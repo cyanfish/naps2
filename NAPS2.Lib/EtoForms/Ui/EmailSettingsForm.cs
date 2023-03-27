@@ -79,6 +79,9 @@ public class EmailSettingsForm : EtoDialogBase
             case EmailProviderType.Thunderbird:
                 _provider.Text = SettingsResources.EmailProviderType_Thunderbird;
                 break;
+            case EmailProviderType.AppleMail:
+                _provider.Text = SettingsResources.EmailProviderType_AppleMail;
+                break;
             case EmailProviderType.CustomSmtp:
                 _provider.Text = config.Get(c => c.EmailSetup.SmtpHost) + '\n' + config.Get(c => c.EmailSetup.SmtpUser);
                 break;

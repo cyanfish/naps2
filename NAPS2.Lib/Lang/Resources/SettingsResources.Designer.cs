@@ -93,6 +93,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string EmailProviderType_AppleMail {
+            get {
+                return ResourceManager.GetString("EmailProviderType_AppleMail", resourceCulture);
+            }
+        }
+        
         internal static string EmailProvider_NotSelected {
             get {
                 return ResourceManager.GetString("EmailProvider_NotSelected", resourceCulture);

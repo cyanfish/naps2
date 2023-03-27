@@ -12,5 +12,7 @@ public enum EmailProviderType
     [LocalizedDescription(typeof(SettingsResources), "EmailProviderType_OutlookWeb")]
     OutlookWeb,
     [LocalizedDescription(typeof(SettingsResources), "EmailProviderType_Thunderbird")]
-    Thunderbird
+    Thunderbird,
+    [LocalizedDescription(typeof(SettingsResources), "EmailProviderType_AppleMail")]
+    AppleMail
 }

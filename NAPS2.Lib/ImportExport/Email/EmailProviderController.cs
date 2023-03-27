@@ -60,6 +60,7 @@ public class EmailProviderController
 #if NET6_0_OR_GREATER
         // For Windows we expect Thunderbird to be used through MAPI. For Linux we need to handle it specially.
         MaybeAddWidget(EmailProviderType.Thunderbird, OperatingSystem.IsLinux());
+        MaybeAddWidget(EmailProviderType.AppleMail, OperatingSystem.IsMacOS());
 #endif
         MaybeAddWidget(EmailProviderType.Gmail, _gmailOauthProvider.HasClientCreds);
         MaybeAddWidget(EmailProviderType.OutlookWeb, _outlookWebOauthProvider.HasClientCreds);
@@ -88,6 +89,13 @@ public class EmailProviderController
                 // When Thunderbird isn't available, we disable it rather than hide it.
                 // The point is to give a hint to the user that Thunderbird support is present.
                 Enabled = _thunderbirdProvider.IsAvailable
+            },
+            EmailProviderType.AppleMail => new EmailProviderWidget
+            {
+                ProviderType = EmailProviderType.AppleMail,
+                ProviderIcon = Icons.apple_mail.ToEtoImage(),
+                ProviderName = EmailProviderType.AppleMail.Description(),
+                Choose = ChooseAppleMail
             },
             EmailProviderType.Gmail => new EmailProviderWidget
             {
@@ -141,6 +149,15 @@ public class EmailProviderController
         var transact = _config.User.BeginTransaction();
         transact.Remove(c => c.EmailSetup);
         transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.Thunderbird);
+        transact.Commit();
+        return true;
+    }
+
+    private bool ChooseAppleMail()
+    {
+        var transact = _config.User.BeginTransaction();
+        transact.Remove(c => c.EmailSetup);
+        transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.AppleMail);
         transact.Commit();
         return true;
     }

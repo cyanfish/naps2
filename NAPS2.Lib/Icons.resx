@@ -349,6 +349,9 @@
   <data name="thunderbird" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\thunderbird.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="apple_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\apple_mail.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="email_setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_setting.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
