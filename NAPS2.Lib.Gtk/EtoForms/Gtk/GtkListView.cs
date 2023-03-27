@@ -1,7 +1,9 @@
 using Eto.Forms;
 using Eto.GtkSharp;
+using Gdk;
 using Gtk;
 using NAPS2.EtoForms.Widgets;
+using Drag = Gtk.Drag;
 using Label = Gtk.Label;
 using Orientation = Gtk.Orientation;
 
@@ -9,6 +11,13 @@ namespace NAPS2.EtoForms.Gtk;
 
 public class GtkListView<T> : IListView<T> where T : notnull
 {
+    private static readonly TargetEntry[] DragTargetEntries =
+    {
+        // TODO: Maybe use a different mime for different list types (profiles/images)?
+        // i.e. something similar to _behavior.CustomDragDataType but in mime format (maybe)
+        new("application/x-naps2-items", 0, 0)
+    };
+
     private readonly ListViewBehavior<T> _behavior;
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
@@ -42,7 +51,15 @@ public class GtkListView<T> : IListView<T> where T : notnull
             _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         }
         _flowBox.ChildActivated += OnChildActivated;
-        _scrolledWindow.Add(_flowBox);
+        var eventBox = new EventBox();
+        eventBox.Child = _flowBox;
+        if (_behavior.AllowDragDrop)
+        {
+            Drag.DestSet(eventBox, DestDefaults.All, GetDropTargetEntries(), DragAction.Copy | DragAction.Move);
+            eventBox.DragDataReceived += OnDragDataReceived;
+            eventBox.DragMotion += OnDragMotion;
+        }
+        _scrolledWindow.Add(eventBox);
         _scrolledWindow.StyleContext.AddClass("listview");
     }
 
@@ -66,10 +83,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public event EventHandler? ItemClicked;
 
-    // TODO: Implement drag/drop
-#pragma warning disable CS0067
     public event EventHandler<DropEventArgs>? Drop;
-#pragma warning restore CS0067
 
     public void SetItems(IEnumerable<T> items)
     {
@@ -133,7 +147,16 @@ public class GtkListView<T> : IListView<T> where T : notnull
                 };
                 vframe.Add(label);
             }
-            flowBoxChild.Add(vframe);
+            // TODO: Event box around the image instead of the frame?
+            var eventBox = new EventBox();
+            eventBox.Child = vframe;
+            if (_behavior.AllowDragDrop || _behavior.AllowFileDrop)
+            {
+                eventBox.DragBegin += OnDragBegin;
+                eventBox.DragDataGet += OnDragDataGet;
+                Drag.SourceSet(eventBox, ModifierType.Button1Mask, DragTargetEntries, DragAction.Move);
+            }
+            flowBoxChild.Add(eventBox);
         }
         flowBoxChild.StyleContext.AddClass("listview-item");
         return flowBoxChild;
@@ -286,6 +309,107 @@ public class GtkListView<T> : IListView<T> where T : notnull
     private static CheckButton GetCheckButton(Widget widget)
     {
         return (CheckButton) ((FlowBoxChild) widget).Child;
+    }
+    
+    private TargetEntry[] GetDropTargetEntries()
+    {
+        var list = new List<TargetEntry>();
+        if (_behavior.AllowDragDrop)
+        {
+            list.Add(new("application/x-naps2-items", 0, 0));
+        }
+        if (_behavior.AllowFileDrop)
+        {
+            list.Add(new("text/uri-list", 0, 0));
+        }
+        return list.ToArray();
+    }
+
+    private void OnDragBegin(object sender, DragBeginArgs args)
+    {
+        // Select the item under the mouse cursor if not already.
+        var dragWidget = (FlowBoxChild) ((EventBox) sender).Parent;
+        var dragItem = ByWidget()[dragWidget].Item;
+        if (!Selection.Contains(dragItem))
+        {
+            Selection = ListSelection.Of(dragItem);
+        }
+    }
+
+    private void OnDragDataGet(object sender, DragDataGetArgs args)
+    {
+        if (Selection.Any())
+        {
+            // TODO: Can we set a pixbuf for the drag?
+            args.SelectionData.Set(
+                Atom.Intern(_behavior.CustomDragDataType, false),
+                8,
+                _behavior.SerializeCustomDragData(Selection.ToArray()));
+        }
+    }
+
+    private void OnDragDataReceived(object sender, DragDataReceivedArgs args)
+    {
+        var index = GetDragIndex();
+        if (args.SelectionData.DataType.Name == _behavior.CustomDragDataType && _behavior.AllowDragDrop)
+        {
+            Drop?.Invoke(this, new DropEventArgs(index, args.SelectionData.Data));
+        }
+        else if (args.SelectionData.Uris.Any() && _behavior.AllowFileDrop)
+        {
+            Drop?.Invoke(this, new DropEventArgs(index, args.SelectionData.Uris.Select(x => new Uri(x).LocalPath)));
+        }
+    }
+
+    private void OnDragMotion(object sender, DragMotionArgs args)
+    {
+        // TODO: Show some kind of visual indicator of the drop location (GetDragIndex)
+    }
+
+    private int GetDragIndex()
+    {
+        if (_entries.Count == 0)
+        {
+            return 0;
+        }
+        var cp = GetMousePosRelativeToFlowbox();
+        var dragToItem = _flowBox.GetChildAtPos(cp.X, cp.Y);
+        if (dragToItem == null)
+        {
+            var items = _flowBox.Children.Cast<FlowBoxChild>().ToList();
+            var minY = items.Select(x => x.Allocation.Top).Min();
+            var maxY = items.Select(x => x.Allocation.Bottom).Max();
+            if (cp.Y < minY)
+            {
+                cp.Y = minY;
+            }
+            if (cp.Y > maxY)
+            {
+                cp.Y = maxY;
+            }
+            var row = items.Where(x => x.Allocation.Top <= cp.Y && x.Allocation.Bottom >= cp.Y)
+                .OrderBy(x => x.Allocation.X)
+                .ToList();
+            dragToItem = row.FirstOrDefault(x => x.Allocation.Right >= cp.X) ?? row.LastOrDefault();
+        }
+        if (dragToItem == null)
+        {
+            return -1;
+        }
+        int dragToIndex = dragToItem.Index;
+        if (cp.X > (dragToItem.Allocation.X + dragToItem.Allocation.Width / 2))
+        {
+            dragToIndex++;
+        }
+        return dragToIndex;
+    }
+
+    private Point GetMousePosRelativeToFlowbox()
+    {
+        _flowBox.Window.GetOrigin(out var boxX, out var boxY);
+        var mousePos = Mouse.Position;
+        var cp = new Point((int) mousePos.X - boxX, (int) mousePos.Y - boxY);
+        return cp;
     }
 
     private class Entry
