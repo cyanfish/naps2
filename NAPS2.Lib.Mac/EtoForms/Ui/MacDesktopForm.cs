@@ -81,11 +81,11 @@ public class MacDesktopForm : DesktopForm
                         new SeparatorMenuItem(),
                         Commands.SaveAll,
                         Commands.SaveSelected,
-                        // TODO: Implement print/email on Mac/Linux
-                        // new SeparatorMenuItem(),
+                        new SeparatorMenuItem(),
+                        // TODO: Implement email on Mac
                         // Commands.EmailAll,
                         // Commands.EmailSelected,
-                        // Commands.Print,
+                        Commands.Print,
                         new SeparatorMenuItem(),
                         Commands.PdfSettings,
                         Commands.ImageSettings,

@@ -20,7 +20,7 @@ public class MacSystemCompat : ISystemCompat
 
     public bool CanEmail => false;
 
-    public bool CanPrint => false;
+    public bool CanPrint => true;
 
     public bool ShouldRememberBackgroundOperations => false;
 

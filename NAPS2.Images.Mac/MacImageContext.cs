@@ -78,6 +78,11 @@ public class MacImageContext : ImageContext
 
     public override ITiffWriter TiffWriter { get; } = new MacTiffWriter();
 
+    public NSImage RenderToNsImage(IRenderableImage image)
+    {
+        return ((MacImage) Render(image)).NsImage;
+    }
+
     private IMemoryImage CreateImage(NSImageRep rep)
     {
         NSImage frame;

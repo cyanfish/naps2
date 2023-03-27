@@ -16,7 +16,7 @@ public class MacModule : GuiModule
         base.Load(builder);
 
         builder.RegisterType<StubNotificationManager>().As<INotificationManager>().SingleInstance();
-        builder.RegisterType<StubScannedImagePrinter>().As<IScannedImagePrinter>();
+        builder.RegisterType<MacScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>();
         builder.RegisterType<MacImageContext>().As<ImageContext>();
         builder.RegisterType<MacImageContext>().AsSelf();
@@ -26,14 +26,6 @@ public class MacModule : GuiModule
         builder.RegisterType<MacPreviewForm>().As<PreviewForm>();
 
         EtoPlatform.Current = new MacEtoPlatform();
-    }
-}
-
-public class StubScannedImagePrinter : IScannedImagePrinter
-{
-    public Task<bool> PromptToPrint(IList<ProcessedImage> images, IList<ProcessedImage> selectedImages)
-    {
-        return Task.FromResult(false);
     }
 }
 
