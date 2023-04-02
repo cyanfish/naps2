@@ -7,10 +7,10 @@ public abstract class LayoutElement
 {
     internal const bool DEBUG_LAYOUT = false;
 
-    protected static LayoutElement[] ExpandChildren(LayoutElement[] children)
+    protected static List<LayoutElement> ExpandChildren(IEnumerable<LayoutElement> children)
     {
         return children.SelectMany(x => x is ExpandLayoutElement expand ? expand.Children : new[] { x })
-            .Where(c => c is not SkipLayoutElement).ToArray();
+            .Where(c => c is not SkipLayoutElement).ToList();
     }
 
     protected internal bool Scale { get; set; }

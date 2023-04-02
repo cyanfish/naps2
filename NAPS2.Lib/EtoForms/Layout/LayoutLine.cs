@@ -7,11 +7,9 @@ namespace NAPS2.EtoForms.Layout;
 /// <summary>
 /// Abstract base class for LayoutColumn and LayoutRow. We use this class to generalize column and row layout logic.
 /// </summary>
-/// <typeparam name="TOrthogonal">The orthogonal type (e.g. LayoutRow if this is LayoutColumn).</typeparam>
-public abstract class LayoutLine<TOrthogonal> : LayoutContainer
-    where TOrthogonal : LayoutContainer
+public abstract class LayoutLine : LayoutContainer
 {
-    protected LayoutLine(LayoutElement[] children) : base(children)
+    protected LayoutLine(IEnumerable<LayoutElement> children) : base(children)
     {
     }
 
@@ -19,11 +17,21 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
 
     protected int? Spacing { get; init; }
 
+    protected bool Aligned { get; set; }
+
+    protected abstract bool IsOrthogonalTo(LayoutLine other);
+
     protected abstract PointF UpdatePosition(PointF position, float delta);
 
     protected abstract PointF UpdateOrthogonalPosition(PointF position, float delta);
 
     protected abstract SizeF UpdateTotalSize(SizeF size, SizeF childSize, int spacing);
+
+    protected abstract float GetBreadth(SizeF size);
+
+    protected abstract float GetLength(SizeF size);
+
+    protected abstract SizeF GetSize(float length, float breadth);
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
@@ -46,7 +54,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         // the actual space the control fills. The child always fills the cell length-wise, but breadth-wise it depends
         // on the control alignment.
         var cellOrigin = bounds.Location;
-        for (int i = 0; i < Children.Length; i++)
+        for (int i = 0; i < Children.Count; i++)
         {
             var child = Children[i];
             var cellSize = GetSize(cellLengths[i], GetBreadth(bounds.Size));
@@ -101,7 +109,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         var size = SizeF.Empty;
         GetInitialCellLengthsAndScaling(context, childContext, parentBounds, out var cellLengths, out var cellScaling);
         UpdateCellLengthsWithPreferredLength(cellLengths, cellScaling);
-        for (int i = 0; i < Children.Length; i++)
+        for (int i = 0; i < Children.Count; i++)
         {
             var childSize = Children[i].GetPreferredSize(childContext, parentBounds);
             var childLayoutSize = GetSize(cellLengths[i], GetBreadth(childSize));
@@ -184,7 +192,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         // If some controls scale, then we take [excess = remaining space + length of all scaling controls],
         // and divide that evenly among all scaling controls so they all have equal length.
         var excess = GetLength(bounds.Size);
-        for (int i = 0; i < Children.Length; i++)
+        for (int i = 0; i < Children.Count; i++)
         {
             if (!cellScaling[i])
             {
@@ -198,7 +206,7 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         if (excess <= 0) return;
         // Update the lengths of scaling controls
         var scaleAmount = Math.DivRem((int) excess, scaleCount, out int scaleExtra);
-        for (int i = 0; i < Children.Length; i++)
+        for (int i = 0; i < Children.Count; i++)
         {
             if (cellScaling[i])
             {
@@ -212,9 +220,9 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         var cellLengths = new List<float>();
         foreach (var child in Children)
         {
-            if (child is TOrthogonal { Aligned: true } opposite)
+            if (child is LayoutLine { Aligned: true } opposite && IsOrthogonalTo(opposite))
             {
-                for (int i = 0; i < opposite.Children.Length; i++)
+                for (int i = 0; i < opposite.Children.Count; i++)
                 {
                     if (cellLengths.Count <= i) cellLengths.Add(0);
                     // TODO: We should probably shrink the bounds if needed
@@ -231,9 +239,9 @@ public abstract class LayoutLine<TOrthogonal> : LayoutContainer
         var cellScaling = new List<bool>();
         foreach (var child in Children)
         {
-            if (child is TOrthogonal { Aligned: true } opposite)
+            if (child is LayoutLine { Aligned: true } opposite && IsOrthogonalTo(opposite))
             {
-                for (int i = 0; i < opposite.Children.Length; i++)
+                for (int i = 0; i < opposite.Children.Count; i++)
                 {
                     if (cellScaling.Count <= i) cellScaling.Add(false);
                     cellScaling[i] = cellScaling[i] || opposite.Children[i].Scale;

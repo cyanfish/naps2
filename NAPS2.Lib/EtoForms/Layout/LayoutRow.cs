@@ -1,9 +1,8 @@
 using Eto.Drawing;
-using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
 
-public class LayoutRow : LayoutLine<LayoutColumn>
+public class LayoutRow : LayoutLine
 {
     public LayoutRow(LayoutElement[] children) : base(children)
     {
@@ -20,6 +19,8 @@ public class LayoutRow : LayoutLine<LayoutColumn>
         Aligned = aligned ?? original.Aligned;
         Visibility = visibility ?? original.Visibility;
     }
+
+    protected override bool IsOrthogonalTo(LayoutLine other) => other is LayoutColumn;
 
     protected override PointF UpdatePosition(PointF position, float delta)
     {

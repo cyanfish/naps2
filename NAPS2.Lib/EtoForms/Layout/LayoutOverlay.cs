@@ -2,21 +2,19 @@ using Eto.Drawing;
 
 namespace NAPS2.EtoForms.Layout;
 
-public class LayoutOverlay : LayoutElement
+public class LayoutOverlay : LayoutContainer
 {
-    public LayoutOverlay(LayoutElement[] children)
+    public LayoutOverlay(IEnumerable<LayoutElement> children)
+        : base(children)
     {
-        Children = ExpandChildren(children);
     }
 
     public LayoutOverlay(LayoutOverlay original, bool? scale = null, int? spacingAfter = null)
+        : base(original.Children)
     {
-        Children = original.Children;
         Scale = scale ?? original.Scale;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
     }
-
-    public LayoutElement[] Children { get; set; }
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {

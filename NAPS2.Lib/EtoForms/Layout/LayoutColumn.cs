@@ -3,7 +3,7 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
 
-public class LayoutColumn : LayoutLine<LayoutRow>
+public class LayoutColumn : LayoutLine
 {
     public LayoutColumn(LayoutElement[] children) : base(children)
     {
@@ -23,6 +23,8 @@ public class LayoutColumn : LayoutLine<LayoutRow>
     }
 
     protected int? LabelSpacing { get; init; }
+
+    protected override bool IsOrthogonalTo(LayoutLine other) => other is LayoutRow;
 
     protected override PointF UpdatePosition(PointF position, float delta)
     {
@@ -45,7 +47,7 @@ public class LayoutColumn : LayoutLine<LayoutRow>
 
     protected override int GetSpacingCore(int i, LayoutContext context)
     {
-        if (i < Children.Length - 1 && Children[i] is LayoutControl { Control: Label })
+        if (i < Children.Count - 1 && Children[i] is LayoutControl { Control: Label })
         {
             return Children[i].SpacingAfter ?? LabelSpacing ?? context.DefaultLabelSpacing;
         }
