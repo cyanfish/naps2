@@ -21,7 +21,7 @@ public class LayoutOverlay : LayoutContainer
         bool inOverlay = false;
         foreach (var child in Children)
         {
-            child.DoLayout(context with { InOverlay = inOverlay }, bounds);
+            child.DoLayout(context with { InOverlay = context.InOverlay || inOverlay }, bounds);
             inOverlay = true;
         }
     }
@@ -32,7 +32,7 @@ public class LayoutOverlay : LayoutContainer
         SizeF size = SizeF.Empty;
         foreach (var child in Children)
         {
-            var childSize = child.GetPreferredSize(context with { InOverlay = inOverlay }, parentBounds);
+            var childSize = child.GetPreferredSize(context with { InOverlay = context.InOverlay || inOverlay }, parentBounds);
             size = SizeF.Max(size, childSize);
             inOverlay = true;
         }
