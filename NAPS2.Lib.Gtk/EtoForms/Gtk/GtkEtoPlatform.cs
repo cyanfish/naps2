@@ -97,6 +97,16 @@ public class GtkEtoPlatform : EtoPlatform
         widget.ShowAll();
     }
 
+    public override void RemoveFromContainer(Control container, Control control)
+    {
+        var overlay = (gtk.Overlay) container.ToNative();
+        var widget = control.ToNative();
+        overlay.Remove(widget);
+        var panel = (gtk.Fixed) overlay.Children[0];
+        panel.Remove(widget);
+        widget.Unrealize();
+    }
+
     public override void SetContainerSize(Window _window, Control container, Size size, int padding)
     {
         var overlay = (gtk.Overlay) container.ToNative();

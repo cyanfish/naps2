@@ -62,6 +62,11 @@ public class MacEtoPlatform : EtoPlatform
         container.ToNative().AddSubview(control.ToNative());
     }
 
+    public override void RemoveFromContainer(Control container, Control control)
+    {
+        control.ToNative().RemoveFromSuperview();
+    }
+
     public override Control AccessibleImageButton(Image image, String text, Action onClick,
         int xOffset = 0, int yOffset = 0)
     {

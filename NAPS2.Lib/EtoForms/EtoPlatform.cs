@@ -27,6 +27,7 @@ public abstract class EtoPlatform
     public abstract void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay);
     public abstract Control CreateContainer();
     public abstract void AddToContainer(Control container, Control control, bool inOverlay);
+    public abstract void RemoveFromContainer(Control container, Control control);
 
     public abstract Control AccessibleImageButton(Image image, string text, Action onClick,
         int xOffset = 0, int yOffset = 0);

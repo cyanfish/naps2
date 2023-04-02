@@ -14,8 +14,6 @@ public record LayoutContext(Control Layout)
 
     public bool IsLayout { get; init; }
 
-    public bool IsFirstLayout { get; init; }
-
     public bool IsNaturalSizeQuery { get; init; }
 
     public bool IsCellLengthQuery { get; set; }

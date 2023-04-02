@@ -149,7 +149,11 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         if (control.GetType() == typeof(Panel))
         {
-            return GetPreferredSize(((Panel) control).Content, availableSpace);
+            var content = ((Panel) control).Content;
+            if (content != null)
+            {
+                return GetPreferredSize(content, availableSpace);
+            }
         }
         return SizeF.Max(
             base.GetPreferredSize(control, availableSpace),
@@ -183,6 +187,11 @@ public class WinFormsEtoPlatform : EtoPlatform
             };
         }
         container.ToNative().Controls.Add(control.ToNative());
+    }
+
+    public override void RemoveFromContainer(Control container, Control control)
+    {
+        container.ToNative().Controls.Remove(control.ToNative());
     }
 
     public override LayoutElement FormatProgressBar(ProgressBar progressBar)

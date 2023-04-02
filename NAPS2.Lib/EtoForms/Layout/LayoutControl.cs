@@ -183,7 +183,7 @@ public class LayoutControl : LayoutElement
         {
             Control.Visible = IsVisible && (context.IsParentVisible ?? true);
         }
-        if (context.IsFirstLayout && !_isAdded)
+        if (!_isAdded)
         {
             EtoPlatform.Current.AddToContainer(context.Layout, Control, context.InOverlay);
             _isAdded = true;
@@ -192,7 +192,7 @@ public class LayoutControl : LayoutElement
                 Visibility.IsVisibleChanged += (_, _) => context.Invalidate();
             }
         }
-        if (context.IsFirstLayout && !_isWindowSet && context.Window != null)
+        if (!_isWindowSet && context.Window != null)
         {
             Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
             TriggerPreLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });

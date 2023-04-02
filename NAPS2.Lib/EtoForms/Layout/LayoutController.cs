@@ -14,6 +14,7 @@ public class LayoutController
     private bool _firstLayout = true;
     private bool _isShown;
     private bool _layoutQueued;
+    private HashSet<Control> _controlSet = new();
 
     public LayoutElement? Content
     {
@@ -73,7 +74,6 @@ public class LayoutController
     private void DoLayout()
     {
         if (_window == null || _content == null || !_isShown || _layoutQueued) return;
-        // TODO: Handle added/removed things
         var size = EtoPlatform.Current.GetClientSize(_window, true);
         int p = RootPadding;
         var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
@@ -89,8 +89,35 @@ public class LayoutController
         }
         _window.SuspendLayout();
         _content.DoLayout(context, bounds);
+        RemoveControls();
         _window.ResumeLayout();
         EtoPlatform.Current.SetContainerSize(_window, _layout, size, p);
+    }
+
+    private void RemoveControls()
+    {
+        var newControlSet = new HashSet<Control>();
+        PopulateControlSet(newControlSet, _content!);
+        foreach (var removedControl in _controlSet.Except(newControlSet))
+        {
+            EtoPlatform.Current.RemoveFromContainer(_layout, removedControl);
+        }
+        _controlSet = newControlSet;
+    }
+
+    private void PopulateControlSet(HashSet<Control> controlSet, LayoutElement element)
+    {
+        if (element is LayoutContainer container)
+        {
+            foreach (var child in container.Children)
+            {
+                PopulateControlSet(controlSet, child);
+            }
+        }
+        if (element is LayoutControl { Control: { } } control)
+        {
+            controlSet.Add(control.Control);
+        }
     }
 
     private LayoutContext GetLayoutContext()
@@ -99,7 +126,6 @@ public class LayoutController
         {
             DefaultSpacing = DefaultSpacing,
             DefaultLabelSpacing = DefaultLabelSpacing,
-            IsFirstLayout = _firstLayout,
             Invalidate = Invalidate
         };
     }
