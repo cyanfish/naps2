@@ -27,6 +27,7 @@ public class LocalTwainSessionController : ITwainSessionController
     {
         var twainDsmPath = NativeLibrary.FindLibraryPath("twaindsm.dll");
         PlatformCompat.System.LoadLibrary(twainDsmPath);
+        PlatformInfo.Current.NewDsmPath = twainDsmPath;
     });
 
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
