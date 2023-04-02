@@ -177,8 +177,8 @@ internal class SaneScanDriver : IScanDriver
         if (scanAreaController.CanSetArea)
         {
             var (minX, minY, maxX, maxY) = scanAreaController.GetBounds();
-            var width = Math.Min((double)options.PageSize!.WidthInMm, maxX - minX);
-            var height = Math.Min((double)options.PageSize.HeightInMm, maxY - minY);
+            var width = Math.Min((double) options.PageSize!.WidthInMm, maxX - minX);
+            var height = Math.Min((double) options.PageSize.HeightInMm, maxY - minY);
             var deltaX = maxX - minX - width;
             var offsetX = options.PageAlign switch
             {
@@ -190,9 +190,8 @@ internal class SaneScanDriver : IScanDriver
         }
     }
 
-    private IMemoryImage? ScanPage(SaneDevice device, IScanEvents scanEvents)
+    internal IMemoryImage? ScanPage(ISaneDevice device, IScanEvents scanEvents)
     {
-        // TODO: Fix up events
         var data = ScanFrame(device, scanEvents, 0, out var p);
         if (data == null)
         {
@@ -201,10 +200,10 @@ internal class SaneScanDriver : IScanDriver
 
         if (p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue)
         {
-            return ProcessMultiFrameImage(device, scanEvents, p, data);
+            return ProcessMultiFrameImage(device, scanEvents, p, data.GetBuffer());
         }
 
-        return ProcessSingleFrameImage(p, data);
+        return ProcessSingleFrameImage(p, data.GetBuffer());
     }
 
     private IMemoryImage ProcessSingleFrameImage(SaneReadParameters p, byte[] data)
@@ -218,16 +217,16 @@ internal class SaneScanDriver : IScanDriver
                 $"Unsupported transfer format: {p.Depth} bits per sample, {p.Frame} frame")
         };
         var image = _scanningContext.ImageContext.Create(p.PixelsPerLine, p.Lines, pixelFormat);
-        var pixelInfo = new PixelInfo(p.PixelsPerLine, p.Lines, subPixelType);
+        var pixelInfo = new PixelInfo(p.PixelsPerLine, p.Lines, subPixelType, p.BytesPerLine);
         new CopyBitwiseImageOp().Perform(data, pixelInfo, image);
         return image;
     }
 
-    private IMemoryImage ProcessMultiFrameImage(SaneDevice device, IScanEvents scanEvents, SaneReadParameters p,
+    private IMemoryImage ProcessMultiFrameImage(ISaneDevice device, IScanEvents scanEvents, SaneReadParameters p,
         byte[] data)
     {
         var image = _scanningContext.ImageContext.Create(p.PixelsPerLine, p.Lines, ImagePixelFormat.RGB24);
-        var pixelInfo = new PixelInfo(p.PixelsPerLine, p.Lines, SubPixelType.Gray);
+        var pixelInfo = new PixelInfo(p.PixelsPerLine, p.Lines, SubPixelType.Gray, p.BytesPerLine);
 
         // Use the first buffer, then read two more buffers and use them so we get all 3 channels
         new CopyBitwiseImageOp { DestChannel = ToChannel(p.Frame) }.Perform(data, pixelInfo, image);
@@ -236,12 +235,12 @@ internal class SaneScanDriver : IScanDriver
         return image;
     }
 
-    private void ReadSingleChannelFrame(SaneDevice device, IScanEvents scanEvents, int frame, PixelInfo pixelInfo,
+    private void ReadSingleChannelFrame(ISaneDevice device, IScanEvents scanEvents, int frame, PixelInfo pixelInfo,
         IMemoryImage image)
     {
         var data = ScanFrame(device, scanEvents, frame, out var p)
                    ?? throw new DeviceException("SANE unexpected last frame");
-        new CopyBitwiseImageOp { DestChannel = ToChannel(p.Frame) }.Perform(data, pixelInfo, image);
+        new CopyBitwiseImageOp { DestChannel = ToChannel(p.Frame) }.Perform(data.GetBuffer(), pixelInfo, image);
     }
 
     private ColorChannel ToChannel(SaneFrameType frame) => frame switch
@@ -252,7 +251,7 @@ internal class SaneScanDriver : IScanDriver
         _ => throw new ArgumentException()
     };
 
-    internal byte[]? ScanFrame(ISaneDevice device, IScanEvents scanEvents, int frame, out SaneReadParameters p)
+    internal MemoryStream? ScanFrame(ISaneDevice device, IScanEvents scanEvents, int frame, out SaneReadParameters p)
     {
         device.Start();
         if (frame == 0)
@@ -266,30 +265,16 @@ internal class SaneScanDriver : IScanDriver
         var frameSize = p.Lines == -1 ? 0 : p.BytesPerLine * p.Lines;
         var currentProgress = frame * frameSize;
         var totalProgress = isMultiFrame ? frameSize * 3 : frameSize;
-        var index = 0;
         var buffer = new byte[65536];
         if (totalProgress > 0)
         {
             scanEvents.PageProgress(currentProgress / (double) totalProgress);
         }
 
-        // We can only use a pre-allocated array if we know the frame size ahead of time.
-        // A MemoryStream is more general, but as these buffers could be very large (GB) it's a worthwhile optimization
-        // to use the pre-allocated array when possible and avoid unnecessary copies.
-        var dataArray = p.Lines != -1 ? new byte[frameSize] : null;
-        var dataStream = new MemoryStream();
-
+        var dataStream = new MemoryStream(frameSize);
         while (device.Read(buffer, out var len))
         {
-            if (dataArray != null)
-            {
-                Array.Copy(buffer, 0, dataArray, index, len);
-            }
-            else
-            {
-                dataStream.Write(buffer, 0, len);
-            }
-            index += len;
+            dataStream.Write(buffer, 0, len);
             currentProgress += len;
             if (totalProgress > 0)
             {
@@ -297,22 +282,14 @@ internal class SaneScanDriver : IScanDriver
             }
         }
 
-        if (index == 0)
+        if (dataStream.Length == 0)
         {
             return null;
         }
-        if (p.Lines != -1 && index != frameSize)
-        {
-            throw new DeviceException($"SANE unexpected data length, got {index}, expected {frameSize}");
-        }
-        if (p.Lines == -1)
-        {
-            // Now that we've read the data we implicitly know the frame size and can work backwards to get the number
-            // of lines.
-            p.Lines = (int) dataStream.Length / p.BytesPerLine;
-        }
+        // Now that we've read the data we know the exact frame size and can work backwards to get the number of lines.
+        p.Lines = (int) dataStream.Length / p.BytesPerLine;
 
-        return dataArray ?? dataStream.ToArray();
+        return dataStream;
     }
 
     // private KeyValueScanOptions GetKeyValueOptions(ScanOptions options)

@@ -2,6 +2,7 @@ using Moq;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Internal.Sane;
 using NAPS2.Scan.Internal.Sane.Native;
+using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan;
@@ -22,13 +23,13 @@ public class SaneScanDriverTests : ContextualTests
     {
         var deviceMock = new Mock<ISaneDevice>();
         var eventsMock = new Mock<IScanEvents>();
-        SetupDeviceMock(deviceMock, true);
+        SetupDeviceMock(deviceMock);
 
         var result = _driver.ScanFrame(deviceMock.Object, eventsMock.Object, 0, out var p);
 
         Assert.NotNull(result);
         Assert.Equal(ExpectedData.Length, result.Length);
-        Assert.Equal(ExpectedData, result.Select(x => (int) x));
+        Assert.Equal(ExpectedData, result.ToArray().Select(x => (int) x));
         deviceMock.Verify(d => d.Start());
         eventsMock.Verify(e => e.PageStart());
         eventsMock.Verify(e => e.PageProgress(0));
@@ -42,13 +43,13 @@ public class SaneScanDriverTests : ContextualTests
     {
         var deviceMock = new Mock<ISaneDevice>();
         var eventsMock = new Mock<IScanEvents>();
-        SetupDeviceMock(deviceMock, false);
+        SetupDeviceMock(deviceMock, -1);
 
         var result = _driver.ScanFrame(deviceMock.Object, eventsMock.Object, 0, out var p);
 
         Assert.NotNull(result);
         Assert.Equal(ExpectedData.Length, result.Length);
-        Assert.Equal(ExpectedData, result.Select(x => (int) x));
+        Assert.Equal(ExpectedData, result.ToArray().Select(x => (int) x));
         Assert.Equal(p.Lines, 8);
         deviceMock.Verify(d => d.Start());
         eventsMock.Verify(e => e.PageStart());
@@ -60,7 +61,7 @@ public class SaneScanDriverTests : ContextualTests
     {
         var deviceMock = new Mock<ISaneDevice>();
         var eventsMock = new Mock<IScanEvents>();
-        SetupDeviceMock(deviceMock, true);
+        SetupDeviceMock(deviceMock);
         deviceMock.Setup(d => d.Read(It.IsAny<byte[]>(), out It.Ref<int>.IsAny))
             .Returns((byte[] buffer, out int len) =>
             {
@@ -77,13 +78,107 @@ public class SaneScanDriverTests : ContextualTests
         eventsMock.VerifyNoOtherCalls();
     }
 
-    private static void SetupDeviceMock(Mock<ISaneDevice> deviceMock, bool includeLines)
+    [Fact]
+    public void ScanPage_KnownFrameSize()
+    {
+        var deviceMock = new Mock<ISaneDevice>();
+        var eventsMock = new Mock<IScanEvents>();
+        SetupDeviceMock(deviceMock);
+
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+
+        Assert.NotNull(result);
+        Assert.Equal(3, result.Width);
+        Assert.Equal(8, result.Height);
+        ImageAsserts.PixelColors(result, new()
+        {
+            { (0, 0), (0, 1, 2) },
+            { (2, 2), (26, 27, 28) }
+        });
+    }
+
+    [Fact]
+    public void ScanPage_UnknownFrameSize()
+    {
+        var deviceMock = new Mock<ISaneDevice>();
+        var eventsMock = new Mock<IScanEvents>();
+        SetupDeviceMock(deviceMock, -1);
+
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+
+        Assert.NotNull(result);
+        Assert.Equal(3, result.Width);
+        Assert.Equal(8, result.Height);
+        ImageAsserts.PixelColors(result, new()
+        {
+            { (0, 0), (0, 1, 2) },
+            { (2, 2), (26, 27, 28) }
+        });
+    }
+
+    [Fact]
+    public void ScanPage_TooSmallFrameSize()
+    {
+        var deviceMock = new Mock<ISaneDevice>();
+        var eventsMock = new Mock<IScanEvents>();
+        SetupDeviceMock(deviceMock, 6);
+
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+
+        Assert.NotNull(result);
+        Assert.Equal(3, result.Width);
+        Assert.Equal(8, result.Height);
+        ImageAsserts.PixelColors(result, new()
+        {
+            { (0, 0), (0, 1, 2) },
+            { (2, 2), (26, 27, 28) }
+        });
+    }
+
+    [Fact]
+    public void ScanPage_TooBigFrameSize()
+    {
+        var deviceMock = new Mock<ISaneDevice>();
+        var eventsMock = new Mock<IScanEvents>();
+        SetupDeviceMock(deviceMock, 10);
+
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+
+        Assert.NotNull(result);
+        Assert.Equal(3, result.Width);
+        Assert.Equal(8, result.Height);
+        ImageAsserts.PixelColors(result, new()
+        {
+            { (0, 0), (0, 1, 2) },
+            { (2, 2), (26, 27, 28) }
+        });
+    }
+
+    [Fact]
+    public void ScanPage_NoRead_ReturnsNull()
+    {
+        var deviceMock = new Mock<ISaneDevice>();
+        var eventsMock = new Mock<IScanEvents>();
+        SetupDeviceMock(deviceMock);
+        deviceMock.Setup(d => d.Read(It.IsAny<byte[]>(), out It.Ref<int>.IsAny))
+            .Returns((byte[] buffer, out int len) =>
+            {
+                len = 0;
+                return false;
+            });
+
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+
+        Assert.Null(result);
+    }
+
+    private static void SetupDeviceMock(Mock<ISaneDevice> deviceMock, int? lines = null)
     {
         deviceMock.Setup(d => d.GetParameters()).Returns(new SaneReadParameters
         {
             Depth = 8,
             Frame = SaneFrameType.Rgb,
-            Lines = includeLines ? 8 : -1,
+            Lines = lines ?? 8,
             BytesPerLine = 10,
             PixelsPerLine = 3
         });
