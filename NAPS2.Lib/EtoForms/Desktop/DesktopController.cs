@@ -1,5 +1,7 @@
 using System.Threading;
 using Eto.Forms;
+using NAPS2.EtoForms.Notifications;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -22,7 +24,7 @@ public class DesktopController
     private readonly IOperationFactory _operationFactory;
     private readonly StillImage _stillImage;
     private readonly IUpdateChecker _updateChecker;
-    private readonly INotificationManager _notify;
+    private readonly Notify _notify;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly ImageListActions _imageListActions;
@@ -41,7 +43,7 @@ public class DesktopController
         RecoveryStorageManager recoveryStorageManager, ThumbnailController thumbnailController,
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,
-        IUpdateChecker updateChecker, INotificationManager notify, ImageTransfer imageTransfer,
+        IUpdateChecker updateChecker, Notify notify, ImageTransfer imageTransfer,
         ImageClipboard imageClipboard, ImageListActions imageListActions,
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,

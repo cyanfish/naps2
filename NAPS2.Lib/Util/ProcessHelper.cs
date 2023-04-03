@@ -4,6 +4,18 @@ public static class ProcessHelper
 {
     public static void OpenUrl(string url) => Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
 
+    public static void OpenFile(string file)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            UseShellExecute = true,
+            FileName = file,
+            Verb = "open"
+        });
+    }
+
+    public static void OpenFolder(string folder) => OpenFile(folder);
+
     public static bool IsSuccessful(string command, string args, int timeoutMs)
     {
         try

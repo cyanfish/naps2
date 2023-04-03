@@ -5,6 +5,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
@@ -14,7 +15,7 @@ namespace NAPS2.EtoForms.Ui;
 public abstract class DesktopForm : EtoFormBase
 {
     private readonly DesktopKeyboardShortcuts _keyboardShortcuts;
-    private readonly INotificationManager _notify;
+    private readonly NotificationManager _notificationManager;
     private readonly CultureHelper _cultureHelper;
     protected readonly ColorScheme _colorScheme;
     private readonly IProfileManager _profileManager;
@@ -37,7 +38,7 @@ public abstract class DesktopForm : EtoFormBase
     public DesktopForm(
         Naps2Config config,
         DesktopKeyboardShortcuts keyboardShortcuts,
-        INotificationManager notify,
+        NotificationManager notificationManager,
         CultureHelper cultureHelper,
         ColorScheme colorScheme,
         IProfileManager profileManager,
@@ -54,7 +55,7 @@ public abstract class DesktopForm : EtoFormBase
         DesktopCommands commands) : base(config)
     {
         _keyboardShortcuts = keyboardShortcuts;
-        _notify = notify;
+        _notificationManager = notificationManager;
         _cultureHelper = cultureHelper;
         _colorScheme = colorScheme;
         _profileManager = profileManager;
@@ -95,6 +96,7 @@ public abstract class DesktopForm : EtoFormBase
         KeyDown += OnKeyDown;
         _listView.Control.KeyDown += OnKeyDown;
         _listView.Control.MouseWheel += ListViewMouseWheel;
+        _listView.Control.MouseMove += ListViewMouseMove;
 
         //
         // Shown += FDesktop_Shown;
@@ -107,6 +109,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.SelectionChanged += ImageList_SelectionChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
+        _notificationManager.Updated += (_, _) => LayoutController.Invalidate();
     }
 
     protected override void BuildLayout()
@@ -121,7 +124,10 @@ public abstract class DesktopForm : EtoFormBase
             GetMainContent(),
             L.Column(
                 C.Filler(),
-                L.Row(GetZoomButtons(), C.Filler())
+                L.Row(
+                    GetZoomButtons(),
+                    C.Filler(),
+                    _notificationManager.Column)
             ).Padding(10)
         );
 
@@ -382,7 +388,7 @@ public abstract class DesktopForm : EtoFormBase
         EtoPlatform.Current.ConfigureZoomButton(zoomIn);
         var zoomOut = C.ImageButton(Commands.ZoomOut);
         EtoPlatform.Current.ConfigureZoomButton(zoomOut);
-        return L.Row(zoomOut, zoomIn).Spacing(-1);
+        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(-1);
     }
 
     private void InitLanguageDropdown()
@@ -484,6 +490,11 @@ public abstract class DesktopForm : EtoFormBase
         {
             _thumbnailController.StepSize(e.Delta.Height); //  / (double) SystemInformation.MouseWheelScrollDelta
         }
+    }
+
+    private void ListViewMouseMove(object? sender, MouseEventArgs e)
+    {
+        _notificationManager.StartTimers();
     }
 
     protected virtual void SetThumbnailSpacing(int thumbnailSize)

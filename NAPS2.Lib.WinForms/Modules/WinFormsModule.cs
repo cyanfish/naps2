@@ -13,7 +13,6 @@ public class WinFormsModule : GuiModule
     {
         base.Load(builder);
 
-        builder.RegisterType<NotificationManager>().As<INotificationManager>().SingleInstance();
         builder.RegisterType<PrintDocumentPrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<WinFormsDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
 

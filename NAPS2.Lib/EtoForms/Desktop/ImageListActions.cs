@@ -1,3 +1,5 @@
+using NAPS2.EtoForms.Notifications;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 
 namespace NAPS2.EtoForms.Desktop;
@@ -10,11 +12,11 @@ public class ImageListActions
     private readonly Naps2Config _config;
     private readonly ThumbnailController _thumbnailController;
     private readonly IExportController _exportController;
-    private readonly INotificationManager _notify;
+    private readonly Notify _notify;
 
     public ImageListActions(UiImageList imageList, IOperationFactory operationFactory,
         OperationProgress operationProgress, Naps2Config config, ThumbnailController thumbnailController,
-        IExportController exportController, INotificationManager notify)
+        IExportController exportController, Notify notify)
     {
         _imageList = imageList;
         _operationFactory = operationFactory;

@@ -4,7 +4,6 @@ using NAPS2.EtoForms.Gtk;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Images.Gtk;
 using NAPS2.ImportExport;
-using NAPS2.Update;
 
 namespace NAPS2.Modules;
 
@@ -14,7 +13,6 @@ public class GtkModule : GuiModule
     {
         base.Load(builder);
 
-        builder.RegisterType<StubNotificationManager>().As<INotificationManager>().SingleInstance();
         builder.RegisterType<GtkScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<GtkDarkModeProvider>().As<IDarkModeProvider>();
         builder.RegisterType<GtkImageContext>().As<ImageContext>();
@@ -24,32 +22,5 @@ public class GtkModule : GuiModule
         builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();
 
         EtoPlatform.Current = new GtkEtoPlatform();
-    }
-}
-
-public class StubNotificationManager : INotificationManager
-{
-    public void PdfSaved(string path)
-    {
-    }
-
-    public void ImagesSaved(int imageCount, string path)
-    {
-    }
-
-    public void DonatePrompt()
-    {
-    }
-
-    public void OperationProgress(OperationProgress opModalProgress, IOperation op)
-    {
-    }
-
-    public void UpdateAvailable(IUpdateChecker updateChecker, UpdateInfo update)
-    {
-    }
-
-    public void Rebuild()
-    {
     }
 }

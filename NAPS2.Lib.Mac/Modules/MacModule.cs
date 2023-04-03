@@ -5,8 +5,6 @@ using NAPS2.EtoForms.Ui;
 using NAPS2.Images.Mac;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
-using NAPS2.Pdf;
-using NAPS2.Update;
 
 namespace NAPS2.Modules;
 
@@ -16,7 +14,6 @@ public class MacModule : GuiModule
     {
         base.Load(builder);
 
-        builder.RegisterType<StubNotificationManager>().As<INotificationManager>().SingleInstance();
         builder.RegisterType<MacScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<AppleMailEmailProvider>().As<IAppleMailEmailProvider>();
         builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>();
@@ -28,41 +25,5 @@ public class MacModule : GuiModule
         builder.RegisterType<MacPreviewForm>().As<PreviewForm>();
 
         EtoPlatform.Current = new MacEtoPlatform();
-    }
-}
-
-public class StubNotificationManager : INotificationManager
-{
-    public void PdfSaved(string path)
-    {
-    }
-
-    public void ImagesSaved(int imageCount, string path)
-    {
-    }
-
-    public void DonatePrompt()
-    {
-    }
-
-    public void OperationProgress(OperationProgress opModalProgress, IOperation op)
-    {
-    }
-
-    public void UpdateAvailable(IUpdateChecker updateChecker, UpdateInfo update)
-    {
-    }
-
-    public void Rebuild()
-    {
-    }
-}
-
-public class StubPdfPasswordProvider : IPdfPasswordProvider
-{
-    public bool ProvidePassword(string fileName, int attemptCount, out string password)
-    {
-        password = null!;
-        return false;
     }
 }

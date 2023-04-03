@@ -1,6 +1,8 @@
 using Autofac;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Desktop;
+using NAPS2.EtoForms.Notifications;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 using NAPS2.Pdf;
 using NAPS2.Scan;
@@ -20,7 +22,8 @@ public class GuiModule : Module
         builder.RegisterType<EtoDialogHelper>().As<DialogHelper>();
         builder.RegisterType<EtoDevicePrompt>().As<IDevicePrompt>();
         builder.RegisterType<EtoPdfPasswordProvider>().As<IPdfPasswordProvider>();
-        builder.Register<ISaveNotify>(ctx => ctx.Resolve<INotificationManager>());
+        builder.RegisterType<NotificationManager>().AsSelf().SingleInstance();
+        builder.Register<ISaveNotify>(ctx => ctx.Resolve<Notify>());
         builder.RegisterType<DesktopController>().AsSelf().SingleInstance();
         builder.RegisterType<UpdateChecker>().As<IUpdateChecker>();
         builder.RegisterType<ExportController>().As<IExportController>();

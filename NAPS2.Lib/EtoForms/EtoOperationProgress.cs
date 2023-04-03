@@ -1,20 +1,22 @@
 using Eto.Forms;
+using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Ui;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms;
 
 public class EtoOperationProgress : OperationProgress
 {
     private readonly IFormFactory _formFactory;
-    private readonly INotificationManager _notificationManager;
+    private readonly Notify _notify;
     private readonly Naps2Config _config;
 
     private readonly HashSet<IOperation> _activeOperations = new();
 
-    public EtoOperationProgress(IFormFactory formFactory, INotificationManager notificationManager, Naps2Config config)
+    public EtoOperationProgress(IFormFactory formFactory, Notify notify, Naps2Config config)
     {
         _formFactory = formFactory;
-        _notificationManager = notificationManager;
+        _notify = notify;
         _config = config;
     }
 
@@ -78,7 +80,7 @@ public class EtoOperationProgress : OperationProgress
 
         if (!op.IsFinished)
         {
-            Invoker.Current.Invoke(() => _notificationManager.OperationProgress(this, op));
+            Invoker.Current.Invoke(() => _notify.OperationProgress(this, op));
         }
     }
 

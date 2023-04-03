@@ -3,6 +3,7 @@ using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Mac;
+using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
@@ -14,7 +15,7 @@ public class MacDesktopForm : DesktopForm
     public MacDesktopForm(
         Naps2Config config,
         DesktopKeyboardShortcuts keyboardShortcuts,
-        INotificationManager notify,
+        NotificationManager notificationManager,
         CultureHelper cultureHelper,
         ColorScheme colorScheme,
         IProfileManager profileManager,
@@ -29,7 +30,7 @@ public class MacDesktopForm : DesktopForm
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands)
-        : base(config, keyboardShortcuts, notify, cultureHelper, colorScheme, profileManager,
+        : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {

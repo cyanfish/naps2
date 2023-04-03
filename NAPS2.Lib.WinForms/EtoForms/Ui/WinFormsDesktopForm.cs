@@ -5,6 +5,7 @@ using Eto.WinForms;
 using Eto.WinForms.Forms.ToolBar;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport.Images;
@@ -26,7 +27,7 @@ public class WinFormsDesktopForm : DesktopForm
     public WinFormsDesktopForm(
         Naps2Config config,
         DesktopKeyboardShortcuts keyboardShortcuts,
-        INotificationManager notify,
+        NotificationManager notificationManager,
         CultureHelper cultureHelper,
         ColorScheme colorScheme,
         IProfileManager profileManager,
@@ -41,7 +42,7 @@ public class WinFormsDesktopForm : DesktopForm
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands)
-        : base(config, keyboardShortcuts, notify, cultureHelper, colorScheme, profileManager,
+        : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
@@ -98,7 +99,7 @@ public class WinFormsDesktopForm : DesktopForm
             FlatStyle = wf.FlatStyle.Flat
         };
         return L.Overlay(
-            mouseCatcher.ToEto(),
+            L.Row(mouseCatcher.ToEto().AlignTrailing()),
             base.GetZoomButtons()
         );
     }

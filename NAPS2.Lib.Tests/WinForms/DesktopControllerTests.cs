@@ -1,6 +1,8 @@
 using Moq;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Desktop;
+using NAPS2.EtoForms.Notifications;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -27,7 +29,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly Mock<IOperationFactory> _operationFactory;
     private readonly StillImage _stillImage;
     private readonly Mock<IUpdateChecker> _updateChecker;
-    private readonly Mock<INotificationManager> _notificationManager;
+    private readonly Mock<Notify> _notify;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly Mock<IExportController> _exportHelper;
@@ -51,7 +53,7 @@ public class DesktopControllerTests : ContextualTests
         _operationFactory = new Mock<IOperationFactory>();
         _stillImage = new StillImage();
         _updateChecker = new Mock<IUpdateChecker>();
-        _notificationManager = new Mock<INotificationManager>();
+        _notify = new Mock<Notify>();
         _imageTransfer = new ImageTransfer();
         _imageClipboard = new ImageClipboard();
         _exportHelper = new Mock<IExportController>();
@@ -72,11 +74,11 @@ public class DesktopControllerTests : ContextualTests
             _operationFactory.Object,
             _stillImage,
             _updateChecker.Object,
-            _notificationManager.Object,
+            _notify.Object,
             _imageTransfer,
             _imageClipboard,
             new ImageListActions(_imageList, _operationFactory.Object, _operationProgress.Object,
-                _config, _thumbnailController, _exportHelper.Object, _notificationManager.Object),
+                _config, _thumbnailController, _exportHelper.Object, _notify.Object),
             _dialogHelper.Object,
             _desktopImagesController,
             _desktopScanController.Object,
@@ -105,7 +107,7 @@ public class DesktopControllerTests : ContextualTests
 
         Assert.True(_config.Get(c => c.HasBeenRun));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.FirstRunDate));
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -119,7 +121,7 @@ public class DesktopControllerTests : ContextualTests
 
         Assert.True(_config.Get(c => c.HasBeenRun));
         Assert.Equal(firstRunDate, _config.Get(c => c.FirstRunDate));
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -131,7 +133,7 @@ public class DesktopControllerTests : ContextualTests
 
         await _desktopController.Initialize();
 
-        _notificationManager.Verify(x => x.DonatePrompt());
+        _notify.Verify(x => x.DonatePrompt());
         Assert.True(_config.Get(c => c.HasBeenPromptedForDonation));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastDonatePromptDate));
     }
@@ -150,7 +152,7 @@ public class DesktopControllerTests : ContextualTests
 
         Assert.True(_config.Get(c => c.HasBeenPromptedForDonation));
         Assert.Equal(donatePromptDate, _config.Get(c => c.LastDonatePromptDate));
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -187,7 +189,7 @@ public class DesktopControllerTests : ContextualTests
         DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
         _updateChecker.VerifyNoOtherCalls();
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 
     [Fact(Skip = "flaky")]
@@ -204,9 +206,9 @@ public class DesktopControllerTests : ContextualTests
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
-        _notificationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
+        _notify.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
         _updateChecker.VerifyNoOtherCalls();
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 
     [Fact(Skip = "flaky")]
@@ -221,7 +223,7 @@ public class DesktopControllerTests : ContextualTests
         Assert.False(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Null(_config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.VerifyNoOtherCalls();
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 
     [Fact(Skip = "flaky")]
@@ -238,7 +240,7 @@ public class DesktopControllerTests : ContextualTests
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         Assert.Equal(updateCheckDate, _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.VerifyNoOtherCalls();
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 
     [Fact(Skip = "flaky")]
@@ -258,8 +260,8 @@ public class DesktopControllerTests : ContextualTests
         Assert.True(_config.Get(c => c.HasCheckedForUpdates));
         DateAsserts.Recent(TimeSpan.FromMilliseconds(1000), _config.Get(c => c.LastUpdateCheckDate));
         _updateChecker.Verify(x => x.CheckForUpdates());
-        _notificationManager.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
+        _notify.Verify(x => x.UpdateAvailable(_updateChecker.Object, mockUpdateInfo));
         _updateChecker.VerifyNoOtherCalls();
-        _notificationManager.VerifyNoOtherCalls();
+        _notify.VerifyNoOtherCalls();
     }
 }
