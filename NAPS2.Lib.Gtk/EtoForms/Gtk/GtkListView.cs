@@ -58,6 +58,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
             Drag.DestSet(eventBox, DestDefaults.All, GetDropTargetEntries(), DragAction.Copy | DragAction.Move);
             eventBox.DragDataReceived += OnDragDataReceived;
             eventBox.DragMotion += OnDragMotion;
+            eventBox.DragLeave += OnDragLeave;
         }
         _scrolledWindow.Add(eventBox);
         _scrolledWindow.StyleContext.AddClass("listview");
@@ -310,7 +311,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
     {
         return (CheckButton) ((FlowBoxChild) widget).Child;
     }
-    
+
     private TargetEntry[] GetDropTargetEntries()
     {
         var list = new List<TargetEntry>();
@@ -363,7 +364,42 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     private void OnDragMotion(object sender, DragMotionArgs args)
     {
-        // TODO: Show some kind of visual indicator of the drop location (GetDragIndex)
+        if (args.Context.SelectedAction != DragAction.Move) return;
+        // Show a visual indicator of the drop location
+        ClearDropIndicator();
+        var index = GetDragIndex();
+        if (index == -1) return;
+        var widgets = _flowBox.Children;
+        // Show on the left (of the image to the right) if we're moving to the left, or on the right (of the image to
+        // the left) if we're moving to the right.
+        // This gives an accurate indication of where the image will appear especially if we're dragging across rows.
+        // If the drop will have no effect (because we're dropping next to the selected image) this will show nothing.
+        // TODO: This doesn't show a drop indicator if we're dropping inside a disjointed selection 
+        var selectedIndices = Selection.ToSelectedIndices(_entries.Select(x => x.Item).ToList()).ToList();
+        var selectionMin = selectedIndices.Min();
+        var selectionMax = selectedIndices.Max() + 1;
+        if (index < selectionMin)
+        {
+            widgets[index].StyleContext.AddClass("drop-before");
+        }
+        if (index > selectionMax)
+        {
+            widgets[index - 1].StyleContext.AddClass("drop-after");
+        }
+    }
+
+    private void OnDragLeave(object sender, DragLeaveArgs args)
+    {
+        ClearDropIndicator();
+    }
+
+    private void ClearDropIndicator()
+    {
+        foreach (var widget in _flowBox.Children)
+        {
+            widget.StyleContext.RemoveClass("drop-before");
+            widget.StyleContext.RemoveClass("drop-after");
+        }
     }
 
     private int GetDragIndex()
