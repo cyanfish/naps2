@@ -53,7 +53,9 @@ public class NLogLogger : ILogger
     {
         protected override void AppendToString(StringBuilder sb, Exception ex)
         {
-            sb.AppendDemystified(ex);
+            // Note we don't want to use the AppendDemystified() helper
+            // https://github.com/benaadams/Ben.Demystifier/issues/85
+            sb.Append(ex.Demystify());
         }
     }
 }
