@@ -1,4 +1,3 @@
-#if USB
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -6,8 +5,9 @@ using LibUsbDotNet;
 using LibUsbDotNet.Info;
 using LibUsbDotNet.LibUsb;
 using LibUsbDotNet.Main;
+using NAPS2.Escl.Client;
 
-namespace NAPS2.Escl.Client;
+namespace NAPS2.Escl.Usb;
 
 public class EsclUsbContext : IDisposable
 {
@@ -153,4 +153,3 @@ public class EsclUsbContext : IDisposable
         _usbContext.Dispose();
     }
 }
-#endif

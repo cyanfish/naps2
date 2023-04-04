@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.Worker", "NAPS2.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk.Worker.Build", "NAPS2.Sdk.Worker\NAPS2.Sdk.Worker.Build.csproj", "{786DD865-259C-462C-A311-06A227D41EE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Escl.Usb", "NAPS2.Escl.Usb\NAPS2.Escl.Usb.csproj", "{33721E7A-6C67-497B-B21F-0A965A9B23B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -539,6 +541,26 @@ Global
 		{786DD865-259C-462C-A311-06A227D41EE3}.Release-Linux|Any CPU.ActiveCfg = Release|Any CPU
 		{786DD865-259C-462C-A311-06A227D41EE3}.Release-Msi|Any CPU.ActiveCfg = Release|Any CPU
 		{786DD865-259C-462C-A311-06A227D41EE3}.Release-Zip|Any CPU.ActiveCfg = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Msi|Any CPU.ActiveCfg = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Msi|Any CPU.Build.0 = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Zip|Any CPU.ActiveCfg = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Zip|Any CPU.Build.0 = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Tools|Any CPU.Build.0 = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Linux|Any CPU.ActiveCfg = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Linux|Any CPU.Build.0 = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Mac|Any CPU.ActiveCfg = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Mac|Any CPU.Build.0 = Debug|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Linux|Any CPU.ActiveCfg = Release|Any CPU
+		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Linux|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

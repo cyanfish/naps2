@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net462;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net462;net6.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
@@ -9,6 +9,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
+        <ProjectReference Include="..\NAPS2.Escl.Client\NAPS2.Escl.Client.csproj" />
+
+        <PackageReference Include="LibUsbDotNet" Version="3.0.102-alpha" />
     </ItemGroup>
 
 </Project>

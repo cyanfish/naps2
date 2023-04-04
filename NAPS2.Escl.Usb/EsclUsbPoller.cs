@@ -1,9 +1,8 @@
-﻿#if USB
-using LibUsbDotNet;
+﻿using LibUsbDotNet;
 using LibUsbDotNet.Info;
 using LibUsbDotNet.LibUsb;
 
-namespace NAPS2.Escl.Client;
+namespace NAPS2.Escl.Usb;
 
 public class EsclUsbPoller
 {
@@ -50,4 +49,3 @@ public class EsclUsbPoller
         });
     }
 }
-#endif

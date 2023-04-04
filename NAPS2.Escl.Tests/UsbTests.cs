@@ -1,5 +1,4 @@
-#if USB
-using NAPS2.Escl.Client;
+using NAPS2.Escl.Usb;
 using Xunit;
 
 namespace NAPS2.Escl.Tests;
@@ -20,4 +19,3 @@ public class UsbTests
         Assert.NotNull(caps);
     }
 }
-#endif
