@@ -1,3 +1,5 @@
+using NAPS2.EtoForms.Notifications;
+
 namespace NAPS2.ImportExport;
 
 public interface IExportController

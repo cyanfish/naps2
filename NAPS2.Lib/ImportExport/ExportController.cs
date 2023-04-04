@@ -1,4 +1,5 @@
 ﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;

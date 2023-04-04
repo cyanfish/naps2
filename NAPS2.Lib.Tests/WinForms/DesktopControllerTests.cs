@@ -2,7 +2,6 @@ using Moq;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Notifications;
-using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -29,7 +28,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly Mock<IOperationFactory> _operationFactory;
     private readonly StillImage _stillImage;
     private readonly Mock<IUpdateChecker> _updateChecker;
-    private readonly Mock<Notify> _notify;
+    private readonly Mock<INotify> _notify;
     private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly Mock<IExportController> _exportHelper;
@@ -53,7 +52,7 @@ public class DesktopControllerTests : ContextualTests
         _operationFactory = new Mock<IOperationFactory>();
         _stillImage = new StillImage();
         _updateChecker = new Mock<IUpdateChecker>();
-        _notify = new Mock<Notify>();
+        _notify = new Mock<INotify>();
         _imageTransfer = new ImageTransfer();
         _imageClipboard = new ImageClipboard();
         _exportHelper = new Mock<IExportController>();

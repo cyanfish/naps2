@@ -12,11 +12,11 @@ public class ImageListActions
     private readonly Naps2Config _config;
     private readonly ThumbnailController _thumbnailController;
     private readonly IExportController _exportController;
-    private readonly Notify _notify;
+    private readonly INotify _notify;
 
     public ImageListActions(UiImageList imageList, IOperationFactory operationFactory,
         OperationProgress operationProgress, Naps2Config config, ThumbnailController thumbnailController,
-        IExportController exportController, Notify notify)
+        IExportController exportController, INotify notify)
     {
         _imageList = imageList;
         _operationFactory = operationFactory;

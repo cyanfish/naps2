@@ -1,6 +1,7 @@
 using Autofac;
 using NAPS2.Automation;
 using NAPS2.EtoForms;
+using NAPS2.EtoForms.Notifications;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 

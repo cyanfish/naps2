@@ -1,9 +1,7 @@
-﻿namespace NAPS2.Util;
+﻿namespace NAPS2.EtoForms.Notifications;
 
 /// <summary>
 /// A base interface for objects that can display information about saved files to the user.
-///
-/// Implementors: NotificationManager
 /// </summary>
 public interface ISaveNotify
 {

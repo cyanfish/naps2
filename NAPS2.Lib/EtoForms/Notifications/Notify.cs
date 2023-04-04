@@ -2,7 +2,7 @@ using NAPS2.Update;
 
 namespace NAPS2.EtoForms.Notifications;
 
-public class Notify : ISaveNotify
+public class Notify : INotify
 {
     private readonly NotificationManager _notificationManager;
 

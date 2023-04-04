@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NAPS2.EtoForms;
+using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport;
 using NAPS2.Pdf;
 using NAPS2.Scan;

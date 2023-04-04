@@ -23,7 +23,8 @@ public class GuiModule : Module
         builder.RegisterType<EtoDevicePrompt>().As<IDevicePrompt>();
         builder.RegisterType<EtoPdfPasswordProvider>().As<IPdfPasswordProvider>();
         builder.RegisterType<NotificationManager>().AsSelf().SingleInstance();
-        builder.Register<ISaveNotify>(ctx => ctx.Resolve<Notify>());
+        builder.RegisterType<Notify>().As<INotify>();
+        builder.RegisterType<Notify>().As<ISaveNotify>();
         builder.RegisterType<DesktopController>().AsSelf().SingleInstance();
         builder.RegisterType<UpdateChecker>().As<IUpdateChecker>();
         builder.RegisterType<ExportController>().As<IExportController>();

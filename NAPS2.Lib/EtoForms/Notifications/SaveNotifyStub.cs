@@ -1,4 +1,4 @@
-namespace NAPS2.Util;
+namespace NAPS2.EtoForms.Notifications;
 
 public class SaveNotifyStub : ISaveNotify
 {
