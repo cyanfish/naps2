@@ -1,18 +1,19 @@
 using System.Threading;
+using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Worker;
 
 public class WorkerPool : IDisposable
 {
     private const int TICK_INTERVAL = 5000;
-        
-    private readonly IWorkerFactory _workerFactory;
+
+    private readonly ScanningContext _scanningContext;
     private readonly Timer _timer;
     private List<PoolEntry> _entries = new();
 
-    public WorkerPool(IWorkerFactory workerFactory)
+    public WorkerPool(ScanningContext scanningContext)
     {
-        _workerFactory = workerFactory;
+        _scanningContext = scanningContext;
         _timer = new Timer(Tick, null, 0, TICK_INTERVAL);
     }
 
@@ -62,7 +63,7 @@ public class WorkerPool : IDisposable
                 _entries.RemoveAt(_entries.Count - 1);
                 return entry.Worker;
             }
-            return _workerFactory.Create(WorkerType.Native);
+            return _scanningContext.CreateWorker(WorkerType.Native)!;
         }
     }
 

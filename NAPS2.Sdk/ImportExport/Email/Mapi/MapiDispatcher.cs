@@ -44,7 +44,7 @@ public class MapiDispatcher
         if (Environment.Is64BitProcess)
         {
             // Try 64-bit first
-            using var worker1 = _scanningContext.WorkerFactory.Create(WorkerType.Native);
+            using var worker1 = _scanningContext.CreateWorker(WorkerType.Native)!;
             if (await worker1.Service.CanLoadMapi(clientName))
             {
                 return await worker1.Service.SendMapiEmail(clientName, message);
@@ -53,7 +53,7 @@ public class MapiDispatcher
         }
 
         // If 64-bit failed, try 32-bit
-        using var worker2 = _scanningContext.WorkerFactory.Create(WorkerType.WinX86);
+        using var worker2 = _scanningContext.CreateWorker(WorkerType.WinX86)!;
         if (await worker2.Service.CanLoadMapi(clientName))
         {
             return await _mapiWrapper.SendEmail(clientName, message);

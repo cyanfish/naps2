@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Remoting.Worker;
+﻿using NAPS2.Scan;
+
+namespace NAPS2.Remoting.Worker;
 
 /// <summary>
 /// A factory interface to spawn NAPS2.Worker.exe instances as needed.
@@ -6,5 +8,5 @@
 public interface IWorkerFactory : IDisposable
 {
     void Init(WorkerFactoryInitOptions? options = null);
-    WorkerContext Create(WorkerType workerType);
+    WorkerContext Create(ScanningContext scanningContext, WorkerType workerType);
 }

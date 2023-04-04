@@ -43,9 +43,10 @@ public class RemoteTwainSessionController : ITwainSessionController
             throw new InvalidOperationException(
                 "ScanningContext.WorkerFactory must be set to use TWAIN.");
         }
-        return _scanningContext.WorkerFactory.Create(options.TwainOptions.Dsm == TwainDsm.NewX64
-            ? WorkerType.Native
-            : WorkerType.WinX86);
+        return _scanningContext.CreateWorker(
+            options.TwainOptions.Dsm == TwainDsm.NewX64
+                ? WorkerType.Native
+                : WorkerType.WinX86)!;
     }
 
     private void EnableWindow(ScanOptions options)

@@ -68,7 +68,8 @@ internal class WiaScanDriver : IScanDriver
         private readonly IScanEvents _scanEvents;
         private readonly Action<IMemoryImage> _callback;
 
-        public WiaScanContext(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
+        public WiaScanContext(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken,
+            IScanEvents scanEvents, Action<IMemoryImage> callback)
         {
             _scanningContext = scanningContext;
             _options = options;
@@ -112,7 +113,7 @@ internal class WiaScanDriver : IScanDriver
             {
                 foreach (var path in paths)
                 {
-                    await foreach(var image in _scanningContext.ImageContext.LoadFrames(path))
+                    await foreach (var image in _scanningContext.ImageContext.LoadFrames(path))
                     {
                         using (image)
                         {
@@ -219,7 +220,7 @@ internal class WiaScanDriver : IScanDriver
                             "ScanningContext.WorkerFactory must be set to use WIA 1.0 Native UI from a 64-bit process");
                     }
                     WiaConfiguration? config;
-                    using (var worker = _scanningContext.WorkerFactory.Create(WorkerType.WinX86))
+                    using (var worker = _scanningContext.CreateWorker(WorkerType.WinX86)!)
                     {
                         config = worker.Service.Wia10NativeUI(device.Id(), _options.DialogParent);
                     }

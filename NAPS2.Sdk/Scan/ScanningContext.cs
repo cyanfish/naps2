@@ -47,6 +47,11 @@ public class ScanningContext : IDisposable
 
     internal IScanDriver? LegacyTwainDriver { get; set; }
 
+    public WorkerContext? CreateWorker(WorkerType workerType)
+    {
+        return WorkerFactory?.Create(this, workerType);
+    }
+
     public ProcessedImage CreateProcessedImage(IImageStorage storage)
     {
         return CreateProcessedImage(storage, Enumerable.Empty<Transform>());

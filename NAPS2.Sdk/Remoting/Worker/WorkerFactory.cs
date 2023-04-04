@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using GrpcDotNetNamedPipes;
+using NAPS2.Scan;
 using NAPS2.Unmanaged;
 
 namespace NAPS2.Remoting.Worker;
@@ -13,12 +14,11 @@ public class WorkerFactory : IWorkerFactory
 
     private readonly string _nativeWorkerExePath;
     private readonly string? _winX86WorkerExePath;
-    private readonly FileStorageManager? _fileStorageManager;
     private readonly Dictionary<string, string> _environmentVariables;
 
     private Dictionary<WorkerType, BlockingCollection<WorkerContext>>? _workerQueues;
 
-    public static WorkerFactory CreateDefault(FileStorageManager? fileStorageManager)
+    public static WorkerFactory CreateDefault()
     {
         var env = new Dictionary<string, string>();
 #if NET6_0_OR_GREATER
@@ -37,7 +37,7 @@ public class WorkerFactory : IWorkerFactory
         }
         if (!OperatingSystem.IsWindows())
         {
-            return new WorkerFactory(Environment.ProcessPath!, null, fileStorageManager, env);
+            return new WorkerFactory(Environment.ProcessPath!, null, env);
         }
 #endif
         var exePath = Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.exe");
@@ -46,15 +46,14 @@ public class WorkerFactory : IWorkerFactory
         {
             workerExePath = Path.Combine(AssemblyHelper.EntryFolder, "lib", "NAPS2.Worker.exe");
         }
-        return new WorkerFactory(exePath, workerExePath, fileStorageManager, env);
+        return new WorkerFactory(exePath, workerExePath, env);
     }
 
     public WorkerFactory(string nativeWorkerExePath, string? winX86WorkerExePath = null,
-        FileStorageManager? fileStorageManager = null, Dictionary<string, string>? environmentVariables = null)
+        Dictionary<string, string>? environmentVariables = null)
     {
         _nativeWorkerExePath = nativeWorkerExePath;
         _winX86WorkerExePath = winX86WorkerExePath;
-        _fileStorageManager = fileStorageManager;
         _environmentVariables = environmentVariables ?? new Dictionary<string, string>();
     }
 
@@ -176,14 +175,14 @@ public class WorkerFactory : IWorkerFactory
         }
     }
 
-    public WorkerContext Create(WorkerType workerType)
+    public WorkerContext Create(ScanningContext scanningContext, WorkerType workerType)
     {
         if (_workerQueues == null)
         {
             throw new InvalidOperationException("WorkerFactory has not been initialized");
         }
         var worker = NextWorker(workerType);
-        worker.Service.Init(_fileStorageManager?.FolderPath);
+        worker.Service.Init(scanningContext.FileStorageManager?.FolderPath);
         return worker;
     }
 

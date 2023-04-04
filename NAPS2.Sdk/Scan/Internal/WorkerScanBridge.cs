@@ -23,7 +23,7 @@ internal class WorkerScanBridge : IScanBridge
         {
             throw new InvalidOperationException("ScanningContext.WorkerFactory must be set to scan with a worker");
         }
-        using var ctx = _scanningContext.WorkerFactory.Create(_workerType);
+        using var ctx = _scanningContext.CreateWorker(_workerType)!;
         await ctx.Service.GetDevices(options, cancelToken, callback);
     }
 
@@ -34,7 +34,7 @@ internal class WorkerScanBridge : IScanBridge
         {
             throw new InvalidOperationException("ScanningContext.WorkerFactory must be set to scan with a worker");
         }
-        using var ctx = _scanningContext.WorkerFactory.Create(_workerType);
+        using var ctx = _scanningContext.CreateWorker(_workerType)!;
         await ctx.Service.Scan(_scanningContext, options, cancelToken, scanEvents,
             (image, tempPath) => { callback(image, new PostProcessingContext { TempPath = tempPath }); });
     }
