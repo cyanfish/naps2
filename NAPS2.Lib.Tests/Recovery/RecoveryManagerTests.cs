@@ -164,14 +164,17 @@ public class RecoveryManagerTests : ContextualTests
     {
         var imageList = new UiImageList();
         var rsm1 = RecoveryStorageManager.CreateFolderWithoutThrottle(folderPath, imageList);
-        var recoveryContext = new ScanningContext(TestImageContextFactory.Get(), new FileStorageManager(folderPath));
+        var recoveryContext = new ScanningContext(TestImageContextFactory.Get())
+        {
+            FileStorageManager = new FileStorageManager(folderPath)
+        };
         var images = Enumerable.Range(0, imageCount).Select(x => new UiImage(CreateRecoveryImage(recoveryContext)))
             .ToList();
         imageList.Mutate(new ListMutation<UiImage>.Append(images));
         rsm1.ReleaseLockForTesting();
         return images;
     }
-    
+
     // TODO: Add tests for recovery params (i.e. thumbnail)
 
     private ProcessedImage CreateRecoveryImage(ScanningContext recoveryContext)

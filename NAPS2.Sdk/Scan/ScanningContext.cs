@@ -9,55 +9,44 @@ public class ScanningContext : IDisposable
 {
     private readonly ProcessedImageOwner _processedImageOwner = new();
 
-    // TODO: Make sure properties are initialized by callers (or something equivalent)
     public ScanningContext(ImageContext imageContext)
     {
         ImageContext = imageContext;
     }
 
-    public ScanningContext(ImageContext imageContext, FileStorageManager fileStorageManager)
-    {
-        ImageContext = imageContext;
-        FileStorageManager = fileStorageManager;
-    }
-
-    public ScanningContext(ImageContext imageContext, FileStorageManager fileStorageManager, IOcrEngine ocrEngine,
-        IWorkerFactory workerFactory)
-    {
-        ImageContext = imageContext;
-        FileStorageManager = fileStorageManager;
-        OcrEngine = ocrEngine;
-        WorkerFactory = workerFactory;
-    }
-
-    // TODO: Figure out initialization etc.
     public ImageContext ImageContext { get; }
 
     public FileStorageManager? FileStorageManager { get; set; }
 
-    public string TempFolderPath { get; set; } = Path.GetTempPath();
-
-    public string? RecoveryPath { get; set; }
-
     public IWorkerFactory? WorkerFactory { get; set; }
-
-    public OcrRequestQueue OcrRequestQueue { get; } = new();
 
     public IOcrEngine? OcrEngine { get; set; }
 
+    public string TempFolderPath { get; set; } = Path.GetTempPath();
+
+    internal string? RecoveryPath { get; set; }
+
+    internal OcrRequestQueue OcrRequestQueue { get; } = new();
+
     internal IScanDriver? LegacyTwainDriver { get; set; }
 
-    public WorkerContext? CreateWorker(WorkerType workerType)
+    public void Dispose()
+    {
+        _processedImageOwner.Dispose();
+        FileStorageManager?.Dispose();
+    }
+
+    internal WorkerContext? CreateWorker(WorkerType workerType)
     {
         return WorkerFactory?.Create(this, workerType);
     }
 
-    public ProcessedImage CreateProcessedImage(IImageStorage storage)
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage)
     {
         return CreateProcessedImage(storage, Enumerable.Empty<Transform>());
     }
 
-    public ProcessedImage CreateProcessedImage(IImageStorage storage, IEnumerable<Transform> transforms)
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage, IEnumerable<Transform> transforms)
     {
         var bitDepth = storage switch
         {
@@ -68,12 +57,12 @@ public class ScanningContext : IDisposable
         return CreateProcessedImage(storage, bitDepth, false, -1, transforms);
     }
 
-    public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
     {
         return CreateProcessedImage(storage, bitDepth, lossless, quality, Enumerable.Empty<Transform>());
     }
 
-    public ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
         IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
@@ -163,23 +152,17 @@ public class ScanningContext : IDisposable
         return new ImageFileStorage(fullPath, false);
     }
 
-    public string SaveToTempFile(IMemoryImage image, BitDepth bitDepth = BitDepth.Color)
+    internal string SaveToTempFile(IMemoryImage image, BitDepth bitDepth = BitDepth.Color)
     {
         var path = Path.Combine(TempFolderPath, Path.GetRandomFileName());
         return new ImageExportHelper()
             .SaveSmallestFormat(path, image, bitDepth, false, -1, out _);
     }
 
-    public string SaveToTempFile(ProcessedImage image, BitDepth bitDepth = BitDepth.Color)
+    internal string SaveToTempFile(ProcessedImage image, BitDepth bitDepth = BitDepth.Color)
     {
         using var rendered = image.Render();
         return SaveToTempFile(rendered, bitDepth);
-    }
-
-    public void Dispose()
-    {
-        _processedImageOwner.Dispose();
-        FileStorageManager?.Dispose();
     }
 
     private class ProcessedImageOwner : IProcessedImageOwner, IDisposable

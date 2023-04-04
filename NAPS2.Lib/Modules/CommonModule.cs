@@ -59,11 +59,21 @@ public class CommonModule : Module
         builder.RegisterType<AutoSaver>().AsSelf();
         // TODO: Use PdfiumWorkerCoordinator?
         builder.RegisterType<PdfiumPdfRenderer>().As<IPdfRenderer>();
-        builder.RegisterType<ScanningContext>().AsSelf().SingleInstance();
         builder.RegisterType<OcrOperationManager>().AsSelf().SingleInstance();
         builder.RegisterType<ThumbnailController>().AsSelf().SingleInstance();
         builder.RegisterType<ThumbnailRenderQueue>().AsSelf().SingleInstance();
         builder.RegisterType<DefaultIconProvider>().As<IIconProvider>();
+
+        // ScanningContext has several properties that need to be populated. We do some here, and also some in
+        // GuiModule/ConsoleModule/WorkerModule as they each have their own needs.
+        builder.RegisterType<ScanningContext>().AsSelf().SingleInstance();
+        builder.RegisterBuildCallback(ctx =>
+        {
+            var scanningContext = ctx.Resolve<ScanningContext>();
+            scanningContext.WorkerFactory = ctx.Resolve<IWorkerFactory>();
+            scanningContext.TempFolderPath = Paths.Temp;
+            scanningContext.RecoveryPath = Paths.Recovery;
+        });
 
         //container.Resolve<ImageContext>().PdfRenderer = container.Resolve<PdfiumWorkerCoordinator>();
 

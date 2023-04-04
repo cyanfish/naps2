@@ -2,6 +2,7 @@ using Autofac;
 using NAPS2.Automation;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Notifications;
+using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 
@@ -29,5 +30,12 @@ public class ConsoleModule : Module
         builder.RegisterType<ConsoleOutput>().AsSelf().WithParameter("writer", Console.Out);
         builder.RegisterType<SaveNotifyStub>().As<ISaveNotify>();
         builder.RegisterType<ConsoleDevicePrompt>().As<IDevicePrompt>();
+
+        builder.RegisterBuildCallback(ctx =>
+        {
+            var scanningContext = ctx.Resolve<ScanningContext>();
+            scanningContext.FileStorageManager = ctx.Resolve<FileStorageManager>();
+            scanningContext.OcrEngine = ctx.Resolve<IOcrEngine>();
+        });
     }
 }

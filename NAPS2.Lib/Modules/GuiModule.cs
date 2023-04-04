@@ -2,8 +2,8 @@ using Autofac;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Notifications;
-using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
+using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
@@ -31,5 +31,12 @@ public class GuiModule : Module
         builder.RegisterType<DesktopScanController>().As<IDesktopScanController>();
         builder.RegisterType<DesktopSubFormController>().As<IDesktopSubFormController>();
         builder.RegisterType<DesktopFormProvider>().AsSelf().SingleInstance();
+
+        builder.RegisterBuildCallback(ctx =>
+        {
+            var scanningContext = ctx.Resolve<ScanningContext>();
+            scanningContext.FileStorageManager = ctx.Resolve<FileStorageManager>();
+            scanningContext.OcrEngine = ctx.Resolve<IOcrEngine>();
+        });
     }
 }

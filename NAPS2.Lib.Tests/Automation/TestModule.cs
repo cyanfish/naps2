@@ -67,7 +67,11 @@ internal class TestModule : Module
         builder.RegisterInstance(new FileStorageManager(recoveryFolderPath));
 
         builder.RegisterBuildCallback(ctx =>
-            ctx.Resolve<ScanningContext>().TempFolderPath = _scanningContext.TempFolderPath);
+        {
+            var scanningContext = ctx.Resolve<ScanningContext>();
+            scanningContext.OcrEngine = ctx.Resolve<IOcrEngine>();
+            scanningContext.TempFolderPath = _scanningContext.TempFolderPath;
+        });
 
         _containerBuilderSetup?.Invoke(builder);
     }
