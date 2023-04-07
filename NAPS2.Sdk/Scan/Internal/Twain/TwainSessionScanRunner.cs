@@ -63,7 +63,9 @@ internal class TwainSessionScanRunner
 #if NET6_0_OR_GREATER
             var rc = _session.Open();
 #else
-            var rc = _session.Open(new WindowsFormsMessageLoopHook(dsmHandle));
+            var rc = dsmHandle == IntPtr.Zero
+                ? _session.Open()
+                : _session.Open(new WindowsFormsMessageLoopHook(dsmHandle));
 #endif
             if (rc != ReturnCode.Success)
             {
