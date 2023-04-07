@@ -1,4 +1,5 @@
-﻿using NAPS2.Scan;
+﻿using Microsoft.Extensions.Logging;
+using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Images;
 
@@ -63,7 +64,7 @@ public class ImageImporter : IImageImporter
             }
             catch (Exception e)
             {
-                Log.ErrorException("Error importing image: " + filePath, e);
+                _scanningContext.Logger.LogError(e, "Error importing image: {FilePath}", filePath);
                 // Handle and notify the user outside the method so that errors importing multiple files can be aggregated
                 throw;
             }

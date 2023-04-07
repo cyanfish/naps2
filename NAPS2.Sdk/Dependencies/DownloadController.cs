@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Net;
 using System.Security.Cryptography;
+using Microsoft.Extensions.Logging;
 using NAPS2.Scan;
 
 namespace NAPS2.Dependencies;
@@ -8,6 +9,7 @@ namespace NAPS2.Dependencies;
 public class DownloadController
 {
     private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
 
     // TODO: Migrate to HttpClient
 #pragma warning disable SYSLIB0014
@@ -23,6 +25,7 @@ public class DownloadController
     public DownloadController(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
         // TODO: Is this needed for net462?
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         _client.DownloadFileCompleted += client_DownloadFileCompleted;
@@ -54,13 +57,13 @@ public class DownloadController
             _hasError = true;
             if (!_cancel)
             {
-                Log.ErrorException("Error downloading file: " + file.DownloadInfo.FileName, e.Error);
+                _logger.LogError(e.Error, "Error downloading file: {FileName}", file.DownloadInfo.FileName);
             }
         }
         else if (file.DownloadInfo.Sha1 != CalculateSha1(Path.Combine(file.TempFolder!, file.DownloadInfo.FileName)))
         {
             _hasError = true;
-            Log.Error("Error downloading file (invalid checksum): " + file.DownloadInfo.FileName);
+            _logger.LogError("Error downloading file (invalid checksum): {FileName}", file.DownloadInfo.FileName);
         }
         else
         {
@@ -123,7 +126,7 @@ public class DownloadController
             }
             catch (Exception ex)
             {
-                Log.ErrorException("Error preparing downloaded file", ex);
+                _logger.LogError(ex, "Error preparing downloaded file");
                 DownloadError?.Invoke(this, EventArgs.Empty);
             }
             Directory.Delete(prev.TempFolder!, true);

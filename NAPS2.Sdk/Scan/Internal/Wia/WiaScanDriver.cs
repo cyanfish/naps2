@@ -1,5 +1,6 @@
 ﻿#if !MAC
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Wia;
@@ -63,6 +64,7 @@ internal class WiaScanDriver : IScanDriver
     private class WiaScanContext
     {
         private readonly ScanningContext _scanningContext;
+        private readonly ILogger _logger;
         private readonly ScanOptions _options;
         private readonly CancellationToken _cancelToken;
         private readonly IScanEvents _scanEvents;
@@ -72,6 +74,7 @@ internal class WiaScanDriver : IScanDriver
             IScanEvents scanEvents, Action<IMemoryImage> callback)
         {
             _scanningContext = scanningContext;
+            _logger = scanningContext.Logger;
             _options = options;
             _cancelToken = cancelToken;
             _scanEvents = scanEvents;
@@ -132,7 +135,7 @@ internal class WiaScanDriver : IScanDriver
                     }
                     catch (Exception e)
                     {
-                        Log.ErrorException("Error deleting WIA 2.0 native transferred file", e);
+                        _logger.LogError(e, "Error deleting WIA 2.0 native transferred file");
                     }
                 }
             }
@@ -160,7 +163,7 @@ internal class WiaScanDriver : IScanDriver
                     using var stream = args.Stream;
                     if (stream.Length == 0)
                     {
-                        Log.Error("Ignoring empty stream from WIA");
+                        _logger.LogError("Ignoring empty stream from WIA");
                         return;
                     }
                     using var image = _scanningContext.ImageContext.Load(stream);
@@ -267,11 +270,11 @@ internal class WiaScanDriver : IScanDriver
             {
                 if (device.Version == WiaVersion.Wia10)
                 {
-                    device.SafeSetProperty(WiaPropertyId.DPS_PAGES, 1);
+                    SafeSetProperty(device, WiaPropertyId.DPS_PAGES, 1);
                 }
                 else
                 {
-                    item.SafeSetProperty(WiaPropertyId.IPS_PAGES, 0);
+                    SafeSetProperty(item, WiaPropertyId.IPS_PAGES, 0);
                 }
             }
 
@@ -280,13 +283,13 @@ internal class WiaScanDriver : IScanDriver
                 switch (_options.PaperSource)
                 {
                     case PaperSource.Flatbed:
-                        device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
+                        SafeSetProperty(device, WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
                         break;
                     case PaperSource.Feeder:
-                        device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
+                        SafeSetProperty(device, WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
                         break;
                     case PaperSource.Duplex:
-                        device.SafeSetProperty(WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT,
+                        SafeSetProperty(device, WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT,
                             WiaPropertyValue.FEEDER | WiaPropertyValue.DUPLEX);
                         break;
                 }
@@ -296,10 +299,10 @@ internal class WiaScanDriver : IScanDriver
                 switch (_options.PaperSource)
                 {
                     case PaperSource.Feeder:
-                        item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
+                        SafeSetProperty(item, WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
                         break;
                     case PaperSource.Duplex:
-                        item.SafeSetProperty(WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.DUPLEX);
+                        SafeSetProperty(item, WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.DUPLEX);
                         break;
                 }
             }
@@ -307,20 +310,20 @@ internal class WiaScanDriver : IScanDriver
             switch (_options.BitDepth)
             {
                 case BitDepth.Grayscale:
-                    item.SafeSetProperty(WiaPropertyId.IPA_DATATYPE, 2);
+                    SafeSetProperty(item, WiaPropertyId.IPA_DATATYPE, 2);
                     break;
                 case BitDepth.Color:
-                    item.SafeSetProperty(WiaPropertyId.IPA_DATATYPE, 3);
+                    SafeSetProperty(item, WiaPropertyId.IPA_DATATYPE, 3);
                     break;
                 case BitDepth.BlackAndWhite:
-                    item.SafeSetProperty(WiaPropertyId.IPA_DATATYPE, 0);
+                    SafeSetProperty(item, WiaPropertyId.IPA_DATATYPE, 0);
                     break;
             }
 
             int xRes = _options.Dpi;
             int yRes = _options.Dpi;
-            item.SafeSetPropertyClosest(WiaPropertyId.IPS_XRES, ref xRes);
-            item.SafeSetPropertyClosest(WiaPropertyId.IPS_YRES, ref yRes);
+            SafeSetPropertyClosest(item, WiaPropertyId.IPS_XRES, ref xRes);
+            SafeSetPropertyClosest(item, WiaPropertyId.IPS_YRES, ref yRes);
 
             int pageWidth = _options.PageSize!.WidthInThousandthsOfAnInch * xRes / 1000;
             int pageHeight = _options.PageSize.HeightInThousandthsOfAnInch * yRes / 1000;
@@ -357,20 +360,56 @@ internal class WiaScanDriver : IScanDriver
 
             if (_options.WiaOptions.OffsetWidth)
             {
-                item.SafeSetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth + horizontalPos);
-                item.SafeSetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
+                SafeSetProperty(item, WiaPropertyId.IPS_XEXTENT, pageWidth + horizontalPos);
+                SafeSetProperty(item, WiaPropertyId.IPS_XPOS, horizontalPos);
             }
             else
             {
-                item.SafeSetProperty(WiaPropertyId.IPS_XEXTENT, pageWidth);
-                item.SafeSetProperty(WiaPropertyId.IPS_XPOS, horizontalPos);
+                SafeSetProperty(item, WiaPropertyId.IPS_XEXTENT, pageWidth);
+                SafeSetProperty(item, WiaPropertyId.IPS_XPOS, horizontalPos);
             }
-            item.SafeSetProperty(WiaPropertyId.IPS_YEXTENT, pageHeight);
+            SafeSetProperty(item, WiaPropertyId.IPS_YEXTENT, pageHeight);
 
             if (!_options.BrightnessContrastAfterScan)
             {
-                item.SafeSetPropertyRange(WiaPropertyId.IPS_CONTRAST, _options.Contrast, -1000, 1000);
-                item.SafeSetPropertyRange(WiaPropertyId.IPS_BRIGHTNESS, _options.Brightness, -1000, 1000);
+                SafeSetPropertyRange(item, WiaPropertyId.IPS_CONTRAST, _options.Contrast, -1000, 1000);
+                SafeSetPropertyRange(item, WiaPropertyId.IPS_BRIGHTNESS, _options.Brightness, -1000, 1000);
+            }
+        }
+
+        private void SafeSetProperty(WiaItemBase item, int propId, int value)
+        {
+            try
+            {
+                item.SetProperty(propId, value);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error setting property");
+            }
+        }
+
+        private void SafeSetPropertyClosest(WiaItemBase item, int propId, ref int value)
+        {
+            try
+            {
+                item.SetPropertyClosest(propId, ref value);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error setting property");
+            }
+        }
+
+        private void SafeSetPropertyRange(WiaItemBase item, int propId, int value, int expectedMin, int expectedMax)
+        {
+            try
+            {
+                item.SetPropertyRange(propId, value, expectedMin, expectedMax);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error setting property");
             }
         }
     }

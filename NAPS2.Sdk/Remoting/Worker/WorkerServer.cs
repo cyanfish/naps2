@@ -20,7 +20,7 @@ public static class WorkerServer
 #if MAC
                 new StubTwainSessionController());
 #else
-                new LocalTwainSessionController());
+                new LocalTwainSessionController(scanningContext));
 #endif
             serviceImpl.OnStop += (_, _) => tcs.SetResult(true);
             WorkerService.BindService(server.ServiceBinder, serviceImpl);

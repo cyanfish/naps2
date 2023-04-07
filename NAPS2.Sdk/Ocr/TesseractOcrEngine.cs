@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Xml;
+using Microsoft.Extensions.Logging;
+using NAPS2.Scan;
 
 namespace NAPS2.Ocr;
 
@@ -9,18 +11,18 @@ public class TesseractOcrEngine : IOcrEngine
     private readonly string _tesseractPath;
     private readonly string? _languageDataBasePath;
     private readonly string _tempFolder;
-    private readonly ErrorOutput? _errorOutput;
 
-    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath, string tempFolder, ErrorOutput? errorOutput)
+    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath, string tempFolder)
     {
         _tesseractPath = tesseractPath;
         _languageDataBasePath = languageDataBasePath;
         _tempFolder = tempFolder;
-        _errorOutput = errorOutput;
     }
     
-    public async Task<OcrResult?> ProcessImage(string imagePath, OcrParams ocrParams, CancellationToken cancelToken)
+    public async Task<OcrResult?> ProcessImage(ScanningContext scanningContext, string imagePath, OcrParams ocrParams,
+        CancellationToken cancelToken)
     {
+        var logger = scanningContext.Logger;
         string tempHocrFilePath = Path.Combine(_tempFolder, Path.GetRandomFileName());
         string tempHocrFilePathWithExt = tempHocrFilePath + ".hocr";
         try
@@ -46,7 +48,7 @@ public class TesseractOcrEngine : IOcrEngine
             if (tesseractProcess == null)
             {
                 // Couldn't start tesseract for some reason
-                Log.Error("Couldn't start OCR process.");
+                logger.LogError("Couldn't start OCR process.");
                 return null;
             }
 
@@ -66,8 +68,8 @@ public class TesseractOcrEngine : IOcrEngine
             {
                 if (!cancelToken.IsCancellationRequested)
                 {
-                    _errorOutput?.DisplayError(SdkResources.OcrTimeout);
-                    Log.Error("OCR process timed out.");
+                    logger.LogError("OCR process timed out.");
+                    OcrTimeout?.Invoke(this, EventArgs.Empty);
                 }
                 try
                 {
@@ -77,7 +79,7 @@ public class TesseractOcrEngine : IOcrEngine
                 }
                 catch (Exception e)
                 {
-                    Log.ErrorException("Error killing OCR process", e);
+                    logger.LogError(e, "Error killing OCR process");
                 }
                 return null;
             }
@@ -114,14 +116,14 @@ public class TesseractOcrEngine : IOcrEngine
         }
         catch (XmlException e)
         {
-            Log.ErrorException("Error running OCR", e);
+            logger.LogError(e, "Error running OCR");
             // Don't display to the error output as an xml exception may just indicate a normal OCR failure
             return null;
         }
         catch (Exception e)
         {
-            Log.ErrorException("Error running OCR", e);
-            _errorOutput?.DisplayError(SdkResources.OcrError, e);
+            logger.LogError(e, "Error running OCR");
+            OcrError?.Invoke(this, new OcrErrorEventArgs(e));
             return null;
         }
         finally
@@ -132,10 +134,14 @@ public class TesseractOcrEngine : IOcrEngine
             }
             catch (Exception e)
             {
-                Log.ErrorException("Error cleaning up OCR temp files", e);
+                logger.LogError(e, "Error cleaning up OCR temp files");
             }
         }
     }
+
+    public event EventHandler<OcrErrorEventArgs>? OcrError;
+
+    public event EventHandler? OcrTimeout;
 
     private static string? GetNearestAncestorAttribute(XElement x, string attributeName)
     {

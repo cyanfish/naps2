@@ -7,16 +7,14 @@ namespace NAPS2.Sdk.Tests.Pdf;
 
 public class PdfImportExportTests : ContextualTests
 {
-    private readonly ITestOutputHelper _testOutputHelper;
-
     private readonly PdfImporter _importer;
     private readonly PdfExporter _exporter;
     private readonly string _importPath;
     private readonly string _exportPath;
 
     public PdfImportExportTests(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper)
     {
-        _testOutputHelper = testOutputHelper;
         _importer = new PdfImporter(ScanningContext);
         _exporter = new PdfExporter(ScanningContext);
         _importPath = CopyResourceToFile(PdfResources.word_generated_pdf, "import.pdf");

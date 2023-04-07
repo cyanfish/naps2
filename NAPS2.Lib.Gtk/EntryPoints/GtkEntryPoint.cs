@@ -3,6 +3,7 @@ using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
+using NAPS2.Scan;
 using UnhandledExceptionEventArgs = Eto.UnhandledExceptionEventArgs;
 
 namespace NAPS2.EntryPoints;
@@ -36,7 +37,7 @@ public static class GtkEntryPoint
         Trace.Listeners.Add(new ConsoleTraceListener());
 
         // Start a pending worker process
-        container.Resolve<IWorkerFactory>().Init();
+        container.Resolve<IWorkerFactory>().Init(container.Resolve<ScanningContext>());
 
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();

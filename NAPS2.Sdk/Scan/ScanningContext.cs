@@ -1,4 +1,6 @@
 using System.Collections.Immutable;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using NAPS2.Ocr;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Internal;
@@ -23,6 +25,8 @@ public class ScanningContext : IDisposable
     public IOcrEngine? OcrEngine { get; set; }
 
     public string TempFolderPath { get; set; } = Path.GetTempPath();
+
+    public ILogger Logger { get; set; } = NullLogger.Instance;
 
     internal string? RecoveryPath { get; set; }
 

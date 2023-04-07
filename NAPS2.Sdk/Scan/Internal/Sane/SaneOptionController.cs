@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using NAPS2.Scan.Internal.Sane.Native;
 
 namespace NAPS2.Scan.Internal.Sane;
@@ -5,11 +6,14 @@ namespace NAPS2.Scan.Internal.Sane;
 internal class SaneOptionController
 {
     private readonly SaneDevice _device;
+    // TODO: Move exception handling + logging out if we split NAPS2.Sane off into a separate library
+    private readonly ILogger _logger;
     private Dictionary<string, SaneOption> _options = null!;
 
-    public SaneOptionController(SaneDevice device)
+    public SaneOptionController(SaneDevice device, ILogger logger)
     {
         _device = device;
+        _logger = logger;
         LoadOptions();
     }
 
@@ -22,6 +26,7 @@ internal class SaneOptionController
 
     public bool TrySet(string name, double value)
     {
+        // TODO: Convert this to debug logging?
         Console.WriteLine($"Maybe setting {name}");
         if (!_options.ContainsKey(name))
             return false;
@@ -40,7 +45,7 @@ internal class SaneOptionController
         }
         catch (Exception ex)
         {
-            Log.ErrorException($"Error writing SANE option {name}", ex);
+            _logger.LogError(ex, "Error writing SANE option {OptionName}", name);
             return false;
         }
     }
@@ -72,7 +77,7 @@ internal class SaneOptionController
         }
         catch (Exception ex)
         {
-            Log.ErrorException($"Error writing SANE option {name}", ex);
+            _logger.LogError(ex, "Error writing SANE option {OptionName}", name);
         }
         return false;
     }
@@ -97,7 +102,7 @@ internal class SaneOptionController
         }
         catch (Exception ex)
         {
-            Log.ErrorException($"Error reading SANE option {name}", ex);
+            _logger.LogError(ex, "Error writing SANE option {OptionName}", name);
             return false;
         }
     }

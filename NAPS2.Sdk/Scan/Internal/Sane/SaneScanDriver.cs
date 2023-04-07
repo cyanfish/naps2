@@ -140,7 +140,7 @@ internal class SaneScanDriver : IScanDriver
 
     private void SetOptions(SaneDevice device, ScanOptions options)
     {
-        var controller = new SaneOptionController(device);
+        var controller = new SaneOptionController(device, _scanningContext.Logger);
 
         if (options.PaperSource == PaperSource.Flatbed)
         {

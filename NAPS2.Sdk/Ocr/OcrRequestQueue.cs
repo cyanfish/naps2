@@ -1,4 +1,6 @@
 ﻿using System.Threading;
+using Microsoft.Extensions.Logging;
+using NAPS2.Scan;
 
 namespace NAPS2.Ocr;
 
@@ -19,7 +21,7 @@ public class OcrRequestQueue
     /// in parallel.
     /// </summary>
     public int WorkerCount { get; init; } = Environment.ProcessorCount;
-    
+
     /// <summary>
     /// For testing. Adds a delay to the worker tasks to process requests.
     /// </summary>
@@ -43,6 +45,7 @@ public class OcrRequestQueue
     /// path specified as "tempImageFilePath". The file will automatically be deleted once it is no longer needed for
     /// the OCR request.
     /// </summary>
+    /// <param name="scanningContext">The scanning context object.</param>
     /// <param name="ocrEngine">The engine to run.</param>
     /// <param name="image">The image to OCR.</param>
     /// <param name="tempImageFilePath">The on-disk image file path.</param>
@@ -50,33 +53,33 @@ public class OcrRequestQueue
     /// <param name="priority">The priority of the request.</param>
     /// <param name="cancelToken">A cancellation token.</param>
     /// <returns>The result of the OCR operation, or null if an error occurred (e.g. engine misconfigured).</returns>
-    public async Task<OcrResult?> Enqueue(IOcrEngine ocrEngine, ProcessedImage image, string tempImageFilePath,
-        OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
+    public async Task<OcrResult?> Enqueue(ScanningContext scanningContext, IOcrEngine ocrEngine, ProcessedImage image,
+        string tempImageFilePath, OcrParams ocrParams, OcrPriority priority, CancellationToken cancelToken)
     {
         OcrRequest req;
         lock (this)
         {
             var reqParams = new OcrRequestParams(image.GetWeakReference(), ocrEngine, ocrParams);
-            req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(reqParams, this));
+            req = _requestCache.GetOrSet(reqParams, () => new OcrRequest(scanningContext, this, reqParams));
             if (req.State is OcrRequestState.Canceled or OcrRequestState.Error)
             {
                 // Retry with a new request
-                req = _requestCache[reqParams] = new OcrRequest(reqParams, this);
+                req = _requestCache[reqParams] = new OcrRequest(scanningContext, this, reqParams);
             }
             req.AddReference(tempImageFilePath, priority, cancelToken);
         }
         // Signal the worker tasks that a request may be ready
         _queueWaitHandle.Release();
         // If no worker threads are running, start them
-        EnsureWorkerThreads();
+        EnsureWorkerThreads(scanningContext);
         await Task.WhenAny(req.CompletedTask, cancelToken.WaitHandle.WaitOneAsync());
         // If no requests are pending, stop the worker threads
-        EnsureWorkerThreads();
+        EnsureWorkerThreads(scanningContext);
         // Return null if canceled
         return req.CompletedTask.IsCompleted ? req.CompletedTask.Result : null;
     }
 
-    private void EnsureWorkerThreads()
+    private void EnsureWorkerThreads(ScanningContext scanningContext)
     {
         lock (this)
         {
@@ -85,7 +88,7 @@ public class OcrRequestQueue
             {
                 for (int i = 0; i < WorkerCount; i++)
                 {
-                    _workerTasks.Add(Task.Run(() => RunWorkerTask(_workerCts, _queueWaitHandle)));
+                    _workerTasks.Add(Task.Run(() => RunWorkerTask(scanningContext, _workerCts, _queueWaitHandle)));
                 }
             }
             if (_workerTasks.Count > 0 && !hasPending)
@@ -98,8 +101,9 @@ public class OcrRequestQueue
         }
     }
 
-    private async Task RunWorkerTask(CancellationTokenSource cts, WaitHandle queueWaitHandle)
+    private async Task RunWorkerTask(ScanningContext scanningContext, CancellationTokenSource cts, WaitHandle queueWaitHandle)
     {
+        var logger = scanningContext.Logger;
         try
         {
             if (WorkerAddedLatency > 0)
@@ -133,7 +137,7 @@ public class OcrRequestQueue
         }
         catch (Exception e)
         {
-            Log.ErrorException("Error in OcrRequestQueue.RunWorkerTask", e);
+            logger.LogError(e, "Error in OcrRequestQueue.RunWorkerTask");
         }
     }
 }

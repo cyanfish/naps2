@@ -3,6 +3,7 @@ using CommandLine;
 using NAPS2.Automation;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
+using NAPS2.Scan;
 
 namespace NAPS2.EntryPoints;
 
@@ -27,7 +28,9 @@ public static class ConsoleEntryPoint
         Paths.ClearTemp();
 
         // Start a pending worker process
-        container.Resolve<IWorkerFactory>().Init(new WorkerFactoryInitOptions { StartSpareWorkers = false });
+        container.Resolve<IWorkerFactory>().Init(
+            container.Resolve<ScanningContext>(),
+            new WorkerFactoryInitOptions { StartSpareWorkers = false });
 
         // Run the scan automation logic
         var scanning = container.Resolve<AutomatedScanning>();

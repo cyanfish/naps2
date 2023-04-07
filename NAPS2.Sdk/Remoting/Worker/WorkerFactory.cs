@@ -125,23 +125,23 @@ public class WorkerFactory : IWorkerFactory
         return proc;
     }
 
-    private void StartWorkerService(WorkerType workerType)
+    private void StartWorkerService(ScanningContext scanningContext, WorkerType workerType)
     {
         Task.Run(() =>
         {
             var proc = StartWorkerProcess(workerType);
             var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
-            _workerQueues![workerType].Add(new WorkerContext(workerType, new WorkerServiceAdapter(channel), proc));
+            _workerQueues![workerType].Add(new WorkerContext(scanningContext, workerType, new WorkerServiceAdapter(channel), proc));
         });
     }
 
-    private WorkerContext NextWorker(WorkerType workerType)
+    private WorkerContext NextWorker(ScanningContext scanningContext, WorkerType workerType)
     {
-        StartWorkerService(workerType);
+        StartWorkerService(scanningContext, workerType);
         return _workerQueues![workerType]!.Take();
     }
 
-    public void Init(WorkerFactoryInitOptions? options)
+    public void Init(ScanningContext scanningContext, WorkerFactoryInitOptions? options)
     {
         if (!File.Exists(_nativeWorkerExePath))
         {
@@ -164,12 +164,12 @@ public class WorkerFactory : IWorkerFactory
             {
                 // We start a "spare" worker so that when we need one, it's immediately ready (and then we'll start another
                 // spare for the next request).
-                StartWorkerService(WorkerType.Native);
+                StartWorkerService(scanningContext, WorkerType.Native);
                 if (PlatformCompat.System.SupportsWinX86Worker)
                 {
                     // On windows as we need 32-bit and 64-bit workers for different things, we will have two spare workers,
                     // which isn't ideal but not a big deal.
-                    StartWorkerService(WorkerType.WinX86);
+                    StartWorkerService(scanningContext, WorkerType.WinX86);
                 }
             }
         }
@@ -181,7 +181,7 @@ public class WorkerFactory : IWorkerFactory
         {
             throw new InvalidOperationException("WorkerFactory has not been initialized");
         }
-        var worker = NextWorker(workerType);
+        var worker = NextWorker(scanningContext, workerType);
         worker.Service.Init(scanningContext.FileStorageManager?.FolderPath);
         return worker;
     }

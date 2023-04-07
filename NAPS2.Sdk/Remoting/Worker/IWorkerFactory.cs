@@ -7,6 +7,6 @@ namespace NAPS2.Remoting.Worker;
 /// </summary>
 public interface IWorkerFactory : IDisposable
 {
-    void Init(WorkerFactoryInitOptions? options = null);
+    void Init(ScanningContext scanningContext, WorkerFactoryInitOptions? options = null);
     WorkerContext Create(ScanningContext scanningContext, WorkerType workerType);
 }

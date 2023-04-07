@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
 using NAPS2.Ocr;
 using NAPS2.Pdf.Pdfium;
@@ -18,10 +19,12 @@ namespace NAPS2.Pdf;
 public class PdfExporter : IPdfExporter
 {
     private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
 
     public PdfExporter(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
     }
 
     public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
@@ -308,7 +311,7 @@ public class PdfExporter : IPdfExporter
             var activeEngine = _scanningContext.OcrEngine;
             if (activeEngine == null)
             {
-                Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
+                _logger.LogError("Supported OCR engine not installed.");
             }
             else
             {
@@ -333,7 +336,7 @@ public class PdfExporter : IPdfExporter
 
         // Start OCR
         state.OcrTask = _scanningContext.OcrRequestQueue.Enqueue(
-            state.OcrEngine!, state.Image, ocrTempFilePath, state.OcrParams!, OcrPriority.Foreground,
+            _scanningContext, state.OcrEngine!, state.Image, ocrTempFilePath, state.OcrParams!, OcrPriority.Foreground,
             state.CancelToken);
         return state;
     }
@@ -367,7 +370,7 @@ public class PdfExporter : IPdfExporter
         }
         catch (Exception ex)
         {
-            Log.Error("Could not import PDF page for possible OCR, falling back to non-OCR path", ex);
+            _logger.LogError(ex, "Could not import PDF page for possible OCR, falling back to non-OCR path");
         }
         if (!state.NeedsOcr)
         {

@@ -1,6 +1,7 @@
 #if !MAC
 using System.Threading;
 using Google.Protobuf;
+using Microsoft.Extensions.Logging;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Exceptions;
 using NTwain;
@@ -15,6 +16,7 @@ namespace NAPS2.Scan.Internal.Twain;
 /// </summary>
 internal class TwainSessionScanRunner
 {
+    private readonly ILogger _logger;
     private readonly TwainDsm _dsm;
     private readonly ScanOptions _options;
     private readonly CancellationToken _cancelToken;
@@ -24,9 +26,10 @@ internal class TwainSessionScanRunner
     private readonly TaskCompletionSource<bool> _tcs;
     private DataSource? _source;
 
-    public TwainSessionScanRunner(TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
+    public TwainSessionScanRunner(ILogger logger, TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
         CancellationToken cancelToken, ITwainEvents twainEvents)
     {
+        _logger = logger;
         _dsm = dsm;
         _options = options;
         _cancelToken = cancelToken;
@@ -232,7 +235,7 @@ internal class TwainSessionScanRunner
         }
         catch (Exception ex)
         {
-            Log.ErrorException("Error sending TWAIN data transfer event", ex);
+            _logger.LogError(ex, "Error sending TWAIN data transfer event");
         }
     }
 
@@ -258,7 +261,7 @@ internal class TwainSessionScanRunner
         }
         catch (Exception ex)
         {
-            Log.ErrorException("Error sending TWAIN transfer ready event", ex);
+            _logger.LogError(ex, "Error sending TWAIN transfer ready event");
         }
     }
 

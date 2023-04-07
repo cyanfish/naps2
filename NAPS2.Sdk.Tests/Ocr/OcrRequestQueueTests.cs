@@ -34,7 +34,7 @@ public class OcrRequestQueueTests : ContextualTests
     [Fact]
     public async Task Enqueue()
     {
-        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
 
         var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams);
@@ -48,7 +48,7 @@ public class OcrRequestQueueTests : ContextualTests
     {
         var tempPath1 = CreateTempFile();
         var tempPath2 = CreateTempFile();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
 
         await DoEnqueueForeground(_image, tempPath1, _ocrParams);
@@ -63,7 +63,7 @@ public class OcrRequestQueueTests : ContextualTests
         Assert.False(File.Exists(tempPath2));
 
         // Verify only a single engine call
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -72,7 +72,7 @@ public class OcrRequestQueueTests : ContextualTests
     {
         var tempPath1 = CreateTempFile();
         var tempPath2 = CreateTempFile();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
 
         var ocrResult1Task = DoEnqueueForeground(_image, tempPath1, _ocrParams);
@@ -87,7 +87,7 @@ public class OcrRequestQueueTests : ContextualTests
         Assert.False(File.Exists(tempPath2));
 
         // Verify only a single engine call
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -97,13 +97,13 @@ public class OcrRequestQueueTests : ContextualTests
         var image1 = CreateScannedImage();
         var tempPath1 = CreateTempFile();
         var expectedResult1 = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(expectedResult1));
 
         var image2 = CreateScannedImage();
         var tempPath2 = CreateTempFile();
         var expectedResult2 = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, tempPath2, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(expectedResult2));
 
         var ocrResult1 = await DoEnqueueForeground(image1, tempPath1, _ocrParams);
@@ -115,8 +115,8 @@ public class OcrRequestQueueTests : ContextualTests
         Assert.False(File.Exists(tempPath2));
 
         // Verify two engine calls
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
-        _mockEngine.Verify(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, tempPath2, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -131,13 +131,13 @@ public class OcrRequestQueueTests : ContextualTests
         var expectedResult2 = CreateOcrResult();
         var expectedResult3 = CreateOcrResult();
         var expectedResult4 = CreateOcrResult();
-        _mockEngine.Setup(x => x.ProcessImage(It.IsAny<string>(), ocrParams1, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams1, It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(expectedResult1));
-        _mockEngine.Setup(x => x.ProcessImage(It.IsAny<string>(), ocrParams2, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams2, It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(expectedResult2));
-        _mockEngine.Setup(x => x.ProcessImage(It.IsAny<string>(), ocrParams3, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams3, It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(expectedResult3));
-        _mockEngine.Setup(x => x.ProcessImage(It.IsAny<string>(), ocrParams4, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams4, It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(expectedResult4));
 
         var ocrResult1 = await DoEnqueueForeground(_image, CreateTempFile(), ocrParams1);
@@ -150,23 +150,23 @@ public class OcrRequestQueueTests : ContextualTests
         Assert.Equal(expectedResult4, ocrResult4);
 
         // Verify distinct engine calls
-        _mockEngine.Verify(x => x.ProcessImage(It.IsAny<string>(), ocrParams1, It.IsAny<CancellationToken>()));
-        _mockEngine.Verify(x => x.ProcessImage(It.IsAny<string>(), ocrParams2, It.IsAny<CancellationToken>()));
-        _mockEngine.Verify(x => x.ProcessImage(It.IsAny<string>(), ocrParams3, It.IsAny<CancellationToken>()));
-        _mockEngine.Verify(x => x.ProcessImage(It.IsAny<string>(), ocrParams4, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams1, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams2, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams3, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), ocrParams4, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
     [Fact]
     public async Task EnqueueWithEngineError()
     {
-        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()))
             .Throws<Exception>();
 
         var ocrResult = await DoEnqueueForeground(_image, _tempPath, _ocrParams);
 
         Assert.Null(ocrResult);
-        _mockEngine.Verify(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -175,9 +175,9 @@ public class OcrRequestQueueTests : ContextualTests
     {
         var tempPath1 = CreateTempFile();
         var tempPath2 = CreateTempFile();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
             .Throws<Exception>();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, tempPath2, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
 
         var ocrResult1 = await DoEnqueueForeground(_image, tempPath1, _ocrParams);
@@ -185,8 +185,8 @@ public class OcrRequestQueueTests : ContextualTests
 
         Assert.Null(ocrResult1);
         Assert.Equal(_expectedResult, ocrResult2);
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
-        _mockEngine.Verify(x => x.ProcessImage(tempPath2, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, tempPath2, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -209,12 +209,12 @@ public class OcrRequestQueueTests : ContextualTests
         var cancelledAtEngineStart = false;
         var cancelledAtEngineEnd = false;
         var cts = new CancellationTokenSource();
-        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>())).Returns(
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>())).Returns(
             new InvocationFunc(invocation =>
             {
                 mockEngineTask = Task.Run(() =>
                 {
-                    var cancelToken = (CancellationToken) invocation.Arguments[2];
+                    var cancelToken = (CancellationToken) invocation.Arguments[3];
                     cancelledAtEngineStart = cancelToken.IsCancellationRequested;
                     cts.Cancel();
                     cancelledAtEngineEnd = cancelToken.IsCancellationRequested;
@@ -229,7 +229,7 @@ public class OcrRequestQueueTests : ContextualTests
         Assert.Null(ocrResult);
         Assert.False(cancelledAtEngineStart);
         Assert.True(cancelledAtEngineEnd);
-        _mockEngine.Verify(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -238,7 +238,7 @@ public class OcrRequestQueueTests : ContextualTests
     {
         var tempPath1 = CreateTempFile();
         var tempPath2 = CreateTempFile();
-        _mockEngine.Setup(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(() => Task.Run(async () =>
             {
                 await Task.Delay(200);
@@ -256,7 +256,7 @@ public class OcrRequestQueueTests : ContextualTests
         var ocrResult2 = await ocrResult2Task;
         Assert.Null(ocrResult1);
         Assert.Equal(_expectedResult, ocrResult2);
-        _mockEngine.Verify(x => x.ProcessImage(tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
+        _mockEngine.Verify(x => x.ProcessImage(ScanningContext, tempPath1, _ocrParams, It.IsAny<CancellationToken>()));
         _mockEngine.VerifyNoOtherCalls();
     }
 
@@ -283,7 +283,7 @@ public class OcrRequestQueueTests : ContextualTests
     [Fact(Skip = "flaky")]
     public async Task ForegroundPrioritized()
     {
-        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
         _ocrRequestQueue.WorkerAddedLatency = 50;
 
@@ -305,7 +305,7 @@ public class OcrRequestQueueTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.Linux)]
     public async Task StressTest()
     {
-        _mockEngine.Setup(x => x.ProcessImage(It.IsAny<string>(), _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
 
         var tasks = EnqueueMany(OcrPriority.Foreground, 1000);
@@ -321,7 +321,7 @@ public class OcrRequestQueueTests : ContextualTests
     [Fact]
     public async Task HasCachedResult()
     {
-        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
 
         await DoEnqueueForeground(_image, _tempPath, _ocrParams);
@@ -337,7 +337,7 @@ public class OcrRequestQueueTests : ContextualTests
     [Fact(Skip = "flaky")]
     public async Task HasCachedResult_WhileProcessing()
     {
-        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()))
             .Returns(_expectedResultTask);
 
         _ocrRequestQueue.WorkerAddedLatency = 50;
@@ -351,7 +351,7 @@ public class OcrRequestQueueTests : ContextualTests
     [Fact]
     public async Task HasCachedResult_WithError()
     {
-        _mockEngine.Setup(x => x.ProcessImage(_tempPath, _ocrParams, It.IsAny<CancellationToken>()))
+        _mockEngine.Setup(x => x.ProcessImage(ScanningContext, _tempPath, _ocrParams, It.IsAny<CancellationToken>()))
             .Throws<Exception>();
 
         await DoEnqueueForeground(_image, _tempPath, _ocrParams);
@@ -393,6 +393,7 @@ public class OcrRequestQueueTests : ContextualTests
         CancellationToken cancellationToken = default)
     {
         return _ocrRequestQueue.Enqueue(
+            ScanningContext,
             _mockEngine.Object,
             image,
             tempPath,

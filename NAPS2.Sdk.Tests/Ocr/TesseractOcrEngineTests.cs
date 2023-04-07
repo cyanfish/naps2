@@ -12,8 +12,9 @@ public class TesseractOcrEngineTests : ContextualTests
     private readonly string _testImagePathHebrew;
 
     public TesseractOcrEngineTests(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper)
     {
-        SetUpOcr(testOutputHelper);
+        SetUpOcr();
         _testImagePath = CopyResourceToFile(BinaryResources.ocr_test, "ocr_test.jpg");
         _testImagePathHebrew = CopyResourceToFile(BinaryResources.ocr_test_hebrew, "ocr_test_hebrew.jpg");
         _engine = (TesseractOcrEngine) ScanningContext.OcrEngine;
@@ -22,7 +23,8 @@ public class TesseractOcrEngineTests : ContextualTests
     [Fact]
     public async Task ProcessEnglishImage()
     {
-        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), CancellationToken.None);
+        var ocrParams = new OcrParams("eng", OcrMode.Fast, 0);
+        var result = await _engine.ProcessImage(ScanningContext, _testImagePath, ocrParams, CancellationToken.None);
         Assert.NotNull(result);
         Assert.NotEmpty(result.Elements);
         foreach (var element in result.Elements)
@@ -40,7 +42,7 @@ public class TesseractOcrEngineTests : ContextualTests
     [Fact]
     public async Task ProcessHebrewImage()
     {
-        var result = await _engine.ProcessImage(_testImagePathHebrew, new OcrParams("heb", OcrMode.Fast, 0), CancellationToken.None);
+        var result = await _engine.ProcessImage(ScanningContext, _testImagePathHebrew, new OcrParams("heb", OcrMode.Fast, 0), CancellationToken.None);
         Assert.NotNull(result);
         Assert.NotEmpty(result.Elements);
         foreach (var element in result.Elements)
@@ -56,7 +58,7 @@ public class TesseractOcrEngineTests : ContextualTests
     {
         CancellationTokenSource cts = new CancellationTokenSource();
         cts.Cancel();
-        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), cts.Token);
+        var result = await _engine.ProcessImage(ScanningContext, _testImagePath, new OcrParams("eng", OcrMode.Fast, 0), cts.Token);
         Assert.Null(result);
     }
 
@@ -65,7 +67,7 @@ public class TesseractOcrEngineTests : ContextualTests
     {
         CancellationTokenSource cts = new CancellationTokenSource();
         cts.CancelAfter(20);
-        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, 0), cts.Token);
+        var result = await _engine.ProcessImage(ScanningContext, _testImagePath, new OcrParams("eng", OcrMode.Fast, 0), cts.Token);
         Assert.Null(result);
     }
 
@@ -73,7 +75,7 @@ public class TesseractOcrEngineTests : ContextualTests
     public async Task Timeout()
     {
         var timeout = 0.1;
-        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, timeout), CancellationToken.None);
+        var result = await _engine.ProcessImage(ScanningContext, _testImagePath, new OcrParams("eng", OcrMode.Fast, timeout), CancellationToken.None);
         Assert.Null(result);
     }
 
@@ -81,7 +83,7 @@ public class TesseractOcrEngineTests : ContextualTests
     public async Task NoTimeout()
     {
         var timeout = 60;
-        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", OcrMode.Fast, timeout), CancellationToken.None);
+        var result = await _engine.ProcessImage(ScanningContext, _testImagePath, new OcrParams("eng", OcrMode.Fast, timeout), CancellationToken.None);
         Assert.NotNull(result);
     }
 
@@ -93,7 +95,7 @@ public class TesseractOcrEngineTests : ContextualTests
         CopyResourceToFile(BinaryResources.heb_traineddata, Path.Combine(FolderPath, "fast"), "eng.traineddata");
 
         var mode = OcrMode.Best;
-        var result = await _engine.ProcessImage(_testImagePath, new OcrParams("eng", mode, 0), CancellationToken.None);
+        var result = await _engine.ProcessImage(ScanningContext, _testImagePath, new OcrParams("eng", mode, 0), CancellationToken.None);
         Assert.NotNull(result);
         Assert.Equal("ADVERTISEMENT.", result.Elements[0].Text);
     }

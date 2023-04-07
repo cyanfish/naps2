@@ -1,11 +1,14 @@
-﻿namespace NAPS2.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+
+namespace NAPS2.Logging;
 
 /// <summary>
 /// Logging functionality.
 /// </summary>
 public static class Log
 {
-    private static ILogger _logger = new DebugLogger();
+    private static ILogger _logger = NullLogger.Instance;
     private static IEventLogger _eventLogger = new NullEventLogger();
 
     public static ILogger Logger
@@ -22,22 +25,22 @@ public static class Log
 
     public static void Info(string message, params object[] args)
     {
-        _logger.Info(string.Format(message, args));
+        _logger.LogInformation(string.Format(message, args));
     }
 
     public static void Error(string message, params object[] args)
     {
-        _logger.Error(string.Format(message, args));
+        _logger.LogError(string.Format(message, args));
     }
 
     public static void ErrorException(string message, Exception exception)
     {
-        _logger.ErrorException(message, exception);
+        _logger.LogError(exception, message);
     }
 
     public static void FatalException(string message, Exception exception)
     {
-        _logger.FatalException(message, exception);
+        _logger.LogCritical(exception, message);
     }
 
     public static void Event(EventType eventType, EventParams eventParams)

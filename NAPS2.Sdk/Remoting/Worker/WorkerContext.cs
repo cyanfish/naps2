@@ -1,4 +1,6 @@
 ﻿using Grpc.Core;
+using Microsoft.Extensions.Logging;
+using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Worker;
 
@@ -12,8 +14,11 @@ public class WorkerContext : IDisposable
     /// </summary>
     private static readonly TimeSpan WorkerStopTimeout = TimeSpan.FromSeconds(60);
 
-    public WorkerContext(WorkerType workerType, WorkerServiceAdapter service, Process process)
+    private readonly ILogger _logger;
+
+    public WorkerContext(ScanningContext scanningContext, WorkerType workerType, WorkerServiceAdapter service, Process process)
     {
+        _logger = scanningContext.Logger;
         Type = workerType;
         Service = service;
         Process = process;
@@ -41,17 +46,17 @@ public class WorkerContext : IDisposable
                 }
                 catch (Exception e)
                 {
-                    Log.ErrorException("Error killing worker", e);
+                    _logger.LogError(e, "Error killing worker");
                 }
             });
         }
         catch (RpcException e) when (e.Status.StatusCode == StatusCode.Unavailable)
         {
-            Log.Error("Could not stop the worker process. It may have crashed.");
+            _logger.LogError("Could not stop the worker process. It may have crashed.");
         }
         catch (Exception e)
         {
-            Log.ErrorException("Error stopping worker", e);
+            _logger.LogError(e, "Error stopping worker");
         }
     }
 }

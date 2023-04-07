@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.Extensions.Logging;
 using NAPS2.EtoForms;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -12,7 +13,6 @@ using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Unmanaged;
-using ILogger = NAPS2.Logging.ILogger;
 
 namespace NAPS2.Modules;
 
@@ -50,10 +50,12 @@ public class CommonModule : Module
         // Host
         builder.Register<IWorkerFactory>(_ => WorkerFactory.CreateDefault()).SingleInstance();
 
+        // Logging
+        builder.Register<ILogger>(_ => NLogConfig.CreateLogger()).SingleInstance();
+
         // Misc
         builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();
         builder.RegisterType<AutofacOperationFactory>().As<IOperationFactory>();
-        builder.RegisterType<NLogLogger>().As<ILogger>().SingleInstance();
         builder.RegisterInstance(new UiImageList());
         builder.RegisterType<StillImage>().AsSelf().SingleInstance();
         builder.RegisterType<AutoSaver>().AsSelf();
@@ -71,6 +73,7 @@ public class CommonModule : Module
         {
             var scanningContext = ctx.Resolve<ScanningContext>();
             scanningContext.WorkerFactory = ctx.Resolve<IWorkerFactory>();
+            scanningContext.Logger = ctx.Resolve<ILogger>();
             scanningContext.TempFolderPath = Paths.Temp;
             scanningContext.RecoveryPath = Paths.Recovery;
         });
@@ -103,11 +106,14 @@ public class CommonModule : Module
             var tesseractPath = PlatformCompat.System.UseSystemTesseract
                 ? "tesseract"
                 : NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName);
-            return new TesseractOcrEngine(
+            var engine = new TesseractOcrEngine(
                 tesseractPath,
                 ctx.Resolve<TesseractLanguageManager>().TessdataBasePath,
-                Paths.Temp,
-                ctx.Resolve<ErrorOutput>());
+                Paths.Temp);
+            var errorOutput = ctx.Resolve<ErrorOutput>();
+            engine.OcrError += (_, args) => errorOutput.DisplayError(SdkResources.OcrError, args.Exception);
+            engine.OcrTimeout += (_, _) => errorOutput.DisplayError(SdkResources.OcrTimeout);
+            return engine;
         }).SingleInstance();
     }
 }

@@ -52,6 +52,7 @@ public class OcrController
         image = image.WithPostProcessingData(image.PostProcessingData with { OcrCts = cts }, true);
 
         var task = _scanningContext.OcrRequestQueue.Enqueue(
+            _scanningContext,
             engine,
             image,
             tempImageFilePath,

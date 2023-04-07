@@ -1,4 +1,6 @@
 ﻿using System.Threading;
+using Microsoft.Extensions.Logging;
+using NAPS2.Scan;
 
 namespace NAPS2.Ocr;
 
@@ -7,14 +9,18 @@ namespace NAPS2.Ocr;
 /// </summary>
 internal class OcrRequest
 {
+    private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
     private readonly OcrRequestQueue _ocrRequestQueue;
     private readonly TaskCompletionSource<OcrResult?> _tcs = new();
     private readonly CancellationTokenSource _requestCts = new();
     private string? _tempImageFilePath;
     private int _activeReferences = 0;
 
-    public OcrRequest(OcrRequestParams reqParams, OcrRequestQueue ocrRequestQueue)
+    public OcrRequest(ScanningContext scanningContext, OcrRequestQueue ocrRequestQueue, OcrRequestParams reqParams)
     {
+        _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
         _ocrRequestQueue = ocrRequestQueue;
         Params = reqParams;
     }
@@ -100,11 +106,11 @@ internal class OcrRequest
         OcrResult? result = null;
         try
         {
-            result = await Params.Engine.ProcessImage(_tempImageFilePath!, Params.OcrParams, _requestCts.Token);
+            result = await Params.Engine.ProcessImage(_scanningContext, _tempImageFilePath!, Params.OcrParams, _requestCts.Token);
         }
         catch (Exception e)
         {
-            Log.ErrorException("Error in OcrEngine.ProcessImage", e);
+            _logger.LogError(e, "Error in OcrEngine.ProcessImage");
         }
         SafeDelete(_tempImageFilePath!);
         lock (_ocrRequestQueue)
@@ -114,7 +120,7 @@ internal class OcrRequest
         _tcs.SetResult(result);
     }
 
-    private static void SafeDelete(string path)
+    private void SafeDelete(string path)
     {
         try
         {
@@ -130,7 +136,7 @@ internal class OcrRequest
         }
         catch (Exception e)
         {
-            Log.ErrorException("Error deleting temp OCR file", e);
+            _logger.LogError(e, "Error deleting temp OCR file");
         }
     }
 }

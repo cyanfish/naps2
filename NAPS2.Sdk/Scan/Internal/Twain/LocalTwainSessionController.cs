@@ -1,6 +1,7 @@
 #if !MAC
 using System.Reflection;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Unmanaged;
 using NTwain;
@@ -30,6 +31,13 @@ public class LocalTwainSessionController : ITwainSessionController
         PlatformInfo.Current.NewDsmPath = twainDsmPath;
     });
 
+    private readonly ILogger _logger;
+
+    public LocalTwainSessionController(ScanningContext scanningContext)
+    {
+        _logger = scanningContext.Logger;
+    }
+
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {
         if (options.TwainOptions.Dsm != TwainDsm.Old)
@@ -50,7 +58,7 @@ public class LocalTwainSessionController : ITwainSessionController
         });
     }
 
-    private static List<ScanDevice> InternalGetDeviceList(ScanOptions options)
+    private List<ScanDevice> InternalGetDeviceList(ScanOptions options)
     {
         PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
         var session = new TwainSession(TwainAppId);
@@ -67,7 +75,7 @@ public class LocalTwainSessionController : ITwainSessionController
             }
             catch (Exception e)
             {
-                Log.ErrorException("Error closing TWAIN session", e);
+                _logger.LogError(e, "Error closing TWAIN session");
             }
         }
     }
@@ -100,7 +108,7 @@ public class LocalTwainSessionController : ITwainSessionController
     private async Task InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken,
         ITwainEvents twainEvents)
     {
-        var runner = new TwainSessionScanRunner(TwainAppId, dsm, options, cancelToken, twainEvents);
+        var runner = new TwainSessionScanRunner(_logger, TwainAppId, dsm, options, cancelToken, twainEvents);
         await runner.Run();
     }
 }

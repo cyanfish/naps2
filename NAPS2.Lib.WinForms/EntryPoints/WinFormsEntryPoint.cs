@@ -9,6 +9,7 @@ using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;
 using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
+using NAPS2.Scan;
 using wf = System.Windows.Forms;
 
 namespace NAPS2.EntryPoints;
@@ -37,7 +38,7 @@ public static class WinFormsEntryPoint
         lifecycle.ExitIfRedundant();
 
         // Start a pending worker process
-        container.Resolve<IWorkerFactory>().Init();
+        container.Resolve<IWorkerFactory>().Init(container.Resolve<ScanningContext>());
 
         // Set up basic application configuration
         container.Resolve<CultureHelper>().SetCulturesFromConfig();

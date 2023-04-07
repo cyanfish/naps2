@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
@@ -23,11 +24,19 @@ public class ContextualTests : IDisposable
         Directory.CreateDirectory(ScanningContext.TempFolderPath);
     }
 
+    public ContextualTests(ITestOutputHelper testOutputHelper)
+        : this()
+    {
+        ScanningContext.Logger = new TestLogger(testOutputHelper);
+    }
+
     public ImageContext ImageContext { get; }
 
     // TODO: We can probably do some processed image lifecycle checking by ensuring the scanning context has no
     // registered images after running a test.
     public ScanningContext ScanningContext { get; }
+
+    public ILogger Logger => ScanningContext.Logger;
 
     public string FolderPath { get; }
 
@@ -51,7 +60,7 @@ public class ContextualTests : IDisposable
         }
     }
 
-    public void SetUpOcr(ITestOutputHelper testOutputHelper)
+    public void SetUpOcr()
     {
         var best = Path.Combine(FolderPath, "best");
         Directory.CreateDirectory(best);
@@ -63,15 +72,15 @@ public class ContextualTests : IDisposable
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
         ScanningContext.OcrEngine =
-            new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath, new TestErrorOutput(testOutputHelper));
+            new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
     }
 
     public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage)
     {
         var ocrMock = new Mock<IOcrEngine>();
-        ocrMock.Setup(x => x.ProcessImage(It.IsAny<string>(), It.IsAny<OcrParams>(), It.IsAny<CancellationToken>()))
+        ocrMock.Setup(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), It.IsAny<OcrParams>(), It.IsAny<CancellationToken>()))
             .Returns(
-                async (string path, OcrParams _, CancellationToken _) =>
+                async (ScanningContext _, string path, OcrParams _, CancellationToken _) =>
                 {
                     var ocrImage = ImageContext.Load(path);
                     await Task.Delay(200);
@@ -147,30 +156,28 @@ public class ContextualTests : IDisposable
         }
     }
 
-    private class TestErrorOutput : ErrorOutput
+    private class TestLogger : ILogger
     {
         private readonly ITestOutputHelper _testOutputHelper;
 
-        public TestErrorOutput(ITestOutputHelper testOutputHelper)
+        public TestLogger(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
         }
 
-        public override void DisplayError(string errorMessage)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            _testOutputHelper.WriteLine(errorMessage);
+            _testOutputHelper.WriteLine(state.ToString());
         }
 
-        public override void DisplayError(string errorMessage, string details)
+        public bool IsEnabled(LogLevel logLevel)
         {
-            _testOutputHelper.WriteLine(errorMessage);
-            _testOutputHelper.WriteLine(details);
+            return true;
         }
 
-        public override void DisplayError(string errorMessage, Exception exception)
+        public IDisposable BeginScope<TState>(TState state)
         {
-            _testOutputHelper.WriteLine(errorMessage);
-            _testOutputHelper.WriteLine(exception.ToString());
+            throw new NotImplementedException();
         }
     }
 }

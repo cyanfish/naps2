@@ -1,4 +1,5 @@
-﻿using NAPS2.Ocr;
+﻿using Microsoft.Extensions.Logging;
+using NAPS2.Ocr;
 using NAPS2.Pdf.Pdfium;
 using NAPS2.Scan;
 
@@ -8,10 +9,12 @@ namespace NAPS2.Pdf;
 internal class PdfiumPdfExporter : IPdfExporter
 {
     private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
 
     public PdfiumPdfExporter(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
     }
 
     public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
@@ -65,7 +68,7 @@ internal class PdfiumPdfExporter : IPdfExporter
                     var activeEngine = _scanningContext.OcrEngine;
                     if (activeEngine == null)
                     {
-                        Log.Error("Supported OCR engine not installed.", ocrParams.LanguageCode);
+                        _logger.LogError("Supported OCR engine not installed.");
                     }
                     else
                     {
