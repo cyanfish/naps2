@@ -107,10 +107,10 @@ public class ScanController
     }
 
     /// <summary>
-    /// Whether scan errors should be thrown when enumerating the IAsyncEnumerable result. If false (the default), you
-    /// will need to listen for the ScanError event to handle errors.
+    /// Whether scan errors should be thrown when enumerating the IAsyncEnumerable result. True by default. If you set
+    /// this to false, you will need to listen for the ScanError event to handle errors.
     /// </summary>
-    public bool PropagateErrors { get; set; }
+    public bool PropagateErrors { get; set; } = true;
 
     public event EventHandler? ScanStart;
 

@@ -67,6 +67,7 @@ internal class ScanPerformer : IScanPerformer
         controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
         controller.ScanEnd += (sender, args) => op.Completed();
         controller.ScanError += (sender, args) => HandleError(args.Exception);
+        controller.PropagateErrors = false;
         TranslateProgress(controller, op);
 
         ShowOperation(op, options, scanParams);
