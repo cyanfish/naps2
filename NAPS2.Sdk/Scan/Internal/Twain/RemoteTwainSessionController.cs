@@ -1,5 +1,4 @@
 using System.Threading;
-using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal.Twain;
@@ -25,42 +24,19 @@ public class RemoteTwainSessionController : ITwainSessionController
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)
     {
         using var workerContext = CreateWorker(options);
-        try
-        {
-            await workerContext.Service.TwainScan(options, cancelToken, twainEvents);
-        }
-        finally
-        {
-            EnableWindow(options);
-        }
+        await workerContext.Service.TwainScan(options, cancelToken, twainEvents);
     }
 
     private WorkerContext CreateWorker(ScanOptions options)
     {
-        // TODO: Allow TWAIN to be used without a worker for SDK users
         if (_scanningContext.WorkerFactory == null)
         {
-            throw new InvalidOperationException(
-                "ScanningContext.WorkerFactory must be set to use TWAIN.");
+            // Shouldn't hit this case
+            throw new InvalidOperationException();
         }
         return _scanningContext.CreateWorker(
             options.TwainOptions.Dsm == TwainDsm.NewX64
                 ? WorkerType.Native
                 : WorkerType.WinX86)!;
-    }
-
-    private void EnableWindow(ScanOptions options)
-    {
-        if (options.DialogParent != IntPtr.Zero && options.UseNativeUI)
-        {
-            // At the Windows API level, a modal window is implemented by doing two things:
-            // 1. Setting the parent on the child window
-            // 2. Disabling the parent window
-            // The worker is supposed to re-enable the window before returning, but in case the process dies or
-            // some other problem occurs, here we make sure that happens.
-            Win32.EnableWindow(options.DialogParent, true);
-            // We also want to make sure the main NAPS2 window is in the foreground
-            Win32.SetForegroundWindow(options.DialogParent);
-        }
     }
 }

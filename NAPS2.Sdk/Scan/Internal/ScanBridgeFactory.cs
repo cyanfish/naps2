@@ -13,6 +13,12 @@ internal class ScanBridgeFactory : IScanBridgeFactory
 
     public IScanBridge Create(ScanOptions options)
     {
+        if (_scanningContext.WorkerFactory == null)
+        {
+            // Worker processes generally aren't required, just preferred for stability.
+            // Where applicable, the driver (i.e. Twain) will throw an error if we're running on the wrong arch.
+            return new InProcScanBridge(_scanningContext);
+        }
         if (options.Driver == Driver.Apple)
         {
             // Run ImageCaptureCore in a worker process for added stability
