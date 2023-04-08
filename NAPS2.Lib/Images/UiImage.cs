@@ -9,8 +9,9 @@ public class UiImage : IDisposable
     private ProcessedImage _processedImage;
     private IMemoryImage? _thumbnail;
     private TransformState? _thumbnailTransformState;
+    private bool _saved;
     private bool _disposed;
-    
+
     public UiImage(ProcessedImage image)
     {
         _processedImage = image;
@@ -45,7 +46,18 @@ public class UiImage : IDisposable
             return _processedImage.GetWeakReference();
         }
     }
-    
+
+    public void MarkSaved(ProcessedImage state)
+    {
+        lock (this)
+        {
+            if (Equals(state, _processedImage))
+            {
+                _saved = true;
+            }
+        }
+    }
+
     public void Dispose()
     {
         lock (this)
@@ -56,7 +68,7 @@ public class UiImage : IDisposable
             }
             _disposed = true;
             _processedImage.Dispose();
-        
+
             if (_thumbnail != null)
             {
                 _thumbnail.Dispose();
@@ -90,6 +102,7 @@ public class UiImage : IDisposable
                 _thumbnail = prerenderedThumbnail;
                 _thumbnailTransformState = _processedImage.TransformState;
             }
+            _saved = false;
         }
         ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
         if (prerenderedThumbnail != null)
@@ -109,6 +122,7 @@ public class UiImage : IDisposable
             var newImage = _processedImage.WithNoTransforms();
             _processedImage.Dispose();
             _processedImage = newImage;
+            _saved = false;
         }
         ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
     }
@@ -149,6 +163,8 @@ public class UiImage : IDisposable
     }
 
     public bool IsThumbnailDirty => _thumbnailTransformState != _processedImage.TransformState;
+
+    public bool HasUnsavedChanges => !_saved;
 
     public EventHandler? ThumbnailChanged;
 

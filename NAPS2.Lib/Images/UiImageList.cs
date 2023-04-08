@@ -5,8 +5,8 @@ namespace NAPS2.Images;
 
 public class UiImageList
 {
-    private StateToken _savedState = new(ImmutableList<ProcessedImage.WeakReference>.Empty);
     private ListSelection<UiImage> _selection;
+    private StateToken _savedState = new(ImmutableList<ProcessedImage.WeakReference>.Empty);
 
     public UiImageList() : this(new List<UiImage>())
     {
@@ -22,18 +22,14 @@ public class UiImageList
 
     public StateToken CurrentState => new(Images.Select(x => x.GetImageWeakReference()).ToImmutableList());
 
-    public StateToken SavedState
-    {
-        get => _savedState;
-        set => _savedState = value ?? throw new ArgumentNullException(nameof(value));
-    }
-
     // TODO: We should make this selection maintain insertion order, or otherwise guarantee that for things like FDesktop.SavePDF we actually get the images in the right order
     public ListSelection<UiImage> Selection
     {
         get => _selection;
         private set => _selection = value ?? throw new ArgumentNullException(nameof(value));
     }
+
+    public bool HasUnsavedChanges => _savedState != CurrentState || Images.Any(x => x.HasUnsavedChanges);
 
     public event EventHandler? SelectionChanged;
 
@@ -47,6 +43,36 @@ public class UiImageList
     {
         Selection = newSelection;
         SelectionChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void MarkSaved(StateToken priorState, IEnumerable<ProcessedImage> savedImages)
+    {
+        var savedImagesSet = savedImages.ToHashSet();
+        lock (this)
+        {
+            _savedState = priorState;
+            foreach (var image in Images)
+            {
+                var imageState = image.GetImageWeakReference().ProcessedImage;
+                if (savedImagesSet.Contains(imageState))
+                {
+                    image.MarkSaved(imageState);
+                }
+            }
+        }
+    }
+
+    public void MarkAllSaved()
+    {
+        lock (this)
+        {
+            _savedState = CurrentState;
+            foreach (var image in Images)
+            {
+                var imageState = image.GetImageWeakReference().ProcessedImage;
+                image.MarkSaved(imageState);
+            }
+        }
     }
 
     public void Mutate(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null,

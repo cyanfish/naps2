@@ -1,7 +1,6 @@
 using System.Threading;
 using Eto.Forms;
 using NAPS2.EtoForms.Notifications;
-using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -200,7 +199,7 @@ public class DesktopController
                 SkipRecoveryCleanup = true;
             }
         }
-        else if (_imageList.Images.Any() && _imageList.SavedState != _imageList.CurrentState)
+        else if (_imageList.Images.Any() && _imageList.HasUnsavedChanges)
         {
             if (userClosing && !SkipRecoveryCleanup)
             {
@@ -211,7 +210,7 @@ public class DesktopController
                 {
                     return false;
                 }
-                _imageList.SavedState = _imageList.CurrentState;
+                _imageList.MarkAllSaved();
             }
             else
             {
@@ -471,7 +470,9 @@ public class DesktopController
         if (await _scannedImagePrinter.PromptToPrint(
                 _desktopFormProvider.DesktopForm, allImages.InnerList, selectedImages.InnerList))
         {
-            _imageList.SavedState = state;
+            // Ideally we would know the exact images saved but it's not a big deal to get it wrong for printing which
+            // is pretty uncommon.
+            _imageList.MarkSaved(state, allImages);
         }
     }
 

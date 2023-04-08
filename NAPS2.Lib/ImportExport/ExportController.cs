@@ -171,7 +171,7 @@ public class ExportController : IExportController
         var state = _imageList.CurrentState;
         if (await RunSavePdfOperation(subSavePath, images))
         {
-            _imageList.SavedState = state;
+            _imageList.MarkSaved(state, images);
             notify.PdfSaved(subSavePath);
             return true;
         }
@@ -189,7 +189,7 @@ public class ExportController : IExportController
         }
         if (await op.Success)
         {
-            _imageList.SavedState = state;
+            _imageList.MarkSaved(state, images);
             notify.ImagesSaved(images.Count, op.FirstFileSaved!);
             return true;
         }
@@ -207,7 +207,7 @@ public class ExportController : IExportController
 
             if (await RunSavePdfOperation(targetPath, images, new EmailMessage()))
             {
-                _imageList.SavedState = state;
+                _imageList.MarkSaved(state, images);
                 return true;
             }
         }
