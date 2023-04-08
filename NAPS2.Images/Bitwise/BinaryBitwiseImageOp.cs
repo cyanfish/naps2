@@ -38,6 +38,26 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
         }
     }
 
+    public unsafe void Perform(byte[] src, PixelInfo srcPixelInfo, byte[] dst, PixelInfo dstPixelInfo)
+    {
+        if (src.Length < srcPixelInfo.Length)
+        {
+            throw new ArgumentException("Source byte array length is less than expected");
+        }
+        if (dst.Length < dstPixelInfo.Length)
+        {
+            throw new ArgumentException(
+                $"Destination byte array length {dst.Length} is less than expected for height {dstPixelInfo.Height} and stride {dstPixelInfo.Stride}");
+        }
+        fixed (byte* srcPtr = src)
+        fixed (byte* dstPtr = dst)
+        {
+            var srcData = new BitwiseImageData(srcPtr, srcPixelInfo);
+            var dstData = new BitwiseImageData(dstPtr, dstPixelInfo);
+            ValidateAndPerform(srcData, dstData);
+        }
+    }
+
     public void Perform(IntPtr src, PixelInfo srcPixelInfo, IMemoryImage dst)
     {
         using var dstLock = dst.Lock(DstLockMode, out var dstData);
@@ -48,6 +68,13 @@ public abstract class BinaryBitwiseImageOp : BitwiseImageOp
     public void Perform(IMemoryImage src, IntPtr dst, PixelInfo dstPixelInfo)
     {
         using var srcLock = src.Lock(SrcLockMode, out var srcData);
+        var dstData = new BitwiseImageData(dst, dstPixelInfo);
+        ValidateAndPerform(srcData, dstData);
+    }
+
+    public void Perform(IntPtr src, PixelInfo srcPixelInfo, IntPtr dst, PixelInfo dstPixelInfo)
+    {
+        var srcData = new BitwiseImageData(src, srcPixelInfo);
         var dstData = new BitwiseImageData(dst, dstPixelInfo);
         ValidateAndPerform(srcData, dstData);
     }

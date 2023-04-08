@@ -71,4 +71,87 @@ public class CopyBitwiseImageOpTests : ContextualTests
         var dest = original.CopyWithPixelFormat(ImagePixelFormat.ARGB32);
         ImageAsserts.Similar(original, dest, 0);
     }
+
+    [Fact]
+    public void BlackWhiteInvertSource()
+    {
+        var srcBuffer = new byte[] { 0xFA, 0x03 };
+        var srcInfo = new PixelInfo(8, 2, SubPixelType.InvertedBit);
+
+        var dstBuffer = new byte[] { 0, 0 };
+        var dstInfo = new PixelInfo(8, 2, SubPixelType.Bit);
+
+        new CopyBitwiseImageOp().Perform(srcBuffer, srcInfo, dstBuffer, dstInfo);
+
+        var expectedBuffer = new byte[] { 0x05, 0xFC };
+        Assert.Equal(expectedBuffer, dstBuffer);
+    }
+
+    [Fact]
+    public void BlackWhiteInvertDest()
+    {
+        var srcBuffer = new byte[] { 0xFA, 0x03 };
+        var srcInfo = new PixelInfo(8, 2, SubPixelType.Bit);
+
+        var dstBuffer = new byte[2];
+        var dstInfo = new PixelInfo(8, 2, SubPixelType.InvertedBit);
+
+        new CopyBitwiseImageOp().Perform(srcBuffer, srcInfo, dstBuffer, dstInfo);
+
+        var expectedBuffer = new byte[] { 0x05, 0xFC };
+        Assert.Equal(expectedBuffer, dstBuffer);
+    }
+
+    [Fact]
+    public void BlackWhiteInvertSourceAndDest()
+    {
+        var srcBuffer = new byte[] { 0xFA, 0x03 };
+        var srcInfo = new PixelInfo(8, 2, SubPixelType.InvertedBit);
+
+        var dstBuffer = new byte[] { 0, 0 };
+        var dstInfo = new PixelInfo(8, 2, SubPixelType.InvertedBit);
+
+        new CopyBitwiseImageOp().Perform(srcBuffer, srcInfo, dstBuffer, dstInfo);
+
+        var expectedBuffer = new byte[] { 0xFA, 0x03 };
+        Assert.Equal(expectedBuffer, dstBuffer);
+    }
+
+    [Fact]
+    public void BlackWhiteInvertSourceToGray()
+    {
+        var srcBuffer = new byte[] { 0xFA, 0x03 };
+        var srcInfo = new PixelInfo(8, 2, SubPixelType.InvertedBit);
+
+        var dstBuffer = new byte[16];
+        var dstInfo = new PixelInfo(8, 2, SubPixelType.Gray);
+
+        new CopyBitwiseImageOp().Perform(srcBuffer, srcInfo, dstBuffer, dstInfo);
+
+        var expectedBuffer = new byte[]
+        {
+            0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x00, 0xFF, // 0x05 expanded
+            0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00 // 0xFC expanded
+        };
+        Assert.Equal(expectedBuffer, dstBuffer);
+    }
+
+    [Fact]
+    public void BlackWhiteInvertDestFromGray()
+    {
+        var srcBuffer = new byte[]
+        {
+            0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0x00, // 0xFA expanded
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF // 0x03 expanded
+        };
+        var srcInfo = new PixelInfo(8, 2, SubPixelType.Gray);
+
+        var dstBuffer = new byte[2];
+        var dstInfo = new PixelInfo(8, 2, SubPixelType.InvertedBit);
+
+        new CopyBitwiseImageOp().Perform(srcBuffer, srcInfo, dstBuffer, dstInfo);
+
+        var expectedBuffer = new byte[] { 0x05, 0xFC };
+        Assert.Equal(expectedBuffer, dstBuffer);
+    }
 }

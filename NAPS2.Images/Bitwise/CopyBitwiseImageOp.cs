@@ -48,11 +48,6 @@ public class CopyBitwiseImageOp : BinaryBitwiseImageOp
             throw new ArgumentException(
                 "DestChannel is only supported when the source is grayscale/color and the destination is color.");
         }
-        if ((src.invertColorSpace || dst.invertColorSpace) && (src.bitsPerPixel != 1 || dst.bitsPerPixel != 1))
-        {
-            throw new ArgumentException(
-                "SubPixelType.InvertedBit is only supported when both source and destination are 1 bit per pixel");
-        }
     }
 
     // TODO: Consider providing a mechanism for bitwise ops to backflow LogicalPixelFormat to input images
