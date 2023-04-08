@@ -322,6 +322,7 @@ internal class TwainSessionScanRunner
         // Paper Source
         switch (_options.PaperSource)
         {
+            case PaperSource.Auto: // Assume the data source will ignore if unsupported
             case PaperSource.Flatbed:
                 source.Capabilities.CapFeederEnabled.SetValue(BoolType.False);
                 source.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);

@@ -92,8 +92,8 @@ internal class SaneScanDriver : IScanDriver
                 // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
                 cancelToken.Register(device.Cancel);
 
-                // TODO: Can we validate whether it's really an adf?
-                if (options.PaperSource == PaperSource.Flatbed)
+                // TODO: Can we validate flatbed and feeder support?
+                if (options.PaperSource is PaperSource.Flatbed or PaperSource.Auto)
                 {
                     var image = ScanPage(device, scanEvents) ??
                                 throw new DeviceException("SANE expected image");
@@ -142,7 +142,8 @@ internal class SaneScanDriver : IScanDriver
     {
         var controller = new SaneOptionController(device, _scanningContext.Logger);
 
-        if (options.PaperSource == PaperSource.Flatbed)
+        // TODO: Check the SOURCE option possible values to check flatbed/feeder support
+        if (options.PaperSource is PaperSource.Flatbed or PaperSource.Auto)
         {
             controller.TrySet(SaneOptionNames.SOURCE, FlatbedStrs);
         }

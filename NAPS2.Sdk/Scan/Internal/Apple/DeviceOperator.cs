@@ -188,7 +188,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _device.RequestOpenSession();
             await _openSessionTcs.Task;
             await _readyTcs.Task;
-            _unit = await SelectUnit(_options.PaperSource == PaperSource.Flatbed
+            _unit = await SelectUnit(_options.PaperSource is PaperSource.Flatbed or PaperSource.Auto
                 ? ICScannerFunctionalUnitType.Flatbed
                 : ICScannerFunctionalUnitType.DocumentFeeder);
             if (_unit is ICScannerFunctionalUnitDocumentFeeder { SupportsDuplexScanning: true } feederUnit)

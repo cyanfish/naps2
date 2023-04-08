@@ -94,6 +94,14 @@ internal class WiaScanDriver : IScanDriver
                 return;
             }
 
+            if (_options.PaperSource == PaperSource.Auto)
+            {
+                // Default to flatbed if supported (or if both support checks fail)
+                _options.PaperSource = SupportsFlatbed(device) || !device.SupportsFeeder()
+                    ? PaperSource.Flatbed
+                    : PaperSource.Feeder;
+            }
+
             using var item = GetItem(device);
             if (item == null)
             {
@@ -212,6 +220,13 @@ internal class WiaScanDriver : IScanDriver
             {
                 throw scanException;
             }
+        }
+
+        private static bool SupportsFlatbed(WiaDevice device)
+        {
+            // TODO: Move this to NAPS2.Wia
+            int capabilities = (int) device.Properties[WiaPropertyId.DPS_DOCUMENT_HANDLING_CAPABILITIES].Value;
+            return (capabilities & WiaPropertyValue.FLATBED) != 0;
         }
 
         private WiaItem? GetItem(WiaDevice device)
