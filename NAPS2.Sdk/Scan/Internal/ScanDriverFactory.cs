@@ -18,8 +18,14 @@ internal class ScanDriverFactory : IScanDriverFactory
                 return new Apple.AppleScanDriver(_scanningContext);
 #else
             case Driver.Wia:
+#if NET6_0_OR_GREATER
+                if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
+#endif
                 return new Wia.WiaScanDriver(_scanningContext);
             case Driver.Twain:
+#if NET6_0_OR_GREATER
+                if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
+#endif
                 return options.TwainOptions.Adapter == TwainAdapter.Legacy
                     ? _scanningContext.LegacyTwainDriver ?? throw new NotSupportedException()
                     : new Twain.TwainScanDriver(_scanningContext);

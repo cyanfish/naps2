@@ -73,6 +73,9 @@ public class WorkerServiceImpl : WorkerService.WorkerServiceBase
 #if MAC
         throw new NotSupportedException();
 #else
+#if NET6_0_OR_GREATER
+        if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
+#endif
         using var callRef = StartCall();
         try
         {

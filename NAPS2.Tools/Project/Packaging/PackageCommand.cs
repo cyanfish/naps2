@@ -91,7 +91,6 @@ public class PackageCommand : ICommand<PackageOptions>
             // too.
             // TODO: Any better way to handle this? Run everything in the guaranteed 32-bit worker? Have a separate WinForms32 project?
             // Or maybe we can deprecate the 32-bit MSI installer. Idk.
-            AddPlatformFile(pkgInfo, appBuildPath, "_win64", "NAPS2.Wia.Native.dll");
             AddPlatformFile(pkgInfo, appBuildPath, "_win64", "twaindsm.dll");
             AddPlatformFile(pkgInfo, appBuildPath, "_win64", "pdfium.dll");
         }
@@ -99,7 +98,6 @@ public class PackageCommand : ICommand<PackageOptions>
         {
             AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
             // Special case as we have a 64 bit main app and a 32 bit worker
-            AddPlatformFile(pkgInfo, appBuildPath, "_win32", "NAPS2.Wia.Native.dll");
             AddPlatformFile(pkgInfo, appBuildPath, "_win32", "twaindsm.dll");
             // TODO: We should run pdfium in a 64-bit worker
             AddPlatformFile(pkgInfo, appBuildPath, "_win32", "pdfium.dll");

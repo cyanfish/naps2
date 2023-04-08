@@ -7,6 +7,9 @@ using NAPS2.Wia;
 
 namespace NAPS2.Scan.Internal.Wia;
 
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+#endif
 internal class WiaScanDriver : IScanDriver
 {
     private readonly ScanningContext _scanningContext;
@@ -178,6 +181,7 @@ internal class WiaScanDriver : IScanDriver
             transfer.Progress += (sender, args) => _scanEvents.PageProgress(args.Percent / 100.0);
             using (_cancelToken.Register(transfer.Cancel))
             {
+                // TODO: Need to call PageStart multiple times for feeder (and non-wia-1.0?)
                 _scanEvents.PageStart();
                 try
                 {

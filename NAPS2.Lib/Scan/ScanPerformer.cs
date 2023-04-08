@@ -275,6 +275,9 @@ internal class ScanPerformer : IScanPerformer
         // TODO: Not sure how best to handle this for console
         if (options.Driver == Driver.Wia)
         {
+#if NET6_0_OR_GREATER
+            if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
+#endif
             // WIA has a nice built-in device selection dialog, so use it
             using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
             try
