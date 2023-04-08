@@ -277,7 +277,7 @@ public class EditProfileForm : EtoDialogBase
         }
         catch (Exception ex)
         {
-            Log.ErrorException(ex.Message, ex.InnerException!);
+            Log.ErrorException(ex.Message, ex);
             _errorOutput.DisplayError(ex.Message, ex);
         }
     }
