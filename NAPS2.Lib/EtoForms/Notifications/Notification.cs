@@ -86,6 +86,17 @@ public abstract class Notification : IDisposable
     {
         var w = e.ClipRectangle.Width;
         var h = e.ClipRectangle.Height;
+        e.Graphics.FillRectangle(BackgroundColor, 0, 0, w, h);
+        e.Graphics.DrawRectangle(BorderColor, 0, 0, w - 1, h - 1);
+    }
+
+    private static void DrawWithRoundedCorners(PaintEventArgs e)
+    {
+        // TODO: We're not using this as the few pixels on the edges aren't transparent, which is a problem if there's
+        // an image underneath. Not sure if there's a way to make that work but I don't care enough about rounded
+        // corners at the moment.
+        var w = e.ClipRectangle.Width;
+        var h = e.ClipRectangle.Height;
         var r = BORDER_RADIUS;
         var d = r * 2;
         var q = r / 2;
