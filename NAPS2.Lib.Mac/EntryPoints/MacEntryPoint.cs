@@ -17,7 +17,7 @@ public static class MacEntryPoint
     {
         if (args.Length > 0 && args[0] is "cli" or "console")
         {
-            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new MacModule());
+            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new MacImagesModule());
         }
         if (args.Length > 0 && args[0] == "worker")
         {
@@ -31,7 +31,7 @@ public static class MacEntryPoint
 
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
-            new CommonModule(), new MacModule(), new RecoveryModule(), new ContextModule());
+            new CommonModule(), new MacImagesModule(), new MacModule(), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 

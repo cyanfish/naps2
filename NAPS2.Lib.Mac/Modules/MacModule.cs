@@ -2,7 +2,6 @@
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Mac;
 using NAPS2.EtoForms.Ui;
-using NAPS2.Images.Mac;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 
@@ -17,8 +16,6 @@ public class MacModule : GuiModule
         builder.RegisterType<MacScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<AppleMailEmailProvider>().As<IAppleMailEmailProvider>();
         builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>();
-        builder.RegisterType<MacImageContext>().As<ImageContext>();
-        builder.RegisterType<MacImageContext>().AsSelf();
         builder.RegisterType<MacIconProvider>().As<IIconProvider>();
 
         builder.RegisterType<MacDesktopForm>().As<DesktopForm>();

@@ -17,16 +17,16 @@ public static class GtkEntryPoint
     {
         if (args.Length > 0 && args[0] is "cli" or "console")
         {
-            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new GtkModule());
+            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new GtkImagesModule());
         }
         if (args.Length > 0 && args[0] == "worker")
         {
-            return WorkerEntryPoint.Run(args.Skip(1).ToArray(), new GtkModule());
+            return WorkerEntryPoint.Run(args.Skip(1).ToArray(), new GtkImagesModule());
         }
 
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
-            new CommonModule(), new GtkModule(), new RecoveryModule(), new ContextModule());
+            new CommonModule(), new GtkImagesModule(), new GtkModule(), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 
