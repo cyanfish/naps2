@@ -19,7 +19,7 @@ public class UploadCommand : ICommand<UploadOptions>
             {
                 throw new Exception($"Expected package to exist: {file.FullName}");
             }
-            if (file.LastWriteTime < DateTime.Now - TimeSpan.FromHours(2))
+            if (!opts.AllowOld && file.LastWriteTime < DateTime.Now - TimeSpan.FromHours(2))
             {
                 throw new Exception($"Expected package to be recently modified: {file.FullName}");
             }
@@ -30,6 +30,12 @@ public class UploadCommand : ICommand<UploadOptions>
         {
             Output.Info("Uploading binaries to Github");
             UploadToGithub().Wait();
+            didSomething = true;
+        }
+        if (opts.Target is "all" or "static")
+        {
+            Output.Info("Uploading binaries to static site downloads.naps2.com");
+            UploadToStaticSite();
             didSomething = true;
         }
 
@@ -46,10 +52,10 @@ public class UploadCommand : ICommand<UploadOptions>
 
     private async Task UploadToGithub()
     {
-
         var version = ProjectHelper.GetCurrentVersionName();
         var token = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "github"));
-        var client = new GitHubClient(new ProductHeaderValue("cyanfish"), new InMemoryCredentialStore(new Credentials(token)));
+        var client = new GitHubClient(new ProductHeaderValue("cyanfish"),
+            new InMemoryCredentialStore(new Credentials(token)));
 
         var commits = await client.Repository.Commit.GetAll(GITHUB_REPO_ID, new CommitRequest
         {
@@ -90,5 +96,22 @@ public class UploadCommand : ICommand<UploadOptions>
             return string.Join('\n', lines.TakeWhile(x => x.Trim() != ""));
         }
         throw new Exception("Changelog needs updating (did not start with \"{expected}\")");
+    }
+
+    private void UploadToStaticSite()
+    {
+        var version = ProjectHelper.GetCurrentVersionName();
+
+        Cli.Run("ssh", $"user@downloads.naps2.com \"mkdir -p /var/www/html/{version}/\"");
+        // Only upload MSI installers as we want people to use Github for downloads. This is only for the Microsoft Store at the moment.
+        foreach (var package in TargetsHelper.EnumeratePackageTargets()
+                     .Where(x => Path.GetExtension(x.PackagePath) == ".msi"))
+        {
+            var path = package.PackagePath;
+            var fileName = Path.GetFileName(path);
+            Output.Verbose($"Uploading asset {path}");
+            Cli.Run("scp", $"{path} user@downloads.naps2.com:/var/www/html/{version}/{fileName}");
+        }
+        Output.Info($"Uploaded files.");
     }
 }
