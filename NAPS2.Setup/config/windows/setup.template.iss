@@ -8,7 +8,7 @@
 AppName=NAPS2 - Not Another PDF Scanner
 AppVersion={#AppVersion}
 AppVerName=NAPS2 {#AppVersionName}
-AppPublisher=Ben Olden-Cooligan
+AppPublisher=NAPS2 Software
 AppPublisherURL=https://www.naps2.com
 AppSupportURL=https://www.naps2.com/support
 AppUpdatesURL=https://www.naps2.com/download

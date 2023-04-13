@@ -5,7 +5,7 @@
       Name="NAPS2"
       Language="1033"
       Version="{{ !version }}"
-      Manufacturer="Ben Olden-Cooligan"
+      Manufacturer="NAPS2 Software"
       UpgradeCode="FEB82971-B3E6-4F19-9684-1D543E644D73">
     <!-- TODO: Files aren't updated if the version isn't bumped. How to fix? I guess it doesn't matter for verification if we delete the folder preemptively... -->
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
