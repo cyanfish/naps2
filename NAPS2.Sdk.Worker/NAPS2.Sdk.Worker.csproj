@@ -10,7 +10,7 @@
 
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Ben Olden-Cooligan</Authors>
-        <Description>Unofficial windows named pipe transport for gRPC</Description>
+        <Description>Worker process for NAPS2.Sdk</Description>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <!--        <PackageReadmeFile>README.md</PackageReadmeFile>-->
         <RepositoryUrl>https://github.com/cyanfish/naps2</RepositoryUrl>
