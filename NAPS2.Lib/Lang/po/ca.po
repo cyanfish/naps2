@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-03-06 01:43\n"
+"PO-Revision-Date: 2023-04-14 00:09\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -156,6 +156,10 @@ msgstr "Hi ha una actualització de l'OCR disponible."
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Controlador d'Apple"
+
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -497,15 +501,15 @@ msgstr "Dúplex"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "Controlador ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "Controlador de xarxa ESCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "Controlador USB ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -730,7 +734,7 @@ msgstr "Esquerra"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr ""
+msgstr "Heretat (només interfície nativa)"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -746,7 +750,7 @@ msgstr "Qualitat màxima (fitxers grans)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Transferència en memòria"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -804,7 +808,7 @@ msgstr "Manca el nom."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Transferència nativa"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -820,7 +824,7 @@ msgstr "Següent"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "Proper escaneig"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
@@ -851,7 +855,7 @@ msgstr "Cap"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "(Not Another PDF Scanner)"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -1035,7 +1039,7 @@ msgstr "Proveïdor"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
-msgstr ""
+msgstr "Preparat per l'escaneig {0}."
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
@@ -1043,7 +1047,7 @@ msgstr "Recupera"
 
 #: UiStrings.resx$RecoverFormTitle$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "Recuperació d'imatges escanejades"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
@@ -1185,7 +1189,7 @@ msgstr "S'està desant {0}..."
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
-msgstr ""
+msgstr "Ajusta a la finestra"
 
 #: UiStrings.resx$ScaleLabel$Message
 msgid "Scale:"
@@ -1330,7 +1334,7 @@ msgstr "El fitxer {0} ja existeix. Voleu sobreescriure'l?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Aquest fitxer està xifrat per contrasenya i és necessària per obrir-lo:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1377,6 +1381,10 @@ msgstr "L'escàner seleccionat esta ocupat."
 msgid "The selected scanner is offline."
 msgstr "El scaner seleccionat esta apagat."
 
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
+msgstr ""
+
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
 msgstr "Opcions Tiff"
@@ -1415,7 +1423,7 @@ msgstr "Progrés de l'actualització"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "La comprovació d'actualitzacions està inhabilitada."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."

@@ -33,6 +33,12 @@
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Web Access</value>
   </data>
+  <data name="EmailProviderType_Thunderbird" xml:space="preserve">
+    <value>Thunderbird</value>
+  </data>
+  <data name="EmailProviderType_AppleMail" xml:space="preserve">
+    <value>Apple Mail</value>
+  </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
     <value>Nenhum provedor selecionado.</value>
   </data>

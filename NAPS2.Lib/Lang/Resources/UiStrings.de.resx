@@ -151,16 +151,16 @@
     <value>Neu ordnen</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Ineinander Fächern</value>
+    <value>Ineinander-Fächern</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Auseinander Fächern</value>
+    <value>Auseinander-Fächern</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternativ Ineinander Fächern</value>
+    <value>Alternatives Interleave</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternativ Auseinander Fächern</value>
+    <value>Alternatives Deinterleave</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Umkehren</value>
@@ -244,13 +244,13 @@
     <value>TWAIN Treiber</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL Treiber</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL Netzwerktreiber</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB-Treiber</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Apple Treiber</value>

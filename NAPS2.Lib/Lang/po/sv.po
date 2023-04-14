@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-03-06 01:43\n"
+"PO-Revision-Date: 2023-04-14 00:09\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -155,6 +155,10 @@ msgstr "En uppdatering till OCR finns tillänglig."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
+msgstr ""
+
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
 msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
@@ -1376,6 +1380,10 @@ msgstr "Den valda skannern är upptagen."
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
 msgstr "Den valda skannern är offline."
+
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
+msgstr ""
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"

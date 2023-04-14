@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-03-06 01:43\n"
+"PO-Revision-Date: 2023-04-14 00:09\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -156,6 +156,10 @@ msgstr "OCR için bir güncelleme var."
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple Sürücüsü"
+
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -1376,6 +1380,10 @@ msgstr "Seçilen tarayıcı meşgul."
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
 msgstr "Seçilen tarayıcı çevrim dışı."
+
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
+msgstr ""
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"

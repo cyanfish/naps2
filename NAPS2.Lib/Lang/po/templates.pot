@@ -151,6 +151,10 @@ msgstr ""
 msgid "Apple Driver"
 msgstr ""
 
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
 msgstr ""
@@ -1369,6 +1373,10 @@ msgstr ""
 #: MiscResources.resx$DeviceOffline$Message
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
+msgstr ""
+
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
 msgstr ""
 
 #: UiStrings.resx$TiffOptions$Message

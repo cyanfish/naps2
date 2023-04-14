@@ -13,66 +13,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Kan de geselecteerde scanner niet vinden.</value>
+    <value>The selected scanner could not be found.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>De geselecteerde scanner is offline.</value>
+    <value>The selected scanner is offline.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Geen apparaat geselecteerd.</value>
+    <value>No device selected.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Geen scanapparaat gevonden.</value>
+    <value>No scanning device was found.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Fout met het stuurprogramma van de scanner.</value>
+    <value>Galat ditemukan didalam driver piranti.</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Versie {0}</value>
+    <value>Version {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Bestand '{0}' kon niet worden geïmporteerd.</value>
+    <value>The file '{0}' could not be imported.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Deze scanner ondersteunt geen automatische documentinvoer. Als uw scanner dit wel heeft, probeer dan een andere driver.</value>
+    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Geen pagina's in de invoerlade.</value>
+    <value>No pages are in the feeder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>U heeft geen toestemming voor kopiëren van inhoud uit bestand '{0}'.</value>
+    <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>De geselecteerde scanner ondersteunt geen dubbelzijdig scannen. Als uw scanner dit hoort te ondersteunen, probeer dan een andere driver.</value>
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>De geselecteerde scanner is bezig.</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>Het deksel van de scanner is open.</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>Er is papier vastgelopen in de scanner.</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>De scanner warmt op.</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>De SANE driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>De OCR engine is niet beschikbaar. Installeer het vereiste pakket:</value>
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>De gekozen driver wordt niet ondersteund op dit systeem.</value>
+    <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>Er is een fout opgetreden bij het uitvoeren van OCR.</value>
+    <value>Galat ditemukan dalam proses OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>Het OCR proces is uitgelopen.</value>
+    <value>The OCR operation timed out.</value>
   </data>
 </root>

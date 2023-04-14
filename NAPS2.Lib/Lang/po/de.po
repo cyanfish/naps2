@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-03-06 01:43\n"
+"PO-Revision-Date: 2023-04-14 00:09\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -94,11 +94,11 @@ msgstr "Drucken erlauben"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "Alternativ Auseinander Fächern"
+msgstr "Alternatives Deinterleave"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr "Alternativ Ineinander Fächern"
+msgstr "Alternatives Interleave"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -156,6 +156,10 @@ msgstr "Ein Update für OCR ist verfügbar."
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple Treiber"
+
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -427,7 +431,7 @@ msgstr "Standarddateipfad:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr "Auseinander Fächern"
+msgstr "Auseinander-Fächern"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
@@ -497,15 +501,15 @@ msgstr "Duplex"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL Treiber"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL Netzwerktreiber"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB-Treiber"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -698,7 +702,7 @@ msgstr "Installation fehlgeschlagen."
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr "Ineinander Fächern"
+msgstr "Ineinander-Fächern"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -1376,6 +1380,10 @@ msgstr "Der gewählte Scanner ist in Benutzung."
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
 msgstr "Der gewählte Scanner ist ausgeschaltet (offline)."
+
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
+msgstr ""
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"

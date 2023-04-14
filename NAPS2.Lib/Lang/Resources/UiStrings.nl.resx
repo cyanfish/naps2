@@ -166,10 +166,10 @@
     <value>Omdraaien</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Alles ongedaan maken</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Selectie omkeren</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Wissen</value>
@@ -202,10 +202,10 @@
     <value>Opslaan</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Alles opslaan</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Selectie bewaren</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Alles opslaan als PDF</value>
@@ -220,10 +220,10 @@
     <value>Geselecteerde(n) opslaan als afbeeldingen</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Iedereen e-mailen</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Geselecteerde e-mail</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>E-mail alles als PDF</value>
@@ -247,7 +247,7 @@
     <value>ESCL Driver</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL Netwerk Driver</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
     <value>ESCL USB Driver</value>
@@ -511,7 +511,7 @@
     <value>Automatisch ophogend nummer (2 cijfers)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Automatisch toenemend nummer (1 cijfer)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Bestandsnaam</value>
@@ -565,7 +565,7 @@
     <value>Wachtwoord</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Het volgende bestand is versleuteld en heeft een wachtwoord nodig om te openen:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Vraag om bestandspad</value>
@@ -697,6 +697,6 @@
     <value>Map openen</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Hulpmiddelen</value>
   </data>
 </root>

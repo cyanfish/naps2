@@ -367,7 +367,7 @@
     <value>S'està comprovant...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>La comprovació d'actualitzacions està inhabilitada.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>S'ha produït un error en instal·lar l'actualització.</value>

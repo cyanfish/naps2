@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-03-06 01:43\n"
+"PO-Revision-Date: 2023-04-14 00:09\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -156,6 +156,10 @@ msgstr "Une mise à jour pour l'OCR est disponible."
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Pilote Apple"
+
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -497,15 +501,15 @@ msgstr "Recto-verso"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "Pilote ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "Pilote réseau ESCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "Pilote USB ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -1377,6 +1381,10 @@ msgstr "Le scanner sélectionné est occupé."
 msgid "The selected scanner is offline."
 msgstr "Le scanner sélectionné est éteint."
 
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
+msgstr ""
+
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
 msgstr "Options TIFF"
@@ -1415,7 +1423,7 @@ msgstr "Progression de la mise à jour"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr "La vérification de la mise à jour est désactivée."
+msgstr "Vérification des mises à jour désactivée."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."

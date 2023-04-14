@@ -190,7 +190,7 @@
     <value>van {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Er is een onbekende fout opgetreden tijdens de batch scan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Batch geannuleerd.</value>

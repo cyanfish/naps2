@@ -196,7 +196,7 @@
     <value>Escala actual</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Scale With Window</value>
+    <value>Ajusta a la finestra</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Desa</value>
@@ -244,13 +244,13 @@
     <value>Dispositiu TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Controlador ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>Controlador de xarxa ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>Controlador USB ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Controlador d'Apple</value>
@@ -325,7 +325,7 @@
     <value>NAPS2 - {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
-    <value>Not Another PDF Scanner</value>
+    <value>(Not Another PDF Scanner)</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
     <value>Configuració de l'OCR</value>
@@ -391,7 +391,7 @@
     <value>Ara no</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Recover Scanned Images</value>
+    <value>Recuperació d'imatges escanejades</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
     <value>Possiblement {0} imatges escanejades a {1} el {2} no s'han desat però es poden recuperar. Voleu continuar amb la recuperació?</value>
@@ -565,7 +565,7 @@
     <value>Contrasenya</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Aquest fitxer està xifrat per contrasenya i és necessària per obrir-lo:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Demana la ruta de destinació</value>
@@ -688,10 +688,10 @@
     <value>Inicia</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
-    <value>Next Scan</value>
+    <value>Proper escaneig</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
-    <value>Ready for scan {0}.</value>
+    <value>Preparat per l'escaneig {0}.</value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
     <value>Obre una carpeta</value>

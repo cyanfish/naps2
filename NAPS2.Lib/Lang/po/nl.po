@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-03-06 01:43\n"
+"PO-Revision-Date: 2023-04-14 00:09\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -106,7 +106,7 @@ msgstr "Er is een additioneel component nodig om deze PDF te importeren. Nu down
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Er is een fout opgetreden bij het uitvoeren van OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -143,7 +143,7 @@ msgstr "Er is een bewerking bezig. Weet u zeker dat u wilt stoppen en de bewerki
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Er is een onbekende fout opgetreden tijdens de batch scan."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -156,6 +156,10 @@ msgstr "Er is een OCR update beschikbaar."
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple driver"
+
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +220,7 @@ msgstr "Instellingen voor automatisch opslaan"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Automatisch toenemend nummer (1 cijfer)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -497,15 +501,15 @@ msgstr "Dubbelzijdig"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL Driver"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL Netwerk Driver"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB Driver"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -513,7 +517,7 @@ msgstr "Bewerken"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Iedereen e-mailen"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
@@ -530,7 +534,7 @@ msgstr "E-mail PDF voortgang"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Geselecteerde e-mail"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
@@ -746,7 +750,7 @@ msgstr "Maximale kwaliteit (grote bestanden)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Geheugen overdracht"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -804,7 +808,7 @@ msgstr "Naam ontbreekt."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Oorspronkelijke overdracht"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1083,11 +1087,11 @@ msgstr "Omdraaien"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Alles ongedaan maken"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Selectie omkeren"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1127,7 +1131,7 @@ msgstr "Opslaan"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Alles opslaan"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
@@ -1157,7 +1161,7 @@ msgstr "PDF voortgang bewaren"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Selectie bewaren"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
@@ -1304,7 +1308,7 @@ msgstr "De OCR engine is niet beschikbaar. Installeer het vereiste pakket:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "Het OCR proces is uitgelopen."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1330,7 +1334,7 @@ msgstr "Bestand {0} bestaat al. Wilt u het bestand overschrijven?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Het volgende bestand is versleuteld en heeft een wachtwoord nodig om te openen:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1377,6 +1381,10 @@ msgstr "De geselecteerde scanner is bezig."
 msgid "The selected scanner is offline."
 msgstr "De geselecteerde scanner is offline."
 
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
+msgstr ""
+
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
 msgstr "Tiff opties"
@@ -1391,7 +1399,7 @@ msgstr "Titel:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Hulpmiddelen"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"

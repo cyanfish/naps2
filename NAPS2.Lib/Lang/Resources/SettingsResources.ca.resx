@@ -33,6 +33,12 @@
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Accés web de l'Outlook</value>
   </data>
+  <data name="EmailProviderType_Thunderbird" xml:space="preserve">
+    <value>Thunderbird</value>
+  </data>
+  <data name="EmailProviderType_AppleMail" xml:space="preserve">
+    <value>Apple Mail</value>
+  </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
     <value>No s'ha seleccionat cap proveïdor.</value>
   </data>
@@ -118,13 +124,13 @@
     <value>Per defecte</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>Heretat (només interfície nativa)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Transferència nativa</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Transferència en memòria</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSM antic</value>
