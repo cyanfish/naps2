@@ -36,6 +36,7 @@ public static class Program
             .Add<ResxOptions, ResxCommand>()
             .Add<PushTemplatesOptions, PushTemplatesCommand>()
             .Add<PullTranslationsOptions, PullTranslationsCommand>()
+            .Add<LangOptions, LangCommand>()
             .Add<SetVersionOptions, SetVersionCommand>()
             .Add<WebsiteUpdateOptions, WebsiteUpdateCommand>()
             .Add<UploadOptions, UploadCommand>()
