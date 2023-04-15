@@ -36,7 +36,7 @@ public class LinkNotification : Notification
         };
     }
 
-    protected override LayoutElement PrimaryContent => _label;
+    protected override LayoutElement PrimaryContent => _label.DynamicWrap(180).MaxWidth(180);
 
     protected override LayoutElement SecondaryContent => _link;
 
