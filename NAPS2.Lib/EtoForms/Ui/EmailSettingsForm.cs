@@ -39,7 +39,7 @@ public class EmailSettingsForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.Provider,
                 L.Row(
-                    _provider.Wrap(EtoPlatform.Current.IsGtk ? 150 : 0).AlignCenter(),
+                    _provider.DynamicWrap(EtoPlatform.Current.IsGtk ? 150 : 0).AlignCenter(),
                     C.Filler(),
                     C.Button(UiStrings.Change, ChangeProvider).AlignCenter().Padding(top: 4, bottom: 4)
                 )

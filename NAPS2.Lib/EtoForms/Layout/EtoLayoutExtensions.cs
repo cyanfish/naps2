@@ -72,7 +72,7 @@ public static class EtoLayoutExtensions
     public static LayoutControl Visible(this Control control, LayoutVisibility? visibility) =>
         new LayoutControl(control, visibility: visibility);
 
-    public static LayoutControl Wrap(this Label label, int defaultWidth)
+    public static LayoutControl DynamicWrap(this Label label, int defaultWidth)
     {
         if (defaultWidth == 0)
         {

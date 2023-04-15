@@ -91,7 +91,7 @@ public class PasswordBoxWithToggle
             return C.Filler();
         }
         var label = C.Label(Title!);
-        return TitleWrapWidth > 0 ? label.Wrap(TitleWrapWidth).Scale() : label.Scale();
+        return TitleWrapWidth > 0 ? label.DynamicWrap(TitleWrapWidth).Scale() : label.Scale();
     }
 
     public event Action? TextChanged;

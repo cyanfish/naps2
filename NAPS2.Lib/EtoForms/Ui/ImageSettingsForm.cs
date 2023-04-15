@@ -43,7 +43,7 @@ public class ImageSettingsForm : EtoDialogBase
                 UiStrings.JpegQuality,
                 L.Column(
                     _jpegQuality.AsControl().SpacingAfter(0),
-                    C.Label(UiStrings.JpegQualityHelp).Wrap(300)
+                    C.Label(UiStrings.JpegQualityHelp).DynamicWrap(300)
                 )
             ),
             L.GroupBox(
