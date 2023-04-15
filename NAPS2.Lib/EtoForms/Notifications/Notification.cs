@@ -35,7 +35,7 @@ public abstract class Notification : IDisposable
         drawable.MouseUp += (_, _) => NotificationClicked();
         drawable.Load += (_, _) => SetUpHideTimeout(drawable);
         return L.Overlay(
-            drawable,
+            drawable.MinWidth(120),
             L.Column(
                 L.Row(
                     PrimaryContent,
