@@ -51,6 +51,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
             _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         }
         _flowBox.ChildActivated += OnChildActivated;
+        _flowBox.ButtonPressEvent += OnButtonPress;
         var eventBox = new EventBox();
         eventBox.Child = _flowBox;
         if (_behavior.AllowDragDrop)
@@ -64,6 +65,15 @@ public class GtkListView<T> : IListView<T> where T : notnull
         _scrolledWindow.StyleContext.AddClass("listview");
     }
 
+    private void OnButtonPress(object o, ButtonPressEventArgs args)
+    {
+        if (args.Event.Button == 3)
+        {
+            // Right click
+            ContextMenu?.Show();
+        }
+    }
+
     private void OnChildActivated(object o, ChildActivatedArgs args)
     {
         ItemClicked?.Invoke(this, EventArgs.Empty);
@@ -75,7 +85,6 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public Control Control => _scrolledWindow.ToEto();
 
-    // TODO: Make this work
     public ContextMenu? ContextMenu { get; set; }
 
     public event EventHandler? Updated;
