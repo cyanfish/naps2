@@ -22,7 +22,7 @@ public class MacSystemCompat : ISystemCompat
 
     public bool CanPrint => true;
 
-    public bool ShouldRememberBackgroundOperations => false;
+    public bool ShouldRememberBackgroundOperations => true;
 
     public bool UseSystemTesseract => false;
 
