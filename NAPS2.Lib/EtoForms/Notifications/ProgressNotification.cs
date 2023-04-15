@@ -43,7 +43,14 @@ public class ProgressNotification : Notification
 
     private void UpdateStatus()
     {
+        var text1 = (_textLabel.Text, _numberLabel.Text);
         EtoOperationProgress.RenderStatus(_op, _textLabel, _numberLabel, _progressBar);
+        var text2 = (_textLabel.Text, _numberLabel.Text);
+        if (text1 != text2)
+        {
+            // The text width may have changed, so the notification size could change
+            Manager?.InvokeUpdated();
+        }
         // Don't display the number if the progress bar is precise
         // Otherwise, the widget will be too cluttered
         // The number is only shown for OcrOperation at the moment

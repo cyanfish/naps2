@@ -33,4 +33,9 @@ public class NotificationManager
     {
         TimersStarting?.Invoke(this, EventArgs.Empty);
     }
+
+    public void InvokeUpdated()
+    {
+        Updated?.Invoke(this, EventArgs.Empty);
+    }
 }
