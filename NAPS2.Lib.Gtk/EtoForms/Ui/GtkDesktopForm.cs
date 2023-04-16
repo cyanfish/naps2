@@ -147,7 +147,7 @@ public class GtkDesktopForm : DesktopForm
         };
         button.Clicked += (_, _) => command.Execute();
         command.EnabledChanged += (_, _) => button.Sensitive = command.Enabled;
-        button.Menu = CreateMenuWidget(menu);
+        button.Menu = CreateMenuWidget(command, menu);
         button.StyleContext.AddClass("desktop-toolbar-button");
         _toolbar.Add(button);
         _toolbarButtonCount++;
@@ -163,60 +163,18 @@ public class GtkDesktopForm : DesktopForm
             Sensitive = command.Enabled
         };
         command.EnabledChanged += (_, _) => button.Sensitive = command.Enabled;
-        var menuWidget = CreateMenuWidget(menu);
-        var menuDelegate = GetMenuDelegate(menuWidget, button);
+        var menuDelegate = GetMenuDelegate(CreateMenuWidget(command, menu), button);
         button.Clicked += menuDelegate;
         button.StyleContext.AddClass("desktop-toolbar-button");
         _toolbar.Add(button);
         _toolbarButtonCount++;
     }
 
-    private Menu CreateMenuWidget(MenuProvider menu)
+    private Menu CreateMenuWidget(Command command, MenuProvider menu)
     {
-        var menuWidget = new Menu();
-        menu.Handle(items =>
-        {
-            foreach (var child in menuWidget.Children)
-            {
-                menuWidget.Remove(child);
-            }
-            foreach (var item in items)
-            {
-                switch (item)
-                {
-                    case MenuProvider.CommandItem commandItem:
-                    {
-                        var menuItem = new MenuItem
-                        {
-                            Label = commandItem.Command.MenuText
-                        };
-                        menuItem.Sensitive = commandItem.Command.Enabled;
-                        commandItem.Command.EnabledChanged +=
-                            (_, _) => menuItem.Sensitive = commandItem.Command.Enabled;
-                        if (commandItem.Command is ActionCommand actionCommand)
-                        {
-                            actionCommand.TextChanged += (_, _) => menuItem.Label = actionCommand.MenuText;
-                        }
-                        menuItem.Activated += (_, _) => commandItem.Command.Execute();
-                        menuWidget.Add(menuItem);
-                    }
-                        break;
-                    case MenuProvider.SeparatorItem:
-                        menuWidget.Add(new SeparatorMenuItem());
-                        break;
-                    case MenuProvider.SubMenuItem subMenuItem:
-                        var subMenu = new MenuItem
-                        {
-                            Label = subMenuItem.Command.MenuText
-                        };
-                        subMenu.Submenu = CreateMenuWidget(subMenuItem.MenuProvider);
-                        menuWidget.Add(subMenu);
-                        break;
-                }
-            }
-            menuWidget.ShowAll();
-        });
-        return menuWidget;
+        var subMenu = CreateSubMenu(command, menu);
+        var menuItem = (ImageMenuItem) subMenu.ControlObject;
+        return (Menu) menuItem.Submenu;
     }
 
     private EventHandler GetMenuDelegate(Menu menuWidget, Widget button)

@@ -369,13 +369,19 @@ public abstract class DesktopForm : EtoFormBase
                 switch (subItem)
                 {
                     case MenuProvider.CommandItem { Command: var command }:
-                        menuItem.Items.Add(new ButtonMenuItem(command));
+                        var buttonMenuItem = new ButtonMenuItem(command);
+                        if (command is ActionCommand actionCommand)
+                        {
+                            actionCommand.TextChanged += (_, _) => buttonMenuItem.Text = actionCommand.MenuText;
+                        }
+                        menuItem.Items.Add(buttonMenuItem);
                         break;
                     case MenuProvider.SeparatorItem:
                         menuItem.Items.Add(new SeparatorMenuItem());
                         break;
-                    case MenuProvider.SubMenuItem:
-                        throw new NotImplementedException();
+                    case MenuProvider.SubMenuItem { Command: var command, MenuProvider: var subMenuProvider }:
+                        menuItem.Items.Add(CreateSubMenu(command, subMenuProvider));
+                        break;
                 }
             }
         });
