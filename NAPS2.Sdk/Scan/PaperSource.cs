@@ -1,9 +1,13 @@
 ﻿namespace NAPS2.Scan;
 
+/// <summary>
+/// Specifies the physical paper source for devices that have multiple options (Flatbed, Feeder, Duplex).
+/// </summary>
 public enum PaperSource
 {
     /// <summary>
-    /// Use a supported paper source for the device. Depending on the driver this usually prefers Flatbed if supported.
+    /// Use a supported paper source for the device. Generally this prioritizes Flatbed -> Feeder -> Duplex, but it
+    /// depends on the driver.
     /// </summary>
     Auto,
 

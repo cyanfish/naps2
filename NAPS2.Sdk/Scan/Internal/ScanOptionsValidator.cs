@@ -75,8 +75,6 @@ public class ScanOptionsValidator
         {
             if (PlatformCompat.System.IsWiaDriverSupported)
             {
-                // TODO: Maybe default to TWAIN
-                // TODO: Also in general "default driver" handling should change
                 return Driver.Wia;
             }
             if (PlatformCompat.System.IsAppleDriverSupported)
