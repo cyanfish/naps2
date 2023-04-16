@@ -12,12 +12,10 @@ public interface ISystemCompat
 
     bool CanUseWin32 { get; }
 
-    // TODO: Implement Print/Email on Mac/Linux
     bool CanEmail { get; }
 
     bool CanPrint { get; }
 
-    // TODO: Implement background progress notifications on Mac/Linux
     bool ShouldRememberBackgroundOperations { get; }
 
     bool UseSystemTesseract { get; }

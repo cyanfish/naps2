@@ -100,22 +100,23 @@ public class ProfilesForm : EtoDialogBase
             _listView.Selection = ListSelection.Of(defaultProfile);
         }
 
-        ContextMenu = new ContextMenu();
-        ContextMenu.AddItems(
+        var contextMenu = new ContextMenu();
+        _listView.ContextMenu = contextMenu;
+        contextMenu.AddItems(
             new ButtonMenuItem(_scanCommand),
             new ButtonMenuItem(_editCommand),
             new ButtonMenuItem(_setDefaultCommand),
             new SeparatorMenuItem());
         if (!NoUserProfiles)
         {
-            ContextMenu.AddItems(
+            contextMenu.AddItems(
                 new ButtonMenuItem(_copyCommand),
                 new ButtonMenuItem(_pasteCommand),
                 new SeparatorMenuItem());
         }
-        ContextMenu.AddItems(
+        contextMenu.AddItems(
             new ButtonMenuItem(_deleteCommand));
-        ContextMenu.Opening += ContextMenuOpening;
+        contextMenu.Opening += ContextMenuOpening;
     }
 
     protected override void BuildLayout()

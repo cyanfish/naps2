@@ -28,7 +28,7 @@ public class RecoverForm : EtoDialogBase
         var notNowButton = C.CancelButton(this, UiStrings.NotNow);
 
         LayoutController.Content = L.Column(
-            _prompt.Wrap(400).MinWidth(300),
+            _prompt.DynamicWrap(400).MinWidth(300),
             C.Filler(),
             L.Row(
                 recoverButton.Scale().Height(32),

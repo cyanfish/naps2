@@ -23,14 +23,14 @@ public static class Log
         set => _eventLogger = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public static void Info(string message, params object[] args)
+    public static void Info(string message)
     {
-        _logger.LogInformation(string.Format(message, args));
+        _logger.LogInformation(message);
     }
 
-    public static void Error(string message, params object[] args)
+    public static void Error(string message)
     {
-        _logger.LogError(string.Format(message, args));
+        _logger.LogError(message);
     }
 
     public static void ErrorException(string message, Exception exception)
