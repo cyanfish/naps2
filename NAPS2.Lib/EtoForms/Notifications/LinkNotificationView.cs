@@ -4,16 +4,18 @@ using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms.Notifications;
 
-public class LinkNotification : Notification
+public class LinkNotificationView : NotificationView
 {
     private readonly string? _linkTarget;
     private readonly string? _folderTarget;
 
     private readonly Label _label = new() { BackgroundColor = BackgroundColor };
-    private readonly LinkButton _link = new()  { BackgroundColor = BackgroundColor };
+    private readonly LinkButton _link = new() { BackgroundColor = BackgroundColor };
     private readonly ContextMenu _contextMenu = new();
 
-    protected LinkNotification(string title, string linkLabel, string? linkTarget, string? folderTarget)
+    protected LinkNotificationView(
+        NotificationModel model, string title, string linkLabel, string? linkTarget, string? folderTarget)
+        : base(model)
     {
         _label.Text = title;
         _label.Font = new Font(_label.Font.Family, _label.Font.Size, FontStyle.Bold);

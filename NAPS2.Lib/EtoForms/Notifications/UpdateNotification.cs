@@ -2,25 +2,19 @@ using NAPS2.Update;
 
 namespace NAPS2.EtoForms.Notifications;
 
-public class UpdateNotification : LinkNotification
+public class UpdateNotification : NotificationModel
 {
-    private readonly IUpdateChecker _updateChecker;
-    private readonly UpdateInfo _update;
-
     public UpdateNotification(IUpdateChecker updateChecker, UpdateInfo update)
-        : base(
-            MiscResources.UpdateAvailable,
-            string.Format(MiscResources.Install, update.Name),
-            null, null)
     {
-        _updateChecker = updateChecker;
-        _update = update;
-        HideTimeout = HIDE_LONG;
+        UpdateChecker = updateChecker;
+        Update = update;
     }
 
-    protected override void LinkClick()
+    public IUpdateChecker UpdateChecker { get; }
+    public UpdateInfo Update { get; }
+
+    public override NotificationView CreateView()
     {
-        _updateChecker.StartUpdate(_update);
-        Manager!.Hide(this);
+        return new UpdateNotificationView(this);
     }
 }

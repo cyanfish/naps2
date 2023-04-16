@@ -1,10 +1,18 @@
 namespace NAPS2.EtoForms.Notifications;
 
-public class SaveNotification : LinkNotification
+public class SaveNotification : NotificationModel
 {
-    public SaveNotification(string message, string path)
-        : base(message, Path.GetFileName(path), path, Path.GetDirectoryName(path))
+    public SaveNotification(string title, string path)
     {
-        HideTimeout = HIDE_SHORT;
+        Title = title;
+        Path = path;
+    }
+
+    public string Title { get; }
+    public string Path { get; }
+
+    public override NotificationView CreateView()
+    {
+        return new SaveNotificationView(this);
     }
 }

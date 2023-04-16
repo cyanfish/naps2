@@ -5,7 +5,7 @@ using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms.Notifications;
 
-public abstract class Notification : IDisposable
+public abstract class NotificationView : IDisposable
 {
     // TODO: Get from color scheme
     protected static readonly Color BackgroundColor = new(0.95f, 0.95f, 0.95f);
@@ -15,6 +15,13 @@ public abstract class Notification : IDisposable
 
     protected const int HIDE_LONG = 60 * 1000;
     protected const int HIDE_SHORT = 5 * 1000;
+
+    protected NotificationView(NotificationModel model)
+    {
+        Model = model;
+    }
+
+    public NotificationModel Model { get; }
 
     protected int HideTimeout { get; set; }
 
@@ -26,12 +33,12 @@ public abstract class Notification : IDisposable
 
     protected abstract LayoutElement SecondaryContent { get; }
 
-    public LayoutElement CreateView()
+    public LayoutElement CreateContent()
     {
         var drawable = new Drawable();
         drawable.Paint += DrawableOnPaint;
         var closeButton = new CloseButton();
-        closeButton.Click += (_, _) => Manager!.Hide(this);
+        closeButton.Click += (_, _) => Manager!.Hide(Model);
         drawable.MouseUp += (_, _) => NotificationClicked();
         drawable.Load += (_, _) => SetUpHideTimeout(drawable);
         return L.Overlay(
@@ -59,7 +66,7 @@ public abstract class Notification : IDisposable
         {
             return new Timer(_ =>
             {
-                Manager!.Hide(this);
+                Manager!.Hide(Model);
             }, null, HideTimeout, -1);
         }
 

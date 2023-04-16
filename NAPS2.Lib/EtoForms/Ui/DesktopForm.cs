@@ -32,6 +32,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly ListProvider<Command> _languageMenuCommands = new();
     private readonly ContextMenu _contextMenu = new();
 
+    private readonly NotificationArea _notificationArea;
     protected IListView<UiImage> _listView;
     private ImageListSyncer? _imageListSyncer;
 
@@ -109,7 +110,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.SelectionChanged += ImageList_SelectionChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
-        _notificationManager.Updated += (_, _) => LayoutController.Invalidate();
+        _notificationArea = new NotificationArea(_notificationManager, LayoutController);
     }
 
     protected override void BuildLayout()
@@ -127,7 +128,7 @@ public abstract class DesktopForm : EtoFormBase
                 L.Row(
                     GetZoomButtons(),
                     C.Filler(),
-                    _notificationManager.Column)
+                    _notificationArea.Content)
             ).Padding(10)
         );
 
@@ -232,6 +233,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.SelectionChanged -= ImageList_SelectionChanged;
         ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
+        _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
     }
 
