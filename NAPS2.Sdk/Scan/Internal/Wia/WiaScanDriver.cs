@@ -404,7 +404,7 @@ internal class WiaScanDriver : IScanDriver
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error setting property");
+                _logger.LogError(e, "Error setting property {PropId}", propId);
             }
         }
 
@@ -416,7 +416,7 @@ internal class WiaScanDriver : IScanDriver
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error setting property");
+                _logger.LogError(e, "Error setting property {PropId}", propId);
             }
         }
 
@@ -428,7 +428,7 @@ internal class WiaScanDriver : IScanDriver
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error setting property");
+                _logger.LogError(e, "Error setting property {PropId}", propId);
             }
         }
     }
