@@ -49,7 +49,7 @@ public class WhiteBlackPointOp : UnaryBitwiseImageOp
         _blackPoint = GetBlackPoint(counts, blackPeak);
         _valid = true;
 
-        Console.WriteLine($"Correcting with whitepoint {_whitePoint} blackpoint {_blackPoint}");
+        // Console.WriteLine($"Correcting with whitepoint {_whitePoint} blackpoint {_blackPoint}");
     }
 
     private static int GetWhitePoint(int[] counts, Peak whitePeak)

@@ -63,12 +63,12 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         // TODO: Add border detection/removal? After deskew.
         var stopwatch = Stopwatch.StartNew();
         ColumnColorOp.PerformFullOp(image);
-        Console.WriteLine($"Column color op time: {stopwatch.ElapsedMilliseconds}");
+        // Console.WriteLine($"Column color op time: {stopwatch.ElapsedMilliseconds}");
         stopwatch.Restart();
         if (transform.Mode == CorrectionMode.Document)
         {
             WhiteBlackPointOp.PerformFullOp(image, transform.Mode);
-            Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
+            // Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
             stopwatch.Restart();
             // A previous version ran a filter pass before white/black point correction with the theory that it could
             // help the accuracy of that correction.
@@ -77,7 +77,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
             // not yet corrected) it could potentially remove fine details.
             var image2 = (TImage) image.CopyBlank();
             new BilateralFilterOp().Perform(image, image2);
-            Console.WriteLine($"Bilateral filter op time: {stopwatch.ElapsedMilliseconds}");
+            // Console.WriteLine($"Bilateral filter op time: {stopwatch.ElapsedMilliseconds}");
             stopwatch.Restart();
             image.Dispose();
             return image2;
@@ -85,7 +85,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         else
         {
             WhiteBlackPointOp.PerformFullOp(image, transform.Mode);
-            Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
+            // Console.WriteLine($"White/black point op time: {stopwatch.ElapsedMilliseconds}");
             stopwatch.Restart();
             return image;
         }

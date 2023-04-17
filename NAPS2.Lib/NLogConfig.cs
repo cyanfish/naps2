@@ -21,9 +21,17 @@ public static class NLogConfig
             ArchiveAboveSize = 100000,
             MaxArchiveFiles = 5
         };
+        var debugTarget = new FileTarget
+        {
+            FileName = Path.Combine(Paths.AppData, "debuglog.txt"),
+            Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
+            ArchiveAboveSize = 100000,
+            MaxArchiveFiles = 1
+        };
         config.AddTarget("errorlogfile", target);
-        var rule = new LoggingRule("*", LogLevel.Debug, target);
-        config.LoggingRules.Add(rule);
+        config.AddTarget("debuglogfile", debugTarget);
+        config.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, target));
+        config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, debugTarget));
         LogManager.Configuration = config;
         return new NLogLoggerFactory().CreateLogger("NAPS2");
     }

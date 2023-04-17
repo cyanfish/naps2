@@ -6,12 +6,11 @@ public class SaneOption
 {
     private static IEnumerable<string> ParseStringArray(IntPtr arrayPtr)
     {
-        for (int i = 0; ; i++)
+        for (int i = 0;; i++)
         {
             var ptr = Marshal.ReadIntPtr(arrayPtr + IntPtr.Size * i);
             var str = Marshal.PtrToStringAnsi(ptr);
             if (str == null) break;
-            Console.WriteLine($"Reading constraint value {str}");
             yield return str;
         }
     }
@@ -45,7 +44,6 @@ public class SaneOption
         Size = descriptor.Size;
         Capabilities = descriptor.Capabilities;
         ConstraintType = descriptor.ConstraintType;
-        Console.WriteLine($"Creating option {Index} {Name} {Title} {Desc} {Type} {Unit} {Size} {Capabilities} {ConstraintType} {descriptor.Constraint}");
         if (descriptor.ConstraintType == SaneConstraintType.StringList)
         {
             StringList = ParseStringArray(descriptor.Constraint).ToList();
@@ -104,4 +102,13 @@ public class SaneOption
     public bool IsActive => !Capabilities.HasFlag(SaneCapabilities.Inactive);
 
     public bool IsSettable => Capabilities.HasFlag(SaneCapabilities.SoftSelect);
+
+    public override string ToString()
+    {
+        var constraint = StringList != null ? string.Join(",", StringList)
+            : WordList != null ? string.Join(",", WordList)
+            : Range != null ? $"{Range.Min}-{Range.Max}/{Range.Quant}"
+            : "";
+        return $"{Index} {Name} {Title} {Desc} {Type} {Unit} {Size} {Capabilities} {ConstraintType} {constraint}";
+    }
 }

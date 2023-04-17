@@ -15,6 +15,10 @@ internal class SaneOptionController
         _device = device;
         _logger = logger;
         LoadOptions();
+        foreach (var opt in _options.Values.OrderBy(x => x.Index))
+        {
+            _logger.LogDebug($"Option: {opt}");
+        }
     }
 
     private void LoadOptions()
@@ -26,8 +30,7 @@ internal class SaneOptionController
 
     public bool TrySet(string name, double value)
     {
-        // TODO: Convert this to debug logging?
-        Console.WriteLine($"Maybe setting {name}");
+        _logger.LogDebug($"Maybe setting {name}");
         if (!_options.ContainsKey(name))
             return false;
         var opt = _options[name];
@@ -35,7 +38,7 @@ internal class SaneOptionController
             return false;
         try
         {
-            Console.WriteLine($"Setting {name} to {value}");
+            _logger.LogDebug($"Setting {name} to {value}");
             _device.SetOption(_options[name], value, out var info);
             if (info.HasFlag(SaneOptionSetInfo.ReloadOptions))
             {
@@ -52,7 +55,7 @@ internal class SaneOptionController
 
     public bool TrySet(string name, IEnumerable<string> valueSet)
     {
-        Console.WriteLine($"Maybe setting {name}");
+        _logger.LogDebug($"Maybe setting {name}");
         if (!_options.ContainsKey(name))
             return false;
         var opt = _options[name];
@@ -65,7 +68,7 @@ internal class SaneOptionController
             {
                 if (valueHashSet.Contains(value))
                 {
-                    Console.WriteLine($"Setting {name} to {value}");
+                    _logger.LogDebug($"Setting {name} to {value}");
                     _device.SetOption(opt, value, out var info);
                     if (info.HasFlag(SaneOptionSetInfo.ReloadOptions))
                     {

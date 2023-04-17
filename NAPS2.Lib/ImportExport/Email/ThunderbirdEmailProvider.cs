@@ -1,5 +1,4 @@
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace NAPS2.ImportExport.Email;
 
@@ -58,7 +57,6 @@ public class ThunderbirdEmailProvider : IEmailProvider
                 // This escaping isn't perfect but it should be good enough. I can't identify clear rules used by the
                 // thunderbird parser anyway.
                 var composeArgs = string.Join(",", arguments.Select(x => x.Replace("\"", "\\\"")));
-                Console.WriteLine(composeArgs);
                 var process =
                     Process.Start(new ProcessStartInfo("thunderbird", $"-compose \"{composeArgs}\"")
                     {
