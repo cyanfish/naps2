@@ -12,8 +12,6 @@ public class ContextModule : Module
         {
             Log.Logger = ctx.Resolve<ILogger>();
         });
-#if DEBUG
         Trace.Listeners.Add(new NLogTraceListener());
-#endif
     }
 }

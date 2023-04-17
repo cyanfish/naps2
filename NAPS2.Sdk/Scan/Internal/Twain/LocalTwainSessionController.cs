@@ -19,9 +19,7 @@ public class LocalTwainSessionController : ITwainSessionController
 
     static LocalTwainSessionController()
     {
-#if DEBUG
         PlatformInfo.Current.Log.IsDebugEnabled = true;
-#endif
     }
 
     private static readonly LazyRunner TwainDsmSetup = new(() =>
