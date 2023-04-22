@@ -14,12 +14,9 @@ public class HelloWorldSample
         var controller = new ScanController(scanningContext);
         ScanDevice device = (await controller.GetDeviceList()).First();
         var options = new ScanOptions { Device = device };
-        await foreach(var image in controller.Scan(options))
+        await foreach (var image in controller.Scan(options))
         {
-            using (image)
-            {
-                Console.WriteLine("Scanned a page!");
-            }
+            Console.WriteLine("Scanned a page!");
         }
     }
 }
