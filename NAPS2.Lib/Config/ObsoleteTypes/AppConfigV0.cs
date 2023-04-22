@@ -48,7 +48,7 @@ public class AppConfigV0
 
     public bool NoUpdatePrompt { get; set; }
 
-    // TODO: Add a NoDebugLogging setting
+    public bool NoDebugLogging { get; set; }
 
     public bool DeleteAfterSaving { get; set; }
 

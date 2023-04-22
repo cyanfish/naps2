@@ -61,8 +61,9 @@ public class AboutForm : EtoDialogBase
                 GetUpdateWidget(),
                 C.TextSpace(),
                 C.NoWrap(string.Format(UiStrings.CopyrightFormat, AssemblyHelper.COPYRIGHT_YEARS)),
-                C.Spacer(),
-                _enableDebugLogging.Padding(left: 4),
+                Config.AppLocked.Has(c => c.EnableDebugLogging)
+                    ? C.None()
+                    : new[] { C.Spacer(), _enableDebugLogging.Padding(left: 4) }.Expand(),
                 C.TextSpace(),
                 L.Row(
                     L.Column(

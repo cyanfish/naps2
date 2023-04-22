@@ -131,6 +131,10 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         {
             storage.Set(x => x.PdfSettings.Compat, c.ForcePdfCompat);
         }
+        if (c.NoDebugLogging)
+        {
+            storage.Set(x => x.EnableDebugLogging, false);
+        }
         return storage;
     }
 
