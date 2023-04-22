@@ -16,7 +16,7 @@
     <value>Despre</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Drepturi de autor {0} Colaboratori NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Icoane din:</value>
@@ -28,7 +28,7 @@
     <value>Ok</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Donează</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiluri</value>
@@ -118,10 +118,10 @@
     <value>Claritate</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Corecție Document</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
+    <value>Resetare</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Rotește</value>
@@ -157,7 +157,7 @@
     <value>Deîntrețesere</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternate Interleave</value>
+    <value>Intercalare alternativă</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
     <value>Deintercalare alternativă</value>
@@ -166,16 +166,16 @@
     <value>Inversează</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Inversează Tot</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Inversează ce este selectat</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Şterge</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Ștergere totală</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Limbă</value>
@@ -199,37 +199,37 @@
     <value>Scalează odată cu fereastra</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Salvează</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Salvează tot</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Salvează selecția</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Salvează toate ca PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Salvați cele selectate ca PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Salvează toate ca Imagini</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Salvați cele selectate ca imagini</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Trimiteți prin e-mail tuturor</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Trimiteți prin e-mail partea selectată</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Trimiteți prin e-mail tuturor ca PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Trimiteți prin e-mail partea selectată ca PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Configurări profil</value>
@@ -244,16 +244,16 @@
     <value>Driver TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Driver-ul ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>Driver de rețea ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>Driver USB ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Driver Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>Driver SANE</value>
@@ -325,7 +325,7 @@
     <value>NAPS2 - {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
-    <value>Not Another PDF Scanner</value>
+    <value>Nici alt scaner PDF</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
     <value>Configurează OCR</value>
@@ -337,7 +337,7 @@
     <value>Limba OCR:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>Modul OCR:</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Rulează automat modulul OCR după scanare</value>
@@ -511,7 +511,7 @@
     <value>Incrementează automat numărul (două cifre)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Număr cu incrementare automată (1 cifră)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nume fişier</value>
@@ -520,7 +520,7 @@
     <value>Previzualizare:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Pentru calități JPEG înalte (80+), creșteți calitatea imaginii în profilul dvs. pentru cele mai bune rezultate.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Calitate JPEG</value>
@@ -565,13 +565,13 @@
     <value>Parolă</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Următorul fișier este criptat și necesită o parolă pentru a se deschide:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Cere calea fișierului</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
-    <value>One file per page</value>
+    <value>Un fișier pe pagină</value>
   </data>
   <data name="OneFilePerScan" xml:space="preserve">
     <value>Fișiere individuale per scanare</value>
@@ -640,7 +640,7 @@
     <value>Întoarce paginile de pe verso</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Versiunea Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementare Twain:</value>
@@ -685,7 +685,7 @@
     <value>Salvează în fișiere separate</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Start</value>
+    <value>Începe</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
     <value>Următoarea scanare</value>
@@ -697,6 +697,9 @@
     <value>Deschide folder-ul</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Unelte</value>
+  </data>
+  <data name="EnableDebugLogging" xml:space="preserve">
+    <value>Enable debug logging</value>
   </data>
 </root>

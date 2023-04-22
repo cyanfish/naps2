@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-14 00:09\n"
+"PO-Revision-Date: 2023-04-22 05:32\n"
 "Last-Translator: \n"
 "Language-Team: Indonesian\n"
 "Language: id\n"
@@ -444,60 +444,60 @@ msgstr "miring-mereng"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Proses Deskew - miring mereng"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Halaman terpindai cek miring-mereng"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr ""
+msgstr "ngelurusin halaman..."
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
-msgstr ""
+msgstr "piranti:"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "Dimensi"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
-msgstr ""
+msgstr "Nama Tampilan:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Koreksi Dokumen"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Donasi"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
-msgstr ""
+msgstr "Selesai"
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
-msgstr ""
+msgstr "Unduh"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr ""
+msgstr "Galat Unduh"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Butuh mengunduh"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr ""
+msgstr "Sedang mengunduh"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr ""
+msgstr "Bolak Balik / 2 muka"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
@@ -513,7 +513,7 @@ msgstr ""
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -549,6 +549,10 @@ msgstr ""
 msgid "Enable Auto Save"
 msgstr ""
 
+#: UiStrings.resx$EnableDebugLogging$Message
+msgid "Enable debug logging"
+msgstr ""
+
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
 msgstr ""
@@ -581,7 +585,7 @@ msgstr ""
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "Cepat"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -589,11 +593,11 @@ msgstr ""
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr ""
+msgstr "Nama Berkas:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
-msgstr ""
+msgstr "Lokasi berkas:"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"

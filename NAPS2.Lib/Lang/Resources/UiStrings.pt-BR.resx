@@ -699,4 +699,7 @@
   <data name="Tools" xml:space="preserve">
     <value>Ferramentas</value>
   </data>
+  <data name="EnableDebugLogging" xml:space="preserve">
+    <value>Enable debug logging</value>
+  </data>
 </root>

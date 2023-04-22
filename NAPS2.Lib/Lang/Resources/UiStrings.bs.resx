@@ -1,110 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -118,22 +13,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutFormTitle" xml:space="preserve">
-    <value>About</value>
+    <value>O programu</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Autorska prava zaštićena {0} NAPS2 saradnici</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Icons from:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>Provjeri ažuriranja</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>U redu</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Donirajte</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiles</value>
@@ -154,13 +49,13 @@
     <value>Set Default</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>Copy</value>
+    <value>Kopiraj</value>
   </data>
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Done</value>
+    <value>Gotovo</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>Default</value>
@@ -169,10 +64,10 @@
     <value>New Profile</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
-    <value>Batch Scan</value>
+    <value>Serijsko skeniranje</value>
   </data>
   <data name="Ocr" xml:space="preserve">
-    <value>OCR</value>
+    <value>OPZ (OCR)</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Profiles</value>
@@ -181,22 +76,22 @@
     <value>Import</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Save PDF</value>
+    <value>Sačuvaj PDF</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
-    <value>PDF Settings</value>
+    <value>PDF postavke</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Save Images</value>
+    <value>Saćuvaj slike</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
     <value>Image Settings</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>Pošalji PDF e-mailom</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>Postavke e-maila</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Print</value>
@@ -211,13 +106,13 @@
     <value>Crop</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
-    <value>Brightness / Contrast</value>
+    <value>Osvjetljenost / Kontrast</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>Nijanse / Zasićenost</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
-    <value>Black and White</value>
+    <value>Crna i bijela boja</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
     <value>Sharpen</value>
@@ -262,10 +157,10 @@
     <value>Deinterleave</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternate Interleave</value>
+    <value>Zamjeni naizmjenično</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternate Deinterleave</value>
+    <value>Zamjeni izmjenično</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Reverse</value>
@@ -277,16 +172,16 @@
     <value>Reverse Selected</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
+    <value>Očisti</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Očisti sve</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Jezik</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>About</value>
+    <value>O programu</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Zoom</value>
@@ -304,43 +199,43 @@
     <value>Scale With Window</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Saćuvaj</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Sačuvaj sve</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Saćuvaj selektovano</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Sačuvaj sve kao PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Sačuvaj selektovano kao PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Sačuvaj sve kao slike</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Sačuvaj selektovano kao slike</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Pošalji sve e-mailom</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Pošalji označeno e-mailom</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Pošalji e-mailom sve kao PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Pošalji označeno kao PDF e-mailom</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profile Settings</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Display name:</value>
+    <value>Naziv za prikaz:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>WIA Driver</value>
@@ -364,10 +259,10 @@
     <value>SANE Driver</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
-    <value>Device:</value>
+    <value>Uređaj:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Choose device</value>
+    <value>Izaberite uređaj</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Use predefined settings</value>
@@ -376,43 +271,43 @@
     <value>Use native UI</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
-    <value>Paper source:</value>
+    <value>Izvor dokumenta:</value>
   </data>
   <data name="PageSizeLabel" xml:space="preserve">
-    <value>Page size:</value>
+    <value>Dimenzija stranice:</value>
   </data>
   <data name="ResolutionLabel" xml:space="preserve">
     <value>Resolution:</value>
   </data>
   <data name="BrightnessLabel" xml:space="preserve">
-    <value>Brightness:</value>
+    <value>Osvjetljenost:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Bit depth:</value>
+    <value>Bitni kvalitet:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
-    <value>Horizontal align:</value>
+    <value>Horizontalno poravnanje:</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
     <value>Scale:</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
-    <value>Contrast:</value>
+    <value>Kontrast:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
     <value>Enable Auto Save</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>Postavke automatskog snimanja</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>Postavke automatskog snimanja</value>
   </data>
   <data name="Advanced" xml:space="preserve">
-    <value>Advanced</value>
+    <value>Napredno</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Otkaži</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
@@ -433,40 +328,40 @@
     <value>Not Another PDF Scanner</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
-    <value>OCR Setup</value>
+    <value>Postavke za OPZ</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
     <value>Make PDFs searchable using OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
-    <value>OCR language:</value>
+    <value>Jezik OPZ-a:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>Način OPZ-a:</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Automatically run OCR after scanning</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
-    <value>Get more languages</value>
+    <value>Preuzmi više jezika</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>OCR Download</value>
+    <value>Preuzmi jezike za OPZ</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>Using OCR requires you to download each language you want to scan.</value>
+    <value>Korištenje OCR (OPZ) zahtjeva preuzimanje pojedinačnih jezika koje želite skenirati.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Select one or more languages:</value>
+    <value>Izaberite jedan ili više jezika:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Estimated download size: {0} MB</value>
+    <value>Procjenjena veličina preuzimanja: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Download</value>
+    <value>Preuzmi</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Download Progress</value>
+    <value>Preuzimanje u toku</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
     <value>Preview</value>
@@ -493,16 +388,13 @@
     <value>Recover</value>
   </data>
   <data name="NotNow" xml:space="preserve">
-    <value>Not Now</value>
+    <value>Ne sada</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
     <value>Recover Scanned Images</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
     <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
-  </data>
-  <data name="Ellipsis" xml:space="preserve">
-    <value>...</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Placeholders</value>
@@ -523,31 +415,31 @@
     <value>Restore Defaults</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>PDF Settings</value>
+    <value>PDF postavke</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
-    <value>Allow Printing</value>
+    <value>Dozvoli štampanje</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>Allow Full Quality Printing</value>
+    <value>Dozvoli štampanje u punom kvalitetu</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
-    <value>Allow Document Modification</value>
+    <value>Dozvoli izmjene na dokumentu</value>
   </data>
   <data name="AllowDocumentAssembly" xml:space="preserve">
-    <value>Allow Document Assembly</value>
+    <value>Dozvoli sastavljanje dokumenata</value>
   </data>
   <data name="AllowContentCopying" xml:space="preserve">
-    <value>Allow Content Copying</value>
+    <value>Dozvoli kopiranje sadržaja</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Allow Content Copying for Accessibility</value>
+    <value>Dozvoli kopiranje sadržaja radi pristupačnosti</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
-    <value>Allow Annotations</value>
+    <value>Dozvoli anotacije</value>
   </data>
   <data name="AllowFormFilling" xml:space="preserve">
-    <value>Allow Form Filling</value>
+    <value>Dozvoli ispunjavanje formulara</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
     <value>Default File Path:</value>
@@ -559,7 +451,7 @@
     <value>Title:</value>
   </data>
   <data name="AuthorLabel" xml:space="preserve">
-    <value>Author:</value>
+    <value>Autor:</value>
   </data>
   <data name="SubjectLabel" xml:space="preserve">
     <value>Subject:</value>
@@ -571,19 +463,19 @@
     <value>Owner Password:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
-    <value>User Password:</value>
+    <value>Korisnička loznika:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
     <value>Remember these settings</value>
   </data>
   <data name="Metadata" xml:space="preserve">
-    <value>Metadata</value>
+    <value>Metapodaci</value>
   </data>
   <data name="Encryption" xml:space="preserve">
     <value>Encryption</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
-    <value>Compatibility</value>
+    <value>Kompatibilnost</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
     <value>Placeholders</value>
@@ -631,46 +523,46 @@
     <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
-    <value>Jpeg Quality</value>
+    <value>Jpeg kvalitet</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
     <value>Tiff Options</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
-    <value>Compression:</value>
+    <value>Kompresija:</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
     <value>Image Settings</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>Postavke e-maila</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provider</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Change</value>
+    <value>Promijeni</value>
   </data>
   <data name="AttachmentNameLabel" xml:space="preserve">
-    <value>Attachment Name:</value>
+    <value>Naziv priloga:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Choose Email Provider</value>
+    <value>Izaberi e-mail provajdera</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Authorize</value>
+    <value>Autoriziraj</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Waiting for authorization...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>Greška</value>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Technical Details</value>
   </data>
   <data name="PdfPasswordFormTitle" xml:space="preserve">
-    <value>Password</value>
+    <value>Lozinka</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
     <value>The following file is encrypted and requires a password to open:</value>
@@ -691,7 +583,7 @@
     <value>More info</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Clear images after saving</value>
+    <value>Očisti slike nakon snimanja</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Custom Page Size</value>
@@ -700,13 +592,13 @@
     <value>Name (optional)</value>
   </data>
   <data name="Dimensions" xml:space="preserve">
-    <value>Dimensions</value>
+    <value>Dimenzije</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Waiting for TWAIN to complete...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>Advanced Profile Settings</value>
+    <value>Postavke naprednog profila</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
     <value>Image Quality</value>
@@ -715,10 +607,10 @@
     <value>Maximum quality (large files)</value>
   </data>
   <data name="BlankPages" xml:space="preserve">
-    <value>Blank Pages</value>
+    <value>Prazne stranice</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Exclude blank pages</value>
+    <value>Izuzmi prazne stranice</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
     <value>White Threshold</value>
@@ -754,7 +646,7 @@
     <value>Twain Implementation:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
-    <value>Batch Scan</value>
+    <value>Serijsko skeniranje</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
     <value>Press Start when ready.</value>

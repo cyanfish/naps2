@@ -5,153 +5,153 @@ msgstr ""
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
 "PO-Revision-Date: 2023-04-22 05:32\n"
 "Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh\n"
+"Language-Team: Bosnian\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Crowdin-Project: naps2\n"
 "X-Crowdin-Project-ID: 531762\n"
-"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-Language: bs\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24-位色"
+msgstr "24-bitne boje"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr ""
+msgstr "A3 (297x420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr ""
+msgstr "A4 (210x297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "A5 (148x210 mm)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr "关于"
+msgstr "O programu"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr "正在获取数据..."
+msgstr "Pribavljanje podataka..."
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
-msgstr "高级"
+msgstr "Napredno"
 
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
-msgstr "高级配置文件设置"
+msgstr "Postavke naprednog profila"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr "全部 ({0})"
+msgstr "Sve ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr "所有文件"
+msgstr "Sve datoteke"
 
 #: UiStrings.resx$AllowAnnotations$Message
 msgid "Allow Annotations"
-msgstr "允许注释"
+msgstr "Dozvoli anotacije"
 
 #: UiStrings.resx$AllowContentCopying$Message
 msgid "Allow Content Copying"
-msgstr "允许复制内容"
+msgstr "Dozvoli kopiranje sadržaja"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "允许其他工具复制内容"
+msgstr "Dozvoli kopiranje sadržaja radi pristupačnosti"
 
 #: UiStrings.resx$AllowDocumentAssembly$Message
 msgid "Allow Document Assembly"
-msgstr "允许组合文件"
+msgstr "Dozvoli sastavljanje dokumenata"
 
 #: UiStrings.resx$AllowDocumentModification$Message
 msgid "Allow Document Modification"
-msgstr "允许修改文件"
+msgstr "Dozvoli izmjene na dokumentu"
 
 #: UiStrings.resx$AllowFormFilling$Message
 msgid "Allow Form Filling"
-msgstr "允许填写表单"
+msgstr "Dozvoli ispunjavanje formulara"
 
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
-msgstr "允许全品质打印"
+msgstr "Dozvoli štampanje u punom kvalitetu"
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
-msgstr "允许打印"
+msgstr "Dozvoli štampanje"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "奇偶页分别排列（偶数页逆序）"
+msgstr "Zamjeni izmjenično"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr "取消奇偶页分别排列（偶数页逆序）"
+msgstr "Zamjeni naizmjenično"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "需要额外的组件来导入这个 PDF 文件，您想要现在开始下载吗？"
+msgstr "Dodatna komponenta je potrebna za uvoz ove PDF datoteke. Da li je želite preuzeti?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Pojavila se greška pri pokretanju OPZ."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr "尝试授权时发生错误."
+msgstr "Greška se pojavila pri pokušaju autorizacije."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
-msgstr "尝试自动保存时发生错误."
+msgstr "Greška se pojavila pri pokušaju automatskog snimanja."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
-msgstr "尝试安装更新时发生错误."
+msgstr "Greška se pojavila pri pokušaju instaliranja ažuriranja."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
-msgstr "尝试存储文件时发生错误."
+msgstr "Greška se pojavila pri pokušaju snimanja datoteke."
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr "尝试发送此邮件时发生错误."
+msgstr "Greška se pojavila pri pokušaju slanja e-maila."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
-msgstr "尝试发送邮件时发生错误."
+msgstr "Greška se pojavila pri pokušaju slanja nekog e-maila."
 
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "尝试扫描文件发生错误."
+msgstr "Greška se pojavila kod drivera za skeniranje."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "操作进行中，是否取消操作并退出？"
+msgstr "Radnja je u toku. Da li sigurno želite otkazati radnju i izaći?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Nepoznata greška se pojavila tokom serijskog skeniranja."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
-msgstr "有可用的更新."
+msgstr "Dostupno je ažuriranje."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "OCR 有可用的更新."
+msgstr "Dostupno je ažuriranje za OPZ."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
@@ -163,60 +163,60 @@ msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "扫描后调整亮度/对比度"
+msgstr ""
 
 #: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
-msgstr "应用到所有已选定的 {0} 个图像"
+msgstr ""
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "您确定要取消批量扫描吗?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "您确定要清除 {0} 个项目吗？"
+msgstr ""
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "您确定要删除“{0}”吗？"
+msgstr ""
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "您确定要删除这个{0}配置吗？"
+msgstr ""
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "您确定要删除{0}个项目吗?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "您确定要删除{0}个配置吗？"
+msgstr ""
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "您确定要撤销您对{0}个图像的修改吗？"
+msgstr ""
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
-msgstr "附件名称:"
+msgstr "Naziv priloga:"
 
 #: UiStrings.resx$AuthorLabel$Message
 msgid "Author:"
-msgstr "作者:"
+msgstr "Autor:"
 
 #: UiStrings.resx$AuthorizeFormTitle$Message
 msgid "Authorize"
-msgstr "授权"
+msgstr "Autoriziraj"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr "自动"
+msgstr "Automatska"
 
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr "自动保存设置"
+msgstr "Postavke automatskog snimanja"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -224,44 +224,44 @@ msgstr ""
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "自动递增（2位数字）"
+msgstr ""
 
 #: UiStrings.resx$AutoIncrementing3Digit$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "自动递增（3位数字）"
+msgstr ""
 
 #: UiStrings.resx$AutoIncrementing4Digit$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "自动递增（4位数字）"
+msgstr ""
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "扫描后自动进行 OCR 识别"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
-msgstr "批量扫描"
+msgstr "Serijsko skeniranje"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled."
-msgstr "已取消批量扫描."
+msgstr "Serija otkazana."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "已完成批量扫描."
+msgstr "Serija kompletirana uspješno."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "批量扫描由于错误而停止."
+msgstr "Serijsko skeniranje zaustavljeno zbog greške."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
@@ -269,202 +269,202 @@ msgstr ""
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
-msgstr "位深:"
+msgstr "Bitni kvalitet:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "位图文件 (*.bmp)"
+msgstr "Bitmap datoteke (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
 msgid "Black and White"
-msgstr "黑白"
+msgstr "Crna i bijela boja"
 
 #: UiStrings.resx$BlankPages$Message
 msgid "Blank Pages"
-msgstr "空白页"
+msgstr "Prazne stranice"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
-msgstr "亮度/对比度"
+msgstr "Osvjetljenost / Kontrast"
 
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
-msgstr "亮度:"
+msgstr "Osvjetljenost:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
-msgstr "取消"
+msgstr "Otkaži"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr "取消批量扫描"
+msgstr "Otkaži seriju"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr "正在取消...."
+msgstr "Otkazivanje...."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr "居中"
+msgstr "centralno"
 
 #: UiStrings.resx$Change$Message
 msgid "Change"
-msgstr "改变"
+msgstr "Promijeni"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr "检查是否有新版本"
+msgstr "Provjeri ažuriranja"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr "正在检查..."
+msgstr "Provjeravanje..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr "选择电子邮件服务商"
+msgstr "Izaberi e-mail provajdera"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr "选择配置"
+msgstr "Izaberite profil"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr "选择设备"
+msgstr "Izaberite uređaj"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
 msgid "Clear"
-msgstr "清除"
+msgstr "Očisti"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Očisti sve"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
-msgstr "保存后清除图片"
+msgstr "Očisti slike nakon snimanja"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr "关闭"
+msgstr "Zatvori"
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
-msgstr "兼容性"
+msgstr "Kompatibilnost"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
-msgstr "压缩:"
+msgstr "Kompresija:"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
-msgstr "对比度:"
+msgstr "Kontrast:"
 
 #: UiStrings.resx$Copy$Message
 msgid "Copy"
-msgstr "复制"
+msgstr "Kopiraj"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr "复制进度"
+msgstr "Napredak kopiranja"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
-msgstr "正在复制..."
+msgstr "Kopiranje..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Autorska prava zaštićena {0} NAPS2 saradnici"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
-msgstr "阈值范围"
+msgstr ""
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
-msgstr "裁剪"
+msgstr ""
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr "裁剪到页面大小"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr "自定义 ({0}x{1} {2})"
+msgstr ""
 
 #: UiStrings.resx$PageSizeFormTitle$Message
 msgid "Custom Page Size"
-msgstr "自定义纸张大小"
+msgstr ""
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
-msgstr "自定义旋转"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr "自定义 SMTP"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom..."
-msgstr "自定义..."
+msgstr ""
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
-msgstr "日 (01-31)"
+msgstr ""
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$WiaVersion_Default$Message
 #: UiStrings.resx$Default$Message
 msgid "Default"
-msgstr "默认"
+msgstr ""
 
 #: UiStrings.resx$DefaultFilePathLabel$Message
 msgid "Default File Path:"
-msgstr "默认文件路径:"
+msgstr ""
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr "奇偶页分别排列"
+msgstr ""
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
 msgid "Delete"
-msgstr "删除"
+msgstr ""
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
-msgstr "倾斜校正"
+msgstr ""
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr "倾斜校正进度"
+msgstr ""
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr "对已扫描页面进行倾斜校正"
+msgstr ""
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr "倾斜校正中..."
+msgstr ""
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
-msgstr "设备:"
+msgstr "Uređaj:"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
-msgstr "尺寸"
+msgstr "Dimenzije"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
-msgstr "显示名称:"
+msgstr "Naziv za prikaz:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
@@ -473,31 +473,31 @@ msgstr ""
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr "捐赠"
+msgstr "Donirajte"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
-msgstr "完成"
+msgstr "Gotovo"
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
-msgstr "下载"
+msgstr "Preuzmi"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "下载错误"
+msgstr "Greška pri preuzimanju"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr "需要下载"
+msgstr "Preuzimanje je potrebno"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr "下载进度"
+msgstr "Preuzimanje u toku"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "输稿器（双面）"
+msgstr ""
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
@@ -513,41 +513,41 @@ msgstr ""
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
-msgstr "编辑"
+msgstr ""
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Pošalji sve e-mailom"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Pošalji e-mailom sve kao PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "通过邮件发送 PDF"
+msgstr "Pošalji PDF e-mailom"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "PDF 邮件发送进度"
+msgstr "Pošalji napredak PDF-ova"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Pošalji označeno e-mailom"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Pošalji označeno kao PDF e-mailom"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
-msgstr "邮件设置"
+msgstr "Postavke e-maila"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
-msgstr "启用自动保存"
+msgstr ""
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
@@ -555,33 +555,33 @@ msgstr ""
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
-msgstr "加密 PDF"
+msgstr ""
 
 #: UiStrings.resx$Encryption$Message
 msgid "Encryption"
-msgstr "加密"
+msgstr ""
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "增强的 Windows 图元文件 (*.emf)"
+msgstr "Poboljšana Windows metadatoteka (*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
-msgstr "错误"
+msgstr "Greška"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
-msgstr "估计下载大小: {0} MB"
+msgstr "Procjenjena veličina preuzimanja: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "可交换图像文件 (*.exif)"
+msgstr "Zamjenjiva slikovna datoteka (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr "排除空白页"
+msgstr "Izuzmi prazne stranice"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
@@ -589,39 +589,39 @@ msgstr ""
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "输稿器"
+msgstr ""
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "文件名"
+msgstr ""
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
-msgstr "文件路径:"
+msgstr ""
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
-msgstr "翻转"
+msgstr ""
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr "翻转偶数页面"
+msgstr ""
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr "对于 JPEG 高质量 (80+)，还可以在配置文件中增加图像质量，以获得最佳效果."
+msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF 文件 (*.gif)"
+msgstr "GIF datoteka (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
-msgstr "获取更多的语言"
+msgstr "Preuzmi više jezika"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "玻璃稿台"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
@@ -629,100 +629,100 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr "灰阶"
+msgstr "Nijanse sive boje"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
-msgstr "水平对齐:"
+msgstr "Horizontalno poravnanje:"
 
 #: UiStrings.resx$Hour2Digit$Message
 msgid "Hour (0-23)"
-msgstr "小时 (0-23)"
+msgstr ""
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
-msgstr "色相/饱和度"
+msgstr "Nijanse / Zasićenost"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr "图标来源:"
+msgstr ""
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
-msgstr "图像"
+msgstr ""
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr "图像文件"
+msgstr ""
 
 #: UiStrings.resx$ImageQuality$Message
 msgid "Image Quality"
-msgstr "图像质量"
+msgstr ""
 
 #: UiStrings.resx$ImageSettings$Message
 #: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
-msgstr "图像设定"
+msgstr ""
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved."
-msgstr "图像已保存."
+msgstr ""
 
 #: UiStrings.resx$Import$Message
 msgid "Import"
-msgstr "导入"
+msgstr ""
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr "导入进度"
+msgstr ""
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
-msgstr "正在导入 {0}..."
+msgstr ""
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
-msgstr "正在导入..."
+msgstr ""
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr "安装 {0}"
+msgstr ""
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr "安装完成"
+msgstr ""
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr "安装失败"
+msgstr ""
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "安装完成。您需要立即重新启动 NAPS2 吗？"
+msgstr ""
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
-msgstr "安装失败."
+msgstr ""
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr "取消奇偶页分别排列"
+msgstr ""
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG 文件(*.jpg, *.jpeg)"
+msgstr "JPEG datoteka (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG2000 datoteka (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
-msgstr "JPEG 品质"
+msgstr "Jpeg kvalitet"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
-msgstr "关键词:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
@@ -730,27 +730,27 @@ msgstr ""
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
-msgstr "语言"
+msgstr "Jezik"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr "左对齐"
+msgstr "Lijevo"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr "传统（仅限本地界面）"
+msgstr ""
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
-msgstr "载入图片至 NAPS2"
+msgstr ""
 
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "通过 OCR 生成可搜索的 PDF 文件"
+msgstr ""
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
-msgstr "最佳质量（大文件）"
+msgstr ""
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
@@ -758,57 +758,57 @@ msgstr ""
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
-msgstr "元数据"
+msgstr "Metapodaci"
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
-msgstr "分钟 (00-59)"
+msgstr ""
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
-msgstr "月份 (01-12)"
+msgstr ""
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
-msgstr "更多信息"
+msgstr ""
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
-msgstr "下移"
+msgstr ""
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
-msgstr "上移"
+msgstr ""
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "多次扫描（每次扫描间固定延时）"
+msgstr ""
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "多次扫描（每次扫描间提示）"
+msgstr ""
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 是完全免费的。请考虑捐款资助."
+msgstr "NAPS2 je potpuno besplatan. Razmotrite donaciju kao podršku."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
-msgstr "名称（可选）"
+msgstr ""
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
-msgstr "请输入配置名称."
+msgstr ""
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
@@ -816,278 +816,278 @@ msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
-msgstr "新建"
+msgstr ""
 
 #: UiStrings.resx$NewProfile$Message
 msgid "New Profile"
-msgstr "新建配置文件"
+msgstr ""
 
 #: UiStrings.resx$Next$Message
 msgid "Next"
-msgstr "下一页"
+msgstr ""
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
-msgstr "下一个扫描"
+msgstr ""
 
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
-msgstr "未选择设备."
+msgstr ""
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder."
-msgstr "输稿器中未发现纸张."
+msgstr ""
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr "未选择邮件服务商."
+msgstr ""
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found."
-msgstr "未找到扫描设备."
+msgstr ""
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr "未找到更新."
+msgstr "Nema dostupnih ažuriranja."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
-msgstr "无"
+msgstr ""
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Not Another PDF Scanner"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
-msgstr "现在不需要"
+msgstr "Ne sada"
 
 #: UiStrings.resx$NumberOfScansLabel$Message
 msgid "Number of scans:"
-msgstr "扫描次数:"
+msgstr ""
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr "光学字符识别 (OCR)"
+msgstr "OPZ (OCR)"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
-msgstr "OCR 下载"
+msgstr "Preuzmi jezike za OPZ"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr "OCR 识别进度"
+msgstr "Napredak OPZ-a"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
-msgstr "OCR 设置"
+msgstr "Postavke za OPZ"
 
 #: UiStrings.resx$OcrLanguageLabel$Message
 msgid "OCR language:"
-msgstr "OCR 语言:"
+msgstr "Jezik OPZ-a:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr "OCR 模式:"
+msgstr "Način OPZ-a:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr "确定"
+msgstr "U redu"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr "基于对齐的偏移宽度 (WIA)"
+msgstr ""
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr "旧版 DSM"
+msgstr ""
 
 #: UiStrings.resx$OneFilePerPage$Message
 msgid "One file per page"
-msgstr "每页一个文件"
+msgstr ""
 
 #: UiStrings.resx$OneFilePerScan$Message
 msgid "One file per scan"
-msgstr "每次扫描一个文件"
+msgstr ""
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded."
-msgstr "无法下载一个或多个文件 ."
+msgstr ""
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
-msgstr "打开文件夹"
+msgstr ""
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr "正在进行操作"
+msgstr "Radnja u toku"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr "Outlook 网页访问"
+msgstr ""
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
-msgstr "输出"
+msgstr ""
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
-msgstr "覆盖文件"
+msgstr ""
 
 #: UiStrings.resx$OwnerPasswordLabel$Message
 msgid "Owner Password:"
-msgstr "文件所有者密码:"
+msgstr ""
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr "PDF 文档(*.pdf)"
+msgstr "PDF dokument (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
-msgstr "PDF 设置"
+msgstr "PDF postavke"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
-msgstr "PDF 保存."
+msgstr "PDF sačuvan."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr "PNG 文件 (*.png)"
+msgstr "PNG daoteka (*.png)"
 
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
-msgstr "纸张大小:"
+msgstr "Dimenzija stranice:"
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
-msgstr "纸张来源:"
+msgstr "Izvor dokumenta:"
 
 #: UiStrings.resx$PdfPasswordFormTitle$Message
 msgid "Password"
-msgstr "密码"
+msgstr "Lozinka"
 
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
-msgstr "粘贴"
+msgstr ""
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
-msgstr "格式符"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr "后处理"
+msgstr ""
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
-msgstr "准备好后点击开始."
+msgstr ""
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
-msgstr "预览"
+msgstr ""
 
 #: UiStrings.resx$PreviewLabel$Message
 msgid "Preview:"
-msgstr "预览:"
+msgstr ""
 
 #: UiStrings.resx$Previous$Message
 msgid "Previous"
-msgstr "上一页"
+msgstr ""
 
 #: MiscResources.resx$Print$Message
 #: UiStrings.resx$Print$Message
 msgid "Print"
-msgstr "打印"
+msgstr ""
 
 #: UiStrings.resx$EditProfileFormTitle$Message
 msgid "Profile Settings"
-msgstr "配置文件设置"
+msgstr ""
 
 #: UiStrings.resx$ProfileLabel$Message
 msgid "Profile:"
-msgstr "配置文件:"
+msgstr ""
 
 #: UiStrings.resx$Profiles$Message
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
-msgstr "配置文件"
+msgstr ""
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr "文件路径提示"
+msgstr ""
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
-msgstr "服务供应商"
+msgstr ""
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
-msgstr "已准备扫描 {0}."
+msgstr ""
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
-msgstr "修复"
+msgstr ""
 
 #: UiStrings.resx$RecoverFormTitle$Message
 msgid "Recover Scanned Images"
-msgstr "修复已扫描的图像"
+msgstr ""
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
-msgstr "正在修复..."
+msgstr ""
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr "修复进度"
+msgstr ""
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
-msgstr "记住这些设定"
+msgstr ""
 
 #: UiStrings.resx$Reorder$Message
 msgid "Reorder"
-msgstr "重新排序"
+msgstr ""
 
 #: UiStrings.resx$Reset$Message
 msgid "Reset"
-msgstr "重置"
+msgstr ""
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "重置图像"
+msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
-msgstr "分辨率:"
+msgstr ""
 
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
-msgstr "还原默认值"
+msgstr ""
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
-msgstr "反转"
+msgstr ""
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
@@ -1099,216 +1099,216 @@ msgstr ""
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
-msgstr "还原"
+msgstr ""
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr "右对齐"
+msgstr "Desno"
 
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
-msgstr "旋转"
+msgstr ""
 
 #: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
-msgstr "逆时针旋转"
+msgstr ""
 
 #: UiStrings.resx$RotateRight$Message
 msgid "Rotate Right"
-msgstr "顺时针旋转"
+msgstr ""
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr "在后台运行"
+msgstr ""
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr "执行 OCR..."
+msgstr ""
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
-msgstr "SANE 驱动"
+msgstr ""
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Saćuvaj"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Sačuvaj sve"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Sačuvaj sve kao slike"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Sačuvaj sve kao PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
 msgid "Save Images"
-msgstr "保存图像"
+msgstr "Saćuvaj slike"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "图像保存进度"
+msgstr "Saćuvaj napredak slika"
 
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
 msgid "Save PDF"
-msgstr "保存 PDF"
+msgstr "Sačuvaj PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "PDF 保存进度"
+msgstr "Sačuvaj napredak PDF-ova"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Saćuvaj selektovano"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Sačuvaj selektovano kao slike"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Sačuvaj selektovano kao PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
-msgstr "保存为单个文件"
+msgstr ""
 
 #: UiStrings.resx$SaveToMultipleFiles$Message
 msgid "Save to multiple files"
-msgstr "保存为多个文件"
+msgstr ""
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr "保存批量扫描结果..."
+msgstr ""
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
-msgstr "正在保存 {0}..."
+msgstr ""
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
-msgstr "使用窗口比例"
+msgstr ""
 
 #: UiStrings.resx$ScaleLabel$Message
 msgid "Scale:"
-msgstr "缩放比例:"
+msgstr ""
 
 #: MiscResources.resx$Scan$Message
 #: UiStrings.resx$Scan$Message
 msgid "Scan"
-msgstr "扫描"
+msgstr ""
 
 #: UiStrings.resx$ScanConfig$Message
 msgid "Scan Configuration"
-msgstr "扫描设置"
+msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr "已扫描的图像"
+msgstr ""
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
-msgstr "正在扫描页面 {0}"
+msgstr ""
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
-msgstr "正在扫描页面 {0} (扫描 {1})..."
+msgstr ""
 
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}..."
-msgstr "正在扫描页面 {0}..."
+msgstr ""
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
-msgstr "秒 (00-59)"
+msgstr ""
 
 #: UiStrings.resx$Select$Message
 msgid "Select"
-msgstr "选择"
+msgstr ""
 
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
-msgstr "全选"
+msgstr ""
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
-msgstr "选择来源"
+msgstr ""
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
-msgstr "请先选择配置文件，然后点击 [扫描] ."
+msgstr ""
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
-msgstr "请选择一个或多个语言:"
+msgstr "Izaberite jedan ili više jezika:"
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
-msgstr "已选择 ({0})"
+msgstr ""
 
 #: UiStrings.resx$SeparateByPatchT$Message
 msgid "Separate files by Patch-T"
-msgstr "通过 Patch-T 拆分文件"
+msgstr ""
 
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
-msgstr "设为默认设置"
+msgstr ""
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
-msgstr "锐化"
+msgstr ""
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
-msgstr "显示"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
-msgstr "单页文件"
+msgstr ""
 
 #: UiStrings.resx$SingleScan$Message
 msgid "Single scan"
-msgstr "单次扫描"
+msgstr ""
 
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
-msgstr "跳过保存提示"
+msgstr ""
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
-msgstr "启动"
+msgstr ""
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
-msgstr "扩展至纸张大小"
+msgstr ""
 
 #: UiStrings.resx$SubjectLabel$Message
 msgid "Subject:"
-msgstr "主题:"
+msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "TIFF 文件 (*.tiff, *.tif)"
+msgstr "TIFF datoteka (*.tiff, *.tif)"
 
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
-msgstr "TWAIN 驱动"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
-msgstr "技术细节"
+msgstr ""
 
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "OCR 组件不可用。请确认已安装所需的软件包:"
+msgstr ""
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
@@ -1317,24 +1317,24 @@ msgstr ""
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "SANE 驱动不可用。请确认已安装所需的软件包:"
+msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
-msgstr "无法导入文件 '{0}'."
+msgstr ""
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "无法导入文件 '{0}'。 只有 NAPS2 生成的 PDF 才能被导入."
+msgstr ""
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
-msgstr "文件正在使用，无法覆盖."
+msgstr ""
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "文件 {0} 已存在，是否覆盖？"
+msgstr ""
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
@@ -1343,47 +1343,47 @@ msgstr ""
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam."
-msgstr "扫描仪发生卡纸."
+msgstr ""
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 #: SdkResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up."
-msgstr "扫描仪正在预热."
+msgstr ""
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 #: SdkResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open."
-msgstr "扫描仪原稿盖已打开."
+msgstr ""
 
 #: MiscResources.resx$DriverNotSupported$Message
 #: SdkResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system."
-msgstr "所选驱动程序不受本系统支持."
+msgstr ""
 
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found."
-msgstr "无法找到所选的扫描仪."
+msgstr ""
 
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
-msgstr "所选的扫描仪不支持使用输稿器。如果您的扫描仪确实有输稿器，请尝试使用不同的驱动程序."
+msgstr ""
 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "所选的扫描仪不支持双面扫描。如果您的扫描仪支持双面扫描，请尝试使用不同的驱动程序."
+msgstr ""
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy."
-msgstr "选定的扫描仪正在工作."
+msgstr ""
 
 #: MiscResources.resx$DeviceOffline$Message
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
-msgstr "选定的扫描仪处于脱机状态."
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1391,15 +1391,15 @@ msgstr ""
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr "TIFF 格式设置"
+msgstr ""
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
-msgstr "扫描之间的间隔（秒）:"
+msgstr ""
 
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
-msgstr "标题:"
+msgstr ""
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1407,80 +1407,80 @@ msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr "Twain 实现:"
+msgstr ""
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr ""
+msgstr "Američki legal (8,5x14 inča)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr ""
+msgstr "Američko pismo (8,5x11 inča)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
-msgstr "未保存的更改"
+msgstr "Nesačuvane promjene"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr "更新进度"
+msgstr "Napredak ažuriranja"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "Provjera ažuriranja je isključena."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
-msgstr "正在更新..."
+msgstr "Ažuriranje..."
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
-msgstr "上传邮件..."
+msgstr "Prijenos e-pošte..."
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
-msgstr "使用本地界面 "
+msgstr ""
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "使用预定义的设置"
+msgstr ""
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
-msgstr "用户密码:"
+msgstr "Korisnička loznika:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
-msgstr "使用 OCR 需要下载您所需的语言."
+msgstr "Korištenje OCR (OPZ) zahtjeva preuzimanje pojedinačnih jezika koje želite skenirati."
 
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
 msgid "Version {0}"
-msgstr "版本 {0}"
+msgstr "Verzija {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
-msgstr "查看"
+msgstr ""
 
 #: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"
-msgstr "WIA 驱动程序"
+msgstr ""
 
 #: UiStrings.resx$WaitingForTwain$Message
 msgid "Waiting for TWAIN to complete..."
-msgstr "正在等待 TWAIN 完成..."
+msgstr ""
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
-msgstr "等待授权..."
+msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
-msgstr "正在等待扫描 {0}..."
+msgstr ""
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
-msgstr "白色阀值"
+msgstr ""
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
@@ -1488,60 +1488,60 @@ msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
-msgstr "年份"
+msgstr ""
 
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
-msgstr "年份 (00-99)"
+msgstr ""
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 #: SdkResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "您没有从文件 '{0}' 中复制内容的权限."
+msgstr ""
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
-msgstr "您没有在该位置保存文件的权限."
+msgstr ""
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
-msgstr "您有未保存的修改，确定要放弃这些修改并退出吗？"
+msgstr ""
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
-msgstr "缩放"
+msgstr ""
 
 #: UiStrings.resx$ZoomActual$Message
 msgid "Zoom Actual"
-msgstr "缩放至实际大小"
+msgstr ""
 
 #: UiStrings.resx$ZoomIn$Message
 msgid "Zoom In"
-msgstr "放大"
+msgstr ""
 
 #: UiStrings.resx$ZoomOut$Message
 msgid "Zoom Out"
-msgstr "缩小"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "厘米"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "单位"
+msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr "毫米"
+msgstr ""
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
-msgstr "/ {0}"
+msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
@@ -1557,7 +1557,7 @@ msgstr ""
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
-msgstr "{0} / {1} 个文件"
+msgstr ""
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
@@ -1565,14 +1565,14 @@ msgstr ""
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "使用 {2} 在 {1} 上扫描的 {0} 张图像可能还未保存，现在可以恢复。您需要恢复这些图像吗？"
+msgstr ""
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."
-msgstr "已保存 {0} 张图像."
+msgstr ""
 
 #: MiscResources.resx$PdfStatus$Message
 #: UiStrings.resx$XOfY$Message
 msgid "{0} of {1}"
-msgstr "{0} / {1}"
+msgstr ""
 

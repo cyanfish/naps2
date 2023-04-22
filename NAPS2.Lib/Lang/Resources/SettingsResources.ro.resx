@@ -31,16 +31,16 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Acces Outlook Web</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
-    <value>Thunderbird</value>
+    <value>Pasăre tunet</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
     <value>Apple Mail</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Niciun furnizor selectat.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Centrează</value>
@@ -124,13 +124,13 @@
     <value>Implicit</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>Vechi (numai interfața de utilizare nativă)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Transfer nativ</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Transfer de memorie</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSM vechi</value>
@@ -142,9 +142,9 @@
     <value>Implicit</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Rapid</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Cel mai bun</value>
   </data>
 </root>

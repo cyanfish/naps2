@@ -13,19 +13,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Hitam Putih</value>
+    <value>Crna i bijela boja</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>Kedalaman Warna 24-Bit</value>
+    <value>24-bitne boje</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Grayscale</value>
+    <value>Nijanse sive boje</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
     <value>{0} dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>SMTP Custom</value>
+    <value>Custom SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -43,13 +43,13 @@
     <value>No provider selected.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
-    <value>Center</value>
+    <value>centralno</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Left</value>
+    <value>Lijevo</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Right</value>
+    <value>Desno</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>cm</value>
@@ -61,28 +61,28 @@
     <value>mm</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (29.7x42.0 cm)</value>
+    <value>A3 (297x420 mm)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (21.0x29.7 cm)</value>
+    <value>A4 (210x297 mm)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (14.8x21.0 cm)</value>
+    <value>A5 (148x210 mm)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (25.0x35.3 cm)</value>
+    <value>B4 (250x353 mm)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
-    <value>B5 (17.6x25.0 cm)</value>
+    <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>kostumasi...</value>
+    <value>Custom...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>Američki legal (8,5x14 inča)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>Američko pismo (8,5x11 inča)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Default</value>
@@ -100,7 +100,7 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Bolak Balik / 2 muka</value>
+    <value>Duplex</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
     <value>Feeder</value>
@@ -109,7 +109,7 @@
     <value>Glass</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Automatska</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -142,9 +142,9 @@
     <value>Default</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Cepat</value>
+    <value>Fast</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Terbaik</value>
+    <value>Best</value>
   </data>
 </root>

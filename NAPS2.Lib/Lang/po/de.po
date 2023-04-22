@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-14 00:09\n"
+"PO-Revision-Date: 2023-04-22 05:32\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -548,6 +548,10 @@ msgstr "E-Mail Einstellungen"
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
 msgstr "Erlaube automatisches Speichern"
+
+#: UiStrings.resx$EnableDebugLogging$Message
+msgid "Enable debug logging"
+msgstr ""
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"

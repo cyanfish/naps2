@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-14 00:09\n"
+"PO-Revision-Date: 2023-04-22 05:32\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro\n"
@@ -98,7 +98,7 @@ msgstr "Deintercalare alternativă"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Intercalare alternativă"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -106,7 +106,7 @@ msgstr "Este necesară o nouă componentă pentru a putea importa acest fișier 
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "A apărut o eroare la rularea OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -143,7 +143,7 @@ msgstr "O operație este în curs. Sigur doriți să ieșiți și să anulați o
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "A apărut o eroare necunoscută în timpul scanării lotului."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -155,11 +155,11 @@ msgstr "Este disponibilă o actualizare a componentei OCR."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Driver Apple"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Mail"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -211,7 +211,7 @@ msgstr "Autorizează"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
@@ -220,7 +220,7 @@ msgstr "Setări de salvare automată"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Număr cu incrementare automată (1 cifră)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -244,7 +244,7 @@ msgstr "B4 (250 x 353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -265,7 +265,7 @@ msgstr "Scanarea multiplă oprită din cauza unei erori."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "Cel mai bun"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -294,7 +294,7 @@ msgstr "Luminozitate:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -344,7 +344,7 @@ msgstr "Şterge"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Ștergere totală"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -364,7 +364,7 @@ msgstr "Comprimare:"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
-msgstr ""
+msgstr "Contrast:"
 
 #: UiStrings.resx$Copy$Message
 msgid "Copy"
@@ -380,7 +380,7 @@ msgstr "Copiere..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Drepturi de autor {0} Colaboratori NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -468,12 +468,12 @@ msgstr "Nume afișat:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Corecție Document"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Donează"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -501,15 +501,15 @@ msgstr "Fată-verso"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "Driver-ul ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "Driver de rețea ESCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "Driver USB ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -517,11 +517,11 @@ msgstr "Editare"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Trimiteți prin e-mail tuturor"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Trimiteți prin e-mail tuturor ca PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
@@ -534,11 +534,11 @@ msgstr "Progres trimitere PDF prin email"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Trimiteți prin e-mail partea selectată"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Trimiteți prin e-mail partea selectată ca PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -548,6 +548,10 @@ msgstr "Configurări email"
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
 msgstr "Activează salvarea automată"
+
+#: UiStrings.resx$EnableDebugLogging$Message
+msgid "Enable debug logging"
+msgstr ""
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -573,7 +577,7 @@ msgstr "Mărime estimată de download: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
+msgstr "Fișier imagine interschimbabil (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -581,7 +585,7 @@ msgstr "Elimină paginile goale"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "Rapid"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -605,7 +609,7 @@ msgstr "Întoarce paginile de pe verso"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr ""
+msgstr "Pentru calități JPEG înalte (80+), creșteți calitatea imaginii în profilul dvs. pentru cele mai bune rezultate."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -621,7 +625,7 @@ msgstr "Sticlă"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -710,7 +714,7 @@ msgstr "Fișier JPEG (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "Fișier JPEG2000 (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -722,7 +726,7 @@ msgstr "Cuvinte cheie:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -734,7 +738,7 @@ msgstr "Stânga"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr ""
+msgstr "Vechi (numai interfața de utilizare nativă)"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -750,7 +754,7 @@ msgstr "Calitate maximă (fișiere mari)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Transfer de memorie"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -758,7 +762,7 @@ msgstr "Metadate"
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "Minute (00-59)"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -788,15 +792,15 @@ msgstr "Scanare multiplă (cu confirmare între scanări)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr ""
+msgstr "NAPS2 este complet gratuit. Luați în considerare să faceți o donație."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -808,7 +812,7 @@ msgstr "Lipsește numele."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Transfer nativ"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -838,7 +842,7 @@ msgstr "Nici o foaie in alimentator."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr ""
+msgstr "Niciun furnizor selectat."
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
@@ -855,7 +859,7 @@ msgstr "Nimic"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Nici alt scaner PDF"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -867,7 +871,7 @@ msgstr "Numarul de scanări:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -875,7 +879,7 @@ msgstr "Descarcă OCR"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR în lucru"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
@@ -887,7 +891,7 @@ msgstr "Limba OCR:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr ""
+msgstr "Modul OCR:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
@@ -903,7 +907,7 @@ msgstr "DSM vechi"
 
 #: UiStrings.resx$OneFilePerPage$Message
 msgid "One file per page"
-msgstr ""
+msgstr "Un fișier pe pagină"
 
 #: UiStrings.resx$OneFilePerScan$Message
 msgid "One file per scan"
@@ -923,7 +927,7 @@ msgstr "Operaţiune în desfăşurare"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Acces Outlook Web"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
@@ -939,7 +943,7 @@ msgstr "Parolă Autor:"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr ""
+msgstr "Document PDF (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
@@ -952,19 +956,19 @@ msgstr "PDF salvat."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1067,7 +1071,7 @@ msgstr "Reordonare"
 
 #: UiStrings.resx$Reset$Message
 msgid "Reset"
-msgstr ""
+msgstr "Resetare"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
@@ -1087,11 +1091,11 @@ msgstr "Inversează"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Inversează Tot"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Inversează ce este selectat"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1119,7 +1123,7 @@ msgstr "Rulează în fundal"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr ""
+msgstr "Se rulează OCR..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
@@ -1127,19 +1131,19 @@ msgstr "Driver SANE"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Salvează"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Salvează tot"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Salvează toate ca Imagini"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Salvează toate ca PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1161,15 +1165,15 @@ msgstr "Progres salvare PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Salvează selecția"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Salvați cele selectate ca imagini"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Salvați cele selectate ca PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1279,7 +1283,7 @@ msgstr "Omite notificarea de salvare"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
-msgstr ""
+msgstr "Începe"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1308,12 +1312,12 @@ msgstr "Motorul OCR nu este disponibil. Asigură-te că ai instalat pachetul nec
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "Operațiunea OCR a expirat."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr ""
+msgstr "Driverul SANE nu este disponibil. Asigurați-vă că instalați pachetele necesare:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
@@ -1334,7 +1338,7 @@ msgstr "Fișierul {0} deja există. Doriți să-l suprascrieți?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Următorul fișier este criptat și necesită o parolă pentru a se deschide:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1383,7 +1387,7 @@ msgstr "Scanerul selectat este deconectat."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Pasăre tunet"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
@@ -1399,7 +1403,7 @@ msgstr "Titlu:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Unelte"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1407,11 +1411,11 @@ msgstr "Implementare Twain:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr ""
+msgstr "US Legal (8.5x14 in)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr ""
+msgstr "US Letter (8.5x11 in)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1423,7 +1427,7 @@ msgstr "Progres Actualizare"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "Verificarea actualizării este dezactivată."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1480,7 +1484,7 @@ msgstr "Limita albă"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Versiunea Wia:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1505,7 +1509,7 @@ msgstr "Există modificări care nu sunt salvate. Sigur vreți să ieșiți și 
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: UiStrings.resx$ZoomActual$Message
 msgid "Zoom Actual"
@@ -1521,43 +1525,43 @@ msgstr "Micșorează"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
-msgstr "din {0}"
+msgstr "Din {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
-msgstr "0} / {1} files"
+msgstr "{0} / {1} fișiere"
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr ""
+msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"

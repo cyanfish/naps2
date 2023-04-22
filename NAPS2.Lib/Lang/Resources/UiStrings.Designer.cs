@@ -753,6 +753,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable debug logging.
+        /// </summary>
+        internal static string EnableDebugLogging {
+            get {
+                return ResourceManager.GetString("EnableDebugLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The following file is encrypted and requires a password to open:.
         /// </summary>
         internal static string EncryptedFilePrompt {

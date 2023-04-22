@@ -28,7 +28,7 @@
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Donasi</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiles</value>
@@ -55,7 +55,7 @@
     <value>Paste</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Done</value>
+    <value>Selesai</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>Default</value>
@@ -118,7 +118,7 @@
     <value>Sharpen</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Koreksi Dokumen</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -235,7 +235,7 @@
     <value>Profile Settings</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Display name:</value>
+    <value>Nama Tampilan:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>WIA Driver</value>
@@ -259,7 +259,7 @@
     <value>SANE Driver</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
-    <value>Device:</value>
+    <value>piranti:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
     <value>Choose device</value>
@@ -358,10 +358,10 @@
     <value>Estimated download size: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Download</value>
+    <value>Unduh</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Download Progress</value>
+    <value>Sedang mengunduh</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
     <value>Preview</value>
@@ -445,7 +445,7 @@
     <value>Path Default Berkas:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
-    <value>File Path:</value>
+    <value>Lokasi berkas:</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Title:</value>
@@ -514,7 +514,7 @@
     <value>penambahan nomor auto (1 digit)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>File Name:</value>
+    <value>Nama Berkas:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Preview:</value>
@@ -592,7 +592,7 @@
     <value>Name (optional)</value>
   </data>
   <data name="Dimensions" xml:space="preserve">
-    <value>Dimensions</value>
+    <value>Dimensi</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Waiting for TWAIN to complete...</value>
@@ -622,7 +622,7 @@
     <value>Post-processing</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Deskew scanned pages</value>
+    <value>Halaman terpindai cek miring-mereng</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Terapkan tingkat kontras/kecerahan setelah pindai selesai</value>
@@ -698,5 +698,8 @@
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>
+  </data>
+  <data name="EnableDebugLogging" xml:space="preserve">
+    <value>Enable debug logging</value>
   </data>
 </root>

@@ -543,6 +543,10 @@ msgstr ""
 msgid "Enable Auto Save"
 msgstr ""
 
+#: UiStrings.resx$EnableDebugLogging$Message
+msgid "Enable debug logging"
+msgstr ""
+
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
 msgstr ""
