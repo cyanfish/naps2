@@ -4,6 +4,33 @@
 
 NAPS2.Sdk is a fully-featured scanning library, supporting WIA, TWAIN, SANE, and ESCL scanners on Windows, Mac, and Linux.
 
+## Packages
+
+NAPS2.Sdk is modular, and depending on your needs you may have to reference a different set of packages.
+
+### Required Packages
+
+- **[NAPS2.Sdk](https://www.nuget.org/packages/NAPS2.Sdk/)**
+  - Contains core scanning functionality for all platforms. 
+- Exactly one of:
+  - **[NAPS2.Images.Gdi](https://www.nuget.org/packages/NAPS2.Images.Gdi/)**
+    - For working with `System.Drawing.Bitmap` images. (Windows Forms)
+  - **[NAPS2.Images.Gtk](https://www.nuget.org/packages/NAPS2.Images.Gtk/)**
+    - For working with `Gdk.Pixbuf` images. (Linux)
+  - **[NAPS2.Images.Mac](https://www.nuget.org/packages/NAPS2.Images.Mac/)**
+    - For working with `AppKit.NSImage` images. (Mac)
+
+### Optional Packages
+
+- **[NAPS2.Sdk.Worker](https://www.nuget.org/packages/NAPS2.Sdk.Worker/)**
+  - For scanning with a [worker process](). (You can also [build your own]() worker.)
+- **[NAPS2.Pdfium.Binaries](https://www.nuget.org/packages/NAPS2.Pdfium.Binaries/)**
+  - For [importing PDFs]().
+- **[NAPS2.Sane.Binaries](https://www.nuget.org/packages/NAPS2.Sane.Binaries/)**
+  - For [using SANE drivers]() on Mac. (Linux has them pre-installed, and Windows isn't supported.) 
+- **[NAPS2.Tesseract.Binaries](https://www.nuget.org/packages/NAPS2.Tesseract.Binaries/)**
+  - For [running OCR](). (You can also use a separate Tesseract installation if you like.) 
+
 ## Drivers
 
 |           | Windows | Mac | Linux |
