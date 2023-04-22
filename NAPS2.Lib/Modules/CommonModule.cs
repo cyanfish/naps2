@@ -51,7 +51,11 @@ public class CommonModule : Module
         builder.Register<IWorkerFactory>(_ => WorkerFactory.CreateDefault()).SingleInstance();
 
         // Logging
-        builder.Register<ILogger>(_ => NLogConfig.CreateLogger()).SingleInstance();
+        builder.Register<ILogger>(ctx =>
+        {
+            var config = ctx.Resolve<Naps2Config>();
+            return NLogConfig.CreateLogger(() => config.Get(c => c.EnableDebugLogging));
+        }).SingleInstance();
 
         // Misc
         builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();

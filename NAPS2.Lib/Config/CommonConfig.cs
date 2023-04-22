@@ -163,4 +163,7 @@ public class CommonConfig
 
     [Common]
     public ScanProfile? DefaultProfileSettings { get; set; }
+
+    [Common]
+    public bool EnableDebugLogging { get; set; }
 }

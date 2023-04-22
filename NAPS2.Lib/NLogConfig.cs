@@ -2,6 +2,7 @@
 using NLog;
 using NLog.Config;
 using NLog.Extensions.Logging;
+using NLog.Filters;
 using NLog.LayoutRenderers;
 using NLog.Targets;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
@@ -10,7 +11,7 @@ namespace NAPS2;
 
 public static class NLogConfig
 {
-    public static ILogger CreateLogger()
+    public static ILogger CreateLogger(Func<bool> enableDebugLogging)
     {
         LayoutRenderer.Register<CustomExceptionLayoutRenderer>("exception");
         var config = new LoggingConfiguration();
@@ -31,7 +32,9 @@ public static class NLogConfig
         config.AddTarget("errorlogfile", target);
         config.AddTarget("debuglogfile", debugTarget);
         config.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, target));
-        config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, debugTarget));
+        var debugRule = new LoggingRule("*", LogLevel.Debug, debugTarget);
+        debugRule.Filters.Add(new WhenMethodFilter(_ => enableDebugLogging() ? FilterResult.Log : FilterResult.Ignore));
+        config.LoggingRules.Add(debugRule);
         LogManager.Configuration = config;
         return new NLogLoggerFactory().CreateLogger("NAPS2");
     }
