@@ -16,15 +16,6 @@ public class PullTranslationsCommand : ICommand<PullTranslationsOptions>
         {
             var client = CrowdinHelper.GetClient();
 
-            await using var templatesFile = File.OpenRead(Paths.TemplatesFile);
-            var storage = await client.Storage.AddStorage(templatesFile, "templates.pot");
-
-            await client.SourceFiles.UpdateOrRestoreFile(CrowdinHelper.PROJECT_ID, CrowdinHelper.TEMPLATES_FILE_ID,
-                new ReplaceFileRequest
-                {
-                    StorageId = storage.Id
-                });
-
             Output.Verbose("Building Crowdin project translations");
             var build = await client.Translations.BuildProjectTranslation(CrowdinHelper.PROJECT_ID,
                 new BuildProjectTranslationRequest());
