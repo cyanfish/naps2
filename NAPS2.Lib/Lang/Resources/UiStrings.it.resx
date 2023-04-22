@@ -61,7 +61,7 @@
     <value>Predefinito</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
-    <value>Nuovo Profilo</value>
+    <value>Nuovo profilo</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
     <value>Scansione in serie</value>
@@ -82,13 +82,13 @@
     <value>Impostazioni PDF</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Salva Immagine</value>
+    <value>Salva immagini</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
     <value>Impostazioni immagine</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>Invia PDF via e-mail</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
     <value>Impostazioni email</value>
@@ -103,7 +103,7 @@
     <value>Visualizza</value>
   </data>
   <data name="Crop" xml:space="preserve">
-    <value>Taglia</value>
+    <value>Ritaglia</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
     <value>Luminosità/contrasto</value>
@@ -115,10 +115,10 @@
     <value>Bianco e nero</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>Focalizzare</value>
+    <value>Nitidezza</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Correzione del documento</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Azzera</value>
@@ -136,10 +136,10 @@
     <value>Capovolgi</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Ruota ed allinea</value>
+    <value>Ruota e allinea</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>Rotazione Personalizzata</value>
+    <value>Rotazione personalizzata</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Sposta su</value>
@@ -163,19 +163,19 @@
     <value>Deinterleave alternativo</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Inverso</value>
+    <value>Inverti</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Inverti tutto</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Inverti selezionati</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Cancella</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Cancella tutto</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Lingua</value>
@@ -184,7 +184,7 @@
     <value>Informazioni</value>
   </data>
   <data name="Zoom" xml:space="preserve">
-    <value>Zoom</value>
+    <value>Ingrandisci</value>
   </data>
   <data name="ZoomIn" xml:space="preserve">
     <value>Aumenta zoom</value>
@@ -199,40 +199,40 @@
     <value>Adatta alla finestra</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Salva</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Salva tutti</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Salva selezionati</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Salva tutti come PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Salva selezionati come PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Salva tutti come immagini</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Salva selezionati come immagini</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Invia e-mail a tutti</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Invia selezionati via e-mail</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Invia e-mail a tutti come PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Invia selezionati via e-mail come PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
-    <value>Configurazione Profilo</value>
+    <value>Impostazioni profilo</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
     <value>Nome visualizzato:</value>
@@ -244,16 +244,16 @@
     <value>Driver TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Driver ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>Driver di rete ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>Driver USB ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Driver Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>Driver SANE</value>
@@ -262,7 +262,7 @@
     <value>Dispositivo:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Scegli Dispositivo</value>
+    <value>Scegli dispositivo</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Usa impostazioni predefinite</value>
@@ -316,7 +316,7 @@
     <value>Seleziona sorgente</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Esegui in Background</value>
+    <value>Esegui in background</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -367,7 +367,7 @@
     <value>Anteprima</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Avanti</value>
+    <value>Prossimo</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Precedente</value>
@@ -385,13 +385,13 @@
     <value>Seleziona tutto</value>
   </data>
   <data name="Recover" xml:space="preserve">
-    <value>Ripristino</value>
+    <value>Ripristina</value>
   </data>
   <data name="NotNow" xml:space="preserve">
     <value>Non ora</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Ripristino Immagini Digitalizzate</value>
+    <value>Ripristino immagini digitalizzate</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
     <value>{0} immagine(i) digitalizzata(e) su {1} a {2} potrebbero non essere state salvate e sono recuperabili. Vuoi recuperarle?</value>
@@ -406,7 +406,7 @@
     <value>File a pagina singola</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Cripta il PDF</value>
+    <value>Cifra il PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Mostra</value>
@@ -421,7 +421,7 @@
     <value>Consenti stampa</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>Consenti stampa ad alta qualità</value>
+    <value>Consenti stampa di alta qualità</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
     <value>Consenti modifica documento</value>
@@ -442,7 +442,7 @@
     <value>Consenti compilazione modulo</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>Percorso File Predefinito:</value>
+    <value>Percorso file predefinito:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
     <value>Percorso del file:</value>
@@ -460,7 +460,7 @@
     <value>Parole chiave:</value>
   </data>
   <data name="OwnerPasswordLabel" xml:space="preserve">
-    <value>Password Proprietario:</value>
+    <value>Password del proprietario:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
     <value>Password utente:</value>
@@ -472,7 +472,7 @@
     <value>Metadati</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Criptare</value>
+    <value>Crifratura</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
     <value>Compatibilità</value>
@@ -511,7 +511,7 @@
     <value>Autoincrementa numero (2 cifre)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Numero incrementato automaticamente (1 cifra)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nome file</value>
@@ -538,7 +538,7 @@
     <value>Impostazioni email</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Provider</value>
+    <value>Fornitore</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>Cambia</value>
@@ -565,28 +565,28 @@
     <value>Password</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Il seguente file è cifrato e richiede una password per essere aperto:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Richiesta del percorso file</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
-    <value>Una pagina per file</value>
+    <value>Un file per pagina</value>
   </data>
   <data name="OneFilePerScan" xml:space="preserve">
     <value>Un file per scansione</value>
   </data>
   <data name="SeparateByPatchT" xml:space="preserve">
-    <value>Separa files tramite Patch-T</value>
+    <value>Separa file tramite Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>Maggiori informazioni</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Elimina immagini dopo il salvataggio</value>
+    <value>Cancella immagini dopo il salvataggio</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
-    <value>Formato Pagina Personalizzato</value>
+    <value>Formato pagina personalizzato</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
     <value>Nome (opzionale)</value>
@@ -604,7 +604,7 @@
     <value>Qualità immagine</value>
   </data>
   <data name="MaximumQuality" xml:space="preserve">
-    <value>Massima qualità (files grandi)</value>
+    <value>Massima qualità (file di grandi dimensioni)</value>
   </data>
   <data name="BlankPages" xml:space="preserve">
     <value>Pagine vuote</value>
@@ -634,13 +634,13 @@
     <value>Adatta a dimensione pagina</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Taglia a dimensione pagina</value>
+    <value>Ritaglia alla dimensione della pagina</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Capovolgi pagine fronte-retro</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Versione WIA:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementazione Twain:</value>
@@ -682,13 +682,13 @@
     <value>Salva in un singolo file</value>
   </data>
   <data name="SaveToMultipleFiles" xml:space="preserve">
-    <value>Salva in files multipli</value>
+    <value>Salva in file multipli</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Avvia</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
-    <value>Prossima Scansione</value>
+    <value>Prossima scansione</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
     <value>Pronto per la scansione {0}.</value>
@@ -697,9 +697,9 @@
     <value>Apri cartella</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Strumenti</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Abilita la registrazione dei log di debug</value>
   </data>
 </root>

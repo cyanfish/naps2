@@ -109,7 +109,7 @@
     <value>Piano</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Automatico</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -124,13 +124,13 @@
     <value>Predefinito</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Eredita (solo UI nativo)</value>
+    <value>Legacy (solo interfaccia grafica nativa)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Trasferimento nativo</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Trasferimento in memoria</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Vecchio DSM</value>
@@ -142,9 +142,9 @@
     <value>Predefinito</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Veloce</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Migliore</value>
   </data>
 </root>

@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseProfile" xml:space="preserve">
-    <value>Scegli Profilo</value>
+    <value>Scegli profilo</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Cancella</value>
@@ -40,40 +40,40 @@
     <value>Lo scanner selezionato non è stato trovato.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Lo scanner selezionato è disconnesso.</value>
+    <value>Lo scanner selezionato è offline.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>Non hai i permessi per salvare i files in questo percorso.</value>
+    <value>Non hai i permessi per salvare i file in questo percorso.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Errore</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>Bitmap Files (*.bmp)</value>
+    <value>File bitmap (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
+    <value>Enhanced MetaFile di Windows (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
     <value>Exchangeable Image File (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF File (*.gif)</value>
+    <value>File GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG File (*.jpg, *.jpeg)</value>
+    <value>File JPEG (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
     <value>Documento PDF (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
-    <value>PNG File (*.png)</value>
+    <value>File PNG (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
     <value>File TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>File JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nome mancante.</value>
@@ -85,7 +85,7 @@
     <value>Nessun dispositivo selezionato.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Nessuno scanner non trovato.</value>
+    <value>Nessuno scanner trovato.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
     <value>Sovrascrivi file</value>
@@ -130,7 +130,7 @@
     <value>Dimensione stimata del download: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
-    <value>{0} / {1} files</value>
+    <value>{0} / {1} file</value>
   </data>
   <data name="SizeProgress" xml:space="preserve">
     <value>{0} / {1} MB</value>
@@ -142,10 +142,10 @@
     <value>Il file '{0}' non può essere importato. Solo i files PDF generati da NAPS2 possono essere importati.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Errore nel download</value>
+    <value>Errore durante lo scaricamento</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>Uno o più files non possono essere scaricati.</value>
+    <value>Uno o più file non possono essere scaricati.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
     <value>Personalizzato ({0}x{1} {2})</value>
@@ -160,7 +160,7 @@
     <value>Resetta Immagine</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire ed abbandonare tali modifiche?</value>
+    <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
     <value>E' in corso un'operazione. Desideri uscire e cancellare tale operazione?</value>
@@ -175,7 +175,7 @@
     <value>Digitalizzazione pagina {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova ad usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova a usare un driver differente.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Non ci sono fogli nel caricatore.</value>
@@ -190,13 +190,13 @@
     <value>di {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Si è verificato un errore sconosciuto durante la scansione in serie.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Scansione in serie annullata.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Annullamento....</value>
+    <value>Annullamento in corso....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
     <value>Serie completata.</value>
@@ -223,7 +223,7 @@
     <value>Salvataggio risultati della serie...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner ha un supporto duplex, prova ad usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner ha un supporto duplex, prova a usare un driver differente.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -241,7 +241,7 @@
     <value>Progresso del ripristino</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Salva Immagine</value>
+    <value>Salva immagini</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
     <value>Progresso del salvataggio immagini</value>
@@ -268,7 +268,7 @@
     <value>Importazione...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>Invia PDF via e-mail</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
     <value>Progresso invio PDF via email</value>
@@ -280,22 +280,22 @@
     <value>Tutti i file</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>Files immagini</value>
+    <value>File immagini</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>Lo scanner selezionato è occupato.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>Coperchio dello scanner aperto.</value>
+    <value>Il coperchio dello scanner è aperto.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
     <value>Carta inceppata nello scanner.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>Surriscaldamento scanner.</value>
+    <value>Lo scanner si sta riscaldando.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>E' disponibile un aggiornamento per l'OCR.</value>
+    <value>È disponibile un aggiornamento per l'OCR.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Immagine salvata.</value>
@@ -313,7 +313,7 @@
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>Il file non può essere sovrascritto perchè è attualmente in uso.</value>
+    <value>Il file non può essere sovrascritto perché è attualmente in uso.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
     <value>Allineamento...</value>
@@ -322,16 +322,16 @@
     <value>Progresso allineamento</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Necessario download</value>
+    <value>Scaricamento necessario</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
     <value>Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi scaricarlo ora?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Sei sicuro di voler annullare la scansione batch?</value>
+    <value>Sei sicuro di voler annullare la scansione in serie?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Annulla batch</value>
+    <value>Annulla operazione in serie</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Fai una donazione.</value>
@@ -346,7 +346,7 @@
     <value>Il motore OCR non è disponibile. Assicurati di aver installato il pacchetto richiesto:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>Il driver selezionato non è supportato in questo sistema.</value>
+    <value>Il driver selezionato non è supportato da questo sistema.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>OCR in corso</value>
@@ -364,10 +364,10 @@
     <value>Nessun aggiornamento disponibile.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Verifica...</value>
+    <value>Verifica in corso...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Il controllo degli aggiornamenti è disabilitato.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Si è verificato un errore durante l'installazione dell'aggiornamento.</value>
@@ -376,7 +376,7 @@
     <value>Installazione {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>E' disponibile un aggiornamento.</value>
+    <value>È disponibile un aggiornamento.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
     <value>Si è verificato un errore provando ad autorizzare.</value>
