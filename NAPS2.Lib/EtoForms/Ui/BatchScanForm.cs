@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
+using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.Config.Model;
 using NAPS2.EtoForms.Layout;
@@ -104,6 +105,7 @@ public class BatchScanForm : EtoDialogBase
         UpdateUIFromSettings();
 
         Title = UiStrings.BatchScanFormTitle;
+        Icon = new Icon(1f, Icons.application_cascade.ToEtoImage());
 
         FormStateController.FixedHeightLayout = true;
 
