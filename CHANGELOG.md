@@ -1,3 +1,24 @@
+Changes in 7.0b8:
+- Added "Email PDF" support to Mac and Linux
+  - Mac: Apple Mail, Gmail, and Outlook Web options
+  - Linux: Thunderbird, Gmail, and Outlook Web options
+- Added "Print" support to Mac and Linux 
+- Added notifications to Mac and Linux
+  - Also updated notification appearance in general
+- Linux: Added drag & drop support
+- Linux: Improved compatibility with older Linux (e.g. Ubuntu 18.04)
+- Linux: Added dependencies to .deb package  
+- Sane: Show IP addresses for escl/airscan backends
+- Windows: Changed installer publisher to "NAPS2 Software"
+- Improved error log formatting
+- Added debug logging for scanning diagnostics
+  - Turn on by checking "Enable debug logging" in the About window
+  - This will record information about scanning activity on disk
+  - You can find debuglog.txt in the [same folder](https://www.naps2.com/doc/troubleshooting#error-log) as errorlog.txt
+  - Use NoDebugLogging in appsettings.xml to hide the option
+- Added Bosnian and Indonesian languages
+- Bug fixes
+
 Changes in 7.0b7:
 - Bug fixes
 

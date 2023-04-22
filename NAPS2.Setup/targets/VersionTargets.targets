@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <Version>7.0.7</Version>
-        <VersionName>7.0b7</VersionName>
+        <Version>7.0.8</Version>
+        <VersionName>7.0b8</VersionName>
     </PropertyGroup>
 </Project>
