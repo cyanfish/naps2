@@ -166,7 +166,7 @@ public class GtkEtoPlatform : EtoPlatform
             label.MaxWidthChars = EstimateCharactersWide(defaultWidth, label);
             label.GetPreferredSize(out var minSize, out var naturalSize);
             label.GetPreferredHeightForWidth(defaultWidth, out var minHeight, out var naturalHeight);
-            return new SizeF(Math.Min(naturalSize.Width, defaultWidth), naturalHeight);
+            return new SizeF(Math.Min(naturalSize.Width + 10, defaultWidth), naturalHeight);
         }
         return base.GetWrappedSize(control, defaultWidth);
     }

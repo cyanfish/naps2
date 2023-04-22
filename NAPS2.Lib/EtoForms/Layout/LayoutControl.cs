@@ -132,7 +132,7 @@ public class LayoutControl : LayoutElement
             // usually what we want.
             return new SizeF(
                 EtoPlatform.Current.GetWrappedSize(Control, (int) parentBounds.Width).Width,
-                EtoPlatform.Current.GetWrappedSize(Control, wrapDefaultWidth).Height);
+                EtoPlatform.Current.GetWrappedSize(Control, Math.Min((int) parentBounds.Width, wrapDefaultWidth)).Height);
         }
         // Now that we've handled the special cases, this measures the real dimensions of the label given
         // the parent bounds. In a layout cell, this ensures we align correctly (e.g. centered vertically).
