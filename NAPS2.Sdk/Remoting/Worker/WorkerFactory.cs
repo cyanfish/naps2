@@ -111,6 +111,8 @@ public class WorkerFactory : IWorkerFactory
             }
         }
 
+        // TODO: Since we set RedirectStandardOutput, we should consume stdout to prevent the buffer from filling up and
+        // stalling the worker process
         var readyStr = proc.StandardOutput.ReadLine();
         if (readyStr?.Trim() == "error")
         {
