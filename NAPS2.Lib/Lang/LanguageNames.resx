@@ -129,6 +129,9 @@
   <data name="bn" xml:space="preserve">
     <value>বাংলা</value>
   </data>
+  <data name="bs" xml:space="preserve">
+    <value>Bosanski</value>
+  </data>
   <data name="ca" xml:space="preserve">
     <value>Català</value>
   </data>

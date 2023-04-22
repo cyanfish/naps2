@@ -96,6 +96,15 @@ namespace NAPS2.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bosanski.
+        /// </summary>
+        internal static string bs {
+            get {
+                return ResourceManager.GetString("bs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Català.
         /// </summary>
         internal static string ca {
