@@ -142,7 +142,7 @@ public class PdfSettingsForm : EtoDialogBase
             perm.Enabled = encrypt;
         }
 
-        _compat.Enabled = !Config.AppLocked.TryGet(c => c.PdfSettings.Compat, out _);
+        _compat.Enabled = !Config.AppLocked.Has(c => c.PdfSettings.Compat);
     }
 
     private void Save()

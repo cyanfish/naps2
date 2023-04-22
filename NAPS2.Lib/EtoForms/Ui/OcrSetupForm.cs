@@ -82,11 +82,11 @@ public class OcrSetupForm : EtoDialogBase
     private void UpdateView()
     {
         bool isEnabled = _enableOcr.IsChecked();
-        _enableOcr.Enabled = !Config.AppLocked.TryGet(c => c.EnableOcr, out _);
-        _ocrLang.Enabled = isEnabled && !Config.AppLocked.TryGet(c => c.OcrLanguageCode, out _);
-        _ocrMode.Enabled = isEnabled && !Config.AppLocked.TryGet(c => c.OcrMode, out _);
-        _ocrAfterScanning.Enabled = isEnabled && !Config.AppLocked.TryGet(c => c.OcrAfterScanning, out _);
-        _moreLanguages.Enabled = !Config.AppLocked.TryGet(c => c.OcrLanguageCode, out _);
+        _enableOcr.Enabled = !Config.AppLocked.Has(c => c.EnableOcr);
+        _ocrLang.Enabled = isEnabled && !Config.AppLocked.Has(c => c.OcrLanguageCode);
+        _ocrMode.Enabled = isEnabled && !Config.AppLocked.Has(c => c.OcrMode);
+        _ocrAfterScanning.Enabled = isEnabled && !Config.AppLocked.Has(c => c.OcrAfterScanning);
+        _moreLanguages.Enabled = !Config.AppLocked.Has(c => c.OcrLanguageCode);
     }
 
     private void EnableOcr_CheckedChanged(object? sender, EventArgs e)
@@ -102,7 +102,7 @@ public class OcrSetupForm : EtoDialogBase
 
     private void Save()
     {
-        if (!Config.AppLocked.TryGet(c => c.EnableOcr, out _))
+        if (!Config.AppLocked.Has(c => c.EnableOcr))
         {
             var transact = Config.User.BeginTransaction();
             transact.Set(c => c.EnableOcr, _enableOcr.IsChecked());

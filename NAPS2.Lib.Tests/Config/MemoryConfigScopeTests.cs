@@ -9,10 +9,10 @@ public class MemoryConfigScopeTests
     public void GetReturnsFalseForUnset()
     {
         var scope = new MemoryConfigScope<TestConfig>();
-        Assert.False(scope.TryGet(c => c.UserName, out _));
-        Assert.False(scope.TryGet(c => c.Sub.X, out _));
-        Assert.False(scope.TryGet(c => c.Sub.Y, out _));
-        Assert.False(scope.TryGet(c => c.Sub.SubSub.Val, out _));
+        Assert.False(scope.Has(c => c.UserName));
+        Assert.False(scope.Has(c => c.Sub.X));
+        Assert.False(scope.Has(c => c.Sub.Y));
+        Assert.False(scope.Has(c => c.Sub.SubSub.Val));
     }
 
     [Fact]
@@ -20,7 +20,7 @@ public class MemoryConfigScopeTests
     {
         // Accessing a child config directly on the scope should fail
         var scope = new MemoryConfigScope<TestConfig>();
-        Assert.Throws<ArgumentException>(() => scope.TryGet(c => c.Sub, out _));
+        Assert.Throws<ArgumentException>(() => scope.Has(c => c.Sub));
     }
 
     [Fact]
@@ -99,17 +99,17 @@ public class MemoryConfigScopeTests
         scope.Set(c => c.Sub.Y, null);
         scope.Set(c => c.Sub.SubSub.Val, "something");
 
-        Assert.True(scope.TryGet(c => c.UserName, out _));
+        Assert.True(scope.Has(c => c.UserName));
         scope.Remove(c => c.UserName);
-        Assert.False(scope.TryGet(c => c.UserName, out _));
+        Assert.False(scope.Has(c => c.UserName));
 
-        Assert.True(scope.TryGet(c => c.Sub.X, out _));
-        Assert.True(scope.TryGet(c => c.Sub.Y, out _));
-        Assert.True(scope.TryGet(c => c.Sub.SubSub.Val, out _));
+        Assert.True(scope.Has(c => c.Sub.X));
+        Assert.True(scope.Has(c => c.Sub.Y));
+        Assert.True(scope.Has(c => c.Sub.SubSub.Val));
         scope.Remove(c => c.Sub);
-        Assert.False(scope.TryGet(c => c.Sub.X, out _));
-        Assert.False(scope.TryGet(c => c.Sub.Y, out _));
-        Assert.False(scope.TryGet(c => c.Sub.SubSub.Val, out _));
+        Assert.False(scope.Has(c => c.Sub.X));
+        Assert.False(scope.Has(c => c.Sub.Y));
+        Assert.False(scope.Has(c => c.Sub.SubSub.Val));
     }
 
     [Fact]
@@ -124,10 +124,10 @@ public class MemoryConfigScopeTests
 
         scope.Remove(c => c);
 
-        Assert.False(scope.TryGet(c => c.UserName, out _));
-        Assert.False(scope.TryGet(c => c.Sub.X, out _));
-        Assert.False(scope.TryGet(c => c.Sub.Y, out _));
-        Assert.False(scope.TryGet(c => c.Sub.SubSub.Val, out _));
+        Assert.False(scope.Has(c => c.UserName));
+        Assert.False(scope.Has(c => c.Sub.X));
+        Assert.False(scope.Has(c => c.Sub.Y));
+        Assert.False(scope.Has(c => c.Sub.SubSub.Val));
     }
 
     [Fact]
@@ -138,10 +138,10 @@ public class MemoryConfigScopeTests
 
         scope.CopyFrom(source);
 
-        Assert.False(scope.TryGet(c => c.UserName, out _));
-        Assert.False(scope.TryGet(c => c.Sub.X, out _));
-        Assert.False(scope.TryGet(c => c.Sub.Y, out _));
-        Assert.False(scope.TryGet(c => c.Sub.SubSub.Val, out _));
+        Assert.False(scope.Has(c => c.UserName));
+        Assert.False(scope.Has(c => c.Sub.X));
+        Assert.False(scope.Has(c => c.Sub.Y));
+        Assert.False(scope.Has(c => c.Sub.SubSub.Val));
 
         scope.Set(c => c.UserName, "blah");
         scope.Set(c => c.Sub.SubSub.Val, "something");
@@ -151,13 +151,13 @@ public class MemoryConfigScopeTests
         Assert.Equal("blah", userName);
         Assert.True(scope.TryGet(c => c.Sub.SubSub.Val, out var val));
         Assert.Equal("something", val);
-        Assert.False(scope.TryGet(c => c.Sub.X, out _));
-        Assert.False(scope.TryGet(c => c.Sub.Y, out _));
+        Assert.False(scope.Has(c => c.Sub.X));
+        Assert.False(scope.Has(c => c.Sub.Y));
 
         source = new ConfigStorage<TestConfig>();
         scope.CopyFrom(source);
-        Assert.True(scope.TryGet(c => c.UserName, out _));
-        Assert.True(scope.TryGet(c => c.Sub.SubSub.Val, out _));
+        Assert.True(scope.Has(c => c.UserName));
+        Assert.True(scope.Has(c => c.Sub.SubSub.Val));
     }
 
     [Config]

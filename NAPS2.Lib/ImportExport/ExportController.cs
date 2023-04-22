@@ -133,7 +133,7 @@ public class ExportController : IExportController
             return false;
         }
 
-        if (!_config.User.TryGet(c => c.EmailSetup.ProviderType, out _))
+        if (!_config.User.Has(c => c.EmailSetup.ProviderType))
         {
             // First email attempt; prompt for a provider
             var form = _formFactory.Create<EmailProviderForm>();

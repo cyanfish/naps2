@@ -81,23 +81,23 @@ public class TransactionConfigScopeTests
     public void SetThenRemove()
     {
         _transact.Set(c => c.Culture, "de");
-        Assert.True(_transact.TryGet(c => c.Culture, out _));
+        Assert.True(_transact.Has(c => c.Culture));
         _transact.Remove(c => c.Culture);
-        Assert.False(_transact.TryGet(c => c.Culture, out _));
+        Assert.False(_transact.Has(c => c.Culture));
         Assert.True(_transact.HasChanges);
 
         _transact.Commit();
         Assert.False(_transact.HasChanges);
-        Assert.False(_baseScope.TryGet(c => c.Culture, out _));
+        Assert.False(_baseScope.Has(c => c.Culture));
     }
 
     [Fact]
     public void RemoveThenSet()
     {
         _transact.Remove(c => c.Culture);
-        Assert.False(_transact.TryGet(c => c.Culture, out _));
+        Assert.False(_transact.Has(c => c.Culture));
         _transact.Set(c => c.Culture, "de");
-        Assert.True(_transact.TryGet(c => c.Culture, out _));
+        Assert.True(_transact.Has(c => c.Culture));
         Assert.True(_transact.HasChanges);
 
         _transact.Commit();
@@ -109,9 +109,9 @@ public class TransactionConfigScopeTests
     public void RemoveParentThenSet()
     {
         _transact.Remove(c => c.PdfSettings);
-        Assert.False(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
+        Assert.False(_transact.Has(c => c.PdfSettings.DefaultFileName));
         _transact.Set(c => c.PdfSettings.DefaultFileName, "test");
-        Assert.True(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
+        Assert.True(_transact.Has(c => c.PdfSettings.DefaultFileName));
         Assert.True(_transact.HasChanges);
 
         _transact.Commit();
@@ -123,13 +123,13 @@ public class TransactionConfigScopeTests
     public void SetThenRemoveParent()
     {
         _transact.Set(c => c.PdfSettings.DefaultFileName, "test");
-        Assert.True(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
+        Assert.True(_transact.Has(c => c.PdfSettings.DefaultFileName));
         _transact.Remove(c => c.PdfSettings);
-        Assert.False(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
+        Assert.False(_transact.Has(c => c.PdfSettings.DefaultFileName));
         Assert.True(_transact.HasChanges);
 
         _transact.Commit();
         Assert.False(_transact.HasChanges);
-        Assert.False(_transact.TryGet(c => c.PdfSettings.DefaultFileName, out _));
+        Assert.False(_transact.Has(c => c.PdfSettings.DefaultFileName));
     }
 }

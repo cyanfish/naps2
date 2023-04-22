@@ -22,6 +22,8 @@ public abstract class ConfigScope<TConfig>
 
     public ConfigScopeMode Mode { get; }
 
+    public bool Has<T>(Expression<Func<TConfig, T>> accessor) => TryGet(accessor, out _);
+
     public bool TryGet<T>(Expression<Func<TConfig, T>> accessor, out T value)
     {
         var result = TryGet(ConfigLookup.ExpandExpression(accessor), out var obj);
