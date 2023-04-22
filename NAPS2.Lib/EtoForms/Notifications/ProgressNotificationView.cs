@@ -72,7 +72,7 @@ public class ProgressNotificationView : NotificationView
     }
 
     protected override LayoutElement PrimaryContent => L.Row(
-        _textLabel,
+        _textLabel.DynamicWrap(180).MaxWidth(180),
         C.Filler().Visible(_numberVis),
         _numberLabel.Visible(_numberVis));
 
