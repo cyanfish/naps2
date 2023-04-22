@@ -1,5 +1,7 @@
 Package: naps2
 Source: naps2
+Depends: libsane1
+Recommends: sane-airscan
 Priority: optional
 Section: graphics
 Maintainer: Ben Olden-Cooligan <ben.cyanfish@gmail.com>
