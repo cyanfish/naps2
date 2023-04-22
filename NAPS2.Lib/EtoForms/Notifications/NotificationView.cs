@@ -41,33 +41,34 @@ public abstract class NotificationView : IDisposable
         closeButton.Click += (_, _) => Manager!.Hide(Model);
         drawable.MouseUp += (_, _) => NotificationClicked();
         drawable.Load += (_, _) => SetUpHideTimeout(drawable);
-        return L.Overlay(
-            drawable.MinWidth(120),
-            L.Column(
-                L.Row(
-                    PrimaryContent,
-                    ShowClose ? C.Spacer().Width(CLOSE_BUTTON_SIZE) : C.None()),
-                SecondaryContent
-            ).Padding(10, 8, 10, 8),
-            ShowClose
-                ? L.Column(
+        return L.Row(
+            C.Filler(),
+            L.Overlay(
+                drawable.MinWidth(120),
+                L.Column(
                     L.Row(
-                        C.Filler(),
-                        closeButton.Size(CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE)
-                    ),
-                    C.Filler()
-                ).Padding(5, 5, 5, 5)
-                : C.None());
+                        PrimaryContent,
+                        ShowClose ? C.Spacer().Width(CLOSE_BUTTON_SIZE) : C.None()),
+                    SecondaryContent
+                ).Padding(10, 8, 10, 8),
+                ShowClose
+                    ? L.Column(
+                        L.Row(
+                            C.Filler(),
+                            closeButton.Size(CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE)
+                        ),
+                        C.Filler()
+                    ).Padding(5, 5, 5, 5)
+                    : C.None()
+            )
+        );
     }
 
     private void SetUpHideTimeout(Control control)
     {
         Timer CreateTimer()
         {
-            return new Timer(_ =>
-            {
-                Manager!.Hide(Model);
-            }, null, HideTimeout, -1);
+            return new Timer(_ => Manager!.Hide(Model), null, HideTimeout, -1);
         }
 
         if (HideTimeout > 0)
@@ -81,6 +82,7 @@ public abstract class NotificationView : IDisposable
                 control.MouseEnter += (_, _) => timer.Dispose();
                 control.MouseLeave += (_, _) => timer = CreateTimer();
             }
+
             Manager!.TimersStarting += StartTimer;
         }
     }
