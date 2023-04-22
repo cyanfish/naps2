@@ -1,7 +1,7 @@
 # NAPS2 - Not Another PDF Scanner
 
 <p align="center">
-<img src="https://www.naps2.com/images/naps2-desktop-win.png?1" width="500" alt="NAPS2 on Windows" /> <img src="https://www.naps2.com/images/naps2-desktop-mac.png?1" width="500" alt="NAPS2 on Mac" /> <img src="https://www.naps2.com/images/naps2-desktop-linux.png?1" width="500" alt="NAPS2 on Linux" />
+<img src="https://www.naps2.com/images/naps2-desktop-win.png?1" width="400" alt="NAPS2 on Windows" /> <img src="https://www.naps2.com/images/naps2-desktop-mac.png?1" width="400" alt="NAPS2 on Mac" /> <img src="https://www.naps2.com/images/naps2-desktop-linux.png?1" width="400" alt="NAPS2 on Linux" />
   <br/>
   <i>NAPS2 on Windows, Mac, and Linux</i>
 </p>
