@@ -1,19 +1,25 @@
 # NAPS2 - Not Another PDF Scanner
 
-NAPS2 is a document scanning application with a focus on simplicity and ease of use. Scan your documents from WIA- and TWAIN-compatible scanners, organize the pages as you like, and save them as PDF, TIFF, JPEG, PNG, and other file formats.
+<p align="center">
+<img src="https://www.naps2.com/images/naps2-desktop-win.png?1" width="500" alt="NAPS2 on Windows" /> <img src="https://www.naps2.com/images/naps2-desktop-mac.png?1" width="500" alt="NAPS2 on Mac" /> <img src="https://www.naps2.com/images/naps2-desktop-linux.png?1" width="500" alt="NAPS2 on Linux" />
+  <br/>
+  <i>NAPS2 on Windows, Mac, and Linux</i>
+</p>
+
+NAPS2 is a document scanning application with a focus on simplicity and ease of use. Scan your documents from WIA, TWAIN, SANE, and ESCL scanners, organize the pages as you like, and save them as PDF, TIFF, JPEG, or PNG. Optical character recognition (OCR) is available using [Tesseract](https://github.com/tesseract-ocr/tesseract).
 
 System requirements:
 - Windows 7+ (x64, x86)
 - macOS 10.15+ (x64, arm64)
-- Linux (x64, arm64) (GTK 3.20+, glibc 2.27+)
+- Linux (x64, arm64) (GTK 3.20+, glibc 2.27+, libsane)
 
 Visit the NAPS2 home page at [www.naps2.com](http://www.naps2.com).
 
 Other links:
-- [Documentation](http://www.naps2.com/support.html)
-- [Translations](http://translate.naps2.com/) - [Doc](http://www.naps2.com/doc-translations.html)
-- [File a Ticket](https://sourceforge.net/p/naps2/tickets/) - For bug reports, feature requests, and general support inquiries.
-- [Discussion Forums](https://sourceforge.net/p/naps2/discussion/general/) - For more open-ended discussion.
+- [Downloads](https://www.naps2.com/download)
+- [Documentation](https://www.naps2.com/support)
+- [Translations](https://translate.naps2.com/)
+- [File a Ticket](https://sourceforge.net/p/naps2/tickets/)
 - [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M77MFAP2ZV9RG)
 
 ## NAPS2.Sdk (for developers)
@@ -24,7 +30,7 @@ Other links:
 [Read more.](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk)
 
 <!-- TODO: Move dev onboarding to the github wiki -->
-Looking to contribute to NAPS2 or NAPS2.Sdk? Have a look at the [Developer Onboarding](https://www.naps2.com/doc-dev-onboarding.html) page.
+Looking to contribute to NAPS2 or NAPS2.Sdk? Have a look at the [wiki](https://github.com/cyanfish/naps2/wiki/1.-Building-&-Development-Environment).
 
 ## License
 
