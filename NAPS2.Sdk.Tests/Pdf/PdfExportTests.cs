@@ -308,6 +308,7 @@ public class PdfExporterTests : ContextualTests
     public async Task ExportProgress(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
 
         var progressMock = new Mock<ProgressCallback>();
 
@@ -329,6 +330,7 @@ public class PdfExporterTests : ContextualTests
     public async Task ExportCancellation(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
 
         var progressMock = new Mock<ProgressCallback>();
         var cts = new CancellationTokenSource();

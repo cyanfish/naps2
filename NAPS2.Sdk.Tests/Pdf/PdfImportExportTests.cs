@@ -26,6 +26,7 @@ public class PdfImportExportTests : ContextualTests
     public async Task ImportExport(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
@@ -39,6 +40,7 @@ public class PdfImportExportTests : ContextualTests
     public async Task ImportInsertExport(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
@@ -60,6 +62,7 @@ public class PdfImportExportTests : ContextualTests
     public async Task ImportTransformExport(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
@@ -117,6 +120,7 @@ public class PdfImportExportTests : ContextualTests
     public async Task ImportExportEncrypted(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);

@@ -75,6 +75,8 @@ public class ContextualTests : IDisposable
             new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
     }
 
+    public void SetUpFakeOcr() => SetUpFakeOcr(new());
+
     public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage)
     {
         var ocrMock = new Mock<IOcrEngine>();
