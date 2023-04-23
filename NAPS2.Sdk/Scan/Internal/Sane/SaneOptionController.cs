@@ -5,12 +5,12 @@ namespace NAPS2.Scan.Internal.Sane;
 
 internal class SaneOptionController
 {
-    private readonly SaneDevice _device;
+    private readonly ISaneDevice _device;
     // TODO: Move exception handling + logging out if we split NAPS2.Sane off into a separate library
     private readonly ILogger _logger;
     private Dictionary<string, SaneOption> _options = null!;
 
-    public SaneOptionController(SaneDevice device, ILogger logger)
+    public SaneOptionController(ISaneDevice device, ILogger logger)
     {
         _device = device;
         _logger = logger;
@@ -53,7 +53,7 @@ internal class SaneOptionController
         }
     }
 
-    public bool TrySet(string name, IEnumerable<string> valueSet)
+    public bool TrySet(string name, SaneOptionMatcher matcher)
     {
         _logger.LogDebug($"Maybe setting {name}");
         if (!_options.ContainsKey(name))
@@ -63,10 +63,9 @@ internal class SaneOptionController
             return false;
         try
         {
-            var valueHashSet = valueSet.ToHashSet();
             foreach (var value in opt.StringList!)
             {
-                if (valueHashSet.Contains(value))
+                if (matcher.Matches(value))
                 {
                     _logger.LogDebug($"Setting {name} to {value}");
                     _device.SetOption(opt, value, out var info);

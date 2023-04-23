@@ -33,6 +33,12 @@ public class SaneOption
         }
     }
 
+    internal static SaneOption CreateForTesting(int index, string name, string[] stringList)
+    {
+        return new SaneOption(index, name, "", "", SaneValueType.String, SaneUnit.None, 0, SaneCapabilities.SoftSelect,
+            SaneConstraintType.StringList, stringList.ToList(), null, null);
+    }
+
     internal SaneOption(SaneOptionDescriptor descriptor, int index)
     {
         Index = index;
@@ -73,6 +79,24 @@ public class SaneOption
                     Quant = quant
                 };
         }
+    }
+
+    private SaneOption(int index, string name, string title, string desc, SaneValueType type, SaneUnit unit, int size,
+        SaneCapabilities caps, SaneConstraintType constraintType, List<string>? stringList, List<double>? wordList,
+        SaneRange? range)
+    {
+        Index = index;
+        Name = name;
+        Title = title;
+        Desc = desc;
+        Type = type;
+        Unit = unit;
+        Size = size;
+        Capabilities = caps;
+        ConstraintType = constraintType;
+        StringList = stringList;
+        WordList = wordList;
+        Range = range;
     }
 
     public int Index { get; }

@@ -7,27 +7,6 @@ namespace NAPS2.Scan.Internal.Sane;
 
 internal class SaneScanDriver : IScanDriver
 {
-    private static readonly HashSet<string> FlatbedStrs = new[]
-    {
-        SaneOptionTranslations.Flatbed,
-        SaneOptionTranslations.FB,
-        SaneOptionTranslations.fb
-    }.SelectMany(x => x).ToHashSet();
-
-    private static readonly HashSet<string> FeederStrs = new[]
-    {
-        SaneOptionTranslations.ADF,
-        SaneOptionTranslations.adf,
-        SaneOptionTranslations.Automatic_Document_Feeder,
-        SaneOptionTranslations.ADF_Front
-    }.SelectMany(x => x).ToHashSet();
-
-    private static readonly HashSet<string> DuplexStrs = new[]
-    {
-        SaneOptionTranslations.Duplex,
-        SaneOptionTranslations.ADF_Duplex
-    }.SelectMany(x => x).ToHashSet();
-
     private readonly ScanningContext _scanningContext;
 
     public SaneScanDriver(ScanningContext scanningContext)
@@ -101,12 +80,11 @@ internal class SaneScanDriver : IScanDriver
                 if (cancelToken.IsCancellationRequested) return;
                 using var device = client.OpenDevice(options.Device!.ID!);
                 if (cancelToken.IsCancellationRequested) return;
-                SetOptions(device, options);
+                SetOptions(device, options, out bool isFeeder);
                 // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
                 cancelToken.Register(device.Cancel);
 
-                // TODO: Can we validate flatbed and feeder support?
-                if (options.PaperSource is PaperSource.Flatbed or PaperSource.Auto)
+                if (!isFeeder)
                 {
                     var image = ScanPage(device, scanEvents) ??
                                 throw new DeviceException("SANE expected image");
@@ -151,32 +129,39 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
-    private void SetOptions(SaneDevice device, ScanOptions options)
+    internal void SetOptions(ISaneDevice device, ScanOptions options, out bool isFeeder)
     {
         var controller = new SaneOptionController(device, _scanningContext.Logger);
 
-        // TODO: Check the SOURCE option possible values to check flatbed/feeder support
-        if (options.PaperSource is PaperSource.Flatbed or PaperSource.Auto)
+        isFeeder = options.PaperSource is PaperSource.Feeder or PaperSource.Duplex; 
+        if (options.PaperSource == PaperSource.Auto)
         {
-            controller.TrySet(SaneOptionNames.SOURCE, FlatbedStrs);
+            if (!controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Flatbed))
+            {
+                isFeeder = controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder);
+            }
+        }
+        else if (options.PaperSource == PaperSource.Flatbed)
+        {
+            controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Flatbed);
         }
         else if (options.PaperSource == PaperSource.Feeder)
         {
             // We could throw NoFeederSupportException on failure, except this might be a feeder-only scanner.
-            controller.TrySet(SaneOptionNames.SOURCE, FeederStrs);
+            controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder);
         }
         else if (options.PaperSource == PaperSource.Duplex)
         {
-            controller.TrySet(SaneOptionNames.SOURCE, DuplexStrs);
-            controller.TrySet(SaneOptionNames.ADF_MODE1, DuplexStrs);
-            controller.TrySet(SaneOptionNames.ADF_MODE2, DuplexStrs);
+            controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex);
+            controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex);
+            controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex);
         }
 
         var mode = options.BitDepth switch
         {
-            BitDepth.BlackAndWhite => SaneOptionTranslations.Lineart,
-            BitDepth.Grayscale => SaneOptionTranslations.Gray,
-            _ => SaneOptionTranslations.Color
+            BitDepth.BlackAndWhite => SaneOptionMatchers.BlackAndWhite,
+            BitDepth.Grayscale => SaneOptionMatchers.Grayscale,
+            _ => SaneOptionMatchers.Color
         };
         controller.TrySet(SaneOptionNames.MODE, mode);
 
@@ -306,60 +291,6 @@ internal class SaneScanDriver : IScanDriver
         return dataStream;
     }
 
-    // private KeyValueScanOptions GetKeyValueOptions(ScanOptions options)
-    // {
-    //     var availableOptions =
-    //         SaneOptionCache.GetOrSet(options.Device!.ID!, () => GetAvailableOptions(options.Device!.ID!));
-    //     var keyValueOptions = new KeyValueScanOptions(options.SaneOptions.KeyValueOptions ?? new KeyValueScanOptions());
-    //
-    //     bool ChooseStringOption(string name, Func<string, bool> match)
-    //     {
-    //         var opt = availableOptions.Get(name);
-    //         var choice = opt?.StringList?.FirstOrDefault(match);
-    //         if (choice != null)
-    //         {
-    //             keyValueOptions[name] = choice;
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-    //
-    //     bool ChooseNumericOption(string name, decimal value)
-    //     {
-    //         var opt = availableOptions.Get(name);
-    //         if (opt?.ConstraintType == SaneConstraintType.WordList)
-    //         {
-    //             var choice = opt.WordList?.OrderBy(x => Math.Abs(x - value)).FirstOrDefault();
-    //             if (choice != null)
-    //             {
-    //                 keyValueOptions[name] = choice.Value.ToString(CultureInfo.InvariantCulture);
-    //                 return true;
-    //             }
-    //         }
-    //         else if (opt?.ConstraintType == SaneConstraintType.Range)
-    //         {
-    //             if (value < opt.Range!.Min)
-    //             {
-    //                 value = opt.Range.Min;
-    //             }
-    //             if (value > opt.Range.Max)
-    //             {
-    //                 value = opt.Range.Max;
-    //             }
-    //             if (opt.Range.Quant != 0)
-    //             {
-    //                 var mod = (value - opt.Range.Min) % opt.Range.Quant;
-    //                 if (mod != 0)
-    //                 {
-    //                     value = mod < opt.Range.Quant / 2 ? value - mod : value + opt.Range.Quant - mod;
-    //                 }
-    //             }
-    //             keyValueOptions[name] = value.ToString("0.#####", CultureInfo.InvariantCulture);
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-    //
     //     bool IsFlatbedChoice(string choice) =>
     //         choice.IndexOf("flatbed", StringComparison.InvariantCultureIgnoreCase) >= 0;
     //
@@ -409,39 +340,4 @@ internal class SaneScanDriver : IScanDriver
     //         ChooseNumericOption("--depth", 1);
     //         ChooseNumericOption("--threshold", (-options.Brightness + 1000) / 20m);
     //     }
-    //
-    //     var width = options.PageSize!.WidthInMm;
-    //     var height = options.PageSize.HeightInMm;
-    //     ChooseNumericOption("-x", width);
-    //     ChooseNumericOption("-y", height);
-    //     var maxWidth = availableOptions.Get("-l")?.Range?.Max;
-    //     var maxHeight = availableOptions.Get("-t")?.Range?.Max;
-    //     if (maxWidth != null)
-    //     {
-    //         if (options.PageAlign == HorizontalAlign.Center)
-    //         {
-    //             ChooseNumericOption("-l", (maxWidth.Value - width) / 2);
-    //         }
-    //         else if (options.PageAlign == HorizontalAlign.Right)
-    //         {
-    //             ChooseNumericOption("-l", maxWidth.Value - width);
-    //         }
-    //         else
-    //         {
-    //             ChooseNumericOption("-l", 0);
-    //         }
-    //     }
-    //     if (maxHeight != null)
-    //     {
-    //         ChooseNumericOption("-t", 0);
-    //     }
-    //
-    //     if (!ChooseNumericOption("--resolution", options.Dpi))
-    //     {
-    //         ChooseNumericOption("--x-resolution", options.Dpi);
-    //         ChooseNumericOption("--y-resolution", options.Dpi);
-    //     }
-    //
-    //     return keyValueOptions;
-    // }
 }

@@ -6,4 +6,8 @@ public interface ISaneDevice
     void Start();
     SaneReadParameters GetParameters();
     bool Read(byte[] buffer, out int len);
+    IEnumerable<SaneOption> GetOptions();
+    void SetOption(SaneOption option, double value, out SaneOptionSetInfo info);
+    void SetOption(SaneOption option, string value, out SaneOptionSetInfo info);
+    void GetOption(SaneOption option, out double value);
 }
