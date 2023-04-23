@@ -86,13 +86,17 @@ public class ContextualTests : IDisposable
                 {
                     var ocrImage = ImageContext.Load(path);
                     await Task.Delay(200);
-                    foreach (var image in ocrTextByImage.Keys)
+                    // Lock so we don't try to access images simultaneously
+                    lock (ocrTextByImage)
                     {
-                        if (ImageAsserts.IsSimilar(image, ocrImage))
+                        foreach (var image in ocrTextByImage.Keys)
                         {
-                            return new OcrResult((0, 0, 100, 100),
-                                ImmutableList.Create(
-                                    new OcrResultElement(ocrTextByImage[image], "eng", false, (0, 0, 10, 10))));
+                            if (ImageAsserts.IsSimilar(image, ocrImage))
+                            {
+                                return new OcrResult((0, 0, 100, 100),
+                                    ImmutableList.Create(
+                                        new OcrResultElement(ocrTextByImage[image], "eng", false, (0, 0, 10, 10))));
+                            }
                         }
                     }
                     return null;
