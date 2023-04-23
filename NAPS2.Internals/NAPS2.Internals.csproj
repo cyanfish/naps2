@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>net6;net462;netstandard2.0</TargetFrameworks>
         <Nullable>enable</Nullable>
-        <RootNamespace>NAPS2.Internals</RootNamespace>
+        <RootNamespace>NAPS2</RootNamespace>
 
         <Title>NAPS2.Internals</Title>
     </PropertyGroup>
