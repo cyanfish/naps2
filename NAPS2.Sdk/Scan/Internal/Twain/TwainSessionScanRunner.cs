@@ -61,7 +61,7 @@ internal class TwainSessionScanRunner
             Debug.WriteLine("NAPS2.TW - Opening session");
             var dsmHandle = _handleManager.GetDsmHandle(_options.DialogParent, _options.UseNativeUI);
 #if NET6_0_OR_GREATER
-            var rc = _session.Open();
+            var rc = _session.Open(new Win32MessageLoopHook(_logger));
 #else
             var rc = dsmHandle == IntPtr.Zero
                 ? _session.Open()
@@ -404,4 +404,5 @@ internal class TwainSessionScanRunner
         cap.SetValue(closest);
     }
 }
+
 #endif
