@@ -9,9 +9,7 @@ public static class RemotingHelper
     {
         if (error != null && !string.IsNullOrEmpty(error.Type))
         {
-            var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))!
-                .GetTypes()
-                .FirstOrDefault(x => x.FullName == error.Type);
+            var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))!.GetType(error.Type, false);
             var exception = CreateExceptionType(exceptionType);
             var messageField =
                 typeof(Exception).GetField("_message", BindingFlags.NonPublic | BindingFlags.Instance);
