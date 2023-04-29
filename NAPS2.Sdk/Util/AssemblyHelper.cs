@@ -51,7 +51,7 @@ public class AssemblyHelper
 
     public static string Title => GetAssemblyAttributeValue<AssemblyTitleAttribute>(x => x.Title);
 
-    public static string Version => Assembly.GetEntryAssembly()!.GetName().Version!.ToString();
+    public static Version Version => Assembly.GetEntryAssembly()!.GetName().Version!;
 
     public static string Description => GetAssemblyAttributeValue<AssemblyDescriptionAttribute>(x => x.Description);
 

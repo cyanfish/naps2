@@ -14,12 +14,13 @@ namespace NAPS2.Scan.Internal.Twain;
 /// </summary>
 public class LocalTwainSessionController : ITwainSessionController
 {
-    public static readonly TWIdentity TwainAppId =
-        TWIdentity.CreateFromAssembly(DataGroups.Image | DataGroups.Control, Assembly.GetEntryAssembly());
+    public static readonly TWIdentity TwainAppId;
 
     static LocalTwainSessionController()
     {
         PlatformInfo.Current.Log.IsDebugEnabled = true;
+        TwainAppId = TWIdentity.Create(DataGroups.Image | DataGroups.Control, AssemblyHelper.Version,
+            AssemblyHelper.Company, AssemblyHelper.Product, AssemblyHelper.Product, AssemblyHelper.Description);
     }
 
     private static readonly LazyRunner TwainDsmSetup = new(() =>
@@ -60,7 +61,12 @@ public class LocalTwainSessionController : ITwainSessionController
     {
         PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
         var session = new TwainSession(TwainAppId);
-        session.Open();
+        // TODO: Standardize on custom hook?
+// #if NET6_0_OR_GREATER
+        session.Open(new Win32MessageLoopHook(_logger));
+// #else
+        // session.Open();
+// #endif
         try
         {
             return session.GetSources().Select(ds => new ScanDevice(ds.Name, ds.Name)).ToList();
