@@ -31,6 +31,18 @@ public static class ProjectHelper
         return version;
     }
 
+    public static string GetSdkVersion()
+    {
+        var sdkTargetsPath = Path.Combine(Paths.Setup, "targets", "SdkPackageTargets.targets");
+        var sdkTargetsFile = XDocument.Load(sdkTargetsPath);
+        var version = sdkTargetsFile.Descendants().SingleOrDefault(x => x.Name.LocalName == "PackageVersion")?.Value;
+        if (version == null)
+        {
+            throw new Exception($"Could not read sdk version: {sdkTargetsPath}");
+        }
+        return version;
+    }
+
     public static string GetPackagePath(string ext, Platform platform, string? version = null,
         string? packageName = null)
     {

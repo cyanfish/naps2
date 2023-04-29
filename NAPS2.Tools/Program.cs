@@ -6,6 +6,7 @@ using NAPS2.Tools.Project.Packaging;
 using NAPS2.Tools.Project.Releasing;
 using NAPS2.Tools.Project.Verification;
 using NAPS2.Tools.Project.Workflows;
+using NAPS2.Tools.Sdk;
 
 namespace NAPS2.Tools;
 
@@ -17,8 +18,6 @@ public static class Program
     // - Replaces the corresponding .po file
     // - Updates language resources for that language
     // - Possibly then runs "pkg zip --name test-{lang}"
-
-    // TODO: Add a "setver" command that updates version targets, Info.plist, and anything else that needs a version
 
     public static int Main(string[] args)
     {
@@ -41,7 +40,8 @@ public static class Program
             .Add<WebsiteUpdateOptions, WebsiteUpdateCommand>()
             .Add<UploadOptions, UploadCommand>()
             .Add<DocOptions, DocCommand>()
-            .Add<SaneOptsOptions, SaneOptsCommand>();
+            .Add<SaneOptsOptions, SaneOptsCommand>()
+            .Add<LocalSdkOptions, LocalSdkCommand>();
 
         var result = Parser.Default.ParseArguments(args, commands.OptionTypes);
         if (result.Errors.Any())
