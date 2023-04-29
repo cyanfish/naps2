@@ -1,6 +1,6 @@
 using CommandLine;
 
-namespace NAPS2.Tools.Project;
+namespace NAPS2.Tools;
 
 public class OptionsBase
 {

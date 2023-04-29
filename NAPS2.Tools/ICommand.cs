@@ -1,4 +1,4 @@
-namespace NAPS2.Tools.Project;
+namespace NAPS2.Tools;
 
 public interface ICommand<in TOptions> where TOptions : OptionsBase
 {
