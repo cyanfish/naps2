@@ -28,6 +28,7 @@ public static class TargetsHelper
                 "release" => new[] { BuildType.Release },
                 "msi" => new[] { BuildType.Msi },
                 "zip" => new[] { BuildType.Zip },
+                "sdk" => new[] { BuildType.Sdk },
                 _ => Array.Empty<BuildType>()
             };
     }

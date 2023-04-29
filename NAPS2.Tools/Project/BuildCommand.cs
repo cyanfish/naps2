@@ -6,6 +6,10 @@ public class BuildCommand : ICommand<BuildOptions>
 {
     public int Run(BuildOptions opts)
     {
+        if (opts.BuildType?.ToLowerInvariant() == "sdk")
+        {
+            Cli.Run("dotnet", "publish NAPS2.Sdk.Worker/NAPS2.Sdk.Worker.Build.csproj -c Release");
+        }
         foreach (var target in TargetsHelper.EnumerateBuildTargets(opts.BuildType))
         {
             var config = GetConfig(target);
@@ -47,6 +51,7 @@ public class BuildCommand : ICommand<BuildOptions>
                 : "Release",
         BuildType.Msi => "Release-Msi",
         BuildType.Zip => "Release-Zip",
+        BuildType.Sdk => "Sdk",
         _ => throw new ArgumentException()
     };
 }

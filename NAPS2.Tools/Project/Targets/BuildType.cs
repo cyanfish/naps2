@@ -5,5 +5,6 @@ public enum BuildType
     Debug,
     Release,
     Msi,
-    Zip
+    Zip,
+    Sdk
 }
