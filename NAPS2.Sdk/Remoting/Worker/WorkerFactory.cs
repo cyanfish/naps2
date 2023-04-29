@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using GrpcDotNetNamedPipes;
+using Microsoft.Extensions.Logging;
 using NAPS2.Scan;
 using NAPS2.Unmanaged;
 
@@ -116,7 +117,8 @@ public class WorkerFactory : IWorkerFactory
         var readyStr = proc.StandardOutput.ReadLine();
         if (readyStr?.Trim() == "error")
         {
-            throw new InvalidOperationException("The worker could not start due to an error. See the worker logs.");
+            var error = proc.StandardOutput.ReadToEnd();
+            throw new InvalidOperationException($"The worker could not start due to an error: {error}");
         }
 
         if (readyStr?.Trim() != "ready")
@@ -131,9 +133,17 @@ public class WorkerFactory : IWorkerFactory
     {
         Task.Run(() =>
         {
-            var proc = StartWorkerProcess(workerType);
-            var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
-            _workerQueues![workerType].Add(new WorkerContext(scanningContext, workerType, new WorkerServiceAdapter(channel), proc));
+            try
+            {
+                var proc = StartWorkerProcess(workerType);
+                var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
+                _workerQueues![workerType]
+                    .Add(new WorkerContext(scanningContext, workerType, new WorkerServiceAdapter(channel), proc));
+            }
+            catch (Exception ex)
+            {
+                scanningContext.Logger.LogError(ex, "Could not start worker");
+            }
         });
     }
 
@@ -147,11 +157,11 @@ public class WorkerFactory : IWorkerFactory
     {
         if (!File.Exists(_nativeWorkerExePath))
         {
-            throw new InvalidOperationException($"Worker exe does not exist: {_nativeWorkerExePath}");
+            scanningContext.Logger.LogDebug($"Native worker exe does not exist: {_nativeWorkerExePath}");
         }
         if (_winX86WorkerExePath != null && !File.Exists(_winX86WorkerExePath))
         {
-            throw new InvalidOperationException($"Worker exe does not exist: {_winX86WorkerExePath}");
+            scanningContext.Logger.LogDebug($"WinX86 worker exe does not exist: {_winX86WorkerExePath}");
         }
 
         options ??= new WorkerFactoryInitOptions();

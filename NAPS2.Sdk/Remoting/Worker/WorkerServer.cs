@@ -36,9 +36,10 @@ public static class WorkerServer
                 server.Kill();
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Console.Write(@"error");
+            Console.WriteLine(@"error");
+            Console.WriteLine(ex.ToString());
             throw;
         }
     }
