@@ -7,13 +7,18 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>NAPS2</RootNamespace>
 
-    <Title>NAPS2 - Not Another PDF Scanner</Title>
-    <Product>NAPS2 - Not Another PDF Scanner</Product>
     <Configurations>Debug;Release;DebugLang</Configurations>
+
+    <Title>NAPS2.Sdk</Title>
+    <Product>NAPS2.Sdk</Product>
+    <Description>NAPS2.Sdk is a fully-featured scanning library, supporting WIA, TWAIN, SANE, and ESCL scanners on Windows, Mac, and Linux.</Description>
+    <PackageTags>naps2 sdk scanner wia twain sane escl</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
     <DefineConstants>MAC</DefineConstants>
@@ -74,9 +79,9 @@
     <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
     <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <Folder Include="ImportExport\Email\Oauth" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

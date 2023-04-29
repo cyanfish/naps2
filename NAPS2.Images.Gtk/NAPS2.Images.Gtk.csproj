@@ -7,7 +7,12 @@
         <RootNamespace>NAPS2.Images.Gtk</RootNamespace>
 
         <Title>NAPS2.Images.Gtk</Title>
+        <Product>NAPS2.Images.Gtk</Product>
+        <Description>Images based on Gdk.Pixbuf for NAPS2.Sdk.</Description>
+        <PackageTags>naps2</PackageTags>
     </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />

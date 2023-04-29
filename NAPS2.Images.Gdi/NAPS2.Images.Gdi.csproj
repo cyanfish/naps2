@@ -8,7 +8,12 @@
         <RootNamespace>NAPS2.Images.Gdi</RootNamespace>
 
         <Title>NAPS2.Images.Gdi</Title>
+        <Product>NAPS2.Images.Gdi</Product>
+        <Description>Images based on System.Drawing.Bitmap for NAPS2.Sdk.</Description>
+        <PackageTags>naps2</PackageTags>
     </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />

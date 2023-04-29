@@ -6,7 +6,12 @@
         <RootNamespace>NAPS2</RootNamespace>
 
         <Title>NAPS2.Internals</Title>
+        <Product>NAPS2.Internals</Product>
+        <Description>Internal code for NAPS2.Sdk. Don't reference this project directly.</Description>
+        <PackageTags>naps2</PackageTags>
     </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />

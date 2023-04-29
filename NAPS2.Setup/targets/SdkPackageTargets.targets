@@ -1,0 +1,19 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    
+    <PropertyGroup>
+        <PackageVersion>0.1.0-alpha01</PackageVersion>
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Ben Olden-Cooligan</Authors>
+        <Company>NAPS2 Software</Company>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/cyanfish/naps2</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/cyanfish/naps2</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="LICENSE" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+</Project>

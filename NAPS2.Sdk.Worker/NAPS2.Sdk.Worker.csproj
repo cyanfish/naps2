@@ -1,27 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6</TargetFramework>
+        <TargetFrameworks>net462;net6</TargetFrameworks>
         <RootNamespace>NAPS2.Sdk.Worker</RootNamespace>
         <AssemblyName>NAPS2.Sdk.Worker</AssemblyName>
 
         <Title>NAPS2.Sdk.Worker</Title>
         <Product>NAPS2.Sdk.Worker</Product>
-
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Authors>Ben Olden-Cooligan</Authors>
         <Description>Worker process for NAPS2.Sdk</Description>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <!--        <PackageReadmeFile>README.md</PackageReadmeFile>-->
-        <RepositoryUrl>https://github.com/cyanfish/naps2</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/cyanfish/naps2</PackageProjectUrl>
-        <RepositoryType>git</RepositoryType>
         <PackageTags>naps2</PackageTags>
-        <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>..\NAPS2.Setup\config\public_signing_key.snk</AssemblyOriginatorKeyFile>
+
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
 
     <ItemGroup>
         <Compile Remove="*.*"/>
@@ -32,9 +24,5 @@
             <PackageCopyToOutput>true</PackageCopyToOutput>
             <PackagePath>contentFiles</PackagePath>
         </None>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
     </ItemGroup>
 </Project>
