@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Util;
 
-public class DebugTimer : IDisposable
+internal class DebugTimer : IDisposable
 {
     private readonly string? _label;
     private readonly Stopwatch _stopwatch;

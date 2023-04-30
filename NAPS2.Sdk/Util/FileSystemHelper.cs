@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Util;
 
-public static class FileSystemHelper
+internal static class FileSystemHelper
 {
     /// <summary>
     /// Creates the parent directory for the provided path if needed.

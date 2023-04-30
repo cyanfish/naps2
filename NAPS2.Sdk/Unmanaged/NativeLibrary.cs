@@ -2,7 +2,7 @@
 
 namespace NAPS2.Unmanaged;
 
-public class NativeLibrary
+internal class NativeLibrary
 {
     public static string FindLibraryPath(string libraryName, string? baseFolder = null) =>
         FindPath(libraryName, baseFolder, PlatformCompat.System.LibrarySearchPaths);

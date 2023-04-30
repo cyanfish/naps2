@@ -2,7 +2,7 @@
 
 namespace NAPS2.Util;
 
-public class ExpFallback
+internal class ExpFallback
 {
     public ExpFallback(int min, int max)
     {

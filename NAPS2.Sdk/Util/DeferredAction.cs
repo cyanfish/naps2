@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Util;
 
-public class DeferredAction
+internal class DeferredAction
 {
     private readonly Action _action;
     private int _counter;

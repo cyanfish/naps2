@@ -1,7 +1,7 @@
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Util;
+namespace NAPS2.Lib.Tests.Util;
 
 public class ListMutationTests
 {

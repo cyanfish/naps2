@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace NAPS2.Util;
 
-public static class WebClientExtensions
+internal static class WebClientExtensions
 {
     public static Task<string> DownloadStringTaskAsync(this WebClient client, string address, CancellationToken cancelToken = default)
     {

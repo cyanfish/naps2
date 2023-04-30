@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Util;
 
-public class NaturalStringComparer : IComparer<string>
+internal class NaturalStringComparer : IComparer<string>
 {
     public int Compare(string? x, string? y)
     {

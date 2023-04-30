@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace NAPS2.Util;
 
-public class AssemblyHelper
+internal class AssemblyHelper
 {
     public const string COPYRIGHT_YEARS = "2009-2023";
 
