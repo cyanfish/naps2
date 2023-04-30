@@ -1,7 +1,8 @@
 ﻿using NAPS2.Dependencies;
+using NAPS2.Sdk.Tests;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Dependencies;
+namespace NAPS2.Lib.Tests.Dependencies;
 
 public class DownloadFormatTests : ContextualTests
 {

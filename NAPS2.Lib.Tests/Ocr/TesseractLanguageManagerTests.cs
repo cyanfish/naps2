@@ -1,7 +1,8 @@
 using NAPS2.Ocr;
+using NAPS2.Sdk.Tests;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Ocr;
+namespace NAPS2.Lib.Tests.Ocr;
 
 public class TesseractLanguageManagerTests : ContextualTests
 {
