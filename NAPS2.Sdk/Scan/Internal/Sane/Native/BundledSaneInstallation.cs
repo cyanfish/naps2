@@ -2,7 +2,7 @@ using NAPS2.Unmanaged;
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class BundledSaneInstallation : ISaneInstallation
+internal class BundledSaneInstallation : ISaneInstallation
 {
     private string? _libraryPath;
     private string[]? _libraryDeps;

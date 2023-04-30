@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class SaneNativeLibrary : Unmanaged.NativeLibrary
+internal class SaneNativeLibrary : Unmanaged.NativeLibrary
 {
     public SaneNativeLibrary(string libraryPath, string[]? libraryDeps)
         : base(libraryPath, libraryDeps)

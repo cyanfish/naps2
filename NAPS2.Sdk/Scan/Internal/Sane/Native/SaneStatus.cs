@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public enum SaneStatus
+internal enum SaneStatus
 {
     Good = 0,
     Unsupported = 1,

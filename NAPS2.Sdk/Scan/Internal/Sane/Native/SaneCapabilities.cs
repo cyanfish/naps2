@@ -1,7 +1,7 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
 [Flags]
-public enum SaneCapabilities
+internal enum SaneCapabilities
 {
     None = 0,
     SoftSelect = 1,

@@ -6,7 +6,7 @@ namespace NAPS2.Scan.Internal.Twain;
 /// <summary>
 /// Proxy implementation of ITwainSessionController that interacts with a Twain session in a worker process.
 /// </summary>
-public class RemoteTwainSessionController : ITwainSessionController
+internal class RemoteTwainSessionController : ITwainSessionController
 {
     private readonly ScanningContext _scanningContext;
 

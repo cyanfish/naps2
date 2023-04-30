@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class SaneClient : SaneNativeObject
+internal class SaneClient : SaneNativeObject
 {
     private static readonly object SaneLock = new();
 

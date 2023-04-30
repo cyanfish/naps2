@@ -3,7 +3,7 @@ using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public abstract class SaneNativeObject : IDisposable
+internal abstract class SaneNativeObject : IDisposable
 {
     private bool _disposed;
     private IntPtr _handle;

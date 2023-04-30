@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public enum SaneOptionAction
+internal enum SaneOptionAction
 {
     GetValue,
     SetValue,

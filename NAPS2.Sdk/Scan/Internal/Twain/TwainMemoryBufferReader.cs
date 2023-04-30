@@ -7,7 +7,7 @@ namespace NAPS2.Scan.Internal.Twain;
 /// <summary>
 /// For Twain MemXfer, this class reads the raw buffer data and copies it into an image object. 
 /// </summary>
-public static class TwainMemoryBufferReader
+internal static class TwainMemoryBufferReader
 {
     private const int BLACK_WHITE = 0;
     private const int GRAY = 1;

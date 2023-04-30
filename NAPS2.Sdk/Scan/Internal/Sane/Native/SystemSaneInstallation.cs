@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class SystemSaneInstallation : ISaneInstallation
+internal class SystemSaneInstallation : ISaneInstallation
 {
     private string? _libraryPath;
 

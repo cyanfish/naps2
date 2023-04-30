@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Scan.Internal.Wia;
 
-public record WiaConfiguration
+internal record WiaConfiguration
 {
     public Dictionary<int, object> DeviceProps { get; init; } = new();
 

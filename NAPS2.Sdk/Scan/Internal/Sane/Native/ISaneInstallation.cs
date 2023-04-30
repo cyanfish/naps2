@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public interface ISaneInstallation
+internal interface ISaneInstallation
 {
     /// <summary>
     /// Whether the SANE installation has a patch to add the sane_stream_devices method.

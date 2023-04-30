@@ -16,7 +16,7 @@ public class WorkerContext : IDisposable
 
     private readonly ILogger _logger;
 
-    public WorkerContext(ScanningContext scanningContext, WorkerType workerType, WorkerServiceAdapter service, Process process)
+    internal WorkerContext(ScanningContext scanningContext, WorkerType workerType, WorkerServiceAdapter service, Process process)
     {
         _logger = scanningContext.Logger;
         Type = workerType;
@@ -26,7 +26,7 @@ public class WorkerContext : IDisposable
 
     public WorkerType Type { get; }
 
-    public WorkerServiceAdapter Service { get; }
+    internal WorkerServiceAdapter Service { get; }
 
     public Process Process { get; }
 

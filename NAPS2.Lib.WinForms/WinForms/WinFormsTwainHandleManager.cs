@@ -4,7 +4,7 @@ using NAPS2.Scan.Internal.Twain;
 
 namespace NAPS2.WinForms;
 
-public class WinFormsTwainHandleManager : TwainHandleManager
+internal class WinFormsTwainHandleManager : TwainHandleManager
 {
     private readonly Form _baseForm;
     private Form? _parentForm;

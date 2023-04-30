@@ -2,7 +2,7 @@ using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal.Twain;
 
-class TwainEvents : ITwainEvents
+internal class TwainEvents : ITwainEvents
 {
     private readonly Action<TwainPageStart> _pageStartCallback;
     private readonly Action<TwainNativeImage> _nativeImageCallback;

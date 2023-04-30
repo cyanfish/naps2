@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane;
 
-public class SaneOptionMatcher
+internal class SaneOptionMatcher
 {
     private readonly HashSet<string> _knownValues;
     private readonly string[] _substrings;

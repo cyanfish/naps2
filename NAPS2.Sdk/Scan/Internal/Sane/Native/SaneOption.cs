@@ -2,7 +2,7 @@
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class SaneOption
+internal class SaneOption
 {
     private static IEnumerable<string> ParseStringArray(IntPtr arrayPtr)
     {

@@ -3,7 +3,7 @@
 namespace NAPS2.Scan.Internal;
 
 // TODO: Add tests for this and/or scanperformer
-public class ScanOptionsValidator
+internal class ScanOptionsValidator
 {
     public ScanOptions ValidateAll(ScanOptions options, ScanningContext scanningContext, bool requireDevice)
     {

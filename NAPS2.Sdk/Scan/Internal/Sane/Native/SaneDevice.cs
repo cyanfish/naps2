@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class SaneDevice : SaneNativeObject, ISaneDevice
+internal class SaneDevice : SaneNativeObject, ISaneDevice
 {
     public SaneDevice(SaneNativeLibrary native, IntPtr handle) : base(native, handle)
     {

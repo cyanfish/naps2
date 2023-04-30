@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public enum SaneFrameType
+internal enum SaneFrameType
 {
     Gray = 0,
     Rgb = 1,

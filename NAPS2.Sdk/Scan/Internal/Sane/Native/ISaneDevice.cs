@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public interface ISaneDevice
+internal interface ISaneDevice
 {
     void Cancel();
     void Start();

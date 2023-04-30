@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public class SaneRange
+internal class SaneRange
 {
     public double Min { get; init; }
 

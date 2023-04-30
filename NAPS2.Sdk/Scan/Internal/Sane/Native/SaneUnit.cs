@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public enum SaneUnit
+internal enum SaneUnit
 {
     None = 0,
     Pixel = 1,

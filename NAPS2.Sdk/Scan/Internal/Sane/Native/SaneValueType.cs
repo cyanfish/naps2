@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public enum SaneValueType
+internal enum SaneValueType
 {
     Bool = 0,
     Int = 1,

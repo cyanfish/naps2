@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane;
 
-public static class SaneOptionMatchers
+internal static class SaneOptionMatchers
 {
     private static readonly IEnumerable<string> FlatbedStrs = new[]
     {

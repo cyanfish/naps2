@@ -10,7 +10,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Worker;
 
-public class WorkerServiceAdapter
+internal class WorkerServiceAdapter
 {
     private readonly WorkerService.WorkerServiceClient _client;
 

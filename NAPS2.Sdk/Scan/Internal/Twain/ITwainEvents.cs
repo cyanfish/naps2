@@ -2,7 +2,7 @@ using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal.Twain;
 
-public interface ITwainEvents
+internal interface ITwainEvents
 {
     void PageStart(TwainPageStart pageStart);
 

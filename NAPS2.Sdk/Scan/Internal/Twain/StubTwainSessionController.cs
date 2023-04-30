@@ -5,7 +5,7 @@ namespace NAPS2.Scan.Internal.Twain;
 /// <summary>
 /// Stub implementation of ITwainSessionController for unsupported platforms.
 /// </summary>
-public class StubTwainSessionController : ITwainSessionController
+internal class StubTwainSessionController : ITwainSessionController
 {
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {

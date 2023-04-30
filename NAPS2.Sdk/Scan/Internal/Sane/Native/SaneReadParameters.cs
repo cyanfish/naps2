@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public struct SaneReadParameters
+internal struct SaneReadParameters
 {
     public SaneFrameType Frame;
     public int LastFrame;

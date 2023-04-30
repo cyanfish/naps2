@@ -16,7 +16,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Worker;
 
-public class WorkerServiceImpl : WorkerService.WorkerServiceBase
+internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
 {
     private readonly ScanningContext _scanningContext;
     private readonly IRemoteScanController _remoteScanController;

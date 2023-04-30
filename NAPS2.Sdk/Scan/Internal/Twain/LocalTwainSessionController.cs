@@ -12,7 +12,7 @@ namespace NAPS2.Scan.Internal.Twain;
 /// <summary>
 /// Real implementation of ITwainSessionController that interacts with a Twain session in the current process.
 /// </summary>
-public class LocalTwainSessionController : ITwainSessionController
+internal class LocalTwainSessionController : ITwainSessionController
 {
     public static readonly TWIdentity TwainAppId;
 

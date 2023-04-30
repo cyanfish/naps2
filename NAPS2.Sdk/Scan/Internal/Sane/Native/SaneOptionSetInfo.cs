@@ -1,6 +1,6 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
-public enum SaneOptionSetInfo
+internal enum SaneOptionSetInfo
 {
     None = 0,
     Inexact = 1,

@@ -4,7 +4,7 @@ using NAPS2.Wia;
 
 namespace NAPS2.Scan.Internal.Wia;
 
-public class WiaScanErrors
+internal class WiaScanErrors
 {
     public static void ThrowDeviceError(WiaException e)
     {
