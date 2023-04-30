@@ -5,7 +5,7 @@ namespace NAPS2.Platform.Windows;
 /// <summary>
 /// Helper class for common Win32 methods called via P/Invoke.
 /// </summary>
-public static class Win32
+internal static class Win32
 {
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);

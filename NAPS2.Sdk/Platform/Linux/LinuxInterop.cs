@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 namespace NAPS2.Platform.Linux;
 
-public static class LinuxInterop
+internal static class LinuxInterop
 {
     [DllImport("libdl.so.2")]
     public static extern IntPtr dlopen(string filename, int flags);

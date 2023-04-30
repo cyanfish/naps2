@@ -3,7 +3,7 @@ using NAPS2.Platform.Windows;
 
 namespace NAPS2.Platform;
 
-public abstract class WindowsSystemCompat : ISystemCompat
+internal abstract class WindowsSystemCompat : ISystemCompat
 {
     public bool IsWiaDriverSupported => true;
 

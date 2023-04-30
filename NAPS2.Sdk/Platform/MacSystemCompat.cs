@@ -3,7 +3,7 @@ using NAPS2.Platform.Mac;
 
 namespace NAPS2.Platform;
 
-public class MacSystemCompat : ISystemCompat
+internal class MacSystemCompat : ISystemCompat
 {
     private const int RTLD_LAZY = 1;
     private const int RTLD_GLOBAL = 8;

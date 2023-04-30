@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Platform;
 
-public interface ISystemCompat
+internal interface ISystemCompat
 {
     bool IsWiaDriverSupported { get; }
 

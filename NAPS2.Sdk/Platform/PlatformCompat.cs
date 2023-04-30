@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Platform;
 
-public class PlatformCompat
+internal class PlatformCompat
 {
     private static ISystemCompat _systemCompat;
 
