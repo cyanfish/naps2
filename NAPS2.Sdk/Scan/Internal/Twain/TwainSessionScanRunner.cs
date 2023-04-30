@@ -50,6 +50,7 @@ internal class TwainSessionScanRunner
 
     public Task Run()
     {
+        // TODO: Work around needing Invoker (maybe pass in SyncContext or something?) and move it to NAPS2.Lib
         Invoker.Current.Invoke(Init);
         return _tcs.Task;
     }

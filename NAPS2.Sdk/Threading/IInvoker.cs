@@ -3,7 +3,7 @@
 /// <summary>
 /// An interface for synchronized access to the UI thread.
 /// </summary>
-public interface IInvoker
+internal interface IInvoker
 {
     /// <summary>
     /// Run an action on the UI thread, waiting for completion before returning.

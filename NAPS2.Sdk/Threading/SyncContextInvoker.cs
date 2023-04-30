@@ -2,7 +2,7 @@ using System.Threading;
 
 namespace NAPS2.Threading;
 
-public class SyncContextInvoker : IInvoker
+internal class SyncContextInvoker : IInvoker
 {
     private readonly SynchronizationContext _current;
 

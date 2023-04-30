@@ -4,7 +4,7 @@
 /// <summary>
 /// Synchronized access to the UI thread.
 /// </summary>
-public static class Invoker
+internal static class Invoker
 {
     private static IInvoker _current = new DefaultInvoker();
 

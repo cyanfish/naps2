@@ -16,7 +16,7 @@ namespace NAPS2.Threading;
 ///             .Run(OutputText);
 /// </example>
 /// </summary>
-public static class Pipeline
+internal static class Pipeline
 {
     private const int DEFAULT_MAX_PARALLELISM = 8;
 
