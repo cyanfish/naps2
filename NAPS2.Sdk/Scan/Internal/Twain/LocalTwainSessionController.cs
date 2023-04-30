@@ -62,11 +62,11 @@ internal class LocalTwainSessionController : ITwainSessionController
         PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
         var session = new TwainSession(TwainAppId);
         // TODO: Standardize on custom hook?
-// #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
         session.Open(new Win32MessageLoopHook(_logger));
-// #else
-        // session.Open();
-// #endif
+#else
+        session.Open();
+#endif
         try
         {
             return session.GetSources().Select(ds => new ScanDevice(ds.Name, ds.Name)).ToList();
