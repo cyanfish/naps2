@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net462;net6</TargetFrameworks>
+        <RootNamespace>NAPS2.Sdk.Worker.Win32</RootNamespace>
+        <AssemblyName>NAPS2.Sdk.Worker.Win32</AssemblyName>
+
+        <Title>NAPS2.Sdk.Worker.Win32</Title>
+        <Product>NAPS2.Sdk.Worker.Win32</Product>
+        <Description>Windows 32-bit (x86) worker process for NAPS2.Sdk</Description>
+        <PackageTags>naps2</PackageTags>
+
+    </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
+
+    <ItemGroup>
+        <Compile Remove="*.*" />
+        <Content Include="NAPS2.Sdk.Worker.targets" PackagePath="build/NAPS2.Sdk.Worker.targets" />
+        <None Include="bin\Release\net6\win-x86\publish\NAPS2.Worker.exe">
+            <Link>lib/NAPS2.Worker.exe</Link>
+            <Pack>true</Pack>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+            <PackagePath>contentFiles</PackagePath>
+        </None>
+    </ItemGroup>
+</Project>

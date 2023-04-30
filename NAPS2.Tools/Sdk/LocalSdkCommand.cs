@@ -15,7 +15,7 @@ public class LocalSdkCommand : ICommand<LocalSdkOptions>
         var sdkProjects = new[]
         {
             "NAPS2.Sdk",
-            "NAPS2.Sdk.Worker",
+            "NAPS2.Sdk.Worker.Win32",
             "NAPS2.Internals",
             "NAPS2.Images",
             "NAPS2.Images.Gdi",
@@ -26,7 +26,8 @@ public class LocalSdkCommand : ICommand<LocalSdkOptions>
         var sdkVersion = ProjectHelper.GetSdkVersion();
         foreach (var project in sdkProjects)
         {
-            var nugetPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release",
+            var projectFolder = project.StartsWith("NAPS2.Sdk.Worker") ? "NAPS2.Sdk.Worker" : project;
+            var nugetPath = Path.Combine(Paths.SolutionRoot, projectFolder, "bin", "Release",
                 $"{project}.{sdkVersion}.nupkg");
             Cli.Run("nuget", $"delete {project} {sdkVersion} -source \"{opts.LocalSource}\" -NonInteractive", ignoreErrorIfOutputContains: "Not Found");
             Cli.Run("nuget", $"add \"{nugetPath}\" -source \"{opts.LocalSource}\"");
