@@ -2,7 +2,7 @@ namespace NAPS2.EtoForms.Notifications;
 
 public class DonateNotificationView : LinkNotificationView
 {
-    private const string DONATE_URL = "https://www.naps2.com/donate";
+    private const string DONATE_URL = "https://www.naps2.com/donate?src=notif";
 
     public DonateNotificationView(DonateNotification model)
         : base(model, MiscResources.DonatePrompt, MiscResources.Donate, DONATE_URL, null)

@@ -11,7 +11,7 @@ public class AboutForm : EtoDialogBase
 {
     private const string NAPS2_HOMEPAGE = "https://www.naps2.com";
     private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
-    private const string DONATE_URL = "https://www.naps2.com/donate";
+    private const string DONATE_URL = "https://www.naps2.com/donate?src=about";
 
     private readonly Control _donateButton;
     private readonly UpdateChecker _updateChecker;

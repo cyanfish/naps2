@@ -20,7 +20,7 @@ Other links:
 - [Documentation](https://www.naps2.com/support)
 - [Translations](https://translate.naps2.com/)
 - [File a Ticket](https://sourceforge.net/p/naps2/tickets/)
-- [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M77MFAP2ZV9RG)
+- [Donate](https://www.naps2.com/donate?src=readme)
 
 ## NAPS2.Sdk (for developers)
 
