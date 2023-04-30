@@ -20,7 +20,7 @@ public class OcrRequestQueue
     /// Gets or sets the number of queue workers, which determines the maximum number of OCR requests that can process
     /// in parallel.
     /// </summary>
-    public int WorkerCount { get; init; } = Environment.ProcessorCount;
+    public int WorkerCount { get; init; } = Math.Max(Environment.ProcessorCount / 2 - 1, 1);
 
     /// <summary>
     /// For testing. Adds a delay to the worker tasks to process requests.
