@@ -21,7 +21,7 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
         ScrollOnDrag = true;
         UseHandCursor = true;
     }
-
+    public override string GetLabel(UiImage item) => item.DisplayName ?? "";
     public override Image GetImage(UiImage item, int imageSize)
     {
         return _thumbnailProvider.GetThumbnail(item, imageSize).ToEtoImage();

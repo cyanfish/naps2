@@ -166,4 +166,8 @@ public class CommonConfig
 
     [Common]
     public bool EnableDebugLogging { get; set; }
+    
+    [User]
+    public bool EnableThumbnailText { get; set; }
+
 }
