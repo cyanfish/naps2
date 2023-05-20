@@ -178,5 +178,4 @@ public class UiImage : IDisposable
         }
     }
 
-    public string DisplayName { get; set; } = "";
 }

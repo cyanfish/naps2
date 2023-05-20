@@ -168,6 +168,6 @@ public class CommonConfig
     public bool EnableDebugLogging { get; set; }
     
     [User]
-    public bool EnableThumbnailText { get; set; }
+    public bool ShowPageNumbers { get; set; }
 
 }

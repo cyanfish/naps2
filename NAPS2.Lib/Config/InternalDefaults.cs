@@ -53,7 +53,7 @@ public static class InternalDefaults
             ThumbnailSize = ThumbnailSizes.DEFAULT_SIZE,
             DesktopToolStripDock = DockStyle.Top,
             EventLogging = EventType.None,
-            EnableThumbnailText = false,
+            ShowPageNumbers = false,
             PdfSettings = new PdfSettings
             {
                 Metadata = new PdfMetadata
