@@ -86,7 +86,6 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
         else
         {
-            //if (_config.Get(c => c.ShowPageNumbers))
             if (_behavior.ShowPageNumbers)
                 height = ImageSize - 12;
             else
@@ -99,7 +98,6 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         if (_behavior.ShowPageNumbers) 
         { 
             // Draw the text below the image
-            //var draw = _config.Get(c => c.EnableThumbnailText);
             // Create string to draw.
             String drawString = (e.ItemIndex+1).ToString() + " / "+_view.Items.Count.ToString(); 
 
