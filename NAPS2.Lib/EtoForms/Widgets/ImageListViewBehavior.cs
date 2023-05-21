@@ -11,7 +11,7 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
     private readonly ImageTransfer _imageTransfer;
 
     public ImageListViewBehavior(UiThumbnailProvider thumbnailProvider, ImageTransfer imageTransfer,
-        ColorScheme colorScheme)
+        ColorScheme colorScheme, Naps2Config config)
     {
         _thumbnailProvider = thumbnailProvider;
         _imageTransfer = imageTransfer;
@@ -20,8 +20,8 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
         ShowLabels = false;
         ScrollOnDrag = true;
         UseHandCursor = true;
+        ShowPageNumbers = config.Get(c => c.ShowPageNumbers);
     }
-
     public override Image GetImage(UiImage item, int imageSize)
     {
         return _thumbnailProvider.GetThumbnail(item, imageSize).ToEtoImage();

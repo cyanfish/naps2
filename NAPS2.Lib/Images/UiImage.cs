@@ -177,4 +177,5 @@ public class UiImage : IDisposable
             return new ImageRenderState(_processedImage.GetWeakReference(), _thumbnailTransformState, _thumbnail, this);
         }
     }
+
 }

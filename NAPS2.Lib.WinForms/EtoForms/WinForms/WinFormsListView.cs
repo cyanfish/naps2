@@ -23,9 +23,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     public WinFormsListView(ListViewBehavior<T> behavior)
     {
+        
         _behavior = behavior;
+        
         _view = behavior.ScrollOnDrag ? new DragScrollListView() : new ListView();
         _view.MultiSelect = behavior.MultiSelect;
+
         if (_behavior.Checkboxes)
         {
             _view.View = View.List;
@@ -71,6 +74,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private bool UseCustomRendering => !_behavior.ShowLabels && !_behavior.Checkboxes;
 
+
     private void CustomRenderItem(object? sender, DrawListViewItemEventArgs e)
     {
         int width, height;
@@ -82,13 +86,37 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
         else
         {
-            height = ImageSize;
+            if (_behavior.ShowPageNumbers)
+                height = ImageSize - 12;
+            else
+                height = ImageSize;
             width = (int) Math.Round(height * (image.Width / (double) image.Height));
         }
         var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
         var y = e.Bounds.Top + (e.Bounds.Height - height) / 2;
         e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
+        if (_behavior.ShowPageNumbers) 
+        { 
+            // Draw the text below the image
+            // Create string to draw.
+            String drawString = (e.ItemIndex+1).ToString() + " / "+_view.Items.Count.ToString(); 
 
+            // Create font and brush.
+            Font drawFont = new Font("Arial", 10);
+            SolidBrush drawBrush = new SolidBrush(Color.Black);
+
+            // Create point 
+            float x1 = x + width / 2;
+            float y1 = y + height + 6;
+
+            // Set format of string.
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.Alignment = StringAlignment.Center;
+        
+            // Draw string to screen.
+            e.Graphics.DrawString(drawString, drawFont, drawBrush, x1, y1, drawFormat);
+
+        }
         // Draw border
         if (e.Item.Selected)
         {
@@ -99,7 +127,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             e.Graphics.DrawRectangle(DefaultPen, x, y, width, height);
         }
     }
-
+    
     public int ImageSize
     {
         get => _view.LargeImageList.ImageSize.Width;
