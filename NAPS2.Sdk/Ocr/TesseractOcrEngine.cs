@@ -51,7 +51,7 @@ public class TesseractOcrEngine : IOcrEngine
                 logger.LogError("Couldn't start OCR process.");
                 return null;
             }
-            // to improve main window responsiveness:
+            // Improve main window responsiveness
             tesseractProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
 
             var waitTasks = new List<Task>
