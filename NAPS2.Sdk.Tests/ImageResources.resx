@@ -211,6 +211,12 @@
   <data name="patcht" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\patcht.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="patcht_cropped_bl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\patcht_cropped_bl.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="patcht_cropped_br" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\patcht_cropped_br.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ocr_test" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ocr_test.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

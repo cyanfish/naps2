@@ -84,7 +84,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
                 height = original.Height;
             }
 
-            if (options.PageSize!.Width > options.PageSize.Height && width < height)
+            if ((options.PageSize!.Width > options.PageSize.Height) ^ (width > height))
             {
                 if (options.CropToPageSize)
                 {

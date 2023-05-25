@@ -66,4 +66,56 @@ public class RemotePostProcessorTests : ContextualTests
         var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
         ImageAsserts.Similar(ImageResources.deskewed, result, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
+
+    [Fact]
+    public void CropToPageSize_BothPortrait()
+    {
+        var image = LoadImage(ImageResources.patcht);
+        var options = new ScanOptions
+        {
+            CropToPageSize = true,
+            PageSize = new PageSize(8m, 10m, PageSizeUnit.Inch)
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        ImageAsserts.Similar(ImageResources.patcht_cropped_br, result);
+    }
+
+    [Fact]
+    public void CropToPageSize_SizeLandscape()
+    {
+        var image = LoadImage(ImageResources.patcht);
+        var options = new ScanOptions
+        {
+            CropToPageSize = true,
+            PageSize = new PageSize(10m, 8m, PageSizeUnit.Inch)
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        ImageAsserts.Similar(ImageResources.patcht_cropped_br, result);
+    }
+
+    [Fact]
+    public void CropToPageSize_ImageLandscape()
+    {
+        var image = LoadImage(ImageResources.patcht).PerformTransform(new RotationTransform(-90));
+        var options = new ScanOptions
+        {
+            CropToPageSize = true,
+            PageSize = new PageSize(8m, 10m, PageSizeUnit.Inch)
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        ImageAsserts.Similar(ImageResources.patcht_cropped_bl, result!.Render().PerformTransform(new RotationTransform(90)));
+    }
+
+    [Fact]
+    public void CropToPageSize_BothLandscape()
+    {
+        var image = LoadImage(ImageResources.patcht).PerformTransform(new RotationTransform(-90));
+        var options = new ScanOptions
+        {
+            CropToPageSize = true,
+            PageSize = new PageSize(10m, 8m, PageSizeUnit.Inch)
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        ImageAsserts.Similar(ImageResources.patcht_cropped_bl, result!.Render().PerformTransform(new RotationTransform(90)));
+    }
 }

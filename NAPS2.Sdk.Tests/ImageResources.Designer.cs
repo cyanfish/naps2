@@ -582,6 +582,26 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] patcht_cropped_bl {
+            get {
+                object obj = ResourceManager.GetObject("patcht_cropped_bl", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] patcht_cropped_br {
+            get {
+                object obj = ResourceManager.GetObject("patcht_cropped_br", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] skewed {
             get {
                 object obj = ResourceManager.GetObject("skewed", resourceCulture);
