@@ -85,7 +85,7 @@ public class SaneScanDriverTests : ContextualTests
         var eventsMock = new Mock<IScanEvents>();
         SetupDeviceMock(deviceMock);
 
-        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object, new SaneScanDriver.OptionData());
 
         Assert.NotNull(result);
         Assert.Equal(3, result.Width);
@@ -104,7 +104,7 @@ public class SaneScanDriverTests : ContextualTests
         var eventsMock = new Mock<IScanEvents>();
         SetupDeviceMock(deviceMock, -1);
 
-        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object, new SaneScanDriver.OptionData());
 
         Assert.NotNull(result);
         Assert.Equal(3, result.Width);
@@ -123,7 +123,7 @@ public class SaneScanDriverTests : ContextualTests
         var eventsMock = new Mock<IScanEvents>();
         SetupDeviceMock(deviceMock, 6);
 
-        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object, new SaneScanDriver.OptionData());
 
         Assert.NotNull(result);
         Assert.Equal(3, result.Width);
@@ -142,7 +142,7 @@ public class SaneScanDriverTests : ContextualTests
         var eventsMock = new Mock<IScanEvents>();
         SetupDeviceMock(deviceMock, 10);
 
-        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object, new SaneScanDriver.OptionData());
 
         Assert.NotNull(result);
         Assert.Equal(3, result.Width);
@@ -167,7 +167,7 @@ public class SaneScanDriverTests : ContextualTests
                 return false;
             });
 
-        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object);
+        var result = _driver.ScanPage(deviceMock.Object, eventsMock.Object, new SaneScanDriver.OptionData());
 
         Assert.Null(result);
     }

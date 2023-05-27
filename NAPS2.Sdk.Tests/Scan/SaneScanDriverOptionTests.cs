@@ -28,9 +28,9 @@ public class SaneScanDriverOptionTests : ContextualTests
             PaperSource = PaperSource.Flatbed
         };
 
-        _driver.SetOptions(device, options, out bool isFeeder);
+        var optionData = _driver.SetOptions(device, options);
 
-        Assert.False(isFeeder);
+        Assert.False(optionData.IsFeeder);
         Assert.Equal("Flatbed", device.GetValue(1));
     }
 
@@ -43,9 +43,9 @@ public class SaneScanDriverOptionTests : ContextualTests
         });
         var options = new ScanOptions { PaperSource = PaperSource.Feeder };
 
-        _driver.SetOptions(device, options, out bool isFeeder);
+        var optionData = _driver.SetOptions(device, options);
 
-        Assert.True(isFeeder);
+        Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
     }
 
@@ -58,9 +58,9 @@ public class SaneScanDriverOptionTests : ContextualTests
         });
         var options = new ScanOptions { PaperSource = PaperSource.Feeder };
 
-        _driver.SetOptions(device, options, out bool isFeeder);
+        var optionData = _driver.SetOptions(device, options);
 
-        Assert.True(isFeeder);
+        Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
     }
 
@@ -73,9 +73,9 @@ public class SaneScanDriverOptionTests : ContextualTests
         });
         var options = new ScanOptions { PaperSource = PaperSource.Duplex };
 
-        _driver.SetOptions(device, options, out bool isFeeder);
+        var optionData = _driver.SetOptions(device, options);
 
-        Assert.True(isFeeder);
+        Assert.True(optionData.IsFeeder);
         Assert.Equal("Duplex", device.GetValue(1));
     }
 
@@ -88,9 +88,9 @@ public class SaneScanDriverOptionTests : ContextualTests
         });
         var options = new ScanOptions { PaperSource = PaperSource.Auto };
 
-        _driver.SetOptions(device, options, out bool isFeeder);
+        var optionData = _driver.SetOptions(device, options);
 
-        Assert.False(isFeeder);
+        Assert.False(optionData.IsFeeder);
         Assert.Equal("Flatbed", device.GetValue(1));
     }
 
@@ -103,9 +103,9 @@ public class SaneScanDriverOptionTests : ContextualTests
         });
         var options = new ScanOptions { PaperSource = PaperSource.Auto };
 
-        _driver.SetOptions(device, options, out bool isFeeder);
+        var optionData = _driver.SetOptions(device, options);
 
-        Assert.True(isFeeder);
+        Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
     }
 
@@ -119,9 +119,9 @@ public class SaneScanDriverOptionTests : ContextualTests
         });
         var options = new ScanOptions { PaperSource = PaperSource.Duplex };
 
-        _driver.SetOptions(device, options, out bool isFeeder);
+        var optionData = _driver.SetOptions(device, options);
 
-        Assert.True(isFeeder);
+        Assert.True(optionData.IsFeeder);
         Assert.Equal("Feeder(left aligned,Duplex)", device.GetValue(1));
     }
 

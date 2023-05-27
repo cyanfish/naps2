@@ -80,19 +80,19 @@ internal class SaneScanDriver : IScanDriver
                 if (cancelToken.IsCancellationRequested) return;
                 using var device = client.OpenDevice(options.Device!.ID!);
                 if (cancelToken.IsCancellationRequested) return;
-                SetOptions(device, options, out bool isFeeder);
+                var optionData = SetOptions(device, options);
                 // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
                 cancelToken.Register(device.Cancel);
 
-                if (!isFeeder)
+                if (!optionData.IsFeeder)
                 {
-                    var image = ScanPage(device, scanEvents) ??
+                    var image = ScanPage(device, scanEvents, optionData) ??
                                 throw new DeviceException("SANE expected image");
                     callback(image);
                 }
                 else
                 {
-                    while (ScanPage(device, scanEvents) is { } image)
+                    while (ScanPage(device, scanEvents, optionData) is { } image)
                     {
                         hasAtLeastOneImage = true;
                         callback(image);
@@ -129,16 +129,19 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
-    internal void SetOptions(ISaneDevice device, ScanOptions options, out bool isFeeder)
+    internal OptionData SetOptions(ISaneDevice device, ScanOptions options)
     {
         var controller = new SaneOptionController(device, _scanningContext.Logger);
+        var optionData = new OptionData
+        {
+            IsFeeder = options.PaperSource is PaperSource.Feeder or PaperSource.Duplex
+        };
 
-        isFeeder = options.PaperSource is PaperSource.Feeder or PaperSource.Duplex; 
         if (options.PaperSource == PaperSource.Auto)
         {
             if (!controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Flatbed))
             {
-                isFeeder = controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder);
+                optionData.IsFeeder = controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder);
             }
         }
         else if (options.PaperSource == PaperSource.Flatbed)
@@ -165,12 +168,7 @@ internal class SaneScanDriver : IScanDriver
         };
         controller.TrySet(SaneOptionNames.MODE, mode);
 
-        // TODO: Get closest resolution value
-        if (!controller.TrySet(SaneOptionNames.RESOLUTION, options.Dpi))
-        {
-            controller.TrySet(SaneOptionNames.X_RESOLUTION, options.Dpi);
-            controller.TrySet(SaneOptionNames.Y_RESOLUTION, options.Dpi);
-        }
+        SetResolution(options, controller, optionData);
 
         var scanAreaController = new SaneScanAreaController(controller);
         if (scanAreaController.CanSetArea)
@@ -187,9 +185,39 @@ internal class SaneScanDriver : IScanDriver
             };
             scanAreaController.SetArea(minX + offsetX, minY, minX + offsetX + width, minY + height);
         }
+
+        return optionData;
     }
 
-    internal IMemoryImage? ScanPage(ISaneDevice device, IScanEvents scanEvents)
+    private static void SetResolution(ScanOptions options, SaneOptionController controller, OptionData optionData)
+    {
+        // TODO: Get closest resolution value
+        if (controller.TrySet(SaneOptionNames.RESOLUTION, options.Dpi))
+        {
+            if (controller.TryGet(SaneOptionNames.RESOLUTION, out var res))
+            {
+                optionData.XRes = res;
+                optionData.YRes = res;
+            }
+        }
+        else
+        {
+            controller.TrySet(SaneOptionNames.X_RESOLUTION, options.Dpi);
+            controller.TrySet(SaneOptionNames.Y_RESOLUTION, options.Dpi);
+            if (controller.TryGet(SaneOptionNames.X_RESOLUTION, out var xRes))
+            {
+                optionData.XRes = xRes;
+            }
+            if (controller.TryGet(SaneOptionNames.Y_RESOLUTION, out var yRes))
+            {
+                optionData.YRes = yRes;
+            }
+        }
+        if (optionData.XRes <= 0) optionData.XRes = options.Dpi;
+        if (optionData.YRes <= 0) optionData.YRes = options.Dpi;
+    }
+
+    internal IMemoryImage? ScanPage(ISaneDevice device, IScanEvents scanEvents, OptionData optionData)
     {
         var data = ScanFrame(device, scanEvents, 0, out var p);
         if (data == null)
@@ -197,12 +225,11 @@ internal class SaneScanDriver : IScanDriver
             return null;
         }
 
-        if (p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue)
-        {
-            return ProcessMultiFrameImage(device, scanEvents, p, data.GetBuffer());
-        }
-
-        return ProcessSingleFrameImage(p, data.GetBuffer());
+        var page = p.Frame is SaneFrameType.Red or SaneFrameType.Green or SaneFrameType.Blue
+            ? ProcessMultiFrameImage(device, scanEvents, p, data.GetBuffer())
+            : ProcessSingleFrameImage(p, data.GetBuffer());
+        page.SetResolution((float) optionData.XRes, (float) optionData.YRes);
+        return page;
     }
 
     private IMemoryImage ProcessSingleFrameImage(SaneReadParameters p, byte[] data)
@@ -291,36 +318,13 @@ internal class SaneScanDriver : IScanDriver
         return dataStream;
     }
 
-    //     bool IsFlatbedChoice(string choice) =>
-    //         choice.IndexOf("flatbed", StringComparison.InvariantCultureIgnoreCase) >= 0;
-    //
-    //     bool IsFeederChoice(string choice) => new[] { "adf", "feeder", "simplex" }.Any(x =>
-    //         choice.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
-    //
-    //     bool IsDuplexChoice(string choice) =>
-    //         choice.IndexOf("duplex", StringComparison.InvariantCultureIgnoreCase) >= 0;
-    //
-    //     if (options.PaperSource == PaperSource.Flatbed)
-    //     {
-    //         ChooseStringOption("--source", IsFlatbedChoice);
-    //     }
-    //     else if (options.PaperSource == PaperSource.Feeder)
-    //     {
-    //         if (!ChooseStringOption("--source", x => IsFeederChoice(x) && !IsDuplexChoice(x)) &&
-    //             !ChooseStringOption("--source", IsFeederChoice) &&
-    //             !ChooseStringOption("--source", IsDuplexChoice))
-    //         {
-    //             throw new NoFeederSupportException();
-    //         }
-    //     }
-    //     else if (options.PaperSource == PaperSource.Duplex)
-    //     {
-    //         if (!ChooseStringOption("--source", IsDuplexChoice))
-    //         {
-    //             throw new NoDuplexSupportException();
-    //         }
-    //     }
-    //
+    internal class OptionData
+    {
+        public bool IsFeeder { get; set; }
+        public double XRes { get; set; }
+        public double YRes { get; set; }
+    }
+
     //     if (options.BitDepth == BitDepth.Color)
     //     {
     //         ChooseStringOption("--mode", x => x == "Color");
