@@ -1,14 +1,17 @@
-﻿using NAPS2.Images.Bitwise;
+﻿using Microsoft.Extensions.Logging;
+using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Scan.Internal;
 
 internal class RemotePostProcessor : IRemotePostProcessor
 {
     private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
 
     public RemotePostProcessor(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
     }
 
 
@@ -76,52 +79,59 @@ internal class RemotePostProcessor : IRemotePostProcessor
 
         if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
         {
-            float width = original.Width / original.HorizontalResolution;
-            float height = original.Height / original.VerticalResolution;
-            if (float.IsNaN(width) || float.IsNaN(height))
-            {
-                width = original.Width;
-                height = original.Height;
-            }
-
-            if ((options.PageSize!.Width > options.PageSize.Height) ^ (width > height))
-            {
-                if (options.CropToPageSize)
-                {
-                    scaled = scaled.PerformTransform(new CropTransform(
-                        0,
-                        (int) ((width - (float) options.PageSize.HeightInInches) * original.HorizontalResolution),
-                        0,
-                        (int) ((height - (float) options.PageSize.WidthInInches) * original.VerticalResolution)
-                    ));
-                }
-                else
-                {
-                    scaled.SetResolution((float) (original.Width / options.PageSize.HeightInInches),
-                        (float) (original.Height / options.PageSize.WidthInInches));
-                }
-            }
-            else
-            {
-                if (options.CropToPageSize)
-                {
-                    scaled = scaled.PerformTransform(new CropTransform
-                    (
-                        0,
-                        (int) ((width - (float) options.PageSize.WidthInInches) * original.HorizontalResolution),
-                        0,
-                        (int) ((height - (float) options.PageSize.HeightInInches) * original.VerticalResolution)
-                    ));
-                }
-                else
-                {
-                    scaled.SetResolution((float) (original.Width / options.PageSize.WidthInInches),
-                        (float) (original.Height / options.PageSize.HeightInInches));
-                }
-            }
+            scaled = CropAndStretch(original, options, scaled);
         }
 
         scaled.UpdateLogicalPixelFormat();
+        return scaled;
+    }
+
+    private IMemoryImage CropAndStretch(IMemoryImage original, ScanOptions options, IMemoryImage scaled)
+    {
+        if (original.HorizontalResolution <= 0 || original.VerticalResolution <= 0)
+        {
+            _logger.LogDebug("Skipping StretchToPageSize/CropToPageSize as there is no resolution data");
+            return scaled;
+        }
+
+        float width = original.Width / original.HorizontalResolution;
+        float height = original.Height / original.VerticalResolution;
+
+        if ((options.PageSize!.Width > options.PageSize.Height) ^ (width > height))
+        {
+            if (options.CropToPageSize)
+            {
+                scaled = scaled.PerformTransform(new CropTransform(
+                    0,
+                    (int) ((width - (float) options.PageSize.HeightInInches) * original.HorizontalResolution),
+                    0,
+                    (int) ((height - (float) options.PageSize.WidthInInches) * original.VerticalResolution)
+                ));
+            }
+            else
+            {
+                scaled.SetResolution((float) (original.Width / options.PageSize.HeightInInches),
+                    (float) (original.Height / options.PageSize.WidthInInches));
+            }
+        }
+        else
+        {
+            if (options.CropToPageSize)
+            {
+                scaled = scaled.PerformTransform(new CropTransform
+                (
+                    0,
+                    (int) ((width - (float) options.PageSize.WidthInInches) * original.HorizontalResolution),
+                    0,
+                    (int) ((height - (float) options.PageSize.HeightInInches) * original.VerticalResolution)
+                ));
+            }
+            else
+            {
+                scaled.SetResolution((float) (original.Width / options.PageSize.WidthInInches),
+                    (float) (original.Height / options.PageSize.HeightInInches));
+            }
+        }
         return scaled;
     }
 
@@ -157,6 +167,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
                 BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
             };
         }
+        Debug.WriteLine($"Thumbnail size: {options.ThumbnailSize}");
         if (options.ThumbnailSize.HasValue)
         {
             data = data with
@@ -167,6 +178,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
                     .PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value)),
                 ThumbnailTransformState = processedImage.TransformState
             };
+            Debug.WriteLine($"Actual thumbnail size: {data.Thumbnail.Width}x{data.Thumbnail.Height}");
         }
         processedImage = processedImage.WithPostProcessingData(data, true);
     }

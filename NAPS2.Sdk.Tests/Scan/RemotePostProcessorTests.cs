@@ -118,4 +118,18 @@ public class RemotePostProcessorTests : ContextualTests
         var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
         ImageAsserts.Similar(ImageResources.patcht_cropped_bl, result!.Render().PerformTransform(new RotationTransform(90)));
     }
+
+    [Fact]
+    public void CropToPageSize_NoResolution()
+    {
+        var image = LoadImage(ImageResources.patcht);
+        image.SetResolution(0, 0);
+        var options = new ScanOptions
+        {
+            CropToPageSize = true,
+            PageSize = new PageSize(8m, 10m, PageSizeUnit.Inch)
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        ImageAsserts.Similar(ImageResources.patcht, result, ignoreResolution: true);
+    }
 }
