@@ -10,6 +10,7 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsListView<T> : IListView<T> where T : notnull
 {
+    private const int TextPadding = 6;
     private static readonly Pen DefaultPen = new(Color.Black, 1);
     private static readonly Pen SelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
     private static readonly StringFormat LabelFormat = new() { Alignment = StringAlignment.Center };
@@ -76,34 +77,35 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     private void CustomRenderItem(object? sender, DrawListViewItemEventArgs e)
     {
-        int width, height;
         var image = ImageList.Get(e.Item);
-        if (image.Width > image.Height)
-        {
-            width = ImageSize;
-            height = (int) Math.Round(width * (image.Height / (double) image.Width));
-        }
-        else
-        {
-            if (_behavior.ShowPageNumbers)
-                height = ImageSize - 12;
-            else
-                height = ImageSize;
-            width = (int) Math.Round(height * (image.Width / (double) image.Height));
-        }
-        var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
-        var y = e.Bounds.Top + (e.Bounds.Height - height) / 2;
-        e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
+        string? label = null;
+        int textOffset = 0;
         if (_behavior.ShowPageNumbers)
         {
+            label = $"{e.ItemIndex + 1} / {_view.Items.Count}";
+            SizeF textSize = e.Graphics.MeasureString(label, _view.Font);
+            textOffset = (int)(textSize.Height + TextPadding);
+        }
+
+        float scaleHeight = (float)(ImageSize - textOffset) / image.Height;
+        float scaleWidth = (float)ImageSize / image.Width;
+
+        float scale = Math.Min(scaleWidth, scaleHeight);
+        int height = (int)Math.Round(image.Height * scale);
+        int width = (int)Math.Round(image.Width * scale);
+
+        var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
+        var y = e.Bounds.Top + (e.Bounds.Height - height - textOffset) / 2;
+        e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
+        if (!string.IsNullOrEmpty(label))
+        {
             // Draw the text below the image
-            string drawString = $"{e.ItemIndex + 1} / {_view.Items.Count}";
             var drawBrush = Brushes.Black;
 
             float x1 = x + width / 2;
-            float y1 = y + height + 6;
+            float y1 = y + height + TextPadding;
 
-            e.Graphics.DrawString(drawString, _view.Font, drawBrush, x1, y1, LabelFormat);
+            e.Graphics.DrawString(label, _view.Font, drawBrush, x1, y1, LabelFormat);
         }
         // Draw border
         if (e.Item.Selected)
