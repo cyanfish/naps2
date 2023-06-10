@@ -36,9 +36,9 @@ public class DownloadController
 
     public int TotalFiles => _filesToDownload.Count;
 
-    public double CurrentFileSize { get; private set; }
+    public long CurrentFileSize { get; private set; }
 
-    public double CurrentFileProgress { get; private set; }
+    public long CurrentFileProgress { get; private set; }
 
     public Task CompletionTask => _completionSource.Task;
 
