@@ -13,7 +13,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private const int TextPadding = 6;
     private static readonly Pen DefaultPen = new(Color.Black, 1);
     private static readonly Pen SelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
-    private static readonly StringFormat LabelFormat = new() { Alignment = StringAlignment.Center };
+    private static readonly StringFormat LabelFormat = new() { Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter };
 
     private readonly ListView _view;
     private readonly Eto.Forms.Control _viewEtoControl;
@@ -79,11 +79,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     {
         var image = ImageList.Get(e.Item);
         string? label = null;
+        SizeF textSize = SizeF.Empty;
         int textOffset = 0;
         if (_behavior.ShowPageNumbers)
         {
             label = $"{e.ItemIndex + 1} / {_view.Items.Count}";
-            SizeF textSize = e.Graphics.MeasureString(label, _view.Font);
+            textSize = e.Graphics.MeasureString(label, _view.Font);
             textOffset = (int)(textSize.Height + TextPadding);
         }
 
@@ -105,7 +106,11 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             float x1 = x + width / 2;
             float y1 = y + height + TextPadding;
 
-            e.Graphics.DrawString(label, _view.Font, drawBrush, x1, y1, LabelFormat);
+            RectangleF labelRect = new(x1, y1, 0, textSize.Height);
+            float maxLabelWidth = Math.Min(textSize.Width, e.Bounds.Width - 2 * TextPadding);
+            labelRect.Inflate(maxLabelWidth / 2, 0);
+
+            e.Graphics.DrawString(label, _view.Font, drawBrush, labelRect, LabelFormat);
         }
         // Draw border
         if (e.Item.Selected)
