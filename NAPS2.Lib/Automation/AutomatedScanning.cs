@@ -202,8 +202,7 @@ public class AutomatedScanning
         {
             _errorOutput.DisplayError(MiscResources.FilesCouldNotBeDownloaded);
         };
-        downloadController.Start();
-        await downloadController.CompletionTask;
+        await downloadController.StartDownloadsAsync();
     }
 
     private void ReorderScannedImages()

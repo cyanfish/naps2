@@ -51,7 +51,7 @@ public class DownloadProgressForm : EtoDialogBase
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
-        Controller.Start();
+        Controller.StartDownloadsAsync().AssertNoAwait();
     }
 
     private void OnDownloadProgress(object? sender, EventArgs e)
