@@ -12,6 +12,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 {
     private static readonly Pen DefaultPen = new(Color.Black, 1);
     private static readonly Pen SelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
+    private static readonly StringFormat LabelFormat = new() { Alignment = StringAlignment.Center };
 
     private readonly ListView _view;
     private readonly Eto.Forms.Control _viewEtoControl;
@@ -97,16 +98,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         {
             // Draw the text below the image
             string drawString = $"{e.ItemIndex + 1} / {_view.Items.Count}";
-            var drawFont = new Font("Arial", 10);
-            var drawBrush = new SolidBrush(Color.Black);
+            var drawBrush = Brushes.Black;
 
             float x1 = x + width / 2;
             float y1 = y + height + 6;
 
-            var drawFormat = new StringFormat();
-            drawFormat.Alignment = StringAlignment.Center;
-
-            e.Graphics.DrawString(drawString, drawFont, drawBrush, x1, y1, drawFormat);
+            e.Graphics.DrawString(drawString, _view.Font, drawBrush, x1, y1, LabelFormat);
         }
         // Draw border
         if (e.Item.Selected)
