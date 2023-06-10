@@ -11,8 +11,10 @@ namespace NAPS2.EtoForms.WinForms;
 public class WinFormsListView<T> : IListView<T> where T : notnull
 {
     private const int TextPadding = 6;
+    private const int SelectionPadding = 3;
     private static readonly Pen DefaultPen = new(Color.Black, 1);
-    private static readonly Pen SelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
+    private static readonly SolidBrush OutlineBrush = new(Color.FromArgb(0x60, 0xa0, 0xe8));
+    private static readonly SolidBrush SelectionBrush = new(Color.FromArgb(0xcc, 0xe8, 0xff));
     private static readonly StringFormat LabelFormat = new() { Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter };
 
     private readonly ListView _view;
@@ -97,6 +99,26 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
         var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
         var y = e.Bounds.Top + (e.Bounds.Height - height - textOffset) / 2;
+
+        if (e.Item.Selected)
+        {
+            Size intTextSize = Size.Ceiling(textSize);
+
+            int selectionWidth = Math.Max(width, intTextSize.Width);
+            int selectionHeight = height + TextPadding + intTextSize.Height;
+
+            var selectionX = e.Bounds.Left + (e.Bounds.Width - width) / 2;
+
+            var selectionRect = new Rectangle(selectionX, y, selectionWidth, selectionHeight);
+            selectionRect.Inflate(SelectionPadding, SelectionPadding);
+
+            var outlineRect = selectionRect;
+            outlineRect.Inflate(1, 1);
+            e.Graphics.FillRectangle(OutlineBrush, outlineRect);
+
+            e.Graphics.FillRectangle(SelectionBrush, selectionRect);
+        }
+
         e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
         if (!string.IsNullOrEmpty(label))
         {
@@ -113,11 +135,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             e.Graphics.DrawString(label, _view.Font, drawBrush, labelRect, LabelFormat);
         }
         // Draw border
-        if (e.Item.Selected)
-        {
-            e.Graphics.DrawRectangle(SelectionPen, x - 2, y - 2, width + 3, height + 3);
-        }
-        else
+        if (!e.Item.Selected)
         {
             e.Graphics.DrawRectangle(DefaultPen, x, y, width, height);
         }
