@@ -31,12 +31,12 @@ public class DownloadController
 
     public void QueueFile(DownloadInfo downloadInfo, Action<string> fileCallback)
     {
-        _filesToDownload.Add(new QueueItem { DownloadInfo = downloadInfo, FileCallback = fileCallback });
+        _filesToDownload.Add(new QueueItem(downloadInfo, fileCallback));
     }
 
     public void QueueFile(IExternalComponent component)
     {
-        _filesToDownload.Add(new QueueItem { DownloadInfo = component.DownloadInfo, FileCallback = component.Install });
+        _filesToDownload.Add(new QueueItem(component.DownloadInfo, component.Install));
     }
 
     public void Stop()
@@ -136,9 +136,9 @@ public class DownloadController
                 return false;
             }
 
-            fileToDownload.TempFolder = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
-            Directory.CreateDirectory(fileToDownload.TempFolder);
-            string p = Path.Combine(fileToDownload.TempFolder, fileToDownload.DownloadInfo.FileName);
+            string tempFolder = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
+            Directory.CreateDirectory(tempFolder);
+            string p = Path.Combine(tempFolder, fileToDownload.DownloadInfo.FileName);
             try
             {
                 result.Position = 0;
@@ -151,7 +151,7 @@ public class DownloadController
                 DownloadError?.Invoke(this, EventArgs.Empty);
             }
             FilesDownloaded++;
-            Directory.Delete(fileToDownload.TempFolder, true);
+            Directory.Delete(tempFolder, true);
         }
 
         DownloadComplete?.Invoke(this, EventArgs.Empty);
@@ -166,14 +166,7 @@ public class DownloadController
         return str;
     }
 
-    private class QueueItem
-    {
-        public required DownloadInfo DownloadInfo { get; set; }
-
-        public string? TempFolder { get; set; }
-
-        public required Action<string> FileCallback { get; set; }
-    }
+    private record QueueItem(DownloadInfo DownloadInfo, Action<string> FileCallback);
 
     public async Task<bool> StartDownloadsAsync()
     {
