@@ -7,18 +7,20 @@ namespace NAPS2.Dependencies;
 
 public class DownloadController
 {
+    private static readonly HttpClient DefaultHttpClient = new();
+
     private readonly ScanningContext _scanningContext;
     private readonly ILogger _logger;
 
-    private static readonly HttpClient _client = new();
-
+    private readonly HttpClient _client;
     private readonly List<QueueItem> _filesToDownload = new();
     private bool _cancel;
 
-    public DownloadController(ScanningContext scanningContext)
+    public DownloadController(ScanningContext scanningContext, HttpClient? client = null)
     {
         _scanningContext = scanningContext;
         _logger = scanningContext.Logger;
+        _client = client ?? DefaultHttpClient;
     }
 
     public int FilesDownloaded { get; private set; }
