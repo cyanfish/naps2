@@ -93,12 +93,6 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, BrightnessTransform transform)
     {
-        if (image.PixelFormat is ImagePixelFormat.BW1)
-        {
-            // No need to handle black & white since brightness is a null transform
-            return image;
-        }
-
         float brightnessNormalized = transform.Brightness / 1000f;
         EnsurePixelFormat(ref image);
         new BrightnessBitwiseImageOp(brightnessNormalized).Perform(image);
