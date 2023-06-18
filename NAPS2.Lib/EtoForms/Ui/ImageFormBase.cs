@@ -130,6 +130,8 @@ public abstract class ImageFormBase : EtoDialogBase
 
     public List<UiImage>? SelectedImages { get; set; }
 
+    protected bool CanScaleWorkingImage { get; set; } = true;
+
     protected virtual IEnumerable<Transform> Transforms => throw new NotImplementedException();
 
     private bool TransformMultiple => SelectedImages != null && _applyToSelected.IsChecked();
@@ -166,13 +168,16 @@ public abstract class ImageFormBase : EtoDialogBase
         using var imageToRender = Image.GetClonedImage();
         WorkingImage = imageToRender.Render();
 
-        // Scale down the image to the screen size for better efficiency without losing much fidelity
-        var workingArea = GetScreenWorkingArea();
-        var widthRatio = WorkingImage.Width / workingArea.Width;
-        var heightRatio = WorkingImage.Height / workingArea.Height;
-        if (widthRatio > 1 || heightRatio > 1)
+        if (CanScaleWorkingImage)
         {
-            WorkingImage = WorkingImage.PerformTransform(new ScaleTransform(1 / Math.Max(widthRatio, heightRatio)));
+            // Scale down the image to the screen size for better efficiency without losing much fidelity
+            var workingArea = GetScreenWorkingArea();
+            var widthRatio = WorkingImage.Width / workingArea.Width;
+            var heightRatio = WorkingImage.Height / workingArea.Height;
+            if (widthRatio > 1 || heightRatio > 1)
+            {
+                WorkingImage = WorkingImage.PerformTransform(new ScaleTransform(1 / Math.Max(widthRatio, heightRatio)));
+            }
         }
 
         DisplayImage = WorkingImage.Clone();

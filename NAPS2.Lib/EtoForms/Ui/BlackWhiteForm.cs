@@ -15,6 +15,8 @@ public class BlackWhiteForm : ImageFormBase
 
         _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high");
         Sliders = new[] { _thresholdSlider };
+        // BlackWhiteTransform is not commutative with scaling
+        CanScaleWorkingImage = false;
     }
 
     protected override IEnumerable<Transform> Transforms =>
