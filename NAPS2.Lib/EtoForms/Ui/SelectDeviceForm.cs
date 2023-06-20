@@ -26,8 +26,7 @@ public class SelectDeviceForm : EtoDialogBase
     {
         Title = UiStrings.SelectSource;
 
-        FormStateController.SaveFormState = false;
-        FormStateController.RestoreFormState = false;
+        FormStateController.SaveFormState = FormStateController.RestoreFormState = AsyncDevices != null;
         FormStateController.DefaultExtraLayoutSize = new Size(50, 0);
 
         LayoutController.Content = L.Row(
