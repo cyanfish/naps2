@@ -59,6 +59,11 @@ public class ImageImporterTests : ContextualTests
         Assert.False(result[0].PostProcessingData.BarcodeDetection.IsAttempted);
         Assert.True(result[0].TransformState.IsEmpty);
 
+        // Verify no re-encode happens
+        var originalImage = ImageContext.Load(filePath);
+        var storageImage = ImageContext.Load(storage.FullPath);
+        ImageAsserts.Similar(originalImage, storageImage, 0);
+
         result[0].Dispose();
         Assert.False(File.Exists(storage.FullPath));
     }

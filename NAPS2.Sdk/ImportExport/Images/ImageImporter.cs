@@ -46,7 +46,9 @@ public class ImageImporter : IImageImporter
 
                         bool lossless = frame.OriginalFileFormat is ImageFileFormat.Bmp or ImageFileFormat.Png;
                         var image = _scanningContext.CreateProcessedImage(
-                            frame,
+                            frame.OriginalFileFormat == ImageFileFormat.Jpeg
+                                ? CreateJpegStorageWithoutReEncoding(filePath, frame)
+                                : frame,
                             BitDepth.Color,
                             lossless,
                             -1);
@@ -69,5 +71,16 @@ public class ImageImporter : IImageImporter
                 throw;
             }
         });
+    }
+
+    private IImageStorage CreateJpegStorageWithoutReEncoding(string originalPath, IMemoryImage loadedImage)
+    {
+        if (_scanningContext.FileStorageManager == null)
+        {
+            return loadedImage;
+        }
+        var storagePath = _scanningContext.FileStorageManager.NextFilePath() + ".jpg";
+        File.Copy(originalPath, storagePath);
+        return new ImageFileStorage(storagePath);
     }
 }
