@@ -51,7 +51,7 @@ public class DownloadProgressForm : EtoDialogBase
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
-        Controller.Start();
+        Controller.StartDownloadsAsync().AssertNoAwait();
     }
 
     private void OnDownloadProgress(object? sender, EventArgs e)
@@ -62,7 +62,7 @@ public class DownloadProgressForm : EtoDialogBase
         var cTot = Controller.CurrentFileSize;
         _totalStatus.Text = string.Format(MiscResources.FilesProgressFormat, f, fTot);
         _totalProgressBar.MaxValue = fTot * 1000;
-        _totalProgressBar.Value = f * 1000 + (cTot == 0 ? 0 : (int)(c / cTot * 1000));
+        _totalProgressBar.Value = f * 1000 + (cTot == 0 ? 0 : (int)(c * 1e3 / cTot));
         _fileStatus.Text = string.Format(MiscResources.SizeProgress, (c / 1e6).ToString("f1"), (cTot / 1e6).ToString("f1"));
         if (c > 0)
         {
