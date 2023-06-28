@@ -6,20 +6,10 @@ namespace NAPS2.ImportExport.Email.Mapi;
 public class MapiDispatcher
 {
     private readonly ScanningContext _scanningContext;
-    private readonly IMapiWrapper _mapiWrapper;
 
-#if NET6_0_OR_GREATER
-    [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-#endif
     public MapiDispatcher(ScanningContext scanningContext)
-        : this(scanningContext, new MapiWrapper(new SystemEmailClients()))
-    {
-    }
-
-    public MapiDispatcher(ScanningContext scanningContext, IMapiWrapper mapiWrapper)
     {
         _scanningContext = scanningContext;
-        _mapiWrapper = mapiWrapper;
     }
 
     /// <summary>
@@ -56,7 +46,7 @@ public class MapiDispatcher
         using var worker2 = _scanningContext.CreateWorker(WorkerType.WinX86)!;
         if (await worker2.Service.CanLoadMapi(clientName))
         {
-            return await _mapiWrapper.SendEmail(clientName, message);
+            return await worker2.Service.SendMapiEmail(clientName, message);
         }
 
         throw new Exception($"Could not load MAPI dll: {clientName}");
