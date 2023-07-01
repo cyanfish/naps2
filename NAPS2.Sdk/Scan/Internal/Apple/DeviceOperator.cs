@@ -1,10 +1,12 @@
 #if MAC
 using System.Threading;
+using AppKit;
 using CoreGraphics;
 using Foundation;
 using ImageCaptureCore;
 using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
+using NAPS2.Images.Mac;
 using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan.Internal.Apple;
@@ -111,46 +113,101 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 
     public override void DidScanToBandData(ICScannerDevice scanner, ICScannerBandData data)
     {
-        var (pixelFormat, subPixelType) = (data.PixelDataType, data.NumComponents, data.BitsPerComponent) switch
-        {
-            (ICScannerPixelDataType.BW, 1, 1) => (ImagePixelFormat.BW1, SubPixelType.Bit),
-            (ICScannerPixelDataType.Gray, 1, 8) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
-            (ICScannerPixelDataType.Rgb, 3, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
-            (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgbn),
-            _ => (ImagePixelFormat.Unsupported, null)
-        };
-        if (pixelFormat == ImagePixelFormat.Unsupported)
-        {
-            // TODO: Set errors
-            _logger.LogError("Unsupported ICC pixel format {PixelDataType} {NumComponents} {BitsPerComponent}",
-                data.PixelDataType, data.NumComponents, data.BitsPerComponent);
-            return;
-        }
-        var bufferInfo = new PixelInfo(
-            (int) data.FullImageWidth,
-            (int) data.FullImageHeight,
-            subPixelType!,
-            (int) data.BytesPerRow);
-        _buffer ??= new MemoryStream((int) bufferInfo.Length);
+        var expectedBufferLength = (int) (data.FullImageHeight * data.BytesPerRow);
+        _buffer ??= new MemoryStream(expectedBufferLength);
         data.DataBuffer!.AsStream().CopyTo(_buffer);
         // TODO: The buffer gets written pretty much all at once, at least for escl - maybe we can/should reuse TwainProgressEstimator
-        _scanEvents.PageProgress(_buffer.Length / (double) bufferInfo.Length);
-        if (_buffer.Length >= bufferInfo.Length)
+        _scanEvents.PageProgress(_buffer.Length / (double) expectedBufferLength);
+
+        if (_buffer.Length >= expectedBufferLength)
         {
             _logger.LogDebug("DidScanToBandData buffer complete");
             var fullBuffer = _buffer;
             _buffer = null;
             var copyTask = Task.Run(() =>
             {
-                var image = _scanningContext.ImageContext.Create(
-                    (int) data.FullImageWidth, (int) data.FullImageHeight, pixelFormat);
-                new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
-                _callback(image);
+                // We prefer to use the provided color profile for maximum color accuracy. If one isn't present we fall
+                // back to a direct bitwise copy if it's in a supported pixel format.
+                var (pixelFormat, subPixelType) = (data.PixelDataType, data.NumComponents, data.BitsPerComponent) switch
+                {
+                    (ICScannerPixelDataType.BW, 1, 1) => (ImagePixelFormat.BW1, SubPixelType.Bit),
+                    (ICScannerPixelDataType.Gray, 1, 8) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
+                    (ICScannerPixelDataType.Rgb, 3, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
+                    (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgbn),
+                    _ => (ImagePixelFormat.Unsupported, null)
+                };
+                if (data.ColorSyncProfilePath != null)
+                {
+                    _logger.LogDebug($"Flushing image with color sync profile {data.ColorSyncProfilePath}");
+                    FlushImageWithColorSpace(fullBuffer, data);
+                }
+                else if (pixelFormat != ImagePixelFormat.Unsupported && subPixelType != null)
+                {
+                    _logger.LogDebug($"Flushing image with pixel format {pixelFormat}");
+                    FlushImageDirectly(fullBuffer, data, subPixelType, pixelFormat);
+                }
+                else
+                {
+                    _logger.LogError(
+                        "No color sync profile and unsupported ICC pixel format " +
+                        "{PixelDataType} {NumComponents} {BitsPerComponent}",
+                        data.PixelDataType, data.NumComponents, data.BitsPerComponent);
+                }
             });
             lock (this)
             {
                 _copyTasks.Add(copyTask);
             }
+        }
+    }
+
+    private void FlushImageDirectly(MemoryStream fullBuffer, ICScannerBandData data, SubPixelType subPixelType,
+        ImagePixelFormat pixelFormat)
+    {
+        var image = _scanningContext.ImageContext.Create(
+            (int) data.FullImageWidth, (int) data.FullImageHeight, pixelFormat);
+        var bufferInfo = new PixelInfo(
+            (int) data.FullImageWidth,
+            (int) data.FullImageHeight,
+            subPixelType!,
+            (int) data.BytesPerRow);
+        _buffer ??= new MemoryStream((int) bufferInfo.Length);
+        new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
+        // TODO: Resolution
+        _callback(image);
+    }
+
+    private void FlushImageWithColorSpace(MemoryStream fullBuffer, ICScannerBandData data)
+    {
+        var colorSpace = CGColorSpace.CreateIccData(NSData.FromFile(data.ColorSyncProfilePath!));
+        var cgImage = new CGImage(
+            (int) data.FullImageWidth,
+            (int) data.FullImageHeight,
+            (int) data.BitsPerComponent,
+            (int) data.BitsPerPixel,
+            (int) data.BytesPerRow,
+            colorSpace,
+            CGBitmapFlags.None,
+            new CGDataProvider(fullBuffer.GetBuffer(), 0, (int) fullBuffer.Length),
+            null,
+            true,
+            CGColorRenderingIntent.Default);
+        var imageRep = new NSBitmapImageRep(cgImage);
+        // TODO: Resolution
+        var nsImage = new NSImage();
+        nsImage.AddRepresentation(imageRep);
+        // TODO: Could maybe do this without the NAPS2.Images.Mac reference but that would require duplicating
+        // a bunch of logic to normalize image reps etc.
+        var macImage = new MacImage(_scanningContext.ImageContext, nsImage);
+        if (_scanningContext.ImageContext is MacImageContext)
+        {
+            _callback(macImage);
+        }
+        else
+        {
+            var image = macImage.Copy(_scanningContext.ImageContext);
+            macImage.Dispose();
+            _callback(image);
         }
     }
 

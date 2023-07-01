@@ -48,6 +48,17 @@ public static class ImageExtensions
     }
 
     /// <summary>
+    /// Creates a new image with the same content, dimensions, and resolution as this image.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="imageContext"></param>
+    /// <returns></returns>
+    public static IMemoryImage Copy(this IMemoryImage source, ImageContext imageContext)
+    {
+        return source.CopyWithPixelFormat(imageContext, source.PixelFormat);
+    }
+
+    /// <summary>
     /// Creates a new image with the same content, dimensions, and resolution as this image, but possibly with a different pixel format.
     /// This can result in some loss of information (e.g. when converting color to gray or black/white).
     /// </summary>
@@ -56,8 +67,22 @@ public static class ImageExtensions
     /// <returns></returns>
     public static IMemoryImage CopyWithPixelFormat(this IMemoryImage source, ImagePixelFormat pixelFormat)
     {
+        return source.CopyWithPixelFormat(source.ImageContext, pixelFormat);
+    }
+
+    /// <summary>
+    /// Creates a new image with the same content, dimensions, and resolution as this image, but possibly with a different pixel format.
+    /// This can result in some loss of information (e.g. when converting color to gray or black/white).
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="imageContext"></param>
+    /// <param name="pixelFormat"></param>
+    /// <returns></returns>
+    public static IMemoryImage CopyWithPixelFormat(this IMemoryImage source, ImageContext imageContext,
+        ImagePixelFormat pixelFormat)
+    {
         if (pixelFormat == ImagePixelFormat.Unsupported) throw new ArgumentException();
-        var newImage = source.CopyBlankWithPixelFormat(pixelFormat);
+        var newImage = source.CopyBlankWithPixelFormat(imageContext, pixelFormat);
         new CopyBitwiseImageOp().Perform(source, newImage);
         newImage.OriginalFileFormat = source.OriginalFileFormat;
         if (source.LogicalPixelFormat < pixelFormat)
@@ -85,8 +110,21 @@ public static class ImageExtensions
     /// <returns></returns>
     public static IMemoryImage CopyBlankWithPixelFormat(this IMemoryImage source, ImagePixelFormat pixelFormat)
     {
+        return CopyBlankWithPixelFormat(source, source.ImageContext, pixelFormat);
+    }
+
+    /// <summary>
+    /// Creates a new (empty) image with the same dimensions and resolution as this image, and the specified pixel format.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="imageContext"></param>
+    /// <param name="pixelFormat"></param>
+    /// <returns></returns>
+    public static IMemoryImage CopyBlankWithPixelFormat(this IMemoryImage source, ImageContext imageContext,
+        ImagePixelFormat pixelFormat)
+    {
         if (pixelFormat == ImagePixelFormat.Unsupported) throw new ArgumentException();
-        var newImage = source.ImageContext.Create(source.Width, source.Height, pixelFormat);
+        var newImage = imageContext.Create(source.Width, source.Height, pixelFormat);
         newImage.SetResolution(source.HorizontalResolution, source.VerticalResolution);
         return newImage;
     }
