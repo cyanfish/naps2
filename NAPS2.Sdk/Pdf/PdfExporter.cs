@@ -254,7 +254,8 @@ public class PdfExporter : IPdfExporter
         lock (state.Document)
         {
             var exportFormat = PrepareForExport(state);
-            DrawImageOnPage(state.Page, state.RenderedImage!, exportFormat, state.Compat);
+            DrawImageOnPage(state.Page, state.RenderedImage!, state.Image.Metadata.PageSize, exportFormat,
+                state.Compat);
             if (state.OcrTask?.Result != null)
             {
                 DrawOcrTextOnPage(state.Page, state.OcrTask.Result);
@@ -456,21 +457,22 @@ public class PdfExporter : IPdfExporter
         return string.Concat(elements);
     }
 
-    private void DrawImageOnPage(PdfPage page, IMemoryImage image, ImageExportFormat exportFormat, PdfCompat compat)
+    private void DrawImageOnPage(PdfPage page, IMemoryImage image, PageSize? pageSize,
+        ImageExportFormat exportFormat, PdfCompat compat)
     {
         using var xImage = XImage.FromImageSource(new ImageSource(image, exportFormat));
         if (compat != PdfCompat.Default)
         {
             xImage.Interpolate = false;
         }
-        var (realWidth, realHeight) = GetRealSize(image);
+        var (realWidth, realHeight) = GetRealSize(image, pageSize);
         page.Width = realWidth;
         page.Height = realHeight;
         using XGraphics gfx = XGraphics.FromPdfPage(page);
         gfx.DrawImage(xImage, 0, 0, realWidth, realHeight);
     }
 
-    private static (int width, int height) GetRealSize(IMemoryImage img)
+    private static (double width, double height) GetRealSize(IMemoryImage img, PageSize? pageSize)
     {
         double hAdjust = 72 / img.HorizontalResolution;
         double vAdjust = 72 / img.VerticalResolution;
@@ -480,7 +482,29 @@ public class PdfExporter : IPdfExporter
         }
         double realWidth = img.Width * hAdjust;
         double realHeight = img.Height * vAdjust;
-        return ((int) realWidth, (int) realHeight);
+
+        // Use the scanned page size if it's close enough
+        // It might not be close enough if we've cropped the image or if the scanner didn't produce the requested size
+        if (pageSize != null)
+        {
+            var pageHorDpi = img.Width / (double) pageSize.WidthInInches;
+            var pageVerDpi = img.Height / (double) pageSize.HeightInInches;
+            // We expect a margin of error of <1 since most of the inaccuracy comes from file formats like JPEG only
+            // storing integral DPIs
+            if (Math.Abs(img.HorizontalResolution - pageHorDpi) <= 1 &&
+                Math.Abs(img.VerticalResolution - pageVerDpi) <= 1)
+            {
+                realWidth = (double) pageSize.WidthInInches * 72;
+                realHeight = (double) pageSize.HeightInInches * 72;
+            }
+        }
+
+        // PDF page size precision is 3 decimal places and image matrix precision is 4 decimal places.
+        // We round to 3 decimal places to ensure they match exactly.
+        realWidth = Math.Round(realWidth, 3);
+        realHeight = Math.Round(realHeight, 3);
+
+        return (realWidth, realHeight);
     }
 
     private static XRect AdjustBounds((int x, int y, int w, int h) bounds, float hAdjust, float vAdjust) =>
