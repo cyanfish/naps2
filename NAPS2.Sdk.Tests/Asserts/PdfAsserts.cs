@@ -19,6 +19,14 @@ public static class PdfAsserts
         Assert.Equal(count, doc.PageCount);
     }
 
+    public static void AssertPageSize(PageSize pageSize, int precision, string filePath)
+    {
+        Assert.True(File.Exists(filePath));
+        var doc = PdfReader.Open(filePath, PdfDocumentOpenMode.InformationOnly);
+        Assert.Equal((double) pageSize.WidthInInches, doc.Pages[0].Width.Inch, precision);
+        Assert.Equal((double) pageSize.HeightInInches, doc.Pages[0].Height.Inch, precision);
+    }
+
     public static async Task AssertCompliant(string profile, string filePath)
     {
         Assert.True(File.Exists(filePath));

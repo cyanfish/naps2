@@ -351,4 +351,38 @@ public class PdfExporterTests : ContextualTests
         progressMock.Verify(x => x(1, 3));
         progressMock.VerifyNoOtherCalls();
     }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportWithPageSize(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var sourceImage = ImageContext.Create(850, 1100, ImagePixelFormat.RGB24);
+        sourceImage.SetResolution(99.4f, 99.4f);
+        using var image = ScanningContext.CreateProcessedImage(sourceImage, BitDepth.Color, false, -1, PageSize.Letter);
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        // If the resolution is close to the actual page size, we should correct to that page size with high precision
+        PdfAsserts.AssertPageSize(PageSize.Letter, 3, filePath);
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportWithMismatchedPageSize(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var sourceImage = ImageContext.Create(850, 1100, ImagePixelFormat.RGB24);
+        sourceImage.SetResolution(98, 98);
+        using var image = ScanningContext.CreateProcessedImage(sourceImage, BitDepth.Color, false, -1, PageSize.Letter);
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        // If the page size is too far off, we should ignore it and go by the actual resolution (precision is less important here)
+        PdfAsserts.AssertPageSize(new PageSize(8.7m, 11.2m, PageSizeUnit.Inch), 1, filePath);
+    }
 }
