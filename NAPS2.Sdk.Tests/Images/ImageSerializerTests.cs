@@ -24,6 +24,7 @@ public class ImageSerializerTests : ContextualTests
             BitDepth.Grayscale,
             true,
             -1,
+            PageSize.A4,
             new[] { new BrightnessTransform(300) });
 
         var serializedImage = ImageSerializer.Serialize(sourceImage, new SerializeImageOptions());
@@ -33,6 +34,7 @@ public class ImageSerializerTests : ContextualTests
         Assert.Equal(300, Assert.IsType<BrightnessTransform>(destImage.TransformState.Transforms[0]).Brightness);
         Assert.True(destImage.Metadata.Lossless);
         Assert.Equal(BitDepth.Grayscale, destImage.Metadata.BitDepth);
+        Assert.Equal(PageSize.A4, destImage.Metadata.PageSize);
         ImageAsserts.Similar(ImageResources.dog_b_p300, destImage);
     }
 

@@ -50,7 +50,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
 
             var bitDepth = options.UseNativeUI ? BitDepth.Color : options.BitDepth;
             var scannedImage = _scanningContext.CreateProcessedImage(image, bitDepth, options.MaxQuality,
-                options.Quality);
+                options.Quality, options.PageSize);
             DoRevertibleTransforms(ref scannedImage, ref image, options, postProcessingContext);
             postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
             return scannedImage;

@@ -44,7 +44,8 @@ public class RecoverableFolder : IDisposable
     }
 
     public RecoverableFolder(ScanningContext scanningContext, ImportPostProcessor importPostProcessor,
-        DirectoryInfo directory, FileStream lockFile, RecoveryIndex recoveryIndex, int imageCount, DateTime scannedDateTime)
+        DirectoryInfo directory, FileStream lockFile, RecoveryIndex recoveryIndex, int imageCount,
+        DateTime scannedDateTime)
     {
         _scanningContext = scanningContext;
         _importPostProcessor = importPostProcessor;
@@ -128,7 +129,8 @@ public class RecoverableFolder : IDisposable
         RecoveryIndexImage indexImage)
     {
         var processedImage = _scanningContext.CreateProcessedImage(storage, indexImage.BitDepth.ToBitDepth(),
-            indexImage.HighQuality, -1, indexImage.TransformList!.ToImmutableList());
+            indexImage.HighQuality, -1, PageSize.Parse(indexImage.PageSize),
+            indexImage.TransformList!.ToImmutableList());
 
         // TODO: Make this take a lazy rendered image or something
         processedImage = _importPostProcessor.AddPostProcessingData(processedImage,

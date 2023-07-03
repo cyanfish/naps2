@@ -58,19 +58,20 @@ public class ScanningContext : IDisposable
             IMemoryImage { LogicalPixelFormat: ImagePixelFormat.Gray8 } => BitDepth.Grayscale,
             _ => BitDepth.Color
         };
-        return CreateProcessedImage(storage, bitDepth, false, -1, transforms);
-    }
-
-    internal ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
-    {
-        return CreateProcessedImage(storage, bitDepth, lossless, quality, Enumerable.Empty<Transform>());
+        return CreateProcessedImage(storage, bitDepth, false, -1, null, transforms);
     }
 
     internal ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
-        IEnumerable<Transform> transforms)
+        PageSize? pageSize)
+    {
+        return CreateProcessedImage(storage, bitDepth, lossless, quality, pageSize, Enumerable.Empty<Transform>());
+    }
+
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
+        PageSize? pageSize, IEnumerable<Transform> transforms)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
-        var metadata = new ImageMetadata(bitDepth, lossless);
+        var metadata = new ImageMetadata(bitDepth, lossless, pageSize);
         var image = new ProcessedImage(
             ImageContext,
             convertedStorage,

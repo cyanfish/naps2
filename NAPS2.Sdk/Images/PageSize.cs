@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace NAPS2.Scan;
+namespace NAPS2.Images;
 
 public record PageSize
 {
@@ -17,6 +17,29 @@ public record PageSize
     public static PageSize B5 = new("176", "250", PageSizeUnit.Millimetre);
 
     public static PageSize B4 = new("250", "353", PageSizeUnit.Millimetre);
+
+    public static PageSize? Parse(string? size)
+    {
+        if (size == null)
+            return null;
+        var parts = size.Split(' ');
+        if (parts.Length != 2)
+            return null;
+        var dims = parts[0].Split('x');
+        if (dims.Length != 2)
+            return null;
+        if (!decimal.TryParse(dims[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var width))
+            return null;
+        if (!decimal.TryParse(dims[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var height))
+            return null;
+        var unit = parts[1] switch
+        {
+            "mm" => PageSizeUnit.Millimetre,
+            "cm" => PageSizeUnit.Centimetre,
+            _ => PageSizeUnit.Inch
+        };
+        return new PageSize(width, height, unit);
+    }
 
     protected PageSize()
     {
@@ -117,4 +140,15 @@ public record PageSize
     }
 
     public int HeightInThousandthsOfAnInch => (int)(HeightInInches * 1000);
+
+    public override string ToString()
+    {
+        var unit = Unit switch
+        {
+            PageSizeUnit.Centimetre => "cm",
+            PageSizeUnit.Millimetre => "mm",
+            _ => "in"
+        };
+        return $"{Width.ToString(CultureInfo.InvariantCulture)}x{Height.ToString(CultureInfo.InvariantCulture)} {unit}";
+    }
 }

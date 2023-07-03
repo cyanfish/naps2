@@ -24,4 +24,5 @@ message SerializedImageMetadata {
 	}
 	BitDepth bitDepth = 2;
 	bool lossless = 3;
+	string pageSize = 4;
 }

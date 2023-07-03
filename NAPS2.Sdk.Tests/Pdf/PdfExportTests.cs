@@ -54,7 +54,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_png), BitDepth.Color, true, -1);
+            LoadImage(ImageResources.dog_png), BitDepth.Color, true, -1, null);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -71,7 +71,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "test.pdf");
         // Width is 99 (not divisible by 4)
         var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_99w), BitDepth.Color, true, -1);
+            LoadImage(ImageResources.dog_99w), BitDepth.Color, true, -1, null);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -87,7 +87,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_alpha), BitDepth.Color, false, -1);
+            LoadImage(ImageResources.dog_alpha), BitDepth.Color, false, -1, null);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -104,7 +104,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_mask), BitDepth.Color, false, -1);
+            LoadImage(ImageResources.dog_mask), BitDepth.Color, false, -1, null);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
@@ -153,7 +153,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_bw_24bit),
-            BitDepth.BlackAndWhite, true, -1);
+            BitDepth.BlackAndWhite, true, -1, null);
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 

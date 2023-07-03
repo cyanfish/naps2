@@ -38,7 +38,8 @@ public static class ImageSerializer
             {
                 TransformListXml = image.TransformState.Transforms.ToXml(),
                 BitDepth = (SerializedImageMetadata.Types.BitDepth) image.Metadata.BitDepth,
-                Lossless = image.Metadata.Lossless
+                Lossless = image.Metadata.Lossless,
+                PageSize = image.Metadata.PageSize?.ToString() ?? ""
             },
             Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
             BarcodeDetectionXml = image.PostProcessingData.BarcodeDetection?.ToXml(),
@@ -144,6 +145,7 @@ public static class ImageSerializer
             (BitDepth) serializedImage.Metadata.BitDepth,
             serializedImage.Metadata.Lossless,
             -1,
+            PageSize.Parse(serializedImage.Metadata.PageSize),
             serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>());
 
         var thumbnail = serializedImage.Thumbnail.ToByteArray();
