@@ -119,7 +119,8 @@ public class RemotePostProcessorTests : ContextualTests
         ImageAsserts.Similar(ImageResources.patcht_cropped_bl, result!.Render().PerformTransform(new RotationTransform(90)));
     }
 
-    [Fact]
+    // Only Linux can have zero resolution images
+    [PlatformFact(include: PlatformFlags.Linux)]
     public void CropToPageSize_NoResolution()
     {
         var image = LoadImage(ImageResources.patcht);
