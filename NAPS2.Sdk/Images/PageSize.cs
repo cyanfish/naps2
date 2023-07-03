@@ -28,17 +28,20 @@ public record PageSize
         var dims = parts[0].Split('x');
         if (dims.Length != 2)
             return null;
-        if (!decimal.TryParse(dims[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var width))
+        if (!decimal.TryParse(dims[0], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var width))
             return null;
-        if (!decimal.TryParse(dims[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var height))
+        if (!decimal.TryParse(dims[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var height))
             return null;
         var unit = parts[1] switch
         {
             "mm" => PageSizeUnit.Millimetre,
             "cm" => PageSizeUnit.Centimetre,
-            _ => PageSizeUnit.Inch
+            "in" => PageSizeUnit.Inch,
+            _ => (PageSizeUnit?) null
         };
-        return new PageSize(width, height, unit);
+        if (unit == null)
+            return null;
+        return new PageSize(width, height, unit.Value);
     }
 
     protected PageSize()
@@ -147,7 +150,8 @@ public record PageSize
         {
             PageSizeUnit.Centimetre => "cm",
             PageSizeUnit.Millimetre => "mm",
-            _ => "in"
+            PageSizeUnit.Inch => "in",
+            _ => throw new InvalidOperationException("Invalid page size unit")
         };
         return $"{Width.ToString(CultureInfo.InvariantCulture)}x{Height.ToString(CultureInfo.InvariantCulture)} {unit}";
     }

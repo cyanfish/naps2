@@ -132,4 +132,19 @@ public class RemotePostProcessorTests : ContextualTests
         var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
         ImageAsserts.Similar(ImageResources.patcht, result, ignoreResolution: true);
     }
+
+    [Fact]
+    public void PageSize()
+    {
+        var image = LoadImage(ImageResources.dog);
+        var options = new ScanOptions
+        {
+            PageSize = NAPS2.Images.PageSize.A4
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        Assert.NotNull(result?.Metadata.PageSize);
+        Assert.Equal(210m, result.Metadata.PageSize.Width);
+        Assert.Equal(297m, result.Metadata.PageSize.Height);
+        Assert.Equal(PageSizeUnit.Millimetre, result.Metadata.PageSize.Unit);
+    }
 }
