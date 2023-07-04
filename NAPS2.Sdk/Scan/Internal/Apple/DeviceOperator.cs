@@ -271,8 +271,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             }
             _logger.LogDebug("ICC: Setting scan parameters");
             SetScanArea(_unit);
-            // TODO: Check supported resolutions?
-            _unit.Resolution = (nuint) _options.Dpi;
+            _unit.Resolution = GetClosestResolution((nuint) _options.Dpi, _unit);
             _unit.BitDepth = _options.BitDepth == BitDepth.BlackAndWhite
                 ? ICScannerBitDepth.Bits1
                 : ICScannerBitDepth.Bits8;
@@ -283,7 +282,6 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                 _ => ICScannerPixelDataType.Rgb
             };
             _device.TransferMode = ICScannerTransferMode.MemoryBased;
-            // TODO: increase? or maybe not as this could still be useful progress for twain scanners
             _device.MaxMemoryBandSize = 65536;
             _logger.LogDebug("ICC: Requesting scan");
             _device.RequestScan();
@@ -319,6 +317,20 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                 _device.RequestCloseSession();
             }
         }
+    }
+
+    private nuint GetClosestResolution(nuint dpi, ICScannerFunctionalUnit unit)
+    {
+        var targetDpi = dpi;
+        if (unit.SupportedResolutions.Count > 0)
+        {
+            targetDpi = unit.SupportedResolutions.MinBy(x => Math.Abs((int) (x - dpi)));
+        }
+        if (targetDpi != dpi)
+        {
+            _logger.LogDebug("ICC: Correcting resolution from {InDpi} to {OutDpi}", dpi, targetDpi);
+        }
+        return targetDpi;
     }
 
     private void SetScanArea(ICScannerFunctionalUnit unit)
