@@ -4,46 +4,41 @@ namespace NAPS2.Dependencies;
 
 public abstract class DownloadFormat
 {
-    public static DownloadFormat Gzip = new GzipDownloadFormat();
+    public static readonly DownloadFormat Gzip = new GzipDownloadFormat();
 
-    public static DownloadFormat Zip = new ZipDownloadFormat();
+    public static readonly DownloadFormat Zip = new ZipDownloadFormat();
 
-    public abstract string Prepare(string tempFilePath);
+    public abstract string Prepare(MemoryStream stream, string tempFilePath);
 
     private class GzipDownloadFormat : DownloadFormat
     {
-        public override string Prepare(string tempFilePath)
+        private const string FileExtension = ".gz";
+
+        public override string Prepare(MemoryStream stream, string tempFilePath)
         {
-            if (!tempFilePath.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+            if (tempFilePath.EndsWith(FileExtension, StringComparison.InvariantCultureIgnoreCase))
             {
-                throw new ArgumentException();
+                tempFilePath = tempFilePath.Substring(0, tempFilePath.Length - 3);
             }
-            var pathWithoutGz = tempFilePath.Substring(0, tempFilePath.Length - 3);
-            Extract(tempFilePath, pathWithoutGz);
-            return pathWithoutGz;
+            Extract(stream, tempFilePath);
+            return tempFilePath;
         }
 
-        private static void Extract(string sourcePath, string destPath)
+        private static void Extract(MemoryStream stream, string destPath)
         {
-            using FileStream inFile = new FileInfo(sourcePath).OpenRead();
             using FileStream outFile = File.Create(destPath);
-            using GZipStream decompress = new GZipStream(inFile, CompressionMode.Decompress);
+            using GZipStream decompress = new(stream, CompressionMode.Decompress);
             decompress.CopyTo(outFile);
         }
     }
 
     private class ZipDownloadFormat : DownloadFormat
     {
-        public override string Prepare(string tempFilePath)
+        public override string Prepare(MemoryStream stream, string tempFilePath)
         {
-            if (!tempFilePath.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase))
-            {
-                throw new ArgumentException();
-            }
-
-            var tempDir = Path.GetDirectoryName(tempFilePath) ?? throw new ArgumentNullException();
-            ZipFile.ExtractToDirectory(tempFilePath, tempDir);
-            File.Delete(tempFilePath);
+            var tempDir = Path.GetDirectoryName(tempFilePath) ?? throw new ArgumentException("Path was a root path", nameof(tempFilePath));
+            ZipArchive archive = new(stream);
+            archive.ExtractToDirectory(tempDir);
             return tempDir;
         }
     }
