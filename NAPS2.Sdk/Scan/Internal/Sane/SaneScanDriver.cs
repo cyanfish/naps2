@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal.Sane.Native;
@@ -189,10 +190,11 @@ internal class SaneScanDriver : IScanDriver
         return optionData;
     }
 
-    private static void SetResolution(ScanOptions options, SaneOptionController controller, OptionData optionData)
+    private void SetResolution(ScanOptions options, SaneOptionController controller, OptionData optionData)
     {
-        // TODO: Get closest resolution value
-        if (controller.TrySet(SaneOptionNames.RESOLUTION, options.Dpi))
+        var targetDpi = GetClosestResolution(options.Dpi, controller);
+
+        if (controller.TrySet(SaneOptionNames.RESOLUTION, targetDpi))
         {
             if (controller.TryGet(SaneOptionNames.RESOLUTION, out var res))
             {
@@ -202,8 +204,8 @@ internal class SaneScanDriver : IScanDriver
         }
         else
         {
-            controller.TrySet(SaneOptionNames.X_RESOLUTION, options.Dpi);
-            controller.TrySet(SaneOptionNames.Y_RESOLUTION, options.Dpi);
+            controller.TrySet(SaneOptionNames.X_RESOLUTION, targetDpi);
+            controller.TrySet(SaneOptionNames.Y_RESOLUTION, targetDpi);
             if (controller.TryGet(SaneOptionNames.X_RESOLUTION, out var xRes))
             {
                 optionData.XRes = xRes;
@@ -213,8 +215,36 @@ internal class SaneScanDriver : IScanDriver
                 optionData.YRes = yRes;
             }
         }
-        if (optionData.XRes <= 0) optionData.XRes = options.Dpi;
-        if (optionData.YRes <= 0) optionData.YRes = options.Dpi;
+        if (optionData.XRes <= 0) optionData.XRes = targetDpi;
+        if (optionData.YRes <= 0) optionData.YRes = targetDpi;
+    }
+
+    private double GetClosestResolution(int dpi, SaneOptionController controller)
+    {
+        var targetDpi = (double) dpi;
+        var opt = controller.GetOption(SaneOptionNames.RESOLUTION) ??
+                  controller.GetOption(SaneOptionNames.X_RESOLUTION) ??
+                  controller.GetOption(SaneOptionNames.Y_RESOLUTION);
+        if (opt != null)
+        {
+            if (opt.ConstraintType == SaneConstraintType.Range)
+            {
+                targetDpi = targetDpi.Clamp(opt.Range!.Min, opt.Range.Max);
+                if (opt.Range.Quant != 0)
+                {
+                    targetDpi -= (targetDpi - opt.Range.Min) % opt.Range.Quant;
+                }
+            }
+            if (opt.ConstraintType == SaneConstraintType.WordList && opt.WordList!.Any())
+            {
+                targetDpi = opt.WordList!.OrderBy(x => Math.Abs(x - targetDpi)).First();
+            }
+        }
+        if ((int) targetDpi != dpi)
+        {
+            _scanningContext.Logger.LogDebug("Correcting DPI from {InDpi} to {OutDpi}", dpi, targetDpi);
+        }
+        return targetDpi;
     }
 
     internal IMemoryImage? ScanPage(ISaneDevice device, IScanEvents scanEvents, OptionData optionData)
