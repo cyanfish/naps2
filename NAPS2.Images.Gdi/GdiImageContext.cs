@@ -30,8 +30,9 @@ public class GdiImageContext : ImageContext
 
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        stream = EnsureMemoryStream(stream);
-        return new GdiImage(this, new Bitmap(stream));
+        var memoryStream = EnsureMemoryStream(stream);
+        using var bitmap = new Bitmap(memoryStream);
+        return new GdiImage(this, bitmap).Copy();
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
