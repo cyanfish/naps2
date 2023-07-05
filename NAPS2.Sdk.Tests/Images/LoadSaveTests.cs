@@ -170,6 +170,19 @@ public class LoadSaveTests : ContextualTests
     }
 
     [Fact]
+    public void SetResolutionAndSave()
+    {
+        var image = LoadImage(ImageResources.dog);
+
+        image.SetResolution(300, 300);
+        var stream = image.SaveToMemoryStream(ImageFileFormat.Jpeg);
+        var image2 = ImageContext.Load(stream);
+
+        Assert.Equal(300, image2.HorizontalResolution);
+        Assert.Equal(300, image2.VerticalResolution);
+    }
+
+    [Fact]
     public void SavePngOptimizesBitDepth()
     {
         var image32Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.ARGB32);
