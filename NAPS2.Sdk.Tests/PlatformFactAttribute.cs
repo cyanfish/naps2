@@ -9,11 +9,11 @@ public sealed class PlatformFactAttribute : FactAttribute
     {
         if (include != PlatformFlags.None && (GetPlatform() & include) != include)
         {
-            Skip = $"Only runs on platform: {include}";
+            Skip = $"Only runs on platform(s): {include}";
         }
         if (exclude != PlatformFlags.None && (GetPlatform() & exclude) != PlatformFlags.None)
         {
-            Skip = $"Doesn't runs on platform: {exclude}";
+            Skip = $"Doesn't run on platform(s): {exclude}";
         }
     }
 
