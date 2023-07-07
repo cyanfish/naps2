@@ -17,6 +17,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     private readonly ILogger _logger;
     private readonly ICScannerDevice _device;
     private ICScannerFunctionalUnit? _unit;
+    private nuint _resolution;
     private readonly DeviceReader _reader;
     private readonly ScanOptions _options;
     private readonly IScanEvents _scanEvents;
@@ -173,7 +174,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             (int) data.BytesPerRow);
         _buffer ??= new MemoryStream((int) bufferInfo.Length);
         new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
-        // TODO: Resolution
+        _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
+        image.SetResolution(_resolution, _resolution);
         _callback(image);
     }
 
@@ -193,12 +195,13 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             true,
             CGColorRenderingIntent.Default);
         var imageRep = new NSBitmapImageRep(cgImage);
-        // TODO: Resolution
         var nsImage = new NSImage();
         nsImage.AddRepresentation(imageRep);
         // TODO: Could maybe do this without the NAPS2.Images.Mac reference but that would require duplicating
         // a bunch of logic to normalize image reps etc.
         var macImage = new MacImage(_scanningContext.ImageContext, nsImage);
+        _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
+        macImage.SetResolution(_resolution, _resolution);
         if (_scanningContext.ImageContext is MacImageContext)
         {
             _callback(macImage);
@@ -271,7 +274,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             }
             _logger.LogDebug("ICC: Setting scan parameters");
             SetScanArea(_unit);
-            _unit.Resolution = GetClosestResolution((nuint) _options.Dpi, _unit);
+            _resolution = GetClosestResolution((nuint) _options.Dpi, _unit);
+            _unit.Resolution = _resolution;
             _unit.BitDepth = _options.BitDepth == BitDepth.BlackAndWhite
                 ? ICScannerBitDepth.Bits1
                 : ICScannerBitDepth.Bits8;
