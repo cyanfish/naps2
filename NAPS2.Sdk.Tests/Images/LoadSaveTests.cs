@@ -173,10 +173,9 @@ public class LoadSaveTests : ContextualTests
     public void SetResolutionAndSaveJpeg()
     {
         var image = LoadImage(ImageResources.dog);
-        var image3 = image.Copy();
 
-        image3.SetResolution(300, 300);
-        var stream = image3.SaveToMemoryStream(ImageFileFormat.Jpeg);
+        image.SetResolution(300, 300);
+        var stream = image.SaveToMemoryStream(ImageFileFormat.Jpeg);
         var image2 = ImageContext.Load(stream);
 
         Assert.Equal(300, image2.HorizontalResolution, 2);

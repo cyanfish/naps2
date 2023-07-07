@@ -28,7 +28,7 @@ public class MacImageContext : ImageContext
     {
         lock (ConstructorLock)
         {
-            var image = new NSImage(NSData.FromStream(stream) ?? throw new ArgumentException(nameof(stream)));
+            var image = NSImage.FromStream(stream);
             var reps = image.Representations();
             try
             {

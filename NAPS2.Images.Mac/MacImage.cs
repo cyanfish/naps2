@@ -27,9 +27,11 @@ public class MacImage : IMemoryImage
 #endif
         }
         PixelFormat = GetPixelFormat(Rep);
-        // TODO: Why do we get an unsupported warning for ColorSpaceName?
+        // TODO: Any replacement for deprecated ColorSpaceName?
+#pragma warning disable CA1416
         bool isDeviceColorSpace = Rep.ColorSpaceName == NSColorSpace.DeviceRGB ||
                                   Rep.ColorSpaceName == NSColorSpace.DeviceWhite;
+#pragma warning restore CA1416
         if (PixelFormat == ImagePixelFormat.Unsupported)
         {
             var rep = MacBitmapHelper.CopyRep(Rep);
@@ -41,6 +43,7 @@ public class MacImage : IMemoryImage
                 ? NSColorSpace.DeviceGrayColorSpace
                 : NSColorSpace.DeviceRGBColorSpace;
             var rep = Rep.ConvertingToColorSpace(newColorSpace, NSColorRenderingIntent.Default);
+            rep.Size = Rep.Size;
             ReplaceRep(rep);
         }
         LogicalPixelFormat = PixelFormat;
@@ -75,15 +78,14 @@ public class MacImage : IMemoryImage
 
     public int Width => (int) Rep.PixelsWide;
     public int Height => (int) Rep.PixelsHigh;
-    public float HorizontalResolution => (float) NsImage.Size.Width.ToDouble() / Width * 72;
-    public float VerticalResolution => (float) NsImage.Size.Height.ToDouble() / Height * 72;
+    public float HorizontalResolution => (float) (Width / NsImage.Size.Width * 72).ToDouble();
+    public float VerticalResolution => (float) (Height / NsImage.Size.Height * 72).ToDouble();
 
     public void SetResolution(float xDpi, float yDpi)
     {
-        // TODO: Image size or imagerep size?
         if (xDpi > 0 && yDpi > 0)
         {
-            NsImage.Size = new CGSize(xDpi / 72 * Width, yDpi / 72 * Height);
+            NsImage.Size = Rep.Size = new CGSize(Width / xDpi * 72, Height / yDpi * 72);
         }
     }
 
@@ -148,17 +150,16 @@ public class MacImage : IMemoryImage
         options ??= new ImageSaveOptions();
         lock (MacImageContext.ConstructorLock)
         {
-            var props = options.Quality != -1 && imageFormat is ImageFileFormat.Jpeg or ImageFileFormat.Jpeg2000
-                ? NSDictionary.FromObjectAndKey(NSNumber.FromDouble(options.Quality / 100.0),
-                    NSBitmapImageRep.CompressionFactor)
-                : null;
             var fileType = imageFormat switch
             {
-                ImageFileFormat.Jpeg => NSBitmapImageFileType.Jpeg,
-                ImageFileFormat.Png => NSBitmapImageFileType.Png,
-                ImageFileFormat.Bmp => NSBitmapImageFileType.Bmp,
-                ImageFileFormat.Tiff => NSBitmapImageFileType.Tiff,
-                ImageFileFormat.Jpeg2000 => NSBitmapImageFileType.Jpeg2000,
+                // TODO: Any replacement for deprecated UTType?
+#pragma warning disable CA1416
+                ImageFileFormat.Jpeg => UTType.JPEG,
+                ImageFileFormat.Png => UTType.PNG,
+                ImageFileFormat.Bmp => UTType.BMP,
+                ImageFileFormat.Tiff => UTType.TIFF,
+                ImageFileFormat.Jpeg2000 => UTType.JPEG2000,
+#pragma warning restore CA1416
                 _ => throw new InvalidOperationException("Unsupported image format")
             };
             var targetFormat = options.PixelFormatHint;
@@ -169,7 +170,23 @@ public class MacImage : IMemoryImage
                 targetFormat = ImagePixelFormat.RGB24;
             }
             using var helper = PixelFormatHelper.Create(this, targetFormat);
-            return helper.Image.Rep.RepresentationUsingTypeProperties(fileType, props);
+            var cgImage = helper.Image.Rep.CGImage; //RepresentationUsingTypeProperties(fileType, props);
+            var data = new NSMutableData();
+            var props = new NSMutableDictionary();
+            props.Add((NSString) "DPIWidth", NSObject.FromObject(HorizontalResolution));
+            props.Add((NSString) "DPIHeight", NSObject.FromObject(VerticalResolution));
+            if (options.Quality != -1 && imageFormat is ImageFileFormat.Jpeg or ImageFileFormat.Jpeg2000)
+            {
+                props.Add((NSString) "kCGImageDestinationLossyCompressionQuality", NSNumber.FromFloat(options.Quality / 100.0f));
+            }
+#if MONOMAC
+            using var dest = CGImageDestination.FromData(data, fileType, 1);
+#else
+            using var dest = CGImageDestination.Create(data, fileType.ToString(), 1)!;
+#endif
+            dest.AddImage(cgImage, props);
+            dest.Close();
+            return data;
         }
     }
 
