@@ -7,9 +7,6 @@ namespace NAPS2.EtoForms.Notifications;
 
 public abstract class NotificationView : IDisposable
 {
-    // TODO: Get from color scheme
-    protected static readonly Color BackgroundColor = new(0.95f, 0.95f, 0.95f);
-    private static readonly Color BorderColor = new(0.7f, 0.7f, 0.7f);
     private const int BORDER_RADIUS = 7;
     private const int CLOSE_BUTTON_SIZE = 18;
 
@@ -33,11 +30,16 @@ public abstract class NotificationView : IDisposable
 
     protected abstract LayoutElement SecondaryContent { get; }
 
+    protected Color BackgroundColor => Manager!.ColorScheme.NotificationBackgroundColor;
+    
+    protected Color BorderColor => Manager!.ColorScheme.NotificationBorderColor;
+
     public LayoutElement CreateContent()
     {
+        BeforeCreateContent();
         var drawable = new Drawable();
         drawable.Paint += DrawableOnPaint;
-        var closeButton = new CloseButton();
+        var closeButton = new CloseButton(Manager!.ColorScheme);
         closeButton.Click += (_, _) => Manager!.Hide(Model);
         drawable.MouseUp += (_, _) => NotificationClicked();
         drawable.Load += (_, _) => SetUpHideTimeout(drawable);
@@ -87,11 +89,15 @@ public abstract class NotificationView : IDisposable
         }
     }
 
+    protected virtual void BeforeCreateContent()
+    {
+    }
+
     protected virtual void NotificationClicked()
     {
     }
 
-    private static void DrawableOnPaint(object? sender, PaintEventArgs e)
+    private void DrawableOnPaint(object? sender, PaintEventArgs e)
     {
         var w = e.ClipRectangle.Width;
         var h = e.ClipRectangle.Height;
@@ -99,7 +105,7 @@ public abstract class NotificationView : IDisposable
         e.Graphics.DrawRectangle(BorderColor, 0, 0, w - 1, h - 1);
     }
 
-    private static void DrawWithRoundedCorners(PaintEventArgs e)
+    private void DrawWithRoundedCorners(PaintEventArgs e)
     {
         // TODO: We're not using this as the few pixels on the edges aren't transparent, which is a problem if there's
         // an image underneath. Not sure if there's a way to make that work but I don't care enough about rounded
@@ -109,8 +115,7 @@ public abstract class NotificationView : IDisposable
         var r = BORDER_RADIUS;
         var d = r * 2;
         var q = r / 2;
-        // TODO: Color scheme background
-        e.Graphics.Clear(Colors.White);
+        e.Graphics.Clear(Manager!.ColorScheme.BackgroundColor);
         // Corners
         e.Graphics.FillEllipse(BackgroundColor, -1, -1, d, d);
         e.Graphics.FillEllipse(BackgroundColor, w - d, -1, d, d);

@@ -17,15 +17,21 @@ public class ColorScheme
         _darkModeProvider.DarkModeChanged += (_, _) => ColorSchemeChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public Color ForegroundColor => _darkModeProvider.IsDarkModeEnabled ? Colors.White : Colors.Black;
+    private bool DarkMode => _darkModeProvider.IsDarkModeEnabled;
 
-    public Color BackgroundColor => _darkModeProvider.IsDarkModeEnabled ? VeryDarkGray : Colors.White;
+    public Color ForegroundColor => DarkMode ? Colors.White : Colors.Black;
 
-    public Color SeparatorColor => _darkModeProvider.IsDarkModeEnabled ? MidGray : LightGray;
+    public Color BackgroundColor => DarkMode ? VeryDarkGray : Colors.White;
 
-    public Color BorderColor => _darkModeProvider.IsDarkModeEnabled ? LightGray : Colors.Black;
+    public Color SeparatorColor => DarkMode ? MidGray : LightGray;
 
-    public Color CropColor => _darkModeProvider.IsDarkModeEnabled ? HighlightBlue : Colors.Black;
+    public Color BorderColor => DarkMode ? LightGray : Colors.Black;
+
+    public Color CropColor => DarkMode ? HighlightBlue : Colors.Black;
+
+    public Color NotificationBackgroundColor => DarkMode ? Color.FromRgb(0x323232) : Color.FromRgb(0xf2f2f2);
+    
+    public Color NotificationBorderColor => DarkMode ? Color.FromRgb(0x606060) : Color.FromRgb(0xb2b2b2);
 
     public event EventHandler? ColorSchemeChanged;
 }

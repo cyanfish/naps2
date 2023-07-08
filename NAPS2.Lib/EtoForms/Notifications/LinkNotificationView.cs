@@ -9,8 +9,8 @@ public class LinkNotificationView : NotificationView
     private readonly string? _linkTarget;
     private readonly string? _folderTarget;
 
-    private readonly Label _label = new() { BackgroundColor = BackgroundColor };
-    private readonly LinkButton _link = new() { BackgroundColor = BackgroundColor };
+    private readonly Label _label = new();
+    private readonly LinkButton _link = new();
     private readonly ContextMenu _contextMenu = new();
 
     protected LinkNotificationView(
@@ -36,6 +36,11 @@ public class LinkNotificationView : NotificationView
                 LinkRightClick();
             }
         };
+    }
+
+    protected override void BeforeCreateContent()
+    {
+        _label.BackgroundColor = _link.BackgroundColor = BackgroundColor;
     }
 
     protected override LayoutElement PrimaryContent => _label.DynamicWrap(180).MaxWidth(180).Scale();

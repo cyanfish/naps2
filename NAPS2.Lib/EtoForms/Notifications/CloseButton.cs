@@ -6,16 +6,15 @@ namespace NAPS2.EtoForms.Notifications;
 public class CloseButton : Drawable
 {
     private const int CLOSE_BUTTON_PADDING = 5;
-    private static readonly Pen CloseButtonPen = new(new Color(0.7f, 0.7f, 0.7f), 3);
-    private static readonly Color DefaultBackground = new(0.95f, 0.95f, 0.95f);
-    private static readonly Color ActiveBackground = new(0.8f, 0.8f, 0.8f);
-    private static readonly Color HoverBackground = new(0.87f, 0.87f, 0.87f);
+
+    private readonly ColorScheme _colorScheme;
 
     private bool _hover;
     private bool _active;
 
-    public CloseButton()
+    public CloseButton(ColorScheme colorScheme)
     {
+        _colorScheme = colorScheme;
         Cursor = Cursors.Pointer;
         Paint += OnPaint;
         MouseEnter += (_, _) =>
@@ -45,6 +44,17 @@ public class CloseButton : Drawable
         };
     }
 
+    private Color PenColor => _colorScheme.NotificationBorderColor;
+    private Color DefaultBackground => _colorScheme.NotificationBackgroundColor;
+    private Color HoverBackground => Color.Blend(
+        _colorScheme.NotificationBackgroundColor,
+        _colorScheme.NotificationBorderColor,
+        0.3f);
+    private Color ActiveBackground => Color.Blend(
+        _colorScheme.NotificationBackgroundColor,
+        _colorScheme.NotificationBorderColor,
+        0.6f);
+
     private void OnPaint(object? sender, PaintEventArgs e)
     {
         var clearColor = _active && _hover ? ActiveBackground : _hover ? HoverBackground : DefaultBackground;
@@ -52,8 +62,9 @@ public class CloseButton : Drawable
         var w = e.ClipRectangle.Width;
         var h = e.ClipRectangle.Height;
         var p = CLOSE_BUTTON_PADDING;
-        e.Graphics.DrawLine(CloseButtonPen, p - 1, p - 1, w - p, h - p);
-        e.Graphics.DrawLine(CloseButtonPen, w - p, p - 1, p - 1, h - p);
+        var pen = new Pen(PenColor, 3);
+        e.Graphics.DrawLine(pen, p - 1, p - 1, w - p, h - p);
+        e.Graphics.DrawLine(pen, w - p, p - 1, p - 1, h - p);
     }
 
     public event EventHandler? Click;
