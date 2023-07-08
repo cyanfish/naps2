@@ -54,7 +54,10 @@ public class MacScannedImagePrinter : IScannedImagePrinter
         public PaginatedImageView(IList<ProcessedImage> images)
         {
             _images = images;
+            // TODO: Fix deprecation issue
+#pragma warning disable CA1422
             BorderType = NSBorderType.NoBorder;
+#pragma warning restore CA1422
             TitlePosition = NSTitlePosition.NoTitle;
             LoadImage();
         }
