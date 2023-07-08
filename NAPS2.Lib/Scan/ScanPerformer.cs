@@ -282,7 +282,14 @@ internal class ScanPerformer : IScanPerformer
             using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
             try
             {
-                var wiaDevice = Invoker.Current.InvokeGet(() => deviceManager.PromptForDevice(options.DialogParent));
+                var wiaDevice = Invoker.Current.InvokeGet(() =>
+                {
+#if NET6_0_OR_GREATER
+                    if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
+#endif
+                    // ReSharper disable once AccessToDisposedClosure
+                    return deviceManager.PromptForDevice(options.DialogParent);
+                });
                 if (wiaDevice == null)
                 {
                     return null;

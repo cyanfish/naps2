@@ -10,6 +10,9 @@ namespace NAPS2.Scan.Internal.Twain;
 /// <summary>
 /// A MessageLoopHook implementation that uses Win32 methods directly, with no dependencies on WinForms or WPF.
 /// </summary>
+#if NET6_0_OR_GREATER
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+#endif
 internal class Win32MessageLoopHook : MessageLoopHook
 {
     private readonly ILogger _logger;
@@ -134,7 +137,7 @@ internal class Win32MessageLoopHook : MessageLoopHook
     private static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
     [DllImport("user32.dll")]
-    private static extern IntPtr CreateWindowEx(int dwExStyle, string lpClassName, string lpWindowName, int dwStyle,
+    private static extern IntPtr CreateWindowEx(int dwExStyle, string lpClassName, string? lpWindowName, int dwStyle,
         int x, int y, int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu, IntPtr hInstance, IntPtr lpParam);
 
     [DllImport("user32.dll")]

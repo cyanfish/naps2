@@ -11,11 +11,10 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
     private readonly ImageTransfer _imageTransfer;
 
     public ImageListViewBehavior(UiThumbnailProvider thumbnailProvider, ImageTransfer imageTransfer,
-        ColorScheme colorScheme, Naps2Config config)
+        ColorScheme colorScheme, Naps2Config config) : base(colorScheme)
     {
         _thumbnailProvider = thumbnailProvider;
         _imageTransfer = imageTransfer;
-        ColorScheme = colorScheme;
         MultiSelect = true;
         ShowLabels = false;
         ScrollOnDrag = true;

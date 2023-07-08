@@ -66,16 +66,23 @@ public class DesktopScanController : IDesktopScanController
             var editSettingsForm = _formFactory.Create<EditProfileForm>();
             editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
 #if !MAC
-            try
+#if NET6_0_OR_GREATER
+            if (OperatingSystem.IsWindows())
             {
-                // Populate the device field automatically (because we can do that!)
-                using var deviceManager = new WiaDeviceManager();
-                using var device = deviceManager.FindDevice(deviceID);
-                editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());
+#endif
+                try
+                {
+                    // Populate the device field automatically (because we can do that!)
+                    using var deviceManager = new WiaDeviceManager();
+                    using var device = deviceManager.FindDevice(deviceID);
+                    editSettingsForm.CurrentDevice = new ScanDevice(deviceID, device.Name());
+                }
+                catch (WiaException)
+                {
+                }
+#if NET6_0_OR_GREATER
             }
-            catch (WiaException)
-            {
-            }
+#endif
 #endif
             editSettingsForm.ShowModal();
             if (!editSettingsForm.Result)

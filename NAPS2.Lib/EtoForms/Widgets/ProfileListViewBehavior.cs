@@ -9,10 +9,9 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
 {
     private readonly ProfileTransfer _profileTransfer;
 
-    public ProfileListViewBehavior(ProfileTransfer profileTransfer, ColorScheme colorScheme)
+    public ProfileListViewBehavior(ProfileTransfer profileTransfer, ColorScheme colorScheme) : base(colorScheme)
     {
         _profileTransfer = profileTransfer;
-        ColorScheme = colorScheme;
         MultiSelect = false;
         ShowLabels = true;
         ScrollOnDrag = false;

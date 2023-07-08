@@ -11,7 +11,6 @@ public class LayoutController
     private readonly Control _layout = EtoPlatform.Current.CreateContainer();
     private LayoutElement? _content;
     private Window? _window;
-    private bool _firstLayout = true;
     private bool _isShown;
     private bool _layoutQueued;
     private HashSet<Control> _controlSet = new();
@@ -82,7 +81,6 @@ public class LayoutController
             return;
         }
         var context = GetLayoutContext() with { Window = _window, IsLayout = true };
-        _firstLayout = false;
         if (LayoutElement.DEBUG_LAYOUT)
         {
             Debug.WriteLine("\n(((Starting layout)))");

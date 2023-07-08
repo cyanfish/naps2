@@ -5,7 +5,12 @@ namespace NAPS2.EtoForms.Widgets;
 
 public abstract class ListViewBehavior<T> where T : notnull
 {
-    public ColorScheme ColorScheme { get; protected set; }
+    protected ListViewBehavior(ColorScheme colorScheme)
+    {
+        ColorScheme = colorScheme;
+    }
+
+    public ColorScheme ColorScheme { get; }
 
     public bool MultiSelect { get; protected set; }
         

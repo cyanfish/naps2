@@ -37,7 +37,7 @@ public class ThunderbirdEmailProvider : IEmailProvider
                 if (!string.IsNullOrEmpty(message.Subject))
                 {
                     // There doesn't seem to be a way to escape "'," but it shouldn't be common
-                    arguments.Add($"subject='{message.Subject.Replace("',", "' ,")}'");
+                    arguments.Add($"subject='{message.Subject!.Replace("',", "' ,")}'");
                 }
                 if (message.Recipients.Any(x => x.Type == EmailRecipientType.To))
                 {
@@ -63,6 +63,10 @@ public class ThunderbirdEmailProvider : IEmailProvider
                         RedirectStandardOutput = true,
                         RedirectStandardError = true
                     });
+                if (process == null)
+                {
+                    throw new InvalidOperationException("Could not start Thunderbird process");
+                }
                 await process.WaitForExitAsync();
             }
             catch (Exception ex)

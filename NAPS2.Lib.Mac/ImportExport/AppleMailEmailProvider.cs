@@ -12,6 +12,10 @@ public class AppleMailEmailProvider : IAppleMailEmailProvider
             Invoker.Current.Invoke(() =>
             {
                 var service = NSSharingService.GetSharingService(NSSharingServiceName.ComposeEmail);
+                if (service == null)
+                {
+                    throw new InvalidOperationException("Could not get ComposeEmail sharing service");
+                }
                 if (emailMessage.Subject != null)
                 {
                     service.Subject = emailMessage.Subject;

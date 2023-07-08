@@ -63,6 +63,7 @@ internal class LocalTwainSessionController : ITwainSessionController
         var session = new TwainSession(TwainAppId);
         // TODO: Standardize on custom hook?
 #if NET6_0_OR_GREATER
+        if (!OperatingSystem.IsWindows()) throw new InvalidOperationException("Windows-only");
         session.Open(new Win32MessageLoopHook(_logger));
 #else
         session.Open();

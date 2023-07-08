@@ -130,7 +130,7 @@ public class SaneScanDriverOptionTests : ContextualTests
         private readonly IEnumerable<SaneOption> _options;
         private readonly Dictionary<int, object> _values;
 
-        public DeviceOptionsMock(IEnumerable<SaneOption> options, Dictionary<int, object>? defaultValues = null)
+        public DeviceOptionsMock(IEnumerable<SaneOption> options, Dictionary<int, object> defaultValues = null)
         {
             _options = options;
             _values = defaultValues ?? new();

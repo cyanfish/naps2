@@ -251,6 +251,11 @@ internal class WiaScanDriver : IScanDriver
                         return null;
                     }
                     var item = device.FindSubItem(config.ItemName);
+                    if (item == null)
+                    {
+                        _logger.LogError("Could not find WIA item {Item}", config.ItemName);
+                        return null;
+                    }
                     device.Properties.DeserializeEditable(device.Properties.Delta(config.DeviceProps));
                     item.Properties.DeserializeEditable(item.Properties.Delta(config.ItemProps));
                     return item;
