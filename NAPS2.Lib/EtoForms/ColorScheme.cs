@@ -7,6 +7,7 @@ public class ColorScheme
     private static readonly Color VeryDarkGray = Color.FromRgb(0x262626);
     private static readonly Color MidGray = Color.FromRgb(0x606060);
     private static readonly Color LightGray = Color.FromRgb(0xdddddd);
+    private static readonly Color HighlightBlue = Color.FromRgb(0x007bff);
 
     private readonly IDarkModeProvider _darkModeProvider;
 
@@ -23,6 +24,8 @@ public class ColorScheme
     public Color SeparatorColor => _darkModeProvider.IsDarkModeEnabled ? MidGray : LightGray;
 
     public Color BorderColor => _darkModeProvider.IsDarkModeEnabled ? LightGray : Colors.Black;
+
+    public Color CropColor => _darkModeProvider.IsDarkModeEnabled ? HighlightBlue : Colors.Black;
 
     public event EventHandler? ColorSchemeChanged;
 }

@@ -12,6 +12,8 @@ public class CropForm : ImageFormBase
     private const int HANDLE_MIN_LENGTH = 30;
     private const int FREEFORM_MIN_SIZE = 10;
 
+    private readonly ColorScheme _colorScheme;
+
     // TODO: Textboxes for direct editing
 
     // Mouse down location
@@ -29,9 +31,10 @@ public class CropForm : ImageFormBase
     private bool _freeformAvailable;
     private bool _freeformActive;
 
-    public CropForm(Naps2Config config, ThumbnailController thumbnailController) :
+    public CropForm(Naps2Config config, ThumbnailController thumbnailController, ColorScheme colorScheme) :
         base(config, thumbnailController)
     {
+        _colorScheme = colorScheme;
         Icon = new Icon(1f, Icons.transform_crop.ToEtoImage());
         Title = UiStrings.Crop;
 
@@ -222,7 +225,7 @@ public class CropForm : ImageFormBase
         var offsetR = _cropR * _overlayW;
         var offsetB = _cropB * _overlayH;
         var fillColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
-        var handlePen = new Pen(Colors.Black, HANDLE_WIDTH);
+        var handlePen = new Pen(_colorScheme.CropColor, HANDLE_WIDTH);
 
         if (_overlayW >= 1 && _overlayH >= 1)
         {
@@ -253,7 +256,7 @@ public class CropForm : ImageFormBase
         if (_freeformActive)
         {
             // Draw border
-            e.Graphics.DrawRectangle(new Pen(Colors.Black), x1, y1, x2 - x1 - 1, y2 - y1 - 1);
+            e.Graphics.DrawRectangle(new Pen(_colorScheme.CropColor), x1, y1, x2 - x1 - 1, y2 - y1 - 1);
         }
         else
         {
