@@ -31,7 +31,10 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
         var item = Items[i];
         var image = _behavior.Checkboxes ? null : _behavior.GetImage(item, _listView.ImageSize);
         var label = _behavior.ShowLabels ? _behavior.GetLabel(item) : null;
-        return new ListViewItem(image, label, _behavior.Checkboxes, isChecked => _itemChecked(item, isChecked),
-            _listView.Selection.Contains(item), () => _itemActivated(item));
+        return new ListViewItem(
+            image, label, _behavior.Checkboxes, _behavior.ColorScheme,
+            isChecked => _itemChecked(item, isChecked),
+            _listView.Selection.Contains(item),
+            () => _itemActivated(item));
     }
 }

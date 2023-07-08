@@ -15,7 +15,7 @@ public class MacModule : GuiModule
 
         builder.RegisterType<MacScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<AppleMailEmailProvider>().As<IAppleMailEmailProvider>();
-        builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>();
+        builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
         builder.RegisterType<MacIconProvider>().As<IIconProvider>();
 
         builder.RegisterType<MacDesktopForm>().As<DesktopForm>();

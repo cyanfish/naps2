@@ -276,7 +276,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         {
             using var image = _behavior.Checkboxes ? null : _behavior.GetImage(item, ImageSize);
             using var listItem = new ListViewItem(
-                image, _behavior.GetLabel(item), _behavior.Checkboxes, null, false, () => { });
+                image, _behavior.GetLabel(item), _behavior.Checkboxes, _behavior.ColorScheme, null, false, () => { });
             listItem.LoadView();
             return listItem.View.FittingSize;
         }

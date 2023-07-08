@@ -138,6 +138,7 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void UpdateColors()
     {
+        // TODO: Do something here or in inheritors?
     }
 
     private void OpeningContextMenu(object? sender, EventArgs e)

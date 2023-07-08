@@ -13,15 +13,18 @@ public class ListViewItem : NSCollectionViewItem
     private readonly Action<bool>? _checkedChanged;
     private readonly Action _onActivate;
     private bool _selected;
+    private readonly ColorScheme _colorScheme;
     private NSImageView? _imageView;
 
-    public ListViewItem(Image? itemImage, string? label, bool checkbox, Action<bool>? checkedChanged, bool selected, Action onActivate)
+    public ListViewItem(Image? itemImage, string? label, bool checkbox, ColorScheme colorScheme,
+        Action<bool>? checkedChanged, bool selected, Action onActivate)
     {
         _itemImage = itemImage;
         _label = label;
         _checkbox = checkbox;
         _checkedChanged = checkedChanged;
         _selected = selected;
+        _colorScheme = colorScheme;
         _onActivate = onActivate;
     }
 
@@ -106,6 +109,6 @@ public class ListViewItem : NSCollectionViewItem
         var layer = View.Layer!;
         layer.BorderWidth = Selected ? 3 : _label == null ? 1 : 0;
         layer.CornerRadius = _label == null ? 0 : 4;
-        layer.BorderColor = Selected ? NSColor.SelectedContentBackground.ToCG() : NSColor.Black.ToCG();
+        layer.BorderColor = Selected ? NSColor.SelectedContentBackground.ToCG() : _colorScheme.BorderColor.ToCG();
     }
 }
