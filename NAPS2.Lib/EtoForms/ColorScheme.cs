@@ -4,7 +4,9 @@ namespace NAPS2.EtoForms;
 
 public class ColorScheme
 {
-    private static readonly Color DarkGray = Color.FromRgb(0x262626);
+    private static readonly Color VeryDarkGray = Color.FromRgb(0x262626);
+    private static readonly Color MidGray = Color.FromRgb(0x606060);
+    private static readonly Color LightGray = Color.FromRgb(0xdddddd);
 
     private readonly IDarkModeProvider _darkModeProvider;
 
@@ -16,7 +18,11 @@ public class ColorScheme
 
     public Color ForegroundColor => _darkModeProvider.IsDarkModeEnabled ? Colors.White : Colors.Black;
 
-    public Color BackgroundColor => _darkModeProvider.IsDarkModeEnabled ? DarkGray : Colors.White;
+    public Color BackgroundColor => _darkModeProvider.IsDarkModeEnabled ? VeryDarkGray : Colors.White;
+
+    public Color SeparatorColor => _darkModeProvider.IsDarkModeEnabled ? MidGray : LightGray;
+
+    public Color BorderColor => _darkModeProvider.IsDarkModeEnabled ? LightGray : Colors.Black;
 
     public event EventHandler? ColorSchemeChanged;
 }

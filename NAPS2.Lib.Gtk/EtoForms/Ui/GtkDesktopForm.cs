@@ -44,21 +44,24 @@ public class GtkDesktopForm : DesktopForm
             imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
         var cssProvider = new CssProvider();
-        // TODO: Adjust colors based on color scheme
+        var bgColor = colorScheme.BackgroundColor.ToHex(false);
+        var fgColor = colorScheme.ForegroundColor.ToHex(false);
+        var sepColor = colorScheme.SeparatorColor.ToHex(false);
+        var brdColor = colorScheme.BorderColor.ToHex(false);
         cssProvider.LoadFromData(@"
             .desktop-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .image-button { min-width: 50px; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .toggle { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button button { padding: 0 5px; }
-            toolbar { border-bottom: 1px solid #ddd; }
-            .listview .frame { background-color: #fff; }
-            .listview .drop-before { border-radius: 0; border-left: 3px solid #000000; padding-left: 0; }
-            .listview .drop-after { border-radius: 0; border-right: 3px solid #000000; padding-right: 0; }
-            .desktop-listview .listview-item image { border: 1px solid #000; }
+            toolbar { border-bottom: 1px solid " + sepColor + @"; }
+            .listview .frame { background-color: " + bgColor + @"; }
+            .listview .drop-before { border-radius: 0; border-left: 3px solid " + fgColor + @"; padding-left: 0; }
+            .listview .drop-after { border-radius: 0; border-right: 3px solid " + fgColor + @"; padding-right: 0; }
+            .desktop-listview .listview-item image { border: 1px solid " + brdColor + @"; }
             .link { padding: 0; }
             .accessible-image-button { border: none; background: none; }
-            .zoom-button { background: white; border: 1px solid; border-radius: 0; }
+            .zoom-button { background: " + bgColor + @"; border: 1px solid " + brdColor + @"; border-radius: 0; }
         ");
         StyleContext.AddProviderForScreen(Gdk.Screen.Default, cssProvider, 800);
     }
