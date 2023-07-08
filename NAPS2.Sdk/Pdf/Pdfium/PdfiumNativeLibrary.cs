@@ -137,6 +137,8 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate bool FPDFPage_RemoveObject_delegate(IntPtr page, IntPtr page_obj);
 
+    public delegate int FPDFPage_GetAnnotCount_delegate(IntPtr page);
+
     public delegate bool FPDFPage_HasTransparency_delegate(IntPtr page);
 
     public delegate IntPtr FPDFImageObj_GetBitmap_delegate(IntPtr image_object);
@@ -225,6 +227,7 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPage_CountObjects_delegate FPDFPage_CountObjects => Load<FPDFPage_CountObjects_delegate>();
     public FPDFPage_GetObject_delegate FPDFPage_GetObject => Load<FPDFPage_GetObject_delegate>();
     public FPDFPage_RemoveObject_delegate FPDFPage_RemoveObject => Load<FPDFPage_RemoveObject_delegate>();
+    public FPDFPage_GetAnnotCount_delegate FPDFPage_GetAnnotCount => Load<FPDFPage_GetAnnotCount_delegate>();
     public FPDFPage_HasTransparency_delegate FPDFPage_HasTransparency => Load<FPDFPage_HasTransparency_delegate>();
     public FPDFImageObj_GetBitmap_delegate FPDFImageObj_GetBitmap => Load<FPDFImageObj_GetBitmap_delegate>();
 

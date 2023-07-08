@@ -24,6 +24,8 @@ internal class PdfPage : NativePdfiumObject
         return new PdfText(Native.FPDFText_LoadPage(Handle));
     }
 
+    public int AnnotCount => Native.FPDFPage_GetAnnotCount(Handle);
+
     public int ObjectCount => Native.FPDFPage_CountObjects(Handle);
 
     public void InsertObject(PdfPageObject pageObject)

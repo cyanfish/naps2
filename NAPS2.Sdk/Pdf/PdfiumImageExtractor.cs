@@ -130,6 +130,10 @@ internal static class PdfiumImageExtractor
 
     public static PdfPageObject? GetSingleImageObject(PdfPage page)
     {
+        if (page.AnnotCount > 0)
+        {
+            return null;
+        }
         using var pageText = page.GetText();
         PdfPageObject? imageObject = null;
         var objectCount = page.ObjectCount;
