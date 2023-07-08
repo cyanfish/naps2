@@ -6,8 +6,8 @@ namespace NAPS2.EtoForms.Ui;
 public class GtkPreviewForm : PreviewForm
 {
     public GtkPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config, desktopCommands, imageList,
-        iconProvider, ksm)
+        IIconProvider iconProvider, KeyboardShortcutManager ksm, ColorScheme colorScheme) : base(config,
+        desktopCommands, imageList, iconProvider, ksm, colorScheme)
     {
     }
 

@@ -34,6 +34,8 @@ public class ScrollZoomImageViewer
 
     public Bitmap? Image { get; set; }
 
+    public ColorScheme? ColorScheme { get; set; }
+
     public event EventHandler<ZoomChangedEventArgs>? ZoomChanged;
 
     private Size RenderSize
@@ -101,11 +103,12 @@ public class ScrollZoomImageViewer
     private void ImagePaint(object? sender, PaintEventArgs e)
     {
         e.Graphics.SetClip(e.ClipRectangle);
-        e.Graphics.Clear(Colors.White);
+        e.Graphics.Clear(ColorScheme?.BackgroundColor ?? Colors.White);
         if (Image != null)
         {
-            e.Graphics.DrawRectangle(Colors.Black, XOffset - 1, YOffset - 1, RenderSize.Width + 1,
-                RenderSize.Height + 1);
+            e.Graphics.DrawRectangle(
+                ColorScheme?.BorderColor ?? Colors.Black,
+                XOffset - 1, YOffset - 1, RenderSize.Width + 1, RenderSize.Height + 1);
             e.Graphics.DrawImage(Image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
         }
     }
@@ -116,6 +119,7 @@ public class ScrollZoomImageViewer
     {
         SetZoom(_renderFactor * (float) Math.Pow(1.2, step), anchorToMouse);
     }
+
     public void SetZoom(float value, bool anchorToMouse = false)
     {
         // TODO: Adjust clamp values based on image size

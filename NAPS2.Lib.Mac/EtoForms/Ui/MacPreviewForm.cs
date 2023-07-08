@@ -9,8 +9,8 @@ public class MacPreviewForm : PreviewForm
     private readonly NSSlider _zoomSlider;
 
     public MacPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config, desktopCommands, imageList,
-        iconProvider, ksm)
+        IIconProvider iconProvider, KeyboardShortcutManager ksm, ColorScheme colorScheme) : base(config,
+        desktopCommands, imageList, iconProvider, ksm, colorScheme)
     {
         _zoomSlider = new NSSlider
         {
@@ -19,10 +19,7 @@ public class MacPreviewForm : PreviewForm
             DoubleValue = 0,
             ToolTip = UiStrings.Zoom
         }.WithAction(ZoomUpdated);
-        ImageViewer.ZoomChanged += (_, _) =>
-        {
-            _zoomSlider.DoubleValue = Math.Log10(ImageViewer.ZoomFactor);
-        };
+        ImageViewer.ZoomChanged += (_, _) => { _zoomSlider.DoubleValue = Math.Log10(ImageViewer.ZoomFactor); };
     }
 
     protected override void CreateToolbar()

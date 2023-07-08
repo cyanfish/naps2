@@ -16,13 +16,14 @@ public class PreviewForm : EtoDialogBase
     private UiImage? _currentImage;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, KeyboardShortcutManager ksm) : base(config)
+        IIconProvider iconProvider, KeyboardShortcutManager ksm, ColorScheme colorScheme) : base(config)
     {
         _desktopCommands = desktopCommands;
         ImageList = imageList;
         _iconProvider = iconProvider;
         _ksm = ksm;
 
+        ImageViewer.ColorScheme = colorScheme;
         ImageViewer.ZoomChanged += ImageViewerZoomChanged;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
