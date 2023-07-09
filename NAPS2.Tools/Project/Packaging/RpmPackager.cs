@@ -70,10 +70,10 @@ public static class RpmPackager
         Cli.Run("tar", $"-zcvf {workingDir}/SOURCES/naps2-{pkgInfo.VersionNumber}.tar.gz {Path.GetFileName(filesDir)}", workingDir: workingDir);
         
         // Build RPM
-        Cli.Run("rpmbuild", $"{dirArg} -ba {workingDir}/SPECS/naps2.spec");
+        var arch = pkgInfo.Platform == Platform.LinuxArm ? "aarch64" : "x86_64";
+        Cli.Run("rpmbuild", $"{dirArg} -ba --target {arch} {workingDir}/SPECS/naps2.spec");
 
         // Copy to output
-        var arch = pkgInfo.Platform == Platform.LinuxArm ? "aarch64" : "x86_64";
         File.Copy(Path.Combine(workingDir, $"RPMS/{arch}/naps2-{pkgInfo.VersionNumber}-1.{arch}.rpm"), rpmPath, true);
 
         Output.OperationEnd($"Packaged rpm: {rpmPath}");
