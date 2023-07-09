@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Linux'))">net6;net462</TargetFrameworks>
-    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Linux'))">net6;net6-macos10.15;net462</TargetFrameworks>
+    <TargetFrameworks>net6;net462</TargetFrameworks>
+    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Linux')) and '$(Configuration)' != 'DebugNoMac'">
+      $(TargetFrameworks);net6-macos10.15
+    </TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>NAPS2</RootNamespace>
 
-    <Configurations>Debug;Release;DebugLang</Configurations>
+    <Configurations>Debug;Release;DebugLang;DebugNoMac</Configurations>
 
     <Title>NAPS2.Sdk</Title>
     <Product>NAPS2.Sdk</Product>
