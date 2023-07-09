@@ -1,3 +1,12 @@
+Changes in 7.0b9:
+- Improved accuracy of PDF page sizes
+- Improved UI responsiveness when OCR is running 
+- Mac: Improved color accuracy for scans with Apple Driver
+- Mac: Added support for dark themes
+- Linux: Added support for dark themes
+- Linux: Added arm64 .deb/.rpm builds
+- Bug fixes
+
 Changes in 7.0b8:
 - Added "Email PDF" support to Mac and Linux
   - Mac: Apple Mail, Gmail, and Outlook Web options
