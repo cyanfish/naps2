@@ -13,7 +13,7 @@
     <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
     <ItemGroup>
-        <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.0.0" />
+        <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.0.1" />
         <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.1.0" />
 
         <ProjectReference Include="..\NAPS2.Lib.Tests\NAPS2.Lib.Tests.csproj" />
