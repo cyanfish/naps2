@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Threading;
 using NAPS2.App.Tests.Targets;
 using NAPS2.Sdk.Tests;
@@ -22,6 +23,7 @@ public class AppiumTests : ContextualTests
     public void Init(IAppTestTarget target)
     {
         _session = StartSession(target.Gui, FolderPath);
+        ResetMainWindow();
     }
 
     public override void Dispose()
@@ -37,32 +39,35 @@ public class AppiumTests : ContextualTests
         base.Dispose();
     }
 
-    protected void WaitUntilGone(string name, int timeoutInMs)
+    protected void ResetMainWindow()
     {
+        _session.SwitchTo().Window(WaitFor(() => _session.WindowHandles.Single()));
+    }
+
+    protected T WaitFor<T>(Expression<Func<T>> expr, int timeoutInMs = 2000)
+    {
+        var func = expr.Compile();
         var stopwatch = Stopwatch.StartNew();
-        try
+        while (true)
         {
-            while (true)
+            try
             {
-                if (_session.FindElementsByName(name).Count == 0)
+                var value = func();
+                if (value is null or false)
                 {
-                    break;
+                    throw new Exception();
                 }
+                return value;
+            }
+            catch (Exception)
+            {
                 if (stopwatch.ElapsedMilliseconds > timeoutInMs)
                 {
-                    throw new WebDriverException("Timeout waiting for element to be gone");
+                    throw new Exception($"Timed out waiting for \"{expr.Body}\"");
                 }
                 Thread.Sleep(100);
             }
         }
-        catch (InvalidOperationException)
-        {
-        }
-    }
-
-    protected void ResetMainWindow()
-    {
-        _session.SwitchTo().Window(_session.WindowHandles[0]);
     }
 
     protected void ClickAt(WindowsElement element)
@@ -75,7 +80,7 @@ public class AppiumTests : ContextualTests
 
     protected void ClickAtName(string name)
     {
-        ClickAt(WaitAndFindElementByName(name));
+        ClickAt(WaitFor(() => _session.FindElementByName(name)));
     }
 
     protected void DoubleClickAt(WindowsElement element)
@@ -89,23 +94,11 @@ public class AppiumTests : ContextualTests
 
     protected void DoubleClickAtName(string name)
     {
-        DoubleClickAt(WaitAndFindElementByName(name));
+        DoubleClickAt(WaitFor(() => _session.FindElementByName(name)));
     }
 
-    protected WindowsElement WaitAndFindElementByName(string name)
+    protected bool HasElementWithName(string name)
     {
-        int i = 0;
-        while(true)
-        {
-            try
-            {
-                return _session.FindElementByName(name);
-            }
-            catch (WebDriverException)
-            {
-                if (++i > 10) throw;
-                Thread.Sleep(100);
-            }
-        }
+        return _session.FindElementsByName(name).Count > 0;
     }
 }

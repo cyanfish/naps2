@@ -34,14 +34,13 @@ public class ImportAndSaveTests : AppiumTests
         
         ClickAtName("Save PDF");
         ResetMainWindow();
-        var fileNameElements = _session.FindElementsByName("File name:");
-        var fileTextBox = fileNameElements.Last();
+        var fileTextBox = WaitFor(() => _session.FindElementsByName("File name:").Last());
         ClickAt(fileTextBox);
         fileTextBox.SendKeys("test.pdf");
         ClickAtName("Save");
         // Wait for the save to finish
         Thread.Sleep(100);
-        WaitUntilGone("Cancel", 10_000);
+        WaitFor(() => !HasElementWithName("Cancel"), 10_000);
 
         var path = Path.Combine(FolderPath, "test.pdf");
         PdfAsserts.AssertImages(path, 

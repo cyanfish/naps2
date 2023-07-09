@@ -26,17 +26,17 @@ public class ScanAndSaveTests : AppiumTests
         // Click OK in the wia device dialog (selecting the first available device by default)
         // TODO: More consistent way to pick the right OK button
         ClickAt(_session.FindElementsByName("OK")[0]);
-        WaitUntilGone("Properties", 1_000);
+        WaitFor(() => !HasElementWithName("Properties"));
         // Click OK in the profile settings window
         ClickAtName("OK");
+        WaitFor(() => HasElementWithName("Cancel"));
         // Wait for scanning to finish
-        WaitUntilGone("Cancel", 30_000);
+        WaitFor(() => !HasElementWithName("Cancel"), 30_000);
         ResetMainWindow();
         // Save "test.pdf" in the default location (which will be the test data path as NAPS2 knows we're in a test)^
         ClickAtName("Save PDF");
         ResetMainWindow();
-        var fileNameElements = _session.FindElementsByName("File name:");
-        var fileTextBox = fileNameElements.Last();
+        var fileTextBox = WaitFor(() => _session.FindElementsByName("File name:").Last());
         ClickAt(fileTextBox);
         fileTextBox.SendKeys("test.pdf");
         ClickAtName("Save");
@@ -62,17 +62,17 @@ public class ScanAndSaveTests : AppiumTests
         if (!string.IsNullOrEmpty(deviceName)) ClickAtName(deviceName);
         // Click Select in the twain device dialog (selecting the first available device by default)
         ClickAtName("Select");
-        WaitUntilGone("Select", 1_000);
+        WaitFor(() => !HasElementWithName("Select"));
         // Click OK in the profile settings window
         ClickAtName("OK");
+        WaitFor(() => HasElementWithName("Cancel"));
         // Wait for scanning to finish
-        WaitUntilGone("Cancel", 30_000);
+        WaitFor(() => !HasElementWithName("Cancel"), 30_000);
         ResetMainWindow();
         // Save "test.pdf" in the default location (which will be the test data path as NAPS2 knows we're in a test)^
         ClickAtName("Save Images");
         ResetMainWindow();
-        var fileNameElements = _session.FindElementsByName("File name:");
-        var fileTextBox = fileNameElements.Last();
+        var fileTextBox = WaitFor(() => _session.FindElementsByName("File name:").Last());
         ClickAt(fileTextBox);
         fileTextBox.SendKeys("test.jpg");
         ClickAtName("Save");
