@@ -254,7 +254,7 @@ public class PdfExporter : IPdfExporter
         lock (state.Document)
         {
             var exportFormat = PrepareForExport(state);
-            DrawImageOnPage(state.Page, state.RenderedImage!, state.Image.Metadata.PageSize, exportFormat,
+            DrawImageOnPage(state.Page, state.Image, state.RenderedImage!, state.Image.Metadata.PageSize, exportFormat,
                 state.Compat);
             if (state.OcrTask?.Result != null)
             {
@@ -457,10 +457,10 @@ public class PdfExporter : IPdfExporter
         return string.Concat(elements);
     }
 
-    private void DrawImageOnPage(PdfPage page, IMemoryImage image, PageSize? pageSize,
+    private void DrawImageOnPage(PdfPage page, ProcessedImage source, IMemoryImage image, PageSize? pageSize,
         ImageExportFormat exportFormat, PdfCompat compat)
     {
-        using var xImage = XImage.FromImageSource(new ImageSource(image, exportFormat));
+        using var xImage = XImage.FromImageSource(new ImageSource(source, image, exportFormat));
         if (compat != PdfCompat.Default)
         {
             xImage.Interpolate = false;
@@ -588,17 +588,32 @@ public class PdfExporter : IPdfExporter
 
     private class ImageSource : IImageSource
     {
+        private readonly ProcessedImage _source;
         private readonly IMemoryImage _image;
         private readonly ImageExportFormat _exportFormat;
 
-        public ImageSource(IMemoryImage image, ImageExportFormat exportFormat)
+        public ImageSource(ProcessedImage source, IMemoryImage image, ImageExportFormat exportFormat)
         {
+            _source = source;
             _image = image;
             _exportFormat = exportFormat;
         }
 
         public void SaveAsJpeg(MemoryStream ms)
         {
+            if (_source is { Storage: ImageFileStorage fileStorage, TransformState.IsEmpty: true } &&
+                ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
+            {
+                // Special case if we have an un-transformed JPEG - just use the original file instead of re-encoding
+                using var fileStream = new FileStream(fileStorage.FullPath, FileMode.Open, FileAccess.Read);
+                // Ensure it's not a grayscale image as those are known to not be embeddable
+                if (JpegFormatHelper.ReadNumComponents(fileStream) > 1)
+                {
+                    fileStream.Seek(0, SeekOrigin.Begin);
+                    fileStream.CopyTo(ms);
+                    return;
+                }
+            }
             // PDFs require RGB channels so we need to make sure we're exporting that.
             _image.Save(ms, ImageFileFormat.Jpeg, new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24 });
         }

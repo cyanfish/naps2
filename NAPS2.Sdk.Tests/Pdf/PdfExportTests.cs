@@ -37,13 +37,28 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_gray))
-            .WithTransform(new GrayscaleTransform(), true);
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_gray)
+            .PerformTransform(new GrayscaleTransform()));
 
         await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_gray);
         PdfAsserts.AssertImageFilter(filePath, 0, "DCTDecode");
+    }
+
+    [Fact]
+    public async Task ExportJpegWithoutEncoding()
+    {
+        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        var renderer = new PdfiumPdfRenderer();
+        var pdfImage = renderer.Render(ImageContext, filePath, PdfRenderSize.Default).Single();
+        ImageAsserts.Similar(image.Render(), pdfImage, 0);
     }
 
     [Theory]
