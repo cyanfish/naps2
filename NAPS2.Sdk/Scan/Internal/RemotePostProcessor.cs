@@ -64,7 +64,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
 
     private IMemoryImage DoInitialTransforms(IMemoryImage original, ScanOptions options)
     {
-        if (options.BitDepth == BitDepth.BlackAndWhite)
+        if (!options.UseNativeUI && options.BitDepth == BitDepth.BlackAndWhite)
         {
             // Ensure we actually have a black & white image (this is a no-op if we already do)
             original = original.PerformTransform(new BlackWhiteTransform(-options.Brightness));
