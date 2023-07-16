@@ -25,20 +25,30 @@ internal static class JpegFormatHelper
             {
                 isJfif = true;
                 var units = buf[7];
-                if (units == 1) // Pixels per inch
+                var hRes = buf[8] * 256 + buf[9];
+                var vRes = buf[10] * 256 + buf[11];
+                if (units == 0 && hRes > 10 && vRes > 10) // Unspecified units but assume pixels per inch
                 {
                     header = header with
                     {
-                        HorizontalDpi = buf[8] * 256 + buf[9],
-                        VerticalDpi = buf[10] * 256 + buf[11]
+                        HorizontalDpi = hRes,
+                        VerticalDpi = vRes
+                    };
+                }
+                else if (units == 1) // Pixels per inch
+                {
+                    header = header with
+                    {
+                        HorizontalDpi = hRes,
+                        VerticalDpi = vRes
                     };
                 }
                 else if (units == 2) // Pixels per cm
                 {
                     header = header with
                     {
-                        HorizontalDpi = (buf[8] * 256 + buf[9]) * 2.54,
-                        VerticalDpi = (buf[10] * 256 + buf[11]) * 2.54
+                        HorizontalDpi = hRes * 2.54,
+                        VerticalDpi = vRes * 2.54
                     };
                 }
             }
