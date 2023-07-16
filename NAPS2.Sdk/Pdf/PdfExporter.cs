@@ -129,7 +129,7 @@ public class PdfExporter : IPdfExporter
                 // We can't use a DisposableList as the objects we need to dispose are generated on the fly
                 foreach (var state in imagePages.Concat(pdfPages))
                 {
-                    state.RenderedImage?.Dispose();
+                    state.Embedder?.Dispose();
                 }
             }
         });
@@ -244,8 +244,25 @@ public class PdfExporter : IPdfExporter
     private PageExportState RenderStep(PageExportState state)
     {
         if (state.CancelToken.IsCancellationRequested) return state;
-        state.RenderedImage = state.Image.Render();
+        state.Embedder = GetRenderedImageOrDirectJpegEmbedder(state);
         return state;
+    }
+
+    private IEmbedder GetRenderedImageOrDirectJpegEmbedder(PageExportState state)
+    {
+        if (state.Image is { Storage: ImageFileStorage fileStorage, TransformState.IsEmpty: true } &&
+            ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
+        {
+            // Special case if we have an un-transformed JPEG - just use the original file instead of re-encoding
+            using var fileStream = new FileStream(fileStorage.FullPath, FileMode.Open, FileAccess.Read);
+            var jpegHeader = JpegFormatHelper.ReadHeader(fileStream);
+            // Ensure it's not a grayscale image as those are known to not be embeddable
+            if (jpegHeader is { NumComponents: > 1 })
+            {
+                return new DirectJpegEmbedder(jpegHeader, fileStorage.FullPath);
+            }
+        }
+        return new RenderedImageEmbedder(state.Image.Render());
     }
 
     private PageExportState WriteToPdfSharpStep(PageExportState state)
@@ -253,9 +270,8 @@ public class PdfExporter : IPdfExporter
         if (state.CancelToken.IsCancellationRequested) return state;
         lock (state.Document)
         {
-            var exportFormat = PrepareForExport(state);
-            DrawImageOnPage(state.Page, state.Image, state.RenderedImage!, state.Image.Metadata.PageSize, exportFormat,
-                state.Compat);
+            var exportFormat = state.Embedder!.PrepareForExport(state.Image.Metadata);
+            DrawImageOnPage(state.Page, state.Embedder, state.Image.Metadata.PageSize, exportFormat, state.Compat);
             if (state.OcrTask?.Result != null)
             {
                 DrawOcrTextOnPage(state.Page, state.OcrTask.Result);
@@ -263,22 +279,6 @@ public class PdfExporter : IPdfExporter
         }
         state.IncrementProgress();
         return state;
-    }
-
-    private static ImageExportFormat PrepareForExport(PageExportState state)
-    {
-        var exportFormat = new ImageExportHelper()
-            .GetExportFormat(state.RenderedImage!, state.Image.Metadata.BitDepth, state.Image.Metadata.Lossless);
-        if (exportFormat.FileFormat == ImageFileFormat.Unspecified)
-        {
-            exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
-        }
-        if (exportFormat.PixelFormat == ImagePixelFormat.BW1 &&
-            state.RenderedImage!.LogicalPixelFormat != ImagePixelFormat.BW1)
-        {
-            state.RenderedImage = state.RenderedImage.PerformTransform(new BlackWhiteTransform());
-        }
-        return exportFormat;
     }
 
     private static MemoryStream FinalizeAndSaveDocument(PdfDocument document, PdfExportParams exportParams)
@@ -325,14 +325,15 @@ public class PdfExporter : IPdfExporter
     private PageExportState InitOcrStep(PageExportState state)
     {
         if (state.CancelToken.IsCancellationRequested) return state;
-        var ext = state.RenderedImage!.OriginalFileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
+        var ext = state.Embedder!.OriginalFileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
         string ocrTempFilePath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ext);
         if (!_scanningContext.OcrRequestQueue.HasCachedResult(state.OcrEngine!, state.Image, state.OcrParams!))
         {
             // Save the image to a file for use in OCR.
             // We don't need to delete this file as long as we pass it to OcrRequestQueue.Enqueue, which takes 
             // ownership and guarantees its eventual deletion.
-            state.RenderedImage!.Save(ocrTempFilePath);
+            using var fileStream = new FileStream(ocrTempFilePath, FileMode.Create, FileAccess.Write);
+            state.Embedder.CopyToStream(fileStream);
         }
 
         // Start OCR
@@ -457,42 +458,42 @@ public class PdfExporter : IPdfExporter
         return string.Concat(elements);
     }
 
-    private void DrawImageOnPage(PdfPage page, ProcessedImage source, IMemoryImage image, PageSize? pageSize,
-        ImageExportFormat exportFormat, PdfCompat compat)
+    private void DrawImageOnPage(PdfPage page, IEmbedder embedder, PageSize? pageSize, ImageExportFormat exportFormat,
+        PdfCompat compat)
     {
-        using var xImage = XImage.FromImageSource(new ImageSource(source, image, exportFormat));
+        using var xImage = XImage.FromImageSource(new ImageSource(embedder, exportFormat));
         if (compat != PdfCompat.Default)
         {
             xImage.Interpolate = false;
         }
-        var (realWidth, realHeight) = GetRealSize(image, pageSize);
+        var (realWidth, realHeight) = GetRealSize(embedder, pageSize);
         page.Width = realWidth;
         page.Height = realHeight;
         using XGraphics gfx = XGraphics.FromPdfPage(page);
         gfx.DrawImage(xImage, 0, 0, realWidth, realHeight);
     }
 
-    private static (double width, double height) GetRealSize(IMemoryImage img, PageSize? pageSize)
+    private static (double width, double height) GetRealSize(IEmbedder embedder, PageSize? pageSize)
     {
-        double hAdjust = 72 / img.HorizontalResolution;
-        double vAdjust = 72 / img.VerticalResolution;
+        double hAdjust = 72 / embedder.HorizontalDpi;
+        double vAdjust = 72 / embedder.VerticalDpi;
         if (double.IsInfinity(hAdjust) || double.IsInfinity(vAdjust))
         {
             hAdjust = vAdjust = 0.75;
         }
-        double realWidth = img.Width * hAdjust;
-        double realHeight = img.Height * vAdjust;
+        double realWidth = embedder.Width * hAdjust;
+        double realHeight = embedder.Height * vAdjust;
 
         // Use the scanned page size if it's close enough
         // It might not be close enough if we've cropped the image or if the scanner didn't produce the requested size
         if (pageSize != null)
         {
-            var pageHorDpi = img.Width / (double) pageSize.WidthInInches;
-            var pageVerDpi = img.Height / (double) pageSize.HeightInInches;
+            var pageHorDpi = embedder.Width / (double) pageSize.WidthInInches;
+            var pageVerDpi = embedder.Height / (double) pageSize.HeightInInches;
             // We expect a margin of error of <1 since most of the inaccuracy comes from file formats like JPEG only
             // storing integral DPIs
-            if (Math.Abs(img.HorizontalResolution - pageHorDpi) <= 1 &&
-                Math.Abs(img.VerticalResolution - pageVerDpi) <= 1)
+            if (Math.Abs(embedder.HorizontalDpi - pageHorDpi) <= 1 &&
+                Math.Abs(embedder.VerticalDpi - pageVerDpi) <= 1)
             {
                 realWidth = (double) pageSize.WidthInInches * 72;
                 realHeight = (double) pageSize.HeightInInches * 72;
@@ -581,45 +582,30 @@ public class PdfExporter : IPdfExporter
         public PdfCompat Compat { get; }
 
         public bool NeedsOcr { get; set; }
-        public IMemoryImage? RenderedImage { get; set; }
+        public IEmbedder? Embedder { get; set; }
         public Task<OcrResult?>? OcrTask { get; set; }
         public PdfDocument? PageDocument { get; set; }
     }
 
     private class ImageSource : IImageSource
     {
-        private readonly ProcessedImage _source;
-        private readonly IMemoryImage _image;
+        private readonly IEmbedder _embedder;
         private readonly ImageExportFormat _exportFormat;
 
-        public ImageSource(ProcessedImage source, IMemoryImage image, ImageExportFormat exportFormat)
+        public ImageSource(IEmbedder embedder, ImageExportFormat exportFormat)
         {
-            _source = source;
-            _image = image;
+            _embedder = embedder;
             _exportFormat = exportFormat;
         }
 
         public void SaveAsJpeg(MemoryStream ms)
         {
-            if (_source is { Storage: ImageFileStorage fileStorage, TransformState.IsEmpty: true } &&
-                ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
-            {
-                // Special case if we have an un-transformed JPEG - just use the original file instead of re-encoding
-                using var fileStream = new FileStream(fileStorage.FullPath, FileMode.Open, FileAccess.Read);
-                // Ensure it's not a grayscale image as those are known to not be embeddable
-                if (JpegFormatHelper.ReadNumComponents(fileStream) > 1)
-                {
-                    fileStream.Seek(0, SeekOrigin.Begin);
-                    fileStream.CopyTo(ms);
-                    return;
-                }
-            }
-            // PDFs require RGB channels so we need to make sure we're exporting that.
-            _image.Save(ms, ImageFileFormat.Jpeg, new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24 });
+            _embedder.CopyToStream(ms);
         }
 
         public void SaveAsPdfBitmap(MemoryStream ms)
         {
+            var image = _embedder.Image;
             var subPixelType = _exportFormat.PixelFormat switch
             {
                 ImagePixelFormat.ARGB32 => SubPixelType.Bgra,
@@ -627,23 +613,24 @@ public class PdfExporter : IPdfExporter
                 _ => throw new InvalidOperationException("Expected 8/24/32 bit bitmap")
             };
             var dstPixelInfo =
-                new PixelInfo(_image.Width, _image.Height, subPixelType, strideAlign: 4) { InvertY = true };
+                new PixelInfo(image.Width, image.Height, subPixelType, strideAlign: 4) { InvertY = true };
             ms.SetLength(dstPixelInfo.Length);
-            new CopyBitwiseImageOp().Perform(_image, ms.GetBuffer(), dstPixelInfo);
+            new CopyBitwiseImageOp().Perform(image, ms.GetBuffer(), dstPixelInfo);
         }
 
         public void SaveAsPdfIndexedBitmap(MemoryStream ms)
         {
-            if (_image.LogicalPixelFormat != ImagePixelFormat.BW1)
+            var image = _embedder.Image;
+            if (image.LogicalPixelFormat != ImagePixelFormat.BW1)
                 throw new InvalidOperationException("Expected 1 bit bitmap");
             var dstPixelInfo =
-                new PixelInfo(_image.Width, _image.Height, SubPixelType.Bit) { InvertY = true };
+                new PixelInfo(image.Width, image.Height, SubPixelType.Bit) { InvertY = true };
             ms.SetLength(dstPixelInfo.Length);
-            new CopyBitwiseImageOp().Perform(_image, ms.GetBuffer(), dstPixelInfo);
+            new CopyBitwiseImageOp().Perform(image, ms.GetBuffer(), dstPixelInfo);
         }
 
-        public int Width => _image.Width;
-        public int Height => _image.Height;
+        public int Width => _embedder.Width;
+        public int Height => _embedder.Height;
         public string? Name => null;
 
         public XImageFormat ImageFormat
@@ -669,6 +656,93 @@ public class PdfExporter : IPdfExporter
                 }
                 throw new Exception($"Unsupported pixel format: {_exportFormat.PixelFormat}");
             }
+        }
+    }
+
+    private interface IEmbedder : IDisposable
+    {
+        void CopyToStream(Stream stream);
+        ImageExportFormat PrepareForExport(ImageMetadata metadata);
+        IMemoryImage Image { get; }
+        int Width { get; }
+        int Height { get; }
+        double HorizontalDpi { get; }
+        double VerticalDpi { get; }
+        ImageFileFormat OriginalFileFormat { get; }
+    }
+
+    private class RenderedImageEmbedder : IEmbedder
+    {
+        public RenderedImageEmbedder(IMemoryImage image)
+        {
+            Image = image;
+        }
+
+        public IMemoryImage Image { get; private set; }
+        public int Width => Image.Width;
+        public int Height => Image.Height;
+        public double HorizontalDpi => Image.HorizontalResolution;
+        public double VerticalDpi => Image.VerticalResolution;
+        public ImageFileFormat OriginalFileFormat => Image.OriginalFileFormat;
+
+        public void CopyToStream(Stream stream)
+        {
+            // PDFs require RGB channels so we need to make sure we're exporting that.
+            Image.Save(stream, ImageFileFormat.Jpeg, new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24 });
+        }
+
+        public ImageExportFormat PrepareForExport(ImageMetadata metadata)
+        {
+            var exportFormat = new ImageExportHelper().GetExportFormat(Image, metadata.BitDepth, metadata.Lossless);
+            if (exportFormat.FileFormat == ImageFileFormat.Unspecified)
+            {
+                exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
+            }
+            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 &&
+                Image.LogicalPixelFormat != ImagePixelFormat.BW1)
+            {
+                Image = Image.PerformTransform(new BlackWhiteTransform());
+            }
+            return exportFormat;
+        }
+
+        public void Dispose()
+        {
+            Image.Dispose();
+        }
+    }
+
+    private class DirectJpegEmbedder : IEmbedder
+    {
+        private readonly JpegFormatHelper.JpegHeader _header;
+        private readonly string _path;
+
+        public DirectJpegEmbedder(JpegFormatHelper.JpegHeader header, string path)
+        {
+            _header = header;
+            _path = path;
+        }
+
+        public IMemoryImage Image => throw new InvalidOperationException();
+        public int Width => _header.Width;
+        public int Height => _header.Height;
+        public double HorizontalDpi => _header.HorizontalDpi;
+        public double VerticalDpi => _header.VerticalDpi;
+        public ImageFileFormat OriginalFileFormat => ImageFileFormat.Jpeg;
+
+        public void CopyToStream(Stream stream)
+        {
+            using var fileStream = new FileStream(_path, FileMode.Open, FileAccess.Read);
+            fileStream.CopyTo(stream);
+        }
+
+        public ImageExportFormat PrepareForExport(ImageMetadata metadata)
+        {
+            return new ImageExportFormat(ImageFileFormat.Jpeg, ImagePixelFormat.RGB24);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
