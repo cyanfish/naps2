@@ -2,11 +2,11 @@
 
 public class ImportOperation : OperationBase
 {
-    private readonly IScannedImageImporter _scannedImageImporter;
+    private readonly IFileImporter _fileImporter;
 
-    public ImportOperation(IScannedImageImporter scannedImageImporter)
+    public ImportOperation(IFileImporter fileImporter)
     {
-        _scannedImageImporter = scannedImageImporter;
+        _fileImporter = fileImporter;
 
         ProgressTitle = MiscResources.ImportProgress;
         AllowCancel = true;
@@ -31,7 +31,7 @@ public class ImportOperation : OperationBase
                     {
                         Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
                         InvokeStatusChanged();
-                        var images = _scannedImageImporter.Import(fileName, importParams, oneFile ? ProgressHandler : CancelToken);
+                        var images = _fileImporter.Import(fileName, importParams, oneFile ? ProgressHandler : CancelToken);
                         await foreach (var image in images)
                         {
                             imageCallback(image);

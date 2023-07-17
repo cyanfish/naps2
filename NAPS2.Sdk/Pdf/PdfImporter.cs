@@ -11,24 +11,11 @@ public class PdfImporter : IPdfImporter
 
     private readonly ScanningContext _scanningContext;
     private readonly IPdfPasswordProvider? _pdfPasswordProvider;
-    private readonly ImportPostProcessor _importPostProcessor;
 
-    public PdfImporter(ScanningContext scanningContext)
-        : this(scanningContext, null)
-    {
-    }
-
-    public PdfImporter(ScanningContext scanningContext, IPdfPasswordProvider? pdfPasswordProvider)
-        : this(scanningContext, pdfPasswordProvider, new ImportPostProcessor())
-    {
-    }
-
-    internal PdfImporter(ScanningContext scanningContext, IPdfPasswordProvider? pdfPasswordProvider,
-        ImportPostProcessor importPostProcessor)
+    public PdfImporter(ScanningContext scanningContext, IPdfPasswordProvider? pdfPasswordProvider = null)
     {
         _scanningContext = scanningContext;
         _pdfPasswordProvider = pdfPasswordProvider;
-        _importPostProcessor = importPostProcessor;
     }
 
     public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
@@ -113,7 +100,7 @@ public class PdfImporter : IPdfImporter
         {
             var pageSize = new PageSize((decimal) page.Width * 72, (decimal) page.Height * 72, PageSizeUnit.Inch);
             var image = _scanningContext.CreateProcessedImage(storage, BitDepth.Color, false, -1, pageSize);
-            return _importPostProcessor.AddPostProcessingData(
+            return ImportPostProcessor.AddPostProcessingData(
                 image,
                 storage,
                 importParams.ThumbnailSize,
@@ -143,7 +130,7 @@ public class PdfImporter : IPdfImporter
         }
 
         var image = _scanningContext.CreateProcessedImage(storage);
-        return _importPostProcessor.AddPostProcessingData(
+        return ImportPostProcessor.AddPostProcessingData(
             image,
             null,
             importParams.ThumbnailSize,

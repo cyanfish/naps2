@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using NAPS2.Serialization;
@@ -8,14 +9,12 @@ namespace NAPS2.Recovery;
 public class RecoverableFolder : IDisposable
 {
     private readonly ScanningContext _scanningContext;
-    private readonly ImportPostProcessor _importPostProcessor;
     private readonly DirectoryInfo _directory;
     private readonly FileStream _lockFile;
     private readonly RecoveryIndex _recoveryIndex;
     private bool _disposed;
 
-    public static RecoverableFolder? TryCreate(ScanningContext scanningContext, ImportPostProcessor importPostProcessor,
-        DirectoryInfo directory)
+    public static RecoverableFolder? TryCreate(ScanningContext scanningContext, DirectoryInfo directory)
     {
         string indexFilePath = Path.Combine(directory.FullName, "index.xml");
         string lockFilePath = Path.Combine(directory.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
@@ -33,7 +32,7 @@ public class RecoverableFolder : IDisposable
             // TODO: Consider auto-delete in this case
             // TODO: Also in the case where you have a lock file but no index is written (especially if no images are present)
             if (imageCount == 0) return null;
-            return new RecoverableFolder(scanningContext, importPostProcessor, directory, lockFile, recoveryIndex,
+            return new RecoverableFolder(scanningContext, directory, lockFile, recoveryIndex,
                 imageCount, scannedDateTime);
         }
         catch (Exception)
@@ -43,12 +42,10 @@ public class RecoverableFolder : IDisposable
         }
     }
 
-    public RecoverableFolder(ScanningContext scanningContext, ImportPostProcessor importPostProcessor,
-        DirectoryInfo directory, FileStream lockFile, RecoveryIndex recoveryIndex, int imageCount,
-        DateTime scannedDateTime)
+    public RecoverableFolder(ScanningContext scanningContext, DirectoryInfo directory, FileStream lockFile,
+        RecoveryIndex recoveryIndex, int imageCount, DateTime scannedDateTime)
     {
         _scanningContext = scanningContext;
-        _importPostProcessor = importPostProcessor;
         _directory = directory;
         _lockFile = lockFile;
         _recoveryIndex = recoveryIndex;
@@ -133,7 +130,7 @@ public class RecoverableFolder : IDisposable
             indexImage.TransformList!.ToImmutableList());
 
         // TODO: Make this take a lazy rendered image or something
-        processedImage = _importPostProcessor.AddPostProcessingData(processedImage,
+        processedImage = ImportPostProcessor.AddPostProcessingData(processedImage,
             null,
             recoveryParams.ThumbnailSize,
             new BarcodeDetectionOptions(),

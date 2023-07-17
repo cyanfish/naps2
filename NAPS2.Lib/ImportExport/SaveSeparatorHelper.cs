@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport;
 
-public static class SaveSeparatorHelper
+internal static class SaveSeparatorHelper
 {
     /// <summary>
     /// Given a list of scans (each of which is a list of 1 or more images),

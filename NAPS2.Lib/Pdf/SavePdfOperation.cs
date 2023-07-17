@@ -4,7 +4,7 @@ using NAPS2.Ocr;
 
 namespace NAPS2.Pdf;
 
-public class SavePdfOperation : OperationBase
+internal class SavePdfOperation : OperationBase
 {
     private readonly IPdfExporter _pdfExporter;
     private readonly IOverwritePrompt _overwritePrompt;

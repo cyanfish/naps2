@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport;
 
-public interface IScannedImageImporter
+public interface IFileImporter
 {
     IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams importParams, ProgressHandler progress = default);
 }

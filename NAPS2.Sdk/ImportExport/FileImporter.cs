@@ -3,12 +3,12 @@ using NAPS2.Pdf;
 
 namespace NAPS2.ImportExport;
 
-public class ScannedImageImporter : IScannedImageImporter
+public class FileImporter : IFileImporter
 {
-    private readonly IScannedImageImporter _pdfImporter;
-    private readonly IScannedImageImporter _imageImporter;
+    private readonly IFileImporter _pdfImporter;
+    private readonly IFileImporter _imageImporter;
 
-    public ScannedImageImporter(IPdfImporter pdfImporter, IImageImporter imageImporter)
+    public FileImporter(IPdfImporter pdfImporter, IImageImporter imageImporter)
     {
         _pdfImporter = pdfImporter;
         _imageImporter = imageImporter;

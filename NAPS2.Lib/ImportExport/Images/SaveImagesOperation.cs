@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport.Images;
 
-public class SaveImagesOperation : OperationBase
+internal class SaveImagesOperation : OperationBase
 {
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly ImageContext _imageContext;

@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Google.Protobuf;
 using Grpc.Core;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
@@ -23,7 +24,6 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
     private readonly ITwainSessionController _twainSessionController;
-    private readonly ImportPostProcessor _importPostProcessor;
 
     private readonly AutoResetEvent _ongoingCallFinished = new(false);
     private int _ongoingCallCount;
@@ -31,22 +31,19 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
     public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer,
         IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
         : this(scanningContext, new RemoteScanController(scanningContext),
-            thumbnailRenderer, mapiWrapper, twainSessionController,
-            new ImportPostProcessor())
+            thumbnailRenderer, mapiWrapper, twainSessionController)
     {
     }
 
     internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController,
         ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController,
-        ImportPostProcessor importPostProcessor)
+        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
     {
         _scanningContext = scanningContext;
         _remoteScanController = remoteScanController;
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
         _twainSessionController = twainSessionController;
-        _importPostProcessor = importPostProcessor;
     }
 
     public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
@@ -268,7 +265,7 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
             int? thumbnailSize = request.ThumbnailSize == 0 ? null : request.ThumbnailSize;
             var barcodeOptions = request.BarcodeDetectionOptionsXml.FromXml<BarcodeDetectionOptions>();
             using var newImage =
-                _importPostProcessor.AddPostProcessingData(image, null, thumbnailSize, barcodeOptions, true);
+                ImportPostProcessor.AddPostProcessingData(image, null, thumbnailSize, barcodeOptions, true);
             return Task.FromResult(new ImportPostProcessResponse
             {
                 Image = ImageSerializer.Serialize(newImage,

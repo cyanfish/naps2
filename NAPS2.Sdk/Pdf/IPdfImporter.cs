@@ -2,6 +2,6 @@
 
 namespace NAPS2.Pdf;
 
-public interface IPdfImporter : IScannedImageImporter
+public interface IPdfImporter : IFileImporter
 {
 }

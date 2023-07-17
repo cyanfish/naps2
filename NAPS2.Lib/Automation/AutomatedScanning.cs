@@ -19,7 +19,7 @@ public class AutomatedScanning
     private readonly IEmailProviderFactory _emailProviderFactory;
     private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
-    private readonly IScannedImageImporter _scannedImageImporter;
+    private readonly IFileImporter _fileImporter;
     private readonly IOperationFactory _operationFactory;
     private readonly TesseractLanguageManager _tesseractLanguageManager;
     private readonly IFormFactory _formFactory;
@@ -40,7 +40,7 @@ public class AutomatedScanning
 
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
-        IScannedImageImporter scannedImageImporter, IOperationFactory operationFactory,
+        IFileImporter fileImporter, IOperationFactory operationFactory,
         TesseractLanguageManager tesseractLanguageManager, IFormFactory formFactory, Naps2Config config,
         IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
     {
@@ -50,7 +50,7 @@ public class AutomatedScanning
         _scanPerformer = scanPerformer;
         _errorOutput = errorOutput;
         _emailProviderFactory = emailProviderFactory;
-        _scannedImageImporter = scannedImageImporter;
+        _fileImporter = fileImporter;
         _operationFactory = operationFactory;
         _tesseractLanguageManager = tesseractLanguageManager;
         _formFactory = formFactory;
@@ -284,7 +284,7 @@ public class AutomatedScanning
                         PatchTOnly = true
                     }
                 };
-                await foreach (var image in _scannedImageImporter.Import(actualPath, importParams))
+                await foreach (var image in _fileImporter.Import(actualPath, importParams))
                 {
                     scan.Add(image);
                 }

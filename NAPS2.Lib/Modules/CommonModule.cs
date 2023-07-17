@@ -21,7 +21,7 @@ public class CommonModule : Module
     protected override void Load(ContainerBuilder builder)
     {
         // Import
-        builder.RegisterType<ScannedImageImporter>().As<IScannedImageImporter>();
+        builder.RegisterType<FileImporter>().As<IFileImporter>();
         builder.RegisterType<PdfImporter>().As<IPdfImporter>();
         builder.RegisterType<ImageImporter>().As<IImageImporter>();
         builder.RegisterType<RecoveryManager>().AsSelf();

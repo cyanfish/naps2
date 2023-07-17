@@ -6,17 +6,10 @@ namespace NAPS2.Recovery;
 public class RecoveryManager
 {
     private readonly ScanningContext _scanningContext;
-    private readonly ImportPostProcessor _importPostProcessor;
 
     public RecoveryManager(ScanningContext scanningContext)
-        : this(scanningContext, new ImportPostProcessor())
-    {
-    }
-
-    public RecoveryManager(ScanningContext scanningContext, ImportPostProcessor importPostProcessor)
     {
         _scanningContext = scanningContext;
-        _importPostProcessor = importPostProcessor;
     }
 
     public RecoverableFolder? GetLatestRecoverableFolder()
@@ -43,7 +36,7 @@ public class RecoveryManager
     {
         try
         {
-            return RecoverableFolder.TryCreate(_scanningContext, _importPostProcessor, directory);
+            return RecoverableFolder.TryCreate(_scanningContext, directory);
         }
         catch (Exception)
         {

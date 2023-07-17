@@ -7,7 +7,7 @@ namespace NAPS2.ImportExport;
 /// Class for handling substitution of special values in file paths. For example, "$(YYYY)" can be substituted with the current year.
 /// Use Placeholders.All for recommended substitutions. Alternatively, you can use Placeholders.Env or Placeholders.None if you prefer.
 /// </summary>
-public abstract class Placeholders
+internal abstract class Placeholders
 {
     public const string YEAR_4_DIGITS = "$(YYYY)";
     public const string YEAR_2_DIGITS = "$(YY)";

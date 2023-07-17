@@ -1,3 +1,4 @@
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
@@ -7,19 +8,12 @@ namespace NAPS2.Sdk.Tests.ImportExport;
 
 public class ImportPostProcessorTests : ContextualTests
 {
-    private readonly ImportPostProcessor _importPostProcessor;
-
-    public ImportPostProcessorTests()
-    {
-        _importPostProcessor = new ImportPostProcessor();
-    }
-
     [Fact]
     public void NoPostProcessing()
     {
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 =
-            _importPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), false);
+            ImportPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), false);
 
         Assert.Null(image2.PostProcessingData.Thumbnail);
         Assert.Null(image2.PostProcessingData.ThumbnailTransformState);
@@ -34,7 +28,7 @@ public class ImportPostProcessorTests : ContextualTests
     {
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 =
-            _importPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), true);
+            ImportPostProcessor.AddPostProcessingData(image, null, null, new BarcodeDetectionOptions(), true);
 
         Assert.False(IsDisposed(image2));
         image2.Dispose();
@@ -46,7 +40,7 @@ public class ImportPostProcessorTests : ContextualTests
     {
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 =
-            _importPostProcessor.AddPostProcessingData(image, null, 256, new BarcodeDetectionOptions(), false);
+            ImportPostProcessor.AddPostProcessingData(image, null, 256, new BarcodeDetectionOptions(), false);
 
         var actual = image2.PostProcessingData.Thumbnail;
 
@@ -63,7 +57,7 @@ public class ImportPostProcessorTests : ContextualTests
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image2 = image.WithTransform(new BrightnessTransform(300));
         using var image3 =
-            _importPostProcessor.AddPostProcessingData(image2, null, 256, new BarcodeDetectionOptions(), false);
+            ImportPostProcessor.AddPostProcessingData(image2, null, 256, new BarcodeDetectionOptions(), false);
 
         var actual = image3.PostProcessingData.Thumbnail;
 
@@ -83,7 +77,7 @@ public class ImportPostProcessorTests : ContextualTests
         using var rendered = LoadImage(ImageResources.dog);
         using var image = ScanningContext.CreateProcessedImage(rendered);
         using var image2 =
-            _importPostProcessor.AddPostProcessingData(image, rendered, 256, new BarcodeDetectionOptions(), true);
+            ImportPostProcessor.AddPostProcessingData(image, rendered, 256, new BarcodeDetectionOptions(), true);
 
         var actual = image2.PostProcessingData.Thumbnail;
 
@@ -103,7 +97,7 @@ public class ImportPostProcessorTests : ContextualTests
     {
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.patcht));
         var barcodeOptions = new BarcodeDetectionOptions { DetectBarcodes = true };
-        using var image2 = _importPostProcessor.AddPostProcessingData(image, null, null, barcodeOptions, false);
+        using var image2 = ImportPostProcessor.AddPostProcessingData(image, null, null, barcodeOptions, false);
 
         Assert.True(image2.PostProcessingData.Barcode.IsPatchT);
     }
@@ -114,7 +108,7 @@ public class ImportPostProcessorTests : ContextualTests
         using var rendered = LoadImage(ImageResources.patcht);
         using var image = ScanningContext.CreateProcessedImage(rendered);
         var barcodeOptions = new BarcodeDetectionOptions { DetectBarcodes = true };
-        using var image2 = _importPostProcessor.AddPostProcessingData(image, rendered, null, barcodeOptions, false);
+        using var image2 = ImportPostProcessor.AddPostProcessingData(image, rendered, null, barcodeOptions, false);
 
         Assert.True(image2.PostProcessingData.Barcode.IsPatchT);
     }

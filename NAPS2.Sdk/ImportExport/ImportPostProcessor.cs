@@ -1,11 +1,10 @@
 using NAPS2.Scan;
 
-namespace NAPS2.ImportExport.Images;
+namespace NAPS2.ImportExport;
 
-// TODO: Maybe make this static (and ImportExportHelper, ImageClipboard, etc.) now that ImageContext is on the image
-public class ImportPostProcessor
+internal static class ImportPostProcessor
 {
-    public ProcessedImage AddPostProcessingData(ProcessedImage image, IMemoryImage? rendered, int? thumbnailSize,
+    public static ProcessedImage AddPostProcessingData(ProcessedImage image, IMemoryImage? rendered, int? thumbnailSize,
         BarcodeDetectionOptions barcodeDetectionOptions, bool disposeOriginalImage)
     {
         if (!thumbnailSize.HasValue && !barcodeDetectionOptions.DetectBarcodes)

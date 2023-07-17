@@ -1,20 +1,15 @@
 ﻿using Microsoft.Extensions.Logging;
 using NAPS2.Scan;
 
-namespace NAPS2.ImportExport.Images;
+namespace NAPS2.ImportExport;
 
 public class ImageImporter : IImageImporter
 {
     private readonly ScanningContext _scanningContext;
-    private readonly ImageContext _imageContext;
-    private readonly ImportPostProcessor _importPostProcessor;
 
-    public ImageImporter(ScanningContext scanningContext, ImageContext imageContext,
-        ImportPostProcessor importPostProcessor)
+    public ImageImporter(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
-        _imageContext = imageContext;
-        _importPostProcessor = importPostProcessor;
     }
 
     public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams importParams,
@@ -28,7 +23,7 @@ public class ImageImporter : IImageImporter
             try
             {
                 var toImport =
-                    _imageContext.LoadFrames(filePath, new ProgressCallback((current, max) =>
+                    _scanningContext.ImageContext.LoadFrames(filePath, new ProgressCallback((current, max) =>
                     {
                         frameCount = max;
                         if (current == 0)
@@ -53,7 +48,7 @@ public class ImageImporter : IImageImporter
                             lossless,
                             -1,
                             null);
-                        image = _importPostProcessor.AddPostProcessingData(
+                        image = ImportPostProcessor.AddPostProcessingData(
                             image,
                             frame,
                             importParams.ThumbnailSize,
