@@ -3,7 +3,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 
-public class MapiDispatcher
+internal class MapiDispatcher
 {
     private readonly ScanningContext _scanningContext;
 

@@ -7,7 +7,7 @@ using NAPS2.ImportExport.Email.Mapi;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class EmailSettingsForm : EtoDialogBase
+internal class EmailSettingsForm : EtoDialogBase
 {
     private readonly SystemEmailClients _systemEmailClients;
 

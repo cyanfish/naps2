@@ -7,7 +7,7 @@ namespace NAPS2.ImportExport.Email.Mapi;
 #if NET6_0_OR_GREATER
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
 #endif
-public class SystemEmailClients
+internal class SystemEmailClients
 {
     private const string DEFAULT_MAPI_DLL = "mapi32.dll";
 

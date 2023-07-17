@@ -1,6 +1,6 @@
 namespace NAPS2.ImportExport.Email.Mapi;
 
-public class MapiEmailProvider : IEmailProvider
+internal class MapiEmailProvider : IEmailProvider
 {
     private readonly MapiDispatcher _mapiDispatcher;
     private readonly Naps2Config _config;

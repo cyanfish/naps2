@@ -5,7 +5,7 @@ using NAPS2.ImportExport.Email;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class EmailProviderForm : EtoDialogBase
+internal class EmailProviderForm : EtoDialogBase
 {
     private readonly EmailProviderController _controller;
 

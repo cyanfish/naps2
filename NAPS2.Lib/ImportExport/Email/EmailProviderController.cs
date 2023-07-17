@@ -7,7 +7,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Email;
 
-public class EmailProviderController
+internal class EmailProviderController
 {
     private readonly IFormFactory _formFactory;
     private readonly Naps2Config _config;

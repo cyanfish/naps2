@@ -2,7 +2,7 @@
 
 // Documented at:
 // http://msdn.microsoft.com/en-us/library/windows/desktop/hh707275%28v=vs.85%29.aspx#MAPI_FORCE_UNICODE
-public enum MapiSendMailReturnCode
+internal enum MapiSendMailReturnCode
 {
     Success = 0,
     UserAbort = 1,
