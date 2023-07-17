@@ -3,7 +3,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Worker;
 
-public class WorkerPool : IDisposable
+internal class WorkerPool : IDisposable
 {
     private const int TICK_INTERVAL = 5000;
 

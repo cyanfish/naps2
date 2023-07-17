@@ -3,7 +3,7 @@ using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Remoting;
 
-public static class RemotingHelper
+internal static class RemotingHelper
 {
     public static void HandleErrors(Error error)
     {

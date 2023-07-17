@@ -7,7 +7,7 @@ namespace NAPS2.Remoting.Worker;
 /// the calling executable, so that there are no zombie processes left behind if the caller terminates.
 /// https://docs.microsoft.com/en-us/windows/desktop/procthread/job-objects
 /// </summary>
-public class Job : IDisposable
+internal class Job : IDisposable
 {
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
     private static extern IntPtr CreateJobObject(IntPtr a, string? lpName);

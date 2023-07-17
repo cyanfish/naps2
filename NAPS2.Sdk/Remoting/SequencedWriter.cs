@@ -2,7 +2,7 @@ using Grpc.Core;
 
 namespace NAPS2.Remoting;
 
-public class SequencedWriter<T>
+internal class SequencedWriter<T>
 {
     private readonly IServerStreamWriter<T> _serverStreamWriter;
     private Task _lastWriteTask = Task.CompletedTask;
