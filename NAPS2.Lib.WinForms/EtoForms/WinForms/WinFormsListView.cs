@@ -137,7 +137,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         // Draw border
         if (!e.Item.Selected)
         {
-            e.Graphics.DrawRectangle(DefaultPen, x, y, width, height);
+            e.Graphics.DrawRectangle(DefaultPen, x - 1, y - 1, width + 1, height + 1);
         }
     }
 
