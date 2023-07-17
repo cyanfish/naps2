@@ -24,7 +24,7 @@ public class ImportPostProcessor
         {
             Thumbnail = thumbnail,
             ThumbnailTransformState = image.TransformState,
-            BarcodeDetection = barcodeDetection
+            Barcode = barcodeDetection
         }, disposeOriginalImage);
     }
 }

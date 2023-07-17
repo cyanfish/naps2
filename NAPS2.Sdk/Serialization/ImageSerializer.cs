@@ -42,7 +42,7 @@ public static class ImageSerializer
                 PageSize = image.Metadata.PageSize?.ToString() ?? ""
             },
             Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
-            BarcodeDetectionXml = image.PostProcessingData.BarcodeDetection?.ToXml(),
+            BarcodeDetectionXml = image.PostProcessingData.Barcode?.ToXml(),
             RenderedFilePath = options.RenderedFilePath ?? ""
         };
 
@@ -161,7 +161,7 @@ public static class ImageSerializer
         {
             processedImage = processedImage.WithPostProcessingData(processedImage.PostProcessingData with
             {
-                BarcodeDetection = serializedImage.BarcodeDetectionXml.FromXml<BarcodeDetection>()
+                Barcode = serializedImage.BarcodeDetectionXml.FromXml<Barcode>()
             }, true);
         }
         return processedImage;

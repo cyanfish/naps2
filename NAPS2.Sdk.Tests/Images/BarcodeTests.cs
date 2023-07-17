@@ -12,43 +12,43 @@ public class BarcodeTests : ContextualTests
     public void DetectPatchT()
     {
         var image = LoadImage(ImageResources.patcht);
-        var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
+        var barcode = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
             PatchTOnly = true
         });
-        Assert.True(detection.IsAttempted);
-        Assert.True(detection.IsBarcodePresent);
-        Assert.True(detection.IsPatchT);
+        Assert.True(barcode.IsDetectionAttempted);
+        Assert.True(barcode.IsDetected);
+        Assert.True(barcode.IsPatchT);
     }
 
     [Fact]
     public void DetectUpc()
     {
         var image = LoadImage(ImageResources.image_upc_barcode);
-        var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
+        var barcode = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
             PatchTOnly = false
         });
-        Assert.True(detection.IsAttempted);
-        Assert.True(detection.IsBarcodePresent);
-        Assert.False(detection.IsPatchT);
-        Assert.Equal("725272730706", detection.DetectedText);
+        Assert.True(barcode.IsDetectionAttempted);
+        Assert.True(barcode.IsDetected);
+        Assert.False(barcode.IsPatchT);
+        Assert.Equal("725272730706", barcode.DetectedText);
     }
 
     [Fact]
     public void DetectNothing()
     {
         var image = LoadImage(ImageResources.dog);
-        var detection = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
+        var barcode = BarcodeDetector.Detect(image, new BarcodeDetectionOptions
         {
             DetectBarcodes = true,
             PatchTOnly = false
         });
-        Assert.True(detection.IsAttempted);
-        Assert.False(detection.IsBarcodePresent);
-        Assert.False(detection.IsPatchT);
-        Assert.Null(detection.DetectedText);
+        Assert.True(barcode.IsDetectionAttempted);
+        Assert.False(barcode.IsDetected);
+        Assert.False(barcode.IsPatchT);
+        Assert.Null(barcode.DetectedText);
     }
 }

@@ -41,7 +41,7 @@ public static class SaveSeparatorHelper
             {
                 foreach (var image in scan)
                 {
-                    if (image.PostProcessingData.BarcodeDetection.IsPatchT)
+                    if (image.PostProcessingData.Barcode.IsPatchT)
                     {
                         image.Dispose();
                         if (images.Count > 0)

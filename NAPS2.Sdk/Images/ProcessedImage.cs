@@ -14,7 +14,7 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
     private readonly RefCount.Token _token;
     private bool _disposed;
 
-    internal ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
+    private ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
         PostProcessingData postProcessingData, TransformState transformState, RefCount refCount)
     {
         ImageContext = imageContext;
@@ -25,7 +25,7 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
         _token = refCount.NewToken();
     }
 
-    public ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
+    internal ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
         PostProcessingData postProcessingData, TransformState transformState, IProcessedImageOwner? owner = null)
     {
         ImageContext = imageContext;

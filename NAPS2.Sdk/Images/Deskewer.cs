@@ -2,7 +2,7 @@
 
 namespace NAPS2.Images;
 
-public abstract class Deskewer
+internal static class Deskewer
 {
     // Conceptually, Hough Line deskewing works like this:
     //

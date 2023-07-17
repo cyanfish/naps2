@@ -8,16 +8,16 @@ namespace NAPS2.Scan;
 /// A wrapper around the ZXing library that detects patch-t and other barcodes.
 /// http://www.alliancegroup.co.uk/patch-codes.htm
 /// </summary>
-public static class BarcodeDetector
+internal static class BarcodeDetector
 {
     private static readonly BarcodeFormat PATCH_T_FORMAT = BarcodeFormat.CODE_39;
 
-    public static BarcodeDetection Detect(IMemoryImage image, BarcodeDetectionOptions options)
+    public static Barcode Detect(IMemoryImage image, BarcodeDetectionOptions options)
     {
         // TODO: Probably shouldn't have DetectBarcodes be in the options class? The call shouldn't happen at all.
         if (!options.DetectBarcodes)
         {
-            return BarcodeDetection.NotAttempted;
+            return Barcode.NoDetection;
         }
 
         var zxingOptions = options.ZXingOptions ?? new DecodingOptions
@@ -30,7 +30,7 @@ public static class BarcodeDetector
              Options = zxingOptions
         };
         var result = reader.Decode(image);
-        return new BarcodeDetection(true, result != null, result?.Text);
+        return new Barcode(true, result != null, result?.Text);
     }
     
     private class MemoryImageLuminanceSource : LuminanceSource

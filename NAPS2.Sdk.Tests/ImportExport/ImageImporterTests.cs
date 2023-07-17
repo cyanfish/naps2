@@ -34,7 +34,7 @@ public class ImageImporterTests : ContextualTests
         Assert.True(result[0].Metadata.Lossless);
         Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
-        Assert.False(result[0].PostProcessingData.BarcodeDetection.IsAttempted);
+        Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
         Assert.True(result[0].TransformState.IsEmpty);
 
         result[0].Dispose();
@@ -56,7 +56,7 @@ public class ImageImporterTests : ContextualTests
         Assert.False(result[0].Metadata.Lossless);
         Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
-        Assert.False(result[0].PostProcessingData.BarcodeDetection.IsAttempted);
+        Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
         Assert.True(result[0].TransformState.IsEmpty);
 
         // Verify no re-encode happens
@@ -225,9 +225,9 @@ public class ImageImporterTests : ContextualTests
         var result = await source.ToListAsync();
 
         Assert.Single(result);
-        Assert.True(result[0].PostProcessingData.BarcodeDetection.IsAttempted);
-        Assert.True(result[0].PostProcessingData.BarcodeDetection.IsBarcodePresent);
-        Assert.True(result[0].PostProcessingData.BarcodeDetection.IsPatchT);
-        Assert.Equal("PATCHT", result[0].PostProcessingData.BarcodeDetection.DetectedText);
+        Assert.True(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
+        Assert.True(result[0].PostProcessingData.Barcode.IsDetected);
+        Assert.True(result[0].PostProcessingData.Barcode.IsPatchT);
+        Assert.Equal("PATCHT", result[0].PostProcessingData.Barcode.DetectedText);
     }
 }

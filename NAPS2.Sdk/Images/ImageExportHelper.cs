@@ -1,6 +1,6 @@
 namespace NAPS2.Images;
 
-public class ImageExportHelper
+internal class ImageExportHelper
 {
     public string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image, BitDepth bitDepth,
         bool lossless, int quality, out ImageFileFormat imageFileFormat)

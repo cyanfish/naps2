@@ -23,7 +23,7 @@ public class ImportPostProcessorTests : ContextualTests
 
         Assert.Null(image2.PostProcessingData.Thumbnail);
         Assert.Null(image2.PostProcessingData.ThumbnailTransformState);
-        Assert.False(image2.PostProcessingData.BarcodeDetection.IsAttempted);
+        Assert.False(image2.PostProcessingData.Barcode.IsDetectionAttempted);
         Assert.False(IsDisposed(image2));
         image2.Dispose();
         Assert.False(IsDisposed(image));
@@ -105,7 +105,7 @@ public class ImportPostProcessorTests : ContextualTests
         var barcodeOptions = new BarcodeDetectionOptions { DetectBarcodes = true };
         using var image2 = _importPostProcessor.AddPostProcessingData(image, null, null, barcodeOptions, false);
 
-        Assert.True(image2.PostProcessingData.BarcodeDetection.IsPatchT);
+        Assert.True(image2.PostProcessingData.Barcode.IsPatchT);
     }
 
     [Fact]
@@ -116,6 +116,6 @@ public class ImportPostProcessorTests : ContextualTests
         var barcodeOptions = new BarcodeDetectionOptions { DetectBarcodes = true };
         using var image2 = _importPostProcessor.AddPostProcessingData(image, rendered, null, barcodeOptions, false);
 
-        Assert.True(image2.PostProcessingData.BarcodeDetection.IsPatchT);
+        Assert.True(image2.PostProcessingData.Barcode.IsPatchT);
     }
 }

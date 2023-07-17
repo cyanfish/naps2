@@ -159,12 +159,12 @@ internal class RemotePostProcessor : IRemotePostProcessor
             processedImage = processedImage.WithTransform(Deskewer.GetDeskewTransform(image), true);
         }
 
-        if (!data.BarcodeDetection.IsBarcodePresent)
+        if (!data.Barcode.IsDetected)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
             data = data with
             {
-                BarcodeDetection = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
+                Barcode = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
             };
         }
         Debug.WriteLine($"Thumbnail size: {options.ThumbnailSize}");
