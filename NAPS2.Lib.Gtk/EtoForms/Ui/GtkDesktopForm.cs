@@ -38,11 +38,14 @@ public class GtkDesktopForm : DesktopForm
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands)
+        DesktopCommands commands,
+        IDarkModeProvider darkModeProvider)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager,
             imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
+        ((GtkDarkModeProvider) darkModeProvider).StyleContext =
+            Eto.Forms.Gtk3Helpers.ToNative(this).StyleContext;
         var cssProvider = new CssProvider();
         var bgColor = colorScheme.BackgroundColor.ToHex(false);
         var fgColor = colorScheme.ForegroundColor.ToHex(false);
