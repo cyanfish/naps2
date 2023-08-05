@@ -194,12 +194,9 @@ internal class ScanPerformer : IScanPerformer
                 IncludeWiaDevices = false
                 // TODO: Consider adding a user option for TwainOptions.ShowProgress instead of our progress window
             },
-            SaneOptions =
-            {
-                KeyValueOptions = scanProfile.KeyValueOptions != null
-                    ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
-                    : new KeyValueScanOptions()
-            },
+            KeyValueOptions = scanProfile.KeyValueOptions != null
+                ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
+                : new KeyValueScanOptions(),
             BarcodeDetectionOptions =
             {
                 DetectBarcodes = scanParams.DetectPatchT ||

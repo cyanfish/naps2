@@ -1,6 +1,6 @@
 namespace NAPS2.Serialization;
 
-public class DeserializeImageOptions
+internal class DeserializeImageOptions
 {
     /// <summary>
     /// If true, the Deserialize caller guarantees that the file storage will not be used for longer than the duration of the RPC call.

@@ -1,6 +1,6 @@
 namespace NAPS2.Serialization;
 
-public class SerializeImageOptions
+internal class SerializeImageOptions
 {
     /// <summary>
     /// Indicates that, when the serialized image is transferred with file-based storage, the file should be considered

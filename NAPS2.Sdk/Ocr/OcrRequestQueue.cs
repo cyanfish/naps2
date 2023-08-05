@@ -9,7 +9,7 @@ namespace NAPS2.Ocr;
 /// Allows OCR requests to be queued and prioritized. Results are cached so that requests with the same set of
 /// parameters (image, engine, language code, etc.) don't do duplicate work.
 /// </summary>
-public class OcrRequestQueue
+internal class OcrRequestQueue
 {
     private readonly Dictionary<OcrRequestParams, OcrRequest> _requestCache = new();
     private Semaphore _queueWaitHandle = new(0, int.MaxValue);

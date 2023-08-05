@@ -3,7 +3,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Serialization;
 
-public static class ImageSerializer
+internal static class ImageSerializer
 {
     public static SerializedImage Serialize(ProcessedImage image, SerializeImageOptions options)
     {

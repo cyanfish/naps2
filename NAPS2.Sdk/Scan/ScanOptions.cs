@@ -65,6 +65,8 @@ public class ScanOptions
     public bool AutoDeskew { get; set; }
 
     public bool FlipDuplexedPages { get; set; }
+
+    public KeyValueScanOptions? KeyValueOptions { get; set; }
 }
 
 public enum HorizontalAlign

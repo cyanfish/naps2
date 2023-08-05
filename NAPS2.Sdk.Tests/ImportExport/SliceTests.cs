@@ -1,6 +1,7 @@
-﻿using Xunit;
+﻿using NAPS2.ImportExport;
+using Xunit;
 
-namespace NAPS2.Sdk.Tests.Util;
+namespace NAPS2.Sdk.Tests.ImportExport;
 
 public class SliceTests
 {

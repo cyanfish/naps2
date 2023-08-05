@@ -3,7 +3,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Ocr;
 
-public class StubOcrEngine : IOcrEngine
+internal class StubOcrEngine : IOcrEngine
 {
     public Task<OcrResult?> ProcessImage(ScanningContext scanningContext, string imagePath, OcrParams ocrParams,
         CancellationToken cancelToken)

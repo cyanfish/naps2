@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace NAPS2.Util;
+namespace NAPS2.ImportExport;
 
 /// <summary>
 /// A class that represents a Python-style slice of a collection.
