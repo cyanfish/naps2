@@ -7,25 +7,60 @@ using NAPS2.Scan.Internal;
 
 namespace NAPS2.Scan;
 
+/// <summary>
+/// A ScanningContext object is needed for most NAPS2 operations. Set it up with the corresponding ImageContext type
+/// for image type you expect (e.g. GdiImageContext for System.Drawing.Bitmap, if you're using Windows Forms). You can
+/// also set various other properties that affect scanning and image processing.
+/// <para/>
+/// When the ScanningContext is disposed, all ProcessedImage objects that were generating from scanning or importing
+/// with that ScanningContext object will be automatically disposed.
+/// </summary>
 public class ScanningContext : IDisposable
 {
     private readonly ProcessedImageOwner _processedImageOwner = new();
 
+    /// <summary>
+    /// Initializes a new instance of the ScanningContext class with the specified ImageContext.
+    /// </summary>
+    /// <param name="imageContext">The corresponding ImageContext type for the image type you expect (e.g.
+    /// GdiImageContext for System.Drawing.Bitmap, if you're using Windows Forms).</param>
     public ScanningContext(ImageContext imageContext)
     {
         ImageContext = imageContext;
     }
 
+    /// <summary>
+    /// Gets the context's ImageContext. This corresponds to the image type used (e.g. GdiImageContext for
+    /// System.Drawing.Bitmap, if you're using Windows Forms).
+    /// </summary>
     public ImageContext ImageContext { get; }
 
+    /// <summary>
+    /// Gets or sets the context's FileStorageManager. If non-null, ProcessedImage objects from scanning or importing
+    /// with this ScanningContext will store the actual image data on disk instead of in memory.
+    /// </summary>
     public FileStorageManager? FileStorageManager { get; set; }
 
+    /// <summary>
+    /// Gets or sets the context's WorkerFactory. This is required for some operations that need to happen in a worker
+    /// process (e.g. to scan with 32-bit TWAIN from a 64-bit process).
+    /// </summary>
     public IWorkerFactory? WorkerFactory { get; set; }
 
+    /// <summary>
+    /// Gets or sets the context's OcrEngine. This is used to perform the OCR (optical character recognition) operation
+    /// if OCR is requested for PDF export.
+    /// </summary>
     public IOcrEngine? OcrEngine { get; set; }
 
+    /// <summary>
+    /// Gets or sets the path to a temp folder where transient files can be stored. Defaults to Path.GetTempPath().
+    /// </summary>
     public string TempFolderPath { get; set; } = Path.GetTempPath();
 
+    /// <summary>
+    /// Gets or sets the logger used for detailed diagnostics.
+    /// </summary>
     public ILogger Logger { get; set; } = NullLogger.Instance;
 
     internal string? RecoveryPath { get; set; }

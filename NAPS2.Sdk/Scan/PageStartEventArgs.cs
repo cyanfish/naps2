@@ -7,5 +7,8 @@ public class PageStartEventArgs : EventArgs
         PageNumber = pageNumber;
     }
 
+    /// <summary>
+    /// Gets the page number currently being scanned (starting from 1).
+    /// </summary>
     public int PageNumber { get; }
 }

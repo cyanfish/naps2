@@ -7,5 +7,8 @@ public class ScanErrorEventArgs : EventArgs
         Exception = exception;
     }
 
+    /// <summary>
+    /// Gets the exception that occurred.
+    /// </summary>
     public Exception Exception { get; }
 }
