@@ -1,7 +1,7 @@
-using Moq;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Mocks;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan;
@@ -11,11 +11,11 @@ public class ScanErrorHandling : ContextualTests
     [Fact]
     public void Scan_InvalidOptions()
     {
-        var localPostProcessor = new Mock<ILocalPostProcessor>();
-        var bridgeFactory = new Mock<IScanBridgeFactory>();
+        var localPostProcessor = Substitute.For<ILocalPostProcessor>();
+        var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
-            new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
-                bridgeFactory.Object);
+            new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
+                bridgeFactory);
 
         var invalidOptions = new ScanOptions { Dpi = -1 };
         Assert.Throws<ArgumentException>(() => controller.Scan(invalidOptions));
@@ -24,11 +24,11 @@ public class ScanErrorHandling : ContextualTests
     [Fact]
     public async Task GetDeviceList_InvalidOptions()
     {
-        var localPostProcessor = new Mock<ILocalPostProcessor>();
-        var bridgeFactory = new Mock<IScanBridgeFactory>();
+        var localPostProcessor = Substitute.For<ILocalPostProcessor>();
+        var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
-            new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
-                bridgeFactory.Object);
+            new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
+                bridgeFactory);
 
         var invalidOptions = new ScanOptions { Dpi = -1 };
         await Assert.ThrowsAsync<ArgumentException>(() => controller.GetDeviceList(invalidOptions));
@@ -37,13 +37,14 @@ public class ScanErrorHandling : ContextualTests
     [Fact]
     public async void Scan_CreateScanBridge()
     {
-        var localPostProcessor = new Mock<ILocalPostProcessor>();
-        var bridgeFactory = new Mock<IScanBridgeFactory>();
+        var localPostProcessor = Substitute.For<ILocalPostProcessor>();
+        var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
-            new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
-                bridgeFactory.Object);
+            new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
+                bridgeFactory);
 
-        bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Throws<InvalidOperationException>();
+        bridgeFactory.When(factory => factory.Create(Arg.Any<ScanOptions>()))
+            .Do(_ => throw new InvalidOperationException());
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice("foo", "bar") });
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
@@ -51,44 +52,45 @@ public class ScanErrorHandling : ContextualTests
     [Fact]
     public async Task GetDeviceList_CreateScanBridge()
     {
-        var localPostProcessor = new Mock<ILocalPostProcessor>();
-        var bridgeFactory = new Mock<IScanBridgeFactory>();
+        var localPostProcessor = Substitute.For<ILocalPostProcessor>();
+        var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
-            new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
-                bridgeFactory.Object);
+            new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
+                bridgeFactory);
 
-        bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Throws<InvalidOperationException>();
+        bridgeFactory.When(factory => factory.Create(Arg.Any<ScanOptions>()))
+            .Do(_ => throw new InvalidOperationException());
         await Assert.ThrowsAsync<InvalidOperationException>(() => controller.GetDeviceList(new ScanOptions()));
     }
 
     [Fact]
     public async Task GetDeviceList_BridgeGetDeviceList()
     {
-        var localPostProcessor = new Mock<ILocalPostProcessor>();
+        var localPostProcessor = Substitute.For<ILocalPostProcessor>();
         var bridge = new StubScanBridge { Error = new InvalidOperationException() };
-        var bridgeFactory = new Mock<IScanBridgeFactory>();
+        var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
-            new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
-                bridgeFactory.Object);
+            new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
+                bridgeFactory);
 
-        bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
+        bridgeFactory.Create(Arg.Any<ScanOptions>()).Returns(bridge);
         await Assert.ThrowsAsync<InvalidOperationException>(() => controller.GetDeviceList(new ScanOptions()));
     }
 
     [Fact]
     public async void Scan_LocalPostProcess()
     {
-        var localPostProcessor = new Mock<ILocalPostProcessor>();
+        var localPostProcessor = Substitute.For<ILocalPostProcessor>();
         var bridge = new StubScanBridge { MockOutput = new List<ProcessedImage> { CreateScannedImage() } };
-        var bridgeFactory = new Mock<IScanBridgeFactory>();
+        var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
-            new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
-                bridgeFactory.Object);
+            new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
+                bridgeFactory);
 
-        bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
-        localPostProcessor.Setup(pp =>
-                pp.PostProcess(It.IsAny<ProcessedImage>(), It.IsAny<ScanOptions>(), It.IsAny<PostProcessingContext>()))
-            .Throws<InvalidOperationException>();
+        bridgeFactory.Create(Arg.Any<ScanOptions>()).Returns(bridge);
+        localPostProcessor.When(pp =>
+                pp.PostProcess(Arg.Any<ProcessedImage>(), Arg.Any<ScanOptions>(), Arg.Any<PostProcessingContext>()))
+            .Do(_ => throw new InvalidOperationException());
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice("foo", "bar") });
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }
@@ -96,14 +98,14 @@ public class ScanErrorHandling : ContextualTests
     [Fact]
     public async void Scan_BridgeScan()
     {
-        var localPostProcessor = new Mock<ILocalPostProcessor>();
+        var localPostProcessor = Substitute.For<ILocalPostProcessor>();
         var bridge = new StubScanBridge { Error = new InvalidOperationException() };
-        var bridgeFactory = new Mock<IScanBridgeFactory>();
+        var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
-            new ScanController(ScanningContext, localPostProcessor.Object, new ScanOptionsValidator(),
-                bridgeFactory.Object);
+            new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
+                bridgeFactory);
 
-        bridgeFactory.Setup(factory => factory.Create(It.IsAny<ScanOptions>())).Returns(bridge);
+        bridgeFactory.Create(Arg.Any<ScanOptions>()).Returns(bridge);
         var source = controller.Scan(new ScanOptions { Device = new ScanDevice("foo", "bar") });
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await source.ToListAsync());
     }

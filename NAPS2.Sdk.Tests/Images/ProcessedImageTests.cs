@@ -1,5 +1,5 @@
 using System.Collections.Immutable;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
@@ -38,52 +38,52 @@ public class ProcessedImageTests : ContextualTests
     [Fact]
     public void StorageDisposed()
     {
-        var storageMock = new Mock<IImageStorage>();
+        var storageMock = Substitute.For<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false, null);
 
         var image = new ProcessedImage(
-            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
         image.Dispose();
 
-        storageMock.Verify(storage => storage.Dispose());
+        storageMock.Received().Dispose();
     }
 
     [Fact]
     public void StorageDisposedOnlyAfterAllClonesDisposed()
     {
-        var storageMock = new Mock<IImageStorage>();
+        var storageMock = Substitute.For<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false, null);
 
         var image = new ProcessedImage(
-            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
         var image2 = image.Clone();
         var image3 = image.Clone();
         var image4 = image2.Clone();
 
         image.Dispose();
-        storageMock.VerifyNoOtherCalls();
+        storageMock.DidNotReceive().Dispose();
 
         image2.Dispose();
-        storageMock.VerifyNoOtherCalls();
+        storageMock.DidNotReceive().Dispose();
 
         // Check extra calls on a single reference don't have an effect
         image3.Dispose();
         image3.Dispose();
         image3.Dispose();
-        storageMock.VerifyNoOtherCalls();
+        storageMock.DidNotReceive().Dispose();
 
         image4.Dispose();
-        storageMock.Verify(storage => storage.Dispose());
+        storageMock.Received().Dispose();
     }
 
     [Fact]
     public void TransformSimplification()
     {
-        var storageMock = new Mock<IImageStorage>();
+        var storageMock = Substitute.For<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false, null);
 
         var image = new ProcessedImage(
-            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
 
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
@@ -109,19 +109,19 @@ public class ProcessedImageTests : ContextualTests
         image.Dispose();
         image2.Dispose();
         image3.Dispose();
-        storageMock.VerifyNoOtherCalls();
+        storageMock.DidNotReceive().Dispose();
         image4.Dispose();
-        storageMock.Verify(storage => storage.Dispose());
+        storageMock.Received().Dispose();
     }
 
     [Fact]
     public void MultipleTransforms()
     {
-        var storageMock = new Mock<IImageStorage>();
+        var storageMock = Substitute.For<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false, null);
 
         var image = new ProcessedImage(
-            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
 
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
@@ -148,22 +148,22 @@ public class ProcessedImageTests : ContextualTests
         image.Dispose();
         image2.Dispose();
         image3.Dispose();
-        storageMock.VerifyNoOtherCalls();
+        storageMock.DidNotReceive().Dispose();
         image4.Dispose();
-        storageMock.Verify(storage => storage.Dispose());
+        storageMock.Received().Dispose();
     }
 
     [Fact]
     public void CloneAfterDisposed()
     {
-        var storageMock = new Mock<IImageStorage>();
+        var storageMock = Substitute.For<IImageStorage>();
         var metadata = new ImageMetadata(BitDepth.Color, false, null);
 
         var image = new ProcessedImage(
-            ImageContext, storageMock.Object, metadata, new PostProcessingData(), TransformState.Empty);
+            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
 
         image.Dispose();
-        storageMock.Verify(storage => storage.Dispose());
+        storageMock.Received().Dispose();
 
         Assert.Throws<ObjectDisposedException>(() => image.Clone());
     }

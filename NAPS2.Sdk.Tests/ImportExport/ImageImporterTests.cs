@@ -1,9 +1,9 @@
 using System.Threading;
-using Moq;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.ImportExport;
@@ -112,14 +112,14 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.dog, "image.jpg");
 
-        var progressMock = new Mock<ProgressCallback>();
-        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object);
+        var progressMock = Substitute.For<ProgressCallback>();
+        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock);
 
-        progressMock.VerifyNoOtherCalls();
+        progressMock.ReceivedCallsCount(0);
         await source.ToListAsync();
-        progressMock.Verify(x => x(0, 1));
-        progressMock.Verify(x => x(1, 1));
-        progressMock.VerifyNoOtherCalls();
+        progressMock.Received()(0, 1);
+        progressMock.Received()(1, 1);
+        progressMock.ReceivedCallsCount(2);
     }
 
     // TODO: Why is this flaking on Linux?
@@ -128,23 +128,23 @@ public class ImageImporterTests : ContextualTests
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");
 
-        var progressMock = new Mock<ProgressCallback>();
-        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock.Object);
+        var progressMock = Substitute.For<ProgressCallback>();
+        var source = _imageImporter.Import(filePath, new ImportParams(), progressMock);
         var enumerator = source.GetAsyncEnumerator();
 
-        progressMock.VerifyNoOtherCalls();
+        progressMock.ReceivedCallsCount(0);
         Assert.True(await enumerator.MoveNextAsync());
-        progressMock.Verify(x => x(0, 3));
-        progressMock.Verify(x => x(1, 3));
-        progressMock.VerifyNoOtherCalls();
+        progressMock.Received()(0, 3);
+        progressMock.Received()(1, 3);
+        progressMock.ReceivedCallsCount(2);
         Assert.True(await enumerator.MoveNextAsync());
-        progressMock.Verify(x => x(2, 3));
-        progressMock.VerifyNoOtherCalls();
+        progressMock.Received()(2, 3);
+        progressMock.ReceivedCallsCount(3);
         Assert.True(await enumerator.MoveNextAsync());
-        progressMock.Verify(x => x(3, 3));
-        progressMock.VerifyNoOtherCalls();
+        progressMock.Received()(3, 3);
+        progressMock.ReceivedCallsCount(4);
         Assert.False(await enumerator.MoveNextAsync());
-        progressMock.VerifyNoOtherCalls();
+        progressMock.ReceivedCallsCount(5);
     }
 
     // TODO: Why is this flaking (at least on Linux)?

@@ -1,9 +1,9 @@
 using System.Threading;
-using Moq;
 using NAPS2.Recovery;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Lib.Tests.Recovery;
@@ -88,20 +88,20 @@ public class RecoveryManagerTests : ContextualTests
 
         var images = new List<ProcessedImage>();
         void ImageCallback(ProcessedImage img) => images.Add(img);
-        var mockProgressCallback = new Mock<ProgressCallback>();
+        var mockProgressCallback = Substitute.For<ProgressCallback>();
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
-        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object);
+        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback);
         Assert.True(result);
 
         Assert.Equal(2, images.Count);
         ImageAsserts.Similar(ImageResources.dog, images[0]);
 
-        mockProgressCallback.Verify(callback => callback(0, 2));
-        mockProgressCallback.Verify(callback => callback(1, 2));
-        mockProgressCallback.Verify(callback => callback(2, 2));
-        mockProgressCallback.VerifyNoOtherCalls();
+        mockProgressCallback.Received()(0, 2);
+        mockProgressCallback.Received()(1, 2);
+        mockProgressCallback.Received()(2, 2);
+        mockProgressCallback.ReceivedCallsCount(3);
     }
 
     [Fact]
@@ -110,7 +110,7 @@ public class RecoveryManagerTests : ContextualTests
         string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
         CreateFolderToRecoverFrom(recovery1, 2);
 
-        var mockImageCallback = new Mock<Action<ProcessedImage>>();
+        var mockImageCallback = Substitute.For<Action<ProcessedImage>>();
         CancellationTokenSource cts = new CancellationTokenSource();
 
         void ProgressCallback(int current, int total)
@@ -122,12 +122,12 @@ public class RecoveryManagerTests : ContextualTests
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
 
-        var result = folder.TryRecover(mockImageCallback.Object, new RecoveryParams(),
+        var result = folder.TryRecover(mockImageCallback, new RecoveryParams(),
             new ProgressHandler(ProgressCallback, cts.Token));
         Assert.False(result);
         Assert.True(Directory.Exists(recovery1));
-        mockImageCallback.Verify(callback => callback(It.IsAny<ProcessedImage>()));
-        mockImageCallback.VerifyNoOtherCalls();
+        mockImageCallback.Received()(Arg.Any<ProcessedImage>());
+        mockImageCallback.ReceivedCallsCount(1);
 
         // After a cancelled recovery, we should be able to recover from the same folder again
         folder.Dispose();
@@ -144,20 +144,20 @@ public class RecoveryManagerTests : ContextualTests
 
         var images = new List<ProcessedImage>();
         void ImageCallback(ProcessedImage img) => images.Add(img);
-        var mockProgressCallback = new Mock<ProgressCallback>();
+        var mockProgressCallback = Substitute.For<ProgressCallback>();
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
-        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback.Object);
+        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback);
         Assert.True(result);
 
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.dog, images[0]);
 
-        mockProgressCallback.Verify(callback => callback(0, 2));
-        mockProgressCallback.Verify(callback => callback(1, 2));
-        mockProgressCallback.Verify(callback => callback(2, 2));
-        mockProgressCallback.VerifyNoOtherCalls();
+        mockProgressCallback.Received()(0, 2);
+        mockProgressCallback.Received()(1, 2);
+        mockProgressCallback.Received()(2, 2);
+        mockProgressCallback.ReceivedCallsCount(3);
     }
 
     private List<UiImage> CreateFolderToRecoverFrom(string folderPath, int imageCount)

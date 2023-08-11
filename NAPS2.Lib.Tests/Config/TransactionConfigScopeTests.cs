@@ -1,5 +1,6 @@
-using Moq;
 using NAPS2.Config.Model;
+using NAPS2.Sdk.Tests;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Lib.Tests.Config;
@@ -55,26 +56,26 @@ public class TransactionConfigScopeTests
     [Fact]
     public void ChangeEvent()
     {
-        var mockHandler = new Mock<EventHandler>();
-        _transact.HasChangesChanged += mockHandler.Object;
-        mockHandler.VerifyNoOtherCalls();
+        var mockHandler = Substitute.For<EventHandler>();
+        _transact.HasChangesChanged += mockHandler;
+        mockHandler.ReceivedCallsCount(0);
 
         _transact.Set(c => c.Culture, "de");
-        mockHandler.Verify(x => x(_transact, EventArgs.Empty));
+        mockHandler.Received()(_transact, EventArgs.Empty);
         _transact.Set(c => c.LastImageExt, ".png");
-        mockHandler.VerifyNoOtherCalls();
+        mockHandler.ReceivedCallsCount(1);
 
         _transact.Rollback();
-        mockHandler.Verify(x => x(_transact, EventArgs.Empty));
-        mockHandler.VerifyNoOtherCalls();
+        mockHandler.Received()(_transact, EventArgs.Empty);
+        mockHandler.ReceivedCallsCount(2);
 
         _transact.Set(c => c.Culture, "de");
-        mockHandler.Verify(x => x(_transact, EventArgs.Empty));
-        mockHandler.VerifyNoOtherCalls();
+        mockHandler.Received()(_transact, EventArgs.Empty);
+        mockHandler.ReceivedCallsCount(3);
 
         _transact.Commit();
-        mockHandler.Verify(x => x(_transact, EventArgs.Empty));
-        mockHandler.VerifyNoOtherCalls();
+        mockHandler.Received()(_transact, EventArgs.Empty);
+        mockHandler.ReceivedCallsCount(4);
     }
 
     [Fact]

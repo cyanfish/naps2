@@ -1,20 +1,20 @@
 using System.Threading;
-using Moq;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
+using NSubstitute;
 
 namespace NAPS2.Sdk.Tests.Mocks;
 
 public class ScanDriverFactoryBuilder
 {
     private readonly StubScanDriver _scanDriver;
-    private readonly Mock<IScanDriverFactory> _scanDriverFactory;
+    private readonly IScanDriverFactory _scanDriverFactory;
 
     public ScanDriverFactoryBuilder()
     {
         _scanDriver = new StubScanDriver();
-        _scanDriverFactory = new Mock<IScanDriverFactory>();
-        _scanDriverFactory.Setup(x => x.Create(It.IsAny<ScanOptions>())).Returns(_scanDriver);
+        _scanDriverFactory = Substitute.For<IScanDriverFactory>();
+        _scanDriverFactory.Create(Arg.Any<ScanOptions>()).Returns(_scanDriver);
     }
 
     public ScanDriverFactoryBuilder WithDeviceList(params ScanDevice[] devices)
@@ -31,7 +31,7 @@ public class ScanDriverFactoryBuilder
 
     internal IScanDriverFactory Build()
     {
-        return _scanDriverFactory.Object;
+        return _scanDriverFactory;
     }
 
     private class StubScanDriver : IScanDriver

@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using GrpcDotNetNamedPipes;
-using Moq;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Images;
 using NAPS2.Remoting.Worker;
@@ -8,6 +7,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Internal.Twain;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Worker;
@@ -49,13 +49,13 @@ public class WorkerChannelTests : ContextualTests
     [Fact]
     public async Task GetDevices()
     {
-        var remoteScanController = new Mock<IRemoteScanController>();
-        using var channel = Start(remoteScanController.Object);
-        remoteScanController
-            .Setup(rsc => rsc.GetDevices(It.IsAny<ScanOptions>(), It.IsAny<CancellationToken>(),
-                It.IsAny<Action<ScanDevice>>()))
-            .Returns((ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback) =>
+        var remoteScanController = Substitute.For<IRemoteScanController>();
+        using var channel = Start(remoteScanController);
+        remoteScanController.GetDevices(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(),
+                Arg.Any<Action<ScanDevice>>())
+            .Returns(x =>
             {
+                var callback = (Action<ScanDevice>) x[2];
                 callback(new ScanDevice("test_id", "test_name"));
                 return Task.CompletedTask;
             });
@@ -66,9 +66,9 @@ public class WorkerChannelTests : ContextualTests
         Assert.Single(deviceList);
         Assert.Equal("test_id", deviceList[0].ID);
         Assert.Equal("test_name", deviceList[0].Name);
-        remoteScanController.Verify(rsc => rsc.GetDevices(It.IsAny<ScanOptions>(), It.IsAny<CancellationToken>(),
-            It.IsAny<Action<ScanDevice>>()));
-        remoteScanController.VerifyNoOtherCalls();
+        _ = remoteScanController.Received().GetDevices(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(),
+            Arg.Any<Action<ScanDevice>>());
+        remoteScanController.ReceivedCallsCount(1);
     }
 
     [Fact]
@@ -134,29 +134,29 @@ public class WorkerChannelTests : ContextualTests
     [Fact]
     public async Task TwainScan()
     {
-        var twainEvents = new Mock<ITwainEvents>();
-        var sessionController = new Mock<ITwainSessionController>();
+        var twainEvents = Substitute.For<ITwainEvents>();
+        var sessionController = Substitute.For<ITwainSessionController>();
 
-        sessionController.Setup(x =>
-            x.StartScan(It.IsAny<ScanOptions>(), It.IsAny<TwainEvents>(), It.IsAny<CancellationToken>())).Returns(
-            new InvocationFunc(ctx =>
-            {
-                var serverTwainEvents = (ITwainEvents) ctx.Arguments[1];
-                serverTwainEvents.PageStart(new TwainPageStart());
-                serverTwainEvents.MemoryBufferTransferred(new TwainMemoryBuffer());
-                serverTwainEvents.PageStart(new TwainPageStart());
-                serverTwainEvents.NativeImageTransferred(new TwainNativeImage());
-                return Task.CompletedTask;
-            }));
+        sessionController.StartScan(Arg.Any<ScanOptions>(), Arg.Any<TwainEvents>(), Arg.Any<CancellationToken>())
+            .Returns(
+                x =>
+                {
+                    var serverTwainEvents = (ITwainEvents) x[1];
+                    serverTwainEvents.PageStart(new TwainPageStart());
+                    serverTwainEvents.MemoryBufferTransferred(new TwainMemoryBuffer());
+                    serverTwainEvents.PageStart(new TwainPageStart());
+                    serverTwainEvents.NativeImageTransferred(new TwainNativeImage());
+                    return Task.CompletedTask;
+                });
 
-        using var channel = Start(twainSessionController: sessionController.Object);
-        await channel.Client.TwainScan(new ScanOptions(), CancellationToken.None, twainEvents.Object);
+        using var channel = Start(twainSessionController: sessionController);
+        await channel.Client.TwainScan(new ScanOptions(), CancellationToken.None, twainEvents);
 
-        twainEvents.Verify(x => x.PageStart(It.IsAny<TwainPageStart>()));
-        twainEvents.Verify(x => x.MemoryBufferTransferred(It.IsAny<TwainMemoryBuffer>()));
-        twainEvents.Verify(x => x.PageStart(It.IsAny<TwainPageStart>()));
-        twainEvents.Verify(x => x.NativeImageTransferred(It.IsAny<TwainNativeImage>()));
-        twainEvents.VerifyNoOtherCalls();
+        twainEvents.Received().PageStart(Arg.Any<TwainPageStart>());
+        twainEvents.Received().MemoryBufferTransferred(Arg.Any<TwainMemoryBuffer>());
+        twainEvents.Received().PageStart(Arg.Any<TwainPageStart>());
+        twainEvents.Received().NativeImageTransferred(Arg.Any<TwainNativeImage>());
+        twainEvents.ReceivedCallsCount(4);
     }
 
     private class MockRemoteScanController : IRemoteScanController

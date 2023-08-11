@@ -1,5 +1,6 @@
-using Moq;
 using NAPS2.ImportExport.Email;
+using NAPS2.Sdk.Tests;
+using NSubstitute;
 
 namespace NAPS2.Lib.Tests.Automation;
 
@@ -9,9 +10,10 @@ public class MockEmailProviderFactory : IEmailProviderFactory
 
     public MockEmailProviderFactory(Action<EmailMessage> messageAsserts)
     {
-        EmailProviderMock.Setup(x => x.SendEmail(It.IsAny<EmailMessage>(), It.IsAny<ProgressHandler>()))
-            .Returns((EmailMessage message, ProgressHandler _) =>
+        EmailProviderMock.SendEmail(Arg.Any<EmailMessage>(), Arg.Any<ProgressHandler>())
+            .Returns(x =>
             {
+                var message = (EmailMessage) x[0];
                 try
                 {
                     messageAsserts.Invoke(message);
@@ -25,11 +27,11 @@ public class MockEmailProviderFactory : IEmailProviderFactory
             });
     }
 
-    public IEmailProvider Create(EmailProviderType type) => EmailProviderMock.Object;
+    public IEmailProvider Create(EmailProviderType type) => EmailProviderMock;
 
-    public IEmailProvider Default => EmailProviderMock.Object;
+    public IEmailProvider Default => EmailProviderMock;
 
-    public Mock<IEmailProvider> EmailProviderMock { get; } = new();
+    public IEmailProvider EmailProviderMock { get; } = Substitute.For<IEmailProvider>();
 
     public void CheckAsserts()
     {
@@ -41,7 +43,7 @@ public class MockEmailProviderFactory : IEmailProviderFactory
 
     public void VerifyExactlyOneMessageSent()
     {
-        EmailProviderMock.Verify(x => x.SendEmail(It.IsAny<EmailMessage>(), It.IsAny<ProgressHandler>()));
-        EmailProviderMock.VerifyNoOtherCalls();
+        EmailProviderMock.Received().SendEmail(Arg.Any<EmailMessage>(), Arg.Any<ProgressHandler>());
+        EmailProviderMock.ReceivedCallsCount(1);
     }
 }

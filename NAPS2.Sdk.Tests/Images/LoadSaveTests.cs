@@ -1,6 +1,6 @@
 using System.Globalization;
-using Moq;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
@@ -56,15 +56,15 @@ public class LoadSaveTests : ContextualTests
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
-        var progressMock = new Mock<ProgressCallback>();
+        var progressMock = Substitute.For<ProgressCallback>();
 
         if (!ImageContext.SupportsFormat(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await ImageContext.LoadFrames(path, progressMock.Object).ToListAsync());
+                await ImageContext.LoadFrames(path, progressMock).ToListAsync());
             return;
         }
-        var images = await ImageContext.LoadFrames(path, progressMock.Object).ToListAsync();
+        var images = await ImageContext.LoadFrames(path, progressMock).ToListAsync();
 
         Assert.Equal(compare.Length, images.Count);
         for (int i = 0; i < images.Count; i++)
@@ -72,9 +72,9 @@ public class LoadSaveTests : ContextualTests
             Assert.Equal(format, images[i].OriginalFileFormat);
             Assert.Equal(logicalPixelFormats[i], images[i].LogicalPixelFormat);
             ImageAsserts.Similar(GetResource(compare[i]), images[i], ignoreResolution: ignoreRes);
-            progressMock.Verify(x => x(i, images.Count));
+            progressMock.Received()(i, images.Count);
         }
-        progressMock.Verify(x => x(images.Count, images.Count));
+        progressMock.Received()(images.Count, images.Count);
     }
 
     [Theory]
@@ -83,15 +83,15 @@ public class LoadSaveTests : ContextualTests
         ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
     {
         var stream = new MemoryStream(GetResource(resource));
-        var progressMock = new Mock<ProgressCallback>();
+        var progressMock = Substitute.For<ProgressCallback>();
 
         if (!ImageContext.SupportsFormat(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await ImageContext.LoadFrames(stream, progressMock.Object).ToListAsync());
+                await ImageContext.LoadFrames(stream, progressMock).ToListAsync());
             return;
         }
-        var images = await ImageContext.LoadFrames(stream, progressMock.Object).ToListAsync();
+        var images = await ImageContext.LoadFrames(stream, progressMock).ToListAsync();
 
         Assert.Equal(compare.Length, images.Count);
         for (int i = 0; i < images.Count; i++)
@@ -99,9 +99,9 @@ public class LoadSaveTests : ContextualTests
             Assert.Equal(format, images[i].OriginalFileFormat);
             Assert.Equal(logicalPixelFormats[i], images[i].LogicalPixelFormat);
             ImageAsserts.Similar(GetResource(compare[i]), images[i], ignoreResolution: ignoreRes);
-            progressMock.Verify(x => x(i, images.Count));
+            progressMock.Received()(i, images.Count);
         }
-        progressMock.Verify(x => x(images.Count, images.Count));
+        progressMock.Received()(images.Count, images.Count);
     }
 
     [Theory]

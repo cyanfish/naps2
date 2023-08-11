@@ -1,11 +1,11 @@
-﻿using Moq;
-using NAPS2.EtoForms;
+﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Lib.Tests.Scan;
@@ -14,28 +14,28 @@ public class AutoSaverTests : ContextualTests
 {
     private readonly AutoSaver _autoSaver;
 
-    private readonly Mock<ErrorOutput> _errorOutput;
-    private readonly Mock<DialogHelper> _dialogHelper;
-    private readonly Mock<OperationProgress> _operationProgress;
-    private readonly Mock<ISaveNotify> _saveNotify;
-    private readonly Mock<IOverwritePrompt> _overwritePrompt;
+    private readonly ErrorOutput _errorOutput;
+    private readonly DialogHelper _dialogHelper;
+    private readonly OperationProgress _operationProgress;
+    private readonly ISaveNotify _saveNotify;
+    private readonly IOverwritePrompt _overwritePrompt;
     private readonly Naps2Config _config;
 
     public AutoSaverTests()
     {
-        _errorOutput = new Mock<ErrorOutput>();
-        _dialogHelper = new Mock<DialogHelper>();
-        _operationProgress = new Mock<OperationProgress>();
-        _saveNotify = new Mock<ISaveNotify>();
-        _overwritePrompt = new Mock<IOverwritePrompt>();
+        _errorOutput = Substitute.For<ErrorOutput>();
+        _dialogHelper = Substitute.For<DialogHelper>();
+        _operationProgress = Substitute.For<OperationProgress>();
+        _saveNotify = Substitute.For<ISaveNotify>();
+        _overwritePrompt = Substitute.For<IOverwritePrompt>();
         _config = Naps2Config.Stub();
         _autoSaver = new AutoSaver(
-            _errorOutput.Object,
-            _dialogHelper.Object,
-            _operationProgress.Object,
-            _saveNotify.Object,
+            _errorOutput,
+            _dialogHelper,
+            _operationProgress,
+            _saveNotify,
             new PdfExporter(ScanningContext),
-            _overwritePrompt.Object,
+            _overwritePrompt,
             _config,
             ImageContext
         );
@@ -181,7 +181,7 @@ public class AutoSaverTests : ContextualTests
     // [Fact]
     // public async Task TwoImagesTwoPdfs()
     // {
-    //     var errorOutput = new Mock<ErrorOutput>();
+    //     var errorOutput = Substitute.For<ErrorOutput>();
     //     var driver = Driver(errorOutput.Object, 2);
     //
     //     var scanProfile = Profile(new AutoSaveSettings
@@ -203,7 +203,7 @@ public class AutoSaverTests : ContextualTests
     // [Fact]
     // public async Task TwoImagesTwoJpegs()
     // {
-    //     var errorOutput = new Mock<ErrorOutput>();
+    //     var errorOutput = Substitute.For<ErrorOutput>();
     //     var driver = Driver(errorOutput.Object, 2);
     //
     //     var scanProfile = Profile(new AutoSaveSettings
@@ -222,7 +222,7 @@ public class AutoSaverTests : ContextualTests
     // [Fact]
     // public async Task ClearAfterSaving()
     // {
-    //     var errorOutput = new Mock<ErrorOutput>();
+    //     var errorOutput = Substitute.For<ErrorOutput>();
     //     var driver = Driver(errorOutput.Object, 2);
     //
     //     var scanProfile = Profile(new AutoSaveSettings

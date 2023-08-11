@@ -1,8 +1,8 @@
 ﻿using System.Threading;
-using Moq;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using Xunit;
 using IScanDriver = NAPS2.Scan.Internal.IScanDriver;
 using IScanDriverFactory = NAPS2.Scan.Internal.IScanDriverFactory;
@@ -16,16 +16,16 @@ public class RemoteScanControllerTests : ContextualTests
     {
         var device = new ScanDevice("test_id1", "test_name1");
         var wiaDevice = new ScanDevice("WIA-test_id2", "test_name2");
-        var scanDriver = new Mock<IScanDriver>();
-        scanDriver.Setup(x =>
-                x.GetDevices(It.IsAny<ScanOptions>(), It.IsAny<CancellationToken>(), It.IsAny<Action<ScanDevice>>()))
-            .Returns((ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback) =>
+        var scanDriver = Substitute.For<IScanDriver>();
+        scanDriver.GetDevices(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<Action<ScanDevice>>())
+            .Returns(x =>
             {
+                var callback = (Action<ScanDevice>) x[2];
                 callback(device);
                 callback(wiaDevice);
                 return Task.CompletedTask;
             });
-        var controller = CreateControllerWithMockDriver(scanDriver.Object);
+        var controller = CreateControllerWithMockDriver(scanDriver);
 
         var deviceList = new List<ScanDevice>();
         await controller.GetDevices(new ScanOptions { Driver = Driver.Wia }, CancellationToken.None, deviceList.Add);
@@ -49,17 +49,17 @@ public class RemoteScanControllerTests : ContextualTests
     [Fact]
     public async Task ScanAndDeskew()
     {
-        var scanDriver = new Mock<IScanDriver>();
-        scanDriver.Setup(x => x.Scan(It.IsAny<ScanOptions>(), It.IsAny<CancellationToken>(), It.IsAny<IScanEvents>(),
-            It.IsAny<Action<IMemoryImage>>())).Returns(new InvocationFunc(
-            ctx =>
+        var scanDriver = Substitute.For<IScanDriver>();
+        scanDriver.Scan(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>()).ReturnsForAnyArgs(
+            x =>
             {
-                var callback = (Action<IMemoryImage>) ctx.Arguments[3];
+                var callback = (Action<IMemoryImage>) x[3];
                 var image = LoadImage(ImageResources.skewed);
                 callback(image);
                 return Task.FromResult(true);
-            }));
-        var controller = CreateControllerWithMockDriver(scanDriver.Object);
+            });
+        var controller = CreateControllerWithMockDriver(scanDriver);
 
         var images = new List<ProcessedImage>();
 
@@ -80,9 +80,9 @@ public class RemoteScanControllerTests : ContextualTests
 
     private RemoteScanController CreateControllerWithMockDriver(IScanDriver scanDriver)
     {
-        var scanDriverFactory = new Mock<IScanDriverFactory>();
-        scanDriverFactory.Setup(x => x.Create(It.IsAny<ScanOptions>())).Returns(scanDriver);
-        var controller = new RemoteScanController(scanDriverFactory.Object, new RemotePostProcessor(ScanningContext));
+        var scanDriverFactory = Substitute.For<IScanDriverFactory>();
+        scanDriverFactory.Create(Arg.Any<ScanOptions>()).Returns(scanDriver);
+        var controller = new RemoteScanController(scanDriverFactory, new RemotePostProcessor(ScanningContext));
         return controller;
     }
 }

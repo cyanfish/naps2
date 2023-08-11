@@ -1,8 +1,8 @@
-using Moq;
 using NAPS2.ImportExport;
 using NAPS2.Pdf;
 using NAPS2.Pdf.Pdfium;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Pdf;
@@ -110,10 +110,13 @@ public class PdfImportTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var passwordProvider = new Mock<IPdfPasswordProvider>();
-        var password = "hello";
-        passwordProvider.Setup(x => x.ProvidePassword(It.IsAny<string>(), It.IsAny<int>(), out password)).Returns(true);
-        var importer = new PdfImporter(ScanningContext, passwordProvider.Object);
+        var passwordProvider = Substitute.For<IPdfPasswordProvider>();
+        passwordProvider.ProvidePassword(Arg.Any<string>(), Arg.Any<int>(), out Arg.Any<string>()).Returns(x =>
+        {
+            x[2] = "hello";
+            return true;
+        });
+        var importer = new PdfImporter(ScanningContext, passwordProvider);
 
         var importPath = CopyResourceToFile(PdfResources.encrypted_pdf, "import.pdf");
         var images = await importer.Import(importPath).ToListAsync();

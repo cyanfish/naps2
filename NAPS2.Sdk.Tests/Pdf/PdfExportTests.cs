@@ -1,7 +1,7 @@
 using System.Threading;
-using Moq;
 using NAPS2.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Pdf;
@@ -325,19 +325,19 @@ public class PdfExporterTests : ContextualTests
         config.StorageConfig.Apply(this);
         SetUpFakeOcr();
 
-        var progressMock = new Mock<ProgressCallback>();
+        var progressMock = Substitute.For<ProgressCallback>();
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         var images = new[] { CreateScannedImage(), CreateScannedImage(), CreateScannedImage() };
         var result = await _exporter.Export(filePath, images, new PdfExportParams(), config.OcrParams,
-            progress: progressMock.Object);
+            progress: progressMock);
 
         Assert.True(result);
-        progressMock.Verify(x => x(0, 3));
-        progressMock.Verify(x => x(1, 3));
-        progressMock.Verify(x => x(2, 3));
-        progressMock.Verify(x => x(3, 3));
-        progressMock.VerifyNoOtherCalls();
+        progressMock.Received()(0, 3);
+        progressMock.Received()(1, 3);
+        progressMock.Received()(2, 3);
+        progressMock.Received()(3, 3);
+        progressMock.ReceivedCallsCount(4);
     }
 
     [Theory]
@@ -347,12 +347,12 @@ public class PdfExporterTests : ContextualTests
         config.StorageConfig.Apply(this);
         SetUpFakeOcr();
 
-        var progressMock = new Mock<ProgressCallback>();
+        var progressMock = Substitute.For<ProgressCallback>();
         var cts = new CancellationTokenSource();
 
         void Progress(int current, int total)
         {
-            progressMock.Object(current, total);
+            progressMock(current, total);
             if (current == 1) cts.Cancel();
         }
 
@@ -362,9 +362,9 @@ public class PdfExporterTests : ContextualTests
             progress: new ProgressHandler(Progress, cts.Token));
 
         Assert.False(result);
-        progressMock.Verify(x => x(0, 3));
-        progressMock.Verify(x => x(1, 3));
-        progressMock.VerifyNoOtherCalls();
+        progressMock.Received()(0, 3);
+        progressMock.Received()(1, 3);
+        progressMock.ReceivedCallsCount(2);
     }
 
     [Theory]

@@ -1,10 +1,10 @@
 using Google.Protobuf;
-using Moq;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Internal.Twain;
 using NAPS2.Sdk.Tests.Asserts;
+using NSubstitute;
 using NTwain.Data;
 using Xunit;
 
@@ -20,21 +20,21 @@ public class TwainImageProcessorTests : ContextualTests
     private static readonly (int, int, int) GRAY = (0x80, 0x80, 0x80);
     private static readonly (int, int, int) LIGHT_GRAY = (0xD3, 0xD3, 0xD3);
 
-    private readonly Mock<IScanEvents> _scanEvents;
-    private readonly Mock<Action<IMemoryImage>> _callback;
+    private readonly IScanEvents _scanEvents;
+    private readonly Action<IMemoryImage> _callback;
     private readonly TwainImageProcessor _processor;
     private readonly List<IMemoryImage> _images;
 
     public TwainImageProcessorTests()
     {
-        _scanEvents = new Mock<IScanEvents>();
-        _callback = new Mock<Action<IMemoryImage>>();
+        _scanEvents = Substitute.For<IScanEvents>();
+        _callback = Substitute.For<Action<IMemoryImage>>();
 
         _images = new List<IMemoryImage>();
-        _callback.Setup(x => x(It.IsAny<IMemoryImage>()))
-            .Callback((IMemoryImage image) => _images.Add(image));
+        _callback.When(x => x(Arg.Any<IMemoryImage>()))
+            .Do(x => _images.Add((IMemoryImage) x[0]));
 
-        _processor = new TwainImageProcessor(ScanningContext, new ScanOptions(), _scanEvents.Object, _callback.Object);
+        _processor = new TwainImageProcessor(ScanningContext, new ScanOptions(), _scanEvents, _callback);
     }
 
     [Fact]

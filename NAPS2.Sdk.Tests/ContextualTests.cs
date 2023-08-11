@@ -1,12 +1,12 @@
 ﻿using System.Collections.Immutable;
 using System.Threading;
 using Microsoft.Extensions.Logging;
-using Moq;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Unmanaged;
+using NSubstitute;
 using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests;
@@ -79,11 +79,12 @@ public class ContextualTests : IDisposable
 
     public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage)
     {
-        var ocrMock = new Mock<IOcrEngine>();
-        ocrMock.Setup(x => x.ProcessImage(ScanningContext, It.IsAny<string>(), It.IsAny<OcrParams>(), It.IsAny<CancellationToken>()))
+        var ocrMock = Substitute.For<IOcrEngine>();
+        ocrMock.ProcessImage(ScanningContext, Arg.Any<string>(), Arg.Any<OcrParams>(), Arg.Any<CancellationToken>())
             .Returns(
-                async (ScanningContext _, string path, OcrParams _, CancellationToken _) =>
+                async x =>
                 {
+                    var path = (string) x[1];
                     var ocrImage = ImageContext.Load(path);
                     await Task.Delay(200);
                     // Lock so we don't try to access images simultaneously
@@ -101,7 +102,7 @@ public class ContextualTests : IDisposable
                     }
                     return null;
                 });
-        ScanningContext.OcrEngine = ocrMock.Object;
+        ScanningContext.OcrEngine = ocrMock;
     }
 
     public string CopyResourceToFile(byte[] resource, string folder, string fileName)
