@@ -22,8 +22,8 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
 
 ### Optional Packages
 
-- **[NAPS2.Sdk.Worker](https://www.nuget.org/packages/NAPS2.Sdk.Worker/)**
-  - For scanning with a [worker process](). (You can also [build your own]() worker.)
+- **[NAPS2.Sdk.Worker.Win32](https://www.nuget.org/packages/NAPS2.Sdk.Worker.Win32/)**
+  - For scanning with [TWAIN on Windows](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/TwainSample.cs).
 - **[NAPS2.Pdfium.Binaries](https://www.nuget.org/packages/NAPS2.Pdfium.Binaries/)**
   - For [importing PDFs]().
 - **[NAPS2.Sane.Binaries](https://www.nuget.org/packages/NAPS2.Sane.Binaries/)**
