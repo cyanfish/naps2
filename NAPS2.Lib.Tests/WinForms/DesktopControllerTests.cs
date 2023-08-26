@@ -38,7 +38,6 @@ public class DesktopControllerTests : ContextualTests
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
     private readonly ThumbnailController _thumbnailController;
-    private readonly IWorkerFactory _workerFactory;
 
     public DesktopControllerTests()
     {
@@ -62,7 +61,7 @@ public class DesktopControllerTests : ContextualTests
         _desktopFormProvider = new DesktopFormProvider();
         _scannedImagePrinter = Substitute.For<IScannedImagePrinter>();
         _thumbnailController = new ThumbnailController(_thumbnailRenderQueue, _config);
-        _workerFactory = Substitute.For<IWorkerFactory>();
+        ScanningContext.WorkerFactory = Substitute.For<IWorkerFactory>();
         _desktopController = new DesktopController(
             ScanningContext,
             _imageList,
@@ -82,8 +81,7 @@ public class DesktopControllerTests : ContextualTests
             _desktopImagesController,
             _desktopScanController,
             _desktopFormProvider,
-            _scannedImagePrinter,
-            _workerFactory
+            _scannedImagePrinter
         );
 
         _operationFactory.Create<RecoveryOperation>().Returns(

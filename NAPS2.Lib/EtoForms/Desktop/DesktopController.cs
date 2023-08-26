@@ -32,13 +32,12 @@ public class DesktopController
     private readonly IDesktopScanController _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
-    private readonly IWorkerFactory _workerFactory;
 
     private bool _closed;
     private bool _initialized;
     private bool _suspended;
 
-    internal DesktopController(ScanningContext scanningContext, UiImageList imageList,
+    public DesktopController(ScanningContext scanningContext, UiImageList imageList,
         RecoveryStorageManager recoveryStorageManager, ThumbnailController thumbnailController,
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,
@@ -46,7 +45,7 @@ public class DesktopController
         ImageClipboard imageClipboard, ImageListActions imageListActions,
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
-        DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter, IWorkerFactory workerFactory)
+        DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -66,7 +65,6 @@ public class DesktopController
         _desktopScanController = desktopScanController;
         _desktopFormProvider = desktopFormProvider;
         _scannedImagePrinter = scannedImagePrinter;
-        _workerFactory = workerFactory;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
@@ -171,7 +169,7 @@ public class DesktopController
         }
         _closed = true;
         _thumbnailController.Dispose();
-        _workerFactory.Dispose();
+        _scanningContext.WorkerFactory!.Dispose();
     }
 
     public bool PrepareForClosing(bool userClosing)
