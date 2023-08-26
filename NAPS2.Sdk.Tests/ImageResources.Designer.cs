@@ -92,6 +92,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] bw_alternating {
+            get {
+                object obj = ResourceManager.GetObject("bw_alternating", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] deskewed {
             get {
                 object obj = ResourceManager.GetObject("deskewed", resourceCulture);

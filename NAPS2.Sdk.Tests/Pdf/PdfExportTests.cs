@@ -146,6 +146,24 @@ public class PdfExporterTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportBlackAndWhiteAlternatingPixels(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var storageImage = LoadImage(ImageResources.bw_alternating);
+        using var image = ScanningContext.CreateProcessedImage(storageImage);
+
+        await _exporter.Export(filePath, new[] { image }, new PdfExportParams());
+
+        PdfAsserts.AssertImages(filePath, ImageResources.bw_alternating);
+        // Alternating black & white pixels is the worst case for CCITT encoding (i.e. the encoded size is bigger than
+        // unencoded), therefore PDFSharp should choose FlateDecode (PNG encoding) instead
+        PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportGrayImage(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);
