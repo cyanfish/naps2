@@ -1,6 +1,6 @@
 namespace NAPS2.Remoting.Worker;
 
-public enum WorkerType
+internal enum WorkerType
 {
     Native,
     WinX86

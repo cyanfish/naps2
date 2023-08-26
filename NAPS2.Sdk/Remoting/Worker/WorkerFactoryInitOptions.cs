@@ -1,6 +1,6 @@
 namespace NAPS2.Remoting.Worker;
 
-public class WorkerFactoryInitOptions
+internal class WorkerFactoryInitOptions
 {
     public bool StartSpareWorkers { get; set; } = true;
 }

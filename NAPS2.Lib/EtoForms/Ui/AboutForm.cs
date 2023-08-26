@@ -17,7 +17,7 @@ public class AboutForm : EtoDialogBase
     private readonly UpdateChecker _updateChecker;
     private readonly CheckBox _enableDebugLogging = C.CheckBox(UiStrings.EnableDebugLogging);
 
-    public AboutForm(Naps2Config config, UpdateChecker updateChecker, IWorkerFactory workerFactory)
+    public AboutForm(Naps2Config config, UpdateChecker updateChecker)
         : base(config)
     {
         _donateButton = EtoPlatform.Current.AccessibleImageButton(

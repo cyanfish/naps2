@@ -45,7 +45,7 @@ public class ScanningContext : IDisposable
     /// Gets or sets the context's WorkerFactory. This is required for some operations that need to happen in a worker
     /// process (e.g. to scan with 32-bit TWAIN from a 64-bit process).
     /// </summary>
-    public IWorkerFactory? WorkerFactory { get; set; }
+    internal IWorkerFactory? WorkerFactory { get; set; }
 
     /// <summary>
     /// Gets or sets the context's OcrEngine. This is used to perform the OCR (optical character recognition) operation

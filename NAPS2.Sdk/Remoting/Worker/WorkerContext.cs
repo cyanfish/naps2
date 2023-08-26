@@ -7,7 +7,7 @@ namespace NAPS2.Remoting.Worker;
 /// <summary>
 /// A class storing the objects the client needs to use a NAPS2.Worker.exe instance.
 /// </summary>
-public class WorkerContext : IDisposable
+internal class WorkerContext : IDisposable
 {
     /// <summary>
     /// Timeout after attempting to normally stop a worker before it is killed.

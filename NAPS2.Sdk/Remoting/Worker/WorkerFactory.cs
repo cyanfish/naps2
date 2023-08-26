@@ -9,12 +9,10 @@ namespace NAPS2.Remoting.Worker;
 /// <summary>
 /// A class to manage the lifecycle of worker processes and hook up the named pipe channels.
 /// </summary>
-public class WorkerFactory : IWorkerFactory
+internal class WorkerFactory : IWorkerFactory
 {
     public const string PIPE_NAME_FORMAT = "NAPS2.Worker.{0}";
-
-    private readonly string _nativeWorkerExePath;
-    private readonly string? _winX86WorkerExePath;
+    private const int TAKE_WORKER_TIMEOUT = 10_000;
     private readonly Dictionary<string, string> _environmentVariables;
 
     private Dictionary<WorkerType, BlockingCollection<WorkerContext>>? _workerQueues;
@@ -53,10 +51,13 @@ public class WorkerFactory : IWorkerFactory
     public WorkerFactory(string nativeWorkerExePath, string? winX86WorkerExePath = null,
         Dictionary<string, string>? environmentVariables = null)
     {
-        _nativeWorkerExePath = nativeWorkerExePath;
-        _winX86WorkerExePath = winX86WorkerExePath;
+        NativeWorkerExePath = nativeWorkerExePath;
+        WinX86WorkerExePath = winX86WorkerExePath;
         _environmentVariables = environmentVariables ?? new Dictionary<string, string>();
     }
+
+    public string NativeWorkerExePath { get; }
+    public string? WinX86WorkerExePath { get; }
 
     private Process StartWorkerProcess(WorkerType workerType)
     {
@@ -64,13 +65,13 @@ public class WorkerFactory : IWorkerFactory
         ProcessStartInfo startInfo;
         if (workerType == WorkerType.WinX86)
         {
-            if (!PlatformCompat.System.SupportsWinX86Worker || _winX86WorkerExePath == null)
+            if (!PlatformCompat.System.SupportsWinX86Worker || WinX86WorkerExePath == null)
             {
                 throw new InvalidOperationException("Unexpected worker configuration");
             }
             startInfo = new ProcessStartInfo
             {
-                FileName = _winX86WorkerExePath,
+                FileName = WinX86WorkerExePath,
                 Arguments = $"{parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -81,7 +82,7 @@ public class WorkerFactory : IWorkerFactory
         {
             startInfo = new ProcessStartInfo
             {
-                FileName = _nativeWorkerExePath,
+                FileName = NativeWorkerExePath,
                 Arguments = $"worker {parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -150,18 +151,22 @@ public class WorkerFactory : IWorkerFactory
     private WorkerContext NextWorker(ScanningContext scanningContext, WorkerType workerType)
     {
         StartWorkerService(scanningContext, workerType);
-        return _workerQueues![workerType]!.Take();
+        if (!_workerQueues![workerType]!.TryTake(out var worker, TAKE_WORKER_TIMEOUT))
+        {
+            throw new InvalidOperationException("Could not start a worker process; see logs for details");
+        }
+        return worker;
     }
 
-    public void Init(ScanningContext scanningContext, WorkerFactoryInitOptions? options)
+    public void Init(ScanningContext scanningContext, WorkerFactoryInitOptions? options = null)
     {
-        if (!File.Exists(_nativeWorkerExePath))
+        if (!File.Exists(NativeWorkerExePath))
         {
-            scanningContext.Logger.LogDebug($"Native worker exe does not exist: {_nativeWorkerExePath}");
+            scanningContext.Logger.LogDebug($"Native worker exe does not exist: {NativeWorkerExePath}");
         }
-        if (_winX86WorkerExePath != null && !File.Exists(_winX86WorkerExePath))
+        if (WinX86WorkerExePath != null && !File.Exists(WinX86WorkerExePath))
         {
-            scanningContext.Logger.LogDebug($"WinX86 worker exe does not exist: {_winX86WorkerExePath}");
+            scanningContext.Logger.LogDebug($"WinX86 worker exe does not exist: {WinX86WorkerExePath}");
         }
 
         options ??= new WorkerFactoryInitOptions();

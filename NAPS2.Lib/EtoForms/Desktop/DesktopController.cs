@@ -38,7 +38,7 @@ public class DesktopController
     private bool _initialized;
     private bool _suspended;
 
-    public DesktopController(ScanningContext scanningContext, UiImageList imageList,
+    internal DesktopController(ScanningContext scanningContext, UiImageList imageList,
         RecoveryStorageManager recoveryStorageManager, ThumbnailController thumbnailController,
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,

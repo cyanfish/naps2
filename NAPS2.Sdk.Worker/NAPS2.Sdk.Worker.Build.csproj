@@ -25,4 +25,8 @@
         <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
         <PackageReference Include="LargeAddressAware" Version="1.0.3" />
     </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="*.targets" />
+    </ItemGroup>
 </Project>
