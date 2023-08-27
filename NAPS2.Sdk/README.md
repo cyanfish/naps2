@@ -19,6 +19,8 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
     - For working with `Gdk.Pixbuf` images. (Linux)
   - **[NAPS2.Images.Mac](https://www.nuget.org/packages/NAPS2.Images.Mac/)**
     - For working with `AppKit.NSImage` images. (Mac)
+  - **[NAPS2.Images.ImageSharp](https://www.nuget.org/packages/NAPS2.Images.ImageSharp/)**
+    - For working with [`ImageSharp`](https://github.com/SixLabors/ImageSharp) images.
 
 ### Optional Packages
 
