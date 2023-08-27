@@ -8,5 +8,6 @@ public enum PlatformFlags
     Mac = 2,
     Linux = 4,
     X64 = 8,
-    Arm64 = 16
+    Arm64 = 16,
+    ImageSharp = 32
 }

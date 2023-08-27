@@ -134,7 +134,7 @@ public class AutoSaverTests : ContextualTests
     //     ImageAsserts.Similar(ImageResources.dog_gray, Path.Combine(FolderPath, "test2.jpg"));
     // }
 
-    [Fact]
+    [PlatformFact(exclude: PlatformFlags.ImageSharp)]
     public async Task TiffFilePerScan()
     {
         var settings = new AutoSaveSettings

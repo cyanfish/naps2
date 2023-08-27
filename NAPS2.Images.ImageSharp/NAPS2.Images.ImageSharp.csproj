@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6</TargetFramework>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>NAPS2.Images.ImageSharp</RootNamespace>
+
+        <Title>NAPS2.Images.ImageSharp</Title>
+        <Product>NAPS2.Images.ImageSharp</Product>
+        <Description>Images based on ImageSharp for NAPS2.Sdk.</Description>
+        <PackageTags>naps2</PackageTags>
+    </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Sdk.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+    </ItemGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\ImageUsers.targets" />
+
+</Project>

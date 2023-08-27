@@ -14,16 +14,25 @@ internal static class ImportPostProcessor
             return disposeOriginalImage ? image : image.Clone();
         }
 
-        using var actualRendered = rendered == null ? image.Render() : rendered.Clone();
-        var barcodeDetection = BarcodeDetector.Detect(actualRendered, barcodeDetectionOptions);
-        var thumbnail = thumbnailSize.HasValue
-            ? actualRendered.PerformTransform(new ThumbnailTransform(thumbnailSize.Value))
-            : null;
-        return image.WithPostProcessingData(image.PostProcessingData with
+        var actualRendered = rendered == null ? image.Render() : rendered.Clone();
+        try
         {
-            Thumbnail = thumbnail,
-            ThumbnailTransformState = image.TransformState,
-            Barcode = barcodeDetection
-        }, disposeOriginalImage);
+            var barcodeDetection = BarcodeDetector.Detect(actualRendered, barcodeDetectionOptions);
+            var thumbnail = thumbnailSize.HasValue
+                ? actualRendered.PerformTransform(new ThumbnailTransform(thumbnailSize.Value))
+                : null;
+            if (thumbnail == null) actualRendered.Dispose();
+            return image.WithPostProcessingData(image.PostProcessingData with
+            {
+                Thumbnail = thumbnail,
+                ThumbnailTransformState = image.TransformState,
+                Barcode = barcodeDetection
+            }, disposeOriginalImage);
+        }
+        catch (Exception)
+        {
+            actualRendered.Dispose();
+            throw;
+        }
     }
 }
