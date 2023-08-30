@@ -28,7 +28,7 @@ public class PdfExporter : IPdfExporter
     }
 
     public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
-        PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler progress = default)
+        PdfExportParams? exportParams = null, OcrParams? ocrParams = null, ProgressHandler progress = default)
     {
         return await Task.Run(async () =>
         {
@@ -47,6 +47,7 @@ public class PdfExporter : IPdfExporter
             // It would be simpler if we could use Pdfium for everything, but it doesn't support a lot of features we
             // need, e.g. configuring interpolation, encryption, PDF/A, etc.
 
+            exportParams ??= new PdfExportParams();
             var document = InitializeDocument(exportParams);
 
             // TODO: Consider storing text from imported image-based pages in PostProcessingData so it can be saved even

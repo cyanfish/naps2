@@ -30,7 +30,7 @@ public class PdfImportExportTests : ContextualTests
 
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
-        await _exporter.Export(_exportPath, images, new PdfExportParams(), config.OcrParams);
+        await _exporter.Export(_exportPath, images, ocrParams: config.OcrParams);
 
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, PdfResources.word_p2);
     }
@@ -52,7 +52,7 @@ public class PdfImportExportTests : ContextualTests
             toInsert,
             images[1]
         };
-        await _exporter.Export(_exportPath, newImages, new PdfExportParams(), config.OcrParams);
+        await _exporter.Export(_exportPath, newImages, ocrParams: config.OcrParams);
 
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, ImageResources.dog, PdfResources.word_p2);
     }
@@ -75,7 +75,7 @@ public class PdfImportExportTests : ContextualTests
         ImageAsserts.Similar(PdfResources.word_p1_rotated, newImages[0], ignoreResolution: true);
         ImageAsserts.Similar(PdfResources.word_p2_bw, newImages[1], ignoreResolution: true);
 
-        await _exporter.Export(_exportPath, newImages, new PdfExportParams(), config.OcrParams);
+        await _exporter.Export(_exportPath, newImages, ocrParams: config.OcrParams);
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1_rotated, PdfResources.word_p2_bw);
     }
 
@@ -102,7 +102,7 @@ public class PdfImportExportTests : ContextualTests
 
         var allImages = images.Concat(imagesForOcr).ToList();
 
-        await _exporter.Export(_exportPath, allImages, new PdfExportParams(), config.OcrParams);
+        await _exporter.Export(_exportPath, allImages, ocrParams: config.OcrParams);
         PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, PdfResources.word_p2, PdfResources.word_patcht_p1);
         PdfAsserts.AssertContainsTextOnce("Page one.", _exportPath);
         if (config.OcrParams != null)
@@ -164,7 +164,7 @@ public class PdfImportExportTests : ContextualTests
             { LoadImage(ImageResources.dog), ""},
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."},
         });
-        await _exporter.Export(_exportPath, images, new PdfExportParams(), config.OcrParams);
+        await _exporter.Export(_exportPath, images, ocrParams: config.OcrParams);
 
         PdfAsserts.AssertImages(_exportPath,
             PdfResources.word_p1,

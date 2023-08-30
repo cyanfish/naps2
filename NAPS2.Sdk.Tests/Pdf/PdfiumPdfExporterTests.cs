@@ -13,7 +13,7 @@ public class PdfiumPdfExporterTests : ContextualTests
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
     
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath, new[] { image }, new PdfExportParams());
+        await pdfExporter.Export(filePath, new[] { image });
         
         PdfAsserts.AssertImages(filePath, ImageResources.dog);
     }

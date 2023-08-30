@@ -18,12 +18,13 @@ internal class PdfiumPdfExporter : IPdfExporter
     }
 
     public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
-        PdfExportParams exportParams, OcrParams? ocrParams = null, ProgressHandler progress = default)
+        PdfExportParams? exportParams = null, OcrParams? ocrParams = null, ProgressHandler progress = default)
     {
         return await Task.Run(() =>
         {
             lock (PdfiumNativeLibrary.Instance)
             {
+                exportParams ??= new PdfExportParams();
                 var compat = exportParams.Compat;
 
                 using var document = PdfDocument.CreateNew();

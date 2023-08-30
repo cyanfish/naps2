@@ -15,7 +15,7 @@ public class PdfBenchmarkTests : ContextualTests
         var pdfExporter = new PdfExporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
-            await pdfExporter.Export(filePath + i + ".pdf", new[] { image }, new PdfExportParams());
+            await pdfExporter.Export(filePath + i + ".pdf", new[] { image });
         }
     }
 
@@ -27,7 +27,7 @@ public class PdfBenchmarkTests : ContextualTests
             BitDepth.Color, false, -1, null, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image }, new PdfExportParams());
+        await pdfExporter.Export(filePath + ".pdf", new[] { image });
     }
 
     [BenchmarkFact]
@@ -38,7 +38,7 @@ public class PdfBenchmarkTests : ContextualTests
             BitDepth.Color, true, -1, null, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image }, new PdfExportParams());
+        await pdfExporter.Export(filePath + ".pdf", new[] { image });
     }
 
     [BenchmarkFact]
@@ -51,7 +51,7 @@ public class PdfBenchmarkTests : ContextualTests
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
-            await pdfExporter.Export(filePath + i + ".pdf", new[] { image }, new PdfExportParams());
+            await pdfExporter.Export(filePath + i + ".pdf", new[] { image });
         }
     }
 
@@ -63,7 +63,7 @@ public class PdfBenchmarkTests : ContextualTests
             BitDepth.Color, false, -1, null, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image }, new PdfExportParams());
+        await pdfExporter.Export(filePath + ".pdf", new[] { image });
     }
 
     [BenchmarkFact]
@@ -74,7 +74,7 @@ public class PdfBenchmarkTests : ContextualTests
             BitDepth.Color, true, -1, null, Enumerable.Empty<Transform>());
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image }, new PdfExportParams());
+        await pdfExporter.Export(filePath + ".pdf", new[] { image });
     }
 
     [BenchmarkFact]
