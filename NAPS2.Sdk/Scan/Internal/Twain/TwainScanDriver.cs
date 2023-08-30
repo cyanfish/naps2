@@ -78,7 +78,7 @@ internal class TwainScanDriver : IScanDriver
             throw new InvalidOperationException(
                 "Tried to run TWAIN from a 64-bit process. " +
                 "If this is intentional, set ScanOptions.TwainOptions.Dsm to TwainDsm.NewX64. " +
-                "Otherwise you can set up a worker process with ScanningContext.WorkerFactory.");
+                "Otherwise you can set up a worker process with ScanningContext.SetUpWin32Worker().");
         }
         if (dsm == TwainDsm.NewX64 && !Environment.Is64BitProcess)
         {

@@ -36,7 +36,7 @@ internal class LegacyTwainScanDriver : IScanDriver
         if (Environment.Is64BitProcess)
         {
             throw new InvalidOperationException(
-                "Can't run TWAIN with TwainAdapter.Legacy from a 64-bit process. You can set up a worker process with ScanningContext.WorkerFactory.");
+                "Can't run TWAIN with TwainAdapter.Legacy from a 64-bit process. You can set up a worker process with ScanningContext.SetUpWin32Worker().");
         }
     }
 }

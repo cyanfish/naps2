@@ -239,7 +239,7 @@ internal class WiaScanDriver : IScanDriver
                     if (_scanningContext.WorkerFactory == null)
                     {
                         throw new InvalidOperationException(
-                            "ScanningContext.WorkerFactory must be set to use WIA 1.0 Native UI from a 64-bit process");
+                            "ScanningContext.SetUpWin32Worker() must be called to use WIA 1.0 Native UI from a 64-bit process");
                     }
                     WiaConfiguration? config;
                     using (var worker = _scanningContext.CreateWorker(WorkerType.WinX86)!)

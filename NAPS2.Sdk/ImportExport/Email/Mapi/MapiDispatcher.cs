@@ -25,7 +25,7 @@ internal class MapiDispatcher
         {
             // TODO: Maybe allow non-worker use for SDK?
             throw new InvalidOperationException(
-                "ScanningContext.WorkerFactory must be set to use MAPI.");
+                "ScanningContext must have a worker set up to use MAPI.");
         }
 #if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException("Windows-only");
