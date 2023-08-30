@@ -44,7 +44,7 @@
     <PackageReference Include="Grpc.Tools" Version="2.47.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="2.0.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
-    <PackageReference Include="NAPS2.Wia" Version="2.0.2" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
+    <PackageReference Include="NAPS2.Wia" Version="2.0.3" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
     <!-- Hide compatibility warnings for NTwain as it will only be actually used on Windows. -->
     <!-- TODO: Does this actually work if we build a net6 framework-dependent app and try to use Twain? -->
 <!--    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />-->
