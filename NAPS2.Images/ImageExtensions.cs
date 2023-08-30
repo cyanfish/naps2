@@ -9,6 +9,64 @@ public static class ImageExtensions
         return image.ImageContext.Render(image);
     }
 
+    /// <summary>
+    /// Saves the image to the given file path. If the file format is unspecified, it will be inferred from the
+    /// file extension if possible.
+    /// </summary>
+    /// <param name="image">The image to save.</param>
+    /// <param name="path">The path to save the image file to.</param>
+    /// <param name="imageFormat">The file format to use.</param>
+    /// <param name="options">Options for saving, e.g. JPEG quality.</param>
+    public static void Save(this IRenderableImage image, string path,
+        ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null)
+    {
+        // TODO: Optimized JPEG saving for file storage with no transforms etc?
+        using var renderedImage = image.Render();
+        renderedImage.Save(path, imageFormat, options);
+    }
+
+    /// <summary>
+    /// Saves the image to the given stream. The file format must be specified.
+    /// </summary>
+    /// <param name="image">The image to save.</param>
+    /// <param name="stream">The stream to save the image to.</param>
+    /// <param name="imageFormat">The file format to use.</param>
+    /// <param name="options">Options for saving, e.g. JPEG quality.</param>
+    public static void Save(this IRenderableImage image, Stream stream,
+        ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null)
+    {
+        using var renderedImage = image.Render();
+        renderedImage.Save(stream, imageFormat, options);
+    }
+
+    /// <summary>
+    /// Saves the image to a new MemoryStream object. The file format must be specified.
+    /// </summary>
+    /// <param name="image">The image to save.</param>
+    /// <param name="imageFormat">The file format to use.</param>
+    /// <param name="options">Options for saving, e.g. JPEG quality.</param>
+    public static MemoryStream SaveToMemoryStream(this IMemoryImage image, ImageFileFormat imageFormat,
+        ImageSaveOptions? options = null)
+    {
+        var stream = new MemoryStream();
+        image.Save(stream, imageFormat, options);
+        stream.Seek(0, SeekOrigin.Begin);
+        return stream;
+    }
+
+    /// <summary>
+    /// Saves the image to a new MemoryStream object. The file format must be specified.
+    /// </summary>
+    /// <param name="image">The image to save.</param>
+    /// <param name="imageFormat">The file format to use.</param>
+    /// <param name="options">Options for saving, e.g. JPEG quality.</param>
+    public static MemoryStream SaveToMemoryStream(this IRenderableImage image, ImageFileFormat imageFormat,
+        ImageSaveOptions? options = null)
+    {
+        using var renderedImage = image.Render();
+        return renderedImage.SaveToMemoryStream(imageFormat, options);
+    }
+
     public static IMemoryImage PerformTransform(this IMemoryImage image, Transform transform)
     {
         return image.ImageContext.PerformTransform(image, transform);
@@ -127,15 +185,6 @@ public static class ImageExtensions
         var newImage = imageContext.Create(source.Width, source.Height, pixelFormat);
         newImage.SetResolution(source.HorizontalResolution, source.VerticalResolution);
         return newImage;
-    }
-
-    public static MemoryStream SaveToMemoryStream(this IMemoryImage image, ImageFileFormat imageFormat,
-        ImageSaveOptions? options = null)
-    {
-        var stream = new MemoryStream();
-        image.Save(stream, imageFormat, options);
-        stream.Seek(0, SeekOrigin.Begin);
-        return stream;
     }
 
     public static string AsTypeHint(this ImageFileFormat imageFormat)
