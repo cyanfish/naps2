@@ -33,6 +33,40 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
 - **[NAPS2.Tesseract.Binaries](https://www.nuget.org/packages/NAPS2.Tesseract.Binaries/)**
   - For [running OCR](). (You can also use a separate Tesseract installation if you like.) 
 
+## Usage
+
+See the [Samples](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk.Samples) for more examples and description.
+
+```c#
+// Set up
+using var scanningContext = new ScanningContext(new GdiImageContext());
+var controller = new ScanController(scanningContext);
+
+// Query for available scanning devices
+var devices = await controller.GetDeviceList();
+
+// Set scanning options
+var options = new ScanOptions
+{
+    Device = devices.First(),
+    PaperSource = PaperSource.Feeder,
+    PageSize = PageSize.A4,
+    Dpi = 300
+};
+
+// Scan and save images
+int i = 1;
+await foreach (var image in controller.Scan(options))
+{
+    image.Save($"page{i++}.jpg");
+}
+
+// Scan and save PDF
+var images = await controller.Scan(options).ToListAsync();
+var pdfExporter = new PdfExporter(scanningContext);
+await pdfExporter.Export("doc.pdf", images);
+```
+
 ## Drivers
 
 |           | Windows | Mac | Linux |
@@ -53,11 +87,25 @@ Apple's [ImageCaptureCore](https://developer.apple.com/documentation/imagecaptur
 
 [ESCL](https://mopria.org/mopria-escl-specification), also known as Apple AirScan, is a standard protocol for scanning over a network. Many modern scanners support ESCL, and as it's a network protocol, specific drivers aren't required. ESCL can also be used over a USB connection in some cases.
 
-## Usage
+### Choosing a Driver
 
-See the [Samples](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk.Samples).
+Each platform has a default driver (WIA on Windows, Apple on Mac, and SANE on Linux). To use another driver, you only need to specify it:
+
+```c#
+var devices = await controller.GetDeviceList(Driver.Twain);
+...
+options.Driver = Driver.Twain;
+```
+
+### Worker Processes
+
+Using the TWAIN driver on Windows usually requires the calling process to be 32-bit. If you want to use TWAIN from a 64-bit process, NAPS2 provides a 32-bit worker process:
+
+```c#
+// Reference the NAPS2.Sdk.Worker.Win32 package and call this method
+scanningContext.SetUpWin32Worker();
+```
 
 ## Contributing
 
-<!-- TODO: Move dev onboarding to the github wiki -->
-Looking to contribute to NAPS2 or NAPS2.Sdk? Have a look at the [Developer Onboarding](https://www.naps2.com/doc/dev-onboarding) page.
+Looking to contribute to NAPS2 or NAPS2.Sdk? Have a look at the [wiki](https://github.com/cyanfish/naps2/wiki/1.-Building-&-Development-Environment).
