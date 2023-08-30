@@ -15,6 +15,7 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Crowdin.Api" Version="2.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="NuGet.Protocol" Version="6.7.0" />
     <PackageReference Include="Octokit" Version="5.0.2" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="VirusTotalNet" Version="2.0.1" />

@@ -43,6 +43,18 @@ public static class ProjectHelper
         return version;
     }
 
+    public static string[] GetSdkProjects() => new[]
+    {
+        "NAPS2.Sdk",
+        "NAPS2.Sdk.Worker.Win32",
+        "NAPS2.Internals",
+        "NAPS2.Images",
+        "NAPS2.Images.Gdi",
+        "NAPS2.Images.Gtk",
+        "NAPS2.Images.Mac",
+        "NAPS2.Images.ImageSharp",
+    };
+
     public static string GetPackagePath(string ext, Platform platform, string? version = null,
         string? packageName = null)
     {

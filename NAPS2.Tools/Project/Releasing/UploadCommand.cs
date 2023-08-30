@@ -1,7 +1,11 @@
 using NAPS2.Tools.Project.Targets;
+using NuGet.Common;
+using NuGet.Protocol;
+using NuGet.Protocol.Core.Types;
 using Octokit;
 using Octokit.Internal;
 using FileMode = System.IO.FileMode;
+using Repository = NuGet.Protocol.Core.Types.Repository;
 
 namespace NAPS2.Tools.Project.Releasing;
 
@@ -11,17 +15,20 @@ public class UploadCommand : ICommand<UploadOptions>
 
     public int Run(UploadOptions opts)
     {
-        // Validate all package files
-        foreach (var target in TargetsHelper.EnumeratePackageTargets())
+        if (opts.Target != "sdk")
         {
-            var file = new FileInfo(target.PackagePath);
-            if (!file.Exists)
+            // Validate all package files
+            foreach (var target in TargetsHelper.EnumeratePackageTargets())
             {
-                throw new Exception($"Expected package to exist: {file.FullName}");
-            }
-            if (!opts.AllowOld && file.LastWriteTime < DateTime.Now - TimeSpan.FromHours(2))
-            {
-                throw new Exception($"Expected package to be recently modified: {file.FullName}");
+                var file = new FileInfo(target.PackagePath);
+                if (!file.Exists)
+                {
+                    throw new Exception($"Expected package to exist: {file.FullName}");
+                }
+                if (!opts.AllowOld && file.LastWriteTime < DateTime.Now - TimeSpan.FromHours(2))
+                {
+                    throw new Exception($"Expected package to be recently modified: {file.FullName}");
+                }
             }
         }
 
@@ -38,16 +45,50 @@ public class UploadCommand : ICommand<UploadOptions>
             UploadToStaticSite();
             didSomething = true;
         }
+        if (opts.Target is "sdk")
+        {
+            UploadToNuget().Wait();
+            didSomething = true;
+        }
 
         if (didSomething)
         {
-            Output.OperationEnd("Binaries uploaded.");
+            Output.OperationEnd(opts.Target == "sdk" ? "Packages uploaded." : "Binaries uploaded.");
         }
         else
         {
             Output.Info("No upload target.");
         }
         return 0;
+    }
+
+    private async Task UploadToNuget()
+    {
+        var repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");
+        var resource = await repository.GetResourceAsync<PackageUpdateResource>();
+        var v = ProjectHelper.GetSdkVersion();
+        var packagePaths = ProjectHelper.GetSdkProjects().Select(x => $"{GetProjectFolder(x)}/bin/Release/{x}.{v}.nupkg").ToList();
+        var key = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "nuget"));
+        await resource.Push(
+            packagePaths,
+            symbolSource: null,
+            timeoutInSecond: 5 * 60,
+            disableBuffering: false,
+            getApiKey: _ => key,
+            getSymbolApiKey: _ => null,
+            noServiceEndpoint: false,
+            skipDuplicate: false,
+            symbolPackageUpdateResource: null,
+            NullLogger.Instance);
+    }
+
+    private string GetProjectFolder(string projectName)
+    {
+        if (projectName.StartsWith("NAPS2.Sdk.Worker"))
+        {
+            return "NAPS2.Sdk.Worker";
+        }
+        return projectName;
     }
 
     private async Task UploadToGithub()

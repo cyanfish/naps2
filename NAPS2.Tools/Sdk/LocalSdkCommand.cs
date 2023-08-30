@@ -12,19 +12,8 @@ public class LocalSdkCommand : ICommand<LocalSdkOptions>
             new BuildCommand().Run(new BuildOptions { BuildType = "sdk" });
         }
 
-        var sdkProjects = new[]
-        {
-            "NAPS2.Sdk",
-            "NAPS2.Sdk.Worker.Win32",
-            "NAPS2.Internals",
-            "NAPS2.Images",
-            "NAPS2.Images.Gdi",
-            "NAPS2.Images.Gtk",
-            "NAPS2.Images.Mac",
-        };
-
         var sdkVersion = ProjectHelper.GetSdkVersion();
-        foreach (var project in sdkProjects)
+        foreach (var project in ProjectHelper.GetSdkProjects())
         {
             var projectFolder = project.StartsWith("NAPS2.Sdk.Worker") ? "NAPS2.Sdk.Worker" : project;
             var nugetPath = Path.Combine(Paths.SolutionRoot, projectFolder, "bin", "Release",
