@@ -5,16 +5,19 @@ internal class PdfBitmap : NativePdfiumObject
     public const uint BLACK = 0;
     public const uint WHITE = uint.MaxValue;
 
-    public static PdfBitmap CreateFromPointerBgr(int width, int height, IntPtr scan0, int stride)
-    {
-        return new PdfBitmap(
-            Native.FPDFBitmap_CreateEx(width, height, PdfiumNativeLibrary.FPDFBitmap_BGR, scan0, stride));
-    }
+    public static PdfBitmap CreateFromPointerBgr(int width, int height, IntPtr scan0, int stride) =>
+        CreateFromPointer(width, height, scan0, stride, PdfiumNativeLibrary.FPDFBitmap_BGR);
 
     public static PdfBitmap CreateFromPointer(int width, int height, IntPtr scan0, int stride, int format)
     {
         return new PdfBitmap(
             Native.FPDFBitmap_CreateEx(width, height, format, scan0, stride));
+    }
+
+    public static PdfBitmap Create(int width, int height, int format)
+    {
+        return new PdfBitmap(
+            Native.FPDFBitmap_CreateEx(width, height, format, IntPtr.Zero, 0));
     }
 
     internal PdfBitmap(IntPtr handle) : base(handle)

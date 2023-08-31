@@ -78,26 +78,21 @@ internal static class PdfiumImageExtractor
         return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, metadata);
     }
 
-    private static unsafe PdfBitmap RenderPdfPageToBitmap(PdfPage page, PdfImageMetadata imageMetadata)
+    private static PdfBitmap RenderPdfPageToBitmap(PdfPage page, PdfImageMetadata imageMetadata)
     {
         var w = imageMetadata.Width;
         var h = imageMetadata.Height;
-        var (subPixelType, format) = imageMetadata.BitsPerPixel switch
+        var format = imageMetadata.BitsPerPixel switch
         {
-            1 or 8 => (SubPixelType.Gray, PdfiumNativeLibrary.FPDFBitmap_Gray),
-            24 => (SubPixelType.Bgr, PdfiumNativeLibrary.FPDFBitmap_BGR),
-            32 => (SubPixelType.Bgra, PdfiumNativeLibrary.FPDFBitmap_BGRA),
+            1 or 8 => PdfiumNativeLibrary.FPDFBitmap_Gray,
+            24 => PdfiumNativeLibrary.FPDFBitmap_BGR,
+            32 => PdfiumNativeLibrary.FPDFBitmap_BGRA,
             _ => throw new ArgumentException()
         };
-        var pixelInfo = new PixelInfo(w, h, subPixelType);
-        var buffer = new byte[pixelInfo.Length];
-        fixed (byte* ptr = buffer)
-        {
-            var pdfiumBitmap = PdfBitmap.CreateFromPointer(w, h, (IntPtr) ptr, pixelInfo.Stride, format);
-            pdfiumBitmap.FillRect(0, 0, w, h, PdfBitmap.WHITE);
-            pdfiumBitmap.RenderPage(page, 0, 0, w, h);
-            return pdfiumBitmap;
-        }
+        var pdfiumBitmap = PdfBitmap.Create(w, h, format);
+        pdfiumBitmap.FillRect(0, 0, w, h, PdfBitmap.WHITE);
+        pdfiumBitmap.RenderPage(page, 0, 0, w, h);
+        return pdfiumBitmap;
     }
 
     private static IMemoryImage CopyPdfBitmapToNewImage(ImageContext imageContext, PdfBitmap pdfBitmap,

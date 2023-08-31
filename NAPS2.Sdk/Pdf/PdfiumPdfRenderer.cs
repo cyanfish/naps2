@@ -74,21 +74,15 @@ internal class PdfiumPdfRenderer : IPdfRenderer
         var bitmap = imageContext.Create(widthInPx, heightInPx, ImagePixelFormat.RGB24);
         bitmap.SetResolution(xDpi, yDpi);
 
-        // As Pdfium only supports BGR, to be general we need to store it in an intermediate buffer,
-        // then use a copy operation to get the data to our output image (which might be BGR or RGB).
-        var pixelInfo = new PixelInfo(widthInPx, heightInPx, SubPixelType.Bgr);
-        var buffer = new byte[pixelInfo.Length];
-        fixed (byte* ptr = buffer)
-        {
-            using var pdfiumBitmap =
-                PdfBitmap.CreateFromPointerBgr(widthInPx, heightInPx, (IntPtr) ptr, pixelInfo.Stride);
-            pdfiumBitmap.FillRect(0, 0, widthInPx, heightInPx, PdfBitmap.WHITE);
-            pdfiumBitmap.RenderPage(page, 0, 0, widthInPx, heightInPx);
+        using var pdfiumBitmap =
+            PdfBitmap.Create(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR);
+        pdfiumBitmap.FillRect(0, 0, widthInPx, heightInPx, PdfBitmap.WHITE);
+        pdfiumBitmap.RenderPage(page, 0, 0, widthInPx, heightInPx);
 
-            new CopyBitwiseImageOp().Perform(buffer, pixelInfo, bitmap);
+        var pixelInfo = new PixelInfo(pdfiumBitmap.Width, pdfiumBitmap.Height, SubPixelType.Bgr, pdfiumBitmap.Stride);
+        new CopyBitwiseImageOp().Perform(pdfiumBitmap.Buffer, pixelInfo, bitmap);
 
-            return bitmap;
-        }
+        return bitmap;
     }
 
     /// <summary>
