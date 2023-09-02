@@ -95,7 +95,7 @@ public class PdfImporter : IPdfImporter
 
     private ProcessedImage GetImageFromPage(PdfPage page, ImportParams importParams)
     {
-        using var storage = PdfiumImageExtractor.GetSingleImage(_scanningContext.ImageContext, page);
+        using var storage = PdfiumImageExtractor.GetSingleImage(_scanningContext.ImageContext, page, false);
         if (storage != null)
         {
             var pageSize = new PageSize((decimal) page.Width * 72, (decimal) page.Height * 72, PageSizeUnit.Inch);

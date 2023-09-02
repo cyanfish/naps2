@@ -52,7 +52,7 @@ internal class PdfiumPdfRenderer : IPdfRenderer
 
             if (!NoExtraction)
             {
-                var image = PdfiumImageExtractor.GetSingleImage(imageContext, page);
+                var image = PdfiumImageExtractor.GetSingleImage(imageContext, page, true);
                 if (image != null)
                 {
                     yield return image;

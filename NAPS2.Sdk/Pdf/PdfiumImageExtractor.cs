@@ -5,9 +5,9 @@ namespace NAPS2.Pdf;
 
 internal static class PdfiumImageExtractor
 {
-    public static IMemoryImage? GetSingleImage(ImageContext imageContext, PdfPage page)
+    public static IMemoryImage? GetSingleImage(ImageContext imageContext, PdfPage page, bool ignoreHiddenText)
     {
-        using var imageObj = GetSingleImageObject(page);
+        using var imageObj = GetSingleImageObject(page, ignoreHiddenText);
         if (imageObj != null)
         {
             var metadata = imageObj.ImageMetadata;
@@ -123,7 +123,7 @@ internal static class PdfiumImageExtractor
         return image;
     }
 
-    public static PdfPageObject? GetSingleImageObject(PdfPage page)
+    public static PdfPageObject? GetSingleImageObject(PdfPage page, bool ignoreHiddenText)
     {
         if (page.AnnotCount > 0)
         {
@@ -144,7 +144,7 @@ internal static class PdfiumImageExtractor
             {
                 imageObject = pageObj;
             }
-            else if (pageObj.IsText && (imageObject == null || IsInvisibleText(pageObj)))
+            else if (ignoreHiddenText && pageObj.IsText && (imageObject == null || IsInvisibleText(pageObj)))
             {
                 // Skip invisible text or text that's underneath the image
                 // TODO: This could be wrong if the image object has transparency

@@ -120,7 +120,7 @@ public static class PdfAsserts
             using var doc = PdfDocument.Load(filePath);
             Assert.InRange(pageIndex, 0, doc.PageCount - 1);
             using var page = doc.GetPage(pageIndex);
-            using var obj = PdfiumImageExtractor.GetSingleImageObject(page);
+            using var obj = PdfiumImageExtractor.GetSingleImageObject(page, true);
             Assert.NotNull(obj);
             Assert.True(obj.HasImageFilters(filters),
                 $"Expected filters: {string.Join(",", filters)}, actual: {string.Join(",", obj.GetImageFilters())}");
