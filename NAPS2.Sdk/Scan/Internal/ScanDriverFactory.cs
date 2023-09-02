@@ -32,6 +32,8 @@ internal class ScanDriverFactory : IScanDriverFactory
 #endif
             case Driver.Sane:
                 return new Sane.SaneScanDriver(_scanningContext);
+            case Driver.Escl:
+                return new Escl.EsclScanDriver(_scanningContext);
             default:
                 throw new NotSupportedException(
                     $"Unsupported driver: {options.Driver}. " +

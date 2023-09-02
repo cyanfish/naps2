@@ -173,6 +173,8 @@ internal class ScanPerformer : IScanPerformer
             Driver = scanProfile.DriverName == DriverNames.WIA ? Driver.Wia
                 : scanProfile.DriverName == DriverNames.SANE ? Driver.Sane
                 : scanProfile.DriverName == DriverNames.TWAIN ? Driver.Twain
+                : scanProfile.DriverName == DriverNames.ESCL ? Driver.Escl
+                : scanProfile.DriverName == DriverNames.APPLE ? Driver.Apple
                 : Driver.Default,
             WiaOptions =
             {

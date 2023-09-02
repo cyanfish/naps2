@@ -16,6 +16,8 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool IsSaneDriverSupported => true;
 
+    public bool IsEsclDriverSupported => false;
+
     public bool CanUseWin32 => false;
 
     public bool CanEmail => true;

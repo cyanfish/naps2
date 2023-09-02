@@ -10,6 +10,8 @@ internal interface ISystemCompat
 
     bool IsSaneDriverSupported { get; }
 
+    bool IsEsclDriverSupported { get; }
+
     bool CanUseWin32 { get; }
 
     bool CanEmail { get; }

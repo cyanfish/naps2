@@ -20,6 +20,7 @@ public class EditProfileForm : EtoDialogBase
     private readonly RadioButton _twainDriver;
     private readonly RadioButton _appleDriver;
     private readonly RadioButton _saneDriver;
+    private readonly RadioButton _esclDriver;
     private readonly TextBox _deviceName = new() { Enabled = false };
     private readonly Button _chooseDevice = new() { Text = UiStrings.ChooseDevice };
     private readonly RadioButton _predefinedSettings;
@@ -56,6 +57,7 @@ public class EditProfileForm : EtoDialogBase
         _twainDriver = new RadioButton(_wiaDriver) { Text = UiStrings.TwainDriver };
         _appleDriver = new RadioButton(_wiaDriver) { Text = UiStrings.AppleDriver };
         _saneDriver = new RadioButton(_wiaDriver) { Text = UiStrings.SaneDriver };
+        _esclDriver = new RadioButton(_wiaDriver) { Text = UiStrings.EsclDriver };
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
         _pageSize.SelectedIndexChanged += PageSize_SelectedIndexChanged;
@@ -63,6 +65,7 @@ public class EditProfileForm : EtoDialogBase
         _twainDriver.CheckedChanged += Driver_CheckedChanged;
         _appleDriver.CheckedChanged += Driver_CheckedChanged;
         _saneDriver.CheckedChanged += Driver_CheckedChanged;
+        _esclDriver.CheckedChanged += Driver_CheckedChanged;
         _predefinedSettings.CheckedChanged += PredefinedSettings_CheckedChanged;
         _nativeUi.CheckedChanged += NativeUi_CheckedChanged;
         _ok.Click += Ok_Click;
@@ -94,6 +97,10 @@ public class EditProfileForm : EtoDialogBase
         if (PlatformCompat.System.IsSaneDriverSupported)
         {
             driverElements.Add(_saneDriver.Scale());
+        }
+        if (PlatformCompat.System.IsEsclDriverSupported)
+        {
+            driverElements.Add(_esclDriver.Scale());
         }
 
         Title = UiStrings.EditProfileFormTitle;
@@ -188,6 +195,7 @@ public class EditProfileForm : EtoDialogBase
             : _wiaDriver.Checked ? Driver.Wia
             : _appleDriver.Checked ? Driver.Apple
             : _saneDriver.Checked ? Driver.Sane
+            : _esclDriver.Checked ? Driver.Escl
             : ScanOptionsValidator.SystemDefaultDriver;
         set
         {
@@ -206,6 +214,10 @@ public class EditProfileForm : EtoDialogBase
             else if (value == Driver.Sane)
             {
                 _saneDriver.Checked = true;
+            }
+            else if (value == Driver.Escl)
+            {
+                _esclDriver.Checked = true;
             }
         }
     }
@@ -457,7 +469,8 @@ public class EditProfileForm : EtoDialogBase
             bool settingsEnabled = !locked && (_predefinedSettings.Checked || !canUseNativeUi);
 
             _displayName.Enabled = !locked;
-            _wiaDriver.Enabled = _twainDriver.Enabled = _appleDriver.Enabled = _saneDriver.Enabled = !locked;
+            _wiaDriver.Enabled = _twainDriver.Enabled =
+                _appleDriver.Enabled = _saneDriver.Enabled = _esclDriver.Enabled = !locked;
             _chooseDevice.Enabled = !deviceLocked;
             _predefinedSettings.Enabled = _nativeUi.Enabled = !locked;
 

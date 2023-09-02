@@ -13,6 +13,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool IsSaneDriverSupported => false;
 
+    public bool IsEsclDriverSupported => true;
+
     public bool CanUseWin32 => true;
 
     public bool CanEmail => true;
