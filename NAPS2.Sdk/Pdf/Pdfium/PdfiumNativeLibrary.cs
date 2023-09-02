@@ -106,10 +106,12 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate IntPtr FPDFPageObj_NewImageObj_delegate(IntPtr document);
 
     public delegate IntPtr FPDFPageObj_NewTextObj_delegate(IntPtr document,
-        [MarshalAs(UnmanagedType.LPStr)] string font, float font_size);
+        [MarshalAs(UnmanagedType.LPStr)]
+        string font, float font_size);
 
     public delegate bool FPDFText_SetText_delegate(IntPtr text_object,
-        [MarshalAs(UnmanagedType.LPWStr)] string text);
+        [MarshalAs(UnmanagedType.LPWStr)]
+        string text);
 
     public delegate void FPDFPageObj_Destroy_delegate(IntPtr page_obj);
 
@@ -175,6 +177,13 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate int FPDFTextObj_GetTextRenderMode_delegate(IntPtr text);
 
     public delegate bool FPDFTextObj_SetTextRenderMode_delegate(IntPtr text, int render_mode);
+
+    public delegate IntPtr FPDFDOC_InitFormFillEnvironment_delegate(IntPtr document, IntPtr formInfo);
+
+    public delegate void FPDFDOC_ExitFormFillEnvironment_delegate(IntPtr handle);
+
+    public delegate void FPDF_FFLDraw_delegate(IntPtr handle, IntPtr bitmap, IntPtr page, int start_x, int start_y, int size_x,
+        int size_y, int rotate, int flags);
 
     public FPDF_InitLibrary_delegate FPDF_InitLibrary => Load<FPDF_InitLibrary_delegate>();
     public FPDF_GetLastError_delegate FPDF_GetLastError => Load<FPDF_GetLastError_delegate>();
@@ -266,6 +275,14 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFTextObj_SetTextRenderMode_delegate FPDFTextObj_SetTextRenderMode =>
         Load<FPDFTextObj_SetTextRenderMode_delegate>();
 
+    public FPDFDOC_InitFormFillEnvironment_delegate FPDFDOC_InitFormFillEnvironment =>
+        Load<FPDFDOC_InitFormFillEnvironment_delegate>();
+
+    public FPDFDOC_ExitFormFillEnvironment_delegate FPDFDOC_ExitFormFillEnvironment =>
+        Load<FPDFDOC_ExitFormFillEnvironment_delegate>();
+
+    public FPDF_FFLDraw_delegate FPDF_FFLDraw => Load<FPDF_FFLDraw_delegate>();
+
     public struct FPDF_FileWrite
     {
         public int version;
@@ -286,4 +303,44 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int GetBlock_delegate(IntPtr param, IntPtr position, IntPtr buffer, IntPtr size);
+
+#pragma warning disable CS0169
+    public struct FPDF_FormFillInfo
+    {
+        public int version;
+
+        private IntPtr Release;
+        private IntPtr FFI_Invalidate;
+        private IntPtr FFI_OutputSelectedRect;
+        private IntPtr FFI_SetCursor;
+        private IntPtr FFI_SetTimer;
+        private IntPtr FFI_KillTimer;
+        private IntPtr FFI_GetLocalTime;
+        private IntPtr FFI_OnChange;
+        private IntPtr FFI_GetPage;
+        private IntPtr FFI_GetCurrentPage;
+        private IntPtr FFI_GetRotation;
+        private IntPtr FFI_ExecuteNamedAction;
+        private IntPtr FFI_SetTextFieldFocus;
+        private IntPtr FFI_DoURIAction;
+        private IntPtr FFI_DoGoToAction;
+
+        private IntPtr m_pJsPlatform;
+
+        private IntPtr FFI_DisplayCaret;
+        private IntPtr FFI_GetCurrentPageIndex;
+        private IntPtr FFI_SetCurrentPage;
+        private IntPtr FFI_GotoURL;
+        private IntPtr FFI_GetPageViewRect;
+        private IntPtr FFI_PageEvent;
+        private IntPtr FFI_PopupMenu;
+        private IntPtr FFI_OpenFile;
+        private IntPtr FFI_EmailTo;
+        private IntPtr FFI_UploadTo;
+        private IntPtr FFI_GetPlatform;
+        private IntPtr FFI_GetLanguage;
+        private IntPtr FFI_DownloadFromURL;
+        private IntPtr FFI_PostRequestURL;
+        private IntPtr FFI_PutRequestURL;
+    }
 }

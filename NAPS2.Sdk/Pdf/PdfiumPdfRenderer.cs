@@ -63,7 +63,7 @@ internal class PdfiumPdfRenderer : IPdfRenderer
         }
     }
 
-    public unsafe IMemoryImage RenderPageToNewImage(ImageContext imageContext, PdfPage page, int pageIndex,
+    public IMemoryImage RenderPageToNewImage(ImageContext imageContext, PdfPage page, int pageIndex,
         PdfRenderSize renderSize)
     {
         var widthInInches = page.Width / 72;
@@ -78,6 +78,10 @@ internal class PdfiumPdfRenderer : IPdfRenderer
             PdfBitmap.Create(widthInPx, heightInPx, PdfiumNativeLibrary.FPDFBitmap_BGR);
         pdfiumBitmap.FillRect(0, 0, widthInPx, heightInPx, PdfBitmap.WHITE);
         pdfiumBitmap.RenderPage(page, 0, 0, widthInPx, heightInPx);
+
+        // We need to draw forms so that filled forms and signatures are visible
+        using var formEnv = page.Document.CreateFormEnv();
+        formEnv.DrawForms(pdfiumBitmap, page);
 
         var pixelInfo = new PixelInfo(pdfiumBitmap.Width, pdfiumBitmap.Height, SubPixelType.Bgr, pdfiumBitmap.Stride);
         new CopyBitwiseImageOp().Perform(pdfiumBitmap.Buffer, pixelInfo, bitmap);

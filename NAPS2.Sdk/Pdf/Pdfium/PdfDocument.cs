@@ -89,6 +89,14 @@ internal class PdfDocument : NativePdfiumObject
         return Encoding.Unicode.GetString(buffer, 0, buffer.Length - 2);
     }
 
+    public PdfFormEnv CreateFormEnv()
+    {
+        var formInfo = new PdfiumNativeLibrary.FPDF_FormFillInfo { version = 2 };
+        var formInfoHandle = GCHandle.Alloc(formInfo, GCHandleType.Pinned);
+        var ptr = formInfoHandle.AddrOfPinnedObject();
+        return new PdfFormEnv(Native.FPDFDOC_InitFormFillEnvironment(Handle, ptr), formInfoHandle);
+    }
+
     public void Save(string path)
     {
         using var stream = new FileStream(path, FileMode.Create);
