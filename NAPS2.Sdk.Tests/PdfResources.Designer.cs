@@ -72,6 +72,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] filled_form_annotated {
+            get {
+                object obj = ResourceManager.GetObject("filled_form_annotated", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] image_pdf {
             get {
                 object obj = ResourceManager.GetObject("image_pdf", resourceCulture);
@@ -115,6 +125,16 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] image_with_text_pdf {
             get {
                 object obj = ResourceManager.GetObject("image_with_text_pdf", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ocr_test_output {
+            get {
+                object obj = ResourceManager.GetObject("ocr_test_output", resourceCulture);
                 return ((byte[])(obj));
             }
         }

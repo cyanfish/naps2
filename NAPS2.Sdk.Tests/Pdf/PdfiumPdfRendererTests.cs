@@ -65,4 +65,15 @@ public class PdfiumPdfRendererTests : ContextualTests
         // This also verifies that the renderer gets the actual image dpi (72)
         ImageAsserts.Similar(ImageResources.dog_bw, images[0]);
     }
+
+    [Fact]
+    public void RenderFormsAndAnnotations()
+    {
+        var path = CopyResourceToFile(PdfResources.filled_form_annotated, "test.pdf");
+
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.filled_form_annotated, images[0]);
+    }
 }

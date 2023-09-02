@@ -552,6 +552,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] filled_form_annotated {
+            get {
+                object obj = ResourceManager.GetObject("filled_form_annotated", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] image_upc_barcode {
             get {
                 object obj = ResourceManager.GetObject("image_upc_barcode", resourceCulture);

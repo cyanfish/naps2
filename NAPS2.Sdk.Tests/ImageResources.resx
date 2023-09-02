@@ -292,4 +292,7 @@
   <data name="bw_alternating" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\bw_alternating.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="filled_form_annotated" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\filled_form_annotated.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

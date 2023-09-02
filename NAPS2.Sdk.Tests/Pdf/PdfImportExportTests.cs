@@ -117,6 +117,24 @@ public class PdfImportExportTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(OcrTestData))]
+    public async Task ImportExportPdfWithOcrText(OcrTestConfig config)
+    {
+        config.StorageConfig.Apply(this);
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."}
+        });
+
+        File.WriteAllBytes(_importPath, PdfResources.ocr_test_output);
+
+        var images = await _importer.Import(_importPath).ToListAsync();
+        await _exporter.Export(_exportPath, images, ocrParams: config.OcrParams);
+
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", _exportPath);
+    }
+
+    [Theory]
+    [ClassData(typeof(OcrTestData))]
     public async Task ImportExportEncrypted(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);
