@@ -74,6 +74,6 @@ public class PdfiumPdfRendererTests : ContextualTests
         var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.filled_form_annotated, images[0]);
+        ImageAsserts.Similar(ImageResources.filled_form_annotated, images[0], ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 }
