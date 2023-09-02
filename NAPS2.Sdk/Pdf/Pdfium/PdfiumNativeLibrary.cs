@@ -21,6 +21,7 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public const int FPDFBitmap_BGR = 2;
     public const int FPDFBitmap_BGRA = 4;
 
+    public const int FPDF_ANNOT = 0x01;
     public const int FPDF_PRINTING = 0x800;
     public const int FPDF_REVERSE_BYTE_ORDER = 0x10;
 

@@ -47,7 +47,7 @@ internal class PdfBitmap : NativePdfiumObject
     public void RenderPage(PdfPage page, int x, int y, int width, int height)
     {
         int rotate = 0;
-        int flags = PdfiumNativeLibrary.FPDF_PRINTING;
+        int flags = PdfiumNativeLibrary.FPDF_PRINTING | PdfiumNativeLibrary.FPDF_ANNOT;
         Native.FPDF_RenderPageBitmap(Handle, page.Handle, x, y, width, height, rotate, flags);
     }
 }
