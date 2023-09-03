@@ -1,3 +1,4 @@
+using System.Net;
 using System.Xml.Linq;
 
 namespace NAPS2.Escl.Client;
@@ -6,6 +7,9 @@ public class EsclClient
 {
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
+    private static readonly HttpClient HttpClient = new();
+    private static readonly HttpClient ChunkedHttpClient = new()
+        { DefaultRequestHeaders = { TransferEncodingChunked = true } };
 
     private readonly EsclService _service;
 
@@ -44,8 +48,7 @@ public class EsclClient
 
     public async Task<EsclScannerStatus> GetStatus()
     {
-        var text = await new HttpClient().GetStringAsync(GetUrl("ScannerStatus"));
-        var doc = XDocument.Parse(text);
+        var doc = await DoRequest("ScannerStatus");
         return new EsclScannerStatus();
     }
 
@@ -73,12 +76,16 @@ public class EsclClient
         };
     }
 
-    public async Task<byte[]> NextDocument(EsclJob job)
+    public async Task<byte[]?> NextDocument(EsclJob job)
     {
-        var client = new HttpClient();
-        client.DefaultRequestHeaders.TransferEncodingChunked = true;
         // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
-        return await client.GetByteArrayAsync(job.Uri + "/NextDocument");
+        var response = await ChunkedHttpClient.GetAsync(job.Uri + "/NextDocument");
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsByteArrayAsync();
     }
 
     private EsclSettingProfile ParseSettingProfile(XElement element,
@@ -121,15 +128,14 @@ public class EsclClient
 
     private async Task<XDocument> DoRequest(string endpoint)
     {
-        // TODO: We're supposed to reuse HttpClient, right?
-        var text = await new HttpClient().GetStringAsync(GetUrl(endpoint));
+        var text = await HttpClient.GetStringAsync(GetUrl(endpoint));
         return XDocument.Parse(text);
     }
 
     private string GetUrl(string endpoint)
     {
         var protocol = _service.Tls ? "https" : "http";
-        return new UriBuilder(protocol, _service.Ip.ToString(), _service.Port, $"{_service.RootUrl}/{endpoint}")
+        return new UriBuilder(protocol, (_service.IpV6 ?? _service.IpV4)!.ToString(), _service.Port, $"{_service.RootUrl}/{endpoint}")
             .Uri.ToString();
     }
 }

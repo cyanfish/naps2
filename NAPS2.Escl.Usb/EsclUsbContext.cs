@@ -47,7 +47,8 @@ public class EsclUsbContext : IDisposable
         var port = ((IPEndPoint) _proxyListener.LocalEndpoint).Port;
         _client = new EsclClient(new EsclService
         {
-            Ip = IPAddress.Loopback,
+            IpV4 = IPAddress.Loopback,
+            IpV6 = null,
             Port = port,
             RootUrl = "eSCL",
             Tls = false

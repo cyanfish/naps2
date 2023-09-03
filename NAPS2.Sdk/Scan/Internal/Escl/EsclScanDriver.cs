@@ -1,12 +1,13 @@
-#if ESCL
+using System.Net;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Escl;
 using NAPS2.Escl.Client;
 using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan.Internal.Escl;
 
-public class EsclScanDriver : IScanDriver
+internal class EsclScanDriver : IScanDriver
 {
     private readonly ScanningContext _scanningContext;
 
@@ -14,32 +15,73 @@ public class EsclScanDriver : IScanDriver
     {
         _scanningContext = scanningContext;
     }
-    
+
     public async Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         // TODO: Run location in a persistent background service
-        EsclServiceLocator locator = new EsclServiceLocator();
-        // TODO: Have EsclServiceLocator return devices as discovered
-        var services = await locator.Locate();
-        foreach (var service in services)
+        using var locator = new EsclServiceLocator(service =>
         {
-            callback(new ScanDevice(service.Uuid, service.Name));
+            // Store both the IP and UUID so we can preferentially find by the IP, but also fall back to looking for
+            // the UUID in case the IP changed
+            var ip = service.IpV4 ?? service.IpV6;
+            var id = $"{ip}|{service.Uuid}";
+            var name = string.IsNullOrEmpty(service.ScannerName)
+                ? $"{ip}"
+                : $"{service.ScannerName} ({ip})";
+            callback(new ScanDevice(id, name));
+        });
+        locator.Start();
+        try
+        {
+            await Task.Delay(2000, cancelToken);
+        }
+        catch (TaskCanceledException)
+        {
         }
     }
 
-    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
+    public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+        Action<IMemoryImage> callback)
     {
-        EsclServiceLocator locator = new EsclServiceLocator();
-        var services = await locator.Locate();
-        var service = services.FirstOrDefault(x => x.Uuid == options.Device!.ID) ??
-                      throw new DeviceException(SdkResources.DeviceOffline);
+        var foundTcs = new TaskCompletionSource<EsclService?>();
+        using var locator = new EsclServiceLocator(async service =>
+        {
+            var parts = options.Device!.ID.Split('|');
+            var ip = parts[0];
+            var uuid = parts[1];
+            if ((service.IpV4 ?? service.IpV6!).ToString() == ip)
+            {
+                foundTcs.TrySetResult(service);
+            }
+            else
+            {
+                var client = new EsclClient(service);
+                try
+                {
+                    var caps = await client.GetCapabilities();
+                    if (caps.Uuid == uuid)
+                    {
+                        foundTcs.TrySetResult(service);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _scanningContext.Logger.LogDebug(ex, "ESCL error");
+                }
+            }
+        });
+        Task.Delay(2000).ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
+        locator.Start();
+
+        // TODO: Cancellation
+        var service = await foundTcs.Task ?? throw new DeviceException(SdkResources.DeviceOffline);
         var client = new EsclClient(service);
         var status = await client.GetStatus();
         var job = await client.CreateScanJob(new EsclScanSettings());
         while (true)
         {
             scanEvents.PageStart();
-            byte[] doc;
+            byte[]? doc;
             try
             {
                 // TODO: PDF or jpeg?
@@ -47,11 +89,11 @@ public class EsclScanDriver : IScanDriver
             }
             catch (Exception ex)
             {
-                // TODO: Log if not 404 or something (maybe return null from nextdoc)
+                _scanningContext.Logger.LogDebug(ex, "ESCL error");
                 break;
             }
+            if (doc == null) break;
             callback(_scanningContext.ImageContext.Load(doc));
         }
     }
 }
-#endif

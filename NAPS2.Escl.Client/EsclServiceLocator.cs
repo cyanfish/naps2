@@ -3,67 +3,54 @@ using Makaretu.Dns;
 
 namespace NAPS2.Escl.Client;
 
-public class EsclServiceLocator
+public class EsclServiceLocator : IDisposable
 {
-    public async Task<List<EsclService>> Locate()
+    private readonly ServiceDiscovery _discovery;
+    private bool _started;
+
+    public EsclServiceLocator(Action<EsclService> serviceCallback)
     {
-        using var sd = new ServiceDiscovery();
-        var locatedServices = new List<EsclService>();
-        sd.ServiceInstanceDiscovered += (sender, args) =>
+        _discovery = new ServiceDiscovery();
+        _discovery.ServiceInstanceDiscovered += (_, args) =>
         {
             try
             {
                 var service = ParseService(args);
-                lock (locatedServices)
-                {
-                    locatedServices.Add(service);
-                }
+                serviceCallback(service);
             }
             catch (Exception)
             {
                 // TODO: Log?
             }
         };
-        sd.QueryServiceInstances("_uscan._tcp");
-        sd.QueryServiceInstances("_uscans._tcp");
-        await Task.Delay(2000);
-        // TODO: De-duplicate http/https services?
-        return locatedServices;
+    }
 
-        // var txtVers = props.GetValueOrDefault("txtvers"); // txt record version
-        // var adminUrl = props.GetValueOrDefault("adminurl"); // url to scanner config page
-        // var esclVersion = props.GetValueOrDefault("Vers"); // escl version e.g. "2.0"
-        // var thumbnail = props.GetValueOrDefault("representation"); // url to png or ico 
-        // var urlBasePath = props.GetValueOrDefault("rs"); // no leading (or trailing) slash
-        // var scannerName = props.GetValueOrDefault("ty"); // human readable
-        // var note = props.GetValueOrDefault("note"); // supposed to be "scanner location", e.g. "Copy Room"
-        // // Note jpeg is better in that we can get one image at a time, but pdf does allow png quality potentially
-        // // Hopefully decent scanners can support png too
-        // // Also for the server we can definitely provide NAPS2-generated pdfs, which is kind of a cool idea for e.g. using from mobile
-        // var pdl = props.GetValueOrDefault("pdl"); // comma separated mime types supported "application/pdf,image/jpeg" at minimum
-        // var uuid = props.GetValueOrDefault("uuid"); // physical device id
-        // var colorSpace = props.GetValueOrDefault("cs"); // comma separated capabilites, "color,grayscale,binary"
-        // var source = props.GetValueOrDefault("is"); // "platen,adf,camera" platen = flatbed
-        // var duplex = props.GetValueOrDefault("duplex"); // "T"rue or "F"alse
-        //
+    public void Start()
+    {
+        if (_started) throw new InvalidOperationException("Already started");
+        _started = true;
+
+        // TODO: De-duplicate http/https services?
+        _discovery.QueryServiceInstances("_uscan._tcp");
+        _discovery.QueryServiceInstances("_uscans._tcp");
     }
 
     private EsclService ParseService(ServiceInstanceDiscoveryEventArgs args)
     {
         string name = args.ServiceInstanceName.Labels[0];
         string protocol = args.ServiceInstanceName.Labels[1];
-        IPAddress? ip = null;
+        IPAddress? ipv4 = null, ipv6 = null;
         int port = -1;
         var props = new Dictionary<string, string>();
         foreach (var record in args.Message.AdditionalRecords)
         {
             if (record is ARecord a)
             {
-                ip ??= a.Address;
+                ipv4 = a.Address;
             }
             if (record is AAAARecord aaaa)
             {
-                ip = aaaa.Address;
+                ipv6 = aaaa.Address;
             }
             if (record is SRVRecord srv)
             {
@@ -83,23 +70,39 @@ public class EsclServiceLocator
         }
         bool http = protocol == "_uscan";
         bool https = protocol == "_uscans";
-        if (ip == null || port == -1 || !http && !https)
+        if ((ipv4 == null && ipv6 == null) || port == -1 || !http && !https)
         {
             throw new ArgumentException();
         }
+
         return new EsclService
         {
-            // Uuid = props["uuid"],
-            // Name = props["ty"],
-            Ip = ip,
+            IpV4 = ipv4,
+            IpV6 = ipv6,
             Port = port,
             Tls = https,
-            RootUrl = props["rs"] // TODO: More props, some required, some optional maybe
+            ScannerName = props["ty"],
+            RootUrl = props["rs"],
+            TxtVersion = Get(props, "txtvers"),
+            AdminUrl = Get(props, "adminurl"),
+            EsclVersion = Get(props, "Vers"),
+            Thumbnail = Get(props, "representation"),
+            Note = Get(props, "note"),
+            MimeTypes = Get(props, "pdl")?.Split(','),
+            Uuid = Get(props, "uuid"),
+            ColorOptions = Get(props, "cs")?.Split(','),
+            SourceOptions = Get(props, "is"),
+            DuplexSupported = Get(props, "duplex")?.ToUpperInvariant() == "T"
         };
     }
 
     private string? Get(Dictionary<string,string> props, string key)
     {
         return props.TryGetValue(key, out var value) ? value : null;
+    }
+
+    public void Dispose()
+    {
+        _discovery.Dispose();
     }
 }

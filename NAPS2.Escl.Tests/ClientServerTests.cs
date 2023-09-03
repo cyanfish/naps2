@@ -22,7 +22,8 @@ public class ClientServerTests
         server.Start();
         var client = new EsclClient(new EsclService
         {
-            Ip = IPAddress.IPv6Loopback,
+            IpV4 = IPAddress.Loopback,
+            IpV6 = IPAddress.IPv6Loopback,
             Port = 9801,
             RootUrl = "escl",
             Tls = false
