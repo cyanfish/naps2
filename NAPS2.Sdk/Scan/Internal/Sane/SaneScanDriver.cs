@@ -82,22 +82,28 @@ internal class SaneScanDriver : IScanDriver
                 using var device = client.OpenDevice(options.Device!.ID!);
                 if (cancelToken.IsCancellationRequested) return;
                 var optionData = SetOptions(device, options);
-                // TODO: We apparently need to cancel even upon normal completion, i.e. one sane_cancel per sane_start
-                cancelToken.Register(device.Cancel);
-
-                if (!optionData.IsFeeder)
+                var cancelOnce = new Once(device.Cancel);
+                cancelToken.Register(cancelOnce.Run);
+                try
                 {
-                    var image = ScanPage(device, scanEvents, optionData) ??
-                                throw new DeviceException("SANE expected image");
-                    callback(image);
-                }
-                else
-                {
-                    while (ScanPage(device, scanEvents, optionData) is { } image)
+                    if (!optionData.IsFeeder)
                     {
-                        hasAtLeastOneImage = true;
+                        var image = ScanPage(device, scanEvents, optionData) ??
+                                    throw new DeviceException("SANE expected image");
                         callback(image);
                     }
+                    else
+                    {
+                        while (ScanPage(device, scanEvents, optionData) is { } image)
+                        {
+                            hasAtLeastOneImage = true;
+                            callback(image);
+                        }
+                    }
+                }
+                finally
+                {
+                    cancelOnce.Run();
                 }
             }
             catch (SaneException ex)
