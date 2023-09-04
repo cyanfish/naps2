@@ -9,7 +9,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
-        <ProjectReference Include="..\NAPS2.Escl.Client\NAPS2.Escl.Client.csproj" />
 
         <PackageReference Include="LibUsbDotNet" Version="3.0.102-alpha" />
     </ItemGroup>

@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Makaretu.Dns.Multicast" Version="0.27.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3" />
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
 

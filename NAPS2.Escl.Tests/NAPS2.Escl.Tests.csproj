@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NAPS2.Escl.Client\NAPS2.Escl.Client.csproj" />
+        <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
         <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
         <ProjectReference Include="..\NAPS2.Escl.Usb\NAPS2.Escl.Usb.csproj" />
     </ItemGroup>
