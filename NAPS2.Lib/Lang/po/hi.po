@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-09-04 17:55\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -21,305 +21,305 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr ""
+msgstr "24-बिट रंग"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr ""
+msgstr "A3 (297x420 मिलीमीटर)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr ""
+msgstr "A4 (210x297 मिलीमीटर)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "A5 (148x210 मिलीमीटर)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr ""
+msgstr "सॉफ्टवेयर के बारे में"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr ""
+msgstr "डेटा प्राप्त किया जा रहा है..."
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
-msgstr ""
+msgstr "उन्नत विकल्प"
 
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
-msgstr ""
+msgstr "उन्नत प्रोफ़ाइल सेटिंग्स"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr ""
+msgstr "सभी ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr ""
+msgstr "सभी फाइलें"
 
 #: UiStrings.resx$AllowAnnotations$Message
 msgid "Allow Annotations"
-msgstr ""
+msgstr "एनोटेशन की अनुमति दें"
 
 #: UiStrings.resx$AllowContentCopying$Message
 msgid "Allow Content Copying"
-msgstr ""
+msgstr "सामग्री प्रतिलिपि बनाने की अनुमति दें"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr ""
+msgstr "पहुंच के लिए सामग्री की प्रतिलिपि बनाने की अनुमति दें"
 
 #: UiStrings.resx$AllowDocumentAssembly$Message
 msgid "Allow Document Assembly"
-msgstr ""
+msgstr "दस्तावेज़ संयोजन की अनुमति दें"
 
 #: UiStrings.resx$AllowDocumentModification$Message
 msgid "Allow Document Modification"
-msgstr ""
+msgstr "दस्तावेज़ संशोधन की अनुमति दें"
 
 #: UiStrings.resx$AllowFormFilling$Message
 msgid "Allow Form Filling"
-msgstr ""
+msgstr "फॉर्म भरने की अनुमति दें"
 
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
-msgstr ""
+msgstr "पूर्ण गुणवत्ता मुद्रण की अनुमति दें"
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
-msgstr ""
+msgstr "मुद्रण की अनुमति दें"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "वैकल्पिक डीइंटरलीव"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "वैकल्पिक इंटरलीव"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr ""
+msgstr "इस पीडीएफ फ़ाइल को आयात करने के लिए एक अतिरिक्त घटक की आवश्यकता है। क्या आप इसे अभी डाउनलोड करना चाहेंगे?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "OCR चलाने में त्रुटि उत्पन्न हुई."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr ""
+msgstr "अधिकृत करने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
-msgstr ""
+msgstr "स्वतः सहेजने का प्रयास करते समय एक त्रुटि उत्पन्न हुई."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
-msgstr ""
+msgstr "अद्यतन स्थापित करने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
-msgstr ""
+msgstr "फ़ाइल को सहेजने का प्रयास करते समय एक त्रुटि उत्पन्न हुई."
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr ""
+msgstr "ईमेल भेजने का प्रयास करते समय एक त्रुटि उत्पन्न हुई."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
-msgstr ""
+msgstr "ईमेल भेजने का प्रयास करते समय एक त्रुटि उत्पन्न हुई."
 
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr ""
+msgstr "स्कैनिंग ड्राइवर के साथ कोई त्रुटि उत्पन्न हुई."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr ""
+msgstr "एक ऑपरेशन चल रहा है. क्या आप वाकई बाहर निकलना और ऑपरेशन रद्द करना चाहते हैं?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "बैच स्कैन के दौरान एक अज्ञात त्रुटि उत्पन्न हुई."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
-msgstr ""
+msgstr "एक अपडेट उपलब्ध है।"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr ""
+msgstr "OCR का अपडेट उपलब्ध है."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "एप्पल ड्राइवर"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "एप्पल मेल"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
-msgstr ""
+msgstr "स्कैन के बाद चमक/कंट्रास्ट लागू करें"
 
 #: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
-msgstr ""
+msgstr "सभी {0} चयनित छवियों पर लागू करें"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "क्या आप बैच स्कैन रद्द करना चाहते हैं?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr ""
+msgstr "क्या आप वाकई {0} आइटम साफ़ करना चाहते हैं?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr ""
+msgstr "क्या आप {0} को डिलीट करना चाहते हैं?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr ""
+msgstr "क्या आप वाकई प्रोफ़ाइल {0} को हटाना चाहते हैं?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr ""
+msgstr "क्या आप वाकई {0} आइटम हटाना चाहते हैं?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr ""
+msgstr "क्या आप वाकई {0} प्रोफ़ाइल हटाना चाहते हैं?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr ""
+msgstr "क्या आप वाकई {0} छवि(छवियों) में अपने परिवर्तन पूर्ववत करना चाहते हैं?"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
-msgstr ""
+msgstr "अनुलग्नक का नाम:"
 
 #: UiStrings.resx$AuthorLabel$Message
 msgid "Author:"
-msgstr ""
+msgstr "लेखक:"
 
 #: UiStrings.resx$AuthorizeFormTitle$Message
 msgid "Authorize"
-msgstr ""
+msgstr "अधिकृत"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "स्वतः"
 
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr ""
+msgstr "स्वतः सहेजें सेटिंग्स"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "स्वत: बढ़ती संख्या (1 अंक)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr ""
+msgstr "स्वत: बढ़ती संख्या (2 अंक)"
 
 #: UiStrings.resx$AutoIncrementing3Digit$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr ""
+msgstr "स्वत: बढ़ती संख्या (3 अंक)"
 
 #: UiStrings.resx$AutoIncrementing4Digit$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr ""
+msgstr "स्वत: वृद्धिशील संख्या (4 अंक)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "स्कैनिंग के बाद स्वचालित रूप से OCR चलाएँ"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "बी4 (250x353 मिलीमीटर)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "बी5 (176x250 मिलीमीटर)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
-msgstr ""
+msgstr "बैच स्कैन"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled."
-msgstr ""
+msgstr "बैच रद्द कर दिया गया."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr ""
+msgstr "बैच सफलतापूर्वक पूरा हुआ."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr ""
+msgstr "त्रुटि के कारण बैच स्कैन रुक गया।"
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "श्रेष्ठ"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
-msgstr ""
+msgstr "बिट गहराई:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr ""
+msgstr "बिटमैप फ़ाइलें (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
 msgid "Black and White"
-msgstr ""
+msgstr "काला और सफेद"
 
 #: UiStrings.resx$BlankPages$Message
 msgid "Blank Pages"
-msgstr ""
+msgstr "खाली पन्ने"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "चमक/विपरीतता"
 
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
-msgstr ""
+msgstr "चमक:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
-msgstr ""
+msgstr "रद्द करें"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "बैच रद्द करें"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr ""
+msgstr "रद्द किया जा रहा है..."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr ""
+msgstr "केन्द्र"
 
 #: UiStrings.resx$Change$Message
 msgid "Change"
-msgstr ""
+msgstr "परिवर्तन"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "अद्यतन के लिए जाँच"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."

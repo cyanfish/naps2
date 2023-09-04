@@ -16,7 +16,7 @@
     <value>Om</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Copyright {0} bidragsgivare till NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ikoner från:</value>
@@ -118,7 +118,7 @@
     <value>Skarpare</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Dokumentkorrektion</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Återställ</value>
@@ -175,7 +175,7 @@
     <value>Rensa</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Rensa alla</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Språk</value>
@@ -184,7 +184,7 @@
     <value>Om</value>
   </data>
   <data name="Zoom" xml:space="preserve">
-    <value>Zoom</value>
+    <value>Zooma</value>
   </data>
   <data name="ZoomIn" xml:space="preserve">
     <value>Zooma in</value>
@@ -199,37 +199,37 @@
     <value>Anpassa till fönsterstorlek</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Spara</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Spara alla</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Spara markerade</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Spara alla som PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Spara markerade som PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Spara alla som bilder</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Spara markerade som bilder</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>E-posta alla</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>E-posta markerade</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>E-posta alla som PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>E-posta markerade som PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profilinställningar</value>
@@ -244,19 +244,19 @@
     <value>TWAIN-drivrutin</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL-drivrutin</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL-nätverksdrivrutin</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL-USB-drivrutin</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Apple-drivrutin</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE-drivrutin</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>Enhet:</value>
@@ -322,7 +322,7 @@
     <value>NAPS2</value>
   </data>
   <data name="Naps2TitleFormat" xml:space="preserve">
-    <value>NAPS2 - {0}</value>
+    <value>NAPS2 − {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
     <value>Not Another PDF Scanner</value>
@@ -436,7 +436,7 @@
     <value>Tillåt innehållskopiering för tillgänglighet</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
-    <value>Tillåt notiser</value>
+    <value>Tillåt annoteringar</value>
   </data>
   <data name="AllowFormFilling" xml:space="preserve">
     <value>Tillåt formulärifyllning</value>
@@ -565,7 +565,7 @@
     <value>Lösenord</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Följande fil är krypterad och kräver ett lösenord för att öppnas:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Ange fil sökväg</value>
@@ -640,7 +640,7 @@
     <value>Vänd duplex-sidor</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>WIA-version:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain-implementering:</value>
@@ -697,9 +697,9 @@
     <value>Öppna mapp</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Verktyg</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Aktivera felsökningsregistrering</value>
   </data>
 </root>

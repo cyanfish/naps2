@@ -700,6 +700,6 @@
     <value>Hulpmiddelen</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Debug logging toestaan</value>
   </data>
 </root>

@@ -61,7 +61,7 @@
     <value>GIF File (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG File (*.jpg, *.jpeg)</value>
+    <value>Datoteka JPEG (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
     <value>PDF Dokument (*.pdf)</value>
@@ -73,7 +73,7 @@
     <value>TIFF Datoteka (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Datoteka JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Manjka ime.</value>
@@ -190,7 +190,7 @@
     <value>od {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Med paketnim pregledom je prišlo do neznane napake.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Zaporedno skeniranje preklicano.</value>
@@ -367,7 +367,7 @@
     <value>Preverjanje...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Preverjanje posodobitev je onemogočeno.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Med nameščanjem posodobitve je prišlo do napake.</value>

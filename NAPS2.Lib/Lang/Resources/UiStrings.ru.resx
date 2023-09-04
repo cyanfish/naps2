@@ -700,6 +700,6 @@
     <value>Инструменты</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Включить ведение журнала отладки</value>
   </data>
 </root>

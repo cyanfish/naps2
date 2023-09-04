@@ -13,43 +13,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Črno-belo</value>
+    <value>काला और सफेद</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>24-bit Barvno</value>
+    <value>24-बिट रंग</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Sivine</value>
+    <value>Grayscale</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
     <value>{0} dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>SMTP po meri</value>
+    <value>Custom SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Splet</value>
+    <value>Outlook Web Access</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Apple Mail</value>
+    <value>एप्पल मेल</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>Ponudnik ni izbran.</value>
+    <value>No provider selected.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
-    <value>Sredina</value>
+    <value>केन्द्र</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Levo</value>
+    <value>Left</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Desno</value>
+    <value>Right</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>cm</value>
@@ -61,22 +61,22 @@
     <value>mm</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297x420 mm)</value>
+    <value>A3 (297x420 मिलीमीटर)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210x297 mm)</value>
+    <value>A4 (210x297 मिलीमीटर)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148x210 mm)</value>
+    <value>A5 (148x210 मिलीमीटर)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (250x353 mm)</value>
+    <value>बी4 (250x353 मिलीमीटर)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
-    <value>B5 (176x250 mm)</value>
+    <value>बी5 (176x250 मिलीमीटर)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Po meri...</value>
+    <value>Custom...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -85,7 +85,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Privzeto</value>
+    <value>Default</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -100,16 +100,16 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Obojestransko</value>
+    <value>Duplex</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Podajalec</value>
+    <value>Feeder</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Steklo</value>
+    <value>Glass</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Samodejno</value>
+    <value>स्वतः</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -118,33 +118,33 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Brez</value>
+    <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Privzeto</value>
+    <value>Default</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Opuščeno (samo osnovni UI)</value>
+    <value>Legacy (native UI only)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Izvorni prenos</value>
+    <value>Native Transfer</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Prenos pomnilnika</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Star DSM</value>
+    <value>Old DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Privzeto</value>
+    <value>Default</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Hitro</value>
+    <value>Fast</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Najboljše</value>
+    <value>श्रेष्ठ</value>
   </data>
 </root>

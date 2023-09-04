@@ -61,28 +61,28 @@
     <value>毫米</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297x420 mm)</value>
+    <value>A3(297 x 420 毫米)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210x297 mm)</value>
+    <value>A4 (210 x 297 毫米)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148x210 mm)</value>
+    <value>A5(149 x 210 毫米)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (250x353 mm)</value>
+    <value>B4 (250x353 毫米)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
-    <value>B5 (176x250 mm)</value>
+    <value>B5 (176x250 毫米)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
     <value>自定义...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8.5x14 英寸)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Legal (8.5x14 英寸)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>默认</value>
@@ -127,10 +127,10 @@
     <value>传统（仅限本地界面）</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>本地传输</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>内存传输</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>旧版 DSM</value>
@@ -142,9 +142,9 @@
     <value>默认</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>快速</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>最佳</value>
   </data>
 </root>

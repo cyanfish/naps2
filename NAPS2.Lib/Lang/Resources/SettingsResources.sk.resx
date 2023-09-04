@@ -37,7 +37,7 @@
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Apple Mail</value>
+    <value>Pošta Apple</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
     <value>Nie je vybratý žiadny poskytovateľ.</value>
@@ -130,7 +130,7 @@
     <value>Natívny prenos</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Presun pamäte</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Staršie DSM</value>

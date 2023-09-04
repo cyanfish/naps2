@@ -13,19 +13,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>The selected scanner could not be found.</value>
+    <value>Izabrani skener se ne može pronaći.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>The selected scanner is offline.</value>
+    <value>Izabrani skener je isključen.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>No device selected.</value>
+    <value>Nije izabran uređaj.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No scanning device was found.</value>
+    <value>Nije pronađen uređaj za skeniranje.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>Greška se pojavila kod drivera za skeniranje.</value>
@@ -34,45 +34,45 @@
     <value>Verzija {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>The file '{0}' could not be imported.</value>
+    <value>Datoteka '{0}' se ne može uvesti.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    <value>Izabrani skener nema podršku za korištenje ulagača papira. Ako skener ima ulagač papira, pokušajte s korištenjem drugog drajvera.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>No pages are in the feeder.</value>
+    <value>Nema papira u ulagaču.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>You do not have permission to copy content from the file '{0}'.</value>
+    <value>Nemate dozvolu za kopiranje sadržaja iz datoteke '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>Izabrani skener nema podršku za korištenje dupleksa - dvostranog skeniranja. Ako skener treba da podržava dupleks, pokušajte s korištenjem drugog drajvera.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>Izabrani skener je zauzet.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>Poklopac skenera je otvoren.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>Papir je zaglavio u skeneru.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Skener se zagrijava.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>SANE drajver nije dostupan. Pobrinite se da instalirate potrebne pakete:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Mehanizam OPZ-a nije dostupan. Pobrinite se da instalirate potreban paket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Izabrani drajver nije podržan na ovom sistemu.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
     <value>Pojavila se greška pri pokretanju OPZ.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Operacija OPZ-a je istekla.</value>
   </data>
 </root>

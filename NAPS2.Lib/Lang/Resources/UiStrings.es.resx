@@ -166,10 +166,10 @@
     <value>Invertir</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Revertir todo</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Revertir todo</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Limpiar</value>
@@ -199,37 +199,37 @@
     <value>Escalar con ventana</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Guardar</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Guardar todo</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Guardar seleccionado</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Guardar todo como PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Guardar seleccionado como PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Guardar todo como imágenes</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Guardar seleccionado como imágenes</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Enviar a todos</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Enviar seleccionado</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Enviar todo como PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Enviar seleccionado como PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Configuración de perfil</value>
@@ -244,13 +244,13 @@
     <value>Controlador TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Dispositivo ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>Dispositivo red ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>Dispositivo ESCL USB</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Controlador de Apple</value>
@@ -514,7 +514,7 @@
     <value>Número autoincremental (1 dígitos)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Nombre de archivo</value>
+    <value>Nombre de archivo:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Vista previa:</value>
@@ -565,7 +565,7 @@
     <value>Contraseña</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>El archivo siguiente está encriptado y requiere una contraseña para abrir:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Preguntar ruta de archivo</value>
@@ -640,7 +640,7 @@
     <value>Voltear las páginas a doble cara</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Versión Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementación Twain:</value>
@@ -697,9 +697,9 @@
     <value>Abrir carpeta</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Herramientas</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Activar registro de depuración</value>
   </data>
 </root>

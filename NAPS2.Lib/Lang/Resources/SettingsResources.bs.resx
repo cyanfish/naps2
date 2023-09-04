@@ -22,16 +22,16 @@
     <value>Nijanse sive boje</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
-    <value>{0} dpi</value>
+    <value>{0} TPI</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Prilagođeni SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook web pristup</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
@@ -40,7 +40,7 @@
     <value>Apple Mail</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Nije izabran provajder.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>centralno</value>
@@ -76,7 +76,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Custom...</value>
+    <value>Prilagođeno...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>Američki legal (8,5x14 inča)</value>
@@ -85,7 +85,7 @@
     <value>Američko pismo (8,5x11 inča)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Zadana</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -100,13 +100,13 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Duplex</value>
+    <value>Dvostran</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Feeder</value>
+    <value>Ulagač papira</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Glass</value>
+    <value>Skenersko staklo</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
     <value>Automatska</value>
@@ -118,33 +118,33 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>None</value>
+    <value>Nijedan</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Zadana</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>Legat (samo nativni KI)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Nativni transfer</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Memorijski transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Old DSM</value>
+    <value>Stari DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Zadana</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Brzi</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Najbolji</value>
   </data>
 </root>

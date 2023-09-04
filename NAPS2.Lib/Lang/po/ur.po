@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-09-04 17:56\n"
 "Last-Translator: \n"
 "Language-Team: Urdu (Pakistan)\n"
 "Language: ur\n"
@@ -38,7 +38,8 @@ msgstr ""
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr ""
+msgstr "کے بارے میں، \n"
+"متعلق"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
@@ -147,11 +148,11 @@ msgstr ""
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
-msgstr ""
+msgstr "ایک اپ ڈیٹ دستیاب ہے۔"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr ""
+msgstr "OCR میں اپ ڈیٹ دستیاب ہے۔"
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
@@ -199,24 +200,24 @@ msgstr ""
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
-msgstr ""
+msgstr "منسلک کا نام:"
 
 #: UiStrings.resx$AuthorLabel$Message
 msgid "Author:"
-msgstr ""
+msgstr "مصنف:"
 
 #: UiStrings.resx$AuthorizeFormTitle$Message
 msgid "Authorize"
-msgstr ""
+msgstr "اجازت دیں"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "خودکار"
 
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr ""
+msgstr "خود کار طریقے سے محفوظ کرنے کی ترتیبات"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"

@@ -73,7 +73,7 @@
     <value>Imagen TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Archivo JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Falta nombre.</value>
@@ -226,7 +226,7 @@
     <value>El escáner seleccionado no admite el uso dúplex. Si el escáner si admite dúplex, intente utilizar un controlador diferente.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
-    <value>{0} / {1}</value>
+    <value>{0} / {1} MB</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
     <value>Importando {0}...</value>
@@ -367,7 +367,7 @@
     <value>Comprobando...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>La verificación de actualizaciones está desactivada.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Ha ocurrido un error al intentar instalar la actualización.</value>

@@ -331,7 +331,7 @@
     <value>Sind Sie sicher, dass Sie den batch-scan abbrechen möchten?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value> Stapelverarbeitung abbrechen</value>
+    <value>Stapelverarbeitung abbrechen</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Spenden</value>
@@ -391,6 +391,6 @@
     <value>Seite {0} wird eingescannt...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Daten erfassen...</value>
+    <value>Datenerfassung...</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-09-04 17:56\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -501,15 +501,15 @@ msgstr "Dúplex"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "Dispositivo ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "Dispositivo red ESCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "Dispositivo ESCL USB"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -517,11 +517,11 @@ msgstr "Editar"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Enviar a todos"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Enviar todo como PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
@@ -534,11 +534,11 @@ msgstr "Progreso del envío del PDF por correo electrónico"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Enviar seleccionado"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Enviar seleccionado como PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -551,7 +551,7 @@ msgstr "Activar autoguardado"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Activar registro de depuración"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -585,7 +585,7 @@ msgstr "Excluir las páginas en blanco"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "Rápido"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -593,7 +593,7 @@ msgstr "Alimentador"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Nombre de archivo"
+msgstr "Nombre de archivo:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -625,7 +625,7 @@ msgstr "Cristal"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "GMail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -714,7 +714,7 @@ msgstr "Imagen JPEG (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "Archivo JPEG2000 (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -754,7 +754,7 @@ msgstr "Máxima calidad (ficheros grandes)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Transferencia de memoria"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -812,7 +812,7 @@ msgstr "Falta nombre."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Transferencia nativa"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1091,11 +1091,11 @@ msgstr "Invertir"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Revertir todo"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Revertir todo"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1131,19 +1131,19 @@ msgstr "Controlador SANE"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Guardar todo"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Guardar todo como imágenes"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Guardar todo como PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1165,15 +1165,15 @@ msgstr "Progreso del guardado del PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Guardar seleccionado"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Guardar seleccionado como imágenes"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Guardar seleccionado como PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1312,7 +1312,7 @@ msgstr "El motor OCR no está disponible. Asegúrese de instalar el paquete nece
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "La operación OCR demoró"
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1338,7 +1338,7 @@ msgstr "El archivo {0} ya existe. ¿Desea sobreescribirlo?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "El archivo siguiente está encriptado y requiere una contraseña para abrir:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1403,7 +1403,7 @@ msgstr "Título:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Herramientas"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1427,7 +1427,7 @@ msgstr "Progreso de la actualización"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "La verificación de actualizaciones está desactivada."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1484,7 +1484,7 @@ msgstr "Umbral de blanco"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Versión Wia:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1549,7 +1549,7 @@ msgstr ""
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"

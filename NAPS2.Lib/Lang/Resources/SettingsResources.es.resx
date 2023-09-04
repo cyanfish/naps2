@@ -28,7 +28,7 @@
     <value>SMTP personalizado</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
-    <value>Gmail</value>
+    <value>GMail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Web Access</value>
@@ -127,10 +127,10 @@
     <value>Heredado (solo interfaz nativa)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Transferencia nativa</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Transferencia de memoria</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Viejo DSM</value>
@@ -142,7 +142,7 @@
     <value>Predeterminado</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Rápido</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Mejor</value>

@@ -700,6 +700,6 @@
     <value>Outils</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Activer le journal de débogage</value>
   </data>
 </root>

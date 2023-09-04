@@ -700,6 +700,6 @@
     <value>Unelte</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Activează jurnalul de depanare</value>
   </data>
 </root>

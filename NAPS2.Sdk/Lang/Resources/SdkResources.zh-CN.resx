@@ -70,9 +70,9 @@
     <value>所选驱动程序不受本系统支持.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>运行OCR时出错。</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>OCR操作超时</value>
   </data>
 </root>

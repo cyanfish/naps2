@@ -244,13 +244,13 @@
     <value>Ovládač TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Ovládač ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>Sieťový ovládač ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>Ovládač ESCL USB</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Ovládač Apple</value>
@@ -700,6 +700,6 @@
     <value>Nástroje</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Povoliť záznam ladenia</value>
   </data>
 </root>

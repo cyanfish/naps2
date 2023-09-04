@@ -118,7 +118,7 @@
     <value>Izostritev</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Popravek dokumenta</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Ponastavi</value>
@@ -166,16 +166,16 @@
     <value>Obrni Vrstni Red</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Obrnite vse</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Obratno izbrano</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Počisti</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Počisti vse</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Jezik</value>
@@ -199,37 +199,37 @@
     <value>Povečava Glede Na Okno</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Shrani</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Shrani vse</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Shrani izbrano</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Shrani vse kot PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Shrani izbrano kot PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Shrani vse kot sliko</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Shrani izbrano kot slike</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Pošlji vse</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Shrani izbrano</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Pošlji vse kot PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>E-pošta izbrana kot PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Nastavitve Profila</value>
@@ -244,16 +244,16 @@
     <value>TWAIN Gonilnik</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL gonilnik</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL omrežni gonilnik</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB gonilnik</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Gonilnik Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>SANE gonilnik</value>
@@ -496,7 +496,7 @@
     <value>Ura (0-23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
-    <value>Minute (00-59)</value>
+    <value>Minuta (00-59)</value>
   </data>
   <data name="Second2Digit" xml:space="preserve">
     <value>Sekunda (00-59)</value>
@@ -511,7 +511,7 @@
     <value>Naraščajoče število (2 cifri)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Naraščajoče število (1 cifra)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Ime Datoteke</value>
@@ -565,7 +565,7 @@
     <value>Geslo</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Naslednja datoteka je šifrirana in za odpiranje zahteva geslo:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Zahtevaj vnos poti datoteke</value>
@@ -640,7 +640,7 @@
     <value>Preslikaj obojestranske strani</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Različica Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain Implementacija:</value>
@@ -685,7 +685,7 @@
     <value>Shrani v več datotek</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Start</value>
+    <value>Začetek</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
     <value>Naslednje Skeniranje</value>
@@ -697,9 +697,9 @@
     <value>Odpri Mapo</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Orodja</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Omogoči beleženje iskanja in odstranjevanja napak (debug)</value>
   </data>
 </root>

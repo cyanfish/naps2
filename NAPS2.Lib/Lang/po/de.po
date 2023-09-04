@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-09-04 17:55\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -42,7 +42,7 @@ msgstr "Über"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr "Daten erfassen..."
+msgstr "Datenerfassung..."
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -66,7 +66,7 @@ msgstr "Anmerkungen erlauben"
 
 #: UiStrings.resx$AllowContentCopying$Message
 msgid "Allow Content Copying"
-msgstr "Kopieren des Inhalts erlauben"
+msgstr "Kopieren von Inhalten zulassen"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
@@ -159,7 +159,7 @@ msgstr "Apple Treiber"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Mail"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -303,7 +303,7 @@ msgstr "Abbrechen"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr " Stapelverarbeitung abbrechen"
+msgstr "Stapelverarbeitung abbrechen"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
@@ -551,7 +551,7 @@ msgstr "Erlaube automatisches Speichern"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Fehlerprotokollierung aktivieren"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -593,7 +593,7 @@ msgstr "Einzug"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Dateiname"
+msgstr "Dateiname:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -1387,7 +1387,7 @@ msgstr "Der gewählte Scanner ist ausgeschaltet (offline)."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"

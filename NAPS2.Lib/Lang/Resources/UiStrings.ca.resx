@@ -700,6 +700,6 @@
     <value>Eines</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Activa el Mode depuració</value>
   </data>
 </root>

@@ -394,7 +394,7 @@
     <value>Odzyskaj zeskanowane obrazy</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} plik(i) przeskanowane w {1} na {2} mogły nie zostać zapisane, ale są do odzyskania. Czy chcesz je odzyskać?</value>
+    <value>{0} plik(i) przeskanowane dnia {1} o {2} mogły nie zostać zapisane, ale są do odzyskania. Czy chcesz je odzyskać?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Symbole zastępcze</value>
