@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text;
 using System.Xml.Linq;
 
 namespace NAPS2.Escl.Client;
@@ -52,23 +53,32 @@ public class EsclClient
         return new EsclScannerStatus();
     }
 
-    public async Task<EsclJob> CreateScanJob(EsclScanSettings scanSettings)
+    public async Task<EsclJob> CreateScanJob(EsclScanSettings settings)
     {
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScanSettings",
-                    new XElement(PwgNs + "Version", "2.6"),
-                    new XElement(ScanNs + "Intent", "Photo"),
+                    new XElement(PwgNs + "Version", "2.0"),
+                    new XElement(ScanNs + "Intent", "TextAndGraphic"),
                     new XElement(PwgNs + "ScanRegions",
+                        new XAttribute(PwgNs + "MustHonor", "true"),
                         new XElement(PwgNs + "ScanRegion",
-                            new XElement(PwgNs + "Height", "1200"),
+                            new XElement(PwgNs + "Height", settings.Height),
                             new XElement(PwgNs + "ContentRegionUnits", "escl:ThreeHundredthsOfInches"),
-                            new XElement(PwgNs + "Width", "1800"),
-                            new XElement(PwgNs + "XOffset"),
-                            new XElement(PwgNs + "YOffset"))),
-                    new XElement(PwgNs + "InputSource", "Platen"),
-                    new XElement(ScanNs + "ColorMode", "Grayscale8")));
-        var response = await new HttpClient().PostAsync(GetUrl("ScanJobs"), new StringContent(doc));
+                            new XElement(PwgNs + "Width", settings.Width),
+                            new XElement(PwgNs + "XOffset", settings.XOffset),
+                            new XElement(PwgNs + "YOffset", settings.YOffset))),
+                    new XElement(PwgNs + "InputSource", settings.InputSource),
+                    new XElement(ScanNs + "Duplex", settings.Duplex),
+                    new XElement(ScanNs + "ColorMode", settings.ColorMode),
+                    new XElement(ScanNs + "XResolution", settings.XResolution),
+                    new XElement(ScanNs + "YResolution", settings.YResolution),
+                    new XElement(ScanNs + "Brightness", settings.Brightness),
+                    new XElement(ScanNs + "Contrast", settings.Contrast),
+                    new XElement(ScanNs + "Threshold", settings.Threshold),
+                    new XElement(PwgNs + "DocumentFormat", settings.DocumentFormat)));
+        var content = new StringContent(doc, Encoding.UTF8, "text/xml");
+        var response = await HttpClient.PostAsync(GetUrl("ScanJobs"), content);
         response.EnsureSuccessStatusCode();
         return new EsclJob
         {
@@ -76,7 +86,7 @@ public class EsclClient
         };
     }
 
-    public async Task<byte[]?> NextDocument(EsclJob job)
+    public async Task<RawDocument?> NextDocument(EsclJob job)
     {
         // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
         var response = await ChunkedHttpClient.GetAsync(job.Uri + "/NextDocument");
@@ -85,7 +95,11 @@ public class EsclClient
             return null;
         }
         response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsByteArrayAsync();
+        return new RawDocument
+        {
+            Data = await response.Content.ReadAsByteArrayAsync(),
+            ContentType = response.Content.Headers.ContentType?.MediaType
+        };
     }
 
     private EsclSettingProfile ParseSettingProfile(XElement element,
@@ -128,6 +142,7 @@ public class EsclClient
 
     private async Task<XDocument> DoRequest(string endpoint)
     {
+        // TODO: Retry logic
         var text = await HttpClient.GetStringAsync(GetUrl(endpoint));
         return XDocument.Parse(text);
     }
@@ -135,7 +150,8 @@ public class EsclClient
     private string GetUrl(string endpoint)
     {
         var protocol = _service.Tls ? "https" : "http";
-        return new UriBuilder(protocol, (_service.IpV6 ?? _service.IpV4)!.ToString(), _service.Port, $"{_service.RootUrl}/{endpoint}")
+        return new UriBuilder(protocol, (_service.IpV6 ?? _service.IpV4)!.ToString(), _service.Port,
+                $"{_service.RootUrl}/{endpoint}")
             .Uri.ToString();
     }
 }

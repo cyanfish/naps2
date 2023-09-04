@@ -11,7 +11,7 @@ public class AdvertiseTests
     {
         using var server = new EsclServer(new EsclServerConfig
         {
-            Capabilities = new EsclCapabilities()
+            Capabilities = new EsclCapabilities
             {
                 Version = "2.6",
                 MakeAndModel = "HP Blah",
@@ -19,11 +19,9 @@ public class AdvertiseTests
             }
         });
         server.Start();
-        using var advertiser = new MdnsAdvertiser();
-        advertiser.Advertise();
         if (Debugger.IsAttached)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 await Task.Delay(5000);
             }

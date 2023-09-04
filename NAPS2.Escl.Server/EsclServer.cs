@@ -8,11 +8,13 @@ public class EsclServer : IDisposable
     private readonly EsclServerConfig _serverConfig;
     private readonly EsclServerState _serverState = new();
     private readonly CancellationTokenSource _cts = new();
+    private readonly MdnsAdvertiser _advertiser;
     private WebServer? _server;
 
     public EsclServer(EsclServerConfig serverConfig)
     {
         _serverConfig = serverConfig;
+        _advertiser = new MdnsAdvertiser(serverConfig);
     }
 
     public int Port { get; set; } = 9898;
@@ -32,6 +34,7 @@ public class EsclServer : IDisposable
         _server.StateChanged += ServerOnStateChanged;
         // TODO: This might block on tasks, maybe copy impl but async
         _server.Start(_cts.Token);
+        _advertiser.Advertise();
     }
 
     private void ServerOnStateChanged(object sender, WebServerStateChangedEventArgs e)
@@ -41,5 +44,6 @@ public class EsclServer : IDisposable
     public void Dispose()
     {
         _cts.Cancel();
+        _advertiser.Dispose();
     }
 }

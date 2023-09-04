@@ -16,6 +16,6 @@ public static class EsclXmlHelper
         root.Add(ScanNsAttr);
         root.Add(PwgNsAttr);
         var content = new XDocument(root);
-        return $"{Decl}{Environment.NewLine}{content}";
+        return $"{Decl}{content}".Replace("\n", "");
     }
 }
