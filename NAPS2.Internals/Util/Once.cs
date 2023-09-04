@@ -3,11 +3,11 @@ namespace NAPS2.Util;
 /// <summary>
 /// Encapsulates an action that should be run once lazily.
 /// </summary>
-public class LazyRunner
+public class Once
 {
     private readonly Lazy<object> _lazy;
 
-    public LazyRunner(Action action)
+    public Once(Action action)
     {
         _lazy = new Lazy<object>(() =>
         {

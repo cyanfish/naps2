@@ -23,7 +23,7 @@ internal class LocalTwainSessionController : ITwainSessionController
             AssemblyHelper.Company, AssemblyHelper.Product, AssemblyHelper.Product, AssemblyHelper.Description);
     }
 
-    private static readonly LazyRunner TwainDsmSetup = new(() =>
+    private static readonly Once TwainDsmSetup = new(() =>
     {
         var twainDsmPath = NativeLibrary.FindLibraryPath("twaindsm.dll");
         PlatformCompat.System.LoadLibrary(twainDsmPath);
