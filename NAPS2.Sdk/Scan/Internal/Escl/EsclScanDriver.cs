@@ -43,6 +43,8 @@ internal class EsclScanDriver : IScanDriver
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<IMemoryImage> callback)
     {
+        if (cancelToken.IsCancellationRequested) return;
+
         var foundTcs = new TaskCompletionSource<EsclService?>();
         using var locator = new EsclServiceLocator(async service =>
         {
@@ -72,12 +74,17 @@ internal class EsclScanDriver : IScanDriver
         });
         Task.Delay(2000).ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
         locator.Start();
-
-        // TODO: Cancellation
         var service = await foundTcs.Task ?? throw new DeviceException(SdkResources.DeviceOffline);
+
+        if (cancelToken.IsCancellationRequested) return;
+
         var client = new EsclClient(service);
+        client.Logger = _scanningContext.Logger;
         var caps = await client.GetCapabilities();
         var status = await client.GetStatus();
+
+        if (cancelToken.IsCancellationRequested) return;
+
         var job = await client.CreateScanJob(new EsclScanSettings
         {
             Width = (int) Math.Round(options.PageSize!.WidthInInches * 300),
@@ -102,35 +109,47 @@ internal class EsclScanDriver : IScanDriver
                 : "image/jpeg"
             // TODO: Offset, brightness/contrast, quality, etc.
         });
-        while (true)
+
+        var cancelOnce = new Once(() => client.CancelJob(job).AssertNoAwait());
+        using var cancelReg = cancelToken.Register(cancelOnce.Run);
+
+        try
         {
-            scanEvents.PageStart();
-            RawDocument? doc;
-            try
+
+            while (true)
             {
-                // TODO: PDF or jpeg?
-                doc = await client.NextDocument(job);
-            }
-            catch (Exception ex)
-            {
-                _scanningContext.Logger.LogDebug(ex, "ESCL error");
-                break;
-            }
-            if (doc == null) break;
-            if (doc.ContentType == "application/pdf")
-            {
-                // TODO: For SDK some kind an error message if Pdfium isn't present
-                var renderer = new PdfiumPdfRenderer();
-                foreach (var image in renderer.Render(_scanningContext.ImageContext, doc.Data, doc.Data.Length,
-                             PdfRenderSize.FromDpi(options.Dpi)))
+                scanEvents.PageStart();
+                RawDocument? doc;
+                try
                 {
-                    callback(image);
+                    // TODO: PDF or jpeg?
+                    doc = await client.NextDocument(job);
+                }
+                catch (Exception ex)
+                {
+                    _scanningContext.Logger.LogDebug(ex, "ESCL error");
+                    break;
+                }
+                if (doc == null) break;
+                if (doc.ContentType == "application/pdf")
+                {
+                    // TODO: For SDK some kind an error message if Pdfium isn't present
+                    var renderer = new PdfiumPdfRenderer();
+                    foreach (var image in renderer.Render(_scanningContext.ImageContext, doc.Data, doc.Data.Length,
+                                 PdfRenderSize.FromDpi(options.Dpi)))
+                    {
+                        callback(image);
+                    }
+                }
+                else
+                {
+                    callback(_scanningContext.ImageContext.Load(doc.Data));
                 }
             }
-            else
-            {
-                callback(_scanningContext.ImageContext.Load(doc.Data));
-            }
+        }
+        finally
+        {
+            cancelOnce.Run();
         }
     }
 }

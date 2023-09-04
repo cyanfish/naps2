@@ -8,4 +8,7 @@ public class EsclCapabilities
     public string? Uuid { get; init; }
     public string? AdminUri { get; init; }
     public string? IconUri { get; init; }
+    public EsclInputCaps? PlatenCaps { get; init; }
+    public EsclInputCaps? AdfSimplexCaps { get; init; }
+    public EsclInputCaps? AdfDuplexCaps { get; init; }
 }

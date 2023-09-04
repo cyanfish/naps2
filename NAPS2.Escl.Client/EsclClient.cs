@@ -1,6 +1,8 @@
 using System.Net;
 using System.Text;
 using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace NAPS2.Escl.Client;
 
@@ -19,6 +21,8 @@ public class EsclClient
         _service = service;
     }
 
+    public ILogger Logger { get; set; } = NullLogger.Instance;
+
     public async Task<EsclCapabilities> GetCapabilities()
     {
         var doc = await DoRequest("ScannerCapabilities");
@@ -27,7 +31,7 @@ public class EsclClient
         {
             throw new InvalidOperationException("Unexpected root element: " + doc.Root?.Name);
         }
-        var settingProfilesEl = root.Element(ScanNs + "SettingProfiles");
+        var settingProfilesEl = root!.Element(ScanNs + "SettingProfiles");
         var settingProfiles = new Dictionary<string, EsclSettingProfile>();
         if (settingProfilesEl != null)
         {
@@ -36,6 +40,9 @@ public class EsclClient
                 ParseSettingProfile(el, settingProfiles);
             }
         }
+        var platenCapsEl = root.Element(ScanNs + "Platen")?.Element(ScanNs + "PlatenInputCaps");
+        var adfSimplexCapsEl = root.Element(ScanNs + "Adf")?.Element(ScanNs + "AdfSimplexInputCaps");
+        var adfDuplexCapsEl = root.Element(ScanNs + "Adf")?.Element(ScanNs + "AdfDuplexInputCaps");
         return new EsclCapabilities
         {
             Version = root.Element(PwgNs + "Version")?.Value,
@@ -43,8 +50,29 @@ public class EsclClient
             SerialNumber = root.Element(PwgNs + "SerialNumber")?.Value,
             Uuid = root.Element(ScanNs + "UUID")?.Value,
             AdminUri = root.Element(ScanNs + "AdminURI")?.Value,
-            IconUri = root.Element(ScanNs + "IconURI")?.Value
+            IconUri = root.Element(ScanNs + "IconURI")?.Value,
+            PlatenCaps = ParseInputCaps(platenCapsEl, settingProfiles),
+            AdfSimplexCaps = ParseInputCaps(adfSimplexCapsEl, settingProfiles),
+            AdfDuplexCaps = ParseInputCaps(adfDuplexCapsEl, settingProfiles)
         };
+    }
+
+    private EsclInputCaps? ParseInputCaps(XElement? element, Dictionary<string, EsclSettingProfile> settingProfiles)
+    {
+        if (element == null)
+        {
+            return null;
+        }
+        var caps = new EsclInputCaps();
+        var settingProfilesEl = element.Element(ScanNs + "SettingProfiles");
+        if (settingProfilesEl != null)
+        {
+            foreach (var el in settingProfilesEl.Elements(ScanNs + "SettingProfile"))
+            {
+                caps.SettingProfiles.Add(ParseSettingProfile(el, settingProfiles));
+            }
+        }
+        return caps;
     }
 
     public async Task<EsclScannerStatus> GetStatus()
@@ -78,8 +106,12 @@ public class EsclClient
                     new XElement(ScanNs + "Threshold", settings.Threshold),
                     new XElement(PwgNs + "DocumentFormat", settings.DocumentFormat)));
         var content = new StringContent(doc, Encoding.UTF8, "text/xml");
-        var response = await HttpClient.PostAsync(GetUrl("ScanJobs"), content);
+        var url = GetUrl("ScanJobs");
+        Logger.LogDebug("ESCL POST {Url}", url);
+        Logger.LogDebug("{Doc}", doc);
+        var response = await HttpClient.PostAsync(url, content);
         response.EnsureSuccessStatusCode();
+        Logger.LogDebug("POST OK");
         return new EsclJob
         {
             Uri = response.Headers.Location!
@@ -89,17 +121,37 @@ public class EsclClient
     public async Task<RawDocument?> NextDocument(EsclJob job)
     {
         // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
-        var response = await ChunkedHttpClient.GetAsync(job.Uri + "/NextDocument");
-        if (response.StatusCode == HttpStatusCode.NotFound)
+        var url = job.Uri + "/NextDocument";
+        Logger.LogDebug("ESCL GET {Url}", url);
+        var response = await ChunkedHttpClient.GetAsync(url);
+        if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
         {
+            // NotFound = end of scan, Gone = canceled
+            Logger.LogDebug("GET failed: {Status}", response.StatusCode);
             return null;
         }
         response.EnsureSuccessStatusCode();
-        return new RawDocument
+        var doc = new RawDocument
         {
             Data = await response.Content.ReadAsByteArrayAsync(),
-            ContentType = response.Content.Headers.ContentType?.MediaType
+            ContentType = response.Content.Headers.ContentType?.MediaType,
+            ContentLocation = response.Content.Headers.ContentLocation?.ToString()
         };
+        Logger.LogDebug("{Type} ({Bytes} bytes) {Location}", doc.ContentType, doc.Data.Length, doc.ContentLocation);
+        return doc;
+    }
+
+    public async Task CancelJob(EsclJob job)
+    {
+        Logger.LogDebug("ESCL DELETE {Url}", job.Uri);
+        var response = await HttpClient.DeleteAsync(job.Uri);
+        if (!response.IsSuccessStatusCode)
+        {
+            Logger.LogDebug("DELETE failed: {Status}", response.StatusCode);
+            return;
+        }
+        response.EnsureSuccessStatusCode();
+        Logger.LogDebug("DELETE OK");
     }
 
     private EsclSettingProfile ParseSettingProfile(XElement element,
@@ -143,8 +195,12 @@ public class EsclClient
     private async Task<XDocument> DoRequest(string endpoint)
     {
         // TODO: Retry logic
-        var text = await HttpClient.GetStringAsync(GetUrl(endpoint));
-        return XDocument.Parse(text);
+        var url = GetUrl(endpoint);
+        Logger.LogDebug("ESCL GET {Url}", url);
+        var text = await HttpClient.GetStringAsync(url);
+        var doc = XDocument.Parse(text);
+        Logger.LogDebug("{Doc}", doc);
+        return doc;
     }
 
     private string GetUrl(string endpoint)
