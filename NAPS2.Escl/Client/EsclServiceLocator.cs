@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using Makaretu.Dns;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace NAPS2.Escl.Client;
 
@@ -16,6 +18,8 @@ public class EsclServiceLocator : IDisposable
             try
             {
                 var service = ParseService(args);
+                Logger.LogDebug("Discovered ESCL Service: {Name}, ipv4 {Ipv4}, ipv6 {IpV6}, port {Port}, uuid {Uuid}",
+                    service.ScannerName, service.IpV4, service.IpV6, service.Port, service.Uuid);
                 serviceCallback(service);
             }
             catch (Exception)
@@ -24,6 +28,8 @@ public class EsclServiceLocator : IDisposable
             }
         };
     }
+
+    public ILogger Logger { get; set; } = NullLogger.Instance;
 
     public void Start()
     {
@@ -96,7 +102,7 @@ public class EsclServiceLocator : IDisposable
         };
     }
 
-    private string? Get(Dictionary<string,string> props, string key)
+    private string? Get(Dictionary<string, string> props, string key)
     {
         return props.TryGetValue(key, out var value) ? value : null;
     }

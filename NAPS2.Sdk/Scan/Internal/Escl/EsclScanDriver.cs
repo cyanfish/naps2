@@ -30,6 +30,7 @@ internal class EsclScanDriver : IScanDriver
                 : $"{service.ScannerName} ({ip})";
             callback(new ScanDevice(id, name));
         });
+        locator.Logger = _scanningContext.Logger;
         locator.Start();
         try
         {
@@ -46,33 +47,18 @@ internal class EsclScanDriver : IScanDriver
         if (cancelToken.IsCancellationRequested) return;
 
         var foundTcs = new TaskCompletionSource<EsclService?>();
-        using var locator = new EsclServiceLocator(async service =>
+        using var locator = new EsclServiceLocator(service =>
         {
             var parts = options.Device!.ID.Split('|');
             var ip = parts[0];
             var uuid = parts[1];
-            if ((service.IpV4 ?? service.IpV6!).ToString() == ip)
+            if ((service.IpV4 ?? service.IpV6!).ToString() == ip || service.Uuid == uuid)
             {
                 foundTcs.TrySetResult(service);
             }
-            else
-            {
-                var client = new EsclClient(service);
-                try
-                {
-                    var caps = await client.GetCapabilities();
-                    if (caps.Uuid == uuid)
-                    {
-                        foundTcs.TrySetResult(service);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _scanningContext.Logger.LogDebug(ex, "ESCL error");
-                }
-            }
         });
         Task.Delay(2000).ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
+        locator.Logger = _scanningContext.Logger;
         locator.Start();
         var service = await foundTcs.Task ?? throw new DeviceException(SdkResources.DeviceOffline);
 
