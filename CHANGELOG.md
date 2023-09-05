@@ -1,3 +1,12 @@
+Changes in 7.1.0:
+- Windows: Added ESCL Driver option
+  - This allows using most network scanners without needing to install a separate driver
+- PDF saving is much faster in some cases
+- Imported PDFs now render forms and annotations 
+- Added Hindi language 
+- Bug fixes
+- NAPS2.Sdk is now available on [Nuget](https://www.nuget.org/packages/NAPS2.Sdk)
+
 Changes in 7.0b9:
 - Improved accuracy of PDF page sizes
 - Improved UI responsiveness when OCR is running 
