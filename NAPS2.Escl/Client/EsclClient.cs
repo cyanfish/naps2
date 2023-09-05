@@ -68,9 +68,10 @@ public class EsclClient
                     new XElement(ScanNs + "ColorMode", settings.ColorMode),
                     new XElement(ScanNs + "XResolution", settings.XResolution),
                     new XElement(ScanNs + "YResolution", settings.YResolution),
-                    new XElement(ScanNs + "Brightness", settings.Brightness),
-                    new XElement(ScanNs + "Contrast", settings.Contrast),
-                    new XElement(ScanNs + "Threshold", settings.Threshold),
+                    // TODO: Brightness/contrast/threshold
+                    // new XElement(ScanNs + "Brightness", settings.Brightness),
+                    // new XElement(ScanNs + "Contrast", settings.Contrast),
+                    // new XElement(ScanNs + "Threshold", settings.Threshold),
                     new XElement(PwgNs + "DocumentFormat", settings.DocumentFormat)));
         var content = new StringContent(doc, Encoding.UTF8, "text/xml");
         var url = GetUrl("ScanJobs");
