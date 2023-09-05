@@ -46,6 +46,87 @@ internal class EsclScanDriver : IScanDriver
     {
         if (cancelToken.IsCancellationRequested) return;
 
+        var service = await FindDeviceEsclService(options) ?? throw new DeviceException(SdkResources.DeviceOffline);
+
+        if (cancelToken.IsCancellationRequested) return;
+
+        var client = new EsclClient(service)
+        {
+            Logger = _scanningContext.Logger
+        };
+
+        var caps = await client.GetCapabilities();
+        var status = await client.GetStatus();
+        var scanSettings = GetScanSettings(options, caps);
+
+        if (cancelToken.IsCancellationRequested) return;
+
+        VerifyStatus(status, scanSettings);
+
+        var job = await client.CreateScanJob(scanSettings);
+
+        var cancelOnce = new Once(() => client.CancelJob(job).AssertNoAwait());
+        using var cancelReg = cancelToken.Register(cancelOnce.Run);
+
+        try
+        {
+            while (true)
+            {
+                // TODO: Can we do progress reporting?
+                scanEvents.PageStart();
+                RawDocument? doc;
+                try
+                {
+                    doc = await client.NextDocument(job);
+                }
+                catch (Exception ex)
+                {
+                    _scanningContext.Logger.LogDebug(ex, "ESCL error");
+                    break;
+                }
+                if (doc == null) break;
+                foreach (var image in GetImagesFromRawDocument(options, doc))
+                {
+                    callback(image);
+                }
+            }
+        }
+        finally
+        {
+            cancelOnce.Run();
+        }
+    }
+
+    private static void VerifyStatus(EsclScannerStatus status, EsclScanSettings scanSettings)
+    {
+        if (status.State is EsclScannerState.Processing or EsclScannerState.Testing or EsclScannerState.Stopped)
+        {
+            throw new DeviceException(SdkResources.DeviceBusy);
+        }
+        if (status.State == EsclScannerState.Down)
+        {
+            throw new DeviceException(SdkResources.DeviceOffline);
+        }
+        if (scanSettings.InputSource == EsclInputSource.Feeder)
+        {
+            if (status.AdfState == EsclAdfState.ScannerAdfEmpty)
+            {
+                throw new DeviceException(SdkResources.NoPagesInFeeder);
+            }
+            if (status.AdfState == EsclAdfState.ScannerAdfJam)
+            {
+                throw new DeviceException(SdkResources.DevicePaperJam);
+            }
+            if (status.AdfState is not (EsclAdfState.Unknown or EsclAdfState.ScannerAdfProcessing
+                or EsclAdfState.ScannedAdfLoaded))
+            {
+                throw new DeviceException(status.AdfState.ToString());
+            }
+        }
+    }
+
+    private async Task<EsclService?> FindDeviceEsclService(ScanOptions options)
+    {
         var foundTcs = new TaskCompletionSource<EsclService?>();
         using var locator = new EsclServiceLocator(service =>
         {
@@ -60,82 +141,120 @@ internal class EsclScanDriver : IScanDriver
         Task.Delay(2000).ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
         locator.Logger = _scanningContext.Logger;
         locator.Start();
-        var service = await foundTcs.Task ?? throw new DeviceException(SdkResources.DeviceOffline);
+        return await foundTcs.Task;
+    }
 
-        if (cancelToken.IsCancellationRequested) return;
+    private IEnumerable<IMemoryImage> GetImagesFromRawDocument(ScanOptions options, RawDocument doc)
+    {
+        if (doc.ContentType == "application/pdf")
+        {
+            // TODO: For SDK some kind an error message if Pdfium isn't present
+            var renderer = new PdfiumPdfRenderer();
+            foreach (var image in renderer.Render(_scanningContext.ImageContext, doc.Data, doc.Data.Length,
+                         PdfRenderSize.FromDpi(options.Dpi)))
+            {
+                yield return image;
+            }
+        }
+        else
+        {
+            yield return _scanningContext.ImageContext.Load(doc.Data);
+        }
+    }
 
-        var client = new EsclClient(service);
-        client.Logger = _scanningContext.Logger;
-        var caps = await client.GetCapabilities();
-        var status = await client.GetStatus();
+    private EsclScanSettings GetScanSettings(ScanOptions options, EsclCapabilities caps)
+    {
+        if (options.PaperSource == PaperSource.Feeder && caps.AdfSimplexCaps == null)
+        {
+            throw new NoFeederSupportException();
+        }
+        if (options.PaperSource == PaperSource.Duplex && caps.AdfDuplexCaps == null)
+        {
+            throw new NoDuplexSupportException();
+        }
+        if (options.PaperSource is PaperSource.Flatbed or PaperSource.Auto
+            && caps.PlatenCaps == null && caps.AdfSimplexCaps != null)
+        {
+            options.PaperSource = PaperSource.Feeder;
+        }
 
-        if (cancelToken.IsCancellationRequested) return;
+        var (inputCaps, inputSource, duplex) = options.PaperSource switch
+        {
+            PaperSource.Feeder => (caps.AdfSimplexCaps, EsclInputSource.Feeder, false),
+            PaperSource.Duplex => (caps.AdfDuplexCaps, EsclInputSource.Feeder, true),
+            _ => (caps.PlatenCaps, EsclInputSource.Platen, false),
+        };
+        inputCaps ??= new EsclInputCaps();
 
-        var job = await client.CreateScanJob(new EsclScanSettings
+        var colorMode = options.BitDepth switch
+        {
+            BitDepth.Color => EsclColorMode.RGB24,
+            BitDepth.Grayscale => EsclColorMode.Grayscale8,
+            BitDepth.BlackAndWhite => EsclColorMode.BlackAndWhite1,
+            _ => EsclColorMode.RGB24
+        };
+        int dpi = options.Dpi;
+
+        var settingProfile = inputCaps.SettingProfiles.FirstOrDefault(x => x.ColorModes.Contains(colorMode))
+                             ?? inputCaps.SettingProfiles.FirstOrDefault();
+
+        if (settingProfile != null)
+        {
+            colorMode = MaybeCorrectColorMode(settingProfile, colorMode);
+
+            var discreteResolutions =
+                settingProfile.DiscreteResolutions.Where(res => res.XResolution == res.YResolution)
+                    .Select(res => res.XResolution).ToList();
+            if (discreteResolutions.Any())
+            {
+                dpi = discreteResolutions.OrderBy(v => Math.Abs(v - dpi)).First();
+            }
+
+            if (settingProfile.XResolutionRange != null && settingProfile.YResolutionRange != null)
+            {
+                int min = Math.Max(settingProfile.XResolutionRange.Min, settingProfile.YResolutionRange.Min);
+                int max = Math.Min(settingProfile.XResolutionRange.Max, settingProfile.YResolutionRange.Max);
+                dpi = dpi.Clamp(min, max);
+            }
+        }
+
+        return new EsclScanSettings
         {
             Width = (int) Math.Round(options.PageSize!.WidthInInches * 300),
             Height = (int) Math.Round(options.PageSize!.HeightInInches * 300),
-            XResolution = options.Dpi, // TODO: Match to caps
-            YResolution = options.Dpi,
-            ColorMode = options.BitDepth switch
-            {
-                BitDepth.Color => EsclColorMode.RGB24,
-                BitDepth.Grayscale => EsclColorMode.Grayscale8,
-                BitDepth.BlackAndWhite => EsclColorMode.BlackAndWhite1,
-                _ => EsclColorMode.RGB24
-            },
-            InputSource = options.PaperSource switch
-            {
-                PaperSource.Feeder or PaperSource.Duplex => EsclInputSource.Feeder,
-                _ => EsclInputSource.Platen
-            },
-            Duplex = options.PaperSource == PaperSource.Duplex,
+            XResolution = dpi,
+            YResolution = dpi,
+            ColorMode = colorMode,
+            InputSource = inputSource,
+            Duplex = duplex,
             DocumentFormat = options.BitDepth == BitDepth.BlackAndWhite || options.MaxQuality
                 ? "application/pdf" // TODO: Use PNG if available?
                 : "image/jpeg"
             // TODO: Offset, brightness/contrast, quality, etc.
-        });
+        };
+    }
 
-        var cancelOnce = new Once(() => client.CancelJob(job).AssertNoAwait());
-        using var cancelReg = cancelToken.Register(cancelOnce.Run);
-
-        try
+    private static EsclColorMode MaybeCorrectColorMode(EsclSettingProfile settingProfile, EsclColorMode colorMode)
+    {
+        if (settingProfile.ColorModes.Contains(colorMode))
         {
-
-            while (true)
+            return colorMode;
+        }
+        if (colorMode == EsclColorMode.BlackAndWhite1)
+        {
+            if (settingProfile.ColorModes.Contains(EsclColorMode.Grayscale8))
             {
-                scanEvents.PageStart();
-                RawDocument? doc;
-                try
-                {
-                    // TODO: PDF or jpeg?
-                    doc = await client.NextDocument(job);
-                }
-                catch (Exception ex)
-                {
-                    _scanningContext.Logger.LogDebug(ex, "ESCL error");
-                    break;
-                }
-                if (doc == null) break;
-                if (doc.ContentType == "application/pdf")
-                {
-                    // TODO: For SDK some kind an error message if Pdfium isn't present
-                    var renderer = new PdfiumPdfRenderer();
-                    foreach (var image in renderer.Render(_scanningContext.ImageContext, doc.Data, doc.Data.Length,
-                                 PdfRenderSize.FromDpi(options.Dpi)))
-                    {
-                        callback(image);
-                    }
-                }
-                else
-                {
-                    callback(_scanningContext.ImageContext.Load(doc.Data));
-                }
+                colorMode = EsclColorMode.Grayscale8;
+            }
+            else if (settingProfile.ColorModes.Contains(EsclColorMode.RGB24))
+            {
+                colorMode = EsclColorMode.RGB24;
             }
         }
-        finally
+        else if (colorMode == EsclColorMode.Grayscale8 && settingProfile.ColorModes.Contains(EsclColorMode.RGB24))
         {
-            cancelOnce.Run();
+            colorMode = EsclColorMode.RGB24;
         }
+        return colorMode;
     }
 }

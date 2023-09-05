@@ -32,7 +32,20 @@ public class EsclClient
     public async Task<EsclScannerStatus> GetStatus()
     {
         var doc = await DoRequest("ScannerStatus");
-        return new EsclScannerStatus();
+        var root = doc.Root;
+        if (root?.Name != ScanNs + "ScannerStatus")
+        {
+            throw new InvalidOperationException("Unexpected root element: " + doc.Root?.Name);
+        }
+        return new EsclScannerStatus
+        {
+            State = Enum.TryParse<EsclScannerState>(root!.Element(PwgNs + "State")?.Value, out var state)
+                ? state
+                : EsclScannerState.Unknown,
+            AdfState = Enum.TryParse<EsclAdfState>(root.Element(ScanNs + "AdfState")?.Value, out var adfState)
+                ? adfState
+                : EsclAdfState.Unknown
+        };
     }
 
     public async Task<EsclJob> CreateScanJob(EsclScanSettings settings)
