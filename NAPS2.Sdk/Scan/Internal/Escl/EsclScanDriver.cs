@@ -89,6 +89,10 @@ internal class EsclScanDriver : IScanDriver
                 {
                     callback(image);
                 }
+                if (scanSettings.InputSource == EsclInputSource.Platen)
+                {
+                    break;
+                }
             }
         }
         finally
