@@ -340,6 +340,21 @@ internal class TwainSessionScanRunner
                 break;
         }
 
+        // TODO: Should we add an "Automatic" option in the NAPS2 GUI instead of making "Glass" = Auto?
+        // For "Auto", choose the feeder if it has paper, otherwise the flatbed.
+        if (_options.PaperSource == PaperSource.Auto)
+        {
+            if (source.Capabilities.CapAutomaticSenseMedium.IsSupported)
+            {
+                source.Capabilities.CapAutomaticSenseMedium.SetValue(BoolType.True);
+            }
+            else if (source.Capabilities.CapFeederLoaded.IsSupported &&
+                     source.Capabilities.CapFeederLoaded.GetCurrent() == BoolType.True)
+            {
+                source.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
+            }
+        }
+
         // Bit Depth
         switch (_options.BitDepth)
         {

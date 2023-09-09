@@ -7,7 +7,7 @@ public enum PaperSource
 {
     /// <summary>
     /// Use a supported paper source for the device. Generally this prioritizes Flatbed -> Feeder -> Duplex, but it
-    /// depends on the driver.
+    /// depends on the driver. This may choose between Feeder and Flatbed based on whether there is paper in the feeder.
     /// </summary>
     Auto,
 
