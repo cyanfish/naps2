@@ -5,6 +5,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>NAPS2.Portable</RootNamespace>
     <AssemblyName>NAPS2.Portable</AssemblyName>
+    <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
