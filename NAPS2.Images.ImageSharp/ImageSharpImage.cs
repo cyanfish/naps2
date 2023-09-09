@@ -140,7 +140,13 @@ public class ImageSharpImage : IMemoryImage
         {
             ImageFileFormat.Bmp => (ImageEncoder) new BmpEncoder(),
             ImageFileFormat.Png => new PngEncoder(),
-            ImageFileFormat.Jpeg => new JpegEncoder { Quality = options.Quality == -1 ? 75 : options.Quality },
+            ImageFileFormat.Jpeg => new JpegEncoder
+            {
+                Quality = options.Quality == -1 ? 75 : options.Quality,
+                // ImageSharp will automatically save an RGB24 image as Grayscale if the actual image colors are gray.
+                // We prevent that here if the caller specified an RGB PixelFormatHint.
+                ColorType = options.PixelFormatHint >= ImagePixelFormat.RGB24 ? JpegEncodingColor.Rgb : null
+            },
             ImageFileFormat.Tiff => new TiffEncoder(),
             _ => throw new InvalidOperationException()
         };
