@@ -10,6 +10,12 @@ public class ClientServerTests
     [Fact]
     public async Task ClientServer()
     {
+        // TODO: Any better way to prevent port collisions when running tests?
+#if NET6_0_OR_GREATER
+        int port = 9802;
+#else
+        int port = 9801;
+#endif
         using var server = new EsclServer(new EsclServerConfig
         {
             Capabilities = new EsclCapabilities
@@ -18,7 +24,7 @@ public class ClientServerTests
                 MakeAndModel = "HP Blah",
                 SerialNumber = "123abc"
             }
-        }) { Port = 9801 };
+        }) { Port = port };
         server.Start();
         var client = new EsclClient(new EsclService
         {
