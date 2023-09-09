@@ -49,7 +49,7 @@ public class PdfExporterTests : ContextualTests
     [Fact]
     public async Task ExportJpegWithoutEncoding()
     {
-        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
+        SetUpFileStorage();
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));

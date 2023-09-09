@@ -33,8 +33,7 @@ public abstract class StorageConfig
     {
         public override void Apply(ContextualTests ctx)
         {
-            var recoveryPath = Path.Combine(ctx.FolderPath, "recovery");
-            ctx.ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(recoveryPath);
+            ctx.SetUpFileStorage();
         }
 
         public override void AssertPdfStorage(IImageStorage storage)

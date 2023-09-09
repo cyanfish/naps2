@@ -80,7 +80,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task Import300Naps2()
     {
-        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
+        SetUpFileStorage();
         var filePath = CopyResourceToFile(PdfResources.image_pdf, "test.pdf");
 
         var pdfExporter = new PdfImporter(ScanningContext);
@@ -93,7 +93,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task Import300Naps2Bw()
     {
-        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
+        SetUpFileStorage();
         var filePath = CopyResourceToFile(PdfResources.image_pdf_bw, "test.pdf");
 
         var pdfExporter = new PdfImporter(ScanningContext);
@@ -106,7 +106,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task Import300NonNaps2()
     {
-        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder("recovery");
+        SetUpFileStorage();
         var filePath = CopyResourceToFile(PdfResources.word_generated_pdf, "test.pdf");
 
         var pdfExporter = new PdfImporter(ScanningContext);

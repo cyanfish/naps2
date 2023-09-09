@@ -16,7 +16,7 @@ public class ImageImporterTests : ContextualTests
     public ImageImporterTests()
     {
         _imageImporter = new ImageImporter(ScanningContext);
-        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(Path.Combine(FolderPath, "recovery"));
+        SetUpFileStorage();
     }
 
     [Fact]

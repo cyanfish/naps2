@@ -80,7 +80,7 @@ public class WorkerChannelTests : ContextualTests
     [Fact]
     public async Task ScanWithFileStorage()
     {
-        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(Path.Combine(FolderPath, "recovery"));
+        SetUpFileStorage();
         await ScanInternalTest();
     }
 

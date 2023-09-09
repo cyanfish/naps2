@@ -10,15 +10,14 @@ namespace NAPS2.Lib.Tests.Recovery;
 
 public class RecoveryManagerTests : ContextualTests
 {
-    private readonly string _recoveryBasePath;
     private readonly RecoveryManager _recoveryManager;
+    private readonly string _recoveryPath;
 
     public RecoveryManagerTests()
     {
-        _recoveryBasePath = Path.Combine(FolderPath, "recovery");
-        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(_recoveryBasePath);
-        ScanningContext.RecoveryPath = _recoveryBasePath;
+        SetUpFileStorage();
         _recoveryManager = new RecoveryManager(ScanningContext);
+        _recoveryPath = Path.Combine(ScanningContext.RecoveryPath!, Path.GetRandomFileName());
     }
 
     [Fact]
@@ -31,8 +30,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void FolderWithNoImages()
     {
-        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        CreateFolderToRecoverFrom(recovery1, 0);
+        CreateFolderToRecoverFrom(_recoveryPath, 0);
 
         var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.Null(folder);
@@ -41,8 +39,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void FolderLocking()
     {
-        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        CreateFolderToRecoverFrom(recovery1, 1);
+        CreateFolderToRecoverFrom(_recoveryPath, 1);
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
@@ -58,8 +55,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void FindSingleFolder()
     {
-        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        CreateFolderToRecoverFrom(recovery1, 1);
+        CreateFolderToRecoverFrom(_recoveryPath, 1);
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
@@ -70,21 +66,19 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void DeleteFolder()
     {
-        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        CreateFolderToRecoverFrom(recovery1, 1);
+        CreateFolderToRecoverFrom(_recoveryPath, 1);
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
-        Assert.True(Directory.Exists(recovery1));
+        Assert.True(Directory.Exists(_recoveryPath));
         folder.TryDelete();
-        Assert.False(Directory.Exists(recovery1));
+        Assert.False(Directory.Exists(_recoveryPath));
     }
 
     [Fact]
     public void Recover()
     {
-        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        CreateFolderToRecoverFrom(recovery1, 2);
+        CreateFolderToRecoverFrom(_recoveryPath, 2);
 
         var images = new List<ProcessedImage>();
         void ImageCallback(ProcessedImage img) => images.Add(img);
@@ -107,8 +101,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void CancelRecover()
     {
-        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        CreateFolderToRecoverFrom(recovery1, 2);
+        CreateFolderToRecoverFrom(_recoveryPath, 2);
 
         var mockImageCallback = Substitute.For<Action<ProcessedImage>>();
         CancellationTokenSource cts = new CancellationTokenSource();
@@ -125,7 +118,7 @@ public class RecoveryManagerTests : ContextualTests
         var result = folder.TryRecover(mockImageCallback, new RecoveryParams(),
             new ProgressHandler(ProgressCallback, cts.Token));
         Assert.False(result);
-        Assert.True(Directory.Exists(recovery1));
+        Assert.True(Directory.Exists(_recoveryPath));
         mockImageCallback.Received()(Arg.Any<ProcessedImage>());
         mockImageCallback.ReceivedCallsCount(1);
 
@@ -138,8 +131,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void RecoverWithMissingFile()
     {
-        string recovery1 = Path.Combine(_recoveryBasePath, Path.GetRandomFileName());
-        var uiImages = CreateFolderToRecoverFrom(recovery1, 2);
+        var uiImages = CreateFolderToRecoverFrom(_recoveryPath, 2);
         File.Delete(((ImageFileStorage) uiImages[0].GetImageWeakReference().ProcessedImage.Storage).FullPath);
 
         var images = new List<ProcessedImage>();

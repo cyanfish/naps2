@@ -60,6 +60,12 @@ public class ContextualTests : IDisposable
         }
     }
 
+    public void SetUpFileStorage()
+    {
+        ScanningContext.RecoveryPath = Path.Combine(FolderPath, "recovery");
+        ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(ScanningContext.RecoveryPath);
+    }
+
     public void SetUpOcr()
     {
         var best = Path.Combine(FolderPath, "best");

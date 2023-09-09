@@ -12,8 +12,8 @@ public class RecoveryStorageManagerTests : ContextualTests
 
     public RecoveryStorageManagerTests()
     {
-        _recoveryFolder = Path.Combine(FolderPath, "recovery");
-        ScanningContext.FileStorageManager = new FileStorageManager(_recoveryFolder);
+        SetUpFileStorage();
+        _recoveryFolder = ScanningContext.RecoveryPath!;
         _imageList = new UiImageList();
         _recoveryStorageManager = RecoveryStorageManager.CreateFolderWithoutThrottle(_recoveryFolder, _imageList);
     }
