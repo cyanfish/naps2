@@ -4,16 +4,40 @@
 #define public Dependency_NoExampleSetup
 #include "..\config\windows\CodeDependencies.iss"
 
+#define AppShortName             "NAPS""
+#define AppLongName              "NAPS2 - Not Another PDF Scanner""
+@define AppCompany               "NAPS2 Software"
+#Define AppCopyrightStartingYear "2017"
+#define AppCopyrightEndYear      GetDateTimeString('yyyy','','')
+
 [Setup]
-AppName=NAPS2 - Not Another PDF Scanner
+AppName={#AppLongName}
 AppVersion={#AppVersion}
-AppVerName=NAPS2 {#AppVersionName}
-AppPublisher=NAPS2 Software
+AppVerName={#AppShortName} {#AppVersionName}
+
+AppPublisher={#AppCompany}
 AppPublisherURL=https://www.naps2.com
 AppSupportURL=https://www.naps2.com/support
 AppUpdatesURL=https://www.naps2.com/download
-DefaultDirName={commonpf}\NAPS2
-DefaultGroupName=NAPS2
+
+VersionInfoDescription={#AppShortName} installer
+VersionInfoVersion={#AppVersion}
+VersionInfoProductName={#AppShortName}
+VersionInfoProductVersion={#AppVersion}
+
+VersionInfoCompany={#AppCompany}
+VersionInfoCopyright={#AppCompany} {#AppCopyrightStartingYear}-{#AppCopyrightEndYear}
+
+UninstallDisplayName={#AppShortName}
+UninstallDisplayIcon={app}\NAPS2.exe
+
+ShowLanguageDialog=yes
+UsePreviousLanguage=no
+LanguageDetectionMethod=uilanguage
+WizardStyle=modern
+
+DefaultDirName={commonpf}\{#AppShortName}
+DefaultGroupName={#AppShortName}
 OutputDir=../publish/{#AppVersionName}
 OutputBaseFilename=naps2-{#AppVersionName}-{#AppPlatform}
 Compression=lzma2/ultra
@@ -22,7 +46,6 @@ SolidCompression=yes
 ; !arch
 
 LicenseFile=..\..\LICENSE
-UninstallDisplayIcon={app}\NAPS2.exe
 
 [Run]
 Filename: "{app}\NAPS2.exe"; Flags: nowait postinstall
