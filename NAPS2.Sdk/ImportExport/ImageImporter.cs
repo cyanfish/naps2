@@ -12,9 +12,10 @@ public class ImageImporter : IImageImporter
         _scanningContext = scanningContext;
     }
 
-    public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams importParams,
+    public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
         ProgressHandler progress = default)
     {
+        importParams ??= new ImportParams();
         return AsyncProducers.RunProducer<ProcessedImage>(async produceImage =>
         {
             if (progress.IsCancellationRequested) return;
