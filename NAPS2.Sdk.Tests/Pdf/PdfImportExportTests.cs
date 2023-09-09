@@ -1,3 +1,4 @@
+using NAPS2.ImportExport;
 using NAPS2.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
@@ -203,5 +204,37 @@ public class PdfImportExportTests : ContextualTests
             PdfAsserts.AssertDoesNotContainText("ADVERTISEMENT.", _exportPath);
             PdfAsserts.AssertDoesNotContainText("Sized for printing unscaled", _exportPath);
         }
+    }
+
+    [Fact]
+    public async Task ImportJpegExportWithoutEncoding()
+    {
+        SetUpFileStorage();
+
+        var path = CopyResourceToFile(ImageResources.dog, "image.jpg");
+        var images = await new ImageImporter(ScanningContext).Import(path).ToListAsync();
+        Assert.Single(images);
+
+        await _exporter.Export(_exportPath, images);
+
+        var renderer = new PdfiumPdfRenderer();
+        var pdfImage = renderer.Render(ImageContext, _exportPath, PdfRenderSize.Default).Single();
+        ImageAsserts.Similar(ImageResources.dog, pdfImage, 0);
+    }
+
+    [Fact]
+    public async Task ImportExifJpegExportWithoutEncoding()
+    {
+        SetUpFileStorage();
+
+        var path = CopyResourceToFile(ImageResources.dog_exif, "image.jpg");
+        var images = await new ImageImporter(ScanningContext).Import(path).ToListAsync();
+        Assert.Single(images);
+
+        await _exporter.Export(_exportPath, images);
+
+        var renderer = new PdfiumPdfRenderer();
+        var pdfImage = renderer.Render(ImageContext, _exportPath, PdfRenderSize.Default).Single();
+        ImageAsserts.Similar(ImageResources.dog_exif, pdfImage, 0);
     }
 }
