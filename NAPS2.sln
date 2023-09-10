@@ -70,6 +70,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Escl.Usb", "NAPS2.Esc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Images.ImageSharp", "NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj", "{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Images.Wpf", "NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj", "{2D4916D4-AF84-45B0-B7EB-0C8379D99946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -572,7 +574,6 @@ Global
 		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Zip|Any CPU.ActiveCfg = Release|Any CPU
 		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Release-Zip|Any CPU.Build.0 = Release|Any CPU
 		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
-		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Tools|Any CPU.Build.0 = Debug|Any CPU
 		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Linux|Any CPU.ActiveCfg = Debug|Any CPU
 		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Linux|Any CPU.Build.0 = Debug|Any CPU
 		{33721E7A-6C67-497B-B21F-0A965A9B23B9}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
@@ -590,21 +591,38 @@ Global
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
-		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Tools|Any CPU.Build.0 = Debug|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Debug-Linux|Any CPU.ActiveCfg = Debug|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Debug-Linux|Any CPU.Build.0 = Debug|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Debug-Mac|Any CPU.ActiveCfg = Debug|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Debug-Mac|Any CPU.Build.0 = Debug|Any CPU
-		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Linux|Any CPU.ActiveCfg = Debug|Any CPU
-		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Linux|Any CPU.Build.0 = Debug|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Msi|Any CPU.ActiveCfg = Release|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Msi|Any CPU.Build.0 = Release|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Zip|Any CPU.ActiveCfg = Release|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Zip|Any CPU.Build.0 = Release|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Sdk|Any CPU.ActiveCfg = Release|Any CPU
 		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Sdk|Any CPU.Build.0 = Release|Any CPU
+		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Linux|Any CPU.ActiveCfg = Release|Any CPU
+		{497EAE6C-F0AC-49D7-A2E1-4C99D52811FE}.Release-Linux|Any CPU.Build.0 = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.DebugLang|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.DebugLang|Any CPU.Build.0 = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Debug-Linux|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Debug-Mac|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Release-Linux|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Release-Msi|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Release-Msi|Any CPU.Build.0 = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Release-Zip|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Release-Zip|Any CPU.Build.0 = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Sdk|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4916D4-AF84-45B0-B7EB-0C8379D99946}.Sdk|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

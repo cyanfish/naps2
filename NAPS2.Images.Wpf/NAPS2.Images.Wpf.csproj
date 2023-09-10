@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net462;net6-windows</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>NAPS2.Images.Wpf</RootNamespace>
+        <UseWpf>true</UseWpf>
+
+        <Title>NAPS2.Images.Wpf</Title>
+        <Product>NAPS2.Images.Wpf</Product>
+        <Description>Images based on WPF for NAPS2.Sdk.</Description>
+        <PackageTags>naps2</PackageTags>
+    </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>NAPS2.Sdk.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\ImageUsers.targets" />
+
+</Project>
