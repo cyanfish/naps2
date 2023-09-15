@@ -15,8 +15,10 @@ internal class WorkerContext : IDisposable
     private static readonly TimeSpan WorkerStopTimeout = TimeSpan.FromSeconds(60);
 
     private readonly ILogger _logger;
+    private bool _stopped;
 
-    internal WorkerContext(ScanningContext scanningContext, WorkerType workerType, WorkerServiceAdapter service, Process process)
+    internal WorkerContext(ScanningContext scanningContext, WorkerType workerType, WorkerServiceAdapter service,
+        Process process)
     {
         _logger = scanningContext.Logger;
         Type = workerType;
@@ -30,33 +32,50 @@ internal class WorkerContext : IDisposable
 
     public Process Process { get; }
 
+    public async Task Stop()
+    {
+        if (_stopped) return;
+        _stopped = true;
+
+        // Try to cleanly stop the worker
+        Task.Run(() =>
+        {
+            try
+            {
+                Service.StopWorker();
+            }
+            catch (RpcException e) when (e.Status.StatusCode == StatusCode.Unavailable)
+            {
+                // This can happen normally if the system is shutting down (and terminated the worker processes) so we
+                // don't log as an error.
+                _logger.LogDebug("Could not stop the worker process. It may have crashed.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error stopping worker");
+            }
+        }).AssertNoAwait();
+
+        // Wait for either the worker process to close or for our timeout
+        await Task.WhenAny(Process.WaitForExitAsync(), Task.Delay(WorkerStopTimeout)).ConfigureAwait(false);
+
+        // If the worker process still hasn't closed we kill it now
+        if (!Process.HasExited)
+        {
+            _logger.LogError("Killing unresponsive worker");
+            try
+            {
+                Process.Kill();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error killing unresponsive worker");
+            }
+        }
+    }
+
     public void Dispose()
     {
-        try
-        {
-            Service.StopWorker();
-            Task.Delay(WorkerStopTimeout).ContinueWith(t =>
-            {
-                try
-                {
-                    if (!Process.HasExited)
-                    {
-                        Process.Kill();
-                    }
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error killing worker");
-                }
-            });
-        }
-        catch (RpcException e) when (e.Status.StatusCode == StatusCode.Unavailable)
-        {
-            _logger.LogError("Could not stop the worker process. It may have crashed.");
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e, "Error stopping worker");
-        }
+        Stop().AssertNoAwait();
     }
 }

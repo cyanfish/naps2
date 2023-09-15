@@ -150,7 +150,7 @@ internal class WorkerServiceAdapter
 
     public void StopWorker()
     {
-        _client.StopWorkerAsync(new StopWorkerRequest());
+        _client.StopWorker(new StopWorkerRequest());
     }
 
     public async Task TwainScan(ScanOptions options, CancellationToken cancelToken, ITwainEvents twainEvents)

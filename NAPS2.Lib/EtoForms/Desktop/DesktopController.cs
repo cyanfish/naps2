@@ -169,7 +169,7 @@ public class DesktopController
         }
         _closed = true;
         _thumbnailController.Dispose();
-        _scanningContext.WorkerFactory!.Dispose();
+        _scanningContext.WorkerFactory!.StopSpareWorkers();
     }
 
     public bool PrepareForClosing(bool userClosing)

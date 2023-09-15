@@ -12,6 +12,7 @@ namespace NAPS2.Remoting.Worker;
 internal class WorkerFactory : IWorkerFactory
 {
     public const string PIPE_NAME_FORMAT = "NAPS2.Worker.{0}";
+    private const int PIPE_CONNECTION_TIMEOUT = 10_000;
     private const int TAKE_WORKER_TIMEOUT = 10_000;
     private readonly Dictionary<string, string> _environmentVariables;
 
@@ -137,7 +138,11 @@ internal class WorkerFactory : IWorkerFactory
             try
             {
                 var proc = StartWorkerProcess(workerType);
-                var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id));
+                var options = new NamedPipeChannelOptions
+                {
+                    ConnectionTimeout = PIPE_CONNECTION_TIMEOUT
+                };
+                var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id), options);
                 _workerQueues![workerType]
                     .Add(new WorkerContext(scanningContext, workerType, new WorkerServiceAdapter(channel), proc));
             }
@@ -203,15 +208,17 @@ internal class WorkerFactory : IWorkerFactory
         return worker;
     }
 
-    public void Dispose()
+    public void StopSpareWorkers()
     {
         if (_workerQueues == null) return;
+        var stopTasks = new List<Task>();
         foreach (var queue in _workerQueues.Values)
         {
             while (queue.TryTake(out var worker))
             {
-                worker.Dispose();
+                stopTasks.Add(worker.Stop());
             }
         }
+        Task.WhenAll(stopTasks).Wait();
     }
 }
