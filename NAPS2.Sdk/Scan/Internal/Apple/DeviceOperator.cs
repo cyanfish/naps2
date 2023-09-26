@@ -137,6 +137,11 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                     (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgbn),
                     _ => (ImagePixelFormat.Unsupported, null)
                 };
+                _logger.LogDebug(
+                    "Image data: width {Width}, height {Height}, type {Type}, comp {Comp}, " +
+                    "bits/comp {BitsPerComp}, bits/pixel {BitsPerPixel}, bytes/row {BytesPerRow}, data len {DataLen}",
+                    data.FullImageWidth, data.FullImageHeight, data.PixelDataType, data.NumComponents,
+                    data.BitsPerComponent, data.BitsPerPixel, data.BytesPerRow, fullBuffer.Length);
                 if (data.ColorSyncProfilePath != null)
                 {
                     _logger.LogDebug($"Flushing image with color sync profile {data.ColorSyncProfilePath}");
