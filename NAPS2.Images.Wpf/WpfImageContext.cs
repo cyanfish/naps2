@@ -16,6 +16,8 @@ public class WpfImageContext : ImageContext
 
     protected override bool SupportsTiff => true;
 
+    public override ITiffWriter TiffWriter => new WpfTiffWriter();
+
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
         var wpfImage = image as WpfImage ?? throw new ArgumentException("Expected WpfImage object");
