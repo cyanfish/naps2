@@ -21,10 +21,9 @@ public class EtoDialogHelper : DialogHelper
         {
             lastExt = "pdf";
         }
-        var defaultFileName = _addExt ? $".{lastExt}" : null;
         var sd = new SaveFileDialog
         {
-            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : defaultFileName
+            FileName = GetDefaultFileName(defaultPath, lastExt)
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt);
         SetDir(sd, defaultPath);
@@ -40,10 +39,9 @@ public class EtoDialogHelper : DialogHelper
 
     public override bool PromptToSavePdf(string? defaultPath, out string? savePath)
     {
-        var defaultFileName = _addExt ? $".pdf" : null;
         var sd = new SaveFileDialog
         {
-            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : defaultFileName
+            FileName = GetDefaultFileName(defaultPath, "pdf")
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
@@ -63,10 +61,9 @@ public class EtoDialogHelper : DialogHelper
         {
             lastExt = "jpg";
         }
-        var defaultFileName = _addExt ? $".{lastExt}" : null;
         var sd = new SaveFileDialog
         {
-            FileName = Path.IsPathRooted(defaultPath) ? Path.GetFileName(defaultPath) : defaultFileName
+            FileName = GetDefaultFileName(defaultPath, lastExt)
         };
         var filterGroups = EtoPlatform.Current.IsGtk
             ? FileFilterGroup.AllImages | FileFilterGroup.Image
@@ -81,6 +78,15 @@ public class EtoDialogHelper : DialogHelper
         }
         savePath = null;
         return false;
+    }
+
+    private string? GetDefaultFileName(string? defaultPath, string ext)
+    {
+        if (string.IsNullOrEmpty(defaultPath))
+        {
+            return _addExt ? $".{ext}" : null;
+        }
+        return defaultPath;
     }
 
     private void SetDir(SaveFileDialog dialog, string? defaultPath)
