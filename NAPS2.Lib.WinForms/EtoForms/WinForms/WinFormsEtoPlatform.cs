@@ -217,12 +217,6 @@ public class WinFormsEtoPlatform : EtoPlatform
         wfButton.FlatStyle = wf.FlatStyle.Flat;
     }
 
-    public override void SetClipboardImage(Clipboard clipboard, Bitmap image)
-    {
-        var dataObj = (wf.DataObject) clipboard.ControlObject;
-        dataObj.SetImage(image.ToSD());
-    }
-
     public override void ConfigureDropDown(DropDown dropDown)
     {
         ((wf.ComboBox) dropDown.ControlObject).DrawMode = wf.DrawMode.Normal;
