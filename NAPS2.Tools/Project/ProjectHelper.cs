@@ -47,6 +47,7 @@ public static class ProjectHelper
     {
         "NAPS2.Sdk",
         "NAPS2.Sdk.Worker.Win32",
+        "NAPS2.Escl",
         "NAPS2.Internals",
         "NAPS2.Images",
         "NAPS2.Images.Gdi",

@@ -6,7 +6,14 @@
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
         <EnablePreviewFeatures>true</EnablePreviewFeatures>
+
+        <Title>NAPS2.Escl</Title>
+        <Product>NAPS2.Escl</Product>
+        <Description>ESCL client for NAPS2.Sdk.</Description>
+        <PackageTags>naps2 escl</PackageTags>
     </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
 
     <ItemGroup>
         <PackageReference Include="Makaretu.Dns.Multicast" Version="0.27.0" />
