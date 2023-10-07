@@ -6,6 +6,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>NAPS2.Images.Wpf</RootNamespace>
         <UseWpf>true</UseWpf>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
 
         <Title>NAPS2.Images.Wpf</Title>
         <Product>NAPS2.Images.Wpf</Product>
