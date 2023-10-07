@@ -235,6 +235,6 @@ public class PdfImportExportTests : ContextualTests
 
         var renderer = new PdfiumPdfRenderer();
         var pdfImage = renderer.Render(ImageContext, _exportPath, PdfRenderSize.Default).Single();
-        ImageAsserts.Similar(ImageResources.dog_exif, pdfImage, 0);
+        ImageAsserts.Similar(ImageResources.dog_exif, pdfImage, 0, ignoreResolution: true);
     }
 }

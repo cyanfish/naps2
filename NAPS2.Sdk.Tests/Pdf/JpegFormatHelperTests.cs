@@ -21,7 +21,7 @@ public class JpegFormatHelperTests
     [Fact]
     public void JfifGrey()
     {
-        var header = JpegFormatHelper.ReadHeader(new MemoryStream(ImageResources.dog_gray));
+        var header = JpegFormatHelper.ReadHeader(new MemoryStream(ImageResources.dog_gray_8bit));
         Assert.NotNull(header);
         Assert.Equal(788, header.Width);
         Assert.Equal(525, header.Height);

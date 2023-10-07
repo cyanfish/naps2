@@ -317,8 +317,8 @@ public class LoadSaveTests : ContextualTests
         },
         new object[]
         {
-            ImageFileFormat.Jpeg, ".jpg", "dog_gray",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
+            ImageFileFormat.Jpeg, ".jpg", "dog_gray_8bit",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true // Gtk fails to load resolution
         },
         new object[]
         {
