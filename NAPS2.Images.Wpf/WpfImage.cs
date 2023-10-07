@@ -6,6 +6,8 @@ namespace NAPS2.Images.Wpf;
 
 public class WpfImage : IMemoryImage
 {
+    private bool _disposed;
+
     public WpfImage(ImageContext imageContext, WriteableBitmap bitmap)
     {
         if (imageContext is not WpfImageContext) throw new ArgumentException("Expected WpfImageContext");
@@ -55,6 +57,7 @@ public class WpfImage : IMemoryImage
 
     public unsafe ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
+        if (_disposed) throw new InvalidOperationException();
         var subPixelType = GetSubPixelType();
         if (lockMode == LockMode.ReadOnly)
         {
@@ -121,6 +124,7 @@ public class WpfImage : IMemoryImage
     public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified,
         ImageSaveOptions? options = null)
     {
+        if (_disposed) throw new InvalidOperationException();
         if (imageFormat == ImageFileFormat.Unspecified)
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
@@ -137,6 +141,7 @@ public class WpfImage : IMemoryImage
 
     public void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null)
     {
+        if (_disposed) throw new InvalidOperationException();
         if (imageFormat == ImageFileFormat.Unspecified)
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
@@ -166,14 +171,19 @@ public class WpfImage : IMemoryImage
         return encoder;
     }
 
-    public IMemoryImage Clone() => new WpfImage(ImageContext, Bitmap.Clone())
+    public IMemoryImage Clone()
     {
-        OriginalFileFormat = OriginalFileFormat,
-        LogicalPixelFormat = LogicalPixelFormat
-    };
+        if (_disposed) throw new InvalidOperationException();
+        return new WpfImage(ImageContext, Bitmap.Clone())
+        {
+            OriginalFileFormat = OriginalFileFormat,
+            LogicalPixelFormat = LogicalPixelFormat
+        };
+    }
 
     public void Dispose()
     {
+        _disposed = true;
         LeakTracer.StopTracking(this);
     }
 }
