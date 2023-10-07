@@ -44,6 +44,14 @@ public class GtkEtoPlatform : EtoPlatform
         return new Bitmap(new BitmapHandler(pixbuf));
     }
 
+    public override void SetClipboardImage(Clipboard clipboard, Bitmap image)
+    {
+        // Without cloning the image, Gtk gives errors on paste.
+        // Presumably it assumes the application will keep the Pixbuf around
+        // (while on Windows/Mac we can just dispose right away).
+        base.SetClipboardImage(clipboard, image.Clone());
+    }
+
     public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
     {
         // TODO
