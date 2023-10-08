@@ -50,9 +50,9 @@ Name: "French";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6
 Name: "German";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\German.isl";
 Name: "Greek";                MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Greek.isl";
 Name: "Hebrew";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Hebrew.isl";
-; Name: "Hindi";                MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Hindi.isl";
+Name: "Hindi";                MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Hindi.isl";
 Name: "Hungarian";            MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Hungarian.isl";
-; Name: "Indonesian";           MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Indonesian.isl";
+Name: "Indonesian";           MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Indonesian.isl";
 Name: "Italian";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Italian.isl";
 Name: "Japanese";             MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Japanese.isl";
 Name: "Korean";               MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Korean.isl";
@@ -71,7 +71,7 @@ Name: "Slovak";               MessagesFile: "C:\Program Files (x86)\Inno Setup 6
 Name: "Slovenian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Slovenian.isl"; 
 Name: "Spanish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Spanish.isl";
 Name: "Swedish";              MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Swedish.isl";
-; Name: "Thai";                 MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Thai.isl";
+Name: "Thai";                 MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Thai.isl";
 Name: "Turkish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Turkish.isl"; 
 Name: "Ukrainian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Ukrainian.isl";
 ; Name: "Urdu";                 MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Urdu.isl";
