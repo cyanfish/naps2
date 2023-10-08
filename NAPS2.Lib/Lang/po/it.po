@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 19:09\n"
+"PO-Revision-Date: 2023-10-08 18:01\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "Colore a 24-bit"
+msgstr "Colore a 24bit"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -38,7 +38,7 @@ msgstr "A5 (148x210 mm)"
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr "Informazioni"
+msgstr "Info sul programma"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
@@ -50,7 +50,7 @@ msgstr "Avanzate"
 
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
-msgstr "Impostazioni avanzate di profilo"
+msgstr "Impostazioni profilo avanzate"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -66,11 +66,11 @@ msgstr "Consenti annotazioni"
 
 #: UiStrings.resx$AllowContentCopying$Message
 msgid "Allow Content Copying"
-msgstr "Consenti la copia dei contenuti"
+msgstr "Consenti copia contenuti"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "Consenti la copia dei contenuti per accessibilità"
+msgstr "Consenti copia contenuti per accessibilità"
 
 #: UiStrings.resx$AllowDocumentAssembly$Message
 msgid "Allow Document Assembly"
@@ -86,7 +86,7 @@ msgstr "Consenti compilazione modulo"
 
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
-msgstr "Consenti stampa di alta qualità"
+msgstr "Consenti stampa in alta qualità"
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -102,7 +102,8 @@ msgstr "Interleave alternativo"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi scaricarlo ora?"
+msgstr "Per importare questo file PDF è necessario un componente aggiuntivo. \n"
+"Vuoi scaricarlo ora?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -135,7 +136,7 @@ msgstr "Si è verificato un errore durante l'invio di una email."
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "Errore del driver di scansione."
+msgstr "Si è verificato un errore con il driver di scansione."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
@@ -171,7 +172,7 @@ msgstr "Applica a tutte le {0} immagini selezionate"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "Sei sicuro di voler annullare la scansione in serie?"
+msgstr "Vuoi annullare la scansione in serie?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -179,7 +180,7 @@ msgstr "Vuoi cancellare il(i) {0} oggetto(i)?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "Sicuro di voler eliminare \"{0}\"?"
+msgstr "Vuoi eliminare \"{0}\"?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -187,15 +188,15 @@ msgstr "Vuoi eliminare il profilo {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Vuoi eliminare {0} oggetto(i)?"
+msgstr "Vuoi eliminare {0} elemento/i?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Vuoi eliminare {0} profilo(i)?"
+msgstr "Vuoi eliminare {0} profilo/i?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Sicuro di voler annullare i cambiamenti a {0} immagine(i)?"
+msgstr "Vuoi annullare le modifiche a {0} immagine/i?"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -216,27 +217,27 @@ msgstr "Automatico"
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr "Salva impostazioni automaticamente"
+msgstr "Salva automaticamente impostazioni"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr "Numero incrementato automaticamente (1 cifra)"
+msgstr "Incremento automatico numero (1 cifra)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "Autoincrementa numero (2 cifre)"
+msgstr "Incremento automatico numero (2 cifre)"
 
 #: UiStrings.resx$AutoIncrementing3Digit$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "Autoincrementa numero (3 cifre)"
+msgstr "Incremento automatico numero (3 cifre)"
 
 #: UiStrings.resx$AutoIncrementing4Digit$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "Autoincrementa numero (4 cifre)"
+msgstr "Incremento automatico numero (4 cifre)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "Avvia automaticamente l'OCR dopo la scansione"
+msgstr "Dopo la scansione avvia automaticamente l'OCR"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -257,7 +258,7 @@ msgstr "Scansione in serie annullata."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "Serie completata."
+msgstr "Scansione in serie completata."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
@@ -315,7 +316,7 @@ msgstr "Centra"
 
 #: UiStrings.resx$Change$Message
 msgid "Change"
-msgstr "Cambia"
+msgstr "Modifica"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
@@ -327,7 +328,7 @@ msgstr "Verifica in corso..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr "Scegli un provider email"
+msgstr "Scegli provider email"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -340,11 +341,11 @@ msgstr "Scegli dispositivo"
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
 msgid "Clear"
-msgstr "Cancella"
+msgstr "Azzera"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr "Cancella tutto"
+msgstr "Azzera tutto"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -372,19 +373,19 @@ msgstr "Copia"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr "Progresso della copia"
+msgstr "Progresso copia"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
-msgstr "Copia in corso..."
+msgstr "Copia..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr "Copyright {0} NAPS2 Contributors"
+msgstr "Copyright {0} contrubitori NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
-msgstr "Soglia di copertura"
+msgstr "Soglia copertura"
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
@@ -392,7 +393,7 @@ msgstr "Ritaglia"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr "Ritaglia alla dimensione della pagina"
+msgstr "Ritaglia alla dimensione pagina"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -468,7 +469,7 @@ msgstr "Nome visualizzato:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr "Correzione del documento"
+msgstr "Correzione documento"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
@@ -485,7 +486,7 @@ msgstr "Scarica"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "Errore durante lo scaricamento"
+msgstr "Errore download"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
@@ -493,11 +494,11 @@ msgstr "Scaricamento necessario"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr "Avanzamento download"
+msgstr "Progresso download"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "Fronte/Retro"
+msgstr "Fronte/retro"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
@@ -517,7 +518,7 @@ msgstr "Modifica"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr "Invia e-mail a tutti"
+msgstr "Invia email a tutti"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
@@ -526,7 +527,7 @@ msgstr "Invia e-mail a tutti come PDF"
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "Invia PDF via e-mail"
+msgstr "Invia PDF via email"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
@@ -534,11 +535,11 @@ msgstr "Progresso invio PDF via email"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr "Invia selezionati via e-mail"
+msgstr "Invia selezionati via email"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr "Invia selezionati via e-mail come PDF"
+msgstr "Invia selezionati via email come PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -551,7 +552,7 @@ msgstr "Abilita salvataggio automatico"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr "Abilita la registrazione dei log di debug"
+msgstr "Abilita registrazione registri debug"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -573,7 +574,7 @@ msgstr "Errore"
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Dimensione stimata del download: {0} MB"
+msgstr "Dimensione stimata download: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -581,7 +582,7 @@ msgstr "Exchangeable Image File (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr "Esclude pagine vuote"
+msgstr "Escludi pagine vuote"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
@@ -589,7 +590,7 @@ msgstr "Veloce"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Caricatore"
+msgstr "Alimentatore automatico"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
@@ -597,7 +598,7 @@ msgstr "Nome file"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
-msgstr "Percorso del file:"
+msgstr "Percorso file:"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -605,11 +606,11 @@ msgstr "Capovolgi"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr "Capovolgi pagine fronte-retro"
+msgstr "Capovolgi pagine fronte retro"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr "Per ottenere i migliori risultati con JPEG di qualità elevata (80+), aumenta anche il valore di Qualità Immagine nel tuo profilo."
+msgstr "Per ottenere i migliori risultati con JPEG di qualità elevata (80+), aumenta nel profilo il valore 'Qualità Immagine'."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -621,7 +622,7 @@ msgstr "Installa altre lingue"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "Piano"
+msgstr "Piano fisso"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
@@ -645,7 +646,7 @@ msgstr "Tonalità/saturazione"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr "Trova icone su:"
+msgstr "Libreria icone:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
@@ -686,7 +687,7 @@ msgstr "Importazione..."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr "Installazione {0}"
+msgstr "Installazione di {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -698,7 +699,8 @@ msgstr "Installazione fallita"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Installazione completata. Vuoi riavviare NAPS2 ora?"
+msgstr "Installazione completata. \n"
+"Vuoi riavviare NAPS2?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
@@ -746,7 +748,7 @@ msgstr "Carica immagini in NAPS2"
 
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Rendi i PDF ricercabili usando l'OCR"
+msgstr "Rendi PDF ricercabili usando l'OCR"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -782,11 +784,11 @@ msgstr "Sposta su"
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "Scansioni multiple (ritardo fisso per ognuna)"
+msgstr "Scansioni multiple (ritardo fisso tra le scansioni)"
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "Scansioni multiple (richiesta tra ognuna)"
+msgstr "Scansioni multiple (richiesta dopo ogni scansione)"
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
@@ -800,7 +802,8 @@ msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 è totalmente gratuito. Considera la possibilità di fare una donazione."
+msgstr "NAPS2 è totalmente gratuito. \n"
+"Considera la possibilità di fare una donazione."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -828,7 +831,7 @@ msgstr "Prossimo"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
-msgstr "Prossima scansione"
+msgstr "Scansione successiva"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
@@ -838,7 +841,7 @@ msgstr "Nessun dispositivo selezionato."
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder."
-msgstr "Non ci sono fogli nel caricatore."
+msgstr "Non ci sono fogli nell'alimentatore automatico."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
@@ -851,7 +854,8 @@ msgstr "Nessuno scanner trovato."
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr "Nessun aggiornamento disponibile."
+msgstr "Il programma è aggiornato.\n"
+"Nessun aggiornamento disponibile."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -867,7 +871,7 @@ msgstr "Non ora"
 
 #: UiStrings.resx$NumberOfScansLabel$Message
 msgid "Number of scans:"
-msgstr "Numero di scansioni:"
+msgstr "Numero scansioni:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
@@ -875,11 +879,11 @@ msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
-msgstr "Scarica OCR"
+msgstr "Download OCR"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr "OCR in corso"
+msgstr "Progresso OCR"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
@@ -899,7 +903,7 @@ msgstr "OK"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr "Bilanciamento larghezza in base ad allineamento (WIA)"
+msgstr "Offset larghezza in base ad allineamento (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
@@ -927,11 +931,11 @@ msgstr "Operazione in corso"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr "Accesso Web di Outlook"
+msgstr "Accesso web Outlook"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
-msgstr "Output"
+msgstr "Destinazione"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -939,7 +943,7 @@ msgstr "Sovrascrivi file"
 
 #: UiStrings.resx$OwnerPasswordLabel$Message
 msgid "Owner Password:"
-msgstr "Password del proprietario:"
+msgstr "Password proprietario:"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
@@ -1001,7 +1005,7 @@ msgstr "Post-processo"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
-msgstr "Premere avvia quando pronti."
+msgstr "Seleziona 'Avvia' quando pronto."
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
@@ -1013,7 +1017,7 @@ msgstr "Anteprima:"
 
 #: UiStrings.resx$Previous$Message
 msgid "Previous"
-msgstr "Precedente"
+msgstr "Indietro"
 
 #: MiscResources.resx$Print$Message
 #: UiStrings.resx$Print$Message
@@ -1035,7 +1039,7 @@ msgstr "Profili"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr "Richiesta del percorso file"
+msgstr "Richiesta percorso file"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
@@ -1059,7 +1063,7 @@ msgstr "Ripristino..."
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr "Progresso del ripristino"
+msgstr "Progresso ripristino"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1071,11 +1075,11 @@ msgstr "Riordina"
 
 #: UiStrings.resx$Reset$Message
 msgid "Reset"
-msgstr "Azzera"
+msgstr "Ripristina"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "Resetta Immagine"
+msgstr "Ripristina immagine"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1123,7 +1127,7 @@ msgstr "Esegui in background"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr "OCR in esecuzione..."
+msgstr "Eseuzione OCR..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
@@ -1152,7 +1156,7 @@ msgstr "Salva immagini"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "Progresso del salvataggio immagini"
+msgstr "Progresso salvataggio immagini"
 
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
@@ -1161,7 +1165,7 @@ msgstr "Salva PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "Progresso del salvataggio PDF"
+msgstr "Progresso salvataggio PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
@@ -1185,7 +1189,7 @@ msgstr "Salva in file multipli"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr "Salvataggio risultati della serie..."
+msgstr "Salvataggio risultati operazioni in serie..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
@@ -1206,7 +1210,7 @@ msgstr "Scansiona"
 
 #: UiStrings.resx$ScanConfig$Message
 msgid "Scan Configuration"
-msgstr "Configurazione della scansione"
+msgstr "Configurazione scansione"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1214,7 +1218,7 @@ msgstr "Immagine scansionata"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
-msgstr "Digitalizzazione pagina {0}"
+msgstr "Scansione pagina {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
@@ -1223,7 +1227,7 @@ msgstr "Scansione pagina {0} (scansione {1})..."
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}..."
-msgstr "Digitalizzazione pagina {0}..."
+msgstr "Scansione pagina {0}..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1243,7 +1247,7 @@ msgstr "Seleziona sorgente"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
-msgstr "Seleziona profilo prima di scansionare."
+msgstr "Seleziona profilo prima della scansione."
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
@@ -1267,7 +1271,7 @@ msgstr "Nitidezza"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
-msgstr "Mostra"
+msgstr "Visualizza"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1279,7 +1283,7 @@ msgstr "Scansione singola"
 
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
-msgstr "Salta richiesta di salvataggio"
+msgstr "Salta richiesta salvataggio"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1308,7 +1312,8 @@ msgstr "Dettagli tecnici"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "Il motore OCR non è disponibile. Assicurati di aver installato il pacchetto richiesto:"
+msgstr "Il motore OCR non è disponibile. \n"
+"Assicurati di aver installato il pacchetto richiesto:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
@@ -1317,7 +1322,8 @@ msgstr "Tempo scaduto per l'operazione OCR."
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "Il driver SANE non è disponibile. Assicurati di aver installato il pacchetto richiesto:"
+msgstr "Il driver SANE non è disponibile. \n"
+"Assicurati di aver installato il pacchetto richiesto:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
@@ -1334,7 +1340,8 @@ msgstr "Il file non può essere sovrascritto perché è attualmente in uso."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Il file {0} esiste già. Vuoi sovrascriverlo?"
+msgstr "Il file {0} esiste già. \n"
+"Vuoi sovrascriverlo?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
@@ -1368,12 +1375,14 @@ msgstr "Lo scanner selezionato non è stato trovato."
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
-msgstr "Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova a usare un driver differente."
+msgstr "Lo scanner selezionato non supporta l'uso di un alimentatore automatico. \n"
+"Se lo scanner ha un alimentatore automatico, prova ad usare un driver differente."
 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner ha un supporto duplex, prova a usare un driver differente."
+msgstr "Lo scanner selezionato non supporta la scansione in fronte retro. \n"
+"Se lo scanner supporta la scansione in fronte retro, prova ad usare un driver differente."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
@@ -1423,7 +1432,7 @@ msgstr "Modifiche non salvate"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr "Avanzamento dell'aggiornamento"
+msgstr "Progresso aggiornamento"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
@@ -1451,7 +1460,7 @@ msgstr "Password utente:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
-msgstr "L'uso dell'OCR richiede che venga scaricata ogni lingua che vuoi far riconoscere."
+msgstr "L'uso dell'OCR richiede che venga scaricata ogni lingua che si vuoie far riconoscere."
 
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
@@ -1505,11 +1514,12 @@ msgstr "Non hai i permessi per salvare i file in questo percorso."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
-msgstr "Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?"
+msgstr "Ci sono modifiche non salvate. \n"
+"Sei sicuro di voler uscire e abbandonare tali modifiche?"
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
-msgstr "Ingrandisci"
+msgstr "Zoom"
 
 #: UiStrings.resx$ZoomActual$Message
 msgid "Zoom Actual"
@@ -1517,11 +1527,11 @@ msgstr "Zoom attuale"
 
 #: UiStrings.resx$ZoomIn$Message
 msgid "Zoom In"
-msgstr "Aumenta zoom"
+msgstr "Zoom +"
 
 #: UiStrings.resx$ZoomOut$Message
 msgid "Zoom Out"
-msgstr "Riduci zoom"
+msgstr "Zoom -"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
@@ -1565,7 +1575,8 @@ msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "{0} immagine(i) digitalizzata(e) su {1} a {2} potrebbero non essere state salvate e sono recuperabili. Vuoi recuperarle?"
+msgstr "{0} immagine/i digitalizzata/e in {1} a {2} potrebbero non essere state salvate e sono recuperabili. \n"
+"Vuoi recuperarle?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

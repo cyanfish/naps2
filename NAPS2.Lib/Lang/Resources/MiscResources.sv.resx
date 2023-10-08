@@ -379,7 +379,7 @@
     <value>En uppdatering är tillgänglig.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Ett fel uppstod vid försök att auktorisera.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Laddar upp e-post...</value>

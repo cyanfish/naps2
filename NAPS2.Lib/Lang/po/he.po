@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-10-08 18:01\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -25,24 +25,24 @@ msgstr "צבע 24 סיביות"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr "A3 (297x240 מ\"מ)"
+msgstr "A3 (297x240 מ״מ)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4 (210x297 מ\"מ)"
+msgstr "A4 (210x297 מ״מ)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5 (148x210 מ\"מ)"
+msgstr "A5 (148x210 מ״מ)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr "אודות"
+msgstr "על אודות"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr "מייבא נתונים..."
+msgstr "נתונים מתקבלים…"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -106,15 +106,15 @@ msgstr "נדרש רכיב נוסף כדי לייבא קובץ PDF זה. האם �
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "אירעה שגיאה בהרצת זיהוי תווים אופטי."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr ""
+msgstr "אירעה שגיאה בניסיון לאימות."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
-msgstr "אירעה שגיאה בעת שמירת אוטומטי."
+msgstr "אירעה שגיאה בעת שמירה אוטומטית."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
@@ -126,7 +126,7 @@ msgstr "תקלה בשמירת הקובץ."
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr "שגיאה התרחשה בעת הנסיון לשלוח מייל.."
+msgstr "שגיאה התרחשה בעת הנסיון לשלוח דוא״ל."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
@@ -139,11 +139,11 @@ msgstr "אירעה שגיאה במנהל ההתקן של הסורק."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "פעולה מתבצעת. האם אתה בטוח שברצונך לצאת ולבטל את הפעולה?"
+msgstr "פעולה מתבצעת. לצאת ולבטל את הפעולה?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "אירעה שגיאה בלתי־ידועה במהלך הסריקה במרוכז."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -151,51 +151,51 @@ msgstr "קיים עדכון זמין."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "עדכון ל- OCR זמין."
+msgstr "יש עדכון לזיהוי התווים האופטי."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "מנהל התקן של Apple"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "דוא״ל Apple"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "החל בהירות/ניגודיות לאחר הסריקה"
+msgstr "החלת בהירות/ניגודיות לאחר הסריקה"
 
 #: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
-msgstr "החל על כל {0} התמונות שנבחרו"
+msgstr "החלה על כל {0} התמונות שנבחרו"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "האם אתה בטוח שאתה רוצה לבטל את קבוצות הסריקות? "
+msgstr "לבטל את קבוצות הסריקות? "
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "בטוחים שתרצו למחוק {0} פריט/ים?"
+msgstr "לפנות {0} פריט/ים?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "בטוחים שתרצו למחוק \"{0}\"?"
+msgstr "למחוק את „{0}”?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "בטוחים שתרצו למחוק את הפרופיל {0}?"
+msgstr "למחוק את הפרופיל {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "בטוחים שתרצו למחוק {0} פריט/ים?"
+msgstr "למחוק {0} פריט/ים?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "בטוחים שתרצו למחוק את הפרופיל/ים {0}?"
+msgstr "למחוק {0} פרופיל/ים?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "לבטל שינויים ב-{0} תמונה/תמונות?"
+msgstr "להחזיר את השינויים שביצעת ב־{0} תמונות?"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -207,7 +207,7 @@ msgstr "מאת:"
 
 #: UiStrings.resx$AuthorizeFormTitle$Message
 msgid "Authorize"
-msgstr ""
+msgstr "אימות"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
@@ -220,52 +220,52 @@ msgstr "הגדרות שמירה אוטומטית"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "מס׳ מונה אוטומטי (ספרה אחת)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "מס' מונה אוטומטי (שתי ספרות)"
+msgstr "מס׳ מונה אוטומטי (שתי ספרות)"
 
 #: UiStrings.resx$AutoIncrementing3Digit$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "מס' מונה אוטומטי (שלוש ספרות)"
+msgstr "מס׳ מונה אוטומטי (שלוש ספרות)"
 
 #: UiStrings.resx$AutoIncrementing4Digit$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "מס' מונה אוטומטי (ארבע ספרות)"
+msgstr "מס׳ מונה אוטומטי (ארבע ספרות)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "הרץ OCR בצורת אוטומטית בסוף הסריקה"
+msgstr "הרצת זיהוי תווים אופטי אוטומטית בסוף הסריקה"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250x353 מ\"מ)"
+msgstr "B4 (250x353 מ״מ)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr "B5 (176x250 מ\"מ)"
+msgstr "B5 (176x250 מ״מ)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
-msgstr "סריקה באצווה"
+msgstr "סריקה במרוכז"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled."
-msgstr "האצווה בוטלה."
+msgstr "הסריקה במרוכז בוטלה."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "אצווה הושלמה בהצלחה."
+msgstr "סריקה במרוכז הושלמה בהצלחה."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "סריקה אצווה נעצרה עקב שגיאה."
+msgstr "סריקה במרוכז נעצרה עקב שגיאה."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "מיטבי"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -273,7 +273,7 @@ msgstr "עומק סיביות:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "קובץ מפת סיביות (*.bmp)"
+msgstr "קובץ מפת סיביות (‎*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
@@ -286,7 +286,7 @@ msgstr "דפים ריקים"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "בהירות / ניגודיות"
 
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
@@ -294,7 +294,7 @@ msgstr "בהירות:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -303,11 +303,11 @@ msgstr "ביטול"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "ביטול סריקה במרוכז"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr ""
+msgstr "בהליכי ביטול…"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -315,44 +315,44 @@ msgstr "ממורכז"
 
 #: UiStrings.resx$Change$Message
 msgid "Change"
-msgstr ""
+msgstr "שינוי"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr "בדוק עדכונים"
+msgstr "איתור עדכונים"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr ""
+msgstr "מתבצעת בדיקה…"
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "נא לבחור ספק דוא״ל"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr "בחר פרופיל"
+msgstr "בחירת פרופיל"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr "בחר התקן"
+msgstr "בחירת התקן"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
 msgid "Clear"
-msgstr "מחק הכל"
+msgstr "פינוי"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "לפנות הכול"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
-msgstr "נקה תמונות לאחר שמירה"
+msgstr "פינוי תמונות לאחר שמירה"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "סגירה"
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -380,7 +380,7 @@ msgstr "העתקה..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "כל הזכויות שמורות {0} לתורמים של לא עוד סתם סורק 2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -392,7 +392,7 @@ msgstr "חיתוך"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr "חתוך לגודל הדף"
+msgstr "חיתוך לגודל הדף"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -408,11 +408,11 @@ msgstr "סיבוב מותאם אישית"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "SMTP בהתאמה אישית"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom..."
-msgstr "מותאם אישית..."
+msgstr "התאמה אישית…"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -431,7 +431,7 @@ msgstr "שם קובץ ברירת מחדל:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr "בטל הפרדה"
+msgstr "ביטול הפרדה"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
@@ -440,19 +440,19 @@ msgstr "מחיקה"
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
-msgstr ""
+msgstr "תיקון הטייה"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "התקדמות תיקון הטייה"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "תיקון הטיית דפים שנסרקו"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr ""
+msgstr "ההטייה מתוקנת…"
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
@@ -460,7 +460,7 @@ msgstr "התקן:"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "ממדים"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -468,12 +468,12 @@ msgstr "שם תצוגה:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "תיקון מסמך"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr "תרום"
+msgstr "תרומה"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -485,11 +485,11 @@ msgstr "הורדה"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "תקלה בהורדה"
+msgstr "שגיאה בהורדה"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "נדרשת הורדה"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
@@ -497,19 +497,19 @@ msgstr "התקדמות ההורדה"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr "דופלקס (דו-צדדי)"
+msgstr "דופלקס (דו־צדדי)"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "מנהל התקן ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "מנהל התקן רשת מסוג ESCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "מנהל התקן USB מסוג ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -517,45 +517,45 @@ msgstr "עריכה"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "שליחה של הכול בדוא״ל"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "שליחה של הכול כ־PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "שליחת PDF בדוא\"ל"
+msgstr "שליחת PDF בדוא״ל"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr ""
+msgstr "התקדמות שליחת PDF בדוא״ל"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "שליחת הנבחרים בדוא״ל"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "שליחת הנבחרים כ־PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
-msgstr "הגדרות דוא\"ל"
+msgstr "הגדרות דוא״ל"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
-msgstr "הפעל שמירה אוטומטית"
+msgstr "הפעלת שמירה אוטומטית"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "הפעלת תיעוד ניפוי שגיאות"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
-msgstr "הצפן PDF"
+msgstr "הצפנת PDF"
 
 #: UiStrings.resx$Encryption$Message
 msgid "Encryption"
@@ -563,7 +563,7 @@ msgstr "הצפנה"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "קובצי מטא מורחבים (‎*.emf)"
+msgstr "קובצי על מורחבים (‎*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
@@ -573,19 +573,19 @@ msgstr "שגיאה"
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
-msgstr "גודל מוערך להורדה: {0} מ\"ב"
+msgstr "גודל מוערך להורדה: {0} מ״ב"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "קובץ תמונה בר-החלפה (*.exif)"
+msgstr "קובץ תמונה בר־החלפה (‎*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "החרגת דפים ריקים"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "מהיר"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -593,7 +593,7 @@ msgstr "מזין מסמכים"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "שם קובץ"
+msgstr "שם קובץ:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -605,19 +605,19 @@ msgstr "היפוך"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr ""
+msgstr "היפוך דפים דו־צדדיים"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr ""
+msgstr "לקבלת איכויות JPEG גבוהות (80 ומעלה), רצוי להגדיל גם את איכות התמונה בפרופיל שלך לתוצאות מיטביות."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "קובץ GIF (*.gif)"
+msgstr "קובץ GIF‏ (‎*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
-msgstr "קבל שפות נוספות"
+msgstr "משיכת שפות נוספות"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -625,7 +625,7 @@ msgstr "זכוכית (משטח)"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -641,11 +641,11 @@ msgstr "שעה (0-23)"
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "גוון / רוויה"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr "צלמיות מתוך:"
+msgstr "סמלים מתוך:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
@@ -653,7 +653,7 @@ msgstr "תמונה"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr "קבצי תמונה"
+msgstr "קובצי תמונה"
 
 #: UiStrings.resx$ImageQuality$Message
 msgid "Image Quality"
@@ -674,19 +674,19 @@ msgstr "ייבוא"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr ""
+msgstr "התקדמות ייבוא"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
-msgstr ""
+msgstr "מתבצע ייבוא של {0}…"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
-msgstr "מייבא..."
+msgstr "מתבצע ייבוא…"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "התקנת {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -698,11 +698,11 @@ msgstr "תקלה בהתקנה"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "ההתקנה הושלמה. האם ברצונך לאתחל את התוכנה?"
+msgstr "ההתקנה הושלמה. להפעיל את התוכנה מחדש עכשיו?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
-msgstr "תקלה בהתקנה."
+msgstr "ההתקנה נכשלה."
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -710,11 +710,11 @@ msgstr "הפרדה"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "קובץ JPEG (*.jpg, *.jpeg)"
+msgstr "קובץ JPEG‏ (‎*.jpg,‏ ‎*.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "קובץ JPEG2000‏ (‎*.jp2,‏ ‎*.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -726,7 +726,7 @@ msgstr "מילות מפתח:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -738,15 +738,15 @@ msgstr "שמאל"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr ""
+msgstr "מיושן (ממשק משתמש מקורי בלבד)"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
-msgstr "טען תמונות לתוך NAPS2"
+msgstr "טעינת תמונות לתוך NAPS2"
 
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "הכן קובצי PDF הניתנים לחיפוש באמצעות OCR"
+msgstr "הפקת קובצי PDF שאפשר לחפש בהם עם זיהוי תווים אופטי"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -754,11 +754,11 @@ msgstr "איכות מירבית (קבצים גדולים)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "העברת זיכרון"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
-msgstr "מטא-נתונים"
+msgstr "נתוני־על"
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
@@ -782,29 +782,29 @@ msgstr "להזיז למעלה"
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr ""
+msgstr "ריבוי סריקות (הפרש קבוע בין הסריקות)"
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr ""
+msgstr "ריבוי סריקות (הצגת בקשה בין הסריקות)"
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "לא עוד סתם סורק 2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "לא עוד סתם סורק 2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 הוא לגמרי בחינם. שקול לבצע תרומה."
+msgstr "NAPS2 הוא לגמרי בחינם. נא לשקול לתרום לנו."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
-msgstr "שם: (לא חובה)"
+msgstr "שם (רשות)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
@@ -812,7 +812,7 @@ msgstr "שם חסר."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "העברה טבעית"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -828,7 +828,7 @@ msgstr "הבא"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "הסריקה הבאה"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
@@ -842,7 +842,7 @@ msgstr "אין דפים במזין המסמכים."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr ""
+msgstr "לא נבחר ספק."
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
@@ -851,15 +851,15 @@ msgstr "לא נמצא סורק."
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr ""
+msgstr "אין עדכונים זמינים."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
-msgstr ""
+msgstr "אין"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "לא עוד סורק PDF"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -867,31 +867,31 @@ msgstr "לא כעת"
 
 #: UiStrings.resx$NumberOfScansLabel$Message
 msgid "Number of scans:"
-msgstr ""
+msgstr "מספר הסריקות:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "זיהוי תווים אופטי"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
-msgstr "הורדת OCR"
+msgstr "הורדת זיהוי תווים אופטי"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "התקדמות זיהוי תווים אופטי"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
-msgstr "הגדרות OCR"
+msgstr "הגדרות זיהוי תווים אופטי"
 
 #: UiStrings.resx$OcrLanguageLabel$Message
 msgid "OCR language:"
-msgstr "שפת OCR:"
+msgstr "שפת זיהוי תווים אופטי:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr "מצב OCR:"
+msgstr "מצב זיהוי תווים אופטי:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
@@ -899,11 +899,11 @@ msgstr "אישור"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr ""
+msgstr "רוחב היסט לפי יישור (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
-msgstr ""
+msgstr "מנהל מקורות נתונים ישן"
 
 #: UiStrings.resx$OneFilePerPage$Message
 msgid "One file per page"
@@ -919,19 +919,19 @@ msgstr "תקלה בהורדת קובץ אחד או יותר."
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
-msgstr "פתח תיקייה"
+msgstr "פתיחת תיקייה"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "פעולה מתבצעת"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Access"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
-msgstr ""
+msgstr "פלט"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
@@ -943,7 +943,7 @@ msgstr "סיסמת בעלים:"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr ""
+msgstr "מסמך PDF‏ (‎*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
@@ -956,19 +956,19 @@ msgstr "PDF נשמר."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -988,20 +988,20 @@ msgstr "סיסמה"
 
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
-msgstr "הדבק"
+msgstr "הדבקה"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
-msgstr "שומרי מקום"
+msgstr "ממלאי מקום"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "עיבוד סופי"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
-msgstr ""
+msgstr "נא ללחוץ על התחלה כשאפשר להתחיל."
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
@@ -1026,7 +1026,7 @@ msgstr "הגדרות פרופיל"
 
 #: UiStrings.resx$ProfileLabel$Message
 msgid "Profile:"
-msgstr ""
+msgstr "פרופיל:"
 
 #: UiStrings.resx$Profiles$Message
 #: UiStrings.resx$ProfilesFormTitle$Message
@@ -1035,15 +1035,15 @@ msgstr "פרופילים"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "לבקש נתיב קובץ"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
-msgstr ""
+msgstr "ספק"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
-msgstr ""
+msgstr "אפשר להתחיל לסרוק {0}."
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
@@ -1055,27 +1055,27 @@ msgstr "שחזור תמונות שנסרקו"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
-msgstr ""
+msgstr "מתבצע שחזור…"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr ""
+msgstr "התקדמות שחזור"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
-msgstr "זכור את ההגדרות"
+msgstr "לזכור את ההגדרות"
 
 #: UiStrings.resx$Reorder$Message
 msgid "Reorder"
-msgstr "סדר מחדש"
+msgstr "סידור מחדש"
 
 #: UiStrings.resx$Reset$Message
 msgid "Reset"
-msgstr "אתחל"
+msgstr "איפוס"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "אפס תמונה"
+msgstr "איפוס תמונה"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1083,23 +1083,23 @@ msgstr "רזולוציה:"
 
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
-msgstr "שחזור ברירת מחדל"
+msgstr "שחזור ברירות מחדל"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
-msgstr "הפוך"
+msgstr "היפוך"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "היפוך של הכול"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "היפוך הנבחרים"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
-msgstr "בטל שינויים"
+msgstr "ביטול שינויים"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -1107,7 +1107,7 @@ msgstr "ימין"
 
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
-msgstr "סובב"
+msgstr "סיבוב"
 
 #: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
@@ -1119,31 +1119,31 @@ msgstr "סיבוב לימין"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "הרצה ברקע"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr ""
+msgstr "זיהוי התווים האופטי רץ…"
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "מנהל התקן SANE"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "שמירה"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "שמירה של הכול"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "שמירה של הכול כתמונות"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "שמירה של הכול כ־PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1152,7 +1152,7 @@ msgstr "לשמור תמונות"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr ""
+msgstr "התקדמות שמירת תמונות"
 
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
@@ -1161,39 +1161,39 @@ msgstr "לשמור PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr ""
+msgstr "התקדמות שמירת PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "שמירת הנבחרים"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "שמירת הנבחרים כתמונות"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "שמירת הנבחרים כ־PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
-msgstr "שמור לקובץ יחיד"
+msgstr "לשמור לקובץ יחיד"
 
 #: UiStrings.resx$SaveToMultipleFiles$Message
 msgid "Save to multiple files"
-msgstr "שמור לקבצים מרובים"
+msgstr "שמירה למספר קבצים"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr ""
+msgstr "תוצאות הסריקה במרוכז נשמרות…"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
-msgstr ""
+msgstr "{0} נשמר…"
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
-msgstr "התאם גודל עם החלון"
+msgstr "התאמת גודל עם החלון"
 
 #: UiStrings.resx$ScaleLabel$Message
 msgid "Scale:"
@@ -1206,7 +1206,7 @@ msgstr "סריקה"
 
 #: UiStrings.resx$ScanConfig$Message
 msgid "Scan Configuration"
-msgstr ""
+msgstr "הגדרות סריקה"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1214,16 +1214,16 @@ msgstr "תמונה שנסרקה"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
-msgstr "סורק עמוד {0}"
+msgstr "עמוד {0} נסרק"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
-msgstr ""
+msgstr "עמוד {0} נסרק (סריקה {1})…"
 
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}..."
-msgstr "סורק עמוד {0}..."
+msgstr "עמוד {0} נסרק…"
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1231,15 +1231,15 @@ msgstr "שניות (00-59)"
 
 #: UiStrings.resx$Select$Message
 msgid "Select"
-msgstr ""
+msgstr "בחירה"
 
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
-msgstr "בחר הכל"
+msgstr "בחירה בהכול"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
-msgstr "בחר מקור"
+msgstr "בחירת מקור"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
@@ -1247,7 +1247,7 @@ msgstr "יש לבחור פרופיל לפני לחיצה על כפתור סרי�
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
-msgstr "בחר שפה אחת או יותר:"
+msgstr "נא לבחור שפה אחת או יותר:"
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1255,39 +1255,39 @@ msgstr "מסומנים ({0})"
 
 #: UiStrings.resx$SeparateByPatchT$Message
 msgid "Separate files by Patch-T"
-msgstr ""
+msgstr "הפרדת קבצים בשיטת Patch-T"
 
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
-msgstr "הגדר ברירת מחדל"
+msgstr "הגדרת ברירת מחדל"
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "חידוד"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
-msgstr "הצג"
+msgstr "הצגה"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
-msgstr ""
+msgstr "קבצים של עמוד אחד"
 
 #: UiStrings.resx$SingleScan$Message
 msgid "Single scan"
-msgstr ""
+msgstr "סריקה בודדת"
 
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
-msgstr ""
+msgstr "דילוג על בקשת שמירה"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
-msgstr "התחל"
+msgstr "התחלה"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
-msgstr "מתח לגודל הדף"
+msgstr "מתיחה לגודל הדף"
 
 #: UiStrings.resx$SubjectLabel$Message
 msgid "Subject:"
@@ -1295,7 +1295,7 @@ msgstr "נושא:"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "קובץ TIFF (*.tiff, *.tif)"
+msgstr "קובץ TIFF‏ (‎*.tiff,‏ ‎*.tif)"
 
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
@@ -1303,62 +1303,62 @@ msgstr "מנהל התקן TWAIN"
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
-msgstr ""
+msgstr "פרטים טכניים"
 
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr ""
+msgstr "מנוע זיהוי התווים האופטי לא זמין. נא לוודא שהתקנת את החבילות הנדרשות:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "הזמן שהוקצב לפעילות זיהוי התווים האופטי נגמר."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr ""
+msgstr "מנהל התקן ה־SANE לא זמין. נא לוודא שהתקנת את החבילות הנדרשות:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
-msgstr "לא ניתן לייבא את הקובץ '{0}'."
+msgstr "לא ניתן לייבא את הקובץ ‚{0}’."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "לא ניתן לייבא את הקובץ '{0}'. ניתן לייבא רק קבצים שנוצרו על ידי תוכנה זו."
+msgstr "לא ניתן לייבא את הקובץ ‚{0}’. ניתן לייבא רק קבצים שנוצרו על ידי תוכנה זו."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
-msgstr ""
+msgstr "לא ניתן לדרוס את הקובץ כיוון שהוא בשימוש כרגע."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "הקובץ {0} כבר קיים. האם להחליפו?"
+msgstr "הקובץ {0} כבר קיים. להחליפו?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "הקובץ הבא מוצפן ונדרשת סיסמה על מנת להציגו:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam."
-msgstr ""
+msgstr "נתקע דף בסורק."
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 #: SdkResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up."
-msgstr ""
+msgstr "הסורק מתחמם."
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 #: SdkResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open."
-msgstr ""
+msgstr "המכסה של הסורק פתוח."
 
 #: MiscResources.resx$DriverNotSupported$Message
 #: SdkResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system."
-msgstr ""
+msgstr "מנהל ההתקן הנבחר לא נתמך במערכת הזאת."
 
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
@@ -1368,34 +1368,34 @@ msgstr "הסורק שנבחר לא נמצא."
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
-msgstr "הסורק שנבחר איננו תומך במזין מסמכים. אם לסורק יש מזין מסמכים, נסה להשתמש במנהל התקן אחר."
+msgstr "הסורק שנבחר איננו תומך במזין מסמכים. אם לסורק יש מזין מסמכים, כדאי לנסות להשתמש במנהל התקן אחר."
 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr ""
+msgstr "הסורק שנבחר לא תומך במצב דופלקס (סריקה דו־צדדית). אם הסורק שלך אמור לתמוך בדופלקס, כדאי לנסות להשתמש במנהל התקן אחר."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy."
-msgstr ""
+msgstr "הסורק הנבחר עסוק."
 
 #: MiscResources.resx$DeviceOffline$Message
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
-msgstr "הסורק שנבחר איננו מקוון (OFFLINE)."
+msgstr "הסורק שנבחר איננו מקוון."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "אפשרויות Tiff"
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
-msgstr ""
+msgstr "זמן בין סריקות (שניות):"
 
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
@@ -1403,19 +1403,19 @@ msgstr "כותרת:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "כלים"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr ""
+msgstr "מימושים של TWAIN:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "נייר US Legal (8.5x14 in)"
+msgstr "נייר US Legal (8.5x14 אינטש)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "נייר US Legal (8.5x14 in)"
+msgstr "נייר US Letter (8.5x11 אינטש)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1423,27 +1423,27 @@ msgstr "שינויים שלא נשמרו"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "התקדמות העדכון"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "בדיקת עדכונים מושבתת."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
-msgstr ""
+msgstr "מתבצע עדכון…"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
-msgstr ""
+msgstr "ההודעה נשלחת בדוא״ל…"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
-msgstr "השתמש בממשק מקורי (נטיבי)"
+msgstr "שימוש בממשק מקורי (טבעי)"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "השתמש בהגדרות שמורות"
+msgstr "שימוש בהגדרות שמורות"
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
@@ -1460,7 +1460,7 @@ msgstr "גרסה {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
-msgstr "הצג"
+msgstr "הצגה"
 
 #: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"
@@ -1468,23 +1468,23 @@ msgstr "מנהל התקן WIA"
 
 #: UiStrings.resx$WaitingForTwain$Message
 msgid "Waiting for TWAIN to complete..."
-msgstr "ממתין למנהל התקן TWAIN..."
+msgstr "בהמתנה למנהל התקן TWAIN..."
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
-msgstr ""
+msgstr "בהמתנה לאימות…"
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
-msgstr ""
+msgstr "בהמתנה לסריקה {0}…"
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
-msgstr ""
+msgstr "סף לבן"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "גרסת Wia:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1509,23 +1509,23 @@ msgstr "ישנם שינויים שלא נשמרו. האם לסגור את התו
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
-msgstr "זום"
+msgstr "תקריב"
 
 #: UiStrings.resx$ZoomActual$Message
 msgid "Zoom Actual"
-msgstr "זום 1:1"
+msgstr "תקריב מקורי"
 
 #: UiStrings.resx$ZoomIn$Message
 msgid "Zoom In"
-msgstr "זום פנימה"
+msgstr "התקרבות"
 
 #: UiStrings.resx$ZoomOut$Message
 msgid "Zoom Out"
-msgstr "זום החוצה"
+msgstr "התרחקות"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr "ס\"מ"
+msgstr "ס״מ"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1533,7 +1533,7 @@ msgstr "אינטש"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr "מ\"מ"
+msgstr "מ״מ"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
@@ -1541,19 +1541,19 @@ msgstr "מתוך {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr "{0} / {1} מ\"ב"
+msgstr "{0} / {1} מ״ב"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
@@ -1561,7 +1561,7 @@ msgstr "{0} / {1} קבצים"
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr ""
+msgstr "{0} נק׳ לאינטש"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
@@ -1569,7 +1569,7 @@ msgstr "{0} תמונה/תמונות שנסרקו ב-{1} ב-{2} לא נשמרו, 
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."
-msgstr ""
+msgstr "{0} תמונות נשמרו."
 
 #: MiscResources.resx$PdfStatus$Message
 #: UiStrings.resx$XOfY$Message

@@ -16,22 +16,22 @@
     <value>Scegli profilo</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Cancella</value>
+    <value>Azzera</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
     <value>Vuoi cancellare il(i) {0} oggetto(i)?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Vuoi eliminare {0} oggetto(i)?</value>
+    <value>Vuoi eliminare {0} elemento/i?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Vuoi eliminare {0} profilo(i)?</value>
+    <value>Vuoi eliminare {0} profilo/i?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Vuoi eliminare il profilo {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>Il file {0} esiste già. Vuoi sovrascriverlo?</value>
+    <value>Il file {0} esiste già. \nVuoi sovrascriverlo?</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Elimina</value>
@@ -97,10 +97,10 @@
     <value>Immagine scansionata</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Seleziona profilo prima di scansionare.</value>
+    <value>Seleziona profilo prima della scansione.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Errore del driver di scansione.</value>
+    <value>Si è verificato un errore con il driver di scansione.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versione {0}</value>
@@ -112,7 +112,7 @@
     <value>Installazione completata</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installazione completata. Vuoi riavviare NAPS2 ora?</value>
+    <value>Installazione completata. \nVuoi riavviare NAPS2?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
     <value>Installazione fallita.</value>
@@ -127,7 +127,7 @@
     <value>Selezionato ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Dimensione stimata del download: {0} MB</value>
+    <value>Dimensione stimata download: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
     <value>{0} / {1} file</value>
@@ -142,7 +142,7 @@
     <value>Il file '{0}' non può essere importato. Solo i files PDF generati da NAPS2 possono essere importati.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Errore durante lo scaricamento</value>
+    <value>Errore download</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
     <value>Uno o più file non possono essere scaricati.</value>
@@ -154,13 +154,13 @@
     <value>Scansiona</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Sicuro di voler annullare i cambiamenti a {0} immagine(i)?</value>
+    <value>Vuoi annullare le modifiche a {0} immagine/i?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Resetta Immagine</value>
+    <value>Ripristina immagine</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?</value>
+    <value>Ci sono modifiche non salvate. \nSei sicuro di voler uscire e abbandonare tali modifiche?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
     <value>E' in corso un'operazione. Desideri uscire e cancellare tale operazione?</value>
@@ -172,13 +172,13 @@
     <value>Operazione in corso</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>Digitalizzazione pagina {0}</value>
+    <value>Scansione pagina {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta l'uso di un alimentatore. Se il tuo scanner ha un alimentatore, prova a usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta l'uso di un alimentatore automatico. \nSe lo scanner ha un alimentatore automatico, prova ad usare un driver differente.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Non ci sono fogli nel caricatore.</value>
+    <value>Non ci sono fogli nell'alimentatore automatico.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>Non hai i permessi per copiare il contenuto dal file '{0}'.</value>
@@ -199,13 +199,13 @@
     <value>Annullamento in corso....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Serie completata.</value>
+    <value>Scansione in serie completata.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
     <value>Scansione in serie arrestata a causa di un errore.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>Digitalizzazione pagina {0}...</value>
+    <value>Scansione pagina {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
     <value>Scansione pagina {0} (scansione {1})...</value>
@@ -220,10 +220,10 @@
     <value>Chiudi</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Salvataggio risultati della serie...</value>
+    <value>Salvataggio risultati operazioni in serie...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta l'uso del duplex. Se lo scanner ha un supporto duplex, prova a usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta la scansione in fronte retro. \nSe lo scanner supporta la scansione in fronte retro, prova ad usare un driver differente.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -238,19 +238,19 @@
     <value>Ripristino...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Progresso del ripristino</value>
+    <value>Progresso ripristino</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Salva immagini</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Progresso del salvataggio immagini</value>
+    <value>Progresso salvataggio immagini</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Salva PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Progresso del salvataggio PDF</value>
+    <value>Progresso salvataggio PDF</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
     <value>Salvataggio {0}...</value>
@@ -259,16 +259,16 @@
     <value>Stampa</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Copia in corso...</value>
+    <value>Copia...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Progresso della copia</value>
+    <value>Progresso copia</value>
   </data>
   <data name="Importing" xml:space="preserve">
     <value>Importazione...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Invia PDF via e-mail</value>
+    <value>Invia PDF via email</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
     <value>Progresso invio PDF via email</value>
@@ -325,10 +325,10 @@
     <value>Scaricamento necessario</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi scaricarlo ora?</value>
+    <value>Per importare questo file PDF è necessario un componente aggiuntivo. \nVuoi scaricarlo ora?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Sei sicuro di voler annullare la scansione in serie?</value>
+    <value>Vuoi annullare la scansione in serie?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
     <value>Annulla operazione in serie</value>
@@ -337,31 +337,31 @@
     <value>Fai una donazione.</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 è totalmente gratuito. Considera la possibilità di fare una donazione.</value>
+    <value>NAPS2 è totalmente gratuito. \nConsidera la possibilità di fare una donazione.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Il driver SANE non è disponibile. Assicurati di aver installato il pacchetto richiesto:</value>
+    <value>Il driver SANE non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Il motore OCR non è disponibile. Assicurati di aver installato il pacchetto richiesto:</value>
+    <value>Il motore OCR non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Il driver selezionato non è supportato da questo sistema.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR in corso</value>
+    <value>Progresso OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>OCR in esecuzione...</value>
+    <value>Eseuzione OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Avanzamento dell'aggiornamento</value>
+    <value>Progresso aggiornamento</value>
   </data>
   <data name="Updating" xml:space="preserve">
     <value>Aggiornamento...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>Nessun aggiornamento disponibile.</value>
+    <value>Il programma è aggiornato.\nNessun aggiornamento disponibile.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Verifica in corso...</value>
@@ -373,7 +373,7 @@
     <value>Si è verificato un errore durante l'installazione dell'aggiornamento.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Installazione {0}</value>
+    <value>Installazione di {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>È disponibile un aggiornamento.</value>
@@ -388,7 +388,7 @@
     <value>Si è verificato un errore durante l'invio dell'email.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>Digitalizzazione pagina {0}...</value>
+    <value>Scansione pagina {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
     <value>Acquisizione dati...</value>

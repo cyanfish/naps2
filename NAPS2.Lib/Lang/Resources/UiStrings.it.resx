@@ -13,13 +13,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutFormTitle" xml:space="preserve">
-    <value>Informazioni</value>
+    <value>Info sul programma</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Copyright {0} contrubitori NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Trova icone su:</value>
+    <value>Libreria icone:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Ricerca degli aggiornamenti:</value>
@@ -88,7 +88,7 @@
     <value>Impostazioni immagine</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Invia PDF via e-mail</value>
+    <value>Invia PDF via email</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
     <value>Impostazioni email</value>
@@ -118,10 +118,10 @@
     <value>Nitidezza</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Correzione del documento</value>
+    <value>Correzione documento</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Azzera</value>
+    <value>Ripristina</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Ruota</value>
@@ -172,25 +172,25 @@
     <value>Inverti selezionati</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Cancella</value>
+    <value>Azzera</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Cancella tutto</value>
+    <value>Azzera tutto</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Lingua</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>Informazioni</value>
+    <value>Info sul programma</value>
   </data>
   <data name="Zoom" xml:space="preserve">
-    <value>Ingrandisci</value>
+    <value>Zoom</value>
   </data>
   <data name="ZoomIn" xml:space="preserve">
-    <value>Aumenta zoom</value>
+    <value>Zoom +</value>
   </data>
   <data name="ZoomOut" xml:space="preserve">
-    <value>Riduci zoom</value>
+    <value>Zoom -</value>
   </data>
   <data name="ZoomActual" xml:space="preserve">
     <value>Zoom attuale</value>
@@ -220,16 +220,16 @@
     <value>Salva selezionati come immagini</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Invia e-mail a tutti</value>
+    <value>Invia email a tutti</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Invia selezionati via e-mail</value>
+    <value>Invia selezionati via email</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Invia e-mail a tutti come PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Invia selezionati via e-mail come PDF</value>
+    <value>Invia selezionati via email come PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Impostazioni profilo</value>
@@ -298,10 +298,10 @@
     <value>Abilita salvataggio automatico</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Salva impostazioni automaticamente</value>
+    <value>Salva automaticamente impostazioni</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Salva impostazioni automaticamente</value>
+    <value>Salva automaticamente impostazioni</value>
   </data>
   <data name="Advanced" xml:space="preserve">
     <value>Avanzate</value>
@@ -331,7 +331,7 @@
     <value>Installa OCR</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
-    <value>Rendi i PDF ricercabili usando l'OCR</value>
+    <value>Rendi PDF ricercabili usando l'OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
     <value>Lingua OCR:</value>
@@ -340,28 +340,28 @@
     <value>Modalità OCR:</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Avvia automaticamente l'OCR dopo la scansione</value>
+    <value>Dopo la scansione avvia automaticamente l'OCR</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Installa altre lingue</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>Scarica OCR</value>
+    <value>Download OCR</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>L'uso dell'OCR richiede che venga scaricata ogni lingua che vuoi far riconoscere.</value>
+    <value>L'uso dell'OCR richiede che venga scaricata ogni lingua che si vuoie far riconoscere.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
     <value>Seleziona una o più lingue:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Dimensione stimata del download: {0} MB</value>
+    <value>Dimensione stimata download: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Scarica</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Avanzamento download</value>
+    <value>Progresso download</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
     <value>Anteprima</value>
@@ -370,7 +370,7 @@
     <value>Prossimo</value>
   </data>
   <data name="Previous" xml:space="preserve">
-    <value>Precedente</value>
+    <value>Indietro</value>
   </data>
   <data name="XOfY" xml:space="preserve">
     <value>{0} di {1}</value>
@@ -394,13 +394,13 @@
     <value>Ripristino immagini digitalizzate</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} immagine(i) digitalizzata(e) su {1} a {2} potrebbero non essere state salvate e sono recuperabili. Vuoi recuperarle?</value>
+    <value>{0} immagine/i digitalizzata/e in {1} a {2} potrebbero non essere state salvate e sono recuperabili. \nVuoi recuperarle?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Segnaposti</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
-    <value>Salta richiesta di salvataggio</value>
+    <value>Salta richiesta salvataggio</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>File a pagina singola</value>
@@ -409,7 +409,7 @@
     <value>Cifra il PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
-    <value>Mostra</value>
+    <value>Visualizza</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
     <value>Ripristina predefiniti</value>
@@ -421,7 +421,7 @@
     <value>Consenti stampa</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>Consenti stampa di alta qualità</value>
+    <value>Consenti stampa in alta qualità</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
     <value>Consenti modifica documento</value>
@@ -430,10 +430,10 @@
     <value>Consenti composizione documento</value>
   </data>
   <data name="AllowContentCopying" xml:space="preserve">
-    <value>Consenti la copia dei contenuti</value>
+    <value>Consenti copia contenuti</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Consenti la copia dei contenuti per accessibilità</value>
+    <value>Consenti copia contenuti per accessibilità</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
     <value>Consenti annotazioni</value>
@@ -445,7 +445,7 @@
     <value>Percorso file predefinito:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
-    <value>Percorso del file:</value>
+    <value>Percorso file:</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Titolo:</value>
@@ -460,7 +460,7 @@
     <value>Parole chiave:</value>
   </data>
   <data name="OwnerPasswordLabel" xml:space="preserve">
-    <value>Password del proprietario:</value>
+    <value>Password proprietario:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
     <value>Password utente:</value>
@@ -502,16 +502,16 @@
     <value>Secondi (00-59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
-    <value>Autoincrementa numero (4 cifre)</value>
+    <value>Incremento automatico numero (4 cifre)</value>
   </data>
   <data name="AutoIncrementing3Digit" xml:space="preserve">
-    <value>Autoincrementa numero (3 cifre)</value>
+    <value>Incremento automatico numero (3 cifre)</value>
   </data>
   <data name="AutoIncrementing2Digit" xml:space="preserve">
-    <value>Autoincrementa numero (2 cifre)</value>
+    <value>Incremento automatico numero (2 cifre)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Numero incrementato automaticamente (1 cifra)</value>
+    <value>Incremento automatico numero (1 cifra)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Nome file</value>
@@ -520,7 +520,7 @@
     <value>Anteprima:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>Per ottenere i migliori risultati con JPEG di qualità elevata (80+), aumenta anche il valore di Qualità Immagine nel tuo profilo.</value>
+    <value>Per ottenere i migliori risultati con JPEG di qualità elevata (80+), aumenta nel profilo il valore 'Qualità Immagine'.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Qualità Jpeg</value>
@@ -541,13 +541,13 @@
     <value>Fornitore</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Cambia</value>
+    <value>Modifica</value>
   </data>
   <data name="AttachmentNameLabel" xml:space="preserve">
     <value>Nome allegato:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Scegli un provider email</value>
+    <value>Scegli provider email</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
     <value>Autorizza</value>
@@ -568,7 +568,7 @@
     <value>Il seguente file è cifrato e richiede una password per essere aperto:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Richiesta del percorso file</value>
+    <value>Richiesta percorso file</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>Un file per pagina</value>
@@ -598,7 +598,7 @@
     <value>In attesa di TWAIN per completare...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>Impostazioni avanzate di profilo</value>
+    <value>Impostazioni profilo avanzate</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
     <value>Qualità immagine</value>
@@ -610,13 +610,13 @@
     <value>Pagine vuote</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Esclude pagine vuote</value>
+    <value>Escludi pagine vuote</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
     <value>Soglia bianco</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
-    <value>Soglia di copertura</value>
+    <value>Soglia copertura</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
     <value>Post-processo</value>
@@ -628,16 +628,16 @@
     <value>Applica luminosità/contrasto dopo la scansione</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
-    <value>Bilanciamento larghezza in base ad allineamento (WIA)</value>
+    <value>Offset larghezza in base ad allineamento (WIA)</value>
   </data>
   <data name="StretchToPageSize" xml:space="preserve">
     <value>Adatta a dimensione pagina</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Ritaglia alla dimensione della pagina</value>
+    <value>Ritaglia alla dimensione pagina</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Capovolgi pagine fronte-retro</value>
+    <value>Capovolgi pagine fronte retro</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versione WIA:</value>
@@ -649,13 +649,13 @@
     <value>Scansione in serie</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Premere avvia quando pronti.</value>
+    <value>Seleziona 'Avvia' quando pronto.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
-    <value>Configurazione della scansione</value>
+    <value>Configurazione scansione</value>
   </data>
   <data name="Output" xml:space="preserve">
-    <value>Output</value>
+    <value>Destinazione</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Profilo:</value>
@@ -664,13 +664,13 @@
     <value>Scansione singola</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Scansioni multiple (richiesta tra ognuna)</value>
+    <value>Scansioni multiple (richiesta dopo ogni scansione)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
-    <value>Scansioni multiple (ritardo fisso per ognuna)</value>
+    <value>Scansioni multiple (ritardo fisso tra le scansioni)</value>
   </data>
   <data name="NumberOfScansLabel" xml:space="preserve">
-    <value>Numero di scansioni:</value>
+    <value>Numero scansioni:</value>
   </data>
   <data name="TimeBetweenScansLabel" xml:space="preserve">
     <value>Intervallo tra le scansioni (secondi):</value>
@@ -688,7 +688,7 @@
     <value>Avvia</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
-    <value>Prossima scansione</value>
+    <value>Scansione successiva</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
     <value>Pronto per la scansione {0}.</value>
@@ -700,6 +700,6 @@
     <value>Strumenti</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Abilita la registrazione dei log di debug</value>
+    <value>Abilita registrazione registri debug</value>
   </data>
 </root>

@@ -16,10 +16,10 @@
     <value>הסורק שנבחר לא נמצא.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>הסורק שנבחר איננו מקוון (OFFLINE).</value>
+    <value>הסורק שנבחר איננו מקוון.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
-    <value>NAPS2</value>
+    <value>לא עוד סתם סורק 2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
     <value>לא נבחר התקן.</value>
@@ -34,10 +34,10 @@
     <value>גרסה {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>לא ניתן לייבא את הקובץ '{0}'.</value>
+    <value>לא ניתן לייבא את הקובץ ‚{0}’.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>הסורק שנבחר איננו תומך במזין מסמכים. אם לסורק יש מזין מסמכים, נסה להשתמש במנהל התקן אחר.</value>
+    <value>הסורק שנבחר איננו תומך במזין מסמכים. אם לסורק יש מזין מסמכים, כדאי לנסות להשתמש במנהל התקן אחר.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>אין דפים במזין המסמכים.</value>
@@ -46,33 +46,33 @@
     <value>אין לך הרשאה להעתקת תוכן מהקובץ '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>הסורק שנבחר לא תומך במצב דופלקס (סריקה דו־צדדית). אם הסורק שלך אמור לתמוך בדופלקס, כדאי לנסות להשתמש במנהל התקן אחר.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>הסורק הנבחר עסוק.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>המכסה של הסורק פתוח.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>נתקע דף בסורק.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>הסורק מתחמם.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>מנהל התקן ה־SANE לא זמין. נא לוודא שהתקנת את החבילות הנדרשות:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>מנוע זיהוי התווים האופטי לא זמין. נא לוודא שהתקנת את החבילות הנדרשות:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>מנהל ההתקן הנבחר לא נתמך במערכת הזאת.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>אירעה שגיאה בהרצת זיהוי תווים אופטי.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>הזמן שהוקצב לפעילות זיהוי התווים האופטי נגמר.</value>
   </data>
 </root>

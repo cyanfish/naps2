@@ -13,66 +13,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Lo scanner selezionato non è stato trovato.</value>
+    <value>The selected scanner could not be found.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Lo scanner selezionato è offline.</value>
+    <value>The selected scanner is offline.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Nessun dispositivo selezionato.</value>
+    <value>No device selected.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Nessuno scanner trovato.</value>
+    <value>No scanning device was found.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Si è verificato un errore con il driver di scansione.</value>
+    <value>An error occurred with the scanning driver.</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Versione {0}</value>
+    <value>เวอร์ชั่น {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Il file '{0}' non può essere importato.</value>
+    <value>The file '{0}' could not be imported.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta l'uso di un alimentatore automatico. \nSe lo scanner ha un alimentatore automatico, prova ad usare un driver differente.</value>
+    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Non ci sono fogli nell'alimentatore automatico.</value>
+    <value>No pages are in the feeder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Non hai i permessi per copiare il contenuto dal file '{0}'.</value>
+    <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta la scansione in fronte retro. \nSe lo scanner supporta la scansione in fronte retro, prova ad usare un driver differente.</value>
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>Lo scanner selezionato è occupato.</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>Il coperchio dello scanner è aperto.</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>Carta inceppata nello scanner.</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>Lo scanner si sta riscaldando.</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Il driver SANE non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Il motore OCR non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>Il driver selezionato non è supportato da questo sistema.</value>
+    <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>Si è verificato un errore durante l'esecuzione dell'OCR.</value>
+    <value>An error occurred running OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>Tempo scaduto per l'operazione OCR.</value>
+    <value>The OCR operation timed out.</value>
   </data>
 </root>

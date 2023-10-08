@@ -16,7 +16,7 @@
     <value>Bianco e nero</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>Colore a 24-bit</value>
+    <value>Colore a 24bit</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Scala di grigi</value>
@@ -31,7 +31,7 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Accesso Web di Outlook</value>
+    <value>Accesso web Outlook</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
@@ -100,13 +100,13 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Fronte/Retro</value>
+    <value>Fronte/retro</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Caricatore</value>
+    <value>Alimentatore automatico</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Piano</value>
+    <value>Piano fisso</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
     <value>Automatico</value>

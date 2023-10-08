@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-09-04 17:56\n"
+"PO-Revision-Date: 2023-10-08 18:01\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -110,7 +110,7 @@ msgstr "Ett fel uppstod vid körning av OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr ""
+msgstr "Ett fel uppstod vid försök att auktorisera."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
@@ -236,7 +236,7 @@ msgstr "Automatiskt uppräkningnummer (4 siffror)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "Automatiskt köra ORC scanning"
+msgstr "Kör automatiskt OCR efter skanning"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -319,7 +319,7 @@ msgstr "Ändra"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr "Kontrollera för uppdatering"
+msgstr "Sök efter uppdateringar"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
@@ -448,7 +448,7 @@ msgstr "Rättar upp framsteg"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr "Rättar scannade sidor"
+msgstr "Räta upp skannade sidor"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
@@ -754,7 +754,7 @@ msgstr "Maximal kvalitet (stora filer)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Minnesöverföring"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -891,7 +891,7 @@ msgstr "OCR-språk:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr "OCR läge:"
+msgstr "OCR-läge:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
@@ -997,7 +997,7 @@ msgstr "Platshållare"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr "För behandling"
+msgstr "Efterbehandling"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1087,15 +1087,15 @@ msgstr "Återställ standard"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
-msgstr "Omvänt"
+msgstr "Vänd om"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Vänd om alla"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Vänd om markerade"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1287,7 +1287,7 @@ msgstr "Starta"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
-msgstr "Anpassa till sid storlek"
+msgstr "Anpassa till sidstorlek"
 
 #: UiStrings.resx$SubjectLabel$Message
 msgid "Subject:"

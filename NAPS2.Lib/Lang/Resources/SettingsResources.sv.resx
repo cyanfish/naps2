@@ -130,7 +130,7 @@
     <value>Native Transfer</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Minnesöverföring</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Gammal DSM</value>

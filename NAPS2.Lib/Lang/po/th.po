@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-10-08 18:01\n"
 "Last-Translator: \n"
 "Language-Team: Thai\n"
 "Language: th\n"
@@ -25,20 +25,20 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr ""
+msgstr "A3 (297x420 มม.)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr ""
+msgstr "A4 (210x297 มม.)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "A5 (148x210 มม.)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr ""
+msgstr "เกี่ยวกับ"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
@@ -54,11 +54,11 @@ msgstr ""
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr ""
+msgstr "ทั้งหมด ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr ""
+msgstr "ไฟล์ทั้งหมด"
 
 #: UiStrings.resx$AllowAnnotations$Message
 msgid "Allow Annotations"
@@ -179,7 +179,7 @@ msgstr ""
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr ""
+msgstr "คุณต้องการ ลบ \"{0}\" ใช่หรือไม่"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -240,11 +240,11 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 มม.)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 มม.)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -265,7 +265,7 @@ msgstr ""
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "ดีที่สุด"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -299,7 +299,7 @@ msgstr ""
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
-msgstr ""
+msgstr "ยกเลิก"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
@@ -352,7 +352,7 @@ msgstr ""
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "ปิด"
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -368,7 +368,7 @@ msgstr ""
 
 #: UiStrings.resx$Copy$Message
 msgid "Copy"
-msgstr ""
+msgstr "คัดลอก"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
@@ -416,14 +416,14 @@ msgstr ""
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "วัน (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$WiaVersion_Default$Message
 #: UiStrings.resx$Default$Message
 msgid "Default"
-msgstr ""
+msgstr "ค่าเริ่มต้น"
 
 #: UiStrings.resx$DefaultFilePathLabel$Message
 msgid "Default File Path:"
@@ -436,7 +436,7 @@ msgstr ""
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
 msgid "Delete"
-msgstr ""
+msgstr "ลบ"
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
@@ -456,7 +456,7 @@ msgstr ""
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
-msgstr ""
+msgstr "อุปกรณ์:"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
@@ -481,11 +481,11 @@ msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
-msgstr ""
+msgstr "ดาวน์โหลด"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr ""
+msgstr "การดาวน์โหลดผิดพลาด"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
@@ -613,7 +613,7 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr ""
+msgstr "GIF File (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -625,7 +625,7 @@ msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -637,7 +637,7 @@ msgstr ""
 
 #: UiStrings.resx$Hour2Digit$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "ชั่วโมง (0-23)"
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
@@ -710,11 +710,11 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr ""
+msgstr "JPEG File (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG2000 File (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -730,7 +730,7 @@ msgstr ""
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
-msgstr ""
+msgstr "ภาษา"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
@@ -762,11 +762,11 @@ msgstr ""
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "นาที (00-59)"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
-msgstr ""
+msgstr "เดือน (01-12)"
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
@@ -774,11 +774,11 @@ msgstr ""
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
-msgstr ""
+msgstr "เลื่อนลง"
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
-msgstr ""
+msgstr "เลื่อนขึ้น"
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -792,11 +792,11 @@ msgstr ""
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
@@ -816,7 +816,7 @@ msgstr ""
 
 #: UiStrings.resx$New$Message
 msgid "New"
-msgstr ""
+msgstr "ใหม่"
 
 #: UiStrings.resx$NewProfile$Message
 msgid "New Profile"
@@ -895,7 +895,7 @@ msgstr ""
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr ""
+msgstr "ตกลง"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
@@ -956,23 +956,23 @@ msgstr ""
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr ""
+msgstr "PNG File (*.png)"
 
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
@@ -984,11 +984,11 @@ msgstr ""
 
 #: UiStrings.resx$PdfPasswordFormTitle$Message
 msgid "Password"
-msgstr ""
+msgstr "รหัสผ่าน"
 
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
-msgstr ""
+msgstr "วาง"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1018,7 +1018,7 @@ msgstr ""
 #: MiscResources.resx$Print$Message
 #: UiStrings.resx$Print$Message
 msgid "Print"
-msgstr ""
+msgstr "พิมพ์"
 
 #: UiStrings.resx$EditProfileFormTitle$Message
 msgid "Profile Settings"
@@ -1131,7 +1131,7 @@ msgstr ""
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "บันทึก"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
@@ -1231,11 +1231,11 @@ msgstr ""
 
 #: UiStrings.resx$Select$Message
 msgid "Select"
-msgstr ""
+msgstr "เลือก"
 
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
-msgstr ""
+msgstr "เลือกทั้งหมด"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr ""
+msgstr "TIFF File (*.tiff, *.tif)"
 
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
@@ -1403,7 +1403,7 @@ msgstr ""
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "เครื่องมือ"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1447,7 +1447,7 @@ msgstr ""
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
-msgstr ""
+msgstr "รหัสผ่านผู้ใช้:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
@@ -1456,7 +1456,7 @@ msgstr ""
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
 msgid "Version {0}"
-msgstr ""
+msgstr "เวอร์ชั่น {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
@@ -1488,11 +1488,11 @@ msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
-msgstr ""
+msgstr "ปี"
 
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
-msgstr ""
+msgstr "ปี (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 #: SdkResources.resx$PdfNoPermissionToExtractContent$Message
@@ -1525,15 +1525,15 @@ msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "ซม."
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "นิ้ว"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "มม."
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
@@ -1541,15 +1541,15 @@ msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
