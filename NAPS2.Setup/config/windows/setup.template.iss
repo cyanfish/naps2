@@ -3,13 +3,14 @@
 ; Set up for InnoDependencyInstaller
 #define public Dependency_NoExampleSetup
 #include "..\config\windows\CodeDependencies.iss"
-#include "..\setup.language.list.iss"
+#include "..\config\windows\setup.template.languages.iss"
 
-#define AppShortName             "NAPS""
-#define AppLongName              "NAPS2 - Not Another PDF Scanner""
-@define AppCompany               "NAPS2 Software"
-#Define AppCopyrightStartingYear "2017"
+#define AppShortName             "NAPS"
+#define AppLongName              "NAPS2 - Not Another PDF Scanner"
+#define AppCompany               "NAPS2 Software"
+#define AppCopyrightStartingYear "2009"
 #define AppCopyrightEndYear      GetDateTimeString('yyyy','','')
+#define AppCopyrightCompany      "NAPS2 Contributors"
 
 [Setup]
 AppName={#AppLongName}
@@ -27,7 +28,7 @@ VersionInfoProductName={#AppShortName}
 VersionInfoProductVersion={#AppVersion}
 
 VersionInfoCompany={#AppCompany}
-VersionInfoCopyright={#AppCompany} {#AppCopyrightStartingYear}-{#AppCopyrightEndYear}
+VersionInfoCopyright=(c) {#AppCopyrightStartingYear}-{#AppCopyrightEndYear}
 
 UninstallDisplayName={#AppShortName}
 UninstallDisplayIcon={app}\NAPS2.exe
