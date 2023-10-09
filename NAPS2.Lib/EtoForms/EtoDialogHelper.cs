@@ -23,7 +23,7 @@ public class EtoDialogHelper : DialogHelper
         }
         var sd = new SaveFileDialog
         {
-            FileName = GetDefaultFileName(defaultPath, lastExt)
+            FileName = GetDefaultFileName(defaultPath, lastExt!)
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt);
         SetDir(sd, defaultPath);
@@ -63,7 +63,7 @@ public class EtoDialogHelper : DialogHelper
         }
         var sd = new SaveFileDialog
         {
-            FileName = GetDefaultFileName(defaultPath, lastExt)
+            FileName = GetDefaultFileName(defaultPath, lastExt!)
         };
         var filterGroups = EtoPlatform.Current.IsGtk
             ? FileFilterGroup.AllImages | FileFilterGroup.Image
