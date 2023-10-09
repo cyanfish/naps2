@@ -117,10 +117,13 @@ public class AutoSaver
         string subPath = placeholders.Substitute(settings.FilePath, true, i);
         if (settings.PromptForFilePath)
         {
-            if (_dialogHelper.PromptToSavePdfOrImage(subPath, out string? newPath))
+            Invoker.Current.Invoke(() =>
             {
-                subPath = placeholders.Substitute(newPath!, true, i);
-            }
+                if (_dialogHelper.PromptToSavePdfOrImage(subPath, out string? newPath))
+                {
+                    subPath = placeholders.Substitute(newPath!, true, i);
+                }
+            });
         }
         // TODO: This placeholder handling is complex and wrong in some cases (e.g. FilePerScan with ext = "jpg")
         // TODO: Maybe have initial placeholders that replace date, then rely on the ops to increment the file num
@@ -139,7 +142,7 @@ public class AutoSaver
             bool success = await op.Success;
             if (success && doNotify)
             {
-                _notify.PdfSaved(subPath);
+                Invoker.Current.Invoke(() => _notify.PdfSaved(subPath));
             }
             return (success, subPath);
         }
@@ -153,7 +156,7 @@ public class AutoSaver
             bool success = await op.Success;
             if (success && doNotify && op.FirstFileSaved != null)
             {
-                _notify.ImagesSaved(images.Count, op.FirstFileSaved);
+                Invoker.Current.Invoke(() => _notify.ImagesSaved(images.Count, op.FirstFileSaved));
             }
             return (success, subPath);
         }
