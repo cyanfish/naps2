@@ -26,6 +26,7 @@ public static class ConsoleEntryPoint
             new CommonModule(), imageModule, new ConsoleModule(options), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
+        TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
         // Start a pending worker process
         container.Resolve<IWorkerFactory>().Init(
@@ -37,5 +38,11 @@ public static class ConsoleEntryPoint
         scanning.Execute().Wait();
 
         return ((ConsoleErrorOutput) container.Resolve<ErrorOutput>()).HasError ? 1 : 0;
+    }
+
+    private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
+    {
+        Log.FatalException("An error occurred that caused the task to terminate.", e.Exception);
+        e.SetObserved();
     }
 }

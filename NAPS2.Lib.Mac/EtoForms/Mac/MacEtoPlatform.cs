@@ -19,16 +19,6 @@ public class MacEtoPlatform : EtoPlatform
         // into a foreground process once we know we're not in worker or console mode. This ensures workers don't have
         // a chance to show in the dock.
         MacProcessHelper.TransformThisProcessToForeground();
-
-        Runtime.MarshalManagedException += (_, eventArgs) =>
-        {
-            Log.ErrorException("Marshalling managed exception", eventArgs.Exception);
-            eventArgs.ExceptionMode = MarshalManagedExceptionMode.ThrowObjectiveCException;
-        };
-        Runtime.MarshalObjectiveCException += (_, eventArgs) =>
-        {
-            Log.Error($"Marshalling ObjC exception: {eventArgs.Exception.Description}");
-        };
     }
 
     public override Application CreateApplication()
