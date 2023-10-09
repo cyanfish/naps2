@@ -1,8 +1,4 @@
-﻿using Autofac;
-using CommandLine;
-using NAPS2.Automation;
-using NAPS2.Modules;
-using NAPS2.Remoting.Worker;
+﻿using NAPS2.Modules;
 
 namespace NAPS2.EntryPoints;
 

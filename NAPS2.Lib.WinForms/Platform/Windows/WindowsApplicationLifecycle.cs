@@ -8,7 +8,7 @@ namespace NAPS2.Platform.Windows;
 /// <summary>
 /// A class to help manage the lifecycle of the NAPS2 GUI.
 /// </summary>
-public class WindowsApplicationLifecycle
+public class WindowsApplicationLifecycle : ApplicationLifecycle
 {
     private readonly StillImage _sti;
     private readonly WindowsEventLogger _windowsEventLogger;
@@ -28,7 +28,7 @@ public class WindowsApplicationLifecycle
     /// Parses the NAPS2 GUI command-line arguments.
     /// </summary>
     /// <param name="args"></param>
-    public void ParseArgs(string[] args)
+    public override void ParseArgs(string[] args)
     {
         bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
         bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
@@ -150,7 +150,7 @@ public class WindowsApplicationLifecycle
     /// <summary>
     /// May terminate the NAPS2 GUI based on the command-line arguments and running processes, sending messages to other processes if appropriate.
     /// </summary>
-    public void ExitIfRedundant()
+    public override void ExitIfRedundant()
     {
         if (_sti.ShouldRegister || _sti.ShouldUnregister || _shouldCreateEventSource)
         {

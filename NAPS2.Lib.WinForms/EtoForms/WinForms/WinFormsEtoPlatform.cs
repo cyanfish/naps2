@@ -1,10 +1,13 @@
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.Reflection;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
+using Eto.WinForms.Forms;
 using Eto.WinForms.Forms.Controls;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gdi;
 using sd = System.Drawing;
@@ -25,6 +28,21 @@ public class WinFormsEtoPlatform : EtoPlatform
         wf.Application.EnableVisualStyles();
         wf.Application.SetCompatibleTextRenderingDefault(false);
         return new Application(Eto.Platforms.WinForms);
+    }
+
+    public override void RunApplication(Application application, Form mainForm)
+    {
+        // We manually run an application rather than using eto as that lets us change the main form
+        // TODO: PR for eto to handle mainform changes correctly
+        application.MainForm = mainForm;
+        mainForm.Show();
+        var appContext = new wf.ApplicationContext(mainForm.ToNative());
+        Invoker.Current = new WinFormsInvoker(() => appContext.MainForm!);
+        WinFormsDesktopForm.ApplicationContext = appContext;
+        var setOptionsMethod =
+            typeof(ApplicationHandler).GetMethod("SetOptions", BindingFlags.Instance | BindingFlags.NonPublic);
+        setOptionsMethod!.Invoke(application.Handler, Array.Empty<object>());
+        wf.Application.Run(appContext);
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>

@@ -32,6 +32,15 @@ public abstract class EtoPlatform
     public abstract Control AccessibleImageButton(Image image, string text, Action onClick,
         int xOffset = 0, int yOffset = 0);
 
+    public virtual void InitializePlatform()
+    {
+    }
+
+    public virtual void RunApplication(Application application, Form mainForm)
+    {
+        application.Run(mainForm);
+    }
+
     public virtual void SetContainerSize(Window window, Control container, Size size, int padding)
     {
     }

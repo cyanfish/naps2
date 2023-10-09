@@ -13,6 +13,24 @@ public class MacEtoPlatform : EtoPlatform
 {
     public override bool IsMac => true;
 
+    public override void InitializePlatform()
+    {
+        // We start the process as a background process (by setting LSBackgroundOnly in Info.plist) and only turn it
+        // into a foreground process once we know we're not in worker or console mode. This ensures workers don't have
+        // a chance to show in the dock.
+        MacProcessHelper.TransformThisProcessToForeground();
+
+        Runtime.MarshalManagedException += (_, eventArgs) =>
+        {
+            Log.ErrorException("Marshalling managed exception", eventArgs.Exception);
+            eventArgs.ExceptionMode = MarshalManagedExceptionMode.ThrowObjectiveCException;
+        };
+        Runtime.MarshalObjectiveCException += (_, eventArgs) =>
+        {
+            Log.Error($"Marshalling ObjC exception: {eventArgs.Exception.Description}");
+        };
+    }
+
     public override Application CreateApplication()
     {
         return new Application(Platforms.macOS);

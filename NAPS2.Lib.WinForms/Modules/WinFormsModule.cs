@@ -3,7 +3,7 @@ using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport;
-using NAPS2.WinForms;
+using NAPS2.Platform.Windows;
 
 namespace NAPS2.Modules;
 
@@ -13,6 +13,7 @@ public class WinFormsModule : GuiModule
     {
         base.Load(builder);
 
+        builder.RegisterType<WindowsApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<PrintDocumentPrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<WinFormsDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
 

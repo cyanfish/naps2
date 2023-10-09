@@ -18,6 +18,23 @@ public class GtkEtoPlatform : EtoPlatform
     
     public override bool IsGtk => true;
 
+    public override void InitializePlatform()
+    {
+        GLib.ExceptionManager.UnhandledException += UnhandledGtkException;
+    }
+
+    private static void UnhandledGtkException(GLib.UnhandledExceptionArgs e)
+    {
+        if (e.IsTerminating)
+        {
+            Log.FatalException("An error occurred that caused the task to terminate.", e.ExceptionObject as Exception ?? new Exception());
+        }
+        else
+        {
+            Log.ErrorException("An unhandled error occurred.", e.ExceptionObject as Exception ?? new Exception());
+        }
+    }
+
     public override Application CreateApplication()
     {
         var application = new Application(Platforms.Gtk);
