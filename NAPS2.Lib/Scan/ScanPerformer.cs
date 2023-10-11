@@ -75,7 +75,7 @@ internal class ScanPerformer : IScanPerformer
 
         var images = controller.Scan(options, op.CancelToken);
 
-        if (scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null)
+        if (scanProfile.EnableAutoSave && scanProfile.AutoSaveSettings != null && !scanParams.NoAutoSave)
         {
             images = _autoSaver.Save(scanProfile.AutoSaveSettings, images);
         }
