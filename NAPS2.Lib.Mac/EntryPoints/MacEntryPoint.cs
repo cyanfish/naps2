@@ -1,4 +1,6 @@
-﻿using NAPS2.Modules;
+﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms.Mac;
+using NAPS2.Modules;
 
 namespace NAPS2.EntryPoints;
 
@@ -18,6 +20,8 @@ public static class MacEntryPoint
         {
             Log.Error($"Marshalling ObjC exception: {eventArgs.Exception.Description}");
         };
+
+        EtoPlatform.Current = new MacEtoPlatform();
 
         if (args.Length > 0 && args[0] is "cli" or "console")
         {

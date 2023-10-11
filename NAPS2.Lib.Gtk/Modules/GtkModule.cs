@@ -17,7 +17,5 @@ public class GtkModule : GuiModule
 
         builder.RegisterType<GtkDesktopForm>().As<DesktopForm>();
         builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();
-
-        EtoPlatform.Current = new GtkEtoPlatform();
     }
 }

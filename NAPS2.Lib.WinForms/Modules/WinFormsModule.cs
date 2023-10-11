@@ -19,7 +19,6 @@ public class WinFormsModule : GuiModule
 
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
 
-        EtoPlatform.Current = new WinFormsEtoPlatform();
         // TODO: Can we add a test for this?
         builder.RegisterBuildCallback(ctx =>
             Log.EventLogger = ctx.Resolve<WindowsEventLogger>());

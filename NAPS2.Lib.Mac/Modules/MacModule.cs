@@ -20,7 +20,5 @@ public class MacModule : GuiModule
 
         builder.RegisterType<MacDesktopForm>().As<DesktopForm>();
         builder.RegisterType<MacPreviewForm>().As<PreviewForm>();
-
-        EtoPlatform.Current = new MacEtoPlatform();
     }
 }

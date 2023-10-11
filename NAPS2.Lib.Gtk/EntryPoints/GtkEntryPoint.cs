@@ -1,4 +1,6 @@
-﻿using NAPS2.Modules;
+﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms.Gtk;
+using NAPS2.Modules;
 
 namespace NAPS2.EntryPoints;
 
@@ -10,6 +12,7 @@ public static class GtkEntryPoint
     public static int Run(string[] args)
     {
         GLib.ExceptionManager.UnhandledException += UnhandledGtkException;
+        EtoPlatform.Current = new GtkEtoPlatform();
 
         if (args.Length > 0 && args[0] is "cli" or "console")
         {

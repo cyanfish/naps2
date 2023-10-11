@@ -1,4 +1,6 @@
-﻿using NAPS2.Modules;
+﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms.WinForms;
+using NAPS2.Modules;
 
 namespace NAPS2.EntryPoints;
 
@@ -9,6 +11,8 @@ public static class WinFormsEntryPoint
 {
     public static int Run(string[] args)
     {
+        EtoPlatform.Current = new WinFormsEtoPlatform();
+
         if (args.Length > 0 && args[0] == "worker")
         {
             return WindowsWorkerEntryPoint.Run(args.Skip(1).ToArray());

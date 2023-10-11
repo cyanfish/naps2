@@ -24,7 +24,15 @@ public class ConsoleModule : Module
         builder.RegisterType<ConsolePdfPasswordProvider>().As<IPdfPasswordProvider>();
         builder.RegisterType<ConsoleErrorOutput>().As<ErrorOutput>().SingleInstance();
         builder.RegisterType<ConsoleOverwritePrompt>().As<IOverwritePrompt>();
-        builder.RegisterType<ConsoleOperationProgress>().As<OperationProgress>();
+        if (_options.Progress)
+        {
+            builder.RegisterType<EtoOperationProgress>().As<OperationProgress>();
+        }
+        else
+        {
+            builder.RegisterType<ConsoleOperationProgress>().As<OperationProgress>();
+        }
+        builder.RegisterType<StubNotify>().As<INotify>();
         // TODO: We might want an eto-based dialog helper, or at least handle dialogs in a more user-friendly way than just silently doing nothing
         builder.RegisterType<StubDialogHelper>().As<DialogHelper>();
         builder.RegisterType<ConsoleOutput>().AsSelf().WithParameter("writer", Console.Out);

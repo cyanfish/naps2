@@ -41,6 +41,13 @@ public abstract class EtoPlatform
         application.Run(mainForm);
     }
 
+    public virtual void RunApplication(Application application)
+    {
+        // TODO: Can we use EtoInvoker more generally and get rid of some of the platform-specific stuff?
+        Invoker.Current = new EtoInvoker(application);
+        application.Run();
+    }
+
     public virtual void SetContainerSize(Window window, Control container, Size size, int padding)
     {
     }

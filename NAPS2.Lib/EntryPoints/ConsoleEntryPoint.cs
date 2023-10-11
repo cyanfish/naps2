@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using CommandLine;
 using NAPS2.Automation;
+using NAPS2.EtoForms;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
@@ -35,7 +36,22 @@ public static class ConsoleEntryPoint
 
         // Run the scan automation logic
         var scanning = container.Resolve<AutomatedScanning>();
-        scanning.Execute().Wait();
+
+        if (options.Progress)
+        {
+            // We need to set up an Eto application in order to be able to display a progress GUI
+            EtoPlatform.Current.InitializePlatform();
+            container.Resolve<CultureHelper>().SetCulturesFromConfig();
+
+            var application = EtoPlatform.Current.CreateApplication();
+            application.UnhandledException += UnhandledException;
+            application.Initialized += (_, _) => scanning.Execute().ContinueWith(_ => application.Quit());
+            EtoPlatform.Current.RunApplication(application);
+        }
+        else
+        {
+            scanning.Execute().Wait();
+        }
 
         return ((ConsoleErrorOutput) container.Resolve<ErrorOutput>()).HasError ? 1 : 0;
     }
@@ -44,5 +60,11 @@ public static class ConsoleEntryPoint
     {
         Log.FatalException("An error occurred that caused the task to terminate.", e.Exception);
         e.SetObserved();
+    }
+
+    private static void UnhandledException(object? sender, Eto.UnhandledExceptionEventArgs e)
+    {
+        Log.FatalException("An error occurred that caused the application to close.",
+            e.ExceptionObject as Exception ?? new Exception());
     }
 }
