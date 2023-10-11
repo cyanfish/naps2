@@ -1,3 +1,6 @@
+Changes in 7.1.1:
+- Bug fixes
+
 Changes in 7.1.0:
 - Windows: Added ESCL Driver option
   - This allows using most network scanners without needing to install a separate driver
