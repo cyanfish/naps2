@@ -187,6 +187,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     private void FlushImageWithColorSpace(MemoryStream fullBuffer, ICScannerBandData data)
     {
         var colorSpace = CGColorSpace.CreateIccData(NSData.FromFile(data.ColorSyncProfilePath!));
+        var flags = (data.BitsPerPixel == 32 ? CGBitmapFlags.NoneSkipLast : CGBitmapFlags.None) |
+                    CGBitmapFlags.ByteOrderDefault;
         var cgImage = new CGImage(
             (int) data.FullImageWidth,
             (int) data.FullImageHeight,
@@ -194,7 +196,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             (int) data.BitsPerPixel,
             (int) data.BytesPerRow,
             colorSpace,
-            CGBitmapFlags.None,
+            flags,
             new CGDataProvider(fullBuffer.GetBuffer(), 0, (int) fullBuffer.Length),
             null,
             true,
