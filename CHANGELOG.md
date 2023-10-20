@@ -1,3 +1,6 @@
+Changes in 7.1.2:
+- Mac: Fixed scanning with macOS 14 Sonoma 
+
 Changes in 7.1.1:
 - Bug fixes
 
