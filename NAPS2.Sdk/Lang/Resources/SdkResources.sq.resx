@@ -70,9 +70,9 @@
     <value>Drejtuesi i zgjedhur nuk mbështetet në këtë sistem.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Ndodhi një gabim gjatë ekzekutimit të OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Afati i veprimit të OCR skadoi.</value>
   </data>
 </root>

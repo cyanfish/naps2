@@ -73,7 +73,7 @@
     <value>Skedar TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Skedar JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Emri mungon.</value>
@@ -190,7 +190,7 @@
     <value>nga {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Ndodhi një gabim i panjohur gjatë ekzekutimit të skanimit në grup.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Grupi u anulua.</value>
@@ -367,7 +367,7 @@
     <value>Po kontrollon...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Kontrolli i përditësimit është çaktivizuar.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Ndodhi një gabim gjatë instalimit të përditësimit.</value>

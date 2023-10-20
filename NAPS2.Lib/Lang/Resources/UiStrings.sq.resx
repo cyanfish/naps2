@@ -16,7 +16,7 @@
     <value>Rreth</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Të drejtat e autorit {0} Kontribuesit e NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ikonat nga:</value>
@@ -118,7 +118,7 @@
     <value>Thekso</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Korrigjimi i dokumentit</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Rivendos</value>
@@ -166,16 +166,16 @@
     <value>Kthe mbrapsht</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Ktheji të gjitha së prapthi</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Kthe së prapthi pjesën e zgjedhur</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Pastro</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Pastro të gjitha</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Gjuha</value>
@@ -199,37 +199,37 @@
     <value>Shkallëzo me dritaren</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Ruaj</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Ruaji të gjitha</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Ruaj pjesën e zgjedhur</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Ruaji të gjitha si PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Ruaj pjesën e zgjedhur si Imazhe PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Ruaji të gjitha si Imazhe</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Ruaj pjesën e zgjedhur si Imazhe</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Dërgoje të gjithë me e-mail</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Dërgo me e-mail pjesën e zgjedhur</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Dërgoje të gjithë me e-mail si PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Dërgo me e-mail pjesë e zgjedhur si PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Cilësimet e profilit</value>
@@ -244,16 +244,16 @@
     <value>Drejtuesi TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Drejtuesi ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>Drejtuesi i rrjetit të ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>Drejtuesi USB i ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Drejtuesi i Apple</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>Drejtuesi SANE</value>
@@ -511,7 +511,7 @@
     <value>Po rrit automatikisht numrin (2 shifra)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Duke rritur automatikisht numrin (1 shifër)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Emri i skedarit</value>
@@ -565,7 +565,7 @@
     <value>Fjalëkalimi</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Skedari i mëposhtëm është i shifruar dhe kërkon një fjalëkaim për t'u hapur:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Pyet për shtegun e skedarit</value>
@@ -640,7 +640,7 @@
     <value>Kthe përmbys faqet duplekse</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Versioni Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementimi i Twain:</value>
@@ -697,9 +697,9 @@
     <value>Hap Dosjen</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Mjetet</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Aktivizo ruajtjen e logeve të debug</value>
   </data>
 </root>

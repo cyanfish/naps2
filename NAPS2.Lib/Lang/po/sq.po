@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-10-20 16:33\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -25,15 +25,15 @@ msgstr "Ngjyra me 24 bit"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr "A3 (297 x 420 mm)"
+msgstr "A3 (297x420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4 (210 x 297 mm)"
+msgstr "A4 (210x297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5 (148 x 210 mm)"
+msgstr "A5 (148x210 mm)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
@@ -106,7 +106,7 @@ msgstr "Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Ndodhi një gabim gjatë ekzekutimit të OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -143,7 +143,7 @@ msgstr "Një operacion është në progres. Je i sigurt se dëshiron të dalësh
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Ndodhi një gabim i panjohur gjatë ekzekutimit të skanimit në grup."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -155,11 +155,11 @@ msgstr "Një përditësim i OCR është i disponueshëm."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Drejtuesi i Apple"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Mail"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -220,7 +220,7 @@ msgstr "Cilësimet e ruajtjes automatike"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Duke rritur automatikisht numrin (1 shifër)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -240,11 +240,11 @@ msgstr "Ekzekuto OCR automatikisht pas skanimit"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -265,7 +265,7 @@ msgstr "Skanimi në grup ndaloi për shkak gabimi."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "Më e mira"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -294,7 +294,7 @@ msgstr "Shkëlqimi:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -344,7 +344,7 @@ msgstr "Pastro"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Pastro të gjitha"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -380,7 +380,7 @@ msgstr "Po kopjon..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Të drejtat e autorit {0} Kontribuesit e NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -468,7 +468,7 @@ msgstr "Emri i afishimit:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Korrigjimi i dokumentit"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
@@ -501,15 +501,15 @@ msgstr "Dupleks"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "Drejtuesi ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "Drejtuesi i rrjetit të ESCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "Drejtuesi USB i ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -517,11 +517,11 @@ msgstr "Modifiko"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Dërgoje të gjithë me e-mail"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Dërgoje të gjithë me e-mail si PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
@@ -534,11 +534,11 @@ msgstr "Progresi i email të PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Dërgo me e-mail pjesën e zgjedhur"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Dërgo me e-mail pjesë e zgjedhur si PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -551,7 +551,7 @@ msgstr "Aktivizo ruajtjen automatike"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Aktivizo ruajtjen e logeve të debug"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -585,7 +585,7 @@ msgstr "Përjashto faqet bosh"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "I shpejtë"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -625,7 +625,7 @@ msgstr "Xham"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -714,7 +714,7 @@ msgstr "Skedar JPEG (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "Skedar JPEG2000 (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -726,7 +726,7 @@ msgstr "Fjalët kyçe:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -754,7 +754,7 @@ msgstr "Cilësi maksimale (skedarë të mëdhenj)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Transferim në kujtesë"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -792,11 +792,11 @@ msgstr "Shumë skanime (pyet ndërmjet skanimeve)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
@@ -812,7 +812,7 @@ msgstr "Emri mungon."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Transferim nativ"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -859,7 +859,7 @@ msgstr "Asnjë"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Not Another PDF Scanner"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -871,7 +871,7 @@ msgstr "Numri i skanimeve:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -895,7 +895,7 @@ msgstr "Regjimi OCR:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
@@ -956,19 +956,19 @@ msgstr "PDF u ruajt."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1091,11 +1091,11 @@ msgstr "Kthe mbrapsht"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Ktheji të gjitha së prapthi"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Kthe së prapthi pjesën e zgjedhur"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1131,19 +1131,19 @@ msgstr "Drejtuesi SANE"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Ruaj"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Ruaji të gjitha"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Ruaji të gjitha si Imazhe"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Ruaji të gjitha si PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1165,15 +1165,15 @@ msgstr "Progresi i ruajtjes së PDF"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Ruaj pjesën e zgjedhur"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Ruaj pjesën e zgjedhur si Imazhe"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Ruaj pjesën e zgjedhur si Imazhe PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1312,7 +1312,7 @@ msgstr "Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketë
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "Afati i veprimit të OCR skadoi."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1338,7 +1338,7 @@ msgstr "Skedari {0} tashmë ekziston. A dëshironi ta mbishkruani?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Skedari i mëposhtëm është i shifruar dhe kërkon një fjalëkaim për t'u hapur:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1387,7 +1387,7 @@ msgstr "Skaneri i zgjedhur është jashtë linje."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
@@ -1403,7 +1403,7 @@ msgstr "Titulli:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Mjetet"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1427,7 +1427,7 @@ msgstr "Progresi i përditësimit"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "Kontrolli i përditësimit është çaktivizuar."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1484,7 +1484,7 @@ msgstr "Kufiri i bardhë"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Versioni Wia:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1525,7 +1525,7 @@ msgstr "Zvogëlo"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1533,7 +1533,7 @@ msgstr "inç"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
@@ -1541,19 +1541,19 @@ msgstr "nga {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
@@ -1561,7 +1561,7 @@ msgstr "{0} / {1} skedarë"
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr ""
+msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"

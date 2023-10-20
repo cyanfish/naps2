@@ -61,13 +61,13 @@
     <value>mm</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297 x 420 mm)</value>
+    <value>A3 (297x420 mm)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210 x 297 mm)</value>
+    <value>A4 (210x297 mm)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148 x 210 mm)</value>
+    <value>A5 (148x210 mm)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
     <value>B4 (250x353 mm)</value>
@@ -127,10 +127,10 @@
     <value>E vjetër (vetëm ndërfaqja e përdoruesit origjinale)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Transferim nativ</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Transferim në kujtesë</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSM e vjetër</value>
@@ -142,9 +142,9 @@
     <value>E paracaktuar</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>I shpejtë</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Më e mira</value>
   </data>
 </root>
