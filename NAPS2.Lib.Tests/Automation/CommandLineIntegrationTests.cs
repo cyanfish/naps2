@@ -283,6 +283,40 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ExistingFile_ForceOverwrite_SplitWithNoPlaceholder()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                ProfileName = string.Empty,
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                ProfileName = string.Empty,
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.1.pdf");
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.2.pdf");
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.3.pdf");
+        Assert.False(File.Exists($"{FolderPath}/test.4.pdf"));
+        Assert.False(File.Exists($"{FolderPath}/test.5.pdf"));
+        Assert.False(File.Exists($"{FolderPath}/test.6.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task MultipleImages()
     {
         var path = $"{FolderPath}/test.pdf";
