@@ -585,7 +585,8 @@ public class AutomatedScanning
                 }
             };
             int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
-            string actualPath = _placeholders.Substitute(path, !_options.ForceOverwrite, scanIndex++, _scanList.Count > 1 ? digits : 0);
+            string actualPath = _placeholders.Substitute(path, !_options.ForceOverwrite,
+                scanIndex++, _scanList.Count > 1 ? digits : 0, !_options.ForceOverwrite);
             op.Start(actualPath, _placeholders, fileContents, _config.Get(c => c.PdfSettings), _ocrParams);
             if (!await op.Success)
             {
