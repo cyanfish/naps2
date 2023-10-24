@@ -74,6 +74,7 @@ internal class SavePdfOperation : OperationBase
                 foreach (var imagesForFile in imagesByFile)
                 {
                     var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
+                    // TODO: Overwrite prompt non-single file?
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
                     if (singleFile && IsFileInUse(currentFileName, out var ex))
