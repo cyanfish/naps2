@@ -70,11 +70,10 @@ internal class SavePdfOperation : OperationBase
             {
                 int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
                 int i = 0;
+
                 foreach (var imagesForFile in imagesByFile)
                 {
-                    var currentFileName = placeholders.Substitute(fileName,
-                        _overwritePrompt.ConfirmOverwrite(fileName) == OverwriteResponse.Yes,
-                        i, singleFile ? 0 : digits);
+                    var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
                     if (singleFile && IsFileInUse(currentFileName, out var ex))
