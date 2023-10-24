@@ -70,7 +70,6 @@ internal class SavePdfOperation : OperationBase
             {
                 int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
                 int i = 0;
-
                 foreach (var imagesForFile in imagesByFile)
                 {
                     var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
