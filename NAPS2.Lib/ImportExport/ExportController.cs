@@ -40,6 +40,7 @@ public class ExportController : IExportController
         if (_config.Get(c => c.PdfSettings.SkipSavePrompt) && Path.IsPathRooted(defaultFileName))
         {
             savePath = defaultFileName!;
+            Directory.CreateDirectory(Path.GetDirectoryName(savePath)!);
         }
         else
         {
