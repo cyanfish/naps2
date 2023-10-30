@@ -447,6 +447,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to stop sharing {0}?.
+        /// </summary>
+        internal static string ConfirmDeleteSharedDevice {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteSharedDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contrast:.
         /// </summary>
         internal static string ContrastLabel {
@@ -1806,6 +1815,33 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scanner Sharing.
+        /// </summary>
+        internal static string ScannerSharing {
+            get {
+                return ResourceManager.GetString("ScannerSharing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanner Sharing.
+        /// </summary>
+        internal static string ScannerSharingFormTitle {
+            get {
+                return ResourceManager.GetString("ScannerSharingFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shared scanners can be used from other computers on the local network by selecting &quot;ESCL Driver&quot; in the other computer&apos;s NAPS2 profile settings..
+        /// </summary>
+        internal static string ScannerSharingIntro {
+            get {
+                return ResourceManager.GetString("ScannerSharingIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Second (00-59).
         /// </summary>
         internal static string Second2Digit {
@@ -1856,6 +1892,15 @@ namespace NAPS2.Lang.Resources {
         internal static string SetDefault {
             get {
                 return ResourceManager.GetString("SetDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shared Scanner Settings.
+        /// </summary>
+        internal static string SharedDeviceFormTitle {
+            get {
+                return ResourceManager.GetString("SharedDeviceFormTitle", resourceCulture);
             }
         }
         

@@ -137,7 +137,7 @@ internal class EsclScanDriver : IScanDriver
             var parts = options.Device!.ID.Split('|');
             var ip = parts[0];
             var uuid = parts[1];
-            if ((service.IpV4 ?? service.IpV6!).ToString() == ip || service.Uuid == uuid)
+            if (service.Uuid == uuid)
             {
                 foundTcs.TrySetResult(service);
             }

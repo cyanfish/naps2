@@ -4,13 +4,14 @@ namespace NAPS2.Escl.Server;
 
 internal class JobState
 {
-    public static JobState CreateNewJob()
+    public static JobState CreateNewJob(IEsclScanJob job)
     {
         return new JobState
         {
             Id = Guid.NewGuid().ToString("D"),
             Status = JobStatus.Processing,
-            LastUpdated = Stopwatch.StartNew()
+            LastUpdated = Stopwatch.StartNew(),
+            Job = job
         };
     }
 
@@ -19,6 +20,8 @@ internal class JobState
     public required JobStatus Status { get; set; }
     
     public required Stopwatch LastUpdated { get; set; }
+
+    public required IEsclScanJob Job { get; set; }
 }
 
 internal enum JobStatus

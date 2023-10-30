@@ -5,36 +5,67 @@ namespace NAPS2.Escl.Server;
 
 public class EsclServer : IDisposable
 {
-    private readonly EsclServerConfig _serverConfig;
-    private readonly EsclServerState _serverState = new();
     private readonly CancellationTokenSource _cts = new();
     private readonly MdnsAdvertiser _advertiser;
-    private WebServer? _server;
+    private readonly Dictionary<EsclDeviceConfig, CancellationTokenSource> _devices = new();
+    private bool _started;
 
-    public EsclServer(EsclServerConfig serverConfig)
+    public EsclServer()
     {
-        _serverConfig = serverConfig;
-        _advertiser = new MdnsAdvertiser(serverConfig);
+        _advertiser = new MdnsAdvertiser();
     }
 
+    public void AddDevice(EsclDeviceConfig deviceConfig)
+    {
+        if (deviceConfig.Port == 0)
+        {
+            deviceConfig.Port = Port++;
+        }
+        _advertiser.AdvertiseDevice(deviceConfig);
+        _devices[deviceConfig] = new CancellationTokenSource();
+        if (_started)
+        {
+            StartServer(deviceConfig);
+        }
+    }
+
+    public void RemoveDevice(EsclDeviceConfig deviceConfig)
+    {
+        _advertiser.UnadvertiseDevice(deviceConfig);
+        _devices[deviceConfig].Cancel();
+        _devices.Remove(deviceConfig);
+    }
+
+    // TODO: Better port handling
     public int Port { get; set; } = 9898;
 
     public void Start()
     {
-        if (_server != null)
+        if (_started)
         {
             throw new InvalidOperationException();
         }
-        var url = $"http://+:{Port}/";
-        _server = new WebServer(o => o
+        _started = true;
+
+        foreach (var device in _devices.Keys)
+        {
+            StartServer(device);
+        }
+    }
+
+    private void StartServer(EsclDeviceConfig deviceConfig)
+    {
+        // TODO: Auto free port?
+        var url = $"http://+:{deviceConfig.Port}/";
+        var serverState = new EsclServerState();
+        var server = new WebServer(o => o
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url))
-            .WithWebApi("/escl", m => m.WithController(() => new EsclApiController(_serverConfig, _serverState)));
-        // _server.HandleHttpException(async (_, _) => { });
-        _server.StateChanged += ServerOnStateChanged;
+            .WithWebApi("/escl", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
+        server.HandleHttpException(async (_, _) => { });
+        server.StateChanged += ServerOnStateChanged;
         // TODO: This might block on tasks, maybe copy impl but async
-        _server.Start(_cts.Token);
-        _advertiser.Advertise();
+        server.Start(CancellationTokenSource.CreateLinkedTokenSource(_cts.Token, _devices[deviceConfig].Token).Token);
     }
 
     private void ServerOnStateChanged(object sender, WebServerStateChangedEventArgs e)

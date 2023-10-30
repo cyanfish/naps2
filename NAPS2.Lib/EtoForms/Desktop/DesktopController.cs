@@ -32,6 +32,7 @@ public class DesktopController
     private readonly IDesktopScanController _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
+    private readonly SharedDeviceManager _sharedDeviceManager;
 
     private bool _closed;
     private bool _initialized;
@@ -45,7 +46,8 @@ public class DesktopController
         ImageClipboard imageClipboard, ImageListActions imageListActions,
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
-        DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter)
+        DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
+        SharedDeviceManager sharedDeviceManager)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -65,6 +67,7 @@ public class DesktopController
         _desktopScanController = desktopScanController;
         _desktopFormProvider = desktopFormProvider;
         _scannedImagePrinter = scannedImagePrinter;
+        _sharedDeviceManager = sharedDeviceManager;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
@@ -73,6 +76,7 @@ public class DesktopController
     {
         if (_initialized) return;
         _initialized = true;
+        StartSharingDevices();
         StartPipesServer();
         ShowStartupMessages();
         ShowRecoveryPrompt();
@@ -81,6 +85,11 @@ public class DesktopController
         SetFirstRunDate();
         ShowDonationPrompt();
         ShowUpdatePrompt();
+    }
+
+    private void StartSharingDevices()
+    {
+        _sharedDeviceManager.StartSharing();
     }
 
     private void ShowDonationPrompt()

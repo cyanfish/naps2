@@ -1,6 +1,7 @@
 using System.Net;
 using NAPS2.Escl.Client;
 using NAPS2.Escl.Server;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Escl.Tests;
@@ -16,15 +17,18 @@ public class ClientServerTests
 #else
         int port = 9801;
 #endif
-        using var server = new EsclServer(new EsclServerConfig
+        var job = Substitute.For<IEsclScanJob>();
+        using var server = new EsclServer { Port = port };
+        server.AddDevice(new EsclDeviceConfig
         {
             Capabilities = new EsclCapabilities
             {
                 Version = "2.0",
                 MakeAndModel = "HP Blah",
                 SerialNumber = "123abc"
-            }
-        }) { Port = port };
+            },
+            CreateJob = () => job
+        });
         server.Start();
         var client = new EsclClient(new EsclService
         {

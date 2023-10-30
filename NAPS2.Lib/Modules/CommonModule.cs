@@ -9,6 +9,7 @@ using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Platform.Windows;
 using NAPS2.Recovery;
+using NAPS2.Remoting;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
@@ -47,8 +48,9 @@ public class CommonModule : Module
         builder.Register(_ => new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
             Path.Combine(Paths.AppData, "config.xml"))).SingleInstance();
 
-        // Host
+        // Remoting
         builder.Register<IWorkerFactory>(_ => WorkerFactory.CreateDefault()).SingleInstance();
+        builder.RegisterType<SharedDeviceManager>().AsSelf().SingleInstance();
 
         // Logging
         builder.Register<ILogger>(ctx =>

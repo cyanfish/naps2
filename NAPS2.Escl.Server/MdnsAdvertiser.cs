@@ -4,36 +4,50 @@ namespace NAPS2.Escl.Server;
 
 public class MdnsAdvertiser : IDisposable
 {
-    private readonly EsclServerConfig _serverConfig;
-    private ServiceDiscovery? _sd;
+    private readonly ServiceDiscovery _sd;
+    private readonly Dictionary<string, ServiceProfile> _serviceProfiles = new();
 
-    public MdnsAdvertiser(EsclServerConfig serverConfig)
+    public MdnsAdvertiser()
     {
-        _serverConfig = serverConfig;
+        _sd = new ServiceDiscovery();
     }
 
-    public void Advertise()
+    public void AdvertiseDevice(EsclDeviceConfig deviceConfig)
     {
-        var name = _serverConfig.Capabilities.MakeAndModel;
-        var service = new ServiceProfile(name, "_uscan._tcp", 9898);
+        if (deviceConfig.Capabilities.Uuid == null)
+        {
+            throw new ArgumentException("UUID must be specified");
+        }
+        var name = deviceConfig.Capabilities.MakeAndModel;
+        var service = new ServiceProfile(name, "_uscan._tcp", (ushort) deviceConfig.Port);
         service.AddProperty("txtvers", "1");
         service.AddProperty("Vers", "2.0"); // TODO: verify
         service.AddProperty("rs", "escl");
         service.AddProperty("ty", name);
         service.AddProperty("pdl", "application/pdf,image/jpeg,image/png");
-        // TODO: Actual UUID, adf/duplex, etc.
-        service.AddProperty("uuid", "0e468f6d-e5dc-4abe-8e9f-ad08d8546b0c");
+        // TODO: Actual adf/duplex, etc.
+        service.AddProperty("uuid", deviceConfig.Capabilities.Uuid);
         service.AddProperty("cs", "color,grayscale,binary");
         service.AddProperty("is", "platen"); // and ,adf
         service.AddProperty("duplex", "F");
-        _sd = new ServiceDiscovery();
         _sd.Announce(service);
         _sd.Advertise(service);
+        _serviceProfiles.Add(deviceConfig.Capabilities.Uuid, service);
+    }
+
+    public void UnadvertiseDevice(EsclDeviceConfig deviceConfig)
+    {
+        if (deviceConfig.Capabilities.Uuid == null)
+        {
+            throw new ArgumentException("UUID must be specified");
+        }
+        _sd.Unadvertise(_serviceProfiles[deviceConfig.Capabilities.Uuid]);
+        _serviceProfiles.Remove(deviceConfig.Capabilities.Uuid);
     }
 
     public void Dispose()
     {
-        _sd?.Unadvertise();
-        _sd?.Dispose();
+        _sd.Unadvertise();
+        _sd.Dispose();
     }
 }

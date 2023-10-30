@@ -12,19 +12,19 @@ internal class EsclApiController : WebApiController
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
 
-    private readonly EsclServerConfig _serverConfig;
+    private readonly EsclDeviceConfig _deviceConfig;
     private readonly EsclServerState _serverState;
 
-    internal EsclApiController(EsclServerConfig serverConfig, EsclServerState serverState)
+    internal EsclApiController(EsclDeviceConfig deviceConfig, EsclServerState serverState)
     {
-        _serverConfig = serverConfig;
+        _deviceConfig = deviceConfig;
         _serverState = serverState;
     }
 
     [Route(HttpVerbs.Get, "/ScannerCapabilities")]
     public async Task GetScannerCapabilities()
     {
-        var caps = _serverConfig.Capabilities;
+        var caps = _deviceConfig.Capabilities;
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerCapabilities",
@@ -105,7 +105,8 @@ internal class EsclApiController : WebApiController
     [Route(HttpVerbs.Post, "/ScanJobs")]
     public void CreateScanJob()
     {
-        var jobState = JobState.CreateNewJob();
+        // TODO: Actually use job input for scan options
+        var jobState = JobState.CreateNewJob(_deviceConfig.CreateJob());
         _serverState.Jobs[jobState.Id] = jobState;
         Response.Headers.Add("Location", $"{Request.Url}/{jobState.Id}");
         Response.StatusCode = 201;
@@ -117,6 +118,7 @@ internal class EsclApiController : WebApiController
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
             jobState.Status is JobStatus.Pending or JobStatus.Processing)
         {
+            jobState.Job.Cancel();
             jobState.Status = JobStatus.Canceled;
             jobState.LastUpdated = Stopwatch.StartNew();
         }
@@ -132,22 +134,26 @@ internal class EsclApiController : WebApiController
     }
 
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
-    public void NextDocument(string jobId)
+    public async Task NextDocument(string jobId)
     {
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
-            jobState.Status is JobStatus.Pending or JobStatus.Processing)
+            jobState.Status is JobStatus.Pending or JobStatus.Processing &&
+            await jobState.Job.WaitForNextDocument())
         {
             Response.Headers.Add("Content-Location", $"/escl/ScanJobs/{jobState.Id}/1");
             // Bypass https://github.com/unosquare/embedio/issues/510
             var field = Response.GetType().GetField("<ProtocolVersion>k__BackingField",
                 BindingFlags.Instance | BindingFlags.NonPublic);
-            field!.SetValue(Response, new Version(1, 1));
+            if (field != null)
+            {
+                field.SetValue(Response, new Version(1, 1));
+            }
             Response.SendChunked = true;
             Response.ContentType = "image/jpeg";
             Response.ContentEncoding = null;
             using var stream = Response.OutputStream;
-            var bytes = File.ReadAllBytes(@"C:\Devel\VS\NAPS2\NAPS2.Sdk.Tests\Resources\dog.jpg");
-            stream.Write(bytes, 0, bytes.Length);
+            jobState.Job.WriteDocumentTo(stream);
+            // TODO: Let IEsclScanJob update status
             jobState.Status = JobStatus.Completed;
             jobState.LastUpdated = Stopwatch.StartNew();
         }

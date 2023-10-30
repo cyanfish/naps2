@@ -86,7 +86,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
-<!--    <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />-->
+    <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="'$(TargetFramework)' == 'net6-macos10.15'" />
     <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
     <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />

@@ -1,3 +1,16 @@
+Changes in 7.2.0:
+- Scanner Sharing
+  - Share scanners with other computers on the local network, for example:
+    - Turn a desktop-connected USB scanner into a wireless scanner usable from your laptop
+    - Allow Windows-only scanners to be used from Mac/Linux using a virtual machine
+    - Set up a Raspberry Pi to turn a USB scanner into a wireless scanner
+  - On the host computer, under the Scan menu, click Scanner Sharing and choose the scanners to share
+    - Under the Tools menu on Mac
+  - On the client computer, select "ESCL Driver" in your profile settings and you should be able to select the shared scanner
+    - "Apple Driver" on Mac and "Sane Driver" on Linux should also work
+  - NAPS2 currently must be kept open on the host for sharing to work
+  - Shared scanners can be used from any ESCL-capable client, not just NAPS2
+
 Changes in 7.1.2:
 - Mac: Fixed scanning with macOS 14 Sonoma 
 

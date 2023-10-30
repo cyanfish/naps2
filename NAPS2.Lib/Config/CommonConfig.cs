@@ -4,6 +4,7 @@ using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.Pdf;
 using NAPS2.Ocr;
+using NAPS2.Remoting;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 
@@ -28,6 +29,9 @@ public class CommonConfig
 
     [Common]
     public ImmutableList<NamedPageSize> CustomPageSizePresets { get; set; } = ImmutableList<NamedPageSize>.Empty;
+
+    [Common]
+    public ImmutableList<SharedDevice> SharedDevices { get; set; } = ImmutableList<SharedDevice>.Empty;
 
     [App]
     public string? StartupMessageTitle { get; set; }

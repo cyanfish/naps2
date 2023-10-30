@@ -155,6 +155,7 @@ public class MacDesktopForm : DesktopForm
                     Items =
                     {
                         Commands.BatchScan,
+                        Commands.ScannerSharing,
                         Commands.Ocr
                     }
                 }

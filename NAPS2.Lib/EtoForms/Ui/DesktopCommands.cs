@@ -43,6 +43,12 @@ public class DesktopCommands
             Image = iconProvider.GetIcon("application_cascade"),
             Shortcut = Application.Instance.CommonModifier | Keys.B
         };
+        ScannerSharing = new ActionCommand(desktopSubFormController.ShowScannerSharingForm)
+        {
+            Text = UiStrings.ScannerSharing,
+            Image = iconProvider.GetIcon("wireless16"),
+            Shortcut = Application.Instance.CommonModifier | Keys.G
+        };
         Profiles = new ActionCommand(desktopSubFormController.ShowProfilesForm)
         {
             Text = UiStrings.Profiles,
@@ -317,6 +323,7 @@ public class DesktopCommands
     public ActionCommand Scan { get; set; }
     public ActionCommand NewProfile { get; set; }
     public ActionCommand BatchScan { get; set; }
+    public ActionCommand ScannerSharing { get; set; }
     public ActionCommand Profiles { get; set; }
     public ActionCommand Ocr { get; set; }
     public ActionCommand Import { get; set; }
