@@ -22,6 +22,7 @@ internal abstract class Placeholders
     public const string NUMBER_1_DIGIT = "$(n)";
     public const string FULL_DATE = "$(YYYY)-$(MM)-$(DD)";
     public const string FULL_TIME = "$(hh)_$(mm)_$(ss)";
+    public const string PATCH_T = "$(PatchT)";
 
     /// <summary>
     /// Substitutes all the standard placeholders. For example, "$(YYYY)-$(MM)-$(DD) $(hh):$(mm):$(ss)" is substituted with the current date and time. Substitutes environment variables. Handles auto-numbering for multiple files,
@@ -82,7 +83,7 @@ internal abstract class Placeholders
             };
 
         private static readonly Regex NumberPlaceholderPattern = new Regex(@"\$\(n+\)");
-
+         
         private readonly DateTime? _dateTimeOverride;
 
         public DefaultPlaceholders(DateTime? dateTimeOverride = null)
@@ -140,6 +141,15 @@ internal abstract class Placeholders
             } while (incrementIfExists && File.Exists(result));
 
             return result;
+        }
+
+        private string SubstitutePatchTNumber(string path) 
+        {
+            string result;
+
+
+
+            return "";
         }
     }
 }

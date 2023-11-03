@@ -25,4 +25,10 @@ public class StubDialogHelper : DialogHelper
         filePaths = null;
         return false;
     }
+
+    public override bool PromptToSelectFolder(string? folderPath, out string? savePath)
+    {
+        savePath = null;
+        return false;
+    }
 }

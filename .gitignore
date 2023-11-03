@@ -1,5 +1,6 @@
 Desktop.ini
 .DS_Store
+deletebins.bat
 packages/
 *.user
 *.suo

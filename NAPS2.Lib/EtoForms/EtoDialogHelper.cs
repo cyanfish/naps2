@@ -131,4 +131,18 @@ public class EtoDialogHelper : DialogHelper
         filePaths = null;
         return false;
     }
+
+    public override bool PromptToSelectFolder(string? folderPath, out string? savePath)
+    {
+        var selectFolderDialog = new SelectFolderDialog();
+
+        if (selectFolderDialog.ShowDialog(null) == DialogResult.Ok)
+        {
+            savePath = selectFolderDialog.Directory;
+            return true;
+        }
+
+        savePath = null;
+        return false;
+    }
 }

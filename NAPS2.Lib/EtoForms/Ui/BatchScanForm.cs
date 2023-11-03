@@ -41,11 +41,27 @@ public class BatchScanForm : EtoDialogBase
     private readonly RadioButton _saveToSingleFile;
     private readonly RadioButton _saveToMultipleFiles;
     private readonly LayoutVisibility _multiVis = new(false);
+    private readonly LayoutVisibility _patchTVis = new(false);
+    private readonly LayoutVisibility _separatorSheetNewBatchVis = new(false);
+    private readonly LayoutVisibility _restartBatchOnErrorVis = new(false);
+    private readonly LayoutVisibility _copyToStagingFolderVis = new(false);
     private readonly RadioButton _filePerScan;
     private readonly RadioButton _filePerPage;
     private readonly RadioButton _separateByPatchT;
+    // Barcode features
+    private readonly RadioButton _separatorSheetNewBatch;
+    private readonly RadioButton _includeSeparatorSheet;
+    private readonly RadioButton _useBarcodePlaceholder;
+    private readonly RadioButton _restartSheetsNumbering;
+    private readonly RadioButton _restartBatchOnError;
+    private readonly RadioButton _copyToStagingFolder;
+    private readonly RadioButton _eraseBatchOnError;
+    private readonly RadioButton _useBatchAsFolderName;
+    private readonly RadioButton _createPatchTLog;
     private readonly LinkButton _moreInfo = C.UrlLink(PATCH_CODE_INFO_URL, UiStrings.MoreInfo);
+    private readonly LayoutVisibility _stagingFolderPathVis = new(false);
     private readonly LayoutVisibility _fileVis = new(false);
+    private readonly FolderPath _stagingFolderPath;
     private readonly FilePathWithPlaceholders _filePath;
 
     private readonly TransactionConfigScope<CommonConfig> _userTransact;
@@ -69,6 +85,17 @@ public class BatchScanForm : EtoDialogBase
         _filePerScan = new RadioButton { Text = UiStrings.OneFilePerScan };
         _filePerPage = new RadioButton(_filePerScan) { Text = UiStrings.OneFilePerPage };
         _separateByPatchT = new RadioButton(_filePerScan) { Text = UiStrings.SeparateByPatchT };
+        // New features
+        _separatorSheetNewBatch = new RadioButton() { Text = UiStrings.SeparatorSheetNewBatch };
+        _includeSeparatorSheet = new RadioButton() { Text = UiStrings.IncludeSeparatorSheet };
+        _useBarcodePlaceholder = new RadioButton() { Text = UiStrings.UseBarcodePlaceholder };
+        _restartSheetsNumbering = new RadioButton() { Text = UiStrings.RestartSheetsNumbering };
+        _restartBatchOnError = new RadioButton() { Text = UiStrings.RestartBatchOnError };
+        _copyToStagingFolder = new RadioButton() { Text = UiStrings.CopyToStagingFolder };
+        _eraseBatchOnError = new RadioButton() { Text = UiStrings.EraseBatchOnError };
+        _useBatchAsFolderName = new RadioButton() { Text = UiStrings.UseBatchAsFolderName };
+        _createPatchTLog = new RadioButton() { Text = UiStrings.CreatePatchTLog };
+        _stagingFolderPath = new(this, dialogHelper);
         _filePath = new(this, dialogHelper);
 
         _start.Click += Start;
@@ -76,6 +103,10 @@ public class BatchScanForm : EtoDialogBase
         _multipleScansDelay.CheckedChanged += UpdateVisibility;
         _saveToSingleFile.CheckedChanged += UpdateVisibility;
         _saveToMultipleFiles.CheckedChanged += UpdateVisibility;
+        _separateByPatchT.CheckedChanged += UpdateVisibility;
+        _separatorSheetNewBatch.CheckedChanged += UpdateVisibility;
+        _restartBatchOnError.CheckedChanged += UpdateVisibility;
+        _copyToStagingFolder.CheckedChanged += UpdateVisibility;
 
         _userTransact = Config.User.BeginTransaction();
         _transactionConfig = Config.WithTransaction(_userTransact);
@@ -86,8 +117,13 @@ public class BatchScanForm : EtoDialogBase
 
     private void UpdateVisibility(object? sender, EventArgs e)
     {
+        _copyToStagingFolderVis.IsVisible = _copyToStagingFolder.Checked;
+        _restartBatchOnErrorVis.IsVisible = _restartBatchOnError.Checked;
+        _separatorSheetNewBatchVis.IsVisible = _separatorSheetNewBatch.Checked;
+        _patchTVis.IsVisible = _separateByPatchT.Checked;
         _delayVis.IsVisible = _multipleScansDelay.Checked;
         _multiVis.IsVisible = _saveToMultipleFiles.Checked;
+        _stagingFolderPathVis.IsVisible = _copyToStagingFolder.Checked;
         _fileVis.IsVisible = _saveToSingleFile.Checked || _saveToMultipleFiles.Checked;
         LayoutController.Invalidate();
     }
@@ -147,6 +183,26 @@ public class BatchScanForm : EtoDialogBase
                         _filePerScan,
                         _filePerPage,
                         _separateByPatchT,
+                        L.Column(
+                            // New features
+                            _separatorSheetNewBatch,
+                            L.Column (
+                                _includeSeparatorSheet
+                            ).Padding(left: 20).Visible(_separatorSheetNewBatchVis),
+                            _useBarcodePlaceholder,
+                            _restartSheetsNumbering,
+                            _restartBatchOnError,
+                            L.Column (
+                                _copyToStagingFolder,
+                                L.Column(
+                                    _eraseBatchOnError,
+                                    C.Label(UiStrings.StagingFolderLabel),
+                                    _stagingFolderPath
+                                ).Padding(left: 20).Visible(_copyToStagingFolderVis)
+                            ).Padding(left: 20).Visible(_restartBatchOnErrorVis),
+                            _useBatchAsFolderName,
+                            _createPatchTLog
+                        ).Padding(left: 20).Visible(_patchTVis),
                         _moreInfo
                     ).Padding(left: 20).Visible(_multiVis),
                     L.Column(
@@ -184,6 +240,7 @@ public class BatchScanForm : EtoDialogBase
         _filePerScan.Checked = _transactionConfig.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerScan;
         _filePerPage.Checked = _transactionConfig.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.FilePerPage;
         _separateByPatchT.Checked = _transactionConfig.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.PatchT;
+        // New features
 
         _filePath.Text = _transactionConfig.Get(c => c.BatchSettings.SavePath);
     }

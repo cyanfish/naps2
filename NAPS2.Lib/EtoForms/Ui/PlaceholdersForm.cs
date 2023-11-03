@@ -18,7 +18,8 @@ public class PlaceholdersForm : EtoDialogBase
             (Placeholders.NUMBER_4_DIGITS, UiStrings.AutoIncrementing4Digit),
             (Placeholders.NUMBER_3_DIGITS, UiStrings.AutoIncrementing3Digit),
             (Placeholders.NUMBER_2_DIGITS, UiStrings.AutoIncrementing2Digit),
-            (Placeholders.NUMBER_1_DIGIT, UiStrings.AutoIncrementing1Digit)
+            (Placeholders.NUMBER_1_DIGIT, UiStrings.AutoIncrementing1Digit),
+            (Placeholders.PATCH_T, UiStrings.PatchTInfo)
         };
 
     private readonly TextBox _fileName = new();
@@ -89,6 +90,7 @@ public class PlaceholdersForm : EtoDialogBase
     private void FileName_TextChanged(object? sender, EventArgs e)
     {
         _preview.Text = Placeholders.All.Substitute(_fileName.Text, false);
+        
     }
 
 }

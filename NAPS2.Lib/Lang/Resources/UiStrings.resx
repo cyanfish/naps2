@@ -810,4 +810,37 @@
   <data name="EnableDebugLogging" xml:space="preserve">
     <value>Enable debug logging</value>
   </data>
+  <data name="PatchTInfo" xml:space="preserve">
+    <value>Information from Patch T</value>
+  </data>
+  <data name="CopyToStagingFolder" xml:space="preserve">
+    <value>Copy scans to the staging folder</value>
+  </data>
+  <data name="CreatePatchTLog" xml:space="preserve">
+    <value>Create a log file</value>
+  </data>
+  <data name="EraseBatchOnError" xml:space="preserve">
+    <value>Erase the batch on error</value>
+  </data>
+  <data name="IncludeSeparatorSheet" xml:space="preserve">
+    <value>Include the separator sheet in the batch</value>
+  </data>
+  <data name="RestartBatchOnError" xml:space="preserve">
+    <value>Restart batch on error</value>
+  </data>
+  <data name="RestartSheetsNumbering" xml:space="preserve">
+    <value>Restart numbering of sheets in each batch</value>
+  </data>
+  <data name="SeparatorSheetNewBatch" xml:space="preserve">
+    <value>Separator sheet starts a new batch</value>
+  </data>
+  <data name="UseBarcodePlaceholder" xml:space="preserve">
+    <value>Use code39 barcode as a placeholder for filenames</value>
+  </data>
+  <data name="UseBatchAsFolderName" xml:space="preserve">
+    <value>Use the batch prefix as a folder name for the images</value>
+  </data>
+  <data name="StagingFolderLabel" xml:space="preserve">
+    <value>Staging Folder:</value>
+  </data>
 </root>
