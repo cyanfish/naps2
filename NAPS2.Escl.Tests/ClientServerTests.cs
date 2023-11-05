@@ -34,6 +34,7 @@ public class ClientServerTests
         {
             IpV4 = IPAddress.Loopback,
             IpV6 = IPAddress.IPv6Loopback,
+            Host = IPAddress.IPv6Loopback.ToString(),
             Port = 9801,
             RootUrl = "escl",
             Tls = false

@@ -11,11 +11,11 @@ public class EsclClient
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
     private static readonly HttpClient HttpClient = new();
+
     private static readonly HttpClient ChunkedHttpClient = new()
         { DefaultRequestHeaders = { TransferEncodingChunked = true } };
 
     private readonly EsclService _service;
-    private IPAddress? _verifiedIp;
 
     public EsclClient(EsclService service)
     {
@@ -26,13 +26,13 @@ public class EsclClient
 
     public async Task<EsclCapabilities> GetCapabilities()
     {
-        var doc = await VerifyIpAndDoRequest("ScannerCapabilities");
+        var doc = await DoRequest("ScannerCapabilities");
         return CapabilitiesParser.Parse(doc);
     }
 
     public async Task<EsclScannerStatus> GetStatus()
     {
-        var doc = await VerifyIpAndDoRequest("ScannerStatus");
+        var doc = await DoRequest("ScannerStatus");
         var root = doc.Root;
         if (root?.Name != ScanNs + "ScannerStatus")
         {
@@ -51,10 +51,6 @@ public class EsclClient
 
     public async Task<EsclJob> CreateScanJob(EsclScanSettings settings)
     {
-        if (_verifiedIp == null)
-        {
-            await VerifyIpAndDoRequest("ScannerCapabilities");
-        }
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScanSettings",
@@ -96,7 +92,7 @@ public class EsclClient
         // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
         var url = job.Uri + "/NextDocument";
         Logger.LogDebug("ESCL GET {Url}", url);
-        var response = await ChunkedHttpClient.GetAsync(url);
+        var response = await HttpClient.GetAsync(url);
         if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
         {
             // NotFound = end of scan, Gone = canceled
@@ -127,56 +123,10 @@ public class EsclClient
         Logger.LogDebug("DELETE OK");
     }
 
-    private async Task<XDocument> VerifyIpAndDoRequest(string endpoint)
-    {
-        if (_service.IpV4 == null)
-        {
-            Logger.LogDebug($"Escl: No IPv4; defaulting to IPv6 {_service.IpV6}");
-            _verifiedIp = _service.IpV6;
-        }
-        if (_service.IpV6 == null)
-        {
-            Logger.LogDebug($"Escl: No IPv6; defaulting to IPv4 {_service.IpV4}");
-            _verifiedIp = _service.IpV4;
-        }
-        if (_verifiedIp != null)
-        {
-            return await DoRequest(endpoint, _verifiedIp);
-        }
-        // TODO: Maybe use a cancellation token so one request doesn't run long?
-        var ipv4 = DoRequest(endpoint, _service.IpV4!);
-        var ipv6 = DoRequest(endpoint, _service.IpV6!);
-        var succeeded = await WaitForFirstSucceededTask(ipv4, ipv6);
-        if (succeeded == ipv4)
-        {
-            Logger.LogDebug($"Escl: Verified working IPv4 {_service.IpV4}");
-            _verifiedIp = _service.IpV4;
-        }
-        if (succeeded == ipv6)
-        {
-            Logger.LogDebug($"Escl: Verified working IPv6 {_service.IpV6}");
-            _verifiedIp = _service.IpV6;
-        }
-        return await succeeded;
-    }
-
-    private async Task<Task<T>> WaitForFirstSucceededTask<T>(Task<T> first, Task<T> second)
-    {
-        var firstDone = await Task.WhenAny(first, second);
-        if (firstDone.IsCompleted && !firstDone.IsFaulted)
-        {
-            return firstDone;
-        }
-        Logger.LogDebug(firstDone.Exception, "Escl: First try request failed");
-        var remainingTask = firstDone == first ? second : first;
-        await remainingTask;
-        return remainingTask;
-    }
-
-    private async Task<XDocument> DoRequest(string endpoint, IPAddress ip)
+    private async Task<XDocument> DoRequest(string endpoint)
     {
         // TODO: Retry logic
-        var url = GetUrl(endpoint, ip);
+        var url = GetUrl(endpoint);
         Logger.LogDebug("ESCL GET {Url}", url);
         var text = await HttpClient.GetStringAsync(url);
         var doc = XDocument.Parse(text);
@@ -184,11 +134,10 @@ public class EsclClient
         return doc;
     }
 
-    private string GetUrl(string endpoint, IPAddress? ip = null)
+    private string GetUrl(string endpoint)
     {
-        ip ??= _verifiedIp ?? throw new InvalidOperationException();
         var protocol = _service.Tls ? "https" : "http";
-        return new UriBuilder(protocol, ip.ToString(), _service.Port,
+        return new UriBuilder(protocol, _service.Host, _service.Port,
                 $"{_service.RootUrl}/{endpoint}")
             .Uri.ToString();
     }

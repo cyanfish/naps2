@@ -15,6 +15,11 @@ public class EsclService
     public required IPAddress? IpV6 { get; init; }
 
     /// <summary>
+    /// The mDNS host name of the scanner.
+    /// </summary>
+    public required string Host { get; init; }
+
+    /// <summary>
     /// The port of the ESCL service.
     /// </summary>
     public required int Port { get; init; }

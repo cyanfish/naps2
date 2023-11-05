@@ -18,8 +18,8 @@ public class EsclServiceLocator : IDisposable
             try
             {
                 var service = ParseService(args);
-                Logger.LogDebug("Discovered ESCL Service: {Name}, ipv4 {Ipv4}, ipv6 {IpV6}, port {Port}, uuid {Uuid}",
-                    service.ScannerName, service.IpV4, service.IpV6, service.Port, service.Uuid);
+                Logger.LogDebug("Discovered ESCL Service: {Name}, ipv4 {Ipv4}, ipv6 {IpV6}, host {Host}, port {Port}, uuid {Uuid}",
+                    service.ScannerName, service.IpV4, service.IpV6, service.Host, service.Port, service.Uuid);
                 serviceCallback(service);
             }
             catch (Exception)
@@ -47,6 +47,7 @@ public class EsclServiceLocator : IDisposable
         string protocol = args.ServiceInstanceName.Labels[1];
         IPAddress? ipv4 = null, ipv6 = null;
         int port = -1;
+        string? host = null;
         var props = new Dictionary<string, string>();
         foreach (var record in args.Message.AdditionalRecords)
         {
@@ -62,6 +63,7 @@ public class EsclServiceLocator : IDisposable
             if (record is SRVRecord srv)
             {
                 port = srv.Port;
+                host = srv.Target.ToString();
             }
             if (record is TXTRecord txt)
             {
@@ -77,7 +79,7 @@ public class EsclServiceLocator : IDisposable
         }
         bool http = protocol == "_uscan";
         bool https = protocol == "_uscans";
-        if ((ipv4 == null && ipv6 == null) || port == -1 || !http && !https)
+        if ((ipv4 == null && ipv6 == null) || port == -1 || host == null || !http && !https)
         {
             throw new ArgumentException();
         }
@@ -86,6 +88,7 @@ public class EsclServiceLocator : IDisposable
         {
             IpV4 = ipv4,
             IpV6 = ipv6,
+            Host = host,
             Port = port,
             Tls = https,
             ScannerName = props["ty"],
