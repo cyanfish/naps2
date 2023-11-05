@@ -76,7 +76,7 @@ public class DesktopController
     {
         if (_initialized) return;
         _initialized = true;
-        StartSharingDevices();
+        _sharedDeviceManager.StartSharing();
         StartPipesServer();
         ShowStartupMessages();
         ShowRecoveryPrompt();
@@ -85,11 +85,6 @@ public class DesktopController
         SetFirstRunDate();
         ShowDonationPrompt();
         ShowUpdatePrompt();
-    }
-
-    private void StartSharingDevices()
-    {
-        _sharedDeviceManager.StartSharing();
     }
 
     private void ShowDonationPrompt()
@@ -164,6 +159,7 @@ public class DesktopController
     {
         if (_suspended) return;
         Pipes.KillServer();
+        _sharedDeviceManager.StopSharing();
         if (!SkipRecoveryCleanup)
         {
             try

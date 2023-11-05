@@ -22,12 +22,17 @@ public class SharedDeviceManager
         _server.Start();
     }
 
+    public void StopSharing()
+    {
+        _server.Stop();
+    }
+
     public void AddSharedDevice(SharedDevice device)
     {
         var devices = _config.Get(c => c.SharedDevices);
         devices = devices.Add(device);
         _config.User.Set(c => c.SharedDevices, devices);
-        _server.RegisterDevice(device.Driver, device.Device);
+        _server.RegisterDevice(device.Driver, device.Device, device.Name);
     }
 
     public void RemoveSharedDevice(SharedDevice device)
@@ -44,7 +49,7 @@ public class SharedDeviceManager
         devices = devices.Replace(original, replacement);
         _config.User.Set(c => c.SharedDevices, devices);
         _server.UnregisterDevice(original.Driver, original.Device);
-        _server.RegisterDevice(replacement.Driver, replacement.Device);
+        _server.RegisterDevice(replacement.Driver, replacement.Device, replacement.Name);
     }
 
     public IEnumerable<SharedDevice> SharedDevices => _config.Get(c => c.SharedDevices);
@@ -53,7 +58,7 @@ public class SharedDeviceManager
     {
         foreach (var device in _config.Get(c => c.SharedDevices))
         {
-            _server.RegisterDevice(device.Driver, device.Device);
+            _server.RegisterDevice(device.Driver, device.Device, device.Name);
         }
     }
 }

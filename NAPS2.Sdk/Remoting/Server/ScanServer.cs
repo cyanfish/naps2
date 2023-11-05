@@ -21,10 +21,10 @@ public class ScanServer : IDisposable
 
     internal ScanController ScanController { get; set; }
 
-    public void RegisterDevice(Driver driver, ScanDevice device)
+    public void RegisterDevice(Driver driver, ScanDevice device, string? name = null)
     {
         var key = (driver, device.ID);
-        var esclDeviceConfig = MakeEsclDeviceConfig(driver, device);
+        var esclDeviceConfig = MakeEsclDeviceConfig(driver, device, name ?? device.Name);
         _currentDevices.Add(key, esclDeviceConfig);
         _esclServer?.AddDevice(esclDeviceConfig);
     }
@@ -37,14 +37,14 @@ public class ScanServer : IDisposable
         _esclServer?.RemoveDevice(esclDeviceConfig);
     }
 
-    private EsclDeviceConfig MakeEsclDeviceConfig(Driver driver, ScanDevice device)
+    private EsclDeviceConfig MakeEsclDeviceConfig(Driver driver, ScanDevice device, string name)
     {
         var uniqueHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(device.ID));
         return new EsclDeviceConfig
         {
             Capabilities = new EsclCapabilities
             {
-                MakeAndModel = device.Name,
+                MakeAndModel = name,
                 Uuid = new Guid(uniqueHash.Take(16).ToArray()).ToString("D"),
                 // TODO: Ideally we want to get the actual device capabilities
                 PlatenCaps = new EsclInputCaps

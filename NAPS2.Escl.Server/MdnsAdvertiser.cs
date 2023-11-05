@@ -19,7 +19,9 @@ public class MdnsAdvertiser : IDisposable
             throw new ArgumentException("UUID must be specified");
         }
         var name = deviceConfig.Capabilities.MakeAndModel;
-        var service = new ServiceProfile(name, "_uscan._tcp", (ushort) deviceConfig.Port);
+        // TODO: Replace all non-ASCII values and/or autogenerate a host name
+        var instance = name.Replace(" ", "");
+        var service = new ServiceProfile(instance, "_uscan._tcp", (ushort) deviceConfig.Port);
         service.AddProperty("txtvers", "1");
         service.AddProperty("Vers", "2.0"); // TODO: verify
         service.AddProperty("rs", "escl");
