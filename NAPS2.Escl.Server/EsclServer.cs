@@ -21,7 +21,7 @@ public class EsclServer : IDisposable
         {
             deviceConfig.Port = Port++;
         }
-        _advertiser.AdvertiseDevice(deviceConfig);
+        Task.Run(() => _advertiser.AdvertiseDevice(deviceConfig));
         _devices[deviceConfig] = new CancellationTokenSource();
         if (_started)
         {
@@ -31,7 +31,8 @@ public class EsclServer : IDisposable
 
     public void RemoveDevice(EsclDeviceConfig deviceConfig)
     {
-        _advertiser.UnadvertiseDevice(deviceConfig);
+        // TODO: Maybe enforce ordering to ensure we don't unadvertise before advertising?
+        Task.Run(() => _advertiser.UnadvertiseDevice(deviceConfig));
         _devices[deviceConfig].Cancel();
         _devices.Remove(deviceConfig);
     }
@@ -64,8 +65,7 @@ public class EsclServer : IDisposable
             .WithWebApi("/escl", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
         server.HandleHttpException(async (_, _) => { });
         server.StateChanged += ServerOnStateChanged;
-        // TODO: This might block on tasks, maybe copy impl but async
-        server.Start(CancellationTokenSource.CreateLinkedTokenSource(_cts.Token, _devices[deviceConfig].Token).Token);
+        server.RunAsync(CancellationTokenSource.CreateLinkedTokenSource(_cts.Token, _devices[deviceConfig].Token).Token);
     }
 
     private void ServerOnStateChanged(object sender, WebServerStateChangedEventArgs e)
