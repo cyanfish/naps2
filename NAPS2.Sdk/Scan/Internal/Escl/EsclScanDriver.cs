@@ -52,52 +52,61 @@ internal class EsclScanDriver : IScanDriver
 
         var client = new EsclClient(service)
         {
-            Logger = _scanningContext.Logger
+            Logger = _scanningContext.Logger,
+            CancelToken = cancelToken
         };
-
-        var caps = await client.GetCapabilities();
-        var status = await client.GetStatus();
-        var scanSettings = GetScanSettings(options, caps);
-
-        if (cancelToken.IsCancellationRequested) return;
-
-        VerifyStatus(status, scanSettings);
-
-        var job = await client.CreateScanJob(scanSettings);
-
-        var cancelOnce = new Once(() => client.CancelJob(job).AssertNoAwait());
-        using var cancelReg = cancelToken.Register(cancelOnce.Run);
 
         try
         {
-            while (true)
+            var caps = await client.GetCapabilities();
+            var status = await client.GetStatus();
+            var scanSettings = GetScanSettings(options, caps);
+
+            if (cancelToken.IsCancellationRequested) return;
+
+            VerifyStatus(status, scanSettings);
+
+            var job = await client.CreateScanJob(scanSettings);
+
+            // TODO: Somehow CancelJob is only running (or the http request is only going through) after the NextDocument
+            // request resolves. Not sure if a client or server issue (does the http server support concurrency?)
+            var cancelOnce = new Once(() => client.CancelJob(job).AssertNoAwait());
+            using var cancelReg = cancelToken.Register(cancelOnce.Run);
+
+            try
             {
-                // TODO: Can we do progress reporting?
-                scanEvents.PageStart();
-                RawDocument? doc;
-                try
+                while (true)
                 {
-                    doc = await client.NextDocument(job);
-                }
-                catch (Exception ex)
-                {
-                    _scanningContext.Logger.LogDebug(ex, "ESCL error");
-                    break;
-                }
-                if (doc == null) break;
-                foreach (var image in GetImagesFromRawDocument(options, doc))
-                {
-                    callback(image);
-                }
-                if (scanSettings.InputSource == EsclInputSource.Platen)
-                {
-                    break;
+                    // TODO: Can we do progress reporting?
+                    scanEvents.PageStart();
+                    RawDocument? doc;
+                    try
+                    {
+                        doc = await client.NextDocument(job);
+                    }
+                    catch (Exception ex)
+                    {
+                        _scanningContext.Logger.LogDebug(ex, "ESCL error");
+                        break;
+                    }
+                    if (doc == null) break;
+                    foreach (var image in GetImagesFromRawDocument(options, doc))
+                    {
+                        callback(image);
+                    }
+                    if (scanSettings.InputSource == EsclInputSource.Platen)
+                    {
+                        break;
+                    }
                 }
             }
+            finally
+            {
+                cancelOnce.Run();
+            }
         }
-        finally
+        catch (TaskCanceledException)
         {
-            cancelOnce.Run();
         }
     }
 

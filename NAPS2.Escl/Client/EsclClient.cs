@@ -24,6 +24,8 @@ public class EsclClient
 
     public ILogger Logger { get; set; } = NullLogger.Instance;
 
+    public CancellationToken CancelToken { get; set; }
+
     public async Task<EsclCapabilities> GetCapabilities()
     {
         var doc = await DoRequest("ScannerCapabilities");
@@ -128,7 +130,9 @@ public class EsclClient
         // TODO: Retry logic
         var url = GetUrl(endpoint);
         Logger.LogDebug("ESCL GET {Url}", url);
-        var text = await HttpClient.GetStringAsync(url);
+        var response = await HttpClient.GetAsync(url, CancelToken);
+        response.EnsureSuccessStatusCode();
+        var text = await response.Content.ReadAsStringAsync();
         var doc = XDocument.Parse(text);
         Logger.LogDebug("{Doc}", doc);
         return doc;
