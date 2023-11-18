@@ -19,7 +19,15 @@ public static class Paths
         if (string.IsNullOrEmpty(userAppData) && OperatingSystem.IsMacOS())
         {
             // Not sure if this is necessary but older macOS (10.15) didn't seem to get the appdata path
+            // TODO: Technically this should be "%HOME%/.config" but keeping this for now, for backwards compatibility
             userAppData = Environment.ExpandEnvironmentVariables("/Users/%USER%/.config");
+        }
+        else if (OperatingSystem.IsMacOS())
+        {
+            // For .NET 8, the macOS ApplicationData path has changed from the Linux-style "~/.config" to the more
+            // correct "~/Library/Application Support". For backwards compatibility we keep .config for now.
+            // TODO: Migrate macOS application data to "~/Library/Application Support"
+            userAppData = Environment.ExpandEnvironmentVariables("%HOME%/.config");
         }
 #else
         var subfolder = "NAPS2";
