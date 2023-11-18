@@ -29,5 +29,5 @@ public class PackageOptions : OptionsBase
     [Option("debug", Required = false, HelpText = "Set DEBUG compile-time constant. Requires --build.")]
     public bool Debug { get; set; }
 
-    // TODO: Add net target (net462/net6/net6-windows etc.)
+    // TODO: Add net target (net462/net8/net8-windows etc.)
 }

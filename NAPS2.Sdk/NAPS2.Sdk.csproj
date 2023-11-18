@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net6;net462</TargetFrameworks>
     <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Linux')) and '$(Configuration)' != 'DebugNoMac'">
-      $(TargetFrameworks);net6-macos10.15
+      $(TargetFrameworks);net8-macos10.15
     </TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -22,7 +22,7 @@
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net6-macos10.15'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8-macos10.15'">
     <DefineConstants>MAC</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(AddDebugConstant)' == '1'">
@@ -37,14 +37,14 @@
       <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
     </Reference>
     <!-- TODO: Switch back to the official nuget if https://github.com/soukoku/ntwain/pull/35 gets merged -->
-    <Reference Include="NTwain" Condition="'$(TargetFramework)' != 'net6-macos10.15'">
+    <Reference Include="NTwain" Condition="'$(TargetFramework)' != 'net8-macos10.15'">
       <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
     </Reference>
     
     <PackageReference Include="Grpc.Tools" Version="2.47.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
-    <PackageReference Include="NAPS2.Wia" Version="2.0.3" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" Condition="'$(TargetFramework)' != 'net8-macos10.15'" />
+    <PackageReference Include="NAPS2.Wia" Version="2.0.3" Condition="'$(TargetFramework)' != 'net8-macos10.15'" />
     <!-- Hide compatibility warnings for NTwain as it will only be actually used on Windows. -->
     <!-- TODO: Does this actually work if we build a net6 framework-dependent app and try to use Twain? -->
 <!--    <PackageReference Include="NTwain" Version="3.7.1" NoWarn="NU1701" Condition="'$(TargetFramework)' != 'net6-macos10.15'" />-->
@@ -87,7 +87,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
     <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
-    <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="'$(TargetFramework)' == 'net6-macos10.15'" />
+    <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="'$(TargetFramework)' == 'net8-macos10.15'" />
     <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
     <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
   </ItemGroup>
