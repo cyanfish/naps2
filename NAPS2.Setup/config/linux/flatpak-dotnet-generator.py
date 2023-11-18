@@ -35,8 +35,8 @@ def main():
                 'flatpak', 'run',
                 '--env=DOTNET_CLI_TELEMETRY_OPTOUT=true',
                 '--env=DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true',
-                '--command=sh', '--runtime=org.freedesktop.Sdk//22.08', '--share=network',
-                '--filesystem=host', 'org.freedesktop.Sdk.Extension.dotnet8//22.08', '-c',
+                '--command=sh', '--runtime=org.freedesktop.Sdk//23.08', '--share=network',
+                '--filesystem=host', 'org.freedesktop.Sdk.Extension.dotnet8//23.08', '-c',
                 'PATH="${PATH}:/usr/lib/sdk/dotnet8/bin" NUGET_PACKAGES="' +
                 str(Path(tmp).resolve()) +
                 '" LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/sdk/dotnet8/lib" exec dotnet ' + cmd,
