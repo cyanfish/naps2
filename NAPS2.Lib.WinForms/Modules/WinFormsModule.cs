@@ -15,7 +15,8 @@ public class WinFormsModule : GuiModule
 
         builder.RegisterType<WindowsApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<PrintDocumentPrinter>().As<IScannedImagePrinter>();
-        builder.RegisterType<WinFormsDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
+        // TODO: Change this when implementing dark mode on Windows
+        builder.RegisterType<StubDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
 
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
 
