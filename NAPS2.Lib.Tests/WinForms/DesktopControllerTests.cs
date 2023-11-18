@@ -39,7 +39,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
     private readonly ThumbnailController _thumbnailController;
-    private readonly SharedDeviceManager _sharedDeviceManager;
+    private readonly ISharedDeviceManager _sharedDeviceManager;
 
     public DesktopControllerTests()
     {
@@ -62,7 +62,7 @@ public class DesktopControllerTests : ContextualTests
         _desktopFormProvider = new DesktopFormProvider();
         _scannedImagePrinter = Substitute.For<IScannedImagePrinter>();
         _thumbnailController = new ThumbnailController(_thumbnailRenderQueue, _config);
-        _sharedDeviceManager = Substitute.For<SharedDeviceManager>();
+        _sharedDeviceManager = Substitute.For<ISharedDeviceManager>();
         ScanningContext.WorkerFactory = Substitute.For<IWorkerFactory>();
         _desktopController = new DesktopController(
             ScanningContext,

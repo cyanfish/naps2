@@ -3,7 +3,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Remoting;
 
-public class SharedDeviceManager
+public class SharedDeviceManager : ISharedDeviceManager
 {
     private readonly Naps2Config _config;
     private readonly ScanServer _server;

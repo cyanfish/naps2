@@ -32,7 +32,7 @@ public class DesktopController
     private readonly IDesktopScanController _desktopScanController;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
-    private readonly SharedDeviceManager _sharedDeviceManager;
+    private readonly ISharedDeviceManager _sharedDeviceManager;
 
     private bool _closed;
     private bool _initialized;
@@ -47,7 +47,7 @@ public class DesktopController
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
-        SharedDeviceManager sharedDeviceManager)
+        ISharedDeviceManager sharedDeviceManager)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;

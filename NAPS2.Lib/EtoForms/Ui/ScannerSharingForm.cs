@@ -8,7 +8,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public class ScannerSharingForm : EtoDialogBase
 {
-    private readonly SharedDeviceManager _sharedDeviceManager;
+    private readonly ISharedDeviceManager _sharedDeviceManager;
 
     private readonly IListView<SharedDevice> _listView;
 
@@ -16,7 +16,7 @@ public class ScannerSharingForm : EtoDialogBase
     private readonly Command _editCommand;
     private readonly Command _deleteCommand;
 
-    public ScannerSharingForm(Naps2Config config, SharedDevicesListViewBehavior listViewBehavior, SharedDeviceManager sharedDeviceManager)
+    public ScannerSharingForm(Naps2Config config, SharedDevicesListViewBehavior listViewBehavior, ISharedDeviceManager sharedDeviceManager)
         : base(config)
     {
         _sharedDeviceManager = sharedDeviceManager;

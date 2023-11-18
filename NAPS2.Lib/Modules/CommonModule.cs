@@ -50,7 +50,7 @@ public class CommonModule : Module
 
         // Remoting
         builder.Register<IWorkerFactory>(_ => WorkerFactory.CreateDefault()).SingleInstance();
-        builder.RegisterType<SharedDeviceManager>().AsSelf().SingleInstance();
+        builder.RegisterType<SharedDeviceManager>().As<ISharedDeviceManager>().SingleInstance();
 
         // Logging
         builder.Register<ILogger>(ctx =>
