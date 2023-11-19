@@ -99,23 +99,24 @@ public abstract class NotificationView : IDisposable
 
     private void DrawableOnPaint(object? sender, PaintEventArgs e)
     {
-        var w = e.ClipRectangle.Width;
-        var h = e.ClipRectangle.Height;
+        var drawable = (Drawable) sender!;
+        var w = drawable.Width;
+        var h = drawable.Height;
         e.Graphics.FillRectangle(BackgroundColor, 0, 0, w, h);
         e.Graphics.DrawRectangle(BorderColor, 0, 0, w - 1, h - 1);
     }
 
-    private void DrawWithRoundedCorners(PaintEventArgs e)
+    private void DrawWithRoundedCorners(Drawable drawable, PaintEventArgs e)
     {
         // TODO: We're not using this as the few pixels on the edges aren't transparent, which is a problem if there's
         // an image underneath. Not sure if there's a way to make that work but I don't care enough about rounded
         // corners at the moment.
-        var w = e.ClipRectangle.Width;
-        var h = e.ClipRectangle.Height;
+        var w = drawable.Width;
+        var h = drawable.Height;
         var r = BORDER_RADIUS;
         var d = r * 2;
         var q = r / 2;
-        e.Graphics.Clear(Manager!.ColorScheme.BackgroundColor);
+        e.Graphics.FillRectangle(Manager!.ColorScheme.BackgroundColor, 0, 0, w, h);
         // Corners
         e.Graphics.FillEllipse(BackgroundColor, -1, -1, d, d);
         e.Graphics.FillEllipse(BackgroundColor, w - d, -1, d, d);

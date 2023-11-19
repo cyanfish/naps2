@@ -57,10 +57,10 @@ public class CloseButton : Drawable
 
     private void OnPaint(object? sender, PaintEventArgs e)
     {
-        var clearColor = _active && _hover ? ActiveBackground : _hover ? HoverBackground : DefaultBackground;
-        e.Graphics.Clear(clearColor);
-        var w = e.ClipRectangle.Width;
-        var h = e.ClipRectangle.Height;
+        var bgColor = _active && _hover ? ActiveBackground : _hover ? HoverBackground : DefaultBackground;
+        var w = Width;
+        var h = Height;
+        e.Graphics.FillRectangle(bgColor, 0, 0, w, h);
         var p = CLOSE_BUTTON_PADDING;
         var pen = new Pen(PenColor, 3);
         e.Graphics.DrawLine(pen, p - 1, p - 1, w - p, h - p);

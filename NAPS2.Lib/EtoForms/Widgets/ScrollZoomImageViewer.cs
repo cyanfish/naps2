@@ -102,8 +102,8 @@ public class ScrollZoomImageViewer
 
     private void ImagePaint(object? sender, PaintEventArgs e)
     {
-        e.Graphics.SetClip(e.ClipRectangle);
-        e.Graphics.Clear(ColorScheme?.BackgroundColor ?? Colors.White);
+        var bgColor = ColorScheme?.BackgroundColor ?? Colors.White;
+        e.Graphics.FillRectangle(bgColor, 0, 0, _imageView.Width, _imageView.Height);
         if (Image != null)
         {
             e.Graphics.DrawRectangle(
