@@ -20,14 +20,16 @@ public static class NLogConfig
             FileName = Path.Combine(Paths.AppData, "errorlog.txt"),
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
-            MaxArchiveFiles = 5
+            MaxArchiveFiles = 5,
+            ConcurrentWrites = true
         };
         var debugTarget = new FileTarget
         {
             FileName = Path.Combine(Paths.AppData, "debuglog.txt"),
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
-            MaxArchiveFiles = 1
+            MaxArchiveFiles = 1,
+            ConcurrentWrites = true
         };
         config.AddTarget("errorlogfile", target);
         config.AddTarget("debuglogfile", debugTarget);
