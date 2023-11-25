@@ -137,7 +137,7 @@ public static class ImageAsserts
             var expected = (r, g, b);
             if (color != expected)
             {
-                throw new AssertActualExpectedException(expected, color, $"Mismatched color at ({x}, {y})");
+                throw new XunitException($"Mismatched color at ({x}, {y}): expected {expected}, got {color}");
             }
         }
     }

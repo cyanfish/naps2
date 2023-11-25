@@ -13,11 +13,11 @@
         <PackageTags>naps2</PackageTags>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="Eto.Platform.Mac64" Version="2.7.2" Condition="'$(TargetFramework)' == 'net6'" />
+        <PackageReference Include="Eto.Platform.Mac64" Version="2.8.2" Condition="'$(TargetFramework)' == 'net6'" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)' == 'net6'">

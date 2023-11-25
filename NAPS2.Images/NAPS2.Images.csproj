@@ -14,13 +14,13 @@
         <PackageTags>naps2</PackageTags>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
-        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
-        <PackageReference Include="System.ValueTuple" Version="4.3.1" />
-        <PackageReference Include="ZXing.Net" Version="0.16.4" />
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+        <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+        <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+        <PackageReference Include="ZXing.Net" Version="0.16.9" />
 
         <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
     </ItemGroup>

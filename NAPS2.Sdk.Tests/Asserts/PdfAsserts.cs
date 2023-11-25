@@ -40,7 +40,7 @@ public static class PdfAsserts
         var value = CountText(text, filePath);
         if (value != 1)
         {
-            throw new AssertActualExpectedException(1, value, $"Unexpected count for \"{text}\"");
+            throw new XunitException($"Unexpected count for \"{text}\": expected {1}, got {value}");
         }
     }
 
@@ -49,7 +49,7 @@ public static class PdfAsserts
         var value = CountText(text, filePath);
         if (value != 0)
         {
-            throw new AssertActualExpectedException(0, value, $"Unexpected count for \"{text}\"");
+            throw new XunitException($"Unexpected count for \"{text}\": expected {0}, got {value}");
         }
     }
 

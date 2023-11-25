@@ -13,11 +13,11 @@
         <PackageTags>naps2</PackageTags>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+        <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
     </ItemGroup>
     
     <ItemGroup>

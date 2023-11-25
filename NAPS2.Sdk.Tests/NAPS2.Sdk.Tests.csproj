@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">net8;net462</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">net8;net462;net8-windows</TargetFrameworks>
     <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">net8</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
@@ -24,19 +24,19 @@
   
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
-    <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+    <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" Condition="$([MSBuild]::IsOSPlatform('Windows')) and '$(TargetFramework)' == 'net8-windows'" />
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
     <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
-    <ProjectReference Include="..\NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" Condition="'$(TargetFramework)' == 'net8'" />
+    <ProjectReference Include="..\NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" Condition="'$(TargetFramework)' == 'net8' or '$(TargetFramework)' == 'net8-windows'" />
 
     <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.0.1" />
     <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.1.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="NSubstitute" Version="5.0.0" />
     <PackageReference Include="PdfAValidator" Version="2.1.109" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    <PackageReference Include="xunit" Version="2.6.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4" PrivateAssets="all" />
   </ItemGroup>
   
   <ItemGroup>

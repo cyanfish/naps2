@@ -23,7 +23,7 @@
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
         <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
-        <PackageReference Include="LargeAddressAware" Version="1.0.3" />
+        <PackageReference Include="LargeAddressAware" Version="1.0.6" />
     </ItemGroup>
 
     <ItemGroup>

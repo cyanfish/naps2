@@ -11,11 +11,11 @@
         <PackageTags>naps2</PackageTags>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
-        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+        <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
     </ItemGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
