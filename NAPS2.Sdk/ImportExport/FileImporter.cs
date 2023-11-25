@@ -14,7 +14,7 @@ public class FileImporter : IFileImporter
         _imageImporter = imageImporter;
     }
 
-    public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams importParams,
+    public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
         ProgressHandler progress = default)
     {
         if (filePath == null)

@@ -85,7 +85,7 @@ public abstract class WinFormsImageList<T> where T : notnull
 
         public Native(WinFormsListView<T> listView, ListViewBehavior<T> behavior) : base(listView, behavior)
         {
-            _images = _listView.NativeControl.LargeImageList.Images;
+            _images = _listView.NativeControl.LargeImageList!.Images;
         }
 
         public override void Clear()

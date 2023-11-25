@@ -121,8 +121,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     public int ImageSize
     {
-        get => _view.LargeImageList.ImageSize.Width;
-        set => WinFormsHacks.SetImageSize(_view.LargeImageList, new Size(value, value));
+        get => _view.LargeImageList!.ImageSize.Width;
+        set => WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(value, value));
     }
 
     private void OnDragEnter(object? sender, DragEventArgs e)
@@ -187,11 +187,11 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         {
             if (_behavior.Checkboxes)
             {
-                Items[i].Checked = Selection.Contains((T) Items[i].Tag);
+                Items[i].Checked = Selection.Contains((T) Items[i].Tag!);
             }
             else
             {
-                Items[i].Selected = Selection.Contains((T) Items[i].Tag);
+                Items[i].Selected = Selection.Contains((T) Items[i].Tag!);
             }
         }
     }
@@ -210,7 +210,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         var images = new List<Image>();
         foreach (ListViewItem listViewItem in Items)
         {
-            var item = (T) listViewItem.Tag;
+            var item = (T) listViewItem.Tag!;
             images.Add(ImageList.PartialAppend(item));
         }
         ImageList.FinishPartialAppends(images);
@@ -230,7 +230,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
         // TODO: We might want to make the differ even smarter. e.g. maybe it can generate an arbitrary order of operations that minimizes update cost
         // example: clear then append 1 instead of delete all but 1
-        var originalItemsList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag).ToList();
+        var originalItemsList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag!).ToList();
         var originalItemsSet = new HashSet<T>(originalItemsList);
         if (!diffs.AppendOperations.Any() && !diffs.ReplaceOperations.Any() &&
             diffs.TrimOperations.Any(x => x.Count == Items.Count))
@@ -265,7 +265,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             }
         }
         SetSelectedItems();
-        var newItemsList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag).ToList();
+        var newItemsList = Items.OfType<ListViewItem>().Select(x => (T) x.Tag!).ToList();
         var newItemsSet = new HashSet<T>(newItemsList);
         if (originalItemsSet.SetEquals(newItemsSet) && !originalItemsList.SequenceEqual(newItemsList))
         {
@@ -313,7 +313,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             var items = _behavior.Checkboxes
                 ? _view.CheckedItems.Cast<ListViewItem>()
                 : _view.SelectedItems.Cast<ListViewItem>();
-            Selection = ListSelection.From(items.Select(x => (T) x.Tag));
+            Selection = ListSelection.From(items.Select(x => (T) x.Tag!));
             _refreshing = false;
         }
     }
@@ -350,7 +350,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             }
             else if (data.Contains("FileDrop"))
             {
-                var filePaths = (string[]) e.Data!.GetData(DataFormats.FileDrop);
+                var filePaths = (string[]) e.Data!.GetData(DataFormats.FileDrop)!;
                 Drop?.Invoke(this, new DropEventArgs(index, filePaths));
             }
         }

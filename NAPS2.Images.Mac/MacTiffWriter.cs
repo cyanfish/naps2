@@ -31,7 +31,7 @@ public class MacTiffWriter : ITiffWriter
         {
             data = new NSMutableData();
             // TODO: We get a warning for UTType
-#pragma warning disable CA1416
+#pragma warning disable CA1416,CA1422
 #if MONOMAC
             dest = CGImageDestination.FromData(
 #else

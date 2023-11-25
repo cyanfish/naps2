@@ -10,19 +10,19 @@ using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
-using wf = System.Windows.Forms;
+using WF = System.Windows.Forms;
 
 namespace NAPS2.EtoForms.Ui;
 
 public class WinFormsDesktopForm : DesktopForm
 {
-    public static wf.ApplicationContext? ApplicationContext { get; set; }
+    public static WF.ApplicationContext? ApplicationContext { get; set; }
 
-    private readonly Dictionary<DesktopToolbarMenuType, wf.ToolStripSplitButton> _menuButtons = new();
+    private readonly Dictionary<DesktopToolbarMenuType, WF.ToolStripSplitButton> _menuButtons = new();
     private readonly ToolbarFormatter _toolbarFormatter = new(new StringWrapper());
-    private readonly wf.Form _form;
-    private wf.ToolStrip _toolStrip = null!;
-    private wf.ToolStripContainer _container = null!;
+    private readonly WF.Form _form;
+    private WF.ToolStrip _toolStrip = null!;
+    private WF.ToolStripContainer _container = null!;
 
     public WinFormsDesktopForm(
         Naps2Config config,
@@ -56,9 +56,9 @@ public class WinFormsDesktopForm : DesktopForm
         // That allows us to check the close reason (which Eto doesn't provide)
     }
 
-    private void OnFormClosing(object? sender, wf.FormClosingEventArgs e)
+    private void OnFormClosing(object? sender, WF.FormClosingEventArgs e)
     {
-        if (!_desktopController.PrepareForClosing(e.CloseReason == wf.CloseReason.UserClosing))
+        if (!_desktopController.PrepareForClosing(e.CloseReason == WF.CloseReason.UserClosing))
         {
             e.Cancel = true;
         }
@@ -77,7 +77,7 @@ public class WinFormsDesktopForm : DesktopForm
         LoadToolStripLocation();
 
         NativeListView.TabIndex = 7;
-        NativeListView.Dock = wf.DockStyle.Fill;
+        NativeListView.Dock = WF.DockStyle.Fill;
         NativeListView.Focus();
     }
 
@@ -92,11 +92,11 @@ public class WinFormsDesktopForm : DesktopForm
         // Disabled buttons don't prevent click events from being sent to the listview below the button, so without this
         // "mouse catcher" control you could e.g. spam click zoom out until it's maxed and then accidentally keep
         // clicking and change the listview selection.
-        var mouseCatcher = new wf.Button
+        var mouseCatcher = new WF.Button
         {
             BackColor = Color.White,
             Size = new Size(45, 23),
-            FlatStyle = wf.FlatStyle.Flat
+            FlatStyle = WF.FlatStyle.Flat
         };
         return L.Overlay(
             L.Row(mouseCatcher.ToEto().AlignTrailing()),
@@ -104,7 +104,7 @@ public class WinFormsDesktopForm : DesktopForm
         );
     }
 
-    private wf.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;
+    private WF.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;
 
     protected override void SetMainForm(Form newMainForm)
     {
@@ -134,16 +134,16 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override LayoutElement GetMainContent()
     {
-        _container = new wf.ToolStripContainer();
+        _container = new WF.ToolStripContainer();
         _container.TopToolStripPanel.Controls.Add(_toolStrip);
-        foreach (var panel in _container.Controls.OfType<wf.ToolStripPanel>())
+        foreach (var panel in _container.Controls.OfType<WF.ToolStripPanel>())
         {
             // Allow tabbing through the toolbar for accessibility
-            WinFormsHacks.SetControlStyle(panel, wf.ControlStyles.Selectable, true);
+            WinFormsHacks.SetControlStyle(panel, WF.ControlStyles.Selectable, true);
         }
 
         var wfContent = _listView.Control.ToNative();
-        wfContent.Dock = wf.DockStyle.Fill;
+        wfContent.Dock = WF.DockStyle.Fill;
         _container.ContentPanel.Controls.Add(wfContent);
 
         return _container.ToEto();
@@ -163,9 +163,9 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void CreateToolbarButton(Command command)
     {
-        var item = new wf.ToolStripButton
+        var item = new WF.ToolStripButton
         {
-            TextImageRelation = wf.TextImageRelation.ImageAboveText
+            TextImageRelation = WF.TextImageRelation.ImageAboveText
         };
         ApplyCommand(item, command);
         _toolStrip.Items.Add(item);
@@ -174,9 +174,9 @@ public class WinFormsDesktopForm : DesktopForm
     protected override void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
         MenuProvider menu)
     {
-        var item = new wf.ToolStripSplitButton
+        var item = new WF.ToolStripSplitButton
         {
-            TextImageRelation = wf.TextImageRelation.ImageAboveText
+            TextImageRelation = WF.TextImageRelation.ImageAboveText
         };
         ApplyCommand(item, command);
         _toolStrip.Items.Add(item);
@@ -184,7 +184,7 @@ public class WinFormsDesktopForm : DesktopForm
         _menuButtons[menuType] = item;
     }
 
-    private void SetUpMenu(wf.ToolStripDropDownItem item, List<MenuProvider.Item> subItems)
+    private void SetUpMenu(WF.ToolStripDropDownItem item, List<MenuProvider.Item> subItems)
     {
         item.DropDownItems.Clear();
         foreach (var subItem in subItems)
@@ -192,16 +192,16 @@ public class WinFormsDesktopForm : DesktopForm
             switch (subItem)
             {
                 case MenuProvider.SeparatorItem:
-                    item.DropDownItems.Add(new wf.ToolStripSeparator());
+                    item.DropDownItems.Add(new WF.ToolStripSeparator());
                     break;
                 case MenuProvider.CommandItem commandSubItem:
-                    item.DropDownItems.Add(ApplyCommand(new wf.ToolStripMenuItem
+                    item.DropDownItems.Add(ApplyCommand(new WF.ToolStripMenuItem
                     {
-                        ImageScaling = wf.ToolStripItemImageScaling.None
+                        ImageScaling = WF.ToolStripItemImageScaling.None
                     }, commandSubItem.Command));
                     break;
                 case MenuProvider.SubMenuItem subMenuSubItem:
-                    var subMenu = new wf.ToolStripMenuItem();
+                    var subMenu = new WF.ToolStripMenuItem();
                     ApplyCommand(subMenu, subMenuSubItem.Command);
                     // TODO: If submenus are dynamic this will memory leak or something
                     subMenuSubItem.MenuProvider.Handle(subSubItems => SetUpMenu(subMenu, subSubItems));
@@ -213,9 +213,9 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
     {
-        var item = new wf.ToolStripDropDownButton
+        var item = new WF.ToolStripDropDownButton
         {
-            TextImageRelation = wf.TextImageRelation.ImageAboveText,
+            TextImageRelation = WF.TextImageRelation.ImageAboveText,
             ShowDropDownArrow = false
         };
         ApplyCommand(item, command);
@@ -238,9 +238,9 @@ public class WinFormsDesktopForm : DesktopForm
         _toolStrip.Items.Add(item);
     }
 
-    private wf.ToolStripItem ApplyCommand(wf.ToolStripItem item, Command command)
+    private WF.ToolStripItem ApplyCommand(WF.ToolStripItem item, Command command)
     {
-        void SetItemText() => item.Text = item is wf.ToolStripMenuItem ? command.MenuText : command.ToolBarText;
+        void SetItemText() => item.Text = item is WF.ToolStripMenuItem ? command.MenuText : command.ToolBarText;
         item.Image = command.Image.ToSD();
         SetItemText();
         if (command is ActionCommand actionCommand)
@@ -249,12 +249,12 @@ public class WinFormsDesktopForm : DesktopForm
         }
         // TODO: We want a better way of determining which keyboard shortcuts are worth showing
         // Ideally we could show them all, but it can be really distracting. So only showing F2/F3 etc. right now.
-        if (item is wf.ToolStripMenuItem menuItem && !command.Shortcut.ToString().Contains(","))
+        if (item is WF.ToolStripMenuItem menuItem && !command.Shortcut.ToString().Contains(","))
         {
             menuItem.ShortcutKeys = command.Shortcut.ToSWF();
         }
         command.EnabledChanged += (_, _) => item.Enabled = command.Enabled;
-        if (item is wf.ToolStripSplitButton button)
+        if (item is WF.ToolStripSplitButton button)
         {
             button.ButtonClick += (_, _) => command.Execute();
         }
@@ -267,7 +267,7 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void CreateToolbarSeparator()
     {
-        _toolStrip.Items.Add(new wf.ToolStripSeparator());
+        _toolStrip.Items.Add(new WF.ToolStripSeparator());
     }
 
     public override void ShowToolbarMenu(DesktopToolbarMenuType menuType)
@@ -277,20 +277,20 @@ public class WinFormsDesktopForm : DesktopForm
 
     private void SaveToolStripLocation()
     {
-        Config.User.Set(c => c.DesktopToolStripDock, _toolStrip.Parent.Dock.ToConfig());
+        Config.User.Set(c => c.DesktopToolStripDock, _toolStrip.Parent!.Dock.ToConfig());
     }
 
     private void LoadToolStripLocation()
     {
         var dock = Config.Get(c => c.DesktopToolStripDock).ToWinForms();
-        if (dock != wf.DockStyle.None)
+        if (dock != WF.DockStyle.None)
         {
-            var panel = _container.Controls.OfType<wf.ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);
+            var panel = _container.Controls.OfType<WF.ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);
             if (panel != null)
             {
                 _toolStrip.Parent = panel;
             }
         }
-        _toolStrip.Parent.TabStop = true;
+        _toolStrip.Parent!.TabStop = true;
     }
 }

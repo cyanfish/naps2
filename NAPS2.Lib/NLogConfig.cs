@@ -13,7 +13,10 @@ public static class NLogConfig
 {
     public static ILogger CreateLogger(Func<bool> enableDebugLogging)
     {
-        LayoutRenderer.Register<CustomExceptionLayoutRenderer>("exception");
+        LogManager.Setup().SetupExtensions(ext =>
+        {
+            ext.RegisterLayoutRenderer<CustomExceptionLayoutRenderer>("exception");
+        });
         var config = new LoggingConfiguration();
         var target = new FileTarget
         {

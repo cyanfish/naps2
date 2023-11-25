@@ -13,7 +13,7 @@ internal static class TwainApi
     public static ScanDevice? SelectDeviceUI()
     {
         var tw = new Twain();
-        if (!tw.Init(Application.OpenForms[0].Handle))
+        if (!tw.Init(Application.OpenForms[0]!.Handle))
         {
             throw new NoDevicesFoundException();
         }

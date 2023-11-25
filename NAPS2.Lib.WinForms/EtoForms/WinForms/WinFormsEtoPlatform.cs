@@ -10,8 +10,8 @@ using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gdi;
-using sd = System.Drawing;
-using wf = System.Windows.Forms;
+using SD = System.Drawing;
+using WF = System.Windows.Forms;
 
 namespace NAPS2.EtoForms.WinForms;
 
@@ -25,8 +25,8 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override Application CreateApplication()
     {
-        wf.Application.EnableVisualStyles();
-        wf.Application.SetCompatibleTextRenderingDefault(false);
+        WF.Application.EnableVisualStyles();
+        WF.Application.SetCompatibleTextRenderingDefault(false);
         return new Application(Eto.Platforms.WinForms);
     }
 
@@ -36,13 +36,13 @@ public class WinFormsEtoPlatform : EtoPlatform
         // TODO: PR for eto to handle mainform changes correctly
         application.MainForm = mainForm;
         mainForm.Show();
-        var appContext = new wf.ApplicationContext(mainForm.ToNative());
+        var appContext = new WF.ApplicationContext(mainForm.ToNative());
         Invoker.Current = new WinFormsInvoker(() => appContext.MainForm!);
         WinFormsDesktopForm.ApplicationContext = appContext;
         var setOptionsMethod =
             typeof(ApplicationHandler).GetMethod("SetOptions", BindingFlags.Instance | BindingFlags.NonPublic);
         setOptionsMethod!.Invoke(application.Handler, Array.Empty<object>());
-        wf.Application.Run(appContext);
+        WF.Application.Run(appContext);
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
@@ -53,26 +53,26 @@ public class WinFormsEtoPlatform : EtoPlatform
         if (string.IsNullOrEmpty(button.Text))
         {
             button.MinimumSize = MinImageOnlyButtonSize;
-            var native = (wf.Button) button.ToNative();
-            native.TextImageRelation = wf.TextImageRelation.Overlay;
-            native.ImageAlign = sd.ContentAlignment.MiddleCenter;
+            var native = (WF.Button) button.ToNative();
+            native.TextImageRelation = WF.TextImageRelation.Overlay;
+            native.ImageAlign = SD.ContentAlignment.MiddleCenter;
             return;
         }
 
         button.MinimumSize = MinImageButtonSize;
         if (button.ImagePosition == ButtonImagePosition.Left)
         {
-            var native = (wf.Button) button.ToNative();
-            native.TextImageRelation = big ? wf.TextImageRelation.ImageBeforeText : wf.TextImageRelation.Overlay;
-            native.ImageAlign = sd.ContentAlignment.MiddleLeft;
-            native.TextAlign = big ? sd.ContentAlignment.MiddleLeft : sd.ContentAlignment.MiddleRight;
+            var native = (WF.Button) button.ToNative()!;
+            native.TextImageRelation = big ? WF.TextImageRelation.ImageBeforeText : WF.TextImageRelation.Overlay;
+            native.ImageAlign = SD.ContentAlignment.MiddleLeft;
+            native.TextAlign = big ? SD.ContentAlignment.MiddleLeft : SD.ContentAlignment.MiddleRight;
 
             if (big)
             {
                 native.Text = @"  " + native.Text;
             }
 
-            var imageWidth = native.Image.Width;
+            var imageWidth = native.Image!.Width;
             using var g = native.CreateGraphics();
             var textWidth = (int) g.MeasureString(native.Text, native.Font).Width;
             native.AutoSize = false;
@@ -116,14 +116,14 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override Bitmap ToBitmap(IMemoryImage image)
     {
         var gdiImage = (GdiImage) image;
-        var bitmap = (sd.Bitmap) gdiImage.Bitmap.Clone();
+        var bitmap = (SD.Bitmap) gdiImage.Bitmap.Clone();
         return bitmap.ToEto();
     }
 
     public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
     {
         var bitmap = new System.Drawing.Bitmap(image.Width, image.Height);
-        using (var g = sd.Graphics.FromImage(bitmap))
+        using (var g = SD.Graphics.FromImage(bitmap))
         {
             var attrs = new ImageAttributes();
             attrs.SetColorMatrix(new ColorMatrix
@@ -131,15 +131,15 @@ public class WinFormsEtoPlatform : EtoPlatform
                 Matrix33 = 0.3f
             });
             g.DrawImage(image.AsBitmap(),
-                new sd.Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                new SD.Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 0,
                 0,
                 image.Width,
                 image.Height,
-                sd.GraphicsUnit.Pixel,
+                SD.GraphicsUnit.Pixel,
                 attrs);
-            using var hourglass = new sd.Bitmap(new MemoryStream(Icons.hourglass_grey));
-            g.DrawImage(hourglass, new sd.Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
+            using var hourglass = new SD.Bitmap(new MemoryStream(Icons.hourglass_grey));
+            g.DrawImage(hourglass, new SD.Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
         }
         image.Dispose();
         return new GdiImage(imageContext, bitmap);
@@ -154,9 +154,9 @@ public class WinFormsEtoPlatform : EtoPlatform
         {
             x = container.Width - x - size.Width;
         }
-        native.Location = new sd.Point(x, y);
+        native.Location = new SD.Point(x, y);
         native.AutoSize = false;
-        native.Size = new sd.Size(size.Width, size.Height);
+        native.Size = new SD.Size(size.Width, size.Height);
         if (inOverlay)
         {
             native.BringToFront();
@@ -180,7 +180,7 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override SizeF GetWrappedSize(Control control, int defaultWidth)
     {
-        if (control.ControlObject is wf.Label label)
+        if (control.ControlObject is WF.Label label)
         {
             using var g = label.CreateGraphics();
             return g.MeasureString(label.Text, label.Font, defaultWidth).ToEto();
@@ -190,12 +190,12 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override Control CreateContainer()
     {
-        return new wf.Panel().ToEto();
+        return new WF.Panel().ToEto();
     }
 
     public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
-        if (control.ToNative() is wf.TextBox textBox)
+        if (control.ToNative() is WF.TextBox textBox)
         {
             // WinForms textboxes behave weirdly when resized during load and can push text offscreen. This fixes that.
             control.Load += (_, _) =>
@@ -221,28 +221,28 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         var form = window.ToNative();
         bool isRtl = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
-        form.RightToLeft = isRtl ? wf.RightToLeft.Yes : wf.RightToLeft.No;
+        form.RightToLeft = isRtl ? WF.RightToLeft.Yes : WF.RightToLeft.No;
         form.RightToLeftLayout = isRtl;
     }
 
     public override void ConfigureZoomButton(Button button)
     {
         button.Size = new Size(23, 23);
-        var wfButton = (wf.Button) button.ToNative();
+        var wfButton = (WF.Button) button.ToNative();
         wfButton.AccessibleName = button.Text;
         wfButton.Text = "";
-        wfButton.BackColor = sd.Color.White;
-        wfButton.FlatStyle = wf.FlatStyle.Flat;
+        wfButton.BackColor = SD.Color.White;
+        wfButton.FlatStyle = WF.FlatStyle.Flat;
     }
 
     public override void ConfigureDropDown(DropDown dropDown)
     {
-        ((wf.ComboBox) dropDown.ControlObject).DrawMode = wf.DrawMode.Normal;
+        ((WF.ComboBox) dropDown.ControlObject).DrawMode = WF.DrawMode.Normal;
     }
 
     public override void ShowIcon(Dialog dialog)
     {
-        ((wf.Form) dialog.ControlObject).ShowIcon = true;
+        ((WF.Form) dialog.ControlObject).ShowIcon = true;
     }
 
     public override void ConfigureEllipsis(Label label)
@@ -253,7 +253,7 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override Bitmap? ExtractAssociatedIcon(string exePath)
     {
-        return sd.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
+        return SD.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
     }
 
     public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
@@ -283,12 +283,12 @@ public class WinFormsEtoPlatform : EtoPlatform
 
             // TODO: Fix this in Eto so we don't need a custom class
             Handler = handler;
-            Size = sd.Size.Empty;
-            MinimumSize = sd.Size.Empty;
-            BorderStyle = wf.BorderStyle.Fixed3D;
+            Size = SD.Size.Empty;
+            MinimumSize = SD.Size.Empty;
+            BorderStyle = WF.BorderStyle.Fixed3D;
             AutoScroll = true;
             AutoSize = true;
-            AutoSizeMode = wf.AutoSizeMode.GrowAndShrink;
+            AutoSizeMode = WF.AutoSizeMode.GrowAndShrink;
             VerticalScroll.SmallChange = 5;
             VerticalScroll.LargeChange = 10;
             HorizontalScroll.SmallChange = 5;
@@ -296,11 +296,11 @@ public class WinFormsEtoPlatform : EtoPlatform
             Controls.Add(handler.ContainerContentControl);
         }
 
-        protected override void OnMouseWheel(wf.MouseEventArgs e)
+        protected override void OnMouseWheel(WF.MouseEventArgs e)
         {
             var etoArgs = e.ToEto(this);
             _mouseWheelHandler.Invoke(this, etoArgs);
-            if (e is wf.HandledMouseEventArgs handledArgs)
+            if (e is WF.HandledMouseEventArgs handledArgs)
             {
                 handledArgs.Handled |= etoArgs.Handled;
             }

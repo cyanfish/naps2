@@ -105,7 +105,7 @@ public class SharedDeviceForm : EtoDialogBase
     public SharedDevice SharedDevice { get; set; } = new()
     {
         Name = "",
-        Device = null,
+        Device = null!,
         Driver = ScanOptionsValidator.SystemDefaultDriver
     };
 
@@ -201,22 +201,24 @@ public class SharedDeviceForm : EtoDialogBase
 
     private void SaveSettings()
     {
-        // TODO: What to do if device not selected?
         SharedDevice = new SharedDevice
         {
             Name = _displayName.Text,
             Driver = DeviceDriver,
-            Device = CurrentDevice,
+            Device = CurrentDevice!
         };
     }
 
     private void Ok_Click(object? sender, EventArgs e)
     {
-        // Note: If CurrentDevice is null, that's fine. A prompt will be shown when scanning.
-
         if (_displayName.Text == "")
         {
             _errorOutput.DisplayError(MiscResources.NameMissing);
+            return;
+        }
+        if (CurrentDevice == null)
+        {
+            _errorOutput.DisplayError(MiscResources.NoDeviceSelected);
             return;
         }
         _result = true;
@@ -233,7 +235,7 @@ public class SharedDeviceForm : EtoDialogBase
     {
         if (((RadioButton) sender!).Checked && !_suppressChangeEvent)
         {
-            SharedDevice = SharedDevice with { Device = null };
+            SharedDevice = SharedDevice with { Device = null! };
             CurrentDevice = null;
         }
     }

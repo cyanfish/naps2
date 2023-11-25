@@ -21,7 +21,7 @@ public class SelectableListView<T> : ISelectable<T> where T : notnull
         if (!_refreshing)
         {
             _refreshing = true;
-            Selection = ListSelection.From(_listView.SelectedItems.Cast<ListViewItem>().Select(x => (T) x.Tag));
+            Selection = ListSelection.From(_listView.SelectedItems.Cast<ListViewItem>().Select(x => (T) x.Tag!));
             _refreshing = false;
         }
     }
@@ -37,7 +37,7 @@ public class SelectableListView<T> : ISelectable<T> where T : notnull
                 _refreshing = true;
                 for (int i = 0; i < _listView.Items.Count; i++)
                 {
-                    _listView.Items[i].Selected = _selection.Contains((T) _listView.Items[i].Tag);
+                    _listView.Items[i].Selected = _selection.Contains((T) _listView.Items[i].Tag!);
                 }
                 _refreshing = false;
             }
@@ -56,7 +56,7 @@ public class SelectableListView<T> : ISelectable<T> where T : notnull
         }
         for (int i = 0; i < _listView.Items.Count; i++)
         {
-            _listView.Items[i].Selected = Selection.Contains((T) _listView.Items[i].Tag);
+            _listView.Items[i].Selected = Selection.Contains((T) _listView.Items[i].Tag!);
         }
         _refreshing = false;
     }

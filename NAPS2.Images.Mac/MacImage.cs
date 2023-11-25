@@ -28,10 +28,10 @@ public class MacImage : IMemoryImage
         }
         PixelFormat = GetPixelFormat(Rep);
         // TODO: Any replacement for deprecated ColorSpaceName?
-#pragma warning disable CA1416
+#pragma warning disable CA1416,CA1422
         bool isDeviceColorSpace = Rep.ColorSpaceName == NSColorSpace.DeviceRGB ||
                                   Rep.ColorSpaceName == NSColorSpace.DeviceWhite;
-#pragma warning restore CA1416
+#pragma warning restore CA1416,CA1422
         if (PixelFormat == ImagePixelFormat.Unsupported)
         {
             var rep = MacBitmapHelper.CopyRep(Rep);
@@ -153,13 +153,13 @@ public class MacImage : IMemoryImage
             var fileType = imageFormat switch
             {
                 // TODO: Any replacement for deprecated UTType?
-#pragma warning disable CA1416
+#pragma warning disable CA1416,CA1422
                 ImageFileFormat.Jpeg => UTType.JPEG,
                 ImageFileFormat.Png => UTType.PNG,
                 ImageFileFormat.Bmp => UTType.BMP,
                 ImageFileFormat.Tiff => UTType.TIFF,
                 ImageFileFormat.Jpeg2000 => UTType.JPEG2000,
-#pragma warning restore CA1416
+#pragma warning restore CA1416,CA1422
                 _ => throw new InvalidOperationException("Unsupported image format")
             };
             var targetFormat = options.PixelFormatHint;

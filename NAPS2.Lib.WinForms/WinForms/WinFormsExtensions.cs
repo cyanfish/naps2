@@ -1,37 +1,37 @@
 namespace NAPS2.WinForms;
 
-using wf = System.Windows.Forms;
+using WF = System.Windows.Forms;
 
 public static class WinFormsExtensions
 {
-    public static wf.MessageBoxIcon ToWinForms(this MessageBoxIcon icon)
+    public static WF.MessageBoxIcon ToWinForms(this MessageBoxIcon icon)
     {
         return icon switch
         {
-            MessageBoxIcon.Information => wf.MessageBoxIcon.Information,
-            MessageBoxIcon.Warning => wf.MessageBoxIcon.Warning,
-            _ => wf.MessageBoxIcon.None
+            MessageBoxIcon.Information => WF.MessageBoxIcon.Information,
+            MessageBoxIcon.Warning => WF.MessageBoxIcon.Warning,
+            _ => WF.MessageBoxIcon.None
         };
     }
 
-    public static wf.DockStyle ToWinForms(this DockStyle dock)
+    public static WF.DockStyle ToWinForms(this DockStyle dock)
     {
         return dock switch
         {
-            DockStyle.Bottom => wf.DockStyle.Bottom,
-            DockStyle.Left => wf.DockStyle.Left,
-            DockStyle.Right => wf.DockStyle.Right,
-            _ => wf.DockStyle.Top
+            DockStyle.Bottom => WF.DockStyle.Bottom,
+            DockStyle.Left => WF.DockStyle.Left,
+            DockStyle.Right => WF.DockStyle.Right,
+            _ => WF.DockStyle.Top
         };
     }
 
-    public static DockStyle ToConfig(this wf.DockStyle dock)
+    public static DockStyle ToConfig(this WF.DockStyle dock)
     {
         return dock switch
         {
-            wf.DockStyle.Bottom => DockStyle.Bottom,
-            wf.DockStyle.Left => DockStyle.Left,
-            wf.DockStyle.Right => DockStyle.Right,
+            WF.DockStyle.Bottom => DockStyle.Bottom,
+            WF.DockStyle.Left => DockStyle.Left,
+            WF.DockStyle.Right => DockStyle.Right,
             _ => DockStyle.Top
         };
     }

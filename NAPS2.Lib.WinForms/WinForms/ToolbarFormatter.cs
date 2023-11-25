@@ -53,7 +53,7 @@ public class ToolbarFormatter
         {
             if (btn is ToolStripSplitButton)
             {
-                if (tStrip.Parent.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
+                if (tStrip.Parent!.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
                 {
                     btn.Margin = new Padding(10, 1, 5, 2);
                 }
@@ -66,7 +66,7 @@ public class ToolbarFormatter
             {
                 btn.Padding = new Padding(5, 0, 5, 0);
             }
-            else if (tStrip.Parent.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
+            else if (tStrip.Parent!.Dock == DockStyle.Left || tStrip.Parent.Dock == DockStyle.Right)
             {
                 btn.Margin = new Padding(0, 1, 5, 2);
             }
