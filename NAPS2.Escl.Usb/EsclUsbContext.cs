@@ -50,6 +50,7 @@ public class EsclUsbContext : IDisposable
             IpV4 = IPAddress.Loopback,
             IpV6 = null,
             Host = IPAddress.Loopback.ToString(),
+            RemoteEndpoint = IPAddress.Loopback,
             Port = port,
             RootUrl = "eSCL",
             Tls = false

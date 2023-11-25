@@ -142,8 +142,7 @@ public class EsclClient
     private string GetUrl(string endpoint)
     {
         var protocol = _service.Tls ? "https" : "http";
-        return new UriBuilder(protocol, _service.Host, _service.Port,
-                $"{_service.RootUrl}/{endpoint}")
-            .Uri.ToString();
+        var ipAndPort = new IPEndPoint(_service.RemoteEndpoint, _service.Port);
+        return $"{protocol}://{ipAndPort}/{_service.RootUrl}/{endpoint}";
     }
 }

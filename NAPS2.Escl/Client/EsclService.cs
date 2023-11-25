@@ -20,6 +20,11 @@ public class EsclService
     public required string Host { get; init; }
 
     /// <summary>
+    /// The IP address of the DNS response.
+    /// </summary>
+    public required IPAddress RemoteEndpoint { get; init; }
+
+    /// <summary>
     /// The port of the ESCL service.
     /// </summary>
     public required int Port { get; init; }
