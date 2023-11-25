@@ -15,4 +15,11 @@
         <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <!-- TODO: Use https://github.com/jdomnitz/net-mdns Nuget package if PRs get merged -->
+        <Reference Include="Makaretu.Dns.Multicast.New">
+            <HintPath>..\NAPS2.Setup\lib\Makaretu.Dns.Multicast.New.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
 </Project>

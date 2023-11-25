@@ -13,12 +13,20 @@
         <PackageTags>naps2 escl</PackageTags>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets"/>
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
     <ItemGroup>
-        <PackageReference Include="Makaretu.Dns.Multicast" Version="0.27.0" />
+        <PackageReference Include="Common.Logging" Version="3.4.1" />
+        <PackageReference Include="Makaretu.Dns" Version="2.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3" />
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- TODO: Use https://github.com/jdomnitz/net-mdns Nuget package if PRs get merged -->
+        <Reference Include="Makaretu.Dns.Multicast.New">
+            <HintPath>..\NAPS2.Setup\lib\Makaretu.Dns.Multicast.New.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
 </Project>
