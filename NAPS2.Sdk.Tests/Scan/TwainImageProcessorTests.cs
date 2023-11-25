@@ -368,6 +368,40 @@ public class TwainImageProcessorTests : ContextualTests
         Assert.Empty(_images);
     }
 
+    [Fact]
+    public void ZeroWidthAndHeightInImageData()
+    {
+        _processor.PageStart(new TwainPageStart
+        {
+            ImageData = CreateColorImageData(0, 0)
+        });
+        _processor.MemoryBufferTransferred(new TwainMemoryBuffer
+        {
+            Buffer = ByteString.CopyFrom(
+                0xFF, 0x00, 0x00,
+                0x00, 0xFF, 0x00,
+                0x00, 0x00,
+                0x00, 0x00, 0xFF,
+                0xFF, 0xFF, 0xFF,
+                0x00, 0x00),
+            Columns = 2,
+            Rows = 2,
+            BytesPerRow = 8,
+            XOffset = 0,
+            YOffset = 0
+        });
+        _processor.Flush();
+
+        Assert.Single(_images);
+        ImageAsserts.PixelColors(_images[0], new()
+        {
+            { (0, 0), RED },
+            { (1, 0), GREEN },
+            { (0, 1), BLUE },
+            { (1, 1), WHITE },
+        });
+    }
+
     private static TwainImageData CreateColorImageData(int width, int height)
     {
         return new TwainImageData

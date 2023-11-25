@@ -55,14 +55,16 @@ internal class TwainImageProcessor : ITwainEvents, IDisposable
             throw new InvalidOperationException();
         }
 
-        var pixelFormat = _currentImageData.BitsPerPixel == 1 ? ImagePixelFormat.BW1 : ImagePixelFormat.RGB24;
-        _currentImage ??= _scanningContext.ImageContext.Create(
-            _currentImageData.Width, _currentImageData.Height, pixelFormat);
-        _currentImage.SetResolution((float) _currentImageData.XRes, (float) _currentImageData.YRes);
-
         _transferredPixels += memoryBuffer.Columns * (long) memoryBuffer.Rows;
         _transferredWidth = Math.Max(_transferredWidth, memoryBuffer.Columns + memoryBuffer.XOffset);
         _transferredHeight = Math.Max(_transferredHeight, memoryBuffer.Rows + memoryBuffer.YOffset);
+
+        var pixelFormat = _currentImageData.BitsPerPixel == 1 ? ImagePixelFormat.BW1 : ImagePixelFormat.RGB24;
+        _currentImage ??= _scanningContext.ImageContext.Create(
+            Math.Max(_currentImageData.Width, _transferredWidth),
+            Math.Max(_currentImageData.Height, _transferredHeight),
+            pixelFormat);
+        _currentImage.SetResolution((float) _currentImageData.XRes, (float) _currentImageData.YRes);
 
         // In case the real image dimensions don't match the specified image dimensions, we may need to get more memory.
         // The image will be realloc'd to the real size once we're done and know what that is.
