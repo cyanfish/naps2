@@ -5,13 +5,6 @@ VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.WinForms", "NAPS2.App.WinForms\NAPS2.App.WinForms.csproj", "{EAC4A133-93BE-4400-BFA9-CEB1615693C4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F6CC4F6D-EE76-43D9-977B-8802C9665CC4}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Console", "NAPS2.App.Console\NAPS2.App.Console.csproj", "{2A321772-75B2-4601-A718-AF0A2370E6A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk", "NAPS2.Sdk\NAPS2.Sdk.csproj", "{968378FA-A649-4058-A928-1FCD97B23070}"
