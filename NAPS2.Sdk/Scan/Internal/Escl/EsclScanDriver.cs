@@ -61,6 +61,7 @@ internal class EsclScanDriver : IScanDriver
             var caps = await client.GetCapabilities();
             var status = await client.GetStatus();
             var scanSettings = GetScanSettings(options, caps);
+            bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
 
             if (cancelToken.IsCancellationRequested) return;
 
@@ -77,12 +78,11 @@ internal class EsclScanDriver : IScanDriver
             {
                 while (true)
                 {
-                    // TODO: Can we do progress reporting?
                     scanEvents.PageStart();
                     RawDocument? doc;
                     try
                     {
-                        doc = await client.NextDocument(job);
+                        doc = await client.NextDocument(job, hasProgressExtension ? scanEvents.PageProgress : null);
                     }
                     catch (Exception ex)
                     {

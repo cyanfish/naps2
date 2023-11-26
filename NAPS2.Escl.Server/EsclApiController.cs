@@ -34,6 +34,7 @@ internal class EsclApiController : WebApiController
                     new XElement(ScanNs + "UUID", "0e468f6d-e5dc-4abe-8e9f-ad08d8546b0c"),
                     new XElement(ScanNs + "AdminURI", ""),
                     new XElement(ScanNs + "IconURI", ""),
+                    new XElement(ScanNs + "Naps2Extensions", "Progress"),
                     new XElement(ScanNs + "SettingProfiles",
                         new XElement(ScanNs + "SettingProfile",
                             new XAttribute("name", "p1"),
@@ -133,6 +134,22 @@ internal class EsclApiController : WebApiController
     {
     }
 
+    [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/Progress")]
+    public async Task Progress(string jobId)
+    {
+        if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
+            jobState.Status is JobStatus.Pending or JobStatus.Processing)
+        {
+            SetChunkedResponse();
+            using var stream = Response.OutputStream;
+            await jobState.Job.WriteProgressTo(stream);
+        }
+        else
+        {
+            Response.StatusCode = 404;
+        }
+    }
+
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
     public async Task NextDocument(string jobId)
     {
@@ -141,14 +158,7 @@ internal class EsclApiController : WebApiController
             await jobState.Job.WaitForNextDocument())
         {
             Response.Headers.Add("Content-Location", $"/escl/ScanJobs/{jobState.Id}/1");
-            // Bypass https://github.com/unosquare/embedio/issues/510
-            var field = Response.GetType().GetField("<ProtocolVersion>k__BackingField",
-                BindingFlags.Instance | BindingFlags.NonPublic);
-            if (field != null)
-            {
-                field.SetValue(Response, new Version(1, 1));
-            }
-            Response.SendChunked = true;
+            SetChunkedResponse();
             Response.ContentType = "image/jpeg";
             Response.ContentEncoding = null;
             using var stream = Response.OutputStream;
@@ -161,5 +171,17 @@ internal class EsclApiController : WebApiController
         {
             Response.StatusCode = 404;
         }
+    }
+
+    private void SetChunkedResponse()
+    {
+        // Bypass https://github.com/unosquare/embedio/issues/510
+        var field = Response.GetType().GetField("<ProtocolVersion>k__BackingField",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        if (field != null)
+        {
+            field.SetValue(Response, new Version(1, 1));
+        }
+        Response.SendChunked = true;
     }
 }

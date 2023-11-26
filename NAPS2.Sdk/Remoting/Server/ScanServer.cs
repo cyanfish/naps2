@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -92,11 +93,13 @@ public class ScanServer : IDisposable
 
     private class ScanJob : IEsclScanJob
     {
+        private readonly ScanController _controller;
         private readonly CancellationTokenSource _cts = new();
         private readonly IAsyncEnumerator<ProcessedImage> _enumerable;
 
         public ScanJob(ScanController controller, Driver driver, ScanDevice device)
         {
+            _controller = controller;
             _enumerable = controller.Scan(new ScanOptions { Driver = driver, Device = device }, _cts.Token).GetAsyncEnumerator();
         }
 
@@ -112,6 +115,31 @@ public class ScanServer : IDisposable
         {
             // TODO: PDF etc
             _enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
+        }
+
+        public async Task WriteProgressTo(Stream stream)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            var streamWriter = new StreamWriter(stream);
+
+            void OnPageProgress(object? sender, PageProgressEventArgs e)
+            {
+                // TODO: Match page number?
+                // TODO: Throttle?
+                streamWriter.WriteLine(e.Progress.ToString(CultureInfo.InvariantCulture));
+                streamWriter.Flush();
+            }
+            void OnPageEnd(object? sender, PageEndEventArgs e)
+            {
+                tcs.TrySetResult(true);
+            }
+
+            _controller.PageProgress += OnPageProgress;
+            _controller.PageEnd += OnPageEnd;
+            // TODO: Terminate in case of errors or if we called too late
+            await tcs.Task;
+            _controller.PageProgress -= OnPageProgress;
+            _controller.PageEnd -= OnPageEnd;
         }
     }
 }

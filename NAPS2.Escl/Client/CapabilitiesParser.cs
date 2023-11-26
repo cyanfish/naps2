@@ -34,6 +34,7 @@ internal static class CapabilitiesParser
             Uuid = root.Element(ScanNs + "UUID")?.Value,
             AdminUri = root.Element(ScanNs + "AdminURI")?.Value,
             IconUri = root.Element(ScanNs + "IconURI")?.Value,
+            Naps2Extensions = root.Element(ScanNs + "Naps2Extensions")?.Value,
             PlatenCaps = ParseInputCaps(platenCapsEl, settingProfiles),
             AdfSimplexCaps = ParseInputCaps(adfSimplexCapsEl, settingProfiles),
             AdfDuplexCaps = ParseInputCaps(adfDuplexCapsEl, settingProfiles)

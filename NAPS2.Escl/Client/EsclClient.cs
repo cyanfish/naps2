@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -90,8 +91,24 @@ public class EsclClient
         };
     }
 
-    public async Task<RawDocument?> NextDocument(EsclJob job)
+    public async Task<RawDocument?> NextDocument(EsclJob job, Action<double>? pageProgress = null)
     {
+        if (pageProgress != null)
+        {
+            var progressUrl = job.Uri + "/Progress";
+            var progressResponse = await HttpClient.GetStreamAsync(progressUrl);
+            var streamReader = new StreamReader(progressResponse);
+            _ = Task.Run(async () =>
+            {
+                while (await streamReader.ReadLineAsync() is { } line)
+                {
+                    if (double.TryParse(line, NumberStyles.Any, CultureInfo.InvariantCulture, out var progress))
+                    {
+                        pageProgress(progress);
+                    }
+                }
+            });
+        }
         // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
         var url = job.Uri + "/NextDocument";
         Logger.LogDebug("ESCL GET {Url}", url);

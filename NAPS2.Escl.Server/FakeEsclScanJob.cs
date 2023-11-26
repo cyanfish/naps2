@@ -13,4 +13,6 @@ internal class FakeEsclScanJob : IEsclScanJob
         var bytes = File.ReadAllBytes(@"C:\Devel\VS\NAPS2\NAPS2.Sdk.Tests\Resources\dog.jpg");
         stream.Write(bytes, 0, bytes.Length);
     }
+
+    public Task WriteProgressTo(Stream stream) => Task.CompletedTask;
 }
