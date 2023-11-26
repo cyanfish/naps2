@@ -7,7 +7,7 @@
     <AssemblyName>NAPS2</AssemblyName>
     <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
-    <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx-x64;osx-arm64</RuntimeIdentifiers>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
