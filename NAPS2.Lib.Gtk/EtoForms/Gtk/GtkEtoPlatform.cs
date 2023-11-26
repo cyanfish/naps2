@@ -6,7 +6,7 @@ using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gtk;
-using gtk = Gtk;
+using GTK = Gtk;
 
 namespace NAPS2.EtoForms.Gtk;
 
@@ -15,7 +15,7 @@ public class GtkEtoPlatform : EtoPlatform
     // TODO: Can we determine this dynamically? Tried container.GetAllocatedSize.Left/Top which works on LxQT but not Gnome
     private const int X_OFF = 2;
     private const int Y_OFF = 2;
-    
+
     public override bool IsGtk => true;
 
     public override Application CreateApplication()
@@ -60,7 +60,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
-        var overlay = (gtk.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) container.ToNative();
         var widget = control.ToNative();
         if (inOverlay)
         {
@@ -70,11 +70,11 @@ public class GtkEtoPlatform : EtoPlatform
         }
         else
         {
-            var panel = (gtk.Fixed) overlay.Children[0];
+            var panel = (GTK.Fixed) overlay.Children[0];
             panel.Move(widget, location.X - X_OFF, location.Y - Y_OFF);
         }
         widget.SetSizeRequest(size.Width, size.Height);
-        if (widget is gtk.Bin { Child: gtk.Label { Wrap: true } label })
+        if (widget is GTK.Bin { Child: GTK.Label { Wrap: true } label })
         {
             label.MaxWidthChars = EstimateCharactersWide(size.Width, label);
         }
@@ -82,24 +82,24 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override Control CreateContainer()
     {
-        var overlay = new gtk.Overlay();
-        overlay.Add(new gtk.Fixed());
+        var overlay = new GTK.Overlay();
+        overlay.Add(new GTK.Fixed());
         return overlay.ToEto();
     }
 
     public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
-        var overlay = (gtk.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) container.ToNative();
         var widget = control.ToNative();
         if (inOverlay)
         {
             overlay.AddOverlay(widget);
-            widget.Halign = gtk.Align.Start;
-            widget.Valign = gtk.Align.Start;
+            widget.Halign = GTK.Align.Start;
+            widget.Valign = GTK.Align.Start;
         }
         else
         {
-            var panel = (gtk.Fixed) overlay.Children[0];
+            var panel = (GTK.Fixed) overlay.Children[0];
             panel.Add(widget);
         }
         widget.ShowAll();
@@ -107,17 +107,17 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void RemoveFromContainer(Control container, Control control)
     {
-        var overlay = (gtk.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) container.ToNative();
         var widget = control.ToNative();
         overlay.Remove(widget);
-        var panel = (gtk.Fixed) overlay.Children[0];
+        var panel = (GTK.Fixed) overlay.Children[0];
         panel.Remove(widget);
         widget.Unrealize();
     }
 
     public override void SetContainerSize(Window _window, Control container, Size size, int padding)
     {
-        var overlay = (gtk.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) container.ToNative();
         if (!_window.Resizable)
         {
             // This ensures the window has the appropriate margins, otherwise with resizable=false it changes to fit
@@ -129,14 +129,14 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override Size GetFormSize(Window window)
     {
-        var gtkWindow = (gtk.Window) window.ToNative();
+        var gtkWindow = (GTK.Window) window.ToNative();
         gtkWindow.GetSize(out int w, out int h);
         return new Size(w, h);
     }
 
     public override void SetFormSize(Window window, Size size)
     {
-        var gtkWindow = (gtk.Window) window.ToNative();
+        var gtkWindow = (GTK.Window) window.ToNative();
         gtkWindow.SetDefaultSize(size.Width, size.Height);
     }
 
@@ -149,7 +149,7 @@ public class GtkEtoPlatform : EtoPlatform
         // the position so it doesn't affect that any more. However, there is a chance this will break in some edge
         // cases.
         widget.Margin = 0;
-        if (widget.IsRealized && widget is not gtk.DrawingArea)
+        if (widget.IsRealized && widget is not GTK.DrawingArea)
         {
             widget.GetSizeRequest(out var oldWidth, out var oldHeight);
             widget.SetSizeRequest(0, 0);
@@ -169,7 +169,7 @@ public class GtkEtoPlatform : EtoPlatform
     public override SizeF GetWrappedSize(Control control, int defaultWidth)
     {
         var widget = control.ToNative();
-        if (widget is gtk.Bin { Child: gtk.Label label })
+        if (widget is GTK.Bin { Child: GTK.Label label })
         {
             label.MaxWidthChars = EstimateCharactersWide(defaultWidth, label);
             label.GetPreferredSize(out var minSize, out var naturalSize);
@@ -179,7 +179,7 @@ public class GtkEtoPlatform : EtoPlatform
         return base.GetWrappedSize(control, defaultWidth);
     }
 
-    private static int EstimateCharactersWide(int pixelWidth, gtk.Label label)
+    private static int EstimateCharactersWide(int pixelWidth, GTK.Label label)
     {
         // TODO: This could vary based on font and text. Can we do better somehow?
         // Ideally we'd be able to wrap based on a pixel width. Maybe if we put the label in a container?
@@ -190,25 +190,25 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override Size GetClientSize(Window window, bool excludeToolbars)
     {
-        var gtkWindow = (gtk.Window) window.ToNative();
+        var gtkWindow = (GTK.Window) window.ToNative();
         gtkWindow.GetSize(out var w, out var h);
         var size = new Size(w, h);
         if (excludeToolbars && window.ToolBar != null)
         {
-            size -= new Size(0, ((gtk.Toolbar) window.ToolBar.ControlObject).AllocatedHeight);
+            size -= new Size(0, ((GTK.Toolbar) window.ToolBar.ControlObject).AllocatedHeight);
         }
         return size;
     }
 
     public override void SetClientSize(Window window, Size clientSize)
     {
-        var gtkWindow = (gtk.Window) window.ToNative();
+        var gtkWindow = (GTK.Window) window.ToNative();
         gtkWindow.Resize(clientSize.Width, clientSize.Height);
     }
 
     public override void SetMinimumClientSize(Window window, Size minSize)
     {
-        var gtkWindow = (gtk.Window) window.ToNative();
+        var gtkWindow = (GTK.Window) window.ToNative();
         gtkWindow.SetSizeRequest(minSize.Width, minSize.Height);
     }
 
@@ -220,11 +220,11 @@ public class GtkEtoPlatform : EtoPlatform
     public override Control AccessibleImageButton(Image image, string text, Action onClick,
         int xOffset = 0, int yOffset = 0)
     {
-        var button = new gtk.Button
+        var button = new GTK.Button
         {
             // Label = text,
             Image = image.ToGtk(),
-            ImagePosition = gtk.PositionType.Left
+            ImagePosition = GTK.PositionType.Left
         };
         button.StyleContext.AddClass("accessible-image-button");
         button.Clicked += (_, _) => onClick();
