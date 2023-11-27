@@ -24,7 +24,7 @@ public class MdnsAdvertiser : IDisposable
         service.HostName = DomainName.Join(domain, service.Domain);
         service.AddProperty("txtvers", "1");
         service.AddProperty("Vers", "2.0"); // TODO: verify
-        service.AddProperty("rs", "escl");
+        service.AddProperty("rs", "eSCL");
         service.AddProperty("ty", name);
         service.AddProperty("pdl", "application/pdf,image/jpeg,image/png");
         // TODO: Actual adf/duplex, etc.

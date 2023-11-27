@@ -77,7 +77,7 @@ internal class EsclApiController : WebApiController
         foreach (var jobState in _serverState.Jobs.Values)
         {
             jobsElement.Add(new XElement(ScanNs + "JobInfo",
-                new XElement(PwgNs + "JobUri", $"/escl/ScanJobs/{jobState.Id}"),
+                new XElement(PwgNs + "JobUri", $"/eESCL/ScanJobs/{jobState.Id}"),
                 new XElement(PwgNs + "JobUuid", jobState.Id),
                 new XElement(ScanNs + "Age", Math.Ceiling(jobState.LastUpdated.Elapsed.TotalSeconds)),
                 // TODO: real data
@@ -156,7 +156,7 @@ internal class EsclApiController : WebApiController
             jobState.Status is JobStatus.Pending or JobStatus.Processing &&
             await jobState.Job.WaitForNextDocument())
         {
-            Response.Headers.Add("Content-Location", $"/escl/ScanJobs/{jobState.Id}/1");
+            Response.Headers.Add("Content-Location", $"/eESCL/ScanJobs/{jobState.Id}/1");
             SetChunkedResponse();
             Response.ContentType = "image/jpeg";
             Response.ContentEncoding = null;

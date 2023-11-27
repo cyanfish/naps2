@@ -62,7 +62,7 @@ public class EsclServer : IDisposable
         var server = new WebServer(o => o
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url))
-            .WithWebApi("/escl", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
+            .WithWebApi("/eSCL", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
         server.StateChanged += ServerOnStateChanged;
         server.RunAsync(CancellationTokenSource.CreateLinkedTokenSource(_cts.Token, _devices[deviceConfig].Token).Token);
     }
