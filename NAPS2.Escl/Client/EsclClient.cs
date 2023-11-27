@@ -12,10 +12,11 @@ public class EsclClient
 {
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
+    // Sadly as we're still using .NET Framework on Windows, we're stuck with the old HttpClient implementation, which
+    // has trouble with concurrency. So we use a separate client for long running requests (Progress/NextDocument).
     private static readonly HttpClient HttpClient = new();
-
-    private static readonly HttpClient ChunkedHttpClient = new()
-        { DefaultRequestHeaders = { TransferEncodingChunked = true } };
+    private static readonly HttpClient ProgressHttpClient = new();
+    private static readonly HttpClient DocumentHttpClient = new();
 
     private readonly EsclService _service;
 
@@ -96,7 +97,7 @@ public class EsclClient
         if (pageProgress != null)
         {
             var progressUrl = job.Uri + "/Progress";
-            var progressResponse = await HttpClient.GetStreamAsync(progressUrl);
+            var progressResponse = await ProgressHttpClient.GetStreamAsync(progressUrl);
             var streamReader = new StreamReader(progressResponse);
             _ = Task.Run(async () =>
             {
@@ -112,7 +113,7 @@ public class EsclClient
         // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
         var url = job.Uri + "/NextDocument";
         Logger.LogDebug("ESCL GET {Url}", url);
-        var response = await HttpClient.GetAsync(url);
+        var response = await DocumentHttpClient.GetAsync(url);
         if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
         {
             // NotFound = end of scan, Gone = canceled
