@@ -6,13 +6,19 @@ internal class JobState
 {
     public static JobState CreateNewJob(IEsclScanJob job)
     {
-        return new JobState
+        var state = new JobState
         {
             Id = Guid.NewGuid().ToString("D"),
             Status = JobStatus.Processing,
             LastUpdated = Stopwatch.StartNew(),
             Job = job
         };
+        job.RegisterStatusChangeCallback(status =>
+        {
+            state.Status = status;
+            state.LastUpdated = Stopwatch.StartNew();
+        });
+        return state;
     }
 
     public required string Id { get; init; }
@@ -22,13 +28,4 @@ internal class JobState
     public required Stopwatch LastUpdated { get; set; }
 
     public required IEsclScanJob Job { get; set; }
-}
-
-internal enum JobStatus
-{
-    Pending,
-    Processing,
-    Completed,
-    Canceled,
-    Aborted
 }

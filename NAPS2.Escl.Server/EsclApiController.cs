@@ -80,6 +80,7 @@ internal class EsclApiController : WebApiController
                 new XElement(PwgNs + "JobUri", $"/escl/ScanJobs/{jobState.Id}"),
                 new XElement(PwgNs + "JobUuid", jobState.Id),
                 new XElement(ScanNs + "Age", Math.Ceiling(jobState.LastUpdated.Elapsed.TotalSeconds)),
+                // TODO: real data
                 new XElement(PwgNs + "ImagesCompleted",
                     jobState.Status is JobStatus.Pending or JobStatus.Processing ? "0" : "1"),
                 new XElement(PwgNs + "ImagesToTransfer", "1"),
@@ -120,8 +121,6 @@ internal class EsclApiController : WebApiController
             jobState.Status is JobStatus.Pending or JobStatus.Processing)
         {
             jobState.Job.Cancel();
-            jobState.Status = JobStatus.Canceled;
-            jobState.LastUpdated = Stopwatch.StartNew();
         }
         else
         {
@@ -163,9 +162,6 @@ internal class EsclApiController : WebApiController
             Response.ContentEncoding = null;
             using var stream = Response.OutputStream;
             jobState.Job.WriteDocumentTo(stream);
-            // TODO: Let IEsclScanJob update status
-            jobState.Status = JobStatus.Completed;
-            jobState.LastUpdated = Stopwatch.StartNew();
         }
         else
         {
