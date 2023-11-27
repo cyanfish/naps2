@@ -11,6 +11,7 @@ public class SharedDeviceManager : ISharedDeviceManager
     {
         _config = config;
         _server = new ScanServer(scanningContext);
+        _server.SetDefaultIcon(Icons.scanner_128);
         RegisterDevicesFromConfig();
     }
 

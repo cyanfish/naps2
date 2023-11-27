@@ -33,7 +33,7 @@ internal class EsclApiController : WebApiController
                     new XElement(PwgNs + "SerialNumber", caps.SerialNumber),
                     new XElement(ScanNs + "UUID", "0e468f6d-e5dc-4abe-8e9f-ad08d8546b0c"),
                     new XElement(ScanNs + "AdminURI", ""),
-                    new XElement(ScanNs + "IconURI", ""),
+                    new XElement(ScanNs + "IconURI", caps.IconPng != null ? $"http://naps2-{caps.Uuid}.local.:{_deviceConfig.Port}/eSCL/icon.png" : ""),
                     new XElement(ScanNs + "Naps2Extensions", "Progress"),
                     new XElement(ScanNs + "SettingProfiles",
                         new XElement(ScanNs + "SettingProfile",
@@ -68,6 +68,22 @@ internal class EsclApiController : WebApiController
         Response.ContentType = "text/xml";
         using var writer = new StreamWriter(HttpContext.OpenResponseStream());
         await writer.WriteAsync(doc);
+    }
+
+    [Route(HttpVerbs.Get, "/icon.png")]
+    public async Task GetIcon()
+    {
+        if (_deviceConfig.Capabilities.IconPng != null)
+        {
+            Response.ContentType = "image/png";
+            using var stream = Response.OutputStream;
+            var buffer = _deviceConfig.Capabilities.IconPng;
+            await stream.WriteAsync(buffer, 0, buffer.Length);
+        }
+        else
+        {
+            Response.StatusCode = 404;
+        }
     }
 
     [Route(HttpVerbs.Get, "/ScannerStatus")]

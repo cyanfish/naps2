@@ -2,12 +2,13 @@ namespace NAPS2.Escl;
 
 public class EsclCapabilities
 {
-    public string? Version { get; init; }
+    public string Version { get; init; } = "2.6";
     public string? MakeAndModel { get; init; }
     public string? SerialNumber { get; init; }
     public string? Uuid { get; init; }
     public string? AdminUri { get; init; }
     public string? IconUri { get; init; }
+    public byte[]? IconPng { get; init; }
     public string? Naps2Extensions { get; init; }
     public EsclInputCaps? PlatenCaps { get; init; }
     public EsclInputCaps? AdfSimplexCaps { get; init; }

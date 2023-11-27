@@ -9,6 +9,7 @@ public class ScanServer : IDisposable
     private readonly ScanningContext _scanningContext;
     private readonly Dictionary<(Driver, string), EsclDeviceConfig> _currentDevices = new();
     private EsclServer? _esclServer;
+    private byte[]? _defaultIconPng;
 
     public ScanServer(ScanningContext scanningContext)
     {
@@ -17,6 +18,11 @@ public class ScanServer : IDisposable
     }
 
     internal ScanController ScanController { get; set; }
+
+    public void SetDefaultIcon(IMemoryImage icon) =>
+        SetDefaultIcon(icon.SaveToMemoryStream(ImageFileFormat.Png).ToArray());
+
+    public void SetDefaultIcon(byte[] iconPng) => _defaultIconPng = iconPng;
 
     public void RegisterDevice(SharedDevice device)
     {
@@ -42,6 +48,7 @@ public class ScanServer : IDisposable
             {
                 MakeAndModel = device.Name,
                 Uuid = device.Uuid,
+                IconPng = _defaultIconPng,
                 // TODO: Ideally we want to get the actual device capabilities
                 PlatenCaps = new EsclInputCaps
                 {
