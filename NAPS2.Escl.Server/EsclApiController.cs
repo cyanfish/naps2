@@ -25,6 +25,7 @@ internal class EsclApiController : WebApiController
     public async Task GetScannerCapabilities()
     {
         var caps = _deviceConfig.Capabilities;
+        var iconUri = caps.IconPng != null ? $"http://naps2-{caps.Uuid}.local.:{_deviceConfig.Port}/eSCL/icon.png" : "";
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerCapabilities",
@@ -33,28 +34,8 @@ internal class EsclApiController : WebApiController
                     new XElement(PwgNs + "SerialNumber", caps.SerialNumber),
                     new XElement(ScanNs + "UUID", "0e468f6d-e5dc-4abe-8e9f-ad08d8546b0c"),
                     new XElement(ScanNs + "AdminURI", ""),
-                    new XElement(ScanNs + "IconURI", caps.IconPng != null ? $"http://naps2-{caps.Uuid}.local.:{_deviceConfig.Port}/eSCL/icon.png" : ""),
+                    new XElement(ScanNs + "IconURI", iconUri),
                     new XElement(ScanNs + "Naps2Extensions", "Progress"),
-                    new XElement(ScanNs + "SettingProfiles",
-                        new XElement(ScanNs + "SettingProfile",
-                            new XAttribute("name", "p1"),
-                            new XElement(ScanNs + "ColorModes",
-                                new XElement(ScanNs + "ColorMode", "BlackAndWhite1"),
-                                new XElement(ScanNs + "ColorMode", "Grayscale8"),
-                                new XElement(ScanNs + "ColorMode", "RGB24")),
-                            new XElement(ScanNs + "DocumentFormats",
-                                new XElement(PwgNs + "DocumentFormat", "application/pdf"),
-                                new XElement(PwgNs + "DocumentFormat", "image/jpeg"),
-                                new XElement(PwgNs + "DocumentFormat", "image/png"),
-                                new XElement(ScanNs + "DocumentFormatExt", "application/pdf"),
-                                new XElement(ScanNs + "DocumentFormatExt", "image/jpeg"),
-                                new XElement(ScanNs + "DocumentFormatExt", "image/png")
-                            ),
-                            new XElement(ScanNs + "SupportedResolutions",
-                                new XElement(ScanNs + "DiscreteResolutions",
-                                    new XElement(ScanNs + "DiscreteResolution",
-                                        new XElement(ScanNs + "XResolution", "100"),
-                                        new XElement(ScanNs + "YResolution", "100")))))),
                     new XElement(ScanNs + "Platen",
                         new XElement(ScanNs + "PlatenInputCaps",
                             new XElement(ScanNs + "MinWidth", "1"),
@@ -64,7 +45,23 @@ internal class EsclApiController : WebApiController
                             new XElement(ScanNs + "MaxScanRegions", "1"),
                             new XElement(ScanNs + "SettingProfiles",
                                 new XElement(ScanNs + "SettingProfile",
-                                    new XAttribute("ref", "p1")))))));
+                                    new XElement(ScanNs + "ColorModes",
+                                        new XElement(ScanNs + "ColorMode", "BlackAndWhite1"),
+                                        new XElement(ScanNs + "ColorMode", "Grayscale8"),
+                                        new XElement(ScanNs + "ColorMode", "RGB24")),
+                                    new XElement(ScanNs + "DocumentFormats",
+                                        new XElement(PwgNs + "DocumentFormat", "application/pdf"),
+                                        new XElement(PwgNs + "DocumentFormat", "image/jpeg"),
+                                        new XElement(PwgNs + "DocumentFormat", "image/png"),
+                                        new XElement(ScanNs + "DocumentFormatExt", "application/pdf"),
+                                        new XElement(ScanNs + "DocumentFormatExt", "image/jpeg"),
+                                        new XElement(ScanNs + "DocumentFormatExt", "image/png")
+                                    ),
+                                    new XElement(ScanNs + "SupportedResolutions",
+                                        new XElement(ScanNs + "DiscreteResolutions",
+                                            new XElement(ScanNs + "DiscreteResolution",
+                                                new XElement(ScanNs + "XResolution", "100"),
+                                                new XElement(ScanNs + "YResolution", "100"))))))))));
         Response.ContentType = "text/xml";
         using var writer = new StreamWriter(HttpContext.OpenResponseStream());
         await writer.WriteAsync(doc);
