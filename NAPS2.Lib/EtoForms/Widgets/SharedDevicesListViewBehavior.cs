@@ -1,5 +1,5 @@
 using Eto.Drawing;
-using NAPS2.Remoting;
+using NAPS2.Remoting.Server;
 
 namespace NAPS2.EtoForms.Widgets;
 

@@ -64,6 +64,11 @@ public class ScanOptions
     public SaneOptions SaneOptions { get; set; } = new();
 
     /// <summary>
+    /// Options specific to the ESCL driver.
+    /// </summary>
+    public EsclOptions EsclOptions { get; set; } = new();
+
+    /// <summary>
     /// Options for detecting barcodes during the scan.
     /// </summary>
     public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new();

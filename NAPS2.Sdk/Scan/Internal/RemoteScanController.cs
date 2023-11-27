@@ -23,10 +23,19 @@ internal class RemoteScanController : IRemoteScanController
         await _scanDriverFactory.Create(options).GetDevices(options, cancelToken, device =>
         {
             var skipWiaDevices = options.Driver == Driver.Twain && !options.TwainOptions.IncludeWiaDevices;
-            if (!skipWiaDevices || !device.ID.StartsWith("WIA-", StringComparison.InvariantCulture))
+            if (skipWiaDevices && device.ID.StartsWith("WIA-", StringComparison.InvariantCulture))
             {
-                callback(device);
+                return;
             }
+            if (options.Driver == Driver.Escl)
+            {
+                if (options.EsclOptions.ExcludeUuids.Contains(Escl.EsclScanDriver.GetUuid(device)))
+                {
+                    return;
+                }
+            }
+
+            callback(device);
         });
     }
 

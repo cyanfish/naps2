@@ -1,7 +1,6 @@
-using NAPS2.Remoting.Server;
 using NAPS2.Scan;
 
-namespace NAPS2.Remoting;
+namespace NAPS2.Remoting.Server;
 
 public class SharedDeviceManager : ISharedDeviceManager
 {
@@ -32,7 +31,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         var devices = _config.Get(c => c.SharedDevices);
         devices = devices.Add(device);
         _config.User.Set(c => c.SharedDevices, devices);
-        _server.RegisterDevice(device.Driver, device.Device, device.Name);
+        _server.RegisterDevice(device);
     }
 
     public void RemoveSharedDevice(SharedDevice device)
@@ -40,7 +39,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         var devices = _config.Get(c => c.SharedDevices);
         devices = devices.Remove(device);
         _config.User.Set(c => c.SharedDevices, devices);
-        _server.UnregisterDevice(device.Driver, device.Device);
+        _server.UnregisterDevice(device);
     }
 
     public void ReplaceSharedDevice(SharedDevice original, SharedDevice replacement)
@@ -48,8 +47,8 @@ public class SharedDeviceManager : ISharedDeviceManager
         var devices = _config.Get(c => c.SharedDevices);
         devices = devices.Replace(original, replacement);
         _config.User.Set(c => c.SharedDevices, devices);
-        _server.UnregisterDevice(original.Driver, original.Device);
-        _server.RegisterDevice(replacement.Driver, replacement.Device, replacement.Name);
+        _server.UnregisterDevice(original);
+        _server.RegisterDevice(replacement);
     }
 
     public IEnumerable<SharedDevice> SharedDevices => _config.Get(c => c.SharedDevices);
@@ -58,7 +57,7 @@ public class SharedDeviceManager : ISharedDeviceManager
     {
         foreach (var device in _config.Get(c => c.SharedDevices))
         {
-            _server.RegisterDevice(device.Driver, device.Device, device.Name);
+            _server.RegisterDevice(device);
         }
     }
 }

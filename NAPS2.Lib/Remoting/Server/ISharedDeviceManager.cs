@@ -1,4 +1,4 @@
-namespace NAPS2.Remoting;
+namespace NAPS2.Remoting.Server;
 
 public interface ISharedDeviceManager
 {

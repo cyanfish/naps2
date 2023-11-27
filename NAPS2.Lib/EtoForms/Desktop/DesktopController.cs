@@ -6,7 +6,7 @@ using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
 using NAPS2.Recovery;
 using NAPS2.Remoting;
-using NAPS2.Remoting.Worker;
+using NAPS2.Remoting.Server;
 using NAPS2.Scan;
 using NAPS2.Update;
 

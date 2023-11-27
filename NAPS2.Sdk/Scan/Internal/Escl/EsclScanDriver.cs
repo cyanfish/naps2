@@ -11,6 +11,16 @@ internal class EsclScanDriver : IScanDriver
 {
     private readonly ScanningContext _scanningContext;
 
+    public static string GetUuid(ScanDevice device)
+    {
+        var parts = device.ID.Split('|');
+        if (parts.Length != 2)
+        {
+            throw new ArgumentException("Invalid ESCL device ID");
+        }
+        return parts[1];
+    }
+
     public EsclScanDriver(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
@@ -141,12 +151,10 @@ internal class EsclScanDriver : IScanDriver
     private async Task<EsclService?> FindDeviceEsclService(ScanOptions options)
     {
         var foundTcs = new TaskCompletionSource<EsclService?>();
+        var deviceUuid = GetUuid(options.Device!);
         using var locator = new EsclServiceLocator(service =>
         {
-            var parts = options.Device!.ID.Split('|');
-            var ip = parts[0];
-            var uuid = parts[1];
-            if (service.Uuid == uuid)
+            if (service.Uuid == deviceUuid)
             {
                 foundTcs.TrySetResult(service);
             }

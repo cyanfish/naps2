@@ -196,6 +196,10 @@ internal class ScanPerformer : IScanPerformer
                 IncludeWiaDevices = false
                 // TODO: Consider adding a user option for TwainOptions.ShowProgress instead of our progress window
             },
+            EsclOptions =
+            {
+                ExcludeUuids = _config.Get(c => c.SharedDevices).Select(x => x.Uuid).ToList()
+            },
             KeyValueOptions = scanProfile.KeyValueOptions != null
                 ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
                 : new KeyValueScanOptions(),

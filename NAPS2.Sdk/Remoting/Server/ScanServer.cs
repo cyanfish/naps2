@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using System.Text;
 using NAPS2.Escl;
 using NAPS2.Escl.Server;
 using NAPS2.Scan;
@@ -20,31 +18,30 @@ public class ScanServer : IDisposable
 
     internal ScanController ScanController { get; set; }
 
-    public void RegisterDevice(Driver driver, ScanDevice device, string? name = null)
+    public void RegisterDevice(SharedDevice device)
     {
-        var key = (driver, device.ID);
-        var esclDeviceConfig = MakeEsclDeviceConfig(driver, device, name ?? device.Name);
+        var key = (device.Driver, device.Device.ID);
+        var esclDeviceConfig = MakeEsclDeviceConfig(device);
         _currentDevices.Add(key, esclDeviceConfig);
         _esclServer?.AddDevice(esclDeviceConfig);
     }
 
-    public void UnregisterDevice(Driver driver, ScanDevice device)
+    public void UnregisterDevice(SharedDevice device)
     {
-        var key = (driver, device.ID);
+        var key = (device.Driver, device.Device.ID);
         var esclDeviceConfig = _currentDevices[key];
         _currentDevices.Remove(key);
         _esclServer?.RemoveDevice(esclDeviceConfig);
     }
 
-    private EsclDeviceConfig MakeEsclDeviceConfig(Driver driver, ScanDevice device, string name)
+    private EsclDeviceConfig MakeEsclDeviceConfig(SharedDevice device)
     {
-        var uniqueHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(device.ID));
         return new EsclDeviceConfig
         {
             Capabilities = new EsclCapabilities
             {
-                MakeAndModel = name,
-                Uuid = new Guid(uniqueHash.Take(16).ToArray()).ToString("D"),
+                MakeAndModel = device.Name,
+                Uuid = device.Uuid,
                 // TODO: Ideally we want to get the actual device capabilities
                 PlatenCaps = new EsclInputCaps
                 {
@@ -61,7 +58,7 @@ public class ScanServer : IDisposable
                     }
                 }
             },
-            CreateJob = () => new ScanJob(ScanController, driver, device)
+            CreateJob = () => new ScanJob(ScanController, device.Driver, device.Device)
         };
     }
 
