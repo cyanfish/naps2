@@ -31,7 +31,9 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
 - **[NAPS2.Sane.Binaries](https://www.nuget.org/packages/NAPS2.Sane.Binaries/)**
   - For [using SANE drivers]() on Mac. (Linux has them pre-installed, and Windows isn't supported.) 
 - **[NAPS2.Tesseract.Binaries](https://www.nuget.org/packages/NAPS2.Tesseract.Binaries/)**
-  - For [running OCR](). (You can also use a separate Tesseract installation if you like.) 
+  - For [running OCR](). (You can also use a separate Tesseract installation if you like.)
+- **[NAPS2.Escl.Server](https://www.nuget.org/packages/NAPS2.Tesseract.Binaries/)**
+  - For [sharing scanners](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/NetworkSharingSample.cs) across the local network.
 
 ## Usage
 
