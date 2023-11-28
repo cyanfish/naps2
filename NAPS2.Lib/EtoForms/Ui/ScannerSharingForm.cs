@@ -24,7 +24,7 @@ public class ScannerSharingForm : EtoDialogBase
         _listView = EtoPlatform.Current.CreateListView(listViewBehavior);
         _addCommand = new ActionCommand(DoAdd)
         {
-            MenuText = UiStrings.New,
+            MenuText = UiStrings.Share,
             Image = Icons.add_small.ToEtoImage()
         };
         _editCommand = new ActionCommand(DoEdit)

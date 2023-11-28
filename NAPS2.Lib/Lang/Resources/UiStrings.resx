@@ -810,6 +810,9 @@
   <data name="EnableDebugLogging" xml:space="preserve">
     <value>Enable debug logging</value>
   </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
   <data name="ScannerSharing" xml:space="preserve">
     <value>Scanner Sharing</value>
   </data>
