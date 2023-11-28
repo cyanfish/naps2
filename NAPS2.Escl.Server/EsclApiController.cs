@@ -59,13 +59,26 @@ internal class EsclApiController : WebApiController
                                     ),
                                     new XElement(ScanNs + "SupportedResolutions",
                                         new XElement(ScanNs + "DiscreteResolutions",
-                                            new XElement(ScanNs + "DiscreteResolution",
-                                                new XElement(ScanNs + "XResolution", "100"),
-                                                new XElement(ScanNs + "YResolution", "100"))))))))));
+                                            CreateResolution(100),
+                                            CreateResolution(150),
+                                            CreateResolution(200),
+                                            CreateResolution(300),
+                                            CreateResolution(400),
+                                            CreateResolution(600),
+                                            CreateResolution(800),
+                                            CreateResolution(1200),
+                                            CreateResolution(2400),
+                                            CreateResolution(4800)
+                                        ))))))));
         Response.ContentType = "text/xml";
         using var writer = new StreamWriter(HttpContext.OpenResponseStream());
         await writer.WriteAsync(doc);
     }
+
+    private XElement CreateResolution(int res) =>
+        new(ScanNs + "DiscreteResolution",
+            new XElement(ScanNs + "XResolution", res.ToString()),
+            new XElement(ScanNs + "YResolution", res.ToString()));
 
     [Route(HttpVerbs.Get, "/icon.png")]
     public async Task GetIcon()
@@ -121,10 +134,21 @@ internal class EsclApiController : WebApiController
     public void CreateScanJob()
     {
         // TODO: Actually use job input for scan options
-        var jobState = JobState.CreateNewJob(_deviceConfig.CreateJob());
+        EsclScanSettings settings;
+        try
+        {
+            var doc = XDocument.Load(Request.InputStream);
+            settings = SettingsParser.Parse(doc);
+        }
+        catch (Exception)
+        {
+            Response.StatusCode = 400; // Bad request
+            return;
+        }
+        var jobState = JobState.CreateNewJob(_deviceConfig.CreateJob(settings));
         _serverState.Jobs[jobState.Id] = jobState;
         Response.Headers.Add("Location", $"{Request.Url}/{jobState.Id}");
-        Response.StatusCode = 201;
+        Response.StatusCode = 201; // Created
     }
 
     [Route(HttpVerbs.Delete, "/ScanJobs/{jobId}")]

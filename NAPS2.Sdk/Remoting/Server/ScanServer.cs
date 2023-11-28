@@ -66,7 +66,7 @@ public class ScanServer : IDisposable
                     }
                 }
             },
-            CreateJob = () => new ScanJob(ScanController, device.Driver, device.Device)
+            CreateJob = settings => new ScanJob(ScanController, device.Driver, device.Device, settings)
         };
     }
 

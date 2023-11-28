@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Xml.Linq;
 
 namespace NAPS2.Escl.Client;
@@ -147,9 +148,6 @@ internal static class CapabilitiesParser
         };
     }
 
-    private static int? MaybeParseInt(XElement? element)
-    {
-        if (element == null) return null;
-        return int.Parse(element.Value);
-    }
+    private static int? MaybeParseInt(XElement? element) =>
+        int.TryParse(element?.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value) ? value : null;
 }

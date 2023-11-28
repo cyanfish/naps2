@@ -20,7 +20,7 @@ public class AdvertiseTests
                 MakeAndModel = "HP Blah",
                 SerialNumber = "123abc"
             },
-            CreateJob = () => job
+            CreateJob = _ => job
         });
         server.Start();
         if (Debugger.IsAttached)

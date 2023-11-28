@@ -27,7 +27,7 @@ public class ClientServerTests
                 MakeAndModel = "HP Blah",
                 SerialNumber = "123abc"
             },
-            CreateJob = () => job
+            CreateJob = _ => job
         });
         server.Start();
         var client = new EsclClient(new EsclService
