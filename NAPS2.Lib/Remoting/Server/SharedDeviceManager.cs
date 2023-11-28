@@ -1,3 +1,4 @@
+using NAPS2.Escl.Server;
 using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Server;
@@ -10,7 +11,7 @@ public class SharedDeviceManager : ISharedDeviceManager
     public SharedDeviceManager(ScanningContext scanningContext, Naps2Config config)
     {
         _config = config;
-        _server = new ScanServer(scanningContext);
+        _server = new ScanServer(scanningContext, new EsclServer());
         _server.SetDefaultIcon(Icons.scanner_128);
         RegisterDevicesFromConfig();
     }

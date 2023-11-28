@@ -28,7 +28,7 @@ internal static class CapabilitiesParser
         var adfDuplexCapsEl = root.Element(ScanNs + "Adf")?.Element(ScanNs + "AdfDuplexInputCaps");
         return new EsclCapabilities
         {
-            Version = root.Element(PwgNs + "Version")?.Value,
+            Version = root.Element(PwgNs + "Version")?.Value ?? EsclCapabilities.DEFAULT_VERSION,
             MakeAndModel = root.Element(PwgNs + "MakeAndModel")?.Value,
             SerialNumber = root.Element(PwgNs + "SerialNumber")?.Value,
             Uuid = root.Element(ScanNs + "UUID")?.Value,

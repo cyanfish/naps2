@@ -3,17 +3,12 @@ using EmbedIO.WebApi;
 
 namespace NAPS2.Escl.Server;
 
-public class EsclServer : IDisposable
+public class EsclServer : IEsclServer
 {
-    private readonly CancellationTokenSource _cts = new();
-    private readonly MdnsAdvertiser _advertiser;
     private readonly Dictionary<EsclDeviceConfig, CancellationTokenSource> _devices = new();
     private bool _started;
-
-    public EsclServer()
-    {
-        _advertiser = new MdnsAdvertiser();
-    }
+    private CancellationTokenSource? _cts;
+    private MdnsAdvertiser? _advertiser;
 
     public void AddDevice(EsclDeviceConfig deviceConfig)
     {
@@ -21,18 +16,23 @@ public class EsclServer : IDisposable
         {
             deviceConfig.Port = Port++;
         }
-        Task.Run(() => _advertiser.AdvertiseDevice(deviceConfig));
         _devices[deviceConfig] = new CancellationTokenSource();
         if (_started)
         {
             StartServer(deviceConfig);
+            var advertiser = _advertiser!;
+            Task.Run(() => advertiser.AdvertiseDevice(deviceConfig));
         }
     }
 
     public void RemoveDevice(EsclDeviceConfig deviceConfig)
     {
-        // TODO: Maybe enforce ordering to ensure we don't unadvertise before advertising?
-        Task.Run(() => _advertiser.UnadvertiseDevice(deviceConfig));
+        if (_started)
+        {
+            // TODO: Maybe enforce ordering to ensure we don't unadvertise before advertising?
+            var advertiser = _advertiser!;
+            Task.Run(() => advertiser.UnadvertiseDevice(deviceConfig));
+        }
         _devices[deviceConfig].Cancel();
         _devices.Remove(deviceConfig);
     }
@@ -47,10 +47,13 @@ public class EsclServer : IDisposable
             throw new InvalidOperationException();
         }
         _started = true;
+        _cts = new CancellationTokenSource();
+        _advertiser = new MdnsAdvertiser();
 
         foreach (var device in _devices.Keys)
         {
             StartServer(device);
+            Task.Run(() => _advertiser!.AdvertiseDevice(device));
         }
     }
 
@@ -64,7 +67,21 @@ public class EsclServer : IDisposable
                 .WithUrlPrefix(url))
             .WithWebApi("/eSCL", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
         server.StateChanged += ServerOnStateChanged;
-        server.RunAsync(CancellationTokenSource.CreateLinkedTokenSource(_cts.Token, _devices[deviceConfig].Token).Token);
+        server.RunAsync(CancellationTokenSource.CreateLinkedTokenSource(_cts!.Token, _devices[deviceConfig].Token).Token);
+    }
+
+    public void Stop()
+    {
+        if (!_started)
+        {
+            throw new InvalidOperationException();
+        }
+        _started = false;
+
+        _cts!.Cancel();
+        _advertiser!.Dispose();
+        _cts = null;
+        _advertiser = null;
     }
 
     private void ServerOnStateChanged(object sender, WebServerStateChangedEventArgs e)
@@ -73,7 +90,9 @@ public class EsclServer : IDisposable
 
     public void Dispose()
     {
-        _cts.Cancel();
-        _advertiser.Dispose();
+        if (_started)
+        {
+            Stop();
+        }
     }
 }

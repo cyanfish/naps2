@@ -2,7 +2,9 @@ namespace NAPS2.Escl;
 
 public class EsclCapabilities
 {
-    public string Version { get; init; } = "2.6";
+    public const string DEFAULT_VERSION = "2.6";
+
+    public string Version { get; init; } = DEFAULT_VERSION;
     public string? MakeAndModel { get; init; }
     public string? SerialNumber { get; init; }
     public string? Uuid { get; init; }

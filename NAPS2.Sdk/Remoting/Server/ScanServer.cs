@@ -8,12 +8,13 @@ public class ScanServer : IDisposable
 {
     private readonly ScanningContext _scanningContext;
     private readonly Dictionary<(Driver, string), EsclDeviceConfig> _currentDevices = new();
-    private EsclServer? _esclServer;
+    private readonly IEsclServer _esclServer;
     private byte[]? _defaultIconPng;
 
-    public ScanServer(ScanningContext scanningContext)
+    public ScanServer(ScanningContext scanningContext, IEsclServer esclServer)
     {
         _scanningContext = scanningContext;
+        _esclServer = esclServer;
         ScanController = new ScanController(scanningContext);
     }
 
@@ -29,7 +30,7 @@ public class ScanServer : IDisposable
         var key = (device.Driver, device.Device.ID);
         var esclDeviceConfig = MakeEsclDeviceConfig(device);
         _currentDevices.Add(key, esclDeviceConfig);
-        _esclServer?.AddDevice(esclDeviceConfig);
+        _esclServer.AddDevice(esclDeviceConfig);
     }
 
     public void UnregisterDevice(SharedDevice device)
@@ -37,7 +38,7 @@ public class ScanServer : IDisposable
         var key = (device.Driver, device.Device.ID);
         var esclDeviceConfig = _currentDevices[key];
         _currentDevices.Remove(key);
-        _esclServer?.RemoveDevice(esclDeviceConfig);
+        _esclServer.RemoveDevice(esclDeviceConfig);
     }
 
     private EsclDeviceConfig MakeEsclDeviceConfig(SharedDevice device)
@@ -69,27 +70,9 @@ public class ScanServer : IDisposable
         };
     }
 
-    public void Start()
-    {
-        if (_esclServer != null) throw new InvalidOperationException("Already started");
-        _esclServer = new EsclServer();
-        foreach (var device in _currentDevices.Values)
-        {
-            _esclServer.AddDevice(device);
-        }
-        _esclServer.Start();
-    }
+    public void Start() => _esclServer.Start();
 
-    public void Stop()
-    {
-        if (_esclServer == null) throw new InvalidOperationException("Not started");
-        _esclServer.Dispose();
-        _esclServer = null;
-    }
+    public void Stop() => _esclServer.Stop();
 
-    public void Dispose()
-    {
-        _esclServer?.Dispose();
-        _esclServer = null;
-    }
+    public void Dispose() => _esclServer.Dispose();
 }
