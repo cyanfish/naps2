@@ -12,6 +12,7 @@ public class EsclClient
 {
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
+
     // Sadly as we're still using .NET Framework on Windows, we're stuck with the old HttpClient implementation, which
     // has trouble with concurrency. So we use a separate client for long running requests (Progress/NextDocument).
     private static readonly HttpClient HttpClient = new();
@@ -160,7 +161,14 @@ public class EsclClient
     private string GetUrl(string endpoint)
     {
         var protocol = _service.Tls ? "https" : "http";
-        var ipAndPort = new IPEndPoint(_service.RemoteEndpoint, _service.Port);
+        var ipAndPort = new IPEndPoint(_service.RemoteEndpoint, _service.Port).ToString();
+#if NET6_0_OR_GREATER
+        if (OperatingSystem.IsMacOS())
+        {
+            // Using the mDNS hostname is more reliable on Mac (but doesn't work at all on Windows)
+            ipAndPort = $"{_service.Host}:{_service.Port}";
+        }
+#endif
         return $"{protocol}://{ipAndPort}/{_service.RootUrl}/{endpoint}";
     }
 }
