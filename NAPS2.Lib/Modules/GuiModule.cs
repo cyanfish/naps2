@@ -28,9 +28,10 @@ public class GuiModule : Module
         builder.RegisterType<DesktopController>().AsSelf().SingleInstance();
         builder.RegisterType<UpdateChecker>().As<IUpdateChecker>();
         builder.RegisterType<ExportController>().As<IExportController>();
-        builder.RegisterType<DesktopScanController>().As<IDesktopScanController>();
-        builder.RegisterType<DesktopSubFormController>().As<IDesktopSubFormController>();
+        builder.RegisterType<DesktopScanController>().As<IDesktopScanController>().SingleInstance();
+        builder.RegisterType<DesktopSubFormController>().As<IDesktopSubFormController>().SingleInstance();
         builder.RegisterType<DesktopFormProvider>().AsSelf().SingleInstance();
+        builder.RegisterType<ImageListActions>().AsSelf().SingleInstance();
 
         builder.RegisterBuildCallback(ctx =>
         {

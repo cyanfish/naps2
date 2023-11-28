@@ -33,7 +33,7 @@ public class CommonModule : Module
         builder.RegisterType<OcrRequestQueue>().AsSelf().SingleInstance();
 
         // Scan
-        builder.RegisterType<ScanPerformer>().As<IScanPerformer>();
+        builder.RegisterType<ScanPerformer>().As<IScanPerformer>().SingleInstance();
         builder.RegisterType<LocalPostProcessor>().As<ILocalPostProcessor>();
         builder.RegisterType<RemotePostProcessor>().As<IRemotePostProcessor>();
         builder.RegisterType<ScanBridgeFactory>().As<IScanBridgeFactory>();
@@ -63,7 +63,7 @@ public class CommonModule : Module
         builder.RegisterType<AutofacOperationFactory>().As<IOperationFactory>();
         builder.RegisterInstance(new UiImageList());
         builder.RegisterType<StillImage>().AsSelf().SingleInstance();
-        builder.RegisterType<AutoSaver>().AsSelf();
+        builder.RegisterType<AutoSaver>().AsSelf().SingleInstance();
         // TODO: Use PdfiumWorkerCoordinator?
         builder.RegisterType<PdfiumPdfRenderer>().As<IPdfRenderer>();
         builder.RegisterType<OcrOperationManager>().AsSelf().SingleInstance();
