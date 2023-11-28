@@ -35,7 +35,7 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
         {
             return Icons.scanner_lock.ToEtoImage();
         }
-        return Icons.scanner_48_old.ToEtoImage();
+        return Icons.scanner_48.ToEtoImage();
     }
 
     public override bool AllowDragDrop => true;
