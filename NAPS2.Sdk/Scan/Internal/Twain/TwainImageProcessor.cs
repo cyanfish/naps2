@@ -57,6 +57,22 @@ internal class TwainImageProcessor : ITwainEvents, IDisposable
         {
             throw new InvalidOperationException();
         }
+        if (memoryBuffer.Columns == 0 && memoryBuffer.BytesPerRow > 0)
+        {
+            // Workaround for bug with Kyocera drivers where Columns is unspecified
+            memoryBuffer.Columns = memoryBuffer.BytesPerRow * 8 / _currentImageData.BitsPerPixel;
+            _logger.LogDebug(
+                "NAPS2.TW - Correcting memory buffer columns to {w} based on bytes/row {bpr}, bits/pixel {bpp}",
+                memoryBuffer.Columns, memoryBuffer.BytesPerRow, _currentImageData.BitsPerPixel);
+        }
+        if (memoryBuffer.Columns <= 0 || memoryBuffer.Rows <= 0 || memoryBuffer.BytesPerRow <= 0)
+        {
+            var b = memoryBuffer;
+            _logger.LogError(
+                "NAPS2.TW - Invalid memory buffer: w {w}, h {h}, bpr {bpr}, len {len}, x {x}, y {y}",
+                b.Columns, b.Rows, b.BytesPerRow, b.Buffer.Length, b.XOffset, b.YOffset);
+            return;
+        }
 
         _transferredPixels += memoryBuffer.Columns * (long) memoryBuffer.Rows;
         _transferredWidth = Math.Max(_transferredWidth, memoryBuffer.Columns + memoryBuffer.XOffset);
