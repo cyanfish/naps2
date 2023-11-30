@@ -222,10 +222,19 @@ internal class TwainSessionScanRunner
         try
         {
             // TODO: We probably want to support native transfer for net6
+            if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory && e.MemoryData == null)
+            {
+                _logger.LogDebug("NAPS2.TW - Expected memory transfer, but got native transfer?");
+            }
 #if NET6_0_OR_GREATER
+            if (e.MemoryData == null)
+            {
+                _logger.LogError("NAPS2.TW - Native transfer is not yet supported with the net6 build.");
+                return;
+            }
             _twainEvents.MemoryBufferTransferred(ToMemoryBuffer(e.MemoryData, e.MemoryInfo));
 #else
-            if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
+            if (e.MemoryData != null)
             {
                 _twainEvents.MemoryBufferTransferred(ToMemoryBuffer(e.MemoryData, e.MemoryInfo));
             }
