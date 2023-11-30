@@ -53,7 +53,7 @@ internal class WiaScanDriver : IScanDriver
                      NativeWiaObject.DefaultWiaVersion == WiaVersion.Wia20
                      && !options.UseNativeUI)
                 {
-                    Debug.WriteLine("Falling back to WIA 1.0 due to E_INVALIDARG");
+                    _scanningContext.Logger.LogDebug("Falling back to WIA 1.0 due to E_INVALIDARG");
                     await context.Scan(WiaVersion.Wia10);
                 }
             }

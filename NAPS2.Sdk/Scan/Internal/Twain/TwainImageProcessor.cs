@@ -1,4 +1,5 @@
 #if !MAC
+using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
 using NAPS2.Remoting.Worker;
 
@@ -11,6 +12,7 @@ namespace NAPS2.Scan.Internal.Twain;
 internal class TwainImageProcessor : ITwainEvents, IDisposable
 {
     private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
     private readonly Action<IMemoryImage> _callback;
     private TwainImageData? _currentImageData;
     private IMemoryImage? _currentImage;
@@ -24,6 +26,7 @@ internal class TwainImageProcessor : ITwainEvents, IDisposable
         Action<IMemoryImage> callback)
     {
         _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
         _callback = callback;
         _progressEstimator = new TwainProgressEstimator(options, scanEvents);
     }
@@ -83,7 +86,7 @@ internal class TwainImageProcessor : ITwainEvents, IDisposable
 
     private void ReallocImage(int width, int height)
     {
-        Debug.WriteLine($"NAPS2.TW - Realloc image {_currentImage!.Width}x{_currentImage.Height} -> {width}x{height}");
+        _logger.LogDebug($"NAPS2.TW - Realloc image {_currentImage!.Width}x{_currentImage.Height} -> {width}x{height}");
         var copy = _scanningContext.ImageContext.Create(width, height, _currentImage!.PixelFormat);
         new CopyBitwiseImageOp
         {

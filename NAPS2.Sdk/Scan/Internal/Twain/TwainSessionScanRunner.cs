@@ -37,7 +37,7 @@ internal class TwainSessionScanRunner
 
         _handleManager = TwainHandleManager.Factory();
         PlatformInfo.Current.PreferNewDSM = dsm != TwainDsm.Old;
-        Debug.WriteLine($"Using TWAIN DSM: {PlatformInfo.Current.ExpectedDsmPath}");
+        _logger.LogDebug($"Using TWAIN DSM: {PlatformInfo.Current.ExpectedDsmPath}");
         _session = new TwainSession(twainAppId);
         _session.TransferReady += TransferReady;
         _session.DataTransferred += DataTransferred;
@@ -59,7 +59,7 @@ internal class TwainSessionScanRunner
     {
         try
         {
-            Debug.WriteLine("NAPS2.TW - Opening session");
+            _logger.LogDebug("NAPS2.TW - Opening session");
             var dsmHandle = _handleManager.GetDsmHandle(_options.DialogParent, _options.UseNativeUI);
 #if NET6_0_OR_GREATER
 
@@ -75,24 +75,24 @@ internal class TwainSessionScanRunner
                 throw new DeviceException($"TWAIN session open error: {rc}");
             }
 
-            Debug.WriteLine("NAPS2.TW - Finding source");
+            _logger.LogDebug("NAPS2.TW - Finding source");
             _source = _session.FirstOrDefault(x => x.Name == _options.Device!.ID);
             if (_source == null)
             {
                 throw new DeviceNotFoundException();
             }
 
-            Debug.WriteLine("NAPS2.TW - Opening source");
+            _logger.LogDebug("NAPS2.TW - Opening source");
             rc = _source.Open();
             if (rc != ReturnCode.Success)
             {
                 throw GetExceptionForStatus(_session.GetStatus());
             }
 
-            Debug.WriteLine("NAPS2.TW - Configuring source");
+            _logger.LogDebug("NAPS2.TW - Configuring source");
             ConfigureSource(_source);
 
-            Debug.WriteLine("NAPS2.TW - Enabling source");
+            _logger.LogDebug("NAPS2.TW - Enabling source");
             var ui = _options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
             var enableHandle = _handleManager.GetEnableHandle(_options.DialogParent, _options.UseNativeUI);
             // Note that according to the twain spec, on Windows it is recommended to set the modal parameter to false
@@ -112,7 +112,7 @@ internal class TwainSessionScanRunner
 
     private void FinishWithCancellation()
     {
-        Debug.WriteLine("NAPS2.TW - Finishing with cancellation");
+        _logger.LogDebug("NAPS2.TW - Finishing with cancellation");
         if (_session.State != 5)
         {
             // If we're in state 6 or 7, this will abort the ongoing transfer via ForceStepDown.
@@ -126,13 +126,13 @@ internal class TwainSessionScanRunner
             // (Or if we're in state 5 in the process of finishing all transfers, then we don't need to cancel anyway.)
             // This will result in FinishWithCompletion being called when the source disables itself.
             // The alternative of calling ForceStepDown from state 5 seems to produce an error message from the scanner.
-            Debug.WriteLine("NAPS2.TW - Will cancel via TransferReady");
+            _logger.LogDebug("NAPS2.TW - Will cancel via TransferReady");
         }
     }
 
     private void FinishWithError(Exception ex)
     {
-        Debug.WriteLine("NAPS2.TW - Finishing with error");
+        _logger.LogDebug("NAPS2.TW - Finishing with error");
         // If we're in state 5 or higher, we'll call ForceStepDown, which could potentially produce additional errors,
         // but what alternative is there?
         // If we're in state 4 or lower, this will just clean up the source/session.
@@ -142,7 +142,7 @@ internal class TwainSessionScanRunner
 
     private void FinishWithCompletion()
     {
-        Debug.WriteLine("NAPS2.TW - Finishing with completion");
+        _logger.LogDebug("NAPS2.TW - Finishing with completion");
         // At this point we should be in state 4 and this will clean up the source/session.
         UnloadTwain();
         _tcs.TrySetResult(true);
@@ -176,24 +176,24 @@ internal class TwainSessionScanRunner
 
     private void StateChanged(object? sender, EventArgs e)
     {
-        Debug.WriteLine($"NAPS2.TW - StateChanged (to {_session.State})");
+        _logger.LogDebug($"NAPS2.TW - StateChanged (to {_session.State})");
     }
 
     private void SourceDisabled(object? sender, EventArgs e)
     {
-        Debug.WriteLine("NAPS2.TW - SourceDisabled");
+        _logger.LogDebug("NAPS2.TW - SourceDisabled");
         FinishWithCompletion();
     }
 
     private void TransferCanceled(object? sender, TransferCanceledEventArgs e)
     {
-        Debug.WriteLine("NAPS2.TW - TransferCanceled");
+        _logger.LogDebug("NAPS2.TW - TransferCanceled");
         _twainEvents.TransferCanceled(new TwainTransferCanceled());
     }
 
     private void TransferError(object? sender, TransferErrorEventArgs e)
     {
-        Debug.WriteLine("NAPS2.TW - TransferError");
+        _logger.LogDebug("NAPS2.TW - TransferError");
         FinishWithError(e.Exception ?? GetExceptionForStatus(e.SourceStatus));
     }
 
@@ -218,7 +218,7 @@ internal class TwainSessionScanRunner
 
     private void DataTransferred(object? sender, DataTransferredEventArgs e)
     {
-        Debug.WriteLine("NAPS2.TW - DataTransferred");
+        _logger.LogDebug("NAPS2.TW - DataTransferred");
         try
         {
             // TODO: We probably want to support native transfer for net6
@@ -255,7 +255,7 @@ internal class TwainSessionScanRunner
 
     private void TransferReady(object? sender, TransferReadyEventArgs e)
     {
-        Debug.WriteLine("NAPS2.TW - TransferReady");
+        _logger.LogDebug("NAPS2.TW - TransferReady");
         try
         {
             var pageStart = new TwainPageStart();

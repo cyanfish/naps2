@@ -167,7 +167,6 @@ internal class RemotePostProcessor : IRemotePostProcessor
                 Barcode = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
             };
         }
-        Debug.WriteLine($"Thumbnail size: {options.ThumbnailSize}");
         if (options.ThumbnailSize.HasValue)
         {
             data = data with
@@ -178,7 +177,6 @@ internal class RemotePostProcessor : IRemotePostProcessor
                     .PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value)),
                 ThumbnailTransformState = processedImage.TransformState
             };
-            Debug.WriteLine($"Actual thumbnail size: {data.Thumbnail.Width}x{data.Thumbnail.Height}");
         }
         processedImage = processedImage.WithPostProcessingData(data, true);
     }
