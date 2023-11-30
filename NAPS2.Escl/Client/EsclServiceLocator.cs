@@ -18,8 +18,8 @@ public class EsclServiceLocator : IDisposable
             try
             {
                 var service = ParseService(args);
-                Logger.LogDebug("Discovered ESCL Service: {Name}, endpoint {Endpoint}, ipv4 {Ipv4}, ipv6 {IpV6}, host {Host}, port {Port}, uuid {Uuid}",
-                    service.ScannerName, args.RemoteEndPoint, service.IpV4, service.IpV6, service.Host, service.Port, service.Uuid);
+                Logger.LogDebug("Discovered ESCL Service: {Name}, instance {Instance}, endpoint {Endpoint}, ipv4 {Ipv4}, ipv6 {IpV6}, host {Host}, port {Port}, uuid {Uuid}",
+                    service.ScannerName, args.ServiceInstanceName, args.RemoteEndPoint, service.IpV4, service.IpV6, service.Host, service.Port, service.Uuid);
                 serviceCallback(service);
             }
             catch (Exception)

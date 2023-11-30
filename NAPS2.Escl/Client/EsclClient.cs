@@ -160,7 +160,7 @@ public class EsclClient
 
     private string GetUrl(string endpoint)
     {
-        var protocol = _service.Tls ? "https" : "http";
+        var protocol = _service.Tls || _service.Port == 443 ? "https" : "http";
         var ipAndPort = new IPEndPoint(_service.RemoteEndpoint, _service.Port).ToString();
 #if NET6_0_OR_GREATER
         if (OperatingSystem.IsMacOS())
