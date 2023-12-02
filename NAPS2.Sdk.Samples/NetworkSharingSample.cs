@@ -26,8 +26,7 @@ public class NetworkSharingSample
         scanServer.RegisterDevice(new SharedDevice
         {
             Name = device.Name,
-            Device = device,
-            Driver = Driver.Default
+            Device = device
         });
 
         // Run the server until the user presses Enter

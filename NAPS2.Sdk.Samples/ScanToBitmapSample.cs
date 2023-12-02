@@ -30,7 +30,6 @@ public class ScanToBitmapSample
         var options = new ScanOptions
         {
             Dpi = 300,
-            Driver = driver,
             Device = device
         };
 

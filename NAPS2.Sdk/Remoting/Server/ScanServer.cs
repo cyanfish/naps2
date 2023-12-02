@@ -27,7 +27,7 @@ public class ScanServer : IDisposable
 
     public void RegisterDevice(SharedDevice device)
     {
-        var key = (device.Driver, device.Device.ID);
+        var key = (device.Device.Driver, device.Device.ID);
         var esclDeviceConfig = MakeEsclDeviceConfig(device);
         _currentDevices.Add(key, esclDeviceConfig);
         _esclServer.AddDevice(esclDeviceConfig);
@@ -35,7 +35,7 @@ public class ScanServer : IDisposable
 
     public void UnregisterDevice(SharedDevice device)
     {
-        var key = (device.Driver, device.Device.ID);
+        var key = (device.Device.Driver, device.Device.ID);
         var esclDeviceConfig = _currentDevices[key];
         _currentDevices.Remove(key);
         _esclServer.RemoveDevice(esclDeviceConfig);
@@ -66,7 +66,7 @@ public class ScanServer : IDisposable
                     }
                 }
             },
-            CreateJob = settings => new ScanJob(ScanController, device.Driver, device.Device, settings)
+            CreateJob = settings => new ScanJob(ScanController, device.Device, settings)
         };
     }
 

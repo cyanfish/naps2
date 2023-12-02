@@ -46,7 +46,7 @@ internal class TestModule : Module
             var defaultProfile = new ScanProfile
             {
                 IsDefault = true,
-                Device = new ScanDevice("001", "Some Scanner")
+                Device = new ScanProfileDevice("001", "Some Scanner")
             };
             profileManager.Mutate(
                 new ListMutation<ScanProfile>.Append(defaultProfile),

@@ -14,15 +14,14 @@ public class RemoteScanControllerTests : ContextualTests
     [Fact]
     public async Task GetDevices()
     {
-        var device = new ScanDevice("test_id1", "test_name1");
-        var wiaDevice = new ScanDevice("WIA-test_id2", "test_name2");
         var scanDriver = Substitute.For<IScanDriver>();
         scanDriver.GetDevices(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<Action<ScanDevice>>())
             .Returns(x =>
             {
+                var options = (ScanOptions) x[0];
                 var callback = (Action<ScanDevice>) x[2];
-                callback(device);
-                callback(wiaDevice);
+                callback(new ScanDevice(options.Driver, "test_id1", "test_name1"));
+                callback(new ScanDevice(options.Driver, "WIA-test_id2", "test_name2"));
                 return Task.CompletedTask;
             });
         var controller = CreateControllerWithMockDriver(scanDriver);

@@ -10,7 +10,15 @@ internal class ScanOptionsValidator
         // Easy deep copy. Ideally we'd do this in a more efficient way.
         options = options.ToXml().FromXml<ScanOptions>();
 
-        options.Driver = ValidateDriver(options.Driver);
+        if (options.Device != null && options.Driver != Driver.Default)
+        {
+            // Verify driver consistency
+            if (options.Driver != options.Device.Driver)
+            {
+                throw new ArgumentException("ScanOptions.Device.Driver must match ScanOptions.Driver");
+            }
+        }
+        options.Driver = ValidateDriver(options.Device?.Driver ?? options.Driver);
         if (options.Driver == Driver.Sane)
         {
             options.UseNativeUI = false;

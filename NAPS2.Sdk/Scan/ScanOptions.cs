@@ -8,7 +8,8 @@ namespace NAPS2.Scan;
 public class ScanOptions
 {
     /// <summary>
-    /// The driver type used for scanning. Supported drivers depend on the platform (Windows/Mac/Linux).
+    /// The driver type used for scanning. Supported drivers depend on the platform (Windows/Mac/Linux). This usually
+    /// doesn't need to be set as it can be determined from the Device property.
     /// </summary>
     public Driver Driver { get; set; }
 

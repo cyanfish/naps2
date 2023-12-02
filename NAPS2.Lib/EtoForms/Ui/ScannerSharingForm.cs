@@ -106,7 +106,7 @@ public class ScannerSharingForm : EtoDialogBase
         fedit.ShowModal();
         if (fedit.Result)
         {
-            _sharedDeviceManager.AddSharedDevice(fedit.SharedDevice);
+            _sharedDeviceManager.AddSharedDevice(fedit.SharedDevice!);
             ReloadDevices();
         }
     }
@@ -121,7 +121,7 @@ public class ScannerSharingForm : EtoDialogBase
             fedit.ShowModal();
             if (fedit.Result)
             {
-                _sharedDeviceManager.ReplaceSharedDevice(originalDevice, fedit.SharedDevice);
+                _sharedDeviceManager.ReplaceSharedDevice(originalDevice, fedit.SharedDevice!);
                 ReloadDevices();
             }
         }

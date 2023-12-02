@@ -229,8 +229,13 @@ public class EditProfileForm : EtoDialogBase
         // Don't trigger any onChange events
         _suppressChangeEvent = true;
 
+        DeviceDriver = new ScanOptionsValidator().ValidateDriver(
+            Enum.TryParse<Driver>(ScanProfile.DriverName, true, out var driver)
+                ? driver
+                : Driver.Default);
+
         _displayName.Text = ScanProfile.DisplayName;
-        CurrentDevice ??= ScanProfile.Device;
+        CurrentDevice ??= ScanProfile.Device?.ToScanDevice(DeviceDriver);
         _isDefault = ScanProfile.IsDefault;
 
         _paperSource.SelectedIndex = (int) ScanProfile.PaperSource;
@@ -244,11 +249,6 @@ public class EditProfileForm : EtoDialogBase
         _horAlign.SelectedIndex = (int) ScanProfile.PageAlign;
 
         _enableAutoSave.Checked = ScanProfile.EnableAutoSave;
-
-        DeviceDriver = new ScanOptionsValidator().ValidateDriver(
-            Enum.TryParse<Driver>(ScanProfile.DriverName, true, out var driver)
-                ? driver
-                : Driver.Default);
 
         _nativeUi.Checked = ScanProfile.UseNativeUI;
         _predefinedSettings.Checked = !ScanProfile.UseNativeUI;
@@ -375,7 +375,7 @@ public class EditProfileForm : EtoDialogBase
         {
             if (!ScanProfile.IsDeviceLocked)
             {
-                ScanProfile.Device = CurrentDevice;
+                ScanProfile.Device = ScanProfileDevice.FromScanDevice(CurrentDevice);
             }
             return;
         }
@@ -388,7 +388,7 @@ public class EditProfileForm : EtoDialogBase
         {
             Version = ScanProfile.CURRENT_VERSION,
 
-            Device = CurrentDevice,
+            Device = ScanProfileDevice.FromScanDevice(CurrentDevice),
             IsDefault = _isDefault,
             DriverName = DeviceDriver.ToString().ToLowerInvariant(),
             DisplayName = _displayName.Text,

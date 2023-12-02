@@ -28,7 +28,7 @@ internal class WiaScanDriver : IScanDriver
             {
                 using (deviceInfo)
                 {
-                    callback(new ScanDevice(deviceInfo.Id(), deviceInfo.Name()));
+                    callback(new ScanDevice(Driver.Wia, deviceInfo.Id(), deviceInfo.Name()));
                 }
             }
         });

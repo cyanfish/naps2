@@ -22,7 +22,7 @@ public class ProfileManagerTests : ContextualTests
     {
         var profile = new ScanProfile
         {
-            Device = new ScanDevice("test_id", "test_name"),
+            Device = new ScanProfileDevice("test_id", "test_name"),
             DisplayName = "A Profile"
         };
         _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), new Selectable<ScanProfile>());

@@ -26,7 +26,7 @@ public class TwainSample
 
         // As we're not using the default (WIA) driver, we need to specify it when listing devices or scanning
         ScanDevice device = (await controller.GetDeviceList(Driver.Twain)).First();
-        var options = new ScanOptions { Device = device, Driver = Driver.Twain };
+        var options = new ScanOptions { Device = device };
 
         await foreach (var image in controller.Scan(options))
         {

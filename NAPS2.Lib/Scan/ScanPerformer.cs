@@ -260,13 +260,13 @@ internal class ScanPerformer : IScanPerformer
             // Persist the device in the profile if configured to do so
             if (_config.Get(c => c.AlwaysRememberDevice))
             {
-                scanProfile.Device = options.Device;
+                scanProfile.Device = ScanProfileDevice.FromScanDevice(options.Device);
                 _profileManager.Save();
             }
         }
         else
         {
-            options.Device = scanProfile.Device;
+            options.Device = scanProfile.Device?.ToScanDevice(options.Driver);
         }
 
         return true;
@@ -297,7 +297,7 @@ internal class ScanPerformer : IScanPerformer
                 {
                     return null;
                 }
-                return new ScanDevice(wiaDevice.Id(), wiaDevice.Name());
+                return new ScanDevice(Driver.Wia, wiaDevice.Id(), wiaDevice.Name());
             }
             catch (WiaException ex) when (ex.ErrorCode == WiaErrorCodes.NO_DEVICE_AVAILABLE)
             {

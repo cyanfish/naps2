@@ -56,7 +56,7 @@ public class WorkerChannelTests : ContextualTests
             .Returns(x =>
             {
                 var callback = (Action<ScanDevice>) x[2];
-                callback(new ScanDevice("test_id", "test_name"));
+                callback(new ScanDevice(Driver.Wia, "test_id", "test_name"));
                 return Task.CompletedTask;
             });
 

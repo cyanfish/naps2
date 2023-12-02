@@ -22,7 +22,7 @@ internal class AppleScanDriver : IScanDriver
             var device = args.Device;
             if (device.Uuid != null && device.Name != null)
             {
-                callback(new ScanDevice(device.Uuid, device.Name));
+                callback(new ScanDevice(Driver.Apple, device.Uuid, device.Name));
             }
         };
         reader.Start();

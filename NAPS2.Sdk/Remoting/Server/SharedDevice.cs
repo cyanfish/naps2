@@ -7,7 +7,6 @@ namespace NAPS2.Remoting.Server;
 public record SharedDevice
 {
     public required string Name { get; init; }
-    public required Driver Driver { get; init; }
     public required ScanDevice Device { get; init; }
 
     public string Uuid

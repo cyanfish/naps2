@@ -26,7 +26,7 @@ internal static class TwainApi
         {
             return null;
         }
-        return new ScanDevice(name, name);
+        return new ScanDevice(Driver.Twain, name, name);
     }
 
     public static List<ScanDevice> GetDeviceList(ScanOptions options)
@@ -46,7 +46,7 @@ internal static class TwainApi
             string? name = tw.GetCurrentName();
             if (name != null)
             {
-                result.Add(new ScanDevice(name, name));
+                result.Add(new ScanDevice(Driver.Twain, name, name));
             }
         } while (tw.GetNext());
         return result;

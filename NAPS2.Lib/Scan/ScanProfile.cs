@@ -47,7 +47,7 @@ public class ScanProfile
     [XmlIgnore]
     public bool IsDeviceLocked { get; set; }
 
-    public ScanDevice? Device { get; set; }
+    public ScanProfileDevice? Device { get; set; }
 
     public string? DriverName { get; set; }
 

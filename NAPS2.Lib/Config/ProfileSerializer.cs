@@ -84,7 +84,7 @@ public class ProfileSerializer : VersionedSerializer<ConfigStorage<ImmutableList
         {
             Version = ScanProfile.CURRENT_VERSION,
             UpgradedFrom = profile.Version,
-            Device = profile.Device is { ID: { }, Name: { } } ? new ScanDevice(profile.Device.ID, profile.Device.Name) : null,
+            Device = profile.Device is { ID: { }, Name: { } } ? new ScanProfileDevice(profile.Device.ID, profile.Device.Name) : null,
             DriverName = profile.DriverName,
             DisplayName = profile.DisplayName ?? "",
             MaxQuality = profile.MaxQuality,
@@ -123,7 +123,7 @@ public class ProfileSerializer : VersionedSerializer<ConfigStorage<ImmutableList
             {
                 Version = ScanProfile.CURRENT_VERSION,
                 UpgradedFrom = 0,
-                Device = profile.Device is { ID: { }, Name: { } } ? new ScanDevice(profile.Device.ID, profile.Device.Name) : null,
+                Device = profile.Device is { ID: { }, Name: { } } ? new ScanProfileDevice(profile.Device.ID, profile.Device.Name) : null,
                 DriverName = profile.DriverName,
                 DisplayName = profile.DisplayName ?? "",
                 MaxQuality = profile.MaxQuality,

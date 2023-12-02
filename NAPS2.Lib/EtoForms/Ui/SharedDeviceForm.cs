@@ -102,12 +102,7 @@ public class SharedDeviceForm : EtoDialogBase
 
     public bool Result => _result;
 
-    public SharedDevice SharedDevice { get; set; } = new()
-    {
-        Name = "",
-        Device = null!,
-        Driver = ScanOptionsValidator.SystemDefaultDriver
-    };
+    public SharedDevice? SharedDevice { get; set; }
 
     public ScanDevice? CurrentDevice
     {
@@ -154,10 +149,10 @@ public class SharedDeviceForm : EtoDialogBase
         // Don't trigger any onChange events
         _suppressChangeEvent = true;
 
-        _displayName.Text = SharedDevice.Name;
-        CurrentDevice ??= SharedDevice.Device;
+        _displayName.Text = SharedDevice?.Name ?? "";
+        CurrentDevice ??= SharedDevice?.Device;
 
-        DeviceDriver = SharedDevice.Driver;
+        DeviceDriver = SharedDevice?.Device.Driver ?? ScanOptionsValidator.SystemDefaultDriver;
 
         // Start triggering onChange events again
         _suppressChangeEvent = false;
@@ -165,7 +160,6 @@ public class SharedDeviceForm : EtoDialogBase
 
     private async void ChooseDevice(object? sender, EventArgs args)
     {
-        SharedDevice = SharedDevice with { Driver = DeviceDriver };
         try
         {
             var profile = new ScanProfile { DriverName = DeviceDriver.ToString().ToLowerInvariant() };
@@ -204,7 +198,6 @@ public class SharedDeviceForm : EtoDialogBase
         SharedDevice = new SharedDevice
         {
             Name = _displayName.Text,
-            Driver = DeviceDriver,
             Device = CurrentDevice!
         };
     }
@@ -235,7 +228,7 @@ public class SharedDeviceForm : EtoDialogBase
     {
         if (((RadioButton) sender!).Checked && !_suppressChangeEvent)
         {
-            SharedDevice = SharedDevice with { Device = null! };
+            SharedDevice = null;
             CurrentDevice = null;
         }
     }

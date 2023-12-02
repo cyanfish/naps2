@@ -15,7 +15,7 @@ internal class ScanJob : IEsclScanJob
     private Action<JobStatus>? _callback;
     private bool _hasError;
 
-    public ScanJob(ScanController controller, Driver driver, ScanDevice device, EsclScanSettings settings)
+    public ScanJob(ScanController controller, ScanDevice device, EsclScanSettings settings)
     {
         _controller = controller;
         _controller.ScanEnd += (_, _) =>
@@ -26,7 +26,6 @@ internal class ScanJob : IEsclScanJob
         _controller.ScanError += (_, _) => { _hasError = true; };
         var options = new ScanOptions
         {
-            Driver = driver,
             Device = device,
             Dpi = Math.Max(settings.XResolution, settings.YResolution),
             BitDepth = settings.ColorMode switch

@@ -50,7 +50,10 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
-    private static ScanDevice GetScanDevice(SaneDeviceInfo device)
+    private static ScanDevice GetScanDevice(SaneDeviceInfo device) =>
+        new(Driver.Sane, device.Name, GetName(device));
+
+    private static string GetName(SaneDeviceInfo device)
     {
         var backend = device.Name.Split(':')[0];
         // Special cases for sane-escl and sane-airscan.
@@ -58,15 +61,15 @@ internal class SaneScanDriver : IScanDriver
         {
             // We include the vendor as it's excluded from the model, and we include the full name instead of
             // just the backend as that has the IP address.
-            return new ScanDevice(device.Name, $"{device.Vendor} {device.Model} ({device.Name})");
+            return $"{device.Vendor} {device.Model} ({device.Name})";
         }
         if (backend == "airscan")
         {
             // We include the device type which has the IP address.
             // TODO: The sane-airscan ID isn't persistent, can we work around that somehow and persist based on IP?
-            return new ScanDevice(device.Name, $"{device.Model} ({backend}:{device.Type})");
+            return $"{device.Model} ({backend}:{device.Type})";
         }
-        return new ScanDevice(device.Name, $"{device.Model} ({backend})");
+        return$"{device.Model} ({backend})";
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

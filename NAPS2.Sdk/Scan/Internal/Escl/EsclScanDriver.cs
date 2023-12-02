@@ -38,7 +38,7 @@ internal class EsclScanDriver : IScanDriver
             var name = string.IsNullOrEmpty(service.ScannerName)
                 ? $"{ip}"
                 : $"{service.ScannerName} ({ip})";
-            callback(new ScanDevice(id, name));
+            callback(new ScanDevice(Driver.Escl, id, name));
         });
         locator.Logger = _scanningContext.Logger;
         locator.Start();

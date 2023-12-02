@@ -70,7 +70,7 @@ internal class LocalTwainSessionController : ITwainSessionController
 #endif
         try
         {
-            return session.GetSources().Select(ds => new ScanDevice(ds.Name, ds.Name)).ToList();
+            return session.GetSources().Select(ds => new ScanDevice(Driver.Twain, ds.Name, ds.Name)).ToList();
         }
         finally
         {
