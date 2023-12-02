@@ -18,8 +18,6 @@ public class SharedDeviceManager : ISharedDeviceManager
 
     public void StartSharing()
     {
-        // TODO: We should only actually start the web server if we have devices to share (depends on whether we have a
-        // separate server instance per device)
         _server.Start();
     }
 
@@ -31,6 +29,11 @@ public class SharedDeviceManager : ISharedDeviceManager
     public void AddSharedDevice(SharedDevice device)
     {
         var devices = _config.Get(c => c.SharedDevices);
+        if (devices.Contains(device))
+        {
+            // Ignore adding duplicates
+            return;
+        }
         devices = devices.Add(device);
         _config.User.Set(c => c.SharedDevices, devices);
         _server.RegisterDevice(device);
@@ -47,6 +50,12 @@ public class SharedDeviceManager : ISharedDeviceManager
     public void ReplaceSharedDevice(SharedDevice original, SharedDevice replacement)
     {
         var devices = _config.Get(c => c.SharedDevices);
+        if (original != replacement && devices.Contains(replacement))
+        {
+            // Delete if the new config is a duplicate
+            RemoveSharedDevice(original);
+            return;
+        }
         devices = devices.Replace(original, replacement);
         _config.User.Set(c => c.SharedDevices, devices);
         _server.UnregisterDevice(original);
