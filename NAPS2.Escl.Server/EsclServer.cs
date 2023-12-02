@@ -5,10 +5,9 @@ namespace NAPS2.Escl.Server;
 
 public class EsclServer : IEsclServer
 {
-    private readonly Dictionary<EsclDeviceConfig, CancellationTokenSource> _devices = new();
+    private readonly Dictionary<EsclDeviceConfig, (MdnsAdvertiser advertiser, CancellationTokenSource cts)> _devices = new();
     private bool _started;
     private CancellationTokenSource? _cts;
-    private MdnsAdvertiser? _advertiser;
 
     public void AddDevice(EsclDeviceConfig deviceConfig)
     {
@@ -16,24 +15,24 @@ public class EsclServer : IEsclServer
         {
             deviceConfig.Port = Port++;
         }
-        _devices[deviceConfig] = new CancellationTokenSource();
+        var advertiser = new MdnsAdvertiser();
+        _devices[deviceConfig] = (advertiser, new CancellationTokenSource());
         if (_started)
         {
             StartServer(deviceConfig);
-            var advertiser = _advertiser!;
             Task.Run(() => advertiser.AdvertiseDevice(deviceConfig));
         }
     }
 
     public void RemoveDevice(EsclDeviceConfig deviceConfig)
     {
+        var (advertiser, cts) = _devices[deviceConfig];
         if (_started)
         {
             // TODO: Maybe enforce ordering to ensure we don't unadvertise before advertising?
-            var advertiser = _advertiser!;
-            Task.Run(() => advertiser.UnadvertiseDevice(deviceConfig));
+            Task.Run(() => advertiser.Dispose());
         }
-        _devices[deviceConfig].Cancel();
+        cts.Cancel();
         _devices.Remove(deviceConfig);
     }
 
@@ -48,12 +47,11 @@ public class EsclServer : IEsclServer
         }
         _started = true;
         _cts = new CancellationTokenSource();
-        _advertiser = new MdnsAdvertiser();
 
         foreach (var device in _devices.Keys)
         {
             StartServer(device);
-            Task.Run(() => _advertiser!.AdvertiseDevice(device));
+            Task.Run(() => _devices[device].advertiser.AdvertiseDevice(device));
         }
     }
 
@@ -67,7 +65,7 @@ public class EsclServer : IEsclServer
                 .WithUrlPrefix(url))
             .WithWebApi("/eSCL", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
         server.StateChanged += ServerOnStateChanged;
-        server.RunAsync(CancellationTokenSource.CreateLinkedTokenSource(_cts!.Token, _devices[deviceConfig].Token).Token);
+        server.RunAsync(CancellationTokenSource.CreateLinkedTokenSource(_cts!.Token, _devices[deviceConfig].cts.Token).Token);
     }
 
     public void Stop()
@@ -79,9 +77,11 @@ public class EsclServer : IEsclServer
         _started = false;
 
         _cts!.Cancel();
-        _advertiser!.Dispose();
+        foreach (var device in _devices.Keys)
+        {
+            _devices[device].advertiser.UnadvertiseDevice(device);
+        }
         _cts = null;
-        _advertiser = null;
     }
 
     private void ServerOnStateChanged(object sender, WebServerStateChangedEventArgs e)
