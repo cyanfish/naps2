@@ -13,7 +13,8 @@ public record SharedDevice
     {
         get
         {
-            var uniqueHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(Device.ID));
+            var key = $"{Device.Driver};{Device.ID};{Name}";
+            var uniqueHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(key));
             return new Guid(uniqueHash.Take(16).ToArray()).ToString("D");
         }
     }

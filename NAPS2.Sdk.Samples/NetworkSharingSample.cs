@@ -23,11 +23,7 @@ public class NetworkSharingSample
         using var scanServer = new ScanServer(scanningContext, new EsclServer());
 
         // Register a device to be shared
-        scanServer.RegisterDevice(new SharedDevice
-        {
-            Name = device.Name,
-            Device = device
-        });
+        scanServer.RegisterDevice(device);
 
         // Run the server until the user presses Enter
         scanServer.Start();

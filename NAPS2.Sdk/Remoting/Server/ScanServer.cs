@@ -7,7 +7,7 @@ namespace NAPS2.Remoting.Server;
 public class ScanServer : IDisposable
 {
     private readonly ScanningContext _scanningContext;
-    private readonly Dictionary<(Driver, string), EsclDeviceConfig> _currentDevices = new();
+    private readonly Dictionary<SharedDevice, EsclDeviceConfig> _currentDevices = new();
     private readonly IEsclServer _esclServer;
     private byte[]? _defaultIconPng;
 
@@ -25,19 +25,23 @@ public class ScanServer : IDisposable
 
     public void SetDefaultIcon(byte[] iconPng) => _defaultIconPng = iconPng;
 
-    public void RegisterDevice(SharedDevice device)
+    public void RegisterDevice(ScanDevice device, string? displayName = null) =>
+        RegisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name });
+
+    public void RegisterDevice(SharedDevice sharedDevice)
     {
-        var key = (device.Device.Driver, device.Device.ID);
-        var esclDeviceConfig = MakeEsclDeviceConfig(device);
-        _currentDevices.Add(key, esclDeviceConfig);
+        var esclDeviceConfig = MakeEsclDeviceConfig(sharedDevice);
+        _currentDevices.Add(sharedDevice, esclDeviceConfig);
         _esclServer.AddDevice(esclDeviceConfig);
     }
 
-    public void UnregisterDevice(SharedDevice device)
+    public void UnregisterDevice(ScanDevice device, string? displayName = null) =>
+        UnregisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name });
+
+    public void UnregisterDevice(SharedDevice sharedDevice)
     {
-        var key = (device.Device.Driver, device.Device.ID);
-        var esclDeviceConfig = _currentDevices[key];
-        _currentDevices.Remove(key);
+        var esclDeviceConfig = _currentDevices[sharedDevice];
+        _currentDevices.Remove(sharedDevice);
         _esclServer.RemoveDevice(esclDeviceConfig);
     }
 
