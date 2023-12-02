@@ -37,7 +37,7 @@ public class ClientServerTests
             Host = IPAddress.IPv6Loopback.ToString(),
             RemoteEndpoint = IPAddress.IPv6Loopback,
             Port = 9801,
-            RootUrl = "eESCL",
+            RootUrl = "eSCL",
             Tls = false
         });
         var caps = await client.GetCapabilities();
