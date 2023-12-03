@@ -25,8 +25,8 @@ public class ScanServer : IDisposable
 
     public void SetDefaultIcon(byte[] iconPng) => _defaultIconPng = iconPng;
 
-    public void RegisterDevice(ScanDevice device, string? displayName = null) =>
-        RegisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name });
+    public void RegisterDevice(ScanDevice device, string? displayName = null, int port = 0) =>
+        RegisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name, Port = port });
 
     public void RegisterDevice(SharedDevice sharedDevice)
     {
@@ -35,8 +35,8 @@ public class ScanServer : IDisposable
         _esclServer.AddDevice(esclDeviceConfig);
     }
 
-    public void UnregisterDevice(ScanDevice device, string? displayName = null) =>
-        UnregisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name });
+    public void UnregisterDevice(ScanDevice device, string? displayName = null, int port = 0) =>
+        UnregisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name, Port = port });
 
     public void UnregisterDevice(SharedDevice sharedDevice)
     {
@@ -49,6 +49,7 @@ public class ScanServer : IDisposable
     {
         return new EsclDeviceConfig
         {
+            Port = device.Port,
             Capabilities = new EsclCapabilities
             {
                 MakeAndModel = device.Name,

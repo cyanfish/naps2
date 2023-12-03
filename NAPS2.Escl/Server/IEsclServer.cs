@@ -4,7 +4,6 @@ public interface IEsclServer : IDisposable
 {
     void AddDevice(EsclDeviceConfig deviceConfig);
     void RemoveDevice(EsclDeviceConfig deviceConfig);
-    int Port { get; set; }
-    void Start();
+    Task Start();
     void Stop();
 }

@@ -18,11 +18,12 @@ public class AdvertiseTests
             {
                 Version = "2.6",
                 MakeAndModel = "HP Blah",
-                SerialNumber = "123abc"
+                SerialNumber = "123abc",
+                Uuid = Guid.NewGuid().ToString("D")
             },
             CreateJob = _ => job
         });
-        server.Start();
+        await server.Start();
         if (Debugger.IsAttached)
         {
             for (int i = 0; i < 100; i++)

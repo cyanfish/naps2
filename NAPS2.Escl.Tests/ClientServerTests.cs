@@ -11,32 +11,28 @@ public class ClientServerTests
     [Fact]
     public async Task ClientServer()
     {
-        // TODO: Any better way to prevent port collisions when running tests?
-#if NET6_0_OR_GREATER
-        int port = 9802;
-#else
-        int port = 9801;
-#endif
         var job = Substitute.For<IEsclScanJob>();
-        using var server = new EsclServer { Port = port };
-        server.AddDevice(new EsclDeviceConfig
+        using var server = new EsclServer();
+        var deviceConfig = new EsclDeviceConfig
         {
             Capabilities = new EsclCapabilities
             {
                 Version = "2.0",
                 MakeAndModel = "HP Blah",
-                SerialNumber = "123abc"
+                SerialNumber = "123abc",
+                Uuid = Guid.NewGuid().ToString("D")
             },
             CreateJob = _ => job
-        });
-        server.Start();
+        };
+        server.AddDevice(deviceConfig);
+        await server.Start();
         var client = new EsclClient(new EsclService
         {
             IpV4 = IPAddress.Loopback,
             IpV6 = IPAddress.IPv6Loopback,
             Host = IPAddress.IPv6Loopback.ToString(),
             RemoteEndpoint = IPAddress.IPv6Loopback,
-            Port = 9801,
+            Port = deviceConfig.Port,
             RootUrl = "eSCL",
             Tls = false
         });

@@ -10,6 +10,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public class SharedDeviceForm : EtoDialogBase
 {
+    private const int BASE_PORT = 9801;
+
     private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
 
@@ -114,6 +116,8 @@ public class SharedDeviceForm : EtoDialogBase
         }
     }
 
+    private int Port { get; set; }
+
     private Driver DeviceDriver
     {
         get => _twainDriver.Checked ? Driver.Twain
@@ -151,6 +155,7 @@ public class SharedDeviceForm : EtoDialogBase
 
         _displayName.Text = SharedDevice?.Name ?? "";
         CurrentDevice ??= SharedDevice?.Device;
+        Port = SharedDevice?.Port ?? 0;
 
         DeviceDriver = SharedDevice?.Device.Driver ?? ScanOptionsValidator.SystemDefaultDriver;
 
@@ -198,8 +203,20 @@ public class SharedDeviceForm : EtoDialogBase
         SharedDevice = new SharedDevice
         {
             Name = _displayName.Text,
-            Device = CurrentDevice!
+            Device = CurrentDevice!,
+            Port = Port == 0 ? NextPort() : Port
         };
+    }
+
+    private int NextPort()
+    {
+        var devices = Config.Get(c => c.SharedDevices);
+        int port = BASE_PORT;
+        while (devices.Any(x => x.Port == port))
+        {
+            port++;
+        }
+        return port;
     }
 
     private void Ok_Click(object? sender, EventArgs e)
