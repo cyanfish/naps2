@@ -12,7 +12,7 @@ internal class ScanJob : IEsclScanJob
     private readonly CancellationTokenSource _cts = new();
     private readonly IAsyncEnumerator<ProcessedImage> _enumerable;
     private readonly TaskCompletionSource<bool> _completedTcs = new();
-    private Action<JobStatus>? _callback;
+    private Action<StatusTransition>? _callback;
     private bool _hasError;
 
     public ScanJob(ScanController controller, ScanDevice device, EsclScanSettings settings)
@@ -20,7 +20,11 @@ internal class ScanJob : IEsclScanJob
         _controller = controller;
         _controller.ScanEnd += (_, _) =>
         {
-            _callback?.Invoke(_hasError ? JobStatus.Aborted : JobStatus.Completed);
+            _callback?.Invoke(StatusTransition.DeviceIdle);
+            if (_hasError)
+            {
+                _callback?.Invoke(StatusTransition.AbortJob);
+            }
             _completedTcs.TrySetResult(!_hasError);
         };
         _controller.ScanError += (_, _) => { _hasError = true; };
@@ -45,16 +49,25 @@ internal class ScanJob : IEsclScanJob
                 : PageSize.Letter,
             // TODO: Align based on offset, etc.
         };
-        _enumerable = controller.Scan(options, _cts.Token).GetAsyncEnumerator();
+        try
+        {
+            _enumerable = controller.Scan(options, _cts.Token).GetAsyncEnumerator();
+        }
+        catch (Exception)
+        {
+            _callback?.Invoke(StatusTransition.DeviceIdle);
+            _callback?.Invoke(StatusTransition.AbortJob);
+            throw;
+        }
     }
 
     public void Cancel()
     {
         _cts.Cancel();
-        _callback?.Invoke(JobStatus.Canceled);
+        _callback?.Invoke(StatusTransition.CancelJob);
     }
 
-    public void RegisterStatusChangeCallback(Action<JobStatus> callback)
+    public void RegisterStatusTransitionCallback(Action<StatusTransition> callback)
     {
         _callback = callback;
     }

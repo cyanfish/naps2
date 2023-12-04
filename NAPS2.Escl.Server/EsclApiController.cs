@@ -119,10 +119,7 @@ internal class EsclApiController : WebApiController
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerStatus",
                     new XElement(PwgNs + "Version", "2.6"),
-                    new XElement(PwgNs + "State",
-                        _serverState.Jobs.Any(x => x.Value.Status is JobStatus.Pending or JobStatus.Processing)
-                            ? "Processing"
-                            : "Idle"),
+                    new XElement(PwgNs + "State", _serverState.IsProcessing ? "Processing" : "Idle"),
                     jobsElement
                 ));
         Response.ContentType = "text/xml";
@@ -145,7 +142,13 @@ internal class EsclApiController : WebApiController
             Response.StatusCode = 400; // Bad request
             return;
         }
-        var jobState = JobState.CreateNewJob(_deviceConfig.CreateJob(settings));
+        if (_serverState.IsProcessing)
+        {
+            Response.StatusCode = 503; // Service unavailable
+            return;
+        }
+        _serverState.IsProcessing = true;
+        var jobState = JobState.CreateNewJob(_serverState, _deviceConfig.CreateJob(settings));
         _serverState.Jobs[jobState.Id] = jobState;
         Response.Headers.Add("Location", $"{Request.Url}/{jobState.Id}");
         Response.StatusCode = 201; // Created
@@ -190,15 +193,22 @@ internal class EsclApiController : WebApiController
     public async Task NextDocument(string jobId)
     {
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
-            jobState.Status is JobStatus.Pending or JobStatus.Processing &&
-            await jobState.Job.WaitForNextDocument())
+            jobState.Status is JobStatus.Pending or JobStatus.Processing)
         {
-            Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobState.Id}/1");
-            SetChunkedResponse();
-            Response.ContentType = "image/jpeg";
-            Response.ContentEncoding = null;
-            using var stream = Response.OutputStream;
-            jobState.Job.WriteDocumentTo(stream);
+            if (await jobState.Job.WaitForNextDocument())
+            {
+                Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobState.Id}/1");
+                SetChunkedResponse();
+                Response.ContentType = "image/jpeg";
+                Response.ContentEncoding = null;
+                using var stream = Response.OutputStream;
+                jobState.Job.WriteDocumentTo(stream);
+            }
+            else
+            {
+                jobState.Status = JobStatus.Completed;
+                Response.StatusCode = 404;
+            }
         }
         else
         {
