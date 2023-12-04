@@ -21,7 +21,8 @@ internal static class SettingsParser
             // TODO: Handle intents?
             InputSource = MaybeParseEnum(root.Element(PwgNs + "InputSource"), EsclInputSource.Platen),
             ColorMode = MaybeParseEnum(root.Element(ScanNs + "ColorMode"), EsclColorMode.RGB24),
-            DocumentFormat = root.Element(ScanNs + "DocumentFormat")?.Value,
+            DocumentFormat = root.Element(ScanNs + "DocumentFormatExt")?.Value ??
+                             root.Element(PwgNs + "DocumentFormat")?.Value,
             Duplex = root.Element(ScanNs + "Duplex")?.Value == "true",
             XResolution = MaybeParseInt(root.Element(ScanNs + "XResolution")) ?? 0,
             YResolution = MaybeParseInt(root.Element(ScanNs + "YResolution")) ?? 0,

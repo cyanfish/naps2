@@ -2,12 +2,14 @@ using System.Globalization;
 using System.Threading;
 using NAPS2.Escl;
 using NAPS2.Escl.Server;
+using NAPS2.Pdf;
 using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Server;
 
 internal class ScanJob : IEsclScanJob
 {
+    private readonly ScanningContext _scanningContext;
     private readonly ScanController _controller;
     private readonly CancellationTokenSource _cts = new();
     private readonly IAsyncEnumerator<ProcessedImage> _enumerable;
@@ -15,8 +17,10 @@ internal class ScanJob : IEsclScanJob
     private Action<StatusTransition>? _callback;
     private bool _hasError;
 
-    public ScanJob(ScanController controller, ScanDevice device, EsclScanSettings settings)
+    public ScanJob(ScanningContext scanningContext, ScanController controller, ScanDevice device,
+        EsclScanSettings settings)
     {
+        _scanningContext = scanningContext;
         _controller = controller;
         _controller.ScanEnd += (_, _) =>
         {
@@ -49,6 +53,12 @@ internal class ScanJob : IEsclScanJob
                 : PageSize.Letter,
             // TODO: Align based on offset, etc.
         };
+        var requestedFormat = settings.DocumentFormat;
+        ContentType = requestedFormat switch
+        {
+            "image/png" or "application/pdf" => requestedFormat,
+            _ => "image/jpeg"
+        };
         try
         {
             _enumerable = controller.Scan(options, _cts.Token).GetAsyncEnumerator();
@@ -61,6 +71,8 @@ internal class ScanJob : IEsclScanJob
         }
     }
 
+    public string ContentType { get; }
+
     public void Cancel()
     {
         _cts.Cancel();
@@ -72,13 +84,40 @@ internal class ScanJob : IEsclScanJob
         _callback = callback;
     }
 
-    // TODO: Handle errors
     public async Task<bool> WaitForNextDocument() => await _enumerable.MoveNextAsync();
 
-    public void WriteDocumentTo(Stream stream)
+    public async Task WriteDocumentTo(Stream stream)
     {
-        // TODO: PDF etc
-        _enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
+        if (ContentType == "image/jpeg")
+        {
+            _enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
+        }
+        if (ContentType == "image/png")
+        {
+            _enumerable.Current.Save(stream, ImageFileFormat.Png);
+        }
+        if (ContentType == "application/pdf")
+        {
+            var pdfExporter = new PdfExporter(_scanningContext);
+            var tempPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetTempFileName());
+            // TODO: Add PDF export to stream capability?
+            await pdfExporter.Export(tempPath, new List<ProcessedImage> { _enumerable.Current });
+            try
+            {
+                using var fileStream = new FileStream(tempPath, FileMode.Open, FileAccess.Read);
+                await fileStream.CopyToAsync(stream);
+            }
+            finally
+            {
+                try
+                {
+                    File.Delete(tempPath);
+                }
+                catch (IOException)
+                {
+                }
+            }
+        }
     }
 
     public async Task WriteProgressTo(Stream stream)

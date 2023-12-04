@@ -2,9 +2,10 @@ namespace NAPS2.Escl.Server;
 
 public interface IEsclScanJob
 {
+    string ContentType { get; }
     void Cancel();
     void RegisterStatusTransitionCallback(Action<StatusTransition> callback);
     Task<bool> WaitForNextDocument();
-    void WriteDocumentTo(Stream stream);
+    Task WriteDocumentTo(Stream stream);
     Task WriteProgressTo(Stream stream);
 }

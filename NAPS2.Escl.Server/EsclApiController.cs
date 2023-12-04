@@ -199,10 +199,10 @@ internal class EsclApiController : WebApiController
             {
                 Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobState.Id}/1");
                 SetChunkedResponse();
-                Response.ContentType = "image/jpeg";
+                Response.ContentType = jobState.Job.ContentType;
                 Response.ContentEncoding = null;
                 using var stream = Response.OutputStream;
-                jobState.Job.WriteDocumentTo(stream);
+                await jobState.Job.WriteDocumentTo(stream);
             }
             else
             {
