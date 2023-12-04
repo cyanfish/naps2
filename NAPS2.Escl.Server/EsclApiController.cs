@@ -29,10 +29,10 @@ internal class EsclApiController : WebApiController
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerCapabilities",
-                    new XElement(PwgNs + "Version", caps.Version), // TODO: Probably hard code version or something
+                    new XElement(PwgNs + "Version", caps.Version),
                     new XElement(PwgNs + "MakeAndModel", caps.MakeAndModel),
                     new XElement(PwgNs + "SerialNumber", caps.SerialNumber),
-                    new XElement(ScanNs + "UUID", "0e468f6d-e5dc-4abe-8e9f-ad08d8546b0c"),
+                    new XElement(ScanNs + "UUID", caps.Uuid),
                     new XElement(ScanNs + "AdminURI", ""),
                     new XElement(ScanNs + "IconURI", iconUri),
                     new XElement(ScanNs + "Naps2Extensions", "Progress"),
