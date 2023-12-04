@@ -79,40 +79,33 @@ internal class EsclScanDriver : IScanDriver
 
             var job = await client.CreateScanJob(scanSettings);
 
-            // TODO: Somehow CancelJob is only running (or the http request is only going through) after the NextDocument
-            // request resolves. Not sure if a client or server issue (does the http server support concurrency?)
             var cancelOnce = new Once(() => client.CancelJob(job).AssertNoAwait());
             using var cancelReg = cancelToken.Register(cancelOnce.Run);
 
             try
             {
-                while (true)
+                if (scanSettings.InputSource == EsclInputSource.Platen)
                 {
                     scanEvents.PageStart();
-                    RawDocument? doc;
-                    try
+                }
+                while (true)
+                {
+                    if (scanSettings.InputSource != EsclInputSource.Platen)
                     {
-                        doc = await client.NextDocument(job, hasProgressExtension ? scanEvents.PageProgress : null);
+                        scanEvents.PageStart();
                     }
-                    catch (Exception ex)
-                    {
-                        _scanningContext.Logger.LogDebug(ex, "ESCL error");
-                        break;
-                    }
+                    var doc = await client.NextDocument(job, hasProgressExtension ? scanEvents.PageProgress : null);
                     if (doc == null) break;
                     foreach (var image in GetImagesFromRawDocument(options, doc))
                     {
                         callback(image);
                     }
-                    if (scanSettings.InputSource == EsclInputSource.Platen)
-                    {
-                        break;
-                    }
                 }
             }
-            finally
+            catch (Exception)
             {
                 cancelOnce.Run();
+                throw;
             }
         }
         catch (TaskCanceledException)
