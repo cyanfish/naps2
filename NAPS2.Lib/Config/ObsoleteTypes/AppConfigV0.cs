@@ -50,6 +50,8 @@ public class AppConfigV0
 
     public bool NoDebugLogging { get; set; }
 
+    public bool NoScannerSharing { get; set; }
+
     public bool DeleteAfterSaving { get; set; }
 
     public bool DisableSaveNotifications { get; set; }

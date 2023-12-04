@@ -16,11 +16,15 @@ public class MenuProvider
         return this;
     }
 
-    public MenuProvider Append(Command command)
+    public MenuProvider Append(Command? command)
     {
+        if (command == null)
+        {
+            return this;
+        }
         _items.Add(new CommandItem
         {
-            Command = command ?? throw new ArgumentNullException(nameof(command))
+            Command = command
         });
         return this;
     }

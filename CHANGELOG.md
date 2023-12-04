@@ -10,6 +10,7 @@ Changes in 7.2.0:
     - "Apple Driver" on Mac and "Sane Driver" on Linux should also work
   - NAPS2 currently must be kept open on the host for sharing to work
   - Shared scanners can be used from any ESCL-capable client, not just NAPS2
+  - Use NoScannerSharing in appsettings.xml to disable
 - Slightly updated icons in Profiles window 
 - Bug fixes
 

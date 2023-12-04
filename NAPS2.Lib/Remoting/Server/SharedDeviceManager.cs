@@ -18,11 +18,19 @@ public class SharedDeviceManager : ISharedDeviceManager
 
     public void StartSharing()
     {
+        if (_config.Get(c => c.DisableScannerSharing))
+        {
+            return;
+        }
         _server.Start();
     }
 
     public void StopSharing()
     {
+        if (_config.Get(c => c.DisableScannerSharing))
+        {
+            return;
+        }
         _server.Stop();
     }
 

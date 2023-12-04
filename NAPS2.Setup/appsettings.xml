@@ -20,6 +20,7 @@
   <AlwaysRememberDevice>false</AlwaysRememberDevice>
   <NoUpdatePrompt>false</NoUpdatePrompt>
   <NoDebugLogging>false</NoDebugLogging>
+  <NoScannerSharing>false</NoScannerSharing>
   <DeleteAfterSaving>false</DeleteAfterSaving>
   <DisableSaveNotifications>false</DisableSaveNotifications>
   <SingleInstance>false</SingleInstance>

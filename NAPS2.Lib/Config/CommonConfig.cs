@@ -174,4 +174,7 @@ public class CommonConfig
     [User]
     public bool ShowPageNumbers { get; set; }
 
+    [Common]
+    public bool DisableScannerSharing { get; set; }
+
 }

@@ -135,6 +135,10 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         {
             storage.Set(x => x.EnableDebugLogging, false);
         }
+        if (c.NoScannerSharing)
+        {
+            storage.Set(x => x.DisableScannerSharing, true);
+        }
         return storage;
     }
 

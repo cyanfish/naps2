@@ -145,7 +145,9 @@ public class ProfilesForm : EtoDialogBase
                         C.Button(_editCommand, ButtonImagePosition.Left),
                         C.Button(_deleteCommand, ButtonImagePosition.Left),
                         C.Filler(),
-                        C.Button(_scannerSharingCommand, ButtonImagePosition.Left)
+                        Config.Get(c => c.DisableScannerSharing)
+                            ? C.None()
+                            : C.Button(_scannerSharingCommand, ButtonImagePosition.Left)
                     )
                 ),
                 C.CancelButton(this, UiStrings.Done)
