@@ -19,4 +19,10 @@ public record SharedDevice
             return new Guid(uniqueHash.Take(16).ToArray()).ToString("D");
         }
     }
+
+    public virtual bool Equals(SharedDevice? other) =>
+        other is not null && Name == other.Name && Device == other.Device;
+
+    public override int GetHashCode() =>
+        Name.GetHashCode() * 23 + Device.GetHashCode();
 }
