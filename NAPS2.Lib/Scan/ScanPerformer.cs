@@ -2,6 +2,7 @@
 using System.Threading;
 using NAPS2.ImportExport;
 using NAPS2.Ocr;
+using NAPS2.Remoting.Server;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 #if !MAC
@@ -22,11 +23,13 @@ internal class ScanPerformer : IScanPerformer
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
     private readonly OcrOperationManager _ocrOperationManager;
+    private readonly ISharedDeviceManager _sharedDeviceManager;
 
     public ScanPerformer(IDevicePrompt devicePrompt, Naps2Config config, OperationProgress operationProgress,
         AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
-        ScanningContext scanningContext, OcrOperationManager ocrOperationManager)
+        ScanningContext scanningContext, OcrOperationManager ocrOperationManager,
+        ISharedDeviceManager sharedDeviceManager)
     {
         _devicePrompt = devicePrompt;
         _config = config;
@@ -38,6 +41,7 @@ internal class ScanPerformer : IScanPerformer
         _scanBridgeFactory = scanBridgeFactory;
         _scanningContext = scanningContext;
         _ocrOperationManager = ocrOperationManager;
+        _sharedDeviceManager = sharedDeviceManager;
     }
 
     public async Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -198,7 +202,7 @@ internal class ScanPerformer : IScanPerformer
             },
             EsclOptions =
             {
-                ExcludeUuids = _config.Get(c => c.SharedDevices).Select(x => x.Uuid).ToList()
+                ExcludeUuids = _sharedDeviceManager.SharedDevices.Select(x => x.Uuid).ToList()
             },
             KeyValueOptions = scanProfile.KeyValueOptions != null
                 ? new KeyValueScanOptions(scanProfile.KeyValueOptions)

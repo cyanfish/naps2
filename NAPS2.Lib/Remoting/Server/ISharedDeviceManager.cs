@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace NAPS2.Remoting.Server;
 
 public interface ISharedDeviceManager
@@ -7,5 +9,5 @@ public interface ISharedDeviceManager
     void AddSharedDevice(SharedDevice device);
     void RemoveSharedDevice(SharedDevice device);
     void ReplaceSharedDevice(SharedDevice original, SharedDevice replacement);
-    IEnumerable<SharedDevice> SharedDevices { get; }
+    ImmutableList<SharedDevice> SharedDevices { get; }
 }

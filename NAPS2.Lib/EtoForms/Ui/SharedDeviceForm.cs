@@ -14,6 +14,7 @@ public class SharedDeviceForm : EtoDialogBase
 
     private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
+    private readonly ISharedDeviceManager _sharedDeviceManager;
 
     private readonly TextBox _displayName = new();
     private readonly RadioButton _wiaDriver;
@@ -29,10 +30,12 @@ public class SharedDeviceForm : EtoDialogBase
     private bool _result;
     private bool _suppressChangeEvent;
 
-    public SharedDeviceForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput) : base(config)
+    public SharedDeviceForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
+        ISharedDeviceManager sharedDeviceManager) : base(config)
     {
         _scanPerformer = scanPerformer;
         _errorOutput = errorOutput;
+        _sharedDeviceManager = sharedDeviceManager;
         _wiaDriver = new RadioButton { Text = UiStrings.WiaDriver };
         _twainDriver = new RadioButton(_wiaDriver) { Text = UiStrings.TwainDriver };
         _appleDriver = new RadioButton(_wiaDriver) { Text = UiStrings.AppleDriver };
@@ -210,7 +213,7 @@ public class SharedDeviceForm : EtoDialogBase
 
     private int NextPort()
     {
-        var devices = Config.Get(c => c.SharedDevices);
+        var devices = _sharedDeviceManager.SharedDevices;
         int port = BASE_PORT;
         while (devices.Any(x => x.Port == port))
         {

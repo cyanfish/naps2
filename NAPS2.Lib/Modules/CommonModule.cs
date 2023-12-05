@@ -49,7 +49,11 @@ public class CommonModule : Module
 
         // Remoting
         builder.Register<IWorkerFactory>(_ => WorkerFactory.CreateDefault()).SingleInstance();
-        builder.RegisterType<SharedDeviceManager>().As<ISharedDeviceManager>().SingleInstance();
+        builder.Register<ISharedDeviceManager>(ctx =>
+            new SharedDeviceManager(
+                ctx.Resolve<ScanningContext>(),
+                ctx.Resolve<Naps2Config>(),
+                Path.Combine(Paths.AppData, "sharing.xml"))).SingleInstance();
 
         // Logging
         builder.Register<ILogger>(ctx =>

@@ -4,7 +4,6 @@ using NAPS2.Scan;
 
 namespace NAPS2.Config;
 
-// TODO: Fix cross-instance contention
 public class ProfileManager : IProfileManager
 {
     private readonly ProfileSerializer _serializer = new();
