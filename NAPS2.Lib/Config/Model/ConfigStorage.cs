@@ -212,8 +212,14 @@ public class ConfigStorage<TConfig>
         var propDataDict = ConfigLookup.GetPropertyData(dst.ValueType).ToDictionary(x => x.Name);
         foreach (var childElement in src.Elements())
         {
-            // TODO: Handle errors
-            var propData = propDataDict[childElement.Name.ToString()];
+            var key = childElement.Name.ToString();
+            if (!propDataDict.ContainsKey(key))
+            {
+                // Unexpected element; best to ignore rather than blow up the config (e.g. after a version downgrade)
+                // TODO: Log?
+                continue;
+            }
+            var propData = propDataDict[key];
             var childNode = dst.Children.GetOrSet(propData.Name, () => new StorageNode(propData.Type)
             {
                 Key = propData.Name,
