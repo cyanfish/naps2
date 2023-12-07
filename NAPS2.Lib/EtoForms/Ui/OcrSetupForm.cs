@@ -24,10 +24,17 @@ public class OcrSetupForm : EtoDialogBase
 
         LoadLanguages();
 
+        var configOcrMode = Config.Get(c => c.OcrMode);
+        if (configOcrMode == LocalizedOcrMode.Legacy)
+        {
+            // Legacy is no longer supported
+            configOcrMode = LocalizedOcrMode.Fast;
+        }
+
         _enableOcr.Checked = Config.Get(c => c.EnableOcr);
         _ocrLang.SelectedKey = Config.Get(c => c.OcrLanguageCode) ?? "";
         if (_ocrLang.SelectedIndex == -1) _ocrLang.SelectedIndex = 0;
-        _ocrMode.SelectedIndex = (int) Config.Get(c => c.OcrMode);
+        _ocrMode.SelectedIndex = (int) configOcrMode;
         if (_ocrMode.SelectedIndex == -1) _ocrMode.SelectedIndex = 0;
         _ocrAfterScanning.Checked = Config.Get(c => c.OcrAfterScanning);
 
