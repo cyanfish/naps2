@@ -175,6 +175,30 @@ public class AutoSaverTests : ContextualTests
         PdfAsserts.AssertImages(Path.Combine(FolderPath, "test2.pdf"), ImageResources.dog_gray);
     }
 
+    [Fact]
+    public async Task PdfSplitPatchT()
+    {
+        var settings = new AutoSaveSettings
+        {
+            FilePath = Path.Combine(FolderPath, "test$(n).pdf"),
+            Separator = SaveSeparator.PatchT
+        };
+        var scanned = CreateScannedImages(
+            ImageResources.dog,
+            ImageResources.dog_gray,
+            ImageResources.patcht,
+            ImageResources.dog_h_n300).ToList();
+        scanned[2] = scanned[2].WithPostProcessingData(scanned[2].PostProcessingData with
+        {
+            Barcode = new Barcode(true, true, "PATCHT")
+        }, true);
+        var output = _autoSaver.Save(settings, scanned.ToAsyncEnumerable());
+        Assert.Equal(4, (await output.ToListAsync()).Count);
+        Assert.Equal(2, Folder.GetFiles().Length);
+        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test1.pdf"), ImageResources.dog, ImageResources.dog_gray);
+        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test2.pdf"), ImageResources.dog_h_n300);
+    }
+
     // TODO: Finish out tests
 
     //
