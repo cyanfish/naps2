@@ -764,6 +764,7 @@ public class PdfExporter : IPdfExporter
             }
             else
             {
+                FileSystemHelper.EnsureParentDirExists(Path!);
                 using var fileStream = new FileStream(Path!, FileMode.Create);
                 inputStream.CopyTo(fileStream);
             }
@@ -777,6 +778,7 @@ public class PdfExporter : IPdfExporter
             }
             else
             {
+                FileSystemHelper.EnsureParentDirExists(Path!);
                 doc.Save(Path!);
             }
         }

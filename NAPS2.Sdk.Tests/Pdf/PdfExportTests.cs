@@ -49,6 +49,21 @@ public class PdfExporterTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportJpegImageToNonexistentFolder(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "blah", "test.pdf");
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+
+        await _exporter.Export(filePath, new[] { image });
+
+        PdfAsserts.AssertImages(filePath, ImageResources.dog);
+        PdfAsserts.AssertImageFilter(filePath, 0, "DCTDecode");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportGrayJpegImage(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);
