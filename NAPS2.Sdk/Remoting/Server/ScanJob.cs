@@ -99,24 +99,7 @@ internal class ScanJob : IEsclScanJob
         if (ContentType == "application/pdf")
         {
             var pdfExporter = new PdfExporter(_scanningContext);
-            var tempPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetTempFileName());
-            // TODO: Add PDF export to stream capability?
-            await pdfExporter.Export(tempPath, new List<ProcessedImage> { _enumerable.Current });
-            try
-            {
-                using var fileStream = new FileStream(tempPath, FileMode.Open, FileAccess.Read);
-                await fileStream.CopyToAsync(stream);
-            }
-            finally
-            {
-                try
-                {
-                    File.Delete(tempPath);
-                }
-                catch (IOException)
-                {
-                }
-            }
+            await pdfExporter.Export(stream, new List<ProcessedImage> { _enumerable.Current });
         }
     }
 
