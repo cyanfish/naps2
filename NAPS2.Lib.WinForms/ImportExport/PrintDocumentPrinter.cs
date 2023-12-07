@@ -53,7 +53,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
                 imagesToPrint = images.Skip(start).Take(length).ToList();
                 break;
             default:
-                imagesToPrint = new List<ProcessedImage>();
+                imagesToPrint = [];
                 break;
         }
         if (imagesToPrint.Count == 0)

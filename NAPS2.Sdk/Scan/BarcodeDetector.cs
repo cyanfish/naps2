@@ -23,7 +23,7 @@ internal static class BarcodeDetector
         var zxingOptions = options.ZXingOptions ?? new DecodingOptions
         {
             TryHarder = true,
-            PossibleFormats = options.PatchTOnly ? new List<BarcodeFormat> { PATCH_T_FORMAT } : null
+            PossibleFormats = options.PatchTOnly ? [PATCH_T_FORMAT] : null
         };
         var reader = new BarcodeReader<IMemoryImage>(x => new MemoryImageLuminanceSource(x))
         {

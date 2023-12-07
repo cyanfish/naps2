@@ -81,7 +81,7 @@ public class ScanErrorHandling : ContextualTests
     public async void Scan_LocalPostProcess()
     {
         var localPostProcessor = Substitute.For<ILocalPostProcessor>();
-        var bridge = new StubScanBridge { MockOutput = new List<ProcessedImage> { CreateScannedImage() } };
+        var bridge = new StubScanBridge { MockOutput = [CreateScannedImage()] };
         var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
             new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),

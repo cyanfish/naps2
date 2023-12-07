@@ -21,8 +21,8 @@ public class PdfSettingsForm : EtoDialogBase
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
-    private readonly List<CheckBox> _permissions = new()
-    {
+    private readonly List<CheckBox> _permissions =
+    [
         new CheckBox { Text = UiStrings.AllowPrinting },
         new CheckBox { Text = UiStrings.AllowFullQualityPrinting },
         new CheckBox { Text = UiStrings.AllowDocumentModification },
@@ -31,7 +31,7 @@ public class PdfSettingsForm : EtoDialogBase
         new CheckBox { Text = UiStrings.AllowContentCopyingForAccessibility },
         new CheckBox { Text = UiStrings.AllowAnnotations },
         new CheckBox { Text = UiStrings.AllowFormFilling }
-    };
+    ];
 
     private readonly DropDown _compat = C.EnumDropDown<PdfCompat>(compat => compat switch
     {

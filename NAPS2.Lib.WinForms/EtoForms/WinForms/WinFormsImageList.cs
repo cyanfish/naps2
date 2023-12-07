@@ -31,7 +31,7 @@ public abstract class WinFormsImageList<T> where T : notnull
 
     public class Custom : WinFormsImageList<T>
     {
-        private readonly List<Image> _images = new();
+        private readonly List<Image> _images = [];
 
         public Custom(WinFormsListView<T> listView, ListViewBehavior<T> behavior) : base(listView, behavior)
         {

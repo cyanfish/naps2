@@ -59,7 +59,7 @@ public static class Program
 
     public class CommandList
     {
-        private readonly List<Type> _optionTypes = new();
+        private readonly List<Type> _optionTypes = [];
         private readonly Dictionary<Type, Type> _optionTypeToCommandType = new();
 
         public CommandList Add<TOption, TCommand>() where TOption : OptionsBase where TCommand : ICommand<TOption>

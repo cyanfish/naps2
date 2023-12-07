@@ -2,7 +2,7 @@ namespace NAPS2.Util;
 
 public class DisposableSet<T> : IDisposable where T : IDisposable
 {
-    private readonly HashSet<T> _set = new();
+    private readonly HashSet<T> _set = [];
 
     public void Add(T obj)
     {

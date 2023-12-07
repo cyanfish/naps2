@@ -10,7 +10,7 @@ public class EtoOperationProgress : OperationProgress
     private readonly INotify _notify;
     private readonly Naps2Config _config;
 
-    private readonly HashSet<IOperation> _activeOperations = new();
+    private readonly HashSet<IOperation> _activeOperations = [];
 
     public EtoOperationProgress(IFormFactory formFactory, INotify notify, Naps2Config config)
     {

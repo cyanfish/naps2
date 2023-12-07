@@ -50,8 +50,8 @@ public class MacPreviewForm : PreviewForm
 
     private List<NSToolbarItem?> CreateMacToolbarItems()
     {
-        return new List<NSToolbarItem?>
-        {
+        return
+        [
             MacToolbarItems.Create("prev", GoToPrevCommand, nav: true),
             MacToolbarItems.Create("next", GoToNextCommand, nav: true),
             MacToolbarItems.CreateMenu("rotate", Commands.RotateMenu, new MenuProvider()
@@ -81,7 +81,7 @@ public class MacPreviewForm : PreviewForm
 #pragma warning restore CA1422
 #pragma warning restore CA1416
             }
-        };
+        ];
     }
 
     private void ZoomUpdated(NSSlider sender)

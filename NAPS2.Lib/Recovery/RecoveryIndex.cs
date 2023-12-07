@@ -8,7 +8,7 @@ public class RecoveryIndex
 
     public RecoveryIndex()
     {
-        Images = new List<RecoveryIndexImage>();
+        Images = [];
     }
 
     public int Version { get; set; }

@@ -54,7 +54,7 @@ public class DownloadControllerTests : ContextualTests
     [Fact]
     public async void NoUrl()
     {
-        DownloadInfo info = new("", new List<DownloadMirror>(), 0, "0000000000000000000000000000000000000000", DownloadFormat.Gzip);
+        DownloadInfo info = new("", [], 0, "0000000000000000000000000000000000000000", DownloadFormat.Gzip);
 
         var mockHandler = Substitute.For<Action<string>>();
 
@@ -75,7 +75,7 @@ public class DownloadControllerTests : ContextualTests
 
         _controller.DownloadError += mockHandler;
 
-        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz", new List<DownloadMirror>() { new DownloadMirror(DummyValidUrl) }, 0, "THIS IS NOT AN SHA1 AND WILL FAIL", DownloadFormat.Gzip));
+        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz", [new DownloadMirror(DummyValidUrl)], 0, "THIS IS NOT AN SHA1 AND WILL FAIL", DownloadFormat.Gzip));
 
         _controller.QueueFile(_mockComponent);
         Assert.False(await _controller.StartDownloadsAsync());
@@ -90,7 +90,8 @@ public class DownloadControllerTests : ContextualTests
     [Fact]
     public async void InvalidMirrorsChecksum()
     {
-        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz", new List<DownloadMirror>() { new DownloadMirror(DummyInvalidUrl), new DownloadMirror(DummyValidUrl) }, 0, StockDogJpegSHA1, DownloadFormat.Gzip));
+        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz",
+            [new DownloadMirror(DummyInvalidUrl), new DownloadMirror(DummyValidUrl)], 0, StockDogJpegSHA1, DownloadFormat.Gzip));
 
         _httpHandler.Expect(DummyInvalidUrl).Respond("application/zip", _animalsZipStream);
         _httpHandler.Expect(DummyValidUrl).Respond("application/gzip", _dogsGzipStream);
@@ -110,7 +111,7 @@ public class DownloadControllerTests : ContextualTests
     [Fact]
     public async void Valid()
     {
-        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz", new List<DownloadMirror>() { new DownloadMirror(DummyValidUrl) }, 0, StockDogJpegSHA1, DownloadFormat.Gzip));
+        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz", [new DownloadMirror(DummyValidUrl)], 0, StockDogJpegSHA1, DownloadFormat.Gzip));
 
         _httpHandler.Expect(DummyValidUrl).Respond("application/gzip", _dogsGzipStream);
 
@@ -129,7 +130,8 @@ public class DownloadControllerTests : ContextualTests
     [Fact]
     public async void ValidUsingMirrorUrl()
     {
-        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz", new List<DownloadMirror>() { new DownloadMirror(DummyInvalidUrl), new DownloadMirror(DummyValidUrl) }, 0, StockDogJpegSHA1, DownloadFormat.Gzip));
+        _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz",
+            [new DownloadMirror(DummyInvalidUrl), new DownloadMirror(DummyValidUrl)], 0, StockDogJpegSHA1, DownloadFormat.Gzip));
 
         _httpHandler.Expect(DummyInvalidUrl);
         _httpHandler.Expect(DummyValidUrl).Respond("application/gzip", _dogsGzipStream);

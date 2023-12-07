@@ -99,7 +99,7 @@ internal class ScanJob : IEsclScanJob
         if (ContentType == "application/pdf")
         {
             var pdfExporter = new PdfExporter(_scanningContext);
-            await pdfExporter.Export(stream, new List<ProcessedImage> { _enumerable.Current });
+            await pdfExporter.Export(stream, [_enumerable.Current]);
         }
     }
 

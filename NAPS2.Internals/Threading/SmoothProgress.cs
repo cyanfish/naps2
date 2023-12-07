@@ -39,9 +39,9 @@ public class SmoothProgress : IDisposable
 
             _stopwatch = Stopwatch.StartNew();
 
-            _previousInputPos = new LinkedList<double>();
+            _previousInputPos = [];
             _previousInputPos.AddLast(0);
-            _previousInputTimes = new LinkedList<long>();
+            _previousInputTimes = [];
             _previousInputTimes.AddLast(0);
         }
     }

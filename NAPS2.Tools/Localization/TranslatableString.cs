@@ -12,5 +12,5 @@ public class TranslatableString
 
     public string? Translation { get; }
 
-    public List<string> Context { get; } = new List<string>();
+    public List<string> Context { get; } = [];
 }

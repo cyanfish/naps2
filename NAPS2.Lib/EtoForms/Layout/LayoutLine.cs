@@ -145,8 +145,8 @@ public abstract class LayoutLine : LayoutContainer
         }
         // If we aren't aligned or we don't have a parent to do that pre-calculation, then we just determine our cell
         // sizes and scaling directly without any special alignment constraints.
-        cellLengths = new List<float>();
-        cellScaling = new List<bool>();
+        cellLengths = [];
+        cellScaling = [];
         var lengthChildContext = childContext with { IsCellLengthQuery = true };
         foreach (var child in Children)
         {

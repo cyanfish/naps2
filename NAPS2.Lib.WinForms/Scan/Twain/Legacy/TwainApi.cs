@@ -88,7 +88,7 @@ internal static class TwainApi
             _settings = settings;
             _tw = tw;
             _form = form;
-            Bitmaps = new List<IMemoryImage>();
+            Bitmaps = [];
             form.Activated += FTwainGui_Activated;
         }
 

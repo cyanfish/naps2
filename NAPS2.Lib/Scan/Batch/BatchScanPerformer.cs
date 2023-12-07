@@ -93,7 +93,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                 OcrCancelToken = _cancelToken,
                 ThumbnailSize = thumbnailController.RenderSize
             };
-            _scans = new List<List<ProcessedImage>>();
+            _scans = [];
         }
 
         public async Task Do()

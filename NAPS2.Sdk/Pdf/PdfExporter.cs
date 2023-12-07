@@ -457,7 +457,7 @@ public class PdfExporter : IPdfExporter
     private static string ReverseText(string text)
     {
         TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(text);
-        List<string> elements = new List<string>();
+        var elements = new List<string>();
         while (enumerator.MoveNext())
         {
             elements.Add(enumerator.GetTextElement());

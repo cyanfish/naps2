@@ -5,7 +5,7 @@ namespace NAPS2.Config;
 
 public class StubProfileManager : IProfileManager
 {
-    private readonly List<ScanProfile> _profiles = new List<ScanProfile>();
+    private readonly List<ScanProfile> _profiles = [];
 
     public ImmutableList<ScanProfile> Profiles => ImmutableList.CreateRange(_profiles);
 

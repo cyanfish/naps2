@@ -144,7 +144,7 @@ public static class ImageAsserts
 
     public class PixelColorData : IEnumerable<((int x, int y), (int r, int g, int b))>
     {
-        private readonly List<((int x, int y), (int r, int g, int b))> _colors = new();
+        private readonly List<((int x, int y), (int r, int g, int b))> _colors = [];
 
         public void Add((int x, int y) pos, (int r, int g, int b) color)
         {

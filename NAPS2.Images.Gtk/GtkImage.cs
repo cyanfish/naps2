@@ -78,7 +78,7 @@ public class GtkImage : IMemoryImage
         }
         if (imageFormat == ImageFileFormat.Tiff)
         {
-            ((GtkImageContext) ImageContext).TiffIo.SaveTiff(new List<IMemoryImage> { this }, path);
+            ((GtkImageContext) ImageContext).TiffIo.SaveTiff([this], path);
             return;
         }
         ImageContext.CheckSupportsFormat(imageFormat);
@@ -97,7 +97,7 @@ public class GtkImage : IMemoryImage
         }
         if (imageFormat == ImageFileFormat.Tiff)
         {
-            ((GtkImageContext) ImageContext).TiffIo.SaveTiff(new List<IMemoryImage> { this }, stream);
+            ((GtkImageContext) ImageContext).TiffIo.SaveTiff([this], stream);
             return;
         }
         ImageContext.CheckSupportsFormat(imageFormat);

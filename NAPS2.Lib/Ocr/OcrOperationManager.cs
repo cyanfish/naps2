@@ -48,7 +48,7 @@ public class OcrOperationManager
             }
             op = _currentOp;
             op.Status.MaxProgress += 1;
-            _ongoingTasks.GetOrSet((OcrController) sender!, () => new HashSet<Task>()).Add(e.ResultTask);
+            _ongoingTasks.GetOrSet((OcrController) sender!, () => []).Add(e.ResultTask);
         }
         op.InvokeStatusChanged();
         if (newOp)

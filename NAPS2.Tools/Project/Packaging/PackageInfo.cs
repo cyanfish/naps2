@@ -4,8 +4,8 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public class PackageInfo
 {
-    private readonly List<PackageFile> _files = new();
-    private readonly HashSet<string> _destPaths = new();
+    private readonly List<PackageFile> _files = [];
+    private readonly HashSet<string> _destPaths = [];
 
     public PackageInfo(Platform platform, string versionName, string versionNumber, string? packageName)
     {
@@ -30,7 +30,7 @@ public class PackageInfo
 
     public IEnumerable<PackageFile> Files => _files;
 
-    public HashSet<string> Languages { get; } = new();
+    public HashSet<string> Languages { get; } = [];
 
     public void AddFile(FileInfo file, string destFolder, string? destFileName = null)
     {

@@ -6,9 +6,9 @@ namespace NAPS2.Sdk.Tests.Mocks;
 
 internal class StubScanBridge : IScanBridge
 {
-    public List<ScanDevice> MockDevices { get; set; } = new();
+    public List<ScanDevice> MockDevices { get; set; } = [];
 
-    public List<ProcessedImage> MockOutput { get; set; } = new();
+    public List<ProcessedImage> MockOutput { get; set; } = [];
         
     public Exception Error { get; set; }
 

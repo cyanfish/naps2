@@ -24,7 +24,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
     private bool _refreshing;
     private readonly ScrolledWindow _scrolledWindow;
     private readonly FlowBox _flowBox;
-    private List<Entry> _entries = new();
+    private List<Entry> _entries = [];
 
     public GtkListView(ListViewBehavior<T> behavior)
     {

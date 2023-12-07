@@ -18,13 +18,13 @@ public abstract class XmlSerializer
 
     protected static readonly Dictionary<Type, List<CustomXmlTypes>> CustomTypesCache = new();
 
-    protected static readonly List<Type> ArrayLikeTypes = new()
-    {
+    protected static readonly List<Type> ArrayLikeTypes =
+    [
         typeof(List<>),
         typeof(HashSet<>),
         typeof(ImmutableList<>),
-        typeof(ImmutableHashSet<>),
-    };
+        typeof(ImmutableHashSet<>)
+    ];
 
     protected static readonly Dictionary<Type, XmlTypeInfo> TypeInfoCache = new()
     {
@@ -79,7 +79,7 @@ public abstract class XmlSerializer
     {
         lock (TypeInfoCache)
         {
-            CustomTypesCache.GetOrSet(type, new List<CustomXmlTypes>()).Add(customTypes);
+            CustomTypesCache.GetOrSet(type, []).Add(customTypes);
         }
     }
 

@@ -18,7 +18,7 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
         _itemActivated = itemActivated;
     }
 
-    public List<T> Items { get; } = new();
+    public List<T> Items { get; } = [];
 
     public override nint GetNumberofItems(NSCollectionView collectionView, nint section)
     {

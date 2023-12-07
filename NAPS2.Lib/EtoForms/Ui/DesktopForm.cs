@@ -153,8 +153,8 @@ public abstract class DesktopForm : EtoFormBase
         {
             // TODO: Remove icon from delete command somehow
             // TODO: Is this memory leaking (because of event handlers) when commands are converted to menuitems?
-            _contextMenu.Items.AddRange(new List<MenuItem>
-            {
+            _contextMenu.Items.AddRange(
+            [
                 Commands.ViewImage,
                 new SeparatorMenuItem(),
                 Commands.SelectAll,
@@ -162,15 +162,15 @@ public abstract class DesktopForm : EtoFormBase
                 Commands.Paste,
                 new SeparatorMenuItem(),
                 Commands.Delete
-            });
+            ]);
         }
         else
         {
-            _contextMenu.Items.AddRange(new List<MenuItem>
-            {
+            _contextMenu.Items.AddRange(
+            [
                 Commands.SelectAll,
                 Commands.Paste
-            });
+            ]);
         }
     }
 

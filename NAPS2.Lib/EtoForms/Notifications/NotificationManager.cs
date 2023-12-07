@@ -7,7 +7,7 @@ public class NotificationManager
         ColorScheme = colorScheme;
     }
 
-    public List<NotificationModel> Notifications { get; } = new();
+    public List<NotificationModel> Notifications { get; } = [];
     
     public ColorScheme ColorScheme { get; }
 

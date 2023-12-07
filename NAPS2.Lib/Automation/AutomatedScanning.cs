@@ -96,7 +96,7 @@ public class AutomatedScanning
                 return;
             }
 
-            _scanList = new List<List<ProcessedImage>>();
+            _scanList = [];
 
             if (_options.ImportPath != null)
             {
@@ -571,7 +571,7 @@ public class AutomatedScanning
         _config.Run.Set(c => c.PdfSettings.Compat, compat);
 
         int scanIndex = 0;
-        _actualOutputPaths = new List<string>();
+        _actualOutputPaths = [];
         foreach (var fileContents in _scanList)
         {
             var op = _operationFactory.Create<SavePdfOperation>();
@@ -625,7 +625,7 @@ public class AutomatedScanning
             }
             OutputVerbose(ConsoleResources.StartingScan, i, _options.Number);
             _pagesScanned = 0;
-            _scanList.Add(new List<ProcessedImage>());
+            _scanList.Add([]);
             var scanParams = new ScanParams
             {
                 NoUI = !_options.Progress,

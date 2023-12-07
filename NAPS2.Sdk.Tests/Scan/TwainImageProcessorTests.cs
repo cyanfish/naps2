@@ -30,7 +30,7 @@ public class TwainImageProcessorTests : ContextualTests
         _scanEvents = Substitute.For<IScanEvents>();
         _callback = Substitute.For<Action<IMemoryImage>>();
 
-        _images = new List<IMemoryImage>();
+        _images = [];
         _callback.When(x => x(Arg.Any<IMemoryImage>()))
             .Do(x => _images.Add((IMemoryImage) x[0]));
 

@@ -47,7 +47,7 @@ internal static class SaveSeparatorHelper
                         if (images.Count > 0)
                         {
                             yield return images;
-                            images = new List<ProcessedImage>();
+                            images = [];
                         }
                     }
                     else

@@ -278,8 +278,8 @@ public class LoadSaveTests : ContextualTests
         (byte[]) ImageResources.ResourceManager.GetObject(resource, CultureInfo.InvariantCulture);
 
     // TODO: Ignore resolution by default in the existing tests, but have separate tests/test cases for resolution
-    public static IEnumerable<object[]> TestCases = new List<object[]>
-    {
+    public static IEnumerable<object[]> TestCases =
+    [
         new object[]
         {
             ImageFileFormat.Png, ".png", "dog_alpha",
@@ -387,5 +387,5 @@ public class LoadSaveTests : ContextualTests
             new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, false
         },
 #endif
-    };
+    ];
 }

@@ -186,8 +186,8 @@ public class MacDesktopForm : DesktopForm
 
     private List<NSToolbarItem?> CreateMacToolbarItems()
     {
-        return new List<NSToolbarItem?>
-        {
+        return
+        [
             MacToolbarItems.Create("scan", Commands.Scan),
             MacToolbarItems.Create("profiles", Commands.Profiles),
             MacToolbarItems.CreateSpace(),
@@ -214,7 +214,7 @@ public class MacDesktopForm : DesktopForm
 #pragma warning restore CA1422
 #pragma warning restore CA1416
             }
-        };
+        ];
     }
 
     protected override LayoutElement GetZoomButtons() => C.Spacer();

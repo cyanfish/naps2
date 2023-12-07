@@ -48,11 +48,11 @@ public class BlankDetectorTests : ContextualTests
         return image.CopyWithPixelFormat(pixelFormat);
     }
 
-    public static IEnumerable<object[]> TestCases = new List<object[]>
-    {
+    public static IEnumerable<object[]> TestCases =
+    [
         new object[] { ImagePixelFormat.ARGB32 },
         new object[] { ImagePixelFormat.RGB24 },
         new object[] { ImagePixelFormat.Gray8 },
         new object[] { ImagePixelFormat.BW1 }
-    };
+    ];
 }

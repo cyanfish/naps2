@@ -12,7 +12,7 @@ using TrimOperation = ListViewDiffs<UiImage>.TrimOperation;
 public class ImageListDiffer
 {
     private readonly UiImageList _imageList;
-    private List<ImageRenderState> _currentState = new();
+    private List<ImageRenderState> _currentState = [];
 
     public ImageListDiffer(UiImageList imageList)
     {

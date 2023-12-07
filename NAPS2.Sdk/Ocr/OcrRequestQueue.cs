@@ -13,7 +13,7 @@ internal class OcrRequestQueue
 {
     private readonly Dictionary<OcrRequestParams, OcrRequest> _requestCache = new();
     private Semaphore _queueWaitHandle = new(0, int.MaxValue);
-    private List<Task> _workerTasks = new();
+    private List<Task> _workerTasks = [];
     private CancellationTokenSource _workerCts = new();
 
     /// <summary>
@@ -94,7 +94,7 @@ internal class OcrRequestQueue
             if (_workerTasks.Count > 0 && !hasPending)
             {
                 _workerCts.Cancel();
-                _workerTasks = new List<Task>();
+                _workerTasks = [];
                 _workerCts = new CancellationTokenSource();
                 _queueWaitHandle = new Semaphore(0, int.MaxValue);
             }

@@ -4,7 +4,7 @@ namespace NAPS2.EtoForms;
 
 public class MenuProvider
 {
-    private readonly List<Item> _items = new();
+    private readonly List<Item> _items = [];
 
     public MenuProvider Dynamic(ListProvider<Command> commandListProvider)
     {

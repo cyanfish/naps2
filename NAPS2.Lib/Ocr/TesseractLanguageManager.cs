@@ -4,11 +4,11 @@ namespace NAPS2.Ocr;
 
 public class TesseractLanguageManager
 {
-    private static readonly List<DownloadMirror> Mirrors = new()
-    {
+    private static readonly List<DownloadMirror> Mirrors =
+    [
         new(@"https://github.com/cyanfish/naps2-components/releases/download/tesseract-4.0.0b4/{0}"),
         new(@"https://sourceforge.net/projects/naps2/files/components/tesseract-4.0.0b4/{0}/download")
-    };
+    ];
 
     private readonly TesseractLanguageData _languageData = TesseractLanguageData.Latest;
 

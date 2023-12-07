@@ -12,7 +12,7 @@ public class UndoStack : IDisposable
     public UndoStack(int maxLength)
     {
         _maxLength = maxLength;
-        _stack = new LinkedList<Memento>();
+        _stack = [];
         _stack.AddFirst(Memento.Empty);
         _current = _stack.First!;
     }

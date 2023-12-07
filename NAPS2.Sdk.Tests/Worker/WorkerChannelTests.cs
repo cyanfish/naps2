@@ -88,11 +88,11 @@ public class WorkerChannelTests : ContextualTests
     {
         var remoteScanController = new MockRemoteScanController
         {
-            Images = new List<ProcessedImage>
-            {
+            Images =
+            [
                 CreateScannedImage(),
                 CreateScannedImage()
-            }
+            ]
         };
 
         using var channel = Start(remoteScanController);
@@ -113,11 +113,11 @@ public class WorkerChannelTests : ContextualTests
     {
         var remoteScanController = new MockRemoteScanController
         {
-            Images = new List<ProcessedImage>
-            {
+            Images =
+            [
                 CreateScannedImage(),
                 CreateScannedImage()
-            },
+            ],
             Exception = new DeviceException("Test error")
         };
         using var channel = Start(remoteScanController);
@@ -161,7 +161,7 @@ public class WorkerChannelTests : ContextualTests
 
     private class MockRemoteScanController : IRemoteScanController
     {
-        public List<ProcessedImage> Images { get; set; } = new();
+        public List<ProcessedImage> Images { get; set; } = [];
 
         public Exception Exception { get; set; }
 

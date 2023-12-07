@@ -462,8 +462,8 @@ public class TransformTests : ContextualTests
         Assert.True(IsDisposed(original));
     }
 
-    public static IEnumerable<object[]> CommutativeGrayTransforms = new List<object[]>
-    {
+    public static IEnumerable<object[]> CommutativeGrayTransforms =
+    [
         // Note that hue and saturation aren't commutative with grayscale as the the grayscale transform weighs each
         // color channel differently
         new object[] { new BrightnessTransform(300) },
@@ -472,5 +472,5 @@ public class TransformTests : ContextualTests
         new object[] { new RotationTransform(46) },
         new object[] { new ThumbnailTransform() },
         new object[] { new CropTransform(10, 10, 10, 10) }
-    };
+    ];
 }

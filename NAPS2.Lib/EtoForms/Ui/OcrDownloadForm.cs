@@ -77,7 +77,7 @@ public class OcrDownloadForm : EtoDialogBase
 
     private HashSet<string> SelectedLanguageComponents
     {
-        get { return new HashSet<string>(_languageList.Selection.Select(lang => $"ocr-{lang.Code}")); }
+        get { return [.._languageList.Selection.Select(lang => $"ocr-{lang.Code}")]; }
     }
 
     private void Download()

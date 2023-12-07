@@ -13,7 +13,7 @@ public static class CollectionExtensions
     /// <returns></returns>
     public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable)
     {
-        return new HashSet<T>(enumerable);
+        return [..enumerable];
     }
 #endif
 
@@ -134,7 +134,7 @@ public static class CollectionExtensions
     {
         if (!dict.ContainsKey(key))
         {
-            dict[key] = new HashSet<TValue>();
+            dict[key] = [];
         }
         dict[key].Add(value);
     }
@@ -152,7 +152,7 @@ public static class CollectionExtensions
     {
         if (!dict.ContainsKey(key))
         {
-            dict[key] = new HashSet<TValue>();
+            dict[key] = [];
         }
         foreach (var value in values)
         {

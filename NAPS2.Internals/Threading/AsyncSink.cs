@@ -5,10 +5,7 @@ public class AsyncSink<T> where T : class
 {
     private static TaskCompletionSource<T?> CreateTcs() => new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-    private readonly List<TaskCompletionSource<T?>> _items = new()
-    {
-        CreateTcs()
-    };
+    private readonly List<TaskCompletionSource<T?>> _items = [CreateTcs()];
     private bool _completed;
 
     public async IAsyncEnumerable<T> AsAsyncEnumerable()

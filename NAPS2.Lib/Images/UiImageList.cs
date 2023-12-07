@@ -8,7 +8,7 @@ public class UiImageList
     private ListSelection<UiImage> _selection;
     private StateToken _savedState = new(ImmutableList<ProcessedImage.WeakReference>.Empty);
 
-    public UiImageList() : this(new List<UiImage>())
+    public UiImageList() : this([])
     {
     }
 
