@@ -83,6 +83,9 @@ internal class TwainSessionScanRunner
             }
 
             _logger.LogDebug("NAPS2.TW - Opening source");
+            _logger.LogDebug(
+                "NAPS2.TW - Name: {Name}; Manu: {Manu}; Family: {Family}; Version: {Version}; Protocol: {Protocol}",
+                _source.Name, _source.Manufacturer, _source.ProductFamily, _source.Version, _source.ProtocolVersion);
             rc = _source.Open();
             if (rc != ReturnCode.Success)
             {
@@ -369,6 +372,7 @@ internal class TwainSessionScanRunner
         {
             case BitDepth.Color:
                 source.Capabilities.ICapPixelType.SetValue(PixelType.RGB);
+                source.Capabilities.ICapBitDepth.SetValue(24);
                 break;
             case BitDepth.Grayscale:
                 source.Capabilities.ICapPixelType.SetValue(PixelType.Gray);
