@@ -17,6 +17,12 @@ internal class PdfiumPdfExporter : IPdfExporter
         _logger = scanningContext.Logger;
     }
 
+    public Task<bool> Export(Stream stream, ICollection<ProcessedImage> images, PdfExportParams? exportParams = null, OcrParams? ocrParams = null,
+        ProgressHandler progress = default)
+    {
+        throw new NotSupportedException();
+    }
+
     public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
         PdfExportParams? exportParams = null, OcrParams? ocrParams = null, ProgressHandler progress = default)
     {

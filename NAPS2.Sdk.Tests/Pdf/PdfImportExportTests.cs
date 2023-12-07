@@ -38,6 +38,22 @@ public class PdfImportExportTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(OcrTestData))]
+    public async Task ImportExportToStream(OcrTestConfig config)
+    {
+        config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
+
+        var fileStream = File.OpenWrite(_exportPath);
+        var images = await _importer.Import(_importPath).ToListAsync();
+        Assert.Equal(2, images.Count);
+        await _exporter.Export(fileStream, images, ocrParams: config.OcrParams);
+        fileStream.Close();
+
+        PdfAsserts.AssertImages(_exportPath, PdfResources.word_p1, PdfResources.word_p2);
+    }
+
+    [Theory]
+    [ClassData(typeof(OcrTestData))]
     public async Task ImportInsertExport(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);

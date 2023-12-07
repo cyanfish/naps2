@@ -27,7 +27,15 @@ public class PdfExporter : IPdfExporter
         _logger = scanningContext.Logger;
     }
 
-    public async Task<bool> Export(string path, ICollection<ProcessedImage> images,
+    public Task<bool> Export(string path, ICollection<ProcessedImage> images,
+        PdfExportParams? exportParams = null, OcrParams? ocrParams = null, ProgressHandler progress = default)
+        => Export(new OutputPathOrStream(path, null), images, exportParams, ocrParams, progress);
+
+    public Task<bool> Export(Stream stream, ICollection<ProcessedImage> images,
+        PdfExportParams? exportParams = null, OcrParams? ocrParams = null, ProgressHandler progress = default)
+        => Export(new OutputPathOrStream(null, stream), images, exportParams, ocrParams, progress);
+
+    private async Task<bool> Export(OutputPathOrStream output, ICollection<ProcessedImage> images,
         PdfExportParams? exportParams = null, OcrParams? ocrParams = null, ProgressHandler progress = default)
     {
         return await Task.Run(async () =>
@@ -123,7 +131,7 @@ public class PdfExporter : IPdfExporter
                 var stream = FinalizeAndSaveDocument(document, exportParams);
                 if (progress.IsCancellationRequested) return false;
 
-                return MergePassthroughPages(stream, path, pdfPages, exportParams, progress);
+                return MergePassthroughPages(stream, output, pdfPages, exportParams, progress);
             }
             finally
             {
@@ -136,13 +144,12 @@ public class PdfExporter : IPdfExporter
         });
     }
 
-    private bool MergePassthroughPages(MemoryStream stream, string path, List<PageExportState> passthroughPages,
+    private bool MergePassthroughPages(MemoryStream stream, OutputPathOrStream output, List<PageExportState> passthroughPages,
         PdfExportParams exportParams, ProgressHandler progress)
     {
         if (!passthroughPages.Any())
         {
-            using var fileStream = new FileStream(path, FileMode.Create);
-            stream.CopyTo(fileStream);
+            output.CopyFromStream(stream);
             return true;
         }
         // TODO: Should we do this (or maybe the whole pdf export/import) in a worker to avoid contention?
@@ -186,7 +193,7 @@ public class PdfExporter : IPdfExporter
                     }
                     if (progress.IsCancellationRequested) return false;
                 }
-                destDoc.Save(path);
+                output.SaveDoc(destDoc);
                 return true;
             }
             finally
@@ -744,6 +751,34 @@ public class PdfExporter : IPdfExporter
 
         public void Dispose()
         {
+        }
+    }
+
+    private record OutputPathOrStream(string? Path, Stream? Stream)
+    {
+        public void CopyFromStream(MemoryStream inputStream)
+        {
+            if (Stream != null)
+            {
+                inputStream.CopyTo(Stream);
+            }
+            else
+            {
+                using var fileStream = new FileStream(Path!, FileMode.Create);
+                inputStream.CopyTo(fileStream);
+            }
+        }
+
+        public void SaveDoc(Pdfium.PdfDocument doc)
+        {
+            if (Stream != null)
+            {
+                doc.Save(Stream);
+            }
+            else
+            {
+                doc.Save(Path!);
+            }
         }
     }
 }
