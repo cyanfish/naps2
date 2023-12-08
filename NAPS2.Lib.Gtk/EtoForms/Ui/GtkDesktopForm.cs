@@ -71,8 +71,6 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void OnLoad(EventArgs e)
     {
-        // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
-        Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current!);
         base.OnLoad(e);
         var listView = (GtkListView<UiImage>) _listView;
         listView.NativeControl.StyleContext.AddClass("desktop-listview");

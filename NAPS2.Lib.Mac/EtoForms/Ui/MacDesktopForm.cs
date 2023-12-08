@@ -38,13 +38,6 @@ public class MacDesktopForm : DesktopForm
         _thumbnailController.Oversample = 2.0;
     }
 
-    protected override void OnLoad(EventArgs e)
-    {
-        // TODO: What's the best place to initialize this? It needs to happen from the UI event loop.
-        Invoker.Current = new SyncContextInvoker(SynchronizationContext.Current!);
-        base.OnLoad(e);
-    }
-
     protected override void UpdateTitle(ScanProfile? defaultProfile)
     {
         Title = UiStrings.Naps2;
