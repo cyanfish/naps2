@@ -10,6 +10,7 @@
         <SelfContained>true</SelfContained>
         <PublishSingleFile>true</PublishSingleFile>
         <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>partial</TrimMode>
 
         <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
 

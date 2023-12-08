@@ -15,6 +15,7 @@
         <SelfContained>true</SelfContained>
         <PublishSingleFile>true</PublishSingleFile>
         <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>partial</TrimMode>
         <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     </PropertyGroup>
 
