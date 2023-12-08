@@ -4,44 +4,38 @@ namespace NAPS2.ImportExport;
 
 public class MacScannedImagePrinter : IScannedImagePrinter
 {
-    public async Task<bool> PromptToPrint(
+    public Task<bool> PromptToPrint(
         Eto.Forms.Window parentWindow, IList<ProcessedImage> images, IList<ProcessedImage> selectedImages)
     {
         if (!images.Any())
         {
-            return false;
+            return Task.FromResult(false);
         }
-        return await Task.Run(() =>
+        using var view = new PaginatedImageView(images);
+        var printOp = NSPrintOperation.FromView(view, new NSPrintInfo
         {
-            return Invoker.Current.InvokeGet(() =>
-            {
-                using var view = new PaginatedImageView(images);
-                var printOp = NSPrintOperation.FromView(view, new NSPrintInfo
-                {
-                    LeftMargin = 0,
-                    BottomMargin = 0,
-                    RightMargin = 0,
-                    TopMargin = 0,
-                    HorizontalPagination = NSPrintingPaginationMode.Fit,
-                    VerticalPagination = NSPrintingPaginationMode.Fit,
-                    HorizontallyCentered = true,
-                    VerticallyCentered = true,
-                    Orientation = view.CurrentImage!.Width > view.CurrentImage.Height
-                        ? NSPrintingOrientation.Landscape
-                        : NSPrintingOrientation.Portrait
-                });
-                if (printOp.RunOperation())
-                {
-                    Log.Event(EventType.Print, new EventParams
-                    {
-                        Name = MiscResources.Print,
-                        Pages = (int) printOp.PageRange.Length
-                    });
-                    return true;
-                }
-                return false;
-            });
+            LeftMargin = 0,
+            BottomMargin = 0,
+            RightMargin = 0,
+            TopMargin = 0,
+            HorizontalPagination = NSPrintingPaginationMode.Fit,
+            VerticalPagination = NSPrintingPaginationMode.Fit,
+            HorizontallyCentered = true,
+            VerticallyCentered = true,
+            Orientation = view.CurrentImage!.Width > view.CurrentImage.Height
+                ? NSPrintingOrientation.Landscape
+                : NSPrintingOrientation.Portrait
         });
+        if (printOp.RunOperation())
+        {
+            Log.Event(EventType.Print, new EventParams
+            {
+                Name = MiscResources.Print,
+                Pages = (int) printOp.PageRange.Length
+            });
+            return Task.FromResult(true);
+        }
+        return Task.FromResult(false);
     }
 
     private class PaginatedImageView : NSBox
