@@ -5,14 +5,14 @@ namespace NAPS2.Escl.Server;
 
 public class EsclServer : IEsclServer
 {
-    private readonly Dictionary<EsclDeviceConfig, (MdnsAdvertiser advertiser, CancellationTokenSource cts)> _devices = new();
+    private readonly Dictionary<EsclDeviceConfig, DeviceContext> _devices = new();
     private bool _started;
     private CancellationTokenSource? _cts;
 
     public void AddDevice(EsclDeviceConfig deviceConfig)
     {
         var advertiser = new MdnsAdvertiser();
-        _devices[deviceConfig] = (advertiser, new CancellationTokenSource());
+        _devices[deviceConfig] = new DeviceContext(advertiser, new CancellationTokenSource());
         if (_started)
         {
             Task.Run(() => StartServerAndAdvertise(deviceConfig, advertiser));
@@ -21,13 +21,12 @@ public class EsclServer : IEsclServer
 
     public void RemoveDevice(EsclDeviceConfig deviceConfig)
     {
-        var (advertiser, cts) = _devices[deviceConfig];
+        var deviceCtx = _devices[deviceConfig];
         if (_started)
         {
-            // TODO: Maybe enforce ordering to ensure we don't unadvertise before advertising?
-            Task.Run(() => advertiser.Dispose());
+            deviceCtx.StartTask?.ContinueWith(_ => deviceCtx.Advertiser.Dispose());
         }
-        cts.Cancel();
+        deviceCtx.Cts.Cancel();
         _devices.Remove(deviceConfig);
     }
 
@@ -35,7 +34,7 @@ public class EsclServer : IEsclServer
     {
         if (_started)
         {
-            throw new InvalidOperationException();
+            return Task.CompletedTask;
         }
         _started = true;
         _cts = new CancellationTokenSource();
@@ -43,14 +42,16 @@ public class EsclServer : IEsclServer
         var tasks = new List<Task>();
         foreach (var device in _devices.Keys)
         {
-            tasks.Add(Task.Run(() => StartServerAndAdvertise(device, _devices[device].advertiser)));
+            var deviceCtx = _devices[device];
+            deviceCtx.StartTask = Task.Run(() => StartServerAndAdvertise(device, _devices[device].Advertiser));
+            tasks.Add(deviceCtx.StartTask);
         }
         return Task.WhenAll(tasks);
     }
 
     private async Task StartServerAndAdvertise(EsclDeviceConfig deviceConfig, MdnsAdvertiser advertiser)
     {
-        var cancelToken = CancellationTokenSource.CreateLinkedTokenSource(_cts!.Token, _devices[deviceConfig].cts.Token).Token;
+        var cancelToken = CancellationTokenSource.CreateLinkedTokenSource(_cts!.Token, _devices[deviceConfig].Cts.Token).Token;
         // Try to run the server with the port specified in the EsclDeviceConfig first. If that fails, try random ports
         // instead, and store the actually-used port back in EsclDeviceConfig so it can be advertised correctly.
         await PortFinder.RunWithSpecifiedOrRandomPort(deviceConfig.Port, async port =>
@@ -76,14 +77,15 @@ public class EsclServer : IEsclServer
     {
         if (!_started)
         {
-            throw new InvalidOperationException();
+            return;
         }
         _started = false;
 
         _cts!.Cancel();
         foreach (var device in _devices.Keys)
         {
-            _devices[device].advertiser.UnadvertiseDevice(device);
+            var deviceCtx = _devices[device];
+            deviceCtx.StartTask?.ContinueWith(_ => deviceCtx.Advertiser.UnadvertiseDevice(device));
         }
         _cts = null;
     }
@@ -94,5 +96,10 @@ public class EsclServer : IEsclServer
         {
             Stop();
         }
+    }
+
+    private record DeviceContext(MdnsAdvertiser Advertiser, CancellationTokenSource Cts)
+    {
+        public Task? StartTask { get; set; }
     }
 }
