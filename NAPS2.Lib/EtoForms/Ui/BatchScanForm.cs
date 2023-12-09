@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
 using Eto.Drawing;
@@ -411,15 +410,6 @@ public class BatchScanForm : EtoDialogBase
         else
         {
             Close();
-        }
-    }
-
-    protected override void OnClosing(CancelEventArgs e)
-    {
-        if (_cts.IsCancellationRequested)
-        {
-            // Keep dialog open while cancel is in progress to avoid concurrency issues
-            e.Cancel = true;
         }
     }
 }
