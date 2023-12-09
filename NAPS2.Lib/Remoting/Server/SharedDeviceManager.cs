@@ -8,13 +8,14 @@ namespace NAPS2.Remoting.Server;
 
 public class SharedDeviceManager : ISharedDeviceManager
 {
-    private const int LOCK_CHECK_INTERVAL = 10_000;
+    private const int STARTUP_RETRY_INTERVAL = 10_000;
 
     private readonly Naps2Config _config;
     private readonly FileConfigScope<ImmutableList<SharedDevice>> _scope;
     private readonly ScanServer _server;
     private FileStream? _lockFile;
-    private Timer? _lockCheckTimer;
+    private Timer? _startTimer;
+    private bool _userStarted;
 
     public SharedDeviceManager(ScanningContext scanningContext, Naps2Config config, string sharedDevicesConfigPath)
     {
@@ -32,26 +33,42 @@ public class SharedDeviceManager : ISharedDeviceManager
         {
             return;
         }
-        if (TakeLock())
+        lock (this)
         {
-            ResetLockTimer();
-            _server.Start();
+            _userStarted = true;
+            if (!TryStart())
+            {
+                // Retry after some interval in case the shared devices changed on disk or the sharing lock frees up
+                _startTimer ??= new Timer(_ => TryStart(), null, STARTUP_RETRY_INTERVAL, STARTUP_RETRY_INTERVAL);
+            }
         }
-        else if (_lockCheckTimer == null)
+    }
+
+    private bool TryStart()
+    {
+        lock (this)
         {
-            _lockCheckTimer = new Timer(_ => StartSharing(), null, LOCK_CHECK_INTERVAL, LOCK_CHECK_INTERVAL);
+            // Only start if (1) we haven't stopped, (2) we have devices to share, and (3) we can take the exclusive
+            // sharing lock (so multiple NAPS2 instances don't try to share duplicates of the same devices)
+            if (_userStarted && SharedDevices.Any() && TakeLock())
+            {
+                ResetStartTimer();
+                _server.Start();
+                return true;
+            }
+            return false;
         }
     }
 
     public void StopSharing()
     {
-        if (_config.Get(c => c.DisableScannerSharing))
+        lock (this)
         {
-            return;
+            _userStarted = false;
+            ResetStartTimer();
+            _server.Stop();
+            ReleaseLock();
         }
-        ResetLockTimer();
-        _server.Stop();
-        ReleaseLock();
     }
 
     private bool TakeLock()
@@ -59,7 +76,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         try
         {
             var path = Path.Combine(Paths.AppData, "sharing.lock");
-            _lockFile = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
+            _lockFile = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
             return true;
         }
         catch (IOException)
@@ -68,10 +85,10 @@ public class SharedDeviceManager : ISharedDeviceManager
         }
     }
 
-    private void ResetLockTimer()
+    private void ResetStartTimer()
     {
-        _lockCheckTimer?.Dispose();
-        _lockCheckTimer = null;
+        _startTimer?.Dispose();
+        _startTimer = null;
     }
 
     private void ReleaseLock()
@@ -91,6 +108,12 @@ public class SharedDeviceManager : ISharedDeviceManager
         devices = devices.Add(device);
         SharedDevices = devices;
         _server.RegisterDevice(device);
+        if (_startTimer != null)
+        {
+            // If startup was deferred, don't wait for the timer before retrying since we adding a device might allow
+            // us to start
+            TryStart();
+        }
     }
 
     public void RemoveSharedDevice(SharedDevice device)
