@@ -48,6 +48,16 @@ public abstract class EtoPlatform
         application.Run();
     }
 
+    public virtual void Invoke(Application application, Action action)
+    {
+        application.Invoke(action);
+    }
+
+    public virtual void AsyncInvoke(Application application, Action action)
+    {
+        application.AsyncInvoke(action);
+    }
+
     public virtual void SetContainerSize(Window window, Control container, Size size, int padding)
     {
     }
