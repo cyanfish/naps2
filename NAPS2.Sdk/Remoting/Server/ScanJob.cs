@@ -9,11 +9,16 @@ namespace NAPS2.Remoting.Server;
 
 internal class ScanJob : IEsclScanJob
 {
+    private const string CT_PDF = "application/pdf";
+    private const string CT_PNG = "image/png";
+    private const string CT_JPEG = "image/jpeg";
+
     private readonly ScanningContext _scanningContext;
     private readonly ScanController _controller;
     private readonly CancellationTokenSource _cts = new();
     private readonly IAsyncEnumerator<ProcessedImage> _enumerable;
     private readonly TaskCompletionSource<bool> _completedTcs = new();
+    private readonly List<ProcessedImage> _pdfImages = [];
     private Action<StatusTransition>? _callback;
     private bool _hasError;
 
@@ -56,8 +61,8 @@ internal class ScanJob : IEsclScanJob
         var requestedFormat = settings.DocumentFormat;
         ContentType = requestedFormat switch
         {
-            "image/png" or "application/pdf" => requestedFormat,
-            _ => "image/jpeg"
+            CT_PNG or CT_PDF => requestedFormat,
+            _ => CT_JPEG
         };
         try
         {
@@ -84,22 +89,39 @@ internal class ScanJob : IEsclScanJob
         _callback = callback;
     }
 
-    public async Task<bool> WaitForNextDocument() => await _enumerable.MoveNextAsync();
+    public async Task<bool> WaitForNextDocument()
+    {
+        if (ContentType == CT_PDF)
+        {
+            // For PDFs we merge all the pages into a single PDF document, so we need to wait for the full scan here
+            if (!await _enumerable.MoveNextAsync())
+            {
+                return false;
+            }
+            do
+            {
+                _pdfImages.Add(_enumerable.Current);
+            } while (await _enumerable.MoveNextAsync());
+            return true;
+        }
+
+        return await _enumerable.MoveNextAsync();
+    }
 
     public async Task WriteDocumentTo(Stream stream)
     {
-        if (ContentType == "image/jpeg")
+        if (ContentType == CT_JPEG)
         {
             _enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
         }
-        if (ContentType == "image/png")
+        if (ContentType == CT_PNG)
         {
             _enumerable.Current.Save(stream, ImageFileFormat.Png);
         }
-        if (ContentType == "application/pdf")
+        if (ContentType == CT_PDF)
         {
             var pdfExporter = new PdfExporter(_scanningContext);
-            await pdfExporter.Export(stream, [_enumerable.Current]);
+            await pdfExporter.Export(stream, _pdfImages);
         }
     }
 
