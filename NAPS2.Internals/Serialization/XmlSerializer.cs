@@ -50,6 +50,7 @@ public abstract class XmlSerializer
         { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new ImmutableListSerializer() } },
         { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new ImmutableHashSetSerializer() } },
         { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
+        { typeof(Guid), new XmlTypeInfo { CustomSerializer = new GuidSerializer() } },
         { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
     };
 
@@ -649,6 +650,19 @@ public abstract class XmlSerializer
         protected override DateTime Deserialize(XElement element)
         {
             return DateTime.Parse(element.Value, CultureInfo.InvariantCulture);
+        }
+    }
+
+    protected class GuidSerializer : CustomXmlSerializer<Guid>
+    {
+        protected override void Serialize(Guid obj, XElement element)
+        {
+            element.Value = obj.ToString();
+        }
+
+        protected override Guid Deserialize(XElement element)
+        {
+            return Guid.Parse(element.Value);
         }
     }
 
