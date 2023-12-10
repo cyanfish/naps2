@@ -25,7 +25,7 @@ internal static class RemotingHelper
 
     private static Exception CreateExceptionType(Type? exceptionType)
     {
-        if (exceptionType != null)
+        if (exceptionType != null && typeof(ScanDriverException).IsAssignableFrom(exceptionType))
         {
             try
             {
