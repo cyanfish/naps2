@@ -20,23 +20,21 @@ internal class ScanJob : IEsclScanJob
     private readonly TaskCompletionSource<bool> _completedTcs = new();
     private readonly List<ProcessedImage> _pdfImages = [];
     private Action<StatusTransition>? _callback;
-    private bool _hasError;
 
     public ScanJob(ScanningContext scanningContext, ScanController controller, ScanDevice device,
         EsclScanSettings settings)
     {
         _scanningContext = scanningContext;
         _controller = controller;
-        _controller.ScanEnd += (_, _) =>
+        _controller.ScanEnd += (_, args) =>
         {
             _callback?.Invoke(StatusTransition.DeviceIdle);
-            if (_hasError)
+            if (args.HasError)
             {
                 _callback?.Invoke(StatusTransition.AbortJob);
             }
-            _completedTcs.TrySetResult(!_hasError);
+            _completedTcs.TrySetResult(!args.HasError);
         };
-        _controller.ScanError += (_, _) => { _hasError = true; };
         var options = new ScanOptions
         {
             Device = device,

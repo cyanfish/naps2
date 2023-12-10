@@ -130,9 +130,9 @@ public class ScanController
         options = _scanOptionsValidator.ValidateAll(options, _scanningContext, true);
         int pageNumber = 0;
 
+        Exception? scanError = null;
         void ScanStartCallback() => ScanStart?.Invoke(this, EventArgs.Empty);
-        void ScanEndCallback() => ScanEnd?.Invoke(this, EventArgs.Empty);
-        void ScanErrorCallback(Exception ex) => ScanError?.Invoke(this, new ScanErrorEventArgs(ex));
+        void ScanEndCallback() => ScanEnd?.Invoke(this, new ScanEndEventArgs(scanError));
         void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
 
         void PageProgressCallback(double progress) =>
@@ -156,7 +156,7 @@ public class ScanController
             }
             catch (Exception ex)
             {
-                ScanErrorCallback(ex);
+                scanError = ex;
                 if (PropagateErrors)
                 {
                     throw;
@@ -181,15 +181,10 @@ public class ScanController
     public event EventHandler? ScanStart;
 
     /// <summary>
-    /// Occurs when a Scan operation has completed.
+    /// Occurs when a Scan operation has completed. If the scan ends due to an error, the Error property will be set on
+    /// the event args. For more detailed diagnostics, set ScanningContext.Logger.
     /// </summary>
-    public event EventHandler? ScanEnd;
-
-    /// <summary>
-    /// Occurs when a fatal error happens during a Scan operation. For more detailed diagnostics, set
-    /// ScanningContext.Logger.
-    /// </summary>
-    public event EventHandler<ScanErrorEventArgs>? ScanError;
+    public event EventHandler<ScanEndEventArgs>? ScanEnd;
 
     /// <summary>
     /// Occurs when scanning starts for a page. This can be called multiple times during a single Scan operation if it

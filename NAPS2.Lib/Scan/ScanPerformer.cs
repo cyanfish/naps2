@@ -65,18 +65,16 @@ internal class ScanPerformer : IScanPerformer
             _scanBridgeFactory);
         var op = new ScanOperation(options);
 
-        Exception? error = null;
         controller.PageStart += (sender, args) => op.NextPage(args.PageNumber);
         controller.ScanEnd += (sender, args) =>
         {
             // Close the progress window before showing the error dialog
             op.Completed();
-            if (error != null)
+            if (args.Error != null)
             {
-                HandleError(error);
+                HandleError(args.Error);
             }
         };
-        controller.ScanError += (sender, args) => error = args.Exception;
         controller.PropagateErrors = false;
         TranslateProgress(controller, op);
 
