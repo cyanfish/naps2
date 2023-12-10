@@ -11,7 +11,7 @@ public class SharedDeviceManager : ISharedDeviceManager
     private const int STARTUP_RETRY_INTERVAL = 10_000;
 
     private readonly Naps2Config _config;
-    private readonly FileConfigScope<ImmutableList<SharedDevice>> _scope;
+    private readonly FileConfigScope<SharingConfig> _scope;
     private readonly ScanServer _server;
     private FileStream? _lockFile;
     private Timer? _startTimer;
@@ -20,10 +20,11 @@ public class SharedDeviceManager : ISharedDeviceManager
     public SharedDeviceManager(ScanningContext scanningContext, Naps2Config config, string sharedDevicesConfigPath)
     {
         _config = config;
-        _scope = ConfigScope.File(sharedDevicesConfigPath, new ConfigStorageSerializer<ImmutableList<SharedDevice>>(),
+        _scope = ConfigScope.File(sharedDevicesConfigPath, new ConfigStorageSerializer<SharingConfig>(),
             ConfigScopeMode.ReadWrite);
         _server = new ScanServer(scanningContext, new EsclServer());
         _server.SetDefaultIcon(Icons.scanner_128);
+        _server.InstanceId = _scope.GetOrDefault(c => c.InstanceId) ?? Guid.NewGuid();
         RegisterDevicesFromConfig();
     }
 
@@ -141,8 +142,15 @@ public class SharedDeviceManager : ISharedDeviceManager
 
     public ImmutableList<SharedDevice> SharedDevices
     {
-        get => _scope.GetOr(c => c, ImmutableList<SharedDevice>.Empty);
-        private set => _scope.Set(c => c, value);
+        get => _scope.GetOr(c => c.SharedDevices, ImmutableList<SharedDevice>.Empty);
+        private set
+        {
+            if (!_scope.TryGet(c => c.InstanceId, out _))
+            {
+                _scope.Set(c => c.InstanceId, _server.InstanceId);
+            }
+            _scope.Set(c => c.SharedDevices, value);
+        }
     }
 
     private void RegisterDevicesFromConfig()

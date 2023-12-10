@@ -10,14 +10,11 @@ public record SharedDevice
     public required ScanDevice Device { get; init; }
     public required int Port { get; init; }
 
-    public string Uuid
+    public string GetUuid(Guid instanceId)
     {
-        get
-        {
-            var key = $"{Device.Driver};{Device.ID};{Name}";
-            var uniqueHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(key));
-            return new Guid(uniqueHash.Take(16).ToArray()).ToString("D");
-        }
+        var key = $"{Device.Driver};{Device.ID};{Name};{instanceId}";
+        var uniqueHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(key));
+        return new Guid(uniqueHash.Take(16).ToArray()).ToString("D");
     }
 
     public virtual bool Equals(SharedDevice? other) =>

@@ -21,6 +21,12 @@ public class ScanServer : IDisposable
 
     internal ScanController ScanController { get; set; }
 
+    /// <summary>
+    /// A unique ID that is used to help derive the UUIDs for shared scanners. If you expect to have multiple shared
+    /// scanners with the same name/model on the same network it may be useful to set this to a unique value.
+    /// </summary>
+    public Guid InstanceId { get; set; }
+
     public void SetDefaultIcon(IMemoryImage icon) =>
         SetDefaultIcon(icon.SaveToMemoryStream(ImageFileFormat.Png).ToArray());
 
@@ -36,8 +42,8 @@ public class ScanServer : IDisposable
         _esclServer.AddDevice(esclDeviceConfig);
     }
 
-    public void UnregisterDevice(ScanDevice device, string? displayName = null, int port = 0) =>
-        UnregisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name, Port = port });
+    public void UnregisterDevice(ScanDevice device, string? displayName = null) =>
+        UnregisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name, Port = 0 });
 
     public void UnregisterDevice(SharedDevice sharedDevice)
     {
@@ -54,7 +60,7 @@ public class ScanServer : IDisposable
             Capabilities = new EsclCapabilities
             {
                 MakeAndModel = device.Name,
-                Uuid = device.Uuid,
+                Uuid = device.GetUuid(InstanceId),
                 IconPng = _defaultIconPng,
                 // TODO: Ideally we want to get the actual device capabilities
                 PlatenCaps = new EsclInputCaps
