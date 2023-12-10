@@ -29,11 +29,16 @@ internal class EsclScanDriver : IScanDriver
     public async Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         // TODO: Run location in a persistent background service
+        var localIPsTask = options.ExcludeLocalIPs ? LocalIPsHelper.Get() : null;
         using var locator = new EsclServiceLocator(service =>
         {
             // Store both the IP and UUID so we can preferentially find by the IP, but also fall back to looking for
             // the UUID in case the IP changed
-            var ip = service.IpV4 ?? service.IpV6;
+            var ip = service.IpV4 ?? service.IpV6!;
+            if (options.ExcludeLocalIPs && localIPsTask!.Result.Contains(ip))
+            {
+                return;
+            }
             var id = $"{ip}|{service.Uuid}";
             var name = string.IsNullOrEmpty(service.ScannerName)
                 ? $"{ip}"

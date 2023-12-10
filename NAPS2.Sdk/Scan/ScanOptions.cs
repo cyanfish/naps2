@@ -70,6 +70,12 @@ public class ScanOptions
     public EsclOptions EsclOptions { get; set; } = new();
 
     /// <summary>
+    /// When querying devices, ignore networked devices that are at the same IP as the current computer (so that devices
+    /// shared with ScanServer aren't given duplicate entries).
+    /// </summary>
+    public bool ExcludeLocalIPs { get; set; }
+
+    /// <summary>
     /// Options for detecting barcodes during the scan.
     /// </summary>
     public BarcodeDetectionOptions BarcodeDetectionOptions { get; set; } = new();

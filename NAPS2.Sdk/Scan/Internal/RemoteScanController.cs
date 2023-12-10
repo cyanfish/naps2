@@ -27,14 +27,6 @@ internal class RemoteScanController : IRemoteScanController
             {
                 return;
             }
-            if (options.Driver == Driver.Escl)
-            {
-                if (options.EsclOptions.ExcludeUuids.Contains(Escl.EsclScanDriver.GetUuid(device)))
-                {
-                    return;
-                }
-            }
-
             callback(device);
         });
     }

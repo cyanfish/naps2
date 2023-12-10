@@ -23,13 +23,11 @@ internal class ScanPerformer : IScanPerformer
     private readonly ScanOptionsValidator _scanOptionsValidator;
     private readonly IScanBridgeFactory _scanBridgeFactory;
     private readonly OcrOperationManager _ocrOperationManager;
-    private readonly ISharedDeviceManager _sharedDeviceManager;
 
     public ScanPerformer(IDevicePrompt devicePrompt, Naps2Config config, OperationProgress operationProgress,
         AutoSaver autoSaver, IProfileManager profileManager, ErrorOutput errorOutput,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory,
-        ScanningContext scanningContext, OcrOperationManager ocrOperationManager,
-        ISharedDeviceManager sharedDeviceManager)
+        ScanningContext scanningContext, OcrOperationManager ocrOperationManager)
     {
         _devicePrompt = devicePrompt;
         _config = config;
@@ -41,7 +39,6 @@ internal class ScanPerformer : IScanPerformer
         _scanBridgeFactory = scanBridgeFactory;
         _scanningContext = scanningContext;
         _ocrOperationManager = ocrOperationManager;
-        _sharedDeviceManager = sharedDeviceManager;
     }
 
     public async Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
@@ -200,13 +197,10 @@ internal class ScanPerformer : IScanPerformer
                 IncludeWiaDevices = false
                 // TODO: Consider adding a user option for TwainOptions.ShowProgress instead of our progress window
             },
-            EsclOptions =
-            {
-                ExcludeUuids = _sharedDeviceManager.SharedDevices.Select(x => x.Uuid).ToList()
-            },
             KeyValueOptions = scanProfile.KeyValueOptions != null
                 ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
                 : new KeyValueScanOptions(),
+            ExcludeLocalIPs = true,
             BarcodeDetectionOptions =
             {
                 DetectBarcodes = scanParams.DetectPatchT ||
