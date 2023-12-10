@@ -167,6 +167,7 @@ internal class WiaScanDriver : IScanDriver
 
             using var transfer = item.StartTransfer();
             Exception? scanException = null;
+            bool hasAtLeastOneImage = false;
             transfer.PageScanned += (sender, args) =>
             {
                 try
@@ -177,6 +178,7 @@ internal class WiaScanDriver : IScanDriver
                         _logger.LogError("Ignoring empty stream from WIA");
                         return;
                     }
+                    hasAtLeastOneImage = true;
                     using var image = _scanningContext.ImageContext.Load(stream);
                     _callback(image);
                 }
@@ -219,6 +221,10 @@ internal class WiaScanDriver : IScanDriver
             if (scanException != null)
             {
                 throw scanException;
+            }
+            if (!hasAtLeastOneImage && !_cancelToken.IsCancellationRequested)
+            {
+                throw new NoPagesException();
             }
         }
 
