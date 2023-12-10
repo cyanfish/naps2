@@ -35,7 +35,7 @@ internal class EsclScanDriver : IScanDriver
             // Store both the IP and UUID so we can preferentially find by the IP, but also fall back to looking for
             // the UUID in case the IP changed
             var ip = service.IpV4 ?? service.IpV6!;
-            if (options.ExcludeLocalIPs && localIPsTask!.Result.Contains(ip))
+            if (options.ExcludeLocalIPs && localIPsTask!.Result.Contains(ip.ToString()))
             {
                 return;
             }

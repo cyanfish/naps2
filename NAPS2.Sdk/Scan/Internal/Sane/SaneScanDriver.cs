@@ -29,6 +29,17 @@ internal class SaneScanDriver : IScanDriver
 
     public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
+        var localIPsTask = options.ExcludeLocalIPs ? LocalIPsHelper.Get() : null;
+
+        void MaybeCallback(SaneDeviceInfo device)
+        {
+            if (options.ExcludeLocalIPs && GetIP(device) is { } ip && localIPsTask!.Result.Contains(ip))
+            {
+                return;
+            }
+            callback(GetScanDevice(device));
+        }
+
         return Task.Run(() =>
         {
             // TODO: This is crashing after a delay for no apparent reason.
@@ -38,13 +49,13 @@ internal class SaneScanDriver : IScanDriver
             // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
             if (Installation.CanStreamDevices)
             {
-                client.StreamDevices(device => callback(GetScanDevice(device)), cancelToken);
+                client.StreamDevices(MaybeCallback, cancelToken);
             }
             else
             {
                 foreach (var device in client.GetDevices())
                 {
-                    callback(GetScanDevice(device));
+                    MaybeCallback(device);
                 }
             }
         });
@@ -69,7 +80,24 @@ internal class SaneScanDriver : IScanDriver
             // TODO: The sane-airscan ID isn't persistent, can we work around that somehow and persist based on IP?
             return $"{device.Model} ({backend}:{device.Type})";
         }
-        return$"{device.Model} ({backend})";
+        return $"{device.Model} ({backend})";
+    }
+
+    private string? GetIP(SaneDeviceInfo device)
+    {
+        var backend = device.Name.Split(':')[0];
+        if (backend == "escl")
+        {
+            // Name is in the form "escl:http://xx.xx.xx.xx:yy"
+            var uri = new Uri(device.Name.Substring(device.Name.IndexOf(":", StringComparison.InvariantCulture) + 1));
+            return uri.Host;
+        }
+        if (backend == "airscan")
+        {
+            // Type is in the form "ip=xx.xx.xx.xx"
+            return device.Type.Substring(3);
+        }
+        return null;
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
