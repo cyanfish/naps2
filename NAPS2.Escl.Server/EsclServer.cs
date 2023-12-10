@@ -1,5 +1,7 @@
 using EmbedIO;
 using EmbedIO.WebApi;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace NAPS2.Escl.Server;
 
@@ -8,6 +10,8 @@ public class EsclServer : IEsclServer
     private readonly Dictionary<EsclDeviceConfig, DeviceContext> _devices = new();
     private bool _started;
     private CancellationTokenSource? _cts;
+
+    public ILogger Logger { get; set; } = NullLogger.Instance;
 
     public void AddDevice(EsclDeviceConfig deviceConfig)
     {
@@ -69,8 +73,15 @@ public class EsclServer : IEsclServer
         var server = new WebServer(o => o
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url))
+            .HandleUnhandledException(UnhandledServerException)
             .WithWebApi("/eSCL", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
         await server.StartAsync(cancelToken);
+    }
+
+    private Task UnhandledServerException(IHttpContext ctx, Exception ex)
+    {
+        Logger.LogError(ex, "Unhandled ESCL server error");
+        return Task.CompletedTask;
     }
 
     public void Stop()

@@ -15,6 +15,7 @@ public class ScanServer : IDisposable
     {
         _scanningContext = scanningContext;
         _esclServer = esclServer;
+        _esclServer.Logger = _scanningContext.Logger;
         ScanController = new ScanController(scanningContext);
     }
 
