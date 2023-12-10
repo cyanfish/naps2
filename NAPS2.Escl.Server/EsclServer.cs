@@ -74,7 +74,7 @@ public class EsclServer : IEsclServer
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url))
             .HandleUnhandledException(UnhandledServerException)
-            .WithWebApi("/eSCL", m => m.WithController(() => new EsclApiController(deviceConfig, serverState)));
+            .WithWebApi("/eSCL", m => m.WithController(() => new EsclApiController(deviceConfig, serverState, Logger)));
         await server.StartAsync(cancelToken);
     }
 

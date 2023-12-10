@@ -1,7 +1,8 @@
-namespace NAPS2.Escl.Server;
+namespace NAPS2.Escl;
 
-public enum JobStatus
+public enum EsclJobState
 {
+    Unknown,
     Pending,
     Processing,
     Completed,

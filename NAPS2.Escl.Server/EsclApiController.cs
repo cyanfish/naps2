@@ -1,9 +1,9 @@
-using System.Diagnostics;
 using System.Reflection;
 using System.Xml.Linq;
 using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
+using Microsoft.Extensions.Logging;
 
 namespace NAPS2.Escl.Server;
 
@@ -14,11 +14,13 @@ internal class EsclApiController : WebApiController
 
     private readonly EsclDeviceConfig _deviceConfig;
     private readonly EsclServerState _serverState;
+    private readonly ILogger _logger;
 
-    internal EsclApiController(EsclDeviceConfig deviceConfig, EsclServerState serverState)
+    internal EsclApiController(EsclDeviceConfig deviceConfig, EsclServerState serverState, ILogger logger)
     {
         _deviceConfig = deviceConfig;
         _serverState = serverState;
+        _logger = logger;
     }
 
     [Route(HttpVerbs.Get, "/ScannerCapabilities")]
@@ -37,42 +39,53 @@ internal class EsclApiController : WebApiController
                     new XElement(ScanNs + "IconURI", iconUri),
                     new XElement(ScanNs + "Naps2Extensions", "Progress"),
                     new XElement(ScanNs + "Platen",
-                        new XElement(ScanNs + "PlatenInputCaps",
-                            new XElement(ScanNs + "MinWidth", "1"),
-                            new XElement(ScanNs + "MaxWidth", "3000"),
-                            new XElement(ScanNs + "MinHeight", "1"),
-                            new XElement(ScanNs + "MaxHeight", "3600"),
-                            new XElement(ScanNs + "MaxScanRegions", "1"),
-                            new XElement(ScanNs + "SettingProfiles",
-                                new XElement(ScanNs + "SettingProfile",
-                                    new XElement(ScanNs + "ColorModes",
-                                        new XElement(ScanNs + "ColorMode", "BlackAndWhite1"),
-                                        new XElement(ScanNs + "ColorMode", "Grayscale8"),
-                                        new XElement(ScanNs + "ColorMode", "RGB24")),
-                                    new XElement(ScanNs + "DocumentFormats",
-                                        new XElement(PwgNs + "DocumentFormat", "application/pdf"),
-                                        new XElement(PwgNs + "DocumentFormat", "image/jpeg"),
-                                        new XElement(PwgNs + "DocumentFormat", "image/png"),
-                                        new XElement(ScanNs + "DocumentFormatExt", "application/pdf"),
-                                        new XElement(ScanNs + "DocumentFormatExt", "image/jpeg"),
-                                        new XElement(ScanNs + "DocumentFormatExt", "image/png")
-                                    ),
-                                    new XElement(ScanNs + "SupportedResolutions",
-                                        new XElement(ScanNs + "DiscreteResolutions",
-                                            CreateResolution(100),
-                                            CreateResolution(150),
-                                            CreateResolution(200),
-                                            CreateResolution(300),
-                                            CreateResolution(400),
-                                            CreateResolution(600),
-                                            CreateResolution(800),
-                                            CreateResolution(1200),
-                                            CreateResolution(2400),
-                                            CreateResolution(4800)
-                                        ))))))));
+                        new XElement(ScanNs + "PlatenInputCaps", GetCommonInputCaps())),
+                    new XElement(ScanNs + "Adf",
+                        new XElement(ScanNs + "AdfSimplexInputCaps", GetCommonInputCaps()),
+                        new XElement(ScanNs + "AdfDuplexInputCaps", GetCommonInputCaps()))));
         Response.ContentType = "text/xml";
         using var writer = new StreamWriter(HttpContext.OpenResponseStream());
         await writer.WriteAsync(doc);
+    }
+
+    private object[] GetCommonInputCaps()
+    {
+        // TODO: After implementing scanner capabilities this should be scanner-specific
+        return
+        [
+            new XElement(ScanNs + "MinWidth", "1"),
+            new XElement(ScanNs + "MaxWidth", "3000"),
+            new XElement(ScanNs + "MinHeight", "1"),
+            new XElement(ScanNs + "MaxHeight", "3600"),
+            new XElement(ScanNs + "MaxScanRegions", "1"),
+            new XElement(ScanNs + "SettingProfiles",
+                new XElement(ScanNs + "SettingProfile",
+                    new XElement(ScanNs + "ColorModes",
+                        new XElement(ScanNs + "ColorMode", "BlackAndWhite1"),
+                        new XElement(ScanNs + "ColorMode", "Grayscale8"),
+                        new XElement(ScanNs + "ColorMode", "RGB24")),
+                    new XElement(ScanNs + "DocumentFormats",
+                        new XElement(PwgNs + "DocumentFormat", "application/pdf"),
+                        new XElement(PwgNs + "DocumentFormat", "image/jpeg"),
+                        new XElement(PwgNs + "DocumentFormat", "image/png"),
+                        new XElement(ScanNs + "DocumentFormatExt", "application/pdf"),
+                        new XElement(ScanNs + "DocumentFormatExt", "image/jpeg"),
+                        new XElement(ScanNs + "DocumentFormatExt", "image/png")
+                    ),
+                    new XElement(ScanNs + "SupportedResolutions",
+                        new XElement(ScanNs + "DiscreteResolutions",
+                            CreateResolution(100),
+                            CreateResolution(150),
+                            CreateResolution(200),
+                            CreateResolution(300),
+                            CreateResolution(400),
+                            CreateResolution(600),
+                            CreateResolution(800),
+                            CreateResolution(1200),
+                            CreateResolution(2400),
+                            CreateResolution(4800)
+                        ))))
+        ];
     }
 
     private XElement CreateResolution(int res) =>
@@ -100,26 +113,29 @@ internal class EsclApiController : WebApiController
     public async Task GetScannerStatus()
     {
         var jobsElement = new XElement(ScanNs + "Jobs");
-        foreach (var jobState in _serverState.Jobs.Values)
+        foreach (var jobInfo in _serverState.Jobs.Values)
         {
             jobsElement.Add(new XElement(ScanNs + "JobInfo",
-                new XElement(PwgNs + "JobUri", $"/eSCL/ScanJobs/{jobState.Id}"),
-                new XElement(PwgNs + "JobUuid", jobState.Id),
-                new XElement(ScanNs + "Age", Math.Ceiling(jobState.LastUpdated.Elapsed.TotalSeconds)),
+                new XElement(PwgNs + "JobUri", $"/eSCL/ScanJobs/{jobInfo.Id}"),
+                new XElement(PwgNs + "JobUuid", jobInfo.Id),
+                new XElement(ScanNs + "Age", Math.Ceiling(jobInfo.LastUpdated.Elapsed.TotalSeconds)),
                 // TODO: real data
                 new XElement(PwgNs + "ImagesCompleted",
-                    jobState.Status is JobStatus.Pending or JobStatus.Processing ? "0" : "1"),
+                    jobInfo.State is EsclJobState.Pending or EsclJobState.Processing ? "0" : "1"),
                 new XElement(PwgNs + "ImagesToTransfer", "1"),
-                new XElement(PwgNs + "JobState", jobState.Status.ToString()),
+                new XElement(PwgNs + "JobState", jobInfo.State.ToString()),
                 new XElement(PwgNs + "JobStateReasons",
                     new XElement(PwgNs + "JobStateReason",
-                        jobState.Status == JobStatus.Processing ? "JobScanning" : "JobCompletedSuccessfully"))));
+                        jobInfo.State == EsclJobState.Processing ? "JobScanning" : "JobCompletedSuccessfully"))));
         }
+        var scannerState = _serverState.IsProcessing ? EsclScannerState.Processing : EsclScannerState.Idle;
+        var adfState = _serverState.IsProcessing ? EsclAdfState.ScannerAdfProcessing : EsclAdfState.ScannedAdfLoaded;
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerStatus",
                     new XElement(PwgNs + "Version", "2.6"),
-                    new XElement(PwgNs + "State", _serverState.IsProcessing ? "Processing" : "Idle"),
+                    new XElement(PwgNs + "State", scannerState),
+                    new XElement(ScanNs + "AdfState", adfState),
                     jobsElement
                 ));
         Response.ContentType = "text/xml";
@@ -148,7 +164,7 @@ internal class EsclApiController : WebApiController
             return;
         }
         _serverState.IsProcessing = true;
-        var jobState = JobState.CreateNewJob(_serverState, _deviceConfig.CreateJob(settings));
+        var jobState = JobInfo.CreateNewJob(_serverState, _deviceConfig.CreateJob(settings));
         _serverState.Jobs[jobState.Id] = jobState;
         Response.Headers.Add("Location", $"{Request.Url}/{jobState.Id}");
         Response.StatusCode = 201; // Created
@@ -158,7 +174,7 @@ internal class EsclApiController : WebApiController
     public void CancelScanJob(string jobId)
     {
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
-            jobState.Status is JobStatus.Pending or JobStatus.Processing)
+            jobState.State is EsclJobState.Pending or EsclJobState.Processing)
         {
             jobState.Job.Cancel();
         }
@@ -177,7 +193,7 @@ internal class EsclApiController : WebApiController
     public async Task Progress(string jobId)
     {
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
-            jobState.Status is JobStatus.Pending or JobStatus.Processing)
+            jobState.State is EsclJobState.Pending or EsclJobState.Processing)
         {
             SetChunkedResponse();
             using var stream = Response.OutputStream;
@@ -193,9 +209,20 @@ internal class EsclApiController : WebApiController
     public async Task NextDocument(string jobId)
     {
         if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
-            jobState.Status is JobStatus.Pending or JobStatus.Processing)
+            jobState.State is EsclJobState.Pending or EsclJobState.Processing)
         {
-            if (await jobState.Job.WaitForNextDocument())
+            bool result;
+            try
+            {
+                result = await jobState.Job.WaitForNextDocument();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug(ex, "ESCL server error waiting for document");
+                Response.StatusCode = 500;
+                return;
+            }
+            if (result)
             {
                 Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobState.Id}/1");
                 SetChunkedResponse();
@@ -206,7 +233,7 @@ internal class EsclApiController : WebApiController
             }
             else
             {
-                jobState.Status = JobStatus.Completed;
+                jobState.State = EsclJobState.Completed;
                 Response.StatusCode = 404;
             }
         }

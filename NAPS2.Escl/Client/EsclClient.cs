@@ -44,10 +44,21 @@ public class EsclClient
         {
             throw new InvalidOperationException("Unexpected root element: " + doc.Root?.Name);
         }
+        var jobStates = new Dictionary<string, EsclJobState>();
+        foreach (var jobInfoEl in root.Element(ScanNs + "Jobs")?.Elements(ScanNs + "JobInfo") ?? [])
+        {
+            var jobUri = jobInfoEl.Element(PwgNs + "JobUri")?.Value;
+            var jobState = ParseHelper.MaybeParseEnum(jobInfoEl.Element(PwgNs + "JobState"), EsclJobState.Unknown);
+            if (jobUri != null && jobState != EsclJobState.Unknown)
+            {
+                jobStates.Add(jobUri, jobState);
+            }
+        }
         return new EsclScannerStatus
         {
             State = ParseHelper.MaybeParseEnum(root.Element(PwgNs + "State"), EsclScannerState.Unknown),
-            AdfState = ParseHelper.MaybeParseEnum(root.Element(ScanNs + "AdfState"), EsclAdfState.Unknown)
+            AdfState = ParseHelper.MaybeParseEnum(root.Element(ScanNs + "AdfState"), EsclAdfState.Unknown),
+            JobStates = jobStates
         };
     }
 

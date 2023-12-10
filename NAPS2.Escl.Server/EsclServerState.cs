@@ -4,5 +4,5 @@ internal class EsclServerState
 {
     public bool IsProcessing { get; set; }
 
-    public Dictionary<string, JobState> Jobs { get; } = new();
+    public Dictionary<string, JobInfo> Jobs { get; } = new();
 }

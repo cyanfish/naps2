@@ -2,14 +2,14 @@ using System.Diagnostics;
 
 namespace NAPS2.Escl.Server;
 
-internal class JobState
+internal class JobInfo
 {
-    public static JobState CreateNewJob(EsclServerState serverState, IEsclScanJob job)
+    public static JobInfo CreateNewJob(EsclServerState serverState, IEsclScanJob job)
     {
-        var state = new JobState
+        var state = new JobInfo
         {
             Id = Guid.NewGuid().ToString("D"),
-            Status = JobStatus.Processing,
+            State = EsclJobState.Processing,
             LastUpdated = Stopwatch.StartNew(),
             Job = job
         };
@@ -17,12 +17,12 @@ internal class JobState
         {
             if (transition == StatusTransition.CancelJob)
             {
-                state.Status = JobStatus.Canceled;
+                state.State = EsclJobState.Canceled;
                 state.LastUpdated = Stopwatch.StartNew();
             }
             if (transition == StatusTransition.AbortJob)
             {
-                state.Status = JobStatus.Aborted;
+                state.State = EsclJobState.Aborted;
                 state.LastUpdated = Stopwatch.StartNew();
             }
             if (transition == StatusTransition.DeviceIdle)
@@ -35,7 +35,7 @@ internal class JobState
 
     public required string Id { get; init; }
 
-    public required JobStatus Status { get; set; }
+    public required EsclJobState State { get; set; }
 
     public required Stopwatch LastUpdated { get; set; }
 
