@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Xml.Linq;
 
 namespace NAPS2.Escl.Client;
@@ -141,13 +140,10 @@ internal static class CapabilitiesParser
         return new EsclInputCaps
         {
             SettingProfiles = settingProfiles,
-            MinWidth = MaybeParseInt(element.Element(ScanNs + "MinWidth")),
-            MaxWidth = MaybeParseInt(element.Element(ScanNs + "MaxWidth")),
-            MinHeight = MaybeParseInt(element.Element(ScanNs + "MinHeight")),
-            MaxHeight = MaybeParseInt(element.Element(ScanNs + "MaxHeight")),
+            MinWidth = ParseHelper.MaybeParseInt(element.Element(ScanNs + "MinWidth")),
+            MaxWidth = ParseHelper.MaybeParseInt(element.Element(ScanNs + "MaxWidth")),
+            MinHeight = ParseHelper.MaybeParseInt(element.Element(ScanNs + "MinHeight")),
+            MaxHeight = ParseHelper.MaybeParseInt(element.Element(ScanNs + "MaxHeight")),
         };
     }
-
-    private static int? MaybeParseInt(XElement? element) =>
-        int.TryParse(element?.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value) ? value : null;
 }

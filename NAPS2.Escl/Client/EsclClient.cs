@@ -46,12 +46,8 @@ public class EsclClient
         }
         return new EsclScannerStatus
         {
-            State = Enum.TryParse<EsclScannerState>(root!.Element(PwgNs + "State")?.Value, out var state)
-                ? state
-                : EsclScannerState.Unknown,
-            AdfState = Enum.TryParse<EsclAdfState>(root.Element(ScanNs + "AdfState")?.Value, out var adfState)
-                ? adfState
-                : EsclAdfState.Unknown
+            State = ParseHelper.MaybeParseEnum(root.Element(PwgNs + "State"), EsclScannerState.Unknown),
+            AdfState = ParseHelper.MaybeParseEnum(root.Element(ScanNs + "AdfState"), EsclAdfState.Unknown)
         };
     }
 

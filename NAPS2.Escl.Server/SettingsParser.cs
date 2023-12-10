@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Xml.Linq;
 
 namespace NAPS2.Escl.Server;
@@ -19,23 +18,17 @@ internal static class SettingsParser
         return new EsclScanSettings
         {
             // TODO: Handle intents?
-            InputSource = MaybeParseEnum(root.Element(PwgNs + "InputSource"), EsclInputSource.Platen),
-            ColorMode = MaybeParseEnum(root.Element(ScanNs + "ColorMode"), EsclColorMode.RGB24),
+            InputSource = ParseHelper.MaybeParseEnum(root.Element(PwgNs + "InputSource"), EsclInputSource.Platen),
+            ColorMode = ParseHelper.MaybeParseEnum(root.Element(ScanNs + "ColorMode"), EsclColorMode.RGB24),
             DocumentFormat = root.Element(ScanNs + "DocumentFormatExt")?.Value ??
                              root.Element(PwgNs + "DocumentFormat")?.Value,
             Duplex = root.Element(ScanNs + "Duplex")?.Value == "true",
-            XResolution = MaybeParseInt(root.Element(ScanNs + "XResolution")) ?? 0,
-            YResolution = MaybeParseInt(root.Element(ScanNs + "YResolution")) ?? 0,
-            Width = MaybeParseInt(scanRegion?.Element(PwgNs + "Width")) ?? 0,
-            Height = MaybeParseInt(scanRegion?.Element(PwgNs + "Height")) ?? 0,
-            XOffset = MaybeParseInt(scanRegion?.Element(PwgNs + "XOffset")) ?? 0,
-            YOffset = MaybeParseInt(scanRegion?.Element(PwgNs + "YOffset")) ?? 0,
+            XResolution = ParseHelper.MaybeParseInt(root.Element(ScanNs + "XResolution")) ?? 0,
+            YResolution = ParseHelper.MaybeParseInt(root.Element(ScanNs + "YResolution")) ?? 0,
+            Width = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "Width")) ?? 0,
+            Height = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "Height")) ?? 0,
+            XOffset = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "XOffset")) ?? 0,
+            YOffset = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "YOffset")) ?? 0,
         };
     }
-
-    private static T MaybeParseEnum<T>(XElement? element, T defaultValue) where T : struct =>
-        Enum.TryParse<T>(element?.Value, out var value) ? value : defaultValue;
-
-    private static int? MaybeParseInt(XElement? element) =>
-        int.TryParse(element?.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value) ? value : null;
 }
