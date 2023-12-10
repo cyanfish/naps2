@@ -37,7 +37,7 @@ internal class EsclApiController : WebApiController
                     new XElement(ScanNs + "UUID", caps.Uuid),
                     new XElement(ScanNs + "AdminURI", ""),
                     new XElement(ScanNs + "IconURI", iconUri),
-                    new XElement(ScanNs + "Naps2Extensions", "Progress"),
+                    new XElement(ScanNs + "Naps2Extensions", "Progress;ErrorDetails"),
                     new XElement(ScanNs + "Platen",
                         new XElement(ScanNs + "PlatenInputCaps", GetCommonInputCaps())),
                     new XElement(ScanNs + "Adf",
@@ -189,6 +189,9 @@ internal class EsclApiController : WebApiController
     {
     }
 
+    // This endpoint is a NAPS2-specific extension to the ESCL API.
+    // It gives a chunked response where each line is a double between 0 and 1 representing the current page progress.
+    // This endpoint should be called once before each call to NextDocument.
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/Progress")]
     public async Task Progress(string jobId)
     {
@@ -205,40 +208,68 @@ internal class EsclApiController : WebApiController
         }
     }
 
-    [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
-    public async Task NextDocument(string jobId)
+    // This endpoint is a NAPS2-specific extension to the ESCL API.
+    // The ESCL status-based model (where errors like "no paper in feeder" are encompassed by ScannerStatus that can be
+    // polled every few seconds) is a good match to a physical scanner but a poor match to NAPS2's model.
+    // Instead, we have a this ErrorDetails endpoint that we call when NextDocument returns a 500 error which gives us
+    // XML-based details for the exception that occurred.
+    [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/ErrorDetails")]
+    public async Task ErrorDetails(string jobId)
     {
-        if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
-            jobState.State is EsclJobState.Pending or EsclJobState.Processing)
+        if (_serverState.Jobs.TryGetValue(jobId, out var jobState))
         {
-            bool result;
-            try
-            {
-                result = await jobState.Job.WaitForNextDocument();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogDebug(ex, "ESCL server error waiting for document");
-                Response.StatusCode = 500;
-                return;
-            }
-            if (result)
-            {
-                Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobState.Id}/1");
-                SetChunkedResponse();
-                Response.ContentType = jobState.Job.ContentType;
-                Response.ContentEncoding = null;
-                using var stream = Response.OutputStream;
-                await jobState.Job.WriteDocumentTo(stream);
-            }
-            else
-            {
-                jobState.State = EsclJobState.Completed;
-                Response.StatusCode = 404;
-            }
+            Response.ContentType = "text/xml";
+            using var stream = Response.OutputStream;
+            await jobState.Job.WriteErrorDetailsTo(stream);
         }
         else
         {
+            Response.StatusCode = 404;
+        }
+    }
+
+    [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
+    public async Task NextDocument(string jobId)
+    {
+        if (!_serverState.Jobs.TryGetValue(jobId, out var jobState))
+        {
+            Response.StatusCode = 404;
+            return;
+        }
+        if (jobState.State == EsclJobState.Aborted)
+        {
+            Response.StatusCode = 500;
+            return;
+        }
+        if (jobState.State is not (EsclJobState.Pending or EsclJobState.Processing))
+        {
+            Response.StatusCode = 404;
+            return;
+        }
+
+        bool result;
+        try
+        {
+            result = await jobState.Job.WaitForNextDocument();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogDebug(ex, "ESCL server error waiting for document");
+            Response.StatusCode = 500;
+            return;
+        }
+        if (result)
+        {
+            Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobState.Id}/1");
+            SetChunkedResponse();
+            Response.ContentType = jobState.Job.ContentType;
+            Response.ContentEncoding = null;
+            using var stream = Response.OutputStream;
+            await jobState.Job.WriteDocumentTo(stream);
+        }
+        else
+        {
+            jobState.State = EsclJobState.Completed;
             Response.StatusCode = 404;
         }
     }

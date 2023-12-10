@@ -1,9 +1,10 @@
 using System.Threading;
-using Microsoft.Extensions.Logging;
 using NAPS2.Escl;
 using NAPS2.Escl.Client;
 using NAPS2.Pdf;
+using NAPS2.Remoting;
 using NAPS2.Scan.Exceptions;
+using NAPS2.Serialization;
 
 namespace NAPS2.Scan.Internal.Escl;
 
@@ -77,6 +78,7 @@ internal class EsclScanDriver : IScanDriver
             var status = await client.GetStatus();
             var scanSettings = GetScanSettings(options, caps);
             bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
+            bool hasErrorDetailsExtension = caps.Naps2Extensions?.Contains("ErrorDetails") ?? false;
 
             if (cancelToken.IsCancellationRequested) return;
 
@@ -110,11 +112,35 @@ internal class EsclScanDriver : IScanDriver
             catch (Exception)
             {
                 cancelOnce.Run();
+                // The root cause for the exception might be a server-side scanning error, so prefer to throw a more
+                // descriptive error rather than an HTTP-based exception.
+                if (hasErrorDetailsExtension)
+                {
+                    await CheckErrorDetails(client, job);
+                }
+                // If not, then just throw the error we got
                 throw;
             }
         }
         catch (TaskCanceledException)
         {
+        }
+    }
+
+    private async Task CheckErrorDetails(EsclClient client, EsclJob job)
+    {
+        string? errorDetails = null;
+        try
+        {
+            errorDetails = await client.ErrorDetails(job);
+        }
+        catch (Exception)
+        {
+            // Ignore
+        }
+        if (!string.IsNullOrEmpty(errorDetails))
+        {
+            RemotingHelper.HandleErrors(errorDetails!.FromXml<Error>());
         }
     }
 

@@ -8,4 +8,5 @@ public interface IEsclScanJob
     Task<bool> WaitForNextDocument();
     Task WriteDocumentTo(Stream stream);
     Task WriteProgressTo(Stream stream);
+    Task WriteErrorDetailsTo(Stream stream);
 }

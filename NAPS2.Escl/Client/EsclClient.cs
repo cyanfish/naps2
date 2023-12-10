@@ -139,6 +139,15 @@ public class EsclClient
         return doc;
     }
 
+    public async Task<string> ErrorDetails(EsclJob job)
+    {
+        var url = job.Uri + "/ErrorDetails";
+        Logger.LogDebug("ESCL GET {Url}", url);
+        var response = await HttpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+
     public async Task CancelJob(EsclJob job)
     {
         Logger.LogDebug("ESCL DELETE {Url}", job.Uri);

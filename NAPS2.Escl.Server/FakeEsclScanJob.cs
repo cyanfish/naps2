@@ -26,4 +26,6 @@ internal class FakeEsclScanJob : IEsclScanJob
     }
 
     public Task WriteProgressTo(Stream stream) => Task.CompletedTask;
+
+    public Task WriteErrorDetailsTo(Stream stream) => Task.CompletedTask;
 }

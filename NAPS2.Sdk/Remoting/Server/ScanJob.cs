@@ -4,6 +4,7 @@ using NAPS2.Escl;
 using NAPS2.Escl.Server;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Server;
 
@@ -20,6 +21,7 @@ internal class ScanJob : IEsclScanJob
     private readonly TaskCompletionSource<bool> _completedTcs = new();
     private readonly List<ProcessedImage> _pdfImages = [];
     private Action<StatusTransition>? _callback;
+    private Exception? _lastError;
 
     public ScanJob(ScanningContext scanningContext, ScanController controller, ScanDevice device,
         EsclScanSettings settings)
@@ -31,6 +33,7 @@ internal class ScanJob : IEsclScanJob
             _callback?.Invoke(StatusTransition.DeviceIdle);
             if (args.HasError)
             {
+                _lastError = args.Error;
                 _callback?.Invoke(StatusTransition.AbortJob);
             }
             _completedTcs.TrySetResult(!args.HasError);
@@ -149,5 +152,14 @@ internal class ScanJob : IEsclScanJob
         await Task.WhenAny(pageEndTcs.Task, _completedTcs.Task);
         _controller.PageProgress -= OnPageProgress;
         _controller.PageEnd -= OnPageEnd;
+    }
+
+    public async Task WriteErrorDetailsTo(Stream stream)
+    {
+        if (_lastError != null)
+        {
+            using var streamWriter = new StreamWriter(stream);
+            await streamWriter.WriteLineAsync(RemotingHelper.ToError(_lastError).ToXml());
+        }
     }
 }

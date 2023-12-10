@@ -6,7 +6,7 @@ internal class JobInfo
 {
     public static JobInfo CreateNewJob(EsclServerState serverState, IEsclScanJob job)
     {
-        var state = new JobInfo
+        var jobInfo = new JobInfo
         {
             Id = Guid.NewGuid().ToString("D"),
             State = EsclJobState.Processing,
@@ -17,20 +17,20 @@ internal class JobInfo
         {
             if (transition == StatusTransition.CancelJob)
             {
-                state.State = EsclJobState.Canceled;
-                state.LastUpdated = Stopwatch.StartNew();
+                jobInfo.State = EsclJobState.Canceled;
+                jobInfo.LastUpdated = Stopwatch.StartNew();
             }
             if (transition == StatusTransition.AbortJob)
             {
-                state.State = EsclJobState.Aborted;
-                state.LastUpdated = Stopwatch.StartNew();
+                jobInfo.State = EsclJobState.Aborted;
+                jobInfo.LastUpdated = Stopwatch.StartNew();
             }
             if (transition == StatusTransition.DeviceIdle)
             {
                 serverState.IsProcessing = false;
             }
         });
-        return state;
+        return jobInfo;
     }
 
     public required string Id { get; init; }
