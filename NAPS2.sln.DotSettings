@@ -28,4 +28,5 @@
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Pixbuf/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=rmse/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=TESSDATA/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=Tesseract/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Tesseract/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/PackageChecker/IgnoredPackage/=Microsoft_002ENETCore_002EApp/@EntryIndexedValue">2.1.30</s:String></wpf:ResourceDictionary>
