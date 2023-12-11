@@ -15,11 +15,11 @@ public class EsclServer : IEsclServer
 
     public void AddDevice(EsclDeviceConfig deviceConfig)
     {
-        var advertiser = new MdnsAdvertiser();
-        _devices[deviceConfig] = new DeviceContext(advertiser, new CancellationTokenSource());
+        var deviceCtx = new DeviceContext(deviceConfig);
+        _devices[deviceConfig] = deviceCtx;
         if (_started)
         {
-            Task.Run(() => StartServerAndAdvertise(deviceConfig, advertiser));
+            Task.Run(() => StartServerAndAdvertise(deviceCtx));
         }
     }
 
@@ -47,34 +47,35 @@ public class EsclServer : IEsclServer
         foreach (var device in _devices.Keys)
         {
             var deviceCtx = _devices[device];
-            deviceCtx.StartTask = Task.Run(() => StartServerAndAdvertise(device, _devices[device].Advertiser));
+            deviceCtx.StartTask = Task.Run(() => StartServerAndAdvertise(deviceCtx));
             tasks.Add(deviceCtx.StartTask);
         }
         return Task.WhenAll(tasks);
     }
 
-    private async Task StartServerAndAdvertise(EsclDeviceConfig deviceConfig, MdnsAdvertiser advertiser)
+    private async Task StartServerAndAdvertise(DeviceContext deviceCtx)
     {
-        var cancelToken = CancellationTokenSource.CreateLinkedTokenSource(_cts!.Token, _devices[deviceConfig].Cts.Token).Token;
+        var cancelToken = CancellationTokenSource.CreateLinkedTokenSource(_cts!.Token, deviceCtx.Cts.Token).Token;
         // Try to run the server with the port specified in the EsclDeviceConfig first. If that fails, try random ports
         // instead, and store the actually-used port back in EsclDeviceConfig so it can be advertised correctly.
-        await PortFinder.RunWithSpecifiedOrRandomPort(deviceConfig.Port, async port =>
+        await PortFinder.RunWithSpecifiedOrRandomPort(deviceCtx.Config.Port, async port =>
         {
-            await StartServer(deviceConfig, port, cancelToken);
-            deviceConfig.Port = port;
+            await StartServer(deviceCtx, port, cancelToken);
+            deviceCtx.Config.Port = port;
         }, cancelToken);
-        advertiser.AdvertiseDevice(deviceConfig);
+        deviceCtx.Advertiser.AdvertiseDevice(deviceCtx.Config);
     }
 
-    private async Task StartServer(EsclDeviceConfig deviceConfig, int port, CancellationToken cancelToken)
+    private async Task StartServer(DeviceContext deviceCtx, int port, CancellationToken cancelToken)
     {
         var url = $"http://+:{port}/";
-        var serverState = new EsclServerState();
+        deviceCtx.ServerState = new EsclServerState();
         var server = new WebServer(o => o
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url))
             .HandleUnhandledException(UnhandledServerException)
-            .WithWebApi("/eSCL", m => m.WithController(() => new EsclApiController(deviceConfig, serverState, Logger)));
+            .WithWebApi("/eSCL",
+                m => m.WithController(() => new EsclApiController(deviceCtx.Config, deviceCtx.ServerState, Logger)));
         await server.StartAsync(cancelToken);
     }
 
@@ -109,8 +110,11 @@ public class EsclServer : IEsclServer
         }
     }
 
-    private record DeviceContext(MdnsAdvertiser Advertiser, CancellationTokenSource Cts)
+    private record DeviceContext(EsclDeviceConfig Config)
     {
+        public MdnsAdvertiser Advertiser { get; } = new();
+        public CancellationTokenSource Cts { get; } = new();
         public Task? StartTask { get; set; }
+        public EsclServerState? ServerState { get; set; }
     }
 }
