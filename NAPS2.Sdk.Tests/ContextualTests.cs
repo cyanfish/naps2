@@ -180,6 +180,9 @@ public class ContextualTests : IDisposable
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
+            // We don't log tracing to the test output as it fills up the limited output space too quickly
+            if (logLevel == LogLevel.Trace) return;
+
             _testOutputHelper.WriteLine(state.ToString());
             if (exception != null)
             {

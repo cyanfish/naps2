@@ -170,7 +170,7 @@ public class EsclClient
         response.EnsureSuccessStatusCode();
         var text = await response.Content.ReadAsStringAsync();
         var doc = XDocument.Parse(text);
-        Logger.LogDebug("{Doc}", doc);
+        Logger.LogTrace("{Doc}", doc);
         return doc;
     }
 

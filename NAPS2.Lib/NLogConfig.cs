@@ -37,7 +37,7 @@ public static class NLogConfig
         config.AddTarget("errorlogfile", target);
         config.AddTarget("debuglogfile", debugTarget);
         config.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, target));
-        var debugRule = new LoggingRule("*", LogLevel.Debug, debugTarget);
+        var debugRule = new LoggingRule("*", LogLevel.Trace, debugTarget);
         debugRule.Filters.Add(new WhenMethodFilter(_ => enableDebugLogging() ? FilterResult.Log : FilterResult.Ignore));
         config.LoggingRules.Add(debugRule);
         LogManager.Configuration = config;

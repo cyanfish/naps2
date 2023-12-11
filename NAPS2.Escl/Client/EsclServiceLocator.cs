@@ -75,7 +75,7 @@ public class EsclServiceLocator : IDisposable
         var props = new Dictionary<string, string>();
         foreach (var record in args.Message.AdditionalRecords)
         {
-            Logger.LogDebug("{Type} {Record}", record.GetType().Name, record);
+            Logger.LogTrace("{Type} {Record}", record.GetType().Name, record);
             if (record is ARecord a)
             {
                 ipv4 = a.Address;
