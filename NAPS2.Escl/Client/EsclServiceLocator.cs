@@ -36,6 +36,30 @@ public class EsclServiceLocator : IDisposable
         if (_started) throw new InvalidOperationException("Already started");
         _started = true;
 
+
+        // We query once when we start, then once again after 1s to account for race conditions where there was a
+        // previous query/answer on the network just before we started listening, which would prevent us from receiving
+        // a response. See the following:
+        //
+        // "When retransmitting Multicast DNS queries to implement continuous monitoring, the interval between the first
+        // two queries MUST be at least one second."
+        // https://datatracker.ietf.org/doc/html/rfc6762#section-5.2
+        //
+        // "A Multicast DNS responder MUST NOT multicast a record on a given interface until at least one second has
+        // elapsed since the last time that record was multicast on that particular interface."
+        // https://datatracker.ietf.org/doc/html/rfc6762#section-6
+        Query();
+        Task.Delay(1000).ContinueWith(_ =>
+        {
+            if (_discovery.Mdns != null)
+            {
+                Query();
+            }
+        });
+    }
+
+    private void Query()
+    {
         // TODO: De-duplicate http/https services?
         _discovery.QueryServiceInstances("_uscan._tcp");
         _discovery.QueryServiceInstances("_uscans._tcp");
