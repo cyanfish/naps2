@@ -1,4 +1,5 @@
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Escl;
 using NAPS2.Escl.Client;
 using NAPS2.Pdf;
@@ -10,7 +11,11 @@ namespace NAPS2.Scan.Internal.Escl;
 
 internal class EsclScanDriver : IScanDriver
 {
+    private const int MAX_DOCUMENT_TRIES = 5;
+    private const int DOCUMENT_RETRY_INTERVAL = 1000;
+
     private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
 
     public static string GetUuid(ScanDevice device)
     {
@@ -25,6 +30,7 @@ internal class EsclScanDriver : IScanDriver
     public EsclScanDriver(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
     }
 
     public async Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
@@ -46,7 +52,7 @@ internal class EsclScanDriver : IScanDriver
                 : $"{service.ScannerName} ({ip})";
             callback(new ScanDevice(Driver.Escl, id, name));
         });
-        locator.Logger = _scanningContext.Logger;
+        locator.Logger = _logger;
         locator.Start();
         try
         {
@@ -68,7 +74,7 @@ internal class EsclScanDriver : IScanDriver
 
         var client = new EsclClient(service)
         {
-            Logger = _scanningContext.Logger,
+            Logger = _logger,
             CancelToken = cancelToken
         };
 
@@ -79,6 +85,7 @@ internal class EsclScanDriver : IScanDriver
             var scanSettings = GetScanSettings(options, caps);
             bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
             bool hasErrorDetailsExtension = caps.Naps2Extensions?.Contains("ErrorDetails") ?? false;
+            Action<double>? progressCallback = hasProgressExtension ? scanEvents.PageProgress : null;
 
             if (cancelToken.IsCancellationRequested) return;
 
@@ -101,7 +108,7 @@ internal class EsclScanDriver : IScanDriver
                     {
                         scanEvents.PageStart();
                     }
-                    var doc = await client.NextDocument(job, hasProgressExtension ? scanEvents.PageProgress : null);
+                    var doc = await GetNextDocumentWithRetries(client, job, progressCallback);
                     if (doc == null) break;
                     foreach (var image in GetImagesFromRawDocument(options, doc))
                     {
@@ -124,6 +131,37 @@ internal class EsclScanDriver : IScanDriver
         }
         catch (TaskCanceledException)
         {
+        }
+    }
+
+    private async Task<RawDocument?> GetNextDocumentWithRetries(
+        EsclClient client, EsclJob job, Action<double>? progress)
+    {
+        int retries = 0;
+        while (true)
+        {
+            try
+            {
+                return await client.NextDocument(job, progress);
+            }
+            catch (Exception)
+            {
+                if (++retries > MAX_DOCUMENT_TRIES)
+                {
+                    _logger.LogDebug("ESCL NextDocument failed, no more retries left");
+                    throw;
+                }
+                var status = await client.GetStatus();
+                var jobState = status.JobStates.Get(job.Uri.AbsolutePath);
+                if (jobState is not (EsclJobState.Pending or EsclJobState.Processing or EsclJobState.Unknown))
+                {
+                    // Only retry if the job is pending or processing
+                    _logger.LogDebug("ESCL NextDocument failed, not retrying as job state is {State}", jobState);
+                    throw;
+                }
+                _logger.LogDebug("ESCL NextDocument failed, retrying as job state is {State}", jobState);
+                await Task.Delay(DOCUMENT_RETRY_INTERVAL);
+            }
         }
     }
 
