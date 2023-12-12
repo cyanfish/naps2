@@ -145,7 +145,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         get => _scope.GetOr(c => c.SharedDevices, ImmutableList<SharedDevice>.Empty);
         private set
         {
-            if (!_scope.TryGet(c => c.InstanceId, out _))
+            if (!_scope.Has(c => c.InstanceId))
             {
                 _scope.Set(c => c.InstanceId, _server.InstanceId);
             }
