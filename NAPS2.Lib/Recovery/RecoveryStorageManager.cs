@@ -20,6 +20,7 @@ namespace NAPS2.Recovery;
 /// </summary>
 public class RecoveryStorageManager : IDisposable
 {
+    public const string INDEX_FILE_NAME = "index.xml";
     public const string LOCK_FILE_NAME = ".lock";
     private static readonly TimeSpan WriteThrottleInterval = TimeSpan.FromMilliseconds(100);
 
@@ -96,7 +97,7 @@ public class RecoveryStorageManager : IDisposable
                     TransformList = processedImage.TransformState.Transforms.ToList()
                 };
             }).ToList();
-            _serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, "index.xml"), recoveryIndex);
+            _serializer.SerializeToFile(Path.Combine(RecoveryFolderPath, INDEX_FILE_NAME), recoveryIndex);
         }
     }
 

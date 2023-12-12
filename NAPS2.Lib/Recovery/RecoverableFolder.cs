@@ -16,10 +16,11 @@ public class RecoverableFolder : IDisposable
 
     public static RecoverableFolder? TryCreate(ScanningContext scanningContext, DirectoryInfo directory)
     {
-        string indexFilePath = Path.Combine(directory.FullName, "index.xml");
+        string indexFilePath = Path.Combine(directory.FullName, RecoveryStorageManager.INDEX_FILE_NAME);
         string lockFilePath = Path.Combine(directory.FullName, RecoveryStorageManager.LOCK_FILE_NAME);
-        if (!File.Exists(indexFilePath) || !File.Exists(lockFilePath))
+        if (!File.Exists(lockFilePath))
         {
+            MaybeCleanUp(directory);
             return null;
         }
         var lockFile = new FileStream(lockFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
@@ -29,16 +30,41 @@ public class RecoverableFolder : IDisposable
             var recoveryIndex = serializer.DeserializeFromFile(indexFilePath);
             var imageCount = recoveryIndex.Images.Count;
             var scannedDateTime = directory.LastWriteTime;
-            // TODO: Consider auto-delete in this case
-            // TODO: Also in the case where you have a lock file but no index is written (especially if no images are present)
-            if (imageCount == 0) return null;
+            if (imageCount == 0)
+            {
+                lockFile.Dispose();
+                MaybeCleanUp(directory);
+                return null;
+            }
             return new RecoverableFolder(scanningContext, directory, lockFile, recoveryIndex,
                 imageCount, scannedDateTime);
         }
         catch (Exception)
         {
             lockFile.Dispose();
+            MaybeCleanUp(directory);
             return null;
+        }
+    }
+
+    private static void MaybeCleanUp(DirectoryInfo directory)
+    {
+        // Clean up empty folders immediately, folders with files after a week
+        var cutoff = DateTime.Now - TimeSpan.FromDays(7);
+        var files = directory.GetFiles();
+        if (files.Any(x =>
+                x.LastWriteTime > cutoff &&
+                x.Name != RecoveryStorageManager.LOCK_FILE_NAME &&
+                x.Name != RecoveryStorageManager.INDEX_FILE_NAME))
+        {
+            return;
+        }
+        try
+        {
+            directory.Delete(true);
+        }
+        catch (IOException)
+        {
         }
     }
 
