@@ -8,7 +8,7 @@ public record SharedDevice
 {
     public required string Name { get; init; }
     public required ScanDevice Device { get; init; }
-    public required int Port { get; init; }
+    public int Port { get; init; }
 
     public string GetUuid(Guid instanceId)
     {

@@ -38,6 +38,12 @@ public class ScanController
     {
     }
 
+    internal ScanController(ScanningContext scanningContext, IScanBridgeFactory scanBridgeFactory)
+        : this(scanningContext, new LocalPostProcessor(scanningContext, new OcrController(scanningContext)),
+            new ScanOptionsValidator(), scanBridgeFactory)
+    {
+    }
+
     internal ScanController(ScanningContext scanningContext, ILocalPostProcessor localPostProcessor,
         ScanOptionsValidator scanOptionsValidator, IScanBridgeFactory scanBridgeFactory)
     {

@@ -43,7 +43,7 @@ public class ScanServer : IDisposable
     }
 
     public void UnregisterDevice(ScanDevice device, string? displayName = null) =>
-        UnregisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name, Port = 0 });
+        UnregisterDevice(new SharedDevice { Device = device, Name = displayName ?? device.Name });
 
     public void UnregisterDevice(SharedDevice sharedDevice)
     {
@@ -82,7 +82,7 @@ public class ScanServer : IDisposable
         };
     }
 
-    public void Start() => _esclServer.Start();
+    public Task Start() => _esclServer.Start();
 
     public void Stop() => _esclServer.Stop();
 
