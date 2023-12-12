@@ -68,9 +68,10 @@ internal class EsclScanDriver : IScanDriver
     {
         if (cancelToken.IsCancellationRequested) return;
 
-        var service = await FindDeviceEsclService(options) ?? throw new DeviceException(SdkResources.DeviceOffline);
+        var service = await FindDeviceEsclService(options, cancelToken);
 
         if (cancelToken.IsCancellationRequested) return;
+        if (service == null) throw new DeviceException(SdkResources.DeviceOffline);
 
         var client = new EsclClient(service)
         {
@@ -210,7 +211,7 @@ internal class EsclScanDriver : IScanDriver
         }
     }
 
-    private async Task<EsclService?> FindDeviceEsclService(ScanOptions options)
+    private async Task<EsclService?> FindDeviceEsclService(ScanOptions options, CancellationToken cancelToken)
     {
         var foundTcs = new TaskCompletionSource<EsclService?>();
         var deviceUuid = GetUuid(options.Device!);
@@ -221,7 +222,8 @@ internal class EsclScanDriver : IScanDriver
                 foundTcs.TrySetResult(service);
             }
         });
-        Task.Delay(options.EsclOptions.SearchTimeout).ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
+        Task.Delay(options.EsclOptions.SearchTimeout, cancelToken)
+            .ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
         locator.Logger = _scanningContext.Logger;
         locator.Start();
         return await foundTcs.Task;
