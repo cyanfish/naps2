@@ -57,7 +57,7 @@ internal class ScanJob : IEsclScanJob
             PageSize = settings.Width > 0 && settings.Height > 0
                 ? new PageSize(settings.Width / 300m, settings.Height / 300m, PageSizeUnit.Inch)
                 : PageSize.Letter,
-            // TODO: Align based on offset, etc.
+            PageAlign = SnapToAlignment(settings.XOffset, settings.Width, EsclInputCaps.DEFAULT_MAX_WIDTH)
         };
         var requestedFormat = settings.DocumentFormat;
         ContentType = requestedFormat switch
@@ -75,6 +75,18 @@ internal class ScanJob : IEsclScanJob
             _callback?.Invoke(StatusTransition.AbortJob);
             throw;
         }
+    }
+
+    private HorizontalAlign SnapToAlignment(int x, int width, int maxWidth)
+    {
+        if (x == 0 || width >= maxWidth) return HorizontalAlign.Right;
+        var fraction = x / (double) (maxWidth - width);
+        return fraction switch
+        {
+            <= 0.25 => HorizontalAlign.Right,
+            >= 0.75 => HorizontalAlign.Left,
+            _ => HorizontalAlign.Center,
+        };
     }
 
     public string ContentType { get; }
