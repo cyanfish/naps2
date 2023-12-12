@@ -301,10 +301,21 @@ internal class EsclScanDriver : IScanDriver
             }
         }
 
+        var width = (int) Math.Round(options.PageSize!.WidthInInches * 300);
+        var height = (int) Math.Round(options.PageSize!.HeightInInches * 300);
+        if (inputCaps.MaxWidth is > 0)
+        {
+            width = Math.Min(width, inputCaps.MaxWidth.Value);
+        }
+        if (inputCaps.MaxHeight is > 0)
+        {
+            height = Math.Min(height, inputCaps.MaxHeight.Value);
+        }
+
         return new EsclScanSettings
         {
-            Width = (int) Math.Round(options.PageSize!.WidthInInches * 300),
-            Height = (int) Math.Round(options.PageSize!.HeightInInches * 300),
+            Width = width,
+            Height = height,
             XResolution = dpi,
             YResolution = dpi,
             ColorMode = colorMode,
@@ -312,8 +323,14 @@ internal class EsclScanDriver : IScanDriver
             Duplex = duplex,
             DocumentFormat = options.BitDepth == BitDepth.BlackAndWhite || options.MaxQuality
                 ? "application/pdf" // TODO: Use PNG if available?
-                : "image/jpeg"
-            // TODO: Offset, brightness/contrast, quality, etc.
+                : "image/jpeg",
+            XOffset = options.PageAlign switch
+            {
+                HorizontalAlign.Left => inputCaps.MaxWidth is > 0 ? inputCaps.MaxWidth.Value - width : 0,
+                HorizontalAlign.Center => inputCaps.MaxWidth is > 0 ? (inputCaps.MaxWidth.Value - width) / 2 : 0,
+                _ => 0
+            }
+            // TODO: Brightness/contrast, quality, etc.
         };
     }
 
