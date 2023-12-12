@@ -8,7 +8,9 @@ namespace NAPS2.Escl.Client;
 public class EsclServiceLocator : IDisposable
 {
     private readonly ServiceDiscovery _discovery;
+    private readonly HashSet<ServiceKey> _locatedServices = new();
     private bool _started;
+    private int _nextQueryInterval = 1000;
 
     public EsclServiceLocator(Action<EsclService> serviceCallback)
     {
@@ -18,6 +20,12 @@ public class EsclServiceLocator : IDisposable
             try
             {
                 var service = ParseService(args);
+                var serviceKey = new ServiceKey(service.ScannerName, service.Uuid, service.Port, service.IpV4, service.IpV6);
+                if (!_locatedServices.Add(serviceKey))
+                {
+                    // Don't callback for duplicates
+                    return;
+                }
                 Logger.LogDebug("Discovered ESCL Service: {Name}, instance {Instance}, endpoint {Endpoint}, ipv4 {Ipv4}, ipv6 {IpV6}, host {Host}, port {Port}, uuid {Uuid}",
                     service.ScannerName, args.ServiceInstanceName, args.RemoteEndPoint, service.IpV4, service.IpV6, service.Host, service.Port, service.Uuid);
                 serviceCallback(service);
@@ -36,33 +44,33 @@ public class EsclServiceLocator : IDisposable
         if (_started) throw new InvalidOperationException("Already started");
         _started = true;
 
+        Query();
+    }
 
-        // We query once when we start, then once again after 1s to account for race conditions where there was a
+    private void Query()
+    {
+        if (_discovery.Mdns == null)
+        {
+            return;
+        }
+        // TODO: De-duplicate http/https services?
+        _discovery.QueryServiceInstances("_uscan._tcp");
+        _discovery.QueryServiceInstances("_uscans._tcp");
+
+        // We query once when we start, then again after 1s, 2s, etc. to account for race conditions where there was a
         // previous query/answer on the network just before we started listening, which would prevent us from receiving
         // a response. See the following:
         //
         // "When retransmitting Multicast DNS queries to implement continuous monitoring, the interval between the first
-        // two queries MUST be at least one second."
+        // two queries MUST be at least one second, and the intervals between successive queries MUST increase by at
+        // least a factor of two."
         // https://datatracker.ietf.org/doc/html/rfc6762#section-5.2
         //
         // "A Multicast DNS responder MUST NOT multicast a record on a given interface until at least one second has
         // elapsed since the last time that record was multicast on that particular interface."
         // https://datatracker.ietf.org/doc/html/rfc6762#section-6
-        Query();
-        Task.Delay(1000).ContinueWith(_ =>
-        {
-            if (_discovery.Mdns != null)
-            {
-                Query();
-            }
-        });
-    }
-
-    private void Query()
-    {
-        // TODO: De-duplicate http/https services?
-        _discovery.QueryServiceInstances("_uscan._tcp");
-        _discovery.QueryServiceInstances("_uscans._tcp");
+        Task.Delay(_nextQueryInterval).ContinueWith(_ => Query());
+        _nextQueryInterval *= 2;
     }
 
     private EsclService ParseService(ServiceInstanceDiscoveryEventArgs args)
@@ -140,4 +148,6 @@ public class EsclServiceLocator : IDisposable
     {
         _discovery.Dispose();
     }
+
+    private record ServiceKey(string? ScannerName, string? Uuid, int Port, IPAddress? IpV4, IPAddress? IpV6);
 }
