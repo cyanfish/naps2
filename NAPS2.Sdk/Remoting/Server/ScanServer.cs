@@ -73,7 +73,7 @@ public class ScanServer : IDisposable
                                 { EsclColorMode.RGB24, EsclColorMode.Grayscale8, EsclColorMode.BlackAndWhite1 },
                             XResolutionRange = new ResolutionRange(100, 4800, 300),
                             YResolutionRange = new ResolutionRange(100, 4800, 300),
-                            DocumentFormats = { "application/pdf", "image/jpeg" }
+                            DocumentFormats = { ContentTypes.PDF, ContentTypes.JPEG, ContentTypes.PNG }
                         }
                     }
                 }

@@ -229,7 +229,7 @@ internal class EsclScanDriver : IScanDriver
 
     private IEnumerable<IMemoryImage> GetImagesFromRawDocument(ScanOptions options, RawDocument doc)
     {
-        if (doc.ContentType == "application/pdf")
+        if (doc.ContentType == ContentTypes.PDF)
         {
             // TODO: For SDK some kind an error message if Pdfium isn't present
             var renderer = new PdfiumPdfRenderer();
@@ -322,8 +322,8 @@ internal class EsclScanDriver : IScanDriver
             InputSource = inputSource,
             Duplex = duplex,
             DocumentFormat = options.BitDepth == BitDepth.BlackAndWhite || options.MaxQuality
-                ? "application/pdf" // TODO: Use PNG if available?
-                : "image/jpeg",
+                ? ContentTypes.PDF // TODO: Use PNG if available?
+                : ContentTypes.JPEG,
             XOffset = options.PageAlign switch
             {
                 HorizontalAlign.Left => inputCaps.MaxWidth is > 0 ? inputCaps.MaxWidth.Value - width : 0,

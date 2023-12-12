@@ -10,10 +10,6 @@ namespace NAPS2.Remoting.Server;
 
 internal class ScanJob : IEsclScanJob
 {
-    private const string CT_PDF = "application/pdf";
-    private const string CT_PNG = "image/png";
-    private const string CT_JPEG = "image/jpeg";
-
     private readonly ScanningContext _scanningContext;
     private readonly ScanController _controller;
     private readonly CancellationTokenSource _cts = new();
@@ -62,8 +58,8 @@ internal class ScanJob : IEsclScanJob
         var requestedFormat = settings.DocumentFormat;
         ContentType = requestedFormat switch
         {
-            CT_PNG or CT_PDF => requestedFormat,
-            _ => CT_JPEG
+            ContentTypes.PNG or ContentTypes.PDF => requestedFormat,
+            _ => ContentTypes.JPEG
         };
         try
         {
@@ -104,7 +100,7 @@ internal class ScanJob : IEsclScanJob
 
     public async Task<bool> WaitForNextDocument()
     {
-        if (ContentType == CT_PDF)
+        if (ContentType == ContentTypes.PDF)
         {
             // For PDFs we merge all the pages into a single PDF document, so we need to wait for the full scan here
             if (!await _enumerable.MoveNextAsync())
@@ -123,17 +119,17 @@ internal class ScanJob : IEsclScanJob
 
     public async Task WriteDocumentTo(Stream stream)
     {
-        if (ContentType == CT_JPEG)
+        if (ContentType == ContentTypes.JPEG)
         {
             _enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
             _enumerable.Current.Dispose();
         }
-        if (ContentType == CT_PNG)
+        if (ContentType == ContentTypes.PNG)
         {
             _enumerable.Current.Save(stream, ImageFileFormat.Png);
             _enumerable.Current.Dispose();
         }
-        if (ContentType == CT_PDF)
+        if (ContentType == ContentTypes.PDF)
         {
             var pdfExporter = new PdfExporter(_scanningContext);
             await pdfExporter.Export(stream, _pdfImages);
