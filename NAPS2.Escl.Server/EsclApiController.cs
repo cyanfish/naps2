@@ -54,9 +54,9 @@ internal class EsclApiController : WebApiController
         return
         [
             new XElement(ScanNs + "MinWidth", "1"),
-            new XElement(ScanNs + "MaxWidth", "5000"), // Supports A3 in both orientations
+            new XElement(ScanNs + "MaxWidth", EsclInputCaps.DEFAULT_MAX_WIDTH),
             new XElement(ScanNs + "MinHeight", "1"),
-            new XElement(ScanNs + "MaxHeight", "5000"), // Supports A3 in both orientations
+            new XElement(ScanNs + "MaxHeight", EsclInputCaps.DEFAULT_MAX_HEIGHT),
             new XElement(ScanNs + "MaxScanRegions", "1"),
             new XElement(ScanNs + "SettingProfiles",
                 new XElement(ScanNs + "SettingProfile",
