@@ -88,15 +88,16 @@ public class EsclClient
                     // new XElement(ScanNs + "Threshold", settings.Threshold),
                     new XElement(PwgNs + "DocumentFormat", settings.DocumentFormat)));
         var content = new StringContent(doc, Encoding.UTF8, "text/xml");
-        var url = GetUrl("ScanJobs");
+        var url = GetUrl($"/{_service.RootUrl}/ScanJobs");
         Logger.LogDebug("ESCL POST {Url}", url);
         Logger.LogDebug("{Doc}", doc);
         var response = await HttpClient.PostAsync(url, content);
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("POST OK");
+
         return new EsclJob
         {
-            Uri = response.Headers.Location!
+            UriPath = response.Headers.Location!.AbsolutePath
         };
     }
 
@@ -104,7 +105,7 @@ public class EsclClient
     {
         if (pageProgress != null)
         {
-            var progressUrl = job.Uri + "/Progress";
+            var progressUrl = GetUrl($"{job.UriPath}/Progress");
             var progressResponse = await ProgressHttpClient.GetStreamAsync(progressUrl);
             var streamReader = new StreamReader(progressResponse);
             _ = Task.Run(async () =>
@@ -119,7 +120,7 @@ public class EsclClient
             });
         }
         // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
-        var url = job.Uri + "/NextDocument";
+        var url = GetUrl($"{job.UriPath}/NextDocument");;
         Logger.LogDebug("ESCL GET {Url}", url);
         var response = await DocumentHttpClient.GetAsync(url);
         if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
@@ -141,7 +142,7 @@ public class EsclClient
 
     public async Task<string> ErrorDetails(EsclJob job)
     {
-        var url = job.Uri + "/ErrorDetails";
+        var url = GetUrl($"{job.UriPath}/ErrorDetails");;
         Logger.LogDebug("ESCL GET {Url}", url);
         var response = await HttpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
@@ -150,8 +151,9 @@ public class EsclClient
 
     public async Task CancelJob(EsclJob job)
     {
-        Logger.LogDebug("ESCL DELETE {Url}", job.Uri);
-        var response = await HttpClient.DeleteAsync(job.Uri);
+        var url = GetUrl(job.UriPath);
+        Logger.LogDebug("ESCL DELETE {Url}", url);
+        var response = await HttpClient.DeleteAsync(url);
         if (!response.IsSuccessStatusCode)
         {
             Logger.LogDebug("DELETE failed: {Status}", response.StatusCode);
@@ -164,7 +166,7 @@ public class EsclClient
     private async Task<XDocument> DoRequest(string endpoint)
     {
         // TODO: Retry logic
-        var url = GetUrl(endpoint);
+        var url = GetUrl($"/{_service.RootUrl}/{endpoint}");
         Logger.LogDebug("ESCL GET {Url}", url);
         var response = await HttpClient.GetAsync(url, CancelToken);
         response.EnsureSuccessStatusCode();
@@ -177,14 +179,19 @@ public class EsclClient
     private string GetUrl(string endpoint)
     {
         var protocol = _service.Tls || _service.Port == 443 ? "https" : "http";
-        var ipAndPort = new IPEndPoint(_service.RemoteEndpoint, _service.Port).ToString();
+        return $"{protocol}://{GetHostAndPort()}{endpoint}";
+    }
+
+    private string GetHostAndPort()
+    {
+        var host = new IPEndPoint(_service.RemoteEndpoint, _service.Port).ToString();
 #if NET6_0_OR_GREATER
         if (OperatingSystem.IsMacOS())
         {
             // Using the mDNS hostname is more reliable on Mac (but doesn't work at all on Windows)
-            ipAndPort = $"{_service.Host}:{_service.Port}";
+            host = $"{_service.Host}:{_service.Port}";
         }
 #endif
-        return $"{protocol}://{ipAndPort}/{_service.RootUrl}/{endpoint}";
+        return host;
     }
 }

@@ -2,5 +2,5 @@ namespace NAPS2.Escl;
 
 public class EsclJob
 {
-    public required Uri Uri { get; init; }
+    public required string UriPath { get; init; }
 }

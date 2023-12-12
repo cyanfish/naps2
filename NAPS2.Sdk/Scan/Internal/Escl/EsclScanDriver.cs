@@ -152,7 +152,7 @@ internal class EsclScanDriver : IScanDriver
                     throw;
                 }
                 var status = await client.GetStatus();
-                var jobState = status.JobStates.Get(job.Uri.AbsolutePath);
+                var jobState = status.JobStates.Get(job.UriPath);
                 if (jobState is not (EsclJobState.Pending or EsclJobState.Processing or EsclJobState.Unknown))
                 {
                     // Only retry if the job is pending or processing
