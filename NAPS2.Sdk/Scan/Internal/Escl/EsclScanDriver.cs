@@ -56,7 +56,7 @@ internal class EsclScanDriver : IScanDriver
         locator.Start();
         try
         {
-            await Task.Delay(2000, cancelToken);
+            await Task.Delay(options.EsclOptions.SearchTimeout, cancelToken);
         }
         catch (TaskCanceledException)
         {
@@ -221,7 +221,7 @@ internal class EsclScanDriver : IScanDriver
                 foundTcs.TrySetResult(service);
             }
         });
-        Task.Delay(2000).ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
+        Task.Delay(options.EsclOptions.SearchTimeout).ContinueWith(_ => foundTcs.TrySetResult(null)).AssertNoAwait();
         locator.Logger = _scanningContext.Logger;
         locator.Start();
         return await foundTcs.Task;
