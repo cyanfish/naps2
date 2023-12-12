@@ -17,13 +17,11 @@ internal class JobInfo
         {
             if (transition == StatusTransition.CancelJob)
             {
-                jobInfo.State = EsclJobState.Canceled;
-                jobInfo.LastUpdated = Stopwatch.StartNew();
+                jobInfo.TransitionState(EsclJobState.Processing, EsclJobState.Canceled);
             }
             if (transition == StatusTransition.AbortJob)
             {
-                jobInfo.State = EsclJobState.Aborted;
-                jobInfo.LastUpdated = Stopwatch.StartNew();
+                jobInfo.TransitionState(EsclJobState.Processing, EsclJobState.Aborted);
             }
             if (transition == StatusTransition.DeviceIdle)
             {
@@ -40,4 +38,16 @@ internal class JobInfo
     public required Stopwatch LastUpdated { get; set; }
 
     public required IEsclScanJob Job { get; set; }
+
+    public void TransitionState(EsclJobState precondition, EsclJobState newState)
+    {
+        lock (this)
+        {
+            if (State == precondition)
+            {
+                State = newState;
+                LastUpdated = Stopwatch.StartNew();
+            }
+        }
+    }
 }

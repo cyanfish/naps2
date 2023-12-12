@@ -231,17 +231,17 @@ internal class EsclApiController : WebApiController
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
     public async Task NextDocument(string jobId)
     {
-        if (!_serverState.Jobs.TryGetValue(jobId, out var jobState))
+        if (!_serverState.Jobs.TryGetValue(jobId, out var jobInfo))
         {
             Response.StatusCode = 404;
             return;
         }
-        if (jobState.State == EsclJobState.Aborted)
+        if (jobInfo.State == EsclJobState.Aborted)
         {
             Response.StatusCode = 500;
             return;
         }
-        if (jobState.State is not (EsclJobState.Pending or EsclJobState.Processing))
+        if (jobInfo.State is not (EsclJobState.Pending or EsclJobState.Processing))
         {
             Response.StatusCode = 404;
             return;
@@ -250,26 +250,30 @@ internal class EsclApiController : WebApiController
         bool result;
         try
         {
-            result = await jobState.Job.WaitForNextDocument();
+            result = await jobInfo.Job.WaitForNextDocument();
         }
         catch (Exception ex)
         {
             _logger.LogDebug(ex, "ESCL server error waiting for document");
+            // The ScanJob should transition the job to aborted on error, but there's a race condition where this could
+            // happen first and another NextDocument call will think the job is still processing unless we ensure it's
+            // in the correct state here.
+            jobInfo.TransitionState(EsclJobState.Processing, EsclJobState.Aborted);
             Response.StatusCode = 500;
             return;
         }
         if (result)
         {
-            Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobState.Id}/1");
+            Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobInfo.Id}/1");
             SetChunkedResponse();
-            Response.ContentType = jobState.Job.ContentType;
+            Response.ContentType = jobInfo.Job.ContentType;
             Response.ContentEncoding = null;
             using var stream = Response.OutputStream;
-            await jobState.Job.WriteDocumentTo(stream);
+            await jobInfo.Job.WriteDocumentTo(stream);
         }
         else
         {
-            jobState.State = EsclJobState.Completed;
+            jobInfo.TransitionState(EsclJobState.Processing, EsclJobState.Completed);
             Response.StatusCode = 404;
         }
     }
