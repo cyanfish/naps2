@@ -67,7 +67,7 @@ public class ScanErrorHandling : ContextualTests
     public async Task GetDeviceList_BridgeGetDeviceList()
     {
         var localPostProcessor = Substitute.For<ILocalPostProcessor>();
-        var bridge = new StubScanBridge { Error = new InvalidOperationException() };
+        var bridge = new MockScanBridge { Error = new InvalidOperationException() };
         var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
             new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
@@ -81,7 +81,7 @@ public class ScanErrorHandling : ContextualTests
     public async void Scan_LocalPostProcess()
     {
         var localPostProcessor = Substitute.For<ILocalPostProcessor>();
-        var bridge = new StubScanBridge { MockOutput = [CreateScannedImage()] };
+        var bridge = new MockScanBridge { MockOutput = [CreateScannedImage()] };
         var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
             new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
@@ -99,7 +99,7 @@ public class ScanErrorHandling : ContextualTests
     public async void Scan_BridgeScan()
     {
         var localPostProcessor = Substitute.For<ILocalPostProcessor>();
-        var bridge = new StubScanBridge { Error = new InvalidOperationException() };
+        var bridge = new MockScanBridge { Error = new InvalidOperationException() };
         var bridgeFactory = Substitute.For<IScanBridgeFactory>();
         var controller =
             new ScanController(ScanningContext, localPostProcessor, new ScanOptionsValidator(),
