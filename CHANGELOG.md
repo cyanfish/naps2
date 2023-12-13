@@ -1,17 +1,19 @@
 Changes in 7.2.0:
 - Scanner Sharing
   - Share scanners with other computers on the local network, for example:
-    - Turn a desktop-connected USB scanner into a wireless scanner usable from your laptop
+    - Turn a desktop-connected USB scanner into a wireless scanner usable from your laptop or phone
     - Allow Windows-only scanners to be used from Mac/Linux using a virtual machine
     - Set up a Raspberry Pi to turn a USB scanner into a wireless scanner
-  - On the host computer, under the Scan menu, click Scanner Sharing and choose the scanners to share
-    - Under the Tools menu on Mac
+  - On the host computer, in the Profiles window, click Scanner Sharing and choose the scanners to share
   - On the client computer, select "ESCL Driver" in your profile settings and you should be able to select the shared scanner
-    - "Apple Driver" on Mac and "Sane Driver" on Linux should also work
   - NAPS2 currently must be kept open on the host for sharing to work
   - Shared scanners can be used from any ESCL-capable client, not just NAPS2
+    - Try [Mopria Scan](https://play.google.com/store/apps/details?id=org.mopria.scan.application) for Android
   - Use NoScannerSharing in appsettings.xml to disable
-- Slightly updated icons in Profiles window 
+- Slightly updated icons in the Profiles window 
+- Old unrecoverable files are now cleaned up on startup
+- Mac/Linux have been upgraded to the .NET 8 runtime
+- Linux flatpak runtime has been upgraded to 23.08
 - Bug fixes
 
 Changes in 7.1.2:
