@@ -15,6 +15,11 @@ internal class EventThrottle<T>
         _eventCallback = eventCallback;
     }
 
+    public void Reset()
+    {
+        _hasLastValue = false;
+    }
+
     public void OnlyIfChanged(T value)
     {
         if (!_hasLastValue)

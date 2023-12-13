@@ -84,7 +84,7 @@ public class ScanServer : IDisposable
 
     public Task Start() => _esclServer.Start();
 
-    public void Stop() => _esclServer.Stop();
+    public Task Stop() => _esclServer.Stop();
 
     public void Dispose() => _esclServer.Dispose();
 }

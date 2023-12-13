@@ -22,10 +22,14 @@ internal class FakeEsclScanJob : IEsclScanJob
     {
         var bytes = File.ReadAllBytes(@"C:\Devel\VS\NAPS2\NAPS2.Sdk.Tests\Resources\dog.jpg");
         await stream.WriteAsync(bytes, 0, bytes.Length);
-        _callback?.Invoke(StatusTransition.DeviceIdle);
+        _callback?.Invoke(StatusTransition.ScanComplete);
     }
 
     public Task WriteProgressTo(Stream stream) => Task.CompletedTask;
 
     public Task WriteErrorDetailsTo(Stream stream) => Task.CompletedTask;
+
+    public void Dispose()
+    {
+    }
 }

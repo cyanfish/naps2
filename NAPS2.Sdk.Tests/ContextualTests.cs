@@ -52,12 +52,9 @@ public class ContextualTests : IDisposable
         return ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
     }
 
-    public IEnumerable<ProcessedImage> CreateScannedImages(params byte[][] images)
+    public List<ProcessedImage> CreateScannedImages(params byte[][] images)
     {
-        foreach (var image in images)
-        {
-            yield return ScanningContext.CreateProcessedImage(LoadImage(image));
-        }
+        return images.Select(image => ScanningContext.CreateProcessedImage(LoadImage(image))).ToList();
     }
 
     public void SetUpFileStorage()

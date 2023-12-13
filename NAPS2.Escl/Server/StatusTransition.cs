@@ -4,5 +4,6 @@ public enum StatusTransition
 {
     CancelJob,
     AbortJob,
-    DeviceIdle
+    ScanComplete,
+    PageComplete
 }

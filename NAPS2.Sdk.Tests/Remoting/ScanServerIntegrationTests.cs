@@ -24,16 +24,13 @@ public class ScanServerIntegrationTests : ContextualTests
         _server = new ScanServer(ScanningContext, new EsclServer());
 
         // Set up a server connecting to a mock scan backend
-        _bridge = new MockScanBridge
-        {
-            MockOutput = [CreateScannedImage()]
-        };
+        _bridge = new MockScanBridge();
         var scanBridgeFactory = Substitute.For<IScanBridgeFactory>();
         scanBridgeFactory.Create(Arg.Any<ScanOptions>()).Returns(_bridge);
         _server.ScanController = new ScanController(ScanningContext, scanBridgeFactory);
 
         // Initialize the server with a single device with a unique ID for the test
-        var displayName = $"testName{Guid.NewGuid()}";
+        var displayName = $"testName-{Guid.NewGuid()}";
         ScanningContext.Logger.LogDebug("Display name: {Name}", displayName);
         var serverDevice = new ScanDevice(ScanOptionsValidator.SystemDefaultDriver, "testID", "testName");
         var serverSharedDevice = new SharedDevice { Device = serverDevice, Name = displayName };
@@ -49,7 +46,7 @@ public class ScanServerIntegrationTests : ContextualTests
 
     public override void Dispose()
     {
-        _server.Dispose();
+        _server.Stop().Wait();
         base.Dispose();
     }
 
@@ -65,6 +62,7 @@ public class ScanServerIntegrationTests : ContextualTests
     [Fact]
     public async Task Scan()
     {
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
         var images = await _client.Scan(new ScanOptions
         {
             Device = _clientDevice
@@ -77,7 +75,7 @@ public class ScanServerIntegrationTests : ContextualTests
     public async Task ScanMultiplePages()
     {
         _bridge.MockOutput =
-            CreateScannedImages(ImageResources.dog, ImageResources.dog_h_n300, ImageResources.dog_h_p300).ToList();
+            CreateScannedImages(ImageResources.dog, ImageResources.dog_h_n300, ImageResources.dog_h_p300);
         var images = await _client.Scan(new ScanOptions
         {
             Device = _clientDevice,
@@ -92,6 +90,7 @@ public class ScanServerIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanWithCorrectOptions()
     {
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
         var images = await _client.Scan(new ScanOptions
         {
             Device = _clientDevice,
@@ -111,7 +110,7 @@ public class ScanServerIntegrationTests : ContextualTests
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.dog, images[0]);
 
-        _bridge.MockOutput = CreateScannedImages(ImageResources.dog_gray).ToList();
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog_gray);
         images = await _client.Scan(new ScanOptions
         {
             Device = _clientDevice,
@@ -131,7 +130,7 @@ public class ScanServerIntegrationTests : ContextualTests
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.dog_gray, images[0]);
 
-        _bridge.MockOutput = CreateScannedImages(ImageResources.dog_bw).ToList();
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog_bw);
         images = await _client.Scan(new ScanOptions
         {
             Device = _clientDevice,
@@ -160,7 +159,51 @@ public class ScanServerIntegrationTests : ContextualTests
 
         await Assert.ThrowsAsync<NoPagesException>(async () => await _client.Scan(new ScanOptions
         {
-            Device = _clientDevice
+            Device = _clientDevice,
+            PaperSource = PaperSource.Feeder
         }).ToListAsync());
+    }
+
+    [Fact]
+    public async Task ScanWithErrorAfterPage()
+    {
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
+        _bridge.Error = new DeviceException(SdkResources.DevicePaperJam);
+
+        await using var enumerator = _client.Scan(new ScanOptions
+        {
+            Device = _clientDevice,
+            PaperSource = PaperSource.Feeder
+        }).GetAsyncEnumerator();
+
+        Assert.True(await enumerator.MoveNextAsync());
+        ImageAsserts.Similar(ImageResources.dog, enumerator.Current);
+
+        var exception = await Assert.ThrowsAsync<DeviceException>(async () => await enumerator.MoveNextAsync());
+        Assert.Equal(SdkResources.DevicePaperJam, exception.Message);
+    }
+
+    [Fact(Skip = "Flaky")]
+    public async Task ScanProgress()
+    {
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog, ImageResources.dog);
+        _bridge.ProgressReports = [0.5];
+
+        var pageStartMock = Substitute.For<EventHandler<PageStartEventArgs>>();
+        var pageProgressMock = Substitute.For<EventHandler<PageProgressEventArgs>>();
+        _client.PageStart += pageStartMock;
+        _client.PageProgress += pageProgressMock;
+
+        await _client.Scan(new ScanOptions
+        {
+            Device = _clientDevice,
+            PaperSource = PaperSource.Feeder
+        }).ToListAsync();
+
+        pageStartMock.Received()(Arg.Any<object>(), Arg.Is<PageStartEventArgs>(args => args.PageNumber == 1));
+        // TODO: This flaked and we only got the second one - why? Can we fix it?
+        pageProgressMock.Received()(Arg.Any<object>(), Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 1 && args.Progress == 0.5));
+        pageStartMock.Received()(Arg.Any<object>(), Arg.Is<PageStartEventArgs>(args => args.PageNumber == 2));
+        pageProgressMock.Received()(Arg.Any<object>(), Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 2 && args.Progress == 0.5));
     }
 }

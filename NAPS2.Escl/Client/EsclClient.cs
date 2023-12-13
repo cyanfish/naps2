@@ -90,7 +90,6 @@ public class EsclClient
         var content = new StringContent(doc, Encoding.UTF8, "text/xml");
         var url = GetUrl($"/{_service.RootUrl}/ScanJobs");
         Logger.LogDebug("ESCL POST {Url}", url);
-        Logger.LogDebug("{Doc}", doc);
         var response = await HttpClient.PostAsync(url, content);
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("POST OK");
@@ -103,6 +102,7 @@ public class EsclClient
 
     public async Task<RawDocument?> NextDocument(EsclJob job, Action<double>? pageProgress = null)
     {
+        var progressCts = new CancellationTokenSource();
         if (pageProgress != null)
         {
             var progressUrl = GetUrl($"{job.UriPath}/Progress");
@@ -110,8 +110,13 @@ public class EsclClient
             var streamReader = new StreamReader(progressResponse);
             _ = Task.Run(async () =>
             {
+                using var streamReaderForDisposal = streamReader;
                 while (await streamReader.ReadLineAsync() is { } line)
                 {
+                    if (progressCts.IsCancellationRequested)
+                    {
+                        return;
+                    }
                     if (double.TryParse(line, NumberStyles.Any, CultureInfo.InvariantCulture, out var progress))
                     {
                         pageProgress(progress);
@@ -119,25 +124,33 @@ public class EsclClient
                 }
             });
         }
-        // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
-        var url = GetUrl($"{job.UriPath}/NextDocument");;
-        Logger.LogDebug("ESCL GET {Url}", url);
-        var response = await DocumentHttpClient.GetAsync(url);
-        if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
+        try
         {
-            // NotFound = end of scan, Gone = canceled
-            Logger.LogDebug("GET failed: {Status}", response.StatusCode);
-            return null;
+            // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
+            var url = GetUrl($"{job.UriPath}/NextDocument");
+            Logger.LogDebug("ESCL GET {Url}", url);
+            var response = await DocumentHttpClient.GetAsync(url);
+            if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
+            {
+                // NotFound = end of scan, Gone = canceled
+                Logger.LogDebug("GET failed: {Status}", response.StatusCode);
+                return null;
+            }
+            response.EnsureSuccessStatusCode();
+            var doc = new RawDocument
+            {
+                Data = await response.Content.ReadAsByteArrayAsync(),
+                ContentType = response.Content.Headers.ContentType?.MediaType,
+                ContentLocation = response.Content.Headers.ContentLocation?.ToString()
+            };
+            Logger.LogDebug("GET OK: {Type} ({Bytes} bytes) {Location}", doc.ContentType, doc.Data.Length,
+                doc.ContentLocation);
+            return doc;
         }
-        response.EnsureSuccessStatusCode();
-        var doc = new RawDocument
+        finally
         {
-            Data = await response.Content.ReadAsByteArrayAsync(),
-            ContentType = response.Content.Headers.ContentType?.MediaType,
-            ContentLocation = response.Content.Headers.ContentLocation?.ToString()
-        };
-        Logger.LogDebug("{Type} ({Bytes} bytes) {Location}", doc.ContentType, doc.Data.Length, doc.ContentLocation);
-        return doc;
+            progressCts.Cancel();
+        }
     }
 
     public async Task<string> ErrorDetails(EsclJob job)
@@ -146,6 +159,7 @@ public class EsclClient
         Logger.LogDebug("ESCL GET {Url}", url);
         var response = await HttpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
+        Logger.LogDebug("GET OK");
         return await response.Content.ReadAsStringAsync();
     }
 
@@ -170,9 +184,9 @@ public class EsclClient
         Logger.LogDebug("ESCL GET {Url}", url);
         var response = await HttpClient.GetAsync(url, CancelToken);
         response.EnsureSuccessStatusCode();
+        Logger.LogDebug("GET OK");
         var text = await response.Content.ReadAsStringAsync();
         var doc = XDocument.Parse(text);
-        Logger.LogTrace("{Doc}", doc);
         return doc;
     }
 

@@ -139,11 +139,13 @@ public class ScanController
         Exception? scanError = null;
         void ScanStartCallback() => ScanStart?.Invoke(this, EventArgs.Empty);
         void ScanEndCallback() => ScanEnd?.Invoke(this, new ScanEndEventArgs(scanError));
-        void PageStartCallback() => PageStart?.Invoke(this, new PageStartEventArgs(++pageNumber));
-
+        void PageStartCallback()
+        {
+            pageNumber++;
+            PageStart?.Invoke(this, new PageStartEventArgs(pageNumber));
+        }
         void PageProgressCallback(double progress) =>
             PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
-
         void PageEndCallback(ProcessedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
 
         ScanStartCallback();

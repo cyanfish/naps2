@@ -85,21 +85,26 @@ public class EsclServer : IEsclServer
         return Task.CompletedTask;
     }
 
-    public void Stop()
+    public Task Stop()
     {
         if (!_started)
         {
-            return;
+            return Task.CompletedTask;
         }
         _started = false;
 
         _cts!.Cancel();
+        var tasks = new List<Task>();
         foreach (var device in _devices.Keys)
         {
             var deviceCtx = _devices[device];
-            deviceCtx.StartTask?.ContinueWith(_ => deviceCtx.Advertiser.UnadvertiseDevice(device));
+            if (deviceCtx.StartTask != null)
+            {
+                tasks.Add(deviceCtx.StartTask.ContinueWith(_ => deviceCtx.Advertiser.UnadvertiseDevice(device)));
+            }
         }
         _cts = null;
+        return Task.WhenAll(tasks);
     }
 
     public void Dispose()

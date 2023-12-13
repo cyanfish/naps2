@@ -9,6 +9,8 @@ internal class MockScanBridge : IScanBridge
     public List<ScanDevice> MockDevices { get; set; } = [];
 
     public List<ProcessedImage> MockOutput { get; set; } = [];
+
+    public List<double> ProgressReports { get; set; } = [];
         
     public Exception Error { get; set; }
 
@@ -38,6 +40,11 @@ internal class MockScanBridge : IScanBridge
         {
             foreach (var img in MockOutput)
             {
+                scanEvents.PageStart();
+                foreach (var progress in ProgressReports)
+                {
+                    scanEvents.PageProgress(progress);
+                }
                 callback(img.Clone(), new PostProcessingContext());
             }
             if (Error != null)

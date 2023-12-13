@@ -12,11 +12,16 @@ internal class ScanJob : IEsclScanJob
 {
     private readonly ScanningContext _scanningContext;
     private readonly ScanController _controller;
+
     private readonly CancellationTokenSource _cts = new();
-    private readonly IAsyncEnumerator<ProcessedImage> _enumerable;
     private readonly TaskCompletionSource<bool> _completedTcs = new();
+    private readonly IAsyncEnumerator<ProcessedImage> _enumerable;
+    private readonly List<ProcessedImage> _allImages = [];
     private readonly List<ProcessedImage> _pdfImages = [];
-    private Action<StatusTransition>? _callback;
+    private readonly Dictionary<int, double> _lastProgressByPageNumber = new();
+
+    private int _currentPage = 1;
+    private Action<StatusTransition>? _statusCallback;
     private Exception? _lastError;
 
     public ScanJob(ScanningContext scanningContext, ScanController controller, ScanDevice device,
@@ -24,14 +29,19 @@ internal class ScanJob : IEsclScanJob
     {
         _scanningContext = scanningContext;
         _controller = controller;
+        _controller.PageProgress += (_, args) => _lastProgressByPageNumber[args.PageNumber] = args.Progress;
+        _controller.PageEnd += (_, args) =>
+        {
+            _statusCallback?.Invoke(StatusTransition.PageComplete);
+            _allImages.Add(args.Image);
+        };
         _controller.ScanEnd += (_, args) =>
         {
-            _callback?.Invoke(StatusTransition.DeviceIdle);
             if (args.HasError)
             {
                 _lastError = args.Error;
-                _callback?.Invoke(StatusTransition.AbortJob);
             }
+            _statusCallback?.Invoke(StatusTransition.ScanComplete);
             _completedTcs.TrySetResult(!args.HasError);
         };
         var options = new ScanOptions
@@ -67,8 +77,8 @@ internal class ScanJob : IEsclScanJob
         }
         catch (Exception)
         {
-            _callback?.Invoke(StatusTransition.DeviceIdle);
-            _callback?.Invoke(StatusTransition.AbortJob);
+            _statusCallback?.Invoke(StatusTransition.AbortJob);
+            _statusCallback?.Invoke(StatusTransition.ScanComplete);
             throw;
         }
     }
@@ -90,12 +100,12 @@ internal class ScanJob : IEsclScanJob
     public void Cancel()
     {
         _cts.Cancel();
-        _callback?.Invoke(StatusTransition.CancelJob);
+        _statusCallback?.Invoke(StatusTransition.CancelJob);
     }
 
     public void RegisterStatusTransitionCallback(Action<StatusTransition> callback)
     {
-        _callback = callback;
+        _statusCallback = callback;
     }
 
     public async Task<bool> WaitForNextDocument()
@@ -109,12 +119,18 @@ internal class ScanJob : IEsclScanJob
             }
             do
             {
+                _currentPage++;
                 _pdfImages.Add(_enumerable.Current);
             } while (await _enumerable.MoveNextAsync());
             return true;
         }
 
-        return await _enumerable.MoveNextAsync();
+        if (await _enumerable.MoveNextAsync())
+        {
+            _currentPage++;
+            return true;
+        }
+        return false;
     }
 
     public async Task WriteDocumentTo(Stream stream)
@@ -143,23 +159,27 @@ internal class ScanJob : IEsclScanJob
 
     public async Task WriteProgressTo(Stream stream)
     {
-        if (_completedTcs.Task.IsCompleted)
-        {
-            return;
-        }
-
         var pageEndTcs = new TaskCompletionSource<bool>();
         var streamWriter = new StreamWriter(stream);
+        var pageNumber = _currentPage;
 
-        void OnPageProgress(object? sender, PageProgressEventArgs e)
+        void WriteProgress(double progress)
         {
-            streamWriter.WriteLine(e.Progress.ToString(CultureInfo.InvariantCulture));
+            streamWriter.WriteLine(progress.ToString(CultureInfo.InvariantCulture));
             streamWriter.Flush();
         }
-
-        void OnPageEnd(object? sender, PageEndEventArgs e)
+        void OnPageProgress(object? sender, PageProgressEventArgs e)
         {
-            pageEndTcs.TrySetResult(true);
+            if (e.PageNumber == pageNumber)
+            {
+                WriteProgress(e.Progress);
+            }
+        }
+        void OnPageEnd(object? sender, PageEndEventArgs e) => pageEndTcs.TrySetResult(true);
+
+        if (_lastProgressByPageNumber.TryGetValue(pageNumber, out var lastPageProgress))
+        {
+            WriteProgress(lastPageProgress);
         }
 
         _controller.PageProgress += OnPageProgress;
@@ -175,6 +195,14 @@ internal class ScanJob : IEsclScanJob
         {
             using var streamWriter = new StreamWriter(stream);
             await streamWriter.WriteLineAsync(RemotingHelper.ToError(_lastError).ToXml());
+        }
+    }
+
+    public void Dispose()
+    {
+        foreach (var image in _allImages)
+        {
+            image.Dispose();
         }
     }
 }

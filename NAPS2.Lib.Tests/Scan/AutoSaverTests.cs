@@ -64,7 +64,7 @@ public class AutoSaverTests : ContextualTests
             FilePath = Path.Combine(FolderPath, "test$(n).pdf")
         };
 
-        var scanned = CreateScannedImages(ImageResources.dog).ToList();
+        var scanned = CreateScannedImages(ImageResources.dog);
         var output = await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
         Assert.Single(output);
@@ -82,7 +82,7 @@ public class AutoSaverTests : ContextualTests
             FilePath = Path.Combine(FolderPath, "test$(n).jpg")
         };
 
-        var scanned = CreateScannedImages(ImageResources.dog).ToList();
+        var scanned = CreateScannedImages(ImageResources.dog);
         var output = await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
         Assert.Single(output);
@@ -187,7 +187,7 @@ public class AutoSaverTests : ContextualTests
             ImageResources.dog,
             ImageResources.dog_gray,
             ImageResources.patcht,
-            ImageResources.dog_h_n300).ToList();
+            ImageResources.dog_h_n300);
         scanned[2] = scanned[2].WithPostProcessingData(scanned[2].PostProcessingData with
         {
             Barcode = new Barcode(true, true, "PATCHT")

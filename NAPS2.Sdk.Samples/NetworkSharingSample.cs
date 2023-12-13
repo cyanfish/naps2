@@ -26,9 +26,9 @@ public class NetworkSharingSample
         scanServer.RegisterDevice(device);
 
         // Run the server until the user presses Enter
-        scanServer.Start();
+        await scanServer.Start();
         Console.ReadLine();
-        scanServer.Stop();
+        await scanServer.Stop();
     }
 
     public static async Task Client()

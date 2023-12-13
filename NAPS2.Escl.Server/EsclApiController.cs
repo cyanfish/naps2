@@ -113,16 +113,14 @@ internal class EsclApiController : WebApiController
     public async Task GetScannerStatus()
     {
         var jobsElement = new XElement(ScanNs + "Jobs");
-        foreach (var jobInfo in _serverState.Jobs.Values)
+        foreach (var jobInfo in _serverState.Jobs.OrderBy(x => x.LastUpdated.ElapsedMilliseconds))
         {
             jobsElement.Add(new XElement(ScanNs + "JobInfo",
                 new XElement(PwgNs + "JobUri", $"/eSCL/ScanJobs/{jobInfo.Id}"),
                 new XElement(PwgNs + "JobUuid", jobInfo.Id),
                 new XElement(ScanNs + "Age", Math.Ceiling(jobInfo.LastUpdated.Elapsed.TotalSeconds)),
-                // TODO: real data
-                new XElement(PwgNs + "ImagesCompleted",
-                    jobInfo.State is EsclJobState.Pending or EsclJobState.Processing ? "0" : "1"),
-                new XElement(PwgNs + "ImagesToTransfer", "1"),
+                new XElement(PwgNs + "ImagesCompleted", jobInfo.ImagesCompleted),
+                new XElement(PwgNs + "ImagesToTransfer", jobInfo.ImagesToTransfer),
                 new XElement(PwgNs + "JobState", jobInfo.State.ToString()),
                 new XElement(PwgNs + "JobStateReasons",
                     new XElement(PwgNs + "JobStateReason",
@@ -164,16 +162,16 @@ internal class EsclApiController : WebApiController
             return;
         }
         _serverState.IsProcessing = true;
-        var jobState = JobInfo.CreateNewJob(_serverState, _deviceConfig.CreateJob(settings));
-        _serverState.Jobs[jobState.Id] = jobState;
-        Response.Headers.Add("Location", $"{Request.Url}/{jobState.Id}");
+        var jobInfo = JobInfo.CreateNewJob(_serverState, _deviceConfig.CreateJob(settings));
+        _serverState.AddJob(jobInfo);
+        Response.Headers.Add("Location", $"{Request.Url}/{jobInfo.Id}");
         Response.StatusCode = 201; // Created
     }
 
     [Route(HttpVerbs.Delete, "/ScanJobs/{jobId}")]
     public void CancelScanJob(string jobId)
     {
-        if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
+        if (_serverState.TryGetJob(jobId, out var jobState) &&
             jobState.State is EsclJobState.Pending or EsclJobState.Processing)
         {
             jobState.Job.Cancel();
@@ -195,7 +193,7 @@ internal class EsclApiController : WebApiController
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/Progress")]
     public async Task Progress(string jobId)
     {
-        if (_serverState.Jobs.TryGetValue(jobId, out var jobState) &&
+        if (_serverState.TryGetJob(jobId, out var jobState) &&
             jobState.State is EsclJobState.Pending or EsclJobState.Processing)
         {
             SetChunkedResponse();
@@ -216,7 +214,7 @@ internal class EsclApiController : WebApiController
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/ErrorDetails")]
     public async Task ErrorDetails(string jobId)
     {
-        if (_serverState.Jobs.TryGetValue(jobId, out var jobState))
+        if (_serverState.TryGetJob(jobId, out var jobState))
         {
             Response.ContentType = "text/xml";
             using var stream = Response.OutputStream;
@@ -231,7 +229,7 @@ internal class EsclApiController : WebApiController
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
     public async Task NextDocument(string jobId)
     {
-        if (!_serverState.Jobs.TryGetValue(jobId, out var jobInfo))
+        if (!_serverState.TryGetJob(jobId, out var jobInfo))
         {
             Response.StatusCode = 404;
             return;
@@ -255,9 +253,6 @@ internal class EsclApiController : WebApiController
         catch (Exception ex)
         {
             _logger.LogDebug(ex, "ESCL server error waiting for document");
-            // The ScanJob should transition the job to aborted on error, but there's a race condition where this could
-            // happen first and another NextDocument call will think the job is still processing unless we ensure it's
-            // in the correct state here.
             jobInfo.TransitionState(EsclJobState.Processing, EsclJobState.Aborted);
             Response.StatusCode = 500;
             return;
@@ -270,6 +265,7 @@ internal class EsclApiController : WebApiController
             Response.ContentEncoding = null;
             using var stream = Response.OutputStream;
             await jobInfo.Job.WriteDocumentTo(stream);
+            jobInfo.TransferredDocument();
         }
         else
         {

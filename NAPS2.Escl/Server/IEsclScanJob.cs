@@ -1,6 +1,6 @@
 namespace NAPS2.Escl.Server;
 
-public interface IEsclScanJob
+public interface IEsclScanJob : IDisposable
 {
     string ContentType { get; }
     void Cancel();

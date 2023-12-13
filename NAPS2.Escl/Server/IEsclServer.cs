@@ -7,6 +7,6 @@ public interface IEsclServer : IDisposable
     void AddDevice(EsclDeviceConfig deviceConfig);
     void RemoveDevice(EsclDeviceConfig deviceConfig);
     Task Start();
-    void Stop();
+    Task Stop();
     ILogger Logger { get; set; }
 }
