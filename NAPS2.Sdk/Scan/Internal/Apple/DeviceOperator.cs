@@ -159,6 +159,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                         "{PixelDataType} {NumComponents} {BitsPerComponent}",
                         data.PixelDataType, data.NumComponents, data.BitsPerComponent);
                 }
+                _scanEvents.PageStart();
             });
             lock (this)
             {

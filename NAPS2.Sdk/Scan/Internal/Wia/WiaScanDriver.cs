@@ -181,6 +181,7 @@ internal class WiaScanDriver : IScanDriver
                     hasAtLeastOneImage = true;
                     using var image = _scanningContext.ImageContext.Load(stream);
                     _callback(image);
+                    _scanEvents.PageStart();
                 }
                 catch (Exception e)
                 {
@@ -191,7 +192,6 @@ internal class WiaScanDriver : IScanDriver
             transfer.Progress += (sender, args) => _scanEvents.PageProgress(args.Percent / 100.0);
             using (_cancelToken.Register(transfer.Cancel))
             {
-                // TODO: Need to call PageStart multiple times for feeder (and non-wia-1.0?)
                 _scanEvents.PageStart();
                 try
                 {
@@ -209,7 +209,6 @@ internal class WiaScanDriver : IScanDriver
                     {
                         while (!_cancelToken.IsCancellationRequested && scanException == null)
                         {
-                            _scanEvents.PageStart();
                             transfer.Download();
                         }
                     }
