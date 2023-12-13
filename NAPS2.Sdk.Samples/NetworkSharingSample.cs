@@ -39,8 +39,8 @@ public class NetworkSharingSample
         // Find the shared device using Driver.Escl
         ScanDevice device = (await controller.GetDeviceList(Driver.Escl)).First();
 
-        // Set up options using Driver.Escl
-        var options = new ScanOptions { Device = device, Driver = Driver.Escl };
+        // Set up options
+        var options = new ScanOptions { Device = device };
 
         // Do the scan
         await foreach (var image in controller.Scan(options))

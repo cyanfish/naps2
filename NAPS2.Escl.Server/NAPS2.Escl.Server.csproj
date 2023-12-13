@@ -5,7 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>12</LangVersion>
+
+        <Title>NAPS2.Escl.Server</Title>
+        <Product>NAPS2.Escl.Server</Product>
+        <Description>ESCL server for NAPS2.Sdk.</Description>
+        <PackageTags>naps2 escl</PackageTags>
     </PropertyGroup>
+
+    <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
     <ItemGroup>
       <PackageReference Include="EmbedIO" Version="3.5.2" />
