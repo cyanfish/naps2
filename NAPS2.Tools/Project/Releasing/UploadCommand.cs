@@ -1,9 +1,12 @@
+using System.Net.Http;
+using System.Threading;
 using NAPS2.Tools.Project.Targets;
 using NuGet.Common;
 using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using Octokit;
 using Octokit.Internal;
+using Renci.SshNet;
 using FileMode = System.IO.FileMode;
 using Repository = NuGet.Protocol.Core.Types.Repository;
 
@@ -37,6 +40,12 @@ public class UploadCommand : ICommand<UploadOptions>
         {
             Output.Info("Uploading binaries to Github");
             UploadToGithub().Wait();
+            didSomething = true;
+        }
+        if (opts.Target is "all" or "sourceforge")
+        {
+            Output.Info("Uploading binaries to SourceForge");
+            UploadToSourceForge().Wait();
             didSomething = true;
         }
         if (opts.Target is "all" or "static")
@@ -119,13 +128,77 @@ public class UploadCommand : ICommand<UploadOptions>
         foreach (var package in TargetsHelper.EnumeratePackageTargets())
         {
             var path = package.PackagePath;
-            Output.Verbose($"Uploading asset {path}");
-            await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            await client.Repository.Release.UploadAsset(release,
-                new ReleaseAssetUpload(Path.GetFileName(path), "application/octet-stream", stream,
-                    null));
+            if (File.Exists(path))
+            {
+                Output.Verbose($"Uploading asset {path}");
+                await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                await client.Repository.Release.UploadAsset(release,
+                    new ReleaseAssetUpload(Path.GetFileName(path), "application/octet-stream", stream,
+                        null));
+            }
         }
         Output.Info($"Created draft Github release: {release.HtmlUrl}");
+    }
+
+    private async Task UploadToSourceForge()
+    {
+        var version = ProjectHelper.GetCurrentVersionName();
+        var config = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "sourceforge"));
+        var parts = config.Split("\n");
+        var username = parts[0].Trim();
+        var privateKeyFile = parts[1].Trim();
+        var apiKey = parts[2].Trim();
+        var connectionInfo = new ConnectionInfo("frs.sourceforge.net", username,
+            new PrivateKeyAuthenticationMethod(username, new PrivateKeyFile(privateKeyFile)));
+        using var client = new SftpClient(connectionInfo);
+        await client.ConnectAsync(CancellationToken.None);
+        Output.Verbose("Connected to SourceForge");
+        try
+        {
+            client.CreateDirectory($"/home/frs/project/naps2/{version}");
+        }
+        catch (Exception)
+        {
+            // Maybe already created
+        }
+        Output.Verbose("Updating readme with changelog");
+        await using var changelogStream = File.OpenRead(Path.Combine(Paths.SolutionRoot, "CHANGELOG.md"));
+        client.UploadFile(changelogStream, "/home/frs/project/naps2/readme.txt");
+        foreach (var package in TargetsHelper.EnumeratePackageTargets().Reverse())
+        {
+            var path = package.PackagePath;
+            if (File.Exists(path))
+            {
+                Output.Verbose($"Uploading asset {path}");
+                await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                client.UploadFile(stream, $"/home/frs/project/naps2/{version}/{Path.GetFileName(path)}");
+            }
+        }
+        Output.Verbose($"Setting default downloads");
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+        await httpClient.PutAsync(
+            $"https://sourceforge.net/projects/naps2/files/{version}/naps2-{version}-win.exe",
+            new FormUrlEncodedContent([
+                new("default", "windows"),
+                new("default", "android"),
+                new("default", "bsd"),
+                new("default", "solaris"),
+                new("default", "others"),
+                new("api_key", apiKey)
+            ]));
+        await httpClient.PutAsync(
+            $"https://sourceforge.net/projects/naps2/files/{version}/naps2-{version}-mac-univ.pkg",
+            new FormUrlEncodedContent([
+                new("default", "mac"),
+                new("api_key", apiKey)
+            ]));
+        await httpClient.PutAsync(
+            $"https://sourceforge.net/projects/naps2/files/{version}/naps2-{version}-linux-x64.deb",
+            new FormUrlEncodedContent([
+                new("default", "linux"),
+                new("api_key", apiKey)
+            ]));
     }
 
     private string GetChangelog()
