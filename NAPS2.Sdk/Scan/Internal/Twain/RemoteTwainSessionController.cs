@@ -1,4 +1,5 @@
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Scan.Internal.Twain;
@@ -25,6 +26,12 @@ internal class RemoteTwainSessionController : ITwainSessionController
     {
         using var workerContext = CreateWorker(options);
         await workerContext.Service.TwainScan(options, cancelToken, twainEvents);
+        if (cancelToken.IsCancellationRequested)
+        {
+            // We need to report cancellation so that TwainImageProcessor doesn't return a partial image
+            _scanningContext.Logger.LogDebug("NAPS2.TW - Sending cancel event");
+            twainEvents.TransferCanceled(new TwainTransferCanceled());
+        }
     }
 
     private WorkerContext CreateWorker(ScanOptions options)
