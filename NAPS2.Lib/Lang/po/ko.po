@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-12-13 04:56\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -192,6 +192,10 @@ msgstr "{0} 개의 이미지를 삭제하시겠습니까?"
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "{0} 개의 프로파일을 삭제하시겠습니까?"
+
+#: UiStrings.resx$ConfirmDeleteSharedDevice$Message
+msgid "Are you sure you want to stop sharing {0}?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -1212,6 +1216,11 @@ msgstr "스캔 설정"
 msgid "Scanned Image"
 msgstr "스캔된 이미지"
 
+#: UiStrings.resx$ScannerSharing$Message
+#: UiStrings.resx$ScannerSharingFormTitle$Message
+msgid "Scanner Sharing"
+msgstr ""
+
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
 msgstr "{0} 페이지 스캔 중"
@@ -1260,6 +1269,18 @@ msgstr "Patch-T 를 통한 파일 분할"
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
 msgstr "기본값 설정"
+
+#: UiStrings.resx$Share$Message
+msgid "Share"
+msgstr ""
+
+#: UiStrings.resx$SharedDeviceFormTitle$Message
+msgid "Shared Scanner Settings"
+msgstr ""
+
+#: UiStrings.resx$ScannerSharingIntro$Message
+msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
+msgstr ""
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"

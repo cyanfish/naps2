@@ -55,7 +55,7 @@
     <value>cm</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
-    <value>in</value>
+    <value>pollici</value>
   </data>
   <data name="PageSizeUnit_Millimetre" xml:space="preserve">
     <value>mm</value>
@@ -79,10 +79,10 @@
     <value>Personalizzato...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>Legale USA (8.5x14 in)</value>
+    <value>Legale USA (8.5x14 pollici)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>Lettera USA (8.5x11 in)</value>
+    <value>Lettera USA (8.5x11 pollici)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Predefinito</value>

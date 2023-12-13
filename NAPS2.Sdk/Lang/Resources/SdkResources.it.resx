@@ -37,7 +37,7 @@
     <value>Il file '{0}' non può essere importato.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta l'uso di un alimentatore automatico. \nSe lo scanner ha un alimentatore automatico, prova ad usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta l'uso di un alimentatore automatico. Se lo scanner ha un alimentatore automatico, prova a usare un driver differente.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Non ci sono fogli nell'alimentatore automatico.</value>
@@ -46,7 +46,7 @@
     <value>Non hai i permessi per copiare il contenuto dal file '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta la scansione in fronte retro. \nSe lo scanner supporta la scansione in fronte retro, prova ad usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta la scansione in fronte retro. Se lo scanner supporta la scansione in fronte retro, prova a usare un driver differente.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>Lo scanner selezionato è occupato.</value>
@@ -61,10 +61,10 @@
     <value>Lo scanner si sta riscaldando.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Il driver SANE non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
+    <value>Il driver SANE non è disponibile. Assicurati di aver installato il pacchetto richiesto:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Il motore OCR non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
+    <value>Il motore OCR non è disponibile. Assicurati di aver installato il pacchetto richiesto:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Il driver selezionato non è supportato da questo sistema.</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-10-08 18:01\n"
+"PO-Revision-Date: 2023-12-13 04:56\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -94,16 +94,15 @@ msgstr "Consenti stampa"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "Deinterleave alternativo"
+msgstr "Inverti interfoliazione alternativa"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr "Interleave alternativo"
+msgstr "Interfoliazione alternativa"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Per importare questo file PDF è necessario un componente aggiuntivo. \n"
-"Vuoi scaricarlo ora?"
+msgstr "Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi scaricarlo ora?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -111,7 +110,7 @@ msgstr "Si è verificato un errore durante l'esecuzione dell'OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr "Si è verificato un errore provando ad autorizzare."
+msgstr "Si è verificato un errore durante il tentativo di autorizzazione."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
@@ -176,7 +175,7 @@ msgstr "Vuoi annullare la scansione in serie?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Vuoi cancellare il(i) {0} oggetto(i)?"
+msgstr "Vuoi cancellare {0} elemento/i?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
@@ -193,6 +192,10 @@ msgstr "Vuoi eliminare {0} elemento/i?"
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Vuoi eliminare {0} profilo/i?"
+
+#: UiStrings.resx$ConfirmDeleteSharedDevice$Message
+msgid "Are you sure you want to stop sharing {0}?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -381,7 +384,7 @@ msgstr "Copia..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr "Copyright {0} contrubitori NAPS2"
+msgstr "Copyright {0} contributori NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -432,7 +435,7 @@ msgstr "Percorso file predefinito:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr "Deinterlaccia"
+msgstr "Inverti interfoliazione"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
@@ -474,7 +477,7 @@ msgstr "Correzione documento"
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr "Fai una donazione."
+msgstr "Donazione"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -552,7 +555,7 @@ msgstr "Abilita salvataggio automatico"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr "Abilita registrazione registri debug"
+msgstr "Abilita la registrazione dei log di debug"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -594,7 +597,7 @@ msgstr "Alimentatore automatico"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Nome file"
+msgstr "Nome file:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -699,8 +702,7 @@ msgstr "Installazione fallita"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Installazione completata. \n"
-"Vuoi riavviare NAPS2?"
+msgstr "Installazione completata. Vuoi riavviare NAPS2 ora?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
@@ -708,7 +710,7 @@ msgstr "Installazione fallita."
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr "Interlaccia"
+msgstr "Interfoliazione"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -802,8 +804,7 @@ msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 è totalmente gratuito. \n"
-"Considera la possibilità di fare una donazione."
+msgstr "NAPS2 è totalmente gratuito. Considera la possibilità di fare una donazione."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -827,7 +828,7 @@ msgstr "Nuovo profilo"
 
 #: UiStrings.resx$Next$Message
 msgid "Next"
-msgstr "Prossimo"
+msgstr "Successiva"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
@@ -854,8 +855,7 @@ msgstr "Nessuno scanner trovato."
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr "Il programma è aggiornato.\n"
-"Nessun aggiornamento disponibile."
+msgstr "Nessun aggiornamento disponibile."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -1005,7 +1005,7 @@ msgstr "Post-processo"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
-msgstr "Seleziona 'Avvia' quando pronto."
+msgstr "Seleziona 'Avvia' quando sei pronto."
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
@@ -1017,7 +1017,7 @@ msgstr "Anteprima:"
 
 #: UiStrings.resx$Previous$Message
 msgid "Previous"
-msgstr "Indietro"
+msgstr "Precedente"
 
 #: MiscResources.resx$Print$Message
 #: UiStrings.resx$Print$Message
@@ -1216,6 +1216,11 @@ msgstr "Configurazione scansione"
 msgid "Scanned Image"
 msgstr "Immagine scansionata"
 
+#: UiStrings.resx$ScannerSharing$Message
+#: UiStrings.resx$ScannerSharingFormTitle$Message
+msgid "Scanner Sharing"
+msgstr ""
+
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
 msgstr "Scansione pagina {0}"
@@ -1265,6 +1270,18 @@ msgstr "Separa file tramite Patch-T"
 msgid "Set Default"
 msgstr "Imposta predefinito"
 
+#: UiStrings.resx$Share$Message
+msgid "Share"
+msgstr ""
+
+#: UiStrings.resx$SharedDeviceFormTitle$Message
+msgid "Shared Scanner Settings"
+msgstr ""
+
+#: UiStrings.resx$ScannerSharingIntro$Message
+msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
+msgstr ""
+
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Nitidezza"
@@ -1312,8 +1329,7 @@ msgstr "Dettagli tecnici"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "Il motore OCR non è disponibile. \n"
-"Assicurati di aver installato il pacchetto richiesto:"
+msgstr "Il motore OCR non è disponibile. Assicurati di aver installato il pacchetto richiesto:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
@@ -1322,8 +1338,7 @@ msgstr "Tempo scaduto per l'operazione OCR."
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "Il driver SANE non è disponibile. \n"
-"Assicurati di aver installato il pacchetto richiesto:"
+msgstr "Il driver SANE non è disponibile. Assicurati di aver installato il pacchetto richiesto:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
@@ -1332,7 +1347,7 @@ msgstr "Il file '{0}' non può essere importato."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Il file '{0}' non può essere importato. Solo i files PDF generati da NAPS2 possono essere importati."
+msgstr "Il file '{0}' non può essere importato. Solo i file PDF generati da NAPS2 possono essere importati."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1340,8 +1355,7 @@ msgstr "Il file non può essere sovrascritto perché è attualmente in uso."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Il file {0} esiste già. \n"
-"Vuoi sovrascriverlo?"
+msgstr "Il file {0} esiste già. Vuoi sovrascriverlo?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
@@ -1375,14 +1389,12 @@ msgstr "Lo scanner selezionato non è stato trovato."
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
-msgstr "Lo scanner selezionato non supporta l'uso di un alimentatore automatico. \n"
-"Se lo scanner ha un alimentatore automatico, prova ad usare un driver differente."
+msgstr "Lo scanner selezionato non supporta l'uso di un alimentatore automatico. Se lo scanner ha un alimentatore automatico, prova a usare un driver differente."
 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "Lo scanner selezionato non supporta la scansione in fronte retro. \n"
-"Se lo scanner supporta la scansione in fronte retro, prova ad usare un driver differente."
+msgstr "Lo scanner selezionato non supporta la scansione in fronte retro. Se lo scanner supporta la scansione in fronte retro, prova a usare un driver differente."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
@@ -1420,11 +1432,11 @@ msgstr "Implementazione Twain:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "Legale USA (8.5x14 in)"
+msgstr "Legale USA (8.5x14 pollici)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "Lettera USA (8.5x11 in)"
+msgstr "Lettera USA (8.5x11 pollici)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1460,7 +1472,7 @@ msgstr "Password utente:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
-msgstr "L'uso dell'OCR richiede che venga scaricata ogni lingua che si vuoie far riconoscere."
+msgstr "L'uso dell'OCR richiede che venga scaricata ogni lingua che si vuole far riconoscere."
 
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
@@ -1514,8 +1526,7 @@ msgstr "Non hai i permessi per salvare i file in questo percorso."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
-msgstr "Ci sono modifiche non salvate. \n"
-"Sei sicuro di voler uscire e abbandonare tali modifiche?"
+msgstr "Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?"
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
@@ -1539,7 +1550,7 @@ msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "in"
+msgstr "pollici"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
@@ -1575,7 +1586,7 @@ msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "{0} immagine/i digitalizzata/e in {1} a {2} potrebbero non essere state salvate e sono recuperabili. \n"
+msgstr "{0} immagine/i digitalizzata/e il {1} alle ore {2} potrebbero non essere state salvate e sono recuperabili. \n"
 "Vuoi recuperarle?"
 
 #: MiscResources.resx$ImagesSaved$Message

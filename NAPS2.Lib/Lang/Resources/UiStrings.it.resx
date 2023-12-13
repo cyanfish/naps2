@@ -16,7 +16,7 @@
     <value>Info sul programma</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} contrubitori NAPS2</value>
+    <value>Copyright {0} contributori NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Libreria icone:</value>
@@ -28,7 +28,7 @@
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Fai una donazione.</value>
+    <value>Donazione</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profili</value>
@@ -151,16 +151,16 @@
     <value>Riordina</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Interlaccia</value>
+    <value>Interfoliazione</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Deinterlaccia</value>
+    <value>Inverti interfoliazione</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Interleave alternativo</value>
+    <value>Interfoliazione alternativa</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Deinterleave alternativo</value>
+    <value>Inverti interfoliazione alternativa</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Inverti</value>
@@ -349,7 +349,7 @@
     <value>Download OCR</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>L'uso dell'OCR richiede che venga scaricata ogni lingua che si vuoie far riconoscere.</value>
+    <value>L'uso dell'OCR richiede che venga scaricata ogni lingua che si vuole far riconoscere.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
     <value>Seleziona una o più lingue:</value>
@@ -367,10 +367,10 @@
     <value>Anteprima</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Prossimo</value>
+    <value>Successiva</value>
   </data>
   <data name="Previous" xml:space="preserve">
-    <value>Indietro</value>
+    <value>Precedente</value>
   </data>
   <data name="XOfY" xml:space="preserve">
     <value>{0} di {1}</value>
@@ -394,7 +394,7 @@
     <value>Ripristino immagini digitalizzate</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} immagine/i digitalizzata/e in {1} a {2} potrebbero non essere state salvate e sono recuperabili. \nVuoi recuperarle?</value>
+    <value>{0} immagine/i digitalizzata/e il {1} alle ore {2} potrebbero non essere state salvate e sono recuperabili. \nVuoi recuperarle?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Segnaposti</value>
@@ -514,7 +514,7 @@
     <value>Incremento automatico numero (1 cifra)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Nome file</value>
+    <value>Nome file:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Anteprima:</value>
@@ -649,7 +649,7 @@
     <value>Scansione in serie</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Seleziona 'Avvia' quando pronto.</value>
+    <value>Seleziona 'Avvia' quando sei pronto.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>Configurazione scansione</value>
@@ -700,6 +700,24 @@
     <value>Strumenti</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Abilita registrazione registri debug</value>
+    <value>Abilita la registrazione dei log di debug</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="ScannerSharing" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingFormTitle" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingIntro" xml:space="preserve">
+    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+  </data>
+  <data name="SharedDeviceFormTitle" xml:space="preserve">
+    <value>Shared Scanner Settings</value>
+  </data>
+  <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
+    <value>Are you sure you want to stop sharing {0}?</value>
   </data>
 </root>

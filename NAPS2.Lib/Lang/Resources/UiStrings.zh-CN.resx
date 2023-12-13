@@ -702,4 +702,22 @@
   <data name="EnableDebugLogging" xml:space="preserve">
     <value>启用调试日志</value>
   </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="ScannerSharing" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingFormTitle" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingIntro" xml:space="preserve">
+    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+  </data>
+  <data name="SharedDeviceFormTitle" xml:space="preserve">
+    <value>Shared Scanner Settings</value>
+  </data>
+  <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
+    <value>Are you sure you want to stop sharing {0}?</value>
+  </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-12-13 04:56\n"
 "Last-Translator: \n"
 "Language-Team: Afrikaans\n"
 "Language: af\n"
@@ -192,6 +192,10 @@ msgstr "Bạn có chắc chắn muốn xóa {0} sản phẩm (s)?"
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "Bạn có chắc chắn muốn xóa {0} hồ sơ?"
+
+#: UiStrings.resx$ConfirmDeleteSharedDevice$Message
+msgid "Are you sure you want to stop sharing {0}?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -1212,6 +1216,11 @@ msgstr ""
 msgid "Scanned Image"
 msgstr ""
 
+#: UiStrings.resx$ScannerSharing$Message
+#: UiStrings.resx$ScannerSharingFormTitle$Message
+msgid "Scanner Sharing"
+msgstr ""
+
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
 msgstr ""
@@ -1259,6 +1268,18 @@ msgstr ""
 
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
+msgstr ""
+
+#: UiStrings.resx$Share$Message
+msgid "Share"
+msgstr ""
+
+#: UiStrings.resx$SharedDeviceFormTitle$Message
+msgid "Shared Scanner Settings"
+msgstr ""
+
+#: UiStrings.resx$ScannerSharingIntro$Message
+msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
 msgstr ""
 
 #: UiStrings.resx$Sharpen$Message

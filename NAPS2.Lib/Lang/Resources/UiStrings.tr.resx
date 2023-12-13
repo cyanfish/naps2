@@ -169,7 +169,7 @@
     <value>Reverse All</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Seçimi Ters Çevir</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Temizle</value>
@@ -202,10 +202,10 @@
     <value>Kaydet</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Tümünü Kaydet</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Seçilenleri Kaydet</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Tümünü PDF Olarak Kaydet</value>
@@ -247,10 +247,10 @@
     <value>ESCL Driver</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL Ağ Sürücüsü</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB Sürücüsü</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Apple Sürücüsü</value>
@@ -511,7 +511,7 @@
     <value>Kendiliğinden artan sayı (2 hane)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Kendiliğinden artan sayı (1 hane)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Dosya Adı</value>
@@ -565,7 +565,7 @@
     <value>Parola</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Bu dosya şifrelenmiş ve açmak için bir şifre gerekiyor:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Dosya yolu için komut iste</value>
@@ -697,9 +697,27 @@
     <value>Klasörü Aç</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Araçlar</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Hata ayıklama günlüğünü etkinleştir</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="ScannerSharing" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingFormTitle" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingIntro" xml:space="preserve">
+    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+  </data>
+  <data name="SharedDeviceFormTitle" xml:space="preserve">
+    <value>Shared Scanner Settings</value>
+  </data>
+  <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
+    <value>Are you sure you want to stop sharing {0}?</value>
   </data>
 </root>

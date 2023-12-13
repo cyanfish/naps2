@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-09-04 17:55\n"
+"PO-Revision-Date: 2023-12-13 04:56\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -192,6 +192,10 @@ msgstr "您确定要删除{0}个项目吗?"
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "您确定要删除{0}个配置吗？"
+
+#: UiStrings.resx$ConfirmDeleteSharedDevice$Message
+msgid "Are you sure you want to stop sharing {0}?"
+msgstr ""
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -1212,6 +1216,11 @@ msgstr "扫描设置"
 msgid "Scanned Image"
 msgstr "已扫描的图像"
 
+#: UiStrings.resx$ScannerSharing$Message
+#: UiStrings.resx$ScannerSharingFormTitle$Message
+msgid "Scanner Sharing"
+msgstr ""
+
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
 msgstr "正在扫描页面 {0}"
@@ -1260,6 +1269,18 @@ msgstr "通过 Patch-T 拆分文件"
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
 msgstr "设为默认设置"
+
+#: UiStrings.resx$Share$Message
+msgid "Share"
+msgstr ""
+
+#: UiStrings.resx$SharedDeviceFormTitle$Message
+msgid "Shared Scanner Settings"
+msgstr ""
+
+#: UiStrings.resx$ScannerSharingIntro$Message
+msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
+msgstr ""
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"

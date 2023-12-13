@@ -19,7 +19,7 @@
     <value>Azzera</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Vuoi cancellare il(i) {0} oggetto(i)?</value>
+    <value>Vuoi cancellare {0} elemento/i?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Vuoi eliminare {0} elemento/i?</value>
@@ -31,7 +31,7 @@
     <value>Vuoi eliminare il profilo {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>Il file {0} esiste già. \nVuoi sovrascriverlo?</value>
+    <value>Il file {0} esiste già. Vuoi sovrascriverlo?</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Elimina</value>
@@ -112,7 +112,7 @@
     <value>Installazione completata</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installazione completata. \nVuoi riavviare NAPS2?</value>
+    <value>Installazione completata. Vuoi riavviare NAPS2 ora?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
     <value>Installazione fallita.</value>
@@ -139,7 +139,7 @@
     <value>Il file '{0}' non può essere importato.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Il file '{0}' non può essere importato. Solo i files PDF generati da NAPS2 possono essere importati.</value>
+    <value>Il file '{0}' non può essere importato. Solo i file PDF generati da NAPS2 possono essere importati.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Errore download</value>
@@ -160,7 +160,7 @@
     <value>Ripristina immagine</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Ci sono modifiche non salvate. \nSei sicuro di voler uscire e abbandonare tali modifiche?</value>
+    <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
     <value>E' in corso un'operazione. Desideri uscire e cancellare tale operazione?</value>
@@ -175,7 +175,7 @@
     <value>Scansione pagina {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta l'uso di un alimentatore automatico. \nSe lo scanner ha un alimentatore automatico, prova ad usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta l'uso di un alimentatore automatico. Se lo scanner ha un alimentatore automatico, prova a usare un driver differente.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Non ci sono fogli nell'alimentatore automatico.</value>
@@ -223,7 +223,7 @@
     <value>Salvataggio risultati operazioni in serie...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta la scansione in fronte retro. \nSe lo scanner supporta la scansione in fronte retro, prova ad usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta la scansione in fronte retro. Se lo scanner supporta la scansione in fronte retro, prova a usare un driver differente.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -325,7 +325,7 @@
     <value>Scaricamento necessario</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Per importare questo file PDF è necessario un componente aggiuntivo. \nVuoi scaricarlo ora?</value>
+    <value>Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi scaricarlo ora?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Vuoi annullare la scansione in serie?</value>
@@ -334,16 +334,16 @@
     <value>Annulla operazione in serie</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Fai una donazione.</value>
+    <value>Donazione</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 è totalmente gratuito. \nConsidera la possibilità di fare una donazione.</value>
+    <value>NAPS2 è totalmente gratuito. Considera la possibilità di fare una donazione.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Il driver SANE non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
+    <value>Il driver SANE non è disponibile. Assicurati di aver installato il pacchetto richiesto:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Il motore OCR non è disponibile. \nAssicurati di aver installato il pacchetto richiesto:</value>
+    <value>Il motore OCR non è disponibile. Assicurati di aver installato il pacchetto richiesto:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Il driver selezionato non è supportato da questo sistema.</value>
@@ -361,7 +361,7 @@
     <value>Aggiornamento...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>Il programma è aggiornato.\nNessun aggiornamento disponibile.</value>
+    <value>Nessun aggiornamento disponibile.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Verifica in corso...</value>
@@ -379,7 +379,7 @@
     <value>È disponibile un aggiornamento.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>Si è verificato un errore provando ad autorizzare.</value>
+    <value>Si è verificato un errore durante il tentativo di autorizzazione.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Caricamento email...</value>

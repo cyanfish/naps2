@@ -70,9 +70,9 @@
     <value>Seçilen sürücü bu sistemde desteklenmiyor.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>OCR çalıştırılırken bir hata oluştu.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>OCR işlemi zaman aşımına uğradı.</value>
   </data>
 </root>

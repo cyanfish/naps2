@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutFormTitle" xml:space="preserve">
-    <value>À propos</value>
+    <value>À propos de</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
     <value>Copyright {0} Contributeurs NAPS2</value>
@@ -181,7 +181,7 @@
     <value>Langue</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>À propos</value>
+    <value>À propos de</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Zoom</value>
@@ -701,5 +701,23 @@
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
     <value>Activer le journal de débogage</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="ScannerSharing" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingFormTitle" xml:space="preserve">
+    <value>Scanner Sharing</value>
+  </data>
+  <data name="ScannerSharingIntro" xml:space="preserve">
+    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+  </data>
+  <data name="SharedDeviceFormTitle" xml:space="preserve">
+    <value>Shared Scanner Settings</value>
+  </data>
+  <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
+    <value>Are you sure you want to stop sharing {0}?</value>
   </data>
 </root>

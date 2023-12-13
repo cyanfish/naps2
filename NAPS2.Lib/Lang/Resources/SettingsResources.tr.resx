@@ -127,7 +127,7 @@
     <value>Eski (yalnızca yerli kullanıcı arayüzü)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Alternatif Aktarım</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
     <value>Memory Transfer</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-04-22 05:32\n"
+"PO-Revision-Date: 2023-12-13 04:56\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -106,7 +106,7 @@ msgstr "Bu PDF dosyasını içe aktarmak için ek bileşen gerekiyor. Şimdi ind
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "OCR çalıştırılırken bir hata oluştu."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -143,7 +143,7 @@ msgstr "Süren işlem var. Çıkmak ve süreci iptal etmek istediğinize emin mi
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Toplu tarama sırasında bilinmeyen bir hata oluştu."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -159,7 +159,7 @@ msgstr "Apple Sürücüsü"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Mail"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -193,6 +193,10 @@ msgstr "{0} adet ögeyi silmek istediğinize emin misiniz?"
 msgid "Are you sure you want to delete {0} profiles?"
 msgstr "{0} adet profili silmek istediğinize emin misiniz?"
 
+#: UiStrings.resx$ConfirmDeleteSharedDevice$Message
+msgid "Are you sure you want to stop sharing {0}?"
+msgstr ""
+
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "{0} adet resimde yapılan değişiklikleri geri almak istediğinize emin misiniz?"
@@ -220,7 +224,7 @@ msgstr "Kendiliğinden Kaydetme Ayarları"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Kendiliğinden artan sayı (1 hane)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -501,15 +505,15 @@ msgstr "Çift Taraflı"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL Driver"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL Ağ Sürücüsü"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB Sürücüsü"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -551,7 +555,7 @@ msgstr "Kendiliğinden Kaydetmeyi Etkinleştir"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Hata ayıklama günlüğünü etkinleştir"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -812,7 +816,7 @@ msgstr "Ad eksik."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Alternatif Aktarım"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1095,7 +1099,7 @@ msgstr ""
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Seçimi Ters Çevir"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1135,7 +1139,7 @@ msgstr "Kaydet"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Tümünü Kaydet"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
@@ -1165,7 +1169,7 @@ msgstr "PDF Kaydetme Süreci"
 
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Seçilenleri Kaydet"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
@@ -1211,6 +1215,11 @@ msgstr "Tarama Yapılandırması"
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
 msgstr "Taranmış Resim"
+
+#: UiStrings.resx$ScannerSharing$Message
+#: UiStrings.resx$ScannerSharingFormTitle$Message
+msgid "Scanner Sharing"
+msgstr ""
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1260,6 +1269,18 @@ msgstr "Dosyaları Patch-T'ye göre ayır"
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
 msgstr "Öntanımlı Olarak Ata"
+
+#: UiStrings.resx$Share$Message
+msgid "Share"
+msgstr ""
+
+#: UiStrings.resx$SharedDeviceFormTitle$Message
+msgid "Shared Scanner Settings"
+msgstr ""
+
+#: UiStrings.resx$ScannerSharingIntro$Message
+msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
+msgstr ""
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1312,7 +1333,7 @@ msgstr "OCR motoru kullanılamıyor. Gerekli paketin kurulduğundan emin olun:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "OCR işlemi zaman aşımına uğradı."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1338,7 +1359,7 @@ msgstr "{0} dosyası zaten var. Üzerine yazmak ister misiniz?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Bu dosya şifrelenmiş ve açmak için bir şifre gerekiyor:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1387,7 +1408,7 @@ msgstr "Seçilen tarayıcı çevrim dışı."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
@@ -1403,7 +1424,7 @@ msgstr "Başlık:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Araçlar"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
