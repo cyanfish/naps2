@@ -101,17 +101,6 @@ public static class TargetsHelper
                         yield return new PackageTarget(PackageType.Zip, Platform.Win64);
                     }
                 }
-                if ((allPkg || packageType == "flatpak") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
-                {
-                    if (allPlat || platform == "linux")
-                    {
-                        yield return new PackageTarget(PackageType.Flatpak, Platform.Linux);
-                    }
-                    if (allPlat || platform == "linuxarm")
-                    {
-                        yield return new PackageTarget(PackageType.Flatpak, Platform.LinuxArm);
-                    }
-                }
                 if ((allPkg || packageType == "deb") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
                 {
                     if (allPlat || platform == "linux")
@@ -132,6 +121,17 @@ public static class TargetsHelper
                     if (allPlat || platform == "linuxarm")
                     {
                         yield return new PackageTarget(PackageType.Rpm, Platform.LinuxArm);
+                    }
+                }
+                if ((allPkg || packageType == "flatpak") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
+                {
+                    if (allPlat || platform == "linux")
+                    {
+                        yield return new PackageTarget(PackageType.Flatpak, Platform.Linux);
+                    }
+                    if (allPlat || platform == "linuxarm")
+                    {
+                        yield return new PackageTarget(PackageType.Flatpak, Platform.LinuxArm);
                     }
                 }
                 if ((allPkg || packageType == "pkg") && (!requireCompatiblePlatform || OperatingSystem.IsMacOS()))
