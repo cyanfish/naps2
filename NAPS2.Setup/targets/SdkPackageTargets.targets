@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     
     <PropertyGroup>
-        <PackageVersion>0.1.0-alpha06</PackageVersion>
+        <PackageVersion>0.1.0-alpha07</PackageVersion>
 
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Ben Olden-Cooligan</Authors>
