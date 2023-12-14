@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images;
@@ -7,6 +8,25 @@ public static class ImageExtensions
     public static IMemoryImage Render(this IRenderableImage image)
     {
         return image.ImageContext.Render(image);
+    }
+
+    /// <summary>
+    /// Checks if we can copy the source JPEG directly rather than re-encoding and suffering JPEG degradation.
+    /// </summary>
+    /// <param name="image"></param>
+    /// <param name="jpegPath"></param>
+    /// <returns></returns>
+    internal static bool IsUntransformedJpegFile(this IRenderableImage image,
+        [MaybeNullWhen(false)] out string jpegPath)
+    {
+        if (image is { Storage: ImageFileStorage fileStorage, TransformState.IsEmpty: true } &&
+            ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
+        {
+            jpegPath = fileStorage.FullPath;
+            return true;
+        }
+        jpegPath = null;
+        return false;
     }
 
     /// <summary>
@@ -20,7 +40,15 @@ public static class ImageExtensions
     public static void Save(this IRenderableImage image, string path,
         ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null)
     {
-        // TODO: Optimized JPEG saving for file storage with no transforms etc?
+        if (imageFormat == ImageFileFormat.Unspecified)
+        {
+            imageFormat = ImageContext.GetFileFormatFromExtension(path);
+        }
+        if (imageFormat == ImageFileFormat.Jpeg && image.IsUntransformedJpegFile(out var jpegPath))
+        {
+            File.Copy(jpegPath, path);
+            return;
+        }
         using var renderedImage = image.Render();
         renderedImage.Save(path, imageFormat, options);
     }
@@ -35,6 +63,16 @@ public static class ImageExtensions
     public static void Save(this IRenderableImage image, Stream stream,
         ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null)
     {
+        if (imageFormat == ImageFileFormat.Unspecified)
+        {
+            throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
+        }
+        if (imageFormat == ImageFileFormat.Jpeg && image.IsUntransformedJpegFile(out var jpegPath))
+        {
+            using var fileStream = File.OpenRead(jpegPath);
+            fileStream.CopyTo(stream);
+            return;
+        }
         using var renderedImage = image.Render();
         renderedImage.Save(stream, imageFormat, options);
     }

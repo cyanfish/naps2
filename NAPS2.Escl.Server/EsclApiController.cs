@@ -42,7 +42,12 @@ internal class EsclApiController : WebApiController
                         new XElement(ScanNs + "PlatenInputCaps", GetCommonInputCaps())),
                     new XElement(ScanNs + "Adf",
                         new XElement(ScanNs + "AdfSimplexInputCaps", GetCommonInputCaps()),
-                        new XElement(ScanNs + "AdfDuplexInputCaps", GetCommonInputCaps()))));
+                        new XElement(ScanNs + "AdfDuplexInputCaps", GetCommonInputCaps())),
+                    new XElement(ScanNs + "CompressionFactorSupport",
+                        new XElement(ScanNs + "Min", 0),
+                        new XElement(ScanNs + "Max", 100),
+                        new XElement(ScanNs + "Normal", 75),
+                        new XElement(ScanNs + "Step", 1))));
         Response.ContentType = "text/xml";
         using var writer = new StreamWriter(HttpContext.OpenResponseStream());
         await writer.WriteAsync(doc);

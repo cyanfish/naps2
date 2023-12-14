@@ -44,6 +44,13 @@ internal class ScanJob : IEsclScanJob
             _statusCallback?.Invoke(StatusTransition.ScanComplete);
             _completedTcs.TrySetResult(!args.HasError);
         };
+
+        var requestedFormat = settings.DocumentFormat;
+        ContentType = requestedFormat switch
+        {
+            ContentTypes.PNG or ContentTypes.PDF => requestedFormat,
+            _ => ContentTypes.JPEG
+        };
         var options = new ScanOptions
         {
             Device = device,
@@ -63,14 +70,11 @@ internal class ScanJob : IEsclScanJob
             PageSize = settings.Width > 0 && settings.Height > 0
                 ? new PageSize(settings.Width / 300m, settings.Height / 300m, PageSizeUnit.Inch)
                 : PageSize.Letter,
-            PageAlign = SnapToAlignment(settings.XOffset, settings.Width, EsclInputCaps.DEFAULT_MAX_WIDTH)
+            PageAlign = SnapToAlignment(settings.XOffset, settings.Width, EsclInputCaps.DEFAULT_MAX_WIDTH),
+            Quality = settings.CompressionFactor ?? ScanOptions.DEFAULT_QUALITY,
+            MaxQuality = ContentType == ContentTypes.PNG
         };
-        var requestedFormat = settings.DocumentFormat;
-        ContentType = requestedFormat switch
-        {
-            ContentTypes.PNG or ContentTypes.PDF => requestedFormat,
-            _ => ContentTypes.JPEG
-        };
+
         try
         {
             _enumerable = controller.Scan(options, _cts.Token).GetAsyncEnumerator();

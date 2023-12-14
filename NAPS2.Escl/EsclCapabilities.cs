@@ -15,4 +15,5 @@ public class EsclCapabilities
     public EsclInputCaps? PlatenCaps { get; init; }
     public EsclInputCaps? AdfSimplexCaps { get; init; }
     public EsclInputCaps? AdfDuplexCaps { get; init; }
+    public EsclRange? CompressionFactorSupport { get; init; }
 }

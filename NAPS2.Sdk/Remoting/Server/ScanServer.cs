@@ -62,21 +62,7 @@ public class ScanServer : IDisposable
                 MakeAndModel = device.Name,
                 Uuid = device.GetUuid(InstanceId),
                 IconPng = _defaultIconPng,
-                // TODO: Ideally we want to get the actual device capabilities
-                PlatenCaps = new EsclInputCaps
-                {
-                    SettingProfiles =
-                    {
-                        new EsclSettingProfile
-                        {
-                            ColorModes =
-                                { EsclColorMode.RGB24, EsclColorMode.Grayscale8, EsclColorMode.BlackAndWhite1 },
-                            XResolutionRange = new ResolutionRange(100, 4800, 300),
-                            YResolutionRange = new ResolutionRange(100, 4800, 300),
-                            DocumentFormats = { ContentTypes.PDF, ContentTypes.JPEG, ContentTypes.PNG }
-                        }
-                    }
-                }
+                // TODO: Ideally we want to get the actual device capabilities (flatbed/feeder, resolution etc.)
             },
             CreateJob = settings => new ScanJob(_scanningContext, ScanController, device.Device, settings)
         };

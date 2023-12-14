@@ -37,7 +37,8 @@ internal static class CapabilitiesParser
             Naps2Extensions = root.Element(ScanNs + "Naps2Extensions")?.Value,
             PlatenCaps = ParseInputCaps(platenCapsEl, settingProfiles),
             AdfSimplexCaps = ParseInputCaps(adfSimplexCapsEl, settingProfiles),
-            AdfDuplexCaps = ParseInputCaps(adfDuplexCapsEl, settingProfiles)
+            AdfDuplexCaps = ParseInputCaps(adfDuplexCapsEl, settingProfiles),
+            CompressionFactorSupport = ParseRange(root.Element(ScanNs + "CompressionFactorSupport"))
         };
     }
 
@@ -60,9 +61,9 @@ internal static class CapabilitiesParser
                 .Select(x => x.Value).ToList() ?? new List<string>(),
             DiscreteResolutions = ParseDiscreteResolutions(element.Element(ScanNs + "SupportedResolutions")
                 ?.Element(ScanNs + "DiscreteResolutions")?.Elements(ScanNs + "DiscreteResolution")),
-            XResolutionRange = ParseResolutionRange(element.Element(ScanNs + "SupportedResolutions")
+            XResolutionRange = ParseRange(element.Element(ScanNs + "SupportedResolutions")
                 ?.Element(ScanNs + "XResolutionRange")),
-            YResolutionRange = ParseResolutionRange(element.Element(ScanNs + "SupportedResolutions")
+            YResolutionRange = ParseRange(element.Element(ScanNs + "SupportedResolutions")
                 ?.Element(ScanNs + "YResolutionRange")),
         };
         if (profile.Name != null)
@@ -72,16 +73,17 @@ internal static class CapabilitiesParser
         return profile;
     }
 
-    private static ResolutionRange? ParseResolutionRange(XElement? element)
+    private static EsclRange? ParseRange(XElement? element)
     {
         if (element == null) return null;
 
-        var min = element.Element(ScanNs + "Min");
-        var max = element.Element(ScanNs + "Max");
-        var normal = element.Element(ScanNs + "Max");
+        var min = ParseHelper.MaybeParseInt(element.Element(ScanNs + "Min"));
+        var max = ParseHelper.MaybeParseInt(element.Element(ScanNs + "Max"));
+        var normal = ParseHelper.MaybeParseInt(element.Element(ScanNs + "Normal"));
+        var step = ParseHelper.MaybeParseInt(element.Element(ScanNs + "Step"));
         if (min != null && max != null && normal != null)
         {
-            return new ResolutionRange(int.Parse(min.Value), int.Parse(max.Value), int.Parse(normal.Value));
+            return new EsclRange(min.Value, max.Value, normal.Value, step ?? 1);
         }
         return null;
     }

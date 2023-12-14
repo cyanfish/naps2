@@ -9,6 +9,6 @@ public class EsclSettingProfile
     public List<string> DocumentFormats { get; init; } = new();
     public List<string> DocumentFormatsExt { get; init; } = new();
     public List<DiscreteResolution> DiscreteResolutions { get; init; } = new();
-    public ResolutionRange? XResolutionRange { get; init; }
-    public ResolutionRange? YResolutionRange { get; init; }
+    public EsclRange? XResolutionRange { get; init; }
+    public EsclRange? YResolutionRange { get; init; }
 }

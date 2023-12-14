@@ -314,6 +314,14 @@ internal class EsclScanDriver : IScanDriver
             height = Math.Min(height, inputCaps.MaxHeight.Value);
         }
 
+        var contentType = ContentTypes.JPEG;
+        if (options.BitDepth == BitDepth.BlackAndWhite || options.MaxQuality)
+        {
+            bool supportsPng = settingProfile != null && settingProfile.DocumentFormats
+                .Concat(settingProfile.DocumentFormatsExt).Contains(ContentTypes.PNG);
+            contentType = supportsPng ? ContentTypes.PNG : ContentTypes.PDF;
+        }
+
         return new EsclScanSettings
         {
             Width = width,
@@ -323,16 +331,15 @@ internal class EsclScanDriver : IScanDriver
             ColorMode = colorMode,
             InputSource = inputSource,
             Duplex = duplex,
-            DocumentFormat = options.BitDepth == BitDepth.BlackAndWhite || options.MaxQuality
-                ? ContentTypes.PDF // TODO: Use PNG if available?
-                : ContentTypes.JPEG,
+            DocumentFormat = contentType,
             XOffset = options.PageAlign switch
             {
                 HorizontalAlign.Left => inputCaps.MaxWidth is > 0 ? inputCaps.MaxWidth.Value - width : 0,
                 HorizontalAlign.Center => inputCaps.MaxWidth is > 0 ? (inputCaps.MaxWidth.Value - width) / 2 : 0,
                 _ => 0
-            }
-            // TODO: Brightness/contrast, quality, etc.
+            },
+            CompressionFactor = caps.CompressionFactorSupport is { Min: 0, Max: 100, Step: 1 } ? options.Quality : null
+            // TODO: Brightness/contrast, etc.
         };
     }
 

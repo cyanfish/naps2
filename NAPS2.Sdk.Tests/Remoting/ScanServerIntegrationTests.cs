@@ -107,6 +107,8 @@ public class ScanServerIntegrationTests : ContextualTests
         Assert.Equal(PaperSource.Flatbed, opts.PaperSource);
         Assert.Equal(PageSize.Letter, opts.PageSize);
         Assert.Equal(HorizontalAlign.Right, opts.PageAlign);
+        Assert.Equal(75, opts.Quality);
+        Assert.False(opts.MaxQuality);
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.dog, images[0]);
 
@@ -118,7 +120,9 @@ public class ScanServerIntegrationTests : ContextualTests
             Dpi = 300,
             PaperSource = PaperSource.Feeder,
             PageSize = PageSize.Legal,
-            PageAlign = HorizontalAlign.Center
+            PageAlign = HorizontalAlign.Center,
+            Quality = 0,
+            MaxQuality = true
         }).ToListAsync();
 
         opts = _bridge.LastOptions;
@@ -127,6 +131,8 @@ public class ScanServerIntegrationTests : ContextualTests
         Assert.Equal(PaperSource.Feeder, opts.PaperSource);
         Assert.Equal(PageSize.Legal, opts.PageSize);
         Assert.Equal(HorizontalAlign.Center, opts.PageAlign);
+        Assert.Equal(0, opts.Quality);
+        Assert.True(opts.MaxQuality);
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.dog_gray, images[0]);
 
@@ -138,7 +144,8 @@ public class ScanServerIntegrationTests : ContextualTests
             Dpi = 4800,
             PaperSource = PaperSource.Duplex,
             PageSize = PageSize.A3,
-            PageAlign = HorizontalAlign.Left
+            PageAlign = HorizontalAlign.Left,
+            Quality = 100
         }).ToListAsync();
 
         opts = _bridge.LastOptions;
@@ -148,6 +155,7 @@ public class ScanServerIntegrationTests : ContextualTests
         Assert.Equal(PageSize.A3.WidthInMm, opts.PageSize!.WidthInMm, 1);
         Assert.Equal(PageSize.A3.HeightInMm, opts.PageSize!.HeightInMm, 1);
         Assert.Equal(HorizontalAlign.Left, opts.PageAlign);
+        Assert.Equal(100, opts.Quality);
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.dog_bw, images[0]);
     }

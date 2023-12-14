@@ -27,4 +27,6 @@ public class EsclScanSettings
     public int Contrast { get; init; }
 
     public int Threshold { get; init; }
+
+    public int? CompressionFactor { get; set; }
 }

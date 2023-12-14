@@ -258,16 +258,15 @@ public class PdfExporter : IPdfExporter
 
     private IEmbedder GetRenderedImageOrDirectJpegEmbedder(PageExportState state)
     {
-        if (state.Image is { Storage: ImageFileStorage fileStorage, TransformState.IsEmpty: true } &&
-            ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
+        if (state.Image.IsUntransformedJpegFile(out var jpegPath))
         {
             // Special case if we have an un-transformed JPEG - just use the original file instead of re-encoding
-            using var fileStream = new FileStream(fileStorage.FullPath, FileMode.Open, FileAccess.Read);
+            using var fileStream = new FileStream(jpegPath, FileMode.Open, FileAccess.Read);
             var jpegHeader = JpegFormatHelper.ReadHeader(fileStream);
             // Ensure it's not a grayscale image as those are known to not be embeddable
             if (jpegHeader is { NumComponents: > 1 })
             {
-                return new DirectJpegEmbedder(jpegHeader, fileStorage.FullPath);
+                return new DirectJpegEmbedder(jpegHeader, jpegPath);
             }
         }
         return new RenderedImageEmbedder(state.Image.Render());

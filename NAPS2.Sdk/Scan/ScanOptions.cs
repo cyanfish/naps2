@@ -7,6 +7,8 @@ namespace NAPS2.Scan;
 /// </summary>
 public class ScanOptions
 {
+    public const int DEFAULT_QUALITY = 75;
+
     /// <summary>
     /// The driver type used for scanning. Supported drivers depend on the platform (Windows/Mac/Linux). This usually
     /// doesn't need to be set as it can be determined from the Device property.
@@ -115,7 +117,7 @@ public class ScanOptions
     /// <summary>
     /// The JPEG compression quality used for storing images. Ignored if MaxQuality is true.
     /// </summary>
-    public int Quality { get; set; }
+    public int Quality { get; set; } = DEFAULT_QUALITY;
 
     /// <summary>
     /// If non-null, generates thumbnails of the specified size and provides them in the PostProcessingData of each

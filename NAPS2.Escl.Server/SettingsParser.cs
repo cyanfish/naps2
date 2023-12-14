@@ -29,6 +29,7 @@ internal static class SettingsParser
             Height = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "Height")) ?? 0,
             XOffset = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "XOffset")) ?? 0,
             YOffset = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "YOffset")) ?? 0,
+            CompressionFactor = ParseHelper.MaybeParseInt(root.Element(ScanNs + "CompressionFactor"))
         };
     }
 }

@@ -86,6 +86,7 @@ public class EsclClient
                     // new XElement(ScanNs + "Brightness", settings.Brightness),
                     // new XElement(ScanNs + "Contrast", settings.Contrast),
                     // new XElement(ScanNs + "Threshold", settings.Threshold),
+                    OptionalElement(ScanNs + "CompressionFactor", settings.CompressionFactor),
                     new XElement(PwgNs + "DocumentFormat", settings.DocumentFormat)));
         var content = new StringContent(doc, Encoding.UTF8, "text/xml");
         var url = GetUrl($"/{_service.RootUrl}/ScanJobs");
@@ -98,6 +99,12 @@ public class EsclClient
         {
             UriPath = response.Headers.Location!.AbsolutePath
         };
+    }
+
+    private XElement? OptionalElement(XName elementName, int? value)
+    {
+        if (value == null) return null;
+        return new XElement(elementName, value);
     }
 
     public async Task<RawDocument?> NextDocument(EsclJob job, Action<double>? pageProgress = null)
@@ -155,7 +162,7 @@ public class EsclClient
 
     public async Task<string> ErrorDetails(EsclJob job)
     {
-        var url = GetUrl($"{job.UriPath}/ErrorDetails");;
+        var url = GetUrl($"{job.UriPath}/ErrorDetails");
         Logger.LogDebug("ESCL GET {Url}", url);
         var response = await HttpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
