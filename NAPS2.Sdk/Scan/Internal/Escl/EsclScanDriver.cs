@@ -148,7 +148,11 @@ internal class EsclScanDriver : IScanDriver
         catch (HttpRequestException ex) when (scanSettings.ColorMode == EsclColorMode.BlackAndWhite1 &&
                                               ex.Message.Contains("409 (Conflict)"))
         {
-            scanSettings = scanSettings with { ColorMode = EsclColorMode.Grayscale8 };
+            scanSettings = scanSettings with
+            {
+                ColorMode = EsclColorMode.Grayscale8,
+                DocumentFormat = ContentTypes.JPEG
+            };
             _logger.LogDebug("Scanning in Grayscale instead of Black & White due to HTTP 409 response");
             job = await client.CreateScanJob(scanSettings);
         }
