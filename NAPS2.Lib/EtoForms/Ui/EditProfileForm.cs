@@ -296,6 +296,7 @@ public class EditProfileForm : EtoDialogBase
 
     private void UpdatePageSizeList()
     {
+        _suppressChangeEvent = true;
         _pageSize.Items.Clear();
 
         // Defaults
@@ -320,6 +321,7 @@ public class EditProfileForm : EtoDialogBase
                 CustomDimens = preset.Dimens
             });
         }
+        _suppressChangeEvent = false;
     }
 
     private void SelectPageSize()
@@ -508,6 +510,8 @@ public class EditProfileForm : EtoDialogBase
 
     private void PageSize_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        if (_suppressChangeEvent) return;
+
         if (_pageSize.SelectedIndex == _pageSize.Items.Count - 1)
         {
             if (_lastPageSizeItem == null)
