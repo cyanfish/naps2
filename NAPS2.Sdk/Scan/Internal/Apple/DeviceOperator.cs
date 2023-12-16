@@ -339,6 +339,19 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         }
     }
 
+    private ICScannerDocumentType GetDocumentTypeFromPageSize(PageSize? pageSize)
+    {
+        // TODO: Maybe some tolerance, e.g. if translating over EsclScanServer?
+        if (pageSize == PageSize.A3) return ICScannerDocumentType.A3;
+        if (pageSize == PageSize.A4) return ICScannerDocumentType.A4;
+        if (pageSize == PageSize.A5) return ICScannerDocumentType.A5;
+        if (pageSize == PageSize.Letter) return ICScannerDocumentType.USLetter;
+        if (pageSize == PageSize.Legal) return ICScannerDocumentType.USLegal;
+        if (pageSize == PageSize.B4) return ICScannerDocumentType.IsoB4;
+        if (pageSize == PageSize.B5) return ICScannerDocumentType.IsoB5;
+        return ICScannerDocumentType.Default;
+    }
+
     private nuint GetClosestResolution(nuint dpi, ICScannerFunctionalUnit unit)
     {
         var targetDpi = dpi;
@@ -355,6 +368,16 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 
     private void SetScanArea(ICScannerFunctionalUnit unit)
     {
+        // Setting DocumentType should be redundant (setting ScanArea is more general), but it shouldn't hurt and may
+        // help with some issues with particular scanners.
+        if (_unit is ICScannerFunctionalUnitDocumentFeeder feederUnit)
+        {
+            feederUnit.DocumentType = GetDocumentTypeFromPageSize(_options.PageSize);
+        }
+        if (_unit is ICScannerFunctionalUnitFlatbed flatbedUnit)
+        {
+            flatbedUnit.DocumentType = GetDocumentTypeFromPageSize(_options.PageSize);
+        }
         unit.MeasurementUnit = ICScannerMeasurementUnit.Inches;
         var maxSize = unit.PhysicalSize;
         var width = Math.Min((double) _options.PageSize!.WidthInInches, maxSize.Width);
