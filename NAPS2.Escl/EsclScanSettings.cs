@@ -1,6 +1,6 @@
 namespace NAPS2.Escl;
 
-public class EsclScanSettings
+public record EsclScanSettings
 {
     public int Width { get; init; }
 

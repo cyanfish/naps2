@@ -1,3 +1,4 @@
+using System.Net.Http;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Escl;
@@ -92,7 +93,7 @@ internal class EsclScanDriver : IScanDriver
 
             VerifyStatus(status, scanSettings);
 
-            var job = await client.CreateScanJob(scanSettings);
+            var job = await CreateScanJobAndCorrectInvalidSettings(client, scanSettings);
 
             var cancelOnce = new Once(() => client.CancelJob(job).AssertNoAwait());
             using var cancelReg = cancelToken.Register(cancelOnce.Run);
@@ -133,6 +134,25 @@ internal class EsclScanDriver : IScanDriver
         catch (TaskCanceledException)
         {
         }
+    }
+
+    private async Task<EsclJob> CreateScanJobAndCorrectInvalidSettings(EsclClient client, EsclScanSettings scanSettings)
+    {
+        _logger.LogDebug("Creating ESCL job: format {Format}, source {Source}, mode {Mode}",
+            scanSettings.DocumentFormat, scanSettings.InputSource, scanSettings.ColorMode);
+        EsclJob job;
+        try
+        {
+            job = await client.CreateScanJob(scanSettings);
+        }
+        catch (HttpRequestException ex) when (scanSettings.ColorMode == EsclColorMode.BlackAndWhite1 &&
+                                              ex.Message.Contains("409 (Conflict)"))
+        {
+            scanSettings = scanSettings with { ColorMode = EsclColorMode.Grayscale8 };
+            _logger.LogDebug("Scanning in Grayscale instead of Black & White due to HTTP 409 response");
+            job = await client.CreateScanJob(scanSettings);
+        }
+        return job;
     }
 
     private async Task<RawDocument?> GetNextDocumentWithRetries(
@@ -301,6 +321,9 @@ internal class EsclScanDriver : IScanDriver
                 int max = Math.Min(settingProfile.XResolutionRange.Max, settingProfile.YResolutionRange.Max);
                 dpi = dpi.Clamp(min, max);
             }
+
+            _logger.LogDebug("ESCL setting profile supports formats: {Formats}",
+                string.Join(",", settingProfile.DocumentFormats.Concat(settingProfile.DocumentFormatsExt).Distinct()));
         }
 
         var width = (int) Math.Round(options.PageSize!.WidthInInches * 300);
