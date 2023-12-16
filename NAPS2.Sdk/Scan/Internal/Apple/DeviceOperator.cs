@@ -145,7 +145,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                 if (data.ColorSyncProfilePath != null)
                 {
                     _logger.LogDebug($"Flushing image with color sync profile {data.ColorSyncProfilePath}");
-                    FlushImageWithColorSpace(fullBuffer, data);
+                    FlushImageWithColorSpace(fullBuffer, data, subPixelType);
                 }
                 else if (pixelFormat != ImagePixelFormat.Unsupported && subPixelType != null)
                 {
@@ -185,23 +185,31 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         _callback(image);
     }
 
-    private void FlushImageWithColorSpace(MemoryStream fullBuffer, ICScannerBandData data)
+    private void FlushImageWithColorSpace(MemoryStream fullBuffer, ICScannerBandData data, SubPixelType? subPixelType)
     {
         var colorSpace = CGColorSpace.CreateIccData(NSData.FromFile(data.ColorSyncProfilePath!));
-        var flags = (data.BitsPerPixel == 32 ? CGBitmapFlags.NoneSkipLast : CGBitmapFlags.None) |
+        var w = (int) data.FullImageWidth;
+        var h = (int) data.FullImageHeight;
+        var bitsPerComponent = (int) data.BitsPerComponent;
+        var bitsPerPixel = (int) data.BitsPerPixel;
+        var bytesPerRow = (int) data.BytesPerRow;
+        var flags = (bitsPerPixel == 32 ? CGBitmapFlags.NoneSkipLast : CGBitmapFlags.None) |
                     CGBitmapFlags.ByteOrderDefault;
-        var cgImage = new CGImage(
-            (int) data.FullImageWidth,
-            (int) data.FullImageHeight,
-            (int) data.BitsPerComponent,
-            (int) data.BitsPerPixel,
-            (int) data.BytesPerRow,
-            colorSpace,
-            flags,
-            new CGDataProvider(fullBuffer.GetBuffer(), 0, (int) fullBuffer.Length),
-            null,
-            true,
-            CGColorRenderingIntent.Default);
+        var buffer = fullBuffer.GetBuffer();
+        var dataProvider = new CGDataProvider(buffer, 0, buffer.Length);
+
+        // There is an apparent bug in ImageCaptureCore where grayscale images can report a bytesPerRow value that is
+        // aligned to a word boundary (and the buffer is sized to match), but the actual data is stored as if that
+        // wasn't the case, leaving a block of zeros at the end of the buffer. We correct for this here.
+        // TODO: Is there any case where this will backfire? Can we detect the problem (e.g. by checking for zeros at
+        // the end of the buffer)?
+        if (subPixelType == SubPixelType.Gray)
+        {
+            bytesPerRow = w;
+        }
+
+        var cgImage = new CGImage(w, h, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace, flags,
+            dataProvider, null, true, CGColorRenderingIntent.Default);
         var imageRep = new NSBitmapImageRep(cgImage);
         var nsImage = new NSImage();
         nsImage.AddRepresentation(imageRep);
