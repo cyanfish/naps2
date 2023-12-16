@@ -91,12 +91,10 @@ Apple's [ImageCaptureCore](https://developer.apple.com/documentation/imagecaptur
 
 ### Choosing a Driver
 
-Each platform has a default driver (WIA on Windows, Apple on Mac, and SANE on Linux). To use another driver, you only need to specify it:
+Each platform has a default driver (WIA on Windows, Apple on Mac, and SANE on Linux). To use another driver, you only need to specify it when querying for devices:
 
 ```c#
 var devices = await controller.GetDeviceList(Driver.Twain);
-...
-options.Driver = Driver.Twain;
 ```
 
 ### Worker Processes
