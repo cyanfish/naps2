@@ -76,7 +76,7 @@ public class EsclServiceLocator : IDisposable
     private EsclService ParseService(ServiceInstanceDiscoveryEventArgs args)
     {
         string name = args.ServiceInstanceName.Labels[0];
-        string protocol = args.ServiceInstanceName.Labels[1];
+        bool isTls = false;
         IPAddress? ipv4 = null, ipv6 = null;
         int port = -1;
         string? host = null;
@@ -94,8 +94,14 @@ public class EsclServiceLocator : IDisposable
             }
             if (record is SRVRecord srv)
             {
-                port = srv.Port;
-                host = srv.Target.ToString();
+                bool recordIsTls = srv.Name.IsSubdomainOf(DomainName.Join("_uscans", "_tcp", "local"));
+                if (host == null || recordIsTls)
+                {
+                    // HTTPS overrides HTTP but not the other way around
+                    port = srv.Port;
+                    host = srv.Target.ToString();
+                    isTls = recordIsTls;
+                }
             }
             if (record is TXTRecord txt)
             {
@@ -109,9 +115,7 @@ public class EsclServiceLocator : IDisposable
                 }
             }
         }
-        bool http = protocol == "_uscan";
-        bool https = protocol == "_uscans";
-        if ((ipv4 == null && ipv6 == null) || port == -1 || host == null || !http && !https)
+        if ((ipv4 == null && ipv6 == null) || port == -1 || host == null)
         {
             throw new ArgumentException();
         }
@@ -123,7 +127,7 @@ public class EsclServiceLocator : IDisposable
             Host = host,
             RemoteEndpoint = args.RemoteEndPoint.Address,
             Port = port,
-            Tls = https,
+            Tls = isTls,
             ScannerName = props["ty"],
             RootUrl = props["rs"],
             TxtVersion = Get(props, "txtvers"),

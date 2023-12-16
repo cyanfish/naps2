@@ -13,11 +13,17 @@ public class EsclClient
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
 
+    private static readonly HttpClientHandler HttpClientHandler = new()
+    {
+        // ESCL certificates are generally self-signed - we aren't trying to verify server authenticity, just ensure
+        // that the connection is encrypted and protect against passive interception.
+        ServerCertificateCustomValidationCallback = (_, _, _, _) => true
+    };
     // Sadly as we're still using .NET Framework on Windows, we're stuck with the old HttpClient implementation, which
     // has trouble with concurrency. So we use a separate client for long running requests (Progress/NextDocument).
-    private static readonly HttpClient HttpClient = new();
-    private static readonly HttpClient ProgressHttpClient = new();
-    private static readonly HttpClient DocumentHttpClient = new();
+    private static readonly HttpClient HttpClient = new(HttpClientHandler);
+    private static readonly HttpClient ProgressHttpClient = new(HttpClientHandler);
+    private static readonly HttpClient DocumentHttpClient = new(HttpClientHandler);
 
     private readonly EsclService _service;
 
