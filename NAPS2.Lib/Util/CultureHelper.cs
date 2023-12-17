@@ -54,6 +54,12 @@ public class CultureHelper
 
     public IEnumerable<(string langCode, string langName)> GetAvailableCultures()
     {
+#if NET6_0_OR_GREATER
+        // For self-contained builds we don't have separate DLL files we can check for existence
+        // TODO: Don't want to hard code this... it defeats the whole purpose of autodetection
+        var exclude = new HashSet<string> { "bn", "ur" };
+        return GetAllCultures().Where(x => !exclude.Contains(x.langCode));
+#else
         foreach (var (langCode, langName) in GetAllCultures())
         {
             // Only include those languages for which localized resources exist
@@ -65,5 +71,6 @@ public class CultureHelper
                 yield return (langCode, langName);
             }
         }
+#endif
     }
 }
