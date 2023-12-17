@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-13 04:56\n"
+"PO-Revision-Date: 2023-12-17 04:36\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -195,7 +195,7 @@ msgstr "Vuoi eliminare {0} profilo/i?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Sei sicuro di voler interrompere la condivisione di {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -323,7 +323,7 @@ msgstr "Modifica"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr "Ricerca degli aggiornamenti:"
+msgstr "Controlla aggiornamenti"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
@@ -1219,7 +1219,7 @@ msgstr "Immagine scansionata"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Condivisione scanner"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1272,15 +1272,15 @@ msgstr "Imposta predefinito"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Condividi"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Impostazioni scanner condiviso"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Gli scanner condivisi possono essere usati da altri computer nella rete locale selezionando \"Driver ESCL\" nelle impostazioni del profilo NAPS2 dell'altro computer."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"

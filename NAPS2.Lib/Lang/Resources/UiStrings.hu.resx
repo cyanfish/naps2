@@ -166,10 +166,10 @@
     <value>Visszafelé</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Összes visszafordítása</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Kiválasztott visszafordítása</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Összes törlése</value>
@@ -202,7 +202,7 @@
     <value>Mentés</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Összes mentése</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
     <value>Kiválasztott mentése</value>
@@ -220,10 +220,10 @@
     <value>Kiválasztottak mentése képekként</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Összes küldése e-mailben</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Kiválasztott küldése e-mailben</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Összes elküldése e-mailben, PDF-ként</value>
@@ -244,13 +244,13 @@
     <value>TWAIN illesztőprogram</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL illesztőprogram</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL hálózati illesztőprogram</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB illesztőprogram</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Apple illesztőprogram</value>
@@ -700,24 +700,24 @@
     <value>Eszközök</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Hibakeresési naplózás engedélyezése</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Megosztás</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Lapolvasó megosztása</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Lapolvasó megosztása</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
     <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Megosztott lapolvasó beállítások</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Biztos benne, hogy nem szeretné többé megosztani a {0} lapolvasót?</value>
   </data>
 </root>

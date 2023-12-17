@@ -22,7 +22,7 @@
     <value>Libreria icone:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Ricerca degli aggiornamenti:</value>
+    <value>Controlla aggiornamenti</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -703,21 +703,21 @@
     <value>Abilita la registrazione dei log di debug</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Condividi</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Condivisione scanner</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Condivisione scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
     <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Impostazioni scanner condiviso</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Sei sicuro di voler interrompere la condivisione di {0}?</value>
   </data>
 </root>

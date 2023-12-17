@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-13 04:56\n"
+"PO-Revision-Date: 2023-12-17 04:36\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -159,7 +159,7 @@ msgstr "Apple illesztőprogram"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Mail"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -195,7 +195,7 @@ msgstr "Biztos, hogy törölni szeretne {0} profilt?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Biztos benne, hogy nem szeretné többé megosztani a {0} lapolvasót?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -505,15 +505,15 @@ msgstr "Kétoldalas"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL illesztőprogram"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL hálózati illesztőprogram"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB illesztőprogram"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -521,7 +521,7 @@ msgstr "Szerkesztés"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Összes küldése e-mailben"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
@@ -538,7 +538,7 @@ msgstr "PDF e-mailben történő elküldésének folyamata"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Kiválasztott küldése e-mailben"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
@@ -555,7 +555,7 @@ msgstr "Automatikus mentés engedélyezése"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Hibakeresési naplózás engedélyezése"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -1095,11 +1095,11 @@ msgstr "Visszafelé"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Összes visszafordítása"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Kiválasztott visszafordítása"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1139,7 +1139,7 @@ msgstr "Mentés"
 
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Összes mentése"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
@@ -1219,7 +1219,7 @@ msgstr "Beolvasott kép"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Lapolvasó megosztása"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1272,15 +1272,15 @@ msgstr "Beállítás alapértelmezettként"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Megosztás"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Megosztott lapolvasó beállítások"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "A megosztott lapolvasók a helyi hálózat más számítógépeiről is használhatók, ha a másik számítógép NAPS2 profilbeállításaiban kiválasztja az \"ESCL illesztőprogramot\"."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1333,7 +1333,7 @@ msgstr "Az karakterfelismerő motor nem áll rendelkezésre. Győződjön meg r�
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "Időtúllépés a karakterfelismerés során."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1408,7 +1408,7 @@ msgstr "A kiválasztott lapolvasó inaktív."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
