@@ -1,3 +1,6 @@
+Changes in 7.2.1:
+- Bug fixes
+
 Changes in 7.2.0:
 - Scanner Sharing
   - Share scanners with other computers on the local network, for example:
