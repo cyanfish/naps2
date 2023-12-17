@@ -34,6 +34,7 @@ public class ResxContext
             {
                 original += line.Substring(1, line.Length - 2);
             }
+            original = original.Replace("\\\"", "\"");
 
             if (line == null || !line.StartsWith("msgstr", StringComparison.InvariantCulture))
             {

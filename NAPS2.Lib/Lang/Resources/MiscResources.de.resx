@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete "{0}"?</value>
+    <value>Sind Sie sicher, dass sie \"{0}\" löschen möchten?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>Die Datei konnte nicht überschrieben werden, da sie im Moment verwendet wird.</value>

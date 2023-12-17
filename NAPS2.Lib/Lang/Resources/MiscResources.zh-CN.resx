@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete "{0}"?</value>
+    <value>您确定要删除“{0}”吗？</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>文件正在使用，无法覆盖.</value>

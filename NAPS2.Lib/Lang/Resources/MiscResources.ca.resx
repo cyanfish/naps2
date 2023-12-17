@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete "{0}"?</value>
+    <value>Segur que voleu suprimir {0} element(s)?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>No es pot sobreescriure el fitxer perquè està en ús.</value>

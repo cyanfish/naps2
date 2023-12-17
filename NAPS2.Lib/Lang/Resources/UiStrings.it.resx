@@ -712,7 +712,7 @@
     <value>Condivisione scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Gli scanner condivisi possono essere usati da altri computer nella rete locale selezionando \"Driver ESCL\" nelle impostazioni del profilo NAPS2 dell'altro computer.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Impostazioni scanner condiviso</value>

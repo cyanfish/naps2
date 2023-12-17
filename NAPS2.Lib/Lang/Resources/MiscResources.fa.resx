@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete "{0}"?</value>
+    <value>آیا مطمئنید که می‌خواهید {0} حذف کنید؟</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>پرونده قابل بازنویسی نیست زیاد در حال استفاده است..</value>
