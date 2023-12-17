@@ -20,7 +20,10 @@ public class PublishCommand : ICommand<PublishOptions>
                 BuildType = buildType
             });
         }
-        new TestCommand().Run(new TestOptions());
+        new TestCommand().Run(new TestOptions
+        {
+            NoGui = opts.NoGui
+        });
         new PackageCommand().Run(new PackageOptions
         {
             PackageType = opts.PackageType,

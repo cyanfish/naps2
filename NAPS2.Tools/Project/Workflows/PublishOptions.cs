@@ -13,4 +13,7 @@ public class PublishOptions : OptionsBase
 
     [Option("noverify", Required = false, HelpText = "Don't run verification tests")]
     public bool NoVerify { get; set; }
+
+    [Option("nogui", Required = false, HelpText = "Only run headless (no gui) tests")]
+    public bool NoGui { get; set; }
 }
