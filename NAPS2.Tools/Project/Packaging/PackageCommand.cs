@@ -25,11 +25,11 @@ public class PackageCommand : ICommand<PackageOptions>
         // TODO: Allow customizing dotnet version
         foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, true))
         {
-            PackageInfo GetPackageInfoForConfig(string config) => GetPackageInfo(target.Platform, config, opts.Name);
+            PackageInfo GetPackageInfoForConfig(string? libConfig = null) => GetPackageInfo(target.Platform, libConfig, opts.Name);
             switch (target.Type)
             {
                 case PackageType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release-Windows"));
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
                     break;
                 case PackageType.Msi:
                     WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"));
@@ -38,23 +38,23 @@ public class PackageCommand : ICommand<PackageOptions>
                     ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"));
                     break;
                 case PackageType.Deb:
-                    DebPackager.PackageDeb(GetPackageInfoForConfig("Release-Linux"));
+                    DebPackager.PackageDeb(GetPackageInfoForConfig());
                     break;
                 case PackageType.Rpm:
-                    RpmPackager.PackageRpm(GetPackageInfoForConfig("Release-Linux"));
+                    RpmPackager.PackageRpm(GetPackageInfoForConfig());
                     break;
                 case PackageType.Flatpak:
-                    FlatpakPackager.Package(GetPackageInfoForConfig("Release-Linux"), opts.NoPre);
+                    FlatpakPackager.Package(GetPackageInfoForConfig(), opts.NoPre);
                     break;
                 case PackageType.Pkg:
-                    MacPackager.Package(GetPackageInfoForConfig("Release-Mac"), opts.NoSign, opts.NoNotarize);
+                    MacPackager.Package(GetPackageInfoForConfig(), opts.NoSign, opts.NoNotarize);
                     break;
             }
         }
         return 0;
     }
 
-    private static PackageInfo GetPackageInfo(Platform platform, string libConfig, string? packageName)
+    private static PackageInfo GetPackageInfo(Platform platform, string? libConfig, string? packageName)
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName(),
             ProjectHelper.GetCurrentVersion(), packageName);
@@ -68,7 +68,7 @@ public class PackageCommand : ICommand<PackageOptions>
         foreach (var project in new[]
                      { "NAPS2.Sdk", "NAPS2.Lib", "NAPS2.App.Worker", "NAPS2.App.WinForms", "NAPS2.App.Console" })
         {
-            var config = project == "NAPS2.Lib" ? libConfig : "Release";
+            var config = project == "NAPS2.Lib" ? libConfig! : "Release";
             var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", config, "net462");
             if (!Directory.Exists(buildPath))
             {
