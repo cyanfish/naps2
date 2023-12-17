@@ -45,10 +45,10 @@ public class BuildCommand : ICommand<BuildOptions>
                 ? "Debug-Linux"
                 : "Debug-Windows",
         BuildType.Release => OperatingSystem.IsMacOS()
-            ? "Release"
+            ? "Release-Mac"
             : OperatingSystem.IsLinux()
                 ? "Release-Linux"
-                : "Release",
+                : "Release-Windows",
         BuildType.Msi => "Release-Msi",
         BuildType.Zip => "Release-Zip",
         BuildType.Sdk => "Sdk",

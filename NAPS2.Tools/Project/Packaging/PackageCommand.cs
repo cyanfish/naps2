@@ -29,7 +29,7 @@ public class PackageCommand : ICommand<PackageOptions>
             switch (target.Type)
             {
                 case PackageType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release-Windows"));
                     break;
                 case PackageType.Msi:
                     WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"));
@@ -47,7 +47,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     FlatpakPackager.Package(GetPackageInfoForConfig("Release-Linux"), opts.NoPre);
                     break;
                 case PackageType.Pkg:
-                    MacPackager.Package(GetPackageInfoForConfig("Release"), opts.NoSign, opts.NoNotarize);
+                    MacPackager.Package(GetPackageInfoForConfig("Release-Mac"), opts.NoSign, opts.NoNotarize);
                     break;
             }
         }
