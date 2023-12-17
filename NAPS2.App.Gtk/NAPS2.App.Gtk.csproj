@@ -12,7 +12,7 @@
         <PublishTrimmed>true</PublishTrimmed>
         <TrimMode>partial</TrimMode>
 
-        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+	<RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>
 
         <Title>NAPS2 - Not Another PDF Scanner</Title>
         <Product>NAPS2 - Not Another PDF Scanner</Product>
