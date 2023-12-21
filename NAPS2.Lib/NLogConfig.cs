@@ -23,7 +23,7 @@ public static class NLogConfig
             FileName = Path.Combine(Paths.AppData, "errorlog.txt"),
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
-            MaxArchiveFiles = 5,
+            MaxArchiveFiles = 1,
             ConcurrentWrites = true
         };
         var debugTarget = new FileTarget
