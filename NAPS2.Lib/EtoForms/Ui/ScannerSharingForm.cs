@@ -9,17 +9,25 @@ namespace NAPS2.EtoForms.Ui;
 public class ScannerSharingForm : EtoDialogBase
 {
     private readonly ISharedDeviceManager _sharedDeviceManager;
+    private readonly IOsServiceManager _osServiceManager;
+    private readonly ErrorOutput _errorOutput;
 
+    private readonly CheckBox _shareAsService = C.CheckBox(UiStrings.ShareAsService);
     private readonly IListView<SharedDevice> _listView;
 
     private readonly Command _addCommand;
     private readonly Command _editCommand;
     private readonly Command _deleteCommand;
 
-    public ScannerSharingForm(Naps2Config config, SharedDevicesListViewBehavior listViewBehavior, ISharedDeviceManager sharedDeviceManager)
+    private bool _suppressChangeEvent;
+
+    public ScannerSharingForm(Naps2Config config, SharedDevicesListViewBehavior listViewBehavior,
+        ISharedDeviceManager sharedDeviceManager, IOsServiceManager osServiceManager, ErrorOutput errorOutput)
         : base(config)
     {
         _sharedDeviceManager = sharedDeviceManager;
+        _osServiceManager = osServiceManager;
+        _errorOutput = errorOutput;
 
         _listView = EtoPlatform.Current.CreateListView(listViewBehavior);
         _addCommand = new ActionCommand(DoAdd)
@@ -39,6 +47,8 @@ public class ScannerSharingForm : EtoDialogBase
             Shortcut = Keys.Delete
         };
 
+        _shareAsService.Checked = _osServiceManager.IsRegistered;
+        _shareAsService.CheckedChanged += ShareAsServiceCheckedChanged;
         _listView.ImageSize = 48;
         _listView.SelectionChanged += SelectionChanged;
 
@@ -64,6 +74,7 @@ public class ScannerSharingForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.ScannerSharingIntro).DynamicWrap(400),
+            _shareAsService,
             C.Spacer(),
             _listView.Control.Scale().NaturalHeight(80),
             L.Row(
@@ -98,6 +109,34 @@ public class ScannerSharingForm : EtoDialogBase
     {
         _editCommand.Enabled = SelectedDevice != null;
         _deleteCommand.Enabled = SelectedDevice != null;
+    }
+
+    private void ShareAsServiceCheckedChanged(object? sender, EventArgs e)
+    {
+        if (_suppressChangeEvent) return;
+        _suppressChangeEvent = true;
+        try
+        {
+            if (_shareAsService.IsChecked())
+            {
+                _osServiceManager.Register();
+            }
+            else
+            {
+                _osServiceManager.Unregister();
+            }
+        }
+        catch (Exception ex)
+        {
+            // TODO: Maybe we display a generic string here?
+            Log.ErrorException(ex.Message, ex);
+            _errorOutput.DisplayError(ex.Message, ex);
+            _shareAsService.Checked = _osServiceManager.IsRegistered;
+        }
+        finally
+        {
+            _suppressChangeEvent = false;
+        }
     }
 
     private void DoAdd()

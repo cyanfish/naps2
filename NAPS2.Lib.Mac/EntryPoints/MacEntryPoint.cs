@@ -23,15 +23,13 @@ public static class MacEntryPoint
 
         EtoPlatform.Current = new MacEtoPlatform();
 
-        if (args.Length > 0 && args[0] is "cli" or "console")
+        var subArgs = args.Skip(1).ToArray();
+        return args switch
         {
-            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new MacImagesModule());
-        }
-        if (args.Length > 0 && args[0] == "worker")
-        {
-            return MacWorkerEntryPoint.Run(args.Skip(1).ToArray());
-        }
-
-        return GuiEntryPoint.Run(args, new MacImagesModule(), new MacModule());
+            ["cli" or "console", ..] => ConsoleEntryPoint.Run(subArgs, new MacImagesModule()),
+            ["worker", ..] => MacWorkerEntryPoint.Run(subArgs),
+            ["server", ..] => ServerEntryPoint.Run(subArgs, new MacImagesModule()),
+            _ => GuiEntryPoint.Run(args, new MacImagesModule(), new MacModule())
+        };
     }
 }

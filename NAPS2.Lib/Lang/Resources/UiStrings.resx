@@ -828,4 +828,7 @@
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
     <value>Are you sure you want to stop sharing {0}?</value>
   </data>
+  <data name="ShareAsService" xml:space="preserve">
+    <value>Share even when NAPS2 is closed</value>
+  </data>
 </root>

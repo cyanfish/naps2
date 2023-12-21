@@ -2191,5 +2191,14 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("ZoomOut", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Share even when NAPS2 is closed.
+        /// </summary>
+        internal static string ShareAsService {
+            get {
+                return ResourceManager.GetString("ShareAsService", resourceCulture);
+            }
+        }
     }
 }

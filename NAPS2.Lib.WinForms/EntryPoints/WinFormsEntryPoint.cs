@@ -13,11 +13,12 @@ public static class WinFormsEntryPoint
     {
         EtoPlatform.Current = new WinFormsEtoPlatform();
 
-        if (args.Length > 0 && args[0] == "worker")
+        var subArgs = args.Skip(1).ToArray();
+        return args switch
         {
-            return WindowsWorkerEntryPoint.Run(args.Skip(1).ToArray());
-        }
-
-        return GuiEntryPoint.Run(args, new GdiModule(), new WinFormsModule());
+            ["worker", ..] => WindowsWorkerEntryPoint.Run(subArgs),
+            ["server", ..] => ServerEntryPoint.Run(subArgs, new GdiModule()),
+            _ => GuiEntryPoint.Run(args, new GdiModule(), new WinFormsModule())
+        };
     }
 }

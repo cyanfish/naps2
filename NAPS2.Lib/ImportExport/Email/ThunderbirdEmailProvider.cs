@@ -13,7 +13,7 @@ public class ThunderbirdEmailProvider : IEmailProvider
 
     // Note we can't really support the Flatpak version of Thunderbird as it won't have access to attachment files from
     // the sandbox.
-    public bool IsAvailable => ProcessHelper.IsSuccessful("thunderbird", "-v", 1000);
+    public bool IsAvailable => ProcessHelper.TryRun("thunderbird", "-v", 1000);
 
     public Task<bool> SendEmail(EmailMessage message, ProgressHandler progress = default)
     {

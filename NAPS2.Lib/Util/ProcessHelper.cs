@@ -16,7 +16,7 @@ public static class ProcessHelper
 
     public static void OpenFolder(string folder) => OpenFile(folder);
 
-    public static bool IsSuccessful(string command, string args, int timeoutMs)
+    public static bool TryRun(string command, string args, int timeoutMs)
     {
         try
         {

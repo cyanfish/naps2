@@ -14,16 +14,14 @@ public static class GtkEntryPoint
         GLib.ExceptionManager.UnhandledException += UnhandledGtkException;
         EtoPlatform.Current = new GtkEtoPlatform();
 
-        if (args.Length > 0 && args[0] is "cli" or "console")
+        var subArgs = args.Skip(1).ToArray();
+        return args switch
         {
-            return ConsoleEntryPoint.Run(args.Skip(1).ToArray(), new GtkImagesModule());
-        }
-        if (args.Length > 0 && args[0] == "worker")
-        {
-            return WorkerEntryPoint.Run(args.Skip(1).ToArray(), new GtkImagesModule());
-        }
-
-        return GuiEntryPoint.Run(args, new GtkImagesModule(), new GtkModule());
+            ["cli" or "console", ..] => ConsoleEntryPoint.Run(subArgs, new GtkImagesModule()),
+            ["worker", ..] => WorkerEntryPoint.Run(subArgs, new GtkImagesModule()),
+            ["server", ..] => ServerEntryPoint.Run(subArgs, new GtkImagesModule()),
+            _ => GuiEntryPoint.Run(args, new GtkImagesModule(), new GtkModule())
+        };
     }
 
     private static void UnhandledGtkException(GLib.UnhandledExceptionArgs e)

@@ -17,6 +17,7 @@ public class MacModule : GuiModule
         builder.RegisterType<AppleMailEmailProvider>().As<IAppleMailEmailProvider>();
         builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
         builder.RegisterType<MacIconProvider>().As<IIconProvider>();
+        builder.RegisterType<MacServiceManager>().As<IOsServiceManager>();
 
         builder.RegisterType<MacDesktopForm>().As<DesktopForm>();
         builder.RegisterType<MacPreviewForm>().As<PreviewForm>();
