@@ -311,6 +311,11 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             {
                 copyTasks = _copyTasks.ToArray();
             }
+            if (copyTasks.Length == 0 && _unit is ICScannerFunctionalUnitDocumentFeeder { DocumentLoaded: false })
+            {
+                _logger.LogDebug("ICC: No pages in feeder");
+                throw new NoPagesException();
+            }
             _logger.LogDebug("ICC: Waiting for scan results");
             await Task.WhenAll(copyTasks);
             _logger.LogDebug("ICC: Closing session");
