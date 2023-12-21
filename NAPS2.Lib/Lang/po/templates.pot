@@ -1268,6 +1268,10 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
+#: UiStrings.resx$ShareAsService$Message
+msgid "Share even when NAPS2 is closed"
+msgstr ""
+
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
 msgstr ""
