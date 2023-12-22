@@ -703,21 +703,24 @@
     <value>Activer le journal de débogage</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Partager</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Partage de scanner</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Partage de scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « ESCL Driver » dans les paramètres de profil NAPS2 de l'autre ordinateur.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Paramètres de partage de scanner</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Faut-il vraiment arrêter de partager « {0} » ?</value>
+  </data>
+  <data name="ShareAsService" xml:space="preserve">
+    <value>Share even when NAPS2 is closed</value>
   </data>
 </root>

@@ -22,7 +22,7 @@
     <value>Libreria icone:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Controlla aggiornamenti</value>
+    <value>Cerca aggiornamenti</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -719,5 +719,8 @@
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
     <value>Sei sicuro di voler interrompere la condivisione di {0}?</value>
+  </data>
+  <data name="ShareAsService" xml:space="preserve">
+    <value>Share even when NAPS2 is closed</value>
   </data>
 </root>

@@ -130,7 +130,7 @@
     <value>Alternatif Aktarım</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Bellek Transferi</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Eski DSM</value>

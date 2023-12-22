@@ -720,4 +720,7 @@
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
     <value>Czy na pewno chcesz zatrzymać udostępnianie {0}?</value>
   </data>
+  <data name="ShareAsService" xml:space="preserve">
+    <value>Udostępnij, nawet jeśli NAPS2 jest zamknięty</value>
+  </data>
 </root>

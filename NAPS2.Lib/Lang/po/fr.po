@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-13 04:56\n"
+"PO-Revision-Date: 2023-12-22 14:17\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -195,7 +195,7 @@ msgstr "Faut-il vraiment supprimer {0} profil(s) ?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Faut-il vraiment arrêter de partager « {0} » ?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -1219,7 +1219,7 @@ msgstr "Image numérisée"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Partage de scanner"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1272,15 +1272,19 @@ msgstr "Définir par défaut"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
+msgstr "Partager"
+
+#: UiStrings.resx$ShareAsService$Message
+msgid "Share even when NAPS2 is closed"
 msgstr ""
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Paramètres de partage de scanner"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « ESCL Driver » dans les paramètres de profil NAPS2 de l'autre ordinateur."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1389,12 +1393,12 @@ msgstr "Le scanner sélectionné est introuvable."
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
-msgstr "Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce scanner en possède un, essayer d'utiliser un autre pilote."
+msgstr "Le scanner sélectionné ne semble pas disposer de dispositif d'alimentation. S'il en possède un, essayer d'utiliser un autre pilote."
 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le prendre en charge, essayer d'utiliser un autre pilote."
+msgstr "Le scanner sélectionné ne semble pas gérer pas le recto-verso. S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message

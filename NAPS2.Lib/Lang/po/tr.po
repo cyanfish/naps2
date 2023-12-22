@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-13 04:56\n"
+"PO-Revision-Date: 2023-12-22 14:17\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -195,7 +195,7 @@ msgstr "{0} adet profili silmek istediğinize emin misiniz?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Paylaşımı durdurmak istediğinize emin misiniz {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -521,7 +521,7 @@ msgstr "Düzenle"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Hepsini E-postala"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
@@ -538,7 +538,7 @@ msgstr "PDF'yi E-Postalama Süreci"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Seçilenleri E-postala"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
@@ -758,7 +758,7 @@ msgstr "En yüksek kalite (büyük dosyalar)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Bellek Transferi"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -1095,7 +1095,7 @@ msgstr "Ters Çevir"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Tümünü Geri Al"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
@@ -1219,7 +1219,7 @@ msgstr "Taranmış Resim"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Tarayıcı Paylaşımı"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1272,15 +1272,19 @@ msgstr "Öntanımlı Olarak Ata"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
+msgstr "Paylaş"
+
+#: UiStrings.resx$ShareAsService$Message
+msgid "Share even when NAPS2 is closed"
 msgstr ""
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Paylaşılan Tarayıcı Ayarları"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Paylaşılan tarayıcılar, diğer bilgisayarın NAPS2 profil ayarlarında \"ESCL Sürücüsü\" seçilerek yerel ağdaki diğer bilgisayarlardan kullanılabilir."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"

@@ -720,4 +720,7 @@
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
     <value>Biztos benne, hogy nem szeretné többé megosztani a {0} lapolvasót?</value>
   </data>
+  <data name="ShareAsService" xml:space="preserve">
+    <value>Share even when NAPS2 is closed</value>
+  </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-13 04:56\n"
+"PO-Revision-Date: 2023-12-22 14:17\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro\n"
@@ -1272,6 +1272,10 @@ msgstr "Stabilește ca implicit"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
+msgstr ""
+
+#: UiStrings.resx$ShareAsService$Message
+msgid "Share even when NAPS2 is closed"
 msgstr ""
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message

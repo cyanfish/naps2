@@ -175,7 +175,7 @@
     <value>Acquisition de la page {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Le scanner sélectionné ne gère pas de dispositif d'alimentation. Si ce scanner en possède un, essayer d'utiliser un autre pilote.</value>
+    <value>Le scanner sélectionné ne semble pas disposer de dispositif d'alimentation. S'il en possède un, essayer d'utiliser un autre pilote.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Il n'y a aucune page dans le dispositif d'alimentation.</value>
@@ -223,7 +223,7 @@
     <value>Enregistrement des acquisitions par lot...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Le scanner sélectionné ne gère pas le recto-verso. Si ce scanner est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
+    <value>Le scanner sélectionné ne semble pas gérer pas le recto-verso. S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
