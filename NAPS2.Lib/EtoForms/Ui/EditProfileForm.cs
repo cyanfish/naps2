@@ -45,6 +45,7 @@ public class EditProfileForm : EtoDialogBase
     private bool _isDefault;
     private bool _result;
     private bool _suppressChangeEvent;
+    private bool _suppressPageSizeEvent;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
         ProfileNameTracker profileNameTracker) : base(config)
@@ -296,7 +297,7 @@ public class EditProfileForm : EtoDialogBase
 
     private void UpdatePageSizeList()
     {
-        _suppressChangeEvent = true;
+        _suppressPageSizeEvent = true;
         _pageSize.Items.Clear();
 
         // Defaults
@@ -321,7 +322,7 @@ public class EditProfileForm : EtoDialogBase
                 CustomDimens = preset.Dimens
             });
         }
-        _suppressChangeEvent = false;
+        _suppressPageSizeEvent = false;
     }
 
     private void SelectPageSize()
@@ -510,7 +511,7 @@ public class EditProfileForm : EtoDialogBase
 
     private void PageSize_SelectedIndexChanged(object? sender, EventArgs e)
     {
-        if (_suppressChangeEvent) return;
+        if (_suppressPageSizeEvent) return;
 
         if (_pageSize.SelectedIndex == _pageSize.Items.Count - 1)
         {
