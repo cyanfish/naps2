@@ -75,7 +75,7 @@ public class ScannerSharingForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.ScannerSharingIntro).DynamicWrap(400),
-            _shareAsService,
+            // _shareAsService,
             C.Spacer(),
             _listView.Control.Scale().NaturalHeight(80),
             L.Row(
