@@ -1,3 +1,6 @@
+Changes in 7.2.2:
+- Bug fixes
+
 Changes in 7.2.1:
 - Bug fixes
 
