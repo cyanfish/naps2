@@ -14,6 +14,7 @@ public class GtkModule : GuiModule
 
         builder.RegisterType<GtkScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<GtkDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
+        builder.RegisterType<LinuxServiceManager>().As<IOsServiceManager>();
 
         builder.RegisterType<GtkDesktopForm>().As<DesktopForm>();
         builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();
