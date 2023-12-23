@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>\"{0}\"を削除しますか?</value>
+    <value>"{0}"を削除しますか?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>使用中ファイルのため、上書きできませんでした。.</value>

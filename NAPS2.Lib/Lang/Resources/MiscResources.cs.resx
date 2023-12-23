@@ -310,7 +310,7 @@
     <value>{0} ({1} × {2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Opravdu chcete smazat \"{0}\"?</value>
+    <value>Opravdu chcete smazat "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>Soubor nemůže být přepsán, protože je právě používán.</value>

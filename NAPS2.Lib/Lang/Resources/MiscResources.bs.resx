@@ -97,7 +97,7 @@
     <value>Skenirana slika</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Izaberite profil prije klika na \"Skeniraj\".</value>
+    <value>Izaberite profil prije klika na "Skeniraj".</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>Greška se pojavila kod drivera za skeniranje.</value>
@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Sigurni ste da želite izbrisati \"{0}\"?</value>
+    <value>Sigurni ste da želite izbrisati "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>Ne može se pisati preko datoteke, jer se ona trenutno koristi.</value>

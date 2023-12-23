@@ -97,7 +97,7 @@
     <value>Сканирано изображение</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Изберете профил преди да натиснете \"Сканиране\".</value>
+    <value>Изберете профил преди да натиснете "Сканиране".</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>Проблем с драйвъра на скенера.</value>

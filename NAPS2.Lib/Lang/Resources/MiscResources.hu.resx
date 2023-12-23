@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Biztos, hogy törölni szeretne \"{0}\" elemet?</value>
+    <value>Biztos, hogy törölni szeretne "{0}" elemet?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>A fájlt nem lehetett felülírni, mert jelenleg használatban van.</value>

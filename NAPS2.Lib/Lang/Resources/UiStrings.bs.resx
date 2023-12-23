@@ -649,7 +649,7 @@
     <value>Serijsko skeniranje</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Pritisnite \"Start\" kada ste spremni.</value>
+    <value>Pritisnite "Start" kada ste spremni.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>Podešavanje skeniranja</value>

@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Ali ste prepričani, da želite izbrisati \"{0}\"?</value>
+    <value>Ali ste prepričani, da želite izbrisati "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>Datoteke ni bilo mogoče prepisati, ker je odprta v drugem programu.</value>

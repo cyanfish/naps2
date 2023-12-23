@@ -181,7 +181,7 @@
     <value>Sööturis ei ole ühtegi lehte.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Teil pole luba sisu kopeerimiseks failist \"{0}\".</value>
+    <value>Teil pole luba sisu kopeerimiseks failist "{0}".</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Faili salvestamisel tekkis viga.</value>

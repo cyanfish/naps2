@@ -712,7 +712,7 @@
     <value>Tarayıcı Paylaşımı</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Paylaşılan tarayıcılar, diğer bilgisayarın NAPS2 profil ayarlarında \"ESCL Sürücüsü\" seçilerek yerel ağdaki diğer bilgisayarlardan kullanılabilir.</value>
+    <value>Paylaşılan tarayıcılar, diğer bilgisayarın NAPS2 profil ayarlarında "ESCL Sürücüsü" seçilerek yerel ağdaki diğer bilgisayarlardan kullanılabilir.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Paylaşılan Tarayıcı Ayarları</value>

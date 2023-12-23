@@ -229,7 +229,7 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Импортируется \"{0}\"...</value>
+    <value>Импортируется "{0}"...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
     <value>Процесс импорта</value>

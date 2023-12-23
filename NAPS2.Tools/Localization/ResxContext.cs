@@ -46,6 +46,7 @@ public class ResxContext
             {
                 translated += line.Substring(1, line.Length - 2);
             }
+            translated = translated.Replace("\\\"", "\"");
 
             Strings[original] = new TranslatableString(original, translated);
             if (!string.IsNullOrWhiteSpace(translated))

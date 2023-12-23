@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>คุณต้องการ ลบ \"{0}\" ใช่หรือไม่</value>
+    <value>คุณต้องการ ลบ "{0}" ใช่หรือไม่</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>The file could not be overwritten because it is currently in use.</value>

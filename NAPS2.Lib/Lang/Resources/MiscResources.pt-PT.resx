@@ -136,10 +136,10 @@
     <value>{0} / {1} MB</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>O ficheiro \"{0}\" não pôde ser importado.</value>
+    <value>O ficheiro "{0}" não pôde ser importado.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>O ficheiro \"{0}\" não pôde ser importado. Apenas ficheiros PDF gerados pelo NAPS2 podem ser importados.</value>
+    <value>O ficheiro "{0}" não pôde ser importado. Apenas ficheiros PDF gerados pelo NAPS2 podem ser importados.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Erro na Transferência</value>
@@ -181,7 +181,7 @@
     <value>Não existem folhas no alimentador.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Não tem permissão para copiar conteúdo do ficheiro \"{0}\".</value>
+    <value>Não tem permissão para copiar conteúdo do ficheiro "{0}".</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Ocorreu um erro ao tentar gravar o ficheiro.</value>
@@ -310,7 +310,7 @@
     <value>{0} ({1} × {2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Tem a certeza que quer apagar \"{0}\"?</value>
+    <value>Tem a certeza que quer apagar "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>O ficheiro não pôde ser substituído porque está atualmente em uso.</value>

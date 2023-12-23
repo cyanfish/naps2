@@ -106,7 +106,7 @@
     <value>גרסה {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>תקלה בשליחת דוא\"ל.</value>
+    <value>תקלה בשליחת דוא"ל.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>ההתקנה הושלמה</value>

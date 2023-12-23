@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>\"{0}\" ögesini silmek istediğinize emin misiniz?</value>
+    <value>"{0}" ögesini silmek istediğinize emin misiniz?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>Dosyanın üzerine yazılamaz çünkü şu anda kullanımda.</value>

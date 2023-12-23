@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>\"{0}\" 이미지를 삭제하시겠습니까?</value>
+    <value>"{0}" 이미지를 삭제하시겠습니까?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>파일이 사용 중이므로 덮어쓰기 할 수 없습니다.</value>

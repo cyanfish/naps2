@@ -712,7 +712,7 @@
     <value>Lapolvasó megosztása</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>A megosztott lapolvasók a helyi hálózat más számítógépeiről is használhatók, ha a másik számítógép NAPS2 profilbeállításaiban kiválasztja az \"ESCL illesztőprogramot\".</value>
+    <value>A megosztott lapolvasók a helyi hálózat más számítógépeiről is használhatók, ha a másik számítógép NAPS2 profilbeállításaiban kiválasztja az "ESCL illesztőprogramot".</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Megosztott lapolvasó beállítások</value>

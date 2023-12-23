@@ -34,7 +34,7 @@
     <value>Versão {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>O ficheiro \"{0}\" não pôde ser importado.</value>
+    <value>O ficheiro "{0}" não pôde ser importado.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>O scanner escolhido aparentemente não possui um alimentador automático. Se o seu scanner possui um alimentador automático, tente usar um controlador diferente.</value>
@@ -43,7 +43,7 @@
     <value>Não existem folhas no alimentador.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Não tem permissão para copiar conteúdo do ficheiro \"{0}\".</value>
+    <value>Não tem permissão para copiar conteúdo do ficheiro "{0}".</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>O scanner escolhido aparentemente não possui frente e verso automático. Se o seu scanner possui frente e verso automático, tente usar um controlador diferente.</value>

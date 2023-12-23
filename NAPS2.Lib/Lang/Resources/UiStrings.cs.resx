@@ -712,7 +712,7 @@
     <value>Sdílení skeneru</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Sdílené skenery lze používat z jiných počítačů v místní síti výběrem možnosti \"ESCL ovladač\" v nastavení profilu NAPS2 jiného počítače.</value>
+    <value>Sdílené skenery lze používat z jiných počítačů v místní síti výběrem možnosti "ESCL ovladač" v nastavení profilu NAPS2 jiného počítače.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Nastavení sdíleného skeneru</value>
