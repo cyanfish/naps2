@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -11,9 +12,6 @@ public class WpfImageTransformer : AbstractImageTransformer<WpfImage>
 
     protected override WpfImage PerformTransform(WpfImage image, RotationTransform transform)
     {
-        // TODO: We can maybe optimize this in some ways, e.g. skip a clone if we're already Rgba32, or convert the
-        // final pixel format back to whatever the original was.
-
         var width = image.Width;
         var height = image.Height;
         float xres = image.HorizontalResolution, yres = image.VerticalResolution;
@@ -23,10 +21,21 @@ public class WpfImageTransformer : AbstractImageTransformer<WpfImage>
             (xres, yres) = (yres, xres);
         }
 
-        var copy = new TransformedBitmap(image.Bitmap, new RotateTransform(transform.Angle));
+        var visual = new DrawingVisual();
+        using (var dc = visual.RenderOpen())
+        {
+            dc.DrawRectangle(Brushes.White, null, new Rect(0, 0, width, height));
+            dc.PushTransform(new TranslateTransform(width / 2.0, height / 2.0));
+            dc.PushTransform(new RotateTransform(transform.Angle));
+            dc.PushTransform(new TranslateTransform(-image.Width / 2.0, -image.Height / 2.0));
+            dc.DrawImage(image.Bitmap, new Rect(0, 0, image.Width, image.Height));
+        }
 
-        var newImage = new WpfImage(ImageContext, new WriteableBitmap(copy));
-        // TODO: In Gdi, we convert this back to BW1. Should we do the same?
+        var rtb = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Default);
+        rtb.Render(visual);
+
+        var newImage = new WpfImage(ImageContext, new WriteableBitmap(rtb));
+        // TODO: In Gdi, we convert this back to BW1 (or the original pixel format). Should we do the same?
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;
