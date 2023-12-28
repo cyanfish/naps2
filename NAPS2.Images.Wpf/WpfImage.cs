@@ -1,4 +1,6 @@
+using System.Reflection;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using NAPS2.Images.Bitwise;
 using NAPS2.Util;
 
@@ -6,6 +8,15 @@ namespace NAPS2.Images.Wpf;
 
 public class WpfImage : IMemoryImage
 {
+    private static MethodInfo? _detachFromDispatcher;
+
+    private static void DetachFromDispatcher(DispatcherObject dispatcherObject)
+    {
+        _detachFromDispatcher ??=
+            typeof(DispatcherObject).GetMethod("DetachFromDispatcher", BindingFlags.Instance | BindingFlags.NonPublic);
+        _detachFromDispatcher!.Invoke(dispatcherObject, Array.Empty<object>());
+    }
+
     private bool _disposed;
 
     public WpfImage(ImageContext imageContext, WriteableBitmap bitmap)
@@ -17,7 +28,7 @@ public class WpfImage : IMemoryImage
         WpfPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
         Bitmap = bitmap;
         LogicalPixelFormat = PixelFormat;
-        Bitmap.Freeze();
+        DetachFromDispatcher(Bitmap);
     }
 
     public ImageContext ImageContext { get; }
@@ -42,7 +53,7 @@ public class WpfImage : IMemoryImage
         var dstInfo = new PixelInfo(Width, Height, GetSubPixelType(), newImage.BackBufferStride);
 
         new CopyBitwiseImageOp().Perform(src, srcInfo, dst, dstInfo);
-        newImage.Freeze();
+        DetachFromDispatcher(newImage);
         Bitmap = newImage;
     }
 
@@ -59,18 +70,15 @@ public class WpfImage : IMemoryImage
     {
         if (_disposed) throw new InvalidOperationException();
         var subPixelType = GetSubPixelType();
-        if (lockMode == LockMode.ReadOnly)
+        imageData = new BitwiseImageData((byte*) Bitmap.BackBuffer,
+            new PixelInfo(Width, Height, subPixelType, Bitmap.BackBufferStride));
+        return new WpfImageLockState();
+    }
+
+    private class WpfImageLockState : ImageLockState
+    {
+        public override void Dispose()
         {
-            imageData = new BitwiseImageData((byte*) Bitmap.BackBuffer,
-                new PixelInfo(Width, Height, subPixelType, Bitmap.BackBufferStride));
-            return new WpfReadOnlyImageLockState();
-        }
-        else
-        {
-            var copy = new WriteableBitmap(Bitmap);
-            imageData = new BitwiseImageData((byte*) copy.BackBuffer,
-                new PixelInfo(Width, Height, subPixelType, copy.BackBufferStride));
-            return new WpfWritableImageLockState(copy, this);
         }
     }
 
@@ -82,40 +90,6 @@ public class WpfImage : IMemoryImage
         ImagePixelFormat.BW1 => SubPixelType.Bit,
         _ => throw new InvalidOperationException("Unsupported pixel format")
     };
-
-    private class WpfReadOnlyImageLockState : ImageLockState
-    {
-        public WpfReadOnlyImageLockState()
-        {
-        }
-
-        public override void Dispose()
-        {
-        }
-    }
-
-    private class WpfWritableImageLockState : ImageLockState
-    {
-        private readonly WpfImage _container;
-        private readonly WriteableBitmap _copy;
-
-        public WpfWritableImageLockState(WriteableBitmap copy, WpfImage container)
-        {
-            _container = container;
-            _copy = copy;
-            _copy.Lock();
-        }
-
-        public override void Dispose()
-        {
-            if (!_copy.IsFrozen)
-            {
-                _copy.Unlock();
-                _copy.Freeze();
-                _container.Bitmap = _copy;
-            }
-        }
-    }
 
     public ImageFileFormat OriginalFileFormat { get; set; }
 
