@@ -9,5 +9,6 @@ public enum PlatformFlags
     Linux = 4,
     X64 = 8,
     Arm64 = 16,
-    ImageSharp = 32
+    ImageSharp = 32,
+    Wpf = 64
 }

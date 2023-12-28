@@ -126,7 +126,22 @@ public class WpfImage : IMemoryImage
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
         var encoder = GetImageEncoder(imageFormat, options);
         encoder.Frames.Add(BitmapFrame.Create(helper.Image.Bitmap));
-        encoder.Save(stream);
+        SaveMaybeWithoutSeeking(stream, encoder);
+    }
+
+    private static void SaveMaybeWithoutSeeking(Stream stream, BitmapEncoder encoder)
+    {
+        if (stream.CanSeek)
+        {
+            encoder.Save(stream);
+        }
+        else
+        {
+            var memoryStream = new MemoryStream();
+            encoder.Save(memoryStream);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            memoryStream.CopyTo(stream);
+        }
     }
 
     private static BitmapEncoder GetImageEncoder(ImageFileFormat imageFormat, ImageSaveOptions options)

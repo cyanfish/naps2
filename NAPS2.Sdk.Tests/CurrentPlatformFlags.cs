@@ -31,6 +31,10 @@ public static class CurrentPlatformFlags
         {
             p |= PlatformFlags.ImageSharp;
         }
+        if (TestImageContextFactory.Get().ImageType.Name == "WpfImage")
+        {
+            p |= PlatformFlags.Wpf;
+        }
         return p;
     }
 
@@ -38,5 +42,11 @@ public static class CurrentPlatformFlags
     {
         var flags = Get();
         return (match & flags) == match;
+    }
+
+    public static bool HasAny(PlatformFlags match)
+    {
+        var flags = Get();
+        return (match & flags) != 0;
     }
 }

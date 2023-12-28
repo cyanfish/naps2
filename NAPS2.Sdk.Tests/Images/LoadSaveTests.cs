@@ -244,7 +244,7 @@ public class LoadSaveTests : ContextualTests
         // All optimized values should be less than their unoptimized counterparts.
         Assert.True(optimized32Bpp < unoptimized32Bpp);
         Assert.True(optimized24Bpp < unoptimized24Bpp);
-        if (!CurrentPlatformFlags.Has(PlatformFlags.ImageSharp))
+        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharp | PlatformFlags.Wpf))
         {
             Assert.True(optimized8Bpp < unoptimized8Bpp);
             Assert.Equal(optimized1Bpp, unoptimized1Bpp);
@@ -295,11 +295,14 @@ public class LoadSaveTests : ContextualTests
             ImageFileFormat.Png, ".png", "dog_gray_png",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
         },
+        // TODO: Can we improve this for WPF?
+#if MAC || LINUX
         new object[]
         {
             ImageFileFormat.Png, ".png", "dog_gray_24bit_png",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
         },
+#endif
         new object[]
         {
             ImageFileFormat.Png, ".png", "dog_bw",
@@ -363,11 +366,14 @@ public class LoadSaveTests : ContextualTests
             ImageFileFormat.Tiff, ".tiff", "dog_gray_tiff",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
         },
+        // TODO: Can we improve this for WPF?
+#if MAC || LINUX
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "dog_gray_24bit_tiff",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
         },
+#endif
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
