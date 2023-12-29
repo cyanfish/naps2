@@ -37,8 +37,6 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
 
 ## Usage
 
-See the [Samples](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk.Samples) for more examples and description.
-
 ```c#
 // Set up
 using var scanningContext = new ScanningContext(new GdiImageContext());
@@ -68,6 +66,15 @@ var images = await controller.Scan(options).ToListAsync();
 var pdfExporter = new PdfExporter(scanningContext);
 await pdfExporter.Export("doc.pdf", images);
 ```
+
+More [samples](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk.Samples):
+- ["Hello World" scanning](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/HelloWorldSample.cs)
+- [Scan and save to PDF/images](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/ScanAndSaveSample.cs)
+- [Scan with TWAIN drivers](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/TwainSample.cs)
+- [Scan to System.Drawing.Bitmap](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/ScanToBitmapSample.cs)
+- [Import and export PDFs](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/PdfImportSample.cs)
+- [Store image data on the filesystem](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/FileStorageSample.cs)
+- [Share scanners on the local network](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/NetworkSharingSample.cs)
 
 ## Drivers
 
