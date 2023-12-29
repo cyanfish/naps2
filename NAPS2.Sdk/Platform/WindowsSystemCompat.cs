@@ -23,8 +23,6 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool ShouldRememberBackgroundOperations => true;
 
-    public bool UseSystemTesseract => false;
-
     public bool RenderInWorker => true;
 
     public bool SupportsWinX86Worker => true;

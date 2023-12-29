@@ -27,11 +27,11 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
 - **[NAPS2.Sdk.Worker.Win32](https://www.nuget.org/packages/NAPS2.Sdk.Worker.Win32/)**
   - For scanning with [TWAIN on Windows](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/TwainSample.cs).
 - **[NAPS2.Pdfium.Binaries](https://www.nuget.org/packages/NAPS2.Pdfium.Binaries/)**
-  - For [importing PDFs]().
+  - For [importing PDFs](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/PdfImportSample.cs).
 - **[NAPS2.Sane.Binaries](https://www.nuget.org/packages/NAPS2.Sane.Binaries/)**
   - For [using SANE drivers]() on Mac. (Linux has them pre-installed, and Windows isn't supported.) 
 - **[NAPS2.Tesseract.Binaries](https://www.nuget.org/packages/NAPS2.Tesseract.Binaries/)**
-  - For [running OCR](). (You can also use a separate Tesseract installation if you like.)
+  - For [running OCR](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/OcrSample.cs). (You can also use a separate Tesseract installation if you like.)
 - **[NAPS2.Escl.Server](https://www.nuget.org/packages/NAPS2.Escl.Server/)**
   - For [sharing scanners](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/NetworkSharingSample.cs) across the local network.
 
@@ -73,6 +73,7 @@ More [samples](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk.Samples):
 - [Scan with TWAIN drivers](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/TwainSample.cs)
 - [Scan to System.Drawing.Bitmap](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/ScanToBitmapSample.cs)
 - [Import and export PDFs](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/PdfImportSample.cs)
+- [Export PDFs with OCR](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/OcrSample.cs)
 - [Store image data on the filesystem](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/FileStorageSample.cs)
 - [Share scanners on the local network](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/NetworkSharingSample.cs)
 

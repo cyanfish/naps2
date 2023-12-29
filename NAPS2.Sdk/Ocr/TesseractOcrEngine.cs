@@ -3,6 +3,7 @@ using System.Threading;
 using System.Xml;
 using Microsoft.Extensions.Logging;
 using NAPS2.Scan;
+using NAPS2.Unmanaged;
 
 namespace NAPS2.Ocr;
 
@@ -10,13 +11,54 @@ public class TesseractOcrEngine : IOcrEngine
 {
     private readonly string _tesseractPath;
     private readonly string? _languageDataBasePath;
+    private readonly bool _withModes;
 
-    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath = null)
+    /// <summary>
+    /// Gets a TesseractOcrEngine instance configured to use the Tesseract executable on the system PATH with the
+    /// system-installed language data.
+    /// </summary>
+    public static TesseractOcrEngine System() =>
+        new("tesseract");
+
+    /// <summary>
+    /// Gets a TesseractOcrEngine instance configured to use the Tesseract executable from the NAPS2.Tesseract.Binaries
+    /// nuget package using language data .traineddata files in the specified folder.
+    /// </summary>
+    public static TesseractOcrEngine Bundled(string languageDataPath) =>
+        new(BundlePath, languageDataPath, false);
+
+    /// <summary>
+    /// Gets a TesseractOcrEngine instance configured to use the Tesseract executable from the NAPS2.Tesseract.Binaries
+    /// nuget package using language data .traineddata files in the specified folder. The folder is expected to have
+    /// subfolders named "best" and "fast" with the actual .trainneddata files that will be used based on the OcrMode.
+    /// </summary>
+    public static TesseractOcrEngine BundledWithModes(string languageDataBasePath) =>
+        new(BundlePath, languageDataBasePath, true);
+
+    /// <summary>
+    /// Gets a TesseractOcrEngine instance configured to use the specified Tesseract executable, optionally looking for
+    /// .traineddata files in the specified folder.
+    /// </summary>
+    public static TesseractOcrEngine Custom(string tesseractExePath, string? languageDataPath = null) =>
+        new(tesseractExePath, languageDataPath, false);
+
+    /// <summary>
+    /// Gets a TesseractOcrEngine instance configured to use the specified Tesseract executable using language data
+    /// .traineddata files in the specified folder. The folder is expected to have subfolders named "best" and "fast"
+    /// with the actual .trainneddata files that will be used based on the OcrMode.
+    /// </summary>
+    public static TesseractOcrEngine CustomWithModes(string tesseractExePath, string languageDataBasePath) =>
+        new(tesseractExePath, languageDataBasePath, true);
+
+    private static string BundlePath => NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName);
+
+    private TesseractOcrEngine(string tesseractPath, string? languageDataBasePath = null, bool withModes = true)
     {
         _tesseractPath = tesseractPath;
         _languageDataBasePath = languageDataBasePath;
+        _withModes = withModes;
     }
-    
+
     public async Task<OcrResult?> ProcessImage(ScanningContext scanningContext, string imagePath, OcrParams ocrParams,
         CancellationToken cancelToken)
     {
@@ -36,8 +78,12 @@ public class TesseractOcrEngine : IOcrEngine
             };
             if (_languageDataBasePath != null)
             {
-                string subfolder = ocrParams.Mode == OcrMode.Best ? "best" : "fast";
-                string languageDataPath = Path.Combine(_languageDataBasePath, subfolder);
+                string languageDataPath = _languageDataBasePath;
+                if (_withModes)
+                {
+                    string subfolder = ocrParams.Mode == OcrMode.Best ? "best" : "fast";
+                    languageDataPath = Path.Combine(languageDataPath, subfolder);
+                }
                 startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = languageDataPath;
                 var tessdata = new DirectoryInfo(languageDataPath);
                 EnsureHocrConfigExists(tessdata);
@@ -193,7 +239,7 @@ public class TesseractOcrEngine : IOcrEngine
         }
         return bounds;
     }
-    
+
     // TODO: Consider adding back CanProcess, or otherwise using this code to get the languages from a system engine
 //     private void CheckIfInstalled()
 //     {

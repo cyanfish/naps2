@@ -26,8 +26,6 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool ShouldRememberBackgroundOperations => true;
 
-    public bool UseSystemTesseract => false;
-
     public bool RenderInWorker => false;
 
     public bool SupportsWinX86Worker => false;

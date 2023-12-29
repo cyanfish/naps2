@@ -74,8 +74,7 @@ public class ContextualTests : IDisposable
         var tesseractPath = NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName, depsRoot);
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
-        ScanningContext.OcrEngine =
-            new TesseractOcrEngine(tesseractPath, FolderPath);
+        ScanningContext.OcrEngine = TesseractOcrEngine.CustomWithModes(tesseractPath, FolderPath);
     }
 
     public void SetUpFakeOcr() => SetUpFakeOcr(new());

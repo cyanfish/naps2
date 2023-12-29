@@ -20,8 +20,6 @@ internal interface ISystemCompat
 
     bool ShouldRememberBackgroundOperations { get; }
 
-    bool UseSystemTesseract { get; }
-
     bool RenderInWorker { get; }
 
     bool SupportsWinX86Worker { get; }
