@@ -10,20 +10,18 @@ public class TesseractOcrEngine : IOcrEngine
 {
     private readonly string _tesseractPath;
     private readonly string? _languageDataBasePath;
-    private readonly string _tempFolder;
 
-    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath, string tempFolder)
+    public TesseractOcrEngine(string tesseractPath, string? languageDataBasePath = null)
     {
         _tesseractPath = tesseractPath;
         _languageDataBasePath = languageDataBasePath;
-        _tempFolder = tempFolder;
     }
     
     public async Task<OcrResult?> ProcessImage(ScanningContext scanningContext, string imagePath, OcrParams ocrParams,
         CancellationToken cancelToken)
     {
         var logger = scanningContext.Logger;
-        string tempHocrFilePath = Path.Combine(_tempFolder, Path.GetRandomFileName());
+        string tempHocrFilePath = Path.Combine(scanningContext.TempFolderPath, Path.GetRandomFileName());
         string tempHocrFilePathWithExt = tempHocrFilePath + ".hocr";
         try
         {

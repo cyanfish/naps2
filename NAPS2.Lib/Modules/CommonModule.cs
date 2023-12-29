@@ -117,8 +117,7 @@ public class CommonModule : Module
                 : NativeLibrary.FindExePath(PlatformCompat.System.TesseractExecutableName);
             var engine = new TesseractOcrEngine(
                 tesseractPath,
-                ctx.Resolve<TesseractLanguageManager>().TessdataBasePath,
-                Paths.Temp);
+                ctx.Resolve<TesseractLanguageManager>().TessdataBasePath);
             var errorOutput = ctx.Resolve<ErrorOutput>();
             engine.OcrError += (_, args) => errorOutput.DisplayError(SdkResources.OcrError, args.Exception);
             engine.OcrTimeout += (_, _) => errorOutput.DisplayError(SdkResources.OcrTimeout);

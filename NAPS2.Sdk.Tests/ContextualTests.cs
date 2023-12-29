@@ -75,7 +75,7 @@ public class ContextualTests : IDisposable
         CopyResourceToFile(BinaryResources.eng_traineddata, fast, "eng.traineddata");
         CopyResourceToFile(BinaryResources.heb_traineddata, fast, "heb.traineddata");
         ScanningContext.OcrEngine =
-            new TesseractOcrEngine(tesseractPath, FolderPath, FolderPath);
+            new TesseractOcrEngine(tesseractPath, FolderPath);
     }
 
     public void SetUpFakeOcr() => SetUpFakeOcr(new());
