@@ -1,5 +1,8 @@
 namespace NAPS2.Pdf;
 
+/// <summary>
+/// Represents standard PDF metadata (e.g. author, subject, title).
+/// </summary>
 public record PdfMetadata
 {
     public string Author { get; init; } = "";

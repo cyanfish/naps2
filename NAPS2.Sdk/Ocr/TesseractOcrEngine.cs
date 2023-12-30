@@ -7,6 +7,9 @@ using NAPS2.Unmanaged;
 
 namespace NAPS2.Ocr;
 
+/// <summary>
+/// OCR engine using Tesseract (https://github.com/tesseract-ocr/tesseract).
+/// </summary>
 public class TesseractOcrEngine : IOcrEngine
 {
     private readonly string _tesseractPath;

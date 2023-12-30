@@ -20,7 +20,6 @@ public class CommonModule : Module
     protected override void Load(ContainerBuilder builder)
     {
         // Export
-        builder.RegisterType<PdfExporter>().As<IPdfExporter>();
         builder.RegisterType<AutofacEmailProviderFactory>().As<IEmailProviderFactory>();
         builder.RegisterType<StubMapiWrapper>().As<IMapiWrapper>();
         builder.RegisterType<OcrRequestQueue>().AsSelf().SingleInstance();

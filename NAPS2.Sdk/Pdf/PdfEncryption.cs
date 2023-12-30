@@ -1,5 +1,8 @@
 namespace NAPS2.Pdf;
 
+/// <summary>
+/// Configuration for PDF encryption (e.g. passwords, permissions).
+/// </summary>
 public record PdfEncryption
 {
     public bool EncryptPdf { get; init; }

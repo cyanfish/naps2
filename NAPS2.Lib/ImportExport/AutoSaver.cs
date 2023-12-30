@@ -12,13 +12,13 @@ public class AutoSaver
     private readonly DialogHelper _dialogHelper;
     private readonly OperationProgress _operationProgress;
     private readonly ISaveNotify _notify;
-    private readonly IPdfExporter _pdfExporter;
+    private readonly PdfExporter _pdfExporter;
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly Naps2Config _config;
     private readonly ImageContext _imageContext;
 
     public AutoSaver(ErrorOutput errorOutput, DialogHelper dialogHelper,
-        OperationProgress operationProgress, ISaveNotify notify, IPdfExporter pdfExporter,
+        OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter,
         IOverwritePrompt overwritePrompt, Naps2Config config, ImageContext imageContext)
     {
         _errorOutput = errorOutput;

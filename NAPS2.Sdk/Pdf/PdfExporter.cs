@@ -16,7 +16,10 @@ using PdfPage = PdfSharpCore.Pdf.PdfPage;
 
 namespace NAPS2.Pdf;
 
-public class PdfExporter : IPdfExporter
+/// <summary>
+/// Exports images to a PDF file.
+/// </summary>
+public class PdfExporter
 {
     private readonly ScanningContext _scanningContext;
     private readonly ILogger _logger;

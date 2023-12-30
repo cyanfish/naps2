@@ -2,6 +2,9 @@
 
 namespace NAPS2.ImportExport;
 
+/// <summary>
+/// Additional parameters for importing files (e.g. PDF password, barcode detection, thumbnail rendering).
+/// </summary>
 public class ImportParams
 {
     public ImportParams()

@@ -6,7 +6,7 @@ using NAPS2.Scan;
 namespace NAPS2.Pdf;
 
 // TODO: Experimental. Also remember that this is failing with access violations on 32-bit (see tests).
-internal class PdfiumPdfExporter : IPdfExporter
+internal class PdfiumPdfExporter
 {
     private readonly ScanningContext _scanningContext;
     private readonly ILogger _logger;

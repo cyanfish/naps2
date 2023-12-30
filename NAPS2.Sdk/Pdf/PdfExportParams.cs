@@ -1,5 +1,8 @@
 namespace NAPS2.Pdf;
 
+/// <summary>
+/// Additional parameters for exporting PDFs (metadata, encryption, compatibility).
+/// </summary>
 public record PdfExportParams
 {
     public PdfExportParams()

@@ -12,14 +12,14 @@ namespace NAPS2.Scan.Batch;
 public class BatchScanPerformer : IBatchScanPerformer
 {
     private readonly IScanPerformer _scanPerformer;
-    private readonly IPdfExporter _pdfExporter;
+    private readonly PdfExporter _pdfExporter;
     private readonly IOperationFactory _operationFactory;
     private readonly IFormFactory _formFactory;
     private readonly Naps2Config _config;
     private readonly IProfileManager _profileManager;
     private readonly ThumbnailController _thumbnailController;
 
-    public BatchScanPerformer(IScanPerformer scanPerformer, IPdfExporter pdfExporter,
+    public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter,
         IOperationFactory operationFactory,
         IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
         ThumbnailController thumbnailController)
@@ -44,7 +44,7 @@ public class BatchScanPerformer : IBatchScanPerformer
     private class BatchState
     {
         private readonly IScanPerformer _scanPerformer;
-        private readonly IPdfExporter _pdfExporter;
+        private readonly PdfExporter _pdfExporter;
         private readonly IOperationFactory _operationFactory;
         private readonly IFormFactory _formFactory;
         private readonly Naps2Config _config;
@@ -60,7 +60,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         private ScanParams _scanParams;
         private List<List<ProcessedImage>> _scans;
 
-        public BatchState(IScanPerformer scanPerformer, IPdfExporter pdfExporter, IOperationFactory operationFactory,
+        public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
             IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
             ThumbnailController thumbnailController, BatchSettings settings,
             Action<string> progressCallback, CancellationToken cancelToken, IFormBase batchForm,
