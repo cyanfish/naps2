@@ -26,6 +26,12 @@ public class DocCommand : ICommand<DocOptions>
         {
             Cli.Run("docfx", "NAPS2.Sdk/_doc/docfx.json --serve", alwaysVerbose: true);
         }
+        if (options.DocCommand == "push")
+        {
+            Cli.Run("docfx", "NAPS2.Sdk/_doc/docfx.json", alwaysVerbose: true);
+            var deployScriptPath = Path.Combine(Paths.Naps2UserFolder, "deploy-docs.ps1");
+            Cli.Run("powershell", deployScriptPath, alwaysVerbose: true);
+        }
         return 0;
     }
 }
