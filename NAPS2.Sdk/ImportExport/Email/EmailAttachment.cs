@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents an attachment for an EmailMessage.
 /// </summary>
-public record EmailAttachment
+internal record EmailAttachment
 {
     /// <summary>
     /// The path of the source file to be attached.

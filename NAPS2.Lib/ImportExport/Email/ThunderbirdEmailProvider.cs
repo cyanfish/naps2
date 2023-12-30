@@ -2,7 +2,7 @@ using System.Text;
 
 namespace NAPS2.ImportExport.Email;
 
-public class ThunderbirdEmailProvider : IEmailProvider
+internal class ThunderbirdEmailProvider : IEmailProvider
 {
     private readonly ErrorOutput _errorOutput;
 

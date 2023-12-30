@@ -2,7 +2,7 @@
 
 namespace NAPS2.ImportExport.Email.Oauth;
 
-public class GmailEmailProvider : MimeEmailProvider
+internal class GmailEmailProvider : MimeEmailProvider
 {
     private readonly GmailOauthProvider _gmailOauthProvider;
 

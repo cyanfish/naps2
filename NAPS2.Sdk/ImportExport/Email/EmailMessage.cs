@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport.Email;
 
-public class EmailMessage
+internal class EmailMessage
 {
     public string? Subject { get; set; }
 

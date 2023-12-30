@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport.Email;
 
-public enum EmailRecipientType
+internal enum EmailRecipientType
 {
     To,
     Cc,

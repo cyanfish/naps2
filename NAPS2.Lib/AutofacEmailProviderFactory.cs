@@ -5,7 +5,7 @@ using NAPS2.ImportExport.Email.Oauth;
 
 namespace NAPS2;
 
-public class AutofacEmailProviderFactory : IEmailProviderFactory
+internal class AutofacEmailProviderFactory : IEmailProviderFactory
 {
     private readonly IComponentContext _container;
 

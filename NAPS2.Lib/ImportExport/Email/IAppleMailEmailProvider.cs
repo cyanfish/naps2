@@ -1,5 +1,5 @@
 namespace NAPS2.ImportExport.Email;
 
-public interface IAppleMailEmailProvider : IEmailProvider
+internal interface IAppleMailEmailProvider : IEmailProvider
 {
 }

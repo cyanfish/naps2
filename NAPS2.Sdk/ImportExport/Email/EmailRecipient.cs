@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport.Email;
 
-public class EmailRecipient
+internal class EmailRecipient
 {
     public static IEnumerable<EmailRecipient> FromText(EmailRecipientType recipType, string? recipText)
     {

@@ -3,7 +3,7 @@ using MimeKit;
 
 namespace NAPS2.ImportExport.Email;
 
-public abstract class MimeEmailProvider : IEmailProvider
+internal abstract class MimeEmailProvider : IEmailProvider
 {
     public async Task<bool> SendEmail(EmailMessage emailMessage, ProgressHandler progress = default)
     {

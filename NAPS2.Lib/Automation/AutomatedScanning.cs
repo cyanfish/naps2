@@ -13,7 +13,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Automation;
 
-public class AutomatedScanning
+internal class AutomatedScanning
 {
     private readonly ImageContext _imageContext;
     private readonly IEmailProviderFactory _emailProviderFactory;

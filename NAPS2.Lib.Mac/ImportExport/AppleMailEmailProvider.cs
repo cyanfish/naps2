@@ -2,7 +2,7 @@ using NAPS2.ImportExport.Email;
 
 namespace NAPS2.ImportExport;
 
-public class AppleMailEmailProvider : IAppleMailEmailProvider
+internal class AppleMailEmailProvider : IAppleMailEmailProvider
 {
     public Task<bool> SendEmail(EmailMessage emailMessage, ProgressHandler progress = default)
     {

@@ -2,7 +2,7 @@
 
 namespace NAPS2.ImportExport.Email.Oauth;
 
-public class OutlookWebEmailProvider : IEmailProvider
+internal class OutlookWebEmailProvider : IEmailProvider
 {
     private readonly OutlookWebOauthProvider _outlookWebOauthProvider;
 

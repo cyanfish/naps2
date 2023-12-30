@@ -4,7 +4,7 @@ using NSubstitute;
 
 namespace NAPS2.Lib.Tests.Automation;
 
-public class MockEmailProviderFactory : IEmailProviderFactory
+internal class MockEmailProviderFactory : IEmailProviderFactory
 {
     private Exception _assertException;
 

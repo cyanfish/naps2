@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.ImportExport.Email;
 
-public interface IEmailProviderFactory
+internal interface IEmailProviderFactory
 {
     IEmailProvider Create(EmailProviderType type);
 
