@@ -6,17 +6,17 @@ namespace NAPS2.ImportExport;
 /// <summary>
 /// Imports PDF or image files.
 /// </summary>
-public class FileImporter : IFileImporter
+public class FileImporter
 {
-    private readonly IFileImporter _pdfImporter;
-    private readonly IFileImporter _imageImporter;
+    private readonly PdfImporter _pdfImporter;
+    private readonly ImageImporter _imageImporter;
 
     public FileImporter(ScanningContext scanningContext)
         : this(new PdfImporter(scanningContext), new ImageImporter(scanningContext))
     {
     }
 
-    public FileImporter(IPdfImporter pdfImporter, IImageImporter imageImporter)
+    public FileImporter(PdfImporter pdfImporter, ImageImporter imageImporter)
     {
         _pdfImporter = pdfImporter;
         _imageImporter = imageImporter;

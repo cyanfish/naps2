@@ -6,7 +6,7 @@ namespace NAPS2.ImportExport;
 /// <summary>
 /// Imports image files.
 /// </summary>
-public class ImageImporter : IImageImporter
+public class ImageImporter
 {
     private readonly ScanningContext _scanningContext;
 

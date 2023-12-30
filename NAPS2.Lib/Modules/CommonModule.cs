@@ -12,7 +12,6 @@ using NAPS2.Remoting.Server;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
-using NAPS2.Unmanaged;
 
 namespace NAPS2.Modules;
 
@@ -20,12 +19,6 @@ public class CommonModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        // Import
-        builder.RegisterType<FileImporter>().As<IFileImporter>();
-        builder.RegisterType<PdfImporter>().As<IPdfImporter>();
-        builder.RegisterType<ImageImporter>().As<IImageImporter>();
-        builder.RegisterType<RecoveryManager>().AsSelf();
-
         // Export
         builder.RegisterType<PdfExporter>().As<IPdfExporter>();
         builder.RegisterType<AutofacEmailProviderFactory>().As<IEmailProviderFactory>();
@@ -74,6 +67,7 @@ public class CommonModule : Module
         builder.RegisterType<ThumbnailController>().AsSelf().SingleInstance();
         builder.RegisterType<ThumbnailRenderQueue>().AsSelf().SingleInstance();
         builder.RegisterType<DefaultIconProvider>().As<IIconProvider>();
+        builder.RegisterType<RecoveryManager>().AsSelf();
 
         // ScanningContext has several properties that need to be populated. We do some here, and also some in
         // GuiModule/ConsoleModule/WorkerModule as they each have their own needs.

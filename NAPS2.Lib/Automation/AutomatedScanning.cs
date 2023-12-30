@@ -19,7 +19,7 @@ internal class AutomatedScanning
     private readonly IEmailProviderFactory _emailProviderFactory;
     private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
-    private readonly IFileImporter _fileImporter;
+    private readonly FileImporter _fileImporter;
     private readonly IOperationFactory _operationFactory;
     private readonly TesseractLanguageManager _tesseractLanguageManager;
     private readonly IFormFactory _formFactory;
@@ -40,7 +40,7 @@ internal class AutomatedScanning
 
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
-        IFileImporter fileImporter, IOperationFactory operationFactory,
+        FileImporter fileImporter, IOperationFactory operationFactory,
         TesseractLanguageManager tesseractLanguageManager, IFormFactory formFactory, Naps2Config config,
         IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
     {

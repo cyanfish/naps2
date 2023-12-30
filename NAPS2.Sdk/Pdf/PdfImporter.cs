@@ -7,7 +7,7 @@ namespace NAPS2.Pdf;
 /// <summary>
 /// Imports PDF files.
 /// </summary>
-public class PdfImporter : IPdfImporter
+public class PdfImporter
 {
     private const int MAX_PASSWORD_ATTEMPTS = 5;
 

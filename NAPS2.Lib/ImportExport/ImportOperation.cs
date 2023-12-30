@@ -2,9 +2,9 @@
 
 public class ImportOperation : OperationBase
 {
-    private readonly IFileImporter _fileImporter;
+    private readonly FileImporter _fileImporter;
 
-    public ImportOperation(IFileImporter fileImporter)
+    public ImportOperation(FileImporter fileImporter)
     {
         _fileImporter = fileImporter;
 
