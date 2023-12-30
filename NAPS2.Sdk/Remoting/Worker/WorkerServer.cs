@@ -6,6 +6,10 @@ using NAPS2.Scan.Internal.Twain;
 
 namespace NAPS2.Remoting.Worker;
 
+/// <summary>
+/// Entry point for the NAPS2.Worker.exe binary. You can use this to build your own custom binary instead of using the
+/// one in the NAPS2.Sdk.Worker.Win32 nuget package.
+/// </summary>
 public static class WorkerServer
 {
     public static async Task Run(ScanningContext scanningContext, CancellationToken cancellationToken = default)

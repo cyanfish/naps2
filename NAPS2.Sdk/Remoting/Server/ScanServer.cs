@@ -4,6 +4,9 @@ using NAPS2.Scan;
 
 namespace NAPS2.Remoting.Server;
 
+/// <summary>
+/// Allows scanning devices to be shared across the network. Clients can connect by using Driver.Escl when scanning.
+/// </summary>
 public class ScanServer : IDisposable
 {
     private readonly ScanningContext _scanningContext;

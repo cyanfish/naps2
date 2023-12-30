@@ -1,5 +1,8 @@
 ﻿namespace NAPS2.Scan;
 
+/// <summary>
+/// Scanning options specific to the TWAIN driver.
+/// </summary>
 public class TwainOptions
 {
     /// <summary>
@@ -14,7 +17,7 @@ public class TwainOptions
     /// NAPS2. NTwain is better for the vast majority of scanners, but a few (e.g. Kyocera brand) may only work with
     /// Legacy for unknown reasons.  
     /// </summary>
-    public TwainAdapter Adapter { get; set; }
+    internal TwainAdapter Adapter { get; set; }
 
     /// <summary>
     /// The transfer mode used for TWAIN, either Native or Memory. By default Native is used, but Memory might have
@@ -36,21 +39,46 @@ public class TwainOptions
     public bool IncludeWiaDevices { get; set; }
 }
 
-public enum TwainAdapter
+internal enum TwainAdapter
 {
     NTwain,
     Legacy
 }
 
+/// <summary>
+/// The data source manager (DSM) to use for TWAIN.
+/// </summary>
 public enum TwainDsm
 {
+    /// <summary>
+    /// The modern 32-bit twaindsm.dll. Recommended.
+    /// </summary>
     New,
+
+    /// <summary>
+    /// The modern 64-bit twaindsm.dll. Choose this if you want to use a 64-bit TWAIN data source.
+    /// </summary>
     NewX64,
+
+    /// <summary>
+    /// The old 32-bit twain32.dll. Some data sources have compatibility issues with the newer DSM.
+    /// </summary>
     Old
 }
 
+/// <summary>
+/// The transfer mode to use for TWAIN.
+/// </summary>
 public enum TwainTransferMode
 {
+    /// <summary>
+    /// Transfers the entire image at once. This may fail with very high-resolution images if they exceed the memory
+    /// limits of the 32-bit worker.
+    /// </summary>
     Native,
+
+    /// <summary>
+    /// Transfers the image in strips. Recommended.
+    /// </summary>
     Memory
 }

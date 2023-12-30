@@ -1,5 +1,8 @@
 ﻿namespace NAPS2.Scan;
 
+/// <summary>
+/// Scanning options specific to the ESCL driver.
+/// </summary>
 public class EsclOptions
 {
     /// <summary>
