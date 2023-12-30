@@ -108,7 +108,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         }
         devices = devices.Add(device);
         SharedDevices = devices;
-        _server.RegisterDevice(device);
+        RegisterOnServer(device);
         if (_startTimer != null)
         {
             // If startup was deferred, don't wait for the timer before retrying since we adding a device might allow
@@ -122,7 +122,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         var devices = SharedDevices;
         devices = devices.Remove(device);
         SharedDevices = devices;
-        _server.UnregisterDevice(device);
+        UnregisterOnServer(device);
     }
 
     public void ReplaceSharedDevice(SharedDevice original, SharedDevice replacement)
@@ -136,8 +136,8 @@ public class SharedDeviceManager : ISharedDeviceManager
         }
         devices = devices.Replace(original, replacement);
         SharedDevices = devices;
-        _server.UnregisterDevice(original);
-        _server.RegisterDevice(replacement);
+        UnregisterOnServer(original);
+        RegisterOnServer(replacement);
     }
 
     public ImmutableList<SharedDevice> SharedDevices
@@ -157,7 +157,13 @@ public class SharedDeviceManager : ISharedDeviceManager
     {
         foreach (var device in SharedDevices)
         {
-            _server.RegisterDevice(device);
+            RegisterOnServer(device);
         }
     }
+
+    private void RegisterOnServer(SharedDevice device) =>
+        _server.RegisterDevice(device.Device, device.Name, device.Port);
+
+    private void UnregisterOnServer(SharedDevice device) =>
+        _server.UnregisterDevice(device.Device, device.Name);
 }

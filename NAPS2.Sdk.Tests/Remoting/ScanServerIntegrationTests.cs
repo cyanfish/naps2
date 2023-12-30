@@ -33,15 +33,15 @@ public class ScanServerIntegrationTests : ContextualTests
         var displayName = $"testName-{Guid.NewGuid()}";
         ScanningContext.Logger.LogDebug("Display name: {Name}", displayName);
         var serverDevice = new ScanDevice(ScanOptionsValidator.SystemDefaultDriver, "testID", "testName");
-        var serverSharedDevice = new SharedDevice { Device = serverDevice, Name = displayName };
-        _server.RegisterDevice(serverSharedDevice);
+        _server.RegisterDevice(serverDevice, displayName);
         _server.Start().Wait();
 
         // Set up a client ScanController for scanning through EsclScanDriver -> network -> ScanServer
         _client = new ScanController(ScanningContext);
         // This device won't match exactly the real device from GetDeviceList but it includes the UUID which is enough
         // for EsclScanDriver to correctly identify the server for scanning.
-        _clientDevice = new ScanDevice(Driver.Escl, $"|{serverSharedDevice.GetUuid(_server.InstanceId)}", displayName);
+        var uuid = new ScanServerDevice { Device = serverDevice, Name = displayName }.GetUuid(_server.InstanceId);
+        _clientDevice = new ScanDevice(Driver.Escl, $"|{uuid}", displayName);
     }
 
     public override void Dispose()
