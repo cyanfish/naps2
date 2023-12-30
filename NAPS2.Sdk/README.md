@@ -77,6 +77,10 @@ More [samples](https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk.Samples):
 - [Store image data on the filesystem](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/FileStorageSample.cs)
 - [Share scanners on the local network](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/NetworkSharingSample.cs)
 
+Also see:
+- [SDK Homepage](https://www.naps2.com/sdk)
+- [Full Api Docs](https://www.naps2.com/sdk/doc/api/)
+
 ## Drivers
 
 |           | Windows | Mac | Linux |

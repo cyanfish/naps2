@@ -1,3 +1,8 @@
-- name: Api Documentation
+- name: Api Docs
   href: api/
   homepage: api/
+- name: Nuget
+  href: https://www.nuget.org/packages/NAPS2.Sdk
+  homepage: https://www.nuget.org/packages/NAPS2.Sdk
+- name: Github
+  href: https://github.com/cyanfish/naps2/tree/master/NAPS2.Sdk

@@ -8,7 +8,7 @@
         <Company>NAPS2 Software</Company>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <RepositoryUrl>https://github.com/cyanfish/naps2</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/cyanfish/naps2</PackageProjectUrl>
+        <PackageProjectUrl>https://www.naps2.com/sdk</PackageProjectUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
