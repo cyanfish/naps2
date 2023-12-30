@@ -15,6 +15,8 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
 - Exactly one of:
   - **[NAPS2.Images.Gdi](https://www.nuget.org/packages/NAPS2.Images.Gdi/)**
     - For working with `System.Drawing.Bitmap` images. (Windows Forms)
+  - **[NAPS2.Images.Wpf](https://www.nuget.org/packages/NAPS2.Images.Wpf/)**
+    - For working with ` System.Windows.Media.Imaging` images. (WPF)
   - **[NAPS2.Images.Gtk](https://www.nuget.org/packages/NAPS2.Images.Gtk/)**
     - For working with `Gdk.Pixbuf` images. (Linux)
   - **[NAPS2.Images.Mac](https://www.nuget.org/packages/NAPS2.Images.Mac/)**
