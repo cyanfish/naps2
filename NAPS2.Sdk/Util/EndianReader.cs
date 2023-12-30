@@ -2,7 +2,7 @@ using System.Buffers.Binary;
 
 namespace NAPS2.Util;
 
-public class EndianReader
+internal class EndianReader
 {
     private readonly bool _reverseEndianness;
 
