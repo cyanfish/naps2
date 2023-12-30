@@ -6,15 +6,26 @@
           "files": [
             "NAPS2.Sdk.csproj"
           ],
-          "src": ".."
+          "src": "../../NAPS2.Sdk"
         }
       ],
       "dest": "api",
       "disableGitFeatures": false,
-      "disableDefaultFilter": false
+      "disableDefaultFilter": false,
+      "properties": {
+        "TargetFramework": "net462"
+      }
     }
   ],
   "build": {
+    "globalMetadata": {
+      "_appName": "NAPS2 SDK",
+      "_appTitle": "NAPS2 SDK",
+      "_appLogoPath": "scanner-48-rev2.png",
+      "_appFaviconPath": "favicon.ico",
+      "_enableSearch": true,
+      "_disableContribution": true
+    },
     "content": [
       {
         "files": [
@@ -24,18 +35,24 @@
       },
       {
         "files": [
-          "articles/**.md",
-          "articles/**/toc.yml",
           "toc.yml",
           "*.md"
         ]
+      },
+      {
+        "files": [
+          "README.md"
+        ],
+		"src": ".."
       }
     ],
     "resource": [
       {
         "files": [
-          "images/**"
-        ]
+          "favicon.ico",
+          "scanner-48-rev2.png"
+        ],
+        "src": "../../NAPS2.Lib/Icons"
       }
     ],
     "overwrite": [
@@ -53,7 +70,7 @@
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
-      "default"
+      "default", "modern"
     ],
     "postProcessors": [],
     "noLangKeyword": false,
