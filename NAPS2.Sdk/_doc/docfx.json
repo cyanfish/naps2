@@ -38,12 +38,6 @@
           "toc.yml",
           "*.md"
         ]
-      },
-      {
-        "files": [
-          "README.md"
-        ],
-		"src": ".."
       }
     ],
     "resource": [
