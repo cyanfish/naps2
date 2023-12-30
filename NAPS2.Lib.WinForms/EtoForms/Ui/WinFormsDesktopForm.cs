@@ -8,7 +8,6 @@ using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
-using NAPS2.ImportExport.Images;
 using NAPS2.WinForms;
 using WF = System.Windows.Forms;
 
@@ -32,7 +31,6 @@ public class WinFormsDesktopForm : DesktopForm
         ColorScheme colorScheme,
         IProfileManager profileManager,
         UiImageList imageList,
-        ImageTransfer imageTransfer,
         ThumbnailController thumbnailController,
         UiThumbnailProvider thumbnailProvider,
         DesktopController desktopController,
@@ -43,7 +41,7 @@ public class WinFormsDesktopForm : DesktopForm
         IDesktopSubFormController desktopSubFormController,
         DesktopCommands commands)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager,
-            imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
+            imageList, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
         _form = this.ToNative();

@@ -8,13 +8,12 @@ namespace NAPS2.EtoForms.Widgets;
 public class ImageListViewBehavior : ListViewBehavior<UiImage>
 {
     private readonly UiThumbnailProvider _thumbnailProvider;
-    private readonly ImageTransfer _imageTransfer;
+    private readonly ImageTransfer _imageTransfer = new();
 
-    public ImageListViewBehavior(UiThumbnailProvider thumbnailProvider, ImageTransfer imageTransfer,
+    public ImageListViewBehavior(UiThumbnailProvider thumbnailProvider,
         ColorScheme colorScheme, Naps2Config config) : base(colorScheme)
     {
         _thumbnailProvider = thumbnailProvider;
-        _imageTransfer = imageTransfer;
         MultiSelect = true;
         ShowLabels = false;
         ScrollOnDrag = true;

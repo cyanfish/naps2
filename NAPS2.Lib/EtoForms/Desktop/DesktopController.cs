@@ -24,7 +24,6 @@ public class DesktopController
     private readonly StillImage _stillImage;
     private readonly IUpdateChecker _updateChecker;
     private readonly INotify _notify;
-    private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly ImageListActions _imageListActions;
     private readonly DialogHelper _dialogHelper;
@@ -33,6 +32,7 @@ public class DesktopController
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
     private readonly ISharedDeviceManager _sharedDeviceManager;
+    private readonly ImageTransfer _imageTransfer = new();
 
     private bool _closed;
     private bool _initialized;
@@ -42,7 +42,7 @@ public class DesktopController
         RecoveryStorageManager recoveryStorageManager, ThumbnailController thumbnailController,
         OperationProgress operationProgress, Naps2Config config, IOperationFactory operationFactory,
         StillImage stillImage,
-        IUpdateChecker updateChecker, INotify notify, ImageTransfer imageTransfer,
+        IUpdateChecker updateChecker, INotify notify,
         ImageClipboard imageClipboard, ImageListActions imageListActions,
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
@@ -59,7 +59,6 @@ public class DesktopController
         _stillImage = stillImage;
         _updateChecker = updateChecker;
         _notify = notify;
-        _imageTransfer = imageTransfer;
         _imageClipboard = imageClipboard;
         _imageListActions = imageListActions;
         _dialogHelper = dialogHelper;
@@ -331,7 +330,7 @@ public class DesktopController
         return filesList;
     }
 
-    public void ImportDirect(ImageTransferData data, bool copy)
+    internal void ImportDirect(ImageTransferData data, bool copy)
     {
         var op = _operationFactory.Create<DirectImportOperation>();
         if (op.Start(data, copy, _desktopImagesController.ReceiveScannedImage(),

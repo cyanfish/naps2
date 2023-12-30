@@ -3,7 +3,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport.Profiles;
 
-public class ProfileTransfer : TransferHelper<ScanProfile, ProfileTransferData>
+internal class ProfileTransfer : TransferHelper<ScanProfile, ProfileTransferData>
 {
     protected override ProfileTransferData AsData(ScanProfile profile)
     {

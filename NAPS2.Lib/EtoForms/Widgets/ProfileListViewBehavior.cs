@@ -7,11 +7,10 @@ namespace NAPS2.EtoForms.Widgets;
 
 public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
 {
-    private readonly ProfileTransfer _profileTransfer;
+    private readonly ProfileTransfer _profileTransfer = new();
 
-    public ProfileListViewBehavior(ProfileTransfer profileTransfer, ColorScheme colorScheme) : base(colorScheme)
+    public ProfileListViewBehavior(ColorScheme colorScheme) : base(colorScheme)
     {
-        _profileTransfer = profileTransfer;
         MultiSelect = false;
         ShowLabels = true;
         ScrollOnDrag = false;

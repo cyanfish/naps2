@@ -1,4 +1,3 @@
-using System.Threading;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Forms.ToolBar;
 using Gdk;
@@ -7,7 +6,6 @@ using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
-using NAPS2.ImportExport.Images;
 using Command = Eto.Forms.Command;
 
 namespace NAPS2.EtoForms.Ui;
@@ -29,7 +27,6 @@ public class GtkDesktopForm : DesktopForm
         ColorScheme colorScheme,
         IProfileManager profileManager,
         UiImageList imageList,
-        ImageTransfer imageTransfer,
         ThumbnailController thumbnailController,
         UiThumbnailProvider thumbnailProvider,
         DesktopController desktopController,
@@ -41,7 +38,7 @@ public class GtkDesktopForm : DesktopForm
         DesktopCommands commands,
         IDarkModeProvider darkModeProvider)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager,
-            imageList, imageTransfer, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
+            imageList, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
             imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
     {
         ((GtkDarkModeProvider) darkModeProvider).StyleContext =

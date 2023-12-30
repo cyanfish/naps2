@@ -7,16 +7,7 @@ namespace NAPS2.ImportExport;
 
 public class ImageClipboard
 {
-    private readonly ImageTransfer _imageTransfer;
-
-    public ImageClipboard() : this(new ImageTransfer())
-    {
-    }
-
-    public ImageClipboard(ImageTransfer imageTransfer)
-    {
-        _imageTransfer = imageTransfer;
-    }
+    private readonly ImageTransfer _imageTransfer = new();
 
     public async Task Write(IEnumerable<ProcessedImage> images, bool includeBitmap)
     {

@@ -81,7 +81,7 @@
       <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
     </AssemblyAttribute>
     
-    <Protobuf Include="**/*.proto" Access="Public" />
+    <Protobuf Include="**/*.proto" Access="Internal" />
   </ItemGroup>
   
   <ItemGroup>

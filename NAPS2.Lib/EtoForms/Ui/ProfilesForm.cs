@@ -13,8 +13,8 @@ public class ProfilesForm : EtoDialogBase
     private readonly IScanPerformer _scanPerformer;
     private readonly ProfileNameTracker _profileNameTracker;
     private readonly IProfileManager _profileManager;
-    private readonly ProfileTransfer _profileTransfer;
     private readonly ThumbnailController _thumbnailController;
+    private readonly ProfileTransfer _profileTransfer = new();
 
     private readonly IListView<ScanProfile> _listView;
 
@@ -28,14 +28,12 @@ public class ProfilesForm : EtoDialogBase
     private readonly Command _scannerSharingCommand;
 
     public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker,
-        IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior,
-        ProfileTransfer profileTransfer, ThumbnailController thumbnailController)
+        IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior, ThumbnailController thumbnailController)
         : base(config)
     {
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;
         _profileManager = profileManager;
-        _profileTransfer = profileTransfer;
         _thumbnailController = thumbnailController;
 
         // TODO: Do this only in WinForms (?)

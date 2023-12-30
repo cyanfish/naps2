@@ -19,7 +19,6 @@ public abstract class DesktopForm : EtoFormBase
     private readonly CultureHelper _cultureHelper;
     protected readonly ColorScheme _colorScheme;
     private readonly IProfileManager _profileManager;
-    private readonly ImageTransfer _imageTransfer;
     protected readonly ThumbnailController _thumbnailController;
     private readonly UiThumbnailProvider _thumbnailProvider;
     protected readonly DesktopController _desktopController;
@@ -27,6 +26,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly ImageListActions _imageListActions;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IDesktopSubFormController _desktopSubFormController;
+    private readonly ImageTransfer _imageTransfer = new();
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
@@ -44,7 +44,6 @@ public abstract class DesktopForm : EtoFormBase
         ColorScheme colorScheme,
         IProfileManager profileManager,
         UiImageList imageList,
-        ImageTransfer imageTransfer,
         ThumbnailController thumbnailController,
         UiThumbnailProvider thumbnailProvider,
         DesktopController desktopController,
@@ -61,7 +60,6 @@ public abstract class DesktopForm : EtoFormBase
         _colorScheme = colorScheme;
         _profileManager = profileManager;
         ImageList = imageList;
-        _imageTransfer = imageTransfer;
         _thumbnailController = thumbnailController;
         _thumbnailProvider = thumbnailProvider;
         _desktopController = desktopController;

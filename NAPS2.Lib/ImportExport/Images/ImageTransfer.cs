@@ -2,7 +2,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.ImportExport.Images;
 
-public class ImageTransfer : TransferHelper<IEnumerable<ProcessedImage>, ImageTransferData>
+internal class ImageTransfer : TransferHelper<IEnumerable<ProcessedImage>, ImageTransferData>
 {
     protected override ImageTransferData AsData(IEnumerable<ProcessedImage> images)
     {

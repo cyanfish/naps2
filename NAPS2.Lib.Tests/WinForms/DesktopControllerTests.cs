@@ -30,7 +30,6 @@ public class DesktopControllerTests : ContextualTests
     private readonly StillImage _stillImage;
     private readonly IUpdateChecker _updateChecker;
     private readonly INotify _notify;
-    private readonly ImageTransfer _imageTransfer;
     private readonly ImageClipboard _imageClipboard;
     private readonly IExportController _exportHelper;
     private readonly DialogHelper _dialogHelper;
@@ -53,7 +52,6 @@ public class DesktopControllerTests : ContextualTests
         _stillImage = new StillImage();
         _updateChecker = Substitute.For<IUpdateChecker>();
         _notify = Substitute.For<INotify>();
-        _imageTransfer = new ImageTransfer();
         _imageClipboard = new ImageClipboard();
         _exportHelper = Substitute.For<IExportController>();
         _dialogHelper = Substitute.For<DialogHelper>();
@@ -75,7 +73,6 @@ public class DesktopControllerTests : ContextualTests
             _stillImage,
             _updateChecker,
             _notify,
-            _imageTransfer,
             _imageClipboard,
             new ImageListActions(_imageList, _operationFactory, _operationProgress,
                 _config, _thumbnailController, _exportHelper, _notify),
