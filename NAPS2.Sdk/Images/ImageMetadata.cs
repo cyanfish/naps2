@@ -1,5 +1,8 @@
 namespace NAPS2.Images;
 
+/// <summary>
+/// Represents additional information about a scanned image (bit depth, quality, page size).
+/// </summary>
 public record ImageMetadata(BitDepth BitDepth, bool Lossless, PageSize? PageSize)
 {
     /// <summary>

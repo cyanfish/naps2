@@ -1,10 +1,13 @@
 namespace NAPS2.Images;
 
 // TODO: Use this in more places, i.e. ImportPostProcessor
+/// <summary>
+/// Renders a ProcessedImage to a thumbnail of a given size.
+/// </summary>
 public class ThumbnailRenderer
 {
     private const int OVERSAMPLE = 3;
-        
+
     private readonly ImageContext _imageContext;
 
     public ThumbnailRenderer(ImageContext imageContext)

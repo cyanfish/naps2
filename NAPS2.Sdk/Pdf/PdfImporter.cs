@@ -1,10 +1,12 @@
 ﻿using NAPS2.ImportExport;
-using NAPS2.ImportExport.Images;
 using NAPS2.Pdf.Pdfium;
 using NAPS2.Scan;
 
 namespace NAPS2.Pdf;
 
+/// <summary>
+/// Imports PDF files.
+/// </summary>
 public class PdfImporter : IPdfImporter
 {
     private const int MAX_PASSWORD_ATTEMPTS = 5;

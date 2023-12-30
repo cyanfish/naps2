@@ -3,6 +3,9 @@ using NAPS2.Scan;
 
 namespace NAPS2.ImportExport;
 
+/// <summary>
+/// Imports image files.
+/// </summary>
 public class ImageImporter : IImageImporter
 {
     private readonly ScanningContext _scanningContext;

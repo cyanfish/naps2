@@ -2,6 +2,9 @@
 
 namespace NAPS2.Images;
 
+/// <summary>
+/// Represents a page size, e.g. US Letter (8.5 x 11 in) or A4 (210 x 297 mm).
+/// </summary>
 public record PageSize
 {
     public static PageSize Letter = new("8.5", "11", PageSizeUnit.Inch);
