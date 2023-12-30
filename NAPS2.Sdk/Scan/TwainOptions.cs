@@ -20,11 +20,10 @@ public class TwainOptions
     internal TwainAdapter Adapter { get; set; }
 
     /// <summary>
-    /// The transfer mode used for TWAIN, either Native or Memory. By default Native is used, but Memory might have
-    /// work better with some scanners.
+    /// The transfer mode used for TWAIN, either Native or Memory. By default Memory is used.
     /// </summary>
     public TwainTransferMode TransferMode { get; set; }
-    
+
     /// <summary>
     /// Whether to show the TWAIN progress UI. This only matters when ScanOptions.UseNativeUI is false (otherwise the
     /// full UI is shown regardless).
@@ -72,13 +71,13 @@ public enum TwainDsm
 public enum TwainTransferMode
 {
     /// <summary>
+    /// Transfers the image in strips. Recommended.
+    /// </summary>
+    Memory,
+
+    /// <summary>
     /// Transfers the entire image at once. This may fail with very high-resolution images if they exceed the memory
     /// limits of the 32-bit worker.
     /// </summary>
-    Native,
-
-    /// <summary>
-    /// Transfers the image in strips. Recommended.
-    /// </summary>
-    Memory
+    Native
 }
