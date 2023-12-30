@@ -11,12 +11,12 @@ internal class WiaScanErrors
         throw e.ErrorCode switch
         {
             WiaErrorCodes.NO_DEVICE_AVAILABLE => new DeviceNotFoundException(),
-            WiaErrorCodes.PAPER_EMPTY => new NoPagesException(),
-            WiaErrorCodes.OFFLINE => new DeviceException(SdkResources.DeviceOffline),
-            WiaErrorCodes.BUSY => new DeviceException(SdkResources.DeviceBusy),
-            WiaErrorCodes.COVER_OPEN => new DeviceException(SdkResources.DeviceCoverOpen),
-            WiaErrorCodes.PAPER_JAM => new DeviceException(SdkResources.DevicePaperJam),
-            WiaErrorCodes.WARMING_UP => new DeviceException(SdkResources.DeviceWarmingUp),
+            WiaErrorCodes.PAPER_EMPTY => new DeviceFeederEmptyException(),
+            WiaErrorCodes.OFFLINE => new DeviceOfflineException(),
+            WiaErrorCodes.BUSY => new DeviceBusyException(),
+            WiaErrorCodes.COVER_OPEN => new DeviceCoverOpenException(),
+            WiaErrorCodes.PAPER_JAM => new DevicePaperJamException(),
+            WiaErrorCodes.WARMING_UP => new DeviceWarmingUpException(),
             _ => new ScanDriverUnknownException(e)
         };
     }

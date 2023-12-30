@@ -1,5 +1,8 @@
 namespace NAPS2.Scan.Exceptions;
 
+/// <summary>
+/// Indicates that PaperSource.Feeder was selected but the scanning device/driver doesn't support feeder scanning.
+/// </summary>
 public class NoFeederSupportException : ScanDriverException
 {
     public NoFeederSupportException()

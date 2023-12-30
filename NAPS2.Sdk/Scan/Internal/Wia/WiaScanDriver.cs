@@ -224,7 +224,7 @@ internal class WiaScanDriver : IScanDriver
             if (!hasAtLeastOneImage && !_cancelToken.IsCancellationRequested &&
                 _options.PaperSource != PaperSource.Flatbed)
             {
-                throw new NoPagesException();
+                throw new DeviceFeederEmptyException();
             }
         }
 

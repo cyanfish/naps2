@@ -1,5 +1,8 @@
 namespace NAPS2.Scan.Exceptions;
 
+/// <summary>
+/// Indicates that PaperSource.Duplex was selected but the scanning device/driver doesn't support duplex scanning.
+/// </summary>
 public class NoDuplexSupportException : ScanDriverException
 {
     public NoDuplexSupportException()

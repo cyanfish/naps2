@@ -314,7 +314,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             if (copyTasks.Length == 0 && _unit is ICScannerFunctionalUnitDocumentFeeder { DocumentLoaded: false })
             {
                 _logger.LogDebug("ICC: No pages in feeder");
-                throw new NoPagesException();
+                throw new DeviceFeederEmptyException();
             }
             _logger.LogDebug("ICC: Waiting for scan results");
             await Task.WhenAll(copyTasks);

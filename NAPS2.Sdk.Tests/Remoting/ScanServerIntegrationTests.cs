@@ -163,9 +163,9 @@ public class ScanServerIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanWithError()
     {
-        _bridge.Error = new NoPagesException();
+        _bridge.Error = new DeviceFeederEmptyException();
 
-        await Assert.ThrowsAsync<NoPagesException>(async () => await _client.Scan(new ScanOptions
+        await Assert.ThrowsAsync<DeviceFeederEmptyException>(async () => await _client.Scan(new ScanOptions
         {
             Device = _clientDevice,
             PaperSource = PaperSource.Feeder

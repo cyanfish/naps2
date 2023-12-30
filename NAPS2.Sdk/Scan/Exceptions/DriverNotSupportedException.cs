@@ -1,5 +1,8 @@
 namespace NAPS2.Scan.Exceptions;
 
+/// <summary>
+/// Indicates that a driver was selected that isn't supported with the current platform or framework.
+/// </summary>
 public class DriverNotSupportedException : ScanDriverException
 {
     public DriverNotSupportedException()

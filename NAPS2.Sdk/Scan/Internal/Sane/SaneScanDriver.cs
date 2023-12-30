@@ -147,19 +147,19 @@ internal class SaneScanDriver : IScanDriver
                     case SaneStatus.NoDocs:
                         if (!hasAtLeastOneImage)
                         {
-                            throw new NoPagesException();
+                            throw new DeviceFeederEmptyException();
                         }
 
                         break;
                     case SaneStatus.DeviceBusy:
-                        throw new DeviceException(SdkResources.DeviceBusy);
+                        throw new DeviceBusyException();
                     case SaneStatus.Invalid:
                         // TODO: Maybe not always correct? e.g. when setting options
-                        throw new DeviceException(SdkResources.DeviceOffline);
+                        throw new DeviceOfflineException();
                     case SaneStatus.Jammed:
-                        throw new DeviceException(SdkResources.DevicePaperJam);
+                        throw new DevicePaperJamException();
                     case SaneStatus.CoverOpen:
-                        throw new DeviceException(SdkResources.DeviceCoverOpen);
+                        throw new DeviceCoverOpenException();
                     default:
                         throw new DeviceException($"SANE error: {ex.Status}");
                 }

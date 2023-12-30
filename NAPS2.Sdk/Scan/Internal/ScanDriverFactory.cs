@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Scan.Internal;
+﻿using NAPS2.Scan.Exceptions;
+
+namespace NAPS2.Scan.Internal;
 
 internal class ScanDriverFactory : IScanDriverFactory
 {
@@ -35,7 +37,7 @@ internal class ScanDriverFactory : IScanDriverFactory
             case Driver.Escl:
                 return new Escl.EsclScanDriver(_scanningContext);
             default:
-                throw new NotSupportedException(
+                throw new DriverNotSupportedException(
                     $"Unsupported driver: {options.Driver}. " +
                     "Make sure you're using the right framework target (e.g. net8-macos10.15 for the Apple driver).");
         }

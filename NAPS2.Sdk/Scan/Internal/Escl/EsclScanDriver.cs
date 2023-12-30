@@ -72,7 +72,7 @@ internal class EsclScanDriver : IScanDriver
         var service = await FindDeviceEsclService(options, cancelToken);
 
         if (cancelToken.IsCancellationRequested) return;
-        if (service == null) throw new DeviceException(SdkResources.DeviceOffline);
+        if (service == null) throw new DeviceOfflineException();
 
         var client = new EsclClient(service)
         {
@@ -211,21 +211,21 @@ internal class EsclScanDriver : IScanDriver
     {
         if (status.State is EsclScannerState.Processing or EsclScannerState.Testing or EsclScannerState.Stopped)
         {
-            throw new DeviceException(SdkResources.DeviceBusy);
+            throw new DeviceBusyException();
         }
         if (status.State == EsclScannerState.Down)
         {
-            throw new DeviceException(SdkResources.DeviceOffline);
+            throw new DeviceOfflineException();
         }
         if (scanSettings.InputSource == EsclInputSource.Feeder)
         {
             if (status.AdfState == EsclAdfState.ScannerAdfEmpty)
             {
-                throw new DeviceException(SdkResources.NoPagesInFeeder);
+                throw new DeviceFeederEmptyException();
             }
             if (status.AdfState == EsclAdfState.ScannerAdfJam)
             {
-                throw new DeviceException(SdkResources.DevicePaperJam);
+                throw new DevicePaperJamException();
             }
             if (status.AdfState is not (EsclAdfState.Unknown or EsclAdfState.ScannerAdfProcessing
                 or EsclAdfState.ScannedAdfLoaded))

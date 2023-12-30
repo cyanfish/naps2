@@ -58,7 +58,7 @@ internal class AppleScanDriver : IScanDriver
         }
         catch (TaskCanceledException)
         {
-            throw new DeviceException(SdkResources.DeviceOffline);
+            throw new DeviceOfflineException();
         }
     }
 }
