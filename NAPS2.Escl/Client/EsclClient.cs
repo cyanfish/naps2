@@ -101,9 +101,11 @@ public class EsclClient
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("POST OK");
 
+        var uri = response.Headers.Location!;
+
         return new EsclJob
         {
-            UriPath = response.Headers.Location!.AbsolutePath
+            UriPath = uri.IsAbsoluteUri ? uri.AbsolutePath : uri.OriginalString
         };
     }
 
