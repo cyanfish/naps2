@@ -12,7 +12,9 @@ namespace NAPS2.Ocr;
 /// OCR results are not accessed directly - OCR is only done to populate the OcrRequestQueue cache for future Save PDF
 /// operations.
 /// </summary>
-public class OcrController
+// TODO: This model seems overly complicated - can we do something simpler like having a singleton OcrController on
+// the ScanningContext?
+internal class OcrController
 {
     private readonly ScanningContext _scanningContext;
     private readonly Dictionary<ProcessedImage.WeakReference, CancellationTokenSource>

@@ -25,19 +25,6 @@ public class ScanController
     {
     }
 
-    /// <summary>
-    /// Initializes a new instance of the ScanController class with the specified ScanningContext and a custom
-    /// OcrController. This is generally unnecessary if all you want to do is run OCR as part of exporting a PDF - in
-    /// that case you only need to set ScanningContext.OcrEngine and specify OcrParams when exporting.
-    /// </summary>
-    /// <param name="scanningContext"></param>
-    /// <param name="ocrController"></param>
-    public ScanController(ScanningContext scanningContext, OcrController ocrController)
-        : this(scanningContext, new LocalPostProcessor(scanningContext, ocrController), new ScanOptionsValidator(),
-            new ScanBridgeFactory(scanningContext))
-    {
-    }
-
     internal ScanController(ScanningContext scanningContext, IScanBridgeFactory scanBridgeFactory)
         : this(scanningContext, new LocalPostProcessor(scanningContext, new OcrController(scanningContext)),
             new ScanOptionsValidator(), scanBridgeFactory)
