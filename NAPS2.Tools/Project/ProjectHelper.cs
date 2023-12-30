@@ -55,6 +55,7 @@ public static class ProjectHelper
         "NAPS2.Images.Gtk",
         "NAPS2.Images.Mac",
         "NAPS2.Images.ImageSharp",
+        "NAPS2.Images.Wpf",
     };
 
     public static string GetPackagePath(string ext, Platform platform, string? version = null,
