@@ -11,6 +11,7 @@ public static class RpmPackager
 
         Output.Verbose("Building binaries");
         var runtimeId = pkgInfo.Platform == Platform.LinuxArm ? "linux-arm64" : "linux-x64";
+        Cli.Run("dotnet", $"clean NAPS2.App.Gtk -c Release -r {runtimeId}");
         Cli.Run("dotnet", $"publish NAPS2.App.Gtk -c Release -r {runtimeId} --self-contained /p:DebugType=None /p:DebugSymbols=false");
 
         Output.Verbose("Creating package");
