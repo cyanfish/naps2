@@ -101,8 +101,9 @@ public static class ImageExtensions
     public static MemoryStream SaveToMemoryStream(this IRenderableImage image, ImageFileFormat imageFormat,
         ImageSaveOptions? options = null)
     {
-        using var renderedImage = image.Render();
-        return renderedImage.SaveToMemoryStream(imageFormat, options);
+        var stream = new MemoryStream();
+        image.Save(stream, imageFormat, options);
+        return stream;
     }
 
     public static IMemoryImage PerformTransform(this IMemoryImage image, Transform transform)
