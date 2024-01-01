@@ -62,7 +62,10 @@ public static class DebPackager
         Directory.CreateDirectory(binDir);
         Cli.Run("ln", $"-s /usr/lib/naps2/naps2 {Path.Combine(binDir, "naps2")}");
 
-        Cli.Run("dpkg-deb", $"-Zxz --build {workingDir} {debPath}");
+        // Fix permissions
+        Cli.Run("chmod", $"a+x {Path.Combine(targetDir, "_linux/tesseract")}");
+
+        Cli.Run("dpkg-deb", $"-Zxz --root-owner-group --build {workingDir} {debPath}");
 
         Output.OperationEnd($"Packaged deb: {debPath}");
     }
