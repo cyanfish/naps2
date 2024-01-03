@@ -122,10 +122,10 @@ public class MacImage : IMemoryImage
 
     public ImagePixelFormat LogicalPixelFormat { get; set; }
 
-    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified,
+    public void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unknown,
         ImageSaveOptions? options = null)
     {
-        if (imageFormat == ImageFileFormat.Unspecified)
+        if (imageFormat == ImageFileFormat.Unknown)
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
@@ -139,7 +139,7 @@ public class MacImage : IMemoryImage
 
     public void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null)
     {
-        if (imageFormat == ImageFileFormat.Unspecified)
+        if (imageFormat == ImageFileFormat.Unknown)
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }

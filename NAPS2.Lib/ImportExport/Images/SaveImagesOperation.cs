@@ -47,7 +47,7 @@ internal class SaveImagesOperation : OperationBase
                     subFileName = placeholders.Substitute(fileName, batch);
                 }
                 var format = ImageContext.GetFileFormatFromExtension(subFileName);
-                if (format == ImageFileFormat.Unspecified)
+                if (format == ImageFileFormat.Unknown)
                 {
                     throw new ArgumentException($"Could not infer file format from extension: {subFileName}");
                 }

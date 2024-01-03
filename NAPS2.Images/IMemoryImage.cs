@@ -80,7 +80,7 @@ public interface IMemoryImage : IImageStorage
     /// <param name="path">The path to save the image file to.</param>
     /// <param name="imageFormat">The file format to use.</param>
     /// <param name="options">Options for saving, e.g. JPEG quality.</param>
-    void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null);
+    void Save(string path, ImageFileFormat imageFormat = ImageFileFormat.Unknown, ImageSaveOptions? options = null);
 
     /// <summary>
     /// Saves the image to the given stream. The file format must be specified.

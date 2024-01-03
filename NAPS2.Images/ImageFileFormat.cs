@@ -2,7 +2,7 @@ namespace NAPS2.Images;
 
 public enum ImageFileFormat
 {
-    Unspecified,
+    Unknown,
     Bmp,
     Jpeg,
     Jpeg2000,

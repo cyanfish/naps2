@@ -66,7 +66,7 @@ internal static class ImageSerializer
                 result.TypeHint = memoryStorage.TypeHint;
                 break;
             case IMemoryImage imageStorage:
-                var fileFormat = imageStorage.OriginalFileFormat == ImageFileFormat.Unspecified
+                var fileFormat = imageStorage.OriginalFileFormat == ImageFileFormat.Unknown
                     ? ImageFileFormat.Jpeg
                     : imageStorage.OriginalFileFormat;
                 result.FileContent = ByteString.FromStream(imageStorage.SaveToMemoryStream(fileFormat));

@@ -82,7 +82,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_SmallerJpeg()
     {
         var color = LoadImage(ImageResources.dog_png);
-        color.OriginalFileFormat = ImageFileFormat.Unspecified;
+        color.OriginalFileFormat = ImageFileFormat.Unknown;
         var path = Path.Combine(FolderPath, "test");
 
         var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);

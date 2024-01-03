@@ -34,7 +34,7 @@ public class FileImporter
         {
             return _pdfImporter.Import(filePath, importParams, progress);
         }
-        if (ImageContext.GetFileFormatFromExtension(filePath) != ImageFileFormat.Unspecified)
+        if (ImageContext.GetFileFormatFromExtension(filePath) != ImageFileFormat.Unknown)
         {
             return _imageImporter.Import(filePath, importParams, progress);
         }

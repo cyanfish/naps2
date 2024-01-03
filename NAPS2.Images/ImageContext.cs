@@ -16,7 +16,7 @@ public abstract class ImageContext
             ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
             ".tif" or ".tiff" => ImageFileFormat.Tiff,
             ".jp2" or ".jpx" => ImageFileFormat.Jpeg2000,
-            _ => ImageFileFormat.Unspecified
+            _ => ImageFileFormat.Unknown
         };
     }
 
@@ -24,7 +24,7 @@ public abstract class ImageContext
     {
         if (!stream.CanSeek)
         {
-            return ImageFileFormat.Unspecified;
+            return ImageFileFormat.Unknown;
         }
         var firstBytes = new byte[8];
         stream.Seek(0, SeekOrigin.Begin);
@@ -39,7 +39,7 @@ public abstract class ImageContext
             [0x49, 0x49, 0x2A, 0x00, ..] => ImageFileFormat.Tiff,
             [0x4D, 0x4D, 0x00, 0x2A, ..] => ImageFileFormat.Tiff,
             [_, _, _, _, 0x6A, 0x50, 0x20, 0x20, ..] => ImageFileFormat.Jpeg2000,
-            _ => ImageFileFormat.Unspecified
+            _ => ImageFileFormat.Unknown
         };
     }
 
@@ -142,7 +142,7 @@ public abstract class ImageContext
         var format = GetFileFormatFromFirstBytes(stream);
         CheckSupportsFormat(format);
         var image = LoadCore(stream, format);
-        if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
+        if (image.OriginalFileFormat == ImageFileFormat.Unknown)
         {
             image.OriginalFileFormat = format;
         }
@@ -219,7 +219,7 @@ public abstract class ImageContext
     {
         await foreach (var image in source)
         {
-            if (image.OriginalFileFormat == ImageFileFormat.Unspecified)
+            if (image.OriginalFileFormat == ImageFileFormat.Unknown)
             {
                 image.OriginalFileFormat = format;
             }

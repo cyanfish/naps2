@@ -38,9 +38,9 @@ public static class ImageExtensions
     /// <param name="imageFormat">The file format to use.</param>
     /// <param name="options">Options for saving, e.g. JPEG quality.</param>
     public static void Save(this IRenderableImage image, string path,
-        ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null)
+        ImageFileFormat imageFormat = ImageFileFormat.Unknown, ImageSaveOptions? options = null)
     {
-        if (imageFormat == ImageFileFormat.Unspecified)
+        if (imageFormat == ImageFileFormat.Unknown)
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
@@ -61,9 +61,9 @@ public static class ImageExtensions
     /// <param name="imageFormat">The file format to use.</param>
     /// <param name="options">Options for saving, e.g. JPEG quality.</param>
     public static void Save(this IRenderableImage image, Stream stream,
-        ImageFileFormat imageFormat = ImageFileFormat.Unspecified, ImageSaveOptions? options = null)
+        ImageFileFormat imageFormat = ImageFileFormat.Unknown, ImageSaveOptions? options = null)
     {
-        if (imageFormat == ImageFileFormat.Unspecified)
+        if (imageFormat == ImageFileFormat.Unknown)
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }

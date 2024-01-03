@@ -78,6 +78,6 @@ internal class ImageExportHelper
             return new ImageExportFormat(ImageFileFormat.Jpeg, ImagePixelFormat.RGB24);
         }
         // No inherent preference for Jpeg or Png, the caller can decide
-        return new ImageExportFormat(ImageFileFormat.Unspecified, ImagePixelFormat.RGB24);
+        return new ImageExportFormat(ImageFileFormat.Unknown, ImagePixelFormat.RGB24);
     }
 }

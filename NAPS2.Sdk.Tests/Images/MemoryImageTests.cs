@@ -111,6 +111,6 @@ public class MemoryImageTests : ContextualTests
         var path = Path.Combine(FolderPath, "test.png");
         
         using var stream = new FileStream(path, FileMode.CreateNew);
-        Assert.Throws<ArgumentException>(() => image.Save(stream, ImageFileFormat.Unspecified));
+        Assert.Throws<ArgumentException>(() => image.Save(stream, ImageFileFormat.Unknown));
     }
 }
