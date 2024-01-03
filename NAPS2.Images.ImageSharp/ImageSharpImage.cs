@@ -23,7 +23,6 @@ public class ImageSharpImage : IMemoryImage
         // TODO: Something similar to MacImage where if it's not a supported pixel type we convert
         // TODO: Though we might also want to add support where reasonable, e.g. we can probably support argb or bgr pretty easily?
         Image = image;
-        LogicalPixelFormat = PixelFormat;
     }
 
     public ImageContext ImageContext { get; }
@@ -62,6 +61,10 @@ public class ImageSharpImage : IMemoryImage
 
     public unsafe ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
+        if (lockMode != LockMode.ReadOnly)
+        {
+            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+        }
         var memoryHandle = PixelFormat switch
         {
             ImagePixelFormat.RGB24 => ((Image<Rgb24>) Image).DangerousTryGetSinglePixelMemory(out var mem)

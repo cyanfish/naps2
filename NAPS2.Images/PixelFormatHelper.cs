@@ -15,6 +15,7 @@ internal class PixelFormatHelper<T> : IDisposable where T : IMemoryImage
 {
     public PixelFormatHelper(T image, ImagePixelFormat targetFormat, ImagePixelFormat minFormat)
     {
+        image.UpdateLogicalPixelFormat();
         // TODO: Maybe we can be aware of the target filetype, e.g. JPEG doesn't have 1bpp. Although the specifics
         // are going to be platform-dependent.
         if (targetFormat == ImagePixelFormat.Unsupported)

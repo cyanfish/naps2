@@ -46,7 +46,6 @@ public class MacImage : IMemoryImage
             rep.Size = Rep.Size;
             ReplaceRep(rep);
         }
-        LogicalPixelFormat = PixelFormat;
     }
 
     private void ReplaceRep(NSBitmapImageRep rep)
@@ -93,6 +92,10 @@ public class MacImage : IMemoryImage
 
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
+        if (lockMode != LockMode.ReadOnly)
+        {
+            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+        }
         var ptr = Rep.BitmapData;
         var stride = (int) Rep.BytesPerRow;
         var subPixelType = PixelFormat switch

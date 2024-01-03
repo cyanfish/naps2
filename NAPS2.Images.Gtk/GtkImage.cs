@@ -13,7 +13,6 @@ public class GtkImage : IMemoryImage
         LeakTracer.StartTracking(this);
         ImageContext = imageContext;
         Pixbuf = pixbuf;
-        LogicalPixelFormat = PixelFormat;
         HorizontalResolution = float.TryParse(pixbuf.GetOption("x-dpi"), out var xDpi) ? xDpi : 0;
         VerticalResolution = float.TryParse(pixbuf.GetOption("y-dpi"), out var yDpi) ? yDpi : 0;
     }
@@ -45,6 +44,10 @@ public class GtkImage : IMemoryImage
 
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
+        if (lockMode != LockMode.ReadOnly)
+        {
+            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+        }
         var ptr = Pixbuf.Pixels;
         var stride = Pixbuf.Rowstride;
         var subPixelType = PixelFormat switch

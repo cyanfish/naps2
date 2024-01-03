@@ -82,7 +82,6 @@ internal class RemotePostProcessor : IRemotePostProcessor
             scaled = CropAndStretch(original, options, scaled);
         }
 
-        scaled.UpdateLogicalPixelFormat();
         return scaled;
     }
 

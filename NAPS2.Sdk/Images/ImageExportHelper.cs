@@ -49,6 +49,7 @@ internal class ImageExportHelper
 
     public ImageExportFormat GetExportFormat(IMemoryImage image, BitDepth bitDepth, bool lossless)
     {
+        image.UpdateLogicalPixelFormat();
         // Store the image in as little space as possible
         if (image.LogicalPixelFormat == ImagePixelFormat.BW1)
         {

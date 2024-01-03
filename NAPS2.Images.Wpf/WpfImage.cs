@@ -27,7 +27,6 @@ public class WpfImage : IMemoryImage
         // TODO: Something similar to MacImage where if it's not a supported pixel type we convert
         WpfPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
         Bitmap = bitmap;
-        LogicalPixelFormat = PixelFormat;
         DetachFromDispatcher(Bitmap);
     }
 
@@ -69,6 +68,10 @@ public class WpfImage : IMemoryImage
     public unsafe ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
         if (_disposed) throw new InvalidOperationException();
+        if (lockMode != LockMode.ReadOnly)
+        {
+            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+        }
         var subPixelType = GetSubPixelType();
         imageData = new BitwiseImageData((byte*) Bitmap.BackBuffer,
             new PixelInfo(Width, Height, subPixelType, Bitmap.BackBufferStride));

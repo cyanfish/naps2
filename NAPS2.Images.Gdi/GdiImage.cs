@@ -23,7 +23,6 @@ public class GdiImage : IMemoryImage
         FixedPixelFormat = GdiPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
         Bitmap = bitmap;
         OriginalFileFormat = bitmap.RawFormat.AsImageFileFormat();
-        LogicalPixelFormat = PixelFormat;
     }
 
     public ImageContext ImageContext { get; }
@@ -49,6 +48,10 @@ public class GdiImage : IMemoryImage
 
     public ImageLockState Lock(LockMode lockMode, out BitwiseImageData imageData)
     {
+        if (lockMode != LockMode.ReadOnly)
+        {
+            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+        }
         return GdiImageLockState.Create(Bitmap, lockMode, out imageData);
     }
 

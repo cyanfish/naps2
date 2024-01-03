@@ -392,7 +392,7 @@ public class TransformTests : ContextualTests
         var expected = LoadImage(ImageResources.dog_bw);
 
         var transformed = original.PerformTransform(new BlackWhiteTransform());
-        Assert.Equal(ImagePixelFormat.BW1, transformed.LogicalPixelFormat);
+        Assert.Equal(ImagePixelFormat.BW1, transformed.UpdateLogicalPixelFormat());
 
         // TODO: There's no inherent reason this shouldn't be an exact match, unless I guess if
         // there's a slight pixel difference between png loading on mac/gdi
@@ -407,7 +407,7 @@ public class TransformTests : ContextualTests
         var expected = LoadImage(ImageResources.dog_bw_p300);
 
         var transformed = original.PerformTransform(new BlackWhiteTransform(300));
-        Assert.Equal(ImagePixelFormat.BW1, transformed.LogicalPixelFormat);
+        Assert.Equal(ImagePixelFormat.BW1, transformed.UpdateLogicalPixelFormat());
 
         ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD);
         AssertOwnership(original, transformed);
@@ -420,7 +420,7 @@ public class TransformTests : ContextualTests
         var expected = LoadImage(ImageResources.dog_gray);
 
         var transformed = original.PerformTransform(new GrayscaleTransform());
-        Assert.Equal(ImagePixelFormat.Gray8, transformed.LogicalPixelFormat);
+        Assert.Equal(ImagePixelFormat.Gray8, transformed.UpdateLogicalPixelFormat());
 
         ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
         AssertOwnership(original, transformed);

@@ -87,6 +87,7 @@ public class ScanningContext : IDisposable
 
     internal ProcessedImage CreateProcessedImage(IImageStorage storage, IEnumerable<Transform> transforms)
     {
+        (storage as IMemoryImage)?.UpdateLogicalPixelFormat();
         var bitDepth = storage switch
         {
             IMemoryImage { LogicalPixelFormat: ImagePixelFormat.BW1 } => BitDepth.BlackAndWhite,

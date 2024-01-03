@@ -38,6 +38,7 @@ internal class LibTiffIo : ITiffWriter
             foreach (var image in images)
             {
                 if (progress.IsCancellationRequested) return false;
+                image.UpdateLogicalPixelFormat();
                 var pixelFormat =
                     image.LogicalPixelFormat == ImagePixelFormat.BW1 || compression == TiffCompressionType.Ccitt4
                         ? ImagePixelFormat.BW1

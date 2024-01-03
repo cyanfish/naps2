@@ -631,6 +631,7 @@ public class PdfExporter
         public void SaveAsPdfIndexedBitmap(MemoryStream ms)
         {
             var image = _embedder.Image;
+            image.UpdateLogicalPixelFormat();
             if (image.LogicalPixelFormat != ImagePixelFormat.BW1)
                 throw new InvalidOperationException("Expected 1 bit bitmap");
             var dstPixelInfo =

@@ -30,6 +30,7 @@ internal class WpfTiffWriter : ITiffWriter
         progress.Report(i, images.Count);
         foreach (var image in images)
         {
+            image.UpdateLogicalPixelFormat();
             if (compression == TiffCompressionType.Ccitt4 && image.LogicalPixelFormat != ImagePixelFormat.BW1)
             {
                 using var bwCopy = image.Clone().PerformTransform(new BlackWhiteTransform());

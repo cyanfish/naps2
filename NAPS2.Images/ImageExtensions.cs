@@ -116,11 +116,16 @@ public static class ImageExtensions
         return image.ImageContext.PerformAllTransforms(image, transforms);
     }
 
-    public static void UpdateLogicalPixelFormat(this IMemoryImage image)
+    public static ImagePixelFormat UpdateLogicalPixelFormat(this IMemoryImage image)
     {
+        if (image.LogicalPixelFormat != ImagePixelFormat.Unsupported)
+        {
+            return image.LogicalPixelFormat;
+        }
         var op = new LogicalPixelFormatOp();
         op.Perform(image);
         image.LogicalPixelFormat = op.LogicalPixelFormat;
+        return image.LogicalPixelFormat;
     }
 
     /// <summary>
@@ -182,9 +187,10 @@ public static class ImageExtensions
         var newImage = source.CopyBlankWithPixelFormat(imageContext, pixelFormat);
         new CopyBitwiseImageOp().Perform(source, newImage);
         newImage.OriginalFileFormat = source.OriginalFileFormat;
-        if (source.LogicalPixelFormat < pixelFormat)
+        if (source.LogicalPixelFormat != ImagePixelFormat.Unsupported)
         {
-            newImage.LogicalPixelFormat = source.LogicalPixelFormat;
+            newImage.LogicalPixelFormat =
+                source.LogicalPixelFormat < pixelFormat ? source.LogicalPixelFormat : pixelFormat;
         }
         return newImage;
     }

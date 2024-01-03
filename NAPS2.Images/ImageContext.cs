@@ -146,7 +146,6 @@ public abstract class ImageContext
         {
             image.OriginalFileFormat = format;
         }
-        image.UpdateLogicalPixelFormat();
         return image;
     }
 
@@ -224,7 +223,6 @@ public abstract class ImageContext
             {
                 image.OriginalFileFormat = format;
             }
-            image.UpdateLogicalPixelFormat();
             yield return image;
         }
     }

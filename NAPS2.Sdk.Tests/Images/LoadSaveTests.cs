@@ -27,7 +27,7 @@ public class LoadSaveTests : ContextualTests
         using var image = ImageContext.Load(path);
 
         Assert.Equal(format, image.OriginalFileFormat);
-        Assert.Equal(logicalPixelFormats[0], image.LogicalPixelFormat);
+        Assert.Equal(logicalPixelFormats[0], image.UpdateLogicalPixelFormat());
         ImageAsserts.Similar(GetResource(compare[0]), image, ignoreResolution: ignoreRes);
     }
 
@@ -46,7 +46,7 @@ public class LoadSaveTests : ContextualTests
         using var image = ImageContext.Load(stream);
 
         Assert.Equal(format, image.OriginalFileFormat);
-        Assert.Equal(logicalPixelFormats[0], image.LogicalPixelFormat);
+        Assert.Equal(logicalPixelFormats[0], image.UpdateLogicalPixelFormat());
         ImageAsserts.Similar(GetResource(compare[0]), image, ignoreResolution: ignoreRes);
     }
 
@@ -70,7 +70,7 @@ public class LoadSaveTests : ContextualTests
         for (int i = 0; i < images.Count; i++)
         {
             Assert.Equal(format, images[i].OriginalFileFormat);
-            Assert.Equal(logicalPixelFormats[i], images[i].LogicalPixelFormat);
+            Assert.Equal(logicalPixelFormats[i], images[i].UpdateLogicalPixelFormat());
             ImageAsserts.Similar(GetResource(compare[i]), images[i], ignoreResolution: ignoreRes);
             progressMock.Received()(i, images.Count);
         }
@@ -97,7 +97,7 @@ public class LoadSaveTests : ContextualTests
         for (int i = 0; i < images.Count; i++)
         {
             Assert.Equal(format, images[i].OriginalFileFormat);
-            Assert.Equal(logicalPixelFormats[i], images[i].LogicalPixelFormat);
+            Assert.Equal(logicalPixelFormats[i], images[i].UpdateLogicalPixelFormat());
             ImageAsserts.Similar(GetResource(compare[i]), images[i], ignoreResolution: ignoreRes);
             progressMock.Received()(i, images.Count);
         }
@@ -122,7 +122,7 @@ public class LoadSaveTests : ContextualTests
 
         var image2 = ImageContext.Load(path);
         Assert.Equal(format, image2.OriginalFileFormat);
-        Assert.Equal(logicalPixelFormats[0], image2.LogicalPixelFormat);
+        Assert.Equal(logicalPixelFormats[0], image2.UpdateLogicalPixelFormat());
         ImageAsserts.Similar(expected, image2, ignoreResolution: ignoreRes);
     }
 
@@ -144,7 +144,7 @@ public class LoadSaveTests : ContextualTests
 
         var image2 = ImageContext.Load(stream);
         Assert.Equal(format, image2.OriginalFileFormat);
-        Assert.Equal(logicalPixelFormats[0], image2.LogicalPixelFormat);
+        Assert.Equal(logicalPixelFormats[0], image2.UpdateLogicalPixelFormat());
         ImageAsserts.Similar(expected, image2, ignoreResolution: ignoreRes);
     }
 

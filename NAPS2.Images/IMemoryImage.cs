@@ -67,7 +67,9 @@ public interface IMemoryImage : IImageStorage
 
     /// <summary>
     /// Gets the color content of the image. For example, an image might be stored in memory with PixelFormat = ARGB32,
-    /// but if it's a grayscale image with no transparency, then LogicalPixelFormat = Gray8.
+    /// but if it's a grayscale image with no transparency, then LogicalPixelFormat = Gray8. By default this is not
+    /// calculated and is set to ImagePixelFormat.Unsupported. Call IMemoryImage.UpdateLogicalPixelFormat() to ensure
+    /// this is calculated.
     /// </summary>
     ImagePixelFormat LogicalPixelFormat { get; set; }
 

@@ -55,6 +55,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     private TImage PerformTransform(TImage image, CorrectionTransform transform)
     {
+        image.UpdateLogicalPixelFormat();
         if (image.LogicalPixelFormat == ImagePixelFormat.BW1)
         {
             return image;
