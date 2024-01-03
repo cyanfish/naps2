@@ -63,7 +63,7 @@ public class ImageSharpImage : IMemoryImage
     {
         if (lockMode != LockMode.ReadOnly)
         {
-            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+            LogicalPixelFormat = ImagePixelFormat.Unknown;
         }
         var memoryHandle = PixelFormat switch
         {

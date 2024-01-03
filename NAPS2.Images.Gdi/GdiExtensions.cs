@@ -95,7 +95,7 @@ public static class GdiExtensions
             case PixelFormat.Format1bppIndexed:
                 return ImagePixelFormat.BW1;
             default:
-                return ImagePixelFormat.Unsupported;
+                return ImagePixelFormat.Unknown;
         }
     }
 

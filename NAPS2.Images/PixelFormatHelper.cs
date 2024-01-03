@@ -4,8 +4,8 @@ namespace NAPS2.Images;
 internal static class PixelFormatHelper
 {
     public static PixelFormatHelper<T> Create<T>(T image,
-        ImagePixelFormat targetFormat = ImagePixelFormat.Unsupported,
-        ImagePixelFormat minFormat = ImagePixelFormat.Unsupported) where T : IMemoryImage
+        ImagePixelFormat targetFormat = ImagePixelFormat.Unknown,
+        ImagePixelFormat minFormat = ImagePixelFormat.Unknown) where T : IMemoryImage
     {
         return new PixelFormatHelper<T>(image, targetFormat, minFormat);
     }
@@ -18,7 +18,7 @@ internal class PixelFormatHelper<T> : IDisposable where T : IMemoryImage
         image.UpdateLogicalPixelFormat();
         // TODO: Maybe we can be aware of the target filetype, e.g. JPEG doesn't have 1bpp. Although the specifics
         // are going to be platform-dependent.
-        if (targetFormat == ImagePixelFormat.Unsupported)
+        if (targetFormat == ImagePixelFormat.Unknown)
         {
             // If targetFormat is not specified, we'll use the logical format to minimize on-disk size.
             targetFormat = image.LogicalPixelFormat;

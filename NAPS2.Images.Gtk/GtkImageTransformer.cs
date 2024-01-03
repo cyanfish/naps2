@@ -75,7 +75,7 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
     protected override GtkImage PerformTransform(GtkImage image, GrayscaleTransform transform)
     {
         new DecolorBitwiseImageOp(false).Perform(image);
-        if (image.LogicalPixelFormat != ImagePixelFormat.Unsupported)
+        if (image.LogicalPixelFormat != ImagePixelFormat.Unknown)
         {
             image.LogicalPixelFormat = ImagePixelFormat.Gray8;
         }

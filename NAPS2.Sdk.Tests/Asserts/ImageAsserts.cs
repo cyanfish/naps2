@@ -68,7 +68,7 @@ public static class ImageAsserts
     private static void Similar(IMemoryImage first, IMemoryImage second,
         double rmseThreshold, bool ignoreResolution, bool isSimilar)
     {
-        if (first.PixelFormat == ImagePixelFormat.Unsupported || second.PixelFormat == ImagePixelFormat.Unsupported)
+        if (first.PixelFormat == ImagePixelFormat.Unknown || second.PixelFormat == ImagePixelFormat.Unknown)
         {
             throw new InvalidOperationException($"Unsupported pixel formats {first.PixelFormat} {second.PixelFormat}");
         }

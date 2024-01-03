@@ -14,7 +14,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     public TImage Apply(TImage image, Transform transform)
     {
-        if (image.PixelFormat == ImagePixelFormat.Unsupported)
+        if (image.PixelFormat == ImagePixelFormat.Unknown)
         {
             throw new ArgumentException("Unsupported pixel format for transforms");
         }

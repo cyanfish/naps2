@@ -46,7 +46,7 @@ public class GtkImage : IMemoryImage
     {
         if (lockMode != LockMode.ReadOnly)
         {
-            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+            LogicalPixelFormat = ImagePixelFormat.Unknown;
         }
         var ptr = Pixbuf.Pixels;
         var stride = Pixbuf.Rowstride;

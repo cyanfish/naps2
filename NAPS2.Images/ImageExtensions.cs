@@ -118,7 +118,7 @@ public static class ImageExtensions
 
     public static ImagePixelFormat UpdateLogicalPixelFormat(this IMemoryImage image)
     {
-        if (image.LogicalPixelFormat != ImagePixelFormat.Unsupported)
+        if (image.LogicalPixelFormat != ImagePixelFormat.Unknown)
         {
             return image.LogicalPixelFormat;
         }
@@ -183,11 +183,11 @@ public static class ImageExtensions
     public static IMemoryImage CopyWithPixelFormat(this IMemoryImage source, ImageContext imageContext,
         ImagePixelFormat pixelFormat)
     {
-        if (pixelFormat == ImagePixelFormat.Unsupported) throw new ArgumentException();
+        if (pixelFormat == ImagePixelFormat.Unknown) throw new ArgumentException();
         var newImage = source.CopyBlankWithPixelFormat(imageContext, pixelFormat);
         new CopyBitwiseImageOp().Perform(source, newImage);
         newImage.OriginalFileFormat = source.OriginalFileFormat;
-        if (source.LogicalPixelFormat != ImagePixelFormat.Unsupported)
+        if (source.LogicalPixelFormat != ImagePixelFormat.Unknown)
         {
             newImage.LogicalPixelFormat =
                 source.LogicalPixelFormat < pixelFormat ? source.LogicalPixelFormat : pixelFormat;
@@ -226,7 +226,7 @@ public static class ImageExtensions
     public static IMemoryImage CopyBlankWithPixelFormat(this IMemoryImage source, ImageContext imageContext,
         ImagePixelFormat pixelFormat)
     {
-        if (pixelFormat == ImagePixelFormat.Unsupported) throw new ArgumentException();
+        if (pixelFormat == ImagePixelFormat.Unknown) throw new ArgumentException();
         var newImage = imageContext.Create(source.Width, source.Height, pixelFormat);
         newImage.SetResolution(source.HorizontalResolution, source.VerticalResolution);
         return newImage;

@@ -55,7 +55,7 @@ public class ImageSharpImageContext : ImageContext
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
-        if (pixelFormat == ImagePixelFormat.Unsupported)
+        if (pixelFormat == ImagePixelFormat.Unknown)
         {
             throw new ArgumentException("Unsupported pixel format");
         }

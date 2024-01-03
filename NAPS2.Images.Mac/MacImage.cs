@@ -32,7 +32,7 @@ public class MacImage : IMemoryImage
         bool isDeviceColorSpace = Rep.ColorSpaceName == NSColorSpace.DeviceRGB ||
                                   Rep.ColorSpaceName == NSColorSpace.DeviceWhite;
 #pragma warning restore CA1416,CA1422
-        if (PixelFormat == ImagePixelFormat.Unsupported)
+        if (PixelFormat == ImagePixelFormat.Unknown)
         {
             var rep = MacBitmapHelper.CopyRep(Rep);
             ReplaceRep(rep);
@@ -65,7 +65,7 @@ public class MacImage : IMemoryImage
             { BitsPerPixel: 32, BitsPerSample: 8, SamplesPerPixel: 3 } => ImagePixelFormat.RGB24,
             { BitsPerPixel: 8, BitsPerSample: 8, SamplesPerPixel: 1 } => ImagePixelFormat.Gray8,
             { BitsPerPixel: 1, BitsPerSample: 1, SamplesPerPixel: 1 } => ImagePixelFormat.BW1,
-            _ => ImagePixelFormat.Unsupported
+            _ => ImagePixelFormat.Unknown
         };
     }
 
@@ -94,7 +94,7 @@ public class MacImage : IMemoryImage
     {
         if (lockMode != LockMode.ReadOnly)
         {
-            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+            LogicalPixelFormat = ImagePixelFormat.Unknown;
         }
         var ptr = Rep.BitmapData;
         var stride = (int) Rep.BytesPerRow;
@@ -166,7 +166,7 @@ public class MacImage : IMemoryImage
                 _ => throw new InvalidOperationException("Unsupported image format")
             };
             var targetFormat = options.PixelFormatHint;
-            if (imageFormat == ImageFileFormat.Bmp && targetFormat == ImagePixelFormat.Unsupported &&
+            if (imageFormat == ImageFileFormat.Bmp && targetFormat == ImagePixelFormat.Unknown &&
                 PixelFormat == ImagePixelFormat.Gray8)
             {
                 // Workaround for issue in some macOS versions with 8bit BMPs

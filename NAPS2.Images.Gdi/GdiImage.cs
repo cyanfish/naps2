@@ -50,7 +50,7 @@ public class GdiImage : IMemoryImage
     {
         if (lockMode != LockMode.ReadOnly)
         {
-            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+            LogicalPixelFormat = ImagePixelFormat.Unknown;
         }
         return GdiImageLockState.Create(Bitmap, lockMode, out imageData);
     }

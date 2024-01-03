@@ -135,7 +135,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                     (ICScannerPixelDataType.Gray, 1, 8) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
                     (ICScannerPixelDataType.Rgb, 3, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
                     (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgbn),
-                    _ => (ImagePixelFormat.Unsupported, null)
+                    _ => (ImagePixelFormat.Unknown, null)
                 };
                 _logger.LogDebug(
                     "Image data: width {Width}, height {Height}, type {Type}, comp {Comp}, " +
@@ -147,7 +147,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                     _logger.LogDebug($"Flushing image with color sync profile {data.ColorSyncProfilePath}");
                     FlushImageWithColorSpace(fullBuffer, data, subPixelType);
                 }
-                else if (pixelFormat != ImagePixelFormat.Unsupported && subPixelType != null)
+                else if (pixelFormat != ImagePixelFormat.Unknown && subPixelType != null)
                 {
                     _logger.LogDebug($"Flushing image with pixel format {pixelFormat}");
                     FlushImageDirectly(fullBuffer, data, subPixelType, pixelFormat);

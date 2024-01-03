@@ -2,7 +2,7 @@
 
 public enum ImagePixelFormat
 {
-    Unsupported,
+    Unknown,
     BW1,
     Gray8,
     RGB24,

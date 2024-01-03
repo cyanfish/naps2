@@ -70,7 +70,7 @@ public class WpfImage : IMemoryImage
         if (_disposed) throw new InvalidOperationException();
         if (lockMode != LockMode.ReadOnly)
         {
-            LogicalPixelFormat = ImagePixelFormat.Unsupported;
+            LogicalPixelFormat = ImagePixelFormat.Unknown;
         }
         var subPixelType = GetSubPixelType();
         imageData = new BitwiseImageData((byte*) Bitmap.BackBuffer,
