@@ -22,6 +22,8 @@ message SerializedImageMetadata {
 		Grayscale = 1;
 		BlackAndWhite = 2;
 	}
-	bool lossless = 2;
-	string pageSize = 3;
+	bool lossless = 3;
+	string pageSize = 4;
+
+	reserved 2;
 }
