@@ -21,11 +21,6 @@ internal class ImageExportHelper
         if (exportFormat.FileFormat == ImageFileFormat.Png)
         {
             imageFileFormat = ImageFileFormat.Png;
-            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 && image.LogicalPixelFormat != ImagePixelFormat.BW1)
-            {
-                using var bwImage = image.Clone().PerformTransform(new BlackWhiteTransform());
-                return bwImage.SaveToMemoryStream(ImageFileFormat.Png);
-            }
             return image.SaveToMemoryStream(ImageFileFormat.Png);
         }
         if (exportFormat.FileFormat == ImageFileFormat.Jpeg)

@@ -709,11 +709,6 @@ public class PdfExporter
             {
                 exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };
             }
-            if (exportFormat.PixelFormat == ImagePixelFormat.BW1 &&
-                Image.LogicalPixelFormat != ImagePixelFormat.BW1)
-            {
-                Image = Image.PerformTransform(new BlackWhiteTransform());
-            }
             return exportFormat;
         }
 
