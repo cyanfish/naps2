@@ -32,7 +32,6 @@ public class ImageImporterTests : ContextualTests
         Assert.True(File.Exists(storage.FullPath));
         Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
         Assert.True(result[0].Metadata.Lossless);
-        Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
         Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
         Assert.True(result[0].TransformState.IsEmpty);
@@ -54,7 +53,6 @@ public class ImageImporterTests : ContextualTests
         Assert.True(File.Exists(storage.FullPath));
         Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
         Assert.False(result[0].Metadata.Lossless);
-        Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
         Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
         Assert.True(result[0].TransformState.IsEmpty);
@@ -79,12 +77,10 @@ public class ImageImporterTests : ContextualTests
         Assert.Equal(3, result.Count);
         AssertUsesRecoveryStorage(result[0].Storage, "00001.jpg");
         Assert.False(result[0].Metadata.Lossless);
-        Assert.Equal(BitDepth.Color, result[0].Metadata.BitDepth);
         ImageAsserts.Similar(ImageResources.dog, result[0]);
 
         AssertUsesRecoveryStorage(result[2].Storage, "00003.jpg");
         Assert.False(result[2].Metadata.Lossless);
-        Assert.Equal(BitDepth.Color, result[2].Metadata.BitDepth);
         ImageAsserts.Similar(ImageResources.stock_cat, result[2]);
 
         result[0].Dispose();

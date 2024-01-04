@@ -1,12 +1,12 @@
 namespace NAPS2.Images;
 
 /// <summary>
-/// Represents additional information about a scanned image (bit depth, quality, page size).
+/// Represents additional information about a scanned image (quality, page size).
 /// </summary>
-public record ImageMetadata(BitDepth BitDepth, bool Lossless, PageSize? PageSize)
+public record ImageMetadata(bool Lossless, PageSize? PageSize)
 {
     /// <summary>
     /// A default set of metadata suitable for test images. Real use cases should be explicit and not use this default value.
     /// </summary>
-    public static readonly ImageMetadata DefaultForTesting = new(BitDepth.Color, false, null);
+    public static readonly ImageMetadata DefaultForTesting = new(false, null);
 }

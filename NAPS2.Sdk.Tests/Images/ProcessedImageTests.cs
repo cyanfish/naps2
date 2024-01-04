@@ -11,21 +11,19 @@ public class ProcessedImageTests : ContextualTests
     {
         var storage = LoadImage(ImageResources.dog);
 
-        var metadata1 = new ImageMetadata(BitDepth.Color, false, null);
+        var metadata1 = new ImageMetadata(false, null);
         var postProcessingData1 = new PostProcessingData();
         var transformState1 = TransformState.Empty;
         var image1 = new ProcessedImage(ImageContext, storage, metadata1, postProcessingData1, transformState1);
         Assert.Equal(storage, image1.Storage);
-        Assert.Equal(BitDepth.Color, image1.Metadata.BitDepth);
         Assert.False(image1.Metadata.Lossless);
         Assert.True(image1.TransformState.IsEmpty);
 
-        var metadata2 = new ImageMetadata(BitDepth.BlackAndWhite, true, null);
+        var metadata2 = new ImageMetadata(true, null);
         var postProcessingData2 = new PostProcessingData();
         var transformState2 = new TransformState(ImmutableList<Transform>.Empty.Add(new CropTransform(0, 50, 0, 50)));
         var image2 = new ProcessedImage(ImageContext, storage, metadata2, postProcessingData2, transformState2);
         Assert.Equal(storage, image2.Storage);
-        Assert.Equal(BitDepth.BlackAndWhite, image2.Metadata.BitDepth);
         Assert.True(image2.Metadata.Lossless);
         Assert.Single(image2.TransformState.Transforms);
         var cropTransform = Assert.IsType<CropTransform>(image2.TransformState.Transforms[0]);
@@ -39,7 +37,7 @@ public class ProcessedImageTests : ContextualTests
     public void StorageDisposed()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(BitDepth.Color, false, null);
+        var metadata = new ImageMetadata(false, null);
 
         var image = new ProcessedImage(
             ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
@@ -52,7 +50,7 @@ public class ProcessedImageTests : ContextualTests
     public void StorageDisposedOnlyAfterAllClonesDisposed()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(BitDepth.Color, false, null);
+        var metadata = new ImageMetadata(false, null);
 
         var image = new ProcessedImage(
             ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
@@ -80,7 +78,7 @@ public class ProcessedImageTests : ContextualTests
     public void TransformSimplification()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(BitDepth.Color, false, null);
+        var metadata = new ImageMetadata(false, null);
 
         var image = new ProcessedImage(
             ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
@@ -118,7 +116,7 @@ public class ProcessedImageTests : ContextualTests
     public void MultipleTransforms()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(BitDepth.Color, false, null);
+        var metadata = new ImageMetadata(false, null);
 
         var image = new ProcessedImage(
             ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
@@ -157,7 +155,7 @@ public class ProcessedImageTests : ContextualTests
     public void CloneAfterDisposed()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(BitDepth.Color, false, null);
+        var metadata = new ImageMetadata(false, null);
 
         var image = new ProcessedImage(
             ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);

@@ -101,7 +101,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_png), BitDepth.Color, true, -1, null);
+            LoadImage(ImageResources.dog_png), true, -1, null);
 
         await _exporter.Export(filePath, new[] { image });
 
@@ -118,7 +118,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "test.pdf");
         // Width is 99 (not divisible by 4)
         var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_99w), BitDepth.Color, true, -1, null);
+            LoadImage(ImageResources.dog_99w), true, -1, null);
 
         await _exporter.Export(filePath, new[] { image });
 
@@ -134,7 +134,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_alpha), BitDepth.Color, false, -1, null);
+            LoadImage(ImageResources.dog_alpha), false, -1, null);
 
         await _exporter.Export(filePath, new[] { image });
 
@@ -151,7 +151,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_mask), BitDepth.Color, false, -1, null);
+            LoadImage(ImageResources.dog_mask), false, -1, null);
 
         await _exporter.Export(filePath, new[] { image });
 
@@ -218,7 +218,7 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_bw_24bit),
-            BitDepth.BlackAndWhite, true, -1, null);
+            true, -1, null);
 
         await _exporter.Export(filePath, new[] { image });
 
@@ -426,7 +426,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "test.pdf");
         var sourceImage = ImageContext.Create(850, 1100, ImagePixelFormat.RGB24);
         sourceImage.SetResolution(99.4f, 99.4f);
-        using var image = ScanningContext.CreateProcessedImage(sourceImage, BitDepth.Color, false, -1, PageSize.Letter);
+        using var image = ScanningContext.CreateProcessedImage(sourceImage, false, -1, PageSize.Letter);
 
         await _exporter.Export(filePath, new[] { image });
 
@@ -443,7 +443,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "test.pdf");
         var sourceImage = ImageContext.Create(850, 1100, ImagePixelFormat.RGB24);
         sourceImage.SetResolution(98, 98);
-        using var image = ScanningContext.CreateProcessedImage(sourceImage, BitDepth.Color, false, -1, PageSize.Letter);
+        using var image = ScanningContext.CreateProcessedImage(sourceImage, false, -1, PageSize.Letter);
 
         await _exporter.Export(filePath, new[] { image });
 

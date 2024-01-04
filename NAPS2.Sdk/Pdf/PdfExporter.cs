@@ -704,7 +704,7 @@ public class PdfExporter
 
         public ImageExportFormat PrepareForExport(ImageMetadata metadata)
         {
-            var exportFormat = new ImageExportHelper().GetExportFormat(Image, metadata.BitDepth, metadata.Lossless);
+            var exportFormat = new ImageExportHelper().GetExportFormat(Image, metadata.Lossless);
             if (exportFormat.FileFormat == ImageFileFormat.Unknown)
             {
                 exportFormat = exportFormat with { FileFormat = ImageFileFormat.Jpeg };

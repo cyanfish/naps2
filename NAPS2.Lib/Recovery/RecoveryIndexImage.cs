@@ -8,8 +8,6 @@ public class RecoveryIndexImage
 
     public List<Transform>? TransformList { get; set; }
 
-    public ScanBitDepth BitDepth { get; set; }
-
     public bool HighQuality { get; set; }
 
     public string? PageSize { get; set; }

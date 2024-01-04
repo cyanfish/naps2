@@ -87,27 +87,20 @@ public class ScanningContext : IDisposable
 
     internal ProcessedImage CreateProcessedImage(IImageStorage storage, IEnumerable<Transform> transforms)
     {
-        (storage as IMemoryImage)?.UpdateLogicalPixelFormat();
-        var bitDepth = storage switch
-        {
-            IMemoryImage { LogicalPixelFormat: ImagePixelFormat.BW1 } => BitDepth.BlackAndWhite,
-            IMemoryImage { LogicalPixelFormat: ImagePixelFormat.Gray8 } => BitDepth.Grayscale,
-            _ => BitDepth.Color
-        };
-        return CreateProcessedImage(storage, bitDepth, false, -1, null, transforms);
+        return CreateProcessedImage(storage, false, -1, null, transforms);
     }
 
-    internal ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage, bool lossless, int quality,
         PageSize? pageSize)
     {
-        return CreateProcessedImage(storage, bitDepth, lossless, quality, pageSize, Enumerable.Empty<Transform>());
+        return CreateProcessedImage(storage, lossless, quality, pageSize, Enumerable.Empty<Transform>());
     }
 
-    internal ProcessedImage CreateProcessedImage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality,
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage, bool lossless, int quality,
         PageSize? pageSize, IEnumerable<Transform> transforms)
     {
-        var convertedStorage = ConvertStorageIfNeeded(storage, bitDepth, lossless, quality);
-        var metadata = new ImageMetadata(bitDepth, lossless, pageSize);
+        var convertedStorage = ConvertStorageIfNeeded(storage, lossless, quality);
+        var metadata = new ImageMetadata(lossless, pageSize);
         var image = new ProcessedImage(
             ImageContext,
             convertedStorage,
@@ -118,11 +111,11 @@ public class ScanningContext : IDisposable
         return image;
     }
 
-    private IImageStorage ConvertStorageIfNeeded(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
+    private IImageStorage ConvertStorageIfNeeded(IImageStorage storage, bool lossless, int quality)
     {
         if (FileStorageManager != null)
         {
-            return ConvertToFileStorage(storage, bitDepth, lossless, quality);
+            return ConvertToFileStorage(storage, lossless, quality);
         }
         return ConvertToMemoryStorage(storage);
     }
@@ -147,12 +140,12 @@ public class ScanningContext : IDisposable
         }
     }
 
-    private IImageStorage ConvertToFileStorage(IImageStorage storage, BitDepth bitDepth, bool lossless, int quality)
+    private IImageStorage ConvertToFileStorage(IImageStorage storage, bool lossless, int quality)
     {
         switch (storage)
         {
             case IMemoryImage image:
-                return WriteImageToBackingFile(image, bitDepth, lossless, quality);
+                return WriteImageToBackingFile(image, lossless, quality);
             case ImageFileStorage fileStorage:
                 return fileStorage;
             case ImageMemoryStorage memoryStorage:
@@ -162,7 +155,7 @@ public class ScanningContext : IDisposable
                 }
                 // TODO: Can we just write this to a file directly? Is there any case where SaveSmallestFormat is really needed?
                 var loadedImage = ImageContext.Load(memoryStorage.Stream);
-                return WriteImageToBackingFile(loadedImage, bitDepth, lossless, quality);
+                return WriteImageToBackingFile(loadedImage, lossless, quality);
             default:
                 // The only case that should hit this is a test with a mock
                 return storage;
@@ -181,7 +174,7 @@ public class ScanningContext : IDisposable
         return new ImageFileStorage(path, false);
     }
 
-    private IImageStorage WriteImageToBackingFile(IMemoryImage image, BitDepth bitDepth, bool lossless, int quality)
+    private IImageStorage WriteImageToBackingFile(IMemoryImage image, bool lossless, int quality)
     {
         if (FileStorageManager == null)
         {
@@ -189,7 +182,7 @@ public class ScanningContext : IDisposable
         }
         var path = FileStorageManager.NextFilePath();
         var fullPath = new ImageExportHelper()
-            .SaveSmallestFormat(path, image, bitDepth, lossless, quality, out _);
+            .SaveSmallestFormat(path, image, lossless, quality, out _);
         return new ImageFileStorage(fullPath, false);
     }
 
@@ -197,7 +190,7 @@ public class ScanningContext : IDisposable
     {
         var path = Path.Combine(TempFolderPath, Path.GetRandomFileName());
         return new ImageExportHelper()
-            .SaveSmallestFormat(path, image, bitDepth, false, -1, out _);
+            .SaveSmallestFormat(path, image, false, -1, out _);
     }
 
     internal string SaveToTempFile(ProcessedImage image, BitDepth bitDepth = BitDepth.Color)

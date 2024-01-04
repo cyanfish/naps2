@@ -151,7 +151,7 @@ public class RecoverableFolder : IDisposable
     private ProcessedImage CreateRecoveredImage(RecoveryParams recoveryParams, IImageStorage storage,
         RecoveryIndexImage indexImage)
     {
-        var processedImage = _scanningContext.CreateProcessedImage(storage, indexImage.BitDepth.ToBitDepth(),
+        var processedImage = _scanningContext.CreateProcessedImage(storage,
             indexImage.HighQuality, -1, PageSize.Parse(indexImage.PageSize),
             indexImage.TransformList!.ToImmutableList());
 

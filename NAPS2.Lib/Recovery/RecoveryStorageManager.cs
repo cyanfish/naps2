@@ -91,7 +91,6 @@ public class RecoveryStorageManager : IDisposable
                 return new RecoveryIndexImage
                 {
                     FileName = Path.GetFileName(storage.FullPath),
-                    BitDepth = processedImage.Metadata.BitDepth.ToScanBitDepth(),
                     HighQuality = processedImage.Metadata.Lossless,
                     PageSize = processedImage.Metadata.PageSize?.ToString(),
                     TransformList = processedImage.TransformState.Transforms.ToList()

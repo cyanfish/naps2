@@ -101,7 +101,7 @@ public class PdfImporter
         if (storage != null)
         {
             var pageSize = new PageSize((decimal) page.Width * 72, (decimal) page.Height * 72, PageSizeUnit.Inch);
-            var image = _scanningContext.CreateProcessedImage(storage, BitDepth.Color, false, -1, pageSize);
+            var image = _scanningContext.CreateProcessedImage(storage, false, -1, pageSize);
             return ImportPostProcessor.AddPostProcessingData(
                 image,
                 storage,

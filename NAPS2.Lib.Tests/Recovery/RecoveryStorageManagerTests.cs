@@ -52,7 +52,6 @@ public class RecoveryStorageManagerTests : ContextualTests
 
         Assert.Contains("00001.jpg</FileName>", indexFileContent);
         Assert.Contains("00002.jpg</FileName>", indexFileContent);
-        Assert.Contains("<BitDepth>C24Bit</BitDepth>", indexFileContent);
         Assert.Contains("<HighQuality>false</HighQuality>", indexFileContent);
     }
 
@@ -79,14 +78,12 @@ public class RecoveryStorageManagerTests : ContextualTests
         var image1 = new UiImage(
             ScanningContext.CreateProcessedImage(
                 ImageContext.Create(100, 100, ImagePixelFormat.RGB24),
-                BitDepth.Grayscale,
                 true,
                 -1,
                 PageSize.A4));
 
         _imageList.Mutate(new ListMutation<UiImage>.Append(image1));
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
-        Assert.Contains("<BitDepth>Grayscale</BitDepth>", indexFileContent);
         Assert.Contains("<HighQuality>true</HighQuality>", indexFileContent);
         Assert.Contains("<PageSize>210x297 mm</PageSize>", indexFileContent);
     }

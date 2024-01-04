@@ -21,7 +21,6 @@ public class ImageSerializerTests : ContextualTests
 
         using var sourceImage = ScanningContext.CreateProcessedImage(
             LoadImage(ImageResources.dog), // TODO: Use an actual grayscale image
-            BitDepth.Grayscale,
             true,
             -1,
             PageSize.A4,
@@ -33,7 +32,6 @@ public class ImageSerializerTests : ContextualTests
         Assert.Single(destImage.TransformState.Transforms);
         Assert.Equal(300, Assert.IsType<BrightnessTransform>(destImage.TransformState.Transforms[0]).Brightness);
         Assert.True(destImage.Metadata.Lossless);
-        Assert.Equal(BitDepth.Grayscale, destImage.Metadata.BitDepth);
         Assert.Equal(PageSize.A4, destImage.Metadata.PageSize);
         ImageAsserts.Similar(ImageResources.dog_b_p300, destImage);
     }

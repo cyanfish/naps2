@@ -37,7 +37,6 @@ internal static class ImageSerializer
             Metadata = new SerializedImageMetadata
             {
                 TransformListXml = image.TransformState.Transforms.ToXml(),
-                BitDepth = (SerializedImageMetadata.Types.BitDepth) image.Metadata.BitDepth,
                 Lossless = image.Metadata.Lossless,
                 PageSize = image.Metadata.PageSize?.ToString() ?? ""
             },
@@ -142,7 +141,6 @@ internal static class ImageSerializer
 
         var processedImage = scanningContext.CreateProcessedImage(
             storage,
-            (BitDepth) serializedImage.Metadata.BitDepth,
             serializedImage.Metadata.Lossless,
             -1,
             PageSize.Parse(serializedImage.Metadata.PageSize),

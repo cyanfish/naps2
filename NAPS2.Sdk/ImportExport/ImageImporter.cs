@@ -48,7 +48,6 @@ public class ImageImporter
                             frame.OriginalFileFormat == ImageFileFormat.Jpeg
                                 ? CreateJpegStorageWithoutReEncoding(filePath, frame)
                                 : frame,
-                            BitDepth.Color,
                             lossless,
                             -1,
                             null);

@@ -18,7 +18,7 @@ public class ImageExportHelperTests : ContextualTests
         var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.BlackAndWhite, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog_bw);
     }
@@ -29,20 +29,9 @@ public class ImageExportHelperTests : ContextualTests
         var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog_bw);
-    }
-
-    [Fact]
-    public void SaveSmallestFormat_ColorWithBlackWhiteBitDepth()
-    {
-        var color = LoadImage(ImageResources.dog);
-        var path = Path.Combine(FolderPath, "test");
-
-        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.BlackAndWhite, false, -1, out var format);
-
-        AssertPng(format, fullPath, ImageResources.dog_bw, ImageAsserts.XPLAT_RMSE_THRESHOLD);
     }
 
     [Fact]
@@ -51,20 +40,31 @@ public class ImageExportHelperTests : ContextualTests
         var color = LoadImage(ImageResources.dog);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, true, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, true, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog);
     }
 
     [Fact]
-    public void SaveSmallestFormat_SmallerPng()
+    public void SaveSmallestFormat_LogicalBlackWhite()
     {
         var bw = LoadImage(ImageResources.dog_bw_24bit);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, bw, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog_bw);
+    }
+
+    [Fact]
+    public void SaveSmallestFormat_SmallerPng()
+    {
+        var bw = LoadImage(ImageResources.dog_clustered_gray);
+        var path = Path.Combine(FolderPath, "test");
+
+        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
+
+        AssertPng(format, fullPath, ImageResources.dog_clustered_gray);
     }
 
     [Fact]
@@ -73,7 +73,7 @@ public class ImageExportHelperTests : ContextualTests
         var color = LoadImage(ImageResources.dog_png);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog);
     }
@@ -85,7 +85,7 @@ public class ImageExportHelperTests : ContextualTests
         color.OriginalFileFormat = ImageFileFormat.Unknown;
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.dog);
     }
@@ -96,7 +96,7 @@ public class ImageExportHelperTests : ContextualTests
         var color = LoadImage(ImageResources.dog_bw_jpg);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, BitDepth.Color, false, -1, out var format);
+        var fullPath = _helper.SaveSmallestFormat(path, color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.dog_bw);
     }

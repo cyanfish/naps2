@@ -2,11 +2,11 @@ namespace NAPS2.Images;
 
 internal class ImageExportHelper
 {
-    public string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image, BitDepth bitDepth,
+    public string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image,
         bool lossless, int quality, out ImageFileFormat imageFileFormat)
     {
         // TODO: Should we save directly to the file?
-        var memoryStream = SaveSmallestFormatToMemoryStream(image, bitDepth, lossless, quality, out imageFileFormat);
+        var memoryStream = SaveSmallestFormatToMemoryStream(image, lossless, quality, out imageFileFormat);
         var ext = imageFileFormat == ImageFileFormat.Png ? ".png" : ".jpg";
         var path = pathWithoutExtension + ext;
         using var fileStream = new FileStream(path, FileMode.Create);
@@ -14,10 +14,10 @@ internal class ImageExportHelper
         return path;
     }
 
-    public MemoryStream SaveSmallestFormatToMemoryStream(IMemoryImage image, BitDepth bitDepth, bool lossless,
+    public MemoryStream SaveSmallestFormatToMemoryStream(IMemoryImage image, bool lossless,
         int quality, out ImageFileFormat imageFileFormat)
     {
-        var exportFormat = GetExportFormat(image, bitDepth, lossless);
+        var exportFormat = GetExportFormat(image, lossless);
         if (exportFormat.FileFormat == ImageFileFormat.Png)
         {
             imageFileFormat = ImageFileFormat.Png;
@@ -47,21 +47,13 @@ internal class ImageExportHelper
         return jpegEncoded;
     }
 
-    public ImageExportFormat GetExportFormat(IMemoryImage image, BitDepth bitDepth, bool lossless)
+    public ImageExportFormat GetExportFormat(IMemoryImage image, bool lossless)
     {
         image.UpdateLogicalPixelFormat();
         // Store the image in as little space as possible
         if (image.LogicalPixelFormat == ImagePixelFormat.BW1)
         {
-            // Already encoded as 1-bit
-            return new ImageExportFormat(ImageFileFormat.Png, ImagePixelFormat.BW1);
-        }
-        if (bitDepth == BitDepth.BlackAndWhite)
-        {
-            // Convert to a 1-bit bitmap before saving to help compression
-            // This is lossless and takes up minimal storage (best of both worlds), so highQuality is irrelevant
-            // Note that if a black and white image comes from native WIA, bitDepth is unknown,
-            // so the image will be png-encoded below instead of using a 1-bit bitmap
+            // Already 1-bit
             return new ImageExportFormat(ImageFileFormat.Png, ImagePixelFormat.BW1);
         }
         if (lossless || image.LogicalPixelFormat == ImagePixelFormat.ARGB32 ||
