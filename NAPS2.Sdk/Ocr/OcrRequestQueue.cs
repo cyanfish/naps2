@@ -20,7 +20,16 @@ internal class OcrRequestQueue
     /// Gets or sets the number of queue workers, which determines the maximum number of OCR requests that can process
     /// in parallel.
     /// </summary>
-    public int WorkerCount { get; init; } = Environment.ProcessorCount;
+    public int WorkerCount { get; init; } = Environment.ProcessorCount switch
+    {
+        // We want OCR to use as many of the available cores (or threads in the case of SMT) as possible, but too many
+        // Tesseract processes can use a lot of memory, so for high core counts we use less, and hard cap at 16.
+        // TODO: Maybe consider checking total system memory, e.g. using https://www.nuget.org/packages/Hardware.Info
+        <= 8 => Environment.ProcessorCount,
+        <= 16 => 8,
+        <= 32 => Environment.ProcessorCount / 2,
+        > 32 => 16
+    };
 
     /// <summary>
     /// For testing. Adds a delay to the worker tasks to process requests.
