@@ -5,20 +5,13 @@ namespace NAPS2.Sdk.Tests.Images;
 
 public class ImageExportHelperTests : ContextualTests
 {
-    private ImageExportHelper _helper;
-
-    public ImageExportHelperTests()
-    {
-        _helper = new ImageExportHelper();
-    }
-
     [Fact]
     public void SaveSmallestFormat_BlackAndWhite()
     {
         var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog_bw);
     }
@@ -29,7 +22,7 @@ public class ImageExportHelperTests : ContextualTests
         var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog_bw);
     }
@@ -40,7 +33,7 @@ public class ImageExportHelperTests : ContextualTests
         var color = LoadImage(ImageResources.dog);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, true, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, true, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog);
     }
@@ -51,7 +44,7 @@ public class ImageExportHelperTests : ContextualTests
         var bw = LoadImage(ImageResources.dog_bw_24bit);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog_bw);
     }
@@ -62,7 +55,7 @@ public class ImageExportHelperTests : ContextualTests
         var bw = LoadImage(ImageResources.dog_clustered_gray);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, bw, false, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog_clustered_gray);
     }
@@ -73,7 +66,7 @@ public class ImageExportHelperTests : ContextualTests
         var color = LoadImage(ImageResources.dog_png);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, false, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, false, -1, out var format);
 
         AssertPng(format, fullPath, ImageResources.dog);
     }
@@ -85,7 +78,7 @@ public class ImageExportHelperTests : ContextualTests
         color.OriginalFileFormat = ImageFileFormat.Unknown;
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, false, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.dog);
     }
@@ -96,7 +89,7 @@ public class ImageExportHelperTests : ContextualTests
         var color = LoadImage(ImageResources.dog_bw_jpg);
         var path = Path.Combine(FolderPath, "test");
 
-        var fullPath = _helper.SaveSmallestFormat(path, color, false, -1, out var format);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, false, -1, out var format);
 
         AssertJpeg(format, fullPath, ImageResources.dog_bw);
     }

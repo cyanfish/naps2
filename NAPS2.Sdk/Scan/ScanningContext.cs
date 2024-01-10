@@ -181,16 +181,14 @@ public class ScanningContext : IDisposable
             throw new InvalidOperationException();
         }
         var path = FileStorageManager.NextFilePath();
-        var fullPath = new ImageExportHelper()
-            .SaveSmallestFormat(path, image, lossless, quality, out _);
+        var fullPath = ImageExportHelper.SaveSmallestFormat(path, image, lossless, quality, out _);
         return new ImageFileStorage(fullPath, false);
     }
 
     internal string SaveToTempFile(IMemoryImage image, BitDepth bitDepth = BitDepth.Color)
     {
         var path = Path.Combine(TempFolderPath, Path.GetRandomFileName());
-        return new ImageExportHelper()
-            .SaveSmallestFormat(path, image, false, -1, out _);
+        return ImageExportHelper.SaveSmallestFormat(path, image, false, -1, out _);
     }
 
     internal string SaveToTempFile(ProcessedImage image, BitDepth bitDepth = BitDepth.Color)

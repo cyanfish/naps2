@@ -1,8 +1,8 @@
 namespace NAPS2.Images;
 
-internal class ImageExportHelper
+internal static class ImageExportHelper
 {
-    public string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image,
+    public static string SaveSmallestFormat(string pathWithoutExtension, IMemoryImage image,
         bool lossless, int quality, out ImageFileFormat imageFileFormat)
     {
         // TODO: Should we save directly to the file?
@@ -14,7 +14,7 @@ internal class ImageExportHelper
         return path;
     }
 
-    public MemoryStream SaveSmallestFormatToMemoryStream(IMemoryImage image, bool lossless,
+    public static MemoryStream SaveSmallestFormatToMemoryStream(IMemoryImage image, bool lossless,
         int quality, out ImageFileFormat imageFileFormat)
     {
         var exportFormat = GetExportFormat(image, lossless);
@@ -42,7 +42,7 @@ internal class ImageExportHelper
         return jpegEncoded;
     }
 
-    public ImageExportFormat GetExportFormat(IMemoryImage image, bool lossless)
+    public static ImageExportFormat GetExportFormat(IMemoryImage image, bool lossless)
     {
         image.UpdateLogicalPixelFormat();
         // Store the image in as little space as possible
