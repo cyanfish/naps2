@@ -145,7 +145,7 @@ public abstract class DesktopForm : EtoFormBase
         if (!EtoPlatform.Current.IsMac)
         {
             // TODO: Can't do this on Mac yet as it disables the menu item indefinitely
-            Commands.Paste.Enabled = _imageTransfer.IsInClipboard();
+            Commands.Paste.Enabled = _imageTransfer.IsInClipboard() || Clipboard.Instance.ContainsImage;
         }
         if (ImageList.Selection.Any())
         {

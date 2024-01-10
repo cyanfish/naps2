@@ -44,6 +44,11 @@ public class GtkEtoPlatform : EtoPlatform
         return new Bitmap(new BitmapHandler(pixbuf));
     }
 
+    public override IMemoryImage FromBitmap(ImageContext imageContext, Bitmap bitmap)
+    {
+        return new GtkImage(imageContext, bitmap.ToGdk());
+    }
+
     public override void SetClipboardImage(Clipboard clipboard, Bitmap image)
     {
         // Without cloning the image, Gtk gives errors on paste.

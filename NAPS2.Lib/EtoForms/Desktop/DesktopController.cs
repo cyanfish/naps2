@@ -1,4 +1,5 @@
 using System.Threading;
+using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport;
@@ -345,6 +346,18 @@ public class DesktopController
         if (_imageTransfer.IsInClipboard())
         {
             ImportDirect(_imageTransfer.GetFromClipboard(), true);
+        }
+        else if (Clipboard.Instance.ContainsImage)
+        {
+            var etoBitmap = (Bitmap) Clipboard.Instance.Image;
+            Task.Run(() =>
+            {
+                var image = EtoPlatform.Current.FromBitmap(_scanningContext.ImageContext, etoBitmap);
+                var processedImage = _scanningContext.CreateProcessedImage(image);
+                processedImage = ImportPostProcessor.AddPostProcessingData(processedImage, image,
+                    _thumbnailController.RenderSize, new BarcodeDetectionOptions(), true);
+                _desktopImagesController.ReceiveScannedImage()(processedImage);
+            });
         }
     }
 

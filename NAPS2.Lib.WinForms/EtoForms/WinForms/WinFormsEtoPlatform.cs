@@ -120,6 +120,11 @@ public class WinFormsEtoPlatform : EtoPlatform
         return bitmap.ToEto();
     }
 
+    public override IMemoryImage FromBitmap(ImageContext imageContext, Bitmap bitmap)
+    {
+        return new GdiImage(imageContext, (SD.Bitmap) bitmap.ToSD());
+    }
+
     public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
     {
         var bitmap = new System.Drawing.Bitmap(image.Width, image.Height);
