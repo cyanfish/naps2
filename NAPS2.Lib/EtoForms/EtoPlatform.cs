@@ -117,9 +117,10 @@ public abstract class EtoPlatform
         return GetPreferredSize(control, new SizeF(defaultWidth, LayoutController.MAX_SIZE));
     }
 
-    public virtual void SetClipboardImage(Clipboard clipboard, Bitmap image)
+    public virtual void SetClipboardImage(Clipboard clipboard, ProcessedImage processedImage, IMemoryImage memoryImage)
     {
-        clipboard.Image = image;
+        using var etoBitmap = memoryImage.ToEtoImage();
+        clipboard.Image = etoBitmap;
     }
 
     public virtual void ConfigureDropDown(DropDown dropDown)

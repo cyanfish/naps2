@@ -240,6 +240,20 @@ public class WinFormsEtoPlatform : EtoPlatform
         wfButton.FlatStyle = WF.FlatStyle.Flat;
     }
 
+    public override void SetClipboardImage(Clipboard clipboard, ProcessedImage processedImage, IMemoryImage memoryImage)
+    {
+        if (memoryImage.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
+        {
+            // Storing 1bit/8bit images to the clipboard doesn't work, so we copy to 24bit if needed
+            using var memoryImage2 = memoryImage.CopyWithPixelFormat(ImagePixelFormat.RGB24);
+            base.SetClipboardImage(clipboard, processedImage, memoryImage2);
+        }
+        else
+        {
+            base.SetClipboardImage(clipboard, processedImage, memoryImage);
+        }
+    }
+
     public override void ConfigureDropDown(DropDown dropDown)
     {
         ((WF.ComboBox) dropDown.ControlObject).DrawMode = WF.DrawMode.Normal;

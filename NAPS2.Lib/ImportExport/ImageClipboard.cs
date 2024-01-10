@@ -24,8 +24,7 @@ public class ImageClipboard
         {
             // Slow path for more full-featured copying, expensive parts not run on UI thread
             using var firstBitmap = await Task.Run(() => imageList[0].Render());
-            using var etoBitmap = firstBitmap.ToEtoImage();
-            EtoPlatform.Current.SetClipboardImage(Clipboard.Instance, etoBitmap);
+            EtoPlatform.Current.SetClipboardImage(Clipboard.Instance, imageList[0], firstBitmap);
             var encodedRtf = await Task.Run(() => RtfEncodeImages(firstBitmap, imageList));
             if (encodedRtf != null)
             {
