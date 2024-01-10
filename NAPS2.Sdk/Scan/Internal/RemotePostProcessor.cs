@@ -185,7 +185,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
         {
             // TODO: If we use tesseract as a library, this is something that that could potentially improve (i.e. not having to save to disk)
             // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
-            return _scanningContext.SaveToTempFile(bitmap, options.BitDepth);
+            return _scanningContext.SaveToTempFile(bitmap);
         }
         return null;
     }

@@ -185,16 +185,16 @@ public class ScanningContext : IDisposable
         return new ImageFileStorage(fullPath, false);
     }
 
-    internal string SaveToTempFile(IMemoryImage image, BitDepth bitDepth = BitDepth.Color)
+    internal string SaveToTempFile(IMemoryImage image)
     {
         var path = Path.Combine(TempFolderPath, Path.GetRandomFileName());
         return ImageExportHelper.SaveSmallestFormat(path, image, false, -1, out _);
     }
 
-    internal string SaveToTempFile(ProcessedImage image, BitDepth bitDepth = BitDepth.Color)
+    internal string SaveToTempFile(ProcessedImage image)
     {
         using var rendered = image.Render();
-        return SaveToTempFile(rendered, bitDepth);
+        return SaveToTempFile(rendered);
     }
 
     private class ProcessedImageOwner : IProcessedImageOwner, IDisposable
