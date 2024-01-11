@@ -10,5 +10,7 @@ public interface IScanPerformer
 {
     Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default);
 
+    IAsyncEnumerable<ScanDevice> GetDevices(ScanProfile scanProfile, CancellationToken cancelToken = default);
+
     IAsyncEnumerable<ProcessedImage> PerformScan(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent = default, CancellationToken cancelToken = default);
 }

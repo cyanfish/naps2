@@ -1048,6 +1048,25 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
+    [Fact]
+    public async Task ListDevices()
+    {
+        var (_, scanDriverFactoryMock) = CreateDriverMocks();
+
+        var outputWriter = new StringWriter();
+        await _automationHelper.WithContainerBuilder(container =>
+        {
+            container.RegisterInstance(new ConsoleOutput(outputWriter));
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                ListDevices = true
+            }, scanDriverFactoryMock);
+
+        Assert.Equal("test_name1\r\ntest_name2\r\n", outputWriter.ToString());
+        AssertRecoveryCleanedUp();
+    }
+
     private static (IScanDriver, IScanDriverFactory) CreateDriverMocks()
     {
         var scanDriverMock = Substitute.For<IScanDriver>();

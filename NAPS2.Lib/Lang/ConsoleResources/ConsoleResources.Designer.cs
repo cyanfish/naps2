@@ -331,6 +331,15 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The driver option was not valid (must be wia/twain/escl/sane/apple)..
+        /// </summary>
+        internal static string InvalidDriver {
+            get {
+                return ResourceManager.GetString("InvalidDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NAPS2.
         /// </summary>
         internal static string NAPS2 {

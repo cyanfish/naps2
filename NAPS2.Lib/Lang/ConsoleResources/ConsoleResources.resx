@@ -257,4 +257,7 @@ Use the "--importpassword" option.</value>
   <data name="InvalidDpi" xml:space="preserve">
     <value>The DPI option was not valid (must be 100/150/200/300/400/600/800/1200/2400/4800).</value>
   </data>
+  <data name="InvalidDriver" xml:space="preserve">
+    <value>The driver option was not valid (must be wia/twain/escl/sane/apple).</value>
+  </data>
 </root>

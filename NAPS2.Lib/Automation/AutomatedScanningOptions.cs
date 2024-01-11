@@ -66,6 +66,9 @@ public class AutomatedScanningOptions
     [Option("device", HelpText = "Scanning device name (can be inexact).")]
     public string? Device { get; set; }
 
+    [Option("listdevices", HelpText = "Instead of scanning, list available devices.")]
+    public bool ListDevices { get; set; }
+
     #endregion
 
     #region Scan Options

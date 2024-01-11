@@ -97,6 +97,12 @@ internal class AutomatedScanning
                 }
             }
 
+            if (_options.ListDevices)
+            {
+                await ListDevices();
+                return;
+            }
+
             if (!PreCheckOverwriteFile())
             {
                 return;
@@ -215,6 +221,21 @@ internal class AutomatedScanning
             _errorOutput.DisplayError(MiscResources.FilesCouldNotBeDownloaded);
         };
         await downloadController.StartDownloadsAsync();
+    }
+
+    private async Task ListDevices()
+    {
+        if (!GetProfile(out var profile))
+        {
+            profile = new ScanProfile();
+        }
+        await SetProfileOverrides(profile);
+        var cts = new CancellationTokenSource();
+        Console.CancelKeyPress += (_, _) => cts.Cancel();
+        await foreach (var device in _scanPerformer.GetDevices(profile, cts.Token))
+        {
+            _output.Writer.WriteLine(device.Name);
+        }
     }
 
     private void ReorderScannedImages()
@@ -439,7 +460,7 @@ internal class AutomatedScanning
     {
         // Most validation is done by the CommandLineParser library, but some constraints that can't be represented by that API need to be checked here
         if (_options.OutputPath == null && _options.EmailFileName == null && _options.Install == null &&
-            !_options.AutoSave)
+            !_options.AutoSave && !_options.ListDevices)
         {
             _errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequired);
             return false;
@@ -448,6 +469,15 @@ internal class AutomatedScanning
         {
             _errorOutput.DisplayError(ConsoleResources.OutputOrEmailRequiredForImport);
             return false;
+        }
+
+        if (_options.Driver != null)
+        {
+            if (ScanPerformer.ParseDriver(_options.Driver) == Driver.Default)
+            {
+                _errorOutput.DisplayError(ConsoleResources.InvalidDriver);
+                return false;
+            }
         }
 
         if (_options.PageSize != null)
@@ -744,32 +774,10 @@ internal class AutomatedScanning
 
     private async Task<bool> SetProfileOverrides(ScanProfile profile)
     {
-        var driver = Driver.Default;
         if (!string.IsNullOrEmpty(_options.Driver))
         {
-            driver = ScanPerformer.ParseDriver(_options.Driver);
+            var driver = ScanPerformer.ParseDriver(_options.Driver);
             profile.DriverName = driver.ToString().ToLowerInvariant();
-        }
-        if (!string.IsNullOrEmpty(_options.Device))
-        {
-            var scanController = new ScanController(_scanningContext, _scanBridgeFactory);
-            var cts = new CancellationTokenSource();
-            bool foundDevice = false;
-            await foreach (var device in scanController.GetDevices(driver, cts.Token))
-            {
-                if (device.Name.ContainsInvariantIgnoreCase(_options.Device!))
-                {
-                    cts.Cancel();
-                    profile.Device = new ScanProfileDevice(device.ID, device.Name);
-                    foundDevice = true;
-                    break;
-                }
-            }
-            if (!foundDevice)
-            {
-                _errorOutput.DisplayError(SdkResources.DeviceNotFound);
-                return false;
-            }
         }
         if (_options.Source != null)
         {
@@ -802,6 +810,28 @@ internal class AutomatedScanning
         {
             profile.RotateDegrees = _options.RotateDegrees.Value;
         }
+
+        if (!string.IsNullOrEmpty(_options.Device))
+        {
+            var cts = new CancellationTokenSource();
+            bool foundDevice = false;
+            await foreach (var device in _scanPerformer.GetDevices(profile, cts.Token))
+            {
+                if (device.Name.ContainsInvariantIgnoreCase(_options.Device!))
+                {
+                    cts.Cancel();
+                    profile.Device = new ScanProfileDevice(device.ID, device.Name);
+                    foundDevice = true;
+                    break;
+                }
+            }
+            if (!foundDevice)
+            {
+                _errorOutput.DisplayError(SdkResources.DeviceNotFound);
+                return false;
+            }
+        }
+
         return true;
     }
 

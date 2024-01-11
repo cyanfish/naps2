@@ -3,6 +3,11 @@ namespace NAPS2.Util;
 
 public static class AsyncProducers
 {
+    public static async IAsyncEnumerable<T> Empty<T>()
+    {
+        yield break;
+    }
+
     public static IAsyncEnumerable<T> RunProducer<T>(ItemProducer<T> producer) where T : class
     {
         return RunProducer(new AsyncItemProducer<T>(produce =>
