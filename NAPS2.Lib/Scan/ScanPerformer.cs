@@ -2,10 +2,10 @@
 using System.Threading;
 using NAPS2.ImportExport;
 using NAPS2.Ocr;
-using NAPS2.Remoting.Server;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 #if !MAC
+using NAPS2.Scan.Internal.Wia;
 using NAPS2.Wia;
 #endif
 
@@ -310,7 +310,7 @@ internal class ScanPerformer : IScanPerformer
             }
             catch (WiaException ex)
             {
-                throw new ScanDriverUnknownException(ex);
+                WiaScanErrors.ThrowDeviceError(ex);
             }
         }
 #endif
