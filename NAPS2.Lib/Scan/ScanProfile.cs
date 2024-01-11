@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Xml.Serialization;
 using NAPS2.ImportExport;
+using NAPS2.Serialization;
 
 namespace NAPS2.Scan;
 
@@ -29,8 +30,8 @@ public class ScanProfile
 
     public ScanProfile Clone()
     {
-        var profile = (ScanProfile) MemberwiseClone();
-        return profile;
+        // Easy deep copy. Ideally we'd do this in a more efficient way.
+        return this.ToXml().FromXml<ScanProfile>();
     }
 
     public override string ToString() => DisplayName;

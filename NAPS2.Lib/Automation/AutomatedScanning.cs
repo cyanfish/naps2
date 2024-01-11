@@ -708,7 +708,7 @@ internal class AutomatedScanning
         {
             if (_options.NoProfile)
             {
-                profile = new ScanProfile();
+                profile = new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             }
             else if (_options.ProfileName == null)
             {
@@ -722,6 +722,10 @@ internal class AutomatedScanning
                           _profileManager.Profiles.First(x =>
                               x.DisplayName.ToLower() == _options.ProfileName.ToLower());
             }
+            // If we have any profile overrides we do not want to risk persisting changes back to the main profile.
+            // It shouldn't happen anyway as we shouldn't call ProfileManager.Save, but this provides a level of
+            // protection against that.
+            profile = profile.Clone();
         }
         catch (InvalidOperationException)
         {
