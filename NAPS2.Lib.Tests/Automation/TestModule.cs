@@ -32,6 +32,7 @@ internal class TestModule : Module
 
     protected override void Load(ContainerBuilder builder)
     {
+        builder.RegisterInstance(_scanningContext);
         builder.RegisterInstance(_imageContext);
         builder.RegisterInstance(_scanDriverFactory);
         builder.RegisterType<InProcScanBridgeFactory>().As<IScanBridgeFactory>();

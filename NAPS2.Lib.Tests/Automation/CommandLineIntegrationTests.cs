@@ -60,9 +60,12 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
-    public async Task ScanWithOcr()
+    public async Task ScanWithOcrLang()
     {
-        SetUpOcr();
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."}
+        });
         var path = $"{FolderPath}/test.pdf";
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -77,9 +80,63 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ScanWithEnableOcr()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."}
+        });
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.OcrLanguageCode, "eng");
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true,
+                EnableOcr = true
+            },
+            ImageResources.ocr_test);
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithDisableOcr()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."}
+        });
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.OcrLanguageCode, "eng");
+            config.User.Set(c => c.EnableOcr, true);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true,
+                DisableOcr = true
+            },
+            ImageResources.ocr_test);
+        PdfAsserts.AssertDoesNotContainText("ADVERTISEMENT.", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ImportAndExportWithOcr()
     {
-        SetUpOcr();
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(PdfResources.word_p1), "Page one."},
+            { LoadImage(PdfResources.word_p2), "Page two."},
+            { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled"}
+        });
         var importPath = $"{FolderPath}/import.pdf";
         File.WriteAllBytes(importPath, PdfResources.word_patcht_pdf);
         var path = $"{FolderPath}/test.pdf";
