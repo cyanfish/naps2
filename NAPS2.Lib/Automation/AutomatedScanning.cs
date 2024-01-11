@@ -9,6 +9,7 @@ using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Scan.Internal;
 using NAPS2.Serialization;
 
 namespace NAPS2.Automation;
@@ -27,6 +28,7 @@ internal class AutomatedScanning
     private readonly IProfileManager _profileManager;
     private readonly RecoveryStorageManager _recoveryStorageManager;
     private readonly ScanningContext _scanningContext;
+    private readonly IScanBridgeFactory _scanBridgeFactory;
 
     private readonly ConsoleOutput _output;
     private readonly AutomatedScanningOptions _options;
@@ -44,7 +46,8 @@ internal class AutomatedScanning
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
         FileImporter fileImporter, IOperationFactory operationFactory,
         TesseractLanguageManager tesseractLanguageManager, IFormFactory formFactory, Naps2Config config,
-        IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext)
+        IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext,
+        IScanBridgeFactory scanBridgeFactory)
     {
         _output = output;
         _options = options;
@@ -60,6 +63,7 @@ internal class AutomatedScanning
         _profileManager = profileManager;
         _recoveryStorageManager = recoveryStorageManager;
         _scanningContext = scanningContext;
+        _scanBridgeFactory = scanBridgeFactory;
     }
 
     public IEnumerable<ProcessedImage> AllImages => _scanList.SelectMany(x => x);
@@ -113,8 +117,10 @@ internal class AutomatedScanning
                 {
                     return;
                 }
-                SetProfileOverrides(profile);
-
+                if (!await SetProfileOverrides(profile))
+                {
+                    return;
+                }
                 await PerformScan(profile);
             }
 
@@ -736,8 +742,35 @@ internal class AutomatedScanning
         return true;
     }
 
-    private void SetProfileOverrides(ScanProfile profile)
+    private async Task<bool> SetProfileOverrides(ScanProfile profile)
     {
+        var driver = Driver.Default;
+        if (!string.IsNullOrEmpty(_options.Driver))
+        {
+            driver = ScanPerformer.ParseDriver(_options.Driver);
+            profile.DriverName = driver.ToString().ToLowerInvariant();
+        }
+        if (!string.IsNullOrEmpty(_options.Device))
+        {
+            var scanController = new ScanController(_scanningContext, _scanBridgeFactory);
+            var cts = new CancellationTokenSource();
+            bool foundDevice = false;
+            await foreach (var device in scanController.GetDevices(driver, cts.Token))
+            {
+                if (device.Name.ContainsInvariantIgnoreCase(_options.Device!))
+                {
+                    cts.Cancel();
+                    profile.Device = new ScanProfileDevice(device.ID, device.Name);
+                    foundDevice = true;
+                    break;
+                }
+            }
+            if (!foundDevice)
+            {
+                _errorOutput.DisplayError(SdkResources.DeviceNotFound);
+                return false;
+            }
+        }
         if (_options.Source != null)
         {
             profile.PaperSource = _options.Source.Value;
@@ -769,6 +802,7 @@ internal class AutomatedScanning
         {
             profile.RotateDegrees = _options.RotateDegrees.Value;
         }
+        return true;
     }
 
     public void ReceiveScannedImage(ProcessedImage scannedImage)

@@ -13,6 +13,19 @@ namespace NAPS2.Scan;
 
 internal class ScanPerformer : IScanPerformer
 {
+    public static Driver ParseDriver(string? value)
+    {
+        return value switch
+        {
+            DriverNames.WIA => Driver.Wia,
+            DriverNames.SANE => Driver.Sane,
+            DriverNames.TWAIN => Driver.Twain,
+            DriverNames.ESCL => Driver.Escl,
+            DriverNames.APPLE => Driver.Apple,
+            _ => Driver.Default
+        };
+    }
+
     private readonly ScanningContext _scanningContext;
     private readonly IDevicePrompt _devicePrompt;
     private readonly Naps2Config _config;
@@ -178,12 +191,7 @@ internal class ScanPerformer : IScanPerformer
     {
         var options = new ScanOptions
         {
-            Driver = scanProfile.DriverName == DriverNames.WIA ? Driver.Wia
-                : scanProfile.DriverName == DriverNames.SANE ? Driver.Sane
-                : scanProfile.DriverName == DriverNames.TWAIN ? Driver.Twain
-                : scanProfile.DriverName == DriverNames.ESCL ? Driver.Escl
-                : scanProfile.DriverName == DriverNames.APPLE ? Driver.Apple
-                : Driver.Default,
+            Driver = ParseDriver(scanProfile.DriverName),
             WiaOptions =
             {
                 WiaApiVersion = scanProfile.WiaVersion,

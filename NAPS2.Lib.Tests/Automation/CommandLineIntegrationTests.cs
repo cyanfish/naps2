@@ -1,10 +1,14 @@
+using System.Threading;
 using Autofac;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Email;
 using NAPS2.Pdf;
+using NAPS2.Scan;
+using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Mocks;
+using NSubstitute;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -64,7 +68,7 @@ public class CommandLineIntegrationTests : ContextualTests
     {
         SetUpFakeOcr(new()
         {
-            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."}
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
         var path = $"{FolderPath}/test.pdf";
         await _automationHelper.RunCommand(
@@ -84,7 +88,7 @@ public class CommandLineIntegrationTests : ContextualTests
     {
         SetUpFakeOcr(new()
         {
-            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."}
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
         var path = $"{FolderPath}/test.pdf";
         await _automationHelper.WithContainer(container =>
@@ -108,7 +112,7 @@ public class CommandLineIntegrationTests : ContextualTests
     {
         SetUpFakeOcr(new()
         {
-            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT."}
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
         var path = $"{FolderPath}/test.pdf";
         await _automationHelper.WithContainer(container =>
@@ -133,9 +137,9 @@ public class CommandLineIntegrationTests : ContextualTests
     {
         SetUpFakeOcr(new()
         {
-            { LoadImage(PdfResources.word_p1), "Page one."},
-            { LoadImage(PdfResources.word_p2), "Page two."},
-            { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled"}
+            { LoadImage(PdfResources.word_p1), "Page one." },
+            { LoadImage(PdfResources.word_p2), "Page two." },
+            { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled" }
         });
         var importPath = $"{FolderPath}/import.pdf";
         File.WriteAllBytes(importPath, PdfResources.word_patcht_pdf);
@@ -911,6 +915,155 @@ public class CommandLineIntegrationTests : ContextualTests
         emailProviderFactory.VerifyExactlyOneMessageSent();
         PdfAsserts.AssertImages(path, Image1, Image2);
         AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithDefaultProfile()
+    {
+        var (scanDriverMock, scanDriverFactoryMock) = CreateDriverMocks();
+
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = $"{FolderPath}/test.jpg",
+                Verbose = true
+            },
+            scanDriverFactoryMock);
+
+        _ = scanDriverMock.Received().Scan(
+            Arg.Is<ScanOptions>(options =>
+                options.PaperSource == PaperSource.Flatbed &&
+                options.BitDepth == BitDepth.Color &&
+                options.Dpi == 200 &&
+                options.PageSize == PageSize.Letter),
+            Arg.Any<CancellationToken>(),
+            Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>());
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithNonDefaultProfile()
+    {
+        var (scanDriverMock, scanDriverFactoryMock) = CreateDriverMocks();
+
+        await _automationHelper.WithContainer(container =>
+        {
+            var profileManager = container.Resolve<IProfileManager>();
+            profileManager.Mutate(new ListMutation<ScanProfile>.Append(new ScanProfile
+            {
+                DisplayName = "second_profile",
+                Device = new ScanProfileDevice("test_id", "test_name"),
+                PaperSource = ScanSource.Feeder,
+                BitDepth = ScanBitDepth.Grayscale,
+                Resolution = ScanDpi.Dpi300,
+                PageSize = ScanPageSize.A4
+            }), ListSelection.Empty<ScanProfile>());
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                ProfileName = "second_profile",
+                OutputPath = $"{FolderPath}/test.jpg",
+                Verbose = true
+            },
+            scanDriverFactoryMock);
+
+        _ = scanDriverMock.Received().Scan(
+            Arg.Is<ScanOptions>(options =>
+                options.PaperSource == PaperSource.Feeder &&
+                options.BitDepth == BitDepth.Grayscale &&
+                options.Dpi == 300 &&
+                options.PageSize == PageSize.A4),
+            Arg.Any<CancellationToken>(),
+            Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>());
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithNoProfile()
+    {
+        var (scanDriverMock, scanDriverFactoryMock) = CreateDriverMocks();
+
+        await _automationHelper.WithContainer(container =>
+        {
+            var profileManager = container.Resolve<IProfileManager>();
+            var profile = profileManager.Profiles[0];
+            profile.PaperSource = ScanSource.Feeder;
+            profile.BitDepth = ScanBitDepth.Grayscale;
+            profile.Resolution = ScanDpi.Dpi300;
+            profile.PageSize = ScanPageSize.A4;
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                NoProfile = true,
+                Device = "name1",
+                OutputPath = $"{FolderPath}/test.jpg",
+                Verbose = true
+            },
+            scanDriverFactoryMock);
+
+        _ = scanDriverMock.Received().Scan(
+            Arg.Is<ScanOptions>(options =>
+                options.PaperSource == PaperSource.Flatbed &&
+                options.BitDepth == BitDepth.Color &&
+                options.Dpi == 200 &&
+                options.PageSize == PageSize.Letter),
+            Arg.Any<CancellationToken>(),
+            Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>());
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithProfileOverrides()
+    {
+        var (scanDriverMock, scanDriverFactoryMock) = CreateDriverMocks();
+
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                Source = ScanSource.Feeder,
+                BitDepth = ConsoleBitDepth.Gray,
+                Dpi = 300,
+                PageSize = "a4",
+                Driver = "twain",
+                Device = "name1",
+                OutputPath = $"{FolderPath}/test.jpg",
+                Verbose = true
+            },
+            scanDriverFactoryMock);
+
+        _ = scanDriverMock.Received().Scan(
+            Arg.Is<ScanOptions>(options =>
+                options.PaperSource == PaperSource.Feeder &&
+                options.BitDepth == BitDepth.Grayscale &&
+                options.Dpi == 300 &&
+                options.PageSize == PageSize.A4 &&
+                options.Driver == Driver.Twain &&
+                options.Device.Name == "test_name1"),
+            Arg.Any<CancellationToken>(),
+            Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>());
+        AssertRecoveryCleanedUp();
+    }
+
+    private static (IScanDriver, IScanDriverFactory) CreateDriverMocks()
+    {
+        var scanDriverMock = Substitute.For<IScanDriver>();
+        var scanDriverFactoryMock = Substitute.For<IScanDriverFactory>();
+        scanDriverFactoryMock.Create(Arg.Any<ScanOptions>()).Returns(scanDriverMock);
+        scanDriverMock.GetDevices(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<Action<ScanDevice>>())
+            .Returns(x =>
+            {
+                var callback = (Action<ScanDevice>) x[2];
+                callback(new ScanDevice(Driver.Wia, "test_id1", "test_name1"));
+                callback(new ScanDevice(Driver.Wia, "test_id2", "test_name2"));
+                return Task.CompletedTask;
+            });
+        scanDriverMock.Scan(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>()).Returns(Task.CompletedTask);
+        return (scanDriverMock, scanDriverFactoryMock);
     }
 
     private void AssertRecoveryCleanedUp()

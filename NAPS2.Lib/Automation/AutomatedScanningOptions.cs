@@ -60,6 +60,12 @@ public class AutomatedScanningOptions
     [Option("noprofile", HelpText = "Use default profile settings instead of a GUI profile.")]
     public bool NoProfile { get; set; }
 
+    [Option("driver", HelpText = "Scanning driver (wia/twain/escl/sane/apple).")]
+    public string? Driver { get; set; }
+
+    [Option("device", HelpText = "Scanning device name (can be inexact).")]
+    public string? Device { get; set; }
+
     #endregion
 
     #region Scan Options
