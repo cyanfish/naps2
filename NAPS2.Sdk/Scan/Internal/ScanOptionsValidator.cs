@@ -1,4 +1,5 @@
-﻿using NAPS2.Serialization;
+﻿using NAPS2.Scan.Exceptions;
+using NAPS2.Serialization;
 
 namespace NAPS2.Scan.Internal;
 
@@ -72,10 +73,22 @@ internal class ScanOptionsValidator
         return options;
     }
 
-    public Driver ValidateDriver(Driver driver) =>
-        driver == Driver.Default
-            ? SystemDefaultDriver
-            : driver;
+    public Driver ValidateDriver(Driver driver)
+    {
+        if (driver == Driver.Default)
+        {
+            return SystemDefaultDriver;
+        }
+        if (driver == Driver.Wia && !PlatformCompat.System.IsWiaDriverSupported ||
+            driver == Driver.Twain && !PlatformCompat.System.IsTwainDriverSupported ||
+            driver == Driver.Escl && !PlatformCompat.System.IsEsclDriverSupported ||
+            driver == Driver.Sane && !PlatformCompat.System.IsSaneDriverSupported ||
+            driver == Driver.Apple && !PlatformCompat.System.IsAppleDriverSupported)
+        {
+            throw new DriverNotSupportedException($"The \"{driver}\" driver is not supported on this platform.");
+        }
+        return driver;
+    }
 
     public static Driver SystemDefaultDriver
     {
