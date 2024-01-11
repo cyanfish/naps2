@@ -162,7 +162,10 @@ internal class AutomatedScanning
         {
             _config.Run.Set(c => c.EnableOcr, true);
         }
-        _config.Run.Set(c => c.OcrLanguageCode, _options.OcrLang);
+        if (!string.IsNullOrEmpty(_options.OcrLang))
+        {
+            _config.Run.Set(c => c.OcrLanguageCode, _options.OcrLang);
+        }
         _ocrParams = _config.DefaultOcrParams();
     }
 

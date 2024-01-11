@@ -77,6 +77,25 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ImportAndExportWithOcr()
+    {
+        SetUpOcr();
+        var importPath = $"{FolderPath}/import.pdf";
+        File.WriteAllBytes(importPath, PdfResources.word_patcht_pdf);
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                ImportPath = importPath,
+                OutputPath = path,
+                Verbose = true,
+                OcrLang = "eng"
+            });
+        PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ScanPdfSettings_DefaultMetadata()
     {
         var path = $"{FolderPath}/test.pdf";
