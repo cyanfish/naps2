@@ -555,6 +555,46 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task Rotate90()
+    {
+        // Test both import and scanning paths
+        var importPath = $"{FolderPath}/import.png";
+        File.WriteAllBytes(importPath, ImageResources.dog_png);
+        var outputPath = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                ImportPath = importPath,
+                RotateDegrees = 90,
+                OutputPath = outputPath,
+                Verbose = true
+            },
+            Image1);
+        PdfAsserts.AssertImages(outputPath, ImageResources.dog_r_p90, ImageResources.dog_r_p90);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task Deskew()
+    {
+        // Test both import and scanning paths
+        var importPath = $"{FolderPath}/import.png";
+        File.WriteAllBytes(importPath, ImageResources.skewed);
+        var outputPath = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                ImportPath = importPath,
+                Deskew = true,
+                OutputPath = outputPath,
+                Verbose = true
+            },
+            ImageResources.skewed);
+        PdfAsserts.AssertImages(outputPath, ImageResources.deskewed, ImageResources.deskewed);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task IgnoreSinglePagePdfSetting()
     {
         var path = $"{FolderPath}/test.pdf";

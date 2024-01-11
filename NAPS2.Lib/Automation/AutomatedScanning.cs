@@ -292,7 +292,7 @@ internal class AutomatedScanning
                 };
                 await foreach (var image in _fileImporter.Import(actualPath, importParams))
                 {
-                    scan.Add(image);
+                    scan.Add(PostProcessImportedImage(image));
                 }
                 _scanList.Add(scan);
             }
@@ -310,6 +310,22 @@ internal class AutomatedScanning
             }
             OutputVerbose(ConsoleResources.ImportedFile, i, filePaths.Length);
         }
+    }
+
+    private ProcessedImage PostProcessImportedImage(ProcessedImage image)
+    {
+        // We separate post-processing for scanned images (as part of the scanning pipeline) and imported images (here).
+        // The reason is that post-processing affects OCR, which runs as part of the scanning pipeline.
+        if (_options.RotateDegrees != null)
+        {
+            image = image.WithTransform(new RotationTransform(_options.RotateDegrees.Value), true);
+        }
+        if (_options.Deskew)
+        {
+            using var rendered = image.Render();
+            image = image.WithTransform(Deskewer.GetDeskewTransform(rendered), true);
+        }
+        return image;
     }
 
     private async Task EmailScannedImages()
@@ -744,6 +760,10 @@ internal class AutomatedScanning
         if (_options.Deskew)
         {
             profile.AutoDeskew = true;
+        }
+        if (_options.RotateDegrees != null)
+        {
+            profile.RotateDegrees = _options.RotateDegrees.Value;
         }
     }
 

@@ -152,6 +152,11 @@ internal class RemotePostProcessor : IRemotePostProcessor
             processedImage = processedImage.WithTransform(new RotationTransform(180), true);
         }
 
+        if (options.RotateDegrees != 0)
+        {
+            processedImage = processedImage.WithTransform(new RotationTransform(options.RotateDegrees), true);
+        }
+
         if (options.AutoDeskew)
         {
             processedImage = processedImage.WithTransform(Deskewer.GetDeskewTransform(image), true);

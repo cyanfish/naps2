@@ -220,6 +220,7 @@ internal class ScanPerformer : IScanPerformer
             Dpi = scanProfile.Resolution.ToIntDpi(),
             Quality = scanProfile.Quality,
             AutoDeskew = scanProfile.AutoDeskew,
+            RotateDegrees = scanProfile.RotateDegrees,
             BitDepth = scanProfile.BitDepth.ToBitDepth(),
             DialogParent = dialogParent,
             MaxQuality = scanProfile.MaxQuality,

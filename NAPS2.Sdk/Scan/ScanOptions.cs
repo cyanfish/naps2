@@ -131,6 +131,12 @@ public class ScanOptions
     public bool AutoDeskew { get; set; }
 
     /// <summary>
+    /// A fixed number of degrees to rotate each scanned page clockwise. If AutoDeskew is true, the fixed rotation
+    /// happens first.
+    /// </summary>
+    public double RotateDegrees { get; set; }
+
+    /// <summary>
     /// Compatibility option to correct problems with some scanners. If this is true and the PaperSource is Duplex,
     /// even-numbered pages are flipped vertically.
     /// </summary>

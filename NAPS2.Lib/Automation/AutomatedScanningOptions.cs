@@ -84,6 +84,9 @@ public class AutomatedScanningOptions
     [Option("deskew", HelpText = "Automatically deskew scanned pages.")]
     public bool Deskew { get; set; }
 
+    [Option("rotate", HelpText = "Rotates pages clockwise by the specified number of degrees.")]
+    public double? RotateDegrees { get; set; }
+
     #endregion
 
     #region Order Options
