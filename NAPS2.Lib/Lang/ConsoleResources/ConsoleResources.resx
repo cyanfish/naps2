@@ -251,4 +251,10 @@ Use the "--importpassword" option.</value>
   <data name="Installing" xml:space="preserve">
     <value>Installing {0}...</value>
   </data>
+  <data name="CouldntParsePageSize" xml:space="preserve">
+    <value>The page size could not be parsed.</value>
+  </data>
+  <data name="InvalidDpi" xml:space="preserve">
+    <value>The DPI option was not valid (must be 100/150/200/300/400/600/800/1200/2400/4800).</value>
+  </data>
 </root>

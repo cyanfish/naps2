@@ -16,7 +16,11 @@ public static class ConsoleEntryPoint
     public static int Run(string[] args, Module imageModule)
     {
         // Parse the command-line arguments (and display help text if appropriate)
-        var options = Parser.Default.ParseArguments<AutomatedScanningOptions>(args).Value;
+        var options = new Parser(settings =>
+        {
+            settings.HelpWriter = Console.Error;
+            settings.CaseInsensitiveEnumValues = true;
+        }).ParseArguments<AutomatedScanningOptions>(args).Value;
         if (options == null)
         {
             return 0;

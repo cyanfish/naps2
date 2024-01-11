@@ -37,6 +37,8 @@ internal class AutomatedScanning
     private Placeholders _placeholders = null!;
     private List<string> _actualOutputPaths = null!;
     private OcrParams _ocrParams = null!;
+    private PageDimensions? _pageDimensions;
+    private ScanDpi? _scanDpi;
 
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
@@ -111,6 +113,7 @@ internal class AutomatedScanning
                 {
                     return;
                 }
+                SetProfileOverrides(profile);
 
                 await PerformScan(profile);
             }
@@ -425,6 +428,45 @@ internal class AutomatedScanning
             return false;
         }
 
+        if (_options.PageSize != null)
+        {
+            var pageSize = PageSize.Parse(_options.PageSize);
+            if (pageSize == null)
+            {
+                _errorOutput.DisplayError(ConsoleResources.CouldntParsePageSize);
+                return false;
+            }
+            _pageDimensions = new PageDimensions
+            {
+                Width = pageSize.Width,
+                Height = pageSize.Height,
+                Unit = (LocalizedPageSizeUnit) pageSize.Unit
+            };
+        }
+
+        if (_options.Dpi is > 0)
+        {
+            _scanDpi = _options.Dpi switch
+            {
+                100 => ScanDpi.Dpi100,
+                150 => ScanDpi.Dpi150,
+                200 => ScanDpi.Dpi200,
+                300 => ScanDpi.Dpi300,
+                400 => ScanDpi.Dpi400,
+                600 => ScanDpi.Dpi600,
+                800 => ScanDpi.Dpi800,
+                1200 => ScanDpi.Dpi1200,
+                2400 => ScanDpi.Dpi2400,
+                4800 => ScanDpi.Dpi4800,
+                _ => null
+            };
+            if (_scanDpi == null)
+            {
+                _errorOutput.DisplayError(ConsoleResources.InvalidDpi);
+                return false;
+            }
+        }
+
         if (new[] { _options.Interleave, _options.Deinterleave, _options.AltInterleave, _options.AltDeinterleave }
                 .Count(x => x) > 1)
         {
@@ -648,7 +690,11 @@ internal class AutomatedScanning
     {
         try
         {
-            if (_options.ProfileName == null)
+            if (_options.NoProfile)
+            {
+                profile = new ScanProfile();
+            }
+            else if (_options.ProfileName == null)
             {
                 // If no profile is specified, use the default (if there is one)
                 profile = _profileManager.Profiles.Single(x => x.IsDefault);
@@ -668,6 +714,37 @@ internal class AutomatedScanning
             return false;
         }
         return true;
+    }
+
+    private void SetProfileOverrides(ScanProfile profile)
+    {
+        if (_options.Source != null)
+        {
+            profile.PaperSource = _options.Source.Value;
+        }
+        if (_pageDimensions != null)
+        {
+            profile.PageSize = ScanPageSize.Custom;
+            profile.CustomPageSize = _pageDimensions;
+        }
+        if (_scanDpi != null)
+        {
+            profile.Resolution = _scanDpi.Value;
+        }
+        if (_options.BitDepth != null)
+        {
+            profile.BitDepth = _options.BitDepth switch
+            {
+                ConsoleBitDepth.Color => ScanBitDepth.C24Bit,
+                ConsoleBitDepth.Gray => ScanBitDepth.Grayscale,
+                ConsoleBitDepth.Bw => ScanBitDepth.BlackWhite,
+                _ => ScanBitDepth.C24Bit
+            };
+        }
+        if (_options.Deskew)
+        {
+            profile.AutoDeskew = true;
+        }
     }
 
     public void ReceiveScannedImage(ProcessedImage scannedImage)
