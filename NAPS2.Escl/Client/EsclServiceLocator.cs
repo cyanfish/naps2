@@ -30,9 +30,9 @@ public class EsclServiceLocator : IDisposable
                     service.ScannerName, args.ServiceInstanceName, args.RemoteEndPoint, service.IpV4, service.IpV6, service.Host, service.Port, service.Uuid);
                 serviceCallback(service);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // TODO: Log?
+                Logger.LogError(ex, "Error parsing ESCL service");
             }
         };
     }
