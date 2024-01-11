@@ -25,6 +25,26 @@ public class PageSizeTests
     }
 
     [Fact]
+    public void ParseWellKnownLetter()
+    {
+        var pageSize = PageSize.Parse("Letter");
+        Assert.NotNull(pageSize);
+        Assert.Equal(8.5m, pageSize.Width);
+        Assert.Equal(11m, pageSize.Height);
+        Assert.Equal(PageSizeUnit.Inch, pageSize.Unit);
+    }
+
+    [Fact]
+    public void ParseWellKnownA4()
+    {
+        var pageSize = PageSize.Parse("a4");
+        Assert.NotNull(pageSize);
+        Assert.Equal(210m, pageSize.Width);
+        Assert.Equal(297m, pageSize.Height);
+        Assert.Equal(PageSizeUnit.Millimetre, pageSize.Unit);
+    }
+
+    [Fact]
     public void ParseCentimetres()
     {
         var pageSize = PageSize.Parse("21x29.7 cm");

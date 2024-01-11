@@ -25,6 +25,23 @@ public record PageSize
     {
         if (size == null)
             return null;
+
+        var wellKnownSize = size.ToLowerInvariant() switch
+        {
+            "letter" => Letter,
+            "legal" => Legal,
+            "a5" => A5,
+            "a4" => A4,
+            "a3" => A3,
+            "b5" => B5,
+            "b4" => B4,
+            _ => null
+        };
+        if (wellKnownSize != null)
+        {
+            return wellKnownSize;
+        }
+
         var parts = size.Split(' ');
         if (parts.Length == 1 && size.Length > 2)
         {
