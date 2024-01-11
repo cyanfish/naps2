@@ -26,6 +26,11 @@ public record PageSize
         if (size == null)
             return null;
         var parts = size.Split(' ');
+        if (parts.Length == 1 && size.Length > 2)
+        {
+            // If there's no space separating the unit, assume the last 2 characters are the unit
+            parts = [size.Substring(0, size.Length - 2), size.Substring(size.Length - 2, 2)];
+        }
         if (parts.Length != 2)
             return null;
         var dims = parts[0].Split('x');

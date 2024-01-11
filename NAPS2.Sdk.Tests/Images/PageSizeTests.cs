@@ -15,6 +15,16 @@ public class PageSizeTests
     }
 
     [Fact]
+    public void ParseInchesNoSpace()
+    {
+        var pageSize = PageSize.Parse("8.5x11in");
+        Assert.NotNull(pageSize);
+        Assert.Equal(8.5m, pageSize.Width);
+        Assert.Equal(11m, pageSize.Height);
+        Assert.Equal(PageSizeUnit.Inch, pageSize.Unit);
+    }
+
+    [Fact]
     public void ParseCentimetres()
     {
         var pageSize = PageSize.Parse("21x29.7 cm");
