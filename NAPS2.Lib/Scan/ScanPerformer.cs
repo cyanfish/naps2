@@ -56,8 +56,16 @@ internal class ScanPerformer : IScanPerformer
 
     public async Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
     {
-        var options = BuildOptions(scanProfile, new ScanParams(), dialogParent);
-        return await PromptForDevice(options);
+        try
+        {
+            var options = BuildOptions(scanProfile, new ScanParams(), dialogParent);
+            return await PromptForDevice(options);
+        }
+        catch (Exception error)
+        {
+            HandleError(error);
+            return null;
+        }
     }
 
     public async IAsyncEnumerable<ProcessedImage> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
