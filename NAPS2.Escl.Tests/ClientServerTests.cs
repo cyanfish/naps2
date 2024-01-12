@@ -30,7 +30,7 @@ public class ClientServerTests
         {
             IpV4 = IPAddress.Loopback,
             IpV6 = IPAddress.IPv6Loopback,
-            Host = IPAddress.IPv6Loopback.ToString(),
+            Host = $"[{IPAddress.IPv6Loopback}]",
             RemoteEndpoint = IPAddress.IPv6Loopback,
             Port = deviceConfig.Port,
             RootUrl = "eSCL",

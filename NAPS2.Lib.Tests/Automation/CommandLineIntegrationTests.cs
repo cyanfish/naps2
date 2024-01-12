@@ -1074,7 +1074,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 BitDepth = ConsoleBitDepth.Gray,
                 Dpi = 300,
                 PageSize = "a4",
-                Driver = "twain",
+                Driver = "escl",
                 Device = "name1",
                 OutputPath = $"{FolderPath}/test.jpg",
                 Verbose = true
@@ -1087,7 +1087,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 options.BitDepth == BitDepth.Grayscale &&
                 options.Dpi == 300 &&
                 options.PageSize == PageSize.A4 &&
-                options.Driver == Driver.Twain &&
+                options.Driver == Driver.Escl &&
                 options.Device.Name == "test_name1"),
             Arg.Any<CancellationToken>(),
             Arg.Any<IScanEvents>(),
@@ -1100,7 +1100,7 @@ public class CommandLineIntegrationTests : ContextualTests
     {
         var (_, scanDriverFactoryMock) = CreateDriverMocks();
 
-        var outputWriter = new StringWriter();
+        var outputWriter = new StringWriter { NewLine = "\n" };
         await _automationHelper.WithContainerBuilder(container =>
         {
             container.RegisterInstance(new ConsoleOutput(outputWriter));
@@ -1110,7 +1110,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 ListDevices = true
             }, scanDriverFactoryMock);
 
-        Assert.Equal("test_name1\r\ntest_name2\r\n", outputWriter.ToString());
+        Assert.Equal("test_name1\ntest_name2\n", outputWriter.ToString());
         AssertRecoveryCleanedUp();
     }
 
