@@ -164,6 +164,11 @@ internal class AutomatedScanning
 
     private void ConfigureOcr()
     {
+        if (_options.NoProfile)
+        {
+            // Don't use OCR-enabled settings from the GUI if --noprofile is set
+            _config.Run.Set(c => c.EnableOcr, false);
+        }
         bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName);
         if (!canUseOcr)
         {

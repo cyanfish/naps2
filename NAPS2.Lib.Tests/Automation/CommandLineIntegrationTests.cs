@@ -64,6 +64,25 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ScanWithNoOcr()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
+        });
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            },
+            ImageResources.ocr_test);
+        PdfAsserts.AssertDoesNotContainText("ADVERTISEMENT.", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ScanWithOcrLang()
     {
         SetUpFakeOcr(new()
@@ -129,6 +148,30 @@ public class CommandLineIntegrationTests : ContextualTests
             },
             ImageResources.ocr_test);
         PdfAsserts.AssertDoesNotContainText("ADVERTISEMENT.", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithOcrSettingsFromGui()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
+        });
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.OcrLanguageCode, "eng");
+            config.User.Set(c => c.EnableOcr, true);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            },
+            ImageResources.ocr_test);
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
         AssertRecoveryCleanedUp();
     }
 
@@ -993,12 +1036,15 @@ public class CommandLineIntegrationTests : ContextualTests
             profile.BitDepth = ScanBitDepth.Grayscale;
             profile.Resolution = ScanDpi.Dpi300;
             profile.PageSize = ScanPageSize.A4;
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.EnableOcr, true);
+            config.User.Set(c => c.OcrLanguageCode, "eng");
         }).RunCommand(
             new AutomatedScanningOptions
             {
                 NoProfile = true,
                 Device = "name1",
-                OutputPath = $"{FolderPath}/test.jpg",
+                OutputPath = $"{FolderPath}/test.pdf",
                 Verbose = true
             },
             scanDriverFactoryMock);
@@ -1008,7 +1054,8 @@ public class CommandLineIntegrationTests : ContextualTests
                 options.PaperSource == PaperSource.Flatbed &&
                 options.BitDepth == BitDepth.Color &&
                 options.Dpi == 200 &&
-                options.PageSize == PageSize.Letter),
+                options.PageSize == PageSize.Letter &&
+                options.OcrParams.LanguageCode == null),
             Arg.Any<CancellationToken>(),
             Arg.Any<IScanEvents>(),
             Arg.Any<Action<IMemoryImage>>());
