@@ -746,17 +746,18 @@ internal class AutomatedScanning
             {
                 profile = new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             }
-            else if (_options.ProfileName == null)
-            {
-                // If no profile is specified, use the default (if there is one)
-                profile = _profileManager.Profiles.Single(x => x.IsDefault);
-            }
-            else
+            else if (_options.ProfileName != null)
             {
                 // Use the profile with the specified name (try case-sensitive first, then case-insensitive)
                 profile = _profileManager.Profiles.FirstOrDefault(x => x.DisplayName == _options.ProfileName) ??
                           _profileManager.Profiles.First(x =>
                               x.DisplayName.ToLower() == _options.ProfileName.ToLower());
+            }
+            else
+            {
+                // If no profile is specified, use the default (if there is one)
+                profile = _profileManager.Profiles.FirstOrDefault(x => x.IsDefault) ??
+                          new ScanProfile { Version = ScanProfile.CURRENT_VERSION };
             }
             // If we have any profile overrides we do not want to risk persisting changes back to the main profile.
             // It shouldn't happen anyway as we shouldn't call ProfileManager.Save, but this provides a level of
