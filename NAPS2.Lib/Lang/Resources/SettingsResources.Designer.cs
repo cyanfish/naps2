@@ -350,5 +350,29 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("OcrMode_Best", resourceCulture);
             }
         }
+        
+        internal static string SaveButtonDefaultAction_SaveAll {
+            get {
+                return ResourceManager.GetString("SaveButtonDefaultAction_SaveAll", resourceCulture);
+            }
+        }
+        
+        internal static string SaveButtonDefaultAction_SaveSelected {
+            get {
+                return ResourceManager.GetString("SaveButtonDefaultAction_SaveSelected", resourceCulture);
+            }
+        }
+        
+        internal static string SaveButtonDefaultAction_AlwaysPrompt {
+            get {
+                return ResourceManager.GetString("SaveButtonDefaultAction_AlwaysPrompt", resourceCulture);
+            }
+        }
+        
+        internal static string SaveButtonDefaultAction_PromptIfSelected {
+            get {
+                return ResourceManager.GetString("SaveButtonDefaultAction_PromptIfSelected", resourceCulture);
+            }
+        }
     }
 }

@@ -40,6 +40,12 @@ public class CommonConfig
     public MessageBoxIcon StartupMessageIcon { get; set; }
 
     [Common]
+    public bool ScanMenuChangesDefaultProfile { get; set; }
+
+    [Common]
+    public bool ShowProfilesToolbar { get; set; }
+
+    [Common]
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
     [Common]

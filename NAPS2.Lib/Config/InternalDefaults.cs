@@ -23,6 +23,7 @@ public static class InternalDefaults
             StartupMessageTitle = "",
             StartupMessageText = "",
             StartupMessageIcon = MessageBoxIcon.None,
+            ScanMenuChangesDefaultProfile = true,
             SaveButtonDefaultAction = SaveButtonDefaultAction.SaveAll,
             HiddenButtons = ToolbarButtons.None,
             DisableAutoSave = false,

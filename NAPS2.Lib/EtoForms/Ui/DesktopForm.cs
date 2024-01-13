@@ -314,8 +314,25 @@ public abstract class DesktopForm : EtoFormBase
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.Language))
             CreateToolbarMenu(Commands.LanguageMenu, GetLanguageMenuProvider());
-        if (!hiddenButtons.HasFlag(ToolbarButtons.About))
-            CreateToolbarButton(Commands.About);
+        MaybeCreateToolbarStackedButtons(
+            Commands.Settings, !hiddenButtons.HasFlag(ToolbarButtons.Settings),
+            Commands.About, !hiddenButtons.HasFlag(ToolbarButtons.About));
+    }
+
+    private void MaybeCreateToolbarStackedButtons(Command command1, bool show1, Command command2, bool show2)
+    {
+        if (show1 && show2)
+        {
+            CreateToolbarStackedButtons(command1, command2);
+        }
+        else if (show1)
+        {
+            CreateToolbarButton(command1);
+        }
+        else if (show2)
+        {
+            CreateToolbarButton(command2);
+        }
     }
 
     public virtual void ShowToolbarMenu(DesktopToolbarMenuType menuType)

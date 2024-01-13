@@ -101,13 +101,13 @@ public class DesktopSubFormController : IDesktopSubFormController
         _formFactory.Create<EmailSettingsForm>().ShowModal();
     }
 
+    public void ShowSettingsForm()
+    {
+        _formFactory.Create<SettingsForm>().ShowModal();
+    }
+
     public void ShowAboutForm()
     {
         _formFactory.Create<AboutForm>().ShowModal();
-    }
-
-    public void ShowSettingsForm()
-    {
-        // FormFactory.Create<FSettings>().ShowDialog();
     }
 }

@@ -58,6 +58,7 @@ public class MacDesktopForm : DesktopForm
             AboutItem = Commands.About,
             ApplicationItems =
             {
+                Commands.Settings,
                 CreateSubMenu(Commands.LanguageMenu, GetLanguageMenuProvider())
             },
             Items =
