@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Linq.Expressions;
 using System.Text;
 using System.Xml;
 using NAPS2.Config.Model;
@@ -37,15 +38,18 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
             if (_mode == ConfigReadMode.DefaultOnly)
             {
                 var oldAppConfig = new XmlSerializer<AppConfigV0>().Deserialize(stream);
-                return AppConfigV0ToCommonConfigDefault(oldAppConfig ?? throw new InvalidOperationException("Couldn't parse app config"));
+                return AppConfigV0ToCommonConfigDefault(
+                    oldAppConfig ?? throw new InvalidOperationException("Couldn't parse app config"));
             }
             if (_mode == ConfigReadMode.LockedOnly)
             {
                 var oldAppConfig = new XmlSerializer<AppConfigV0>().Deserialize(stream);
-                return AppConfigV0ToCommonConfigLocked(oldAppConfig ?? throw new InvalidOperationException("Couldn't parse app config"));
+                return AppConfigV0ToCommonConfigLocked(
+                    oldAppConfig ?? throw new InvalidOperationException("Couldn't parse app config"), doc);
             }
             var oldUserConfig = new XmlSerializer<UserConfigV0>().Deserialize(stream);
-            return UserConfigV0ToCommonConfig(oldUserConfig ?? throw new InvalidOperationException("Couldn't parse user config"));
+            return UserConfigV0ToCommonConfig(oldUserConfig ??
+                                              throw new InvalidOperationException("Couldn't parse user config"));
         }
         if (_mode == ConfigReadMode.DefaultOnly)
         {
@@ -79,7 +83,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
             {
                 FilterProperties(child, target, childMode);
             }
-            else if(childMode != target)
+            else if (childMode != target)
             {
                 child.Remove();
             }
@@ -117,7 +121,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         return storage;
     }
 
-    private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigLocked(AppConfigV0 c)
+    private ConfigStorage<CommonConfig> AppConfigV0ToCommonConfigLocked(AppConfigV0 c, XDocument doc)
     {
         var storage = new ConfigStorage<CommonConfig>();
         if (c.OcrState == OcrState.Enabled)
@@ -140,6 +144,21 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         {
             storage.Set(x => x.DisableScannerSharing, true);
         }
+
+        void SetIfLocked<T>(Expression<Func<CommonConfig, T>> accessor, T value, string name)
+        {
+            var element = doc.Root!.Element(name);
+            bool isLocked = element?.Attribute("mode")?.Value == "lock";
+            if (isLocked)
+            {
+                storage.Set(accessor, value);
+            }
+        }
+        SetIfLocked(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction, nameof(c.ScanButtonDefaultAction));
+        SetIfLocked(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction, nameof(c.SaveButtonDefaultAction));
+        SetIfLocked(x => x.DeleteAfterSaving, c.DeleteAfterSaving, nameof(c.DeleteAfterSaving));
+        SetIfLocked(x => x.SingleInstance, c.SingleInstance, nameof(c.SingleInstance));
+
         return storage;
     }
 

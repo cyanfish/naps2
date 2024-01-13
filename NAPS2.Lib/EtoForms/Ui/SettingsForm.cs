@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
@@ -97,13 +98,21 @@ internal class SettingsForm : EtoDialogBase
 
     private void UpdateValues(Naps2Config config)
     {
-        _scanChangesDefaultProfile.Checked = config.Get(c => c.ScanMenuChangesDefaultProfile);
-        _showProfilesToolbar.Checked = config.Get(c => c.ShowProfilesToolbar);
-        _showPageNumbers.Checked = config.Get(c => c.ShowPageNumbers);
+        void UpdateCheckbox(CheckBox checkBox, Expression<Func<CommonConfig, bool>> accessor)
+        {
+            checkBox.Checked = config.Get(accessor);
+            checkBox.Enabled = !config.AppLocked.Has(accessor);
+        }
+
+        UpdateCheckbox(_scanChangesDefaultProfile, c => c.ScanMenuChangesDefaultProfile);
+        UpdateCheckbox(_showProfilesToolbar, c => c.ShowProfilesToolbar);
+        UpdateCheckbox(_showPageNumbers, c => c.ShowPageNumbers);
         _scanButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.ScanButtonDefaultAction);
+        _scanButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.ScanButtonDefaultAction);
         _saveButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.SaveButtonDefaultAction);
-        _clearAfterSaving.Checked = config.Get(c => c.DeleteAfterSaving);
-        _singleInstance.Checked = config.Get(c => c.SingleInstance);
+        _saveButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.SaveButtonDefaultAction);
+        UpdateCheckbox(_clearAfterSaving, c => c.DeleteAfterSaving);
+        UpdateCheckbox(_singleInstance, c => c.SingleInstance);
     }
 
     private void Save()
