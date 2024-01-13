@@ -11,6 +11,7 @@ internal class SettingsForm : EtoDialogBase
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
     private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
+    private readonly DropDown _scanButtonDefaultAction = C.EnumDropDown<ScanButtonDefaultAction>();
     private readonly DropDown _saveButtonDefaultAction = C.EnumDropDown<SaveButtonDefaultAction>();
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);
@@ -62,9 +63,13 @@ internal class SettingsForm : EtoDialogBase
                     _showProfilesToolbar,
                     _scanChangesDefaultProfile,
                     L.Row(
+                        C.Label(UiStrings.ScanButtonDefaultAction).AlignCenter().Padding(right: 20),
+                        _scanButtonDefaultAction
+                    ).Aligned(),
+                    L.Row(
                         C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
                         _saveButtonDefaultAction
-                    ),
+                    ).Aligned(),
                     _clearAfterSaving
                 )
             ),
@@ -95,6 +100,7 @@ internal class SettingsForm : EtoDialogBase
         _scanChangesDefaultProfile.Checked = config.Get(c => c.ScanMenuChangesDefaultProfile);
         _showProfilesToolbar.Checked = config.Get(c => c.ShowProfilesToolbar);
         _showPageNumbers.Checked = config.Get(c => c.ShowPageNumbers);
+        _scanButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.ScanButtonDefaultAction);
         _saveButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.SaveButtonDefaultAction);
         _clearAfterSaving.Checked = config.Get(c => c.DeleteAfterSaving);
         _singleInstance.Checked = config.Get(c => c.SingleInstance);
@@ -107,6 +113,7 @@ internal class SettingsForm : EtoDialogBase
         transact.Set(c => c.ScanMenuChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
         transact.Set(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
         transact.Set(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
+        transact.Set(c => c.ScanButtonDefaultAction, (ScanButtonDefaultAction) _scanButtonDefaultAction.SelectedIndex);
         transact.Set(c => c.SaveButtonDefaultAction, (SaveButtonDefaultAction) _saveButtonDefaultAction.SelectedIndex);
         transact.Set(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
         transact.Set(c => c.SingleInstance, _singleInstance.IsChecked());

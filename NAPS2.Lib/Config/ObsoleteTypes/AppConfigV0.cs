@@ -20,6 +20,8 @@ public class AppConfigV0
 
     public ScanProfile? DefaultProfileSettings { get; set; }
 
+    public ScanButtonDefaultAction ScanButtonDefaultAction { get; set; }
+
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
     public bool HideOcrButton { get; set; }

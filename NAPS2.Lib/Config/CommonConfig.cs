@@ -46,6 +46,9 @@ public class CommonConfig
     public bool ShowProfilesToolbar { get; set; }
 
     [Common]
+    public ScanButtonDefaultAction ScanButtonDefaultAction { get; set; }
+
+    [Common]
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
     [Common]

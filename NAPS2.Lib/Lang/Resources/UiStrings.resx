@@ -300,6 +300,9 @@
   <data name="ShowPageNumbers" xml:space="preserve">
     <value>Show page numbers</value>
   </data>
+  <data name="ScanButtonDefaultAction" xml:space="preserve">
+    <value>"Scan" button default action:</value>
+  </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
     <value>"Save" button default action:</value>
   </data>

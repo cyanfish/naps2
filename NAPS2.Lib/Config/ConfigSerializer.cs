@@ -95,6 +95,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.StartupMessageText, c.StartupMessageText);
         storage.Set(x => x.StartupMessageIcon, c.StartupMessageIcon);
         storage.Set(x => x.DefaultProfileSettings, c.DefaultProfileSettings);
+        storage.Set(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction);
         storage.Set(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction);
         storage.Set(x => x.HiddenButtons, GetHiddenButtonFlags(c));
         storage.Set(x => x.DisableAutoSave, c.DisableAutoSave);

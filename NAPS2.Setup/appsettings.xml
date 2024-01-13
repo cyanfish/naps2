@@ -5,6 +5,7 @@
   <StartupMessageTitle></StartupMessageTitle>
   <StartupMessageText></StartupMessageText>
   <StartupMessageIcon>Information</StartupMessageIcon>
+  <ScanButtonDefaultAction>ScanWithDefaultProfile</ScanButtonDefaultAction>
   <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
   <HideOcrButton>false</HideOcrButton>
   <HideImportButton>false</HideImportButton>

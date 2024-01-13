@@ -101,7 +101,13 @@ public class DesktopScanController : IDesktopScanController
 
     public async Task ScanDefault()
     {
-        if (_profileManager.DefaultProfile != null)
+        var action = _config.Get(c => c.ScanButtonDefaultAction);
+
+        if (action == ScanButtonDefaultAction.AlwaysPrompt)
+        {
+            _desktopFormProvider.DesktopForm.ShowToolbarMenu(DesktopToolbarMenuType.Scan);
+        }
+        else if (_profileManager.DefaultProfile != null)
         {
             await DoScan(_profileManager.DefaultProfile);
         }
