@@ -20,9 +20,19 @@ public class AppConfigV0
 
     public ScanProfile? DefaultProfileSettings { get; set; }
 
+    public bool ShowPageNumbers { get; set; }
+
+    public bool ShowProfilesToolbar { get; set; }
+
+    public bool ScanChangesDefaultProfile { get; set; }
+
     public ScanButtonDefaultAction ScanButtonDefaultAction { get; set; }
 
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
+
+    public bool DeleteAfterSaving { get; set; }
+
+    public bool SingleInstance { get; set; }
 
     public bool HideOcrButton { get; set; }
 
@@ -56,11 +66,7 @@ public class AppConfigV0
 
     public bool NoScannerSharing { get; set; }
 
-    public bool DeleteAfterSaving { get; set; }
-
     public bool DisableSaveNotifications { get; set; }
-
-    public bool SingleInstance { get; set; }
 
     public string? ComponentsPath { get; set; }
 

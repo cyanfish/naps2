@@ -99,8 +99,13 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.StartupMessageText, c.StartupMessageText);
         storage.Set(x => x.StartupMessageIcon, c.StartupMessageIcon);
         storage.Set(x => x.DefaultProfileSettings, c.DefaultProfileSettings);
+        storage.Set(x => x.ShowPageNumbers, c.ShowPageNumbers);
+        storage.Set(x => x.ShowProfilesToolbar, c.ShowProfilesToolbar);
+        storage.Set(x => x.ScanChangesDefaultProfile, c.ScanChangesDefaultProfile);
         storage.Set(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction);
         storage.Set(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction);
+        storage.Set(x => x.DeleteAfterSaving, c.DeleteAfterSaving);
+        storage.Set(x => x.SingleInstance, c.SingleInstance);
         storage.Set(x => x.HiddenButtons, GetHiddenButtonFlags(c));
         storage.Set(x => x.DisableAutoSave, c.DisableAutoSave);
         storage.Set(x => x.LockSystemProfiles, c.LockSystemProfiles);
@@ -108,9 +113,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.NoUserProfiles, c.NoUserProfiles);
         storage.Set(x => x.AlwaysRememberDevice, c.AlwaysRememberDevice);
         storage.Set(x => x.NoUpdatePrompt, c.NoUpdatePrompt);
-        storage.Set(x => x.DeleteAfterSaving, c.DeleteAfterSaving);
         storage.Set(x => x.DisableSaveNotifications, c.DisableSaveNotifications);
-        storage.Set(x => x.SingleInstance, c.SingleInstance);
         storage.Set(x => x.ComponentsPath, c.ComponentsPath);
         storage.Set(x => x.OcrTimeoutInSeconds, c.OcrTimeoutInSeconds);
         storage.Set(x => x.OcrLanguageCode, c.OcrDefaultLanguage);
@@ -154,6 +157,9 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
                 storage.Set(accessor, value);
             }
         }
+        SetIfLocked(x => x.ShowPageNumbers, c.ShowPageNumbers, nameof(c.ShowPageNumbers));
+        SetIfLocked(x => x.ShowProfilesToolbar, c.ShowProfilesToolbar, nameof(c.ShowProfilesToolbar));
+        SetIfLocked(x => x.ScanChangesDefaultProfile, c.ScanChangesDefaultProfile, nameof(c.ScanChangesDefaultProfile));
         SetIfLocked(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction, nameof(c.ScanButtonDefaultAction));
         SetIfLocked(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction, nameof(c.SaveButtonDefaultAction));
         SetIfLocked(x => x.DeleteAfterSaving, c.DeleteAfterSaving, nameof(c.DeleteAfterSaving));

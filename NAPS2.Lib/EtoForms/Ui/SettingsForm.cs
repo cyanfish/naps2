@@ -104,7 +104,7 @@ internal class SettingsForm : EtoDialogBase
             checkBox.Enabled = !config.AppLocked.Has(accessor);
         }
 
-        UpdateCheckbox(_scanChangesDefaultProfile, c => c.ScanMenuChangesDefaultProfile);
+        UpdateCheckbox(_scanChangesDefaultProfile, c => c.ScanChangesDefaultProfile);
         UpdateCheckbox(_showProfilesToolbar, c => c.ShowProfilesToolbar);
         UpdateCheckbox(_showPageNumbers, c => c.ShowPageNumbers);
         _scanButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.ScanButtonDefaultAction);
@@ -119,7 +119,7 @@ internal class SettingsForm : EtoDialogBase
     {
         // TODO: Maybe only save settings that have been user-changed
         var transact = Config.User.BeginTransaction();
-        transact.Set(c => c.ScanMenuChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
+        transact.Set(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
         transact.Set(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
         transact.Set(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
         transact.Set(c => c.ScanButtonDefaultAction, (ScanButtonDefaultAction) _scanButtonDefaultAction.SelectedIndex);
@@ -128,6 +128,7 @@ internal class SettingsForm : EtoDialogBase
         transact.Set(c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
         _desktopFormProvider.DesktopForm.Invalidate();
+        _desktopFormProvider.DesktopForm.PlaceOptionalToolbars();
     }
 
     private void RestoreDefaults_Click(object? sender, EventArgs e)

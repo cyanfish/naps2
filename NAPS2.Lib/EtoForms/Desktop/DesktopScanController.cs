@@ -145,7 +145,7 @@ public class DesktopScanController : IDesktopScanController
 
     private void MaybeSetDefaultProfile(ScanProfile profile)
     {
-        if (_config.Get(c => c.ScanMenuChangesDefaultProfile) || _profileManager.DefaultProfile == null)
+        if (_config.Get(c => c.ScanChangesDefaultProfile) || _profileManager.DefaultProfile == null)
         {
             _profileManager.DefaultProfile = profile;
         }

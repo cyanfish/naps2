@@ -40,7 +40,7 @@ public class CommonConfig
     public MessageBoxIcon StartupMessageIcon { get; set; }
 
     [Common]
-    public bool ScanMenuChangesDefaultProfile { get; set; }
+    public bool ScanChangesDefaultProfile { get; set; }
 
     [Common]
     public bool ShowProfilesToolbar { get; set; }
@@ -134,6 +134,9 @@ public class CommonConfig
 
     [Common]
     public DockStyle DesktopToolStripDock { get; set; }
+
+    [Common]
+    public DockStyle ProfilesToolStripDock { get; set; }
 
     [App]
     public EventType EventLogging { get; set; }
