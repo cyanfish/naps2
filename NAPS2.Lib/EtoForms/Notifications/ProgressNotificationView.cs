@@ -24,7 +24,7 @@ public class ProgressNotificationView : NotificationView
         _op.Finished += OnFinished;
         if (_op.IsFinished)
         {
-            Invoker.Current.Invoke(() => Manager?.Hide(Model));
+            Manager?.Hide(Model);
         }
         _textLabel.MouseUp += (_, _) => NotificationClicked();
         _numberLabel.MouseUp += (_, _) => NotificationClicked();
@@ -39,7 +39,7 @@ public class ProgressNotificationView : NotificationView
 
     private void OnFinished(object? sender, EventArgs e)
     {
-        Invoker.Current.Invoke(() => Manager?.Hide(Model));
+        Manager?.Hide(Model);
     }
 
     private void UpdateStatus()

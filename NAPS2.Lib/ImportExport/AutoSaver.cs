@@ -142,7 +142,7 @@ public class AutoSaver
             bool success = await op.Success;
             if (success && doNotify)
             {
-                Invoker.Current.Invoke(() => _notify.PdfSaved(subPath));
+                _notify.PdfSaved(subPath);
             }
             return (success, subPath);
         }
@@ -156,7 +156,7 @@ public class AutoSaver
             bool success = await op.Success;
             if (success && doNotify && op.FirstFileSaved != null)
             {
-                Invoker.Current.Invoke(() => _notify.ImagesSaved(images.Count, op.FirstFileSaved));
+                _notify.ImagesSaved(images.Count, op.FirstFileSaved);
             }
             return (success, subPath);
         }

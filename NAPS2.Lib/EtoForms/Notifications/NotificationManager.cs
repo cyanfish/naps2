@@ -8,7 +8,7 @@ public class NotificationManager
     }
 
     public List<NotificationModel> Notifications { get; } = [];
-    
+
     public ColorScheme ColorScheme { get; }
 
     public event EventHandler? Updated;
@@ -17,25 +17,31 @@ public class NotificationManager
 
     public void Show(NotificationModel notification)
     {
-        Notifications.Add(notification);
-        Updated?.Invoke(this, EventArgs.Empty);
+        Invoker.Current.Invoke(() =>
+        {
+            Notifications.Add(notification);
+            Updated?.Invoke(this, EventArgs.Empty);
+        });
     }
 
     public void Hide(NotificationModel notification)
     {
-        if (Notifications.Remove(notification))
+        Invoker.Current.Invoke(() =>
         {
-            Updated?.Invoke(this, EventArgs.Empty);
-        }
+            if (Notifications.Remove(notification))
+            {
+                Updated?.Invoke(this, EventArgs.Empty);
+            }
+        });
     }
 
     public void StartTimers()
     {
-        TimersStarting?.Invoke(this, EventArgs.Empty);
+        Invoker.Current.Invoke(() => TimersStarting?.Invoke(this, EventArgs.Empty));
     }
 
     public void InvokeUpdated()
     {
-        Updated?.Invoke(this, EventArgs.Empty);
+        Invoker.Current.Invoke(() => Updated?.Invoke(this, EventArgs.Empty));
     }
 }
