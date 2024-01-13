@@ -53,7 +53,8 @@ public class EsclUsbContext : IDisposable
             RemoteEndpoint = IPAddress.Loopback,
             Port = port,
             RootUrl = "eSCL",
-            Tls = false
+            Tls = false,
+            Uuid = Guid.Empty.ToString("D")
         });
         Task.Run(ProxyLoop);
     }

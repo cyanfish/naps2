@@ -21,10 +21,16 @@ internal class EsclScanDriver : IScanDriver
     public static string GetUuid(ScanDevice device)
     {
         var parts = device.ID.Split('|');
+        if (parts.Length == 1)
+        {
+            // Current IDs are just the UUID
+            return parts[0];
+        }
         if (parts.Length != 2)
         {
             throw new ArgumentException("Invalid ESCL device ID");
         }
+        // Old IDs have both the IP and UUID separated by "|"
         return parts[1];
     }
 
@@ -40,14 +46,15 @@ internal class EsclScanDriver : IScanDriver
         var localIPsTask = options.ExcludeLocalIPs ? LocalIPsHelper.Get() : null;
         using var locator = new EsclServiceLocator(service =>
         {
-            // Store both the IP and UUID so we can preferentially find by the IP, but also fall back to looking for
-            // the UUID in case the IP changed
             var ip = service.IpV4 ?? service.IpV6!;
             if (options.ExcludeLocalIPs && localIPsTask!.Result.Contains(ip.ToString()))
             {
                 return;
             }
-            var id = $"{ip}|{service.Uuid}";
+            // TODO: When we implement scanner capabilities, store all the connection information in there so we can
+            // try and connect directly before querying for a potentially-updated-IP (and then back-propagate the new
+            // connection info).
+            var id = service.Uuid;
             var name = string.IsNullOrEmpty(service.ScannerName)
                 ? $"{ip}"
                 : $"{service.ScannerName} ({ip})";

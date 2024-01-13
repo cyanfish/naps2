@@ -38,10 +38,8 @@ public class ScanServerIntegrationTests : ContextualTests
 
         // Set up a client ScanController for scanning through EsclScanDriver -> network -> ScanServer
         _client = new ScanController(ScanningContext);
-        // This device won't match exactly the real device from GetDeviceList but it includes the UUID which is enough
-        // for EsclScanDriver to correctly identify the server for scanning.
         var uuid = new ScanServerDevice { Device = serverDevice, Name = displayName }.GetUuid(_server.InstanceId);
-        _clientDevice = new ScanDevice(Driver.Escl, $"|{uuid}", displayName);
+        _clientDevice = new ScanDevice(Driver.Escl, uuid, displayName);
     }
 
     public override void Dispose()
@@ -54,9 +52,9 @@ public class ScanServerIntegrationTests : ContextualTests
     public async Task FindDevice()
     {
         var devices = await _client.GetDeviceList(Driver.Escl);
-        // The device name is suffixed with the IP so we just check the prefix matches (and vice versa for ID)
+        // The device name is suffixed with the IP so we just check the prefix matches
         Assert.Contains(devices,
-            device => device.Name.StartsWith(_clientDevice.Name) && device.ID.EndsWith(_clientDevice.ID));
+            device => device.Name.StartsWith(_clientDevice.Name) && device.ID == _clientDevice.ID);
     }
 
     [Fact]

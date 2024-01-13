@@ -13,6 +13,7 @@ public class ClientServerTests
     {
         var job = Substitute.For<IEsclScanJob>();
         using var server = new EsclServer();
+        var uuid = Guid.NewGuid().ToString("D");
         var deviceConfig = new EsclDeviceConfig
         {
             Capabilities = new EsclCapabilities
@@ -20,7 +21,7 @@ public class ClientServerTests
                 Version = "2.0",
                 MakeAndModel = "HP Blah",
                 SerialNumber = "123abc",
-                Uuid = Guid.NewGuid().ToString("D")
+                Uuid = uuid
             },
             CreateJob = _ => job
         };
@@ -34,7 +35,8 @@ public class ClientServerTests
             RemoteEndpoint = IPAddress.IPv6Loopback,
             Port = deviceConfig.Port,
             RootUrl = "eSCL",
-            Tls = false
+            Tls = false,
+            Uuid = uuid
         });
         var caps = await client.GetCapabilities();
         Assert.Equal("2.0", caps.Version);

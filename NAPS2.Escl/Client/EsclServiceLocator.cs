@@ -115,9 +115,10 @@ public class EsclServiceLocator : IDisposable
                 }
             }
         }
-        if ((ipv4 == null && ipv6 == null) || port == -1 || host == null)
+        string? uuid = Get(props, "uuid");
+        if ((ipv4 == null && ipv6 == null) || port == -1 || host == null || uuid == null)
         {
-            throw new ArgumentException();
+            throw new ArgumentException("Missing host/IP/port/uuid");
         }
 
         return new EsclService
@@ -128,6 +129,7 @@ public class EsclServiceLocator : IDisposable
             RemoteEndpoint = args.RemoteEndPoint.Address,
             Port = port,
             Tls = isTls,
+            Uuid = uuid,
             ScannerName = props["ty"],
             RootUrl = props["rs"],
             TxtVersion = Get(props, "txtvers"),
@@ -136,7 +138,6 @@ public class EsclServiceLocator : IDisposable
             Thumbnail = Get(props, "representation"),
             Note = Get(props, "note"),
             MimeTypes = Get(props, "pdl")?.Split(','),
-            Uuid = Get(props, "uuid"),
             ColorOptions = Get(props, "cs")?.Split(','),
             SourceOptions = Get(props, "is"),
             DuplexSupported = Get(props, "duplex")?.ToUpperInvariant() == "T"

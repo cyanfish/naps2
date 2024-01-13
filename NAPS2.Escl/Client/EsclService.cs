@@ -43,7 +43,7 @@ public class EsclService
     /// <summary>
     /// A unique identifier for the physical scanner device.
     /// </summary>
-    public string? Uuid { get; init; }
+    public required string Uuid { get; init; }
 
     /// <summary>
     /// The make and model of the scanner.
