@@ -10,12 +10,14 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsListView<T> : IListView<T> where T : notnull
 {
-    private const int TextPadding = 6;
-    private const int SelectionPadding = 3;
     private static readonly Pen DefaultPen = new(Color.Black, 1);
-    private static readonly SolidBrush OutlineBrush = new(Color.FromArgb(0x60, 0xa0, 0xe8));
-    private static readonly SolidBrush SelectionBrush = new(Color.FromArgb(0xcc, 0xe8, 0xff));
-    private static readonly StringFormat LabelFormat = new() { Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter };
+    private static readonly Pen BasicSelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
+    private const int PageNumberTextPadding = 6;
+    private const int PageNumberSelectionPadding = 3;
+    private static readonly SolidBrush PageNumberOutlineBrush = new(Color.FromArgb(0x60, 0xa0, 0xe8));
+    private static readonly SolidBrush PageNumberSelectionBrush = new(Color.FromArgb(0xcc, 0xe8, 0xff));
+    private static readonly StringFormat PageNumberLabelFormat = new()
+        { Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter };
 
     private readonly ListView _view;
     private readonly Eto.Forms.Control _viewEtoControl;
@@ -80,64 +82,92 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private void CustomRenderItem(object? sender, DrawListViewItemEventArgs e)
     {
         var image = ImageList.Get(e.Item);
-        string? label = null;
-        SizeF textSize = SizeF.Empty;
-        int textOffset = 0;
         if (_behavior.ShowPageNumbers)
         {
-            label = $"{e.ItemIndex + 1} / {_view.Items.Count}";
-            textSize = e.Graphics.MeasureString(label, _view.Font);
-            textOffset = (int)(textSize.Height + TextPadding);
-        }
+            // When page numbers are shown, we use a completely different drawing path, as we need to offset the image
+            // to have room for the page numbers, and the selection rectangle has a completely different style to
+            // encompass the page numbers too.
+            string label = $"{e.ItemIndex + 1} / {_view.Items.Count}";
+            SizeF textSize = e.Graphics.MeasureString(label, _view.Font);
+            int textOffset = (int) (textSize.Height + PageNumberTextPadding);
 
-        float scaleHeight = (float)(ImageSize - textOffset) / image.Height;
-        float scaleWidth = (float)ImageSize / image.Width;
+            float scaleHeight = (float) (ImageSize - textOffset) / image.Height;
+            float scaleWidth = (float) ImageSize / image.Width;
 
-        float scale = Math.Min(scaleWidth, scaleHeight);
-        int height = (int)Math.Round(image.Height * scale);
-        int width = (int)Math.Round(image.Width * scale);
+            float scale = Math.Min(scaleWidth, scaleHeight);
+            int height = (int) Math.Round(image.Height * scale);
+            int width = (int) Math.Round(image.Width * scale);
 
-        var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
-        var y = e.Bounds.Top + (e.Bounds.Height - height - textOffset) / 2;
+            var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
+            var y = e.Bounds.Top + (e.Bounds.Height - height - textOffset) / 2;
 
-        if (e.Item.Selected)
-        {
-            Size intTextSize = Size.Ceiling(textSize);
+            // Draw selection rectangle/background
+            if (e.Item.Selected)
+            {
+                Size intTextSize = Size.Ceiling(textSize);
 
-            int selectionWidth = Math.Max(width, intTextSize.Width);
-            int selectionHeight = height + TextPadding + intTextSize.Height;
+                int selectionWidth = Math.Max(width, intTextSize.Width);
+                int selectionHeight = height + PageNumberTextPadding + intTextSize.Height;
 
-            var selectionX = e.Bounds.Left + (e.Bounds.Width - width) / 2;
+                var selectionX = e.Bounds.Left + (e.Bounds.Width - width) / 2;
 
-            var selectionRect = new Rectangle(selectionX, y, selectionWidth, selectionHeight);
-            selectionRect.Inflate(SelectionPadding, SelectionPadding);
+                var selectionRect = new Rectangle(selectionX, y, selectionWidth, selectionHeight);
+                selectionRect.Inflate(PageNumberSelectionPadding, PageNumberSelectionPadding);
 
-            var outlineRect = selectionRect;
-            outlineRect.Inflate(1, 1);
-            e.Graphics.FillRectangle(OutlineBrush, outlineRect);
+                var outlineRect = selectionRect;
+                outlineRect.Inflate(1, 1);
+                e.Graphics.FillRectangle(PageNumberOutlineBrush, outlineRect);
 
-            e.Graphics.FillRectangle(SelectionBrush, selectionRect);
-        }
+                e.Graphics.FillRectangle(PageNumberSelectionBrush, selectionRect);
+            }
 
-        e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
-        if (!string.IsNullOrEmpty(label))
-        {
+            // Draw image
+            e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
+
             // Draw the text below the image
             var drawBrush = Brushes.Black;
-
-            float x1 = x + width / 2;
-            float y1 = y + height + TextPadding;
-
+            float x1 = x + width / 2f;
+            float y1 = y + height + PageNumberTextPadding;
             RectangleF labelRect = new(x1, y1, 0, textSize.Height);
-            float maxLabelWidth = Math.Min(textSize.Width, e.Bounds.Width - 2 * TextPadding);
+            float maxLabelWidth = Math.Min(textSize.Width, e.Bounds.Width - 2 * PageNumberTextPadding);
             labelRect.Inflate(maxLabelWidth / 2, 0);
+            e.Graphics.DrawString(label, _view.Font, drawBrush, labelRect, PageNumberLabelFormat);
 
-            e.Graphics.DrawString(label, _view.Font, drawBrush, labelRect, LabelFormat);
+            // Draw unselected border
+            if (!e.Item.Selected)
+            {
+                e.Graphics.DrawRectangle(DefaultPen, x - 1, y - 1, width + 1, height + 1);
+            }
         }
-        // Draw border
-        if (!e.Item.Selected)
+        else
         {
-            e.Graphics.DrawRectangle(DefaultPen, x - 1, y - 1, width + 1, height + 1);
+            // The basic no-page-numbers drawing path
+            int width, height;
+            if (image.Width > image.Height)
+            {
+                width = ImageSize;
+                height = (int) Math.Round(width * (image.Height / (double) image.Width));
+            }
+            else
+            {
+                height = ImageSize;
+                width = (int) Math.Round(height * (image.Width / (double) image.Height));
+            }
+            var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
+            var y = e.Bounds.Top + (e.Bounds.Height - height) / 2;
+
+            // Draw image
+            e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
+
+            // Draw border
+            if (e.Item.Selected)
+            {
+                e.Graphics.DrawRectangle(BasicSelectionPen, x - 2, y - 2, width + 3, height + 3);
+            }
+            else
+            {
+                e.Graphics.DrawRectangle(DefaultPen, x, y, width, height);
+            }
         }
     }
 

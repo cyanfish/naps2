@@ -8,18 +8,22 @@ namespace NAPS2.EtoForms.Widgets;
 public class ImageListViewBehavior : ListViewBehavior<UiImage>
 {
     private readonly UiThumbnailProvider _thumbnailProvider;
+    private readonly Naps2Config _config;
     private readonly ImageTransfer _imageTransfer = new();
 
     public ImageListViewBehavior(UiThumbnailProvider thumbnailProvider,
         ColorScheme colorScheme, Naps2Config config) : base(colorScheme)
     {
         _thumbnailProvider = thumbnailProvider;
+        _config = config;
         MultiSelect = true;
         ShowLabels = false;
         ScrollOnDrag = true;
         UseHandCursor = true;
-        ShowPageNumbers = config.Get(c => c.ShowPageNumbers);
     }
+
+    public override bool ShowPageNumbers => _config.Get(c => c.ShowPageNumbers);
+
     public override Image GetImage(UiImage item, int imageSize)
     {
         return _thumbnailProvider.GetThumbnail(item, imageSize).ToEtoImage();

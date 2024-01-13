@@ -7,6 +7,7 @@ namespace NAPS2.EtoForms.Ui;
 
 internal class SettingsForm : EtoDialogBase
 {
+    private readonly DesktopFormProvider _desktopFormProvider;
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
     private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
@@ -18,8 +19,10 @@ internal class SettingsForm : EtoDialogBase
     private Command _emailSettingsCommand;
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
-    public SettingsForm(Naps2Config config, DesktopSubFormController desktopSubFormController) : base(config)
+    public SettingsForm(Naps2Config config, DesktopSubFormController desktopSubFormController,
+        DesktopFormProvider desktopFormProvider) : base(config)
     {
+        _desktopFormProvider = desktopFormProvider;
         UpdateValues(Config);
         _restoreDefaults.Click += RestoreDefaults_Click;
 
@@ -108,6 +111,7 @@ internal class SettingsForm : EtoDialogBase
         transact.Set(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
         transact.Set(c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
+        _desktopFormProvider.DesktopForm.Invalidate();
     }
 
     private void RestoreDefaults_Click(object? sender, EventArgs e)

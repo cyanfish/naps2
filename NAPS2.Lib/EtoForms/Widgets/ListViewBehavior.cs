@@ -16,7 +16,7 @@ public abstract class ListViewBehavior<T> where T : notnull
         
     public bool ShowLabels { get; protected set; }
 
-    public bool ShowPageNumbers { get; protected set; }
+    public virtual bool ShowPageNumbers => false;
 
     public bool ScrollOnDrag { get; protected set; }
 
