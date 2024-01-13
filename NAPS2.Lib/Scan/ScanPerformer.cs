@@ -26,6 +26,9 @@ internal class ScanPerformer : IScanPerformer
         };
     }
 
+    public static string SystemDefaultDriverName =>
+        ScanOptionsValidator.SystemDefaultDriver.ToString().ToLowerInvariant();
+
     private readonly ScanningContext _scanningContext;
     private readonly IDevicePrompt _devicePrompt;
     private readonly Naps2Config _config;

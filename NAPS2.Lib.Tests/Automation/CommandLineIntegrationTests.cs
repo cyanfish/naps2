@@ -1043,6 +1043,7 @@ public class CommandLineIntegrationTests : ContextualTests
             new AutomatedScanningOptions
             {
                 NoProfile = true,
+                Driver = ScanPerformer.SystemDefaultDriverName,
                 Device = "name1",
                 OutputPath = $"{FolderPath}/test.pdf",
                 Verbose = true
@@ -1107,6 +1108,7 @@ public class CommandLineIntegrationTests : ContextualTests
         }).RunCommand(
             new AutomatedScanningOptions
             {
+                Driver = ScanPerformer.SystemDefaultDriverName,
                 ListDevices = true
             }, scanDriverFactoryMock);
 

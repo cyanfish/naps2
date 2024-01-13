@@ -242,7 +242,7 @@ internal class AutomatedScanning
     {
         var profile = new ScanProfile
         {
-            DriverName = ScanOptionsValidator.SystemDefaultDriver.ToString().ToLowerInvariant()
+            DriverName = ScanPerformer.SystemDefaultDriverName
         };
         await SetProfileOverrides(profile);
 
