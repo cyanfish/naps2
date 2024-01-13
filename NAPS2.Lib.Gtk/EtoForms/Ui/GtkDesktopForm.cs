@@ -101,7 +101,7 @@ public class GtkDesktopForm : DesktopForm
         ");
     }
 
-    protected override void ConfigureToolbar()
+    protected override void ConfigureToolbars()
     {
         _toolbar = ((ToolBarHandler) ToolBar.Handler).Control;
         _toolbar.Style = ToolbarStyle.Both;

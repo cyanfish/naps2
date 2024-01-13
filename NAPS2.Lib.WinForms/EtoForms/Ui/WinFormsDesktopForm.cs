@@ -8,6 +8,7 @@ using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
+using NAPS2.Scan;
 using NAPS2.WinForms;
 using WF = System.Windows.Forms;
 
@@ -20,7 +21,8 @@ public class WinFormsDesktopForm : DesktopForm
     private readonly Dictionary<DesktopToolbarMenuType, WF.ToolStripSplitButton> _menuButtons = new();
     private readonly ToolbarFormatter _toolbarFormatter = new(new StringWrapper());
     private readonly WF.Form _form;
-    private WF.ToolStrip _toolStrip = null!;
+    private WF.ToolStrip _mainToolStrip = null!;
+    private WF.ToolStrip _profilesToolStrip = null!;
     private WF.ToolStripContainer _container = null!;
 
     public WinFormsDesktopForm(
@@ -81,7 +83,7 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void OnShown(EventArgs e)
     {
-        _toolbarFormatter.RelayoutToolbar(_toolStrip);
+        _toolbarFormatter.RelayoutToolbar(_mainToolStrip);
         base.OnShown(e);
     }
 
@@ -121,19 +123,72 @@ public class WinFormsDesktopForm : DesktopForm
         base.SetCulture(cultureId);
     }
 
-    protected override void ConfigureToolbar()
+    protected override void ConfigureToolbars()
     {
-        _toolStrip = ((ToolBarHandler) ToolBar.Handler).Control;
-        _toolStrip.ShowItemToolTips = false;
-        _toolStrip.TabStop = true;
-        _toolStrip.ImageScalingSize = new Size(32, 32);
-        _toolStrip.ParentChanged += (_, _) => _toolbarFormatter.RelayoutToolbar(_toolStrip);
+        _mainToolStrip = ((ToolBarHandler) ToolBar.Handler).Control;
+        _mainToolStrip.ShowItemToolTips = false;
+        _mainToolStrip.TabStop = true;
+        _mainToolStrip.ImageScalingSize = new Size(32, 32);
+        _mainToolStrip.ParentChanged += (_, _) => _toolbarFormatter.RelayoutToolbar(_mainToolStrip);
+
+        _profilesToolStrip = new WF.ToolStrip();
+        _profilesToolStrip.ShowItemToolTips = false;
+        _profilesToolStrip.TabStop = true;
+        _profilesToolStrip.ImageScalingSize = new Size(16, 16);
+        _profilesToolStrip.Location = new Point(0, 100);
+    }
+
+    public override void PlaceProfilesToolbar()
+    {
+        if (Config.Get(c => c.ShowProfilesToolbar) && _profilesToolStrip.Parent == null)
+        {
+            _container.TopToolStripPanel.Controls.Add(_profilesToolStrip);
+        }
+        if (!Config.Get(c => c.ShowProfilesToolbar) && _profilesToolStrip.Parent != null)
+        {
+            _profilesToolStrip.Parent.Controls.Remove(_profilesToolStrip);
+        }
+    }
+
+    protected override void UpdateProfilesToolbar()
+    {
+        var toolbarItems = _profilesToolStrip.Items;
+        var profiles = _profileManager.Profiles;
+        var extra = toolbarItems.Count - profiles.Count;
+        var missing = profiles.Count - toolbarItems.Count;
+        for (int i = 0; i < extra; i++)
+        {
+            toolbarItems.RemoveAt(toolbarItems.Count - 1);
+        }
+        for (int i = 0; i < missing; i++)
+        {
+            var item = new WF.ToolStripButton
+            {
+                TextImageRelation = WF.TextImageRelation.ImageBeforeText,
+                ImageAlign = ContentAlignment.MiddleLeft,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Image = Image.FromStream(new MemoryStream(Icons.control_play_blue_small))
+            };
+            item.Click += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Tag);
+            toolbarItems.Add(item);
+        }
+        for (int i = 0; i < profiles.Count; i++)
+        {
+            var profile = profiles[i];
+            var item = toolbarItems[i];
+            item.Tag = profile;
+            if (item.Text != profile.DisplayName)
+            {
+                item.Text = profile.DisplayName;
+            }
+        }
     }
 
     protected override LayoutElement GetMainContent()
     {
         _container = new WF.ToolStripContainer();
-        _container.TopToolStripPanel.Controls.Add(_toolStrip);
+        _container.TopToolStripPanel.Controls.Add(_mainToolStrip);
+        PlaceProfilesToolbar();
         foreach (var panel in _container.Controls.OfType<WF.ToolStripPanel>())
         {
             // Allow tabbing through the toolbar for accessibility
@@ -166,7 +221,7 @@ public class WinFormsDesktopForm : DesktopForm
             TextImageRelation = WF.TextImageRelation.ImageAboveText
         };
         ApplyCommand(item, command);
-        _toolStrip.Items.Add(item);
+        _mainToolStrip.Items.Add(item);
     }
 
     protected override void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
@@ -177,7 +232,7 @@ public class WinFormsDesktopForm : DesktopForm
             TextImageRelation = WF.TextImageRelation.ImageAboveText
         };
         ApplyCommand(item, command);
-        _toolStrip.Items.Add(item);
+        _mainToolStrip.Items.Add(item);
         menu.Handle(subItems => SetUpMenu(item, subItems));
         _menuButtons[menuType] = item;
     }
@@ -217,7 +272,7 @@ public class WinFormsDesktopForm : DesktopForm
             ShowDropDownArrow = false
         };
         ApplyCommand(item, command);
-        _toolStrip.Items.Add(item);
+        _mainToolStrip.Items.Add(item);
         menu.Handle(subItems => SetUpMenu(item, subItems));
     }
 
@@ -233,7 +288,7 @@ public class WinFormsDesktopForm : DesktopForm
         command1.EnabledChanged += (_, _) => item.Enabled = command1.Enabled;
         item.FirstClick += (_, _) => command1.Execute();
         item.SecondClick += (_, _) => command2.Execute();
-        _toolStrip.Items.Add(item);
+        _mainToolStrip.Items.Add(item);
     }
 
     private WF.ToolStripItem ApplyCommand(WF.ToolStripItem item, Command command)
@@ -265,7 +320,7 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void CreateToolbarSeparator()
     {
-        _toolStrip.Items.Add(new WF.ToolStripSeparator());
+        _mainToolStrip.Items.Add(new WF.ToolStripSeparator());
     }
 
     public override void ShowToolbarMenu(DesktopToolbarMenuType menuType)
@@ -275,20 +330,27 @@ public class WinFormsDesktopForm : DesktopForm
 
     private void SaveToolStripLocation()
     {
-        Config.User.Set(c => c.DesktopToolStripDock, _toolStrip.Parent!.Dock.ToConfig());
+        Config.User.Set(c => c.DesktopToolStripDock, _mainToolStrip.Parent!.Dock.ToConfig());
+        Config.User.Set(c => c.ProfilesToolStripDock, _profilesToolStrip.Parent?.Dock.ToConfig() ?? DockStyle.Top);
     }
 
     private void LoadToolStripLocation()
     {
-        var dock = Config.Get(c => c.DesktopToolStripDock).ToWinForms();
-        if (dock != WF.DockStyle.None)
+        SetDock(_mainToolStrip, Config.Get(c => c.DesktopToolStripDock));
+        if (_profilesToolStrip.Parent != null)
         {
-            var panel = _container.Controls.OfType<WF.ToolStripPanel>().FirstOrDefault(x => x.Dock == dock);
-            if (panel != null)
-            {
-                _toolStrip.Parent = panel;
-            }
+            SetDock(_profilesToolStrip, Config.Get(c => c.ProfilesToolStripDock));
         }
-        _toolStrip.Parent!.TabStop = true;
+    }
+
+    private void SetDock(WF.ToolStrip toolStrip, DockStyle dock)
+    {
+        var wfDock = dock.ToWinForms();
+        var panel = _container.Controls.OfType<WF.ToolStripPanel>().FirstOrDefault(x => x.Dock == wfDock);
+        if (panel != null)
+        {
+            toolStrip.Parent = panel;
+        }
+        toolStrip.Parent!.TabStop = true;
     }
 }

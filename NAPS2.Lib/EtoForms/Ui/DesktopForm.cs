@@ -18,11 +18,11 @@ public abstract class DesktopForm : EtoFormBase
     private readonly NotificationManager _notificationManager;
     private readonly CultureHelper _cultureHelper;
     protected readonly ColorScheme _colorScheme;
-    private readonly IProfileManager _profileManager;
+    protected readonly IProfileManager _profileManager;
     protected readonly ThumbnailController _thumbnailController;
     private readonly UiThumbnailProvider _thumbnailProvider;
     protected readonly DesktopController _desktopController;
-    private readonly IDesktopScanController _desktopScanController;
+    protected readonly IDesktopScanController _desktopScanController;
     private readonly ImageListActions _imageListActions;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IDesktopSubFormController _desktopSubFormController;
@@ -73,6 +73,7 @@ public abstract class DesktopForm : EtoFormBase
         //
         CreateToolbarsAndMenus();
         UpdateScanButton();
+        UpdateProfilesToolbar();
         InitLanguageDropdown();
 
         _listView = EtoPlatform.Current.CreateListView(imageListViewBehavior);
@@ -189,6 +190,7 @@ public abstract class DesktopForm : EtoFormBase
     private void ProfileManager_ProfilesUpdated(object? sender, EventArgs e)
     {
         UpdateScanButton();
+        UpdateProfilesToolbar();
     }
 
     private void ThumbnailController_ThumbnailSizeChanged(object? sender, EventArgs e)
@@ -239,7 +241,7 @@ public abstract class DesktopForm : EtoFormBase
     protected virtual void CreateToolbarsAndMenus()
     {
         ToolBar = new ToolBar();
-        ConfigureToolbar();
+        ConfigureToolbars();
 
         var hiddenButtons = Config.Get(c => c.HiddenButtons);
 
@@ -352,7 +354,15 @@ public abstract class DesktopForm : EtoFormBase
         return new MenuProvider().Dynamic(_languageMenuCommands);
     }
 
-    protected virtual void ConfigureToolbar()
+    protected virtual void ConfigureToolbars()
+    {
+    }
+
+    protected virtual void UpdateProfilesToolbar()
+    {
+    }
+
+    public virtual void PlaceProfilesToolbar()
     {
     }
 

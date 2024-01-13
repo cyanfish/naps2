@@ -128,7 +128,7 @@ internal class SettingsForm : EtoDialogBase
         transact.Set(c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
         _desktopFormProvider.DesktopForm.Invalidate();
-        _desktopFormProvider.DesktopForm.PlaceOptionalToolbars();
+        _desktopFormProvider.DesktopForm.PlaceProfilesToolbar();
     }
 
     private void RestoreDefaults_Click(object? sender, EventArgs e)
