@@ -90,6 +90,18 @@ internal class ScanOptionsValidator
         return driver;
     }
 
+    public static IEnumerable<Driver> SupportedDrivers
+    {
+        get
+        {
+            if (PlatformCompat.System.IsWiaDriverSupported) yield return Driver.Wia;
+            if (PlatformCompat.System.IsTwainDriverSupported) yield return Driver.Twain;
+            if (PlatformCompat.System.IsEsclDriverSupported) yield return Driver.Escl;
+            if (PlatformCompat.System.IsSaneDriverSupported) yield return Driver.Sane;
+            if (PlatformCompat.System.IsAppleDriverSupported) yield return Driver.Apple;
+        }
+    }
+
     public static Driver SystemDefaultDriver
     {
         get

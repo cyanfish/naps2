@@ -159,6 +159,15 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The --driver option must be set to use the --device or --listdevices option. Possible values: {0}.
+        /// </summary>
+        internal static string DriverRequired {
+            get {
+                return ResourceManager.GetString("DriverRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Emailing....
         /// </summary>
         internal static string Emailing {
@@ -331,7 +340,7 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The driver option was not valid (must be wia/twain/escl/sane/apple)..
+        ///   Looks up a localized string similar to The driver option was not valid. Possible values: {0}.
         /// </summary>
         internal static string InvalidDriver {
             get {
@@ -345,6 +354,15 @@ namespace NAPS2.Lang.ConsoleResources {
         internal static string NAPS2 {
             get {
                 return ResourceManager.GetString("NAPS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No device was specified. Either use &quot;--profile&quot; to specify a profile with a device, or use &quot;--device&quot; to choose a particular device (and &quot;--listdevices&quot; to see available choices)..
+        /// </summary>
+        internal static string NoDeviceSpecified {
+            get {
+                return ResourceManager.GetString("NoDeviceSpecified", resourceCulture);
             }
         }
         

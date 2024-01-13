@@ -9,6 +9,7 @@ using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Recovery;
 using NAPS2.Scan;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 using NAPS2.Serialization;
 
@@ -142,11 +143,20 @@ internal class AutomatedScanning
                 await EmailScannedImages();
             }
         }
+        catch (ScanDriverException ex) when (ex is not ScanDriverUnknownException)
+        {
+            _output.Writer.WriteLine(ex.Message);
+        }
         catch (Exception ex)
         {
             hasUnexpectedException = true;
             Log.FatalException("An error occurred that caused the console application to close.", ex);
             _output.Writer.WriteLine(ConsoleResources.UnexpectedError);
+            _output.Writer.WriteLine(ex.Message);
+            if (ex.InnerException != null)
+            {
+                _output.Writer.WriteLine(ex.InnerException.Message);
+            }
         }
         finally
         {
@@ -230,11 +240,12 @@ internal class AutomatedScanning
 
     private async Task ListDevices()
     {
-        if (!GetProfile(out var profile))
+        var profile = new ScanProfile
         {
-            profile = new ScanProfile();
-        }
+            DriverName = ScanOptionsValidator.SystemDefaultDriver.ToString().ToLowerInvariant()
+        };
         await SetProfileOverrides(profile);
+
         var cts = new CancellationTokenSource();
         Console.CancelKeyPress += (_, _) => cts.Cancel();
         await foreach (var device in _scanPerformer.GetDevices(profile, cts.Token))
@@ -476,11 +487,17 @@ internal class AutomatedScanning
             return false;
         }
 
+        if ((_options.Device != null || _options.ListDevices) && _options.Driver == null)
+        {
+            _errorOutput.DisplayError(string.Format(ConsoleResources.DriverRequired, SupportedDriversString));
+            return false;
+        }
+
         if (_options.Driver != null)
         {
             if (ScanPerformer.ParseDriver(_options.Driver) == Driver.Default)
             {
-                _errorOutput.DisplayError(ConsoleResources.InvalidDriver);
+                _errorOutput.DisplayError(string.Format(ConsoleResources.InvalidDriver, SupportedDriversString));
                 return false;
             }
         }
@@ -547,6 +564,9 @@ internal class AutomatedScanning
 
         return true;
     }
+
+    private string SupportedDriversString => string.Join(", ",
+        ScanOptionsValidator.SupportedDrivers.Select(x => x.ToString().ToLowerInvariant()));
 
     private async Task ExportScannedImages()
     {
@@ -836,6 +856,12 @@ internal class AutomatedScanning
                 _errorOutput.DisplayError(SdkResources.DeviceNotFound);
                 return false;
             }
+        }
+
+        if (!_options.ListDevices && profile.Device == null)
+        {
+            _errorOutput.DisplayError(ConsoleResources.NoDeviceSpecified);
+            return false;
         }
 
         return true;

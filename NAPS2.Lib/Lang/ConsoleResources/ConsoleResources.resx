@@ -258,6 +258,12 @@ Use the "--importpassword" option.</value>
     <value>The DPI option was not valid (must be 100/150/200/300/400/600/800/1200/2400/4800).</value>
   </data>
   <data name="InvalidDriver" xml:space="preserve">
-    <value>The driver option was not valid (must be wia/twain/escl/sane/apple).</value>
+    <value>The driver option was not valid. Possible values: {0}</value>
+  </data>
+  <data name="NoDeviceSpecified" xml:space="preserve">
+    <value>No device was specified. Either use "--profile" to specify a profile with a device, or use "--device" to choose a particular device (and "--listdevices" to see available choices).</value>
+  </data>
+  <data name="DriverRequired" xml:space="preserve">
+    <value>The --driver option must be set to use the --device or --listdevices option. Possible values: {0}</value>
   </data>
 </root>

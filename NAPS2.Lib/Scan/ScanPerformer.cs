@@ -70,17 +70,9 @@ internal class ScanPerformer : IScanPerformer
 
     public IAsyncEnumerable<ScanDevice> GetDevices(ScanProfile scanProfile, CancellationToken cancelToken = default)
     {
-        try
-        {
-            var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero);
-            var controller = CreateScanController(new ScanParams());
-            return controller.GetDevices(options, cancelToken);
-        }
-        catch (Exception error)
-        {
-            HandleError(error);
-            return AsyncProducers.Empty<ScanDevice>();
-        }
+        var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero);
+        var controller = CreateScanController(new ScanParams());
+        return controller.GetDevices(options, cancelToken);
     }
 
     public async IAsyncEnumerable<ProcessedImage> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
