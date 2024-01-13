@@ -17,6 +17,10 @@ msgstr ""
 msgid "\"Save\" button default action:"
 msgstr ""
 
+#: UiStrings.resx$ScanButtonDefaultAction$Message
+msgid "\"Scan\" button default action:"
+msgstr ""
+
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
 msgstr ""
@@ -103,6 +107,7 @@ msgid "Alternate Interleave"
 msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+#: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr ""
 
@@ -1234,6 +1239,10 @@ msgstr ""
 
 #: UiStrings.resx$ScanConfig$Message
 msgid "Scan Configuration"
+msgstr ""
+
+#: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+msgid "Scan With Default Profile"
 msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
