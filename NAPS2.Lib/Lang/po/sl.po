@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Slovenian\n"
 "Language: sl\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: sl\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,6 +108,10 @@ msgstr "Drugačno Razpletanje"
 msgid "Alternate Interleave"
 msgstr "Drugačno Prepletanje"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Za uvoz te PDF datoteke je potrebna dodatna komponenta. Jo želite prenesti sedaj?"
@@ -160,6 +172,10 @@ msgstr "Gonilnik Apple"
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
 msgstr "Apple Mail"
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -708,6 +724,10 @@ msgstr "Namestitev zaključena. Želite ponovno zagnati NAPS2?"
 msgid "Installation failed."
 msgstr "Namestitev spodletela."
 
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
+
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "Prepletanje"
@@ -921,6 +941,10 @@ msgstr "Ena datoteka na sken"
 msgid "One or more files could not be downloaded."
 msgstr "Ene ali več datotek ni bilo mogoče prenesti."
 
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
+
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
 msgstr "Odpri Mapo"
@@ -1037,6 +1061,10 @@ msgstr "Profil:"
 msgid "Profiles"
 msgstr "Profili"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "Zahtevaj vnos poti datoteke"
@@ -1137,6 +1165,7 @@ msgstr "SANE gonilnik"
 msgid "Save"
 msgstr "Shrani"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "Shrani vse"
@@ -1167,6 +1196,7 @@ msgstr "Shrani PDF"
 msgid "Save PDF Progress"
 msgstr "Potek Shranjevanja PDF"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "Shrani izbrano"
@@ -1270,6 +1300,11 @@ msgstr "Loči datoteke po Patch-T"
 msgid "Set Default"
 msgstr "Nastavi Privzeto"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
 msgstr ""
@@ -1293,6 +1328,14 @@ msgstr "Izostritev"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Pokaži"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

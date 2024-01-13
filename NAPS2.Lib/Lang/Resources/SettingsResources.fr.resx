@@ -145,6 +145,18 @@
     <value>Rapide</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Meilleure</value>
+    <value>Meilleur</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
+    <value>Enregistrer tout</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
+    <value>Enregistrer la sélection</value>
+  </data>
+  <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
+    <value>Always Prompt</value>
+  </data>
+  <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
+    <value>Prompt If Selected</value>
   </data>
 </root>

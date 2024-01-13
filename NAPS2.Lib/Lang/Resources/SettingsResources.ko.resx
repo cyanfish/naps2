@@ -25,22 +25,22 @@
     <value>{0} dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>사용자 설정 SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>웹용 Outlook</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Apple Mail</value>
+    <value>Apple 메일</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>제공자 선택되지 않음</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>중앙</value>
@@ -55,7 +55,7 @@
     <value>cm</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
-    <value>in</value>
+    <value>인치</value>
   </data>
   <data name="PageSizeUnit_Millimetre" xml:space="preserve">
     <value>mm</value>
@@ -79,10 +79,10 @@
     <value>사용자 설정...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8.5x14 인치)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8.5x11 인치)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>기본값</value>
@@ -109,7 +109,7 @@
     <value>평판</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>자동</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -118,7 +118,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>None</value>
+    <value>없음</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>기본값</value>
@@ -127,10 +127,10 @@
     <value>레거시 (네이티브 UI 만 가능)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>네이티브 전송</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>메모리 전송</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>구 DSM</value>
@@ -142,9 +142,21 @@
     <value>기본값</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>빠르게</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>최고 품질</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
+    <value>모두 저장</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
+    <value>선택된 항목 저장</value>
+  </data>
+  <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
+    <value>Always Prompt</value>
+  </data>
+  <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
+    <value>Prompt If Selected</value>
   </data>
 </root>

@@ -352,7 +352,7 @@
     <value>Progresso OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Eseuzione OCR...</value>
+    <value>Esecuzione OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
     <value>Progresso aggiornamento</value>

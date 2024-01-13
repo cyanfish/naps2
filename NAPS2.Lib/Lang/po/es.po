@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,6 +108,10 @@ msgstr "Desentrelazado alternativo"
 msgid "Alternate Interleave"
 msgstr "Entrelazado alternativo"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Se necesita un componente adicional para importar este archivo PDF. ¿Quiere descargarlo ahora?"
@@ -159,6 +171,10 @@ msgstr "Controlador de Apple"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
+msgstr ""
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
 msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
@@ -708,6 +724,10 @@ msgstr "Instalación completa. ¿Desea reiniciar NAPS2 ahora?"
 msgid "Installation failed."
 msgstr "La instalación ha fallado."
 
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
+
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "Entrelazar"
@@ -921,6 +941,10 @@ msgstr "Un archivo por escaneo"
 msgid "One or more files could not be downloaded."
 msgstr "Uno o más archivos no se han podido descargar."
 
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
+
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
 msgstr "Abrir carpeta"
@@ -1037,6 +1061,10 @@ msgstr "Perfil:"
 msgid "Profiles"
 msgstr "Perfiles"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "Preguntar ruta de archivo"
@@ -1137,6 +1165,7 @@ msgstr "Controlador SANE"
 msgid "Save"
 msgstr "Guardar"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "Guardar todo"
@@ -1167,6 +1196,7 @@ msgstr "Guardar PDF"
 msgid "Save PDF Progress"
 msgstr "Progreso del guardado del PDF"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "Guardar seleccionado"
@@ -1270,6 +1300,11 @@ msgstr "Separar archivos usando Patch-T"
 msgid "Set Default"
 msgstr "Configurar como predeterminado"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
 msgstr ""
@@ -1293,6 +1328,14 @@ msgstr "Enfoque"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Mostrar"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: sq\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,6 +108,10 @@ msgstr "Heqja e shtresave alternative"
 msgid "Alternate Interleave"
 msgstr "Krijimi i shtresave alternative"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A dëshiron ta shkarkosh tani?"
@@ -160,6 +172,10 @@ msgstr "Drejtuesi i Apple"
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
 msgstr "Apple Mail"
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -708,6 +724,10 @@ msgstr "Instalimi përfundoi. A dëshiron ta rihapësh NAPS2 tani?"
 msgid "Installation failed."
 msgstr "Instalimi dështoi."
 
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
+
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "Përziej"
@@ -921,6 +941,10 @@ msgstr "Një skedar për skanim"
 msgid "One or more files could not be downloaded."
 msgstr "Një ose më shumë skedarë s'mund të shkarkoheshin."
 
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
+
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
 msgstr "Hap Dosjen"
@@ -1037,6 +1061,10 @@ msgstr "Profili:"
 msgid "Profiles"
 msgstr "Profilet"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "Pyet për shtegun e skedarit"
@@ -1137,6 +1165,7 @@ msgstr "Drejtuesi SANE"
 msgid "Save"
 msgstr "Ruaj"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "Ruaji të gjitha"
@@ -1167,6 +1196,7 @@ msgstr "Ruaj PDF"
 msgid "Save PDF Progress"
 msgstr "Progresi i ruajtjes së PDF"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "Ruaj pjesën e zgjedhur"
@@ -1270,6 +1300,11 @@ msgstr "Ndaj skedarët me Patch-T"
 msgid "Set Default"
 msgstr "Vendos të paracaktuar"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
 msgstr ""
@@ -1293,6 +1328,14 @@ msgstr "Thekso"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Shfaq"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

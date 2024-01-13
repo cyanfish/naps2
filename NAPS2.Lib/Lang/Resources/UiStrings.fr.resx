@@ -180,6 +180,30 @@
   <data name="Language" xml:space="preserve">
     <value>Langue</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Interface" xml:space="preserve">
+    <value>Interface</value>
+  </data>
+  <data name="ScanChangesDefaultProfile" xml:space="preserve">
+    <value>"Scan" menu changes default profile</value>
+  </data>
+  <data name="ShowProfilesToolbar" xml:space="preserve">
+    <value>Show "Profiles" toolbar</value>
+  </data>
+  <data name="ShowPageNumbers" xml:space="preserve">
+    <value>Show page numbers</value>
+  </data>
+  <data name="SaveButtonDefaultAction" xml:space="preserve">
+    <value>"Save" button default action:</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="SingleInstanceDesc" xml:space="preserve">
+    <value>Only allow a single NAPS2 instance</value>
+  </data>
   <data name="About" xml:space="preserve">
     <value>À propos de</value>
   </data>
@@ -394,7 +418,7 @@
     <value>Récupérer des images numérisées</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été enregistrée(s), et est(sont) récupérable(s). Faut-il procéder à la récupération ?</value>
+    <value>{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été enregistrée(s), et est(sont) récupérable(s). Souhaitez-vous procéder à la récupération ?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Chaînes de substitution</value>
@@ -536,6 +560,9 @@
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>Paramètres de messagerie</value>
+  </data>
+  <data name="SettingsFormTitle" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Fournisseur</value>
@@ -718,9 +745,9 @@
     <value>Paramètres de partage de scanner</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Faut-il vraiment arrêter de partager « {0} » ?</value>
+    <value>Souhaitez-vous vraiment arrêter de partager « {0} » ?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Partager même lorsque NAPS2 est fermé</value>
   </data>
 </root>

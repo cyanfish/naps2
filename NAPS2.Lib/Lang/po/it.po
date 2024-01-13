@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: it\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,6 +108,10 @@ msgstr "Inverti interfoliazione alternativa"
 msgid "Alternate Interleave"
 msgstr "Interfoliazione alternativa"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi scaricarlo ora?"
@@ -160,6 +172,10 @@ msgstr "Driver Apple"
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
 msgstr "Apple Mail"
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -708,6 +724,10 @@ msgstr "Installazione completata. Vuoi riavviare NAPS2 ora?"
 msgid "Installation failed."
 msgstr "Installazione fallita."
 
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
+
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "Interfoliazione"
@@ -879,7 +899,7 @@ msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
-msgstr "Download OCR"
+msgstr "Scarica OCR"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
@@ -920,6 +940,10 @@ msgstr "Un file per scansione"
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded."
 msgstr "Uno o più file non possono essere scaricati."
+
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1037,6 +1061,10 @@ msgstr "Profilo:"
 msgid "Profiles"
 msgstr "Profili"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "Richiesta percorso file"
@@ -1127,7 +1155,7 @@ msgstr "Esegui in background"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr "Eseuzione OCR..."
+msgstr "Esecuzione OCR..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
@@ -1137,6 +1165,7 @@ msgstr "Driver SANE"
 msgid "Save"
 msgstr "Salva"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "Salva tutti"
@@ -1167,6 +1196,7 @@ msgstr "Salva PDF"
 msgid "Save PDF Progress"
 msgstr "Progresso salvataggio PDF"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "Salva selezionati"
@@ -1270,13 +1300,18 @@ msgstr "Separa file tramite Patch-T"
 msgid "Set Default"
 msgstr "Imposta predefinito"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
 msgstr "Condividi"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Condividi anche quando NAPS2 è chiuso"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
@@ -1293,6 +1328,14 @@ msgstr "Nitidezza"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Visualizza"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

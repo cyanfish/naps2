@@ -147,4 +147,16 @@
   <data name="OcrMode_Best" xml:space="preserve">
     <value>最佳</value>
   </data>
+  <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
+    <value>保存所有</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
+    <value>保存所选</value>
+  </data>
+  <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
+    <value>Always Prompt</value>
+  </data>
+  <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
+    <value>Prompt If Selected</value>
+  </data>
 </root>

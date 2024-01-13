@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,6 +108,10 @@ msgstr "奇偶页分别排列（偶数页逆序）"
 msgid "Alternate Interleave"
 msgstr "取消奇偶页分别排列（偶数页逆序）"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "需要额外的组件来导入这个 PDF 文件，您想要现在开始下载吗？"
@@ -160,6 +172,10 @@ msgstr "Apple 驱动程序"
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
 msgstr "Apple Mail"
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -708,6 +724,10 @@ msgstr "安装完成。您需要立即重新启动 NAPS2 吗？"
 msgid "Installation failed."
 msgstr "安装失败."
 
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
+
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "取消奇偶页分别排列"
@@ -921,6 +941,10 @@ msgstr "每次扫描一个文件"
 msgid "One or more files could not be downloaded."
 msgstr "无法下载一个或多个文件 ."
 
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
+
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
 msgstr "打开文件夹"
@@ -1037,6 +1061,10 @@ msgstr "配置文件:"
 msgid "Profiles"
 msgstr "配置文件"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "文件路径提示"
@@ -1137,6 +1165,7 @@ msgstr "SANE 驱动"
 msgid "Save"
 msgstr "保存"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "保存所有"
@@ -1167,6 +1196,7 @@ msgstr "保存 PDF"
 msgid "Save PDF Progress"
 msgstr "PDF 保存进度"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "保存所选"
@@ -1270,6 +1300,11 @@ msgstr "通过 Patch-T 拆分文件"
 msgid "Set Default"
 msgstr "设为默认设置"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
 msgstr ""
@@ -1293,6 +1328,14 @@ msgstr "锐化"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "显示"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

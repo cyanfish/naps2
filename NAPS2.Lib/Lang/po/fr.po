@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: fr\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,9 +108,13 @@ msgstr "Désappairer alternativement [162534>123456]"
 msgid "Alternate Interleave"
 msgstr "Appairer alternativement [135642>123456]"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Un composant supplémentaire est requis pour importer ce fichier PDF. Faut-il le télécharger maintenant ?"
+msgstr "Un composant supplémentaire est requis pour importer ce fichier PDF. Souhaitez-vous le télécharger maintenant ?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -139,7 +151,7 @@ msgstr "Une erreur est survenue avec le pilote d'acquisition."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "Une opération est en cours. Faut-il vraiment quitter et annuler l'opération ?"
+msgstr "Une opération est en cours. Souhaitez-vous vraiment quitter et annuler l'opération ?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
@@ -161,6 +173,10 @@ msgstr "Pilote Apple"
 msgid "Apple Mail"
 msgstr "Apple Mail"
 
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
 msgstr "Appliquer la luminosité/contraste après acquisition"
@@ -171,35 +187,35 @@ msgstr "Appliquer aux {0} images sélectionnées"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "Faut-il vraiment annuler l'acquisition par lot ?"
+msgstr "Souhaitez-vous vraiment annuler l'acquisition par lot ?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Faut-il vraiment effacer {0} élément(s) ?"
+msgstr "Souhaitez-vous vraiment effacer {0} élément(s) ?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "Faut-il vraiment supprimer « {0} » ?"
+msgstr "Souhaitez-vous vraiment supprimer « {0} » ?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Faut-il vraiment supprimer le profil « {0} » ?"
+msgstr "Souhaitez-vous vraiment supprimer le profil « {0} » ?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Faut-il vraiment supprimer {0} élément(s) ?"
+msgstr "Souhaitez-vous vraiment supprimer {0} élément(s) ?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Faut-il vraiment supprimer {0} profil(s) ?"
+msgstr "Souhaitez-vous vraiment supprimer {0} profil(s) ?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr "Faut-il vraiment arrêter de partager « {0} » ?"
+msgstr "Souhaitez-vous vraiment arrêter de partager « {0} » ?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Faut-il vraiment défaire les modifications sur {0} image(s) ?"
+msgstr "Souhaitez-vous vraiment annuler les modifications sur {0} image(s) ?"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -265,11 +281,11 @@ msgstr "Lot terminé avec succès."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "Acquisition par lot arrêtée avec l'erreur."
+msgstr "Acquisition par lot arrêtée en raison d'une erreur."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr "Meilleure"
+msgstr "Meilleur"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -702,11 +718,15 @@ msgstr "Échec de l'installation"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Installation terminée. Faut-il redémarrer NAPS2 maintenant ?"
+msgstr "Installation terminée. Souhaitez-vous redémarrer NAPS2 maintenant ?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
 msgstr "Échec de l'installation."
+
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -921,6 +941,10 @@ msgstr "Un fichier par numérisation"
 msgid "One or more files could not be downloaded."
 msgstr "Au moins un fichier n'a pas pu être téléchargé."
 
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
+
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
 msgstr "Ouvrir un dossier"
@@ -1037,6 +1061,10 @@ msgstr "Profil :"
 msgid "Profiles"
 msgstr "Profils"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "Demander le chemin pour le fichier"
@@ -1137,6 +1165,7 @@ msgstr "Pilote SANE"
 msgid "Save"
 msgstr "Enregistrer"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "Enregistrer tout"
@@ -1167,6 +1196,7 @@ msgstr "Enregistrer en PDF"
 msgid "Save PDF Progress"
 msgstr "Progression de l'enregistrement en PDF"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "Enregistrer la sélection"
@@ -1270,13 +1300,18 @@ msgstr "Délimitation des fichiers par Patch-T"
 msgid "Set Default"
 msgstr "Définir par défaut"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
 msgstr "Partager"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Partager même lorsque NAPS2 est fermé"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
@@ -1293,6 +1328,14 @@ msgstr "Accentuation"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Afficher"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1530,7 +1573,7 @@ msgstr "Vous n'avez pas la permission d'enregistrer des fichiers à cet emplacem
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
-msgstr "Il existe des modifications non enregistrées. Faut-il vraiment quitter et les perdre ?"
+msgstr "Il existe des modifications non enregistrées. Souhaitez-vous vraiment quitter et les annuler ces modifications ?"
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
@@ -1590,7 +1633,7 @@ msgstr "{0} ppp"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été enregistrée(s), et est(sont) récupérable(s). Faut-il procéder à la récupération ?"
+msgstr "{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été enregistrée(s), et est(sont) récupérable(s). Souhaitez-vous procéder à la récupération ?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

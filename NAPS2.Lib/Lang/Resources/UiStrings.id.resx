@@ -180,6 +180,30 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Interface" xml:space="preserve">
+    <value>Interface</value>
+  </data>
+  <data name="ScanChangesDefaultProfile" xml:space="preserve">
+    <value>"Scan" menu changes default profile</value>
+  </data>
+  <data name="ShowProfilesToolbar" xml:space="preserve">
+    <value>Show "Profiles" toolbar</value>
+  </data>
+  <data name="ShowPageNumbers" xml:space="preserve">
+    <value>Show page numbers</value>
+  </data>
+  <data name="SaveButtonDefaultAction" xml:space="preserve">
+    <value>"Save" button default action:</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="SingleInstanceDesc" xml:space="preserve">
+    <value>Only allow a single NAPS2 instance</value>
+  </data>
   <data name="About" xml:space="preserve">
     <value>Tentang</value>
   </data>
@@ -536,6 +560,9 @@
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>Email Settings</value>
+  </data>
+  <data name="SettingsFormTitle" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provider</value>

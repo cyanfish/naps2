@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: pt-BR\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,6 +108,10 @@ msgstr "Desintercalar Alternado"
 msgid "Alternate Interleave"
 msgstr "Intercalar Alternado"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "É necessário um componente adicional para importar este arquivo PDF. Gostaria de baixá-lo agora?"
@@ -161,6 +173,10 @@ msgstr "Apple Driver"
 msgid "Apple Mail"
 msgstr "Apple Mail"
 
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
 msgstr "Aplicar Brilho/Contraste após digitalizar"
@@ -195,7 +211,7 @@ msgstr "Confirma remoção de {0} perfis?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Tem certeza que deseja interromper o compartilhamento {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -505,7 +521,7 @@ msgstr "Duplex"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr "ESCL Driver"
+msgstr "Driver ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
@@ -707,6 +723,10 @@ msgstr "Instalação completada. Deseja reiniciar o NAPS2 agora?"
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
 msgstr "Falha na instalação."
+
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -921,6 +941,10 @@ msgstr "Um arquivo por digitalização"
 msgid "One or more files could not be downloaded."
 msgstr "Um ou mais arquivos podem não ter sido baixados."
 
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
+
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
 msgstr "Abrir pasta"
@@ -1037,6 +1061,10 @@ msgstr "Perfil:"
 msgid "Profiles"
 msgstr "Perfis"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "Solicitar o caminho do arquivo"
@@ -1137,6 +1165,7 @@ msgstr "Driver SANE"
 msgid "Save"
 msgstr "Salvar"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "Salvar Tudo"
@@ -1167,6 +1196,7 @@ msgstr "Salvar PDF"
 msgid "Save PDF Progress"
 msgstr "Progresso de Salvamento do PDF"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "Salvar Selecionados"
@@ -1219,7 +1249,7 @@ msgstr "Imagem digitalizada"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Compartilhar Scanner"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1270,21 +1300,26 @@ msgstr "Separar Arquivos por Patch-T"
 msgid "Set Default"
 msgstr "Definir Padrão"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Compartilhar"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Compartilhar mesmo quando o NAPS2 estiver fechado"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Configurações do Scanner Compartilhado"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Scanners compartilhados podem ser usados a partir de outros computadores na rede local selecionando \"Driver ESCL\" nas configurações de perfil NAPS2 do outro computador."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1293,6 +1328,14 @@ msgstr "Nitidez"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Mostrar"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

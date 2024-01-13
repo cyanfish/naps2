@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -18,6 +18,14 @@ msgstr ""
 "X-Crowdin-Language: ca\n"
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -100,6 +108,10 @@ msgstr "Desintercalat alternatiu"
 msgid "Alternate Interleave"
 msgstr "Intercalat alternatiu"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "Es requereix un complement extra per importar aquest fitxer PDF. Voleu baixar-ho ara?"
@@ -160,6 +172,10 @@ msgstr "Controlador d'Apple"
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
 msgstr "Apple Mail"
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -708,6 +724,10 @@ msgstr "S'ha instal·lat correctament. Voleu reiniciar el NAPS2 ara per aplicar 
 msgid "Installation failed."
 msgstr "S'ha produït un error en la instal·lació."
 
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
+
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "Intercala"
@@ -921,6 +941,10 @@ msgstr "Un fitxer per escaneig"
 msgid "One or more files could not be downloaded."
 msgstr "No s'ha pogut baixar un o més fitxers."
 
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
+
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
 msgstr "Obre una carpeta"
@@ -1037,6 +1061,10 @@ msgstr "Perfils:"
 msgid "Profiles"
 msgstr "Perfils"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "Demana la ruta de destinació"
@@ -1137,6 +1165,7 @@ msgstr "Controlador SANE"
 msgid "Save"
 msgstr "Desa"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
 msgstr "Desa-ho tot"
@@ -1167,6 +1196,7 @@ msgstr "Desa (PDF)"
 msgid "Save PDF Progress"
 msgstr "Progrés del desat en PDF"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
 msgstr "Desa la selecció"
@@ -1270,6 +1300,11 @@ msgstr "Separació amb codis Patch-T"
 msgid "Set Default"
 msgstr "Estableix per defecte"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
 msgstr ""
@@ -1293,6 +1328,14 @@ msgstr "Nitidesa"
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Mostra"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

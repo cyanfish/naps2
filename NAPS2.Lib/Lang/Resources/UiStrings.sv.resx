@@ -180,6 +180,30 @@
   <data name="Language" xml:space="preserve">
     <value>Språk</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Interface" xml:space="preserve">
+    <value>Interface</value>
+  </data>
+  <data name="ScanChangesDefaultProfile" xml:space="preserve">
+    <value>"Scan" menu changes default profile</value>
+  </data>
+  <data name="ShowProfilesToolbar" xml:space="preserve">
+    <value>Show "Profiles" toolbar</value>
+  </data>
+  <data name="ShowPageNumbers" xml:space="preserve">
+    <value>Show page numbers</value>
+  </data>
+  <data name="SaveButtonDefaultAction" xml:space="preserve">
+    <value>"Save" button default action:</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="SingleInstanceDesc" xml:space="preserve">
+    <value>Only allow a single NAPS2 instance</value>
+  </data>
   <data name="About" xml:space="preserve">
     <value>Om</value>
   </data>
@@ -511,7 +535,7 @@
     <value>Automatiskt uppräkningnummer (2 siffror)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Auto-uppräknande nummer (1 siffra)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Filnamn</value>
@@ -536,6 +560,9 @@
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>E-postinställningar</value>
+  </data>
+  <data name="SettingsFormTitle" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Leverantör</value>
@@ -703,24 +730,24 @@
     <value>Aktivera felsökningsregistrering</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Dela</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Skannerdelning</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Skannerdelning</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Det går att använda delade skannrar från andra datorer på det lokala nätverket genom att välja "ESCL-drivrutin" i NAPS2:s profilinställningar på den andra datorn.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Inställningar för delad skanner</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Är du säker på att du vill sluta dela {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Dela också när NAPS2 är stängt</value>
   </data>
 </root>

@@ -19,16 +19,16 @@
     <value>Tout effacer</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Faut-il vraiment effacer {0} élément(s) ?</value>
+    <value>Souhaitez-vous vraiment effacer {0} élément(s) ?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
+    <value>Souhaitez-vous vraiment supprimer {0} élément(s) ?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
+    <value>Souhaitez-vous vraiment supprimer {0} profil(s) ?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Faut-il vraiment supprimer le profil « {0} » ?</value>
+    <value>Souhaitez-vous vraiment supprimer le profil « {0} » ?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
     <value>Le fichier « {0} » existe déjà. Faut-il vraiment l'écraser ?</value>
@@ -112,7 +112,7 @@
     <value>Installation terminée</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installation terminée. Faut-il redémarrer NAPS2 maintenant ?</value>
+    <value>Installation terminée. Souhaitez-vous redémarrer NAPS2 maintenant ?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
     <value>Échec de l'installation.</value>
@@ -154,16 +154,16 @@
     <value>Numériser</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Faut-il vraiment défaire les modifications sur {0} image(s) ?</value>
+    <value>Souhaitez-vous vraiment annuler les modifications sur {0} image(s) ?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Réinitialisation de l'image</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Il existe des modifications non enregistrées. Faut-il vraiment quitter et les perdre ?</value>
+    <value>Il existe des modifications non enregistrées. Souhaitez-vous vraiment quitter et les annuler ces modifications ?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>Une opération est en cours. Faut-il vraiment quitter et annuler l'opération ?</value>
+    <value>Une opération est en cours. Souhaitez-vous vraiment quitter et annuler l'opération ?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Modifications non enregistrées</value>
@@ -202,7 +202,7 @@
     <value>Lot terminé avec succès.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Acquisition par lot arrêtée avec l'erreur.</value>
+    <value>Acquisition par lot arrêtée en raison d'une erreur.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>Acquisition de la page {0}...</value>
@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Faut-il vraiment supprimer « {0} » ?</value>
+    <value>Souhaitez-vous vraiment supprimer « {0} » ?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>Le fichier ne peut pas être écrasé car il est en cours d'utilisation.</value>
@@ -325,10 +325,10 @@
     <value>Téléchargement requis</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Faut-il le télécharger maintenant ?</value>
+    <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Souhaitez-vous le télécharger maintenant ?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Faut-il vraiment annuler l'acquisition par lot ?</value>
+    <value>Souhaitez-vous vraiment annuler l'acquisition par lot ?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
     <value>Annuler le lot</value>

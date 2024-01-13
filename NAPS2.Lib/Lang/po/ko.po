@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2023-12-22 14:17\n"
+"PO-Revision-Date: 2024-01-13 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -19,21 +19,29 @@ msgstr ""
 "X-Crowdin-File: templates.pot\n"
 "X-Crowdin-File-ID: 75\n"
 
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr ""
+
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
 msgstr "24-비트 컬러"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr ""
+msgstr "A3 (297x420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr ""
+msgstr "A4 (210x297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "A5 (148x210 mm)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
@@ -42,7 +50,7 @@ msgstr "정보"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr "수집 데이터..."
+msgstr "데이터 수집 중..."
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -100,17 +108,21 @@ msgstr "대체 디인터리브"
 msgid "Alternate Interleave"
 msgstr "대체 인터리브"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "이 PDF 파일을 불러오기 위해서는 추가적인 컴포넌트가 필요합니다. 지금 다운로드 하시겠습니까?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "OCR 작업 중 오류가 발생했습니다."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr ""
+msgstr "인증을 시도하는 중 오류가 발생했습니다."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
@@ -118,7 +130,7 @@ msgstr "파일을 자동으로 저장하는 중 오류가 발생했습니다.."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
-msgstr ""
+msgstr "업데이트를 설치하는 중 오류가 발생했습니다."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -126,7 +138,7 @@ msgstr "파일을 저장하는 중 오류가 발생했습니다.."
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr ""
+msgstr "이메일을 보내는 중 오류가 발생했습니다."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
@@ -139,26 +151,30 @@ msgstr "스캔 중 오류가 발생했습니다.."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr ""
+msgstr "작업이 진행 중입니다. 진행중인 작업을 취소하고 종료하시겠습니까?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "일괄 스캔 중 알 수 없는 오류가 발생했습니다."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
-msgstr ""
+msgstr "업데이트가 있습니다."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "OCR 업데이트를 사용할 수 있습니다.."
+msgstr "OCR 업데이트를 사용할 수 있습니다."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Apple 드라이버"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
+msgstr "Apple 메일"
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
 msgstr ""
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
@@ -171,7 +187,7 @@ msgstr "선택된 {0} 개의 이미지에 적용"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr ""
+msgstr "일괄 스캔을 취소하시겠습니까?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -195,7 +211,7 @@ msgstr "{0} 개의 프로파일을 삭제하시겠습니까?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "{0} 의 공유를 중단하시겠습니까?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -211,11 +227,11 @@ msgstr "작성자:"
 
 #: UiStrings.resx$AuthorizeFormTitle$Message
 msgid "Authorize"
-msgstr ""
+msgstr "인증"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "자동"
 
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
@@ -224,7 +240,7 @@ msgstr "자동 저장 설정"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "자동 증가 번호 (한자리)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -240,15 +256,15 @@ msgstr "자동 증가 번호 (네자리)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr ""
+msgstr "스캔 후 자동으로 OCR 실행"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -257,19 +273,19 @@ msgstr "일괄 스캔"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled."
-msgstr "일괄 작업이 취소되었습니다.."
+msgstr "일괄 작업이 취소되었습니다."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "일괄 작업이 완료되었습니다.."
+msgstr "일괄 작업이 완료되었습니다."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "오류로 인해 일괄 작업이 중지되었습니다.."
+msgstr "오류로 인해 일괄 작업이 중지되었습니다."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "최고 품질"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -298,7 +314,7 @@ msgstr "밝기:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -307,11 +323,11 @@ msgstr "취소"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "일괄 작업 취소"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr "취소하기...."
+msgstr "취소하는 중..."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -319,19 +335,19 @@ msgstr "중앙"
 
 #: UiStrings.resx$Change$Message
 msgid "Change"
-msgstr ""
+msgstr "변경"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "업데이트 확인"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr ""
+msgstr "확인 중..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "이메일 제공자 선택"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -344,15 +360,15 @@ msgstr "장치 선택"
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
 msgid "Clear"
-msgstr "비우기"
+msgstr "지우기"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "모두 지우기"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
-msgstr "자동저장 후 이미지 비우기"
+msgstr "자동 저장 후 이미지 지우기"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -364,7 +380,7 @@ msgstr "호환성"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
-msgstr ""
+msgstr "압축 방법:"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -376,7 +392,7 @@ msgstr "복사"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr "복사 진행상태"
+msgstr "복사 진행 중"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
@@ -384,7 +400,7 @@ msgstr "복사 중..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Copyright {0} NAPS2 기여자들"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -392,7 +408,7 @@ msgstr "적용범위 임계값"
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
-msgstr "잘라내기"
+msgstr "자르기"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
@@ -412,7 +428,7 @@ msgstr "사용자 정의 회전"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "사용자 설정 SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom..."
@@ -420,7 +436,7 @@ msgstr "사용자 설정..."
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
-msgstr "일자 (01-31)"
+msgstr "일 (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -448,7 +464,7 @@ msgstr "기울기 보정"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr "기울기 보정"
+msgstr "기울기 보정 중"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
@@ -472,12 +488,12 @@ msgstr "표시 이름:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "문서 교정"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "후원"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -497,7 +513,7 @@ msgstr "다운로드가 필요합니다"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr "다운로드 진행상황"
+msgstr "다운로드 진행 중"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -505,15 +521,15 @@ msgstr "양방향"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL 드라이버"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL 네트워크 드라이버"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB 드라이버"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -521,28 +537,28 @@ msgstr "편집"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "모두 이메일 보내기"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "모두 PDF로 이메일로 보내기"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "이메일 PDF"
+msgstr "PDF로 이메일 보내기"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "이메일 PDF 진행상황"
+msgstr "PDF로 이메일 보내기 진행 중"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "선택된 항목 이메일로 보내기"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "선택된 항목을 PDF로 이메일 보내기"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -555,7 +571,7 @@ msgstr "자동 저장 켜기"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "디버그 로깅 활성화"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -567,7 +583,7 @@ msgstr "암호화"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "확장 메타 파일 (*.emf)"
+msgstr "확장 메타파일 (*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
@@ -581,7 +597,7 @@ msgstr "예상 다운로드 용량: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "교환이미지 파일 (*.exif)"
+msgstr "교환 가능한 이미지 파일 (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -589,7 +605,7 @@ msgstr "빈 페이지 제외"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "빠르게"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -613,7 +629,7 @@ msgstr "양면 인쇄 된 페이지 뒤집기"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr ""
+msgstr "높은 JPEG 품질(80 이상)을 선택한 경우 최상의 결과를 위해 프로파일에서 이미지 품질도 높히는 것이 좋습니다."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -629,7 +645,7 @@ msgstr "평판"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -678,7 +694,7 @@ msgstr "가져오기"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr "가져오기 진행 상태"
+msgstr "가져오기 진행 중"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
@@ -690,7 +706,7 @@ msgstr "가져오는 중입니다..."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "{0} 설치"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -708,6 +724,10 @@ msgstr "설치가 완료되었습니다. NAPS2 를 재시작 하시겠습니까?
 msgid "Installation failed."
 msgstr "설치 실패."
 
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr ""
+
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
 msgstr "인터리브"
@@ -718,7 +738,7 @@ msgstr "JPEG 파일 (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG2000 파일 (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -730,7 +750,7 @@ msgstr "검색어:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -758,7 +778,7 @@ msgstr "최대 품질 (용량 큼)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "메모리 전송"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -796,15 +816,15 @@ msgstr "여러장 스캔하기 (매 장마다 팝업 표시)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr ""
+msgstr "NAPS2는 완전 무료로 제공됩니다. 기부를 고려해 보십시오."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -816,7 +836,7 @@ msgstr "이름이 없습니다."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "네이티브 전송"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -842,28 +862,28 @@ msgstr "선택된 장치가 없습니다.."
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder."
-msgstr "공급장치에 용지가 없습니다.."
+msgstr "공급장치에 용지가 없습니다."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr ""
+msgstr "제공자 선택되지 않음"
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found."
-msgstr "스캔 장치를 찾을 수 없습니다.."
+msgstr "스캔 장치를 찾을 수 없습니다."
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr ""
+msgstr "사용 가능한 업데이트가 없습니다."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
-msgstr ""
+msgstr "없음"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Not Another PDF Scanner"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -875,7 +895,7 @@ msgstr "스캔 장 수:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -883,7 +903,7 @@ msgstr "OCR 다운로드"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "OCR 진행 중"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
@@ -895,7 +915,7 @@ msgstr "OCR 언어:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr ""
+msgstr "OCR 모드:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
@@ -919,7 +939,11 @@ msgstr "스캔 당 한 개 파일"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded."
-msgstr "한개 또는 그 이상의 파일을 다운로드 할 수 없습니다.."
+msgstr "하나 이상의 파일을 다운로드 할 수 없습니다."
+
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr ""
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -927,11 +951,11 @@ msgstr "폴더 열기"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "작업 진행 중"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "웹용 Outlook"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
@@ -960,19 +984,19 @@ msgstr "PDF 가 저장되었습니다."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1037,17 +1061,21 @@ msgstr "프로파일:"
 msgid "Profiles"
 msgstr "프로파일"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr ""
+
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
 msgstr "파일 경로창"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
-msgstr ""
+msgstr "제공자"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
-msgstr "{0} 개의 스캔 준비됨."
+msgstr "스캔 {0} 준비됨."
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
@@ -1063,11 +1091,11 @@ msgstr "복구 중..."
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr "복구 진행 상황"
+msgstr "복구 진행 중"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
-msgstr "설정값 기억"
+msgstr "설정 기억하기"
 
 #: UiStrings.resx$Reorder$Message
 msgid "Reorder"
@@ -1087,7 +1115,7 @@ msgstr "해상도:"
 
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
-msgstr "초기설정으로 복원"
+msgstr "초기 설정으로 복원"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1095,15 +1123,15 @@ msgstr "뒤집기"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "모두 뒤집기"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "선택한 항목 뒤집기"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
-msgstr "되돌림"
+msgstr "되돌리기"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -1123,31 +1151,32 @@ msgstr "오른쪽으로 회전"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "백그라운드에서 실행"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr ""
+msgstr "OCR 실행 중..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE 드라이버"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "모두 저장"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "모두 이미지로 저장"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "모두 PDF로 저장"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1156,7 +1185,7 @@ msgstr "이미지 저장"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "이미지 저장 상황"
+msgstr "이미지 저장 중"
 
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
@@ -1165,19 +1194,20 @@ msgstr "PDF 저장"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "PDF 저장 상황"
+msgstr "PDF 저장 중"
 
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "선택된 항목 저장"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "선택된 항목을 이미지로 저장"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "선택된 항목을 PDF로 저장"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1189,7 +1219,7 @@ msgstr "여러 파일로 저장하기"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr "일괄 작업 결과 저장하기..."
+msgstr "일괄 작업 결과 저장 중..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
@@ -1219,7 +1249,7 @@ msgstr "스캔된 이미지"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "스캐너 공유"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1227,7 +1257,7 @@ msgstr "{0} 페이지 스캔 중"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
-msgstr "{0} 페이지 스캔 중 ({1} 스캔)..."
+msgstr "{0} 페이지 스캔 중 (스캔 {1})..."
 
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanProgressPage$Message
@@ -1252,15 +1282,15 @@ msgstr "원본 선택"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
-msgstr "스캔을 클릭하기 전에 프로파일을 선택 해 주세요.."
+msgstr "스캔을 클릭하기 전에 프로파일을 선택 해 주세요."
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
-msgstr "한 개 또는 그 이상의 언어를 선택 해 주세요.:"
+msgstr "한 개 이상의 언어를 선택 해 주세요:"
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
-msgstr "{0} 개 선택됨"
+msgstr "선택된 항목 ({0})"
 
 #: UiStrings.resx$SeparateByPatchT$Message
 msgid "Separate files by Patch-T"
@@ -1270,21 +1300,26 @@ msgstr "Patch-T 를 통한 파일 분할"
 msgid "Set Default"
 msgstr "기본값 설정"
 
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr ""
+
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "공유"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "NAPS2를 닫아도 공"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "공유된 스캐너 설정"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "공유된 스캐너는 로컬 네트워크에 있는 다른 컴퓨터의 NAPS2 프로필 설정에서 \"ESCL 드라이버\"를 선택해 사용할 수 있습니다."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1294,9 +1329,17 @@ msgstr "샤픈"
 msgid "Show"
 msgstr "보기"
 
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr ""
+
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
-msgstr ""
+msgstr "단일 페이지 파일"
 
 #: UiStrings.resx$SingleScan$Message
 msgid "Single scan"
@@ -1333,25 +1376,25 @@ msgstr "기술 상세"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr ""
+msgstr "OCR 엔진을 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "OCR 작업 시간이 초과되었습니다."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr ""
+msgstr "SANE 드라이버를 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
-msgstr "'{0}' 파일을 불러올 수 없습니다.."
+msgstr "'{0}' 파일을 불러올 수 없습니다."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "'{0}' 파일을 불러올 수 없습니다. NAPS2 는 PDF 파일만 제작이 가능합니다.."
+msgstr "'{0}' 파일을 불러올 수 없습니다. NAPS2에서 제작한 PDF 파일만 불러올 수 있습니다."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1363,7 +1406,7 @@ msgstr "{0} 파일이 이미 존재합니다. 덮어쓰시겠습니까?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "다음 파일은 암호화 되어 있으며 열기 위해서는 암호가 필요합니다:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1383,40 +1426,40 @@ msgstr "스캐너 커버 열림."
 #: MiscResources.resx$DriverNotSupported$Message
 #: SdkResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system."
-msgstr ""
+msgstr "선택한 드라이버는 이 시스템에서 사용할 수 없습니다."
 
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found."
-msgstr "선택된 스캐너를 찾을 수 없습니다.."
+msgstr "선택된 스캐너를 찾을 수 없습니다."
 
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
-msgstr "선택된 스캐너에서는 지급기를 사용할 수 없습니다. 만약 지급기가 있는 스캐너라면, 다른 드라이버를 선택 해 주세요.."
+msgstr "선택된 스캐너에서는 지급기를 사용할 수 없습니다. 만약 지급기가 있는 스캐너라면, 다른 드라이버를 선택 해 주세요."
 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "선택된 스캐너에서는 양면 기능을 사용할 수 없습니다. 만약 스캐너가 양면 기능을 지원한다면, 다른 드라이버를 선택 해 주세요.."
+msgstr "선택된 스캐너에서는 양면 기능을 사용할 수 없습니다. 만약 스캐너가 양면 기능을 지원한다면, 다른 드라이버를 선택 해 주세요."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy."
-msgstr "선택된 스캐너가 사용 중 입니다.."
+msgstr "선택된 스캐너가 사용 중 입니다."
 
 #: MiscResources.resx$DeviceOffline$Message
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
-msgstr "선택된 스캐너의 연결이 끊겼습니다. ."
+msgstr "선택된 스캐너의 연결이 끊겼습니다."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "TIFF 옵션"
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
@@ -1428,19 +1471,19 @@ msgstr "제목:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "도구"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr "Twain 구현:"
+msgstr "TWAIN 구현:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr ""
+msgstr "US Legal (8.5x14 인치)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr ""
+msgstr "US Letter (8.5x11 인치)"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1448,19 +1491,19 @@ msgstr "저장되지 않은 변경 사항"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "업데이트 진행 중"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "업데이트 확인이 비활성화 되어 있습니다."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
-msgstr ""
+msgstr "업데이트 중..."
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
-msgstr ""
+msgstr "이메일 업로드 중..."
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1476,12 +1519,12 @@ msgstr "사용자 암호:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
-msgstr "OCR 을 이용하여 스캔하고자 하는 각 언어를 선택 해 주세요.."
+msgstr "OCR을 이용하려면 스캔하고자 하는 언어를 다운로드 해야 합니다."
 
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
 msgid "Version {0}"
-msgstr "{0} 버전"
+msgstr "버전 {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
@@ -1497,11 +1540,11 @@ msgstr "TWAIN 완료 대기중..."
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
-msgstr ""
+msgstr "인증을 기다리는 중..."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
-msgstr "{0} 스캔 대기중..."
+msgstr "스캔 {0} 대기중..."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
@@ -1509,7 +1552,7 @@ msgstr "백색 임계값"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "WIA 버전:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1550,35 +1593,35 @@ msgstr "축소"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr ""
+msgstr "인치"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
-msgstr ""
+msgstr "중 {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
@@ -1586,11 +1629,11 @@ msgstr "{0} / {1} 파일"
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr ""
+msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "스캔된 {0} 이미지가 {2} 의 {1} 에 저장되지 않았을 수 있습니다. 복구 하시겠습니까?"
+msgstr "{1} {2} 에 스캔된 {0} 개의 이미지를 복구 할 수 있습니다. 복구 하시겠습니까?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

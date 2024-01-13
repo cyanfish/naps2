@@ -180,6 +180,30 @@
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Interface" xml:space="preserve">
+    <value>Interface</value>
+  </data>
+  <data name="ScanChangesDefaultProfile" xml:space="preserve">
+    <value>"Scan" menu changes default profile</value>
+  </data>
+  <data name="ShowProfilesToolbar" xml:space="preserve">
+    <value>Show "Profiles" toolbar</value>
+  </data>
+  <data name="ShowPageNumbers" xml:space="preserve">
+    <value>Show page numbers</value>
+  </data>
+  <data name="SaveButtonDefaultAction" xml:space="preserve">
+    <value>"Save" button default action:</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="SingleInstanceDesc" xml:space="preserve">
+    <value>Only allow a single NAPS2 instance</value>
+  </data>
   <data name="About" xml:space="preserve">
     <value>Sobre</value>
   </data>
@@ -244,7 +268,7 @@
     <value>Driver TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Driver ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
     <value>ESCL Network Driver</value>
@@ -537,6 +561,9 @@
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>Configurações de e-mail</value>
   </data>
+  <data name="SettingsFormTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Provider" xml:space="preserve">
     <value>Provedor</value>
   </data>
@@ -703,24 +730,24 @@
     <value>Habilitar log de depuração</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Compartilhar</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Compartilhar Scanner</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Compartilhar Scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Scanners compartilhados podem ser usados a partir de outros computadores na rede local selecionando "Driver ESCL" nas configurações de perfil NAPS2 do outro computador.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Configurações do Scanner Compartilhado</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Tem certeza que deseja interromper o compartilhamento {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Compartilhar mesmo quando o NAPS2 estiver fechado</value>
   </data>
 </root>

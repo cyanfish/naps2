@@ -127,7 +127,7 @@
     <value>Inbyggd (endast inbyggt användargränssnitt)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Inbyggd överföring</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
     <value>Minnesöverföring</value>
@@ -146,5 +146,17 @@
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Bäst</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
+    <value>Spara alla</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
+    <value>Spara markerade</value>
+  </data>
+  <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
+    <value>Always Prompt</value>
+  </data>
+  <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
+    <value>Prompt If Selected</value>
   </data>
 </root>
