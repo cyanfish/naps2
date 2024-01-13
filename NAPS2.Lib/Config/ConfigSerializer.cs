@@ -151,6 +151,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         if (c.HideSaveImagesButton) flags |= ToolbarButtons.SaveImages;
         if (c.HideEmailButton) flags |= ToolbarButtons.EmailPdf;
         if (c.HidePrintButton) flags |= ToolbarButtons.Print;
+        if (c.HideSettingsButton) flags |= ToolbarButtons.Settings;
         if (c.HideDonateButton) flags |= ToolbarButtons.Donate;
         return flags;
     }

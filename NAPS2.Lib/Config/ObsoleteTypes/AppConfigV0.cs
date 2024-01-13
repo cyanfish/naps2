@@ -34,6 +34,8 @@ public class AppConfigV0
 
     public bool HidePrintButton { get; set; }
 
+    public bool HideSettingsButton { get; set; }
+
     public bool HideDonateButton { get; set; }
 
     public bool DisableAutoSave { get; set; }

@@ -12,6 +12,7 @@
   <HideSaveImagesButton>false</HideSaveImagesButton>
   <HideEmailButton>false</HideEmailButton>
   <HidePrintButton>false</HidePrintButton>
+  <HideSettingsButton>false</HideSettingsButton>
   <HideDonateButton>false</HideDonateButton>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
