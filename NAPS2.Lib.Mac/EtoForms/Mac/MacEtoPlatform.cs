@@ -74,6 +74,12 @@ public class MacEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
+        if (control is Button)
+        {
+            // EtoButton has some weird IsAutoSize logic that conflicts with frame setting unless w/h are defined
+            control.Width = size.Width;
+            control.Height = size.Height;
+        }
         var rect = new CGRect(location.X, container.Height - location.Y - size.Height, size.Width, size.Height);
         var view = control.ToNative();
         view.Frame = view.GetFrameForAlignmentRect(rect);
