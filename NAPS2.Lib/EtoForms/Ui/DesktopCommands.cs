@@ -12,10 +12,11 @@ public class DesktopCommands
     private readonly ImageListActions _imageListActions;
     private readonly ThumbnailController _thumbnailController;
     private readonly IIconProvider _iconProvider;
+    private readonly Naps2Config _config;
 
     public DesktopCommands(DesktopController desktopController, DesktopScanController desktopScanController,
         IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions,
-        ThumbnailController thumbnailController, IIconProvider iconProvider)
+        ThumbnailController thumbnailController, IIconProvider iconProvider, Naps2Config config)
     {
         _desktopController = desktopController;
         _desktopScanController = desktopScanController;
@@ -24,6 +25,9 @@ public class DesktopCommands
         _imageListActions = imageListActions;
         _thumbnailController = thumbnailController;
         _iconProvider = iconProvider;
+        _config = config;
+
+        var hiddenButtons = config.Get(c => c.HiddenButtons);
 
         Scan = new ActionCommand(desktopScanController.ScanDefault)
         {
@@ -277,12 +281,12 @@ public class DesktopCommands
         Settings = new ActionCommand(desktopSubFormController.ShowSettingsForm)
         {
             Text = UiStrings.Settings,
-            Image = iconProvider.GetIcon("cog")
+            Image = iconProvider.GetIcon(hiddenButtons.HasFlag(ToolbarButtons.About) ? "cog" : "cog_small")
         };
         About = new ActionCommand(desktopSubFormController.ShowAboutForm)
         {
             Text = UiStrings.About,
-            Image = iconProvider.GetIcon("information")
+            Image = iconProvider.GetIcon(hiddenButtons.HasFlag(ToolbarButtons.Settings) ? "information" : "information_small")
         };
         ZoomIn = new ActionCommand(() => thumbnailController.StepSize(1))
         {
@@ -320,7 +324,8 @@ public class DesktopCommands
             _imageList,
             _imageListActions.WithSelection(selectionFunc),
             _thumbnailController,
-            _iconProvider);
+            _iconProvider,
+            _config);
     }
 
     public ImageListActions ImageListActions => _imageListActions;
