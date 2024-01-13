@@ -5,8 +5,8 @@
   <StartupMessageTitle></StartupMessageTitle>
   <StartupMessageText></StartupMessageText>
   <StartupMessageIcon>Information</StartupMessageIcon>
-  <ScanButtonDefaultAction>ScanWithDefaultProfile</ScanButtonDefaultAction>
-  <SaveButtonDefaultAction>SaveAll</SaveButtonDefaultAction>
+  <ScanButtonDefaultAction mode="default">ScanWithDefaultProfile</ScanButtonDefaultAction>
+  <SaveButtonDefaultAction mode="default">SaveAll</SaveButtonDefaultAction>
   <HideOcrButton>false</HideOcrButton>
   <HideImportButton>false</HideImportButton>
   <HideSavePdfButton>false</HideSavePdfButton>
@@ -23,9 +23,9 @@
   <NoUpdatePrompt>false</NoUpdatePrompt>
   <NoDebugLogging>false</NoDebugLogging>
   <NoScannerSharing>false</NoScannerSharing>
-  <DeleteAfterSaving>false</DeleteAfterSaving>
+  <DeleteAfterSaving mode="default">true</DeleteAfterSaving>
   <DisableSaveNotifications>false</DisableSaveNotifications>
-  <SingleInstance>false</SingleInstance>
+  <SingleInstance mode="default">false</SingleInstance>
   <ComponentsPath></ComponentsPath>
   <OcrTimeoutInSeconds>600</OcrTimeoutInSeconds>
   <OcrState>UserConfig</OcrState>
