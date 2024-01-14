@@ -23,6 +23,11 @@ public static class Log
         set => _eventLogger = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    public static void Debug(string message)
+    {
+        _logger.LogDebug(message);
+    }
+
     public static void Info(string message)
     {
         _logger.LogInformation(message);

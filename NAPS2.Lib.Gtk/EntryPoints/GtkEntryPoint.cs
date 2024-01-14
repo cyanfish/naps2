@@ -12,6 +12,7 @@ public static class GtkEntryPoint
     public static int Run(string[] args)
     {
         GLib.ExceptionManager.UnhandledException += UnhandledGtkException;
+        GLibLogInterceptor.WriteToDebugLog();
         EtoPlatform.Current = new GtkEtoPlatform();
 
         var subArgs = args.Skip(1).ToArray();
