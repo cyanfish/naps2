@@ -200,7 +200,14 @@ public class GtkEtoPlatform : EtoPlatform
         var size = new Size(w, h);
         if (excludeToolbars && window.ToolBar != null)
         {
-            size -= new Size(0, ((GTK.Toolbar) window.ToolBar.ControlObject).AllocatedHeight);
+            var toolbar = (GTK.Toolbar) window.ToolBar.ControlObject;
+            var vbox = (GTK.VBox) toolbar.Parent;
+            var heights = vbox.Children.OfType<GTK.Toolbar>().Select(x =>
+            {
+                x.GetPreferredHeight(out _, out int naturalHeight);
+                return naturalHeight;
+            });
+            size -= new Size(0, heights.Sum());
         }
         return size;
     }

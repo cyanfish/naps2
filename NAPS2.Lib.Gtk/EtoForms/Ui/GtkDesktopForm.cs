@@ -6,6 +6,7 @@ using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
+using NAPS2.Scan;
 using Command = Eto.Forms.Command;
 
 namespace NAPS2.EtoForms.Ui;
@@ -18,6 +19,7 @@ public class GtkDesktopForm : DesktopForm
     private int _toolbarMenuToggleCount;
     private int _toolbarPadding;
     private CssProvider? _toolbarPaddingCssProvider;
+    private Toolbar _profilesToolbar = null!;
 
     public GtkDesktopForm(
         Naps2Config config,
@@ -71,6 +73,7 @@ public class GtkDesktopForm : DesktopForm
         base.OnLoad(e);
         var listView = (GtkListView<UiImage>) _listView;
         listView.NativeControl.StyleContext.AddClass("desktop-listview");
+        PlaceProfilesToolbar();
     }
 
     protected override void OnSizeChanged(EventArgs e)
@@ -106,6 +109,54 @@ public class GtkDesktopForm : DesktopForm
         _toolbar = ((ToolBarHandler) ToolBar.Handler).Control;
         _toolbar.Style = ToolbarStyle.Both;
         _toolbar.StyleContext.AddClass("desktop-toolbar");
+
+        _profilesToolbar = new Toolbar();
+        _profilesToolbar.Style = ToolbarStyle.BothHoriz;
+    }
+
+    public override void PlaceProfilesToolbar()
+    {
+        if (Config.Get(c => c.ShowProfilesToolbar) && _profilesToolbar.Parent == null)
+        {
+            ((VBox) _toolbar.Parent).Add(_profilesToolbar);
+            LayoutController.Invalidate();
+        }
+        if (!Config.Get(c => c.ShowProfilesToolbar) && _profilesToolbar.Parent != null)
+        {
+            ((VBox) _toolbar.Parent).Remove(_profilesToolbar);
+            LayoutController.Invalidate();
+        }
+    }
+
+    protected override void UpdateProfilesToolbar()
+    {
+        var profiles = _profileManager.Profiles;
+        var extra = _profilesToolbar.NItems - profiles.Count;
+        var missing = profiles.Count - _profilesToolbar.NItems;
+        for (int i = 0; i < extra; i++)
+        {
+            _profilesToolbar.Remove(_profilesToolbar.Children.Last());
+        }
+        for (int i = 0; i < missing; i++)
+        {
+            var item = new ToolButton(Icons.control_play_blue_small.ToEtoImage().ToGtk(), "test")
+            {
+                Homogeneous = false,
+                IsImportant = true
+            };
+            item.Clicked += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Data["naps2_profile"]!);
+            _profilesToolbar.Add(item);
+        }
+        for (int i = 0; i < profiles.Count; i++)
+        {
+            var profile = profiles[i];
+            var item = (ToolButton) _profilesToolbar.GetNthItem(i);
+            item.Data["naps2_profile"] = profile;
+            if (item.Label != profile.DisplayName)
+            {
+                item.Label = profile.DisplayName;
+            }
+        }
     }
 
     protected override void CreateToolbarButton(Command command)
