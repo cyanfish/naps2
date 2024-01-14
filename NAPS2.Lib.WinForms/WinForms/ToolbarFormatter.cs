@@ -21,12 +21,9 @@ public class ToolbarFormatter
     {
         if (tStrip.Parent == null) return;
         // Resize and wrap text as necessary
-        using (var g = tStrip.CreateGraphics())
+        foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
         {
-            foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
-            {
-                btn.Text = _stringWrapper.Wrap(btn.Text ?? "", 80, g, btn.Font);
-            }
+            btn.Text = _stringWrapper.Wrap(btn.Text ?? "", 80, btn.Font);
         }
         ResetToolbarMargin(tStrip);
         // Recalculate sizes

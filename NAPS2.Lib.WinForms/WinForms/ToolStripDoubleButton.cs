@@ -37,8 +37,7 @@ public class ToolStripDoubleButton : ToolStripButton
 
     private int MeasureTextWidth(string text, ref bool wrap)
     {
-        using var g = Graphics.FromImage(new Bitmap(1, 1));
-        var width = (int) Math.Ceiling(g.MeasureString(text, Font).Width);
+        var width = TextRenderer.MeasureText(text, Font).Width;
         if (MaxTextWidth > 0 && width > MaxTextWidth)
         {
             var words = text.Split(' ');
@@ -46,7 +45,7 @@ public class ToolStripDoubleButton : ToolStripButton
             {
                 var left = string.Join(" ", words.Take(words.Length - i));
                 var right = string.Join(" ", words.Skip(words.Length - i));
-                var wrappedWidth = (int) Math.Ceiling(g.MeasureString(left + "\n" + right, Font).Width);
+                var wrappedWidth = TextRenderer.MeasureText(left + "\n" + right, Font).Width;
                 if (wrappedWidth < width)
                 {
                     width = wrappedWidth;

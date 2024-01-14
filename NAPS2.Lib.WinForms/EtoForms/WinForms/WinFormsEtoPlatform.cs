@@ -73,8 +73,7 @@ public class WinFormsEtoPlatform : EtoPlatform
             }
 
             var imageWidth = native.Image!.Width;
-            using var g = native.CreateGraphics();
-            var textWidth = (int) g.MeasureString(native.Text, native.Font).Width;
+            var textWidth = WF.TextRenderer.MeasureText(native.Text, native.Font).Width;
             native.AutoSize = false;
 
             if (big)
@@ -187,8 +186,8 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         if (control.ControlObject is WF.Label label)
         {
-            using var g = label.CreateGraphics();
-            return g.MeasureString(label.Text, label.Font, defaultWidth).ToEto();
+            return WF.TextRenderer.MeasureText(label.Text, label.Font, new SD.Size(defaultWidth, int.MaxValue),
+                WF.TextFormatFlags.WordBreak).ToEto();
         }
         return base.GetWrappedSize(control, defaultWidth);
     }

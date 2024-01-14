@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 
 namespace NAPS2.Util;
 
@@ -8,7 +9,7 @@ namespace NAPS2.Util;
 /// </summary>
 public class StringWrapper
 {
-    public string Wrap(string text, int maxWidth, Graphics drawingGraphics, Font drawingFont)
+    public string Wrap(string text, int maxWidth, Font drawingFont)
     {
         var result = new StringBuilder();
         var parts = new Queue<string>(text.Split(' '));
@@ -19,7 +20,7 @@ public class StringWrapper
             {
                 nextParts.Add(parts.Dequeue());
             } while (
-                parts.Count > 0 && drawingGraphics.MeasureString(string.Join(" ", nextParts.Concat(new[] { parts.Peek() })).Replace("&", ""),
+                parts.Count > 0 && TextRenderer.MeasureText(string.Join(" ", nextParts.Concat(new[] { parts.Peek() })).Replace("&", ""),
                     drawingFont).Width < maxWidth);
             result.Append(string.Join(" ", nextParts));
             if (parts.Count > 0)

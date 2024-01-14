@@ -88,7 +88,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             // to have room for the page numbers, and the selection rectangle has a completely different style to
             // encompass the page numbers too.
             string label = $"{e.ItemIndex + 1} / {_view.Items.Count}";
-            SizeF textSize = e.Graphics.MeasureString(label, _view.Font);
+            SizeF textSize = TextRenderer.MeasureText(label, _view.Font);
             int textOffset = (int) (textSize.Height + PageNumberTextPadding);
 
             float scaleHeight = (float) (ImageSize - textOffset) / image.Height;
