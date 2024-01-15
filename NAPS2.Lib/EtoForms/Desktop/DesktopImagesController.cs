@@ -28,4 +28,11 @@ public class DesktopImagesController
             }
         };
     }
+
+    public void AppendImageBatch(IEnumerable<ProcessedImage> images)
+    {
+        _imageList.Mutate(
+            new ImageListMutation.Append(images.Select(image => new UiImage(image))),
+            isPassiveInteraction: true);
+    }
 }

@@ -306,13 +306,10 @@ public class DesktopController
             AutoSessionRestore = _config.Get(c => c.KeepSession),
             ThumbnailSize = _thumbnailController.RenderSize
         };
-        if (op.Start(_desktopImagesController.ReceiveScannedImage(), recoveryParams))
+        if (op.Start(_desktopImagesController.ReceiveScannedImage(), _desktopImagesController.AppendImageBatch,
+                recoveryParams))
         {
-            if (recoveryParams.AutoSessionRestore)
-            {
-                _operationProgress.ShowBackgroundProgress(op);
-            }
-            else
+            if (!recoveryParams.AutoSessionRestore)
             {
                 _operationProgress.ShowProgress(op);
             }

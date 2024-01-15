@@ -102,14 +102,16 @@ public class RecoverableFolder : IDisposable
         }
     }
 
-    public bool TryRecover(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams,
-        ProgressHandler progress)
+    public bool TryRecover(Action<ProcessedImage> imageCallback, Action<IEnumerable<ProcessedImage>> imageBatchCallback,
+        RecoveryParams recoveryParams, ProgressHandler progress)
     {
         if (_disposed) throw new ObjectDisposedException(nameof(RecoverableFolder));
 
         int currentProgress = 0;
         int totalProgress = ImageCount;
         progress.Report(currentProgress, totalProgress);
+
+        var recoveredImages = new List<ProcessedImage>();
 
         foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
         {
@@ -145,10 +147,21 @@ public class RecoverableFolder : IDisposable
 
             var storage = new ImageFileStorage(newPath);
             var recoveredImage = CreateRecoveredImage(recoveryParams, storage, indexImage);
-            imageCallback(recoveredImage);
+            if (!recoveryParams.AutoSessionRestore)
+            {
+                imageCallback(recoveredImage);
+            }
+            else
+            {
+                recoveredImages.Add(recoveredImage);
+            }
 
             currentProgress++;
             progress.Report(currentProgress, totalProgress);
+        }
+        if (recoveryParams.AutoSessionRestore)
+        {
+            imageBatchCallback(recoveredImages);
         }
         // Now that we've recovered successfully, we can safely delete the old folder
         TryDelete();

@@ -56,6 +56,18 @@ public abstract class OperationBase : IOperation
         StartTask(() => Task.FromResult(action()));
     }
 
+    protected void RunSync(Func<bool> action)
+    {
+        try
+        {
+            _tcs.TrySetResult(action());
+        }
+        catch (Exception ex)
+        {
+            _tcs.TrySetException(ex);
+        }
+    }
+
     private void StartTask(Func<Task<bool>> action)
     {
         Task.Run(async () =>
