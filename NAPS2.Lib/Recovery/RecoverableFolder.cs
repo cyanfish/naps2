@@ -102,16 +102,41 @@ public class RecoverableFolder : IDisposable
         }
     }
 
-    public bool TryRecover(Action<ProcessedImage> imageCallback, Action<IEnumerable<ProcessedImage>> imageBatchCallback,
-        RecoveryParams recoveryParams, ProgressHandler progress)
+    public IEnumerable<ProcessedImage> FastRecover()
+    {
+        if (_disposed) throw new ObjectDisposedException(nameof(RecoverableFolder));
+
+        var recoveredImages = new List<ProcessedImage>();
+        foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
+        {
+            var (oldPath, newPath) = GetPaths(indexImage);
+            try
+            {
+                // Move instead of copying as it's faster
+                File.Move(oldPath, newPath);
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Could not recover image", e);
+                continue;
+            }
+
+            var storage = new ImageFileStorage(newPath);
+            recoveredImages.Add(CreateRecoveredImage(new RecoveryParams(), storage, indexImage));
+        }
+        // Delete the old folder (which should be mostly empty now)
+        TryDelete();
+        return recoveredImages;
+    }
+
+    public bool TryRecover(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams,
+        ProgressHandler progress)
     {
         if (_disposed) throw new ObjectDisposedException(nameof(RecoverableFolder));
 
         int currentProgress = 0;
         int totalProgress = ImageCount;
         progress.Report(currentProgress, totalProgress);
-
-        var recoveredImages = new List<ProcessedImage>();
 
         foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
         {
@@ -120,20 +145,10 @@ public class RecoverableFolder : IDisposable
                 return false;
             }
 
-            string imagePath = Path.Combine(_directory.FullName, indexImage.FileName!);
-            var ext = Path.GetExtension(imagePath);
-            string newPath = _scanningContext.FileStorageManager!.NextFilePath() + ext;
-
+            var (oldPath, newPath) = GetPaths(indexImage);
             try
             {
-                if (recoveryParams.AutoSessionRestore)
-                {
-                    File.Move(imagePath, newPath);
-                }
-                else
-                {
-                    File.Copy(imagePath, newPath);
-                }
+                File.Copy(oldPath, newPath);
             }
             catch (Exception e)
             {
@@ -147,25 +162,22 @@ public class RecoverableFolder : IDisposable
 
             var storage = new ImageFileStorage(newPath);
             var recoveredImage = CreateRecoveredImage(recoveryParams, storage, indexImage);
-            if (!recoveryParams.AutoSessionRestore)
-            {
-                imageCallback(recoveredImage);
-            }
-            else
-            {
-                recoveredImages.Add(recoveredImage);
-            }
+            imageCallback(recoveredImage);
 
             currentProgress++;
             progress.Report(currentProgress, totalProgress);
         }
-        if (recoveryParams.AutoSessionRestore)
-        {
-            imageBatchCallback(recoveredImages);
-        }
         // Now that we've recovered successfully, we can safely delete the old folder
         TryDelete();
         return true;
+    }
+
+    private (string oldPath, string newPath) GetPaths(RecoveryIndexImage indexImage)
+    {
+        string oldPath = Path.Combine(_directory.FullName, indexImage.FileName!);
+        var ext = Path.GetExtension(oldPath);
+        string newPath = _scanningContext.FileStorageManager!.NextFilePath() + ext;
+        return (oldPath, newPath);
     }
 
     private ProcessedImage CreateRecoveredImage(RecoveryParams recoveryParams, IImageStorage storage,
@@ -178,7 +190,7 @@ public class RecoverableFolder : IDisposable
         // TODO: Make this take a lazy rendered image or something
         processedImage = ImportPostProcessor.AddPostProcessingData(processedImage,
             null,
-            recoveryParams.AutoSessionRestore ? null : recoveryParams.ThumbnailSize,
+            recoveryParams.ThumbnailSize,
             new BarcodeDetectionOptions(),
             true);
         return processedImage;

@@ -18,8 +18,7 @@ internal class RecoveryOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(Action<ProcessedImage> imageCallback, Action<IEnumerable<ProcessedImage>> imageBatchCallback,
-        RecoveryParams recoveryParams)
+    public bool Start(Action<ProcessedImage> imageCallback, RecoveryParams recoveryParams)
     {
         Status = new OperationStatus
         {
@@ -33,15 +32,14 @@ internal class RecoveryOperation : OperationBase
         }
         try
         {
-            switch (recoveryParams.AutoSessionRestore ? RecoverAction.Recover : PromptToRecover(recoverableFolder))
+            switch (PromptToRecover(recoverableFolder))
             {
                 case RecoverAction.Recover:
-                    Action<Func<bool>> runFunc = recoveryParams.AutoSessionRestore ? RunSync : RunAsync;
-                    runFunc(() =>
+                    RunAsync(() =>
                     {
                         try
                         {
-                            return recoverableFolder.TryRecover(imageCallback, imageBatchCallback, recoveryParams,
+                            return recoverableFolder.TryRecover(imageCallback, recoveryParams,
                                 ProgressHandler);
                         }
                         finally

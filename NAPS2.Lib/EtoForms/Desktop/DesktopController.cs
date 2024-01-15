@@ -33,9 +33,11 @@ public class DesktopController
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
     private readonly ISharedDeviceManager _sharedDeviceManager;
+    private readonly RecoveryManager _recoveryManager;
     private readonly ImageTransfer _imageTransfer = new();
 
     private bool _closed;
+    private bool _preInitialized;
     private bool _initialized;
     private bool _suspended;
 
@@ -48,7 +50,7 @@ public class DesktopController
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
-        ISharedDeviceManager sharedDeviceManager)
+        ISharedDeviceManager sharedDeviceManager, RecoveryManager recoveryManager)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -68,9 +70,17 @@ public class DesktopController
         _desktopFormProvider = desktopFormProvider;
         _scannedImagePrinter = scannedImagePrinter;
         _sharedDeviceManager = sharedDeviceManager;
+        _recoveryManager = recoveryManager;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
+
+    public void PreInitialize()
+    {
+        if (_preInitialized) return;
+        _preInitialized = true;
+        RestoreSession();
+    }
 
     public async Task Initialize()
     {
@@ -297,22 +307,41 @@ public class DesktopController
         }
     }
 
+    private void RestoreSession()
+    {
+        // In case the user has the "Keep images across sessions" option, this is similar to the RecoveryOperation in
+        // ShowRecoveryPrompt, but designed to be faster and more seamless. This means a few things:
+        // - Image files are moved instead of copied. This is destructive (higher risk of data loss) but fast.
+        // - Thumbnail rendering is deferred.
+        // - No operation progress is displayed and the recovery happens synchronously during OnLoad instead of
+        // asynchronously after OnShown.
+        // - Images are sent back to the UI as a single batch.
+        if (!_config.Get(c => c.KeepSession))
+        {
+            return;
+        }
+        var recoverableFolder = _recoveryManager.GetLatestRecoverableFolder();
+        if (recoverableFolder != null)
+        {
+            _desktopImagesController.AppendImageBatch(recoverableFolder.FastRecover());
+        }
+    }
+
     private void ShowRecoveryPrompt()
     {
+        if (_config.Get(c => c.KeepSession))
+        {
+            return;
+        }
         // Allow scanned images to be recovered in case of an unexpected close
         var op = _operationFactory.Create<RecoveryOperation>();
         var recoveryParams = new RecoveryParams
         {
-            AutoSessionRestore = _config.Get(c => c.KeepSession),
             ThumbnailSize = _thumbnailController.RenderSize
         };
-        if (op.Start(_desktopImagesController.ReceiveScannedImage(), _desktopImagesController.AppendImageBatch,
-                recoveryParams))
+        if (op.Start(_desktopImagesController.ReceiveScannedImage(), recoveryParams))
         {
-            if (!recoveryParams.AutoSessionRestore)
-            {
-                _operationProgress.ShowProgress(op);
-            }
+            _operationProgress.ShowProgress(op);
         }
     }
 

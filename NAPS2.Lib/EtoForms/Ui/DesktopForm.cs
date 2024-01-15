@@ -207,6 +207,7 @@ public abstract class DesktopForm : EtoFormBase
         base.OnLoad(e);
         _imageListSyncer = new ImageListSyncer(ImageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
         SetThumbnailSpacing(_thumbnailController.VisibleSize);
+        _desktopController.PreInitialize();
     }
 
     protected override async void OnShown(EventArgs e)
