@@ -195,6 +195,9 @@
   <data name="ShowPageNumbers" xml:space="preserve">
     <value>Show page numbers</value>
   </data>
+  <data name="ScanButtonDefaultAction" xml:space="preserve">
+    <value>"Scan" button default action:</value>
+  </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
     <value>"Save" button default action:</value>
   </data>
@@ -611,6 +614,9 @@
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
     <value>Očisti slike nakon snimanja</value>
+  </data>
+  <data name="KeepSession" xml:space="preserve">
+    <value>Keep images across sessions</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Proizvoljna veličina strane</value>

@@ -743,6 +743,10 @@ msgstr ""
 msgid "Jpeg Quality"
 msgstr ""
 
+#: UiStrings.resx$KeepSession$Message
+msgid "Keep images across sessions"
+msgstr ""
+
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
 msgstr ""

@@ -181,28 +181,31 @@
     <value>Wybór języka</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ustawienia</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Interfejs</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Menu „Skanuj” zmienia profil domyślny</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Pokaż pasek narzędzi „Profile”</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Pokaż numery stron</value>
+  </data>
+  <data name="ScanButtonDefaultAction" xml:space="preserve">
+    <value>Domyślna czynność przycisku „Skanuj”:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Domyślna czynność przycisku „Zapisz”:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplikacja</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Zezwól tylko na pojedynczą instancję NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>O programie</value>
@@ -544,7 +547,7 @@
     <value>Podgląd:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>Aby uzyskać wysoką jakość JPEG (80+) i najlepsze wyniki, również zwiększ w swoim profilu Jakość obrazu.</value>
+    <value>Aby uzyskać wysoką jakość JPEG (80+) i najlepsze wyniki, również zwiększ w swoim profilu jakość obrazu.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Jakość JPEG</value>
@@ -562,7 +565,7 @@
     <value>Ustawienia poczty</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ustawienia</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Dostawca</value>
@@ -611,6 +614,9 @@
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
     <value>Wyczyść obrazy po zapisaniu</value>
+  </data>
+  <data name="KeepSession" xml:space="preserve">
+    <value>Keep images across sessions</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Niestandardowy rozmiar strony</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-13 07:26\n"
+"PO-Revision-Date: 2024-01-15 04:42\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt\n"
@@ -21,6 +21,10 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
+msgstr ""
+
+#: UiStrings.resx$ScanButtonDefaultAction$Message
+msgid "\"Scan\" button default action:"
 msgstr ""
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
@@ -109,6 +113,7 @@ msgid "Alternate Interleave"
 msgstr "Intercalar Alternado"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+#: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr ""
 
@@ -744,6 +749,10 @@ msgstr "JPEG2000 File (*.jp2, *.jpx)"
 msgid "Jpeg Quality"
 msgstr "Qualidade JPEG"
 
+#: UiStrings.resx$KeepSession$Message
+msgid "Keep images across sessions"
+msgstr ""
+
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
 msgstr "Palavras-chave:"
@@ -1241,6 +1250,10 @@ msgstr "Digitalizar"
 #: UiStrings.resx$ScanConfig$Message
 msgid "Scan Configuration"
 msgstr "Configuração da digitalização"
+
+#: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+msgid "Scan With Default Profile"
+msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"

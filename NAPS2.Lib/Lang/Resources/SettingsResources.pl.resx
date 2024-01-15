@@ -154,9 +154,15 @@
     <value>Zapisz zaznaczone</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Zawsze pytaj</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Pytaj, jeśli zaznaczone</value>
+  </data>
+  <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
+    <value>Skanuj za pomocą domyślnego profilu</value>
+  </data>
+  <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
+    <value>Zawsze pytaj</value>
   </data>
 </root>
