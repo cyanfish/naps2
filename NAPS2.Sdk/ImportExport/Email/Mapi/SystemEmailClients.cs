@@ -1,6 +1,8 @@
 ﻿using System.Runtime.InteropServices;
+using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 using NAPS2.Platform.Windows;
+using NAPS2.Scan;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 
@@ -10,6 +12,13 @@ namespace NAPS2.ImportExport.Email.Mapi;
 internal class SystemEmailClients
 {
     private const string DEFAULT_MAPI_DLL = "mapi32.dll";
+
+    private readonly ILogger _logger;
+
+    public SystemEmailClients(ScanningContext scanningContext)
+    {
+        _logger = scanningContext.Logger;
+    }
 
     public string? GetDefaultName()
     {
@@ -48,7 +57,9 @@ internal class SystemEmailClients
 
     internal (MapiSendMailDelegate?, MapiSendMailDelegateW?) GetDelegate(string? clientName, out bool unicode)
     {
+        _logger.LogDebug($"Using MAPI client {clientName ?? "<default>"}");
         var dllPath = GetDllPath(clientName);
+        _logger.LogDebug($"Loading MAPI DLL {dllPath}");
         var module = Win32.LoadLibrary(dllPath);
         if (module == IntPtr.Zero)
         {
@@ -57,12 +68,14 @@ internal class SystemEmailClients
         var addr = Win32.GetProcAddress(module, "MAPISendMailW");
         if (addr != IntPtr.Zero)
         {
+            _logger.LogDebug("Using unicode function MAPISendMailW");
             unicode = true;
             return (null, (MapiSendMailDelegateW)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegateW)));
         }
         addr = Win32.GetProcAddress(module, "MAPISendMail");
         if (addr != IntPtr.Zero)
         {
+            _logger.LogDebug("Using ansi function MAPISendMail");
             unicode = false;
             return ((MapiSendMailDelegate)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegate)), null);
         }
