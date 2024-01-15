@@ -1,3 +1,29 @@
+Changes in 7.3.0:
+- Added a general "Settings" window with new options (some not available on Mac/Linux):
+  - Show page numbers
+  - Show Profiles toolbar
+  - Scan menu changes default profile
+  - Scan button default action
+  - Save button default action
+  - Clear images after saving
+  - Keep images across sessions
+  - Only allow a single NAPS2 instance
+- Added corresponding appsettings.xml options
+  - See https://www.naps2.com/doc/org-use
+- Added "mode" attribute to some settings in appsettings.xml:
+  - mode="default" provides a default value for the user
+  - mode="lock" prevents the user from changing the value
+- Added new console options:
+  - "--noprofile" to only use CLI options (not GUI profiles)
+  - "--listdevices" to see available scanning devices
+  - "--driver", "--device", "--source", "--pagesize", "--dpi", "--bitdepth" scanning options
+  - "--deskew", "--rotate" post-processing options
+  - See https://www.naps2.com/doc/command-line
+- Windows: Updated .exe installer style
+- Windows: Added back "Alt" hotkeys
+- Windows: Fixed an issue sending email with Outlook 2010-2016
+- Bug fixes
+
 Changes in 7.2.2:
 - Bug fixes
 
