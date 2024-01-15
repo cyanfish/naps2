@@ -105,6 +105,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction);
         storage.Set(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction);
         storage.Set(x => x.DeleteAfterSaving, c.DeleteAfterSaving);
+        storage.Set(x => x.KeepSession, c.KeepSession);
         storage.Set(x => x.SingleInstance, c.SingleInstance);
         storage.Set(x => x.HiddenButtons, GetHiddenButtonFlags(c));
         storage.Set(x => x.DisableAutoSave, c.DisableAutoSave);
@@ -163,6 +164,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         SetIfLocked(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction, nameof(c.ScanButtonDefaultAction));
         SetIfLocked(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction, nameof(c.SaveButtonDefaultAction));
         SetIfLocked(x => x.DeleteAfterSaving, c.DeleteAfterSaving, nameof(c.DeleteAfterSaving));
+        SetIfLocked(x => x.KeepSession, c.KeepSession, nameof(c.KeepSession));
         SetIfLocked(x => x.SingleInstance, c.SingleInstance, nameof(c.SingleInstance));
 
         return storage;

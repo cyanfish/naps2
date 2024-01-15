@@ -11,6 +11,7 @@
   <ScanButtonDefaultAction mode="default">ScanWithDefaultProfile</ScanButtonDefaultAction>
   <SaveButtonDefaultAction mode="default">SaveAll</SaveButtonDefaultAction>
   <DeleteAfterSaving mode="default">false</DeleteAfterSaving>
+  <KeepSession mode="default">false</KeepSession>
   <SingleInstance mode="default">false</SingleInstance>
   <HideOcrButton>false</HideOcrButton>
   <HideImportButton>false</HideImportButton>

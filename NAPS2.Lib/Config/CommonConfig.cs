@@ -97,6 +97,9 @@ public class CommonConfig
     public bool DeleteAfterSaving { get; set; }
 
     [Common]
+    public bool KeepSession { get; set; }
+
+    [Common]
     public bool DisableSaveNotifications { get; set; }
 
     [Common]

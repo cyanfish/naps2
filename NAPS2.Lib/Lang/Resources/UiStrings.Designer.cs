@@ -1023,6 +1023,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Keep images across sessions.
+        /// </summary>
+        internal static string KeepSession {
+            get {
+                return ResourceManager.GetString("KeepSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keywords:.
         /// </summary>
         internal static string KeywordsLabel {

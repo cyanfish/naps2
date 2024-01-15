@@ -723,6 +723,9 @@
   <data name="ClearAfterSaving" xml:space="preserve">
     <value>Clear images after saving</value>
   </data>
+  <data name="KeepSession" xml:space="preserve">
+    <value>Keep images across sessions</value>
+  </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Custom Page Size</value>
   </data>

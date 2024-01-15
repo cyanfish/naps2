@@ -124,7 +124,14 @@ public class RecoverableFolder : IDisposable
 
             try
             {
-                File.Copy(imagePath, newPath);
+                if (recoveryParams.AutoSessionRestore)
+                {
+                    File.Move(imagePath, newPath);
+                }
+                else
+                {
+                    File.Copy(imagePath, newPath);
+                }
             }
             catch (Exception e)
             {
@@ -158,7 +165,7 @@ public class RecoverableFolder : IDisposable
         // TODO: Make this take a lazy rendered image or something
         processedImage = ImportPostProcessor.AddPostProcessingData(processedImage,
             null,
-            recoveryParams.ThumbnailSize,
+            recoveryParams.AutoSessionRestore ? null : recoveryParams.ThumbnailSize,
             new BarcodeDetectionOptions(),
             true);
         return processedImage;

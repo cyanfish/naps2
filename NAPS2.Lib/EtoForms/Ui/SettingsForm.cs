@@ -15,6 +15,7 @@ internal class SettingsForm : EtoDialogBase
     private readonly DropDown _scanButtonDefaultAction = C.EnumDropDown<ScanButtonDefaultAction>();
     private readonly DropDown _saveButtonDefaultAction = C.EnumDropDown<SaveButtonDefaultAction>();
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
+    private readonly CheckBox _keepSession = C.CheckBox(UiStrings.KeepSession);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);
     private readonly Command _pdfSettingsCommand;
     private readonly Command _imageSettingsCommand;
@@ -72,18 +73,19 @@ internal class SettingsForm : EtoDialogBase
                             C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
                             _saveButtonDefaultAction
                         ).Aligned()
-                        : C.None(),
-                    _clearAfterSaving
+                        : C.None()
                 )
             ),
-            PlatformCompat.System.SupportsSingleInstance
-                ? L.GroupBox(
-                    UiStrings.Application,
-                    L.Column(
-                        _singleInstance
-                    )
+            L.GroupBox(
+                UiStrings.Application,
+                L.Column(
+                    _clearAfterSaving,
+                    _keepSession,
+                    PlatformCompat.System.SupportsSingleInstance
+                        ? _singleInstance
+                        : C.None()
                 )
-                : C.None(),
+            ),
             // TODO: Probably only show these after we start adding tabs
             // L.Row(
             //     C.Button(_pdfSettingsCommand, ButtonImagePosition.Left),
@@ -116,6 +118,7 @@ internal class SettingsForm : EtoDialogBase
         _saveButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.SaveButtonDefaultAction);
         _saveButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.SaveButtonDefaultAction);
         UpdateCheckbox(_clearAfterSaving, c => c.DeleteAfterSaving);
+        UpdateCheckbox(_keepSession, c => c.KeepSession);
         UpdateCheckbox(_singleInstance, c => c.SingleInstance);
     }
 
@@ -136,6 +139,7 @@ internal class SettingsForm : EtoDialogBase
         SetIfChanged(c => c.ScanButtonDefaultAction, (ScanButtonDefaultAction) _scanButtonDefaultAction.SelectedIndex);
         SetIfChanged(c => c.SaveButtonDefaultAction, (SaveButtonDefaultAction) _saveButtonDefaultAction.SelectedIndex);
         SetIfChanged(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
+        SetIfChanged(c => c.KeepSession, _keepSession.IsChecked());
         SetIfChanged(c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
 

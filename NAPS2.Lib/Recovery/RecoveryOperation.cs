@@ -13,7 +13,7 @@ internal class RecoveryOperation : OperationBase
         _formFactory = formFactory;
         _recoveryManager = recoveryManager;
 
-        ProgressTitle = MiscResources.ImportProgress;
+        ProgressTitle = MiscResources.RecoveryProgress;
         AllowCancel = true;
         AllowBackground = true;
     }
@@ -32,7 +32,7 @@ internal class RecoveryOperation : OperationBase
         }
         try
         {
-            switch (PromptToRecover(recoverableFolder))
+            switch (recoveryParams.AutoSessionRestore ? RecoverAction.Recover : PromptToRecover(recoverableFolder))
             {
                 case RecoverAction.Recover:
                     RunAsync(() =>

@@ -32,6 +32,8 @@ public class AppConfigV0
 
     public bool DeleteAfterSaving { get; set; }
 
+    public bool KeepSession { get; set; }
+
     public bool SingleInstance { get; set; }
 
     public bool HideOcrButton { get; set; }

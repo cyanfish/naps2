@@ -160,7 +160,7 @@ public class DesktopController
         if (_suspended) return;
         Pipes.KillServer();
         _sharedDeviceManager.StopSharing();
-        if (!SkipRecoveryCleanup)
+        if (!SkipRecoveryCleanup && !_config.Get(c => c.KeepSession))
         {
             try
             {
@@ -204,7 +204,7 @@ public class DesktopController
         }
         else if (_imageList.Images.Any() && _imageList.HasUnsavedChanges)
         {
-            if (userClosing && !SkipRecoveryCleanup)
+            if (userClosing && !SkipRecoveryCleanup && !_config.Get(c => c.KeepSession))
             {
                 var result = MessageBox.Show(_desktopFormProvider.DesktopForm, MiscResources.ExitWithUnsavedChanges,
                     MiscResources.UnsavedChanges,
@@ -301,10 +301,21 @@ public class DesktopController
     {
         // Allow scanned images to be recovered in case of an unexpected close
         var op = _operationFactory.Create<RecoveryOperation>();
-        if (op.Start(_desktopImagesController.ReceiveScannedImage(),
-                new RecoveryParams { ThumbnailSize = _thumbnailController.RenderSize }))
+        var recoveryParams = new RecoveryParams
         {
-            _operationProgress.ShowProgress(op);
+            AutoSessionRestore = _config.Get(c => c.KeepSession),
+            ThumbnailSize = _thumbnailController.RenderSize
+        };
+        if (op.Start(_desktopImagesController.ReceiveScannedImage(), recoveryParams))
+        {
+            if (recoveryParams.AutoSessionRestore)
+            {
+                _operationProgress.ShowBackgroundProgress(op);
+            }
+            else
+            {
+                _operationProgress.ShowProgress(op);
+            }
         }
     }
 
