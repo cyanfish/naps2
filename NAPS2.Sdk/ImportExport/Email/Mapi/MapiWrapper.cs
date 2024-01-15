@@ -34,7 +34,8 @@ internal class MapiWrapper : IMapiWrapper
                 flags |= MapiSendMailFlags.LogonUI;
             }
 
-            return unicode ? SendMailW(mapiSendMailW!, message, flags) : SendMail(mapiSendMail!, message, flags);
+            return Invoker.Current.InvokeGet(() =>
+                unicode ? SendMailW(mapiSendMailW!, message, flags) : SendMail(mapiSendMail!, message, flags));
         });
     }
 
