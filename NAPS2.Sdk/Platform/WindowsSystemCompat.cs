@@ -15,6 +15,14 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool IsEsclDriverSupported => true;
 
+    public bool SupportsShowPageNumbers => true;
+
+    public bool SupportsProfilesToolbar => true;
+
+    public bool SupportsButtonActions => true;
+
+    public bool SupportsSingleInstance => true;
+
     public bool CanUseWin32 => true;
 
     public bool CanEmail => true;

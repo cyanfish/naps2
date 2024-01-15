@@ -11,6 +11,14 @@ internal interface ISystemCompat
     bool IsSaneDriverSupported { get; }
 
     bool IsEsclDriverSupported { get; }
+    
+    bool SupportsShowPageNumbers { get; }
+    
+    bool SupportsProfilesToolbar { get; }
+    
+    bool SupportsButtonActions { get; }
+    
+    bool SupportsSingleInstance { get; }
 
     bool CanUseWin32 { get; }
 

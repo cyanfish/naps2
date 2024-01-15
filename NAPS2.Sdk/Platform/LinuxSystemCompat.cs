@@ -18,6 +18,14 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool IsEsclDriverSupported => true;
 
+    public bool SupportsShowPageNumbers => false;
+
+    public bool SupportsProfilesToolbar => true;
+
+    public bool SupportsButtonActions => true;
+
+    public bool SupportsSingleInstance => false;
+
     public bool CanUseWin32 => false;
 
     public bool CanEmail => true;

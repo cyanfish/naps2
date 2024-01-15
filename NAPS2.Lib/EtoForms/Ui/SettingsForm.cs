@@ -16,9 +16,9 @@ internal class SettingsForm : EtoDialogBase
     private readonly DropDown _saveButtonDefaultAction = C.EnumDropDown<SaveButtonDefaultAction>();
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);
-    private Command _pdfSettingsCommand;
-    private Command _imageSettingsCommand;
-    private Command _emailSettingsCommand;
+    private readonly Command _pdfSettingsCommand;
+    private readonly Command _imageSettingsCommand;
+    private readonly Command _emailSettingsCommand;
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
     public SettingsForm(Naps2Config config, DesktopSubFormController desktopSubFormController,
@@ -54,32 +54,36 @@ internal class SettingsForm : EtoDialogBase
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 
-        // TODO: Customize settings per platform (incl. only 2 options for save action on Mac)
-        // TODO: Disable locked settings
         LayoutController.Content = L.Column(
             L.GroupBox(
                 UiStrings.Interface,
                 L.Column(
-                    _showPageNumbers,
-                    _showProfilesToolbar,
+                    PlatformCompat.System.SupportsShowPageNumbers ? _showPageNumbers : C.None(),
+                    PlatformCompat.System.SupportsProfilesToolbar ? _showProfilesToolbar : C.None(),
                     _scanChangesDefaultProfile,
-                    L.Row(
-                        C.Label(UiStrings.ScanButtonDefaultAction).AlignCenter().Padding(right: 20),
-                        _scanButtonDefaultAction
-                    ).Aligned(),
-                    L.Row(
-                        C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
-                        _saveButtonDefaultAction
-                    ).Aligned(),
+                    PlatformCompat.System.SupportsButtonActions
+                        ? L.Row(
+                            C.Label(UiStrings.ScanButtonDefaultAction).AlignCenter().Padding(right: 20),
+                            _scanButtonDefaultAction
+                        ).Aligned()
+                        : C.None(),
+                    PlatformCompat.System.SupportsButtonActions
+                        ? L.Row(
+                            C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
+                            _saveButtonDefaultAction
+                        ).Aligned()
+                        : C.None(),
                     _clearAfterSaving
                 )
             ),
-            L.GroupBox(
-                UiStrings.Application,
-                L.Column(
-                    _singleInstance
+            PlatformCompat.System.SupportsSingleInstance
+                ? L.GroupBox(
+                    UiStrings.Application,
+                    L.Column(
+                        _singleInstance
+                    )
                 )
-            ),
+                : C.None(),
             // TODO: Probably only show these after we start adding tabs
             // L.Row(
             //     C.Button(_pdfSettingsCommand, ButtonImagePosition.Left),
@@ -117,16 +121,24 @@ internal class SettingsForm : EtoDialogBase
 
     private void Save()
     {
-        // TODO: Maybe only save settings that have been user-changed
         var transact = Config.User.BeginTransaction();
-        transact.Set(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
-        transact.Set(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
-        transact.Set(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
-        transact.Set(c => c.ScanButtonDefaultAction, (ScanButtonDefaultAction) _scanButtonDefaultAction.SelectedIndex);
-        transact.Set(c => c.SaveButtonDefaultAction, (SaveButtonDefaultAction) _saveButtonDefaultAction.SelectedIndex);
-        transact.Set(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
-        transact.Set(c => c.SingleInstance, _singleInstance.IsChecked());
+        void SetIfChanged<T>(Expression<Func<CommonConfig, T>> accessor, T value)
+        {
+            var oldValue = Config.Get(accessor);
+            if (!Equals(value, oldValue))
+            {
+                transact.Set(accessor, value);
+            }
+        }
+        SetIfChanged(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
+        SetIfChanged(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
+        SetIfChanged(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
+        SetIfChanged(c => c.ScanButtonDefaultAction, (ScanButtonDefaultAction) _scanButtonDefaultAction.SelectedIndex);
+        SetIfChanged(c => c.SaveButtonDefaultAction, (SaveButtonDefaultAction) _saveButtonDefaultAction.SelectedIndex);
+        SetIfChanged(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
+        SetIfChanged(c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
+
         _desktopFormProvider.DesktopForm.Invalidate();
         _desktopFormProvider.DesktopForm.PlaceProfilesToolbar();
     }
