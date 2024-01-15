@@ -64,7 +64,8 @@ public static class DebPackager
         Cli.Run("ln", $"-s /usr/lib/naps2/naps2 {Path.Combine(binDir, "naps2")}");
 
         // Fix permissions
-        Cli.Run("chmod", $"a+x {Path.Combine(targetDir, "_linux/tesseract")}");
+        var nativeLibsFolder = pkgInfo.Platform == Platform.LinuxArm ? "_linuxarm" : "_linux";
+        Cli.Run("chmod", $"a+x {Path.Combine(targetDir, nativeLibsFolder, "tesseract")}");
 
         Cli.Run("dpkg-deb", $"-Zxz --root-owner-group --build {workingDir} {debPath}");
 
