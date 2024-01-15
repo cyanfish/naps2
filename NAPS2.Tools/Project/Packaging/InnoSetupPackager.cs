@@ -26,7 +26,7 @@ public static class InnoSetupPackager
         var defLines = new StringBuilder();
         defLines.AppendLine($"#define AppVersion \"{packageInfo.VersionNumber}\"");
         defLines.AppendLine($"#define AppVersionName \"{packageInfo.VersionName}\"");
-        defLines.AppendLine($"#define AppPlatform \"{packageInfo.Platform.PackageName()}\"");
+        defLines.AppendLine($"#define AppPlatform \"{packageInfo.PackageName ?? packageInfo.Platform.PackageName()}\"");
         template = template.Replace("; !defs", defLines.ToString());
 
         var arch = new StringBuilder();
