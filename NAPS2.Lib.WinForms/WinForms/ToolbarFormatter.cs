@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Windows.Forms;
 using DockStyle = System.Windows.Forms.DockStyle;
 
@@ -11,6 +10,7 @@ public class ToolbarFormatter
 {
     private const int FORM_PIXEL_BUFFER = 30;
     private readonly StringWrapper _stringWrapper;
+    private readonly HashSet<char> _charsUsedForAltHotkeys = [];
 
     public ToolbarFormatter(StringWrapper stringWrapper)
     {
@@ -24,6 +24,17 @@ public class ToolbarFormatter
         foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
         {
             btn.Text = _stringWrapper.Wrap(btn.Text ?? "", 80, btn.Font);
+            if (!btn.Text.Contains("&"))
+            {
+                var charToUse = btn.Text.Where(char.IsLetter)
+                    .FirstOrDefault(c => !_charsUsedForAltHotkeys.Contains(char.ToLowerInvariant(c)));
+                if (charToUse != default)
+                {
+                    _charsUsedForAltHotkeys.Add(char.ToLowerInvariant(charToUse));
+                    var index = btn.Text.IndexOf(charToUse);
+                    btn.Text = btn.Text.Substring(0, index) + @"&" + btn.Text.Substring(index);
+                }
+            }
         }
         ResetToolbarMargin(tStrip);
         // Recalculate sizes
