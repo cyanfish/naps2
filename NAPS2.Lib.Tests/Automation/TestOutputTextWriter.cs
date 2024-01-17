@@ -5,7 +5,8 @@ namespace NAPS2.Lib.Tests.Automation;
 
 internal class TestOutputTextWriter : TextWriter
 {
-    readonly ITestOutputHelper _output;
+    private readonly StringBuilder _stringBuilder = new();
+    private readonly ITestOutputHelper _output;
 
     public TestOutputTextWriter(ITestOutputHelper output)
     {
@@ -14,7 +15,14 @@ internal class TestOutputTextWriter : TextWriter
 
     public override Encoding Encoding => Encoding.UTF8;
 
-    public override void WriteLine(string message) => _output.WriteLine(message);
+    public string Output => _stringBuilder.ToString();
 
-    public override void WriteLine(string format, params object[] args) => _output.WriteLine(format, args);
+    public override void WriteLine(string message)
+    {
+        _stringBuilder.AppendLine(message);
+        _output.WriteLine(message);
+    }
+
+    public override void WriteLine(string format, params object[] args) =>
+        WriteLine(string.Format(format, args));
 }

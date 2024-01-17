@@ -50,11 +50,13 @@ internal class SavePdfOperation : OperationBase
                 if (subFileName != overwriteFile &&
                     _overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
                 {
+                    FailedToStart();
                     return false;
                 }
                 if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
                 {
                     InvokeError(MiscResources.FileInUse, ex!);
+                    FailedToStart();
                     return false;
                 }
             }

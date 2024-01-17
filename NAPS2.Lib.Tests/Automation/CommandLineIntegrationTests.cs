@@ -31,7 +31,7 @@ public class CommandLineIntegrationTests : ContextualTests
     public CommandLineIntegrationTests(ITestOutputHelper testOutputHelper)
         : base(testOutputHelper)
     {
-        _automationHelper = new AutomationHelper(this, testOutputHelper);
+        _automationHelper = new AutomationHelper(this, new TestOutputTextWriter(testOutputHelper));
     }
 
     [Fact]
@@ -373,7 +373,7 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
-    public async Task ExistingFile_NoOverwrite()
+    public async Task ExistingPdf_NoOverwrite()
     {
         var path = $"{FolderPath}/test.pdf";
         File.WriteAllText(path, "blah");
@@ -389,7 +389,7 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
-    public async Task ExistingFile_ForceOverwrite()
+    public async Task ExistingPdf_ForceOverwrite()
     {
         var path = $"{FolderPath}/test.pdf";
         File.WriteAllText(path, "blah");
@@ -402,6 +402,75 @@ public class CommandLineIntegrationTests : ContextualTests
             },
             Image1);
         PdfAsserts.AssertImages(path, Image1);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingPdf_ForceOverwrite_InUse()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        File.WriteAllText(path, "blah");
+        using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                Verbose = true
+            },
+            Image1);
+        Assert.Contains("The file could not be overwritten because it is currently in use.", _automationHelper.Output);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingImage_NoOverwrite()
+    {
+        var path = $"{FolderPath}/test.jpg";
+        File.WriteAllText(path, "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            },
+            Image1);
+        Assert.Equal("blah", File.ReadAllText(path));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingImage_ForceOverwrite()
+    {
+        var path = $"{FolderPath}/test.jpg";
+        File.WriteAllText(path, "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                Verbose = true
+            },
+            Image1);
+        ImageAsserts.Similar(Image1, ImageContext.Load(path));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingImage_ForceOverwrite_InUse()
+    {
+        var path = $"{FolderPath}/test.jpg";
+        File.WriteAllText(path, "blah");
+        using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                Verbose = true
+            },
+            Image1);
+        Assert.Contains("The file could not be overwritten because it is currently in use.", _automationHelper.Output);
         AssertRecoveryCleanedUp();
     }
 

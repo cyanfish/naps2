@@ -89,6 +89,12 @@ public abstract class OperationBase : IOperation
         }).AssertNoAwait();
     }
 
+    protected void FailedToStart()
+    {
+        InvokeFinished();
+        _tcs.TrySetResult(false);
+    }
+
     protected void InvokeFinished()
     {
         IsFinished = true;
