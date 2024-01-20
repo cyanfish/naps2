@@ -185,8 +185,16 @@ internal class EsclScanDriver : IScanDriver
                     _logger.LogDebug("ESCL NextDocument failed, no more retries left");
                     throw;
                 }
-                var status = await client.GetStatus();
-                var jobState = status.JobStates.Get(job.UriPath);
+                EsclJobState jobState = EsclJobState.Unknown;
+                try
+                {
+                    var status = await client.GetStatus();
+                    jobState = status.JobStates.Get(job.UriPath);
+                }
+                catch (Exception)
+                {
+                    _logger.LogDebug("ESCL GetStatus failed, could not get job state");
+                }
                 if (jobState is not (EsclJobState.Pending or EsclJobState.Processing or EsclJobState.Unknown))
                 {
                     // Only retry if the job is pending or processing
