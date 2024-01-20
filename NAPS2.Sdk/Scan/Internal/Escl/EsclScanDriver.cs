@@ -125,8 +125,9 @@ internal class EsclScanDriver : IScanDriver
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogDebug(ex, "ESCL driver error");
                 cancelOnce.Run();
                 // The root cause for the exception might be a server-side scanning error, so prefer to throw a more
                 // descriptive error rather than an HTTP-based exception.
@@ -176,8 +177,9 @@ internal class EsclScanDriver : IScanDriver
             {
                 return await client.NextDocument(job, progress);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogDebug(ex, "ESCL NextDocument error");
                 if (++retries > MAX_DOCUMENT_TRIES)
                 {
                     _logger.LogDebug("ESCL NextDocument failed, no more retries left");
