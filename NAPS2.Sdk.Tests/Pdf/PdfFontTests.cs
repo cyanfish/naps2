@@ -101,6 +101,7 @@ public class PdfFontTests : ContextualTests
         new object[] { Alphabet.Malayalam, "mal", "ഹല\u0d47\u0d3e വ\u0d47ൾഡ\u0d4d", false },
         new object[] { Alphabet.Myanmar, "mya", "မင\u103a\u1039ဂလ\u102cပ\u102bကမ\u1039ဘ\u102cလ\u1031\u102cက", false },
         new object[] { Alphabet.Sinhala, "sin", "හ\u0dd9ල\u0dddවර\u0dcaල\u0dcaඩ\u0dca", false },
+        new object[] { Alphabet.Syriac, "syr", "ܐܘ ܢ\u0733ܫܐ ܟ\u0737ܬܠ\u0736ܗ", true },
         new object[] { Alphabet.Tamil, "tam", "வணக\u0bcdகம\u0bcdஉலகம\u0bcd", false },
         new object[] { Alphabet.Telugu, "tel", "హల\u0c4bవరల\u0c4dడ\u0c4d", false },
         new object[] { Alphabet.Thaana, "div", "ހ\u07acލ\u07afދ\u07aaނ\u07a8ޔ\u07ac", true },
