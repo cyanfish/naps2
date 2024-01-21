@@ -87,6 +87,7 @@ public class ContextualTests : IDisposable
                 async x =>
                 {
                     var path = (string) x[1];
+                    var ocrParams = (OcrParams) x[2];
                     var ocrImage = ImageContext.Load(path);
                     await Task.Delay(200);
                     // Lock so we don't try to access images simultaneously
@@ -98,7 +99,7 @@ public class ContextualTests : IDisposable
                             {
                                 return new OcrResult((0, 0, 100, 100),
                                     ImmutableList.Create(
-                                        new OcrResultElement(ocrTextByImage[image], "eng", false, (0, 0, 10, 10))));
+                                        new OcrResultElement(ocrTextByImage[image], ocrParams.LanguageCode!, false, (0, 0, 10, 10))));
                             }
                         }
                     }

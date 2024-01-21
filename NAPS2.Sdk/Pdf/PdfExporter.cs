@@ -420,7 +420,7 @@ public class PdfExporter
             var info = GetTextDrawInfo(page, gfx, ocrResult, element);
             if (info == null) continue;
 
-            // TODO: We should embed the font data, both for PDF compatibility (e.g. PDF/A) and for Linux support 
+            // TODO: We should embed the font data, both for PDF compatibility (e.g. PDF/A) and for Linux support
             var textObj = pdfiumDocument.NewText("TimesNewRoman", info.FontSize);
             textObj.TextRenderMode = TextRenderMode.Invisible;
             textObj.SetText(info.Text);
@@ -439,10 +439,10 @@ public class PdfExporter
 
         var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width / ocrResult.PageBounds.w,
             (float) page.Height / ocrResult.PageBounds.h);
-        var adjustedFontSize = CalculateFontSize(element.Text, adjustedBounds, gfx);
+        var adjustedFontSize = CalculateFontSize(element, adjustedBounds, gfx);
         // Special case to avoid accidentally recognizing big lines as dashes/underscores
         if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) return null;
-        var font = new XFont(GetFontName(), adjustedFontSize, XFontStyle.Regular,
+        var font = new XFont(SystemFontPicker.GetBestFont(element.LanguageCode), adjustedFontSize, XFontStyle.Regular,
             new XPdfFontOptions(PdfFontEncoding.Unicode));
         var adjustedTextSize = gfx.MeasureString(element.Text, font);
         var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
@@ -521,28 +521,15 @@ public class PdfExporter
     private static XRect AdjustBounds((int x, int y, int w, int h) bounds, float hAdjust, float vAdjust) =>
         new XRect(bounds.x * hAdjust, bounds.y * vAdjust, bounds.w * hAdjust, bounds.h * vAdjust);
 
-    private static int CalculateFontSize(string text, XRect adjustedBounds, XGraphics gfx)
+    private static int CalculateFontSize(OcrResultElement element, XRect adjustedBounds, XGraphics gfx)
     {
         int fontSizeGuess = Math.Max(1, (int) (adjustedBounds.Height));
+        var fontFamily = SystemFontPicker.GetBestFont(element.LanguageCode);
         var measuredBoundsForGuess =
-            gfx.MeasureString(text, new XFont(GetFontName(), fontSizeGuess, XFontStyle.Regular));
+            gfx.MeasureString(element.Text, new XFont(fontFamily, fontSizeGuess, XFontStyle.Regular));
         double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
         int adjustedFontSize = Math.Max(1, (int) Math.Floor(fontSizeGuess * adjustmentFactor));
         return adjustedFontSize;
-    }
-
-    private static string GetFontName()
-    {
-#if NET6_0_OR_GREATER
-        if (OperatingSystem.IsLinux())
-        {
-            // Liberation Serif is broadly included in Linux distros and is designed to have the same measurements
-            // as Times New Roman.
-            // TODO: Maybe we should use Times New Roman if available?
-            return "Liberation Serif";
-        }
-#endif
-        return "Times New Roman";
     }
 
     private static bool IsPdfStorage(IImageStorage storage) => storage switch
