@@ -320,7 +320,7 @@ public class DesktopController
         {
             return;
         }
-        var recoverableFolder = _recoveryManager.GetLatestRecoverableFolder();
+        using var recoverableFolder = _recoveryManager.GetLatestRecoverableFolder();
         if (recoverableFolder != null)
         {
             _desktopImagesController.AppendImageBatch(recoverableFolder.FastRecover());
