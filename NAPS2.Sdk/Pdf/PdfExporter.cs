@@ -442,7 +442,7 @@ public class PdfExporter
         var adjustedFontSize = CalculateFontSize(element, adjustedBounds, gfx);
         // Special case to avoid accidentally recognizing big lines as dashes/underscores
         if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) return null;
-        var font = new XFont(SystemFontPicker.GetBestFont(element.LanguageCode), adjustedFontSize, XFontStyle.Regular,
+        var font = new XFont(PdfFontPicker.GetBestFont(element.LanguageCode), adjustedFontSize, XFontStyle.Regular,
             new XPdfFontOptions(PdfFontEncoding.Unicode));
         var adjustedTextSize = gfx.MeasureString(element.Text, font);
         var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
@@ -524,7 +524,7 @@ public class PdfExporter
     private static int CalculateFontSize(OcrResultElement element, XRect adjustedBounds, XGraphics gfx)
     {
         int fontSizeGuess = Math.Max(1, (int) (adjustedBounds.Height));
-        var fontFamily = SystemFontPicker.GetBestFont(element.LanguageCode);
+        var fontFamily = PdfFontPicker.GetBestFont(element.LanguageCode);
         var measuredBoundsForGuess =
             gfx.MeasureString(element.Text, new XFont(fontFamily, fontSizeGuess, XFontStyle.Regular));
         double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;

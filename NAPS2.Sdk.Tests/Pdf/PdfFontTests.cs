@@ -33,7 +33,6 @@ public class PdfFontTests : ContextualTests
         }
     }
 
-    // TODO: Maybe make these not run on Linux by default if it requires a specific package like noto-fonts-cjk
     [Theory]
     [MemberData(nameof(AlphabetTestCases))]
     public async Task ExportAlphabetsWithPdfSharp(string langCode, string text, bool rtl)
