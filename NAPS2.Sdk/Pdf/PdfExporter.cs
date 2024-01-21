@@ -8,6 +8,7 @@ using NAPS2.Pdf.Pdfium;
 using NAPS2.Scan;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Drawing.Layout;
+using PdfSharpCore.Fonts;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
@@ -415,19 +416,35 @@ public class PdfExporter
         Pdfium.PdfPage pdfiumPage, OcrResult ocrResult)
     {
         using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
-        foreach (var element in ocrResult.Elements)
+        var fontCache = new Dictionary<string, PdfFont>();
+        try
         {
-            var info = GetTextDrawInfo(page, gfx, ocrResult, element);
-            if (info == null) continue;
+            foreach (var element in ocrResult.Elements)
+            {
+                var info = GetTextDrawInfo(page, gfx, ocrResult, element);
+                if (info == null) continue;
 
-            // TODO: We should embed the font data, both for PDF compatibility (e.g. PDF/A) and for Linux support
-            var textObj = pdfiumDocument.NewText("TimesNewRoman", info.FontSize);
-            textObj.TextRenderMode = TextRenderMode.Invisible;
-            textObj.SetText(info.Text);
-            // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
-            // try to make them identical, although it's not perfect to begin with.
-            textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - (info.Y + info.TextHeight));
-            pdfiumPage.InsertObject(textObj);
+                var fontName = PdfFontPicker.GetBestFont(element.LanguageCode);
+                var font = fontCache.GetOrSet(fontName, () =>
+                {
+                    var fontInfo = GlobalFontSettings.FontResolver.ResolveTypeface(fontName, false, false);
+                    return pdfiumDocument.LoadFont(GlobalFontSettings.FontResolver.GetFont(fontInfo.FaceName));
+                });
+                var textObj = pdfiumDocument.NewText(font, info.FontSize);
+                textObj.TextRenderMode = TextRenderMode.Invisible;
+                textObj.SetText(info.Text);
+                // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
+                // try to make them identical, although it's not perfect to begin with.
+                textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - (info.Y + info.TextHeight));
+                pdfiumPage.InsertObject(textObj);
+            }
+        }
+        finally
+        {
+            foreach (var font in fontCache.Values)
+            {
+                font.Dispose();
+            }
         }
         pdfiumPage.GenerateContent();
     }

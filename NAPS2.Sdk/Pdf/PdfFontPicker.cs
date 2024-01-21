@@ -48,6 +48,7 @@ internal static class PdfFontPicker
             Alphabet.Myanmar => "Myanmar Text",
             // Alphabet.Oriya => "",
             Alphabet.Sinhala => "Nirmala UI",
+            Alphabet.Syriac => "Estrangelo Edessa", // Supplemental font, needs installation via Control Panel
             Alphabet.Tamil => "Nirmala UI",
             Alphabet.Telugu => "Nirmala UI",
             Alphabet.Thaana => "MV Boli",

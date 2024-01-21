@@ -63,6 +63,11 @@ internal class PdfDocument : NativePdfiumObject
         return new PdfPageObject(Native.FPDFPageObj_NewTextObj(Handle, font, fontSize), this, null, true);
     }
 
+    public PdfPageObject NewText(PdfFont font, int fontSize)
+    {
+        return new PdfPageObject(Native.FPDFPageObj_CreateTextObj(Handle, font.Handle, fontSize), this, null, true);
+    }
+
     public PdfPage NewPage(double width, double height)
     {
         return new PdfPage(Native.FPDFPage_New(Handle, int.MaxValue, width, height), this, -1);
@@ -95,6 +100,11 @@ internal class PdfDocument : NativePdfiumObject
         var formInfoHandle = GCHandle.Alloc(formInfo, GCHandleType.Pinned);
         var ptr = formInfoHandle.AddrOfPinnedObject();
         return new PdfFormEnv(Native.FPDFDOC_InitFormFillEnvironment(Handle, ptr), formInfoHandle);
+    }
+
+    public PdfFont LoadFont(byte[] data)
+    {
+        return new PdfFont(Native.FPDFText_LoadFont(Handle, data, data.Length, PdfiumNativeLibrary.FPDF_FONT_TRUETYPE, true));
     }
 
     public void Save(string path)
