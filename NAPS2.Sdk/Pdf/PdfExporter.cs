@@ -8,7 +8,6 @@ using NAPS2.Pdf.Pdfium;
 using NAPS2.Scan;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Drawing.Layout;
-using PdfSharpCore.Fonts;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
@@ -63,7 +62,7 @@ public class PdfExporter
             var document = InitializeDocument(exportParams);
 
             // TODO: Consider storing text from imported image-based pages in PostProcessingData so it can be saved even
-            // when not exporting with OCR (assuming no transforms). 
+            // when not exporting with OCR (assuming no transforms).
             var ocrEngine = GetOcrEngine(ocrParams);
 
             var imagePages = new List<PageExportState>();
@@ -148,8 +147,8 @@ public class PdfExporter
         });
     }
 
-    private bool MergePassthroughPages(MemoryStream stream, OutputPathOrStream output, List<PageExportState> passthroughPages,
-        PdfExportParams exportParams, ProgressHandler progress)
+    private bool MergePassthroughPages(MemoryStream stream, OutputPathOrStream output,
+        List<PageExportState> passthroughPages, PdfExportParams exportParams, ProgressHandler progress)
     {
         if (!passthroughPages.Any())
         {
@@ -167,6 +166,8 @@ public class PdfExporter
                 var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
                 using var destDoc =
                     Pdfium.PdfDocument.Load(destHandle.AddrOfPinnedObject(), (int) stream.Length, password);
+                using var fontSubsets =
+                    new PdfiumFontSubsets(destDoc, passthroughPages.Select(state => state.OcrTask?.Result));
                 foreach (var state in passthroughPages)
                 {
                     destDoc.DeletePage(state.PageIndex);
@@ -193,7 +194,7 @@ public class PdfExporter
                     if (state.OcrTask?.Result != null)
                     {
                         using var page = destDoc.GetPage(state.PageIndex);
-                        DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, state.OcrTask.Result);
+                        DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, fontSubsets, state.OcrTask.Result);
                     }
                     if (progress.IsCancellationRequested) return false;
                 }
@@ -341,7 +342,7 @@ public class PdfExporter
         if (!_scanningContext.OcrRequestQueue.HasCachedResult(state.OcrEngine!, state.Image, state.OcrParams!))
         {
             // Save the image to a file for use in OCR.
-            // We don't need to delete this file as long as we pass it to OcrRequestQueue.Enqueue, which takes 
+            // We don't need to delete this file as long as we pass it to OcrRequestQueue.Enqueue, which takes
             // ownership and guarantees its eventual deletion.
             using var fileStream = new FileStream(ocrTempFilePath, FileMode.Create, FileAccess.Write);
             state.Embedder.CopyToStream(fileStream);
@@ -413,38 +414,22 @@ public class PdfExporter
     }
 
     private static void DrawOcrTextOnPdfiumPage(PdfPage page, Pdfium.PdfDocument pdfiumDocument,
-        Pdfium.PdfPage pdfiumPage, OcrResult ocrResult)
+        Pdfium.PdfPage pdfiumPage, PdfiumFontSubsets fontSubsets, OcrResult ocrResult)
     {
         using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
-        var fontCache = new Dictionary<string, PdfFont>();
-        try
+        foreach (var element in ocrResult.Elements)
         {
-            foreach (var element in ocrResult.Elements)
-            {
-                var info = GetTextDrawInfo(page, gfx, ocrResult, element);
-                if (info == null) continue;
+            var info = GetTextDrawInfo(page, gfx, ocrResult, element);
+            if (info == null) continue;
 
-                var fontName = PdfFontPicker.GetBestFont(element.LanguageCode);
-                var font = fontCache.GetOrSet(fontName, () =>
-                {
-                    var fontInfo = GlobalFontSettings.FontResolver.ResolveTypeface(fontName, false, false);
-                    return pdfiumDocument.LoadFont(GlobalFontSettings.FontResolver.GetFont(fontInfo.FaceName));
-                });
-                var textObj = pdfiumDocument.NewText(font, info.FontSize);
-                textObj.TextRenderMode = TextRenderMode.Invisible;
-                textObj.SetText(info.Text);
-                // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
-                // try to make them identical, although it's not perfect to begin with.
-                textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - (info.Y + info.TextHeight));
-                pdfiumPage.InsertObject(textObj);
-            }
-        }
-        finally
-        {
-            foreach (var font in fontCache.Values)
-            {
-                font.Dispose();
-            }
+            var fontName = PdfFontPicker.GetBestFont(element.LanguageCode);
+            var textObj = pdfiumDocument.NewText(fontSubsets[fontName], info.FontSize);
+            textObj.TextRenderMode = TextRenderMode.Invisible;
+            textObj.SetText(info.Text);
+            // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
+            // try to make them identical, although it's not perfect to begin with.
+            textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - (info.Y + info.TextHeight));
+            pdfiumPage.InsertObject(textObj);
         }
         pdfiumPage.GenerateContent();
     }

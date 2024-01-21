@@ -77,9 +77,7 @@ public class ContextualTests : IDisposable
         ScanningContext.OcrEngine = TesseractOcrEngine.CustomWithModes(tesseractPath, FolderPath);
     }
 
-    public void SetUpFakeOcr() => SetUpFakeOcr(new());
-
-    public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage)
+    public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage = null, string ifNoMatch = null, int delay = 200)
     {
         var ocrMock = Substitute.For<IOcrEngine>();
         ocrMock.ProcessImage(ScanningContext, Arg.Any<string>(), Arg.Any<OcrParams>(), Arg.Any<CancellationToken>())
@@ -89,19 +87,30 @@ public class ContextualTests : IDisposable
                     var path = (string) x[1];
                     var ocrParams = (OcrParams) x[2];
                     var ocrImage = ImageContext.Load(path);
-                    await Task.Delay(200);
-                    // Lock so we don't try to access images simultaneously
-                    lock (ocrTextByImage)
+                    await Task.Delay(delay);
+
+                    OcrResult CreateOcrResult(string text) => new((0, 0, 100, 100),
+                        ImmutableList.Create(
+                            new OcrResultElement(text, ocrParams.LanguageCode!, false,
+                                (0, 0, 10, 10))));
+
+                    if (ocrTextByImage != null)
                     {
-                        foreach (var image in ocrTextByImage.Keys)
+                        // Lock so we don't try to access images simultaneously
+                        lock (ocrTextByImage)
                         {
-                            if (ImageAsserts.IsSimilar(image, ocrImage))
+                            foreach (var image in ocrTextByImage.Keys)
                             {
-                                return new OcrResult((0, 0, 100, 100),
-                                    ImmutableList.Create(
-                                        new OcrResultElement(ocrTextByImage[image], ocrParams.LanguageCode!, false, (0, 0, 10, 10))));
+                                if (ImageAsserts.IsSimilar(image, ocrImage))
+                                {
+                                    return CreateOcrResult(ocrTextByImage[image]);
+                                }
                             }
                         }
+                    }
+                    if (ifNoMatch != null)
+                    {
+                        return CreateOcrResult(ifNoMatch);
                     }
                     return null;
                 });

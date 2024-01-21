@@ -133,6 +133,9 @@
   <data name="word_p2_bw" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\word_p2_bw.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="word_ocr_test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\word_ocr_test.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="image_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\image_pdf.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

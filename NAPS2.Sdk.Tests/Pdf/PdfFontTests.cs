@@ -22,7 +22,7 @@ public class PdfFontTests : ContextualTests
         _exporter = new PdfExporter(ScanningContext);
         _exportPath = Path.Combine(FolderPath, "test.pdf");
         _pdfiumImportPath = Path.Combine(FolderPath, "import_ocr.pdf");
-        File.WriteAllBytes(_pdfiumImportPath, PdfResources.word_patcht_pdf);
+        File.WriteAllBytes(_pdfiumImportPath, PdfResources.word_ocr_test);
     }
 
     [Fact]
@@ -45,10 +45,7 @@ public class PdfFontTests : ContextualTests
     [MemberData(nameof(AlphabetTestCases))]
     internal async Task ExportAlphabetsWithPdfSharp(Alphabet alphabet, string langCode, string text, bool rtl)
     {
-        SetUpFakeOcr(new()
-        {
-            { LoadImage(ImageResources.dog), text }
-        });
+        SetUpFakeOcr(ifNoMatch: text, delay: 0);
 
         using var image = CreateScannedImage();
         await _exporter.Export(_exportPath, [image], ocrParams: new OcrParams(langCode));
@@ -58,16 +55,15 @@ public class PdfFontTests : ContextualTests
             text = new string(text.Reverse().ToArray());
         }
         PdfAsserts.AssertContainsTextOnce(text, _exportPath);
+        // Rough verification that a font subset is used instead of embedding the whole font
+        Assert.InRange(new FileInfo(_exportPath).Length, 1, 500_000);
     }
 
     [Theory]
     [MemberData(nameof(AlphabetTestCases))]
     internal async Task ExportAlphabetsWithPdfium(Alphabet alphabet, string langCode, string text, bool rtl)
     {
-        SetUpFakeOcr(new()
-        {
-            { LoadImage(PdfResources.word_patcht_p1), text }
-        });
+        SetUpFakeOcr(ifNoMatch: text, delay: 0);
 
         var images = await _importer.Import(_pdfiumImportPath).ToListAsync();
         await _exporter.Export(_exportPath, images, ocrParams: new OcrParams(langCode));
@@ -77,6 +73,8 @@ public class PdfFontTests : ContextualTests
             text = new string(text.Reverse().ToArray());
         }
         PdfAsserts.AssertContainsTextOnce(text, _exportPath);
+        // Rough verification that a font subset is used instead of embedding the whole font
+        Assert.InRange(new FileInfo(_exportPath).Length, 1, 500_000);
     }
 
     public static IEnumerable<object[]> AlphabetTestCases =

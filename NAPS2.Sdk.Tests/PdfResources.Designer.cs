@@ -152,6 +152,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] word_ocr_test {
+            get {
+                object obj = ResourceManager.GetObject("word_ocr_test", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] word_p1 {
             get {
                 object obj = ResourceManager.GetObject("word_p1", resourceCulture);
