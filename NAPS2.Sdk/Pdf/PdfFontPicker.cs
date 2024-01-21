@@ -73,6 +73,7 @@ internal static class PdfFontPicker
         {
             // Noto fonts aren't always going to be installed, but they're among the most common
             Alphabet.Arabic => "Noto Sans Arabic",
+            Alphabet.Armenian => "Noto Sans Armenian",
             Alphabet.Bengali => "Noto Sans Bengali",
             Alphabet.CanadianAboriginal => "Noto Sans CanAborig",
             Alphabet.Cherokee => "Noto Sans Cherokee",
