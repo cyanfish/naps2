@@ -180,12 +180,30 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void CreateToolbarStackedButtons(Command command1, Command command2)
     {
+        // Simply create a ToolItem with two buttons stacked on top of each other
         var button1 = CreateToolButton(command1, Orientation.Horizontal);
         var button2 = CreateToolButton(command2, Orientation.Horizontal);
         var vbox = new Box(Orientation.Vertical, 0);
         vbox.Add(button1);
         vbox.Add(button2);
-        AddCustomToolItem(vbox);
+        var toolItem = new ToolItem();
+        toolItem.Add(vbox);
+
+        // Handle the toolbar overflowing into a menu
+        toolItem.CreateMenuProxy += (o, args) =>
+        {
+            var menuItem1 = (ImageMenuItem) new Eto.Forms.ButtonMenuItem(command1).ControlObject;
+            var menuItem2 = (ImageMenuItem) new Eto.Forms.ButtonMenuItem(command2).ControlObject;
+            // Hack to show two menu items instead of one. Seems to work for now.
+            menuItem1.ParentSet += (_, _) => ((Container) menuItem1.Parent)?.Add(menuItem2);
+            toolItem.SetProxyMenuItem("", menuItem1);
+        };
+        // GTK ties the menu item's sensitivity to the ToolItem's sensitivity. We only need to check the first command
+        // since the second command's menu item is hacked in.
+        toolItem.Sensitive = command1.Enabled;
+        command1.EnabledChanged += (_, _) => toolItem.Sensitive = command1.Enabled;
+
+        _toolbar.Add(toolItem);
         _toolbarButtonCount++;
     }
 
@@ -238,13 +256,6 @@ public class GtkDesktopForm : DesktopForm
     {
         var button = _menuButtons.Get(menuType);
         (button?.Menu as Menu)?.PopupAtWidget(button, Gravity.SouthWest, Gravity.NorthWest, null);
-    }
-
-    private void AddCustomToolItem(Widget item)
-    {
-        var toolItem = new ToolItem();
-        toolItem.Add(item);
-        _toolbar.Add(toolItem);
     }
 
     private static Button CreateToolButton(Command command, Orientation orientation = Orientation.Vertical,
