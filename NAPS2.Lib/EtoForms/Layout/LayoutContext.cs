@@ -24,7 +24,7 @@ public record LayoutContext(Control Layout)
 
     public bool InOverlay { get; init; }
 
-    public bool? IsParentVisible { get; init; }
+    public LayoutVisibility? ParentVisibility { get; init; }
 
     public required Action Invalidate { get; init; }
 }

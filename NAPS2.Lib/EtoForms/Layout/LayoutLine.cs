@@ -102,7 +102,7 @@ public abstract class LayoutLine : LayoutContainer
     public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
     {
         var childContext = GetChildContext(context, parentBounds);
-        if (childContext.IsParentVisible == false)
+        if (childContext.ParentVisibility?.IsVisible == false)
         {
             return SizeF.Empty;
         }
@@ -126,9 +126,7 @@ public abstract class LayoutLine : LayoutContainer
             CellLengths = GetChildCellLengths(context, bounds),
             CellScaling = GetChildCellScaling(),
             Depth = context.Depth + 1,
-            IsParentVisible = context.IsParentVisible != null || Visibility != null
-                ? (context.IsParentVisible ?? true) && IsVisible
-                : null
+            ParentVisibility = LayoutVisibility.Combine(context.ParentVisibility, Visibility)
         };
     }
 

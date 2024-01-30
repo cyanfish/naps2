@@ -179,9 +179,9 @@ public class LayoutControl : LayoutElement
     private void EnsureIsAdded(LayoutContext context)
     {
         if (Control == null) return;
-        if (Visibility != null || context.IsParentVisible != null)
+        if (Visibility != null || context.ParentVisibility != null)
         {
-            Control.Visible = IsVisible && (context.IsParentVisible ?? true);
+            Control.Visible = IsVisible && (context.ParentVisibility?.IsVisible ?? true);
         }
         if (!_isAdded)
         {
@@ -190,6 +190,10 @@ public class LayoutControl : LayoutElement
             if (Visibility != null)
             {
                 Visibility.IsVisibleChanged += (_, _) => context.Invalidate();
+            }
+            if (context.ParentVisibility != null)
+            {
+                context.ParentVisibility.IsVisibleChanged += (_, _) => context.Invalidate();
             }
         }
         if (!_isWindowSet && context.Window != null)

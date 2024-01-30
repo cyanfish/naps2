@@ -20,6 +20,7 @@ public class PdfSettingsForm : EtoDialogBase
     private readonly PasswordBoxWithToggle _userPassword = new() { Title = UiStrings.UserPasswordLabel };
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
+    private readonly LayoutVisibility _encryptVis = new(false);
 
     private readonly List<CheckBox> _permissions =
     [
@@ -85,9 +86,11 @@ public class PdfSettingsForm : EtoDialogBase
                 UiStrings.Encryption,
                 L.Column(
                     _encryptPdf,
-                    _ownerPassword,
-                    _userPassword,
-                    L.Column(_permissions.Expand()).Spacing(0)
+                    L.Column(
+                        _ownerPassword,
+                        _userPassword,
+                        L.Column(_permissions.Expand()).Spacing(0)
+                    ).Visible(_encryptVis)
                 )
             ),
             L.GroupBox(
@@ -134,14 +137,7 @@ public class PdfSettingsForm : EtoDialogBase
     private void UpdateEnabled()
     {
         _skipSavePrompt.Enabled = Path.IsPathRooted(_defaultFilePath.Text);
-
-        bool encrypt = _encryptPdf.IsChecked();
-        _userPassword.Enabled = _ownerPassword.Enabled = encrypt;
-        foreach (var perm in _permissions)
-        {
-            perm.Enabled = encrypt;
-        }
-
+        _encryptVis.IsVisible = _encryptPdf.IsChecked();
         _compat.Enabled = !Config.AppLocked.Has(c => c.PdfSettings.Compat);
     }
 
