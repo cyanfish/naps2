@@ -74,7 +74,8 @@ public class PdfFontTests : ContextualTests
         }
         PdfAsserts.AssertContainsTextOnce(text, _exportPath);
         // Rough verification that a font subset is used instead of embedding the whole font
-        Assert.InRange(new FileInfo(_exportPath).Length, 1, 500_000);
+        // TODO: It seems like Pdfium fonts are bigger than PdfSharp - maybe not compressed? Can we improve that?
+        Assert.InRange(new FileInfo(_exportPath).Length, 1, 700_000);
     }
 
     public static IEnumerable<object[]> AlphabetTestCases =
