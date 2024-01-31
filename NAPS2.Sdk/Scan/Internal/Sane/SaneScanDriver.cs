@@ -8,6 +8,8 @@ namespace NAPS2.Scan.Internal.Sane;
 
 internal class SaneScanDriver : IScanDriver
 {
+    private static string? _customConfigDir;
+    
     private readonly ScanningContext _scanningContext;
 
     public SaneScanDriver(ScanningContext scanningContext)
@@ -20,6 +22,15 @@ internal class SaneScanDriver : IScanDriver
             : File.Exists("/.flatpak-info")
                 ? new FlatpakSaneInstallation()
                 : new SystemSaneInstallation();
+        if (_customConfigDir == null)
+        {
+            // SANE caches the SANE_CONFIG_DIR environment variable process-wide, which means that we can't willy-nilly
+            // change the config dir. However, if we use a static directory name and only create the actual directory
+            // when we want to use it, SANE will (without caching) use the directory when it exists, and fall back to
+            // the default config dir otherwise.
+            _customConfigDir = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
+            Installation.SetCustomConfigDir(_customConfigDir);
+        }
 #else
         Installation = null!;
 #endif
@@ -66,7 +77,7 @@ internal class SaneScanDriver : IScanDriver
 
     private static string GetName(SaneDeviceInfo device)
     {
-        var backend = device.Name.Split(':')[0];
+        var backend = GetBackend(device.Name);
         // Special cases for sane-escl and sane-airscan.
         if (backend == "escl")
         {
@@ -77,7 +88,6 @@ internal class SaneScanDriver : IScanDriver
         if (backend == "airscan")
         {
             // We include the device type which has the IP address.
-            // TODO: The sane-airscan ID isn't persistent, can we work around that somehow and persist based on IP?
             return $"{device.Model} ({backend}:{device.Type})";
         }
         return $"{device.Model} ({backend})";
@@ -85,7 +95,7 @@ internal class SaneScanDriver : IScanDriver
 
     private string? GetIP(SaneDeviceInfo device)
     {
-        var backend = device.Name.Split(':')[0];
+        var backend = GetBackend(device.Name);
         if (backend == "escl")
         {
             // Name is in the form "escl:http://xx.xx.xx.xx:yy"
@@ -100,71 +110,162 @@ internal class SaneScanDriver : IScanDriver
         return null;
     }
 
+    private static string GetBackend(string saneDeviceName)
+    {
+        return saneDeviceName.Split(':')[0];
+    }
+
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<IMemoryImage> callback)
     {
         return Task.Run(() =>
         {
-            bool hasAtLeastOneImage = false;
             try
             {
-                using var client = new SaneClient(Installation);
-                if (cancelToken.IsCancellationRequested) return;
-                using var device = client.OpenDevice(options.Device!.ID!);
-                if (cancelToken.IsCancellationRequested) return;
-                var optionData = SetOptions(device, options);
-                var cancelOnce = new Once(device.Cancel);
-                cancelToken.Register(cancelOnce.Run);
-                try
-                {
-                    if (!optionData.IsFeeder)
-                    {
-                        var image = ScanPage(device, scanEvents, optionData) ??
-                                    throw new DeviceException("SANE expected image");
-                        callback(image);
-                    }
-                    else
-                    {
-                        while (ScanPage(device, scanEvents, optionData) is { } image)
-                        {
-                            hasAtLeastOneImage = true;
-                            callback(image);
-                        }
-                    }
-                }
-                finally
-                {
-                    cancelOnce.Run();
-                }
+                ScanWithSaneDevice(options, cancelToken, scanEvents, callback, options.Device!.ID);
             }
-            catch (SaneException ex)
+            catch (DeviceOfflineException)
             {
-                switch (ex.Status)
+                // Some SANE backends (e.g. airscan, genesys) have inconsistent IDs so "device offline" might actually
+                // just mean "device id has changed". We can query for a "backup" device that matches the name of the
+                // original device, and assume it's the same physical device, which should generally be correct.
+                string? backupDeviceId = QueryForBackupSaneDevice(options.Device!);
+                if (backupDeviceId == null)
                 {
-                    case SaneStatus.Good:
-                    case SaneStatus.Cancelled:
-                        return;
-                    case SaneStatus.NoDocs:
-                        if (!hasAtLeastOneImage)
-                        {
-                            throw new DeviceFeederEmptyException();
-                        }
-
-                        break;
-                    case SaneStatus.DeviceBusy:
-                        throw new DeviceBusyException();
-                    case SaneStatus.Invalid:
-                        // TODO: Maybe not always correct? e.g. when setting options
-                        throw new DeviceOfflineException();
-                    case SaneStatus.Jammed:
-                        throw new DevicePaperJamException();
-                    case SaneStatus.CoverOpen:
-                        throw new DeviceCoverOpenException();
-                    default:
-                        throw new DeviceException($"SANE error: {ex.Status}");
+                    throw;
                 }
+                ScanWithSaneDevice(options, cancelToken, scanEvents, callback, backupDeviceId);
             }
         });
+    }
+
+    void ScanWithSaneDevice(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
+        Action<IMemoryImage> callback, string deviceId)
+    {
+        bool hasAtLeastOneImage = false;
+        try
+        {
+            using var client = new SaneClient(Installation);
+            if (cancelToken.IsCancellationRequested) return;
+            _scanningContext.Logger.LogDebug("Opening SANE Device \"{ID}\"", deviceId);
+            using var device = client.OpenDevice(deviceId);
+            if (cancelToken.IsCancellationRequested) return;
+            var optionData = SetOptions(device, options);
+            var cancelOnce = new Once(device.Cancel);
+            cancelToken.Register(cancelOnce.Run);
+            try
+            {
+                if (!optionData.IsFeeder)
+                {
+                    var image = ScanPage(device, scanEvents, optionData) ??
+                                throw new DeviceException("SANE expected image");
+                    callback(image);
+                }
+                else
+                {
+                    while (ScanPage(device, scanEvents, optionData) is { } image)
+                    {
+                        hasAtLeastOneImage = true;
+                        callback(image);
+                    }
+                }
+            }
+            finally
+            {
+                cancelOnce.Run();
+            }
+        }
+        catch (SaneException ex)
+        {
+            switch (ex.Status)
+            {
+                case SaneStatus.Good:
+                case SaneStatus.Cancelled:
+                    return;
+                case SaneStatus.NoDocs:
+                    if (!hasAtLeastOneImage)
+                    {
+                        throw new DeviceFeederEmptyException();
+                    }
+
+                    break;
+                case SaneStatus.DeviceBusy:
+                    throw new DeviceBusyException();
+                case SaneStatus.Invalid:
+                    // TODO: Maybe not always correct? e.g. when setting options
+                    throw new DeviceOfflineException();
+                case SaneStatus.Jammed:
+                    throw new DevicePaperJamException();
+                case SaneStatus.CoverOpen:
+                    throw new DeviceCoverOpenException();
+                default:
+                    throw new DeviceException($"SANE error: {ex.Status}");
+            }
+        }
+    }
+
+    private string? QueryForBackupSaneDevice(ScanDevice device)
+    {
+        // If we couldn't get an ID match, we can call GetDevices again and see if we can find a name match.
+        // This can be very slow (10+ seconds) if we have to query every single backend (the normal SANE behavior for
+        // GetDevices). We can hack this by creating a temporary SANE config dir that only references the single backend
+        // we need, so it ends up being only ~1s.
+        _scanningContext.Logger.LogDebug(
+            "SANE Device appears offline; re-querying in case of ID change for name \"{Name}\"", device.Name);
+        string? tempConfigDir = MaybeCreateTempConfigDirForSingleBackend(GetBackend(device.ID));
+        try
+        {
+            using var client = new SaneClient(Installation);
+            var backupDevice = client.GetDevices()
+                .FirstOrDefault(deviceInfo => GetName(deviceInfo) == device.Name);
+            if (backupDevice.Name == null)
+            {
+                _scanningContext.Logger.LogDebug("No matching device found");
+                return null;
+            }
+            return backupDevice.Name;
+        }
+        finally
+        {
+            if (tempConfigDir != null)
+            {
+                try
+                {
+                    Directory.Delete(tempConfigDir, true);
+                }
+                catch (Exception ex)
+                {
+                    _scanningContext.Logger.LogDebug(ex, "Error cleaning up temp SANE config dir");
+                }
+            }
+        }
+    }
+
+    private string? MaybeCreateTempConfigDirForSingleBackend(string backendName)
+    {
+        if (!Directory.Exists(Installation.DefaultConfigDir) || _customConfigDir == null)
+        {
+            // Non-typical SANE installation where we don't know the config dir and can't do this optimization
+            return null;
+        }
+        // SANE normally doesn't provide a way to only query a single backend - it's all or nothing.
+        // However, there is a workaround - if we use the SANE_CONFIG_DIR environment variable, we can specify a custom
+        // config dir, which can have a dll.conf file that only has a single backend specified.
+        Directory.CreateDirectory(_customConfigDir);
+        // Copy the backend.conf file in case there's any important backend-specific configuration
+        var backendConfFile = $"{backendName}.conf";
+        if (File.Exists(Path.Combine(Installation.DefaultConfigDir, backendConfFile)))
+        {
+            File.Copy(
+                Path.Combine(Installation.DefaultConfigDir, backendConfFile),
+                Path.Combine(_customConfigDir, backendConfFile));
+        }
+        // Create a dll.conf file with only the single backend name (normally it's all backends, one per line)
+        File.WriteAllText(Path.Combine(_customConfigDir, "dll.conf"), backendName);
+        // Create an empty dll.d dir so SANE doesn't use the default one
+        Directory.CreateDirectory(Path.Combine(_customConfigDir, "dll.d"));
+        _scanningContext.Logger.LogDebug("Create temp SANE config dir {Dir}", _customConfigDir);
+        return _customConfigDir;
     }
 
     internal OptionData SetOptions(ISaneDevice device, ScanOptions options)

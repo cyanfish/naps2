@@ -13,6 +13,16 @@ internal interface ISaneInstallation
     void Initialize();
 
     /// <summary>
+    /// Sets the path to a custom sane.d config directory.
+    /// </summary>
+    void SetCustomConfigDir(string configDir);
+
+    /// <summary>
+    /// Gets the path to the default sane.d config directory.
+    /// </summary>
+    string DefaultConfigDir { get; }
+
+    /// <summary>
     /// Gets the path to the libsane library.
     /// </summary>
     string LibraryPath { get; }
