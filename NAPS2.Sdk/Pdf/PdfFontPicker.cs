@@ -37,7 +37,6 @@ internal static class PdfFontPicker
             Alphabet.Cherokee => "Gadugi",
             Alphabet.Devanagari => "Nirmala UI",
             Alphabet.Ethiopic => "Ebrima",
-            // Alphabet.Fraktur => "",
             Alphabet.Georgian => "Calibri",
             Alphabet.Gujarati => "Nirmala UI",
             Alphabet.Gurmukhi => "Nirmala UI",
@@ -46,7 +45,7 @@ internal static class PdfFontPicker
             Alphabet.Lao => "Leelawadee UI",
             Alphabet.Malayalam => "Nirmala UI",
             Alphabet.Myanmar => "Myanmar Text",
-            // Alphabet.Oriya => "",
+            Alphabet.Oriya => "Kalinga", // Supplemental font, needs installation via Control Panel
             Alphabet.Sinhala => "Nirmala UI",
             Alphabet.Syriac => "Estrangelo Edessa", // Supplemental font, needs installation via Control Panel
             Alphabet.Tamil => "Nirmala UI",
@@ -64,7 +63,37 @@ internal static class PdfFontPicker
 
     private static string GetMacFont(Alphabet alphabet)
     {
-        return "Times New Roman";
+        return alphabet switch
+        {
+            Alphabet.Arabic => ".SF Arabic",
+            Alphabet.Armenian => ".SF Armenian",
+            Alphabet.Bengali => "Bangla MN",
+            Alphabet.CanadianAboriginal => "Euphemia UCAS",
+            Alphabet.Cherokee => "Plantagenet Cherokee",
+            Alphabet.Devanagari => "Devanagari MT",
+            Alphabet.Ethiopic => "Kefa",
+            Alphabet.Georgian => ".SF Georgian",
+            Alphabet.Gujarati => "Gujarati MT",
+            Alphabet.Gurmukhi => "Gurmukhi MT",
+            Alphabet.Kannada => "Kannada MN",
+            Alphabet.Khmer => "Khmer MN",
+            Alphabet.Lao => "Lao MN",
+            Alphabet.Malayalam => "Malayalam MN",
+            Alphabet.Myanmar => "Myanmar MN",
+            Alphabet.Oriya => "Oriya MN",
+            Alphabet.Sinhala => "Sinhala MN",
+            Alphabet.Syriac => "Noto Sans Syriac",
+            Alphabet.Tamil => "Tamil MN",
+            Alphabet.Telugu => "Telugu MN",
+            Alphabet.Thaana => "Noto Sans Thaana",
+            Alphabet.Thai => "Sathu",
+            Alphabet.Tibetan => "Kailasa",
+            Alphabet.ChineseSimplified => "Heiti SC",
+            Alphabet.ChineseTraditional => "Heiti TC",
+            Alphabet.Japanese => ".Aqua Kana",
+            Alphabet.Korean => "AppleMyungjo",
+            _ => "Times New Roman"
+        };
     }
 
     private static string GetLinuxFont(Alphabet alphabet)
@@ -79,7 +108,6 @@ internal static class PdfFontPicker
             Alphabet.Cherokee => "Noto Sans Cherokee",
             Alphabet.Devanagari => "Noto Sans Devanagari",
             Alphabet.Ethiopic => "Noto Sans Ethiopic",
-            // Alphabet.Fraktur => "",
             Alphabet.Georgian => "Noto Sans Georgian",
             Alphabet.Gujarati => "Noto Sans Gujarati",
             Alphabet.Gurmukhi => "Noto Sans Gurmukhi",
@@ -102,7 +130,6 @@ internal static class PdfFontPicker
             Alphabet.Korean => "Noto Sans CJK KR",
             // Liberation Serif is broadly included in Linux distros and is designed to have the same measurements
             // as Times New Roman.
-            // TODO: Maybe we should use Times New Roman if available?
             _ => "Liberation Serif"
         };
     }
@@ -123,7 +150,6 @@ internal static class PdfFontPicker
         Cherokee,
         Devanagari,
         Ethiopic,
-        Fraktur,
         Georgian,
         Gujarati,
         Gurmukhi,
@@ -160,7 +186,6 @@ internal static class PdfFontPicker
             "aze_cyrl" or "bel" or "bul" or "kaz" or "kir" or "mkd" or "mon" or "rus" or "srp" or "tgk" or "ukr" or "uzb_cyrl" => Alphabet.Cyrillic,
             "hin" or "mar" or "nep" or "san" => Alphabet.Devanagari,
             "amh" or "tir" => Alphabet.Ethiopic,
-            "enm" or "frm" or "frk" or "ita_old" or "spa_old" => Alphabet.Fraktur,
             "kat" or "kat_old" => Alphabet.Georgian,
             "ell" or "grc" => Alphabet.Greek,
             "guj" => Alphabet.Gujarati,
@@ -169,13 +194,14 @@ internal static class PdfFontPicker
             "kan" => Alphabet.Kannada,
             "khm" => Alphabet.Khmer,
             "lao" => Alphabet.Lao,
-            // TODO: The reference says "vie" (Vietnamese) is its own script, but it looks like Latin?
             "afr" or "aze" or "bos" or "bre" or "cat" or "ceb" or "ces" or "cos" or "cym" or "dan" or "deu" or "eng" or
                 "epo" or "est" or "eus" or "fao" or "fil" or "fin" or "fra" or "fry" or "gla" or "gle" or "glg" or
                 "hat" or "hrv" or "hun" or "ind" or "isl" or "ita" or "jav" or "lat" or "lav" or "lit" or "ltz" or
                 "mlt" or "mri" or "msa" or "nld" or "nor" or "oci" or "pol" or "por" or "que" or "ron" or "slk" or
                 "slv" or "spa" or "sqi" or "srp_latn" or "sun" or "swa" or "swe" or "tat" or "ton" or "tur" or "uzb" or
-                "vie" or "yor" => Alphabet.Latin,
+                "yor" => Alphabet.Latin,
+            // Tesseract has separate "scripts" for Fraktur and Vietnamese but they both just use Latin characters
+            "enm" or "frm" or "frk" or "ita_old" or "spa_old" or "vie" => Alphabet.Latin,
             "mal" => Alphabet.Malayalam,
             "mya" => Alphabet.Myanmar,
             "ori" => Alphabet.Oriya,
