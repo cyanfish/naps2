@@ -30,7 +30,7 @@
     <ProjectReference Include="..\NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" Condition="'$(TargetFramework)' == 'net8' or '$(TargetFramework)' == 'net8-windows'" />
     <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
 
-    <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.0.1" />
+    <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.1.0" />
     <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="NSubstitute" Version="5.0.0" />
