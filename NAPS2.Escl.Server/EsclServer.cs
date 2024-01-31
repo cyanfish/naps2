@@ -7,6 +7,11 @@ namespace NAPS2.Escl.Server;
 
 public class EsclServer : IEsclServer
 {
+    static EsclServer()
+    {
+        Swan.Logging.Logger.NoLogging();
+    }
+    
     private readonly Dictionary<EsclDeviceConfig, DeviceContext> _devices = new();
     private bool _started;
     private CancellationTokenSource? _cts;
