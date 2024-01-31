@@ -1,4 +1,5 @@
-﻿using Codeuctivity;
+﻿using System.Text.RegularExpressions;
+using Codeuctivity;
 using NAPS2.Pdf;
 using NAPS2.Pdf.Pdfium;
 using PdfSharpCore.Pdf.IO;
@@ -61,7 +62,8 @@ public static class PdfAsserts
         {
             int startIndex = 0;
             int index;
-            while ((index = pageText.IndexOf(text, startIndex, StringComparison.InvariantCulture)) != -1)
+            var normalized = Regex.Replace(pageText, "\\s+", " ");
+            while ((index = normalized.IndexOf(text, startIndex, StringComparison.InvariantCulture)) != -1)
             {
                 count++;
                 startIndex = index + 1;
