@@ -408,8 +408,10 @@ public class PdfExporter
             if (info == null) continue;
 #if DEBUG && DEBUGOCR
             gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), info.Bounds);
-#endif
+            tf.DrawString(info.Text, info.Font, XBrushes.Blue, info.Bounds);
+#else
             tf.DrawString(info.Text, info.Font, XBrushes.Transparent, info.Bounds);
+#endif
         }
     }
 
@@ -424,7 +426,11 @@ public class PdfExporter
 
             var fontName = PdfFontPicker.GetBestFont(element.LanguageCode);
             var textObj = pdfiumDocument.NewText(fontSubsets[fontName], info.FontSize);
+#if DEBUG && DEBUGOCR
+            textObj.FillColor = (0, 0, 255, 255);
+#else
             textObj.TextRenderMode = TextRenderMode.Invisible;
+#endif
             textObj.SetText(info.Text);
             // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
             // try to make them identical, although it's not perfect to begin with.

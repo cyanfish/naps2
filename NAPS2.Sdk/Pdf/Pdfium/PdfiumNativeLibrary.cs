@@ -178,6 +178,10 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public delegate bool FPDFPageObj_GetFillColor_delegate(IntPtr page_object, out uint r, out uint g, out uint b,
         out uint a);
 
+    public delegate bool FPDFPageObj_SetStrokeColor_delegate(IntPtr page_object, uint r, uint g, uint b, uint a);
+
+    public delegate bool FPDFPageObj_SetFillColor_delegate(IntPtr page_object, uint r, uint g, uint b, uint a);
+
     public delegate int FPDFPageObj_GetType_delegate(IntPtr page_object);
 
     public delegate IntPtr
@@ -277,6 +281,12 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public FPDFPageObj_GetFillColor_delegate FPDFPageObj_GetFillColor =>
         Load<FPDFPageObj_GetFillColor_delegate>();
+
+    public FPDFPageObj_SetStrokeColor_delegate FPDFPageObj_SetStrokeColor =>
+        Load<FPDFPageObj_SetStrokeColor_delegate>();
+
+    public FPDFPageObj_SetFillColor_delegate FPDFPageObj_SetFillColor =>
+        Load<FPDFPageObj_SetFillColor_delegate>();
 
     public FPDFPageObj_GetType_delegate FPDFPageObj_GetType => Load<FPDFPageObj_GetType_delegate>();
     public FPDFTextObj_GetText_delegate FPDFTextObj_GetText => Load<FPDFTextObj_GetText_delegate>();

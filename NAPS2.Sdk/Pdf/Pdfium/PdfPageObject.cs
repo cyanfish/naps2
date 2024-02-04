@@ -71,23 +71,44 @@ internal class PdfPageObject : NativePdfiumObject
         }
     }
 
-    public (uint r, uint g, uint b, uint a) GetStrokeColor()
+    public (uint r, uint g, uint b, uint a) StrokeColor
     {
-        // TODO: Maybe fill color? Or something else to get the text color
-        if (!Native.FPDFPageObj_GetStrokeColor(Handle, out var r, out var g, out var b, out var a))
+        get
         {
-            throw new Exception("Could not get stroke color");
+            if (!Native.FPDFPageObj_GetStrokeColor(Handle, out var r, out var g, out var b, out var a))
+            {
+                throw new Exception("Could not get stroke color");
+            }
+            return (r, g, b, a);
         }
-        return (r, g, b, a);
+        set
+        {
+            var (r, g, b, a) = value;
+            if (!Native.FPDFPageObj_SetStrokeColor(Handle, r, g, b, a))
+            {
+                throw new Exception("Could not set stroke color");
+            }
+        }
     }
 
-    public (uint r, uint g, uint b, uint a) GetFillColor()
+    public (uint r, uint g, uint b, uint a) FillColor
     {
-        if (!Native.FPDFPageObj_GetFillColor(Handle, out var r, out var g, out var b, out var a))
+        get
         {
-            throw new Exception("Could not get fill color");
+            if (!Native.FPDFPageObj_GetFillColor(Handle, out var r, out var g, out var b, out var a))
+            {
+                throw new Exception("Could not get fill color");
+            }
+            return (r, g, b, a);
         }
-        return (r, g, b, a);
+        set
+        {
+            var (r, g, b, a) = value;
+            if (!Native.FPDFPageObj_SetFillColor(Handle, r, g, b, a))
+            {
+                throw new Exception("Could not set fill color");
+            }
+        }
     }
 
     public string GetText(PdfText pageText)
