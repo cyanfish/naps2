@@ -92,7 +92,7 @@ public class ContextualTests : IDisposable
                     OcrResult CreateOcrResult(string text) => new((0, 0, 100, 100),
                         ImmutableList.Create(
                             new OcrResultElement(text, ocrParams.LanguageCode!, false,
-                                (0, 0, 10, 10))));
+                                (10, 10, 10, 10))));
 
                     if (ocrTextByImage != null)
                     {
