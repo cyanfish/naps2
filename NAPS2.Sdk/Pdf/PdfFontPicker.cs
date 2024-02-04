@@ -76,7 +76,7 @@ internal static class PdfFontPicker
             Alphabet.Gujarati => "Gujarati MT",
             Alphabet.Gurmukhi => "Gurmukhi MT",
             Alphabet.Kannada => "Kannada MN",
-            Alphabet.Khmer => "Khmer MN",
+            Alphabet.Khmer => "Khmer Sangam MN",
             Alphabet.Lao => "Lao MN",
             Alphabet.Malayalam => "Malayalam MN",
             Alphabet.Myanmar => "Myanmar MN",
