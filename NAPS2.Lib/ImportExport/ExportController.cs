@@ -169,7 +169,7 @@ public class ExportController : IExportController
     {
         var subSavePath = Placeholders.All.Substitute(savePath);
         var state = _imageList.CurrentState;
-        if (await RunSavePdfOperation(subSavePath, images))
+        if (await RunSavePdfOperation(subSavePath, images, originalFilename: savePath))
         {
             _imageList.MarkSaved(state, images);
             notify.PdfSaved(subSavePath);
@@ -219,12 +219,12 @@ public class ExportController : IExportController
     }
 
     private async Task<bool> RunSavePdfOperation(string filename, IList<ProcessedImage> images,
-        EmailMessage? emailMessage = null)
+        EmailMessage? emailMessage = null, string? originalFilename = null)
     {
         var op = _operationFactory.Create<SavePdfOperation>();
 
         if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings),
-                _config.DefaultOcrParams(), emailMessage, filename))
+                _config.DefaultOcrParams(), emailMessage, originalFilename ?? filename))
         {
             _operationProgress.ShowProgress(op);
         }
