@@ -22,7 +22,7 @@ internal class SaneScanDriver : IScanDriver
             : File.Exists("/.flatpak-info")
                 ? new FlatpakSaneInstallation()
                 : new SystemSaneInstallation();
-        if (_customConfigDir == null)
+        if (_customConfigDir == null && !OperatingSystem.IsWindows())
         {
             // SANE caches the SANE_CONFIG_DIR environment variable process-wide, which means that we can't willy-nilly
             // change the config dir. However, if we use a static directory name and only create the actual directory
