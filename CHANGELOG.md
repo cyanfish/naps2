@@ -1,3 +1,10 @@
+Changes in 7.3.1:
+- Improved loading time for "Keep images across sessions"
+- Fixed some SANE devices incorrectly appearing offline
+- Fixed some SANE devices not respecting page size
+- Fixed OCR issues with non-Latin alphabets
+- Bug fixes
+
 Changes in 7.3.0:
 - Added a general "Settings" window with new options (some not available on Mac/Linux):
   - Show page numbers
