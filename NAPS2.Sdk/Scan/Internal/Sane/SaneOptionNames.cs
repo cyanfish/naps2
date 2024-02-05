@@ -10,6 +10,8 @@ internal static class SaneOptionNames
     public const string ADF_MODE1 = "adf_mode";
     public const string ADF_MODE2 = "adf-mode";
 
+    public const string PAGE_WIDTH = "page-width";
+    public const string PAGE_HEIGHT = "page-height";
     public const string TOP_LEFT_X = "tl-x";
     public const string TOP_LEFT_Y = "tl-y";
     public const string BOT_RIGHT_X = "br-x";

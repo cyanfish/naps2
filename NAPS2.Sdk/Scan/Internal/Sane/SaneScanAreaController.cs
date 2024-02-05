@@ -5,6 +5,8 @@ namespace NAPS2.Scan.Internal.Sane;
 internal class SaneScanAreaController
 {
     private readonly SaneOptionController _optionController;
+    private readonly SaneOption? _pageW;
+    private readonly SaneOption? _pageH;
     private readonly SaneOption? _tlx;
     private readonly SaneOption? _tly;
     private readonly SaneOption? _brx;
@@ -16,6 +18,8 @@ internal class SaneScanAreaController
     {
         _optionController = optionController;
 
+        _pageW = _optionController.GetOption(SaneOptionNames.PAGE_WIDTH);
+        _pageH = _optionController.GetOption(SaneOptionNames.PAGE_HEIGHT);
         _tlx = _optionController.GetOption(SaneOptionNames.TOP_LEFT_X);
         _tly = _optionController.GetOption(SaneOptionNames.TOP_LEFT_Y);
         _brx = _optionController.GetOption(SaneOptionNames.BOT_RIGHT_X);
@@ -65,6 +69,8 @@ internal class SaneScanAreaController
 
     private double GetMaxMm(SaneOption opt, double? dpi) => ToMm(opt, GetNumericRangeMax(opt), dpi);
 
+    private double? MaybeGetMaxMm(SaneOption? opt, double? res) => opt == null ? null : GetMaxMm(opt, res);
+
     private double ToMm(SaneOption opt, double value, double? dpi)
     {
         if (opt.Unit == SaneUnit.Pixel)
@@ -77,14 +83,22 @@ internal class SaneScanAreaController
     public (double minX, double minY, double maxX, double maxY) GetBounds()
     {
         if (!CanSetArea) throw new InvalidOperationException();
+        // Checking just tl/br should be enough, but some backends have an issue where we need to check width/height too
+        // https://gitlab.com/sane-project/backends/-/issues/730
         return (
-            GetMinMm(_tlx!, _xres), GetMinMm(_tly!, _yres),
-            GetMaxMm(_brx!, _xres), GetMaxMm(_bry!, _yres));
+            GetMinMm(_tlx!, _xres),
+            GetMinMm(_tly!, _yres),
+            Math.Max(GetMaxMm(_brx!, _xres), MaybeGetMaxMm(_pageW, _xres) ?? 0),
+            Math.Max(GetMaxMm(_bry!, _yres), MaybeGetMaxMm(_pageH, _xres) ?? 0));
     }
 
     public void SetArea(double x1, double y1, double x2, double y2)
     {
         if (!CanSetArea) throw new InvalidOperationException();
+        // Setting just tl/br should be enough, but some backends have an issue where we need to set width/height too
+        // https://gitlab.com/sane-project/backends/-/issues/730
+        _optionController.TrySet(SaneOptionNames.PAGE_WIDTH, x2 - x1);
+        _optionController.TrySet(SaneOptionNames.PAGE_HEIGHT, y2 - y1);
         _optionController.TrySet(SaneOptionNames.TOP_LEFT_X, x1);
         _optionController.TrySet(SaneOptionNames.TOP_LEFT_Y, y1);
         _optionController.TrySet(SaneOptionNames.BOT_RIGHT_X, x2);
