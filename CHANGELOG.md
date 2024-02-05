@@ -1,5 +1,6 @@
 Changes in 7.3.1:
 - Improved loading time for "Keep images across sessions"
+- PDF encryption settings are now hidden until enabled
 - Fixed some SANE devices incorrectly appearing offline
 - Fixed some SANE devices not respecting page size
 - Fixed OCR issues with non-Latin alphabets
