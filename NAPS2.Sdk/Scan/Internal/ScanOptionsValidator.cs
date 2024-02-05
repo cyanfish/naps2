@@ -8,8 +8,7 @@ internal class ScanOptionsValidator
 {
     public ScanOptions ValidateAll(ScanOptions options, ScanningContext scanningContext, bool requireDevice)
     {
-        // Easy deep copy. Ideally we'd do this in a more efficient way.
-        options = options.ToXml().FromXml<ScanOptions>();
+        options = options.Clone();
 
         if (options.Device != null && options.Driver != Driver.Default)
         {

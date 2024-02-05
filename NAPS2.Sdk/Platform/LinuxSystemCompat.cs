@@ -53,6 +53,8 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public string SaneLibraryName => "libsane.so.1";
 
+    public bool IsLibUsbReliable => true;
+
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => LinuxInterop.dlsym(libraryHandle, symbol);

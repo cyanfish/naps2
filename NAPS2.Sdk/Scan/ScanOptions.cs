@@ -1,4 +1,5 @@
 ﻿using NAPS2.Ocr;
+using NAPS2.Serialization;
 
 namespace NAPS2.Scan;
 
@@ -143,4 +144,10 @@ public class ScanOptions
     public bool FlipDuplexedPages { get; set; }
 
     public KeyValueScanOptions? KeyValueOptions { get; set; }
+
+    public ScanOptions Clone()
+    {
+        // Easy deep copy. Ideally we'd do this in a more efficient way.
+        return this.ToXml().FromXml<ScanOptions>();
+    }
 }

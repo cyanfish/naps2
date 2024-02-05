@@ -11,7 +11,6 @@ internal class SaneClient : SaneNativeObject
     {
         lock (SaneLock)
         {
-            saneInstallation.Initialize();
             return new SaneNativeLibrary(saneInstallation.LibraryPath, saneInstallation.LibraryDeps);
         }
     }

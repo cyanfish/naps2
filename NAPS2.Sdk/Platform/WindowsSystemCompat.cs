@@ -47,6 +47,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public string SaneLibraryName => "sane.dll";
 
+    public bool IsLibUsbReliable => true;
+
     public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);
 
     public string GetLoadError() => Marshal.GetLastWin32Error().ToString();

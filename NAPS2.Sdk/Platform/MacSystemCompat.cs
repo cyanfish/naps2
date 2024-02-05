@@ -64,6 +64,8 @@ internal class MacSystemCompat : ISystemCompat
 
     public string SaneLibraryName => "libsane.1.dylib";
 
+    public bool IsLibUsbReliable => false;
+
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => MacInterop.dlsym(libraryHandle, symbol);

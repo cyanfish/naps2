@@ -44,6 +44,8 @@ internal interface ISystemCompat
 
     string SaneLibraryName { get; }
 
+    bool IsLibUsbReliable { get; }
+
     IntPtr LoadLibrary(string path);
 
     IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);

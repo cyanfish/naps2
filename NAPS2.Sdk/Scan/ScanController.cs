@@ -1,6 +1,9 @@
 ﻿using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Ocr;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
+using NAPS2.Scan.Internal.Sane;
 
 namespace NAPS2.Scan;
 
@@ -138,16 +141,60 @@ public class ScanController
         ScanStartCallback();
         return AsyncProducers.RunProducer<ProcessedImage>(async produceImage =>
         {
-            try
+            var bridge = _scanBridgeFactory.Create(options);
+
+            async Task DoScan(ScanOptions actualOptions)
             {
-                var bridge = _scanBridgeFactory.Create(options);
-                await bridge.Scan(options, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback),
+                await bridge.Scan(actualOptions, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback),
                     (image, postProcessingContext) =>
                     {
-                        image = _localPostProcessor.PostProcess(image, options, postProcessingContext);
+                        image = _localPostProcessor.PostProcess(image, actualOptions, postProcessingContext);
                         produceImage(image);
                         PageEndCallback(image);
                     });
+            }
+
+            try
+            {
+                try
+                {
+                    await DoScan(options);
+                }
+                catch (DeviceOfflineException) when
+                    (options.Driver == Driver.Sane &&
+                     (_scanningContext.WorkerFactory != null || PlatformCompat.System.IsLibUsbReliable))
+                {
+                    // Some SANE backends (e.g. airscan, genesys) have inconsistent IDs so "device offline" might actually
+                    // just mean "device id has changed". We can query for a device that matches the name of the
+                    // original device, and assume it's the same physical device, which should generally be correct.
+                    //
+                    // TODO: Ideally this would be contained within SaneScanDriver, but due to libusb's unreliability on
+                    // macOS, we have to make sure each call is in a separate worker process. Makes me wonder if the
+                    // scanning pipeline could be redesigned so that drivers have more control over worker processes.
+                    _scanningContext.Logger.LogDebug(
+                        "SANE Device appears offline; re-querying in case of ID change for name \"{Name}\"",
+                        options.Device!.Name);
+                    var getDevicesOptions = options.Clone();
+                    getDevicesOptions.SaneOptions.Backend = SaneScanDriver.GetBackend(options.Device!);
+                    ScanDevice? matchingDevice = null;
+                    using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancelToken);
+                    await bridge.GetDevices(getDevicesOptions, cts.Token, device =>
+                    {
+                        if (device.Name == options.Device!.Name)
+                        {
+                            matchingDevice = device;
+                            cts.Cancel();
+                        }
+                    });
+                    if (matchingDevice == null)
+                    {
+                        _scanningContext.Logger.LogDebug("No matching device found");
+                        throw;
+                    }
+                    var actualOptions = options.Clone();
+                    actualOptions.Device = matchingDevice;
+                    await DoScan(actualOptions);
+                }
             }
             catch (Exception ex)
             {
