@@ -28,7 +28,7 @@
     <value>Aucun périphérique d'acquisition n'a été trouvé.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Une erreur est survenue avec le pilote d'acquisition.</value>
+    <value>Une erreur est survenue avec le pilote de numérisation.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>

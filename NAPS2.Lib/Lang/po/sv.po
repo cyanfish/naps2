@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:43\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Standardåtgärd för knappen \"Spara\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Standardåtgärd för knappen \"Skanna\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Menyn \"Skanna\" ändrar standardprofil"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,7 +115,7 @@ msgstr "Alternativ interfoliering"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Fråga alltid"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -180,7 +180,7 @@ msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Applikation"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -731,7 +731,7 @@ msgstr "Installationen misslyckades."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Gränssnitt"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -751,7 +751,7 @@ msgstr "JPEG-kvalitet"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Behåll bilder mellan sessioner"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -833,7 +833,7 @@ msgstr "NAPS2 − {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 är helt gratis. Tänk gärna på att donera.."
+msgstr "NAPS2 är helt gratis. Överväg gärna att donera."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -952,7 +952,7 @@ msgstr "En eller flera filer kunde inte laddas ner."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Tillåt endast en NAPS2-instans"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1072,7 +1072,7 @@ msgstr "Profiler"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Fråga vid markering"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1253,7 +1253,7 @@ msgstr "Skanningskonfiguration"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Skanna med standardprofil"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1316,7 +1316,7 @@ msgstr "Ange standard"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
@@ -1344,11 +1344,11 @@ msgstr "Visa"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Visa verktygsfältet \"Profiler\""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Visa sidnummer"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

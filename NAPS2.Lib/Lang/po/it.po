@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Azione predefinita del tasto \"Salva\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Azione predefinita del tasto \"Scansiona\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Menu \"Scansiona\" modifica il profilo predefinito"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,7 +115,7 @@ msgstr "Interfoliazione alternativa"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Chiedi sempre"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -180,7 +180,7 @@ msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Applicazione"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -731,7 +731,7 @@ msgstr "Installazione fallita."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Interfaccia"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -751,7 +751,7 @@ msgstr "Qualità Jpeg"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Mantieni le immagini tra una sezione e l'altra"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -952,7 +952,7 @@ msgstr "Uno o più file non possono essere scaricati."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Consenti una sola istanza di NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1072,7 +1072,7 @@ msgstr "Profili"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Chiedi se selezionato"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1253,7 +1253,7 @@ msgstr "Configurazione scansione"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Scansiona con Profilo Predefinito"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1316,7 +1316,7 @@ msgstr "Imposta predefinito"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Impostazioni"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
@@ -1344,11 +1344,11 @@ msgstr "Visualizza"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Mostra barra \"Profili\""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Mostra numeri di pagina"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

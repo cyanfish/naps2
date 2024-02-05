@@ -19,16 +19,16 @@
     <value>Tout effacer</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Souhaitez-vous vraiment effacer {0} élément(s) ?</value>
+    <value>Faut-il vraiment effacer {0} élément(s) ?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Souhaitez-vous vraiment supprimer {0} élément(s) ?</value>
+    <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Souhaitez-vous vraiment supprimer {0} profil(s) ?</value>
+    <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Souhaitez-vous vraiment supprimer le profil « {0} » ?</value>
+    <value>Faut-il vraiment supprimer le profil « {0} » ?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
     <value>Le fichier « {0} » existe déjà. Faut-il vraiment l'écraser ?</value>
@@ -100,7 +100,7 @@
     <value>Sélectionner un profil avant de cliquer sur « Numériser ».</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Une erreur est survenue avec le pilote d'acquisition.</value>
+    <value>Une erreur est survenue avec le pilote de numérisation.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>
@@ -112,7 +112,7 @@
     <value>Installation terminée</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installation terminée. Souhaitez-vous redémarrer NAPS2 maintenant ?</value>
+    <value>Installation terminée. Faut-il redémarrer NAPS2 maintenant ?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
     <value>Échec de l'installation.</value>
@@ -145,7 +145,7 @@
     <value>Erreur de téléchargement</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>Au moins un fichier n'a pas pu être téléchargé.</value>
+    <value>Un ou plusieurs fichiers n'ont pas pu être téléchargés.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
     <value>Personnalisé ({0}x{1} {2})</value>
@@ -154,16 +154,16 @@
     <value>Numériser</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Souhaitez-vous vraiment annuler les modifications sur {0} image(s) ?</value>
+    <value>Faut-il vraiment défaire les modifications sur {0} image(s) ?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Réinitialisation de l'image</value>
+    <value>Réinitialiser l'image</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Il existe des modifications non enregistrées. Souhaitez-vous vraiment quitter et les annuler ces modifications ?</value>
+    <value>Il existe des modifications non enregistrées. Faut-il vraiment quitter et les perdre ?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>Une opération est en cours. Souhaitez-vous vraiment quitter et annuler l'opération ?</value>
+    <value>Une opération est en cours. Faut-il vraiment quitter et annuler l'opération ?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Modifications non enregistrées</value>
@@ -220,7 +220,7 @@
     <value>Fermer</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Enregistrement des acquisitions par lot...</value>
+    <value>Enregistrement des acquisitions par lot…</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Le scanner sélectionné ne semble pas gérer pas le recto-verso. S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
@@ -310,7 +310,7 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Souhaitez-vous vraiment supprimer « {0} » ?</value>
+    <value>Faut-il vraiment supprimer « {0} » ?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>Le fichier ne peut pas être écrasé car il est en cours d'utilisation.</value>
@@ -325,16 +325,16 @@
     <value>Téléchargement requis</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Souhaitez-vous le télécharger maintenant ?</value>
+    <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Faut-il le télécharger maintenant ?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Souhaitez-vous vraiment annuler l'acquisition par lot ?</value>
+    <value>Faut-il vraiment annuler l'acquisition par lot ?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
     <value>Annuler le lot</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Don</value>
+    <value>Faire un don</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 est gratuit, mais il est possible de faire un don.</value>
@@ -352,7 +352,7 @@
     <value>Progression de l'OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>OCR en exécution...</value>
+    <value>OCR en cours…</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
     <value>Progression de la mise à jour</value>
@@ -376,7 +376,7 @@
     <value>Installer {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>Une mise à jour est disponible.</value>
+    <value>Mise à jour disponible.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
     <value>Une erreur est survenue en essayant d'autoriser.</value>

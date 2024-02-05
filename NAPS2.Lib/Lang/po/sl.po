@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:43\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: Slovenian\n"
 "Language: sl\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Privzeto dejanje gumba \"Shrani\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Privzeto dejanje gumba \"Skeniraj\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
@@ -1320,7 +1320,7 @@ msgstr ""
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Souporaba"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
@@ -1348,7 +1348,7 @@ msgstr ""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Prikaži številko strani"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

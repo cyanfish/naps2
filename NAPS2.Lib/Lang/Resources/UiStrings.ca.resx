@@ -40,7 +40,7 @@
     <value>Edita</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Esborra</value>
+    <value>Suprimeix</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Escaneja</value>
@@ -91,7 +91,7 @@
     <value>PDF per correu-e</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Paràmetres del correu electrònic</value>
+    <value>Configuració del correu electrònic</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Imprimeix</value>
@@ -100,10 +100,10 @@
     <value>Imatge</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>Visualitza</value>
+    <value>Mostra</value>
   </data>
   <data name="Crop" xml:space="preserve">
-    <value>Escapça</value>
+    <value>Retalla</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
     <value>Brillantor/Contrast</value>
@@ -142,10 +142,10 @@
     <value>Rotació personalitzada</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Mou amunt</value>
+    <value>Desplaça cap amunt</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Mou avall</value>
+    <value>Desplaça cap avall</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Organitza</value>
@@ -181,31 +181,31 @@
     <value>Idioma</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configuració</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Interfície</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>El menú "Escaneja" canvia el perfil per defecte</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Mostra la barra d'eines "Perfils"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Mostra els números de pàgina</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Acció predeterminada del botó "Escaneja":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Acció predeterminada del botó "Desa":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplicació</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Permet només una única instància de NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Quant a</value>
@@ -250,13 +250,13 @@
     <value>Envia-ho tot</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Seleccionat</value>
+    <value>Correu-e seleccionat</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Envia-ho tot com a PDF per correu-e</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Envia-ho la selecció com a PDF per correu-e</value>
+    <value>Envia la selecció com a PDF per correu-e</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Paràmetres del perfil</value>
@@ -265,7 +265,7 @@
     <value>Mostra el nom:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
-    <value>Dispositiu WIA</value>
+    <value>Controlador WIA</value>
   </data>
   <data name="TwainDriver" xml:space="preserve">
     <value>Dispositiu TWAIN</value>
@@ -292,7 +292,7 @@
     <value>Trieu dispositiu</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
-    <value>Utiltza els ajustos predeterminats</value>
+    <value>Utilitza la configuració predeterminada</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
     <value>Utilitza la interfície nativa</value>
@@ -343,7 +343,7 @@
     <value>Origen</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Executa en rerefons</value>
+    <value>Executa en segon pla</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -370,7 +370,7 @@
     <value>Inicia l'OCR automàticament després d'escanejar</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
-    <value>Més idiomes</value>
+    <value>Obteniu més idiomes</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
     <value>Baixada de l'OCR</value>
@@ -391,7 +391,7 @@
     <value>Progrés de la baixada</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
-    <value>Previsualitza</value>
+    <value>Vista prèvia</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Següent</value>
@@ -544,7 +544,7 @@
     <value>Nom del fitxer</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
-    <value>Previsualitza:</value>
+    <value>Vista prèvia:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
     <value>Per a obtenir imatges JPEG d'alta qualitat (80+), incrementeu també la resolució al perfil.</value>
@@ -562,10 +562,10 @@
     <value>Opcions de la imatge</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Paràmetres del correu electrònic</value>
+    <value>Configuració del correu electrònic</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configuració</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Proveïdor</value>
@@ -598,7 +598,7 @@
     <value>Aquest fitxer està xifrat per contrasenya i és necessària per obrir-lo:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Demana la ruta de destinació</value>
+    <value>Pregunta la ruta de destinació</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>Un fitxer per pàgina</value>
@@ -616,7 +616,7 @@
     <value>Neteja les imatges després de desar</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Conserva les imatges entre sessions</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Mida personalitzada de la pàgina</value>
@@ -667,10 +667,10 @@
     <value>Ajusta a la mida de la pàgina</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Escapça a la mida de la pàgina</value>
+    <value>Retalla a la mida de la pàgina</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Gira les pàgines doblegades</value>
+    <value>Gira 180º les pàgines parell</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versió Wia:</value>
@@ -697,7 +697,7 @@
     <value>Escaneig senzill</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Escaneig múltiple (demana entre cada escaneig)</value>
+    <value>Escaneig múltiple (pregunta entre cada escaneig)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
     <value>Escaneig múltiple (retard fixe entre escaneig)</value>
@@ -721,7 +721,7 @@
     <value>Inicia</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
-    <value>Proper escaneig</value>
+    <value>Següent escaneig</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
     <value>Preparat per l'escaneig {0}.</value>
@@ -736,24 +736,24 @@
     <value>Activa el Mode depuració</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Comparteix</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Compartició d'escàners</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Compartició d'escàners</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Els escàners compartits es poden utilitzar des d'altres ordinadors de la xarxa local seleccionant "ESCL Driver" a la configuració del perfil NAPS2 de l'altre ordinador.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Configuració de l'escàner compartit</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Esteu segur que voleu aturar la compartició {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Comparteix fins i tot quan NAPS2 és tancat</value>
   </data>
 </root>

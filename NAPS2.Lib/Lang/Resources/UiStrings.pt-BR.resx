@@ -181,31 +181,31 @@
     <value>Idioma</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configurações</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Interface</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>O menu em "Digitalizar" altera o perfil padrão</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Exibir barra de ferramentas "Perfis"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Mostrar números de páginas</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Ação padrão do botão "Salvar":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Ação padrão do botão "Salvar":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplicativo</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Permitir apenas uma instância do NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Sobre</value>
@@ -565,7 +565,7 @@
     <value>Configurações de e-mail</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configurações</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provedor</value>
@@ -616,7 +616,7 @@
     <value>Limpar imagens após salvar</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Manter imagens entre as sessões</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Tamanho de página personalizada</value>

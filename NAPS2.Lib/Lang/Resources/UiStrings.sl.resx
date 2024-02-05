@@ -193,13 +193,13 @@
     <value>Show "Profiles" toolbar</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Prikaži številko strani</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Privzeto dejanje gumba "Skeniraj":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Privzeto dejanje gumba "Shrani":</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Application</value>
@@ -736,7 +736,7 @@
     <value>Omogoči beleženje iskanja in odstranjevanja napak (debug)</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Souporaba</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
     <value>Scanner Sharing</value>

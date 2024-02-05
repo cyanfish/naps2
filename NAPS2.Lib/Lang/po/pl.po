@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -751,7 +751,7 @@ msgstr "Jakość JPEG"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Zachowaj obrazy między sesjami"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"

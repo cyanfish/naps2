@@ -181,31 +181,31 @@
     <value>Язык</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Интерфейс</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Меню "Сканировать" меняет профиль по умолчанию</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Показывать панель "Профили"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Показывать номера страниц</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Действие кнопки "Сканировать" по умолчанию:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Действие кнопки "Сохранить" по умолчанию:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Приложение</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Разрешать только один экземпляр NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>О программе</value>
@@ -565,7 +565,7 @@
     <value>Параметры эл. почты</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Провайдер</value>
@@ -616,7 +616,7 @@
     <value>Очистить картинки после сохранения</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Сохранять изображения между сеансами</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Другой размер страницы</value>
@@ -736,24 +736,24 @@
     <value>Включить ведение журнала отладки</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Поделиться</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Общий доступ к сканеру</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Общий доступ к сканеру</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Общие сканеры можно использовать с других компьютеров в локальной сети, выбрав "ESCL Driver" в настройках профиля NAPS2 на другом компьютере.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Настройки общего сканера</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Вы уверены, что хотите отключить общий доступ к {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Сохранять общий доступ даже при закрытом NAPS2</value>
   </data>
 </root>

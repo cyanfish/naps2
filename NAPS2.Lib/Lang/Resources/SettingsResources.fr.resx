@@ -145,24 +145,24 @@
     <value>Rapide</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Meilleur</value>
+    <value>Meilleure</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Enregistrer tout</value>
+    <value>Tout enregistrer</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
     <value>Enregistrer la sélection</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Toujours demander</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Demander si sélectionné</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Numériser avec le profil par défaut</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Toujours demander</value>
   </data>
 </root>

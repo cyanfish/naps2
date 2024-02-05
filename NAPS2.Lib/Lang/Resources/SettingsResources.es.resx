@@ -31,7 +31,7 @@
     <value>GMail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Acceso web de Outlook</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
@@ -154,15 +154,15 @@
     <value>Guardar seleccionado</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Preguntar siempre</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Preguntar si se selecciona</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Escanear con perfil predeterminado</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Preguntar siempre</value>
   </data>
 </root>

@@ -616,7 +616,7 @@
     <value>Wyczyść obrazy po zapisaniu</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Zachowaj obrazy między sesjami</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Niestandardowy rozmiar strony</value>

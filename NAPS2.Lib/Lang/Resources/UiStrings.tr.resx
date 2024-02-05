@@ -181,31 +181,31 @@
     <value>Dil</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ayarlar</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Arayüz</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>"Tara" menüsü varsayılan profili değiştirir</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>"Profiller" araç çubuğunu göster</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Sayfa numaralarını göster</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>"Tara" düğmesi varsayılan eylemi:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>"Kaydet" düğmesi varsayılan eylemi:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Uygulama</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Yalnızca tek bir NAPS2 örneğine izin verin</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Hakkında</value>
@@ -565,7 +565,7 @@
     <value>E-Posta Ayarları</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ayarlar</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Sağlayıcı</value>
@@ -616,7 +616,7 @@
     <value>Kaydettikten sonra resimleri temizle</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Görüntüleri oturumlar arasında saklayın</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Özel Sayfa Boyutu</value>
@@ -754,6 +754,6 @@
     <value>Paylaşımı durdurmak istediğinize emin misiniz {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>NAPS2 kapalıyken bile paylaşın</value>
   </data>
 </root>

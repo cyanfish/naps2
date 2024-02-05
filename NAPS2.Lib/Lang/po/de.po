@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "\"Speichern\"-Button Standardaktion:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "\"Scan\"-Button Standardaktion:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Menü \"Scan\" ändert das Standardprofil"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,7 +115,7 @@ msgstr "Alternatives Interleave"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Immer nachfragen"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -180,7 +180,7 @@ msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Anwendung"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "Möchten Sie wirklich {0} Profile löschen?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Sind Sie sicher, dass Sie {0} nicht mehr teilen möchten?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -731,7 +731,7 @@ msgstr "Installation fehlgeschlagen."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Benutzeroberfläche"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -751,7 +751,7 @@ msgstr "JPEG-Qualität"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Bilder über Sitzungen hinweg behalten"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -952,7 +952,7 @@ msgstr "Eine oder mehrere Dateien konnten nicht heruntergeladen werden."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Nur eine einzige NAPS2-Instanz erlauben"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1072,7 +1072,7 @@ msgstr "Profile"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Nachfrage, wenn ausgewählt"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1253,7 +1253,7 @@ msgstr "Scan-Einstellungen"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Mit Standardprofil scannen"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1262,7 +1262,7 @@ msgstr "Eingelesenes Bild"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Scanner teilen"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1316,23 +1316,23 @@ msgstr "Auf Standard setzen"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Teilen"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Auch teilen, wenn NAPS2 geschlossen ist"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Geteilte Scanner Einstellungen"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Geteilte Scanner können von anderen Computern im lokalen Netzwerk verwendet werden, indem Sie auf dem anderen Computer in den NAPS2 Profileinstellungen \"ESCL Treiber\" auswählen."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1344,11 +1344,11 @@ msgstr "Anzeigen"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Zeige \"Profile\" Symbolleiste"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Zeige Seitenzahlen"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

@@ -181,31 +181,31 @@
     <value>Idioma</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configuración</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Interfaz</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>El menú "Escanear" cambia el perfil por defecto</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Mostrar la barra de herramientas "Perfiles"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Mostrar números de página</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Acción predeterminada del botón "Escanear":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Acción predeterminada del botón "Guardar":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplicación</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Permitir sólo una sola instancia de NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Acerca de</value>
@@ -352,7 +352,7 @@
     <value>NAPS2 - {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
-    <value>Not Another PDF Scanner</value>
+    <value>No es otro escáner PDF</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
     <value>Ajustes de OCR</value>
@@ -565,7 +565,7 @@
     <value>Configuración del correo electrónico</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configuración</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Proveedor</value>
@@ -616,7 +616,7 @@
     <value>Borrar las imágenes después de guardar</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Mantener las imágenes entre sesiones</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Tamaño de página personalizado</value>
@@ -736,24 +736,24 @@
     <value>Activar registro de depuración</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Compartir</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Compartir escáner</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Compartir escáner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Los escáneres compartidos se pueden utilizar desde otros ordenadores de la red local seleccionando "ESCL Driver" en la configuración del perfil NAPS2 del resto de equipos.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Configuración de Escáner Compartido</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>¿Estás seguro de que quieres dejar de compartir {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Compartir incluso cuando NAPS2 esté cerrado</value>
   </data>
 </root>

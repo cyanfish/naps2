@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "\"Tallenna\" painikkeen oletustoiminto:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "\"Skannaa\" painikkeen oletustoiminto:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "\"Skannaa\" valikko muuttaa oletusprofiilia"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,7 +115,7 @@ msgstr "Vaihtoehtoinen lomitus"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Kysy aina"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -123,7 +123,7 @@ msgstr "Tämän PDF-tiedoston tuomiseen tarvitaan lisäkomponentti. Haluatko lad
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "OCR:n käytössä tapahtui virhe."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -160,7 +160,7 @@ msgstr "Toiminto on käynnissä. Haluatko varmasti poistua ja peruuttaa toiminno
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Tuntematon virhe sarjaskannauksessa."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -172,15 +172,15 @@ msgstr "OCR-päivitys on saatavana."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Applen Ajuri"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Sähköposti"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Sovellus"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "Haluatko varmasti poistaa {0} profiilia?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Haluatko varmasti lopettaa jakamisen {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -245,7 +245,7 @@ msgstr "Automaattisen tallennuksen asetukset"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Automaattinen lisäys (1 numero)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -290,7 +290,7 @@ msgstr "Sarjaskannaus pysäytetty virheen takia."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "Paras"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -369,7 +369,7 @@ msgstr "Tyhjennä"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Poista kaikki"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -405,7 +405,7 @@ msgstr "Kopioidaan..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Tekijänoikeudet {0} NAPS2 Avustajat"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -493,7 +493,7 @@ msgstr "Näyttönimi:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Dokumentin Korjaus"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
@@ -526,15 +526,15 @@ msgstr "Kaksipuoleinen"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL- Ajuri"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL Verkkoajuri"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB-ajuri"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -542,11 +542,11 @@ msgstr "Muokkaa"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Lähetä kaikki sähköpostitse"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Lähetä kaikki sähköpostilla PDF-muodossa"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
@@ -559,11 +559,11 @@ msgstr "PDF - postituksen eteneminen"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Lähetä valittu sähköpostilla"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Lähetä valittu PDF-tiedostona"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -576,7 +576,7 @@ msgstr "Salli automaattinen tallennus"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Ota virheenkorjausloki käyttöön"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -602,7 +602,7 @@ msgstr "Arvioitu latauskoko {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
+msgstr "Exif-tiedosto (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -731,7 +731,7 @@ msgstr "Asennus epäonnistui."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Käyttöliittymä"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -743,7 +743,7 @@ msgstr "JPEG-tiedosto (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG2000-tiedosto (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -751,7 +751,7 @@ msgstr "Jpeg - laatu"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Säilytä kuvat eri istunnoissa"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -845,7 +845,7 @@ msgstr "Nimi puuttuu."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Natiivi Siirto"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -952,7 +952,7 @@ msgstr "Tiedosto(j)a ei voitu ladata."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Salli vain yksi NAPS2-instanssi"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -964,7 +964,7 @@ msgstr "Toiminto käynnissä"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web-käyttö"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
@@ -1072,7 +1072,7 @@ msgstr "Profiilit"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Kysy jos valittu"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1132,11 +1132,11 @@ msgstr "Taaksepäin"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Vaihda kaikkien arvot"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Vaihda valittujen arvot"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1172,20 +1172,20 @@ msgstr "SANE - ajuri"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Tallenna"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Tallenna kaikki"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Tallenna kaikki kuvina"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Tallenna kaikki PDF-muodossa"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1208,15 +1208,15 @@ msgstr "PDF:n tallennuksen eteneminen"
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Tallenna valitut"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Tallenna valitut kuvina"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Tallenna valitut PDF-muodossa"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1253,7 +1253,7 @@ msgstr "Skannausasetukset"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Skannaa Oletusprofiililla"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1262,7 +1262,7 @@ msgstr "Skannattu kuva"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Skannerin Jakaminen"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1316,23 +1316,23 @@ msgstr "Aseta oletus"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Asetukset"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Jaa"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Jaa vaikka NAPS2 olisi suljettu"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Jaetut Skannerin Asetukset"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Jaettuja skannereita voidaan käyttää muista paikallisessa verkossa olevista tietokoneista valitsemalla \"ESCL Driver\" toisen tietokoneen NAPS2-profiiliasetuksista."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1344,11 +1344,11 @@ msgstr "Näytä"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Näytä \"Profiilit\" työkalupalkki"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Näytä sivunnumerot"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1393,7 +1393,7 @@ msgstr "OCR - moottori ei ole käytettävissä. Asenna tarvittava osat:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "OCR-operaatio aikakatkaistiin."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
@@ -1419,7 +1419,7 @@ msgstr "Tiedosto {0} on jo olemassa. Haluatko korvata tiedoston?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Seuraava tiedosto on salattu ja tarvitsee salasanan avaukseen:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1484,7 +1484,7 @@ msgstr "Otsikko:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Työkalut"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1508,7 +1508,7 @@ msgstr "Päivityksen eteneminen"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "Päivityksen tarkistus on poistettu käytöstä."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1565,7 +1565,7 @@ msgstr "Valkoisen raja-arvo"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Wia-versio:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

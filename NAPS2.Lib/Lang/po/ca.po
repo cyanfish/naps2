@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Acció predeterminada del botó \"Desa\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Acció predeterminada del botó \"Escaneja\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "El menú \"Escaneja\" canvia el perfil per defecte"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,7 +115,7 @@ msgstr "Intercalat alternatiu"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Pregunta'm sempre"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -147,12 +147,12 @@ msgstr "S'ha produït un error en enviar el correu electrònic."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
-msgstr "S'ha produït un error mentre s'enviava el correu-e ."
+msgstr "S'ha produït un error en enviar un correu electrònic."
 
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "S'ha produït un error amb el driver del escaner."
+msgstr "S'ha produït un error amb el controlador de l'escàner."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
@@ -180,7 +180,7 @@ msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Aplicació"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "Segur que voleu suprimir {0} perfils?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Esteu segur que voleu aturar la compartició {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -413,11 +413,11 @@ msgstr "Llindar de cobertura"
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
-msgstr "Escapça"
+msgstr "Retalla"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr "Escapça a la mida de la pàgina"
+msgstr "Retalla a la mida de la pàgina"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -461,7 +461,7 @@ msgstr "Desentrellaça"
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
 msgid "Delete"
-msgstr "Esborra"
+msgstr "Suprimeix"
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
@@ -559,16 +559,16 @@ msgstr "Progrés d'enviament del PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr "Seleccionat"
+msgstr "Correu-e seleccionat"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr "Envia-ho la selecció com a PDF per correu-e"
+msgstr "Envia la selecció com a PDF per correu-e"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
-msgstr "Paràmetres del correu electrònic"
+msgstr "Configuració del correu electrònic"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
@@ -630,7 +630,7 @@ msgstr "Gira"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr "Gira les pàgines doblegades"
+msgstr "Gira 180º les pàgines parell"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
@@ -642,7 +642,7 @@ msgstr "Fitxer GIF (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
-msgstr "Més idiomes"
+msgstr "Obteniu més idiomes"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -731,7 +731,7 @@ msgstr "S'ha produït un error en la instal·lació."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Interfície"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -751,7 +751,7 @@ msgstr "Qualitat Jpeg"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Conserva les imatges entre sessions"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -807,11 +807,11 @@ msgstr "Més informació"
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
-msgstr "Mou avall"
+msgstr "Desplaça cap avall"
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
-msgstr "Mou amunt"
+msgstr "Desplaça cap amunt"
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -819,7 +819,7 @@ msgstr "Escaneig múltiple (retard fixe entre escaneig)"
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "Escaneig múltiple (demana entre cada escaneig)"
+msgstr "Escaneig múltiple (pregunta entre cada escaneig)"
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
@@ -841,7 +841,7 @@ msgstr "Nom (opcional)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
-msgstr "Manca el nom."
+msgstr "Falta el nom."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
@@ -861,7 +861,7 @@ msgstr "Següent"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
-msgstr "Proper escaneig"
+msgstr "Següent escaneig"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
@@ -952,7 +952,7 @@ msgstr "No s'ha pogut baixar un o més fitxers."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Permet només una única instància de NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1042,11 +1042,11 @@ msgstr "Premeu Inicia per continuar."
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
-msgstr "Previsualitza"
+msgstr "Vista prèvia"
 
 #: UiStrings.resx$PreviewLabel$Message
 msgid "Preview:"
-msgstr "Previsualitza:"
+msgstr "Vista prèvia:"
 
 #: UiStrings.resx$Previous$Message
 msgid "Previous"
@@ -1072,11 +1072,11 @@ msgstr "Perfils"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Pregunta si s'ha seleccionat"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr "Demana la ruta de destinació"
+msgstr "Pregunta la ruta de destinació"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
@@ -1160,7 +1160,7 @@ msgstr "Gira a la dreta"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr "Executa en rerefons"
+msgstr "Executa en segon pla"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
@@ -1253,7 +1253,7 @@ msgstr "Configuració de l’escàner"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Escaneja amb el perfil per defecte"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1262,7 +1262,7 @@ msgstr "Imatge escanejada"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Compartició d'escàners"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1295,7 +1295,7 @@ msgstr "Origen"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
-msgstr "Selecciona un perfil abans de fer click a Scanejar."
+msgstr "Seleccioneu un perfil abans de fer clic a Escaneja."
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
@@ -1316,23 +1316,23 @@ msgstr "Estableix per defecte"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Configuració"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Comparteix"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Comparteix fins i tot quan NAPS2 és tancat"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Configuració de l'escàner compartit"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Els escàners compartits es poden utilitzar des d'altres ordinadors de la xarxa local seleccionant \"ESCL Driver\" a la configuració del perfil NAPS2 de l'altre ordinador."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1344,11 +1344,11 @@ msgstr "Mostra"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Mostra la barra d'eines \"Perfils\""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Mostra els números de pàgina"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1439,12 +1439,12 @@ msgstr "La tapa de l'escàner està oberta."
 #: MiscResources.resx$DriverNotSupported$Message
 #: SdkResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system."
-msgstr "El controlador seleccionat no està suportat en aquest sistema."
+msgstr "El controlador seleccionat no és compatible amb aquest sistema."
 
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found."
-msgstr "El scanner seleccionat no s'ha pogut trobar ."
+msgstr "No s'ha pogut trobar l'escàner seleccionat."
 
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
@@ -1464,7 +1464,7 @@ msgstr "L'escàner seleccionat esta ocupat."
 #: MiscResources.resx$DeviceOffline$Message
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
-msgstr "El scaner seleccionat esta apagat."
+msgstr "L'escàner seleccionat està apagat."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1524,7 +1524,7 @@ msgstr "Utilitza la interfície nativa"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "Utiltza els ajustos predeterminats"
+msgstr "Utilitza la configuració predeterminada"
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
@@ -1541,11 +1541,11 @@ msgstr "Versió {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
-msgstr "Visualitza"
+msgstr "Mostra"
 
 #: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"
-msgstr "Dispositiu WIA"
+msgstr "Controlador WIA"
 
 #: UiStrings.resx$WaitingForTwain$Message
 msgid "Waiting for TWAIN to complete..."

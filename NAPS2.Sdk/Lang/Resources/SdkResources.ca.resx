@@ -13,10 +13,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>El scanner seleccionat no s'ha pogut trobar .</value>
+    <value>No s'ha pogut trobar l'escàner seleccionat.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>El scaner seleccionat esta apagat.</value>
+    <value>L'escàner seleccionat està apagat.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -28,7 +28,7 @@
     <value>No s'ha trobat cap dispositiu d'escaneig.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>S'ha produït un error amb el driver del escaner.</value>
+    <value>S'ha produït un error amb el controlador de l'escàner.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versió {0}</value>
@@ -67,7 +67,7 @@
     <value>No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet necessari:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>El controlador seleccionat no està suportat en aquest sistema.</value>
+    <value>El controlador seleccionat no és compatible amb aquest sistema.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
     <value>S'ha produït un error en iniciar l'OCR.</value>

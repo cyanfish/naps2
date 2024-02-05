@@ -31,13 +31,13 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook Web-käyttö</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Apple Mail</value>
+    <value>Apple Sähköposti</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
     <value>Tapaa ei ole valittu.</value>
@@ -127,7 +127,7 @@
     <value>Perinteinen (vain natiivikäyttöliittymä)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Natiivi Siirto</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
     <value>Memory Transfer</value>
@@ -145,24 +145,24 @@
     <value>Fast</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Paras</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Tallenna kaikki</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Tallenna valitut</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Kysy aina</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Kysy jos valittu</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Skannaa Oletusprofiililla</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Kysy aina</value>
   </data>
 </root>

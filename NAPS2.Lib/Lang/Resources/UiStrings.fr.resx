@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutFormTitle" xml:space="preserve">
-    <value>À propos de</value>
+    <value>À propos</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
     <value>Copyright {0} Contributeurs NAPS2</value>
@@ -28,7 +28,7 @@
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Don</value>
+    <value>Faire un don</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profils</value>
@@ -115,7 +115,7 @@
     <value>Noir et blanc</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>Accentuation</value>
+    <value>Améliorer la netteté</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
     <value>Correction de document</value>
@@ -181,34 +181,34 @@
     <value>Langue</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Paramètres</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Interface</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Le menu « Numériser » modifie le profil par défaut</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Afficher la barre d'outils « Profils »</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Afficher les numéros de page</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Action par défaut du bouton « Numériser » :</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Action par défaut du bouton « Enregistrer » :</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Application</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>N'autoriser qu'une seule instance de NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>À propos de</value>
+    <value>À propos</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Zoom</value>
@@ -229,7 +229,7 @@
     <value>Enregistrer</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Enregistrer tout</value>
+    <value>Tout enregistrer</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
     <value>Enregistrer la sélection</value>
@@ -316,7 +316,7 @@
     <value>Alignement horizontal :</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
-    <value>Échelle:</value>
+    <value>Échelle :</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
     <value>Contraste :</value>
@@ -361,7 +361,7 @@
     <value>Rendre possible la recherche dans les PDF issus d'OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
-    <value>Langue OCR :</value>
+    <value>Langue de l'OCR :</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Mode de l'OCR :</value>
@@ -421,7 +421,7 @@
     <value>Récupérer des images numérisées</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été enregistrée(s), et est(sont) récupérable(s). Souhaitez-vous procéder à la récupération ?</value>
+    <value>{0} image(s) numérisée(s) le {1} à {2} n'a(ont) peut-être pas été enregistrée(s), et est(sont) récupérable(s). Faut-il procéder à leur récupération ?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Chaînes de substitution</value>
@@ -565,7 +565,7 @@
     <value>Paramètres de messagerie</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Paramètres</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Fournisseur</value>
@@ -595,10 +595,10 @@
     <value>Mot de passe</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>Le fichier suivant est chiffré, son ouverture nécessite un mot de passe :</value>
+    <value>Le fichier suivant est chiffré et son ouverture nécessite un mot de passe :</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Demander le chemin pour le fichier</value>
+    <value>Demander un chemin pour le fichier</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>Un fichier par page</value>
@@ -616,7 +616,7 @@
     <value>Effacer les images après l'enregistrement</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Conserver les images d'une session à l'autre</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Taille de page personnalisée</value>
@@ -745,13 +745,13 @@
     <value>Partage de scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « ESCL Driver » dans les paramètres de profil NAPS2 de l'autre ordinateur.</value>
+    <value>Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « Pilote ESCL » dans les paramètres de profil NAPS2 de l'autre ordinateur.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Paramètres de partage de scanner</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Souhaitez-vous vraiment arrêter de partager « {0} » ?</value>
+    <value>Faut-il vraiment arrêter de partager « {0} » ?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Partager même lorsque NAPS2 est fermé</value>

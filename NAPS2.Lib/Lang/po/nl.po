@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-02-05 03:30\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Standaardactie van de knop \"Opslaan\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Standaardactie van de knop \"Scannen\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Menu \"Scan\" wijzigt het standaardprofiel"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -54,7 +54,7 @@ msgstr "Over"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr "Data wordt opgehaald..."
+msgstr "Gegevens ophalen..."
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -115,7 +115,7 @@ msgstr "Alternatief afwisselend tussenvoegen"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Altijd Vragen"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -180,7 +180,7 @@ msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Toepassing"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "Weet u zeker dat u {0} profielen wilt verwijderen?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Weet u zeker dat u wilt stoppen met het delen van {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -232,7 +232,7 @@ msgstr "Auteur:"
 
 #: UiStrings.resx$AuthorizeFormTitle$Message
 msgid "Authorize"
-msgstr "Autoriseer"
+msgstr "Autoriseren"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
@@ -332,7 +332,7 @@ msgstr "Annuleer batch"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr "Bezig met annuleren...."
+msgstr "Annuleren...."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -348,7 +348,7 @@ msgstr "Controleer op updates"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr "Controleert..."
+msgstr "Controleren..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
@@ -401,7 +401,7 @@ msgstr "Voortgang kopiëren"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
-msgstr "Bezig met kopiëren..."
+msgstr "Kopiëren..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
@@ -477,7 +477,7 @@ msgstr "Gescande pagina's rechtzetten"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr "Aan het rechtzetten..."
+msgstr "Rechtzetten..."
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
@@ -498,7 +498,7 @@ msgstr "Documentcorrectie"
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr "Doneer"
+msgstr "Doneren"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -518,7 +518,7 @@ msgstr "Download vereist"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr "Downloadvoortgang"
+msgstr "Voortgang downloaden"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -542,28 +542,28 @@ msgstr "Bewerken"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr "Iedereen e-mailen"
+msgstr "Alles e-mailen"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr "E-mail alles als PDF"
+msgstr "Alles als PDF e-mailen"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "PDF mailen"
+msgstr "PDF e-mailen"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "E-mail PDF voortgang"
+msgstr "Voortgang PDF e-mailen"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr "Geselecteerde e-mail"
+msgstr "Selectie e-mailen"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr "Geselecteerde(n) mailen als PDF"
+msgstr "Selectie als PDF e-mailen"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -638,7 +638,7 @@ msgstr "Voor hoge-kwaliteit JPEG (80+), verhoog ook de afbeeldingskwaliteit in u
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF bestand (*.gif)"
+msgstr "GIF-bestand (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -707,7 +707,7 @@ msgstr "Importeren {0}..."
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
-msgstr "Bezig met importeren..."
+msgstr "Importeren..."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
@@ -731,7 +731,7 @@ msgstr "Installatie mislukt."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Uiterlijk"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -739,11 +739,11 @@ msgstr "Afwisselend tussenvoegen"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr "JPEG bestand (*.jpg, *.jpeg)"
+msgstr "JPEG-bestand (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr "JPEG2000 bestand(*.jp2, *.jpx)"
+msgstr "JPEG2000-bestand(*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -751,7 +751,7 @@ msgstr "JPEG kwaliteit"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Afbeeldingen over sessies behouden"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -912,7 +912,7 @@ msgstr "OCR downloaden"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr "OCR voortgang"
+msgstr "Voortgang OCR"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
@@ -952,7 +952,7 @@ msgstr "Download mislukt voor 1 of meerdere bestanden."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Slechts één NAPS2-instantie toestaan"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -960,7 +960,7 @@ msgstr "Map openen"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr "Bewerking is bezig"
+msgstr "Bewerking wordt uitgevoerd"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -980,7 +980,7 @@ msgstr "Wachtwoord eigenaar:"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr "PDF bestand (*.pdf)"
+msgstr "PDF-document (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
@@ -1009,7 +1009,7 @@ msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
-msgstr "PNG bestand (*.png)"
+msgstr "PNG-bestand (*.png)"
 
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
@@ -1072,7 +1072,7 @@ msgstr "Profielen"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Vragen indien geselecteerd"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1096,11 +1096,11 @@ msgstr "Herstel gescande afbeeldingen"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
-msgstr "Bezig met herstellen..."
+msgstr "Herstellen..."
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
-msgstr "Herstelvoortgang"
+msgstr "Voortgang herstellen"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1140,7 +1140,7 @@ msgstr "Selectie omkeren"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
-msgstr "Herstel"
+msgstr "Herstellen"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -1164,7 +1164,7 @@ msgstr "In de achtergrond draaien"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr "OCR draait..."
+msgstr "OCR uitvoeren..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
@@ -1203,7 +1203,7 @@ msgstr "PDF opslaan"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "PDF voortgang bewaren"
+msgstr "Voortgang PDF opslaan"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
@@ -1212,11 +1212,11 @@ msgstr "Selectie bewaren"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr "Geselecteerde(n) opslaan als afbeeldingen"
+msgstr "Selectie opslaan als afbeeldingen"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr "Geselecteerde(n) opslaan als PDF"
+msgstr "Selectie opslaan als PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1232,7 +1232,7 @@ msgstr "Batchresultaten opslaan..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
-msgstr "Bezig met opslaan {0}..."
+msgstr "Opslaan {0}..."
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
@@ -1253,7 +1253,7 @@ msgstr "Scaninstellingen"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Scannen met standaardprofiel"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1262,7 +1262,7 @@ msgstr "Gescande afbeelding"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Scanner delen"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1283,7 +1283,7 @@ msgstr "Seconde (00-59)"
 
 #: UiStrings.resx$Select$Message
 msgid "Select"
-msgstr "Selecteer"
+msgstr "Selecteren"
 
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
@@ -1316,23 +1316,23 @@ msgstr "Als standaard instellen"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Delen"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Delen zelfs als NAPS2 gesloten is"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Instellingen gedeelde scanner"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Gedeelde scanners kunnen worden gebruikt vanaf andere computers op het lokale netwerk door \"ESCL Driver\" te selecteren in de NAPS2-profielinstellingen van de andere computer."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1344,11 +1344,11 @@ msgstr "Tonen"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Werkbalk \"Profielen\" weergeven"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Paginanummers weergeven"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1376,7 +1376,7 @@ msgstr "Onderwerp:"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
-msgstr "TIFF bestand (*.tiff, *.tif)"
+msgstr "TIFF-bestand (*.tiff, *.tif)"
 
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"

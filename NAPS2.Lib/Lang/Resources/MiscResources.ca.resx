@@ -34,13 +34,13 @@
     <value>El fitxer {0} ja existeix. Voleu sobreescriure'l?</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Esborra</value>
+    <value>Suprimeix</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>El scanner seleccionat no s'ha pogut trobar .</value>
+    <value>No s'ha pogut trobar l'escàner seleccionat.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>El scaner seleccionat esta apagat.</value>
+    <value>L'escàner seleccionat està apagat.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
     <value>No teniu permís per desar fitxers en aquesta ubicació.</value>
@@ -76,7 +76,7 @@
     <value>Fitxer JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>Manca el nom.</value>
+    <value>Falta el nom.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -97,16 +97,16 @@
     <value>Imatge escanejada</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Selecciona un perfil abans de fer click a Scanejar.</value>
+    <value>Seleccioneu un perfil abans de fer clic a Escaneja.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>S'ha produït un error amb el driver del escaner.</value>
+    <value>S'ha produït un error amb el controlador de l'escàner.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versió {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>S'ha produït un error mentre s'enviava el correu-e .</value>
+    <value>S'ha produït un error en enviar un correu electrònic.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Instal·lació completa</value>
@@ -346,7 +346,7 @@
     <value>No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet necessari:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>El controlador seleccionat no està suportat en aquest sistema.</value>
+    <value>El controlador seleccionat no és compatible amb aquest sistema.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>Progrés de l'OCR</value>

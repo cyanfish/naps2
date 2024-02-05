@@ -16,7 +16,7 @@
     <value>Tietoja</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Tekijänoikeudet {0} NAPS2 Avustajat</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Käytettyjen kuvakkeiden lähde:</value>
@@ -118,7 +118,7 @@
     <value>Terävöitä</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Dokumentin Korjaus</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Palauta</value>
@@ -166,46 +166,46 @@
     <value>Taaksepäin</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Vaihda kaikkien arvot</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Vaihda valittujen arvot</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Tyhjennä</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Poista kaikki</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Kieli</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Asetukset</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Käyttöliittymä</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>"Skannaa" valikko muuttaa oletusprofiilia</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Näytä "Profiilit" työkalupalkki</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Näytä sivunnumerot</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>"Skannaa" painikkeen oletustoiminto:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>"Tallenna" painikkeen oletustoiminto:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Sovellus</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Salli vain yksi NAPS2-instanssi</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Tietoja</value>
@@ -226,37 +226,37 @@
     <value>Skaalaa ikkunan mukaan</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Tallenna</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Tallenna kaikki</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Tallenna valitut</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Tallenna kaikki PDF-muodossa</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Tallenna valitut PDF-muodossa</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Tallenna kaikki kuvina</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Tallenna valitut kuvina</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Lähetä kaikki sähköpostitse</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Lähetä valittu sähköpostilla</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Lähetä kaikki sähköpostilla PDF-muodossa</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Lähetä valittu PDF-tiedostona</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profiiliasetukset</value>
@@ -271,16 +271,16 @@
     <value>TWAIN-ajuri</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL- Ajuri</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL Verkkoajuri</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB-ajuri</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Applen Ajuri</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>SANE - ajuri</value>
@@ -538,7 +538,7 @@
     <value>Automaattinen lisäys (2 numeroa)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Automaattinen lisäys (1 numero)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Tiedoston nimi</value>
@@ -565,7 +565,7 @@
     <value>Sähköpostiasetukset</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Asetukset</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Palveluntarjoaja</value>
@@ -595,7 +595,7 @@
     <value>Salasana</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Seuraava tiedosto on salattu ja tarvitsee salasanan avaukseen:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Kysy tiedostopolkua</value>
@@ -616,7 +616,7 @@
     <value>Pyyhi kuvat tallennukset jälkeen</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Säilytä kuvat eri istunnoissa</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Mukautettu sivun koko</value>
@@ -673,7 +673,7 @@
     <value>Käännä kaksipuoleiset sivut</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wia-versio:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain - toteutus:</value>
@@ -730,30 +730,30 @@
     <value>Avaa kansio</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Työkalut</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Ota virheenkorjausloki käyttöön</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Jaa</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Skannerin Jakaminen</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Skannerin Jakaminen</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Jaettuja skannereita voidaan käyttää muista paikallisessa verkossa olevista tietokoneista valitsemalla "ESCL Driver" toisen tietokoneen NAPS2-profiiliasetuksista.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Jaetut Skannerin Asetukset</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Haluatko varmasti lopettaa jakamisen {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Jaa vaikka NAPS2 olisi suljettu</value>
   </data>
 </root>

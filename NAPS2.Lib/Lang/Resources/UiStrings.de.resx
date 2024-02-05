@@ -181,31 +181,31 @@
     <value>Sprache</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Benutzeroberfläche</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Menü "Scan" ändert das Standardprofil</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Zeige "Profile" Symbolleiste</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Zeige Seitenzahlen</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>"Scan"-Button Standardaktion:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>"Speichern"-Button Standardaktion:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Anwendung</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Nur eine einzige NAPS2-Instanz erlauben</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Über</value>
@@ -565,7 +565,7 @@
     <value>E-Mail Einstellungen</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Anbieter</value>
@@ -616,7 +616,7 @@
     <value>Entferne Bilder nach dem Speichern</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Bilder über Sitzungen hinweg behalten</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Benutzerdefinierte Seitengröße</value>
@@ -736,24 +736,24 @@
     <value>Fehlerprotokollierung aktivieren</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Teilen</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Scanner teilen</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Scanner teilen</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Geteilte Scanner können von anderen Computern im lokalen Netzwerk verwendet werden, indem Sie auf dem anderen Computer in den NAPS2 Profileinstellungen "ESCL Treiber" auswählen.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Geteilte Scanner Einstellungen</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Sind Sie sicher, dass Sie {0} nicht mehr teilen möchten?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Auch teilen, wenn NAPS2 geschlossen ist</value>
   </data>
 </root>

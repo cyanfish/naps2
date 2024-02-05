@@ -28,7 +28,7 @@
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Doneer</value>
+    <value>Doneren</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profielen</value>
@@ -88,7 +88,7 @@
     <value>Instellingen afbeeldingen</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>PDF mailen</value>
+    <value>PDF e-mailen</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
     <value>E-mailinstellingen</value>
@@ -181,31 +181,31 @@
     <value>Taal</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Instellingen</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Uiterlijk</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Menu "Scan" wijzigt het standaardprofiel</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Werkbalk "Profielen" weergeven</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Paginanummers weergeven</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Standaardactie van de knop "Scannen":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Standaardactie van de knop "Opslaan":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Toepassing</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Slechts één NAPS2-instantie toestaan</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Over</value>
@@ -238,25 +238,25 @@
     <value>Alles opslaan als PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Geselecteerde(n) opslaan als PDF</value>
+    <value>Selectie opslaan als PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
     <value>Alles opslaan als afbeeldingen</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Geselecteerde(n) opslaan als afbeeldingen</value>
+    <value>Selectie opslaan als afbeeldingen</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Iedereen e-mailen</value>
+    <value>Alles e-mailen</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Geselecteerde e-mail</value>
+    <value>Selectie e-mailen</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>E-mail alles als PDF</value>
+    <value>Alles als PDF e-mailen</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Geselecteerde(n) mailen als PDF</value>
+    <value>Selectie als PDF e-mailen</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profielinstellingen</value>
@@ -337,7 +337,7 @@
     <value>Annuleren</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Selecteer</value>
+    <value>Selecteren</value>
   </data>
   <data name="SelectSource" xml:space="preserve">
     <value>Bron selecteren</value>
@@ -388,7 +388,7 @@
     <value>Downloaden</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Downloadvoortgang</value>
+    <value>Voortgang downloaden</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
     <value>Voorbeeld</value>
@@ -403,7 +403,7 @@
     <value>{0} van {1}</value>
   </data>
   <data name="Revert" xml:space="preserve">
-    <value>Herstel</value>
+    <value>Herstellen</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Toepassen op {0} geselecteerde afbeeldingen</value>
@@ -565,7 +565,7 @@
     <value>E-mailinstellingen</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Instellingen</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provider</value>
@@ -580,7 +580,7 @@
     <value>Kies e-mail provider</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Autoriseer</value>
+    <value>Autoriseren</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Wacht op autorisatie...</value>
@@ -616,7 +616,7 @@
     <value>Afbeeldingen verwijderen na opslaan</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Afbeeldingen over sessies behouden</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Aangepaste paginagrootte</value>
@@ -736,24 +736,24 @@
     <value>Debug logging toestaan</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Delen</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Scanner delen</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Scanner delen</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Gedeelde scanners kunnen worden gebruikt vanaf andere computers op het lokale netwerk door "ESCL Driver" te selecteren in de NAPS2-profielinstellingen van de andere computer.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Instellingen gedeelde scanner</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Weet u zeker dat u wilt stoppen met het delen van {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Delen zelfs als NAPS2 gesloten is</value>
   </data>
 </root>

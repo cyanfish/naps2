@@ -181,31 +181,31 @@
     <value>Språk</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Inställningar</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Gränssnitt</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Menyn "Skanna" ändrar standardprofil</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Visa verktygsfältet "Profiler"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Visa sidnummer</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Standardåtgärd för knappen "Skanna":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Standardåtgärd för knappen "Spara":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Applikation</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Tillåt endast en NAPS2-instans</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Om</value>
@@ -565,7 +565,7 @@
     <value>E-postinställningar</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Inställningar</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Leverantör</value>
@@ -616,7 +616,7 @@
     <value>Rensa bort bilder efter att de sparats</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Behåll bilder mellan sessioner</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Anpassad sidstorlek</value>

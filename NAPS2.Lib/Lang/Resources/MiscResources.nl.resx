@@ -58,22 +58,22 @@
     <value>Exchangeable Image File (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF bestand (*.gif)</value>
+    <value>GIF-bestand (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG bestand (*.jpg, *.jpeg)</value>
+    <value>JPEG-bestand (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF bestand (*.pdf)</value>
+    <value>PDF-document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
-    <value>PNG bestand (*.png)</value>
+    <value>PNG-bestand (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
-    <value>TIFF bestand (*.tiff, *.tif)</value>
+    <value>TIFF-bestand (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 bestand(*.jp2, *.jpx)</value>
+    <value>JPEG2000-bestand(*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Naam ontbreekt.</value>
@@ -169,7 +169,7 @@
     <value>Niet-opgeslagen wijzigingen</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Bewerking is bezig</value>
+    <value>Bewerking wordt uitgevoerd</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Scannen pagina {0}</value>
@@ -196,7 +196,7 @@
     <value>Batch geannuleerd.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Bezig met annuleren....</value>
+    <value>Annuleren....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
     <value>Batch succesvol voltooid.</value>
@@ -235,10 +235,10 @@
     <value>Voortgang importeren</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Bezig met herstellen...</value>
+    <value>Herstellen...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Herstelvoortgang</value>
+    <value>Voortgang herstellen</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Afbeeldingen opslaan</value>
@@ -250,28 +250,28 @@
     <value>PDF opslaan</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>PDF voortgang bewaren</value>
+    <value>Voortgang PDF opslaan</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Bezig met opslaan {0}...</value>
+    <value>Opslaan {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Afdrukken</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Bezig met kopiëren...</value>
+    <value>Kopiëren...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
     <value>Voortgang kopiëren</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Bezig met importeren...</value>
+    <value>Importeren...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>PDF mailen</value>
+    <value>PDF e-mailen</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>E-mail PDF voortgang</value>
+    <value>Voortgang PDF e-mailen</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
     <value>Er was een fout bij het automatisch opslaan.</value>
@@ -316,7 +316,7 @@
     <value>Overschrijven bestand mislukt want het is in gebruik.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Aan het rechtzetten...</value>
+    <value>Rechtzetten...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Voortgang rechtzetten</value>
@@ -334,7 +334,7 @@
     <value>Annuleer batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Doneer</value>
+    <value>Doneren</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 is helemaal gratis. Overweeg een donatie.</value>
@@ -349,10 +349,10 @@
     <value>De gekozen driver wordt niet ondersteund op dit systeem.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR voortgang</value>
+    <value>Voortgang OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>OCR draait...</value>
+    <value>OCR uitvoeren...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
     <value>Voortgang bijwerken</value>
@@ -364,7 +364,7 @@
     <value>Geen updates beschikbaar.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Controleert...</value>
+    <value>Controleren...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
     <value>Controleren van updates is uitgeschakeld.</value>
@@ -391,6 +391,6 @@
     <value>Scannen pagina {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Data wordt opgehaald...</value>
+    <value>Gegevens ophalen...</value>
   </data>
 </root>

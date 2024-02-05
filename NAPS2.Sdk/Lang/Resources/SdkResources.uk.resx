@@ -16,13 +16,13 @@
     <value>Не знайдено вибраний сканер.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Вибраний сканер відключений.</value>
+    <value>Вибраний сканер вимкнено.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Не вибраний пристрій.</value>
+    <value>Не вибрано пристрій.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
     <value>Не знайдено жодного сканера.</value>
@@ -34,45 +34,45 @@
     <value>Версія {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Файл '{0}' не може бути імпортований.</value>
+    <value>Неможливо імпортувати файл '{0}'.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Цей сканер не підтримує автоматичну подачу паперу. Якщо Ваш сканер має автоматичну подачу паперу, спробуйте використати інший драйвер..</value>
+    <value>Вибраний сканер не підтримує автоматичну подачу паперу. Якщо ваш сканер все ж має автоматичну подачу паперу, спробуйте вибрати інший драйвер..</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>В пристрої відсутній папір.</value>
+    <value>У пристрої відсутній папір.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Ви не можете копіювати вміст файлу '{0}'.</value>
+    <value>Відсутні права на копіювання вмісту файлу '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>Вибраний сканер не підтримує двостороннє сканування. Якщо ваш сканер все ж підтримує двостороннє сканування, спробуйте вибрати інший драйвер.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>Вибраний сканер зайнятий.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>Відкрито кришку сканеру.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>Зминання паперу у сканері.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Прогрівання сканеру.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Драйвер SANE не доступний. Перевірте, чи встановлено такі пакети:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Рушій розпізнавання (OCR) не доступний. Перевірте, чи встановлено такі пакети::</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Вибраний драйвер не підтримується системою.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Під час цифрового розпізнавання трапилася помилка.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Час операції з розпізнавання вичерпано.</value>
   </data>
 </root>

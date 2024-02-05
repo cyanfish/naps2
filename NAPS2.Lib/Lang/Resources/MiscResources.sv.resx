@@ -337,7 +337,7 @@
     <value>Donerar</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 är helt gratis. Tänk gärna på att donera..</value>
+    <value>NAPS2 är helt gratis. Överväg gärna att donera.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE drivrutin är inte tillgänglig. Kontroller och installera nödvändigt paket:</value>

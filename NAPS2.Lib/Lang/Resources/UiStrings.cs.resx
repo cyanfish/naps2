@@ -181,31 +181,31 @@
     <value>Jazyk</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Nastavení</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Rozhraní</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Nabídka "Skenovat" změní výchozí profil</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Zobrazit panel nástrojů "Profily"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Zobrazit čísla stránek</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Výchozí akce tlačítka "Sken":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Výchozí akce tlačítka "Uložit":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplikace</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Povolit pouze jednu instanci NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>O aplikaci</value>
@@ -565,7 +565,7 @@
     <value>Nastavení e-mailu</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Nastavení</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Poskytovatel</value>
@@ -616,7 +616,7 @@
     <value>Vyčistit obrázky po skenování</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Uchovávat obrázky napříč relacemi</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Vlastní velikost papíru</value>

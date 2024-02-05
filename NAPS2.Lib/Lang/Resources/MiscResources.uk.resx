@@ -19,31 +19,31 @@
     <value>Очистити</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Ви справді бажаєте очистити профіль(лі) {0}?</value>
+    <value>Дійсно очистити профіль(лі) {0}?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Ви справді бажаєте видалити {0} профілі(в)?</value>
+    <value>Дійсно вилучити {0} профілі(в)?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Ви справді бажаєте видалити {0} профілів?</value>
+    <value>Дійсно вилучити {0} профілів?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Ви дійсно хочете видалити профіль {0}?</value>
+    <value>Дійсно вилучити профіль {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
     <value>Файл {0} вже існує. Перезаписати його?</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Видалити</value>
+    <value>Вилучити</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
     <value>Не знайдено вибраний сканер.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Вибраний сканер відключений.</value>
+    <value>Вибраний сканер вимкнено.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>У вас немає прав для створення файлів у цьому каталозі..</value>
+    <value>Відсутні права для створення файлів у цьому каталозі..</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Помилка</value>
@@ -61,19 +61,19 @@
     <value>GIF файл (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG файл (*.jpg, *.jpeg)</value>
+    <value>Файл JPEG (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF Document (*.pdf)</value>
+    <value>Документ PDF (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
-    <value>PNG файл (*.png)</value>
+    <value>Файл PNG (*.png)</value>
   </data>
   <data name="FileTypeTiff" xml:space="preserve">
-    <value>TIFF файл (*.tiff, *.tif)</value>
+    <value>Файл TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Файл JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Відсутнє ім'я.</value>
@@ -82,7 +82,7 @@
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Не вибраний пристрій.</value>
+    <value>Не вибрано пристрій.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
     <value>Не знайдено жодного сканера.</value>
@@ -91,7 +91,7 @@
     <value>Перезаписати файл</value>
   </data>
   <data name="PdfStatus" xml:space="preserve">
-    <value>{0} з {1}</value>
+    <value>{0} із {1}</value>
   </data>
   <data name="ScannedImage" xml:space="preserve">
     <value>Зіскановане зображення</value>
@@ -106,7 +106,7 @@
     <value>Версія {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>При відправці пошти сталася помилка.</value>
+    <value>Під час надсилання ел. пошти сталася помилка.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Встановлення завершено</value>
@@ -127,7 +127,7 @@
     <value>Вибрані ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Приблизний об’єм звантаження: {0} МБ</value>
+    <value>Приблизний розмір звантаження: {0} МБ</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
     <value>{0} / {1} файлів</value>
@@ -136,16 +136,16 @@
     <value>{0} / {1} МБ</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Файл '{0}' не може бути імпортований.</value>
+    <value>Неможливо імпортувати файл '{0}'.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Не можна імпортувати файл '{0}'. Можуть бути імпортовані лише  PDF файли створені NAPS2..</value>
+    <value>Неможливо імпортувати файл '{0}'. Можливо імпортувати лише файли PDF, які було створено NAPS2..</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Помилка звантаження</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>Один або декілька файлів завантажити не вдалось.</value>
+    <value>Не вдалося звантажити один або більше файлів.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
     <value>Користувача ({0}x{1} {2})</value>
@@ -154,238 +154,238 @@
     <value>Сканувати</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Ви бажаєте відмінити зміни в {0} зображеннях ?</value>
+    <value>Дійсно скасувати зміни в {0} зображеннях ?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Перевантажити зображення</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Є незбережені зміни. Ви впевнені, що хочете вийти та відмовитись від них?</value>
+    <value>Є незбережені зміни. Дійсно вийти та відмовитись від них?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Операція в процесі виконання. Дійсно скасувати цю операцію та вийти?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Зміни не збережено</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Виконується операція</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Сканування сторінки {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Цей сканер не підтримує автоматичну подачу паперу. Якщо Ваш сканер має автоматичну подачу паперу, спробуйте використати інший драйвер..</value>
+    <value>Вибраний сканер не підтримує автоматичну подачу паперу. Якщо ваш сканер все ж має автоматичну подачу паперу, спробуйте вибрати інший драйвер..</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>В пристрої відсутній папір.</value>
+    <value>У пристрої відсутній папір.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Ви не можете копіювати вміст файлу '{0}'.</value>
+    <value>Відсутні права на копіювання вмісту файлу '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Під час збереження файлу трапилась помилка.</value>
   </data>
   <data name="OfN" xml:space="preserve">
-    <value>з {0}</value>
+    <value>із {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Під час пакетного сканування трапилася невідома помилка.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Batch cancelled.</value>
+    <value>Пакетне сканування скасовано.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Cancelling....</value>
+    <value>Скасування...</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Batch completed successfully.</value>
+    <value>Пакетне сканування успішно виконано.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Batch scan stopped due to error.</value>
+    <value>Пакетне сканування зупинено через помилку.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>Сканування сторінки {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>Scanning page {0} (scan {1})...</value>
+    <value>Сканування сторінки {0} (скан {1})...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>Waiting for scan {0}...</value>
+    <value>Очікування на скан {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Скасувати</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Закрити</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Saving batch results...</value>
+    <value>Збереження результатиів пакетного сканування...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>Вибраний сканер не підтримує двостороннє сканування. Якщо ваш сканер все ж підтримує двостороннє сканування, спробуйте вибрати інший драйвер.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Importing {0}...</value>
+    <value>Виконується імпорт {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>Import Progress</value>
+    <value>Імпорт</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Recovering...</value>
+    <value>Відновлення...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Recovery Progress</value>
+    <value>Виконується відновлення</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Зберегти як зображення</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Save Images Progress</value>
+    <value>Виконується збереження зображень</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Зберегти PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Save PDF Progress</value>
+    <value>Виконується збереження PDF</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Saving {0}...</value>
+    <value>Збереження {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Друк</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Copying...</value>
+    <value>Виконується копіювання...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Copy Progress</value>
+    <value>Копіювання</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importing...</value>
+    <value>Виконується імпорт...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>PDF поштою</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Email PDF Progress</value>
+    <value>Надсилання PDF ел.п оштою</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>An error occurred when trying to auto save.</value>
+    <value>Під час спроби автоматичного збереження трапилася помилка.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
     <value>Всі файли</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>Image Files</value>
+    <value>Файли зображень</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>Вибраний сканер зайнятий.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>Відкрито кришку сканеру.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>Зминання паперу у сканері.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Прогрівання сканеру.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>An update to OCR is available.</value>
+    <value>Доступне оновлення пакету розпізнавання.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>Зображення збережено.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} images saved.</value>
+    <value>{0} зображень збережено.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>Файл PDF збережено.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete "{0}"?</value>
+    <value>Дійсно вилучити "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>The file could not be overwritten because it is currently in use.</value>
+    <value>Неможливо перезаписати файл, оскільки він зараз використовується.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>Вирівнювання виконується...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>Вирівнювання перекосу</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>Потрібно звантажити</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>Для імпорту цього файлу PDF потрбно встановити додатковий компонент. Чи завантажити його зараз?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Дійсно скасувати пакетне сканування</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Скасувати пакетне сканування</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Ваш внесок</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 є вільним програмним забезпеченням. Запрошуємо зробити ваш внесок.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Драйвер SANE не доступний. Перевірте, чи встановлено такі пакети:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>Рушій розпізнавання (OCR) не доступний. Перевірте, чи встановлено такі пакети::</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Вибраний драйвер не підтримується системою.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Виконується розпізнавання</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Виконується розпізнавання...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Виконується оновлення</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Оновлення...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Відсутні оновлення</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Виконується перевірка...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Перевірку оновлення вимкнено.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occurred when trying to install the update.</value>
+    <value>Під час встановлення оновлення трапилася помилка.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Встановити {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Доступне оновлення.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Під час спроби авторизації трапилася помилка.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Завантаження ел.пошти...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Під час надсилання ел. пошти сталася помилка.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Сканування сторінки {0}...</value>

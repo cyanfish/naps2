@@ -181,31 +181,31 @@
     <value>Lingua</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Impostazioni</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Interfaccia</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Menu "Scansiona" modifica il profilo predefinito</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Mostra barra "Profili"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Mostra numeri di pagina</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Azione predefinita del tasto "Scansiona":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Azione predefinita del tasto "Salva":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Applicazione</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Consenti una sola istanza di NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Info sul programma</value>
@@ -565,7 +565,7 @@
     <value>Impostazioni email</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Impostazioni</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Fornitore</value>
@@ -616,7 +616,7 @@
     <value>Cancella immagini dopo il salvataggio</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Mantieni le immagini tra una sezione e l'altra</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Formato pagina personalizzato</value>
