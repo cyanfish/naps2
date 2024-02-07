@@ -9,11 +9,13 @@ namespace NAPS2.Images;
 public class UiThumbnailProvider
 {
     private readonly ImageContext _imageContext;
+    private readonly ColorScheme _colorScheme;
     private IMemoryImage? _placeholder;
 
-    public UiThumbnailProvider(ImageContext imageContext)
+    public UiThumbnailProvider(ImageContext imageContext, ColorScheme colorScheme)
     {
         _imageContext = imageContext;
+        _colorScheme = colorScheme;
     }
 
     public IMemoryImage GetThumbnail(UiImage img, int thumbnailSize)
@@ -43,6 +45,7 @@ public class UiThumbnailProvider
             }
             _placeholder?.Dispose();
             _placeholder = _imageContext.Create(thumbnailSize, thumbnailSize, ImagePixelFormat.RGB24);
+            _placeholder.Fill(_colorScheme.BackgroundColor);
             _placeholder = EtoPlatform.Current.DrawHourglass(_imageContext, _placeholder);
             return _placeholder;
         }

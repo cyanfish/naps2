@@ -1,5 +1,6 @@
 using Eto.Drawing;
 using Eto.Forms;
+using NAPS2.Images.Bitwise;
 
 namespace NAPS2.EtoForms;
 
@@ -39,5 +40,10 @@ public static class EtoExtensions
     public static bool IsChecked(this CheckBox checkBox)
     {
         return checkBox.Checked == true;
+    }
+
+    public static void Fill(this IMemoryImage image, Color color)
+    {
+        new FillColorImageOp((byte) color.Rb, (byte) color.Gb, (byte) color.Bb, (byte) color.Ab).Perform(image);
     }
 }
