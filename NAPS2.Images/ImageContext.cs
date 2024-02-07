@@ -5,8 +5,6 @@ namespace NAPS2.Images;
 
 public abstract class ImageContext
 {
-    private readonly IPdfRenderer? _pdfRenderer;
-
     public static ImageFileFormat GetFileFormatFromExtension(string path)
     {
         return Path.GetExtension(path).ToLowerInvariant() switch
@@ -43,40 +41,39 @@ public abstract class ImageContext
         };
     }
 
-    protected ImageContext(Type imageType, IPdfRenderer? pdfRenderer = null)
+    protected ImageContext(Type imageType)
     {
         ImageType = imageType;
-        _pdfRenderer = pdfRenderer;
     }
 
     // TODO: Add NotNullWhen attribute?
-    private bool MaybeRenderPdf(ImageFileStorage fileStorage, out IMemoryImage? renderedPdf)
+    private bool MaybeRenderPdf(ImageFileStorage fileStorage, IPdfRenderer? pdfRenderer, out IMemoryImage? renderedPdf)
     {
         if (Path.GetExtension(fileStorage.FullPath).ToLowerInvariant() == ".pdf")
         {
-            if (_pdfRenderer == null)
+            if (pdfRenderer == null)
             {
                 throw new InvalidOperationException(
-                    "Unable to render pdf page as the ImageContext wasn't created with an IPdfRenderer.");
+                    "Unable to render pdf page as the IRenderableImage didn't implement IPdfRendererProvider.");
             }
-            renderedPdf = _pdfRenderer.Render(this, fileStorage.FullPath, PdfRenderSize.Default).Single();
+            renderedPdf = pdfRenderer.Render(this, fileStorage.FullPath, PdfRenderSize.Default).Single();
             return true;
         }
         renderedPdf = null;
         return false;
     }
 
-    private bool MaybeRenderPdf(ImageMemoryStorage memoryStorage, out IMemoryImage? renderedPdf)
+    private bool MaybeRenderPdf(ImageMemoryStorage memoryStorage, IPdfRenderer? pdfRenderer, out IMemoryImage? renderedPdf)
     {
         if (memoryStorage.TypeHint == ".pdf")
         {
-            if (_pdfRenderer == null)
+            if (pdfRenderer == null)
             {
                 throw new InvalidOperationException(
-                    "Unable to render pdf page as the ImageContext wasn't created with an IPdfRenderer.");
+                    "Unable to render pdf page as the IRenderableImage didn't implement IPdfRendererProvider.");
             }
             var stream = memoryStorage.Stream;
-            renderedPdf = _pdfRenderer.Render(this, stream.GetBuffer(), (int) stream.Length, PdfRenderSize.Default)
+            renderedPdf = pdfRenderer.Render(this, stream.GetBuffer(), (int) stream.Length, PdfRenderSize.Default)
                 .Single();
             return true;
         }
@@ -239,22 +236,27 @@ public abstract class ImageContext
 
     public IMemoryImage Render(IRenderableImage image)
     {
-        var bitmap = RenderFromStorage(image.Storage);
+        var bitmap = RenderWithoutTransforms(image);
         return PerformAllTransforms(bitmap, image.TransformState.Transforms);
     }
 
-    public IMemoryImage RenderFromStorage(IImageStorage storage)
+    public IMemoryImage RenderWithoutTransforms(IRenderableImage image)
+    {
+        return RenderFromStorage(image.Storage, (image as IPdfRendererProvider)?.PdfRenderer);
+    }
+
+    private IMemoryImage RenderFromStorage(IImageStorage storage, IPdfRenderer pdfRenderer)
     {
         switch (storage)
         {
             case ImageFileStorage fileStorage:
-                if (MaybeRenderPdf(fileStorage, out var renderedPdf))
+                if (MaybeRenderPdf(fileStorage, pdfRenderer, out var renderedPdf))
                 {
                     return renderedPdf!;
                 }
                 return Load(fileStorage.FullPath);
             case ImageMemoryStorage memoryStorage:
-                if (MaybeRenderPdf(memoryStorage, out var renderedMemoryPdf))
+                if (MaybeRenderPdf(memoryStorage, pdfRenderer, out var renderedMemoryPdf))
                 {
                     return renderedMemoryPdf!;
                 }

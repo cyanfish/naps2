@@ -11,11 +11,7 @@ public class GdiImageContext : ImageContext
 {
     private readonly GdiImageTransformer _imageTransformer;
 
-    public GdiImageContext() : this(null)
-    {
-    }
-
-    public GdiImageContext(IPdfRenderer? pdfRenderer) : base(typeof(GdiImage), pdfRenderer)
+    public GdiImageContext() : base(typeof(GdiImage))
     {
         _imageTransformer = new GdiImageTransformer(this);
     }

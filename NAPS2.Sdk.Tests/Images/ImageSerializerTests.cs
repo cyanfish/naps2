@@ -278,7 +278,7 @@ public class ImageSerializerTests : ContextualTests
     public async Task PdfDeserializeToMemoryStorage(StorageConfig config)
     {
         config.Apply(this);
-        using var destContext = new ScanningContext(TestImageContextFactory.Get(new PdfiumPdfRenderer()));
+        using var destContext = new ScanningContext(TestImageContextFactory.Get());
 
         var importPath = Path.Combine(FolderPath, "import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_generated_pdf);
@@ -340,7 +340,7 @@ public class ImageSerializerTests : ContextualTests
 
     private ScanningContext CreateDestContextWithFileStorage()
     {
-        return new ScanningContext(TestImageContextFactory.Get(new PdfiumPdfRenderer()))
+        return new ScanningContext(TestImageContextFactory.Get())
         {
             FileStorageManager = FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest"))
         };

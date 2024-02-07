@@ -9,7 +9,7 @@ public class WpfImageContext : ImageContext
 {
     private readonly WpfImageTransformer _imageTransformer;
 
-    public WpfImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(WpfImage), pdfRenderer)
+    public WpfImageContext() : base(typeof(WpfImage))
     {
         _imageTransformer = new WpfImageTransformer(this);
     }

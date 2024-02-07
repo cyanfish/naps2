@@ -21,7 +21,7 @@ public class ImageSharpImageContext : ImageContext
         Configuration = GetConfiguration()
     };
 
-    public ImageSharpImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(ImageSharpImage), pdfRenderer)
+    public ImageSharpImageContext() : base(typeof(ImageSharpImage))
     {
         _imageTransformer = new ImageSharpImageTransformer(this);
     }

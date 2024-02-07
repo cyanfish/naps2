@@ -9,7 +9,7 @@ public class GtkImageContext : ImageContext
     private readonly GtkImageTransformer _imageTransformer;
     private readonly LibTiffIo _tiffIo;
 
-    public GtkImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(GtkImage), pdfRenderer)
+    public GtkImageContext() : base(typeof(GtkImage))
     {
         _imageTransformer = new GtkImageTransformer(this);
         _tiffIo = new LibTiffIo(this);

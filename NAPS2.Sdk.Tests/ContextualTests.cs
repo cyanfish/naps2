@@ -18,7 +18,7 @@ public class ContextualTests : IDisposable
         FolderPath = Path.GetFullPath(Path.Combine("naps2_test_temp", Path.GetRandomFileName()));
         Folder = Directory.CreateDirectory(FolderPath);
 
-        ImageContext = TestImageContextFactory.Get(new PdfiumPdfRenderer());
+        ImageContext = TestImageContextFactory.Get();
         ScanningContext = new ScanningContext(ImageContext);
         ScanningContext.TempFolderPath = Path.Combine(FolderPath, "temp");
         Directory.CreateDirectory(ScanningContext.TempFolderPath);

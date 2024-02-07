@@ -1,3 +1,5 @@
+using NAPS2.Pdf;
+
 namespace NAPS2.Images;
 
 /// <summary>
@@ -9,7 +11,7 @@ namespace NAPS2.Images;
 /// reference with Clone() that will need to be disposed, and the underlying image storage will only be disposed once
 /// all related instances are disposed (or the parent ScanningContext is disposed).
 /// </summary>
-public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<ProcessedImage>
+public class ProcessedImage : IRenderableImage, IPdfRendererProvider, IDisposable, IEquatable<ProcessedImage>
 {
     private readonly RefCount.Token _token;
     private bool _disposed;
@@ -189,4 +191,6 @@ public class ProcessedImage : IRenderableImage, IDisposable, IEquatable<Processe
     /// at any moment.
     /// </param>
     public record WeakReference(ProcessedImage ProcessedImage);
+
+    IPdfRenderer IPdfRendererProvider.PdfRenderer => new PdfiumPdfRenderer();
 }

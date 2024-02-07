@@ -9,7 +9,7 @@ public class MacImageContext : ImageContext
 
     private readonly MacImageTransformer _imageTransformer;
 
-    public MacImageContext(IPdfRenderer? pdfRenderer = null) : base(typeof(MacImage), pdfRenderer)
+    public MacImageContext() : base(typeof(MacImage))
     {
         NSApplication.CheckForIllegalCrossThreadCalls = false;
         _imageTransformer = new MacImageTransformer(this);
