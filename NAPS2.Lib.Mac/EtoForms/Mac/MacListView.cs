@@ -132,6 +132,12 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
             var animator = (NSCollectionView) _view.Animator;
             animator.MoveItem(NSIndexPath.Create(0, fromIndex), NSIndexPath.Create(0, toIndex));
         }
+        else if (!diffs.AppendOperations.Any() && !diffs.TrimOperations.Any())
+        {
+            // Only updating items
+            var indexPaths = diffs.ReplaceOperations.Select(op => NSIndexPath.Create(0, op.Index)).ToArray();
+            _view.ReloadItems(new NSSet<NSIndexPath>(indexPaths));
+        }
         else
         {
             _view.ReloadData();
