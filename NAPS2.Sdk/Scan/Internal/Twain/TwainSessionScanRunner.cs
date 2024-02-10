@@ -138,7 +138,7 @@ internal class TwainSessionScanRunner
 
     private void FinishWithError(Exception ex)
     {
-        _logger.LogDebug("NAPS2.TW - Finishing with error");
+        _logger.LogDebug(ex, "NAPS2.TW - Finishing with error");
         // If we're in state 5 or higher, we'll call ForceStepDown, which could potentially produce additional errors,
         // but what alternative is there?
         // If we're in state 4 or lower, this will just clean up the source/session.
