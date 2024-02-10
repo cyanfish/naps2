@@ -24,6 +24,7 @@ internal class TwainSessionScanRunner
     private readonly TwainHandleManager _handleManager;
     private readonly TwainSession _session;
     private readonly TaskCompletionSource<bool> _tcs;
+    private readonly TaskCompletionSource<bool> _sourceDisabledTcs;
     private DataSource? _source;
 
     public TwainSessionScanRunner(ILogger logger, TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
@@ -45,13 +46,14 @@ internal class TwainSessionScanRunner
         _session.TransferError += TransferError;
         _session.SourceDisabled += SourceDisabled;
         _session.StateChanged += StateChanged;
-        _tcs = new TaskCompletionSource<bool>();
+        _tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _sourceDisabledTcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
     }
 
     public Task Run()
     {
         // TODO: Work around needing Invoker (maybe pass in SyncContext or something?) and move it to NAPS2.Lib
-        Invoker.Current.Invoke(Init);
+        Invoker.Current.InvokeDispatch(Init);
         return _tcs.Task;
     }
 
@@ -105,7 +107,8 @@ internal class TwainSessionScanRunner
                 throw GetExceptionForStatus(_source.GetStatus());
             }
 
-            _cancelToken.Register(FinishWithCancellation);
+            _cancelToken.Register(() => Invoker.Current.Invoke(FinishWithCancellation));
+            _sourceDisabledTcs.Task.ContinueWith(_ => Invoker.Current.Invoke(FinishWithCompletion)).AssertNoAwait();
         }
         catch (Exception ex)
         {
@@ -185,7 +188,7 @@ internal class TwainSessionScanRunner
     private void SourceDisabled(object? sender, EventArgs e)
     {
         _logger.LogDebug("NAPS2.TW - SourceDisabled");
-        FinishWithCompletion();
+        _sourceDisabledTcs.TrySetResult(true);
     }
 
     private void TransferCanceled(object? sender, TransferCanceledEventArgs e)
