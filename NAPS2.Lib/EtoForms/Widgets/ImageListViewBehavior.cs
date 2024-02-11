@@ -26,7 +26,8 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
 
     public override Image GetImage(UiImage item, int imageSize)
     {
-        return _thumbnailProvider.GetThumbnail(item, imageSize).ToEtoImage();
+        using var thumbnail = _thumbnailProvider.GetThumbnail(item, imageSize);
+        return thumbnail.ToEtoImage();
     }
 
     public override bool AllowDragDrop => true;
