@@ -209,7 +209,7 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
         }
     }
 
-    public override Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request,
+    public override async Task<RenderThumbnailResponse> RenderThumbnail(RenderThumbnailRequest request,
         ServerCallContext context)
     {
         using var callRef = StartCall();
@@ -221,16 +221,16 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
             };
             using var image =
                 ImageSerializer.Deserialize(_scanningContext, request.Image, deserializeOptions);
-            var thumbnail = _thumbnailRenderer.Render(image, request.Size);
+            var thumbnail = await _thumbnailRenderer.Render(image, request.Size);
             var stream = thumbnail.SaveToMemoryStream(ImageFileFormat.Png);
-            return Task.FromResult(new RenderThumbnailResponse
+            return new RenderThumbnailResponse
             {
                 Thumbnail = ByteString.FromStream(stream)
-            });
+            };
         }
         catch (Exception e)
         {
-            return Task.FromResult(new RenderThumbnailResponse { Error = RemotingHelper.ToError(e) });
+            return new RenderThumbnailResponse { Error = RemotingHelper.ToError(e) };
         }
     }
 

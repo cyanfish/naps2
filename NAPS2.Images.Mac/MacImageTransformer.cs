@@ -32,7 +32,8 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         c.ConcatCTM(CGAffineTransform.Multiply(CGAffineTransform.Multiply(t1, t2), t3));
 
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);
-        c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
+        using var cgImage = image.Rep.AsCGImage(ref rect, null, null);
+        c.DrawImage(rect, cgImage);
         image.Dispose();
         return newImage;
     }
@@ -46,7 +47,8 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
         CGRect rect = new CGRect(0, 0, transform.Width, transform.Height);
         // TODO: This changes the image size to match the original which we probably don't want.
-        c.DrawImage(rect, image.Rep.AsCGImage(ref rect, null, null));
+        using var cgImage = image.Rep.AsCGImage(ref rect, null, null);
+        c.DrawImage(rect, cgImage);
         image.Dispose();
         return newImage;
     }

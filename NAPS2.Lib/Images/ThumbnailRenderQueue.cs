@@ -99,7 +99,7 @@ public class ThumbnailRenderQueue : IDisposable
                     {
                         var thumb = worker != null
                             ? RenderThumbnailWithWorker(worker, imageToRender, thumbnailSize)
-                            : _thumbnailRenderer.Render(imageToRender, thumbnailSize);
+                            : _thumbnailRenderer.Render(imageToRender, thumbnailSize).Result;
 
                         if (!ThumbnailStillNeedsRendering(next, thumbnailSize))
                         {

@@ -34,6 +34,7 @@ public class MacImageContext : ImageContext
             {
                 if (reps.Length > 1)
                 {
+                    image.Dispose();
                     return CreateImage(reps[0]);
                 }
                 return new MacImage(this, image);
@@ -69,6 +70,7 @@ public class MacImageContext : ImageContext
         }
         finally
         {
+            image.Dispose();
             foreach (var rep in reps)
             {
                 rep.Dispose();

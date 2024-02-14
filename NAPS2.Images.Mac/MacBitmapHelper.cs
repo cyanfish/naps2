@@ -11,7 +11,8 @@ internal static class MacBitmapHelper
         var copy = CreateRepForDrawing(w, h);
         using var c = CreateContext(copy, false, true);
         CGRect rect = new CGRect(0, 0, w, h);
-        c.DrawImage(rect, original.AsCGImage(ref rect, null, null));
+        using var cgImage = original.AsCGImage(ref rect, null, null);
+        c.DrawImage(rect, cgImage);
         return copy;
     }
 
