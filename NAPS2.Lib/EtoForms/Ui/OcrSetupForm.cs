@@ -1,3 +1,4 @@
+using System.Globalization;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
@@ -15,14 +16,16 @@ public class OcrSetupForm : EtoDialogBase
     private readonly CheckBox _ocrAfterScanning = C.CheckBox(UiStrings.RunOcrAfterScanning);
     private readonly LinkButton _moreLanguages = C.Link(UiStrings.GetMoreLanguages);
 
+    private string? _code;
+    private string? _multiLangCode;
+    private bool _suppressLangChangeEvent;
+
     public OcrSetupForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager) : base(config)
     {
         _tesseractLanguageManager = tesseractLanguageManager;
 
         _enableOcr.CheckedChanged += EnableOcr_CheckedChanged;
         _moreLanguages.Click += MoreLanguages_Click;
-
-        LoadLanguages();
 
         var configOcrMode = Config.Get(c => c.OcrMode);
         if (configOcrMode == LocalizedOcrMode.Legacy)
@@ -31,13 +34,16 @@ public class OcrSetupForm : EtoDialogBase
             configOcrMode = LocalizedOcrMode.Fast;
         }
 
+        _code = Config.Get(c => c.OcrLanguageCode);
+        _multiLangCode = Config.Get(c => c.LastOcrMultiLangCode);
+
         _enableOcr.Checked = Config.Get(c => c.EnableOcr);
-        _ocrLang.SelectedKey = Config.Get(c => c.OcrLanguageCode) ?? "";
-        if (_ocrLang.SelectedIndex == -1) _ocrLang.SelectedIndex = 0;
+        _ocrLang.SelectedIndexChanged += OcrLang_SelectedIndexChanged;
         _ocrMode.SelectedIndex = (int) configOcrMode;
         if (_ocrMode.SelectedIndex == -1) _ocrMode.SelectedIndex = 0;
         _ocrAfterScanning.Checked = Config.Get(c => c.OcrAfterScanning);
 
+        LoadLanguages();
         UpdateView();
     }
 
@@ -73,17 +79,43 @@ public class OcrSetupForm : EtoDialogBase
 
     private void LoadLanguages()
     {
+        _suppressLangChangeEvent = true;
         var languages = _tesseractLanguageManager.InstalledLanguages
             .OrderBy(x => x.Name)
             .ToList();
-        var selectedKey = _ocrLang.SelectedKey;
         _ocrLang.Items.Clear();
         _ocrLang.Items.AddRange(languages.Select(lang => new ListItem
         {
             Key = lang.Code,
             Text = lang.Name
         }));
-        _ocrLang.SelectedKey = selectedKey;
+        if (languages.Count > 1)
+        {
+            if (_multiLangCode?.Contains("+") == true)
+            {
+                _ocrLang.Items.Add(new ListItem
+                {
+                    Key = _multiLangCode,
+                    Text = string.Join($"{CultureInfo.CurrentCulture.TextInfo.ListSeparator} ",
+                        _multiLangCode.Split('+')
+                            .Select(code => languages.SingleOrDefault(lang => lang.Code == code)?.Name))
+                });
+            }
+            _ocrLang.Items.Add(new ListItem
+            {
+                Key = "",
+                Text = UiStrings.MultipleLanguages
+            });
+        }
+        if (!string.IsNullOrEmpty(_code))
+        {
+            _ocrLang.SelectedKey = _code;
+        }
+        if (_ocrLang.SelectedIndex == -1)
+        {
+            _ocrLang.SelectedIndex = 0;
+        }
+        _suppressLangChangeEvent = false;
     }
 
     private void UpdateView()
@@ -107,6 +139,26 @@ public class OcrSetupForm : EtoDialogBase
         LoadLanguages();
     }
 
+    private void OcrLang_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (_suppressLangChangeEvent) return;
+        if (_ocrLang.SelectedIndex == _ocrLang.Items.Count - 1)
+        {
+            var multiLangForm = FormFactory.Create<OcrMultiLangForm>();
+            multiLangForm.ShowModal();
+            if (multiLangForm.Code != null)
+            {
+                _code = multiLangForm.Code;
+            }
+            if (multiLangForm.Code?.Contains("+") == true)
+            {
+                _multiLangCode = multiLangForm.Code;
+            }
+            LoadLanguages();
+        }
+        _code = _ocrLang.SelectedKey;
+    }
+
     private void Save()
     {
         if (!Config.AppLocked.Has(c => c.EnableOcr))
@@ -114,6 +166,10 @@ public class OcrSetupForm : EtoDialogBase
             var transact = Config.User.BeginTransaction();
             transact.Set(c => c.EnableOcr, _enableOcr.IsChecked());
             transact.Set(c => c.OcrLanguageCode, _ocrLang.SelectedKey);
+            if (_multiLangCode?.Contains("+") == true)
+            {
+                Config.User.Set(c => c.LastOcrMultiLangCode, _multiLangCode);
+            }
             transact.Set(c => c.OcrMode, (LocalizedOcrMode) _ocrMode.SelectedIndex);
             transact.Set(c => c.OcrAfterScanning, _ocrAfterScanning.IsChecked());
             transact.Commit();

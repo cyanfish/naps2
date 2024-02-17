@@ -121,6 +121,9 @@ public class CommonConfig
     public string? OcrLanguageCode { get; set; }
 
     [Common]
+    public string? LastOcrMultiLangCode { get; set; }
+
+    [Common]
     public LocalizedOcrMode OcrMode { get; set; }
 
     [Common]
@@ -188,5 +191,4 @@ public class CommonConfig
 
     [Common]
     public bool DisableScannerSharing { get; set; }
-
 }

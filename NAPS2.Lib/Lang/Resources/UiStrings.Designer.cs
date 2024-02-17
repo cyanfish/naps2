@@ -1131,6 +1131,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multiple Languages....
+        /// </summary>
+        internal static string MultipleLanguages {
+            get {
+                return ResourceManager.GetString("MultipleLanguages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multiple scans (fixed delay between scans).
         /// </summary>
         internal static string MultipleScansDelay {
@@ -1271,6 +1280,15 @@ namespace NAPS2.Lang.Resources {
         internal static string OcrModeLabel {
             get {
                 return ResourceManager.GetString("OcrModeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple Languages.
+        /// </summary>
+        internal static string OcrMultiLangFormTitle {
+            get {
+                return ResourceManager.GetString("OcrMultiLangFormTitle", resourceCulture);
             }
         }
         

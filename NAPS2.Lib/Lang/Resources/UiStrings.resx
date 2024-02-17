@@ -864,4 +864,10 @@
   <data name="ShareAsService" xml:space="preserve">
     <value>Share even when NAPS2 is closed</value>
   </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Multiple Languages...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Multiple Languages</value>
+  </data>
 </root>
