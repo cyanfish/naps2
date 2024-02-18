@@ -63,7 +63,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
         // TODO: Include deskew?
         // TODO: Add border detection/removal? After deskew.
         var stopwatch = Stopwatch.StartNew();
-        ColumnColorOp.PerformFullOp(image);
+        // ColumnColorOp.PerformFullOp(image);
         // Console.WriteLine($"Column color op time: {stopwatch.ElapsedMilliseconds}");
         stopwatch.Restart();
         if (transform.Mode == CorrectionMode.Document)
