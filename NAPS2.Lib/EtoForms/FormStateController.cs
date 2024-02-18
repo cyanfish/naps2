@@ -118,7 +118,7 @@ public class FormStateController
                 EtoPlatform.Current.SetFormLocation(_window, location);
             }
         }
-        if (!size.IsEmpty && _window.Resizable)
+        if (!size.IsEmpty && Resizable)
         {
             if (!_minimumClientSize.IsEmpty)
             {
