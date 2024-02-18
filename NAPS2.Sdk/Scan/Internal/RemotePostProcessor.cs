@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
-using NAPS2.Ocr;
 
 namespace NAPS2.Scan.Internal;
 
@@ -191,11 +190,6 @@ internal class RemotePostProcessor : IRemotePostProcessor
         {
             // TODO: If we use tesseract as a library, this is something that that could potentially improve (i.e. not having to save to disk)
             // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
-            if (options.OcrParams.Mode is OcrMode.FastWithPreProcess or OcrMode.BestWithPreProcess)
-            {
-                bitmap = _scanningContext.ImageContext.PerformTransform(bitmap,
-                    new CorrectionTransform(CorrectionMode.Document));
-            }
             return _scanningContext.SaveToTempFile(bitmap);
         }
         return null;

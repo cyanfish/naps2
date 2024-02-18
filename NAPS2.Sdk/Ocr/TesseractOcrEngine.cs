@@ -70,6 +70,10 @@ public class TesseractOcrEngine : IOcrEngine
         string tempHocrFilePathWithExt = tempHocrFilePath + ".hocr";
         try
         {
+            if (ocrParams.Mode is OcrMode.FastWithPreProcess or OcrMode.BestWithPreProcess)
+            {
+                PreProcessImage(scanningContext, imagePath);
+            }
             var startInfo = new ProcessStartInfo
             {
                 FileName = _tesseractPath,
@@ -191,6 +195,21 @@ public class TesseractOcrEngine : IOcrEngine
     public event EventHandler<OcrErrorEventArgs>? OcrError;
 
     public event EventHandler? OcrTimeout;
+
+    private static void PreProcessImage(ScanningContext scanningContext, string imagePath)
+    {
+        IMemoryImage? image = null;
+        try
+        {
+            image = scanningContext.ImageContext.Load(imagePath);
+            image = image.PerformTransform(new CorrectionTransform(CorrectionMode.Document));
+            image.Save(imagePath);
+        }
+        finally
+        {
+            image?.Dispose();
+        }
+    }
 
     private static string? GetNearestAncestorAttribute(XElement x, string attributeName)
     {
