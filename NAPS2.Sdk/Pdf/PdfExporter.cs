@@ -344,8 +344,16 @@ public class PdfExporter
             // Save the image to a file for use in OCR.
             // We don't need to delete this file as long as we pass it to OcrRequestQueue.Enqueue, which takes
             // ownership and guarantees its eventual deletion.
-            using var fileStream = new FileStream(ocrTempFilePath, FileMode.Create, FileAccess.Write);
-            state.Embedder.CopyToStream(fileStream);
+            if (state.OcrParams!.Mode is OcrMode.FastWithPreProcess or OcrMode.BestWithPreProcess)
+            {
+                using var preProcessed = state.Image.WithTransform(new CorrectionTransform(CorrectionMode.Document));
+                preProcessed.Save(ocrTempFilePath);
+            }
+            else
+            {
+                using var fileStream = new FileStream(ocrTempFilePath, FileMode.Create, FileAccess.Write);
+                state.Embedder.CopyToStream(fileStream);
+            }
         }
 
         // Start OCR

@@ -186,11 +186,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Best + Pre-Processing.
+        /// </summary>
+        internal static string OcrMode_BestWithPreProcess {
+            get {
+                return ResourceManager.GetString("OcrMode_BestWithPreProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fast.
         /// </summary>
         internal static string OcrMode_Fast {
             get {
                 return ResourceManager.GetString("OcrMode_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast + Pre-Processing.
+        /// </summary>
+        internal static string OcrMode_FastWithPreProcess {
+            get {
+                return ResourceManager.GetString("OcrMode_FastWithPreProcess", resourceCulture);
             }
         }
         

@@ -84,7 +84,7 @@ public class TesseractOcrEngine : IOcrEngine
                 string languageDataPath = _languageDataBasePath;
                 if (_withModes)
                 {
-                    string subfolder = ocrParams.Mode == OcrMode.Best ? "best" : "fast";
+                    string subfolder = ocrParams.Mode is OcrMode.Best or OcrMode.BestWithPreProcess ? "best" : "fast";
                     languageDataPath = Path.Combine(languageDataPath, subfolder);
                 }
                 startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = languageDataPath;

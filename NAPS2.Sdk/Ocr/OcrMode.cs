@@ -7,5 +7,7 @@ public enum OcrMode
 {
     Default,
     Fast,
-    Best
+    FastWithPreProcess,
+    Best,
+    BestWithPreProcess
 }
