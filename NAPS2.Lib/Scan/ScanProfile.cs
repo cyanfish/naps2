@@ -105,6 +105,8 @@ public class ScanProfile
 
     public TwainImpl TwainImpl { get; set; }
 
+    public bool TwainProgress { get; set; }
+
     public bool ExcludeBlankPages { get; set; }
 
     public int BlankPageWhiteThreshold { get; set; }

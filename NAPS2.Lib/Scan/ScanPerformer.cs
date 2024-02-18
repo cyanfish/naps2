@@ -183,7 +183,8 @@ internal class ScanPerformer : IScanPerformer
     private void ShowOperation(ScanOperation op, ScanOptions scanOptions, ScanParams scanParams)
     {
         bool isWia10 = scanOptions.Driver == Driver.Wia && scanOptions.WiaOptions.WiaApiVersion == WiaApiVersion.Wia10;
-        if (scanParams.NoUI || scanOptions.UseNativeUI && !isWia10)
+        bool showingTwainProgress = scanOptions.Driver == Driver.Twain && scanOptions.TwainOptions.ShowProgress;
+        if (scanParams.NoUI || scanOptions.UseNativeUI && !isWia10 || showingTwainProgress)
         {
             return;
         }
@@ -233,6 +234,7 @@ internal class ScanPerformer : IScanPerformer
                 TransferMode = scanProfile.TwainImpl is TwainImpl.Default or TwainImpl.MemXfer
                     ? TwainTransferMode.Memory
                     : TwainTransferMode.Native,
+                ShowProgress = scanProfile.TwainProgress,
                 IncludeWiaDevices = false
                 // TODO: Consider adding a user option for TwainOptions.ShowProgress instead of our progress window
             },

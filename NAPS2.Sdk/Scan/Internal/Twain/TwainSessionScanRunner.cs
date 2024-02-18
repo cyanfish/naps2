@@ -62,7 +62,7 @@ internal class TwainSessionScanRunner
         try
         {
             _logger.LogDebug("NAPS2.TW - Opening session");
-            var dsmHandle = _handleManager.GetDsmHandle(_options.DialogParent, _options.UseNativeUI);
+            var dsmHandle = _handleManager.GetDsmHandle(_options.DialogParent, _options.UseNativeUI || _options.TwainOptions.ShowProgress);
 #if NET6_0_OR_GREATER
 
             if (!OperatingSystem.IsWindows()) throw new InvalidOperationException("Windows-only");
@@ -99,7 +99,7 @@ internal class TwainSessionScanRunner
 
             _logger.LogDebug("NAPS2.TW - Enabling source");
             var ui = _options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-            var enableHandle = _handleManager.GetEnableHandle(_options.DialogParent, _options.UseNativeUI);
+            var enableHandle = _handleManager.GetEnableHandle(_options.DialogParent, _options.UseNativeUI || _options.TwainOptions.ShowProgress);
             // Note that according to the twain spec, on Windows it is recommended to set the modal parameter to false
             rc = _source.Enable(ui, false, enableHandle);
             if (rc != ReturnCode.Success)

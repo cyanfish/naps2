@@ -2031,6 +2031,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show native TWAIN progress.
+        /// </summary>
+        internal static string ShowNativeTwainProgress {
+            get {
+                return ResourceManager.GetString("ShowNativeTwainProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show page numbers.
         /// </summary>
         internal static string ShowPageNumbers {

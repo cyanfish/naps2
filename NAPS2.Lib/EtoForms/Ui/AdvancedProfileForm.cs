@@ -29,6 +29,7 @@ public class AdvancedProfileForm : EtoDialogBase
     });
 
     private readonly DropDown _twainImpl = C.EnumDropDown<TwainImpl>();
+    private readonly CheckBox _twainProgress = new() { Text = UiStrings.ShowNativeTwainProgress };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
     public AdvancedProfileForm(Naps2Config config) : base(config)
@@ -88,7 +89,8 @@ public class AdvancedProfileForm : EtoDialogBase
                     PlatformCompat.System.IsWiaDriverSupported ? C.Label(UiStrings.WiaVersionLabel) : C.None(),
                     PlatformCompat.System.IsWiaDriverSupported ? _wiaVersion : C.None(),
                     PlatformCompat.System.IsTwainDriverSupported ? C.Label(UiStrings.TwainImplLabel) : C.None(),
-                    PlatformCompat.System.IsTwainDriverSupported ? _twainImpl : C.None()
+                    PlatformCompat.System.IsTwainDriverSupported ? _twainImpl : C.None(),
+                    PlatformCompat.System.IsTwainDriverSupported ? _twainProgress : C.None()
                 )
             ),
             L.Row(
@@ -113,6 +115,7 @@ public class AdvancedProfileForm : EtoDialogBase
         _cropToPageSize.Checked = scanProfile.ForcePageSizeCrop;
         _flipDuplexed.Checked = scanProfile.FlipDuplexedPages;
         _twainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
+        _twainProgress.Checked = scanProfile.TwainProgress;
         _excludeBlank.Checked = scanProfile.ExcludeBlankPages;
         _whiteThreshold.IntValue = scanProfile.BlankPageWhiteThreshold;
         _coverageThreshold.IntValue = scanProfile.BlankPageCoverageThreshold;
@@ -121,6 +124,7 @@ public class AdvancedProfileForm : EtoDialogBase
     private void UpdateEnabled()
     {
         _twainImpl.Enabled = ScanProfile!.DriverName == DriverNames.TWAIN;
+        _twainProgress.Enabled = ScanProfile!.DriverName == DriverNames.TWAIN;
         _offsetWidth.Enabled = ScanProfile.DriverName == DriverNames.WIA;
         _wiaVersion.Enabled = ScanProfile.DriverName == DriverNames.WIA;
         _quality.Enabled = !_maximumQuality.IsChecked();
@@ -148,6 +152,7 @@ public class AdvancedProfileForm : EtoDialogBase
         {
             ScanProfile.TwainImpl = (TwainImpl) _twainImpl.SelectedIndex;
         }
+        ScanProfile.TwainProgress = _twainProgress.IsChecked();
         ScanProfile.ExcludeBlankPages = _excludeBlank.IsChecked();
         ScanProfile.BlankPageWhiteThreshold = _whiteThreshold.IntValue;
         ScanProfile.BlankPageCoverageThreshold = _coverageThreshold.IntValue;

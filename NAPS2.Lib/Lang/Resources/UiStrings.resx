@@ -870,4 +870,7 @@
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
     <value>Multiple Languages</value>
   </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Show native TWAIN progress</value>
+  </data>
 </root>

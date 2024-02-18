@@ -52,7 +52,7 @@ internal class TwainScanDriver : IScanDriver
 
     private void EnableWindow(ScanOptions options)
     {
-        if (options.DialogParent != IntPtr.Zero && options.UseNativeUI)
+        if (options.DialogParent != IntPtr.Zero && (options.UseNativeUI || options.TwainOptions.ShowProgress))
         {
             // At the Windows API level, a modal window is implemented by doing two things:
             // 1. Setting the parent on the child window
