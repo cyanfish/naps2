@@ -36,7 +36,7 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
         bool copyAlpha = src.hasAlpha && dst.hasAlpha;
         const int s = FILTER_SIZE / 2;
 
-        var filter = new int[FILTER_SIZE, FILTER_SIZE];
+        var filter = new int[FILTER_SIZE * FILTER_SIZE];
         for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
         {
             for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
@@ -45,7 +45,7 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
                 int dy = filterY - s;
                 var dmax = Math.Sqrt(2 * s * s);
                 var d = Math.Sqrt(dx * dx + dy * dy) / dmax;
-                filter[filterX, filterY] = (int)((1 - d) * 256);
+                filter[filterX + filterY * FILTER_SIZE] = (int)((1 - d) * 256);
             }
         }
 
@@ -105,7 +105,7 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
 
                                 // TODO: Better color distance
                                 var diff = (r + g + b) - (r2 + g2 + b2) + 256 * 3;
-                                var weight = filter[filterX, filterY] * diffWeights[diff];
+                                var weight = filter[filterX + filterY * FILTER_SIZE] * diffWeights[diff];
                                 weightTotal += weight;
                                 rTotal += r2 * weight;
                                 gTotal += g2 * weight;
