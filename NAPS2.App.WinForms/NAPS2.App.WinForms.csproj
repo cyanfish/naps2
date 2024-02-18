@@ -31,7 +31,7 @@
   
   <ItemGroup>
     <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.1.0" />
-    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.1.0" />
+    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.2.0" />
 
     <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
