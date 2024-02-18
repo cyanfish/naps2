@@ -31,7 +31,12 @@ public class ScanProfile
     public ScanProfile Clone()
     {
         // Easy deep copy. Ideally we'd do this in a more efficient way.
-        return this.ToXml().FromXml<ScanProfile>();
+        var copy = this.ToXml().FromXml<ScanProfile>();
+        // Copy XmlIgnore properties
+        copy.UpgradedFrom = UpgradedFrom;
+        copy.IsLocked = IsLocked;
+        copy.IsDeviceLocked = IsDeviceLocked;
+        return copy;
     }
 
     public override string ToString() => DisplayName;

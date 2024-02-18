@@ -151,7 +151,7 @@ public class ProfileManager : IProfileManager
         }
 
         var systemProfileNames = new HashSet<string>(systemProfiles.Select(x => x.DisplayName));
-        foreach (var profile in userProfiles)
+        foreach (var profile in userProfiles.ToList())
         {
             if (systemProfileNames.Contains(profile.DisplayName))
             {

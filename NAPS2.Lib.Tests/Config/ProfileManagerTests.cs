@@ -104,4 +104,6 @@ public class ProfileManagerTests : ContextualTests
         Assert.Equal(2, profiles[0].Version);
         Assert.Equal(1, profiles[0].UpgradedFrom);
     }
+
+    // TODO: Add tests for LockSystemProfiles etc
 }
