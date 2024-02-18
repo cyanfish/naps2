@@ -10,7 +10,6 @@ public class UiThumbnailProvider
 {
     private readonly ImageContext _imageContext;
     private readonly ColorScheme _colorScheme;
-    private IMemoryImage? _placeholder;
 
     public UiThumbnailProvider(ImageContext imageContext, ColorScheme colorScheme)
     {
@@ -37,17 +36,9 @@ public class UiThumbnailProvider
 
     private IMemoryImage RenderPlaceholder(int thumbnailSize)
     {
-        lock (this)
-        {
-            if (_placeholder?.Width == thumbnailSize)
-            {
-                return _placeholder;
-            }
-            _placeholder?.Dispose();
-            _placeholder = _imageContext.Create(thumbnailSize, thumbnailSize, ImagePixelFormat.RGB24);
-            _placeholder.Fill(_colorScheme.BackgroundColor);
-            _placeholder = EtoPlatform.Current.DrawHourglass(_imageContext, _placeholder);
-            return _placeholder;
-        }
+        var placeholder = _imageContext.Create(thumbnailSize, thumbnailSize, ImagePixelFormat.RGB24);
+        placeholder.Fill(_colorScheme.BackgroundColor);
+        placeholder = EtoPlatform.Current.DrawHourglass(_imageContext, placeholder);
+        return placeholder;
     }
 }
