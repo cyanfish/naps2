@@ -471,6 +471,9 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR mode:</value>
   </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Fix white balance and remove noise</value>
+  </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Automatically run OCR after scanning</value>
   </data>

@@ -13,18 +13,18 @@ public static class ConfigExtensions
         }
         return new OcrParams(
             config.Get(c => c.OcrLanguageCode),
-            MapOcrMode(config.Get(c => c.OcrMode)),
+            MapOcrMode(config.Get(c => c.OcrMode), config.Get(c => c.OcrPreProcessing)),
             config.Get(c => c.OcrTimeoutInSeconds));
     }
 
-    private static OcrMode MapOcrMode(LocalizedOcrMode ocrMode)
+    private static OcrMode MapOcrMode(LocalizedOcrMode ocrMode, bool preProcessing)
     {
-        return ocrMode switch
+        return (ocrMode, preProcessing) switch
         {
-            LocalizedOcrMode.Fast => OcrMode.Fast,
-            LocalizedOcrMode.FastWithPreProcess => OcrMode.FastWithPreProcess,
-            LocalizedOcrMode.Best => OcrMode.BestWithPreProcess,
-            LocalizedOcrMode.BestWithPreProcess => OcrMode.BestWithPreProcess,
+            (LocalizedOcrMode.Fast, false) => OcrMode.Fast,
+            (LocalizedOcrMode.Fast, true) => OcrMode.FastWithPreProcess,
+            (LocalizedOcrMode.Best, false) => OcrMode.Best,
+            (LocalizedOcrMode.Best, true) => OcrMode.BestWithPreProcess,
             _ => OcrMode.Default
         };
     }

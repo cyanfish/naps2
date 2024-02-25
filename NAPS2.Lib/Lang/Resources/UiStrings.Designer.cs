@@ -1293,6 +1293,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fix white balance and remove noise.
+        /// </summary>
+        internal static string OcrPreProcessing {
+            get {
+                return ResourceManager.GetString("OcrPreProcessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select one or more languages:.
         /// </summary>
         internal static string OcrSelectLanguageLabel {

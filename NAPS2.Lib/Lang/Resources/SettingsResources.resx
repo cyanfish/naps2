@@ -267,14 +267,8 @@
   <data name="OcrMode_Fast" xml:space="preserve">
     <value>Fast</value>
   </data>
-  <data name="OcrMode_FastWithPreProcess" xml:space="preserve">
-    <value>Fast + Pre-Processing</value>
-  </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Best</value>
-  </data>
-  <data name="OcrMode_BestWithPreProcess" xml:space="preserve">
-    <value>Best + Pre-Processing</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
     <value>Save All</value>

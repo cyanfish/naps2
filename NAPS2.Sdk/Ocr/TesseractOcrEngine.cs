@@ -70,7 +70,7 @@ public class TesseractOcrEngine : IOcrEngine
         string tempHocrFilePathWithExt = tempHocrFilePath + ".hocr";
         try
         {
-            if (ocrParams.Mode is OcrMode.FastWithPreProcess or OcrMode.BestWithPreProcess)
+            if (ocrParams.Mode.HasFlag(OcrMode.WithPreProcess))
             {
                 PreProcessImage(scanningContext, imagePath);
             }
@@ -88,7 +88,7 @@ public class TesseractOcrEngine : IOcrEngine
                 string languageDataPath = _languageDataBasePath;
                 if (_withModes)
                 {
-                    string subfolder = ocrParams.Mode is OcrMode.Best or OcrMode.BestWithPreProcess ? "best" : "fast";
+                    string subfolder = ocrParams.Mode.HasFlag(OcrMode.Best) ? "best" : "fast";
                     languageDataPath = Path.Combine(languageDataPath, subfolder);
                 }
                 startInfo.EnvironmentVariables["TESSDATA_PREFIX"] = languageDataPath;

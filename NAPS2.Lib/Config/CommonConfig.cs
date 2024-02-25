@@ -127,6 +127,9 @@ public class CommonConfig
     public LocalizedOcrMode OcrMode { get; set; }
 
     [Common]
+    public bool OcrPreProcessing { get; set; }
+
+    [Common]
     public bool OcrAfterScanning { get; set; }
 
     [User]

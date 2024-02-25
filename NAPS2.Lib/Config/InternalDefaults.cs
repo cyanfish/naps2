@@ -50,6 +50,7 @@ public static class InternalDefaults
             OcrLanguageCode = "",
             LastOcrMultiLangCode = "",
             OcrMode = LocalizedOcrMode.Fast,
+            OcrPreProcessing = false,
             OcrAfterScanning = true,
             LastImageExt = "",
             LastPdfOrImageExt = "",

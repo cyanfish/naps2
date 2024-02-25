@@ -12,8 +12,8 @@ public class OcrSetupForm : EtoDialogBase
 
     private readonly CheckBox _enableOcr = C.CheckBox(UiStrings.MakePdfsSearchable);
     private readonly DropDown _ocrLang = C.DropDown();
-    private readonly DropDown _ocrMode = C.EnumDropDown(LocalizedOcrMode.Fast, LocalizedOcrMode.FastWithPreProcess,
-        LocalizedOcrMode.Best, LocalizedOcrMode.BestWithPreProcess);
+    private readonly DropDown _ocrMode = C.EnumDropDown(LocalizedOcrMode.Fast, LocalizedOcrMode.Best);
+    private readonly CheckBox _ocrPreProcessing = C.CheckBox(UiStrings.OcrPreProcessing);
     private readonly CheckBox _ocrAfterScanning = C.CheckBox(UiStrings.RunOcrAfterScanning);
     private readonly LinkButton _moreLanguages = C.Link(UiStrings.GetMoreLanguages);
 
@@ -42,6 +42,7 @@ public class OcrSetupForm : EtoDialogBase
         _ocrLang.SelectedIndexChanged += OcrLang_SelectedIndexChanged;
         _ocrMode.SelectedIndex = (int) configOcrMode;
         if (_ocrMode.SelectedIndex == -1) _ocrMode.SelectedIndex = 0;
+        _ocrPreProcessing.Checked = Config.Get(c => c.OcrPreProcessing);
         _ocrAfterScanning.Checked = Config.Get(c => c.OcrAfterScanning);
 
         LoadLanguages();
@@ -65,6 +66,7 @@ public class OcrSetupForm : EtoDialogBase
                 C.Label(UiStrings.OcrModeLabel).AlignCenter().Padding(right: 40),
                 _ocrMode.Scale()
             ).Aligned(),
+            _ocrPreProcessing,
             _ocrAfterScanning,
             C.Filler(),
             L.Row(
@@ -125,6 +127,7 @@ public class OcrSetupForm : EtoDialogBase
         _enableOcr.Enabled = !Config.AppLocked.Has(c => c.EnableOcr);
         _ocrLang.Enabled = isEnabled && !Config.AppLocked.Has(c => c.OcrLanguageCode);
         _ocrMode.Enabled = isEnabled && !Config.AppLocked.Has(c => c.OcrMode);
+        _ocrPreProcessing.Enabled = isEnabled && !Config.AppLocked.Has(c => c.OcrPreProcessing);
         _ocrAfterScanning.Enabled = isEnabled && !Config.AppLocked.Has(c => c.OcrAfterScanning);
         _moreLanguages.Enabled = !Config.AppLocked.Has(c => c.OcrLanguageCode);
     }
@@ -172,6 +175,7 @@ public class OcrSetupForm : EtoDialogBase
                 Config.User.Set(c => c.LastOcrMultiLangCode, _multiLangCode);
             }
             transact.Set(c => c.OcrMode, (LocalizedOcrMode) _ocrMode.SelectedIndex);
+            transact.Set(c => c.OcrPreProcessing, _ocrPreProcessing.IsChecked());
             transact.Set(c => c.OcrAfterScanning, _ocrAfterScanning.IsChecked());
             transact.Commit();
         }
