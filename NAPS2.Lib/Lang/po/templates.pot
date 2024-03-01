@@ -618,6 +618,10 @@ msgstr ""
 msgid "File Path:"
 msgstr ""
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr ""
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr ""
@@ -805,6 +809,14 @@ msgstr ""
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
+msgstr ""
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr ""
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
 msgstr ""
 
 #: UiStrings.resx$MultipleScansDelay$Message
@@ -1338,6 +1350,10 @@ msgstr ""
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
+msgstr ""
+
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
 msgstr ""
 
 #: UiStrings.resx$ShowPageNumbers$Message
