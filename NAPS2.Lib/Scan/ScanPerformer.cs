@@ -236,10 +236,10 @@ internal class ScanPerformer : IScanPerformer
                     : TwainTransferMode.Native,
                 ShowProgress = scanProfile.TwainProgress,
                 IncludeWiaDevices = false
-                // TODO: Consider adding a user option for TwainOptions.ShowProgress instead of our progress window
             },
             SaneOptions =
             {
+                // We use a worker process for SANE so we should clean up after each operation
                 KeepInitialized = false
             },
             KeyValueOptions = scanProfile.KeyValueOptions != null

@@ -9,6 +9,9 @@ using Alphabet = NAPS2.Pdf.PdfFontPicker.Alphabet;
 
 namespace NAPS2.Sdk.Tests.Pdf;
 
+// As we use the same data for multiple methods, some parameters may be unused
+#pragma warning disable xUnit1026
+
 public class PdfFontTests : ContextualTests
 {
     private readonly PdfImporter _importer;
@@ -36,7 +39,7 @@ public class PdfFontTests : ContextualTests
 
     [Theory]
     [MemberData(nameof(AlphabetTestCases))]
-    internal async Task MapLanguageCodeToAlphabet(Alphabet alphabet, string langCode, string text, bool rtl)
+    internal void MapLanguageCodeToAlphabet(Alphabet alphabet, string langCode, string text, bool rtl)
     {
         Assert.Equal(alphabet, PdfFontPicker.MapLanguageCodeToAlphabet(langCode));
     }

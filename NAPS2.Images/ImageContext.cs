@@ -245,7 +245,7 @@ public abstract class ImageContext
         return RenderFromStorage(image.Storage, (image as IPdfRendererProvider)?.PdfRenderer);
     }
 
-    private IMemoryImage RenderFromStorage(IImageStorage storage, IPdfRenderer pdfRenderer)
+    private IMemoryImage RenderFromStorage(IImageStorage storage, IPdfRenderer? pdfRenderer)
     {
         switch (storage)
         {

@@ -75,6 +75,7 @@ public static class GLibLogInterceptor
         nint nFields,
         IntPtr user_data);
 
+    [StructLayout(LayoutKind.Sequential)]
     struct GLogField
     {
         public string key;

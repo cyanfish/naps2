@@ -3,6 +3,7 @@ namespace NAPS2.Util;
 
 public static class AsyncProducers
 {
+#pragma warning disable CS1998
     public static async IAsyncEnumerable<T> Empty<T>()
     {
         yield break;

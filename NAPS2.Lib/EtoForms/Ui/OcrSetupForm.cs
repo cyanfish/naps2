@@ -143,7 +143,7 @@ public class OcrSetupForm : EtoDialogBase
         LoadLanguages();
     }
 
-    private void OcrLang_SelectedIndexChanged(object sender, EventArgs e)
+    private void OcrLang_SelectedIndexChanged(object? sender, EventArgs e)
     {
         if (_suppressLangChangeEvent) return;
         if (_ocrLang.SelectedIndex == _ocrLang.Items.Count - 1)

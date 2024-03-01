@@ -169,7 +169,7 @@ public class WinFormsDesktopForm : DesktopForm
                 TextAlign = ContentAlignment.MiddleLeft,
                 Image = Image.FromStream(new MemoryStream(Icons.control_play_blue_small))
             };
-            item.Click += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Tag);
+            item.Click += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Tag!);
             toolbarItems.Add(item);
         }
         for (int i = 0; i < profiles.Count; i++)

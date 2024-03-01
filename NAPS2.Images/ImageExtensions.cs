@@ -16,8 +16,7 @@ public static class ImageExtensions
     /// <param name="image"></param>
     /// <param name="jpegPath"></param>
     /// <returns></returns>
-    internal static bool IsUntransformedJpegFile(this IRenderableImage image,
-        [MaybeNullWhen(false)] out string jpegPath)
+    internal static bool IsUntransformedJpegFile(this IRenderableImage image, out string jpegPath)
     {
         if (image is { Storage: ImageFileStorage fileStorage, TransformState.IsEmpty: true } &&
             ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
@@ -25,7 +24,7 @@ public static class ImageExtensions
             jpegPath = fileStorage.FullPath;
             return true;
         }
-        jpegPath = null;
+        jpegPath = null!;
         return false;
     }
 
