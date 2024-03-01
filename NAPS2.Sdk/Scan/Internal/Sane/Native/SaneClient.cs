@@ -6,6 +6,9 @@ namespace NAPS2.Scan.Internal.Sane.Native;
 internal class SaneClient : SaneNativeObject
 {
     private static readonly object SaneLock = new();
+    private static bool _isInitialized;
+
+    private readonly bool _keepInitialized;
 
     private static SaneNativeLibrary GetNativeLibrary(ISaneInstallation saneInstallation)
     {
@@ -15,10 +18,17 @@ internal class SaneClient : SaneNativeObject
         }
     }
 
-    public SaneClient(ISaneInstallation saneInstallation) : base(GetNativeLibrary(saneInstallation), IntPtr.Zero)
+    public SaneClient(ISaneInstallation saneInstallation, bool keepInitialized)
+        : base(GetNativeLibrary(saneInstallation), IntPtr.Zero)
     {
+        _keepInitialized = keepInitialized;
+
         Monitor.Enter(SaneLock);
-        Native.sane_init(out _, IntPtr.Zero);
+        if (!_isInitialized)
+        {
+            Native.sane_init(out _, IntPtr.Zero);
+            _isInitialized = true;
+        }
     }
 
     public IEnumerable<SaneDeviceInfo> GetDevices()
@@ -56,9 +66,10 @@ internal class SaneClient : SaneNativeObject
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing)
+        if (disposing && !_keepInitialized)
         {
             Native.sane_exit();
+            _isInitialized = false;
         }
         Monitor.Exit(SaneLock);
     }

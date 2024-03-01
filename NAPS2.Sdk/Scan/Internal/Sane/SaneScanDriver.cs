@@ -50,7 +50,7 @@ internal class SaneScanDriver : IScanDriver
             {
                 // TODO: This is crashing after a delay for no apparent reason.
                 // That's okay because we're in a worker process, but ideally we could fix it in SANE.
-                using var client = new SaneClient(Installation);
+                using var client = new SaneClient(Installation, options.SaneOptions.KeepInitialized);
                 // TODO: We can use device.type and .vendor to help pick an icon etc.
                 // https://sane-project.gitlab.io/standard/api.html#device-descriptor-type
                 if (Installation.CanStreamDevices)
@@ -133,7 +133,7 @@ internal class SaneScanDriver : IScanDriver
             try
             {
                 Installation.Initialize();
-                using var client = new SaneClient(Installation);
+                using var client = new SaneClient(Installation, options.SaneOptions.KeepInitialized);
                 if (cancelToken.IsCancellationRequested) return;
                 _scanningContext.Logger.LogDebug("Opening SANE Device \"{ID}\"", options.Device!.ID);
                 using var device = client.OpenDevice(options.Device.ID);
