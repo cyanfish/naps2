@@ -347,6 +347,10 @@ internal class WiaScanDriver : IScanDriver
             int yRes = _options.Dpi;
             SafeSetPropertyClosest(item, WiaPropertyId.IPS_XRES, ref xRes);
             SafeSetPropertyClosest(item, WiaPropertyId.IPS_YRES, ref yRes);
+            if (xRes != _options.Dpi || yRes != _options.Dpi)
+            {
+                _logger.LogDebug($"Correcting DPI from {_options.Dpi}x{_options.Dpi} to {xRes}x{yRes}");
+            }
 
             int pageWidth = _options.PageSize!.WidthInThousandthsOfAnInch * xRes / 1000;
             int pageHeight = _options.PageSize.HeightInThousandthsOfAnInch * yRes / 1000;
