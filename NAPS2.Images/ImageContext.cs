@@ -116,8 +116,6 @@ public abstract class ImageContext
     protected virtual bool SupportsTiff => false;
     protected virtual bool SupportsJpeg2000 => false;
 
-    // TODO: Implement these 4 load methods here, calling protected abstract internal methods.
-    // TODO: That will let us implement common behavior (reading file formats, setting originalfileformat/logicalpixelformat) consistently.
     /// <summary>
     /// Loads an image from the given file path.
     /// </summary>
