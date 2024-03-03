@@ -93,7 +93,9 @@
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' != 'net8-macos10.15'">
     <!-- TODO: Ideally we'd only have package dependencies, not direct dlls -->
     <Content Include="..\NAPS2.Setup\lib\PdfSharpCore.dll">
       <Pack>true</Pack>
