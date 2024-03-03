@@ -93,6 +93,28 @@
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+
+    <!-- TODO: Ideally we'd only have package dependencies, not direct dlls -->
+    <Content Include="..\NAPS2.Setup\lib\PdfSharpCore.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\net6.0</PackagePath>
+    </Content>
+    <Content Include="..\NAPS2.Setup\lib\NTwain.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\net6.0</PackagePath>
+    </Content>
+    <Content Include="..\NAPS2.Setup\lib\PdfSharpCore.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\net462</PackagePath>
+    </Content>
+    <Content Include="..\NAPS2.Setup\lib\NTwain.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\net462</PackagePath>
+    </Content>
+    <Content Include="..\NAPS2.Setup\lib\PdfSharpCore.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\net8.0-macos10.15</PackagePath>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
