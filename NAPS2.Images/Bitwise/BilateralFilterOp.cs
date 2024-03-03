@@ -20,10 +20,13 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
 
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
-        // TODO: Implement grayscale?
         if (src.bytesPerPixel is 3 or 4 && dst.bytesPerPixel is 3 or 4)
         {
             PerformRgba(src, dst, partStart, partEnd);
+        }
+        else if (src.bytesPerPixel == 1 && dst.bytesPerPixel == 1)
+        {
+            PerformGray(src, dst, partStart, partEnd);
         }
         else
         {
@@ -36,25 +39,8 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
         bool copyAlpha = src.hasAlpha && dst.hasAlpha;
         const int s = FILTER_SIZE / 2;
 
-        var filter = new int[FILTER_SIZE * FILTER_SIZE];
-        for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
-        {
-            for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
-            {
-                int dx = filterX - s;
-                int dy = filterY - s;
-                var dmax = Math.Sqrt(2 * s * s);
-                var d = Math.Sqrt(dx * dx + dy * dy) / dmax;
-                filter[filterX + filterY * FILTER_SIZE] = (int)((1 - d) * 256);
-            }
-        }
-
-        var diffWeights = new int[256 * 3 * 2];
-        for (int i = 0; i < COLOR_DIST_MAX * 3; i++)
-        {
-            diffWeights[256 * 3 + i] = COLOR_DIST_MAX - i / 3;
-            diffWeights[256 * 3 - i] = COLOR_DIST_MAX - i / 3;
-        }
+        var filter = BuildFilter();
+        var diffWeights = BuildRgbaDiffWeights();
 
         for (int i = partStart; i < partEnd; i++)
         {
@@ -81,7 +67,8 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
                         byte nextR = *(nextPixel + src.rOff);
                         byte nextG = *(nextPixel + src.gOff);
                         byte nextB = *(nextPixel + src.bOff);
-                        if (prevR == 255 && prevG == 255 && prevB == 255 && nextR == 255 && nextG == 255 && nextB == 255)
+                        if (prevR == 255 && prevG == 255 && prevB == 255 && nextR == 255 && nextG == 255 &&
+                            nextB == 255)
                         {
                             skipPixel = true;
                         }
@@ -126,5 +113,105 @@ public class BilateralFilterOp : BinaryBitwiseImageOp
                 }
             }
         }
+    }
+
+    private unsafe void PerformGray(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
+    {
+        const int s = FILTER_SIZE / 2;
+
+        var filter = BuildFilter();
+        var diffWeights = BuildGrayDiffWeights();
+
+        for (int i = partStart; i < partEnd; i++)
+        {
+            var srcRow = src.ptr + src.stride * i;
+            var dstRow = dst.ptr + dst.stride * i;
+            for (int j = 0; j < src.w; j++)
+            {
+                var srcPixel = srcRow + j * src.bytesPerPixel;
+                var dstPixel = dstRow + j * dst.bytesPerPixel;
+                int lum = *srcPixel;
+
+                if (j > s && j < src.w - s && i > s && i < src.h - s)
+                {
+                    bool skipPixel = false;
+                    if (lum == 255)
+                    {
+                        var prevPixel = src.ptr + src.stride * i + src.bytesPerPixel * j - 1;
+                        var nextPixel = src.ptr + src.stride * i + src.bytesPerPixel * j + 1;
+                        byte prev = *prevPixel;
+                        byte next = *nextPixel;
+                        if (prev == 255 && next == 255)
+                        {
+                            skipPixel = true;
+                        }
+                    }
+                    if (!skipPixel)
+                    {
+                        int lumTotal = 0;
+                        int weightTotal = 0;
+                        for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
+                        {
+                            for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
+                            {
+                                int imageX = j - s + filterX;
+                                int imageY = i - s + filterY;
+
+                                var pixel = src.ptr + src.stride * imageY + src.bytesPerPixel * imageX;
+
+                                var lum2 = *pixel;
+
+                                var diff = lum - lum2 + 256;
+                                var weight = filter[filterX + filterY * FILTER_SIZE] * diffWeights[diff];
+                                weightTotal += weight;
+                                lumTotal += lum2 * weight;
+                            }
+                        }
+                        lum = lumTotal / weightTotal;
+                    }
+                }
+                *dstPixel = (byte) lum;
+            }
+        }
+    }
+
+    private static int[] BuildFilter()
+    {
+        const int s = FILTER_SIZE / 2;
+        var filter = new int[FILTER_SIZE * FILTER_SIZE];
+        for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
+        {
+            for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
+            {
+                int dx = filterX - s;
+                int dy = filterY - s;
+                var dmax = Math.Sqrt(2 * s * s);
+                var d = Math.Sqrt(dx * dx + dy * dy) / dmax;
+                filter[filterX + filterY * FILTER_SIZE] = (int) ((1 - d) * 256);
+            }
+        }
+        return filter;
+    }
+
+    private static int[] BuildRgbaDiffWeights()
+    {
+        var diffWeights = new int[256 * 3 * 2];
+        for (int i = 0; i < COLOR_DIST_MAX * 3; i++)
+        {
+            diffWeights[256 * 3 + i] = COLOR_DIST_MAX - i / 3;
+            diffWeights[256 * 3 - i] = COLOR_DIST_MAX - i / 3;
+        }
+        return diffWeights;
+    }
+
+    private static int[] BuildGrayDiffWeights()
+    {
+        var diffWeights = new int[256 * 2];
+        for (int i = 0; i < COLOR_DIST_MAX; i++)
+        {
+            diffWeights[256 + i] = COLOR_DIST_MAX - i;
+            diffWeights[256 - i] = COLOR_DIST_MAX - i;
+        }
+        return diffWeights;
     }
 }
