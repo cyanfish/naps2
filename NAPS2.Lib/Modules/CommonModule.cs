@@ -57,7 +57,7 @@ public class CommonModule : Module
         // Misc
         builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();
         builder.RegisterType<AutofacOperationFactory>().As<IOperationFactory>();
-        builder.RegisterInstance(new UiImageList());
+        builder.RegisterType<UiImageList>().AsSelf().SingleInstance();
         builder.RegisterType<StillImage>().AsSelf().SingleInstance();
         builder.RegisterType<AutoSaver>().AsSelf().SingleInstance();
         // TODO: Use PdfiumWorkerCoordinator?

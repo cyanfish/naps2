@@ -265,7 +265,7 @@ internal class AutomatedScanning
         foreach (var scan in _scanList)
         {
             // To take advantage of the existing mutation logic we wrap the scan in a UiImageList then copy it back
-            var imageList = new UiImageList(scan.Select(x => new UiImage(x)).ToList());
+            var imageList = UiImageList.FromImages(scan.Select(x => new UiImage(x)).ToList());
 
             if (_options.AltDeinterleave)
             {

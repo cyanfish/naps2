@@ -5,6 +5,8 @@ namespace NAPS2.Images;
 
 public class UiImageList
 {
+    public static UiImageList FromImages(List<UiImage> images) => new(images);
+
     private ListSelection<UiImage> _selection;
     private StateToken _savedState = new(ImmutableList<ProcessedImage.WeakReference>.Empty);
 
@@ -12,7 +14,7 @@ public class UiImageList
     {
     }
 
-    public UiImageList(List<UiImage> images)
+    private UiImageList(List<UiImage> images)
     {
         Images = images.ToImmutableList();
         _selection = ListSelection.Empty<UiImage>();
