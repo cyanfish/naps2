@@ -183,7 +183,8 @@ public class DesktopCommands
         // TODO: Make this an image form with options
         DocumentCorrection = new ActionCommand(imageListActions.DocumentCorrection)
         {
-            Text = UiStrings.DocumentCorrection
+            Text = UiStrings.DocumentCorrection,
+            Image = iconProvider.GetIcon("document")
         };
         ResetImage = new ActionCommand(desktopController.ResetImage)
         {
