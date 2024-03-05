@@ -149,7 +149,6 @@ public abstract class DesktopForm : EtoFormBase
         }
         if (ImageList.Selection.Any())
         {
-            // TODO: Remove icon from delete command somehow
             // TODO: Is this memory leaking (because of event handlers) when commands are converted to menuitems?
             _contextMenu.Items.AddRange(
             [
