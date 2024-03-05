@@ -422,6 +422,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] copy {
+            get {
+                object obj = ResourceManager.GetObject("copy", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] cross {
             get {
                 object obj = ResourceManager.GetObject("cross", resourceCulture);
@@ -622,6 +632,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] paste {
+            get {
+                object obj = ResourceManager.GetObject("paste", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] pdf_email {
             get {
                 object obj = ResourceManager.GetObject("pdf_email", resourceCulture);
@@ -705,6 +725,16 @@ namespace NAPS2 {
         internal static byte[] printer {
             get {
                 object obj = ResourceManager.GetObject("printer", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] redo {
+            get {
+                object obj = ResourceManager.GetObject("redo", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -875,6 +905,16 @@ namespace NAPS2 {
         internal static byte[] transform_flip {
             get {
                 object obj = ResourceManager.GetObject("transform_flip", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] undo {
+            get {
+                object obj = ResourceManager.GetObject("undo", resourceCulture);
                 return ((byte[])(obj));
             }
         }

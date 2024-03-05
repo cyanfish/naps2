@@ -308,22 +308,25 @@ public class DesktopCommands
         Copy = new ActionCommand(desktopController.Copy)
         {
             Text = UiStrings.Copy,
+            Image = iconProvider.GetIcon("copy"),
             Shortcut = Application.Instance.CommonModifier | Keys.C
         };
         Paste = new ActionCommand(desktopController.Paste)
         {
             Text = UiStrings.Paste,
+            Image = iconProvider.GetIcon("paste"),
             Shortcut = Application.Instance.CommonModifier | Keys.V
         };
-        // TODO: Undo/redo icons?
         Undo = new ActionCommand(imageListActions.Undo)
         {
             Text = UiStrings.Undo,
+            Image = iconProvider.GetIcon("undo"),
             Shortcut = Application.Instance.CommonModifier | Keys.Z
         };
         Redo = new ActionCommand(imageListActions.Redo)
         {
             Text = UiStrings.Redo,
+            Image = iconProvider.GetIcon("redo"),
             Shortcut = EtoPlatform.Current.IsWinForms
                 ? Application.Instance.CommonModifier | Keys.Y
                 : Application.Instance.CommonModifier | Keys.Shift | Keys.Z
