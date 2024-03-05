@@ -373,6 +373,10 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr ""
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr ""
@@ -1108,6 +1112,14 @@ msgstr ""
 msgid "Recovery Progress"
 msgstr ""
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr ""
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr ""
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr ""
@@ -1372,6 +1384,10 @@ msgstr ""
 msgid "Skip save prompt"
 msgstr ""
 
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr ""
@@ -1506,6 +1522,14 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
+msgstr ""
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr ""
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
 msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
