@@ -303,6 +303,9 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.Sharpen)
                 .Append(Commands.DocumentCorrection)
                 .Separator()
+                .Append(Commands.Split)
+                .Append(Commands.Combine)
+                .Separator()
                 .Append(Commands.ResetImage));
         if (!hiddenButtons.HasFlag(ToolbarButtons.Rotate))
             CreateToolbarMenu(Commands.RotateMenu, GetRotateMenuProvider());

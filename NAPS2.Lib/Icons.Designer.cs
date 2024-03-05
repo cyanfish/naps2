@@ -372,6 +372,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] combine {
+            get {
+                object obj = ResourceManager.GetObject("combine", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] contrast {
             get {
                 object obj = ResourceManager.GetObject("contrast", resourceCulture);
@@ -845,6 +855,16 @@ namespace NAPS2 {
         internal static byte[] sharpen {
             get {
                 object obj = ResourceManager.GetObject("sharpen", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] split {
+            get {
+                object obj = ResourceManager.GetObject("split", resourceCulture);
                 return ((byte[])(obj));
             }
         }

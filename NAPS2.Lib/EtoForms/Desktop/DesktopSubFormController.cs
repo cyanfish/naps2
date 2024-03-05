@@ -25,6 +25,9 @@ public class DesktopSubFormController : IDesktopSubFormController
     public void ShowHueSaturationForm() => ShowImageForm<HueSatForm>();
     public void ShowBlackWhiteForm() => ShowImageForm<BlackWhiteForm>();
     public void ShowSharpenForm() => ShowImageForm<SharpenForm>();
+    public void ShowSplitForm() => ShowImageForm<SplitForm>();
+    public void ShowCombineForm() => ShowImageForm<CombineForm>();
+
     public void ShowRotateForm() => ShowImageForm<RotateForm>();
 
     private void ShowImageForm<T>() where T : ImageFormBase

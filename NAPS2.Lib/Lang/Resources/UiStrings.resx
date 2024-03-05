@@ -888,4 +888,10 @@
   <data name="ShowNativeTwainProgress" xml:space="preserve">
     <value>Show native TWAIN progress</value>
   </data>
+  <data name="Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combine</value>
+  </data>
 </root>

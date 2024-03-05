@@ -403,4 +403,10 @@
   <data name="document" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\document.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="split" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\split.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="combine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\combine.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

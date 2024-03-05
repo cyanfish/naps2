@@ -186,6 +186,16 @@ public class DesktopCommands
             Text = UiStrings.DocumentCorrection,
             Image = iconProvider.GetIcon("document")
         };
+        Split = new ActionCommand(desktopSubFormController.ShowSplitForm)
+        {
+            Text = UiStrings.Split,
+            Image = iconProvider.GetIcon("split")
+        };
+        Combine = new ActionCommand(desktopSubFormController.ShowCombineForm)
+        {
+            Text = UiStrings.Combine,
+            Image = iconProvider.GetIcon("combine")
+        };
         ResetImage = new ActionCommand(desktopController.ResetImage)
         {
             Text = UiStrings.Reset
@@ -379,6 +389,8 @@ public class DesktopCommands
     public ActionCommand BlackWhite { get; set; }
     public ActionCommand Sharpen { get; set; }
     public ActionCommand DocumentCorrection { get; set; }
+    public ActionCommand Split { get; set; }
+    public ActionCommand Combine { get; set; }
     public ActionCommand ResetImage { get; set; }
     public ActionCommand RotateMenu { get; set; }
     public ActionCommand RotateLeft { get; set; }
