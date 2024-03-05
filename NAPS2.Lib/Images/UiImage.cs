@@ -79,7 +79,7 @@ public class UiImage : IDisposable
 
     public void AddTransform(Transform transform, IMemoryImage? prerenderedThumbnail = null)
     {
-        AddTransforms(new[] { transform }, prerenderedThumbnail);
+        AddTransforms([transform], prerenderedThumbnail);
     }
 
     public void AddTransforms(IEnumerable<Transform> transforms, IMemoryImage? prerenderedThumbnail = null)
@@ -111,6 +111,20 @@ public class UiImage : IDisposable
         }
     }
 
+    public void ReplaceTransformState(TransformState oldTransformState, TransformState newTransformState)
+    {
+        lock (this)
+        {
+            if (TransformState != oldTransformState)
+            {
+                return;
+            }
+            _processedImage = _processedImage.WithTransformState(newTransformState, true);
+            _saved = false;
+        }
+        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+    }
+
     public void ResetTransforms()
     {
         lock (this)
@@ -119,9 +133,7 @@ public class UiImage : IDisposable
             {
                 return;
             }
-            var newImage = _processedImage.WithNoTransforms();
-            _processedImage.Dispose();
-            _processedImage = newImage;
+            _processedImage = _processedImage.WithNoTransforms(true);
             _saved = false;
         }
         ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
@@ -166,6 +178,8 @@ public class UiImage : IDisposable
 
     public bool HasUnsavedChanges => !_saved;
 
+    public TransformState TransformState => _processedImage.TransformState;
+
     public EventHandler? ThumbnailChanged;
 
     public EventHandler? ThumbnailInvalidated;
@@ -177,5 +191,4 @@ public class UiImage : IDisposable
             return new ImageRenderState(_processedImage.GetWeakReference(), _thumbnailTransformState, _thumbnail, this);
         }
     }
-
 }

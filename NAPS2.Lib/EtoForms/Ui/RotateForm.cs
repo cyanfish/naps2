@@ -13,24 +13,21 @@ public class RotateForm : ImageFormBase
     private bool _guideExists;
     private PointF _guideStart, _guideEnd;
 
-    public RotateForm(Naps2Config config, ThumbnailController thumbnailController, IIconProvider iconProvider) :
-        base(config, thumbnailController)
+    public RotateForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+        IIconProvider iconProvider) :
+        base(config, imageList, thumbnailController)
     {
         Icon = new Icon(1f, Icons.arrow_rotate_anticlockwise_small.ToEtoImage());
         Title = UiStrings.Rotate;
 
         _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small");
-        Sliders = new[] { _angleSlider };
+        Sliders = [_angleSlider];
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
     }
 
-    protected override IEnumerable<Transform> Transforms =>
-        new Transform[]
-        {
-            new RotationTransform((double) _angleSlider.DecimalValue)
-        };
+    protected override List<Transform> Transforms => [new RotationTransform((double) _angleSlider.DecimalValue)];
 
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
     {

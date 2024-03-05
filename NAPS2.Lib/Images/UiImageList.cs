@@ -5,7 +5,11 @@ namespace NAPS2.Images;
 
 public class UiImageList
 {
+    private const int MAX_UNDO_LENGTH = 20;
+
     public static UiImageList FromImages(List<UiImage> images) => new(images);
+
+    private readonly UndoStack _undoStack = new(MAX_UNDO_LENGTH);
 
     private ListSelection<UiImage> _selection;
     private StateToken _savedState = new(ImmutableList<ProcessedImage.WeakReference>.Empty);
@@ -32,6 +36,10 @@ public class UiImageList
     }
 
     public bool HasUnsavedChanges => _savedState != CurrentState || Images.Any(x => x.HasUnsavedChanges);
+
+    public bool CanUndo => _undoStack.CanUndo;
+
+    public bool CanRedo => _undoStack.CanRedo;
 
     public event EventHandler? SelectionChanged;
 
@@ -78,24 +86,25 @@ public class UiImageList
     }
 
     public void Mutate(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null,
-        bool isPassiveInteraction = false)
+        bool isPassiveInteraction = false, bool updateUndoStack = true)
     {
-        MutateInternal(mutation, selectionToMutate, isPassiveInteraction);
+        MutateInternal(mutation, selectionToMutate, isPassiveInteraction, updateUndoStack);
     }
 
     public async Task MutateAsync(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null,
-        bool isPassiveInteraction = false)
+        bool isPassiveInteraction = false, bool updateUndoStack = true)
     {
-        await Task.Run(() => MutateInternal(mutation, selectionToMutate, isPassiveInteraction));
+        await Task.Run(() => MutateInternal(mutation, selectionToMutate, isPassiveInteraction, updateUndoStack));
     }
 
     private void MutateInternal(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate,
-        bool isPassiveInteraction)
+        bool isPassiveInteraction, bool updateUndoStack)
     {
         lock (this)
         {
             var currentSelection = _selection;
-            var before = new HashSet<UiImage>(Images);
+            var before = Images.ToList();
+            var beforeTransforms = before.Select(img => img.TransformState).ToList();
             var mutableImages = Images.ToList();
             if (!ReferenceEquals(selectionToMutate, null))
             {
@@ -106,7 +115,8 @@ public class UiImageList
                 mutation.Apply(mutableImages, ref currentSelection);
             }
             Images = mutableImages.ToImmutableList();
-            var after = new HashSet<UiImage>(Images);
+            var after = Images.ToList();
+            var afterTransforms = after.Select(img => img.TransformState).ToList();
 
             foreach (var added in after.Except(before))
             {
@@ -120,12 +130,33 @@ public class UiImageList
                 removed.Dispose();
             }
 
+            if (updateUndoStack)
+            {
+                MaybeAddToUndoStack(before, beforeTransforms, after, afterTransforms);
+            }
+
             if (currentSelection != _selection)
             {
                 UpdateSelectionOnUiThread(currentSelection);
             }
         }
         ImagesUpdated?.Invoke(this, new ImageListEventArgs(isPassiveInteraction));
+    }
+
+    private void MaybeAddToUndoStack(
+        List<UiImage> before, List<TransformState> beforeTransforms,
+        List<UiImage> after, List<TransformState> afterTransforms)
+    {
+        if (ReplaceRangeUndoElement.FromFullList(this, before, after)
+            is { } replaceRangeUndoElement)
+        {
+            _undoStack.Push(replaceRangeUndoElement);
+        }
+        if (TransformImagesUndoElement.FromFullList(before, beforeTransforms, after, afterTransforms)
+            is { } replaceTransformsUndoElement)
+        {
+            _undoStack.Push(replaceTransformsUndoElement);
+        }
     }
 
     private void UpdateSelectionOnUiThread(ListSelection<UiImage> currentSelection)
@@ -152,6 +183,36 @@ public class UiImageList
     {
         // A thumbnail invalidation indicates an image edit which is an active interaction.
         ImagesThumbnailInvalidated?.Invoke(this, new ImageListEventArgs(true));
+    }
+
+    public async Task Undo()
+    {
+        await Task.Run(() =>
+        {
+            lock (this)
+            {
+                _undoStack.Undo();
+            }
+        });
+    }
+
+    public async Task Redo()
+    {
+        await Task.Run(() =>
+        {
+            lock (this)
+            {
+                _undoStack.Redo();
+            }
+        });
+    }
+
+    public void PushUndoElement(IUndoElement undoElement)
+    {
+        lock (this)
+        {
+            _undoStack.Push(undoElement);
+        }
     }
 
     /// <summary>

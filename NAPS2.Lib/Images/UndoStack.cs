@@ -1,80 +1,54 @@
-using System.Collections.Immutable;
-
 namespace NAPS2.Images;
 
-// TODO: Actually implement undo in the UI
-public class UndoStack : IDisposable
+public class UndoStack
 {
     private readonly int _maxLength;
-    private readonly LinkedList<Memento> _stack;
-    private LinkedListNode<Memento> _current;
+    private readonly List<IUndoElement> _stack = [];
+    private int _position = 0;
 
     public UndoStack(int maxLength)
     {
         _maxLength = maxLength;
-        _stack = [];
-        _stack.AddFirst(Memento.Empty);
-        _current = _stack.First!;
     }
 
-    public Memento Current => _current.Value;
-
-    public bool Push(IEnumerable<ProcessedImage> images)
+    public bool Push(IUndoElement element)
     {
-        return Push(new Memento(images.ToImmutableList()));
-    }
-
-    public bool Push(Memento memento)
-    {
-        if (_stack.First!.Value == memento)
-        {
-            return false;
-        }
         ClearRedo();
-        _stack.AddFirst(memento);
-        _current = _stack.First;
-        Trim();
-        return true;
-    }
-
-    private void Trim()
-    {
-        while (_stack.Count > _maxLength && _stack.Last != _current)
+        _stack.Insert(0, element);
+        if (_stack.Count > _maxLength)
         {
-            _stack.Last!.Value.Dispose();
-            _stack.RemoveLast();
+            _stack.RemoveRange(_maxLength, _stack.Count - _maxLength);
         }
+        return true;
     }
 
     public void ClearRedo()
     {
-        while (_stack.First != _current)
-        {
-            _stack.First!.Value.Dispose();
-            _stack.RemoveFirst();
-        }
+        _stack.RemoveRange(0, _position);
+        _position = 0;
     }
 
     public void ClearUndo()
     {
-        while (_stack.Last != _current)
-        {
-            _stack.Last!.Value.Dispose();
-            _stack.RemoveLast();
-        }
+        _stack.RemoveRange(_position, _stack.Count - _position);
     }
-        
+
     public void ClearBoth()
     {
         ClearRedo();
         ClearUndo();
     }
 
+    public bool CanUndo => _position < _stack.Count;
+
+    public bool CanRedo => _position > 0;
+
     public bool Undo()
     {
-        if (_current.Next != null)
+        if (CanUndo)
         {
-            _current = _current.Next;
+            _position++;
+            _stack[_position - 1].ApplyUndo();
             return true;
         }
         return false;
@@ -82,19 +56,12 @@ public class UndoStack : IDisposable
 
     public bool Redo()
     {
-        if (_current.Previous != null)
+        if (CanRedo)
         {
-            _current = _current.Previous;
+            _position--;
+            _stack[_position].ApplyRedo();
             return true;
         }
         return false;
-    }
-
-    public void Dispose()
-    {
-        foreach (var memento in _stack)
-        {
-            memento.Dispose();
-        }
     }
 }

@@ -181,7 +181,7 @@ public class DesktopCommands
             Image = iconProvider.GetIcon("sharpen")
         };
         // TODO: Make this an image form with options
-        DocumentCorrection = new ActionCommand(desktopController.RunDocumentCorrection)
+        DocumentCorrection = new ActionCommand(imageListActions.DocumentCorrection)
         {
             Text = UiStrings.DocumentCorrection
         };
@@ -286,7 +286,9 @@ public class DesktopCommands
         About = new ActionCommand(desktopSubFormController.ShowAboutForm)
         {
             Text = UiStrings.About,
-            Image = iconProvider.GetIcon(hiddenButtons.HasFlag(ToolbarButtons.Settings) ? "information" : "information_small")
+            Image = iconProvider.GetIcon(hiddenButtons.HasFlag(ToolbarButtons.Settings)
+                ? "information"
+                : "information_small")
         };
         ZoomIn = new ActionCommand(() => thumbnailController.StepSize(1))
         {
@@ -312,6 +314,19 @@ public class DesktopCommands
         {
             Text = UiStrings.Paste,
             Shortcut = Application.Instance.CommonModifier | Keys.V
+        };
+        // TODO: Undo/redo icons?
+        Undo = new ActionCommand(imageListActions.Undo)
+        {
+            Text = UiStrings.Undo,
+            Shortcut = Application.Instance.CommonModifier | Keys.Z
+        };
+        Redo = new ActionCommand(imageListActions.Redo)
+        {
+            Text = UiStrings.Redo,
+            Shortcut = EtoPlatform.Current.IsWinForms
+                ? Application.Instance.CommonModifier | Keys.Y
+                : Application.Instance.CommonModifier | Keys.Shift | Keys.Z
         };
     }
 
@@ -387,4 +402,6 @@ public class DesktopCommands
     public ActionCommand SelectAll { get; set; }
     public ActionCommand Copy { get; set; }
     public ActionCommand Paste { get; set; }
+    public ActionCommand Undo { get; set; }
+    public ActionCommand Redo { get; set; }
 }

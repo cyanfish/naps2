@@ -7,6 +7,7 @@ namespace NAPS2.EtoForms.Ui;
 
 public abstract class ImageFormBase : EtoDialogBase
 {
+    private readonly UiImageList _imageList;
     private readonly ThumbnailController _thumbnailController;
 
     private readonly ImageView _imageView = new();
@@ -18,8 +19,10 @@ public abstract class ImageFormBase : EtoDialogBase
     // Image bounds in the coordinate space of the overlay control
     protected float _overlayT, _overlayL, _overlayR, _overlayB, _overlayW, _overlayH;
 
-    public ImageFormBase(Naps2Config config, ThumbnailController thumbnailController) : base(config)
+    public ImageFormBase(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController) :
+        base(config)
     {
+        _imageList = imageList;
         _thumbnailController = thumbnailController;
         _revert.Click += Revert;
         _renderThrottle = new RefreshThrottle(RenderImage);
@@ -132,11 +135,11 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected bool CanScaleWorkingImage { get; set; } = true;
 
-    protected virtual IEnumerable<Transform> Transforms => throw new NotImplementedException();
+    protected virtual List<Transform> Transforms => throw new NotImplementedException();
 
     private bool TransformMultiple => SelectedImages != null && _applyToSelected.IsChecked();
 
-    private IEnumerable<UiImage> ImagesToTransform => TransformMultiple ? SelectedImages! : Enumerable.Repeat(Image, 1);
+    private List<UiImage> ImagesToTransform => TransformMultiple ? SelectedImages! : [Image];
 
     protected virtual IMemoryImage RenderPreview()
     {
@@ -214,21 +217,18 @@ public abstract class ImageFormBase : EtoDialogBase
 
     private void Apply()
     {
-        if (Transforms.Any(x => !x.IsNull))
+        IMemoryImage? firstImageThumb = null;
+        if (WorkingImage != null)
         {
-            foreach (var img in ImagesToTransform)
-            {
-                IMemoryImage? updatedThumb = null;
-                if (img == Image && WorkingImage != null)
-                {
-                    // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
-                    var transformed = WorkingImage.Clone().PerformAllTransforms(Transforms);
-                    updatedThumb =
-                        transformed.PerformTransform(new ThumbnailTransform(_thumbnailController.RenderSize));
-                }
-                img.AddTransforms(Transforms, updatedThumb);
-            }
+            // Optimize thumbnail rendering for the first (or only) image since we already have it loaded into memory
+            var transformed = WorkingImage.Clone().PerformAllTransforms(Transforms);
+            firstImageThumb =
+                transformed.PerformTransform(new ThumbnailTransform(_thumbnailController.RenderSize));
         }
+        var mutation = new ImageListMutation.AddTransforms(
+            Transforms.ToList(),
+            new Dictionary<UiImage, IMemoryImage?> { [Image] = firstImageThumb });
+        _imageList.Mutate(mutation, ListSelection.From(ImagesToTransform));
         TransformSaved();
     }
 

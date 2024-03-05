@@ -94,6 +94,10 @@ public class MacDesktopForm : DesktopForm
                         Commands.SelectAll,
                         Commands.Copy,
                         Commands.Paste,
+                        new SeparatorMenuItem(),
+                        Commands.Undo,
+                        Commands.Redo,
+                        new SeparatorMenuItem(),
                         Commands.Delete
                     }
                 },

@@ -8,7 +8,7 @@ public class DeskewOperation : OperationBase
         AllowBackground = true;
     }
 
-    public bool Start(ICollection<UiImage> images, DeskewParams deskewParams)
+    public bool Start(UiImageList imageList, List<UiImage> images, DeskewParams deskewParams)
     {
         ProgressTitle = MiscResources.AutoDeskewProgress;
         Status = new OperationStatus
@@ -19,7 +19,9 @@ public class DeskewOperation : OperationBase
 
         RunAsync(async () =>
         {
-            return await Pipeline.For(images, CancelToken).RunParallel(img =>
+            var beforeTransforms = new List<TransformState>();
+            var afterTransforms = new List<TransformState>();
+            var result = await Pipeline.For(images, CancelToken).StepParallel(img =>
             {
                 using var processedImage = img.GetClonedImage();
                 var image = processedImage.Render();
@@ -32,18 +34,27 @@ public class DeskewOperation : OperationBase
                     var thumbnail = deskewParams.ThumbnailSize.HasValue
                         ? image.PerformTransform(new ThumbnailTransform(deskewParams.ThumbnailSize.Value))
                         : null;
+                    var before = img.TransformState;
                     img.AddTransform(transform, thumbnail);
+                    var after = img.TransformState;
                     lock (this)
                     {
                         Status.CurrentProgress += 1;
                     }
                     InvokeStatusChanged();
+                    return (before, after);
                 }
                 finally
                 {
                     image.Dispose();
                 }
+            }).Run(transformState =>
+            {
+                beforeTransforms.Add(transformState.before);
+                afterTransforms.Add(transformState.after);
             });
+            imageList.PushUndoElement(new TransformImagesUndoElement(images, beforeTransforms, afterTransforms));
+            return result;
         });
 
         return true;

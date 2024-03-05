@@ -105,6 +105,7 @@ public abstract class DesktopForm : EtoFormBase
         _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
         ImageList.SelectionChanged += ImageList_SelectionChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
+        ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
         _notificationArea = new NotificationArea(_notificationManager, LayoutController);
     }
@@ -158,6 +159,9 @@ public abstract class DesktopForm : EtoFormBase
                 Commands.Copy,
                 Commands.Paste,
                 new SeparatorMenuItem(),
+                Commands.Undo,
+                Commands.Redo,
+                new SeparatorMenuItem(),
                 Commands.Delete
             ]);
         }
@@ -166,7 +170,10 @@ public abstract class DesktopForm : EtoFormBase
             _contextMenu.Items.AddRange(
             [
                 Commands.SelectAll,
-                Commands.Paste
+                Commands.Paste,
+                new SeparatorMenuItem(),
+                Commands.Undo,
+                Commands.Redo
             ]);
         }
     }
@@ -182,7 +189,12 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
     {
-        Invoker.Current.Invoke(UpdateToolbar);
+        Invoker.Current.InvokeDispatch(UpdateToolbar);
+    }
+
+    private void ImageList_ImagesThumbnailInvalidated(object? sender, ImageListEventArgs e)
+    {
+        Invoker.Current.InvokeDispatch(UpdateToolbar);
     }
 
     private void ProfileManager_ProfilesUpdated(object? sender, EventArgs e)
@@ -232,6 +244,7 @@ public abstract class DesktopForm : EtoFormBase
         _thumbnailController.ThumbnailSizeChanged -= ThumbnailController_ThumbnailSizeChanged;
         ImageList.SelectionChanged -= ImageList_SelectionChanged;
         ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
+        ImageList.ImagesThumbnailInvalidated -= ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
         _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
@@ -483,6 +496,9 @@ public abstract class DesktopForm : EtoFormBase
 
         // Other
         Commands.SelectAll.Enabled = ImageList.Images.Any();
+        Commands.Undo.Enabled = ImageList.CanUndo;
+        Commands.Redo.Enabled = ImageList.CanRedo;
+        // TODO: Set undo/redo text here (e.g. "Undo Brightness/Contrast" instead of just "Undo")
         Commands.ZoomIn.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize < ThumbnailSizes.MAX_SIZE;
         Commands.ZoomOut.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
         Commands.NewProfile.Enabled =

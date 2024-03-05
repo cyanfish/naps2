@@ -56,12 +56,22 @@ public class ProcessedImage : IRenderableImage, IPdfRendererProvider, IDisposabl
     /// appended to the TransformState. All instances will need to be disposed before the underlying image storage is
     /// disposed.
     /// </summary>
-    /// <param name="transform"></param>
-    /// <returns></returns>
-    public ProcessedImage WithTransform(Transform transform, bool disposeSelf = false)
+    public ProcessedImage WithTransform(Transform transform, bool disposeSelf = false) =>
+        WithTransformState(TransformState.AddOrSimplify(transform), disposeSelf);
+
+    /// <summary>
+    /// Creates a new ProcessedImage instance with the same underlying image storage/metadata and no transforms. All
+    /// instances will need to be disposed before the underlying image storage is disposed.
+    /// </summary>
+    public ProcessedImage WithNoTransforms(bool disposeSelf = false) =>
+        WithTransformState(TransformState.Empty, disposeSelf);
+
+    /// <summary>
+    /// Creates a new ProcessedImage instance with the same underlying image storage/metadata and a new transform
+    /// state. All instances will need to be disposed before the underlying image storage is disposed.
+    /// </summary>
+    public ProcessedImage WithTransformState(TransformState newTransformState, bool disposeSelf = false)
     {
-        // TODO: Should metadata update for some transforms?
-        var newTransformState = TransformState.AddOrSimplify(transform);
         var result =
             new ProcessedImage(ImageContext, Storage, Metadata, PostProcessingData, newTransformState, _token.RefCount);
         if (disposeSelf)
@@ -70,17 +80,6 @@ public class ProcessedImage : IRenderableImage, IPdfRendererProvider, IDisposabl
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// Creates a new ProcessedImage instance with the same underlying image storage/metadata and no transforms. All
-    /// instances will need to be disposed before the underlying image storage is disposed.
-    /// </summary>
-    /// <returns></returns>
-    public ProcessedImage WithNoTransforms()
-    {
-        return new ProcessedImage(
-            ImageContext, Storage, Metadata, PostProcessingData, TransformState.Empty, _token.RefCount);
     }
 
     public ProcessedImage WithPostProcessingData(PostProcessingData postProcessingData, bool disposeSelf)

@@ -159,6 +159,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Undo {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Redo {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Done</value>
   </data>

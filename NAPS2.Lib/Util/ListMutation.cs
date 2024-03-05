@@ -14,6 +14,9 @@ public abstract class ListMutation<T> where T : notnull
         
     public abstract void Apply(List<T> list, ref ListSelection<T> selection);
 
+    /// <summary>
+    /// Moves the selection one element later in the list.
+    /// </summary>
     public class MoveDown : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -33,6 +36,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Moves the selection one earlier in the list.
+    /// </summary>
     public class MoveUp : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -51,6 +57,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Moves the selection to the specified index in the list.
+    /// </summary>
     public class MoveTo : ListMutation<T>
     {
         private readonly int _destinationIndex;
@@ -86,6 +95,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Converts lists in the order 1,3,5,2,4,6 to 1,2,3,4,5,6.
+    /// </summary>
     public class Interleave : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -107,6 +119,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Converts lists in the order 1,2,3,4,5,6 to 1,3,5,2,4,6.
+    /// </summary>
     public class Deinterleave : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -132,6 +147,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Converts lists in the order 1,3,5,6,4,2 to 1,2,3,4,5,6.
+    /// </summary>
     public class AltInterleave : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -153,6 +171,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Converts lists in the order 1,2,3,4,5,6 to 1,3,5,6,4,2.
+    /// </summary>
     public class AltDeinterleave : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -178,6 +199,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Reverses the order of the entire list.
+    /// </summary>
     public class ReverseAll : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -186,6 +210,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Reverses the order of the selection.
+    /// </summary>
     public class ReverseSelection : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -202,7 +229,10 @@ public abstract class ListMutation<T> where T : notnull
             }
         }
     }
-        
+
+    /// <summary>
+    /// Deletes all elements from the list.
+    /// </summary>
     public class DeleteAll : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -216,6 +246,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Deletes the selection from the list.
+    /// </summary>
     public class DeleteSelected : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
@@ -229,6 +262,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Inserts the given item at the given index.
+    /// </summary>
     public class InsertAt : ListMutation<T>
     {
         private readonly int _index;
@@ -246,6 +282,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Inserts the given item after the given predecessor (or at the end of the list if none).
+    /// </summary>
     public class InsertAfter : ListMutation<T>
     {
         private readonly T _itemToInsert;
@@ -274,6 +313,9 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Replaces the selection with the given item.
+    /// </summary>
     public class ReplaceWith : ListMutation<T>
     {
         private readonly T _newItem;
@@ -308,6 +350,53 @@ public abstract class ListMutation<T> where T : notnull
         }
     }
 
+    /// <summary>
+    /// Replaces the given sequence of items with a different sequence of items. Both sequences must be non-empty,
+    /// and if the original sequence isn't present nothing happens.
+    /// </summary>
+    public class ReplaceRange : ListMutation<T>
+    {
+        private readonly List<T> _oldRange;
+        private readonly List<T> _newRange;
+
+        public ReplaceRange(List<T> oldRange, List<T> newRange)
+        {
+            if (oldRange.Count == 0 || newRange.Count == 0) throw new ArgumentException();
+            _oldRange = oldRange;
+            _newRange = newRange;
+        }
+
+        public override void Apply(List<T> list, ref ListSelection<T> selection)
+        {
+            int index = -1;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(list[i], _oldRange[0]))
+                {
+                    bool match = true;
+                    for (int j = 0; j < _oldRange.Count; j++)
+                    {
+                        if (!EqualityComparer<T>.Default.Equals(list[i + j], _oldRange[j]))
+                        {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (match)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            list.RemoveRange(index, _oldRange.Count);
+            list.InsertRange(index, _newRange);
+        }
+    }
+
+    /// <summary>
+    /// Appends the given item(s) to the end of the list.
+    /// </summary>
     public class Append : ListMutation<T>
     {
         private readonly List<T> _items;

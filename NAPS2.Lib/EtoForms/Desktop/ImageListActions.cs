@@ -70,6 +70,10 @@ public class ImageListActions
 
     public async Task Flip() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(180), Selection);
 
+    public void DocumentCorrection() =>
+        _imageList.Mutate(new ImageListMutation.AddTransforms([new CorrectionTransform(CorrectionMode.Document)]),
+            Selection);
+
     // TODO: Does it make sense to move this method somewhere else?
     public void Deskew()
     {
@@ -80,7 +84,7 @@ public class ImageListActions
         }
 
         var op = _operationFactory.Create<DeskewOperation>();
-        if (op.Start(images, new DeskewParams { ThumbnailSize = _thumbnailController.RenderSize }))
+        if (op.Start(_imageList, images.ToList(), new DeskewParams { ThumbnailSize = _thumbnailController.RenderSize }))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -92,6 +96,10 @@ public class ImageListActions
     public void ResetTransforms() => _imageList.Mutate(new ImageListMutation.ResetTransforms(), Selection);
 
     public void SelectAll() => _imageList.UpdateSelection(ListSelection.From(_imageList.Images));
+
+    public async Task Undo() => await _imageList.Undo();
+
+    public async Task Redo() => await _imageList.Redo();
 
     public Task SaveAllAsPdf() => _exportController.SavePdf(_imageList.Images, _notify);
     public Task SaveSelectedAsPdf() => _exportController.SavePdf(_imageList.Selection, _notify);

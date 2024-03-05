@@ -31,8 +31,9 @@ public class CropForm : ImageFormBase
     private bool _freeformAvailable;
     private bool _freeformActive;
 
-    public CropForm(Naps2Config config, ThumbnailController thumbnailController, ColorScheme colorScheme) :
-        base(config, thumbnailController)
+    public CropForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+        ColorScheme colorScheme) :
+        base(config, imageList, thumbnailController)
     {
         _colorScheme = colorScheme;
         Icon = new Icon(1f, Icons.transform_crop.ToEtoImage());
@@ -80,17 +81,16 @@ public class CropForm : ImageFormBase
         return WorkingImage!.Clone();
     }
 
-    protected override IEnumerable<Transform> Transforms =>
-        new Transform[]
-        {
-            new CropTransform(
-                (int) Math.Round(_realL),
-                (int) Math.Round(_realR),
-                (int) Math.Round(_realT),
-                (int) Math.Round(_realB),
-                ImageWidth,
-                ImageHeight)
-        };
+    protected override List<Transform> Transforms =>
+    [
+        new CropTransform(
+            (int) Math.Round(_realL),
+            (int) Math.Round(_realR),
+            (int) Math.Round(_realT),
+            (int) Math.Round(_realB),
+            ImageWidth,
+            ImageHeight)
+    ];
 
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
     {
