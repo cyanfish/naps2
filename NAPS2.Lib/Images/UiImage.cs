@@ -10,7 +10,6 @@ public class UiImage : IDisposable
     private IMemoryImage? _thumbnail;
     private TransformState? _thumbnailTransformState;
     private bool _saved;
-    private bool _disposed;
 
     public UiImage(ProcessedImage image)
     {
@@ -62,11 +61,11 @@ public class UiImage : IDisposable
     {
         lock (this)
         {
-            if (_disposed)
+            if (IsDisposed)
             {
                 return;
             }
-            _disposed = true;
+            IsDisposed = true;
             _processedImage.Dispose();
 
             if (_thumbnail != null)
@@ -173,6 +172,8 @@ public class UiImage : IDisposable
         }
         ThumbnailChanged?.Invoke(this, EventArgs.Empty);
     }
+
+    public bool IsDisposed { get; private set; }
 
     public bool IsThumbnailDirty => _thumbnailTransformState != _processedImage.TransformState;
 

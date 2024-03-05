@@ -14,7 +14,10 @@ internal class TransformImagesUndoElement(
     {
         for (int i = 0; i < images.Count; i++)
         {
-            images[i].ReplaceTransformState(toReplace[i], replaceWith[i]);
+            if (!images[i].IsDisposed)
+            {
+                images[i].ReplaceTransformState(toReplace[i], replaceWith[i]);
+            }
         }
     }
 
