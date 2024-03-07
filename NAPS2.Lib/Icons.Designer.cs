@@ -62,6 +62,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] _switch {
+            get {
+                object obj = ResourceManager.GetObject("switch", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] accept {
             get {
                 object obj = ResourceManager.GetObject("accept", resourceCulture);
@@ -375,6 +385,16 @@ namespace NAPS2 {
         internal static byte[] combine {
             get {
                 object obj = ResourceManager.GetObject("combine", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] combine_hor {
+            get {
+                object obj = ResourceManager.GetObject("combine_hor", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -852,6 +872,66 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] shape_align_bottom {
+            get {
+                object obj = ResourceManager.GetObject("shape_align_bottom", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] shape_align_center {
+            get {
+                object obj = ResourceManager.GetObject("shape_align_center", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] shape_align_left {
+            get {
+                object obj = ResourceManager.GetObject("shape_align_left", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] shape_align_middle {
+            get {
+                object obj = ResourceManager.GetObject("shape_align_middle", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] shape_align_right {
+            get {
+                object obj = ResourceManager.GetObject("shape_align_right", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] shape_align_top {
+            get {
+                object obj = ResourceManager.GetObject("shape_align_top", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] sharpen {
             get {
                 object obj = ResourceManager.GetObject("sharpen", resourceCulture);
@@ -865,6 +945,26 @@ namespace NAPS2 {
         internal static byte[] split {
             get {
                 object obj = ResourceManager.GetObject("split", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] split_hor {
+            get {
+                object obj = ResourceManager.GetObject("split_hor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] switch_hor {
+            get {
+                object obj = ResourceManager.GetObject("switch_hor", resourceCulture);
                 return ((byte[])(obj));
             }
         }

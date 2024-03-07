@@ -505,6 +505,7 @@ public abstract class DesktopForm : EtoFormBase
         Commands.ZoomOut.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
         Commands.NewProfile.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
+        Commands.Combine.Enabled = ImageList.Images.Count > 1;
     }
 
     private void UpdateScanButton()

@@ -7,8 +7,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public abstract class ImageFormBase : EtoDialogBase
 {
-    private readonly UiImageList _imageList;
-    private readonly ThumbnailController _thumbnailController;
+    protected readonly UiImageList _imageList;
+    protected readonly ThumbnailController _thumbnailController;
 
     private readonly ImageView _imageView = new();
     private readonly CheckBox _applyToSelected = new();
@@ -41,9 +41,9 @@ public abstract class ImageFormBase : EtoDialogBase
         LayoutController.Content = L.Column(
             Overlay.Scale(),
             CreateControls(),
-            SelectedImages is { Count: > 1 } ? _applyToSelected : C.None(),
+            SelectedImages is { Count: > 1 } && CanApplyToAllSelected ? _applyToSelected : C.None(),
             L.Row(
-                _revert,
+                ShowRevertButton ? _revert : C.None(),
                 C.Filler(),
                 L.OkCancel(
                     C.OkButton(this, beforeClose: Apply),
@@ -55,8 +55,8 @@ public abstract class ImageFormBase : EtoDialogBase
     protected int ImageHeight { get; set; }
     protected int ImageWidth { get; set; }
 
-    protected IMemoryImage? WorkingImage { get; private set; }
-    protected IMemoryImage? DisplayImage { get; private set; }
+    protected IMemoryImage? WorkingImage { get; set; }
+    protected IMemoryImage? DisplayImage { get; set; }
     protected Drawable Overlay { get; } = new();
     protected int OverlayBorderSize { get; set; }
 
@@ -135,6 +135,10 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected bool CanScaleWorkingImage { get; set; } = true;
 
+    protected bool CanApplyToAllSelected { get; set; } = true;
+
+    protected bool ShowRevertButton { get; set; } = true;
+
     protected virtual List<Transform> Transforms => throw new NotImplementedException();
 
     private bool TransformMultiple => SelectedImages != null && _applyToSelected.IsChecked();
@@ -168,6 +172,15 @@ public abstract class ImageFormBase : EtoDialogBase
         base.OnLoad(e);
         _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages?.Count);
 
+        InitDisplayImage();
+        ImageWidth = DisplayImage!.Width;
+        ImageHeight = DisplayImage.Height;
+        InitTransform();
+        UpdatePreviewBox();
+    }
+
+    protected virtual void InitDisplayImage()
+    {
         using var imageToRender = Image.GetClonedImage();
         WorkingImage = imageToRender.Render();
 
@@ -184,13 +197,9 @@ public abstract class ImageFormBase : EtoDialogBase
         }
 
         DisplayImage = WorkingImage.Clone();
-        ImageWidth = DisplayImage.Width;
-        ImageHeight = DisplayImage.Height;
-        InitTransform();
-        UpdatePreviewBox();
     }
 
-    private RectangleF GetScreenWorkingArea()
+    protected RectangleF GetScreenWorkingArea()
     {
         try
         {
@@ -215,7 +224,7 @@ public abstract class ImageFormBase : EtoDialogBase
         _renderThrottle.RunAction();
     }
 
-    private void Apply()
+    protected virtual void Apply()
     {
         IMemoryImage? firstImageThumb = null;
         if (WorkingImage != null)

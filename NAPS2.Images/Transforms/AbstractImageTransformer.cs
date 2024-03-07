@@ -1,7 +1,7 @@
 using NAPS2.Images.Bitwise;
 using NAPS2.Util;
 
-namespace NAPS2.Images.Storage;
+namespace NAPS2.Images.Transforms;
 
 public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryImage
 {

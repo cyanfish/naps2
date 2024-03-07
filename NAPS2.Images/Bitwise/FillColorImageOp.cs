@@ -2,6 +2,9 @@ namespace NAPS2.Images.Bitwise;
 
 public class FillColorImageOp : UnaryBitwiseImageOp
 {
+    public static FillColorImageOp Black => new(0, 0, 0, 255);
+    public static FillColorImageOp White => new(255, 255, 255, 255);
+
     private readonly byte _r, _g, _b, _a;
 
     public FillColorImageOp(byte r, byte g, byte b, byte a)

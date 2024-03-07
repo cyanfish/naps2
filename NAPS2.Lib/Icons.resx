@@ -406,7 +406,37 @@
   <data name="split" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="split_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\split_hor.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="combine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="combine_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\combine_hor.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="switch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\switch.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="switch_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\switch_hor.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shape_align_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\shape_align_top.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shape_align_middle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\shape_align_middle.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shape_align_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\shape_align_bottom.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shape_align_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\shape_align_left.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shape_align_center" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\shape_align_center.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shape_align_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\shape_align_right.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

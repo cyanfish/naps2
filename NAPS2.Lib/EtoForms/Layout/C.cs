@@ -223,4 +223,16 @@ public static class C
     {
         return new SkipLayoutElement();
     }
+
+    public static Button IconButton(Image icon, Action onClick)
+    {
+        var button = new Button
+        {
+            Image = icon,
+            ImagePosition = ButtonImagePosition.Overlay,
+            MinimumSize = new Size(icon.Width + 30, 0)
+        };
+        button.Click += (_, _) => onClick();
+        return button;
+    }
 }
