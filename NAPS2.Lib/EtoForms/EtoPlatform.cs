@@ -39,13 +39,11 @@ public abstract class EtoPlatform
 
     public virtual void RunApplication(Application application, Form mainForm)
     {
-        Invoker.Current = new EtoInvoker(application);
         application.Run(mainForm);
     }
 
     public virtual void RunApplication(Application application)
     {
-        Invoker.Current = new EtoInvoker(application);
         application.Run();
     }
 

@@ -37,7 +37,6 @@ public class WinFormsEtoPlatform : EtoPlatform
         application.MainForm = mainForm;
         mainForm.Show();
         var appContext = new WF.ApplicationContext(mainForm.ToNative());
-        Invoker.Current = new WinFormsInvoker(() => appContext.MainForm!);
         WinFormsDesktopForm.ApplicationContext = appContext;
         var setOptionsMethod =
             typeof(ApplicationHandler).GetMethod("SetOptions", BindingFlags.Instance | BindingFlags.NonPublic);

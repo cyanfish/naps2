@@ -38,6 +38,7 @@ public static class GuiEntryPoint
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();
         application.UnhandledException += UnhandledException;
+        Invoker.Current = new EtoInvoker(application);
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
 

@@ -50,6 +50,7 @@ public static class ConsoleEntryPoint
             var application = EtoPlatform.Current.CreateApplication();
             application.UnhandledException += UnhandledException;
             application.Initialized += (_, _) => scanning.Execute().ContinueWith(_ => application.Quit());
+            Invoker.Current = new EtoInvoker(application);
             EtoPlatform.Current.RunApplication(application);
         }
         else
