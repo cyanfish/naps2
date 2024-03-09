@@ -15,6 +15,10 @@ public abstract class UnaryImageFormBase(
 
     protected IMemoryImage? WorkingImage { get; set; }
 
+    protected int RealImageWidth { get; private set; }
+
+    protected int RealImageHeight { get; private set; }
+
     protected SliderWithTextBox[] Sliders { get; set; } = Array.Empty<SliderWithTextBox>();
 
     protected bool CanScaleWorkingImage { get; set; } = true;
@@ -66,6 +70,8 @@ public abstract class UnaryImageFormBase(
     {
         using var imageToRender = Image.GetClonedImage();
         WorkingImage = imageToRender.Render();
+        RealImageWidth = WorkingImage.Width;
+        RealImageHeight = WorkingImage.Height;
 
         if (CanScaleWorkingImage)
         {

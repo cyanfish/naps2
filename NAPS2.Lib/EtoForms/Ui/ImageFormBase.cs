@@ -30,8 +30,8 @@ public abstract class ImageFormBase : EtoDialogBase
     protected UiImageList ImageList { get; }
     protected ThumbnailController ThumbnailController { get; }
 
-    protected int ImageHeight { get; set; }
-    protected int ImageWidth { get; set; }
+    protected int DisplayImageHeight { get; set; }
+    protected int DisplayImageWidth { get; set; }
 
     protected IMemoryImage? DisplayImage { get; set; }
     protected Drawable Overlay { get; } = new();
@@ -56,8 +56,8 @@ public abstract class ImageFormBase : EtoDialogBase
     {
         base.OnPreLoad(e);
         InitDisplayImage();
-        ImageWidth = DisplayImage!.Width;
-        ImageHeight = DisplayImage.Height;
+        DisplayImageWidth = DisplayImage!.Width;
+        DisplayImageHeight = DisplayImage.Height;
     }
 
     protected override void OnLoad(EventArgs e)
@@ -88,8 +88,8 @@ public abstract class ImageFormBase : EtoDialogBase
     private void UpdateImageCoords()
     {
         if (!Overlay.Loaded) return;
-        var widthRatio = ImageWidth / (float) (Overlay.Width - OverlayBorderSize * 2);
-        var heightRatio = ImageHeight / (float) (Overlay.Height - OverlayBorderSize * 2);
+        var widthRatio = DisplayImageWidth / (float) (Overlay.Width - OverlayBorderSize * 2);
+        var heightRatio = DisplayImageHeight / (float) (Overlay.Height - OverlayBorderSize * 2);
         var ratio = widthRatio / heightRatio;
         if (ratio > 1)
         {
@@ -125,10 +125,10 @@ public abstract class ImageFormBase : EtoDialogBase
         {
             DisplayImage?.Dispose();
             DisplayImage = bitmap;
-            if (DisplayImage.Width != ImageWidth || DisplayImage.Height != ImageHeight)
+            if (DisplayImage.Width != DisplayImageWidth || DisplayImage.Height != DisplayImageHeight)
             {
-                ImageWidth = DisplayImage.Width;
-                ImageHeight = DisplayImage.Height;
+                DisplayImageWidth = DisplayImage.Width;
+                DisplayImageHeight = DisplayImage.Height;
                 UpdateImageCoords();
             }
             Overlay.Invalidate();

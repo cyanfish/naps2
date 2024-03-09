@@ -52,17 +52,17 @@ public class CropForm : UnaryImageFormBase
     protected override void OnPreLoad(EventArgs e)
     {
         base.OnPreLoad(e);
-        if (_lastTransform != null && _lastTransform.OriginalWidth == ImageWidth &&
-            _lastTransform.OriginalHeight == ImageHeight)
+        if (_lastTransform != null && _lastTransform.OriginalWidth == RealImageWidth &&
+            _lastTransform.OriginalHeight == RealImageHeight)
         {
             _realL = _lastTransform.Left;
             _realR = _lastTransform.Right;
             _realT = _lastTransform.Top;
             _realB = _lastTransform.Bottom;
-            _cropL = _realL / ImageWidth;
-            _cropR = _realR / ImageWidth;
-            _cropT = _realT / ImageHeight;
-            _cropB = _realB / ImageHeight;
+            _cropL = _realL / RealImageWidth;
+            _cropR = _realR / RealImageWidth;
+            _cropT = _realT / RealImageHeight;
+            _cropB = _realB / RealImageHeight;
         }
     }
 
@@ -90,8 +90,8 @@ public class CropForm : UnaryImageFormBase
             (int) Math.Round(_realR),
             (int) Math.Round(_realT),
             (int) Math.Round(_realB),
-            ImageWidth,
-            ImageHeight)
+            RealImageWidth,
+            RealImageHeight)
     ];
 
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
@@ -110,10 +110,10 @@ public class CropForm : UnaryImageFormBase
         // We calculate the distance between the mouse and each handle side
         // The 0.1 offset is to provide a bit of affinity so that if the crop size is 0 (so all distances are the same),
         // you can still e.g. pick the top-left handle if you put the mouse a bit top-left of it.
-        var t = _overlayT + _realT * _overlayH / ImageHeight;
-        var b = _overlayB - _realB * _overlayH / ImageHeight;
-        var l = _overlayL + _realL * _overlayW / ImageWidth;
-        var r = _overlayR - _realR * _overlayW / ImageWidth;
+        var t = _overlayT + _realT * _overlayH / RealImageHeight;
+        var b = _overlayB - _realB * _overlayH / RealImageHeight;
+        var l = _overlayL + _realL * _overlayW / RealImageWidth;
+        var r = _overlayR - _realR * _overlayW / RealImageWidth;
         var dyT = Math.Abs(e.Location.Y - (t - 0.1f));
         var dyB = Math.Abs(e.Location.Y - (b + 0.1f));
         var dyM = Math.Abs(e.Location.Y - (t + b) / 2);
@@ -140,10 +140,10 @@ public class CropForm : UnaryImageFormBase
 
     private void Overlay_MouseUp(object? sender, MouseEventArgs e)
     {
-        _realT = _cropT * ImageHeight;
-        _realB = _cropB * ImageHeight;
-        _realL = _cropL * ImageWidth;
-        _realR = _cropR * ImageWidth;
+        _realT = _cropT * RealImageHeight;
+        _realB = _cropB * RealImageHeight;
+        _realL = _cropL * RealImageWidth;
+        _realR = _cropR * RealImageWidth;
         _activeHandle = Handle.None;
         _freeformAvailable = false;
         _freeformActive = false;
@@ -182,19 +182,19 @@ public class CropForm : UnaryImageFormBase
         {
             if (_activeHandle.HasFlag(Handle.Top))
             {
-                _cropT = (_realT / ImageHeight + delta.Y / _overlayH).Clamp(0, 1 - _cropB);
+                _cropT = (_realT / RealImageHeight + delta.Y / _overlayH).Clamp(0, 1 - _cropB);
             }
             if (_activeHandle.HasFlag(Handle.Right))
             {
-                _cropR = (_realR / ImageWidth - delta.X / _overlayW).Clamp(0, 1 - _cropL);
+                _cropR = (_realR / RealImageWidth - delta.X / _overlayW).Clamp(0, 1 - _cropL);
             }
             if (_activeHandle.HasFlag(Handle.Bottom))
             {
-                _cropB = (_realB / ImageHeight - delta.Y / _overlayH).Clamp(0, 1 - _cropT);
+                _cropB = (_realB / RealImageHeight - delta.Y / _overlayH).Clamp(0, 1 - _cropT);
             }
             if (_activeHandle.HasFlag(Handle.Left))
             {
-                _cropL = (_realL / ImageWidth + delta.X / _overlayW).Clamp(0, 1 - _cropR);
+                _cropL = (_realL / RealImageWidth + delta.X / _overlayW).Clamp(0, 1 - _cropR);
             }
         }
     }
