@@ -9,10 +9,8 @@ public class CombineForm : ImageFormBase
     private readonly IIconProvider _iconProvider;
     private readonly ScanningContext _scanningContext;
 
-    private readonly LayoutVisibility _hVis = new(false);
-    private readonly LayoutVisibility _vVis = new(false);
-    private readonly LayoutVisibility _hAlignVis = new(true);
-    private readonly LayoutVisibility _vAlignVis = new(true);
+    private readonly LayoutVisibility _horizontalOrientationVis = new(false);
+    private readonly LayoutVisibility _alignVis = new(true);
     private CombineOrientation _orientation;
     private double _hOffset = 0.5;
     private double _vOffset = 0.5;
@@ -37,7 +35,6 @@ public class CombineForm : ImageFormBase
 
     protected override LayoutElement CreateControls()
     {
-        // TODO: Why is there a form size change when we first toggle orientation?
         return L.Row(
             C.Filler(),
             L.Row(
@@ -45,21 +42,21 @@ public class CombineForm : ImageFormBase
                     C.IconButton(_iconProvider.GetIcon("shape_align_left")!, () => SetHOffset(0)),
                     C.IconButton(_iconProvider.GetIcon("shape_align_center")!, () => SetHOffset(0.5)),
                     C.IconButton(_iconProvider.GetIcon("shape_align_right")!, () => SetHOffset(1.0))
-                ).Visible(_hAlignVis),
+                ).Visible(_alignVis),
                 C.IconButton(_iconProvider.GetIcon("combine_hor")!, () => SetOrientation(CombineOrientation.Horizontal))
                     .Padding(left: 20),
                 C.IconButton(_iconProvider.GetIcon("switch")!, SwapImages)
-            ).Visible(_vVis),
+            ).Visible(!_horizontalOrientationVis),
             L.Row(
                 L.Row(
                     C.IconButton(_iconProvider.GetIcon("shape_align_top")!, () => SetVOffset(0)),
                     C.IconButton(_iconProvider.GetIcon("shape_align_middle")!, () => SetVOffset(0.5)),
                     C.IconButton(_iconProvider.GetIcon("shape_align_bottom")!, () => SetVOffset(1.0))
-                ).Visible(_vAlignVis),
+                ).Visible(_alignVis),
                 C.IconButton(_iconProvider.GetIcon("combine")!, () => SetOrientation(CombineOrientation.Vertical))
                     .Padding(left: 20),
                 C.IconButton(_iconProvider.GetIcon("switch_hor")!, SwapImages)
-            ).Visible(_hVis),
+            ).Visible(_horizontalOrientationVis),
             C.Filler()
         );
     }
@@ -86,8 +83,7 @@ public class CombineForm : ImageFormBase
     private void SetOrientation(CombineOrientation orientation)
     {
         _orientation = orientation;
-        _hVis.IsVisible = _orientation == CombineOrientation.Horizontal;
-        _vVis.IsVisible = _orientation == CombineOrientation.Vertical;
+        _horizontalOrientationVis.IsVisible = _orientation == CombineOrientation.Horizontal;
         UpdatePreviewBox();
     }
 
@@ -112,12 +108,11 @@ public class CombineForm : ImageFormBase
         _orientation = WorkingImage1.Width + WorkingImage2.Width > WorkingImage1.Height + WorkingImage2.Height
             ? CombineOrientation.Vertical
             : CombineOrientation.Horizontal;
-        _hVis.IsVisible = _orientation == CombineOrientation.Horizontal;
-        _vVis.IsVisible = _orientation == CombineOrientation.Vertical;
-        // We could make these visibilities different (i.e. hAlignVis is only based on if widths are different), but
+        _horizontalOrientationVis.IsVisible = _orientation == CombineOrientation.Horizontal;
+        // We could make these visibilities different (i.e. hAlignVis + vAlignVis), but
         // that means the button alignment can change underneath the mouse which isn't great.
-        _hAlignVis.IsVisible = WorkingImage1.Width != WorkingImage2.Width || WorkingImage1.Height != WorkingImage2.Height;
-        _vAlignVis.IsVisible = WorkingImage1.Width != WorkingImage2.Width || WorkingImage1.Height != WorkingImage2.Height;
+        _alignVis.IsVisible =
+            WorkingImage1.Width != WorkingImage2.Width || WorkingImage1.Height != WorkingImage2.Height;
 
         var workingArea = GetScreenWorkingArea();
         var widthRatio1 = WorkingImage1.Width / workingArea.Width;
