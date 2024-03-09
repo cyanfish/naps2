@@ -179,10 +179,10 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ImageList_SelectionChanged(object? sender, EventArgs e)
     {
-        Invoker.Current.Invoke(() =>
+        Invoker.Current.InvokeDispatch(() =>
         {
             UpdateToolbar();
-            _listView!.Selection = ImageList.Selection;
+            _listView.Selection = ImageList.Selection;
         });
     }
 
