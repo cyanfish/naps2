@@ -1,6 +1,6 @@
 ﻿namespace NAPS2.Images.Transforms;
 
-public class CorrectionTransform : Transform
+public record CorrectionTransform : Transform
 {
     public CorrectionTransform()
     {

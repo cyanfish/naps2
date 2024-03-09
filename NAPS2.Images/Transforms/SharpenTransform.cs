@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class SharpenTransform : Transform
+public record SharpenTransform : Transform
 {
     public SharpenTransform()
     {

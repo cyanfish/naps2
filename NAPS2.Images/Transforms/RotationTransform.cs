@@ -4,7 +4,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class RotationTransform : Transform
+public record RotationTransform : Transform
 {
     public const double TOLERANCE = 0.001;
 

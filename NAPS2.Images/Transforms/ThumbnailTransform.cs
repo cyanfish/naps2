@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class ThumbnailTransform : Transform
+public record ThumbnailTransform : Transform
 {
     public const int DEFAULT_SIZE = 256;
 

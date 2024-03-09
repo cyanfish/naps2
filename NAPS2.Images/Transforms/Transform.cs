@@ -4,7 +4,7 @@ using NAPS2.Serialization;
 
 namespace NAPS2.Images.Transforms;
 
-public abstract class Transform
+public abstract record Transform
 {
     static Transform()
     {

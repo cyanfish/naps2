@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class ResizeTransform : Transform
+public record ResizeTransform : Transform
 {
     public ResizeTransform()
     {

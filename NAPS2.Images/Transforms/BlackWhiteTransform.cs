@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class BlackWhiteTransform : Transform
+public record BlackWhiteTransform : Transform
 {
     public BlackWhiteTransform()
     {

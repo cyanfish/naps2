@@ -1,5 +1,5 @@
 ﻿namespace NAPS2.Images.Transforms;
 
-public class ColorBitDepthTransform : Transform
+public record ColorBitDepthTransform : Transform
 {
 }

@@ -3,7 +3,6 @@ using NAPS2.Util;
 
 namespace NAPS2.Images;
 
-// TODO: Make sure transform equality works
 public record TransformState(ImmutableList<Transform> Transforms)
 {
     public static readonly TransformState Empty = new(ImmutableList<Transform>.Empty);

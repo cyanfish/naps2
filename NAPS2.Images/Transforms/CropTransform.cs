@@ -4,7 +4,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class CropTransform : Transform
+public record CropTransform : Transform
 {
     public CropTransform()
     {

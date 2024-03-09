@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class SaturationTransform : Transform
+public record SaturationTransform : Transform
 {
     public SaturationTransform()
     {

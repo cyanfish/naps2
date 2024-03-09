@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class BrightnessTransform : Transform
+public record BrightnessTransform : Transform
 {
     public BrightnessTransform()
     {

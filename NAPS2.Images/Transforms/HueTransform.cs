@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class HueTransform : Transform
+public record HueTransform : Transform
 {
     public HueTransform()
     {

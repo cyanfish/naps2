@@ -3,7 +3,7 @@
 
 namespace NAPS2.Images.Transforms;
 
-public class TrueContrastTransform : Transform
+public record TrueContrastTransform : Transform
 {
     public TrueContrastTransform()
     {
