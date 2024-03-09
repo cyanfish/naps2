@@ -106,14 +106,25 @@ public class RecoverableFolder : IDisposable
     {
         if (_disposed) throw new ObjectDisposedException(nameof(RecoverableFolder));
 
+        var fileRefCount = _recoveryIndex.Images.GroupBy(indexImage => indexImage.FileName ?? "")
+            .ToDictionary(group => group.Key, group => group.Count());
+
         var recoveredImages = new List<ProcessedImage>();
         foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
         {
             var (oldPath, newPath) = GetPaths(indexImage);
             try
             {
-                // Move instead of copying as it's faster
-                File.Move(oldPath, newPath);
+                fileRefCount[indexImage.FileName!]--;
+                if (fileRefCount[indexImage.FileName!] == 0)
+                {
+                    // Move instead of copying as it's faster
+                    File.Move(oldPath, newPath);
+                }
+                else
+                {
+                    File.Copy(oldPath, newPath);
+                }
             }
             catch (Exception e)
             {
