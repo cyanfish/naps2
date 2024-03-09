@@ -28,7 +28,6 @@ public class UiImageList
 
     public StateToken CurrentState => new(Images.Select(x => x.GetImageWeakReference()).ToImmutableList());
 
-    // TODO: We should make this selection maintain insertion order, or otherwise guarantee that for things like FDesktop.SavePDF we actually get the images in the right order
     public ListSelection<UiImage> Selection
     {
         get => _selection;
@@ -48,6 +47,11 @@ public class UiImageList
     public event EventHandler<ImageListEventArgs>? ImagesThumbnailChanged;
 
     public event EventHandler<ImageListEventArgs>? ImagesThumbnailInvalidated;
+
+    public void AddToSelection(UiImage image)
+    {
+        UpdateSelection(ListSelection.From(Images.Where(x => x == image || Selection.Contains(x))));
+    }
 
     public void UpdateSelection(ListSelection<UiImage> newSelection)
     {
@@ -86,19 +90,20 @@ public class UiImageList
     }
 
     public void Mutate(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null,
-        bool isPassiveInteraction = false, bool updateUndoStack = true)
+        bool isPassiveInteraction = false, bool updateUndoStack = true, bool disposeDeleted = true)
     {
-        MutateInternal(mutation, selectionToMutate, isPassiveInteraction, updateUndoStack);
+        MutateInternal(mutation, selectionToMutate, isPassiveInteraction, updateUndoStack, disposeDeleted);
     }
 
     public async Task MutateAsync(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate = null,
-        bool isPassiveInteraction = false, bool updateUndoStack = true)
+        bool isPassiveInteraction = false, bool updateUndoStack = true, bool disposeDeleted = true)
     {
-        await Task.Run(() => MutateInternal(mutation, selectionToMutate, isPassiveInteraction, updateUndoStack));
+        await Task.Run(() =>
+            MutateInternal(mutation, selectionToMutate, isPassiveInteraction, updateUndoStack, disposeDeleted));
     }
 
     private void MutateInternal(ListMutation<UiImage> mutation, ListSelection<UiImage>? selectionToMutate,
-        bool isPassiveInteraction, bool updateUndoStack)
+        bool isPassiveInteraction, bool updateUndoStack, bool disposeDeleted)
     {
         lock (this)
         {
@@ -118,17 +123,23 @@ public class UiImageList
             var after = Images.ToList();
             var afterTransforms = after.Select(img => img.TransformState).ToList();
 
-            foreach (var added in after.Except(before))
+            var allAdded = after.Except(before).ToList();
+            foreach (var added in allAdded)
             {
                 added.ThumbnailChanged += ImageThumbnailChanged;
                 added.ThumbnailInvalidated += ImageThumbnailInvalidated;
             }
-            foreach (var removed in before.Except(after))
+            var allRemoved = before.Except(after).ToList();
+            foreach (var removed in allRemoved)
             {
                 removed.ThumbnailChanged -= ImageThumbnailChanged;
                 removed.ThumbnailInvalidated -= ImageThumbnailInvalidated;
-                removed.Dispose();
+                if (disposeDeleted)
+                {
+                    removed.Dispose();
+                }
             }
+            currentSelection = ListSelection.From(currentSelection.Except(allRemoved));
 
             if (updateUndoStack)
             {

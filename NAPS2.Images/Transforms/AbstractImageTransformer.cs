@@ -187,8 +187,8 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
 
     protected virtual TImage PerformTransform(TImage image, ScaleTransform transform)
     {
-        var width = (int) Math.Round(image.Width * transform.ScaleFactor);
-        var height = (int) Math.Round(image.Height * transform.ScaleFactor);
+        var width = (int) Math.Max(Math.Round(image.Width * transform.ScaleFactor), 1);
+        var height = (int) Math.Max(Math.Round(image.Height * transform.ScaleFactor), 1);
         return PerformTransform(image, new ResizeTransform(width, height));
     }
 

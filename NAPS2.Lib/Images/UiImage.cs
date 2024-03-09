@@ -124,6 +124,16 @@ public class UiImage : IDisposable
         ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
     }
 
+    public void ReplaceInternalImage(ProcessedImage newImage)
+    {
+        lock (this)
+        {
+            _processedImage = newImage;
+            _saved = false;
+        }
+        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+    }
+
     public void ResetTransforms()
     {
         lock (this)

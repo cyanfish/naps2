@@ -237,10 +237,6 @@ public abstract class ListMutation<T> where T : notnull
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
-            foreach (var item in list)
-            {
-                (item as IDisposable)?.Dispose();
-            }
             list.Clear();
             selection = ListSelection.Empty<T>();
         }
@@ -253,10 +249,6 @@ public abstract class ListMutation<T> where T : notnull
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
-            foreach (var item in selection)
-            {
-                (item as IDisposable)?.Dispose();
-            }
             list.RemoveAll(selection);
             selection = ListSelection.Empty<T>();
         }
@@ -300,13 +292,42 @@ public abstract class ListMutation<T> where T : notnull
         {
             // Default to the end of the list
             int index = list.Count;
-            // Use the index after the last item from the same source (if it exists)
             if (_predecessor != null)
             {
                 int lastIndex = list.IndexOf(_predecessor);
                 if (lastIndex != -1)
                 {
                     index = lastIndex + 1;
+                }
+            }
+            list.Insert(index, _itemToInsert);
+        }
+    }
+
+    /// <summary>
+    /// Inserts the given item before the given successor (or at the start of the list if none).
+    /// </summary>
+    public class InsertBefore : ListMutation<T>
+    {
+        private readonly T _itemToInsert;
+        private readonly T? _successor;
+
+        public InsertBefore(T itemToInsert, T? successor)
+        {
+            _itemToInsert = itemToInsert;
+            _successor = successor;
+        }
+
+        public override void Apply(List<T> list, ref ListSelection<T> selection)
+        {
+            // Default to the start of the list
+            int index = 0;
+            if (_successor != null)
+            {
+                int lastIndex = list.IndexOf(_successor);
+                if (lastIndex != -1)
+                {
+                    index = lastIndex;
                 }
             }
             list.Insert(index, _itemToInsert);
