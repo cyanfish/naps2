@@ -3,7 +3,7 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class HueSatForm : ImageFormBase
+public class HueSatForm : UnaryImageFormBase
 {
     private readonly SliderWithTextBox _hueSlider = new();
     private readonly SliderWithTextBox _saturationSlider = new();

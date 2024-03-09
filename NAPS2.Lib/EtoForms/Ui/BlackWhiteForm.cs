@@ -3,7 +3,7 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class BlackWhiteForm : ImageFormBase
+public class BlackWhiteForm : UnaryImageFormBase
 {
     private readonly SliderWithTextBox _thresholdSlider = new();
 

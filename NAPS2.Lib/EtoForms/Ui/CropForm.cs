@@ -3,7 +3,7 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class CropForm : ImageFormBase
+public class CropForm : UnaryImageFormBase
 {
     private static CropTransform? _lastTransform;
 
@@ -49,8 +49,9 @@ public class CropForm : ImageFormBase
     private int HandleLength =>
         (int) Math.Max(Math.Round(Math.Min(_overlayH, _overlayW) * HANDLE_LENGTH_RATIO), HANDLE_MIN_LENGTH);
 
-    protected override void InitTransform()
+    protected override void OnPreLoad(EventArgs e)
     {
+        base.OnPreLoad(e);
         if (_lastTransform != null && _lastTransform.OriginalWidth == ImageWidth &&
             _lastTransform.OriginalHeight == ImageHeight)
         {
@@ -65,12 +66,13 @@ public class CropForm : ImageFormBase
         }
     }
 
-    protected override void TransformSaved()
+    protected override void Apply()
     {
+        base.Apply();
         _lastTransform = (CropTransform) Transforms.Single();
     }
 
-    protected override void ResetTransform()
+    protected override void Revert()
     {
         _cropT = _cropL = _cropB = _cropR = _realT = _realL = _realB = _realR = 0;
         Overlay.Invalidate();

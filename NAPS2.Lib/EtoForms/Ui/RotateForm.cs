@@ -4,7 +4,7 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class RotateForm : ImageFormBase
+public class RotateForm : UnaryImageFormBase
 {
     private const int MIN_LINE_DISTANCE = 50;
 

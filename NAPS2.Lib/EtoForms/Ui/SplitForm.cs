@@ -2,7 +2,7 @@ using Eto.Drawing;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class SplitForm : ImageFormBase
+public class SplitForm : UnaryImageFormBase
 {
     public SplitForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController) :
         base(config, imageList, thumbnailController)

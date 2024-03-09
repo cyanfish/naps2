@@ -23,8 +23,6 @@ public class CombineForm : ImageFormBase
         _scanningContext = scanningContext;
         Icon = new Icon(1f, Icons.combine.ToEtoImage());
         Title = UiStrings.Combine;
-        CanApplyToAllSelected = false;
-        ShowRevertButton = false;
     }
 
     private UiImage Image1 { get; set; } = null!;
@@ -93,10 +91,10 @@ public class CombineForm : ImageFormBase
         // Otherwise, we look for the previous image in the list, which should be considered the first image, and then
         // this image is the second.
         var nextImage = SelectedImages?.ElementAtOrDefault(1) ??
-                        _imageList.Images.ElementAtOrDefault(_imageList.Images.IndexOf(Image) + 1);
+                        ImageList.Images.ElementAtOrDefault(ImageList.Images.IndexOf(Image) + 1);
         Image1 = nextImage != null
             ? Image
-            : _imageList.Images.ElementAtOrDefault(_imageList.Images.IndexOf(Image) - 1) ??
+            : ImageList.Images.ElementAtOrDefault(ImageList.Images.IndexOf(Image) - 1) ??
               throw new InvalidOperationException("No image to combine with");
         Image2 = nextImage ?? Image;
 
@@ -152,13 +150,13 @@ public class CombineForm : ImageFormBase
         using var combinedImage = CombineImages(renderedImage1, renderedImage2);
 
         // TODO: Use working images for thumbnail?
-        var thumbnail = combinedImage.Clone().PerformTransform(new ThumbnailTransform(_thumbnailController.RenderSize));
+        var thumbnail = combinedImage.Clone().PerformTransform(new ThumbnailTransform(ThumbnailController.RenderSize));
         var ppd = new PostProcessingData { Thumbnail = thumbnail, ThumbnailTransformState = TransformState.Empty };
         var processedImage = _scanningContext.CreateProcessedImage(combinedImage).WithPostProcessingData(ppd, true);
 
-        _imageList.Mutate(new ListMutation<UiImage>.InsertAfter(new UiImage(processedImage), Image));
+        ImageList.Mutate(new ListMutation<UiImage>.InsertAfter(new UiImage(processedImage), Image));
         // TODO: Maybe have a checkbox to keep the original images?
-        _imageList.Mutate(new ListMutation<UiImage>.DeleteSelected(), ListSelection.Of(Image1, Image2));
+        ImageList.Mutate(new ListMutation<UiImage>.DeleteSelected(), ListSelection.Of(Image1, Image2));
     }
 
     protected override void OnClosed(EventArgs e)

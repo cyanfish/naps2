@@ -3,7 +3,7 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class BrightContForm : ImageFormBase
+public class BrightContForm : UnaryImageFormBase
 {
     private readonly SliderWithTextBox _brightnessSlider = new();
     private readonly SliderWithTextBox _contrastSlider = new();
