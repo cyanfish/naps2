@@ -25,6 +25,7 @@ public class PreviewForm : EtoDialogBase
 
         ImageViewer.ColorScheme = colorScheme;
         ImageViewer.ZoomChanged += ImageViewerZoomChanged;
+        ImageList.ImagesUpdated += ImageList_ImagesUpdated;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -62,6 +63,55 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.Delete,
             Image = iconProvider.GetIcon("cross")
         };
+    }
+
+    private void ImageList_ImagesUpdated(object sender, ImageListEventArgs e)
+    {
+        Invoker.Current.InvokeDispatch(async () =>
+        {
+            bool shouldClose = false;
+            lock (ImageList)
+            {
+                if (ImageList.Images.Contains(CurrentImage))
+                {
+                    UpdateImageIndex();
+                    UpdatePage();
+                    return;
+                }
+                if (ImageList.Images.Any())
+                {
+                    // Update the GUI for the newly displayed image
+                    var nextIndex = ImageIndex >= ImageList.Images.Count ? ImageList.Images.Count - 1 : ImageIndex;
+                    CurrentImage = ImageList.Images[nextIndex];
+                    ImageList.UpdateSelection(ListSelection.Of(CurrentImage));
+                }
+                else
+                {
+                    shouldClose = true;
+                    ImageList.UpdateSelection(ListSelection.Empty<UiImage>());
+                }
+            }
+            if (shouldClose)
+            {
+                // No images left to display, so no point keeping the form open
+                Close();
+            }
+            else
+            {
+                UpdatePage();
+                await UpdateImage();
+            }
+        });
+    }
+
+    private void UpdateImageIndex()
+    {
+        var index = ImageList.Images.IndexOf(CurrentImage);
+        if (index == -1)
+        {
+            index = 0;
+        }
+        ImageIndex = index;
     }
 
     protected ScrollZoomImageViewer ImageViewer { get; } = new();
@@ -104,6 +154,7 @@ public class PreviewForm : EtoDialogBase
                 _currentImage.ThumbnailInvalidated -= ImageThumbnailInvalidated;
             }
             _currentImage = value;
+            UpdateImageIndex();
             Commands = _desktopCommands.WithSelection(() => ListSelection.Of(_currentImage));
             _currentImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
         }
@@ -114,18 +165,7 @@ public class PreviewForm : EtoDialogBase
         Invoker.Current.InvokeDispatch(() => UpdateImage().AssertNoAwait());
     }
 
-    protected int ImageIndex
-    {
-        get
-        {
-            var index = ImageList!.Images.IndexOf(CurrentImage);
-            if (index == -1)
-            {
-                index = 0;
-            }
-            return index;
-        }
-    }
+    protected int ImageIndex { get; private set; }
 
     protected override async void OnLoad(EventArgs eventArgs)
     {
@@ -184,6 +224,10 @@ public class PreviewForm : EtoDialogBase
                 MakeToolButton(Commands.HueSat),
                 MakeToolButton(Commands.BlackWhite),
                 MakeToolButton(Commands.Sharpen),
+                MakeToolButton(Commands.DocumentCorrection),
+                new SeparatorToolItem(),
+                MakeToolButton(Commands.Split),
+                MakeToolButton(Commands.Combine),
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.SaveSelectedPdf, _iconProvider.GetIcon("file_extension_pdf")),
                 MakeToolButton(Commands.SaveSelectedImages, _iconProvider.GetIcon("picture_small")),
@@ -257,9 +301,8 @@ public class PreviewForm : EtoDialogBase
         }
     }
 
-    private async Task DeleteCurrentImage()
+    private void DeleteCurrentImage()
     {
-        var lastIndex = ImageIndex;
         if (MessageBox.Show(this,
                 string.Format(MiscResources.ConfirmDeleteItems, 1),
                 MiscResources.Delete, MessageBoxButtons.OKCancel,
@@ -267,33 +310,6 @@ public class PreviewForm : EtoDialogBase
         {
             // We don't want to run Commands.Delete as that runs on DesktopController and uses that selection.
             Commands.ImageListActions.DeleteSelected();
-        }
-
-        bool shouldClose = false;
-        lock (ImageList)
-        {
-            if (ImageList.Images.Any())
-            {
-                // Update the GUI for the newly displayed image
-                var nextIndex = lastIndex >= ImageList.Images.Count ? ImageList.Images.Count - 1 : lastIndex;
-                CurrentImage = ImageList.Images[nextIndex];
-                ImageList.UpdateSelection(ListSelection.Of(CurrentImage));
-            }
-            else
-            {
-                shouldClose = true;
-                ImageList.UpdateSelection(ListSelection.Empty<UiImage>());
-            }
-        }
-        if (shouldClose)
-        {
-            // No images left to display, so no point keeping the form open
-            Close();
-        }
-        else
-        {
-            UpdatePage();
-            await UpdateImage();
         }
     }
 

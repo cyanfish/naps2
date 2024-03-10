@@ -148,7 +148,7 @@ public class UiImageList
 
             if (currentSelection != _selection)
             {
-                UpdateSelectionOnUiThread(currentSelection);
+                UpdateSelection(currentSelection);
             }
         }
         ImagesUpdated?.Invoke(this, new ImageListEventArgs(isPassiveInteraction));
@@ -167,20 +167,6 @@ public class UiImageList
             is { } replaceTransformsUndoElement)
         {
             _undoStack.Push(replaceTransformsUndoElement);
-        }
-    }
-
-    private void UpdateSelectionOnUiThread(ListSelection<UiImage> currentSelection)
-    {
-        // TODO: This won't work right as SyncContext.Current is only set on the UI thread anyway
-        var syncContext = SynchronizationContext.Current;
-        if (syncContext != null)
-        {
-            syncContext.Post(_ => UpdateSelection(currentSelection), null);
-        }
-        else
-        {
-            UpdateSelection(currentSelection);
         }
     }
 

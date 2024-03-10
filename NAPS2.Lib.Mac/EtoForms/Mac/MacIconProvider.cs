@@ -32,7 +32,10 @@ public class MacIconProvider : IIconProvider
         { "sharpen", "rhombus" },
         { "cross", "trash" },
         { "file_extension_pdf", "doc.richtext" },
-        { "pictures", "photo" }
+        { "pictures", "photo" },
+        { "document", "doc.text" },
+        { "split", "squareshape.split.2x2.dotted" },
+        { "combine", "rectangle.grid.1x2" }
     };
 
     private readonly DefaultIconProvider _defaultIconProvider;

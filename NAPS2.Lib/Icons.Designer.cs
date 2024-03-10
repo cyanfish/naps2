@@ -62,16 +62,6 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] _switch {
-            get {
-                object obj = ResourceManager.GetObject("switch", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] accept {
             get {
                 object obj = ResourceManager.GetObject("accept", resourceCulture);
@@ -395,6 +385,16 @@ namespace NAPS2 {
         internal static byte[] combine_hor {
             get {
                 object obj = ResourceManager.GetObject("combine_hor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] combine_ver {
+            get {
+                object obj = ResourceManager.GetObject("combine_ver", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -962,9 +962,29 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] split_ver {
+            get {
+                object obj = ResourceManager.GetObject("split_ver", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] switch_hor {
             get {
                 object obj = ResourceManager.GetObject("switch_hor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] switch_ver {
+            get {
+                object obj = ResourceManager.GetObject("switch_ver", resourceCulture);
                 return ((byte[])(obj));
             }
         }

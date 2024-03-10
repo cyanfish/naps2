@@ -406,16 +406,22 @@
   <data name="split" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="split_ver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\split.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="split_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split_hor.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="combine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="combine_ver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\combine.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="combine_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine_hor.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="switch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="switch_ver" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\switch.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="switch_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">

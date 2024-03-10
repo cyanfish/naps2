@@ -36,7 +36,7 @@ public class SplitForm : UnaryImageFormBase
         Icon = new Icon(1f, Icons.split.ToEtoImage());
         Title = UiStrings.Split;
 
-        _vSplit = C.IconButton(iconProvider.GetIcon("split")!, () => SetOrientation(SplitOrientation.Vertical));
+        _vSplit = C.IconButton(iconProvider.GetIcon("split_ver")!, () => SetOrientation(SplitOrientation.Vertical));
         _hSplit = C.IconButton(iconProvider.GetIcon("split_hor")!, () => SetOrientation(SplitOrientation.Horizontal));
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;

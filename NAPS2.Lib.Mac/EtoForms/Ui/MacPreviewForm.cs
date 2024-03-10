@@ -65,6 +65,9 @@ public class MacPreviewForm : PreviewForm
             MacToolbarItems.Create("huesat", Commands.HueSat),
             MacToolbarItems.Create("blackwhite", Commands.BlackWhite),
             MacToolbarItems.Create("sharpen", Commands.Sharpen),
+            MacToolbarItems.Create("documentcorrection", Commands.DocumentCorrection),
+            MacToolbarItems.Create("split", Commands.Split),
+            MacToolbarItems.Create("combine", Commands.Combine),
             MacToolbarItems.CreateSeparator("sep0"),
             MacToolbarItems.Create("save", Commands.SaveSelected),
             // TODO: Fix this

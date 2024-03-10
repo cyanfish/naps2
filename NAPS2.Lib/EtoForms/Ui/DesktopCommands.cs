@@ -349,7 +349,7 @@ public class DesktopCommands
         return new DesktopCommands(
             _desktopController,
             _desktopScanController,
-            _desktopSubFormController,
+            _desktopSubFormController.WithSelection(selectionFunc),
             _imageList,
             _imageListActions.WithSelection(selectionFunc),
             _thumbnailController,

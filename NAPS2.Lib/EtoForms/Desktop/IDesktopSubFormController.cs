@@ -2,6 +2,7 @@ namespace NAPS2.EtoForms.Desktop;
 
 public interface IDesktopSubFormController
 {
+    IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc);
     void ShowCropForm();
     void ShowBrightnessContrastForm();
     void ShowHueSaturationForm();

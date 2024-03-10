@@ -20,6 +20,18 @@ public class DesktopSubFormController : IDesktopSubFormController
         _tesseractLanguageManager = tesseractLanguageManager;
     }
 
+    private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
+
+    private ListSelection<UiImage> Selection => SelectionFunc?.Invoke() ?? _imageList.Selection;
+
+    public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc)
+    {
+        return new DesktopSubFormController(_formFactory, _imageList, _desktopImagesController, _tesseractLanguageManager)
+        {
+            SelectionFunc = selectionFunc
+        };
+    }
+
     public void ShowCropForm() => ShowImageForm<CropForm>();
     public void ShowBrightnessContrastForm() => ShowImageForm<BrightContForm>();
     public void ShowHueSaturationForm() => ShowImageForm<HueSatForm>();
@@ -32,7 +44,7 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     private void ShowImageForm<T>() where T : ImageFormBase
     {
-        var selection = _imageList.Selection;
+        var selection = Selection;
         if (selection.Any())
         {
             var form = _formFactory.Create<T>();
@@ -80,7 +92,7 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public void ShowViewerForm()
     {
-        var selected = _imageList.Selection.FirstOrDefault();
+        var selected = Selection.FirstOrDefault();
         if (selected != null)
         {
             using var viewer = _formFactory.Create<PreviewForm>();
