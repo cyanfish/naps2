@@ -16,16 +16,9 @@
     <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
     <ItemGroup>
-        <PackageReference Include="Makaretu.Dns" Version="2.0.1" />
+        <PackageReference Include="NAPS2.Mdns" Version="1.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <!-- TODO: Use https://github.com/jdomnitz/net-mdns Nuget package if PRs get merged -->
-        <Reference Include="Makaretu.Dns.Multicast.New">
-            <HintPath>..\NAPS2.Setup\lib\Makaretu.Dns.Multicast.New.dll</HintPath>
-        </Reference>
     </ItemGroup>
 
     <ItemGroup>
