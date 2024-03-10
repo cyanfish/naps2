@@ -46,6 +46,9 @@ public class KeyboardShortcuts
     public string? ImageHue { get; set; }
     public string? ImageSaturation { get; set; }
     public string? ImageSharpen { get; set; }
+    public string? ImageDocumentCorrection { get; set; }
+    public string? ImageSplit { get; set; }
+    public string? ImageCombine { get; set; }
     public string? ImageReset { get; set; }
 
     public string? RotateLeft { get; set; }

@@ -347,6 +347,8 @@ public class PreviewForm : EtoDialogBase
         _ksm.Assign("Ctrl+Oemplus", ZoomInCommand);
         _ksm.Assign("Ctrl+OemMinus", ZoomOutCommand);
         _ksm.Assign("Ctrl+0", ZoomActualCommand);
+        _ksm.Assign("Ctrl+Z", Commands.Undo);
+        _ksm.Assign("Ctrl+Y", Commands.Redo);
 
         // Configured
 
@@ -360,6 +362,9 @@ public class PreviewForm : EtoDialogBase
         _ksm.Assign(ks.ImageHue, Commands.HueSat);
         _ksm.Assign(ks.ImageSaturation, Commands.HueSat);
         _ksm.Assign(ks.ImageSharpen, Commands.Sharpen);
+        _ksm.Assign(ks.ImageDocumentCorrection, Commands.DocumentCorrection);
+        _ksm.Assign(ks.ImageSplit, Commands.Split);
+        _ksm.Assign(ks.ImageCombine, Commands.Combine);
 
         _ksm.Assign(ks.RotateCustom, Commands.CustomRotate);
         _ksm.Assign(ks.RotateFlip, Commands.Flip);
