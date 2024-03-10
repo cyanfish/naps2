@@ -32,10 +32,8 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
         CairoHelper.SetSourcePixbuf(context, image.Pixbuf, 0, 0);
         context.Paint();
         var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, width, height));
-        // TODO: In Gdi, we convert this back to BW1. Should we do the same?
-        newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
-            ? ImagePixelFormat.Gray8
-            : image.LogicalPixelFormat;
+        OptimizePixelFormat(image, ref newImage);
+        newImage.LogicalPixelFormat = image.LogicalPixelFormat;
         newImage.SetResolution(xres, yres);
         image.Dispose();
         return newImage;

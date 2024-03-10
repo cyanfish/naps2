@@ -34,6 +34,7 @@ public class MacImageTransformer : AbstractImageTransformer<MacImage>
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);
         using var cgImage = image.Rep.AsCGImage(ref rect, null, null);
         c.DrawImage(rect, cgImage);
+        OptimizePixelFormat(image, ref newImage);
         image.Dispose();
         return newImage;
     }

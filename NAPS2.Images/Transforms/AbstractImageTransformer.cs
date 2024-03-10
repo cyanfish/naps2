@@ -266,7 +266,7 @@ public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryIma
     /// <param name="result">The result that may be replaced.</param>
     protected void OptimizePixelFormat(TImage original, ref TImage result)
     {
-        if (original.PixelFormat == ImagePixelFormat.BW1)
+        if (original.UpdateLogicalPixelFormat() == ImagePixelFormat.BW1)
         {
             result = PerformTransform(result, new BlackWhiteTransform());
         }
