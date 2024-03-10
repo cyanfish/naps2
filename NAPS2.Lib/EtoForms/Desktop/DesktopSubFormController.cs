@@ -1,5 +1,4 @@
 using NAPS2.EtoForms.Ui;
-using NAPS2.Images;
 using NAPS2.Ocr;
 
 namespace NAPS2.EtoForms.Desktop;
@@ -26,7 +25,8 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc)
     {
-        return new DesktopSubFormController(_formFactory, _imageList, _desktopImagesController, _tesseractLanguageManager)
+        return new DesktopSubFormController(_formFactory, _imageList, _desktopImagesController,
+            _tesseractLanguageManager)
         {
             SelectionFunc = selectionFunc
         };
@@ -38,9 +38,13 @@ public class DesktopSubFormController : IDesktopSubFormController
     public void ShowBlackWhiteForm() => ShowImageForm<BlackWhiteForm>();
     public void ShowSharpenForm() => ShowImageForm<SharpenForm>();
     public void ShowSplitForm() => ShowImageForm<SplitForm>();
-    public void ShowCombineForm() => ShowImageForm<CombineForm>();
-
     public void ShowRotateForm() => ShowImageForm<RotateForm>();
+
+    public void ShowCombineForm()
+    {
+        if (_imageList.Images.Count < 2) return;
+        ShowImageForm<CombineForm>();
+    }
 
     private void ShowImageForm<T>() where T : ImageFormBase
     {
