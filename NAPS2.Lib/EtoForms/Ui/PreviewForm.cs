@@ -380,6 +380,7 @@ public class PreviewForm : EtoDialogBase
         {
             ImageViewer.Image?.Dispose();
             ImageViewer.Image = null;
+            ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
         }
         base.Dispose(disposing);
     }
