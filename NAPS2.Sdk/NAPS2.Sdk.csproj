@@ -31,11 +31,9 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="NAPS2.PdfSharp" Version="1.0.1" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="SixLabors.Fonts" Version="1.0.1" />
-    <Reference Include="PdfSharpCore">
-      <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
-    </Reference>
     <!-- TODO: Switch back to the official nuget if https://github.com/soukoku/ntwain/pull/35 gets merged -->
     <Reference Include="NTwain" Condition="'$(TargetFramework)' != 'net8-macos10.15'">
       <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
@@ -97,25 +95,13 @@
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net8-macos10.15'">
     <!-- TODO: Ideally we'd only have package dependencies, not direct dlls -->
-    <Content Include="..\NAPS2.Setup\lib\PdfSharpCore.dll">
+    <Content Include="..\NAPS2.Setup\lib\NTwain.dll">
       <Pack>true</Pack>
       <PackagePath>lib\net6.0</PackagePath>
     </Content>
     <Content Include="..\NAPS2.Setup\lib\NTwain.dll">
       <Pack>true</Pack>
-      <PackagePath>lib\net6.0</PackagePath>
-    </Content>
-    <Content Include="..\NAPS2.Setup\lib\PdfSharpCore.dll">
-      <Pack>true</Pack>
       <PackagePath>lib\net462</PackagePath>
-    </Content>
-    <Content Include="..\NAPS2.Setup\lib\NTwain.dll">
-      <Pack>true</Pack>
-      <PackagePath>lib\net462</PackagePath>
-    </Content>
-    <Content Include="..\NAPS2.Setup\lib\PdfSharpCore.dll">
-      <Pack>true</Pack>
-      <PackagePath>lib\net8.0-macos10.15</PackagePath>
     </Content>
   </ItemGroup>
 

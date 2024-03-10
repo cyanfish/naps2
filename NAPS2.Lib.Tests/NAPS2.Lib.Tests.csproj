@@ -11,10 +11,6 @@
     <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
     <ItemGroup>
-        <Reference Include="PdfSharpCore">
-            <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
-        </Reference>
-
         <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
 

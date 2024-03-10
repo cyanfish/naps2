@@ -15,9 +15,6 @@
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <ItemGroup>
-    <Reference Include="PdfSharpCore">
-      <HintPath>..\NAPS2.Setup\lib\PdfSharpCore.dll</HintPath>
-    </Reference>
     <Reference Include="NTwain">
       <HintPath>..\NAPS2.Setup\lib\NTwain.dll</HintPath>
     </Reference>
