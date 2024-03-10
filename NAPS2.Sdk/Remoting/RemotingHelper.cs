@@ -9,18 +9,30 @@ internal static class RemotingHelper
     {
         if (error != null && !string.IsNullOrEmpty(error.Type))
         {
-            var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))!.GetType(error.Type, false);
-            var exception = CreateExceptionType(exceptionType);
-            var messageField =
-                typeof(Exception).GetField("_message", BindingFlags.NonPublic | BindingFlags.Instance);
-            var stackTraceField = typeof(Exception).GetField("_stackTraceString",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            var typePrefix = exceptionType == null ? $"{error.Type}: " : "";
-            messageField?.SetValue(exception, typePrefix + error.Message);
-            stackTraceField?.SetValue(exception, error.StackTrace);
+            var exception = MakeExceptionObject(error);
             exception.PreserveStackTrace();
             throw exception;
         }
+    }
+
+    private static Exception MakeExceptionObject(Error error)
+    {
+        var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))!.GetType(error.Type, false);
+        var exception = CreateExceptionType(exceptionType);
+        var messageField =
+            typeof(Exception).GetField("_message", BindingFlags.NonPublic | BindingFlags.Instance);
+        var stackTraceField = typeof(Exception).GetField("_stackTraceString",
+            BindingFlags.NonPublic | BindingFlags.Instance);
+        var innerExceptionField = typeof(Exception).GetField("_innerException",
+            BindingFlags.NonPublic | BindingFlags.Instance);
+        var typePrefix = exceptionType == null ? $"{error.Type}: " : "";
+        messageField?.SetValue(exception, typePrefix + error.Message);
+        stackTraceField?.SetValue(exception, error.StackTrace);
+        if (error.InnerException != null)
+        {
+            innerExceptionField?.SetValue(exception, MakeExceptionObject(error.InnerException));
+        }
+        return exception;
     }
 
     private static Exception CreateExceptionType(Type? exceptionType)
@@ -44,6 +56,7 @@ internal static class RemotingHelper
         {
             Type = e.GetType().FullName,
             Message = e.Message,
-            StackTrace = e.StackTrace
+            StackTrace = e.StackTrace,
+            InnerException = e.InnerException != null ? ToError(e.InnerException) : null
         };
 }
