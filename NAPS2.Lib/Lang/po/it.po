@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -379,6 +379,10 @@ msgstr "Cancella immagini dopo il salvataggio"
 msgid "Close"
 msgstr "Chiudi"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Combina"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilità"
@@ -624,6 +628,10 @@ msgstr "Nome file:"
 msgid "File Path:"
 msgstr "Percorso file:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Correggi bilanciamento del bianco e rimuovi il rumore"
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Capovolgi"
@@ -812,6 +820,14 @@ msgstr "Sposta giù"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Sposta su"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Lingue multiple"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Lingue multiple..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "Ripristino..."
 msgid "Recovery Progress"
 msgstr "Progresso ripristino"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Ripeti operazione"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Ripeti operazione {0}"
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Ricorda queste impostazioni"
@@ -1346,6 +1370,10 @@ msgstr "Visualizza"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Mostra barra \"Profili\""
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "Visualizza avanzamento TWAIN nativo"
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Mostra numeri di pagina"
@@ -1361,6 +1389,10 @@ msgstr "Scansione singola"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Salta richiesta salvataggio"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Dividi"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "Legale USA (8.5x14 pollici)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "Lettera USA (8.5x11 pollici)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Annulla operazione"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "Annulla operazione {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

@@ -124,7 +124,7 @@
     <value>Standard</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Inbyggd (endast inbyggt användargränssnitt)</value>
+    <value>Äldre (endast inbyggt gränssnitt)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
     <value>Inbyggd överföring</value>

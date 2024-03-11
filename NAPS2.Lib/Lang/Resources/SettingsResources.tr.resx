@@ -19,7 +19,7 @@
     <value>24-bit Renk</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Gri tonlama</value>
+    <value>Gri Tonlama</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
     <value>{0} dpi</value>
@@ -130,7 +130,7 @@
     <value>Alternatif Aktarım</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Bellek Transferi</value>
+    <value>Bellek Aktarımı</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Eski DSM</value>
@@ -160,7 +160,7 @@
     <value>Seçildiyse Sor</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Varsayılan Profil ile Tara</value>
+    <value>Öntanımlı Profille Tara</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>Her Zaman Sor</value>

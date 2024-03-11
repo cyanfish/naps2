@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Enganxa</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Desfés</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Refés</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Desfés {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Refés {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Fet</value>
   </data>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Mode de l'OCR:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Corregeix el balanç de blancs i suprimeix el soroll</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Inicia l'OCR automàticament després d'escanejar</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Comparteix fins i tot quan NAPS2 és tancat</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Diversos idiomes...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Diversos idiomes</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Mostra la interfície de progrés nativa del TWAIN</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Divideix</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combina</value>
   </data>
 </root>

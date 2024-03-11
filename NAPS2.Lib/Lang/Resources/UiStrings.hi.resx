@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Undo {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Redo {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Done</value>
   </data>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR mode:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>स्कैनिंग के बाद स्वचालित रूप से OCR चलाएँ</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Share even when NAPS2 is closed</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Multiple Languages...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Multiple Languages</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Show native TWAIN progress</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combine</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
@@ -379,6 +379,10 @@ msgstr "Tøm bilder etter lagring"
 msgid "Close"
 msgstr "Lukk"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr ""
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Kompatibilitet"
@@ -624,6 +628,10 @@ msgstr "Filnavn"
 msgid "File Path:"
 msgstr "Filsti:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr ""
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Speilvend"
@@ -811,6 +819,14 @@ msgstr ""
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
+msgstr ""
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr ""
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
 msgstr ""
 
 #: UiStrings.resx$MultipleScansDelay$Message
@@ -1102,6 +1118,14 @@ msgstr ""
 msgid "Recovery Progress"
 msgstr "Gjenopprettingsfremdrift"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr ""
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr ""
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr ""
@@ -1346,6 +1370,10 @@ msgstr "Vis"
 msgid "Show \"Profiles\" toolbar"
 msgstr ""
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr ""
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr ""
@@ -1360,6 +1388,10 @@ msgstr "Enkeltskanning"
 
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
+msgstr ""
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
 msgstr ""
 
 #: UiStrings.resx$Start$Message
@@ -1496,6 +1528,14 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
+msgstr ""
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr ""
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
 msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message

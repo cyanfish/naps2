@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Klistra in</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Ångra</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Gör om</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Ångra {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Gör om {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Klart</value>
   </data>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR-läge:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Åtgärda vitbalans och ta bort brus</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Kör automatiskt OCR efter skanning</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Dela också när NAPS2 är stängt</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Flera språk...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Flera språk</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Visa inbyggt TWAIN-förlopp</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Dela</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Sammanfoga</value>
   </data>
 </root>

@@ -61,18 +61,18 @@
     <value>Подготовка на скенера.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>Драйверът SANE не е наличен. Уверете се, че сте инсталирали необходимите пакети:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR двигател не е наличен. Уверете се, че сте инсталирали необходимия пакет:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Избраният драйвер не се поддържа от тази система.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Възникна грешка при OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Операцията за OCR изтече.</value>
   </data>
 </root>

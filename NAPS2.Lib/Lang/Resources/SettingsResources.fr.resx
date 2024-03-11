@@ -76,7 +76,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Personnalisé...</value>
+    <value>Personnalisée…</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 p)</value>
@@ -142,10 +142,10 @@
     <value>Prédéfinie</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Rapide</value>
+    <value>Plus rapide</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Meilleure</value>
+    <value>Plus précis</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
     <value>Tout enregistrer</value>

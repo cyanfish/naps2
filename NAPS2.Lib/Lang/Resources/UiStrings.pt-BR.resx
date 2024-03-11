@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Colar</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Desfazer</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Refazer</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Desfazer {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Refazer {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Concluído</value>
   </data>
@@ -187,7 +199,7 @@
     <value>Interface</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>O menu em "Digitalizar" altera o perfil padrão</value>
+    <value>O menu do botão "Digitalizar" altera o perfil padrão</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>Exibir barra de ferramentas "Perfis"</value>
@@ -196,7 +208,7 @@
     <value>Mostrar números de páginas</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>Ação padrão do botão "Salvar":</value>
+    <value>Ação padrão do botão "Digitalizar":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
     <value>Ação padrão do botão "Salvar":</value>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Modo do OCR:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Corrigir equilíbrio branco e remover ruído</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Executar automaticamente o OCR após a digitalização</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Compartilhar mesmo quando o NAPS2 estiver fechado</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Múltiplos idiomas...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Múltiplos idiomas</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Mostrar progresso nativo do TWAIN</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Separar</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combinar</value>
   </data>
 </root>

@@ -25,7 +25,7 @@
     <value>{0} dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Персонализиран SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -37,10 +37,10 @@
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Apple Mail</value>
+    <value>Apple имейл</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Няма избран доставчик.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Център</value>
@@ -115,22 +115,22 @@
     <value>CCITT4</value>
   </data>
   <data name="TiffComp_Lzw" xml:space="preserve">
-    <value>LZW</value>
+    <value>LZW - алгоритъм за компресиране на данни без загуби</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>None</value>
+    <value>Нито един</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>По подразбиране</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>Остаряло (само с присъщия потребителски интерфейс)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Местен трансфер</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Прехвърляне на паметта</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Стар DSM</value>
@@ -148,21 +148,21 @@
     <value>Най-добър</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Запазване на всички</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Запазване на избраното</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Постоянно напомняне</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Ако е избрано напомняне</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Сканиране с профил по подразбиране</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Постоянно напомняне</value>
   </data>
 </root>

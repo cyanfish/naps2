@@ -160,7 +160,7 @@
     <value>Prompt If Selected</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Beolvasás az alapértelmezett profillal</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>Always Prompt</value>

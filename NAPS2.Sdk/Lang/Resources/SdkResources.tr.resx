@@ -64,15 +64,15 @@
     <value>SANE sürücüsü kullanılamıyor. Gerekli paketlerin kuruluduğundan emin olun:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR motoru kullanılamıyor. Gerekli paketin kurulduğundan emin olun:</value>
+    <value>OKT motoru kullanılamıyor. Gerekli paketin kurulduğundan emin olun:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Seçilen sürücü bu sistemde desteklenmiyor.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>OCR çalıştırılırken bir hata oluştu.</value>
+    <value>OKT çalıştırılırken hata oluştu.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>OCR işlemi zaman aşımına uğradı.</value>
+    <value>OKT işlemi zaman aşımına uğradı.</value>
   </data>
 </root>

@@ -196,7 +196,7 @@
     <value>Lot annulé.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Annulation....</value>
+    <value>Annulation…</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
     <value>Lot terminé avec succès.</value>
@@ -208,10 +208,10 @@
     <value>Acquisition de la page {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>Acquisition page {0} (numérisation {1})...</value>
+    <value>Acquisition page {0} (numérisation {1})…</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>En attente de l'acquisition {0}...</value>
+    <value>En attente de l'acquisition {0}…</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
@@ -229,13 +229,13 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Importation de « {0} »...</value>
+    <value>Importation de « {0} »…</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
     <value>Progression de l'importation</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Récupération...</value>
+    <value>Récupération…</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
     <value>Progression de la récupération</value>
@@ -253,19 +253,19 @@
     <value>Progression de l'enregistrement en PDF</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Enregistrement de « {0} »...</value>
+    <value>Enregistrement de « {0} »…</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Imprimer</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Copie...</value>
+    <value>Copie…</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
     <value>Progression de la copie</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importation...</value>
+    <value>Importation…</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>PDF par courriel</value>
@@ -316,7 +316,7 @@
     <value>Le fichier ne peut pas être écrasé car il est en cours d'utilisation.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Réalignement...</value>
+    <value>Réalignement…</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Progression du réalignement</value>
@@ -358,13 +358,13 @@
     <value>Progression de la mise à jour</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Mise à jour...</value>
+    <value>Mise à jour…</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
     <value>Aucune mise à jour disponible.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Vérification...</value>
+    <value>Vérification…</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
     <value>Vérification des mises à jour désactivée.</value>
@@ -382,7 +382,7 @@
     <value>Une erreur est survenue en essayant d'autoriser.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Envoi du courriel...</value>
+    <value>Envoi du courriel…</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Une erreur est survenue en essayant d'envoyer le courriel.</value>
@@ -391,6 +391,6 @@
     <value>Acquisition de la page {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Acquisition des données...</value>
+    <value>Acquisition des données…</value>
   </data>
 </root>

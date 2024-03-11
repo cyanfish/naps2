@@ -25,7 +25,7 @@
     <value>Opravdu si přejete smazat položky {0}?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Jste si jisti, že chcete smazat profily {0}? </value>
+    <value>Jste si jisti, že chcete smazat profily {0}?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Jste si jisti, že chcete smazat profil {0}?</value>
@@ -61,7 +61,7 @@
     <value>Soubor GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>Soubor JPEG (*.jpg, *.jpeg) </value>
+    <value>Soubor JPEG (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
     <value>PDF dokument (*.pdf)</value>
@@ -307,7 +307,7 @@
     <value>PDF uloženo.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
-    <value>{0} ({1} × {2} {3})</value>
+    <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Opravdu chcete smazat "{0}"?</value>
@@ -370,7 +370,7 @@
     <value>Kontrola aktualizací je vypnuta.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Při pokusu o aktualizaci došlo k chybě..</value>
+    <value>Při pokusu o aktualizaci došlo k chybě.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Instalovat {0}</value>

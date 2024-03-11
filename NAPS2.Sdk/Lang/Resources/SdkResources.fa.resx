@@ -70,7 +70,7 @@
     <value>درایور انتخابیدر این سیستم قابل استفاده نیست..</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>خطایی در OCR  رخ داد.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
     <value>The OCR operation timed out.</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt\n"
@@ -25,11 +25,11 @@ msgstr "Ação padrão do botão \"Salvar\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr "Ação padrão do botão \"Salvar\":"
+msgstr "Ação padrão do botão \"Digitalizar\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr "O menu em \"Digitalizar\" altera o perfil padrão"
+msgstr "O menu do botão \"Digitalizar\" altera o perfil padrão"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -379,6 +379,10 @@ msgstr "Limpar imagens após salvar"
 msgid "Close"
 msgstr "Fechar"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Combinar"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilidade"
@@ -624,6 +628,10 @@ msgstr "Nome do Arquivo"
 msgid "File Path:"
 msgstr "Caminho do arquivo:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Corrigir equilíbrio branco e remover ruído"
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Inverter"
@@ -812,6 +820,14 @@ msgstr "Mover abaixo"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Mover acima"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Múltiplos idiomas"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Múltiplos idiomas..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "Recuperando..."
 msgid "Recovery Progress"
 msgstr "Progresso da Recuperação"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Refazer"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Refazer {0}"
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Lembrar essas configurações"
@@ -1346,6 +1370,10 @@ msgstr "Mostrar"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Exibir barra de ferramentas \"Perfis\""
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "Mostrar progresso nativo do TWAIN"
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Mostrar números de páginas"
@@ -1361,6 +1389,10 @@ msgstr "Única digitalização"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Pular pedido de salvar"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Separar"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "Ofício (8.5x14 pol)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "Ofício (8.5x11 pol)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Desfazer"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "Desfazer {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

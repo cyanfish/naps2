@@ -73,7 +73,7 @@
     <value>Súbor TIFF (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>Súbor JPEG2000 (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Chýba názov.</value>
@@ -97,7 +97,7 @@
     <value>Naskenovaný obrázok</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Pred kliknutím na Skenovať najskôr vyberte profil.</value>
+    <value>Najskôr vyberte profil pred kliknutím na Skenovať.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>Pri ovládači skenovania sa vyskytla chyba.</value>
@@ -136,7 +136,7 @@
     <value>{0} / {1} MB</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Súbor '{0}' sa nemožno importovať.</value>
+    <value>Súbor '{0}' nemožno importovať.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
     <value>Súbor '{0}' nemožno importovať. Možno importovať len PDF súbory vygenerované cez NAPS2.</value>
@@ -325,7 +325,7 @@
     <value>Potrebné stiahnutie</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Na import tohto súboru PDF je potrebný ďalší komponent. Chcete ho stiahnuť teraz?</value>
+    <value>Na import tohto súboru PDF je potrebný ďalší komponent. Chcete ho teraz stiahnuť?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Naozaj chcete zrušiť dávkové skenovanie?</value>
@@ -334,7 +334,7 @@
     <value>Zrušiť dávku</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Obdarovať</value>
+    <value>Darovať</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 je úplne zadarmo. Zvážte obdarovanie.</value>

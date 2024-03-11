@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Вставити</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Undo {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Redo {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Завершити</value>
   </data>
@@ -366,6 +378,9 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Режим розпізнавання:</value>
   </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Fix white balance and remove noise</value>
+  </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Автоматично розпізнавати після сканування</value>
   </data>
@@ -646,7 +661,7 @@
     <value>Прибрати порожні сторінки</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>White Threshold</value>
+    <value>Поріг білого кольору</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
     <value>Поріг покриття</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Надавати доступ навіть тоді, коли NAPS2 буде закрито</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Декілька мов...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Декілька мов</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Показувати нативне сканування TWAIN</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combine</value>
   </data>
 </root>

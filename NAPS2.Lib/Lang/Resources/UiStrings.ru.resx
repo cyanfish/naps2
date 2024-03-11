@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Вставить</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Undo {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Redo {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Готово</value>
   </data>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Режим распознавания текста (OCR):</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Исправить баланс белого и убрать шум</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Автоматически запустить распознавание текста (OCR) после сканирования</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Сохранять общий доступ даже при закрытом NAPS2</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Несколько языков...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Несколько языков</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Показать "нативный" прогресс TWAIN</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combine</value>
   </data>
 </root>

@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Zalijepi</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Poništi radnju</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Ponovi radnju</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Poništi {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Ponovi {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Gotovo</value>
   </data>
@@ -181,31 +193,31 @@
     <value>Jezik</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Postavke</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Interfejs</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Meni za "Skeniranje" mijenja zadani profil</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Prikaži alatnu traku "Profili"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Prikaži brojeve stranica</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Zadana funckija dugmeta "Skeniraj":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Zadana funckija dugmeta "Saćuvaj":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplikacija</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Dozvoli samo jednu programsku instancu NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>O programu</value>
@@ -232,19 +244,19 @@
     <value>Sačuvaj sve</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Saćuvaj selektovano</value>
+    <value>Sačuvaj izabrano</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Sačuvaj sve kao PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Sačuvaj selektovano kao PDF</value>
+    <value>Sačuvaj izabrano kao PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
     <value>Sačuvaj sve kao slike</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Sačuvaj selektovano kao slike</value>
+    <value>Sačuvaj izabrano kao slike</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
     <value>Pošalji sve e-mailom</value>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Način OPZ-a:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Popravi balans bijele i ukloni šum</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Automatski pokreni OPZ nakon skeniranja</value>
@@ -565,7 +580,7 @@
     <value>Postavke e-maila</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Postavke</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provajder</value>
@@ -616,7 +631,7 @@
     <value>Očisti slike nakon snimanja</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Zadrži slike kroz sesije</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Prilagođene dimenzije stranice</value>
@@ -736,24 +751,39 @@
     <value>Omogući zapise otklanjanja grešaka</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Dijeli</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Dijeljenje skenera</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Dijeljenje skenera</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Dijeljeni skeneri mogu se koristiti s drugih računara na lokalnoj mreži tako što se izabere "ESCL" drajver u postavkama NAPS2 profila na drugim računarima.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Postavke dijeljenog skenera</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Da li želite zaustaviti dijeljenje {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Dijeli i kada je NAPS2 zatvoren</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Više jezika...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Više jezika</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Prikaži napredak nativnog TWAIN-a</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Podijeli</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Kombinuj</value>
   </data>
 </root>

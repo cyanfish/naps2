@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Vložit</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Zpět</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Znovu</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Zpět {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Znovu {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Hotovo</value>
   </data>
@@ -366,6 +378,9 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Mód OCR:</value>
   </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Opravit vyvážení bílé a odstranění šumu</value>
+  </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Po skenování automaticky spustit OCR</value>
   </data>
@@ -541,7 +556,7 @@
     <value>Automatický přírůstek čísla (1 znak)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Název souboru</value>
+    <value>Název souboru:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Náhled:</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Sdílet, i když je NAPS2 zavřený</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Více jazyků...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Více jazyků</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Zobrazit nativní průběh TWAIN</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Rozdělit</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Spojit</value>
   </data>
 </root>

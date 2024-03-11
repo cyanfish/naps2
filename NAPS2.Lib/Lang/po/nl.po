@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -379,6 +379,10 @@ msgstr "Afbeeldingen verwijderen na opslaan"
 msgid "Close"
 msgstr "Sluiten"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Samenvoegen"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibiliteit"
@@ -624,6 +628,10 @@ msgstr "Bestandsnaam"
 msgid "File Path:"
 msgstr "Bestandspad:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Witbalans verbeteren en ruis verminderen"
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Spiegelen"
@@ -812,6 +820,14 @@ msgstr "Omlaag"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Omhoog"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Meerdere talen"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Meerdere talen..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "Herstellen..."
 msgid "Recovery Progress"
 msgstr "Voortgang herstellen"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Opnieuw"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Opnieuw {0}"
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Onthoud deze instellingen"
@@ -1346,6 +1370,10 @@ msgstr "Tonen"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Werkbalk \"Profielen\" weergeven"
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "TWAIN-voortgang weergegeven"
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Paginanummers weergeven"
@@ -1361,6 +1389,10 @@ msgstr "Enkele scan"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Opslaanvenster overslaan"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Splitsen"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "US Legal (8.5x14 in)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 in)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "{0} ongedaan maken"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

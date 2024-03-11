@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -379,6 +379,10 @@ msgstr "Rensa bort bilder efter att de sparats"
 msgid "Close"
 msgstr "Stäng"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Sammanfoga"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Kompatibilitet"
@@ -624,6 +628,10 @@ msgstr "Filnamn"
 msgid "File Path:"
 msgstr "Filsökväg:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Åtgärda vitbalans och ta bort brus"
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Vänd"
@@ -771,7 +779,7 @@ msgstr "Vänster"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr "Inbyggd (endast inbyggt användargränssnitt)"
+msgstr "Äldre (endast inbyggt gränssnitt)"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -812,6 +820,14 @@ msgstr "Flytta ner"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Flytta upp"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Flera språk"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Flera språk..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "Återställer..."
 msgid "Recovery Progress"
 msgstr "Återställningsförlopp"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Gör om"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Gör om {0}"
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Kom ihåg dessa inställningar"
@@ -1346,6 +1370,10 @@ msgstr "Visa"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Visa verktygsfältet \"Profiler\""
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "Visa inbyggt TWAIN-förlopp"
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Visa sidnummer"
@@ -1361,6 +1389,10 @@ msgstr "Enkelskanning"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Fråga inte vid spara"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Dela"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "US Legal (8.5x14 in)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 in)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Ångra"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "Ångra {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

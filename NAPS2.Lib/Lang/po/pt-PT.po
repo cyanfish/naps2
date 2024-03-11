@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
@@ -379,6 +379,10 @@ msgstr "Apagar imagens após guardar"
 msgid "Close"
 msgstr "Fechar"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr ""
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilidade"
@@ -624,6 +628,10 @@ msgstr "Nome do ficheiro"
 msgid "File Path:"
 msgstr "Caminho do ficheiro:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr ""
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Rodar"
@@ -812,6 +820,14 @@ msgstr "Mover para baixo"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Mover para cima"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr ""
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr ""
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "A recuperar..."
 msgid "Recovery Progress"
 msgstr "Progresso da recuperação"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr ""
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr ""
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Lembrar estas configurações"
@@ -1346,6 +1370,10 @@ msgstr "Mostrar"
 msgid "Show \"Profiles\" toolbar"
 msgstr ""
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr ""
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr ""
@@ -1361,6 +1389,10 @@ msgstr "Digitalização individual"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Saltar questão para guardar"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr ""
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "US Legal (8,5 × 14 pol.)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8,5 × 11 pol.)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr ""
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

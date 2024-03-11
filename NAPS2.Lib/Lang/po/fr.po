@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -29,7 +29,7 @@ msgstr "Action par défaut du bouton « Numériser » :"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr "Le menu « Numériser » modifie le profil par défaut"
+msgstr "Modifier le profil par défaut avec le menu « Numériser »"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -54,11 +54,11 @@ msgstr "À propos"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr "Acquisition des données..."
+msgstr "Acquisition des données…"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
-msgstr "Avancés"
+msgstr "Avancés…"
 
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
@@ -290,7 +290,7 @@ msgstr "Acquisition par lot arrêtée en raison d'une erreur."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr "Meilleure"
+msgstr "Plus précis"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -332,7 +332,7 @@ msgstr "Annuler le lot"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr "Annulation...."
+msgstr "Annulation…"
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -348,7 +348,7 @@ msgstr "Vérifier les mises à jour"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr "Vérification..."
+msgstr "Vérification…"
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
@@ -379,6 +379,10 @@ msgstr "Effacer les images après l'enregistrement"
 msgid "Close"
 msgstr "Fermer"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Combiner"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilité"
@@ -401,7 +405,7 @@ msgstr "Progression de la copie"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
-msgstr "Copie..."
+msgstr "Copie…"
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
@@ -437,7 +441,7 @@ msgstr "SMTP personnalisé"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom..."
-msgstr "Personnalisé..."
+msgstr "Personnalisée…"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -477,7 +481,7 @@ msgstr "Réaligner les pages numérisées"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr "Réalignement..."
+msgstr "Réalignement…"
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
@@ -610,7 +614,7 @@ msgstr "Exclure les pages blanches"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr "Rapide"
+msgstr "Plus rapide"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -618,11 +622,15 @@ msgstr "Dispositif d'alimentation"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Nom du fichier"
+msgstr "Nom du fichier :"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
 msgstr "Chemin du fichier :"
+
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Corriger la balance des blancs et supprimer le bruit"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -703,11 +711,11 @@ msgstr "Progression de l'importation"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
-msgstr "Importation de « {0} »..."
+msgstr "Importation de « {0} »…"
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
-msgstr "Importation..."
+msgstr "Importation…"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
@@ -812,6 +820,14 @@ msgstr "Descendre"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Monter"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Multilingue"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Multilingue..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1096,11 +1112,19 @@ msgstr "Récupérer des images numérisées"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
-msgstr "Récupération..."
+msgstr "Récupération…"
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
 msgstr "Progression de la récupération"
+
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Rétablir"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Rétablir {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1232,7 +1256,7 @@ msgstr "Enregistrement des acquisitions par lot…"
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
-msgstr "Enregistrement de « {0} »..."
+msgstr "Enregistrement de « {0} »…"
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
@@ -1270,7 +1294,7 @@ msgstr "Acquisition de la page {0}"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
-msgstr "Acquisition page {0} (numérisation {1})..."
+msgstr "Acquisition page {0} (numérisation {1})…"
 
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanProgressPage$Message
@@ -1346,6 +1370,10 @@ msgstr "Afficher"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Afficher la barre d'outils « Profils »"
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "Afficher la progression native TWAIN"
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Afficher les numéros de page"
@@ -1361,6 +1389,10 @@ msgstr "Acquisition unique"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Ignorer l'invite d'enregistrement"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Diviser"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1498,6 +1530,14 @@ msgstr "US Legal (8.5x14 p)"
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 p)"
 
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Annuler"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "Annuler {0}"
+
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "Modifications non enregistrées"
@@ -1512,11 +1552,11 @@ msgstr "Vérification des mises à jour désactivée."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
-msgstr "Mise à jour..."
+msgstr "Mise à jour…"
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
-msgstr "Envoi du courriel..."
+msgstr "Envoi du courriel…"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1549,7 +1589,7 @@ msgstr "Pilote WIA"
 
 #: UiStrings.resx$WaitingForTwain$Message
 msgid "Waiting for TWAIN to complete..."
-msgstr "En attente de la fin du transfert TWAIN..."
+msgstr "En attente de la fin du transfert TWAIN…"
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
@@ -1557,7 +1597,7 @@ msgstr "En attente d'autorisation..."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
-msgstr "En attente de l'acquisition {0}..."
+msgstr "En attente de l'acquisition {0}…"
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"

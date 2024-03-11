@@ -121,7 +121,7 @@
     <value>A telepítés sikertelen</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>Mind ({0})</value>
+    <value>Összes ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
     <value>Kiválasztott ({0})</value>
@@ -277,7 +277,7 @@
     <value>Hiba történt az automatikus mentés során.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
-    <value>Minden fájl</value>
+    <value>Összes fájl</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
     <value>Képfájlok</value>

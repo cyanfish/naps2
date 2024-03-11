@@ -34,7 +34,7 @@
     <value>Verzia {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Súbor '{0}' sa nemožno importovať.</value>
+    <value>Súbor '{0}' nemožno importovať.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Vybraný skener nepodporuje použitie podávača. Ak skener obsahuje podávač, skúste použiť iný ovládač.</value>

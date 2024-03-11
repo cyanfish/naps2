@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Beillesztés</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Visszavonás</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Mégis</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Visszavonás {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Mégis {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Kész</value>
   </data>
@@ -181,31 +193,31 @@
     <value>Nyelv</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Beállítások</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Felület</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>A "Beolvasás" menü megváltoztatja az alapértelmezett profilt</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>"Profilok" eszköztár megjelenítése</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Oldalszámok megjelenítése</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>"Beolvasás" gomb alapértelmezett művelete:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>"Mentés" gomb alapértelmezett művelete:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Alkalmazás</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Csak egyetlen NAPS2 példány engedélyezése</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Névjegy</value>
@@ -366,6 +378,9 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Karakterfelismerés mód:</value>
   </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Fehéregyensúly javítása és zaj eltávolítása</value>
+  </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Karakterfelismerés automatikus futtatása beolvasás után</value>
   </data>
@@ -376,7 +391,7 @@
     <value>Karakterfelismerés letöltés</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>Az karakterfelismerés használatához minden olyan nyelvet le kell töltenie, amelyet be szeretne olvasni.</value>
+    <value>A karakterfelismerés használatához minden olyan nyelvet le kell töltenie, amelyet be szeretne olvasni.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
     <value>Válasszon ki egy vagy több nyelvet:</value>
@@ -565,7 +580,7 @@
     <value>E-mail beállítások</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Beállítások</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Szolgáltató</value>
@@ -616,7 +631,7 @@
     <value>Képek törlése mentés után</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Képek megtartása a munkamenetek között</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Egyéni oldalméret</value>
@@ -754,6 +769,21 @@
     <value>Biztos benne, hogy nem szeretné többé megosztani a {0} lapolvasót?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Megosztás akkor is, ha a NAPS2 be van zárva</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Több nyelv...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Több nyelv</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>A natív TWAIN folyamat megjelenítése</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Felosztás</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Egyesítés</value>
   </data>
 </root>

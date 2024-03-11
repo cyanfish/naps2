@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>הדבקה</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>הסגה</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>ביצוע מחדש</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>הסגת {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>ביצוע {0} מחדש</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>אישור</value>
   </data>
@@ -181,31 +193,31 @@
     <value>שפה</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>הגדרות</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>מנשק</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>תפריט „סריקה” משנה את פרופיל ברירת המחדל</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>הצגת סרגל כלים „פרופילים”</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>הצגת מספרי עמודים</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>פעולת ברירת מחדל לכפתור „סריקה”:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>פעולת ברירת מחדל לכפתור „שמירה”:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>יישום</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>לאפשר רק עותק יחיד של NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>על אודות</value>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>מצב זיהוי תווים אופטי:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>תיקון איזון לבן והסרת רעש</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>הרצת זיהוי תווים אופטי אוטומטית בסוף הסריקה</value>
@@ -565,7 +580,7 @@
     <value>הגדרות דוא״ל</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>הגדרות</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>ספק</value>
@@ -616,7 +631,7 @@
     <value>פינוי תמונות לאחר שמירה</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>לשמור תמונות בין הפעלות</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>גודל נייר מותאם אישית</value>
@@ -736,24 +751,39 @@
     <value>הפעלת תיעוד ניפוי שגיאות</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>שיתוף</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>שיתוף סורק</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>שיתוף סורק</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>אפשר להשתמש בסורקים משותפים במחשבים אחרים ברשת המקומית על ידי בחירה ב„מנהל התקן ESCL” בהגדרות הפרופיל של NAPS2 במחשב השני.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>הגדרות סורק משותף</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>להפסיק לשתף את {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>לשתף אפילו כש־NAPS2 סגור</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>מגוון שפות…</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>מגוון שפות</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>הצגת תהליך TWAIN טבעי</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>פיצול</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>שילוב</value>
   </data>
 </root>

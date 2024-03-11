@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Plakken</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Ongedaan maken</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Opnieuw</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>{0} ongedaan maken</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Opnieuw {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Gereed</value>
   </data>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR modus:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Witbalans verbeteren en ruis verminderen</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Start OCR automatisch na het scannen</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Delen zelfs als NAPS2 gesloten is</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Meerdere talen...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Meerdere talen</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>TWAIN-voortgang weergegeven</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Splitsen</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Samenvoegen</value>
   </data>
 </root>

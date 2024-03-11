@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:43\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Predvolená akcia tlačidla \"Uložiť\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Predvolená akcia tlačidla \"Skenovať\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Ponuka \"Skenovať\" zmení predvolený profil"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,11 +115,11 @@ msgstr "Alternatívne vkladanie"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Vždy sa spýtať"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Na import tohto súboru PDF je potrebný ďalší komponent. Chcete ho stiahnuť teraz?"
+msgstr "Na import tohto súboru PDF je potrebný ďalší komponent. Chcete ho teraz stiahnuť?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -180,7 +180,7 @@ msgstr "Pošta Apple"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Aplikácia"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "Naozaj chcete odstrániť {0} profilov?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Naozaj chcete prestať zdieľať {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -379,6 +379,10 @@ msgstr "Po uložení obrázky vymažte"
 msgid "Close"
 msgstr "Zavrieť"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Kombinovať"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Kompatibilta"
@@ -498,7 +502,7 @@ msgstr "Oprava dokumentu"
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr "Obdarovať"
+msgstr "Darovať"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -618,11 +622,15 @@ msgstr "Podávač"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Názov súboru"
+msgstr "Názov súboru:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
 msgstr "Cesta súboru:"
+
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Oprava vyváženia bielej a odstránenie šumu"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -731,7 +739,7 @@ msgstr "Inštalácia zlyhala."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Rozhranie"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -743,15 +751,15 @@ msgstr "Súbor JPEG (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr "JPEG2000 File (*.jp2, *.jpx)"
+msgstr "Súbor JPEG2000 (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
-msgstr "Kvalita súbora jpeg"
+msgstr "Kvalita JPEG"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Zachovať obrázky naprieč reláciami"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -812,6 +820,14 @@ msgstr "Posunúť nadol"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Posunúť nahor"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Viacero jazykov"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Viacero jazykov..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -952,7 +968,7 @@ msgstr "Jeden alebo viac súborov sa nepodarilo stiahnuť."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Povoliť len jednu inštanciu NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -985,7 +1001,7 @@ msgstr "Dokument PDF (*.pdf)"
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
-msgstr "Nastavenie PDF"
+msgstr "Nastavenia PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
@@ -1072,7 +1088,7 @@ msgstr "Profily"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Spýtať sa, ak je vybrané"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1101,6 +1117,14 @@ msgstr "Obnovovanie..."
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
 msgstr "Priebeh obnovovania"
+
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Vpred"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Vpred {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1253,7 +1277,7 @@ msgstr "Konfigurácia skenovania"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Skenovať pomocou predvoleného profilu"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1262,7 +1286,7 @@ msgstr "Naskenovaný obrázok"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Zdieľanie skenera"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1295,7 +1319,7 @@ msgstr "Vybrať zdroj"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
-msgstr "Pred kliknutím na Skenovať najskôr vyberte profil."
+msgstr "Najskôr vyberte profil pred kliknutím na Skenovať."
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
@@ -1316,23 +1340,23 @@ msgstr "Nastaviť pôvodné"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Nastavenia"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Zdieľať"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Zdieľať aj keď je NASP2 zavretý"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Nastavenia zdieľaného skeneru"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Zdieľané skenery môžu byť použité z iných počítačov v miestnej sieti zvolením možnosti \"Ovládač ESCL\" v nastaveniach profilu NAPS2 iného počítača."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1344,11 +1368,15 @@ msgstr "Ukázať"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Zobraziť panel nástrojov \"Profily\""
+
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "Zobraziť prirodzený priebeh TWAIN"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Zobraziť čísla stránok"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1361,6 +1389,10 @@ msgstr "Jedno skenovanie"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Preskočiť výzvu na uloženie"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Rozdeliť"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1403,7 +1435,7 @@ msgstr "Ovládač SANE nie je k dispozícii. Preverte požadované balíky pre i
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
-msgstr "Súbor '{0}' sa nemožno importovať."
+msgstr "Súbor '{0}' nemožno importovať."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
@@ -1472,7 +1504,7 @@ msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr "Možnosti Tiff"
+msgstr "Možnosti TIFF"
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
@@ -1488,7 +1520,7 @@ msgstr "Nástroje"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr "Implementácia Twain:"
+msgstr "Implementácia TWAIN:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1497,6 +1529,14 @@ msgstr "US Legal (8.5x14 in)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 in)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Späť"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "Späť {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1565,7 +1605,7 @@ msgstr "Prah bielej"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr "Verzia Wia:"
+msgstr "Verzia WIA:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

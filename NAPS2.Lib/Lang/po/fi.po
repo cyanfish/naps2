@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -379,6 +379,10 @@ msgstr "Pyyhi kuvat tallennukset jälkeen"
 msgid "Close"
 msgstr "Sulje"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Yhdistä"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Yhteensopivuus"
@@ -624,6 +628,10 @@ msgstr "Tiedoston nimi"
 msgid "File Path:"
 msgstr "Tiedostopolku:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr ""
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Käännä"
@@ -812,6 +820,14 @@ msgstr "Siirrä alas"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Siirrä ylös"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr ""
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr ""
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "Palautetaan..."
 msgid "Recovery Progress"
 msgstr "Palauttamisen eteneminen"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Tee uudelleen"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Tee Uudelleen {0}"
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Muista asetukset"
@@ -1346,6 +1370,10 @@ msgstr "Näytä"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Näytä \"Profiilit\" työkalupalkki"
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr ""
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Näytä sivunnumerot"
@@ -1361,6 +1389,10 @@ msgstr "Yksittäisskannaus"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Ohita talleta - kysymys"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Jaa"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr ""
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr ""
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Kumoa"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "Kumoa {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

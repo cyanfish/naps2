@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "פעולת ברירת מחדל לכפתור „שמירה”:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "פעולת ברירת מחדל לכפתור „סריקה”:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "תפריט „סריקה” משנה את פרופיל ברירת המחדל"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,7 +115,7 @@ msgstr "הפרדה מסורג"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "תמיד לבקש אישור"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -180,7 +180,7 @@ msgstr "דוא״ל Apple"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "יישום"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "למחוק {0} פרופיל/ים?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "להפסיק לשתף את {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -378,6 +378,10 @@ msgstr "פינוי תמונות לאחר שמירה"
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "סגירה"
+
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "שילוב"
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -624,6 +628,10 @@ msgstr "שם קובץ:"
 msgid "File Path:"
 msgstr "נתיב קובץ:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "תיקון איזון לבן והסרת רעש"
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "היפוך"
@@ -731,7 +739,7 @@ msgstr "ההתקנה נכשלה."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "מנשק"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -751,7 +759,7 @@ msgstr "איכות Jpeg"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "לשמור תמונות בין הפעלות"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -812,6 +820,14 @@ msgstr "להזיז למטה"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "להזיז למעלה"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "מגוון שפות"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "מגוון שפות…"
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -952,7 +968,7 @@ msgstr "תקלה בהורדת קובץ אחד או יותר."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "לאפשר רק עותק יחיד של NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1072,7 +1088,7 @@ msgstr "פרופילים"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "לבקש אישור אם נבחר"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1101,6 +1117,14 @@ msgstr "מתבצע שחזור…"
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
 msgstr "התקדמות שחזור"
+
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "ביצוע מחדש"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "ביצוע {0} מחדש"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1253,7 +1277,7 @@ msgstr "הגדרות סריקה"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "לסרוק עם פרופיל ברירת המחדל"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1262,7 +1286,7 @@ msgstr "תמונה שנסרקה"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "שיתוף סורק"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1316,23 +1340,23 @@ msgstr "הגדרת ברירת מחדל"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "הגדרות"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "שיתוף"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "לשתף אפילו כש־NAPS2 סגור"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "הגדרות סורק משותף"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "אפשר להשתמש בסורקים משותפים במחשבים אחרים ברשת המקומית על ידי בחירה ב„מנהל התקן ESCL” בהגדרות הפרופיל של NAPS2 במחשב השני."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1344,11 +1368,15 @@ msgstr "הצגה"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "הצגת סרגל כלים „פרופילים”"
+
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "הצגת תהליך TWAIN טבעי"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "הצגת מספרי עמודים"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1361,6 +1389,10 @@ msgstr "סריקה בודדת"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "דילוג על בקשת שמירה"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "פיצול"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "נייר US Legal (8.5x14 אינטש)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "נייר US Letter (8.5x11 אינטש)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "הסגה"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "הסגת {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

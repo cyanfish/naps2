@@ -16,7 +16,7 @@
     <value>Относно</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Авторско право {0} на сътрудници на NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Икони от:</value>
@@ -25,10 +25,10 @@
     <value>Проверка за обновяване</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Да</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Даряване</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Профили</value>
@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Постави</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Undo {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Redo {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Готово</value>
   </data>
@@ -67,7 +79,7 @@
     <value>Групово сканиране</value>
   </data>
   <data name="Ocr" xml:space="preserve">
-    <value>OCR</value>
+    <value>Оптично разпознаване на думи</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Профили</value>
@@ -115,10 +127,10 @@
     <value>Черно и бяло</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>Sharpen</value>
+    <value>Изостряне</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Корекция на документа</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Изчистване</value>
@@ -136,7 +148,7 @@
     <value>Обръщане</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Deskew</value>
+    <value>Изправяне</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
     <value>Завъртане по избор</value>
@@ -151,25 +163,25 @@
     <value>Пренареждане</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Interleave</value>
+    <value>Редуване</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Deinterleave</value>
+    <value>Смесване</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternate Interleave</value>
+    <value>Заместващо редуване</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternate Deinterleave</value>
+    <value>Редуващо разпръскване</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Обръщане</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Обръщане на всички</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Обратно на избраното</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Изчистване</value>
@@ -181,31 +193,31 @@
     <value>Език</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Интерфейс</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Сканиране</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Показване на лентата с инструменти "Профили"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Показване на номерата на страниците</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Сканиране:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Запазване:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Приложение</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Позволяване на само един екземпляр на NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Относно</value>
@@ -226,37 +238,37 @@
     <value>Мащабиране според прозореца</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Запазване</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Запазване на всички</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Запазване на избраното</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Запазване на всички като PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Запазване на избраното като PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Запазване на всички като изображения</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Запазване на избраното като изображения</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Изпращане на имейла на всички</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Имейлът е избран</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Изпращане на имейла към всички като PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Имейлът е избран като PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Настройки на профила</value>
@@ -271,19 +283,19 @@
     <value>TWAIN драйвър</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL драйвер</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL мрежов драйвер</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB драйвер</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Apple драйвер</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE драйвер</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>Устройство:</value>
@@ -343,7 +355,7 @@
     <value>Избери източник</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Run in Background</value>
+    <value>Изпълнение във фонов режим</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -352,7 +364,7 @@
     <value>NAPS2 - {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
-    <value>Not Another PDF Scanner</value>
+    <value>Не е като други PDF скенери</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
     <value>Настройки на OCR</value>
@@ -364,7 +376,10 @@
     <value>Език за OCR:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>OCR режим:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Автоматично стартиране на Оптично разпознаване след сканиране</value>
@@ -430,7 +445,7 @@
     <value>Пропусни запитването за запис</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
-    <value>Single page files</value>
+    <value>Файлове с една страница</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Шифроване на PDF</value>
@@ -538,7 +553,7 @@
     <value>Автоматично отброяване (2 цифри)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Автоматично нарастване (с 1 цифра)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Име на файл</value>
@@ -547,13 +562,13 @@
     <value>Преглед:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>За високо качество на JPEG (80+), също така увеличете и качеството на изображението във вашия профил за най-добри резултати.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Jpeg качество</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>Опции на Tiff</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
     <value>Компресиране:</value>
@@ -565,10 +580,10 @@
     <value>Настройки за имейл</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Provider</value>
+    <value>Доставчик</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>Промяна</value>
@@ -583,7 +598,7 @@
     <value>Упълномощи</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
-    <value>Waiting for authorization...</value>
+    <value>Чака се позволение...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
     <value>Грешка</value>
@@ -595,10 +610,10 @@
     <value>Парола</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Следният файл е шифрован и изисква парола за отваряне:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Prompt for file path</value>
+    <value>Напомняне за път на файла</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>Всяка страница в отделен файл</value>
@@ -607,7 +622,7 @@
     <value>Всяко сканиране в отделен файл</value>
   </data>
   <data name="SeparateByPatchT" xml:space="preserve">
-    <value>Separate files by Patch-T</value>
+    <value>Разделяне на файловете чрез Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>Повече информация</value>
@@ -616,7 +631,7 @@
     <value>Изчисти изображенията след запис</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Съхраняване на изображенията по време на сесиите</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Нестандартен размер на страница</value>
@@ -649,13 +664,13 @@
     <value>Праг на бялото</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
-    <value>Coverage Threshold</value>
+    <value>Праг на покритие</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
-    <value>Post-processing</value>
+    <value>Последваща обработка</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Deskew scanned pages</value>
+    <value>Изправяне на сканираните страници</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Приложи яркост/контраст след сканиране</value>
@@ -664,16 +679,16 @@
     <value>Компенсирай широчината на база подравняване (WIA)</value>
   </data>
   <data name="StretchToPageSize" xml:space="preserve">
-    <value>Stretch to page size</value>
+    <value>Разтягане до размера на страницата</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Crop to page size</value>
+    <value>Изрязване до размера на страницата</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Обърни двустранно сканираните страници</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wia версия:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain реализация:</value>
@@ -730,30 +745,45 @@
     <value>Отвори папка</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Инструменти</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Активиране на регистрирането на грешки</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Споделяне</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Споделяне на скенер</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Споделяне на скенер</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Споделените скенери могат да се използват от други компютри в локалната мрежа, като изберете "ESCL драйвер" в настройките на NAPS2 профила на другия компютър.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Споделени настройки на скенера</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Сигурни ли сте, че искате да спрете споделянето на {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Споделяне дори когато NAPS2 е затворен</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Multiple Languages...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Multiple Languages</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Show native TWAIN progress</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combine</value>
   </data>
 </root>

@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Einfügen</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Rückgängig {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Wiederholen {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Fertig</value>
   </data>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR-Modus:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Weißabgleich korrigieren und Rauschen entfernen</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>OCR nach dem Scannen automatisch starten</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Auch teilen, wenn NAPS2 geschlossen ist</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Mehrere Sprachen...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Mehrere Sprachen</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Nativen TWAIN-Fortschritt anzeigen</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Teilen</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Kombinieren</value>
   </data>
 </root>

@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Ngjit</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Zhbëje</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Ribëje</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Zhbëje {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Ribëje {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>U krye</value>
   </data>
@@ -181,31 +193,31 @@
     <value>Gjuha</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Cilësimet</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Ndërfaqja</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Меню "Скан" меняет профиль по умолчанию</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Shfaqe rreshtin e mjeteve "Profilet"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Shfaqi numrat e faqeve</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Действие кнопки "Скан":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Veprimi i paracaktuar i butonit "Ruaj":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Приложение</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Lejo vetëm një instancë të NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Rreth</value>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Regjimi OCR:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Rregullo balancimin e ngjyrës së bardhë dhe hiq zhurmën</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Ekzekuto OCR automatikisht pas skanimit</value>
@@ -565,7 +580,7 @@
     <value>Cilësimet e emailit</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Cilësimet</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Siguruesi i shërbimit</value>
@@ -616,7 +631,7 @@
     <value>Pastro imazhet pas ruajtjes</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Mbaji imazhet ndërmjet sesioneve</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Madhësi e personalizuar e faqes</value>
@@ -736,24 +751,39 @@
     <value>Aktivizo ruajtjen e logeve të debug</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Bëje të disponueshme</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Disponueshmëria e skanerit</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Disponueshmëria e skanerit</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Skanerat e disponueshëm në rrjet mund të përdoren nga kompjuterat e tjerë në rrjetin lokal duke zgjedhur "Drajveri i ESCL" në cilësimet e profilit të NAPS2.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Cilësimet e skanerit të disponueshëm</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Je i sigurt se dëshiron të ndalosh disponueshmërinë e {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Bëje të disponueshme edhe kur NAPS2 është i mbyllur</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Shumë gjuhë...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Shumë gjuhë</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Shfaqe progresin nativ të TWAIN</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Ndaje</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Kombinoje</value>
   </data>
 </root>

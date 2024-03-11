@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Coller</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Rétablir</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Annuler {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Rétablir {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Fermer</value>
   </data>
@@ -187,7 +199,7 @@
     <value>Interface</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>Le menu « Numériser » modifie le profil par défaut</value>
+    <value>Modifier le profil par défaut avec le menu « Numériser »</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>Afficher la barre d'outils « Profils »</value>
@@ -331,7 +343,7 @@
     <value>Paramètres d'enregistrement automatique</value>
   </data>
   <data name="Advanced" xml:space="preserve">
-    <value>Avancés</value>
+    <value>Avancés…</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Mode de l'OCR :</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Corriger la balance des blancs et supprimer le bruit</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Exécuter automatiquement l'OCR après la numérisation</value>
@@ -541,7 +556,7 @@
     <value>Numéro auto-incrémenté (1 chiffre)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Nom du fichier</value>
+    <value>Nom du fichier :</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Aperçu :</value>
@@ -628,7 +643,7 @@
     <value>Dimensions</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
-    <value>En attente de la fin du transfert TWAIN...</value>
+    <value>En attente de la fin du transfert TWAIN…</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
     <value>Paramètres de profil avancés</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Partager même lorsque NAPS2 est fermé</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Multilingue...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Multilingue</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Afficher la progression native TWAIN</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Diviser</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combiner</value>
   </data>
 </root>

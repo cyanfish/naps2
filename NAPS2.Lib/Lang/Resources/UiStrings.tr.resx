@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Yapıştır</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Undo {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Redo {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Tamam</value>
   </data>
@@ -187,7 +199,7 @@
     <value>Arayüz</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Tara" menüsü varsayılan profili değiştirir</value>
+    <value>"Tara" menüsü öntanımlı profili değiştirir</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>"Profiller" araç çubuğunu göster</value>
@@ -196,16 +208,16 @@
     <value>Sayfa numaralarını göster</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Tara" düğmesi varsayılan eylemi:</value>
+    <value>"Tara" düğmesi öntanımlı eylemi:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Kaydet" düğmesi varsayılan eylemi:</value>
+    <value>"Kaydet" düğmesi öntanımlı eylemi:</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Uygulama</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Yalnızca tek bir NAPS2 örneğine izin verin</value>
+    <value>Yalnızca tek NAPS2 örneğine izin ver</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Hakkında</value>
@@ -220,7 +232,7 @@
     <value>Uzaklaştır</value>
   </data>
   <data name="ZoomActual" xml:space="preserve">
-    <value>Normal Yakınlaşma</value>
+    <value>Olağan Yakınlaşma</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
     <value>Pencereye Göre Ölçeklendir</value>
@@ -247,7 +259,7 @@
     <value>Seçileni Resim Olarak Kaydet</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Hepsini E-postala</value>
+    <value>Tümünü E-postala</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
     <value>Seçilenleri E-postala</value>
@@ -271,7 +283,7 @@
     <value>TWAIN Sürücüsü</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL Sürücüsü</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
     <value>ESCL Ağ Sürücüsü</value>
@@ -355,34 +367,37 @@
     <value>Not Another PDF Scanner</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
-    <value>OCR Kurulumu</value>
+    <value>OKT Kurulumu</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
-    <value>OCR kullanarak aranabilir PDF oluştur</value>
+    <value>OKT kullanarak aranabilir PDF oluştur</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
-    <value>OCR dili:</value>
+    <value>OKT dili:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR kipi:</value>
+    <value>OKT kipi:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Taradıktan sonra OCR'yi kendiliğinden çalıştır</value>
+    <value>Taradıktan sonra OKT'yi kendiliğinden çalıştır</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Daha çok dil yükle</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>OCR Dili Yükle</value>
+    <value>OKT Dili Yükle</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>OCR kullanmak için taramak istediğiniz dili indirmeniz gerekir.</value>
+    <value>OKT kullanmak için taramak istediğiniz dili indirmeniz gerekir.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Bir veya daha çok dil seçin:</value>
+    <value>Bir ya da daha çok dil seçin:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Tahmini indirme boyutu: {0} MB</value>
+    <value>Öngörülen indirme boyutu: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>İndir</value>
@@ -421,10 +436,10 @@
     <value>Taranmış Resimleri Kurtar</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{1} {2} tarihinde taranan {0} adet resim kaydedilmedi ve kurtarılabilir. Kurtarmak ister msiniz?</value>
+    <value>{1} {2} tarihinde taranan {0} resim kaydedilmedi ve kurtarılabilir. Kurtarmak ister msiniz?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
-    <value>Yer tutucular</value>
+    <value>Yer Tutucular</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
     <value>Kaydetme istemini atla</value>
@@ -472,7 +487,7 @@
     <value>Öntanımlı Dosya Yolu:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
-    <value>Dosya yolu:</value>
+    <value>Dosya Yolu:</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Başlık:</value>
@@ -505,7 +520,7 @@
     <value>Uyumluluk</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
-    <value>Yer tutucular</value>
+    <value>Yer Tutucular</value>
   </data>
   <data name="Year4Digit" xml:space="preserve">
     <value>Yıl</value>
@@ -616,7 +631,7 @@
     <value>Kaydettikten sonra resimleri temizle</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Görüntüleri oturumlar arasında saklayın</value>
+    <value>Görüntüleri oturumlar arasında sakla</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Özel Sayfa Boyutu</value>
@@ -745,7 +760,7 @@
     <value>Tarayıcı Paylaşımı</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Paylaşılan tarayıcılar, diğer bilgisayarın NAPS2 profil ayarlarında "ESCL Sürücüsü" seçilerek yerel ağdaki diğer bilgisayarlardan kullanılabilir.</value>
+    <value>Paylaşılan tarayıcılar, yerel ağdaki diğer bilgisayarların NAPS2 profil ayarlarında "ESCL Sürücüsü" seçilerek kullanılabilir.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Paylaşılan Tarayıcı Ayarları</value>
@@ -754,6 +769,21 @@
     <value>Paylaşımı durdurmak istediğinize emin misiniz {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>NAPS2 kapalıyken bile paylaşın</value>
+    <value>NAPS2 kapalıyken de paylaş</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Multiple Languages...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Multiple Languages</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Show native TWAIN progress</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combine</value>
   </data>
 </root>

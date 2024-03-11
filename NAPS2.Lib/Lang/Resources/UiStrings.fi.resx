@@ -54,6 +54,18 @@
   <data name="Paste" xml:space="preserve">
     <value>Liitä</value>
   </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Kumoa</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Tee uudelleen</value>
+  </data>
+  <data name="UndoFormat" xml:space="preserve">
+    <value>Kumoa {0}</value>
+  </data>
+  <data name="RedoFormat" xml:space="preserve">
+    <value>Tee Uudelleen {0}</value>
+  </data>
   <data name="Done" xml:space="preserve">
     <value>Valmis</value>
   </data>
@@ -365,6 +377,9 @@
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR muoto:</value>
+  </data>
+  <data name="OcrPreProcessing" xml:space="preserve">
+    <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Tunnista teksti optisesti automaattisesti skannauksen jälkeen</value>
@@ -755,5 +770,20 @@
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Jaa vaikka NAPS2 olisi suljettu</value>
+  </data>
+  <data name="MultipleLanguages" xml:space="preserve">
+    <value>Multiple Languages...</value>
+  </data>
+  <data name="OcrMultiLangFormTitle" xml:space="preserve">
+    <value>Multiple Languages</value>
+  </data>
+  <data name="ShowNativeTwainProgress" xml:space="preserve">
+    <value>Show native TWAIN progress</value>
+  </data>
+  <data name="Split" xml:space="preserve">
+    <value>Jaa</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Yhdistä</value>
   </data>
 </root>

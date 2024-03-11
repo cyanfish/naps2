@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-01-15 04:42\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian\n"
 "Language: bg\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Запазване:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Сканиране:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Сканиране"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -106,28 +106,28 @@ msgstr "Разреши принтиране"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "Редуващо разпръскване"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Заместващо редуване"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Постоянно напомняне"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr ""
+msgstr "Необходим е допълнителен компонент за импортиране на този PDF файл. Искате ли да го изтеглите сега?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Възникна грешка при OCR."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr ""
+msgstr "Възникна грешка при опит за упълномощаване."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
@@ -143,7 +143,7 @@ msgstr "Възникна грешка при опит за запис на фа�
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr ""
+msgstr "Възникна грешка при опит за изпращане на имейла."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
@@ -156,11 +156,11 @@ msgstr "Проблем с драйвъра на скенера."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr ""
+msgstr "Операцията е в развитие. Сигурни ли сте, че искате да излезете и да отмените операцията?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Възникна неизвестна грешка по време на груповото сканиране."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -168,19 +168,19 @@ msgstr "Налично обновяване."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "Наличен е ъпдейт за OCR модула."
+msgstr "Наличен е актуализация за OCR модула."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Apple драйвер"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple имейл"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Приложение"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "Сигурни ли сте, че искате да изтриете пр
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Сигурни ли сте, че искате да спрете споделянето на {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -245,7 +245,7 @@ msgstr "Автоматично запазване на настройките"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Автоматично нарастване (с 1 цифра)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -319,7 +319,7 @@ msgstr "Яркост:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -379,6 +379,10 @@ msgstr "Изчисти изображенията след запис"
 msgid "Close"
 msgstr "Затвори"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr ""
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Съвместимост"
@@ -405,11 +409,11 @@ msgstr "Копиране..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "Авторско право {0} на сътрудници на NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
-msgstr ""
+msgstr "Праг на покритие"
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
@@ -417,7 +421,7 @@ msgstr "Изрязване"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "Изрязване до размера на страницата"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -433,7 +437,7 @@ msgstr "Завъртане по избор"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "Персонализиран SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom..."
@@ -456,7 +460,7 @@ msgstr "Директория по подразбиране:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr ""
+msgstr "Смесване"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
@@ -465,19 +469,19 @@ msgstr "Изтриване"
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
-msgstr ""
+msgstr "Изправяне"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "Напредък на изправянето"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "Изправяне на сканираните страници"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr ""
+msgstr "Изправяне..."
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
@@ -493,12 +497,12 @@ msgstr "Име за показване:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Корекция на документа"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "Даряване"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -514,7 +518,7 @@ msgstr "Грешка при сваляне"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "Необходимо изтегляне"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
@@ -526,15 +530,15 @@ msgstr "Двустранно"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL драйвер"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL мрежов драйвер"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB драйвер"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -542,11 +546,11 @@ msgstr "Редактиране"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Изпращане на имейла на всички"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Изпращане на имейла към всички като PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
@@ -559,11 +563,11 @@ msgstr "Напредък на изпращане на PDF по имейл"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Имейлът е избран"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Имейлът е избран като PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -576,7 +580,7 @@ msgstr "Автоматично запазване"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Активиране на регистрирането на грешки"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -602,7 +606,7 @@ msgstr "Приблизителен размер за сваляне: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
+msgstr "стандарт за метаданни в графични и звукови файлове (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -624,6 +628,10 @@ msgstr "Име на файл"
 msgid "File Path:"
 msgstr "Местоположение на файла:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr ""
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Обръщане"
@@ -634,7 +642,7 @@ msgstr "Обърни двустранно сканираните страниц�
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr ""
+msgstr "За високо качество на JPEG (80+), също така увеличете и качеството на изображението във вашия профил за най-добри резултати."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -711,7 +719,7 @@ msgstr "Импортиране..."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "Инсталиране {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -731,11 +739,11 @@ msgstr "Неуспешна инсталация."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Интерфейс"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr ""
+msgstr "Редуване"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -751,7 +759,7 @@ msgstr "Jpeg качество"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Съхраняване на изображенията по време на сесиите"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -759,7 +767,7 @@ msgstr "Ключови думи:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW - алгоритъм за компресиране на данни без загуби"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -771,7 +779,7 @@ msgstr "Ляво"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr ""
+msgstr "Остаряло (само с присъщия потребителски интерфейс)"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -787,7 +795,7 @@ msgstr "Максимално качество (по-големи файлове)
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Прехвърляне на паметта"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -813,6 +821,14 @@ msgstr "Преместване надолу"
 msgid "Move Up"
 msgstr "Преместване нагоре"
 
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr ""
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr ""
+
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
 msgstr "Многократно сканиране (фиксирано забавяне между сканиранията)"
@@ -829,11 +845,11 @@ msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr ""
+msgstr "NAPS2 е напълно безплатен. Обмислете дарение."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -845,7 +861,7 @@ msgstr "Липсва име."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Местен трансфер"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -875,7 +891,7 @@ msgstr "Няма листoве в устройството за подаване
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr ""
+msgstr "Няма избран доставчик."
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
@@ -884,15 +900,15 @@ msgstr "Не е открито сканиращо устройство."
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr ""
+msgstr "Няма налични актуализации."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
-msgstr ""
+msgstr "Нито един"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Не е като други PDF скенери"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -904,7 +920,7 @@ msgstr "Брой сканирания:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "Оптично разпознаване на думи"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -912,7 +928,7 @@ msgstr "Сваляне на OCR"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr ""
+msgstr "Напредък на оптичното разпознаване"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
@@ -924,11 +940,11 @@ msgstr "Език за OCR:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr ""
+msgstr "OCR режим:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr ""
+msgstr "Да"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
@@ -952,7 +968,7 @@ msgstr "Един или няколко файла не могат да бъда�
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Позволяване на само един екземпляр на NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -960,11 +976,11 @@ msgstr "Отвори папка"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
-msgstr ""
+msgstr "Операцията е в ход"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Outlook Web Access"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
@@ -993,19 +1009,19 @@ msgstr "PDF записан."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1034,7 +1050,7 @@ msgstr "Заместители"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr ""
+msgstr "Последваща обработка"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1072,15 +1088,15 @@ msgstr "Профили"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Ако е избрано напомняне"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr ""
+msgstr "Напомняне за път на файла"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
-msgstr ""
+msgstr "Доставчик"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
@@ -1101,6 +1117,14 @@ msgstr "Възстановяване..."
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
 msgstr "Напредък на възстановяването"
+
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr ""
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr ""
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1132,11 +1156,11 @@ msgstr "Обръщане"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Обръщане на всички"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Обратно на избраното"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1160,32 +1184,32 @@ msgstr "Завъртане надясно"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr ""
+msgstr "Изпълнение във фонов режим"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr ""
+msgstr "Започва оптичното разпознаване..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE драйвер"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Запазване"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Запазване на всички"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Запазване на всички като изображения"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Запазване на всички като PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1208,15 +1232,15 @@ msgstr "Напредък на запазване на PDF"
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Запазване на избраното"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "Запазване на избраното като изображения"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "Запазване на избраното като PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1253,7 +1277,7 @@ msgstr "Настройки на сканирането"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Сканиране с профил по подразбиране"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1262,7 +1286,7 @@ msgstr "Сканирано изображение"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Споделяне на скенер"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1307,7 +1331,7 @@ msgstr "Избрани ({0})"
 
 #: UiStrings.resx$SeparateByPatchT$Message
 msgid "Separate files by Patch-T"
-msgstr ""
+msgstr "Разделяне на файловете чрез Patch-T"
 
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
@@ -1316,27 +1340,27 @@ msgstr "Задаване като настройки по подразбиран
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Споделяне"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Споделяне дори когато NAPS2 е затворен"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Споделени настройки на скенера"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Споделените скенери могат да се използват от други компютри в локалната мрежа, като изберете \"ESCL драйвер\" в настройките на NAPS2 профила на другия компютър."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "Изостряне"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1344,15 +1368,19 @@ msgstr "Показване"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
+msgstr "Показване на лентата с инструменти \"Профили\""
+
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
 msgstr ""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "Показване на номерата на страниците"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
-msgstr ""
+msgstr "Файлове с една страница"
 
 #: UiStrings.resx$SingleScan$Message
 msgid "Single scan"
@@ -1362,13 +1390,17 @@ msgstr "Единично сканиране"
 msgid "Skip save prompt"
 msgstr "Пропусни запитването за запис"
 
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Старт"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
-msgstr ""
+msgstr "Разтягане до размера на страницата"
 
 #: UiStrings.resx$SubjectLabel$Message
 msgid "Subject:"
@@ -1389,16 +1421,16 @@ msgstr "Технически данни"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr ""
+msgstr "OCR двигател не е наличен. Уверете се, че сте инсталирали необходимия пакет:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
+msgstr "Операцията за OCR изтече."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr ""
+msgstr "Драйверът SANE не е наличен. Уверете се, че сте инсталирали необходимите пакети:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
@@ -1419,7 +1451,7 @@ msgstr "Вече има файл {0} . Искате ли да бъде през�
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr ""
+msgstr "Следният файл е шифрован и изисква парола за отваряне:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1439,7 +1471,7 @@ msgstr "Капакът на скенера не е затворен."
 #: MiscResources.resx$DriverNotSupported$Message
 #: SdkResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system."
-msgstr ""
+msgstr "Избраният драйвер не се поддържа от тази система."
 
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
@@ -1468,11 +1500,11 @@ msgstr "Избраният скенер е недостъпен."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr ""
+msgstr "Опции на Tiff"
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
@@ -1484,7 +1516,7 @@ msgstr "Заглавие:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Инструменти"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1498,25 +1530,33 @@ msgstr "US Legal (8.5x14 инча)"
 msgid "US Letter (8.5x11 in)"
 msgstr "US писмо (8.5x11 инч)"
 
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr ""
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr ""
+
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "Незаписани промени"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "Напредък на актуализацията"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "Проверката за актуализация е деактивирана."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
-msgstr ""
+msgstr "Актуализиране..."
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
-msgstr ""
+msgstr "Качване на имейл..."
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1553,7 +1593,7 @@ msgstr "Изчакване TWAIN да приключи задачата..."
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
-msgstr ""
+msgstr "Чака се позволение..."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
@@ -1565,7 +1605,7 @@ msgstr "Праг на бялото"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Wia версия:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1622,19 +1662,19 @@ msgstr "от {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
@@ -1642,7 +1682,7 @@ msgstr "{0} / {1} файлове"
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr ""
+msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -379,6 +379,10 @@ msgstr "Neteja les imatges després de desar"
 msgid "Close"
 msgstr "Tanca"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "Combina"
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilitat"
@@ -624,6 +628,10 @@ msgstr "Nom del fitxer"
 msgid "File Path:"
 msgstr "Camí del fitxer:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Corregeix el balanç de blancs i suprimeix el soroll"
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Gira"
@@ -812,6 +820,14 @@ msgstr "Desplaça cap avall"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Desplaça cap amunt"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Diversos idiomes"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Diversos idiomes..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "S'està recuperant......"
 msgid "Recovery Progress"
 msgstr "Progrés de la recuperació"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "Refés"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "Refés {0}"
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Recorda aquesta configuració"
@@ -1346,6 +1370,10 @@ msgstr "Mostra"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Mostra la barra d'eines \"Perfils\""
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "Mostra la interfície de progrés nativa del TWAIN"
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Mostra els números de pàgina"
@@ -1361,6 +1389,10 @@ msgstr "Escaneig senzill"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Omet les opcions de desat"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "Divideix"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "US Legal (8.5x14 in)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "Carta US (8.5x11 in)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "Desfés"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "Desfés {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

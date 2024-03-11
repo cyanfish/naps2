@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-02-05 03:30\n"
+"PO-Revision-Date: 2024-03-11 02:36\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -379,6 +379,10 @@ msgstr "Очистить картинки после сохранения"
 msgid "Close"
 msgstr "Закрыть"
 
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr ""
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Совместимость"
@@ -624,6 +628,10 @@ msgstr "Имя файла:"
 msgid "File Path:"
 msgstr "Путь к файлу:"
 
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "Исправить баланс белого и убрать шум"
+
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Отразить"
@@ -812,6 +820,14 @@ msgstr "Переместить ниже"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Переместить выше"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "Несколько языков"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "Несколько языков..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1102,6 +1118,14 @@ msgstr "Восстановление..."
 msgid "Recovery Progress"
 msgstr "Процесс восстановления"
 
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr ""
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr ""
+
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
 msgstr "Запомнить эти настройки"
@@ -1346,6 +1370,10 @@ msgstr "Показать"
 msgid "Show \"Profiles\" toolbar"
 msgstr "Показывать панель \"Профили\""
 
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "Показать \"нативный\" прогресс TWAIN"
+
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Показывать номера страниц"
@@ -1361,6 +1389,10 @@ msgstr "Одиночное сканирование"
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
 msgstr "Пропустить запрос на сохранение"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr ""
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1497,6 +1529,14 @@ msgstr "US Legal (8.5x14 дюймов)"
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 дюймов)"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr ""
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
