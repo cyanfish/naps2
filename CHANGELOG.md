@@ -1,3 +1,17 @@
+Changes in 7.4.0:
+- Added Undo/Redo (from the right-click menu or Ctrl+Z)
+  - Deletions can't be undone 
+- Added Split/Combine (under the Image menu)
+  - Split can be used for book scanning to separate pages
+  - Combine can be used to include front/back sides of an ID card in one image
+- Added "Multiple Languages" as an option for OCR (in the OCR language dropdown)
+- Added a "Fix white balance and remove noise" OCR option
+  - This can improve OCR with low-quality scans, but will make OCR slower
+  - This is equivalent to using "Document Correction" before OCR
+- Upgraded Tesseract from 5.2.0 to 5.3.4 for OCR
+- Added a "Show native TWAIN progress" profile option (under Advanced) 
+- Bug fixes
+
 Changes in 7.3.1:
 - Improved loading time for "Keep images across sessions"
 - PDF encryption settings are now hidden until enabled
