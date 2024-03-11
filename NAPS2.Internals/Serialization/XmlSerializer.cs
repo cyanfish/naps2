@@ -241,6 +241,9 @@ public abstract class XmlSerializer
 
                 if (typeInfo.CustomSerializer == null)
                 {
+                    // Prevent infinite recursion by populating the partial type info
+                    // Cycles in type info are ok (e.g. Node.Parent is a Node), just not in the actual objects
+                    TypeInfoCache[type] = typeInfo;
                     var knownTypesFromPropertyTypes =
                         props.SelectMany(x => GetTypeInfo(x.PropertyType).KnownTypesByElementName);
                     var knownTypesFromActualType = GetKnownTypes(type);
