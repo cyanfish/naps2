@@ -35,7 +35,7 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign("Ctrl+C", commands.Copy);
         _ksm.Assign("Ctrl+V", commands.Paste);
         _ksm.Assign("Ctrl+Z", commands.Undo);
-        _ksm.Assign("Ctrl+Y", commands.Redo);
+        _ksm.Assign(EtoPlatform.Current.IsGtk ? "Ctrl+Shift+Z" : "Ctrl+Y", commands.Redo);
 
         // Configured
 

@@ -348,7 +348,7 @@ public class PreviewForm : EtoDialogBase
         _ksm.Assign("Ctrl+OemMinus", ZoomOutCommand);
         _ksm.Assign("Ctrl+0", ZoomActualCommand);
         _ksm.Assign("Ctrl+Z", Commands.Undo);
-        _ksm.Assign("Ctrl+Y", Commands.Redo);
+        _ksm.Assign(EtoPlatform.Current.IsGtk ? "Ctrl+Shift+Z" : "Ctrl+Y", Commands.Redo);
 
         // Configured
 
