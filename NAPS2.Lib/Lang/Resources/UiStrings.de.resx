@@ -756,4 +756,16 @@
   <data name="ShareAsService" xml:space="preserve">
     <value>Auch teilen, wenn NAPS2 geschlossen ist</value>
   </data>
+  <data name="Squeeze" xml:space="preserve">
+    <value>Squeeze</value>
+  </data>
+  <data name="SqueezeAll" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="SqueezeSelected" xml:space="preserve">
+    <value>Ausgewählte</value>
+  </data>
+  <data name="SqueezeSettings" xml:space="preserve">
+    <value>Sqz Einstellungen</value>
+  </data>
 </root>

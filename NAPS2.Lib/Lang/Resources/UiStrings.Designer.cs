@@ -2065,7 +2065,37 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("SkipSavePrompt", resourceCulture);
             }
         }
-        
+
+        // Squeeze Anpassung
+        internal static string Squeeze
+        {
+            get
+            {
+                return ResourceManager.GetString("Squeeze", resourceCulture);
+            }
+        }
+        internal static string SqueezeAll
+        {
+            get
+            {
+                return ResourceManager.GetString("SqueezeAll", resourceCulture);
+            }
+        }
+        internal static string SqueezeSelected
+        {
+            get
+            {
+                return ResourceManager.GetString("SqueezeSelected", resourceCulture);
+            }
+        }
+        internal static string SqueezeSettings
+        {
+            get
+            {
+                return ResourceManager.GetString("SqueezeSettings", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>

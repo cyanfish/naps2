@@ -5,5 +5,6 @@ public enum DesktopToolbarMenuType
     Scan,
     SavePdf,
     SaveImages,
-    EmailPdf
+    EmailPdf,
+    Squeeze
 }

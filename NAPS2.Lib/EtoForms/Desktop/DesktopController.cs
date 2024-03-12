@@ -535,6 +535,10 @@ public class DesktopController
             ImportFiles(fileNames!);
         }
     }
+    public void Squeeze()
+    {
+
+    }
 
     public void Suspend()
     {

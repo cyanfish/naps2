@@ -257,6 +257,14 @@ public abstract class DesktopForm : EtoFormBase
             CreateToolbarButton(Commands.Ocr);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Import))
             CreateToolbarButton(Commands.Import);
+        // CreateToolbarSeparator();
+        // Anpassung für den Squeeze Button
+        if (!hiddenButtons.HasFlag(ToolbarButtons.Squeeze))
+            CreateToolbarButtonWithMenu(Commands.Squeeze, DesktopToolbarMenuType.Squeeze, new MenuProvider()
+                .Append(Commands.SqueezeAll)
+                .Append(Commands.SqueezeSelected)
+                .Separator()
+                .Append(Commands.SqueezeSettings));
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.SavePdf))
             CreateToolbarButtonWithMenu(Commands.SavePdf, DesktopToolbarMenuType.SavePdf, new MenuProvider()

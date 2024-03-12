@@ -71,6 +71,25 @@ public class DesktopCommands
             Image = iconProvider.GetIcon("folder_picture"),
             Shortcut = Application.Instance.CommonModifier | Keys.O
         };
+        // Squeeze Icon Shortcut?
+        Squeeze = new ActionCommand(desktopController.Squeeze)
+        {
+            Text = UiStrings.Squeeze,
+            Image = iconProvider.GetIcon("inbox_out-white")
+        };
+        SqueezeAll = new ActionCommand(_imageListActions.SelectAll)
+        {
+            Text = UiStrings.SqueezeAll
+        };
+        SqueezeSelected = new ActionCommand(_imageListActions.SelectAll)
+        {
+            Text = UiStrings.SqueezeSelected
+        };
+        SqueezeSettings = new ActionCommand(desktopSubFormController.ShowSqueezeSettingsForm)
+        {
+            Text = UiStrings.SqueezeSettings,
+            Image = iconProvider.GetIcon("cog_small")
+        };
         SaveAll = new ActionCommand(_imageListActions.SaveAllAsPdfOrImages)
         {
             Text = UiStrings.SaveAll,
@@ -337,6 +356,10 @@ public class DesktopCommands
     public ActionCommand Profiles { get; set; }
     public ActionCommand Ocr { get; set; }
     public ActionCommand Import { get; set; }
+    public ActionCommand Squeeze { get; set; }
+    public ActionCommand SqueezeAll { get; set; }
+    public ActionCommand SqueezeSelected { get; set; }
+    public ActionCommand SqueezeSettings { get; set; }
     public ActionCommand SaveAll { get; set; }
     public ActionCommand SaveSelected { get; set; }
     public ActionCommand SavePdf { get; set; }
