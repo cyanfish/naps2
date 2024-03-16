@@ -26,6 +26,18 @@ public class MacEtoPlatform : EtoPlatform
         return new Application(Platforms.macOS);
     }
 
+    public override void Invoke(Application application, Action action)
+    {
+        // TODO: Eto PR to always use InvokeOnMainThread, don't execute the action directly
+        // even if we're already on the main thread.
+        NSApplication.SharedApplication.InvokeOnMainThread(action);
+    }
+
+    public override void AsyncInvoke(Application application, Action action)
+    {
+        NSApplication.SharedApplication.BeginInvokeOnMainThread(action);
+    }
+
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new MacListView<T>(behavior);
 
