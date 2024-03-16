@@ -65,7 +65,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
-        var overlay = (GTK.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
         var widget = control.ToNative();
         if (inOverlay)
         {
@@ -90,7 +90,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
-        var overlay = (GTK.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
         var widget = control.ToNative();
         if (inOverlay)
         {
@@ -108,7 +108,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void RemoveFromContainer(Control container, Control control)
     {
-        var overlay = (GTK.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
         var widget = control.ToNative();
         overlay.Remove(widget);
         var panel = (GTK.Fixed) overlay.Children[0];
@@ -118,7 +118,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetContainerSize(Window _window, Control container, Size size, int padding)
     {
-        var overlay = (GTK.Overlay) container.ToNative();
+        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
         if (!_window.Resizable)
         {
             // This ensures the window has the appropriate margins, otherwise with resizable=false it changes to fit

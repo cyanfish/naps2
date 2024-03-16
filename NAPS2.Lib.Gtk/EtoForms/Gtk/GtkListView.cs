@@ -63,6 +63,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
         _scrolledWindow.Add(eventBox);
         _scrolledWindow.StyleContext.AddClass("listview");
+        Control = _scrolledWindow.ToEto();
     }
 
     private void OnButtonPress(object o, ButtonPressEventArgs args)
@@ -83,7 +84,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     public ScrolledWindow NativeControl => _scrolledWindow;
 
-    public Control Control => _scrolledWindow.ToEto();
+    public Control Control { get; }
 
     public ContextMenu? ContextMenu { get; set; }
 
