@@ -20,8 +20,8 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
-    <PackageReference Include="Eto.Forms" Version="2.8.2" />
-    <PackageReference Include="Eto.Platform.Windows" Version="2.8.2" />
+    <PackageReference Include="Eto.Forms" Version="2.8.3" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.8.3" />
   </ItemGroup>
 
   <ItemGroup>

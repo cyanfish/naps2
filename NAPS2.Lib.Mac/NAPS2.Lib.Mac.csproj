@@ -16,7 +16,7 @@
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" />
         <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
-        <PackageReference Include="Eto.Platform.macOS" Version="2.8.2" />
+        <PackageReference Include="Eto.Platform.macOS" Version="2.8.3" />
     </ItemGroup>
 
     <ItemGroup>

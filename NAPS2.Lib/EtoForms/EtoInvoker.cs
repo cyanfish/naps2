@@ -13,18 +13,18 @@ public class EtoInvoker : IInvoker
 
     public void Invoke(Action action)
     {
-        EtoPlatform.Current.Invoke(_application, action);
+        _application.Invoke(action);
     }
 
     public void InvokeDispatch(Action action)
     {
-        EtoPlatform.Current.AsyncInvoke(_application, action);
+        _application.AsyncInvoke(action);
     }
 
     public T InvokeGet<T>(Func<T> func)
     {
         T value = default!;
-        EtoPlatform.Current.Invoke(_application, () => value = func());
+        _application.Invoke(() => value = func());
         return value;
     }
 }

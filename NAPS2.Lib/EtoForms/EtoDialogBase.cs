@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 
@@ -25,17 +24,6 @@ public abstract class EtoDialogBase : Dialog, IFormBase
     {
         BuildLayout();
         base.OnPreLoad(e);
-    }
-
-    // TODO: PR for Eto to integrate this
-    public new Icon Icon
-    {
-        get => base.Icon;
-        set
-        {
-            base.Icon = value;
-            EtoPlatform.Current.ShowIcon(this);
-        }
     }
 
     public FormStateController FormStateController { get; }

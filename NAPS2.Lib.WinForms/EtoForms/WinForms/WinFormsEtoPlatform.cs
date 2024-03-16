@@ -30,20 +30,6 @@ public class WinFormsEtoPlatform : EtoPlatform
         return new Application(Eto.Platforms.WinForms);
     }
 
-    public override void RunApplication(Application application, Form mainForm)
-    {
-        // We manually run an application rather than using eto as that lets us change the main form
-        // TODO: PR for eto to handle mainform changes correctly
-        application.MainForm = mainForm;
-        mainForm.Show();
-        var appContext = new WF.ApplicationContext(mainForm.ToNative());
-        WinFormsDesktopForm.ApplicationContext = appContext;
-        var setOptionsMethod =
-            typeof(ApplicationHandler).GetMethod("SetOptions", BindingFlags.Instance | BindingFlags.NonPublic);
-        setOptionsMethod!.Invoke(application.Handler, Array.Empty<object>());
-        WF.Application.Run(appContext);
-    }
-
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new WinFormsListView<T>(behavior);
 

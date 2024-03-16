@@ -42,7 +42,7 @@ public static class GuiEntryPoint
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
 
-        EtoPlatform.Current.RunApplication(application, desktop);
+        application.Run(desktop);
         return 0;
     }
 

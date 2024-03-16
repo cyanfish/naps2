@@ -26,20 +26,6 @@ public class MacEtoPlatform : EtoPlatform
         return new Application(Platforms.macOS);
     }
 
-    public override void Invoke(Application application, Action action)
-    {
-        // TODO: Eto PR to use this instead of DispatchQueue.MainQueue
-        // Invoking directly on DispatchQueue ignores the run loop mode, which can mean something like spawning a modal
-        // form doesn't behave normally.
-        // https://stackoverflow.com/questions/9335434/whats-the-difference-between-performselectoronmainthread-and-dispatch-async
-        NSApplication.SharedApplication.InvokeOnMainThread(action);
-    }
-
-    public override void AsyncInvoke(Application application, Action action)
-    {
-        NSApplication.SharedApplication.BeginInvokeOnMainThread(action);
-    }
-
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new MacListView<T>(behavior);
 

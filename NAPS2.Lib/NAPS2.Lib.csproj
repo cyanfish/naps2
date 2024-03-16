@@ -37,7 +37,7 @@
     <PackageReference Include="MimeKit" Version="1.22.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.2.6" />
-    <PackageReference Include="Eto.Forms" Version="2.8.2" />
+    <PackageReference Include="Eto.Forms" Version="2.8.3" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.3.5" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
   </ItemGroup>
