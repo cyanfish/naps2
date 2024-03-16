@@ -23,7 +23,8 @@ public class PackageCommand : ICommand<PackageOptions>
 
         // TODO: Fix windows targets to ensure that the project is built
         // TODO: Allow customizing dotnet version
-        foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, true))
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(
+                     opts.PackageType, opts.Platform, true, opts.XCompile))
         {
             PackageInfo GetPackageInfoForConfig(string? libConfig = null) => GetPackageInfo(target.Platform, libConfig, opts.Name);
             switch (target.Type)

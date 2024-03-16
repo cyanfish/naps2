@@ -36,9 +36,9 @@ public static class TargetsHelper
     public static IEnumerable<PackageTarget> EnumeratePackageTargets() => EnumeratePackageTargets(null, null, false);
 
     public static IEnumerable<PackageTarget> EnumeratePackageTargets(string? packageTypeOpt, string? platformOpt,
-        bool requireCompatiblePlatform)
+        bool requireCompatiblePlatform, bool xCompile = false)
     {
-        var targets = DoEnumeratePackageTargets(packageTypeOpt, platformOpt, requireCompatiblePlatform).ToList();
+        var targets = DoEnumeratePackageTargets(packageTypeOpt, platformOpt, requireCompatiblePlatform, xCompile).ToList();
         if (targets.Count == 0)
         {
             throw new Exception($"Invalid package/platform combination: {packageTypeOpt}/{platformOpt}");
@@ -47,7 +47,7 @@ public static class TargetsHelper
     }
 
     private static IEnumerable<PackageTarget> DoEnumeratePackageTargets(string? packageTypeOpt, string? platformOpt,
-        bool requireCompatiblePlatform)
+        bool requireCompatiblePlatform, bool xCompile)
     {
         packageTypeOpt = packageTypeOpt?.ToLowerInvariant() ?? "";
         platformOpt = platformOpt?.ToLowerInvariant() ?? "";
@@ -103,33 +103,45 @@ public static class TargetsHelper
                 }
                 if ((allPkg || packageType == "deb") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
                 {
-                    if (allPlat || platform == "linux")
+                    if (allPlat || platform == "linux" && (!requireCompatiblePlatform ||
+                                                           xCompile ||
+                                                           RuntimeInformation.OSArchitecture == Architecture.X64))
                     {
                         yield return new PackageTarget(PackageType.Deb, Platform.Linux);
                     }
-                    if (allPlat || platform == "linuxarm")
+                    if (allPlat || platform == "linuxarm" && (!requireCompatiblePlatform ||
+                                                              xCompile ||
+                                                              RuntimeInformation.OSArchitecture == Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Deb, Platform.LinuxArm);
                     }
                 }
                 if ((allPkg || packageType == "rpm") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
                 {
-                    if (allPlat || platform == "linux")
+                    if (allPlat || platform == "linux" && (!requireCompatiblePlatform ||
+                                                           xCompile ||
+                                                           RuntimeInformation.OSArchitecture == Architecture.X64))
                     {
                         yield return new PackageTarget(PackageType.Rpm, Platform.Linux);
                     }
-                    if (allPlat || platform == "linuxarm")
+                    if (allPlat || platform == "linuxarm" && (!requireCompatiblePlatform ||
+                                                              xCompile ||
+                                                              RuntimeInformation.OSArchitecture == Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Rpm, Platform.LinuxArm);
                     }
                 }
                 if ((allPkg || packageType == "flatpak") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
                 {
-                    if (allPlat || platform == "linux")
+                    if (allPlat || platform == "linux" && (!requireCompatiblePlatform ||
+                                                           xCompile ||
+                                                           RuntimeInformation.OSArchitecture == Architecture.X64))
                     {
                         yield return new PackageTarget(PackageType.Flatpak, Platform.Linux);
                     }
-                    if (allPlat || platform == "linuxarm")
+                    if (allPlat || platform == "linuxarm" && (!requireCompatiblePlatform ||
+                                                              xCompile ||
+                                                              RuntimeInformation.OSArchitecture == Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Flatpak, Platform.LinuxArm);
                     }

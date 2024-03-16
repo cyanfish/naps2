@@ -29,5 +29,8 @@ public class PackageOptions : OptionsBase
     [Option("debug", Required = false, HelpText = "Set DEBUG compile-time constant. Requires --build.")]
     public bool Debug { get; set; }
 
+    [Option("xcompile", Required = false, HelpText = "Cross-compile packages where possible (e.g. build linux-arm64 on linux-x64)")]
+    public bool XCompile { get; set; }
+
     // TODO: Add net target (net462/net8/net8-windows etc.)
 }
