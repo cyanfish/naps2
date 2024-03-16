@@ -304,6 +304,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             }
             foreach (var replace in diffs.ReplaceOperations)
             {
+                // TODO: This seems to have some race condition (errors when changing languages while thumbnails render)
                 Items[replace.Index].Tag = replace.Item;
                 ImageList.Replace(replace.Item, replace.Index);
             }

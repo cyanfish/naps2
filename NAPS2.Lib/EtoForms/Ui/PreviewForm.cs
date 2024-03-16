@@ -65,7 +65,7 @@ public class PreviewForm : EtoDialogBase
         };
     }
 
-    private void ImageList_ImagesUpdated(object sender, ImageListEventArgs e)
+    private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
     {
         Invoker.Current.InvokeDispatch(async () =>
         {
