@@ -304,7 +304,11 @@ public class WinFormsDesktopForm : DesktopForm
         // Ideally we could show them all, but it can be really distracting. So only showing F2/F3 etc. right now.
         if (item is WF.ToolStripMenuItem menuItem && !command.Shortcut.ToString().Contains(","))
         {
-            menuItem.ShortcutKeys = command.Shortcut.ToSWF();
+            var swfKeys = command.Shortcut.ToSWF();
+            if (WF.ToolStripManager.IsValidShortcut(swfKeys))
+            {
+                menuItem.ShortcutKeys = swfKeys;
+            }
         }
         command.EnabledChanged += (_, _) => item.Enabled = command.Enabled;
         if (item is WF.ToolStripSplitButton button)
