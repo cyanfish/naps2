@@ -379,9 +379,11 @@ internal class TwainScanRunner
                 break;
             case BitDepth.Grayscale:
                 source.Capabilities.ICapPixelType.SetValue(PixelType.Gray);
+                source.Capabilities.ICapBitDepth.SetValue(8);
                 break;
             case BitDepth.BlackAndWhite:
                 source.Capabilities.ICapPixelType.SetValue(PixelType.BlackWhite);
+                source.Capabilities.ICapBitDepth.SetValue(1);
                 break;
         }
 
