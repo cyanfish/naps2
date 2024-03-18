@@ -22,9 +22,9 @@ public static class WorkerServer
             var serviceImpl = new WorkerServiceImpl(scanningContext,
                 new ThumbnailRenderer(scanningContext.ImageContext), new StubMapiWrapper(),
 #if MAC
-                new StubTwainSessionController());
+                new StubTwainController());
 #else
-                new LocalTwainSessionController(scanningContext));
+                new LocalTwainController(scanningContext));
 #endif
             serviceImpl.OnStop += (_, _) => tcs.SetResult(true);
             WorkerService.BindService(server.ServiceBinder, serviceImpl);

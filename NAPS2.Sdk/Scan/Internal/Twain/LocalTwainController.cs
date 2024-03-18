@@ -10,13 +10,13 @@ using NTwain.Data;
 namespace NAPS2.Scan.Internal.Twain;
 
 /// <summary>
-/// Real implementation of ITwainSessionController that interacts with a Twain session in the current process.
+/// Real implementation of ITwainController that interacts with a Twain session in the current process.
 /// </summary>
-internal class LocalTwainSessionController : ITwainSessionController
+internal class LocalTwainController : ITwainController
 {
     public static readonly TWIdentity TwainAppId;
 
-    static LocalTwainSessionController()
+    static LocalTwainController()
     {
         PlatformInfo.Current.Log.IsDebugEnabled = true;
         TwainAppId = TWIdentity.Create(DataGroups.Image | DataGroups.Control, AssemblyHelper.Version,
@@ -32,7 +32,7 @@ internal class LocalTwainSessionController : ITwainSessionController
 
     private readonly ILogger _logger;
 
-    public LocalTwainSessionController(ScanningContext scanningContext)
+    public LocalTwainController(ScanningContext scanningContext)
     {
         _logger = scanningContext.Logger;
     }
@@ -113,7 +113,7 @@ internal class LocalTwainSessionController : ITwainSessionController
     private async Task InternalScan(TwainDsm dsm, ScanOptions options, CancellationToken cancelToken,
         ITwainEvents twainEvents)
     {
-        var runner = new TwainSessionScanRunner(_logger, TwainAppId, dsm, options, cancelToken, twainEvents);
+        var runner = new TwainScanRunner(_logger, TwainAppId, dsm, options, cancelToken, twainEvents);
         await runner.Run();
     }
 }

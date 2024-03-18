@@ -3,9 +3,9 @@ using System.Threading;
 namespace NAPS2.Scan.Internal.Twain;
 
 /// <summary>
-/// Stub implementation of ITwainSessionController for unsupported platforms.
+/// Stub implementation of ITwainController for unsupported platforms.
 /// </summary>
-internal class StubTwainSessionController : ITwainSessionController
+internal class StubTwainController : ITwainController
 {
     public Task<List<ScanDevice>> GetDeviceList(ScanOptions options)
     {

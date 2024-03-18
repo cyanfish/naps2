@@ -5,7 +5,7 @@ using NAPS2.Platform.Windows;
 namespace NAPS2.Scan.Internal.Twain;
 
 /// <summary>
-/// Implementation of IScanDriver for Twain. Delegates to RemoteTwainSessionController in most cases which runs Twain
+/// Implementation of IScanDriver for Twain. Delegates to RemoteTwainController in most cases which runs Twain
 /// in a 32-bit worker process as Twain drivers are generally 32-bit only. 
 /// </summary>
 internal class TwainScanDriver : IScanDriver
@@ -22,7 +22,7 @@ internal class TwainScanDriver : IScanDriver
         CheckArch(options);
         return Task.Run(async () =>
         {
-            var controller = GetSessionController(options);
+            var controller = GetTwainController(options);
             foreach (var device in await controller.GetDeviceList(options))
             {
                 callback(device);
@@ -36,7 +36,7 @@ internal class TwainScanDriver : IScanDriver
         CheckArch(options);
         return Task.Run(async () =>
         {
-            var controller = GetSessionController(options);
+            var controller = GetTwainController(options);
             using var state = new TwainImageProcessor(_scanningContext, options, scanEvents, callback);
             try
             {
@@ -86,16 +86,16 @@ internal class TwainScanDriver : IScanDriver
         }
     }
 
-    private ITwainSessionController GetSessionController(ScanOptions options)
+    private ITwainController GetTwainController(ScanOptions options)
     {
         if (_scanningContext.WorkerFactory == null)
         {
             // If we don't have a worker, we assume the configuration has already been validated by CheckArch and will
             // run in the current process.
             // In general we always prefer to run TWAIN in a worker though.
-            return new LocalTwainSessionController(_scanningContext);
+            return new LocalTwainController(_scanningContext);
         }
-        return new RemoteTwainSessionController(_scanningContext);
+        return new RemoteTwainController(_scanningContext);
     }
 }
 #endif

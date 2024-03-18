@@ -23,27 +23,27 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
     private readonly IRemoteScanController _remoteScanController;
     private readonly ThumbnailRenderer _thumbnailRenderer;
     private readonly IMapiWrapper _mapiWrapper;
-    private readonly ITwainSessionController _twainSessionController;
+    private readonly ITwainController _twainController;
 
     private readonly AutoResetEvent _ongoingCallFinished = new(false);
     private int _ongoingCallCount;
 
     public WorkerServiceImpl(ScanningContext scanningContext, ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
+        IMapiWrapper mapiWrapper, ITwainController twainController)
         : this(scanningContext, new RemoteScanController(scanningContext),
-            thumbnailRenderer, mapiWrapper, twainSessionController)
+            thumbnailRenderer, mapiWrapper, twainController)
     {
     }
 
     internal WorkerServiceImpl(ScanningContext scanningContext, IRemoteScanController remoteScanController,
         ThumbnailRenderer thumbnailRenderer,
-        IMapiWrapper mapiWrapper, ITwainSessionController twainSessionController)
+        IMapiWrapper mapiWrapper, ITwainController twainController)
     {
         _scanningContext = scanningContext;
         _remoteScanController = remoteScanController;
         _thumbnailRenderer = thumbnailRenderer;
         _mapiWrapper = mapiWrapper;
-        _twainSessionController = twainSessionController;
+        _twainController = twainController;
     }
 
     public override Task<InitResponse> Init(InitRequest request, ServerCallContext context)
@@ -315,7 +315,7 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
         try
         {
             var options = request.OptionsXml.FromXml<ScanOptions>();
-            var deviceList = await _twainSessionController.GetDeviceList(options);
+            var deviceList = await _twainController.GetDeviceList(options);
             return new GetDeviceListResponse
             {
                 DeviceListXml = deviceList.ToXml()
@@ -353,7 +353,7 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
                 })
             );
             var options = request.OptionsXml.FromXml<ScanOptions>();
-            await _twainSessionController.StartScan(options, twainEvents, context.CancellationToken);
+            await _twainController.StartScan(options, twainEvents, context.CancellationToken);
         }
         catch (Exception e)
         {

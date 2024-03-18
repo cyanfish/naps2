@@ -10,18 +10,18 @@ public class WorkerModule : Module
     {
         builder.Register(ctx => new ScanningContext(ctx.Resolve<ImageContext>())).SingleInstance();
 #if MAC
-        builder.RegisterType<StubTwainSessionController>().As<ITwainSessionController>();
+        builder.RegisterType<StubTwainController>().As<ITwainController>();
 #elif NET6_0_OR_GREATER
         if (OperatingSystem.IsWindows())
         {
-            builder.RegisterType<LocalTwainSessionController>().As<ITwainSessionController>();
+            builder.RegisterType<LocalTwainController>().As<ITwainController>();
         }
         else
         {
-            builder.RegisterType<StubTwainSessionController>().As<ITwainSessionController>();
+            builder.RegisterType<StubTwainController>().As<ITwainController>();
         }
 #else
-        builder.RegisterType<LocalTwainSessionController>().As<ITwainSessionController>();
+        builder.RegisterType<LocalTwainController>().As<ITwainController>();
 #endif
     }
 }

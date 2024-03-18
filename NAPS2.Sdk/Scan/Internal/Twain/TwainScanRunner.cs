@@ -14,7 +14,7 @@ namespace NAPS2.Scan.Internal.Twain;
 /// ITwainEvents interface. This logic involves quite a bit of complicated state management related to the Twain spec.
 /// https://twain.org/wp-content/uploads/2015/05/TWAIN-2.3-Specification.pdf
 /// </summary>
-internal class TwainSessionScanRunner
+internal class TwainScanRunner
 {
     private readonly ILogger _logger;
     private readonly TwainDsm _dsm;
@@ -27,7 +27,7 @@ internal class TwainSessionScanRunner
     private readonly TaskCompletionSource<bool> _sourceDisabledTcs;
     private DataSource? _source;
 
-    public TwainSessionScanRunner(ILogger logger, TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
+    public TwainScanRunner(ILogger logger, TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
         CancellationToken cancelToken, ITwainEvents twainEvents)
     {
         _logger = logger;

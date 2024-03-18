@@ -5,13 +5,13 @@ using NAPS2.Remoting.Worker;
 namespace NAPS2.Scan.Internal.Twain;
 
 /// <summary>
-/// Proxy implementation of ITwainSessionController that interacts with a Twain session in a worker process.
+/// Proxy implementation of ITwainController that interacts with a Twain session in a worker process.
 /// </summary>
-internal class RemoteTwainSessionController : ITwainSessionController
+internal class RemoteTwainController : ITwainController
 {
     private readonly ScanningContext _scanningContext;
 
-    public RemoteTwainSessionController(ScanningContext scanningContext)
+    public RemoteTwainController(ScanningContext scanningContext)
     {
         _scanningContext = scanningContext;
     }

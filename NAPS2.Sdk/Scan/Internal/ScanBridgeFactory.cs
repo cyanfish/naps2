@@ -32,7 +32,7 @@ internal class ScanBridgeFactory : IScanBridgeFactory
         if (options is { Driver: Driver.Twain, TwainOptions.Adapter: TwainAdapter.Legacy })
         {
             // Legacy twain needs to run in a 32-bit worker
-            // (Normal twain also does, but it runs the worker at a lower level via RemoteTwainSessionController)
+            // (Normal twain also does, but it runs the worker at a lower level via RemoteTwainController)
             return new WorkerScanBridge(_scanningContext, WorkerType.WinX86);
         }
         return new InProcScanBridge(_scanningContext);

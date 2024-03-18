@@ -15,13 +15,13 @@ namespace NAPS2.Sdk.Tests.Worker;
 public class WorkerChannelTests : ContextualTests
 {
     private Channel Start(IRemoteScanController remoteScanController = null, ThumbnailRenderer thumbnailRenderer = null,
-        IMapiWrapper mapiWrapper = null, ITwainSessionController twainSessionController = null)
+        IMapiWrapper mapiWrapper = null, ITwainController twainController = null)
     {
         string pipeName = $"WorkerNamedPipeTests.{Path.GetRandomFileName()}";
         NamedPipeServer server = new NamedPipeServer(pipeName);
         WorkerService.BindService(server.ServiceBinder,
             new WorkerServiceImpl(ScanningContext, remoteScanController, thumbnailRenderer, mapiWrapper,
-                twainSessionController));
+                twainController));
         server.Start();
         var client = new WorkerServiceAdapter(new NamedPipeChannel(".", pipeName));
         return new Channel
@@ -135,9 +135,9 @@ public class WorkerChannelTests : ContextualTests
     public async Task TwainScan()
     {
         var twainEvents = Substitute.For<ITwainEvents>();
-        var sessionController = Substitute.For<ITwainSessionController>();
+        var twainController = Substitute.For<ITwainController>();
 
-        sessionController.StartScan(Arg.Any<ScanOptions>(), Arg.Any<TwainEvents>(), Arg.Any<CancellationToken>())
+        twainController.StartScan(Arg.Any<ScanOptions>(), Arg.Any<TwainEvents>(), Arg.Any<CancellationToken>())
             .Returns(
                 x =>
                 {
@@ -149,7 +149,7 @@ public class WorkerChannelTests : ContextualTests
                     return Task.CompletedTask;
                 });
 
-        using var channel = Start(twainSessionController: sessionController);
+        using var channel = Start(twainController: twainController);
         await channel.Client.TwainScan(new ScanOptions(), CancellationToken.None, twainEvents);
 
         twainEvents.Received().PageStart(Arg.Any<TwainPageStart>());
