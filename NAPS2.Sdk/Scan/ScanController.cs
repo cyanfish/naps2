@@ -138,6 +138,9 @@ public class ScanController
             PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
         void PageEndCallback(ProcessedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
 
+        _scanningContext.Logger.LogDebug("Scanning with {Device}", options.Device);
+        _scanningContext.Logger.LogDebug("Scan source: {Source}; bit depth: {BitDepth}; dpi: {Dpi}; page size: {PageSize}",
+            options.PaperSource, options.BitDepth, options.Dpi, options.PageSize);
         ScanStartCallback();
         return AsyncProducers.RunProducer<ProcessedImage>(async produceImage =>
         {
