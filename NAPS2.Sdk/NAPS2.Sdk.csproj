@@ -30,9 +30,9 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Grpc.Tools" Version="2.59.0" PrivateAssets="all" />
-    <PackageReference Include="GrpcDotNetNamedPipes" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.62.0" PrivateAssets="all" />
+    <PackageReference Include="GrpcDotNetNamedPipes" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" Condition="'$(TargetFramework)' != 'net8-macos10.15'" />
     <PackageReference Include="NAPS2.NTwain" Version="1.0.0" Condition="'$(TargetFramework)' != 'net8-macos10.15'" />
     <PackageReference Include="NAPS2.PdfSharp" Version="1.0.1" />

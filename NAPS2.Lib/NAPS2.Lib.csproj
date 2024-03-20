@@ -31,14 +31,14 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
-    <PackageReference Include="Autofac" Version="7.1.0" />
+    <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="MimeKit" Version="1.22.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NLog" Version="5.2.6" />
+    <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="Eto.Forms" Version="2.8.3" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.5" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
   </ItemGroup>
   

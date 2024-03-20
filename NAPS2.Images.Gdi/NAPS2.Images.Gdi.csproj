@@ -17,7 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+        <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
     </ItemGroup>
     
     <ItemGroup>

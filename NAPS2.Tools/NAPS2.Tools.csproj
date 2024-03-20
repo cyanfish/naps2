@@ -13,11 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="Crowdin.Api" Version="2.19.0" />
+    <PackageReference Include="Crowdin.Api" Version="2.21.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NuGet.Protocol" Version="6.8.0" />
-    <PackageReference Include="Octokit" Version="9.0.0" />
-    <PackageReference Include="SSH.NET" Version="2023.0.0" />
+    <PackageReference Include="NuGet.Protocol" Version="6.9.1" />
+    <PackageReference Include="Octokit" Version="10.0.0" />
+    <PackageReference Include="SSH.NET" Version="2024.0.0" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="VirusTotalNet" Version="2.2.0" />
   </ItemGroup>
