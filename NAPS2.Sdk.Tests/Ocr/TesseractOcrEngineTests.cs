@@ -26,17 +26,17 @@ public class TesseractOcrEngineTests : ContextualTests
         var ocrParams = new OcrParams("eng", OcrMode.Fast, 0);
         var result = await _engine.ProcessImage(ScanningContext, _testImagePath, ocrParams, CancellationToken.None);
         Assert.NotNull(result);
-        Assert.NotEmpty(result.Elements);
-        foreach (var element in result.Elements)
+        Assert.NotEmpty(result.Words);
+        foreach (var element in result.Words)
         {
             Assert.Equal("eng", element.LanguageCode);
             Assert.False(element.RightToLeft);
         }
-        Assert.Equal("ADVERTISEMENT.", result.Elements[0].Text);
-        Assert.InRange(result.Elements[0].Bounds.x, 139, 149);
-        Assert.InRange(result.Elements[0].Bounds.y, 26, 36);
-        Assert.InRange(result.Elements[0].Bounds.w, 237, 247);
-        Assert.InRange(result.Elements[0].Bounds.h, 17, 27);
+        Assert.Equal("ADVERTISEMENT.", result.Words[0].Text);
+        Assert.InRange(result.Words[0].Bounds.x, 139, 149);
+        Assert.InRange(result.Words[0].Bounds.y, 26, 36);
+        Assert.InRange(result.Words[0].Bounds.w, 237, 247);
+        Assert.InRange(result.Words[0].Bounds.h, 17, 27);
     }
 
     [Fact]
@@ -44,13 +44,13 @@ public class TesseractOcrEngineTests : ContextualTests
     {
         var result = await _engine.ProcessImage(ScanningContext, _testImagePathHebrew, new OcrParams("heb", OcrMode.Fast, 0), CancellationToken.None);
         Assert.NotNull(result);
-        Assert.NotEmpty(result.Elements);
-        foreach (var element in result.Elements)
+        Assert.NotEmpty(result.Words);
+        foreach (var element in result.Words)
         {
             Assert.Equal("heb", element.LanguageCode);
             Assert.True(element.RightToLeft);
         }
-        Assert.Equal("הקדמת", result.Elements[0].Text);
+        Assert.Equal("הקדמת", result.Words[0].Text);
     }
 
     [Fact(Skip = "flaky")]
@@ -97,6 +97,6 @@ public class TesseractOcrEngineTests : ContextualTests
         var mode = OcrMode.Best;
         var result = await _engine.ProcessImage(ScanningContext, _testImagePath, new OcrParams("eng", mode, 0), CancellationToken.None);
         Assert.NotNull(result);
-        Assert.Equal("ADVERTISEMENT.", result.Elements[0].Text);
+        Assert.Equal("ADVERTISEMENT.", result.Words[0].Text);
     }
 }

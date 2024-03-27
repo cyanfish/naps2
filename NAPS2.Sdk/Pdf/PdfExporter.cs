@@ -7,12 +7,12 @@ using NAPS2.Ocr;
 using NAPS2.Pdf.Pdfium;
 using NAPS2.Scan;
 using PdfSharpCore.Drawing;
-using PdfSharpCore.Drawing.Layout;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using PdfDocument = PdfSharpCore.Pdf.PdfDocument;
 using PdfPage = PdfSharpCore.Pdf.PdfPage;
+using Alphabet = NAPS2.Pdf.PdfFontPicker.Alphabet;
 
 namespace NAPS2.Pdf;
 
@@ -398,20 +398,19 @@ public class PdfExporter
     private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
     {
 #if DEBUG && DEBUGOCR
-            using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Append);
+        using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Append);
 #else
         using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
 #endif
-        var tf = new XTextFormatter(gfx);
-        foreach (var element in ocrResult.Elements)
+        foreach (var info in GetOcrTextToDraw(page, ocrResult, gfx))
         {
-            var info = GetTextDrawInfo(page, gfx, ocrResult, element);
-            if (info == null) continue;
+            var font = new XFont(info.FontFamily, info.FontSize, XFontStyle.Regular,
+                new XPdfFontOptions(PdfFontEncoding.Unicode));
 #if DEBUG && DEBUGOCR
             gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), info.Bounds);
-            tf.DrawString(info.Text, info.Font, XBrushes.Blue, info.Bounds);
+            gfx.DrawString(info.Text, font, XBrushes.Blue, info.X, info.Y, XStringFormats.BaseLineLeft);
 #else
-            tf.DrawString(info.Text, info.Font, XBrushes.Transparent, info.Bounds);
+            gfx.DrawString(info.Text, font, XBrushes.Transparent, info.X, info.Y, XStringFormats.BaseLineLeft);
 #endif
         }
     }
@@ -420,13 +419,9 @@ public class PdfExporter
         Pdfium.PdfPage pdfiumPage, PdfiumFontSubsets fontSubsets, OcrResult ocrResult)
     {
         using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
-        foreach (var element in ocrResult.Elements)
+        foreach (var info in GetOcrTextToDraw(page, ocrResult, gfx))
         {
-            var info = GetTextDrawInfo(page, gfx, ocrResult, element);
-            if (info == null) continue;
-
-            var fontName = PdfFontPicker.GetBestFont(element.LanguageCode);
-            var textObj = pdfiumDocument.NewText(fontSubsets[fontName], info.FontSize);
+            var textObj = pdfiumDocument.NewText(fontSubsets[info.FontFamily], info.FontSize);
 #if DEBUG && DEBUGOCR
             textObj.FillColor = (0, 0, 255, 255);
 #else
@@ -435,34 +430,78 @@ public class PdfExporter
             textObj.SetText(info.Text);
             // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
             // try to make them identical, although it's not perfect to begin with.
-            textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - (info.Y + info.TextHeight));
+            textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - info.Y);
             pdfiumPage.InsertObject(textObj);
         }
         pdfiumPage.GenerateContent();
     }
 
-    private static TextDrawInfo? GetTextDrawInfo(PdfPage page, XGraphics gfx, OcrResult ocrResult,
-        OcrResultElement element)
+    private static IEnumerable<TextDrawInfo> GetOcrTextToDraw(PdfPage page, OcrResult ocrResult, XGraphics gfx)
     {
-        if (string.IsNullOrEmpty(element.Text)) return null;
+        double hAdjust = page.Width / ocrResult.PageBounds.w;
+        double vAdjust = page.Height / ocrResult.PageBounds.h;
+        foreach (var line in ocrResult.Lines)
+        {
+            var lineFontFamily = PdfFontPicker.GetBestFont(line.LanguageCode);
+            var lineFontSize = line.FontSize;
+            // Chinese/Japanese/Korean languages don't need font size alignment as words are generally just 1 char
+            if (!IsCjk(line.LanguageCode))
+            {
+                // Only measure words with at least 3 characters to avoid noise
+                var eligibleWords = line.Children.Where(word => word.Text.Length >= 3).ToList();
+                if (eligibleWords.Count > 1)
+                {
+                    // In case Tesseract underestimated the font size, keep increasing it as long as all words are still
+                    // within their bounds.
+                    while (true)
+                    {
+                        var font = new XFont(lineFontFamily, lineFontSize + 1, XFontStyle.Regular);
+                        if (eligibleWords.All(word => gfx.MeasureString(word.Text, font).Width < word.Bounds.w * hAdjust))
+                        {
+                            lineFontSize++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < line.Children.Count; i++)
+            {
+                var word = line.Children[i];
+                if (string.IsNullOrEmpty(word.Text)) continue;
 
-        var adjustedBounds = AdjustBounds(element.Bounds, (float) page.Width / ocrResult.PageBounds.w,
-            (float) page.Height / ocrResult.PageBounds.h);
-        var adjustedFontSize = CalculateFontSize(element, adjustedBounds, gfx);
-        // Special case to avoid accidentally recognizing big lines as dashes/underscores
-        if (adjustedFontSize > 100 && (element.Text == "-" || element.Text == "_")) return null;
-        var font = new XFont(PdfFontPicker.GetBestFont(element.LanguageCode), adjustedFontSize, XFontStyle.Regular,
-            new XPdfFontOptions(PdfFontEncoding.Unicode));
-        var adjustedTextSize = gfx.MeasureString(element.Text, font);
-        var verticalOffset = (adjustedBounds.Height - adjustedTextSize.Height) / 2;
-        var horizontalOffset = (adjustedBounds.Width - adjustedTextSize.Width) / 2;
-        adjustedBounds.Offset((float) horizontalOffset, (float) verticalOffset);
+                var rightBound = i + 1 < line.Children.Count ? line.Children[i + 1].Bounds.x : -1;
+                var adjustedRightBound = rightBound * hAdjust;
+                var adjustedX = word.Bounds.x * hAdjust;
+                var adjustedY = word.Baseline * vAdjust;
 
-        return new TextDrawInfo(
-            element.RightToLeft ? ReverseText(element.Text) : element.Text,
-            font,
-            adjustedBounds,
-            adjustedTextSize);
+                // We make sure there's enough distance between this word and the next to fit a space (" "), so that
+                // when you Ctrl+A and Ctrl+C in a PDF file, the words don't blend together
+                var wordFontSize = ClampFontSizeByRightBound(word, lineFontSize, adjustedX, adjustedRightBound, gfx);
+
+                // Special case to avoid accidentally recognizing big lines as dashes/underscores
+                if (wordFontSize > 100 && (word.Text == "-" || word.Text == "_")) continue;
+
+                yield return new TextDrawInfo(
+                    word.RightToLeft ? ReverseText(word.Text) : word.Text,
+                    lineFontFamily,
+                    wordFontSize,
+                    (int) Math.Round(adjustedX),
+                    (int) Math.Round(adjustedY));
+            }
+        }
+    }
+
+    private static bool IsCjk(string langCode)
+    {
+        var alphabet = PdfFontPicker.MapLanguageCodeToAlphabet(langCode);
+        return alphabet is
+            Alphabet.ChineseSimplified or
+            Alphabet.ChineseTraditional or
+            Alphabet.Japanese or
+            Alphabet.Korean;
     }
 
     private static string ReverseText(string text)
@@ -527,18 +566,34 @@ public class PdfExporter
         return (realWidth, realHeight);
     }
 
-    private static XRect AdjustBounds((int x, int y, int w, int h) bounds, float hAdjust, float vAdjust) =>
-        new XRect(bounds.x * hAdjust, bounds.y * vAdjust, bounds.w * hAdjust, bounds.h * vAdjust);
-
-    private static int CalculateFontSize(OcrResultElement element, XRect adjustedBounds, XGraphics gfx)
+    private static int ClampFontSizeByRightBound(OcrResultElement element, int initialFontSize, double x,
+        double rightBound,
+        XGraphics gfx)
     {
-        int fontSizeGuess = Math.Max(1, (int) (adjustedBounds.Height));
+        var fontSize = initialFontSize;
+        if (IsCjk(element.LanguageCode))
+        {
+            // No word separators so no need to ensure space between words
+            return fontSize;
+        }
+        if (rightBound < 0)
+        {
+            // No word to the right
+            return fontSize;
+        }
         var fontFamily = PdfFontPicker.GetBestFont(element.LanguageCode);
-        var measuredBoundsForGuess =
-            gfx.MeasureString(element.Text, new XFont(fontFamily, fontSizeGuess, XFontStyle.Regular));
-        double adjustmentFactor = adjustedBounds.Width / measuredBoundsForGuess.Width;
-        int adjustedFontSize = Math.Max(1, (int) Math.Floor(fontSizeGuess * adjustmentFactor));
-        return adjustedFontSize;
+        while (fontSize > 2)
+        {
+            var spaceWidth = gfx.MeasureString(" ", new XFont(fontFamily, fontSize, XFontStyle.Regular)).Width;
+            var measuredBounds =
+                gfx.MeasureString(element.Text, new XFont(fontFamily, fontSize, XFontStyle.Regular));
+            if (measuredBounds.Width + x <= rightBound - spaceWidth)
+            {
+                break;
+            }
+            fontSize--;
+        }
+        return fontSize;
     }
 
     private static bool IsPdfStorage(IImageStorage storage) => storage switch
@@ -548,16 +603,7 @@ public class PdfExporter
         _ => false
     };
 
-    private record TextDrawInfo(string Text, XFont Font, XRect Bounds, XSize TextSize)
-    {
-        public int FontSize => (int) Font.Size;
-        public float X => (float) Bounds.X;
-        public float Y => (float) Bounds.Y;
-        public float Width => (float) Bounds.Width;
-        public float Height => (float) Bounds.Height;
-        public float TextWidth => (float) TextSize.Width;
-        public float TextHeight => (float) TextSize.Height;
-    }
+    private record TextDrawInfo(string Text, string FontFamily, int FontSize, int X, int Y);
 
     private class PageExportState
     {

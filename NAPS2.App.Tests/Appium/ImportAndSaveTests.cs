@@ -52,7 +52,7 @@ public class ImportAndSaveTests : AppiumTests
         PdfAsserts.AssertContainsTextOnce("Page one.", path);
         PdfAsserts.AssertContainsTextOnce("Page two.", path);
         PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
-        PdfAsserts.AssertContainsTextOnce("Patch Code separator sheet geometry", path);
+        PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", path);
         AppTestHelper.AssertNoErrorLog(FolderPath);
     }
 

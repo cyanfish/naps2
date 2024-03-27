@@ -14,7 +14,7 @@ internal class PdfiumFontSubsets : IDisposable
     public PdfiumFontSubsets(PdfDocument pdfiumDocument, IEnumerable<OcrResult?> ocrResults)
     {
         var fontSubsetBuilders = new Dictionary<string, FontSubsetBuilder>();
-        foreach (var element in ocrResults.WhereNotNull().SelectMany(result => result.Elements))
+        foreach (var element in ocrResults.WhereNotNull().SelectMany(result => result.Words))
         {
             // Map the OCR language to a font that supports its glyphs
             var fontName = PdfFontPicker.GetBestFont(element.LanguageCode);

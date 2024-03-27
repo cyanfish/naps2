@@ -375,8 +375,8 @@ public class OcrRequestQueueTests : ContextualTests
 
     private static OcrResult CreateOcrResult()
     {
-        var uniqueElement = new OcrResultElement(Guid.NewGuid().ToString(), "eng", false, (0, 0, 1, 1));
-        return new OcrResult((0, 0, 1, 1), ImmutableList<OcrResultElement>.Empty.Add(uniqueElement));
+        var uniqueElement = new OcrResultElement(Guid.NewGuid().ToString(), "eng", false, (0, 0, 1, 1), 0, 10, ImmutableList<OcrResultElement>.Empty);
+        return new OcrResult((0, 0, 1, 1), ImmutableList.Create(uniqueElement), ImmutableList.Create(uniqueElement));
     }
 
     private static OcrParams CreateOcrParams()

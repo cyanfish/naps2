@@ -89,10 +89,13 @@ public class ContextualTests : IDisposable
                     var ocrImage = ImageContext.Load(path);
                     await Task.Delay(delay);
 
-                    OcrResult CreateOcrResult(string text) => new((0, 0, 100, 100),
-                        ImmutableList.Create(
+                    OcrResult CreateOcrResult(string text)
+                    {
+                        var list = ImmutableList.Create(
                             new OcrResultElement(text, ocrParams.LanguageCode!, false,
-                                (10, 10, 10, 10))));
+                                (10, 10, 10, 10), 0, 10, ImmutableList<OcrResultElement>.Empty));
+                        return new((0, 0, 100, 100), list, list);
+                    }
 
                     if (ocrTextByImage != null)
                     {
