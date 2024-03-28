@@ -138,5 +138,15 @@ namespace NAPS2.Sdk.Tests {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] testcert {
+            get {
+                object obj = ResourceManager.GetObject("testcert", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

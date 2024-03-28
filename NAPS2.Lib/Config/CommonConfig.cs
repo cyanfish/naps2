@@ -1,10 +1,10 @@
 ﻿using System.Collections.Immutable;
 using NAPS2.Config.Model;
+using NAPS2.Escl;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
 using NAPS2.Pdf;
 using NAPS2.Ocr;
-using NAPS2.Remoting.Server;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 
@@ -146,6 +146,12 @@ public class CommonConfig
 
     [Common]
     public DockStyle ProfilesToolStripDock { get; set; }
+
+    [Common]
+    public EsclSecurityPolicy EsclSecurityPolicy { get; set; }
+
+    [Common]
+    public string? EsclServerCertificatePath { get; set; }
 
     [App]
     public EventType EventLogging { get; set; }

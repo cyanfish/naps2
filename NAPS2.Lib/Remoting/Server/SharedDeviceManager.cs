@@ -1,5 +1,7 @@
 using System.Collections.Immutable;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using NAPS2.Config.Model;
 using NAPS2.Escl.Server;
 using NAPS2.Scan;
@@ -10,6 +12,7 @@ public class SharedDeviceManager : ISharedDeviceManager
 {
     private const int STARTUP_RETRY_INTERVAL = 10_000;
 
+    private readonly ILogger _logger;
     private readonly Naps2Config _config;
     private readonly FileConfigScope<SharingConfig> _scope;
     private readonly ScanServer _server;
@@ -19,11 +22,30 @@ public class SharedDeviceManager : ISharedDeviceManager
 
     public SharedDeviceManager(ScanningContext scanningContext, Naps2Config config, string sharedDevicesConfigPath)
     {
+        _logger = scanningContext.Logger;
         _config = config;
         _scope = ConfigScope.File(sharedDevicesConfigPath, new ConfigStorageSerializer<SharingConfig>(),
             ConfigScopeMode.ReadWrite);
         _server = new ScanServer(scanningContext, new EsclServer());
         _server.SetDefaultIcon(Icons.scanner_128);
+        _server.SecurityPolicy = config.Get(c => c.EsclSecurityPolicy);
+        if (config.Get(c => c.EsclServerCertificatePath) is { } certPath && !string.IsNullOrWhiteSpace(certPath))
+        {
+            try
+            {
+                _server.Certificate = new X509Certificate2(File.ReadAllBytes(certPath));
+                if (!_server.Certificate.HasPrivateKey)
+                {
+                    _logger.LogDebug(
+                        $"Certificate has no private key. Make sure it's installed in the local computer's certificate store. \"{certPath}\"");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,
+                    $"Could not read X509 certificate from EsclServerCertificatePath \"{certPath}\"");
+            }
+        }
         _server.InstanceId = _scope.GetOrDefault(c => c.InstanceId) ?? Guid.NewGuid();
         RegisterDevicesFromConfig();
     }
@@ -54,7 +76,8 @@ public class SharedDeviceManager : ISharedDeviceManager
             if (_userStarted && SharedDevices.Any() && TakeLock())
             {
                 ResetStartTimer();
-                _server.Start();
+                _server.Start().ContinueWith(t =>
+                    _logger.LogError(t.Exception, "Error starting ScanServer"), TaskContinuationOptions.OnlyOnFaulted);
                 return true;
             }
             return false;
@@ -67,7 +90,8 @@ public class SharedDeviceManager : ISharedDeviceManager
         {
             _userStarted = false;
             ResetStartTimer();
-            _server.Stop();
+            _server.Stop().ContinueWith(t =>
+                _logger.LogError(t.Exception, "Error starting ScanServer"), TaskContinuationOptions.OnlyOnFaulted);
             ReleaseLock();
         }
     }
@@ -162,7 +186,7 @@ public class SharedDeviceManager : ISharedDeviceManager
     }
 
     private void RegisterOnServer(SharedDevice device) =>
-        _server.RegisterDevice(device.Device, device.Name, device.Port);
+        _server.RegisterDevice(device.Device, device.Name, device.Port, device.TlsPort);
 
     private void UnregisterOnServer(SharedDevice device) =>
         _server.UnregisterDevice(device.Device, device.Name);

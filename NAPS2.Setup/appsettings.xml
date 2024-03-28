@@ -37,6 +37,8 @@
   <OcrDefaultMode>Fast</OcrDefaultMode>
   <OcrDefaultAfterScanning>true</OcrDefaultAfterScanning>
   <ForcePdfCompat>Default</ForcePdfCompat>
+  <EsclSecurityPolicy>None</EsclSecurityPolicy>
+  <EsclServerCertificatePath></EsclServerCertificatePath>
   <EventLogging>None</EventLogging>
   <DefaultProfileSettings>
     <DriverName></DriverName>

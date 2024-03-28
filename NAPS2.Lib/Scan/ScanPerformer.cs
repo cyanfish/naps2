@@ -242,6 +242,10 @@ internal class ScanPerformer : IScanPerformer
                 // We use a worker process for SANE so we should clean up after each operation
                 KeepInitialized = false
             },
+            EsclOptions =
+            {
+                SecurityPolicy = _config.Get(c => c.EsclSecurityPolicy)
+            },
             KeyValueOptions = scanProfile.KeyValueOptions != null
                 ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
                 : new KeyValueScanOptions(),

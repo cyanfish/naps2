@@ -25,9 +25,14 @@ public class EsclService
     public required IPAddress RemoteEndpoint { get; init; }
 
     /// <summary>
-    /// The port of the ESCL service.
+    /// The HTTP port of the ESCL service.
     /// </summary>
     public required int Port { get; init; }
+
+    /// <summary>
+    /// The HTTPS port of the ESCL service.
+    /// </summary>
+    public required int TlsPort { get; init; }
 
     /// <summary>
     /// Whether to use HTTPS for the connection.

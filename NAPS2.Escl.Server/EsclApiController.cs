@@ -14,12 +14,15 @@ internal class EsclApiController : WebApiController
 
     private readonly EsclDeviceConfig _deviceConfig;
     private readonly EsclServerState _serverState;
+    private readonly EsclSecurityPolicy _securityPolicy;
     private readonly ILogger _logger;
 
-    internal EsclApiController(EsclDeviceConfig deviceConfig, EsclServerState serverState, ILogger logger)
+    internal EsclApiController(EsclDeviceConfig deviceConfig, EsclServerState serverState,
+        EsclSecurityPolicy securityPolicy, ILogger logger)
     {
         _deviceConfig = deviceConfig;
         _serverState = serverState;
+        _securityPolicy = securityPolicy;
         _logger = logger;
     }
 
@@ -27,7 +30,8 @@ internal class EsclApiController : WebApiController
     public async Task GetScannerCapabilities()
     {
         var caps = _deviceConfig.Capabilities;
-        var iconUri = caps.IconPng != null ? $"http://naps2-{caps.Uuid}.local.:{_deviceConfig.Port}/eSCL/icon.png" : "";
+        var protocol = _securityPolicy.HasFlag(EsclSecurityPolicy.ServerRequireHttps) ? "https" : "http";
+        var iconUri = caps.IconPng != null ? $"{protocol}://naps2-{caps.Uuid}.local.:{_deviceConfig.Port}/eSCL/icon.png" : "";
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerCapabilities",
@@ -169,7 +173,13 @@ internal class EsclApiController : WebApiController
         _serverState.IsProcessing = true;
         var jobInfo = JobInfo.CreateNewJob(_serverState, _deviceConfig.CreateJob(settings));
         _serverState.AddJob(jobInfo);
-        Response.Headers.Add("Location", $"{Request.Url}/{jobInfo.Id}");
+        var uri = Request.Url;
+        if (Request.IsSecureConnection)
+        {
+            // Fix https://github.com/unosquare/embedio/issues/593
+            uri = new UriBuilder(uri) { Scheme = "https" }.Uri;
+        }
+        Response.Headers.Add("Location", $"{uri}/{jobInfo.Id}");
         Response.StatusCode = 201; // Created
     }
 

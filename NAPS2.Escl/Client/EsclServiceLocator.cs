@@ -19,15 +19,24 @@ public class EsclServiceLocator : IDisposable
         {
             try
             {
-                var service = ParseService(args);
-                var serviceKey = new ServiceKey(service.ScannerName, service.Uuid, service.Port, service.IpV4, service.IpV6);
-                if (!_locatedServices.Add(serviceKey))
+                if (args.ServiceInstanceName.Labels[1] is not ("_uscan" or "_uscans"))
                 {
-                    // Don't callback for duplicates
                     return;
                 }
-                Logger.LogDebug("Discovered ESCL Service: {Name}, instance {Instance}, endpoint {Endpoint}, ipv4 {Ipv4}, ipv6 {IpV6}, host {Host}, port {Port}, uuid {Uuid}",
-                    service.ScannerName, args.ServiceInstanceName, args.RemoteEndPoint, service.IpV4, service.IpV6, service.Host, service.Port, service.Uuid);
+                var service = ParseService(args);
+                // TODO: Does the IP really make the device distinct? Not that it should matter in practice, but still.
+                // TODO: We definitely want to de-duplicate HTTP/HTTPS, but I'm not sure how to do that. Remind me how
+                var serviceKey = new ServiceKey(service.ScannerName, service.Uuid, service.Port, service.IpV4, service.IpV6);
+                lock (_locatedServices)
+                {
+                    if (!_locatedServices.Add(serviceKey))
+                    {
+                        // Don't callback for duplicates
+                        return;
+                    }
+                }
+                Logger.LogDebug("Discovered ESCL Service: {Name}, instance {Instance}, endpoint {Endpoint}, ipv4 {Ipv4}, ipv6 {IpV6}, host {Host}, port {Port}, tlsPort {Port}, uuid {Uuid}",
+                    service.ScannerName, args.ServiceInstanceName, args.RemoteEndPoint, service.IpV4, service.IpV6, service.Host, service.Port, service.TlsPort, service.Uuid);
                 serviceCallback(service);
             }
             catch (Exception ex)
@@ -79,6 +88,7 @@ public class EsclServiceLocator : IDisposable
         bool isTls = false;
         IPAddress? ipv4 = null, ipv6 = null;
         int port = -1;
+        int tlsPort = -1;
         string? host = null;
         var props = new Dictionary<string, string>();
         foreach (var record in args.Message.AdditionalRecords)
@@ -95,10 +105,17 @@ public class EsclServiceLocator : IDisposable
             if (record is SRVRecord srv)
             {
                 bool recordIsTls = srv.Name.IsSubdomainOf(DomainName.Join("_uscans", "_tcp", "local"));
+                if (recordIsTls)
+                {
+                    tlsPort = srv.Port;
+                }
+                else
+                {
+                    port = srv.Port;
+                }
                 if (host == null || recordIsTls)
                 {
                     // HTTPS overrides HTTP but not the other way around
-                    port = srv.Port;
                     host = srv.Target.ToString();
                     isTls = recordIsTls;
                 }
@@ -116,7 +133,7 @@ public class EsclServiceLocator : IDisposable
             }
         }
         string? uuid = Get(props, "uuid");
-        if ((ipv4 == null && ipv6 == null) || port == -1 || host == null || uuid == null)
+        if ((ipv4 == null && ipv6 == null) || (port == -1 && tlsPort == -1) || host == null || uuid == null)
         {
             throw new ArgumentException("Missing host/IP/port/uuid");
         }
@@ -128,6 +145,7 @@ public class EsclServiceLocator : IDisposable
             Host = host,
             RemoteEndpoint = args.RemoteEndPoint.Address,
             Port = port,
+            TlsPort = tlsPort,
             Tls = isTls,
             Uuid = uuid,
             ScannerName = props["ty"],

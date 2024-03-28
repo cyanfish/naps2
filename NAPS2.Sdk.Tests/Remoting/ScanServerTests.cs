@@ -1,53 +1,15 @@
-using Microsoft.Extensions.Logging;
-using NAPS2.Escl.Server;
-using NAPS2.Remoting.Server;
+using NAPS2.Escl;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
-using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Asserts;
-using NAPS2.Sdk.Tests.Mocks;
 using NSubstitute;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 
-public class ScanServerIntegrationTests : ContextualTests
+public class ScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper)
 {
-    private readonly ScanServer _server;
-    private readonly MockScanBridge _bridge;
-    private readonly ScanController _client;
-    private readonly ScanDevice _clientDevice;
-
-    public ScanServerIntegrationTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    {
-        _server = new ScanServer(ScanningContext, new EsclServer());
-
-        // Set up a server connecting to a mock scan backend
-        _bridge = new MockScanBridge();
-        var scanBridgeFactory = Substitute.For<IScanBridgeFactory>();
-        scanBridgeFactory.Create(Arg.Any<ScanOptions>()).Returns(_bridge);
-        _server.ScanController = new ScanController(ScanningContext, scanBridgeFactory);
-
-        // Initialize the server with a single device with a unique ID for the test
-        var displayName = $"testName-{Guid.NewGuid()}";
-        ScanningContext.Logger.LogDebug("Display name: {Name}", displayName);
-        var serverDevice = new ScanDevice(ScanOptionsValidator.SystemDefaultDriver, "testID", "testName");
-        _server.RegisterDevice(serverDevice, displayName);
-        _server.Start().Wait();
-
-        // Set up a client ScanController for scanning through EsclScanDriver -> network -> ScanServer
-        _client = new ScanController(ScanningContext);
-        var uuid = new ScanServerDevice { Device = serverDevice, Name = displayName }.GetUuid(_server.InstanceId);
-        _clientDevice = new ScanDevice(Driver.Escl, uuid, displayName);
-    }
-
-    public override void Dispose()
-    {
-        _server.Stop().Wait();
-        base.Dispose();
-    }
-
     [Fact]
     public async Task FindDevice()
     {
@@ -211,5 +173,19 @@ public class ScanServerIntegrationTests : ContextualTests
         pageProgressMock.Received()(Arg.Any<object>(), Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 1 && args.Progress == 0.5));
         pageStartMock.Received()(Arg.Any<object>(), Arg.Is<PageStartEventArgs>(args => args.PageNumber == 2));
         pageProgressMock.Received()(Arg.Any<object>(), Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 2 && args.Progress == 0.5));
+    }
+
+    [Fact]
+    public async Task ScanPreventedByHttpsSecurityPolicy()
+    {
+        var scanResult = _client.Scan(new ScanOptions
+        {
+            Device = _clientDevice,
+            EsclOptions =
+            {
+                SecurityPolicy = EsclSecurityPolicy.RequireHttps
+            }
+        });
+        await Assert.ThrowsAsync<EsclSecurityPolicyViolationException>(async () => await scanResult.ToListAsync());
     }
 }

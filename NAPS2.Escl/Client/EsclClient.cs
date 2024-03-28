@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
+using System.Security.Authentication;
 using System.Text;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
@@ -13,7 +14,13 @@ public class EsclClient
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
 
-    private static readonly HttpClientHandler HttpClientHandler = new()
+    // Clients that verify HTTPS certificates
+    private static readonly HttpClient VerifiedHttpClient = new();
+    private static readonly HttpClient VerifiedProgressHttpClient = new();
+    private static readonly HttpClient VerifiedDocumentHttpClient = new();
+
+    // Clients that don't verify HTTPS certificates
+    private static readonly HttpClientHandler UnverifiedHttpClientHandler = new()
     {
         // ESCL certificates are generally self-signed - we aren't trying to verify server authenticity, just ensure
         // that the connection is encrypted and protect against passive interception.
@@ -21,20 +28,37 @@ public class EsclClient
     };
     // Sadly as we're still using .NET Framework on Windows, we're stuck with the old HttpClient implementation, which
     // has trouble with concurrency. So we use a separate client for long running requests (Progress/NextDocument).
-    private static readonly HttpClient HttpClient = new(HttpClientHandler);
-    private static readonly HttpClient ProgressHttpClient = new(HttpClientHandler);
-    private static readonly HttpClient DocumentHttpClient = new(HttpClientHandler);
+    private static readonly HttpClient UnverifiedHttpClient = new(UnverifiedHttpClientHandler);
+    private static readonly HttpClient UnverifiedProgressHttpClient = new(UnverifiedHttpClientHandler);
+    private static readonly HttpClient UnverifiedDocumentHttpClient = new(UnverifiedHttpClientHandler);
 
     private readonly EsclService _service;
+    private bool _httpFallback;
 
     public EsclClient(EsclService service)
     {
         _service = service;
     }
 
+    public EsclSecurityPolicy SecurityPolicy { get; set; }
+
     public ILogger Logger { get; set; } = NullLogger.Instance;
 
     public CancellationToken CancelToken { get; set; }
+
+    private HttpClient HttpClient => SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttpOrTrustedCertificate)
+        ? VerifiedHttpClient
+        : UnverifiedHttpClient;
+
+    private HttpClient ProgressHttpClient =>
+        SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttpOrTrustedCertificate)
+            ? VerifiedProgressHttpClient
+            : UnverifiedProgressHttpClient;
+
+    private HttpClient DocumentHttpClient =>
+        SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttpOrTrustedCertificate)
+            ? VerifiedDocumentHttpClient
+            : UnverifiedDocumentHttpClient;
 
     public async Task<EsclCapabilities> GetCapabilities()
     {
@@ -95,9 +119,13 @@ public class EsclClient
                     OptionalElement(ScanNs + "CompressionFactor", settings.CompressionFactor),
                     new XElement(PwgNs + "DocumentFormat", settings.DocumentFormat)));
         var content = new StringContent(doc, Encoding.UTF8, "text/xml");
-        var url = GetUrl($"/{_service.RootUrl}/ScanJobs");
-        Logger.LogDebug("ESCL POST {Url}", url);
-        var response = await HttpClient.PostAsync(url, content);
+        var response = await WithHttpFallback(
+            () => GetUrl($"/{_service.RootUrl}/ScanJobs"),
+            url =>
+            {
+                Logger.LogDebug("ESCL POST {Url}", url);
+                return HttpClient.PostAsync(url, content);
+            });
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("POST OK");
 
@@ -142,9 +170,13 @@ public class EsclClient
         try
         {
             // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
-            var url = GetUrl($"{job.UriPath}/NextDocument");
-            Logger.LogDebug("ESCL GET {Url}", url);
-            var response = await DocumentHttpClient.GetAsync(url);
+            var response = await WithHttpFallback(
+                () => GetUrl($"{job.UriPath}/NextDocument"),
+                url =>
+                {
+                    Logger.LogDebug("ESCL GET {Url}", url);
+                    return DocumentHttpClient.GetAsync(url);
+                });
             if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
             {
                 // NotFound = end of scan, Gone = canceled
@@ -170,9 +202,13 @@ public class EsclClient
 
     public async Task<string> ErrorDetails(EsclJob job)
     {
-        var url = GetUrl($"{job.UriPath}/ErrorDetails");
-        Logger.LogDebug("ESCL GET {Url}", url);
-        var response = await HttpClient.GetAsync(url);
+        var response = await WithHttpFallback(
+            () => GetUrl($"{job.UriPath}/ErrorDetails"),
+            url =>
+            {
+                Logger.LogDebug("ESCL GET {Url}", url);
+                return HttpClient.GetAsync(url);
+            });
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("GET OK");
         return await response.Content.ReadAsStringAsync();
@@ -180,9 +216,13 @@ public class EsclClient
 
     public async Task CancelJob(EsclJob job)
     {
-        var url = GetUrl(job.UriPath);
-        Logger.LogDebug("ESCL DELETE {Url}", url);
-        var response = await HttpClient.DeleteAsync(url);
+        var response = await WithHttpFallback(
+            () => GetUrl(job.UriPath),
+            url =>
+            {
+                Logger.LogDebug("ESCL DELETE {Url}", url);
+                return HttpClient.DeleteAsync(url);
+            });
         if (!response.IsSuccessStatusCode)
         {
             Logger.LogDebug("DELETE failed: {Status}", response.StatusCode);
@@ -195,9 +235,13 @@ public class EsclClient
     private async Task<XDocument> DoRequest(string endpoint)
     {
         // TODO: Retry logic
-        var url = GetUrl($"/{_service.RootUrl}/{endpoint}");
-        Logger.LogDebug("ESCL GET {Url}", url);
-        var response = await HttpClient.GetAsync(url, CancelToken);
+        var response = await WithHttpFallback(
+            () => GetUrl($"/{_service.RootUrl}/{endpoint}"),
+            url =>
+            {
+                Logger.LogDebug("ESCL GET {Url}", url);
+                return HttpClient.GetAsync(url, CancelToken);
+            });
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("GET OK");
         var text = await response.Content.ReadAsStringAsync();
@@ -205,20 +249,47 @@ public class EsclClient
         return doc;
     }
 
-    private string GetUrl(string endpoint)
+    private async Task<T> WithHttpFallback<T>(Func<string> urlFunc, Func<string, Task<T>> func)
     {
-        var protocol = _service.Tls || _service.Port == 443 ? "https" : "http";
-        return $"{protocol}://{GetHostAndPort()}{endpoint}";
+        string url = urlFunc();
+        try
+        {
+            return await func(url);
+        }
+        catch (HttpRequestException ex) when (!SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttps) &&
+                                              !_httpFallback &&
+                                              url.StartsWith("https://") && (
+                                                  ex.InnerException is AuthenticationException ||
+                                                  ex.InnerException?.InnerException is AuthenticationException))
+        {
+            Logger.LogDebug(ex, "TLS authentication error; falling back to HTTP");
+            _httpFallback = true;
+            url = urlFunc();
+            return await func(url);
+        }
     }
 
-    private string GetHostAndPort()
+    private string GetUrl(string endpoint)
     {
-        var host = new IPEndPoint(_service.RemoteEndpoint, _service.Port).ToString();
+        bool tls = (_service.Tls || _service.Port == 443) && !_httpFallback;
+        if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttps) && !tls)
+        {
+            throw new EsclSecurityPolicyViolationException(
+                $"EsclSecurityPolicy of {SecurityPolicy} doesn't allow HTTP connections");
+        }
+        var protocol = tls ? "https" : "http";
+        return $"{protocol}://{GetHostAndPort(_service.Tls && !_httpFallback)}{endpoint}";
+    }
+
+    private string GetHostAndPort(bool tls)
+    {
+        var port = tls ? _service.TlsPort : _service.Port;
+        var host = new IPEndPoint(_service.RemoteEndpoint, port).ToString();
 #if NET6_0_OR_GREATER
         if (OperatingSystem.IsMacOS())
         {
             // Using the mDNS hostname is more reliable on Mac (but doesn't work at all on Windows)
-            host = $"{_service.Host}:{_service.Port}";
+            host = $"{_service.Host}:{port}";
         }
 #endif
         return host;

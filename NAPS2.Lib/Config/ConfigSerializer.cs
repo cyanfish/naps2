@@ -120,6 +120,8 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.OcrLanguageCode, c.OcrDefaultLanguage);
         storage.Set(x => x.OcrMode, c.OcrDefaultMode);
         storage.Set(x => x.OcrAfterScanning, c.OcrDefaultAfterScanning);
+        storage.Set(x => x.EsclSecurityPolicy, c.EsclSecurityPolicy);
+        storage.Set(x => x.EsclServerCertificatePath, c.EsclServerCertificatePath);
         storage.Set(x => x.EventLogging, c.EventLogging);
         storage.Set(x => x.KeyboardShortcuts, c.KeyboardShortcuts ?? new KeyboardShortcuts());
         return storage;

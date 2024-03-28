@@ -34,6 +34,7 @@ public class ClientServerTests
             Host = $"[{IPAddress.IPv6Loopback}]",
             RemoteEndpoint = IPAddress.IPv6Loopback,
             Port = deviceConfig.Port,
+            TlsPort = deviceConfig.TlsPort,
             RootUrl = "eSCL",
             Tls = false,
             Uuid = uuid
@@ -42,5 +43,13 @@ public class ClientServerTests
         Assert.Equal("2.0", caps.Version);
         Assert.Equal("HP Blah", caps.MakeAndModel);
         Assert.Equal("123abc", caps.SerialNumber);
+    }
+
+    [Fact]
+    public async Task StartTlsServerWithoutCertificate()
+    {
+        using var server = new EsclServer();
+        server.SecurityPolicy = EsclSecurityPolicy.RequireHttps;
+        await Assert.ThrowsAsync<EsclSecurityPolicyViolationException>(() => server.Start());
     }
 }

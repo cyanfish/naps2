@@ -1,4 +1,5 @@
 using System.Xml.Serialization;
+using NAPS2.Escl;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
@@ -83,6 +84,10 @@ public class AppConfigV0
     public bool OcrDefaultAfterScanning { get; set; }
 
     public PdfCompat ForcePdfCompat { get; set; }
+
+    public EsclSecurityPolicy EsclSecurityPolicy { get; set; }
+
+    public string? EsclServerCertificatePath { get; set; }
 
     public EventType EventLogging { get; set; }
 

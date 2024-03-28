@@ -46,6 +46,7 @@ internal class EsclScanDriver : IScanDriver
         var localIPsTask = options.ExcludeLocalIPs ? LocalIPsHelper.Get() : null;
         using var locator = new EsclServiceLocator(service =>
         {
+            // TODO: Consider limiting available devices by security policy
             var ip = service.IpV4 ?? service.IpV6!;
             if (options.ExcludeLocalIPs && localIPsTask!.Result.Contains(ip.ToString()))
             {
@@ -83,6 +84,7 @@ internal class EsclScanDriver : IScanDriver
 
         var client = new EsclClient(service)
         {
+            SecurityPolicy = options.EsclOptions.SecurityPolicy,
             Logger = _logger,
             CancelToken = cancelToken
         };

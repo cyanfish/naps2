@@ -3,7 +3,6 @@ using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.Remoting.Server;
 using NAPS2.Scan;
-using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 
 namespace NAPS2.EtoForms.Ui;
@@ -11,6 +10,7 @@ namespace NAPS2.EtoForms.Ui;
 public class SharedDeviceForm : EtoDialogBase
 {
     private const int BASE_PORT = 9801;
+    private const int BASE_TLS_PORT = 9901;
 
     private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
@@ -121,6 +121,8 @@ public class SharedDeviceForm : EtoDialogBase
 
     private int Port { get; set; }
 
+    private int TlsPort { get; set; }
+
     private Driver DeviceDriver
     {
         get => _twainDriver.Checked ? Driver.Twain
@@ -159,6 +161,7 @@ public class SharedDeviceForm : EtoDialogBase
         _displayName.Text = SharedDevice?.Name ?? "";
         CurrentDevice ??= SharedDevice?.Device;
         Port = SharedDevice?.Port ?? 0;
+        TlsPort = SharedDevice?.TlsPort ?? 0;
 
         DeviceDriver = SharedDevice?.Device.Driver ?? ScanOptionsValidator.SystemDefaultDriver;
 
@@ -187,7 +190,8 @@ public class SharedDeviceForm : EtoDialogBase
         {
             Name = _displayName.Text,
             Device = CurrentDevice!,
-            Port = Port == 0 ? NextPort() : Port
+            Port = Port == 0 ? NextPort() : Port,
+            TlsPort = TlsPort == 0 ? NextTlsPort() : TlsPort
         };
     }
 
@@ -200,6 +204,17 @@ public class SharedDeviceForm : EtoDialogBase
             port++;
         }
         return port;
+    }
+
+    private int NextTlsPort()
+    {
+        var devices = _sharedDeviceManager.SharedDevices;
+        int tlsPort = BASE_TLS_PORT;
+        while (devices.Any(x => x.TlsPort == tlsPort))
+        {
+            tlsPort++;
+        }
+        return tlsPort;
     }
 
     private void Ok_Click(object? sender, EventArgs e)

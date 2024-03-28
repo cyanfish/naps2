@@ -9,6 +9,7 @@ internal record ScanServerDevice
     public required string Name { get; init; }
     public required ScanDevice Device { get; init; }
     public int Port { get; init; }
+    public int TlsPort { get; init; }
 
     public string GetUuid(Guid instanceId)
     {

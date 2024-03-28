@@ -142,4 +142,7 @@
     <data name="ocr_test_hebrew" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>Resources\ocr_test_hebrew.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </data>
+    <data name="testcert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>Resources\testcert.pfx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
 </root>
