@@ -91,9 +91,11 @@ public class ContextualTests : IDisposable
 
                     OcrResult CreateOcrResult(string text)
                     {
-                        var list = ImmutableList.Create(
-                            new OcrResultElement(text, ocrParams.LanguageCode!, false,
-                                (10, 10, 10, 10), 0, 10, ImmutableList<OcrResultElement>.Empty));
+                        var word = new OcrResultElement(text, ocrParams.LanguageCode!, false,
+                            (10, 10, 10, 10), 20, 10, ImmutableList<OcrResultElement>.Empty);
+                        var line = new OcrResultElement(text, ocrParams.LanguageCode!, false,
+                            (10, 10, 10, 10), 20, 10, ImmutableList.Create(word));
+                        var list = ImmutableList.Create(line);
                         return new((0, 0, 100, 100), list, list);
                     }
 
