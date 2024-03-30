@@ -9,7 +9,8 @@ public class EtoOverwritePrompt : IOverwritePrompt
         string fileName = Path.GetFileName(path);
         var dialogResult = Invoker.Current.InvokeGet(() =>
             MessageBox.Show(string.Format(MiscResources.ConfirmOverwriteFile, fileName),
-                MiscResources.OverwriteFile, MessageBoxButtons.YesNoCancel, MessageBoxType.Warning));
+                MiscResources.OverwriteFile, MessageBoxButtons.YesNoCancel, MessageBoxType.Warning,
+                MessageBoxDefaultButton.Yes));
         return dialogResult switch
         {
             DialogResult.Yes => OverwriteResponse.Yes,

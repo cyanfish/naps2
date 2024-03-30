@@ -398,7 +398,7 @@ public class DesktopController
             if (MessageBox.Show(_desktopFormProvider.DesktopForm,
                     string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count),
                     MiscResources.Clear, MessageBoxButtons.OKCancel,
-                    MessageBoxType.Question) == DialogResult.Ok)
+                    MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
             {
                 _imageListActions.DeleteAll();
                 GC.Collect();

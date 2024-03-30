@@ -28,7 +28,8 @@ public class ProfilesForm : EtoDialogBase
     private readonly Command _scannerSharingCommand;
 
     public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker,
-        IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior, ThumbnailController thumbnailController)
+        IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior,
+        ThumbnailController thumbnailController)
         : base(config)
     {
         _scanPerformer = scanPerformer;
@@ -312,8 +313,8 @@ public class ProfilesForm : EtoDialogBase
         if (SelectedProfile != null && !SelectionLocked)
         {
             string message = string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
-            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxType.Warning) ==
-                DialogResult.Yes)
+            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxType.Warning,
+                    MessageBoxDefaultButton.OK) == DialogResult.Ok)
             {
                 foreach (var profile in _listView.Selection)
                 {

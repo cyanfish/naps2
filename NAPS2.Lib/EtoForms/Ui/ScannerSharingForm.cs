@@ -172,8 +172,8 @@ public class ScannerSharingForm : EtoDialogBase
         if (SelectedDevice != null)
         {
             string message = string.Format(UiStrings.ConfirmDeleteSharedDevice, SelectedDevice.Name);
-            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.YesNo, MessageBoxType.Warning) ==
-                DialogResult.Yes)
+            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxType.Warning,
+                    MessageBoxDefaultButton.OK) == DialogResult.Ok)
             {
                 _sharedDeviceManager.RemoveSharedDevice(SelectedDevice);
                 ReloadDevices();

@@ -400,7 +400,7 @@ public class BatchScanForm : EtoDialogBase
         if (_batchRunning)
         {
             if (MessageBox.Show(MiscResources.ConfirmCancelBatch, MiscResources.CancelBatch, MessageBoxButtons.YesNo,
-                    MessageBoxType.Question) == DialogResult.Yes)
+                    MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
             {
                 _cts.Cancel();
                 _cancel.Enabled = false;
