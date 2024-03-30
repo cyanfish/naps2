@@ -168,6 +168,7 @@ public static class InternalDefaults
                 ImageSharpen = "",
                 RotateLeft = "",
                 RotateRight = "",
+                AltFlip = "",
                 RotateFlip = "",
                 RotateCustom = "",
                 MoveUp = "Ctrl+Up",

@@ -70,6 +70,9 @@ public class ImageListActions
 
     public async Task Flip() => await _imageList.MutateAsync(new ImageListMutation.RotateFlip(180), Selection);
 
+    public async Task AltFlip() =>
+        await _imageList.MutateAsync(new ImageListMutation.AltFlip(), Selection);
+
     public void DocumentCorrection() =>
         _imageList.Mutate(new ImageListMutation.AddTransforms([new CorrectionTransform(CorrectionMode.Document)]),
             Selection);

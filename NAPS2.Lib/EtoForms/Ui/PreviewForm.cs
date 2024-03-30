@@ -214,6 +214,7 @@ public class PreviewForm : EtoDialogBase
                     {
                         Commands.RotateLeft,
                         Commands.RotateRight,
+                        Commands.AltFlip,
                         Commands.Flip,
                         Commands.Deskew,
                         Commands.CustomRotate
@@ -370,6 +371,7 @@ public class PreviewForm : EtoDialogBase
         _ksm.Assign(ks.RotateFlip, Commands.Flip);
         _ksm.Assign(ks.RotateLeft, Commands.RotateLeft);
         _ksm.Assign(ks.RotateRight, Commands.RotateRight);
+        _ksm.Assign(ks.AltFlip, Commands.AltFlip);
         _ksm.Assign(ks.SaveImages, Commands.SaveSelectedImages);
         _ksm.Assign(ks.SavePDF, Commands.SaveSelectedPdf);
     }
