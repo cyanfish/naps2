@@ -107,17 +107,5 @@
     <EmbeddedResource Remove="ClientCreds_.resx" />
     <Compile Remove="ClientCreds_.Designer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Lang\Resources\UiStrings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>UiStrings.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Lang\Resources\UiStrings.resx">
-      <LastGenOutput>UiStrings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
   
 </Project>
