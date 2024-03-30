@@ -241,8 +241,10 @@ public class ConfigStorage<TConfig>
             }
             var serializer = new UntypedXmlSerializer();
             var rootElementName = customRootElementName ?? serializer.GetDefaultElementName(typeof(TConfig));
-            doc.Add(new XElement(rootElementName));
-            CopyNodeToXElement(_root, doc.Root!, serializer);
+            var root = new XElement(rootElementName);
+            doc.Add(root);
+            root.SetAttributeValue(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            CopyNodeToXElement(_root, root, serializer);
         }
     }
 
