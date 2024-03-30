@@ -360,6 +360,7 @@ public abstract class DesktopForm : EtoFormBase
             .Append(Commands.RotateLeft)
             .Append(Commands.RotateRight)
             .Append(Commands.Flip)
+            .Append(Commands.AltFlip)
             .Append(Commands.Deskew)
             .Append(Commands.CustomRotate);
 

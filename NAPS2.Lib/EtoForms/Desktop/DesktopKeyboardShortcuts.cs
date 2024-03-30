@@ -1,5 +1,6 @@
 using Eto.Forms;
 using NAPS2.EtoForms.Ui;
+using System.Runtime.InteropServices;
 
 namespace NAPS2.EtoForms.Desktop;
 
@@ -84,6 +85,7 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.RotateFlip, commands.Flip);
         _ksm.Assign(ks.RotateLeft, commands.RotateLeft);
         _ksm.Assign(ks.RotateRight, commands.RotateRight);
+        _ksm.Assign(ks.AltFlip, commands.AltFlip);
         _ksm.Assign(ks.SaveImages, commands.SaveImages);
         _ksm.Assign(ks.SaveImagesAll, commands.SaveAllImages);
         _ksm.Assign(ks.SaveImagesSelected, commands.SaveSelectedImages);

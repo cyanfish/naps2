@@ -125,6 +125,7 @@
     <RotateLeft></RotateLeft>
     <RotateRight></RotateRight>
     <RotateFlip></RotateFlip>
+    <AltFlip></AltFlip>
     <RotateCustom></RotateCustom>
     <MoveUp>Ctrl+Up</MoveUp>
     <MoveDown>Ctrl+Down</MoveDown>

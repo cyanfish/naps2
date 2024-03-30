@@ -220,6 +220,10 @@ public class DesktopCommands
             Text = UiStrings.Flip,
             Image = iconProvider.GetIcon("arrow_switch_small")
         };
+        AltFlip = new ActionCommand(imageListActions.AltFlip)
+        {
+            Text = UiStrings.AltFlip
+        };
         Deskew = new ActionCommand(imageListActions.Deskew)
         {
             Text = UiStrings.Deskew
@@ -396,6 +400,7 @@ public class DesktopCommands
     public ActionCommand RotateLeft { get; set; }
     public ActionCommand RotateRight { get; set; }
     public ActionCommand Flip { get; set; }
+    public ActionCommand AltFlip { get; set; }
     public ActionCommand Deskew { get; set; }
     public ActionCommand CustomRotate { get; set; }
     public ActionCommand MoveUp { get; set; }
