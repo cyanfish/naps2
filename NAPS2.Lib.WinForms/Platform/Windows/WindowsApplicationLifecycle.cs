@@ -12,15 +12,18 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
 {
     private readonly StillImage _sti;
     private readonly WindowsEventLogger _windowsEventLogger;
+    private readonly ProcessCoordinator _processCoordinator;
     private readonly Naps2Config _config;
 
     private bool _shouldCreateEventSource;
     private int _returnCode;
 
-    public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger, Naps2Config config)
+    public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger,
+        ProcessCoordinator processCoordinator, Naps2Config config)
     {
         _sti = sti;
         _windowsEventLogger = windowsEventLogger;
+        _processCoordinator = processCoordinator;
         _config = config;
     }
 
@@ -104,7 +107,8 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
             }
         }
 
-        _shouldCreateEventSource = args.Any(x => x.Equals("/CreateEventSource", StringComparison.InvariantCultureIgnoreCase));
+        _shouldCreateEventSource =
+            args.Any(x => x.Equals("/CreateEventSource", StringComparison.InvariantCultureIgnoreCase));
         if (_shouldCreateEventSource)
         {
             try
@@ -165,8 +169,8 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
             foreach (var process in GetOtherNaps2Processes())
             {
                 // Another instance of NAPS2 is running, so send it the "Scan" signal
-                ActivateProcess(process);
-                if (Pipes.SendMessage(process, Pipes.MSG_SCAN_WITH_DEVICE + _sti.DeviceID!))
+                SetMainWindowToForeground(process);
+                if (_processCoordinator.ScanWithDevice(process, 100, _sti.DeviceID!))
                 {
                     // Successful, so this instance can be closed before showing any UI
                     Environment.Exit(0);
@@ -177,21 +181,39 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
         // Only start one instance if configured for SingleInstance
         if (_config.Get(c => c.SingleInstance))
         {
-            // See if there's another NAPS2 process running
-            foreach (var process in GetOtherNaps2Processes())
+            if (!_processCoordinator.TryTakeInstanceLock())
             {
-                // Another instance of NAPS2 is running, so send it the "Activate" signal
-                ActivateProcess(process);
-                if (Pipes.SendMessage(process, Pipes.MSG_ACTIVATE))
+                Log.Debug("Failed to get SingleInstance lock");
+                var process = _processCoordinator.GetProcessWithInstanceLock();
+                if (process != null)
                 {
-                    // Successful, so this instance should be closed
-                    Environment.Exit(0);
+                    // Another instance of NAPS2 is running, so send it the "Activate" signal
+                    Log.Debug($"Activating process {process.Id}");
+
+                    // For new processes, wait until the process is at least 5 seconds old.
+                    // This might be useful in cases where multiple NAPS2 processes are started at once, e.g. clicking
+                    // to open a group of files associated with NAPS2.
+                    int processAge = (DateTime.Now - process.StartTime).Milliseconds;
+                    int timeout = (5000 - processAge).Clamp(100, 5000);
+
+                    SetMainWindowToForeground(process);
+                    bool ok = true;
+                    if (Environment.GetCommandLineArgs() is [_, var arg] && File.Exists(arg))
+                    {
+                        Log.Debug($"Sending OpenFileRequest for {arg}");
+                        ok = _processCoordinator.OpenFile(process, timeout, arg);
+                    }
+                    if (ok && _processCoordinator.Activate(process, timeout))
+                    {
+                        // Successful, so this instance should be closed
+                        Environment.Exit(0);
+                    }
                 }
             }
         }
     }
 
-    private static void ActivateProcess(Process process)
+    private static void SetMainWindowToForeground(Process process)
     {
         if (process.MainWindowHandle != IntPtr.Zero)
         {

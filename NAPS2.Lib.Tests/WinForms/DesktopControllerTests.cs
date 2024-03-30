@@ -2,9 +2,9 @@ using NAPS2.EtoForms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
 using NAPS2.Recovery;
+using NAPS2.Remoting;
 using NAPS2.Remoting.Server;
 using NAPS2.Remoting.Worker;
 using NAPS2.Sdk.Tests;
@@ -39,6 +39,7 @@ public class DesktopControllerTests : ContextualTests
     private readonly IScannedImagePrinter _scannedImagePrinter;
     private readonly ThumbnailController _thumbnailController;
     private readonly ISharedDeviceManager _sharedDeviceManager;
+    private readonly ProcessCoordinator _processCoordinator;
 
     public DesktopControllerTests()
     {
@@ -61,6 +62,8 @@ public class DesktopControllerTests : ContextualTests
         _scannedImagePrinter = Substitute.For<IScannedImagePrinter>();
         _thumbnailController = new ThumbnailController(_thumbnailRenderQueue, _config);
         _sharedDeviceManager = Substitute.For<ISharedDeviceManager>();
+        _processCoordinator =
+            new ProcessCoordinator(Path.Combine(FolderPath, "instance.lock"), Guid.NewGuid().ToString("D"));
         ScanningContext.WorkerFactory = Substitute.For<IWorkerFactory>();
         _desktopController = new DesktopController(
             ScanningContext,
@@ -82,6 +85,7 @@ public class DesktopControllerTests : ContextualTests
             _desktopFormProvider,
             _scannedImagePrinter,
             _sharedDeviceManager,
+            _processCoordinator,
             new RecoveryManager(ScanningContext)
         );
 
@@ -261,5 +265,29 @@ public class DesktopControllerTests : ContextualTests
         _notify.Received().UpdateAvailable(_updateChecker, mockUpdateInfo);
         _updateChecker.ReceivedCallsCount(1);
         _notify.ReceivedCallsCount(1);
+    }
+
+    [Fact]
+    public async Task ProcessCoordinatorOpenFile()
+    {
+        var importOp = new ImportOperation(new FileImporter(ScanningContext));
+        _operationFactory.Create<ImportOperation>().Returns(importOp);
+        var path = CopyResourceToFile(ImageResources.dog, "test.jpg");
+
+        await _desktopController.Initialize();
+        Assert.True(_processCoordinator.OpenFile(Process.GetCurrentProcess(), 10000, path));
+        await Task.WhenAny(importOp.Success, Task.Delay(10000));
+
+        Assert.Single(_imageList.Images);
+        ImageAsserts.Similar(ImageResources.dog, _imageList.Images[0].GetClonedImage().Render());
+    }
+
+    [Fact]
+    public async Task ProcessCoordinatorScanWithDevice()
+    {
+        await _desktopController.Initialize();
+        Assert.True(_processCoordinator.ScanWithDevice(Process.GetCurrentProcess(), 10000, "abc"));
+
+        _ = _desktopScanController.Received().ScanWithDevice("abc");
     }
 }

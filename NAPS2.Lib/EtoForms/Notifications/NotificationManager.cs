@@ -2,14 +2,17 @@ namespace NAPS2.EtoForms.Notifications;
 
 public class NotificationManager
 {
-    public NotificationManager(ColorScheme colorScheme)
+    public NotificationManager(ColorScheme colorScheme, Naps2Config config)
     {
         ColorScheme = colorScheme;
+        Config = config;
     }
 
     public List<NotificationModel> Notifications { get; } = [];
 
     public ColorScheme ColorScheme { get; }
+
+    public Naps2Config Config { get; }
 
     public event EventHandler? Updated;
 

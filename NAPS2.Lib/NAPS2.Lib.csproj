@@ -34,6 +34,7 @@
     <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.62.0" PrivateAssets="all" />
     <PackageReference Include="MimeKitLite" Version="4.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.2.8" />
@@ -55,6 +56,8 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>NAPS2.Lib.Gtk</_Parameter1>
     </AssemblyAttribute>
+
+    <Protobuf Include="**/*.proto" Access="Public" />
   </ItemGroup>
 
   <ItemGroup>

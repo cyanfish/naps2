@@ -28,6 +28,7 @@ public class ProgressForm : EtoDialogBase
     protected override void BuildLayout()
     {
         FormStateController.RestoreFormState = false;
+        FormStateController.SaveFormState = false;
 
         LayoutController.Content = L.Column(
             _status,
@@ -113,6 +114,10 @@ public class ProgressForm : EtoDialogBase
 
     private void RunInBg_Click(object? sender, EventArgs e)
     {
+        var bgOps = Config.Get(c => c.BackgroundOperations);
+        bgOps = bgOps.Add(Operation.GetType().Name);
+        Config.User.Set(c => c.BackgroundOperations, bgOps);
+
         _background = true;
         Close();
     }

@@ -1,6 +1,8 @@
 using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
+using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
@@ -33,6 +35,7 @@ public class DesktopController
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IScannedImagePrinter _scannedImagePrinter;
     private readonly ISharedDeviceManager _sharedDeviceManager;
+    private readonly ProcessCoordinator _processCoordinator;
     private readonly RecoveryManager _recoveryManager;
     private readonly ImageTransfer _imageTransfer = new();
 
@@ -50,7 +53,7 @@ public class DesktopController
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
-        ISharedDeviceManager sharedDeviceManager, RecoveryManager recoveryManager)
+        ISharedDeviceManager sharedDeviceManager, ProcessCoordinator processCoordinator, RecoveryManager recoveryManager)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -70,6 +73,7 @@ public class DesktopController
         _desktopFormProvider = desktopFormProvider;
         _scannedImagePrinter = scannedImagePrinter;
         _sharedDeviceManager = sharedDeviceManager;
+        _processCoordinator = processCoordinator;
         _recoveryManager = recoveryManager;
     }
 
@@ -87,9 +91,10 @@ public class DesktopController
         if (_initialized) return;
         _initialized = true;
         _sharedDeviceManager.StartSharing();
-        StartPipesServer();
+        StartProcessCoordinator();
         ShowStartupMessages();
         ShowRecoveryPrompt();
+        ImportFilesFromCommandLine();
         InitThumbnailRendering();
         await RunStillImageEvents();
         SetFirstRunDate();
@@ -168,7 +173,7 @@ public class DesktopController
     public void Cleanup()
     {
         if (_suspended) return;
-        Pipes.KillServer();
+        _processCoordinator.KillServer();
         _sharedDeviceManager.StopSharing();
         if (!SkipRecoveryCleanup && !_config.Get(c => c.KeepSession))
         {
@@ -256,44 +261,10 @@ public class DesktopController
         return true;
     }
 
-    private void StartPipesServer()
+    private void StartProcessCoordinator()
     {
-        // Receive messages from other processes
-        Pipes.StartServer(msg =>
-        {
-            if (msg.StartsWith(Pipes.MSG_SCAN_WITH_DEVICE, StringComparison.InvariantCulture))
-            {
-                Invoker.Current.Invoke(async () =>
-                    await _desktopScanController.ScanWithDevice(msg.Substring(Pipes.MSG_SCAN_WITH_DEVICE.Length)));
-            }
-            if (msg.Equals(Pipes.MSG_ACTIVATE))
-            {
-                Invoker.Current.Invoke(() =>
-                {
-                    // TODO: xplat
-                    var formOnTop = Application.Instance.Windows.Last();
-                    if (formOnTop.WindowState == WindowState.Minimized && PlatformCompat.System.CanUseWin32)
-                    {
-                        Win32.ShowWindow(formOnTop.NativeHandle, Win32.ShowWindowCommands.Restore);
-                    }
-                    formOnTop.BringToFront();
-                });
-            }
-            if (msg.Equals(Pipes.MSG_CLOSE_WINDOW))
-            {
-                Invoker.Current.Invoke(() =>
-                {
-                    _desktopFormProvider.DesktopForm.Close();
-#if NET6_0_OR_GREATER
-                    if (OperatingSystem.IsMacOS())
-                    {
-                        // Closing the main window isn't enough to quit the app on Mac
-                        Application.Instance.Quit();
-                    }
-#endif
-                });
-            }
-        });
+        // Receive messages from other NAPS2 processes
+        _processCoordinator.StartServer(new ProcessCoordinatorServiceImpl(this));
     }
 
     private void ShowStartupMessages()
@@ -345,18 +316,33 @@ public class DesktopController
         }
     }
 
+    private void ImportFilesFromCommandLine()
+    {
+        if (Environment.GetCommandLineArgs() is [_, var arg] && File.Exists(arg))
+        {
+            ImportFiles([arg]);
+        }
+    }
+
     private void InitThumbnailRendering()
     {
         _thumbnailController.Init(_imageList);
     }
 
-    public void ImportFiles(IEnumerable<string> files)
+    public void ImportFiles(ICollection<string> files, bool background = false)
     {
         var op = _operationFactory.Create<ImportOperation>();
         if (op.Start(OrderFiles(files), _desktopImagesController.ReceiveScannedImage(),
                 new ImportParams { ThumbnailSize = _thumbnailController.RenderSize }))
         {
-            _operationProgress.ShowProgress(op);
+            if (background)
+            {
+                _operationProgress.ShowBackgroundProgress(op);
+            }
+            else
+            {
+                _operationProgress.ShowProgress(op);
+            }
         }
     }
 
@@ -536,5 +522,58 @@ public class DesktopController
     public void Resume()
     {
         _suspended = false;
+    }
+
+    private class ProcessCoordinatorServiceImpl(DesktopController controller) : ProcessCoordinatorService.ProcessCoordinatorServiceBase
+    {
+        public override Task<Empty> Activate(ActivateRequest request, ServerCallContext context)
+        {
+            Invoker.Current.Invoke(() =>
+            {
+                var formOnTop = Application.Instance.Windows.Last();
+                if (PlatformCompat.System.CanUseWin32)
+                {
+                    if (formOnTop.WindowState == WindowState.Minimized)
+                    {
+                        Win32.ShowWindow(formOnTop.NativeHandle, Win32.ShowWindowCommands.Restore);
+                    }
+                    Win32.SetForegroundWindow(formOnTop.NativeHandle);
+                }
+                else
+                {
+                    formOnTop.BringToFront();
+                }
+            });
+            return Task.FromResult(new Empty());
+        }
+
+        public override Task<Empty> CloseWindow(CloseWindowRequest request, ServerCallContext context)
+        {
+            Invoker.Current.Invoke(() =>
+            {
+                controller._desktopFormProvider.DesktopForm.Close();
+#if NET6_0_OR_GREATER
+            if (OperatingSystem.IsMacOS())
+            {
+                // Closing the main window isn't enough to quit the app on Mac
+                Application.Instance.Quit();
+            }
+#endif
+            });
+            return Task.FromResult(new Empty());
+        }
+
+        public override Task<Empty> OpenFile(OpenFileRequest request, ServerCallContext context)
+        {
+            controller.ImportFiles(request.Path, true);
+            return Task.FromResult(new Empty());
+        }
+
+        public override Task<Empty> ScanWithDevice(ScanWithDeviceRequest request, ServerCallContext context)
+        {
+            Invoker.Current.Invoke(async () =>
+                await controller._desktopScanController.ScanWithDevice(request.Device));
+            return Task.FromResult(new Empty());
+        }
     }
 }

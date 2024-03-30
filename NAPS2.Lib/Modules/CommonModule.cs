@@ -8,6 +8,7 @@ using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Platform.Windows;
 using NAPS2.Recovery;
+using NAPS2.Remoting;
 using NAPS2.Remoting.Server;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
@@ -46,6 +47,7 @@ public class CommonModule : Module
                 ctx.Resolve<ScanningContext>(),
                 ctx.Resolve<Naps2Config>(),
                 Path.Combine(Paths.AppData, "sharing.xml"))).SingleInstance();
+        builder.RegisterInstance(ProcessCoordinator.CreateDefault());
 
         // Logging
         builder.Register<ILogger>(ctx =>

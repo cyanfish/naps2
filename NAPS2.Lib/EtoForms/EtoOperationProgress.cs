@@ -49,10 +49,6 @@ public class EtoOperationProgress : OperationProgress
     {
         Attach(op);
 
-        var bgOps = _config.Get(c => c.BackgroundOperations);
-        bgOps = bgOps.Remove(op.GetType().Name);
-        _config.User.Set(c => c.BackgroundOperations, bgOps);
-
         if (!op.IsFinished)
         {
             Invoker.Current.Invoke(() =>
@@ -72,10 +68,6 @@ public class EtoOperationProgress : OperationProgress
     public override void ShowBackgroundProgress(IOperation op)
     {
         Attach(op);
-
-        var bgOps = _config.Get(c => c.BackgroundOperations);
-        bgOps = bgOps.Add(op.GetType().Name);
-        _config.User.Set(c => c.BackgroundOperations, bgOps);
 
         if (!op.IsFinished)
         {

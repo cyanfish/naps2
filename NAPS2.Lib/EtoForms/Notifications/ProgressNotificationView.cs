@@ -60,7 +60,11 @@ public class ProgressNotificationView : NotificationView
 
     protected override void NotificationClicked()
     {
-        Manager!.Hide(Model);
+        var bgOps = Manager!.Config.Get(c => c.BackgroundOperations);
+        bgOps = bgOps.Remove(_op.GetType().Name);
+        Manager.Config.User.Set(c => c.BackgroundOperations, bgOps);
+
+        Manager.Hide(Model);
         _operationProgress.ShowModalProgress(_op);
     }
 
