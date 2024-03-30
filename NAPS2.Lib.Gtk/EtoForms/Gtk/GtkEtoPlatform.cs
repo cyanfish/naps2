@@ -247,4 +247,31 @@ public class GtkEtoPlatform : EtoPlatform
         gtkButton.StyleContext.AddClass("zoom-button");
         gtkButton.SetSizeRequest(0, 0);
     }
+
+    public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
+    {
+        var native = control.ToNative();
+        // Attach to the child so that the scrollbars don't steal the event from us
+        var child = (native as GTK.Bin)?.Child;
+        if (child == null)
+        {
+            Log.Error("Expected scrollable to be GTK.Bin");
+            base.AttachMouseWheelEvent(control, eventHandler);
+        }
+        else
+        {
+            child.ScrollEvent += (sender, args) =>
+            {
+                var ev = args.Event;
+                var newArgs = new MouseEventArgs(
+                    MouseButtons.None,
+                    ev.State.ToEtoKey(),
+                    new PointF((float) ev.X, (float) ev.Y),
+                    // Negate deltaY to match WinForms
+                    new SizeF((float) ev.DeltaX, (float) -ev.DeltaY));
+                eventHandler.Invoke(sender, newArgs);
+                args.RetVal = newArgs.Handled;
+            };
+        }
+    }
 }
