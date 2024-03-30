@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "NAPS2.App.WinForms": {
+      "commandName": "Project"
+    }
+  }
+}
