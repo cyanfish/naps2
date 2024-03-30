@@ -14,23 +14,19 @@ public class EsclClient
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
 
-    // Clients that verify HTTPS certificates
+    // Client that verifies HTTPS certificates
+    private static readonly HttpClientHandler VerifiedHttpClientHandler = new() { MaxConnectionsPerServer = 256 };
     private static readonly HttpClient VerifiedHttpClient = new();
-    private static readonly HttpClient VerifiedProgressHttpClient = new();
-    private static readonly HttpClient VerifiedDocumentHttpClient = new();
 
-    // Clients that don't verify HTTPS certificates
+    // Client that doesn't verify HTTPS certificates
     private static readonly HttpClientHandler UnverifiedHttpClientHandler = new()
     {
+        MaxConnectionsPerServer = 256,
         // ESCL certificates are generally self-signed - we aren't trying to verify server authenticity, just ensure
         // that the connection is encrypted and protect against passive interception.
         ServerCertificateCustomValidationCallback = (_, _, _, _) => true
     };
-    // Sadly as we're still using .NET Framework on Windows, we're stuck with the old HttpClient implementation, which
-    // has trouble with concurrency. So we use a separate client for long running requests (Progress/NextDocument).
     private static readonly HttpClient UnverifiedHttpClient = new(UnverifiedHttpClientHandler);
-    private static readonly HttpClient UnverifiedProgressHttpClient = new(UnverifiedHttpClientHandler);
-    private static readonly HttpClient UnverifiedDocumentHttpClient = new(UnverifiedHttpClientHandler);
 
     private readonly EsclService _service;
     private bool _httpFallback;
@@ -49,16 +45,6 @@ public class EsclClient
     private HttpClient HttpClient => SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttpOrTrustedCertificate)
         ? VerifiedHttpClient
         : UnverifiedHttpClient;
-
-    private HttpClient ProgressHttpClient =>
-        SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttpOrTrustedCertificate)
-            ? VerifiedProgressHttpClient
-            : UnverifiedProgressHttpClient;
-
-    private HttpClient DocumentHttpClient =>
-        SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttpOrTrustedCertificate)
-            ? VerifiedDocumentHttpClient
-            : UnverifiedDocumentHttpClient;
 
     public async Task<EsclCapabilities> GetCapabilities()
     {
@@ -149,7 +135,7 @@ public class EsclClient
         if (pageProgress != null)
         {
             var progressUrl = GetUrl($"{job.UriPath}/Progress");
-            var progressResponse = await ProgressHttpClient.GetStreamAsync(progressUrl);
+            var progressResponse = await HttpClient.GetStreamAsync(progressUrl);
             var streamReader = new StreamReader(progressResponse);
             _ = Task.Run(async () =>
             {
@@ -175,7 +161,7 @@ public class EsclClient
                 url =>
                 {
                     Logger.LogDebug("ESCL GET {Url}", url);
-                    return DocumentHttpClient.GetAsync(url);
+                    return HttpClient.GetAsync(url);
                 });
             if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
             {
