@@ -48,6 +48,9 @@ public class WinFormsDesktopForm : DesktopForm
     {
         _form = this.ToNative();
         _form.FormClosing += OnFormClosing;
+
+        // TODO: Remove this if https://github.com/picoe/Eto/issues/2601 is fixed
+        NativeListView.KeyDown += (_, e) => OnKeyDown(new KeyEventArgs(e.KeyData.ToEto(), KeyEventType.KeyDown));
     }
 
     protected override void OnClosing(CancelEventArgs e)
