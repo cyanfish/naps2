@@ -1482,6 +1482,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pre-emptively run OCR after scanning.
+        /// </summary>
+        internal static string PreemptivelyOcrAfterScanning {
+            get {
+                return ResourceManager.GetString("PreemptivelyOcrAfterScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press Start when ready..
         /// </summary>
         internal static string PressStartWhenReady {

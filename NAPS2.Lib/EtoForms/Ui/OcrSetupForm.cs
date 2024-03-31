@@ -2,6 +2,7 @@ using System.Globalization;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
+using NAPS2.Lang;
 using NAPS2.Ocr;
 
 namespace NAPS2.EtoForms.Ui;
@@ -14,7 +15,11 @@ public class OcrSetupForm : EtoDialogBase
     private readonly DropDown _ocrLang = C.DropDown();
     private readonly DropDown _ocrMode = C.EnumDropDown(LocalizedOcrMode.Fast, LocalizedOcrMode.Best);
     private readonly CheckBox _ocrPreProcessing = C.CheckBox(UiStrings.OcrPreProcessing);
-    private readonly CheckBox _ocrAfterScanning = C.CheckBox(UiStrings.RunOcrAfterScanning);
+    private readonly CheckBox _ocrAfterScanning = C.CheckBox(
+        TranslationMigrator.PickTranslated(
+            UiStrings.ResourceManager,
+            "RunOcrAfterScanning",
+            "PreemptivelyOcrAfterScanning"));
     private readonly LinkButton _moreLanguages = C.Link(UiStrings.GetMoreLanguages);
 
     private string? _code;
