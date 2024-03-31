@@ -141,4 +141,25 @@ public class MacEtoPlatform : EtoPlatform
             base.SetClientSize(window, clientSize);
         }
     }
+
+    public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
+    {
+        var view = control.ToNative();
+        var monitor = NSEvent.AddLocalMonitorForEventsMatchingMask(NSEventMask.ScrollWheel, evt =>
+        {
+            if (ReferenceEquals(evt.Window, view.Window) &&
+                view.HitTest(evt.LocationInWindow) != null!)
+            {
+                var newArgs = new MouseEventArgs(
+                    MouseButtons.None,
+                    evt.ModifierFlags.ToEto(),
+                    evt.LocationInWindow.ToEto(),
+                    new SizeF((float) evt.DeltaX, (float) evt.DeltaY));
+                eventHandler(control, newArgs);
+                return newArgs.Handled ? null! : evt;
+            }
+            return evt;
+        });
+        control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
+    }
 }

@@ -8,6 +8,7 @@ public class ScrollZoomImageViewer
 {
     private readonly Scrollable _scrollable = new() { Border = BorderType.None };
     private readonly Drawable _imageView = new() { BackgroundColor = Colors.White };
+    private PointF _scrollableLocation;
     private Size _renderSize;
     private float _renderFactor;
     private PointF? _mousePos;
@@ -20,6 +21,7 @@ public class ScrollZoomImageViewer
         _scrollable.Content = _imageView;
         _scrollable.BackgroundColor = Colors.White;
         _imageView.Paint += ImagePaint;
+        _scrollable.Shown += OnShown;
         _scrollable.MouseEnter += OnMouseEnter;
         _scrollable.MouseLeave += OnMouseLeave;
         _scrollable.MouseMove += OnMouseMove;
@@ -55,9 +57,15 @@ public class ScrollZoomImageViewer
     private bool IsWidthBound =>
         Image!.Width / (float) Image.Height > AvailableWidth / (float) AvailableHeight;
 
+    private bool FitsInBounds => RenderSize.Width <= AvailableWidth && RenderSize.Height <= AvailableHeight;
+
     private float XOffset => Math.Max((_imageView.Width - RenderSize.Width) / 2, 0);
     private float YOffset => Math.Max((_imageView.Height - RenderSize.Height) / 2, 0);
 
+    private void OnShown(object? sender, EventArgs e)
+    {
+        _scrollableLocation = _scrollable.Location;
+    }
 
     private void OnMouseEnter(object? sender, MouseEventArgs e)
     {
@@ -174,19 +182,19 @@ public class ScrollZoomImageViewer
     {
         var anchorMiddle = new PointF(0.5f, 0.5f);
         var scrollableMiddle = new PointF(
-            _scrollable.Location.X + _scrollable.Width / 2,
-            _scrollable.Location.Y + _scrollable.Height / 2);
+            _scrollableLocation.X + _scrollable.Width / 2f,
+            _scrollableLocation.Y + _scrollable.Height / 2f);
         if (!anchorToMouse ||
             _mousePos is not { } mousePos ||
-            mousePos.X < _scrollable.Location.X ||
-            mousePos.Y < _scrollable.Location.Y ||
-            mousePos.X > _scrollable.Location.X + _scrollable.Width ||
-            mousePos.Y > _scrollable.Location.Y + _scrollable.Height)
+            mousePos.X < _scrollableLocation.X ||
+            mousePos.Y < _scrollableLocation.Y ||
+            mousePos.X > _scrollableLocation.X + _scrollable.Width ||
+            mousePos.Y > _scrollableLocation.Y + _scrollable.Height)
         {
             // Mouse is outside the scrollable
             return (anchorMiddle, scrollableMiddle);
         }
-        var mouseRelativePos = mousePos - _scrollable.Location - new Point(1, 1);
+        var mouseRelativePos = mousePos - _scrollableLocation - new Point(1, 1);
         var x = (mouseRelativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
         var y = (mouseRelativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
         if (x < 0 || y < 0 || x > 1 || y > 1)
@@ -201,6 +209,10 @@ public class ScrollZoomImageViewer
     // in the image that was underneath the mouse back there (after the image size has been changed).
     private void SetMouseAnchor((PointF imageAnchor, PointF mouseRelativePos) anchor)
     {
+        if (FitsInBounds)
+        {
+            return;
+        }
         // TODO: This is off a bit for the "middle" anchor, probably because the scrollbars themselves appear
         var xScroll = anchor.imageAnchor.X * RenderSize.Width + XOffset - anchor.mouseRelativePos.X;
         var yScroll = anchor.imageAnchor.Y * RenderSize.Height + YOffset - anchor.mouseRelativePos.Y;
