@@ -25,11 +25,13 @@ public class ImageClipboard
             // Slow path for more full-featured copying, expensive parts not run on UI thread
             using var firstBitmap = await Task.Run(() => imageList[0].Render());
             EtoPlatform.Current.SetClipboardImage(Clipboard.Instance, imageList[0], firstBitmap);
-            var encodedRtf = await Task.Run(() => RtfEncodeImages(firstBitmap, imageList));
-            if (encodedRtf != null)
-            {
-                Clipboard.Instance.SetString(encodedRtf, "Rich Text Format");
-            }
+            // TODO: Do we want to re-enable this at all? Or make it configurable somehow? The problem is that it's
+            // TODO: slow and memory-hungry.
+            // var encodedRtf = await Task.Run(() => RtfEncodeImages(firstBitmap, imageList));
+            // if (encodedRtf != null)
+            // {
+            //     Clipboard.Instance.SetString(encodedRtf, "Rich Text Format");
+            // }
         }
     }
 

@@ -231,20 +231,20 @@ public class WinFormsEtoPlatform : EtoPlatform
         var jpegOrPng = ImageExportHelper.SaveSmallestFormatToMemoryStream(memoryImage,
             processedImage.Metadata.Lossless, -1, out var fileFormat);
         var handler = (ClipboardHandler) clipboard.Handler;
-        // Note this only updates the DataObject, it doesn't set the clipboard, that's done in the
-        // base.SetClipboardImage(...) call below
+        // Note this only updates the DataObject, it doesn't set the clipboard, that's done below
         handler.Control.SetData(fileFormat == ImageFileFormat.Jpeg ? "JFIF" : "PNG", jpegOrPng);
 
         if (memoryImage.PixelFormat is ImagePixelFormat.BW1 or ImagePixelFormat.Gray8)
         {
             // Storing 1bit/8bit images to the clipboard doesn't work, so we copy to 24bit if needed
             using var memoryImage2 = memoryImage.CopyWithPixelFormat(ImagePixelFormat.RGB24);
-            base.SetClipboardImage(clipboard, processedImage, memoryImage2);
+            handler.Control.SetImage(memoryImage2.AsBitmap());
         }
         else
         {
-            base.SetClipboardImage(clipboard, processedImage, memoryImage);
+            handler.Control.SetImage(memoryImage.AsBitmap());
         }
+        WF.Clipboard.SetDataObject(handler.Control, true);
     }
 
     public override void ConfigureDropDown(DropDown dropDown)
