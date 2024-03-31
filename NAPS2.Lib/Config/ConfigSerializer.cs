@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using NAPS2.Config.Model;
 using NAPS2.Config.ObsoleteTypes;
+using NAPS2.Escl;
 using NAPS2.Pdf;
 using NAPS2.Serialization;
 
@@ -149,6 +150,10 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         if (c.NoScannerSharing)
         {
             storage.Set(x => x.DisableScannerSharing, true);
+        }
+        if (c.EsclSecurityPolicy != EsclSecurityPolicy.None)
+        {
+            storage.Set(x => x.EsclSecurityPolicy, c.EsclSecurityPolicy);
         }
 
         void SetIfLocked<T>(Expression<Func<CommonConfig, T>> accessor, T value, string name)
