@@ -123,6 +123,9 @@ public class ScrollZoomImageViewer
 
     public float ZoomFactor => _renderFactor;
 
+    // GDI doesn't like when the render size (4 bytes per pixel) exceeds int.MaxValue
+    public float MaxZoom => (float) Math.Sqrt(int.MaxValue * 0.99 / (Image!.Width * Image.Height * 4));
+
     public void ChangeZoom(float step, bool anchorToMouse = false)
     {
         SetZoom(_renderFactor * (float) Math.Pow(1.2, step), anchorToMouse);
@@ -130,9 +133,7 @@ public class ScrollZoomImageViewer
 
     public void SetZoom(float value, bool anchorToMouse = false)
     {
-        // TODO: Adjust clamp values based on image size
-        // (and also propagate that to the Mac slider limits)
-        _renderFactor = value.Clamp(0.01f, 10);
+        _renderFactor = value.Clamp(0.01f, MaxZoom);
         _scrollable.SuspendLayout();
         var anchor = GetMouseAnchor(anchorToMouse);
         RenderSize =
@@ -218,7 +219,6 @@ public class ScrollZoomImageViewer
         var yScroll = anchor.imageAnchor.Y * RenderSize.Height + YOffset - anchor.mouseRelativePos.Y;
         _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));
     }
-
 
     public static implicit operator LayoutElement(ScrollZoomImageViewer control)
     {

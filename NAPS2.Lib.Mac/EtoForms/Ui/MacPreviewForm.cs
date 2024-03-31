@@ -19,7 +19,11 @@ public class MacPreviewForm : PreviewForm
             DoubleValue = 0,
             ToolTip = UiStrings.Zoom
         }.WithAction(ZoomUpdated);
-        ImageViewer.ZoomChanged += (_, _) => { _zoomSlider.DoubleValue = Math.Log10(ImageViewer.ZoomFactor); };
+        ImageViewer.ZoomChanged += (_, _) =>
+        {
+            _zoomSlider.DoubleValue = Math.Log10(ImageViewer.ZoomFactor);
+            _zoomSlider.MaxValue = Math.Log10(ImageViewer.MaxZoom);
+        };
     }
 
     protected override void CreateToolbar()
