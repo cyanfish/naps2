@@ -8,7 +8,7 @@ namespace NAPS2.Escl.Tests;
 
 public class ClientServerTests
 {
-    [Fact]
+    [Fact(Timeout = 60_000)]
     public async Task ClientServer()
     {
         var job = Substitute.For<IEsclScanJob>();

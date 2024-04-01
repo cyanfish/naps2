@@ -11,13 +11,13 @@ namespace NAPS2.Sdk.Tests.Remoting;
 public class ScanServerTests(ITestOutputHelper testOutputHelper)
     : ScanServerTestsBase(testOutputHelper, EsclSecurityPolicy.ServerDisableHttps)
 {
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task FindDevice()
     {
         Assert.True(await TryFindClientDevice());
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task Scan()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
@@ -29,7 +29,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task ScanMultiplePages()
     {
         _bridge.MockOutput =
@@ -45,7 +45,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         ImageAsserts.Similar(ImageResources.dog_h_p300, images[2]);
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task ScanWithCorrectOptions()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
@@ -118,7 +118,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         ImageAsserts.Similar(ImageResources.dog_bw, images[0]);
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task ScanWithError()
     {
         _bridge.Error = new DeviceFeederEmptyException();
@@ -130,7 +130,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         }).ToListAsync());
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task ScanWithErrorAfterPage()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
@@ -149,7 +149,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         Assert.Equal(SdkResources.DevicePaperJam, exception.Message);
     }
 
-    [Fact(Skip = "Flaky")]
+    [Fact(Timeout = TIMEOUT, Skip = "Flaky")]
     public async Task ScanProgress()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog, ImageResources.dog);
@@ -175,7 +175,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
             Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 2 && args.Progress == 0.5));
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task ScanPreventedByHttpsSecurityPolicy()
     {
         var scanResult = _client.Scan(new ScanOptions

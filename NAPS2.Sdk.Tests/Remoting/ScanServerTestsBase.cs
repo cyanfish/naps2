@@ -14,6 +14,8 @@ namespace NAPS2.Sdk.Tests.Remoting;
 
 public class ScanServerTestsBase : ContextualTests
 {
+    protected const int TIMEOUT = 60_000;
+
     protected readonly ScanServer _server;
     private protected readonly MockScanBridge _bridge;
     protected readonly ScanController _client;

@@ -11,13 +11,13 @@ namespace NAPS2.Sdk.Tests.Remoting;
 public class SelfSignedCertScanServerTests(ITestOutputHelper testOutputHelper)
     : ScanServerTestsBase(testOutputHelper, EsclSecurityPolicy.RequireHttps)
 {
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task FindDevice()
     {
         Assert.True(await TryFindClientDevice());
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task Scan()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
@@ -33,7 +33,7 @@ public class SelfSignedCertScanServerTests(ITestOutputHelper testOutputHelper)
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    [Fact]
+    [Fact(Timeout = TIMEOUT)]
     public async Task ScanPreventedByTrustedCertificateSecurityPolicy()
     {
         var scanResult = _client.Scan(new ScanOptions
