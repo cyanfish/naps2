@@ -8,11 +8,12 @@ using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Mocks;
 using NSubstitute;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 
-public class ScanServerTestsBase : ContextualTests
+public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
 {
     protected const int TIMEOUT = 60_000;
 
@@ -40,7 +41,6 @@ public class ScanServerTestsBase : ContextualTests
         ScanningContext.Logger.LogDebug("Display name: {Name}", displayName);
         var serverDevice = new ScanDevice(ScanOptionsValidator.SystemDefaultDriver, "testID", "testName");
         _server.RegisterDevice(serverDevice, displayName);
-        _server.Start().Wait();
 
         // Set up a client ScanController for scanning through EsclScanDriver -> network -> ScanServer
         _client = new ScanController(ScanningContext);
@@ -48,11 +48,9 @@ public class ScanServerTestsBase : ContextualTests
         _clientDevice = new ScanDevice(Driver.Escl, uuid, displayName);
     }
 
-    public override void Dispose()
-    {
-        _server.Stop().Wait();
-        base.Dispose();
-    }
+    public Task InitializeAsync() => _server.Start();
+
+    public Task DisposeAsync() => _server.Stop();
 
     protected async Task<bool> TryFindClientDevice()
     {
