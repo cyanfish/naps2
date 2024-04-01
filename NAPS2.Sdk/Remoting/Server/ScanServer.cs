@@ -39,7 +39,8 @@ public class ScanServer : IDisposable
     }
 
     /// <summary>
-    /// If non-null, enables TLS connections to the server with the given certificate.
+    /// The certificate to be used for TLS connections to the server. If not specified, a self-signed certificate will
+    /// be generated when the server starts (unless prevented by the security policy).
     /// </summary>
     public X509Certificate2? Certificate
     {

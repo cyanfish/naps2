@@ -15,10 +15,7 @@ public class TlsScanServerTests(ITestOutputHelper testOutputHelper) : ScanServer
     [Fact]
     public async Task FindDevice()
     {
-        var devices = await _client.GetDeviceList(Driver.Escl);
-        // The device name is suffixed with the IP so we just check the prefix matches
-        Assert.Contains(devices,
-            device => device.Name.StartsWith(_clientDevice.Name) && device.ID == _clientDevice.ID);
+        Assert.True(await TryFindClientDevice());
     }
 
     [Fact]

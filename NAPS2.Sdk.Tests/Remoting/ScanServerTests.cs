@@ -8,15 +8,13 @@ using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 
-public class ScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper)
+public class ScanServerTests(ITestOutputHelper testOutputHelper)
+    : ScanServerTestsBase(testOutputHelper, EsclSecurityPolicy.ServerDisableHttps)
 {
     [Fact]
     public async Task FindDevice()
     {
-        var devices = await _client.GetDeviceList(Driver.Escl);
-        // The device name is suffixed with the IP so we just check the prefix matches
-        Assert.Contains(devices,
-            device => device.Name.StartsWith(_clientDevice.Name) && device.ID == _clientDevice.ID);
+        Assert.True(await TryFindClientDevice());
     }
 
     [Fact]
@@ -170,9 +168,11 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTes
 
         pageStartMock.Received()(Arg.Any<object>(), Arg.Is<PageStartEventArgs>(args => args.PageNumber == 1));
         // TODO: This flaked and we only got the second one - why? Can we fix it?
-        pageProgressMock.Received()(Arg.Any<object>(), Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 1 && args.Progress == 0.5));
+        pageProgressMock.Received()(Arg.Any<object>(),
+            Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 1 && args.Progress == 0.5));
         pageStartMock.Received()(Arg.Any<object>(), Arg.Is<PageStartEventArgs>(args => args.PageNumber == 2));
-        pageProgressMock.Received()(Arg.Any<object>(), Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 2 && args.Progress == 0.5));
+        pageProgressMock.Received()(Arg.Any<object>(),
+            Arg.Is<PageProgressEventArgs>(args => args.PageNumber == 2 && args.Progress == 0.5));
     }
 
     [Fact]

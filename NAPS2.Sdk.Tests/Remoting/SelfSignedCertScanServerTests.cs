@@ -1,6 +1,5 @@
 using System.Net.Http;
 using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
 using NAPS2.Escl;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
@@ -9,11 +8,17 @@ using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 
-public class FallbackScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper,
-    EsclSecurityPolicy.None, new X509Certificate2(BinaryResources.testcert))
+public class SelfSignedCertScanServerTests(ITestOutputHelper testOutputHelper)
+    : ScanServerTestsBase(testOutputHelper, EsclSecurityPolicy.RequireHttps)
 {
     [Fact]
-    public async Task ScanFallbackFromHttpsToHttp()
+    public async Task FindDevice()
+    {
+        Assert.True(await TryFindClientDevice());
+    }
+
+    [Fact]
+    public async Task Scan()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
         var images = await _client.Scan(new ScanOptions
@@ -21,9 +26,7 @@ public class FallbackScanServerTests(ITestOutputHelper testOutputHelper) : ScanS
             Device = _clientDevice,
             EsclOptions =
             {
-                // This policy makes sure HTTPS will fail due to an untrusted certificate, which simulates the case
-                // where we're failing due to the server only supporting obsolete TLS versions.
-                SecurityPolicy = EsclSecurityPolicy.ClientRequireTrustedCertificate
+                SecurityPolicy = EsclSecurityPolicy.RequireHttps
             }
         }).ToListAsync();
         Assert.Single(images);

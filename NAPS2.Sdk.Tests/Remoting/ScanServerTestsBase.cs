@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Escl;
 using NAPS2.Escl.Server;
@@ -49,5 +50,15 @@ public class ScanServerTestsBase : ContextualTests
     {
         _server.Stop().Wait();
         base.Dispose();
+    }
+
+    protected async Task<bool> TryFindClientDevice()
+    {
+        var cts = new CancellationTokenSource();
+        // The device name is suffixed with the IP so we just check the prefix matches
+        bool found = await _client.GetDevices(Driver.Escl, cts.Token)
+            .AnyAsync(device => device.Name.StartsWith(_clientDevice.Name) && device.ID == _clientDevice.ID);
+        cts.Cancel();
+        return found;
     }
 }

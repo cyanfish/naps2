@@ -46,10 +46,18 @@ public class ClientServerTests
     }
 
     [Fact]
-    public async Task StartTlsServerWithoutCertificate()
+    public async Task StartTlsServerWithoutTrustedCertificate()
     {
         using var server = new EsclServer();
-        server.SecurityPolicy = EsclSecurityPolicy.RequireHttps;
+        server.SecurityPolicy = EsclSecurityPolicy.RequireTrustedCertificate;
+        await Assert.ThrowsAsync<EsclSecurityPolicyViolationException>(() => server.Start());
+    }
+
+    [Fact]
+    public async Task StartTlsServerWithInconsistentFlags()
+    {
+        using var server = new EsclServer();
+        server.SecurityPolicy = EsclSecurityPolicy.RequireHttps | EsclSecurityPolicy.ServerDisableHttps;
         await Assert.ThrowsAsync<EsclSecurityPolicyViolationException>(() => server.Start());
     }
 }

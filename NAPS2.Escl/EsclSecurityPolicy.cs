@@ -8,9 +8,12 @@ public enum EsclSecurityPolicy
     /// </summary>
     None = 0,
 
-    ServerRequireHttps = 1,
-    ClientRequireHttps = 2,
-    ClientRequireHttpOrTrustedCertificate = 4,
+    ServerDisableHttps = 1,
+    ServerRequireHttps = 2,
+    ServerRequireTrustedCertificate = 4,
+    ClientDisableHttps = 8,
+    ClientRequireHttps = 16,
+    ClientRequireTrustedCertificate = 32,
 
     /// <summary>
     /// Only allow HTTPS connections, but clients will accept self-signed certificates.
@@ -20,5 +23,5 @@ public enum EsclSecurityPolicy
     /// <summary>
     /// Only allow HTTPS connections, and clients will only accept trusted certificates.
     /// </summary>
-    RequireTrustedCertificate = RequireHttps | ClientRequireHttpOrTrustedCertificate
+    RequireTrustedCertificate = RequireHttps | ServerRequireTrustedCertificate | ClientRequireTrustedCertificate
 }

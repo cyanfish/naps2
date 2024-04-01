@@ -50,7 +50,7 @@ public class EsclClient
 
     public CancellationToken CancelToken { get; set; }
 
-    private HttpClient HttpClient => SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttpOrTrustedCertificate)
+    private HttpClient HttpClient => SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireTrustedCertificate)
         ? VerifiedHttpClient
         : UnverifiedHttpClient;
 
@@ -269,7 +269,8 @@ public class EsclClient
 
     private string GetUrl(string endpoint)
     {
-        bool tls = (_service.Tls || _service.Port == 443) && !_httpFallback;
+        bool tls = (_service.Tls || _service.Port == 443) && !_httpFallback &&
+                   !SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientDisableHttps);
         if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttps) && !tls)
         {
             throw new EsclSecurityPolicyViolationException(

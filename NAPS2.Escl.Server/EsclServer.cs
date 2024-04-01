@@ -44,19 +44,36 @@ public class EsclServer : IEsclServer
         _devices.Remove(deviceConfig);
     }
 
-    public Task Start()
+    public async Task Start()
     {
         if (_started)
         {
-            return Task.CompletedTask;
+            return;
         }
-        if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerRequireHttps) && Certificate == null)
+        if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerRequireHttps) &&
+            SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerDisableHttps))
+        {
+            throw new EsclSecurityPolicyViolationException(
+                $"EsclSecurityPolicy of {SecurityPolicy} is inconsistent");
+        }
+        if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerRequireTrustedCertificate) && Certificate == null)
         {
             throw new EsclSecurityPolicyViolationException(
                 $"EsclSecurityPolicy of {SecurityPolicy} needs a certificate to be specified");
         }
         _started = true;
         _cts = new CancellationTokenSource();
+
+        // Try to generate a self-signed certificate if the caller hasn't provided one
+        if (!SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerDisableHttps) && Certificate == null)
+        {
+            await Task.Run(() => Certificate = CertificateHelper.GenerateSelfSignedCertificate(Logger));
+        }
+        if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerRequireHttps) && Certificate == null)
+        {
+            throw new EsclSecurityPolicyViolationException(
+                $"EsclSecurityPolicy of {SecurityPolicy} needs a certificate to be specified");
+        }
 
         var tasks = new List<Task>();
         foreach (var device in _devices.Keys)
@@ -65,7 +82,7 @@ public class EsclServer : IEsclServer
             deviceCtx.StartTask = Task.Run(() => StartServerAndAdvertise(deviceCtx));
             tasks.Add(deviceCtx.StartTask);
         }
-        return Task.WhenAll(tasks);
+        await Task.WhenAll(tasks);
     }
 
     private async Task StartServerAndAdvertise(DeviceContext deviceCtx)
@@ -74,7 +91,7 @@ public class EsclServer : IEsclServer
         // Try to run the server with the port specified in the EsclDeviceConfig first. If that fails, try random ports
         // instead, and store the actually-used port back in EsclDeviceConfig so it can be advertised correctly.
         bool hasHttp = !SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerRequireHttps);
-        bool hasHttps = Certificate != null;
+        bool hasHttps = !SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerDisableHttps) && Certificate != null;
         if (hasHttp)
         {
             await PortFinder.RunWithSpecifiedOrRandomPort(deviceCtx.Config.Port, async port =>
@@ -105,7 +122,8 @@ public class EsclServer : IEsclServer
                 .WithCertificate((tls ? Certificate : null)!))
             .HandleUnhandledException(UnhandledServerException)
             .WithWebApi("/eSCL",
-                m => m.WithController(() => new EsclApiController(deviceCtx.Config, deviceCtx.ServerState, SecurityPolicy, Logger)));
+                m => m.WithController(() =>
+                    new EsclApiController(deviceCtx.Config, deviceCtx.ServerState, SecurityPolicy, Logger)));
         await server.StartAsync(cancelToken);
     }
 
