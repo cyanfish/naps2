@@ -48,6 +48,10 @@ internal class JobInfo
 
     public required IEsclScanJob Job { get; set; }
 
+    public SimpleAsyncLock NextDocumentLock { get; } = new();
+
+    public bool NextDocumentReady { get; set; }
+
     // This is different than EsclJobState.Completed; the ESCL state only transitions to completed once the client has
     // finished querying for documents. IsScanComplete is set to true immediately after the physical scan operation is
     // done.

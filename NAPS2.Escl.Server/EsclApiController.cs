@@ -260,10 +260,24 @@ internal class EsclApiController : WebApiController
             return;
         }
 
-        bool result;
+        await jobInfo.NextDocumentLock.Take();
         try
         {
-            result = await jobInfo.Job.WaitForNextDocument();
+            await WaitForAndWriteNextDocument(jobInfo);
+        }
+        finally
+        {
+            jobInfo.NextDocumentLock.Release();
+        }
+    }
+
+    private async Task WaitForAndWriteNextDocument(JobInfo jobInfo)
+    {
+        try
+        {
+            // If we already have a document (i.e. if a connection error occured during the previous NextDocument
+            // request), we stay at that same document and don't advance
+            jobInfo.NextDocumentReady = jobInfo.NextDocumentReady || await jobInfo.Job.WaitForNextDocument();
         }
         catch (Exception ex)
         {
@@ -272,15 +286,28 @@ internal class EsclApiController : WebApiController
             Response.StatusCode = 500;
             return;
         }
-        if (result)
+
+        // At this point either we have a document and can respond with it, or we have no documents left and should 404
+        if (jobInfo.NextDocumentReady)
         {
-            Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobInfo.Id}/1");
-            SetChunkedResponse();
-            Response.ContentType = jobInfo.Job.ContentType;
-            Response.ContentEncoding = null;
-            using var stream = Response.OutputStream;
-            await jobInfo.Job.WriteDocumentTo(stream);
-            jobInfo.TransferredDocument();
+            try
+            {
+                Response.Headers.Add("Content-Location", $"/eSCL/ScanJobs/{jobInfo.Id}/1");
+                SetChunkedResponse();
+                Response.ContentType = jobInfo.Job.ContentType;
+                Response.ContentEncoding = null;
+                using var stream = Response.OutputStream;
+                await jobInfo.Job.WriteDocumentTo(stream);
+                jobInfo.NextDocumentReady = false;
+                jobInfo.TransferredDocument();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "ESCL server error writing document");
+                // We don't transition state here, as the assumption is that the problem was network-related and the
+                // client will retry
+                Response.StatusCode = 500;
+            }
         }
         else
         {

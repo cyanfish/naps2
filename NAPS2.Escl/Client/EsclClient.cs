@@ -15,16 +15,24 @@ public class EsclClient
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
 
     // Client that verifies HTTPS certificates
-    private static readonly HttpClientHandler VerifiedHttpClientHandler = new() { MaxConnectionsPerServer = 256 };
-    private static readonly HttpClient VerifiedHttpClient = new();
-
-    // Client that doesn't verify HTTPS certificates
-    private static readonly HttpClientHandler UnverifiedHttpClientHandler = new()
+    private static readonly HttpMessageHandler VerifiedHttpClientHandler = new StandardSocketsHttpHandler
     {
         MaxConnectionsPerServer = 256,
-        // ESCL certificates are generally self-signed - we aren't trying to verify server authenticity, just ensure
-        // that the connection is encrypted and protect against passive interception.
-        ServerCertificateCustomValidationCallback = (_, _, _, _) => true
+        ConnectTimeout = TimeSpan.FromSeconds(5)
+    };
+    private static readonly HttpClient VerifiedHttpClient = new(VerifiedHttpClientHandler);
+
+    // Client that doesn't verify HTTPS certificates
+    private static readonly HttpMessageHandler UnverifiedHttpClientHandler = new StandardSocketsHttpHandler
+    {
+        MaxConnectionsPerServer = 256,
+        ConnectTimeout = TimeSpan.FromSeconds(5),
+        SslOptions =
+        {
+            // ESCL certificates are generally self-signed - we aren't trying to verify server authenticity, just ensure
+            // that the connection is encrypted and protect against passive interception.
+            RemoteCertificateValidationCallback = (_, _, _, _) => true
+        }
     };
     private static readonly HttpClient UnverifiedHttpClient = new(UnverifiedHttpClientHandler);
 
@@ -176,6 +184,10 @@ public class EsclClient
                 ContentType = response.Content.Headers.ContentType?.MediaType,
                 ContentLocation = response.Content.Headers.ContentLocation?.ToString()
             };
+            if (doc.Data.Length == 0)
+            {
+                throw new Exception("ESCL response had no data, the connection may have been interrupted");
+            }
             Logger.LogDebug("GET OK: {Type} ({Bytes} bytes) {Location}", doc.ContentType, doc.Data.Length,
                 doc.ContentLocation);
             return doc;
