@@ -897,6 +897,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flip back sides of duplex pages.
+        /// </summary>
+        internal static string FlipBackSidesOfDuplexPages {
+            get {
+                return ResourceManager.GetString("FlipBackSidesOfDuplexPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flip duplexed pages.
         /// </summary>
         internal static string FlipDuplexedPages {

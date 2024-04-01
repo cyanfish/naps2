@@ -2,6 +2,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
+using NAPS2.Lang;
 using NAPS2.Scan;
 
 namespace NAPS2.EtoForms.Ui;
@@ -18,7 +19,13 @@ public class AdvancedProfileForm : EtoDialogBase
     private readonly CheckBox _offsetWidth = new() { Text = UiStrings.OffsetWidth };
     private readonly CheckBox _stretchToPageSize = new() { Text = UiStrings.StretchToPageSize };
     private readonly CheckBox _cropToPageSize = new() { Text = UiStrings.CropToPageSize };
-    private readonly CheckBox _flipDuplexed = new() { Text = UiStrings.FlipDuplexedPages };
+    private readonly CheckBox _flipDuplexed = new()
+    {
+        Text = TranslationMigrator.PickTranslated(
+            UiStrings.ResourceManager,
+            "FlipDuplexedPages",
+            "FlipBackSidesOfDuplexPages")
+    };
 
     private readonly DropDown _wiaVersion = C.EnumDropDown<WiaApiVersion>(value => value switch
     {

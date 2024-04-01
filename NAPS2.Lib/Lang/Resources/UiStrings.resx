@@ -798,6 +798,9 @@
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Flip duplexed pages</value>
   </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Flip back sides of duplex pages</value>
+  </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia Version:</value>
   </data>
