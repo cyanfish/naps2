@@ -9,8 +9,6 @@ namespace NAPS2.Sdk.Tests.Images;
 
 public class MacImageTests : ContextualTests
 {
-    private readonly ImageContext _imageContext = new MacImageContext();
-
     [Theory]
     [InlineData(ImagePixelFormat.ARGB32)]
     [InlineData(ImagePixelFormat.RGB24)]
@@ -21,7 +19,7 @@ public class MacImageTests : ContextualTests
         var nsImage = new NSImage();
         var rep = MacBitmapHelper.CreateRep(100, 100, pixelFormat);
         nsImage.AddRepresentation(rep);
-        var image = new MacImage(_imageContext, nsImage);
+        var image = new MacImage(nsImage);
         Assert.Equal(pixelFormat, image.PixelFormat);
         Assert.Equal(rep.Handle, image.Rep.Handle);
     }
@@ -30,7 +28,7 @@ public class MacImageTests : ContextualTests
     public void ThrowsOnNoReps()
     {
         var nsImage = new NSImage();
-        Assert.Throws<ArgumentException>(() => new MacImage(_imageContext, nsImage));
+        Assert.Throws<ArgumentException>(() => new MacImage(nsImage));
     }
 
     [Fact]
@@ -39,7 +37,7 @@ public class MacImageTests : ContextualTests
         var nsImage = new NSImage();
         nsImage.AddRepresentation(MacBitmapHelper.CreateRep(100, 100, ImagePixelFormat.ARGB32));
         nsImage.AddRepresentation(MacBitmapHelper.CreateRep(100, 100, ImagePixelFormat.ARGB32));
-        Assert.Throws<ArgumentException>(() => new MacImage(_imageContext, nsImage));
+        Assert.Throws<ArgumentException>(() => new MacImage(nsImage));
     }
 
     [Theory]
@@ -55,7 +53,7 @@ public class MacImageTests : ContextualTests
             : NSColorSpace.GenericGrayColorSpace;
         rep = rep.ConvertingToColorSpace(colorSpace, NSColorRenderingIntent.Default);
         nsImage.AddRepresentation(rep);
-        var image = new MacImage(_imageContext, nsImage);
+        var image = new MacImage(nsImage);
         Assert.NotEqual(rep.Handle, image.Rep.Handle);
         Assert.Equal(pixelFormat, image.PixelFormat);
     }
@@ -66,7 +64,7 @@ public class MacImageTests : ContextualTests
         var nsImage = new NSImage();
         var rep = new NSBitmapImageRep(IntPtr.Zero, 100, 100, 1, 1, false, false, NSColorSpace.DeviceBlack, 13, 1);
         nsImage.AddRepresentation(rep);
-        var image = new MacImage(_imageContext, nsImage);
+        var image = new MacImage(nsImage);
         Assert.NotEqual(rep.Handle, image.Rep.Handle);
         Assert.Equal(ImagePixelFormat.Gray8, image.PixelFormat);
     }
@@ -78,7 +76,7 @@ public class MacImageTests : ContextualTests
         var nsImage = new NSImage();
         var rep = Create64BitRepFromImage(referenceImage);
         nsImage.AddRepresentation(rep);
-        var image = new MacImage(_imageContext, nsImage);
+        var image = new MacImage(nsImage);
         Assert.NotEqual(rep.Handle, image.Rep.Handle);
         ImageAsserts.Similar(referenceImage, image);
     }
