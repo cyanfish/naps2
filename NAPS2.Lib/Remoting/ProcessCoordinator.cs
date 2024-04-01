@@ -65,9 +65,12 @@ public class ProcessCoordinator(string instanceLockPath, string pipeNameFormat)
         TrySendMessage(recipient, timeout,
             client => client.ScanWithDevice(new ScanWithDeviceRequest { Device = device }));
 
-    public bool OpenFile(Process recipient, int timeout, string path) =>
-        TrySendMessage(recipient, timeout,
-            client => client.OpenFile(new OpenFileRequest { Path = { path } }));
+    public bool OpenFile(Process recipient, int timeout, params string[] paths)
+    {
+        var req = new OpenFileRequest();
+        req.Path.AddRange(paths);
+        return TrySendMessage(recipient, timeout, client => client.OpenFile(req));
+    }
 
     public bool TryTakeInstanceLock()
     {

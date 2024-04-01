@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+
+    <!-- Basic metadata -->
     <key>CFBundleName</key>
     <string>NAPS2</string>
     <key>CFBundleIdentifier</key>
@@ -17,10 +19,77 @@
     <key>CFBundleIconFile</key>
     <string>Icon.icns</string>
     <key>NSPrincipalClass</key>
+
     <!-- We start as a background application in case we're in worker mode and don't want to show a UI.
      If we're in GUI mode we dynamically switch to a foreground application (see MacEntryPoint.cs). -->
     <string>NSApplication</string>
     <key>LSBackgroundOnly</key>
     <true/>
+
+    <!-- File types for "Open With" -->
+    <key>CFBundleDocumentTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>PDF</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>com.adobe.pdf</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>JPG</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.jpeg</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>JP2</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.jpeg-2000</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>PNG</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.png</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>TIFF</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.tiff</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>BMP</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>com.microsoft.bmp</string>
+        </array>
+      </dict>
+    </array>
+
   </dict>
 </plist>

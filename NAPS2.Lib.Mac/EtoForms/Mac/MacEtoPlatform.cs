@@ -6,6 +6,7 @@ using Eto.Mac.Drawing;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Mac;
+using NAPS2.Remoting;
 
 namespace NAPS2.EtoForms.Mac;
 
@@ -23,7 +24,9 @@ public class MacEtoPlatform : EtoPlatform
 
     public override Application CreateApplication()
     {
-        return new Application(Platforms.macOS);
+        var application = new Application(Platforms.macOS);
+        ((NSApplication) application.ControlObject).Delegate = new MacAppDelegate();
+        return application;
     }
 
     public override void Invoke(Application application, Action action)
@@ -159,5 +162,21 @@ public class MacEtoPlatform : EtoPlatform
             return evt;
         });
         control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
+    }
+
+    private class MacAppDelegate : AppDelegate
+    {
+        public override bool OpenFile(NSApplication sender, string filename)
+        {
+            Task.Run(() =>
+                ProcessCoordinator.CreateDefault().OpenFile(Process.GetCurrentProcess(), 100, filename));
+            return true;
+        }
+
+        public override void OpenFiles(NSApplication sender, string[] filenames)
+        {
+            Task.Run(() =>
+                ProcessCoordinator.CreateDefault().OpenFile(Process.GetCurrentProcess(), 100, filenames));
+        }
     }
 }
