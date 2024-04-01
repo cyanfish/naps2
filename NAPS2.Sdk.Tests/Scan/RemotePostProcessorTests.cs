@@ -160,4 +160,55 @@ public class RemotePostProcessorTests : ContextualTests
         Assert.Equal(297m, result.Metadata.PageSize.Height);
         Assert.Equal(PageSizeUnit.Millimetre, result.Metadata.PageSize.Unit);
     }
+
+    [Fact]
+    public void NoFlipDuplexed()
+    {
+        var image1 = LoadImage(ImageResources.dog);
+        var image2 = LoadImage(ImageResources.dog);
+        var options = new ScanOptions
+        {
+            PaperSource = PaperSource.Duplex
+        };
+        var result1 = _remotePostProcessor.PostProcess(image1, options, new PostProcessingContext
+        {
+            PageNumber = 1
+        })!;
+        var result2 = _remotePostProcessor.PostProcess(image2, options, new PostProcessingContext
+        {
+            PageNumber = 2
+        })!;
+        Assert.Equal(1, result1.PostProcessingData.PageNumber);
+        Assert.Equal(PageSide.Front, result1.PostProcessingData.PageSide);
+        ImageAsserts.Similar(ImageResources.dog, result1);
+        Assert.Equal(2, result2.PostProcessingData.PageNumber);
+        Assert.Equal(PageSide.Back, result2.PostProcessingData.PageSide);
+        ImageAsserts.Similar(ImageResources.dog, result2);
+    }
+
+    [Fact]
+    public void FlipDuplexed()
+    {
+        var image1 = LoadImage(ImageResources.dog);
+        var image2 = LoadImage(ImageResources.dog);
+        var options = new ScanOptions
+        {
+            PaperSource = PaperSource.Duplex,
+            FlipDuplexedPages = true
+        };
+        var result1 = _remotePostProcessor.PostProcess(image1, options, new PostProcessingContext
+        {
+            PageNumber = 1
+        })!;
+        var result2 = _remotePostProcessor.PostProcess(image2, options, new PostProcessingContext
+        {
+            PageNumber = 2
+        })!;
+        Assert.Equal(1, result1.PostProcessingData.PageNumber);
+        Assert.Equal(PageSide.Front, result1.PostProcessingData.PageSide);
+        ImageAsserts.Similar(ImageResources.dog, result1);
+        Assert.Equal(2, result2.PostProcessingData.PageNumber);
+        Assert.Equal(PageSide.Back, result2.PostProcessingData.PageSide);
+        ImageAsserts.Similar(ImageResources.dog, result2.WithTransform(new RotationTransform(180)));
+    }
 }

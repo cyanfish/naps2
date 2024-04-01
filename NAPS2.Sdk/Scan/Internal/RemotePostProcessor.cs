@@ -137,7 +137,10 @@ internal class RemotePostProcessor : IRemotePostProcessor
     private void DoRevertibleTransforms(ref ProcessedImage processedImage, ref IMemoryImage image, ScanOptions options,
         PostProcessingContext postProcessingContext)
     {
-        var data = processedImage.PostProcessingData;
+        var data = processedImage.PostProcessingData with
+        {
+            PageNumber = postProcessingContext.PageNumber
+        };
 
         if ((!options.UseNativeUI && options.BrightnessContrastAfterScan) ||
             options.Driver is not (Driver.Wia or Driver.Twain))
@@ -146,10 +149,16 @@ internal class RemotePostProcessor : IRemotePostProcessor
             processedImage = processedImage.WithTransform(new TrueContrastTransform(options.Contrast), true);
         }
 
-        if (options.FlipDuplexedPages && options.PaperSource == PaperSource.Duplex &&
-            postProcessingContext.PageNumber % 2 == 0)
+        if (options.PaperSource == PaperSource.Duplex)
         {
-            processedImage = processedImage.WithTransform(new RotationTransform(180), true);
+            data = data with
+            {
+                PageSide = postProcessingContext.PageNumber % 2 == 0 ? PageSide.Back : PageSide.Front
+            };
+            if (options.FlipDuplexedPages && data.PageSide == PageSide.Back)
+            {
+                processedImage = processedImage.WithTransform(new RotationTransform(180), true);
+            }
         }
 
         if (options.RotateDegrees != 0)
