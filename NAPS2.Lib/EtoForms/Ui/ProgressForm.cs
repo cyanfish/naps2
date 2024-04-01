@@ -57,7 +57,7 @@ public class ProgressForm : EtoDialogBase
     {
         if (_loaded && !_background)
         {
-            Invoker.Current.Invoke(DisplayProgress);
+            Invoker.Current.InvokeDispatch(DisplayProgress);
         }
     }
 
@@ -65,7 +65,7 @@ public class ProgressForm : EtoDialogBase
     {
         if (_loaded && !_background)
         {
-            Invoker.Current.Invoke(Close);
+            Invoker.Current.InvokeDispatch(Close);
         }
     }
 
@@ -79,7 +79,7 @@ public class ProgressForm : EtoDialogBase
         DisplayProgress();
         if (_operation.IsFinished)
         {
-            Close();
+            Invoker.Current.InvokeDispatch(Close);
         }
     }
 
