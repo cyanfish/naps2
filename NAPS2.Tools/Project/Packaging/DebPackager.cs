@@ -4,7 +4,7 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class DebPackager
 {
-    public static void PackageDeb(PackageInfo pkgInfo)
+    public static void PackageDeb(PackageInfo pkgInfo, bool noSign)
     {
         var debPath = pkgInfo.GetPath("deb");
         Output.Info($"Packaging deb: {debPath}");
@@ -68,6 +68,11 @@ public static class DebPackager
         Cli.Run("chmod", $"a+x {Path.Combine(targetDir, nativeLibsFolder, "tesseract")}");
 
         Cli.Run("dpkg-deb", $"-Zxz --root-owner-group --build {workingDir} {debPath}");
+
+        if (!noSign)
+        {
+            Cli.Run("debsigs", $"--sign=origin {debPath}");
+        }
 
         Output.OperationEnd($"Packaged deb: {debPath}");
     }

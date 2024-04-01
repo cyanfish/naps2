@@ -39,7 +39,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"));
                     break;
                 case PackageType.Deb:
-                    DebPackager.PackageDeb(GetPackageInfoForConfig());
+                    DebPackager.PackageDeb(GetPackageInfoForConfig(), opts.NoSign);
                     break;
                 case PackageType.Rpm:
                     RpmPackager.PackageRpm(GetPackageInfoForConfig(), opts.NoSign);
