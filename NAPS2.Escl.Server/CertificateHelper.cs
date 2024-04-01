@@ -38,12 +38,12 @@ internal static class CertificateHelper
             var request = CertificateRequestConstructor!.Invoke(new object[]
                 { "CN=NAPS2-ESCL-Self-Signed", RSA.Create(), HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1 });
 
-            var extensions = (Collection<X509Extension>) CertificateExtensionsProperty!.GetValue(request);
+            var extensions = (Collection<X509Extension>) CertificateExtensionsProperty!.GetValue(request)!;
             extensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.KeyEncipherment, true));
 
             var now = DateTimeOffset.UtcNow;
             var cert = (X509Certificate2) CreateSelfSignedMethod!.Invoke(request,
-                new object[] { now.AddDays(-1), now.AddYears(10) });
+                new object[] { now.AddDays(-1), now.AddYears(10) })!;
             var pfxCert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
 
             return pfxCert;
