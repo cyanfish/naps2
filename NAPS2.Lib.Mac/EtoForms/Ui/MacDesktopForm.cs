@@ -10,6 +10,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public class MacDesktopForm : DesktopForm
 {
+    private NSSlider? _zoomSlider;
+
     public MacDesktopForm(
         Naps2Config config,
         DesktopKeyboardShortcuts keyboardShortcuts,
@@ -112,6 +114,8 @@ public class MacDesktopForm : DesktopForm
                     Items =
                     {
                         Commands.ViewImage,
+                        Commands.ZoomIn,
+                        Commands.ZoomOut,
                         new SeparatorMenuItem(),
                         Commands.Crop,
                         Commands.BrightCont,
@@ -137,6 +141,9 @@ public class MacDesktopForm : DesktopForm
                     Text = UiStrings.Reorder,
                     Items =
                     {
+                        Commands.MoveUp,
+                        Commands.MoveDown,
+                        new SeparatorMenuItem(),
                         Commands.Interleave,
                         Commands.Deinterleave,
                         new SeparatorMenuItem(),
@@ -152,6 +159,7 @@ public class MacDesktopForm : DesktopForm
                     Text = UiStrings.Tools,
                     Items =
                     {
+                        Commands.Profiles,
                         Commands.BatchScan,
                         Commands.ScannerSharing,
                         Commands.Ocr
@@ -184,6 +192,17 @@ public class MacDesktopForm : DesktopForm
 
     private List<NSToolbarItem?> CreateMacToolbarItems()
     {
+        _zoomSlider = new NSSlider
+        {
+            MinValue = 0,
+            MaxValue = 1,
+            DoubleValue = ThumbnailSizes.SizeToCurve(_thumbnailController.VisibleSize),
+            ToolTip = UiStrings.Zoom
+        };
+        _zoomSlider.WithAction(() =>
+            _thumbnailController.VisibleSize = ThumbnailSizes.CurveToSize(_zoomSlider.DoubleValue));
+        _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
+
         return
         [
             MacToolbarItems.Create("scan", Commands.Scan),
@@ -198,13 +217,7 @@ public class MacDesktopForm : DesktopForm
             MacToolbarItems.Create("moveDown", Commands.MoveDown, tooltip: UiStrings.MoveDown),
             new NSToolbarItem("zoom")
             {
-                View = new NSSlider
-                {
-                    MinValue = 0,
-                    MaxValue = 1,
-                    DoubleValue = ThumbnailSizes.SizeToCurve(_thumbnailController.VisibleSize),
-                    ToolTip = UiStrings.Zoom
-                }.WithAction(ZoomUpdated),
+                View = _zoomSlider,
                 // MaxSize still works even though it's deprecated
 #pragma warning disable CA1416
 #pragma warning disable CA1422
@@ -215,10 +228,16 @@ public class MacDesktopForm : DesktopForm
         ];
     }
 
-    protected override LayoutElement GetZoomButtons() => C.Spacer();
-
-    private void ZoomUpdated(NSSlider sender)
+    protected override void OnClosed(EventArgs e)
     {
-        _thumbnailController.VisibleSize = ThumbnailSizes.CurveToSize(sender.DoubleValue);
+        base.OnClosed(e);
+        _thumbnailController.ThumbnailSizeChanged -= ThumbnailController_ThumbnailSizeChanged;
     }
+
+    private void ThumbnailController_ThumbnailSizeChanged(object? o, EventArgs eventArgs)
+    {
+        _zoomSlider!.DoubleValue = ThumbnailSizes.SizeToCurve(_thumbnailController.VisibleSize);
+    }
+
+    protected override LayoutElement GetZoomButtons() => C.Spacer();
 }
