@@ -42,7 +42,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     DebPackager.PackageDeb(GetPackageInfoForConfig());
                     break;
                 case PackageType.Rpm:
-                    RpmPackager.PackageRpm(GetPackageInfoForConfig());
+                    RpmPackager.PackageRpm(GetPackageInfoForConfig(), opts.NoSign);
                     break;
                 case PackageType.Flatpak:
                     FlatpakPackager.Package(GetPackageInfoForConfig(), opts.NoPre);

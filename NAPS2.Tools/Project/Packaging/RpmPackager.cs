@@ -4,7 +4,7 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class RpmPackager
 {
-    public static void PackageRpm(PackageInfo pkgInfo)
+    public static void PackageRpm(PackageInfo pkgInfo, bool noSign)
     {
         var rpmPath = pkgInfo.GetPath("rpm");
         Output.Info($"Packaging rpm: {rpmPath}");
@@ -12,7 +12,8 @@ public static class RpmPackager
         Output.Verbose("Building binaries");
         var runtimeId = pkgInfo.Platform == Platform.LinuxArm ? "linux-arm64" : "linux-x64";
         Cli.Run("dotnet", $"clean NAPS2.App.Gtk -c Release -r {runtimeId}");
-        Cli.Run("dotnet", $"publish NAPS2.App.Gtk -c Release -r {runtimeId} --self-contained /p:DebugType=None /p:DebugSymbols=false");
+        Cli.Run("dotnet",
+            $"publish NAPS2.App.Gtk -c Release -r {runtimeId} --self-contained /p:DebugType=None /p:DebugSymbols=false");
 
         Output.Verbose("Creating package");
 
@@ -61,21 +62,29 @@ public static class RpmPackager
         File.Copy(
             Path.Combine(Paths.SolutionRoot, "LICENSE"),
             Path.Combine(targetDir, "LICENSE.txt"));
-        
+
         // Create symlinks
         var binDir = Path.Combine(filesDir, "usr/bin");
         Directory.CreateDirectory(binDir);
         Cli.Run("ln", $"-s /usr/lib/naps2/naps2 {Path.Combine(binDir, "naps2")}");
-        
+
         // Compress files
-        Cli.Run("tar", $"-zcvf {workingDir}/SOURCES/naps2-{pkgInfo.VersionNumber}.tar.gz {Path.GetFileName(filesDir)}", workingDir: workingDir);
-        
+        Cli.Run("tar", $"-zcvf {workingDir}/SOURCES/naps2-{pkgInfo.VersionNumber}.tar.gz {Path.GetFileName(filesDir)}",
+            workingDir: workingDir);
+
         // Build RPM
         var arch = pkgInfo.Platform == Platform.LinuxArm ? "aarch64" : "x86_64";
         Cli.Run("rpmbuild", $"{dirArg} -ba --target {arch} {workingDir}/SPECS/naps2.spec");
+        var sourceRpmPath = Path.Combine(workingDir, $"RPMS/{arch}/naps2-{pkgInfo.VersionNumber}-1.{arch}.rpm");
+
+        // Sign
+        if (!noSign)
+        {
+            Cli.Run("rpmsign", $"--addsign {sourceRpmPath}");
+        }
 
         // Copy to output
-        File.Copy(Path.Combine(workingDir, $"RPMS/{arch}/naps2-{pkgInfo.VersionNumber}-1.{arch}.rpm"), rpmPath, true);
+        File.Copy(sourceRpmPath, rpmPath, true);
 
         Output.OperationEnd($"Packaged rpm: {rpmPath}");
     }
