@@ -45,7 +45,7 @@ public class ConsoleAppTests : ContextualTests
         {
             Assert.True(process.WaitForExit(EXIT_TIMEOUT));
             var stdout = process.StandardOutput.ReadToEnd();
-            if (OperatingSystem.IsWindows())
+            if (target.IsWindows)
             {
                 // TODO: Figure out why ExitCode always appears as 0 on Mac/Linux
                 Assert.NotEqual(0, process.ExitCode);

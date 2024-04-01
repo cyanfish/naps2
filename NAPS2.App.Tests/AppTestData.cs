@@ -7,6 +7,7 @@ public class AppTestData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {
+#if NET6_0_OR_GREATER
         if (OperatingSystem.IsWindows())
         {
             yield return new object[] { new WinNet462AppTestTarget() };
@@ -19,6 +20,9 @@ public class AppTestData : IEnumerable<object[]>
         {
             yield return new object[] { new LinuxAppTestTarget() };
         }
+#else
+        yield return new object[] { new WinNet462AppTestTarget() };
+#endif
     }
 
     IEnumerator IEnumerable.GetEnumerator()

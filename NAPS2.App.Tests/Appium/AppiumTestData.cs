@@ -7,6 +7,7 @@ public class AppiumTestData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {
+#if NET6_0_OR_GREATER
         if (OperatingSystem.IsWindows())
         {
             yield return new object[] { new WinNet462AppTestTarget() };
@@ -19,6 +20,9 @@ public class AppiumTestData : IEnumerable<object[]>
         {
             // No Appium impl yet
         }
+#else
+        yield return new object[] { new WinNet462AppTestTarget() };
+#endif
     }
 
     IEnumerator IEnumerable.GetEnumerator()

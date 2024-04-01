@@ -7,6 +7,7 @@ public class LinuxAppTestTarget : IAppTestTarget
     public AppTestExe Console => GetAppTestExe("console");
     public AppTestExe Gui => GetAppTestExe(null);
     public AppTestExe Worker => GetAppTestExe("worker");
+    public bool IsWindows => false;
 
     private AppTestExe GetAppTestExe(string argPrefix)
     {

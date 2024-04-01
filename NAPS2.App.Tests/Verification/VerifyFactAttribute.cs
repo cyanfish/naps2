@@ -40,10 +40,12 @@ public sealed class VerifyTheoryAttribute : TheoryAttribute
         get => _windowsAppium;
         set
         {
+#if NET6_0_OR_GREATER
             if (value && Skip == null && !OperatingSystem.IsWindows())
             {
                 Skip = "Appium tests are only supported on Windows right now.";
             }
+#endif
             _windowsAppium = value;
         }
     }
