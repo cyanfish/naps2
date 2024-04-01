@@ -91,7 +91,7 @@ public class SharedDeviceManager : ISharedDeviceManager
             _userStarted = false;
             ResetStartTimer();
             _server.Stop().ContinueWith(t =>
-                _logger.LogError(t.Exception, "Error starting ScanServer"), TaskContinuationOptions.OnlyOnFaulted);
+                _logger.LogError(t.Exception, "Error stopping ScanServer"), TaskContinuationOptions.OnlyOnFaulted);
             ReleaseLock();
         }
     }
