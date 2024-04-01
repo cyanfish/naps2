@@ -19,18 +19,16 @@ public class WpfImage : IMemoryImage
 
     private bool _disposed;
 
-    public WpfImage(ImageContext imageContext, WriteableBitmap bitmap)
+    public WpfImage(WriteableBitmap bitmap)
     {
-        if (imageContext is not WpfImageContext) throw new ArgumentException("Expected WpfImageContext");
         LeakTracer.StartTracking(this);
-        ImageContext = imageContext;
         // TODO: Something similar to MacImage where if it's not a supported pixel type we convert
         WpfPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
         Bitmap = bitmap;
         DetachFromDispatcher(Bitmap);
     }
 
-    public ImageContext ImageContext { get; }
+    public ImageContext ImageContext { get; } = new WpfImageContext();
 
     public WriteableBitmap Bitmap { get; private set; }
 
@@ -166,7 +164,7 @@ public class WpfImage : IMemoryImage
     public IMemoryImage Clone()
     {
         if (_disposed) throw new InvalidOperationException();
-        return new WpfImage(ImageContext, Bitmap.Clone())
+        return new WpfImage(Bitmap.Clone())
         {
             OriginalFileFormat = OriginalFileFormat,
             LogicalPixelFormat = LogicalPixelFormat

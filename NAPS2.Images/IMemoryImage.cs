@@ -8,8 +8,6 @@ namespace NAPS2.Images;
 /// </summary>
 public interface IMemoryImage : IImageStorage
 {
-    // TODO: Now that ImageContext objects are fully stateless, we can maybe eliminate ImageContext as a parameter
-    // in IMemoryImage constructors and just create the appropriate ImageContext objects automatically.
     /// <summary>
     /// Gets the image context used to create this image.
     /// </summary>

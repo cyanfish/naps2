@@ -23,8 +23,8 @@ public abstract class EtoPlatform
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button, bool big);
     public abstract Bitmap ToBitmap(IMemoryImage image);
-    public abstract IMemoryImage FromBitmap(ImageContext imageContext, Bitmap bitmap);
-    public abstract IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage thumb);
+    public abstract IMemoryImage FromBitmap(Bitmap bitmap);
+    public abstract IMemoryImage DrawHourglass(IMemoryImage thumb);
     public abstract void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay);
     public abstract Control CreateContainer();
     public abstract void AddToContainer(Control container, Control control, bool inOverlay);

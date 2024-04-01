@@ -33,7 +33,7 @@ public class ImageSharpImageTransformer : AbstractImageTransformer<ImageSharpIma
         var cropRect = new Rectangle((copy.Width - width) / 2, (copy.Height - height) / 2, width, height);
         copy.Mutate(x => x.Crop(cropRect));
 
-        var newImage = new ImageSharpImage(ImageContext, copy);
+        var newImage = new ImageSharpImage(copy);
         // TODO: In Gdi, we convert this back to BW1. Should we do the same?
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8

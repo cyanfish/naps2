@@ -7,17 +7,15 @@ namespace NAPS2.Images.Gtk;
 
 public class GtkImage : IMemoryImage
 {
-    public GtkImage(ImageContext imageContext, Pixbuf pixbuf)
+    public GtkImage(Pixbuf pixbuf)
     {
-        if (imageContext is not GtkImageContext) throw new ArgumentException("Expected GtkImageContext");
         LeakTracer.StartTracking(this);
-        ImageContext = imageContext;
         Pixbuf = pixbuf;
         HorizontalResolution = float.TryParse(pixbuf.GetOption("x-dpi"), out var xDpi) ? xDpi : 0;
         VerticalResolution = float.TryParse(pixbuf.GetOption("y-dpi"), out var yDpi) ? yDpi : 0;
     }
 
-    public ImageContext ImageContext { get; }
+    public ImageContext ImageContext { get; } = new GtkImageContext();
 
     public Pixbuf Pixbuf { get; }
 
@@ -142,7 +140,7 @@ public class GtkImage : IMemoryImage
         return (keys.ToArray(), values.ToArray());
     }
 
-    public IMemoryImage Clone() => new GtkImage(ImageContext, (Pixbuf) Pixbuf.Clone())
+    public IMemoryImage Clone() => new GtkImage((Pixbuf) Pixbuf.Clone())
     {
         OriginalFileFormat = OriginalFileFormat,
         LogicalPixelFormat = LogicalPixelFormat,

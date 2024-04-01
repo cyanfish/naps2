@@ -215,7 +215,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         nsImage.AddRepresentation(imageRep);
         // TODO: Could maybe do this without the NAPS2.Images.Mac reference but that would require duplicating
         // a bunch of logic to normalize image reps etc.
-        var macImage = new MacImage(_scanningContext.ImageContext, nsImage);
+        var macImage = new MacImage(nsImage);
         _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
         macImage.SetResolution(_resolution, _resolution);
         if (_scanningContext.ImageContext is MacImageContext)

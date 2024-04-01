@@ -34,7 +34,7 @@ public class WpfImageTransformer : AbstractImageTransformer<WpfImage>
         var rtb = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Default);
         rtb.Render(visual);
 
-        var newImage = new WpfImage(ImageContext, new WriteableBitmap(rtb));
+        var newImage = new WpfImage(new WriteableBitmap(rtb));
         // TODO: In Gdi, we convert this back to BW1 (or the original pixel format). Should we do the same?
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
@@ -49,7 +49,7 @@ public class WpfImageTransformer : AbstractImageTransformer<WpfImage>
         var copy = new TransformedBitmap(image.Bitmap,
             new System.Windows.Media.ScaleTransform(transform.Width / (double) image.Width,
                 transform.Height / (double) image.Height));
-        var newImage = new WpfImage(ImageContext, new WriteableBitmap(copy));
+        var newImage = new WpfImage(new WriteableBitmap(copy));
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;

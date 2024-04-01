@@ -17,7 +17,7 @@ public class GdiModule : Module
         builder.RegisterBuildCallback(ctx =>
         {
             var scanningContext = ctx.Resolve<ScanningContext>();
-            scanningContext.LegacyTwainDriver = new LegacyTwainScanDriver(scanningContext);
+            scanningContext.LegacyTwainDriver = new LegacyTwainScanDriver();
         });
     }
 }

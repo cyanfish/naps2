@@ -37,7 +37,7 @@ public class MacImageContext : ImageContext
                     image.Dispose();
                     return CreateImage(reps[0]);
                 }
-                return new MacImage(this, image);
+                return new MacImage(image);
             }
             finally
             {
@@ -93,7 +93,7 @@ public class MacImageContext : ImageContext
             frame = new NSImage(rep.Size);
         }
         frame.AddRepresentation(rep);
-        return new MacImage(this, frame);
+        return new MacImage(frame);
     }
 
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
@@ -104,7 +104,7 @@ public class MacImageContext : ImageContext
             var image = new NSImage(rep.Size);
             image.AddRepresentation(rep);
             rep.Dispose();
-            return new MacImage(this, image);
+            return new MacImage(image);
         }
     }
 }

@@ -32,7 +32,7 @@ public class GtkImageContext : ImageContext
             _tiffIo.LoadTiff(img => { image = img; cts.Cancel(); }, stream, cts.Token);
             return image;
         }
-        return new GtkImage(this, new Pixbuf(stream));
+        return new GtkImage(new Pixbuf(stream));
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
@@ -65,6 +65,6 @@ public class GtkImageContext : ImageContext
             throw new ArgumentException("Unsupported pixel format");
         }
         var pixbuf = new Pixbuf(Colorspace.Rgb, pixelFormat == ImagePixelFormat.ARGB32, 8, width, height);
-        return new GtkImage(this, pixbuf);
+        return new GtkImage(pixbuf);
     }
 }

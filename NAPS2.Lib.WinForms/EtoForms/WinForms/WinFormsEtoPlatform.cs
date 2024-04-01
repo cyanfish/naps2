@@ -104,12 +104,12 @@ public class WinFormsEtoPlatform : EtoPlatform
         return bitmap.ToEto();
     }
 
-    public override IMemoryImage FromBitmap(ImageContext imageContext, Bitmap bitmap)
+    public override IMemoryImage FromBitmap(Bitmap bitmap)
     {
-        return new GdiImage(imageContext, (SD.Bitmap) bitmap.ToSD());
+        return new GdiImage((SD.Bitmap) bitmap.ToSD());
     }
 
-    public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
+    public override IMemoryImage DrawHourglass(IMemoryImage image)
     {
         var bitmap = new System.Drawing.Bitmap(image.Width, image.Height);
         using (var g = SD.Graphics.FromImage(bitmap))
@@ -131,7 +131,7 @@ public class WinFormsEtoPlatform : EtoPlatform
             g.DrawImage(hourglass, new SD.Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
         }
         image.Dispose();
-        return new GdiImage(imageContext, bitmap);
+        return new GdiImage(bitmap);
     }
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)

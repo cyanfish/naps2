@@ -28,7 +28,7 @@ public class GdiImageContext : ImageContext
     {
         var memoryStream = EnsureMemoryStream(stream);
         using var bitmap = new Bitmap(memoryStream);
-        return new GdiImage(this, bitmap).Copy();
+        return new GdiImage(bitmap).Copy();
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
@@ -42,7 +42,7 @@ public class GdiImageContext : ImageContext
             progress.Report(i, count);
             if (progress.IsCancellationRequested) break;
             bitmap.SelectActiveFrame(FrameDimension.Page, i);
-            produceImage(new GdiImage(this, bitmap).Copy());
+            produceImage(new GdiImage(bitmap).Copy());
         }
         progress.Report(count, count);
     }
@@ -85,6 +85,6 @@ public class GdiImageContext : ImageContext
             }
             bitmap.Palette = p;
         }
-        return new GdiImage(this, bitmap);
+        return new GdiImage(bitmap);
     }
 }

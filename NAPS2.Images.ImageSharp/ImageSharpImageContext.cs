@@ -36,7 +36,7 @@ public class ImageSharpImageContext : ImageContext
 
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        return new ImageSharpImage(this, Image.Load(GetDecoderOptions(), stream));
+        return new ImageSharpImage(Image.Load(GetDecoderOptions(), stream));
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
@@ -66,6 +66,6 @@ public class ImageSharpImageContext : ImageContext
             ImagePixelFormat.Gray8 or ImagePixelFormat.BW1 => new Image<L8>(GetConfiguration(), width, height),
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
-        return new ImageSharpImage(this, image);
+        return new ImageSharpImage(image);
     }
 }

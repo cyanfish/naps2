@@ -4,10 +4,8 @@ namespace NAPS2.Images.Mac;
 
 public class MacImage : IMemoryImage
 {
-    public MacImage(ImageContext imageContext, NSImage image)
+    public MacImage(NSImage image)
     {
-        if (imageContext is not MacImageContext) throw new ArgumentException("Expected MacImageContext");
-        ImageContext = imageContext;
         NsImage = image ?? throw new ArgumentNullException(nameof(image));
         var reps = NsImage.Representations();
         if (reps.Length != 1)
@@ -69,7 +67,7 @@ public class MacImage : IMemoryImage
         };
     }
 
-    public ImageContext ImageContext { get; }
+    public ImageContext ImageContext { get; } = new MacImageContext();
 
     public NSImage NsImage { get; }
 
@@ -208,7 +206,7 @@ public class MacImage : IMemoryImage
 #else
             var nsImage = (NSImage) NsImage.Copy();
 #endif
-            return new MacImage(ImageContext, nsImage)
+            return new MacImage(nsImage)
             {
                 OriginalFileFormat = OriginalFileFormat,
                 LogicalPixelFormat = LogicalPixelFormat

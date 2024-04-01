@@ -12,10 +12,8 @@ namespace NAPS2.Images.Gdi;
 #endif
 public class GdiImage : IMemoryImage
 {
-    public GdiImage(ImageContext imageContext, Bitmap bitmap)
+    public GdiImage(Bitmap bitmap)
     {
-        if (imageContext is not GdiImageContext) throw new ArgumentException("Expected GdiImageContext");
-        ImageContext = imageContext;
         if (bitmap == null)
         {
             throw new ArgumentNullException(nameof(bitmap));
@@ -25,7 +23,7 @@ public class GdiImage : IMemoryImage
         OriginalFileFormat = bitmap.RawFormat.AsImageFileFormat();
     }
 
-    public ImageContext ImageContext { get; }
+    public ImageContext ImageContext { get; } = new GdiImageContext();
 
     /// <summary>
     /// Gets the underlying System.Drawing.Bitmap object for this image.

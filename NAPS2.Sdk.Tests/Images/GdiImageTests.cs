@@ -32,7 +32,7 @@ public class GdiImageTests
     {
         var bitmap = new Bitmap(new MemoryStream(ImageResources.dog_bw_invertpal));
 
-        var image = new GdiImage(new GdiImageContext(), bitmap);
+        var image = new GdiImage(bitmap);
         Assert.True(image.FixedPixelFormat);
         Assert.Equal(ImagePixelFormat.BW1, image.PixelFormat);
         Assert.Equal(Color.Black.ToArgb(), image.Bitmap.Palette.Entries[0].ToArgb());
@@ -49,7 +49,7 @@ public class GdiImageTests
         p.Entries[128] = Color.Blue;
         bitmap.Palette = p;
 
-        var image = new GdiImage(new GdiImageContext(), bitmap);
+        var image = new GdiImage(bitmap);
         Assert.True(image.FixedPixelFormat);
         Assert.Equal(ImagePixelFormat.RGB24, image.PixelFormat);
     }
@@ -59,7 +59,7 @@ public class GdiImageTests
     {
         var bitmap = new Bitmap(1, 1, PixelFormat.Format48bppRgb);
 
-        var image = new GdiImage(new GdiImageContext(), bitmap);
+        var image = new GdiImage(bitmap);
         Assert.True(image.FixedPixelFormat);
         Assert.Equal(ImagePixelFormat.RGB24, image.PixelFormat);
     }
@@ -69,7 +69,7 @@ public class GdiImageTests
     {
         var bitmap = new Bitmap(1, 1, PixelFormat.Format64bppArgb);
 
-        var image = new GdiImage(new GdiImageContext(), bitmap);
+        var image = new GdiImage(bitmap);
         Assert.True(image.FixedPixelFormat);
         Assert.Equal(ImagePixelFormat.ARGB32, image.PixelFormat);
     }

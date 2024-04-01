@@ -5,13 +5,6 @@ namespace NAPS2.Scan.Twain.Legacy;
 
 internal class LegacyTwainScanDriver : IScanDriver
 {
-    private readonly ScanningContext _scanningContext;
-
-    public LegacyTwainScanDriver(ScanningContext scanningContext)
-    {
-        _scanningContext = scanningContext;
-    }
-
     public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback)
     {
         Check32Bit();
@@ -28,7 +21,7 @@ internal class LegacyTwainScanDriver : IScanDriver
         Action<IMemoryImage> callback)
     {
         Check32Bit();
-        return Task.Run(() => Invoker.Current.Invoke(() => TwainApi.Scan(_scanningContext, options, callback)));
+        return Task.Run(() => Invoker.Current.Invoke(() => TwainApi.Scan(options, callback)));
     }
 
     private static void Check32Bit()

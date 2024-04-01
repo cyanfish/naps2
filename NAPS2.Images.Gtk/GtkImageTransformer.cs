@@ -31,7 +31,7 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
         context.Translate(-image.Width / 2.0, -image.Height / 2.0);
         CairoHelper.SetSourcePixbuf(context, image.Pixbuf, 0, 0);
         context.Paint();
-        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, width, height));
+        var newImage = new GtkImage(new Pixbuf(surface, 0, 0, width, height));
         OptimizePixelFormat(image, ref newImage);
         newImage.LogicalPixelFormat = image.LogicalPixelFormat;
         newImage.SetResolution(xres, yres);
@@ -49,7 +49,7 @@ public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
         context.Scale(transform.Width / (double) image.Width, transform.Height / (double) image.Height);
         CairoHelper.SetSourcePixbuf(context, image.Pixbuf, 0, 0);
         context.Paint();
-        var newImage = new GtkImage(ImageContext, new Pixbuf(surface, 0, 0, transform.Width, transform.Height));
+        var newImage = new GtkImage(new Pixbuf(surface, 0, 0, transform.Width, transform.Height));
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;

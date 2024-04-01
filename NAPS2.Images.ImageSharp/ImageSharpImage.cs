@@ -15,17 +15,15 @@ namespace NAPS2.Images.ImageSharp;
 
 public class ImageSharpImage : IMemoryImage
 {
-    public ImageSharpImage(ImageContext imageContext, Image image)
+    public ImageSharpImage(Image image)
     {
-        if (imageContext is not ImageSharpImageContext) throw new ArgumentException("Expected ImageSharpImageContext");
         LeakTracer.StartTracking(this);
-        ImageContext = imageContext;
         // TODO: Something similar to MacImage where if it's not a supported pixel type we convert
         // TODO: Though we might also want to add support where reasonable, e.g. we can probably support argb or bgr pretty easily?
         Image = image;
     }
 
-    public ImageContext ImageContext { get; }
+    public ImageContext ImageContext { get; } = new ImageSharpImageContext();
 
     public Image Image { get; }
 
@@ -156,7 +154,7 @@ public class ImageSharpImage : IMemoryImage
         return encoder;
     }
 
-    public IMemoryImage Clone() => new ImageSharpImage(ImageContext, Image.Clone(_ => { }))
+    public IMemoryImage Clone() => new ImageSharpImage(Image.Clone(_ => { }))
     {
         OriginalFileFormat = OriginalFileFormat,
         LogicalPixelFormat = LogicalPixelFormat

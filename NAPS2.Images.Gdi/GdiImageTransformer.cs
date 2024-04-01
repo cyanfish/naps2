@@ -53,7 +53,7 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
             g.TranslateTransform(-image.Width / 2.0f, -image.Height / 2.0f);
             g.DrawImage(image.Bitmap, new Rectangle(0, 0, image.Width, image.Height));
         }
-        var resultImage = new GdiImage(ImageContext, result);
+        var resultImage = new GdiImage(result);
         OptimizePixelFormat(image, ref resultImage);
         image.Dispose();
         return resultImage;
@@ -82,6 +82,6 @@ public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
             image.HorizontalResolution * image.Width / transform.Width,
             image.VerticalResolution * image.Height / transform.Height);
         image.Dispose();
-        return new GdiImage(ImageContext, result);
+        return new GdiImage(result);
     }
 }

@@ -44,9 +44,9 @@ public class GtkEtoPlatform : EtoPlatform
         return new Bitmap(new BitmapHandler(pixbuf));
     }
 
-    public override IMemoryImage FromBitmap(ImageContext imageContext, Bitmap bitmap)
+    public override IMemoryImage FromBitmap(Bitmap bitmap)
     {
-        return new GtkImage(imageContext, bitmap.ToGdk());
+        return new GtkImage(bitmap.ToGdk());
     }
 
     public override void SetClipboardImage(Clipboard clipboard, ProcessedImage processedImage, IMemoryImage memoryImage)
@@ -57,7 +57,7 @@ public class GtkEtoPlatform : EtoPlatform
         clipboard.Image = memoryImage.ToEtoImage();
     }
 
-    public override IMemoryImage DrawHourglass(ImageContext imageContext, IMemoryImage image)
+    public override IMemoryImage DrawHourglass(IMemoryImage image)
     {
         // TODO
         return image;

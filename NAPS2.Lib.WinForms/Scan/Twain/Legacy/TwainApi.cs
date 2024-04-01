@@ -52,7 +52,7 @@ internal static class TwainApi
         return result;
     }
 
-    public static void Scan(ScanningContext scanningContext, ScanOptions options, Action<IMemoryImage> produceImage)
+    public static void Scan(ScanOptions options, Action<IMemoryImage> produceImage)
     {
         var tw = new Twain();
         if (!tw.Init(options.DialogParent))
@@ -64,7 +64,7 @@ internal static class TwainApi
             throw new DeviceNotFoundException();
         }
         var form = new FTwainGui();
-        var mf = new TwainMessageFilter(scanningContext, options, tw, form);
+        var mf = new TwainMessageFilter(options, tw, form);
         form.ShowDialog(new Win32Window(options.DialogParent));
         foreach (var b in mf.Bitmaps)
         {
@@ -74,7 +74,6 @@ internal static class TwainApi
 
     private class TwainMessageFilter : IMessageFilter
     {
-        private readonly ScanningContext _scanningContext;
         private readonly ScanOptions _settings;
         private readonly Twain _tw;
         private readonly FTwainGui _form;
@@ -82,9 +81,8 @@ internal static class TwainApi
         private bool _activated;
         private bool _msgfilter;
 
-        public TwainMessageFilter(ScanningContext scanningContext, ScanOptions settings, Twain tw, FTwainGui form)
+        public TwainMessageFilter(ScanOptions settings, Twain tw, FTwainGui form)
         {
-            _scanningContext = scanningContext;
             _settings = settings;
             _tw = tw;
             _form = form;
@@ -129,7 +127,7 @@ internal static class TwainApi
                         int bitcount = 0;
 
                         Bitmap bmp = DibUtils.BitmapFromDib(img, out bitcount);
-                        Bitmaps.Add(new GdiImage(_scanningContext.ImageContext, bmp));
+                        Bitmaps.Add(new GdiImage(bmp));
                     }
                     _form.Close();
                     break;

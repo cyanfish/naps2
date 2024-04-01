@@ -32,7 +32,7 @@ public class WpfImageContext : ImageContext
         bitmap.CacheOption = BitmapCacheOption.OnLoad;
         bitmap.EndInit();
         bitmap.Freeze();
-        return new WpfImage(this, new WriteableBitmap(bitmap));
+        return new WpfImage(new WriteableBitmap(bitmap));
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
@@ -46,7 +46,7 @@ public class WpfImageContext : ImageContext
             foreach (var frame in decoder.Frames)
             {
                 if (progress.IsCancellationRequested) return;
-                produceImage(new WpfImage(this, new WriteableBitmap(frame)));
+                produceImage(new WpfImage(new WriteableBitmap(frame)));
                 progress.Report(++i, decoder.Frames.Count);
             }
             return;
@@ -77,6 +77,6 @@ public class WpfImageContext : ImageContext
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
         var image = new WriteableBitmap(width, height, 0, 0, wpfPixelFormat, null);
-        return new WpfImage(this, image);
+        return new WpfImage(image);
     }
 }

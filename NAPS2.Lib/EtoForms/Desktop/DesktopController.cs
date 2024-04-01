@@ -375,7 +375,7 @@ public class DesktopController
             var etoBitmap = (Bitmap) Clipboard.Instance.Image;
             Task.Run(() =>
             {
-                var image = EtoPlatform.Current.FromBitmap(_scanningContext.ImageContext, etoBitmap);
+                var image = EtoPlatform.Current.FromBitmap(etoBitmap);
                 var processedImage = _scanningContext.CreateProcessedImage(image);
                 processedImage = ImportPostProcessor.AddPostProcessingData(processedImage, image,
                     _thumbnailController.RenderSize, new BarcodeDetectionOptions(), true);
