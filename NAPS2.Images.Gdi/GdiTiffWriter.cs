@@ -4,9 +4,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Images.Gdi;
 
-#if NET6_0_OR_GREATER
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-#endif
 internal class GdiTiffWriter : ITiffWriter
 {
     public bool SaveTiff(IList<IMemoryImage> images, string path,

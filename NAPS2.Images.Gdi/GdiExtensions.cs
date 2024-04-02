@@ -3,9 +3,7 @@ using System.Drawing.Imaging;
 
 namespace NAPS2.Images.Gdi;
 
-#if NET6_0_OR_GREATER
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-#endif
 public static class GdiExtensions
 {
     public static Bitmap RenderToBitmap(this IRenderableImage image)

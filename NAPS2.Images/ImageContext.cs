@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using NAPS2.Util;
 
 namespace NAPS2.Images;
@@ -46,8 +47,8 @@ public abstract class ImageContext
         ImageType = imageType;
     }
 
-    // TODO: Add NotNullWhen attribute?
-    private bool MaybeRenderPdf(ImageFileStorage fileStorage, IPdfRenderer? pdfRenderer, out IMemoryImage? renderedPdf)
+    private bool MaybeRenderPdf(ImageFileStorage fileStorage, IPdfRenderer? pdfRenderer,
+        [NotNullWhen(true)] out IMemoryImage? renderedPdf)
     {
         if (Path.GetExtension(fileStorage.FullPath).ToLowerInvariant() == ".pdf")
         {
@@ -63,7 +64,8 @@ public abstract class ImageContext
         return false;
     }
 
-    private bool MaybeRenderPdf(ImageMemoryStorage memoryStorage, IPdfRenderer? pdfRenderer, out IMemoryImage? renderedPdf)
+    private bool MaybeRenderPdf(ImageMemoryStorage memoryStorage, IPdfRenderer? pdfRenderer,
+        [NotNullWhen(true)] out IMemoryImage? renderedPdf)
     {
         if (memoryStorage.TypeHint == ".pdf")
         {
@@ -250,13 +252,13 @@ public abstract class ImageContext
             case ImageFileStorage fileStorage:
                 if (MaybeRenderPdf(fileStorage, pdfRenderer, out var renderedPdf))
                 {
-                    return renderedPdf!;
+                    return renderedPdf;
                 }
                 return Load(fileStorage.FullPath);
             case ImageMemoryStorage memoryStorage:
                 if (MaybeRenderPdf(memoryStorage, pdfRenderer, out var renderedMemoryPdf))
                 {
-                    return renderedMemoryPdf!;
+                    return renderedMemoryPdf;
                 }
                 return Load(memoryStorage.Stream);
             case IMemoryImage image:

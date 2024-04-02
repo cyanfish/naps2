@@ -7,9 +7,7 @@ using NAPS2.Wia;
 
 namespace NAPS2.Scan.Internal.Wia;
 
-#if NET6_0_OR_GREATER
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
 internal class WiaScanDriver : IScanDriver
 {
     private readonly ScanningContext _scanningContext;

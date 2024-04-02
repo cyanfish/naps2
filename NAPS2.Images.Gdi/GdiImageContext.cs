@@ -4,9 +4,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Images.Gdi;
 
-#if NET6_0_OR_GREATER
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-#endif
 public class GdiImageContext : ImageContext
 {
     private readonly GdiImageTransformer _imageTransformer;

@@ -43,9 +43,7 @@ public class StillImage
     // TODO: Does it make sense to add IStillImage::(Un)RegisterLaunchApplication to NAPS2.Wia.Native?
     // https://docs.microsoft.com/en-us/previous-versions/windows/hardware/drivers/ff543798(v=vs.85)
     // Instead of modifying the registry directly.
-#if NET6_0_OR_GREATER
     [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-#endif
     public void Register()
     {
         var exe = AssemblyHelper.EntryFile;
@@ -71,9 +69,7 @@ public class StillImage
         key3.SetValue("Name", "NAPS2");
     }
 
-#if NET6_0_OR_GREATER
     [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-#endif
     public void Unregister()
     {
         Registry.LocalMachine.DeleteSubKey(REGKEY_AUTOPLAY_HANDLER_NAPS2, false);

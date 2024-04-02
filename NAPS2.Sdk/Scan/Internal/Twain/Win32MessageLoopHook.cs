@@ -10,9 +10,7 @@ namespace NAPS2.Scan.Internal.Twain;
 /// <summary>
 /// A MessageLoopHook implementation that uses Win32 methods directly, with no dependencies on WinForms or WPF.
 /// </summary>
-#if NET6_0_OR_GREATER
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
 internal class Win32MessageLoopHook : MessageLoopHook
 {
     private readonly ILogger _logger;

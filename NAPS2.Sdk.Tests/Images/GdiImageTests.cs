@@ -7,9 +7,7 @@ using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
 
-#if NET6_0_OR_GREATER
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-#endif
 public class GdiImageTests
 {
     [Fact]
