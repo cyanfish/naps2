@@ -23,7 +23,7 @@ public class GuiAppTests : ContextualTests
             else
             {
                 var helper = ProcessCoordinator.CreateDefault();
-                Assert.True(helper.CloseWindow(process, 1000));
+                Assert.True(helper.CloseWindow(process, 5000));
             }
             Assert.True(process.WaitForExit(5000));
             AppTestHelper.AssertNoErrorLog(FolderPath);

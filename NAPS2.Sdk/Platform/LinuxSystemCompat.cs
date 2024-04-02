@@ -24,7 +24,7 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool SupportsButtonActions => true;
 
-    public bool SupportsSingleInstance => false;
+    public bool SupportsSingleInstance => true;
 
     public bool CanUseWin32 => false;
 

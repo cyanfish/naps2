@@ -63,7 +63,7 @@ public class DesktopControllerTests : ContextualTests
         _thumbnailController = new ThumbnailController(_thumbnailRenderQueue, _config);
         _sharedDeviceManager = Substitute.For<ISharedDeviceManager>();
         _processCoordinator =
-            new ProcessCoordinator(Path.Combine(FolderPath, "instance.lock"), Guid.NewGuid().ToString("D"));
+            new ProcessCoordinator(FolderPath, Guid.NewGuid().ToString("D"));
         ScanningContext.WorkerFactory = Substitute.For<IWorkerFactory>();
         _desktopController = new DesktopController(
             ScanningContext,

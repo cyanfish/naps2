@@ -12,13 +12,19 @@ namespace NAPS2.Remoting;
 /// same unit. Instead, this class handles the case where the user (or a system feature like StillImage) opens NAPS2
 /// twice.
 /// </summary>
-public class ProcessCoordinator(string instanceLockPath, string pipeNameFormat)
+public class ProcessCoordinator(string basePath, string pipeNameFormat)
 {
+    private const string LOCK_FILE_NAME = "instance.lock";
+    private const string PROC_FILE_NAME = "instance.proc";
+    
     public static ProcessCoordinator CreateDefault() =>
-        new(Path.Combine(Paths.AppData, "instance.lock"), "NAPS2_PIPE_v2_{0}");
+        new(Paths.AppData, "NAPS2_PIPE_v2_{0}");
 
     private NamedPipeServer? _server;
     private FileStream? _instanceLock;
+
+    private string LockFilePath => Path.Combine(basePath, LOCK_FILE_NAME);
+    private string ProcFilePath => Path.Combine(basePath, PROC_FILE_NAME);
 
     private string GetPipeName(Process process)
     {
@@ -80,9 +86,10 @@ public class ProcessCoordinator(string instanceLockPath, string pipeNameFormat)
         }
         try
         {
-            _instanceLock = new FileStream(instanceLockPath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read);
-            _instanceLock.SetLength(0);
-            using var writer = new StreamWriter(_instanceLock, Encoding.UTF8, 1024, true);
+            _instanceLock = new FileStream(LockFilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
+            using var procFile = new FileStream(ProcFilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read);
+            procFile.SetLength(0);
+            using var writer = new StreamWriter(procFile, Encoding.UTF8, 1024);
             writer.WriteLine(Process.GetCurrentProcess().Id);
         }
         catch (Exception)
@@ -96,7 +103,7 @@ public class ProcessCoordinator(string instanceLockPath, string pipeNameFormat)
     {
         try
         {
-            using var reader = new FileStream(instanceLockPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var reader = new FileStream(ProcFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             var id = int.Parse(new StreamReader(reader).ReadLine()?.Trim() ?? "");
             return Process.GetProcessById(id);
         }

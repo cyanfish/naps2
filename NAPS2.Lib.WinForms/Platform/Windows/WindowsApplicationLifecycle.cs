@@ -5,26 +5,21 @@ using NAPS2.Remoting;
 namespace NAPS2.Platform.Windows;
 
 // TODO: Can we add tests for this somehow?
-/// <summary>
-/// A class to help manage the lifecycle of the NAPS2 GUI.
-/// </summary>
 public class WindowsApplicationLifecycle : ApplicationLifecycle
 {
     private readonly StillImage _sti;
     private readonly WindowsEventLogger _windowsEventLogger;
     private readonly ProcessCoordinator _processCoordinator;
-    private readonly Naps2Config _config;
 
     private bool _shouldCreateEventSource;
     private int _returnCode;
 
     public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger,
-        ProcessCoordinator processCoordinator, Naps2Config config)
+        ProcessCoordinator processCoordinator, Naps2Config config) : base(processCoordinator, config)
     {
         _sti = sti;
         _windowsEventLogger = windowsEventLogger;
         _processCoordinator = processCoordinator;
-        _config = config;
     }
 
     /// <summary>
@@ -178,42 +173,10 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
             }
         }
 
-        // Only start one instance if configured for SingleInstance
-        if (_config.Get(c => c.SingleInstance))
-        {
-            if (!_processCoordinator.TryTakeInstanceLock())
-            {
-                Log.Debug("Failed to get SingleInstance lock");
-                var process = _processCoordinator.GetProcessWithInstanceLock();
-                if (process != null)
-                {
-                    // Another instance of NAPS2 is running, so send it the "Activate" signal
-                    Log.Debug($"Activating process {process.Id}");
-
-                    // For new processes, wait until the process is at least 5 seconds old.
-                    // This might be useful in cases where multiple NAPS2 processes are started at once, e.g. clicking
-                    // to open a group of files associated with NAPS2.
-                    int processAge = (DateTime.Now - process.StartTime).Milliseconds;
-                    int timeout = (5000 - processAge).Clamp(100, 5000);
-
-                    SetMainWindowToForeground(process);
-                    bool ok = true;
-                    if (Environment.GetCommandLineArgs() is [_, var arg] && File.Exists(arg))
-                    {
-                        Log.Debug($"Sending OpenFileRequest for {arg}");
-                        ok = _processCoordinator.OpenFile(process, timeout, arg);
-                    }
-                    if (ok && _processCoordinator.Activate(process, timeout))
-                    {
-                        // Successful, so this instance should be closed
-                        Environment.Exit(0);
-                    }
-                }
-            }
-        }
+        base.ExitIfRedundant();
     }
 
-    private static void SetMainWindowToForeground(Process process)
+    protected override void SetMainWindowToForeground(Process process)
     {
         if (process.MainWindowHandle != IntPtr.Zero)
         {

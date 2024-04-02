@@ -13,6 +13,7 @@ public class MacModule : GuiModule
     {
         base.Load(builder);
 
+        builder.RegisterType<MacApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<MacScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<AppleMailEmailProvider>().As<IAppleMailEmailProvider>();
         builder.RegisterType<MacDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
