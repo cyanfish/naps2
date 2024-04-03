@@ -62,6 +62,36 @@
           <RegistryValue Type="string" Name="Icon" Value="[INSTALLFOLDER]NAPS2.exe,0" />
           <RegistryValue Type="string" Name="Name" Value="NAPS2" />
         </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".pdf\OpenWithProgids">
+          <RegistryValue Type="string" Name="NAPS2" Value="" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".jpg\OpenWithProgids">
+          <RegistryValue Type="string" Name="NAPS2" Value="" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".jpeg\OpenWithProgids">
+          <RegistryValue Type="string" Name="NAPS2" Value="" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".png\OpenWithProgids">
+          <RegistryValue Type="string" Name="NAPS2" Value="" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".tiff\OpenWithProgids">
+          <RegistryValue Type="string" Name="NAPS2" Value="" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".tif\OpenWithProgids">
+          <RegistryValue Type="string" Name="NAPS2" Value="" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".bmp\OpenWithProgids">
+          <RegistryValue Type="string" Name="NAPS2" Value="" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key="NAPS2">
+          <RegistryValue Type="string" Value="NAPS2" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key="NAPS2\DefaultIcon">
+          <RegistryValue Type="string" Value="[INSTALLFOLDER]NAPS2.exe,0" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key="NAPS2\shell\open\command">
+          <RegistryValue Type="string" Value="&quot;[INSTALLFOLDER]NAPS2.exe&quot; &quot;%1&quot;" />
+        </RegistryKey>
       </Component>
     </Directory>
 

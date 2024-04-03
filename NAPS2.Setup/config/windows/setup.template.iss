@@ -11,6 +11,7 @@
 #define AppCopyrightStartYear    "2009"
 #define AppCopyrightEndYear      GetDateTimeString('yyyy','','')
 #define AppCopyrightCompany      "NAPS2 Contributors"
+#define ExeName                  "NAPS2.exe"
 
 [Setup]
 AppName={#AppLongName}
@@ -38,7 +39,7 @@ DefaultGroupName={#AppShortName}
 LicenseFile=..\..\LICENSE
 
 UninstallDisplayName={#AppShortName}
-UninstallDisplayIcon={app}\NAPS2.exe
+UninstallDisplayIcon={app}\{#ExeName}
 
 OutputDir=../publish/{#AppVersionName}
 OutputBaseFilename=naps2-{#AppVersionName}-{#AppPlatform}
@@ -47,8 +48,10 @@ LZMAUseSeparateProcess=yes
 SolidCompression=yes
 ; !arch
 
+ChangesAssociations=yes
+
 [Run]
-Filename: "{app}\NAPS2.exe"; Flags: nowait postinstall
+Filename: "{app}\{#ExeName}"; Flags: nowait postinstall
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -72,22 +75,32 @@ Type: filesandordirs; Name: "{app}\lib"
 ; !clean32
 
 [Icons]
-Name: "{group}\NAPS2"; Filename: "{app}\NAPS2.exe"
-Name: "{commondesktop}\NAPS2"; Filename: "{app}\NAPS2.exe"; Tasks: desktopicon
+Name: "{group}\NAPS2"; Filename: "{app}\{#ExeName}"
+Name: "{commondesktop}\NAPS2"; Filename: "{app}\{#ExeName}"; Tasks: desktopicon
 
 [Registry]
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; Flags: uninsdeletekey
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Action"; ValueData: "Scan with NAPS2"
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "CLSID"; ValueData: "WIACLSID"
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "DefaultIcon"; ValueData: "sti.dll,0"
-Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "InitCmdLine"; ValueData: "/WiaCmd;{app}\NAPS2.exe /StiDevice:%1 /StiEvent:%2;"
+Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "InitCmdLine"; ValueData: "/WiaCmd;{app}\{#ExeName} /StiDevice:%1 /StiEvent:%2;"
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Provider"; ValueData: "NAPS2"
 
-Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\StillImage\Registered Applications"; Flags:uninsdeletevalue; ValueType: string; ValueName: "NAPS2"; ValueData: "{app}\NAPS2.exe"
+Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\StillImage\Registered Applications"; Flags:uninsdeletevalue; ValueType: string; ValueName: "NAPS2"; ValueData: "{app}\{#ExeName}"
 
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{{1c3a7177-f3a7-439e-be47-e304a185f932}"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Cmdline"; ValueData: "{app}\NAPS2.exe /StiDevice:%1 /StiEvent:%2"
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Cmdline"; ValueData: "{app}\{#ExeName} /StiDevice:%1 /StiEvent:%2"
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Desc"; ValueData: "Scan with NAPS2"
-Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\NAPS2.exe,0"
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#ExeName},0"
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\StillImage\Events\STIProxyEvent\{{1c3a7177-f3a7-439e-be47-e304a185f932}"; ValueType: string; ValueName: "Name"; ValueData: "NAPS2"
 
+Root: HKCR; Subkey: ".pdf\OpenWithProgids"; ValueType: string; ValueName: "{#AppShortName}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: ".jpg\OpenWithProgids"; ValueType: string; ValueName: "{#AppShortName}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: ".jpeg\OpenWithProgids"; ValueType: string; ValueName: "{#AppShortName}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: ".png\OpenWithProgids"; ValueType: string; ValueName: "{#AppShortName}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: ".tiff\OpenWithProgids"; ValueType: string; ValueName: "{#AppShortName}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: ".tif\OpenWithProgids"; ValueType: string; ValueName: "{#AppShortName}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: ".bmp\OpenWithProgids"; ValueType: string; ValueName: "{#AppShortName}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "{#AppShortName}"; ValueType: string; ValueName: ""; ValueData: "{#AppShortName}"; Flags: uninsdeletekey;
+Root: HKCR; Subkey: "{#AppShortName}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#ExeName},0"
+Root: HKCR; Subkey: "{#AppShortName}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#ExeName}"" ""%1"""
