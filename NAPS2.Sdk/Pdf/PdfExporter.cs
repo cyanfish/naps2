@@ -21,6 +21,9 @@ namespace NAPS2.Pdf;
 /// </summary>
 public class PdfExporter
 {
+    private const int PDF_VERSION_14 = 14;
+    private const int PDF_VERSION_17 = 17;
+
     private readonly ScanningContext _scanningContext;
     private readonly ILogger _logger;
 
@@ -311,6 +314,12 @@ public class PdfExporter
             PdfAHelper.SetCidMap(document);
             PdfAHelper.CreateXmpMetadata(document, compat);
         }
+
+        document.Version = compat switch
+        {
+            PdfCompat.PdfA2B or PdfCompat.PdfA3B or PdfCompat.PdfA3U => PDF_VERSION_17,
+            _ => PDF_VERSION_14
+        };
 
         var stream = new MemoryStream();
         document.Save(stream);
