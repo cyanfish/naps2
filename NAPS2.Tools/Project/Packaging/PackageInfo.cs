@@ -12,7 +12,7 @@ public class PackageInfo
         Platform = platform;
         VersionName = versionName;
         VersionNumber = versionNumber;
-        PackageName = packageName;
+        PackageName = packageName == null ? platform.PackageName() : $"{platform.PackageName()}-{packageName}";;
     }
 
     public Platform Platform { get; }
@@ -21,7 +21,7 @@ public class PackageInfo
 
     public string VersionNumber { get; }
 
-    public string? PackageName { get; }
+    public string PackageName { get; }
 
     public string GetPath(string ext)
     {
