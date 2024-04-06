@@ -30,6 +30,16 @@
       <ComponentGroupRef Id="LangComponents" />
     </Feature>
 
+    <Property Id="INNOINSTALLATION" Value="NOTEXIST">
+      <DirectorySearch Id="CheckFileDir" Path="[ProgramFiles{{ !64 }}64{{ !~64 }}Folder]NAPS2" Depth="0">
+        <FileSearch Id="CheckFile" Name="unins000.exe" />
+      </DirectorySearch>
+    </Property>
+
+    <Condition Message="NAPS2 has already been installed using the EXE installer and can't be upgraded using the MSI installer. Either use the EXE installer to upgrade, or uninstall NAPS2 then re-install with the MSI.">
+        <![CDATA[INNOINSTALLATION="NOTEXIST"]]>
+    </Condition>
+
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFiles{{ !64 }}64{{ !~64 }}Folder">
         <Directory Id="INSTALLFOLDER" Name="NAPS2">
@@ -100,7 +110,7 @@
         <!-- !root -->
       </Component>
     </DirectoryRef>
-    
+
     <DirectoryRef Id="LIBFOLDER">
       <Component Id="Deps" Guid="04AC2B17-BDFA-4AA0-B8CA-0AE208D9193A">
         <!-- !lib -->
