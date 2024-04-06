@@ -73,6 +73,8 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate bool FPDF_SaveAsCopy_delegate(IntPtr document, ref FPDF_FileWrite fileWrite, int flags);
 
+    public delegate bool FPDF_GetFileVersion_delegate(IntPtr document, out int fileVersion);
+
     public delegate IntPtr FPDF_GetMetaText_delegate(IntPtr document, [MarshalAs(UnmanagedType.LPStr)] string tag,
         byte[]? buffer, IntPtr buflen);
 
@@ -214,6 +216,7 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDF_LoadMemDocument_delegate FPDF_LoadMemDocument => Load<FPDF_LoadMemDocument_delegate>();
     public FPDF_CloseDocument_delegate FPDF_CloseDocument => Load<FPDF_CloseDocument_delegate>();
     public FPDF_SaveAsCopy_delegate FPDF_SaveAsCopy => Load<FPDF_SaveAsCopy_delegate>();
+    public FPDF_GetFileVersion_delegate FPDF_GetFileVersion => Load<FPDF_GetFileVersion_delegate>();
     public FPDF_GetMetaText_delegate FPDF_GetMetaText => Load<FPDF_GetMetaText_delegate>();
     public FPDF_GetPageCount_delegate FPDF_GetPageCount => Load<FPDF_GetPageCount_delegate>();
     public FPDF_LoadPage_delegate FPDF_LoadPage => Load<FPDF_LoadPage_delegate>();

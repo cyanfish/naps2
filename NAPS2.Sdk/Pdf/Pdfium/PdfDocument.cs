@@ -43,6 +43,8 @@ internal class PdfDocument : NativePdfiumObject
 
     public int PageCount => Native.FPDF_GetPageCount(Handle);
 
+    public int? Version => Native.FPDF_GetFileVersion(Handle, out int version) ? version : null;
+
     public PdfPage GetPage(int pageIndex)
     {
         return new PdfPage(Native.FPDF_LoadPage(Handle, pageIndex), this, pageIndex);

@@ -23,6 +23,7 @@ public class PdfExporter
 {
     private const int PDF_VERSION_14 = 14;
     private const int PDF_VERSION_17 = 17;
+    private const string PDFIUM_PRODUCER = "PDFium";
 
     private readonly ScanningContext _scanningContext;
     private readonly ILogger _logger;
@@ -133,8 +134,9 @@ public class PdfExporter
                 await pdfPagesOcrPipeline;
                 if (progress.IsCancellationRequested) return false;
 
+                var producer = pdfPages.Any() ? PDFIUM_PRODUCER : PdfSharpCore.ProductVersionInfo.Producer;
                 // TODO: Doing in memory as that's presumably faster than IO, but of course that's quite a bit of memory use potentially...
-                var stream = FinalizeAndSaveDocument(document, exportParams);
+                var stream = FinalizeAndSaveDocument(document, exportParams, producer);
                 if (progress.IsCancellationRequested) return false;
 
                 return MergePassthroughPages(stream, output, pdfPages, exportParams, progress);
@@ -296,7 +298,8 @@ public class PdfExporter
         return state;
     }
 
-    private static MemoryStream FinalizeAndSaveDocument(PdfDocument document, PdfExportParams exportParams)
+    private static MemoryStream FinalizeAndSaveDocument(PdfDocument document, PdfExportParams exportParams,
+        string producer)
     {
         var compat = exportParams.Compat;
         var now = DateTime.Now;
@@ -312,7 +315,7 @@ public class PdfExporter
         {
             PdfAHelper.SetColorProfile(document);
             PdfAHelper.SetCidMap(document);
-            PdfAHelper.CreateXmpMetadata(document, compat);
+            PdfAHelper.CreateXmpMetadata(document, compat, producer);
         }
 
         document.Version = compat switch
@@ -465,7 +468,8 @@ public class PdfExporter
                     while (true)
                     {
                         var font = new XFont(lineFontFamily, lineFontSize + 1, XFontStyle.Regular);
-                        if (eligibleWords.All(word => gfx.MeasureString(word.Text, font).Width < word.Bounds.w * hAdjust))
+                        if (eligibleWords.All(
+                                word => gfx.MeasureString(word.Text, font).Width < word.Bounds.w * hAdjust))
                         {
                             lineFontSize++;
                         }

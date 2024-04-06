@@ -30,6 +30,10 @@ public static class PdfAsserts
 
     public static async Task AssertCompliant(string profile, string filePath)
     {
+        if (string.IsNullOrEmpty(profile))
+        {
+            return;
+        }
         Assert.True(File.Exists(filePath));
         var report = await LazyPdfAValidator.Value.ValidateWithDetailedReportAsync(filePath);
         Assert.True(report.Jobs.Job.ValidationReport.IsCompliant);
@@ -126,6 +130,15 @@ public static class PdfAsserts
             Assert.NotNull(obj);
             Assert.True(obj.HasImageFilters(filters),
                 $"Expected filters: {string.Join(",", filters)}, actual: {string.Join(",", obj.GetImageFilters())}");
+        }
+    }
+
+    public static void AssertVersion(int version, string filePath)
+    {
+        lock (PdfiumNativeLibrary.Instance)
+        {
+            using var doc = PdfDocument.Load(filePath);
+            Assert.Equal(version, doc.Version);
         }
     }
 }

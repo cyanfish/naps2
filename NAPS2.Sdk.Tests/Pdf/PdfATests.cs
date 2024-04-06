@@ -1,35 +1,76 @@
+using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
+using Xunit;
 
 namespace NAPS2.Sdk.Tests.Pdf;
 
-// TODO: Validate with OCR output
-// TODO: Maaaybe validate with external import? We certainly can't guarantee it, but maybe some cases can be verified for best effort
 public class PdfATests : ContextualTests
 {
-    // Sadly the pdfa verifier library only supports windows/mac
-    [PlatformFact(exclude: PlatformFlags.Mac)]
-    public async Task Validate()
-    {
-        var pdfExporter = new PdfExporter(ScanningContext);
-        var testCases = new (PdfCompat pdfCompat, string profile, string fileName)[]
-        {
-            (PdfCompat.PdfA1B, "PDF/A-1B", "pdfa1b_test.pdf"),
-            (PdfCompat.PdfA2B, "PDF/A-2B", "pdfa2b_test.pdf"),
-            (PdfCompat.PdfA3B, "PDF/A-3B", "pdfa3b_test.pdf"),
-            (PdfCompat.PdfA3U, "PDF/A-3U", "pdfa3u_test.pdf")
-        };
+    private readonly PdfExporter _pdfExporter;
+    private readonly string _path;
+    private readonly string _importPath;
 
-        var tasks = testCases.Select(testCase =>
-        {
-            using var image = CreateScannedImage();
-            var path = Path.Combine(FolderPath, testCase.fileName);
-            pdfExporter.Export(path, new[] { image }, new PdfExportParams
-            {
-                Compat = testCase.pdfCompat
-            }).Wait();
-            return PdfAsserts.AssertCompliant(testCase.profile, path);
-        }).ToArray();
-        await Task.WhenAll(tasks);
+    public PdfATests()
+    {
+        _pdfExporter = new PdfExporter(ScanningContext);
+        _path = Path.Combine(FolderPath, "test.pdf");
+        _importPath = CopyResourceToFile(PdfResources.word_patcht_pdf, "word.pdf");
     }
+
+    // Sadly the pdfa verifier library only supports windows/linux
+    [PlatformTheory(exclude: PlatformFlags.Mac)]
+    [MemberData(nameof(TestCases))]
+    public async Task Validate(PdfCompat pdfCompat, string profile, int version)
+    {
+        await _pdfExporter.Export(_path, new[] { CreateScannedImage() }, new PdfExportParams
+        {
+            Compat = pdfCompat
+        });
+
+        PdfAsserts.AssertVersion(version, _path);
+        await PdfAsserts.AssertCompliant(profile, _path);
+    }
+
+    [PlatformTheory(exclude: PlatformFlags.Mac)]
+    [MemberData(nameof(TestCases))]
+    public async Task ValidateWithOcr(PdfCompat pdfCompat, string profile, int version)
+    {
+        SetUpFakeOcr(ifNoMatch: "hello world");
+
+        await _pdfExporter.Export(_path, new[] { CreateScannedImage() }, new PdfExportParams
+        {
+            Compat = pdfCompat
+        }, new OcrParams("eng"));
+
+        PdfAsserts.AssertVersion(version, _path);
+        await PdfAsserts.AssertCompliant(profile, _path);
+    }
+
+    [PlatformTheory(exclude: PlatformFlags.Mac)]
+    [MemberData(nameof(TestCases))]
+    public async Task ValidateWithPdfium(PdfCompat pdfCompat, string profile, int version)
+    {
+        var images = await new PdfImporter(ScanningContext).Import(_importPath).ToListAsync();
+
+        await _pdfExporter.Export(_path, images, new PdfExportParams
+        {
+            Compat = pdfCompat
+        });
+
+        PdfAsserts.AssertVersion(version, _path);
+        await PdfAsserts.AssertCompliant(profile, _path);
+    }
+
+    // Note that we don't have a Pdfium OCR test as we fail compliance due to the way Pdfium embeds fonts, which isn't
+    // practical to fix.
+
+    public static IEnumerable<object[]> TestCases =
+    [
+        [PdfCompat.Default, "", 14],
+        [PdfCompat.PdfA1B, "PDF/A-1B", 14],
+        [PdfCompat.PdfA2B, "PDF/A-2B", 17],
+        [PdfCompat.PdfA3B, "PDF/A-3B", 17],
+        [PdfCompat.PdfA3U, "PDF/A-3U", 17]
+    ];
 }

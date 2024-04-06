@@ -6,12 +6,12 @@ namespace NAPS2.Pdf;
 
 internal static class PdfAHelper
 {
-    public static void CreateXmpMetadata(PdfDocument document, PdfCompat compat)
+    public static void CreateXmpMetadata(PdfDocument document, PdfCompat compat, string producer)
     {
         var metadataDict = new PdfDictionary(document);
         metadataDict.Elements["/Type"] = new PdfName("/Metadata");
         metadataDict.Elements["/Subtype"] = new PdfName("/XML");
-        metadataDict.CreateStream(CreateRawXmpMetadata(document.Info, GetConformance(compat)));
+        metadataDict.CreateStream(CreateRawXmpMetadata(document.Info, GetConformance(compat), producer));
         document.Internals.AddObject(metadataDict);
         document.Internals.Catalog.Elements["/Metadata"] = metadataDict.Reference;
     }
@@ -33,7 +33,8 @@ internal static class PdfAHelper
         }
     }
 
-    private static byte[] CreateRawXmpMetadata(PdfDocumentInformation info, (string, string) conformance)
+    private static byte[] CreateRawXmpMetadata(PdfDocumentInformation info, (string, string) conformance,
+        string producer)
     {
         string xml = $@"<?xpacket begin=""{'\ufeff'}"" id=""W5M0MpCehiHzreSzNTczkc9d""?>
 <x:xmpmeta xmlns:x=""adobe:ns:meta/"" x:xmptk=""Adobe XMP Core 5.1.0-jc003"">
@@ -45,7 +46,7 @@ internal static class PdfAHelper
         xmlns:pdfaid=""http://www.aiim.org/pdfa/ns/id/""
       dc:format=""application/pdf""
 	  pdf:Keywords=""{info.Keywords}""
-      pdf:Producer=""{PdfSharpCore.ProductVersionInfo.Producer}""
+      pdf:Producer=""{producer}""
       xmp:CreateDate=""{info.CreationDate:yyyy'-'MM'-'dd'T'HH':'mm':'ssK}""
       xmp:ModifyDate=""{info.ModificationDate:yyyy'-'MM'-'dd'T'HH':'mm':'ssK}""
       xmp:CreatorTool=""{info.Creator}""
