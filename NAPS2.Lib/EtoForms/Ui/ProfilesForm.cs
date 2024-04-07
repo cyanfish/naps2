@@ -223,7 +223,8 @@ public class ProfilesForm : EtoDialogBase
                 if (!NoUserProfiles)
                 {
                     _profileManager.Mutate(
-                        new ListMutation<ScanProfile>.Append(data.ScanProfileXml.FromXml<ScanProfile>()), _listView);
+                        new ListMutation<ScanProfile>.AppendAndSelect(data.ScanProfileXml.FromXml<ScanProfile>()),
+                        _listView);
                 }
             }
         }
@@ -264,8 +265,8 @@ public class ProfilesForm : EtoDialogBase
             {
                 return;
             }
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(editSettingsForm.ScanProfile),
-                ListSelection.Empty<ScanProfile>());
+            _profileManager.Mutate(new ListMutation<ScanProfile>.AppendAndSelect(editSettingsForm.ScanProfile),
+                _listView);
             _profileManager.DefaultProfile = editSettingsForm.ScanProfile;
         }
         if (SelectedProfile == null)
@@ -293,7 +294,7 @@ public class ProfilesForm : EtoDialogBase
         fedit.ShowModal();
         if (fedit.Result)
         {
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(fedit.ScanProfile), _listView);
+            _profileManager.Mutate(new ListMutation<ScanProfile>.AppendAndSelect(fedit.ScanProfile), _listView);
         }
     }
 
@@ -355,7 +356,7 @@ public class ProfilesForm : EtoDialogBase
         {
             var data = _profileTransfer.GetFromClipboard();
             var profile = data.ScanProfileXml.FromXml<ScanProfile>();
-            _profileManager.Mutate(new ListMutation<ScanProfile>.Append(profile), _listView);
+            _profileManager.Mutate(new ListMutation<ScanProfile>.AppendAndSelect(profile), _listView);
         }
     }
 

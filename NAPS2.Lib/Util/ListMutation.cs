@@ -435,6 +435,29 @@ public abstract class ListMutation<T> where T : notnull
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
             list.AddRange(_items);
+        }
+    }
+
+    /// <summary>
+    /// Appends the given item(s) to the end of the list and selects them.
+    /// </summary>
+    public class AppendAndSelect : ListMutation<T>
+    {
+        private readonly List<T> _items;
+
+        public AppendAndSelect(IEnumerable<T> items)
+        {
+            _items = items.ToList();
+        }
+
+        public AppendAndSelect(params T[] items)
+        {
+            _items = items.ToList();
+        }
+
+        public override void Apply(List<T> list, ref ListSelection<T> selection)
+        {
+            list.AddRange(_items);
             selection = ListSelection.From(_items);
         }
     }
