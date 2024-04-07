@@ -528,7 +528,7 @@ public class DesktopController
     {
         public override Task<Empty> Activate(ActivateRequest request, ServerCallContext context)
         {
-            Invoker.Current.Invoke(() =>
+            Invoker.Current.InvokeDispatch(() =>
             {
                 var formOnTop = Application.Instance.Windows.Last();
                 if (PlatformCompat.System.CanUseWin32)
@@ -549,7 +549,7 @@ public class DesktopController
 
         public override Task<Empty> CloseWindow(CloseWindowRequest request, ServerCallContext context)
         {
-            Invoker.Current.Invoke(() =>
+            Invoker.Current.InvokeDispatch(() =>
             {
                 controller._desktopFormProvider.DesktopForm.Close();
 #if NET6_0_OR_GREATER
@@ -565,13 +565,13 @@ public class DesktopController
 
         public override Task<Empty> OpenFile(OpenFileRequest request, ServerCallContext context)
         {
-            controller.ImportFiles(request.Path, true);
+            Invoker.Current.InvokeDispatch(() => controller.ImportFiles(request.Path, true));
             return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> ScanWithDevice(ScanWithDeviceRequest request, ServerCallContext context)
         {
-            Invoker.Current.Invoke(async () =>
+            Invoker.Current.InvokeDispatch(async () =>
                 await controller._desktopScanController.ScanWithDevice(request.Device));
             return Task.FromResult(new Empty());
         }
