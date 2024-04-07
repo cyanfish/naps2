@@ -100,7 +100,8 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
                 catch (Exception)
                 {
                     // Failed to load. Since we're using FileShare.None, it can't be concurrent modification.
-                    // Either the file is newly created, or it was corrupted. In either case we can ignore and overwrite.
+                    // Either the file is newly created, or it was corrupted. In either case we can backup and overwrite.
+                    Backup(stream);
                 }
                 // Merge the cache and our changes into a local copy (so in case of exceptions nothing is changed)
                 copy = new ConfigStorage<TConfig>();
@@ -118,6 +119,21 @@ public class FileConfigScope<TConfig> : ConfigScope<TConfig>
         catch (IOException ex)
         {
             Log.ErrorException($"Error writing {_filePath}", ex);
+        }
+    }
+
+    private void Backup(FileStream stream)
+    {
+        try
+        {
+            using var backupStream = new FileStream(_filePath + ".bak", FileMode.Create);
+            backupStream.SetLength(0);
+            stream.Seek(0, SeekOrigin.Begin);
+            stream.CopyTo(backupStream);
+        }
+        catch (Exception)
+        {
+            // Ignore, we did our best
         }
     }
 }
