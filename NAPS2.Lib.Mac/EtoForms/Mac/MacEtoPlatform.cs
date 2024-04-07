@@ -148,8 +148,7 @@ public class MacEtoPlatform : EtoPlatform
         var view = control.ToNative();
         var monitor = NSEvent.AddLocalMonitorForEventsMatchingMask(NSEventMask.KeyDown, evt =>
         {
-            if (ReferenceEquals(evt.Window, view.Window) &&
-                view.HitTest(evt.LocationInWindow) != null!)
+            if (ReferenceEquals(evt.Window, view.Window))
             {
                 var args = evt.ToEtoKeyEventArgs();
                 return handle(args.KeyData) ? null! : evt;
