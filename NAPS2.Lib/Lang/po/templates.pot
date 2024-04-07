@@ -630,6 +630,10 @@ msgstr ""
 msgid "Flip"
 msgstr ""
 
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr ""
+
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
 msgstr ""
@@ -1044,6 +1048,10 @@ msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
+msgstr ""
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
 msgstr ""
 
 #: UiStrings.resx$PressStartWhenReady$Message
