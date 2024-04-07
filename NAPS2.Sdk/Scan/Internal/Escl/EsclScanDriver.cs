@@ -145,6 +145,7 @@ internal class EsclScanDriver : IScanDriver
         catch (HttpRequestException ex) when (ex.InnerException is TaskCanceledException or SocketException)
         {
             // A connection timeout manifests as TaskCanceledException
+            _logger.LogError(ex, "Error connecting to ESCL device");
             throw new DeviceCommunicationException();
         }
         catch (TaskCanceledException)
