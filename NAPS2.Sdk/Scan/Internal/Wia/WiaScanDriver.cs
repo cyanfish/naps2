@@ -177,8 +177,21 @@ internal class WiaScanDriver : IScanDriver
                         return;
                     }
                     hasAtLeastOneImage = true;
-                    using var image = _scanningContext.ImageContext.Load(stream);
-                    _callback(image);
+                    IMemoryImage image;
+                    try
+                    {
+                        image = _scanningContext.ImageContext.Load(stream);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error loading stream from WIA");
+                        // Assume the problem is an incomplete stream due to some kind of communication failure
+                        throw new DeviceCommunicationException();
+                    }
+                    using (image)
+                    {
+                        _callback(image);
+                    }
                     _scanEvents.PageStart();
                 }
                 catch (Exception e)

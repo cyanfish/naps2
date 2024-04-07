@@ -186,6 +186,8 @@ internal class SaneScanDriver : IScanDriver
                         throw new DevicePaperJamException();
                     case SaneStatus.CoverOpen:
                         throw new DeviceCoverOpenException();
+                    case SaneStatus.IoError:
+                        throw new DeviceCommunicationException();
                     default:
                         throw new DeviceException($"SANE error: {ex.Status}");
                 }

@@ -13,6 +13,7 @@ internal class WiaScanErrors
             WiaErrorCodes.NO_DEVICE_AVAILABLE => new DeviceNotFoundException(),
             WiaErrorCodes.PAPER_EMPTY => new DeviceFeederEmptyException(),
             WiaErrorCodes.OFFLINE => new DeviceOfflineException(),
+            WiaErrorCodes.COMMUNICATION => new DeviceCommunicationException(),
             WiaErrorCodes.BUSY => new DeviceBusyException(),
             WiaErrorCodes.COVER_OPEN => new DeviceCoverOpenException(),
             WiaErrorCodes.PAPER_JAM => new DevicePaperJamException(),

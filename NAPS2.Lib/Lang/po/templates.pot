@@ -377,6 +377,10 @@ msgstr ""
 msgid "Combine"
 msgstr ""
 
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr ""
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr ""

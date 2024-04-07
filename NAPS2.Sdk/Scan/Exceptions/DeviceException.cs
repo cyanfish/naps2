@@ -26,6 +26,11 @@ public class DeviceFeederEmptyException() : DeviceException(SdkResources.NoPages
 public class DeviceOfflineException() : DeviceException(SdkResources.DeviceOffline);
 
 /// <summary>
+/// Indicates the connection with the scanning device was interrupted.
+/// </summary>
+public class DeviceCommunicationException() : DeviceException(SdkResources.DeviceCommunicationFailure);
+
+/// <summary>
 /// Indicates the scanning device is busy with another operation. Maybe retry later.
 /// </summary>
 public class DeviceBusyException() : DeviceException(SdkResources.DeviceBusy);

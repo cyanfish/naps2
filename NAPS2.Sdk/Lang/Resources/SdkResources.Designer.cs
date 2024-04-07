@@ -69,6 +69,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Communication with the scanning device was interrupted..
+        /// </summary>
+        internal static string DeviceCommunicationFailure {
+            get {
+                return ResourceManager.GetString("DeviceCommunicationFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The scanner&apos;s cover is open..
         /// </summary>
         internal static string DeviceCoverOpen {

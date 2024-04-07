@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Escl;
@@ -141,12 +142,10 @@ internal class EsclScanDriver : IScanDriver
                 throw;
             }
         }
-        catch (HttpRequestException ex) when (ex.InnerException is TaskCanceledException)
+        catch (HttpRequestException ex) when (ex.InnerException is TaskCanceledException or SocketException)
         {
             // A connection timeout manifests as TaskCanceledException
-            // TODO: Do we want to add a DeviceCommunicationException? It might be more appropriate here
-            // (and maps to WIA too)
-            throw new DeviceOfflineException();
+            throw new DeviceCommunicationException();
         }
         catch (TaskCanceledException)
         {

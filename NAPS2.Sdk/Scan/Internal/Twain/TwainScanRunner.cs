@@ -215,8 +215,10 @@ internal class TwainScanRunner
                 return new AlreadyHandledDriverException();
             case ConditionCode.PaperJam:
                 return new DevicePaperJamException();
-            case ConditionCode.CheckDeviceOnline:
+            case ConditionCode.CheckDeviceOnline when _session.State <= 3:
                 return new DeviceOfflineException();
+            case ConditionCode.CheckDeviceOnline when _session.State >= 4:
+                return new DeviceCommunicationException();
             default:
                 return new DeviceException($"TWAIN error: {status.ConditionCode}");
         }
