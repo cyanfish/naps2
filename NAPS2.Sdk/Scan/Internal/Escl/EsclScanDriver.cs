@@ -141,6 +141,13 @@ internal class EsclScanDriver : IScanDriver
                 throw;
             }
         }
+        catch (HttpRequestException ex) when (ex.InnerException is TaskCanceledException)
+        {
+            // A connection timeout manifests as TaskCanceledException
+            // TODO: Do we want to add a DeviceCommunicationException? It might be more appropriate here
+            // (and maps to WIA too)
+            throw new DeviceOfflineException();
+        }
         catch (TaskCanceledException)
         {
         }
