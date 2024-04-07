@@ -46,9 +46,10 @@ public class ScannerSharingForm : EtoDialogBase
             Image = Icons.cross_small.ToEtoImage()
         };
 
-        var profilesKsm = new KeyboardShortcutManager();
-        profilesKsm.Assign("Del", _deleteCommand);
-        EtoPlatform.Current.HandleKeyDown(_listView.Control, profilesKsm.Perform);
+        var sharingKsm = new KeyboardShortcutManager();
+        sharingKsm.Assign("Esc", Close);
+        sharingKsm.Assign("Del", _deleteCommand);
+        EtoPlatform.Current.HandleKeyDown(_listView.Control, sharingKsm.Perform);
 
         // TODO: Enable
         // _shareAsService.Checked = _osServiceManager.IsRegistered;

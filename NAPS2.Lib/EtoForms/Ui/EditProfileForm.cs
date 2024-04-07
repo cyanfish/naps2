@@ -35,8 +35,6 @@ public class EditProfileForm : EtoDialogBase
     private readonly CheckBox _enableAutoSave = new() { Text = UiStrings.EnableAutoSave };
     private readonly LinkButton _autoSaveSettings = new() { Text = UiStrings.AutoSaveSettings };
     private readonly Button _advanced = new() { Text = UiStrings.Advanced };
-    private readonly Button _ok = new() { Text = UiStrings.OK };
-    private readonly Button _cancel = new() { Text = UiStrings.Cancel };
     private readonly SliderWithTextBox _brightnessSlider = new();
     private readonly SliderWithTextBox _contrastSlider = new();
 
@@ -69,8 +67,6 @@ public class EditProfileForm : EtoDialogBase
         _esclDriver.CheckedChanged += Driver_CheckedChanged;
         _predefinedSettings.CheckedChanged += PredefinedSettings_CheckedChanged;
         _nativeUi.CheckedChanged += NativeUi_CheckedChanged;
-        _ok.Click += Ok_Click;
-        _cancel.Click += Cancel_Click;
 
         _chooseDevice.Click += ChooseDevice;
         _enableAutoSave.CheckedChanged += EnableAutoSave_CheckedChanged;
@@ -166,8 +162,8 @@ public class EditProfileForm : EtoDialogBase
                 _advanced,
                 C.Filler(),
                 L.OkCancel(
-                    _ok,
-                    _cancel)
+                    C.OkButton(this, SaveSettings),
+                    C.CancelButton(this))
             )
         );
     }
@@ -351,16 +347,24 @@ public class EditProfileForm : EtoDialogBase
         _pageSize.SelectedIndex = _pageSize.Items.Count - 2;
     }
 
-
-    private void SaveSettings()
+    private bool SaveSettings()
     {
+        // Note: If CurrentDevice is null, that's fine. A prompt will be shown when scanning.
+
+        if (_displayName.Text == "")
+        {
+            _errorOutput.DisplayError(MiscResources.NameMissing);
+            return false;
+        }
+        _result = true;
+
         if (ScanProfile.IsLocked)
         {
             if (!ScanProfile.IsDeviceLocked)
             {
                 ScanProfile.Device = ScanProfileDevice.FromScanDevice(CurrentDevice);
             }
-            return;
+            return true;
         }
         var pageSize = (PageSizeListItem) _pageSize.SelectedValue;
         if (ScanProfile.DisplayName != null)
@@ -410,25 +414,7 @@ public class EditProfileForm : EtoDialogBase
             BlankPageWhiteThreshold = ScanProfile.BlankPageWhiteThreshold,
             BlankPageCoverageThreshold = ScanProfile.BlankPageCoverageThreshold
         };
-    }
-
-    private void Ok_Click(object? sender, EventArgs e)
-    {
-        // Note: If CurrentDevice is null, that's fine. A prompt will be shown when scanning.
-
-        if (_displayName.Text == "")
-        {
-            _errorOutput.DisplayError(MiscResources.NameMissing);
-            return;
-        }
-        _result = true;
-        SaveSettings();
-        Close();
-    }
-
-    private void Cancel_Click(object? sender, EventArgs e)
-    {
-        Close();
+        return true;
     }
 
     private void PredefinedSettings_CheckedChanged(object? sender, EventArgs e)

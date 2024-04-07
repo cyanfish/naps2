@@ -87,6 +87,7 @@ public class ProfilesForm : EtoDialogBase
         };
 
         var profilesKsm = new KeyboardShortcutManager();
+        profilesKsm.Assign("Esc", Close);
         profilesKsm.Assign("Del", _deleteCommand);
         profilesKsm.Assign("Mod+C", _copyCommand);
         profilesKsm.Assign("Mod+V", _pasteCommand);
