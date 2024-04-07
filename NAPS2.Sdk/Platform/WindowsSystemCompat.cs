@@ -29,6 +29,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool CanPrint => true;
 
+    public bool CombinedPdfAndImageSaving => false;
+
     public bool ShouldRememberBackgroundOperations => true;
 
     public bool RenderInWorker => true;

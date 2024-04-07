@@ -9,19 +9,18 @@ public class PreviewForm : EtoDialogBase
 {
     private readonly DesktopCommands _desktopCommands;
     private readonly IIconProvider _iconProvider;
-    private readonly KeyboardShortcutManager _ksm;
+    private readonly KeyboardShortcutManager _previewKsm;
 
     private readonly ButtonToolItem _pageNumberButton = new();
     private readonly ButtonToolItem _zoomPercentButton = new();
     private UiImage? _currentImage;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, KeyboardShortcutManager ksm, ColorScheme colorScheme) : base(config)
+        IIconProvider iconProvider, ColorScheme colorScheme) : base(config)
     {
         _desktopCommands = desktopCommands;
         ImageList = imageList;
         _iconProvider = iconProvider;
-        _ksm = ksm;
 
         ImageViewer.ColorScheme = colorScheme;
         ImageViewer.ZoomChanged += ImageViewerZoomChanged;
@@ -63,6 +62,9 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.Delete,
             Image = iconProvider.GetIcon("cross")
         };
+
+        _previewKsm = new KeyboardShortcutManager();
+        EtoPlatform.Current.HandleKeyDown(this, _previewKsm.Perform);
     }
 
     private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
@@ -313,65 +315,59 @@ public class PreviewForm : EtoDialogBase
         }
     }
 
-    protected override async void OnKeyDown(KeyEventArgs e)
-    {
-        if (!(e.Control || e.Shift || e.Alt))
-        {
-            switch (e.Key)
-            {
-                case Keys.Escape:
-                    Close();
-                    return;
-                // TODO: Left/right should maybe not change page if we're not at max zoom out (i.e. if we can pan)
-                case Keys.PageDown:
-                case Keys.Right:
-                case Keys.Down:
-                    await GoTo(ImageIndex + 1);
-                    return;
-                case Keys.PageUp:
-                case Keys.Left:
-                case Keys.Up:
-                    await GoTo(ImageIndex - 1);
-                    return;
-            }
-        }
-
-        e.Handled = _ksm.Perform(e.KeyData);
-    }
-
     private void AssignKeyboardShortcuts()
     {
-        // Defaults
+        // Unconfigurable defaults
 
-        _ksm.Assign("Del", DeleteCurrentImageCommand);
-        _ksm.Assign("Ctrl+Oemplus", ZoomInCommand);
-        _ksm.Assign("Ctrl+OemMinus", ZoomOutCommand);
-        _ksm.Assign("Ctrl+0", ZoomActualCommand);
-        _ksm.Assign("Ctrl+Z", Commands.Undo);
-        _ksm.Assign(EtoPlatform.Current.IsGtk ? "Ctrl+Shift+Z" : "Ctrl+Y", Commands.Redo);
+        _previewKsm.Assign("Esc", Close);
+        _previewKsm.Assign("Del", DeleteCurrentImageCommand);
+        _previewKsm.Assign("Mod+0", ZoomActualCommand);
+        _previewKsm.Assign("Mod+Z", Commands.Undo);
+        _previewKsm.Assign(EtoPlatform.Current.IsWinForms ? "Mod+Y" : "Mod+Shift+Z", Commands.Redo);
 
-        // Configured
+        _previewKsm.Assign("PageDown", () => _ = GoTo(ImageIndex + 1));
+        _previewKsm.Assign("Right", () => _ = GoTo(ImageIndex + 1));
+        _previewKsm.Assign("Down", () => _ = GoTo(ImageIndex + 1));
+
+        _previewKsm.Assign("PageUp", () => _ = GoTo(ImageIndex - 1));
+        _previewKsm.Assign("Left", () => _ = GoTo(ImageIndex - 1));
+        _previewKsm.Assign("Up", () => _ = GoTo(ImageIndex - 1));
+
+        // Configured defaults
 
         var ks = Config.Get(c => c.KeyboardShortcuts);
 
-        _ksm.Assign(ks.Delete, DeleteCurrentImageCommand);
-        _ksm.Assign(ks.ImageBlackWhite, Commands.BlackWhite);
-        _ksm.Assign(ks.ImageBrightness, Commands.BrightCont);
-        _ksm.Assign(ks.ImageContrast, Commands.BrightCont);
-        _ksm.Assign(ks.ImageCrop, Commands.Crop);
-        _ksm.Assign(ks.ImageHue, Commands.HueSat);
-        _ksm.Assign(ks.ImageSaturation, Commands.HueSat);
-        _ksm.Assign(ks.ImageSharpen, Commands.Sharpen);
-        _ksm.Assign(ks.ImageDocumentCorrection, Commands.DocumentCorrection);
-        _ksm.Assign(ks.ImageSplit, Commands.Split);
-        _ksm.Assign(ks.ImageCombine, Commands.Combine);
+        _previewKsm.Assign(ks.Delete, DeleteCurrentImageCommand);
+        _previewKsm.Assign(ks.ImageBlackWhite, Commands.BlackWhite);
+        _previewKsm.Assign(ks.ImageBrightness, Commands.BrightCont);
+        _previewKsm.Assign(ks.ImageContrast, Commands.BrightCont);
+        _previewKsm.Assign(ks.ImageCrop, Commands.Crop);
+        _previewKsm.Assign(ks.ImageHue, Commands.HueSat);
+        _previewKsm.Assign(ks.ImageSaturation, Commands.HueSat);
+        _previewKsm.Assign(ks.ImageSharpen, Commands.Sharpen);
+        _previewKsm.Assign(ks.ImageDocumentCorrection, Commands.DocumentCorrection);
+        _previewKsm.Assign(ks.ImageSplit, Commands.Split);
+        _previewKsm.Assign(ks.ImageCombine, Commands.Combine);
 
-        _ksm.Assign(ks.RotateCustom, Commands.CustomRotate);
-        _ksm.Assign(ks.RotateFlip, Commands.Flip);
-        _ksm.Assign(ks.RotateLeft, Commands.RotateLeft);
-        _ksm.Assign(ks.RotateRight, Commands.RotateRight);
-        _ksm.Assign(ks.SaveImages, Commands.SaveSelectedImages);
-        _ksm.Assign(ks.SavePDF, Commands.SaveSelectedPdf);
+        _previewKsm.Assign(ks.RotateCustom, Commands.CustomRotate);
+        _previewKsm.Assign(ks.RotateFlip, Commands.Flip);
+        _previewKsm.Assign(ks.RotateLeft, Commands.RotateLeft);
+        _previewKsm.Assign(ks.RotateRight, Commands.RotateRight);
+
+        if (PlatformCompat.System.CombinedPdfAndImageSaving)
+        {
+            _previewKsm.Assign(ks.SavePDFAll, Commands.SaveSelected);
+        }
+        else
+        {
+            _previewKsm.Assign(ks.SavePDF, Commands.SaveSelectedPdf);
+            _previewKsm.Assign(ks.SaveImages, Commands.SaveSelectedImages);
+            _previewKsm.Assign(ks.SavePDFAll, Commands.SaveSelectedPdf);
+            _previewKsm.Assign(ks.SaveImagesAll, Commands.SaveSelectedImages);
+        }
+
+        _previewKsm.Assign(ks.ZoomIn, ZoomInCommand);
+        _previewKsm.Assign(ks.ZoomOut, ZoomOutCommand);
     }
 
     protected override void Dispose(bool disposing)

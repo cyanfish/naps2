@@ -127,6 +127,10 @@ public class FileConfigScopeTests : ContextualTests
         Assert.False(defaultsScope.Has(c => c.PdfSettings.Compat));
         Assert.True(defaultsScope.TryGet(c => c.AlwaysRememberDevice, out var alwaysRememberDevice));
         Assert.True(alwaysRememberDevice);
+
+        Assert.False(lockedScope.Has(c => c.KeyboardShortcuts.ScanDefault));
+        Assert.True(defaultsScope.TryGet(c => c.KeyboardShortcuts.ScanDefault, out var scanDefault));
+        Assert.Equal("Mod+Enter", scanDefault);
     }
 
     [Fact]

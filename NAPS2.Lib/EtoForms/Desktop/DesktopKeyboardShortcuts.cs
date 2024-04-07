@@ -16,28 +16,20 @@ public class DesktopKeyboardShortcuts
 
     public void Assign(DesktopCommands commands)
     {
-        // Defaults
-        _ksm.Assign("Ctrl+Enter", commands.Scan);
-        _ksm.Assign("Ctrl+B", commands.BatchScan);
-        _ksm.Assign("Ctrl+O", commands.Import);
-        _ksm.Assign("Ctrl+S", commands.SavePdf);
-        _ksm.Assign("Ctrl+P", commands.Print);
-        _ksm.Assign("Ctrl+Up", commands.MoveUp);
-        _ksm.Assign("Ctrl+Left", commands.MoveUp);
-        _ksm.Assign("Ctrl+Down", commands.MoveDown);
-        _ksm.Assign("Ctrl+Right", commands.MoveDown);
-        _ksm.Assign("Ctrl+Shift+Del", commands.ClearAll);
-        _ksm.Assign("F1", commands.About);
-        _ksm.Assign("Ctrl+OemMinus", commands.ZoomOut);
-        _ksm.Assign("Ctrl+Oemplus", commands.ZoomIn);
+        // Unconfigurable defaults
+        _ksm.Assign("Mod+.", commands.Scan);
+        _ksm.Assign("Mod+Up", commands.MoveUp);
+        _ksm.Assign("Mod+Left", commands.MoveUp);
+        _ksm.Assign("Mod+Down", commands.MoveDown);
+        _ksm.Assign("Mod+Right", commands.MoveDown);
         _ksm.Assign("Del", commands.Delete);
-        _ksm.Assign("Ctrl+A", commands.SelectAll);
-        _ksm.Assign("Ctrl+C", commands.Copy);
-        _ksm.Assign("Ctrl+V", commands.Paste);
-        _ksm.Assign("Ctrl+Z", commands.Undo);
-        _ksm.Assign(EtoPlatform.Current.IsGtk ? "Ctrl+Shift+Z" : "Ctrl+Y", commands.Redo);
+        _ksm.Assign("Mod+A", commands.SelectAll);
+        _ksm.Assign("Mod+C", commands.Copy);
+        _ksm.Assign("Mod+V", commands.Paste);
+        _ksm.Assign("Mod+Z", commands.Undo);
+        _ksm.Assign(EtoPlatform.Current.IsWinForms ? "Mod+Y" : "Mod+Shift+Z", commands.Redo);
 
-        // Configured
+        // Configured defaults
 
         var ks = _config.Get(c => c.KeyboardShortcuts);
 
@@ -50,6 +42,7 @@ public class DesktopKeyboardShortcuts
             _ksm.Assign(ks.EmailPDF, commands.EmailPdf);
             _ksm.Assign(ks.EmailPDFAll, commands.EmailAll);
             _ksm.Assign(ks.EmailPDFSelected, commands.EmailSelected);
+            _ksm.Assign(ks.EmailSettings, commands.EmailSettings);
         }
         _ksm.Assign(ks.ImageBlackWhite, commands.BlackWhite);
         _ksm.Assign(ks.ImageBrightness, commands.BrightCont);
@@ -84,13 +77,24 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.RotateFlip, commands.Flip);
         _ksm.Assign(ks.RotateLeft, commands.RotateLeft);
         _ksm.Assign(ks.RotateRight, commands.RotateRight);
-        _ksm.Assign(ks.SaveImages, commands.SaveImages);
-        _ksm.Assign(ks.SaveImagesAll, commands.SaveAllImages);
-        _ksm.Assign(ks.SaveImagesSelected, commands.SaveSelectedImages);
-        _ksm.Assign(ks.SavePDF, commands.SavePdf);
-        _ksm.Assign(ks.SavePDFAll, commands.SaveAllPdf);
-        _ksm.Assign(ks.SavePDFSelected, commands.SaveSelectedPdf);
+        if (PlatformCompat.System.CombinedPdfAndImageSaving)
+        {
+            _ksm.Assign(ks.SavePDFAll, commands.SaveAll);
+            _ksm.Assign(ks.SavePDFSelected, commands.SaveSelected);
+        }
+        else
+        {
+            _ksm.Assign(ks.SaveImages, commands.SaveImages);
+            _ksm.Assign(ks.SaveImagesAll, commands.SaveAllImages);
+            _ksm.Assign(ks.SaveImagesSelected, commands.SaveSelectedImages);
+            _ksm.Assign(ks.SavePDF, commands.SavePdf);
+            _ksm.Assign(ks.SavePDFAll, commands.SaveAllPdf);
+            _ksm.Assign(ks.SavePDFSelected, commands.SaveSelectedPdf);
+        }
+        _ksm.Assign(ks.PDFSettings, commands.PdfSettings);
+        _ksm.Assign(ks.ImageSettings, commands.ImageSettings);
         _ksm.Assign(ks.ScanDefault, commands.Scan);
+        _ksm.Assign(ks.ScannerSharing, commands.ScannerSharing);
 
         _ksm.Assign(ks.ZoomIn, commands.ZoomIn);
         _ksm.Assign(ks.ZoomOut, commands.ZoomOut);

@@ -268,6 +268,11 @@ public class WinFormsEtoPlatform : EtoPlatform
         return SD.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
     }
 
+    public override void HandleKeyDown(Control control, Func<Keys, bool> handle)
+    {
+        control.ToNative().KeyDown += (_, args) => args.Handled = handle(args.KeyData.ToEto());
+    }
+
     public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
     {
         if (control is Scrollable scrollable)

@@ -16,6 +16,11 @@ public abstract class EtoDialogBase : Dialog, IFormBase
         ShowInTaskbar = true;
         LayoutController.Bind(this);
         LayoutController.Invalidated += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
+        if (EtoPlatform.Current.IsMac)
+        {
+            // Always have a basic menu on Mac, otherwise system keyboard shortcuts like Copy/Paste don't work
+            Menu = new MenuBar();
+        }
     }
 
     protected abstract void BuildLayout();

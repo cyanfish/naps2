@@ -1,6 +1,6 @@
 ﻿using Eto.Forms;
 
-namespace NAPS2.EtoForms.Desktop;
+namespace NAPS2.EtoForms;
 
 /// <summary>
 /// A helper class to assign keyboard shortcuts to commands.
@@ -12,12 +12,16 @@ public class KeyboardShortcutManager
 
     private readonly Dictionary<string, Keys> _customMap = new()
     {
+        { "mod", Application.Instance.CommonModifier },
+        { "cmd", Keys.Application },
         { "ctrl", Keys.Control },
         { "del", Keys.Delete },
         { "ins", Keys.Insert },
         { "break", Keys.Pause },
         { "oemplus", Keys.Equal },
         { "oemminus", Keys.Minus },
+        { "esc", Keys.Escape },
+        { ".", Keys.Period },
         { "0", Keys.D0 },
         { "1", Keys.D1 },
         { "2", Keys.D2 },

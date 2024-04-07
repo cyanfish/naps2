@@ -65,8 +65,7 @@ public class ProfilesForm : EtoDialogBase
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            Image = Icons.cross_small.ToEtoImage(),
-            Shortcut = Keys.Delete
+            Image = Icons.cross_small.ToEtoImage()
         };
         _setDefaultCommand = new ActionCommand(DoSetDefault)
         {
@@ -75,19 +74,23 @@ public class ProfilesForm : EtoDialogBase
         };
         _copyCommand = new ActionCommand(DoCopy)
         {
-            MenuText = UiStrings.Copy,
-            Shortcut = Application.Instance.CommonModifier | Keys.C
+            MenuText = UiStrings.Copy
         };
         _pasteCommand = new ActionCommand(DoPaste)
         {
-            MenuText = UiStrings.Paste,
-            Shortcut = Application.Instance.CommonModifier | Keys.V
+            MenuText = UiStrings.Paste
         };
         _scannerSharingCommand = new ActionCommand(OpenScannerSharingForm)
         {
             MenuText = UiStrings.ScannerSharing,
             Image = Icons.wireless16.ToEtoImage()
         };
+
+        var profilesKsm = new KeyboardShortcutManager();
+        profilesKsm.Assign("Del", _deleteCommand);
+        profilesKsm.Assign("Mod+C", _copyCommand);
+        profilesKsm.Assign("Mod+V", _pasteCommand);
+        EtoPlatform.Current.HandleKeyDown(_listView.Control, profilesKsm.Perform);
 
         _listView.ImageSize = 48;
         _listView.ItemClicked += ItemClicked;

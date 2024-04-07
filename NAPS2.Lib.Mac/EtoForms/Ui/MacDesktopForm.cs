@@ -50,10 +50,6 @@ public class MacDesktopForm : DesktopForm
     {
         Commands.MoveDown.ToolBarText = "";
         Commands.MoveUp.ToolBarText = "";
-        Commands.SaveAllPdf.Shortcut = Application.Instance.CommonModifier | Keys.S;
-        Commands.SaveSelectedPdf.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S;
-        Commands.SaveAllImages.Shortcut = Application.Instance.CommonModifier | Keys.M;
-        Commands.SaveSelectedImages.Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.M;
 
         Menu = new MenuBar
         {

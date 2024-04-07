@@ -143,6 +143,22 @@ public class MacEtoPlatform : EtoPlatform
         }
     }
 
+    public override void HandleKeyDown(Control control, Func<Keys, bool> handle)
+    {
+        var view = control.ToNative();
+        var monitor = NSEvent.AddLocalMonitorForEventsMatchingMask(NSEventMask.KeyDown, evt =>
+        {
+            if (ReferenceEquals(evt.Window, view.Window) &&
+                view.HitTest(evt.LocationInWindow) != null!)
+            {
+                var args = evt.ToEtoKeyEventArgs();
+                return handle(args.KeyData) ? null! : evt;
+            }
+            return evt;
+        });
+        control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
+    }
+
     public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
     {
         var view = control.ToNative();

@@ -9,8 +9,8 @@ public class MacPreviewForm : PreviewForm
     private readonly NSSlider _zoomSlider;
 
     public MacPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, KeyboardShortcutManager ksm, ColorScheme colorScheme) : base(config,
-        desktopCommands, imageList, iconProvider, ksm, colorScheme)
+        IIconProvider iconProvider, ColorScheme colorScheme) : base(config,
+        desktopCommands, imageList, iconProvider, colorScheme)
     {
         _zoomSlider = new NSSlider
         {

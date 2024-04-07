@@ -131,6 +131,11 @@ public abstract class EtoPlatform
 
     public virtual Bitmap? ExtractAssociatedIcon(string exePath) => throw new NotSupportedException();
 
+    public virtual void HandleKeyDown(Control control, Func<Keys, bool> handle)
+    {
+        control.KeyDown += (_, args) => args.Handled = handle(args.KeyData);
+    }
+
     public virtual void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
     {
         control.MouseWheel += eventHandler;

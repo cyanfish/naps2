@@ -32,6 +32,8 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool CanPrint => true;
 
+    public bool CombinedPdfAndImageSaving => false;
+
     public bool ShouldRememberBackgroundOperations => true;
 
     public bool RenderInWorker => false;

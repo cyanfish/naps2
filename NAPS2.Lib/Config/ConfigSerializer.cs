@@ -124,7 +124,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.EsclSecurityPolicy, c.EsclSecurityPolicy);
         storage.Set(x => x.EsclServerCertificatePath, c.EsclServerCertificatePath);
         storage.Set(x => x.EventLogging, c.EventLogging);
-        storage.Set(x => x.KeyboardShortcuts, c.KeyboardShortcuts ?? new KeyboardShortcuts());
+        storage.Set(x => x.KeyboardShortcuts, MapKeyboardShortcuts(c.KeyboardShortcuts ?? new KeyboardShortcuts()));
         return storage;
     }
 
@@ -189,6 +189,18 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         if (c.HideSettingsButton) flags |= ToolbarButtons.Settings;
         if (c.HideDonateButton) flags |= ToolbarButtons.Donate;
         return flags;
+    }
+
+    private KeyboardShortcuts MapKeyboardShortcuts(KeyboardShortcuts keyboardShortcuts)
+    {
+        // To be platform-independent, replace "Ctrl+" with "Mod+", which means "Ctrl" on Window/Linux and "Cmd" on Mac
+        var serializer = new XmlSerializer<KeyboardShortcuts>();
+        var doc = serializer.SerializeToXDocument(keyboardShortcuts);
+        foreach (var node in doc.Root!.Elements())
+        {
+            node.Value = node.Value.Replace("Ctrl+", "Mod+");
+        }
+        return serializer.DeserializeFromXDocument(doc)!;
     }
 
     private static ConfigStorage<CommonConfig> UserConfigV0ToCommonConfig(UserConfigV0 c)

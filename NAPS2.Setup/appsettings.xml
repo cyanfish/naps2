@@ -98,20 +98,21 @@
     <ScanProfile10>F11</ScanProfile10>
     <ScanProfile11>F12</ScanProfile11>
     <ScanProfile12></ScanProfile12>
-    <NewProfile></NewProfile>
+    <NewProfile>Ctrl+N</NewProfile>
     <BatchScan>Ctrl+B</BatchScan>
-    <Profiles></Profiles>
-    <Ocr></Ocr>
+    <Profiles>Ctrl+L</Profiles>
+    <ScannerSharing>Ctrl+G</ScannerSharing>
+    <Ocr>Ctrl+Alt+O</Ocr>
     <Import>Ctrl+O</Import>
-    <SavePDF>Ctrl+S</SavePDF>
-    <SavePDFAll></SavePDFAll>
-    <SavePDFSelected></SavePDFSelected>
-    <SaveImages></SaveImages>
-    <SaveImagesAll></SaveImagesAll>
-    <SaveImagesSelected></SaveImagesSelected>
-    <EmailPDF></EmailPDF>
-    <EmailPDFAll></EmailPDFAll>
-    <EmailPDFSelected></EmailPDFSelected>
+    <SavePDFAll>Ctrl+S</SavePDFAll>
+    <SavePDFSelected>Ctrl+Shift+S</SavePDFSelected>
+    <PDFSettings>Ctrl+Alt+P</PDFSettings>
+    <SaveImagesAll>Ctrl+I</SaveImagesAll>
+    <SaveImagesSelected>Ctrl+Shift+I</SaveImagesSelected>
+    <ImageSettings>Ctrl+Alt+I</ImageSettings>
+    <EmailPDFAll>Ctrl+E</EmailPDFAll>
+    <EmailPDFSelected>Ctrl+Shift+E</EmailPDFSelected>
+    <EmailSettings>Ctrl+Alt+E</EmailSettings>
     <Print>Ctrl+P</Print>
     <ImageView></ImageView>
     <ImageBlackWhite></ImageBlackWhite>
@@ -122,9 +123,9 @@
     <ImageSaturation></ImageSaturation>
     <ImageSharpen></ImageSharpen>
     <ImageReset></ImageReset>
-    <RotateLeft></RotateLeft>
-    <RotateRight></RotateRight>
-    <RotateFlip></RotateFlip>
+    <RotateLeft>Ctrl+Shift+Left</RotateLeft>
+    <RotateRight>Ctrl+Shift+Right</RotateRight>
+    <RotateFlip>Ctrl+Shift+Down</RotateFlip>
     <RotateCustom></RotateCustom>
     <MoveUp>Ctrl+Up</MoveUp>
     <MoveDown>Ctrl+Down</MoveDown>

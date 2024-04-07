@@ -26,6 +26,8 @@ internal interface ISystemCompat
 
     bool CanPrint { get; }
 
+    bool CombinedPdfAndImageSaving { get; }
+
     bool ShouldRememberBackgroundOperations { get; }
 
     bool RenderInWorker { get; }

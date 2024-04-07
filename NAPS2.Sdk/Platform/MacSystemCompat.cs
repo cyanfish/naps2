@@ -32,6 +32,8 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool CanPrint => true;
 
+    public bool CombinedPdfAndImageSaving => true;
+
     public bool ShouldRememberBackgroundOperations => true;
 
     public bool RenderInWorker => false;

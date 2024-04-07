@@ -32,56 +32,47 @@ public class DesktopCommands
         Scan = new ActionCommand(desktopScanController.ScanDefault)
         {
             Text = UiStrings.Scan,
-            Image = iconProvider.GetIcon("control_play_blue"),
-            Shortcut = Application.Instance.CommonModifier | Keys.Period
+            Image = iconProvider.GetIcon("control_play_blue")
         };
         NewProfile = new ActionCommand(desktopScanController.ScanWithNewProfile)
         {
             Text = UiStrings.NewProfile,
-            Image = iconProvider.GetIcon("add_small"),
-            Shortcut = Application.Instance.CommonModifier | Keys.N
+            Image = iconProvider.GetIcon("add_small")
         };
         BatchScan = new ActionCommand(desktopSubFormController.ShowBatchScanForm)
         {
             Text = UiStrings.BatchScan,
-            Image = iconProvider.GetIcon("application_cascade"),
-            Shortcut = Application.Instance.CommonModifier | Keys.B
+            Image = iconProvider.GetIcon("application_cascade")
         };
         ScannerSharing = new ActionCommand(desktopSubFormController.ShowScannerSharingForm)
         {
             Text = UiStrings.ScannerSharing,
-            Image = iconProvider.GetIcon("wireless16"),
-            Shortcut = Application.Instance.CommonModifier | Keys.G
+            Image = iconProvider.GetIcon("wireless16")
         };
         Profiles = new ActionCommand(desktopSubFormController.ShowProfilesForm)
         {
             Text = UiStrings.Profiles,
-            Image = iconProvider.GetIcon("blueprints"),
-            Shortcut = Application.Instance.CommonModifier | Keys.L
+            Image = iconProvider.GetIcon("blueprints")
         };
         Ocr = new ActionCommand(desktopSubFormController.ShowOcrForm)
         {
             Text = UiStrings.Ocr,
-            Image = iconProvider.GetIcon("text"),
-            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.O
+            Image = iconProvider.GetIcon("text")
         };
         Import = new ActionCommand(desktopController.Import)
         {
             Text = UiStrings.Import,
-            Image = iconProvider.GetIcon("folder_picture"),
-            Shortcut = Application.Instance.CommonModifier | Keys.O
+            Image = iconProvider.GetIcon("folder_picture")
         };
         SaveAll = new ActionCommand(_imageListActions.SaveAllAsPdfOrImages)
         {
             Text = UiStrings.SaveAll,
-            Image = iconProvider.GetIcon("diskette"),
-            Shortcut = Application.Instance.CommonModifier | Keys.S
+            Image = iconProvider.GetIcon("diskette")
         };
         SaveSelected = new ActionCommand(_imageListActions.SaveSelectedAsPdfOrImages)
         {
             Text = UiStrings.SaveSelected,
-            Image = iconProvider.GetIcon("diskette"),
-            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S
+            Image = iconProvider.GetIcon("diskette")
         };
         SavePdf = new ActionCommand(desktopController.SavePdf)
         {
@@ -98,8 +89,7 @@ public class DesktopCommands
         };
         PdfSettings = new ActionCommand(desktopSubFormController.ShowPdfSettingsForm)
         {
-            Text = UiStrings.PdfSettings,
-            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.P
+            Text = UiStrings.PdfSettings
         };
         SaveImages = new ActionCommand(desktopController.SaveImages)
         {
@@ -116,8 +106,7 @@ public class DesktopCommands
         };
         ImageSettings = new ActionCommand(desktopSubFormController.ShowImageSettingsForm)
         {
-            Text = UiStrings.ImageSettings,
-            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.I
+            Text = UiStrings.ImageSettings
         };
         EmailPdf = new ActionCommand(desktopController.EmailPdf)
         {
@@ -126,24 +115,20 @@ public class DesktopCommands
         };
         EmailAll = new ActionCommand(imageListActions.EmailAllAsPdf)
         {
-            Text = UiStrings.EmailAll,
-            Shortcut = Application.Instance.CommonModifier | Keys.E
+            Text = UiStrings.EmailAll
         };
         EmailSelected = new ActionCommand(imageListActions.EmailSelectedAsPdf)
         {
-            Text = UiStrings.EmailSelected,
-            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.E
+            Text = UiStrings.EmailSelected
         };
         EmailSettings = new ActionCommand(desktopSubFormController.ShowEmailSettingsForm)
         {
-            Text = UiStrings.EmailSettings,
-            Shortcut = Application.Instance.CommonModifier | Keys.Alt | Keys.E
+            Text = UiStrings.EmailSettings
         };
         Print = new ActionCommand(desktopController.Print)
         {
             Text = UiStrings.Print,
-            Image = iconProvider.GetIcon("printer"),
-            Shortcut = Application.Instance.CommonModifier | Keys.P
+            Image = iconProvider.GetIcon("printer")
         };
         ImageMenu = new ActionCommand
         {
@@ -274,15 +259,13 @@ public class DesktopCommands
         Delete = new ActionCommand(desktopController.Delete)
         {
             Text = UiStrings.Delete,
-            Image = iconProvider.GetIcon("cross"),
-            Shortcut = Keys.Delete
+            Image = iconProvider.GetIcon("cross")
         };
         ClearAll = new ActionCommand(desktopController.Clear)
         {
             ToolBarText = UiStrings.Clear,
             MenuText = UiStrings.ClearAll,
-            Image = iconProvider.GetIcon("cancel"),
-            Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.Delete
+            Image = iconProvider.GetIcon("cancel")
         };
         LanguageMenu = new ActionCommand
         {
@@ -313,34 +296,27 @@ public class DesktopCommands
         };
         SelectAll = new ActionCommand(imageListActions.SelectAll)
         {
-            Text = UiStrings.SelectAll,
-            Shortcut = Application.Instance.CommonModifier | Keys.A
+            Text = UiStrings.SelectAll
         };
         Copy = new ActionCommand(desktopController.Copy)
         {
             Text = UiStrings.Copy,
-            Image = iconProvider.GetIcon("copy"),
-            Shortcut = Application.Instance.CommonModifier | Keys.C
+            Image = iconProvider.GetIcon("copy")
         };
         Paste = new ActionCommand(desktopController.Paste)
         {
             Text = UiStrings.Paste,
-            Image = iconProvider.GetIcon("paste"),
-            Shortcut = Application.Instance.CommonModifier | Keys.V
+            Image = iconProvider.GetIcon("paste")
         };
         Undo = new ActionCommand(imageListActions.Undo)
         {
             Text = UiStrings.Undo,
-            Image = iconProvider.GetIcon("undo"),
-            Shortcut = Application.Instance.CommonModifier | Keys.Z
+            Image = iconProvider.GetIcon("undo")
         };
         Redo = new ActionCommand(imageListActions.Redo)
         {
             Text = UiStrings.Redo,
-            Image = iconProvider.GetIcon("redo"),
-            Shortcut = EtoPlatform.Current.IsWinForms
-                ? Application.Instance.CommonModifier | Keys.Y
-                : Application.Instance.CommonModifier | Keys.Shift | Keys.Z
+            Image = iconProvider.GetIcon("redo")
         };
     }
 

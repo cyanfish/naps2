@@ -43,9 +43,12 @@ public class ScannerSharingForm : EtoDialogBase
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            Image = Icons.cross_small.ToEtoImage(),
-            Shortcut = Keys.Delete
+            Image = Icons.cross_small.ToEtoImage()
         };
+
+        var profilesKsm = new KeyboardShortcutManager();
+        profilesKsm.Assign("Del", _deleteCommand);
+        EtoPlatform.Current.HandleKeyDown(_listView.Control, profilesKsm.Perform);
 
         // TODO: Enable
         // _shareAsService.Checked = _osServiceManager.IsRegistered;

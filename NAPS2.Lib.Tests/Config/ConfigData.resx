@@ -277,6 +277,9 @@
   &lt;OcrDefaultAfterScanning&gt;true&lt;/OcrDefaultAfterScanning&gt;
   &lt;ForcePdfCompat&gt;PdfA1B&lt;/ForcePdfCompat&gt;
   &lt;EventLogging&gt;None&lt;/EventLogging&gt;
+  &lt;KeyboardShortcuts&gt;
+      &lt;ScanDefault&gt;Ctrl+Enter&lt;/ScanDefault&gt;
+  &lt;/KeyboardShortcuts&gt;
 &lt;/AppConfig&gt;</value>
   </data>
   <data name="NewAppSettings" xml:space="preserve">

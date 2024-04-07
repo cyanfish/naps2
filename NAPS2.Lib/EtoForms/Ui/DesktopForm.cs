@@ -69,12 +69,7 @@ public abstract class DesktopForm : EtoFormBase
         _desktopSubFormController = desktopSubFormController;
         Commands = commands;
 
-        if (!EtoPlatform.Current.IsMac)
-        {
-            // For Mac the menu shortcuts work without needing manual hooks
-            // Maybe at some point we can support custom assignment on Mac, though we'll need to fix Ctrl vs Command
-            _keyboardShortcuts.Assign(Commands);
-        }
+        _keyboardShortcuts.Assign(Commands);
         CreateToolbarsAndMenus();
         UpdateScanButton();
         UpdateProfilesToolbar();
@@ -91,10 +86,10 @@ public abstract class DesktopForm : EtoFormBase
         // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)
         _contextMenu.Items.Add(Commands.SelectAll);
         _contextMenu.Opening += OpeningContextMenu;
-        KeyDown += OnKeyDown;
-        _listView.Control.KeyDown += OnKeyDown;
         _listView.Control.MouseWheel += ListViewMouseWheel;
         _listView.Control.MouseMove += ListViewMouseMove;
+        EtoPlatform.Current.HandleKeyDown(this, _keyboardShortcuts.Perform);
+        EtoPlatform.Current.HandleKeyDown(_listView.Control, _keyboardShortcuts.Perform);
 
         //
         // Shown += FDesktop_Shown;
@@ -525,11 +520,6 @@ public abstract class DesktopForm : EtoFormBase
             _keyboardShortcuts.AssignProfileShortcut(i + 1, commandList[i]);
         }
         _scanMenuCommands.Value = commandList;
-    }
-
-    private void OnKeyDown(object? sender, KeyEventArgs e)
-    {
-        e.Handled = _keyboardShortcuts.Perform(e.KeyData);
     }
 
     protected virtual void UpdateTitle(ScanProfile? defaultProfile)
