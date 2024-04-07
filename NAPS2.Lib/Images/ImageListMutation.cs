@@ -16,6 +16,25 @@ public abstract class ImageListMutation : ListMutation<UiImage>
         }
     }
 
+    public class AltFlip() : ImageListMutation
+    {
+        public override void Apply(List<UiImage> list, ref ListSelection<UiImage> selection)
+        {
+            bool toggle = false;
+            foreach (UiImage img in selection)
+            {
+                if (toggle)
+                {
+                    var transform = new RotationTransform(180);
+                    var thumb = img.GetThumbnailClone();
+                    var updatedThumb = thumb?.PerformTransform(transform);
+                    img.AddTransform(transform, updatedThumb);
+                }
+                toggle = !toggle;
+            }
+        }
+    }
+
     public class AddTransforms(List<Transform> transforms, Dictionary<UiImage, IMemoryImage?>? updatedThumbnails = null)
         : ListMutation<UiImage>
     {

@@ -130,6 +130,7 @@ public class MacDesktopForm : DesktopForm
                         Commands.RotateLeft,
                         Commands.RotateRight,
                         Commands.Flip,
+                        Commands.AltFlip,
                         Commands.Deskew,
                         Commands.CustomRotate,
                         new SeparatorMenuItem(),

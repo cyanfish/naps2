@@ -62,6 +62,7 @@ public class MacPreviewForm : PreviewForm
                 .Append(Commands.RotateLeft)
                 .Append(Commands.RotateRight)
                 .Append(Commands.Flip)
+                .Append(Commands.AltFlip)
                 .Append(Commands.Deskew)
                 .Append(Commands.CustomRotate)),
             MacToolbarItems.Create("crop", Commands.Crop),

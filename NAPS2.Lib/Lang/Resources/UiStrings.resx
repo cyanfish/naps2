@@ -252,6 +252,9 @@
   <data name="Flip" xml:space="preserve">
     <value>Flip</value>
   </data>
+  <data name="AltFlip" xml:space="preserve">
+    <value>Flip every 2nd image</value>
+  </data>
   <data name="Deskew" xml:space="preserve">
     <value>Deskew</value>
   </data>

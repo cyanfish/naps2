@@ -54,6 +54,7 @@ public class KeyboardShortcuts
     public string? RotateLeft { get; set; }
     public string? RotateRight { get; set; }
     public string? RotateFlip { get; set; }
+    public string? AltFlip { get; set; }
     public string? RotateCustom { get; set; }
 
     public string? MoveUp { get; set; }

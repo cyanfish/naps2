@@ -177,6 +177,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flip every 2nd image.
+        /// </summary>
+        internal static string AltFlip {
+            get {
+                return ResourceManager.GetString("AltFlip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alternate Interleave.
         /// </summary>
         internal static string AltInterleave {
