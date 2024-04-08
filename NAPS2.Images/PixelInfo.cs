@@ -1,4 +1,4 @@
-namespace NAPS2.Images.Bitwise;
+namespace NAPS2.Images;
 
 public class PixelInfo
 {

@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class SaturationBitwiseImageOp : UnaryBitwiseImageOp
+internal class SaturationBitwiseImageOp : UnaryBitwiseImageOp
 {
     private readonly float _saturationAdjusted;
 

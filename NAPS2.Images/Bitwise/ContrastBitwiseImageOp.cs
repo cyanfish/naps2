@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class ContrastBitwiseImageOp : UnaryBitwiseImageOp
+internal class ContrastBitwiseImageOp : UnaryBitwiseImageOp
 {
     private readonly float _contrastAdjusted;
     private readonly float _offset;

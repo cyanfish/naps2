@@ -1,6 +1,6 @@
 namespace NAPS2.Images;
 
-public class PdfRenderSize
+internal class PdfRenderSize
 {
     public static readonly PdfRenderSize Default = FromDpi(300);
 

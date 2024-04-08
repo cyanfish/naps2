@@ -4,7 +4,7 @@ using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images.Gtk;
 
-public class GtkImageTransformer : AbstractImageTransformer<GtkImage>
+internal class GtkImageTransformer : AbstractImageTransformer<GtkImage>
 {
     public GtkImageTransformer(ImageContext imageContext) : base(imageContext)
     {

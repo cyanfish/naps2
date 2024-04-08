@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class BlankDetectionImageOp : UnaryBitwiseImageOp
+internal class BlankDetectionImageOp : UnaryBitwiseImageOp
 {
     // If the pixel value (0-255) >= white_threshold, then it counts as a white pixel.
     private const int WHITE_THRESHOLD_MIN = 1;

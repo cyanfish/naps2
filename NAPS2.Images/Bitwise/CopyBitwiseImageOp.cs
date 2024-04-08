@@ -1,7 +1,7 @@
 namespace NAPS2.Images.Bitwise;
 
 // TODO: Need to double check callers set resolution when needed
-public class CopyBitwiseImageOp : BinaryBitwiseImageOp
+internal class CopyBitwiseImageOp : BinaryBitwiseImageOp
 {
     // TODO: Consider requiring an explicit DiscardAlpha parameter
 

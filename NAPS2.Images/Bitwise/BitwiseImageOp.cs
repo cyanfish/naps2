@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class BitwiseImageOp
+internal class BitwiseImageOp
 {
     public const int R_MULT = 299;
     public const int G_MULT = 587;

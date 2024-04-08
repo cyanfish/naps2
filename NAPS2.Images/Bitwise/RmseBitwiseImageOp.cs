@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class RmseBitwiseImageOp : BinaryBitwiseImageOp
+internal class RmseBitwiseImageOp : BinaryBitwiseImageOp
 {
     protected override LockMode SrcLockMode => LockMode.ReadOnly;
     protected override LockMode DstLockMode => LockMode.ReadOnly;

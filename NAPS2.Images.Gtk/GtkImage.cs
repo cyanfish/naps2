@@ -59,7 +59,7 @@ public class GtkImage : IMemoryImage
     }
 
     // TODO: Should we implement some kind of actual locking?
-    public class GtkImageLockState : ImageLockState
+    internal class GtkImageLockState : ImageLockState
     {
         public override void Dispose()
         {

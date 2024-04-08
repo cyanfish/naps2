@@ -3,7 +3,7 @@ namespace NAPS2.Images.Bitwise;
 /// <summary>
 /// Corrects images with poor calibration for white/black values.
 /// </summary>
-public class WhiteBlackPointOp : UnaryBitwiseImageOp
+internal class WhiteBlackPointOp : UnaryBitwiseImageOp
 {
     // When we've identified the block of pixel values that we consider white (or black),
     // this is the percentile (counting from the mid levels) at which we set the

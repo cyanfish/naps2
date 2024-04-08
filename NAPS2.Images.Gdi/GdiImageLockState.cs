@@ -5,7 +5,7 @@ using NAPS2.Images.Bitwise;
 namespace NAPS2.Images.Gdi;
 
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-public class GdiImageLockState : ImageLockState
+internal class GdiImageLockState : ImageLockState
 {
     public static GdiImageLockState Create(Bitmap bitmap, LockMode lockMode, out BitwiseImageData imageData)
     {

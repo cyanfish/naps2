@@ -4,7 +4,7 @@ namespace NAPS2.Images.Bitwise;
 /// Runs a bilateral filter operation, which reduces noise without losing edges or fine details.
 /// https://en.wikipedia.org/wiki/Bilateral_filter
 /// </summary>
-public class BilateralFilterOp : BinaryBitwiseImageOp
+internal class BilateralFilterOp : BinaryBitwiseImageOp
 {
     // The color distance (in the 0-255 range) at which pixels are weighted to 0.
     // The weight linearly scales up as the color distance approaches 0.

@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace NAPS2.Images.Wpf;
 
-public class WpfImageTransformer : AbstractImageTransformer<WpfImage>
+internal class WpfImageTransformer : AbstractImageTransformer<WpfImage>
 {
     public WpfImageTransformer(ImageContext imageContext) : base(imageContext)
     {

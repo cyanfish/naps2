@@ -2,7 +2,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Images.Mac;
 
-public class MacTiffWriter : ITiffWriter
+internal class MacTiffWriter : ITiffWriter
 {
     public bool SaveTiff(IList<IMemoryImage> images, string path,
         TiffCompressionType compression = TiffCompressionType.Auto, ProgressHandler progress = default)

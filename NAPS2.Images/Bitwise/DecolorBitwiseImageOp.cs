@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class DecolorBitwiseImageOp : UnaryBitwiseImageOp
+internal class DecolorBitwiseImageOp : UnaryBitwiseImageOp
 {
     private readonly bool _blackAndWhite;
 

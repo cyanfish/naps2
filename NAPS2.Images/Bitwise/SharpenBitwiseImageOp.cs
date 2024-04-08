@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class SharpenBitwiseImageOp : BinaryBitwiseImageOp
+internal class SharpenBitwiseImageOp : BinaryBitwiseImageOp
 {
     private readonly float _sharpness;
 

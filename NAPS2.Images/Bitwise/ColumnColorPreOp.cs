@@ -3,7 +3,7 @@ namespace NAPS2.Images.Bitwise;
 /// <summary>
 /// Performs pre-processing for the ColumnColorOp.
 /// </summary>
-public class ColumnColorPreOp : UnaryBitwiseImageOp
+internal class ColumnColorPreOp : UnaryBitwiseImageOp
 {
     private const double COL_IGNORE_TOP_AND_BOTTOM = 0.02;
 

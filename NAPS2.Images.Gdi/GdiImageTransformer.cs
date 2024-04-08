@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 namespace NAPS2.Images.Gdi;
 
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
-public class GdiImageTransformer : AbstractImageTransformer<GdiImage>
+internal class GdiImageTransformer : AbstractImageTransformer<GdiImage>
 {
     public GdiImageTransformer(ImageContext imageContext) : base(imageContext)
     {

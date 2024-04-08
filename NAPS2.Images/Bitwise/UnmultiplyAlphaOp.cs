@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class UnmultiplyAlphaOp : UnaryBitwiseImageOp
+internal class UnmultiplyAlphaOp : UnaryBitwiseImageOp
 {
     protected override void PerformCore(BitwiseImageData data, int partStart, int partEnd)
     {

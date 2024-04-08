@@ -3,7 +3,7 @@ using NAPS2.Util;
 
 namespace NAPS2.Images.Transforms;
 
-public abstract class AbstractImageTransformer<TImage> where TImage : IMemoryImage
+internal abstract class AbstractImageTransformer<TImage> where TImage : IMemoryImage
 {
     protected AbstractImageTransformer(ImageContext imageContext)
     {

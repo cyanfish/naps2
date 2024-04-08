@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class RgbPixelReader : IDisposable
+internal class RgbPixelReader : IDisposable
 {
     private readonly ImageLockState _lock;
     private readonly BitwiseImageData _data;

@@ -4,7 +4,7 @@ namespace NAPS2.Images.Mac;
 /// Building xamarin-mac and monomac on different platforms can mean dealing with different floating point types.
 /// This class allows minimizing conditional compilation at the target site.
 /// </summary>
-public static class FloatHelper
+internal static class FloatHelper
 {
 #if MONOMAC
     public static float ToFloat(this float value)

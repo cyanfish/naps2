@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Mac;
 
-public class MacImageTransformer : AbstractImageTransformer<MacImage>
+internal class MacImageTransformer : AbstractImageTransformer<MacImage>
 {
     public MacImageTransformer(ImageContext imageContext) : base(imageContext)
     {

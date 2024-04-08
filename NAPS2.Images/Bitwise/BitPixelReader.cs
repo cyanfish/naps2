@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class BitPixelReader : IDisposable
+internal class BitPixelReader : IDisposable
 {
     private const int THRESHOLD = 140 * 1000;
 

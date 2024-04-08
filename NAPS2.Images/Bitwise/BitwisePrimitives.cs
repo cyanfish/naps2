@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public static class BitwisePrimitives
+internal static class BitwisePrimitives
 {
     public static unsafe void Invert(BitwiseImageData data, int partStart = -1, int partEnd = -1)
     {

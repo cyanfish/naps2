@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class LogicalPixelFormatOp : UnaryBitwiseImageOp
+internal class LogicalPixelFormatOp : UnaryBitwiseImageOp
 {
     public ImagePixelFormat LogicalPixelFormat { get; private set; }
 

@@ -1,6 +1,6 @@
 namespace NAPS2.Images;
 
-public interface IPdfRenderer
+internal interface IPdfRenderer
 {
     IEnumerable<IMemoryImage> Render(ImageContext imageContext, string path, PdfRenderSize renderSize, string? password = null);
 

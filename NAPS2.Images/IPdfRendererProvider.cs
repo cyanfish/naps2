@@ -1,6 +1,6 @@
 namespace NAPS2.Images;
 
-public interface IPdfRendererProvider
+internal interface IPdfRendererProvider
 {
     IPdfRenderer PdfRenderer { get; }
 }

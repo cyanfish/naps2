@@ -1,6 +1,6 @@
-﻿namespace NAPS2.Images.Storage;
+﻿namespace NAPS2.Images;
 
-public class ImageFileStorage : IImageStorage
+internal class ImageFileStorage : IImageStorage
 {
     private bool _disposed;
 

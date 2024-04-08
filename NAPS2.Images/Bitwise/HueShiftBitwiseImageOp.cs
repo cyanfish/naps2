@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class HueShiftBitwiseImageOp : UnaryBitwiseImageOp
+internal class HueShiftBitwiseImageOp : UnaryBitwiseImageOp
 {
     private readonly float _shiftAdjusted;
 

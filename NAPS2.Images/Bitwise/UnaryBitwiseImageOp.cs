@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public abstract class UnaryBitwiseImageOp : BitwiseImageOp
+internal abstract class UnaryBitwiseImageOp : BitwiseImageOp
 {
     public void Perform(IMemoryImage image)
     {

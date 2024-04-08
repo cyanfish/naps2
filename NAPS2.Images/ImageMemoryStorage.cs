@@ -1,4 +1,4 @@
-﻿namespace NAPS2.Images.Storage;
+﻿namespace NAPS2.Images;
 
 /// <summary>
 /// A special type of image storage that stores an image encoded as an in-memory PNG/JPEG/PDF stream. Normally in-memory
@@ -6,7 +6,7 @@
 /// serialization use cases where we don't know yet if the image will be stored in-memory or on disk. And for PDFs
 /// this is the only option for in-memory storage.
 /// </summary>
-public class ImageMemoryStorage : IImageStorage
+internal class ImageMemoryStorage : IImageStorage
 {
     public ImageMemoryStorage(MemoryStream stream, string typeHint)
     {

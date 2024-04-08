@@ -9,7 +9,7 @@ namespace NAPS2.Images.Bitwise;
 /// be calibrated independently. Of course that means this correction must happen before deskew or anything else that
 /// can combine values across columns.
 /// </summary>
-public class ColumnColorOp : UnaryBitwiseImageOp
+internal class ColumnColorOp : UnaryBitwiseImageOp
 {
     /// <summary>
     /// Performs this operation including pre-processing steps.

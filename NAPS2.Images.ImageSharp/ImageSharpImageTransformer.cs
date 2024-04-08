@@ -5,7 +5,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace NAPS2.Images.ImageSharp;
 
-public class ImageSharpImageTransformer : AbstractImageTransformer<ImageSharpImage>
+internal class ImageSharpImageTransformer : AbstractImageTransformer<ImageSharpImage>
 {
     public ImageSharpImageTransformer(ImageContext imageContext) : base(imageContext)
     {

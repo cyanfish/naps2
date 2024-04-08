@@ -109,7 +109,7 @@ public class MacImage : IMemoryImage
     }
 
     // TODO: Should we implement some kind of actual locking?
-    public class MacImageLockState : ImageLockState
+    internal class MacImageLockState : ImageLockState
     {
         public override void Dispose()
         {

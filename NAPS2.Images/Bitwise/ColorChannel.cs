@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public enum ColorChannel
+internal enum ColorChannel
 {
     All,
     Red,

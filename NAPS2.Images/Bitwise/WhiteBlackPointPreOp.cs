@@ -3,7 +3,7 @@ namespace NAPS2.Images.Bitwise;
 /// <summary>
 /// Performs pre-processing for the WhiteBlackPointOp.
 /// </summary>
-public class WhiteBlackPointPreOp : UnaryBitwiseImageOp
+internal class WhiteBlackPointPreOp : UnaryBitwiseImageOp
 {
     public WhiteBlackPointPreOp(CorrectionMode mode)
     {

@@ -87,7 +87,7 @@ public class ImageSharpImage : IMemoryImage
         return new ImageSharpImageLockState(memoryHandle);
     }
 
-    public class ImageSharpImageLockState : ImageLockState
+    internal class ImageSharpImageLockState : ImageLockState
     {
         private readonly MemoryHandle _memoryHandle;
 

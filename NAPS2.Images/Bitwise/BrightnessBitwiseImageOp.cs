@@ -1,6 +1,6 @@
 namespace NAPS2.Images.Bitwise;
 
-public class BrightnessBitwiseImageOp : UnaryBitwiseImageOp
+internal class BrightnessBitwiseImageOp : UnaryBitwiseImageOp
 {
     private readonly float _brightnessAdjusted;
 
