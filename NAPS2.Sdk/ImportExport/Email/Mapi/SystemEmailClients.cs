@@ -20,7 +20,7 @@ internal class SystemEmailClients
 
     public string? GetDefaultName()
     {
-        using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
+        using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
         return key?.GetValue(null)?.ToString();
     }
 
