@@ -1,3 +1,24 @@
+Changes in 7.4.1:
+- Improved OCR text alignment
+- Added "Open With" support for PDF and image files
+- Changed some labels to improve clarity
+  - "Automatically run OCR after scanning" &rarr; "Pre-emptively run OCR after scanning"
+  - "Flip duplexed pages" &rarr; "Flip back sides of duplex pages"
+- Added HTTPS support for scanner sharing
+  - Uses an auto-generated self-signed certificate by default
+  - Admins can set [EsclServerCertificatePath](https://www.naps2.com/doc/org-use#escl-server-certificate-path) to use a custom certificate
+  - Admins can set [EsclSecurityPolicy](https://www.naps2.com/doc/org-use#escl-security-policy) to force servers/clients to only use HTTPS
+    - This affects all ESCL devices, not just shared scanners
+- Improved ESCL reliability with network interruptions
+- Fixed some issues with Preview window zooming
+- Made confirmation dialogs more consistent (OK/Cancel vs. Yes/No)
+- Added more default keyboard shortcuts
+- Mac: Fixed issues with keyboard shortcuts
+- Mac: Added some missing menu items (Zoom In/Out, Move Up/Down, Profiles)
+- Linux: Added a signature to .deb/.rpm packages
+- Windows: The .msi installer can no longer be used to upgrade over .exe
+- Bug fixes
+
 Changes in 7.4.0:
 - Added Undo/Redo (from the right-click menu or Ctrl+Z)
   - Deletions can't be undone 
