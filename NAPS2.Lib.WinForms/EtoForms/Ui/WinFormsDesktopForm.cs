@@ -16,8 +16,6 @@ namespace NAPS2.EtoForms.Ui;
 
 public class WinFormsDesktopForm : DesktopForm
 {
-    public static WF.ApplicationContext? ApplicationContext { get; set; }
-
     private readonly Dictionary<DesktopToolbarMenuType, WF.ToolStripSplitButton> _menuButtons = new();
     private readonly ToolbarFormatter _toolbarFormatter = new(new StringWrapper());
     private readonly WF.Form _form;
@@ -108,17 +106,6 @@ public class WinFormsDesktopForm : DesktopForm
     }
 
     private WF.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;
-
-    protected override void SetMainForm(Form newMainForm)
-    {
-        base.SetMainForm(newMainForm);
-        if (ApplicationContext == null)
-        {
-            Log.Error("ApplicationContext should not be null");
-            return;
-        }
-        ApplicationContext.MainForm = newMainForm.ToSWF();
-    }
 
     protected override void SetCulture(string cultureId)
     {

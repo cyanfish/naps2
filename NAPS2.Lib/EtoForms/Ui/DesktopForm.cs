@@ -454,7 +454,7 @@ public abstract class DesktopForm : EtoFormBase
             FormStateController.DoSaveFormState();
             var newDesktop = FormFactory.Create<DesktopForm>();
             newDesktop.Show();
-            SetMainForm(newDesktop);
+            Application.Instance.MainForm = newDesktop;
             Close();
         }
         finally
@@ -462,11 +462,6 @@ public abstract class DesktopForm : EtoFormBase
             _desktopController.Resume();
         }
         // TODO: If we make any other forms non-modal, we will need to refresh them too
-    }
-
-    protected virtual void SetMainForm(Form newMainForm)
-    {
-        Application.Instance.MainForm = newMainForm;
     }
 
     protected virtual void UpdateToolbar()
