@@ -202,7 +202,7 @@
     <value>Lot terminé avec succès.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Acquisition par lot arrêtée en raison d'une erreur.</value>
+    <value>Numérisation par lot arrêtée en raison d'une erreur.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>Acquisition de la page {0}...</value>

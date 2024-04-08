@@ -202,10 +202,10 @@
     <value>Menu "Scansiona" modifica il profilo predefinito</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Mostra barra "Profili"</value>
+    <value>Visualizza barra "Profili"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Mostra numeri di pagina</value>
+    <value>Visualizza numeri di pagina</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
     <value>Azione predefinita del tasto "Scansiona":</value>
@@ -383,6 +383,9 @@
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Dopo la scansione avvia automaticamente l'OCR</value>
+  </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Esegui preventivamente OCR dopo la scansione</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Installa altre lingue</value>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Capovolgi pagine fronte retro</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Capovolgi lati posteriori pagine fronte/retro</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versione WIA:</value>

@@ -19,7 +19,7 @@
     <value>Azzera</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Vuoi cancellare {0} elemento/i?</value>
+    <value>Vuoi eliminare {0} elemento/i?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Vuoi eliminare {0} elemento/i?</value>
@@ -163,7 +163,7 @@
     <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>E' in corso un'operazione. Desideri uscire e cancellare tale operazione?</value>
+    <value>E' in corso un'operazione. \nVuoi uscire e annullare questa operazione?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Modifiche non salvate</value>

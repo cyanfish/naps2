@@ -384,6 +384,9 @@
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Automatically run OCR after scanning</value>
   </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Pre-emptively run OCR after scanning</value>
+  </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Инсталирај више језика</value>
   </data>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>окрени дуплирану страну</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Flip back sides of duplex pages</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia Version:</value>

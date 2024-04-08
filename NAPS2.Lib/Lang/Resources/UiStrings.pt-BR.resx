@@ -352,7 +352,7 @@
     <value>Selecionar</value>
   </data>
   <data name="SelectSource" xml:space="preserve">
-    <value>Selecionar origem</value>
+    <value>Selecionar Origem</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Executar em segundo plano</value>
@@ -383,6 +383,9 @@
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Executar automaticamente o OCR após a digitalização</value>
+  </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Execute o OCR preventivamente após a digitalização</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Instalar mais idiomas</value>
@@ -424,7 +427,7 @@
     <value>Aplicar para todas as {0} imagens selecionadas</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
-    <value>Seleciona tudo</value>
+    <value>Selecionar tudo</value>
   </data>
   <data name="Recover" xml:space="preserve">
     <value>Recuperar</value>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Virar páginas frente e verso</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Virar o verso das páginas em duplex</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versão Wia:</value>

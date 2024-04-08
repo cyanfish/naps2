@@ -384,6 +384,9 @@
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Start OCR automatisch na het scannen</value>
   </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>OCR vooraf uitvoeren na scannen</value>
+  </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Meer talen installeren</value>
   </data>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Dubbelzijdige pagina's omdraaien</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Achterzijde van dubbelzijdige pagina's omdraaien</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia versie:</value>

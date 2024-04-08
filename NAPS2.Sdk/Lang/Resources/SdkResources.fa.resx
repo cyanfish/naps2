@@ -18,6 +18,9 @@
   <data name="DeviceOffline" xml:space="preserve">
     <value>اسکنر انتخابی خاموش است.</value>
   </data>
+  <data name="DeviceCommunicationFailure" xml:space="preserve">
+    <value>Communication with the scanning device was interrupted.</value>
+  </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>

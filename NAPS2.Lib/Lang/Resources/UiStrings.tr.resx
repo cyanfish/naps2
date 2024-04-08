@@ -384,6 +384,9 @@
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Taradıktan sonra OKT'yi kendiliğinden çalıştır</value>
   </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Pre-emptively run OCR after scanning</value>
+  </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Daha çok dil yükle</value>
   </data>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Çift taraflı sayfaları ters yüz et</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Çift taraflı sayfaların arka yüzlerini çevirin</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia Sürümü:</value>

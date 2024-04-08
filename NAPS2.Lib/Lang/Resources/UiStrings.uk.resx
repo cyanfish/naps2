@@ -55,16 +55,16 @@
     <value>Вставити</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Повернути</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Повторити</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Повернути {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Повторити {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Завершити</value>
@@ -169,10 +169,10 @@
     <value>Позбавити чергування</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternate Interleave</value>
+    <value>Альтернативна міжчерговість</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternate Deinterleave</value>
+    <value>Альтенативна віддаленість</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Зворотній порядок</value>
@@ -379,9 +379,12 @@
     <value>Режим розпізнавання:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Виправити баланс білого кольору та прибрати шум</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
+    <value>Автоматично розпізнавати після сканування</value>
+  </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
     <value>Автоматично розпізнавати після сканування</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
@@ -687,6 +690,9 @@
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Віддзеркалити двосторонні сторінки</value>
   </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Віддзеркалити задній бік двосторонніх сторінок</value>
+  </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Версія Wia:</value>
   </data>
@@ -781,9 +787,9 @@
     <value>Показувати нативне сканування TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Розділити</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Об'єднати</value>
   </data>
 </root>

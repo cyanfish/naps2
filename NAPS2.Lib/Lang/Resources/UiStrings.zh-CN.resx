@@ -55,16 +55,16 @@
     <value>粘贴</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>撤销</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>重做</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>撤消 {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>重做 {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>完成</value>
@@ -193,31 +193,31 @@
     <value>语言</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>设置</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>界面</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>"扫描"菜单可以更改默认配置文件</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>显示"配置文件"工具栏</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>显示页码</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>"扫描"按钮默认操作：</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>"保存"按钮默认操作：</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>应用</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>仅允许单个 NAPS2 实例</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>关于</value>
@@ -379,10 +379,13 @@
     <value>OCR 模式:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>修复白平衡并移除噪点</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>扫描后自动进行 OCR 识别</value>
+  </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Pre-emptively run OCR after scanning</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>获取更多的语言</value>
@@ -463,7 +466,7 @@
     <value>允许打印</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>允许全品质打印</value>
+    <value>允许完全质量打印</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
     <value>允许修改文件</value>
@@ -475,7 +478,7 @@
     <value>允许复制内容</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>允许其他工具复制内容</value>
+    <value>允许复制内容以实现辅助功能</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
     <value>允许注释</value>
@@ -580,7 +583,7 @@
     <value>邮件设置</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>设置</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>服务供应商</value>
@@ -631,7 +634,7 @@
     <value>保存后清除图片</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>在整个会话期间保留图像</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>自定义纸张大小</value>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>翻转偶数页面</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Flip back sides of duplex pages</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia 版本：</value>
@@ -751,39 +757,39 @@
     <value>启用调试日志</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>共享</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>扫描仪共享</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>扫描仪共享</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>共享的扫描仪可以通过在其他计算机的 NAPS2 配置中选择 “ESCL 驱动程序” 从本地网络上的其他计算机中使用。</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>共享扫描仪设置</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>您确定想要停止分享 {0} 吗？</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>即使在NAPS2关闭时也共享</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>多语言...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>多语言</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>显示本地 TWAIN 进程</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>拆分</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>合并</value>
   </data>
 </root>

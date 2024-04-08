@@ -18,6 +18,9 @@
   <data name="DeviceOffline" xml:space="preserve">
     <value>Der gewählte Scanner ist ausgeschaltet (offline).</value>
   </data>
+  <data name="DeviceCommunicationFailure" xml:space="preserve">
+    <value>Die Kommunikation mit dem Scan-Gerät wurde unterbrochen.</value>
+  </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>

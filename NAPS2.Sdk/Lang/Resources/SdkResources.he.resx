@@ -18,6 +18,9 @@
   <data name="DeviceOffline" xml:space="preserve">
     <value>הסורק שנבחר איננו מקוון.</value>
   </data>
+  <data name="DeviceCommunicationFailure" xml:space="preserve">
+    <value>התקשורת מול מכשיר הסריקה נקטעה.</value>
+  </data>
   <data name="NAPS2" xml:space="preserve">
     <value>לא עוד סתם סורק 2</value>
   </data>

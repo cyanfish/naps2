@@ -18,6 +18,9 @@
   <data name="DeviceOffline" xml:space="preserve">
     <value>L'escàner seleccionat està apagat.</value>
   </data>
+  <data name="DeviceCommunicationFailure" xml:space="preserve">
+    <value>S'ha interromput la comunicació amb el dispositiu d'escaneig.</value>
+  </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>

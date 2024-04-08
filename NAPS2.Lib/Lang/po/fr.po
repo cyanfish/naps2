@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -286,7 +286,7 @@ msgstr "Lot terminé avec succès."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "Acquisition par lot arrêtée en raison d'une erreur."
+msgstr "Numérisation par lot arrêtée en raison d'une erreur."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
@@ -382,6 +382,10 @@ msgstr "Fermer"
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
 msgstr "Combiner"
+
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr ""
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -618,7 +622,7 @@ msgstr "Plus rapide"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Dispositif d'alimentation"
+msgstr "Chargeur de documents"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
@@ -635,6 +639,10 @@ msgstr "Corriger la balance des blancs et supprimer le bruit"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Retourner"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr ""
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1051,6 +1059,10 @@ msgstr "Chaînes de substitution"
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Post-traitement"
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr ""
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

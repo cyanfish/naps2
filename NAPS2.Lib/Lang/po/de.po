@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -383,6 +383,10 @@ msgstr "Schließen"
 msgid "Combine"
 msgstr "Kombinieren"
 
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "Die Kommunikation mit dem Scan-Gerät wurde unterbrochen."
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Kompatibilität"
@@ -635,6 +639,10 @@ msgstr "Weißabgleich korrigieren und Rauschen entfernen"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Spiegeln"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "Rückseite von Duplex-Seiten spiegeln"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1051,6 +1059,10 @@ msgstr "Platzhalter"
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Nachbearbeitung"
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "OCR nach dem Scannen im Voraus ausführen"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

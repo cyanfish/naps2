@@ -13,19 +13,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>O scanner escolhido não foi encontrado.</value>
+    <value>O digitalizador escolhido não foi encontrado.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>O scanner escolhido está offline.</value>
+    <value>O digitalizador escolhido está desligado.</value>
+  </data>
+  <data name="DeviceCommunicationFailure" xml:space="preserve">
+    <value>Communication with the scanning device was interrupted.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Nenhum dispositivo escolhido.</value>
+    <value>Nenhum dispositivo selecionado.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Nenhum scanner foi encontrado.</value>
+    <value>Não foi encontrado um digitalizador.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>Ocorreu um erro com o controlador de digitalização.</value>
@@ -34,10 +37,10 @@
     <value>Versão {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>O ficheiro "{0}" não pôde ser importado.</value>
+    <value>Não foi possível importar "{0}".</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>O scanner escolhido aparentemente não possui um alimentador automático. Se o seu scanner possui um alimentador automático, tente usar um controlador diferente.</value>
+    <value>Aparentemente, o digitalizador escolhido não possui um alimentador. Se o seu digitalizador possuir um alimentador, tente usar um controlador diferente.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Não existem folhas no alimentador.</value>
@@ -46,33 +49,33 @@
     <value>Não tem permissão para copiar conteúdo do ficheiro "{0}".</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>O scanner escolhido aparentemente não possui frente e verso automático. Se o seu scanner possui frente e verso automático, tente usar um controlador diferente.</value>
+    <value>Aparentemente, o digitalizador escolhido não permite digitalização em frente e verso. Se for suposto que o digitalizador permita, tente usar um controlador diferente.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>O scanner escolhido está ocupado.</value>
+    <value>O digitalizador escolhido está ocupado.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>A tampa do scanner está aberta.</value>
+    <value>A tampa do digitalizador está aberta.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>O scanner está com papel encravado.</value>
+    <value>Existe papel encravado no digitalizador.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>O scanner está a aquecer.</value>
+    <value>O digitalizador está a aquecer.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>O controlador SANE não está disponível. Certifique-se que instala os pacotes necessários:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>O motor do OCR não está disponível. Certifique-se que instala o pacote necessário:</value>
+    <value>O motor OCR não está disponível. Certifique-se que instalou o pacote necessário:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>O controlador escolhido não é suportado neste sistema.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Ocorreu um erro ao executar OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>A operação OCR caducou.</value>
   </data>
 </root>

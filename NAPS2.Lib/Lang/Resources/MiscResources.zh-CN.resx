@@ -121,7 +121,7 @@
     <value>安装失败</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>全部 ({0})</value>
+    <value>所有 ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
     <value>已选择 ({0})</value>
@@ -163,7 +163,7 @@
     <value>您有未保存的修改，确定要放弃这些修改并退出吗？</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>操作进行中，是否取消操作并退出？</value>
+    <value>一个操作正在进行中。您确定要退出并取消操作吗？</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>未保存的更改</value>

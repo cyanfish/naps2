@@ -328,7 +328,7 @@
     <value>נדרש רכיב נוסף כדי לייבא קובץ PDF זה. האם ברצונך להוריד אותו כעת?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>לבטל את קבוצות הסריקות? </value>
+    <value>לבטל את הסריקות במרוכז?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
     <value>ביטול סריקה במרוכז</value>

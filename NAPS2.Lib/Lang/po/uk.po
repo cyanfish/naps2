@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -106,11 +106,11 @@ msgstr "Дозволити друк"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "Альтенативна віддаленість"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Альтернативна міжчерговість"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -381,7 +381,11 @@ msgstr "Закрити"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "Об'єднати"
+
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "Обмін інформацією зі сканером було перервано."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -559,7 +563,7 @@ msgstr "PDF поштою"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "Надсилання PDF ел.п оштою"
+msgstr "Надсилання PDF ел. поштою"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
@@ -630,11 +634,15 @@ msgstr "Шлях файлу:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Виправити баланс білого кольору та прибрати шум"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Віддзеркалити"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "Віддзеркалити задній бік двосторонніх сторінок"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1052,6 +1060,10 @@ msgstr "Заповнювачі"
 msgid "Post-processing"
 msgstr "Післяобробка"
 
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "Автоматично розпізнавати після сканування"
+
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
 msgstr "Натисніть Старт, коли будете готові."
@@ -1120,11 +1132,11 @@ msgstr "Виконується відновлення"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "Повторити"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "Повторити {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1392,7 +1404,7 @@ msgstr "Пропускати запит на збереження"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "Розділити"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1532,11 +1544,11 @@ msgstr "US Letter (8.5x11 дюймів)"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "Повернути"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "Повернути {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

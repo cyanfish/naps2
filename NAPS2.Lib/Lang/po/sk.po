@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -383,6 +383,10 @@ msgstr "Zavrieť"
 msgid "Combine"
 msgstr "Kombinovať"
 
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "Komunikácia so skenovacím zariadením bola prerušená."
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Kompatibilta"
@@ -635,6 +639,10 @@ msgstr "Oprava vyváženia bielej a odstránenie šumu"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Preklopiť"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr ""
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1051,6 +1059,10 @@ msgstr "Zástupné symboly"
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Následné spracovanie"
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr ""
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

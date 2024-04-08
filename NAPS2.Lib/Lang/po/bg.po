@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian\n"
 "Language: bg\n"
@@ -381,6 +381,10 @@ msgstr "Затвори"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
+msgstr "Комбиниране"
+
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
 msgstr ""
 
 #: UiStrings.resx$Compatibility$Message
@@ -630,11 +634,15 @@ msgstr "Местоположение на файла:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Коригиране баланса на бялото и премахване на шума"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Обръщане"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr ""
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -823,11 +831,11 @@ msgstr "Преместване нагоре"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "Множество езици"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "Множество езици..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1052,6 +1060,10 @@ msgstr "Заместители"
 msgid "Post-processing"
 msgstr "Последваща обработка"
 
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr ""
+
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
 msgstr "Натиснете Старт, когато сте готови."
@@ -1120,11 +1132,11 @@ msgstr "Напредък на възстановяването"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "Възстановяване на отменено действие"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "Възстановяване на отменено действие {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1372,7 +1384,7 @@ msgstr "Показване на лентата с инструменти \"Пр�
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
-msgstr ""
+msgstr "Показване на напредъка на TWAIN"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
@@ -1392,7 +1404,7 @@ msgstr "Пропусни запитването за запис"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "Разделяне"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1532,11 +1544,11 @@ msgstr "US писмо (8.5x11 инч)"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "Отмяна на извършено действие"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "Отмяна на извършено действие {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

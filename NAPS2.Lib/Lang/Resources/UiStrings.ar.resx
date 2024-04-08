@@ -384,6 +384,9 @@
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>مباشرة اقلاع قارئ الحروف بعد الفحص</value>
   </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Pre-emptively run OCR after scanning</value>
+  </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>الحصول على المزيد من اللغات</value>
   </data>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>قلب الصفحات المزدوجة</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Flip back sides of duplex pages</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia Version:</value>

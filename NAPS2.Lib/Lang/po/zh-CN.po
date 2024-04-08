@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "\"保存\"按钮默认操作："
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "\"扫描\"按钮默认操作："
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "\"扫描\"菜单可以更改默认配置文件"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -66,7 +66,7 @@ msgstr "高级配置文件设置"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr "全部 ({0})"
+msgstr "所有 ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
@@ -82,7 +82,7 @@ msgstr "允许复制内容"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "允许其他工具复制内容"
+msgstr "允许复制内容以实现辅助功能"
 
 #: UiStrings.resx$AllowDocumentAssembly$Message
 msgid "Allow Document Assembly"
@@ -98,7 +98,7 @@ msgstr "允许填写表单"
 
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
-msgstr "允许全品质打印"
+msgstr "允许完全质量打印"
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -115,7 +115,7 @@ msgstr "取消奇偶页分别排列（偶数页逆序）"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "总是提示"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -156,7 +156,7 @@ msgstr "尝试扫描文件发生错误."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "操作进行中，是否取消操作并退出？"
+msgstr "一个操作正在进行中。您确定要退出并取消操作吗？"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
@@ -180,7 +180,7 @@ msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "应用"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "您确定要删除{0}个配置吗？"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "您确定想要停止分享 {0} 吗？"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -381,6 +381,10 @@ msgstr "关闭"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
+msgstr "合并"
+
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
 msgstr ""
 
 #: UiStrings.resx$Compatibility$Message
@@ -630,11 +634,15 @@ msgstr "文件路径:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "修复白平衡并移除噪点"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "翻转"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr ""
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -739,7 +747,7 @@ msgstr "安装失败."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "界面"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -759,7 +767,7 @@ msgstr "JPEG 品质"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "在整个会话期间保留图像"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -823,11 +831,11 @@ msgstr "上移"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "多语言"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "多语言..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -968,7 +976,7 @@ msgstr "无法下载一个或多个文件 ."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "仅允许单个 NAPS2 实例"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1052,6 +1060,10 @@ msgstr "格式符"
 msgid "Post-processing"
 msgstr "后处理"
 
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr ""
+
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
 msgstr "准备好后点击开始."
@@ -1088,7 +1100,7 @@ msgstr "配置文件"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "当选中时提示"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1120,11 +1132,11 @@ msgstr "修复进度"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "重做"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "重做 {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1277,7 +1289,7 @@ msgstr "扫描设置"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "使用默认配置文件扫描"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1286,7 +1298,7 @@ msgstr "已扫描的图像"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "扫描仪共享"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1340,23 +1352,23 @@ msgstr "设为默认设置"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "共享"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "即使在NAPS2关闭时也共享"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "共享扫描仪设置"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "共享的扫描仪可以通过在其他计算机的 NAPS2 配置中选择 “ESCL 驱动程序” 从本地网络上的其他计算机中使用。"
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1368,15 +1380,15 @@ msgstr "显示"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "显示\"配置文件\"工具栏"
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
-msgstr ""
+msgstr "显示本地 TWAIN 进程"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "显示页码"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1392,7 +1404,7 @@ msgstr "跳过保存提示"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "拆分"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1532,11 +1544,11 @@ msgstr "US Legal (8.5x14 英寸)"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "撤销"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "撤消 {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

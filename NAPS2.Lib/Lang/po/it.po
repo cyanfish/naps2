@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -156,7 +156,8 @@ msgstr "Si è verificato un errore con il driver di scansione."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "E' in corso un'operazione. Desideri uscire e cancellare tale operazione?"
+msgstr "E' in corso un'operazione. \n"
+"Vuoi uscire e annullare questa operazione?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
@@ -196,7 +197,7 @@ msgstr "Vuoi annullare la scansione in serie?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Vuoi cancellare {0} elemento/i?"
+msgstr "Vuoi eliminare {0} elemento/i?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
@@ -382,6 +383,10 @@ msgstr "Chiudi"
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
 msgstr "Combina"
+
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "La comunicazione con il dispositivo di scansione è stata interrotta."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -635,6 +640,10 @@ msgstr "Correggi bilanciamento del bianco e rimuovi il rumore"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Capovolgi"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "Capovolgi lati posteriori pagine fronte/retro"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1052,6 +1061,10 @@ msgstr "Segnaposti"
 msgid "Post-processing"
 msgstr "Post-processo"
 
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "Esegui preventivamente OCR dopo la scansione"
+
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
 msgstr "Seleziona 'Avvia' quando sei pronto."
@@ -1368,7 +1381,7 @@ msgstr "Visualizza"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr "Mostra barra \"Profili\""
+msgstr "Visualizza barra \"Profili\""
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
@@ -1376,7 +1389,7 @@ msgstr "Visualizza avanzamento TWAIN nativo"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr "Mostra numeri di pagina"
+msgstr "Visualizza numeri di pagina"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

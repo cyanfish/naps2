@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -383,6 +383,10 @@ msgstr "Zamknij"
 msgid "Combine"
 msgstr "Połącz"
 
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "Komunikacja z urządzeniem skanującym została przerwana."
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Zgodność"
@@ -635,6 +639,10 @@ msgstr "Napraw balans bieli i usuń szum"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Odwróć"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "Odwróć tyły stron dwustronnych"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1051,6 +1059,10 @@ msgstr "Symbole zastępcze"
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Przetwarzanie końcowe"
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "Zapobiegawczo uruchom OCR po skanowaniu"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

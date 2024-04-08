@@ -13,16 +13,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutFormTitle" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>Acerca</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Direitos de autor {0} Contribuidores NAPS2</value>
+    <value>Direitos de autor {0}, Contribuidores NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ícones de:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Verificar se existem atualizações</value>
+    <value>Procurar atualizações</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -55,16 +55,16 @@
     <value>Colar</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Desfazer</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Refazer</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Desfazer {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Refazer {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Terminado</value>
@@ -73,10 +73,10 @@
     <value>Padrão</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
-    <value>Novo Perfil</value>
+    <value>Novo perfil</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
-    <value>Digitalização em série</value>
+    <value>Digitalização em lote</value>
   </data>
   <data name="Ocr" xml:space="preserve">
     <value>OCR</value>
@@ -88,22 +88,22 @@
     <value>Importar</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Salvar PDF</value>
+    <value>Guardar PDF</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
     <value>Definições PDF</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Salvar imagens</value>
+    <value>Guardar imagens</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
     <value>Definições da Imagem</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Enviar PDF por Email</value>
+    <value>Enviar por e-mail</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Definições de Email</value>
+    <value>Definições de e-mail</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Imprimir</value>
@@ -118,16 +118,16 @@
     <value>Recortar</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
-    <value>Brilho / Contraste</value>
+    <value>Brilho/Contraste</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Tonalidade / Saturação</value>
+    <value>Tom/Saturação</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
-    <value>Preto e Branco</value>
+    <value>Preto e branco</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>Tornar mais nítido</value>
+    <value>Melhorar</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
     <value>Correção do documento</value>
@@ -139,13 +139,13 @@
     <value>Rodar</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
-    <value>Rodar para a esquerda</value>
+    <value>Rodar à esquerda</value>
   </data>
   <data name="RotateRight" xml:space="preserve">
-    <value>Rodar para a direita</value>
+    <value>Rodar à direita</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Rodar</value>
+    <value>Inverter</value>
   </data>
   <data name="Deskew" xml:space="preserve">
     <value>Endireitar</value>
@@ -178,103 +178,103 @@
     <value>Inverter</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Inverter tudo</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Inverter seleção</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Limpar</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Apagar Tudo</value>
+    <value>Limpar tudo</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Definições</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Interface</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>O menu "Digitalizar" altera perfil padrão</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Mostrar barra de ferramentas "Perfis"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Mostrar número de páginas</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Ação padrão do botão "Digitalizar":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Ação padrão do botão "Guardar":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplicação</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Permitir apenas uma instância NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>Acerca</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Ampliar</value>
   </data>
   <data name="ZoomIn" xml:space="preserve">
-    <value>Aumentar Zoom</value>
+    <value>Ampliar</value>
   </data>
   <data name="ZoomOut" xml:space="preserve">
-    <value>Diminuir Zoom</value>
+    <value>Reduzir</value>
   </data>
   <data name="ZoomActual" xml:space="preserve">
-    <value>Zoom Real</value>
+    <value>Tamanho real</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Ajustar à Janela</value>
+    <value>Ajustar à janela</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Guardar</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Guardar tudo</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Guardar seleção</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Guardar Todas como PDF</value>
+    <value>Guardar tudo como PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Guardar Selecionadas como PDF</value>
+    <value>Guardar seleção como PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Guardar Todas como Imagens</value>
+    <value>Guardar tudo como imagem</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Guardar Selecionadas como Imagens</value>
+    <value>Guardar seleção como imagem</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Enviar tudo por e-mail</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>E-mail selecionado</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Enviar tudo por correio eletrónico como PDF</value>
+    <value>Enviar tudo por e-mail como PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Enviar selecionadas por correio eletrónico como PDF</value>
+    <value>Enviar seleção por e-mail como PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
-    <value>Configurar Perfil</value>
+    <value>Definições de perfil</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Nome a exibir:</value>
+    <value>Nome mostrado:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>Controlador WIA</value>
@@ -283,13 +283,13 @@
     <value>Controlador TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Controlador ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>Controlador de rede ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>Controlador ESCL USB</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Controlador Apple</value>
@@ -307,7 +307,7 @@
     <value>Usar configuração pré-definida</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
-    <value>Usar interface nativa</value>
+    <value>Interface nativa</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
     <value>Origem do papel:</value>
@@ -322,7 +322,7 @@
     <value>Brilho:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Profundidade de Bits:</value>
+    <value>Profundidade de cor:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
     <value>Alinhamento horizontal:</value>
@@ -337,10 +337,10 @@
     <value>Ativar guardar automático</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Guardar configurações automaticamente</value>
+    <value>Definições de gravação automática</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Guardar configurações automaticamente</value>
+    <value>Definições de gravação automática</value>
   </data>
   <data name="Advanced" xml:space="preserve">
     <value>Avançado</value>
@@ -352,10 +352,10 @@
     <value>Selecionar</value>
   </data>
   <data name="SelectSource" xml:space="preserve">
-    <value>Escolher Fonte</value>
+    <value>Selecionar origem</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Executar em segundo plano</value>
+    <value>Enviar para segundo plano</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -370,40 +370,43 @@
     <value>Configurar OCR</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
-    <value>Tornar os PDF pesquisáveis usando OCR</value>
+    <value>Tornar PDF pesquisáveis via OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
     <value>Idioma OCR:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>Modo de OCR:</value>
+    <value>Modo OCR:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Corrigir brancos e remover ruído</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Executar OCR automaticamente após a digitalização</value>
+    <value>Executar OCR após a digitalização</value>
+  </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Pre-emptively run OCR after scanning</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
-    <value>Instalar mais idiomas</value>
+    <value>Obter mais idiomas</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>Transferir OCR</value>
+    <value>Descarregar OCR</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>Para usar o OCR é necessário transferir as línguas que pretende digitalizar.</value>
+    <value>Para usar OCR, é necessário descarregar os idiomas que pretende digitalizar.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Escolha uma ou mais línguas:</value>
+    <value>Escolha um ou mais idiomas:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Tamanho estimado da transferência: {0} MB</value>
+    <value>Tamanho estimado da descarga: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Transferir</value>
+    <value>Descarregar</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Progresso da transferência</value>
+    <value>Progresso da descarga</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
     <value>Pré-visualizar</value>
@@ -421,10 +424,10 @@
     <value>Reverter</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
-    <value>Aplicar a todas as {0} imagens selecionadas</value>
+    <value>Aplicar às {0} imagens selecionadas</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
-    <value>Selecionar Tudo</value>
+    <value>Selecionar tudo</value>
   </data>
   <data name="Recover" xml:space="preserve">
     <value>Recuperar</value>
@@ -433,22 +436,22 @@
     <value>Agora não</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Recuperar Imagens Digitalizadas</value>
+    <value>Recuperar imagens digitalizadas</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} digitalização/ões realizadas em {1} às {2} podem não ter sigo guardadas e são recuperáveis. Quer recuperá-las?</value>
+    <value>{0} digitalizações realizadas em {1} às {2} podem não ter sido guardadas e são recuperáveis. Recuperar agora?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
-    <value>Espaços reservados</value>
+    <value>Marcadores</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
-    <value>Saltar questão para guardar</value>
+    <value>Ignorar questão para guardar</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
-    <value>Ficheiros de página individual</value>
+    <value>Ficheiros de uma página</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Encriptar PDF</value>
+    <value>Cifrar PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Mostrar</value>
@@ -460,31 +463,31 @@
     <value>Definições PDF</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
-    <value>Permitir Impressão</value>
+    <value>Permitir impressão</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>Permitir Impressão de Alta Qualidade</value>
+    <value>Permitir impressão de alta qualidade</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
-    <value>Permitir Modificação Do Documento</value>
+    <value>Permitir alteração do documento</value>
   </data>
   <data name="AllowDocumentAssembly" xml:space="preserve">
-    <value>Permitir Montagem do Documento</value>
+    <value>Permitir organização do documento</value>
   </data>
   <data name="AllowContentCopying" xml:space="preserve">
-    <value>Permitir Cópia de Conteúdo</value>
+    <value>Permitir cópia de conteúdo</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Permitir Cópia de Conteúdo para Acessibilidade</value>
+    <value>Permitir cópia de conteúdo para acessibilidade</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
-    <value>Permitir Anotações</value>
+    <value>Permitir anotações</value>
   </data>
   <data name="AllowFormFilling" xml:space="preserve">
-    <value>Permitir Preenchimento de Formulário</value>
+    <value>Permitir preenchimento de formulários</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>Caminho do ficheiro padrão:</value>
+    <value>Caminho padrão do ficheiro:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
     <value>Caminho do ficheiro:</value>
@@ -502,25 +505,25 @@
     <value>Palavras-chave:</value>
   </data>
   <data name="OwnerPasswordLabel" xml:space="preserve">
-    <value>Palavra-passe do proprietário:</value>
+    <value>Palavra-passe de proprietário:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
     <value>Palavra-passe do utilizador:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
-    <value>Lembrar estas configurações</value>
+    <value>Memorizar definições</value>
   </data>
   <data name="Metadata" xml:space="preserve">
     <value>Metadados</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Encriptação</value>
+    <value>Cifra</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
     <value>Compatibilidade</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
-    <value>Espaços reservados</value>
+    <value>Marcadores</value>
   </data>
   <data name="Year4Digit" xml:space="preserve">
     <value>Ano</value>
@@ -544,25 +547,25 @@
     <value>Segundo (00-59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
-    <value>Número de auto-incremento (4 dígitos)</value>
+    <value>Incrementar número automaticamente (4 dígitos)</value>
   </data>
   <data name="AutoIncrementing3Digit" xml:space="preserve">
-    <value>Número de auto-incremento (3 dígitos)</value>
+    <value>Incrementar número automaticamente (3 dígitos)</value>
   </data>
   <data name="AutoIncrementing2Digit" xml:space="preserve">
-    <value>Número de auto-incremento (2 dígitos)</value>
+    <value>Incrementar número automaticamente (2 dígitos)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Incrementar número automaticamente (1 dígito)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Nome do ficheiro</value>
+    <value>Nome do ficheiro:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Pré-visualizar:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>Para qualidades de JPEG altas (80+), aumente também a qualidade de imagem no seu perfil para obter melhores resultados.</value>
+    <value>Para qualidade JPEG alta (80+), aumente a qualidade da imagem no seu perfil para obter melhores resultados.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Qualidade JPEG</value>
@@ -577,13 +580,13 @@
     <value>Definições da Imagem</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Definições de Email</value>
+    <value>Definições de e-mail</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Definições</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Fornecedor</value>
+    <value>Serviço</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>Alterar</value>
@@ -592,7 +595,7 @@
     <value>Nome do anexo:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Escolha um fornecedor de correio eletrónico</value>
+    <value>Escolha um serviço de e-mail</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
     <value>Autorizar</value>
@@ -604,16 +607,16 @@
     <value>Erro</value>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Detalhes Técnicos</value>
+    <value>Detalhes técnicos</value>
   </data>
   <data name="PdfPasswordFormTitle" xml:space="preserve">
     <value>Palavra-passe</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>O seguinte ficheiro está cifrado e requer uma palavra-passe para ser aberto:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Questionar pelo caminho do ficheiro</value>
+    <value>Pedir caminho do ficheiro</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>Um ficheiro por página</value>
@@ -622,16 +625,16 @@
     <value>Um ficheiro por digitalização</value>
   </data>
   <data name="SeparateByPatchT" xml:space="preserve">
-    <value>Separar ficheiros por Patch-T</value>
+    <value>Separar ficheiros com Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>Mais informação</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Apagar imagens após guardar</value>
+    <value>Limpar imagens após guardar</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Manter imagens entre sessões</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Tamanho de página personalizado</value>
@@ -646,7 +649,7 @@
     <value>Aguardar que o TWAIN termine...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>Configuração Avançada do Perfil</value>
+    <value>Definições avançadas do perfil</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
     <value>Qualidade da imagem</value>
@@ -655,16 +658,16 @@
     <value>Alta qualidade (ficheiros grandes)</value>
   </data>
   <data name="BlankPages" xml:space="preserve">
-    <value>Páginas em branco</value>
+    <value>Páginas vazias</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Excluir páginas em branco</value>
+    <value>Excluir páginas vazias</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>Limite de Branco</value>
+    <value>Limite de brancos</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
-    <value>Limite de Cobertura</value>
+    <value>Limite de cobertura</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
     <value>Pós-processamento</value>
@@ -679,13 +682,16 @@
     <value>Compensar largura em função do alinhamento (WIA)</value>
   </data>
   <data name="StretchToPageSize" xml:space="preserve">
-    <value>Esticar até ao tamanho da página</value>
+    <value>Ajustar ao tamanho da página</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Cortar pelo tamanho da página</value>
+    <value>Recortar ao tamanho da página</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Inverter páginas digitalizadas em frente e verso</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Flip back sides of duplex pages</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versão WIA:</value>
@@ -694,10 +700,10 @@
     <value>Implementação TWAIN:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
-    <value>Digitalização em série</value>
+    <value>Digitalização em lote</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Pressione Iniciar quando estiver pronto.</value>
+    <value>Prima Iniciar quando quiser.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>Configuração da digitalização</value>
@@ -712,7 +718,7 @@
     <value>Digitalização individual</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Múltiplas digitalizações (questionar entre digitalizações)</value>
+    <value>Múltiplas digitalizações (perguntar entre digitalizações)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
     <value>Múltiplas digitalizações (intervalo fixo entre digitalizações)</value>
@@ -724,66 +730,66 @@
     <value>Tempo entre digitalizações (segundos):</value>
   </data>
   <data name="LoadIn" xml:space="preserve">
-    <value>Carregar imagens no NAPS2</value>
+    <value>Carregar imagens em NAPS2</value>
   </data>
   <data name="SaveToSingleFile" xml:space="preserve">
-    <value>Guardar num ficheiro individual</value>
+    <value>Guardar para um ficheiro</value>
   </data>
   <data name="SaveToMultipleFiles" xml:space="preserve">
-    <value>Guardar em vários ficheiros</value>
+    <value>Guardar para vários ficheiros</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Iniciar</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
-    <value>Próxima digitalização</value>
+    <value>Digitalização seguinte</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
-    <value>Pronto para digitalizar {0}.</value>
+    <value>Pronto para a {0} digitalização.</value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
     <value>Abrir pasta</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Ferramentas</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Ativar registos de depuração</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Partilhar</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Partilha de digitalização</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Partilha de digitalização</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Definições da partilha</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Tem a certeza que pretende parar de partilhar {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Partilhar mesmo se NAPS2 estiver fechado</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>Vários idiomas...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>Vários idiomas</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>Mostrar progresso TWAIN nativo</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Separar</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Combinar</value>
   </data>
 </root>

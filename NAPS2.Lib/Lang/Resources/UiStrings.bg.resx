@@ -55,16 +55,16 @@
     <value>Постави</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Отмяна на извършено действие</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Възстановяване на отменено действие</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Отмяна на извършено действие {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Възстановяване на отменено действие {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Готово</value>
@@ -379,10 +379,13 @@
     <value>OCR режим:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Коригиране баланса на бялото и премахване на шума</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Автоматично стартиране на Оптично разпознаване след сканиране</value>
+  </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>Pre-emptively run OCR after scanning</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Още езици</value>
@@ -687,6 +690,9 @@
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Обърни двустранно сканираните страници</value>
   </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>Flip back sides of duplex pages</value>
+  </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia версия:</value>
   </data>
@@ -772,18 +778,18 @@
     <value>Споделяне дори когато NAPS2 е затворен</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>Множество езици...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>Множество езици</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>Показване на напредъка на TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Разделяне</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Комбиниране</value>
   </data>
 </root>

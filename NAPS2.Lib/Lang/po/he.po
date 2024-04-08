@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -192,7 +192,7 @@ msgstr "החלה על כל {0} התמונות שנבחרו"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "לבטל את קבוצות הסריקות? "
+msgstr "לבטל את הסריקות במרוכז?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -382,6 +382,10 @@ msgstr "סגירה"
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
 msgstr "שילוב"
+
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "התקשורת מול מכשיר הסריקה נקטעה."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -635,6 +639,10 @@ msgstr "תיקון איזון לבן והסרת רעש"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "היפוך"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "היפוך הצד האחורי בדפים דו־צדדיים"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1051,6 +1059,10 @@ msgstr "ממלאי מקום"
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "עיבוד סופי"
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "הרצת זיהוי תווים אופטי מקדים בסוף הסריקה"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Preto e Branco</value>
+    <value>Preto e branco</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
     <value>Cor de 24 bits</value>
@@ -31,7 +31,7 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook na Web</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
@@ -40,10 +40,10 @@
     <value>Apple Mail</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>Nenhum fornecedor escolhido.</value>
+    <value>Serviço não selecionado.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
-    <value>Centrar</value>
+    <value>Centro</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
     <value>Esquerda</value>
@@ -55,7 +55,7 @@
     <value>cm</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
-    <value>pol.</value>
+    <value>pol</value>
   </data>
   <data name="PageSizeUnit_Millimetre" xml:space="preserve">
     <value>mm</value>
@@ -109,7 +109,7 @@
     <value>Vidro</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Automática</value>
+    <value>Automático</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -124,13 +124,13 @@
     <value>Padrão</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legado (apenas interface nativa)</value>
+    <value>Legado (interface nativa)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Transferência nativa</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Transferência de memória</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>DSM antigo</value>
@@ -148,21 +148,21 @@
     <value>Melhor</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Guardar tudo</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Guardar seleção</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Perguntar sempre</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Perguntar se selecionado</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Digitalizar com o perfil padrão</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Perguntar sempre</value>
   </data>
 </root>

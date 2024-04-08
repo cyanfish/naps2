@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -383,6 +383,10 @@ msgstr "Tanca"
 msgid "Combine"
 msgstr "Combina"
 
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "S'ha interromput la comunicació amb el dispositiu d'escaneig."
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilitat"
@@ -635,6 +639,10 @@ msgstr "Corregeix el balanç de blancs i suprimeix el soroll"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Gira"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "Gireu el revers de les pàgines dúplex"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1051,6 +1059,10 @@ msgstr "Marcadors de posició"
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Post-processament"
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "Inicia l'OCR de forma preventiva després de l'escaneig"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

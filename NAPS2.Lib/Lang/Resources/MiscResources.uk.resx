@@ -271,7 +271,7 @@
     <value>PDF поштою</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Надсилання PDF ел.п оштою</value>
+    <value>Надсилання PDF ел. поштою</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
     <value>Під час спроби автоматичного збереження трапилася помилка.</value>

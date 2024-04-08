@@ -384,6 +384,9 @@
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>הרצת זיהוי תווים אופטי אוטומטית בסוף הסריקה</value>
   </data>
+  <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
+    <value>הרצת זיהוי תווים אופטי מקדים בסוף הסריקה</value>
+  </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>משיכת שפות נוספות</value>
   </data>
@@ -686,6 +689,9 @@
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>היפוך דפים דו־צדדיים</value>
+  </data>
+  <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
+    <value>היפוך הצד האחורי בדפים דו־צדדיים</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>גרסת Wia:</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-03-11 02:36\n"
+"PO-Revision-Date: 2024-04-08 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt\n"
@@ -383,6 +383,10 @@ msgstr "Fechar"
 msgid "Combine"
 msgstr "Combinar"
 
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "A comunicação com scanner foi interrompida."
+
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilidade"
@@ -635,6 +639,10 @@ msgstr "Corrigir equilíbrio branco e remover ruído"
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
 msgstr "Inverter"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "Virar o verso das páginas em duplex"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1052,6 +1060,10 @@ msgstr "Substituições"
 msgid "Post-processing"
 msgstr "Pós-processamento"
 
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "Execute o OCR preventivamente após a digitalização"
+
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
 msgstr "Pressione Iniciar quando estiver pronto."
@@ -1311,11 +1323,11 @@ msgstr "Selecionar"
 
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
-msgstr "Seleciona tudo"
+msgstr "Selecionar tudo"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
-msgstr "Selecionar origem"
+msgstr "Selecionar Origem"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
