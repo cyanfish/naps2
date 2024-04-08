@@ -7,14 +7,48 @@
             "NAPS2.Sdk.csproj"
           ],
           "src": "../../NAPS2.Sdk"
+        },
+        {
+          "files": [
+            "NAPS2.Images.csproj"
+          ],
+          "src": "../../NAPS2.Images"
+        },
+        {
+          "files": [
+            "NAPS2.Images.Gdi.csproj"
+          ],
+          "src": "../../NAPS2.Images.Gdi"
+        },
+        {
+          "files": [
+            "NAPS2.Images.Wpf.csproj"
+          ],
+          "src": "../../NAPS2.Images.Wpf"
+        },
+        {
+          "files": [
+            "NAPS2.Images.Mac.csproj"
+          ],
+          "src": "../../NAPS2.Images.Mac"
+        },
+        {
+          "files": [
+            "NAPS2.Images.Gtk.csproj"
+          ],
+          "src": "../../NAPS2.Images.Gtk"
+        },
+        {
+          "files": [
+            "NAPS2.Images.ImageSharp.csproj"
+          ],
+          "src": "../../NAPS2.Images.ImageSharp"
         }
       ],
       "dest": "api",
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
-      "properties": {
-        "TargetFramework": "net462"
-      }
+      "allowCompilationErrors": true
     }
   ],
   "build": {
