@@ -217,9 +217,9 @@ public class UploadCommand : ICommand<UploadOptions>
         var version = ProjectHelper.GetCurrentVersionName();
 
         Cli.Run("ssh", $"user@downloads.naps2.com \"mkdir -p /var/www/html/{version}/\"");
-        // Only upload MSI installers as we want people to use Github for downloads. This is only for the Microsoft Store at the moment.
+        // Only upload packages that are needed (e.g. for Microsoft store, Apt repo)
         foreach (var package in TargetsHelper.EnumeratePackageTargets()
-                     .Where(x => Path.GetExtension(x.PackagePath) == ".msi"))
+                     .Where(x => Path.GetExtension(x.PackagePath) is ".msi" or ".deb"))
         {
             var path = package.PackagePath;
             var fileName = Path.GetFileName(path);
