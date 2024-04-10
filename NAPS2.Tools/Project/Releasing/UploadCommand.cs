@@ -18,17 +18,18 @@ public class UploadCommand : ICommand<UploadOptions>
 
     public int Run(UploadOptions opts)
     {
+        string version = opts.Version ?? ProjectHelper.GetCurrentVersion();
         if (opts.Target != "sdk")
         {
             // Validate all package files
             foreach (var target in TargetsHelper.EnumeratePackageTargets())
             {
-                var file = new FileInfo(target.PackagePath);
+                var file = new FileInfo(target.PackagePath(version));
                 if (!file.Exists)
                 {
                     throw new Exception($"Expected package to exist: {file.FullName}");
                 }
-                if (!opts.AllowOld && file.LastWriteTime < DateTime.Now - TimeSpan.FromHours(2))
+                if (opts.Version == null && !opts.AllowOld && file.LastWriteTime < DateTime.Now - TimeSpan.FromHours(2))
                 {
                     throw new Exception($"Expected package to be recently modified: {file.FullName}");
                 }
@@ -39,19 +40,25 @@ public class UploadCommand : ICommand<UploadOptions>
         if (opts.Target is "all" or "github")
         {
             Output.Info("Uploading binaries to Github");
-            UploadToGithub().Wait();
+            UploadToGithub(version).Wait();
             didSomething = true;
         }
         if (opts.Target is "all" or "sourceforge")
         {
             Output.Info("Uploading binaries to SourceForge");
-            UploadToSourceForge().Wait();
+            UploadToSourceForge(version).Wait();
             didSomething = true;
         }
         if (opts.Target is "all" or "static")
         {
             Output.Info("Uploading binaries to static site downloads.naps2.com");
-            UploadToStaticSite();
+            UploadToStaticSite(version, opts.PackageType);
+            didSomething = true;
+        }
+        if (opts.Target is "all" or "apt")
+        {
+            Output.Info("Updating Apt metadata on downloads.naps2.com");
+            UpdateAptMetadata();
             didSomething = true;
         }
         if (opts.Target is "sdk")
@@ -100,9 +107,8 @@ public class UploadCommand : ICommand<UploadOptions>
         return projectName;
     }
 
-    private async Task UploadToGithub()
+    private async Task UploadToGithub(string version)
     {
-        var version = ProjectHelper.GetCurrentVersionName();
         var token = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "github"));
         var client = new GitHubClient(new ProductHeaderValue("cyanfish"),
             new InMemoryCredentialStore(new Credentials(token)));
@@ -127,7 +133,7 @@ public class UploadCommand : ICommand<UploadOptions>
             });
         foreach (var package in TargetsHelper.EnumeratePackageTargets())
         {
-            var path = package.PackagePath;
+            var path = package.PackagePath(version);
             if (File.Exists(path))
             {
                 Output.Verbose($"Uploading asset {path}");
@@ -140,9 +146,8 @@ public class UploadCommand : ICommand<UploadOptions>
         Output.Info($"Created draft Github release: {release.HtmlUrl}");
     }
 
-    private async Task UploadToSourceForge()
+    private async Task UploadToSourceForge(string version)
     {
-        var version = ProjectHelper.GetCurrentVersionName();
         var config = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "sourceforge"));
         var parts = config.Split("\n");
         var username = parts[0].Trim();
@@ -166,7 +171,7 @@ public class UploadCommand : ICommand<UploadOptions>
         client.UploadFile(changelogStream, "/home/frs/project/naps2/readme.txt");
         foreach (var package in TargetsHelper.EnumeratePackageTargets().Reverse())
         {
-            var path = package.PackagePath;
+            var path = package.PackagePath(version);
             if (File.Exists(path))
             {
                 Output.Verbose($"Uploading asset {path}");
@@ -212,20 +217,39 @@ public class UploadCommand : ICommand<UploadOptions>
         throw new Exception("Changelog needs updating (did not start with \"{expected}\")");
     }
 
-    private void UploadToStaticSite()
+    private void UploadToStaticSite(string version, string? packageType)
     {
-        var version = ProjectHelper.GetCurrentVersionName();
-
         Cli.Run("ssh", $"user@downloads.naps2.com \"mkdir -p /var/www/html/{version}/\"");
         // Only upload packages that are needed (e.g. for Microsoft store, Apt repo)
-        foreach (var package in TargetsHelper.EnumeratePackageTargets()
-                     .Where(x => Path.GetExtension(x.PackagePath) is ".msi" or ".deb"))
+        foreach (var package in TargetsHelper.EnumeratePackageTargets(packageType, null, false)
+                     .Where(x => Path.GetExtension(x.PackagePath(version)) is ".msi" or ".deb"))
         {
-            var path = package.PackagePath;
+            var path = package.PackagePath(version);
             var fileName = Path.GetFileName(path);
             Output.Verbose($"Uploading asset {path}");
             Cli.Run("scp", $"{path} user@downloads.naps2.com:/var/www/html/{version}/{fileName}");
         }
         Output.Info($"Uploaded files.");
+    }
+
+    private void UpdateAptMetadata()
+    {
+        var aptTemp = Path.Combine(Paths.SetupObj, "apt");
+        if (Directory.Exists(aptTemp))
+        {
+            Directory.Delete(aptTemp, true);
+        }
+        Directory.CreateDirectory(aptTemp);
+
+        Cli.Run("ssh", "user@downloads.naps2.com \"mkdir -p /home/user/apt-temp/\"");
+        Cli.Run("ssh", "user@downloads.naps2.com \"cd /var/www/html/ ; apt-ftparchive packages . > /home/user/apt-temp/Packages\" ; apt-ftparchive release . > /home/user/apt-temp/Release\"");
+        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp/Packages {Path.Combine(aptTemp, "Packages")}");
+        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp/Release {Path.Combine(aptTemp, "Release")}");
+        Cli.Run("gpg", $"--output {Path.Combine(aptTemp, "Release.gpg")} --sign {Path.Combine(aptTemp, "Release")}");
+        Cli.Run("gpg", $"--output {Path.Combine(aptTemp, "InRelease")} --clearsign {Path.Combine(aptTemp, "Release")}");
+        Cli.Run("scp", $"{Path.Combine(aptTemp, "Packages")} user@downloads.naps2.com:/var/www/html/Packages");
+        Cli.Run("scp", $"{Path.Combine(aptTemp, "Release")} user@downloads.naps2.com:/var/www/html/Release");
+        Cli.Run("scp", $"{Path.Combine(aptTemp, "Release.gpg")} user@downloads.naps2.com:/var/www/html/Release.gpg");
+        Cli.Run("scp", $"{Path.Combine(aptTemp, "InRelease")} user@downloads.naps2.com:/var/www/html/InRelease");
     }
 }
