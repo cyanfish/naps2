@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Xml.Linq;
 using EmbedIO;
@@ -244,31 +245,45 @@ internal class EsclApiController : WebApiController
     [Route(HttpVerbs.Get, "/ScanJobs/{jobId}/NextDocument")]
     public async Task NextDocument(string jobId)
     {
-        if (!_serverState.TryGetJob(jobId, out var jobInfo))
+        if (!CheckJobState(jobId, out var jobInfo))
         {
-            Response.StatusCode = 404;
-            return;
-        }
-        if (jobInfo.State == EsclJobState.Aborted)
-        {
-            Response.StatusCode = 500;
-            return;
-        }
-        if (jobInfo.State is not (EsclJobState.Pending or EsclJobState.Processing))
-        {
-            Response.StatusCode = 404;
             return;
         }
 
         await jobInfo.NextDocumentLock.Take();
         try
         {
+            // Recheck job state in case it's been changed while we were waiting on the lock
+            if (!CheckJobState(jobId, out _))
+            {
+                return;
+            }
             await WaitForAndWriteNextDocument(jobInfo);
         }
         finally
         {
             jobInfo.NextDocumentLock.Release();
         }
+    }
+
+    private bool CheckJobState(string jobId, [NotNullWhen(true)] out JobInfo? jobInfo)
+    {
+        if (!_serverState.TryGetJob(jobId, out jobInfo))
+        {
+            Response.StatusCode = 404;
+            return false;
+        }
+        if (jobInfo.State == EsclJobState.Aborted)
+        {
+            Response.StatusCode = 500;
+            return false;
+        }
+        if (jobInfo.State is not (EsclJobState.Pending or EsclJobState.Processing))
+        {
+            Response.StatusCode = 404;
+            return false;
+        }
+        return true;
     }
 
     private async Task WaitForAndWriteNextDocument(JobInfo jobInfo)
