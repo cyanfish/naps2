@@ -292,7 +292,15 @@ internal class EsclApiController : WebApiController
         {
             // If we already have a document (i.e. if a connection error occured during the previous NextDocument
             // request), we stay at that same document and don't advance
-            jobInfo.NextDocumentReady = jobInfo.NextDocumentReady || await jobInfo.Job.WaitForNextDocument();
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(5000);
+            jobInfo.NextDocumentReady = jobInfo.NextDocumentReady || await jobInfo.Job.WaitForNextDocument(cts.Token);
+        }
+        catch (TaskCanceledException)
+        {
+            _logger.LogDebug("Waiting for document timed out, returning 503");
+            Response.StatusCode = 503;
+            return;
         }
         catch (Exception ex)
         {

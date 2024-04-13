@@ -23,6 +23,7 @@ internal class ScanJob : IEsclScanJob
     private int _currentPage = 1;
     private Action<StatusTransition>? _statusCallback;
     private Exception? _lastError;
+    private Task<bool>? _pausedNextDocumentTask;
 
     public ScanJob(ScanningContext scanningContext, ScanController controller, ScanDevice device,
         EsclScanSettings settings)
@@ -112,29 +113,47 @@ internal class ScanJob : IEsclScanJob
         _statusCallback = callback;
     }
 
-    public async Task<bool> WaitForNextDocument()
+    public async Task<bool> WaitForNextDocument(CancellationToken cancelToken)
     {
-        if (ContentType == ContentTypes.PDF)
+        Task<bool> nextDocumentTask;
+        lock (this)
         {
-            // For PDFs we merge all the pages into a single PDF document, so we need to wait for the full scan here
-            if (!await _enumerable.MoveNextAsync())
+            nextDocumentTask = _pausedNextDocumentTask ?? Task.Run(async () =>
             {
-                return false;
-            }
-            do
-            {
-                _currentPage++;
-                _pdfImages.Add(_enumerable.Current);
-            } while (await _enumerable.MoveNextAsync());
-            return true;
-        }
+                if (ContentType == ContentTypes.PDF)
+                {
+                    // For PDFs we merge all the pages into a single PDF document, so we need to wait for the full scan here
+                    if (!await _enumerable.MoveNextAsync())
+                    {
+                        return false;
+                    }
+                    do
+                    {
+                        _currentPage++;
+                        _pdfImages.Add(_enumerable.Current);
+                    } while (await _enumerable.MoveNextAsync());
+                    return true;
+                }
 
-        if (await _enumerable.MoveNextAsync())
-        {
-            _currentPage++;
-            return true;
+                if (await _enumerable.MoveNextAsync())
+                {
+                    _currentPage++;
+                    return true;
+                }
+                return false;
+            });
+            _pausedNextDocumentTask = null;
         }
-        return false;
+        await Task.WhenAny(nextDocumentTask, cancelToken.WaitHandle.WaitOneAsync());
+        lock (this)
+        {
+            if (!nextDocumentTask.IsCompleted)
+            {
+                _pausedNextDocumentTask = nextDocumentTask;
+                throw new TaskCanceledException();
+            }
+        }
+        return await nextDocumentTask;
     }
 
     public async Task WriteDocumentTo(Stream stream)

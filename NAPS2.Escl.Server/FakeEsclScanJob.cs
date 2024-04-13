@@ -16,7 +16,7 @@ internal class FakeEsclScanJob : IEsclScanJob
         _callback = callback;
     }
 
-    public Task<bool> WaitForNextDocument() => Task.FromResult(true);
+    public Task<bool> WaitForNextDocument(CancellationToken cancelToken) => Task.FromResult(true);
 
     public async Task WriteDocumentTo(Stream stream)
     {

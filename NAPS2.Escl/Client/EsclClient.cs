@@ -164,20 +164,32 @@ public class EsclClient
         try
         {
             // TODO: Maybe check Content-Location on the response header to ensure no duplicate document?
-            var response = await WithHttpFallback(
-                () => GetUrl($"{job.UriPath}/NextDocument"),
-                url =>
-                {
-                    Logger.LogDebug("ESCL GET {Url}", url);
-                    return HttpClient.GetAsync(url);
-                });
-            if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
+            HttpResponseMessage response;
+            while (true)
             {
-                // NotFound = end of scan, Gone = canceled
-                Logger.LogDebug("GET failed: {Status}", response.StatusCode);
-                return null;
+                response = await WithHttpFallback(
+                    () => GetUrl($"{job.UriPath}/NextDocument"),
+                    url =>
+                    {
+                        Logger.LogDebug("ESCL GET {Url}", url);
+                        return HttpClient.GetAsync(url);
+                    });
+                if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
+                {
+                    // ServiceUnavailable = retry after a delay
+                    Logger.LogDebug("GET returned 503, waiting to retry");
+                    await Task.Delay(2000);
+                    continue;
+                }
+                if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Gone)
+                {
+                    // NotFound = end of scan, Gone = canceled
+                    Logger.LogDebug("GET failed: {Status}", response.StatusCode);
+                    return null;
+                }
+                response.EnsureSuccessStatusCode();
+                break;
             }
-            response.EnsureSuccessStatusCode();
             var doc = new RawDocument
             {
                 Data = await response.Content.ReadAsByteArrayAsync(),
