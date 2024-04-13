@@ -115,7 +115,7 @@ public class EsclServer : IEsclServer
     {
         var protocol = tls ? "https" : "http";
         var url = $"{protocol}://+:{port}/";
-        deviceCtx.ServerState = new EsclServerState();
+        deviceCtx.ServerState = new EsclServerState(Logger);
         var server = new WebServer(o => o
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url)

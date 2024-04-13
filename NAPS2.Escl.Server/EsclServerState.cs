@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 
 namespace NAPS2.Escl.Server;
 
@@ -6,8 +7,15 @@ internal class EsclServerState
 {
     private const int CLEANUP_INTERVAL = 10_000;
 
-    private Timer? _cleanupTimer;
+    private readonly ILogger _logger;
+
     private readonly Dictionary<string, JobInfo> _jobDict = new();
+    private Timer? _cleanupTimer;
+
+    public EsclServerState(ILogger logger)
+    {
+        _logger = logger;
+    }
 
     public bool IsProcessing { get; set; }
 
@@ -38,6 +46,7 @@ internal class EsclServerState
             {
                 if (jobInfo.IsEligibleForCleanup)
                 {
+                    _logger.LogDebug($"Cleaning up job {jobInfo.Id} (state {jobInfo.State}, last updated {jobInfo.LastUpdated.Elapsed.TotalSeconds:F1} seconds ago)");
                     _jobDict.Remove(jobInfo.Id);
                     jobInfo.Job.Dispose();
                     if (_jobDict.Count == 0)
