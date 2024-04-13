@@ -430,6 +430,9 @@ public class PdfExporter
     private static void DrawOcrTextOnPdfiumPage(PdfPage page, Pdfium.PdfDocument pdfiumDocument,
         Pdfium.PdfPage pdfiumPage, PdfiumFontSubsets fontSubsets, OcrResult ocrResult)
     {
+        // Set the page measurements so the coordinates are scaled correctly in GetOcrTextToDraw
+        page.Width = pdfiumPage.Width;
+        page.Height = pdfiumPage.Height;
         using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
         foreach (var info in GetOcrTextToDraw(page, ocrResult, gfx))
         {
@@ -440,8 +443,7 @@ public class PdfExporter
             textObj.TextRenderMode = TextRenderMode.Invisible;
 #endif
             textObj.SetText(info.Text);
-            // This ends up being slightly different alignment then the PdfSharp-based text. Maybe at some point we can
-            // try to make them identical, although it's not perfect to begin with.
+            // The matrix alignment here is equivalent to the PDFSharp BaseLineLeft alignment
             textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - info.Y);
             pdfiumPage.InsertObject(textObj);
         }
