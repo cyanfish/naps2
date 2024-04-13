@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using GrpcDotNetNamedPipes;
 using static NAPS2.Remoting.ProcessCoordinatorService;
 
@@ -90,7 +91,7 @@ public class ProcessCoordinator(string basePath, string pipeNameFormat)
             using var procFile = new FileStream(ProcFilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read);
             procFile.SetLength(0);
             using var writer = new StreamWriter(procFile, Encoding.UTF8, 1024);
-            writer.WriteLine(Process.GetCurrentProcess().Id);
+            writer.WriteLine(Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture));
         }
         catch (Exception)
         {
@@ -104,7 +105,7 @@ public class ProcessCoordinator(string basePath, string pipeNameFormat)
         try
         {
             using var reader = new FileStream(ProcFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            var id = int.Parse(new StreamReader(reader).ReadLine()?.Trim() ?? "");
+            var id = int.Parse(new StreamReader(reader).ReadLine()?.Trim() ?? "", CultureInfo.InvariantCulture);
             return Process.GetProcessById(id);
         }
         catch (Exception)

@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Threading;
 using System.Xml;
 using Microsoft.Extensions.Logging;
@@ -276,8 +277,10 @@ public class TesseractOcrEngine : IOcrEngine
         var bounds = (0, 0, 0, 0);
         if (ParseData(element, "bbox", 4, out string[] parts))
         {
-            int x1 = int.Parse(parts[1]), y1 = int.Parse(parts[2]);
-            int x2 = int.Parse(parts[3]), y2 = int.Parse(parts[4]);
+            int x1 = int.Parse(parts[1], CultureInfo.InvariantCulture),
+                y1 = int.Parse(parts[2], CultureInfo.InvariantCulture);
+            int x2 = int.Parse(parts[3], CultureInfo.InvariantCulture),
+                y2 = int.Parse(parts[4], CultureInfo.InvariantCulture);
             bounds = (x1, y1, x2 - x1, y2 - y1);
         }
         return bounds;
@@ -288,7 +291,7 @@ public class TesseractOcrEngine : IOcrEngine
         int fontSize = 0;
         if (ParseData(element, "x_fsize", 1, out string[] parts))
         {
-            fontSize = int.Parse(parts[1]);
+            fontSize = int.Parse(parts[1], CultureInfo.InvariantCulture);
         }
         return fontSize;
     }
@@ -299,8 +302,8 @@ public class TesseractOcrEngine : IOcrEngine
         float b = 0;
         if (ParseData(element, "baseline", 2, out string[] parts))
         {
-            m = float.Parse(parts[1]);
-            b = float.Parse(parts[2]);
+            m = float.Parse(parts[1], CultureInfo.InvariantCulture);
+            b = float.Parse(parts[2], CultureInfo.InvariantCulture);
         }
         return (m, b);
     }
@@ -310,7 +313,7 @@ public class TesseractOcrEngine : IOcrEngine
         float angle = 0;
         if (ParseData(element, "textangle", 1, out string[] parts))
         {
-            angle = float.Parse(parts[1]);
+            angle = float.Parse(parts[1], CultureInfo.InvariantCulture);
         }
         return angle;
     }
