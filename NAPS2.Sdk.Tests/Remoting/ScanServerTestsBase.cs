@@ -32,7 +32,7 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
         _bridge = new MockScanBridge();
         var scanBridgeFactory = Substitute.For<IScanBridgeFactory>();
         scanBridgeFactory.Create(Arg.Any<ScanOptions>()).Returns(_bridge);
-        _server.ScanController = new ScanController(ScanningContext, scanBridgeFactory);
+        _server.ScanControllerFactory = () => new ScanController(ScanningContext, scanBridgeFactory);
         _server.SecurityPolicy = securityPolicy;
         _server.Certificate = certificate;
 

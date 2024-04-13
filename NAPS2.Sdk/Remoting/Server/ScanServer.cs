@@ -20,7 +20,7 @@ public class ScanServer : IDisposable
         _scanningContext = scanningContext;
         _esclServer = esclServer;
         _esclServer.Logger = _scanningContext.Logger;
-        ScanController = new ScanController(scanningContext);
+        ScanControllerFactory = () => new ScanController(scanningContext);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class ScanServer : IDisposable
         set => _esclServer.Certificate = value;
     }
 
-    internal ScanController ScanController { get; set; }
+    internal Func<ScanController> ScanControllerFactory { get; set; }
 
     public void SetDefaultIcon(IMemoryImage icon) =>
         SetDefaultIcon(icon.SaveToMemoryStream(ImageFileFormat.Png).ToArray());
@@ -89,7 +89,7 @@ public class ScanServer : IDisposable
                 IconPng = _defaultIconPng,
                 // TODO: Ideally we want to get the actual device capabilities (flatbed/feeder, resolution etc.)
             },
-            CreateJob = settings => new ScanJob(_scanningContext, ScanController, device.Device, settings)
+            CreateJob = settings => new ScanJob(_scanningContext, ScanControllerFactory(), device.Device, settings)
         };
     }
 
