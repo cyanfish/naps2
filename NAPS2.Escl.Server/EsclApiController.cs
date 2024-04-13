@@ -293,12 +293,16 @@ internal class EsclApiController : WebApiController
             // If we already have a document (i.e. if a connection error occured during the previous NextDocument
             // request), we stay at that same document and don't advance
             var cts = new CancellationTokenSource();
-            cts.CancelAfter(5000);
+            // TODO: Cancel this after a short interval.
+            // TODO: This is going to break clients that don't have 503 support, so we'll launch that first and keep this change for 7.5.0+
+            // cts.CancelAfter(1000);
             jobInfo.NextDocumentReady = jobInfo.NextDocumentReady || await jobInfo.Job.WaitForNextDocument(cts.Token);
         }
         catch (TaskCanceledException)
         {
             _logger.LogDebug("Waiting for document timed out, returning 503");
+            // Tell the client to retry after 2s
+            Response.Headers.Add("Retry-After", "2");
             Response.StatusCode = 503;
             return;
         }
