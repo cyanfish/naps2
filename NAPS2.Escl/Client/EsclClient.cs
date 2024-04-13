@@ -172,7 +172,7 @@ public class EsclClient
                     url =>
                     {
                         Logger.LogDebug("ESCL GET {Url}", url);
-                        return HttpClient.GetAsync(url);
+                        return HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
                     });
                 if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
                 {
@@ -190,9 +190,10 @@ public class EsclClient
                 response.EnsureSuccessStatusCode();
                 break;
             }
+            var data = await ReadStreamWithPerReadTimeout(await response.Content.ReadAsStreamAsync(), 10_000);
             var doc = new RawDocument
             {
-                Data = await response.Content.ReadAsByteArrayAsync(),
+                Data = data,
                 ContentType = response.Content.Headers.ContentType?.MediaType,
                 ContentLocation = response.Content.Headers.ContentLocation?.ToString()
             };
@@ -208,6 +209,23 @@ public class EsclClient
         {
             progressCts.Cancel();
         }
+    }
+
+    private static async Task<byte[]> ReadStreamWithPerReadTimeout(Stream stream, int timeout)
+    {
+        // We expect the server to be continuously sending some kind of data - if reads take longer than the timeout,
+        // we assume that the connection has been disrupted.
+        MemoryStream tempStream = new MemoryStream();
+        byte[] buffer = new byte[4096];
+        while (true)
+        {
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(timeout);
+            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, cts.Token);
+            if (bytesRead == 0) break;
+            tempStream.Write(buffer, 0, bytesRead);
+        }
+        return tempStream.ToArray();
     }
 
     public async Task<string> ErrorDetails(EsclJob job)
