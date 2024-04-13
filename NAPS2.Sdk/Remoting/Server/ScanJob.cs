@@ -142,17 +142,20 @@ internal class ScanJob : IEsclScanJob
         if (ContentType == ContentTypes.JPEG)
         {
             _enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
+            stream.Dispose();
             _enumerable.Current.Dispose();
         }
         if (ContentType == ContentTypes.PNG)
         {
             _enumerable.Current.Save(stream, ImageFileFormat.Png);
+            stream.Dispose();
             _enumerable.Current.Dispose();
         }
         if (ContentType == ContentTypes.PDF)
         {
             var pdfExporter = new PdfExporter(_scanningContext);
             await pdfExporter.Export(stream, _pdfImages);
+            stream.Dispose();
             foreach (var image in _pdfImages)
             {
                 image.Dispose();
