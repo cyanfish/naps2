@@ -20,7 +20,10 @@ public class EsclClient
         MaxConnectionsPerServer = 256,
         ConnectTimeout = TimeSpan.FromSeconds(5)
     };
-    private static readonly HttpClient VerifiedHttpClient = new(VerifiedHttpClientHandler);
+    private static readonly HttpClient VerifiedHttpClient = new(VerifiedHttpClientHandler)
+    {
+        Timeout = TimeSpan.FromSeconds(10)
+    };
 
     // Client that doesn't verify HTTPS certificates
     private static readonly HttpMessageHandler UnverifiedHttpClientHandler = new StandardSocketsHttpHandler
@@ -34,7 +37,10 @@ public class EsclClient
             RemoteCertificateValidationCallback = (_, _, _, _) => true
         }
     };
-    private static readonly HttpClient UnverifiedHttpClient = new(UnverifiedHttpClientHandler);
+    private static readonly HttpClient UnverifiedHttpClient = new(UnverifiedHttpClientHandler)
+    {
+        Timeout = TimeSpan.FromSeconds(10)
+    };
 
     private readonly EsclService _service;
     private bool _httpFallback;
