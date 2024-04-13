@@ -217,12 +217,12 @@ public class EsclClient
         }
     }
 
-    private static async Task<byte[]> ReadStreamWithPerReadTimeout(Stream stream, int timeout)
+    private async Task<byte[]> ReadStreamWithPerReadTimeout(Stream stream, int timeout)
     {
         // We expect the server to be continuously sending some kind of data - if reads take longer than the timeout,
         // we assume that the connection has been disrupted.
         MemoryStream tempStream = new MemoryStream();
-        byte[] buffer = new byte[4096];
+        byte[] buffer = new byte[65536];
         while (true)
         {
             var cts = new CancellationTokenSource();
