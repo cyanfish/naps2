@@ -252,26 +252,25 @@ public class GtkEtoPlatform : EtoPlatform
     {
         var native = control.ToNative();
         // Attach to the child so that the scrollbars don't steal the event from us
-        var child = (native as GTK.Bin)?.Child;
-        if (child == null)
+        if (native is GTK.EventBox eventBox)
         {
-            Log.Error("Expected scrollable to be GTK.Bin");
-            base.AttachMouseWheelEvent(control, eventHandler);
+            native = eventBox.Child;
         }
-        else
+        if (native is GTK.ScrolledWindow scrolledWindow)
         {
-            child.ScrollEvent += (sender, args) =>
-            {
-                var ev = args.Event;
-                var newArgs = new MouseEventArgs(
-                    MouseButtons.None,
-                    ev.State.ToEtoKey(),
-                    new PointF((float) ev.X, (float) ev.Y),
-                    // Negate deltaY to match WinForms
-                    new SizeF((float) ev.DeltaX, (float) -ev.DeltaY));
-                eventHandler.Invoke(sender, newArgs);
-                args.RetVal = newArgs.Handled;
-            };
+            native = scrolledWindow.Child;
         }
+        native.ScrollEvent += (sender, args) =>
+        {
+            var ev = args.Event;
+            var newArgs = new MouseEventArgs(
+                MouseButtons.None,
+                ev.State.ToEtoKey(),
+                new PointF((float) ev.X, (float) ev.Y),
+                // Negate deltaY to match WinForms
+                new SizeF((float) ev.DeltaX, (float) -ev.DeltaY));
+            eventHandler.Invoke(sender, newArgs);
+            args.RetVal = newArgs.Handled;
+        };
     }
 }

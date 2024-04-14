@@ -86,8 +86,8 @@ public abstract class DesktopForm : EtoFormBase
         // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)
         _contextMenu.Items.Add(Commands.SelectAll);
         _contextMenu.Opening += OpeningContextMenu;
-        _listView.Control.MouseWheel += ListViewMouseWheel;
-        _listView.Control.MouseMove += ListViewMouseMove;
+        EtoPlatform.Current.AttachMouseWheelEvent(_listView.Control, ListViewMouseWheel);
+        EtoPlatform.Current.AttachMouseMoveEvent(_listView.Control, ListViewMouseMove);
         EtoPlatform.Current.HandleKeyDown(this, _keyboardShortcuts.Perform);
         EtoPlatform.Current.HandleKeyDown(_listView.Control, _keyboardShortcuts.Perform);
 
@@ -526,7 +526,8 @@ public abstract class DesktopForm : EtoFormBase
     {
         if (e.Modifiers.HasFlag(Keys.Control))
         {
-            _thumbnailController.StepSize(e.Delta.Height); //  / (double) SystemInformation.MouseWheelScrollDelta
+            _thumbnailController.StepSize(e.Delta.Height);
+            e.Handled = true;
         }
     }
 

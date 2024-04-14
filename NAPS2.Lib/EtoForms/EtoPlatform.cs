@@ -140,4 +140,9 @@ public abstract class EtoPlatform
     {
         control.MouseWheel += eventHandler;
     }
+
+    public virtual void AttachMouseMoveEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
+    {
+        control.MouseMove += eventHandler;
+    }
 }

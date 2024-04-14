@@ -286,8 +286,15 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
         else
         {
-            throw new NotImplementedException("Only implemented for Scrollable");
+            var wfControl = control.ToNative();
+            wfControl.MouseWheel += (sender, e) => eventHandler(sender, e.ToEto(wfControl));
         }
+    }
+
+    public override void AttachMouseMoveEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
+    {
+        var wfControl = control.ToNative();
+        wfControl.MouseMove += (sender, e) => eventHandler(sender, e.ToEto(wfControl));
     }
 
     private class ScrollableWithMouseWheelEvents : ScrollableHandler.CustomScrollable
