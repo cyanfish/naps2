@@ -28,10 +28,8 @@ public abstract class ApplicationLifecycle
     protected virtual void HandleSingleInstance()
     {
         // Only start one instance if configured for SingleInstance
-        Log.Debug("HandleSingleInstance");
         if (_config.Get(c => c.SingleInstance))
         {
-            Log.Debug("SingleInstance enabled");
             if (!_processCoordinator.TryTakeInstanceLock())
             {
                 Log.Debug("Failed to get SingleInstance lock");
