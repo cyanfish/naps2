@@ -1,3 +1,6 @@
+Changes in 7.4.2:
+- Bug fixes
+
 Changes in 7.4.1:
 - Improved OCR text alignment
 - Added "Open With" support for PDF and image files
