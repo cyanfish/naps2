@@ -19,7 +19,7 @@
     <value>Le scanner sélectionné est éteint.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>La communication avec le périphérique de numérisation a été interrompue.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>

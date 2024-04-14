@@ -385,7 +385,7 @@
     <value>Automatski pokreni OPZ nakon skeniranja</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Preventivno pokreni OPZ nakon skeniranja</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Preuzmi više jezika</value>
@@ -691,7 +691,7 @@
     <value>Obrni obostrane listove</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Obrnite pozadinske stranice obostranih listova</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Verzija WIA:</value>

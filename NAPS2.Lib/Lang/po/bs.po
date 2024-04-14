@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-04-14 03:12\n"
 "Last-Translator: \n"
 "Language-Team: Bosnian\n"
 "Language: bs\n"
@@ -385,7 +385,7 @@ msgstr "Kombinuj"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Prekinuta je komunikacija sa uređajem za skeniranje."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -642,7 +642,7 @@ msgstr "Obrni"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Obrnite pozadinske stranice obostranih listova"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1062,7 +1062,7 @@ msgstr "Naknadna obrada"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Preventivno pokreni OPZ nakon skeniranja"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

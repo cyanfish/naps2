@@ -385,7 +385,7 @@
     <value>Exécuter automatiquement l'OCR après la numérisation</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Exécuter de façon préventive la ROC après la numérisation</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Obtenir plus de langues</value>

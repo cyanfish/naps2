@@ -379,7 +379,7 @@
     <value>Режим розпізнавання:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Виправити баланс білого кольору та прибрати шум</value>
+    <value>Виправляти баланс білого кольору та прибирати шум</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Автоматично розпізнавати після сканування</value>

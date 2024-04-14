@@ -385,7 +385,7 @@
     <value>Автоматично стартиране на Оптично разпознаване след сканиране</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Стартирайте превантивно OCR след сканиране</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Още езици</value>
@@ -691,7 +691,7 @@
     <value>Обърни двустранно сканираните страници</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Обърнете обратните страни на страниците</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia версия:</value>
