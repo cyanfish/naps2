@@ -18,7 +18,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
-        <PackageReference Include="Polyfill" Version="4.2.0" />
+         <PackageReference Include="Polyfill" Version="4.2.0" PrivateAssets="all" />
         <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
         <PackageReference Include="ZXing.Net" Version="0.16.9" />
 

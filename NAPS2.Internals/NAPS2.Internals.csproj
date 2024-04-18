@@ -15,7 +15,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
-        <PackageReference Include="Polyfill" Version="4.2.0" />
+         <PackageReference Include="Polyfill" Version="4.2.0" PrivateAssets="all" />
         <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
         <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     </ItemGroup>

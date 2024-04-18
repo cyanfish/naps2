@@ -16,7 +16,7 @@
 
         <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.1.0" />
         <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.2.0" />
-        <PackageReference Include="IsExternalInit" Version="1.0.3" />
+        <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
         <PackageReference Include="NSubstitute" Version="5.0.0" />
         <PackageReference Include="RichardSzalay.MockHttp" Version="7.0.0" />

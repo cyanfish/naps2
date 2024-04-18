@@ -11,7 +11,7 @@
         <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
 
         <PackageReference Include="LibUsbDotNet" Version="3.0.102-alpha" />
-        <PackageReference Include="Polyfill" Version="4.2.0" />
+         <PackageReference Include="Polyfill" Version="4.2.0" PrivateAssets="all" />
     </ItemGroup>
 
 </Project>
