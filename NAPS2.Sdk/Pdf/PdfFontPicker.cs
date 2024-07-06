@@ -201,7 +201,7 @@ internal static class PdfFontPicker
                 "slv" or "spa" or "sqi" or "srp_latn" or "sun" or "swa" or "swe" or "tat" or "ton" or "tur" or "uzb" or
                 "yor" => Alphabet.Latin,
             // Tesseract has separate "scripts" for Fraktur and Vietnamese but they both just use Latin characters
-            "enm" or "frm" or "frk" or "ita_old" or "spa_old" or "vie" => Alphabet.Latin,
+            "enm" or "frm" or "deu_latf" or "ita_old" or "spa_old" or "vie" => Alphabet.Latin,
             "mal" => Alphabet.Malayalam,
             "mya" => Alphabet.Myanmar,
             "ori" => Alphabet.Oriya,
