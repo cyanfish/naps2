@@ -80,9 +80,9 @@ internal class SystemEmailClients
         throw new Exception($"Could not find an entry point in dll for email: {dllPath}");
     }
 
-    private static string GetDllPath(string? clientName)
+    private string GetDllPath(string? clientName)
     {
-        if (string.IsNullOrEmpty(clientName))
+        if (string.IsNullOrEmpty(clientName) || clientName == GetDefaultName())
         {
             return DEFAULT_MAPI_DLL;
         }
