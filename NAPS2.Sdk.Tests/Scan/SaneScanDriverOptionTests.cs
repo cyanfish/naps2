@@ -125,6 +125,25 @@ public class SaneScanDriverOptionTests : ContextualTests
         Assert.Equal("Feeder(left aligned,Duplex)", device.GetValue(1));
     }
 
+    [Fact]
+    public void SetOptions_DuplicateOptions()
+    {
+        var device = new DeviceOptionsMock(new[]
+        {
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" }),
+            SaneOption.CreateForTesting(2, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" })
+        });
+        var options = new ScanOptions
+        {
+            PaperSource = PaperSource.Flatbed
+        };
+
+        var optionData = _driver.SetOptions(device, options);
+
+        Assert.False(optionData.IsFeeder);
+        Assert.Equal("Flatbed", device.GetValue(1));
+    }
+
     private class DeviceOptionsMock : ISaneDevice
     {
         private readonly IEnumerable<SaneOption> _options;

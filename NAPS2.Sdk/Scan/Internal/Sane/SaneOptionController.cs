@@ -25,7 +25,8 @@ internal class SaneOptionController
     {
         _options = _device.GetOptions()
             .Where(x => x.Name != null && x.Type != SaneValueType.Group)
-            .ToDictionary(x => x.Name!);
+            .GroupBy(x => x.Name!)
+            .ToDictionary(x => x.Key, x => x.First());
     }
 
     public bool TrySet(string name, double value)
