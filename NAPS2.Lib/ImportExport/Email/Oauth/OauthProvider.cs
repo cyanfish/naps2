@@ -169,6 +169,12 @@ public abstract class OauthProvider
         return JObject.Parse(response);
     }
 
+    protected async Task PostAuthorizedNoResponse(string url)
+    {
+        using var client = AuthorizedClient();
+        await client.UploadStringTaskAsync(url, "POST", "");
+    }
+
     private WebClient AuthorizedClient()
     {
         var client = new WebClient();

@@ -31,10 +31,18 @@ internal class OutlookWebEmailProvider : IEmailProvider
                 ["contentBytes"] = Convert.ToBase64String(File.ReadAllBytes(attachment.FilePath))
             }))
         };
-        var respUrl = await _outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progress);
+        var draft = await _outlookWebOauthProvider.UploadDraft(messageObj.ToString(), progress);
 
-        // Open the draft in the user's browser
-        ProcessHelper.OpenUrl(respUrl + "&ispopout=0");
+
+        if (emailMessage.AutoSend)
+        {
+            await _outlookWebOauthProvider.SendDraft(draft.MessageId);
+        }
+        else
+        {
+            // Open the draft in the user's browser
+            ProcessHelper.OpenUrl(draft.WebLink + "&ispopout=0");
+        }
 
         return true;
     }
