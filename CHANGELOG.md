@@ -1,3 +1,10 @@
+Changes in 7.4.3:
+- Fixed some ESCL connection issues
+- Fixed email compatibility with HCL Notes
+- Fixed issues with "Outlook Web Access" email provider
+- Fixed SANE compability with some HP devices
+- Fixed Fraktur-based languages for OCR
+
 Changes in 7.4.2:
 - Bug fixes
 
