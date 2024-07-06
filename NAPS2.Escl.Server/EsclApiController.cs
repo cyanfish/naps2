@@ -42,7 +42,7 @@ internal class EsclApiController : WebApiController
                     new XElement(ScanNs + "UUID", caps.Uuid),
                     new XElement(ScanNs + "AdminURI", ""),
                     new XElement(ScanNs + "IconURI", iconUri),
-                    new XElement(ScanNs + "Naps2Extensions", "Progress;ErrorDetails"),
+                    new XElement(ScanNs + "Naps2Extensions", "Progress;ErrorDetails;ShortTimeout"),
                     new XElement(ScanNs + "Platen",
                         new XElement(ScanNs + "PlatenInputCaps", GetCommonInputCaps())),
                     new XElement(ScanNs + "Adf",
@@ -293,9 +293,7 @@ internal class EsclApiController : WebApiController
             // If we already have a document (i.e. if a connection error occured during the previous NextDocument
             // request), we stay at that same document and don't advance
             var cts = new CancellationTokenSource();
-            // TODO: Cancel this after a short interval.
-            // TODO: This is going to break clients that don't have 503 support, so we'll launch that first and keep this change for 7.5.0+
-            // cts.CancelAfter(1000);
+            cts.CancelAfter(1000);
             jobInfo.NextDocumentReady = jobInfo.NextDocumentReady || await jobInfo.Job.WaitForNextDocument(cts.Token);
         }
         catch (TaskCanceledException)

@@ -97,6 +97,7 @@ internal class EsclScanDriver : IScanDriver
             var scanSettings = GetScanSettings(options, caps);
             bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
             bool hasErrorDetailsExtension = caps.Naps2Extensions?.Contains("ErrorDetails") ?? false;
+            bool hasShortTimeoutExtension = caps.Naps2Extensions?.Contains("ShortTimeout") ?? false;
             Action<double>? progressCallback = hasProgressExtension ? scanEvents.PageProgress : null;
 
             if (cancelToken.IsCancellationRequested) return;
@@ -120,7 +121,7 @@ internal class EsclScanDriver : IScanDriver
                     {
                         scanEvents.PageStart();
                     }
-                    var doc = await GetNextDocumentWithRetries(client, job, progressCallback);
+                    var doc = await GetNextDocumentWithRetries(client, job, progressCallback, hasShortTimeoutExtension);
                     if (doc == null) break;
                     foreach (var image in GetImagesFromRawDocument(options, doc))
                     {
@@ -176,15 +177,15 @@ internal class EsclScanDriver : IScanDriver
         return job;
     }
 
-    private async Task<RawDocument?> GetNextDocumentWithRetries(
-        EsclClient client, EsclJob job, Action<double>? progress)
+    private async Task<RawDocument?> GetNextDocumentWithRetries(EsclClient client, EsclJob job,
+        Action<double>? progress, bool shortTimeout)
     {
         int retries = 0;
         while (true)
         {
             try
             {
-                return await client.NextDocument(job, progress);
+                return await client.NextDocument(job, progress, shortTimeout);
             }
             catch (Exception ex)
             {

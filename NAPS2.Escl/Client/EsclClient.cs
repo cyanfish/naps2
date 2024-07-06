@@ -24,6 +24,10 @@ public class EsclClient
     {
         Timeout = TimeSpan.FromSeconds(10)
     };
+    private static readonly HttpClient LongTimeoutVerifiedHttpClient = new(VerifiedHttpClientHandler)
+    {
+        Timeout = TimeSpan.FromSeconds(120)
+    };
 
     // Client that doesn't verify HTTPS certificates
     private static readonly HttpMessageHandler UnverifiedHttpClientHandler = new StandardSocketsHttpHandler
@@ -40,6 +44,10 @@ public class EsclClient
     private static readonly HttpClient UnverifiedHttpClient = new(UnverifiedHttpClientHandler)
     {
         Timeout = TimeSpan.FromSeconds(10)
+    };
+    private static readonly HttpClient LongTimeoutUnverifiedHttpClient = new(UnverifiedHttpClientHandler)
+    {
+        Timeout = TimeSpan.FromSeconds(120)
     };
 
     private readonly EsclService _service;
@@ -59,6 +67,11 @@ public class EsclClient
     private HttpClient HttpClient => SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireTrustedCertificate)
         ? VerifiedHttpClient
         : UnverifiedHttpClient;
+
+    private HttpClient LongTimeoutHttpClient =>
+        SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireTrustedCertificate)
+            ? LongTimeoutVerifiedHttpClient
+            : LongTimeoutUnverifiedHttpClient;
 
     public async Task<EsclCapabilities> GetCapabilities()
     {
@@ -143,13 +156,13 @@ public class EsclClient
         return new XElement(elementName, value);
     }
 
-    public async Task<RawDocument?> NextDocument(EsclJob job, Action<double>? pageProgress = null)
+    public async Task<RawDocument?> NextDocument(EsclJob job, Action<double>? pageProgress = null, bool shortTimeout = false)
     {
         var progressCts = new CancellationTokenSource();
         if (pageProgress != null)
         {
             var progressUrl = GetUrl($"{job.UriPath}/Progress");
-            var progressResponse = await HttpClient.GetStreamAsync(progressUrl);
+            var progressResponse = await LongTimeoutHttpClient.GetStreamAsync(progressUrl);
             var streamReader = new StreamReader(progressResponse);
             _ = Task.Run(async () =>
             {
@@ -178,7 +191,8 @@ public class EsclClient
                     url =>
                     {
                         Logger.LogDebug("ESCL GET {Url}", url);
-                        return HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                        var client = shortTimeout ? HttpClient : LongTimeoutHttpClient;
+                        return client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
                     });
                 if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
                 {
