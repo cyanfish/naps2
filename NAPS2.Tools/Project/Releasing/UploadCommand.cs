@@ -241,10 +241,11 @@ public class UploadCommand : ICommand<UploadOptions>
         }
         Directory.CreateDirectory(aptTemp);
 
-        Cli.Run("ssh", "user@downloads.naps2.com \"mkdir -p /home/user/apt-temp/\"");
-        Cli.Run("ssh", "user@downloads.naps2.com \"cd /var/www/html/ ; apt-ftparchive packages . > /home/user/apt-temp/Packages\" ; apt-ftparchive release . > /home/user/apt-temp/Release\"");
-        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp/Packages {Path.Combine(aptTemp, "Packages")}");
-        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp/Release {Path.Combine(aptTemp, "Release")}");
+        Cli.Run("ssh", "user@downloads.naps2.com \"mkdir -p /home/user/apt-temp-packages/\"");
+        Cli.Run("ssh", "user@downloads.naps2.com \"mkdir -p /home/user/apt-temp-release/\"");
+        Cli.Run("ssh", "user@downloads.naps2.com \"cd /var/www/html/ ; apt-ftparchive packages . > /home/user/apt-temp-packages/Packages\" ; apt-ftparchive release /home/user/apt-temp-packages/ > /home/user/apt-temp-release/Release\"");
+        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp-packages/Packages {Path.Combine(aptTemp, "Packages")}");
+        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp-release/Release {Path.Combine(aptTemp, "Release")}");
         Cli.Run("gpg", $"--output {Path.Combine(aptTemp, "Release.gpg")} --sign {Path.Combine(aptTemp, "Release")}");
         Cli.Run("gpg", $"--output {Path.Combine(aptTemp, "InRelease")} --clearsign {Path.Combine(aptTemp, "Release")}");
         Cli.Run("scp", $"{Path.Combine(aptTemp, "Packages")} user@downloads.naps2.com:/var/www/html/Packages");
