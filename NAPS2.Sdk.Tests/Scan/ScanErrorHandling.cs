@@ -35,7 +35,7 @@ public class ScanErrorHandling : ContextualTests
     }
 
     [Fact]
-    public async void Scan_CreateScanBridge()
+    public async Task Scan_CreateScanBridge()
     {
         var localPostProcessor = Substitute.For<ILocalPostProcessor>();
         var bridgeFactory = Substitute.For<IScanBridgeFactory>();
@@ -78,7 +78,7 @@ public class ScanErrorHandling : ContextualTests
     }
 
     [Fact]
-    public async void Scan_LocalPostProcess()
+    public async Task Scan_LocalPostProcess()
     {
         var localPostProcessor = Substitute.For<ILocalPostProcessor>();
         var bridge = new MockScanBridge { MockOutput = [CreateScannedImage()] };
@@ -96,7 +96,7 @@ public class ScanErrorHandling : ContextualTests
     }
 
     [Fact]
-    public async void Scan_BridgeScan()
+    public async Task Scan_BridgeScan()
     {
         var localPostProcessor = Substitute.For<ILocalPostProcessor>();
         var bridge = new MockScanBridge { Error = new InvalidOperationException() };

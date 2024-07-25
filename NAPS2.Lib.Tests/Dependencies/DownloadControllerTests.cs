@@ -36,7 +36,7 @@ public class DownloadControllerTests : ContextualTests
     }
 
     [Fact]
-    public async void NoQueue()
+    public async Task NoQueue()
     {
         MockHttpMessageHandler handler = new();
         DownloadController controller = new(ScanningContext, handler.ToHttpClient());
@@ -52,7 +52,7 @@ public class DownloadControllerTests : ContextualTests
     }
 
     [Fact]
-    public async void NoUrl()
+    public async Task NoUrl()
     {
         DownloadInfo info = new("", [], 0, "0000000000000000000000000000000000000000", DownloadFormat.Gzip);
 
@@ -67,7 +67,7 @@ public class DownloadControllerTests : ContextualTests
     }
 
     [Fact]
-    public async void InvalidChecksum()
+    public async Task InvalidChecksum()
     {
         _httpHandler.Expect(DummyValidUrl).Respond("application/gzip", _dogsGzipStream);
 
@@ -88,7 +88,7 @@ public class DownloadControllerTests : ContextualTests
     }
 
     [Fact]
-    public async void InvalidMirrorsChecksum()
+    public async Task InvalidMirrorsChecksum()
     {
         _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz",
             [new DownloadMirror(DummyInvalidUrl), new DownloadMirror(DummyValidUrl)], 0, StockDogJpegSHA1, DownloadFormat.Gzip));
@@ -109,7 +109,7 @@ public class DownloadControllerTests : ContextualTests
     }
 
     [Fact]
-    public async void Valid()
+    public async Task Valid()
     {
         _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz", [new DownloadMirror(DummyValidUrl)], 0, StockDogJpegSHA1, DownloadFormat.Gzip));
 
@@ -128,7 +128,7 @@ public class DownloadControllerTests : ContextualTests
     }
 
     [Fact]
-    public async void ValidUsingMirrorUrl()
+    public async Task ValidUsingMirrorUrl()
     {
         _mockComponent.DownloadInfo.Returns(new DownloadInfo("temp.gz",
             [new DownloadMirror(DummyInvalidUrl), new DownloadMirror(DummyValidUrl)], 0, StockDogJpegSHA1, DownloadFormat.Gzip));
