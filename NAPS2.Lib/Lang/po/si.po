@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Sinhala\n"
 "Language: si\n"
@@ -115,7 +115,7 @@ msgstr "මාරුවෙන් මාරුවට කොළ එකතු ක�
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "සෑමවිටම පෙන්වන්න"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -123,11 +123,11 @@ msgstr "මෙම PDF ගොනුව ලබාගැනීමට අමතර �
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "OCR ධාවනය කිරීමේදී දෝෂයක් ඇති විය."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr ""
+msgstr "අවසර දීමට උත්සාහ කිරීමේදී දෝෂයක් ඇති විය."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
@@ -135,7 +135,7 @@ msgstr "නිතැන් සුරැකීමට උත්සාහ කරද
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
-msgstr ""
+msgstr "යාවත්කාලීන ස්ථාපනය කිරීමට උත්සාහ කිරීමේදී දෝෂයක් ඇති විය."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -143,7 +143,7 @@ msgstr "ගොනුව සුරැකීමට උත්සාහ කරද්
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr ""
+msgstr "ඊමේල් යැවීමට උත්සාහ කිරීමේදී දෝෂයක් ඇති විය."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
@@ -156,7 +156,7 @@ msgstr "පරිලෝකකයෙහි උපක්‍රම ධාවකය�
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr ""
+msgstr "මෙහෙයුමක් ක්‍රියාත්මකයි. මෙහෙයුම අවලංගු කර පිටවීමට අවශ්‍ය ද?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
@@ -324,7 +324,7 @@ msgstr ""
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
-msgstr ""
+msgstr "අවලංගු කරන්න"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
@@ -356,11 +356,11 @@ msgstr ""
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr ""
+msgstr "පැතිකඩ තෝරන්න"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr ""
+msgstr "උපාංගය තෝරන්න"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message

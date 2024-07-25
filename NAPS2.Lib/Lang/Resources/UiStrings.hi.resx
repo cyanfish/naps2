@@ -16,10 +16,10 @@
     <value>सॉफ्टवेयर के बारे में</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>कॉपीराइट {0} NAPS2 योगदानकर्ता</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Icons from:</value>
+    <value>चिह्न प्रदाता:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>अद्यतन के लिए जाँच</value>
@@ -28,28 +28,28 @@
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>दान करें</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiles</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>New</value>
+    <value>नया</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>संपादित करें</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>नष्ट करें</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scan</value>
+    <value>स्कैन करें</value>
   </data>
   <data name="SetDefault" xml:space="preserve">
     <value>Set Default</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>Copy</value>
+    <value>प्रतिलिपि बनाएँ</value>
   </data>
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>
@@ -58,7 +58,7 @@
     <value>Undo</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>फिर से करें</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
     <value>Undo {0}</value>
@@ -67,13 +67,13 @@
     <value>Redo {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Done</value>
+    <value>पूर्ण</value>
   </data>
   <data name="Default" xml:space="preserve">
-    <value>Default</value>
+    <value>डिफ़ॉल्ट (न्यून)</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
-    <value>New Profile</value>
+    <value>नया प्रोफ़ाइल</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
     <value>बैच स्कैन</value>
@@ -85,10 +85,10 @@
     <value>Profiles</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Import</value>
+    <value>आयात करें</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Save PDF</value>
+    <value>पीडीएफ सेव करें</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
     <value>PDF Settings</value>
@@ -97,10 +97,10 @@
     <value>Save Images</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
-    <value>Image Settings</value>
+    <value>छवि समायोजन</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>पीडीएफ(PDF) ईमेल करे</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
     <value>Email Settings</value>
@@ -109,19 +109,19 @@
     <value>Print</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>छवि</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="Crop" xml:space="preserve">
-    <value>Crop</value>
+    <value>क्रॉप करें</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
     <value>चमक/विपरीतता</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>रंग / संतृप्ति</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
     <value>काला और सफेद</value>
@@ -130,7 +130,7 @@
     <value>Sharpen</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>दस्तावेज़ सुधार</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -145,19 +145,19 @@
     <value>Rotate Right</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Flip</value>
+    <value>पलटें</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Deskew</value>
+    <value>तिरछापन दूर करें</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>Custom Rotation</value>
+    <value>कस्टम घुमाव</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Move Up</value>
+    <value>ऊपर की ओर खिसकाए</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Move Down</value>
+    <value>नीचे की ओर खिसकाए</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Reorder</value>
@@ -166,7 +166,7 @@
     <value>Interleave</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Deinterleave</value>
+    <value>बीच में छूड़ाव हटाये</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
     <value>वैकल्पिक इंटरलीव</value>
@@ -184,22 +184,22 @@
     <value>Reverse Selected</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
+    <value>क्लियर करें</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>सभी साफ करें</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>भाषा</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>इंटरफेस</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>"स्कैन" मेनू डिफ़ॉल्ट प्रोफ़ाइल को बदल देता है</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>Show "Profiles" toolbar</value>
@@ -208,13 +208,13 @@
     <value>Show page numbers</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>स्कैन करे</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>स्कैन करे</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>एप्लिकेशन</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
     <value>Only allow a single NAPS2 instance</value>
@@ -235,7 +235,7 @@
     <value>Zoom Actual</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Scale With Window</value>
+    <value>खिड़की के साथ स्केल करें</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
@@ -244,19 +244,19 @@
     <value>Save All</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>चयनित सेव करें</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
     <value>Save All as PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>चयनित को पीडीएफ के रूप में सेव करें</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
     <value>Save All as Images</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>चयनित को छवियों के रूप में सेव करें</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
     <value>Email All</value>
@@ -274,7 +274,7 @@
     <value>Profile Settings</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Display name:</value>
+    <value>प्रदर्शित होने वाला नाम:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>WIA Driver</value>
@@ -283,7 +283,7 @@
     <value>TWAIN Driver</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ईएससीएल (ESCL) ड्राइवर</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
     <value>ESCL Network Driver</value>
@@ -298,10 +298,10 @@
     <value>SANE Driver</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
-    <value>Device:</value>
+    <value>उपकरण:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Choose device</value>
+    <value>डिवाइस का चयन करें</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Use predefined settings</value>
@@ -328,10 +328,10 @@
     <value>Horizontal align:</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
-    <value>Scale:</value>
+    <value>पैमाना</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
-    <value>Contrast:</value>
+    <value>कन्ट्रास्ट:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
     <value>Enable Auto Save</value>
@@ -370,7 +370,7 @@
     <value>OCR Setup</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
-    <value>Make PDFs searchable using OCR</value>
+    <value>ओसीआर (OCR) का उपयोग करके पीडीएफ को खोजने योग्य बनाएं</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
     <value>OCR language:</value>
@@ -403,16 +403,16 @@
     <value>Estimated download size: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Download</value>
+    <value>डाउनलोड करें</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Download Progress</value>
+    <value>डाउनलोड प्रगति</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
     <value>Preview</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Next</value>
+    <value>अगला</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
@@ -430,13 +430,13 @@
     <value>Select All</value>
   </data>
   <data name="Recover" xml:space="preserve">
-    <value>Recover</value>
+    <value>पुनर्प्राप्त करें</value>
   </data>
   <data name="NotNow" xml:space="preserve">
     <value>Not Now</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Recover Scanned Images</value>
+    <value>स्कैन की गई छवियाँ पुनर्प्राप्त करें</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
     <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
@@ -451,7 +451,7 @@
     <value>Single page files</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Encrypt PDF</value>
+    <value>PDF सुरक्षित करे</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Show</value>
@@ -487,7 +487,7 @@
     <value>फॉर्म भरने की अनुमति दें</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>Default File Path:</value>
+    <value>डिफ़ॉल्ट फ़ाइल पथ</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
     <value>File Path:</value>
@@ -502,7 +502,7 @@
     <value>Subject:</value>
   </data>
   <data name="KeywordsLabel" xml:space="preserve">
-    <value>Keywords:</value>
+    <value>खोजशब्द:</value>
   </data>
   <data name="OwnerPasswordLabel" xml:space="preserve">
     <value>Owner Password:</value>
@@ -514,13 +514,13 @@
     <value>Remember these settings</value>
   </data>
   <data name="Metadata" xml:space="preserve">
-    <value>Metadata</value>
+    <value>मेटाडाटा</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Encryption</value>
+    <value>सुरक्षा अनुभाग</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
-    <value>Compatibility</value>
+    <value>संगतता</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
     <value>Placeholders</value>
@@ -532,16 +532,16 @@
     <value>Year (00-99)</value>
   </data>
   <data name="Month2Digit" xml:space="preserve">
-    <value>Month (01-12)</value>
+    <value>महीना (0-12)</value>
   </data>
   <data name="Day2Digit" xml:space="preserve">
-    <value>Day (01-31)</value>
+    <value>दिन (01-31)</value>
   </data>
   <data name="Hour2Digit" xml:space="preserve">
-    <value>Hour (0-23)</value>
+    <value>घंटा (0-23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
-    <value>Minute (00-59)</value>
+    <value>मिनट (00-59)</value>
   </data>
   <data name="Second2Digit" xml:space="preserve">
     <value>Second (00-59)</value>
@@ -559,7 +559,7 @@
     <value>स्वत: बढ़ती संख्या (1 अंक)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>File Name:</value>
+    <value>फ़ाइल का नाम</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Preview:</value>
@@ -568,16 +568,16 @@
     <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
-    <value>Jpeg Quality</value>
+    <value>Jpeg की गुणवत्ता</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
     <value>Tiff Options</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
-    <value>Compression:</value>
+    <value>कम्प्रेशन</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Image Settings</value>
+    <value>छवि समायोजन</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>Email Settings</value>
@@ -586,7 +586,7 @@
     <value>Settings</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Provider</value>
+    <value>प्रदाता</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>परिवर्तन</value>
@@ -595,7 +595,7 @@
     <value>अनुलग्नक का नाम:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Choose Email Provider</value>
+    <value>ईमेल प्रदाता चुनें</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
     <value>अधिकृत</value>
@@ -604,7 +604,7 @@
     <value>Waiting for authorization...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>त्रुटि</value>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Technical Details</value>
@@ -628,22 +628,22 @@
     <value>Separate files by Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>More info</value>
+    <value>और जाने</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Clear images after saving</value>
+    <value>सहेजने के बाद छवियाँ साफ़ करें</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
     <value>Keep images across sessions</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
-    <value>Custom Page Size</value>
+    <value>कस्टम पेज आकार</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
-    <value>Name (optional)</value>
+    <value>नाम (वैकल्पिक)</value>
   </data>
   <data name="Dimensions" xml:space="preserve">
-    <value>Dimensions</value>
+    <value>आयाम</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Waiting for TWAIN to complete...</value>
@@ -652,28 +652,28 @@
     <value>उन्नत प्रोफ़ाइल सेटिंग्स</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
-    <value>Image Quality</value>
+    <value>छवि की गुणवत्ता</value>
   </data>
   <data name="MaximumQuality" xml:space="preserve">
-    <value>Maximum quality (large files)</value>
+    <value>अधिकतम गुणवत्ता (बड़ी फ़ाइलें)</value>
   </data>
   <data name="BlankPages" xml:space="preserve">
     <value>खाली पन्ने</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Exclude blank pages</value>
+    <value>खाली पेज रहने दे</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
     <value>White Threshold</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
-    <value>Coverage Threshold</value>
+    <value>कवरेज सीमा</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
     <value>Post-processing</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Deskew scanned pages</value>
+    <value>स्कैन किए गए पृष्ठों से तिरछापन दूर करें</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>स्कैन के बाद चमक/कंट्रास्ट लागू करें</value>
@@ -685,7 +685,7 @@
     <value>Stretch to page size</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Crop to page size</value>
+    <value>पृष्ठ आकार के अनुसार काटें</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Flip duplexed pages</value>
@@ -718,10 +718,10 @@
     <value>Single scan</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Multiple scans (prompt between scans)</value>
+    <value>एकाधिक स्कैन (स्कैन के बीच संकेत)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
-    <value>Multiple scans (fixed delay between scans)</value>
+    <value>एकाधिक स्कैन (स्कैन के बीच निश्चित विलंब)</value>
   </data>
   <data name="NumberOfScansLabel" xml:space="preserve">
     <value>Number of scans:</value>
@@ -730,19 +730,19 @@
     <value>Time between scans (seconds):</value>
   </data>
   <data name="LoadIn" xml:space="preserve">
-    <value>Load images into NAPS2</value>
+    <value>NAPS2 में छवियाँ लोड करें</value>
   </data>
   <data name="SaveToSingleFile" xml:space="preserve">
-    <value>Save to a single file</value>
+    <value>एकल फ़ाइल में सेव करें</value>
   </data>
   <data name="SaveToMultipleFiles" xml:space="preserve">
-    <value>Save to multiple files</value>
+    <value>एकाधिक फ़ाइलों में सेव करें</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
-    <value>Next Scan</value>
+    <value>अगला स्कैन</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
     <value>Ready for scan {0}.</value>
@@ -772,16 +772,16 @@
     <value>Shared Scanner Settings</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>क्या आप वाकई शेयरिंग बंद करना चाहते हैं?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Share even when NAPS2 is closed</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>एकाधिक भाषाएँ...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>एकाधिक भाषाएँ</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
     <value>Show native TWAIN progress</value>
@@ -790,6 +790,6 @@
     <value>Split</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>मिलाएँ</value>
   </data>
 </root>

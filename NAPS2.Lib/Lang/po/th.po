@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Thai\n"
 "Language: th\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "ค่าเริ่มต้นของปุ่ม \"บันทึก\""
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "ค่าเริ่มต้นของปุ่ม \"สแกน\""
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr ""
+msgstr "สี 24 บิต"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -58,11 +58,11 @@ msgstr ""
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
-msgstr ""
+msgstr "ขั้นสูง"
 
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
-msgstr ""
+msgstr "การตั้งค่าโปรไฟล์ขั้นสูง"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -232,24 +232,24 @@ msgstr ""
 
 #: UiStrings.resx$AuthorizeFormTitle$Message
 msgid "Authorize"
-msgstr ""
+msgstr "อนุญาต"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "อัตโนมัติ"
 
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr ""
+msgstr "การตั้งค่าบันทึกอัตโนมัติ"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "การเพิ่มจำนวนอัตโนมัติ (1 หลัก)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr ""
+msgstr "การเพิ่มจำนวนอัตโนมัติ (2 หลัก)"
 
 #: UiStrings.resx$AutoIncrementing3Digit$Message
 msgid "Auto-incrementing number (3 digits)"
@@ -294,7 +294,7 @@ msgstr "ดีที่สุด"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
-msgstr ""
+msgstr "ความลึกบิต"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
@@ -303,11 +303,11 @@ msgstr ""
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
 msgid "Black and White"
-msgstr ""
+msgstr "ขาวดำ"
 
 #: UiStrings.resx$BlankPages$Message
 msgid "Blank Pages"
-msgstr ""
+msgstr "หน้าว่าง"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -332,7 +332,7 @@ msgstr ""
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr ""
+msgstr "กำลังยกเลิก...."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -344,7 +344,7 @@ msgstr ""
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr ""
+msgstr "ตรวจสอบเวอร์ชันใหม่"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
@@ -409,7 +409,7 @@ msgstr ""
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
-msgstr ""
+msgstr "กำลังคัดลอก..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
@@ -506,7 +506,7 @@ msgstr ""
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "บริจาค"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"

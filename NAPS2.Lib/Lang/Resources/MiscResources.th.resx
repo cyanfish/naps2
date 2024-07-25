@@ -196,7 +196,7 @@
     <value>Batch cancelled.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Cancelling....</value>
+    <value>กำลังยกเลิก....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
     <value>Batch completed successfully.</value>
@@ -259,7 +259,7 @@
     <value>พิมพ์</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Copying...</value>
+    <value>กำลังคัดลอก...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
     <value>Copy Progress</value>
@@ -334,7 +334,7 @@
     <value>Cancel Batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>บริจาค</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 is completely free. Consider making a donation.</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -156,8 +156,7 @@ msgstr "Si è verificato un errore con il driver di scansione."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "E' in corso un'operazione. \n"
-"Vuoi uscire e annullare questa operazione?"
+msgstr "È in corso un'operazione. Sicuro di volere uscire e annullare questa operazione?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
@@ -266,7 +265,7 @@ msgstr "Dopo la scansione avvia automaticamente l'OCR"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr "B4 (250×353 mm)"
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
@@ -333,7 +332,7 @@ msgstr "Annulla operazione in serie"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr "Annullamento in corso...."
+msgstr "Annullamento...."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -465,7 +464,7 @@ msgstr "Percorso file predefinito:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr "Inverti interfoliazione"
+msgstr "Deinterleave"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
@@ -507,7 +506,7 @@ msgstr "Correzione documento"
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr "Donazione"
+msgstr "Dona"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
@@ -752,7 +751,7 @@ msgstr "Interfaccia"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr "Interfoliazione"
+msgstr "Interleave"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -1499,7 +1498,7 @@ msgstr "Lo scanner selezionato non supporta l'uso di un alimentatore automatico.
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "Lo scanner selezionato non supporta la scansione in fronte retro. Se lo scanner supporta la scansione in fronte retro, prova a usare un driver differente."
+msgstr "Lo scanner selezionato non supporta la scansione fronte retro. Se lo scanner dovrebbe supportare la scansione fronte retro, prova a usare un driver differente."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
@@ -1618,7 +1617,7 @@ msgstr "Soglia bianco"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr "Versione WIA:"
+msgstr "Versione Wia:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1699,8 +1698,7 @@ msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "{0} immagine/i digitalizzata/e il {1} alle ore {2} potrebbero non essere state salvate e sono recuperabili. \n"
-"Vuoi recuperarle?"
+msgstr "{0} immagine/i digitalizzata/e il {1} alle ore {2} potrebbero non essere state salvate e sono recuperabili. Vuoi recuperarle?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

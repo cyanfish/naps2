@@ -19,7 +19,7 @@
     <value>Den valda skannern är offline.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Kommunikationen med skanningsenheten avbröts.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>

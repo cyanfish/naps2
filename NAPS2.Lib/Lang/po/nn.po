@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Nynorsk\n"
 "Language: nn_NO\n"
@@ -385,7 +385,7 @@ msgstr "Slå saman"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Kommunikasjon med skannaren vart avbroten."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -642,7 +642,7 @@ msgstr "Vend"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Vend baksida av dupleks-sider"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1062,7 +1062,7 @@ msgstr "Post-prosessering"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Kjør OCR automatisk etter skanning"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

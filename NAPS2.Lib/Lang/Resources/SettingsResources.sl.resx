@@ -154,7 +154,7 @@
     <value>Shrani izbrano</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Vprašaj vsakič</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
     <value>Prompt If Selected</value>
@@ -163,6 +163,6 @@
     <value>Scan With Default Profile</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Vprašaj vsakič</value>
   </data>
 </root>

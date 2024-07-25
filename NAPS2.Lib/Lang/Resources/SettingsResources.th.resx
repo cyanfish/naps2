@@ -13,10 +13,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Black and White</value>
+    <value>ขาวดำ</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>24-bit Color</value>
+    <value>สี 24 บิต</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Grayscale</value>
@@ -109,7 +109,7 @@
     <value>Glass</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>อัตโนมัติ</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>

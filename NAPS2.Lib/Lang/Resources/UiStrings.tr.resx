@@ -55,10 +55,10 @@
     <value>Yapıştır</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Geri al</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Yinele</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
     <value>Undo {0}</value>
@@ -778,18 +778,18 @@
     <value>NAPS2 kapalıyken de paylaş</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>Çoklu Dil...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>Çoklu Dil</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
     <value>Show native TWAIN progress</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Böl</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Birleştir</value>
   </data>
 </root>

@@ -19,16 +19,16 @@
     <value>The selected scanner is offline.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>स्कैनिंग डिवाइस के साथ संचार बाधित हो गया।</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>No device selected.</value>
+    <value>कोई उपकरण चयनित नहीं।</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No scanning device was found.</value>
+    <value>कोई स्कैनिंग उपकरण नहीं मिला।</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>स्कैनिंग ड्राइवर के साथ कोई त्रुटि उत्पन्न हुई.</value>
@@ -43,7 +43,7 @@
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>No pages are in the feeder.</value>
+    <value>फीडर में कोई पेज नहीं है।</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>You do not have permission to copy content from the file '{0}'.</value>

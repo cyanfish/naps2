@@ -19,7 +19,7 @@
     <value>Выбранный сканер отключён.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Связь с устройством сканирования была прервана.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>

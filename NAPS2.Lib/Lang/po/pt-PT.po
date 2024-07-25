@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
@@ -29,7 +29,7 @@ msgstr "Ação padrão do botão \"Digitalizar\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr "O menu \"Digitalizar\" altera perfil padrão"
+msgstr "O menu \"Digitalizar\" altera o perfil padrão"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -192,7 +192,7 @@ msgstr "Aplicar às {0} imagens selecionadas"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "Tem a certeza de pretende cancelar a digitalização em lote?"
+msgstr "Tem a certeza de que pretende cancelar a digitalização em lote?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -385,7 +385,7 @@ msgstr "Combinar"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "A comunicação com o digitalizador foi interrompida."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -413,7 +413,7 @@ msgstr "A copiar…"
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr "Direitos de autor {0}, Contribuidores NAPS2"
+msgstr "Direitos de autor {0}, Colaboradores NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -449,7 +449,7 @@ msgstr "Personalizar..."
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
-msgstr "Dia (01-31)"
+msgstr "Dias (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -497,7 +497,7 @@ msgstr "Dimensões"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
-msgstr "Nome mostrado:"
+msgstr "Nome a exibir:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
@@ -606,7 +606,7 @@ msgstr "Erro"
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Tamanho estimado da descarga: {0} MB"
+msgstr "Tamanho estimado da transferência: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -634,7 +634,7 @@ msgstr "Caminho do ficheiro:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr "Corrigir brancos e remover ruído"
+msgstr "Corrigir balanço de brancos e remover ruído"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -642,7 +642,7 @@ msgstr "Inverter"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Inverter lados das páginas duplas"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -678,7 +678,7 @@ msgstr "Alinhamento horizontal:"
 
 #: UiStrings.resx$Hour2Digit$Message
 msgid "Hour (0-23)"
-msgstr "Hora (0-23)"
+msgstr "Horas (0-23)"
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
@@ -703,7 +703,7 @@ msgstr "Qualidade da imagem"
 #: UiStrings.resx$ImageSettings$Message
 #: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
-msgstr "Definições da Imagem"
+msgstr "Definições de imagem"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved."
@@ -811,7 +811,7 @@ msgstr "Metadados"
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
-msgstr "Minuto (00-59)"
+msgstr "Minutos (00-59)"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -857,7 +857,7 @@ msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 é totalmente gratuito. Considere fazer uma doação."
+msgstr "NAPS2 é totalmente gratuito. Considere fazer um donativo."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -1045,7 +1045,7 @@ msgstr "Origem do papel:"
 
 #: UiStrings.resx$PdfPasswordFormTitle$Message
 msgid "Password"
-msgstr "Palavra-passe"
+msgstr "Senha"
 
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
@@ -1062,7 +1062,7 @@ msgstr "Pós-processamento"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Efetuar OCR após a digitalização"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1217,7 +1217,7 @@ msgstr "Guardar tudo"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr "Guardar tudo como imagem"
+msgstr "Guardar tudo como imagens"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
@@ -1298,7 +1298,7 @@ msgstr "Imagem digitalizada"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr "Partilha de digitalização"
+msgstr "Partilha de digitalizador"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1315,7 +1315,7 @@ msgstr "A digitalizar página {0}..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
-msgstr "Segundo (00-59)"
+msgstr "Segundos (00-59)"
 
 #: UiStrings.resx$Select$Message
 msgid "Select"
@@ -1364,15 +1364,15 @@ msgstr "Partilhar mesmo se NAPS2 estiver fechado"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr "Definições da partilha"
+msgstr "Definições partilhadas do digitalizador"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr "."
+msgstr "Digitalizadores partilhados podem ser usados a partir de outros computadores na rede local selecionando \"Controlador ESCL\" nas configurações do perfil NAPS2 do outro computador."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
-msgstr "Melhorar"
+msgstr "Nitidez"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1447,11 +1447,11 @@ msgstr "O controlador SANE não está disponível. Certifique-se que instala os 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
-msgstr "Não foi possível importar \"{0}\"."
+msgstr "Não foi possível importar o ficheiro \"{0}\"."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Não foi possível importar \"{0}\". Apenas pode importar ficheiros PDF gerados por NAPS2."
+msgstr "Não foi possível importar o ficheiro \"{0}\". Apenas pode importar ficheiros PDF gerados por NAPS2."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1463,7 +1463,7 @@ msgstr "O ficheiro {0} já existe. Deseja substituir?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr "O seguinte ficheiro está cifrado e requer uma palavra-passe para ser aberto:"
+msgstr "O seguinte ficheiro está cifrado e requer uma senha para ser aberto:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1498,7 +1498,7 @@ msgstr "Aparentemente, o digitalizador escolhido não possui um alimentador. Se 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "Aparentemente, o digitalizador escolhido não permite digitalização em frente e verso. Se for suposto que o digitalizador permita, tente usar um controlador diferente."
+msgstr "Aparentemente, o digitalizador escolhido não permite digitalização em frente e verso. Se é suposto que o digitalizador o permita, tente usar um controlador diferente."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
@@ -1560,7 +1560,7 @@ msgstr "Progresso da atualização"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr "A pesquisa de atualizações está desativada."
+msgstr "A verificação de atualizações está desativada."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1572,15 +1572,15 @@ msgstr "A enviar e-mail..."
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
-msgstr "Interface nativa"
+msgstr "Usar interface nativa"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "Usar configuração pré-definida"
+msgstr "Usar configuração predefinida"
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
-msgstr "Palavra-passe do utilizador:"
+msgstr "Senha do utilizador:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
@@ -1625,7 +1625,7 @@ msgstr "Ano"
 
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
-msgstr "Ano (00-99)"
+msgstr "Anos (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 #: SdkResources.resx$PdfNoPermissionToExtractContent$Message

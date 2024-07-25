@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Slovenian\n"
 "Language: sl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
 "X-Crowdin-Project: naps2\n"
 "X-Crowdin-Project-ID: 531762\n"
 "X-Crowdin-Language: sl\n"
@@ -115,7 +115,7 @@ msgstr "Drugačno Prepletanje"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Vprašaj vsakič"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -180,7 +180,7 @@ msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Aplikacija"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -381,7 +381,7 @@ msgstr "Zapri"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "Združi"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
@@ -747,7 +747,7 @@ msgstr "Namestitev spodletela."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Vmesnik"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -1132,11 +1132,11 @@ msgstr "Potek Reševanja"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "Uveljavi"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "Uveljjavi {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1298,7 +1298,7 @@ msgstr "Skenirana Slika"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Deljenje optičnega bralnika"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1380,7 +1380,7 @@ msgstr "Pokaži"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "Prikaži vrstico \"Profili\""
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
@@ -1404,7 +1404,7 @@ msgstr "Preskoči okno shranjevanja"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "Razdeli"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1544,11 +1544,11 @@ msgstr "US Letter (8.5x11 in)"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "Razveljavi"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "Razveljevi {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

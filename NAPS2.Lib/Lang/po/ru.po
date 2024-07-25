@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -381,11 +381,11 @@ msgstr "Закрыть"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "Объединить"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Связь с устройством сканирования была прервана."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -642,7 +642,7 @@ msgstr "Отразить"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Перевернуть обратные стороны дуплексных листов"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1062,7 +1062,7 @@ msgstr "Постобработка"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Превентивно запускать распознавание после сканирования"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1132,11 +1132,11 @@ msgstr "Процесс восстановления"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "Повторить"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "Повторить {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1404,7 +1404,7 @@ msgstr "Пропустить запрос на сохранение"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "Разделить"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1544,11 +1544,11 @@ msgstr "US Letter (8.5x11 дюймов)"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "Отменить"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "Отменить {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

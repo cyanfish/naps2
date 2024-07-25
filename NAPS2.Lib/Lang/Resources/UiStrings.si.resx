@@ -301,7 +301,7 @@
     <value>Device:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Choose device</value>
+    <value>උපාංගය තෝරන්න</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Use predefined settings</value>
@@ -346,7 +346,7 @@
     <value>ප්‍රගත  </value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>අවලංගු කරන්න</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>

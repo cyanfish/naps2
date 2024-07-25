@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -385,7 +385,7 @@ msgstr "Spojit"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Komunikace se skenovacím zařízením byla přerušena."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -642,7 +642,7 @@ msgstr "Překlopit"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Obrácení zadních stran oboustranných stránek"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1062,7 +1062,7 @@ msgstr "Následné zpracování"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Předběžné spuštění OCR po skenování"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

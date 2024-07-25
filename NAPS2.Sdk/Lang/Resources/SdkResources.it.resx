@@ -49,7 +49,7 @@
     <value>Non hai i permessi per copiare il contenuto dal file '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta la scansione in fronte retro. Se lo scanner supporta la scansione in fronte retro, prova a usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta la scansione fronte retro. Se lo scanner dovrebbe supportare la scansione fronte retro, prova a usare un driver differente.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>Lo scanner selezionato è occupato.</value>

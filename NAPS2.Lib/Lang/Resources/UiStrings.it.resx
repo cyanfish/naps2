@@ -28,7 +28,7 @@
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donazione</value>
+    <value>Dona</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profili</value>
@@ -163,10 +163,10 @@
     <value>Riordina</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Interfoliazione</value>
+    <value>Interleave</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Inverti interfoliazione</value>
+    <value>Deinterleave</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
     <value>Interfoliazione alternativa</value>
@@ -439,7 +439,7 @@
     <value>Ripristino immagini digitalizzate</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} immagine/i digitalizzata/e il {1} alle ore {2} potrebbero non essere state salvate e sono recuperabili. \nVuoi recuperarle?</value>
+    <value>{0} immagine/i digitalizzata/e il {1} alle ore {2} potrebbero non essere state salvate e sono recuperabili. Vuoi recuperarle?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Segnaposti</value>
@@ -694,7 +694,7 @@
     <value>Capovolgi lati posteriori pagine fronte/retro</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Versione WIA:</value>
+    <value>Versione Wia:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementazione Twain:</value>

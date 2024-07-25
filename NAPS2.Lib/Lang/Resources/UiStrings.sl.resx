@@ -55,16 +55,16 @@
     <value>Prilepi</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Razveljavi</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Uveljavi</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Razveljevi {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Uveljjavi {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Končaj</value>
@@ -196,13 +196,13 @@
     <value>Nastavitve</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Vmesnik</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
     <value>"Scan" menu changes default profile</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Prikaži vrstico "Profili"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
     <value>Prikaži številko strani</value>
@@ -214,7 +214,7 @@
     <value>Privzeto dejanje gumba "Shrani":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplikacija</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
     <value>Only allow a single NAPS2 instance</value>
@@ -760,10 +760,10 @@
     <value>Souporaba</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Deljenje optičnega bralnika</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Deljenje optičnega bralnika</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
     <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
@@ -787,9 +787,9 @@
     <value>Show native TWAIN progress</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Razdeli</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Združi</value>
   </data>
 </root>

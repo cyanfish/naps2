@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -385,7 +385,7 @@ msgstr "Yhdistä"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Yhteys skannauslaitteen kanssa keskeytyi."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -634,7 +634,7 @@ msgstr "Tiedostopolku:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Korjaa valkotasapaino ja poista kohinaa"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -831,11 +831,11 @@ msgstr "Siirrä ylös"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "Useita kieliä"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "Useita kieliä..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"

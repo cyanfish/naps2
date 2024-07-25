@@ -127,7 +127,7 @@
     <value>Selecionadas ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Tamanho estimado da descarga: {0} MB</value>
+    <value>Tamanho estimado da transferência: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
     <value>{0} / {1} ficheiros</value>
@@ -136,10 +136,10 @@
     <value>{0} / {1} MB</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Não foi possível importar "{0}".</value>
+    <value>Não foi possível importar o ficheiro "{0}".</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Não foi possível importar "{0}". Apenas pode importar ficheiros PDF gerados por NAPS2.</value>
+    <value>Não foi possível importar o ficheiro "{0}". Apenas pode importar ficheiros PDF gerados por NAPS2.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Erro ao descarregar</value>
@@ -223,7 +223,7 @@
     <value>A guardar lote...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Aparentemente, o digitalizador escolhido não permite digitalização em frente e verso. Se for suposto que o digitalizador permita, tente usar um controlador diferente.</value>
+    <value>Aparentemente, o digitalizador escolhido não permite digitalização em frente e verso. Se é suposto que o digitalizador o permita, tente usar um controlador diferente.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -328,7 +328,7 @@
     <value>Um componente adicional é necessário para importar este ficheiro PDF. Descarregar agora?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Tem a certeza de pretende cancelar a digitalização em lote?</value>
+    <value>Tem a certeza de que pretende cancelar a digitalização em lote?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
     <value>Cancelar lote</value>
@@ -337,7 +337,7 @@
     <value>Doar</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 é totalmente gratuito. Considere fazer uma doação.</value>
+    <value>NAPS2 é totalmente gratuito. Considere fazer um donativo.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>O controlador SANE não está disponível. Certifique-se que instala os pacotes necessários:</value>
@@ -367,7 +367,7 @@
     <value>A verificar...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>A pesquisa de atualizações está desativada.</value>
+    <value>A verificação de atualizações está desativada.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Ocorreu um erro ao tentar instalar a atualização.</value>

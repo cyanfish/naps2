@@ -163,7 +163,7 @@
     <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>E' in corso un'operazione. \nVuoi uscire e annullare questa operazione?</value>
+    <value>È in corso un'operazione. Sicuro di volere uscire e annullare questa operazione?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Modifiche non salvate</value>
@@ -196,7 +196,7 @@
     <value>Scansione in serie annullata.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Annullamento in corso....</value>
+    <value>Annullamento....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
     <value>Scansione in serie completata.</value>
@@ -223,7 +223,7 @@
     <value>Salvataggio risultati operazioni in serie...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Lo scanner selezionato non supporta la scansione in fronte retro. Se lo scanner supporta la scansione in fronte retro, prova a usare un driver differente.</value>
+    <value>Lo scanner selezionato non supporta la scansione fronte retro. Se lo scanner dovrebbe supportare la scansione fronte retro, prova a usare un driver differente.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -334,7 +334,7 @@
     <value>Annulla operazione in serie</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donazione</value>
+    <value>Dona</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 è totalmente gratuito. Considera la possibilità di fare una donazione.</value>

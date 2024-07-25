@@ -100,7 +100,7 @@
     <value>Sélectionner un profil avant de cliquer sur « Numériser ».</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Une erreur est survenue avec le pilote de numérisation.</value>
+    <value>Une erreur est survenue avec le pilote d'acquisition.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version {0}</value>
@@ -190,7 +190,7 @@
     <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Une erreur inconnue s'est produite lors de la numérisation par lot.</value>
+    <value>Une erreur inconnue s'est produite lors de l'acquisition par lot.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Lot annulé.</value>
@@ -202,7 +202,7 @@
     <value>Lot terminé avec succès.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Numérisation par lot arrêtée en raison d'une erreur.</value>
+    <value>Acquisition par lot arrêtée en raison d'une erreur.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>Acquisition de la page {0}...</value>
@@ -223,7 +223,7 @@
     <value>Enregistrement des acquisitions par lot…</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Le scanner sélectionné ne semble pas gérer pas le recto-verso. S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
+    <value>Le scanner sélectionné ne semble pas gérer pas le recto-verso (duplex). S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -340,7 +340,7 @@
     <value>NAPS2 est gratuit, mais il est possible de faire un don.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets requis :</value>
+    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets nécessaires :</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
     <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis :</value>

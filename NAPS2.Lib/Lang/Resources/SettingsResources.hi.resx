@@ -19,16 +19,16 @@
     <value>24-बिट रंग</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Grayscale</value>
+    <value>ग्रेस्केल</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
     <value>{0} dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>स्वयं का एसएमटीपी(SMTP)</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
-    <value>Gmail</value>
+    <value>जीमेल</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Web Access</value>
@@ -40,13 +40,13 @@
     <value>एप्पल मेल</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>कोई प्रदाता चयनित नहीं।</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>केन्द्र</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Left</value>
+    <value>बाएं</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
     <value>Right</value>
@@ -76,7 +76,7 @@
     <value>बी5 (176x250 मिलीमीटर)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Custom...</value>
+    <value>कस्टम...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -85,7 +85,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>डिफ़ॉल्ट (न्यून)</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -100,7 +100,7 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Duplex</value>
+    <value>डुप्लेक्स</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
     <value>Feeder</value>
@@ -121,16 +121,16 @@
     <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>डिफ़ॉल्ट (न्यून)</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>लीगेसी (केवल मूल यूआई)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>नेटिव ट्रांसफर</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>मेमोरी ट्रांसफर</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Old DSM</value>
@@ -139,10 +139,10 @@
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>डिफ़ॉल्ट (न्यून)</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>तेज</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>श्रेष्ठ</value>
@@ -151,10 +151,10 @@
     <value>Save All</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>चयनित सेव करें</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>हमेशा पूछें</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
     <value>Prompt If Selected</value>
@@ -163,6 +163,6 @@
     <value>Scan With Default Profile</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>हमेशा पूछें</value>
   </data>
 </root>

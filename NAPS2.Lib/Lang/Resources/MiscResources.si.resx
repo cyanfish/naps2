@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseProfile" xml:space="preserve">
-    <value>Choose Profile</value>
+    <value>පැතිකඩ තෝරන්න</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
@@ -163,7 +163,7 @@
     <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>මෙහෙයුමක් ක්‍රියාත්මකයි. මෙහෙයුම අවලංගු කර පිටවීමට අවශ්‍ය ද?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Unsaved Changes</value>
@@ -214,7 +214,7 @@
     <value>Waiting for scan {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>අවලංගු කරන්න</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
@@ -370,7 +370,7 @@
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>An error occurred when trying to install the update.</value>
+    <value>යාවත්කාලීන ස්ථාපනය කිරීමට උත්සාහ කිරීමේදී දෝෂයක් ඇති විය.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Install {0}</value>
@@ -379,13 +379,13 @@
     <value>An update is available.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>අවසර දීමට උත්සාහ කිරීමේදී දෝෂයක් ඇති විය.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Uploading email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>ඊමේල් යැවීමට උත්සාහ කිරීමේදී දෝෂයක් ඇති විය.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Scanning page {0}...</value>

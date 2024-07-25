@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -381,7 +381,7 @@ msgstr "Kapat"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "Birleştir"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
@@ -831,11 +831,11 @@ msgstr "Yukarı Taşı"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "Çoklu Dil"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "Çoklu Dil..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1132,7 +1132,7 @@ msgstr "Kurtarma Süreci"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "Yinele"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
@@ -1404,7 +1404,7 @@ msgstr "Kaydetme istemini atla"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "Böl"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1544,7 +1544,7 @@ msgstr "US Letter (8.5x11 inç)"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "Geri al"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"

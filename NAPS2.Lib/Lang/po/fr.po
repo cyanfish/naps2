@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-14 03:12\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -152,7 +152,7 @@ msgstr "Une erreur est survenue en essayant d'envoyer un courriel."
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "Une erreur est survenue avec le pilote de numérisation."
+msgstr "Une erreur est survenue avec le pilote d'acquisition."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
@@ -160,7 +160,7 @@ msgstr "Une opération est en cours. Faut-il vraiment quitter et annuler l'opér
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr "Une erreur inconnue s'est produite lors de la numérisation par lot."
+msgstr "Une erreur inconnue s'est produite lors de l'acquisition par lot."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -286,7 +286,7 @@ msgstr "Lot terminé avec succès."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "Numérisation par lot arrêtée en raison d'une erreur."
+msgstr "Acquisition par lot arrêtée en raison d'une erreur."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
@@ -642,7 +642,7 @@ msgstr "Retourner"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Retourner le verso des pages duplex"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -1062,7 +1062,7 @@ msgstr "Post-traitement"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr "Exécuter de façon préventive la ROC après la numérisation"
+msgstr "Exécuter l'OCR immédiatement après la numérisation"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1442,7 +1442,7 @@ msgstr "L'opération OCR a expiré."
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "Le pilote SANE n'est pas disponible. Merci d'installer les paquets requis :"
+msgstr "Le pilote SANE n'est pas disponible. Merci d'installer les paquets nécessaires :"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
@@ -1498,7 +1498,7 @@ msgstr "Le scanner sélectionné ne semble pas disposer de dispositif d'alimenta
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
 msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
-msgstr "Le scanner sélectionné ne semble pas gérer pas le recto-verso. S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote."
+msgstr "Le scanner sélectionné ne semble pas gérer pas le recto-verso (duplex). S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote."
 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -385,7 +385,7 @@ msgstr "Sammanfoga"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Kommunikationen med skanningsenheten avbröts."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -642,11 +642,11 @@ msgstr "Vänd"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Vänd duplexsidors baksidor"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr "Vänd duplex-sidor"
+msgstr "Vänd duplexsidor"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
@@ -1062,7 +1062,7 @@ msgstr "Efterbehandling"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Kör OCR efter skanning i förebyggande syfte"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-07-25 03:19\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "स्कैन करे"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "स्कैन करे"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "\"स्कैन\" मेनू डिफ़ॉल्ट प्रोफ़ाइल को बदल देता है"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -115,7 +115,7 @@ msgstr "वैकल्पिक इंटरलीव"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "हमेशा पूछें"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -180,7 +180,7 @@ msgstr "एप्पल मेल"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "एप्लिकेशन"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -216,7 +216,7 @@ msgstr "क्या आप वाकई {0} प्रोफ़ाइल हट�
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "क्या आप वाकई शेयरिंग बंद करना चाहते हैं?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -348,193 +348,193 @@ msgstr "अद्यतन के लिए जाँच"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr ""
+msgstr "जांच की जा रही है"
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "ईमेल प्रदाता चुनें"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr ""
+msgstr "प्रोफ़ाइल चुनें"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr ""
+msgstr "डिवाइस का चयन करें"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
 msgid "Clear"
-msgstr ""
+msgstr "क्लियर करें"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "सभी साफ करें"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "सहेजने के बाद छवियाँ साफ़ करें"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
-msgstr ""
+msgstr "बंद करे"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "मिलाएँ"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "स्कैनिंग डिवाइस के साथ संचार बाधित हो गया।"
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
-msgstr ""
+msgstr "संगतता"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
-msgstr ""
+msgstr "कम्प्रेशन"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
-msgstr ""
+msgstr "कन्ट्रास्ट:"
 
 #: UiStrings.resx$Copy$Message
 msgid "Copy"
-msgstr ""
+msgstr "प्रतिलिपि बनाएँ"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr ""
+msgstr "कॉपी प्रगति"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
-msgstr ""
+msgstr "कॉपी करी जा रही है |"
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "कॉपीराइट {0} NAPS2 योगदानकर्ता"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
-msgstr ""
+msgstr "कवरेज सीमा"
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
-msgstr ""
+msgstr "क्रॉप करें"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr ""
+msgstr "पृष्ठ आकार के अनुसार काटें"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr ""
+msgstr "पसंद के अनुसार ({0}x{1} {2})"
 
 #: UiStrings.resx$PageSizeFormTitle$Message
 msgid "Custom Page Size"
-msgstr ""
+msgstr "कस्टम पेज आकार"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
-msgstr ""
+msgstr "कस्टम घुमाव"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
-msgstr ""
+msgstr "स्वयं का एसएमटीपी(SMTP)"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom..."
-msgstr ""
+msgstr "कस्टम..."
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
-msgstr ""
+msgstr "दिन (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$WiaVersion_Default$Message
 #: UiStrings.resx$Default$Message
 msgid "Default"
-msgstr ""
+msgstr "डिफ़ॉल्ट (न्यून)"
 
 #: UiStrings.resx$DefaultFilePathLabel$Message
 msgid "Default File Path:"
-msgstr ""
+msgstr "डिफ़ॉल्ट फ़ाइल पथ"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr ""
+msgstr "बीच में छूड़ाव हटाये"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
 msgid "Delete"
-msgstr ""
+msgstr "नष्ट करें"
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
-msgstr ""
+msgstr "तिरछापन दूर करें"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr ""
+msgstr "तिरछापन दूर करने की प्रगति"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr ""
+msgstr "स्कैन किए गए पृष्ठों से तिरछापन दूर करें"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr ""
+msgstr "तिरछापन दूर किया जा रहा है..."
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
-msgstr ""
+msgstr "उपकरण:"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
-msgstr ""
+msgstr "आयाम"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
-msgstr ""
+msgstr "प्रदर्शित होने वाला नाम:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "दस्तावेज़ सुधार"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr ""
+msgstr "दान करें"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
-msgstr ""
+msgstr "पूर्ण"
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
-msgstr ""
+msgstr "डाउनलोड करें"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr ""
+msgstr "डाउनलोड एरर"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr ""
+msgstr "डाउनलोड की आवश्यकता है"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr ""
+msgstr "डाउनलोड प्रगति"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
-msgstr ""
+msgstr "डुप्लेक्स"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ईएससीएल (ESCL) ड्राइवर"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
@@ -546,7 +546,7 @@ msgstr ""
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
-msgstr ""
+msgstr "संपादित करें"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -559,7 +559,7 @@ msgstr ""
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr ""
+msgstr "पीडीएफ(PDF) ईमेल करे"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
@@ -588,11 +588,11 @@ msgstr ""
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "PDF सुरक्षित करे"
 
 #: UiStrings.resx$Encryption$Message
 msgid "Encryption"
-msgstr ""
+msgstr "सुरक्षा अनुभाग"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -601,7 +601,7 @@ msgstr ""
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
-msgstr ""
+msgstr "त्रुटि"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -614,11 +614,11 @@ msgstr ""
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "खाली पेज रहने दे"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "तेज"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -626,7 +626,7 @@ msgstr ""
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr ""
+msgstr "फ़ाइल का नाम"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -638,7 +638,7 @@ msgstr ""
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
-msgstr ""
+msgstr "पलटें"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
@@ -666,11 +666,11 @@ msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "जीमेल"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr ""
+msgstr "ग्रेस्केल"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -678,32 +678,32 @@ msgstr ""
 
 #: UiStrings.resx$Hour2Digit$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "घंटा (0-23)"
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "रंग / संतृप्ति"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr ""
+msgstr "चिह्न प्रदाता:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
-msgstr ""
+msgstr "छवि"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr ""
+msgstr "इमेज फाइल"
 
 #: UiStrings.resx$ImageQuality$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "छवि की गुणवत्ता"
 
 #: UiStrings.resx$ImageSettings$Message
 #: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "छवि समायोजन"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved."
@@ -711,43 +711,43 @@ msgstr ""
 
 #: UiStrings.resx$Import$Message
 msgid "Import"
-msgstr ""
+msgstr "आयात करें"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr ""
+msgstr "आयात की प्रगति"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
-msgstr ""
+msgstr "आयत हो रहा है {0}..."
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
-msgstr ""
+msgstr "आयत हो रहा है"
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "अधिस्थापित {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
-msgstr ""
+msgstr "अधिस्थापना पूर्ण"
 
 #: MiscResources.resx$InstallFailedTitle$Message
 msgid "Installation Failed"
-msgstr ""
+msgstr "अधिस्थापना विफल"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr ""
+msgstr "अधिस्थापना पूर्ण। क्या आप अब NAPS2 को पुनः आरंभ करना चाहते हैं?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
-msgstr ""
+msgstr "अधिस्थापना विफल।"
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "इंटरफेस"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -755,15 +755,15 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
-msgstr ""
+msgstr "JPEG File (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG2000 File (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
-msgstr ""
+msgstr "Jpeg की गुणवत्ता"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
@@ -771,7 +771,7 @@ msgstr ""
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
-msgstr ""
+msgstr "खोजशब्द:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
@@ -779,136 +779,136 @@ msgstr ""
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
-msgstr ""
+msgstr "भाषा"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr ""
+msgstr "बाएं"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr ""
+msgstr "लीगेसी (केवल मूल यूआई)"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
-msgstr ""
+msgstr "NAPS2 में छवियाँ लोड करें"
 
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
-msgstr ""
+msgstr "ओसीआर (OCR) का उपयोग करके पीडीएफ को खोजने योग्य बनाएं"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
-msgstr ""
+msgstr "अधिकतम गुणवत्ता (बड़ी फ़ाइलें)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "मेमोरी ट्रांसफर"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
-msgstr ""
+msgstr "मेटाडाटा"
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
-msgstr ""
+msgstr "मिनट (00-59)"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
-msgstr ""
+msgstr "महीना (0-12)"
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
-msgstr ""
+msgstr "और जाने"
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
-msgstr ""
+msgstr "नीचे की ओर खिसकाए"
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
-msgstr ""
+msgstr "ऊपर की ओर खिसकाए"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "एकाधिक भाषाएँ"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "एकाधिक भाषाएँ..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr ""
+msgstr "एकाधिक स्कैन (स्कैन के बीच निश्चित विलंब)"
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr ""
+msgstr "एकाधिक स्कैन (स्कैन के बीच संकेत)"
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr ""
+msgstr "NAPS2 पूरी तरह से मुफ़्त है। दान देने पर विचार करें।"
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "नाम (वैकल्पिक)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
-msgstr ""
+msgstr "नाम गायब है।"
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "नेटिव ट्रांसफर"
 
 #: UiStrings.resx$New$Message
 msgid "New"
-msgstr ""
+msgstr "नया"
 
 #: UiStrings.resx$NewProfile$Message
 msgid "New Profile"
-msgstr ""
+msgstr "नया प्रोफ़ाइल"
 
 #: UiStrings.resx$Next$Message
 msgid "Next"
-msgstr ""
+msgstr "अगला"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
-msgstr ""
+msgstr "अगला स्कैन"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
-msgstr ""
+msgstr "कोई उपकरण चयनित नहीं।"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder."
-msgstr ""
+msgstr "फीडर में कोई पेज नहीं है।"
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr ""
+msgstr "कोई प्रदाता चयनित नहीं।"
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found."
-msgstr ""
+msgstr "कोई स्कैनिंग उपकरण नहीं मिला।"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr ""
+msgstr "कोई अपडेट उपलब्ध नहीं है।"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -1108,7 +1108,7 @@ msgstr ""
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
-msgstr ""
+msgstr "प्रदाता"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
@@ -1116,15 +1116,15 @@ msgstr ""
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
-msgstr ""
+msgstr "पुनर्प्राप्त करें"
 
 #: UiStrings.resx$RecoverFormTitle$Message
 msgid "Recover Scanned Images"
-msgstr ""
+msgstr "स्कैन की गई छवियाँ पुनर्प्राप्त करें"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
-msgstr ""
+msgstr "पुनर्प्राप्त हो रही है..."
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
@@ -1132,7 +1132,7 @@ msgstr ""
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "फिर से करें"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
@@ -1235,53 +1235,53 @@ msgstr ""
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
 msgid "Save PDF"
-msgstr ""
+msgstr "पीडीएफ सेव करें"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr ""
+msgstr "पीडीएफ की प्रगति सेव करें"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "चयनित सेव करें"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
-msgstr ""
+msgstr "चयनित को छवियों के रूप में सेव करें"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "चयनित को पीडीएफ के रूप में सेव करें"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
-msgstr ""
+msgstr "एकल फ़ाइल में सेव करें"
 
 #: UiStrings.resx$SaveToMultipleFiles$Message
 msgid "Save to multiple files"
-msgstr ""
+msgstr "एकाधिक फ़ाइलों में सेव करें"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr ""
+msgstr "खेप परिणाम सेव कारा जा रहा है..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
-msgstr ""
+msgstr "सेव कारा जा रहा है {0}..."
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
-msgstr ""
+msgstr "खिड़की के साथ स्केल करें"
 
 #: UiStrings.resx$ScaleLabel$Message
 msgid "Scale:"
-msgstr ""
+msgstr "पैमाना"
 
 #: MiscResources.resx$Scan$Message
 #: UiStrings.resx$Scan$Message
 msgid "Scan"
-msgstr ""
+msgstr "स्कैन करें"
 
 #: UiStrings.resx$ScanConfig$Message
 msgid "Scan Configuration"

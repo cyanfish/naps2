@@ -19,7 +19,7 @@
     <value>O digitalizador escolhido está desligado.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>A comunicação com o digitalizador foi interrompida.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -37,7 +37,7 @@
     <value>Versão {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Não foi possível importar "{0}".</value>
+    <value>Não foi possível importar o ficheiro "{0}".</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Aparentemente, o digitalizador escolhido não possui um alimentador. Se o seu digitalizador possuir um alimentador, tente usar um controlador diferente.</value>
@@ -49,7 +49,7 @@
     <value>Não tem permissão para copiar conteúdo do ficheiro "{0}".</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>Aparentemente, o digitalizador escolhido não permite digitalização em frente e verso. Se for suposto que o digitalizador permita, tente usar um controlador diferente.</value>
+    <value>Aparentemente, o digitalizador escolhido não permite digitalização em frente e verso. Se é suposto que o digitalizador o permita, tente usar um controlador diferente.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>O digitalizador escolhido está ocupado.</value>

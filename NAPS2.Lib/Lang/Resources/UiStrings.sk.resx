@@ -385,7 +385,7 @@
     <value>Po skenovaní automaticky spustiť OCR</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Predbežné spustenie OCR po skenovaní</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Získať viac jazykov</value>
@@ -691,7 +691,7 @@
     <value>Preklopiť obojstranný scan</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Preklopenie zadných strán obojstranných strán</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Verzia WIA:</value>

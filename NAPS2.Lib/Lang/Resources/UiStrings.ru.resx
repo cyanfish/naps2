@@ -55,16 +55,16 @@
     <value>Вставить</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Отменить</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Повторить</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Отменить {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Повторить {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Готово</value>
@@ -385,7 +385,7 @@
     <value>Автоматически запустить распознавание текста (OCR) после сканирования</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Превентивно запускать распознавание после сканирования</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Установить другие языки</value>
@@ -691,7 +691,7 @@
     <value>Развернуть дуплексные страницы</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Перевернуть обратные стороны дуплексных листов</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Версия WIA:</value>
@@ -787,9 +787,9 @@
     <value>Показать "нативный" прогресс TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Разделить</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Объединить</value>
   </data>
 </root>

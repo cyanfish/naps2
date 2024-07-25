@@ -385,7 +385,7 @@
     <value>Exécuter automatiquement l'OCR après la numérisation</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Exécuter de façon préventive la ROC après la numérisation</value>
+    <value>Exécuter l'OCR immédiatement après la numérisation</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Obtenir plus de langues</value>
@@ -691,7 +691,7 @@
     <value>Retourner les pages recto-verso</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Retourner le verso des pages duplex</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Version WIA :</value>

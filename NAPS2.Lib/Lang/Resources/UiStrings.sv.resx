@@ -385,7 +385,7 @@
     <value>Kör automatiskt OCR efter skanning</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Kör OCR efter skanning i förebyggande syfte</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Hämta fler språk</value>
@@ -688,10 +688,10 @@
     <value>Ändra till sidstorlek </value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Vänd duplex-sidor</value>
+    <value>Vänd duplexsidor</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Vänd duplexsidors baksidor</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>WIA-version:</value>

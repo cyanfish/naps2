@@ -22,13 +22,13 @@
     <value>Icons from:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>ตรวจสอบเวอร์ชันใหม่</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>ตกลง</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>บริจาค</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiles</value>
@@ -124,7 +124,7 @@
     <value>Hue / Saturation</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
-    <value>Black and White</value>
+    <value>ขาวดำ</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
     <value>Sharpen</value>
@@ -208,10 +208,10 @@
     <value>Show page numbers</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>ค่าเริ่มต้นของปุ่ม "สแกน"</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>ค่าเริ่มต้นของปุ่ม "บันทึก"</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Application</value>
@@ -322,7 +322,7 @@
     <value>Brightness:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Bit depth:</value>
+    <value>ความลึกบิต</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
     <value>Horizontal align:</value>
@@ -337,13 +337,13 @@
     <value>Enable Auto Save</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>การตั้งค่าบันทึกอัตโนมัติ</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>การตั้งค่าบันทึกอัตโนมัติ</value>
   </data>
   <data name="Advanced" xml:space="preserve">
-    <value>Advanced</value>
+    <value>ขั้นสูง</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>ยกเลิก</value>
@@ -553,10 +553,10 @@
     <value>Auto-incrementing number (3 digits)</value>
   </data>
   <data name="AutoIncrementing2Digit" xml:space="preserve">
-    <value>Auto-incrementing number (2 digits)</value>
+    <value>การเพิ่มจำนวนอัตโนมัติ (2 หลัก)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>การเพิ่มจำนวนอัตโนมัติ (1 หลัก)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>File Name:</value>
@@ -598,7 +598,7 @@
     <value>Choose Email Provider</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Authorize</value>
+    <value>อนุญาต</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Waiting for authorization...</value>
@@ -649,7 +649,7 @@
     <value>Waiting for TWAIN to complete...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>Advanced Profile Settings</value>
+    <value>การตั้งค่าโปรไฟล์ขั้นสูง</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
     <value>Image Quality</value>
@@ -658,7 +658,7 @@
     <value>Maximum quality (large files)</value>
   </data>
   <data name="BlankPages" xml:space="preserve">
-    <value>Blank Pages</value>
+    <value>หน้าว่าง</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
     <value>Exclude blank pages</value>

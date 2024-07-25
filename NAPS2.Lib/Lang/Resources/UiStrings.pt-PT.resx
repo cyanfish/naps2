@@ -16,7 +16,7 @@
     <value>Acerca</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Direitos de autor {0}, Contribuidores NAPS2</value>
+    <value>Direitos de autor {0}, Colaboradores NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ícones de:</value>
@@ -97,7 +97,7 @@
     <value>Guardar imagens</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
-    <value>Definições da Imagem</value>
+    <value>Definições de imagem</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>Enviar por e-mail</value>
@@ -127,7 +127,7 @@
     <value>Preto e branco</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>Melhorar</value>
+    <value>Nitidez</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
     <value>Correção do documento</value>
@@ -199,7 +199,7 @@
     <value>Interface</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>O menu "Digitalizar" altera perfil padrão</value>
+    <value>O menu "Digitalizar" altera o perfil padrão</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>Mostrar barra de ferramentas "Perfis"</value>
@@ -253,7 +253,7 @@
     <value>Guardar seleção como PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Guardar tudo como imagem</value>
+    <value>Guardar tudo como imagens</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
     <value>Guardar seleção como imagem</value>
@@ -274,7 +274,7 @@
     <value>Definições de perfil</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Nome mostrado:</value>
+    <value>Nome a exibir:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>Controlador WIA</value>
@@ -304,10 +304,10 @@
     <value>Escolha o dispositivo</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
-    <value>Usar configuração pré-definida</value>
+    <value>Usar configuração predefinida</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
-    <value>Interface nativa</value>
+    <value>Usar interface nativa</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
     <value>Origem do papel:</value>
@@ -379,13 +379,13 @@
     <value>Modo OCR:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Corrigir brancos e remover ruído</value>
+    <value>Corrigir balanço de brancos e remover ruído</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Executar OCR após a digitalização</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Efetuar OCR após a digitalização</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Obter mais idiomas</value>
@@ -400,7 +400,7 @@
     <value>Escolha um ou mais idiomas:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Tamanho estimado da descarga: {0} MB</value>
+    <value>Tamanho estimado da transferência: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Descarregar</value>
@@ -508,7 +508,7 @@
     <value>Palavra-passe de proprietário:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
-    <value>Palavra-passe do utilizador:</value>
+    <value>Senha do utilizador:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
     <value>Memorizar definições</value>
@@ -529,22 +529,22 @@
     <value>Ano</value>
   </data>
   <data name="Year2Digit" xml:space="preserve">
-    <value>Ano (00-99)</value>
+    <value>Anos (00-99)</value>
   </data>
   <data name="Month2Digit" xml:space="preserve">
     <value>Mês (01-12)</value>
   </data>
   <data name="Day2Digit" xml:space="preserve">
-    <value>Dia (01-31)</value>
+    <value>Dias (01-31)</value>
   </data>
   <data name="Hour2Digit" xml:space="preserve">
-    <value>Hora (0-23)</value>
+    <value>Horas (0-23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
-    <value>Minuto (00-59)</value>
+    <value>Minutos (00-59)</value>
   </data>
   <data name="Second2Digit" xml:space="preserve">
-    <value>Segundo (00-59)</value>
+    <value>Segundos (00-59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
     <value>Incrementar número automaticamente (4 dígitos)</value>
@@ -577,7 +577,7 @@
     <value>Compressão:</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Definições da Imagem</value>
+    <value>Definições de imagem</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>Definições de e-mail</value>
@@ -610,10 +610,10 @@
     <value>Detalhes técnicos</value>
   </data>
   <data name="PdfPasswordFormTitle" xml:space="preserve">
-    <value>Palavra-passe</value>
+    <value>Senha</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>O seguinte ficheiro está cifrado e requer uma palavra-passe para ser aberto:</value>
+    <value>O seguinte ficheiro está cifrado e requer uma senha para ser aberto:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Pedir caminho do ficheiro</value>
@@ -691,7 +691,7 @@
     <value>Inverter páginas digitalizadas em frente e verso</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Inverter lados das páginas duplas</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versão WIA:</value>
@@ -760,16 +760,16 @@
     <value>Partilhar</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Partilha de digitalização</value>
+    <value>Partilha de digitalizador</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Partilha de digitalização</value>
+    <value>Partilha de digitalizador</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>.</value>
+    <value>Digitalizadores partilhados podem ser usados a partir de outros computadores na rede local selecionando "Controlador ESCL" nas configurações do perfil NAPS2 do outro computador.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Definições da partilha</value>
+    <value>Definições partilhadas do digitalizador</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
     <value>Tem a certeza que pretende parar de partilhar {0}?</value>
