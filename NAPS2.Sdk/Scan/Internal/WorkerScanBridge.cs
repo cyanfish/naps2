@@ -27,6 +27,16 @@ internal class WorkerScanBridge : IScanBridge
         await ctx.Service.GetDevices(options, cancelToken, callback);
     }
 
+    public async Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    {
+        if (_scanningContext.WorkerFactory == null)
+        {
+            throw new InvalidOperationException("ScanningContext must have a worker set up.");
+        }
+        using var ctx = _scanningContext.CreateWorker(_workerType)!;
+        return await ctx.Service.GetCaps(options, cancelToken);
+    }
+
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<ProcessedImage, PostProcessingContext> callback)
     {

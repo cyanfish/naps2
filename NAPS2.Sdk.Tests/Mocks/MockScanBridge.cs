@@ -33,6 +33,11 @@ internal class MockScanBridge : IScanBridge
         });
     }
 
+    public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    {
+        return null!;
+    }
+
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
     {
         LastOptions = options;

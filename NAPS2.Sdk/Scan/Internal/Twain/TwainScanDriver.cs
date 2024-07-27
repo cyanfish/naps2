@@ -30,6 +30,11 @@ internal class TwainScanDriver : IScanDriver
         });
     }
 
+    public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    {
+        return Task.FromResult<ScanCaps?>(null);
+    }
+
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<IMemoryImage> callback)
     {

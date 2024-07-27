@@ -31,6 +31,11 @@ internal class RemoteScanController : IRemoteScanController
         });
     }
 
+    public async Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    {
+        return await _scanDriverFactory.Create(options).GetCaps(options, cancelToken);
+    }
+
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<ProcessedImage, PostProcessingContext> callback)
     {

@@ -108,6 +108,16 @@ public class ScanController
         });
     }
 
+    public Task<ScanCaps?> GetCaps(ScanDevice device, CancellationToken cancelToken = default) =>
+        GetCaps(new ScanOptions { Device = device }, cancelToken);
+
+    public async Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken = default)
+    {
+        options = _scanOptionsValidator.ValidateAll(options, _scanningContext, true);
+        var bridge = _scanBridgeFactory.Create(options);
+        return await bridge.GetCaps(options, cancelToken);
+    }
+
     /// <summary>
     /// Scans using the specified options and returns an enumerable of the scanned images.
     /// <para/>

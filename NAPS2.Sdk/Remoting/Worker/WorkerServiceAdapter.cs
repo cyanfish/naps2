@@ -67,6 +67,14 @@ internal class WorkerServiceAdapter
         }
     }
 
+    public async Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    {
+        var req = new GetCapsRequest { OptionsXml = options.ToXml() };
+        var resp = await _client.GetCapsAsync(req);
+        RemotingHelper.HandleErrors(resp.Error);
+        return resp.ScanCapsXml.FromXml<ScanCaps>();
+    }
+
     public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken,
         IScanEvents scanEvents, Action<ProcessedImage, string> imageCallback)
     {

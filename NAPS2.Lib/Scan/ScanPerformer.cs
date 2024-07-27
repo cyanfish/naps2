@@ -78,6 +78,14 @@ internal class ScanPerformer : IScanPerformer
         return controller.GetDevices(options, cancelToken);
     }
 
+    public async Task<ScanCaps?> GetCaps(ScanProfile scanProfile, CancellationToken cancelToken = default)
+    {
+        var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero);
+        options.Device = scanProfile.Device?.ToScanDevice(options.Driver);
+        var controller = CreateScanController(new ScanParams());
+        return await controller.GetCaps(options, cancelToken);
+    }
+
     public async IAsyncEnumerable<ProcessedImage> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
         IntPtr dialogParent = default, [EnumeratorCancellation] CancellationToken cancelToken = default)
     {

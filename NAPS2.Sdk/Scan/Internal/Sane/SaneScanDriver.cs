@@ -82,6 +82,11 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
+    public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    {
+        return Task.FromResult<ScanCaps?>(null);
+    }
+
     private static ScanDevice GetScanDevice(SaneDeviceInfo device) =>
         new(Driver.Sane, device.Name, GetName(device));
 

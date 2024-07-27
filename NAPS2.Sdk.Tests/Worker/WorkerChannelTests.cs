@@ -168,6 +168,11 @@ public class WorkerChannelTests : ContextualTests
         public Task GetDevices(ScanOptions options, CancellationToken cancelToken, Action<ScanDevice> callback) =>
             throw new NotSupportedException();
 
+        public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
+        {
+            return null!;
+        }
+
         public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
             Action<ProcessedImage, PostProcessingContext> callback)
         {

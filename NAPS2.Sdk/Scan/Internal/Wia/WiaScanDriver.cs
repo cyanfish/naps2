@@ -1,4 +1,5 @@
 ﻿#if !MAC
+using System.Collections.Immutable;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Remoting.Worker;
@@ -30,6 +31,66 @@ internal class WiaScanDriver : IScanDriver
                 }
             }
         });
+    }
+
+    public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    {
+        return Task.Run(() =>
+        {
+            try
+            {
+                using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
+                using var device = deviceManager.FindDevice(options.Device!.ID);
+                using var items = device.GetSubItems().ToDisposableList();
+                var flatbed = items.FirstOrDefault(x => x.Name() == "Flatbed");
+                var feeder = items.FirstOrDefault(x => x.Name() == "Feeder");
+                var flatbedCaps = flatbed != null ? GetItemCaps(device, flatbed, true) : null;
+                var feederCaps = feeder != null ? GetItemCaps(device, feeder, false) : null;
+                return (ScanCaps?) new ScanCaps(
+                    new MetadataCaps(
+                        Manufacturer: device.Properties.GetOrNull(WiaPropertyId.DIP_VEND_DESC)?.Value as string,
+                        Model: device.Properties.GetOrNull(WiaPropertyId.DIP_DEV_DESC)?.Value as string
+                    ),
+                    new PaperSourceCaps(device.SupportsFlatbed(), device.SupportsFeeder(), device.SupportsDuplex(),
+                        true),
+                    device.SupportsFlatbed() ? flatbedCaps : null,
+                    device.SupportsFeeder() ? feederCaps : null,
+                    device.SupportsDuplex() ? feederCaps : null
+                );
+            }
+            catch (WiaException e)
+            {
+                WiaScanErrors.ThrowDeviceError(e);
+                throw;
+            }
+        });
+    }
+
+    private PerSourceCaps GetItemCaps(WiaDevice device, WiaItem item, bool flatbed)
+    {
+        var xRes = item.Properties.GetOrNull(WiaPropertyId.IPS_XRES);
+        var dpiCaps = xRes != null
+            ? new DpiCaps(
+                xRes.Attributes.Values?.Cast<int>().ToImmutableList(),
+                xRes.Attributes.Min,
+                xRes.Attributes.Max,
+                xRes.Attributes.Step)
+            : null;
+        var dataType = item.Properties.GetOrNull(WiaPropertyId.IPA_DATATYPE);
+        var validDataTypes = dataType?.Attributes.Values;
+        var bitDepthCaps = validDataTypes != null
+            ? new BitDepthCaps(
+                validDataTypes.Contains(3),
+                validDataTypes.Contains(2),
+                validDataTypes.Contains(0))
+            : null;
+        var (horizontalSize, verticalSize) = GetScanArea(device, item, flatbed);
+        var scanAreaSize = new PageSize(horizontalSize / 1000m, verticalSize / 1000m, PageSizeUnit.Inch);
+        return new PerSourceCaps(
+            dpiCaps,
+            bitDepthCaps,
+            new PageSizeCaps(scanAreaSize)
+        );
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
@@ -85,7 +146,7 @@ internal class WiaScanDriver : IScanDriver
         public async Task Scan(WiaVersion wiaVersion)
         {
             using var deviceManager = new WiaDeviceManager(wiaVersion);
-            using var device = deviceManager.FindDevice(_options.Device!.ID!);
+            using var device = deviceManager.FindDevice(_options.Device!.ID);
             if (device.Version == WiaVersion.Wia20 && _options.UseNativeUI)
             {
                 await DoWia20NativeTransfer(deviceManager, device);
@@ -366,23 +427,7 @@ internal class WiaScanDriver : IScanDriver
             int pageWidth = _options.PageSize!.WidthInThousandthsOfAnInch * xRes / 1000;
             int pageHeight = _options.PageSize.HeightInThousandthsOfAnInch * yRes / 1000;
 
-            int horizontalSize, verticalSize;
-            if (device.Version == WiaVersion.Wia10)
-            {
-                horizontalSize =
-                    (int) device.Properties[_options.PaperSource == PaperSource.Flatbed
-                        ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
-                        : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
-                verticalSize =
-                    (int) device.Properties[_options.PaperSource == PaperSource.Flatbed
-                        ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
-                        : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
-            }
-            else
-            {
-                horizontalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
-                verticalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
-            }
+            var (horizontalSize, verticalSize) = GetScanArea(device, item, _options.PaperSource == PaperSource.Flatbed);
 
             int pagemaxwidth = horizontalSize * xRes / 1000;
             int pagemaxheight = verticalSize * yRes / 1000;
@@ -450,6 +495,28 @@ internal class WiaScanDriver : IScanDriver
                 _logger.LogError(e, "Error setting property {PropId}", propId);
             }
         }
+    }
+
+    private static (int, int) GetScanArea(WiaDevice device, WiaItem item, bool flatbed)
+    {
+        int horizontalSize, verticalSize;
+        if (device.Version == WiaVersion.Wia10)
+        {
+            horizontalSize =
+                (int) device.Properties[flatbed
+                    ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
+                    : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
+            verticalSize =
+                (int) device.Properties[flatbed
+                    ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
+                    : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
+        }
+        else
+        {
+            horizontalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
+            verticalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
+        }
+        return (horizontalSize, verticalSize);
     }
 }
 #endif

@@ -14,6 +14,7 @@ service WorkerService {
 	rpc RenderPdf (RenderPdfRequest) returns (RenderPdfResponse) {}
 	rpc ImportPostProcess (ImportPostProcessRequest) returns (ImportPostProcessResponse) {}
 	rpc GetDevices (GetDevicesRequest) returns (stream GetDevicesResponse) {}
+	rpc GetCaps (GetCapsRequest) returns (GetCapsResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
 	rpc TwainGetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
 	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
@@ -45,6 +46,15 @@ message GetDevicesRequest {
 message GetDevicesResponse {
 	NAPS2.Remoting.Error error = 1;
 	string deviceXml = 2;
+}
+
+message GetCapsRequest {
+	string optionsXml = 1;
+}
+
+message GetCapsResponse {
+	NAPS2.Remoting.Error error = 1;
+	string scanCapsXml = 2;
 }
 
 message GetDeviceListRequest {
