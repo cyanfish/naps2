@@ -12,7 +12,7 @@ internal class StubTwainController : ITwainController
         throw new NotSupportedException();
     }
 
-    public Task<ScanCaps?> GetCaps(ScanOptions options)
+    public Task<ScanCaps> GetCaps(ScanOptions options)
     {
         throw new NotSupportedException();
     }

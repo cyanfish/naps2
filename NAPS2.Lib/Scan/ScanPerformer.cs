@@ -78,7 +78,7 @@ internal class ScanPerformer : IScanPerformer
         return controller.GetDevices(options, cancelToken);
     }
 
-    public async Task<ScanCaps?> GetCaps(ScanProfile scanProfile, CancellationToken cancelToken = default)
+    public async Task<ScanCaps> GetCaps(ScanProfile scanProfile, CancellationToken cancelToken = default)
     {
         var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero);
         options.Device = scanProfile.Device?.ToScanDevice(options.Driver);

@@ -30,7 +30,7 @@ internal class TwainScanDriver : IScanDriver
         });
     }
 
-    public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
         CheckArch(options);
         return Task.Run(async () =>

@@ -29,9 +29,9 @@ internal class AppleScanDriver : IScanDriver
         await Task.Delay(2000, cancelToken);
     }
 
-    public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        return Task.FromResult<ScanCaps?>(null);
+        return Task.FromResult(new ScanCaps());
     }
 
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

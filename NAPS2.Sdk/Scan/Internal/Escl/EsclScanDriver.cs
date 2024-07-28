@@ -73,9 +73,9 @@ internal class EsclScanDriver : IScanDriver
         }
     }
 
-    public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        return Task.FromResult<ScanCaps?>(null);
+        return Task.FromResult(new ScanCaps());
     }
 
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

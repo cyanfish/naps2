@@ -67,12 +67,12 @@ internal class WorkerServiceAdapter
         }
     }
 
-    public async Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public async Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
         var req = new GetCapsRequest { OptionsXml = options.ToXml() };
         var resp = await _client.GetCapsAsync(req, cancellationToken: cancelToken);
         RemotingHelper.HandleErrors(resp.Error);
-        return string.IsNullOrEmpty(resp.ScanCapsXml) ? null : resp.ScanCapsXml.FromXml<ScanCaps>();
+        return resp.ScanCapsXml.FromXml<ScanCaps>();
     }
 
     public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken,
@@ -209,12 +209,12 @@ internal class WorkerServiceAdapter
         return resp.DeviceListXml.FromXml<List<ScanDevice>>();
     }
 
-    public async Task<ScanCaps?> TwainGetCaps(ScanOptions options)
+    public async Task<ScanCaps> TwainGetCaps(ScanOptions options)
     {
         var req = new GetCapsRequest { OptionsXml = options.ToXml() };
         var resp = await _client.TwainGetCapsAsync(req);
         RemotingHelper.HandleErrors(resp.Error);
-        return string.IsNullOrEmpty(resp.ScanCapsXml) ? null : resp.ScanCapsXml.FromXml<ScanCaps>();
+        return resp.ScanCapsXml.FromXml<ScanCaps>();
     }
 
     public ProcessedImage ImportPostProcess(ScanningContext scanningContext, ProcessedImage img, int? thumbnailSize,

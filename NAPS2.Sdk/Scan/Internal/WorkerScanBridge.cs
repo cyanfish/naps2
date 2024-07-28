@@ -27,7 +27,7 @@ internal class WorkerScanBridge : IScanBridge
         await ctx.Service.GetDevices(options, cancelToken, callback);
     }
 
-    public async Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public async Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
         if (_scanningContext.WorkerFactory == null)
         {

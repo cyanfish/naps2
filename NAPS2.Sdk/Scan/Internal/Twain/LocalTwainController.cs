@@ -85,7 +85,7 @@ internal class LocalTwainController : ITwainController
         }
     }
 
-    public Task<ScanCaps?> GetCaps(ScanOptions options)
+    public Task<ScanCaps> GetCaps(ScanOptions options)
     {
         if (options.TwainOptions.Dsm != TwainDsm.Old)
         {
@@ -105,7 +105,7 @@ internal class LocalTwainController : ITwainController
         });
     }
 
-    private ScanCaps? InternalGetCaps(ScanOptions options)
+    private ScanCaps InternalGetCaps(ScanOptions options)
     {
         PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
         var session = new TwainSession(TwainAppId);
@@ -119,14 +119,14 @@ internal class LocalTwainController : ITwainController
         try
         {
             var ds = session.GetSources().FirstOrDefault(ds => ds.Name == options.Device!.ID);
-            if (ds == null) return null;
+            if (ds == null) throw new DeviceNotFoundException();
             try
             {
                 var rc = ds.Open();
                 if (rc != ReturnCode.Success)
                 {
                     _logger.LogDebug("Couldn't open TWAIN data source for capabilities, return code {RC}", rc);
-                    return null;
+                    return new ScanCaps();
                 }
                 try
                 {
@@ -172,7 +172,11 @@ internal class LocalTwainController : ITwainController
             catch (Exception e)
             {
                 _logger.LogError(e, "Error getting TWAIN capabilities");
-                return null;
+                if (e is DeviceException)
+                {
+                    throw;
+                }
+                throw new ScanDriverUnknownException(e);
             }
         }
         finally

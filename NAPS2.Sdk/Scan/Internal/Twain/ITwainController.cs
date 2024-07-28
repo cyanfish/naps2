@@ -9,6 +9,6 @@ namespace NAPS2.Scan.Internal.Twain;
 internal interface ITwainController
 {
     Task<List<ScanDevice>> GetDeviceList(ScanOptions options);
-    Task<ScanCaps?> GetCaps(ScanOptions options);
+    Task<ScanCaps> GetCaps(ScanOptions options);
     Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken);
 }

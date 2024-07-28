@@ -33,7 +33,7 @@ internal class WiaScanDriver : IScanDriver
         });
     }
 
-    public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
         return Task.Run(() =>
         {
@@ -46,7 +46,7 @@ internal class WiaScanDriver : IScanDriver
                 var feeder = items.FirstOrDefault(x => x.Name() == "Feeder");
                 var flatbedCaps = flatbed != null ? GetItemCaps(device, flatbed, true) : null;
                 var feederCaps = feeder != null ? GetItemCaps(device, feeder, false) : null;
-                return (ScanCaps?) new ScanCaps
+                return new ScanCaps
                 {
                     MetadataCaps = new MetadataCaps
                     {
@@ -77,13 +77,12 @@ internal class WiaScanDriver : IScanDriver
     {
         var xRes = item.Properties.GetOrNull(WiaPropertyId.IPS_XRES);
         var dpiCaps = xRes != null
-            ? new DpiCaps
-            {
-                Values = xRes.Attributes.Values?.Cast<int>().ToImmutableList(),
-                Min = xRes.Attributes.Min,
-                Max = xRes.Attributes.Max,
-                Step = xRes.Attributes.Step
-            }
+            ? xRes.Attributes.Flags.HasFlag(WiaPropertyFlags.Range)
+                ? DpiCaps.ForRange(xRes.Attributes.Min, xRes.Attributes.Max, xRes.Attributes.Step)
+                : new DpiCaps
+                {
+                    Values = xRes.Attributes.Values?.Cast<int>().ToImmutableList(),
+                }
             : null;
         var dataType = item.Properties.GetOrNull(WiaPropertyId.IPA_DATATYPE);
         var validDataTypes = dataType?.Attributes.Values;
