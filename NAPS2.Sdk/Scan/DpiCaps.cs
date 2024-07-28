@@ -4,10 +4,6 @@ namespace NAPS2.Scan;
 
 public class DpiCaps
 {
-    internal DpiCaps()
-    {
-    }
-
     public ImmutableList<int>? Values { get; init; }
 
     public int Min { get; init; }

@@ -2,10 +2,6 @@ namespace NAPS2.Scan;
 
 public class ScanCaps
 {
-    internal ScanCaps()
-    {
-    }
-
     public MetadataCaps? MetadataCaps { get; init; }
 
     public PaperSourceCaps? PaperSourceCaps { get; init; }

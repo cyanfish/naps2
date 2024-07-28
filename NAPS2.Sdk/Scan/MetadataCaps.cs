@@ -2,10 +2,6 @@ namespace NAPS2.Scan;
 
 public class MetadataCaps
 {
-    internal MetadataCaps()
-    {
-    }
-
     public string? DriverSubtype { get; init; }
 
     public string? Manufacturer { get; init; }

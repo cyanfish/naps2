@@ -2,10 +2,6 @@ namespace NAPS2.Scan;
 
 public class PaperSourceCaps
 {
-    internal PaperSourceCaps()
-    {
-    }
-
     public bool SupportsFlatbed { get; init; }
 
     public bool SupportsFeeder { get; init; }
