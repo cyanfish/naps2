@@ -46,17 +46,24 @@ internal class WiaScanDriver : IScanDriver
                 var feeder = items.FirstOrDefault(x => x.Name() == "Feeder");
                 var flatbedCaps = flatbed != null ? GetItemCaps(device, flatbed, true) : null;
                 var feederCaps = feeder != null ? GetItemCaps(device, feeder, false) : null;
-                return (ScanCaps?) new ScanCaps(
-                    new MetadataCaps(
-                        Manufacturer: device.Properties.GetOrNull(WiaPropertyId.DIP_VEND_DESC)?.Value as string,
-                        Model: device.Properties.GetOrNull(WiaPropertyId.DIP_DEV_DESC)?.Value as string
-                    ),
-                    new PaperSourceCaps(device.SupportsFlatbed(), device.SupportsFeeder(), device.SupportsDuplex(),
-                        true),
-                    device.SupportsFlatbed() ? flatbedCaps : null,
-                    device.SupportsFeeder() ? feederCaps : null,
-                    device.SupportsDuplex() ? feederCaps : null
-                );
+                return (ScanCaps?) new ScanCaps
+                {
+                    MetadataCaps = new MetadataCaps
+                    {
+                        Manufacturer = device.Properties.GetOrNull(WiaPropertyId.DIP_VEND_DESC)?.Value as string,
+                        Model = device.Properties.GetOrNull(WiaPropertyId.DIP_DEV_DESC)?.Value as string
+                    },
+                    PaperSourceCaps = new PaperSourceCaps
+                    {
+                        SupportsFlatbed = device.SupportsFlatbed(),
+                        SupportsFeeder = device.SupportsFeeder(),
+                        SupportsDuplex = device.SupportsDuplex(),
+                        CanCheckIfFeederHasPaper = true
+                    },
+                    FlatbedCaps = device.SupportsFlatbed() ? flatbedCaps : null,
+                    FeederCaps = device.SupportsFeeder() ? feederCaps : null,
+                    DuplexCaps = device.SupportsDuplex() ? feederCaps : null
+                };
             }
             catch (WiaException e)
             {
@@ -70,27 +77,32 @@ internal class WiaScanDriver : IScanDriver
     {
         var xRes = item.Properties.GetOrNull(WiaPropertyId.IPS_XRES);
         var dpiCaps = xRes != null
-            ? new DpiCaps(
-                xRes.Attributes.Values?.Cast<int>().ToImmutableList(),
-                xRes.Attributes.Min,
-                xRes.Attributes.Max,
-                xRes.Attributes.Step)
+            ? new DpiCaps
+            {
+                Values = xRes.Attributes.Values?.Cast<int>().ToImmutableList(),
+                Min = xRes.Attributes.Min,
+                Max = xRes.Attributes.Max,
+                Step = xRes.Attributes.Step
+            }
             : null;
         var dataType = item.Properties.GetOrNull(WiaPropertyId.IPA_DATATYPE);
         var validDataTypes = dataType?.Attributes.Values;
         var bitDepthCaps = validDataTypes != null
-            ? new BitDepthCaps(
-                validDataTypes.Contains(3),
-                validDataTypes.Contains(2),
-                validDataTypes.Contains(0))
+            ? new BitDepthCaps
+            {
+                SupportsColor = validDataTypes.Contains(3),
+                SupportsGrayscale = validDataTypes.Contains(2),
+                SupportsBlackAndWhite = validDataTypes.Contains(0)
+            }
             : null;
         var (horizontalSize, verticalSize) = GetScanArea(device, item, flatbed);
-        var scanAreaSize = new PageSize(horizontalSize / 1000m, verticalSize / 1000m, PageSizeUnit.Inch);
-        return new PerSourceCaps(
-            dpiCaps,
-            bitDepthCaps,
-            new PageSizeCaps(scanAreaSize)
-        );
+        var scanArea = new PageSize(horizontalSize / 1000m, verticalSize / 1000m, PageSizeUnit.Inch);
+        return new PerSourceCaps
+        {
+            DpiCaps = dpiCaps,
+            BitDepthCaps = bitDepthCaps,
+            PageSizeCaps = new PageSizeCaps { ScanArea = scanArea }
+        };
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

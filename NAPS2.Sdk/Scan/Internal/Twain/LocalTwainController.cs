@@ -142,19 +142,27 @@ internal class LocalTwainController : ITwainController
 
                     bool supportsDuplex = supportsFeeder && ds.Capabilities.CapDuplex.GetCurrent() != Duplex.None;
 
-                    return new ScanCaps(
-                        new MetadataCaps(
-                            Manufacturer: ds.Manufacturer,
-                            Model: ds.Name,
-                            SerialNumber: ds.Capabilities.CapSerialNumber.GetCurrent()
-                        ),
-                        new PaperSourceCaps(supportsFlatbed, supportsFeeder, supportsDuplex,
-                            ds.Capabilities.CapAutomaticSenseMedium.IsSupported ||
-                            ds.Capabilities.CapFeederLoaded.IsSupported),
-                        flatbedCaps,
-                        feederCaps,
-                        supportsDuplex ? feederCaps : null
-                    );
+                    return new ScanCaps
+                    {
+                        MetadataCaps = new MetadataCaps
+                        {
+                            Manufacturer = ds.Manufacturer,
+                            Model = ds.Name,
+                            SerialNumber = ds.Capabilities.CapSerialNumber.GetCurrent()
+                        },
+                        PaperSourceCaps = new PaperSourceCaps
+                        {
+                            SupportsFlatbed = supportsFlatbed,
+                            SupportsFeeder = supportsFeeder,
+                            SupportsDuplex = supportsDuplex,
+                            CanCheckIfFeederHasPaper =
+                                ds.Capabilities.CapAutomaticSenseMedium.IsSupported ||
+                                ds.Capabilities.CapFeederLoaded.IsSupported
+                        },
+                        FlatbedCaps = flatbedCaps,
+                        FeederCaps = feederCaps,
+                        DuplexCaps = supportsDuplex ? feederCaps : null
+                    };
                 }
                 finally
                 {
@@ -184,20 +192,27 @@ internal class LocalTwainController : ITwainController
     {
         var xRes = ds.Capabilities.ICapXResolution.GetValues().Select(x => (int) x.Whole);
         var yRes = ds.Capabilities.ICapYResolution.GetValues().Select(x => (int) x.Whole);
-        var dpiCaps = new DpiCaps(xRes.Intersect(yRes).ToImmutableList(), 0, 0, 0);
+        var dpiCaps = new DpiCaps { Values = xRes.Intersect(yRes).ToImmutableList() };
         var pixelTypes = ds.Capabilities.ICapPixelType.GetValues().ToList();
-        var bitDepthCaps = new BitDepthCaps(
-            pixelTypes.Contains(PixelType.RGB),
-            pixelTypes.Contains(PixelType.Gray),
-            pixelTypes.Contains(PixelType.BlackWhite));
+        var bitDepthCaps = new BitDepthCaps
+        {
+            SupportsColor = pixelTypes.Contains(PixelType.RGB),
+            SupportsGrayscale = pixelTypes.Contains(PixelType.Gray),
+            SupportsBlackAndWhite = pixelTypes.Contains(PixelType.BlackWhite)
+        };
         var w = ds.Capabilities.ICapPhysicalWidth.GetCurrent();
         var h = ds.Capabilities.ICapPhysicalHeight.GetCurrent();
-        var scanAreaSize = new PageSize(
+        var scanArea = new PageSize(
             decimal.Round(w.Whole + w.Fraction / 65536m, 4),
             decimal.Round(h.Whole + h.Fraction / 65536m, 4),
             PageSizeUnit.Inch);
-        var pageSizeCaps = new PageSizeCaps(scanAreaSize);
-        return new PerSourceCaps(dpiCaps, bitDepthCaps, pageSizeCaps);
+        var pageSizeCaps = new PageSizeCaps { ScanArea = scanArea };
+        return new PerSourceCaps
+        {
+            DpiCaps = dpiCaps,
+            BitDepthCaps = bitDepthCaps,
+            PageSizeCaps = pageSizeCaps
+        };
     }
 
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)

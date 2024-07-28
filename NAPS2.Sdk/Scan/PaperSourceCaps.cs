@@ -1,13 +1,16 @@
 namespace NAPS2.Scan;
 
-public record PaperSourceCaps(
-    bool SupportsFlatbed,
-    bool SupportsFeeder,
-    bool SupportsDuplex,
-    bool CanCheckIfFeederHasPaper
-)
+public class PaperSourceCaps
 {
-    private PaperSourceCaps() : this(false, false, false, false)
+    internal PaperSourceCaps()
     {
     }
+
+    public bool SupportsFlatbed { get; init; }
+
+    public bool SupportsFeeder { get; init; }
+
+    public bool SupportsDuplex { get; init; }
+
+    public bool CanCheckIfFeederHasPaper { get; init; }
 }

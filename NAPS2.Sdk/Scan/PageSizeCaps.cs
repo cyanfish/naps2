@@ -1,10 +1,10 @@
 namespace NAPS2.Scan;
 
-public record PageSizeCaps(
-    PageSize ScanAreaSize
-)
+public class PageSizeCaps
 {
-    private PageSizeCaps() : this(new PageSize(0, 0, PageSizeUnit.Inch))
+    internal PageSizeCaps()
     {
     }
+
+    public PageSize? ScanArea { get; init; }
 }

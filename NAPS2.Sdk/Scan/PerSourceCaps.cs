@@ -1,12 +1,14 @@
 namespace NAPS2.Scan;
 
-public record PerSourceCaps(
-    DpiCaps? DpiCaps,
-    BitDepthCaps? BitDepthCaps,
-    PageSizeCaps? PageSizeCaps
-)
+public class PerSourceCaps
 {
-    private PerSourceCaps() : this(null, null, null)
+    internal PerSourceCaps()
     {
     }
+
+    public DpiCaps? DpiCaps { get; init; }
+
+    public BitDepthCaps? BitDepthCaps { get; init; }
+
+    public PageSizeCaps? PageSizeCaps { get; init; }
 }

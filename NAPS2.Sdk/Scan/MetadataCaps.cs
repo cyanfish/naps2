@@ -1,15 +1,20 @@
 namespace NAPS2.Scan;
 
-public record MetadataCaps(
-    string? DriverSubtype = null,
-    string? Manufacturer = null,
-    string? Model = null,
-    string? SerialNumber = null,
-    string? Location = null,
-    string? IconUri = null
-)
+public class MetadataCaps
 {
-    private MetadataCaps() : this(null, null, null, null, null, null)
+    internal MetadataCaps()
     {
     }
+
+    public string? DriverSubtype { get; init; }
+
+    public string? Manufacturer { get; init; }
+
+    public string? Model { get; init; }
+
+    public string? SerialNumber { get; init; }
+
+    public string? Location { get; init; }
+
+    public string? IconUri { get; init; }
 }

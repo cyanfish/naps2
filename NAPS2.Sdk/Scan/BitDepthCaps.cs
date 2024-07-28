@@ -1,12 +1,14 @@
 namespace NAPS2.Scan;
 
-public record BitDepthCaps(
-    bool SupportsColor,
-    bool SupportsGrayscale,
-    bool SupportsBlackAndWhite
-)
+public class BitDepthCaps
 {
-    private BitDepthCaps() : this(false, false, false)
+    internal BitDepthCaps()
     {
     }
+
+    public bool SupportsColor { get; init; }
+
+    public bool SupportsGrayscale { get; init; }
+
+    public bool SupportsBlackAndWhite { get; init; }
 }
