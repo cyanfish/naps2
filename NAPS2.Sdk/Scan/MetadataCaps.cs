@@ -7,4 +7,9 @@ public record MetadataCaps(
     string? SerialNumber = null,
     string? Location = null,
     string? IconUri = null
-);
+)
+{
+    private MetadataCaps() : this(null, null, null, null, null, null)
+    {
+    }
+}

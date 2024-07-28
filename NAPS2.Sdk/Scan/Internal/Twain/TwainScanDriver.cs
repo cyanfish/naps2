@@ -32,7 +32,12 @@ internal class TwainScanDriver : IScanDriver
 
     public Task<ScanCaps?> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        return Task.FromResult<ScanCaps?>(null);
+        CheckArch(options);
+        return Task.Run(async () =>
+        {
+            var controller = GetTwainController(options);
+            return await controller.GetCaps(options);
+        });
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

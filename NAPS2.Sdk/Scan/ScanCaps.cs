@@ -6,4 +6,9 @@ public record ScanCaps(
     PerSourceCaps? FlatbedCaps,
     PerSourceCaps? FeederCaps,
     PerSourceCaps? DuplexCaps
-);
+)
+{
+    private ScanCaps() : this(null, null, null, null, null)
+    {
+    }
+}

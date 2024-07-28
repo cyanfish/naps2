@@ -22,6 +22,12 @@ internal class RemoteTwainController : ITwainController
         return await workerContext.Service.TwainGetDeviceList(options);
     }
 
+    public async Task<ScanCaps?> GetCaps(ScanOptions options)
+    {
+        using var workerContext = CreateWorker(options);
+        return await workerContext.Service.TwainGetCaps(options);
+    }
+
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)
     {
         using var workerContext = CreateWorker(options);

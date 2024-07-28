@@ -128,6 +128,21 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
         await sequencedWriter.WaitForCompletion();
     }
 
+    public override async Task<GetCapsResponse> GetCaps(GetCapsRequest request, ServerCallContext context)
+    {
+        using var callRef = StartCall();
+        try
+        {
+            var scanOptions = request.OptionsXml.FromXml<ScanOptions>();
+            var caps = await _remoteScanController.GetCaps(scanOptions, context.CancellationToken);
+            return new GetCapsResponse { ScanCapsXml = caps?.ToXml() ?? "" };
+        }
+        catch (Exception e)
+        {
+            return new GetCapsResponse { Error = RemotingHelper.ToError(e) };
+        }
+    }
+
     public override async Task Scan(ScanRequest request, IServerStreamWriter<ScanResponse> responseStream,
         ServerCallContext context)
     {
@@ -324,6 +339,24 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
         catch (Exception e)
         {
             return new GetDeviceListResponse { Error = RemotingHelper.ToError(e) };
+        }
+    }
+
+    public override async Task<GetCapsResponse> TwainGetCaps(GetCapsRequest request, ServerCallContext context)
+    {
+        using var callRef = StartCall();
+        try
+        {
+            var options = request.OptionsXml.FromXml<ScanOptions>();
+            var caps = await _twainController.GetCaps(options);
+            return new GetCapsResponse
+            {
+                ScanCapsXml = caps?.ToXml() ?? ""
+            };
+        }
+        catch (Exception e)
+        {
+            return new GetCapsResponse { Error = RemotingHelper.ToError(e) };
         }
     }
 

@@ -12,6 +12,11 @@ internal class StubTwainController : ITwainController
         throw new NotSupportedException();
     }
 
+    public Task<ScanCaps?> GetCaps(ScanOptions options)
+    {
+        throw new NotSupportedException();
+    }
+
     public Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)
     {
         throw new NotSupportedException();

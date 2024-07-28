@@ -17,6 +17,7 @@ service WorkerService {
 	rpc GetCaps (GetCapsRequest) returns (GetCapsResponse) {}
 	rpc Scan (ScanRequest) returns (stream ScanResponse) {}
 	rpc TwainGetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse) {}
+	rpc TwainGetCaps (GetCapsRequest) returns (GetCapsResponse) {}
 	rpc TwainScan (TwainScanRequest) returns (stream TwainScanResponse) {}
 	rpc StopWorker (StopWorkerRequest) returns (StopWorkerResponse) {}
 }

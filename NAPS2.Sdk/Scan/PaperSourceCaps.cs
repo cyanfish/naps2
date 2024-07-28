@@ -5,4 +5,9 @@ public record PaperSourceCaps(
     bool SupportsFeeder,
     bool SupportsDuplex,
     bool CanCheckIfFeederHasPaper
-);
+)
+{
+    private PaperSourceCaps() : this(false, false, false, false)
+    {
+    }
+}

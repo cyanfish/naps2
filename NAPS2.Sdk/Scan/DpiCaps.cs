@@ -7,4 +7,9 @@ public record DpiCaps(
     int Min,
     int Max,
     int Step
-);
+)
+{
+    private DpiCaps() : this(null, 0, 0, 0)
+    {
+    }
+}

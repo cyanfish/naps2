@@ -1,5 +1,5 @@
 #if !MAC
-using System.Reflection;
+using System.Collections.Immutable;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Scan.Exceptions;
@@ -83,6 +83,121 @@ internal class LocalTwainController : ITwainController
                 _logger.LogError(e, "Error closing TWAIN session");
             }
         }
+    }
+
+    public Task<ScanCaps?> GetCaps(ScanOptions options)
+    {
+        if (options.TwainOptions.Dsm != TwainDsm.Old)
+        {
+            TwainDsmSetup.Run();
+        }
+        return Task.Run(() =>
+        {
+            var caps = InternalGetCaps(options);
+            if (options.TwainOptions.Dsm != TwainDsm.Old && caps == null)
+            {
+                // Fall back to OldDsm in case of no devices
+                // This is primarily for Citrix support, which requires using twain_32.dll for TWAIN passthrough
+                caps = InternalGetCaps(options);
+            }
+
+            return caps;
+        });
+    }
+
+    private ScanCaps? InternalGetCaps(ScanOptions options)
+    {
+        PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
+        var session = new TwainSession(TwainAppId);
+        // TODO: Standardize on custom hook?
+#if NET6_0_OR_GREATER
+        if (!OperatingSystem.IsWindows()) throw new InvalidOperationException("Windows-only");
+        session.Open(new Win32MessageLoopHook(_logger));
+#else
+        session.Open();
+#endif
+        try
+        {
+            var ds = session.GetSources().FirstOrDefault(ds => ds.Name == options.Device!.ID);
+            if (ds == null) return null;
+            try
+            {
+                var rc = ds.Open();
+                if (rc != ReturnCode.Success)
+                {
+                    _logger.LogDebug("Couldn't open TWAIN data source for capabilities, return code {RC}", rc);
+                    return null;
+                }
+                try
+                {
+                    var feederCap = ds.Capabilities.CapFeederEnabled;
+
+                    feederCap.SetValue(BoolType.False);
+                    bool supportsFlatbed = feederCap.GetCurrent() == BoolType.False;
+                    var flatbedCaps = supportsFlatbed ? GetPerSourceCaps(ds) : null;
+
+                    feederCap.SetValue(BoolType.True);
+                    bool supportsFeeder = feederCap.GetCurrent() == BoolType.True;
+                    var feederCaps = supportsFeeder ? GetPerSourceCaps(ds) : null;
+
+                    bool supportsDuplex = supportsFeeder && ds.Capabilities.CapDuplex.GetCurrent() != Duplex.None;
+
+                    return new ScanCaps(
+                        new MetadataCaps(
+                            Manufacturer: ds.Manufacturer,
+                            Model: ds.Name,
+                            SerialNumber: ds.Capabilities.CapSerialNumber.GetCurrent()
+                        ),
+                        new PaperSourceCaps(supportsFlatbed, supportsFeeder, supportsDuplex,
+                            ds.Capabilities.CapAutomaticSenseMedium.IsSupported ||
+                            ds.Capabilities.CapFeederLoaded.IsSupported),
+                        flatbedCaps,
+                        feederCaps,
+                        supportsDuplex ? feederCaps : null
+                    );
+                }
+                finally
+                {
+                    ds.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting TWAIN capabilities");
+                return null;
+            }
+        }
+        finally
+        {
+            try
+            {
+                session.Close();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error closing TWAIN session for capabilities");
+            }
+        }
+    }
+
+    private PerSourceCaps GetPerSourceCaps(DataSource ds)
+    {
+        var xRes = ds.Capabilities.ICapXResolution.GetValues().Select(x => (int) x.Whole);
+        var yRes = ds.Capabilities.ICapYResolution.GetValues().Select(x => (int) x.Whole);
+        var dpiCaps = new DpiCaps(xRes.Intersect(yRes).ToImmutableList(), 0, 0, 0);
+        var pixelTypes = ds.Capabilities.ICapPixelType.GetValues().ToList();
+        var bitDepthCaps = new BitDepthCaps(
+            pixelTypes.Contains(PixelType.RGB),
+            pixelTypes.Contains(PixelType.Gray),
+            pixelTypes.Contains(PixelType.BlackWhite));
+        var w = ds.Capabilities.ICapPhysicalWidth.GetCurrent();
+        var h = ds.Capabilities.ICapPhysicalHeight.GetCurrent();
+        var scanAreaSize = new PageSize(
+            decimal.Round(w.Whole + w.Fraction / 65536m, 4),
+            decimal.Round(h.Whole + h.Fraction / 65536m, 4),
+            PageSizeUnit.Inch);
+        var pageSizeCaps = new PageSizeCaps(scanAreaSize);
+        return new PerSourceCaps(dpiCaps, bitDepthCaps, pageSizeCaps);
     }
 
     public async Task StartScan(ScanOptions options, ITwainEvents twainEvents, CancellationToken cancelToken)
