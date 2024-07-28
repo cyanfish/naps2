@@ -376,8 +376,17 @@
   <data name="favicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\favicon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="ask" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\ask.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="exclamation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\exclamation.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="exclamation_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\exclamation-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="draw_ellipse_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\draw_ellipse-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="diskette" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\diskette.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

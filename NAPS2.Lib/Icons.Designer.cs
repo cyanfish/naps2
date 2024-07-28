@@ -262,6 +262,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] ask {
+            get {
+                object obj = ResourceManager.GetObject("ask", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] blueprints {
             get {
                 object obj = ResourceManager.GetObject("blueprints", resourceCulture);
@@ -502,6 +512,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] draw_ellipse_small {
+            get {
+                object obj = ResourceManager.GetObject("draw_ellipse_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] email_attach {
             get {
                 object obj = ResourceManager.GetObject("email_attach", resourceCulture);
@@ -535,6 +555,16 @@ namespace NAPS2 {
         internal static byte[] exclamation {
             get {
                 object obj = ResourceManager.GetObject("exclamation", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] exclamation_small {
+            get {
+                object obj = ResourceManager.GetObject("exclamation_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }
