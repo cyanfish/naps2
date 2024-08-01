@@ -46,21 +46,22 @@ internal abstract class Placeholders
     /// <param name="incrementIfExists">Whether to use an auto-incrementing file number to make the file name unique.</param>
     /// <param name="numberSkip">The file number will be at least one bigger than this value.</param>
     /// <param name="autoNumberDigits">The minimum number of digits in the file number. Only has an effect if the path does not contain a numeric placeholder like $(n) or $(nnn).</param>
+    /// <param name="incrementPlaceholderIfExists">Whether to increment the placeholder number to make the file name unique.</param>
     /// <returns>The file path with substitutions.</returns>
     [return: NotNullIfNotNull("filePath")]
     public abstract string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
-        int autoNumberDigits = 0);
+        int autoNumberDigits = 0, bool incrementPlaceholderIfExists = true);
 
     public class StubPlaceholders : Placeholders
     {
         public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0) => filePath;
+            int autoNumberDigits = 0, bool incrementPlaceholderIfExists = true) => filePath;
     }
 
     public class EnvironmentPlaceholders : Placeholders
     {
         public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0)
+            int autoNumberDigits = 0, bool incrementPlaceholderIfExists = true)
         {
             if (filePath == null) return null;
             return Environment.ExpandEnvironmentVariables(filePath);
@@ -99,7 +100,7 @@ internal abstract class Placeholders
 
         [return: NotNullIfNotNull("filePath")]
         public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0)
+            int autoNumberDigits = 0, bool incrementPlaceholderIfExists = true)
         {
             if (filePath == null)
             {
@@ -116,7 +117,7 @@ internal abstract class Placeholders
             if (match.Success)
             {
                 result = NumberPlaceholderPattern.Replace(result, "");
-                result = SubstituteNumber(result, match.Index, match.Length - 3, numberSkip, true);
+                result = SubstituteNumber(result, match.Index, match.Length - 3, numberSkip, incrementPlaceholderIfExists);
             }
             else if (autoNumberDigits > 0)
             {
