@@ -600,11 +600,29 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 device found..
+        /// </summary>
+        internal static string DeviceFoundSingular {
+            get {
+                return ResourceManager.GetString("DeviceFoundSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Device:.
         /// </summary>
         internal static string DeviceLabel {
             get {
                 return ResourceManager.GetString("DeviceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} devices found..
+        /// </summary>
+        internal static string DevicesFound {
+            get {
+                return ResourceManager.GetString("DevicesFound", resourceCulture);
             }
         }
         
@@ -1235,6 +1253,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No devices found..
+        /// </summary>
+        internal static string NoDevicesFound {
+            get {
+                return ResourceManager.GetString("NoDevicesFound", resourceCulture);
             }
         }
         
@@ -1968,6 +1995,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Searching for devices....
+        /// </summary>
+        internal static string SearchingForDevices {
+            get {
+                return ResourceManager.GetString("SearchingForDevices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Second (00-59).
         /// </summary>
         internal static string Second2Digit {
@@ -1991,6 +2027,15 @@ namespace NAPS2.Lang.Resources {
         internal static string SelectAll {
             get {
                 return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Device.
+        /// </summary>
+        internal static string SelectDevice {
+            get {
+                return ResourceManager.GetString("SelectDevice", resourceCulture);
             }
         }
         

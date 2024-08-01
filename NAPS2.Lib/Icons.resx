@@ -196,6 +196,9 @@
   <data name="scanner_wireless" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-wireless-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="device" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\device.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="transform_flip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\transform_flip.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -267,6 +270,12 @@
   </data>
   <data name="text_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="text_align_justify_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\text_align_justify-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="large_tiles_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\large_tiles-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="control_play_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\control_play_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

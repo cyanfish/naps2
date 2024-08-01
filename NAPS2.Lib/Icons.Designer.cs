@@ -492,6 +492,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] device {
+            get {
+                object obj = ResourceManager.GetObject("device", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] diskette {
             get {
                 object obj = ResourceManager.GetObject("diskette", resourceCulture);
@@ -675,6 +685,16 @@ namespace NAPS2 {
         internal static byte[] key_small {
             get {
                 object obj = ResourceManager.GetObject("key_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] large_tiles_small {
+            get {
+                object obj = ResourceManager.GetObject("large_tiles_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -1025,6 +1045,16 @@ namespace NAPS2 {
         internal static byte[] text {
             get {
                 object obj = ResourceManager.GetObject("text", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] text_align_justify_small {
+            get {
+                object obj = ResourceManager.GetObject("text_align_justify_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }

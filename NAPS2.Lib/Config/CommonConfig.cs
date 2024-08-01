@@ -70,6 +70,9 @@ public class CommonConfig
     public bool AlwaysRememberDevice { get; set; }
 
     [Common]
+    public bool DeviceListAsTextOnly { get; set; }
+
+    [Common]
     public bool NoUpdatePrompt { get; set; }
 
     [Common]

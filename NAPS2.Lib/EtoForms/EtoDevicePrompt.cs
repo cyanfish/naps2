@@ -1,7 +1,5 @@
-﻿using System.Threading;
-using NAPS2.EtoForms.Ui;
+﻿using NAPS2.EtoForms.Ui;
 using NAPS2.Scan;
-using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.EtoForms;
 
@@ -16,41 +14,15 @@ public class EtoDevicePrompt : IDevicePrompt
         _scanningContext = scanningContext;
     }
 
-    public async Task<ScanDevice?> PromptForDevice(ScanOptions options)
+    public Task<ScanDevice?> PromptForDevice(ScanOptions options)
     {
-        // TWAIN and WIA get devices very fast (<1s) so it's better UX to just wait until we load the devices before
-        // showing the selection dialog.
-        // On the other hand, SANE can take a long time (10s), and Apple/ESCL wait a couple seconds for potential
-        // network responses, so it's better to show the selection dialog and lazily populate it.
-        bool waitForDevices = options.Driver is Driver.Wia or Driver.Twain;
-        if (waitForDevices)
+        // TODO: Extension method or something to turn InvokeGet into Task<T>?
+        return Task.FromResult(Invoker.Current.InvokeGet(() =>
         {
-            var deviceList = await new ScanController(_scanningContext).GetDeviceList(options);
-            if (deviceList.Count == 0)
-            {
-                throw new NoDevicesFoundException();
-            }
-            return Invoker.Current.InvokeGet(() =>
-            {
-                var deviceForm = _formFactory.Create<SelectDeviceForm>();
-                deviceForm.DeviceList = deviceList;
-                deviceForm.ShowModal();
-                return deviceForm.SelectedDevice;
-            });
-        }
-        else
-        {
-            var cts = new CancellationTokenSource();
-            var devices = new ScanController(_scanningContext).GetDevices(options, cts.Token);
-            return Invoker.Current.InvokeGet(() =>
-            {
-                var deviceForm = _formFactory.Create<SelectDeviceForm>();
-                deviceForm.AsyncDevices = devices;
-                deviceForm.AsyncCancelToken = cts.Token;
-                deviceForm.ShowModal();
-                cts.Cancel();
-                return deviceForm.SelectedDevice;
-            });
-        }
+            var deviceForm = _formFactory.Create<SelectDeviceForm>();
+            deviceForm.ScanOptions = options;
+            deviceForm.ShowModal();
+            return deviceForm.SelectedDevice;
+        }));
     }
 }

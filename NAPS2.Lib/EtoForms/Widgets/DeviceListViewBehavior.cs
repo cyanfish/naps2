@@ -1,0 +1,25 @@
+using Eto.Drawing;
+using NAPS2.Scan;
+
+namespace NAPS2.EtoForms.Widgets;
+
+public class DeviceListViewBehavior : ListViewBehavior<ScanDevice>
+{
+    private readonly Dictionary<ScanDevice, Image> _imageMap = new();
+
+    public DeviceListViewBehavior(ColorScheme colorScheme) : base(colorScheme)
+    {
+        MultiSelect = false;
+        ShowLabels = true;
+        ScrollOnDrag = false;
+    }
+
+    public void SetImage(ScanDevice item, Image image) => _imageMap.Add(item, image);
+
+    public override string GetLabel(ScanDevice item) => item.Name;
+
+    public override Image GetImage(ScanDevice item, Size imageSize)
+    {
+        return (_imageMap.Get(item) ?? Icons.device.ToEtoImage()).PadTo(imageSize);
+    }
+}

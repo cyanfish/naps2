@@ -62,7 +62,7 @@ internal class ScanPerformer : IScanPerformer
         try
         {
             var options = BuildOptions(scanProfile, new ScanParams(), dialogParent);
-            return await PromptForDevice(options);
+            return await _devicePrompt.PromptForDevice(options);
         }
         catch (Exception error)
         {
@@ -307,7 +307,7 @@ internal class ScanPerformer : IScanPerformer
         // If a device wasn't specified, prompt the user to pick one
         if (string.IsNullOrEmpty(scanProfile.Device?.ID))
         {
-            options.Device = await PromptForDevice(options);
+            options.Device = await _devicePrompt.PromptForDevice(options);
             if (options.Device == null)
             {
                 return false;
@@ -326,47 +326,5 @@ internal class ScanPerformer : IScanPerformer
         }
 
         return true;
-    }
-
-    private async Task<ScanDevice?> PromptForDevice(ScanOptions options)
-    {
-#if !MAC
-        // TODO: Not sure how best to handle this for console
-        if (options.Driver == Driver.Wia)
-        {
-#if NET6_0_OR_GREATER
-            if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
-#endif
-            // WIA has a nice built-in device selection dialog, so use it
-            using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
-            try
-            {
-                var wiaDevice = Invoker.Current.InvokeGet(() =>
-                {
-#if NET6_0_OR_GREATER
-                    if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
-#endif
-                    // ReSharper disable once AccessToDisposedClosure
-                    return deviceManager.PromptForDevice(options.DialogParent);
-                });
-                if (wiaDevice == null)
-                {
-                    return null;
-                }
-                return new ScanDevice(Driver.Wia, wiaDevice.Id(), wiaDevice.Name());
-            }
-            catch (WiaException ex) when (ex.ErrorCode == WiaErrorCodes.NO_DEVICE_AVAILABLE)
-            {
-                throw new NoDevicesFoundException();
-            }
-            catch (WiaException ex)
-            {
-                WiaScanErrors.ThrowDeviceError(ex);
-            }
-        }
-#endif
-
-        // Other drivers do not, so use a generic dialog
-        return await _devicePrompt.PromptForDevice(options);
     }
 }

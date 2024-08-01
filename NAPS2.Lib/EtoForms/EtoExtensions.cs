@@ -46,4 +46,20 @@ public static class EtoExtensions
     {
         new FillColorImageOp((byte) color.Rb, (byte) color.Gb, (byte) color.Bb, (byte) color.Ab).Perform(image);
     }
+
+    public static Image PadTo(this Image image, Size size)
+    {
+        bool fits = image.Width <= size.Width && image.Height <= size.Height;
+        bool needsPadding = image.Height < size.Height || image.Width < size.Width;
+        if (fits && needsPadding)
+        {
+            var newImage = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppRgba);
+            using var graphics = new Graphics(newImage);
+            graphics.Clear(Colors.Transparent);
+            graphics.DrawImage(image, (size.Width - image.Width) / 2f, (size.Height - image.Height) / 2f);
+            image.Dispose();
+            return newImage;
+        }
+        return image;
+    }
 }
