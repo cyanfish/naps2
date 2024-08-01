@@ -153,9 +153,9 @@ public class LayoutControl : LayoutElement
         {
             size.Width = Width.Value;
         }
-        if (context.IsNaturalSizeQuery && NaturalWidth != null)
+        if (!context.IsLayout && NaturalWidth != null)
         {
-            size.Width = Math.Max(size.Width, NaturalWidth.Value);
+            size.Width = NaturalWidth.Value;
         }
         if (Height != null)
         {
@@ -169,9 +169,9 @@ public class LayoutControl : LayoutElement
         {
             size.Height = Math.Max(size.Height, MinHeight.Value);
         }
-        if (context.IsNaturalSizeQuery && NaturalHeight != null)
+        if (!context.IsLayout && NaturalHeight != null)
         {
-            size.Height = Math.Max(size.Height, NaturalHeight.Value);
+            size.Height = NaturalHeight.Value;
         }
         return size;
     }
