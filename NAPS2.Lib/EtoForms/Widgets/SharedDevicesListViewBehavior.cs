@@ -14,5 +14,5 @@ public class SharedDevicesListViewBehavior : ListViewBehavior<SharedDevice>
 
     public override string GetLabel(SharedDevice item) => item.Name;
 
-    public override Image GetImage(SharedDevice item, int imageSize) => Icons.scanner_wireless.ToEtoImage();
+    public override Image GetImage(SharedDevice item, Size imageSize) => Icons.scanner_wireless.ToEtoImage();
 }

@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
 using Eto.Mac.Forms.Menu;
@@ -71,10 +72,10 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         ItemClicked?.Invoke(this, EventArgs.Empty);
     }
 
-    public int ImageSize
+    public Size ImageSize
     {
-        get => (int) ((NSCollectionViewFlowLayout) _layout).ItemSize.Width;
-        set => ((NSCollectionViewFlowLayout) _layout).ItemSize = new CGSize(value, value);
+        get => Size.Truncate(((NSCollectionViewFlowLayout) _layout).ItemSize.ToEto());
+        set => ((NSCollectionViewFlowLayout) _layout).ItemSize = new CGSize(value.Width, value.Height);
     }
 
     public Control Control => _panel;
@@ -290,7 +291,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         {
             var size = _behavior.GetImage(item, ImageSize).Size;
             var max = (double) Math.Max(size.Width, size.Height);
-            return new CGSize(size.Width * ImageSize / max, size.Height * ImageSize / max);
+            return new CGSize(size.Width * ImageSize.Width / max, size.Height * ImageSize.Width / max);
         }
     }
 

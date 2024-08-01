@@ -1,4 +1,4 @@
-using NAPS2.EtoForms;
+using Eto.Drawing;
 using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.Images;
@@ -51,7 +51,7 @@ public class ThumbnailController : IDisposable
         {
             var thumbnailSize = ThumbnailSizes.Validate(value);
             _config.User.Set(c => c.ThumbnailSize, thumbnailSize);
-            if (ListView?.ImageSize == thumbnailSize)
+            if (ListView?.ImageSize.Width == thumbnailSize)
             {
                 // Same size so no resizing needed
                 return;
@@ -76,7 +76,7 @@ public class ThumbnailController : IDisposable
         if (ListView != null)
         {
             // Adjust the visible thumbnail display with the new size
-            ListView.ImageSize = VisibleSize;
+            ListView.ImageSize = new Size(VisibleSize, VisibleSize);
             ListView.RegenerateImages();
         }
 

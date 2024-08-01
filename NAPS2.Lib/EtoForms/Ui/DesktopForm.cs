@@ -80,7 +80,7 @@ public abstract class DesktopForm : EtoFormBase
         _listView.ItemClicked += ListViewItemClicked;
         _listView.Drop += ListViewDrop;
         _listView.SelectionChanged += ListViewSelectionChanged;
-        _listView.ImageSize = _thumbnailController.VisibleSize;
+        _listView.ImageSize = new Size(_thumbnailController.VisibleSize, _thumbnailController.VisibleSize);
         _listView.ContextMenu = _contextMenu;
 
         // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)

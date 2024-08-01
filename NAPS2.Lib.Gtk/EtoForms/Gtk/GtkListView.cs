@@ -80,7 +80,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         ItemClicked?.Invoke(this, EventArgs.Empty);
     }
 
-    public int ImageSize { get; set; }
+    public Eto.Drawing.Size ImageSize { get; set; }
 
     public ScrolledWindow NativeControl => _scrolledWindow;
 

@@ -91,8 +91,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             SizeF textSize = TextRenderer.MeasureText(label, _view.Font);
             int textOffset = (int) (textSize.Height + PageNumberTextPadding);
 
-            float scaleHeight = (float) (ImageSize - textOffset) / image.Height;
-            float scaleWidth = (float) ImageSize / image.Width;
+            float scaleHeight = (float) (ImageSize.Height - textOffset) / image.Height;
+            float scaleWidth = (float) ImageSize.Width / image.Width;
 
             float scale = Math.Min(scaleWidth, scaleHeight);
             int height = (int) Math.Round(image.Height * scale);
@@ -145,12 +145,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             int width, height;
             if (image.Width > image.Height)
             {
-                width = ImageSize;
+                width = ImageSize.Width;
                 height = (int) Math.Round(width * (image.Height / (double) image.Width));
             }
             else
             {
-                height = ImageSize;
+                height = ImageSize.Height;
                 width = (int) Math.Round(height * (image.Width / (double) image.Height));
             }
             var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
@@ -171,10 +171,10 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
     }
 
-    public int ImageSize
+    public Eto.Drawing.Size ImageSize
     {
-        get => _view.LargeImageList!.ImageSize.Width;
-        set => WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(value, value));
+        get => _view.LargeImageList!.ImageSize.ToEto();
+        set => WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(value.Width, value.Height));
     }
 
     private void OnDragEnter(object? sender, DragEventArgs e)

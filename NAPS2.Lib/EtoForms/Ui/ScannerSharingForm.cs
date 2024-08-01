@@ -54,7 +54,7 @@ public class ScannerSharingForm : EtoDialogBase
         // TODO: Enable
         // _shareAsService.Checked = _osServiceManager.IsRegistered;
         // _shareAsService.CheckedChanged += ShareAsServiceCheckedChanged;
-        _listView.ImageSize = 48;
+        _listView.ImageSize = new Size(48, 48);
         _listView.SelectionChanged += SelectionChanged;
 
         _addCommand.Enabled = true;

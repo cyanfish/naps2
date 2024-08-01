@@ -20,7 +20,7 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
 
     public override string GetLabel(ScanProfile item) => item.DisplayName ?? "";
 
-    public override Image GetImage(ScanProfile item, int imageSize)
+    public override Image GetImage(ScanProfile item, Size imageSize)
     {
         if (item.IsDefault && item.IsLocked)
         {

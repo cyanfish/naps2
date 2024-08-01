@@ -93,7 +93,7 @@ public class ProfilesForm : EtoDialogBase
         profilesKsm.Assign("Mod+V", _pasteCommand);
         EtoPlatform.Current.HandleKeyDown(_listView.Control, profilesKsm.Perform);
 
-        _listView.ImageSize = 48;
+        _listView.ImageSize = new Size(48, 48);
         _listView.ItemClicked += ItemClicked;
         _listView.SelectionChanged += SelectionChanged;
         _listView.Drop += Drop;
