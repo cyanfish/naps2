@@ -59,7 +59,10 @@ internal class GdiImageTransformer : AbstractImageTransformer<GdiImage>
 
     protected override GdiImage PerformTransform(GdiImage image, ResizeTransform transform)
     {
-        var result = new Bitmap(transform.Width, transform.Height, PixelFormat.Format24bppRgb);
+        var result = new Bitmap(transform.Width, transform.Height,
+            image.PixelFormat == ImagePixelFormat.ARGB32
+                ? PixelFormat.Format32bppArgb
+                : PixelFormat.Format24bppRgb);
         using Graphics g = Graphics.FromImage(result);
         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
         // We set WrapMode to avoid artifacts

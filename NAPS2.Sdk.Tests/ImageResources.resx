@@ -229,6 +229,9 @@
   <data name="dog_alpha" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_alpha.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="dog_alpha_sc_50pct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_alpha_sc_50pct.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dog_alpha_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_alpha.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
