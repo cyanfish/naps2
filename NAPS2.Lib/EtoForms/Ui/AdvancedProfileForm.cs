@@ -130,12 +130,8 @@ public class AdvancedProfileForm : EtoDialogBase
 
     private void UpdateEnabled()
     {
-        _twainImpl.Enabled = ScanProfile!.DriverName == DriverNames.TWAIN;
-        _twainProgress.Enabled = ScanProfile!.DriverName == DriverNames.TWAIN;
-        _offsetWidth.Enabled = ScanProfile.DriverName == DriverNames.WIA;
-        _wiaVersion.Enabled = ScanProfile.DriverName == DriverNames.WIA;
         _quality.Enabled = !_maximumQuality.IsChecked();
-        _whiteThreshold.Enabled = _excludeBlank.IsChecked() && ScanProfile.BitDepth != ScanBitDepth.BlackWhite;
+        _whiteThreshold.Enabled = _excludeBlank.IsChecked() && ScanProfile!.BitDepth != ScanBitDepth.BlackWhite;
         _coverageThreshold.Enabled = _excludeBlank.IsChecked();
     }
 
