@@ -19,7 +19,7 @@ internal class EsclScanDriver : IScanDriver
     private readonly ScanningContext _scanningContext;
     private readonly ILogger _logger;
 
-    public static string GetUuid(ScanDevice device)
+    private static string GetUuid(ScanDevice device)
     {
         var parts = device.ID.Split('|');
         if (parts.Length == 1)
@@ -83,17 +83,27 @@ internal class EsclScanDriver : IScanDriver
     {
         if (cancelToken.IsCancellationRequested) return;
 
-        var service = await FindDeviceEsclService(options, cancelToken);
+        EsclClient client;
+        string deviceId = options.Device!.ID;
 
-        if (cancelToken.IsCancellationRequested) return;
-        if (service == null) throw new DeviceOfflineException();
-
-        var client = new EsclClient(service)
+        if (deviceId.StartsWith("http://") || deviceId.StartsWith("https://"))
         {
-            SecurityPolicy = options.EsclOptions.SecurityPolicy,
-            Logger = _logger,
-            CancelToken = cancelToken
-        };
+            client = new EsclClient(new Uri(deviceId));
+            // TODO: Handle device offline?
+        }
+        else
+        {
+            var service = await FindDeviceEsclService(options, cancelToken);
+
+            if (cancelToken.IsCancellationRequested) return;
+            if (service == null) throw new DeviceOfflineException();
+
+            client = new EsclClient(service);
+        }
+
+        client.SecurityPolicy = options.EsclOptions.SecurityPolicy;
+        client.Logger = _logger;
+        client.CancelToken = cancelToken;
 
         try
         {

@@ -76,6 +76,15 @@ public class ScanServer : IDisposable
         _esclServer.RemoveDevice(esclDeviceConfig);
     }
 
+    internal (int port, int tlsPort) GetDevicePorts(ScanDevice device, string? displayName = null) =>
+        GetDevicePorts(new ScanServerDevice { Device = device, Name = displayName ?? device.Name });
+
+    private (int port, int tlsPort) GetDevicePorts(ScanServerDevice sharedDevice)
+    {
+        var esclDeviceConfig = _currentDevices[sharedDevice];
+        return (esclDeviceConfig.Port, esclDeviceConfig.TlsPort);
+    }
+
     private EsclDeviceConfig MakeEsclDeviceConfig(ScanServerDevice device)
     {
         return new EsclDeviceConfig

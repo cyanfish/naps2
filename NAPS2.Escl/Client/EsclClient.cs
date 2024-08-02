@@ -50,12 +50,22 @@ public class EsclClient
         Timeout = TimeSpan.FromSeconds(120)
     };
 
-    private readonly EsclService _service;
+    private readonly EsclService? _service;
+    private readonly Uri? _uriBase;
+    private readonly string _rootUrl;
     private bool _httpFallback;
 
     public EsclClient(EsclService service)
     {
         _service = service;
+        _rootUrl = _service.RootUrl;
+    }
+
+    public EsclClient(Uri uriBase)
+    {
+        _uriBase = uriBase;
+        _rootUrl = _uriBase.AbsolutePath;
+        if (_rootUrl.StartsWith("/")) _rootUrl = _rootUrl.Substring(1);
     }
 
     public EsclSecurityPolicy SecurityPolicy { get; set; }
@@ -133,7 +143,7 @@ public class EsclClient
                     new XElement(PwgNs + "DocumentFormat", settings.DocumentFormat)));
         var content = new StringContent(doc, Encoding.UTF8, "text/xml");
         var response = await WithHttpFallback(
-            () => GetUrl($"/{_service.RootUrl}/ScanJobs"),
+            () => GetUrl($"/{_rootUrl}/ScanJobs"),
             url =>
             {
                 Logger.LogDebug("ESCL POST {Url}", url);
@@ -156,7 +166,8 @@ public class EsclClient
         return new XElement(elementName, value);
     }
 
-    public async Task<RawDocument?> NextDocument(EsclJob job, Action<double>? pageProgress = null, bool shortTimeout = false)
+    public async Task<RawDocument?> NextDocument(EsclJob job, Action<double>? pageProgress = null,
+        bool shortTimeout = false)
     {
         var progressCts = new CancellationTokenSource();
         if (pageProgress != null)
@@ -285,7 +296,7 @@ public class EsclClient
     {
         // TODO: Retry logic
         var response = await WithHttpFallback(
-            () => GetUrl($"/{_service.RootUrl}/{endpoint}"),
+            () => GetUrl($"/{_rootUrl}/{endpoint}"),
             url =>
             {
                 Logger.LogDebug("ESCL GET {Url}", url);
@@ -320,12 +331,18 @@ public class EsclClient
 
     private string GetUrl(string endpoint)
     {
-        bool tls = (_service.Tls || _service.Port == 443) && !_httpFallback &&
-                   !SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientDisableHttps);
+        bool tls = _service == null
+            ? _uriBase!.Scheme == "https"
+            : (_service.Tls || _service.Port == 443) && !_httpFallback &&
+              !SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientDisableHttps);
         if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireHttps) && !tls)
         {
             throw new EsclSecurityPolicyViolationException(
                 $"EsclSecurityPolicy of {SecurityPolicy} doesn't allow HTTP connections");
+        }
+        if (_service == null)
+        {
+            return $"{_uriBase!.Scheme}://{_uriBase.Host}:{_uriBase.Port}{endpoint}";
         }
         var protocol = tls ? "https" : "http";
         return $"{protocol}://{GetHostAndPort(_service.Tls && !_httpFallback)}{endpoint}";
@@ -333,7 +350,7 @@ public class EsclClient
 
     private string GetHostAndPort(bool tls)
     {
-        var port = tls ? _service.TlsPort : _service.Port;
+        var port = tls ? _service!.TlsPort : _service!.Port;
         var host = new IPEndPoint(_service.RemoteEndpoint, port).ToString();
 #if NET6_0_OR_GREATER
         if (OperatingSystem.IsMacOS())

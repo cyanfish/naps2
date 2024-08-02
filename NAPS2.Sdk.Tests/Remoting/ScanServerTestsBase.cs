@@ -18,6 +18,8 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
     protected const int TIMEOUT = 60_000;
 
     protected readonly ScanServer _server;
+    protected readonly ScanDevice _serverDevice;
+    protected readonly string _serverDisplayName;
     private protected readonly MockScanBridge _bridge;
     protected readonly ScanController _client;
     protected readonly ScanDevice _clientDevice;
@@ -37,15 +39,15 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
         _server.Certificate = certificate;
 
         // Initialize the server with a single device with a unique ID for the test
-        var displayName = $"testName-{Guid.NewGuid()}";
-        ScanningContext.Logger.LogDebug("Display name: {Name}", displayName);
-        var serverDevice = new ScanDevice(ScanOptionsValidator.SystemDefaultDriver, "testID", "testName");
-        _server.RegisterDevice(serverDevice, displayName);
+        _serverDisplayName = $"testName-{Guid.NewGuid()}";
+        ScanningContext.Logger.LogDebug("Display name: {Name}", _serverDisplayName);
+        _serverDevice = new ScanDevice(ScanOptionsValidator.SystemDefaultDriver, "testID", "testName");
+        _server.RegisterDevice(_serverDevice, _serverDisplayName);
 
         // Set up a client ScanController for scanning through EsclScanDriver -> network -> ScanServer
         _client = new ScanController(ScanningContext);
-        var uuid = new ScanServerDevice { Device = serverDevice, Name = displayName }.GetUuid(_server.InstanceId);
-        _clientDevice = new ScanDevice(Driver.Escl, uuid, displayName);
+        var uuid = new ScanServerDevice { Device = _serverDevice, Name = _serverDisplayName }.GetUuid(_server.InstanceId);
+        _clientDevice = new ScanDevice(Driver.Escl, uuid, _serverDisplayName);
     }
 
     public Task InitializeAsync() => _server.Start();
