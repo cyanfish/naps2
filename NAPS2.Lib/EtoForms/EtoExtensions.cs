@@ -57,7 +57,6 @@ public static class EtoExtensions
             using var graphics = new Graphics(newImage);
             graphics.Clear(Colors.Transparent);
             graphics.DrawImage(image, (size.Width - image.Width) / 2f, (size.Height - image.Height) / 2f);
-            image.Dispose();
             return newImage;
         }
         return image;

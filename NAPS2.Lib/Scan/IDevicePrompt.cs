@@ -2,5 +2,5 @@ namespace NAPS2.Scan;
 
 public interface IDevicePrompt
 {
-    public Task<ScanDevice?> PromptForDevice(ScanOptions options);
+    public Task<DeviceChoice> PromptForDevice(ScanOptions options, bool allowAlwaysAsk);
 }

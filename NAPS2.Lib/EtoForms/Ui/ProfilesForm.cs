@@ -260,6 +260,7 @@ public class ProfilesForm : EtoDialogBase
             {
                 Version = ScanProfile.CURRENT_VERSION
             };
+            editSettingsForm.NewProfile = true;
             editSettingsForm.ShowModal();
             if (!editSettingsForm.Result)
             {
@@ -291,6 +292,7 @@ public class ProfilesForm : EtoDialogBase
     {
         var fedit = FormFactory.Create<EditProfileForm>();
         fedit.ScanProfile = Config.DefaultProfileSettings();
+        fedit.NewProfile = true;
         fedit.ShowModal();
         if (fedit.Result)
         {

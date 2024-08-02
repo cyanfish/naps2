@@ -8,7 +8,7 @@ namespace NAPS2.Scan;
 /// </summary>
 public interface IScanPerformer
 {
-    Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default);
+    Task<DeviceChoice> PromptForDevice(ScanProfile scanProfile, bool allowAlwaysAsk = true, IntPtr dialogParent = default);
 
     IAsyncEnumerable<ScanDevice> GetDevices(ScanProfile scanProfile, CancellationToken cancelToken = default);
 

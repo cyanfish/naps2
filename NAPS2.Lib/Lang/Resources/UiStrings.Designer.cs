@@ -186,6 +186,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Always Ask.
+        /// </summary>
+        internal static string AlwaysAsk {
+            get {
+                return ResourceManager.GetString("AlwaysAsk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apple Driver.
         /// </summary>
         internal static string AppleDriver {

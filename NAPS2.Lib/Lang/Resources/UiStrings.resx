@@ -903,6 +903,9 @@
   <data name="Combine" xml:space="preserve">
     <value>Combine</value>
   </data>
+  <data name="AlwaysAsk" xml:space="preserve">
+    <value>Always Ask</value>
+  </data>
   <data name="SearchingForDevices" xml:space="preserve">
     <value>Searching for devices...</value>
   </data>

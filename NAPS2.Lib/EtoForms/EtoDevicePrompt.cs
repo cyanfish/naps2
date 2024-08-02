@@ -14,15 +14,16 @@ public class EtoDevicePrompt : IDevicePrompt
         _scanningContext = scanningContext;
     }
 
-    public Task<ScanDevice?> PromptForDevice(ScanOptions options)
+    public Task<DeviceChoice> PromptForDevice(ScanOptions options, bool allowAlwaysAsk)
     {
         // TODO: Extension method or something to turn InvokeGet into Task<T>?
         return Task.FromResult(Invoker.Current.InvokeGet(() =>
         {
             var deviceForm = _formFactory.Create<SelectDeviceForm>();
             deviceForm.ScanOptions = options;
+            deviceForm.AllowAlwaysAsk = allowAlwaysAsk;
             deviceForm.ShowModal();
-            return deviceForm.SelectedDevice;
+            return deviceForm.Choice;
         }));
     }
 }

@@ -57,17 +57,17 @@ internal class ScanPerformer : IScanPerformer
         _ocrOperationManager = ocrOperationManager;
     }
 
-    public async Task<ScanDevice?> PromptForDevice(ScanProfile scanProfile, IntPtr dialogParent = default)
+    public async Task<DeviceChoice> PromptForDevice(ScanProfile scanProfile, bool allowAlwaysAsk, IntPtr dialogParent = default)
     {
         try
         {
             var options = BuildOptions(scanProfile, new ScanParams(), dialogParent);
-            return await _devicePrompt.PromptForDevice(options);
+            return await _devicePrompt.PromptForDevice(options, allowAlwaysAsk);
         }
         catch (Exception error)
         {
             HandleError(error);
-            return null;
+            return DeviceChoice.None;
         }
     }
 
@@ -307,7 +307,7 @@ internal class ScanPerformer : IScanPerformer
         // If a device wasn't specified, prompt the user to pick one
         if (string.IsNullOrEmpty(scanProfile.Device?.ID))
         {
-            options.Device = await _devicePrompt.PromptForDevice(options);
+            options.Device = (await _devicePrompt.PromptForDevice(options, false)).Device;
             if (options.Device == null)
             {
                 return false;

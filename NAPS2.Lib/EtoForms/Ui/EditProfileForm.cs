@@ -36,7 +36,7 @@ public class EditProfileForm : EtoDialogBase
     private readonly SliderWithTextBox _contrastSlider = new();
 
     private ScanProfile _scanProfile = null!;
-    private ScanDevice? _currentDevice;
+    private DeviceChoice _currentDevice = DeviceChoice.None;
     private bool _isDefault;
     private bool _result;
     private bool _suppressChangeEvent;
@@ -58,7 +58,6 @@ public class EditProfileForm : EtoDialogBase
         _enableAutoSave.CheckedChanged += EnableAutoSave_CheckedChanged;
         _autoSaveSettings.Click += AutoSaveSettings_LinkClicked;
         _advanced.Click += Advanced_Click;
-        _deviceName.KeyDown += DeviceName_KeyDown;
     }
 
     protected override void BuildLayout()
@@ -138,24 +137,34 @@ public class EditProfileForm : EtoDialogBase
         set => _scanProfile = value.Clone();
     }
 
-    public ScanDevice? CurrentDevice
+    public bool NewProfile { get; set; }
+
+    public DeviceChoice CurrentDevice
     {
         get => _currentDevice;
         set
         {
             _currentDevice = value;
-            _deviceName.Text = value?.Name ?? "";
-            _deviceDriver.Text = value?.Driver switch
+            if (value == DeviceChoice.None)
             {
-                Driver.Wia => UiStrings.WiaDriver,
-                Driver.Twain => UiStrings.TwainDriver,
-                Driver.Sane => UiStrings.SaneDriver,
-                Driver.Escl => UiStrings.EsclDriver,
-                Driver.Apple => UiStrings.AppleDriver,
-                _ => ""
-            };
-            _deviceVis.IsVisible = _deviceName.Text.Length > 0;
-            _deviceIcon.Image = Icons.device.ToEtoImage();
+                _deviceName.Text = "";
+                _deviceVis.IsVisible = false;
+            }
+            else
+            {
+                _deviceName.Text = value.Device?.Name ?? UiStrings.AlwaysAsk;
+                _deviceDriver.Text = value.Driver switch
+                {
+                    Driver.Wia => UiStrings.WiaDriver,
+                    Driver.Twain => UiStrings.TwainDriver,
+                    Driver.Sane => UiStrings.SaneDriver,
+                    Driver.Escl => UiStrings.EsclDriver,
+                    Driver.Apple => UiStrings.AppleDriver,
+                    _ => ""
+                };
+                _deviceVis.IsVisible = true;
+                _deviceIcon.Image = value.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage();
+            }
         }
     }
 
@@ -174,7 +183,18 @@ public class EditProfileForm : EtoDialogBase
                 : Driver.Default);
 
         _displayName.Text = ScanProfile.DisplayName;
-        CurrentDevice ??= ScanProfile.Device?.ToScanDevice(DeviceDriver);
+        if (CurrentDevice == DeviceChoice.None)
+        {
+            var device = ScanProfile.Device?.ToScanDevice(DeviceDriver);
+            if (device != null)
+            {
+                CurrentDevice = DeviceChoice.ForDevice(device);
+            }
+            else if (!NewProfile)
+            {
+                CurrentDevice = DeviceChoice.ForAlwaysAsk(DeviceDriver);
+            }
+        }
         _isDefault = ScanProfile.IsDefault;
 
         _paperSource.SelectedIndex = (int) ScanProfile.PaperSource;
@@ -201,16 +221,16 @@ public class EditProfileForm : EtoDialogBase
     private async void ChooseDevice(object? sender, EventArgs args)
     {
         ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
-        var device = await _scanPerformer.PromptForDevice(ScanProfile, NativeHandle);
-        if (device != null)
+        var choice = await _scanPerformer.PromptForDevice(ScanProfile, true, NativeHandle);
+        if (choice.Device != null || choice.AlwaysAsk)
         {
-            if (string.IsNullOrEmpty(_displayName.Text) ||
-                CurrentDevice != null && CurrentDevice.Name == _displayName.Text)
+            if ((string.IsNullOrEmpty(_displayName.Text) ||
+                 CurrentDevice.Device?.Name == _displayName.Text) && !choice.AlwaysAsk)
             {
-                _displayName.Text = device.Name;
+                _displayName.Text = choice.Device!.Name;
             }
-            CurrentDevice = device;
-            DeviceDriver = device.Driver;
+            CurrentDevice = choice;
+            DeviceDriver = choice.Driver;
             UpdateEnabledControls();
         }
     }
@@ -293,11 +313,14 @@ public class EditProfileForm : EtoDialogBase
 
     private bool SaveSettings()
     {
-        // Note: If CurrentDevice is null, that's fine. A prompt will be shown when scanning.
-
         if (_displayName.Text == "")
         {
             _errorOutput.DisplayError(MiscResources.NameMissing);
+            return false;
+        }
+        if (CurrentDevice == DeviceChoice.None)
+        {
+            _errorOutput.DisplayError(MiscResources.NoDeviceSelected);
             return false;
         }
         _result = true;
@@ -306,7 +329,7 @@ public class EditProfileForm : EtoDialogBase
         {
             if (!ScanProfile.IsDeviceLocked)
             {
-                ScanProfile.Device = ScanProfileDevice.FromScanDevice(CurrentDevice);
+                ScanProfile.Device = ScanProfileDevice.FromScanDevice(CurrentDevice.Device);
             }
             return true;
         }
@@ -319,7 +342,7 @@ public class EditProfileForm : EtoDialogBase
         {
             Version = ScanProfile.CURRENT_VERSION,
 
-            Device = ScanProfileDevice.FromScanDevice(CurrentDevice),
+            Device = ScanProfileDevice.FromScanDevice(CurrentDevice.Device),
             IsDefault = _isDefault,
             DriverName = DeviceDriver.ToString().ToLowerInvariant(),
             DisplayName = _displayName.Text,
@@ -477,14 +500,6 @@ public class EditProfileForm : EtoDialogBase
             }
         }
         _autoSaveSettings.Enabled = _enableAutoSave.IsChecked();
-    }
-
-    private void DeviceName_KeyDown(object? sender, KeyEventArgs e)
-    {
-        if (e.Key == Keys.Delete)
-        {
-            CurrentDevice = null;
-        }
     }
 
     private class PageSizeListItem : IListItem

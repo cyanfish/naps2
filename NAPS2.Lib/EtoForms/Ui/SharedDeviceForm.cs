@@ -172,7 +172,7 @@ public class SharedDeviceForm : EtoDialogBase
     private async void ChooseDevice(object? sender, EventArgs args)
     {
         var profile = new ScanProfile { DriverName = DeviceDriver.ToString().ToLowerInvariant() };
-        var device = await _scanPerformer.PromptForDevice(profile, NativeHandle);
+        var device = (await _scanPerformer.PromptForDevice(profile, false, NativeHandle)).Device;
         if (device != null)
         {
             if (string.IsNullOrEmpty(_displayName.Text) ||

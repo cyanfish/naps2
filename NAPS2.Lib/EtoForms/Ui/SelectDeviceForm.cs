@@ -11,6 +11,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public class SelectDeviceForm : EtoDialogBase
 {
+    private readonly ScanDevice AlwaysAskMarker = new(Driver.Default, "*always*ask*", UiStrings.AlwaysAsk);
+
     private readonly RadioButton _wiaDriver;
     private readonly RadioButton _twainDriver;
     private readonly RadioButton _appleDriver;
@@ -23,7 +25,6 @@ public class SelectDeviceForm : EtoDialogBase
     private readonly ListBox _deviceTextList = new();
     private readonly IListView<ScanDevice> _deviceIconList;
     private readonly Button _selectDevice;
-    private readonly List<ScanDevice> _lazyDeviceList = [];
     // TODO: The spinner doesn't seem to animate on WinForms
     private readonly Spinner _spinner = new() { Enabled = true };
     private readonly ImageView _statusIcon = new();
@@ -40,9 +41,9 @@ public class SelectDeviceForm : EtoDialogBase
         _deviceListViewBehavior = deviceListViewBehavior;
         _scanningContext = scanningContext;
         _selectDevice = C.OkButton(this, SelectDevice, UiStrings.Select);
-        _selectDevice.Enabled = false;
         _deviceIconList = EtoPlatform.Current.CreateListView(deviceListViewBehavior);
         _deviceIconList.ImageSize = new Size(48, 32);
+        deviceListViewBehavior.SetImage(AlwaysAskMarker, iconProvider.GetIcon("ask")!);
 
         _deviceTextList.Activated += (_, _) => _selectDevice.PerformClick();
         _deviceIconList.ItemClicked += (_, _) => _selectDevice.PerformClick();
@@ -56,7 +57,7 @@ public class SelectDeviceForm : EtoDialogBase
         _textListVis.IsVisible = config.Get(c => c.DeviceListAsTextOnly);
     }
 
-    private void Driver_MouseUp(object sender, EventArgs e)
+    private void Driver_MouseUp(object? sender, EventArgs e)
     {
         QueryForDevices();
     }
@@ -194,17 +195,13 @@ public class SelectDeviceForm : EtoDialogBase
         _activeQuery = DeviceDriver;
 
         DeviceList = new List<ScanDevice>();
-
-        _deviceIconList.SetItems(DeviceList!);
-        _deviceTextList.Items.Clear();
-        foreach (var device in DeviceList)
+        ExtraItems = new List<ScanDevice>();
+        if (AllowAlwaysAsk && DeviceDriver is not (Driver.Wia or Driver.Twain))
         {
-            _deviceTextList.Items.Add(new ListItem
-            {
-                Key = device.ID,
-                Text = device.Name
-            });
+            ExtraItems.Add(AlwaysAskMarker);
         }
+
+        UpdateDevices(true);
 
         var cts = new CancellationTokenSource();
         _getDevicesCts = cts;
@@ -223,33 +220,38 @@ public class SelectDeviceForm : EtoDialogBase
                         if (!cts.IsCancellationRequested)
                         {
                             DeviceList.Add(device);
-                            _deviceIconList.SetItems(DeviceList!);
-                            _deviceTextList.Items.Add(
-                                new ListItem
-                                {
-                                    Key = device.ID,
-                                    Text = device.Name
-                                });
-                            if (_deviceTextList.Items.Count == 1)
+                            UpdateDevices(false);
+                            if (DeviceList.Count == 1)
                             {
                                 _deviceIconList.Selection = ListSelection.Of(DeviceList[0]);
                                 _deviceTextList.SelectedIndex = 0;
-                                _selectDevice.Enabled = true;
                             }
                         }
                     });
                 }
                 Invoker.Current.Invoke(() =>
                 {
+                    if (AllowAlwaysAsk && DeviceDriver is Driver.Wia or Driver.Twain)
+                    {
+                        if (!cts.IsCancellationRequested)
+                        {
+                            ExtraItems.Add(AlwaysAskMarker);
+                            UpdateDevices(false);
+                        }
+                    }
+                });
+                Invoker.Current.Invoke(() =>
+                {
                     if (!cts.IsCancellationRequested)
                     {
-                        int found = DeviceList.Count;
                         _spinnerVis.IsVisible = false;
                         _statusIcon.Image =
-                            found > 0 ? Icons.accept_small.ToEtoImage() : Icons.exclamation_small.ToEtoImage();
-                        _statusLabel.Text = found switch
+                            DeviceList.Count > 0
+                                ? Icons.accept_small.ToEtoImage()
+                                : Icons.exclamation_small.ToEtoImage();
+                        _statusLabel.Text = DeviceList.Count switch
                         {
-                            > 1 => string.Format(UiStrings.DevicesFound, found),
+                            > 1 => string.Format(UiStrings.DevicesFound, DeviceList.Count),
                             1 => UiStrings.DeviceFoundSingular,
                             _ => UiStrings.NoDevicesFound
                         };
@@ -281,11 +283,32 @@ public class SelectDeviceForm : EtoDialogBase
         });
     }
 
+    private void UpdateDevices(bool clear)
+    {
+        _deviceIconList.SetItems(DeviceList!.Concat(ExtraItems!));
+        if (clear)
+        {
+            _deviceTextList.Items.Clear();
+        }
+        foreach (var device in DeviceList!.Concat(ExtraItems!).Skip(_deviceTextList.Items.Count))
+        {
+            _deviceTextList.Items.Add(new ListItem
+            {
+                Key = device.ID,
+                Text = device.Name
+            });
+        }
+    }
+
     public ScanOptions? ScanOptions { get; set; }
+
+    public bool AllowAlwaysAsk { get; set; }
 
     public List<ScanDevice>? DeviceList { get; private set; }
 
-    public ScanDevice? SelectedDevice { get; private set; }
+    private List<ScanDevice>? ExtraItems { get; set; }
+
+    public DeviceChoice Choice { get; private set; } = DeviceChoice.None;
 
     private bool SelectDevice()
     {
@@ -296,7 +319,7 @@ public class SelectDeviceForm : EtoDialogBase
                 _deviceTextList.Focus();
                 return false;
             }
-            SelectedDevice = (DeviceList ?? _lazyDeviceList).FirstOrDefault(x => x.ID == _deviceTextList.SelectedKey);
+            Choice = DeviceChoice.ForDevice(DeviceList!.First(x => x.ID == _deviceTextList.SelectedKey));
         }
         else
         {
@@ -305,7 +328,11 @@ public class SelectDeviceForm : EtoDialogBase
                 _deviceIconList.Control.Focus();
                 return false;
             }
-            SelectedDevice = _deviceIconList.Selection.First();
+            Choice = DeviceChoice.ForDevice(_deviceIconList.Selection.First());
+        }
+        if (Choice.Device == AlwaysAskMarker)
+        {
+            Choice = DeviceChoice.ForAlwaysAsk(DeviceDriver);
         }
         return true;
     }

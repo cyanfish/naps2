@@ -292,6 +292,7 @@ public class BatchScanForm : EtoDialogBase
         {
             var fedit = FormFactory.Create<EditProfileForm>();
             fedit.ScanProfile = Config.DefaultProfileSettings();
+            fedit.NewProfile = true;
             fedit.ShowModal();
             if (fedit.Result)
             {
