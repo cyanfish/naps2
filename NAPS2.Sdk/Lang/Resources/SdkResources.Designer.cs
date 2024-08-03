@@ -256,5 +256,23 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("Version", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The worker process crashed..
+        /// </summary>
+        internal static string WorkerCrash {
+            get {
+                return ResourceManager.GetString("WorkerCrash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The worker process crashed. Check the Windows event viewer..
+        /// </summary>
+        internal static string WorkerCrashWindows {
+            get {
+                return ResourceManager.GetString("WorkerCrashWindows", resourceCulture);
+            }
+        }
     }
 }

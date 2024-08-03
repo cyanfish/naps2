@@ -34,6 +34,8 @@ internal interface ISystemCompat
 
     bool SupportsWinX86Worker { get; }
 
+    string WorkerCrashMessage { get; }
+
     string[] ExeSearchPaths { get; }
 
     string[] LibrarySearchPaths { get; }

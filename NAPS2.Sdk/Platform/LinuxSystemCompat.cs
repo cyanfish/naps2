@@ -40,6 +40,8 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool SupportsWinX86Worker => false;
 
+    public string WorkerCrashMessage => SdkResources.WorkerCrash;
+
     public string[] ExeSearchPaths => LibrarySearchPaths;
 
     public string[] LibrarySearchPaths => new[]

@@ -3,6 +3,7 @@ using Grpc.Core;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.Scan;
+using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 using NAPS2.Scan.Internal.Twain;
 using NAPS2.Scan.Internal.Wia;
@@ -60,6 +61,10 @@ internal class WorkerServiceAdapter
         }
         catch (RpcException ex)
         {
+            if (ex.StatusCode == StatusCode.Unavailable)
+            {
+                throw new ScanDriverUnknownException(PlatformCompat.System.WorkerCrashMessage, ex);
+            }
             if (ex.Status.StatusCode != StatusCode.Cancelled)
             {
                 throw;
@@ -69,10 +74,21 @@ internal class WorkerServiceAdapter
 
     public async Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        var req = new GetCapsRequest { OptionsXml = options.ToXml() };
-        var resp = await _client.GetCapsAsync(req, cancellationToken: cancelToken);
-        RemotingHelper.HandleErrors(resp.Error);
-        return resp.ScanCapsXml.FromXml<ScanCaps>();
+        try
+        {
+            var req = new GetCapsRequest { OptionsXml = options.ToXml() };
+            var resp = await _client.GetCapsAsync(req, cancellationToken: cancelToken);
+            RemotingHelper.HandleErrors(resp.Error);
+            return resp.ScanCapsXml.FromXml<ScanCaps>();
+        }
+        catch (RpcException ex)
+        {
+            if (ex.StatusCode == StatusCode.Unavailable)
+            {
+                throw new ScanDriverUnknownException(PlatformCompat.System.WorkerCrashMessage, ex);
+            }
+            throw;
+        }
     }
 
     public async Task Scan(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken,
@@ -107,7 +123,11 @@ internal class WorkerServiceAdapter
         }
         catch (RpcException ex)
         {
-            if (ex.Status.StatusCode != StatusCode.Cancelled)
+            if (ex.StatusCode == StatusCode.Unavailable)
+            {
+                throw new ScanDriverUnknownException(PlatformCompat.System.WorkerCrashMessage, ex);
+            }
+            if (ex.StatusCode != StatusCode.Cancelled)
             {
                 throw;
             }
@@ -194,7 +214,11 @@ internal class WorkerServiceAdapter
         }
         catch (RpcException ex)
         {
-            if (ex.Status.StatusCode != StatusCode.Cancelled)
+            if (ex.StatusCode == StatusCode.Unavailable)
+            {
+                throw new ScanDriverUnknownException(PlatformCompat.System.WorkerCrashMessage, ex);
+            }
+            if (ex.StatusCode != StatusCode.Cancelled)
             {
                 throw;
             }
@@ -203,18 +227,40 @@ internal class WorkerServiceAdapter
 
     public async Task<List<ScanDevice>> TwainGetDeviceList(ScanOptions options)
     {
-        var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };
-        var resp = await _client.TwainGetDeviceListAsync(req);
-        RemotingHelper.HandleErrors(resp.Error);
-        return resp.DeviceListXml.FromXml<List<ScanDevice>>();
+        try
+        {
+            var req = new GetDeviceListRequest { OptionsXml = options.ToXml() };
+            var resp = await _client.TwainGetDeviceListAsync(req);
+            RemotingHelper.HandleErrors(resp.Error);
+            return resp.DeviceListXml.FromXml<List<ScanDevice>>();
+        }
+        catch (RpcException ex)
+        {
+            if (ex.StatusCode == StatusCode.Unavailable)
+            {
+                throw new ScanDriverUnknownException(PlatformCompat.System.WorkerCrashMessage, ex);
+            }
+            throw;
+        }
     }
 
     public async Task<ScanCaps> TwainGetCaps(ScanOptions options)
     {
-        var req = new GetCapsRequest { OptionsXml = options.ToXml() };
-        var resp = await _client.TwainGetCapsAsync(req);
-        RemotingHelper.HandleErrors(resp.Error);
-        return resp.ScanCapsXml.FromXml<ScanCaps>();
+        try
+        {
+            var req = new GetCapsRequest { OptionsXml = options.ToXml() };
+            var resp = await _client.TwainGetCapsAsync(req);
+            RemotingHelper.HandleErrors(resp.Error);
+            return resp.ScanCapsXml.FromXml<ScanCaps>();
+        }
+        catch (RpcException ex)
+        {
+            if (ex.StatusCode == StatusCode.Unavailable)
+            {
+                throw new ScanDriverUnknownException(PlatformCompat.System.WorkerCrashMessage, ex);
+            }
+            throw;
+        }
     }
 
     public ProcessedImage ImportPostProcess(ScanningContext scanningContext, ProcessedImage img, int? thumbnailSize,

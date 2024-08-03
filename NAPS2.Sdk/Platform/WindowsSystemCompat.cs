@@ -37,6 +37,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool SupportsWinX86Worker => true;
 
+    public string WorkerCrashMessage => SdkResources.WorkerCrashWindows;
+
     public abstract string[] ExeSearchPaths { get;  }
 
     public abstract string[] LibrarySearchPaths { get;  }
