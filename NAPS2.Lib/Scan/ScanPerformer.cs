@@ -267,7 +267,7 @@ internal class ScanPerformer : IScanPerformer
             OcrParams = scanParams.OcrParams ?? OcrParams.Empty,
             Brightness = scanProfile.Brightness,
             Contrast = scanProfile.Contrast,
-            Dpi = scanProfile.Resolution.ToIntDpi(),
+            Dpi = scanProfile.Resolution.Dpi,
             Quality = scanProfile.Quality,
             AutoDeskew = scanProfile.AutoDeskew,
             RotateDegrees = scanProfile.RotateDegrees,

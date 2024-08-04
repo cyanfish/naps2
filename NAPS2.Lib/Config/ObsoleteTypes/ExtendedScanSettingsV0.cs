@@ -15,7 +15,7 @@ public class ExtendedScanSettingsV0 : ScanSettingsV0
         BitDepth = ScanBitDepth.C24Bit;
         PageAlign = ScanHorizontalAlign.Left;
         PageSize = ScanPageSize.Letter;
-        Resolution = ScanDpi.Dpi200;
+        Resolution.Dpi = 200;
         PaperSource = ScanSource.Glass;
     }
 
@@ -37,7 +37,7 @@ public class ExtendedScanSettingsV0 : ScanSettingsV0
 
     public PageDimensions? CustomPageSize { get; set; }
 
-    public ScanDpi Resolution { get; set; }
+    public ScanResolution Resolution { get; set; } = new();
 
     public ScanSource PaperSource { get; set; }
 }

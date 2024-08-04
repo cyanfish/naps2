@@ -232,9 +232,19 @@ public class EditProfileForm : EtoDialogBase
         }
         _isDefault = ScanProfile.IsDefault;
 
+        // TODO: Allow selecting custom DPI values
+        int resolutionIndex = 0;
+        foreach (ScanDpi scanDpi in Enum.GetValues(typeof(ScanDpi)))
+        {
+            if (ScanProfile.Resolution.Dpi > scanDpi.ToIntDpi())
+            {
+                resolutionIndex++;
+            }
+        }
+
         _paperSource.SelectedIndex = (int) ScanProfile.PaperSource;
         _bitDepth.SelectedIndex = (int) ScanProfile.BitDepth;
-        _resolution.SelectedIndex = (int) ScanProfile.Resolution;
+        _resolution.SelectedIndex = resolutionIndex;
         _contrastSlider.IntValue = ScanProfile.Contrast;
         _brightnessSlider.IntValue = ScanProfile.Brightness;
         UpdatePageSizeList();
@@ -393,7 +403,7 @@ public class EditProfileForm : EtoDialogBase
             PageSize = pageSize.Type,
             CustomPageSizeName = pageSize.CustomName,
             CustomPageSize = pageSize.CustomDimens,
-            Resolution = (ScanDpi) _resolution.SelectedIndex,
+            Resolution = new ScanResolution { Dpi = ((ScanDpi) _resolution.SelectedIndex).ToIntDpi() },
             PaperSource = (ScanSource) _paperSource.SelectedIndex,
 
             EnableAutoSave = _enableAutoSave.IsChecked(),

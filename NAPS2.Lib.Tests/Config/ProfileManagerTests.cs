@@ -68,7 +68,7 @@ public class ProfileManagerTests : ContextualTests
 
         Assert.Equal("wia", profiles[0].DriverName);
         Assert.Equal("test_id", profiles[0].Device?.ID);
-        Assert.Equal(ScanDpi.Dpi200, profiles[0].Resolution);
+        Assert.Equal(200, profiles[0].Resolution.Dpi);
         Assert.Equal(2, profiles[0].Version);
         Assert.Equal(0, profiles[0].UpgradedFrom);
     }
@@ -84,7 +84,7 @@ public class ProfileManagerTests : ContextualTests
 
         Assert.Equal("wia", profiles[0].DriverName);
         Assert.Equal("test_id", profiles[0].Device?.ID);
-        Assert.Equal(ScanDpi.Dpi200, profiles[0].Resolution);
+        Assert.Equal(200, profiles[0].Resolution.Dpi);
         Assert.Equal(2, profiles[0].Version);
         Assert.Equal(1, profiles[0].UpgradedFrom);
     }

@@ -20,7 +20,7 @@ public class ScanProfile
         BitDepth = ScanBitDepth.C24Bit;
         PageAlign = ScanHorizontalAlign.Right;
         PageSize = ScanPageSize.Letter;
-        Resolution = ScanDpi.Dpi200;
+        Resolution.Dpi = 200;
         PaperSource = ScanSource.Glass;
         Quality = 75;
         BlankPageWhiteThreshold = 70;
@@ -83,7 +83,7 @@ public class ScanProfile
 
     public PageDimensions? CustomPageSize { get; set; }
 
-    public ScanDpi Resolution { get; set; }
+    public ScanResolution Resolution { get; set; } = new();
 
     public ScanSource PaperSource { get; set; }
 

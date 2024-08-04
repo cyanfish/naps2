@@ -1068,7 +1068,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Device = new ScanProfileDevice("test_id", "test_name"),
                 PaperSource = ScanSource.Feeder,
                 BitDepth = ScanBitDepth.Grayscale,
-                Resolution = ScanDpi.Dpi300,
+                Resolution = new ScanResolution { Dpi = 300 },
                 PageSize = ScanPageSize.A4
             }), ListSelection.Empty<ScanProfile>());
         }).RunCommand(
@@ -1103,7 +1103,7 @@ public class CommandLineIntegrationTests : ContextualTests
             var profile = profileManager.Profiles[0];
             profile.PaperSource = ScanSource.Feeder;
             profile.BitDepth = ScanBitDepth.Grayscale;
-            profile.Resolution = ScanDpi.Dpi300;
+            profile.Resolution = new ScanResolution { Dpi = 300 };
             profile.PageSize = ScanPageSize.A4;
             var config = container.Resolve<Naps2Config>();
             config.User.Set(c => c.EnableOcr, true);

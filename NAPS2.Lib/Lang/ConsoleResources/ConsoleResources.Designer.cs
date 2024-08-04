@@ -331,15 +331,6 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The DPI option was not valid (must be 100/150/200/300/400/600/800/1200/2400/4800)..
-        /// </summary>
-        internal static string InvalidDpi {
-            get {
-                return ResourceManager.GetString("InvalidDpi", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The driver option was not valid. Possible values: {0}.
         /// </summary>
         internal static string InvalidDriver {

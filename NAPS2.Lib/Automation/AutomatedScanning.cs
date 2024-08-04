@@ -41,7 +41,6 @@ internal class AutomatedScanning
     private List<string> _actualOutputPaths = null!;
     private OcrParams _ocrParams = null!;
     private PageDimensions? _pageDimensions;
-    private ScanDpi? _scanDpi;
 
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
         IScanPerformer scanPerformer, ErrorOutput errorOutput, IEmailProviderFactory emailProviderFactory,
@@ -518,29 +517,6 @@ internal class AutomatedScanning
             };
         }
 
-        if (_options.Dpi is > 0)
-        {
-            _scanDpi = _options.Dpi switch
-            {
-                100 => ScanDpi.Dpi100,
-                150 => ScanDpi.Dpi150,
-                200 => ScanDpi.Dpi200,
-                300 => ScanDpi.Dpi300,
-                400 => ScanDpi.Dpi400,
-                600 => ScanDpi.Dpi600,
-                800 => ScanDpi.Dpi800,
-                1200 => ScanDpi.Dpi1200,
-                2400 => ScanDpi.Dpi2400,
-                4800 => ScanDpi.Dpi4800,
-                _ => null
-            };
-            if (_scanDpi == null)
-            {
-                _errorOutput.DisplayError(ConsoleResources.InvalidDpi);
-                return false;
-            }
-        }
-
         if (new[] { _options.Interleave, _options.Deinterleave, _options.AltInterleave, _options.AltDeinterleave }
                 .Count(x => x) > 1)
         {
@@ -814,9 +790,9 @@ internal class AutomatedScanning
             profile.PageSize = ScanPageSize.Custom;
             profile.CustomPageSize = _pageDimensions;
         }
-        if (_scanDpi != null)
+        if (_options.Dpi != null)
         {
-            profile.Resolution = _scanDpi.Value;
+            profile.Resolution.Dpi = _options.Dpi.Value;
         }
         if (_options.BitDepth != null)
         {
