@@ -50,6 +50,19 @@ public class EsclClient
         Timeout = TimeSpan.FromSeconds(120)
     };
 
+    public static HttpClient GetHttpClient(EsclSecurityPolicy securityPolicy, bool longTimeout = false)
+    {
+        if (longTimeout)
+        {
+            return securityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireTrustedCertificate)
+                ? LongTimeoutVerifiedHttpClient
+                : LongTimeoutUnverifiedHttpClient;
+        }
+        return securityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireTrustedCertificate)
+            ? VerifiedHttpClient
+            : UnverifiedHttpClient;
+    }
+
     private readonly EsclService? _service;
     private readonly Uri? _uriBase;
     private readonly string _rootUrl;
@@ -74,14 +87,9 @@ public class EsclClient
 
     public CancellationToken CancelToken { get; set; }
 
-    private HttpClient HttpClient => SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireTrustedCertificate)
-        ? VerifiedHttpClient
-        : UnverifiedHttpClient;
+    private HttpClient HttpClient => GetHttpClient(SecurityPolicy, false);
 
-    private HttpClient LongTimeoutHttpClient =>
-        SecurityPolicy.HasFlag(EsclSecurityPolicy.ClientRequireTrustedCertificate)
-            ? LongTimeoutVerifiedHttpClient
-            : LongTimeoutUnverifiedHttpClient;
+    private HttpClient LongTimeoutHttpClient => GetHttpClient(SecurityPolicy, true);
 
     public async Task<EsclCapabilities> GetCapabilities()
     {
@@ -290,6 +298,28 @@ public class EsclClient
         }
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("DELETE OK");
+    }
+
+    public string? IconUri
+    {
+        get
+        {
+            // TODO: Consider replacing the hostname with the remote endpoint?
+            var iconUri = _service?.Thumbnail;
+            if (string.IsNullOrWhiteSpace(iconUri))
+            {
+                return null;
+            }
+            if (iconUri!.StartsWith("http://") || iconUri.StartsWith("https://"))
+            {
+                return iconUri;
+            }
+            if (!iconUri.StartsWith("/"))
+            {
+                iconUri = "/" + iconUri;
+            }
+            return GetUrl(iconUri);
+        }
     }
 
     private async Task<XDocument> DoRequest(string endpoint)

@@ -14,7 +14,7 @@ public class DeviceListViewBehavior : ListViewBehavior<ScanDevice>
         ScrollOnDrag = false;
     }
 
-    public void SetImage(ScanDevice item, Image image) => _imageMap.Add(item, image);
+    public void SetImage(ScanDevice item, Image image) => _imageMap[item] = image;
 
     public override string GetLabel(ScanDevice item) => item.Name;
 

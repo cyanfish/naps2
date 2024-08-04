@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
@@ -13,6 +14,7 @@ public class EditProfileForm : EtoDialogBase
     private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
     private readonly ProfileNameTracker _profileNameTracker;
+    private readonly DeviceCapsCache _deviceCapsCache;
 
     private readonly TextBox _displayName = new();
     private readonly ImageView _deviceIcon = new();
@@ -41,13 +43,16 @@ public class EditProfileForm : EtoDialogBase
     private bool _result;
     private bool _suppressChangeEvent;
     private bool _suppressPageSizeEvent;
+    private CancellationTokenSource? _loadIconCts;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
-        ProfileNameTracker profileNameTracker) : base(config)
+        ProfileNameTracker profileNameTracker, DeviceCapsCache deviceCapsCache) : base(config)
     {
         _scanPerformer = scanPerformer;
         _errorOutput = errorOutput;
         _profileNameTracker = profileNameTracker;
+        _deviceCapsCache = deviceCapsCache;
+
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
         _pageSize.SelectedIndexChanged += PageSize_SelectedIndexChanged;
@@ -163,9 +168,39 @@ public class EditProfileForm : EtoDialogBase
                     _ => ""
                 };
                 _deviceVis.IsVisible = true;
-                _deviceIcon.Image = value.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage();
+
+                var iconUri = value.Device?.Caps?.MetadataCaps?.IconUri;
+                var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
+                _deviceIcon.Image = cachedIcon ?? (value.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage());
+                LayoutController.Invalidate();
+                if (cachedIcon == null && iconUri != null)
+                {
+                    ReloadDeviceIcon(iconUri);
+                }
             }
         }
+    }
+
+    private void ReloadDeviceIcon(string iconUri)
+    {
+        var cts = new CancellationTokenSource();
+        _loadIconCts?.Cancel();
+        _loadIconCts = cts;
+        Task.Run(async () =>
+        {
+            var icon = await _deviceCapsCache.LoadIcon(iconUri);
+            if (icon != null)
+            {
+                Invoker.Current.Invoke(() =>
+                {
+                    if (!cts.IsCancellationRequested)
+                    {
+                        _deviceIcon.Image = icon;
+                        LayoutController.Invalidate();
+                    }
+                });
+            }
+        });
     }
 
     private Driver DeviceDriver { get; set; }

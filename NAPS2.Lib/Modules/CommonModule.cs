@@ -69,6 +69,7 @@ public class CommonModule : Module
         builder.RegisterType<ThumbnailRenderQueue>().AsSelf().SingleInstance();
         builder.RegisterType<DefaultIconProvider>().As<IIconProvider>();
         builder.RegisterType<RecoveryManager>().AsSelf();
+        builder.RegisterType<DeviceCapsCache>().AsSelf().SingleInstance();
 
         // ScanningContext has several properties that need to be populated. We do some here, and also some in
         // GuiModule/ConsoleModule/WorkerModule as they each have their own needs.

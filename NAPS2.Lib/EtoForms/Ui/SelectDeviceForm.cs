@@ -21,6 +21,7 @@ public class SelectDeviceForm : EtoDialogBase
     private readonly IIconProvider _iconProvider;
     private readonly DeviceListViewBehavior _deviceListViewBehavior;
     private readonly ScanningContext _scanningContext;
+    private readonly DeviceCapsCache _deviceCapsCache;
     private readonly LayoutVisibility _textListVis = new(false);
     private readonly ListBox _deviceTextList = new();
     private readonly IListView<ScanDevice> _deviceIconList;
@@ -35,11 +36,13 @@ public class SelectDeviceForm : EtoDialogBase
     private Driver? _activeQuery;
 
     public SelectDeviceForm(Naps2Config config, IIconProvider iconProvider,
-        DeviceListViewBehavior deviceListViewBehavior, ScanningContext scanningContext) : base(config)
+        DeviceListViewBehavior deviceListViewBehavior, ScanningContext scanningContext,
+        DeviceCapsCache deviceCapsCache) : base(config)
     {
         _iconProvider = iconProvider;
         _deviceListViewBehavior = deviceListViewBehavior;
         _scanningContext = scanningContext;
+        _deviceCapsCache = deviceCapsCache;
         _selectDevice = C.OkButton(this, SelectDevice, UiStrings.Select);
         _deviceIconList = EtoPlatform.Current.CreateListView(deviceListViewBehavior);
         _deviceIconList.ImageSize = new Size(48, 32);
@@ -187,7 +190,7 @@ public class SelectDeviceForm : EtoDialogBase
             return;
         }
 
-        _deviceIconList.ImageSize = DeviceDriver == Driver.Escl ? new Size(64, 64) : new Size(48, 32);
+        _deviceIconList.ImageSize = DeviceDriver == Driver.Escl ? new Size(48, 48) : new Size(48, 32);
 
         _getDevicesCts?.Cancel();
         _spinnerVis.IsVisible = true;
@@ -219,6 +222,27 @@ public class SelectDeviceForm : EtoDialogBase
                     {
                         if (!cts.IsCancellationRequested)
                         {
+                            var iconUri = device.Caps?.MetadataCaps?.IconUri;
+                            var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
+                            if (cachedIcon != null)
+                            {
+                                _deviceListViewBehavior.SetImage(device, cachedIcon);
+                            }
+                            else
+                            {
+                                Task.Run(async () =>
+                                {
+                                    var icon = await _deviceCapsCache.LoadIcon(device);
+                                    if (icon != null)
+                                    {
+                                        Invoker.Current.Invoke(() =>
+                                        {
+                                            _deviceListViewBehavior.SetImage(device, icon);
+                                            _deviceIconList.RegenerateImages();
+                                        });
+                                    }
+                                });
+                            }
                             DeviceList.Add(device);
                             UpdateDevices(false);
                             if (DeviceList.Count == 1)
@@ -290,9 +314,20 @@ public class SelectDeviceForm : EtoDialogBase
         {
             _deviceTextList.Items.Clear();
         }
-        foreach (var device in DeviceList!.Concat(ExtraItems!).Skip(_deviceTextList.Items.Count))
+        foreach (var device in ExtraItems!)
         {
-            _deviceTextList.Items.Add(new ListItem
+            if (_deviceTextList.Items.All(x => x.Key != device.ID))
+            {
+                _deviceTextList.Items.Add(new ListItem
+                {
+                    Key = device.ID,
+                    Text = device.Name
+                });
+            }
+        }
+        foreach (var device in DeviceList!.Skip(_deviceTextList.Items.Count - ExtraItems.Count))
+        {
+            _deviceTextList.Items.Insert(_deviceTextList.Items.Count - ExtraItems.Count, new ListItem
             {
                 Key = device.ID,
                 Text = device.Name

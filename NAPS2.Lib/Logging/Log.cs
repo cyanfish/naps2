@@ -28,6 +28,11 @@ public static class Log
         _logger.LogDebug(message);
     }
 
+    public static void DebugException(string message, Exception exception)
+    {
+        _logger.LogDebug(exception, message);
+    }
+
     public static void Info(string message)
     {
         _logger.LogInformation(message);
