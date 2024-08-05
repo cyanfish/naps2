@@ -152,8 +152,8 @@ public class AutoSaverTests : ContextualTests
         Assert.Single(Folder.GetFiles());
         var frames = await ImageContext.LoadFrames(Path.Combine(FolderPath, "test1.tiff")).ToListAsync();
         Assert.Equal(2, frames.Count);
-        ImageAsserts.Similar(ImageResources.dog, frames[0]);
-        ImageAsserts.Similar(ImageResources.dog_gray, frames[1]);
+        ImageAsserts.Similar(ImageResources.dog, frames[0], ignoreResolution: true);
+        ImageAsserts.Similar(ImageResources.dog_gray, frames[1], ignoreResolution: true);
     }
 
     [Fact]

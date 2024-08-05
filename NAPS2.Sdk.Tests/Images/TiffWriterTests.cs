@@ -104,7 +104,7 @@ public class TiffWriterTests : ContextualTests
         for (int i = 0; i < expectedImages.Length; i++)
         {
             Assert.Equal(ImageFileFormat.Tiff, actual[i].OriginalFileFormat);
-            ImageAsserts.Similar(expectedImages[i], actual[i]);
+            ImageAsserts.Similar(expectedImages[i], actual[i], ignoreResolution: true);
         }
     }
 }

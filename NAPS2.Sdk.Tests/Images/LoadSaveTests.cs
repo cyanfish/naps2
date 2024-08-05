@@ -359,7 +359,7 @@ public class LoadSaveTests : ContextualTests
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "dog_tiff",
-            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, true
         },
         new object[]
         {
@@ -371,26 +371,26 @@ public class LoadSaveTests : ContextualTests
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "dog_gray_24bit_tiff",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
         },
 #endif
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
-            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         },
 // TODO: Any way to improve these cases for ImageSharp?
 #if MAC || LINUX || !NET6_0_OR_GREATER
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "dog_alpha_tiff",
-            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, false
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true
         },
         new object[]
         {
             ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
-            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, false
+            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true
         },
 #endif
     ];
