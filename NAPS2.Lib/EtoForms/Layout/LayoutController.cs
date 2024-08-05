@@ -61,6 +61,14 @@ public class LayoutController
     public void Invalidate()
     {
         if (_layoutQueued) return;
+        if (_window == null || _content == null || !_isShown)
+        {
+            Invoker.Current.InvokeDispatch(() =>
+            {
+                Invalidated?.Invoke(this, EventArgs.Empty);
+            });
+            return;
+        }
         _layoutQueued = true;
         Invoker.Current.InvokeDispatch(() =>
         {
