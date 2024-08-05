@@ -39,7 +39,7 @@ public class LayoutController
         if (_window != null) throw new InvalidOperationException();
         _window = window;
         window.Content = _layout;
-        window.Shown += (_, _) =>
+        window.LoadComplete += (_, _) =>
         {
             _isShown = true;
             DoLayout();
