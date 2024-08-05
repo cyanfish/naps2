@@ -242,15 +242,15 @@ public class EditProfileForm : EtoDialogBase
             }
         }
 
-        _paperSource.SelectedIndex = (int) ScanProfile.PaperSource;
-        _bitDepth.SelectedIndex = (int) ScanProfile.BitDepth;
+        _paperSource.SelectedKey = ScanProfile.PaperSource.ToString();
+        _bitDepth.SelectedKey = ScanProfile.BitDepth.ToString();
         _resolution.SelectedIndex = resolutionIndex;
         _contrastSlider.IntValue = ScanProfile.Contrast;
         _brightnessSlider.IntValue = ScanProfile.Brightness;
         UpdatePageSizeList();
         SelectPageSize();
-        _scale.SelectedIndex = (int) ScanProfile.AfterScanScale;
-        _horAlign.SelectedIndex = (int) ScanProfile.PageAlign;
+        _scale.SelectedKey = ScanProfile.AfterScanScale.ToString();
+        _horAlign.SelectedKey = ScanProfile.PageAlign.ToString();
 
         _enableAutoSave.Checked = ScanProfile.EnableAutoSave;
 
@@ -395,16 +395,16 @@ public class EditProfileForm : EtoDialogBase
             MaxQuality = ScanProfile.MaxQuality,
             UseNativeUI = _nativeUi.Checked,
 
-            AfterScanScale = (ScanScale) _scale.SelectedIndex,
-            BitDepth = (ScanBitDepth) _bitDepth.SelectedIndex,
+            AfterScanScale = EnumHelper.ParseOrDefault<ScanScale>(_scale.SelectedKey),
+            BitDepth = EnumHelper.ParseOrDefault<ScanBitDepth>(_bitDepth.SelectedKey),
             Brightness = _brightnessSlider.IntValue,
             Contrast = _contrastSlider.IntValue,
-            PageAlign = (ScanHorizontalAlign) _horAlign.SelectedIndex,
+            PageAlign = EnumHelper.ParseOrDefault<ScanHorizontalAlign>(_horAlign.SelectedKey),
             PageSize = pageSize.Type,
             CustomPageSizeName = pageSize.CustomName,
             CustomPageSize = pageSize.CustomDimens,
             Resolution = new ScanResolution { Dpi = ((ScanDpi) _resolution.SelectedIndex).ToIntDpi() },
-            PaperSource = (ScanSource) _paperSource.SelectedIndex,
+            PaperSource = EnumHelper.ParseOrDefault<ScanSource>(_paperSource.SelectedKey),
 
             EnableAutoSave = _enableAutoSave.IsChecked(),
             AutoSaveSettings = ScanProfile.AutoSaveSettings,
