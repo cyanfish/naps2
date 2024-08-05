@@ -60,7 +60,11 @@ public class FormStateController
                 {
                     size.Height = Math.Min(size.Height, oldMaximumClientSize.Height);
                 }
-                size += DefaultClientSize - oldDefaultClientSize;
+                // TODO: Maybe we can add a flag to do this behavior? It makes it so that changes to the layout size
+                // after the form is loaded cause the form size to change proportionally (even if we're still within
+                // our min/max bounds). This is causing problems for dynamically sized images/labels etc. but maybe
+                // there's a world where we want to re-enable this for some forms.
+                // size += DefaultClientSize - oldDefaultClientSize;
                 size = Size.Max(size, _minimumClientSize);
                 if (_maximumClientSize.Height > 0)
                 {
