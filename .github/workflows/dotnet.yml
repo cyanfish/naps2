@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       matrix:
-        os: [windows-2022, ubuntu-22.04, macos-14]
+        os: [windows-2022, ubuntu-24.04, macos-14]
     steps:
     - name: Install OS dependencies
       if: matrix.os == 'ubuntu-22.04'
