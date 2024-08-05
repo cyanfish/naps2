@@ -102,6 +102,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] cat {
+            get {
+                object obj = ResourceManager.GetObject("cat", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] deskewed {
             get {
                 object obj = ResourceManager.GetObject("deskewed", resourceCulture);
@@ -295,6 +305,26 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] dog_c_p300 {
             get {
                 object obj = ResourceManager.GetObject("dog_c_p300", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_cat_combined {
+            get {
+                object obj = ResourceManager.GetObject("dog_cat_combined", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_cat_combined_bw {
+            get {
+                object obj = ResourceManager.GetObject("dog_cat_combined_bw", resourceCulture);
                 return ((byte[])(obj));
             }
         }

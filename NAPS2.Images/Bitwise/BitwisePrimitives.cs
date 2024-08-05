@@ -34,6 +34,7 @@ internal static class BitwisePrimitives
     {
         if (partStart == -1) partStart = 0;
         if (partEnd == -1) partEnd = data.h;
+        if (data.invertColorSpace) value = (byte) ~value;
 
         var longCount = data.stride / 8;
         var remainingStart = longCount * 8;

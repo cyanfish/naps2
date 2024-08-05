@@ -464,6 +464,32 @@ public class TransformTests : ContextualTests
         AssertOwnership(original, transformed);
     }
 
+    [Fact]
+    public void Combine()
+    {
+        var first = LoadImage(ImageResources.dog);
+        var second = LoadImage(ImageResources.cat);
+        var expected = LoadImage(ImageResources.dog_cat_combined);
+
+        var transformed = MoreImageTransforms.Combine(first, second, CombineOrientation.Vertical);
+        Assert.Equal(ImagePixelFormat.RGB24, transformed.PixelFormat);
+
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void CombineBlackAndWhite()
+    {
+        var first = LoadImage(ImageResources.dog).PerformTransform(new BlackWhiteTransform());
+        var second = LoadImage(ImageResources.cat).PerformTransform(new BlackWhiteTransform());
+        var expected = LoadImage(ImageResources.dog_cat_combined_bw).PerformTransform(new BlackWhiteTransform());
+
+        var transformed = MoreImageTransforms.Combine(first, second, CombineOrientation.Vertical);
+        Assert.Equal(ImagePixelFormat.BW1, transformed.UpdateLogicalPixelFormat());
+
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+    }
+
     private void AssertOwnership(IMemoryImage original, IMemoryImage transformed)
     {
         // The contract for a transform is that either it returns the original image or it disposes the original and

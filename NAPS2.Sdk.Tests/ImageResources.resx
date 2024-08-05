@@ -202,6 +202,9 @@
   <data name="skewed_bw" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\skewed_bw.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\cat.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="stock_cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\stock-cat.jpeg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -303,5 +306,11 @@
   </data>
   <data name="dog_exif" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_exif.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_cat_combined" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_cat_combined.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_cat_combined_bw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_cat_combined_bw.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

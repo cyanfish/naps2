@@ -15,11 +15,19 @@ internal class FillColorImageOp : UnaryBitwiseImageOp
         _a = a;
     }
 
+    protected override void ValidateCore(BitwiseImageData data)
+    {
+    }
+
     protected override void PerformCore(BitwiseImageData data, int partStart, int partEnd)
     {
         if (data.bytesPerPixel is 1 or 3 or 4)
         {
             PerformRgba(data, partStart, partEnd);
+        }
+        else if (data.bitsPerPixel == 1 && (_r, _g, _b, _a) is (0, 0, 0, 255) or (255, 255, 255, 255))
+        {
+            PerformBw(data, partStart, partEnd);
         }
         else
         {
@@ -53,5 +61,11 @@ internal class FillColorImageOp : UnaryBitwiseImageOp
                 }
             }
         }
+    }
+
+    private void PerformBw(BitwiseImageData data, int partStart, int partEnd)
+    {
+        byte fill = (byte) (_r == 255 ? 0xFF : 0x00);
+        BitwisePrimitives.Fill(data, fill, partStart, partEnd);
     }
 }
