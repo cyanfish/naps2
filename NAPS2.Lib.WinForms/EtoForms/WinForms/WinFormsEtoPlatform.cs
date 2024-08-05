@@ -162,6 +162,13 @@ public class WinFormsEtoPlatform : EtoPlatform
                 return GetPreferredSize(content, availableSpace);
             }
         }
+        if (control.GetType() == typeof(Slider))
+        {
+            var size = control.ToNative().PreferredSize.ToEto();
+            return ((Slider) control).Orientation == Orientation.Horizontal
+                ? new SizeF(size.Height, size.Height)
+                : new SizeF(size.Width, size.Width);
+        }
         return SizeF.Max(
             base.GetPreferredSize(control, availableSpace),
             control.ToNative().PreferredSize.ToEto());
