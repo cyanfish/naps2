@@ -55,6 +55,8 @@ public class ScanProfile
 
     public ScanProfileDevice? Device { get; set; }
 
+    public ScanProfileCaps? Caps { get; set; }
+
     public string? DriverName { get; set; }
 
     public string DisplayName { get; set; } = "";

@@ -22,7 +22,13 @@ public class DeviceCapsCache
         _config = config;
     }
 
-    public async Task<ScanCaps> QueryCaps(ScanProfile profile)
+    public ScanCaps? GetCachedCaps(ScanProfile profile)
+    {
+        var key = GetDeviceKey(profile);
+        return _capsCache.Get(key);
+    }
+
+    public async Task<ScanCaps?> QueryCaps(ScanProfile profile)
     {
         var key = GetDeviceKey(profile);
         if (!_capsCache.ContainsKey(key))
@@ -35,7 +41,7 @@ public class DeviceCapsCache
             catch (Exception ex)
             {
                 Log.DebugException("Error getting device caps", ex);
-                return new ScanCaps();
+                return null;
             }
         }
         return _capsCache[key];

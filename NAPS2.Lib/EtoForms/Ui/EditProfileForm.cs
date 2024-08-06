@@ -44,6 +44,7 @@ public class EditProfileForm : EtoDialogBase
     private bool _suppressChangeEvent;
     private bool _suppressPageSizeEvent;
     private CancellationTokenSource? _loadIconCts;
+    private CancellationTokenSource? _updateCapsCts;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
         ProfileNameTracker profileNameTracker, DeviceCapsCache deviceCapsCache) : base(config)
@@ -79,7 +80,7 @@ public class EditProfileForm : EtoDialogBase
             C.Spacer(),
             L.GroupBox(UiStrings.DeviceLabel,
                 L.Row(
-                    _deviceIcon.Visible(_deviceVis).AlignCenter(),
+                    _deviceIcon.Visible(_deviceVis).AlignCenter().NaturalWidth(48),
                     L.Column(
                         C.Filler(),
                         _deviceName,
@@ -168,16 +169,24 @@ public class EditProfileForm : EtoDialogBase
                     _ => ""
                 };
                 _deviceVis.IsVisible = true;
-
-                var iconUri = value.Device?.Caps?.MetadataCaps?.IconUri;
-                var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
-                _deviceIcon.Image = cachedIcon ?? (value.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage());
-                LayoutController.Invalidate();
-                if (cachedIcon == null && iconUri != null)
-                {
-                    ReloadDeviceIcon(iconUri);
-                }
             }
+        }
+    }
+
+    private void UpdateUiForCaps()
+    {
+        SetDeviceIcon(ScanProfile.Caps?.IconUri);
+    }
+
+    private void SetDeviceIcon(string? iconUri)
+    {
+        var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
+        _deviceIcon.Image =
+            cachedIcon ?? (_currentDevice.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage());
+        LayoutController.Invalidate();
+        if (cachedIcon == null && iconUri != null)
+        {
+            ReloadDeviceIcon(iconUri);
         }
     }
 
@@ -201,6 +210,51 @@ public class EditProfileForm : EtoDialogBase
                 });
             }
         });
+    }
+
+    private void UpdateCaps()
+    {
+        var cts = new CancellationTokenSource();
+        _updateCapsCts?.Cancel();
+        _updateCapsCts = cts;
+        var updatedProfile = GetUpdatedScanProfile();
+        var cachedCaps = _deviceCapsCache.GetCachedCaps(updatedProfile);
+        if (cachedCaps != null)
+        {
+            ScanProfile.Caps = MapCaps(cachedCaps);
+        }
+        else
+        {
+            ScanProfile.Caps = MapCaps(CurrentDevice.Device?.Caps);
+            // The caps on the device are generally incomplete, so we do a full query
+            if (updatedProfile.Device != null)
+            {
+                Task.Run(async () =>
+                {
+                    var caps = await _deviceCapsCache.QueryCaps(updatedProfile);
+                    if (caps != null)
+                    {
+                        Invoker.Current.Invoke(() =>
+                        {
+                            if (!cts.IsCancellationRequested)
+                            {
+                                ScanProfile.Caps = MapCaps(caps);
+                                UpdateUiForCaps();
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        UpdateUiForCaps();
+    }
+
+    private ScanProfileCaps MapCaps(ScanCaps? caps)
+    {
+        return new ScanProfileCaps
+        {
+            IconUri = caps?.MetadataCaps?.IconUri
+        };
     }
 
     private Driver DeviceDriver { get; set; }
@@ -260,6 +314,7 @@ public class EditProfileForm : EtoDialogBase
         // Start triggering onChange events again
         _suppressChangeEvent = false;
 
+        UpdateUiForCaps();
         UpdateEnabledControls();
     }
 
@@ -276,6 +331,8 @@ public class EditProfileForm : EtoDialogBase
             }
             CurrentDevice = choice;
             DeviceDriver = choice.Driver;
+
+            UpdateCaps();
             UpdateEnabledControls();
         }
     }
@@ -378,16 +435,23 @@ public class EditProfileForm : EtoDialogBase
             }
             return true;
         }
-        var pageSize = (PageSizeListItem) _pageSize.SelectedValue;
         if (ScanProfile.DisplayName != null)
         {
             _profileNameTracker.RenamingProfile(ScanProfile.DisplayName, _displayName.Text);
         }
-        _scanProfile = new ScanProfile
+        _scanProfile = GetUpdatedScanProfile();
+        return true;
+    }
+
+    private ScanProfile GetUpdatedScanProfile()
+    {
+        var pageSize = (PageSizeListItem) _pageSize.SelectedValue;
+        return new ScanProfile
         {
             Version = ScanProfile.CURRENT_VERSION,
 
             Device = ScanProfileDevice.FromScanDevice(CurrentDevice.Device),
+            Caps = ScanProfile.Caps,
             IsDefault = _isDefault,
             DriverName = DeviceDriver.ToString().ToLowerInvariant(),
             DisplayName = _displayName.Text,
@@ -426,7 +490,6 @@ public class EditProfileForm : EtoDialogBase
             BlankPageWhiteThreshold = ScanProfile.BlankPageWhiteThreshold,
             BlankPageCoverageThreshold = ScanProfile.BlankPageCoverageThreshold
         };
-        return true;
     }
 
     private void PredefinedSettings_CheckedChanged(object? sender, EventArgs e)
