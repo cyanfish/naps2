@@ -354,6 +354,9 @@
   <data name="SelectSource" xml:space="preserve">
     <value>Izvēlēties avotu</value>
   </data>
+  <data name="SelectDevice" xml:space="preserve">
+    <value>Select Device</value>
+  </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Darbojas fonā</value>
   </data>
@@ -791,5 +794,38 @@
   </data>
   <data name="Combine" xml:space="preserve">
     <value>Combine</value>
+  </data>
+  <data name="ManualIp" xml:space="preserve">
+    <value>Manual IP</value>
+  </data>
+  <data name="ManualIpFormTitle" xml:space="preserve">
+    <value>Manual IP</value>
+  </data>
+  <data name="IpHost" xml:space="preserve">
+    <value>IP/Host</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Connection error.</value>
+  </data>
+  <data name="AlwaysAsk" xml:space="preserve">
+    <value>Always Ask</value>
+  </data>
+  <data name="SearchingForDevices" xml:space="preserve">
+    <value>Searching for devices...</value>
+  </data>
+  <data name="DevicesFound" xml:space="preserve">
+    <value>{0} devices found.</value>
+  </data>
+  <data name="DeviceFoundSingular" xml:space="preserve">
+    <value>1 device found.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>No devices found.</value>
   </data>
 </root>

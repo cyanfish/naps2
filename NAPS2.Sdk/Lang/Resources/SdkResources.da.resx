@@ -13,13 +13,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Den valgte skanner kan ikke findes.</value>
+    <value>Den valgte scanner blev ikke fundet.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Den valgte skanner er offline.</value>
+    <value>Den valgte scanner er offline.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Kommunikation med scanningsenheden blev afbrudt.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -28,7 +28,7 @@
     <value>Ingen enheder valgt.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Ingen skannerenheder blev fundet.</value>
+    <value>Ingen scannincsenheder blev fundet.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>Der opstod en fejl med scanner driveren.</value>
@@ -64,18 +64,24 @@
     <value>Scanneren varmer op.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>SANE-driveren er ikke tilgængelig. Kontroller at du har installeret den påkrævede pakke:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR-motoren er ikke tilgængelig. Kontroller at du har installeret den påkrævede pakke:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Den valgte driver er ikke understøttet på dette system.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Der opstod en fejl under kørsel af OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>OCR-handlingen fik timeout.</value>
+  </data>
+  <data name="WorkerCrash" xml:space="preserve">
+    <value>The worker process crashed.</value>
+  </data>
+  <data name="WorkerCrashWindows" xml:space="preserve">
+    <value>The worker process crashed. Check the Windows event viewer.</value>
   </data>
 </root>

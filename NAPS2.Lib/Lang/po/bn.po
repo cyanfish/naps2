@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-08-07 05:13\n"
 "Last-Translator: \n"
 "Language-Team: Bengali\n"
 "Language: bn\n"
@@ -29,6 +29,10 @@ msgstr ""
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
+msgstr ""
+
+#: UiStrings.resx$DeviceFoundSingular$Message
+msgid "1 device found."
 msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
@@ -110,6 +114,10 @@ msgstr ""
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
+msgstr ""
+
+#: UiStrings.resx$AlwaysAsk$Message
+msgid "Always Ask"
 msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
@@ -393,6 +401,14 @@ msgstr ""
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
+msgstr ""
+
+#: UiStrings.resx$Connect$Message
+msgid "Connect"
+msgstr ""
+
+#: UiStrings.resx$ConnectionError$Message
+msgid "Connection error."
 msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
@@ -684,6 +700,10 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr ""
 
+#: UiStrings.resx$IpHost$Message
+msgid "IP/Host"
+msgstr ""
+
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
 msgstr ""
@@ -797,6 +817,11 @@ msgstr ""
 msgid "Make PDFs searchable using OCR"
 msgstr ""
 
+#: UiStrings.resx$ManualIp$Message
+#: UiStrings.resx$ManualIpFormTitle$Message
+msgid "Manual IP"
+msgstr ""
+
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr ""
@@ -890,6 +915,10 @@ msgstr ""
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
+msgstr ""
+
+#: UiStrings.resx$NoDevicesFound$Message
+msgid "No devices found."
 msgstr ""
 
 #: MiscResources.resx$NoPagesInFeeder$Message
@@ -1054,6 +1083,10 @@ msgstr ""
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
+msgstr ""
+
+#: UiStrings.resx$Port$Message
+msgid "Port"
 msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
@@ -1313,6 +1346,10 @@ msgstr ""
 msgid "Scanning page {0}..."
 msgstr ""
 
+#: UiStrings.resx$SearchingForDevices$Message
+msgid "Searching for devices..."
+msgstr ""
+
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
 msgstr ""
@@ -1324,6 +1361,10 @@ msgstr ""
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "সব নির্বাচন করুন"
+
+#: UiStrings.resx$SelectDevice$Message
+msgid "Select Device"
+msgstr ""
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1510,6 +1551,14 @@ msgstr ""
 msgid "The selected scanner is offline."
 msgstr ""
 
+#: SdkResources.resx$WorkerCrash$Message
+msgid "The worker process crashed."
+msgstr ""
+
+#: SdkResources.resx$WorkerCrashWindows$Message
+msgid "The worker process crashed. Check the Windows event viewer."
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
 msgstr ""
@@ -1690,6 +1739,10 @@ msgstr ""
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
+msgstr ""
+
+#: UiStrings.resx$DevicesFound$Message
+msgid "{0} devices found."
 msgstr ""
 
 #: SettingsResources.resx$DpiFormat$Message

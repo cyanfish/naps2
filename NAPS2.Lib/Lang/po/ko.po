@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-08-07 05:13\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -29,6 +29,10 @@ msgstr ""
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
+msgstr ""
+
+#: UiStrings.resx$DeviceFoundSingular$Message
+msgid "1 device found."
 msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
@@ -111,6 +115,10 @@ msgstr "대체 디인터리브"
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
 msgstr "대체 인터리브"
+
+#: UiStrings.resx$AlwaysAsk$Message
+msgid "Always Ask"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -394,6 +402,14 @@ msgstr "호환성"
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "압축 방법:"
+
+#: UiStrings.resx$Connect$Message
+msgid "Connect"
+msgstr ""
+
+#: UiStrings.resx$ConnectionError$Message
+msgid "Connection error."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -684,6 +700,10 @@ msgstr "시간 (0-23)"
 msgid "Hue / Saturation"
 msgstr "색조 / 채도"
 
+#: UiStrings.resx$IpHost$Message
+msgid "IP/Host"
+msgstr ""
+
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
 msgstr "아이콘 출처:"
@@ -797,6 +817,11 @@ msgstr "NAPS2 에 이미지 불러오기"
 msgid "Make PDFs searchable using OCR"
 msgstr "OCR 을 이용하여 검색 가능한 PDF 만들기"
 
+#: UiStrings.resx$ManualIp$Message
+#: UiStrings.resx$ManualIpFormTitle$Message
+msgid "Manual IP"
+msgstr ""
+
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr "최대 품질 (용량 큼)"
@@ -891,6 +916,10 @@ msgstr "다음 스캔"
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
 msgstr "선택된 장치가 없습니다.."
+
+#: UiStrings.resx$NoDevicesFound$Message
+msgid "No devices found."
+msgstr ""
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1055,6 +1084,10 @@ msgstr "붙여넣기"
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
 msgstr "파일명 형식"
+
+#: UiStrings.resx$Port$Message
+msgid "Port"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1313,6 +1346,10 @@ msgstr "{0} 페이지 스캔 중 (스캔 {1})..."
 msgid "Scanning page {0}..."
 msgstr "{0} 페이지 스캔 중..."
 
+#: UiStrings.resx$SearchingForDevices$Message
+msgid "Searching for devices..."
+msgstr ""
+
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
 msgstr "초 (00-59)"
@@ -1324,6 +1361,10 @@ msgstr "선택"
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "전체 선택"
+
+#: UiStrings.resx$SelectDevice$Message
+msgid "Select Device"
+msgstr ""
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1510,6 +1551,14 @@ msgstr "선택된 스캐너가 사용 중 입니다."
 msgid "The selected scanner is offline."
 msgstr "선택된 스캐너의 연결이 끊겼습니다."
 
+#: SdkResources.resx$WorkerCrash$Message
+msgid "The worker process crashed."
+msgstr ""
+
+#: SdkResources.resx$WorkerCrashWindows$Message
+msgid "The worker process crashed. Check the Windows event viewer."
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
 msgstr "Thunderbird"
@@ -1691,6 +1740,10 @@ msgstr "{0} / {1} MB"
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "{0} / {1} 파일"
+
+#: UiStrings.resx$DevicesFound$Message
+msgid "{0} devices found."
+msgstr ""
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

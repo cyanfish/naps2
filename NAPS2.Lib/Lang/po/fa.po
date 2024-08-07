@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-08-07 05:13\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -29,6 +29,10 @@ msgstr ""
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
+msgstr ""
+
+#: UiStrings.resx$DeviceFoundSingular$Message
+msgid "1 device found."
 msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
@@ -111,6 +115,10 @@ msgstr "صفحات سفید را بصورت متناوب حذف کردن"
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
 msgstr "جایگذاری متناوب"
+
+#: UiStrings.resx$AlwaysAsk$Message
+msgid "Always Ask"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -394,6 +402,14 @@ msgstr "سازگاری"
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "فشردگی:"
+
+#: UiStrings.resx$Connect$Message
+msgid "Connect"
+msgstr ""
+
+#: UiStrings.resx$ConnectionError$Message
+msgid "Connection error."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -684,6 +700,10 @@ msgstr "ساعت (۰-۲۳)"
 msgid "Hue / Saturation"
 msgstr "پرده / غلظت"
 
+#: UiStrings.resx$IpHost$Message
+msgid "IP/Host"
+msgstr ""
+
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
 msgstr "آیکون‌ها از:"
@@ -797,6 +817,11 @@ msgstr "بارگذاری تصویر در NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "ایجاد PDF قابل جستجو بوسیله OCR"
 
+#: UiStrings.resx$ManualIp$Message
+#: UiStrings.resx$ManualIpFormTitle$Message
+msgid "Manual IP"
+msgstr ""
+
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr "حداکثر کیفیت (پرونده‌های بزرگ)"
@@ -891,6 +916,10 @@ msgstr "اسکن بعدی"
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
 msgstr "هیچ دستگاهی انتخاب نشده."
+
+#: UiStrings.resx$NoDevicesFound$Message
+msgid "No devices found."
+msgstr ""
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1055,6 +1084,10 @@ msgstr "چسباندن"
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
 msgstr "جانگهدار"
+
+#: UiStrings.resx$Port$Message
+msgid "Port"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1313,6 +1346,10 @@ msgstr "اسکن صفحه {0} (اسکن {1})..."
 msgid "Scanning page {0}..."
 msgstr "اسکن صفحه {0}..."
 
+#: UiStrings.resx$SearchingForDevices$Message
+msgid "Searching for devices..."
+msgstr ""
+
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
 msgstr "ثانیه (۰۰-۵۹)"
@@ -1324,6 +1361,10 @@ msgstr "انتخاب"
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "انتخاب همه"
+
+#: UiStrings.resx$SelectDevice$Message
+msgid "Select Device"
+msgstr ""
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1510,6 +1551,14 @@ msgstr "اسکنر انتخابی مشغول است."
 msgid "The selected scanner is offline."
 msgstr "اسکنر انتخابی خاموش است."
 
+#: SdkResources.resx$WorkerCrash$Message
+msgid "The worker process crashed."
+msgstr ""
+
+#: SdkResources.resx$WorkerCrashWindows$Message
+msgid "The worker process crashed. Check the Windows event viewer."
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
 msgstr ""
@@ -1691,6 +1740,10 @@ msgstr "{0} / {1} مگابایت"
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "{0} / {1} پرونده‌ها"
+
+#: UiStrings.resx$DevicesFound$Message
+msgid "{0} devices found."
+msgstr ""
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

@@ -78,4 +78,10 @@
   <data name="OcrTimeout" xml:space="preserve">
     <value>O tempo limite da operação OCR expirou.</value>
   </data>
+  <data name="WorkerCrash" xml:space="preserve">
+    <value>The worker process crashed.</value>
+  </data>
+  <data name="WorkerCrashWindows" xml:space="preserve">
+    <value>The worker process crashed. Check the Windows event viewer.</value>
+  </data>
 </root>

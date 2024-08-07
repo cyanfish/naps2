@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-08-07 05:13\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -29,6 +29,10 @@ msgstr ""
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
+msgstr ""
+
+#: UiStrings.resx$DeviceFoundSingular$Message
+msgid "1 device found."
 msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
@@ -111,6 +115,10 @@ msgstr ""
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
 msgstr "デインターリーブの変更"
+
+#: UiStrings.resx$AlwaysAsk$Message
+msgid "Always Ask"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -394,6 +402,14 @@ msgstr "互換性"
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "圧縮:"
+
+#: UiStrings.resx$Connect$Message
+msgid "Connect"
+msgstr ""
+
+#: UiStrings.resx$ConnectionError$Message
+msgid "Connection error."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -684,6 +700,10 @@ msgstr "(0-23)時間"
 msgid "Hue / Saturation"
 msgstr "色相/彩度"
 
+#: UiStrings.resx$IpHost$Message
+msgid "IP/Host"
+msgstr ""
+
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
 msgstr ""
@@ -797,6 +817,11 @@ msgstr "NAPS2にイメージを読み込む"
 msgid "Make PDFs searchable using OCR"
 msgstr "OCRを利用して検索可能なPDFを作成"
 
+#: UiStrings.resx$ManualIp$Message
+#: UiStrings.resx$ManualIpFormTitle$Message
+msgid "Manual IP"
+msgstr ""
+
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr "最大画質(ファイルサイズ大)"
@@ -891,6 +916,10 @@ msgstr "次のスキャン"
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
 msgstr "デバイスが選択されていません."
+
+#: UiStrings.resx$NoDevicesFound$Message
+msgid "No devices found."
+msgstr ""
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1055,6 +1084,10 @@ msgstr "貼り付け"
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
 msgstr "プレースホルダー"
+
+#: UiStrings.resx$Port$Message
+msgid "Port"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1313,6 +1346,10 @@ msgstr "ページ {0} をスキャン中 (スキャン {1})..."
 msgid "Scanning page {0}..."
 msgstr "ページ {0} をスキャン中..."
 
+#: UiStrings.resx$SearchingForDevices$Message
+msgid "Searching for devices..."
+msgstr ""
+
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
 msgstr "(00-59)秒"
@@ -1324,6 +1361,10 @@ msgstr "選択"
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "すべて選択"
+
+#: UiStrings.resx$SelectDevice$Message
+msgid "Select Device"
+msgstr ""
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1510,6 +1551,14 @@ msgstr "選択されたスキャナは使用中です。."
 msgid "The selected scanner is offline."
 msgstr "選択されたスキャナは接続されていません。."
 
+#: SdkResources.resx$WorkerCrash$Message
+msgid "The worker process crashed."
+msgstr ""
+
+#: SdkResources.resx$WorkerCrashWindows$Message
+msgid "The worker process crashed. Check the Windows event viewer."
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
 msgstr ""
@@ -1691,6 +1740,10 @@ msgstr ""
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "ファイル：{0} / {1}個 "
+
+#: UiStrings.resx$DevicesFound$Message
+msgid "{0} devices found."
+msgstr ""
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

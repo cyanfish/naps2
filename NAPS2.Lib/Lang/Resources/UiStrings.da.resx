@@ -22,13 +22,13 @@
     <value>Ikoner fra:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>Søg efter opdateringer</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Doner</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiler</value>
@@ -43,7 +43,7 @@
     <value>Slet</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Skan</value>
+    <value>Scan</value>
   </data>
   <data name="SetDefault" xml:space="preserve">
     <value>Sæt standard</value>
@@ -55,16 +55,16 @@
     <value>Indsæt</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Fortryd</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Gentag</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Fortryd {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Gentag {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Fuldført</value>
@@ -76,7 +76,7 @@
     <value>Ny profil</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
-    <value>Batch Scan</value>
+    <value>Batch-scanning</value>
   </data>
   <data name="Ocr" xml:space="preserve">
     <value>OCR</value>
@@ -85,7 +85,7 @@
     <value>Profiler</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Importér</value>
+    <value>Importer</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Gem PDF</value>
@@ -100,13 +100,13 @@
     <value>Billedindstillinger</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>E-mail til PDF</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Email indstillinger</value>
+    <value>E-mail indstillinger</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Print</value>
+    <value>Udskriv</value>
   </data>
   <data name="Image" xml:space="preserve">
     <value>Billede</value>
@@ -130,19 +130,19 @@
     <value>Gør skarpere</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Dokumentkorrektion</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Nulstil</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>Rotér</value>
+    <value>Roter</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
-    <value>Rotér til venstre</value>
+    <value>Roter til venstre</value>
   </data>
   <data name="RotateRight" xml:space="preserve">
-    <value>Rotér til højre</value>
+    <value>Roter til højre</value>
   </data>
   <data name="Flip" xml:space="preserve">
     <value>Spejling</value>
@@ -160,7 +160,7 @@
     <value>Flyt ned</value>
   </data>
   <data name="Reorder" xml:space="preserve">
-    <value>Sortere</value>
+    <value>Sorter</value>
   </data>
   <data name="Interleave" xml:space="preserve">
     <value>Indflette</value>
@@ -178,46 +178,46 @@
     <value>Omvendt</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Omvend alle</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Omvend markerede</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Ryd</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Ryd alle</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Sprog</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Indstillinger</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Grænseflade</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>"Scan" menu ændrer standardprofil</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>Vis værktøjslinjen "Profiler"</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>Vis sidenumre</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Standardhandling for knappen "Scan":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Standardhandling for knappen "Gem":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Program</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Tillad kun en enkelt åben NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Om</value>
@@ -238,37 +238,37 @@
     <value>Skalér med vindue</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Gem</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Gem alle</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Gem valgte</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Gem alle som PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>Gem valgte som PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Gem alle som billeder</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>Gem valgte som billeder</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Send alle via e-mail</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>E-mail valgt</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Send alle via e-mail som PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Send det valgte via e-mail som PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profilindstillinger</value>
@@ -277,25 +277,25 @@
     <value>Vist navn:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
-    <value>WIA Driver</value>
+    <value>WIA driver</value>
   </data>
   <data name="TwainDriver" xml:space="preserve">
-    <value>TWAIN Driver</value>
+    <value>TWAIN-driver</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL driver</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL netværksdriver</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB-driver</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Apple driver</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE driver</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>Enhed:</value>
@@ -354,8 +354,11 @@
   <data name="SelectSource" xml:space="preserve">
     <value>Vælg kilde</value>
   </data>
+  <data name="SelectDevice" xml:space="preserve">
+    <value>Select Device</value>
+  </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Run in Background</value>
+    <value>Kør i baggrunden</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -376,16 +379,16 @@
     <value>OCR sprog:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>OCR-tilstand:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Ret hvidbalance og fjern støj</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Automatically run OCR after scanning</value>
+    <value>Kør OCR automatisk efter scanning</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Kør forebyggende OCR efter scanning</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Hent flere sprog</value>
@@ -436,10 +439,10 @@
     <value>Ikke nu</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Gendan skannet billeder</value>
+    <value>Gendan scannet billede</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} billede(r) skannet på {1} af {2} er måske ikke blevet gemt, men er mulige at genskabe. Vil du genskabe dem?</value>
+    <value>{0} billede(r) scannet på {1} af {2} er måske ikke blevet gemt, men er mulige at genskabe. Vil du genskabe dem?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Pladsholdere</value>
@@ -448,7 +451,7 @@
     <value>Spring over gemme-prompt</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
-    <value>Single page files</value>
+    <value>Enkelt side-filer</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Kryptér PDF</value>
@@ -556,52 +559,52 @@
     <value>Autoforøgelsesnummer (2 cifre)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Automatisk stigende tal (1 ciffer)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Filnavn</value>
+    <value>Filnavn:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Eksempel:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>For høje JPEG-kvaliteter (80+), bør du også øge billedkvaliteten i din profil for de bedste resultater.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Jpeg kvalitet</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>TIFF-indstillinger</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
-    <value>Compression:</value>
+    <value>Komprimering:</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
     <value>Billedindstillinger</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Email indstillinger</value>
+    <value>E-mail indstillinger</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Indstillinger</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Provider</value>
+    <value>Udbyder</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Change</value>
+    <value>Skift</value>
   </data>
   <data name="AttachmentNameLabel" xml:space="preserve">
     <value>Navn på vedhæftning:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Choose Email Provider</value>
+    <value>Vælg e-mail udbyder</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Authorize</value>
+    <value>Autoriser</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
-    <value>Waiting for authorization...</value>
+    <value>Venter på godkendelse...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
     <value>Fejl</value>
@@ -613,7 +616,7 @@
     <value>Adgangskode</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>Følgende fil er krypteret og kræver en adgangskode, for at åbne den:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Spørg efter filsti</value>
@@ -634,7 +637,7 @@
     <value>Ryd billeder efter gem</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Behold billeder på tværs af sessioner</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Tilpasset sidestørrelse</value>
@@ -652,7 +655,7 @@
     <value>Avancerede Profil Indstillinger</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
-    <value>billedkvalitet</value>
+    <value>Billedkvalitet</value>
   </data>
   <data name="MaximumQuality" xml:space="preserve">
     <value>Maximum kvalitet (store filer)</value>
@@ -691,16 +694,16 @@
     <value>Vend duplex sider</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Vend bagsiden af duplex-sider</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>WIA-version:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain Implementering:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
-    <value>Batch Scan</value>
+    <value>Batch-scanning</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
     <value>Tryk start når du er klar.</value>
@@ -709,7 +712,7 @@
     <value>Scan konfiguration</value>
   </data>
   <data name="Output" xml:space="preserve">
-    <value>Output</value>
+    <value>Resultat</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Profil:</value>
@@ -751,45 +754,78 @@
     <value>Åben mappe</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Værktøjer</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Aktiver logning af fejl</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Del</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Deling af scanner</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Deling af scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Delte scannere kan bruges fra andre computere på det lokale netværk, ved at vælge "ESCL Driver" i den anden computers NAPS2-profilindstillinger.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Delt scanner-indstillinger</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Er du sikker på, at du vil stoppe med at dele {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Del selv når NAPS2 er lukket</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>Flere sprog...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>Flere sprog</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>Vis indbygget TWAIN-fremskridt</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Opdel</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Kombiner</value>
+  </data>
+  <data name="ManualIp" xml:space="preserve">
+    <value>Manual IP</value>
+  </data>
+  <data name="ManualIpFormTitle" xml:space="preserve">
+    <value>Manual IP</value>
+  </data>
+  <data name="IpHost" xml:space="preserve">
+    <value>IP/Host</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Connection error.</value>
+  </data>
+  <data name="AlwaysAsk" xml:space="preserve">
+    <value>Always Ask</value>
+  </data>
+  <data name="SearchingForDevices" xml:space="preserve">
+    <value>Searching for devices...</value>
+  </data>
+  <data name="DevicesFound" xml:space="preserve">
+    <value>{0} devices found.</value>
+  </data>
+  <data name="DeviceFoundSingular" xml:space="preserve">
+    <value>1 device found.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>No devices found.</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-07-25 03:19\n"
+"PO-Revision-Date: 2024-08-07 05:13\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -30,6 +30,10 @@ msgstr "Výchozí akce tlačítka \"Sken\":"
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
 msgstr "Nabídka \"Skenovat\" změní výchozí profil"
+
+#: UiStrings.resx$DeviceFoundSingular$Message
+msgid "1 device found."
+msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -111,6 +115,10 @@ msgstr "Střídavé prokládání"
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
 msgstr "Střídavé vložení listů"
+
+#: UiStrings.resx$AlwaysAsk$Message
+msgid "Always Ask"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -394,6 +402,14 @@ msgstr "Kompatibilita"
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "Komprese:"
+
+#: UiStrings.resx$Connect$Message
+msgid "Connect"
+msgstr ""
+
+#: UiStrings.resx$ConnectionError$Message
+msgid "Connection error."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -684,6 +700,10 @@ msgstr "Hodina (0-23)"
 msgid "Hue / Saturation"
 msgstr "Odstín / Sytost"
 
+#: UiStrings.resx$IpHost$Message
+msgid "IP/Host"
+msgstr ""
+
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
 msgstr "Použité ikony:"
@@ -797,6 +817,11 @@ msgstr "Nahrát obrázky do NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "Umožnit prohledávání PDF pomocí OCR"
 
+#: UiStrings.resx$ManualIp$Message
+#: UiStrings.resx$ManualIpFormTitle$Message
+msgid "Manual IP"
+msgstr ""
+
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr "Nejlepší kvalita (velký soubor)"
@@ -891,6 +916,10 @@ msgstr "Další sken"
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
 msgstr "Nebylo vybráno žádné zařízení."
+
+#: UiStrings.resx$NoDevicesFound$Message
+msgid "No devices found."
+msgstr ""
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1055,6 +1084,10 @@ msgstr "Vložit"
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
 msgstr "Zástupné znaky"
+
+#: UiStrings.resx$Port$Message
+msgid "Port"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1313,6 +1346,10 @@ msgstr "Skenuje se stránka {0} (sken {1})..."
 msgid "Scanning page {0}..."
 msgstr "Skenuje se stránka {0}..."
 
+#: UiStrings.resx$SearchingForDevices$Message
+msgid "Searching for devices..."
+msgstr ""
+
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
 msgstr "Sekunda (00-59)"
@@ -1324,6 +1361,10 @@ msgstr "Vybrat"
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "Vybrat vše"
+
+#: UiStrings.resx$SelectDevice$Message
+msgid "Select Device"
+msgstr ""
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1510,6 +1551,14 @@ msgstr "Vybraný skener je zaneprázdněn."
 msgid "The selected scanner is offline."
 msgstr "Vybraný skener je vypnutý."
 
+#: SdkResources.resx$WorkerCrash$Message
+msgid "The worker process crashed."
+msgstr ""
+
+#: SdkResources.resx$WorkerCrashWindows$Message
+msgid "The worker process crashed. Check the Windows event viewer."
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
 msgstr "Thunderbird"
@@ -1691,6 +1740,10 @@ msgstr "{0}/{1} MB"
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "{0}/{1} souborů"
+
+#: UiStrings.resx$DevicesFound$Message
+msgid "{0} devices found."
+msgstr ""
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-04-08 23:05\n"
+"PO-Revision-Date: 2024-08-07 05:13\n"
 "Last-Translator: \n"
 "Language-Team: Serbian (Latin)\n"
 "Language: sr\n"
@@ -29,6 +29,10 @@ msgstr ""
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
+msgstr ""
+
+#: UiStrings.resx$DeviceFoundSingular$Message
+msgid "1 device found."
 msgstr ""
 
 #: SettingsResources.resx$BitDepth_24Color$Message
@@ -111,6 +115,10 @@ msgstr "Izmeni neispreplitanost"
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
 msgstr "Izmeni ispreplitanost"
+
+#: UiStrings.resx$AlwaysAsk$Message
+msgid "Always Ask"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -394,6 +402,14 @@ msgstr "Kompatibilnost"
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "Kompresija:"
+
+#: UiStrings.resx$Connect$Message
+msgid "Connect"
+msgstr ""
+
+#: UiStrings.resx$ConnectionError$Message
+msgid "Connection error."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -684,6 +700,10 @@ msgstr "Sat (0-23)"
 msgid "Hue / Saturation"
 msgstr ""
 
+#: UiStrings.resx$IpHost$Message
+msgid "IP/Host"
+msgstr ""
+
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
 msgstr "Ikonice iz:"
@@ -797,6 +817,11 @@ msgstr "Učitaj slike u aplikaciju"
 msgid "Make PDFs searchable using OCR"
 msgstr "Učinite PDF-ove pretraživim koristeći OCR"
 
+#: UiStrings.resx$ManualIp$Message
+#: UiStrings.resx$ManualIpFormTitle$Message
+msgid "Manual IP"
+msgstr ""
+
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
 msgstr "Maksimalni kvalitet (velike datoteke)"
@@ -891,6 +916,10 @@ msgstr "Sledeći sken"
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
 msgstr "Uređaj nije odabran."
+
+#: UiStrings.resx$NoDevicesFound$Message
+msgid "No devices found."
+msgstr ""
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1054,6 +1083,10 @@ msgstr "Nalepi"
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
+msgstr ""
+
+#: UiStrings.resx$Port$Message
+msgid "Port"
 msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
@@ -1313,6 +1346,10 @@ msgstr "Skeniranje strane {0} (scan {1})..."
 msgid "Scanning page {0}..."
 msgstr "Skeniranje strane {0}..."
 
+#: UiStrings.resx$SearchingForDevices$Message
+msgid "Searching for devices..."
+msgstr ""
+
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
 msgstr "Sekunde (00-59)"
@@ -1324,6 +1361,10 @@ msgstr "Izaberi"
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
 msgstr "Izaberi sve sve"
+
+#: UiStrings.resx$SelectDevice$Message
+msgid "Select Device"
+msgstr ""
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1510,6 +1551,14 @@ msgstr ""
 msgid "The selected scanner is offline."
 msgstr "Odabrani skener nije uključen."
 
+#: SdkResources.resx$WorkerCrash$Message
+msgid "The worker process crashed."
+msgstr ""
+
+#: SdkResources.resx$WorkerCrashWindows$Message
+msgid "The worker process crashed. Check the Windows event viewer."
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
 msgstr ""
@@ -1691,6 +1740,10 @@ msgstr ""
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
 msgstr "{0} / {1} datoteka"
+
+#: UiStrings.resx$DevicesFound$Message
+msgid "{0} devices found."
+msgstr ""
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
