@@ -47,11 +47,7 @@ public class DeviceCapsCache
         return _capsCache[key];
     }
 
-    public Image? GetCachedIcon(ScanDevice? device)
-    {
-        string? iconUri = device?.Caps?.MetadataCaps?.IconUri;
-        return GetCachedIcon(iconUri);
-    }
+    public Image? GetCachedIcon(ScanDevice? device) => GetCachedIcon(device?.IconUri);
 
     public Image? GetCachedIcon(string? iconUri)
     {
@@ -59,11 +55,7 @@ public class DeviceCapsCache
         return _iconCache.Get(iconUri);
     }
 
-    public async Task<Image?> LoadIcon(ScanDevice? device)
-    {
-        string? iconUri = device?.Caps?.MetadataCaps?.IconUri;
-        return await LoadIcon(iconUri);
-    }
+    public async Task<Image?> LoadIcon(ScanDevice? device) => await LoadIcon(device?.IconUri);
 
     public async Task<Image?> LoadIcon(string? iconUri)
     {

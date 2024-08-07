@@ -222,8 +222,7 @@ public class SelectDeviceForm : EtoDialogBase
                     {
                         if (!cts.IsCancellationRequested)
                         {
-                            var iconUri = device.Caps?.MetadataCaps?.IconUri;
-                            var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
+                            var cachedIcon = _deviceCapsCache.GetCachedIcon(device.IconUri);
                             if (cachedIcon != null)
                             {
                                 _deviceListViewBehavior.SetImage(device, cachedIcon);

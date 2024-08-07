@@ -175,7 +175,7 @@ public class EditProfileForm : EtoDialogBase
 
     private void UpdateUiForCaps()
     {
-        SetDeviceIcon(ScanProfile.Caps?.IconUri);
+        SetDeviceIcon(IconUri);
     }
 
     private void SetDeviceIcon(string? iconUri)
@@ -225,8 +225,6 @@ public class EditProfileForm : EtoDialogBase
         }
         else
         {
-            ScanProfile.Caps = MapCaps(CurrentDevice.Device?.Caps);
-            // The caps on the device are generally incomplete, so we do a full query
             if (updatedProfile.Device != null)
             {
                 Task.Run(async () =>
@@ -253,11 +251,12 @@ public class EditProfileForm : EtoDialogBase
     {
         return new ScanProfileCaps
         {
-            IconUri = caps?.MetadataCaps?.IconUri
         };
     }
 
     private Driver DeviceDriver { get; set; }
+
+    private string? IconUri { get; set; }
 
     protected override void OnLoad(EventArgs e)
     {
@@ -270,6 +269,7 @@ public class EditProfileForm : EtoDialogBase
             Enum.TryParse<Driver>(ScanProfile.DriverName, true, out var driver)
                 ? driver
                 : Driver.Default);
+        IconUri = ScanProfile.Device?.IconUri;
 
         _displayName.Text = ScanProfile.DisplayName;
         if (CurrentDevice == DeviceChoice.None)
@@ -331,6 +331,7 @@ public class EditProfileForm : EtoDialogBase
             }
             CurrentDevice = choice;
             DeviceDriver = choice.Driver;
+            IconUri = choice.Device?.IconUri;
 
             UpdateCaps();
             UpdateEnabledControls();

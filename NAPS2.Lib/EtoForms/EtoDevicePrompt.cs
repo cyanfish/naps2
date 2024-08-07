@@ -6,12 +6,10 @@ namespace NAPS2.EtoForms;
 public class EtoDevicePrompt : IDevicePrompt
 {
     private readonly IFormFactory _formFactory;
-    private readonly ScanningContext _scanningContext;
 
-    public EtoDevicePrompt(IFormFactory formFactory, ScanningContext scanningContext)
+    public EtoDevicePrompt(IFormFactory formFactory)
     {
         _formFactory = formFactory;
-        _scanningContext = scanningContext;
     }
 
     public Task<DeviceChoice> PromptForDevice(ScanOptions options, bool allowAlwaysAsk)
