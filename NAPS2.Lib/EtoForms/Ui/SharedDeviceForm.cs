@@ -24,11 +24,8 @@ public class SharedDeviceForm : EtoDialogBase
     private readonly Label _deviceDriver = new();
     private readonly LayoutVisibility _deviceVis = new(false);
     private readonly Button _chooseDevice = new() { Text = UiStrings.ChooseDevice };
-    private readonly Button _ok = new() { Text = UiStrings.OK };
-    private readonly Button _cancel = new() { Text = UiStrings.Cancel };
 
     private DeviceChoice _currentDevice = DeviceChoice.None;
-    private bool _result;
     private CancellationTokenSource? _loadIconCts;
 
     public SharedDeviceForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
@@ -38,8 +35,6 @@ public class SharedDeviceForm : EtoDialogBase
         _errorOutput = errorOutput;
         _sharedDeviceManager = sharedDeviceManager;
         _deviceCapsCache = deviceCapsCache;
-        _ok.Click += Ok_Click;
-        _cancel.Click += Cancel_Click;
 
         _chooseDevice.Click += ChooseDevice;
     }
@@ -72,13 +67,13 @@ public class SharedDeviceForm : EtoDialogBase
             L.Row(
                 C.Filler(),
                 L.OkCancel(
-                    _ok,
-                    _cancel)
+                    C.OkButton(this, SaveSettings),
+                    C.CancelButton(this))
             )
         );
     }
 
-    public bool Result => _result;
+    public bool Result { get; private set; }
 
     public SharedDevice? SharedDevice { get; set; }
 
@@ -149,15 +144,27 @@ public class SharedDeviceForm : EtoDialogBase
         }
     }
 
-    private void SaveSettings()
+    private bool SaveSettings()
     {
+        if (_displayName.Text == "")
+        {
+            _errorOutput.DisplayError(MiscResources.NameMissing);
+            return false;
+        }
+        if (CurrentDevice.Device == null)
+        {
+            _errorOutput.DisplayError(MiscResources.NoDeviceSelected);
+            return false;
+        }
         SharedDevice = new SharedDevice
         {
             Name = _displayName.Text,
-            Device = CurrentDevice.Device!,
+            Device = CurrentDevice.Device,
             Port = Port == 0 ? NextPort() : Port,
             TlsPort = TlsPort == 0 ? NextTlsPort() : TlsPort
         };
+        Result = true;
+        return true;
     }
 
     private int NextPort()
@@ -214,27 +221,5 @@ public class SharedDeviceForm : EtoDialogBase
                 });
             }
         });
-    }
-
-    private void Ok_Click(object? sender, EventArgs e)
-    {
-        if (_displayName.Text == "")
-        {
-            _errorOutput.DisplayError(MiscResources.NameMissing);
-            return;
-        }
-        if (CurrentDevice.Device == null)
-        {
-            _errorOutput.DisplayError(MiscResources.NoDeviceSelected);
-            return;
-        }
-        _result = true;
-        SaveSettings();
-        Close();
-    }
-
-    private void Cancel_Click(object? sender, EventArgs e)
-    {
-        Close();
     }
 }
