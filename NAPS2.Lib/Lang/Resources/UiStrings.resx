@@ -903,6 +903,24 @@
   <data name="Combine" xml:space="preserve">
     <value>Combine</value>
   </data>
+  <data name="ManualIp" xml:space="preserve">
+    <value>Manual IP</value>
+  </data>
+  <data name="ManualIpFormTitle" xml:space="preserve">
+    <value>Manual IP</value>
+  </data>
+  <data name="IpHost" xml:space="preserve">
+    <value>IP/Host</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Connection error.</value>
+  </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Always Ask</value>
   </data>

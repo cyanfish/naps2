@@ -12,6 +12,7 @@ namespace NAPS2.EtoForms.Ui;
 public class SelectDeviceForm : EtoDialogBase
 {
     private readonly ScanDevice AlwaysAskMarker = new(Driver.Default, "*always*ask*", UiStrings.AlwaysAsk);
+    private readonly ScanDevice ManualIpMarker = new(Driver.Default, "*manual*ip*", UiStrings.ManualIp);
 
     private readonly RadioButton _wiaDriver;
     private readonly RadioButton _twainDriver;
@@ -47,6 +48,7 @@ public class SelectDeviceForm : EtoDialogBase
         _deviceIconList = EtoPlatform.Current.CreateListView(deviceListViewBehavior);
         _deviceIconList.ImageSize = new Size(48, 32);
         deviceListViewBehavior.SetImage(AlwaysAskMarker, iconProvider.GetIcon("ask")!);
+        deviceListViewBehavior.SetImage(ManualIpMarker, iconProvider.GetIcon("network_ip")!);
 
         _deviceTextList.Activated += (_, _) => _selectDevice.PerformClick();
         _deviceIconList.ItemClicked += (_, _) => _selectDevice.PerformClick();
@@ -199,6 +201,10 @@ public class SelectDeviceForm : EtoDialogBase
 
         DeviceList = new List<ScanDevice>();
         ExtraItems = new List<ScanDevice>();
+        if (DeviceDriver == Driver.Escl)
+        {
+            ExtraItems.Add(ManualIpMarker);
+        }
         if (AllowAlwaysAsk && DeviceDriver is not (Driver.Wia or Driver.Twain))
         {
             ExtraItems.Add(AlwaysAskMarker);
@@ -367,6 +373,13 @@ public class SelectDeviceForm : EtoDialogBase
         if (Choice.Device == AlwaysAskMarker)
         {
             Choice = DeviceChoice.ForAlwaysAsk(DeviceDriver);
+        }
+        if (Choice.Device == ManualIpMarker)
+        {
+            var ipForm = FormFactory.Create<ManualIpForm>();
+            ipForm.ShowModal();
+            Choice = ipForm.Device != null ? DeviceChoice.ForDevice(ipForm.Device) : DeviceChoice.None;
+            return ipForm.Result;
         }
         return true;
     }

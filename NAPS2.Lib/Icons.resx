@@ -373,6 +373,12 @@
   <data name="wireless16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\wireless16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="network_ip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\network_ip.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="network_ip_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\network_ip-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cog.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

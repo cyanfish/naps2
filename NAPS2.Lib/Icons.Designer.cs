@@ -712,6 +712,26 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] network_ip {
+            get {
+                object obj = ResourceManager.GetObject("network_ip", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] network_ip_small {
+            get {
+                object obj = ResourceManager.GetObject("network_ip_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] outlookweb {
             get {
                 object obj = ResourceManager.GetObject("outlookweb", resourceCulture);

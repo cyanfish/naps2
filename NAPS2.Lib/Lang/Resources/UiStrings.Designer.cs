@@ -483,6 +483,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        internal static string Connect {
+            get {
+                return ResourceManager.GetString("Connect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection error..
+        /// </summary>
+        internal static string ConnectionError {
+            get {
+                return ResourceManager.GetString("ConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contrast:.
         /// </summary>
         internal static string ContrastLabel {
@@ -1050,6 +1068,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IP/Host.
+        /// </summary>
+        internal static string IpHost {
+            get {
+                return ResourceManager.GetString("IpHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jpeg Quality.
         /// </summary>
         internal static string JpegQuality {
@@ -1109,6 +1136,24 @@ namespace NAPS2.Lang.Resources {
         internal static string MakePdfsSearchable {
             get {
                 return ResourceManager.GetString("MakePdfsSearchable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual IP.
+        /// </summary>
+        internal static string ManualIp {
+            get {
+                return ResourceManager.GetString("ManualIp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual IP.
+        /// </summary>
+        internal static string ManualIpFormTitle {
+            get {
+                return ResourceManager.GetString("ManualIpFormTitle", resourceCulture);
             }
         }
         
@@ -1514,6 +1559,15 @@ namespace NAPS2.Lang.Resources {
         internal static string PlaceholdersFormTitle {
             get {
                 return ResourceManager.GetString("PlaceholdersFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port.
+        /// </summary>
+        internal static string Port {
+            get {
+                return ResourceManager.GetString("Port", resourceCulture);
             }
         }
         
