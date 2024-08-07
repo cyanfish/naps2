@@ -25,18 +25,29 @@ public class DeviceCapsCache
     public ScanCaps? GetCachedCaps(ScanProfile profile)
     {
         var key = GetDeviceKey(profile);
-        return _capsCache.Get(key);
+        lock (_capsCache)
+        {
+            return _capsCache.Get(key);
+        }
     }
 
     public async Task<ScanCaps?> QueryCaps(ScanProfile profile)
     {
         var key = GetDeviceKey(profile);
-        if (!_capsCache.ContainsKey(key))
+        bool contains;
+        lock (_capsCache)
+        {
+            contains = _capsCache.ContainsKey(key);
+        }
+        if (!contains)
         {
             try
             {
                 var caps = await _scanPerformer.GetCaps(profile);
-                _capsCache[key] = caps;
+                lock (_capsCache)
+                {
+                    _capsCache[key] = caps;
+                }
             }
             catch (Exception ex)
             {
@@ -44,7 +55,10 @@ public class DeviceCapsCache
                 return null;
             }
         }
-        return _capsCache[key];
+        lock (_capsCache)
+        {
+            return _capsCache[key];
+        }
     }
 
     public Image? GetCachedIcon(ScanDevice? device) => GetCachedIcon(device?.IconUri);
@@ -52,7 +66,10 @@ public class DeviceCapsCache
     public Image? GetCachedIcon(string? iconUri)
     {
         if (iconUri == null) return null;
-        return _iconCache.Get(iconUri);
+        lock (_iconCache)
+        {
+            return _iconCache.Get(iconUri);
+        }
     }
 
     public async Task<Image?> LoadIcon(ScanDevice? device) => await LoadIcon(device?.IconUri);
@@ -60,12 +77,20 @@ public class DeviceCapsCache
     public async Task<Image?> LoadIcon(string? iconUri)
     {
         if (iconUri == null) return null;
-        if (!_iconCache.ContainsKey(iconUri))
+        bool contains;
+        lock (_iconCache)
+        {
+            contains = _iconCache.ContainsKey(iconUri);
+        }
+        if (!contains)
         {
             try
             {
                 var icon = await DoLoadIcon(iconUri);
-                _iconCache[iconUri] = icon;
+                lock (_iconCache)
+                {
+                    _iconCache[iconUri] = icon;
+                }
             }
             catch (Exception ex)
             {
@@ -73,7 +98,10 @@ public class DeviceCapsCache
                 return null;
             }
         }
-        return _iconCache[iconUri];
+        lock (_iconCache)
+        {
+            return _iconCache[iconUri];
+        }
     }
 
     private async Task<Image> DoLoadIcon(string iconUri)
