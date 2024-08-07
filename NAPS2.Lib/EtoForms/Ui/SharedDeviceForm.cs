@@ -1,3 +1,4 @@
+using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
@@ -15,63 +16,36 @@ public class SharedDeviceForm : EtoDialogBase
     private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
     private readonly ISharedDeviceManager _sharedDeviceManager;
+    private readonly DeviceCapsCache _deviceCapsCache;
 
     private readonly TextBox _displayName = new();
-    private readonly RadioButton _wiaDriver;
-    private readonly RadioButton _twainDriver;
-    private readonly RadioButton _appleDriver;
-    private readonly RadioButton _saneDriver;
-    private readonly TextBox _deviceName = new() { Enabled = false };
+    private readonly ImageView _deviceIcon = new();
+    private readonly Label _deviceName = new();
+    private readonly Label _deviceDriver = new();
+    private readonly LayoutVisibility _deviceVis = new(false);
     private readonly Button _chooseDevice = new() { Text = UiStrings.ChooseDevice };
     private readonly Button _ok = new() { Text = UiStrings.OK };
     private readonly Button _cancel = new() { Text = UiStrings.Cancel };
 
-    private ScanDevice? _currentDevice;
+    private DeviceChoice _currentDevice = DeviceChoice.None;
     private bool _result;
-    private bool _suppressChangeEvent;
+    private CancellationTokenSource? _loadIconCts;
 
     public SharedDeviceForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
-        ISharedDeviceManager sharedDeviceManager) : base(config)
+        ISharedDeviceManager sharedDeviceManager, DeviceCapsCache deviceCapsCache) : base(config)
     {
         _scanPerformer = scanPerformer;
         _errorOutput = errorOutput;
         _sharedDeviceManager = sharedDeviceManager;
-        _wiaDriver = new RadioButton { Text = UiStrings.WiaDriver };
-        _twainDriver = new RadioButton(_wiaDriver) { Text = UiStrings.TwainDriver };
-        _appleDriver = new RadioButton(_wiaDriver) { Text = UiStrings.AppleDriver };
-        _saneDriver = new RadioButton(_wiaDriver) { Text = UiStrings.SaneDriver };
-        _wiaDriver.CheckedChanged += Driver_CheckedChanged;
-        _twainDriver.CheckedChanged += Driver_CheckedChanged;
-        _appleDriver.CheckedChanged += Driver_CheckedChanged;
-        _saneDriver.CheckedChanged += Driver_CheckedChanged;
+        _deviceCapsCache = deviceCapsCache;
         _ok.Click += Ok_Click;
         _cancel.Click += Cancel_Click;
 
         _chooseDevice.Click += ChooseDevice;
-        _deviceName.KeyDown += DeviceName_KeyDown;
     }
 
     protected override void BuildLayout()
     {
-        // TODO: Don't show if only one driver is available
-        var driverElements = new List<LayoutElement>();
-        if (PlatformCompat.System.IsWiaDriverSupported)
-        {
-            driverElements.Add(_wiaDriver.Scale());
-        }
-        if (PlatformCompat.System.IsTwainDriverSupported)
-        {
-            driverElements.Add(_twainDriver.Scale());
-        }
-        if (PlatformCompat.System.IsAppleDriverSupported)
-        {
-            driverElements.Add(_appleDriver.Scale());
-        }
-        if (PlatformCompat.System.IsSaneDriverSupported)
-        {
-            driverElements.Add(_saneDriver.Scale());
-        }
-
         Title = UiStrings.SharedDeviceFormTitle;
         Icon = new Icon(1f, Icons.wireless16.ToEtoImage());
 
@@ -79,21 +53,20 @@ public class SharedDeviceForm : EtoDialogBase
         FormStateController.FixedHeightLayout = true;
 
         LayoutController.Content = L.Column(
-            L.Row(
-                L.Column(
-                    C.Label(UiStrings.DisplayNameLabel),
-                    _displayName,
-                    L.Row(
-                        driverElements.ToArray()
-                    ),
-                    C.Spacer(),
-                    C.Label(UiStrings.DeviceLabel),
-                    L.Row(
-                        _deviceName.Scale(),
-                        _chooseDevice
-                    )
-                ).Scale(),
-                new ImageView { Image = Icons.scanner_48.ToEtoImage() }
+            C.Label(UiStrings.DisplayNameLabel),
+            _displayName,
+            C.Spacer(),
+            L.GroupBox(UiStrings.DeviceLabel,
+                L.Row(
+                    _deviceIcon.Visible(_deviceVis).AlignCenter().NaturalWidth(48),
+                    L.Column(
+                        C.Filler(),
+                        _deviceName,
+                        _deviceDriver,
+                        C.Filler()
+                    ).Spacing(5).Visible(_deviceVis).Scale(),
+                    _chooseDevice.AlignCenter()
+                )
             ),
             C.Filler(),
             L.Row(
@@ -109,13 +82,31 @@ public class SharedDeviceForm : EtoDialogBase
 
     public SharedDevice? SharedDevice { get; set; }
 
-    public ScanDevice? CurrentDevice
+    public DeviceChoice CurrentDevice
     {
         get => _currentDevice;
         set
         {
             _currentDevice = value;
-            _deviceName.Text = value?.Name ?? "";
+            if (value == DeviceChoice.None)
+            {
+                _deviceName.Text = "";
+                _deviceVis.IsVisible = false;
+            }
+            else
+            {
+                _deviceName.Text = value.Device?.Name;
+                _deviceDriver.Text = value.Driver switch
+                {
+                    Driver.Wia => UiStrings.WiaDriver,
+                    Driver.Twain => UiStrings.TwainDriver,
+                    Driver.Sane => UiStrings.SaneDriver,
+                    Driver.Escl => UiStrings.EsclDriver,
+                    Driver.Apple => UiStrings.AppleDriver,
+                    _ => ""
+                };
+                _deviceVis.IsVisible = true;
+            }
         }
     }
 
@@ -123,64 +114,38 @@ public class SharedDeviceForm : EtoDialogBase
 
     private int TlsPort { get; set; }
 
-    private Driver DeviceDriver
-    {
-        get => _twainDriver.Checked ? Driver.Twain
-            : _wiaDriver.Checked ? Driver.Wia
-            : _appleDriver.Checked ? Driver.Apple
-            : _saneDriver.Checked ? Driver.Sane
-            : ScanOptionsValidator.SystemDefaultDriver;
-        set
-        {
-            if (value == Driver.Twain)
-            {
-                _twainDriver.Checked = true;
-            }
-            else if (value == Driver.Wia)
-            {
-                _wiaDriver.Checked = true;
-            }
-            else if (value == Driver.Apple)
-            {
-                _appleDriver.Checked = true;
-            }
-            else if (value == Driver.Sane)
-            {
-                _saneDriver.Checked = true;
-            }
-        }
-    }
+    private Driver DeviceDriver { get; set; } = ScanOptionsValidator.SystemDefaultDriver;
 
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
 
-        // Don't trigger any onChange events
-        _suppressChangeEvent = true;
+        if (SharedDevice != null)
+        {
+            _displayName.Text = SharedDevice.Name;
+            CurrentDevice = DeviceChoice.ForDevice(SharedDevice.Device);
+            Port = SharedDevice.Port;
+            TlsPort = SharedDevice.TlsPort;
+            DeviceDriver = SharedDevice.Device.Driver;
+        }
 
-        _displayName.Text = SharedDevice?.Name ?? "";
-        CurrentDevice ??= SharedDevice?.Device;
-        Port = SharedDevice?.Port ?? 0;
-        TlsPort = SharedDevice?.TlsPort ?? 0;
-
-        DeviceDriver = SharedDevice?.Device.Driver ?? ScanOptionsValidator.SystemDefaultDriver;
-
-        // Start triggering onChange events again
-        _suppressChangeEvent = false;
+        SetDeviceIcon(CurrentDevice.Device?.IconUri);
     }
 
     private async void ChooseDevice(object? sender, EventArgs args)
     {
         var profile = new ScanProfile { DriverName = DeviceDriver.ToString().ToLowerInvariant() };
-        var device = (await _scanPerformer.PromptForDevice(profile, false, NativeHandle)).Device;
-        if (device != null)
+        var device = await _scanPerformer.PromptForDevice(profile, false, NativeHandle);
+        if (device.Device != null)
         {
             if (string.IsNullOrEmpty(_displayName.Text) ||
-                CurrentDevice != null && CurrentDevice.Name == _displayName.Text)
+                CurrentDevice != DeviceChoice.None && CurrentDevice.Device?.Name == _displayName.Text)
             {
-                _displayName.Text = device.Name;
+                _displayName.Text = device.Device.Name;
             }
             CurrentDevice = device;
+            DeviceDriver = device.Driver;
+            SetDeviceIcon(CurrentDevice.Device?.IconUri);
         }
     }
 
@@ -189,7 +154,7 @@ public class SharedDeviceForm : EtoDialogBase
         SharedDevice = new SharedDevice
         {
             Name = _displayName.Text,
-            Device = CurrentDevice!,
+            Device = CurrentDevice.Device!,
             Port = Port == 0 ? NextPort() : Port,
             TlsPort = TlsPort == 0 ? NextTlsPort() : TlsPort
         };
@@ -217,6 +182,40 @@ public class SharedDeviceForm : EtoDialogBase
         return tlsPort;
     }
 
+    private void SetDeviceIcon(string? iconUri)
+    {
+        var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
+        _deviceIcon.Image =
+            cachedIcon ?? (_currentDevice.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage());
+        LayoutController.Invalidate();
+        if (cachedIcon == null && iconUri != null)
+        {
+            ReloadDeviceIcon(iconUri);
+        }
+    }
+
+    private void ReloadDeviceIcon(string iconUri)
+    {
+        var cts = new CancellationTokenSource();
+        _loadIconCts?.Cancel();
+        _loadIconCts = cts;
+        Task.Run(async () =>
+        {
+            var icon = await _deviceCapsCache.LoadIcon(iconUri);
+            if (icon != null)
+            {
+                Invoker.Current.Invoke(() =>
+                {
+                    if (!cts.IsCancellationRequested)
+                    {
+                        _deviceIcon.Image = icon;
+                        LayoutController.Invalidate();
+                    }
+                });
+            }
+        });
+    }
+
     private void Ok_Click(object? sender, EventArgs e)
     {
         if (_displayName.Text == "")
@@ -224,7 +223,7 @@ public class SharedDeviceForm : EtoDialogBase
             _errorOutput.DisplayError(MiscResources.NameMissing);
             return;
         }
-        if (CurrentDevice == null)
+        if (CurrentDevice.Device == null)
         {
             _errorOutput.DisplayError(MiscResources.NoDeviceSelected);
             return;
@@ -237,22 +236,5 @@ public class SharedDeviceForm : EtoDialogBase
     private void Cancel_Click(object? sender, EventArgs e)
     {
         Close();
-    }
-
-    private void Driver_CheckedChanged(object? sender, EventArgs e)
-    {
-        if (((RadioButton) sender!).Checked && !_suppressChangeEvent)
-        {
-            SharedDevice = null;
-            CurrentDevice = null;
-        }
-    }
-
-    private void DeviceName_KeyDown(object? sender, KeyEventArgs e)
-    {
-        if (e.Key == Keys.Delete)
-        {
-            CurrentDevice = null;
-        }
     }
 }
