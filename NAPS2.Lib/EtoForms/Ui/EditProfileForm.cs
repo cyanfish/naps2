@@ -11,17 +11,12 @@ namespace NAPS2.EtoForms.Ui;
 
 public class EditProfileForm : EtoDialogBase
 {
-    private readonly IScanPerformer _scanPerformer;
     private readonly ErrorOutput _errorOutput;
     private readonly ProfileNameTracker _profileNameTracker;
     private readonly DeviceCapsCache _deviceCapsCache;
 
     private readonly TextBox _displayName = new();
-    private readonly ImageView _deviceIcon = new();
-    private readonly Label _deviceName = new();
-    private readonly Label _deviceDriver = new();
-    private readonly LayoutVisibility _deviceVis = new(false);
-    private readonly Button _chooseDevice = new() { Text = UiStrings.ChooseDevice };
+    private readonly DeviceSelectorWidget _deviceSelectorWidget;
     private readonly RadioButton _predefinedSettings;
     private readonly RadioButton _nativeUi;
     private readonly DropDown _paperSource = C.EnumDropDown<ScanSource>();
@@ -38,21 +33,24 @@ public class EditProfileForm : EtoDialogBase
     private readonly SliderWithTextBox _contrastSlider = new();
 
     private ScanProfile _scanProfile = null!;
-    private DeviceChoice _currentDevice = DeviceChoice.None;
     private bool _isDefault;
     private bool _result;
     private bool _suppressChangeEvent;
     private bool _suppressPageSizeEvent;
-    private CancellationTokenSource? _loadIconCts;
     private CancellationTokenSource? _updateCapsCts;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
         ProfileNameTracker profileNameTracker, DeviceCapsCache deviceCapsCache) : base(config)
     {
-        _scanPerformer = scanPerformer;
         _errorOutput = errorOutput;
         _profileNameTracker = profileNameTracker;
         _deviceCapsCache = deviceCapsCache;
+        _deviceSelectorWidget = new(scanPerformer, deviceCapsCache, this)
+        {
+            ProfileFunc = GetUpdatedScanProfile,
+            AllowAlwaysAsk = true
+        };
+        _deviceSelectorWidget.DeviceChanged += DeviceChanged;
 
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
@@ -60,10 +58,28 @@ public class EditProfileForm : EtoDialogBase
         _predefinedSettings.CheckedChanged += PredefinedSettings_CheckedChanged;
         _nativeUi.CheckedChanged += NativeUi_CheckedChanged;
 
-        _chooseDevice.Click += ChooseDevice;
         _enableAutoSave.CheckedChanged += EnableAutoSave_CheckedChanged;
         _autoSaveSettings.Click += AutoSaveSettings_LinkClicked;
         _advanced.Click += Advanced_Click;
+    }
+
+    public void SetDevice(ScanDevice device)
+    {
+        _deviceSelectorWidget.Choice = DeviceChoice.ForDevice(device);
+    }
+
+    private void DeviceChanged(object? sender, DeviceChangedEventArgs e)
+    {
+        if (e.NewChoice.Device != null && (string.IsNullOrEmpty(_displayName.Text) ||
+                                           e.PreviousChoice.Device?.Name == _displayName.Text))
+        {
+            _displayName.Text = e.NewChoice.Device.Name;
+        }
+        DeviceDriver = e.NewChoice.Driver;
+        IconUri = e.NewChoice.Device?.IconUri;
+
+        UpdateCaps();
+        UpdateEnabledControls();
     }
 
     protected override void BuildLayout()
@@ -78,18 +94,7 @@ public class EditProfileForm : EtoDialogBase
             C.Label(UiStrings.DisplayNameLabel),
             _displayName,
             C.Spacer(),
-            L.GroupBox(UiStrings.DeviceLabel,
-                L.Row(
-                    _deviceIcon.Visible(_deviceVis).AlignCenter().NaturalWidth(48),
-                    L.Column(
-                        C.Filler(),
-                        _deviceName,
-                        _deviceDriver,
-                        C.Filler()
-                    ).Spacing(5).Visible(_deviceVis).Scale(),
-                    _chooseDevice.AlignCenter()
-                )
-            ),
+            _deviceSelectorWidget,
             C.Spacer(),
             PlatformCompat.System.IsWiaDriverSupported || PlatformCompat.System.IsTwainDriverSupported
                 ? L.Row(
@@ -145,71 +150,8 @@ public class EditProfileForm : EtoDialogBase
 
     public bool NewProfile { get; set; }
 
-    public DeviceChoice CurrentDevice
-    {
-        get => _currentDevice;
-        set
-        {
-            _currentDevice = value;
-            if (value == DeviceChoice.None)
-            {
-                _deviceName.Text = "";
-                _deviceVis.IsVisible = false;
-            }
-            else
-            {
-                _deviceName.Text = value.Device?.Name ?? UiStrings.AlwaysAsk;
-                _deviceDriver.Text = value.Driver switch
-                {
-                    Driver.Wia => UiStrings.WiaDriver,
-                    Driver.Twain => UiStrings.TwainDriver,
-                    Driver.Sane => UiStrings.SaneDriver,
-                    Driver.Escl => UiStrings.EsclDriver,
-                    Driver.Apple => UiStrings.AppleDriver,
-                    _ => ""
-                };
-                _deviceVis.IsVisible = true;
-            }
-        }
-    }
-
     private void UpdateUiForCaps()
     {
-        SetDeviceIcon(IconUri);
-    }
-
-    private void SetDeviceIcon(string? iconUri)
-    {
-        var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
-        _deviceIcon.Image =
-            cachedIcon ?? (_currentDevice.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage());
-        LayoutController.Invalidate();
-        if (cachedIcon == null && iconUri != null)
-        {
-            ReloadDeviceIcon(iconUri);
-        }
-    }
-
-    private void ReloadDeviceIcon(string iconUri)
-    {
-        var cts = new CancellationTokenSource();
-        _loadIconCts?.Cancel();
-        _loadIconCts = cts;
-        Task.Run(async () =>
-        {
-            var icon = await _deviceCapsCache.LoadIcon(iconUri);
-            if (icon != null)
-            {
-                Invoker.Current.Invoke(() =>
-                {
-                    if (!cts.IsCancellationRequested)
-                    {
-                        _deviceIcon.Image = icon;
-                        LayoutController.Invalidate();
-                    }
-                });
-            }
-        });
     }
 
     private void UpdateCaps()
@@ -272,16 +214,16 @@ public class EditProfileForm : EtoDialogBase
         IconUri = ScanProfile.Device?.IconUri;
 
         _displayName.Text = ScanProfile.DisplayName;
-        if (CurrentDevice == DeviceChoice.None)
+        if (_deviceSelectorWidget.Choice == DeviceChoice.None)
         {
             var device = ScanProfile.Device?.ToScanDevice(DeviceDriver);
             if (device != null)
             {
-                CurrentDevice = DeviceChoice.ForDevice(device);
+                _deviceSelectorWidget.Choice = DeviceChoice.ForDevice(device);
             }
             else if (!NewProfile)
             {
-                CurrentDevice = DeviceChoice.ForAlwaysAsk(DeviceDriver);
+                _deviceSelectorWidget.Choice = DeviceChoice.ForAlwaysAsk(DeviceDriver);
             }
         }
         _isDefault = ScanProfile.IsDefault;
@@ -316,26 +258,6 @@ public class EditProfileForm : EtoDialogBase
 
         UpdateUiForCaps();
         UpdateEnabledControls();
-    }
-
-    private async void ChooseDevice(object? sender, EventArgs args)
-    {
-        ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
-        var choice = await _scanPerformer.PromptForDevice(ScanProfile, true, NativeHandle);
-        if (choice.Device != null || choice.AlwaysAsk)
-        {
-            if ((string.IsNullOrEmpty(_displayName.Text) ||
-                 CurrentDevice.Device?.Name == _displayName.Text) && !choice.AlwaysAsk)
-            {
-                _displayName.Text = choice.Device!.Name;
-            }
-            CurrentDevice = choice;
-            DeviceDriver = choice.Driver;
-            IconUri = choice.Device?.IconUri;
-
-            UpdateCaps();
-            UpdateEnabledControls();
-        }
     }
 
     private void UpdatePageSizeList()
@@ -421,7 +343,7 @@ public class EditProfileForm : EtoDialogBase
             _errorOutput.DisplayError(MiscResources.NameMissing);
             return false;
         }
-        if (CurrentDevice == DeviceChoice.None)
+        if (_deviceSelectorWidget.Choice == DeviceChoice.None)
         {
             _errorOutput.DisplayError(MiscResources.NoDeviceSelected);
             return false;
@@ -432,7 +354,7 @@ public class EditProfileForm : EtoDialogBase
         {
             if (!ScanProfile.IsDeviceLocked)
             {
-                ScanProfile.Device = ScanProfileDevice.FromScanDevice(CurrentDevice.Device);
+                ScanProfile.Device = ScanProfileDevice.FromScanDevice(_deviceSelectorWidget.Choice.Device);
             }
             return true;
         }
@@ -451,7 +373,7 @@ public class EditProfileForm : EtoDialogBase
         {
             Version = ScanProfile.CURRENT_VERSION,
 
-            Device = ScanProfileDevice.FromScanDevice(CurrentDevice.Device),
+            Device = ScanProfileDevice.FromScanDevice(_deviceSelectorWidget.Choice.Device),
             Caps = ScanProfile.Caps,
             IsDefault = _isDefault,
             DriverName = DeviceDriver.ToString().ToLowerInvariant(),
@@ -515,7 +437,7 @@ public class EditProfileForm : EtoDialogBase
             bool settingsEnabled = !locked && (_predefinedSettings.Checked || !canUseNativeUi);
 
             _displayName.Enabled = !locked;
-            _chooseDevice.Enabled = !deviceLocked;
+            _deviceSelectorWidget.Enabled = !deviceLocked;
             _predefinedSettings.Enabled = _nativeUi.Enabled = !locked;
 
             _paperSource.Enabled = settingsEnabled;

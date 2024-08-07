@@ -76,7 +76,7 @@ public class DesktopScanController : IDesktopScanController
                     // Populate the device field automatically (because we can do that!)
                     using var deviceManager = new WiaDeviceManager();
                     using var device = deviceManager.FindDevice(deviceID);
-                    editSettingsForm.CurrentDevice = DeviceChoice.ForDevice(new ScanDevice(Driver.Wia, deviceID, device.Name()));
+                    editSettingsForm.SetDevice(new ScanDevice(Driver.Wia, deviceID, device.Name()));
                 }
                 catch (WiaException)
                 {
