@@ -17,7 +17,7 @@ public class EtoDevicePrompt : IDevicePrompt
         // TODO: Extension method or something to turn InvokeGet into Task<T>?
         return Task.FromResult(Invoker.Current.InvokeGet(() =>
         {
-            var deviceForm = _formFactory.Create<SelectDeviceForm>();
+            var deviceForm = _formFactory.Create<ChooseDeviceForm>();
             deviceForm.ScanOptions = options;
             deviceForm.AllowAlwaysAsk = allowAlwaysAsk;
             deviceForm.ShowModal();

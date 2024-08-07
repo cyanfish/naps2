@@ -9,7 +9,7 @@ using NAPS2.Scan.Internal;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class SelectDeviceForm : EtoDialogBase
+public class ChooseDeviceForm : EtoDialogBase
 {
     private readonly ScanDevice AlwaysAskMarker = new(Driver.Default, "*always*ask*", UiStrings.AlwaysAsk);
     private readonly ScanDevice ManualIpMarker = new(Driver.Default, "*manual*ip*", UiStrings.ManualIp);
@@ -36,7 +36,7 @@ public class SelectDeviceForm : EtoDialogBase
     private CancellationTokenSource? _getDevicesCts;
     private Driver? _activeQuery;
 
-    public SelectDeviceForm(Naps2Config config, IIconProvider iconProvider,
+    public ChooseDeviceForm(Naps2Config config, IIconProvider iconProvider,
         DeviceListViewBehavior deviceListViewBehavior, ScanningContext scanningContext,
         DeviceCapsCache deviceCapsCache) : base(config)
     {
