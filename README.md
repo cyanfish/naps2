@@ -39,3 +39,4 @@ NAPS2 is licensed under the GNU GPL 2.0 (or later). Some projects have additiona
 - NAPS2.Images.* - GNU LGPL 2.1 (or later)
 - NAPS2.Sdk - GNU LGPL 2.1 (or later)
 - NAPS2.Sdk.Samples - MIT
+- NAPS2.Internals - GNU LGPL 2.1 (or later)
