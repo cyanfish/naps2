@@ -134,16 +134,16 @@ public class ChooseDeviceForm : EtoDialogBase
             nameof(UiStrings.SelectDevice));
 
         FormStateController.SaveFormState = FormStateController.RestoreFormState = true;
-        FormStateController.DefaultExtraLayoutSize = new Size(50, 0);
+        FormStateController.DefaultExtraLayoutSize = new Size(150, 100);
 
         LayoutController.Content = L.Column(
             L.Row(
                 [
                     ..driverElements,
                     C.IconButton(_iconProvider.GetIcon("large_tiles_small")!, () => SetListView(false))
-                        .Visible(_textListVis),
+                        .Visible(_textListVis).Width(40),
                     C.IconButton(_iconProvider.GetIcon("text_align_justify_small")!, () => SetListView(true))
-                        .Visible(!_textListVis)
+                        .Visible(!_textListVis).Width(40)
                 ]
             ),
             _deviceIconList.Control.NaturalSize(150, 100).Scale().Visible(!_textListVis),
@@ -250,11 +250,6 @@ public class ChooseDeviceForm : EtoDialogBase
                             }
                             DeviceList.Add(device);
                             UpdateDevices(false);
-                            if (DeviceList.Count == 1)
-                            {
-                                _deviceIconList.Selection = ListSelection.Of(DeviceList[0]);
-                                _deviceTextList.SelectedIndex = 0;
-                            }
                         }
                     });
                 }
