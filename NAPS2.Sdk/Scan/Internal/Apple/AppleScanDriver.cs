@@ -29,9 +29,14 @@ internal class AppleScanDriver : IScanDriver
         await Task.Delay(2000, cancelToken);
     }
 
-    public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public async Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        return Task.FromResult(new ScanCaps());
+        using var reader = new DeviceReader();
+        // Note we don't want to dispose the device, as the ICDeviceBrowser manages its lifetime.
+        var device = await GetDevice(reader, options.Device!);
+        using var oper =
+            new DeviceOperator(_scanningContext, device, reader, options, cancelToken, null!, null!);
+        return await oper.GetCaps();
     }
 
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,

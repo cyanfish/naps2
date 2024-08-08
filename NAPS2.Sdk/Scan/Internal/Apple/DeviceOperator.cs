@@ -1,4 +1,5 @@
 #if MAC
+using System.Collections.Immutable;
 using System.Threading;
 using AppKit;
 using CoreGraphics;
@@ -268,6 +269,99 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 
     public override void DidRemoveDevice(ICDevice device)
     {
+    }
+
+    public async Task<ScanCaps> GetCaps()
+    {
+        try
+        {
+            _device.Delegate = this;
+            _logger.LogDebug("ICC: Opening session for caps");
+            _device.RequestOpenSession();
+            await _openSessionTcs.Task;
+            _logger.LogDebug("ICC: Waiting for ready");
+            await _readyTcs.Task;
+
+            var unitTypes = _device.AvailableFunctionalUnitTypes;
+            bool supportsFeeder = unitTypes.Contains((NSNumber) (int) ICScannerFunctionalUnitType.Flatbed);
+            bool supportsFlatbed = unitTypes.Contains((NSNumber) (int) ICScannerFunctionalUnitType.DocumentFeeder);
+            bool supportsDuplex = false;
+            PerSourceCaps? flatbedCaps = null;
+            PerSourceCaps? feederCaps = null;
+            PerSourceCaps? duplexCaps = null;
+
+            _logger.LogDebug("ICC: Selecting flatbed unit");
+            _unit = await SelectUnit(ICScannerFunctionalUnitType.Flatbed);
+            if (_unit is ICScannerFunctionalUnitFlatbed flatbedUnit)
+            {
+                flatbedCaps = GetCapsFromUnit(flatbedUnit);
+            }
+
+            _logger.LogDebug("ICC: Selecting feeder unit");
+            _unit = await SelectUnit(ICScannerFunctionalUnitType.DocumentFeeder);
+            if (_unit is ICScannerFunctionalUnitDocumentFeeder feederUnit)
+            {
+                supportsDuplex = feederUnit.SupportsDuplexScanning;
+                feederCaps = GetCapsFromUnit(feederUnit);
+                if (supportsDuplex) duplexCaps = feederCaps;
+            }
+
+            _logger.LogDebug("ICC: Closing session");
+            _device.RequestCloseSession();
+            await _closeTcs.Task;
+            _logger.LogDebug("ICC: Caps query success");
+
+            return new ScanCaps
+            {
+                MetadataCaps = new()
+                {
+                    SerialNumber = _device.SerialNumber
+                },
+                PaperSourceCaps = new()
+                {
+                    SupportsFlatbed = supportsFlatbed,
+                    SupportsFeeder = supportsFeeder,
+                    SupportsDuplex = supportsDuplex,
+                    CanCheckIfFeederHasPaper = true
+                },
+                FlatbedCaps = flatbedCaps,
+                FeederCaps = feederCaps,
+                DuplexCaps = duplexCaps
+            };
+        }
+        finally
+        {
+            if (_device.HasOpenSession)
+            {
+                _logger.LogDebug("ICC: Closing session (in finally)");
+                _device.RequestCloseSession();
+            }
+        }
+    }
+
+    private PerSourceCaps GetCapsFromUnit(ICScannerFunctionalUnit unit)
+    {
+        unit.MeasurementUnit = ICScannerMeasurementUnit.Inches;
+        return new PerSourceCaps
+        {
+            DpiCaps = new()
+            {
+                Values = unit.SupportedResolutions.Select(x => (int) x).Order().ToImmutableList()
+            },
+            BitDepthCaps = new()
+            {
+                SupportsBlackAndWhite = unit.SupportedBitDepths.Contains((nuint) ICScannerBitDepth.Bits1),
+                SupportsGrayscale = unit.SupportedBitDepths.Contains((nuint) ICScannerBitDepth.Bits8),
+                SupportsColor = unit.SupportedBitDepths.Contains((nuint) ICScannerBitDepth.Bits8)
+            },
+            PageSizeCaps = new()
+            {
+                ScanArea = new PageSize(
+                    (decimal) unit.PhysicalSize.Width,
+                    (decimal) unit.PhysicalSize.Height,
+                    PageSizeUnit.Inch)
+            }
+        };
     }
 
     public async Task Scan()
