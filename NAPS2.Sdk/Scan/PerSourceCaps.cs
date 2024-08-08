@@ -2,8 +2,15 @@ using System.Collections.Immutable;
 
 namespace NAPS2.Scan;
 
+/// <summary>
+/// Represents capabilities specific to a single PaperSource as part of ScanCaps.
+/// </summary>
 public class PerSourceCaps
 {
+    /// <summary>
+    /// Gets an object representing the union of all possible option values allowed by the provided objects.
+    /// This can be helpful when presenting the user with a single set of possible options for multiple sources.
+    /// </summary>
     public static PerSourceCaps UnionAll(ICollection<PerSourceCaps> caps)
     {
         DpiCaps? dpiCaps = null;
@@ -45,9 +52,18 @@ public class PerSourceCaps
         };
     }
 
+    /// <summary>
+    /// Valid values for ScanOptions.Dpi.
+    /// </summary>
     public DpiCaps? DpiCaps { get; init; }
 
+    /// <summary>
+    /// Valid values for ScanOptions.BitDepth.
+    /// </summary>
     public BitDepthCaps? BitDepthCaps { get; init; }
 
+    /// <summary>
+    /// Valid values for ScanOptions.PageSize.
+    /// </summary>
     public PageSizeCaps? PageSizeCaps { get; init; }
 }

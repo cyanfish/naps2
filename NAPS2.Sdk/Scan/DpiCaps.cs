@@ -2,10 +2,20 @@ using System.Collections.Immutable;
 
 namespace NAPS2.Scan;
 
+/// <summary>
+/// Represents valid values for ScanOptions.Dpi as part of PerSourceCaps.
+/// </summary>
 public class DpiCaps
 {
     private static readonly int[] TargetCommonValues = [0, 100, 150, 200, 300, 400, 600, 800, 1200, 2400, 4800];
 
+    /// <summary>
+    /// Creates an instance of DpiCaps that allows values in the specified range.
+    /// </summary>
+    /// <param name="min">The lowest valid DPI value, inclusive.</param>
+    /// <param name="max">The highest valid DPI value, inclusive.</param>
+    /// <param name="step">The increment between valid DPI values (must be >0).</param>
+    /// <returns></returns>
     public static DpiCaps ForRange(int min, int max, int step)
     {
         if (step <= 0) return new DpiCaps();
@@ -20,8 +30,14 @@ public class DpiCaps
         };
     }
 
+    /// <summary>
+    /// Allowed values for ScanOptions.Dpi.
+    /// </summary>
     public ImmutableList<int>? Values { get; init; }
 
+    /// <summary>
+    /// Recommended values for ScanOptions.Dpi to be presented to the user.
+    /// </summary>
     public ImmutableList<int>? CommonValues
     {
         get
