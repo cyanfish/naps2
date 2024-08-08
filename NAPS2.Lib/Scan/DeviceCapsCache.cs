@@ -106,9 +106,18 @@ public class DeviceCapsCache
 
     private async Task<Image> DoLoadIcon(string iconUri)
     {
-        var client = EsclClient.GetHttpClient(_config.Get(c => c.EsclSecurityPolicy));
-        var imageBytes = await client.GetByteArrayAsync(iconUri);
-        using var image = _imageContext.Load(imageBytes);
+        IMemoryImage? image;
+        if (iconUri.StartsWith("file://"))
+        {
+            string path = new Uri(iconUri).LocalPath;
+            image = _imageContext.Load(path);
+        }
+        else
+        {
+            var client = EsclClient.GetHttpClient(_config.Get(c => c.EsclSecurityPolicy));
+            var imageBytes = await client.GetByteArrayAsync(iconUri);
+            image = _imageContext.Load(imageBytes);
+        }
         return image.PerformTransform(new ThumbnailTransform(ICON_SIZE)).ToEtoImage();
     }
 
