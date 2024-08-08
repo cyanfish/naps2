@@ -26,11 +26,6 @@ public class MetadataCaps
     public string? SerialNumber { get; init; }
 
     /// <summary>
-    /// The location note associated with the device.
-    /// </summary>
-    public string? Location { get; init; }
-
-    /// <summary>
     /// The URI for an icon associated with the device.
     /// </summary>
     public string? IconUri { get; init; }

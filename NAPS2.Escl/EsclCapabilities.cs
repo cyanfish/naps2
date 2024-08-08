@@ -7,6 +7,7 @@ public class EsclCapabilities
     public string Version { get; init; } = DEFAULT_VERSION;
     public string? MakeAndModel { get; init; }
     public string? SerialNumber { get; init; }
+    public string? Manufacturer { get; init; }
     public string? Uuid { get; init; }
     public string? AdminUri { get; init; }
     public string? IconUri { get; init; }

@@ -31,6 +31,7 @@ internal static class CapabilitiesParser
             Version = root.Element(PwgNs + "Version")?.Value ?? EsclCapabilities.DEFAULT_VERSION,
             MakeAndModel = root.Element(PwgNs + "MakeAndModel")?.Value,
             SerialNumber = root.Element(PwgNs + "SerialNumber")?.Value,
+            Manufacturer = root.Element(ScanNs + "Manufacturer")?.Value,
             Uuid = root.Element(ScanNs + "UUID")?.Value,
             AdminUri = root.Element(ScanNs + "AdminURI")?.Value,
             IconUri = root.Element(ScanNs + "IconURI")?.Value,

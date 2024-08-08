@@ -11,10 +11,11 @@ public class PerSourceCaps
     /// Gets an object representing the union of all possible option values allowed by the provided objects.
     /// This can be helpful when presenting the user with a single set of possible options for multiple sources.
     /// </summary>
-    public static PerSourceCaps UnionAll(ICollection<PerSourceCaps> caps)
+    public static PerSourceCaps UnionAll(IEnumerable<PerSourceCaps> caps)
     {
+        var capsColl = caps as ICollection<PerSourceCaps> ?? caps.ToList();
         DpiCaps? dpiCaps = null;
-        foreach (var dpiValues in caps.Select(x => x.DpiCaps?.Values).WhereNotNull())
+        foreach (var dpiValues in capsColl.Select(x => x.DpiCaps?.Values).WhereNotNull())
         {
             dpiCaps = new DpiCaps
             {
@@ -22,7 +23,7 @@ public class PerSourceCaps
             };
         }
         BitDepthCaps? bitDepthCaps = null;
-        foreach (var bd in caps.Select(x => x.BitDepthCaps).WhereNotNull())
+        foreach (var bd in capsColl.Select(x => x.BitDepthCaps).WhereNotNull())
         {
             bitDepthCaps = new BitDepthCaps
             {
@@ -32,7 +33,7 @@ public class PerSourceCaps
             };
         }
         PageSizeCaps? pageSizeCaps = null;
-        foreach (var area in caps.Select(x => x.PageSizeCaps?.ScanArea).WhereNotNull())
+        foreach (var area in capsColl.Select(x => x.PageSizeCaps?.ScanArea).WhereNotNull())
         {
             pageSizeCaps = new PageSizeCaps
             {

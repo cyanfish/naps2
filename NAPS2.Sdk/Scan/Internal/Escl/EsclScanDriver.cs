@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading;
@@ -53,9 +54,6 @@ internal class EsclScanDriver : IScanDriver
             {
                 return;
             }
-            // TODO: When we implement scanner capabilities, store all the connection information in there so we can
-            // try and connect directly before querying for a potentially-updated-IP (and then back-propagate the new
-            // connection info).
             var id = service.Uuid;
             var name = string.IsNullOrEmpty(service.ScannerName)
                 ? $"{ip}"
@@ -73,37 +71,100 @@ internal class EsclScanDriver : IScanDriver
         }
     }
 
-    public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
+    public async Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        return Task.FromResult(new ScanCaps());
+        if (cancelToken.IsCancellationRequested) return new ScanCaps();
+        var client = await GetEsclClient(options, cancelToken);
+        if (client == null) return new ScanCaps();
+
+        try
+        {
+            var caps = await client.GetCapabilities();
+            return new ScanCaps
+            {
+                MetadataCaps = new()
+                {
+                    Model = caps.MakeAndModel,
+                    Manufacturer = caps.Manufacturer,
+                    SerialNumber = caps.SerialNumber,
+                    IconUri = client.IconUri
+                },
+                PaperSourceCaps = new()
+                {
+                    SupportsFlatbed = caps.PlatenCaps != null,
+                    SupportsFeeder = caps.AdfSimplexCaps != null,
+                    SupportsDuplex = caps.AdfDuplexCaps != null,
+                    CanCheckIfFeederHasPaper = true
+                },
+                FlatbedCaps = MapCaps(caps.PlatenCaps),
+                FeederCaps = MapCaps(caps.AdfSimplexCaps),
+                DuplexCaps = MapCaps(caps.AdfDuplexCaps)
+            };
+        }
+        catch (HttpRequestException ex) when (ex.InnerException is TaskCanceledException or SocketException)
+        {
+            // A connection timeout manifests as TaskCanceledException
+            _logger.LogError(ex, "Error connecting to ESCL device");
+            throw new DeviceCommunicationException();
+        }
+        catch (TaskCanceledException)
+        {
+        }
+        return new ScanCaps();
+    }
+
+    private PerSourceCaps? MapCaps(EsclInputCaps? caps)
+    {
+        if (caps == null)
+        {
+            return null;
+        }
+        return PerSourceCaps.UnionAll(caps.SettingProfiles.Select(profile => MapSettingProfile(caps, profile)));
+    }
+
+    private PerSourceCaps MapSettingProfile(EsclInputCaps caps, EsclSettingProfile profile)
+    {
+        DpiCaps? dpiCaps = null;
+        if (profile.DiscreteResolutions.Count > 0)
+        {
+            dpiCaps = new DpiCaps
+            {
+                Values = profile.DiscreteResolutions
+                    .Where(res => res.XResolution == res.YResolution)
+                    .Select(res => res.XResolution).ToImmutableList()
+            };
+        }
+        else if (profile.XResolutionRange != null && profile.YResolutionRange != null)
+        {
+            int min = Math.Max(profile.XResolutionRange.Min, profile.YResolutionRange.Min);
+            int max = Math.Min(profile.XResolutionRange.Max, profile.YResolutionRange.Max);
+            int step = Math.Max(profile.XResolutionRange.Step, profile.YResolutionRange.Step);
+            dpiCaps = DpiCaps.ForRange(min, max, step);
+        }
+        return new PerSourceCaps
+        {
+            DpiCaps = dpiCaps,
+            BitDepthCaps = new BitDepthCaps
+            {
+                SupportsColor = profile.ColorModes.Contains(EsclColorMode.RGB24),
+                SupportsGrayscale = profile.ColorModes.Contains(EsclColorMode.Grayscale8),
+                SupportsBlackAndWhite = profile.ColorModes.Contains(EsclColorMode.BlackAndWhite1)
+            },
+            PageSizeCaps = caps.MaxWidth != null && caps.MaxHeight != null
+                ? new PageSizeCaps
+                {
+                    ScanArea = new PageSize(caps.MaxWidth.Value / 300m, caps.MaxHeight.Value / 300m, PageSizeUnit.Inch)
+                }
+                : null
+        };
     }
 
     public async Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents,
         Action<IMemoryImage> callback)
     {
         if (cancelToken.IsCancellationRequested) return;
-
-        EsclClient client;
-        string deviceId = options.Device!.ID;
-
-        if (deviceId.StartsWith("http://") || deviceId.StartsWith("https://"))
-        {
-            client = new EsclClient(new Uri(deviceId));
-            // TODO: Handle device offline?
-        }
-        else
-        {
-            var service = await FindDeviceEsclService(options, cancelToken);
-
-            if (cancelToken.IsCancellationRequested) return;
-            if (service == null) throw new DeviceOfflineException();
-
-            client = new EsclClient(service);
-        }
-
-        client.SecurityPolicy = options.EsclOptions.SecurityPolicy;
-        client.Logger = _logger;
-        client.CancelToken = cancelToken;
+        var client = await GetEsclClient(options, cancelToken);
+        if (client == null) return;
 
         try
         {
@@ -167,6 +228,31 @@ internal class EsclScanDriver : IScanDriver
         catch (TaskCanceledException)
         {
         }
+    }
+
+    private async Task<EsclClient?> GetEsclClient(ScanOptions options, CancellationToken cancelToken)
+    {
+        EsclClient client;
+        string deviceId = options.Device!.ID;
+
+        if (deviceId.StartsWith("http://") || deviceId.StartsWith("https://"))
+        {
+            client = new EsclClient(new Uri(deviceId));
+            // TODO: Handle device offline?
+        }
+        else
+        {
+            var service = await FindDeviceEsclService(options, cancelToken);
+            if (cancelToken.IsCancellationRequested) return null;
+            if (service == null) throw new DeviceOfflineException();
+            client = new EsclClient(service);
+        }
+
+        client.SecurityPolicy = options.EsclOptions.SecurityPolicy;
+        client.Logger = _logger;
+        client.CancelToken = cancelToken;
+
+        return client;
     }
 
     private async Task<EsclJob> CreateScanJobAndCorrectInvalidSettings(EsclClient client, EsclScanSettings scanSettings)
