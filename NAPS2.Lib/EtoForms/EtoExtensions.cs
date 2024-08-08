@@ -11,6 +11,8 @@ public static class EtoExtensions
     public static Bitmap ToEtoImage(this byte[] bytes) => new(bytes);
     public static Bitmap ToEtoImage(this IMemoryImage image) => EtoPlatform.Current.ToBitmap(image);
 
+    public static Bitmap Clone(this Image image) => new(image);
+
     public static MessageBoxType ToEto(this MessageBoxIcon icon)
     {
         return icon switch
@@ -57,6 +59,7 @@ public static class EtoExtensions
             using var graphics = new Graphics(newImage);
             graphics.Clear(Colors.Transparent);
             graphics.DrawImage(image, (size.Width - image.Width) / 2f, (size.Height - image.Height) / 2f);
+            image.Dispose();
             return newImage;
         }
         return image;
