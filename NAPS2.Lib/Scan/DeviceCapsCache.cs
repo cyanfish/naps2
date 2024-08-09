@@ -24,6 +24,7 @@ public class DeviceCapsCache
 
     public ScanCaps? GetCachedCaps(ScanProfile profile)
     {
+        if (profile.DriverName == null || profile.Device == null) return null;
         var key = GetDeviceKey(profile);
         lock (_capsCache)
         {
@@ -33,6 +34,7 @@ public class DeviceCapsCache
 
     public async Task<ScanCaps?> QueryCaps(ScanProfile profile)
     {
+        if (profile.DriverName == null || profile.Device == null) return null;
         var key = GetDeviceKey(profile);
         bool contains;
         lock (_capsCache)
@@ -123,8 +125,7 @@ public class DeviceCapsCache
 
     private DeviceKey GetDeviceKey(ScanProfile profile)
     {
-        if (profile.DriverName == null || profile.Device == null) throw new ArgumentException();
-        return new DeviceKey(profile.DriverName, profile.Device.ID, profile.WiaVersion, profile.TwainImpl);
+        return new DeviceKey(profile.DriverName!, profile.Device!.ID, profile.WiaVersion, profile.TwainImpl);
     }
 
     private record DeviceKey(string DriverName, string DeviceId, WiaApiVersion WiaVersion, TwainImpl TwainImpl);

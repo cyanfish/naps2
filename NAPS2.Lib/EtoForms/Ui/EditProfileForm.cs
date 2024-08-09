@@ -19,13 +19,13 @@ public class EditProfileForm : EtoDialogBase
     private readonly DeviceSelectorWidget _deviceSelectorWidget;
     private readonly RadioButton _predefinedSettings;
     private readonly RadioButton _nativeUi;
-    private readonly DropDown _paperSource = C.EnumDropDown<ScanSource>();
+    private readonly LayoutVisibility _nativeUiVis = new(true);
+    private readonly EnumDropDownWidget<ScanSource> _paperSource = new();
     private readonly DropDown _pageSize = C.EnumDropDown<ScanPageSize>();
-    private readonly DropDown _resolution = C.EnumDropDown<ScanDpi>(
-        dpi => string.Format(SettingsResources.DpiFormat, dpi.ToIntDpi().ToString(CultureInfo.CurrentCulture)));
-    private readonly DropDown _bitDepth = C.EnumDropDown<ScanBitDepth>();
-    private readonly DropDown _horAlign = C.EnumDropDown<ScanHorizontalAlign>();
-    private readonly DropDown _scale = C.EnumDropDown<ScanScale>();
+    private readonly DropDownWidget<int> _resolution = new();
+    private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
+    private readonly EnumDropDownWidget<ScanHorizontalAlign> _horAlign = new();
+    private readonly EnumDropDownWidget<ScanScale> _scale = new();
     private readonly CheckBox _enableAutoSave = new() { Text = UiStrings.EnableAutoSave };
     private readonly LinkButton _autoSaveSettings = new() { Text = UiStrings.AutoSaveSettings };
     private readonly Button _advanced = new() { Text = UiStrings.Advanced };
@@ -54,6 +54,8 @@ public class EditProfileForm : EtoDialogBase
 
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
+        _resolution.Format = x => string.Format(SettingsResources.DpiFormat, x.ToString(CultureInfo.InvariantCulture));
+        _paperSource.SelectedItemChanged += PaperSource_SelectedItemChanged;
         _pageSize.SelectedIndexChanged += PageSize_SelectedIndexChanged;
         _predefinedSettings.CheckedChanged += PredefinedSettings_CheckedChanged;
         _nativeUi.CheckedChanged += NativeUi_CheckedChanged;
@@ -100,7 +102,7 @@ public class EditProfileForm : EtoDialogBase
                 ? L.Row(
                     _predefinedSettings,
                     _nativeUi
-                )
+                ).Visible(_nativeUiVis)
                 : C.None(),
             C.Spacer(),
             L.Row(
@@ -152,6 +154,26 @@ public class EditProfileForm : EtoDialogBase
 
     private void UpdateUiForCaps()
     {
+        _suppressChangeEvent = true;
+
+        _paperSource.Items = ScanProfile.Caps?.PaperSources is [_, ..] paperSources
+            ? paperSources
+            : EnumDropDownWidget<ScanSource>.DefaultItems;
+
+        var selectedSource = _paperSource.SelectedItem;
+
+        var validResolutions = selectedSource switch
+        {
+            ScanSource.Glass => ScanProfile.Caps?.GlassResolutions,
+            ScanSource.Feeder => ScanProfile.Caps?.FeederResolutions,
+            ScanSource.Duplex => ScanProfile.Caps?.DuplexResolutions,
+            _ => null
+        };
+        _resolution.Items = validResolutions is [_, ..]
+            ? validResolutions
+            : EnumDropDownWidget<ScanDpi>.DefaultItems.Select(x => x.ToIntDpi());
+
+        _suppressChangeEvent = false;
     }
 
     private void UpdateCaps()
@@ -167,6 +189,7 @@ public class EditProfileForm : EtoDialogBase
         }
         else
         {
+            ScanProfile.Caps = null;
             if (updatedProfile.Device != null)
             {
                 Task.Run(async () =>
@@ -191,8 +214,22 @@ public class EditProfileForm : EtoDialogBase
 
     private ScanProfileCaps MapCaps(ScanCaps? caps)
     {
+        List<ScanSource>? paperSources = null;
+        if (caps?.PaperSourceCaps is { } paperSourceCaps)
+        {
+            paperSources = new List<ScanSource>();
+            if (paperSourceCaps.SupportsFlatbed) paperSources.Add(ScanSource.Glass);
+            if (paperSourceCaps.SupportsFeeder) paperSources.Add(ScanSource.Feeder);
+            if (paperSourceCaps.SupportsDuplex) paperSources.Add(ScanSource.Duplex);
+        }
+
         return new ScanProfileCaps
         {
+            PaperSources = paperSources,
+            FeederCheck = caps?.PaperSourceCaps?.CanCheckIfFeederHasPaper,
+            GlassResolutions = caps?.FlatbedCaps?.DpiCaps?.CommonValues?.ToList(),
+            FeederResolutions = caps?.FeederCaps?.DpiCaps?.CommonValues?.ToList(),
+            DuplexResolutions = caps?.DuplexCaps?.DpiCaps?.CommonValues?.ToList()
         };
     }
 
@@ -228,25 +265,15 @@ public class EditProfileForm : EtoDialogBase
         }
         _isDefault = ScanProfile.IsDefault;
 
-        // TODO: Allow selecting custom DPI values
-        int resolutionIndex = 0;
-        foreach (ScanDpi scanDpi in Enum.GetValues(typeof(ScanDpi)))
-        {
-            if (ScanProfile.Resolution.Dpi > scanDpi.ToIntDpi())
-            {
-                resolutionIndex++;
-            }
-        }
-
-        _paperSource.SelectedKey = ScanProfile.PaperSource.ToString();
-        _bitDepth.SelectedKey = ScanProfile.BitDepth.ToString();
-        _resolution.SelectedIndex = resolutionIndex;
+        _paperSource.SelectedItem = ScanProfile.PaperSource;
+        _bitDepth.SelectedItem = ScanProfile.BitDepth;
+        _resolution.SelectedItem = ScanProfile.Resolution.Dpi;
         _contrastSlider.IntValue = ScanProfile.Contrast;
         _brightnessSlider.IntValue = ScanProfile.Brightness;
         UpdatePageSizeList();
         SelectPageSize();
-        _scale.SelectedKey = ScanProfile.AfterScanScale.ToString();
-        _horAlign.SelectedKey = ScanProfile.PageAlign.ToString();
+        _scale.SelectedItem = ScanProfile.AfterScanScale;
+        _horAlign.SelectedItem = ScanProfile.PageAlign;
 
         _enableAutoSave.Checked = ScanProfile.EnableAutoSave;
 
@@ -382,16 +409,16 @@ public class EditProfileForm : EtoDialogBase
             MaxQuality = ScanProfile.MaxQuality,
             UseNativeUI = _nativeUi.Checked,
 
-            AfterScanScale = EnumHelper.ParseOrDefault<ScanScale>(_scale.SelectedKey),
-            BitDepth = EnumHelper.ParseOrDefault<ScanBitDepth>(_bitDepth.SelectedKey),
+            AfterScanScale = _scale.SelectedItem,
+            BitDepth = _bitDepth.SelectedItem,
             Brightness = _brightnessSlider.IntValue,
             Contrast = _contrastSlider.IntValue,
-            PageAlign = EnumHelper.ParseOrDefault<ScanHorizontalAlign>(_horAlign.SelectedKey),
+            PageAlign = _horAlign.SelectedItem,
             PageSize = pageSize.Type,
             CustomPageSizeName = pageSize.CustomName,
             CustomPageSize = pageSize.CustomDimens,
-            Resolution = new ScanResolution { Dpi = ((ScanDpi) _resolution.SelectedIndex).ToIntDpi() },
-            PaperSource = EnumHelper.ParseOrDefault<ScanSource>(_paperSource.SelectedKey),
+            Resolution = new ScanResolution { Dpi = _resolution.SelectedItem },
+            PaperSource = _paperSource.SelectedItem,
 
             EnableAutoSave = _enableAutoSave.IsChecked(),
             AutoSaveSettings = ScanProfile.AutoSaveSettings,
@@ -439,6 +466,7 @@ public class EditProfileForm : EtoDialogBase
             _displayName.Enabled = !locked;
             _deviceSelectorWidget.Enabled = !deviceLocked;
             _predefinedSettings.Enabled = _nativeUi.Enabled = !locked;
+            _nativeUiVis.IsVisible = _deviceSelectorWidget.Choice.Device == null || canUseNativeUi;
 
             _paperSource.Enabled = settingsEnabled;
             _resolution.Enabled = settingsEnabled;
@@ -461,6 +489,12 @@ public class EditProfileForm : EtoDialogBase
 
     private int _lastPageSizeIndex = -1;
     private PageSizeListItem? _lastPageSizeItem;
+
+    private void PaperSource_SelectedItemChanged(object? sender, EventArgs e)
+    {
+        if (_suppressChangeEvent) return;
+        UpdateUiForCaps();
+    }
 
     private void PageSize_SelectedIndexChanged(object? sender, EventArgs e)
     {
@@ -509,7 +543,7 @@ public class EditProfileForm : EtoDialogBase
     {
         var form = FormFactory.Create<AdvancedProfileForm>();
         ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
-        ScanProfile.BitDepth = (ScanBitDepth) _bitDepth.SelectedIndex;
+        ScanProfile.BitDepth = _bitDepth.SelectedItem;
         form.ScanProfile = ScanProfile;
         form.ShowModal();
     }
