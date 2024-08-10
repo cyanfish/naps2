@@ -200,6 +200,7 @@ public class ChooseDeviceForm : EtoDialogBase
         _activeQuery = DeviceDriver;
 
         DeviceList = new List<ScanDevice>();
+        DeviceSet = new HashSet<ScanDevice>();
         ExtraItems = new List<ScanDevice>();
         if (DeviceDriver == Driver.Escl)
         {
@@ -248,7 +249,11 @@ public class ChooseDeviceForm : EtoDialogBase
                                     }
                                 });
                             }
-                            DeviceList.Add(device);
+                            if (!DeviceSet.Contains(device))
+                            {
+                                DeviceList.Add(device);
+                                DeviceSet.Add(device);
+                            }
                             UpdateDevices(false);
                         }
                     });
@@ -309,8 +314,7 @@ public class ChooseDeviceForm : EtoDialogBase
 
     private void UpdateDevices(bool clear)
     {
-        var uniqueDevices = DeviceList!.Distinct().ToList();
-        _deviceIconList.SetItems(uniqueDevices.Concat(ExtraItems!));
+        _deviceIconList.SetItems(DeviceList!.Concat(ExtraItems!));
         if (clear)
         {
             _deviceTextList.Items.Clear();
@@ -326,7 +330,7 @@ public class ChooseDeviceForm : EtoDialogBase
                 });
             }
         }
-        foreach (var device in uniqueDevices.Skip(_deviceTextList.Items.Count - ExtraItems.Count))
+        foreach (var device in DeviceList!.Skip(_deviceTextList.Items.Count - ExtraItems.Count))
         {
             _deviceTextList.Items.Insert(_deviceTextList.Items.Count - ExtraItems.Count, new ListItem
             {
@@ -340,7 +344,9 @@ public class ChooseDeviceForm : EtoDialogBase
 
     public bool AllowAlwaysAsk { get; set; }
 
-    public List<ScanDevice>? DeviceList { get; private set; }
+    private List<ScanDevice>? DeviceList { get; set; }
+
+    private HashSet<ScanDevice>? DeviceSet { get; set; }
 
     private List<ScanDevice>? ExtraItems { get; set; }
 
