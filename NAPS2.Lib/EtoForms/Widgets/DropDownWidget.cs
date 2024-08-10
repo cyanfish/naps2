@@ -89,7 +89,9 @@ public class DropDownWidget<T> where T : notnull
         {
             _hasUserPreferredItem = true;
             _userPreferredItem = value;
+            _changingItems = true;
             InternalSelectedItem = value;
+            _changingItems = false;
         }
     }
 

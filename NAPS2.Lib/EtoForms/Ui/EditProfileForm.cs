@@ -37,6 +37,7 @@ public class EditProfileForm : EtoDialogBase
     private bool _result;
     private bool _suppressChangeEvent;
     private CancellationTokenSource? _updateCapsCts;
+    private PageSizeListItem? _customPageSize;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
         ProfileNameTracker profileNameTracker, DeviceCapsCache deviceCapsCache) : base(config)
@@ -194,19 +195,13 @@ public class EditProfileForm : EtoDialogBase
                 CustomDimens = preset.Dimens
             }).ToList();
 
-        if (GetCustomPageSizeFromProfile() is { } customSize && !customSizes.Contains(customSize))
+        if (_customPageSize != null && !customSizes.Contains(_customPageSize))
         {
-            customSizes.Add(customSize);
+            customSizes.Add(_customPageSize);
         }
         _pageSize.Items = presetSizes.Concat(customSizes).Append(new PageSizeListItem(ScanPageSize.Custom));
 
         _suppressChangeEvent = false;
-    }
-
-    private PageSizeListItem? GetCustomPageSizeFromProfile()
-    {
-        if (ScanProfile.PageSize != ScanPageSize.Custom || ScanProfile.CustomPageSize == null) return null;
-        return GetCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
     }
 
     private PageSizeListItem GetCustomPageSize(string? name, PageDimensions dimens)
@@ -309,6 +304,10 @@ public class EditProfileForm : EtoDialogBase
                 ? driver
                 : Driver.Default);
         IconUri = ScanProfile.Device?.IconUri;
+        if (ScanProfile.PageSize == ScanPageSize.Custom && ScanProfile.CustomPageSize != null)
+        {
+            _customPageSize = GetCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
+        }
 
         _displayName.Text = ScanProfile.DisplayName;
         if (_deviceSelectorWidget.Choice == DeviceChoice.None)
@@ -330,7 +329,7 @@ public class EditProfileForm : EtoDialogBase
         _resolution.SelectedItem = ScanProfile.Resolution.Dpi;
         _contrastSlider.IntValue = ScanProfile.Contrast;
         _brightnessSlider.IntValue = ScanProfile.Brightness;
-        _pageSize.SelectedItem = GetCustomPageSizeFromProfile() ?? new PageSizeListItem(ScanProfile.PageSize);
+        _pageSize.SelectedItem = _customPageSize ?? new PageSizeListItem(ScanProfile.PageSize);
         _scale.SelectedItem = ScanProfile.AfterScanScale;
         _horAlign.SelectedItem = ScanProfile.PageAlign;
 
@@ -344,17 +343,6 @@ public class EditProfileForm : EtoDialogBase
 
         UpdateUiForCaps();
         UpdateEnabledControls();
-    }
-
-    private void SelectCustomPageSize(string? name, PageDimensions dimens)
-    {
-        // TODO: This doesn't persist if UpdateUiForCaps is called after
-        var customItem = GetCustomPageSize(name, dimens);
-        if (!_pageSize.Items.Contains(customItem))
-        {
-            _pageSize.Items = _pageSize.Items.SkipLast(1).Append(customItem).Append(_pageSize.Items.Last());
-        }
-        _pageSize.SelectedItem = customItem;
     }
 
     private bool SaveSettings()
@@ -506,8 +494,9 @@ public class EditProfileForm : EtoDialogBase
             form.ShowModal();
             if (form.Result)
             {
+                _customPageSize = GetCustomPageSize(form.PageSizeName!, form.PageSizeDimens!);
+                _pageSize.SelectedItem = _customPageSize;
                 UpdateUiForCaps();
-                SelectCustomPageSize(form.PageSizeName!, form.PageSizeDimens!);
             }
             else
             {
