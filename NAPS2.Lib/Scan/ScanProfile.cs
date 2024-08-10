@@ -323,6 +323,11 @@ public static class ScanEnumExtensions
         return attrs.Select(x => x.PageDimensions).SingleOrDefault();
     }
 
+    public static PageSize ToPageSize(this PageDimensions pageDimensions)
+    {
+        return new PageSize(pageDimensions.Width, pageDimensions.Height, (PageSizeUnit) pageDimensions.Unit);
+    }
+
     public static int ToIntDpi(this ScanDpi enumValue)
     {
         switch (enumValue)
