@@ -9,13 +9,6 @@ public class EnumDropDownWidget<T> : DropDownWidget<T> where T : struct, Enum
     public EnumDropDownWidget()
     {
         Format = x => x.Description();
-    }
-
-    protected override void PreLoad(object sender, EventArgs e)
-    {
-        if (!Items.Any())
-        {
-            Items = DefaultItems;
-        }
+        Items = DefaultItems;
     }
 }

@@ -379,7 +379,7 @@ public static class ScanEnumExtensions
         object[] attrs =
             enumValue.GetType().GetField(enumValue.ToString())!.GetCustomAttributes(typeof(DescriptionAttribute),
                 false);
-        return attrs.Cast<DescriptionAttribute>().Select(x => x.Description).Single();
+        return attrs.Cast<DescriptionAttribute>().Select(x => x.Description).SingleOrDefault() ?? "";
     }
 
     public static BitDepth ToBitDepth(this ScanBitDepth bitDepth)

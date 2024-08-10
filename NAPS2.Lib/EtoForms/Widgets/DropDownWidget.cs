@@ -7,6 +7,7 @@ public class DropDownWidget<T> where T : notnull
 {
     private readonly DropDown _dropDown = new();
     private T[] _items = [];
+    private Func<T, string> _format = x => x?.ToString() ?? "";
 
     private bool _hasUserPreferredItem;
     private T? _userPreferredItem;
@@ -16,18 +17,22 @@ public class DropDownWidget<T> where T : notnull
     {
         EtoPlatform.Current.ConfigureDropDown(_dropDown);
         _dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
-        _dropDown.PreLoad += PreLoad;
         if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)))
         {
             GetClosestItem = GetClosestItemByComparing;
         }
     }
 
-    protected virtual void PreLoad(object sender, EventArgs e)
+    public Func<T, string> Format
     {
+        get => _format;
+        set
+        {
+            _format = value;
+            // Force the dropdown items to be regenerated
+            Items = Items;
+        }
     }
-
-    public Func<T, string> Format { get; set; } = x => x?.ToString() ?? "";
 
     public Func<T[], T, T>? GetClosestItem { get; set; }
 
