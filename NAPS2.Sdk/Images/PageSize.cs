@@ -178,6 +178,6 @@ public record PageSize
             PageSizeUnit.Inch => "in",
             _ => throw new InvalidOperationException("Invalid page size unit")
         };
-        return $"{Width.ToString(CultureInfo.InvariantCulture)}x{Height.ToString(CultureInfo.InvariantCulture)} {unit}";
+        return $"{Width:0.#####}x{Height:0.#####} {unit}";
     }
 }

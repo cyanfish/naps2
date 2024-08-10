@@ -21,7 +21,7 @@ public class EditProfileForm : EtoDialogBase
     private readonly RadioButton _nativeUi;
     private readonly LayoutVisibility _nativeUiVis = new(true);
     private readonly EnumDropDownWidget<ScanSource> _paperSource = new();
-    private readonly DropDown _pageSize = C.EnumDropDown<ScanPageSize>();
+    private readonly DropDownWidget<PageSizeListItem> _pageSize = new();
     private readonly DropDownWidget<int> _resolution = new();
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
     private readonly EnumDropDownWidget<ScanHorizontalAlign> _horAlign = new();
@@ -36,7 +36,6 @@ public class EditProfileForm : EtoDialogBase
     private bool _isDefault;
     private bool _result;
     private bool _suppressChangeEvent;
-    private bool _suppressPageSizeEvent;
     private CancellationTokenSource? _updateCapsCts;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
@@ -56,7 +55,8 @@ public class EditProfileForm : EtoDialogBase
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
         _resolution.Format = x => string.Format(SettingsResources.DpiFormat, x.ToString(CultureInfo.InvariantCulture));
         _paperSource.SelectedItemChanged += PaperSource_SelectedItemChanged;
-        _pageSize.SelectedIndexChanged += PageSize_SelectedIndexChanged;
+        _pageSize.Format = x => x.Text;
+        _pageSize.SelectedItemChanged += PageSize_SelectedItemChanged;
         _predefinedSettings.CheckedChanged += PredefinedSettings_CheckedChanged;
         _nativeUi.CheckedChanged += NativeUi_CheckedChanged;
 
@@ -156,24 +156,72 @@ public class EditProfileForm : EtoDialogBase
     {
         _suppressChangeEvent = true;
 
-        _paperSource.Items = ScanProfile.Caps?.PaperSources is [_, ..] paperSources
+        _paperSource.Items = ScanProfile.Caps?.PaperSources?.Values is [_, ..] paperSources
             ? paperSources
             : EnumDropDownWidget<ScanSource>.DefaultItems;
 
         var selectedSource = _paperSource.SelectedItem;
-
-        var validResolutions = selectedSource switch
+        var perSource = selectedSource switch
         {
-            ScanSource.Glass => ScanProfile.Caps?.GlassResolutions,
-            ScanSource.Feeder => ScanProfile.Caps?.FeederResolutions,
-            ScanSource.Duplex => ScanProfile.Caps?.DuplexResolutions,
+            ScanSource.Glass => ScanProfile.Caps?.Glass,
+            ScanSource.Feeder => ScanProfile.Caps?.Feeder,
+            ScanSource.Duplex => ScanProfile.Caps?.Duplex,
             _ => null
         };
+
+        var validResolutions = perSource?.Resolutions;
         _resolution.Items = validResolutions is [_, ..]
             ? validResolutions
             : EnumDropDownWidget<ScanDpi>.DefaultItems.Select(x => x.ToIntDpi());
 
+        var scanArea = perSource?.ScanArea;
+        var sizeCaps = new PageSizeCaps { ScanArea = scanArea };
+
+        var allPresets = EnumDropDownWidget<ScanPageSize>.DefaultItems.SkipLast(2).ToList();
+        var conditionalPresets = new[] { ScanPageSize.A3, ScanPageSize.B4 };
+        var includedPresets = allPresets.Where(preset =>
+            !conditionalPresets.Contains(preset) || sizeCaps.Fits(preset.PageDimensions()!.ToPageSize()));
+        var presetSizes = includedPresets.Select(size => new PageSizeListItem(size)).ToList();
+
+        var customSizes = Config.Get(c => c.CustomPageSizePresets)
+            .OrderBy(x => x.Name)
+            .Select(preset => new PageSizeListItem
+            {
+                Type = ScanPageSize.Custom,
+                Text = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width,
+                    preset.Dimens.Height, preset.Dimens.Unit.Description()),
+                CustomName = preset.Name,
+                CustomDimens = preset.Dimens
+            }).ToList();
+
+        if (GetCustomPageSizeFromProfile() is { } customSize && !customSizes.Contains(customSize))
+        {
+            customSizes.Add(customSize);
+        }
+        _pageSize.Items = presetSizes.Concat(customSizes).Append(new PageSizeListItem(ScanPageSize.Custom));
+
         _suppressChangeEvent = false;
+    }
+
+    private PageSizeListItem? GetCustomPageSizeFromProfile()
+    {
+        if (ScanProfile.PageSize != ScanPageSize.Custom || ScanProfile.CustomPageSize == null) return null;
+        return GetCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
+    }
+
+    private PageSizeListItem GetCustomPageSize(string? name, PageDimensions dimens)
+    {
+        return new PageSizeListItem
+        {
+            Type = ScanPageSize.Custom,
+            Text = string.IsNullOrEmpty(name)
+                ? string.Format(MiscResources.CustomPageSizeFormat, dimens.Width, dimens.Height,
+                    dimens.Unit.Description())
+                : string.Format(MiscResources.NamedPageSizeFormat, name, dimens.Width, dimens.Height,
+                    dimens.Unit.Description()),
+            CustomName = name,
+            CustomDimens = dimens
+        };
     }
 
     private void UpdateCaps()
@@ -225,11 +273,23 @@ public class EditProfileForm : EtoDialogBase
 
         return new ScanProfileCaps
         {
-            PaperSources = paperSources,
+            PaperSources = new PaperSourceProfileCaps { Values = paperSources },
             FeederCheck = caps?.PaperSourceCaps?.CanCheckIfFeederHasPaper,
-            GlassResolutions = caps?.FlatbedCaps?.DpiCaps?.CommonValues?.ToList(),
-            FeederResolutions = caps?.FeederCaps?.DpiCaps?.CommonValues?.ToList(),
-            DuplexResolutions = caps?.DuplexCaps?.DpiCaps?.CommonValues?.ToList()
+            Glass = new PerSourceProfileCaps
+            {
+                ScanArea = caps?.FlatbedCaps?.PageSizeCaps?.ScanArea,
+                Resolutions = caps?.FlatbedCaps?.DpiCaps?.CommonValues?.ToList()
+            },
+            Feeder = new PerSourceProfileCaps
+            {
+                ScanArea = caps?.FeederCaps?.PageSizeCaps?.ScanArea,
+                Resolutions = caps?.FeederCaps?.DpiCaps?.CommonValues?.ToList()
+            },
+            Duplex = new PerSourceProfileCaps
+            {
+                ScanArea = caps?.DuplexCaps?.PageSizeCaps?.ScanArea,
+                Resolutions = caps?.DuplexCaps?.DpiCaps?.CommonValues?.ToList()
+            }
         };
     }
 
@@ -270,8 +330,7 @@ public class EditProfileForm : EtoDialogBase
         _resolution.SelectedItem = ScanProfile.Resolution.Dpi;
         _contrastSlider.IntValue = ScanProfile.Contrast;
         _brightnessSlider.IntValue = ScanProfile.Brightness;
-        UpdatePageSizeList();
-        SelectPageSize();
+        _pageSize.SelectedItem = GetCustomPageSizeFromProfile() ?? new PageSizeListItem(ScanProfile.PageSize);
         _scale.SelectedItem = ScanProfile.AfterScanScale;
         _horAlign.SelectedItem = ScanProfile.PageAlign;
 
@@ -287,80 +346,15 @@ public class EditProfileForm : EtoDialogBase
         UpdateEnabledControls();
     }
 
-    private void UpdatePageSizeList()
-    {
-        _suppressPageSizeEvent = true;
-        _pageSize.Items.Clear();
-
-        // Defaults
-        foreach (ScanPageSize item in Enum.GetValues(typeof(ScanPageSize)))
-        {
-            _pageSize.Items.Add(new PageSizeListItem
-            {
-                Type = item,
-                Text = item.Description()
-            });
-        }
-
-        // Custom Presets
-        foreach (var preset in Config.Get(c => c.CustomPageSizePresets).OrderBy(x => x.Name))
-        {
-            _pageSize.Items.Insert(_pageSize.Items.Count - 1, new PageSizeListItem
-            {
-                Type = ScanPageSize.Custom,
-                Text = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width,
-                    preset.Dimens.Height, preset.Dimens.Unit.Description()),
-                CustomName = preset.Name,
-                CustomDimens = preset.Dimens
-            });
-        }
-        _suppressPageSizeEvent = false;
-    }
-
-    private void SelectPageSize()
-    {
-        if (ScanProfile.PageSize == ScanPageSize.Custom)
-        {
-            if (ScanProfile.CustomPageSize != null)
-            {
-                SelectCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
-            }
-            else
-            {
-                _pageSize.SelectedIndex = 0;
-            }
-        }
-        else
-        {
-            _pageSize.SelectedIndex = (int) ScanProfile.PageSize;
-        }
-    }
-
     private void SelectCustomPageSize(string? name, PageDimensions dimens)
     {
-        for (int i = 0; i < _pageSize.Items.Count; i++)
+        // TODO: This doesn't persist if UpdateUiForCaps is called after
+        var customItem = GetCustomPageSize(name, dimens);
+        if (!_pageSize.Items.Contains(customItem))
         {
-            var item = (PageSizeListItem) _pageSize.Items[i];
-            if (item.Type == ScanPageSize.Custom && item.CustomName == name && item.CustomDimens == dimens)
-            {
-                _pageSize.SelectedIndex = i;
-                return;
-            }
+            _pageSize.Items = _pageSize.Items.SkipLast(1).Append(customItem).Append(_pageSize.Items.Last());
         }
-
-        // Not found, so insert a new item
-        _pageSize.Items.Insert(_pageSize.Items.Count - 1, new PageSizeListItem
-        {
-            Type = ScanPageSize.Custom,
-            Text = string.IsNullOrEmpty(name)
-                ? string.Format(MiscResources.CustomPageSizeFormat, dimens.Width, dimens.Height,
-                    dimens.Unit.Description())
-                : string.Format(MiscResources.NamedPageSizeFormat, name, dimens.Width, dimens.Height,
-                    dimens.Unit.Description()),
-            CustomName = name,
-            CustomDimens = dimens
-        });
-        _pageSize.SelectedIndex = _pageSize.Items.Count - 2;
+        _pageSize.SelectedItem = customItem;
     }
 
     private bool SaveSettings()
@@ -395,7 +389,7 @@ public class EditProfileForm : EtoDialogBase
 
     private ScanProfile GetUpdatedScanProfile()
     {
-        var pageSize = (PageSizeListItem) _pageSize.SelectedValue;
+        var pageSize = _pageSize.SelectedItem!;
         return new ScanProfile
         {
             Version = ScanProfile.CURRENT_VERSION,
@@ -487,7 +481,6 @@ public class EditProfileForm : EtoDialogBase
         }
     }
 
-    private int _lastPageSizeIndex = -1;
     private PageSizeListItem? _lastPageSizeItem;
 
     private void PaperSource_SelectedItemChanged(object? sender, EventArgs e)
@@ -496,11 +489,9 @@ public class EditProfileForm : EtoDialogBase
         UpdateUiForCaps();
     }
 
-    private void PageSize_SelectedIndexChanged(object? sender, EventArgs e)
+    private void PageSize_SelectedItemChanged(object? sender, EventArgs e)
     {
-        if (_suppressPageSizeEvent) return;
-
-        if (_pageSize.SelectedIndex == _pageSize.Items.Count - 1)
+        if (Equals(_pageSize.SelectedItem, new PageSizeListItem(ScanPageSize.Custom)))
         {
             if (_lastPageSizeItem == null)
             {
@@ -515,16 +506,15 @@ public class EditProfileForm : EtoDialogBase
             form.ShowModal();
             if (form.Result)
             {
-                UpdatePageSizeList();
+                UpdateUiForCaps();
                 SelectCustomPageSize(form.PageSizeName!, form.PageSizeDimens!);
             }
             else
             {
-                _pageSize.SelectedIndex = _lastPageSizeIndex;
+                _pageSize.SelectedItem = _lastPageSizeItem;
             }
         }
-        _lastPageSizeIndex = _pageSize.SelectedIndex;
-        _lastPageSizeItem = (PageSizeListItem) _pageSize.SelectedValue;
+        _lastPageSizeItem = _pageSize.SelectedItem;
     }
 
     private void AutoSaveSettings_LinkClicked(object? sender, EventArgs eventArgs)
@@ -569,6 +559,16 @@ public class EditProfileForm : EtoDialogBase
 
     private class PageSizeListItem : IListItem
     {
+        public PageSizeListItem()
+        {
+        }
+
+        public PageSizeListItem(ScanPageSize size)
+        {
+            Type = size;
+            Text = size.Description();
+        }
+
         public string Text { get; set; } = null!;
 
         public string Key => Text;
@@ -578,5 +578,29 @@ public class EditProfileForm : EtoDialogBase
         public string? CustomName { get; set; }
 
         public PageDimensions? CustomDimens { get; set; }
+
+        protected bool Equals(PageSizeListItem other)
+        {
+            return Type == other.Type && CustomName == other.CustomName && Equals(CustomDimens, other.CustomDimens);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((PageSizeListItem) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (int) Type;
+                hashCode = (hashCode * 397) ^ (CustomName != null ? CustomName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CustomDimens != null ? CustomDimens.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 }
