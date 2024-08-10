@@ -3,6 +3,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -12,8 +13,8 @@ internal class SettingsForm : EtoDialogBase
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
     private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
-    private readonly DropDown _scanButtonDefaultAction = C.EnumDropDown<ScanButtonDefaultAction>();
-    private readonly DropDown _saveButtonDefaultAction = C.EnumDropDown<SaveButtonDefaultAction>();
+    private readonly EnumDropDownWidget<ScanButtonDefaultAction> _scanButtonDefaultAction = new();
+    private readonly EnumDropDownWidget<SaveButtonDefaultAction> _saveButtonDefaultAction = new();
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
     private readonly CheckBox _keepSession = C.CheckBox(UiStrings.KeepSession);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);
@@ -113,9 +114,9 @@ internal class SettingsForm : EtoDialogBase
         UpdateCheckbox(_scanChangesDefaultProfile, c => c.ScanChangesDefaultProfile);
         UpdateCheckbox(_showProfilesToolbar, c => c.ShowProfilesToolbar);
         UpdateCheckbox(_showPageNumbers, c => c.ShowPageNumbers);
-        _scanButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.ScanButtonDefaultAction);
+        _scanButtonDefaultAction.SelectedItem = config.Get(c => c.ScanButtonDefaultAction);
         _scanButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.ScanButtonDefaultAction);
-        _saveButtonDefaultAction.SelectedIndex = (int) config.Get(c => c.SaveButtonDefaultAction);
+        _saveButtonDefaultAction.SelectedItem = config.Get(c => c.SaveButtonDefaultAction);
         _saveButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.SaveButtonDefaultAction);
         UpdateCheckbox(_clearAfterSaving, c => c.DeleteAfterSaving);
         UpdateCheckbox(_keepSession, c => c.KeepSession);
@@ -136,8 +137,8 @@ internal class SettingsForm : EtoDialogBase
         SetIfChanged(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
         SetIfChanged(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
         SetIfChanged(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
-        SetIfChanged(c => c.ScanButtonDefaultAction, (ScanButtonDefaultAction) _scanButtonDefaultAction.SelectedIndex);
-        SetIfChanged(c => c.SaveButtonDefaultAction, (SaveButtonDefaultAction) _saveButtonDefaultAction.SelectedIndex);
+        SetIfChanged(c => c.ScanButtonDefaultAction, _scanButtonDefaultAction.SelectedItem);
+        SetIfChanged(c => c.SaveButtonDefaultAction, _saveButtonDefaultAction.SelectedItem);
         SetIfChanged(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
         SetIfChanged(c => c.KeepSession, _keepSession.IsChecked());
         SetIfChanged(c => c.SingleInstance, _singleInstance.IsChecked());

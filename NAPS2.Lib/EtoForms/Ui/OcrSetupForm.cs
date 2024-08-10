@@ -2,6 +2,7 @@ using System.Globalization;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.Lang;
 using NAPS2.Ocr;
 
@@ -13,7 +14,8 @@ public class OcrSetupForm : EtoDialogBase
 
     private readonly CheckBox _enableOcr = C.CheckBox(UiStrings.MakePdfsSearchable);
     private readonly DropDown _ocrLang = C.DropDown();
-    private readonly DropDown _ocrMode = C.EnumDropDown(LocalizedOcrMode.Fast, LocalizedOcrMode.Best);
+    private readonly EnumDropDownWidget<LocalizedOcrMode> _ocrMode = new()
+        { Items = [LocalizedOcrMode.Fast, LocalizedOcrMode.Best] };
     private readonly CheckBox _ocrPreProcessing = C.CheckBox(UiStrings.OcrPreProcessing);
     private readonly CheckBox _ocrAfterScanning = C.CheckBox(
         TranslationMigrator.PickTranslated(
@@ -45,8 +47,7 @@ public class OcrSetupForm : EtoDialogBase
 
         _enableOcr.Checked = Config.Get(c => c.EnableOcr);
         _ocrLang.SelectedIndexChanged += OcrLang_SelectedIndexChanged;
-        _ocrMode.SelectedIndex = (int) configOcrMode;
-        if (_ocrMode.SelectedIndex == -1) _ocrMode.SelectedIndex = 0;
+        _ocrMode.SelectedItem = configOcrMode;
         _ocrPreProcessing.Checked = Config.Get(c => c.OcrPreProcessing);
         _ocrAfterScanning.Checked = Config.Get(c => c.OcrAfterScanning);
 
@@ -69,7 +70,7 @@ public class OcrSetupForm : EtoDialogBase
             ).Aligned(),
             L.Row(
                 C.Label(UiStrings.OcrModeLabel).AlignCenter().Padding(right: 40),
-                _ocrMode.Scale()
+                _ocrMode.AsControl().Scale()
             ).Aligned(),
             _ocrPreProcessing,
             _ocrAfterScanning,
@@ -179,7 +180,7 @@ public class OcrSetupForm : EtoDialogBase
             {
                 Config.User.Set(c => c.LastOcrMultiLangCode, _multiLangCode);
             }
-            transact.Set(c => c.OcrMode, (LocalizedOcrMode) _ocrMode.SelectedIndex);
+            transact.Set(c => c.OcrMode, _ocrMode.SelectedItem);
             transact.Set(c => c.OcrPreProcessing, _ocrPreProcessing.IsChecked());
             transact.Set(c => c.OcrAfterScanning, _ocrAfterScanning.IsChecked());
             transact.Commit();

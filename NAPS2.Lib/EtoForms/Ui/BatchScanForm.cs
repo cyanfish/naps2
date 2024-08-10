@@ -29,7 +29,7 @@ public class BatchScanForm : EtoDialogBase
     private readonly Label _status = new() { Text = UiStrings.PressStartWhenReady };
     private readonly Button _start = new() { Text = UiStrings.Start };
     private readonly Button _cancel = new() { Text = UiStrings.Cancel };
-    private readonly DropDown _profile = C.DropDown();
+    private readonly DropDownWidget<ScanProfile> _profile = new();
     private readonly RadioButton _singleScan;
     private readonly RadioButton _multipleScansPrompt;
     private readonly RadioButton _multipleScansDelay;
@@ -69,6 +69,7 @@ public class BatchScanForm : EtoDialogBase
         _filePerPage = new RadioButton(_filePerScan) { Text = UiStrings.OneFilePerPage };
         _separateByPatchT = new RadioButton(_filePerScan) { Text = UiStrings.SeparateByPatchT };
         _filePath = new(this, dialogHelper);
+        _profile.Format = x => x.DisplayName;
 
         _start.Click += Start;
         _cancel.Click += Cancel;
@@ -122,7 +123,7 @@ public class BatchScanForm : EtoDialogBase
                 L.Column(
                     C.Label(UiStrings.ProfileLabel),
                     L.Row(
-                        _profile.Scale(),
+                        _profile.AsControl().Scale(),
                         C.Button(EditProfileCommand, ButtonImagePosition.Overlay),
                         C.Button(NewProfileCommand, ButtonImagePosition.Overlay)
                     ),
@@ -192,11 +193,11 @@ public class BatchScanForm : EtoDialogBase
     {
         bool ok = true;
 
-        _userTransact.Set(c => c.BatchSettings.ProfileDisplayName, _profile.SelectedKey);
-        if (_profile.SelectedIndex == -1)
+        _userTransact.Set(c => c.BatchSettings.ProfileDisplayName, _profile.SelectedItem?.DisplayName);
+        if (_profile.SelectedItem == null)
         {
             ok = false;
-            _profile.Focus();
+            _profile.AsControl().Focus();
         }
 
         _userTransact.Set(c => c.BatchSettings.ScanType, _multipleScansPrompt.Checked
@@ -245,32 +246,17 @@ public class BatchScanForm : EtoDialogBase
 
     private void UpdateProfiles()
     {
-        _profile.Items.Clear();
-        _profile.Items.AddRange(_profileManager.Profiles.Select(profile => new ListItem
-        {
-            Text = profile.DisplayName,
-            Key = profile.DisplayName,
-            Tag = profile
-        }));
-        if (!string.IsNullOrEmpty(_transactionConfig.Get(c => c.BatchSettings.ProfileDisplayName)) &&
-            _profileManager.Profiles.Any(x =>
-                x.DisplayName == _transactionConfig.Get(c => c.BatchSettings.ProfileDisplayName)))
-        {
-            _profile.SelectedKey = _transactionConfig.Get(c => c.BatchSettings.ProfileDisplayName);
-        }
-        else if (_profileManager.DefaultProfile != null)
-        {
-            _profile.SelectedKey = _profileManager.DefaultProfile.DisplayName;
-        }
-        else
-        {
-            _profile.SelectedKey = null;
-        }
+        _profile.Items = _profileManager.Profiles;
+        var selectedName = _transactionConfig.Get(c => c.BatchSettings.ProfileDisplayName);
+        var selectedProfile = selectedName != null
+            ? _profileManager.Profiles.FirstOrDefault(x => x.DisplayName == selectedName)
+            : null;
+        _profile.SelectedItem = selectedProfile ?? _profileManager.DefaultProfile;
     }
 
     private void EditProfile()
     {
-        var originalProfile = (ScanProfile) ((ListItem) _profile.SelectedValue).Tag;
+        var originalProfile = _profile.SelectedItem;
         if (originalProfile != null)
         {
             var fedit = FormFactory.Create<EditProfileForm>();
@@ -336,7 +322,7 @@ public class BatchScanForm : EtoDialogBase
     {
         var controls = new Control[]
         {
-            _profile, _singleScan, _multipleScansPrompt, _multipleScansDelay, _numberOfScans,
+            _profile.AsControl(), _singleScan, _multipleScansPrompt, _multipleScansDelay, _numberOfScans,
             _timeBetweenScans, _load, _saveToSingleFile, _saveToMultipleFiles, _filePerScan, _filePerPage,
             _separateByPatchT, _moreInfo
         };

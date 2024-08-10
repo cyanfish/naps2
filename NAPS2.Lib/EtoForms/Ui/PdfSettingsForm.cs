@@ -34,19 +34,20 @@ public class PdfSettingsForm : EtoDialogBase
         new CheckBox { Text = UiStrings.AllowFormFilling }
     ];
 
-    private readonly DropDown _compat = C.EnumDropDown<PdfCompat>(compat => compat switch
-    {
-        PdfCompat.Default => UiStrings.Default,
-        PdfCompat.PdfA1B => "PDF/A-1b",
-        PdfCompat.PdfA2B => "PDF/A-2b",
-        PdfCompat.PdfA3B => "PDF/A-3b",
-        PdfCompat.PdfA3U => "PDF/A-3u",
-        _ => throw new ArgumentException()
-    });
+    private readonly EnumDropDownWidget<PdfCompat> _compat = new();
 
     public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
     {
         _defaultFilePath = new(this, dialogHelper) { PdfOnly = true };
+        _compat.Format = compat => compat switch
+        {
+            PdfCompat.Default => UiStrings.Default,
+            PdfCompat.PdfA1B => "PDF/A-1b",
+            PdfCompat.PdfA2B => "PDF/A-2b",
+            PdfCompat.PdfA3B => "PDF/A-3b",
+            PdfCompat.PdfA3U => "PDF/A-3u",
+            _ => throw new ArgumentException()
+        };
 
         UpdateValues(Config);
         UpdateEnabled();
@@ -130,7 +131,7 @@ public class PdfSettingsForm : EtoDialogBase
             config.Get(c => c.PdfSettings.Encryption.AllowContentCopyingForAccessibility);
         _permissions[6].Checked = config.Get(c => c.PdfSettings.Encryption.AllowAnnotations);
         _permissions[7].Checked = config.Get(c => c.PdfSettings.Encryption.AllowFormFilling);
-        _compat.SelectedIndex = (int) config.Get(c => c.PdfSettings.Compat);
+        _compat.SelectedItem = config.Get(c => c.PdfSettings.Compat);
         _rememberSettings.Checked = config.Get(c => c.RememberPdfSettings);
     }
 
@@ -169,7 +170,7 @@ public class PdfSettingsForm : EtoDialogBase
                 AllowAnnotations = _permissions[6].IsChecked(),
                 AllowFormFilling = _permissions[7].IsChecked()
             },
-            Compat = (PdfCompat) _compat.SelectedIndex
+            Compat = _compat.SelectedItem
         };
 
         var runTransact = Config.Run.BeginTransaction();

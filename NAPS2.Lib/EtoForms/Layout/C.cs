@@ -144,41 +144,6 @@ public static class C
         return dropDown;
     }
 
-    public static DropDown EnumDropDown<T>(params T[] values) where T : Enum
-    {
-        var dropDown = new DropDown();
-        EtoPlatform.Current.ConfigureDropDown(dropDown);
-        foreach (var item in values)
-        {
-            dropDown.Items.Add(new ListItem
-            {
-                Key = item.ToString(),
-                Text = item.Description()
-            });
-        }
-        return dropDown;
-    }
-
-    public static DropDown EnumDropDown<T>() where T : Enum
-    {
-        return EnumDropDown<T>(x => x.Description());
-    }
-
-    public static DropDown EnumDropDown<T>(Func<T, string> format) where T : Enum
-    {
-        var dropDown = new DropDown();
-        EtoPlatform.Current.ConfigureDropDown(dropDown);
-        foreach (var item in Enum.GetValues(typeof(T)))
-        {
-            dropDown.Items.Add(new ListItem
-            {
-                Key = item.ToString(),
-                Text = format((T) item)
-            });
-        }
-        return dropDown;
-    }
-
     public static CheckBox CheckBox(string text) => new() { Text = text };
 
     public static Button CancelButton(Dialog dialog, string? text = null) =>

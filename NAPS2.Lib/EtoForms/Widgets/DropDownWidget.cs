@@ -16,10 +16,15 @@ public class DropDownWidget<T> where T : notnull
     {
         EtoPlatform.Current.ConfigureDropDown(_dropDown);
         _dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
+        _dropDown.PreLoad += PreLoad;
         if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)))
         {
             GetClosestItem = GetClosestItemByComparing;
         }
+    }
+
+    protected virtual void PreLoad(object sender, EventArgs e)
+    {
     }
 
     public Func<T, string> Format { get; set; } = x => x?.ToString() ?? "";
@@ -129,5 +134,5 @@ public class DropDownWidget<T> where T : notnull
 
     public static implicit operator LayoutElement(DropDownWidget<T> control) => control.AsControl();
 
-    public LayoutElement AsControl() => _dropDown;
+    public DropDown AsControl() => _dropDown;
 }

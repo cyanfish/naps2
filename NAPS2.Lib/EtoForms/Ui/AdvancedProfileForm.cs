@@ -27,15 +27,9 @@ public class AdvancedProfileForm : EtoDialogBase
             "FlipBackSidesOfDuplexPages")
     };
 
-    private readonly DropDown _wiaVersion = C.EnumDropDown<WiaApiVersion>(value => value switch
-    {
-        WiaApiVersion.Default => SettingsResources.WiaVersion_Default,
-        WiaApiVersion.Wia10 => SettingsResources.WiaVersion_Wia10,
-        WiaApiVersion.Wia20 => SettingsResources.WiaVersion_Wia20,
-        _ => value.ToString()
-    });
+    private readonly EnumDropDownWidget<WiaApiVersion> _wiaVersion = new();
 
-    private readonly DropDown _twainImpl = C.EnumDropDown<TwainImpl>();
+    private readonly EnumDropDownWidget<TwainImpl> _twainImpl = new();
     private readonly CheckBox _twainProgress = new() { Text = UiStrings.ShowNativeTwainProgress };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
@@ -44,9 +38,16 @@ public class AdvancedProfileForm : EtoDialogBase
         _restoreDefaults.Click += RestoreDefaults_Click;
         _maximumQuality.CheckedChanged += MaximumQuality_CheckedChanged;
         _excludeBlank.CheckedChanged += ExcludeBlank_CheckedChanged;
+        _wiaVersion.Format = value => value switch
+        {
+            WiaApiVersion.Default => SettingsResources.WiaVersion_Default,
+            WiaApiVersion.Wia10 => SettingsResources.WiaVersion_Wia10,
+            WiaApiVersion.Wia20 => SettingsResources.WiaVersion_Wia20,
+            _ => value.ToString()
+        };
         if (!Environment.Is64BitProcess)
         {
-            _twainImpl.Items.RemoveAt((int) TwainImpl.X64);
+            _twainImpl.Items = EnumDropDownWidget<TwainImpl>.DefaultItems.Where(x => x != TwainImpl.X64);
         }
     }
 
@@ -117,11 +118,11 @@ public class AdvancedProfileForm : EtoDialogBase
         _brightContAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
         _deskew.Checked = scanProfile.AutoDeskew;
         _offsetWidth.Checked = scanProfile.WiaOffsetWidth;
-        _wiaVersion.SelectedIndex = (int) scanProfile.WiaVersion;
+        _wiaVersion.SelectedItem = scanProfile.WiaVersion;
         _stretchToPageSize.Checked = scanProfile.ForcePageSize;
         _cropToPageSize.Checked = scanProfile.ForcePageSizeCrop;
         _flipDuplexed.Checked = scanProfile.FlipDuplexedPages;
-        _twainImpl.SelectedIndex = (int) scanProfile.TwainImpl;
+        _twainImpl.SelectedItem = scanProfile.TwainImpl;
         _twainProgress.Checked = scanProfile.TwainProgress;
         _excludeBlank.Checked = scanProfile.ExcludeBlankPages;
         _whiteThreshold.IntValue = scanProfile.BlankPageWhiteThreshold;
@@ -144,17 +145,11 @@ public class AdvancedProfileForm : EtoDialogBase
         ScanProfile.BrightnessContrastAfterScan = _brightContAfterScan.IsChecked();
         ScanProfile.AutoDeskew = _deskew.IsChecked();
         ScanProfile.WiaOffsetWidth = _offsetWidth.IsChecked();
-        if (_wiaVersion.SelectedIndex != -1)
-        {
-            ScanProfile.WiaVersion = (WiaApiVersion) _wiaVersion.SelectedIndex;
-        }
+        ScanProfile.WiaVersion = _wiaVersion.SelectedItem;
         ScanProfile.ForcePageSize = _stretchToPageSize.IsChecked();
         ScanProfile.ForcePageSizeCrop = _cropToPageSize.IsChecked();
         ScanProfile.FlipDuplexedPages = _flipDuplexed.IsChecked();
-        if (_twainImpl.SelectedIndex != -1)
-        {
-            ScanProfile.TwainImpl = (TwainImpl) _twainImpl.SelectedIndex;
-        }
+        ScanProfile.TwainImpl = _twainImpl.SelectedItem;
         ScanProfile.TwainProgress = _twainProgress.IsChecked();
         ScanProfile.ExcludeBlankPages = _excludeBlank.IsChecked();
         ScanProfile.BlankPageWhiteThreshold = _whiteThreshold.IntValue;

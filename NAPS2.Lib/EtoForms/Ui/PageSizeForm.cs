@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 using NAPS2.Scan;
 
 namespace NAPS2.EtoForms.Ui;
@@ -11,7 +12,7 @@ public class PageSizeForm : EtoDialogBase
     private readonly ComboBox _name = new();
     private readonly NumericMaskedTextBox<decimal> _width = new();
     private readonly NumericMaskedTextBox<decimal> _height = new();
-    private readonly DropDown _unit = C.EnumDropDown<LocalizedPageSizeUnit>();
+    private readonly EnumDropDownWidget<LocalizedPageSizeUnit> _unit = new();
 
     private PageDimensions? _initialDimens;
 
@@ -76,7 +77,7 @@ public class PageSizeForm : EtoDialogBase
                 _width.Scale().AlignCenter(),
                 C.Label("X").AlignCenter(),
                 _height.Scale().AlignCenter(),
-                _unit.Scale().AlignCenter()
+                _unit.AsControl().Scale().AlignCenter()
             ),
             L.Row(
                 C.Filler(),
@@ -100,7 +101,7 @@ public class PageSizeForm : EtoDialogBase
     {
         _width.Text = dimens.Width.ToString(CultureInfo.CurrentCulture);
         _height.Text = dimens.Height.ToString(CultureInfo.CurrentCulture);
-        _unit.SelectedIndex = (int) dimens.Unit;
+        _unit.SelectedItem = dimens.Unit;
     }
 
     private void Name_SelectionChange(object? sender, EventArgs e)
@@ -137,7 +138,7 @@ public class PageSizeForm : EtoDialogBase
         {
             Width = width,
             Height = height,
-            Unit = (LocalizedPageSizeUnit) _unit.SelectedIndex
+            Unit = _unit.SelectedItem
         };
         if (!string.IsNullOrWhiteSpace(_name.Text))
         {
