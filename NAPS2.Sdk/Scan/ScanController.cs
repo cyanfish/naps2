@@ -108,9 +108,23 @@ public class ScanController
         });
     }
 
+    /// <summary>
+    /// Gets the capabilities of the scanning device. This includes valid values for scanning options and extra metadata
+    /// beyond just the device name and id.
+    /// </summary>
+    /// <param name="device">The device to query for capabilities.</param>
+    /// <param name="cancelToken">A token used to cancel the operation.</param>
+    /// <returns></returns>
     public Task<ScanCaps> GetCaps(ScanDevice device, CancellationToken cancelToken = default) =>
         GetCaps(new ScanOptions { Device = device }, cancelToken);
 
+    /// <summary>
+    /// Gets the capabilities of the scanning device. This includes valid values for scanning options and extra metadata
+    /// beyond just the device name and id.
+    /// </summary>
+    /// <param name="options">The options to use.</param>
+    /// <param name="cancelToken">A token used to cancel the operation.</param>
+    /// <returns></returns>
     public async Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken = default)
     {
         options = _scanOptionsValidator.ValidateAll(options, _scanningContext, true);
