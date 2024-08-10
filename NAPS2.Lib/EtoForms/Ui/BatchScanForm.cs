@@ -277,8 +277,8 @@ public class BatchScanForm : EtoDialogBase
         if (!(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked)))
         {
             var fedit = FormFactory.Create<EditProfileForm>();
-            fedit.ScanProfile = Config.DefaultProfileSettings();
             fedit.NewProfile = true;
+            fedit.ScanProfile = Config.DefaultProfileSettings();
             fedit.ShowModal();
             if (fedit.Result)
             {

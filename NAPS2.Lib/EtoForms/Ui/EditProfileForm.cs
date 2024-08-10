@@ -148,7 +148,11 @@ public class EditProfileForm : EtoDialogBase
     public ScanProfile ScanProfile
     {
         get => _scanProfile;
-        set => _scanProfile = value.Clone();
+        set
+        {
+            _scanProfile = value.Clone();
+            UpdateUiForScanProfile();
+        }
     }
 
     public bool NewProfile { get; set; }
@@ -296,6 +300,12 @@ public class EditProfileForm : EtoDialogBase
     {
         base.OnLoad(e);
 
+        UpdateUiForCaps();
+        UpdateEnabledControls();
+    }
+
+    private void UpdateUiForScanProfile()
+    {
         // Don't trigger any onChange events
         _suppressChangeEvent = true;
 
@@ -340,9 +350,6 @@ public class EditProfileForm : EtoDialogBase
 
         // Start triggering onChange events again
         _suppressChangeEvent = false;
-
-        UpdateUiForCaps();
-        UpdateEnabledControls();
     }
 
     private bool SaveSettings()

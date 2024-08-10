@@ -87,7 +87,10 @@ public class DeviceSelectorWidget
         var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
         _deviceIcon.Image =
             cachedIcon ?? (_choice.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage());
-        _parentWindow.LayoutController.Invalidate();
+        if (((Window) _parentWindow).Loaded)
+        {
+            _parentWindow.LayoutController.Invalidate();
+        }
         if (cachedIcon == null && iconUri != null)
         {
             ReloadDeviceIcon(iconUri);

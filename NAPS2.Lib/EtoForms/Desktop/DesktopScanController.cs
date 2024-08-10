@@ -64,8 +64,8 @@ public class DesktopScanController : IDesktopScanController
 
             // No profile for the device we're scanning with, so prompt to create one
             var editSettingsForm = _formFactory.Create<EditProfileForm>();
-            editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
             editSettingsForm.NewProfile = true;
+            editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
 #if !MAC
 #if NET6_0_OR_GREATER
             if (OperatingSystem.IsWindows())
@@ -125,8 +125,8 @@ public class DesktopScanController : IDesktopScanController
     public async Task ScanWithNewProfile()
     {
         var editSettingsForm = _formFactory.Create<EditProfileForm>();
-        editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
         editSettingsForm.NewProfile = true;
+        editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
         editSettingsForm.ShowModal();
         if (!editSettingsForm.Result)
         {

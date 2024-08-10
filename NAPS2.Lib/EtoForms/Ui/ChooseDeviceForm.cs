@@ -309,7 +309,8 @@ public class ChooseDeviceForm : EtoDialogBase
 
     private void UpdateDevices(bool clear)
     {
-        _deviceIconList.SetItems(DeviceList!.Concat(ExtraItems!));
+        var uniqueDevices = DeviceList!.Distinct().ToList();
+        _deviceIconList.SetItems(uniqueDevices.Concat(ExtraItems!));
         if (clear)
         {
             _deviceTextList.Items.Clear();
@@ -325,7 +326,7 @@ public class ChooseDeviceForm : EtoDialogBase
                 });
             }
         }
-        foreach (var device in DeviceList!.Skip(_deviceTextList.Items.Count - ExtraItems.Count))
+        foreach (var device in uniqueDevices.Skip(_deviceTextList.Items.Count - ExtraItems.Count))
         {
             _deviceTextList.Items.Insert(_deviceTextList.Items.Count - ExtraItems.Count, new ListItem
             {

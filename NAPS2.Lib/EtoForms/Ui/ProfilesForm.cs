@@ -256,11 +256,11 @@ public class ProfilesForm : EtoDialogBase
         if (_profileManager.Profiles.Count == 0)
         {
             var editSettingsForm = FormFactory.Create<EditProfileForm>();
+            editSettingsForm.NewProfile = true;
             editSettingsForm.ScanProfile = new ScanProfile
             {
                 Version = ScanProfile.CURRENT_VERSION
             };
-            editSettingsForm.NewProfile = true;
             editSettingsForm.ShowModal();
             if (!editSettingsForm.Result)
             {
@@ -291,8 +291,8 @@ public class ProfilesForm : EtoDialogBase
     private void DoAdd()
     {
         var fedit = FormFactory.Create<EditProfileForm>();
-        fedit.ScanProfile = Config.DefaultProfileSettings();
         fedit.NewProfile = true;
+        fedit.ScanProfile = Config.DefaultProfileSettings();
         fedit.ShowModal();
         if (fedit.Result)
         {
