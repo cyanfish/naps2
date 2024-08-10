@@ -189,6 +189,13 @@ public class GtkEtoPlatform : EtoPlatform
         return (int) Math.Floor(pixelWidth / approxCharWidth);
     }
 
+    public override void ConfigureEllipsis(Label label)
+    {
+        var eventBox = (GTK.EventBox) label.ToNative();
+        var gtkLabel = (GTK.Label) eventBox.Child;
+        gtkLabel.Ellipsize = Pango.EllipsizeMode.End;
+    }
+
     public override Size GetClientSize(Window window, bool excludeToolbars)
     {
         var gtkWindow = (GTK.Window) window.ToNative();

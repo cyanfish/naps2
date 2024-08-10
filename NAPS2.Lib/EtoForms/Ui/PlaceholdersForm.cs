@@ -27,7 +27,6 @@ public class PlaceholdersForm : EtoDialogBase
     public PlaceholdersForm(Naps2Config config) : base(config)
     {
         // TODO: Ellipsis aren't working, presumably because Eto uses custom label rendering on WinForms
-        EtoPlatform.Current.ConfigureEllipsis(_preview);
         _fileName.TextChanged += FileName_TextChanged;
     }
 
@@ -44,7 +43,7 @@ public class PlaceholdersForm : EtoDialogBase
             C.Label(UiStrings.FileNameLabel),
             _fileName,
             C.Label(UiStrings.PreviewLabel),
-            _preview,
+            _preview.Ellipsize(),
             L.Row(
                 C.Filler(),
                 L.OkCancel(

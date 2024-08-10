@@ -92,6 +92,12 @@ public static class EtoLayoutExtensions
     public static LayoutControl Visible(this Control control, LayoutVisibility? visibility) =>
         new LayoutControl(control, visibility: visibility);
 
+    public static Label Ellipsize(this Label label)
+    {
+        EtoPlatform.Current.ConfigureEllipsis(label);
+        return label;
+    }
+
     /// <summary>
     /// Wraps the given label. The way this works is that is uses the specified width to calculate the allocated height,
     /// which remains static (so e.g. if you're resizing a form, the form height isn't dependent on its width). If

@@ -128,7 +128,7 @@ public class DeviceSelectorWidget
                 _deviceIcon.Visible(_deviceVis).AlignCenter().NaturalWidth(48),
                 L.Column(
                     C.Filler(),
-                    _deviceName,
+                    _deviceName.Ellipsize().NaturalWidth(200),
                     _deviceDriver,
                     C.Filler()
                 ).Spacing(5).Visible(_deviceVis).Scale(),
