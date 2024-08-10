@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Immutable;
+using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
 using NAPS2.Scan.Exceptions;
@@ -84,7 +85,127 @@ internal class SaneScanDriver : IScanDriver
 
     public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        return Task.FromResult(new ScanCaps());
+        return Task.Run(() =>
+        {
+            try
+            {
+                Installation.Initialize();
+                using var client = new SaneClient(Installation, options.SaneOptions.KeepInitialized);
+                if (cancelToken.IsCancellationRequested) return new ScanCaps();
+                _scanningContext.Logger.LogDebug("Opening SANE Device \"{ID}\" for caps", options.Device!.ID);
+                using var device = client.OpenDevice(options.Device.ID);
+                if (cancelToken.IsCancellationRequested) return new ScanCaps();
+
+                var controller = new SaneOptionController(device, _scanningContext.Logger);
+
+                PerSourceCaps? flatbed = null;
+                PerSourceCaps? feeder = null;
+                PerSourceCaps? duplex = null;
+
+                if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Flatbed))
+                {
+                    flatbed = GetPerSourceCaps(controller);
+                }
+                if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder))
+                {
+                    feeder = GetPerSourceCaps(controller);
+                }
+                if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex) ||
+                    controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex) ||
+                    controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex))
+                {
+                    duplex = GetPerSourceCaps(controller);
+                }
+
+                return new ScanCaps
+                {
+                    MetadataCaps = new MetadataCaps
+                    {
+                        DriverSubtype = GetBackend(options.Device)
+                    },
+                    PaperSourceCaps = flatbed != null || feeder != null || duplex != null
+                        ? new PaperSourceCaps
+                        {
+                            SupportsFlatbed = flatbed != null,
+                            SupportsFeeder = feeder != null,
+                            SupportsDuplex = duplex != null
+                        }
+                        : null,
+                    FlatbedCaps = flatbed,
+                    FeederCaps = feeder,
+                    DuplexCaps = duplex
+                };
+            }
+            catch (SaneException ex)
+            {
+                switch (ex.Status)
+                {
+                    case SaneStatus.Good:
+                    case SaneStatus.Cancelled:
+                        return new ScanCaps();
+                    case SaneStatus.DeviceBusy:
+                        throw new DeviceBusyException();
+                    case SaneStatus.Invalid:
+                        _scanningContext.Logger.LogDebug(ex, "Sane invalid error");
+                        throw new DeviceOfflineException();
+                    case SaneStatus.IoError:
+                        throw new DeviceCommunicationException();
+                    default:
+                        throw new DeviceException($"SANE error: {ex.Status}");
+                }
+            }
+        });
+    }
+
+    private PerSourceCaps GetPerSourceCaps(SaneOptionController controller)
+    {
+        var resOpt = controller.GetOption(SaneOptionNames.RESOLUTION);
+        var xResOpt = controller.GetOption(SaneOptionNames.X_RESOLUTION);
+        var yResOpt = controller.GetOption(SaneOptionNames.Y_RESOLUTION);
+        var resValues = resOpt != null
+            ? GetValues(resOpt)
+            : GetValues(xResOpt) is { } xValues && GetValues(yResOpt) is { } yValues
+                ? xValues.Intersect(yValues).OrderBy(dpi => dpi).ToImmutableList()
+                : null;
+
+        var scanAreaController = new SaneScanAreaController(controller);
+        var (minX, minY, maxX, maxY) = scanAreaController.GetBounds();
+
+        return new PerSourceCaps
+        {
+            BitDepthCaps = controller.GetOption(SaneOptionNames.MODE) != null
+                ? new BitDepthCaps
+                {
+                    SupportsColor = controller.TrySet(SaneOptionNames.MODE, SaneOptionMatchers.Color),
+                    SupportsGrayscale = controller.TrySet(SaneOptionNames.MODE, SaneOptionMatchers.Grayscale),
+                    SupportsBlackAndWhite = controller.TrySet(SaneOptionNames.MODE, SaneOptionMatchers.BlackAndWhite)
+                }
+                : null,
+            DpiCaps = new DpiCaps
+            {
+                Values = resValues
+            },
+            PageSizeCaps = new PageSizeCaps
+            {
+                ScanArea = scanAreaController.CanSetArea
+                    ? new PageSize((decimal) (maxX - minX), (decimal) (maxY - minY), PageSizeUnit.Millimetre)
+                    : null
+            }
+        };
+    }
+
+    private ImmutableList<int>? GetValues(SaneOption? option)
+    {
+        if (option == null) return null;
+        if (option.WordList != null)
+        {
+            return option.WordList.Select(x => (int) x).ToImmutableList();
+        }
+        if (option.Range != null)
+        {
+            return DpiCaps.ForRange((int) option.Range.Min, (int) option.Range.Max, (int) option.Range.Quant).Values;
+        }
+        return null;
     }
 
     private static ScanDevice GetScanDevice(SaneDeviceInfo device) =>
