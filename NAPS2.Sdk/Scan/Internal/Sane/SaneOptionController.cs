@@ -56,7 +56,13 @@ internal class SaneOptionController
 
     public bool TrySet(string name, SaneOptionMatcher matcher)
     {
+        return TrySet(name, matcher, out _);
+    }
+
+    public bool TrySet(string name, SaneOptionMatcher matcher, out string? matchedValue)
+    {
         _logger.LogDebug($"Maybe setting {name}");
+        matchedValue = null;
         if (!_options.ContainsKey(name))
             return false;
         var opt = _options[name];
@@ -68,6 +74,7 @@ internal class SaneOptionController
             {
                 if (matcher.Matches(value))
                 {
+                    matchedValue = value;
                     _logger.LogDebug($"Setting {name} to {value}");
                     _device.SetOption(opt, value, out var info);
                     if (info.HasFlag(SaneOptionSetInfo.ReloadOptions))

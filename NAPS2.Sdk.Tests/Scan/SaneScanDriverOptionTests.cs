@@ -21,7 +21,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     {
         var device = new DeviceOptionsMock(new[]
         {
-            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" })
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         });
         var options = new ScanOptions
         {
@@ -39,7 +39,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     {
         var device = new DeviceOptionsMock(new[]
         {
-            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" })
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         });
         var options = new ScanOptions { PaperSource = PaperSource.Feeder };
 
@@ -54,7 +54,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     {
         var device = new DeviceOptionsMock(new[]
         {
-            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF Duplex", "ADF" })
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF Duplex", "ADF"])
         });
         var options = new ScanOptions { PaperSource = PaperSource.Feeder };
 
@@ -69,7 +69,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     {
         var device = new DeviceOptionsMock(new[]
         {
-            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" })
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         });
         var options = new ScanOptions { PaperSource = PaperSource.Duplex };
 
@@ -84,7 +84,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     {
         var device = new DeviceOptionsMock(new[]
         {
-            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" })
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         });
         var options = new ScanOptions { PaperSource = PaperSource.Auto };
 
@@ -99,7 +99,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     {
         var device = new DeviceOptionsMock(new[]
         {
-            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "ADF", "Duplex" })
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["ADF", "Duplex"])
         });
         var options = new ScanOptions { PaperSource = PaperSource.Auto };
 
@@ -115,7 +115,7 @@ public class SaneScanDriverOptionTests : ContextualTests
         var device = new DeviceOptionsMock(new[]
         {
             SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE,
-                new[] { "Feeder(left aligned)", "Feeder(left aligned,Duplex)" })
+                ["Feeder(left aligned)", "Feeder(left aligned,Duplex)"])
         });
         var options = new ScanOptions { PaperSource = PaperSource.Duplex };
 
@@ -130,8 +130,8 @@ public class SaneScanDriverOptionTests : ContextualTests
     {
         var device = new DeviceOptionsMock(new[]
         {
-            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" }),
-            SaneOption.CreateForTesting(2, SaneOptionNames.SOURCE, new[] { "Flatbed", "ADF", "Duplex" })
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"]),
+            SaneOption.CreateForTesting(2, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         });
         var options = new ScanOptions
         {
@@ -142,6 +142,23 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.False(optionData.IsFeeder);
         Assert.Equal("Flatbed", device.GetValue(1));
+    }
+
+    [Fact]
+    public void SetOptions_NoGrayErrorDiffusion()
+    {
+        var device = new DeviceOptionsMock(new[]
+        {
+            SaneOption.CreateForTesting(1, SaneOptionNames.MODE, ["Gray[Error Diffusion]", "True Gray"])
+        });
+        var options = new ScanOptions
+        {
+            BitDepth = BitDepth.Grayscale
+        };
+
+        var optionData = _driver.SetOptions(device, options);
+
+        Assert.Equal("True Gray", optionData.Mode);
     }
 
     private class DeviceOptionsMock : ISaneDevice

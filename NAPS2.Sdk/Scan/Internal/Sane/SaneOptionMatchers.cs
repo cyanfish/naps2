@@ -34,10 +34,12 @@ internal static class SaneOptionMatchers
 
     public static readonly SaneOptionMatcher BlackAndWhite =
         new SaneOptionMatcher(SaneOptionTranslations.Lineart, "black and white", "black & white", "black/white");
-    
+
     public static readonly SaneOptionMatcher Grayscale =
-        new SaneOptionMatcher(SaneOptionTranslations.Gray, "gray", "grey");
-    
+        new SaneOptionMatcher(SaneOptionTranslations.Gray, "gray", "grey")
+            // Error diffusion isn't "real" grayscale
+            .Exclude(new SaneOptionMatcher([], "Error Diffusion"));
+
     public static readonly SaneOptionMatcher Color =
         new SaneOptionMatcher(SaneOptionTranslations.Color, "color", "colour");
 }

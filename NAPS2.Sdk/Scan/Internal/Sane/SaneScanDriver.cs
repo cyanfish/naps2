@@ -397,7 +397,7 @@ internal class SaneScanDriver : IScanDriver
             BitDepth.Grayscale => SaneOptionMatchers.Grayscale,
             _ => SaneOptionMatchers.Color
         };
-        controller.TrySet(SaneOptionNames.MODE, mode);
+        controller.TrySet(SaneOptionNames.MODE, mode, out optionData.Mode);
 
         SetResolution(options, controller, optionData);
 
@@ -580,9 +580,10 @@ internal class SaneScanDriver : IScanDriver
 
     internal class OptionData
     {
-        public bool IsFeeder { get; set; }
-        public double XRes { get; set; }
-        public double YRes { get; set; }
+        public bool IsFeeder;
+        public double XRes;
+        public double YRes;
+        public string? Mode;
     }
 
     //     if (options.BitDepth == BitDepth.Color)
