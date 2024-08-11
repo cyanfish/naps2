@@ -163,16 +163,16 @@
     <value>Átrendezés</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Átrendezés</value>
+    <value>Átlapolás</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
     <value>Elhagyás</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternate Interleave</value>
+    <value>Alternatív átlapolás</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternatív képminőség javítás</value>
+    <value>Alternatív Deinterleave</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Visszafelé</value>
@@ -355,7 +355,7 @@
     <value>Forrás kiválasztása</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Eszköz kiválasztása</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Futtatás a háttérben</value>
@@ -388,7 +388,7 @@
     <value>Karakterfelismerés automatikus futtatása beolvasás után</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Előzetes OCR futtatás a beolvasás után</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>További nyelvek beszerzése</value>
@@ -694,7 +694,7 @@
     <value>Kétoldalas oldalak megfordítása</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Duplex (kétoldalas) oldalak hátoldalának megfordítása</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia verzió:</value>
@@ -796,36 +796,36 @@
     <value>Egyesítés</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Kézi IP</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Kézi IP</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/Gazdagép</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Csatlakozás</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Csatlakozási hiba.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Mindig kérdezzen rá</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>Eszközök keresése...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>{0} eszköz található.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>1 eszköz található.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Nem található eszköz.</value>
   </data>
 </root>

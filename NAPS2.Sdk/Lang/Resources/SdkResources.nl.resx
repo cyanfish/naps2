@@ -79,9 +79,9 @@
     <value>Het OCR proces is uitgelopen.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Het werkproces is gecrasht.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Het werkproces is gecrasht. Controleer de Windows event viewer.</value>
   </data>
 </root>

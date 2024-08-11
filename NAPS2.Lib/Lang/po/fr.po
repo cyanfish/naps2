@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-08-11 02:47\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -33,7 +33,7 @@ msgstr "Modifier le profil par défaut avec le menu « Numériser »"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "Un périphérique trouvé."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "Appairer alternativement [135642>123456]"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Toujours demander"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -405,11 +405,11 @@ msgstr "Compression :"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Connecter"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Erreur de connexion."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -702,7 +702,7 @@ msgstr "Teinte / Saturation"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP de l’hôte"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -820,7 +820,7 @@ msgstr "Rendre possible la recherche dans les PDF issus d'OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "IP manuelle"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +919,7 @@ msgstr "Aucun périphérique sélectionné."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Aucun périphérique trouvé."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1087,7 +1087,7 @@ msgstr "Chaînes de substitution"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1348,7 +1348,7 @@ msgstr "Acquisition de la page {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Recherche de périphériques..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1364,7 @@ msgstr "Tout sélectionner"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Choix du périphérique"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1553,11 +1553,11 @@ msgstr "Le scanner sélectionné est éteint."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Le processus de travail a planté."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Le processus de travail a planté. Vérifiez la visionneuse d'événements Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1743,7 @@ msgstr "Fichier(s) {0} / {1}"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} périphériques trouvés."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

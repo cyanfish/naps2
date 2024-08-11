@@ -79,9 +79,9 @@
     <value>S'ha excedit el temps d'espera d'OCR.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>S'ha produït un error.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Ha fallat la tasca. Reviseu el Visor d'esdeveniments de Windows.</value>
   </data>
 </root>

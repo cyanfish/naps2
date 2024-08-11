@@ -355,7 +355,7 @@
     <value>Origen</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Selecció del dispositiu</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Executa en segon pla</value>
@@ -796,36 +796,36 @@
     <value>Combina</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP manual</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP manual</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/Amfitrió</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Connecta</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Error de connexió.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Demana sempre</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>S'estan cercant dispositius...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>{0} dispositius trobats.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>S'ha trobat 1 dispositiu.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>No s'ha trobat cap dispositiu.</value>
   </data>
 </root>

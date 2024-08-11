@@ -355,7 +355,7 @@
     <value>Quelle auswählen</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Gerät auswählen</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Ausführung im Hintergrund</value>
@@ -808,24 +808,24 @@
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Verbinden</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Verbindungsfehler.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Immer fragen</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>Suche nach Geräten...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>{0} Geräte gefunden.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>1 Gerät gefunden.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Keine Geräte gefunden.</value>
   </data>
 </root>

@@ -355,7 +355,7 @@
     <value>בחירת מקור</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>בחירת מכשיר</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>הרצה ברקע</value>
@@ -796,36 +796,36 @@
     <value>שילוב</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP ידני</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP ידני</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/מארח</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>פתחה</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>התחברות</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>שגיאת חיבור.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>תמיד לשאול</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>מתבצע חיפוש אחר מכשירים…</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>נמצאו {0} מכשירים.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>נמצא מכשיר.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>לא נמצאו מכשירים.</value>
   </data>
 </root>

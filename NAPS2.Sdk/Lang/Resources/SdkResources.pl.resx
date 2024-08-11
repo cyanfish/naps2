@@ -79,9 +79,9 @@
     <value>Upłynął limit czasu operacji OCR.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Proces roboczy uległ awarii.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Proces roboczy uległ awarii. Sprawdź podgląd zdarzeń systemu Windows.</value>
   </data>
 </root>

@@ -79,9 +79,9 @@
     <value>הזמן שהוקצב לפעילות זיהוי התווים האופטי נגמר.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>תהליך הרקע קרס.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>תהליך הרקע קרס. נא לבדוק את הסיבה במציג האירועים של Windows.</value>
   </data>
 </root>

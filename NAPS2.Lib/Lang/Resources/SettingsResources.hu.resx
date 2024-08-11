@@ -154,15 +154,15 @@
     <value>Kiválasztott mentése</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Mindig kérdezzen rá</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Kérdezzen rá, ha kiválasztva</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
     <value>Beolvasás az alapértelmezett profillal</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Mindig kérdezzen rá</value>
   </data>
 </root>

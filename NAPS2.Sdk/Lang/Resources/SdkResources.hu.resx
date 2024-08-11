@@ -79,9 +79,9 @@
     <value>Időtúllépés a karakterfelismerés során.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>A munkavégző folyamat összeomlott.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>A munkavégző folyamat összeomlott. Ellenőrizze a Windows eseménynaplóját.</value>
   </data>
 </root>

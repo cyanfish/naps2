@@ -79,9 +79,9 @@
     <value>Zeitüberschreitung bei der Texterkennung.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Der Arbeitsprozess ist abgestürzt.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Der Arbeitsprozess ist abgestürzt. Überprüfen Sie die Windows-Ereignisanzeige.</value>
   </data>
 </root>

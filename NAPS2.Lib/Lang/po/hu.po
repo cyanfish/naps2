@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-08-11 02:47\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -33,7 +33,7 @@ msgstr "A \"Beolvasás\" menü megváltoztatja az alapértelmezett profilt"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 eszköz található."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -110,20 +110,20 @@ msgstr "Nyomtatás engedélyezése"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "Alternatív képminőség javítás"
+msgstr "Alternatív Deinterleave"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "Alternatív átlapolás"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Mindig kérdezzen rá"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Mindig kérdezzen rá"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -405,11 +405,11 @@ msgstr "Tömörítés:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Csatlakozás"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Csatlakozási hiba."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -658,7 +658,7 @@ msgstr "Átfordítás"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Duplex (kétoldalas) oldalak hátoldalának megfordítása"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -702,7 +702,7 @@ msgstr "Színárnyalat / telítettség"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Gazdagép"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -771,7 +771,7 @@ msgstr "Felület"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr "Átrendezés"
+msgstr "Átlapolás"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -820,7 +820,7 @@ msgstr "A PDF-ek kereshetővé tétele karakterfelismeréssel"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Kézi IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +919,7 @@ msgstr "Nincs kiválasztott eszköz."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Nem található eszköz."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1087,7 +1087,7 @@ msgstr "Helyettesítők"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1095,7 +1095,7 @@ msgstr "Utófeldogozás"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Előzetes OCR futtatás a beolvasás után"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1133,7 +1133,7 @@ msgstr "Profilok"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Kérdezzen rá, ha kiválasztva"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1348,7 +1348,7 @@ msgstr "{0}. oldal beolvasása..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Eszközök keresése..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1364,7 @@ msgstr "Összes kijelölése"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Eszköz kiválasztása"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1553,11 +1553,11 @@ msgstr "A kiválasztott lapolvasó inaktív."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "A munkavégző folyamat összeomlott."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "A munkavégző folyamat összeomlott. Ellenőrizze a Windows eseménynaplóját."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1743,7 @@ msgstr "{0} / {1} fájl"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} eszköz található."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

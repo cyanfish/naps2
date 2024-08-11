@@ -823,7 +823,7 @@
     <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>Устройство не найдено.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
     <value>No devices found.</value>
