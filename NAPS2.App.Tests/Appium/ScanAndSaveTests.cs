@@ -18,15 +18,13 @@ public class ScanAndSaveTests : AppiumTests
         Init(target);
         // Clicking Scan without a profile opens the profile settings window
         ClickAtName("Scan");
-        // WIA driver is selected by default, so we open the WIA device dialog
         ClickAtName("Choose device");
-        Thread.Sleep(100);
+        WaitFor(() => HasElementWithName("Always Ask"));
         var deviceName = AppTestHelper.GetDeviceName(Driver.Wia);
+        // WIA driver is selected by default, so we just click the device
         if (!string.IsNullOrEmpty(deviceName)) ClickAtName(deviceName);
-        // Click OK in the wia device dialog (selecting the first available device by default)
-        // TODO: More consistent way to pick the right OK button
-        ClickAt(_session.FindElementsByName("OK")[0]);
-        WaitFor(() => !HasElementWithName("Properties"));
+        ClickAt(_session.FindElementByName("Select"));
+        WaitFor(() => !HasElementWithName("Select"));
         // Click OK in the profile settings window
         ClickAtName("OK");
         WaitFor(() => HasElementWithName("Cancel"));
@@ -54,13 +52,13 @@ public class ScanAndSaveTests : AppiumTests
         Init(target);
         // Clicking Scan without a profile opens the profile settings window
         ClickAtName("Scan");
-        ClickAtName("TWAIN Driver");
-        // Open the TWAIN device dialog
         ClickAtName("Choose device");
-        Thread.Sleep(100);
+        WaitFor(() => HasElementWithName("Always Ask"));
         var deviceName = AppTestHelper.GetDeviceName(Driver.Twain);
+        ClickAtName("TWAIN Driver");
+        Thread.Sleep(100);
+        WaitFor(() => HasElementWithName("Always Ask"));
         if (!string.IsNullOrEmpty(deviceName)) ClickAtName(deviceName);
-        // Click Select in the twain device dialog (selecting the first available device by default)
         ClickAtName("Select");
         WaitFor(() => !HasElementWithName("Select"));
         // Click OK in the profile settings window
