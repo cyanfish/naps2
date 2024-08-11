@@ -361,7 +361,8 @@ public class ChooseDeviceForm : EtoDialogBase
                 _deviceTextList.Focus();
                 return false;
             }
-            Choice = DeviceChoice.ForDevice(DeviceList!.First(x => x.ID == _deviceTextList.SelectedKey));
+            Choice = DeviceChoice.ForDevice(DeviceList!.Concat(ExtraItems!)
+                .First(x => x.ID == _deviceTextList.SelectedKey));
         }
         else
         {
