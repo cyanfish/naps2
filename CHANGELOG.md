@@ -1,3 +1,16 @@
+Changes in 7.5.0:
+- Reworked device selection
+  - Driver selection is now in the "Choose device" window
+  - Click the top-right button to toggle between icon and list views
+  - You can no longer create a profile without selecting a device
+    - To prompt for a device each time you scan, "Always Ask" must be explicitly selected
+- Added "Manual IP" option for ESCL
+- Available profile options now change based on scanner support
+- Improved the error message when the worker process crashes
+- Sane: Fixed an issue with selecting the wrong grayscale mode
+- Fixed an issue with auto save paths that include Unicode
+- Fixed an issue with "Combine" for black and white images
+
 Changes in 7.4.3:
 - Fixed some ESCL connection issues
 - Fixed email compatibility with HCL Notes
