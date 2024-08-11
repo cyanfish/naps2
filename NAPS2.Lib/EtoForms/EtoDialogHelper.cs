@@ -105,7 +105,7 @@ public class EtoDialogHelper : DialogHelper
         }
         if (path != null)
         {
-            dialog.Directory = new Uri(Path.GetFullPath(path));
+            dialog.Directory = UriHelper.FilePathToFileUri(Path.GetFullPath(path));
         }
     }
 
@@ -121,7 +121,7 @@ public class EtoDialogHelper : DialogHelper
         if (Paths.IsTestAppDataPath)
         {
             // For UI test automation we choose the appdata folder to find the prepared files to import
-            ofd.Directory = new Uri(Path.GetFullPath(Paths.AppData));
+            ofd.Directory = UriHelper.FilePathToFileUri(Path.GetFullPath(Paths.AppData));
         }
         if (ofd.ShowDialog(null) == DialogResult.Ok)
         {
