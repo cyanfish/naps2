@@ -8,6 +8,13 @@ public class MacIconProvider : IIconProvider
     private static readonly Dictionary<string, string> IconMap = new()
     {
         { "control_play_blue", "play" },
+        { "control_play_blue_small", "play" },
+        { "add_small", "plus.circle" },
+        { "pencil_small", "pencil" },
+        { "cross", "trash" },
+        { "cross_small", "xmark" },
+        { "accept_small", "checkmark.circle" },
+        { "wireless16", "wifi" },
         { "blueprints", "list.bullet" },
         { "folder_picture", "folder" },
         { "diskette", "square.and.arrow.down" },
@@ -30,12 +37,16 @@ public class MacIconProvider : IIconProvider
         { "contrast", "circle.righthalf.filled" },
         { "contrast_high", "circle.righthalf.filled" },
         { "sharpen", "rhombus" },
-        { "cross", "trash" },
         { "file_extension_pdf", "doc.richtext" },
         { "pictures", "photo" },
         { "document", "doc.text" },
         { "split", "squareshape.split.2x2.dotted" },
-        { "combine", "rectangle.grid.1x2" }
+        { "text_align_justify_small", "text.justify" },
+        { "large_tiles_small", "square.grid.2x2" },
+        { "exclamation_small", "exclamationmark.triangle" },
+        // TODO: Consider these
+        // { "ask", "questionmark" },
+        // { "network_ip", "wifi.router" },
     };
 
     private readonly DefaultIconProvider _defaultIconProvider;
@@ -45,7 +56,7 @@ public class MacIconProvider : IIconProvider
         _defaultIconProvider = defaultIconProvider;
     }
 
-    public Image? GetIcon(string name)
+    public Image? GetIcon(string name, bool oversized = false)
     {
         if (!OperatingSystem.IsMacOSVersionAtLeast(11) && name == "arrow_rotate_anticlockwise")
         {
@@ -58,6 +69,10 @@ public class MacIconProvider : IIconProvider
             var symbol = NSImage.GetSystemSymbol(IconMap[name], null);
             if (symbol != null)
             {
+                if (oversized)
+                {
+                    symbol = symbol.GetImage(NSImageSymbolConfiguration.Create(32, 0.1));
+                }
                 return new Bitmap(new BitmapHandler(symbol));
             }
         }

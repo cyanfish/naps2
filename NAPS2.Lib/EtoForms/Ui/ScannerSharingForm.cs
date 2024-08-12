@@ -22,7 +22,8 @@ public class ScannerSharingForm : EtoDialogBase
     private bool _suppressChangeEvent;
 
     public ScannerSharingForm(Naps2Config config, SharedDevicesListViewBehavior listViewBehavior,
-        ISharedDeviceManager sharedDeviceManager, IOsServiceManager osServiceManager, ErrorOutput errorOutput)
+        ISharedDeviceManager sharedDeviceManager, IOsServiceManager osServiceManager, ErrorOutput errorOutput,
+        IIconProvider iconProvider)
         : base(config)
     {
         _sharedDeviceManager = sharedDeviceManager;
@@ -33,17 +34,17 @@ public class ScannerSharingForm : EtoDialogBase
         _addCommand = new ActionCommand(DoAdd)
         {
             MenuText = UiStrings.Share,
-            Image = Icons.add_small.ToEtoImage()
+            Image = iconProvider.GetIcon("add_small")
         };
         _editCommand = new ActionCommand(DoEdit)
         {
             MenuText = UiStrings.Edit,
-            Image = Icons.pencil_small.ToEtoImage()
+            Image = iconProvider.GetIcon("pencil_small")
         };
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            Image = Icons.cross_small.ToEtoImage()
+            Image = iconProvider.GetIcon("cross_small")
         };
 
         var sharingKsm = new KeyboardShortcutManager();

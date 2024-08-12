@@ -16,12 +16,12 @@ public class PageSizeForm : EtoDialogBase
 
     private PageDimensions? _initialDimens;
 
-    public PageSizeForm(Naps2Config config)
+    public PageSizeForm(Naps2Config config, IIconProvider iconProvider)
         : base(config)
     {
         DeletePageSizeCommand = new ActionCommand(DeletePageSize)
         {
-            Image = Icons.cross_small.ToEtoImage()
+            Image = iconProvider.GetIcon("cross_small")
         };
         _name.SelectedValueChanged += Name_SelectionChange;
         _name.TextChanged += Name_TextChanged;

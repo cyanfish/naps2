@@ -276,8 +276,8 @@ public class ChooseDeviceForm : EtoDialogBase
                         _spinnerVis.IsVisible = false;
                         _statusIcon.Image =
                             DeviceList.Count > 0
-                                ? Icons.accept_small.ToEtoImage()
-                                : Icons.exclamation_small.ToEtoImage();
+                                ? _iconProvider.GetIcon("accept_small")
+                                : _iconProvider.GetIcon("exclamation_small");
                         _statusLabel.Text = DeviceList.Count switch
                         {
                             > 1 => string.Format(UiStrings.DevicesFound, DeviceList.Count),
@@ -294,7 +294,7 @@ public class ChooseDeviceForm : EtoDialogBase
                     if (!cts.IsCancellationRequested)
                     {
                         _spinnerVis.IsVisible = false;
-                        _statusIcon.Image = Icons.exclamation_small.ToEtoImage();
+                        _statusIcon.Image = _iconProvider.GetIcon("exclamation_small");
                         _statusLabel.Text = ex.Message;
                     }
                 });

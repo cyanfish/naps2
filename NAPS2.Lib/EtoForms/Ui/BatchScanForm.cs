@@ -53,7 +53,7 @@ public class BatchScanForm : EtoDialogBase
     private CancellationTokenSource _cts = new();
 
     public BatchScanForm(Naps2Config config, DialogHelper dialogHelper, IProfileManager profileManager,
-        IBatchScanPerformer batchScanPerformer, ErrorOutput errorOutput)
+        IBatchScanPerformer batchScanPerformer, ErrorOutput errorOutput, IIconProvider iconProvider)
         : base(config)
     {
         _profileManager = profileManager;
@@ -80,8 +80,8 @@ public class BatchScanForm : EtoDialogBase
         _userTransact = Config.User.BeginTransaction();
         _transactionConfig = Config.WithTransaction(_userTransact);
 
-        EditProfileCommand = new ActionCommand(EditProfile) { Image = Icons.pencil_small.ToEtoImage() };
-        NewProfileCommand = new ActionCommand(NewProfile) { Image = Icons.add_small.ToEtoImage() };
+        EditProfileCommand = new ActionCommand(EditProfile) { Image = iconProvider.GetIcon("pencil_small") };
+        NewProfileCommand = new ActionCommand(NewProfile) { Image = iconProvider.GetIcon("add_small") };
     }
 
     private void UpdateVisibility(object? sender, EventArgs e)
@@ -124,8 +124,8 @@ public class BatchScanForm : EtoDialogBase
                     C.Label(UiStrings.ProfileLabel),
                     L.Row(
                         _profile.AsControl().Scale(),
-                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay),
-                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay)
+                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(30),
+                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(30)
                     ),
                     _singleScan,
                     _multipleScansPrompt,

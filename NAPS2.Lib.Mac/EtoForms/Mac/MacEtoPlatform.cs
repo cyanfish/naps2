@@ -50,6 +50,7 @@ public class MacEtoPlatform : EtoPlatform
         {
             var nsButton = (NSButton) button.ToNative();
             nsButton.ImageHugsTitle = true;
+            nsButton.Title = Environment.NewLine + nsButton.Title;
         }
     }
 

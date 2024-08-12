@@ -14,6 +14,7 @@ public class ProfilesForm : EtoDialogBase
     private readonly ProfileNameTracker _profileNameTracker;
     private readonly IProfileManager _profileManager;
     private readonly ThumbnailController _thumbnailController;
+    private readonly IIconProvider _iconProvider;
     private readonly ProfileTransfer _profileTransfer = new();
 
     private readonly IListView<ScanProfile> _listView;
@@ -29,13 +30,14 @@ public class ProfilesForm : EtoDialogBase
 
     public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker,
         IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior,
-        ThumbnailController thumbnailController)
+        ThumbnailController thumbnailController, IIconProvider iconProvider)
         : base(config)
     {
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;
         _profileManager = profileManager;
         _thumbnailController = thumbnailController;
+        _iconProvider = iconProvider;
 
         // TODO: Do this only in WinForms (?)
         // switch (Handler)
@@ -50,27 +52,27 @@ public class ProfilesForm : EtoDialogBase
         _scanCommand = new ActionCommand(DoScan)
         {
             MenuText = UiStrings.Scan,
-            Image = Icons.control_play_blue_small.ToEtoImage(),
+            Image = iconProvider.GetIcon("control_play_blue_small"),
         };
         _addCommand = new ActionCommand(DoAdd)
         {
             MenuText = UiStrings.New,
-            Image = Icons.add_small.ToEtoImage()
+            Image = iconProvider.GetIcon("add_small")
         };
         _editCommand = new ActionCommand(DoEdit)
         {
             MenuText = UiStrings.Edit,
-            Image = Icons.pencil_small.ToEtoImage()
+            Image = iconProvider.GetIcon("pencil_small")
         };
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            Image = Icons.cross_small.ToEtoImage()
+            Image = iconProvider.GetIcon("cross_small")
         };
         _setDefaultCommand = new ActionCommand(DoSetDefault)
         {
             MenuText = UiStrings.SetDefault,
-            Image = Icons.accept_small.ToEtoImage()
+            Image = iconProvider.GetIcon("accept_small")
         };
         _copyCommand = new ActionCommand(DoCopy)
         {
@@ -83,7 +85,7 @@ public class ProfilesForm : EtoDialogBase
         _scannerSharingCommand = new ActionCommand(OpenScannerSharingForm)
         {
             MenuText = UiStrings.ScannerSharing,
-            Image = Icons.wireless16.ToEtoImage()
+            Image = iconProvider.GetIcon("wireless16")
         };
 
         var profilesKsm = new KeyboardShortcutManager();
@@ -138,7 +140,7 @@ public class ProfilesForm : EtoDialogBase
         LayoutController.Content = L.Column(
             L.Row(
                 _listView.Control.Scale(),
-                C.Button(_scanCommand, Icons.control_play_blue.ToEtoImage(), ButtonImagePosition.Above)
+                C.Button(_scanCommand, _iconProvider.GetIcon("control_play_blue", true)!, ButtonImagePosition.Above)
                     .Height(80)
             ).Aligned().Scale(),
             L.Row(
