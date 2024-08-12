@@ -21,7 +21,7 @@ public class EditProfileForm : EtoDialogBase
     private readonly RadioButton _nativeUi;
     private readonly LayoutVisibility _nativeUiVis = new(true);
     private readonly EnumDropDownWidget<ScanSource> _paperSource = new();
-    private readonly DropDownWidget<PageSizeListItem> _pageSize = new();
+    private readonly PageSizeDropDownWidget _pageSize;
     private readonly DropDownWidget<int> _resolution = new();
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
     private readonly EnumDropDownWidget<ScanHorizontalAlign> _horAlign = new();
@@ -37,7 +37,6 @@ public class EditProfileForm : EtoDialogBase
     private bool _result;
     private bool _suppressChangeEvent;
     private CancellationTokenSource? _updateCapsCts;
-    private PageSizeListItem? _customPageSize;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
         ProfileNameTracker profileNameTracker, DeviceCapsCache deviceCapsCache) : base(config)
@@ -50,14 +49,13 @@ public class EditProfileForm : EtoDialogBase
             ProfileFunc = GetUpdatedScanProfile,
             AllowAlwaysAsk = true
         };
+        _pageSize = new(this);
         _deviceSelectorWidget.DeviceChanged += DeviceChanged;
 
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
         _resolution.Format = x => string.Format(SettingsResources.DpiFormat, x.ToString(CultureInfo.InvariantCulture));
         _paperSource.SelectedItemChanged += PaperSource_SelectedItemChanged;
-        _pageSize.Format = x => x.Text;
-        _pageSize.SelectedItemChanged += PageSize_SelectedItemChanged;
         _predefinedSettings.CheckedChanged += PredefinedSettings_CheckedChanged;
         _nativeUi.CheckedChanged += NativeUi_CheckedChanged;
 
@@ -184,43 +182,10 @@ public class EditProfileForm : EtoDialogBase
 
         var allPresets = EnumDropDownWidget<ScanPageSize>.DefaultItems.SkipLast(2).ToList();
         var conditionalPresets = new[] { ScanPageSize.A3, ScanPageSize.B4 };
-        var includedPresets = allPresets.Where(preset =>
+        _pageSize.VisiblePresets = allPresets.Where(preset =>
             !conditionalPresets.Contains(preset) || sizeCaps.Fits(preset.PageDimensions()!.ToPageSize()));
-        var presetSizes = includedPresets.Select(size => new PageSizeListItem(size)).ToList();
-
-        var customSizes = Config.Get(c => c.CustomPageSizePresets)
-            .OrderBy(x => x.Name)
-            .Select(preset => new PageSizeListItem
-            {
-                Type = ScanPageSize.Custom,
-                Text = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width,
-                    preset.Dimens.Height, preset.Dimens.Unit.Description()),
-                CustomName = preset.Name,
-                CustomDimens = preset.Dimens
-            }).ToList();
-
-        if (_customPageSize != null && !customSizes.Contains(_customPageSize))
-        {
-            customSizes.Add(_customPageSize);
-        }
-        _pageSize.Items = presetSizes.Concat(customSizes).Append(new PageSizeListItem(ScanPageSize.Custom));
 
         _suppressChangeEvent = false;
-    }
-
-    private PageSizeListItem GetCustomPageSize(string? name, PageDimensions dimens)
-    {
-        return new PageSizeListItem
-        {
-            Type = ScanPageSize.Custom,
-            Text = string.IsNullOrEmpty(name)
-                ? string.Format(MiscResources.CustomPageSizeFormat, dimens.Width, dimens.Height,
-                    dimens.Unit.Description())
-                : string.Format(MiscResources.NamedPageSizeFormat, name, dimens.Width, dimens.Height,
-                    dimens.Unit.Description()),
-            CustomName = name,
-            CustomDimens = dimens
-        };
     }
 
     private void UpdateCaps()
@@ -314,10 +279,6 @@ public class EditProfileForm : EtoDialogBase
                 ? driver
                 : Driver.Default);
         IconUri = ScanProfile.Device?.IconUri;
-        if (ScanProfile.PageSize == ScanPageSize.Custom && ScanProfile.CustomPageSize != null)
-        {
-            _customPageSize = GetCustomPageSize(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
-        }
 
         _displayName.Text = ScanProfile.DisplayName;
         if (_deviceSelectorWidget.Choice == DeviceChoice.None)
@@ -334,12 +295,20 @@ public class EditProfileForm : EtoDialogBase
         }
         _isDefault = ScanProfile.IsDefault;
 
+        if (ScanProfile.PageSize == ScanPageSize.Custom && ScanProfile.CustomPageSize != null)
+        {
+            _pageSize.SetCustom(ScanProfile.CustomPageSizeName, ScanProfile.CustomPageSize);
+        }
+        else
+        {
+            _pageSize.SetPreset(ScanProfile.PageSize);
+        }
+
         _paperSource.SelectedItem = ScanProfile.PaperSource;
         _bitDepth.SelectedItem = ScanProfile.BitDepth;
         _resolution.SelectedItem = ScanProfile.Resolution.Dpi;
         _contrastSlider.IntValue = ScanProfile.Contrast;
         _brightnessSlider.IntValue = ScanProfile.Brightness;
-        _pageSize.SelectedItem = _customPageSize ?? new PageSizeListItem(ScanProfile.PageSize);
         _scale.SelectedItem = ScanProfile.AfterScanScale;
         _horAlign.SelectedItem = ScanProfile.PageAlign;
 
@@ -476,41 +445,11 @@ public class EditProfileForm : EtoDialogBase
         }
     }
 
-    private PageSizeListItem? _lastPageSizeItem;
 
     private void PaperSource_SelectedItemChanged(object? sender, EventArgs e)
     {
         if (_suppressChangeEvent) return;
         UpdateUiForCaps();
-    }
-
-    private void PageSize_SelectedItemChanged(object? sender, EventArgs e)
-    {
-        if (Equals(_pageSize.SelectedItem, new PageSizeListItem(ScanPageSize.Custom)))
-        {
-            if (_lastPageSizeItem == null)
-            {
-                Log.Error("Expected last page size to be set");
-                return;
-            }
-            // "Custom..." selected
-            var form = FormFactory.Create<PageSizeForm>();
-            form.PageSizeDimens = _lastPageSizeItem.Type == ScanPageSize.Custom
-                ? _lastPageSizeItem.CustomDimens
-                : _lastPageSizeItem.Type.PageDimensions();
-            form.ShowModal();
-            if (form.Result)
-            {
-                _customPageSize = GetCustomPageSize(form.PageSizeName!, form.PageSizeDimens!);
-                _pageSize.SelectedItem = _customPageSize;
-                UpdateUiForCaps();
-            }
-            else
-            {
-                _pageSize.SelectedItem = _lastPageSizeItem;
-            }
-        }
-        _lastPageSizeItem = _pageSize.SelectedItem;
     }
 
     private void AutoSaveSettings_LinkClicked(object? sender, EventArgs eventArgs)
@@ -551,52 +490,5 @@ public class EditProfileForm : EtoDialogBase
             }
         }
         _autoSaveSettings.Enabled = _enableAutoSave.IsChecked();
-    }
-
-    private class PageSizeListItem : IListItem
-    {
-        public PageSizeListItem()
-        {
-        }
-
-        public PageSizeListItem(ScanPageSize size)
-        {
-            Type = size;
-            Text = size.Description();
-        }
-
-        public string Text { get; set; } = null!;
-
-        public string Key => Text;
-
-        public ScanPageSize Type { get; set; }
-
-        public string? CustomName { get; set; }
-
-        public PageDimensions? CustomDimens { get; set; }
-
-        protected bool Equals(PageSizeListItem other)
-        {
-            return Type == other.Type && CustomName == other.CustomName && Equals(CustomDimens, other.CustomDimens);
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((PageSizeListItem) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (int) Type;
-                hashCode = (hashCode * 397) ^ (CustomName != null ? CustomName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CustomDimens != null ? CustomDimens.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
     }
 }
