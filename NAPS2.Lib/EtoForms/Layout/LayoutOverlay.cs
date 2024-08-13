@@ -14,6 +14,8 @@ public class LayoutOverlay : LayoutContainer
     {
         Scale = scale ?? original.Scale;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
+        Width = original.Width;
+        Height = original.Height;
     }
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
@@ -35,6 +37,14 @@ public class LayoutOverlay : LayoutContainer
             var childSize = child.GetPreferredSize(context with { InOverlay = context.InOverlay || inOverlay }, parentBounds);
             size = SizeF.Max(size, childSize);
             inOverlay = true;
+        }
+        if (Width != null)
+        {
+            size.Width = Width.Value;
+        }
+        if (Height != null)
+        {
+            size.Height = Height.Value;
         }
         return size;
     }

@@ -18,6 +18,8 @@ public class LayoutRow : LayoutLine
         Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;
         Visibility = visibility ?? original.Visibility;
+        Width = original.Width;
+        Height = original.Height;
     }
 
     protected override bool IsOrthogonalTo(LayoutLine other) => other is LayoutColumn;

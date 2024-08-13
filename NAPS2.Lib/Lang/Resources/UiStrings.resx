@@ -936,4 +936,7 @@
   <data name="NoDevicesFound" xml:space="preserve">
     <value>No devices found.</value>
   </data>
+  <data name="ToggleSidebar" xml:space="preserve">
+    <value>Sidebar</value>
+  </data>
 </root>

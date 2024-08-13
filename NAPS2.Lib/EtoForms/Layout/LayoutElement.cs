@@ -18,6 +18,8 @@ public abstract class LayoutElement
     protected internal LayoutVisibility? Visibility { get; set; }
     protected internal bool IsVisible => Visibility?.IsVisible ?? true;
     protected internal int? SpacingAfter { get; set; }
+    protected internal int? Width { get; set; }
+    protected internal int? Height { get; set; }
 
     public static implicit operator LayoutElement(Control control) =>
         new LayoutControl(control);

@@ -35,6 +35,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly NotificationArea _notificationArea;
     protected IListView<UiImage> _listView;
     private ImageListSyncer? _imageListSyncer;
+    private readonly Sidebar _sidebar;
 
     public DesktopForm(
         Naps2Config config,
@@ -52,7 +53,8 @@ public abstract class DesktopForm : EtoFormBase
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands) : base(config)
+        DesktopCommands commands,
+        Sidebar sidebar) : base(config)
     {
         _keyboardShortcuts = keyboardShortcuts;
         _notificationManager = notificationManager;
@@ -67,6 +69,7 @@ public abstract class DesktopForm : EtoFormBase
         _imageListActions = imageListActions;
         _desktopFormProvider = desktopFormProvider;
         _desktopSubFormController = desktopSubFormController;
+        _sidebar = sidebar;
         Commands = commands;
 
         _keyboardShortcuts.Assign(Commands);
@@ -112,16 +115,21 @@ public abstract class DesktopForm : EtoFormBase
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(1210, 600);
 
+
         LayoutController.RootPadding = 0;
-        LayoutController.Content = L.Overlay(
-            GetMainContent(),
-            L.Column(
-                C.Filler(),
-                L.Row(
-                    GetZoomButtons(),
+        LayoutController.Content = L.LeftPanel(
+            LayoutController,
+            _sidebar.CreateView(this),
+            L.Overlay(
+                GetMainContent(),
+                L.Column(
                     C.Filler(),
-                    _notificationArea.Content)
-            ).Padding(10)
+                    L.Row(
+                        GetZoomButtons(),
+                        C.Filler(),
+                        _notificationArea.Content)
+                ).Padding(10)
+            ).Scale()
         );
 
         UpdateColors();
@@ -578,5 +586,10 @@ public abstract class DesktopForm : EtoFormBase
         {
             _imageListActions.MoveTo(position);
         }
+    }
+
+    public void ToggleSidebar()
+    {
+        _sidebar.ToggleVisibility();
     }
 }

@@ -116,6 +116,14 @@ public abstract class LayoutLine : LayoutContainer
             size = UpdateTotalSize(size, childLayoutSize, GetSpacing(i, context));
         }
         size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0);
+        if (Width != null)
+        {
+            size.Width = Width.Value;
+        }
+        if (Height != null)
+        {
+            size.Height = Height.Value;
+        }
         return size;
     }
 

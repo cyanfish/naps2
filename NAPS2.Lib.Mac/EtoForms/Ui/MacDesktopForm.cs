@@ -28,10 +28,11 @@ public class MacDesktopForm : DesktopForm
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands)
-        : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager,
-            imageList, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
-            imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
+        DesktopCommands commands,
+        Sidebar sidebar)
+        : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
+            thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
+            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar)
     {
         // For retina screens
         _thumbnailController.Oversample = 2.0;
@@ -211,6 +212,7 @@ public class MacDesktopForm : DesktopForm
             MacToolbarItems.CreateMenu("rotate", Commands.RotateMenu, GetRotateMenuProvider()),
             MacToolbarItems.Create("moveUp", Commands.MoveUp, tooltip: UiStrings.MoveUp),
             MacToolbarItems.Create("moveDown", Commands.MoveDown, tooltip: UiStrings.MoveDown),
+            MacToolbarItems.Create("sidebar", Commands.ToggleSidebar, tooltip: UiStrings.ToggleSidebar, nav: true),
             new NSToolbarItem("zoom")
             {
                 View = _zoomSlider,

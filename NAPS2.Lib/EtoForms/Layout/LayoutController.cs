@@ -63,10 +63,7 @@ public class LayoutController
         if (_layoutQueued) return;
         if (_window == null || _content == null || !_isShown)
         {
-            Invoker.Current.InvokeDispatch(() =>
-            {
-                Invalidated?.Invoke(this, EventArgs.Empty);
-            });
+            Invoker.Current.InvokeDispatch(() => { Invalidated?.Invoke(this, EventArgs.Empty); });
             return;
         }
         _layoutQueued = true;
@@ -126,7 +123,7 @@ public class LayoutController
         }
     }
 
-    private LayoutContext GetLayoutContext()
+    internal LayoutContext GetLayoutContext()
     {
         return new LayoutContext(_layout)
         {
@@ -137,4 +134,12 @@ public class LayoutController
     }
 
     public event EventHandler? Invalidated;
+
+    public Size GetSizeFor(LayoutElement element)
+    {
+        return Size.Truncate(
+            element.GetPreferredSize(
+                GetLayoutContext(),
+                new RectangleF(0, 0, MAX_SIZE, MAX_SIZE)));
+    }
 }

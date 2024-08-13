@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
@@ -53,5 +54,28 @@ public static class L
     public static LayoutElement Buffer(LayoutElement element, int left, int top, int right, int bottom)
     {
         return new BufferLayoutElement(element, left, top, right, bottom);
+    }
+
+    public static LayoutElement LeftPanel(LayoutController controller, LayoutElement left, LayoutElement right)
+    {
+        var splitter = new Splitter
+        {
+            Orientation = Orientation.Horizontal,
+            Panel1 = new Panel(),
+            Panel1MinimumSize = controller.GetSizeFor(left).Width,
+            Panel2 = new Panel(),
+            Panel2MinimumSize = controller.GetSizeFor(right).Width,
+            FixedPanel = SplitterFixedPanel.Panel1
+        };
+        splitter.PositionChanged += (_, _) =>
+        {
+            left.Width = splitter.Position;
+            controller.Invalidate();
+        };
+        if (left.Visibility is { } vis)
+        {
+            vis.IsVisibleChanged += (_, _) => splitter.Visible = vis.IsVisible;
+        }
+        return L.Overlay(splitter, L.Row(left, right).Spacing(1));
     }
 }

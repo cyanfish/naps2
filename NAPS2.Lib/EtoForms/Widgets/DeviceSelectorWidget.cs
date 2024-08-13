@@ -67,6 +67,8 @@ public class DeviceSelectorWidget
         set => _chooseDevice.Enabled = value;
     }
 
+    public bool ShowChooseDevice { get; set; } = true;
+
     public event EventHandler<DeviceChangedEventArgs>? DeviceChanged;
 
     private async void ChooseDevice(object? sender, EventArgs args)
@@ -131,11 +133,16 @@ public class DeviceSelectorWidget
                 _deviceIcon.Visible(_deviceVis).AlignCenter().NaturalWidth(48),
                 L.Column(
                     C.Filler(),
-                    _deviceName.DynamicWrap(300),
+                    ShowChooseDevice ? _deviceName.DynamicWrap(300) : _deviceName.Ellipsize().MaxWidth(150),
                     _deviceDriver,
                     C.Filler()
                 ).Spacing(5).Visible(_deviceVis).Scale(),
-                _chooseDevice.AlignCenter()
+                // TODO: We should probably have a compact choose-device button for the sidebar.
+                // It should also change the name of the profile if it matches the device name.
+                // i.e. for users that are naming their own profiles, its their responsibility to keep the devices
+                // matched up. For a "basic" user that might only create one profile, its name should keep matched
+                // with the device.
+                ShowChooseDevice ? _chooseDevice.AlignCenter() : C.None()
             )
         );
     }

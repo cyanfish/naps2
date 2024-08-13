@@ -54,11 +54,9 @@ public class LayoutControl : LayoutElement
 
     internal Control? Control { get; }
     private Padding Padding { get; }
-    private int? Width { get; }
     private int? MinWidth { get; }
     private int? MaxWidth { get; }
     private int? NaturalWidth { get; }
-    private int? Height { get; }
     private int? MinHeight { get; }
     private int? MaxHeight { get; }
     private int? NaturalHeight { get; }

@@ -13,10 +13,12 @@ public class DesktopCommands
     private readonly ThumbnailController _thumbnailController;
     private readonly IIconProvider _iconProvider;
     private readonly Naps2Config _config;
+    private readonly DesktopFormProvider _desktopFormProvider;
 
     public DesktopCommands(DesktopController desktopController, DesktopScanController desktopScanController,
         IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions,
-        ThumbnailController thumbnailController, IIconProvider iconProvider, Naps2Config config)
+        ThumbnailController thumbnailController, IIconProvider iconProvider, Naps2Config config,
+        DesktopFormProvider desktopFormProvider)
     {
         _desktopController = desktopController;
         _desktopScanController = desktopScanController;
@@ -26,6 +28,7 @@ public class DesktopCommands
         _thumbnailController = thumbnailController;
         _iconProvider = iconProvider;
         _config = config;
+        _desktopFormProvider = desktopFormProvider;
 
         var hiddenButtons = config.Get(c => c.HiddenButtons);
 
@@ -318,6 +321,11 @@ public class DesktopCommands
             Text = UiStrings.Redo,
             Image = iconProvider.GetIcon("redo")
         };
+        ToggleSidebar = new ActionCommand(() => _desktopFormProvider.DesktopForm.ToggleSidebar())
+        {
+            Text = UiStrings.ToggleSidebar,
+            Image = iconProvider.GetIcon("sidebar")
+        };
     }
 
     public DesktopCommands WithSelection(Func<ListSelection<UiImage>> selectionFunc)
@@ -330,7 +338,8 @@ public class DesktopCommands
             _imageListActions.WithSelection(selectionFunc),
             _thumbnailController,
             _iconProvider,
-            _config);
+            _config,
+            _desktopFormProvider);
     }
 
     public ImageListActions ImageListActions => _imageListActions;
@@ -396,4 +405,5 @@ public class DesktopCommands
     public ActionCommand Paste { get; set; }
     public ActionCommand Undo { get; set; }
     public ActionCommand Redo { get; set; }
+    public ActionCommand ToggleSidebar { get; set; }
 }

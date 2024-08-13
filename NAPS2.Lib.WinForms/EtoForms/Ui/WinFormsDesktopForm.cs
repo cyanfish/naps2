@@ -39,10 +39,11 @@ public class WinFormsDesktopForm : DesktopForm
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands)
-        : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager,
-            imageList, thumbnailController, thumbnailProvider, desktopController, desktopScanController,
-            imageListActions, imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands)
+        DesktopCommands commands,
+        Sidebar sidebar)
+        : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
+            thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
+            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar)
     {
         _form = this.ToNative();
         _form.FormClosing += OnFormClosing;
