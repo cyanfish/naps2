@@ -21,7 +21,7 @@ public class PerSourceProfileCaps
             {
                 element.Add(new XElement("ScanArea", obj.ScanArea));
             }
-            if (obj.Resolutions != null)
+            if (obj.Resolutions is { Count: > 0 })
             {
                 element.Add(new XElement("Resolutions",
                     string.Join(",", obj.Resolutions.Select(x => x.ToString(CultureInfo.InvariantCulture)))));
@@ -31,11 +31,11 @@ public class PerSourceProfileCaps
         protected override PerSourceProfileCaps Deserialize(XElement element)
         {
             var caps = new PerSourceProfileCaps();
-            if (element.Element("ScanArea") is { } scanArea)
+            if (element.Element("ScanArea") is { Value.Length: > 0 } scanArea)
             {
                 caps.ScanArea = PageSize.Parse(scanArea.Value);
             }
-            if (element.Element("Resolutions") is { } resolutions)
+            if (element.Element("Resolutions") is { Value.Length: > 0 } resolutions)
             {
                 caps.Resolutions = resolutions.Value.Split(',')
                     .Select(x => int.Parse(x, NumberStyles.Integer, CultureInfo.InvariantCulture)).ToList();
