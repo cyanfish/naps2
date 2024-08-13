@@ -1,3 +1,7 @@
+Changes in 7.5.1:
+- Mac: Use more native icons
+- Fixed an issue loading profiles
+
 Changes in 7.5.0:
 - Reworked device selection
   - Driver selection is now in the "Choose device" window
