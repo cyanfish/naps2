@@ -27,6 +27,15 @@ internal class EsclApiController : WebApiController
         _logger = logger;
     }
 
+    protected override void OnBeforeHandler()
+    {
+        base.OnBeforeHandler();
+        if (_securityPolicy.HasFlag(EsclSecurityPolicy.ServerAllowAnyOrigin))
+        {
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+        }
+    }
+
     [Route(HttpVerbs.Get, "/ScannerCapabilities")]
     public async Task GetScannerCapabilities()
     {
