@@ -190,6 +190,7 @@ internal class EsclApiController : WebApiController
             // Fix https://github.com/unosquare/embedio/issues/593
             uri = new UriBuilder(uri) { Scheme = "https" }.Uri;
         }
+        Response.Headers.Add("Access-Control-Expose-Headers", "Location");
         Response.Headers.Add("Location", $"{uri}/{jobInfo.Id}");
         Response.StatusCode = 201; // Created
     }
