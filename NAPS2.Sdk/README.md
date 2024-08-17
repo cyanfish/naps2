@@ -83,6 +83,12 @@ Also see:
 - [SDK Homepage](https://www.naps2.com/sdk)
 - [Full Api Docs](https://www.naps2.com/sdk/doc/api/)
 
+## Web Scanning with JS/TS
+
+NAPS2's [scanner-sharing](https://github.com/cyanfish/naps2/blob/master/NAPS2.Sdk.Samples/NetworkSharingSample.cs) server uses ESCL, which is a [standard](https://mopria.org/mopria-escl-specification) HTTP protocol and can be used from a web browser with JavaScript or TypeScript.
+
+See the [naps2-webscan](https://github.com/cyanfish/naps2-webscan) project for example code to scan from a browser.
+
 ## Drivers
 
 |           | Windows | Mac | Linux |
