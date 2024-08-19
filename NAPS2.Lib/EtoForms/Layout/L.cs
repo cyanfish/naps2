@@ -67,6 +67,7 @@ public static class L
             Panel2MinimumSize = controller.GetSizeFor(right).Width,
             FixedPanel = SplitterFixedPanel.Panel1
         };
+        splitter.Position = splitter.Panel1MinimumSize;
         splitter.PositionChanged += (_, _) =>
         {
             left.Width = splitter.Position;
@@ -76,6 +77,8 @@ public static class L
         {
             vis.IsVisibleChanged += (_, _) => splitter.Visible = vis.IsVisible;
         }
-        return L.Overlay(splitter, L.Row(left, right).Spacing(1));
+        var splitterPanel = new Panel();
+        splitterPanel.Content = splitter;
+        return L.Overlay(splitterPanel, L.Row(left, right).Spacing(3));
     }
 }

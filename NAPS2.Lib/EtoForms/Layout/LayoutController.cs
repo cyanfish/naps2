@@ -30,6 +30,8 @@ public class LayoutController
         }
     }
 
+    public Control Container => _layout;
+
     public int RootPadding { get; set; } = 10;
     public int DefaultLabelSpacing { get; set; } = 2;
     public int DefaultSpacing { get; set; } = 6;

@@ -79,7 +79,7 @@ public class WinFormsDesktopForm : DesktopForm
         LoadToolStripLocation();
 
         NativeListView.TabIndex = 7;
-        NativeListView.Dock = WF.DockStyle.Fill;
+        NativeListView.BorderStyle = WF.BorderStyle.None;
         NativeListView.Focus();
     }
 
@@ -120,13 +120,18 @@ public class WinFormsDesktopForm : DesktopForm
         _mainToolStrip.ShowItemToolTips = false;
         _mainToolStrip.TabStop = true;
         _mainToolStrip.ImageScalingSize = new Size(32, 32);
-        _mainToolStrip.ParentChanged += (_, _) => _toolbarFormatter.RelayoutToolbar(_mainToolStrip);
+        _mainToolStrip.ParentChanged += (_, _) =>
+        {
+            _toolbarFormatter.RelayoutToolbar(_mainToolStrip);
+            LayoutController.Invalidate();
+        };
 
         _profilesToolStrip = new WF.ToolStrip();
         _profilesToolStrip.ShowItemToolTips = false;
         _profilesToolStrip.TabStop = true;
         _profilesToolStrip.ImageScalingSize = new Size(16, 16);
         _profilesToolStrip.Location = new Point(0, 100);
+        _profilesToolStrip.ParentChanged += (_, _) => LayoutController.Invalidate();
     }
 
     public override void PlaceProfilesToolbar()
@@ -175,8 +180,10 @@ public class WinFormsDesktopForm : DesktopForm
         }
     }
 
-    protected override LayoutElement GetMainContent()
+    protected override void BuildLayout()
     {
+        base.BuildLayout();
+
         _container = new WF.ToolStripContainer();
         _container.TopToolStripPanel.Controls.Add(_mainToolStrip);
         PlaceProfilesToolbar();
@@ -186,11 +193,11 @@ public class WinFormsDesktopForm : DesktopForm
             WinFormsHacks.SetControlStyle(panel, WF.ControlStyles.Selectable, true);
         }
 
-        var wfContent = _listView.Control.ToNative();
+        var wfContent = LayoutController.Container.ToNative();
         wfContent.Dock = WF.DockStyle.Fill;
+        var etoContainer = _container.ToEto();
+        Content = etoContainer;
         _container.ContentPanel.Controls.Add(wfContent);
-
-        return _container.ToEto();
     }
 
     protected override void SetThumbnailSpacing(int thumbnailSize)

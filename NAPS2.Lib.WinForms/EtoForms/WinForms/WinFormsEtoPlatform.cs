@@ -1,13 +1,11 @@
 using System.Drawing.Imaging;
 using System.Globalization;
-using System.Reflection;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms;
 using Eto.WinForms.Forms.Controls;
 using NAPS2.EtoForms.Layout;
-using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gdi;
 using SD = System.Drawing;
@@ -182,6 +180,22 @@ public class WinFormsEtoPlatform : EtoPlatform
                 WF.TextFormatFlags.WordBreak).ToEto();
         }
         return base.GetWrappedSize(control, defaultWidth);
+    }
+
+    public override Size GetClientSize(Window window, bool excludeToolbars = false)
+    {
+        var size = base.GetClientSize(window);
+        if (excludeToolbars && window.Content is { ControlObject: WF.ToolStripContainer container })
+        {
+            var top = container.TopToolStripPanel.Controls.Cast<WF.ToolStrip>();
+            var bottom = container.BottomToolStripPanel.Controls.Cast<WF.ToolStrip>();
+            var left = container.LeftToolStripPanel.Controls.Cast<WF.ToolStrip>();
+            var right = container.RightToolStripPanel.Controls.Cast<WF.ToolStrip>();
+            size -= new Size(
+                left.Concat(right).Sum(x => x.Width),
+                top.Concat(bottom).Sum(x => x.Height));
+        }
+        return size;
     }
 
     public override Control CreateContainer()
