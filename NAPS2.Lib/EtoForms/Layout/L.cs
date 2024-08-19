@@ -77,8 +77,6 @@ public static class L
         {
             vis.IsVisibleChanged += (_, _) => splitter.Visible = vis.IsVisible;
         }
-        var splitterPanel = new Panel();
-        splitterPanel.Content = splitter;
-        return L.Overlay(splitterPanel, L.Row(left, right).Spacing(3));
+        return L.Overlay(splitter, L.Row(left, right).Spacing(3));
     }
 }

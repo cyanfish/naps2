@@ -237,5 +237,5 @@ public class MacDesktopForm : DesktopForm
         _zoomSlider!.DoubleValue = ThumbnailSizes.SizeToCurve(_thumbnailController.VisibleSize);
     }
 
-    protected override LayoutElement GetZoomButtons() => C.Spacer();
+    protected override LayoutElement GetControlButtons() => C.Spacer();
 }

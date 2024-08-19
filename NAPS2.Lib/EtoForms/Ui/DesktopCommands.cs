@@ -324,7 +324,7 @@ public class DesktopCommands
         ToggleSidebar = new ActionCommand(() => _desktopFormProvider.DesktopForm.ToggleSidebar())
         {
             Text = UiStrings.ToggleSidebar,
-            Image = iconProvider.GetIcon("sidebar")
+            Image = iconProvider.GetIcon("application_side_list")
         };
     }
 

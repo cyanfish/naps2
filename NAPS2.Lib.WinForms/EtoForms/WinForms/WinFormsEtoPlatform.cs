@@ -237,7 +237,7 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override void ConfigureZoomButton(Button button)
     {
-        button.Size = new Size(23, 23);
+        button.Size = new Size(25, 25);
         var wfButton = (WF.Button) button.ToNative();
         wfButton.AccessibleName = button.Text;
         wfButton.Text = "";

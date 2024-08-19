@@ -89,7 +89,7 @@ public class WinFormsDesktopForm : DesktopForm
         base.OnShown(e);
     }
 
-    protected override LayoutElement GetZoomButtons()
+    protected override LayoutElement GetControlButtons()
     {
         // Disabled buttons don't prevent click events from being sent to the listview below the button, so without this
         // "mouse catcher" control you could e.g. spam click zoom out until it's maxed and then accidentally keep
@@ -100,9 +100,12 @@ public class WinFormsDesktopForm : DesktopForm
             Size = new Size(45, 23),
             FlatStyle = WF.FlatStyle.Flat
         };
-        return L.Overlay(
-            L.Row(mouseCatcher.ToEto().AlignTrailing()),
-            base.GetZoomButtons()
+        return L.Row(
+            GetSidebarButton(),
+            L.Overlay(
+                L.Row(mouseCatcher.ToEto().AlignTrailing()),
+                GetZoomButtons()
+            )
         );
     }
 

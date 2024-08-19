@@ -469,4 +469,7 @@
   <data name="shape_align_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_right.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="application_side_list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\application_side_list.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

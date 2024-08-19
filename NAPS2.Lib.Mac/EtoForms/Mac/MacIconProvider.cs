@@ -44,7 +44,7 @@ public class MacIconProvider : IIconProvider
         { "text_align_justify_small", "text.justify" },
         { "large_tiles_small", "square.grid.2x2" },
         { "exclamation_small", "exclamationmark.triangle" },
-        { "sidebar", "sidebar.left" },
+        { "application_side_list", "sidebar.left" },
         // TODO: Consider these
         // { "ask", "questionmark" },
         // { "network_ip", "wifi.router" },

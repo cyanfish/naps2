@@ -122,6 +122,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] application_side_list {
+            get {
+                object obj = ResourceManager.GetObject("application_side_list", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] arrow_down {
             get {
                 object obj = ResourceManager.GetObject("arrow_down", resourceCulture);

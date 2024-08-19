@@ -121,11 +121,11 @@ public abstract class DesktopForm : EtoFormBase
             LayoutController,
             _sidebar.CreateView(this),
             L.Overlay(
-                GetMainContent(),
+                _listView.Control,
                 L.Column(
                     C.Filler(),
                     L.Row(
-                        GetZoomButtons(),
+                        GetControlButtons(),
                         C.Filler(),
                         _notificationArea.Content)
                 ).Padding(10)
@@ -432,9 +432,19 @@ public abstract class DesktopForm : EtoFormBase
         return menuItem;
     }
 
-    protected virtual LayoutElement GetMainContent() => _listView.Control;
+    protected virtual LayoutElement GetControlButtons()
+    {
+        return L.Row(GetSidebarButton(), GetZoomButtons());
+    }
 
-    protected virtual LayoutElement GetZoomButtons()
+    protected LayoutElement GetSidebarButton()
+    {
+        var toggleSidebar = C.ImageButton(Commands.ToggleSidebar);
+        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar);
+        return toggleSidebar.AlignTrailing();
+    }
+
+    protected LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
         EtoPlatform.Current.ConfigureZoomButton(zoomIn);
