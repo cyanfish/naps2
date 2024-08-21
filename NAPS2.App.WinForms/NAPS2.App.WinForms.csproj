@@ -1,28 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8-windows;net462</TargetFrameworks>
+    <TargetFramework>net9-windows</TargetFramework>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <OutputType>WinExe</OutputType>
-    <AppConfig>app.config</AppConfig>
-    <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>
     <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
-<!--    <PublishSingleFile>true</PublishSingleFile>-->
-<!--    <SelfContained>true</SelfContained>-->
-<!--    <RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
-<!--    <ValidateExecutableReferencesMatchSelfContained>false</ValidateExecutableReferencesMatchSelfContained>-->
-<!--    <PublishTrimmed>true</PublishTrimmed>-->
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>partial</TrimMode>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
-
-    <!--
-    We reference the 32-bit worker directly so the EXE is included in the output.
-    -->
-    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
@@ -33,10 +26,7 @@
     <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.1.0" />
     <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.2.0" />
 
-    <ProjectReference Include="..\NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
     <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
-
-    <PackageReference Include="LargeAddressAware" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +34,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Link>appsettings.xml</Link>
       <TargetPath>appsettings.xml</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\NAPS2.App.Worker\bin\Release\net9-windows\win-x86\publish\NAPS2.Worker*.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Link>NAPS2.Worker.exe</Link>
+      <TargetPath>NAPS2.Worker.exe</TargetPath>
     </ContentWithTargetPath>
   </ItemGroup>
 </Project>

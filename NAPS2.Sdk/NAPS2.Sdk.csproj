@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6;net462</TargetFrameworks>
-    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Linux')) and '$(Configuration)' != 'DebugNoMac'">
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">
       $(TargetFrameworks);net8-macos10.15
     </TargetFrameworks>
     <Nullable>enable</Nullable>
