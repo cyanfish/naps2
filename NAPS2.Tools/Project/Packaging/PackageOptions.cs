@@ -14,9 +14,6 @@ public class PackageOptions : OptionsBase
     [Option("name", Required = false, HelpText = "Name to be appended to the package filename")]
     public string? Name { get; set; }
 
-    [Option("build", Required = false, HelpText = "Build before packaging")]
-    public bool Build { get; set; }
-
     [Option("nopre", Required = false, HelpText = "Skip pre-packaging steps")]
     public bool NoPre { get; set; }
 
@@ -26,11 +23,6 @@ public class PackageOptions : OptionsBase
     [Option("nonotarize", Required = false, HelpText = "Skip notarization only")]
     public bool NoNotarize { get; set; }
 
-    [Option("debug", Required = false, HelpText = "Set DEBUG compile-time constant. Requires --build.")]
-    public bool Debug { get; set; }
-
     [Option("xcompile", Required = false, HelpText = "Cross-compile packages where possible (e.g. build linux-arm64 on linux-x64)")]
     public bool XCompile { get; set; }
-
-    // TODO: Add net target (net462/net8/net8-windows etc.)
 }

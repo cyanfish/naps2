@@ -1,32 +1,28 @@
 using System.Text;
-using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
 
 public static class InnoSetupPackager
 {
-    public static void PackageExe(PackageInfo packageInfo, bool noSign)
+    public static void PackageExe(Func<PackageInfo> pkgInfoFunc)
     {
-        if (!noSign)
-        {
-            Output.Verbose("Signing contents");
-            WindowsSigning.SignContents(packageInfo);
-        }
+        Output.Verbose("Building binaries");
+        Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
+        Cli.Run("dotnet", "clean NAPS2.App.WinForms -c Release");
+        Cli.Run("dotnet", "clean NAPS2.App.Console -c Release");
+        Cli.Run("dotnet", "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false");
+        Cli.Run("dotnet", "publish NAPS2.App.WinForms -c Release /p:DebugType=None /p:DebugSymbols=false");
+        Cli.Run("dotnet", "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false");
 
-        var exePath = packageInfo.GetPath("exe");
+        var pkgInfo = pkgInfoFunc();
+        var exePath = pkgInfo.GetPath("exe");
         Output.Info($"Packaging exe installer: {exePath}");
 
-        var innoDefPath = GenerateInnoDef(packageInfo);
+        var innoDefPath = GenerateInnoDef(pkgInfo);
 
         // TODO: Use https://github.com/DomGries/InnoDependencyInstaller for .net dependency
         var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/Inno Setup 6/iscc.exe");
         Cli.Run(iscc, $"\"{innoDefPath}\"");
-
-        if (!noSign)
-        {
-            Output.Verbose("Signing installer");
-            WindowsSigning.SignFile(exePath);
-        }
 
         Output.OperationEnd($"Packaged exe installer: {exePath}");
     }
@@ -42,15 +38,9 @@ public static class InnoSetupPackager
         template = template.Replace("; !defs", defLines.ToString());
 
         var arch = new StringBuilder();
-        if (packageInfo.Platform is Platform.Win64 or Platform.Win)
-        {
-            arch.AppendLine("ArchitecturesInstallIn64BitMode=x64");
-            template = template.Replace("; !clean32", @"Type: filesandordirs; Name: ""{commonpf32}\NAPS2""");
-        }
-        if (packageInfo.Platform == Platform.Win64)
-        {
-            arch.AppendLine("ArchitecturesAllowed=x64");
-        }
+        arch.AppendLine("ArchitecturesInstallIn64BitMode=x64");
+        template = template.Replace("; !clean32", @"Type: filesandordirs; Name: ""{commonpf32}\NAPS2""");
+        arch.AppendLine("ArchitecturesAllowed=x64");
         template = template.Replace("; !arch", arch.ToString());
 
         var fileLines = new StringBuilder();

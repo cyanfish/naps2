@@ -6,7 +6,6 @@ public static class MsiInstaller
 {
     public static void Install(Platform platform, string version, bool run)
     {
-        ProjectHelper.DeleteInstallationFolder(Platform.Win32);
         ProjectHelper.DeleteInstallationFolder(Platform.Win64);
 
         var msiPath = ProjectHelper.GetPackagePath("msi", platform, version);

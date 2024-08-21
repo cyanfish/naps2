@@ -6,7 +6,6 @@ public static class ExeInstaller
 {
     public static void Install(Platform platform, string version, bool run)
     {
-        ProjectHelper.DeleteInstallationFolder(Platform.Win32);
         ProjectHelper.DeleteInstallationFolder(Platform.Win64);
 
         var exePath = ProjectHelper.GetPackagePath("exe", platform, version);

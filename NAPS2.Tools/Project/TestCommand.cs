@@ -6,7 +6,6 @@ public class TestCommand : ICommand<TestOptions>
 {
     public int Run(TestOptions opts)
     {
-        // TODO: Framework options (e.g. "-f net462")
         var arch = RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant();
         var depsRootPath = OperatingSystem.IsMacOS()
             ? $"NAPS2.App.Mac/bin/Debug/net8-macos10.15/osx-{arch}"

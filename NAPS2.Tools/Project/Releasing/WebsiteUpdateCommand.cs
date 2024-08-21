@@ -46,8 +46,8 @@ public class WebsiteUpdateCommand : ICommand<WebsiteUpdateOptions>
                 var sha1 = SHA1.Create();
 
                 // TODO: All files? These are the only ones we need for auto update
-                var exePath = ProjectHelper.GetPackagePath("exe", Platform.Win, opts.Version);
-                var zipPath = ProjectHelper.GetPackagePath("zip", Platform.Win, opts.Version);
+                var exePath = ProjectHelper.GetPackagePath("exe", Platform.Win64, opts.Version);
+                var zipPath = ProjectHelper.GetPackagePath("zip", Platform.Win64, opts.Version);
 
                 foreach (var path in new[] { exePath, zipPath })
                 {

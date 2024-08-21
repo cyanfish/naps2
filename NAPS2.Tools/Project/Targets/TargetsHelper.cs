@@ -6,8 +6,6 @@ public static class TargetsHelper
 {
     public static string PackageName(this Platform platform) => platform switch
     {
-        Platform.Win => "win",
-        Platform.Win32 => "win-x86",
         Platform.Win64 => "win-x64",
         Platform.Mac => "mac-univ",
         Platform.MacIntel => "mac-x64",
@@ -60,43 +58,21 @@ public static class TargetsHelper
                 bool allPlat = string.IsNullOrEmpty(platform) || platform == "all";
                 if ((allPkg || packageType == "exe") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
                 {
-                    if (allPlat || platform == "win")
-                    {
-                        yield return new PackageTarget(PackageType.Exe, Platform.Win);
-                    }
-                    // Only build 32/64-bit exe installers if explicitly requested
-                    if (platform == "win32")
-                    {
-                        yield return new PackageTarget(PackageType.Exe, Platform.Win32);
-                    }
-                    if (platform == "win64")
+                    if (allPlat || platform == "win" || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Exe, Platform.Win64);
                     }
                 }
                 if ((allPkg || packageType == "msi") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
                 {
-                    if (allPlat || platform == "win32")
-                    {
-                        yield return new PackageTarget(PackageType.Msi, Platform.Win32);
-                    }
-                    if (allPlat || platform == "win64")
+                    if (allPlat || platform == "win" || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Msi, Platform.Win64);
                     }
                 }
                 if ((allPkg || packageType == "zip") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
                 {
-                    if (allPlat || platform == "zip")
-                    {
-                        yield return new PackageTarget(PackageType.Zip, Platform.Win);
-                    }
-                    // Only build 32/64-bit zip archives if explicitly requested
-                    if (platform == "win32")
-                    {
-                        yield return new PackageTarget(PackageType.Zip, Platform.Win32);
-                    }
-                    if (platform == "win64")
+                    if (allPlat || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Zip, Platform.Win64);
                     }

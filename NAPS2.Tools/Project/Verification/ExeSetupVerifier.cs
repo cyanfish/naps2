@@ -28,7 +28,7 @@ public static class ExeSetupVerifier
         public UpgradeTest(Platform platform)
         {
             _platform = platform;
-            _install32 = ProjectHelper.GetInstallationFolder(Platform.Win32);
+            _install32 = Path.Combine(Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%"), "NAPS2");
             _testFilePath = Path.Combine(_install32, "_verify_testfile.exe");
             Directory.CreateDirectory(_install32);
             File.WriteAllText(_testFilePath, "");
@@ -40,7 +40,7 @@ public static class ExeSetupVerifier
             {
                 throw new Exception("Verification error: Exe installer did not delete old files");
             }
-            if (_platform is Platform.Win or Platform.Win64 && Directory.Exists(_install32))
+            if (Directory.Exists(_install32))
             {
                 throw new Exception("Verification error: Exe installer did not delete old install dir");
             }
