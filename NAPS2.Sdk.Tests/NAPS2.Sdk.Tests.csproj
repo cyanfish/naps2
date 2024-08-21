@@ -20,7 +20,7 @@
     <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
     <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
-    <ProjectReference Include="..\NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" Condition="'$(TargetFramework)' == 'net8' or '$(TargetFramework)' == 'net8-windows'" />
+    <ProjectReference Include="..\NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" />
     <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
 
     <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.1.0" />
