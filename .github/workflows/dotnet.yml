@@ -26,8 +26,6 @@ jobs:
         dotnet-version: 9.0.x
     - name: Install workloads
       run: dotnet workload install macos
-    - name: Install dependencies
-      run: dotnet restore
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
     # For Mac we need to build a second time to make sure native deps are present. TODO: Figure out why
