@@ -10,7 +10,7 @@ public class AppiumTestData : IEnumerable<object[]>
 #if NET6_0_OR_GREATER
         if (OperatingSystem.IsWindows())
         {
-            yield return new object[] { new WinNet462AppTestTarget() };
+            yield return new object[] { new WindowsAppTestTarget() };
         }
         else if (OperatingSystem.IsMacOS())
         {
@@ -21,7 +21,7 @@ public class AppiumTestData : IEnumerable<object[]>
             // No Appium impl yet
         }
 #else
-        yield return new object[] { new WinNet462AppTestTarget() };
+        yield return new object[] { new WindowsAppTestTarget() };
 #endif
     }
 

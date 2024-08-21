@@ -1,6 +1,6 @@
 namespace NAPS2.App.Tests.Targets;
 
-public class WinNet462AppTestTarget : IAppTestTarget
+public class WindowsAppTestTarget : IAppTestTarget
 {
     public AppTestExe Console => GetAppTestExe("NAPS2.App.Console", "NAPS2.Console.exe", null);
     public AppTestExe Gui => GetAppTestExe("NAPS2.App.WinForms", "NAPS2.exe", null);
@@ -10,10 +10,10 @@ public class WinNet462AppTestTarget : IAppTestTarget
     private AppTestExe GetAppTestExe(string project, string exeName, string testRootSubPath)
     {
         return new AppTestExe(
-            Path.Combine(AppTestHelper.SolutionRoot, project, "bin", "Debug", "net462"),
+            Path.Combine(AppTestHelper.SolutionRoot, project, "bin", "Debug", "net9-windows", "win-x64"),
             exeName,
             TestRootSubPath: testRootSubPath);
     }
 
-    public override string ToString() => "Windows (net462)";
+    public override string ToString() => "Windows";
 }
