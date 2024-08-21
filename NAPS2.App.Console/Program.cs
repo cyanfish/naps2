@@ -1,4 +1,5 @@
-﻿using NAPS2.EntryPoints;
+﻿using System.Runtime;
+using NAPS2.EntryPoints;
 
 namespace NAPS2.Console;
 
@@ -10,7 +11,11 @@ static class Program
     [STAThread]
     static int Main(string[] args)
     {
-        // Use reflection to avoid antivirus false positives (yes, really)
-        return (int) typeof(WindowsConsoleEntryPoint).GetMethod("Run")!.Invoke(null, new object[] { args })!;
+        var profilesPath = Path.Combine(Paths.AppData, "jit");
+        Directory.CreateDirectory(profilesPath);
+        ProfileOptimization.SetProfileRoot(profilesPath);
+        ProfileOptimization.StartProfile("naps2.console.jit");
+
+        return WindowsConsoleEntryPoint.Run(args);
     }
 }
