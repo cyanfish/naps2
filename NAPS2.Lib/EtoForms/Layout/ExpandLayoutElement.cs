@@ -13,6 +13,6 @@ public class ExpandLayoutElement : LayoutElement
 
     public override void DoLayout(LayoutContext context, RectangleF bounds) => throw new NotSupportedException();
 
-    public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds) =>
+    protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds) =>
         throw new NotSupportedException();
 }

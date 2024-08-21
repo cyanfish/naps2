@@ -26,5 +26,16 @@ public abstract class LayoutElement
 
     public abstract void DoLayout(LayoutContext context, RectangleF bounds);
 
-    public abstract SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds);
+    public SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
+    {
+        if (context.PreferredSizeCache.TryGetValue(this, out var size))
+        {
+            return size;
+        }
+        size = GetPreferredSizeCore(context, parentBounds);
+        context.PreferredSizeCache[this] = size;
+        return size;
+    }
+
+    protected abstract SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds);
 }

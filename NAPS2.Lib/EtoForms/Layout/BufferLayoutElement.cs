@@ -26,7 +26,7 @@ public class BufferLayoutElement : LayoutElement
                 bounds.Height - Top - Bottom));
     }
 
-    public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
+    protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
         return Element.GetPreferredSize(context,
                    new RectangleF(parentBounds.X + Left, parentBounds.Top + Top, parentBounds.Width - Left - Right,

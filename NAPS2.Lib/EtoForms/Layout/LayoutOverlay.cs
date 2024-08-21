@@ -28,7 +28,7 @@ public class LayoutOverlay : LayoutContainer
         }
     }
 
-    public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
+    protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
         bool inOverlay = false;
         SizeF size = SizeF.Empty;

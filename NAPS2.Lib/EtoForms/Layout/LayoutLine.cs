@@ -99,7 +99,7 @@ public abstract class LayoutLine : LayoutContainer
         childOrigin = UpdateOrthogonalPosition(cellOrigin, alignmentOffset);
     }
 
-    public override SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
+    protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
         var childContext = GetChildContext(context, parentBounds);
         if (childContext.ParentVisibility?.IsVisible == false)
