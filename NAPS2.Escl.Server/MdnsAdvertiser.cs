@@ -5,14 +5,13 @@ namespace NAPS2.Escl.Server;
 
 public class MdnsAdvertiser : IDisposable
 {
-    private readonly ServiceDiscovery _sd;
     private readonly Dictionary<string, ServiceProfile> _serviceProfiles = new();
     private readonly Dictionary<string, ServiceProfile> _serviceProfiles2 = new();
 
-    public MdnsAdvertiser()
-    {
-        _sd = new ServiceDiscovery();
-    }
+    // Initializing ServiceDiscovery is slow (it queries network interfaces) so use lazily
+    private readonly Lazy<ServiceDiscovery> _sd = new(() => new ServiceDiscovery());
+
+    private ServiceDiscovery ServiceDiscovery => _sd.Value;
 
     public void AdvertiseDevice(EsclDeviceConfig deviceConfig, bool hasHttp, bool hasHttps)
     {
@@ -67,20 +66,20 @@ public class MdnsAdvertiser : IDisposable
         service.HostName = hostName;
 
         // Send the full set of HTTP/HTTPS records to anyone currently listening
-        _sd.Announce(service);
+        ServiceDiscovery.Announce(service);
 
         // Set up to respond to _uscan/_uscans queries with our records.
-        _sd.Advertise(service);
+        ServiceDiscovery.Advertise(service);
         if (hasHttp && hasHttps)
         {
             // Add _uscans to the available services (_uscan was already mapped in Advertise())
-            _sd.NameServer.Catalog[ServiceDiscovery.ServiceName].Resources.Add(new PTRRecord
+            ServiceDiscovery.NameServer.Catalog[ServiceDiscovery.ServiceName].Resources.Add(new PTRRecord
                 { Name = ServiceDiscovery.ServiceName, DomainName = httpsProfile.QualifiedServiceName });
             // Cross-reference _uscan to the HTTPS records
-            _sd.NameServer.Catalog[httpProfile.QualifiedServiceName].Resources.Add(new PTRRecord
+            ServiceDiscovery.NameServer.Catalog[httpProfile.QualifiedServiceName].Resources.Add(new PTRRecord
                 { Name = httpsProfile.QualifiedServiceName, DomainName = httpsProfile.FullyQualifiedName });
             // Add a _uscans reference with both HTTP and HTTPS records
-            _sd.NameServer.Catalog[httpsProfile.QualifiedServiceName] = new Node
+            ServiceDiscovery.NameServer.Catalog[httpsProfile.QualifiedServiceName] = new Node
             {
                 Name = httpsProfile.QualifiedServiceName, Authoritative = true, Resources =
                 {
@@ -134,19 +133,19 @@ public class MdnsAdvertiser : IDisposable
         }
         if (_serviceProfiles.ContainsKey(uuid))
         {
-            _sd.Unadvertise(_serviceProfiles[uuid]);
+            ServiceDiscovery.Unadvertise(_serviceProfiles[uuid]);
             _serviceProfiles.Remove(uuid);
         }
         if (_serviceProfiles2.ContainsKey(uuid))
         {
-            _sd.Unadvertise(_serviceProfiles2[uuid]);
+            ServiceDiscovery.Unadvertise(_serviceProfiles2[uuid]);
             _serviceProfiles2.Remove(uuid);
         }
     }
 
     public void Dispose()
     {
-        _sd.Unadvertise();
-        _sd.Dispose();
+        ServiceDiscovery.Unadvertise();
+        ServiceDiscovery.Dispose();
     }
 }
