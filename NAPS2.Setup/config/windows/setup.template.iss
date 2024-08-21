@@ -71,6 +71,8 @@ end;
 [InstallDelete]     
 Type: files; Name: "{app}\*.exe"
 Type: files; Name: "{app}\*.exe.config"
+Type: files; Name: "{app}\*.dll"
+Type: files; Name: "{app}\*.json"
 Type: filesandordirs; Name: "{app}\lib"
 ; !clean32
 

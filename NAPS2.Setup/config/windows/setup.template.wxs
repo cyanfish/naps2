@@ -31,7 +31,7 @@
     </Feature>
 
     <Property Id="INNOINSTALLATION" Value="NOTEXIST">
-      <DirectorySearch Id="CheckFileDir" Path="[ProgramFiles{{ !64 }}64{{ !~64 }}Folder]NAPS2" Depth="0">
+      <DirectorySearch Id="CheckFileDir" Path="[ProgramFiles64Folder]NAPS2" Depth="0">
         <FileSearch Id="CheckFile" Name="unins000.exe" />
       </DirectorySearch>
     </Property>
@@ -41,7 +41,7 @@
     </Condition>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFiles{{ !64 }}64{{ !~64 }}Folder">
+      <Directory Id="ProgramFiles64Folder">
         <Directory Id="INSTALLFOLDER" Name="NAPS2">
           <Directory Id="LIBFOLDER" Name="lib">
             <Directory Id="LIBWIN32FOLDER" Name="_win32" />
