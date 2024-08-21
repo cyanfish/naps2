@@ -33,6 +33,8 @@ ShowLanguageDialog=yes
 UsePreviousLanguage=no
 LanguageDetectionMethod=uilanguage
 WizardStyle=modern
+; Require Windows 10 1607+
+MinVersion=10.0.14393
 
 DefaultDirName={commonpf}\{#AppShortName}
 DefaultGroupName={#AppShortName}
