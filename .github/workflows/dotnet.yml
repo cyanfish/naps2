@@ -28,9 +28,5 @@ jobs:
       run: dotnet workload install macos
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
-    # For Mac we need to build a second time to make sure native deps are present. TODO: Figure out why
-    - name: Build 2
-      if: matrix.os == 'macos-12'
-      run: dotnet run --project NAPS2.Tools -- build debug -v
     - name: Test
       run: dotnet run --project NAPS2.Tools -- test -v --nogui
