@@ -37,8 +37,9 @@ public class CommonModule : Module
 
         // Config
         // TODO: Make this a usable path on Mac/Linux
-        builder.Register(_ => new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
-            Path.Combine(Paths.AppData, "config.xml"))).SingleInstance();
+        var config = new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
+            Path.Combine(Paths.AppData, "config.xml"));
+        builder.RegisterInstance(config);
 
         // Remoting
         builder.Register<IWorkerFactory>(_ => WorkerFactory.CreateDefault()).SingleInstance();
@@ -50,11 +51,9 @@ public class CommonModule : Module
         builder.RegisterInstance(ProcessCoordinator.CreateDefault());
 
         // Logging
-        builder.Register<ILogger>(ctx =>
-        {
-            var config = ctx.Resolve<Naps2Config>();
-            return NLogConfig.CreateLogger(() => config.Get(c => c.EnableDebugLogging));
-        }).SingleInstance();
+        var lazyLogger = new LazyLogger(() =>
+            NLogConfig.CreateLogger(() => config.Get(c => c.EnableDebugLogging)));
+        builder.RegisterInstance<ILogger>(lazyLogger);
 
         // Misc
         builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();
