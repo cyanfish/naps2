@@ -11,7 +11,7 @@
     <key>CFBundleShortVersionString</key>
     <string>7.5.2</string>
     <key>LSMinimumSystemVersion</key>
-    <string>10.15</string>
+    <string>12.0</string>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>NSHumanReadableCopyright</key>
