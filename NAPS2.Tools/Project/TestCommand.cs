@@ -8,7 +8,7 @@ public class TestCommand : ICommand<TestOptions>
     {
         var arch = RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant();
         var depsRootPath = OperatingSystem.IsMacOS()
-            ? $"NAPS2.App.Mac/bin/Debug/net8-macos10.15/osx-{arch}"
+            ? $"NAPS2.App.Mac/bin/Debug/net8-macos/osx-{arch}"
             : OperatingSystem.IsLinux()
                 ? $"NAPS2.App.Gtk/bin/Debug/net8/linux-{arch}"
                 : $"NAPS2.App.WinForms/bin/Debug/net9-windows/win-{arch}";

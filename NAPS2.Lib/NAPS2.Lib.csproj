@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net8</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-      $(TargetFrameworks);net8-macos10.15
+      $(TargetFrameworks);net8-macos
     </TargetFrameworks>
     <Nullable>enable</Nullable>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
@@ -17,7 +17,7 @@
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net8-macos10.15'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8-macos'">
     <DefineConstants>MAC</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release-Msi'">

@@ -14,13 +14,7 @@ jobs:
       if: matrix.os == 'ubuntu-24.04'
       run: sudo apt-get install -y fonts-liberation2 fonts-noto-core fonts-noto-cjk
     - uses: actions/checkout@v4
-    - name: Setup .NET 8
-      if: matrix.os == 'macos-14'
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
     - name: Setup .NET 9
-      if: matrix.os != 'macos-14'
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x

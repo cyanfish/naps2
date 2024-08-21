@@ -14,7 +14,7 @@ public static class MacPackager
         Output.Info($"Packaging installer: {pkgPath}");
 
         Output.Verbose("Building bundle");
-        var basePath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "bin", "Release", "net8-macos10.15");
+        var basePath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "bin", "Release", "net8-macos");
         string bundlePath = packageInfo.Platform switch
         {
             Platform.Mac => Path.Combine(basePath, "NAPS2.app"),

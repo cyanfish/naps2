@@ -24,7 +24,7 @@ public enum Driver
 
     /// <summary>
     /// Use an Apple ImageCaptureCore driver (Mac-only). You will also need to compile against a macOS framework target
-    /// (e.g net8-macos10.15) to use this driver type.
+    /// (e.g net8-macos) to use this driver type.
     /// </summary>
     Apple,
 

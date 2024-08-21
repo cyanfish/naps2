@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>net6</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-            $(TargetFrameworks);net8-macos10.15
+            $(TargetFrameworks);net8-macos
         </TargetFrameworks>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -35,7 +35,7 @@
         <Using Include="MonoMac.MobileCoreServices" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net8-macos10.15'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8-macos'">
         <Using Include="AppKit" />
         <Using Include="CoreGraphics" />
         <Using Include="Foundation" />
