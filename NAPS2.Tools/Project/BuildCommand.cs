@@ -10,6 +10,11 @@ public class BuildCommand : ICommand<BuildOptions>
         {
             Cli.Run("dotnet", "publish NAPS2.Sdk.Worker/NAPS2.Sdk.Worker.Build.csproj -c Release");
         }
+        if (OperatingSystem.IsWindows())
+        {
+            // TODO: Consider having debug/test builds look for NAPS2.Worker.exe in the NAPS2.App.Worker bin folder
+            Cli.Run("dotnet", "publish NAPS2.App.Worker -c Release");
+        }
         foreach (var target in TargetsHelper.EnumerateBuildTargets(opts.BuildType))
         {
             var config = GetConfig(target);
