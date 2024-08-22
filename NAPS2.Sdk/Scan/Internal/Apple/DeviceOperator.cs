@@ -30,7 +30,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     private readonly TaskCompletionSource _scanCompleteTcs = new();
     private TaskCompletionSource? _cancelTcs;
     private readonly TaskCompletionSource _closeTcs = new();
-    private readonly List<Task> _copyTasks = new();
+    private Task? _writeToCallback;
     private MemoryStream? _buffer;
 
     public DeviceOperator(ScanningContext scanningContext, ICScannerDevice device, DeviceReader reader,
@@ -125,51 +125,65 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         {
             _logger.LogDebug("DidScanToBandData buffer complete");
             var fullBuffer = _buffer;
-            _buffer = null;
-            var copyTask = Task.Run(() =>
+            var tcs = new TaskCompletionSource<IMemoryImage?>();
+            // Ensure sequencing is maintained when writing to the callback even if copy tasks finish out of order
+            _writeToCallback = (_writeToCallback ?? Task.CompletedTask).ContinueWith(async _ =>
             {
-                // We prefer to use the provided color profile for maximum color accuracy. If one isn't present we fall
-                // back to a direct bitwise copy if it's in a supported pixel format.
-                var (pixelFormat, subPixelType) = (data.PixelDataType, data.NumComponents, data.BitsPerComponent) switch
+                var image = await tcs.Task;
+                if (image != null)
                 {
-                    (ICScannerPixelDataType.BW, 1, 1) => (ImagePixelFormat.BW1, SubPixelType.Bit),
-                    (ICScannerPixelDataType.Gray, 1, 8) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
-                    (ICScannerPixelDataType.Rgb, 3, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
-                    (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgbn),
-                    _ => (ImagePixelFormat.Unknown, null)
-                };
-                _logger.LogDebug(
-                    "Image data: width {Width}, height {Height}, type {Type}, comp {Comp}, " +
-                    "bits/comp {BitsPerComp}, bits/pixel {BitsPerPixel}, bytes/row {BytesPerRow}, data len {DataLen}",
-                    data.FullImageWidth, data.FullImageHeight, data.PixelDataType, data.NumComponents,
-                    data.BitsPerComponent, data.BitsPerPixel, data.BytesPerRow, fullBuffer.Length);
-                if (data.ColorSyncProfilePath != null)
-                {
-                    _logger.LogDebug($"Flushing image with color sync profile {data.ColorSyncProfilePath}");
-                    FlushImageWithColorSpace(fullBuffer, data, subPixelType);
+                    _callback(image);
                 }
-                else if (pixelFormat != ImagePixelFormat.Unknown && subPixelType != null)
-                {
-                    _logger.LogDebug($"Flushing image with pixel format {pixelFormat}");
-                    FlushImageDirectly(fullBuffer, data, subPixelType, pixelFormat);
-                }
-                else
-                {
-                    _logger.LogError(
-                        "No color sync profile and unsupported ICC pixel format " +
-                        "{PixelDataType} {NumComponents} {BitsPerComponent}",
-                        data.PixelDataType, data.NumComponents, data.BitsPerComponent);
-                }
-                _scanEvents.PageStart();
             });
-            lock (this)
+            Task.Run(() =>
             {
-                _copyTasks.Add(copyTask);
-            }
+                try
+                {
+                    // We prefer to use the provided color profile for maximum color accuracy. If one isn't present we
+                    // fall back to a direct bitwise copy if it's in a supported pixel format.
+                    var (pixelFormat, subPixelType) =
+                        (data.PixelDataType, data.NumComponents, data.BitsPerComponent) switch
+                        {
+                            (ICScannerPixelDataType.BW, 1, 1) => (ImagePixelFormat.BW1, SubPixelType.Bit),
+                            (ICScannerPixelDataType.Gray, 1, 8) => (ImagePixelFormat.Gray8, SubPixelType.Gray),
+                            (ICScannerPixelDataType.Rgb, 3, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgb),
+                            (ICScannerPixelDataType.Rgb, 4, 8) => (ImagePixelFormat.RGB24, SubPixelType.Rgbn),
+                            _ => (ImagePixelFormat.Unknown, null)
+                        };
+                    _logger.LogDebug(
+                        "Image data: width {Width}, height {Height}, type {Type}, comp {Comp}, " +
+                        "bits/comp {BitsPerComp}, bits/pixel {BitsPerPixel}, bytes/row {BytesPerRow}, data len {DataLen}",
+                        data.FullImageWidth, data.FullImageHeight, data.PixelDataType, data.NumComponents,
+                        data.BitsPerComponent, data.BitsPerPixel, data.BytesPerRow, fullBuffer.Length);
+                    if (data.ColorSyncProfilePath != null)
+                    {
+                        _logger.LogDebug($"Flushing image with color sync profile {data.ColorSyncProfilePath}");
+                        FlushImageWithColorSpace(tcs, fullBuffer, data, subPixelType);
+                    }
+                    else if (pixelFormat != ImagePixelFormat.Unknown && subPixelType != null)
+                    {
+                        _logger.LogDebug($"Flushing image with pixel format {pixelFormat}");
+                        FlushImageDirectly(tcs, fullBuffer, data, subPixelType, pixelFormat);
+                    }
+                    else
+                    {
+                        _logger.LogError(
+                            "No color sync profile and unsupported ICC pixel format " +
+                            "{PixelDataType} {NumComponents} {BitsPerComponent}",
+                            data.PixelDataType, data.NumComponents, data.BitsPerComponent);
+                    }
+                    _scanEvents.PageStart();
+                }
+                finally
+                {
+                    tcs.TrySetResult(null);
+                }
+            });
         }
     }
 
-    private void FlushImageDirectly(MemoryStream fullBuffer, ICScannerBandData data, SubPixelType subPixelType,
+    private void FlushImageDirectly(TaskCompletionSource<IMemoryImage?> tcs, MemoryStream fullBuffer,
+        ICScannerBandData data, SubPixelType subPixelType,
         ImagePixelFormat pixelFormat)
     {
         var image = _scanningContext.ImageContext.Create(
@@ -183,10 +197,11 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
         _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
         image.SetResolution(_resolution, _resolution);
-        _callback(image);
+        tcs.SetResult(image);
     }
 
-    private void FlushImageWithColorSpace(MemoryStream fullBuffer, ICScannerBandData data, SubPixelType? subPixelType)
+    private void FlushImageWithColorSpace(TaskCompletionSource<IMemoryImage?> tcs, MemoryStream fullBuffer,
+        ICScannerBandData data, SubPixelType? subPixelType)
     {
         var colorSpace = CGColorSpace.CreateIccData(NSData.FromFile(data.ColorSyncProfilePath!));
         var w = (int) data.FullImageWidth;
@@ -221,13 +236,13 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         macImage.SetResolution(_resolution, _resolution);
         if (_scanningContext.ImageContext is MacImageContext)
         {
-            _callback(macImage);
+            tcs.SetResult(macImage);
         }
         else
         {
             var image = macImage.Copy(_scanningContext.ImageContext);
             macImage.Dispose();
-            _callback(image);
+            tcs.SetResult(image);
         }
     }
 
@@ -400,18 +415,16 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _logger.LogDebug("ICC: Requesting scan");
             _device.RequestScan();
             await _scanSuccessTcs.Task;
-            Task[] copyTasks;
-            lock (this)
-            {
-                copyTasks = _copyTasks.ToArray();
-            }
-            if (copyTasks.Length == 0 && _unit is ICScannerFunctionalUnitDocumentFeeder { DocumentLoaded: false })
+            if (_writeToCallback == null && _unit is ICScannerFunctionalUnitDocumentFeeder { DocumentLoaded: false })
             {
                 _logger.LogDebug("ICC: No pages in feeder");
                 throw new DeviceFeederEmptyException();
             }
-            _logger.LogDebug("ICC: Waiting for scan results");
-            await Task.WhenAll(copyTasks);
+            if (_writeToCallback != null)
+            {
+                _logger.LogDebug("ICC: Waiting for scan results");
+                await _writeToCallback;
+            }
             _logger.LogDebug("ICC: Closing session");
             _device.RequestCloseSession();
             await _closeTcs.Task;
