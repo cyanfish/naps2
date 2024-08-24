@@ -64,6 +64,10 @@ public class PackageCommand : ICommand<PackageOptions>
             PopulatePackageInfo(buildPath, platform, pkgInfo);
         }
 
+        var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net9-windows",
+            "win-x86", "publish");
+        pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
+
         var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net9-windows",
             "win-x64", "publish");
         AddPlatformFiles(pkgInfo, appBuildPath, "_win64");

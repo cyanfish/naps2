@@ -33,11 +33,6 @@
       <Link>appsettings.xml</Link>
       <TargetPath>appsettings.xml</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="..\NAPS2.App.Worker\bin\Release\net9-windows\win-x86\publish\NAPS2.Worker*.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Link>NAPS2.Worker.exe</Link>
-      <TargetPath>NAPS2.Worker.exe</TargetPath>
-    </ContentWithTargetPath>
   </ItemGroup>
 
 </Project>
