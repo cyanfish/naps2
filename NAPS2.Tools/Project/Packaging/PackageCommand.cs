@@ -202,8 +202,11 @@ public class PackageCommand : ICommand<PackageOptions>
         // Add each included file to the package contents
         foreach (var exeFile in dir.EnumerateFiles("*.exe"))
         {
-            if (exeFile.Name == "NAPS2.Worker.exe") continue;
-            pkgInfo.AddFile(exeFile, "");
+            if (excludeDlls.All(exclude => !exeFile.Name.StartsWith(exclude)))
+            {
+                if (exeFile.Name == "NAPS2.Worker.exe") continue;
+                pkgInfo.AddFile(exeFile, "");
+            }
         }
         foreach (var configFile in dir.EnumerateFiles("*.json"))
         {
