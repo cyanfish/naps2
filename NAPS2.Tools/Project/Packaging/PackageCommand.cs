@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 using NAPS2.Tools.Project.Targets;
 using Newtonsoft.Json;
@@ -108,21 +109,15 @@ public class PackageCommand : ICommand<PackageOptions>
             throw new Exception($"Could not find path: {dir.FullName}");
         }
 
-        // Parse the NAPS2.deps.json file to:
-        // (a) As part of our effort to relocate DLLs under the "lib" subfolder for a cleaner install directory,
-        //     get the map of subfolders where the prober will look for each DLL
-        // (b) Strip out dependencies we're "manually" trimming via "excludeDlls"
-        // TODO: Fix for NAPS2.Console
+        // Parse the NAPS2.deps.json file to strip out dependencies we're "manually" trimming via "excludeDlls"
         var depsFile = dir.EnumerateFiles("*.deps.json").First();
         JObject deps;
         using (var stream = depsFile.OpenText())
         using (var reader = new JsonTextReader(stream))
             deps = (JObject) JToken.ReadFrom(reader);
         var targets = (JObject) deps["targets"]![".NETCoreApp,Version=v9.0/win-x64"]!;
-        var dllMap = new Dictionary<string, string>();
         foreach (var pair in targets)
         {
-            var pathPrefix = pair.Key;
             var target = (JObject) pair.Value!;
             if (target.TryGetValue("runtime", out var runtime))
             {
@@ -134,7 +129,6 @@ public class PackageCommand : ICommand<PackageOptions>
                     {
                         ((JObject) runtime).Remove(runtimeDlls.Key);
                     }
-                    dllMap.Add(dllName, Path.Combine("lib", pathPrefix.Replace('/', Path.DirectorySeparatorChar), string.Join(Path.DirectorySeparatorChar, parts.SkipLast(1))));
                 }
             }
             if (target.TryGetValue("resources", out var resources))
@@ -157,11 +151,6 @@ public class PackageCommand : ICommand<PackageOptions>
                     {
                         ((JObject) native).Remove(runtimeDlls.Key);
                     }
-                    if (!runtimeDlls.Key.StartsWith("host"))
-                    {
-                        dllMap.Add(runtimeDlls.Key,
-                            Path.Combine("lib", pathPrefix.Replace('/', Path.DirectorySeparatorChar)));
-                    }
                 }
             }
         }
@@ -169,54 +158,25 @@ public class PackageCommand : ICommand<PackageOptions>
         using (JsonTextWriter writer = new JsonTextWriter(file) { Formatting = Formatting.Indented })
             deps.WriteTo(writer);
 
-        string GetProbingPath(string dll)
-        {
-            if (dll is "NAPS2.dll" or "NAPS2.Console.dll") return "";
-            return dllMap.GetValueOrDefault(dll, "");
-        }
-
-        string GetResourceProbingPath(string dll, string lang)
-        {
-            dll = dll.Replace(".resources.dll", ".dll");
-            if (dllMap.TryGetValue(dll, out var path))
-            {
-                return Path.Combine(path, lang);
-            }
-            return lang;
-        }
-
-        // Add additionalProbingPaths=["lib"] to the NAPS2.runtimeconfig.json file
-        // TODO: Fix for NAPS2.Console
-        var runtimeConfigFile = dir.EnumerateFiles("*.runtimeconfig.json").First();
-        JObject runtimeConfig;
-        using (var stream = runtimeConfigFile.OpenText())
-        using (var reader = new JsonTextReader(stream))
-            runtimeConfig = (JObject) JToken.ReadFrom(reader);
-
-        ((JObject) runtimeConfig["runtimeOptions"]!)["additionalProbingPaths"] = new JArray { "lib" };
-
-        using (StreamWriter file = runtimeConfigFile.CreateText())
-        using (JsonTextWriter writer = new JsonTextWriter(file) { Formatting = Formatting.Indented })
-            runtimeConfig.WriteTo(writer);
-
         // Add each included file to the package contents
         foreach (var exeFile in dir.EnumerateFiles("*.exe"))
         {
             if (excludeDlls.All(exclude => !exeFile.Name.StartsWith(exclude)))
             {
                 if (exeFile.Name == "NAPS2.Worker.exe") continue;
+                PatchExe(exeFile);
                 pkgInfo.AddFile(exeFile, "");
             }
         }
         foreach (var configFile in dir.EnumerateFiles("*.json"))
         {
-            pkgInfo.AddFile(configFile, "");
+            pkgInfo.AddFile(configFile, "lib");
         }
         foreach (var dllFile in dir.EnumerateFiles("*.dll"))
         {
             if (excludeDlls.All(exclude => !dllFile.Name.StartsWith(exclude)))
             {
-                pkgInfo.AddFile(dllFile, GetProbingPath(dllFile.Name));
+                pkgInfo.AddFile(dllFile, "lib");
             }
         }
         foreach (var langFolder in dir.EnumerateDirectories()
@@ -226,11 +186,47 @@ public class PackageCommand : ICommand<PackageOptions>
             {
                 if (excludeDlls.All(exclude => !resourceDll.Name.StartsWith(exclude)))
                 {
-                    pkgInfo.AddFile(resourceDll, GetResourceProbingPath(resourceDll.Name, langFolder.Name));
+                    pkgInfo.AddFile(resourceDll, Path.Combine("lib", langFolder.Name));
                     pkgInfo.Languages.Add(langFolder.Name);
                 }
             }
         }
+    }
+
+    private static void PatchExe(FileInfo exeFile)
+    {
+        // The dotnet base exes (e.g. NAPS2.exe) have a hard-coded path for the relevant dll (e.g. NAPS2.dll).
+        // This path is also the path at which all the dependencies are searched. By default, the path is in the current
+        // directory, but we can easily replace it with a subpath to the "lib" folder. (Note that the path is padded so
+        // we don't even need to offset the bytes afterward.) This means everything other than the exes can live in
+        // that "lib" subfolder once we do this patch.
+        var bytes = File.ReadAllBytes(exeFile.FullName);
+        var from = Path.ChangeExtension(exeFile.Name, ".dll");
+        var to = @"lib\" + from;
+        var fromBytes = Encoding.UTF8.GetBytes(from);
+        var toBytes = Encoding.UTF8.GetBytes(to);
+        var index = SearchBytes(bytes, fromBytes);
+        for (int i = 0; i < toBytes.Length; i++)
+        {
+            bytes[index + i] = toBytes[i];
+        }
+        File.WriteAllBytes(exeFile.FullName, bytes);
+    }
+
+    private static int SearchBytes(byte[] haystack, byte[] needle)
+    {
+        var len = needle.Length;
+        var limit = haystack.Length - len;
+        for (var i = 0; i <= limit; i++)
+        {
+            var k = 0;
+            for (; k < len; k++)
+            {
+                if (needle[k] != haystack[i + k]) break;
+            }
+            if (k == len) return i;
+        }
+        return -1;
     }
 
     private static void AddPlatformFiles(PackageInfo pkgInfo, string buildPath, string platformPath)

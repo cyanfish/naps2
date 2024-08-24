@@ -13,6 +13,7 @@ public static class ZipArchivePackager
         Cli.Run("dotnet", "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
         Cli.Run("dotnet", "publish NAPS2.App.WinForms -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
         Cli.Run("dotnet", "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
+        Cli.Run("dotnet", "build NAPS2.App.PortableLauncher -c Release");
 
         var pkgInfo = pkgInfoFunc();
         var zipPath = pkgInfo.GetPath("zip");

@@ -28,9 +28,8 @@ internal class AssemblyHelper
         // https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli#api-incompatibility
         EntryFolder = AppContext.BaseDirectory;
 
-        // If this is NAPS2.Worker.exe inside the "lib" subfolder, the base path needs to be the parent folder
-        var args = Environment.GetCommandLineArgs();
-        if (args.Length > 0 && args[0].ToLowerInvariant().Contains("naps2.worker") && EntryFolder.EndsWith(@"\lib\"))
+        // If this is inside the "lib" subfolder, the base path needs to be the parent folder
+        if (EntryFolder.EndsWith(@"\lib\"))
         {
             EntryFolder = EntryFolder.Substring(0, EntryFolder.Length - 4);
         }
