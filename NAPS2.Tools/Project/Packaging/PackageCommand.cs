@@ -84,19 +84,22 @@ public class PackageCommand : ICommand<PackageOptions>
         string[] excludeDlls =
         {
             // DLLs that are unneeded but missed by the built-in trimming
-            "D3D",
-            "Microsoft.DiaSymReader",
             "Microsoft.VisualBasic",
-            "mscordaccore",
-            "PenImc",
             "System.Data",
             "System.Private.DataContract",
             "System.Windows.Forms.Design",
+            // For WPF
+            "D3D",
             "System.Windows.Input",
             "System.Xaml",
             "UIAutomation",
             "WindowsBase",
-            "wpfgfx"
+            "wpfgfx",
+            // For debugging
+            "createdump",
+            "Microsoft.DiaSymReader",
+            "mscordaccore",
+            "mscordbi",
         };
 
         var dir = new DirectoryInfo(buildPath);
