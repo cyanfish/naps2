@@ -287,7 +287,7 @@ public class DesktopControllerTests : ContextualTests
     {
         await _desktopController.Initialize();
         Assert.True(_processCoordinator.ScanWithDevice(Process.GetCurrentProcess(), 10000, "abc"));
-
+        await Task.Delay(500);
         _ = _desktopScanController.Received().ScanWithDevice("abc");
     }
 }
