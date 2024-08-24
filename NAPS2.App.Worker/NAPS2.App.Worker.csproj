@@ -4,6 +4,7 @@
     <TargetFramework>net9-windows</TargetFramework>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <OutputType>WinExe</OutputType>
+    <Nullable>enable</Nullable>
     <LargeAddressAware>true</LargeAddressAware>
     <RootNamespace>NAPS2.Worker</RootNamespace>
     <AssemblyName>NAPS2.Worker</AssemblyName>
@@ -23,8 +24,18 @@
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
-    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
+    <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="LargeAddressAware" Version="1.0.6" />
+    <PackageReference Include="NLog" Version="5.3.2" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.11" />
+
+    <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
+    <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../NAPS2.Lib/Paths.cs" />
+    <Compile Include="../NAPS2.Lib/NLogConfig.cs" />
+    <Compile Include="../NAPS2.Lib/EntryPoints/CoreWorkerEntryPoint.cs" />
   </ItemGroup>
 </Project>

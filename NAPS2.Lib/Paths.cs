@@ -86,9 +86,9 @@ public static class Paths
                 Directory.CreateDirectory(TempPath);
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            Log.ErrorException("Error clearing temp files", e);
+            // Ignore errors clearing temp files
         }
     }
 

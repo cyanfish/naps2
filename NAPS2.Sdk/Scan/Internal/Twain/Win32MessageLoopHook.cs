@@ -3,10 +3,10 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NTwain;
-using NTwain.Internals;
 
 namespace NAPS2.Scan.Internal.Twain;
 
+// TODO: Consider refactoring this to re-use code from Win32MessagePump
 /// <summary>
 /// A MessageLoopHook implementation that uses Win32 methods directly, with no dependencies on WinForms or WPF.
 /// </summary>
@@ -58,7 +58,6 @@ internal class Win32MessageLoopHook : MessageLoopHook
         {
             try
             {
-                // TODO: Maybe we can use code like this to replace BackgroundForm and unify TWAIN window handling across winforms/wpf/netcore
                 Handle = CreateWindowEx(0, "Message", null, 0, 0, 0, 0, 0, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero,
                     IntPtr.Zero);
                 while (!_stopped && GetMessage(out var msg, IntPtr.Zero, 0, 0) > 0)

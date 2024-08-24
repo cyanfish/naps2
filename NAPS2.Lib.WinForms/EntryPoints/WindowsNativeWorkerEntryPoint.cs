@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Windows.Forms;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.Modules;
@@ -8,11 +8,9 @@ using NAPS2.WinForms;
 namespace NAPS2.EntryPoints;
 
 /// <summary>
-/// The entry point for NAPS2.Worker.exe, an off-process worker.
-///
-/// NAPS2.Worker.exe runs in 32-bit mode for compatibility with 32-bit TWAIN drivers.
+/// The entry point logic for NAPS2.exe when running in worker mode.
 /// </summary>
-public static class WindowsWorkerEntryPoint
+public static class WindowsNativeWorkerEntryPoint
 {
     public static int Run(string[] args)
     {
@@ -22,6 +20,7 @@ public static class WindowsWorkerEntryPoint
 
         // Set up a form for the worker process
         // A parent form is needed for some operations, namely 64-bit TWAIN scanning
+        // TODO: We don't currently do TWAIN scanning in the native worker, so maybe this can be cleaned up
         var form = new BackgroundForm();
         Invoker.Current = new WinFormsInvoker(() => form);
         TwainHandleManager.Factory = () => new WinFormsTwainHandleManager(form);

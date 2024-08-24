@@ -16,7 +16,7 @@ public static class WinFormsEntryPoint
         var subArgs = args.Skip(1).ToArray();
         return args switch
         {
-            ["worker", ..] => WindowsWorkerEntryPoint.Run(subArgs),
+            ["worker", ..] => WindowsNativeWorkerEntryPoint.Run(subArgs),
             ["server", ..] => ServerEntryPoint.Run(subArgs, new GdiModule()),
             _ => GuiEntryPoint.Run(args, new GdiModule(), new WinFormsModule())
         };
