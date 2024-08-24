@@ -45,7 +45,7 @@ UninstallDisplayIcon={app}\{#ExeName}
 
 OutputDir=../publish/{#AppVersionName}
 OutputBaseFilename=naps2-{#AppVersionName}-{#AppPlatform}
-Compression=lzma2/ultra
+Compression=lzma2/ultra64
 LZMAUseSeparateProcess=yes
 SolidCompression=yes
 ; !arch
