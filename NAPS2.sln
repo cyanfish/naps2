@@ -4,8 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.WinForms", "NAPS2.App.WinForms\NAPS2.App.WinForms.csproj", "{EAC4A133-93BE-4400-BFA9-CEB1615693C4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BA9A65A0-00FE-4BF4-A023-7D804817453F} = {BA9A65A0-00FE-4BF4-A023-7D804817453F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.App.Console", "NAPS2.App.Console\NAPS2.App.Console.csproj", "{2A321772-75B2-4601-A718-AF0A2370E6A8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BA9A65A0-00FE-4BF4-A023-7D804817453F} = {BA9A65A0-00FE-4BF4-A023-7D804817453F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAPS2.Sdk", "NAPS2.Sdk\NAPS2.Sdk.csproj", "{968378FA-A649-4058-A928-1FCD97B23070}"
 EndProject

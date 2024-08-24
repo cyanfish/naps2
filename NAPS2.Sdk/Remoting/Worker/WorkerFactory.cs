@@ -41,18 +41,21 @@ internal class WorkerFactory : IWorkerFactory
         }
 #endif
         var exePath = Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.exe");
-        var workerExePath = Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.Worker.exe");
-        if (!File.Exists(workerExePath))
+        string[] candidateWorkerPaths =
         {
-            workerExePath = Path.Combine(AssemblyHelper.EntryFolder, "lib", "NAPS2.Worker.exe");
-        }
 #if DEBUG
-        if (!File.Exists(workerExePath))
-        {
-            workerExePath = Path.Combine(AssemblyHelper.EntryFolder,
-                @"..\..\..\..\..\NAPS2.App.Worker\bin\Debug\net9-windows\win-x86\NAPS2.Worker.exe");
-        }
+            Path.Combine(AssemblyHelper.EntryFolder,
+                @"..\..\..\..\..\NAPS2.App.Worker\bin\Debug\net9-windows\win-x86\NAPS2.Worker.exe"),
 #endif
+            Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.Worker.exe"),
+            Path.Combine(AssemblyHelper.EntryFolder, "lib", "NAPS2.Worker.exe")
+        };
+        string workerExePath = "";
+        foreach (var candidateWorkerPath in candidateWorkerPaths)
+        {
+            workerExePath = candidateWorkerPath;
+            if (File.Exists(workerExePath)) break;
+        }
         return new WorkerFactory(exePath, workerExePath, env);
     }
 
