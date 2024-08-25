@@ -25,6 +25,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         WF.Application.EnableVisualStyles();
         WF.Application.SetCompatibleTextRenderingDefault(false);
+        WF.Application.SetHighDpiMode(WF.HighDpiMode.PerMonitorV2);
         return new Application(Eto.Platforms.WinForms);
     }
 
