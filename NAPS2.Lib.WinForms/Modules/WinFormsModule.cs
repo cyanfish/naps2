@@ -18,6 +18,7 @@ public class WinFormsModule : GuiModule
         // TODO: Change this when implementing dark mode on Windows
         builder.RegisterType<StubDarkModeProvider>().As<IDarkModeProvider>().SingleInstance();
         builder.RegisterType<WindowsServiceManager>().As<IOsServiceManager>().SingleInstance();
+        builder.RegisterType<WinFormsIconProvider>().As<IIconProvider>();
 
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
 

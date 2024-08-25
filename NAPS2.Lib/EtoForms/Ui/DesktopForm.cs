@@ -27,6 +27,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly IDesktopSubFormController _desktopSubFormController;
     private readonly ImageTransfer _imageTransfer = new();
+    private readonly Lazy<DesktopCommands> _commands;
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
@@ -53,7 +54,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands,
+        Lazy<DesktopCommands> commands,
         Sidebar sidebar) : base(config)
     {
         _keyboardShortcuts = keyboardShortcuts;
@@ -70,8 +71,9 @@ public abstract class DesktopForm : EtoFormBase
         _desktopFormProvider = desktopFormProvider;
         _desktopSubFormController = desktopSubFormController;
         _sidebar = sidebar;
-        Commands = commands;
+        _commands = commands;
 
+        _desktopFormProvider.DesktopForm = this;
         _keyboardShortcuts.Assign(Commands);
         CreateToolbarsAndMenus();
         UpdateScanButton();
@@ -98,7 +100,6 @@ public abstract class DesktopForm : EtoFormBase
         // Shown += FDesktop_Shown;
         // Closing += FDesktop_Closing;
         // Closed += FDesktop_Closed;
-        _desktopFormProvider.DesktopForm = this;
         _thumbnailController.ListView = _listView;
         _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
         ImageList.SelectionChanged += ImageList_SelectionChanged;
@@ -212,7 +213,7 @@ public abstract class DesktopForm : EtoFormBase
     }
 
     protected UiImageList ImageList { get; }
-    protected DesktopCommands Commands { get; }
+    protected DesktopCommands Commands => _commands.Value;
 
     protected override void OnLoad(EventArgs e)
     {

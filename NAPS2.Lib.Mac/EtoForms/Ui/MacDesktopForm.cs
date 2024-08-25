@@ -28,7 +28,7 @@ public class MacDesktopForm : DesktopForm
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands,
+        Lazy<DesktopCommands> commands,
         Sidebar sidebar)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,

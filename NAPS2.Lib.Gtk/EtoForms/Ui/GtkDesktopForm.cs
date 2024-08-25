@@ -37,7 +37,7 @@ public class GtkDesktopForm : DesktopForm
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands,
+        Lazy<DesktopCommands> commands,
         IDarkModeProvider darkModeProvider,
         Sidebar sidebar)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,

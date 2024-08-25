@@ -39,7 +39,7 @@ public class WinFormsDesktopForm : DesktopForm
         ImageListViewBehavior imageListViewBehavior,
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
-        DesktopCommands commands,
+        Lazy<DesktopCommands> commands,
         Sidebar sidebar)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
@@ -47,6 +47,7 @@ public class WinFormsDesktopForm : DesktopForm
     {
         _form = this.ToNative();
         _form.FormClosing += OnFormClosing;
+        _form.DpiChanged += OnDpiChanged;
 
         // TODO: Remove this if https://github.com/picoe/Eto/issues/2601 is fixed
         NativeListView.KeyDown += (_, e) => OnKeyDown(new KeyEventArgs(e.KeyData.ToEto(), KeyEventType.KeyDown));
@@ -77,6 +78,7 @@ public class WinFormsDesktopForm : DesktopForm
         base.OnLoad(e);
 
         LoadToolStripLocation();
+        OnDpiChanged(this, EventArgs.Empty);
 
         NativeListView.TabIndex = 7;
         NativeListView.BorderStyle = WF.BorderStyle.None;
@@ -122,7 +124,6 @@ public class WinFormsDesktopForm : DesktopForm
         _mainToolStrip = ((ToolBarHandler) ToolBar.Handler).Control;
         _mainToolStrip.ShowItemToolTips = false;
         _mainToolStrip.TabStop = true;
-        _mainToolStrip.ImageScalingSize = new Size(32, 32);
         _mainToolStrip.ParentChanged += (_, _) =>
         {
             _toolbarFormatter.RelayoutToolbar(_mainToolStrip);
@@ -132,9 +133,14 @@ public class WinFormsDesktopForm : DesktopForm
         _profilesToolStrip = new WF.ToolStrip();
         _profilesToolStrip.ShowItemToolTips = false;
         _profilesToolStrip.TabStop = true;
-        _profilesToolStrip.ImageScalingSize = new Size(16, 16);
         _profilesToolStrip.Location = new Point(0, 100);
         _profilesToolStrip.ParentChanged += (_, _) => LayoutController.Invalidate();
+    }
+
+    private void OnDpiChanged(object? sender, EventArgs e)
+    {
+        _mainToolStrip.ImageScalingSize = new Size(_form.DeviceDpi * 32 / 96, _form.DeviceDpi * 32 / 96);
+        _profilesToolStrip.ImageScalingSize = new Size(_form.DeviceDpi * 16 / 96, _form.DeviceDpi * 16 / 96);
     }
 
     public override void PlaceProfilesToolbar()

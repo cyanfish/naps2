@@ -64,4 +64,22 @@ public static class EtoExtensions
         }
         return image;
     }
+
+    public static Image ResizeTo(this Image image, int size) => ResizeTo(image, new Size(size, size));
+
+    public static Image ResizeTo(this Image image, int width, int height) => ResizeTo(image, new Size(width, height));
+
+    public static Image ResizeTo(this Image image, Size size)
+    {
+        if (image.Width != size.Width || image.Height != size.Height)
+        {
+            var newImage = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppRgba);
+            using var graphics = new Graphics(newImage);
+            graphics.Clear(Colors.Transparent);
+            graphics.DrawImage(image, 0, 0, size.Width, size.Height);
+            image.Dispose();
+            return newImage;
+        }
+        return image;
+    }
 }
