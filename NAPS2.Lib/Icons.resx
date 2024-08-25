@@ -127,6 +127,9 @@
   <data name="arrow_rotate_anticlockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_anticlockwise.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="arrow_rotate_anticlockwise_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\arrow_rotate_anticlockwise-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="arrow_rotate_clockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_clockwise.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -139,8 +142,14 @@
   <data name="blueprints" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\blueprints.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="blueprints_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\blueprints-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cross.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cross_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\cross-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="key_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\key-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -151,8 +160,14 @@
   <data name="email_attach" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_attach.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="email_attach_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\email_attach-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="file_extension_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\file_extension_pdf.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="file_extension_pdf_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\file_extension_pdf-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="file_extension_pdf_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\file_extension_pdf_small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -226,8 +241,17 @@
   <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cancel.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cancel_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\cancel-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cancel_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cancel-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="broom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\broom.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="broom_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\broom-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cross_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cross-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -250,11 +274,20 @@
   <data name="world" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\world.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="world_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\world-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="folder_picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\folder_picture.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="folder_picture_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\folder_picture-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="arrow_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_refresh.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="arrow_refresh_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\arrow_refresh-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="arrow_rotate_anticlockwise_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_anticlockwise-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -267,6 +300,9 @@
   </data>
   <data name="text" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="text_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\text-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="text_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -282,6 +318,9 @@
   </data>
   <data name="control_play_blue_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\control_play_blue-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="control_play_blue_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\control_play_blue-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="color_wheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_wheel.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -307,8 +346,14 @@
   <data name="pictures" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pictures.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="pictures-hries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\pictures-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="picture_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture_edit.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="picture_edit_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\picture_edit-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="picture_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture_save.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -321,6 +366,9 @@
   </data>
   <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\printer.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="printer_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\printer-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="application_cascade" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_cascade.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -376,6 +424,9 @@
   <data name="network_ip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\network_ip.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="network_ip_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\network_ip-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="network_ip_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\network_ip-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -393,6 +444,9 @@
   </data>
   <data name="ask" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\ask.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ask_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\ask-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="exclamation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\exclamation.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
