@@ -24,8 +24,11 @@ internal class SettingsForm : EtoDialogBase
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
     public SettingsForm(Naps2Config config, DesktopSubFormController desktopSubFormController,
-        DesktopFormProvider desktopFormProvider) : base(config)
+        DesktopFormProvider desktopFormProvider, IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.SettingsFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("cog_small"));
+
         _desktopFormProvider = desktopFormProvider;
         UpdateValues(Config);
         _restoreDefaults.Click += RestoreDefaults_Click;
@@ -33,26 +36,22 @@ internal class SettingsForm : EtoDialogBase
         _pdfSettingsCommand = new ActionCommand(desktopSubFormController.ShowPdfSettingsForm)
         {
             Text = UiStrings.PdfSettings,
-            Image = Icons.file_extension_pdf_small.ToEtoImage()
+            Image = iconProvider.GetIcon("file_extension_pdf_small")
         };
         _imageSettingsCommand = new ActionCommand(desktopSubFormController.ShowImageSettingsForm)
         {
             Text = UiStrings.ImageSettings,
-            // TODO: Get an actual 16x16 image
-            Image = Icons.picture_small.ToEtoImage()
+            Image = iconProvider.GetIcon("picture_small")
         };
         _emailSettingsCommand = new ActionCommand(desktopSubFormController.ShowEmailSettingsForm)
         {
             Text = UiStrings.EmailSettings,
-            Image = Icons.email_small.ToEtoImage()
+            Image = iconProvider.GetIcon("email_small")
         };
     }
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.SettingsFormTitle;
-        Icon = new Icon(1f, Icons.cog_small.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 

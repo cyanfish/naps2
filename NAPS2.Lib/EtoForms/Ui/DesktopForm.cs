@@ -28,6 +28,8 @@ public abstract class DesktopForm : EtoFormBase
     private readonly IDesktopSubFormController _desktopSubFormController;
     private readonly ImageTransfer _imageTransfer = new();
     private readonly Lazy<DesktopCommands> _commands;
+    private readonly Sidebar _sidebar;
+    protected readonly IIconProvider _iconProvider;
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
@@ -36,7 +38,6 @@ public abstract class DesktopForm : EtoFormBase
     private readonly NotificationArea _notificationArea;
     protected IListView<UiImage> _listView;
     private ImageListSyncer? _imageListSyncer;
-    private readonly Sidebar _sidebar;
 
     public DesktopForm(
         Naps2Config config,
@@ -55,8 +56,11 @@ public abstract class DesktopForm : EtoFormBase
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         Lazy<DesktopCommands> commands,
-        Sidebar sidebar) : base(config)
+        Sidebar sidebar,
+        IIconProvider iconProvider) : base(config)
     {
+        Icon = Icons.favicon.ToEtoIcon();
+
         _keyboardShortcuts = keyboardShortcuts;
         _notificationManager = notificationManager;
         _cultureHelper = cultureHelper;
@@ -71,6 +75,7 @@ public abstract class DesktopForm : EtoFormBase
         _desktopFormProvider = desktopFormProvider;
         _desktopSubFormController = desktopSubFormController;
         _sidebar = sidebar;
+        _iconProvider = iconProvider;
         _commands = commands;
 
         _desktopFormProvider.DesktopForm = this;
@@ -111,8 +116,6 @@ public abstract class DesktopForm : EtoFormBase
 
     protected override void BuildLayout()
     {
-        Icon = Icons.favicon.ToEtoIcon();
-
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(1210, 600);
 
@@ -526,7 +529,7 @@ public abstract class DesktopForm : EtoFormBase
                 {
                     // TODO: Does this need to change on non-WinForms?
                     MenuText = profile.DisplayName.Replace("&", "&&"),
-                    Image = profile == defaultProfile ? Icons.accept_small.ToEtoImage() : null
+                    Image = profile == defaultProfile ? _iconProvider.GetIcon("accept_small") : null
                 })
             .ToImmutableList<Command>();
         for (int i = 0; i < commandList.Count; i++)

@@ -11,10 +11,10 @@ public class BlackWhiteForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        Icon = new Icon(1f, Icons.contrast_high.ToEtoImage());
+        Icon = new Icon(1f, iconProvider.GetIcon("contrast_high_small"));
         Title = UiStrings.BlackAndWhite;
 
-        _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high");
+        _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high_small");
         Sliders = [_thresholdSlider];
         // BlackWhiteTransform is not commutative with scaling
         CanScaleWorkingImage = false;

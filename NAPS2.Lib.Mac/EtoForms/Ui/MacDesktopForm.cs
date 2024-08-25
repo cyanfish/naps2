@@ -29,10 +29,11 @@ public class MacDesktopForm : DesktopForm
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         Lazy<DesktopCommands> commands,
-        Sidebar sidebar)
+        Sidebar sidebar,
+        IIconProvider iconProvider)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
-            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar)
+            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider)
     {
         // For retina screens
         _thumbnailController.Oversample = 2.0;

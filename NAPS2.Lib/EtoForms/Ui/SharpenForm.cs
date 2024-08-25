@@ -11,10 +11,10 @@ public class SharpenForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        Icon = new Icon(1f, Icons.sharpen.ToEtoImage());
+        Icon = new Icon(1f, iconProvider.GetIcon("sharpen_small"));
         Title = UiStrings.Sharpen;
 
-        _sharpenSlider.Icon = iconProvider.GetIcon("sharpen");
+        _sharpenSlider.Icon = iconProvider.GetIcon("sharpen_small");
         Sliders = [_sharpenSlider];
     }
 

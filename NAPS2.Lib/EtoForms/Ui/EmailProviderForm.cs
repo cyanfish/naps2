@@ -9,16 +9,17 @@ internal class EmailProviderForm : EtoDialogBase
 {
     private readonly EmailProviderController _controller;
 
-    public EmailProviderForm(Naps2Config config, EmailProviderController controller) : base(config)
+    public EmailProviderForm(Naps2Config config, EmailProviderController controller, IIconProvider iconProvider) :
+        base(config)
     {
+        Title = UiStrings.EmailProviderFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("email_small"));
+
         _controller = controller;
     }
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.EmailProviderFormTitle;
-        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
-
         FormStateController.FixedHeightLayout = true;
 
         LayoutController.DefaultSpacing = 0;
@@ -40,5 +41,4 @@ internal class EmailProviderForm : EtoDialogBase
     }
 
     public bool Result { get; private set; }
-
 }

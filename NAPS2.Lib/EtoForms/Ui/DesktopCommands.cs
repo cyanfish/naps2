@@ -45,7 +45,7 @@ public class DesktopCommands
         BatchScan = new ActionCommand(desktopSubFormController.ShowBatchScanForm)
         {
             Text = UiStrings.BatchScan,
-            Image = iconProvider.GetIcon("application_cascade")
+            Image = iconProvider.GetIcon("application_cascade_small")
         };
         ScannerSharing = new ActionCommand(desktopSubFormController.ShowScannerSharingForm)
         {
@@ -69,13 +69,11 @@ public class DesktopCommands
         };
         SaveAll = new ActionCommand(_imageListActions.SaveAllAsPdfOrImages)
         {
-            Text = UiStrings.SaveAll,
-            Image = iconProvider.GetIcon("diskette")
+            Text = UiStrings.SaveAll
         };
         SaveSelected = new ActionCommand(_imageListActions.SaveSelectedAsPdfOrImages)
         {
-            Text = UiStrings.SaveSelected,
-            Image = iconProvider.GetIcon("diskette")
+            Text = UiStrings.SaveSelected
         };
         SavePdf = new ActionCommand(desktopController.SavePdf)
         {
@@ -146,43 +144,43 @@ public class DesktopCommands
         Crop = new ActionCommand(desktopSubFormController.ShowCropForm)
         {
             Text = UiStrings.Crop,
-            Image = iconProvider.GetIcon("transform_crop")
+            Image = iconProvider.GetIcon("transform_crop_small")
         };
         BrightCont = new ActionCommand(desktopSubFormController.ShowBrightnessContrastForm)
         {
             Text = UiStrings.BrightnessContrast,
-            Image = iconProvider.GetIcon("contrast_with_sun")
+            Image = iconProvider.GetIcon("contrast_with_sun_small")
         };
         HueSat = new ActionCommand(desktopSubFormController.ShowHueSaturationForm)
         {
             Text = UiStrings.HueSaturation,
-            Image = iconProvider.GetIcon("color_management")
+            Image = iconProvider.GetIcon("color_management_small")
         };
         BlackWhite = new ActionCommand(desktopSubFormController.ShowBlackWhiteForm)
         {
             Text = UiStrings.BlackAndWhite,
-            Image = iconProvider.GetIcon("contrast_high")
+            Image = iconProvider.GetIcon("contrast_high_small")
         };
         Sharpen = new ActionCommand(desktopSubFormController.ShowSharpenForm)
         {
             Text = UiStrings.Sharpen,
-            Image = iconProvider.GetIcon("sharpen")
+            Image = iconProvider.GetIcon("sharpen_small")
         };
         // TODO: Make this an image form with options
         DocumentCorrection = new ActionCommand(imageListActions.DocumentCorrection)
         {
             Text = UiStrings.DocumentCorrection,
-            Image = iconProvider.GetIcon("document")
+            Image = iconProvider.GetIcon("document_small")
         };
         Split = new ActionCommand(desktopSubFormController.ShowSplitForm)
         {
             Text = UiStrings.Split,
-            Image = iconProvider.GetIcon("split")
+            Image = iconProvider.GetIcon("split_small")
         };
         Combine = new ActionCommand(desktopSubFormController.ShowCombineForm)
         {
             Text = UiStrings.Combine,
-            Image = iconProvider.GetIcon("combine")
+            Image = iconProvider.GetIcon("combine_small")
         };
         ResetImage = new ActionCommand(desktopController.ResetImage)
         {
@@ -290,12 +288,12 @@ public class DesktopCommands
         ZoomIn = new ActionCommand(() => thumbnailController.StepSize(1))
         {
             Text = UiStrings.ZoomIn,
-            Image = iconProvider.GetIcon("zoom_in")
+            Image = iconProvider.GetIcon("zoom_in_small")
         };
         ZoomOut = new ActionCommand(() => thumbnailController.StepSize(-1))
         {
             Text = UiStrings.ZoomOut,
-            Image = iconProvider.GetIcon("zoom_out")
+            Image = iconProvider.GetIcon("zoom_out_small")
         };
         SelectAll = new ActionCommand(imageListActions.SelectAll)
         {
@@ -304,27 +302,27 @@ public class DesktopCommands
         Copy = new ActionCommand(desktopController.Copy)
         {
             Text = UiStrings.Copy,
-            Image = iconProvider.GetIcon("copy")
+            Image = iconProvider.GetIcon("copy_small")
         };
         Paste = new ActionCommand(desktopController.Paste)
         {
             Text = UiStrings.Paste,
-            Image = iconProvider.GetIcon("paste")
+            Image = iconProvider.GetIcon("paste_small")
         };
         Undo = new ActionCommand(imageListActions.Undo)
         {
             Text = UiStrings.Undo,
-            Image = iconProvider.GetIcon("undo")
+            Image = iconProvider.GetIcon("undo_small")
         };
         Redo = new ActionCommand(imageListActions.Redo)
         {
             Text = UiStrings.Redo,
-            Image = iconProvider.GetIcon("redo")
+            Image = iconProvider.GetIcon("redo_small")
         };
         ToggleSidebar = new ActionCommand(() => _desktopFormProvider.DesktopForm.ToggleSidebar())
         {
             Text = UiStrings.ToggleSidebar,
-            Image = iconProvider.GetIcon("application_side_list")
+            Image = iconProvider.GetIcon("application_side_list_small")
         };
     }
 

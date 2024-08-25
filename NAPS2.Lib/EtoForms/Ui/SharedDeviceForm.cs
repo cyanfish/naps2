@@ -20,11 +20,15 @@ public class SharedDeviceForm : EtoDialogBase
     private readonly DeviceSelectorWidget _deviceSelectorWidget;
 
     public SharedDeviceForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
-        ISharedDeviceManager sharedDeviceManager, DeviceCapsCache deviceCapsCache) : base(config)
+        ISharedDeviceManager sharedDeviceManager, DeviceCapsCache deviceCapsCache,
+        IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.SharedDeviceFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("wireless16"));
+
         _errorOutput = errorOutput;
         _sharedDeviceManager = sharedDeviceManager;
-        _deviceSelectorWidget = new(scanPerformer, deviceCapsCache, this)
+        _deviceSelectorWidget = new(scanPerformer, deviceCapsCache, iconProvider, this)
         {
             ProfileFunc = () => new ScanProfile { DriverName = DeviceDriver.ToString().ToLowerInvariant() },
             AllowAlwaysAsk = false
@@ -44,9 +48,6 @@ public class SharedDeviceForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.SharedDeviceFormTitle;
-        Icon = new Icon(1f, Icons.wireless16.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 

@@ -172,9 +172,39 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] arrow_left {
+            get {
+                object obj = ResourceManager.GetObject("arrow_left", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] arrow_left_small {
+            get {
+                object obj = ResourceManager.GetObject("arrow_left_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] arrow_out {
             get {
                 object obj = ResourceManager.GetObject("arrow_out", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] arrow_out_small {
+            get {
+                object obj = ResourceManager.GetObject("arrow_out_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -195,6 +225,26 @@ namespace NAPS2 {
         internal static byte[] arrow_refresh_hires {
             get {
                 object obj = ResourceManager.GetObject("arrow_refresh_hires", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] arrow_right {
+            get {
+                object obj = ResourceManager.GetObject("arrow_right", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] arrow_right_small {
+            get {
+                object obj = ResourceManager.GetObject("arrow_right_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }

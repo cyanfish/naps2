@@ -65,11 +65,11 @@ public static class EtoExtensions
         return image;
     }
 
-    public static Image ResizeTo(this Image image, int size) => ResizeTo(image, new Size(size, size));
+    public static Bitmap ResizeTo(this Bitmap image, int size) => ResizeTo(image, new Size(size, size));
 
-    public static Image ResizeTo(this Image image, int width, int height) => ResizeTo(image, new Size(width, height));
+    public static Bitmap ResizeTo(this Bitmap image, int width, int height) => ResizeTo(image, new Size(width, height));
 
-    public static Image ResizeTo(this Image image, Size size)
+    public static Bitmap ResizeTo(this Bitmap image, Size size)
     {
         if (image.Width != size.Width || image.Height != size.Height)
         {

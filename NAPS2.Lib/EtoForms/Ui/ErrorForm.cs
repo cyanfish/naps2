@@ -5,14 +5,15 @@ namespace NAPS2.EtoForms.Ui;
 
 public class ErrorForm : EtoDialogBase
 {
-    private readonly ImageView _image = new() { Image = Icons.exclamation.ToEtoImage() };
+    private readonly ImageView _image = new();
     private readonly Label _message = new();
     private readonly TextArea _details = new() { ReadOnly = true };
     private readonly LayoutVisibility _detailsVisibility = new(false);
 
-    public ErrorForm(Naps2Config config)
+    public ErrorForm(Naps2Config config, IIconProvider iconProvider)
         : base(config)
     {
+        _image.Image = iconProvider.GetIcon("exclamation");
     }
 
     protected override void BuildLayout()

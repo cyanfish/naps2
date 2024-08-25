@@ -37,7 +37,7 @@ public class Sidebar
     {
         var profile = _profileManager.Profiles.First();
 
-        _deviceSelectorWidget = new DeviceSelectorWidget(_scanPerformer, _deviceCapsCache, parentWindow)
+        _deviceSelectorWidget = new DeviceSelectorWidget(_scanPerformer, _deviceCapsCache, _iconProvider, parentWindow)
         {
             ShowChooseDevice = false,
             ProfileFunc = () => profile

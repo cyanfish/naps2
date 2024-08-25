@@ -9,6 +9,7 @@ public class DeviceSelectorWidget
 {
     private readonly IScanPerformer _scanPerformer;
     private readonly DeviceCapsCache _deviceCapsCache;
+    private readonly IIconProvider _iconProvider;
     private readonly IFormBase _parentWindow;
 
     private readonly ImageView _deviceIcon = new();
@@ -20,10 +21,12 @@ public class DeviceSelectorWidget
     private DeviceChoice _choice = DeviceChoice.None;
     private CancellationTokenSource? _loadIconCts;
 
-    public DeviceSelectorWidget(IScanPerformer scanPerformer, DeviceCapsCache deviceCapsCache, IFormBase parentWindow)
+    public DeviceSelectorWidget(IScanPerformer scanPerformer, DeviceCapsCache deviceCapsCache,
+        IIconProvider iconProvider, IFormBase parentWindow)
     {
         _scanPerformer = scanPerformer;
         _deviceCapsCache = deviceCapsCache;
+        _iconProvider = iconProvider;
         _parentWindow = parentWindow;
         _chooseDevice.Click += ChooseDevice;
     }
@@ -72,7 +75,8 @@ public class DeviceSelectorWidget
     public event EventHandler<DeviceChangedEventArgs>? DeviceChanged;
 
     private async void ChooseDevice(object? sender, EventArgs args)
-    {;
+    {
+        ;
         var choice = await _scanPerformer.PromptForDevice(ProfileFunc(), AllowAlwaysAsk, _parentWindow.NativeHandle);
         if (choice.Device != null || choice.AlwaysAsk)
         {
@@ -88,7 +92,7 @@ public class DeviceSelectorWidget
     {
         var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
         _deviceIcon.Image =
-            cachedIcon ?? (_choice.AlwaysAsk ? Icons.ask.ToEtoImage() : Icons.device.ToEtoImage());
+            cachedIcon ?? (_choice.AlwaysAsk ? _iconProvider.GetIcon("ask") : _iconProvider.GetIcon("device"));
         if (((Window) _parentWindow).Loaded)
         {
             _parentWindow.LayoutController.Invalidate();

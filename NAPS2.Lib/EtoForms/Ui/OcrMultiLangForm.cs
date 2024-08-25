@@ -10,8 +10,11 @@ public class OcrMultiLangForm : EtoDialogBase
     private readonly IListView<Language> _languageList;
 
     public OcrMultiLangForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager,
-        OcrLanguagesListViewBehavior ocrLanguagesListViewBehavior) : base(config)
+        OcrLanguagesListViewBehavior ocrLanguagesListViewBehavior, IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.OcrMultiLangFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("text_small"));
+
         _languageList = EtoPlatform.Current.CreateListView(ocrLanguagesListViewBehavior);
         _languageList.SetItems(tesseractLanguageManager.InstalledLanguages.OrderBy(x => x.Name));
     }
@@ -20,9 +23,6 @@ public class OcrMultiLangForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.OcrMultiLangFormTitle;
-        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-
         FormStateController.RestoreFormState = false;
         FormStateController.DefaultExtraLayoutSize = new Size(150, 20);
 

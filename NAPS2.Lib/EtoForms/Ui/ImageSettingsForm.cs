@@ -16,8 +16,11 @@ public class ImageSettingsForm : EtoDialogBase
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
-    public ImageSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
+    public ImageSettingsForm(Naps2Config config, DialogHelper dialogHelper, IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.ImageSettingsFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("picture_small"));
+
         _defaultFilePath = new(this, dialogHelper) { ImagesOnly = true };
 
         UpdateValues(Config);
@@ -29,9 +32,6 @@ public class ImageSettingsForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.ImageSettingsFormTitle;
-        Icon = new Icon(1f, Icons.picture_small.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 

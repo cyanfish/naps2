@@ -14,8 +14,12 @@ public class DownloadProgressForm : EtoDialogBase
     private readonly ProgressBar _totalProgressBar = new();
     private readonly ProgressBar _fileProgressBar = new();
 
-    public DownloadProgressForm(ScanningContext scanningContext, Naps2Config config) : base(config)
+    public DownloadProgressForm(ScanningContext scanningContext, Naps2Config config, IIconProvider iconProvider) :
+        base(config)
     {
+        Title = UiStrings.DownloadProgressFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("text_small"));
+
         Controller = new DownloadController(scanningContext);
         Controller.DownloadError += OnDownloadError;
         Controller.DownloadComplete += (_, _) => Close();
@@ -24,16 +28,14 @@ public class DownloadProgressForm : EtoDialogBase
 
     private void OnDownloadError(object? sender, EventArgs e)
     {
-        MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK, MessageBoxType.Error);
+        MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK,
+            MessageBoxType.Error);
     }
 
     public DownloadController Controller { get; }
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.DownloadProgressFormTitle;
-        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-
         FormStateController.RestoreFormState = false;
 
         LayoutController.Content = L.Column(
@@ -62,8 +64,9 @@ public class DownloadProgressForm : EtoDialogBase
         var cTot = Controller.CurrentFileSize;
         _totalStatus.Text = string.Format(MiscResources.FilesProgressFormat, f, fTot);
         _totalProgressBar.MaxValue = fTot * 1000;
-        _totalProgressBar.Value = f * 1000 + (cTot == 0 ? 0 : (int)(c * 1e3 / cTot));
-        _fileStatus.Text = string.Format(MiscResources.SizeProgress, (c / 1e6).ToString("f1"), (cTot / 1e6).ToString("f1"));
+        _totalProgressBar.Value = f * 1000 + (cTot == 0 ? 0 : (int) (c * 1e3 / cTot));
+        _fileStatus.Text =
+            string.Format(MiscResources.SizeProgress, (c / 1e6).ToString("f1"), (cTot / 1e6).ToString("f1"));
         if (c > 0)
         {
             _fileProgressBar.MaxValue = (int) cTot;
@@ -76,5 +79,4 @@ public class DownloadProgressForm : EtoDialogBase
         base.OnClosing(e);
         Controller.Stop();
     }
-
 }

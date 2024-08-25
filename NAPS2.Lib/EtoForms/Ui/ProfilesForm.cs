@@ -33,6 +33,9 @@ public class ProfilesForm : EtoDialogBase
         ThumbnailController thumbnailController, IIconProvider iconProvider)
         : base(config)
     {
+        Title = UiStrings.ProfilesFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("blueprints_small"));
+
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;
         _profileManager = profileManager;
@@ -132,9 +135,6 @@ public class ProfilesForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.ProfilesFormTitle;
-        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
 
         LayoutController.Content = L.Column(

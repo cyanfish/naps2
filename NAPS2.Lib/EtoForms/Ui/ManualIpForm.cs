@@ -14,9 +14,12 @@ public class ManualIpForm : EtoDialogBase
 
     private readonly ErrorOutput _errorOutput;
 
-    public ManualIpForm(Naps2Config config, ErrorOutput errorOutput)
+    public ManualIpForm(Naps2Config config, ErrorOutput errorOutput, IIconProvider iconProvider)
         : base(config)
     {
+        Title = UiStrings.ManualIpFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("network_ip_small"));
+
         _errorOutput = errorOutput;
     }
 
@@ -26,9 +29,6 @@ public class ManualIpForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.ManualIpFormTitle;
-        Icon = new Icon(1f, Icons.network_ip_small.ToEtoImage());
-
         FormStateController.RestoreFormState = false;
         FormStateController.FixedHeightLayout = true;
 

@@ -26,6 +26,9 @@ public class ScannerSharingForm : EtoDialogBase
         IIconProvider iconProvider)
         : base(config)
     {
+        Title = UiStrings.ScannerSharingFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("wireless16"));
+
         _sharedDeviceManager = sharedDeviceManager;
         _osServiceManager = osServiceManager;
         _errorOutput = errorOutput;
@@ -73,9 +76,6 @@ public class ScannerSharingForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.ScannerSharingFormTitle;
-        Icon = new Icon(1f, Icons.wireless16.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
 
         LayoutController.Content = L.Column(

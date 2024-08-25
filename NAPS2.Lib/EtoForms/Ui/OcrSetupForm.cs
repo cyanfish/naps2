@@ -28,8 +28,12 @@ public class OcrSetupForm : EtoDialogBase
     private string? _multiLangCode;
     private bool _suppressLangChangeEvent;
 
-    public OcrSetupForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager) : base(config)
+    public OcrSetupForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager,
+        IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.OcrSetupFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("text_small"));
+
         _tesseractLanguageManager = tesseractLanguageManager;
 
         _enableOcr.CheckedChanged += EnableOcr_CheckedChanged;
@@ -57,9 +61,6 @@ public class OcrSetupForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.OcrSetupFormTitle;
-        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-
         FormStateController.Resizable = false;
 
         LayoutController.Content = L.Column(

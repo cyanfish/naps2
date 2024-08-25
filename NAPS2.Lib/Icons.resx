@@ -127,6 +127,9 @@
   <data name="arrow_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_out.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="arrow_out_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\arrow_out-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="arrow_rotate_anticlockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_anticlockwise.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -153,6 +156,18 @@
   </data>
   <data name="arrow_up_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_up-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="arrow_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\arrow_left.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="arrow_left_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\arrow_left-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="arrow_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\arrow_right.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="arrow_right_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\arrow_right-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="blueprints" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\blueprints.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

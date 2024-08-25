@@ -15,7 +15,7 @@ public class WinFormsIconProvider : IIconProvider
         _desktopFormProvider = desktopFormProvider;
     }
 
-    public Image? GetIcon(string name, bool oversized = false)
+    public Bitmap? GetIcon(string name, bool oversized = false)
     {
         var dpi = _desktopFormProvider.DesktopForm.ToNative().DeviceDpi;
 

@@ -4,7 +4,7 @@ namespace NAPS2.EtoForms;
 
 public class DefaultIconProvider : IIconProvider
 {
-    public Image? GetIcon(string name, bool oversized = false)
+    public Bitmap? GetIcon(string name, bool oversized = false)
     {
         var data = (byte[]?) Icons.ResourceManager.GetObject(name);
         if (data == null) return null;

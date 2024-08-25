@@ -19,10 +19,11 @@ public class CombineForm : ImageFormBase
         IIconProvider iconProvider, ScanningContext scanningContext) :
         base(config, imageList, thumbnailController)
     {
+        Title = UiStrings.Combine;
+        Icon = new Icon(1f, iconProvider.GetIcon("combine_small"));
+
         _iconProvider = iconProvider;
         _scanningContext = scanningContext;
-        Icon = new Icon(1f, Icons.combine.ToEtoImage());
-        Title = UiStrings.Combine;
     }
 
     private UiImage Image1 { get; set; } = null!;
@@ -37,23 +38,25 @@ public class CombineForm : ImageFormBase
             C.Filler(),
             L.Row(
                 L.Row(
-                    C.IconButton(_iconProvider.GetIcon("shape_align_left")!, () => SetHOffset(0)),
-                    C.IconButton(_iconProvider.GetIcon("shape_align_center")!, () => SetHOffset(0.5)),
-                    C.IconButton(_iconProvider.GetIcon("shape_align_right")!, () => SetHOffset(1.0))
+                    C.IconButton(_iconProvider.GetIcon("shape_align_left_small")!, () => SetHOffset(0)),
+                    C.IconButton(_iconProvider.GetIcon("shape_align_center_small")!, () => SetHOffset(0.5)),
+                    C.IconButton(_iconProvider.GetIcon("shape_align_right_small")!, () => SetHOffset(1.0))
                 ).Visible(_alignVis),
-                C.IconButton(_iconProvider.GetIcon("combine_hor")!, () => SetOrientation(CombineOrientation.Horizontal))
+                C.IconButton(_iconProvider.GetIcon("combine_hor_small")!,
+                        () => SetOrientation(CombineOrientation.Horizontal))
                     .Padding(left: 20),
-                C.IconButton(_iconProvider.GetIcon("switch_ver")!, SwapImages)
+                C.IconButton(_iconProvider.GetIcon("switch_ver_small")!, SwapImages)
             ).Visible(!_horizontalOrientationVis),
             L.Row(
                 L.Row(
-                    C.IconButton(_iconProvider.GetIcon("shape_align_top")!, () => SetVOffset(0)),
-                    C.IconButton(_iconProvider.GetIcon("shape_align_middle")!, () => SetVOffset(0.5)),
-                    C.IconButton(_iconProvider.GetIcon("shape_align_bottom")!, () => SetVOffset(1.0))
+                    C.IconButton(_iconProvider.GetIcon("shape_align_top_small")!, () => SetVOffset(0)),
+                    C.IconButton(_iconProvider.GetIcon("shape_align_middle_small")!, () => SetVOffset(0.5)),
+                    C.IconButton(_iconProvider.GetIcon("shape_align_bottom_small")!, () => SetVOffset(1.0))
                 ).Visible(_alignVis),
-                C.IconButton(_iconProvider.GetIcon("combine_ver")!, () => SetOrientation(CombineOrientation.Vertical))
+                C.IconButton(_iconProvider.GetIcon("combine_ver_small")!,
+                        () => SetOrientation(CombineOrientation.Vertical))
                     .Padding(left: 20),
-                C.IconButton(_iconProvider.GetIcon("switch_hor")!, SwapImages)
+                C.IconButton(_iconProvider.GetIcon("switch_hor_small")!, SwapImages)
             ).Visible(_horizontalOrientationVis),
             C.Filler()
         );

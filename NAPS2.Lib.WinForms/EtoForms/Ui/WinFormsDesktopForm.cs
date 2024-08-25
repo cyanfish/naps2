@@ -40,10 +40,11 @@ public class WinFormsDesktopForm : DesktopForm
         DesktopFormProvider desktopFormProvider,
         IDesktopSubFormController desktopSubFormController,
         Lazy<DesktopCommands> commands,
-        Sidebar sidebar)
+        Sidebar sidebar,
+        IIconProvider iconProvider)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
-            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar)
+            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider)
     {
         _form = this.ToNative();
         _form.FormClosing += OnFormClosing;
@@ -172,7 +173,7 @@ public class WinFormsDesktopForm : DesktopForm
                 TextImageRelation = WF.TextImageRelation.ImageBeforeText,
                 ImageAlign = ContentAlignment.MiddleLeft,
                 TextAlign = ContentAlignment.MiddleLeft,
-                Image = Image.FromStream(new MemoryStream(Icons.control_play_blue_small))
+                Image = _iconProvider.GetIcon("control_play_blue_small").ToSD()
             };
             item.Click += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Tag!);
             toolbarItems.Add(item);

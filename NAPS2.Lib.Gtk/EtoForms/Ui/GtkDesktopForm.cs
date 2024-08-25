@@ -39,10 +39,11 @@ public class GtkDesktopForm : DesktopForm
         IDesktopSubFormController desktopSubFormController,
         Lazy<DesktopCommands> commands,
         IDarkModeProvider darkModeProvider,
-        Sidebar sidebar)
+        Sidebar sidebar,
+        IIconProvider iconProvider)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
-            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar)
+            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider)
     {
         ((GtkDarkModeProvider) darkModeProvider).StyleContext =
             Eto.Forms.Gtk3Helpers.ToNative(this).StyleContext;

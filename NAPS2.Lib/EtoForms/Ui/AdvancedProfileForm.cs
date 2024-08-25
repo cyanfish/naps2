@@ -33,8 +33,11 @@ public class AdvancedProfileForm : EtoDialogBase
     private readonly CheckBox _twainProgress = new() { Text = UiStrings.ShowNativeTwainProgress };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
-    public AdvancedProfileForm(Naps2Config config) : base(config)
+    public AdvancedProfileForm(Naps2Config config, IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.AdvancedProfileFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("blueprints_small"));
+
         _restoreDefaults.Click += RestoreDefaults_Click;
         _maximumQuality.CheckedChanged += MaximumQuality_CheckedChanged;
         _excludeBlank.CheckedChanged += ExcludeBlank_CheckedChanged;
@@ -57,9 +60,6 @@ public class AdvancedProfileForm : EtoDialogBase
     {
         UpdateValues(ScanProfile!);
         UpdateEnabled();
-
-        Title = UiStrings.AdvancedProfileFormTitle;
-        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;

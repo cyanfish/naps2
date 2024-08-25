@@ -36,8 +36,11 @@ public class PdfSettingsForm : EtoDialogBase
 
     private readonly EnumDropDownWidget<PdfCompat> _compat = new();
 
-    public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper) : base(config)
+    public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper, IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.PdfSettingsFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("file_extension_pdf_small"));
+
         _defaultFilePath = new(this, dialogHelper) { PdfOnly = true };
         _compat.Format = compat => compat switch
         {
@@ -59,9 +62,6 @@ public class PdfSettingsForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.PdfSettingsFormTitle;
-        Icon = new Icon(1f, Icons.file_extension_pdf_small.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 

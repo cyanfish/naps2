@@ -56,6 +56,9 @@ public class BatchScanForm : EtoDialogBase
         IBatchScanPerformer batchScanPerformer, ErrorOutput errorOutput, IIconProvider iconProvider)
         : base(config)
     {
+        Title = UiStrings.BatchScanFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("application_cascade_small"));
+
         _profileManager = profileManager;
         _batchScanPerformer = batchScanPerformer;
         _errorOutput = errorOutput;
@@ -103,9 +106,6 @@ public class BatchScanForm : EtoDialogBase
         NewProfileCommand.Enabled =
             !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
         UpdateUIFromSettings();
-
-        Title = UiStrings.BatchScanFormTitle;
-        Icon = new Icon(1f, Icons.application_cascade.ToEtoImage());
 
         FormStateController.FixedHeightLayout = true;
         AbortButton = _cancel;

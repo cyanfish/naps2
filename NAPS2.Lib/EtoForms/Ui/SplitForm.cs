@@ -32,12 +32,15 @@ public class SplitForm : UnaryImageFormBase
         IIconProvider iconProvider, ColorScheme colorScheme) :
         base(config, imageList, thumbnailController)
     {
-        _colorScheme = colorScheme;
-        Icon = new Icon(1f, Icons.split.ToEtoImage());
         Title = UiStrings.Split;
+        Icon = new Icon(1f, iconProvider.GetIcon("split_small"));
 
-        _vSplit = C.IconButton(iconProvider.GetIcon("split_ver")!, () => SetOrientation(SplitOrientation.Vertical));
-        _hSplit = C.IconButton(iconProvider.GetIcon("split_hor")!, () => SetOrientation(SplitOrientation.Horizontal));
+        _colorScheme = colorScheme;
+
+        _vSplit = C.IconButton(iconProvider.GetIcon("split_ver_small")!,
+            () => SetOrientation(SplitOrientation.Vertical));
+        _hSplit = C.IconButton(iconProvider.GetIcon("split_hor_small")!,
+            () => SetOrientation(SplitOrientation.Horizontal));
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
@@ -46,7 +49,9 @@ public class SplitForm : UnaryImageFormBase
     protected override List<Transform> Transforms => throw new NotSupportedException();
 
     private int HandleClickRadius =>
-        (int) Math.Max(Math.Round((_orientation == SplitOrientation.Horizontal ? _overlayH : _overlayW) * HANDLE_RADIUS_RATIO), HANDLE_MIN_RADIUS);
+        (int) Math.Max(
+            Math.Round((_orientation == SplitOrientation.Horizontal ? _overlayH : _overlayW) * HANDLE_RADIUS_RATIO),
+            HANDLE_MIN_RADIUS);
 
     protected override void OnPreLoad(EventArgs e)
     {
@@ -184,12 +189,14 @@ public class SplitForm : UnaryImageFormBase
         if (_orientation == SplitOrientation.Horizontal)
         {
             var y = _overlayT + _cropY * _overlayH;
-            return e.Location.Y > y - radius && e.Location.Y < y + radius && e.Location.X > _overlayL && e.Location.X < _overlayR;
+            return e.Location.Y > y - radius && e.Location.Y < y + radius && e.Location.X > _overlayL &&
+                   e.Location.X < _overlayR;
         }
         else
         {
             var x = _overlayL + _cropX * _overlayW;
-            return e.Location.X > x - radius && e.Location.X < x + radius && e.Location.Y > _overlayT && e.Location.Y < _overlayB;
+            return e.Location.X > x - radius && e.Location.X < x + radius && e.Location.Y > _overlayT &&
+                   e.Location.Y < _overlayB;
         }
     }
 

@@ -15,8 +15,11 @@ public class OcrDownloadForm : EtoDialogBase
     private readonly Button _downloadButton;
 
     public OcrDownloadForm(Naps2Config config, TesseractLanguageManager tesseractLanguageManager,
-        OcrLanguagesListViewBehavior ocrLanguagesListViewBehavior) : base(config)
+        OcrLanguagesListViewBehavior ocrLanguagesListViewBehavior, IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.OcrDownloadFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("text_small"));
+
         _tesseractLanguageManager = tesseractLanguageManager;
         _languageList = EtoPlatform.Current.CreateListView(ocrLanguagesListViewBehavior);
 
@@ -42,9 +45,6 @@ public class OcrDownloadForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.OcrDownloadFormTitle;
-        Icon = new Icon(1f, Icons.text_small.ToEtoImage());
-
         FormStateController.RestoreFormState = false;
         FormStateController.DefaultExtraLayoutSize = new Size(300, 300);
 

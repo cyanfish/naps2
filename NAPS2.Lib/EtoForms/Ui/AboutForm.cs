@@ -17,9 +17,12 @@ public class AboutForm : EtoDialogBase
     private readonly UpdateChecker _updateChecker;
     private readonly CheckBox _enableDebugLogging = C.CheckBox(UiStrings.EnableDebugLogging);
 
-    public AboutForm(Naps2Config config, UpdateChecker updateChecker)
+    public AboutForm(Naps2Config config, IIconProvider iconProvider, UpdateChecker updateChecker)
         : base(config)
     {
+        Title = UiStrings.AboutFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("information_small"));
+
         _donateButton = EtoPlatform.Current.AccessibleImageButton(
             Icons.btn_donate_LG.ToEtoImage(),
             UiStrings.Donate,
@@ -35,9 +38,6 @@ public class AboutForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.AboutFormTitle;
-        Icon = new Icon(1f, Icons.information_small.ToEtoImage());
-
         FormStateController.Resizable = false;
         FormStateController.RestoreFormState = false;
 

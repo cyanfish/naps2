@@ -10,16 +10,16 @@ public class AuthorizeForm : EtoDialogBase
     private readonly ErrorOutput _errorOutput;
     private CancellationTokenSource? _cancelTokenSource;
 
-    public AuthorizeForm(Naps2Config config, ErrorOutput errorOutput) : base(config)
+    public AuthorizeForm(Naps2Config config, IIconProvider iconProvider, ErrorOutput errorOutput) : base(config)
     {
+        Title = UiStrings.AuthorizeFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("key_small"));
+
         _errorOutput = errorOutput;
     }
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.AuthorizeFormTitle;
-        Icon = new Icon(1f, Icons.key_small.ToEtoImage());
-
         FormStateController.FixedHeightLayout = true;
         FormStateController.RestoreFormState = false;
         FormStateController.Resizable = false;

@@ -32,12 +32,13 @@ public class CropForm : UnaryImageFormBase
     private bool _freeformActive;
 
     public CropForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
-        ColorScheme colorScheme) :
+        ColorScheme colorScheme, IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        _colorScheme = colorScheme;
-        Icon = new Icon(1f, Icons.transform_crop.ToEtoImage());
         Title = UiStrings.Crop;
+        Icon = new Icon(1f, iconProvider.GetIcon("transform_crop_small"));
+
+        _colorScheme = colorScheme;
 
         OverlayBorderSize = HANDLE_WIDTH;
         Overlay.MouseDown += Overlay_MouseDown;

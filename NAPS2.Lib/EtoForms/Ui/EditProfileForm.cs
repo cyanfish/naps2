@@ -39,12 +39,16 @@ public class EditProfileForm : EtoDialogBase
     private CancellationTokenSource? _updateCapsCts;
 
     public EditProfileForm(Naps2Config config, IScanPerformer scanPerformer, ErrorOutput errorOutput,
-        ProfileNameTracker profileNameTracker, DeviceCapsCache deviceCapsCache) : base(config)
+        ProfileNameTracker profileNameTracker, DeviceCapsCache deviceCapsCache,
+        IIconProvider iconProvider) : base(config)
     {
+        Title = UiStrings.EditProfileFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("blueprints_small"));
+
         _errorOutput = errorOutput;
         _profileNameTracker = profileNameTracker;
         _deviceCapsCache = deviceCapsCache;
-        _deviceSelectorWidget = new(scanPerformer, deviceCapsCache, this)
+        _deviceSelectorWidget = new(scanPerformer, deviceCapsCache, iconProvider, this)
         {
             ProfileFunc = GetUpdatedScanProfile,
             AllowAlwaysAsk = true
@@ -85,9 +89,6 @@ public class EditProfileForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.EditProfileFormTitle;
-        Icon = new Icon(1f, Icons.blueprints_small.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 

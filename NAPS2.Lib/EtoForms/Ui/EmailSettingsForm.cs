@@ -16,8 +16,12 @@ internal class EmailSettingsForm : EtoDialogBase
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
-    public EmailSettingsForm(Naps2Config config, SystemEmailClients systemEmailClients) : base(config)
+    public EmailSettingsForm(Naps2Config config, SystemEmailClients systemEmailClients, IIconProvider iconProvider) :
+        base(config)
     {
+        Title = UiStrings.EmailSettingsFormTitle;
+        Icon = new Icon(1f, iconProvider.GetIcon("email_small"));
+
         _systemEmailClients = systemEmailClients;
         _attachmentName = new(this);
 
@@ -29,9 +33,6 @@ internal class EmailSettingsForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        Title = UiStrings.EmailSettingsFormTitle;
-        Icon = new Icon(1f, Icons.email_small.ToEtoImage());
-
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 
