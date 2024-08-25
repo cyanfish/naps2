@@ -28,9 +28,7 @@ internal class ScanDriverFactory : IScanDriverFactory
 #if NET6_0_OR_GREATER
                 if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
 #endif
-                return options.TwainOptions.Adapter == TwainAdapter.Legacy
-                    ? _scanningContext.LegacyTwainDriver ?? throw new NotSupportedException()
-                    : new Twain.TwainScanDriver(_scanningContext);
+                return new Twain.TwainScanDriver(_scanningContext);
 #endif
             case Driver.Sane:
                 return new Sane.SaneScanDriver(_scanningContext);

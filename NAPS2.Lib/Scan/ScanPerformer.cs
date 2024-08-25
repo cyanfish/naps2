@@ -232,7 +232,6 @@ internal class ScanPerformer : IScanPerformer
             },
             TwainOptions =
             {
-                Adapter = scanProfile.TwainImpl == TwainImpl.Legacy ? TwainAdapter.Legacy : TwainAdapter.NTwain,
                 Dsm = scanProfile.TwainImpl == TwainImpl.X64
                     ? TwainDsm.NewX64
                     : scanProfile.TwainImpl is TwainImpl.OldDsm or TwainImpl.Legacy

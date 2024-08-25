@@ -49,6 +49,8 @@ public class AdvancedProfileForm : EtoDialogBase
         {
             _twainImpl.Items = EnumDropDownWidget<TwainImpl>.DefaultItems.Where(x => x != TwainImpl.X64);
         }
+        // Remove obsolete options
+        _twainImpl.Items = _twainImpl.Items.Except([TwainImpl.Legacy]);
     }
 
     protected override void BuildLayout()
@@ -122,7 +124,7 @@ public class AdvancedProfileForm : EtoDialogBase
         _stretchToPageSize.Checked = scanProfile.ForcePageSize;
         _cropToPageSize.Checked = scanProfile.ForcePageSizeCrop;
         _flipDuplexed.Checked = scanProfile.FlipDuplexedPages;
-        _twainImpl.SelectedItem = scanProfile.TwainImpl;
+        _twainImpl.SelectedItem = scanProfile.TwainImpl == TwainImpl.Legacy ? TwainImpl.OldDsm : scanProfile.TwainImpl;
         _twainProgress.Checked = scanProfile.TwainProgress;
         _excludeBlank.Checked = scanProfile.ExcludeBlankPages;
         _whiteThreshold.IntValue = scanProfile.BlankPageWhiteThreshold;

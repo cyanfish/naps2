@@ -13,13 +13,6 @@ public class TwainOptions
     public TwainDsm Dsm { get; set; }
 
     /// <summary>
-    /// The adapter used for TWAIN, either the modern NTwain or the Legacy implementation used in very old versions of
-    /// NAPS2. NTwain is better for the vast majority of scanners, but a few (e.g. Kyocera brand) may only work with
-    /// Legacy for unknown reasons.  
-    /// </summary>
-    internal TwainAdapter Adapter { get; set; }
-
-    /// <summary>
     /// The transfer mode used for TWAIN, either Native or Memory. By default Memory is used.
     /// </summary>
     public TwainTransferMode TransferMode { get; set; }
@@ -36,12 +29,6 @@ public class TwainOptions
     /// By default they are excluded, since NAPS2 supports using WIA devices directly.
     /// </summary>
     public bool IncludeWiaDevices { get; set; }
-}
-
-internal enum TwainAdapter
-{
-    NTwain,
-    Legacy
 }
 
 /// <summary>

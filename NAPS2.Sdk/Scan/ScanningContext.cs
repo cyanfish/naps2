@@ -67,8 +67,6 @@ public class ScanningContext : IDisposable
 
     internal OcrRequestQueue OcrRequestQueue { get; } = new();
 
-    internal IScanDriver? LegacyTwainDriver { get; set; }
-
     public void Dispose()
     {
         _processedImageOwner.Dispose();
