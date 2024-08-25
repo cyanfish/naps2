@@ -268,7 +268,7 @@ public class DesktopCommands
         {
             ToolBarText = UiStrings.Clear,
             MenuText = UiStrings.ClearAll,
-            Image = iconProvider.GetIcon("cancel")
+            Image = iconProvider.GetIcon("broom")
         };
         LanguageMenu = new ActionCommand
         {
