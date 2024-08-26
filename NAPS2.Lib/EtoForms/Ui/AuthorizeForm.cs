@@ -13,7 +13,7 @@ public class AuthorizeForm : EtoDialogBase
     public AuthorizeForm(Naps2Config config, IIconProvider iconProvider, ErrorOutput errorOutput) : base(config)
     {
         Title = UiStrings.AuthorizeFormTitle;
-        Icon = new Icon(1f, iconProvider.GetIcon("key_small"));
+        Icon = iconProvider.GetFormIcon("key_small");
 
         _errorOutput = errorOutput;
     }

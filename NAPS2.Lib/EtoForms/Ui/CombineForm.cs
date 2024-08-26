@@ -20,7 +20,7 @@ public class CombineForm : ImageFormBase
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Combine;
-        Icon = new Icon(1f, iconProvider.GetIcon("combine_small"));
+        Icon = iconProvider.GetFormIcon("combine_small");
 
         _iconProvider = iconProvider;
         _scanningContext = scanningContext;

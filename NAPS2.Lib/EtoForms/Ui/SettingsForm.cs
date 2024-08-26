@@ -27,7 +27,7 @@ internal class SettingsForm : EtoDialogBase
         DesktopFormProvider desktopFormProvider, IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.SettingsFormTitle;
-        Icon = new Icon(1f, iconProvider.GetIcon("cog_small"));
+        Icon = iconProvider.GetFormIcon("cog_small");
 
         _desktopFormProvider = desktopFormProvider;
         UpdateValues(Config);

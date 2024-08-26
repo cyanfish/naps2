@@ -47,4 +47,10 @@ public class WinFormsIconProvider : IIconProvider
 
         return null;
     }
+
+    public Icon? GetFormIcon(string name)
+    {
+        var icon = GetIcon(name);
+        return icon != null ? new Icon(1f, icon) : null;
+    }
 }

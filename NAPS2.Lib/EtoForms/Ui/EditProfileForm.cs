@@ -43,7 +43,7 @@ public class EditProfileForm : EtoDialogBase
         IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.EditProfileFormTitle;
-        Icon = new Icon(1f, iconProvider.GetIcon("blueprints_small"));
+        Icon = iconProvider.GetFormIcon("blueprints_small");
 
         _errorOutput = errorOutput;
         _profileNameTracker = profileNameTracker;

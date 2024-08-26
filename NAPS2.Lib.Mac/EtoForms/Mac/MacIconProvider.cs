@@ -83,4 +83,6 @@ public class MacIconProvider : IIconProvider
         }
         return _defaultIconProvider.GetIcon(name);
     }
+
+    public Icon? GetFormIcon(string name) => null;
 }

@@ -12,7 +12,7 @@ public class HueSatForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        Icon = new Icon(1f, iconProvider.GetIcon("color_management_small"));
+        Icon = iconProvider.GetFormIcon("color_management_small");
         Title = UiStrings.HueSaturation;
 
         _hueSlider.Icon = iconProvider.GetIcon("color_wheel_small");

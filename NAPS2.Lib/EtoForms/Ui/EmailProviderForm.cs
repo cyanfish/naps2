@@ -13,7 +13,7 @@ internal class EmailProviderForm : EtoDialogBase
         base(config)
     {
         Title = UiStrings.EmailProviderFormTitle;
-        Icon = new Icon(1f, iconProvider.GetIcon("email_small"));
+        Icon = iconProvider.GetFormIcon("email_small");
 
         _controller = controller;
     }

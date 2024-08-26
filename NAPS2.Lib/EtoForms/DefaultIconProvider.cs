@@ -10,4 +10,10 @@ public class DefaultIconProvider : IIconProvider
         if (data == null) return null;
         return new Bitmap(data);
     }
+
+    public Icon? GetFormIcon(string name)
+    {
+        var icon = GetIcon(name);
+        return icon != null ? new Icon(1f, icon) : null;
+    }
 }

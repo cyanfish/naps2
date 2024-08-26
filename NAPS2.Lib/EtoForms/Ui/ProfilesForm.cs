@@ -34,7 +34,7 @@ public class ProfilesForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.ProfilesFormTitle;
-        Icon = new Icon(1f, iconProvider.GetIcon("blueprints_small"));
+        Icon = iconProvider.GetFormIcon("blueprints_small");
 
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;

@@ -27,7 +27,7 @@ public class ScannerSharingForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.ScannerSharingFormTitle;
-        Icon = new Icon(1f, iconProvider.GetIcon("wireless16"));
+        Icon = iconProvider.GetFormIcon("wireless16");
 
         _sharedDeviceManager = sharedDeviceManager;
         _osServiceManager = osServiceManager;

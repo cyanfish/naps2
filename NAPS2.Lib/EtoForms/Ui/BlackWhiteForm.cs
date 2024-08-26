@@ -11,7 +11,7 @@ public class BlackWhiteForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        Icon = new Icon(1f, iconProvider.GetIcon("contrast_high_small"));
+        Icon = iconProvider.GetFormIcon("contrast_high_small");
         Title = UiStrings.BlackAndWhite;
 
         _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high_small");

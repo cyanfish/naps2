@@ -11,7 +11,7 @@ public class SharpenForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        Icon = new Icon(1f, iconProvider.GetIcon("sharpen_small"));
+        Icon = iconProvider.GetFormIcon("sharpen_small");
         Title = UiStrings.Sharpen;
 
         _sharpenSlider.Icon = iconProvider.GetIcon("sharpen_small");

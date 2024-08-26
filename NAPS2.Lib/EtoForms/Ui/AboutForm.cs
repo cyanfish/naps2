@@ -21,7 +21,7 @@ public class AboutForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.AboutFormTitle;
-        Icon = new Icon(1f, iconProvider.GetIcon("information_small"));
+        Icon = iconProvider.GetFormIcon("information_small");
 
         _donateButton = EtoPlatform.Current.AccessibleImageButton(
             Icons.btn_donate_LG.ToEtoImage(),
