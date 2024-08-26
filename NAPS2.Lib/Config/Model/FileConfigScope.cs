@@ -5,7 +5,7 @@ namespace NAPS2.Config.Model;
 
 public class FileConfigScope<TConfig> : ConfigScope<TConfig>
 {
-    private static readonly TimeSpan READ_INTERVAL = TimeSpan.FromMilliseconds(100); 
+    private static readonly TimeSpan READ_INTERVAL = TimeSpan.FromMilliseconds(5000);
     
     private readonly string _filePath;
     private readonly ISerializer<ConfigStorage<TConfig>> _serializer;
