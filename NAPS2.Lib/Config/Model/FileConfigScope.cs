@@ -6,18 +6,19 @@ namespace NAPS2.Config.Model;
 public class FileConfigScope<TConfig> : ConfigScope<TConfig>
 {
     private static readonly TimeSpan READ_INTERVAL = TimeSpan.FromMilliseconds(5000);
-    
+
     private readonly string _filePath;
     private readonly ISerializer<ConfigStorage<TConfig>> _serializer;
     private ConfigStorage<TConfig> _cache = new();
     private ConfigStorage<TConfig> _changes = new();
     private readonly TimedThrottle _readHandshakeThrottle;
 
-    public FileConfigScope(string filePath, ISerializer<ConfigStorage<TConfig>> serializer, ConfigScopeMode mode) : base(mode)
+    public FileConfigScope(string filePath, ISerializer<ConfigStorage<TConfig>> serializer, ConfigScopeMode mode,
+        TimeSpan? readInterval = null) : base(mode)
     {
         _filePath = filePath;
         _serializer = serializer;
-        _readHandshakeThrottle = new TimedThrottle(ReadHandshake, READ_INTERVAL);
+        _readHandshakeThrottle = new TimedThrottle(ReadHandshake, readInterval ?? READ_INTERVAL);
     }
 
     protected override bool TryGetInternal(ConfigLookup lookup, out object? value)

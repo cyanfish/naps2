@@ -14,8 +14,10 @@ public class FileConfigScopeTests : ContextualTests
     public void FileScope()
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
-            
+        var scope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite,
+            TimeSpan.FromMilliseconds(100));
+
         // Nothing should be created yet
         Assert.False(File.Exists(configPath));
 
@@ -28,7 +30,7 @@ public class FileConfigScopeTests : ContextualTests
 
         var doc = XDocument.Load(configPath);
         Assert.Equal("UserConfig", doc.Root?.Name);
-        
+
         var docValue = doc.Descendants("Culture").Single().Value;
         Assert.Equal("fr", docValue);
 
@@ -88,7 +90,8 @@ public class FileConfigScopeTests : ContextualTests
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
         File.WriteAllText(configPath, @"blah");
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
 
         Assert.False(scope.Has(c => c.Culture));
     }
@@ -98,7 +101,8 @@ public class FileConfigScopeTests : ContextualTests
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
         File.WriteAllText(configPath, @"<?xml version=""1.0"" encoding=""utf-8""?><Blah><Culture>fr</Culture></Blah>");
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
 
         Assert.False(scope.Has(c => c.Culture));
     }
@@ -107,7 +111,8 @@ public class FileConfigScopeTests : ContextualTests
     public void ReadWithMissingFile()
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
 
         Assert.False(scope.Has(c => c.Culture));
     }
@@ -117,8 +122,10 @@ public class FileConfigScopeTests : ContextualTests
     {
         var configPath = Path.Combine(FolderPath, "appsettings.xml");
         File.WriteAllText(configPath, ConfigData.AppSettings);
-        var defaultsScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
-        var lockedScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.LockedOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+        var defaultsScope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+        var lockedScope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.LockedOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
 
         Assert.False(lockedScope.Has(c => c.AlwaysRememberDevice));
         Assert.True(lockedScope.TryGet(c => c.PdfSettings.Compat, out var pdfCompat));
@@ -138,8 +145,10 @@ public class FileConfigScopeTests : ContextualTests
     {
         var configPath = Path.Combine(FolderPath, "appsettings.xml");
         File.WriteAllText(configPath, ConfigData.NewAppSettings);
-        var defaultsScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
-        var lockedScope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.LockedOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+        var defaultsScope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
+        var lockedScope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.LockedOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
 
         Assert.False(lockedScope.Has(c => c.SingleInstance));
         Assert.True(lockedScope.TryGet(c => c.DeleteAfterSaving, out var deleteAfterSaving));
@@ -155,7 +164,8 @@ public class FileConfigScopeTests : ContextualTests
     {
         var configPath = Path.Combine(FolderPath, "config.xml");
         File.WriteAllText(configPath, ConfigData.OldUserConfig);
-        var scope = new FileConfigScope<CommonConfig>(configPath, new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
+        var scope = new FileConfigScope<CommonConfig>(configPath,
+            new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
 
         Assert.False(scope.Has(c => c.LockSystemProfiles));
         Assert.True(scope.TryGet(c => c.OcrMode, out var ocrMode));
