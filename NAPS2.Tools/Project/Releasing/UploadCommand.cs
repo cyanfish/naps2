@@ -18,7 +18,7 @@ public class UploadCommand : ICommand<UploadOptions>
 
     public int Run(UploadOptions opts)
     {
-        string version = opts.Version ?? ProjectHelper.GetCurrentVersion();
+        string version = opts.Version ?? ProjectHelper.GetCurrentVersionName();
         if (opts.Target != "sdk")
         {
             // Validate all package files
@@ -58,7 +58,7 @@ public class UploadCommand : ICommand<UploadOptions>
         if (opts.Target is "all" or "apt")
         {
             Output.Info("Updating Apt metadata on downloads.naps2.com");
-            UpdateAptMetadata();
+            UpdateAptMetadata(version);
             didSomething = true;
         }
         if (opts.Target is "sdk")
@@ -83,7 +83,8 @@ public class UploadCommand : ICommand<UploadOptions>
         var repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");
         var resource = await repository.GetResourceAsync<PackageUpdateResource>();
         var v = ProjectHelper.GetSdkVersion();
-        var packagePaths = ProjectHelper.GetSdkProjects().Select(x => $"{GetProjectFolder(x)}/bin/Release/{x}.{v}.nupkg").ToList();
+        var packagePaths = ProjectHelper.GetSdkProjects()
+            .Select(x => $"{GetProjectFolder(x)}/bin/Release/{x}.{v}.nupkg").ToList();
         var key = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "nuget"));
         await resource.Push(
             packagePaths,
@@ -179,6 +180,11 @@ public class UploadCommand : ICommand<UploadOptions>
                 client.UploadFile(stream, $"/home/frs/project/naps2/{version}/{Path.GetFileName(path)}");
             }
         }
+        if (version.Contains('b'))
+        {
+            Output.Verbose("Skipping default downloads for beta");
+            return;
+        }
         Output.Verbose($"Setting default downloads");
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -232,8 +238,14 @@ public class UploadCommand : ICommand<UploadOptions>
         Output.Info($"Uploaded files.");
     }
 
-    private void UpdateAptMetadata()
+    private void UpdateAptMetadata(string version)
     {
+        if (version.Contains('b'))
+        {
+            Output.Verbose("Skipping APT metadata for beta");
+            return;
+        }
+
         var aptTemp = Path.Combine(Paths.SetupObj, "apt");
         if (Directory.Exists(aptTemp))
         {
@@ -243,9 +255,12 @@ public class UploadCommand : ICommand<UploadOptions>
 
         Cli.Run("ssh", "user@downloads.naps2.com \"mkdir -p /home/user/apt-temp-packages/\"");
         Cli.Run("ssh", "user@downloads.naps2.com \"mkdir -p /home/user/apt-temp-release/\"");
-        Cli.Run("ssh", "user@downloads.naps2.com \"cd /var/www/html/ ; apt-ftparchive packages . > /home/user/apt-temp-packages/Packages\" ; apt-ftparchive release /home/user/apt-temp-packages/ > /home/user/apt-temp-release/Release\"");
-        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp-packages/Packages {Path.Combine(aptTemp, "Packages")}");
-        Cli.Run("scp", $"user@downloads.naps2.com:/home/user/apt-temp-release/Release {Path.Combine(aptTemp, "Release")}");
+        Cli.Run("ssh",
+            "user@downloads.naps2.com \"cd /var/www/html/ ; apt-ftparchive packages . > /home/user/apt-temp-packages/Packages\" ; apt-ftparchive release /home/user/apt-temp-packages/ > /home/user/apt-temp-release/Release\"");
+        Cli.Run("scp",
+            $"user@downloads.naps2.com:/home/user/apt-temp-packages/Packages {Path.Combine(aptTemp, "Packages")}");
+        Cli.Run("scp",
+            $"user@downloads.naps2.com:/home/user/apt-temp-release/Release {Path.Combine(aptTemp, "Release")}");
         Cli.Run("gpg", $"--output {Path.Combine(aptTemp, "Release.gpg")} --sign {Path.Combine(aptTemp, "Release")}");
         Cli.Run("gpg", $"--output {Path.Combine(aptTemp, "InRelease")} --clearsign {Path.Combine(aptTemp, "Release")}");
         Cli.Run("scp", $"{Path.Combine(aptTemp, "Packages")} user@downloads.naps2.com:/var/www/html/Packages");
