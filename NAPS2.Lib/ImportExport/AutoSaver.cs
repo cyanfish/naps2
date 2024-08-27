@@ -117,13 +117,15 @@ public class AutoSaver
         string subPath = placeholders.Substitute(settings.FilePath, true, i);
         if (settings.PromptForFilePath)
         {
-            Invoker.Current.Invoke(() =>
+            string? newPath = null!;
+            if (Invoker.Current.InvokeGet(() => _dialogHelper.PromptToSavePdfOrImage(subPath, out newPath)))
             {
-                if (_dialogHelper.PromptToSavePdfOrImage(subPath, out string? newPath))
-                {
-                    subPath = placeholders.Substitute(newPath!, true, i);
-                }
-            });
+                subPath = placeholders.Substitute(newPath!, true, i);
+            }
+            else
+            {
+                return (false, null);
+            }
         }
         // TODO: This placeholder handling is complex and wrong in some cases (e.g. FilePerScan with ext = "jpg")
         // TODO: Maybe have initial placeholders that replace date, then rely on the ops to increment the file num

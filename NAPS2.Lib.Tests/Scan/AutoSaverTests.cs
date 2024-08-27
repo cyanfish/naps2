@@ -199,6 +199,53 @@ public class AutoSaverTests : ContextualTests
         PdfAsserts.AssertImages(Path.Combine(FolderPath, "test2.pdf"), ImageResources.dog_h_n300);
     }
 
+    [Fact]
+    public async Task PromptForFilePath()
+    {
+        var settings = new AutoSaveSettings
+        {
+            FilePath = Path.Combine(FolderPath, "test_a_$(n).pdf"),
+            PromptForFilePath = true
+        };
+        _dialogHelper.PromptToSavePdfOrImage(Arg.Any<string>(), out Arg.Any<string>()).Returns(x =>
+        {
+            x[1] = Path.Combine(FolderPath, "test_b_$(n).pdf");
+            return true;
+        });
+
+        var scanned = CreateScannedImages(ImageResources.dog);
+        var output = await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
+        Assert.Single(output);
+        Assert.False(IsDisposed(output[0]));
+        Assert.True(IsDisposed(scanned[0]));
+        Assert.Single(Folder.GetFiles());
+        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test_b_1.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task CancelPromptForFilePath()
+    {
+        var settings = new AutoSaveSettings
+        {
+            FilePath = Path.Combine(FolderPath, "test$(n).pdf"),
+            PromptForFilePath = true
+        };
+        _dialogHelper.PromptToSavePdfOrImage(Arg.Any<string>(), out Arg.Any<string>()).Returns(x =>
+        {
+            x[1] = Path.Combine(FolderPath, "test$(n).pdf");
+            return false;
+        });
+
+        var scanned = CreateScannedImages(ImageResources.dog);
+        var output = await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
+        Assert.Single(output);
+        Assert.False(IsDisposed(output[0]));
+        Assert.True(IsDisposed(scanned[0]));
+        Assert.Empty(Folder.GetFiles());
+    }
+
     // TODO: Finish out tests
 
     //
