@@ -19,14 +19,14 @@ public class ProfilesForm : EtoDialogBase
 
     private readonly IListView<ScanProfile> _listView;
 
-    private readonly Command _scanCommand;
-    private readonly Command _addCommand;
-    private readonly Command _editCommand;
-    private readonly Command _deleteCommand;
-    private readonly Command _setDefaultCommand;
-    private readonly Command _copyCommand;
-    private readonly Command _pasteCommand;
-    private readonly Command _scannerSharingCommand;
+    private readonly ActionCommand _scanCommand;
+    private readonly ActionCommand _addCommand;
+    private readonly ActionCommand _editCommand;
+    private readonly ActionCommand _deleteCommand;
+    private readonly ActionCommand _setDefaultCommand;
+    private readonly ActionCommand _copyCommand;
+    private readonly ActionCommand _pasteCommand;
+    private readonly ActionCommand _scannerSharingCommand;
 
     public ProfilesForm(Naps2Config config, IScanPerformer scanPerformer, ProfileNameTracker profileNameTracker,
         IProfileManager profileManager, ProfileListViewBehavior profileListViewBehavior,
@@ -55,27 +55,27 @@ public class ProfilesForm : EtoDialogBase
         _scanCommand = new ActionCommand(DoScan)
         {
             MenuText = UiStrings.Scan,
-            Image = iconProvider.GetIcon("control_play_blue_small"),
+            IconName = "control_play_blue_small",
         };
         _addCommand = new ActionCommand(DoAdd)
         {
             MenuText = UiStrings.New,
-            Image = iconProvider.GetIcon("add_small")
+            IconName = "add_small"
         };
         _editCommand = new ActionCommand(DoEdit)
         {
             MenuText = UiStrings.Edit,
-            Image = iconProvider.GetIcon("pencil_small")
+            IconName = "pencil_small"
         };
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            Image = iconProvider.GetIcon("cross_small")
+            IconName = "cross_small"
         };
         _setDefaultCommand = new ActionCommand(DoSetDefault)
         {
             MenuText = UiStrings.SetDefault,
-            Image = iconProvider.GetIcon("accept_small")
+            IconName = "accept_small"
         };
         _copyCommand = new ActionCommand(DoCopy)
         {
@@ -88,7 +88,7 @@ public class ProfilesForm : EtoDialogBase
         _scannerSharingCommand = new ActionCommand(OpenScannerSharingForm)
         {
             MenuText = UiStrings.ScannerSharing,
-            Image = iconProvider.GetIcon("wireless_small")
+            IconName = "wireless_small"
         };
 
         var profilesKsm = new KeyboardShortcutManager();

@@ -27,7 +27,7 @@ public class PageSizeForm : EtoDialogBase
         _name.TextChanged += Name_TextChanged;
     }
 
-    public Command DeletePageSizeCommand { get; set; }
+    public ActionCommand DeletePageSizeCommand { get; set; }
 
     private void DeletePageSize()
     {

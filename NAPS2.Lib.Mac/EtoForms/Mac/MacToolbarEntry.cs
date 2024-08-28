@@ -11,12 +11,12 @@ public static class MacToolbarItems
         return new ToolBarHandler.DividerToolbarItem(true);
     }
 
-    public static NSToolbarItem Create(string id, Command command, string? title = null, string? tooltip = null,
+    public static NSToolbarItem Create(string id, ActionCommand command, string? title = null, string? tooltip = null,
         bool nav = false)
     {
         var item = new NSToolbarItem(id)
         {
-            Image = command.Image?.ToNS(),
+            Image = command.GetIconImage(1)?.ToNS(),
             Title = title ?? "",
             Label = command.ToolBarText ?? "",
             // TODO: Verify this fixes label display on macOS 10.15
@@ -31,12 +31,12 @@ public static class MacToolbarItems
         return item;
     }
 
-    public static NSToolbarItem CreateMenu(string id, Command menuCommand, MenuProvider menuProvider,
+    public static NSToolbarItem CreateMenu(string id, ActionCommand menuCommand, MenuProvider menuProvider,
         string? title = null, string? tooltip = null)
     {
         return new NSMenuToolbarItem(id)
         {
-            Image = menuCommand.Image?.ToNS(),
+            Image = menuCommand.GetIconImage(1)?.ToNS(),
             Label = menuCommand.ToolBarText ?? "",
             Title = title ?? "",
             ToolTip = tooltip ?? menuCommand.ToolBarText ?? "",

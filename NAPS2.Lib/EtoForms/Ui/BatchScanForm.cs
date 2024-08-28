@@ -83,8 +83,8 @@ public class BatchScanForm : EtoDialogBase
         _userTransact = Config.User.BeginTransaction();
         _transactionConfig = Config.WithTransaction(_userTransact);
 
-        EditProfileCommand = new ActionCommand(EditProfile) { Image = iconProvider.GetIcon("pencil_small") };
-        NewProfileCommand = new ActionCommand(NewProfile) { Image = iconProvider.GetIcon("add_small") };
+        EditProfileCommand = new ActionCommand(EditProfile) { IconName = "pencil_small" };
+        NewProfileCommand = new ActionCommand(NewProfile) { IconName = "add_small" };
     }
 
     private void UpdateVisibility(object? sender, EventArgs e)
@@ -97,9 +97,9 @@ public class BatchScanForm : EtoDialogBase
 
     public Action<ProcessedImage> ImageCallback { get; set; } = null!;
 
-    private Command NewProfileCommand { get; }
+    private ActionCommand NewProfileCommand { get; }
 
-    private Command EditProfileCommand { get; }
+    private ActionCommand EditProfileCommand { get; }
 
     protected override void BuildLayout()
     {
