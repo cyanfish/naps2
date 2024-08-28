@@ -15,9 +15,9 @@ public class ScannerSharingForm : EtoDialogBase
     private readonly CheckBox _shareAsService = C.CheckBox(UiStrings.ShareAsService);
     private readonly IListView<SharedDevice> _listView;
 
-    private readonly Command _addCommand;
-    private readonly Command _editCommand;
-    private readonly Command _deleteCommand;
+    private readonly ActionCommand _addCommand;
+    private readonly ActionCommand _editCommand;
+    private readonly ActionCommand _deleteCommand;
 
     private bool _suppressChangeEvent;
 
@@ -37,17 +37,17 @@ public class ScannerSharingForm : EtoDialogBase
         _addCommand = new ActionCommand(DoAdd)
         {
             MenuText = UiStrings.Share,
-            Image = iconProvider.GetIcon("add_small")
+            IconName = "add_small"
         };
         _editCommand = new ActionCommand(DoEdit)
         {
             MenuText = UiStrings.Edit,
-            Image = iconProvider.GetIcon("pencil_small")
+            IconName = "pencil_small"
         };
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            Image = iconProvider.GetIcon("cross_small")
+            IconName = "cross_small"
         };
 
         var sharingKsm = new KeyboardShortcutManager();
