@@ -36,7 +36,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new WinFormsListView<T>(behavior);
 
-    public override void ConfigureImageButton(Button button, bool big)
+    public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         if (string.IsNullOrEmpty(button.Text))
         {
@@ -47,24 +47,26 @@ public class WinFormsEtoPlatform : EtoPlatform
             return;
         }
 
+        bool largeText = flags.HasFlag(ButtonFlags.LargeText);
+        bool largeIcon = flags.HasFlag(ButtonFlags.LargeIcon);
         button.MinimumSize = MinImageButtonSize;
         if (button.ImagePosition == ButtonImagePosition.Left)
         {
             var native = (WF.Button) button.ToNative()!;
-            native.TextImageRelation = big ? WF.TextImageRelation.ImageBeforeText : WF.TextImageRelation.Overlay;
+            native.TextImageRelation = largeText ? WF.TextImageRelation.ImageBeforeText : WF.TextImageRelation.Overlay;
             native.ImageAlign = SD.ContentAlignment.MiddleLeft;
-            native.TextAlign = big ? SD.ContentAlignment.MiddleLeft : SD.ContentAlignment.MiddleRight;
+            native.TextAlign = largeText ? SD.ContentAlignment.MiddleLeft : SD.ContentAlignment.MiddleRight;
 
-            if (big)
+            if (largeText)
             {
                 native.Text = @"  " + native.Text;
             }
 
-            var imageWidth = big ? 32 : 16;
+            var imageWidth = largeIcon ? 32 : 16;
             var textWidth = WF.TextRenderer.MeasureText(native.Text, native.Font).Width;
             native.AutoSize = false;
 
-            if (big)
+            if (largeText)
             {
                 native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = IMAGE_PADDING };
             }

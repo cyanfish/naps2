@@ -78,14 +78,15 @@ internal class EmailProviderController
             EmailProviderType.System => new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.System,
-                ProviderIcon = GetSystemIcon(clientName!) ?? _iconProvider.GetIcon("mail_yellow")!,
+                ProviderIcon = GetSystemIcon(clientName!),
+                ProviderIconName = "mail_yellow",
                 ProviderName = clientName!,
                 Choose = () => ChooseSystem(clientName!)
             },
             EmailProviderType.Thunderbird => new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.Thunderbird,
-                ProviderIcon = _iconProvider.GetIcon("thunderbird")!,
+                ProviderIconName = "thunderbird",
                 ProviderName = EmailProviderType.Thunderbird.Description(),
                 Choose = ChooseThunderbird,
                 // When Thunderbird isn't available, we disable it rather than hide it.
@@ -95,28 +96,28 @@ internal class EmailProviderController
             EmailProviderType.AppleMail => new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.AppleMail,
-                ProviderIcon = _iconProvider.GetIcon("apple_mail")!,
+                ProviderIconName = "apple_mail",
                 ProviderName = EmailProviderType.AppleMail.Description(),
                 Choose = ChooseAppleMail
             },
             EmailProviderType.Gmail => new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.Gmail,
-                ProviderIcon = _iconProvider.GetIcon("gmail")!,
+                ProviderIconName = "gmail",
                 ProviderName = EmailProviderType.Gmail.Description(),
                 Choose = () => ChooseOauth(_gmailOauthProvider)
             },
             EmailProviderType.OutlookWeb => new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.OutlookWeb,
-                ProviderIcon = _iconProvider.GetIcon("outlookweb")!,
+                ProviderIconName = "outlookweb",
                 ProviderName = EmailProviderType.OutlookWeb.Description(),
                 Choose = () => ChooseOauth(_outlookWebOauthProvider)
             },
             // EmailProviderType.CustomSmtp => new EmailProviderWidget
             // {
             //     ProviderType = EmailProviderType.CustomSmtp,
-            //     ProviderIcon = _iconProvider.GetIcon("email_setting")!,
+            //     ProviderIconName = "email_setting",
             //     ProviderName = EmailProviderType.CustomSmtp.Description(),
             //     Choose = ChooseCustomSmtp
             // },

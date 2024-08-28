@@ -85,24 +85,38 @@ public static class C
             Command = command
         };
 
-    public static Button Button(Command command) =>
+    public static Button Button(ActionCommand command) =>
         Button(command.MenuText, command);
 
-    public static Button Button(Command command, ButtonImagePosition imagePosition, bool big = false)
+    public static Button Button(ActionCommand command, ButtonImagePosition imagePosition, ButtonFlags flags = default)
     {
-        return Button(command, command.Image, imagePosition, big);
+        return Button(command, command.IconName, imagePosition, flags);
     }
 
-    public static Button Button(Command command, Image image, ButtonImagePosition imagePosition = default, bool big = false)
+    public static Button Button(ActionCommand command, string? iconName, ButtonImagePosition imagePosition = default, ButtonFlags flags = default)
     {
         var button = Button(command);
-        button.Image = image;
-        button.ImagePosition = imagePosition;
-        if (big)
+        if (command.Image != null)
         {
-            button.Font = new Font(button.Font.Family, 12);
+            EtoPlatform.Current.AttachDpiDependency(button,
+                scale =>
+                {
+                    int targetSize = flags.HasFlag(ButtonFlags.LargeIcon) ? 32 : 16;
+                    button.Image = command.Image.Clone().ResizeTo((int) (targetSize * scale));
+                });
         }
-        EtoPlatform.Current.ConfigureImageButton(button, big);
+        else if (iconName != null)
+        {
+            EtoPlatform.Current.AttachDpiDependency(button,
+                scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale));
+        }
+        button.ImagePosition = imagePosition;
+        if (flags.HasFlag(ButtonFlags.LargeText))
+        {
+            EtoPlatform.Current.AttachDpiDependency(button,
+                scale => button.Font = new Font(button.Font.Family, 12 * scale));
+        }
+        EtoPlatform.Current.ConfigureImageButton(button, flags);
         return button;
     }
 

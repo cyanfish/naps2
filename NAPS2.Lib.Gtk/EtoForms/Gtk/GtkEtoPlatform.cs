@@ -36,7 +36,7 @@ public class GtkEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new GtkListView<T>(behavior);
 
-    public override void ConfigureImageButton(Button button, bool big)
+    public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
     }
 

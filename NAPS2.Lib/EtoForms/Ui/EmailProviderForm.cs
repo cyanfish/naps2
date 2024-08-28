@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Email;
@@ -25,18 +24,21 @@ internal class EmailProviderForm : EtoDialogBase
         LayoutController.DefaultSpacing = 0;
         LayoutController.Content = L.Column(
             _controller.GetWidgets().Select(x => C.Button(new ActionCommand(() =>
-            {
-                if (x.Choose())
                 {
-                    Result = true;
-                    Close();
-                }
-            })
-            {
-                Text = x.ProviderName,
-                Image = x.ProviderIcon,
-                Enabled = x.Enabled
-            }, ButtonImagePosition.Left, big: true).NaturalWidth(500).Height(50)).Expand()
+                    if (x.Choose())
+                    {
+                        Result = true;
+                        Close();
+                    }
+                })
+                {
+                    Text = x.ProviderName,
+                    Image = x.ProviderIcon,
+                    IconName = x.ProviderIconName,
+                    Enabled = x.Enabled
+                }, ButtonImagePosition.Left, ButtonFlags.LargeText | ButtonFlags.LargeIcon).NaturalWidth(500)
+                .Height(50))
+                .Expand()
         );
     }
 

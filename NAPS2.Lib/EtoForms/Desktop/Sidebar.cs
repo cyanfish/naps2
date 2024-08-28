@@ -120,7 +120,7 @@ public class Sidebar
             C.Button(new ActionCommand(() => { })
             {
                 MenuText = UiStrings.Scan,
-                Image = _iconProvider.GetIcon("control_play_blue_small")
+                IconName = "control_play_blue_small"
             }, ButtonImagePosition.Left).AlignCenter().Height(30),
             C.Filler()
         ).Padding(left: parentWindow.LayoutController.DefaultSpacing + 10, right: 10).Visible(_sidebarVis);

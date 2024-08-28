@@ -29,7 +29,12 @@ public class WinFormsIconProvider : IIconProvider
         var data = (byte[]?) Icons.ResourceManager.GetObject(name);
         if (data != null)
         {
-            return new Bitmap(data);
+            var bitmap = new Bitmap(data);
+            if (scale > 1)
+            {
+                return bitmap.ResizeTo((int) (bitmap.Width * scale), (int) (bitmap.Height * scale));
+            }
+            return bitmap;
         }
 
         return null;
