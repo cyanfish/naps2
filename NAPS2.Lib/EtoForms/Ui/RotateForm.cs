@@ -18,7 +18,7 @@ public class RotateForm : UnaryImageFormBase
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Rotate;
-        Icon = iconProvider.GetFormIcon("arrow_rotate_anticlockwise_small");
+        IconName = "arrow_rotate_anticlockwise_small";
 
         _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small");
         Sliders = [_angleSlider];

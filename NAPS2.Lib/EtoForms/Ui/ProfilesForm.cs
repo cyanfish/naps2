@@ -34,7 +34,7 @@ public class ProfilesForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.ProfilesFormTitle;
-        Icon = iconProvider.GetFormIcon("blueprints_small");
+        IconName = "blueprints_small";
 
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;
@@ -88,7 +88,7 @@ public class ProfilesForm : EtoDialogBase
         _scannerSharingCommand = new ActionCommand(OpenScannerSharingForm)
         {
             MenuText = UiStrings.ScannerSharing,
-            Image = iconProvider.GetIcon("wireless16")
+            Image = iconProvider.GetIcon("wireless_small")
         };
 
         var profilesKsm = new KeyboardShortcutManager();

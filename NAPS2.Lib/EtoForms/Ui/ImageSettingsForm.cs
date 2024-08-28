@@ -19,7 +19,7 @@ public class ImageSettingsForm : EtoDialogBase
     public ImageSettingsForm(Naps2Config config, DialogHelper dialogHelper, IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.ImageSettingsFormTitle;
-        Icon = iconProvider.GetFormIcon("picture_small");
+        IconName = "picture_small";
 
         _defaultFilePath = new(this, dialogHelper) { ImagesOnly = true };
 

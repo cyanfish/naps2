@@ -36,7 +36,7 @@ public class CropForm : UnaryImageFormBase
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Crop;
-        Icon = iconProvider.GetFormIcon("transform_crop_small");
+        IconName = "transform_crop_small";
 
         _colorScheme = colorScheme;
 

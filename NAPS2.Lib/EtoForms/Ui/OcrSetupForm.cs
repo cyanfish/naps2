@@ -32,7 +32,7 @@ public class OcrSetupForm : EtoDialogBase
         IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.OcrSetupFormTitle;
-        Icon = iconProvider.GetFormIcon("text_small");
+        IconName = "text_small";
 
         _tesseractLanguageManager = tesseractLanguageManager;
 

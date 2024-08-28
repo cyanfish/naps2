@@ -20,7 +20,7 @@ internal class EmailSettingsForm : EtoDialogBase
         base(config)
     {
         Title = UiStrings.EmailSettingsFormTitle;
-        Icon = iconProvider.GetFormIcon("email_small");
+        IconName = "email_small";
 
         _systemEmailClients = systemEmailClients;
         _attachmentName = new(this);

@@ -36,7 +36,7 @@ public class AdvancedProfileForm : EtoDialogBase
     public AdvancedProfileForm(Naps2Config config, IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.AdvancedProfileFormTitle;
-        Icon = iconProvider.GetFormIcon("blueprints_small");
+        IconName = "blueprints_small";
 
         _restoreDefaults.Click += RestoreDefaults_Click;
         _maximumQuality.CheckedChanged += MaximumQuality_CheckedChanged;

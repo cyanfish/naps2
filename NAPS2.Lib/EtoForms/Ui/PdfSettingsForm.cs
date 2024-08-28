@@ -39,7 +39,7 @@ public class PdfSettingsForm : EtoDialogBase
     public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper, IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.PdfSettingsFormTitle;
-        Icon = iconProvider.GetFormIcon("file_extension_pdf_small");
+        IconName = "file_extension_pdf_small";
 
         _defaultFilePath = new(this, dialogHelper) { PdfOnly = true };
         _compat.Format = compat => compat switch

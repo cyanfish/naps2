@@ -57,7 +57,7 @@ public class BatchScanForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.BatchScanFormTitle;
-        Icon = iconProvider.GetFormIcon("application_cascade_small");
+        IconName = "application_cascade_small";
 
         _profileManager = profileManager;
         _batchScanPerformer = batchScanPerformer;

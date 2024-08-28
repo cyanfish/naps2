@@ -18,7 +18,7 @@ public class ManualIpForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.ManualIpFormTitle;
-        Icon = iconProvider.GetFormIcon("network_ip_small");
+        IconName = "network_ip_small";
 
         _errorOutput = errorOutput;
     }

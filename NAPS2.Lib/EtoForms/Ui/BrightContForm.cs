@@ -12,7 +12,7 @@ public class BrightContForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        Icon = iconProvider.GetFormIcon("contrast_with_sun_small");
+        IconName = "contrast_with_sun_small";
         Title = UiStrings.BrightnessContrast;
 
         _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun_small");

@@ -33,7 +33,7 @@ public class SplitForm : UnaryImageFormBase
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Split;
-        Icon = iconProvider.GetFormIcon("split_small");
+        IconName = "split_small";
 
         _colorScheme = colorScheme;
 

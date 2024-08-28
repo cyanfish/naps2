@@ -36,4 +36,13 @@ public abstract class EtoFormBase : Form, IFormBase
     }
         
     public Naps2Config Config { get; set; }
+
+    public string IconName
+    {
+        set
+        {
+            EtoPlatform.Current.AttachDpiDependency(this,
+                scale => Icon = EtoPlatform.Current.IconProvider.GetFormIcon(value, scale));
+        }
+    }
 }
