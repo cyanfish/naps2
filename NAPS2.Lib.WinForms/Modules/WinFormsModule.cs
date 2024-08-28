@@ -21,6 +21,7 @@ public class WinFormsModule : GuiModule
         builder.RegisterType<WinFormsIconProvider>().As<IIconProvider>();
 
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
+        builder.RegisterType<WinFormsPreviewForm>().As<PreviewForm>();
 
         // TODO: Can we add a test for this?
         builder.RegisterBuildCallback(ctx =>

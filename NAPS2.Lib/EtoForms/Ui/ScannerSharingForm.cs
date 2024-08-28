@@ -69,8 +69,8 @@ public class ScannerSharingForm : EtoDialogBase
         var contextMenu = new ContextMenu();
         _listView.ContextMenu = contextMenu;
         contextMenu.AddItems(
-            new ButtonMenuItem(_editCommand),
-            new ButtonMenuItem(_deleteCommand));
+            C.ButtonMenuItem(this, _editCommand),
+            C.ButtonMenuItem(this, _deleteCommand));
         contextMenu.Opening += ContextMenuOpening;
     }
 

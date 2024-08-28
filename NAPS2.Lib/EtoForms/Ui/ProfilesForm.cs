@@ -117,19 +117,19 @@ public class ProfilesForm : EtoDialogBase
         var contextMenu = new ContextMenu();
         _listView.ContextMenu = contextMenu;
         contextMenu.AddItems(
-            new ButtonMenuItem(_scanCommand),
-            new ButtonMenuItem(_editCommand),
-            new ButtonMenuItem(_setDefaultCommand),
+            C.ButtonMenuItem(this, _scanCommand),
+            C.ButtonMenuItem(this, _editCommand),
+            C.ButtonMenuItem(this, _setDefaultCommand),
             new SeparatorMenuItem());
         if (!NoUserProfiles)
         {
             contextMenu.AddItems(
-                new ButtonMenuItem(_copyCommand),
-                new ButtonMenuItem(_pasteCommand),
+                C.ButtonMenuItem(this, _copyCommand),
+                C.ButtonMenuItem(this, _pasteCommand),
                 new SeparatorMenuItem());
         }
         contextMenu.AddItems(
-            new ButtonMenuItem(_deleteCommand));
+            C.ButtonMenuItem(this, _deleteCommand));
         contextMenu.Opening += ContextMenuOpening;
     }
 
@@ -140,7 +140,7 @@ public class ProfilesForm : EtoDialogBase
         LayoutController.Content = L.Column(
             L.Row(
                 _listView.Control.Scale(),
-                C.Button(_scanCommand, _iconProvider.GetIcon("control_play_blue", true)!, ButtonImagePosition.Above)
+                C.Button(_scanCommand, _iconProvider.GetIcon("control_play_blue")!, ButtonImagePosition.Above)
                     .Height(80)
             ).Aligned().Scale(),
             L.Row(

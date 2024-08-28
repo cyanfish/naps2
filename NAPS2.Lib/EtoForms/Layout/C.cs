@@ -200,4 +200,15 @@ public static class C
         button.Click += (_, _) => onClick();
         return button;
     }
+
+    public static MenuItem ButtonMenuItem(Window window, ActionCommand command)
+    {
+        var menuItem = new ButtonMenuItem(command);
+        EtoPlatform.Current.AttachDpiDependency(window, scale =>
+        {
+            EtoPlatform.Current.SetImageSize(menuItem, (int) (16 * scale));
+            menuItem.Image = command.GetIconImage(scale);
+        });
+        return menuItem;
+    }
 }

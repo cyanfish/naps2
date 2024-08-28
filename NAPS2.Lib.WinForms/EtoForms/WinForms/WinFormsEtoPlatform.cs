@@ -6,6 +6,7 @@ using Eto.WinForms;
 using Eto.WinForms.Forms;
 using Eto.WinForms.Forms.Controls;
 using Eto.WinForms.Forms.Menu;
+using Eto.WinForms.Forms.ToolBar;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gdi;
@@ -59,7 +60,7 @@ public class WinFormsEtoPlatform : EtoPlatform
                 native.Text = @"  " + native.Text;
             }
 
-            var imageWidth = native.Image!.Width;
+            var imageWidth = big ? 32 : 16;
             var textWidth = WF.TextRenderer.MeasureText(native.Text, native.Font).Width;
             native.AutoSize = false;
 
@@ -243,6 +244,18 @@ public class WinFormsEtoPlatform : EtoPlatform
     }
 
     public override float GetScaleFactor(Window window) => window.ToNative().DeviceDpi / 96f;
+
+    public override void SetImageSize(ButtonMenuItem menuItem, int size)
+    {
+        var handler = (ButtonMenuItemHandler) menuItem.Handler;
+        handler.ImageSize = size;
+    }
+
+    public override void SetImageSize(ButtonToolItem menuItem, int size)
+    {
+        var handler = (ButtonToolItemHandler) menuItem.Handler;
+        handler.ImageSize = size;
+    }
 
     public override void ConfigureZoomButton(Button button, string icon)
     {

@@ -151,4 +151,12 @@ public abstract class EtoPlatform
     }
 
     public virtual float GetScaleFactor(Window window) => 1;
+
+    public virtual void SetImageSize(ButtonMenuItem menuItem, int size)
+    {
+    }
+
+    public virtual void SetImageSize(ButtonToolItem toolItem, int size)
+    {
+    }
 }
