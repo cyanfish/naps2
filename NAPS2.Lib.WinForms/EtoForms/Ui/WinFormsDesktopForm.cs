@@ -169,9 +169,10 @@ public class WinFormsDesktopForm : DesktopForm
             {
                 TextImageRelation = WF.TextImageRelation.ImageBeforeText,
                 ImageAlign = ContentAlignment.MiddleLeft,
-                TextAlign = ContentAlignment.MiddleLeft,
-                Image = _iconProvider.GetIcon("control_play_blue_small").ToSD()
+                TextAlign = ContentAlignment.MiddleLeft
             };
+            EtoPlatform.Current.AttachDpiDependency(this,
+                scale => item.Image = _iconProvider.GetIcon("control_play_blue_small", scale).ToSD());
             item.Click += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Tag!);
             toolbarItems.Add(item);
         }
@@ -302,7 +303,8 @@ public class WinFormsDesktopForm : DesktopForm
     private WF.ToolStripItem ApplyCommand(WF.ToolStripItem item, Command command)
     {
         void SetItemText() => item.Text = item is WF.ToolStripMenuItem ? command.MenuText : command.ToolBarText;
-        item.Image = command.Image.ToSD();
+        EtoPlatform.Current.AttachDpiDependency(this,
+            scale => item.Image = ((ActionCommand) command).GetIconImage(scale).ToSD());
         SetItemText();
         if (command is ActionCommand actionCommand)
         {
