@@ -391,7 +391,7 @@
   <data name="pictures" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pictures.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pictures-hries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="pictures_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pictures-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="picture_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">

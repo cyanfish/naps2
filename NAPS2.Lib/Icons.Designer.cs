@@ -1152,9 +1152,9 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] pictures_hries {
+        internal static byte[] pictures_hires {
             get {
-                object obj = ResourceManager.GetObject("pictures-hries", resourceCulture);
+                object obj = ResourceManager.GetObject("pictures_hires", resourceCulture);
                 return ((byte[])(obj));
             }
         }
