@@ -141,35 +141,35 @@ public class LayoutControl : LayoutElement
     {
         if (MaxWidth != null)
         {
-            size.Width = Math.Min(size.Width, MaxWidth.Value);
+            size.Width = Math.Min(size.Width, MaxWidth.Value * context.Scale);
         }
         if (MinWidth != null)
         {
-            size.Width = Math.Max(size.Width, MinWidth.Value);
+            size.Width = Math.Max(size.Width, MinWidth.Value * context.Scale);
         }
         if (Width != null)
         {
-            size.Width = Width.Value;
+            size.Width = Width.Value * context.Scale;
         }
         if (!context.IsLayout && NaturalWidth != null)
         {
-            size.Width = NaturalWidth.Value;
+            size.Width = NaturalWidth.Value * context.Scale;
         }
         if (Height != null)
         {
-            size.Height = Height.Value;
+            size.Height = Height.Value * context.Scale;
         }
         if (MaxHeight != null)
         {
-            size.Height = Math.Min(size.Height, MaxHeight.Value);
+            size.Height = Math.Min(size.Height, MaxHeight.Value * context.Scale);
         }
         if (MinHeight != null)
         {
-            size.Height = Math.Max(size.Height, MinHeight.Value);
+            size.Height = Math.Max(size.Height, MinHeight.Value * context.Scale);
         }
         if (!context.IsLayout && NaturalHeight != null)
         {
-            size.Height = NaturalHeight.Value;
+            size.Height = NaturalHeight.Value * context.Scale;
         }
         return size;
     }
