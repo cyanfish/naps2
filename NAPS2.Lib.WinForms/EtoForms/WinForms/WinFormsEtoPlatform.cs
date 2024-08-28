@@ -5,6 +5,7 @@ using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms;
 using Eto.WinForms.Forms.Controls;
+using Eto.WinForms.Forms.Menu;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gdi;
@@ -20,6 +21,8 @@ public class WinFormsEtoPlatform : EtoPlatform
     private const int IMAGE_PADDING = 5;
 
     public override bool IsWinForms => true;
+
+    public override IIconProvider IconProvider { get; } = new WinFormsIconProvider();
 
     public override Application CreateApplication()
     {
@@ -228,23 +231,71 @@ public class WinFormsEtoPlatform : EtoPlatform
         return progressBar.Size(420, 40);
     }
 
-    public override void UpdateRtl(Window window)
+    public override void InitForm(Window window)
     {
         var form = window.ToNative();
+
         bool isRtl = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
         form.RightToLeft = isRtl ? WF.RightToLeft.Yes : WF.RightToLeft.No;
         form.RightToLeftLayout = isRtl;
+
+        form.DpiChanged += (_, _) => (window as IFormBase)?.LayoutController.Invalidate();
     }
+
+    public override float GetScaleFactor(Window window) => window.ToNative().DeviceDpi / 96f;
 
     public override void ConfigureZoomButton(Button button)
     {
-        button.Size = new Size(25, 25);
         var wfButton = (WF.Button) button.ToNative();
         wfButton.AccessibleName = button.Text;
         wfButton.Text = "";
         wfButton.BackColor = SD.Color.White;
         wfButton.FlatStyle = WF.FlatStyle.Flat;
     }
+
+    private void AttachDpiDependency(WF.Control control, Action<float> callback)
+    {
+        void DpiChanged(object? sender, EventArgs eventArgs)
+        {
+            callback(GetScaleFactor(control.FindForm().ToEtoWindow()));
+        }
+        void Register()
+        {
+            if (control is WF.Form form)
+            {
+                form.DpiChanged += DpiChanged;
+            }
+            else
+            {
+                control.DpiChangedAfterParent += DpiChanged;
+            }
+            DpiChanged(null, EventArgs.Empty);
+        }
+        void Unregister()
+        {
+            if (control is WF.Form form)
+            {
+                form.DpiChanged -= DpiChanged;
+            }
+            else
+            {
+                control.DpiChangedAfterParent -= DpiChanged;
+            }
+        }
+
+        if (control.IsHandleCreated)
+        {
+            Register();
+        }
+        else
+        {
+            control.HandleCreated += (_, _) => Register();
+        }
+        control.HandleDestroyed += (_, _) => Unregister();
+    }
+
+    public override void AttachDpiDependency(Control control, Action<float> callback) =>
+        AttachDpiDependency(control.ToNative(), callback);
 
     public override void SetClipboardImage(Clipboard clipboard, ProcessedImage processedImage, IMemoryImage memoryImage)
     {

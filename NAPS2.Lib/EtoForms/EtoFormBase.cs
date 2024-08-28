@@ -9,12 +9,12 @@ public abstract class EtoFormBase : Form, IFormBase
 
     protected EtoFormBase(Naps2Config config)
     {
-        EtoPlatform.Current.UpdateRtl(this);
         Config = config;
         FormStateController = new FormStateController(this, config);
         Resizable = true;
         LayoutController.Bind(this);
         LayoutController.Invalidated += (_, _) => FormStateController.UpdateLayoutSize(LayoutController);
+        EtoPlatform.Current.InitForm(this);
     }
 
     protected abstract void BuildLayout();

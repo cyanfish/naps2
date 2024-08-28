@@ -6,10 +6,9 @@ namespace NAPS2.EtoForms;
 public abstract class EtoDialogBase : Dialog, IFormBase
 {
     private IFormFactory? _formFactory;
-    
+
     protected EtoDialogBase(Naps2Config config)
     {
-        EtoPlatform.Current.UpdateRtl(this);
         Config = config;
         FormStateController = new FormStateController(this, config);
         Resizable = true;
@@ -21,6 +20,7 @@ public abstract class EtoDialogBase : Dialog, IFormBase
             // Always have a basic menu on Mac, otherwise system keyboard shortcuts like Copy/Paste don't work
             Menu = new MenuBar();
         }
+        EtoPlatform.Current.InitForm(this);
     }
 
     protected abstract void BuildLayout();

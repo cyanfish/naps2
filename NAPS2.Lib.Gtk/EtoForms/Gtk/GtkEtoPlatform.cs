@@ -18,6 +18,8 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override bool IsGtk => true;
 
+    public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
+
     public override Application CreateApplication()
     {
         var application = new Application(Platforms.Gtk);

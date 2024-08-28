@@ -19,6 +19,8 @@ public abstract class EtoPlatform
     public virtual bool IsMac => false;
     public virtual bool IsWinForms => false;
 
+    public abstract IIconProvider IconProvider { get; }
+
     public abstract Application CreateApplication();
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button, bool big);
@@ -92,13 +94,15 @@ public abstract class EtoPlatform
         window.Location = location;
     }
 
-    public virtual void UpdateRtl(Window window)
+    public virtual void InitForm(Window window)
     {
     }
 
     public virtual void ConfigureZoomButton(Button button)
     {
     }
+
+    public virtual void AttachDpiDependency(Control control, Action<float> callback) => callback(1f);
 
     public virtual SizeF GetWrappedSize(Control control, int defaultWidth)
     {
@@ -145,4 +149,6 @@ public abstract class EtoPlatform
     {
         control.MouseMove += eventHandler;
     }
+
+    public virtual float GetScaleFactor(Window window) => 1;
 }

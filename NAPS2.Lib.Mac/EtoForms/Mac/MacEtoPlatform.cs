@@ -14,6 +14,8 @@ public class MacEtoPlatform : EtoPlatform
 {
     public override bool IsMac => true;
 
+    public override IIconProvider IconProvider { get; } = new MacIconProvider(new DefaultIconProvider());
+
     public override void InitializePlatform()
     {
         // We start the process as a background process (by setting LSBackgroundOnly in Info.plist) and only turn it
