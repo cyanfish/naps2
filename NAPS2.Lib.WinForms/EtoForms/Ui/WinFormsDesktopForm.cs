@@ -289,11 +289,14 @@ public class WinFormsDesktopForm : DesktopForm
     {
         var item = new ToolStripDoubleButton
         {
-            FirstImage = command1.Image.ToSD(),
             FirstText = command1.ToolBarText,
-            SecondImage = command2.Image.ToSD(),
             SecondText = command2.ToolBarText
         };
+        EtoPlatform.Current.AttachDpiDependency(this, scale =>
+        {
+            item.FirstImage = ((ActionCommand) command1).GetIconImage(scale).ToSD();
+            item.SecondImage = ((ActionCommand) command2).GetIconImage(scale).ToSD();
+        });
         command1.EnabledChanged += (_, _) => item.Enabled = command1.Enabled;
         item.FirstClick += (_, _) => command1.Execute();
         item.SecondClick += (_, _) => command2.Execute();

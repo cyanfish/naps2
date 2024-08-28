@@ -11,8 +11,8 @@ public class ToolStripDoubleButton : ToolStripButton
     public event EventHandler? FirstClick;
     public event EventHandler? SecondClick;
 
-    public required Image FirstImage { get; init; }
-    public required Image SecondImage { get; init; }
+    public Image? FirstImage { get; set; }
+    public Image? SecondImage { get; set; }
 
     [Localizable(true)]
     public required string FirstText { get; init; }
