@@ -77,7 +77,8 @@ public abstract class LayoutLine : LayoutContainer
 
     protected virtual int GetSpacingCore(int i, LayoutContext context)
     {
-        return Children[i].SpacingAfter ?? Spacing ?? context.DefaultSpacing;
+        int spacing = Children[i].SpacingAfter ?? Spacing ?? context.DefaultSpacing;
+        return (int) (context.Scale * spacing);
     }
 
     private void GetChildSizeAndOrigin(LayoutElement child, LayoutContext childContext,
