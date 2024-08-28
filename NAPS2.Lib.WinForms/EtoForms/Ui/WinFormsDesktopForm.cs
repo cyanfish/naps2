@@ -88,7 +88,8 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void OnShown(EventArgs e)
     {
-        _toolbarFormatter.RelayoutToolbar(_mainToolStrip);
+        EtoPlatform.Current.AttachDpiDependency(this,
+            scale => _toolbarFormatter.RelayoutToolbar(_mainToolStrip, scale));
         base.OnShown(e);
     }
 
@@ -127,7 +128,7 @@ public class WinFormsDesktopForm : DesktopForm
         _mainToolStrip.TabStop = true;
         _mainToolStrip.ParentChanged += (_, _) =>
         {
-            _toolbarFormatter.RelayoutToolbar(_mainToolStrip);
+            _toolbarFormatter.RelayoutToolbar(_mainToolStrip, EtoPlatform.Current.GetScaleFactor(this));
             LayoutController.Invalidate();
         };
 
