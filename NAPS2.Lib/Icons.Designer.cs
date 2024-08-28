@@ -1672,9 +1672,19 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] wireless16 {
+        internal static byte[] wireless {
             get {
-                object obj = ResourceManager.GetObject("wireless16", resourceCulture);
+                object obj = ResourceManager.GetObject("wireless", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] wireless_small {
+            get {
+                object obj = ResourceManager.GetObject("wireless_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }

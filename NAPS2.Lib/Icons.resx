@@ -469,8 +469,11 @@
   <data name="hourglass_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\hourglass_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="wireless16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\wireless16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="wireless" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\wireless.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="wireless_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\wireless-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="network_ip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\network_ip.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
