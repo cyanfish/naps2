@@ -98,7 +98,7 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual void ConfigureZoomButton(Button button)
+    public virtual void ConfigureZoomButton(Button button, string icon)
     {
     }
 

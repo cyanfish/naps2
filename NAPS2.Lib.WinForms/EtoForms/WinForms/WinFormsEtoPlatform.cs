@@ -244,8 +244,13 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override float GetScaleFactor(Window window) => window.ToNative().DeviceDpi / 96f;
 
-    public override void ConfigureZoomButton(Button button)
+    public override void ConfigureZoomButton(Button button, string icon)
     {
+        AttachDpiDependency(button, scale =>
+        {
+            button.Size = new Size((int) (25 * scale), (int) (25 * scale));
+            button.Image = IconProvider.GetIcon(icon, scale);
+        });
         var wfButton = (WF.Button) button.ToNative();
         wfButton.AccessibleName = button.Text;
         wfButton.Text = "";

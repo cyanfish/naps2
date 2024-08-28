@@ -248,9 +248,10 @@ public class GtkEtoPlatform : EtoPlatform
         return button.ToEto();
     }
 
-    public override void ConfigureZoomButton(Button button)
+    public override void ConfigureZoomButton(Button button, string icon)
     {
         button.Text = "";
+        button.Image = IconProvider.GetIcon(icon);
         button.Size = Size.Empty;
         var gtkButton = button.ToNative();
         gtkButton.StyleContext.AddClass("zoom-button");
