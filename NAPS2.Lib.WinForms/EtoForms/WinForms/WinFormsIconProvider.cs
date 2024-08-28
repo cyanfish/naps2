@@ -1,32 +1,19 @@
 using Eto.Drawing;
-using Eto.Forms;
-using NAPS2.EtoForms.Desktop;
 
 namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsIconProvider : IIconProvider
 {
-    private const int DEFAULT_DPI = 96;
-
-    private readonly DesktopFormProvider _desktopFormProvider;
-
-    public WinFormsIconProvider(DesktopFormProvider desktopFormProvider)
+    public Bitmap? GetIcon(string name, float scale = 1f, bool oversized = false)
     {
-        _desktopFormProvider = desktopFormProvider;
-    }
-
-    public Bitmap? GetIcon(string name, bool oversized = false)
-    {
-        var dpi = _desktopFormProvider.DesktopForm.ToNative().DeviceDpi;
-
-        if (dpi > DEFAULT_DPI)
+        if (scale > 1)
         {
             if (name.EndsWith("_small"))
             {
                 var norm = (byte[]?) Icons.ResourceManager.GetObject(name.Substring(0, name.Length - 6));
                 if (norm != null)
                 {
-                    return new Bitmap(norm).ResizeTo(16 * dpi / DEFAULT_DPI);
+                    return new Bitmap(norm).ResizeTo((int) (16 * scale));
                 }
             }
             else
@@ -34,7 +21,7 @@ public class WinFormsIconProvider : IIconProvider
                 var hires = (byte[]?) Icons.ResourceManager.GetObject(name + "_hires");
                 if (hires != null)
                 {
-                    return new Bitmap(hires).ResizeTo(32 * dpi / DEFAULT_DPI);
+                    return new Bitmap(hires).ResizeTo((int) (32 * scale));
                 }
             }
         }
@@ -48,9 +35,9 @@ public class WinFormsIconProvider : IIconProvider
         return null;
     }
 
-    public Icon? GetFormIcon(string name)
+    public Icon? GetFormIcon(string name, float scale = 1f)
     {
-        var icon = GetIcon(name);
+        var icon = GetIcon(name, scale);
         return icon != null ? new Icon(1f, icon) : null;
     }
 }

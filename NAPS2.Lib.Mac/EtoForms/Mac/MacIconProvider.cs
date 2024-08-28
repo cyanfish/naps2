@@ -13,7 +13,7 @@ public class MacIconProvider : IIconProvider
         { "cross", "trash" },
         { "cross_small", "xmark" },
         { "accept", "checkmark.circle" },
-        { "wireless16", "wifi" },
+        { "wireless", "wifi" },
         { "blueprints", "list.bullet" },
         { "folder_picture", "folder" },
         { "diskette", "square.and.arrow.down" },
@@ -54,7 +54,7 @@ public class MacIconProvider : IIconProvider
         _defaultIconProvider = defaultIconProvider;
     }
 
-    public Bitmap? GetIcon(string name, bool oversized = false)
+    public Bitmap? GetIcon(string name, float scale = 1f, bool oversized = false)
     {
         if (!OperatingSystem.IsMacOSVersionAtLeast(11) && name == "arrow_rotate_anticlockwise")
         {
@@ -84,5 +84,5 @@ public class MacIconProvider : IIconProvider
         return _defaultIconProvider.GetIcon(name);
     }
 
-    public Icon? GetFormIcon(string name) => null;
+    public Icon? GetFormIcon(string name, float scale = 1f) => null;
 }
