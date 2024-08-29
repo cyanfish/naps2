@@ -169,14 +169,27 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
         if (control.GetType() == typeof(Slider))
         {
-            var size = control.ToNative().PreferredSize.ToEto();
+            var native = control.ToNative();
+            var size = (SizeF) native.PreferredSize.ToEto();
+            // Work around a WinForms bug where the preferred size of a Slider/WF.TrackBar is based on the primary
+            // screen DPI, not the DPI of the screen it's actually on
+            var scaleDelta = (native.FindForm()!.DeviceDpi / 96f) / (Screen.PrimaryScreen.RealDPI / 72f);
+            size *= scaleDelta;
+            // We also want to correct for the idea that sliders should be fully scalable in orthogonal directions
+            // depending on the orientation
             return ((Slider) control).Orientation == Orientation.Horizontal
-                ? new SizeF(size.Height, size.Height)
-                : new SizeF(size.Width, size.Width);
+                ? new SizeF(size.Height * scaleDelta, size.Height * scaleDelta)
+                : new SizeF(size.Width * scaleDelta, size.Width * scaleDelta);
         }
-        return SizeF.Max(
+        var preferredSize = SizeF.Max(
             base.GetPreferredSize(control, availableSpace),
             control.ToNative().PreferredSize.ToEto());
+        if (control.GetType() == typeof(DropDown))
+        {
+            // Work around a WinForms bug where the preferred height of a DropDown is incorrect
+            preferredSize.Height = control.Height;
+        }
+        return preferredSize;
     }
 
     public override SizeF GetWrappedSize(Control control, int defaultWidth)
