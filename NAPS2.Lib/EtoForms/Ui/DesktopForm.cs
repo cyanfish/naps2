@@ -133,7 +133,7 @@ public abstract class DesktopForm : EtoFormBase
                         GetControlButtons(),
                         C.Filler(),
                         _notificationArea.Content)
-                ).Padding(10)
+                ).Padding(8)
             ).Scale()
         );
 

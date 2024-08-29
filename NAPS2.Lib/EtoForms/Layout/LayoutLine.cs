@@ -42,8 +42,8 @@ public abstract class LayoutLine : LayoutContainer
         if (Padding is { } padding)
         {
             bounds = new RectangleF(
-                bounds.X + padding.Left, bounds.Y + padding.Top,
-                bounds.Width - padding.Horizontal, bounds.Height - padding.Vertical);
+                bounds.X + padding.Left * context.Scale, bounds.Y + padding.Top * context.Scale,
+                bounds.Width - padding.Horizontal * context.Scale, bounds.Height - padding.Vertical * context.Scale);
         }
         var childContext = GetChildContext(context, bounds);
         GetInitialCellLengthsAndScaling(context, childContext, bounds, out var cellLengths, out var cellScaling);
@@ -116,7 +116,7 @@ public abstract class LayoutLine : LayoutContainer
             var childLayoutSize = GetSize(cellLengths[i], GetBreadth(childSize));
             size = UpdateTotalSize(size, childLayoutSize, GetSpacing(i, context));
         }
-        size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0);
+        size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0) * context.Scale;
         if (Width != null)
         {
             size.Width = Width.Value;
