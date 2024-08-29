@@ -34,6 +34,7 @@ static class Program
         var serviceImpl = new WorkerServiceImpl(scanningContext, new ThumbnailRenderer(scanningContext.ImageContext),
             new MapiWrapper(new SystemEmailClients(scanningContext)), new LocalTwainController(scanningContext));
 
+        Trace.Listeners.Add(new NLog.NLogTraceListener());
         scanningContext.Logger = logger;
         messagePump.Logger = logger;
         Invoker.Current = messagePump;
