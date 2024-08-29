@@ -208,7 +208,7 @@ public class WinFormsDesktopForm : DesktopForm
         _container.ContentPanel.Controls.Add(wfContent);
     }
 
-    protected override void SetThumbnailSpacing(int thumbnailSize)
+    protected override void SetThumbnailSpacing(int thumbnailSize, float scale)
     {
         const int MIN_PADDING = 6;
         const int MAX_PADDING = 66;
@@ -217,7 +217,9 @@ public class WinFormsDesktopForm : DesktopForm
             (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
         int hSpacing = thumbnailSize + padding;
         int vSpacing = thumbnailSize + padding * 2;
-        WinFormsHacks.SetListSpacing(NativeListView, hSpacing, vSpacing);
+        WinFormsHacks.SetListSpacing(NativeListView,
+            (int) Math.Round(hSpacing * scale),
+            (int) Math.Round(vSpacing * scale));
     }
 
     protected override void CreateToolbarButton(Command command)

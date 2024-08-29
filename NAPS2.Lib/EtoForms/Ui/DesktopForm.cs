@@ -107,6 +107,7 @@ public abstract class DesktopForm : EtoFormBase
         // Closed += FDesktop_Closed;
         _thumbnailController.ListView = _listView;
         _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
+        EtoPlatform.Current.AttachDpiDependency(this, scale => _thumbnailController.Oversample = scale);
         ImageList.SelectionChanged += ImageList_SelectionChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
@@ -211,7 +212,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ThumbnailController_ThumbnailSizeChanged(object? sender, EventArgs e)
     {
-        SetThumbnailSpacing(_thumbnailController.VisibleSize);
+        SetThumbnailSpacing(_thumbnailController.VisibleSize, EtoPlatform.Current.GetScaleFactor(this));
         UpdateToolbar();
     }
 
@@ -222,7 +223,8 @@ public abstract class DesktopForm : EtoFormBase
     {
         base.OnLoad(e);
         _imageListSyncer = new ImageListSyncer(ImageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
-        SetThumbnailSpacing(_thumbnailController.VisibleSize);
+        EtoPlatform.Current.AttachDpiDependency(this,
+            scale => SetThumbnailSpacing(_thumbnailController.VisibleSize, scale));
         _desktopController.PreInitialize();
     }
 
@@ -558,7 +560,7 @@ public abstract class DesktopForm : EtoFormBase
         _notificationManager.StartTimers();
     }
 
-    protected virtual void SetThumbnailSpacing(int thumbnailSize)
+    protected virtual void SetThumbnailSpacing(int thumbnailSize, float scale)
     {
     }
 

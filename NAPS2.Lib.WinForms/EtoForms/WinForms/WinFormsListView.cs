@@ -26,6 +26,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private ListSelection<T> _selection = ListSelection.Empty<T>();
     private bool _refreshing;
     private ContextMenu? _contextMenu;
+    private float _dpiScale = 1f;
+    private Eto.Drawing.Size _imageSize = new(48, 48);
 
     public WinFormsListView(ListViewBehavior<T> behavior)
     {
@@ -74,25 +76,34 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             _view.OwnerDraw = true;
             _view.DrawItem += CustomRenderItem;
         }
+
+        EtoPlatform.Current.AttachDpiDependency(_viewEtoControl, scale =>
+        {
+            _dpiScale = scale;
+            // Reset internal size based on new scale
+            ImageSize = ImageSize;
+        });
     }
 
     private bool UseCustomRendering => !_behavior.ShowLabels && !_behavior.Checkboxes;
-
 
     private void CustomRenderItem(object? sender, DrawListViewItemEventArgs e)
     {
         var image = ImageList.Get(e.Item);
         if (_behavior.ShowPageNumbers)
         {
+            int tp = (int) Math.Round(PageNumberTextPadding * _dpiScale);
+            int sp = (int) Math.Round(PageNumberSelectionPadding * _dpiScale);
+
             // When page numbers are shown, we use a completely different drawing path, as we need to offset the image
             // to have room for the page numbers, and the selection rectangle has a completely different style to
             // encompass the page numbers too.
             string label = $"{e.ItemIndex + 1} / {_view.Items.Count}";
             SizeF textSize = TextRenderer.MeasureText(label, _view.Font);
-            int textOffset = (int) (textSize.Height + PageNumberTextPadding);
+            int textOffset = (int) (textSize.Height + tp);
 
-            float scaleHeight = (float) (ImageSize.Height - textOffset) / image.Height;
-            float scaleWidth = (float) ImageSize.Width / image.Width;
+            float scaleHeight = (ImageSize.Height * _dpiScale - textOffset) / image.Height;
+            float scaleWidth = ImageSize.Width * _dpiScale / image.Width;
 
             float scale = Math.Min(scaleWidth, scaleHeight);
             int height = (int) Math.Round(image.Height * scale);
@@ -107,12 +118,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
                 Size intTextSize = Size.Ceiling(textSize);
 
                 int selectionWidth = Math.Max(width, intTextSize.Width);
-                int selectionHeight = height + PageNumberTextPadding + intTextSize.Height;
+                int selectionHeight = height + tp + intTextSize.Height;
 
                 var selectionX = e.Bounds.Left + (e.Bounds.Width - width) / 2;
 
                 var selectionRect = new Rectangle(selectionX, y, selectionWidth, selectionHeight);
-                selectionRect.Inflate(PageNumberSelectionPadding, PageNumberSelectionPadding);
+                selectionRect.Inflate(sp, sp);
 
                 var outlineRect = selectionRect;
                 outlineRect.Inflate(1, 1);
@@ -127,9 +138,9 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             // Draw the text below the image
             var drawBrush = Brushes.Black;
             float x1 = x + width / 2f;
-            float y1 = y + height + PageNumberTextPadding;
+            float y1 = y + height + tp;
             RectangleF labelRect = new(x1, y1, 0, textSize.Height);
-            float maxLabelWidth = Math.Min(textSize.Width, e.Bounds.Width - 2 * PageNumberTextPadding);
+            float maxLabelWidth = Math.Min(textSize.Width, e.Bounds.Width - 2 * tp);
             labelRect.Inflate(maxLabelWidth / 2, 0);
             e.Graphics.DrawString(label, _view.Font, drawBrush, labelRect, PageNumberLabelFormat);
 
@@ -145,12 +156,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             int width, height;
             if (image.Width > image.Height)
             {
-                width = ImageSize.Width;
+                width = (int) Math.Round(ImageSize.Width * _dpiScale);
                 height = (int) Math.Round(width * (image.Height / (double) image.Width));
             }
             else
             {
-                height = ImageSize.Height;
+                height = (int) Math.Round(ImageSize.Height * _dpiScale);
                 width = (int) Math.Round(height * (image.Width / (double) image.Height));
             }
             var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
@@ -173,8 +184,13 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
     public Eto.Drawing.Size ImageSize
     {
-        get => _view.LargeImageList!.ImageSize.ToEto();
-        set => WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(value.Width, value.Height));
+        get => _imageSize;
+        set
+        {
+            _imageSize = value;
+            WinFormsHacks.SetImageSize(_view.LargeImageList!,
+                new Size((int) Math.Round(_imageSize.Width * _dpiScale), (int) Math.Round(_imageSize.Height * _dpiScale)));
+        }
     }
 
     private void OnDragEnter(object? sender, DragEventArgs e)
