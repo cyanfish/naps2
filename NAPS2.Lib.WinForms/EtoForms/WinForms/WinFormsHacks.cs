@@ -17,7 +17,7 @@ public static class WinFormsHacks
 
     static WinFormsHacks()
     {
-        ImageSizeField = typeof(ImageList).GetField("imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
+        ImageSizeField = typeof(ImageList).GetField("_imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
         PerformRecreateHandleMethod = typeof(ImageList).GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
 
         if (ImageSizeField == null || PerformRecreateHandleMethod == null)
@@ -32,7 +32,7 @@ public static class WinFormsHacks
         if (ImageSizeField != null && PerformRecreateHandleMethod != null)
         {
             ImageSizeField.SetValue(imageList, size);
-            PerformRecreateHandleMethod.Invoke(imageList, new object[] { "ImageSize" });
+            PerformRecreateHandleMethod.Invoke(imageList, []);
         }
         else
         {
