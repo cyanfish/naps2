@@ -40,7 +40,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         if (string.IsNullOrEmpty(button.Text))
         {
-            button.MinimumSize = MinImageOnlyButtonSize;
+            AttachDpiDependency(button, scale => button.MinimumSize = Size.Round(MinImageOnlyButtonSize * scale));
             var native = (WF.Button) button.ToNative();
             native.TextImageRelation = WF.TextImageRelation.Overlay;
             native.ImageAlign = SD.ContentAlignment.MiddleCenter;
@@ -49,7 +49,7 @@ public class WinFormsEtoPlatform : EtoPlatform
 
         bool largeText = flags.HasFlag(ButtonFlags.LargeText);
         bool largeIcon = flags.HasFlag(ButtonFlags.LargeIcon);
-        button.MinimumSize = MinImageButtonSize;
+        AttachDpiDependency(button, scale => button.MinimumSize = Size.Round(MinImageButtonSize * scale));
         if (button.ImagePosition == ButtonImagePosition.Left)
         {
             var native = (WF.Button) button.ToNative()!;
@@ -63,21 +63,26 @@ public class WinFormsEtoPlatform : EtoPlatform
             }
 
             var imageWidth = largeIcon ? 32 : 16;
-            var textWidth = WF.TextRenderer.MeasureText(native.Text, native.Font).Width;
             native.AutoSize = false;
 
-            if (largeText)
+            AttachDpiDependency(button, scale =>
             {
-                native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = IMAGE_PADDING };
-            }
-            else
-            {
-                var widthWithoutRightPadding = imageWidth + textWidth + IMAGE_PADDING + 15;
-                button.Width = Math.Max(widthWithoutRightPadding + IMAGE_PADDING,
-                    ButtonHandler.DefaultMinimumSize.Width);
-                var rightPadding = IMAGE_PADDING + (native.Width - widthWithoutRightPadding - IMAGE_PADDING) / 2;
-                native.Padding = native.Padding with { Left = IMAGE_PADDING, Right = rightPadding };
-            }
+                var textWidth = WF.TextRenderer.MeasureText(native.Text, native.Font).Width;
+                int p = (int) Math.Round(IMAGE_PADDING * scale);
+                if (largeText)
+                {
+                    native.Padding = native.Padding with { Left = p, Right = p };
+                }
+                else
+                {
+                    var widthWithoutRightPadding = p + textWidth + (int) Math.Round((imageWidth + 15) * scale);
+                    var width = Math.Max(widthWithoutRightPadding + p,
+                        (int) Math.Round(ButtonHandler.DefaultMinimumSize.Width * scale));
+                    button.Width = width;
+                    var rightPadding = p + (width - widthWithoutRightPadding - p) / 2;
+                    native.Padding = native.Padding with { Left = p, Right = rightPadding };
+                }
+            });
         }
     }
 
@@ -167,9 +172,9 @@ public class WinFormsEtoPlatform : EtoPlatform
                 return GetPreferredSize(content, availableSpace);
             }
         }
+        var native = control.ToNative();
         if (control.GetType() == typeof(Slider))
         {
-            var native = control.ToNative();
             var size = (SizeF) native.PreferredSize.ToEto();
             // Work around a WinForms bug where the preferred size of a Slider/WF.TrackBar is based on the primary
             // screen DPI, not the DPI of the screen it's actually on
@@ -183,7 +188,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
         var preferredSize = SizeF.Max(
             base.GetPreferredSize(control, availableSpace),
-            control.ToNative().PreferredSize.ToEto());
+            native.PreferredSize.ToEto());
         if (control.GetType() == typeof(DropDown))
         {
             // Work around a WinForms bug where the preferred height of a DropDown is incorrect
