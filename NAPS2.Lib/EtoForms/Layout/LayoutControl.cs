@@ -73,8 +73,10 @@ public class LayoutControl : LayoutElement
         bounds.Size = UpdateFixedDimensions(context, bounds.Size);
         if (Control != null)
         {
-            var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Top);
-            var size = new SizeF(bounds.Width - Padding.Horizontal, bounds.Height - Padding.Vertical);
+            var location = new PointF(bounds.X + Padding.Left * context.Scale, bounds.Y + Padding.Top * context.Scale);
+            var size = new SizeF(
+                bounds.Width - Padding.Horizontal * context.Scale,
+                bounds.Height - Padding.Vertical * context.Scale);
             size = SizeF.Max(SizeF.Empty, size);
             EnsureIsAdded(context);
             EtoPlatform.Current.SetFrame(
@@ -107,7 +109,9 @@ public class LayoutControl : LayoutElement
             }
         }
         size = UpdateFixedDimensions(context, size);
-        return new SizeF(size.Width + Padding.Horizontal, size.Height + Padding.Vertical);
+        return new SizeF(
+            size.Width + Padding.Horizontal * context.Scale,
+            size.Height + Padding.Vertical * context.Scale);
     }
 
     private SizeF GetWrappedSize(LayoutContext context, RectangleF parentBounds, int wrapDefaultWidth)
@@ -130,7 +134,8 @@ public class LayoutControl : LayoutElement
             // usually what we want.
             return new SizeF(
                 EtoPlatform.Current.GetWrappedSize(Control, (int) parentBounds.Width).Width,
-                EtoPlatform.Current.GetWrappedSize(Control, Math.Min((int) parentBounds.Width, wrapDefaultWidth)).Height);
+                EtoPlatform.Current.GetWrappedSize(Control, Math.Min((int) parentBounds.Width, wrapDefaultWidth))
+                    .Height);
         }
         // Now that we've handled the special cases, this measures the real dimensions of the label given
         // the parent bounds. In a layout cell, this ensures we align correctly (e.g. centered vertically).
