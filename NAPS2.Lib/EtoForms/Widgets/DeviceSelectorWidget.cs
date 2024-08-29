@@ -91,8 +91,9 @@ public class DeviceSelectorWidget
     public void SetDeviceIcon(string? iconUri)
     {
         var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
-        _deviceIcon.Image =
-            cachedIcon ?? (_choice.AlwaysAsk ? _iconProvider.GetIcon("ask") : _iconProvider.GetIcon("device"));
+        EtoPlatform.Current.AttachDpiDependency(_deviceIcon, scale =>
+            _deviceIcon.Image =
+                cachedIcon ?? (_choice.AlwaysAsk ? _iconProvider.GetIcon("ask", scale) : _iconProvider.GetIcon("device", scale)));
         if (((Window) _parentWindow).Loaded)
         {
             _parentWindow.LayoutController.Invalidate();
