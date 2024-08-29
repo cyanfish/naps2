@@ -80,8 +80,11 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         EtoPlatform.Current.AttachDpiDependency(_viewEtoControl, scale =>
         {
             _dpiScale = scale;
-            // Reset internal size based on new scale
-            ImageSize = ImageSize;
+            if (_behavior.ScaleImageSize)
+            {
+                // Reset internal size based on new scale
+                ImageSize = ImageSize;
+            }
         });
     }
 
@@ -90,6 +93,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private void CustomRenderItem(object? sender, DrawListViewItemEventArgs e)
     {
         var image = ImageList.Get(e.Item);
+        int imageSizeW = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Width * _dpiScale) : _imageSize.Width;
+        int imageSizeH = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Height * _dpiScale) : _imageSize.Height;
         if (_behavior.ShowPageNumbers)
         {
             int tp = (int) Math.Round(PageNumberTextPadding * _dpiScale);
@@ -102,8 +107,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             SizeF textSize = TextRenderer.MeasureText(label, _view.Font);
             int textOffset = (int) (textSize.Height + tp);
 
-            float scaleHeight = (ImageSize.Height * _dpiScale - textOffset) / image.Height;
-            float scaleWidth = ImageSize.Width * _dpiScale / image.Width;
+            float scaleHeight = (float) (imageSizeH - textOffset) / image.Height;
+            float scaleWidth = (float) imageSizeW / image.Width;
 
             float scale = Math.Min(scaleWidth, scaleHeight);
             int height = (int) Math.Round(image.Height * scale);
@@ -156,12 +161,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             int width, height;
             if (image.Width > image.Height)
             {
-                width = (int) Math.Round(ImageSize.Width * _dpiScale);
+                width = imageSizeW;
                 height = (int) Math.Round(width * (image.Height / (double) image.Width));
             }
             else
             {
-                height = (int) Math.Round(ImageSize.Height * _dpiScale);
+                height = imageSizeH;
                 width = (int) Math.Round(height * (image.Width / (double) image.Height));
             }
             var x = e.Bounds.Left + (e.Bounds.Width - width) / 2;
@@ -188,8 +193,9 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         set
         {
             _imageSize = value;
-            WinFormsHacks.SetImageSize(_view.LargeImageList!,
-                new Size((int) Math.Round(_imageSize.Width * _dpiScale), (int) Math.Round(_imageSize.Height * _dpiScale)));
+            int w = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Width * _dpiScale) : _imageSize.Width;
+            int h = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Height * _dpiScale) : _imageSize.Height;
+            WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(w, h));
         }
     }
 
