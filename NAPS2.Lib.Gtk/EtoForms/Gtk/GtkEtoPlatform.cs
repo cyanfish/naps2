@@ -38,6 +38,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
+        AttachDpiDependency(button, _ => button.ScaleImage());
     }
 
     public override Bitmap ToBitmap(IMemoryImage image)
@@ -269,10 +270,11 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void ConfigureZoomButton(Button button, string icon)
     {
-        button.Text = "";
-        button.Image = IconProvider.GetIcon(icon);
-        button.Size = Size.Empty;
         var gtkButton = button.ToNative();
+        button.Text = "";
+        button.Image = IconProvider.GetIcon(icon, gtkButton.ScaleFactor);
+        button.ScaleImage();
+        button.Size = Size.Empty;
         gtkButton.StyleContext.AddClass("zoom-button");
         gtkButton.SetSizeRequest(0, 0);
     }
