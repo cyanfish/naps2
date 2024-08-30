@@ -234,6 +234,25 @@ public class GtkEtoPlatform : EtoPlatform
         // TODO: Gtk windows drift if we remember location. For now using the default location is fine.
     }
 
+    public override float GetScaleFactor(Window window)
+    {
+        // GTK scale factors are integers. Any fractional scaling (e.g. 1.5x) works by rendering at 2x and then scaling
+        // down.
+        return window.ToNative().ScaleFactor;
+    }
+
+    public override void AttachDpiDependency(Control control, Action<float> callback)
+    {
+        if (control.Loaded)
+        {
+            callback(GetScaleFactor(control.ParentWindow));
+        }
+        else
+        {
+            control.Load += (_, _) => callback(GetScaleFactor(control.ParentWindow));
+        }
+    }
+
     public override Control AccessibleImageButton(Image image, string text, Action onClick,
         int xOffset = 0, int yOffset = 0)
     {

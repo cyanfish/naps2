@@ -23,7 +23,7 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override bool IsWinForms => true;
 
-    public override IIconProvider IconProvider { get; } = new WinFormsIconProvider();
+    public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
 
     public override Application CreateApplication()
     {

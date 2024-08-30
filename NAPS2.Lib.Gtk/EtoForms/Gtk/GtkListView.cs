@@ -139,7 +139,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         else
         {
             using var image = _behavior.GetImage(item, ImageSize);
-            var imageWidget = image.ToGtk();
+            var imageWidget = image.ToGdk().ToScaledImage(_flowBox.ScaleFactor);
             // TODO: Is there a better way to prevent the image from expanding in both dimensions?
             var hframe = new Box(Orientation.Horizontal, 0);
             hframe.Halign = Align.Center;

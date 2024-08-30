@@ -163,7 +163,7 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void CreateToolbarButton(Command command)
     {
-        var button = new ToolButton(command.Image.ToGtk(), command.ToolBarText)
+        var button = new ToolButton(GetCommandImage(command), command.ToolBarText)
         {
             Homogeneous = false,
             Sensitive = command.Enabled
@@ -212,7 +212,7 @@ public class GtkDesktopForm : DesktopForm
     protected override void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
         MenuProvider menu)
     {
-        var button = new MenuToolButton(command.Image.ToGtk(), command.ToolBarText)
+        var button = new MenuToolButton(GetCommandImage(command), command.ToolBarText)
         {
             Homogeneous = false,
             Sensitive = command.Enabled
@@ -229,7 +229,7 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
     {
-        var button = new ToolButton(command.Image.ToGtk(), command.ToolBarText)
+        var button = new ToolButton(GetCommandImage(command), command.ToolBarText)
         {
             Homogeneous = false,
             Sensitive = command.Enabled
@@ -260,11 +260,11 @@ public class GtkDesktopForm : DesktopForm
         (button?.Menu as Menu)?.PopupAtWidget(button, Gravity.SouthWest, Gravity.NorthWest, null);
     }
 
-    private static Button CreateToolButton(Command command, Orientation orientation = Orientation.Vertical,
+    private Button CreateToolButton(Command command, Orientation orientation = Orientation.Vertical,
         int spacing = 4)
     {
         var box = new Box(orientation, spacing);
-        box.Add(command.Image.ToGtk());
+        box.Add(GetCommandImage(command));
         var label = new Label(command.ToolBarText);
         box.Add(label);
         var button = new Button(box)
@@ -276,5 +276,12 @@ public class GtkDesktopForm : DesktopForm
         command.EnabledChanged +=
             (_, _) => button.Sensitive = command.Enabled;
         return button;
+    }
+
+    private Image GetCommandImage(Command command)
+    {
+        var scale = EtoPlatform.Current.GetScaleFactor(this);
+        var image = ((ActionCommand) command).GetIconImage(scale);
+        return image.ToGdk().ToScaledImage((int) scale);
     }
 }
