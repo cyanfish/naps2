@@ -239,6 +239,7 @@ public class WinFormsDesktopForm : DesktopForm
         {
             TextImageRelation = WF.TextImageRelation.ImageAboveText
         };
+        EtoPlatform.Current.AttachDpiDependency(this, scale => item.DropDownButtonWidth = (int) (scale * 15));
         ApplyCommand(item, command);
         _mainToolStrip.Items.Add(item);
         menu.Handle(subItems => SetUpMenu(item, subItems));
