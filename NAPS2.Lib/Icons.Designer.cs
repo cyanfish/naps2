@@ -112,6 +112,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] apple_mail_hires {
+            get {
+                object obj = ResourceManager.GetObject("apple_mail_hires", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] application_cascade {
             get {
                 object obj = ResourceManager.GetObject("application_cascade", resourceCulture);
@@ -942,6 +952,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] gmail_hires {
+            get {
+                object obj = ResourceManager.GetObject("gmail_hires", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] hourglass_grey {
             get {
                 object obj = ResourceManager.GetObject("hourglass_grey", resourceCulture);
@@ -1022,6 +1042,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] mail_yellow_hires {
+            get {
+                object obj = ResourceManager.GetObject("mail_yellow_hires", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] network_ip {
             get {
                 object obj = ResourceManager.GetObject("network_ip", resourceCulture);
@@ -1055,6 +1085,16 @@ namespace NAPS2 {
         internal static byte[] outlookweb {
             get {
                 object obj = ResourceManager.GetObject("outlookweb", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] outlookweb_hires {
+            get {
+                object obj = ResourceManager.GetObject("outlookweb_hires", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -1585,6 +1625,16 @@ namespace NAPS2 {
         internal static byte[] thunderbird {
             get {
                 object obj = ResourceManager.GetObject("thunderbird", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] thunderbird_hires {
+            get {
+                object obj = ResourceManager.GetObject("thunderbird_hires", resourceCulture);
                 return ((byte[])(obj));
             }
         }

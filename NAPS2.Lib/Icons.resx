@@ -451,20 +451,35 @@
   <data name="gmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\gmail.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="gmail_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\gmail-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="outlookweb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\outlookweb.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="outlookweb_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\outlookweb-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="thunderbird" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\thunderbird.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="thunderbird_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\thunderbird-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="apple_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\apple_mail.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="apple_mail_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\apple_mail-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="email_setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_setting.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mail_yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\mail_yellow.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mail_yellow_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\mail_yellow-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="hourglass_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\hourglass_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
