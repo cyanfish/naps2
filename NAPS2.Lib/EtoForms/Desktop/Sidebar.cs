@@ -35,7 +35,7 @@ public class Sidebar
 
     public LayoutElement CreateView(IFormBase parentWindow)
     {
-        var profile = _profileManager.Profiles.First();
+        var profile = _profileManager.Profiles.FirstOrDefault() ?? new ScanProfile();
 
         _deviceSelectorWidget = new DeviceSelectorWidget(_scanPerformer, _deviceCapsCache, _iconProvider, parentWindow)
         {
