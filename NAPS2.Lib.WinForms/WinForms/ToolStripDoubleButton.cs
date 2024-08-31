@@ -11,15 +11,21 @@ public class ToolStripDoubleButton : ToolStripButton
     public event EventHandler? FirstClick;
     public event EventHandler? SecondClick;
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Image? FirstImage { get; set; }
+
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Image? SecondImage { get; set; }
 
     [Localizable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public required string FirstText { get; init; }
 
     [Localizable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public required string SecondText { get; init; }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public int MaxTextWidth { get; init; }
 
     public override Size GetPreferredSize(Size constrainingSize)
