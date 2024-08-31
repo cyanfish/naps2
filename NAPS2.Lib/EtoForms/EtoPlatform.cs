@@ -98,7 +98,7 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual void ConfigureZoomButton(Button button, string icon)
+    public virtual void ConfigureZoomButton(Button button, string icon, ColorScheme colorScheme)
     {
     }
 
@@ -131,6 +131,7 @@ public abstract class EtoPlatform
 
     public virtual void ConfigureEllipsis(Label label)
     {
+        // TODO: Maybe implement our own ellipsis logic that uses text-measuring to strip trailing characters and add "..."?
     }
 
     public virtual Bitmap? ExtractAssociatedIcon(string exePath) => throw new NotSupportedException();

@@ -30,6 +30,10 @@ public class WinFormsEtoPlatform : EtoPlatform
         WF.Application.EnableVisualStyles();
         WF.Application.SetCompatibleTextRenderingDefault(false);
         WF.Application.SetHighDpiMode(WF.HighDpiMode.PerMonitorV2);
+        // WinForms dark mode is experimental
+#pragma warning disable WFO5001
+        WF.Application.SetColorMode(WF.SystemColorMode.System);
+#pragma warning restore WFO5001
         return new Application(Eto.Platforms.WinForms);
     }
 
@@ -279,7 +283,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         handler.ImageSize = size;
     }
 
-    public override void ConfigureZoomButton(Button button, string icon)
+    public override void ConfigureZoomButton(Button button, string icon, ColorScheme colorScheme)
     {
         AttachDpiDependency(button, scale =>
         {
@@ -289,7 +293,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         var wfButton = (WF.Button) button.ToNative();
         wfButton.AccessibleName = button.Text;
         wfButton.Text = "";
-        wfButton.BackColor = SD.Color.White;
+        wfButton.BackColor = colorScheme.BackgroundColor.ToSD();
         wfButton.FlatStyle = WF.FlatStyle.Flat;
     }
 

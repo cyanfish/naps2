@@ -8,6 +8,10 @@ public class ColorScheme
     private static readonly Color MidGray = Color.FromRgb(0x606060);
     private static readonly Color LightGray = Color.FromRgb(0xdddddd);
     private static readonly Color HighlightBlue = Color.FromRgb(0x007bff);
+    private static readonly Color MidBlue = Color.FromRgb(0x60a0e8);
+    private static readonly Color PaleBlue = Color.FromRgb(0xcce8ff);
+    private static readonly Color DarkGrayBlue = Color.FromRgb(0x28445b);
+    private static readonly Color DarkOutlineBlue = Color.FromRgb(0x0078d4);
 
     private readonly IDarkModeProvider _darkModeProvider;
 
@@ -28,6 +32,10 @@ public class ColorScheme
     public Color BorderColor => DarkMode ? LightGray : Colors.Black;
 
     public Color CropColor => DarkMode ? HighlightBlue : Colors.Black;
+
+    public Color HighlightBorderColor => DarkMode ? DarkOutlineBlue : MidBlue;
+
+    public Color HighlightBackgroundColor => DarkMode ? DarkGrayBlue : PaleBlue;
 
     public Color NotificationBackgroundColor => DarkMode ? Color.FromRgb(0x323232) : Color.FromRgb(0xf2f2f2);
     

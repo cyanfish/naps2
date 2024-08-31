@@ -268,7 +268,7 @@ public class GtkEtoPlatform : EtoPlatform
         return button.ToEto();
     }
 
-    public override void ConfigureZoomButton(Button button, string icon)
+    public override void ConfigureZoomButton(Button button, string icon, ColorScheme colorScheme)
     {
         var gtkButton = button.ToNative();
         button.Text = "";

@@ -51,6 +51,21 @@ public class WinFormsDesktopForm : DesktopForm
 
         // TODO: Remove this if https://github.com/picoe/Eto/issues/2601 is fixed
         NativeListView.KeyDown += (_, e) => OnKeyDown(new KeyEventArgs(e.KeyData.ToEto(), KeyEventType.KeyDown));
+
+        Load += (_, _) => colorScheme.ColorSchemeChanged += ColorSchemeChanged;
+        UnLoad += (_, _) => colorScheme.ColorSchemeChanged -= ColorSchemeChanged;
+    }
+
+    private void ColorSchemeChanged(object? sender, EventArgs e)
+    {
+        Invoker.Current.InvokeDispatch(() =>
+        {
+            if (WF.Application.OpenForms.Count == 1)
+            {
+                // Reload the form as WinForms dark mode doesn't dynamically switch everything
+                SetCulture(Config.Get(c => c.Culture) ?? "en");
+            }
+        });
     }
 
     protected override void OnClosing(CancelEventArgs e)

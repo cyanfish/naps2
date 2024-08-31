@@ -3,16 +3,13 @@ using Microsoft.Win32;
 
 namespace NAPS2.EtoForms.WinForms;
 
-public class WinFormsDarkModeProvider : IDarkModeProvider, IMessageFilter
+public class WinFormsDarkModeProvider : IDarkModeProvider
 {
-    private const int WM_SETTINGCHANGE = 0x1A;
-    private const int WM_REFLECT = 0x2000;
-
     private bool? _value;
 
     public WinFormsDarkModeProvider()
     {
-        Application.AddMessageFilter(this);
+        SystemEvents.UserPreferenceChanged += OnUserPreferenceChanged;
     }
 
     public bool IsDarkModeEnabled => _value ??= ReadDarkMode();
@@ -33,15 +30,17 @@ public class WinFormsDarkModeProvider : IDarkModeProvider, IMessageFilter
 
     public event EventHandler? DarkModeChanged;
 
-    public bool PreFilterMessage(ref Message m)
+    private void OnUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
     {
-        if (m.Msg is WM_SETTINGCHANGE or (WM_SETTINGCHANGE | WM_REFLECT))
+        var newValue = ReadDarkMode();
+        if (newValue != _value)
         {
-            // TODO: Maybe we can narrow down the changed setting based on lParam?
-            // https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-settingchange
-            _value = null;
+            _value = newValue;
+            // WinForms dark mode is experimental
+#pragma warning disable WFO5001
+            Application.SetColorMode(newValue ? SystemColorMode.Dark : SystemColorMode.Classic);
+#pragma warning restore WFO5001
             DarkModeChanged?.Invoke(this, EventArgs.Empty);
         }
-        return false;
     }
 }

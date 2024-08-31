@@ -10,12 +10,12 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsListView<T> : IListView<T> where T : notnull
 {
-    private static readonly Pen DefaultPen = new(Color.Black, 1);
+    private Pen DefaultPen => new(_behavior.ColorScheme.ForegroundColor.ToSD(), 1);
     private static readonly Pen BasicSelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
     private const int PageNumberTextPadding = 6;
     private const int PageNumberSelectionPadding = 3;
-    private static readonly SolidBrush PageNumberOutlineBrush = new(Color.FromArgb(0x60, 0xa0, 0xe8));
-    private static readonly SolidBrush PageNumberSelectionBrush = new(Color.FromArgb(0xcc, 0xe8, 0xff));
+    private SolidBrush PageNumberOutlineBrush => new(_behavior.ColorScheme.HighlightBorderColor.ToSD());
+    private SolidBrush PageNumberSelectionBrush => new(_behavior.ColorScheme.HighlightBackgroundColor.ToSD());
     private static readonly StringFormat PageNumberLabelFormat = new()
         { Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter };
 
@@ -141,7 +141,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
 
             // Draw the text below the image
-            var drawBrush = Brushes.Black;
+            var drawBrush = new SolidBrush(_behavior.ColorScheme.ForegroundColor.ToSD());
             float x1 = x + width / 2f;
             float y1 = y + height + tp;
             RectangleF labelRect = new(x1, y1, 0, textSize.Height);

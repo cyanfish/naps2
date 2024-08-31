@@ -446,16 +446,16 @@ public abstract class DesktopForm : EtoFormBase
     protected LayoutElement GetSidebarButton()
     {
         var toggleSidebar = C.ImageButton(Commands.ToggleSidebar);
-        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list_small");
+        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list_small", _colorScheme);
         return toggleSidebar.AlignTrailing();
     }
 
     protected LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small", _colorScheme);
         var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small", _colorScheme);
         return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(-1);
     }
 
