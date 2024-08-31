@@ -139,7 +139,7 @@ public class ProfilesForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             L.Row(
-                _listView.Control.Scale(),
+                _listView.Control.NaturalSize(150, 100).Scale(),
                 C.Button(_scanCommand, "control_play_blue", ButtonImagePosition.Above, ButtonFlags.LargeIcon)
                     .Height(80)
             ).Aligned().Scale(),
