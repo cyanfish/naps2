@@ -136,15 +136,6 @@ public abstract class DesktopForm : EtoFormBase
                 ).Padding(8)
             ).Scale()
         );
-
-        UpdateColors();
-        // TODO: Memory leak?
-        _colorScheme.ColorSchemeChanged += (_, _) => UpdateColors();
-    }
-
-    protected virtual void UpdateColors()
-    {
-        // TODO: Do something here or in inheritors?
     }
 
     private void OpeningContextMenu(object? sender, EventArgs e)
@@ -446,16 +437,16 @@ public abstract class DesktopForm : EtoFormBase
     protected LayoutElement GetSidebarButton()
     {
         var toggleSidebar = C.ImageButton(Commands.ToggleSidebar);
-        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list_small", _colorScheme);
+        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list_small");
         return toggleSidebar.AlignTrailing();
     }
 
     protected LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small", _colorScheme);
+        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small", _colorScheme);
+        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small");
         return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(-1);
     }
 

@@ -19,6 +19,7 @@ public class GtkEtoPlatform : EtoPlatform
     public override bool IsGtk => true;
 
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
+    public override IDarkModeProvider DarkModeProvider { get; } = new GtkDarkModeProvider();
 
     public override Application CreateApplication()
     {
@@ -268,7 +269,7 @@ public class GtkEtoPlatform : EtoPlatform
         return button.ToEto();
     }
 
-    public override void ConfigureZoomButton(Button button, string icon, ColorScheme colorScheme)
+    public override void ConfigureZoomButton(Button button, string icon)
     {
         var gtkButton = button.ToNative();
         button.Text = "";

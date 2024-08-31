@@ -15,11 +15,18 @@ public abstract class EtoPlatform
         set => _current = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    protected EtoPlatform()
+    {
+        ColorScheme = new ColorScheme(DarkModeProvider);
+    }
+
     public virtual bool IsGtk => false;
     public virtual bool IsMac => false;
     public virtual bool IsWinForms => false;
 
     public abstract IIconProvider IconProvider { get; }
+    public abstract IDarkModeProvider DarkModeProvider { get; }
+    public ColorScheme ColorScheme { get; }
 
     public abstract Application CreateApplication();
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
@@ -98,7 +105,7 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual void ConfigureZoomButton(Button button, string icon, ColorScheme colorScheme)
+    public virtual void ConfigureZoomButton(Button button, string icon)
     {
     }
 

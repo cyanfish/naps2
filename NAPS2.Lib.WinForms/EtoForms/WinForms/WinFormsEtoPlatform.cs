@@ -24,6 +24,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override bool IsWinForms => true;
 
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
+    public override IDarkModeProvider DarkModeProvider { get; } = new WinFormsDarkModeProvider();
 
     public override Application CreateApplication()
     {
@@ -283,7 +284,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         handler.ImageSize = size;
     }
 
-    public override void ConfigureZoomButton(Button button, string icon, ColorScheme colorScheme)
+    public override void ConfigureZoomButton(Button button, string icon)
     {
         AttachDpiDependency(button, scale =>
         {
@@ -293,7 +294,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         var wfButton = (WF.Button) button.ToNative();
         wfButton.AccessibleName = button.Text;
         wfButton.Text = "";
-        wfButton.BackColor = colorScheme.BackgroundColor.ToSD();
+        wfButton.BackColor = ColorScheme.BackgroundColor.ToSD();
         wfButton.FlatStyle = WF.FlatStyle.Flat;
     }
 
