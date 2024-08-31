@@ -41,5 +41,7 @@ public class ColorScheme
     
     public Color NotificationBorderColor => DarkMode ? Color.FromRgb(0x606060) : Color.FromRgb(0xb2b2b2);
 
+    public Color LinkColor => DarkMode ? Color.FromRgb(0x60cdff) : Color.FromRgb(0x0000ff);
+
     public event EventHandler? ColorSchemeChanged;
 }

@@ -27,7 +27,7 @@ public class EditProfileForm : EtoDialogBase
     private readonly EnumDropDownWidget<ScanHorizontalAlign> _horAlign = new();
     private readonly EnumDropDownWidget<ScanScale> _scale = new();
     private readonly CheckBox _enableAutoSave = new() { Text = UiStrings.EnableAutoSave };
-    private readonly LinkButton _autoSaveSettings = new() { Text = UiStrings.AutoSaveSettings };
+    private readonly LinkButton _autoSaveSettings = C.Link(UiStrings.AutoSaveSettings);
     private readonly Button _advanced = new() { Text = UiStrings.Advanced };
     private readonly SliderWithTextBox _brightnessSlider = new();
     private readonly SliderWithTextBox _contrastSlider = new();

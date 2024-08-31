@@ -10,8 +10,8 @@ public class LinkNotificationView : NotificationView
     private readonly string? _folderTarget;
 
     private readonly Label _label = new();
-    private readonly LinkButton _link = new();
     private readonly ContextMenu _contextMenu = new();
+    private readonly LinkButton _link;
 
     protected LinkNotificationView(
         NotificationModel model, string title, string linkLabel, string? linkTarget, string? folderTarget)
@@ -19,7 +19,7 @@ public class LinkNotificationView : NotificationView
     {
         _label.Text = title;
         _label.Font = new Font(_label.Font.Family, _label.Font.Size, FontStyle.Bold);
-        _link.Text = linkLabel;
+        _link = C.Link(linkLabel);
         _linkTarget = linkTarget;
         _folderTarget = folderTarget;
 

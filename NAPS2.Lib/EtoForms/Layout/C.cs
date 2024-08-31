@@ -16,29 +16,19 @@ public static class C
         new Label { Text = text, Wrap = WrapMode.None };
 
     /// <summary>
-    /// Creates a link button with the given URL as both text and click action.
-    /// </summary>
-    /// <param name="url"></param>
-    /// <param name="label"></param>
-    /// <returns></returns>
-    public static LinkButton UrlLink(string url, string? label = null)
-    {
-        void OnClick() => ProcessHelper.OpenUrl(url);
-        return new LinkButton
-        {
-            Text = label ?? url,
-            Command = new ActionCommand(OnClick)
-        };
-    }
-
-    /// <summary>
     /// Creates a link button with the specified text.
     /// </summary>
     /// <param name="text"></param>
     /// <returns></returns>
     public static LinkButton Link(string text)
     {
-        return new LinkButton { Text = text };
+        var link = new LinkButton { Text = text };
+        if (EtoPlatform.Current.IsWinForms)
+        {
+            // TODO: Remove this when https://github.com/dotnet/winforms/issues/11935 is fixed
+            link.TextColor = EtoPlatform.Current.ColorScheme.LinkColor;
+        }
+        return link;
     }
 
     /// <summary>
@@ -49,11 +39,21 @@ public static class C
     /// <returns></returns>
     public static LinkButton Link(string text, Action onClick)
     {
-        return new LinkButton
-        {
-            Text = text,
-            Command = new ActionCommand(onClick)
-        };
+        var link = Link(text);
+        link.Command = new ActionCommand(onClick);
+        return link;
+    }
+
+    /// <summary>
+    /// Creates a link button with the given URL as both text and click action.
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="label"></param>
+    /// <returns></returns>
+    public static LinkButton UrlLink(string url, string? label = null)
+    {
+        void OnClick() => ProcessHelper.OpenUrl(url);
+        return Link(label ?? url, OnClick);
     }
 
     /// <summary>
