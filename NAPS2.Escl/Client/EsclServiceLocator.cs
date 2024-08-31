@@ -91,7 +91,7 @@ public class EsclServiceLocator : IDisposable
         int tlsPort = -1;
         string? host = null;
         var props = new Dictionary<string, string>();
-        foreach (var record in args.Message.AdditionalRecords)
+        foreach (var record in args.Message.Answers.Concat(args.Message.AdditionalRecords))
         {
             Logger.LogTrace("{Type} {Record}", record.GetType().Name, record);
             if (record is ARecord a)
