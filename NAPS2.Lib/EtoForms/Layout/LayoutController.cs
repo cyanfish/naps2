@@ -132,7 +132,7 @@ public class LayoutController
             DefaultSpacing = DefaultSpacing,
             DefaultLabelSpacing = DefaultLabelSpacing,
             Invalidate = Invalidate,
-            Scale = EtoPlatform.Current.GetScaleFactor(_window!)
+            Scale = EtoPlatform.Current.ScaleLayout ? EtoPlatform.Current.GetScaleFactor(_window!) : 1f
         };
     }
 

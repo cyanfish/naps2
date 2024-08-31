@@ -35,8 +35,6 @@ public class MacDesktopForm : DesktopForm
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider)
     {
-        // For retina screens
-        _thumbnailController.Oversample = 2.0;
     }
 
     protected override void UpdateTitle(ScanProfile? defaultProfile)

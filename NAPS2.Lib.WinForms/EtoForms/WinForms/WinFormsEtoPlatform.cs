@@ -265,6 +265,8 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override float GetScaleFactor(Window window) => window.ToNative().DeviceDpi / 96f;
 
+    public override bool ScaleLayout => true;
+
     public override void SetImageSize(ButtonMenuItem menuItem, int size)
     {
         var handler = (ButtonMenuItemHandler) menuItem.Handler;

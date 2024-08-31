@@ -102,6 +102,8 @@ public class MacEtoPlatform : EtoPlatform
         control.ToNative().RemoveFromSuperview();
     }
 
+    public override float GetScaleFactor(Window window) => 2f;
+
     public override Control AccessibleImageButton(Image image, String text, Action onClick,
         int xOffset = 0, int yOffset = 0)
     {
