@@ -147,6 +147,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             RectangleF labelRect = new(x1, y1, 0, textSize.Height);
             float maxLabelWidth = Math.Min(textSize.Width, e.Bounds.Width - 2 * tp);
             labelRect.Inflate(maxLabelWidth / 2, 0);
+            labelRect.Width += 2;
             e.Graphics.DrawString(label, _view.Font, drawBrush, labelRect, PageNumberLabelFormat);
 
             // Draw unselected border
