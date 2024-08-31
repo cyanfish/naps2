@@ -25,7 +25,7 @@ public static class GtkEtoExtensions
         // physical size, which will look too big and blurry. To get an actual crisp image rendered at 32x32 logical
         // pixels and 64x64 physical pixels, we first create a surface with a 2x scale factor and then create the
         // Gtk.Image from that.
-        var surface = Gdk.CairoHelper.SurfaceCreateFromPixbuf(pixbuf, scaleFactor, null);
+        using var surface = Gdk.CairoHelper.SurfaceCreateFromPixbuf(pixbuf, scaleFactor, null);
         return new Image(surface);
     }
 
