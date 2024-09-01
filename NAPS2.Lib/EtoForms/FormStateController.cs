@@ -80,7 +80,7 @@ public class FormStateController
         if (RestoreFormState || SaveFormState)
         {
             var formStates = _config.Get(c => c.FormStates);
-            _formState = formStates.SingleOrDefault(x => x.Name == FormName) ?? new FormState {Name = FormName};
+            _formState = formStates.SingleOrDefault(x => x.Name == FormName) ?? new FormState { Name = FormName };
         }
 
         if (RestoreFormState)
@@ -111,7 +111,10 @@ public class FormStateController
             throw new InvalidOperationException();
         }
         var location = new Point(_formState.Location.X, _formState.Location.Y);
-        var size = new Size(_formState.Size.Width, _formState.Size.Height);
+        var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
+        var size = new Size(
+            (int) Math.Round(_formState.Size.Width * scale),
+            (int) Math.Round(_formState.Size.Height * scale));
         if (!location.IsZero)
         {
             if (Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
@@ -148,7 +151,10 @@ public class FormStateController
             if (_window.WindowState == WindowState.Normal)
             {
                 var size = EtoPlatform.Current.GetClientSize(_window);
-                _formState.Size = new FormState.FormSize(size.Width, size.Height);
+                var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
+                _formState.Size = new FormState.FormSize(
+                    (int) Math.Round(size.Width / scale),
+                    (int) Math.Round(size.Height / scale));
             }
         }
     }

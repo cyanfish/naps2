@@ -158,9 +158,11 @@ public abstract class EtoPlatform
         control.MouseMove += eventHandler;
     }
 
-    public virtual float GetScaleFactor(Window window) => 1;
+    public virtual float GetScaleFactor(Window window) => 1f;
 
     public virtual bool ScaleLayout => false;
+
+    public float GetLayoutScaleFactor(Window window) => ScaleLayout ? GetScaleFactor(window) : 1f;
 
     public virtual void SetImageSize(ButtonMenuItem menuItem, int size)
     {
