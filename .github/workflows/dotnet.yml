@@ -14,11 +14,19 @@ jobs:
       if: matrix.os == 'ubuntu-24.04'
       run: sudo apt-get install -y fonts-liberation2 fonts-noto-core fonts-noto-cjk
     - uses: actions/checkout@v4
+    - name: Setup .NET 9 (daily)
+      if: matrix.os == 'windows-2022'
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+        dotnet-quality: daily
     - name: Setup .NET 9
+      if: matrix.os != 'windows-2022'
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
     - name: Install workloads
+      if: matrix.os == 'macos-14'
       run: dotnet workload install macos
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
