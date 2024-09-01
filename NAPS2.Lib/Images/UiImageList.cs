@@ -173,13 +173,13 @@ public class UiImageList
     private void ImageThumbnailChanged(object? sender, EventArgs args)
     {
         // A thumbnail change indicates rendering which is a passive interaction.
-        ImagesThumbnailChanged?.Invoke(this, new ImageListEventArgs(false));
+        ImagesThumbnailChanged?.Invoke(this, new ImageListEventArgs(true));
     }
 
     private void ImageThumbnailInvalidated(object? sender, EventArgs args)
     {
         // A thumbnail invalidation indicates an image edit which is an active interaction.
-        ImagesThumbnailInvalidated?.Invoke(this, new ImageListEventArgs(true));
+        ImagesThumbnailInvalidated?.Invoke(this, new ImageListEventArgs(false));
     }
 
     public async Task Undo()

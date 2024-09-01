@@ -10,7 +10,7 @@ namespace NAPS2.Images;
 /// </summary>
 public class ImageListSyncer
 {
-    private static readonly TimeSpan SyncThrottleInterval = TimeSpan.FromMilliseconds(100);
+    private static readonly TimeSpan SyncThrottleInterval = TimeSpan.FromMilliseconds(200);
 
     private readonly UiImageList _imageList;
     private readonly Action<ListViewDiffs<UiImage>> _diffCallback;
