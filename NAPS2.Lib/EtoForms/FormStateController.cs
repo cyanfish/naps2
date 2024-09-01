@@ -4,7 +4,6 @@ using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms;
 
-// TODO: Verify all the size handling works correctly with maximized forms.
 public class FormStateController
 {
     private readonly Window _window;

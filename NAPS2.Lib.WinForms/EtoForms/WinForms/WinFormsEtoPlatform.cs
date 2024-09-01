@@ -231,6 +231,10 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override void SetClientSize(Window window, Size clientSize)
     {
         window.ToNative().ClientSize = clientSize.ToSD();
+        if (!window.Loaded)
+        {
+            Invoker.Current.InvokeDispatch(() => (window as IFormBase)?.LayoutController.Invalidate());
+        }
     }
 
     public override Control CreateContainer()
