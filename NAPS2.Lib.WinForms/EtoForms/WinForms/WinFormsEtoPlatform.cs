@@ -194,7 +194,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         var preferredSize = SizeF.Max(
             base.GetPreferredSize(control, availableSpace),
             native.PreferredSize.ToEto());
-        if (control.GetType() == typeof(DropDown))
+        if (control.GetType() == typeof(DropDown) && control.Height > 0)
         {
             // Work around a WinForms bug where the preferred height of a DropDown is incorrect
             preferredSize.Height = control.Height;
