@@ -214,7 +214,7 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override Size GetClientSize(Window window, bool excludeToolbars = false)
     {
-        var size = base.GetClientSize(window);
+        var size = window.ToNative().ClientSize.ToEto();
         if (excludeToolbars && window.Content is { ControlObject: WF.ToolStripContainer container })
         {
             var top = container.TopToolStripPanel.Controls.Cast<WF.ToolStrip>();
@@ -226,6 +226,11 @@ public class WinFormsEtoPlatform : EtoPlatform
                 top.Concat(bottom).Sum(x => x.Height));
         }
         return size;
+    }
+
+    public override void SetClientSize(Window window, Size clientSize)
+    {
+        window.ToNative().ClientSize = clientSize.ToSD();
     }
 
     public override Control CreateContainer()
