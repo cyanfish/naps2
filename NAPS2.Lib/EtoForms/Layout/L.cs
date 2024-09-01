@@ -67,7 +67,7 @@ public static class L
             Panel2MinimumSize = controller.GetSizeFor(right).Width,
             FixedPanel = SplitterFixedPanel.Panel1
         };
-        splitter.Position = splitter.Panel1MinimumSize;
+        left.Width = splitter.Position = splitter.Panel1MinimumSize;
         splitter.PositionChanged += (_, _) =>
         {
             left.Width = splitter.Position;
