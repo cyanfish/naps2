@@ -49,7 +49,7 @@ public class FormStateController
             var oldDefaultClientSize = DefaultClientSize;
             var oldMaximumClientSize = _maximumClientSize;
             DefaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
-            _maximumClientSize = FixedHeightLayout ? new Size(0, _minimumClientSize.Height) : Size.Empty;
+            _maximumClientSize = FixedHeightLayout || !Resizable ? new Size(0, _minimumClientSize.Height) : Size.Empty;
 
             if (_loaded)
             {
@@ -111,10 +111,6 @@ public class FormStateController
             throw new InvalidOperationException();
         }
         var location = new Point(_formState.Location.X, _formState.Location.Y);
-        var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
-        var size = new Size(
-            (int) Math.Round(_formState.Size.Width * scale),
-            (int) Math.Round(_formState.Size.Height * scale));
         if (!location.IsZero)
         {
             if (Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
@@ -124,6 +120,10 @@ public class FormStateController
                 EtoPlatform.Current.SetFormLocation(_window, location);
             }
         }
+        var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
+        var size = new Size(
+            (int) Math.Round(_formState.Size.Width * scale),
+            (int) Math.Round(_formState.Size.Height * scale));
         if (!size.IsEmpty && Resizable)
         {
             if (!_minimumClientSize.IsEmpty)
