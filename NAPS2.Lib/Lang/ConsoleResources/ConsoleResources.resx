@@ -263,4 +263,7 @@ Use the "--importpassword" option.</value>
   <data name="DriverRequired" xml:space="preserve">
     <value>The --driver option must be set to use the --device or --listdevices option. Possible values: {0}</value>
   </data>
+  <data name="Cancelling" xml:space="preserve">
+    <value>Cancelling... Press Ctrl+C again to terminate.</value>
+  </data>
 </root>

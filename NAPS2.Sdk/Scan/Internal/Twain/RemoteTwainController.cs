@@ -37,6 +37,9 @@ internal class RemoteTwainController : ITwainController
             // We need to report cancellation so that TwainImageProcessor doesn't return a partial image
             _scanningContext.Logger.LogDebug("NAPS2.TW - Sending cancel event");
             twainEvents.TransferCanceled(new TwainTransferCanceled());
+            // We also want to wait until the worker closes so we guarantee the parent process doesn't die before the
+            // TWAIN process has a chance to clean up
+            await workerContext.Stop();
         }
     }
 

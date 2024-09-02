@@ -105,6 +105,15 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelling... Press Ctrl+C again to terminate..
+        /// </summary>
+        internal static string Cancelling {
+            get {
+                return ResourceManager.GetString("Cancelling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified component is already installed..
         /// </summary>
         internal static string ComponentAlreadyInstalled {

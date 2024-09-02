@@ -33,6 +33,7 @@ internal class AutomatedScanning
 
     private readonly ConsoleOutput _output;
     private readonly AutomatedScanningOptions _options;
+    private readonly CancellationTokenSource _cts = new();
     private PdfEncryption _parsedEncryptConfigOption = null!;
     private List<List<ProcessedImage>> _scanList = null!;
     private int _pagesScanned;
@@ -78,6 +79,15 @@ internal class AutomatedScanning
 
     public async Task Execute()
     {
+        Console.CancelKeyPress += (_, e) =>
+        {
+            if (!_cts.IsCancellationRequested)
+            {
+                Console.WriteLine(ConsoleResources.Cancelling);
+                _cts.Cancel();
+                e.Cancel = true;
+            }
+        };
         bool hasUnexpectedException = false;
         try
         {
@@ -115,6 +125,8 @@ internal class AutomatedScanning
                 await ImportImages();
             }
 
+            if (_cts.IsCancellationRequested) return;
+
             ConfigureOcr();
 
             if (_options.Number > 0)
@@ -129,6 +141,8 @@ internal class AutomatedScanning
                 }
                 await PerformScan(profile);
             }
+
+            if (_cts.IsCancellationRequested) return;
 
             ReorderScannedImages();
 
@@ -245,9 +259,7 @@ internal class AutomatedScanning
         };
         await SetProfileOverrides(profile);
 
-        var cts = new CancellationTokenSource();
-        Console.CancelKeyPress += (_, _) => cts.Cancel();
-        await foreach (var device in _scanPerformer.GetDevices(profile, cts.Token))
+        await foreach (var device in _scanPerformer.GetDevices(profile, _cts.Token))
         {
             _output.Writer.WriteLine(device.Name);
         }
@@ -332,7 +344,7 @@ internal class AutomatedScanning
                         PatchTOnly = true
                     }
                 };
-                await foreach (var image in _fileImporter.Import(actualPath, importParams))
+                await foreach (var image in _fileImporter.Import(actualPath, importParams, _cts.Token))
                 {
                     scan.Add(PostProcessImportedImage(image));
                 }
@@ -443,7 +455,7 @@ internal class AutomatedScanning
             }
 
             OutputVerbose(ConsoleResources.SendingEmail);
-            if (await _emailProviderFactory.Default.SendEmail(message))
+            if (await _emailProviderFactory.Default.SendEmail(message, _cts.Token))
             {
                 OutputVerbose(ConsoleResources.EmailSent);
             }
@@ -590,6 +602,7 @@ internal class AutomatedScanning
         foreach (var scan in _scanList)
         {
             var op = _operationFactory.Create<SaveImagesOperation>();
+            _cts.Token.Register(op.Cancel);
             int i = -1;
             op.StatusChanged += (sender, args) =>
             {
@@ -673,6 +686,7 @@ internal class AutomatedScanning
         foreach (var fileContents in _scanList)
         {
             var op = _operationFactory.Create<SavePdfOperation>();
+            _cts.Token.Register(op.Cancel);
             int i = -1;
             op.StatusChanged += (sender, args) =>
             {
@@ -731,7 +745,7 @@ internal class AutomatedScanning
                 DetectPatchT = _options.SplitPatchT,
                 OcrParams = _ocrParams
             };
-            await foreach (var image in _scanPerformer.PerformScan(profile, scanParams))
+            await foreach (var image in _scanPerformer.PerformScan(profile, scanParams, cancelToken: _cts.Token))
             {
                 ReceiveScannedImage(image);
             }
