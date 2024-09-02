@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
@@ -15,8 +14,11 @@ public class BrightContForm : UnaryImageFormBase
         IconName = "contrast_with_sun_small";
         Title = UiStrings.BrightnessContrast;
 
-        _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun_small");
-        _contrastSlider.Icon = iconProvider.GetIcon("contrast_small");
+        EtoPlatform.Current.AttachDpiDependency(this, scale =>
+        {
+            _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun_small", scale);
+            _contrastSlider.Icon = iconProvider.GetIcon("contrast_small", scale);
+        });
         Sliders = [_brightnessSlider, _contrastSlider];
     }
 

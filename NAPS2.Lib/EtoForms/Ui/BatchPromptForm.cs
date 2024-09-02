@@ -7,7 +7,7 @@ public class BatchPromptForm : EtoDialogBase
 {
     private readonly Button _scanButton;
 
-    public BatchPromptForm(Naps2Config config, IIconProvider iconProvider) : base(config)
+    public BatchPromptForm(Naps2Config config) : base(config)
     {
         var scanNextCommand = new ActionCommand(() =>
         {
@@ -16,7 +16,7 @@ public class BatchPromptForm : EtoDialogBase
         })
         {
             Text = UiStrings.Scan,
-            Image = iconProvider.GetIcon("control_play_blue_small")
+            IconName = "control_play_blue_small"
         };
         _scanButton = C.Button(scanNextCommand, ButtonImagePosition.Left);
         DefaultButton = _scanButton;

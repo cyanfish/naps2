@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
@@ -15,8 +14,11 @@ public class HueSatForm : UnaryImageFormBase
         IconName = "color_management_small";
         Title = UiStrings.HueSaturation;
 
-        _hueSlider.Icon = iconProvider.GetIcon("color_wheel_small");
-        _saturationSlider.Icon = iconProvider.GetIcon("color_gradient_small");
+        EtoPlatform.Current.AttachDpiDependency(this, scale =>
+        {
+            _hueSlider.Icon = iconProvider.GetIcon("color_wheel_small", scale);
+            _saturationSlider.Icon = iconProvider.GetIcon("color_gradient_small", scale);
+        });
         Sliders = [_hueSlider, _saturationSlider];
     }
 

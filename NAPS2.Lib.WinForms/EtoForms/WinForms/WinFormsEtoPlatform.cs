@@ -293,10 +293,16 @@ public class WinFormsEtoPlatform : EtoPlatform
         handler.ImageSize = size;
     }
 
-    public override void SetImageSize(ButtonToolItem menuItem, int size)
+    public override void SetImageSize(ToolItem menuItem, int size)
     {
-        var handler = (ButtonToolItemHandler) menuItem.Handler;
-        handler.ImageSize = size;
+        if (menuItem.Handler is ButtonToolItemHandler buttonHandler)
+        {
+            buttonHandler.ImageSize = size;
+        }
+        if (menuItem.Handler is DropDownToolItemHandler dropDownHandler)
+        {
+            dropDownHandler.ImageSize = size;
+        }
     }
 
     public override void ConfigureZoomButton(Button button, string icon)

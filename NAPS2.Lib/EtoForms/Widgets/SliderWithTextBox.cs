@@ -10,6 +10,8 @@ public class SliderWithTextBox
 
     private readonly Constraints _constraints;
     private readonly Slider _slider = new();
+    private readonly ImageView _imageView = new();
+    private readonly LayoutVisibility? _imageVis = new(false);
     private readonly TextBox _textBox;
 
     private int _valueCache;
@@ -78,7 +80,15 @@ public class SliderWithTextBox
         }
     }
 
-    public Image? Icon { get; set; }
+    public Image? Icon
+    {
+        get => _imageView.Image;
+        set
+        {
+            _imageView.Image = value;
+            _imageVis.IsVisible = value != null;
+        }
+    }
 
     public static implicit operator LayoutElement(SliderWithTextBox control)
     {
@@ -90,11 +100,9 @@ public class SliderWithTextBox
     public LayoutRow AsControl()
     {
         return L.Row(
-            Icon != null
-                ? new ImageView { Image = Icon }
-                    .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
-                    .Padding(top: 2, bottom: 2)
-                : C.None(),
+            _imageView
+                .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)
+                .Padding(top: 2, bottom: 2).Visible(_imageVis),
             _slider.Scale(),
             _textBox.Width(EtoPlatform.Current.IsGtk ? 50 : 40)
                 .Align(EtoPlatform.Current.IsWinForms ? LayoutAlignment.Leading : LayoutAlignment.Center)

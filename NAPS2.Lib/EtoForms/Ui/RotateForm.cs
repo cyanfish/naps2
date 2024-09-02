@@ -20,7 +20,8 @@ public class RotateForm : UnaryImageFormBase
         Title = UiStrings.Rotate;
         IconName = "arrow_rotate_anticlockwise_small";
 
-        _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small");
+        EtoPlatform.Current.AttachDpiDependency(this,
+            scale => _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small", scale));
         Sliders = [_angleSlider];
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;

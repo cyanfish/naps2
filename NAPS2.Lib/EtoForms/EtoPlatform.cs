@@ -168,7 +168,7 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual void SetImageSize(ButtonToolItem toolItem, int size)
+    public virtual void SetImageSize(ToolItem toolItem, int size)
     {
     }
 }

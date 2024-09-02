@@ -208,9 +208,8 @@ public class PreviewForm : EtoDialogBase
                 MakeToolButton(ZoomOutCommand),
                 _zoomPercentButton,
                 new SeparatorToolItem(),
-                new DropDownToolItem
+                WithToolItemIcon(new DropDownToolItem
                 {
-                    Image = _iconProvider.GetIcon("arrow_rotate_anticlockwise_small"),
                     ToolTip = UiStrings.Rotate,
                     Items =
                     {
@@ -220,7 +219,7 @@ public class PreviewForm : EtoDialogBase
                         Commands.Deskew,
                         Commands.CustomRotate
                     }
-                },
+                }, "arrow_rotate_anticlockwise_small"),
                 MakeToolButton(Commands.Crop),
                 MakeToolButton(Commands.BrightCont),
                 MakeToolButton(Commands.HueSat),
@@ -247,19 +246,21 @@ public class PreviewForm : EtoDialogBase
         }
     }
 
-    private ToolItem MakeToolButton(ActionCommand command, string? iconName = null)
-    {
-        var toolItem = new ButtonToolItem
+    private ToolItem MakeToolButton(ActionCommand command, string? iconName = null) =>
+        WithToolItemIcon(new ButtonToolItem
         {
             Command = command,
             Text = null,
             ToolTip = command.Text
-        };
+        }, iconName ?? command.IconName!);
+
+    private ToolItem WithToolItemIcon(ToolItem toolItem, string iconName)
+    {
         EtoPlatform.Current.AttachDpiDependency(this,
             scale =>
             {
                 EtoPlatform.Current.SetImageSize(toolItem, (int) (16 * scale));
-                toolItem.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName ?? command.IconName!, scale);
+                toolItem.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale);
             });
         return toolItem;
     }

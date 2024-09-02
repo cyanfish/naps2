@@ -203,14 +203,18 @@ public static class C
         return new SkipLayoutElement();
     }
 
-    public static Button IconButton(Image icon, Action onClick)
+    public static Button IconButton(string iconName, Action onClick)
     {
         var button = new Button
         {
-            Image = icon,
-            ImagePosition = ButtonImagePosition.Overlay,
-            MinimumSize = new Size(icon.Width + 30, 0)
+            ImagePosition = ButtonImagePosition.Overlay
         };
+        EtoPlatform.Current.AttachDpiDependency(button, scale =>
+        {
+            var icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale)!;
+            button.Image = icon;
+            button.MinimumSize = new Size(icon.Width + 30, 0);
+        });
         button.Click += (_, _) => onClick();
         return button;
     }
