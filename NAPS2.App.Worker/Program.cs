@@ -28,15 +28,15 @@ static class Program
         //
         // Thus the simplest solution is just to pull in a bit of code from NAPS2.Lib that has what we need
         // (pretty much only paths, logging, and the worker setup) and avoid using Autofac.
-        var messagePump = Win32MessagePump.Create();
-        var scanningContext = new ScanningContext(new GdiImageContext());
         var logger = NLogConfig.CreateLogger(() => true);
+        var messagePump = Win32MessagePump.Create();
+        messagePump.Logger = logger;
+        var scanningContext = new ScanningContext(new GdiImageContext());
+        scanningContext.Logger = logger;
         var serviceImpl = new WorkerServiceImpl(scanningContext, new ThumbnailRenderer(scanningContext.ImageContext),
             new MapiWrapper(new SystemEmailClients(scanningContext)), new LocalTwainController(scanningContext));
 
         Trace.Listeners.Add(new NLog.NLogTraceListener());
-        scanningContext.Logger = logger;
-        messagePump.Logger = logger;
         Invoker.Current = messagePump;
         TwainHandleManager.Factory = () => new Win32TwainHandleManager(messagePump);
 
