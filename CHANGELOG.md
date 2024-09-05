@@ -1,3 +1,20 @@
+Changes in 8.0b1:
+- Added a scanning sidebar
+    - Quickly change basic profile settings
+    - Click the icon in the bottom-left (top-left on Mac) to open/close
+    - Admins can set [HideSidebar](https://www.naps2.com/doc/org-use#hide-sidebar) to remove it entirely
+- Changed system requirements
+    - Windows 7, 8 and 8.1 are no longer supported
+    - Windows 10 1607+ is required
+    - macOS 10.15 and 11 are no longer supported
+    - macOS 12+ is required
+- Improved support for high-dpi screens
+- Windows: Added support for dark themes
+- Twain: Removed "Legacy" twain implementation option
+- Changed the "Clear" icon to a broom
+- Performance improvements
+- Bug fixes
+
 Changes in 7.5.2:
 - NAPS2 is now available on the Microsoft Store & the Mac App Store
   - It costs a small fee to support the developer and provide automatic updates
