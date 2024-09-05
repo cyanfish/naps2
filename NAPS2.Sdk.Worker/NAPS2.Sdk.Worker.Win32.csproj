@@ -18,7 +18,7 @@
     <ItemGroup>
         <Compile Remove="*.*" />
         <Content Include="NAPS2.Sdk.Worker.Win32.targets" PackagePath="build/NAPS2.Sdk.Worker.Win32.targets" />
-        <None Include="bin\Release\net8\win-x86\publish\NAPS2.Worker.exe">
+        <None Include="bin\Release\net9\win-x86\publish\NAPS2.Worker.exe">
             <Link>lib/NAPS2.Worker.exe</Link>
             <Pack>true</Pack>
             <PackageCopyToOutput>true</PackageCopyToOutput>
