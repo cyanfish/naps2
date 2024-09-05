@@ -1,3 +1,4 @@
+#if !MAC
 using NTwain;
 
 namespace NAPS2.Scan.Internal.Twain;
@@ -21,3 +22,4 @@ internal class TwainHandleManager : IDisposable
     {
     }
 }
+#endif

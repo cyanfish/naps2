@@ -1,8 +1,10 @@
+#if !MAC
 using NAPS2.Scan.Internal.Twain;
 using NTwain;
 
 namespace NAPS2.Platform.Windows;
 
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 internal class Win32TwainHandleManager : TwainHandleManager
 {
     private readonly Win32MessagePump _messagePump;
@@ -73,3 +75,4 @@ internal class Win32TwainHandleManager : TwainHandleManager
         }
     }
 }
+#endif

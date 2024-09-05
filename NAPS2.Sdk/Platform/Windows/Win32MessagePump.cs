@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace NAPS2.Platform.Windows;
 
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 internal class Win32MessagePump : IInvoker, IDisposable
 {
     private const string WND_CLASS_NAME = "MPWndClass";

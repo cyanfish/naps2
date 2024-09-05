@@ -13,14 +13,32 @@ namespace NAPS2.Remoting.Worker;
 /// </summary>
 public static class WorkerServer
 {
+#pragma warning disable CS1998
     public static async Task Run(ScanningContext scanningContext, CancellationToken cancellationToken = default)
     {
         try
         {
-            var messagePump = Win32MessagePump.Create();
-            messagePump.Logger = scanningContext.Logger;
-            Invoker.Current = messagePump;
-            TwainHandleManager.Factory = () => new Win32TwainHandleManager(messagePump);
+            var tcs = new TaskCompletionSource<bool>();
+            var run = async () => { await tcs.Task; };
+            var stop = () => tcs.SetResult(true);
+
+#if !MAC
+#if NET6_0_OR_GREATER
+            if (OperatingSystem.IsWindows())
+            {
+#endif
+                var messagePump = Win32MessagePump.Create();
+                messagePump.Logger = scanningContext.Logger;
+                Invoker.Current = messagePump;
+#pragma warning disable CA1416
+                TwainHandleManager.Factory = () => new Win32TwainHandleManager(messagePump);
+                run = async () => messagePump.RunMessageLoop();
+                stop = () => messagePump.Dispose();
+#pragma warning restore CA1416
+#if NET6_0_OR_GREATER
+            }
+#endif
+#endif
 
             var server =
                 new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
@@ -31,14 +49,14 @@ public static class WorkerServer
 #else
                 new LocalTwainController(scanningContext));
 #endif
-            serviceImpl.OnStop += (_, _) => messagePump.Dispose();
+            serviceImpl.OnStop += (_, _) => stop();
             WorkerService.BindService(server.ServiceBinder, serviceImpl);
             cancellationToken.Register(() => serviceImpl.Stop());
             server.Start();
             try
             {
                 Console.WriteLine(@"ready");
-                messagePump.RunMessageLoop();
+                await run();
             }
             finally
             {
