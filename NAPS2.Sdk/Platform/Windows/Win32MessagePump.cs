@@ -7,10 +7,18 @@ namespace NAPS2.Platform.Windows;
 
 internal class Win32MessagePump : IInvoker, IDisposable
 {
+    private const string WND_CLASS_NAME = "MPWndClass";
+    private const string RUN_QUEUED_ACTIONS_MESSAGE_NAME = "MPRunQueuedActions";
+
     public static Win32MessagePump Create()
     {
         return new Win32MessagePump();
     }
+
+    // We store the delegate as an instance variable so it doesn't get garbage collected
+    // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+    private readonly Win32.WndProc _wndProcDelegate;
+    private readonly uint _runQueuedActionsMessage;
 
     private readonly Queue<Action> _queue = new();
     private readonly Thread? _messageLoopThread;
@@ -19,44 +27,22 @@ internal class Win32MessagePump : IInvoker, IDisposable
     private Win32MessagePump()
     {
         _messageLoopThread = Thread.CurrentThread;
-        Handle = CreateWindowEx(0, "Message", "", 0, 0, 0, 0, 0, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+        _wndProcDelegate = CustomWndProc;
+
+        Win32.RegisterClassW(new Win32.WndClass
+        {
+            lpszClassName = WND_CLASS_NAME,
+            lpfnWndProc = Marshal.GetFunctionPointerForDelegate(_wndProcDelegate),
+            hInstance = Process.GetCurrentProcess().Handle
+        });
+
+        _runQueuedActionsMessage = Win32.RegisterWindowMessage(RUN_QUEUED_ACTIONS_MESSAGE_NAME);
+
+        Handle = Win32.CreateWindowEx(0, WND_CLASS_NAME, "", 0, 0, 0, 0, 0, IntPtr.Zero, IntPtr.Zero,
+            Process.GetCurrentProcess().Handle, IntPtr.Zero);
     }
 
-    public void RunMessageLoop()
-    {
-        try
-        {
-            while (!_stopped && GetMessage(out var msg, IntPtr.Zero, 0, 0) > 0)
-            {
-                DispatchMessage(ref msg);
-
-                var actionsToCall = new List<Action>();
-                lock (_queue)
-                {
-                    while (_queue.Count > 0)
-                    {
-                        actionsToCall.Add(_queue.Dequeue());
-                    }
-                }
-                // Run the actions outside the lock to avoid deadlock scenarios
-                foreach (var action in actionsToCall)
-                {
-                    try
-                    {
-                        action();
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.LogError(ex, "Error in message handler");
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Logger.LogError(ex, "Error in message loop");
-        }
-    }
+    public Func<IntPtr, int, IntPtr, IntPtr, bool>? Filter { get; set; }
 
     public ILogger Logger { get; set; } = NullLogger.Instance;
 
@@ -77,7 +63,7 @@ internal class Win32MessagePump : IInvoker, IDisposable
                 action();
                 toggle.Set();
             });
-            PostMessage(Handle, 0, IntPtr.Zero, IntPtr.Zero);
+            Win32.PostMessage(Handle, _runQueuedActionsMessage, IntPtr.Zero, IntPtr.Zero);
         }
         toggle.WaitOne();
     }
@@ -87,7 +73,7 @@ internal class Win32MessagePump : IInvoker, IDisposable
         lock (_queue)
         {
             _queue.Enqueue(action);
-            PostMessage(Handle, 0, IntPtr.Zero, IntPtr.Zero);
+            Win32.PostMessage(Handle, _runQueuedActionsMessage, IntPtr.Zero, IntPtr.Zero);
         }
     }
 
@@ -98,55 +84,77 @@ internal class Win32MessagePump : IInvoker, IDisposable
         return value;
     }
 
+    public void RunMessageLoop()
+    {
+        try
+        {
+            while (!_stopped && Win32.GetMessage(out var msg, IntPtr.Zero, 0, 0) > 0)
+            {
+                if (!(Filter?.Invoke(Handle, msg.msg, msg.wParam, msg.lParam) ?? false))
+                {
+                    Win32.TranslateMessage(msg);
+                    Win32.DispatchMessage(ref msg);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error in message loop");
+        }
+    }
+
+    private void RunQueuedActions()
+    {
+        var actionsToCall = new List<Action>();
+        lock (_queue)
+        {
+            while (_queue.Count > 0)
+            {
+                actionsToCall.Add(_queue.Dequeue());
+            }
+        }
+        // Run the actions outside the lock to avoid deadlock scenarios
+        foreach (var action in actionsToCall)
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error in invoked action");
+            }
+        }
+    }
+
+    private IntPtr CustomWndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+    {
+        if (msg == _runQueuedActionsMessage)
+        {
+            RunQueuedActions();
+            return IntPtr.Zero;
+        }
+        return Win32.DefWindowProcW(hWnd, msg, wParam, lParam);
+    }
+
     public IntPtr CreateBackgroundWindow(IntPtr parent = default)
     {
         return InvokeGet(() =>
-            CreateWindowEx(0, "Message", "", 0, 0, 0, 0, 0, parent, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero));
+            Win32.CreateWindowEx(0, WND_CLASS_NAME, "", 0, 0, 0, 0, 0, parent, IntPtr.Zero,
+                Process.GetCurrentProcess().Handle, IntPtr.Zero));
     }
 
     public void CloseWindow(IntPtr window)
     {
-        InvokeDispatch(() => { DestroyWindow(window); });
+        InvokeDispatch(() => Win32.DestroyWindow(window));
     }
 
     public void Dispose()
     {
         InvokeDispatch(() =>
         {
-            DestroyWindow(Handle);
+            Win32.DestroyWindow(Handle);
             _stopped = true;
         });
     }
-
-    private struct Message
-    {
-        public IntPtr hWnd;
-        public int msg;
-        public IntPtr wParam;
-        public IntPtr lParam;
-        public uint time;
-        public Point pt;
-    }
-
-    private struct Point
-    {
-        public int x;
-        public int y;
-    }
-
-    [DllImport("user32.dll")]
-    private static extern int GetMessage(out Message lpMsg, IntPtr hWnd, uint wMsgFilterMin, uint wMsgFilterMax);
-
-    [DllImport("user32.dll")]
-    private static extern bool DispatchMessage(ref Message lpmsg);
-
-    [DllImport("user32.dll")]
-    private static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr CreateWindowEx(int dwExStyle, string lpClassName, string? lpWindowName, int dwStyle,
-        int x, int y, int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu, IntPtr hInstance, IntPtr lpParam);
-
-    [DllImport("user32.dll")]
-    private static extern bool DestroyWindow(IntPtr hWnd);
 }

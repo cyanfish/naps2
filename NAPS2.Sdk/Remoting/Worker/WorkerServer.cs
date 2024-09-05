@@ -1,6 +1,7 @@
 using System.Threading;
 using GrpcDotNetNamedPipes;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.Platform.Windows;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal.Twain;
 
@@ -16,7 +17,11 @@ public static class WorkerServer
     {
         try
         {
-            var tcs = new TaskCompletionSource<bool>();
+            var messagePump = Win32MessagePump.Create();
+            messagePump.Logger = scanningContext.Logger;
+            Invoker.Current = messagePump;
+            TwainHandleManager.Factory = () => new Win32TwainHandleManager(messagePump);
+
             var server =
                 new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
             var serviceImpl = new WorkerServiceImpl(scanningContext,
@@ -26,14 +31,14 @@ public static class WorkerServer
 #else
                 new LocalTwainController(scanningContext));
 #endif
-            serviceImpl.OnStop += (_, _) => tcs.SetResult(true);
+            serviceImpl.OnStop += (_, _) => messagePump.Dispose();
             WorkerService.BindService(server.ServiceBinder, serviceImpl);
             cancellationToken.Register(() => serviceImpl.Stop());
             server.Start();
             try
             {
                 Console.WriteLine(@"ready");
-                await tcs.Task;
+                messagePump.RunMessageLoop();
             }
             finally
             {

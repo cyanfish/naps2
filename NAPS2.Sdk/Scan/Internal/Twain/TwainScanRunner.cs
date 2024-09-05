@@ -62,16 +62,8 @@ internal class TwainScanRunner
         try
         {
             _logger.LogDebug("NAPS2.TW - Opening session");
-            var dsmHandle = _handleManager.GetDsmHandle(_options.DialogParent, _options.UseNativeUI || _options.TwainOptions.ShowProgress);
-#if NET6_0_OR_GREATER
-
-            if (!OperatingSystem.IsWindows()) throw new InvalidOperationException("Windows-only");
-            var rc = _session.Open(new Win32MessageLoopHook(_logger));
-#else
-            var rc = dsmHandle == IntPtr.Zero
-                ? _session.Open()
-                : _session.Open(new WindowsFormsMessageLoopHook(dsmHandle));
-#endif
+            bool useNativeUi = _options.UseNativeUI || _options.TwainOptions.ShowProgress;
+            var rc = _session.Open(_handleManager.CreateMessageLoopHook(_options.DialogParent, useNativeUi));
             if (rc != ReturnCode.Success)
             {
                 throw new DeviceException($"TWAIN session open error: {rc}");
@@ -99,7 +91,7 @@ internal class TwainScanRunner
 
             _logger.LogDebug("NAPS2.TW - Enabling source");
             var ui = _options.UseNativeUI ? SourceEnableMode.ShowUI : SourceEnableMode.NoUI;
-            var enableHandle = _handleManager.GetEnableHandle(_options.DialogParent, _options.UseNativeUI || _options.TwainOptions.ShowProgress);
+            var enableHandle = _handleManager.GetEnableHandle(_options.DialogParent, useNativeUi);
             // Note that according to the twain spec, on Windows it is recommended to set the modal parameter to false
             rc = _source.Enable(ui, false, enableHandle);
             if (rc != ReturnCode.Success)
@@ -122,7 +114,7 @@ internal class TwainScanRunner
         if (_session.State != 5)
         {
             // If we're in state 6 or 7, this will abort the ongoing transfer via ForceStepDown.
-            // If we're in state 4 or lower, then we're not transferring and this will just clean up the source/session.  
+            // If we're in state 4 or lower, then we're not transferring and this will just clean up the source/session.
             UnloadTwain();
             _tcs.TrySetResult(false);
         }

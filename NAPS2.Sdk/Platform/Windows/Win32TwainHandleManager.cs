@@ -1,4 +1,5 @@
 using NAPS2.Scan.Internal.Twain;
+using NTwain;
 
 namespace NAPS2.Platform.Windows;
 
@@ -54,6 +55,11 @@ internal class Win32TwainHandleManager : TwainHandleManager
         _disabledWindow = dialogParent;
 
         return _parentWindow;
+    }
+
+    public override MessageLoopHook CreateMessageLoopHook(IntPtr dialogParent = default, bool useNativeUi = false)
+    {
+        return new Win32MessageLoopHook(_messagePump, GetDsmHandle(dialogParent, useNativeUi));
     }
 
     public override void Dispose()
