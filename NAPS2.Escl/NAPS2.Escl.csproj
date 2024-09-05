@@ -21,6 +21,7 @@
          <PackageReference Include="Polyfill" Version="4.9.0" PrivateAssets="all" />
         <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.8" />
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
+        <PackageReference Include="System.Private.Uri" Version="4.3.2" />
         <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     </ItemGroup>
 

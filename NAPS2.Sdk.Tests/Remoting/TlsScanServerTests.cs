@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 namespace NAPS2.Sdk.Tests.Remoting;
 
 public class TlsScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper,
-    EsclSecurityPolicy.RequireHttps, new X509Certificate2(BinaryResources.testcert))
+    EsclSecurityPolicy.RequireHttps, X509CertificateLoader.LoadPkcs12(BinaryResources.testcert, null))
 {
     [Fact(Timeout = TIMEOUT)]
     public async Task FindDevice()

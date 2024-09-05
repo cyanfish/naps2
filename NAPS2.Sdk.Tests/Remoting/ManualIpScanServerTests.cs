@@ -7,8 +7,8 @@ using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 
-public class ManualIpScanServerTests(ITestOutputHelper testOutputHelper)
-    : ScanServerTestsBase(testOutputHelper, EsclSecurityPolicy.None, new X509Certificate2(BinaryResources.testcert))
+public class ManualIpScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper,
+    EsclSecurityPolicy.None, X509CertificateLoader.LoadPkcs12(BinaryResources.testcert, null))
 {
     [Fact(Timeout = TIMEOUT)]
     public async Task ScanHttpIpv4()
