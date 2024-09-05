@@ -61,7 +61,8 @@ internal class LocalTwainController : ITwainController
     {
         PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
         var session = new TwainSession(TwainAppId);
-        session.Open(TwainHandleManager.Factory().CreateMessageLoopHook());
+        using var handleManager = TwainHandleManager.Factory();
+        session.Open(handleManager.CreateMessageLoopHook());
         try
         {
             return session.GetSources().Select(ds => new ScanDevice(Driver.Twain, ds.Name, ds.Name)).ToList();
@@ -103,7 +104,8 @@ internal class LocalTwainController : ITwainController
     {
         PlatformInfo.Current.PreferNewDSM = options.TwainOptions.Dsm != TwainDsm.Old;
         var session = new TwainSession(TwainAppId);
-        session.Open(TwainHandleManager.Factory().CreateMessageLoopHook());
+        using var handleManager = TwainHandleManager.Factory();
+        session.Open(handleManager.CreateMessageLoopHook());
         try
         {
             var ds = session.GetSources().FirstOrDefault(ds => ds.Name == options.Device!.ID);

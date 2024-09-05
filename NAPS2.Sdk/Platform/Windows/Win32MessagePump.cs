@@ -5,6 +5,9 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace NAPS2.Platform.Windows;
 
+/// <summary>
+/// Allows creation of a Win32 event loop without any references to WinForms or WPF.
+/// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 internal class Win32MessagePump : IInvoker, IDisposable
 {

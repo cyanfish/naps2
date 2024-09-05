@@ -52,8 +52,7 @@ internal class TwainScanRunner
 
     public Task Run()
     {
-        // TODO: Work around needing Invoker (maybe pass in SyncContext or something?) and move it to NAPS2.Lib
-        Invoker.Current.InvokeDispatch(Init);
+        _handleManager.Invoker.InvokeDispatch(Init);
         return _tcs.Task;
     }
 
@@ -99,8 +98,8 @@ internal class TwainScanRunner
                 throw GetExceptionForStatus(_source.GetStatus());
             }
 
-            _cancelToken.Register(() => Invoker.Current.Invoke(FinishWithCancellation));
-            _sourceDisabledTcs.Task.ContinueWith(_ => Invoker.Current.Invoke(FinishWithCompletion)).AssertNoAwait();
+            _cancelToken.Register(() => _handleManager.Invoker.Invoke(FinishWithCancellation));
+            _sourceDisabledTcs.Task.ContinueWith(_ => _handleManager.Invoker.Invoke(FinishWithCompletion)).AssertNoAwait();
         }
         catch (Exception ex)
         {

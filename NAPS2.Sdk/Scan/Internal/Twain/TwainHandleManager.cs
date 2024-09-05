@@ -3,23 +3,31 @@ using NTwain;
 
 namespace NAPS2.Scan.Internal.Twain;
 
-internal class TwainHandleManager : IDisposable
+/// <summary>
+/// Abstracts how HWND handles are obtained for use with TWAIN.
+/// </summary>
+internal abstract class TwainHandleManager : IDisposable
 {
-    public static Func<TwainHandleManager> Factory { get; set; } = () => new TwainHandleManager();
+    public static Func<TwainHandleManager> Factory { get; set; } = () =>
+    {
+#if NET6_0_OR_GREATER
+        if (!OperatingSystem.IsWindows()) throw new NotSupportedException();
+#endif
+        return new DefaultTwainHandleManager();
+    };
 
     protected TwainHandleManager()
     {
     }
 
-    public virtual IntPtr GetDsmHandle(IntPtr dialogParent, bool useNativeUi) => dialogParent;
+    public abstract IntPtr GetDsmHandle(IntPtr dialogParent, bool useNativeUi);
 
-    public virtual IntPtr GetEnableHandle(IntPtr dialogParent, bool useNativeUi) => dialogParent;
+    public abstract IntPtr GetEnableHandle(IntPtr dialogParent, bool useNativeUi);
 
-    public virtual MessageLoopHook CreateMessageLoopHook(IntPtr dialogParent = default, bool useNativeUi = false) =>
-        throw new NotSupportedException();
+    public abstract MessageLoopHook CreateMessageLoopHook(IntPtr dialogParent = default, bool useNativeUi = false);
 
-    public virtual void Dispose()
-    {
-    }
+    public abstract IInvoker Invoker { get; }
+
+    public abstract void Dispose();
 }
 #endif

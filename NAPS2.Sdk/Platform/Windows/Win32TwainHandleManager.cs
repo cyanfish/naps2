@@ -4,6 +4,9 @@ using NTwain;
 
 namespace NAPS2.Platform.Windows;
 
+/// <summary>
+/// TwainHandleManager implementation that uses a Win32MessagePump to get window handles to hand off to TWAIN.
+/// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 internal class Win32TwainHandleManager : TwainHandleManager
 {
@@ -63,6 +66,8 @@ internal class Win32TwainHandleManager : TwainHandleManager
     {
         return new Win32MessageLoopHook(_messagePump, GetDsmHandle(dialogParent, useNativeUi));
     }
+
+    public override IInvoker Invoker => _messagePump;
 
     public override void Dispose()
     {
