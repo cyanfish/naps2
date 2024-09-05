@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8-macos</TargetFramework>
+    <TargetFramework>net9-macos</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>NAPS2</RootNamespace>
     <AssemblyName>NAPS2</AssemblyName>

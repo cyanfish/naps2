@@ -10,7 +10,7 @@ public class MacAppTestTarget : IAppTestTarget
     private AppTestExe GetAppTestExe(string argPrefix)
     {
         return new AppTestExe(
-            Path.Combine(AppTestHelper.SolutionRoot, "NAPS2.App.Mac", "bin", "Debug", "net8-macos"),
+            Path.Combine(AppTestHelper.SolutionRoot, "NAPS2.App.Mac", "bin", "Debug", "net9-macos"),
             Path.Combine("NAPS2.app", "Contents", "MacOS", "NAPS2"),
             argPrefix);
     }
