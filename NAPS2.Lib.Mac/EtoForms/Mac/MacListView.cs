@@ -106,6 +106,10 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
     // TODO: Do we need this method? Clean up the name/doc at least
     public void RegenerateImages()
     {
+        if (_dataSource.Items.Count == 0)
+        {
+            return;
+        }
         _view.ReloadData();
     }
 

@@ -22,19 +22,15 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
 
     public override Image GetImage(ScanProfile item, Size imageSize)
     {
-        if (item.IsDefault && item.IsLocked)
+        var iconName = (item.IsDefault, item.IsLocked) switch
         {
-            return Icons.scanner_lock_default.ToEtoImage();
-        }
-        if (item.IsDefault)
-        {
-            return Icons.scanner_default.ToEtoImage();
-        }
-        if (item.IsLocked)
-        {
-            return Icons.scanner_lock.ToEtoImage();
-        }
-        return Icons.scanner_48.ToEtoImage();
+            (true, true) => "scanner_lock_default_48",
+            (true, false) => "scanner_default_48",
+            (false, true) => "scanner_lock_48",
+            (false, false) => "scanner_48"
+        };
+        var scale = imageSize.Height / 48f;
+        return EtoPlatform.Current.IconProvider.GetIcon(iconName, scale)!;
     }
 
     public override bool AllowDragDrop => true;

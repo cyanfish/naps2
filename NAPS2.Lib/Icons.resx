@@ -238,20 +238,35 @@
   <data name="scanner_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-64-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="scanner_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-96.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="scanner_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-128.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="scanner_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="scanner_default_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-default-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="scanner_lock_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="scanner_default_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-default-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="scanner_lock_default_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-lock-default-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="scanner_lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="scanner_lock_default_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-lock-default-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="scanner_lock_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-lock-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="scanner_wireless" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="scanner_lock_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-lock-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="scanner_wireless_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-wireless-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="scanner_wireless_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-wireless-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="device" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\device.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

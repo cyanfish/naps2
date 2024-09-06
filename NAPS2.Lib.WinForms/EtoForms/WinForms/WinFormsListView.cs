@@ -278,6 +278,10 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         {
             throw new InvalidOperationException();
         }
+        if (Items.Count == 0)
+        {
+            return;
+        }
         _refreshing = true;
         _view.BeginUpdate();
         ImageList.Clear();

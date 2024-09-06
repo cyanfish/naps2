@@ -8,12 +8,21 @@ public class DefaultIconProvider : IIconProvider
     {
         if (scale > 1)
         {
+            // TODO: Maybe generalize everything with a numeric pixel size suffix?
             if (name.EndsWith("_small"))
             {
                 var norm = (byte[]?) Icons.ResourceManager.GetObject(name.Substring(0, name.Length - 6));
                 if (norm != null)
                 {
                     return new Bitmap(norm).ResizeTo((int) (16 * scale));
+                }
+            }
+            else if (name.EndsWith("_48"))
+            {
+                var hires = (byte[]?) Icons.ResourceManager.GetObject(name.Substring(0, name.Length - 3) + "_96");
+                if (hires != null)
+                {
+                    return new Bitmap(hires).ResizeTo((int) (48 * scale));
                 }
             }
             else

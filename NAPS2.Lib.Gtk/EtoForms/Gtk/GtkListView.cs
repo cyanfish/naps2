@@ -181,6 +181,10 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             throw new InvalidOperationException();
         }
+        if (_entries.Count == 0)
+        {
+            return;
+        }
         _refreshing = true;
         foreach (var entry in _entries)
         {

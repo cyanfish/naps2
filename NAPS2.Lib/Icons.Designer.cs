@@ -1292,9 +1292,9 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] scanner_default {
+        internal static byte[] scanner_96 {
             get {
-                object obj = ResourceManager.GetObject("scanner_default", resourceCulture);
+                object obj = ResourceManager.GetObject("scanner_96", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -1302,9 +1302,9 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] scanner_lock {
+        internal static byte[] scanner_default_48 {
             get {
-                object obj = ResourceManager.GetObject("scanner_lock", resourceCulture);
+                object obj = ResourceManager.GetObject("scanner_default_48", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -1312,9 +1312,9 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] scanner_lock_default {
+        internal static byte[] scanner_default_96 {
             get {
-                object obj = ResourceManager.GetObject("scanner_lock_default", resourceCulture);
+                object obj = ResourceManager.GetObject("scanner_default_96", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -1322,9 +1322,59 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] scanner_wireless {
+        internal static byte[] scanner_lock_48 {
             get {
-                object obj = ResourceManager.GetObject("scanner_wireless", resourceCulture);
+                object obj = ResourceManager.GetObject("scanner_lock_48", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] scanner_lock_96 {
+            get {
+                object obj = ResourceManager.GetObject("scanner_lock_96", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] scanner_lock_default_48 {
+            get {
+                object obj = ResourceManager.GetObject("scanner_lock_default_48", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] scanner_lock_default_96 {
+            get {
+                object obj = ResourceManager.GetObject("scanner_lock_default_96", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] scanner_wireless_48 {
+            get {
+                object obj = ResourceManager.GetObject("scanner_wireless_48", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] scanner_wireless_96 {
+            get {
+                object obj = ResourceManager.GetObject("scanner_wireless_96", resourceCulture);
                 return ((byte[])(obj));
             }
         }
