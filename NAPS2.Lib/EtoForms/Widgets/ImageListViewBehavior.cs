@@ -25,9 +25,9 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
 
     public override bool ShowPageNumbers => _config.Get(c => c.ShowPageNumbers);
 
-    public override Image GetImage(UiImage item, Size imageSize)
+    public override Image GetImage(IListView<UiImage> listView, UiImage item)
     {
-        using var thumbnail = _thumbnailProvider.GetThumbnail(item, imageSize.Width);
+        using var thumbnail = _thumbnailProvider.GetThumbnail(item, listView.ImageSize.Width);
         return thumbnail.ToEtoImage();
     }
 

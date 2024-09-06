@@ -58,11 +58,8 @@ public class ScannerSharingForm : EtoDialogBase
         // TODO: Enable
         // _shareAsService.Checked = _osServiceManager.IsRegistered;
         // _shareAsService.CheckedChanged += ShareAsServiceCheckedChanged;
-        EtoPlatform.Current.AttachDpiDependency(this, scale =>
-        {
-            _listView.ImageSize = Size.Round(new SizeF(48, 48) * scale);
-            _listView.RegenerateImages();
-        });
+        EtoPlatform.Current.AttachDpiDependency(this, _ => _listView.RegenerateImages());
+        _listView.ImageSize = new Size(48, 48);
         _listView.SelectionChanged += SelectionChanged;
 
         _addCommand.Enabled = true;

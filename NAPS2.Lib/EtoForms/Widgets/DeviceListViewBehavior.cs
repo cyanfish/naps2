@@ -18,8 +18,8 @@ public class DeviceListViewBehavior : ListViewBehavior<ScanDevice>
 
     public override string GetLabel(ScanDevice item) => item.Name;
 
-    public override Image GetImage(ScanDevice item, Size imageSize)
+    public override Image GetImage(IListView<ScanDevice> listView, ScanDevice item)
     {
-        return (_imageMap.Get(item)?.Clone() ?? Icons.device.ToEtoImage()).PadTo(imageSize);
+        return (_imageMap.Get(item)?.Clone() ?? Icons.device.ToEtoImage()).PadTo(listView.ImageSize);
     }
 }

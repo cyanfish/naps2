@@ -20,7 +20,7 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
 
     public override string GetLabel(ScanProfile item) => item.DisplayName ?? "";
 
-    public override Image GetImage(ScanProfile item, Size imageSize)
+    public override Image GetImage(IListView<ScanProfile> listView, ScanProfile item)
     {
         var iconName = (item.IsDefault, item.IsLocked) switch
         {
@@ -29,7 +29,7 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
             (false, true) => "scanner_lock_48",
             (false, false) => "scanner_48"
         };
-        var scale = imageSize.Height / 48f;
+        var scale = EtoPlatform.Current.GetScaleFactor(listView.Control.ParentWindow);
         return EtoPlatform.Current.IconProvider.GetIcon(iconName, scale)!;
     }
 

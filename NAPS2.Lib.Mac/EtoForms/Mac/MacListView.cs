@@ -285,7 +285,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         var item = _dataSource.Items[(int) indexPath.Item];
         if (_behavior.ShowLabels)
         {
-            using var image = _behavior.Checkboxes ? null : _behavior.GetImage(item, ImageSize);
+            using var image = _behavior.Checkboxes ? null : _behavior.GetImage(this, item);
             using var listItem = new ListViewItem(
                 image, _behavior.GetLabel(item), _behavior.Checkboxes, _behavior.ColorScheme, null, false, () => { });
             listItem.LoadView();
@@ -293,7 +293,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         }
         else
         {
-            var size = _behavior.GetImage(item, ImageSize).Size;
+            var size = _behavior.GetImage(this, item).Size;
             var max = (double) Math.Max(size.Width, size.Height);
             return new CGSize(size.Width * ImageSize.Width / max, size.Height * ImageSize.Width / max);
         }

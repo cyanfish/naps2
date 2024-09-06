@@ -18,7 +18,7 @@ public abstract class WinFormsImageList<T> where T : notnull
 
     private Image ItemToImage(T item)
     {
-        return _behavior.GetImage(item, _listView.ImageSize).ToSD();
+        return _behavior.GetImage(_listView, item).ToSD();
     }
 
     public abstract void Clear();
@@ -95,7 +95,7 @@ public abstract class WinFormsImageList<T> where T : notnull
 
         public override void Append(T item, ListViewItem listViewItem)
         {
-            _images.Add(_behavior.GetImage(item, _listView.ImageSize).ToSD());
+            _images.Add(_behavior.GetImage(_listView, item).ToSD());
             listViewItem.ImageIndex = _images.Count - 1;
         }
 

@@ -107,8 +107,9 @@ public static class C
         }
         else if (iconName != null)
         {
+            bool oversized = imagePosition == ButtonImagePosition.Above && flags.HasFlag(ButtonFlags.LargeIcon);
             EtoPlatform.Current.AttachDpiDependency(button,
-                scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale));
+                scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale, oversized));
         }
         button.ImagePosition = imagePosition;
         if (flags.HasFlag(ButtonFlags.LargeText))

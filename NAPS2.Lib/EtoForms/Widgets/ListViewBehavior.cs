@@ -28,7 +28,7 @@ public abstract class ListViewBehavior<T> where T : notnull
 
     public virtual string GetLabel(T item) => throw new NotSupportedException();
 
-    public virtual Image GetImage(T item, Size imageSize) => throw new NotSupportedException();
+    public virtual Image GetImage(IListView<T> listView, T item) => throw new NotSupportedException();
 
     public virtual bool AllowDragDrop => false;
 

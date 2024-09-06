@@ -47,9 +47,12 @@ public class ListViewItem : NSCollectionViewItem
         }
         else if (_label != null)
         {
+            var image = _itemImage.ToNS();
+            // Resize high-dpi images so they render correctly on retina displays
+            image.Size = new CGSize(image.Size.Width / 2, image.Size.Height / 2);
             _imageView = new NSImageView
             {
-                Image = _itemImage.ToNS()
+                Image = image
             };
             var stack = NSStackView.FromViews(new NSView[]
             {

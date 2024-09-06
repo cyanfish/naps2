@@ -29,7 +29,7 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
     {
         var i = (int) indexPath.Item;
         var item = Items[i];
-        var image = _behavior.Checkboxes ? null : _behavior.GetImage(item, _listView.ImageSize);
+        var image = _behavior.Checkboxes ? null : _behavior.GetImage(_listView, item);
         var label = _behavior.ShowLabels ? _behavior.GetLabel(item) : null;
         return new ListViewItem(
             image, label, _behavior.Checkboxes, _behavior.ColorScheme,
