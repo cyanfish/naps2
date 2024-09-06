@@ -109,7 +109,8 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual void AttachDpiDependency(Control control, Action<float> callback) => callback(1f);
+    public virtual void AttachDpiDependency(Control control, Action<float> callback) =>
+        callback(GetScaleFactor(control.ParentWindow));
 
     public virtual SizeF GetWrappedSize(Control control, int defaultWidth)
     {

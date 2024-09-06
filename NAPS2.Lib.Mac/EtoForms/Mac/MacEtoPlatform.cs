@@ -49,11 +49,17 @@ public class MacEtoPlatform : EtoPlatform
 
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
+        var nsButton = (NSButton) button.ToNative();
         if (button.ImagePosition == ButtonImagePosition.Above)
         {
-            var nsButton = (NSButton) button.ToNative();
             nsButton.ImageHugsTitle = true;
             nsButton.Title = Environment.NewLine + nsButton.Title;
+        }
+        var image = nsButton.Image;
+        if (image.Representations() is [NSBitmapImageRep rep, ..])
+        {
+            image.Size = new CGSize(rep.PixelsWide / 2f, rep.PixelsHigh / 2f);
+            nsButton.Image = image;
         }
     }
 

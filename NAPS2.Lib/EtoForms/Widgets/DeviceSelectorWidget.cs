@@ -1,4 +1,5 @@
 using System.Threading;
+using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.Scan;
@@ -19,6 +20,8 @@ public class DeviceSelectorWidget
     private readonly Button _chooseDevice = new() { Text = UiStrings.ChooseDevice };
 
     private DeviceChoice _choice = DeviceChoice.None;
+    private Image? _deviceIconImage;
+    private string _deviceIconName = "device";
     private CancellationTokenSource? _loadIconCts;
 
     public DeviceSelectorWidget(IScanPerformer scanPerformer, DeviceCapsCache deviceCapsCache,
@@ -29,6 +32,7 @@ public class DeviceSelectorWidget
         _iconProvider = iconProvider;
         _parentWindow = parentWindow;
         _chooseDevice.Click += ChooseDevice;
+        EtoPlatform.Current.AttachDpiDependency(_deviceIcon, _ => UpdateDeviceIconImage());
     }
 
     public required Func<ScanProfile> ProfileFunc { get; init; }
@@ -76,7 +80,6 @@ public class DeviceSelectorWidget
 
     private async void ChooseDevice(object? sender, EventArgs args)
     {
-        ;
         var choice = await _scanPerformer.PromptForDevice(ProfileFunc(), AllowAlwaysAsk, _parentWindow.NativeHandle);
         if (choice.Device != null || choice.AlwaysAsk)
         {
@@ -90,15 +93,15 @@ public class DeviceSelectorWidget
 
     public void SetDeviceIcon(string? iconUri)
     {
-        var cachedIcon = _deviceCapsCache.GetCachedIcon(iconUri);
-        EtoPlatform.Current.AttachDpiDependency(_deviceIcon, scale =>
-            _deviceIcon.Image =
-                cachedIcon ?? (_choice.AlwaysAsk ? _iconProvider.GetIcon("ask", scale) : _iconProvider.GetIcon("device", scale)));
+        _deviceIconImage = _deviceCapsCache.GetCachedIcon(iconUri);
+        _deviceIconName = _choice.AlwaysAsk ? "ask" : "device";
+        UpdateDeviceIconImage();
+
         if (((Window) _parentWindow).Loaded)
         {
             _parentWindow.LayoutController.Invalidate();
         }
-        if (cachedIcon == null && iconUri != null)
+        if (_deviceIconImage == null && iconUri != null)
         {
             ReloadDeviceIcon(iconUri);
         }
@@ -118,12 +121,21 @@ public class DeviceSelectorWidget
                 {
                     if (!cts.IsCancellationRequested)
                     {
-                        _deviceIcon.Image = icon;
+                        _deviceIconImage = icon;
+                        UpdateDeviceIconImage();
                         _parentWindow.LayoutController.Invalidate();
                     }
                 });
             }
         });
+    }
+
+    private void UpdateDeviceIconImage()
+    {
+        float scale = EtoPlatform.Current.GetScaleFactor(_deviceIcon.ParentWindow);
+        _deviceIcon.Image = _deviceIconImage ?? _iconProvider.GetIcon(_deviceIconName, scale);
+        var size = _deviceIconImage != null ? new SizeF(48, 48) : new SizeF(32, 32);
+        _deviceIcon.Size = Size.Round(size * EtoPlatform.Current.GetLayoutScaleFactor(_deviceIcon.ParentWindow));
     }
 
     public static implicit operator LayoutElement(DeviceSelectorWidget control)
@@ -142,11 +154,8 @@ public class DeviceSelectorWidget
                     _deviceDriver,
                     C.Filler()
                 ).Spacing(5).Visible(_deviceVis).Scale(),
-                // TODO: We should probably have a compact choose-device button for the sidebar.
-                // It should also change the name of the profile if it matches the device name.
-                // i.e. for users that are naming their own profiles, its their responsibility to keep the devices
-                // matched up. For a "basic" user that might only create one profile, its name should keep matched
-                // with the device.
+                // TODO: We can consider a compact choose-device button for the sidebar, but maybe simpler to force
+                // creation of separate profiles
                 ShowChooseDevice ? _chooseDevice.AlignCenter() : C.None()
             )
         );

@@ -1,7 +1,6 @@
 using System.Windows.Input;
 using Eto.Drawing;
 using Eto.Forms;
-using NAPS2.Scan;
 
 namespace NAPS2.EtoForms.Layout;
 
@@ -93,7 +92,8 @@ public static class C
         return Button(command, command.IconName, imagePosition, flags);
     }
 
-    public static Button Button(ActionCommand command, string? iconName, ButtonImagePosition imagePosition = default, ButtonFlags flags = default)
+    public static Button Button(ActionCommand command, string? iconName, ButtonImagePosition imagePosition = default,
+        ButtonFlags flags = default)
     {
         var button = Button(command);
         if (command.Image != null)
@@ -114,8 +114,10 @@ public static class C
         button.ImagePosition = imagePosition;
         if (flags.HasFlag(ButtonFlags.LargeText))
         {
+            var baseFontSize = button.Font.Size;
             EtoPlatform.Current.AttachDpiDependency(button,
-                scale => button.Font = new Font(button.Font.Family, 12 * scale));
+                _ => button.Font = new Font(button.Font.Family,
+                    baseFontSize * 4 / 3 * EtoPlatform.Current.GetLayoutScaleFactor(button.ParentWindow)));
         }
         EtoPlatform.Current.ConfigureImageButton(button, flags);
         return button;

@@ -35,6 +35,7 @@ public class ChooseDeviceForm : EtoDialogBase
 
     private CancellationTokenSource? _getDevicesCts;
     private Driver? _activeQuery;
+    private string? _statusIconName;
 
     public ChooseDeviceForm(Naps2Config config, IIconProvider iconProvider,
         DeviceListViewBehavior deviceListViewBehavior, ScanningContext scanningContext,
@@ -47,8 +48,10 @@ public class ChooseDeviceForm : EtoDialogBase
         _selectDevice = C.OkButton(this, SelectDevice, UiStrings.Select);
         _deviceIconList = EtoPlatform.Current.CreateListView(deviceListViewBehavior);
         _deviceIconList.ImageSize = new Size(48, 32);
-        deviceListViewBehavior.SetImage(AlwaysAskMarker, iconProvider.GetIcon("ask")!);
-        deviceListViewBehavior.SetImage(ManualIpMarker, iconProvider.GetIcon("network_ip")!);
+        deviceListViewBehavior.SetIconName(AlwaysAskMarker, "ask");
+        deviceListViewBehavior.SetIconName(ManualIpMarker, "network_ip");
+
+        EtoPlatform.Current.AttachDpiDependency(this, _ => UpdateStatusIcon());
 
         _deviceTextList.Activated += (_, _) => _selectDevice.PerformClick();
         _deviceIconList.ItemClicked += (_, _) => _selectDevice.PerformClick();
@@ -60,6 +63,15 @@ public class ChooseDeviceForm : EtoDialogBase
         _esclDriver = new RadioButton(_wiaDriver) { Text = UiStrings.EsclDriver };
 
         _textListVis.IsVisible = config.Get(c => c.DeviceListAsTextOnly);
+    }
+
+    private void UpdateStatusIcon()
+    {
+        if (_statusIconName != null)
+        {
+            _statusIcon.Image = _iconProvider.GetIcon(_statusIconName, EtoPlatform.Current.GetScaleFactor(this));
+            _statusIcon.Size = Size.Round(new SizeF(16, 16) * EtoPlatform.Current.GetLayoutScaleFactor(this));
+        }
     }
 
     private void Driver_MouseUp(object? sender, EventArgs e)
@@ -274,10 +286,8 @@ public class ChooseDeviceForm : EtoDialogBase
                     if (!cts.IsCancellationRequested)
                     {
                         _spinnerVis.IsVisible = false;
-                        _statusIcon.Image =
-                            DeviceList.Count > 0
-                                ? _iconProvider.GetIcon("accept_small")
-                                : _iconProvider.GetIcon("exclamation_small");
+                        _statusIconName = DeviceList.Count > 0 ? "accept_small" : "exclamation_small";
+                        UpdateStatusIcon();
                         _statusLabel.Text = DeviceList.Count switch
                         {
                             > 1 => string.Format(UiStrings.DevicesFound, DeviceList.Count),
@@ -294,7 +304,8 @@ public class ChooseDeviceForm : EtoDialogBase
                     if (!cts.IsCancellationRequested)
                     {
                         _spinnerVis.IsVisible = false;
-                        _statusIcon.Image = _iconProvider.GetIcon("exclamation_small");
+                        _statusIconName = "exclamation_small";
+                        UpdateStatusIcon();
                         _statusLabel.Text = ex.Message;
                     }
                 });

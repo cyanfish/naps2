@@ -6,8 +6,6 @@ namespace NAPS2.Scan;
 
 public class DeviceCapsCache
 {
-    private const int ICON_SIZE = 48;
-
     private readonly Dictionary<DeviceKey, ScanCaps> _capsCache = new();
     private readonly Dictionary<string, Image> _iconCache = new();
 
@@ -120,7 +118,7 @@ public class DeviceCapsCache
             var imageBytes = await client.GetByteArrayAsync(iconUri);
             image = _imageContext.Load(imageBytes);
         }
-        return image.PerformTransform(new ThumbnailTransform(ICON_SIZE)).ToEtoImage();
+        return image.ToEtoImage();
     }
 
     private DeviceKey GetDeviceKey(ScanProfile profile)
