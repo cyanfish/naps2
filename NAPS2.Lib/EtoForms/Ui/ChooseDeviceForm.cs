@@ -51,7 +51,11 @@ public class ChooseDeviceForm : EtoDialogBase
         deviceListViewBehavior.SetIconName(AlwaysAskMarker, "ask");
         deviceListViewBehavior.SetIconName(ManualIpMarker, "network_ip");
 
-        EtoPlatform.Current.AttachDpiDependency(this, _ => UpdateStatusIcon());
+        EtoPlatform.Current.AttachDpiDependency(this, _ =>
+        {
+            _deviceIconList.RegenerateImages();
+            UpdateStatusIcon();
+        });
 
         _deviceTextList.Activated += (_, _) => _selectDevice.PerformClick();
         _deviceIconList.ItemClicked += (_, _) => _selectDevice.PerformClick();

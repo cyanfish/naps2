@@ -231,9 +231,9 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override void SetClientSize(Window window, Size clientSize)
     {
         window.ToNative().ClientSize = clientSize.ToSD();
-        if (!window.Loaded)
+        if (window is IFormBase { FormStateController.Loaded: false } form)
         {
-            Invoker.Current.InvokeDispatch(() => (window as IFormBase)?.LayoutController.Invalidate());
+            Invoker.Current.InvokeDispatch(() => form.LayoutController.Invalidate());
         }
     }
 

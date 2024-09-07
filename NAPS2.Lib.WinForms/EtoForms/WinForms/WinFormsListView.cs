@@ -80,11 +80,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         EtoPlatform.Current.AttachDpiDependency(_viewEtoControl, scale =>
         {
             _dpiScale = scale;
-            if (_behavior.ScaleImageSize)
-            {
-                // Reset internal size based on new scale
-                ImageSize = ImageSize;
-            }
+            // Reset internal size based on new scale
+            ImageSize = ImageSize;
         });
     }
 
@@ -93,8 +90,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private void CustomRenderItem(object? sender, DrawListViewItemEventArgs e)
     {
         var image = ImageList.Get(e.Item);
-        int imageSizeW = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Width * _dpiScale) : _imageSize.Width;
-        int imageSizeH = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Height * _dpiScale) : _imageSize.Height;
+        int imageSizeW = (int) Math.Round(_imageSize.Width * _dpiScale);
+        int imageSizeH = (int) Math.Round(_imageSize.Height * _dpiScale);
         if (_behavior.ShowPageNumbers)
         {
             int tp = (int) Math.Round(PageNumberTextPadding * _dpiScale);
@@ -194,8 +191,8 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         set
         {
             _imageSize = value;
-            int w = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Width * _dpiScale) : _imageSize.Width;
-            int h = _behavior.ScaleImageSize ? (int) Math.Round(_imageSize.Height * _dpiScale) : _imageSize.Height;
+            int w = (int) Math.Round(_imageSize.Width * _dpiScale);
+            int h = (int) Math.Round(_imageSize.Height * _dpiScale);
             WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(w, h));
         }
     }
@@ -271,15 +268,17 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         }
     }
 
-    // TODO: Do we need this method? Clean up the name/doc at least
     public void RegenerateImages()
     {
-        if (_refreshing)
+        if (_refreshing || Items.Count == 0)
         {
-            throw new InvalidOperationException();
+            return;
         }
-        if (Items.Count == 0)
+        if (!UseCustomRendering)
         {
+            // TODO: Not sure why but this gets glitchy unless we reset the items too
+            Invoker.Current.InvokeDispatch(() =>
+                SetItems(_view.Items.Cast<ListViewItem>().Select(x => (T) x.Tag!).ToList()));
             return;
         }
         _refreshing = true;

@@ -20,7 +20,6 @@ public class ImageListViewBehavior : ListViewBehavior<UiImage>
         ShowLabels = false;
         ScrollOnDrag = true;
         UseHandCursor = true;
-        ScaleImageSize = true;
     }
 
     public override bool ShowPageNumbers => _config.Get(c => c.ShowPageNumbers);

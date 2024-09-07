@@ -108,12 +108,6 @@ public class ProfilesForm : EtoDialogBase
         _addCommand.Enabled = !NoUserProfiles;
         _editCommand.Enabled = false;
         _deleteCommand.Enabled = false;
-        ReloadProfiles();
-        var defaultProfile = _profileManager.Profiles.FirstOrDefault(x => x.IsDefault);
-        if (defaultProfile != null)
-        {
-            _listView.Selection = ListSelection.Of(defaultProfile);
-        }
 
         var contextMenu = new ContextMenu();
         _listView.ContextMenu = contextMenu;
@@ -170,6 +164,17 @@ public class ProfilesForm : EtoDialogBase
     }
 
     private bool NoUserProfiles => Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked);
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        ReloadProfiles();
+        var defaultProfile = _profileManager.Profiles.FirstOrDefault(x => x.IsDefault);
+        if (defaultProfile != null)
+        {
+            _listView.Selection = ListSelection.Of(defaultProfile);
+        }
+    }
 
     private void ProfilesUpdated(object? sender, EventArgs e)
     {

@@ -9,7 +9,6 @@ public class FormStateController
     private readonly Window _window;
     private readonly Naps2Config _config;
     private FormState? _formState;
-    private bool _loaded;
     private bool _hasSetSize;
     private Size _minimumClientSize;
     private Size _maximumClientSize;
@@ -39,6 +38,8 @@ public class FormStateController
 
     public bool Resizable { get; set; } = true;
 
+    public bool Loaded { get; private set; }
+
     public string FormName => _window.GetType().Name;
 
     public void UpdateLayoutSize(LayoutController layoutController)
@@ -51,7 +52,7 @@ public class FormStateController
             DefaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
             _maximumClientSize = FixedHeightLayout || !Resizable ? new Size(0, _minimumClientSize.Height) : Size.Empty;
 
-            if (_loaded)
+            if (Loaded)
             {
                 // Dynamic re-sizing because the layout contents have changed (not just a normal resize/maximize etc).
                 var size = EtoPlatform.Current.GetClientSize(_window);
@@ -92,7 +93,7 @@ public class FormStateController
             // TODO: Use size delta to re-center
             EtoPlatform.Current.SetClientSize(_window, DefaultClientSize);
         }
-        _loaded = true;
+        Loaded = true;
     }
 
     private void OnShownInternal(object? sender, EventArgs e)
@@ -145,7 +146,7 @@ public class FormStateController
 
     private void OnResize(object? sender, EventArgs eventArgs)
     {
-        if (_loaded && _formState != null && SaveFormState)
+        if (Loaded && _formState != null && SaveFormState)
         {
             _formState.Maximized = (_window.WindowState == WindowState.Maximized);
             if (_window.WindowState == WindowState.Normal)
@@ -161,7 +162,7 @@ public class FormStateController
 
     private void OnMove(object? sender, EventArgs eventArgs)
     {
-        if (_loaded && _formState != null && SaveFormState)
+        if (Loaded && _formState != null && SaveFormState)
         {
             if (_window.WindowState == WindowState.Normal)
             {

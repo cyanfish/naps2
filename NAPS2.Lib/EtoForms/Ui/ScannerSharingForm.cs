@@ -65,7 +65,6 @@ public class ScannerSharingForm : EtoDialogBase
         _addCommand.Enabled = true;
         _editCommand.Enabled = false;
         _deleteCommand.Enabled = false;
-        ReloadDevices();
 
         var contextMenu = new ContextMenu();
         _listView.ContextMenu = contextMenu;
@@ -100,6 +99,12 @@ public class ScannerSharingForm : EtoDialogBase
     public Action<ProcessedImage>? ImageCallback { get; set; }
 
     private SharedDevice? SelectedDevice => _listView.Selection.SingleOrDefault();
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        ReloadDevices();
+    }
 
     private void ReloadDevices()
     {

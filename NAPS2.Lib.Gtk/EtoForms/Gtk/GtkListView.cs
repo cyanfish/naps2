@@ -173,8 +173,6 @@ public class GtkListView<T> : IListView<T> where T : notnull
         return flowBoxChild;
     }
 
-    // TODO: Do we need this method? Clean up the name/doc at least
-    // TODO: Seems like we might not need it at all, the syncer is working? Or is the idea this is faster for WinForms? But in that case we should probably not update on sync.
     public void RegenerateImages()
     {
         if (_refreshing)
