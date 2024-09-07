@@ -19,7 +19,6 @@ public class FormStateController
         _config = config;
         window.SizeChanged += OnResize;
         window.LocationChanged += OnMove;
-        window.PreLoad += OnLoadInternal;
         window.Shown += OnShownInternal;
         window.Closed += OnClosed;
     }
@@ -76,7 +75,7 @@ public class FormStateController
         }
     }
 
-    private void OnLoadInternal(object? sender, EventArgs eventArgs)
+    public void LoadState()
     {
         if (RestoreFormState || SaveFormState)
         {
@@ -112,16 +111,17 @@ public class FormStateController
             throw new InvalidOperationException();
         }
         var location = new Point(_formState.Location.X, _formState.Location.Y);
-        if (!location.IsZero)
+        var screen = Screen.Screens.FirstOrDefault(x => x.WorkingArea.Contains(location));
+        if (!location.IsZero && screen != null)
         {
-            if (Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
-            {
-                // Only move to the specified location if it's onscreen
-                // It might be offscreen if the user has disconnected a monitor
-                EtoPlatform.Current.SetFormLocation(_window, location);
-            }
+            // Only move to the specified location if it's onscreen
+            // It might be offscreen if the user has disconnected a monitor
+            EtoPlatform.Current.SetFormLocation(_window, location);
         }
-        var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
+        // We use the screen instead of the window to get the scale factor so that we don't need to create the window
+        // handle here. This is important because on WinForms setting the window maximized state doesn't work properly
+        // if the handle is already created.
+        var scale = EtoPlatform.Current.GetLayoutScaleFactor(screen ?? Screen.PrimaryScreen);
         var size = new Size(
             (int) Math.Round(_formState.Size.Width * scale),
             (int) Math.Round(_formState.Size.Height * scale));

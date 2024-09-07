@@ -161,9 +161,13 @@ public abstract class EtoPlatform
 
     public virtual float GetScaleFactor(Window window) => 1f;
 
+    public virtual float GetScaleFactor(Screen screen) => screen.RealScale;
+
     public virtual bool ScaleLayout => false;
 
     public float GetLayoutScaleFactor(Window window) => ScaleLayout ? GetScaleFactor(window) : 1f;
+
+    public float GetLayoutScaleFactor(Screen screen) => ScaleLayout ? GetScaleFactor(screen) : 1f;
 
     public virtual void SetImageSize(ButtonMenuItem menuItem, int size)
     {

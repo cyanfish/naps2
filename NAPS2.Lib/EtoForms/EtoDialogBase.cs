@@ -27,6 +27,7 @@ public abstract class EtoDialogBase : Dialog, IFormBase
 
     protected override void OnPreLoad(EventArgs e)
     {
+        FormStateController.LoadState();
         BuildLayout();
         base.OnPreLoad(e);
     }

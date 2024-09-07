@@ -21,6 +21,7 @@ public abstract class EtoFormBase : Form, IFormBase
 
     protected override void OnPreLoad(EventArgs e)
     {
+        FormStateController.LoadState();
         BuildLayout();
         base.OnPreLoad(e);
     }
