@@ -201,7 +201,7 @@ public class ChooseDeviceForm : EtoDialogBase
         QueryForDevices();
     }
 
-    private void QueryForDevices()
+    private async void QueryForDevices()
     {
         if (_activeQuery == DeviceDriver)
         {
@@ -235,96 +235,72 @@ public class ChooseDeviceForm : EtoDialogBase
         optionsWithDriver.Driver = DeviceDriver;
         var controller = new ScanController(_scanningContext);
 
-        Task.Run(async () =>
+        try
         {
-            try
+            await foreach (var device in controller.GetDevices(optionsWithDriver, cts.Token))
             {
-                await foreach (var device in controller.GetDevices(optionsWithDriver, cts.Token))
+                if (!cts.IsCancellationRequested)
                 {
-                    Invoker.Current.Invoke(() =>
+                    var cachedIcon = _deviceCapsCache.GetCachedIcon(device.IconUri);
+                    if (cachedIcon != null)
                     {
-                        if (!cts.IsCancellationRequested)
+                        _deviceListViewBehavior.SetImage(device, cachedIcon);
+                    }
+                    else
+                    {
+                        var icon = await _deviceCapsCache.LoadIcon(device);
+                        if (icon != null)
                         {
-                            var cachedIcon = _deviceCapsCache.GetCachedIcon(device.IconUri);
-                            if (cachedIcon != null)
-                            {
-                                _deviceListViewBehavior.SetImage(device, cachedIcon);
-                            }
-                            else
-                            {
-                                Task.Run(async () =>
-                                {
-                                    var icon = await _deviceCapsCache.LoadIcon(device);
-                                    if (icon != null)
-                                    {
-                                        Invoker.Current.Invoke(() =>
-                                        {
-                                            _deviceListViewBehavior.SetImage(device, icon);
-                                            _deviceIconList.RegenerateImages();
-                                        });
-                                    }
-                                });
-                            }
-                            if (!DeviceSet.Contains(device))
-                            {
-                                DeviceList.Add(device);
-                                DeviceSet.Add(device);
-                            }
-                            UpdateDevices(false);
+                            _deviceListViewBehavior.SetImage(device, icon);
+                            _deviceIconList.RegenerateImages();
                         }
-                    });
+                    }
+                    if (!DeviceSet.Contains(device))
+                    {
+                        DeviceList.Add(device);
+                        DeviceSet.Add(device);
+                    }
+                    UpdateDevices(false);
                 }
-                Invoker.Current.Invoke(() =>
-                {
-                    if (AllowAlwaysAsk && DeviceDriver is Driver.Wia or Driver.Twain)
-                    {
-                        if (!cts.IsCancellationRequested)
-                        {
-                            ExtraItems.Add(AlwaysAskMarker);
-                            UpdateDevices(false);
-                        }
-                    }
-                });
-                Invoker.Current.Invoke(() =>
-                {
-                    if (!cts.IsCancellationRequested)
-                    {
-                        _spinnerVis.IsVisible = false;
-                        _statusIconName = DeviceList.Count > 0 ? "accept_small" : "exclamation_small";
-                        UpdateStatusIcon();
-                        _statusLabel.Text = DeviceList.Count switch
-                        {
-                            > 1 => string.Format(UiStrings.DevicesFound, DeviceList.Count),
-                            1 => UiStrings.DeviceFoundSingular,
-                            _ => UiStrings.NoDevicesFound
-                        };
-                    }
-                });
             }
-            catch (Exception ex)
+            if (AllowAlwaysAsk && DeviceDriver is Driver.Wia or Driver.Twain)
             {
-                Invoker.Current.Invoke(() =>
+                if (!cts.IsCancellationRequested)
                 {
-                    if (!cts.IsCancellationRequested)
-                    {
-                        _spinnerVis.IsVisible = false;
-                        _statusIconName = "exclamation_small";
-                        UpdateStatusIcon();
-                        _statusLabel.Text = ex.Message;
-                    }
-                });
+                    ExtraItems.Add(AlwaysAskMarker);
+                    UpdateDevices(false);
+                }
             }
-            finally
+            if (!cts.IsCancellationRequested)
             {
-                Invoker.Current.Invoke(() =>
+                _spinnerVis.IsVisible = false;
+                _statusIconName = DeviceList.Count > 0 ? "accept_small" : "exclamation_small";
+                UpdateStatusIcon();
+                _statusLabel.Text = DeviceList.Count switch
                 {
-                    if (!cts.IsCancellationRequested)
-                    {
-                        _activeQuery = null;
-                    }
-                });
+                    > 1 => string.Format(UiStrings.DevicesFound, DeviceList.Count),
+                    1 => UiStrings.DeviceFoundSingular,
+                    _ => UiStrings.NoDevicesFound
+                };
             }
-        });
+        }
+        catch (Exception ex)
+        {
+            if (!cts.IsCancellationRequested)
+            {
+                _spinnerVis.IsVisible = false;
+                _statusIconName = "exclamation_small";
+                UpdateStatusIcon();
+                _statusLabel.Text = ex.Message;
+            }
+        }
+        finally
+        {
+            if (!cts.IsCancellationRequested)
+            {
+                _activeQuery = null;
+            }
+        }
     }
 
     private void UpdateDevices(bool clear)
