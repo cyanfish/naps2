@@ -117,13 +117,14 @@ public class LayoutControl : LayoutElement
     private SizeF GetWrappedSize(LayoutContext context, RectangleF parentBounds, int wrapDefaultWidth)
     {
         if (Control == null) throw new InvalidOperationException();
+        int scaledWrapDefaultWidth = (int) Math.Round(wrapDefaultWidth * context.Scale);
         // Label wrapping is fairly complicated.
         if (!context.IsLayout)
         {
             // If we're not in a layout operation (i.e. we're getting a minimum or default form size), the
             // measured size should be based on the default width for wrapping.
             // This produces the label width (if small) or the default width (if long enough to wrap).
-            return EtoPlatform.Current.GetWrappedSize(Control, wrapDefaultWidth);
+            return EtoPlatform.Current.GetWrappedSize(Control, scaledWrapDefaultWidth);
         }
         if (context.IsCellLengthQuery)
         {
@@ -134,7 +135,7 @@ public class LayoutControl : LayoutElement
             // usually what we want.
             return new SizeF(
                 EtoPlatform.Current.GetWrappedSize(Control, (int) parentBounds.Width).Width,
-                EtoPlatform.Current.GetWrappedSize(Control, Math.Min((int) parentBounds.Width, wrapDefaultWidth))
+                EtoPlatform.Current.GetWrappedSize(Control, Math.Min((int) parentBounds.Width, scaledWrapDefaultWidth))
                     .Height);
         }
         // Now that we've handled the special cases, this measures the real dimensions of the label given
