@@ -6,6 +6,7 @@ namespace NAPS2.EtoForms.Layout;
 public abstract class LayoutElement
 {
     internal const bool DEBUG_LAYOUT = false;
+    internal const bool DEBUG_SIZE = false;
 
     protected static List<LayoutElement> ExpandChildren(IEnumerable<LayoutElement> children)
     {

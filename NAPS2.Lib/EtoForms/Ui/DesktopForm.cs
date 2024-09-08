@@ -123,7 +123,6 @@ public abstract class DesktopForm : EtoFormBase
 
         LayoutController.RootPadding = 0;
         LayoutController.Content = L.LeftPanel(
-            LayoutController,
             _sidebar.CreateView(this),
             L.Overlay(
                 _listView.Control,
@@ -214,7 +213,7 @@ public abstract class DesktopForm : EtoFormBase
     {
         base.OnLoad(e);
         _imageListSyncer = new ImageListSyncer(ImageList, _listView.ApplyDiffs, SynchronizationContext.Current!);
-        EtoPlatform.Current.AttachDpiDependency(this,
+        EtoPlatform.Current.AttachDpiDependency(_listView.Control,
             scale => SetThumbnailSpacing(_thumbnailController.VisibleSize, scale));
         _desktopController.PreInitialize();
     }

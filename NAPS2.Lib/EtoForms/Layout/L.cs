@@ -56,27 +56,8 @@ public static class L
         return new BufferLayoutElement(element, left, top, right, bottom);
     }
 
-    public static LayoutElement LeftPanel(LayoutController controller, LayoutElement left, LayoutElement right)
+    public static LayoutElement LeftPanel(LayoutElement left, LayoutElement right)
     {
-        var splitter = new Splitter
-        {
-            Orientation = Orientation.Horizontal,
-            Panel1 = new Panel(),
-            Panel1MinimumSize = controller.GetSizeFor(left).Width,
-            Panel2 = new Panel(),
-            Panel2MinimumSize = controller.GetSizeFor(right).Width,
-            FixedPanel = SplitterFixedPanel.Panel1
-        };
-        left.Width = splitter.Position = splitter.Panel1MinimumSize;
-        splitter.PositionChanged += (_, _) =>
-        {
-            left.Width = splitter.Position;
-            controller.Invalidate();
-        };
-        if (left.Visibility is { } vis)
-        {
-            vis.IsVisibleChanged += (_, _) => splitter.Visible = vis.IsVisible;
-        }
-        return L.Overlay(splitter, L.Row(left, right).Spacing(3));
+        return new LayoutLeftPanel(left, right);
     }
 }

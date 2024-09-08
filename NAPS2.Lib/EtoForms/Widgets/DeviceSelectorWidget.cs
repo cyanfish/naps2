@@ -13,7 +13,7 @@ public class DeviceSelectorWidget
     private readonly IIconProvider _iconProvider;
     private readonly IFormBase _parentWindow;
 
-    private readonly ImageView _deviceIcon = new();
+    private readonly ImageView _deviceIcon = new() { Size = new Size(32, 32) };
     private readonly Label _deviceName = new();
     private readonly Label _deviceDriver = new();
     private readonly LayoutVisibility _deviceVis = new(false);

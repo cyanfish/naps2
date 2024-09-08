@@ -109,9 +109,16 @@ public class LayoutControl : LayoutElement
             }
         }
         size = UpdateFixedDimensions(context, size);
-        return new SizeF(
+        size = new SizeF(
             size.Width + Padding.Horizontal * context.Scale,
             size.Height + Padding.Vertical * context.Scale);
+        if (DEBUG_SIZE)
+        {
+            var text = Control is TextControl txt ? $"\"{txt.Text}\" " : "";
+            Debug.WriteLine(
+                $"{new string(' ', context.Depth)}{text}{Control?.GetType().Name ?? "ZeroSpace"} size {size}");
+        }
+        return size;
     }
 
     private SizeF GetWrappedSize(LayoutContext context, RectangleF parentBounds, int wrapDefaultWidth)
