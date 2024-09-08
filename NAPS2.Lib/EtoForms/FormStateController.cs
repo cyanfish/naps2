@@ -30,9 +30,9 @@ public class FormStateController
 
     public bool AutoLayoutSize { get; set; } = true;
 
-    public Size DefaultExtraLayoutSize { get; set; }
+    public SizeF DefaultExtraLayoutSize { get; set; }
 
-    public Size DefaultClientSize { get; set; }
+    public SizeF DefaultClientSize { get; set; }
 
     public bool FixedHeightLayout { get; set; }
 
@@ -46,10 +46,11 @@ public class FormStateController
     {
         if (AutoLayoutSize)
         {
+            var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
             _minimumClientSize = layoutController.GetLayoutSize(false);
             var oldDefaultClientSize = DefaultClientSize;
             var oldMaximumClientSize = _maximumClientSize;
-            DefaultClientSize = layoutController.GetLayoutSize(true) + DefaultExtraLayoutSize;
+            DefaultClientSize = (SizeF) layoutController.GetLayoutSize(true) / scale + DefaultExtraLayoutSize;
             _maximumClientSize = FixedHeightLayout || !Resizable ? new Size(0, _minimumClientSize.Height) : Size.Empty;
 
             if (Loaded)
@@ -91,7 +92,8 @@ public class FormStateController
         if (!_hasSetSize && !DefaultClientSize.IsEmpty)
         {
             // TODO: Use size delta to re-center
-            EtoPlatform.Current.SetClientSize(_window, DefaultClientSize);
+            var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
+            EtoPlatform.Current.SetClientSize(_window, Size.Round(DefaultClientSize * scale));
         }
         Loaded = true;
     }
