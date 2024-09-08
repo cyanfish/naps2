@@ -64,6 +64,7 @@ public class PageSizeForm : EtoDialogBase
 
         FormStateController.RestoreFormState = false;
         FormStateController.FixedHeightLayout = true;
+        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.NameOptional),

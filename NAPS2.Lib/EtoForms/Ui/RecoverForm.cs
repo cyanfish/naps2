@@ -20,6 +20,7 @@ public class RecoverForm : EtoDialogBase
         FormStateController.SaveFormState = false;
         FormStateController.RestoreFormState = false;
         // FormStateController.Resizable = false;
+        base.BuildLayout();
 
         var recoverButton = C.DialogButton(this, UiStrings.Recover,
             beforeClose: () => SelectedAction = RecoverAction.Recover);

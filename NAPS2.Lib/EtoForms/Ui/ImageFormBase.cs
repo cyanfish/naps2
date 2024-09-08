@@ -39,6 +39,8 @@ public abstract class ImageFormBase : EtoDialogBase
 
     protected override void BuildLayout()
     {
+        base.BuildLayout();
+
         LayoutController.Content = L.Column(
             Overlay.Scale(),
             CreateControls(),

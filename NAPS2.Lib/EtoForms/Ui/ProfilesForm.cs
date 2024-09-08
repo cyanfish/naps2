@@ -131,6 +131,7 @@ public class ProfilesForm : EtoDialogBase
     protected override void BuildLayout()
     {
         FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
+        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             L.Row(

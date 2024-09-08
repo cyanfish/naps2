@@ -23,6 +23,7 @@ public class AuthorizeForm : EtoDialogBase
         FormStateController.FixedHeightLayout = true;
         FormStateController.RestoreFormState = false;
         FormStateController.Resizable = false;
+        base.BuildLayout();
 
         LayoutController.Content = L.Row(
             C.Label(UiStrings.WaitingForAuthorization).Padding(right: 30),

@@ -47,6 +47,7 @@ public class OcrDownloadForm : EtoDialogBase
     {
         FormStateController.RestoreFormState = false;
         FormStateController.DefaultExtraLayoutSize = new Size(300, 300);
+        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.OcrDownloadSummaryText),

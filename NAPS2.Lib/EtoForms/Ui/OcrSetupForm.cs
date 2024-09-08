@@ -62,6 +62,7 @@ public class OcrSetupForm : EtoDialogBase
     protected override void BuildLayout()
     {
         FormStateController.Resizable = false;
+        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             _enableOcr,

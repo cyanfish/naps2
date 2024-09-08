@@ -38,6 +38,7 @@ public class PlaceholdersForm : EtoDialogBase
 
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
+        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.FileNameLabel),

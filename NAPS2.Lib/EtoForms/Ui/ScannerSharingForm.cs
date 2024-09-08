@@ -77,6 +77,7 @@ public class ScannerSharingForm : EtoDialogBase
     protected override void BuildLayout()
     {
         FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
+        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.ScannerSharingIntro).DynamicWrap(400),

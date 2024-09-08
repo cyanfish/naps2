@@ -22,6 +22,7 @@ public class ErrorForm : EtoDialogBase
 
         FormStateController.RestoreFormState = false;
         FormStateController.FixedHeightLayout = true;
+        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             L.Row(
