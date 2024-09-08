@@ -255,18 +255,10 @@ public class GtkEtoPlatform : EtoPlatform
         }
     }
 
-    public override Control AccessibleImageButton(Image image, string text, Action onClick,
-        int xOffset = 0, int yOffset = 0)
+    public override void ConfigureDonateButton(Button button)
     {
-        var button = new GTK.Button
-        {
-            // Label = text,
-            Image = image.ToGtk(),
-            ImagePosition = GTK.PositionType.Left
-        };
-        button.StyleContext.AddClass("accessible-image-button");
-        button.Clicked += (_, _) => onClick();
-        return button.ToEto();
+        var native = (GTK.Button) button.ToNative();
+        native.StyleContext.AddClass("accessible-image-button");
     }
 
     public override void ConfigureZoomButton(Button button, string icon)

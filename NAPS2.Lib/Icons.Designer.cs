@@ -422,16 +422,6 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] btn_donate_LG {
-            get {
-                object obj = ResourceManager.GetObject("btn_donate_LG", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] cancel {
             get {
                 object obj = ResourceManager.GetObject("cancel", resourceCulture);

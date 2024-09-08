@@ -39,8 +39,7 @@ public abstract class EtoPlatform
     public abstract void AddToContainer(Control container, Control control, bool inOverlay);
     public abstract void RemoveFromContainer(Control container, Control control);
 
-    public abstract Control AccessibleImageButton(Image image, string text, Action onClick,
-        int xOffset = 0, int yOffset = 0);
+    public abstract void ConfigureDonateButton(Button button);
 
     public virtual void InitializePlatform()
     {

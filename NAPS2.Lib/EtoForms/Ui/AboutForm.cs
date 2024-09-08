@@ -13,7 +13,7 @@ public class AboutForm : EtoDialogBase
     private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
     private const string DONATE_URL = "https://www.naps2.com/donate?src=about";
 
-    private readonly Control _donateButton;
+    private readonly Button _donateButton;
     private readonly UpdateChecker _updateChecker;
     private readonly CheckBox _enableDebugLogging = C.CheckBox(UiStrings.EnableDebugLogging);
 
@@ -23,10 +23,13 @@ public class AboutForm : EtoDialogBase
         Title = UiStrings.AboutFormTitle;
         IconName = "information_small";
 
-        _donateButton = EtoPlatform.Current.AccessibleImageButton(
-            Icons.btn_donate_LG.ToEtoImage(),
-            UiStrings.Donate,
-            () => ProcessHelper.OpenUrl(DONATE_URL));
+        _donateButton = C.Button(UiStrings.Donate, () => ProcessHelper.OpenUrl(DONATE_URL));
+        _donateButton.BackgroundColor = Color.FromRgb(0xfeda96);
+        _donateButton.TextColor = Color.FromRgb(0x1b464e);
+        _donateButton.Font = new Font(_donateButton.Font.Family, _donateButton.Font.Size * 11 / 10,
+            FontStyle.Italic | FontStyle.Bold);
+        EtoPlatform.Current.ConfigureDonateButton(_donateButton);
+
         _enableDebugLogging.Checked = config.Get(c => c.EnableDebugLogging);
         _enableDebugLogging.CheckedChanged += (_, _) =>
         {

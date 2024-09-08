@@ -460,9 +460,6 @@
   <data name="sharpen_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\sharpen-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btn_donate_LG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\btn_donate_LG.gif;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="gmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\gmail.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

@@ -111,16 +111,10 @@ public class MacEtoPlatform : EtoPlatform
 
     public override float GetScaleFactor(Window window) => 2f;
 
-    public override Control AccessibleImageButton(Image image, String text, Action onClick,
-        int xOffset = 0, int yOffset = 0)
+    public override void ConfigureDonateButton(Button button)
     {
-        return new NSButton
-        {
-            Title = text,
-            Image = image.ToNS(),
-            ImagePosition = NSCellImagePosition.ImageOnly,
-            Bordered = false
-        }.WithAction(onClick).ToEto();
+        var native = (NSButton) button.ToNative();
+        native.Bordered = false;
     }
 
     public override LayoutElement CreateGroupBox(string title, LayoutElement content)

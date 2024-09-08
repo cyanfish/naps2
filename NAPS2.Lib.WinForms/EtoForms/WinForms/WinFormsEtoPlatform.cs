@@ -91,25 +91,12 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
     }
 
-    public override Control AccessibleImageButton(Image image, string text, Action onClick,
-        int xOffset = 0, int yOffset = 0)
+    public override void ConfigureDonateButton(Button button)
     {
-        // This works by overlaying an image on top a button.
-        // If the image has transparency an offset may need to be specified to keep the button hidden.
-        // If the text is too large relative to the button it will be impossible to hide fully.
-        var imageView = new ImageView { Image = image, Cursor = Eto.Forms.Cursors.Pointer };
-        imageView.MouseDown += (_, _) => onClick();
-        var button = new Button
-        {
-            Text = text,
-            Width = 0,
-            Height = 0,
-            Command = new ActionCommand(onClick)
-        };
-        var pix = new PixelLayout();
-        pix.Add(button, xOffset, yOffset);
-        pix.Add(imageView, 0, 0);
-        return pix;
+        var native = (WF.Button) button.ToNative();
+        native.FlatStyle = WF.FlatStyle.Flat;
+        native.FlatAppearance.BorderColor = Color.FromRgb(0xfbad5f).ToSD();
+        native.FlatAppearance.BorderSize = 2;
     }
 
     public override Bitmap ToBitmap(IMemoryImage image)
