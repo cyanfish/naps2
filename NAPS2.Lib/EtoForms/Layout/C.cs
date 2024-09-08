@@ -116,8 +116,7 @@ public static class C
         {
             var baseFontSize = button.Font.Size;
             EtoPlatform.Current.AttachDpiDependency(button,
-                _ => button.Font = new Font(button.Font.Family,
-                    baseFontSize * 4 / 3 * EtoPlatform.Current.GetLayoutScaleFactor(button.ParentWindow)));
+                _ => button.Font = new Font(button.Font.Family, baseFontSize * 4 / 3));
         }
         EtoPlatform.Current.ConfigureImageButton(button, flags);
         return button;

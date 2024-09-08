@@ -191,9 +191,12 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         set
         {
             _imageSize = value;
-            int w = (int) Math.Round(_imageSize.Width * _dpiScale);
-            int h = (int) Math.Round(_imageSize.Height * _dpiScale);
-            WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(w, h));
+            if (_view.LargeImageList != null)
+            {
+                int w = (int) Math.Round(_imageSize.Width * _dpiScale);
+                int h = (int) Math.Round(_imageSize.Height * _dpiScale);
+                WinFormsHacks.SetImageSize(_view.LargeImageList!, new Size(w, h));
+            }
         }
     }
 
