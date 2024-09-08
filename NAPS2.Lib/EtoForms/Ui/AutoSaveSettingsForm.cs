@@ -54,7 +54,6 @@ public class AutoSaveSettingsForm : EtoDialogBase
         Title = UiStrings.AutoSaveSettingsFormTitle;
 
         FormStateController.FixedHeightLayout = true;
-        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.FilePathLabel).NaturalWidth(300),

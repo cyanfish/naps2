@@ -109,7 +109,6 @@ public class BatchScanForm : EtoDialogBase
 
         FormStateController.FixedHeightLayout = true;
         AbortButton = _cancel;
-        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             L.Row(

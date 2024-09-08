@@ -24,7 +24,6 @@ public class PdfPasswordForm : EtoDialogBase
 
         FormStateController.RestoreFormState = false;
         FormStateController.FixedHeightLayout = true;
-        base.BuildLayout();
 
         _passwordBox.Title = FileName!;
         _passwordBox.TitleWrapWidth = 300;

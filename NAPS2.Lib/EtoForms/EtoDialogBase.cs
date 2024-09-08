@@ -23,18 +23,11 @@ public abstract class EtoDialogBase : Dialog, IFormBase
         EtoPlatform.Current.InitForm(this);
     }
 
-    protected virtual void BuildLayout()
-    {
-        FormStateController.LoadState();
-    }
+    protected abstract void BuildLayout();
 
     protected override void OnPreLoad(EventArgs e)
     {
         BuildLayout();
-        if (!FormStateController.Loaded)
-        {
-            throw new InvalidOperationException("Base BuildLayout method not called");
-        }
         base.OnPreLoad(e);
     }
 

@@ -37,7 +37,6 @@ public class DownloadProgressForm : EtoDialogBase
     protected override void BuildLayout()
     {
         FormStateController.RestoreFormState = false;
-        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             _totalStatus,

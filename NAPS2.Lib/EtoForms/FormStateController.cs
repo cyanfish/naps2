@@ -19,6 +19,7 @@ public class FormStateController
         _config = config;
         window.SizeChanged += OnResize;
         window.LocationChanged += OnMove;
+        window.PreLoad += OnLoadInternal;
         window.Shown += OnShownInternal;
         window.Closed += OnClosed;
     }
@@ -75,7 +76,7 @@ public class FormStateController
         }
     }
 
-    public void LoadState()
+    private void OnLoadInternal(object? sender, EventArgs eventArgs)
     {
         if (RestoreFormState || SaveFormState)
         {
@@ -111,17 +112,16 @@ public class FormStateController
             throw new InvalidOperationException();
         }
         var location = new Point(_formState.Location.X, _formState.Location.Y);
-        var screen = Screen.Screens.FirstOrDefault(x => x.WorkingArea.Contains(location));
-        if (!location.IsZero && screen != null)
+        if (!location.IsZero)
         {
-            // Only move to the specified location if it's onscreen
-            // It might be offscreen if the user has disconnected a monitor
-            EtoPlatform.Current.SetFormLocation(_window, location);
+            if (Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
+            {
+                // Only move to the specified location if it's onscreen
+                // It might be offscreen if the user has disconnected a monitor
+                EtoPlatform.Current.SetFormLocation(_window, location);
+            }
         }
-        // We use the screen instead of the window to get the scale factor so that we don't need to create the window
-        // handle here. This is important because on WinForms setting the window maximized state doesn't work properly
-        // if the handle is already created.
-        var scale = EtoPlatform.Current.GetLayoutScaleFactor(screen ?? Screen.PrimaryScreen);
+        var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
         var size = new Size(
             (int) Math.Round(_formState.Size.Width * scale),
             (int) Math.Round(_formState.Size.Height * scale));
@@ -141,6 +141,12 @@ public class FormStateController
         if (_formState.Maximized && _window.Resizable)
         {
             _window.WindowState = WindowState.Maximized;
+            // TODO: Setting WindowState immediately doesn't work on WinForms when we've already created a window handle
+            // Theoretically we could move this code around earlier before the handle is created (e.g. when we're
+            // doing layouting to determine the width of the sidebar), but it's hard to get all the interdependencies
+            // between layouting and form state working correctly. This workaround of setting it again later works but
+            // results in an animation for the maximization.
+            Invoker.Current.InvokeDispatch(() => _window.WindowState = WindowState.Maximized);
         }
     }
 

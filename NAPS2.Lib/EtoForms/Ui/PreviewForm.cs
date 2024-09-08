@@ -130,7 +130,6 @@ public class PreviewForm : EtoDialogBase
     {
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(800, 600);
-        base.BuildLayout();
 
         LayoutController.RootPadding = 0;
         LayoutController.Content = ImageViewer;

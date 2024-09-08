@@ -20,7 +20,6 @@ internal class EmailProviderForm : EtoDialogBase
     protected override void BuildLayout()
     {
         FormStateController.FixedHeightLayout = true;
-        base.BuildLayout();
 
         LayoutController.DefaultSpacing = 0;
         LayoutController.Content = L.Column(

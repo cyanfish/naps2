@@ -40,7 +40,6 @@ public class AboutForm : EtoDialogBase
     {
         FormStateController.Resizable = false;
         FormStateController.RestoreFormState = false;
-        base.BuildLayout();
 
         LayoutController.DefaultSpacing = 2;
         LayoutController.Content = L.Row(

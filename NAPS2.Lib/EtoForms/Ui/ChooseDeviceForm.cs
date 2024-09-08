@@ -151,7 +151,6 @@ public class ChooseDeviceForm : EtoDialogBase
 
         FormStateController.SaveFormState = FormStateController.RestoreFormState = true;
         FormStateController.DefaultExtraLayoutSize = new Size(150, 100);
-        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             L.Row(

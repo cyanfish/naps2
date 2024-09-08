@@ -33,7 +33,6 @@ public class BatchPromptForm : EtoDialogBase
         FormStateController.SaveFormState = false;
         FormStateController.RestoreFormState = false;
         FormStateController.Resizable = false;
-        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             C.Label(string.Format(UiStrings.ReadyForScan, ScanNumber)).NaturalWidth(200),

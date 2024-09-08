@@ -29,7 +29,6 @@ public class ProgressForm : EtoDialogBase
     {
         FormStateController.RestoreFormState = false;
         FormStateController.SaveFormState = false;
-        base.BuildLayout();
 
         LayoutController.Content = L.Column(
             _status,
