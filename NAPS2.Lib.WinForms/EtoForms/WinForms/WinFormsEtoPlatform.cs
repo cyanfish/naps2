@@ -280,8 +280,6 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override float GetScaleFactor(Window window)
     {
         var form = window.ToNative();
-        // Force creation of form handle
-        _ = form.Handle;
         return form.DeviceDpi / 96f;
     }
 
