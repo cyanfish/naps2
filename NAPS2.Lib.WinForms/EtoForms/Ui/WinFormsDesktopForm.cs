@@ -136,24 +136,34 @@ public class WinFormsDesktopForm : DesktopForm
 
     protected override void ConfigureToolbars()
     {
+        _container = new WF.ToolStripContainer();
         _mainToolStrip = ((ToolBarHandler) ToolBar.Handler).Control;
+        _profilesToolStrip = new WF.ToolStrip();
+
         _mainToolStrip.ShowItemToolTips = false;
         _mainToolStrip.TabStop = true;
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _mainToolStrip.ImageScalingSize = new Size((int) (32 * scale), (int) (32 * scale)));
+        _container.TopToolStripPanel.Controls.Add(_mainToolStrip);
         _mainToolStrip.ParentChanged += (_, _) =>
         {
             _toolbarFormatter.RelayoutToolbar(_mainToolStrip, EtoPlatform.Current.GetScaleFactor(this));
             LayoutController.Invalidate();
         };
 
-        _profilesToolStrip = new WF.ToolStrip();
         _profilesToolStrip.ShowItemToolTips = false;
         _profilesToolStrip.TabStop = true;
-        _profilesToolStrip.Location = new Point(0, 100);
+        _profilesToolStrip.Location = new Point(0, 1000);
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _profilesToolStrip.ImageScalingSize = new Size((int) (16 * scale), (int) (16 * scale)));
+        PlaceProfilesToolbar();
         _profilesToolStrip.ParentChanged += (_, _) => LayoutController.Invalidate();
+
+        foreach (var panel in _container.Controls.OfType<WF.ToolStripPanel>())
+        {
+            // Allow tabbing through the toolbar for accessibility
+            WinFormsHacks.SetControlStyle(panel, WF.ControlStyles.Selectable, true);
+        }
     }
 
     public override void PlaceProfilesToolbar()
@@ -206,15 +216,6 @@ public class WinFormsDesktopForm : DesktopForm
     protected override void BuildLayout()
     {
         base.BuildLayout();
-
-        _container = new WF.ToolStripContainer();
-        _container.TopToolStripPanel.Controls.Add(_mainToolStrip);
-        PlaceProfilesToolbar();
-        foreach (var panel in _container.Controls.OfType<WF.ToolStripPanel>())
-        {
-            // Allow tabbing through the toolbar for accessibility
-            WinFormsHacks.SetControlStyle(panel, WF.ControlStyles.Selectable, true);
-        }
 
         var wfContent = LayoutController.Container.ToNative();
         wfContent.Dock = WF.DockStyle.Fill;
