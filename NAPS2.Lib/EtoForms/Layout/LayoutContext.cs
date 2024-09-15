@@ -2,8 +2,10 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
 
-public record LayoutContext(Control Layout)
+public record LayoutContext
 {
+    public required Control Container { get; init; }
+
     public int DefaultSpacing { get; init; }
 
     public int DefaultLabelSpacing { get; init; }

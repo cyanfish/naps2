@@ -69,66 +69,91 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
-        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
+        if (location.X < 0 || location.Y < 0) throw new InvalidOperationException();
+        var overlay = container.ToNative() as GTK.Overlay;
+        var panel = container.ToNative() as GTK.Fixed;
         var widget = control.ToNative();
-        if (inOverlay)
+        var parent = overlay?.Parent ?? panel?.Parent.Parent;
+        int xOff = 0;
+        int yOff = 0;
+        if (parent is GTK.Alignment)
+        {
+            // Top-level container, so we offset
+            xOff = X_OFF;
+            yOff = Y_OFF;
+        }
+        if (overlay != null)
         {
             // TODO: Ideally we would use GetChildPosition instead of margin but that signal is not firing, not sure why
-            widget.MarginTop = location.Y - Y_OFF;
-            widget.MarginStart = location.X - X_OFF;
+            widget.MarginTop = location.Y - yOff;
+            widget.MarginStart = location.X - xOff;
         }
-        else
+        if (panel != null)
         {
-            var panel = (GTK.Fixed) overlay.Children[0];
-            panel.Move(widget, location.X - X_OFF, location.Y - Y_OFF);
+            if (widget.Parent != panel) throw new InvalidOperationException("Invalid parent");
+            panel.Move(widget, location.X - xOff, location.Y - yOff);
         }
         widget.SetSizeRequest(size.Width, size.Height);
+        if (widget is GTK.Overlay childOverlay)
+        {
+            var childPanel = (GTK.Fixed) childOverlay.Child;
+            childPanel.SetSizeRequest(size.Width, size.Height);
+        }
     }
 
-    public override Control CreateContainer()
-    {
-        var overlay = new GTK.Overlay();
-        overlay.Add(new GTK.Fixed());
-        return overlay.ToEto();
-    }
+    public override Control CreateContainer() => new GTK.Fixed().AsEto();
 
     public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
-        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
+        var overlay = container.ToNative() as GTK.Overlay;
+        var panel = container.ToNative() as GTK.Fixed;
         var widget = control.ToNative();
-        if (inOverlay)
+        if (overlay != null)
         {
             overlay.AddOverlay(widget);
             widget.Halign = GTK.Align.Start;
             widget.Valign = GTK.Align.Start;
         }
-        else
+        if (panel != null)
         {
-            var panel = (GTK.Fixed) overlay.Children[0];
             panel.Add(widget);
         }
         widget.ShowAll();
     }
+    
+    public override Control? MaybeCreateOverlayContainer()
+    {
+        var overlay = new GTK.Overlay();
+        var panel = new GTK.Fixed();
+        overlay.Child = panel;
+        return overlay.AsEto();
+    }
+
+    public override Control? GetOverlayContainer(Control? container, bool inOverlay)
+    {
+        var overlay = (GTK.Overlay) container.ToNative();
+        return inOverlay ? overlay.AsEto() : overlay.Child.AsEto();
+    }
 
     public override void RemoveFromContainer(Control container, Control control)
     {
-        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
+        var overlay = container.ToNative() as GTK.Overlay;
+        var panel = container.ToNative() as GTK.Fixed;
         var widget = control.ToNative();
-        overlay.Remove(widget);
-        var panel = (GTK.Fixed) overlay.Children[0];
-        panel.Remove(widget);
+        overlay?.Remove(widget);
+        panel?.Remove(widget);
         widget.Unrealize();
     }
 
     public override void SetContainerSize(Window _window, Control container, Size size, int padding)
     {
-        var overlay = (GTK.Overlay) ((GTK.EventBox) container.ToNative()).Child;
+        var native = (GTK.Fixed) container.ToNative();
         if (!_window.Resizable)
         {
             // This ensures the window has the appropriate margins, otherwise with resizable=false it changes to fit
             // the contents
-            overlay.MarginBottom = padding - Y_OFF;
-            overlay.MarginEnd = padding - X_OFF;
+            native.MarginBottom = padding - Y_OFF;
+            native.MarginEnd = padding - X_OFF;
         }
     }
 

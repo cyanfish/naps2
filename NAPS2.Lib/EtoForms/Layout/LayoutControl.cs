@@ -84,7 +84,7 @@ public class LayoutControl : LayoutElement
             bounds.Height - Padding.Vertical * context.Scale);
         size = SizeF.Max(SizeF.Empty, size);
         EtoPlatform.Current.SetFrame(
-            context.Layout,
+            context.Container,
             Control,
             Point.Round(location),
             Size.Round(size),
@@ -194,7 +194,7 @@ public class LayoutControl : LayoutElement
         if (Control == null) return;
         if (!_isAdded)
         {
-            EtoPlatform.Current.AddToContainer(context.Layout, Control, context.InOverlay);
+            EtoPlatform.Current.AddToContainer(context.Container, Control, context.InOverlay);
             _isAdded = true;
             if (Visibility != null)
             {

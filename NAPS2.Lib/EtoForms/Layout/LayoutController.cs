@@ -129,8 +129,9 @@ public class LayoutController
 
     internal LayoutContext GetLayoutContext()
     {
-        return new LayoutContext(_layout)
+        return new LayoutContext
         {
+            Container = _layout,
             DefaultSpacing = DefaultSpacing,
             DefaultLabelSpacing = DefaultLabelSpacing,
             Invalidate = Invalidate,
