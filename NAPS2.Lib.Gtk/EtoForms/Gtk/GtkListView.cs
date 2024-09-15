@@ -63,7 +63,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
         _scrolledWindow.Add(eventBox);
         _scrolledWindow.StyleContext.AddClass("listview");
-        Control = _scrolledWindow.ToEto();
+        Control = _scrolledWindow.AsEto();
     }
 
     private void OnButtonPress(object o, ButtonPressEventArgs args)

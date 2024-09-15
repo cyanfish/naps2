@@ -47,4 +47,15 @@ public static class GtkEtoExtensions
         var image = button.Image.ToGdk().ToScaledImage(scaleFactor);
         button.SetImage(image);
     }
+
+    // Workaround for https://github.com/picoe/Eto/issues/2601 with ToEto()
+    public static Control AsEto(this Widget widget) => new(new NativeHandler(widget));
+
+    private class NativeHandler : Eto.GtkSharp.Forms.GtkControl<Widget, Control, Control.ICallback>
+    {
+        public NativeHandler(Widget widget)
+        {
+            Control = widget;
+        }
+    }
 }
