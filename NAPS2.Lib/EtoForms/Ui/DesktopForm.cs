@@ -119,8 +119,8 @@ public abstract class DesktopForm : EtoFormBase
     {
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(1210, 600);
-        EtoPlatform.Current.AttachDpiDependency(this, scale =>
-            MinimumSize = Size.Round(new SizeF(600, 300) * scale));
+        EtoPlatform.Current.AttachDpiDependency(this, _ =>
+            MinimumSize = Size.Round(new SizeF(600, 300) * EtoPlatform.Current.GetLayoutScaleFactor(this)));
 
         LayoutController.RootPadding = 0;
         LayoutController.Content = L.LeftPanel(

@@ -179,6 +179,10 @@ public class GtkEtoPlatform : EtoPlatform
         // the position so it doesn't affect that any more. However, there is a chance this will break in some edge
         // cases.
         widget.Margin = 0;
+        if (control is ImageView && control.Size.Width > 1)
+        {
+            return control.Size;
+        }
         if (widget.IsRealized && widget is not GTK.DrawingArea)
         {
             widget.GetSizeRequest(out var oldWidth, out var oldHeight);
