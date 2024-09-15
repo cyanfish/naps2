@@ -64,7 +64,8 @@ public class GtkDesktopForm : DesktopForm
             .listview .drop-after { border-radius: 0; border-right: 3px solid " + fgColor + @"; padding-right: 0; }
             .desktop-listview .listview-item image { border: 1px solid " + brdColor + @"; }
             .link { padding: 0; }
-            .accessible-image-button { border: none; background: none; }
+            .donate-button { border: 1px solid #fbad5f; background: #feda96; }
+            .donate-button:hover { background: #eeca86; }
             .zoom-button { background: " + bgColor + @"; border: 1px solid " + brdColor + @"; border-radius: 0; }
         ");
         StyleContext.AddProviderForScreen(Gdk.Screen.Default, cssProvider, 800);

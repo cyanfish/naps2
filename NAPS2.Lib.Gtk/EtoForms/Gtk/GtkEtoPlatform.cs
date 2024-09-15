@@ -287,7 +287,7 @@ public class GtkEtoPlatform : EtoPlatform
     public override void ConfigureDonateButton(Button button)
     {
         var native = (GTK.Button) button.ToNative();
-        native.StyleContext.AddClass("accessible-image-button");
+        native.StyleContext.AddClass("donate-button");
     }
 
     public override void ConfigureZoomButton(Button button, string icon)
