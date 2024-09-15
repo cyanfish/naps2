@@ -11,7 +11,7 @@ public class SliderWithTextBox
     private readonly Constraints _constraints;
     private readonly Slider _slider = new();
     private readonly ImageView _imageView = new();
-    private readonly LayoutVisibility? _imageVis = new(false);
+    private readonly LayoutVisibility _imageVis = new(false);
     private readonly TextBox _textBox;
 
     private int _valueCache;
