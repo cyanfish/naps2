@@ -399,9 +399,10 @@ public abstract class DesktopForm : EtoFormBase
     {
         var menuItem = new SubMenuItem
         {
-            Text = menuCommand.MenuText,
-            Image = menuCommand.Image
+            Text = menuCommand.MenuText
         };
+        EtoPlatform.Current.AttachDpiDependency(this,
+            scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(scale));
         menuProvider.Handle(subItems =>
         {
             menuItem.Items.Clear();
@@ -415,6 +416,8 @@ public abstract class DesktopForm : EtoFormBase
                         {
                             actionCommand.TextChanged += (_, _) => buttonMenuItem.Text = actionCommand.MenuText;
                         }
+                        EtoPlatform.Current.AttachDpiDependency(this,
+                            scale => buttonMenuItem.Image = ((ActionCommand) command).GetIconImage(scale));
                         menuItem.Items.Add(buttonMenuItem);
                         break;
                     case MenuProvider.SeparatorItem:
@@ -522,7 +525,7 @@ public abstract class DesktopForm : EtoFormBase
                 {
                     // TODO: Does this need to change on non-WinForms?
                     MenuText = profile.DisplayName.Replace("&", "&&"),
-                    Image = profile == defaultProfile ? _iconProvider.GetIcon("accept_small") : null
+                    IconName = profile == defaultProfile ? "accept_small" : null
                 })
             .ToImmutableList<Command>();
         for (int i = 0; i < commandList.Count; i++)
