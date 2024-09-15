@@ -224,6 +224,8 @@ public static class C
     public static MenuItem ButtonMenuItem(Window window, ActionCommand command)
     {
         var menuItem = new ButtonMenuItem(command);
+        // TODO: Can we fix this memory leak?
+        command.TextChanged += (_, _) => menuItem.Text = command.MenuText;
         EtoPlatform.Current.AttachDpiDependency(window, scale =>
         {
             EtoPlatform.Current.SetImageSize(menuItem, (int) (16 * scale));

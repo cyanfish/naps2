@@ -151,27 +151,27 @@ public abstract class DesktopForm : EtoFormBase
             // TODO: Is this memory leaking (because of event handlers) when commands are converted to menuitems?
             _contextMenu.Items.AddRange(
             [
-                Commands.ViewImage,
+                C.ButtonMenuItem(this, Commands.ViewImage),
                 new SeparatorMenuItem(),
-                Commands.SelectAll,
-                Commands.Copy,
-                Commands.Paste,
+                C.ButtonMenuItem(this, Commands.SelectAll),
+                C.ButtonMenuItem(this, Commands.Copy),
+                C.ButtonMenuItem(this, Commands.Paste),
                 new SeparatorMenuItem(),
-                Commands.Undo,
-                Commands.Redo,
+                C.ButtonMenuItem(this, Commands.Undo),
+                C.ButtonMenuItem(this, Commands.Redo),
                 new SeparatorMenuItem(),
-                Commands.Delete
+                C.ButtonMenuItem(this, Commands.Delete)
             ]);
         }
         else
         {
             _contextMenu.Items.AddRange(
             [
-                Commands.SelectAll,
-                Commands.Paste,
+                C.ButtonMenuItem(this, Commands.SelectAll),
+                C.ButtonMenuItem(this, Commands.Paste),
                 new SeparatorMenuItem(),
-                Commands.Undo,
-                Commands.Redo
+                C.ButtonMenuItem(this, Commands.Undo),
+                C.ButtonMenuItem(this, Commands.Redo)
             ]);
         }
     }
@@ -411,14 +411,7 @@ public abstract class DesktopForm : EtoFormBase
                 switch (subItem)
                 {
                     case MenuProvider.CommandItem { Command: var command }:
-                        var buttonMenuItem = new ButtonMenuItem(command);
-                        if (command is ActionCommand actionCommand)
-                        {
-                            actionCommand.TextChanged += (_, _) => buttonMenuItem.Text = actionCommand.MenuText;
-                        }
-                        EtoPlatform.Current.AttachDpiDependency(this,
-                            scale => buttonMenuItem.Image = ((ActionCommand) command).GetIconImage(scale));
-                        menuItem.Items.Add(buttonMenuItem);
+                        menuItem.Items.Add(C.ButtonMenuItem(this, (ActionCommand) command));
                         break;
                     case MenuProvider.SeparatorItem:
                         menuItem.Items.Add(new SeparatorMenuItem());
