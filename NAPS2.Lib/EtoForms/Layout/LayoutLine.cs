@@ -33,6 +33,15 @@ public abstract class LayoutLine : LayoutContainer
 
     protected abstract SizeF GetSize(float length, float breadth);
 
+    public override void Materialize(LayoutContext context)
+    {
+        var childContext = GetChildContext(context, RectangleF.Empty, false);
+        foreach (var child in Children)
+        {
+            child.Materialize(childContext);
+        }
+    }
+
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
         if (DEBUG_LAYOUT)
@@ -45,7 +54,7 @@ public abstract class LayoutLine : LayoutContainer
                 bounds.X + padding.Left * context.Scale, bounds.Y + padding.Top * context.Scale,
                 bounds.Width - padding.Horizontal * context.Scale, bounds.Height - padding.Vertical * context.Scale);
         }
-        var childContext = GetChildContext(context, bounds);
+        var childContext = GetChildContext(context, bounds, true);
         GetInitialCellLengthsAndScaling(context, childContext, bounds, out var cellLengths, out var cellScaling);
 
         UpdateCellLengthsForAvailableSpace(cellLengths, cellScaling, bounds, context);
@@ -102,7 +111,7 @@ public abstract class LayoutLine : LayoutContainer
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
-        var childContext = GetChildContext(context, parentBounds);
+        var childContext = GetChildContext(context, parentBounds, true);
         if (childContext.ParentVisibility?.IsVisible == false)
         {
             return SizeF.Empty;
@@ -128,15 +137,22 @@ public abstract class LayoutLine : LayoutContainer
         return size;
     }
 
-    private LayoutContext GetChildContext(LayoutContext context, RectangleF bounds)
+    private LayoutContext GetChildContext(LayoutContext context, RectangleF bounds, bool includeCellInfo)
     {
-        return context with
+        var childContext = context with
         {
-            CellLengths = GetChildCellLengths(context, bounds),
-            CellScaling = GetChildCellScaling(),
             Depth = context.Depth + 1,
             ParentVisibility = LayoutVisibility.Combine(context.ParentVisibility, Visibility)
         };
+        if (includeCellInfo)
+        {
+            childContext = childContext with
+            {
+                CellLengths = GetChildCellLengths(context, bounds),
+                CellScaling = GetChildCellScaling()
+            };
+        }
+        return childContext;
     }
 
     private void GetInitialCellLengthsAndScaling(LayoutContext context, LayoutContext childContext, RectangleF bounds,
