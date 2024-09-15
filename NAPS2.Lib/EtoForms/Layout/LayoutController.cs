@@ -54,6 +54,7 @@ public class LayoutController
         if (_content == null) throw new InvalidOperationException();
         var bounds = new RectangleF(0, 0, MAX_SIZE, MAX_SIZE);
         var context = GetLayoutContext() with { IsNaturalSizeQuery = natural };
+        _content.Materialize(context);
         var contentSize = _content.GetPreferredSize(context, bounds);
         var padding = new SizeF(RootPadding * 2, RootPadding * 2);
         var naturalSize = Size.Ceiling(contentSize + padding);
@@ -93,6 +94,7 @@ public class LayoutController
             Debug.WriteLine("\n(((Starting layout)))");
         }
         _window.SuspendLayout();
+        _content.Materialize(context);
         _content.DoLayout(context, bounds);
         RemoveControls();
         _window.ResumeLayout();
@@ -140,9 +142,11 @@ public class LayoutController
 
     public Size GetSizeFor(LayoutElement element)
     {
+        var context = GetLayoutContext();
+        element.Materialize(context);
         return Size.Truncate(
             element.GetPreferredSize(
-                GetLayoutContext(),
+                context,
                 new RectangleF(0, 0, MAX_SIZE, MAX_SIZE)));
     }
 }

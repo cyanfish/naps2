@@ -26,6 +26,8 @@ public class LayoutLeftPanel : LayoutElement
         _overlay = L.Overlay(_splitter, L.Row(left, right).Spacing(3));
     }
 
+    public override void Materialize(LayoutContext context) => _overlay.Materialize(context);
+
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
         var w = MeasureWidth(context, bounds, _left);

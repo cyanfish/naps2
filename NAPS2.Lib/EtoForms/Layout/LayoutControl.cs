@@ -71,21 +71,24 @@ public class LayoutControl : LayoutElement
                 $"{new string(' ', context.Depth)}{text}{Control?.GetType().Name ?? "ZeroSpace"} layout with bounds {bounds}");
         }
         bounds.Size = UpdateFixedDimensions(context, bounds.Size);
-        if (Control != null)
-        {
-            var location = new PointF(bounds.X + Padding.Left * context.Scale, bounds.Y + Padding.Top * context.Scale);
-            var size = new SizeF(
-                bounds.Width - Padding.Horizontal * context.Scale,
-                bounds.Height - Padding.Vertical * context.Scale);
-            size = SizeF.Max(SizeF.Empty, size);
-            EnsureIsAdded(context);
-            EtoPlatform.Current.SetFrame(
-                context.Layout,
-                Control,
-                Point.Round(location),
-                Size.Round(size),
-                context.InOverlay);
-        }
+        UpdateVisibility(context);
+        UpdateFrame(context, bounds);
+    }
+
+    private void UpdateFrame(LayoutContext context, RectangleF bounds)
+    {
+        if (Control == null) return;
+        var location = new PointF(bounds.X + Padding.Left * context.Scale, bounds.Y + Padding.Top * context.Scale);
+        var size = new SizeF(
+            bounds.Width - Padding.Horizontal * context.Scale,
+            bounds.Height - Padding.Vertical * context.Scale);
+        size = SizeF.Max(SizeF.Empty, size);
+        EtoPlatform.Current.SetFrame(
+            context.Layout,
+            Control,
+            Point.Round(location),
+            Size.Round(size),
+            context.InOverlay);
     }
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
@@ -93,12 +96,11 @@ public class LayoutControl : LayoutElement
         var size = SizeF.Empty;
         if (!IsVisible)
         {
-            EnsureIsAdded(context);
             return size;
         }
         if (Control != null)
         {
-            EnsureIsAdded(context);
+            UpdateVisibility(context);
             if (WrapDefaultWidth is { } wrapDefaultWidth)
             {
                 size = GetWrappedSize(context, parentBounds, wrapDefaultWidth);
@@ -187,13 +189,9 @@ public class LayoutControl : LayoutElement
         return size;
     }
 
-    private void EnsureIsAdded(LayoutContext context)
+    public override void Materialize(LayoutContext context)
     {
         if (Control == null) return;
-        if (Visibility != null || context.ParentVisibility != null)
-        {
-            Control.Visible = IsVisible && (context.ParentVisibility?.IsVisible ?? true);
-        }
         if (!_isAdded)
         {
             EtoPlatform.Current.AddToContainer(context.Layout, Control, context.InOverlay);
@@ -214,6 +212,15 @@ public class LayoutControl : LayoutElement
             TriggerLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
             TriggerLoadCompleteMethod.Invoke(Control, new object[] { EventArgs.Empty });
             _isWindowSet = true;
+        }
+    }
+
+    private void UpdateVisibility(LayoutContext context)
+    {
+        if (Control == null) return;
+        if (Visibility != null || context.ParentVisibility != null)
+        {
+            Control.Visible = IsVisible && (context.ParentVisibility?.IsVisible ?? true);
         }
     }
 }

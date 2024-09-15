@@ -19,6 +19,8 @@ public class BufferLayoutElement : LayoutElement
     public int Right { get; }
     public int Bottom { get; }
 
+    public override void Materialize(LayoutContext context) => Element.Materialize(context);
+
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
         Element.DoLayout(context, new RectangleF(
