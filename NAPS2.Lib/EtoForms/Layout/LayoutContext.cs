@@ -28,6 +28,8 @@ public record LayoutContext(Control Layout)
 
     public required Action Invalidate { get; init; }
 
+    public bool UseCache { get; init; } = true;
+    
     public Dictionary<LayoutElement, Eto.Drawing.SizeF> PreferredSizeCache { get; } = new();
 
     public float Scale { get; init; }

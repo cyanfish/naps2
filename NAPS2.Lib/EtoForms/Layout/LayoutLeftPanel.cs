@@ -58,12 +58,10 @@ public class LayoutLeftPanel : LayoutElement
 
     private int MeasureWidth(LayoutContext context, RectangleF bounds, LayoutElement element)
     {
-        // TODO: Maybe use context parameters somehow (e.g. don't populate cache, ignore size constraints)
         var w = element.Width;
         element.Width = null;
-        int result = (int) element.GetPreferredSize(context, bounds).Width;
+        int result = (int) element.GetPreferredSize(context with { UseCache = false }, bounds).Width;
         element.Width = w;
-        context.PreferredSizeCache.Remove(element);
         return result;
     }
 

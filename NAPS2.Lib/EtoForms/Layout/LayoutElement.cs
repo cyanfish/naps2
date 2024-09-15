@@ -48,12 +48,15 @@ public abstract class LayoutElement
     /// <returns></returns>
     public SizeF GetPreferredSize(LayoutContext context, RectangleF parentBounds)
     {
-        if (context.PreferredSizeCache.TryGetValue(this, out var size))
+        if (context.UseCache && context.PreferredSizeCache.TryGetValue(this, out var size))
         {
             return size;
         }
         size = GetPreferredSizeCore(context, parentBounds);
-        context.PreferredSizeCache[this] = size;
+        if (context.UseCache)
+        {
+            context.PreferredSizeCache[this] = size;
+        }
         return size;
     }
 
