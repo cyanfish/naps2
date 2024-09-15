@@ -132,11 +132,10 @@ public class DeviceSelectorWidget
 
     private void UpdateDeviceIconImage()
     {
-        if (_deviceIcon.ParentWindow == null) return;
-        float scale = EtoPlatform.Current.GetScaleFactor(_deviceIcon.ParentWindow);
+        float scale = EtoPlatform.Current.GetScaleFactor((Window) _parentWindow);
         _deviceIcon.Image = _deviceIconImage ?? _iconProvider.GetIcon(_deviceIconName, scale);
         var size = _deviceIconImage != null ? new SizeF(48, 48) : new SizeF(32, 32);
-        _deviceIcon.Size = Size.Round(size * EtoPlatform.Current.GetLayoutScaleFactor(_deviceIcon.ParentWindow));
+        _deviceIcon.Size = Size.Round(size * EtoPlatform.Current.GetLayoutScaleFactor((Window) _parentWindow));
     }
 
     public static implicit operator LayoutElement(DeviceSelectorWidget control)
