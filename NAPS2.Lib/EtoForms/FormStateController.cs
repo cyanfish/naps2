@@ -47,10 +47,10 @@ public class FormStateController
         if (AutoLayoutSize)
         {
             var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
-            _minimumClientSize = layoutController.GetLayoutSize(false);
+            _minimumClientSize = layoutController.GetLayoutSize();
             var oldDefaultClientSize = DefaultClientSize;
             var oldMaximumClientSize = _maximumClientSize;
-            DefaultClientSize = (SizeF) layoutController.GetLayoutSize(true) / scale + DefaultExtraLayoutSize;
+            DefaultClientSize = (SizeF) _minimumClientSize / scale + DefaultExtraLayoutSize;
             _maximumClientSize = FixedHeightLayout || !Resizable ? new Size(0, _minimumClientSize.Height) : Size.Empty;
 
             if (Loaded)

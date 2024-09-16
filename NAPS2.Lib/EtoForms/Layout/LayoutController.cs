@@ -49,11 +49,11 @@ public class LayoutController
         window.SizeChanged += (_, _) => DoLayout();
     }
 
-    public Size GetLayoutSize(bool natural)
+    public Size GetLayoutSize()
     {
         if (_content == null) throw new InvalidOperationException();
         var bounds = new RectangleF(0, 0, MAX_SIZE, MAX_SIZE);
-        var context = GetLayoutContext() with { IsNaturalSizeQuery = natural };
+        var context = GetLayoutContext();
         _content.Materialize(context);
         var contentSize = _content.GetPreferredSize(context, bounds);
         var padding = new SizeF(RootPadding * 2, RootPadding * 2);

@@ -16,8 +16,6 @@ public record LayoutContext
 
     public bool IsLayout { get; init; }
 
-    public bool IsNaturalSizeQuery { get; init; }
-
     public bool IsCellLengthQuery { get; set; }
 
     public int Depth { get; init; }
