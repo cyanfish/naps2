@@ -135,7 +135,9 @@ public abstract class DesktopForm : EtoFormBase
                         _notificationArea.Content)
                 ).Padding(8)
             ).Scale()
-        );
+        ).SizeConfig(
+            () => Config.Get(c => c.SidebarWidth),
+            width => Config.User.Set(c => c.SidebarWidth, width));
     }
 
     private void OpeningContextMenu(object? sender, EventArgs e)

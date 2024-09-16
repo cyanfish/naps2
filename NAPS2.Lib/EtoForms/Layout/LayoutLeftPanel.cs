@@ -10,6 +10,8 @@ public class LayoutLeftPanel : LayoutElement
     private readonly LayoutOverlay _overlay;
     private readonly Splitter _splitter;
 
+    private Func<int> _widthGetter = () => 0;
+    private Action<int> _widthSetter = _ => { };
     private bool _isInitialized;
 
     public LayoutLeftPanel(LayoutElement left, LayoutElement right)
@@ -37,12 +39,13 @@ public class LayoutLeftPanel : LayoutElement
 
         if (!_isInitialized)
         {
-            _left.Width = _splitter.Position = _splitter.Panel1MinimumSize;
+            _left.Width = _splitter.Position = Math.Max(_widthGetter(), _splitter.Panel1MinimumSize);
             _splitter.PositionChanged += (_, _) =>
             {
                 if (_left.Width != _splitter.Position)
                 {
                     _left.Width = _splitter.Position;
+                    _widthSetter(_splitter.Position);
                     context.Invalidate();
                 }
             };
@@ -73,5 +76,12 @@ public class LayoutLeftPanel : LayoutElement
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
         return _overlay.GetPreferredSize(context, parentBounds);
+    }
+
+    public LayoutLeftPanel SizeConfig(Func<int> getter, Action<int> setter)
+    {
+        _widthGetter = getter;
+        _widthSetter = setter;
+        return this;
     }
 }

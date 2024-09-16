@@ -58,6 +58,7 @@ public static class InternalDefaults
             DesktopToolStripDock = DockStyle.Top,
             EventLogging = EventType.None,
             ShowPageNumbers = false,
+            SidebarVisible = true,
             PdfSettings = new PdfSettings
             {
                 Metadata = new PdfMetadata

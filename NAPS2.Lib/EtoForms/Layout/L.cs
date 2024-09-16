@@ -56,7 +56,7 @@ public static class L
         return new BufferLayoutElement(element, left, top, right, bottom);
     }
 
-    public static LayoutElement LeftPanel(LayoutElement left, LayoutElement right)
+    public static LayoutLeftPanel LeftPanel(LayoutElement left, LayoutElement right)
     {
         return new LayoutLeftPanel(left, right);
     }

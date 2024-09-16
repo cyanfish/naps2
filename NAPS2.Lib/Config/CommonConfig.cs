@@ -203,4 +203,10 @@ public class CommonConfig
 
     [Common]
     public bool DisableScannerSharing { get; set; }
+
+    [User]
+    public bool SidebarVisible { get; set; }
+
+    [User]
+    public int SidebarWidth { get; set; }
 }

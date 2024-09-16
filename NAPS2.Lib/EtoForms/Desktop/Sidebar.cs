@@ -88,6 +88,7 @@ public class Sidebar
 
     public LayoutElement CreateView(IFormBase parentWindow)
     {
+        _sidebarVis.IsVisible = _config.Get(c => c.SidebarVisible);
         _profile.SelectedItem = _profileManager.DefaultProfile;
 
         _deviceSelectorWidget = new DeviceSelectorWidget(_scanPerformer, _deviceCapsCache, _iconProvider, parentWindow)
@@ -217,5 +218,6 @@ public class Sidebar
     public void ToggleVisibility()
     {
         _sidebarVis.IsVisible = !_sidebarVis.IsVisible;
+        _config.User.Set(c => c.SidebarVisible, _sidebarVis.IsVisible);
     }
 }
