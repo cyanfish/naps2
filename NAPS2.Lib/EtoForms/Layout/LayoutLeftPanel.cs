@@ -60,7 +60,12 @@ public class LayoutLeftPanel : LayoutElement
     {
         var w = element.Width;
         element.Width = null;
-        int result = (int) element.GetPreferredSize(context with { UseCache = false }, bounds).Width;
+        var measureContext = context with
+        {
+            IsLayout = false,
+            UseCache = false
+        };
+        int result = (int) element.GetPreferredSize(measureContext, bounds).Width;
         element.Width = w;
         return result;
     }

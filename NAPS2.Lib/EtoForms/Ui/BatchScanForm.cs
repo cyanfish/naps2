@@ -123,7 +123,7 @@ public class BatchScanForm : EtoDialogBase
                 L.Column(
                     C.Label(UiStrings.ProfileLabel),
                     L.Row(
-                        _profile.AsControl().Scale(),
+                        _profile.AsControl().Scale().NaturalWidth(100),
                         C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(30),
                         C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(30)
                     ),

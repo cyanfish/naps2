@@ -114,7 +114,7 @@ public class Sidebar
                 C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(30),
                 C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(30)
             ),
-            _profile.AsControl(),
+            _profile.AsControl().NaturalWidth(100),
             C.Spacer(),
             _deviceSelectorWidget,
             C.Spacer(),
