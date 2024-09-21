@@ -44,7 +44,18 @@ public class Sidebar
 
         EditProfileCommand = new ActionCommand(EditProfile) { IconName = "pencil_small" };
         NewProfileCommand = new ActionCommand(NewProfile) { IconName = "add_small" };
+        ScanCommand = new ActionCommand(DoScan)
+        {
+            Text = UiStrings.Scan,
+            IconName = "control_play_blue_small"
+        };
     }
+
+    private ActionCommand NewProfileCommand { get; }
+
+    private ActionCommand EditProfileCommand { get; }
+
+    private ActionCommand ScanCommand { get; }
 
     private void UpdateProfilesDropdown() => _profile.Items = _profileManager.Profiles;
 
@@ -82,9 +93,21 @@ public class Sidebar
         }
     }
 
-    private ActionCommand NewProfileCommand { get; }
+    private void DoScan()
+    {
+        var profile = _profile.SelectedItem!;
+        var pageSize = _pageSize!.SelectedItem!;
 
-    private ActionCommand EditProfileCommand { get; }
+        profile.PaperSource = _paperSource.SelectedItem;
+        profile.PageSize = pageSize.Type;
+        profile.CustomPageSizeName = pageSize.CustomName;
+        profile.CustomPageSize = pageSize.CustomDimens;
+        profile.Resolution = new ScanResolution { Dpi = _resolution.SelectedItem };
+        profile.BitDepth = _bitDepth.SelectedItem;
+        _profileManager.Save();
+
+        _desktopScanController.ScanWithProfile(profile);
+    }
 
     public LayoutElement CreateView(IFormBase parentWindow)
     {
@@ -131,29 +154,9 @@ public class Sidebar
             C.Label(UiStrings.BitDepthLabel),
             _bitDepth,
             C.Spacer(),
-            C.Button(new ActionCommand(DoScan)
-            {
-                MenuText = UiStrings.Scan,
-                IconName = "control_play_blue_small"
-            }, ButtonImagePosition.Left).AlignCenter().Height(30),
+            C.Button(ScanCommand, ButtonImagePosition.Left).AlignCenter().Height(30),
             C.Filler()
         ).Padding(left: parentWindow.LayoutController.DefaultSpacing + 10, right: 10).Visible(_sidebarVis);
-    }
-
-    private void DoScan()
-    {
-        var profile = _profile.SelectedItem!;
-        var pageSize = _pageSize!.SelectedItem!;
-        
-        profile.PaperSource = _paperSource.SelectedItem;
-        profile.PageSize = pageSize.Type;
-        profile.CustomPageSizeName = pageSize.CustomName;
-        profile.CustomPageSize = pageSize.CustomDimens;
-        profile.Resolution = new ScanResolution { Dpi = _resolution.SelectedItem };
-        profile.BitDepth = _bitDepth.SelectedItem;
-        _profileManager.Save();
-        
-        _desktopScanController.ScanWithProfile(profile);
     }
 
     private void UpdateUiForProfile()
