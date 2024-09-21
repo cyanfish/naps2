@@ -487,14 +487,16 @@ public class PdfExporter
                 var word = line.Children[i];
                 if (string.IsNullOrEmpty(word.Text)) continue;
 
-                var rightBound = i + 1 < line.Children.Count ? line.Children[i + 1].Bounds.x : -1;
+                bool hasNextWord = i + 1 < line.Children.Count;
+                var rightBound = hasNextWord ? line.Children[i + 1].Bounds.x : ocrResult.PageBounds.w;
                 var adjustedRightBound = rightBound * hAdjust;
                 var adjustedX = word.Bounds.x * hAdjust;
                 var adjustedY = word.Baseline * vAdjust;
 
                 // We make sure there's enough distance between this word and the next to fit a space (" "), so that
                 // when you Ctrl+A and Ctrl+C in a PDF file, the words don't blend together
-                var wordFontSize = ClampFontSizeByRightBound(word, lineFontSize, adjustedX, adjustedRightBound, gfx);
+                var wordFontSize = ClampFontSizeByRightBound(word, lineFontSize, adjustedX, adjustedRightBound,
+                    hasNextWord, gfx);
 
                 // Special case to avoid accidentally recognizing big lines as dashes/underscores
                 if (wordFontSize > 100 && (word.Text == "-" || word.Text == "_")) continue;
@@ -582,7 +584,7 @@ public class PdfExporter
     }
 
     private static int ClampFontSizeByRightBound(OcrResultElement element, int initialFontSize, double x,
-        double rightBound,
+        double rightBound, bool includeSpace,
         XGraphics gfx)
     {
         var fontSize = initialFontSize;
@@ -599,7 +601,9 @@ public class PdfExporter
         var fontFamily = PdfFontPicker.GetBestFont(element.LanguageCode);
         while (fontSize > 2)
         {
-            var spaceWidth = gfx.MeasureString(" ", new XFont(fontFamily, fontSize, XFontStyle.Regular)).Width;
+            var spaceWidth = includeSpace
+                ? gfx.MeasureString(" ", new XFont(fontFamily, fontSize, XFontStyle.Regular)).Width
+                : 0;
             var measuredBounds =
                 gfx.MeasureString(element.Text, new XFont(fontFamily, fontSize, XFontStyle.Regular));
             if (measuredBounds.Width + x <= rightBound - spaceWidth)
