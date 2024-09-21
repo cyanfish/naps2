@@ -11,6 +11,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public class ChooseDeviceForm : EtoDialogBase
 {
+    private const string FLATPAK_MISSING_SCANNER_URL = "https://www.naps2.com/doc/flatpak-missing-scanner";
+
     private readonly ScanDevice AlwaysAskMarker = new(Driver.Default, "*always*ask*", UiStrings.AlwaysAsk);
     private readonly ScanDevice ManualIpMarker = new(Driver.Default, "*manual*ip*", UiStrings.ManualIp);
 
@@ -31,6 +33,11 @@ public class ChooseDeviceForm : EtoDialogBase
     private readonly Spinner _spinner = new() { Enabled = true };
     private readonly ImageView _statusIcon = new();
     private readonly Label _statusLabel = new() { Text = UiStrings.SearchingForDevices };
+
+    private readonly LinkButton _flatpakMissingDevice =
+        C.UrlLink(FLATPAK_MISSING_SCANNER_URL, UiStrings.CantFindScannerFlatpak);
+
+    private readonly LayoutVisibility _saneDriverVis = new(false);
     private readonly LayoutVisibility _spinnerVis = new(true);
 
     private CancellationTokenSource? _getDevicesCts;
@@ -164,6 +171,11 @@ public class ChooseDeviceForm : EtoDialogBase
             ),
             _deviceIconList.Control.NaturalSize(150, 100).Scale().Visible(!_textListVis),
             _deviceTextList.NaturalSize(150, 100).Scale().Visible(_textListVis),
+#if NET6_0_OR_GREATER
+            OperatingSystem.IsLinux() && File.Exists("/.flatpak-info")
+                ? _flatpakMissingDevice.Visible(_saneDriverVis)
+                : C.None(),
+#endif
             L.Row(
                 _spinner.Visible(_spinnerVis).AlignCenter(),
                 _statusIcon.Visible(!_spinnerVis).AlignCenter(),
@@ -208,6 +220,7 @@ public class ChooseDeviceForm : EtoDialogBase
             return;
         }
 
+        _saneDriverVis.IsVisible = _saneDriver.Checked;
         _deviceIconList.ImageSize = DeviceDriver == Driver.Escl ? new Size(48, 48) : new Size(48, 32);
 
         _getDevicesCts?.Cancel();

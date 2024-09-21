@@ -1688,5 +1688,11 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("ToggleSidebar", resourceCulture);
             }
         }
+        
+        internal static string CantFindScannerFlatpak {
+            get {
+                return ResourceManager.GetString("CantFindScannerFlatpak", resourceCulture);
+            }
+        }
     }
 }
