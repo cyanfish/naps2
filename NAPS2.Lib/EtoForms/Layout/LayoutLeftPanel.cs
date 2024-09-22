@@ -25,7 +25,7 @@ public class LayoutLeftPanel : LayoutElement
             Panel2 = new Panel(),
             FixedPanel = SplitterFixedPanel.Panel1
         };
-        _overlay = L.Overlay(_splitter, L.Row(left, right).Spacing(3));
+        _overlay = L.Overlay(_splitter, L.Row(left, right).Spacing(EtoPlatform.Current.IsWinForms ? 3 : 2));
     }
 
     public override void Materialize(LayoutContext context) => _overlay.Materialize(context);
