@@ -42,9 +42,10 @@ public class MacIconProvider : IIconProvider
         { "large_tiles", "square.grid.2x2" },
         { "exclamation", "exclamationmark.triangle" },
         { "application_side_list", "sidebar.left" },
+        { "ask", "questionmark" },
         // TODO: Consider these
-        // { "ask", "questionmark" },
         // { "network_ip", "wifi.router" },
+        // { "device", "scanner" },
     };
 
     private readonly DefaultIconProvider _defaultIconProvider;
@@ -76,6 +77,12 @@ public class MacIconProvider : IIconProvider
                     if (oversized)
                     {
                         symbol = symbol.GetImage(NSImageSymbolConfiguration.Create(32, 0.1));
+                    }
+                    if (name == "ask")
+                    {
+                        // Needs to be rendered at fixed dimensions to display properly in the Choose Device listview
+                        symbol = symbol.GetImage(NSImageSymbolConfiguration.Create(60, 0.1));
+                        return (Bitmap) new Bitmap(new BitmapHandler(symbol)).PadTo(new Size(64, 64));
                     }
                     return new Bitmap(new BitmapHandler(symbol));
                 }
