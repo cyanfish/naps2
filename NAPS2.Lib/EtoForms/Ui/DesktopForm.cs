@@ -126,7 +126,8 @@ public abstract class DesktopForm : EtoFormBase
         LayoutController.Content = L.LeftPanel(
             _sidebar.CreateView(this),
             L.Overlay(
-                _listView.Control,
+                // For WinForms, we add 1px of top padding to give us room to draw a border above the listview
+                _listView.Control.Padding(top: EtoPlatform.Current.IsWinForms ? 1 : 0),
                 L.Column(
                     C.Filler(),
                     L.Row(

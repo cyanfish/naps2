@@ -222,6 +222,34 @@ public class WinFormsDesktopForm : DesktopForm
         var etoContainer = _container.ToEto();
         Content = etoContainer;
         _container.ContentPanel.Controls.Add(wfContent);
+
+        DrawContentBorders();
+    }
+
+    private void DrawContentBorders()
+    {
+        var pen = new Pen(_colorScheme.SeparatorColor.ToSD());
+
+        var splitter = ((LayoutLeftPanel) LayoutController.Content!).Splitter;
+        var panel1 = (WF.Panel) splitter.Panel1.ToNative();
+        var panel2 = (WF.Panel) splitter.Panel2.ToNative();
+        var split = (WF.SplitContainer) splitter.ToNative();
+        // Draw horizontal lines at the top of the content (below the toolbar) and a vertical line at the sidebar split point
+        // TODO: Improve this for when the toolbars are in non-standard positions (i.e. not the top)
+        // TODO: Consider if it's worth widening the border for high-dpi
+        panel1.Paint += (_, args) =>
+        {
+            args.Graphics.DrawLine(pen, panel1.Left, panel1.Top, panel1.Right, panel1.Top);
+        };
+        split.Paint += (_, args) =>
+        {
+            args.Graphics.DrawLine(pen, split.Left, split.Top, split.Right, split.Top);
+            args.Graphics.DrawLine(pen, splitter.Position + 2, split.Top, splitter.Position + 2, split.Bottom);
+        };
+        panel2.Paint += (_, args) =>
+        {
+            args.Graphics.DrawLine(pen, panel2.Left, panel2.Top, panel2.Right, panel2.Top);
+        };
     }
 
     protected override void SetThumbnailSpacing(int thumbnailSize, float scale)

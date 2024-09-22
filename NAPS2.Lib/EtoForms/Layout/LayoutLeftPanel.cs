@@ -8,7 +8,6 @@ public class LayoutLeftPanel : LayoutElement
     private readonly LayoutElement _left;
     private readonly LayoutElement _right;
     private readonly LayoutOverlay _overlay;
-    private readonly Splitter _splitter;
 
     private Func<int> _widthGetter = () => 0;
     private Action<int> _widthSetter = _ => { };
@@ -18,44 +17,45 @@ public class LayoutLeftPanel : LayoutElement
     {
         _left = left;
         _right = right;
-        _splitter = new Splitter
+        Splitter = new Splitter
         {
             Orientation = Orientation.Horizontal,
             Panel1 = new Panel(),
             Panel2 = new Panel(),
             FixedPanel = SplitterFixedPanel.Panel1
         };
-        _overlay = L.Overlay(_splitter, L.Row(left, right).Spacing(EtoPlatform.Current.IsWinForms ? 3 : 2));
+        _overlay = L.Overlay(Splitter, L.Row(left, right).Spacing(EtoPlatform.Current.IsWinForms ? 3 : 2));
     }
+
+    public Splitter Splitter { get; }
 
     public override void Materialize(LayoutContext context) => _overlay.Materialize(context);
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
         var w = MeasureWidth(context, bounds, _left);
-        if (_splitter.Position < w)
+        if (Splitter.Position < w)
         {
-            _left.Width = _splitter.Position = w;
+            _left.Width = Splitter.Position = w;
         }
-        _splitter.Panel1MinimumSize = w;
-        _splitter.Panel2MinimumSize = (int) (100 * context.Scale);
+        Splitter.Panel1MinimumSize = w;
+        Splitter.Panel2MinimumSize = (int) (100 * context.Scale);
 
         if (!_isInitialized)
         {
-            _left.Width = _splitter.Position = Math.Max(_widthGetter(), _splitter.Panel1MinimumSize);
-            _splitter.PositionChanged += (_, _) =>
+            _left.Width = Splitter.Position = Math.Max(_widthGetter(), Splitter.Panel1MinimumSize);
+            Splitter.PositionChanged += (_, _) =>
             {
-                if (_left.Width != _splitter.Position)
+                if (_left.Width != Splitter.Position)
                 {
-                    _left.Width = _splitter.Position;
-                    _widthSetter(_splitter.Position);
+                    _left.Width = Splitter.Position;
+                    _widthSetter(Splitter.Position);
                     context.Invalidate();
                 }
             };
-            if (_left.Visibility is { } vis)
-            {
-                vis.IsVisibleChanged += (_, _) => _splitter.Visible = vis.IsVisible;
-            }
+            // TODO: We could hide the splitter based on the side panel's visibility, but currently on WinForms it's
+            // responsible for drawing content borders so we don't want to do that. The splitter is hidden behind the
+            // listview in any case.
             _isInitialized = true;
         }
 
