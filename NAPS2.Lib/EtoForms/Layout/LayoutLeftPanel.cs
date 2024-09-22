@@ -33,7 +33,10 @@ public class LayoutLeftPanel : LayoutElement
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
         var w = MeasureWidth(context, bounds, _left);
-        if (_splitter.Position < w) _splitter.Position = w;
+        if (_splitter.Position < w)
+        {
+            _left.Width = _splitter.Position = w;
+        }
         _splitter.Panel1MinimumSize = w;
         _splitter.Panel2MinimumSize = (int) (100 * context.Scale);
 
