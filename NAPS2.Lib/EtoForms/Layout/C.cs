@@ -77,15 +77,19 @@ public static class C
     /// <param name="text"></param>
     /// <param name="command"></param>
     /// <returns></returns>
-    public static Button Button(string text, ICommand command) =>
-        new Button
+    public static Button Button(string text, ActionCommand command)
+    {
+        var button = new Button
         {
             Text = text,
             Command = command
         };
-
-    public static Button Button(ActionCommand command) =>
-        Button(command.MenuText, command);
+        if (string.IsNullOrEmpty(text) && !string.IsNullOrEmpty(command.ToolTip))
+        {
+            button.ToolTip = command.ToolTip;
+        }
+        return button;
+    }
 
     public static Button Button(ActionCommand command, ButtonImagePosition imagePosition, ButtonFlags flags = default)
     {
@@ -95,7 +99,7 @@ public static class C
     public static Button Button(ActionCommand command, string? iconName, ButtonImagePosition imagePosition = default,
         ButtonFlags flags = default)
     {
-        var button = Button(command);
+        var button = Button(imagePosition == ButtonImagePosition.Overlay ? "" : command.MenuText, command);
         if (command.Image != null)
         {
             EtoPlatform.Current.AttachDpiDependency(button,

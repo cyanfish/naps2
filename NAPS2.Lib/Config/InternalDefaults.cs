@@ -59,6 +59,7 @@ public static class InternalDefaults
             EventLogging = EventType.None,
             ShowPageNumbers = false,
             SidebarVisible = true,
+            SidebarWidth = 200,
             PdfSettings = new PdfSettings
             {
                 Metadata = new PdfMetadata

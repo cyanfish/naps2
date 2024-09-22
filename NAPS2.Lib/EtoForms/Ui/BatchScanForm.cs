@@ -83,8 +83,16 @@ public class BatchScanForm : EtoDialogBase
         _userTransact = Config.User.BeginTransaction();
         _transactionConfig = Config.WithTransaction(_userTransact);
 
-        EditProfileCommand = new ActionCommand(EditProfile) { IconName = "pencil_small" };
-        NewProfileCommand = new ActionCommand(NewProfile) { IconName = "add_small" };
+        EditProfileCommand = new ActionCommand(EditProfile)
+        {
+            ToolTip = UiStrings.Edit,
+            IconName = "pencil_small"
+        };
+        NewProfileCommand = new ActionCommand(NewProfile)
+        {
+            ToolTip = UiStrings.New,
+            IconName = "add_small"
+        };
     }
 
     private void UpdateVisibility(object? sender, EventArgs e)

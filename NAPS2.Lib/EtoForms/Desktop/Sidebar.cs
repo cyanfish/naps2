@@ -19,6 +19,7 @@ public class Sidebar
     private readonly IDesktopScanController _desktopScanController;
 
     private readonly LayoutVisibility _sidebarVis = new(true);
+    private readonly LayoutVisibility _onboardingVis = new(false);
     private readonly DropDownWidget<ScanProfile> _profile = new();
     private readonly EnumDropDownWidget<ScanSource> _paperSource = new();
     private readonly DropDownWidget<int> _resolution = new();
@@ -42,8 +43,17 @@ public class Sidebar
         _profileManager.ProfilesUpdated += (_, _) => UpdateProfilesDropdown();
         UpdateProfilesDropdown();
 
-        EditProfileCommand = new ActionCommand(EditProfile) { IconName = "pencil_small" };
-        NewProfileCommand = new ActionCommand(NewProfile) { IconName = "add_small" };
+        EditProfileCommand = new ActionCommand(EditProfile)
+        {
+            ToolTip = UiStrings.Edit,
+            IconName = "pencil_small"
+        };
+        NewProfileCommand = new ActionCommand(NewProfile)
+        {
+            Text = UiStrings.NewProfile,
+            ToolTip = UiStrings.New,
+            IconName = "add_small"
+        };
         ScanCommand = new ActionCommand(DoScan)
         {
             Text = UiStrings.Scan,
@@ -52,12 +62,14 @@ public class Sidebar
     }
 
     private ActionCommand NewProfileCommand { get; }
-
     private ActionCommand EditProfileCommand { get; }
-
     private ActionCommand ScanCommand { get; }
 
-    private void UpdateProfilesDropdown() => _profile.Items = _profileManager.Profiles;
+    private void UpdateProfilesDropdown()
+    {
+        _profile.Items = _profileManager.Profiles;
+        _onboardingVis.IsVisible = _profileManager.Profiles.Count == 0;
+    }
 
     private void EditProfile()
     {
@@ -112,7 +124,7 @@ public class Sidebar
     public LayoutElement CreateView(IFormBase parentWindow)
     {
         _sidebarVis.IsVisible = _config.Get(c => c.SidebarVisible);
-        _profile.SelectedItem = _profileManager.DefaultProfile;
+        _profile.SelectedItem = _profileManager.DefaultProfile ?? _profileManager.Profiles.FirstOrDefault();
 
         _deviceSelectorWidget = new DeviceSelectorWidget(_scanPerformer, _deviceCapsCache, _iconProvider, parentWindow)
         {
@@ -132,29 +144,34 @@ public class Sidebar
         UpdateUiForProfile();
 
         return L.Column(
-            C.Filler(),
-            L.Row(
-                C.Label(UiStrings.ProfileLabel).Scale().AlignTrailing(),
-                // On Mac we set an explicit height as for some reason it fixes the button style after hide+show
-                C.Button(EditProfileCommand, ButtonImagePosition.Overlay)
-                    .Height(EtoPlatform.Current.IsMac ? 20 : null).Width(30),
-                C.Button(NewProfileCommand, ButtonImagePosition.Overlay)
-                    .Height(EtoPlatform.Current.IsMac ? 20 : null).Width(30)
-            ),
-            _profile.AsControl().NaturalWidth(100),
-            C.Spacer(),
-            _deviceSelectorWidget,
-            C.Spacer(),
-            C.Label(UiStrings.PaperSourceLabel),
-            _paperSource,
-            C.Label(UiStrings.PageSizeLabel),
-            _pageSize,
-            C.Label(UiStrings.ResolutionLabel),
-            _resolution,
-            C.Label(UiStrings.BitDepthLabel),
-            _bitDepth,
-            C.Spacer(),
-            C.Button(ScanCommand, ButtonImagePosition.Left).AlignCenter().Height(30),
+            C.Filler().NaturalWidth(100),
+            L.Column(
+                C.Button(NewProfileCommand, ButtonImagePosition.Left).Height(30).AlignCenter()
+            ).Visible(_onboardingVis),
+            L.Column(
+                L.Row(
+                    C.Label(UiStrings.ProfileLabel).Scale().AlignTrailing(),
+                    // On Mac we set an explicit height as for some reason it fixes the button style after hide+show
+                    C.Button(EditProfileCommand, ButtonImagePosition.Overlay)
+                        .Height(EtoPlatform.Current.IsMac ? 20 : null).Width(30),
+                    C.Button(NewProfileCommand, ButtonImagePosition.Overlay)
+                        .Height(EtoPlatform.Current.IsMac ? 20 : null).Width(30)
+                ),
+                _profile.AsControl(),
+                C.Spacer(),
+                _deviceSelectorWidget,
+                C.Spacer(),
+                C.Label(UiStrings.PaperSourceLabel),
+                _paperSource,
+                C.Label(UiStrings.PageSizeLabel),
+                _pageSize,
+                C.Label(UiStrings.ResolutionLabel),
+                _resolution,
+                C.Label(UiStrings.BitDepthLabel),
+                _bitDepth,
+                C.Spacer(),
+                C.Button(ScanCommand, ButtonImagePosition.Left).AlignCenter().Height(30)
+            ).Visible(!_onboardingVis),
             C.Filler()
         ).Padding(left: parentWindow.LayoutController.DefaultSpacing + 10, right: 10).Visible(_sidebarVis);
     }
