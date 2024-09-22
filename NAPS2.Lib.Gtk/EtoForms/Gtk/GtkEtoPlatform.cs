@@ -69,6 +69,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
+        // TODO: Getting some errors when starting naps2 with the sidebar hidden then trying to show it
         if (location.X < 0 || location.Y < 0) throw new InvalidOperationException();
         var overlay = container.ToNative() as GTK.Overlay;
         var panel = container.ToNative() as GTK.Fixed;
@@ -205,7 +206,7 @@ public class GtkEtoPlatform : EtoPlatform
         var widget = control.ToNative();
         if (widget is GTK.Bin { Child: GTK.Label label })
         {
-            label.MaxWidthChars = EstimateCharactersWide(defaultWidth, label);
+            label.MaxWidthChars = EstimateCharactersWide(defaultWidth, label.GetFont());
             label.GetPreferredSize(out var minSize, out var naturalSize);
             label.GetPreferredHeightForWidth(defaultWidth, out var minHeight, out var naturalHeight);
             return new SizeF(Math.Min(naturalSize.Width + 10, defaultWidth), naturalHeight);
@@ -213,11 +214,11 @@ public class GtkEtoPlatform : EtoPlatform
         return base.GetWrappedSize(control, defaultWidth);
     }
 
-    private static int EstimateCharactersWide(int pixelWidth, GTK.Label label)
+    private static int EstimateCharactersWide(int pixelWidth, Pango.FontDescription font)
     {
         // TODO: This could vary based on font and text. Can we do better somehow?
         // Ideally we'd be able to wrap based on a pixel width. Maybe if we put the label in a container?
-        var fontSize = label.GetFont().Size / Pango.Scale.PangoScale;
+        var fontSize = font.Size / Pango.Scale.PangoScale;
         var approxCharWidth = fontSize * 0.75;
         return (int) Math.Floor(pixelWidth / approxCharWidth);
     }
@@ -227,6 +228,16 @@ public class GtkEtoPlatform : EtoPlatform
         var eventBox = (GTK.EventBox) label.ToNative();
         var gtkLabel = (GTK.Label) eventBox.Child;
         gtkLabel.Ellipsize = Pango.EllipsizeMode.End;
+    }
+
+    public override void ConfigureDropDown(DropDown dropDown)
+    {
+        var native = (GTK.ComboBox) ((GTK.EventBox) dropDown.ToNative()).Child;
+        var cell = native.Cells.OfType<GTK.CellRendererText>().FirstOrDefault()!;
+        // TODO: I should probably test this on more desktop environments
+        // Setting the renderer width to 1 allows the width to be set properly as part of layouting
+        cell.Width = 1;
+        cell.Height = 25;
     }
 
     public override Size GetClientSize(Window window, bool excludeToolbars)
