@@ -1401,7 +1401,7 @@ msgstr "Zdieľať"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr "Zdieľať aj keď je NASP2 zavretý"
+msgstr "Zdieľať aj keď je NAPS2 zavretý"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"

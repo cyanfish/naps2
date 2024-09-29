@@ -778,7 +778,7 @@
     <value>Naozaj chcete prestať zdieľať {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Zdieľať aj keď je NASP2 zavretý</value>
+    <value>Zdieľať aj keď je NAPS2 zavretý</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
     <value>Viacero jazykov...</value>
