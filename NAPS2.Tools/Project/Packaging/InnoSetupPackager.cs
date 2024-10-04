@@ -4,7 +4,7 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class InnoSetupPackager
 {
-    public static void PackageExe(Func<PackageInfo> pkgInfoFunc)
+    public static void PackageExe(Func<PackageInfo> pkgInfoFunc, bool noSign)
     {
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
@@ -15,6 +15,12 @@ public static class InnoSetupPackager
         Cli.Run("dotnet", "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false");
 
         var pkgInfo = pkgInfoFunc();
+        if (!noSign)
+        {
+            Output.Verbose("Signing contents");
+            WindowsSigning.SignContents(pkgInfo);
+        }
+
         var exePath = pkgInfo.GetPath("exe");
         Output.Info($"Packaging exe installer: {exePath}");
 
@@ -23,6 +29,12 @@ public static class InnoSetupPackager
         // TODO: Use https://github.com/DomGries/InnoDependencyInstaller for .net dependency
         var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/Inno Setup 6/iscc.exe");
         Cli.Run(iscc, $"\"{innoDefPath}\"");
+
+        if (!noSign)
+        {
+            Output.Verbose("Signing installer");
+            WindowsSigning.SignFile(exePath);
+        }
 
         Output.OperationEnd($"Packaged exe installer: {exePath}");
     }

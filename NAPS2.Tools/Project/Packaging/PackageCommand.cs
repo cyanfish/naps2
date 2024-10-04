@@ -17,13 +17,13 @@ public class PackageCommand : ICommand<PackageOptions>
             switch (target.Type)
             {
                 case PackageType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig);
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig, opts.NoSign);
                     break;
                 case PackageType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig);
+                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig, opts.NoSign);
                     break;
                 case PackageType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig);
+                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig, opts.NoSign);
                     break;
                 case PackageType.Deb:
                     DebPackager.PackageDeb(GetPackageInfoForConfig(), opts.NoSign);

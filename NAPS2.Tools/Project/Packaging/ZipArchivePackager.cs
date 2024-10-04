@@ -4,7 +4,7 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class ZipArchivePackager
 {
-    public static void PackageZip(Func<PackageInfo> pkgInfoFunc)
+    public static void PackageZip(Func<PackageInfo> pkgInfoFunc, bool noSign)
     {
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
@@ -16,6 +16,12 @@ public static class ZipArchivePackager
         Cli.Run("dotnet", "build NAPS2.App.PortableLauncher -c Release");
 
         var pkgInfo = pkgInfoFunc();
+        if (!noSign)
+        {
+            Output.Verbose("Signing contents");
+            WindowsSigning.SignContents(pkgInfo);
+        }
+
         var zipPath = pkgInfo.GetPath("zip");
         Output.Info($"Packaging zip archive: {zipPath}");
 

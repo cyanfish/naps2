@@ -6,7 +6,7 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class WixToolsetPackager
 {
-    public static void PackageMsi(Func<PackageInfo> pkgInfoFunc)
+    public static void PackageMsi(Func<PackageInfo> pkgInfoFunc, bool noSign)
     {
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
@@ -17,6 +17,12 @@ public static class WixToolsetPackager
         Cli.Run("dotnet", "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
+        if (!noSign)
+        {
+            Output.Verbose("Signing contents");
+            WindowsSigning.SignContents(pkgInfo);
+        }
+
         var msiPath = pkgInfo.GetPath("msi");
         Output.Info($"Packaging msi installer: {msiPath}");
 
@@ -30,6 +36,13 @@ public static class WixToolsetPackager
 
         var light = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.11/bin/light.exe");
         Cli.Run(light, $"\"{wixobjPath}\" -spdb -ext WixUIExtension -o \"{msiPath}\"");
+
+        if (!noSign)
+        {
+            Output.Verbose("Signing installer");
+            WindowsSigning.SignFile(msiPath);
+        }
+
         Output.OperationEnd($"Packaged msi installer: {msiPath}");
     }
 
