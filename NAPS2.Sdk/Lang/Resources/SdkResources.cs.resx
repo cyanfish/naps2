@@ -79,9 +79,9 @@
     <value>Vypršel časový limit operace OCR.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Pracovní proces spadl.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Pracovní proces spadl. Zkontrolujte prohlížeč událostí systému Windows.</value>
   </data>
 </root>

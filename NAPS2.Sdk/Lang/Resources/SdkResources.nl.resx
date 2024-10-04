@@ -82,6 +82,6 @@
     <value>Het werkproces is gecrasht.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>Het werkproces is gecrasht. Controleer de Windows event viewer.</value>
+    <value>Het werkproces is gecrasht. Controleer het Windows Gebeurtenis-logboek.</value>
   </data>
 </root>

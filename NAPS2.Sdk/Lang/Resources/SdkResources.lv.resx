@@ -19,7 +19,7 @@
     <value>Izvēlētais skeneris ir bezsaistē.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Pārtrūka sakari ar skenēšanas ierīci.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -73,7 +73,7 @@
     <value>Izvēlētais draiveris šajā sistēmā nav atbalstīts.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Pie teksta atpazīšanas notika kļūda.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
     <value>The OCR operation timed out.</value>

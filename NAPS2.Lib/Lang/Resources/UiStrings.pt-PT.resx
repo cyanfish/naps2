@@ -304,7 +304,7 @@
     <value>Escolha o dispositivo</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
-    <value>Usar configuração predefinida</value>
+    <value>Usar definições predefinidas</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
     <value>Usar interface nativa</value>
@@ -355,7 +355,7 @@
     <value>Selecionar origem</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Selecionar dispositivo</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Enviar para segundo plano</value>
@@ -511,7 +511,7 @@
     <value>Palavra-passe de proprietário:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
-    <value>Senha do utilizador:</value>
+    <value>Palavra-passe do utilizador:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
     <value>Memorizar definições</value>
@@ -613,10 +613,10 @@
     <value>Detalhes técnicos</value>
   </data>
   <data name="PdfPasswordFormTitle" xml:space="preserve">
-    <value>Senha</value>
+    <value>Palavra-passe</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>O seguinte ficheiro está cifrado e requer uma senha para ser aberto:</value>
+    <value>O seguinte ficheiro está cifrado e requer uma palavra-passe para ser aberto:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Pedir caminho do ficheiro</value>
@@ -709,7 +709,7 @@
     <value>Prima Iniciar quando quiser.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
-    <value>Configuração da digitalização</value>
+    <value>Configurações de digitalização</value>
   </data>
   <data name="Output" xml:space="preserve">
     <value>Resultado</value>
@@ -769,7 +769,7 @@
     <value>Partilha de digitalizador</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Digitalizadores partilhados podem ser usados a partir de outros computadores na rede local selecionando "Controlador ESCL" nas configurações do perfil NAPS2 do outro computador.</value>
+    <value>Os digitalizadores partilhados podem ser usados a partir de outros computadores na rede local, selecionando "Controlador ESCL" nas definições do perfil NAPS2 do outro computador.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Definições partilhadas do digitalizador</value>
@@ -796,36 +796,36 @@
     <value>Combinar</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP manual</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP manual</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/Anfitrião</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>Porta</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Conectar</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Erro de ligação.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Perguntar sempre</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>A procurar dispositivos...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>{0} dispositivo(s) encontrado(s).</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>1 dispositivo encontrado.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Não foram encontrados dispositivos.</value>
   </data>
 </root>

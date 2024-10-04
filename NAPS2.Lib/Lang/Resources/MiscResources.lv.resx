@@ -52,10 +52,10 @@
     <value>Bitmap datnes (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
+    <value>Paplašinātais metafails (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
-    <value>Exchangeable Image File (*.exif)</value>
+    <value>Paplašinātais attēlu fails (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
     <value>GIF datne (*.gif)</value>
@@ -73,7 +73,7 @@
     <value>TIFF datne (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 fails (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nav nosaukuma.</value>
@@ -190,7 +190,7 @@
     <value>no {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Pie partijas skenēšanas notika nezināma kļūda.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Partija atcelta.</value>
@@ -367,13 +367,13 @@
     <value>Pārbauda...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Jauninājumu pārbaude ir atslēgta.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Notikusi kļūda mēģinot instalēt jauninājumu.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Instalēt {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Pieejams atjauninājums.</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-11 02:47\n"
+"PO-Revision-Date: 2024-10-04 23:31\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -58,7 +58,7 @@ msgstr "Quant a"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr "S'estan obtenint les dades......"
+msgstr "S'estan obtenint les dades..."
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -102,7 +102,7 @@ msgstr "Permet l'emplenament de camps de formulari"
 
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
-msgstr "Permet la impressió en resolució alta"
+msgstr "Permet la impressió en alta resolució"
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -123,11 +123,11 @@ msgstr "Demana sempre"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr "Pregunta'm sempre"
+msgstr "Demana sempre"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Es requereix un complement extra per importar aquest fitxer PDF. Voleu baixar-ho ara?"
+msgstr "Es requereix un complement extra per a importar aquest fitxer PDF. Voleu baixar-ho ara?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -139,7 +139,7 @@ msgstr "S'ha produït un error amb l'autorització."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
-msgstr "S'ha produït un error amb el desat automàtic."
+msgstr "S'ha produït un error amb el desament automàtic."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
@@ -208,7 +208,7 @@ msgstr "Segur que voleu buidar {0} pàgines?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "Segur que voleu suprimir {0} element(s)?"
+msgstr "Segur que voleu suprimir {0} elements?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
@@ -216,7 +216,7 @@ msgstr "Segur que voleu suprimir el perfil {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Segur que voleu suprimir {0} element(s)?"
+msgstr "Segur que voleu suprimir {0} elements?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
@@ -224,7 +224,7 @@ msgstr "Segur que voleu suprimir {0} perfils?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr "Esteu segur que voleu aturar la compartició {0}?"
+msgstr "Segur que voleu aturar la compartició de {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -249,7 +249,7 @@ msgstr "Automàtica"
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr "Opcions de desat automàtic"
+msgstr "Opcions de desament automàtic"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -340,7 +340,7 @@ msgstr "Cancel·la la tasca"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
-msgstr "S'està cancel·lant......."
+msgstr "S'està cancel·lant..."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
@@ -368,7 +368,7 @@ msgstr "Trieu el perfil"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr "Trieu dispositiu"
+msgstr "Trieu un dispositiu"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
@@ -437,11 +437,11 @@ msgstr "Llindar de cobertura"
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
-msgstr "Retalla"
+msgstr "Escapça"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr "Retalla a la mida de la pàgina"
+msgstr "Escapça a la mida de la pàgina"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -461,7 +461,7 @@ msgstr "SMTP personalitzat"
 
 #: SettingsResources.resx$PageSize_Custom$Message
 msgid "Custom..."
-msgstr "Personalitzat..."
+msgstr "Personalitzada..."
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -501,7 +501,7 @@ msgstr "Alinea les pàgines escanejades"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr "S'està alineant......"
+msgstr "S'està alineant..."
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
@@ -513,7 +513,7 @@ msgstr "Mides"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
-msgstr "Mostra el nom:"
+msgstr "Nom mostrat:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
@@ -583,7 +583,7 @@ msgstr "Progrés d'enviament del PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr "Correu-e seleccionat"
+msgstr "Seleccionat"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
@@ -596,7 +596,7 @@ msgstr "Configuració del correu electrònic"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
-msgstr "Habilita el desat automàtic"
+msgstr "Habilita el desament automàtic"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
@@ -608,7 +608,7 @@ msgstr "Xifra el PDF"
 
 #: UiStrings.resx$Encryption$Message
 msgid "Encryption"
-msgstr "Xifrat"
+msgstr "Xifratge"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -642,7 +642,7 @@ msgstr "Alimentador"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Nom del fitxer"
+msgstr "Nom del fitxer:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -662,7 +662,7 @@ msgstr "Gireu el revers de les pàgines dúplex"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr "Gira 180º les pàgines parell"
+msgstr "Gira les pàgines doblegades"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
@@ -674,7 +674,7 @@ msgstr "Fitxer GIF (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
-msgstr "Obteniu més idiomes"
+msgstr "Més idiomes"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
@@ -714,7 +714,7 @@ msgstr "Imatge"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr "Imatges"
+msgstr "Fitxers d'imatge"
 
 #: UiStrings.resx$ImageQuality$Message
 msgid "Image Quality"
@@ -848,11 +848,11 @@ msgstr "Més informació"
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
-msgstr "Desplaça cap avall"
+msgstr "Mou avall"
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
-msgstr "Desplaça cap amunt"
+msgstr "Mou amunt"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -864,11 +864,11 @@ msgstr "Diversos idiomes..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "Escaneig múltiple (retard fixe entre escaneig)"
+msgstr "Escaneig múltiple (retard fix entre escaneig)"
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "Escaneig múltiple (pregunta entre cada escaneig)"
+msgstr "Escaneig múltiple (demana entre cada escaneig)"
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
@@ -910,7 +910,7 @@ msgstr "Següent"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
-msgstr "Següent escaneig"
+msgstr "Proper escaneig"
 
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
@@ -1005,7 +1005,7 @@ msgstr "No s'ha pogut baixar un o més fitxers."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr "Permet només una única instància de NAPS2"
+msgstr "Permet només una única instància del NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1091,7 +1091,7 @@ msgstr "Port"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr "Post-processament"
+msgstr "Tractament posterior"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
@@ -1103,11 +1103,11 @@ msgstr "Premeu Inicia per continuar."
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
-msgstr "Vista prèvia"
+msgstr "Previsualitza"
 
 #: UiStrings.resx$PreviewLabel$Message
 msgid "Preview:"
-msgstr "Vista prèvia:"
+msgstr "Previsualitza:"
 
 #: UiStrings.resx$Previous$Message
 msgid "Previous"
@@ -1124,7 +1124,7 @@ msgstr "Paràmetres del perfil"
 
 #: UiStrings.resx$ProfileLabel$Message
 msgid "Profile:"
-msgstr "Perfils:"
+msgstr "Perfil:"
 
 #: UiStrings.resx$Profiles$Message
 #: UiStrings.resx$ProfilesFormTitle$Message
@@ -1133,11 +1133,11 @@ msgstr "Perfils"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr "Pregunta si s'ha seleccionat"
+msgstr "Demana en seleccionar"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr "Pregunta la ruta de destinació"
+msgstr "Demana la ruta de destinació"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
@@ -1157,7 +1157,7 @@ msgstr "Recuperació d'imatges escanejades"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
-msgstr "S'està recuperant......"
+msgstr "S'està recuperant..."
 
 #: MiscResources.resx$RecoveryProgress$Message
 msgid "Recovery Progress"
@@ -1229,7 +1229,7 @@ msgstr "Gira a la dreta"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr "Executa en segon pla"
+msgstr "Executa en rerefons"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
@@ -1263,7 +1263,7 @@ msgstr "Desa les imatges"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "Progrés del desat d'imatges"
+msgstr "Progrés del desament d'imatges"
 
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
@@ -1272,7 +1272,7 @@ msgstr "Desa (PDF)"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "Progrés del desat en PDF"
+msgstr "Progrés del desament en PDF"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
@@ -1297,7 +1297,7 @@ msgstr "Desa en fitxers múltiples"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr "Resultats del desat en lot..."
+msgstr "Resultats del desament en lot..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
@@ -1331,7 +1331,7 @@ msgstr "Imatge escanejada"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr "Compartició d'escàners"
+msgstr "Compartició d'escàner"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1380,7 +1380,7 @@ msgstr "Seleccioneu un o més idiomes:"
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
-msgstr "Seleccionat ({0})"
+msgstr "Selecció ({0})"
 
 #: UiStrings.resx$SeparateByPatchT$Message
 msgid "Separate files by Patch-T"
@@ -1409,7 +1409,7 @@ msgstr "Configuració de l'escàner compartit"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr "Els escàners compartits es poden utilitzar des d'altres ordinadors de la xarxa local seleccionant \"ESCL Driver\" a la configuració del perfil NAPS2 de l'altre ordinador."
+msgstr "Els escàners compartits es poden utilitzar des d'altres ordinadors de la xarxa local seleccionant «Controlador ESCL» a la configuració del perfil NAPS2 de l'altre ordinador."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1421,7 +1421,7 @@ msgstr "Mostra"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr "Mostra la barra d'eines \"Perfils\""
+msgstr "Mostra la barra d'eines «Perfils»"
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
@@ -1441,7 +1441,7 @@ msgstr "Escaneig senzill"
 
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
-msgstr "Omet les opcions de desat"
+msgstr "Omet les opcions de desament"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
@@ -1465,7 +1465,7 @@ msgstr "Fitxer TIFF (*.tiff, *.tif)"
 
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
-msgstr "Dispositiu TWAIN"
+msgstr "Controlador TWAIN"
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1514,7 +1514,7 @@ msgstr "L'escàner té un embús de paper."
 #: MiscResources.resx$DeviceWarmingUp$Message
 #: SdkResources.resx$DeviceWarmingUp$Message
 msgid "The scanner is warming up."
-msgstr "S'està posant a punt l'escàner...."
+msgstr "L'escàner s'està escalfant."
 
 #: MiscResources.resx$DeviceCoverOpen$Message
 #: SdkResources.resx$DeviceCoverOpen$Message
@@ -1544,7 +1544,7 @@ msgstr "L'escàner seleccionat no suporta dúplex (escaneig per dues cares). Si 
 #: MiscResources.resx$DeviceBusy$Message
 #: SdkResources.resx$DeviceBusy$Message
 msgid "The selected scanner is busy."
-msgstr "L'escàner seleccionat esta ocupat."
+msgstr "L'escàner seleccionat està ocupat."
 
 #: MiscResources.resx$DeviceOffline$Message
 #: SdkResources.resx$DeviceOffline$Message
@@ -1565,7 +1565,7 @@ msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr "Opcions Tiff"
+msgstr "Opcions TIFF"
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
@@ -1581,7 +1581,7 @@ msgstr "Eines"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr "Implementació Twain:"
+msgstr "Implementació TWAIN:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
@@ -1613,7 +1613,7 @@ msgstr "La comprovació d'actualitzacions està inhabilitada."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
-msgstr "S'està actualitzant......"
+msgstr "S'està actualitzant..."
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
@@ -1625,7 +1625,7 @@ msgstr "Utilitza la interfície nativa"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "Utilitza la configuració predeterminada"
+msgstr "Utilitza les opcions per defecte"
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
@@ -1642,7 +1642,7 @@ msgstr "Versió {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
-msgstr "Mostra"
+msgstr "Visualitza"
 
 #: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"
@@ -1650,11 +1650,11 @@ msgstr "Controlador WIA"
 
 #: UiStrings.resx$WaitingForTwain$Message
 msgid "Waiting for TWAIN to complete..."
-msgstr "Esperant a TWAIN per completar..."
+msgstr "Esperant a TWAIN per a completar..."
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
-msgstr "S'està esperant autorització..."
+msgstr "S'està esperant l'autorització..."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
@@ -1679,11 +1679,11 @@ msgstr "Any (00-99)"
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 #: SdkResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "No teniu prou permisos per copiar el contingut del fitxer '{0}'."
+msgstr "No teniu prou permisos per a copiar el contingut del fitxer '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
-msgstr "No teniu permís per desar fitxers en aquesta ubicació."
+msgstr "No teniu prou permisos per a desar fitxers en aquesta ubicació."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
@@ -1751,7 +1751,7 @@ msgstr "{0} ppp"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "Possiblement {0} imatges escanejades a {1} el {2} no s'han desat però es poden recuperar. Voleu continuar amb la recuperació?"
+msgstr "Possiblement {0} imatges escanejades el {1} a les {2} no s'han desat, però es poden recuperar. Voleu continuar amb la recuperació?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

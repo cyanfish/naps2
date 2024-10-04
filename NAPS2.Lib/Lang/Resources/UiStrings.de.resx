@@ -796,10 +796,10 @@
     <value>Kombinieren</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Manuelle IP</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Manuelle IP</value>
   </data>
   <data name="IpHost" xml:space="preserve">
     <value>IP/Host</value>

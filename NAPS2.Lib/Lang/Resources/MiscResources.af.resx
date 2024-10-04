@@ -13,28 +13,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseProfile" xml:space="preserve">
-    <value>Chọn thuộc tính</value>
+    <value>Kies Profiel</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Xóa</value>
+    <value>Maak skoon</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Bạn có chắc chắn bạn muốn xóa {0} sản phẩm (s)?</value>
+    <value>Verseker dat jy {0} item(s) wil verwyder?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Bạn có chắc chắn muốn xóa {0} sản phẩm (s)?</value>
+    <value>Verseker dat jy {0} item(s) wil uitvee?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Bạn có chắc chắn muốn xóa {0} hồ sơ?</value>
+    <value>Verseker dat jy {0} profiele wil uitvee?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>Bạn có chắc chắn bạn muốn xóa hồ sơ {0}?</value>
+    <value>Verseker dat jy profiel {0} wil uitvee?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
     <value>The file {0} already exists. Do you want to overwrite it?</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Xóa</value>
+    <value>Vee uit</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
     <value>The selected scanner could not be found.</value>
@@ -43,25 +43,25 @@
     <value>The selected scanner is offline.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>You don't have permission to save files at this location.</value>
+    <value>Jy het nie toestemming om lêers hier te stoor nie.</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Lỗi</value>
+    <value>Fout</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>Bitmap Files (*.bmp)</value>
+    <value>Bitmap Leêrs (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
+    <value>Verbeterde Windows MetaFile (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
-    <value>Exchangeable Image File (*.exif)</value>
+    <value>Uitruilbare beeldlêer (*.exif)</value>
   </data>
   <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF File (*.gif)</value>
+    <value>GIF Lêer (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
-    <value>JPEG File (*.jpg, *.jpeg)</value>
+    <value>JPEG Lêer (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
     <value>PDF dokument (*.pdf)</value>
@@ -73,7 +73,7 @@
     <value>TIFF File (*.tiff, *.tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 Lêer (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Noem ontbreek.</value>
@@ -88,49 +88,49 @@
     <value>Geen skandering toestel gevind.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
-    <value>Oorskryf Lêer</value>
+    <value>Skryf Oor Lêer</value>
   </data>
   <data name="PdfStatus" xml:space="preserve">
-    <value>{0} of {1}</value>
+    <value>{0} van {1}</value>
   </data>
   <data name="ScannedImage" xml:space="preserve">
-    <value>Scanned Image</value>
+    <value>Geskandeerde Beeld</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Select a profile before clicking Scan.</value>
+    <value>Kies 'n profiel voordat u Skandeer klik.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Có lỗi xảy ra với trình điều khiển máy quét.</value>
+    <value>Daar was n fout met die skandeer drywer.</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version {0}</value>
+    <value>Weergawe {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>Có lỗi xảy ra trong khi đang cố gắng để gửi một email.</value>
+    <value>Daar was 'n fout tydens die e-pos versending.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
-    <value>Cài đặt thành công</value>
+    <value>Installasie Afgehandel</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Cài đặt hoàn tất. Bạn có muốn khởi động lại NAPS2 bây giờ?</value>
+    <value>Installasie Afgehandel. Herlaai NAPS2?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
-    <value>Cài đặt thất bại.</value>
+    <value>Installasie het misluk.</value>
   </data>
   <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Cài đặt bị lỗi</value>
+    <value>Installasie het misluk</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>Tất cả ({0})</value>
+    <value>Alles ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
-    <value>Selected ({0})</value>
+    <value>Gekies ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Ước tính kích thước download: {0} MB</value>
+    <value>Beraamde Aflaai grootte: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
-    <value>{0} / {1} files</value>
+    <value>{0} / {1} leêrs</value>
   </data>
   <data name="SizeProgress" xml:space="preserve">
     <value>{0} / {1} MB</value>
@@ -142,37 +142,37 @@
     <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Tải Về lỗi</value>
+    <value>Aflaai Misluk</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
     <value>Een of meer lêers kon nie afgelaai word.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>Tùy chỉnh ({0}x{1} {2})</value>
+    <value>Eie Groote ({0}x{1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scan</value>
+    <value>Skandeer</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
     <value>Bạn có chắc chắn bạn muốn hoàn tác các thay đổi đến {0} hình ảnh (s)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Reset Image</value>
+    <value>Stel Beeld terug</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
+    <value>Jy het ongebergde veranderinge. Is jy seker jy wil die program verlaat en veranderinge verloor?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
     <value>Die program is tans besig met 'n taak. Is jy seker dat jy die program wil verlaat en die taak kanselleer?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
-    <value>Unsaved Changes</value>
+    <value>Ongebergde Veranderings</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Besig met handeling</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>Scanning page {0}</value>
+    <value>Skandeer bladsy {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
@@ -181,46 +181,46 @@
     <value>Geen bladsye is in die voerder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>You do not have permission to copy content from the file '{0}'.</value>
+    <value>Jy het nie toestemming om inhoud vanaf die lêer '{0}' te kopieer nie.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>Có lỗi xảy ra khi cố gắng để lưu các tập tin.</value>
+    <value>Daar was 'n fout tydens leêr-stoor.</value>
   </data>
   <data name="OfN" xml:space="preserve">
-    <value>of {0}</value>
+    <value>van {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Obekende fout tydens bondel skandeer.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Hủy Scan hàng loạt.</value>
+    <value>Bondel gekanseleer.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>Đang dừng....</value>
+    <value>Besig om te kanseleer....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Scan hàng loạt thành công.</value>
+    <value>Bondel suksesvol afgehandel.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
     <value>Scan hàng loạt dừng lại do lỗi.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>Scanning page {0}...</value>
+    <value>Skandeer tans bladsy {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>Scanning page {0} (scan {1})...</value>
+    <value>Skandeer tans bladsy {0} (skandeer {1})...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>Waiting for scan {0}...</value>
+    <value>Wag tans vir skandering {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Hủy</value>
+    <value>Kanselleer</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Đóng</value>
+    <value>Maak toe</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Saving batch results...</value>
+    <value>Stoor tans bondelresultate...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
@@ -229,58 +229,58 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Đang chèn {0}...</value>
+    <value>Intrek Besig {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>Chèn xong</value>
+    <value>Intrek Vordering</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Herstel...</value>
+    <value>Besig om te Herstel...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Recovery Progress</value>
+    <value>Herwinningsvordering</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Save Images</value>
+    <value>Stoor Beelde</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Save Images Progress</value>
+    <value>Beeldstoor Vordering</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Save PDF</value>
+    <value>Stoor PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Save PDF Progress</value>
+    <value>PDF-Stoor Vordering</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Saving {0}...</value>
+    <value>Stoor tans {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Afdruk</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>Đang sao chép...</value>
+    <value>Besig om te kopieer...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Sao chép Tiến trình</value>
+    <value>Kopieëringvordering</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Đang chèn...</value>
+    <value>Intrek Besig...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>ePosPDF</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Email PDF Progress</value>
+    <value>ePos PDF Vordering</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>Có lỗi xảy ra khi cố gắng tự động Lưu.</value>
+    <value>Daar was 'n fout tydens outo-stoor.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
-    <value>Tất cả các tập tin</value>
+    <value>Alle Lêers</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>TỆP ẢNH</value>
+    <value>Beeld Lêers</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>The selected scanner is busy.</value>
@@ -295,49 +295,49 @@
     <value>The scanner is warming up.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Một bản cập nhật để OCR có sẵn.</value>
+    <value>Nuwe OCR weergawe is beskikbaar.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Lưu ảnh.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} images saved.</value>
+    <value>{0} Beelde gestoor.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF gered.</value>
+    <value>PDF gestoor.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Bạn có chắc chắn muốn xóa "{0}"?</value>
+    <value>Verseker dat jy "{0}" wil uitvee?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>Besig om reguit te trek...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>Reguit-trek Vordering</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>Aflaai Benodig</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
+    <value>Addisionele komponent benodig om hierdie PDF in te trek. Wil jy dit nou aflaai?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Are you sure you want to cancel the batch scan?</value>
+    <value>Bevestig bondel-skandeer kanselasie?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Cancel Batch</value>
+    <value>Kanseleer Bondel</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Skenk</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 is heeltemal gratis. Oorweeg dit om 'n skenking te maak.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>The SANE driver is not available. Make sure to install the required packages:</value>
@@ -349,48 +349,48 @@
     <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>OCR-vordering</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>Besig om OCR uit te voer...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Opdateer-vordering</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Besig om nuwe weergawe te instaleeri...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Geen nuuter weergawes beskikbaar nie.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Besig om te kyk...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Nuwe weergawe soek is afgeskakel.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>'n Nuwe weergawe is beskikbaar.</value>
+    <value>Daar was 'n fout met installasie van die nuwe weergawe.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Installeer {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Nuwe weergawe is beskikbaar.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Magtigings-fout het voorgekom.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Besig om ePos op te laai...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>Daar was a 'n fout tydens die e-pos versending.</value>
+    <value>Daar was 'n fout tydens die e-pos versending.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>Scanning page {0}...</value>
+    <value>Skandeer tans bladsy {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>Thu thập dữ liệu...</value>
+    <value>Data word ingetrek...</value>
   </data>
 </root>

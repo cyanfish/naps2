@@ -79,9 +79,9 @@
     <value>The OCR operation timed out.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Arbeidsprosessen krasja.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Arbeidsprosessen krasja Sjekk Windows-hendingsvisaren.</value>
   </data>
 </root>

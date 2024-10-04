@@ -16,7 +16,7 @@
     <value>Par</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>{0} NAPS2 Contributors autortiesības</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ikonas no:</value>
@@ -25,7 +25,7 @@
     <value>Pārbaudīt atjauninājumus</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Apstiprināt</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Ziedot</value>
@@ -55,16 +55,16 @@
     <value>Ielīmēt</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Atcelt</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Atkārtot</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Atcelt {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Atkārtot {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Pabeigts</value>
@@ -130,7 +130,7 @@
     <value>Asināt</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Koriģēt dokumentu</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Atiestatīt</value>
@@ -178,28 +178,28 @@
     <value>Apvērst</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Apriezt visu</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Apgriezt izvēlēto</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Notīrīt</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Notīrīt visu</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Valoda</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Uzstādījumi</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Saskarne</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>"Skenēt" komandkarte maina noklusējuma profilu</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>Show "Profiles" toolbar</value>
@@ -208,16 +208,16 @@
     <value>Show page numbers</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Pogas "Skenēt" noklusējuma darbība:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Pogas "Saglabāt" noklusējuma darbība:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Lietotne</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Atļaut tikai vienu NAPS2 eksemplāru</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Par</value>
@@ -238,37 +238,37 @@
     <value>Mērogot ar logu</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Saglabāt</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Saglabāt visu</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Saglabāt izvēlēto</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>Saglabāt visu kā PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
     <value>Save Selected as PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>Saglabāt visu kā attēlus</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
     <value>Save Selected as Images</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Visu nosūtīt uz e-pastu</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Nosūtīt uz e-pastu izvēlēto</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Visu nosūtīt uz e-pastu kā PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Nosūtīt uz e-pastu izvēlēto kā PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profila iestatījumi</value>
@@ -283,19 +283,19 @@
     <value>TWAIN draiveris</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL draiveris</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL tīkla draiveris</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USB draiveris</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Apple draiveris</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>SANE draiveris</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>Ierīce:</value>
@@ -355,7 +355,7 @@
     <value>Izvēlēties avotu</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Izvēlieties ierīci</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Darbojas fonā</value>
@@ -379,16 +379,16 @@
     <value>OCR valoda:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR mode:</value>
+    <value>OCR režīms:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Fiksēt baltā balansu un dzēst trokšņus</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Automātiski palaist OCR (teksta atpazīšanu) pēc skenēšanas</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Pēc skanēšanas sākt teksta atpazīšanu</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Iegūt vairāk valodu</value>
@@ -559,7 +559,7 @@
     <value>Automātiski palielināt skaitli (2 cipari)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Automātiski palielināt skaitli (1 numurs)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Datnes nosaukums</value>
@@ -586,7 +586,7 @@
     <value>E-pasta iestatījumi</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Uzstādījumi</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provaideris</value>
@@ -637,7 +637,7 @@
     <value>Notīrīt attēlus pēc saglabāšanas</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Saglabāt attēlus starp seansiem</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Pielāgots lapas izmērs</value>
@@ -694,10 +694,10 @@
     <value>Apvērst dupleksās lapas</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Apgriezt puses divpusējām lapām</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wia versija:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>TWAIN realizācija:</value>
@@ -754,19 +754,19 @@
     <value>Atvērt mapi</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Rīki</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Ieslēgt atkļūdošanu</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Kopīgot</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Skenera kopīgošana</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>Skenera kopīgošana</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
     <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
@@ -775,16 +775,16 @@
     <value>Shared Scanner Settings</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Vai tiešām vēlaties atcelt {0} kopīgošanu?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Share even when NAPS2 is closed</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>Vairākas valodas...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>Vairākas valodas</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
     <value>Show native TWAIN progress</value>
@@ -793,39 +793,39 @@
     <value>Split</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Apvienot</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Manuālā IP adrese</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Manuālā IP adrese</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/Host adrese</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>Ports</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Pieslēgties</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Pieslēguma kļūda.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Vienmēr prasīt</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>Tiek meklētas ierīces...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>Atrasta(-s) {0} ierīce(-s).</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>Atrasta 1 ierīce.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Neviena ierīce nav atrasta.</value>
   </data>
 </root>

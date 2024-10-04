@@ -79,9 +79,9 @@
     <value>OCR-handlingen fik timeout.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Arbejdsprocessen fejlede.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Arbejdsprocessen fejlede. Kontroller Windows event-fremviseren.</value>
   </data>
 </root>

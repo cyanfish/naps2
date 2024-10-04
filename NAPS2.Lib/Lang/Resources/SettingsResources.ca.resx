@@ -76,7 +76,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Personalitzat...</value>
+    <value>Personalitzada...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -154,15 +154,15 @@
     <value>Desa la selecció</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Pregunta'm sempre</value>
+    <value>Demana sempre</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Pregunta si s'ha seleccionat</value>
+    <value>Demana en seleccionar</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
     <value>Escaneja amb el perfil per defecte</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Pregunta'm sempre</value>
+    <value>Demana sempre</value>
   </data>
 </root>

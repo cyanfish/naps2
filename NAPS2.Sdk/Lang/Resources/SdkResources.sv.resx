@@ -79,9 +79,9 @@
     <value>OCR-åtgärden överskred tidsgränsen.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Arbetsprocessen kraschade.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Arbetsprocessen kraschade. Se Loggboken i Windows.</value>
   </data>
 </root>

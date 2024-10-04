@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-10-04 23:31\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -33,7 +33,7 @@ msgstr "Nabídka \"Skenovat\" změní výchozí profil"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "Nalezeno 1 zařízení."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "Střídavé vložení listů"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Vždy se zeptat"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -405,11 +405,11 @@ msgstr "Komprese:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Připojit"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Chyba připojení."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -702,7 +702,7 @@ msgstr "Odstín / Sytost"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Hostitel"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -820,7 +820,7 @@ msgstr "Umožnit prohledávání PDF pomocí OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Manuální IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +919,7 @@ msgstr "Nebylo vybráno žádné zařízení."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Zařízení nenalezena."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1087,7 +1087,7 @@ msgstr "Zástupné znaky"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1348,7 +1348,7 @@ msgstr "Skenuje se stránka {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Hledání zařízení..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1364,7 @@ msgstr "Vybrat vše"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Výběr zařízení"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1553,11 +1553,11 @@ msgstr "Vybraný skener je vypnutý."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Pracovní proces spadl."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Pracovní proces spadl. Zkontrolujte prohlížeč událostí systému Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1743,7 @@ msgstr "{0}/{1} souborů"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "Nalezeno {0} zařízení."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

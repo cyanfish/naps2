@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-10-04 23:31\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -33,7 +33,7 @@ msgstr "Menyn \"Skanna\" ändrar standardprofil"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 enhet hittades."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "Alternativ interfoliering"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Fråga alltid"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -405,11 +405,11 @@ msgstr "Komprimera:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Anslut"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Anslutningsfel."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -702,7 +702,7 @@ msgstr "Ljus / Mättnad"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Värd"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -820,7 +820,7 @@ msgstr "Gör PDF:er sökbara med hjälp av OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Manuell IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +919,7 @@ msgstr "Ingen enhet vald."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Inga enheter hittades."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1087,7 +1087,7 @@ msgstr "Platshållare"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1348,7 +1348,7 @@ msgstr "Skannar sidan {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Söker efter enheter ..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1364,7 @@ msgstr "Markera alla"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Välj enhet"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1553,11 +1553,11 @@ msgstr "Den valda skannern är offline."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Arbetsprocessen kraschade."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Arbetsprocessen kraschade. Se Loggboken i Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1743,7 @@ msgstr "{0} / {1} filer"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} enheter hittades."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

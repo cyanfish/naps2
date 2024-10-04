@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-10-04 23:31\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
@@ -33,7 +33,7 @@ msgstr "O menu \"Digitalizar\" altera o perfil padrão"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 dispositivo encontrado."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "Intercalar alternado"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Perguntar sempre"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -405,11 +405,11 @@ msgstr "Compressão:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Conectar"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Erro de ligação."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -702,7 +702,7 @@ msgstr "Tom/Saturação"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Anfitrião"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -820,7 +820,7 @@ msgstr "Tornar PDF pesquisáveis via OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "IP manual"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +919,7 @@ msgstr "Nenhum dispositivo selecionado."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Não foram encontrados dispositivos."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1074,7 +1074,7 @@ msgstr "Origem do papel:"
 
 #: UiStrings.resx$PdfPasswordFormTitle$Message
 msgid "Password"
-msgstr "Senha"
+msgstr "Palavra-passe"
 
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
@@ -1087,7 +1087,7 @@ msgstr "Marcadores"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Porta"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1318,7 +1318,7 @@ msgstr "Digitalizar"
 
 #: UiStrings.resx$ScanConfig$Message
 msgid "Scan Configuration"
-msgstr "Configuração da digitalização"
+msgstr "Configurações de digitalização"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
@@ -1348,7 +1348,7 @@ msgstr "A digitalizar página {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "A procurar dispositivos..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1364,7 @@ msgstr "Selecionar tudo"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Selecionar dispositivo"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1409,7 +1409,7 @@ msgstr "Definições partilhadas do digitalizador"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr "Digitalizadores partilhados podem ser usados a partir de outros computadores na rede local selecionando \"Controlador ESCL\" nas configurações do perfil NAPS2 do outro computador."
+msgstr "Os digitalizadores partilhados podem ser usados a partir de outros computadores na rede local, selecionando \"Controlador ESCL\" nas definições do perfil NAPS2 do outro computador."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1504,7 +1504,7 @@ msgstr "O ficheiro {0} já existe. Deseja substituir?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr "O seguinte ficheiro está cifrado e requer uma senha para ser aberto:"
+msgstr "O seguinte ficheiro está cifrado e requer uma palavra-passe para ser aberto:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
@@ -1553,11 +1553,11 @@ msgstr "O digitalizador escolhido está desligado."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "O processo de trabalho falhou."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "O processo de trabalho falhou. Analise o visualizador de eventos Windows,"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1625,11 +1625,11 @@ msgstr "Usar interface nativa"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "Usar configuração predefinida"
+msgstr "Usar definições predefinidas"
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
-msgstr "Senha do utilizador:"
+msgstr "Palavra-passe do utilizador:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
@@ -1743,7 +1743,7 @@ msgstr "{0} / {1} ficheiros"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} dispositivo(s) encontrado(s)."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

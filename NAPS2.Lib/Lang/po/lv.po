@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-10-04 23:31\n"
 "Last-Translator: \n"
 "Language-Team: Latvian\n"
 "Language: lv\n"
@@ -21,19 +21,19 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Pogas \"Saglabāt\" noklusējuma darbība:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Pogas \"Skenēt\" noklusējuma darbība:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "\"Skenēt\" komandkarte maina noklusējuma profilu"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "Atrasta 1 ierīce."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -41,15 +41,15 @@ msgstr "24-bitu krāsa"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr ""
+msgstr "A3 (297x420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr ""
+msgstr "A4 (210x297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "A5 (148x210 mm)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
@@ -118,12 +118,12 @@ msgstr "Pārkārtot pretēji"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Vienmēr prasīt"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Vienmēr atgādināt"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -131,7 +131,7 @@ msgstr "Lai importētu šo PDF datni, vajadzīga papildus komponente. Vai vēlat
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr ""
+msgstr "Pie teksta atpazīšanas notika kļūda."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
@@ -168,7 +168,7 @@ msgstr "Notiek darbība. Vai esat pārliecināti, ka vēlaties iziet un pārtrau
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "Pie partijas skenēšanas notika nezināma kļūda."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -180,15 +180,15 @@ msgstr "Pieejams OCR atjauninājums."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr ""
+msgstr "Apple draiveris"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Lietotne"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -224,7 +224,7 @@ msgstr "Vai tiešām vēlaties dzēst {0} profilus?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Vai tiešām vēlaties atcelt {0} kopīgošanu?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -244,7 +244,7 @@ msgstr "Autorizēt"
 
 #: SettingsResources.resx$TiffComp_Auto$Message
 msgid "Auto"
-msgstr ""
+msgstr "Automātiski"
 
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
@@ -253,7 +253,7 @@ msgstr "Automātiski saglabāt iestatījumus"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr ""
+msgstr "Automātiski palielināt skaitli (1 numurs)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
@@ -273,11 +273,11 @@ msgstr "Automātiski palaist OCR (teksta atpazīšanu) pēc skenēšanas"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -298,7 +298,7 @@ msgstr "Partijas skenēšana apstājās kļūdas dēļ."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "Vislabākais"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -327,7 +327,7 @@ msgstr "Spilgtums:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -377,7 +377,7 @@ msgstr "Notīrīt"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "Notīrīt visu"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
@@ -389,11 +389,11 @@ msgstr "Aizvērt"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "Apvienot"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Pārtrūka sakari ar skenēšanas ierīci."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -405,11 +405,11 @@ msgstr "Kompresija:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Pieslēgties"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Pieslēguma kļūda."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -429,7 +429,7 @@ msgstr "Kopē..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr ""
+msgstr "{0} NAPS2 Contributors autortiesības"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -517,7 +517,7 @@ msgstr "Parādāmais nosaukums:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "Koriģēt dokumentu"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
@@ -550,15 +550,15 @@ msgstr "Duplekss"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL draiveris"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL tīkla draiveris"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB draiveris"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -566,11 +566,11 @@ msgstr "Rediģēt"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Visu nosūtīt uz e-pastu"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Visu nosūtīt uz e-pastu kā PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
@@ -583,11 +583,11 @@ msgstr "PDF uz e-pastu progress"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Nosūtīt uz e-pastu izvēlēto"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Nosūtīt uz e-pastu izvēlēto kā PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -600,7 +600,7 @@ msgstr "Iespējot automātisku saglabāšanu"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Ieslēgt atkļūdošanu"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -612,7 +612,7 @@ msgstr "Šifrēšana"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr ""
+msgstr "Paplašinātais metafails (*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
@@ -626,7 +626,7 @@ msgstr "Paredzamais lejupielādes izmērs: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
+msgstr "Paplašinātais attēlu fails (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -634,7 +634,7 @@ msgstr "Izlaist tukšās lapas"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "Ātrais"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -650,7 +650,7 @@ msgstr "Datnes ceļš:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Fiksēt baltā balansu un dzēst trokšņus"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -658,7 +658,7 @@ msgstr "Apvērst"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Apgriezt puses divpusējām lapām"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -682,7 +682,7 @@ msgstr "Stikls"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -702,7 +702,7 @@ msgstr "Tonis / Piesātinājums"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Host adrese"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -747,7 +747,7 @@ msgstr "Importē..."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
-msgstr ""
+msgstr "Instalēt {0}"
 
 #: MiscResources.resx$InstallComplete$Message
 msgid "Installation Complete"
@@ -767,7 +767,7 @@ msgstr "Instalēšana neizdevās."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Saskarne"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -779,7 +779,7 @@ msgstr "JPEG datne (*.jpg, *.jpeg)"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
-msgstr ""
+msgstr "JPEG2000 fails (*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
@@ -787,7 +787,7 @@ msgstr "JPEG kvalitāte"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Saglabāt attēlus starp seansiem"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -795,7 +795,7 @@ msgstr "Atslēgvārdi:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -820,7 +820,7 @@ msgstr "Padarīt PDF meklējamus, izmantojot OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Manuālā IP adrese"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -828,7 +828,7 @@ msgstr "Maksimālā kvalitāte (lielas datnes)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr ""
+msgstr "Nosūtīšana izmantojot atmiņu"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -856,11 +856,11 @@ msgstr "Pārvietot uz augšu"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "Vairākas valodas"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "Vairākas valodas..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -874,11 +874,11 @@ msgstr "Vairākas skenēšanas (jautāt starp skenējumiem)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
@@ -894,7 +894,7 @@ msgstr "Nav nosaukuma."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr ""
+msgstr "Vecā tipa nosūtīšana"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -919,7 +919,7 @@ msgstr "Nav izvēlēta ierīce."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Neviena ierīce nav atrasta."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -945,7 +945,7 @@ msgstr "Nav"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Not Another PDF Scanner"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -957,7 +957,7 @@ msgstr "Skenējumu skaits:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -977,11 +977,11 @@ msgstr "OCR valoda:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr ""
+msgstr "OCR režīms:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr ""
+msgstr "Apstiprināt"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
@@ -1005,7 +1005,7 @@ msgstr "Vienu vai vairākas datnes nevarēja lejupielādēt."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Atļaut tikai vienu NAPS2 eksemplāru"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1046,19 +1046,19 @@ msgstr "PDF saglabāts."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1087,7 +1087,7 @@ msgstr "Vietrāži"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Ports"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1095,7 +1095,7 @@ msgstr "Pēcapstrāde"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Pēc skanēšanas sākt teksta atpazīšanu"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1133,7 +1133,7 @@ msgstr "Profili"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Prasīt, ja izvēlēts"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1165,11 +1165,11 @@ msgstr "Atgūšanas progress"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "Atkārtot"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "Atkārtot {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1201,11 +1201,11 @@ msgstr "Apvērst"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr ""
+msgstr "Apriezt visu"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr ""
+msgstr "Apgriezt izvēlēto"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1237,24 +1237,24 @@ msgstr "Notiek OCR..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
-msgstr ""
+msgstr "SANE draiveris"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "Saglabāt"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "Saglabāt visu"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "Saglabāt visu kā attēlus"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "Saglabāt visu kā PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1277,7 +1277,7 @@ msgstr "PDF saglabāšanas progress"
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "Saglabāt izvēlēto"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
@@ -1322,7 +1322,7 @@ msgstr "Skenēšanas konfigurācija"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Skenēt ar noklusējuma profilu"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1331,7 +1331,7 @@ msgstr "Skenētais attēls"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "Skenera kopīgošana"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1348,7 +1348,7 @@ msgstr "Skenē {0}. lappusi..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Tiek meklētas ierīces..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1364,7 @@ msgstr "Izvēlēties visu"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Izvēlieties ierīci"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1393,11 +1393,11 @@ msgstr "Uzstādīt noklusējumu"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "Uzstādījumi"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "Kopīgot"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
@@ -1561,7 +1561,7 @@ msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
@@ -1577,7 +1577,7 @@ msgstr "Virsraksts:"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
-msgstr ""
+msgstr "Rīki"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1593,11 +1593,11 @@ msgstr "US Letter (8.5x11 collas)"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "Atcelt"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "Atcelt {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1609,7 +1609,7 @@ msgstr "Atjauninājuma progress"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "Jauninājumu pārbaude ir atslēgta."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1666,7 +1666,7 @@ msgstr "Baltā slieksnis"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr ""
+msgstr "Wia versija:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1707,7 +1707,7 @@ msgstr "Samazināt"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1715,7 +1715,7 @@ msgstr "collas"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
@@ -1723,19 +1723,19 @@ msgstr "no {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"
@@ -1743,11 +1743,11 @@ msgstr "{0} / {1} datnes"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "Atrasta(-s) {0} ierīce(-s)."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr ""
+msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"

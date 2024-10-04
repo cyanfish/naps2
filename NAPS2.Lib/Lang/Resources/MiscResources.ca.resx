@@ -22,7 +22,7 @@
     <value>Segur que voleu buidar {0} pàgines?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>Segur que voleu suprimir {0} element(s)?</value>
+    <value>Segur que voleu suprimir {0} elements?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
     <value>Segur que voleu suprimir {0} perfils?</value>
@@ -43,7 +43,7 @@
     <value>L'escàner seleccionat està apagat.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>No teniu permís per desar fitxers en aquesta ubicació.</value>
+    <value>No teniu prou permisos per a desar fitxers en aquesta ubicació.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
@@ -124,7 +124,7 @@
     <value>Tot ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
-    <value>Seleccionat ({0})</value>
+    <value>Selecció ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Mida estimada de la baixada: {0} MB</value>
@@ -181,7 +181,7 @@
     <value>No hi ha cap pàgina a l'alimentador.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>No teniu prou permisos per copiar el contingut del fitxer '{0}'.</value>
+    <value>No teniu prou permisos per a copiar el contingut del fitxer '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>S'ha produït un error en desar el fitxer.</value>
@@ -196,7 +196,7 @@
     <value>S'ha cancel·lat l'escaneig per lots.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>S'està cancel·lant.......</value>
+    <value>S'està cancel·lant...</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
     <value>L'escaneig per lots ha finalitzat correctament.</value>
@@ -220,7 +220,7 @@
     <value>Tanca</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Resultats del desat en lot...</value>
+    <value>Resultats del desament en lot...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>L'escàner seleccionat no suporta dúplex (escaneig per dues cares). Si el vostre escàner suporta aquesta tecnologia, seleccioneu un controlador diferent.</value>
@@ -235,7 +235,7 @@
     <value>Progrés de la importació</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>S'està recuperant......</value>
+    <value>S'està recuperant...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
     <value>Progrés de la recuperació</value>
@@ -244,13 +244,13 @@
     <value>Desa les imatges</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Progrés del desat d'imatges</value>
+    <value>Progrés del desament d'imatges</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Desa (PDF)</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Progrés del desat en PDF</value>
+    <value>Progrés del desament en PDF</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
     <value>S'està desant {0}...</value>
@@ -274,16 +274,16 @@
     <value>Progrés d'enviament del PDF</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>S'ha produït un error amb el desat automàtic.</value>
+    <value>S'ha produït un error amb el desament automàtic.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
     <value>Tots els fitxers</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>Imatges</value>
+    <value>Fitxers d'imatge</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>L'escàner seleccionat esta ocupat.</value>
+    <value>L'escàner seleccionat està ocupat.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
     <value>La tapa de l'escàner està oberta.</value>
@@ -292,7 +292,7 @@
     <value>L'escàner té un embús de paper.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>S'està posant a punt l'escàner....</value>
+    <value>L'escàner s'està escalfant.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
     <value>Hi ha una actualització de l'OCR disponible.</value>
@@ -310,13 +310,13 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Segur que voleu suprimir {0} element(s)?</value>
+    <value>Segur que voleu suprimir {0} elements?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>No es pot sobreescriure el fitxer perquè està en ús.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>S'està alineant......</value>
+    <value>S'està alineant...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Progrés de l'alineació</value>
@@ -325,7 +325,7 @@
     <value>Baixada necessària</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Es requereix un complement extra per importar aquest fitxer PDF. Voleu baixar-ho ara?</value>
+    <value>Es requereix un complement extra per a importar aquest fitxer PDF. Voleu baixar-ho ara?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Segur que voleu cancel·lar el procés d'escaneig per lots?</value>
@@ -358,7 +358,7 @@
     <value>Progrés de l'actualització</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>S'està actualitzant......</value>
+    <value>S'està actualitzant...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
     <value>No hi ha actualitzacions disponibles.</value>
@@ -391,6 +391,6 @@
     <value>S'està escanejant la pàgina {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>S'estan obtenint les dades......</value>
+    <value>S'estan obtenint les dades...</value>
   </data>
 </root>

@@ -79,9 +79,9 @@
     <value>OCR-operaatio aikakatkaistiin.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Työprosessi kaatui.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Työprosessi kaatui. Tarkista Windows-tapahtuman katselija.</value>
   </data>
 </root>

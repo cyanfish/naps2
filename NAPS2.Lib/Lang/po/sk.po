@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-11 02:47\n"
+"PO-Revision-Date: 2024-10-04 23:31\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -1401,7 +1401,7 @@ msgstr "Zdieľať"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr "Zdieľať aj keď je NASP2 zavretý"
+msgstr "Zdieľať aj keď je NAPS2 zavretý"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"

@@ -79,9 +79,9 @@
     <value>Operacija OPZ-a je istekla.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Radni proces je prekinut.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Radni proces je prekinut. Provjerite preglednik događaja u Windowsu.</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-10-04 23:31\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -33,7 +33,7 @@ msgstr "\"Skannaa\" valikko muuttaa oletusprofiilia"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 laite löytyi."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "Vaihtoehtoinen lomitus"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Kysy aina"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -405,11 +405,11 @@ msgstr "Pakkaus:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Yhdistä"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Yhteysvirhe."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -702,7 +702,7 @@ msgstr "Sävy / kylläisyys"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Isäntä"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -820,7 +820,7 @@ msgstr "Mahdollista haku PDF:issä optisen tekstintunnistuksen avulla"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Manuaalinen IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +919,7 @@ msgstr "Laitetta ei valittu."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Laitteita ei löytynyt."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1087,7 +1087,7 @@ msgstr "Paikkamerkit"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Portti"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1348,7 +1348,7 @@ msgstr "Skannataan sivua {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Etsitään laitteita..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1364,7 @@ msgstr "Valitse kaikki"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Valitse laite"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1553,11 +1553,11 @@ msgstr "Valittu skanneri on offline-tilassa."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Työprosessi kaatui."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Työprosessi kaatui. Tarkista Windows-tapahtuman katselija."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1743,7 @@ msgstr "{0} / {1} tiedostoa"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} laitetta löytyi."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

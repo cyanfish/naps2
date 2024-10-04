@@ -46,13 +46,13 @@
     <value>No hi ha cap pàgina a l'alimentador.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>No teniu prou permisos per copiar el contingut del fitxer '{0}'.</value>
+    <value>No teniu prou permisos per a copiar el contingut del fitxer '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>L'escàner seleccionat no suporta dúplex (escaneig per dues cares). Si el vostre escàner suporta aquesta tecnologia, seleccioneu un controlador diferent.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>L'escàner seleccionat esta ocupat.</value>
+    <value>L'escàner seleccionat està ocupat.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
     <value>La tapa de l'escàner està oberta.</value>
@@ -61,7 +61,7 @@
     <value>L'escàner té un embús de paper.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>S'està posant a punt l'escàner....</value>
+    <value>L'escàner s'està escalfant.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>No s'ha trobat el controlador SANE. Assegureu-vos d'instal·lar les dependències necessàries:</value>

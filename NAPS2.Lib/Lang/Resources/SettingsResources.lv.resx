@@ -109,7 +109,7 @@
     <value>Stikls</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Auto</value>
+    <value>Automātiski</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -127,10 +127,10 @@
     <value>Savietojams (tikai standarta saskarne)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Vecā tipa nosūtīšana</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Nosūtīšana izmantojot atmiņu</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Vecais DSM</value>
@@ -142,27 +142,27 @@
     <value>Noklusētais</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Ātrais</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Vislabākais</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Saglabāt visu</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Saglabāt izvēlēto</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Vienmēr atgādināt</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Prasīt, ja izvēlēts</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Skenēt ar noklusējuma profilu</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Vienmēr atgādināt</value>
   </data>
 </root>
