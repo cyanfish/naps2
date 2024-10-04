@@ -1,3 +1,13 @@
+Changes in 7.5.2:
+- NAPS2 is now available on the Microsoft Store & the Mac App Store
+  - It costs a small fee to support the developer and provide automatic updates
+  - NAPS2 will continue to be freely available at www.naps2.com
+- Windows: Installers and executables are now EV code-signed
+- Fixed NAPS2.Console issues with cancellation
+- Fixed ESCL compatibility with AirSane
+- Fixed an issue with Apple Driver and out-of-order pages
+- Fixed auto save file prompts to cancel correctly
+
 Changes in 7.5.1:
 - Mac: Use more native icons
 - Fixed an issue loading profiles
