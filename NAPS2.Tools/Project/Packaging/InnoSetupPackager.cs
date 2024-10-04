@@ -5,8 +5,14 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class InnoSetupPackager
 {
-    public static void PackageExe(PackageInfo packageInfo)
+    public static void PackageExe(PackageInfo packageInfo, bool noSign)
     {
+        if (!noSign)
+        {
+            Output.Verbose("Signing contents");
+            WindowsSigning.SignContents(packageInfo);
+        }
+
         var exePath = packageInfo.GetPath("exe");
         Output.Info($"Packaging exe installer: {exePath}");
 
@@ -15,6 +21,12 @@ public static class InnoSetupPackager
         // TODO: Use https://github.com/DomGries/InnoDependencyInstaller for .net dependency
         var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/Inno Setup 6/iscc.exe");
         Cli.Run(iscc, $"\"{innoDefPath}\"");
+
+        if (!noSign)
+        {
+            Output.Verbose("Signing installer");
+            WindowsSigning.SignFile(exePath);
+        }
 
         Output.OperationEnd($"Packaged exe installer: {exePath}");
     }

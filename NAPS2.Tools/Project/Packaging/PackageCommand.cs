@@ -30,13 +30,13 @@ public class PackageCommand : ICommand<PackageOptions>
             switch (target.Type)
             {
                 case PackageType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"));
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig("Release"), opts.NoSign);
                     break;
                 case PackageType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"));
+                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig("Release-Msi"), opts.NoSign);
                     break;
                 case PackageType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"));
+                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig("Release-Zip"), opts.NoSign);
                     break;
                 case PackageType.Deb:
                     DebPackager.PackageDeb(GetPackageInfoForConfig(), opts.NoSign);

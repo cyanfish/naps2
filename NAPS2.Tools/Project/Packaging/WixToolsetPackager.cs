@@ -6,8 +6,14 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class WixToolsetPackager
 {
-    public static void PackageMsi(PackageInfo pkgInfo)
+    public static void PackageMsi(PackageInfo pkgInfo, bool noSign)
     {
+        if (!noSign)
+        {
+            Output.Verbose("Signing contents");
+            WindowsSigning.SignContents(pkgInfo);
+        }
+
         var msiPath = pkgInfo.GetPath("msi");
         Output.Info($"Packaging msi installer: {msiPath}");
         var wxsPath = GenerateWxs(pkgInfo);
@@ -20,6 +26,13 @@ public static class WixToolsetPackager
 
         var light = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.11/bin/light.exe");
         Cli.Run(light, $"\"{wixobjPath}\" -spdb -ext WixUIExtension -o \"{msiPath}\"");
+
+        if (!noSign)
+        {
+            Output.Verbose("Signing installer");
+            WindowsSigning.SignFile(msiPath);
+        }
+
         Output.OperationEnd($"Packaged msi installer: {msiPath}");
     }
 

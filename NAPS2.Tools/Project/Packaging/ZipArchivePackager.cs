@@ -4,8 +4,14 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class ZipArchivePackager
 {
-    public static void PackageZip(PackageInfo pkgInfo)
+    public static void PackageZip(PackageInfo pkgInfo, bool noSign)
     {
+        if (!noSign)
+        {
+            Output.Verbose("Signing contents");
+            WindowsSigning.SignContents(pkgInfo);
+        }
+
         var zipPath = pkgInfo.GetPath("zip");
         Output.Info($"Packaging zip archive: {zipPath}");
         if (File.Exists(zipPath))
