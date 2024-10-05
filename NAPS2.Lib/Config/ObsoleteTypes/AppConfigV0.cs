@@ -53,6 +53,8 @@ public class AppConfigV0
 
     public bool HideDonateButton { get; set; }
 
+    public bool HideSidebar { get; set; }
+
     public bool DisableAutoSave { get; set; }
 
     public bool LockSystemProfiles { get; set; }

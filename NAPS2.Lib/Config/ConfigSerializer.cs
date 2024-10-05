@@ -188,6 +188,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         if (c.HidePrintButton) flags |= ToolbarButtons.Print;
         if (c.HideSettingsButton) flags |= ToolbarButtons.Settings;
         if (c.HideDonateButton) flags |= ToolbarButtons.Donate;
+        if (c.HideSidebar) flags |= ToolbarButtons.Sidebar;
         return flags;
     }
 

@@ -124,7 +124,9 @@ public abstract class DesktopForm : EtoFormBase
 
         LayoutController.RootPadding = 0;
         LayoutController.Content = L.LeftPanel(
-            _sidebar.CreateView(this),
+            Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Sidebar)
+                ? C.None()
+                : _sidebar.CreateView(this),
             L.Overlay(
                 // For WinForms, we add 1px of top padding to give us room to draw a border above the listview
                 _listView.Control.Padding(top: EtoPlatform.Current.IsWinForms ? 1 : 0),
@@ -435,6 +437,10 @@ public abstract class DesktopForm : EtoFormBase
 
     protected LayoutElement GetSidebarButton()
     {
+        if (Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Sidebar))
+        {
+            return C.None();
+        }
         var toggleSidebar = C.ImageButton(Commands.ToggleSidebar);
         EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list_small");
         return toggleSidebar.AlignTrailing();
