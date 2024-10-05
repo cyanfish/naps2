@@ -21,7 +21,7 @@
   <HidePrintButton>false</HidePrintButton>
   <HideSettingsButton>false</HideSettingsButton>
   <HideDonateButton>false</HideDonateButton>
-  <HideSidebar>true</HideSidebar>
+  <HideSidebar>false</HideSidebar>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
   <LockUnspecifiedDevices>false</LockUnspecifiedDevices>
