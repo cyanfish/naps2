@@ -25,7 +25,7 @@
   <PropertyGroup Condition="'$(TargetFramework)' == 'net8-macos'">
     <DefineConstants>MAC</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(AddDebugConstant)' == '1'">
+  <PropertyGroup Condition="'$(AddDebugConstant)' == '1' or '$(Configuration)' == 'DebugLang' or '$(Configuration)' == 'DebugNoMac'">
     <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
   </PropertyGroup>
   
