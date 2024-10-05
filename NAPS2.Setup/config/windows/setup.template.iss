@@ -27,7 +27,7 @@ VersionInfoVersion={#AppVersion}
 VersionInfoProductName={#AppShortName}
 VersionInfoProductVersion={#AppVersion}
 VersionInfoCompany={#AppCompany}
-VersionInfoCopyright=(c) {#AppCopyrightStartYear}-{#AppCopyrightEndYear}
+VersionInfoCopyright=(c) {#AppCopyrightStartYear}-{#AppCopyrightEndYear} {#AppCompany}
 
 ShowLanguageDialog=yes
 UsePreviousLanguage=no
