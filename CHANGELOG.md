@@ -1,4 +1,5 @@
 Changes in 8.0b1:
+- [Beta feedback thread](https://github.com/cyanfish/naps2/discussions/467)
 - Added a scanning sidebar
     - Quickly change basic profile settings
     - Click the icon in the bottom-left (top-left on Mac) to open/close
