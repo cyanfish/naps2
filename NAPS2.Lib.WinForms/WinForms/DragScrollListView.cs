@@ -22,6 +22,7 @@ public class DragScrollListView : ListView
         _tmrLvScroll = new Timer(components);
         SuspendLayout();
         _tmrLvScroll.Tick += tmrLVScroll_Tick;
+        HandleDestroyed += (_, _) => _tmrLvScroll.Dispose();
         DragOver += ListViewBase_DragOver;
         ResumeLayout(false);
     }
