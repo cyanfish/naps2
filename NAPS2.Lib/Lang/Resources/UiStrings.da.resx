@@ -828,4 +828,10 @@
   <data name="NoDevicesFound" xml:space="preserve">
     <value>Ingen enheder fundet.</value>
   </data>
+  <data name="ToggleSidebar" xml:space="preserve">
+    <value>Sidebar</value>
+  </data>
+  <data name="CantFindScannerFlatpak" xml:space="preserve">
+    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+  </data>
 </root>
