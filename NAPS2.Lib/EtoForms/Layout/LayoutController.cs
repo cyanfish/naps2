@@ -41,8 +41,21 @@ public class LayoutController
         window.Content = _layout;
         window.LoadComplete += (_, _) =>
         {
-            _isShown = true;
+            if (window is not Form)
+            {
+                // For dialogs loading is equivalent to being shown
+                _isShown = true;
+            }
             DoLayout();
+        };
+        window.Shown += (_, _) =>
+        {
+            // For forms, it's possible they might be maximized between LoadComplete and Shown so we need to relayout
+            if (window is Form)
+            {
+                _isShown = true;
+                DoLayout();
+            }
         };
         window.SizeChanged += (_, _) => DoLayout();
     }
