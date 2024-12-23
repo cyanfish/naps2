@@ -128,8 +128,10 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _buffer = null;
             var tcs = new TaskCompletionSource<IMemoryImage?>();
             // Ensure sequencing is maintained when writing to the callback even if copy tasks finish out of order
-            _writeToCallback = (_writeToCallback ?? Task.CompletedTask).ContinueWith(async _ =>
+            var previousCallback = _writeToCallback ?? Task.CompletedTask;
+            _writeToCallback = Task.Run(async () =>
             {
+                await previousCallback;
                 var image = await tcs.Task;
                 if (image != null)
                 {
