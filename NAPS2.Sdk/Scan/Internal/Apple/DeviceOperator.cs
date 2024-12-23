@@ -125,6 +125,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         {
             _logger.LogDebug("DidScanToBandData buffer complete");
             var fullBuffer = _buffer;
+            _buffer = null;
             var tcs = new TaskCompletionSource<IMemoryImage?>();
             // Ensure sequencing is maintained when writing to the callback even if copy tasks finish out of order
             _writeToCallback = (_writeToCallback ?? Task.CompletedTask).ContinueWith(async _ =>
