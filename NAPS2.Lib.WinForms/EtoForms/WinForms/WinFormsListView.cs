@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.Menu;
@@ -203,11 +204,19 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private void OnDragEnter(object? sender, DragEventArgs e)
     {
         var data = e.Data.ToEto();
-        if (data.Contains(_behavior.CustomDragDataType) && _behavior.AllowDragDrop)
+        // TODO: Figure out why .Contains is not working correctly on net9
+        try
         {
-            e.Effect = _behavior.GetCustomDragEffect(data.GetData(_behavior.CustomDragDataType)).ToSwf();
+            if (data.Contains(_behavior.CustomDragDataType) && _behavior.AllowDragDrop)
+            {
+                e.Effect = _behavior.GetCustomDragEffect(data.GetData(_behavior.CustomDragDataType)).ToSwf();
+                return;
+            }
         }
-        else if (data.Contains("FileDrop") && _behavior.AllowFileDrop)
+        catch (COMException)
+        {
+        }
+        if (data.Contains("FileDrop") && _behavior.AllowFileDrop)
         {
             e.Effect = DragDropEffects.Copy;
         }
@@ -423,20 +432,33 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private void OnDragDrop(object? sender, DragEventArgs e)
     {
         var index = GetDragIndex(e);
+        _view.InsertionMark.Index = -1;
         if (index != -1)
         {
             var data = e.Data.ToEto();
-            if (data.Contains(_behavior.CustomDragDataType))
+            // TODO: Figure out why .Contains is not working correctly on net9
+            try
             {
-                Drop?.Invoke(this, new DropEventArgs(index, data.GetData(_behavior.CustomDragDataType)));
+                if (data.Contains(_behavior.CustomDragDataType))
+                {
+                    Drop?.Invoke(this, new DropEventArgs(index, data.GetData(_behavior.CustomDragDataType)));
+                }
             }
-            else if (data.Contains("FileDrop"))
+            catch (COMException)
             {
-                var filePaths = (string[]) e.Data!.GetData(DataFormats.FileDrop)!;
-                Drop?.Invoke(this, new DropEventArgs(index, filePaths));
+            }
+            try
+            {
+                if (data.Contains("FileDrop"))
+                {
+                    var filePaths = (string[]) e.Data!.GetData(DataFormats.FileDrop)!;
+                    Drop?.Invoke(this, new DropEventArgs(index, filePaths));
+                }
+            }
+            catch (COMException)
+            {
             }
         }
-        _view.InsertionMark.Index = -1;
     }
 
     private void OnDragLeave(object? sender, EventArgs e)
