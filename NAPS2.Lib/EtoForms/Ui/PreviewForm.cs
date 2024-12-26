@@ -126,7 +126,7 @@ public class PreviewForm : EtoDialogBase
     protected override void BuildLayout()
     {
         Title = UiStrings.PreviewFormTitle;
-        Icon = Icons.favicon.ToEtoIcon();
+        Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
 
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(800, 600);
