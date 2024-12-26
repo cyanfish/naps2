@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net462;net6</TargetFrameworks>
+        <TargetFrameworks>net462;net6;net8</TargetFrameworks>
         <RootNamespace>NAPS2.Sdk.Worker</RootNamespace>
         <AssemblyName>NAPS2.Sdk.Worker.Win32</AssemblyName>
 

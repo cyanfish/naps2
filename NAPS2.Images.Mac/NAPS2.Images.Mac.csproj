@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6;net8-macos</TargetFrameworks>
+        <TargetFrameworks>net6;net8;net8-macos</TargetFrameworks>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <CheckEolTargetFramework>false</CheckEolTargetFramework>
@@ -17,14 +17,14 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="Eto.Platform.Mac64" Version="2.8.3" Condition="'$(TargetFramework)' == 'net6'" />
+        <PackageReference Include="Eto.Platform.Mac64" Version="2.8.3" Condition="'$(TargetFramework)' != 'net8-macos'" />
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)' == 'net6'">
+    <PropertyGroup Condition="'$(TargetFramework)' != 'net8-macos'">
         <DefineConstants>MONOMAC</DefineConstants>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net6'">
+    <ItemGroup Condition="'$(TargetFramework)' != 'net8-macos'">
         <Using Include="MonoMac.AppKit" />
         <Using Include="MonoMac.CoreGraphics" />
         <Using Include="MonoMac.Foundation" />
