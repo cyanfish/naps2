@@ -5,7 +5,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>12</LangVersion>
-        <EnablePreviewFeatures>true</EnablePreviewFeatures>
 
         <Title>NAPS2.Escl</Title>
         <Product>NAPS2.Escl</Product>
