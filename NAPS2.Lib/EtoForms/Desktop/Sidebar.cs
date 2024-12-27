@@ -20,6 +20,7 @@ public class Sidebar
 
     private readonly LayoutVisibility _sidebarVis = new(true);
     private readonly LayoutVisibility _onboardingVis = new(false);
+    private readonly LayoutVisibility _predefinedVis = new(true);
     private readonly DropDownWidget<ScanProfile> _profile = new();
     private readonly EnumDropDownWidget<ScanSource> _paperSource = new();
     private readonly DropDownWidget<int> _resolution = new();
@@ -160,15 +161,17 @@ public class Sidebar
                 _profile.AsControl(),
                 C.Spacer(),
                 _deviceSelectorWidget,
-                C.Spacer(),
-                C.Label(UiStrings.PaperSourceLabel),
-                _paperSource,
-                C.Label(UiStrings.PageSizeLabel),
-                _pageSize,
-                C.Label(UiStrings.ResolutionLabel),
-                _resolution,
-                C.Label(UiStrings.BitDepthLabel),
-                _bitDepth,
+                L.Column(
+                    C.Spacer(),
+                    C.Label(UiStrings.PaperSourceLabel),
+                    _paperSource,
+                    C.Label(UiStrings.PageSizeLabel),
+                    _pageSize,
+                    C.Label(UiStrings.ResolutionLabel),
+                    _resolution,
+                    C.Label(UiStrings.BitDepthLabel),
+                    _bitDepth
+                ).Visible(_predefinedVis),
                 C.Spacer(),
                 C.Button(ScanCommand, ButtonImagePosition.Left).AlignCenter().Height(30)
             ).Visible(!_onboardingVis),
@@ -195,6 +198,8 @@ public class Sidebar
         {
             _deviceSelectorWidget!.Choice = DeviceChoice.ForAlwaysAsk(deviceDriver);
         }
+
+        _predefinedVis.IsVisible = !profile.UseNativeUI;
 
         if (profile.PageSize == ScanPageSize.Custom && profile.CustomPageSize != null)
         {
