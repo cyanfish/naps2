@@ -3,7 +3,7 @@ using Eto.Forms;
 
 namespace NAPS2.EtoForms.Layout;
 
-public class LayoutLeftPanel : LayoutElement
+public class LayoutLeftPanel : LayoutContainer
 {
     private readonly LayoutElement _left;
     private readonly LayoutElement _right;
@@ -13,7 +13,7 @@ public class LayoutLeftPanel : LayoutElement
     private Action<int> _widthSetter = _ => { };
     private bool _isInitialized;
 
-    public LayoutLeftPanel(LayoutElement left, LayoutElement right)
+    public LayoutLeftPanel(LayoutElement left, LayoutElement right) : base([left, right])
     {
         _left = left;
         _right = right;
