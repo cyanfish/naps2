@@ -208,7 +208,7 @@
     <value>Shfaqi numrat e faqeve</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>Действие кнопки "Скан":</value>
+    <value>Veprimi i paracaktuar i butonit "Skano":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
     <value>Veprimi i paracaktuar i butonit "Ruaj":</value>
@@ -355,7 +355,7 @@
     <value>Zgjidh burimin</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Zgjidh pajisjen</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Ekzekuto në sfond</value>
@@ -388,7 +388,7 @@
     <value>Ekzekuto OCR automatikisht pas skanimit</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Ekzekuto në mënyrë paraprake OCR mbas skanimit</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Merr më shumë gjuhë</value>
@@ -694,7 +694,7 @@
     <value>Kthe përmbys faqet duplekse</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Kalo mbrapa anët e faqeve duplekse</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versioni Wia:</value>
@@ -796,37 +796,37 @@
     <value>Kombinoje</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP statike</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP statike</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/Makina</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>Porta</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Lidhu</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Gabim në lidhje.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Pyet gjithmonë</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>Po kërkon pajisjet...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>U gjetën {0} pajisje.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>U gjet 1 pajisje.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Nuk u gjet asnjë pajisje.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar</value>

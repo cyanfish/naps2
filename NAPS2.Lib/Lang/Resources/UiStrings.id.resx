@@ -19,7 +19,7 @@
     <value>Copyright {0} , Kontributor NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Icons from:</value>
+    <value>Ikon dari:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Periksa pembaharuan</value>
@@ -100,10 +100,10 @@
     <value>Image Settings</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>Emailkan PDF</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>Pengaturan Email</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Print</value>
@@ -145,7 +145,7 @@
     <value>Rotate Right</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Flip</value>
+    <value>Putar Balik</value>
   </data>
   <data name="Deskew" xml:space="preserve">
     <value>miring-mereng</value>
@@ -196,10 +196,10 @@
     <value>Settings</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>Antarmuka</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Menu "Pindai" mengubah profil bawaan</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>Show "Profiles" toolbar</value>
@@ -208,13 +208,13 @@
     <value>Show page numbers</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>Aksi bawaan tombol "Pindai":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>Aksi bawaan tombol "Simpan":</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>Aplikasi</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
     <value>Only allow a single NAPS2 instance</value>
@@ -259,16 +259,16 @@
     <value>Save Selected as Images</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>Emailkan Semua</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>Emailkan Pilihan</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>Emailkan Semua sebagai PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>Emailkan Pilihan sebagai PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profile Settings</value>
@@ -301,7 +301,7 @@
     <value>piranti:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Choose device</value>
+    <value>Pilih perangkat</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Use predefined settings</value>
@@ -325,7 +325,7 @@
     <value>Kedalaman bit:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
-    <value>Horizontal align:</value>
+    <value>Penyelarasan horizontal:</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
     <value>Scale:</value>
@@ -334,7 +334,7 @@
     <value>Kontras:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
-    <value>Enable Auto Save</value>
+    <value>Aktifkan Penyimpanan Otomatis</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
     <value>Pengaturan (Auto Save)</value>
@@ -382,7 +382,7 @@
     <value>OCR mode:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Perbaiki white balance dan hilangkan noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Auto Jalankan OCR Teks setelah pemindaian</value>
@@ -391,7 +391,7 @@
     <value>Pre-emptively run OCR after scanning</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
-    <value>Get more languages</value>
+    <value>Dapatkan bahasa lain</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
     <value>OCR Download</value>
@@ -403,7 +403,7 @@
     <value>Select one or more languages:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Estimated download size: {0} MB</value>
+    <value>Estimasi ukuran unduhan: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Unduh</value>
@@ -454,7 +454,7 @@
     <value>Single page files</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Encrypt PDF</value>
+    <value>Enkripsi PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Show</value>
@@ -520,7 +520,7 @@
     <value>Metadata</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Encryption</value>
+    <value>Enkripsi</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
     <value>Kompatibilitas</value>
@@ -541,7 +541,7 @@
     <value>Tanggal (01-31)</value>
   </data>
   <data name="Hour2Digit" xml:space="preserve">
-    <value>Hour (0-23)</value>
+    <value>Jam (0-23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
     <value>Minute (00-59)</value>
@@ -568,7 +568,7 @@
     <value>Preview:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
+    <value>Untuk JPEG kualitas tinggi, tingkatkan juga kualitas gambar di profilmu untuk hasil terbaik.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Jpeg Quality</value>
@@ -583,7 +583,7 @@
     <value>Image Settings</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>Pengaturan Email</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
     <value>Settings</value>
@@ -607,7 +607,7 @@
     <value>Waiting for authorization...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>Kesalahan</value>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Technical Details</value>
@@ -664,7 +664,7 @@
     <value>Laman Kosong</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Exclude blank pages</value>
+    <value>Lewati halaman kosong</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
     <value>White Threshold</value>
@@ -691,10 +691,10 @@
     <value>Crop ke ukuran halaman</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Flip duplexed pages</value>
+    <value>Balik halaman bolak-balik</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Balik sisi halaman bolak-balik</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia Version:</value>
@@ -757,7 +757,7 @@
     <value>Tools</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>Aktifkan debug logging</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>
@@ -775,7 +775,7 @@
     <value>Shared Scanner Settings</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Anda yakin ingin berhenti membagikan {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Share even when NAPS2 is closed</value>
@@ -793,7 +793,7 @@
     <value>Split</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Gabungkan</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
     <value>Manual IP</value>
@@ -808,13 +808,13 @@
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Hubungkan</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Kesalahan koneksi.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Selalu tanyakan</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
     <value>Searching for devices...</value>
@@ -823,7 +823,7 @@
     <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>1 perangkat ditemukan.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
     <value>No devices found.</value>

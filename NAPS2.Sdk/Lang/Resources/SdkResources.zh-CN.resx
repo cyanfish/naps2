@@ -19,7 +19,7 @@
     <value>选定的扫描仪处于脱机状态.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>与扫描设备的通信中断</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -79,9 +79,9 @@
     <value>OCR操作超时</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>工作进程崩溃</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>工作进程崩溃。检查 Windows 事件查看器</value>
   </data>
 </root>

@@ -19,7 +19,7 @@
     <value>Kedalaman Warna 24-Bit</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Grayscale</value>
+    <value>Skala abu-abu</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
     <value>{0} dpi</value>
@@ -103,10 +103,10 @@
     <value>Bolak Balik / 2 muka</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Feeder</value>
+    <value>Pengumpan</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Glass</value>
+    <value>Kaca</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
     <value>Auto</value>
@@ -154,7 +154,7 @@
     <value>Save Selected</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Selalu tanya</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
     <value>Prompt If Selected</value>
@@ -163,6 +163,6 @@
     <value>Scan With Default Profile</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Selalu tanya</value>
   </data>
 </root>

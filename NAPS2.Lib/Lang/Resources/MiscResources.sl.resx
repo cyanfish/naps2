@@ -190,7 +190,7 @@
     <value>od {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Med paketnim pregledom je prišlo do neznane napake.</value>
+    <value>Med zaporednim skeniranjem je prišlo do neznane napake.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Zaporedno skeniranje preklicano.</value>
@@ -328,7 +328,7 @@
     <value>Za uvoz te PDF datoteke je potrebna dodatna komponenta. Jo želite prenesti sedaj?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Prekini zaporedno skeniranje?</value>
+    <value>Ali želite prekiniti zaporedno skeniranje?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
     <value>Prekliči paket</value>

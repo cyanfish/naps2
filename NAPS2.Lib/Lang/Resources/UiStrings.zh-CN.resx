@@ -355,7 +355,7 @@
     <value>选择来源</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>选择设备</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>在后台运行</value>
@@ -388,7 +388,7 @@
     <value>扫描后自动进行 OCR 识别</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>扫描后自动运行 OCR</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>获取更多的语言</value>
@@ -694,7 +694,7 @@
     <value>翻转偶数页面</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>翻转双面打印的背面</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia 版本：</value>
@@ -796,37 +796,37 @@
     <value>合并</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>手动IP地址</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>手动IP地址</value>
   </data>
   <data name="IpHost" xml:space="preserve">
     <value>IP/Host</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>端口</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>连接</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>连接出错</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>总是询问</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>正在搜索设备…</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>找到 {0} 台设备</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>找到 1 台设备</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>未找到设备</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar</value>

@@ -46,7 +46,7 @@
     <value>Skeniraj</value>
   </data>
   <data name="SetDefault" xml:space="preserve">
-    <value>Nastavi Privzeto</value>
+    <value>Nastavi privzeto</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Kopiraj</value>
@@ -169,10 +169,10 @@
     <value>Razpletanje</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Drugačno Prepletanje</value>
+    <value>Drugačno prepletanje</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Drugačno Razpletanje</value>
+    <value>Drugačno razpletanje</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Obrni Vrstni Red</value>
@@ -199,7 +199,7 @@
     <value>Vmesnik</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>Meni "Skeniraj" spremeni privzeti profil</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
     <value>Prikaži vrstico "Profili"</value>
@@ -217,7 +217,7 @@
     <value>Aplikacija</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>Dovoli samo eno aktivno okno NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Vizitka</value>
@@ -355,10 +355,10 @@
     <value>Izberi Izvor</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Izberi napravo</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Poženi v ozadju</value>
+    <value>Izvajaj v ozadju</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -382,13 +382,13 @@
     <value>Način OCR:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Popravi ravnovesje beline in odstrani šum</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Avtomatsko zaženi OCR po skeniranju</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Izvedi OCR po skeniranju</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Pridobi več jezikov</value>
@@ -427,7 +427,7 @@
     <value>Povrni</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
-    <value>Uveljavi na vseh {0} izbranih slikah</value>
+    <value>Uveljavite na vseh {0} izbranih slikah</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Izberi Vse</value>
@@ -460,37 +460,37 @@
     <value>Pokaži</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
-    <value>Povrni Privzete Nastavitve</value>
+    <value>Povrni privzete nastavitve</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
     <value>PDF Nastavitve</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
-    <value>Dovoli Tiskanje</value>
+    <value>Dovolite tiskanje</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>Dovoli Tiskanje v Polni Kvaliteti</value>
+    <value>Dovolite tiskanje v najboljši kvaliteti</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
-    <value>Dovoli Spreminjanje Dokumenta</value>
+    <value>Dovolite spreminjanje dokumenta</value>
   </data>
   <data name="AllowDocumentAssembly" xml:space="preserve">
-    <value>Dovoli Sestavo Dokumenta</value>
+    <value>Dovolite sestavo dokumenta</value>
   </data>
   <data name="AllowContentCopying" xml:space="preserve">
-    <value>Dovoli Kopiranje Vsebine</value>
+    <value>Dovolite kopiranje vsebine</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Dovoli Kopiranje Vsebine za Dostopnost</value>
+    <value>Dovolite kopiranje vsebine za dostopnost</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
-    <value>Dovoli Opombe</value>
+    <value>Dovolite opombe</value>
   </data>
   <data name="AllowFormFilling" xml:space="preserve">
-    <value>Dovoli Izpolnjevanje Obrazca</value>
+    <value>Dovolite izpolnjevanje obrazca</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>Privzeta Pot Datotek:</value>
+    <value>Privzeta pot datotek:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
     <value>Pot datoteke:</value>
@@ -637,7 +637,7 @@
     <value>Po shranjevanju počisti slike</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Ohrani slike med sejami</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Velikost strani po meri</value>
@@ -679,7 +679,7 @@
     <value>Poravnaj skenirane strani</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
-    <value>Uveljavi svetlost/kontrast po skeniranju</value>
+    <value>Uveljavite svetlost/kontrast po skeniranju</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
     <value>Zamik glede na poravnavo (WIA)</value>
@@ -694,7 +694,7 @@
     <value>Preslikaj obojestranske strani</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Obrni zadnje strani dvostranskih listov</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Različica Wia:</value>
@@ -763,31 +763,31 @@
     <value>Souporaba</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Deljenje optičnega bralnika</value>
+    <value>Skupna raba skenerja</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Deljenje optičnega bralnika</value>
+    <value>Skupna raba skenerja</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>Skenerje v skupni rabi lahko uporabljajo drugi računalniki v lokalnem omrežju z izbiro "ESCL gonilnik" v nastavitvah profila NAPS2 na drugem računalniku.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>Skupna raba nastavitev skenerja</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>Ali si prepričan, da želiš ustaviti deljenje {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>Skupna raba, četudi je NAPS2 zaprt</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>Večjezično...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>Večjezično</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>Prikaži nativni TWAIN napredek</value>
   </data>
   <data name="Split" xml:space="preserve">
     <value>Razdeli</value>
@@ -796,37 +796,37 @@
     <value>Združi</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Ročni IP naslov</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Ročni IP naslov</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/gostitelj</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>Vrata</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Poveži</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Napaka v povezavi.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Vedno vprašaj</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>Iščem naprave...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>{0} naprav najdenih.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>Najdena je bila 1 naprava.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Ne najdem naprav.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar</value>

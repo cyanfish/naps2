@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-10-05 17:46\n"
+"PO-Revision-Date: 2024-12-28 00:12\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -25,7 +25,7 @@ msgstr "Veprimi i paracaktuar i butonit \"Ruaj\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr "Действие кнопки \"Скан\":"
+msgstr "Veprimi i paracaktuar i butonit \"Skano\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
@@ -33,7 +33,7 @@ msgstr "Меню \"Скан\" меняет профиль по умолчани�
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "U gjet 1 pajisje."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "Krijimi i shtresave alternative"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Pyet gjithmonë"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -397,7 +397,7 @@ msgstr "Kombinoje"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Komunikimi me pajisjen e skanimit u ndërpre."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -409,11 +409,11 @@ msgstr "Ngjeshja:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Lidhu"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Gabim në lidhje."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -662,7 +662,7 @@ msgstr "Përmbys"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Kalo mbrapa anët e faqeve duplekse"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -706,7 +706,7 @@ msgstr "Ngjyrimi/Ngopja"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Makina"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -824,7 +824,7 @@ msgstr "Bëji PDF-të të kërkueshme duke përdorur OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "IP statike"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -923,7 +923,7 @@ msgstr "Nuk është zgjedhur asnjë pajisje."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Nuk u gjet asnjë pajisje."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1091,7 +1091,7 @@ msgstr "Vendmbajtëset"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Porta"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1099,7 +1099,7 @@ msgstr "Pas përpunimit"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Ekzekuto në mënyrë paraprake OCR mbas skanimit"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1352,7 +1352,7 @@ msgstr "Po skanon faqen {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Po kërkon pajisjet..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1368,7 +1368,7 @@ msgstr "Zgjidhi të gjitha"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Zgjidh pajisjen"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1561,11 +1561,11 @@ msgstr "Skaneri i zgjedhur është jashtë linje."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Procesi i punës u ndërpre."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Procesi i punës u ndërpre. Kontrolloni shikuesin e ngjarjeve të Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1751,7 +1751,7 @@ msgstr "{0} / {1} skedarë"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "U gjetën {0} pajisje."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

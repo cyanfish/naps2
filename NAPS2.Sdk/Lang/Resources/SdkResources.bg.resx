@@ -79,9 +79,9 @@
     <value>Операцията за OCR изтече.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Работният процес се срина.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Работният процес се срина. Проверете програмата за преглед на събитията на Windows.</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-10-05 17:46\n"
+"PO-Revision-Date: 2024-12-30 22:55\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -331,7 +331,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "Vous ne trouvez pas votre scanner ? Découvrez les limites du Flatpak NPAS2."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -509,7 +509,7 @@ msgstr "Réalignement…"
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
-msgstr "Périphérique :"
+msgstr "Périphérique"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
@@ -554,15 +554,15 @@ msgstr "Recto-verso"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr "Pilote ESCL"
+msgstr "Pilote eSCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr "Pilote réseau ESCL"
+msgstr "Pilote réseau eSCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr "Pilote USB ESCL"
+msgstr "Pilote USB eSCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -706,7 +706,7 @@ msgstr "Teinte / Saturation"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr "IP de l’hôte"
+msgstr "IP/Hôte"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -864,7 +864,7 @@ msgstr "Multilingue"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr "Multilingue..."
+msgstr "Multilingue…"
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -1352,7 +1352,7 @@ msgstr "Acquisition de la page {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr "Recherche de périphériques..."
+msgstr "Recherche de périphériques…"
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1368,7 +1368,7 @@ msgstr "Tout sélectionner"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr "Choix du périphérique"
+msgstr "Choisir un périphérique"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1413,7 +1413,7 @@ msgstr "Paramètres de partage de scanner"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr "Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « Pilote ESCL » dans les paramètres de profil NAPS2 de l'autre ordinateur."
+msgstr "Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « Pilote eSCL » dans les paramètres de profil NAPS2 de l'autre ordinateur."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1437,7 +1437,7 @@ msgstr "Afficher les numéros de page"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "Barre latérale"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1453,7 +1453,7 @@ msgstr "Ignorer l'invite d'enregistrement"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr "Diviser"
+msgstr "Scinder"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1565,7 +1565,7 @@ msgstr "Le processus de travail a planté."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr "Le processus de travail a planté. Vérifiez la visionneuse d'événements Windows."
+msgstr "Le processus de travail a planté. Vérifier dans l'Observateur d'évènements Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"

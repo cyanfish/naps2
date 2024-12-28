@@ -829,9 +829,9 @@
     <value>Nem található eszköz.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sidebar</value>
+    <value>Oldalsáv</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+    <value>Nem találja a lapolvasóját? Olvasson a NAPS2 Flatpak korlátairól.</value>
   </data>
 </root>

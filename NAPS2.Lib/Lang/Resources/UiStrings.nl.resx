@@ -829,9 +829,9 @@
     <value>Geen apparaten gevonden.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sidebar</value>
+    <value>Zijbalk</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+    <value>Kun je je scanner niet vinden? Lees dan over de beperkingen van NAPS2 Flatpak.</value>
   </data>
 </root>
