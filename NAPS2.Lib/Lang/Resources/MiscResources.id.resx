@@ -46,13 +46,13 @@
     <value>You don't have permission to save files at this location.</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Kesalahan</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>berkas Bitmap (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
+    <value>Tingkatkan Windows MetaFile (*.emf)</value>
   </data>
   <data name="FileTypeExif" xml:space="preserve">
     <value>Exchangeable Image File (*.exif)</value>
@@ -127,7 +127,7 @@
     <value>Selected ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Estimated download size: {0} MB</value>
+    <value>Estimasi ukuran unduhan: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
     <value>{0} / {1} files</value>
@@ -268,10 +268,10 @@
     <value>Importing...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>Emailkan PDF</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Email PDF Progress</value>
+    <value>Emailkan Progres PDF</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
     <value>Galat ditemukan ketika menyimpan otomatis.</value>

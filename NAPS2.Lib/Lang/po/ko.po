@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-10-04 23:31\n"
+"PO-Revision-Date: 2024-12-28 00:12\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -328,6 +328,10 @@ msgstr "밝기:"
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
 msgstr "CCITT4"
+
+#: UiStrings.resx$CantFindScannerFlatpak$Message
+msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
+msgstr ""
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -1429,6 +1433,10 @@ msgstr ""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
+msgstr ""
+
+#: UiStrings.resx$ToggleSidebar$Message
+msgid "Sidebar"
 msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message

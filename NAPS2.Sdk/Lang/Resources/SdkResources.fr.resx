@@ -82,6 +82,6 @@
     <value>Le processus de travail a planté.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>Le processus de travail a planté. Vérifiez la visionneuse d'événements Windows.</value>
+    <value>Le processus de travail a planté. Vérifier dans l'Observateur d'évènements Windows.</value>
   </data>
 </root>

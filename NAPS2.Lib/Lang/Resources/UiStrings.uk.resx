@@ -19,7 +19,7 @@
     <value>Всі права застережено {0} Розробники NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Піктограми взяті з:</value>
+    <value>Використання значків:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Перевірка оновлень</value>
@@ -79,7 +79,7 @@
     <value>Пакетне сканування</value>
   </data>
   <data name="Ocr" xml:space="preserve">
-    <value>Розпізнавання</value>
+    <value>Розпізнати</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Профілі</value>
@@ -355,7 +355,7 @@
     <value>Вибрати джерело</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Виберіть пристрій</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Виконувати на задньому фоні</value>
@@ -460,7 +460,7 @@
     <value>Показати</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
-    <value>Відновити типові</value>
+    <value>Скинути до типових</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
     <value>Налаштування PDF </value>
@@ -796,36 +796,36 @@
     <value>Об'єднати</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Вручну IP</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>Вручну IP</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP-адреса/назва хосту</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>Порт</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>З'єднатися</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Помилка під час з'єднання.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Завжди питати</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>Пошук пристроїв...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>Знайдено {0} пристроїв.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>Знайдено 1 пристрій.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Не знайдено пристрої.</value>
   </data>
 </root>

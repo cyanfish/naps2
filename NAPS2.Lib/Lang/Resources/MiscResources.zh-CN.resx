@@ -22,13 +22,13 @@
     <value>您确定要清除 {0} 个项目吗？</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>您确定要删除{0}个项目吗?</value>
+    <value>您确定要删除{0} 个项目吗?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>您确定要删除{0}个配置吗？</value>
+    <value>您确定要删除{0} 个配置吗？</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>您确定要删除这个{0}配置吗？</value>
+    <value>您确定要删除这个{0} 配置吗？</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
     <value>文件 {0} 已存在，是否覆盖？</value>
@@ -154,7 +154,7 @@
     <value>扫描</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>您确定要撤销您对{0}个图像的修改吗？</value>
+    <value>您确定要撤销您对{0} 个图像的修改吗？</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>重置图像</value>

@@ -19,7 +19,7 @@
     <value>Izbran skener je izklopljen.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Komunikacija s skenerjem je bila prekinjena.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -79,9 +79,9 @@
     <value>Časovna omejitev operacije OCR je potekla.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Delovni proces se je zrušil.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Delovni proces se je zrušil. Preveri pregledovalnik dogodkov v sistemu Windows.</value>
   </data>
 </root>

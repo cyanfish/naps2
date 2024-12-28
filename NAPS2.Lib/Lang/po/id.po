@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-12-28 00:12\n"
 "Last-Translator: \n"
 "Language-Team: Indonesian\n"
 "Language: id\n"
@@ -21,19 +21,19 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "Aksi bawaan tombol \"Simpan\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "Aksi bawaan tombol \"Pindai\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Menu \"Pindai\" mengubah profil bawaan"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 perangkat ditemukan."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,12 +118,12 @@ msgstr "Alternatif Interleave"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Selalu tanyakan"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "Selalu tanya"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -184,11 +184,11 @@ msgstr "Driver utk Apple"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
-msgstr ""
+msgstr "Apple Mail"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "Aplikasi"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -224,7 +224,7 @@ msgstr "Lakukan penghapusan profile(s) {0}, anda yakin?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Anda yakin ingin berhenti membagikan {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -329,6 +329,10 @@ msgstr "Kecerahan:"
 msgid "CCITT4"
 msgstr "CCITT4"
 
+#: UiStrings.resx$CantFindScannerFlatpak$Message
+msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
+msgstr ""
+
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
@@ -368,7 +372,7 @@ msgstr "Pilih Profil"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr ""
+msgstr "Pilih perangkat"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
@@ -389,11 +393,11 @@ msgstr "Tutup"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "Gabungkan"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Komunikasi dengan alat pindai terganggu."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -405,11 +409,11 @@ msgstr "Kompresi:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Hubungkan"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Kesalahan koneksi."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -550,15 +554,15 @@ msgstr "Bolak Balik / 2 muka"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "ESCL Driver"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "ESCL Network Driver"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr ""
+msgstr "ESCL USB Driver"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -566,71 +570,71 @@ msgstr "Edit"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
-msgstr ""
+msgstr "Emailkan Semua"
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "Emailkan Semua sebagai PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr ""
+msgstr "Emailkan PDF"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr ""
+msgstr "Emailkan Progres PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "Emailkan Pilihan"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "Emailkan Pilihan sebagai PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "Pengaturan Email"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "Aktifkan Penyimpanan Otomatis"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr ""
+msgstr "Aktifkan debug logging"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "Enkripsi PDF"
 
 #: UiStrings.resx$Encryption$Message
 msgid "Encryption"
-msgstr ""
+msgstr "Enkripsi"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr ""
+msgstr "Tingkatkan Windows MetaFile (*.emf)"
 
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
-msgstr ""
+msgstr "Kesalahan"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
-msgstr ""
+msgstr "Estimasi ukuran unduhan: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr ""
+msgstr "Exchangeable Image File (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr ""
+msgstr "Lewati halaman kosong"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
@@ -638,7 +642,7 @@ msgstr "Cepat"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr ""
+msgstr "Pengumpan"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
@@ -650,63 +654,63 @@ msgstr "Lokasi berkas:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Perbaiki white balance dan hilangkan noise"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
-msgstr ""
+msgstr "Putar Balik"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Balik sisi halaman bolak-balik"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr ""
+msgstr "Balik halaman bolak-balik"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr ""
+msgstr "Untuk JPEG kualitas tinggi, tingkatkan juga kualitas gambar di profilmu untuk hasil terbaik."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr ""
+msgstr "GIF File (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
-msgstr ""
+msgstr "Dapatkan bahasa lain"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr ""
+msgstr "Kaca"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr ""
+msgstr "Skala abu-abu"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
-msgstr ""
+msgstr "Penyelarasan horizontal:"
 
 #: UiStrings.resx$Hour2Digit$Message
 msgid "Hour (0-23)"
-msgstr ""
+msgstr "Jam (0-23)"
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "Hue / Saturation"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Host"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr ""
+msgstr "Ikon dari:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
@@ -767,7 +771,7 @@ msgstr ""
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "Antarmuka"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -1429,6 +1433,10 @@ msgstr ""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
+msgstr ""
+
+#: UiStrings.resx$ToggleSidebar$Message
+msgid "Sidebar"
 msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message

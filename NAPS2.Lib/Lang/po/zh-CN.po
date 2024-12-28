@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-12-28 00:12\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -33,7 +33,7 @@ msgstr "\"扫描\"菜单可以更改默认配置文件"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "找到 1 台设备"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "取消奇偶页分别排列（偶数页逆序）"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "总是询问"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -212,15 +212,15 @@ msgstr "您确定要删除“{0}”吗？"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "您确定要删除这个{0}配置吗？"
+msgstr "您确定要删除这个{0} 配置吗？"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "您确定要删除{0}个项目吗?"
+msgstr "您确定要删除{0} 个项目吗?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "您确定要删除{0}个配置吗？"
+msgstr "您确定要删除{0} 个配置吗？"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
@@ -228,7 +228,7 @@ msgstr "您确定想要停止分享 {0} 吗？"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "您确定要撤销您对{0}个图像的修改吗？"
+msgstr "您确定要撤销您对{0} 个图像的修改吗？"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -329,6 +329,10 @@ msgstr "亮度:"
 msgid "CCITT4"
 msgstr "CCITT4"
 
+#: UiStrings.resx$CantFindScannerFlatpak$Message
+msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
+msgstr ""
+
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
@@ -393,7 +397,7 @@ msgstr "合并"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "与扫描设备的通信中断"
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -405,11 +409,11 @@ msgstr "压缩:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "连接"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "连接出错"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -658,7 +662,7 @@ msgstr "翻转"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "翻转双面打印的背面"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -702,7 +706,7 @@ msgstr "色相/饱和度"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Host"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -820,7 +824,7 @@ msgstr "通过 OCR 生成可搜索的 PDF 文件"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "手动IP地址"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +923,7 @@ msgstr "未选择设备."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "未找到设备"
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1087,7 +1091,7 @@ msgstr "格式符"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "端口"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1095,7 +1099,7 @@ msgstr "后处理"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "扫描后自动运行 OCR"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1348,7 +1352,7 @@ msgstr "正在扫描页面 {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "正在搜索设备…"
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1368,7 @@ msgstr "全选"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "选择设备"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1430,6 +1434,10 @@ msgstr "显示本地 TWAIN 进程"
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "显示页码"
+
+#: UiStrings.resx$ToggleSidebar$Message
+msgid "Sidebar"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1553,11 +1561,11 @@ msgstr "选定的扫描仪处于脱机状态."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "工作进程崩溃"
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "工作进程崩溃。检查 Windows 事件查看器"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1751,7 @@ msgstr "{0} / {1} 个文件"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "找到 {0} 台设备"
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

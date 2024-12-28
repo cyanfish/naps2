@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-12-28 00:12\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -33,7 +33,7 @@ msgstr "Вибір в меню \"Сканувати\" змінює типови�
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "Знайдено 1 пристрій."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -118,7 +118,7 @@ msgstr "Альтернативна міжчерговість"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Завжди питати"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -329,6 +329,10 @@ msgstr "Яскравість:"
 msgid "CCITT4"
 msgstr ""
 
+#: UiStrings.resx$CantFindScannerFlatpak$Message
+msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
+msgstr ""
+
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
@@ -405,11 +409,11 @@ msgstr "Стиснення:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "З'єднатися"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Помилка під час з'єднання."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -702,11 +706,11 @@ msgstr "Відтінок / насиченість"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP-адреса/назва хосту"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr "Піктограми взяті з:"
+msgstr "Використання значків:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
@@ -820,7 +824,7 @@ msgstr "Створити PDF файл з можливістю пошуку"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Вручну IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -919,7 +923,7 @@ msgstr "Не вибрано пристрій."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Не знайдено пристрої."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -957,7 +961,7 @@ msgstr "Кількість сторінок:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr "Розпізнавання"
+msgstr "Розпізнати"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -1087,7 +1091,7 @@ msgstr "Заповнювачі"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Порт"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1193,7 +1197,7 @@ msgstr "Роздільна здатність:"
 
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
-msgstr "Відновити типові"
+msgstr "Скинути до типових"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1348,7 +1352,7 @@ msgstr "Сканування сторінки {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Пошук пристроїв..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1368,7 @@ msgstr "Вибрати все"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Виберіть пристрій"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1430,6 +1434,10 @@ msgstr "Показувати нативне сканування TWAIN"
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Показувати нумерацію сторінок"
+
+#: UiStrings.resx$ToggleSidebar$Message
+msgid "Sidebar"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1553,11 +1561,11 @@ msgstr "Вибраний сканер вимкнено."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Збій робочого процесу."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Збій робочого процесу. Перегляньте журнал подій Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1751,7 @@ msgstr "{0} / {1} файлів"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "Знайдено {0} пристроїв."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

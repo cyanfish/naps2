@@ -283,13 +283,13 @@
     <value>Pilote TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>Pilote ESCL</value>
+    <value>Pilote eSCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>Pilote réseau ESCL</value>
+    <value>Pilote réseau eSCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>Pilote USB ESCL</value>
+    <value>Pilote USB eSCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Pilote Apple</value>
@@ -298,7 +298,7 @@
     <value>Pilote SANE</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
-    <value>Périphérique :</value>
+    <value>Périphérique</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
     <value>Sélectionner</value>
@@ -355,7 +355,7 @@
     <value>Sélectionner une source</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Choix du périphérique</value>
+    <value>Choisir un périphérique</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Exécuter en tâche de fond</value>
@@ -769,7 +769,7 @@
     <value>Partage de scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « Pilote ESCL » dans les paramètres de profil NAPS2 de l'autre ordinateur.</value>
+    <value>Les scanners partagés peuvent être utilisés à partir d'autres ordinateurs du réseau local en sélectionnant « Pilote eSCL » dans les paramètres de profil NAPS2 de l'autre ordinateur.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Paramètres de partage de scanner</value>
@@ -781,7 +781,7 @@
     <value>Partager même lorsque NAPS2 est fermé</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multilingue...</value>
+    <value>Multilingue…</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
     <value>Multilingue</value>
@@ -790,7 +790,7 @@
     <value>Afficher la progression native TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Diviser</value>
+    <value>Scinder</value>
   </data>
   <data name="Combine" xml:space="preserve">
     <value>Combiner</value>
@@ -802,7 +802,7 @@
     <value>IP manuelle</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP de l’hôte</value>
+    <value>IP/Hôte</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
@@ -817,7 +817,7 @@
     <value>Toujours demander</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Recherche de périphériques...</value>
+    <value>Recherche de périphériques…</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
     <value>{0} périphériques trouvés.</value>

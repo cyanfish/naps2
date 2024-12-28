@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-08-07 05:13\n"
+"PO-Revision-Date: 2024-12-28 00:12\n"
 "Last-Translator: \n"
 "Language-Team: Slovenian\n"
 "Language: sl\n"
@@ -29,15 +29,15 @@ msgstr "Privzeto dejanje gumba \"Skeniraj\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "Meni \"Skeniraj\" spremeni privzeti profil"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "Najdena je bila 1 naprava."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "24-bit Barvno"
+msgstr "24-bit barvno"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -78,52 +78,52 @@ msgstr "Vse datoteke"
 
 #: UiStrings.resx$AllowAnnotations$Message
 msgid "Allow Annotations"
-msgstr "Dovoli Opombe"
+msgstr "Dovolite opombe"
 
 #: UiStrings.resx$AllowContentCopying$Message
 msgid "Allow Content Copying"
-msgstr "Dovoli Kopiranje Vsebine"
+msgstr "Dovolite kopiranje vsebine"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
-msgstr "Dovoli Kopiranje Vsebine za Dostopnost"
+msgstr "Dovolite kopiranje vsebine za dostopnost"
 
 #: UiStrings.resx$AllowDocumentAssembly$Message
 msgid "Allow Document Assembly"
-msgstr "Dovoli Sestavo Dokumenta"
+msgstr "Dovolite sestavo dokumenta"
 
 #: UiStrings.resx$AllowDocumentModification$Message
 msgid "Allow Document Modification"
-msgstr "Dovoli Spreminjanje Dokumenta"
+msgstr "Dovolite spreminjanje dokumenta"
 
 #: UiStrings.resx$AllowFormFilling$Message
 msgid "Allow Form Filling"
-msgstr "Dovoli Izpolnjevanje Obrazca"
+msgstr "Dovolite izpolnjevanje obrazca"
 
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
-msgstr "Dovoli Tiskanje v Polni Kvaliteti"
+msgstr "Dovolite tiskanje v najboljši kvaliteti"
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
-msgstr "Dovoli Tiskanje"
+msgstr "Dovolite tiskanje"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "Drugačno Razpletanje"
+msgstr "Drugačno razpletanje"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr "Drugačno Prepletanje"
+msgstr "Drugačno prepletanje"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Vedno vprašaj"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr "Vprašaj vsakič"
+msgstr "Vedno vprašaj"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -168,7 +168,7 @@ msgstr "Operacija je v teku. Želite prekiniti operacijo in zapustiti aplikacijo
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr "Med paketnim pregledom je prišlo do neznane napake."
+msgstr "Med zaporednim skeniranjem je prišlo do neznane napake."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -192,15 +192,15 @@ msgstr "Aplikacija"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "Uveljavi svetlost/kontrast po skeniranju"
+msgstr "Uveljavite svetlost/kontrast po skeniranju"
 
 #: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
-msgstr "Uveljavi na vseh {0} izbranih slikah"
+msgstr "Uveljavite na vseh {0} izbranih slikah"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "Prekini zaporedno skeniranje?"
+msgstr "Ali želite prekiniti zaporedno skeniranje?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -224,7 +224,7 @@ msgstr "Ali ste prepričani, da želite izbrisati {0} profilov?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr ""
+msgstr "Ali si prepričan, da želiš ustaviti deljenje {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -329,6 +329,10 @@ msgstr "Svetlost:"
 msgid "CCITT4"
 msgstr "CCITT4"
 
+#: UiStrings.resx$CantFindScannerFlatpak$Message
+msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
+msgstr ""
+
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
 msgid "Cancel"
@@ -393,7 +397,7 @@ msgstr "Združi"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Komunikacija s skenerjem je bila prekinjena."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -405,11 +409,11 @@ msgstr "Stiskanje:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Poveži"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Napaka v povezavi."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -476,7 +480,7 @@ msgstr "Privzeto"
 
 #: UiStrings.resx$DefaultFilePathLabel$Message
 msgid "Default File Path:"
-msgstr "Privzeta Pot Datotek:"
+msgstr "Privzeta pot datotek:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
@@ -650,7 +654,7 @@ msgstr "Pot datoteke:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Popravi ravnovesje beline in odstrani šum"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -658,7 +662,7 @@ msgstr "Preslikaj"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Obrni zadnje strani dvostranskih listov"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -702,7 +706,7 @@ msgstr "Odtenek / Nasičenje"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/gostitelj"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -787,7 +791,7 @@ msgstr "Jpeg Kvaliteta"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "Ohrani slike med sejami"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -820,7 +824,7 @@ msgstr "Naredi PDF z možnostjo iskanja z uporabo OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Ročni IP naslov"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -856,11 +860,11 @@ msgstr "Premakni Gor"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "Večjezično"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "Večjezično..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -919,7 +923,7 @@ msgstr "Naprava ni izbrana."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Ne najdem naprav."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1005,7 +1009,7 @@ msgstr "Ene ali več datotek ni bilo mogoče prenesti."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "Dovoli samo eno aktivno okno NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1087,7 +1091,7 @@ msgstr "Mesta"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Vrata"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1095,7 +1099,7 @@ msgstr "Post-procesiranje"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Izvedi OCR po skeniranju"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1133,7 +1137,7 @@ msgstr "Profili"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "Vprašaj, če je izbrano"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1193,7 +1197,7 @@ msgstr "Ločljivost:"
 
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
-msgstr "Povrni Privzete Nastavitve"
+msgstr "Povrni privzete nastavitve"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1229,7 +1233,7 @@ msgstr "Zasukaj v desno"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr "Poženi v ozadju"
+msgstr "Izvajaj v ozadju"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
@@ -1322,7 +1326,7 @@ msgstr "Nastavitev Skeniranja"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "Skeniraj s privzetim profilom"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1331,7 +1335,7 @@ msgstr "Skenirana Slika"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr "Deljenje optičnega bralnika"
+msgstr "Skupna raba skenerja"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1348,7 +1352,7 @@ msgstr "Skeniram stran {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Iščem naprave..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1364,7 +1368,7 @@ msgstr "Izberi Vse"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Izberi napravo"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1388,7 +1392,7 @@ msgstr "Loči datoteke po Patch-T"
 
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
-msgstr "Nastavi Privzeto"
+msgstr "Nastavi privzeto"
 
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
@@ -1401,15 +1405,15 @@ msgstr "Souporaba"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "Skupna raba, četudi je NAPS2 zaprt"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr ""
+msgstr "Skupna raba nastavitev skenerja"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr ""
+msgstr "Skenerje v skupni rabi lahko uporabljajo drugi računalniki v lokalnem omrežju z izbiro \"ESCL gonilnik\" v nastavitvah profila NAPS2 na drugem računalniku."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1425,11 +1429,15 @@ msgstr "Prikaži vrstico \"Profili\""
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
-msgstr ""
+msgstr "Prikaži nativni TWAIN napredek"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
 msgstr "Prikaži številko strani"
+
+#: UiStrings.resx$ToggleSidebar$Message
+msgid "Sidebar"
+msgstr ""
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1553,11 +1561,11 @@ msgstr "Izbran skener je izklopljen."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Delovni proces se je zrušil."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Delovni proces se je zrušil. Preveri pregledovalnik dogodkov v sistemu Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1743,7 +1751,7 @@ msgstr "{0} / {1} datotek"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} naprav najdenih."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
