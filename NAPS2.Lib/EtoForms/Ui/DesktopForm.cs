@@ -59,7 +59,7 @@ public abstract class DesktopForm : EtoFormBase
         Sidebar sidebar,
         IIconProvider iconProvider) : base(config)
     {
-        Icon = Icons.favicon.ToEtoIcon();
+        Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
 
         _keyboardShortcuts = keyboardShortcuts;
         _notificationManager = notificationManager;

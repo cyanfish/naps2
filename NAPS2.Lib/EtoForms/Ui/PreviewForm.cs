@@ -19,7 +19,7 @@ public class PreviewForm : EtoDialogBase
         IIconProvider iconProvider, ColorScheme colorScheme) : base(config)
     {
         Title = UiStrings.PreviewFormTitle;
-        Icon = Icons.favicon.ToEtoIcon();
+        Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
 
         _desktopCommands = desktopCommands;
         ImageList = imageList;

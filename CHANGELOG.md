@@ -17,10 +17,15 @@ Changes in 8.0b1:
 - Performance improvements
 - Bug fixes
 
+Changes in 7.5.3:
+- Windows: Fixed a bug with maximized windows
+- Mac: Fixed bugs with Apple Driver
+- Linux: Fixed compatibility with Fedora 41 and others
+
 Changes in 7.5.2:
-- NAPS2 is now available on the Microsoft Store & the Mac App Store
-  - It costs a small fee to support the developer and provide automatic updates
-  - NAPS2 will continue to be freely available at www.naps2.com
+- ~~NAPS2 is now available on the Microsoft Store & the Mac App Store~~
+  - ~~It costs a small fee to support the developer and provide automatic updates~~
+  - ~~NAPS2 will continue to be freely available at www.naps2.com~~
 - Windows: Installers and executables are now EV code-signed
 - Fixed NAPS2.Console issues with cancellation
 - Fixed ESCL compatibility with AirSane
