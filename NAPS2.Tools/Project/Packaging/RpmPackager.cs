@@ -38,7 +38,7 @@ public static class RpmPackager
         File.WriteAllText(Path.Combine(workingDir, "SPECS/naps2.spec"), template);
 
         // Copy binary files
-        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Gtk", "bin", "Release", "net8", runtimeId,
+        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Gtk", "bin", "Release", "net9", runtimeId,
             "publish");
         var filesDir = Path.Combine(workingDir, $"naps2-{pkgInfo.VersionNumber}");
         var targetDir = Path.Combine(filesDir, "usr/lib/naps2");

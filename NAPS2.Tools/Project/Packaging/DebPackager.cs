@@ -34,7 +34,7 @@ public static class DebPackager
         File.WriteAllText(Path.Combine(controlDir, "control"), template);
 
         // Copy binary files
-        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Gtk", "bin", "Release", "net8", runtimeId,
+        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Gtk", "bin", "Release", "net9", runtimeId,
             "publish");
         var targetDir = Path.Combine(workingDir, "usr/lib/naps2");
         ProjectHelper.CopyDirectory(publishDir, targetDir);
