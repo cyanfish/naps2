@@ -10,8 +10,9 @@
 
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>partial</TrimMode>
+    <!-- TODO: Re-enable trimming if we can fix startup time as well as WIA being broken -->
+    <PublishTrimmed>false</PublishTrimmed>
+    <TrimMode>none</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>

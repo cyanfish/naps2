@@ -5,7 +5,7 @@ namespace NAPS2.Tools;
 
 public static class Cli
 {
-    public static void Run(string command, string args, Dictionary<string, string>? env = null,
+    public static int Run(string command, string args, Dictionary<string, string>? env = null,
         CancellationToken cancel = default, bool noVerbose = false, bool alwaysVerbose = false,
         string? ignoreErrorIfOutputContains = null, string? workingDir = null)
     {
@@ -75,6 +75,7 @@ public static class Cli
                 }
                 throw new Exception($"Command failed: {command} {args}");
             }
+            return proc.ExitCode;
         }
         finally
         {
