@@ -51,6 +51,6 @@ public static class WindowsSigning
     public static void SignFile(string path)
     {
         Cli.Run("signtool",
-            $"sign /tr http://timestamp.globalsign.com/tsa/r6advanced1 /td sha256 /fd sha256 /a /as \"{path}\"");
+            $"sign /tr http://timestamp.globalsign.com/tsa/r6advanced1 /td sha256 /fd sha256 /a \"{path}\"");
     }
 }
