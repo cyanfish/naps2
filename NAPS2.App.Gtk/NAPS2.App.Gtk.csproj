@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8</TargetFramework>
+        <TargetFramework>net9</TargetFramework>
         <OutputType>Exe</OutputType>
         <RootNamespace>NAPS2</RootNamespace>
         <AssemblyName>naps2</AssemblyName>

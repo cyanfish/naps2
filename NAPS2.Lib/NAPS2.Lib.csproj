@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8</TargetFrameworks>
+    <TargetFrameworks>net9</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">
       $(TargetFrameworks);net9-macos
     </TargetFrameworks>
