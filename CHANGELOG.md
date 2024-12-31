@@ -1,3 +1,11 @@
+Changes in 8.0b2:
+- Fixes from 7.5.3
+- Fixed WIA scanning
+- Fixed drag and drop on Windows
+- Fixed notifications on Linux
+- Fixed sidebar settings being shown with "Use native UI" selected
+- Linux flatpak runtime has been upgraded to 24.08
+
 Changes in 8.0b1:
 - [Beta feedback thread](https://github.com/cyanfish/naps2/discussions/467)
 - Added a scanning sidebar
