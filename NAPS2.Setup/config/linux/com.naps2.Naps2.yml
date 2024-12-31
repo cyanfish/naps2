@@ -22,16 +22,16 @@ modules:
     sources:
       - type: git
         url: https://github.com/libusb/libusb
-        tag: v1.0.26
-        commit: 4239bc3a50014b8e6a5a2a59df1fff3b7469543b
+        tag: v1.0.27
+        commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b
   - name: leptonica
     buildsystem: cmake-ninja
     builddir: true
     sources:
       - type: git
         url: https://github.com/DanBloomberg/leptonica
-        tag: 1.82.0
-        commit: f4138265b390f1921b9891d6669674d3157887d8
+        tag: 1.85.0
+        commit: 63aef18d98432b8582a1565e241f7bd2ee9cc8d9
   - name: tesseract
     buildsystem: cmake-ninja
     builddir: true
@@ -44,8 +44,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/tesseract-ocr/tesseract
-        tag: 5.2.0
-        commit: 5ad5325a0aa8effc47ca033625b6a51682f82767
+        tag: 5.5.0
+        commit: 64eab6c457b2337dd690746a5fde5c222b40d5f8
   - name: avahi
     buildsystem: autotools
     config-opts:
@@ -67,8 +67,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/sane-project/backends
-        tag: 1.1.1
-        commit: 332edc8b7ce642bb06132cf204a8c2dd57720bce
+        tag: 1.3.1
+        commit: 3ff55fd8ee04ae459e199088ebe11ac979671d0e
       - type: patch
         path: sane-streamdevices.patch
   - name: sane-airscan
@@ -76,8 +76,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/alexpevzner/sane-airscan
-        tag: 0.99.27
-        commit: 053f5654cd4d16f077fe5cb40d32004aaa321462
+        tag: 0.99.31
+        commit: a086d81a1222194804a075cac496c821023ae23a
   - name: main
     buildsystem: simple
     build-options:
