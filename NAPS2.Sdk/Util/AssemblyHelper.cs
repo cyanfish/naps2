@@ -4,7 +4,7 @@ namespace NAPS2.Util;
 
 internal class AssemblyHelper
 {
-    public const string COPYRIGHT_YEARS = "2009-2024";
+    public const string COPYRIGHT_YEARS = "2009-2025";
 
     public static string GetFolder(Assembly? assembly)
     {
