@@ -26,6 +26,10 @@ public static class WindowsSigning
 
     private static bool NeedsSignature(PackageFile file)
     {
+        if (Path.GetExtension(file.FileName) == ".exe")
+        {
+            return true;
+        }
         try
         {
             AssemblyName.GetAssemblyName(file.SourcePath);
