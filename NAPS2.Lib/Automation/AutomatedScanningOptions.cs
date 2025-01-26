@@ -39,7 +39,7 @@ public class AutomatedScanningOptions
     [Option('n', "number", Default = 1, HelpText = "The number of scans to perform.")]
     public int Number { get; set; } = 1;
 
-    [Option('d', "delay", Default = 0, HelpText = "The delay (in milliseconds) between each scan.")]
+    [Option('d', "delay", Default = 0, HelpText = "The delay (in milliseconds) before each scan.")]
     public int Delay { get; set; }
 
     [Option('f', "force", HelpText = "Overwrite existing files." +
