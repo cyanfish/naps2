@@ -604,6 +604,26 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task NoSplitWithMultipleScans()
+    {
+        var path = $"{FolderPath}/test$(n).pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Number = 3,
+                Verbose = true
+            },
+            new ScanDriverFactoryBuilder()
+                .WithScannedImages(Image1, Image2, Image3)
+                .WithScannedImages(Image4, Image5)
+                .WithScannedImages()
+                .Build());
+        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1, Image2, Image3, Image4, Image5);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task SplitWithNoPlaceholder()
     {
         var path = $"{FolderPath}/test.pdf";
