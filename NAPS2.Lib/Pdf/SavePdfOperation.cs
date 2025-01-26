@@ -112,18 +112,6 @@ internal class SavePdfOperation : OperationBase
             {
                 InvokeError(MiscResources.DontHavePermission, ex);
             }
-            catch (IOException ex)
-            {
-                if (File.Exists(subFileName) && !FileSystemHelper.IsDiskFullException(ex))
-                {
-                    InvokeError(MiscResources.FileInUse, ex);
-                }
-                else
-                {
-                    Log.ErrorException(MiscResources.ErrorSaving, ex);
-                    InvokeError(MiscResources.ErrorSaving, ex);
-                }
-            }
             catch (Exception ex)
             {
                 Log.ErrorException(MiscResources.ErrorSaving, ex);
