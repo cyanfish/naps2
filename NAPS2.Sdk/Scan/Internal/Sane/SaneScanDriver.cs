@@ -417,6 +417,25 @@ internal class SaneScanDriver : IScanDriver
             scanAreaController.SetArea(minX + offsetX, minY, minX + offsetX + width, minY + height);
         }
 
+        foreach (var kvp in options.KeyValueOptions)
+        {
+            string name = kvp.Key;
+            string value = kvp.Value;
+            var opt = controller.GetOption(name);
+            if (opt != null)
+            {
+                // TODO: Also implement bool value type
+                if (opt.Type == SaneValueType.String)
+                {
+                    controller.TrySet(name, new SaneOptionMatcher([value]));
+                }
+                if (opt.Type is SaneValueType.Int or SaneValueType.Fixed && double.TryParse(value, out var doubleValue))
+                {
+                    controller.TrySet(name, doubleValue);
+                }
+            }
+        }
+
         return optionData;
     }
 

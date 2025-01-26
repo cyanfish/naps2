@@ -143,7 +143,7 @@ public class ScanOptions
     /// </summary>
     public bool FlipDuplexedPages { get; set; }
 
-    public KeyValueScanOptions? KeyValueOptions { get; set; }
+    public KeyValueScanOptions KeyValueOptions { get; set; } = new();
 
     public ScanOptions Clone()
     {

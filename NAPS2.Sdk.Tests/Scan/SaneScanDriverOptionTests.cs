@@ -161,6 +161,23 @@ public class SaneScanDriverOptionTests : ContextualTests
         Assert.Equal("True Gray", optionData.Mode);
     }
 
+    [Fact]
+    public void SetOptions_KeyValue()
+    {
+        var device = new DeviceOptionsMock(new[]
+        {
+            SaneOption.CreateForTesting(1, SaneOptionNames.MODE, ["Lineart", "Halftone", "Gray", "Color"])
+        });
+        var options = new ScanOptions
+        {
+            KeyValueOptions = { ["mode"] = "Halftone" }
+        };
+
+        _driver.SetOptions(device, options);
+
+        Assert.Equal("Halftone", device.GetValue(1));
+    }
+
     private class DeviceOptionsMock : ISaneDevice
     {
         private readonly IEnumerable<SaneOption> _options;
