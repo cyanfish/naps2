@@ -114,7 +114,7 @@ internal class SavePdfOperation : OperationBase
             }
             catch (IOException ex)
             {
-                if (File.Exists(subFileName))
+                if (File.Exists(subFileName) && !FileSystemHelper.IsDiskFullException(ex))
                 {
                     InvokeError(MiscResources.FileInUse, ex);
                 }

@@ -2,6 +2,9 @@
 
 internal static class FileSystemHelper
 {
+    private const int HR_ERROR_HANDLE_DISK_FULL = unchecked((int) 0x80070027);
+    private const int HR_ERROR_DISK_FULL = unchecked((int) 0x80070070);
+
     /// <summary>
     /// Creates the parent directory for the provided path if needed.
     /// </summary>
@@ -14,6 +17,10 @@ internal static class FileSystemHelper
             parentDir.Create();
         }
     }
+
+    // TODO: Can we detect this on Linux/Mac?
+    public static bool IsDiskFullException(IOException exception) =>
+        exception.HResult is HR_ERROR_DISK_FULL or HR_ERROR_HANDLE_DISK_FULL;
 
     public static bool IsFileInUse(string filePath, out Exception? exception)
     {
@@ -34,7 +41,7 @@ internal static class FileSystemHelper
         exception = null;
         return false;
     }
-    
+
     // https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
     public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
     {
