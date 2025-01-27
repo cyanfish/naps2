@@ -5,7 +5,7 @@ namespace NAPS2.ImportExport;
 internal record InputPathOrStream(string? FilePath, Stream? Stream, string? StreamFileName)
 {
     public string FileName => Stream != null
-        ? StreamFileName ?? "<stream>"
+        ? StreamFileName ?? ""
         : Path.GetFileName(FilePath)!;
 
     public void CopyToFile(string outputPath)

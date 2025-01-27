@@ -30,6 +30,11 @@ public abstract class ImageContext
         stream.Read(firstBytes, 0, 8);
         stream.Seek(0, SeekOrigin.Begin);
 
+        return GetFileFormatFromFirstBytes(firstBytes);
+    }
+
+    public static ImageFileFormat GetFileFormatFromFirstBytes(byte[] firstBytes)
+    {
         return firstBytes switch
         {
             [0x89, 0x50, 0x4E, 0x47, ..] => ImageFileFormat.Png,
