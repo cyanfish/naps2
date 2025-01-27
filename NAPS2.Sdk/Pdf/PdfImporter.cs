@@ -21,6 +21,12 @@ public class PdfImporter
     }
 
     public IAsyncEnumerable<ProcessedImage> Import(string filePath, ImportParams? importParams = null,
+        ProgressHandler progress = default) => Import(new InputPathOrStream(filePath, null, null), importParams, progress);
+
+    public IAsyncEnumerable<ProcessedImage> Import(Stream stream, ImportParams? importParams = null,
+        ProgressHandler progress = default) => Import(new InputPathOrStream(null, stream, null), importParams, progress);
+
+    internal IAsyncEnumerable<ProcessedImage> Import(InputPathOrStream input, ImportParams? importParams = null,
         ProgressHandler progress = default)
     {
         importParams ??= new ImportParams();
@@ -30,7 +36,7 @@ public class PdfImporter
 
             lock (PdfiumNativeLibrary.Instance)
             {
-                using var document = LoadDocument(filePath, importParams);
+                using var document = LoadDocument(input, importParams);
                 if (document == null) return;
                 progress.Report(0, document.PageCount);
 
@@ -54,7 +60,7 @@ public class PdfImporter
         });
     }
 
-    private PdfDocument? LoadDocument(string filePath, ImportParams importParams)
+    private PdfDocument? LoadDocument(InputPathOrStream input, ImportParams importParams)
     {
         PdfDocument? doc = null;
         try
@@ -65,25 +71,28 @@ public class PdfImporter
             {
                 try
                 {
-                    doc = PdfDocument.Load(filePath, password);
+                    doc = input.LoadPdfDoc(password);
                     break;
                 }
                 catch (PdfiumException ex) when (ex.ErrorCode == PdfiumErrorCode.PasswordNeeded &&
                                                  _pdfPasswordProvider != null)
                 {
-                    if (!_pdfPasswordProvider.ProvidePassword(Path.GetFileName(filePath), passwordAttempts++,
-                            out password))
+                    if (!_pdfPasswordProvider.ProvidePassword(input.FileName, passwordAttempts++, out password))
                     {
                         return null;
                     }
                 }
                 catch (PdfiumException ex) when (ex.ErrorCode == PdfiumErrorCode.FileNotFoundOrUnavailable)
                 {
-                    if (!File.Exists(filePath))
+                    if (input.FilePath != null && !File.Exists(input.FilePath))
                     {
-                        throw new FileNotFoundException($"Could not find pdf file: '{filePath}'");
+                        throw new FileNotFoundException($"Could not find pdf file: '{input.FilePath}'");
                     }
-                    throw new IOException($"Could not open pdf file for reading: '{filePath}'");
+                    if (input.FilePath != null)
+                    {
+                        throw new IOException($"Could not open pdf file for reading: '{input.FilePath}'");
+                    }
+                    throw new IOException("Could not open pdf file for reading");
                 }
             }
             return doc;

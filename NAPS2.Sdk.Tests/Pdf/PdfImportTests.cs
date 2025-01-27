@@ -37,12 +37,43 @@ public class PdfImportTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportNonNaps2PdfFromStream(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var importStream = new MemoryStream(PdfResources.word_generated_pdf);
+        var images = await _importer.Import(importStream).ToListAsync();
+
+        Assert.Equal(2, images.Count);
+        storageConfig.AssertPdfStorage(images[0].Storage);
+        storageConfig.AssertPdfStorage(images[1].Storage);
+        // TODO: Why is the expected resolution weird?
+        ImageAsserts.Similar(PdfResources.word_p1, images[0], ignoreResolution: true);
+        ImageAsserts.Similar(PdfResources.word_p2, images[1], ignoreResolution: true);
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
     public async Task ImportNaps2Pdf(StorageConfig storageConfig)
     {
         storageConfig.Apply(this);
 
         var importPath = CopyResourceToFile(PdfResources.image_pdf, "import.pdf");
         var images = await _importer.Import(importPath).ToListAsync();
+
+        Assert.Single(images);
+        storageConfig.AssertJpegStorage(images[0].Storage);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ImportNaps2PdfFromStream(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var importStream = new MemoryStream(PdfResources.image_pdf);
+        var images = await _importer.Import(importStream).ToListAsync();
 
         Assert.Single(images);
         storageConfig.AssertJpegStorage(images[0].Storage);

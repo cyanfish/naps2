@@ -66,6 +66,53 @@ public class ImageImporterTests : ContextualTests
         Assert.False(File.Exists(storage.FullPath));
     }
 
+    [Fact]
+    public async Task ImportPngImageFromStream()
+    {
+        var fileStream = new MemoryStream(ImageResources.skewed_bw);
+
+        var source = _imageImporter.Import(fileStream, new ImportParams());
+        var result = await source.ToListAsync();
+
+        Assert.Single(result);
+        var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
+        Assert.True(File.Exists(storage.FullPath));
+        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
+        Assert.True(result[0].Metadata.Lossless);
+        Assert.Null(result[0].PostProcessingData.Thumbnail);
+        Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
+        Assert.True(result[0].TransformState.IsEmpty);
+
+        result[0].Dispose();
+        Assert.False(File.Exists(storage.FullPath));
+    }
+
+    [Fact]
+    public async Task ImportJpegImageFromStream()
+    {
+        var fileStream = new MemoryStream(ImageResources.dog);
+
+        var source = _imageImporter.Import(fileStream, new ImportParams());
+        var result = await source.ToListAsync();
+
+        Assert.Single(result);
+        var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
+        Assert.True(File.Exists(storage.FullPath));
+        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
+        Assert.False(result[0].Metadata.Lossless);
+        Assert.Null(result[0].PostProcessingData.Thumbnail);
+        Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
+        Assert.True(result[0].TransformState.IsEmpty);
+
+        // Verify no re-encode happens
+        var originalImage = ImageContext.Load(fileStream);
+        var storageImage = ImageContext.Load(storage.FullPath);
+        ImageAsserts.Similar(originalImage, storageImage, 0);
+
+        result[0].Dispose();
+        Assert.False(File.Exists(storage.FullPath));
+    }
+
     [PlatformFact(exclude: PlatformFlags.ImageSharp)]
     public async Task ImportTiffImage()
     {
