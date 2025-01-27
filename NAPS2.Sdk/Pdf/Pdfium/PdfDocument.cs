@@ -13,6 +13,37 @@ internal class PdfDocument : NativePdfiumObject
             PlatformCompat.System.FileReadLock(path));
     }
 
+    public static PdfDocument Load(Stream stream, string? password = null)
+    {
+        byte[]? buffer = null;
+        if (stream is MemoryStream memoryStream)
+        {
+            try
+            {
+                buffer = memoryStream.GetBuffer();
+            }
+            catch (Exception)
+            {
+                // The buffer might not be exposable
+            }
+        }
+        if (buffer == null)
+        {
+            memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            buffer = memoryStream.GetBuffer();
+        }
+        return Load(buffer, (int) stream.Length, password);
+    }
+
+    public static PdfDocument Load(byte[] buffer, int length, string? password = null)
+    {
+        var gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+        return new PdfDocument(
+            Native.FPDF_LoadMemDocument(gcHandle.AddrOfPinnedObject(), length, ToUtf(password)),
+            gcHandle: gcHandle);
+    }
+
     public static PdfDocument Load(IntPtr buffer, int length, string? password = null)
     {
         return new PdfDocument(
@@ -35,10 +66,12 @@ internal class PdfDocument : NativePdfiumObject
     }
 
     private readonly IDisposable? _readLock;
+    private GCHandle _gcHandle;
 
-    private PdfDocument(IntPtr handle, IDisposable? readLock = null) : base(handle)
+    private PdfDocument(IntPtr handle, IDisposable? readLock = null, GCHandle gcHandle = default) : base(handle)
     {
         _readLock = readLock;
+        _gcHandle = gcHandle;
     }
 
     public int PageCount => Native.FPDF_GetPageCount(Handle);
@@ -106,7 +139,8 @@ internal class PdfDocument : NativePdfiumObject
 
     public PdfFont LoadFont(byte[] data)
     {
-        return new PdfFont(Native.FPDFText_LoadFont(Handle, data, data.Length, PdfiumNativeLibrary.FPDF_FONT_TRUETYPE, true));
+        return new PdfFont(Native.FPDFText_LoadFont(Handle, data, data.Length, PdfiumNativeLibrary.FPDF_FONT_TRUETYPE,
+            true));
     }
 
     public void Save(string path)
@@ -142,6 +176,10 @@ internal class PdfDocument : NativePdfiumObject
         if (disposing)
         {
             _readLock?.Dispose();
+            if (_gcHandle.IsAllocated)
+            {
+                _gcHandle.Free();
+            }
         }
     }
 

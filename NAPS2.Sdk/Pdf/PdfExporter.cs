@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
-using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
+using NAPS2.ImportExport;
 using NAPS2.Ocr;
 using NAPS2.Pdf.Pdfium;
 using NAPS2.Scan;
@@ -164,52 +164,32 @@ public class PdfExporter
         // TODO: Although we would need to be careful to handle OcrRequestQueue state correctly across processes.
         lock (PdfiumNativeLibrary.Instance)
         {
-            var destBuffer = stream.GetBuffer();
-            var destHandle = GCHandle.Alloc(destBuffer, GCHandleType.Pinned);
-            try
+            var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
+            using var destDoc = Pdfium.PdfDocument.Load(stream, password);
+            using var fontSubsets =
+                new PdfiumFontSubsets(destDoc, passthroughPages.Select(state => state.OcrTask?.Result));
+            foreach (var state in passthroughPages)
             {
-                var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
-                using var destDoc =
-                    Pdfium.PdfDocument.Load(destHandle.AddrOfPinnedObject(), (int) stream.Length, password);
-                using var fontSubsets =
-                    new PdfiumFontSubsets(destDoc, passthroughPages.Select(state => state.OcrTask?.Result));
-                foreach (var state in passthroughPages)
+                destDoc.DeletePage(state.PageIndex);
+                if (state.Image.Storage is ImageFileStorage fileStorage)
                 {
-                    destDoc.DeletePage(state.PageIndex);
-                    if (state.Image.Storage is ImageFileStorage fileStorage)
-                    {
-                        using var sourceDoc = Pdfium.PdfDocument.Load(fileStorage.FullPath);
-                        CopyPage(destDoc, sourceDoc, state);
-                    }
-                    else if (state.Image.Storage is ImageMemoryStorage memoryStorage)
-                    {
-                        var sourceBuffer = memoryStorage.Stream.GetBuffer();
-                        var sourceHandle = GCHandle.Alloc(sourceBuffer, GCHandleType.Pinned);
-                        try
-                        {
-                            using var sourceDoc = Pdfium.PdfDocument.Load(sourceHandle.AddrOfPinnedObject(),
-                                (int) memoryStorage.Stream.Length);
-                            CopyPage(destDoc, sourceDoc, state);
-                        }
-                        finally
-                        {
-                            sourceHandle.Free();
-                        }
-                    }
-                    if (state.OcrTask?.Result != null)
-                    {
-                        using var page = destDoc.GetPage(state.PageIndex);
-                        DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, fontSubsets, state.OcrTask.Result);
-                    }
-                    if (progress.IsCancellationRequested) return false;
+                    using var sourceDoc = Pdfium.PdfDocument.Load(fileStorage.FullPath);
+                    CopyPage(destDoc, sourceDoc, state);
                 }
-                output.SaveDoc(destDoc);
-                return true;
+                else if (state.Image.Storage is ImageMemoryStorage memoryStorage)
+                {
+                    using var sourceDoc = Pdfium.PdfDocument.Load(memoryStorage.Stream);
+                    CopyPage(destDoc, sourceDoc, state);
+                }
+                if (state.OcrTask?.Result != null)
+                {
+                    using var page = destDoc.GetPage(state.PageIndex);
+                    DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, fontSubsets, state.OcrTask.Result);
+                }
+                if (progress.IsCancellationRequested) return false;
             }
-            finally
-            {
-                destHandle.Free();
-            }
+            output.SavePdfDoc(destDoc);
+            return true;
         }
     }
 
@@ -810,36 +790,6 @@ public class PdfExporter
 
         public void Dispose()
         {
-        }
-    }
-
-    private record OutputPathOrStream(string? Path, Stream? Stream)
-    {
-        public void CopyFromStream(MemoryStream inputStream)
-        {
-            if (Stream != null)
-            {
-                inputStream.CopyTo(Stream);
-            }
-            else
-            {
-                FileSystemHelper.EnsureParentDirExists(Path!);
-                using var fileStream = new FileStream(Path!, FileMode.Create);
-                inputStream.CopyTo(fileStream);
-            }
-        }
-
-        public void SaveDoc(Pdfium.PdfDocument doc)
-        {
-            if (Stream != null)
-            {
-                doc.Save(Stream);
-            }
-            else
-            {
-                FileSystemHelper.EnsureParentDirExists(Path!);
-                doc.Save(Path!);
-            }
         }
     }
 }

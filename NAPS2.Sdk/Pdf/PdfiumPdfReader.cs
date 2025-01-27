@@ -37,18 +37,10 @@ internal class PdfiumPdfReader
     {
         lock (PdfiumNativeLibrary.Instance)
         {
-            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            try
+            using var doc = PdfDocument.Load(buffer, length, password);
+            foreach (var text in DoReadTextByPage(doc))
             {
-                using var doc = PdfDocument.Load(handle.AddrOfPinnedObject(), length, password);
-                foreach (var text in DoReadTextByPage(doc))
-                {
-                    yield return text;
-                }
-            }
-            finally
-            {
-                handle.Free();
+                yield return text;
             }
         }
     }

@@ -26,18 +26,10 @@ internal class PdfiumPdfRenderer : IPdfRenderer
         // Pdfium is not thread-safe
         lock (PdfiumNativeLibrary.Instance)
         {
-            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            try
+            using var doc = PdfDocument.Load(buffer, length, password);
+            foreach (var memoryImage in RenderDocument(imageContext, renderSize, doc))
             {
-                using var doc = PdfDocument.Load(handle.AddrOfPinnedObject(), length, password);
-                foreach (var memoryImage in RenderDocument(imageContext, renderSize, doc))
-                {
-                    yield return memoryImage;
-                }
-            }
-            finally
-            {
-                handle.Free();
+                yield return memoryImage;
             }
         }
     }
