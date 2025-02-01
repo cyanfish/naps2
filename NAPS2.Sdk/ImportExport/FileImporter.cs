@@ -39,7 +39,7 @@ public class FileImporter
         {
             return _pdfImporter.Import(input, importParams, progress);
         }
-        if (Path.GetExtension(input.FileName).ToLowerInvariant() == ".zip")
+        if (Path.GetExtension(input.FileName).ToLowerInvariant() is ".zip" or ".cbz") // cbz = comic book zip
         {
             return ImportZip(input, importParams, progress);
         }
