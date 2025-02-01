@@ -1,4 +1,5 @@
-﻿using Eto.Forms;
+﻿using System.Text;
+using Eto.Forms;
 
 namespace NAPS2.EtoForms;
 
@@ -60,6 +61,34 @@ public class KeyboardShortcutManager
             Log.ErrorException("Error parsing keyboard shortcut", ex);
         }
         return Keys.None;
+    }
+
+    public string? Stringify(Keys keys)
+    {
+        if (keys == Keys.None)
+        {
+            return null;
+        }
+        var sb = new StringBuilder();
+        if (keys.HasFlag(Keys.Control))
+        {
+            sb.Append("Ctrl + ");
+        }
+        if (keys.HasFlag(Keys.Shift))
+        {
+            sb.Append("Shift + ");
+        }
+        if (keys.HasFlag(Keys.Alt))
+        {
+            sb.Append("Alt + ");
+        }
+        if (keys.HasFlag(Keys.Application))
+        {
+            sb.Append(EtoPlatform.Current.IsMac ? "Cmd + " : "Win + ");
+        }
+        var keysWithoutModifiers = keys & ~(Keys.Control | Keys.Shift | Keys.Alt | Keys.Application);
+        sb.Append(keysWithoutModifiers);
+        return sb.ToString();
     }
 
     public bool Assign(string? value, Action action)

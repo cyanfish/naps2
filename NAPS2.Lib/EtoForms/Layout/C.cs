@@ -91,6 +91,8 @@ public static class C
         return button;
     }
 
+    public static Button Button(ActionCommand command) => Button(command.Text, command);
+
     public static Button Button(ActionCommand command, ButtonImagePosition imagePosition, ButtonFlags flags = default)
     {
         return Button(command, command.IconName, imagePosition, flags);

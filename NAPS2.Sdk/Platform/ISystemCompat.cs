@@ -17,6 +17,8 @@ internal interface ISystemCompat
     bool SupportsProfilesToolbar { get; }
     
     bool SupportsButtonActions { get; }
+
+    bool SupportsKeyboardShortcuts { get; }
     
     bool SupportsSingleInstance { get; }
 

@@ -24,6 +24,8 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool SupportsButtonActions => true;
 
+    public bool SupportsKeyboardShortcuts => true;
+
     public bool SupportsSingleInstance => true;
 
     public bool CanUseWin32 => false;

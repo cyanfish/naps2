@@ -18,9 +18,10 @@ internal class SettingsForm : EtoDialogBase
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
     private readonly CheckBox _keepSession = C.CheckBox(UiStrings.KeepSession);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);
-    private readonly Command _pdfSettingsCommand;
-    private readonly Command _imageSettingsCommand;
-    private readonly Command _emailSettingsCommand;
+    private readonly ActionCommand _pdfSettingsCommand;
+    private readonly ActionCommand _imageSettingsCommand;
+    private readonly ActionCommand _emailSettingsCommand;
+    private readonly ActionCommand _keyboardShortcutsCommand;
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
     public SettingsForm(Naps2Config config, DesktopSubFormController desktopSubFormController,
@@ -48,6 +49,10 @@ internal class SettingsForm : EtoDialogBase
             Text = UiStrings.EmailSettings,
             Image = iconProvider.GetIcon("email_small")
         };
+        _keyboardShortcutsCommand = new ActionCommand(() => FormFactory.Create<KeyboardShortcutsForm>().ShowModal())
+        {
+            Text = UiStrings.KeyboardShortcuts
+        };
     }
 
     protected override void BuildLayout()
@@ -73,6 +78,9 @@ internal class SettingsForm : EtoDialogBase
                             C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
                             _saveButtonDefaultAction
                         ).Aligned()
+                        : C.None(),
+                    PlatformCompat.System.SupportsKeyboardShortcuts
+                        ? C.Button(_keyboardShortcutsCommand).AlignLeading()
                         : C.None()
                 )
             ),
