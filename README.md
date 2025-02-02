@@ -37,5 +37,6 @@ Looking to contribute to NAPS2 or NAPS2.Sdk? Have a look at the [Github wiki](ht
 NAPS2 is licensed under the GNU GPL 2.0 (or later). Some projects have additional license options:
 - NAPS2.Escl.* - GNU LGPL 2.1 (or later)
 - NAPS2.Images.* - GNU LGPL 2.1 (or later)
+- NAPS2.Internals - GNU LGPL 2.1 (or later)
 - NAPS2.Sdk - GNU LGPL 2.1 (or later)
 - NAPS2.Sdk.Samples - MIT
