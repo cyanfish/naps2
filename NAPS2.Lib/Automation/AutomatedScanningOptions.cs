@@ -42,6 +42,9 @@ public class AutomatedScanningOptions
     [Option('d', "delay", Default = 0, HelpText = "The delay (in milliseconds) before each scan.")]
     public int Delay { get; set; }
 
+    [Option("waitscan", HelpText = "Wait for user input (enter/return) before each scan.")]
+    public bool WaitScan { get; set; }
+
     [Option('f', "force", HelpText = "Overwrite existing files." +
                                      " If not specified, any files that already exist will not be changed.")]
     public bool ForceOverwrite { get; set; }

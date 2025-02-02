@@ -147,6 +147,9 @@
   <data name="Waiting" xml:space="preserve">
     <value>Waiting {0}ms...</value>
   </data>
+  <data name="PressEnterToScan" xml:space="preserve">
+    <value>Press Enter to scan.</value>
+  </data>
   <data name="StartingScan" xml:space="preserve">
     <value>Starting scan {0} of {1}...</value>
   </data>

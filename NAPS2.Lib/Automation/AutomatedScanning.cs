@@ -730,6 +730,11 @@ internal class AutomatedScanning
         _totalPagesScanned = 0;
         foreach (int i in Enumerable.Range(1, _options.Number))
         {
+            if (_options.WaitScan)
+            {
+                OutputVerbose(ConsoleResources.PressEnterToScan);
+                Console.ReadLine();
+            }
             if (_options.Delay > 0)
             {
                 OutputVerbose(ConsoleResources.Waiting, _options.Delay);
