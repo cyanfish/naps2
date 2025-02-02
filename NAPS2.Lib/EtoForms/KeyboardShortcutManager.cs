@@ -70,6 +70,10 @@ public class KeyboardShortcutManager
             return null;
         }
         var sb = new StringBuilder();
+        if (keys.HasFlag(Keys.Application))
+        {
+            sb.Append(EtoPlatform.Current.IsMac ? "Cmd + " : "Win + ");
+        }
         if (keys.HasFlag(Keys.Control))
         {
             sb.Append("Ctrl + ");
@@ -82,12 +86,7 @@ public class KeyboardShortcutManager
         {
             sb.Append("Alt + ");
         }
-        if (keys.HasFlag(Keys.Application))
-        {
-            sb.Append(EtoPlatform.Current.IsMac ? "Cmd + " : "Win + ");
-        }
-        var keysWithoutModifiers = keys & ~(Keys.Control | Keys.Shift | Keys.Alt | Keys.Application);
-        sb.Append(keysWithoutModifiers);
+        sb.Append(keys & ~Keys.ModifierMask);
         return sb.ToString();
     }
 

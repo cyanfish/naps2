@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
-using Eto.Drawing;
 using Eto.Forms;
+using NAPS2.Config.Model;
 using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms.Ui;
@@ -50,40 +50,128 @@ public class KeyboardShortcutsForm : EtoDialogBase
     ];
 
     private readonly ListBox _listBox = new();
+    private readonly TextBox _shortcutText = new();
+    private readonly Button _unassign = C.Button(UiStrings.Unassign);
+    private readonly Button _restoreDefaults = C.Button(UiStrings.RestoreDefaults);
+    private readonly TransactionConfigScope<CommonConfig> _transact;
+    private readonly Naps2Config _transactionConfig;
 
     public KeyboardShortcutsForm(Naps2Config config, KeyboardShortcutManager ksm) : base(config)
     {
         _ksm = ksm;
+        _transact = Config.User.BeginTransaction();
+        _transactionConfig = Config.WithTransaction(_transact);
         _listBox.DataStore = Shortcuts;
         _listBox.ItemTextBinding = new DelegateBinding<Shortcut, string>(GetLabel);
-    }
-
-    private string GetLabel(Shortcut shortcut)
-    {
-        var keys = _ksm.Parse(Config.Get(shortcut.Accessor));
-        if (keys == Keys.None)
-        {
-            return shortcut.Label;
-        }
-        // TODO: Better than ToString?
-        return string.Format(UiStrings.KeyboardShortcutLabelFormat, shortcut.Label, _ksm.Stringify(keys));
+        _listBox.SelectedIndexChanged += ListBox_SelectedIndexChanged;
+        ListBox_SelectedIndexChanged(this, EventArgs.Empty);
+        _shortcutText.KeyDown += ShortcutText_KeyDown;
+        _unassign.Click += Unassign_Click;
+        _restoreDefaults.Click += RestoreDefaults_Click;
     }
 
     protected override void BuildLayout()
     {
         Title = UiStrings.KeyboardShortcutsFormTitle;
 
-        FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
-
         LayoutController.Content = L.Column(
-            _listBox
+            L.Row(
+                _listBox.NaturalSize(200, 400).Scale(),
+                L.Column(
+                    C.Filler(),
+                    _shortcutText.Width(150),
+                    _unassign,
+                    C.Filler()
+                )
+            ).Scale(),
+            L.Row(
+                _restoreDefaults.MinWidth(140),
+                C.Filler(),
+                L.OkCancel(C.OkButton(this, Save), C.CancelButton(this))
+            )
         );
+    }
+
+    private void Unassign_Click(object? sender, EventArgs e)
+    {
+        var selected = (Shortcut?) _listBox.SelectedValue;
+        if (selected == null) return;
+        _transact.Set(selected.Accessor, "");
+        UpdateShortcutText("");
+    }
+
+    private void RestoreDefaults_Click(object? sender, EventArgs e)
+    {
+        foreach (var shortcut in Shortcuts)
+        {
+            _transact.Remove(shortcut.Accessor);
+        }
+        _listBox.Invalidate();
+        ListBox_SelectedIndexChanged(this, EventArgs.Empty);
+    }
+
+    private void ShortcutText_KeyDown(object? sender, KeyEventArgs e)
+    {
+        // TODO: There's an accessibility issue here of when this textbox is selected, it's impossible to defocus with
+        // the keyboard. Maybe a better solution is to keep the textbox disabled until you click the Assign button, then
+        // disable it again once a valid key combination has been pressed?
+        e.Handled = true;
+        var selected = (Shortcut?) _listBox.SelectedValue;
+        if (selected == null) return;
+        if (e.Key is Keys.LeftControl or Keys.LeftAlt or Keys.LeftShift or Keys.LeftApplication
+            or Keys.RightControl or Keys.RightAlt or Keys.RightShift or Keys.RightApplication)
+        {
+            return;
+        }
+        var text = _ksm.Stringify(e.KeyData);
+        _transact.Set(selected.Accessor, text);
+        UpdateShortcutText(text);
+    }
+
+    private void UpdateShortcutText(string? text)
+    {
+        _shortcutText.Text = text;
+        _listBox.Invalidate();
+    }
+
+    private void ListBox_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        var selected = (Shortcut?) _listBox.SelectedValue;
+        if (selected == null)
+        {
+            _shortcutText.Text = "";
+            _shortcutText.Enabled = false;
+            _unassign.Enabled = false;
+        }
+        else
+        {
+            _shortcutText.Text = GetKeyString(selected);
+            _shortcutText.Enabled = true;
+            _unassign.Enabled = true;
+        }
+    }
+
+    private string GetKeyString(Shortcut shortcut)
+    {
+        var keys = _ksm.Parse(_transactionConfig.Get(shortcut.Accessor));
+        return _ksm.Stringify(keys) ?? "";
+    }
+
+    private string GetLabel(Shortcut shortcut)
+    {
+        var keys = _ksm.Parse(_transactionConfig.Get(shortcut.Accessor));
+        if (keys == Keys.None)
+        {
+            return shortcut.Label;
+        }
+        return string.Format(UiStrings.KeyboardShortcutLabelFormat, shortcut.Label, _ksm.Stringify(keys));
     }
 
     public bool Updated { get; private set; }
 
     private void Save()
     {
+        _transact.Commit();
         Updated = true;
     }
 

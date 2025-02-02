@@ -2427,6 +2427,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unassign.
+        /// </summary>
+        internal static string Unassign {
+            get {
+                return ResourceManager.GetString("Unassign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undo.
         /// </summary>
         internal static string Undo {
