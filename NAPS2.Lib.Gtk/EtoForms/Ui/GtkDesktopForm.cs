@@ -122,6 +122,7 @@ public class GtkDesktopForm : DesktopForm
         if (Config.Get(c => c.ShowProfilesToolbar) && _profilesToolbar.Parent == null)
         {
             ((VBox) _toolbar.Parent).Add(_profilesToolbar);
+            _profilesToolbar.ShowAll();
             LayoutController.Invalidate();
         }
         if (!Config.Get(c => c.ShowProfilesToolbar) && _profilesToolbar.Parent != null)
