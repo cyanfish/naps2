@@ -48,6 +48,41 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.EmailSettings, c => c.KeyboardShortcuts.EmailSettings),
 
         new(UiStrings.Print, c => c.KeyboardShortcuts.Print),
+
+        new(UiStrings.View, c => c.KeyboardShortcuts.ImageView),
+        new(UiStrings.BlackAndWhite, c => c.KeyboardShortcuts.ImageView),
+        new(UiStrings.BrightnessContrast, c => c.KeyboardShortcuts.ImageBrightness),
+        new(UiStrings.Crop, c => c.KeyboardShortcuts.ImageCrop),
+        new(UiStrings.HueSaturation, c => c.KeyboardShortcuts.ImageHue),
+        new(UiStrings.Sharpen, c => c.KeyboardShortcuts.ImageSharpen),
+        new(UiStrings.DocumentCorrection, c => c.KeyboardShortcuts.ImageDocumentCorrection),
+        new(UiStrings.Split, c => c.KeyboardShortcuts.ImageSplit),
+        new(UiStrings.Combine, c => c.KeyboardShortcuts.ImageCombine),
+        new(UiStrings.Reset, c => c.KeyboardShortcuts.ImageReset),
+
+        new(UiStrings.RotateLeft, c => c.KeyboardShortcuts.RotateLeft),
+        new(UiStrings.RotateRight, c => c.KeyboardShortcuts.RotateRight),
+        new(UiStrings.Flip, c => c.KeyboardShortcuts.RotateFlip),
+        new(UiStrings.CustomRotation, c => c.KeyboardShortcuts.RotateCustom),
+
+        new(UiStrings.MoveUp, c => c.KeyboardShortcuts.MoveUp),
+        new(UiStrings.MoveDown, c => c.KeyboardShortcuts.MoveDown),
+
+        new(UiStrings.Interleave, c => c.KeyboardShortcuts.ReorderInterleave),
+        new(UiStrings.Deinterleave, c => c.KeyboardShortcuts.ReorderDeinterleave),
+        new(UiStrings.AltInterleave, c => c.KeyboardShortcuts.ReorderAltInterleave),
+        new(UiStrings.AltDeinterleave, c => c.KeyboardShortcuts.ReorderAltDeinterleave),
+        new(UiStrings.ReverseAll, c => c.KeyboardShortcuts.ReorderReverseAll),
+        new(UiStrings.ReverseSelected, c => c.KeyboardShortcuts.ReorderReverseSelected),
+
+        new(UiStrings.Delete, c => c.KeyboardShortcuts.Delete),
+        new(UiStrings.Clear, c => c.KeyboardShortcuts.Clear),
+
+        new(UiStrings.Settings, c => c.KeyboardShortcuts.Settings),
+        new(UiStrings.About, c => c.KeyboardShortcuts.About),
+
+        new(UiStrings.ZoomIn, c => c.KeyboardShortcuts.ZoomIn),
+        new(UiStrings.ZoomOut, c => c.KeyboardShortcuts.ZoomOut),
     ];
 
     private readonly DesktopFormProvider _desktopFormProvider;

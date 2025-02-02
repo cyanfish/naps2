@@ -35,6 +35,7 @@ public class DesktopKeyboardShortcuts
 
         var ks = _config.Get(c => c.KeyboardShortcuts);
 
+        _ksm.Assign(ks.Settings, commands.Settings);
         _ksm.Assign(ks.About, commands.About);
         _ksm.Assign(ks.BatchScan, commands.BatchScan);
         _ksm.Assign(ks.Clear, commands.ClearAll);

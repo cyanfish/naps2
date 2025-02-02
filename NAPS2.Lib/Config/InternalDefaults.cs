@@ -186,6 +186,7 @@ public static class InternalDefaults
                 ReorderReverseSelected = "",
                 Delete = "",
                 Clear = "Mod+Shift+Del",
+                Settings = "",
                 About = "F1",
                 ZoomIn = "Mod+Oemplus",
                 ZoomOut = "Mod+OemMinus"
