@@ -212,9 +212,10 @@ public class WinFormsDesktopForm : DesktopForm
             var profile = profiles[i];
             var item = toolbarItems[i];
             item.Tag = profile;
-            if (item.Text != profile.DisplayName)
+            var text = profile.DisplayName.Replace("&", "&&");
+            if (item.Text != text)
             {
-                item.Text = profile.DisplayName;
+                item.Text = text;
             }
         }
     }

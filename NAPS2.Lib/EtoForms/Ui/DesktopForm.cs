@@ -541,7 +541,6 @@ public abstract class DesktopForm : EtoFormBase
         var commandList = _profileManager.Profiles.Select(profile =>
                 new ActionCommand(() => _desktopScanController.ScanWithProfile(profile))
                 {
-                    // TODO: Does this need to change on non-WinForms?
                     MenuText = profile.DisplayName.Replace("&", "&&"),
                     IconName = profile == defaultProfile ? "accept_small" : null
                 })
