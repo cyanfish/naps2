@@ -40,6 +40,7 @@ public class ToolbarFormatter
         // Recalculate sizes
         Invoker.Current.InvokeDispatch(() =>
         {
+            if (tStrip.Parent == null) return;
             if (tStrip.Parent.Dock == DockStyle.Top || tStrip.Parent.Dock == DockStyle.Bottom)
             {
                 // TODO: If we cache the used width, this check doesn't require any layout - so we can run it on form resize to see if we need to relayout 
