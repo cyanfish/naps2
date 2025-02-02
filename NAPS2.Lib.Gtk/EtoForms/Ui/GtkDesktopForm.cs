@@ -162,6 +162,11 @@ public class GtkDesktopForm : DesktopForm
         }
     }
 
+    protected override void RecreateToolbarsAndMenus()
+    {
+        // Recreating toolbars doesn't work well on Gtk and isn't necessary anyway
+    }
+
     protected override void CreateToolbarButton(Command command)
     {
         var button = new ToolButton(GetCommandImage(command), command.ToolBarText)
