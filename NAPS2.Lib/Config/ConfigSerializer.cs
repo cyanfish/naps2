@@ -173,6 +173,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         SetIfLocked(x => x.DeleteAfterSaving, c.DeleteAfterSaving, nameof(c.DeleteAfterSaving));
         SetIfLocked(x => x.KeepSession, c.KeepSession, nameof(c.KeepSession));
         SetIfLocked(x => x.SingleInstance, c.SingleInstance, nameof(c.SingleInstance));
+        SetIfLocked(x => x.KeyboardShortcuts, MapKeyboardShortcuts(c.KeyboardShortcuts ?? new KeyboardShortcuts()), nameof(c.KeyboardShortcuts));
 
         return storage;
     }

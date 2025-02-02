@@ -85,7 +85,7 @@
     <FlipDuplexedPages>false</FlipDuplexedPages>
     <TwainImpl>Default</TwainImpl>
   </DefaultProfileSettings>
-  <KeyboardShortcuts>
+  <KeyboardShortcuts mode="default">
     <ScanDefault>Ctrl+Enter</ScanDefault>
     <ScanProfile1>F2</ScanProfile1>
     <ScanProfile2>F3</ScanProfile2>
@@ -127,6 +127,7 @@
     <RotateLeft>Ctrl+Shift+Left</RotateLeft>
     <RotateRight>Ctrl+Shift+Right</RotateRight>
     <RotateFlip>Ctrl+Shift+Down</RotateFlip>
+    <RotateDeskew></RotateDeskew>
     <RotateCustom></RotateCustom>
     <MoveUp>Ctrl+Up</MoveUp>
     <MoveDown>Ctrl+Down</MoveDown>
@@ -138,6 +139,7 @@
     <ReorderReverseSelected></ReorderReverseSelected>
     <Delete></Delete>
     <Clear>Ctrl+Shift+Del</Clear>
+    <Settings></Settings>
     <About>F1</About>
     <ZoomIn>Ctrl+Oemplus</ZoomIn>
     <ZoomOut>Ctrl+OemMinus</ZoomOut>

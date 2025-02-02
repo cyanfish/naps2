@@ -32,17 +32,14 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.Ocr, c => c.KeyboardShortcuts.Ocr),
         new(UiStrings.Import, c => c.KeyboardShortcuts.Import),
         Shortcut.Separator,
-        new(UiStrings.SavePdf, c => c.KeyboardShortcuts.SavePDF),
         new(UiStrings.SaveAllAsPdf, c => c.KeyboardShortcuts.SavePDFAll),
         new(UiStrings.SaveSelectedAsPdf, c => c.KeyboardShortcuts.SavePDFSelected),
         new(UiStrings.PdfSettings, c => c.KeyboardShortcuts.PDFSettings),
         Shortcut.Separator,
-        new(UiStrings.SaveImages, c => c.KeyboardShortcuts.SaveImages),
         new(UiStrings.SaveAllAsImages, c => c.KeyboardShortcuts.SaveImagesAll),
         new(UiStrings.SaveSelectedAsImages, c => c.KeyboardShortcuts.SaveImagesSelected),
         new(UiStrings.ImageSettings, c => c.KeyboardShortcuts.ImageSettings),
         Shortcut.Separator,
-        new(UiStrings.EmailPdf, c => c.KeyboardShortcuts.EmailPDF),
         new(UiStrings.EmailAllAsPdf, c => c.KeyboardShortcuts.EmailPDFAll),
         new(UiStrings.EmailSelectedAsPdf, c => c.KeyboardShortcuts.EmailPDFSelected),
         new(UiStrings.EmailSettings, c => c.KeyboardShortcuts.EmailSettings),
@@ -199,10 +196,11 @@ public class KeyboardShortcutsForm : EtoDialogBase
         }
         else
         {
+            bool locked = _transactionConfig.AppLocked.Has(selected.Accessor);
             _shortcutText.Text = GetKeyString(selected);
             _shortcutText.Enabled = false;
-            _assign.Enabled = true;
-            _unassign.Enabled = _shortcutText.Text != "";
+            _assign.Enabled = !locked;
+            _unassign.Enabled = !locked && _shortcutText.Text != "";
         }
         _listBox.Invalidate();
     }
