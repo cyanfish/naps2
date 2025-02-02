@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-12-28 00:12\n"
+"PO-Revision-Date: 2025-02-02 18:25\n"
 "Last-Translator: \n"
 "Language-Team: Latvian\n"
 "Language: lv\n"
@@ -229,6 +229,10 @@ msgstr "Vai tiešām vēlaties atcelt {0} kopīgošanu?"
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "Vai tiešām vēlaties atsaukt jūsu veiktās izmaiņas {0} attēlam(iem)?"
+
+#: UiStrings.resx$Assign$Message
+msgid "Assign"
+msgstr ""
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -793,6 +797,11 @@ msgstr "JPEG kvalitāte"
 msgid "Keep images across sessions"
 msgstr "Saglabāt attēlus starp seansiem"
 
+#: UiStrings.resx$KeyboardShortcuts$Message
+#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
+msgid "Keyboard Shortcuts"
+msgstr ""
+
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
 msgstr "Atslēgvārdi:"
@@ -1325,8 +1334,17 @@ msgid "Scan Configuration"
 msgstr "Skenēšanas konfigurācija"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+#: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
 msgstr "Skenēt ar noklusējuma profilu"
+
+#: UiStrings.resx$ScanWithNewProfile$Message
+msgid "Scan With New Profile"
+msgstr ""
+
+#: UiStrings.resx$ScanWithProfile$Message
+msgid "Scan With Profile {0}"
+msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1599,6 +1617,10 @@ msgstr "US Legal (8.5x14 collas)"
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (8.5x11 collas)"
 
+#: UiStrings.resx$Unassign$Message
+msgid "Unassign"
+msgstr ""
+
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
 msgstr "Atcelt"
@@ -1732,6 +1754,10 @@ msgstr "no {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
+
+#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
+msgid "{0} ({1})"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

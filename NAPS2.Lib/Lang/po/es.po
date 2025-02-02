@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-12-28 00:12\n"
+"PO-Revision-Date: 2025-02-02 18:25\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -33,7 +33,7 @@ msgstr "El menú \"Escanear\" cambia el perfil por defecto"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 dispositivo encontrado."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -110,7 +110,7 @@ msgstr "Permitir impresión"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "Desentrelazado alternativo"
+msgstr "Des entrelazado alternativo"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
@@ -118,7 +118,7 @@ msgstr "Entrelazado alternativo"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Preguntar siempre"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -230,6 +230,10 @@ msgstr "¿Estás seguro de que quieres dejar de compartir {0}?"
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "¿Está seguro de que quiere deshacer los cambios a {0} imagen(es)?"
 
+#: UiStrings.resx$Assign$Message
+msgid "Assign"
+msgstr ""
+
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
 msgstr "Nombre del archivo adjunto:"
@@ -331,7 +335,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "¿No encuentras tu escáner? Lee las limitaciones del Flatpak NAPS2."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -393,11 +397,11 @@ msgstr "Cerrar"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "Combinar"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Se interrumpió la comunicación con el dispositivo de escaneo."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -409,11 +413,11 @@ msgstr "Compresión:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Conectar"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Error de conexión."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -654,7 +658,7 @@ msgstr "Ruta del archivo:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Corregir el balance de blancos y eliminar el ruido"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -662,7 +666,7 @@ msgstr "Voltear"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "Voltea el reverso de las páginas dúplex"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -706,7 +710,7 @@ msgstr "Tono / Saturación"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Host"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -793,6 +797,11 @@ msgstr "Calidad Jpeg"
 msgid "Keep images across sessions"
 msgstr "Mantener las imágenes entre sesiones"
 
+#: UiStrings.resx$KeyboardShortcuts$Message
+#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
+msgid "Keyboard Shortcuts"
+msgstr ""
+
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
 msgstr "Palabras clave:"
@@ -824,7 +833,7 @@ msgstr "Hacer que los PDFs sean buscables usando OCR"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "IP manual"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -860,11 +869,11 @@ msgstr "Subir"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "Varios idiomas"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "Varios idiomas..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -923,7 +932,7 @@ msgstr "No ha seleccionado ningún dispositivo."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "No se han encontrado dispositivos."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1325,8 +1334,17 @@ msgid "Scan Configuration"
 msgstr "Configuración del escaneo"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+#: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
 msgstr "Escanear con perfil predeterminado"
+
+#: UiStrings.resx$ScanWithNewProfile$Message
+msgid "Scan With New Profile"
+msgstr ""
+
+#: UiStrings.resx$ScanWithProfile$Message
+msgid "Scan With Profile {0}"
+msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1599,6 +1617,10 @@ msgstr "Oficio (356 x 216 mm)"
 msgid "US Letter (8.5x11 in)"
 msgstr "Carta (279 x 216 mm)"
 
+#: UiStrings.resx$Unassign$Message
+msgid "Unassign"
+msgstr ""
+
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
 msgstr ""
@@ -1732,6 +1754,10 @@ msgstr "de {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
+
+#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
+msgid "{0} ({1})"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

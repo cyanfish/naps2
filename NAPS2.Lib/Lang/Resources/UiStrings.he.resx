@@ -834,4 +834,28 @@
   <data name="CantFindScannerFlatpak" xml:space="preserve">
     <value>הסורק לא נמצא? להלן הפרטים על המגבלות של ה־Flatpak של NAPS2.</value>
   </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>קיצורי מקלדת</value>
+  </data>
+  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
+    <value>קיצורי מקלדת</value>
+  </data>
+  <data name="ScanWithProfile" xml:space="preserve">
+    <value>סריקה עם פרופיל {0}</value>
+  </data>
+  <data name="ScanWithDefaultProfile" xml:space="preserve">
+    <value>לסרוק עם פרופיל ברירת המחדל</value>
+  </data>
+  <data name="ScanWithNewProfile" xml:space="preserve">
+    <value>סריקה עם פרופיל חדש</value>
+  </data>
+  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>הקצאה</value>
+  </data>
+  <data name="Unassign" xml:space="preserve">
+    <value>ביטול הקצאה</value>
+  </data>
 </root>

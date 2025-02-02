@@ -834,4 +834,28 @@
   <data name="CantFindScannerFlatpak" xml:space="preserve">
     <value>Nie możesz znaleźć swojego skanera? Przeczytaj o ograniczeniach Flatpaka NAPS2.</value>
   </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Skróty klawiszowe</value>
+  </data>
+  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
+    <value>Skróty klawiszowe</value>
+  </data>
+  <data name="ScanWithProfile" xml:space="preserve">
+    <value>Skanuj za pomocą profilu {0}</value>
+  </data>
+  <data name="ScanWithDefaultProfile" xml:space="preserve">
+    <value>Skanuj za pomocą domyślnego profilu</value>
+  </data>
+  <data name="ScanWithNewProfile" xml:space="preserve">
+    <value>Skanuj za pomocą nowego profilu</value>
+  </data>
+  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Przypisz</value>
+  </data>
+  <data name="Unassign" xml:space="preserve">
+    <value>Usuń przypisanie</value>
+  </data>
 </root>

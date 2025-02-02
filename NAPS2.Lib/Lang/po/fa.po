@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-12-28 00:12\n"
+"PO-Revision-Date: 2025-02-02 18:25\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -229,6 +229,10 @@ msgstr ""
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "آیا مطمئن هستند می‌خواهید تغییرات خود را روی {0} تصویر واگردانی کنید؟"
+
+#: UiStrings.resx$Assign$Message
+msgid "Assign"
+msgstr ""
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -793,6 +797,11 @@ msgstr "کیفیت Jpeg"
 msgid "Keep images across sessions"
 msgstr ""
 
+#: UiStrings.resx$KeyboardShortcuts$Message
+#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
+msgid "Keyboard Shortcuts"
+msgstr ""
+
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
 msgstr "کلیدواژه‌ها:"
@@ -1325,7 +1334,16 @@ msgid "Scan Configuration"
 msgstr "پیکربندی اسکن"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+#: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
+msgstr ""
+
+#: UiStrings.resx$ScanWithNewProfile$Message
+msgid "Scan With New Profile"
+msgstr ""
+
+#: UiStrings.resx$ScanWithProfile$Message
+msgid "Scan With Profile {0}"
 msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
@@ -1599,6 +1617,10 @@ msgstr "US Legal (۸٫۵x۱۴ اینچ)"
 msgid "US Letter (8.5x11 in)"
 msgstr "US Letter (۸٫۵x۱۱ اینچ)"
 
+#: UiStrings.resx$Unassign$Message
+msgid "Unassign"
+msgstr ""
+
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
 msgstr ""
@@ -1731,6 +1753,10 @@ msgstr "از {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
+msgstr ""
+
+#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
+msgid "{0} ({1})"
 msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message

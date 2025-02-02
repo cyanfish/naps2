@@ -834,4 +834,28 @@
   <data name="CantFindScannerFlatpak" xml:space="preserve">
     <value>Kun je je scanner niet vinden? Lees dan over de beperkingen van NAPS2 Flatpak.</value>
   </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Sneltoetsen</value>
+  </data>
+  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
+    <value>Sneltoetsen</value>
+  </data>
+  <data name="ScanWithProfile" xml:space="preserve">
+    <value>Scannen met Profiel {0}</value>
+  </data>
+  <data name="ScanWithDefaultProfile" xml:space="preserve">
+    <value>Scannen met standaardprofiel</value>
+  </data>
+  <data name="ScanWithNewProfile" xml:space="preserve">
+    <value>Scannen met nieuw profiel</value>
+  </data>
+  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Toewijzen</value>
+  </data>
+  <data name="Unassign" xml:space="preserve">
+    <value>Toewijzing verwijderen</value>
+  </data>
 </root>

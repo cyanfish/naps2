@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-12-28 00:12\n"
+"PO-Revision-Date: 2025-02-02 18:25\n"
 "Last-Translator: \n"
 "Language-Team: Bosnian\n"
 "Language: bs\n"
@@ -230,6 +230,10 @@ msgstr "Da li želite zaustaviti dijeljenje {0}?"
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "Sigurni ste da želite vratiti promjene na {0} slike(a)?"
 
+#: UiStrings.resx$Assign$Message
+msgid "Assign"
+msgstr ""
+
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
 msgstr "Naziv priloga:"
@@ -331,7 +335,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "Ne može se pronaći vaš skener? Pročitajte o ograničenjima NAPS2 flatpak-a."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -792,6 +796,11 @@ msgstr "Jpeg kvalitet"
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
 msgstr "Zadrži slike kroz sesije"
+
+#: UiStrings.resx$KeyboardShortcuts$Message
+#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
+msgid "Keyboard Shortcuts"
+msgstr ""
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -1325,8 +1334,17 @@ msgid "Scan Configuration"
 msgstr "Podešavanje skeniranja"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+#: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
 msgstr "Skeniraj sa zadanim profilom"
+
+#: UiStrings.resx$ScanWithNewProfile$Message
+msgid "Scan With New Profile"
+msgstr ""
+
+#: UiStrings.resx$ScanWithProfile$Message
+msgid "Scan With Profile {0}"
+msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1437,7 +1455,7 @@ msgstr "Prikaži brojeve stranica"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "Bočna traka"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1599,6 +1617,10 @@ msgstr "Američki legal (8,5x14 inča)"
 msgid "US Letter (8.5x11 in)"
 msgstr "Američko pismo (8,5x11 inča)"
 
+#: UiStrings.resx$Unassign$Message
+msgid "Unassign"
+msgstr ""
+
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
 msgstr "Poništi radnju"
@@ -1732,6 +1754,10 @@ msgstr "od {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
+
+#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
+msgid "{0} ({1})"
+msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

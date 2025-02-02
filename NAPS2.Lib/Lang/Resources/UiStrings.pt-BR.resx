@@ -834,4 +834,28 @@
   <data name="CantFindScannerFlatpak" xml:space="preserve">
     <value>Não consegue encontrar seu scanner? Leia sobre as limitações do NAPS2 Flatpak.</value>
   </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Atalhos de Teclado</value>
+  </data>
+  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
+    <value>Atalhos de Teclado</value>
+  </data>
+  <data name="ScanWithProfile" xml:space="preserve">
+    <value>Digitalizar com o Perfil {0}</value>
+  </data>
+  <data name="ScanWithDefaultProfile" xml:space="preserve">
+    <value>Digitalizar com o perfil padrão</value>
+  </data>
+  <data name="ScanWithNewProfile" xml:space="preserve">
+    <value>Digitalizar com novo perfil</value>
+  </data>
+  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Associar</value>
+  </data>
+  <data name="Unassign" xml:space="preserve">
+    <value>Desassociar</value>
+  </data>
 </root>

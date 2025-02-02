@@ -19,7 +19,7 @@
     <value>El escáner seleccionado está inactivo.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Se interrumpió la comunicación con el dispositivo de escaneo.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>

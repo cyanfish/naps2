@@ -834,4 +834,28 @@
   <data name="CantFindScannerFlatpak" xml:space="preserve">
     <value>Nem találja a lapolvasóját? Olvasson a NAPS2 Flatpak korlátairól.</value>
   </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Billentyűparancsok</value>
+  </data>
+  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
+    <value>Billentyűparancsok</value>
+  </data>
+  <data name="ScanWithProfile" xml:space="preserve">
+    <value>Lapolvasás a {0} profillal</value>
+  </data>
+  <data name="ScanWithDefaultProfile" xml:space="preserve">
+    <value>Beolvasás az alapértelmezett profillal</value>
+  </data>
+  <data name="ScanWithNewProfile" xml:space="preserve">
+    <value>Lapolvasás új profillal</value>
+  </data>
+  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Hozzárendelés</value>
+  </data>
+  <data name="Unassign" xml:space="preserve">
+    <value>Hozzárendelés megszüntetése</value>
+  </data>
 </root>

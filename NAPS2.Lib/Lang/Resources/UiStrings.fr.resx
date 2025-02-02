@@ -832,6 +832,30 @@
     <value>Barre latérale</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Vous ne trouvez pas votre scanner ? Découvrez les limites du Flatpak NPAS2.</value>
+    <value>Scanner introuvable ? Afficher les limites du Flatpak NAPS2.</value>
+  </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Raccourcis clavier</value>
+  </data>
+  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
+    <value>Raccourcis clavier</value>
+  </data>
+  <data name="ScanWithProfile" xml:space="preserve">
+    <value>Numériser avec le profil {0}</value>
+  </data>
+  <data name="ScanWithDefaultProfile" xml:space="preserve">
+    <value>Numériser avec le profil par défaut</value>
+  </data>
+  <data name="ScanWithNewProfile" xml:space="preserve">
+    <value>Numériser avec un nouveau profil</value>
+  </data>
+  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Affecter</value>
+  </data>
+  <data name="Unassign" xml:space="preserve">
+    <value>Désaffecter</value>
   </data>
 </root>

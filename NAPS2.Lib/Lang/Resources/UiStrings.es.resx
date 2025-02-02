@@ -172,7 +172,7 @@
     <value>Entrelazado alternativo</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Desentrelazado alternativo</value>
+    <value>Des entrelazado alternativo</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Invertir</value>
@@ -382,7 +382,7 @@
     <value>Modo OCR:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>Corregir el balance de blancos y eliminar el ruido</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Ejecutar OCR automáticamente después del escaneo</value>
@@ -694,7 +694,7 @@
     <value>Voltear las páginas a doble cara</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>Voltea el reverso de las páginas dúplex</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Versión Wia:</value>
@@ -781,10 +781,10 @@
     <value>Compartir incluso cuando NAPS2 esté cerrado</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>Varios idiomas...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>Varios idiomas</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
     <value>Show native TWAIN progress</value>
@@ -793,13 +793,13 @@
     <value>Split</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Combinar</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP manual</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>IP manual</value>
   </data>
   <data name="IpHost" xml:space="preserve">
     <value>IP/Host</value>
@@ -808,13 +808,13 @@
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Conectar</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>Error de conexión.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Preguntar siempre</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
     <value>Searching for devices...</value>
@@ -823,15 +823,39 @@
     <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>1 dispositivo encontrado.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>No se han encontrado dispositivos.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+    <value>¿No encuentras tu escáner? Lee las limitaciones del Flatpak NAPS2.</value>
+  </data>
+  <data name="KeyboardShortcuts" xml:space="preserve">
+    <value>Keyboard Shortcuts</value>
+  </data>
+  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
+    <value>Keyboard Shortcuts</value>
+  </data>
+  <data name="ScanWithProfile" xml:space="preserve">
+    <value>Scan With Profile {0}</value>
+  </data>
+  <data name="ScanWithDefaultProfile" xml:space="preserve">
+    <value>Escanear con perfil predeterminado</value>
+  </data>
+  <data name="ScanWithNewProfile" xml:space="preserve">
+    <value>Scan With New Profile</value>
+  </data>
+  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Assign</value>
+  </data>
+  <data name="Unassign" xml:space="preserve">
+    <value>Unassign</value>
   </data>
 </root>

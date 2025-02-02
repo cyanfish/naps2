@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2024-12-30 22:55\n"
+"PO-Revision-Date: 2025-02-02 18:25\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -229,6 +229,10 @@ msgstr "Sei sicuro di voler interrompere la condivisione di {0}?"
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr "Vuoi annullare le modifiche a {0} immagine/i?"
+
+#: UiStrings.resx$Assign$Message
+msgid "Assign"
+msgstr "Assegna"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -793,6 +797,11 @@ msgstr "Qualità Jpeg"
 msgid "Keep images across sessions"
 msgstr "Mantieni le immagini tra una sezione e l'altra"
 
+#: UiStrings.resx$KeyboardShortcuts$Message
+#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
+msgid "Keyboard Shortcuts"
+msgstr "Scorciatoie tastiera"
+
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
 msgstr "Parole chiave:"
@@ -1325,8 +1334,17 @@ msgid "Scan Configuration"
 msgstr "Configurazione scansione"
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+#: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
 msgstr "Scansiona con Profilo Predefinito"
+
+#: UiStrings.resx$ScanWithNewProfile$Message
+msgid "Scan With New Profile"
+msgstr "Scansiona con nuovo profilo"
+
+#: UiStrings.resx$ScanWithProfile$Message
+msgid "Scan With Profile {0}"
+msgstr "Scansiona con il profilo {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1600,6 +1618,10 @@ msgstr "Legale USA (8.5x14 pollici)"
 msgid "US Letter (8.5x11 in)"
 msgstr "Lettera USA (8.5x11 pollici)"
 
+#: UiStrings.resx$Unassign$Message
+msgid "Unassign"
+msgstr "Rimuovi assegnazione"
+
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
 msgstr "Annulla operazione"
@@ -1733,6 +1755,10 @@ msgstr "di {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
+
+#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
+msgid "{0} ({1})"
+msgstr "{0} ({1})"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
