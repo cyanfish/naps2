@@ -26,29 +26,29 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(string.Format(UiStrings.ScanWithProfile, 12), c => c.KeyboardShortcuts.ScanProfile12),
         new(UiStrings.ScanWithNewProfile, c => c.KeyboardShortcuts.NewProfile),
         new(UiStrings.BatchScan, c => c.KeyboardShortcuts.BatchScan),
-
+        Shortcut.Separator,
         new(UiStrings.Profiles, c => c.KeyboardShortcuts.Profiles),
         new(UiStrings.ScannerSharing, c => c.KeyboardShortcuts.ScannerSharing),
         new(UiStrings.Ocr, c => c.KeyboardShortcuts.Ocr),
         new(UiStrings.Import, c => c.KeyboardShortcuts.Import),
-
+        Shortcut.Separator,
         new(UiStrings.SavePdf, c => c.KeyboardShortcuts.SavePDF),
         new(UiStrings.SaveAllAsPdf, c => c.KeyboardShortcuts.SavePDFAll),
         new(UiStrings.SaveSelectedAsPdf, c => c.KeyboardShortcuts.SavePDFSelected),
         new(UiStrings.PdfSettings, c => c.KeyboardShortcuts.PDFSettings),
-
+        Shortcut.Separator,
         new(UiStrings.SaveImages, c => c.KeyboardShortcuts.SaveImages),
         new(UiStrings.SaveAllAsImages, c => c.KeyboardShortcuts.SaveImagesAll),
         new(UiStrings.SaveSelectedAsImages, c => c.KeyboardShortcuts.SaveImagesSelected),
         new(UiStrings.ImageSettings, c => c.KeyboardShortcuts.ImageSettings),
-
+        Shortcut.Separator,
         new(UiStrings.EmailPdf, c => c.KeyboardShortcuts.EmailPDF),
         new(UiStrings.EmailAllAsPdf, c => c.KeyboardShortcuts.EmailPDFAll),
         new(UiStrings.EmailSelectedAsPdf, c => c.KeyboardShortcuts.EmailPDFSelected),
         new(UiStrings.EmailSettings, c => c.KeyboardShortcuts.EmailSettings),
-
+        Shortcut.Separator,
         new(UiStrings.Print, c => c.KeyboardShortcuts.Print),
-
+        Shortcut.Separator,
         new(UiStrings.View, c => c.KeyboardShortcuts.ImageView),
         new(UiStrings.BlackAndWhite, c => c.KeyboardShortcuts.ImageView),
         new(UiStrings.BrightnessContrast, c => c.KeyboardShortcuts.ImageBrightness),
@@ -59,28 +59,27 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.Split, c => c.KeyboardShortcuts.ImageSplit),
         new(UiStrings.Combine, c => c.KeyboardShortcuts.ImageCombine),
         new(UiStrings.Reset, c => c.KeyboardShortcuts.ImageReset),
-
+        Shortcut.Separator,
         new(UiStrings.RotateLeft, c => c.KeyboardShortcuts.RotateLeft),
         new(UiStrings.RotateRight, c => c.KeyboardShortcuts.RotateRight),
         new(UiStrings.Flip, c => c.KeyboardShortcuts.RotateFlip),
         new(UiStrings.CustomRotation, c => c.KeyboardShortcuts.RotateCustom),
-
+        Shortcut.Separator,
         new(UiStrings.MoveUp, c => c.KeyboardShortcuts.MoveUp),
         new(UiStrings.MoveDown, c => c.KeyboardShortcuts.MoveDown),
-
+        Shortcut.Separator,
         new(UiStrings.Interleave, c => c.KeyboardShortcuts.ReorderInterleave),
         new(UiStrings.Deinterleave, c => c.KeyboardShortcuts.ReorderDeinterleave),
         new(UiStrings.AltInterleave, c => c.KeyboardShortcuts.ReorderAltInterleave),
         new(UiStrings.AltDeinterleave, c => c.KeyboardShortcuts.ReorderAltDeinterleave),
         new(UiStrings.ReverseAll, c => c.KeyboardShortcuts.ReorderReverseAll),
         new(UiStrings.ReverseSelected, c => c.KeyboardShortcuts.ReorderReverseSelected),
-
+        Shortcut.Separator,
         new(UiStrings.Delete, c => c.KeyboardShortcuts.Delete),
         new(UiStrings.Clear, c => c.KeyboardShortcuts.Clear),
-
         new(UiStrings.Settings, c => c.KeyboardShortcuts.Settings),
         new(UiStrings.About, c => c.KeyboardShortcuts.About),
-
+        Shortcut.Separator,
         new(UiStrings.ZoomIn, c => c.KeyboardShortcuts.ZoomIn),
         new(UiStrings.ZoomOut, c => c.KeyboardShortcuts.ZoomOut),
     ];
@@ -148,7 +147,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
     private void Unassign_Click(object? sender, EventArgs e)
     {
         var selected = (Shortcut?) _listBox.SelectedValue;
-        if (selected == null) return;
+        if (selected?.Accessor == null) return;
         _transact.Set(selected.Accessor, "");
         UpdateUi();
     }
@@ -157,7 +156,10 @@ public class KeyboardShortcutsForm : EtoDialogBase
     {
         foreach (var shortcut in Shortcuts)
         {
-            _transact.Remove(shortcut.Accessor);
+            if (shortcut.Accessor != null)
+            {
+                _transact.Remove(shortcut.Accessor);
+            }
         }
         UpdateUi();
     }
@@ -168,7 +170,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
         e.Handled = true;
         var selected = (Shortcut?) _listBox.SelectedValue;
-        if (selected == null) return;
+        if (selected?.Accessor == null) return;
         if (e.Key is Keys.LeftControl or Keys.LeftAlt or Keys.LeftShift or Keys.LeftApplication
             or Keys.RightControl or Keys.RightAlt or Keys.RightShift or Keys.RightApplication)
         {
@@ -187,7 +189,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
     private void UpdateUi()
     {
         var selected = (Shortcut?) _listBox.SelectedValue;
-        if (selected == null)
+        if (selected?.Accessor == null)
         {
             _shortcutText.Text = "";
             _shortcutText.Enabled = false;
@@ -206,12 +208,16 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
     private string GetKeyString(Shortcut shortcut)
     {
+        if (shortcut.Accessor == null) return "";
+
         var keys = _ksm.Parse(_transactionConfig.Get(shortcut.Accessor));
         return _ksm.Stringify(keys) ?? "";
     }
 
     private string GetLabel(Shortcut shortcut)
     {
+        if (shortcut.Accessor == null) return shortcut.Label;
+
         var keys = _ksm.Parse(_transactionConfig.Get(shortcut.Accessor));
         if (keys == Keys.None)
         {
@@ -226,5 +232,8 @@ public class KeyboardShortcutsForm : EtoDialogBase
         _desktopFormProvider.DesktopForm.AssignKeyboardShortcuts();
     }
 
-    private record Shortcut(string Label, Expression<Func<CommonConfig, string?>> Accessor);
+    private record Shortcut(string Label, Expression<Func<CommonConfig, string?>>? Accessor)
+    {
+        public static Shortcut Separator { get; } = new("-------", null);
+    }
 }

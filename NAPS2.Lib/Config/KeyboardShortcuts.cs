@@ -70,7 +70,6 @@ public class KeyboardShortcuts
 
     public string? Delete { get; set; }
     public string? Clear { get; set; }
-
     public string? Settings { get; set; }
     public string? About { get; set; }
 
