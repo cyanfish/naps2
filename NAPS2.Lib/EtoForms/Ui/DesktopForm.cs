@@ -79,7 +79,7 @@ public abstract class DesktopForm : EtoFormBase
         _commands = commands;
 
         _desktopFormProvider.DesktopForm = this;
-        AssignKeyboardShortcuts();
+        _keyboardShortcuts.Assign(Commands);
         CreateToolbarsAndMenus();
         UpdateScanButton();
         UpdateProfilesToolbar();
@@ -215,10 +215,14 @@ public abstract class DesktopForm : EtoFormBase
     protected UiImageList ImageList { get; }
     protected DesktopCommands Commands => _commands.Value;
 
-    public void AssignKeyboardShortcuts()
+    public void ReassignKeyboardShortcuts()
     {
         _keyboardShortcuts.Assign(Commands);
+        UpdateScanButton();
+        RecreateToolbarsAndMenus();
     }
+
+    protected virtual void RecreateToolbarsAndMenus() => CreateToolbarsAndMenus();
 
     protected override void OnLoad(EventArgs e)
     {
@@ -261,8 +265,15 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void CreateToolbarsAndMenus()
     {
-        ToolBar = new ToolBar();
-        ConfigureToolbars();
+        if (ToolBar == null)
+        {
+            ToolBar = new ToolBar();
+            ConfigureToolbars();
+        }
+        else
+        {
+            ToolBar.Items.Clear();
+        }
 
         var hiddenButtons = Config.Get(c => c.HiddenButtons);
 

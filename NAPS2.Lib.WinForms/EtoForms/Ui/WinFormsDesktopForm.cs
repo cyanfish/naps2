@@ -134,6 +134,12 @@ public class WinFormsDesktopForm : DesktopForm
         base.SetCulture(cultureId);
     }
 
+    protected override void RecreateToolbarsAndMenus()
+    {
+        base.RecreateToolbarsAndMenus();
+        _toolbarFormatter.RelayoutToolbar(_mainToolStrip, EtoPlatform.Current.GetScaleFactor(this));
+    }
+
     protected override void ConfigureToolbars()
     {
         _container = new WF.ToolStripContainer();

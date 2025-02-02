@@ -228,7 +228,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
     private void Save()
     {
         _transact.Commit();
-        _desktopFormProvider.DesktopForm.AssignKeyboardShortcuts();
+        _desktopFormProvider.DesktopForm.ReassignKeyboardShortcuts();
     }
 
     private record Shortcut(string Label, Expression<Func<CommonConfig, string?>>? Accessor)
