@@ -664,4 +664,10 @@
   <data name="application_side_list_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_side_list-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\keyboard.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="keyboard_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\keyboard-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

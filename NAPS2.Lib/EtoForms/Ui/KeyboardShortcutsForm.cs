@@ -115,8 +115,8 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
     protected override void BuildLayout()
     {
-        FormStateController.RestoreFormState = false;
         Title = UiStrings.KeyboardShortcutsFormTitle;
+        IconName = "keyboard_small";
 
         LayoutController.Content = L.Column(
             L.Row(

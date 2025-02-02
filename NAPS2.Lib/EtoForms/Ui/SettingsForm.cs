@@ -51,7 +51,8 @@ internal class SettingsForm : EtoDialogBase
         };
         _keyboardShortcutsCommand = new ActionCommand(() => FormFactory.Create<KeyboardShortcutsForm>().ShowModal())
         {
-            Text = UiStrings.KeyboardShortcuts
+            Text = UiStrings.KeyboardShortcuts,
+            Image = iconProvider.GetIcon("keyboard_small")
         };
     }
 
@@ -80,7 +81,7 @@ internal class SettingsForm : EtoDialogBase
                         ).Aligned()
                         : C.None(),
                     PlatformCompat.System.SupportsKeyboardShortcuts
-                        ? C.Button(_keyboardShortcutsCommand).AlignLeading()
+                        ? C.Button(_keyboardShortcutsCommand, ButtonImagePosition.Left).AlignLeading()
                         : C.None()
                 )
             ),
