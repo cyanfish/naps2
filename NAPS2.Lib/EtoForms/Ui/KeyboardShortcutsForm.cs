@@ -54,6 +54,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
     private readonly ListBox _listBox = new();
     private readonly TextBox _shortcutText = new();
+    private readonly Button _assign = C.Button(UiStrings.Assign);
     private readonly Button _unassign = C.Button(UiStrings.Unassign);
     private readonly Button _restoreDefaults = C.Button(UiStrings.RestoreDefaults);
 
@@ -70,22 +71,25 @@ public class KeyboardShortcutsForm : EtoDialogBase
         _listBox.DataStore = Shortcuts;
         _listBox.ItemTextBinding = new DelegateBinding<Shortcut, string>(GetLabel);
         _listBox.SelectedIndexChanged += ListBox_SelectedIndexChanged;
-        ListBox_SelectedIndexChanged(this, EventArgs.Empty);
         _shortcutText.KeyDown += ShortcutText_KeyDown;
+        _assign.Click += Assign_Click;
         _unassign.Click += Unassign_Click;
         _restoreDefaults.Click += RestoreDefaults_Click;
+        UpdateUi();
     }
 
     protected override void BuildLayout()
     {
+        FormStateController.RestoreFormState = false;
         Title = UiStrings.KeyboardShortcutsFormTitle;
 
         LayoutController.Content = L.Column(
             L.Row(
-                _listBox.NaturalSize(200, 400).Scale(),
+                _listBox.NaturalSize(300, 500).Scale(),
                 L.Column(
                     C.Filler(),
                     _shortcutText.Width(150),
+                    _assign,
                     _unassign,
                     C.Filler()
                 )
@@ -98,12 +102,20 @@ public class KeyboardShortcutsForm : EtoDialogBase
         );
     }
 
+    private void Assign_Click(object? sender, EventArgs e)
+    {
+        var selected = (Shortcut?) _listBox.SelectedValue;
+        if (selected == null) return;
+        _shortcutText.Enabled = true;
+        _shortcutText.Focus();
+    }
+
     private void Unassign_Click(object? sender, EventArgs e)
     {
         var selected = (Shortcut?) _listBox.SelectedValue;
         if (selected == null) return;
         _transact.Set(selected.Accessor, "");
-        UpdateShortcutText("");
+        UpdateUi();
     }
 
     private void RestoreDefaults_Click(object? sender, EventArgs e)
@@ -112,15 +124,13 @@ public class KeyboardShortcutsForm : EtoDialogBase
         {
             _transact.Remove(shortcut.Accessor);
         }
-        _listBox.Invalidate();
-        ListBox_SelectedIndexChanged(this, EventArgs.Empty);
+        UpdateUi();
     }
 
     private void ShortcutText_KeyDown(object? sender, KeyEventArgs e)
     {
-        // TODO: There's an accessibility issue here of when this textbox is selected, it's impossible to defocus with
-        // the keyboard. Maybe a better solution is to keep the textbox disabled until you click the Assign button, then
-        // disable it again once a valid key combination has been pressed?
+        if (!_shortcutText.Enabled) return;
+
         e.Handled = true;
         var selected = (Shortcut?) _listBox.SelectedValue;
         if (selected == null) return;
@@ -131,30 +141,32 @@ public class KeyboardShortcutsForm : EtoDialogBase
         }
         var text = _ksm.Stringify(e.KeyData);
         _transact.Set(selected.Accessor, text);
-        UpdateShortcutText(text);
-    }
-
-    private void UpdateShortcutText(string? text)
-    {
-        _shortcutText.Text = text;
-        _listBox.Invalidate();
+        UpdateUi();
     }
 
     private void ListBox_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        UpdateUi();
+    }
+
+    private void UpdateUi()
     {
         var selected = (Shortcut?) _listBox.SelectedValue;
         if (selected == null)
         {
             _shortcutText.Text = "";
             _shortcutText.Enabled = false;
+            _assign.Enabled = false;
             _unassign.Enabled = false;
         }
         else
         {
             _shortcutText.Text = GetKeyString(selected);
-            _shortcutText.Enabled = true;
-            _unassign.Enabled = true;
+            _shortcutText.Enabled = false;
+            _assign.Enabled = true;
+            _unassign.Enabled = _shortcutText.Text != "";
         }
+        _listBox.Invalidate();
     }
 
     private string GetKeyString(Shortcut shortcut)

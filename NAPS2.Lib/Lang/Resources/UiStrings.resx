@@ -960,6 +960,9 @@
   <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
     <value>{0} ({1})</value>
   </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Assign</value>
+  </data>
   <data name="Unassign" xml:space="preserve">
     <value>Unassign</value>
   </data>
