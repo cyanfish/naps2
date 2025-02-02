@@ -24,7 +24,7 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool SupportsButtonActions => false;
 
-    public bool SupportsKeyboardShortcuts => false;
+    public bool SupportsKeyboardShortcuts => true;
 
     public bool SupportsSingleInstance => false;
 

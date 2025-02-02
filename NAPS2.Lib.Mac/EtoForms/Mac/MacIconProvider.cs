@@ -43,6 +43,8 @@ public class MacIconProvider : IIconProvider
         { "exclamation", "exclamationmark.triangle" },
         { "application_side_list", "sidebar.left" },
         { "ask", "questionmark" },
+        // TODO: This doesn't render properly as it's very wide and gets squished
+        // { "keyboard", "keyboard" },
         // TODO: Consider these
         // { "network_ip", "wifi.router" },
         // { "device", "scanner" },
