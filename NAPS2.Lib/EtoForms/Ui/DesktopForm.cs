@@ -79,7 +79,7 @@ public abstract class DesktopForm : EtoFormBase
         _commands = commands;
 
         _desktopFormProvider.DesktopForm = this;
-        _keyboardShortcuts.Assign(Commands);
+        AssignKeyboardShortcuts();
         CreateToolbarsAndMenus();
         UpdateScanButton();
         UpdateProfilesToolbar();
@@ -214,6 +214,11 @@ public abstract class DesktopForm : EtoFormBase
 
     protected UiImageList ImageList { get; }
     protected DesktopCommands Commands => _commands.Value;
+
+    public void AssignKeyboardShortcuts()
+    {
+        _keyboardShortcuts.Assign(Commands);
+    }
 
     protected override void OnLoad(EventArgs e)
     {

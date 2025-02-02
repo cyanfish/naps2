@@ -33,7 +33,13 @@ public class KeyboardShortcutManager
         { "7", Keys.D7 },
         { "8", Keys.D8 },
         { "9", Keys.D9 }
-    }; 
+    };
+
+    public void Clear()
+    {
+        _dict.Clear();
+        _commandDict.Clear();
+    }
 
     public Keys Parse(string? value)
     {

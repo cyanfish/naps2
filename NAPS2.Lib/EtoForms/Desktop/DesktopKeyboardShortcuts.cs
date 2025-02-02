@@ -16,6 +16,8 @@ public class DesktopKeyboardShortcuts
 
     public void Assign(DesktopCommands commands)
     {
+        _ksm.Clear();
+
         // Unconfigurable defaults
         _ksm.Assign("Mod+.", commands.Scan);
         _ksm.Assign("Mod+Up", commands.MoveUp);

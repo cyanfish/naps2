@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using Eto.Forms;
 using NAPS2.Config.Model;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms.Ui;
@@ -49,16 +50,21 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.Print, c => c.KeyboardShortcuts.Print),
     ];
 
+    private readonly DesktopFormProvider _desktopFormProvider;
+
     private readonly ListBox _listBox = new();
     private readonly TextBox _shortcutText = new();
     private readonly Button _unassign = C.Button(UiStrings.Unassign);
     private readonly Button _restoreDefaults = C.Button(UiStrings.RestoreDefaults);
+
     private readonly TransactionConfigScope<CommonConfig> _transact;
     private readonly Naps2Config _transactionConfig;
 
-    public KeyboardShortcutsForm(Naps2Config config, KeyboardShortcutManager ksm) : base(config)
+    public KeyboardShortcutsForm(Naps2Config config, KeyboardShortcutManager ksm,
+        DesktopFormProvider desktopFormProvider) : base(config)
     {
         _ksm = ksm;
+        _desktopFormProvider = desktopFormProvider;
         _transact = Config.User.BeginTransaction();
         _transactionConfig = Config.WithTransaction(_transact);
         _listBox.DataStore = Shortcuts;
@@ -167,12 +173,10 @@ public class KeyboardShortcutsForm : EtoDialogBase
         return string.Format(UiStrings.KeyboardShortcutLabelFormat, shortcut.Label, _ksm.Stringify(keys));
     }
 
-    public bool Updated { get; private set; }
-
     private void Save()
     {
         _transact.Commit();
-        Updated = true;
+        _desktopFormProvider.DesktopForm.AssignKeyboardShortcuts();
     }
 
     private record Shortcut(string Label, Expression<Func<CommonConfig, string?>> Accessor);
