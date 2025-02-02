@@ -730,15 +730,18 @@ internal class AutomatedScanning
         _totalPagesScanned = 0;
         foreach (int i in Enumerable.Range(1, _options.Number))
         {
-            if (_options.WaitScan)
+            if (i > 1 || !_options.FirstNow)
             {
-                OutputVerbose(ConsoleResources.PressEnterToScan);
-                Console.ReadLine();
-            }
-            if (_options.Delay > 0)
-            {
-                OutputVerbose(ConsoleResources.Waiting, _options.Delay);
-                Thread.Sleep(_options.Delay);
+                if (_options.WaitScan)
+                {
+                    OutputVerbose(ConsoleResources.PressEnterToScan);
+                    Console.ReadLine();
+                }
+                if (_options.Delay > 0)
+                {
+                    OutputVerbose(ConsoleResources.Waiting, _options.Delay);
+                    Thread.Sleep(_options.Delay);
+                }
             }
             OutputVerbose(ConsoleResources.StartingScan, i, _options.Number);
             _pagesScanned = 0;

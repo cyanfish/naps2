@@ -45,6 +45,9 @@ public class AutomatedScanningOptions
     [Option("waitscan", HelpText = "Wait for user input (enter/return) before each scan.")]
     public bool WaitScan { get; set; }
 
+    [Option("firstnow", HelpText = "When using --delay or --waitscan in combination with multiple scans (-n), don't wait before the first scan.")]
+    public bool FirstNow { get; set; }
+
     [Option('f', "force", HelpText = "Overwrite existing files." +
                                      " If not specified, any files that already exist will not be changed.")]
     public bool ForceOverwrite { get; set; }
