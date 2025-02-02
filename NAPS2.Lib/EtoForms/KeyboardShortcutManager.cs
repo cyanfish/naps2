@@ -11,7 +11,7 @@ public class KeyboardShortcutManager
     private readonly Dictionary<Keys, Action> _dict = new();
     private readonly Dictionary<Keys, Command> _commandDict = new();
 
-    private readonly Dictionary<string, Keys> _customMap = new()
+    private readonly Dictionary<string, Keys> _parseMap = new()
     {
         { "mod", Application.Instance.CommonModifier },
         { "cmd", Keys.Application },
@@ -22,7 +22,17 @@ public class KeyboardShortcutManager
         { "oemplus", Keys.Equal },
         { "oemminus", Keys.Minus },
         { "esc", Keys.Escape },
+        { "\\", Keys.Backslash },
+        { ",", Keys.Comma },
+        { "=", Keys.Equal },
+        { "`", Keys.Grave },
+        { "-", Keys.Minus },
         { ".", Keys.Period },
+        { "\"", Keys.Quote },
+        { ";", Keys.Semicolon },
+        { "/", Keys.Slash },
+        { "[", Keys.LeftBracket },
+        { "]", Keys.RightBracket },
         { "0", Keys.D0 },
         { "1", Keys.D1 },
         { "2", Keys.D2 },
@@ -33,6 +43,32 @@ public class KeyboardShortcutManager
         { "7", Keys.D7 },
         { "8", Keys.D8 },
         { "9", Keys.D9 }
+    };
+
+    private readonly Dictionary<Keys, string> _stringifyMap = new()
+    {
+        { Keys.Escape, "Esc" },
+        { Keys.Backslash, "\\" },
+        { Keys.Comma, "," },
+        { Keys.Equal, "=" },
+        { Keys.Grave, "`" },
+        { Keys.Minus, "-" },
+        { Keys.Period, "." },
+        { Keys.Quote, "\"" },
+        { Keys.Semicolon, ";" },
+        { Keys.Slash, "/" },
+        { Keys.LeftBracket, "[" },
+        { Keys.RightBracket, "]" },
+        { Keys.D0, "0" },
+        { Keys.D1, "1" },
+        { Keys.D2, "2" },
+        { Keys.D3, "3" },
+        { Keys.D4, "4" },
+        { Keys.D5, "5" },
+        { Keys.D6, "6" },
+        { Keys.D7, "7" },
+        { Keys.D8, "8" },
+        { Keys.D9, "9" }
     };
 
     public void Clear()
@@ -50,9 +86,9 @@ public class KeyboardShortcutManager
                 var keys = Keys.None;
                 foreach (var part in value!.Split('+').Select(x => x.Trim().ToLowerInvariant()))
                 {
-                    if (_customMap.ContainsKey(part))
+                    if (_parseMap.ContainsKey(part))
                     {
-                        keys |= _customMap[part];
+                        keys |= _parseMap[part];
                     }
                     else
                     {
@@ -92,7 +128,8 @@ public class KeyboardShortcutManager
         {
             sb.Append("Alt + ");
         }
-        sb.Append(keys & ~Keys.ModifierMask);
+        var keyWithoutMods = keys & ~Keys.ModifierMask;
+        sb.Append(_stringifyMap.Get(keyWithoutMods) ?? keyWithoutMods.ToString());
         return sb.ToString();
     }
 
