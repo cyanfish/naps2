@@ -176,6 +176,7 @@ public static class InternalDefaults
                 RotateRight = "Mod+Shift+Right",
                 RotateFlip = "Mod+Shift+Down",
                 RotateCustom = "",
+                RotateDeskew = "",
                 MoveUp = "Mod+Up",
                 MoveDown = "Mod+Down",
                 ReorderInterleave = "",

@@ -63,6 +63,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.RotateLeft, c => c.KeyboardShortcuts.RotateLeft),
         new(UiStrings.RotateRight, c => c.KeyboardShortcuts.RotateRight),
         new(UiStrings.Flip, c => c.KeyboardShortcuts.RotateFlip),
+        new(UiStrings.Deskew, c => c.KeyboardShortcuts.RotateDeskew),
         new(UiStrings.CustomRotation, c => c.KeyboardShortcuts.RotateCustom),
         Shortcut.Separator,
         new(UiStrings.MoveUp, c => c.KeyboardShortcuts.MoveUp),

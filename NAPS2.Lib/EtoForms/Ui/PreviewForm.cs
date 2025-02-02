@@ -357,6 +357,7 @@ public class PreviewForm : EtoDialogBase
         _previewKsm.Assign(ks.ImageCombine, Commands.Combine);
 
         _previewKsm.Assign(ks.RotateCustom, Commands.CustomRotate);
+        _previewKsm.Assign(ks.RotateDeskew, Commands.Deskew);
         _previewKsm.Assign(ks.RotateFlip, Commands.Flip);
         _previewKsm.Assign(ks.RotateLeft, Commands.RotateLeft);
         _previewKsm.Assign(ks.RotateRight, Commands.RotateRight);

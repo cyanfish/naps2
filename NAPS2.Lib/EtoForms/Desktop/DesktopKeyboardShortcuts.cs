@@ -77,6 +77,7 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.ReorderReverseAll, commands.ReverseAll);
         _ksm.Assign(ks.ReorderReverseSelected, commands.ReverseSelected);
         _ksm.Assign(ks.RotateCustom, commands.CustomRotate);
+        _ksm.Assign(ks.RotateDeskew, commands.Deskew);
         _ksm.Assign(ks.RotateFlip, commands.Flip);
         _ksm.Assign(ks.RotateLeft, commands.RotateLeft);
         _ksm.Assign(ks.RotateRight, commands.RotateRight);
