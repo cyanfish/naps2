@@ -67,6 +67,13 @@ public class CropForm : UnaryImageFormBase
         }
     }
 
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        // The crop form has no other focusable elements, so focus "OK" instead of "Revert"
+        DefaultButton.Focus();
+    }
+
     protected override void Apply()
     {
         base.Apply();
