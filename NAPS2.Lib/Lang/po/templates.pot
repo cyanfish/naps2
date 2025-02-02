@@ -224,6 +224,10 @@ msgstr ""
 msgid "Are you sure you want undo your changes to {0} image(s)?"
 msgstr ""
 
+#: UiStrings.resx$Assign$Message
+msgid "Assign"
+msgstr ""
+
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
 msgstr ""
@@ -787,6 +791,11 @@ msgstr ""
 msgid "Keep images across sessions"
 msgstr ""
 
+#: UiStrings.resx$KeyboardShortcuts$Message
+#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
+msgid "Keyboard Shortcuts"
+msgstr ""
+
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
 msgstr ""
@@ -1319,7 +1328,16 @@ msgid "Scan Configuration"
 msgstr ""
 
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+#: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
+msgstr ""
+
+#: UiStrings.resx$ScanWithNewProfile$Message
+msgid "Scan With New Profile"
+msgstr ""
+
+#: UiStrings.resx$ScanWithProfile$Message
+msgid "Scan With Profile {0}"
 msgstr ""
 
 #: MiscResources.resx$ScannedImage$Message
@@ -1593,6 +1611,10 @@ msgstr ""
 msgid "US Letter (8.5x11 in)"
 msgstr ""
 
+#: UiStrings.resx$Unassign$Message
+msgid "Unassign"
+msgstr ""
+
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
 msgstr ""
@@ -1725,6 +1747,10 @@ msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
+msgstr ""
+
+#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
+msgid "{0} ({1})"
 msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
