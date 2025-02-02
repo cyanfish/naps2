@@ -1,3 +1,11 @@
+Changes in 8.0b3:
+- Added "Keyboard Shortcuts" settings
+- Added "--waitscan" and "--firstnow" console options
+- Added support for importing zip files
+- Upgraded Tesseract from 5.3.4 to 5.5.0 for OCR
+- Fixed an issue with antivirus false positives
+- Bug fixes
+
 Changes in 8.0b2:
 - Fixes from 7.5.3
 - Fixed WIA scanning
