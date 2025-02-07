@@ -9,7 +9,7 @@ namespace NAPS2.EtoForms.Ui;
 public class KeyboardShortcutsForm : EtoDialogBase
 {
     private readonly KeyboardShortcutManager _ksm;
-    private static readonly List<Shortcut> Shortcuts =
+    private readonly List<Shortcut> Shortcuts =
     [
         new(UiStrings.ScanWithDefaultProfile, c => c.KeyboardShortcuts.ScanDefault),
         new(string.Format(UiStrings.ScanWithProfile, 1), c => c.KeyboardShortcuts.ScanProfile1),
