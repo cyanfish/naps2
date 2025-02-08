@@ -84,8 +84,8 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
     private readonly DesktopFormProvider _desktopFormProvider;
 
-    private readonly ListBox _listBox = new();
-    private readonly TextBox _shortcutText = new();
+    private readonly GridView _gridView;
+    private readonly TextBox _shortcutText = new() { ReadOnly = true };
     private readonly Button _assign = C.Button(UiStrings.Assign);
     private readonly Button _unassign = C.Button(UiStrings.Unassign);
     private readonly Button _restoreDefaults = C.Button(UiStrings.RestoreDefaults);
@@ -100,9 +100,27 @@ public class KeyboardShortcutsForm : EtoDialogBase
         _desktopFormProvider = desktopFormProvider;
         _transact = Config.User.BeginTransaction();
         _transactionConfig = Config.WithTransaction(_transact);
-        _listBox.DataStore = Shortcuts;
-        _listBox.ItemTextBinding = new DelegateBinding<Shortcut, string>(GetLabel);
-        _listBox.SelectedIndexChanged += ListBox_SelectedIndexChanged;
+        _gridView = new()
+        {
+            DataStore = Shortcuts,
+            Columns =
+            {
+                new()
+                {
+                    HeaderText = UiStrings.Action,
+                    DataCell = new TextBoxCell { Binding = new PropertyBinding<string>("Label") },
+                    Width = 280
+                },
+                new()
+                {
+                    HeaderText = UiStrings.Shortcut,
+                    DataCell = new TextBoxCell { Binding = new DelegateBinding<Shortcut, string>(GetShortcutLabel) },
+                    Width = 150
+                }
+            }
+        };
+        _gridView.SelectionChanged += GridView_SelectionChanged;
+        _gridView.CellDoubleClick += Assign_Click;
         _shortcutText.KeyDown += ShortcutText_KeyDown;
         _assign.Click += Assign_Click;
         _unassign.Click += Unassign_Click;
@@ -117,7 +135,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             L.Row(
-                _listBox.NaturalSize(300, 500).Scale(),
+                _gridView.NaturalSize(450, 500).Scale(),
                 L.Column(
                     C.Filler(),
                     _shortcutText.Width(150),
@@ -136,15 +154,15 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
     private void Assign_Click(object? sender, EventArgs e)
     {
-        var selected = (Shortcut?) _listBox.SelectedValue;
+        var selected = (Shortcut?) _gridView.SelectedItem;
         if (selected == null) return;
-        _shortcutText.Enabled = true;
+        _shortcutText.ReadOnly = false;
         _shortcutText.Focus();
     }
 
     private void Unassign_Click(object? sender, EventArgs e)
     {
-        var selected = (Shortcut?) _listBox.SelectedValue;
+        var selected = (Shortcut?) _gridView.SelectedItem;
         if (selected?.Accessor == null) return;
         _transact.Set(selected.Accessor, "");
         UpdateUi();
@@ -164,10 +182,10 @@ public class KeyboardShortcutsForm : EtoDialogBase
 
     private void ShortcutText_KeyDown(object? sender, KeyEventArgs e)
     {
-        if (!_shortcutText.Enabled) return;
+        if (_shortcutText.ReadOnly) return;
 
         e.Handled = true;
-        var selected = (Shortcut?) _listBox.SelectedValue;
+        var selected = (Shortcut?) _gridView.SelectedItem;
         if (selected?.Accessor == null) return;
         if (e.Key is Keys.LeftControl or Keys.LeftAlt or Keys.LeftShift or Keys.LeftApplication
             or Keys.RightControl or Keys.RightAlt or Keys.RightShift or Keys.RightApplication)
@@ -179,18 +197,18 @@ public class KeyboardShortcutsForm : EtoDialogBase
         UpdateUi();
     }
 
-    private void ListBox_SelectedIndexChanged(object? sender, EventArgs e)
+    private void GridView_SelectionChanged(object? sender, EventArgs e)
     {
         UpdateUi();
     }
 
     private void UpdateUi()
     {
-        var selected = (Shortcut?) _listBox.SelectedValue;
+        var selected = (Shortcut?) _gridView.SelectedItem;
         if (selected?.Accessor == null)
         {
             _shortcutText.Text = "";
-            _shortcutText.Enabled = false;
+            _shortcutText.ReadOnly = true;
             _assign.Enabled = false;
             _unassign.Enabled = false;
         }
@@ -198,11 +216,11 @@ public class KeyboardShortcutsForm : EtoDialogBase
         {
             bool locked = _transactionConfig.AppLocked.Has(selected.Accessor);
             _shortcutText.Text = GetKeyString(selected);
-            _shortcutText.Enabled = false;
+            _shortcutText.ReadOnly = true;
             _assign.Enabled = !locked;
             _unassign.Enabled = !locked && _shortcutText.Text != "";
         }
-        _listBox.Invalidate();
+        _gridView.Invalidate();
     }
 
     private string GetKeyString(Shortcut shortcut)
@@ -213,16 +231,12 @@ public class KeyboardShortcutsForm : EtoDialogBase
         return _ksm.Stringify(keys) ?? "";
     }
 
-    private string GetLabel(Shortcut shortcut)
+    private string GetShortcutLabel(Shortcut shortcut)
     {
-        if (shortcut.Accessor == null) return shortcut.Label;
+        if (shortcut.Accessor == null) return "";
 
         var keys = _ksm.Parse(_transactionConfig.Get(shortcut.Accessor));
-        if (keys == Keys.None)
-        {
-            return shortcut.Label;
-        }
-        return string.Format(UiStrings.KeyboardShortcutLabelFormat, shortcut.Label, _ksm.Stringify(keys));
+        return _ksm.Stringify(keys) ?? "";
     }
 
     private void Save()

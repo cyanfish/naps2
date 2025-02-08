@@ -54,6 +54,10 @@ msgstr ""
 msgid "Acquiring data..."
 msgstr ""
 
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr ""
+
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
 msgstr ""
@@ -1431,6 +1435,10 @@ msgstr ""
 msgid "Sharpen"
 msgstr ""
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr ""
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr ""
@@ -1747,10 +1755,6 @@ msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
 msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message

@@ -78,6 +78,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        internal static string Action {
+            get {
+                return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Advanced.
         /// </summary>
         internal static string Advanced {
@@ -1118,15 +1127,6 @@ namespace NAPS2.Lang.Resources {
         internal static string KeepSession {
             get {
                 return ResourceManager.GetString("KeepSession", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} ({1}).
-        /// </summary>
-        internal static string KeyboardShortcutLabelFormat {
-            get {
-                return ResourceManager.GetString("KeyboardShortcutLabelFormat", resourceCulture);
             }
         }
         
@@ -2252,6 +2252,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Sharpen {
             get {
                 return ResourceManager.GetString("Sharpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shortcut.
+        /// </summary>
+        internal static string Shortcut {
+            get {
+                return ResourceManager.GetString("Shortcut", resourceCulture);
             }
         }
         
