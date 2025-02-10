@@ -406,6 +406,150 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ExistingFile_NoOverwrite_SplitWithPlaceholder()
+    {
+        var path = $"{FolderPath}/test$(n).pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ProfileName = string.Empty,
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+        await _automationHelper.WithContainer(container =>
+            {
+                var profileManager = container.Resolve<IProfileManager>();
+                profileManager.Profiles.Remove(profileManager.Profiles.Where(p => p.IsDefault).First());
+            }).RunCommand(
+                new AutomatedScanningOptions
+                {
+                    OutputPath = path,
+                    ProfileName = string.Empty,
+                    Split = true,
+                    Verbose = true
+                },
+                new[] { Image1, Image2, Image3 });
+        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/test2.pdf", Image2);
+        PdfAsserts.AssertImages($"{FolderPath}/test3.pdf", Image3);
+        Assert.True(File.Exists($"{FolderPath}/test4.pdf"));
+        Assert.True(File.Exists($"{FolderPath}/test5.pdf"));
+        Assert.True(File.Exists($"{FolderPath}/test6.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingFile_ForceOverwrite_SplitWithPlaceholder()
+    {
+        var path = $"{FolderPath}/test$(n).pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                ProfileName = string.Empty,
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+        await _automationHelper.WithContainer(container =>
+            {
+                var profileManager = container.Resolve<IProfileManager>();
+                profileManager.Profiles.Remove(profileManager.Profiles.Where(p => p.IsDefault).First());
+            }).RunCommand(
+                new AutomatedScanningOptions
+                {
+                    OutputPath = path,
+                    ForceOverwrite = true,
+                    ProfileName = string.Empty,
+                    Split = true,
+                    Verbose = true
+                },
+                new[] { Image1, Image2, Image3 });
+        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/test2.pdf", Image2);
+        PdfAsserts.AssertImages($"{FolderPath}/test3.pdf", Image3);
+        Assert.False(File.Exists($"{FolderPath}/test4.pdf"));
+        Assert.False(File.Exists($"{FolderPath}/test5.pdf"));
+        Assert.False(File.Exists($"{FolderPath}/test6.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingFile_NoOverwrite_SplitWithNoPlaceholder()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ProfileName = string.Empty,
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+        await _automationHelper.WithContainer(container =>
+            {
+                var profileManager = container.Resolve<IProfileManager>();
+                profileManager.Profiles.Remove(profileManager.Profiles.Where(p => p.IsDefault).First());
+            }).RunCommand(
+                new AutomatedScanningOptions
+                {
+                    OutputPath = path,
+                    ProfileName = string.Empty,
+                    Split = true,
+                    Verbose = true
+                },
+                new[] { Image1, Image2, Image3 });
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.1.pdf");
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.2.pdf");
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.3.pdf");
+        Assert.True(File.Exists($"{FolderPath}/test.4.pdf"));
+        Assert.True(File.Exists($"{FolderPath}/test.5.pdf"));
+        Assert.True(File.Exists($"{FolderPath}/test.6.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingFile_ForceOverwrite_SplitWithNoPlaceholder()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                ForceOverwrite = true,
+                ProfileName = string.Empty,
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2, Image3 });
+        await _automationHelper.WithContainer(container =>
+            {
+                var profileManager = container.Resolve<IProfileManager>();
+                profileManager.Profiles.Remove(profileManager.Profiles.Where(p => p.IsDefault).First());
+            }).RunCommand(
+                new AutomatedScanningOptions
+                {
+                    OutputPath = path,
+                    ForceOverwrite = true,
+                    ProfileName = string.Empty,
+                    Split = true,
+                    Verbose = true
+                },
+                new[] { Image1, Image2, Image3 });
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.1.pdf");
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.2.pdf");
+        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.3.pdf");
+        Assert.False(File.Exists($"{FolderPath}/test.4.pdf"));
+        Assert.False(File.Exists($"{FolderPath}/test.5.pdf"));
+        Assert.False(File.Exists($"{FolderPath}/test.6.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ExistingPdf_ForceOverwrite_InUse()
     {
         var path = $"{FolderPath}/test.pdf";
