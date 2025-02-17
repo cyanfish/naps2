@@ -33,7 +33,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         {
             try
             {
-                _server.Certificate = new X509Certificate2(File.ReadAllBytes(certPath));
+                _server.Certificate = X509CertificateLoader.LoadPkcs12FromFile(certPath, null);
                 if (!_server.Certificate.HasPrivateKey)
                 {
                     _logger.LogDebug(

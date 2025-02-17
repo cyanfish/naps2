@@ -64,7 +64,7 @@ public class ToolStripDoubleButton : ToolStripButton
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        if (Owner == null)
+        if (Owner == null || FirstImage == null || SecondImage == null)
             return;
         ToolStripRenderer renderer = ToolStripManager.Renderer;
 
