@@ -21,6 +21,19 @@ internal record InputPathOrStream(string? FilePath, Stream? Stream, string? Stre
         }
     }
 
+    public void CopyToStream(Stream outputStream)
+    {
+        if (Stream != null)
+        {
+            Stream.CopyTo(outputStream);
+        }
+        else
+        {
+            using var inputStream = new FileStream(FilePath!, FileMode.Open);
+            inputStream.CopyTo(outputStream);
+        }
+    }
+
     public PdfDocument LoadPdfDoc(string? password)
     {
         return Stream != null
