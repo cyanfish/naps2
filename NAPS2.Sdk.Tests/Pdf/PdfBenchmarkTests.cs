@@ -9,13 +9,12 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfSharpExport300()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog),
-            false, -1, null, Enumerable.Empty<Transform>());
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         var pdfExporter = new PdfExporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
-            await pdfExporter.Export(filePath + i + ".pdf", new[] { image });
+            await pdfExporter.Export(filePath + i + ".pdf", [image]);
         }
     }
 
@@ -23,35 +22,32 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfSharpExportHuge()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge),
-            false, -1, null, Enumerable.Empty<Transform>());
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge));
 
         var pdfExporter = new PdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image });
+        await pdfExporter.Export(filePath + ".pdf", [image]);
     }
 
     [BenchmarkFact]
     public async Task PdfSharpExportHugePng()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png),
-            true, -1, null, Enumerable.Empty<Transform>());
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png));
 
         var pdfExporter = new PdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image });
+        await pdfExporter.Export(filePath + ".pdf", [image]);
     }
 
     [BenchmarkFact]
     public async Task PdfiumExport300()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog),
-            false, -1, null, Enumerable.Empty<Transform>());
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
         for (int i = 0; i < 300; i++)
         {
-            await pdfExporter.Export(filePath + i + ".pdf", new[] { image });
+            await pdfExporter.Export(filePath + i + ".pdf", [image]);
         }
     }
 
@@ -59,22 +55,20 @@ public class PdfBenchmarkTests : ContextualTests
     public async Task PdfiumExportHuge()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge),
-            false, -1, null, Enumerable.Empty<Transform>());
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge));
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image });
+        await pdfExporter.Export(filePath + ".pdf", [image]);
     }
 
     [BenchmarkFact]
     public async Task PdfiumExportHugePng()
     {
         var filePath = Path.Combine(FolderPath, "test");
-        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png),
-            true, -1, null, Enumerable.Empty<Transform>());
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png));
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
-        await pdfExporter.Export(filePath + ".pdf", new[] { image });
+        await pdfExporter.Export(filePath + ".pdf", [image]);
     }
 
     [BenchmarkFact]

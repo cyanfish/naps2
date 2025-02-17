@@ -94,7 +94,7 @@ public class RecoveryStorageManagerTests : ContextualTests
         var image1 = new UiImage(
             ScanningContext.CreateProcessedImage(
                 ImageContext.Create(100, 100, ImagePixelFormat.RGB24),
-                new[] {new BrightnessTransform(100)}));
+                transforms: [new BrightnessTransform(100)]));
 
         _imageList.Mutate(new ListMutation<UiImage>.Append(image1));
         var indexFileContent3 = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));

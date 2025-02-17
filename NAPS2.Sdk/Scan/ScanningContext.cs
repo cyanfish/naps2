@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using NAPS2.Ocr;
 using NAPS2.Remoting.Worker;
-using NAPS2.Scan.Internal;
 
 namespace NAPS2.Scan;
 
@@ -78,24 +77,8 @@ public class ScanningContext : IDisposable
         return WorkerFactory?.Create(this, workerType);
     }
 
-    internal ProcessedImage CreateProcessedImage(IImageStorage storage)
-    {
-        return CreateProcessedImage(storage, Enumerable.Empty<Transform>());
-    }
-
-    internal ProcessedImage CreateProcessedImage(IImageStorage storage, IEnumerable<Transform> transforms)
-    {
-        return CreateProcessedImage(storage, false, -1, null, transforms);
-    }
-
-    internal ProcessedImage CreateProcessedImage(IImageStorage storage, bool lossless, int quality,
-        PageSize? pageSize)
-    {
-        return CreateProcessedImage(storage, lossless, quality, pageSize, Enumerable.Empty<Transform>());
-    }
-
-    internal ProcessedImage CreateProcessedImage(IImageStorage storage, bool lossless, int quality,
-        PageSize? pageSize, IEnumerable<Transform> transforms)
+    internal ProcessedImage CreateProcessedImage(IImageStorage storage, bool lossless = false, int quality = -1,
+        PageSize? pageSize = null, IEnumerable<Transform>? transforms = null)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, lossless, quality);
         var metadata = new ImageMetadata(lossless, pageSize);
@@ -104,7 +87,7 @@ public class ScanningContext : IDisposable
             convertedStorage,
             metadata,
             new PostProcessingData(),
-            new TransformState(transforms.ToImmutableList()),
+            new TransformState(transforms?.ToImmutableList() ?? []),
             _processedImageOwner);
         return image;
     }
