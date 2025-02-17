@@ -255,8 +255,8 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
         try
         {
             var renderer = new PdfiumPdfRenderer();
-            using var image = renderer
-                .Render(_scanningContext.ImageContext, request.Path, PdfRenderSize.FromDpi(request.Dpi)).Single();
+            using var image = renderer.RenderPage(_scanningContext.ImageContext, request.Path,
+                PdfRenderSize.FromDpi(request.Dpi));
             var stream = image.SaveToMemoryStream(ImageFileFormat.Png);
             return Task.FromResult(new RenderPdfResponse
             {

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using NAPS2.Images.Bitwise;
+﻿using NAPS2.Images.Bitwise;
 using NAPS2.Pdf.Pdfium;
 
 namespace NAPS2.Pdf;
@@ -34,13 +33,37 @@ internal class PdfiumPdfRenderer : IPdfRenderer
         }
     }
 
+    public IMemoryImage RenderPage(ImageContext imageContext, string path, PdfRenderSize renderSize,
+        int pageIndex = 0, string? password = null)
+    {
+        // Pdfium is not thread-safe
+        lock (PdfiumNativeLibrary.Instance)
+        {
+            using var doc = PdfDocument.Load(path, password);
+            return RenderDocument(imageContext, renderSize, doc, pageIndex).Single();
+        }
+    }
+
+    public IMemoryImage RenderPage(ImageContext imageContext, byte[] buffer, int length, PdfRenderSize renderSize,
+        int pageIndex, string? password = null)
+    {
+        // Pdfium is not thread-safe
+        lock (PdfiumNativeLibrary.Instance)
+        {
+            using var doc = PdfDocument.Load(buffer, length, password);
+            return RenderDocument(imageContext, renderSize, doc, pageIndex).Single();
+        }
+    }
+
     private IEnumerable<IMemoryImage> RenderDocument(ImageContext imageContext, PdfRenderSize renderSize,
-        PdfDocument doc)
+        PdfDocument doc, int? pageIndex = null)
     {
         var pageCount = doc.PageCount;
-        for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
+        int start = pageIndex ?? 0;
+        int end = pageIndex ?? pageCount - 1;
+        for (int i = start; i <= end; i++)
         {
-            using var page = doc.GetPage(pageIndex);
+            using var page = doc.GetPage(i);
 
             if (!NoExtraction)
             {
@@ -51,7 +74,7 @@ internal class PdfiumPdfRenderer : IPdfRenderer
                     continue;
                 }
             }
-            yield return RenderPageToNewImage(imageContext, page, pageIndex, renderSize);
+            yield return RenderPageToNewImage(imageContext, page, i, renderSize);
         }
     }
 

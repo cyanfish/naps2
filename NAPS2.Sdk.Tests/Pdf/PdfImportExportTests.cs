@@ -249,7 +249,7 @@ public class PdfImportExportTests : ContextualTests
         await _exporter.Export(_exportPath, images);
 
         var renderer = new PdfiumPdfRenderer();
-        var pdfImage = renderer.Render(ImageContext, _exportPath, PdfRenderSize.Default).Single();
+        var pdfImage = renderer.RenderPage(ImageContext, _exportPath, PdfRenderSize.Default);
         ImageAsserts.Similar(ImageResources.dog, pdfImage, 0);
     }
 
@@ -265,7 +265,7 @@ public class PdfImportExportTests : ContextualTests
         await _exporter.Export(_exportPath, images);
 
         var renderer = new PdfiumPdfRenderer();
-        var pdfImage = renderer.Render(ImageContext, _exportPath, PdfRenderSize.Default).Single();
+        var pdfImage = renderer.RenderPage(ImageContext, _exportPath, PdfRenderSize.Default);
         ImageAsserts.Similar(ImageResources.dog_exif, pdfImage, 0, ignoreResolution: true);
     }
 }

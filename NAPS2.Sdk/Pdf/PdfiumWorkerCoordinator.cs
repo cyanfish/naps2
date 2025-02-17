@@ -35,4 +35,16 @@ internal class PdfiumWorkerCoordinator : IPdfRenderer
     {
         throw new NotImplementedException();
     }
+
+    public IMemoryImage RenderPage(ImageContext imageContext, string path, PdfRenderSize renderSize, int pageIndex,
+        string? password = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IMemoryImage RenderPage(ImageContext imageContext, byte[] buffer, int length, PdfRenderSize renderSize, int pageIndex,
+        string? password = null)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -62,7 +62,7 @@ public abstract class ImageContext
                 throw new InvalidOperationException(
                     "Unable to render pdf page as the IRenderableImage didn't implement IPdfRendererProvider.");
             }
-            renderedPdf = pdfRenderer.Render(this, fileStorage.FullPath, PdfRenderSize.Default).Single();
+            renderedPdf = pdfRenderer.RenderPage(this, fileStorage.FullPath, PdfRenderSize.Default);
             return true;
         }
         renderedPdf = null;
@@ -80,8 +80,7 @@ public abstract class ImageContext
                     "Unable to render pdf page as the IRenderableImage didn't implement IPdfRendererProvider.");
             }
             var stream = memoryStorage.Stream;
-            renderedPdf = pdfRenderer.Render(this, stream.GetBuffer(), (int) stream.Length, PdfRenderSize.Default)
-                .Single();
+            renderedPdf = pdfRenderer.RenderPage(this, stream.GetBuffer(), (int) stream.Length, PdfRenderSize.Default);
             return true;
         }
         renderedPdf = null;

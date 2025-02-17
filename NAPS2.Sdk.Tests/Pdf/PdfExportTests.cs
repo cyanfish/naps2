@@ -24,7 +24,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog);
         PdfAsserts.AssertImageFilter(filePath, 0, "DCTDecode");
@@ -40,7 +40,7 @@ public class PdfExporterTests : ContextualTests
         var fileStream = File.OpenWrite(filePath);
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
-        await _exporter.Export(fileStream, new[] { image });
+        await _exporter.Export(fileStream, [image]);
         fileStream.Close();
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog);
@@ -56,7 +56,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "blah", "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog);
         PdfAsserts.AssertImageFilter(filePath, 0, "DCTDecode");
@@ -72,7 +72,7 @@ public class PdfExporterTests : ContextualTests
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_gray_8bit)
             .PerformTransform(new GrayscaleTransform()));
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_gray);
         PdfAsserts.AssertImageFilter(filePath, 0, "DCTDecode");
@@ -86,10 +86,10 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         var renderer = new PdfiumPdfRenderer();
-        var pdfImage = renderer.Render(ImageContext, filePath, PdfRenderSize.Default).Single();
+        var pdfImage = renderer.RenderPage(ImageContext, filePath, PdfRenderSize.Default);
         ImageAsserts.Similar(image.Render(), pdfImage, 0);
     }
 
@@ -100,10 +100,9 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_png), true, -1, null);
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_png), lossless: true);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog);
         PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
@@ -117,10 +116,9 @@ public class PdfExporterTests : ContextualTests
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
         // Width is 99 (not divisible by 4)
-        var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_99w), true, -1, null);
+        var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_99w), lossless: true);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_99w);
         PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
@@ -133,10 +131,9 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_alpha), false, -1, null);
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_alpha));
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         // TODO: This assert is broken as pdfium rendering doesn't work for images with masks yet
         // PdfAsserts.AssertImages(filePath, ImageResources.dog_alpha);
@@ -150,10 +147,9 @@ public class PdfExporterTests : ContextualTests
         storageConfig.Apply(this);
 
         var filePath = Path.Combine(FolderPath, "test.pdf");
-        using var image = ScanningContext.CreateProcessedImage(
-            LoadImage(ImageResources.dog_mask), false, -1, null);
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_mask));
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         // TODO: This assert is broken as pdfium rendering doesn't work for images with masks yet
         // PdfAsserts.AssertImages(filePath, ImageResources.dog_alpha);
@@ -170,7 +166,7 @@ public class PdfExporterTests : ContextualTests
         var storageImage = LoadImage(ImageResources.dog_bw);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_bw);
         PdfAsserts.AssertImageFilter(filePath, 0, "CCITTFaxDecode");
@@ -186,7 +182,7 @@ public class PdfExporterTests : ContextualTests
         var storageImage = LoadImage(ImageResources.bw_alternating);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.bw_alternating);
         // Alternating black & white pixels is the worst case for CCITT encoding (i.e. the encoded size is bigger than
@@ -204,7 +200,7 @@ public class PdfExporterTests : ContextualTests
         var storageImage = LoadImage(ImageResources.dog_clustered_gray);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_clustered_gray);
         PdfAsserts.AssertImageFilter(filePath, 0, "FlateDecode");
@@ -220,7 +216,7 @@ public class PdfExporterTests : ContextualTests
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_bw_24bit),
             true, -1, null);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_bw);
         PdfAsserts.AssertImageFilter(filePath, 0, "CCITTFaxDecode");
@@ -242,7 +238,7 @@ public class PdfExporterTests : ContextualTests
             Subject = "subject"
         };
 
-        await _exporter.Export(filePath, new[] { image }, new PdfExportParams { Metadata = metadata });
+        await _exporter.Export(filePath, [image], new PdfExportParams { Metadata = metadata });
 
         PdfAsserts.AssertMetadata(metadata with { Creator = "NAPS2" }, filePath, "world");
         // TODO: We should also test embedded dates etc. somewhere, no tests for that yet 
@@ -264,7 +260,7 @@ public class PdfExporterTests : ContextualTests
             Subject = "נושא"
         };
 
-        await _exporter.Export(filePath, new[] { image }, new PdfExportParams { Metadata = metadata });
+        await _exporter.Export(filePath, [image], new PdfExportParams { Metadata = metadata });
 
         PdfAsserts.AssertMetadata(metadata with { Creator = "NAPS2" }, filePath, "world");
         // TODO: We should also test embedded dates etc. somewhere, no tests for that yet 
@@ -279,7 +275,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "מְחַבֵּר.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog);
     }
@@ -293,7 +289,7 @@ public class PdfExporterTests : ContextualTests
         var filePath = Path.Combine(FolderPath, "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
-        await _exporter.Export(filePath, new[] { image }, new PdfExportParams
+        await _exporter.Export(filePath, [image], new PdfExportParams
         {
             Encryption = new()
             {
@@ -322,7 +318,7 @@ public class PdfExporterTests : ContextualTests
             Subject = "subject"
         };
 
-        await _exporter.Export(filePath, new[] { image }, new PdfExportParams
+        await _exporter.Export(filePath, [image], new PdfExportParams
         {
             Encryption = new()
             {
@@ -353,7 +349,7 @@ public class PdfExporterTests : ContextualTests
             Subject = "נושא"
         };
 
-        await _exporter.Export(filePath, new[] { image }, new PdfExportParams
+        await _exporter.Export(filePath, [image], new PdfExportParams
         {
             Encryption = new()
             {
@@ -428,7 +424,7 @@ public class PdfExporterTests : ContextualTests
         sourceImage.SetResolution(99.4f, 99.4f);
         using var image = ScanningContext.CreateProcessedImage(sourceImage, false, -1, PageSize.Letter);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         // If the resolution is close to the actual page size, we should correct to that page size with high precision
         PdfAsserts.AssertPageSize(PageSize.Letter, 3, filePath);
@@ -445,7 +441,7 @@ public class PdfExporterTests : ContextualTests
         sourceImage.SetResolution(98, 98);
         using var image = ScanningContext.CreateProcessedImage(sourceImage, false, -1, PageSize.Letter);
 
-        await _exporter.Export(filePath, new[] { image });
+        await _exporter.Export(filePath, [image]);
 
         // If the page size is too far off, we should ignore it and go by the actual resolution (precision is less important here)
         PdfAsserts.AssertPageSize(new PageSize(8.7m, 11.2m, PageSizeUnit.Inch), 1, filePath);
