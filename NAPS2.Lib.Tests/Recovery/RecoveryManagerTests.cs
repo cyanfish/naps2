@@ -30,7 +30,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void FolderWithNoImages()
     {
-        CreateFolderToRecoverFrom(_recoveryPath, 0);
+        CreateFolderToRecoverFrom(_recoveryPath, []);
 
         var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.Null(folder);
@@ -39,7 +39,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void FolderLocking()
     {
-        CreateFolderToRecoverFrom(_recoveryPath, 1);
+        CreateFolderToRecoverFrom(_recoveryPath, ["a"]);
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
@@ -55,7 +55,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void FindSingleFolder()
     {
-        CreateFolderToRecoverFrom(_recoveryPath, 1);
+        CreateFolderToRecoverFrom(_recoveryPath, ["a"]);
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
@@ -66,7 +66,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void DeleteFolder()
     {
-        CreateFolderToRecoverFrom(_recoveryPath, 1);
+        CreateFolderToRecoverFrom(_recoveryPath, ["a"]);
 
         using var folder = _recoveryManager.GetLatestRecoverableFolder();
         Assert.NotNull(folder);
@@ -78,7 +78,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void Recover()
     {
-        CreateFolderToRecoverFrom(_recoveryPath, 2);
+        CreateFolderToRecoverFrom(_recoveryPath, ["a", "b"]);
 
         var images = new List<ProcessedImage>();
         void ImageCallback(ProcessedImage img) => images.Add(img);
@@ -99,9 +99,22 @@ public class RecoveryManagerTests : ContextualTests
     }
 
     [Fact]
+    public void FastRecover()
+    {
+        CreateFolderToRecoverFrom(_recoveryPath, ["a", "b"]);
+
+        using var folder = _recoveryManager.GetLatestRecoverableFolder();
+        Assert.NotNull(folder);
+        var images = folder.FastRecover().ToList();
+
+        Assert.Equal(2, images.Count);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+    }
+
+    [Fact]
     public void CancelRecover()
     {
-        CreateFolderToRecoverFrom(_recoveryPath, 2);
+        CreateFolderToRecoverFrom(_recoveryPath, ["a", "b"]);
 
         var mockImageCallback = Substitute.For<Action<ProcessedImage>>();
         CancellationTokenSource cts = new CancellationTokenSource();
@@ -118,7 +131,9 @@ public class RecoveryManagerTests : ContextualTests
         var result = folder.TryRecover(mockImageCallback, new RecoveryParams(),
             new ProgressHandler(ProgressCallback, cts.Token));
         Assert.False(result);
-        Assert.True(Directory.Exists(_recoveryPath));
+        var recoveryDir = new DirectoryInfo(_recoveryPath);
+        Assert.True(recoveryDir.Exists);
+        Assert.Equal(4, recoveryDir.GetFiles().Length);
         mockImageCallback.Received()(Arg.Any<ProcessedImage>());
         mockImageCallback.ReceivedCallsCount(1);
 
@@ -131,7 +146,7 @@ public class RecoveryManagerTests : ContextualTests
     [Fact]
     public void RecoverWithMissingFile()
     {
-        var uiImages = CreateFolderToRecoverFrom(_recoveryPath, 2);
+        var uiImages = CreateFolderToRecoverFrom(_recoveryPath, ["a", "b"]);
         File.Delete(((ImageFileStorage) uiImages[0].GetImageWeakReference().ProcessedImage.Storage).FullPath);
 
         var images = new List<ProcessedImage>();
@@ -152,7 +167,71 @@ public class RecoveryManagerTests : ContextualTests
         mockProgressCallback.ReceivedCallsCount(3);
     }
 
-    private List<UiImage> CreateFolderToRecoverFrom(string folderPath, int imageCount)
+    [Fact]
+    public void FastRecoverWithMissingFile()
+    {
+        var uiImages = CreateFolderToRecoverFrom(_recoveryPath, ["a", "b"]);
+        File.Delete(((ImageFileStorage) uiImages[0].GetImageWeakReference().ProcessedImage.Storage).FullPath);
+
+        using var folder = _recoveryManager.GetLatestRecoverableFolder();
+        Assert.NotNull(folder);
+        var images = folder.FastRecover().ToList();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+    }
+
+    [Fact]
+    public void RecoverWithSharedStorage()
+    {
+        CreateFolderToRecoverFrom(_recoveryPath, ["a", "a", "b", "b"]);
+
+        var images = new List<ProcessedImage>();
+        void ImageCallback(ProcessedImage img) => images.Add(img);
+        var mockProgressCallback = Substitute.For<ProgressCallback>();
+
+        using var folder = _recoveryManager.GetLatestRecoverableFolder();
+        Assert.NotNull(folder);
+        var result = folder.TryRecover(ImageCallback, new RecoveryParams(), mockProgressCallback);
+        Assert.True(result);
+
+        Assert.Equal(4, images.Count);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+        ImageAsserts.Similar(ImageResources.dog, images[1]);
+        ImageAsserts.Similar(ImageResources.dog, images[2]);
+        ImageAsserts.Similar(ImageResources.dog, images[3]);
+        Assert.Equal(images[0].Storage, images[1].Storage);
+        Assert.NotEqual(images[1].Storage, images[2].Storage);
+        Assert.Equal(images[2].Storage, images[3].Storage);
+
+        mockProgressCallback.Received()(0, 4);
+        mockProgressCallback.Received()(1, 4);
+        mockProgressCallback.Received()(2, 4);
+        mockProgressCallback.Received()(3, 4);
+        mockProgressCallback.Received()(4, 4);
+        mockProgressCallback.ReceivedCallsCount(5);
+    }
+
+    [Fact]
+    public void FastRecoverWithSharedStorage()
+    {
+        CreateFolderToRecoverFrom(_recoveryPath, ["a", "a", "b", "b"]);
+
+        using var folder = _recoveryManager.GetLatestRecoverableFolder();
+        Assert.NotNull(folder);
+        var images = folder.FastRecover().ToList();
+
+        Assert.Equal(4, images.Count);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+        ImageAsserts.Similar(ImageResources.dog, images[1]);
+        ImageAsserts.Similar(ImageResources.dog, images[2]);
+        ImageAsserts.Similar(ImageResources.dog, images[3]);
+        Assert.Equal(images[0].Storage, images[1].Storage);
+        Assert.NotEqual(images[1].Storage, images[2].Storage);
+        Assert.Equal(images[2].Storage, images[3].Storage);
+    }
+
+    private List<UiImage> CreateFolderToRecoverFrom(string folderPath, List<string> imageRefs)
     {
         var imageList = new UiImageList();
         var rsm1 = RecoveryStorageManager.CreateFolderWithoutThrottle(folderPath, imageList);
@@ -160,8 +239,10 @@ public class RecoveryManagerTests : ContextualTests
         {
             FileStorageManager = new FileStorageManager(folderPath)
         };
-        var images = Enumerable.Range(0, imageCount).Select(x => new UiImage(CreateRecoveryImage(recoveryContext)))
+        var processedImages = imageRefs.Distinct().ToDictionary(x => x, _ => CreateRecoveryImage(recoveryContext));
+        var images = imageRefs.Select(x => new UiImage(processedImages[x].Clone()))
             .ToList();
+        processedImages.Values.ToDisposableList().Dispose();
         imageList.Mutate(new ListMutation<UiImage>.Append(images));
         rsm1.ReleaseLockForTesting();
         return images;

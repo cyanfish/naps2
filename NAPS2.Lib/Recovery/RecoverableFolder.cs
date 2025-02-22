@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using NAPS2.ImportExport;
-using NAPS2.ImportExport.Images;
 using NAPS2.Scan;
 using NAPS2.Serialization;
 
@@ -102,39 +101,31 @@ public class RecoverableFolder : IDisposable
         }
     }
 
+    private Dictionary<string, StorageKey> CreateStorageKeys()
+    {
+        return _recoveryIndex.Images
+            .Select(indexImage => indexImage.FileName)
+            .Distinct()
+            .Select(originalFileName => new StorageKey(_scanningContext, _directory, originalFileName!))
+            .ToDictionary(x => x.OriginalFileName);
+    }
+
     public IEnumerable<ProcessedImage> FastRecover()
     {
         if (_disposed) throw new ObjectDisposedException(nameof(RecoverableFolder));
 
-        var fileRefCount = _recoveryIndex.Images.GroupBy(indexImage => indexImage.FileName ?? "")
-            .ToDictionary(group => group.Key, group => group.Count());
-
+        var storageKeys = CreateStorageKeys();
         var recoveredImages = new List<ProcessedImage>();
         foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
         {
-            var (oldPath, newPath) = GetPaths(indexImage);
-            try
+            var storageKey = storageKeys[indexImage.FileName!];
+            storageKey.EnsureMigrated(move: true);
+            if (storageKey.NewPath != null)
             {
-                fileRefCount[indexImage.FileName!]--;
-                if (fileRefCount[indexImage.FileName!] == 0)
-                {
-                    // Move instead of copying as it's faster
-                    File.Move(oldPath, newPath);
-                }
-                else
-                {
-                    File.Copy(oldPath, newPath);
-                }
+                recoveredImages.Add(CreateRecoveredImage(new RecoveryParams(), indexImage, storageKey));
             }
-            catch (Exception e)
-            {
-                Log.ErrorException("Could not recover image", e);
-                continue;
-            }
-
-            var storage = new ImageFileStorage(newPath);
-            recoveredImages.Add(CreateRecoveredImage(new RecoveryParams(), storage, indexImage));
         }
+
         // Delete the old folder (which should be mostly empty now)
         TryDelete();
         return recoveredImages;
@@ -149,54 +140,40 @@ public class RecoverableFolder : IDisposable
         int totalProgress = ImageCount;
         progress.Report(currentProgress, totalProgress);
 
-        foreach (RecoveryIndexImage indexImage in _recoveryIndex.Images)
+        var storageKeys = CreateStorageKeys();
+        foreach (var indexImage in _recoveryIndex.Images)
         {
             if (progress.IsCancellationRequested)
             {
                 return false;
             }
-
-            var (oldPath, newPath) = GetPaths(indexImage);
-            try
+            var storageKey = storageKeys[indexImage.FileName!];
+            storageKey.EnsureMigrated(move: false);
+            if (storageKey.NewPath != null)
             {
-                File.Copy(oldPath, newPath);
+                var recoveredImage = CreateRecoveredImage(recoveryParams, indexImage, storageKey);
+                imageCallback(recoveredImage);
             }
-            catch (Exception e)
-            {
-                // TODO: Should we treat FileNotFound differently than other exceptions? i.e. continue on FNF, abort otherwise
-                Log.ErrorException("Could not recover image", e);
-
-                currentProgress++;
-                progress.Report(currentProgress, totalProgress);
-                continue;
-            }
-
-            var storage = new ImageFileStorage(newPath);
-            var recoveredImage = CreateRecoveredImage(recoveryParams, storage, indexImage);
-            imageCallback(recoveredImage);
-
             currentProgress++;
             progress.Report(currentProgress, totalProgress);
         }
+
         // Now that we've recovered successfully, we can safely delete the old folder
         TryDelete();
         return true;
     }
 
-    private (string oldPath, string newPath) GetPaths(RecoveryIndexImage indexImage)
+    private ProcessedImage CreateRecoveredImage(RecoveryParams recoveryParams, RecoveryIndexImage indexImage,
+        StorageKey storageKey)
     {
-        string oldPath = Path.Combine(_directory.FullName, indexImage.FileName!);
-        var ext = Path.GetExtension(oldPath);
-        string newPath = _scanningContext.FileStorageManager!.NextFilePath() + ext;
-        return (oldPath, newPath);
-    }
-
-    private ProcessedImage CreateRecoveredImage(RecoveryParams recoveryParams, IImageStorage storage,
-        RecoveryIndexImage indexImage)
-    {
-        var processedImage = _scanningContext.CreateProcessedImage(storage,
-            indexImage.HighQuality, -1, PageSize.Parse(indexImage.PageSize),
-            indexImage.TransformList!.ToImmutableList());
+        var processedImage = _scanningContext.CreateProcessedImage(
+            storageKey.CreateStorage(),
+            indexImage.HighQuality,
+            -1,
+            PageSize.Parse(indexImage.PageSize),
+            indexImage.TransformList!.ToImmutableList(),
+            storageKey.RefCount);
+        storageKey.RefCount ??= processedImage.StorageRefCount;
 
         // TODO: Make this take a lazy rendered image or something
         processedImage = ImportPostProcessor.AddPostProcessingData(processedImage,
@@ -205,5 +182,50 @@ public class RecoverableFolder : IDisposable
             new BarcodeDetectionOptions(),
             true);
         return processedImage;
+    }
+
+    private record StorageKey(
+        ScanningContext ScanningContext,
+        DirectoryInfo OriginalDirectory,
+        string OriginalFileName)
+    {
+        public void EnsureMigrated(bool move)
+        {
+            if (Migrated) return;
+            Migrated = true;
+            try
+            {
+                var newPath = GetNewPath();
+                if (move)
+                {
+                    File.Move(OriginalPath, newPath);
+                }
+                else
+                {
+                    File.Copy(OriginalPath, newPath);
+                }
+                NewPath = newPath;
+            }
+            catch (Exception e)
+            {
+                Log.ErrorException("Could not recover image", e);
+            }
+        }
+
+        public string OriginalPath => Path.Combine(OriginalDirectory.FullName, OriginalFileName);
+
+        public string? NewPath { get; private set; }
+
+        public bool Migrated { get; private set; }
+
+        public IImageStorage? Storage { get; private set; }
+
+        public RefCount? RefCount { get; set; }
+
+        public IImageStorage CreateStorage() =>
+            Storage ??= new ImageFileStorage(NewPath ?? throw new InvalidOperationException());
+
+        private string GetNewPath() =>
+            ScanningContext.FileStorageManager!.NextFilePath() + Path.GetExtension(OriginalFileName);
     }
 }
