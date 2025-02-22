@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using NAPS2.Sdk.Tests.Asserts;
 using NSubstitute;
 using Xunit;
 
@@ -11,19 +11,14 @@ public class ProcessedImageTests : ContextualTests
     {
         var storage = LoadImage(ImageResources.dog);
 
-        var metadata1 = new ImageMetadata(false, null);
-        var postProcessingData1 = new PostProcessingData();
-        var transformState1 = TransformState.Empty;
-        var image1 = new ProcessedImage(ImageContext, storage, metadata1, postProcessingData1, transformState1);
-        Assert.Equal(storage, image1.Storage);
+        var image1 = ScanningContext.CreateProcessedImage(storage);
+        ImageAsserts.Similar(storage, (IMemoryImage) image1.Storage, 0);
         Assert.False(image1.Metadata.Lossless);
         Assert.True(image1.TransformState.IsEmpty);
 
-        var metadata2 = new ImageMetadata(true, null);
-        var postProcessingData2 = new PostProcessingData();
-        var transformState2 = new TransformState(ImmutableList<Transform>.Empty.Add(new CropTransform(0, 50, 0, 50)));
-        var image2 = new ProcessedImage(ImageContext, storage, metadata2, postProcessingData2, transformState2);
-        Assert.Equal(storage, image2.Storage);
+        var image2 = ScanningContext.CreateProcessedImage(storage, lossless: true,
+            transforms: [new CropTransform(0, 50, 0, 50)]);
+        ImageAsserts.Similar(storage, (IMemoryImage) image2.Storage, 0);
         Assert.True(image2.Metadata.Lossless);
         Assert.Single(image2.TransformState.Transforms);
         var cropTransform = Assert.IsType<CropTransform>(image2.TransformState.Transforms[0]);
@@ -37,10 +32,8 @@ public class ProcessedImageTests : ContextualTests
     public void StorageDisposed()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(false, null);
+        var image = ScanningContext.CreateProcessedImage(storageMock);
 
-        var image = new ProcessedImage(
-            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
         image.Dispose();
 
         storageMock.Received().Dispose();
@@ -50,10 +43,7 @@ public class ProcessedImageTests : ContextualTests
     public void StorageDisposedOnlyAfterAllClonesDisposed()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(false, null);
-
-        var image = new ProcessedImage(
-            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = ScanningContext.CreateProcessedImage(storageMock);
         var image2 = image.Clone();
         var image3 = image.Clone();
         var image4 = image2.Clone();
@@ -78,10 +68,7 @@ public class ProcessedImageTests : ContextualTests
     public void TransformSimplification()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(false, null);
-
-        var image = new ProcessedImage(
-            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = ScanningContext.CreateProcessedImage(storageMock);
 
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
@@ -116,10 +103,7 @@ public class ProcessedImageTests : ContextualTests
     public void MultipleTransforms()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(false, null);
-
-        var image = new ProcessedImage(
-            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = ScanningContext.CreateProcessedImage(storageMock);
 
         // 90deg transform 
         var image2 = image.WithTransform(new RotationTransform(90));
@@ -155,10 +139,7 @@ public class ProcessedImageTests : ContextualTests
     public void CloneAfterDisposed()
     {
         var storageMock = Substitute.For<IImageStorage>();
-        var metadata = new ImageMetadata(false, null);
-
-        var image = new ProcessedImage(
-            ImageContext, storageMock, metadata, new PostProcessingData(), TransformState.Empty);
+        var image = ScanningContext.CreateProcessedImage(storageMock);
 
         image.Dispose();
         storageMock.Received().Dispose();

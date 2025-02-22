@@ -16,34 +16,24 @@ public class ProcessedImage : IRenderableImage, IPdfRendererProvider, IDisposabl
     private readonly RefCount.Token _token;
     private bool _disposed;
 
-    private ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
-        PostProcessingData postProcessingData, TransformState transformState, RefCount refCount)
-    {
-        ImageContext = imageContext;
-        Storage = storage;
-        Metadata = metadata;
-        PostProcessingData = postProcessingData;
-        TransformState = transformState;
-        _token = refCount.NewToken();
-    }
-
     internal ProcessedImage(ImageContext imageContext, IImageStorage storage, ImageMetadata metadata,
-        PostProcessingData postProcessingData, TransformState transformState, IProcessedImageOwner? owner = null)
+        PostProcessingData postProcessingData, TransformState transformState, RefCount storageRefCount)
     {
         ImageContext = imageContext;
         Storage = storage;
         Metadata = metadata;
         PostProcessingData = postProcessingData;
         TransformState = transformState;
-        var internalDisposer = new InternalDisposer(this, owner);
-        var refCount = new RefCount(internalDisposer);
-        _token = refCount.NewToken();
+        StorageRefCount = storageRefCount;
+        _token = StorageRefCount.NewToken();
     }
 
     public ImageContext ImageContext { get; }
 
     // TODO: Consider having two copies of the image on disk - one before transforms, one after.
     public IImageStorage Storage { get; }
+
+    internal RefCount StorageRefCount { get; }
 
     public ImageMetadata Metadata { get; }
 
@@ -152,14 +142,16 @@ public class ProcessedImage : IRenderableImage, IPdfRendererProvider, IDisposabl
         }
     }
 
-    private class InternalDisposer : IDisposable
+    internal class InternalDisposer : IDisposable
     {
-        private readonly ProcessedImage _processedImage;
+        private readonly IImageStorage _storage;
+        private readonly PostProcessingData _postProcessingData;
         private bool _disposed;
 
-        public InternalDisposer(ProcessedImage processedImage, IProcessedImageOwner? owner)
+        public InternalDisposer(IImageStorage storage, PostProcessingData postProcessingData, IProcessedImageOwner? owner)
         {
-            _processedImage = processedImage;
+            _storage = storage;
+            _postProcessingData = postProcessingData;
             owner?.Register(this);
         }
 
@@ -175,9 +167,9 @@ public class ProcessedImage : IRenderableImage, IPdfRendererProvider, IDisposabl
                 _disposed = true;
             }
 
-            _processedImage.Storage.Dispose();
-            _processedImage.PostProcessingData.Thumbnail?.Dispose();
-            _processedImage.PostProcessingData.OcrCts?.Cancel();
+            _storage.Dispose();
+            _postProcessingData.Thumbnail?.Dispose();
+            _postProcessingData.OcrCts?.Cancel();
         }
     }
 

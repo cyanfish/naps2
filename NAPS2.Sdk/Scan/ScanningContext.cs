@@ -78,17 +78,22 @@ public class ScanningContext : IDisposable
     }
 
     internal ProcessedImage CreateProcessedImage(IImageStorage storage, bool lossless = false, int quality = -1,
-        PageSize? pageSize = null, IEnumerable<Transform>? transforms = null)
+        PageSize? pageSize = null, IEnumerable<Transform>? transforms = null,
+        RefCount? refCount = null)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, lossless, quality);
         var metadata = new ImageMetadata(lossless, pageSize);
+        var postProcessingData = new PostProcessingData();
+        refCount ??=
+            new RefCount(
+                new ProcessedImage.InternalDisposer(convertedStorage, postProcessingData, _processedImageOwner));
         var image = new ProcessedImage(
             ImageContext,
             convertedStorage,
             metadata,
-            new PostProcessingData(),
+            postProcessingData,
             new TransformState(transforms?.ToImmutableList() ?? []),
-            _processedImageOwner);
+            refCount);
         return image;
     }
 
