@@ -57,7 +57,10 @@ internal abstract class NativePdfiumObject : IDisposable
         {
             if (Handle != IntPtr.Zero)
             {
-                DisposeHandle();
+                lock (PdfiumNativeLibrary.Instance)
+                {
+                    DisposeHandle();
+                }
             }
             _disposed = true;
         }
@@ -78,8 +81,6 @@ internal abstract class NativePdfiumObject : IDisposable
 
     ~NativePdfiumObject()
     {
-        // TODO: This isn't necessarily going to work as we don't have a lock, not sure the best way to handle it
-        // Though this does provide a way to give some kind of error when running tests
         Dispose(false);
     }
 }
