@@ -362,14 +362,12 @@ public class PdfExporter
         {
             if (state.Image.Storage is ImageFileStorage fileStorage)
             {
-                state.PageDocument = PdfReader.Open(fileStorage.FullPath, PdfDocumentOpenMode.Import);
                 state.NeedsOcr = !new PdfiumPdfReader()
                     .ReadTextByPage(fileStorage.FullPath)
                     .Any(x => x.Trim().Length > 0);
             }
             else if (state.Image.Storage is ImageMemoryStorage memoryStorage)
             {
-                state.PageDocument = PdfReader.Open(memoryStorage.Stream, PdfDocumentOpenMode.Import);
                 state.NeedsOcr = !new PdfiumPdfReader()
                     .ReadTextByPage(memoryStorage.Stream.GetBuffer(), (int) memoryStorage.Stream.Length)
                     .Any(x => x.Trim().Length > 0);
@@ -378,11 +376,6 @@ public class PdfExporter
         catch (Exception ex)
         {
             _logger.LogError(ex, "Could not import PDF page for possible OCR, falling back to non-OCR path");
-        }
-        if (!state.NeedsOcr)
-        {
-            // TODO: Could also switch around the checks, not sure which order is better
-            state.PageDocument?.Close();
         }
         return state;
     }
@@ -635,7 +628,6 @@ public class PdfExporter
         public bool NeedsOcr { get; set; }
         public IEmbedder? Embedder { get; set; }
         public Task<OcrResult?>? OcrTask { get; set; }
-        public PdfDocument? PageDocument { get; set; }
     }
 
     private class ImageSource : IImageSource
