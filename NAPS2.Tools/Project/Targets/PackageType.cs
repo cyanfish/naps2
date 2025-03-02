@@ -4,6 +4,7 @@ public enum PackageType
 {
     Exe,
     Msi,
+    Msix,
     Zip,
     Pkg,
     Flatpak,

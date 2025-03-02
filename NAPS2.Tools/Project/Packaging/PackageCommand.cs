@@ -22,6 +22,9 @@ public class PackageCommand : ICommand<PackageOptions>
                 case PackageType.Msi:
                     WixToolsetPackager.PackageMsi(GetPackageInfoForConfig, opts.NoSign);
                     break;
+                case PackageType.Msix:
+                    MsixPackager.PackageMsix(GetPackageInfoForConfig, opts.NoSign);
+                    break;
                 case PackageType.Zip:
                     ZipArchivePackager.PackageZip(GetPackageInfoForConfig, opts.NoSign);
                     break;
@@ -210,6 +213,11 @@ public class PackageCommand : ICommand<PackageOptions>
         var fromBytes = Encoding.UTF8.GetBytes(from);
         var toBytes = Encoding.UTF8.GetBytes(to);
         var index = SearchBytes(bytes, fromBytes);
+        if (bytes[(index - 4)..index] is [(byte) 'l', (byte) 'i', (byte) 'b', (byte) '\\'])
+        {
+            // Already patched
+            return;
+        }
         for (int i = 0; i < toBytes.Length; i++)
         {
             bytes[index + i] = toBytes[i];

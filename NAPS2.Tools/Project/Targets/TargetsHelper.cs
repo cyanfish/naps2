@@ -70,6 +70,13 @@ public static class TargetsHelper
                         yield return new PackageTarget(PackageType.Msi, Platform.Win64);
                     }
                 }
+                if ((allPkg || packageType == "msix") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                {
+                    if (allPlat || platform == "win" || platform == "win64")
+                    {
+                        yield return new PackageTarget(PackageType.Msix, Platform.Win64);
+                    }
+                }
                 if ((allPkg || packageType == "zip") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
                 {
                     if (allPlat || platform == "win64")
