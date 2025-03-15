@@ -466,6 +466,12 @@
   <data name="gmail_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\gmail-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="outlooknew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\outlooknew.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="outlooknew_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\outlooknew-hires.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="outlookweb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\outlookweb.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

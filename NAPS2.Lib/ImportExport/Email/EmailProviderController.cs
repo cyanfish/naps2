@@ -13,18 +13,21 @@ internal class EmailProviderController
     private readonly Naps2Config _config;
     private readonly SystemEmailClients _systemEmailClients;
     private readonly GmailOauthProvider _gmailOauthProvider;
+    private readonly OutlookNewEmailProvider _outlookNewEmailProvider;
     private readonly OutlookWebOauthProvider _outlookWebOauthProvider;
     private readonly ThunderbirdEmailProvider _thunderbirdProvider;
     private readonly IIconProvider _iconProvider;
 
     public EmailProviderController(IFormFactory formFactory, Naps2Config config, SystemEmailClients systemEmailClients,
-        GmailOauthProvider gmailOauthProvider, OutlookWebOauthProvider outlookWebOauthProvider,
-        ThunderbirdEmailProvider thunderbirdProvider, IIconProvider iconProvider)
+        GmailOauthProvider gmailOauthProvider, OutlookNewEmailProvider outlookNewEmailProvider,
+        OutlookWebOauthProvider outlookWebOauthProvider, ThunderbirdEmailProvider thunderbirdProvider,
+        IIconProvider iconProvider)
     {
         _formFactory = formFactory;
         _config = config;
         _systemEmailClients = systemEmailClients;
         _gmailOauthProvider = gmailOauthProvider;
+        _outlookNewEmailProvider = outlookNewEmailProvider;
         _outlookWebOauthProvider = outlookWebOauthProvider;
         _thunderbirdProvider = thunderbirdProvider;
         _iconProvider = iconProvider;
@@ -35,10 +38,8 @@ internal class EmailProviderController
         var providerWidgets = new List<EmailProviderWidget>();
         var userSetup = _config.Get(c => c.EmailSetup);
 
-#if NET6_0_OR_GREATER
         if (OperatingSystem.IsWindowsVersionAtLeast(7))
         {
-#endif
             var systemClientNames = _systemEmailClients.GetNames();
             var defaultSystemClientName = _systemEmailClients.GetDefaultName();
 
@@ -47,9 +48,7 @@ internal class EmailProviderController
             {
                 providerWidgets.Add(GetWidget(EmailProviderType.System, clientName));
             }
-#if NET6_0_OR_GREATER
         }
-#endif
 
         void MaybeAddWidget(EmailProviderType type, bool condition)
         {
@@ -59,11 +58,10 @@ internal class EmailProviderController
             }
         }
 
-#if NET6_0_OR_GREATER
         // For Windows we expect Thunderbird to be used through MAPI. For Linux we need to handle it specially.
         MaybeAddWidget(EmailProviderType.Thunderbird, OperatingSystem.IsLinux());
         MaybeAddWidget(EmailProviderType.AppleMail, OperatingSystem.IsMacOS());
-#endif
+        MaybeAddWidget(EmailProviderType.OutlookNew, _outlookNewEmailProvider.IsAvailable);
         MaybeAddWidget(EmailProviderType.Gmail, _gmailOauthProvider.HasClientCreds);
         MaybeAddWidget(EmailProviderType.OutlookWeb, _outlookWebOauthProvider.HasClientCreds);
 
@@ -88,7 +86,7 @@ internal class EmailProviderController
                 ProviderType = EmailProviderType.Thunderbird,
                 ProviderIconName = "thunderbird",
                 ProviderName = EmailProviderType.Thunderbird.Description(),
-                Choose = ChooseThunderbird,
+                Choose = () => ChooseProviderType(EmailProviderType.Thunderbird),
                 // When Thunderbird isn't available, we disable it rather than hide it.
                 // The point is to give a hint to the user that Thunderbird support is present.
                 Enabled = _thunderbirdProvider.IsAvailable
@@ -98,7 +96,7 @@ internal class EmailProviderController
                 ProviderType = EmailProviderType.AppleMail,
                 ProviderIconName = "apple_mail",
                 ProviderName = EmailProviderType.AppleMail.Description(),
-                Choose = ChooseAppleMail
+                Choose = () => ChooseProviderType(EmailProviderType.AppleMail),
             },
             EmailProviderType.Gmail => new EmailProviderWidget
             {
@@ -106,6 +104,13 @@ internal class EmailProviderController
                 ProviderIconName = "gmail",
                 ProviderName = EmailProviderType.Gmail.Description(),
                 Choose = () => ChooseOauth(_gmailOauthProvider)
+            },
+            EmailProviderType.OutlookNew => new EmailProviderWidget
+            {
+                ProviderType = EmailProviderType.OutlookNew,
+                ProviderIconName = "outlooknew",
+                ProviderName = EmailProviderType.OutlookNew.Description(),
+                Choose = () => ChooseProviderType(EmailProviderType.OutlookNew),
             },
             EmailProviderType.OutlookWeb => new EmailProviderWidget
             {
@@ -147,20 +152,11 @@ internal class EmailProviderController
         return true;
     }
 
-    private bool ChooseThunderbird()
+    private bool ChooseProviderType(EmailProviderType providerType)
     {
         var transact = _config.User.BeginTransaction();
         transact.Remove(c => c.EmailSetup);
-        transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.Thunderbird);
-        transact.Commit();
-        return true;
-    }
-
-    private bool ChooseAppleMail()
-    {
-        var transact = _config.User.BeginTransaction();
-        transact.Remove(c => c.EmailSetup);
-        transact.Set(c => c.EmailSetup.ProviderType, EmailProviderType.AppleMail);
+        transact.Set(c => c.EmailSetup.ProviderType, providerType);
         transact.Commit();
         return true;
     }

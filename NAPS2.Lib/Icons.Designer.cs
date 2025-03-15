@@ -1092,6 +1092,26 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] outlooknew {
+            get {
+                object obj = ResourceManager.GetObject("outlooknew", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] outlooknew_hires {
+            get {
+                object obj = ResourceManager.GetObject("outlooknew_hires", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] outlookweb {
             get {
                 object obj = ResourceManager.GetObject("outlookweb", resourceCulture);

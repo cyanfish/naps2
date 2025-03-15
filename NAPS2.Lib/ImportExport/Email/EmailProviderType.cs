@@ -9,6 +9,8 @@ public enum EmailProviderType
     CustomSmtp,
     [LocalizedDescription(typeof(SettingsResources), "EmailProviderType_Gmail")]
     Gmail,
+    [LocalizedDescription(typeof(SettingsResources), "EmailProviderType_OutlookNew")]
+    OutlookNew,
     [LocalizedDescription(typeof(SettingsResources), "EmailProviderType_OutlookWeb")]
     OutlookWeb,
     [LocalizedDescription(typeof(SettingsResources), "EmailProviderType_Thunderbird")]

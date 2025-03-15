@@ -73,6 +73,9 @@ internal class EmailSettingsForm : EtoDialogBase
                 _provider.Text = SettingsResources.EmailProviderType_Gmail + '\n' +
                                  config.Get(c => c.EmailSetup.GmailUser);
                 break;
+            case EmailProviderType.OutlookNew:
+                _provider.Text = SettingsResources.EmailProviderType_OutlookNew;
+                break;
             case EmailProviderType.OutlookWeb:
                 _provider.Text = SettingsResources.EmailProviderType_OutlookWeb + '\n' +
                                  config.Get(c => c.EmailSetup.OutlookWebUser);

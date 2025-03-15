@@ -20,6 +20,8 @@ internal class AutofacEmailProviderFactory : IEmailProviderFactory
         {
             case EmailProviderType.Gmail:
                 return _container.Resolve<GmailEmailProvider>();
+            case EmailProviderType.OutlookNew:
+                return _container.Resolve<OutlookNewEmailProvider>();
             case EmailProviderType.OutlookWeb:
                 return _container.Resolve<OutlookWebEmailProvider>();
             case EmailProviderType.Thunderbird:

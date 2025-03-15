@@ -132,6 +132,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Outlook (new).
+        /// </summary>
+        internal static string EmailProviderType_OutlookNew {
+            get {
+                return ResourceManager.GetString("EmailProviderType_OutlookNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outlook Web Access.
         /// </summary>
         internal static string EmailProviderType_OutlookWeb {
