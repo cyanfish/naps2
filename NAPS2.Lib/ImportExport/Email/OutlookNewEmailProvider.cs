@@ -23,7 +23,8 @@ internal class OutlookNewEmailProvider : MimeEmailProvider
         get
         {
             if (!OperatingSystem.IsWindows()) return null;
-            using var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\App Paths\olk.exe");
+            using var key =
+                Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\App Paths\olk.exe");
             var path = key?.GetValue(null)?.ToString();
             if (path == null || !File.Exists(path)) return null;
             return path;
@@ -41,7 +42,8 @@ internal class OutlookNewEmailProvider : MimeEmailProvider
             string? emlPath = null;
             try
             {
-                var exePath = ExecutablePath ?? throw new InvalidOperationException("New outlook executable not available");
+                var exePath = ExecutablePath ??
+                              throw new InvalidOperationException("New outlook executable not available");
 
                 // Add header so that Outlook opens the message as a draft to edit/send
                 message.Headers.Add("X-Unsent", "1");
@@ -59,7 +61,13 @@ internal class OutlookNewEmailProvider : MimeEmailProvider
                 {
                     throw new InvalidOperationException("Could not start Outlook (new) process");
                 }
-                await process.WaitForExitAsync();
+                await Task.WhenAny(
+                    process.WaitForExitAsync(),
+                    Task.Delay(TimeSpan.FromSeconds(30)),
+                    progress.CancelToken.WaitHandle.WaitOneAsync());
+            }
+            catch (OperationCanceledException)
+            {
             }
             catch (Exception ex)
             {
