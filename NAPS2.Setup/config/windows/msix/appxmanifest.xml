@@ -29,15 +29,38 @@
                      uap10:RuntimeBehavior="win32App"
                      uap10:TrustLevel="mediumIL">
             <uap3:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner"
-                                Description="Scan documents to PDF and more, as simply as possible."
-                                Square150x150Logo="Assets\scanner-150.png"
-                                Square44x44Logo="Assets\scanner-44.png"
-                                BackgroundColor="transparent" />
+                                 Description="Scan documents to PDF and more, as simply as possible."
+                                 Square150x150Logo="Assets\scanner-150.png"
+                                 Square44x44Logo="Assets\scanner-44.png"
+                                 BackgroundColor="transparent" />
             <Extensions>
                 <uap3:Extension Category="windows.appExecutionAlias">
                     <uap3:AppExecutionAlias>
                         <uap8:ExecutionAlias Alias="NAPS2_Alias.exe" />
                     </uap3:AppExecutionAlias>
+                </uap3:Extension>
+                <uap3:Extension Category="windows.fileTypeAssociation" EntryPoint="Windows.FullTrustApplication">
+                    <uap3:FileTypeAssociation Name="pdf" Parameters="&quot;%1&quot;">
+                        <uap:SupportedFileTypes>
+                            <uap:FileType ContentType="application/zip">.pdf</uap:FileType>
+                        </uap:SupportedFileTypes>
+                        <uap:DisplayName>PDF Files</uap:DisplayName>
+                        <uap:Logo>Assets\scanner-44.png</uap:Logo>
+                    </uap3:FileTypeAssociation>
+                </uap3:Extension>
+                <uap3:Extension Category="windows.fileTypeAssociation" EntryPoint="Windows.FullTrustApplication">
+                    <uap3:FileTypeAssociation Name="image" Parameters="&quot;%1&quot;">
+                        <uap:SupportedFileTypes>
+                            <uap:FileType ContentType="image/jpeg">.jpg</uap:FileType>
+                            <uap:FileType ContentType="image/jpeg">.jpeg</uap:FileType>
+                            <uap:FileType ContentType="image/png">.png</uap:FileType>
+                            <uap:FileType ContentType="image/tiff">.tiff</uap:FileType>
+                            <uap:FileType ContentType="image/tiff">.tif</uap:FileType>
+                            <uap:FileType ContentType="image/bmp">.bmp</uap:FileType>
+                        </uap:SupportedFileTypes>
+                        <uap:DisplayName>Image Files</uap:DisplayName>
+                        <uap:Logo>Assets\scanner-44.png</uap:Logo>
+                    </uap3:FileTypeAssociation>
                 </uap3:Extension>
             </Extensions>
         </Application>
