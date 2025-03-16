@@ -48,9 +48,9 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public string WorkerCrashMessage => SdkResources.WorkerCrashWindows;
 
-    public abstract string[] ExeSearchPaths { get;  }
+    public abstract string[] ExeSearchPaths { get; }
 
-    public abstract string[] LibrarySearchPaths { get;  }
+    public abstract string[] LibrarySearchPaths { get; }
 
     public string TesseractExecutableName => "tesseract.exe";
 
@@ -75,16 +75,23 @@ internal abstract class WindowsSystemCompat : ISystemCompat
     public IDisposable? FileWriteLock(string path) => null;
 
     private const long APPMODEL_ERROR_NO_PACKAGE = 15700L;
+
     private bool IsRunningAsMsix
     {
         get
         {
-            int length = 0;
-            var sb = new StringBuilder(0);
-            Win32.GetCurrentPackageFullName(ref length, sb);
-            sb = new StringBuilder(length);
-            int result = Win32.GetCurrentPackageFullName(ref length, sb);
-            return result != APPMODEL_ERROR_NO_PACKAGE;
+#if NET6_0_OR_GREATER
+            if (OperatingSystem.IsWindowsVersionAtLeast(10))
+            {
+                int length = 0;
+                var sb = new StringBuilder(0);
+                Win32.GetCurrentPackageFullName(ref length, sb);
+                sb = new StringBuilder(length);
+                int result = Win32.GetCurrentPackageFullName(ref length, sb);
+                return result != APPMODEL_ERROR_NO_PACKAGE;
+            }
+#endif
+            return false;
         }
     }
 }
