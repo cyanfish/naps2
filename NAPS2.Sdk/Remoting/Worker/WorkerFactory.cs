@@ -82,7 +82,7 @@ internal class WorkerFactory : IWorkerFactory
             }
             startInfo = new ProcessStartInfo
             {
-                FileName = WinX86WorkerExePath,
+                FileName = PlatformCompat.System.WinX86WorkerAlias ?? WinX86WorkerExePath,
                 Arguments = $"{parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -93,7 +93,7 @@ internal class WorkerFactory : IWorkerFactory
         {
             startInfo = new ProcessStartInfo
             {
-                FileName = NativeWorkerExePath,
+                FileName = PlatformCompat.System.NativeWorkerAlias ?? NativeWorkerExePath,
                 Arguments = $"worker {parentId}",
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,

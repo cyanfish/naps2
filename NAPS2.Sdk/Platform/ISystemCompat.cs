@@ -36,6 +36,10 @@ internal interface ISystemCompat
 
     bool SupportsWinX86Worker { get; }
 
+    string? NativeWorkerAlias { get; }
+
+    string? WinX86WorkerAlias { get; }
+
     string WorkerCrashMessage { get; }
 
     string[] ExeSearchPaths { get; }

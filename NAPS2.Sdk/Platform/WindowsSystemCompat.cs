@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 using NAPS2.Platform.Windows;
 
 namespace NAPS2.Platform;
@@ -39,6 +40,12 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool SupportsWinX86Worker => true;
 
+    // Due to weird MSIX permission issues, we need to run worker processes using their aliases so that Windows sets
+    // them up with "package identity" which will allow them to load their DLLs.
+    public string? NativeWorkerAlias => IsRunningAsMsix ? "NAPS2_Alias.exe" : null;
+
+    public string? WinX86WorkerAlias => IsRunningAsMsix ? "NAPS2.Worker_Alias.exe" : null;
+
     public string WorkerCrashMessage => SdkResources.WorkerCrashWindows;
 
     public abstract string[] ExeSearchPaths { get;  }
@@ -66,4 +73,18 @@ internal abstract class WindowsSystemCompat : ISystemCompat
     public IDisposable? FileReadLock(string path) => null;
 
     public IDisposable? FileWriteLock(string path) => null;
+
+    private const long APPMODEL_ERROR_NO_PACKAGE = 15700L;
+    private bool IsRunningAsMsix
+    {
+        get
+        {
+            int length = 0;
+            var sb = new StringBuilder(0);
+            Win32.GetCurrentPackageFullName(ref length, sb);
+            sb = new StringBuilder(length);
+            int result = Win32.GetCurrentPackageFullName(ref length, sb);
+            return result != APPMODEL_ERROR_NO_PACKAGE;
+        }
+    }
 }

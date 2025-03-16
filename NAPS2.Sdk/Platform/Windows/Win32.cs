@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 
 namespace NAPS2.Platform.Windows;
 
@@ -74,6 +75,9 @@ internal static class Win32
 
     [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     public static extern uint RegisterWindowMessage(string lpString);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    public static extern int GetCurrentPackageFullName(ref int packageFullNameLength, StringBuilder packageFullName);
 
     public enum ShowWindowCommands
     {
