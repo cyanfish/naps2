@@ -31,8 +31,9 @@ public static class MsixPackager
         }
 
         var manifestPath = Path.Combine(Paths.SetupObj, "appxmanifest.xml");
-        File.Copy(Path.Combine(Paths.SetupWindows, "appxmanifest.xml"), manifestPath, true);
-        var logoPath = Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Icons", "scanner-128.png");
+        var resourcesPriPath = Path.Combine(Paths.SetupObj, "resources.pri");
+        var msixConfig = Path.Combine(Paths.SetupWindows, "msix");
+        File.Copy(Path.Combine(msixConfig, "appxmanifest.xml"), manifestPath, true);
         var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net9", "win-x64",
             "publish");
         var mappingFilePath = Path.Combine(Paths.SetupObj, "msixmapping.txt");
@@ -44,11 +45,19 @@ public static class MsixPackager
             var fullSourcePath = Path.Combine(publishDir, file.SourcePath);
             mappingFile.WriteLine($"\"{fullSourcePath}\" \"{file.DestPath}\"");
         }
+        foreach (var assetFile in new DirectoryInfo(Path.Combine(msixConfig, "Assets")).EnumerateFiles())
+        {
+            mappingFile.WriteLine($"\"{assetFile.FullName}\" \"Assets\\{assetFile.Name}\"");
+        }
         mappingFile.WriteLine($"\"{manifestPath}\" \"AppxManifest.xml\"");
-        mappingFile.WriteLine($"\"{logoPath}\" \"scanner.png\"");
+        mappingFile.WriteLine($"\"{resourcesPriPath}\" \"resources.pri\"");
         mappingFile.Close();
 
+        var makePri = @"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\makepri.exe";
         var makeAppx = @"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\makeappx.exe";
+
+        if (File.Exists(resourcesPriPath)) File.Delete(resourcesPriPath);
+        Cli.Run(makePri, $"new /pr \"{msixConfig}\" /cf \"{msixConfig}\\priconfig.xml\" /o /of \"{resourcesPriPath}\" /mn \"{manifestPath}\"");
 
         Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixPath}\"");
 

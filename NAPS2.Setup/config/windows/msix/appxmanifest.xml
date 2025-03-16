@@ -6,12 +6,13 @@
         xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
         xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
-    <Identity Name="NAPS2Software.NAPS2-NotAnotherPDFScanner" Version="8.0.3.0" Publisher="CN=1D624E39-8523-4AAC-B3B6-1452E653A003" ProcessorArchitecture="x64" />
+    <Identity Name="NAPS2Software.NAPS2-NotAnotherPDFScanner" Version="8.0.3.0"
+              Publisher="CN=1D624E39-8523-4AAC-B3B6-1452E653A003" ProcessorArchitecture="x64" />
     <Properties>
         <DisplayName>NAPS2 - Not Another PDF Scanner</DisplayName>
         <PublisherDisplayName>NAPS2 Software</PublisherDisplayName>
         <Description>Scan documents to PDF and more, as simply as possible.</Description>
-        <Logo>scanner.png</Logo>
+        <Logo>Assets\scanner-150.png</Logo>
     </Properties>
     <Resources>
         <Resource Language="en-us" />
@@ -20,15 +21,18 @@
         <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.22631.0" />
     </Dependencies>
     <Capabilities>
-        <rescap:Capability Name="runFullTrust"/>
-        <rescap:Capability Name="unvirtualizedResources"/>
+        <rescap:Capability Name="runFullTrust" />
+        <rescap:Capability Name="unvirtualizedResources" />
     </Capabilities>
     <Applications>
         <Application Id="NAPS2" Executable="NAPS2.exe"
                      uap10:RuntimeBehavior="win32App"
                      uap10:TrustLevel="mediumIL">
-            <uap:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner" Description="Scan documents to PDF and more, as simply as possible." Square150x150Logo="scanner.png"
-                                Square44x44Logo="scanner.png" BackgroundColor="#6688aa" />
+            <uap3:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner"
+                                Description="Scan documents to PDF and more, as simply as possible."
+                                Square150x150Logo="Assets\scanner-150.png"
+                                Square44x44Logo="Assets\scanner-44.png"
+                                BackgroundColor="transparent" />
             <Extensions>
                 <uap3:Extension Category="windows.appExecutionAlias">
                     <uap3:AppExecutionAlias>
@@ -40,8 +44,12 @@
         <Application Id="NAPS2.Console" Executable="NAPS2.Console.exe"
                      uap10:RuntimeBehavior="win32App"
                      uap10:TrustLevel="mediumIL">
-            <uap:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner" Description="Scan documents to PDF and more, as simply as possible." Square150x150Logo="scanner.png"
-                                Square44x44Logo="scanner.png" BackgroundColor="#6688aa" />
+            <uap:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner"
+                                Description="Scan documents to PDF and more, as simply as possible."
+                                Square150x150Logo="Assets\scanner-150.png"
+                                Square44x44Logo="Assets\scanner-44.png"
+                                BackgroundColor="transparent"
+                                AppListEntry="none" />
             <Extensions>
                 <uap3:Extension Category="windows.appExecutionAlias">
                     <uap3:AppExecutionAlias>
@@ -53,8 +61,12 @@
         <Application Id="NAPS2.Worker" Executable="lib\NAPS2.Worker.exe"
                      uap10:RuntimeBehavior="win32App"
                      uap10:TrustLevel="mediumIL">
-            <uap:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner" Description="Scan documents to PDF and more, as simply as possible." Square150x150Logo="scanner.png"
-                                Square44x44Logo="scanner.png" BackgroundColor="#6688aa" />
+            <uap:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner"
+                                Description="Scan documents to PDF and more, as simply as possible."
+                                Square150x150Logo="Assets\scanner-150.png"
+                                Square44x44Logo="Assets\scanner-44.png"
+                                BackgroundColor="transparent"
+                                AppListEntry="none" />
             <Extensions>
                 <uap3:Extension Category="windows.appExecutionAlias">
                     <uap3:AppExecutionAlias>
