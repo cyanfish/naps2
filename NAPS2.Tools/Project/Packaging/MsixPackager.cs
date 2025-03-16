@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace NAPS2.Tools.Project.Packaging;
 
 public static class MsixPackager
@@ -57,13 +59,18 @@ public static class MsixPackager
         var makeAppx = @"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\makeappx.exe";
 
         if (File.Exists(resourcesPriPath)) File.Delete(resourcesPriPath);
-        Cli.Run(makePri, $"new /pr \"{msixConfig}\" /cf \"{msixConfig}\\priconfig.xml\" /o /of \"{resourcesPriPath}\" /mn \"{manifestPath}\"");
+        Cli.Run(makePri,
+            $"new /pr \"{msixConfig}\" /cf \"{msixConfig}\\priconfig.xml\" /o /of \"{resourcesPriPath}\" /mn \"{manifestPath}\"");
 
         Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixPath}\"");
 
-        File.WriteAllText(manifestPath, File.ReadAllText(manifestPath).Replace(
-            "CN=1D624E39-8523-4AAC-B3B6-1452E653A003",
-            N2Config.WindowsIdentity));
+        File.WriteAllText(manifestPath, File.ReadAllText(manifestPath)
+            .Replace(
+                "CN=1D624E39-8523-4AAC-B3B6-1452E653A003",
+                N2Config.WindowsIdentity)
+            .Replace(
+                "<Resource Language=\"en-us\" />",
+                GetSupportedLanguages(pkgInfo)));
 
         Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixTestPath}\"");
 
@@ -74,5 +81,17 @@ public static class MsixPackager
         }
 
         Output.OperationEnd($"Packaged msix installer: {msixPath}");
+    }
+
+    private static string GetSupportedLanguages(PackageInfo pkgInfo)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("<Resource Language=\"en-us\" />");
+        foreach (var language in pkgInfo.Files.Where(x => x.FileName.StartsWith("NAPS2.Lib.resources.dll"))
+                     .Select(x => Path.GetFileName(x.DestDir)))
+        {
+            sb.AppendLine($"<Resource Language=\"{language}\" />");
+        }
+        return sb.ToString();
     }
 }

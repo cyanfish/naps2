@@ -30,6 +30,10 @@ public class PackageInfo
 
     public IEnumerable<PackageFile> Files => _files;
 
+    /// <summary>
+    /// The set of languages that have resource files. This may be different from the set of NAPS2-supported languages
+    /// as WinForms etc. provide resources for a disjoint set of languages.
+    /// </summary>
     public HashSet<string> Languages { get; } = [];
 
     public void AddFile(FileInfo file, string destFolder, string? destFileName = null)
