@@ -78,7 +78,7 @@ public class MacIconProvider : IIconProvider
                 {
                     if (oversized)
                     {
-                        symbol = symbol.GetImage(NSImageSymbolConfiguration.Create(32, 0.1));
+                        symbol = symbol.GetImage(NSImageSymbolConfiguration.Create(32, 0.1))!;
                     }
                     if (name == "ask")
                     {

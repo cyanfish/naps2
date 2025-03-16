@@ -55,7 +55,7 @@ public class MacEtoPlatform : EtoPlatform
             nsButton.ImageHugsTitle = true;
             nsButton.Title = Environment.NewLine + nsButton.Title;
         }
-        var image = nsButton.Image;
+        var image = nsButton.Image!;
         if (image.Representations() is [NSBitmapImageRep rep, ..])
         {
             image.Size = new CGSize(rep.PixelsWide / 2f, rep.PixelsHigh / 2f);

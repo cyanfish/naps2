@@ -6,6 +6,9 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Mac;
 
+// NSPasteboardTypeFileUrl is deprecated but still needed
+#pragma warning disable CS0618 // Type or member is obsolete
+
 public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> where T : notnull
 {
     private readonly ListViewBehavior<T> _behavior;
@@ -48,11 +51,11 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         _view.AllowsMultipleSelection = !behavior.Checkboxes && behavior.MultiSelect;
         if (_behavior.AllowDragDrop)
         {
-            _view.RegisterForDraggedTypes(new[] { _behavior.CustomDragDataType });
+            _view.RegisterForDraggedTypes([_behavior.CustomDragDataType]);
         }
         if (_behavior.AllowFileDrop)
         {
-            _view.RegisterForDraggedTypes(new string[] { NSPasteboard.NSPasteboardTypeFileUrl });
+            _view.RegisterForDraggedTypes([NSPasteboard.NSPasteboardTypeFileUrl]);
         }
         _scrollView.DocumentView = _view;
         _panel.Content = _scrollView.ToEto();
@@ -60,7 +63,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     private void ItemChecked(T item, bool isChecked)
     {
-        _selection = ListSelection.From(isChecked ? _selection.Append(item) : _selection.Except(new[] { item }));
+        _selection = ListSelection.From(isChecked ? _selection.Append(item) : _selection.Except([item]));
         SelectionChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -327,8 +330,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     private bool GetCustomData(INSDraggingInfo draggingInfo, out byte[] data)
     {
-        if (draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(new[]
-                { _behavior.CustomDragDataType }))
+        if (draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes([_behavior.CustomDragDataType]))
         {
             var items = draggingInfo.DraggingPasteboard.PasteboardItems;
             data = items.Length > 1
@@ -343,8 +345,8 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
 
     private bool GetFilePaths(INSDraggingInfo draggingInfo, out IEnumerable<string> filePaths)
     {
-        if (draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(new string[]
-                { NSPasteboard.NSPasteboardTypeFileUrl }))
+        if (draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(
+                [NSPasteboard.NSPasteboardTypeFileUrl]))
         {
             var items = draggingInfo.DraggingPasteboard.PasteboardItems;
             filePaths =
@@ -382,8 +384,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
                 return _behavior.GetCustomDragEffect(data).ToNS();
             }
             if (_behavior.AllowFileDrop && draggingInfo.DraggingPasteboard.CanReadItemWithDataConformingToTypes(
-                    new string[]
-                        { NSPasteboard.NSPasteboardTypeFileUrl }))
+                    [NSPasteboard.NSPasteboardTypeFileUrl]))
             {
                 return NSDragOperation.Copy;
             }
@@ -405,7 +406,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         try
         {
             var item = new NSPasteboardItem();
-            var binaryData = _behavior.SerializeCustomDragData(new[] { _dataSource.Items[(int) indexPath.Item] });
+            var binaryData = _behavior.SerializeCustomDragData([_dataSource.Items[(int) indexPath.Item]]);
             item.SetDataForType(NSData.FromArray(binaryData), _behavior.CustomDragDataType);
             return item;
         }
