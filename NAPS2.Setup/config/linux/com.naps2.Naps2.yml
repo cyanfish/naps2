@@ -9,6 +9,7 @@ copy-icon: true
 cleanup:
   - /include
   - /lib/*.a
+  - /lib64/*.a
   - /lib/*.la
   - /lib/cmake
   - /lib/debug
