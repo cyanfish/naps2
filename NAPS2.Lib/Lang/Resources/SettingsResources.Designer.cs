@@ -348,6 +348,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom....
+        /// </summary>
+        internal static string Resolution_Custom {
+            get {
+                return ResourceManager.GetString("Resolution_Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Always Prompt.
         /// </summary>
         internal static string SaveButtonDefaultAction_AlwaysPrompt {

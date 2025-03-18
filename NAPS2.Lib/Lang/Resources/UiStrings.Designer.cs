@@ -744,6 +744,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dpi.
+        /// </summary>
+        internal static string Dpi {
+            get {
+                return ResourceManager.GetString("Dpi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string Edit {
@@ -1802,6 +1811,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Resolution.
+        /// </summary>
+        internal static string ResolutionFormTitle {
+            get {
+                return ResourceManager.GetString("ResolutionFormTitle", resourceCulture);
             }
         }
         

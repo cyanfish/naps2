@@ -22,7 +22,7 @@ public class EditProfileForm : EtoDialogBase
     private readonly LayoutVisibility _nativeUiVis = new(true);
     private readonly EnumDropDownWidget<ScanSource> _paperSource = new();
     private readonly PageSizeDropDownWidget _pageSize;
-    private readonly DropDownWidget<int> _resolution = new();
+    private readonly ResolutionDropDownWidget _resolution;
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
     private readonly EnumDropDownWidget<ScanHorizontalAlign> _horAlign = new();
     private readonly EnumDropDownWidget<ScanScale> _scale = new();
@@ -54,11 +54,11 @@ public class EditProfileForm : EtoDialogBase
             AllowAlwaysAsk = true
         };
         _pageSize = new(this);
+        _resolution = new(this);
         _deviceSelectorWidget.DeviceChanged += DeviceChanged;
 
         _predefinedSettings = new RadioButton { Text = UiStrings.UsePredefinedSettings };
         _nativeUi = new RadioButton(_predefinedSettings) { Text = UiStrings.UseNativeUi };
-        _resolution.Format = x => string.Format(SettingsResources.DpiFormat, x.ToString(CultureInfo.InvariantCulture));
         _paperSource.SelectedItemChanged += PaperSource_SelectedItemChanged;
         _predefinedSettings.CheckedChanged += PredefinedSettings_CheckedChanged;
         _nativeUi.CheckedChanged += NativeUi_CheckedChanged;
@@ -174,7 +174,7 @@ public class EditProfileForm : EtoDialogBase
         };
 
         var validResolutions = perSource?.Resolutions;
-        _resolution.Items = validResolutions is [_, ..]
+        _resolution.VisiblePresets = validResolutions is [_, ..]
             ? validResolutions
             : EnumDropDownWidget<ScanDpi>.DefaultItems.Select(x => x.ToIntDpi());
 
@@ -307,7 +307,7 @@ public class EditProfileForm : EtoDialogBase
 
         _paperSource.SelectedItem = ScanProfile.PaperSource;
         _bitDepth.SelectedItem = ScanProfile.BitDepth;
-        _resolution.SelectedItem = ScanProfile.Resolution.Dpi;
+        _resolution.SetDpi(ScanProfile.Resolution.Dpi);
         _contrastSlider.IntValue = ScanProfile.Contrast;
         _brightnessSlider.IntValue = ScanProfile.Brightness;
         _scale.SelectedItem = ScanProfile.AfterScanScale;
@@ -376,7 +376,7 @@ public class EditProfileForm : EtoDialogBase
             PageSize = pageSize.Type,
             CustomPageSizeName = pageSize.CustomName,
             CustomPageSize = pageSize.CustomDimens,
-            Resolution = new ScanResolution { Dpi = _resolution.SelectedItem },
+            Resolution = new ScanResolution { Dpi = _resolution.SelectedItem?.Dpi ?? 0 },
             PaperSource = _paperSource.SelectedItem,
 
             EnableAutoSave = _enableAutoSave.IsChecked(),

@@ -30,6 +30,9 @@ public class CommonConfig
     [Common]
     public ImmutableList<NamedPageSize> CustomPageSizePresets { get; set; } = ImmutableList<NamedPageSize>.Empty;
 
+    [User]
+    public int LastCustomResolution { get; set; }
+
     [App]
     public string? StartupMessageTitle { get; set; }
 

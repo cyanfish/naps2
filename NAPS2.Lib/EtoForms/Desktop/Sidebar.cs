@@ -23,11 +23,11 @@ public class Sidebar
     private readonly LayoutVisibility _predefinedVis = new(true);
     private readonly DropDownWidget<ScanProfile> _profile = new();
     private readonly EnumDropDownWidget<ScanSource> _paperSource = new();
-    private readonly DropDownWidget<int> _resolution = new();
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
 
     private DeviceSelectorWidget? _deviceSelectorWidget;
     private PageSizeDropDownWidget? _pageSize;
+    private ResolutionDropDownWidget? _resolution;
 
     public Sidebar(IScanPerformer scanPerformer, DeviceCapsCache deviceCapsCache, IProfileManager profileManager,
         Naps2Config config, IIconProvider iconProvider, IFormFactory formFactory,
@@ -115,7 +115,7 @@ public class Sidebar
         profile.PageSize = pageSize.Type;
         profile.CustomPageSizeName = pageSize.CustomName;
         profile.CustomPageSize = pageSize.CustomDimens;
-        profile.Resolution = new ScanResolution { Dpi = _resolution.SelectedItem };
+        profile.Resolution = new ScanResolution { Dpi = _resolution?.SelectedItem?.Dpi ?? 0 };
         profile.BitDepth = _bitDepth.SelectedItem;
         _profileManager.Save();
 
@@ -133,6 +133,7 @@ public class Sidebar
             ProfileFunc = () => _profile.SelectedItem!
         };
         _pageSize = new PageSizeDropDownWidget(parentWindow);
+        _resolution = new ResolutionDropDownWidget(parentWindow);
         _profile.SelectedItemChanged += (_, _) =>
         {
             if (_config.Get(c => c.ScanChangesDefaultProfile))
@@ -212,9 +213,7 @@ public class Sidebar
 
         _paperSource.SelectedItem = profile.PaperSource;
         _bitDepth.SelectedItem = profile.BitDepth;
-        _resolution.SelectedItem = profile.Resolution.Dpi;
-        _resolution.Format = dpi =>
-            string.Format(SettingsResources.DpiFormat, dpi.ToString(CultureInfo.InvariantCulture));
+        _resolution!.SetDpi(profile.Resolution.Dpi);
 
         _paperSource.Items = profile.Caps?.PaperSources?.Values is [_, ..] paperSources
             ? paperSources
@@ -230,7 +229,7 @@ public class Sidebar
         };
 
         var validResolutions = perSource?.Resolutions;
-        _resolution.Items = validResolutions is [_, ..]
+        _resolution.VisiblePresets = validResolutions is [_, ..]
             ? validResolutions
             : EnumDropDownWidget<ScanDpi>.DefaultItems.Select(x => x.ToIntDpi());
 
