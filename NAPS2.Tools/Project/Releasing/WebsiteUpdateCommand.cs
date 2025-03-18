@@ -1,7 +1,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -44,6 +43,7 @@ public class WebsiteUpdateCommand : ICommand<WebsiteUpdateOptions>
 
                 var cert = new X509Certificate2(certPath, password);
                 var sha1 = SHA1.Create();
+                var sha256 = SHA256.Create();
 
                 // TODO: All files? These are the only ones we need for auto update
                 var exePath = ProjectHelper.GetPackagePath("exe", Platform.Win64, opts.Version);
@@ -52,15 +52,20 @@ public class WebsiteUpdateCommand : ICommand<WebsiteUpdateOptions>
                 foreach (var path in new[] { exePath, zipPath })
                 {
                     var bytes = File.ReadAllBytes(path);
-                    var hash = sha1.ComputeHash(bytes);
-                    var sig = cert.GetRSAPrivateKey()!.SignHash(hash, HashAlgorithmName.SHA1,
+                    var sha1Hash = sha1.ComputeHash(bytes);
+                    var sha256Hash = sha256.ComputeHash(bytes);
+                    var sig = cert.GetRSAPrivateKey()!.SignHash(sha1Hash, HashAlgorithmName.SHA1,
+                        RSASignaturePadding.Pkcs1);
+                    var sig256 = cert.GetRSAPrivateKey()!.SignHash(sha256Hash, HashAlgorithmName.SHA256,
                         RSASignaturePadding.Pkcs1);
                     File.WriteAllBytes($"{path}.sig", sig);
                     var data = JsonConvert.SerializeObject(new
                     {
                         name = Path.GetFileName(path),
-                        sha1 = Convert.ToBase64String(hash),
-                        sig = Convert.ToBase64String(sig)
+                        sha1 = Convert.ToBase64String(sha1Hash),
+                        sha256 = Convert.ToBase64String(sha256Hash),
+                        sig = Convert.ToBase64String(sig),
+                        sig256 = Convert.ToBase64String(sig256)
                     });
                     var response = client.PostAsync(ADD_FILE_SIG_URL, new StringContent(data, Encoding.UTF8, "application/json")).Result;
                     if (response.StatusCode != HttpStatusCode.OK)
