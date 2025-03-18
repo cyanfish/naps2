@@ -157,10 +157,10 @@ public class UpdateOperation : OperationBase
 
     private bool VerifyHash()
     {
-        using var sha = SHA1.Create();
+        using var sha = SHA256.Create();
         using FileStream stream = File.OpenRead(_tempPath!);
         byte[] checksum = sha.ComputeHash(stream);
-        return checksum.SequenceEqual(_update!.Sha1);
+        return checksum.SequenceEqual(_update!.Sha256);
     }
 
     private bool VerifySignature()
@@ -168,7 +168,7 @@ public class UpdateOperation : OperationBase
         var cert = X509CertificateLoader.LoadPkcs12(ClientCreds_.naps2_public, null);
         var csp = cert.GetRSAPublicKey();
         if (csp == null) return false;
-        return csp.VerifyHash(_update!.Sha1, _update.Signature, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+        return csp.VerifyHash(_update!.Sha256, _update.Signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
     }
 
     private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)

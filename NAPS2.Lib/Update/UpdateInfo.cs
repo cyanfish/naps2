@@ -2,11 +2,11 @@
 
 public class UpdateInfo
 {
-    public UpdateInfo(string name, string downloadUrl, byte[] sha1, byte[] signature)
+    public UpdateInfo(string name, string downloadUrl, byte[] sha256, byte[] signature)
     {
         Name = name;
         DownloadUrl = downloadUrl;
-        Sha1 = sha1;
+        Sha256 = sha256;
         Signature = signature;
     }
 
@@ -14,7 +14,7 @@ public class UpdateInfo
 
     public string DownloadUrl { get; }
 
-    public byte[] Sha1 { get; }
+    public byte[] Sha256 { get; }
 
     public byte[] Signature { get; }
 }

@@ -44,11 +44,11 @@ public class UpdateChecker : IUpdateChecker
             var updateFile = release["files"]!.Value<JToken>(UPDATE_FILE_EXT);
             if (updateFile == null) continue;
 
-            var sha1 = updateFile.Value<string>("sha1");
+            var sha256 = updateFile.Value<string>("sha256");
             var sig = updateFile.Value<string>("sig");
-            if (sha1 == null || sig == null) continue;
+            if (sha256 == null || sig == null) continue;
 
-            return new UpdateInfo(versionName, updateFile.Value<string>("url")!, Convert.FromBase64String(sha1),
+            return new UpdateInfo(versionName, updateFile.Value<string>("url")!, Convert.FromBase64String(sha256),
                 Convert.FromBase64String(sig));
         }
         return null;
