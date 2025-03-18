@@ -170,10 +170,11 @@ internal class EsclScanDriver : IScanDriver
         {
             var caps = await client.GetCapabilities();
             var status = await client.GetStatus();
-            var scanSettings = GetScanSettings(options, caps);
             bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
             bool hasErrorDetailsExtension = caps.Naps2Extensions?.Contains("ErrorDetails") ?? false;
             bool hasShortTimeoutExtension = caps.Naps2Extensions?.Contains("ShortTimeout") ?? false;
+            bool hasAnyDpiExtension = caps.Naps2Extensions?.Contains("AnyDpi") ?? false;
+            var scanSettings = GetScanSettings(options, caps, hasAnyDpiExtension);
             Action<double>? progressCallback = hasProgressExtension ? scanEvents.PageProgress : null;
 
             if (cancelToken.IsCancellationRequested) return;
@@ -399,7 +400,7 @@ internal class EsclScanDriver : IScanDriver
         }
     }
 
-    private EsclScanSettings GetScanSettings(ScanOptions options, EsclCapabilities caps)
+    private EsclScanSettings GetScanSettings(ScanOptions options, EsclCapabilities caps, bool hasAnyDpiExtension)
     {
         if (options.PaperSource == PaperSource.Feeder && caps.AdfSimplexCaps == null)
         {
@@ -439,19 +440,22 @@ internal class EsclScanDriver : IScanDriver
         {
             colorMode = MaybeCorrectColorMode(settingProfile, colorMode);
 
-            var discreteResolutions =
-                settingProfile.DiscreteResolutions.Where(res => res.XResolution == res.YResolution)
-                    .Select(res => res.XResolution).ToList();
-            if (discreteResolutions.Any())
+            if (!hasAnyDpiExtension)
             {
-                dpi = discreteResolutions.OrderBy(v => Math.Abs(v - dpi)).First();
-            }
+                var discreteResolutions =
+                    settingProfile.DiscreteResolutions.Where(res => res.XResolution == res.YResolution)
+                        .Select(res => res.XResolution).ToList();
+                if (discreteResolutions.Any())
+                {
+                    dpi = discreteResolutions.OrderBy(v => Math.Abs(v - dpi)).First();
+                }
 
-            if (settingProfile.XResolutionRange != null && settingProfile.YResolutionRange != null)
-            {
-                int min = Math.Max(settingProfile.XResolutionRange.Min, settingProfile.YResolutionRange.Min);
-                int max = Math.Min(settingProfile.XResolutionRange.Max, settingProfile.YResolutionRange.Max);
-                dpi = dpi.Clamp(min, max);
+                if (settingProfile.XResolutionRange != null && settingProfile.YResolutionRange != null)
+                {
+                    int min = Math.Max(settingProfile.XResolutionRange.Min, settingProfile.YResolutionRange.Min);
+                    int max = Math.Min(settingProfile.XResolutionRange.Max, settingProfile.YResolutionRange.Max);
+                    dpi = dpi.Clamp(min, max);
+                }
             }
 
             _logger.LogDebug("ESCL setting profile supports formats: {Formats}",

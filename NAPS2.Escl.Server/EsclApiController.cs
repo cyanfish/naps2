@@ -52,7 +52,7 @@ internal class EsclApiController : WebApiController
                     new XElement(ScanNs + "UUID", caps.Uuid),
                     new XElement(ScanNs + "AdminURI", ""),
                     new XElement(ScanNs + "IconURI", iconUri),
-                    new XElement(ScanNs + "Naps2Extensions", "Progress;ErrorDetails;ShortTimeout"),
+                    new XElement(ScanNs + "Naps2Extensions", "Progress;ErrorDetails;ShortTimeout;AnyDpi"),
                     new XElement(ScanNs + "Platen",
                         new XElement(ScanNs + "PlatenInputCaps", GetCommonInputCaps())),
                     new XElement(ScanNs + "Adf",
