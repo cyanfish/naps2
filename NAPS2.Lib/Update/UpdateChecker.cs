@@ -45,11 +45,11 @@ public class UpdateChecker : IUpdateChecker
             if (updateFile == null) continue;
 
             var sha256 = updateFile.Value<string>("sha256");
-            var sig = updateFile.Value<string>("sig");
-            if (sha256 == null || sig == null) continue;
+            var sig256 = updateFile.Value<string>("sig256");
+            if (sha256 == null || sig256 == null) continue;
 
             return new UpdateInfo(versionName, updateFile.Value<string>("url")!, Convert.FromBase64String(sha256),
-                Convert.FromBase64String(sig));
+                Convert.FromBase64String(sig256));
         }
         return null;
     }
