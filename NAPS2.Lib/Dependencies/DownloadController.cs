@@ -106,7 +106,7 @@ public class DownloadController
             if (result != null)
             {
                 result.Position = 0;
-                if (fileToDownload.DownloadInfo.Sha1 == CalculateSha1(result))
+                if (fileToDownload.DownloadInfo.Sha256 == CalculateSha256(result))
                 {
                     return result;
                 }
@@ -160,9 +160,9 @@ public class DownloadController
         return true;
     }
 
-    private string CalculateSha1(Stream stream)
+    private string CalculateSha256(Stream stream)
     {
-        using var sha = SHA1.Create();
+        using var sha = SHA256.Create();
         byte[] checksum = sha.ComputeHash(stream);
         string str = BitConverter.ToString(checksum).Replace("-", String.Empty).ToLowerInvariant();
         return str;

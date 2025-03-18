@@ -2,12 +2,12 @@
 
 public class DownloadInfo
 {
-    public DownloadInfo(string fileName, List<DownloadMirror> mirrors, double size, string sha1, DownloadFormat format)
+    public DownloadInfo(string fileName, List<DownloadMirror> mirrors, double size, string sha256, DownloadFormat format)
     {
         FileName = fileName;
         Urls = mirrors.Select(x => x.Url(fileName)).ToList();
         Size = size;
-        Sha1 = sha1;
+        Sha256 = sha256;
         Format = format;
     }
 
@@ -19,5 +19,5 @@ public class DownloadInfo
 
     public double Size { get; }
 
-    public string Sha1 { get; }
+    public string Sha256 { get; }
 }

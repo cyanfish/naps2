@@ -18,7 +18,7 @@ public class TesseractLanguageManager
         LanguageComponents = _languageData.Data.Select(x =>
             new MultiFileExternalComponent($"ocr-{x.Code}", TessdataBasePath,
                 new[] { $"best/{x.Code}.traineddata", $"fast/{x.Code}.traineddata" },
-                new DownloadInfo(x.Filename, Mirrors, x.Size, x.Sha1, DownloadFormat.Zip)));
+                new DownloadInfo(x.Filename, Mirrors, x.Size, x.Sha256, DownloadFormat.Zip)));
     }
 
     private string GetTessdataBasePath(string basePath)
