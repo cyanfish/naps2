@@ -12,12 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: naps2\n"
-"X-Crowdin-Project-ID: 531762\n"
-"X-Crowdin-Language: it\n"
-"X-Crowdin-File: templates.pot\n"
-"X-Crowdin-File-ID: 75\n"
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
@@ -59,6 +53,10 @@ msgstr "Info sul programma"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Acquisizione dati..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Azione"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -1437,6 +1435,10 @@ msgstr "Gli scanner condivisi possono essere usati da altri computer nella rete 
 msgid "Sharpen"
 msgstr "Nitidezza"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Collegamento"
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Visualizza"
@@ -1583,8 +1585,7 @@ msgstr "Il processo di elaborazione si è bloccato."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr "Il processo di elaborazione si è bloccato. \n"
-"Controlla il visualizzatore eventi di Windows."
+msgstr "Il processo di elaborazione si è bloccato. Controlla il visualizzatore eventi di Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1755,10 +1756,6 @@ msgstr "di {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr "{0} ({1})"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
