@@ -84,7 +84,7 @@ public class UploadCommand : ICommand<UploadOptions>
         var resource = await repository.GetResourceAsync<PackageUpdateResource>();
         var v = ProjectHelper.GetSdkVersion();
         var packagePaths = ProjectHelper.GetSdkProjects()
-            .Select(x => $"{x}/bin/Release/{x}.{v}.nupkg").ToList();
+            .Select(x => $"{x}/bin/Sdk/{x}.{v}.nupkg").ToList();
         var key = await File.ReadAllTextAsync(Path.Combine(Paths.Naps2UserFolder, "nuget"));
         await resource.Push(
             packagePaths,
