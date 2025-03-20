@@ -16,410 +16,411 @@
   <Folder Name="/app/">
     <Project Path="NAPS2.App.Console\NAPS2.App.Console.csproj" Type="Classic C#">
       <BuildDependency Project="NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.App.Gtk\NAPS2.App.Gtk.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.App.Mac\NAPS2.App.Mac.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.App.PortableLauncher\NAPS2.App.PortableLauncher.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.App.Tests\NAPS2.App.Tests.csproj" Type="Classic C#">
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.App.WinForms\NAPS2.App.WinForms.csproj" Type="Classic C#">
       <BuildDependency Project="NAPS2.App.Worker\NAPS2.App.Worker.csproj" />
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.App.Worker\NAPS2.App.Worker.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
   </Folder>
   <Folder Name="/escl/">
     <Project Path="NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Escl.Tests\NAPS2.Escl.Tests.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Escl.Usb\NAPS2.Escl.Usb.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Escl\NAPS2.Escl.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
   </Folder>
   <Folder Name="/images/">
     <Project Path="NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
     <Project Path="NAPS2.Images\NAPS2.Images.csproj" Type="Classic C#">
-      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
       <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+      <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
       <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
       <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+      <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     </Project>
   </Folder>
   <Project Path="NAPS2.Internals\NAPS2.Internals.csproj" Type="Classic C#">
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Lib.Gtk\NAPS2.Lib.Gtk.csproj" Type="Classic C#">
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Lib.Mac\NAPS2.Lib.Mac.csproj" Type="Classic C#">
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Lib.Tests\NAPS2.Lib.Tests.csproj" Type="Classic C#">
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" Type="Classic C#">
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Lib\NAPS2.Lib.csproj" Type="Classic C#">
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Sdk.Samples\NAPS2.Sdk.Samples.csproj" Type="Classic C#">
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Sdk.ScannerTests\NAPS2.Sdk.ScannerTests.csproj" Type="Classic C#">
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" Type="Classic C#">
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Sdk.Worker.Build\NAPS2.Sdk.Worker.Build.csproj" Type="Classic C#">
     <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Sdk.Worker.Win32\NAPS2.Sdk.Worker.Win32.csproj" Type="Classic C#">
+    <BuildDependency Project="NAPS2.Sdk.Worker.Build\NAPS2.Sdk.Worker.Build.csproj" />
     <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Sdk\NAPS2.Sdk.csproj" Type="Classic C#">
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="DebugNoMac|Any CPU" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="DebugNoMac|Any CPU" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="DebugNoMac|Any CPU" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Setup\NAPS2.Setup.csproj" Type="Classic C#">
     <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Release|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Release|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU|NoBuild" />
   </Project>
   <Project Path="NAPS2.Tools\NAPS2.Tools.csproj" Type="Classic C#">
     <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Msi|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Release-Zip|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU" />
     <Configuration Solution="Debug-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Debug-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Debug-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Linux|Any CPU" Project="Debug|Any CPU|NoBuild" />
-    <Configuration Solution="Sdk|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Mac|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Msi|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Release-Zip|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Sdk|Any CPU" Project="Debug|Any CPU|NoBuild" />
+    <Configuration Solution="Tools|Any CPU" Project="Debug|Any CPU" />
   </Project>
 </Solution>
