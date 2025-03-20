@@ -33,7 +33,9 @@ public class SharedDeviceManager : ISharedDeviceManager
         {
             try
             {
-                _server.Certificate = X509CertificateLoader.LoadPkcs12FromFile(certPath, null);
+                _server.Certificate = Path.GetExtension(certPath) == ".pfx"
+                    ? X509CertificateLoader.LoadPkcs12FromFile(certPath, null)
+                    : X509CertificateLoader.LoadCertificateFromFile(certPath);
                 if (!_server.Certificate.HasPrivateKey)
                 {
                     _logger.LogDebug(

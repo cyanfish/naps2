@@ -41,7 +41,9 @@ public static class WindowsSigning
         }
         try
         {
+#pragma warning disable SYSLIB0057 // No replacement for this obsolete method yet
             X509Certificate.CreateFromSignedFile(file.SourcePath);
+#pragma warning restore SYSLIB0057
             // Already has a signature
             return false;
         }

@@ -165,7 +165,7 @@ public class UpdateOperation : OperationBase
 
     private bool VerifySignature()
     {
-        var cert = X509CertificateLoader.LoadPkcs12(ClientCreds_.naps2_public, null);
+        var cert = X509CertificateLoader.LoadCertificate(ClientCreds_.naps2_public);
         var csp = cert.GetRSAPublicKey();
         if (csp == null) return false;
         return csp.VerifyHash(_update!.Sha256, _update.Signature256, HashAlgorithmName.SHA256,

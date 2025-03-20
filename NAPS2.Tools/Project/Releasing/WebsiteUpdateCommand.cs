@@ -41,7 +41,7 @@ public class WebsiteUpdateCommand : ICommand<WebsiteUpdateOptions>
                 var password = Console.ReadLine()?.Trim() ??
                                throw new InvalidOperationException("Password not provided");
 
-                var cert = new X509Certificate2(certPath, password);
+                var cert = X509CertificateLoader.LoadPkcs12FromFile(certPath, password);
                 var sha1 = SHA1.Create();
                 var sha256 = SHA256.Create();
 
