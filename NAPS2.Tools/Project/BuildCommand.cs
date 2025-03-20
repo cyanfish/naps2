@@ -8,7 +8,7 @@ public class BuildCommand : ICommand<BuildOptions>
     {
         if (opts.BuildType?.ToLowerInvariant() == "sdk")
         {
-            Cli.Run("dotnet", "publish NAPS2.Sdk.Worker/NAPS2.Sdk.Worker.Build.csproj -c Release");
+            Cli.Run("dotnet", "publish NAPS2.Sdk.Worker.Build/NAPS2.Sdk.Worker.Build.csproj -c Release");
         }
         foreach (var target in TargetsHelper.EnumerateBuildTargets(opts.BuildType))
         {

@@ -354,7 +354,7 @@
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
   </Project>
-  <Project Path="NAPS2.Sdk.Worker\NAPS2.Sdk.Worker.Build.csproj" Type="Classic C#">
+  <Project Path="NAPS2.Sdk.Worker.Build\NAPS2.Sdk.Worker.Build.csproj" Type="Classic C#">
     <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
@@ -368,7 +368,7 @@
     <Configuration Solution="Release-Mac|Any CPU" Project="Release|Any CPU|NoBuild" />
     <Configuration Solution="Release-Windows|Any CPU" Project="Release|Any CPU|NoBuild" />
   </Project>
-  <Project Path="NAPS2.Sdk.Worker\NAPS2.Sdk.Worker.Win32.csproj" Type="Classic C#">
+  <Project Path="NAPS2.Sdk.Worker.Win32\NAPS2.Sdk.Worker.Win32.csproj" Type="Classic C#">
     <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="DebugLang|Any CPU" Project="Debug|Any CPU|NoBuild" />
     <Configuration Solution="Release-Msi|Any CPU" Project="Release|Any CPU|NoBuild" />
