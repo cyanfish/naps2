@@ -48,7 +48,7 @@ internal class OutlookNewEmailProvider : MimeEmailProvider
                 // Add header so that Outlook opens the message as a draft to edit/send
                 message.Headers.Add("X-Unsent", "1");
 
-                emlPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetTempFileName() + ".eml");
+                emlPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ".eml");
                 await message.WriteToAsync(emlPath, progress.CancelToken);
 
                 var process =
