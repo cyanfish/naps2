@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       matrix:
-        os: [windows-2022, ubuntu-24.04, macos-14]
+        os: [windows-2022, ubuntu-24.04, macos-15]
     steps:
     - name: Install OS dependencies
       if: matrix.os == 'ubuntu-24.04'
@@ -24,5 +24,5 @@ jobs:
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
     - name: Test
-      if: matrix.os != 'macos-14'
+      if: matrix.os != 'macos-15'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui
