@@ -13,7 +13,7 @@ internal static class Paths
             if (_root == null)
             {
                 _root = Assembly.GetExecutingAssembly().Location;
-                while (!File.Exists(Path.Combine(_root, "NAPS2.slnx")))
+                while (!File.Exists(Path.Combine(_root, "NAPS2.sln")))
                 {
                     _root = Path.GetDirectoryName(_root);
                     if (_root == null)
