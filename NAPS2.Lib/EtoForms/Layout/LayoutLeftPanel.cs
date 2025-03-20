@@ -36,14 +36,17 @@ public class LayoutLeftPanel : LayoutContainer
         var w = MeasureWidth(context, bounds, _left);
         if (Splitter.Position < w)
         {
-            _left.Width = Splitter.Position = w;
+            EtoPlatform.Current.SetSplitterPosition(Splitter, w);
+            _left.Width = w;
         }
         Splitter.Panel1MinimumSize = w;
         Splitter.Panel2MinimumSize = (int) (100 * context.Scale);
 
         if (!_isInitialized)
         {
-            _left.Width = Splitter.Position = Math.Max(_widthGetter(), Splitter.Panel1MinimumSize);
+            int initialWidth = Math.Max(_widthGetter(), w);
+            EtoPlatform.Current.SetSplitterPosition(Splitter, initialWidth);
+            _left.Width = initialWidth;
             Splitter.PositionChanged += (_, _) =>
             {
                 if (_left.Width != Splitter.Position)

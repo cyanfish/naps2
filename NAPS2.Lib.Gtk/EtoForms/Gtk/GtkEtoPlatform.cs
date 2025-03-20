@@ -121,7 +121,7 @@ public class GtkEtoPlatform : EtoPlatform
         }
         widget.ShowAll();
     }
-    
+
     public override Control? MaybeCreateOverlayContainer()
     {
         var overlay = new GTK.Overlay();
@@ -336,5 +336,27 @@ public class GtkEtoPlatform : EtoPlatform
             eventHandler.Invoke(sender, newArgs);
             args.RetVal = newArgs.Handled;
         };
+    }
+
+    public override void SetSplitterPosition(Splitter splitter, int pos)
+    {
+        if (splitter.Width == 1)
+        {
+            // TODO: Fix Eto so that SplitterHandler.EnsurePosition doesn't ignore the specified position
+            var paned = (GTK.Paned) splitter.ControlObject;
+            void OnDrawn(object o, EventArgs drawnArgs)
+            {
+                if (splitter.Width != 1)
+                {
+                    paned.Drawn -= OnDrawn;
+                    splitter.Position = pos;
+                }
+            }
+            paned.Drawn += OnDrawn;
+        }
+        else
+        {
+            splitter.Position = pos;
+        }
     }
 }

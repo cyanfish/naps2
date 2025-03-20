@@ -175,4 +175,6 @@ public abstract class EtoPlatform
     public virtual Control? MaybeCreateOverlayContainer() => null;
 
     public virtual Control? GetOverlayContainer(Control? container, bool inOverlay) => null;
+    
+    public virtual void SetSplitterPosition(Splitter splitter, int pos) => splitter.Position = pos;
 }
