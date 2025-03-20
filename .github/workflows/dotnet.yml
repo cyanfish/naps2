@@ -19,6 +19,7 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Install workloads
+      if: matrix.os == 'macos-15'
       run: dotnet workload install macos
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
