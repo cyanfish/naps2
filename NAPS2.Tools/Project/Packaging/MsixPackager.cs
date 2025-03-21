@@ -6,30 +6,30 @@ public static class MsixPackager
 {
     public static void PackageMsix(Func<PackageInfo> pkgInfoFunc, bool noSign)
     {
-        // Output.Verbose("Building binaries");
-        // Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
-        // Cli.Run("dotnet", "clean NAPS2.App.WinForms -c Release");
-        // Cli.Run("dotnet", "clean NAPS2.App.Console -c Release");
-        // Cli.Run("dotnet",
-        //     "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        // Cli.Run("dotnet",
-        //     "publish NAPS2.App.WinForms -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        // Cli.Run("dotnet",
-        //     "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+        Output.Verbose("Building binaries");
+        Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
+        Cli.Run("dotnet", "clean NAPS2.App.WinForms -c Release");
+        Cli.Run("dotnet", "clean NAPS2.App.Console -c Release");
+        Cli.Run("dotnet",
+            "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+        Cli.Run("dotnet",
+            "publish NAPS2.App.WinForms -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+        Cli.Run("dotnet",
+            "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
 
         var msixPath = pkgInfo.GetPath("msix");
-        var msixTestPath = msixPath.Replace(".msix", "-test.msix");
+        var msixStorePath = msixPath.Replace(".msix", "-store.msix");
         Output.Info($"Packaging msix installer: {msixPath}");
 
+        if (File.Exists(msixStorePath))
+        {
+            File.Delete(msixStorePath);
+        }
         if (File.Exists(msixPath))
         {
             File.Delete(msixPath);
-        }
-        if (File.Exists(msixTestPath))
-        {
-            File.Delete(msixTestPath);
         }
 
         var manifestPath = Path.Combine(Paths.SetupObj, "appxmanifest.xml");
@@ -62,7 +62,7 @@ public static class MsixPackager
         Cli.Run(makePri,
             $"new /pr \"{msixConfig}\" /cf \"{msixConfig}\\priconfig.xml\" /o /of \"{resourcesPriPath}\" /mn \"{manifestPath}\"");
 
-        Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixPath}\"");
+        Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixStorePath}\"");
 
         File.WriteAllText(manifestPath, File.ReadAllText(manifestPath)
             .Replace(
@@ -75,12 +75,12 @@ public static class MsixPackager
                 "<Resource Language=\"en-us\" />",
                 GetSupportedLanguages(pkgInfo)));
 
-        Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixTestPath}\"");
+        Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixPath}\"");
 
         if (!noSign)
         {
-            Output.Verbose("Signing test installer");
-            WindowsSigning.SignFile(msixTestPath);
+            Output.Verbose("Signing installer");
+            WindowsSigning.SignFile(msixPath);
         }
 
         Output.OperationEnd($"Packaged msix installer: {msixPath}");
