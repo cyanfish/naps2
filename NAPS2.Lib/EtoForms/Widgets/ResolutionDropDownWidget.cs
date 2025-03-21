@@ -25,6 +25,12 @@ public class ResolutionDropDownWidget : DropDownWidget<ResolutionDropDownWidget.
         set
         {
             _visiblePresets = value.ToList();
+            if (_lastResolutionItem != null &&
+                (_lastResolutionItem.Custom && _visiblePresets.Contains(_lastResolutionItem.Dpi) ||
+                 !_lastResolutionItem.Custom && !_visiblePresets.Contains(_lastResolutionItem.Dpi)))
+            {
+                SelectedItem = new ResolutionListItem(_lastResolutionItem.Dpi, !_lastResolutionItem.Custom);
+            }
             RegenerateItems();
         }
     }
@@ -125,12 +131,12 @@ public class ResolutionDropDownWidget : DropDownWidget<ResolutionDropDownWidget.
         if (VisiblePresets.Contains(dpi))
         {
             _customResolution = null;
-            SelectedItem = new ResolutionListItem(dpi, false);
+            SelectedItem = _lastResolutionItem = new ResolutionListItem(dpi, false);
         }
         else
         {
             _customResolution = new ResolutionListItem(dpi, true);
-            SelectedItem = _customResolution;
+            SelectedItem = _lastResolutionItem = _customResolution;
         }
     }
 }
