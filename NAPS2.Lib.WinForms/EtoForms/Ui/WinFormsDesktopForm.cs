@@ -343,6 +343,7 @@ public class WinFormsDesktopForm : DesktopForm
             FirstText = command1.ToolBarText,
             SecondText = command2.ToolBarText
         };
+        item.AccessibleName = string.Join(" ", command1.ToolBarText, command2.ToolBarText);
         EtoPlatform.Current.AttachDpiDependency(this, scale =>
         {
             item.FirstImage = ((ActionCommand) command1).GetIconImage(scale).ToSD();
