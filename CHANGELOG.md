@@ -1,3 +1,6 @@
+Changes in 8.1.1:
+- Fixed an issue with dpi selection 
+
 Changes in 8.1.0:
 - Added the ability to pick a custom resolution
 - Added email provider for "New Outlook"
