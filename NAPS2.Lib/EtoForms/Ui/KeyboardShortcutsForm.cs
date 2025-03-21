@@ -102,7 +102,6 @@ public class KeyboardShortcutsForm : EtoDialogBase
         _transactionConfig = Config.WithTransaction(_transact);
         _gridView = new()
         {
-            DataStore = Shortcuts,
             Columns =
             {
                 new()
@@ -126,6 +125,12 @@ public class KeyboardShortcutsForm : EtoDialogBase
         _unassign.Click += Unassign_Click;
         _restoreDefaults.Click += RestoreDefaults_Click;
         UpdateUi();
+    }
+
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        _gridView.DataStore = Shortcuts;
     }
 
     protected override void BuildLayout()
