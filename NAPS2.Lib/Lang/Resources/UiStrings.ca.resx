@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Mides</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Resolució personalitzada</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>ppp</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Esperant a TWAIN per a completar...</value>
   </data>
@@ -835,27 +841,30 @@
     <value>No trobeu el vostre escàner? Informeu-vos de les limitacions del NAPS2 en versió Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Dreceres de teclat</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Dreceres de teclat</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Escaneja amb el perfil {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Escaneja amb el perfil per defecte</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
-  </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>Escaneja amb un perfil nou</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Vincula</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Desvincula</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Acció</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Drecera</value>
   </data>
 </root>

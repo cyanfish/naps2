@@ -30,6 +30,9 @@
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
+  <data name="EmailProviderType_OutlookNew" xml:space="preserve">
+    <value>Outlook (new)</value>
+  </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Web Access</value>
   </data>
@@ -83,6 +86,9 @@
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
     <value>US Letter (8.5 × 11 in)</value>
+  </data>
+  <data name="Resolution_Custom" xml:space="preserve">
+    <value>Vlastní...</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Výchozí</value>

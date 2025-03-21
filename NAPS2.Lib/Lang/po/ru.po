@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -33,7 +33,7 @@ msgstr "Меню \"Сканировать\" меняет профиль по у�
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr "Устройство не найдено."
+msgstr "1 устройство найдено."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -59,6 +59,10 @@ msgstr "О программе"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Получение данных..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr ""
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -118,7 +122,7 @@ msgstr "Альтернативное чередование"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Всегда спрашивать"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -459,6 +463,10 @@ msgstr "Другой ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Другой размер страницы"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Другой поворот"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Свой SMTP сервер"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Другой..."
 
@@ -551,6 +560,10 @@ msgstr "Необходимо скачать"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Загрузка..."
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -932,7 +945,7 @@ msgstr "Не выбран сканер."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Устройств не найдено."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1028,6 +1041,10 @@ msgstr "Открыть папку"
 msgid "Operation in Progress"
 msgstr "Операция в процессе"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr "Outlook Web Access"
@@ -1100,7 +1117,7 @@ msgstr "Поля для заполнения"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Порт"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1386,7 +1403,7 @@ msgstr "Выбрать все"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Выбор устройства"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1436,6 +1453,10 @@ msgstr "Общие сканеры можно использовать с дру�
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Резкость"
+
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr ""
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1754,10 +1775,6 @@ msgstr "из {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -59,6 +59,10 @@ msgstr "Quant a"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "S'estan obtenint les dades..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Acció"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -232,7 +236,7 @@ msgstr "Segur que voleu desfer els canvis en {0} imatges?"
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Vincula"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -459,6 +463,10 @@ msgstr "Personalitzat ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Mida personalitzada de la pàgina"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr "Resolució personalitzada"
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Rotació personalitzada"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "SMTP personalitzat"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Personalitzada..."
 
@@ -551,6 +560,10 @@ msgstr "Baixada necessària"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Progrés de la baixada"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr "ppp"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -800,7 +813,7 @@ msgstr "Conserva les imatges entre sessions"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Dreceres de teclat"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -1027,6 +1040,10 @@ msgstr "Obre una carpeta"
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
 msgstr "Operació en progrés"
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr "Outlook (nou)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1340,11 +1357,11 @@ msgstr "Escaneja amb el perfil per defecte"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Escaneja amb un perfil nou"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "Escaneja amb el perfil {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1436,6 +1453,10 @@ msgstr "Els escàners compartits es poden utilitzar des d'altres ordinadors de l
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Nitidesa"
+
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Drecera"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1619,7 +1640,7 @@ msgstr "Carta US (8.5x11 in)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Desvincula"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1754,10 +1775,6 @@ msgstr "de {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

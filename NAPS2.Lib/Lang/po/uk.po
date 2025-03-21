@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -59,6 +59,10 @@ msgstr "Про програму"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Отримання даних..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Дія"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -459,6 +463,10 @@ msgstr "Користувача ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Розмір сторінки користувача"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Ротація користувачем"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Користувацький SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Інший..."
 
@@ -551,6 +560,10 @@ msgstr "Потрібно звантажити"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Поступ звантаження"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -1028,6 +1041,10 @@ msgstr "Відкрити каталог"
 msgid "Operation in Progress"
 msgstr "Виконується операція"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr ""
@@ -1437,6 +1454,10 @@ msgstr "Сканери у спільному доступі можна вико�
 msgid "Sharpen"
 msgstr "Різкість"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Скорочення"
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Показати"
@@ -1753,10 +1774,6 @@ msgstr "із {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
 msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message

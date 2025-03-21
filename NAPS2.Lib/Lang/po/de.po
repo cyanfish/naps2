@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -59,6 +59,10 @@ msgstr "Über"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Datenerfassung..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Aktion"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -459,6 +463,10 @@ msgstr "Benutzerdefiniert ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Benutzerdefinierte Seitengröße"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr "Angepasste Auflösung"
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Benutzerdefinierte Rotation"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Benutzerdefinierter SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Benutzerdefiniert..."
 
@@ -551,6 +560,10 @@ msgstr "Download erforderlich"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Download-Fortschritt"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr "DPI"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -1028,6 +1041,10 @@ msgstr "Ordner öffnen"
 msgid "Operation in Progress"
 msgstr "Verarbeitung läuft"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr "Outlook (neu)"
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr "Outlook im Web"
@@ -1108,7 +1125,7 @@ msgstr "Nachbearbeitung"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr "OCR nach dem Scannen im Voraus ausführen"
+msgstr "OCR nach dem Scannen automatisch starten"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1340,11 +1357,11 @@ msgstr "Mit Standardprofil scannen"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Mit neuem Profil scannen"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "Mit Profil {0} scannen"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1436,6 +1453,10 @@ msgstr "Geteilte Scanner können von anderen Computern im lokalen Netzwerk verwe
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Schärfen"
+
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Tastenkürzel"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1619,7 +1640,7 @@ msgstr "US Letter (8.5x11 Zoll)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Zuweisung aufheben"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1754,10 +1775,6 @@ msgstr "von {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr "{0} ({1})"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

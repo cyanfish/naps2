@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Dimensionet</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Rezolucion i personalizuar</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>Dpi</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Po pret që të përfundojë TWAIN...</value>
   </data>
@@ -835,27 +841,30 @@
     <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Shkurtimet nga tastiera</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Shkurtimet nga tastiera</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Skano me profilin {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Skano me profilin e paracaktuar</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
-  </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>Skano me profilin e ri</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Cakto</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Mos cakto</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Shortcut</value>
   </data>
 </root>

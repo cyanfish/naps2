@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Bosnian\n"
 "Language: bs\n"
@@ -59,6 +59,10 @@ msgstr "O programu"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Pribavljanje podataka..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Radnja"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -232,7 +236,7 @@ msgstr "Sigurni ste da želite vratiti promjene na {0} slike(a)?"
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Dodijeli"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -459,6 +463,10 @@ msgstr "Prilagođeno ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Prilagođene dimenzije stranice"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Prilagođena rotacija"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Prilagođeni SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Prilagođeno..."
 
@@ -551,6 +560,10 @@ msgstr "Preuzimanje je potrebno"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Preuzimanje u toku"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -800,7 +813,7 @@ msgstr "Zadrži slike kroz sesije"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Prečaci tastature"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -1027,6 +1040,10 @@ msgstr "Otvori folder"
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
 msgstr "Radnja u toku"
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1340,11 +1357,11 @@ msgstr "Skeniraj sa zadanim profilom"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Skeniraj s novim profilom"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "Skeniraj s profilom {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1436,6 +1453,10 @@ msgstr "Dijeljeni skeneri mogu se koristiti s drugih računara na lokalnoj mrež
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Izoštri"
+
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Prečac"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1619,7 +1640,7 @@ msgstr "Američko pismo (8,5x11 inča)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Oslobodi"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1754,10 +1775,6 @@ msgstr "od {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

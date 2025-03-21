@@ -19,7 +19,7 @@
     <value>선택된 스캐너의 연결이 끊겼습니다.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>스캔 장비와 연결이 끊어졌습니다.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -79,9 +79,9 @@
     <value>OCR 작업 시간이 초과되었습니다.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>작업 프로세스가 튕겼습니다.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>작업 프로세스가 튕겼습니다. Windows 이벤트 뷰어를 확인하십시오.</value>
   </data>
 </root>

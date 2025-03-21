@@ -379,7 +379,7 @@
     <value>Este disponibilă o actualizare.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>A survenit o eroare la încercarea de autorizare.</value>
+    <value>A apărut o eroare la încercarea de autorizare.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Se încarcă e-mailul ...</value>

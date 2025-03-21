@@ -30,6 +30,9 @@
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
+  <data name="EmailProviderType_OutlookNew" xml:space="preserve">
+    <value>Outlook (i ri)</value>
+  </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Hyrja nga Uebi në Outlook</value>
   </data>
@@ -83,6 +86,9 @@
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
     <value>Letër SHBA (8.5 x 11 inç)</value>
+  </data>
+  <data name="Resolution_Custom" xml:space="preserve">
+    <value>E personalizuar...</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>E paracaktuar</value>

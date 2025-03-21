@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -59,6 +59,10 @@ msgstr "Névjegy"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Adatgyűjtés..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Művelet"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -459,6 +463,10 @@ msgstr "Egyéni ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Egyéni oldalméret"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr "Egyéni felbontás"
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Egyéni forgatás"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Egyéni SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Egyéni..."
 
@@ -551,6 +560,10 @@ msgstr "Letöltés szükséges"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Letöltési folyamat"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr "Dpi"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -1028,6 +1041,10 @@ msgstr "Mappa megnyitása"
 msgid "Operation in Progress"
 msgstr "Művelet folyamatban"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr "Outlook (új)"
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr "Outlook Web Access"
@@ -1437,6 +1454,10 @@ msgstr "A megosztott lapolvasók a helyi hálózat más számítógépeiről is 
 msgid "Sharpen"
 msgstr "Élesítés"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Billentyűparancs"
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Megjelenítés"
@@ -1754,10 +1775,6 @@ msgstr "/ {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr "{0} ({1})"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

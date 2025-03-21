@@ -388,7 +388,7 @@
     <value>OCR nach dem Scannen automatisch starten</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>OCR nach dem Scannen im Voraus ausführen</value>
+    <value>OCR nach dem Scannen automatisch starten</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Weitere Sprachen installieren</value>
@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Abmessungen</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Angepasste Auflösung</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>DPI</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Warte auf TWAIN zur Fertigstellung...</value>
   </data>
@@ -841,21 +847,24 @@
     <value>Tastaturbefehle</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Mit Profil {0} scannen</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Mit Standardprofil scannen</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
-  </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>Mit neuem Profil scannen</value>
   </data>
   <data name="Assign" xml:space="preserve">
     <value>Zuweisen</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Zuweisung aufheben</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Tastenkürzel</value>
   </data>
 </root>

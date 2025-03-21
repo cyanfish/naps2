@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -59,6 +59,10 @@ msgstr "Rreth"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Po merr të dhënat..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr ""
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -232,7 +236,7 @@ msgstr "A je i sigurt se dëshiron të zhbësh ndryshimet e tua te {0} imazh(e)?
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Cakto"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -459,6 +463,10 @@ msgstr "E personalizuar ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Madhësi e personalizuar e faqes"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr "Rezolucion i personalizuar"
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Rrotullim i personalizuar"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "SMTP e personalizuar"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "E personalizuar..."
 
@@ -551,6 +560,10 @@ msgstr "Nevojitet shkarkim"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Progresi i shkarkimit"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr "Dpi"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -800,7 +813,7 @@ msgstr "Mbaji imazhet ndërmjet sesioneve"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Shkurtimet nga tastiera"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -1027,6 +1040,10 @@ msgstr "Hap Dosjen"
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
 msgstr "Veprimi në progres"
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr "Outlook (i ri)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1340,11 +1357,11 @@ msgstr "Skano me profilin e paracaktuar"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Skano me profilin e ri"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "Skano me profilin {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1436,6 +1453,10 @@ msgstr "Skanerat e disponueshëm në rrjet mund të përdoren nga kompjuterat e 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Thekso"
+
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr ""
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1619,7 +1640,7 @@ msgstr "Letër SHBA (8.5 x 11 inç)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Mos cakto"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1754,10 +1775,6 @@ msgstr "nga {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

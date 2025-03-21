@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Wymiary</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Rozdzielczość niestandardowa</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>dpi</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Oczekiwanie na zakończenie zadania TWAIN...</value>
   </data>
@@ -849,13 +855,16 @@
   <data name="ScanWithNewProfile" xml:space="preserve">
     <value>Skanuj za pomocą nowego profilu</value>
   </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
-  </data>
   <data name="Assign" xml:space="preserve">
     <value>Przypisz</value>
   </data>
   <data name="Unassign" xml:space="preserve">
     <value>Usuń przypisanie</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Czynność</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Skrót</value>
   </data>
 </root>

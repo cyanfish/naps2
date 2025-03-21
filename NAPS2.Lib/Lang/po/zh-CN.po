@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -59,6 +59,10 @@ msgstr "关于"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "正在获取数据..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "操作"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -232,7 +236,7 @@ msgstr "您确定要撤销您对{0} 个图像的修改吗？"
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "分配"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -335,7 +339,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "找不到您的扫描仪吗？了解关于 NAPS Flatpak 的限制。"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -459,6 +463,10 @@ msgstr "自定义 ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "自定义纸张大小"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "自定义旋转"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "自定义 SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "自定义..."
 
@@ -551,6 +560,10 @@ msgstr "需要下载"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "下载进度"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -800,7 +813,7 @@ msgstr "在整个会话期间保留图像"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "键盘快捷键"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -1027,6 +1040,10 @@ msgstr "打开文件夹"
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
 msgstr "正在进行操作"
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1340,11 +1357,11 @@ msgstr "使用默认配置文件扫描"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "使用新配置文件扫描"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "使用配置文件{0}扫描"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1437,6 +1454,10 @@ msgstr "共享的扫描仪可以通过在其他计算机的 NAPS2 配置中选�
 msgid "Sharpen"
 msgstr "锐化"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "快捷键"
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "显示"
@@ -1455,7 +1476,7 @@ msgstr "显示页码"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "侧边栏"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1619,7 +1640,7 @@ msgstr "US Legal (8.5x14 英寸)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "取消分配"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1754,10 +1775,6 @@ msgstr "/ {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

@@ -190,7 +190,7 @@
     <value>من {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>حدث خطأ غير معروف أثناء مسح الدفعة.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>الدفعات تم إلغائها.</value>

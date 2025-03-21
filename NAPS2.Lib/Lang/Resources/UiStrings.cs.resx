@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Rozměry</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Custom Resolution</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>Dpi</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Čekání na dokončení TWAIN...</value>
   </data>
@@ -835,27 +841,30 @@
     <value>Nemůžete najít skener? Přečtěte si o omezeních Flatpaku NAPS2.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Klávesové zkratky</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Klávesové zkratky</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Skenovat pomocí profilu {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Skenovat pomocí výchozího profilu</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
-  </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>Skenovat pomocí nového profilu</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Přiřadit</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Zrušit přiřazení</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Akce</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Zkratka</value>
   </data>
 </root>

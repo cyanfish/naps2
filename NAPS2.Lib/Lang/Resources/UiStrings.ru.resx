@@ -355,7 +355,7 @@
     <value>Выбрать источник</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Выбор устройства</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Запустить в фоновом режиме</value>
@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Размеры</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Custom Resolution</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>Dpi</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Ожидание завершения работы TWAIN...</value>
   </data>
@@ -805,7 +811,7 @@
     <value>IP/Host</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>Порт</value>
   </data>
   <data name="Connect" xml:space="preserve">
     <value>Connect</value>
@@ -814,7 +820,7 @@
     <value>Connection error.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Всегда спрашивать</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
     <value>Searching for devices...</value>
@@ -823,10 +829,10 @@
     <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>Устройство не найдено.</value>
+    <value>1 устройство найдено.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>Устройств не найдено.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar</value>
@@ -849,13 +855,16 @@
   <data name="ScanWithNewProfile" xml:space="preserve">
     <value>Scan With New Profile</value>
   </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
-  </data>
   <data name="Assign" xml:space="preserve">
     <value>Assign</value>
   </data>
   <data name="Unassign" xml:space="preserve">
     <value>Unassign</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Shortcut</value>
   </data>
 </root>

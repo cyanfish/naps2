@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Estonian\n"
 "Language: et\n"
@@ -59,6 +59,10 @@ msgstr "Meist"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Andmeid pärimas..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr ""
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -459,6 +463,10 @@ msgstr ""
 msgid "Custom Page Size"
 msgstr ""
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr ""
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr ""
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr ""
 
@@ -551,6 +560,10 @@ msgstr ""
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Allalaadimise edenemine"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -1028,6 +1041,10 @@ msgstr "Ava kaust"
 msgid "Operation in Progress"
 msgstr "Töö käib"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr ""
@@ -1437,6 +1454,10 @@ msgstr ""
 msgid "Sharpen"
 msgstr "Teravdama"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr ""
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Näita"
@@ -1753,10 +1774,6 @@ msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
 msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message

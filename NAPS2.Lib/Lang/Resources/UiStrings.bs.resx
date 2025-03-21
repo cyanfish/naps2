@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Dimenzije</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Custom Resolution</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>Dpi</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Čekanje TWAIN-a da završi...</value>
   </data>
@@ -835,27 +841,30 @@
     <value>Ne može se pronaći vaš skener? Pročitajte o ograničenjima NAPS2 flatpak-a.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Prečaci tastature</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Prečaci tastature</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Skeniraj s profilom {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Skeniraj sa zadanim profilom</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
-  </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>Skeniraj s novim profilom</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Dodijeli</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Oslobodi</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Radnja</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Prečac</value>
   </data>
 </root>

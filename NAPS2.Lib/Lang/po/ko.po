@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -21,19 +21,19 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "\"저장\"버튼 기본 작동:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "\"스캔\" 버튼 기본 작동:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr ""
+msgstr "\"스캔\" 메뉴로 기본 프로파일 변경하기"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 장치 발견됨."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -59,6 +59,10 @@ msgstr "정보"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "데이터 수집 중..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "동작"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -118,12 +122,12 @@ msgstr "대체 인터리브"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "항상 묻기"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr ""
+msgstr "항상 묻기"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -188,7 +192,7 @@ msgstr "Apple 메일"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "어플리케이션"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -232,7 +236,7 @@ msgstr "{0} 개의 이미지에 대한 변경사항을 취소하시겠습니까?
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "할당"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -335,7 +339,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "스캐너를 찾을 수 없습니까? NAPS2 Flatpak의 한계에 대해서 확인해보세요."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -397,11 +401,11 @@ msgstr "닫기"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "합치기"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "스캔 장비와 연결이 끊어졌습니다."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -413,11 +417,11 @@ msgstr "압축 방법:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "연결"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "연결 오류."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -459,6 +463,10 @@ msgstr "사용자 설정 ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "페이지 크기 사용자 설정"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "사용자 정의 회전"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "사용자 설정 SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "사용자 설정..."
 
@@ -551,6 +560,10 @@ msgstr "다운로드가 필요합니다"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "다운로드 진행 중"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -658,7 +671,7 @@ msgstr "파일 경로:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "화이트밸런스 조정 및 노이즈 제거"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -666,7 +679,7 @@ msgstr "뒤집기"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr ""
+msgstr "양면인쇄의 뒷면 회전하기"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -710,7 +723,7 @@ msgstr "색조 / 채도"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/호스트"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -775,7 +788,7 @@ msgstr "설치 실패."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "인터페이스"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -795,12 +808,12 @@ msgstr "Jpeg 품질"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr ""
+msgstr "세션간 이미지 유지하기"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "키보드 단축키"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -833,7 +846,7 @@ msgstr "OCR 을 이용하여 검색 가능한 PDF 만들기"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "IP 수동 설정"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -869,11 +882,11 @@ msgstr "위로 이동"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "복수의 언어"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "복수의 언어..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -932,7 +945,7 @@ msgstr "선택된 장치가 없습니다.."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "발견된 장치 없음."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1018,7 +1031,7 @@ msgstr "하나 이상의 파일을 다운로드 할 수 없습니다."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr ""
+msgstr "한 개의 NAPS2 창만 허용하기"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1027,6 +1040,10 @@ msgstr "폴더 열기"
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
 msgstr "작업 진행 중"
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1100,7 +1117,7 @@ msgstr "파일명 형식"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "포트"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1108,7 +1125,7 @@ msgstr "후처리"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "스캔 후 자동으로 OCR 실행"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1146,7 +1163,7 @@ msgstr "프로파일"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr ""
+msgstr "선택한 경우 묻기"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
@@ -1178,11 +1195,11 @@ msgstr "복구 진행 중"
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "다시 실행"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "{0} 다시 실행"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1336,15 +1353,15 @@ msgstr "스캔 설정"
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 #: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "기본 프로파일을 사용하여 스캔하기"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "새로운 프로파일을 사용하여 스캔하기"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "{0} 프로파일을 사용하여 스캔하기"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1370,7 +1387,7 @@ msgstr "{0} 페이지 스캔 중..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "장치를 찾는 중..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1386,7 +1403,7 @@ msgstr "전체 선택"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "장치 선택"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1415,7 +1432,7 @@ msgstr "기본값 설정"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
@@ -1437,25 +1454,29 @@ msgstr "공유된 스캐너는 로컬 네트워크에 있는 다른 컴퓨터의
 msgid "Sharpen"
 msgstr "샤픈"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "단축키"
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "보기"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr ""
+msgstr "\"프로파일\" 도구모음 보이기"
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
-msgstr ""
+msgstr "기본 TWAIN 진행과정 보이기"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "페이지 번호 보이기"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "사이드바"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1471,7 +1492,7 @@ msgstr "저장 확인창 건너뛰기"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "나누기"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1579,11 +1600,11 @@ msgstr "선택된 스캐너의 연결이 끊겼습니다."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "작업 프로세스가 튕겼습니다."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "작업 프로세스가 튕겼습니다. Windows 이벤트 뷰어를 확인하십시오."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1619,15 +1640,15 @@ msgstr "US Letter (8.5x11 인치)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "할당 취소"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr ""
+msgstr "실행취소"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "{0} 실행취소"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1755,10 +1776,6 @@ msgstr "중 {0}"
 msgid "x64"
 msgstr "x64"
 
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr ""
-
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
 msgstr "{0} ({1}x{2} {3})"
@@ -1777,7 +1794,7 @@ msgstr "{0} / {1} 파일"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} 장치 발견됨."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

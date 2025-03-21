@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Afrikaans\n"
 "Language: af\n"
@@ -59,6 +59,10 @@ msgstr "Meer omtrent NAPS2"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Data word ingetrek..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr ""
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -459,6 +463,10 @@ msgstr "Eie Groote ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Pasgemaakte Bladsy Grootte"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Pasgemaakte Rotasie"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Pasgemaakte SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Tùy chỉnh..."
 
@@ -551,6 +560,10 @@ msgstr "Aflaai Benodig"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Aflaai Vordering"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -1028,6 +1041,10 @@ msgstr "Maak Vouer oop"
 msgid "Operation in Progress"
 msgstr "Besig met handeling"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr "Outlook Web Toegang"
@@ -1437,6 +1454,10 @@ msgstr "Gedeelde skandeerders kan vanaf ander rekenaars op die plaaslike netwerk
 msgid "Sharpen"
 msgstr "Verskerp"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr ""
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Wys"
@@ -1754,10 +1775,6 @@ msgstr "van {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"

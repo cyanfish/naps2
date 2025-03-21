@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Dimensões</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Custom Resolution</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>Dpi</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Aguardar que o TWAIN termine...</value>
   </data>
@@ -835,27 +841,30 @@
     <value>Não consegue encontrar o seu digitalizador? Leia sobre as limitações do NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Teclas de atalho</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Teclas de atalho</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Digitalizar com o perfil {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Digitalizar com o perfil padrão</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
-  </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>Digitalizar com o novo perfil</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Atribuir</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Remover atribuição</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Ação</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Atalho</value>
   </data>
 </root>

@@ -457,6 +457,10 @@ msgstr ""
 msgid "Custom Page Size"
 msgstr ""
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr ""
@@ -466,6 +470,7 @@ msgid "Custom SMTP"
 msgstr ""
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr ""
 
@@ -548,6 +553,10 @@ msgstr ""
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
+msgstr ""
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
 msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
@@ -1024,6 +1033,10 @@ msgstr ""
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
+msgstr ""
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
 msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message

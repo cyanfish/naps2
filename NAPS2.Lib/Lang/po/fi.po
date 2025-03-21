@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -59,6 +59,10 @@ msgstr "Tietoja"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Haetaan tietoja..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Toiminto"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -232,7 +236,7 @@ msgstr "Haluatko varmasti peruuttaa kuvien ( {0} ) muutokset?"
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Määritä"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -335,7 +339,7 @@ msgstr ""
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "Skanneria ei löytynyt? Lue NAPS2 Flatpakin rajoituksista."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -459,6 +463,10 @@ msgstr "Mukautettu  ({0}x{1} {2})"
 msgid "Custom Page Size"
 msgstr "Mukautettu sivun koko"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Mukautettu kääntäminen"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Mukautettu SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Mukautettu..."
 
@@ -551,6 +560,10 @@ msgstr "Tarvitaan lataus"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Latauksen eteneminen"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -642,7 +655,7 @@ msgstr "Ohita tyhjät sivut"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "Nopea"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -690,7 +703,7 @@ msgstr "Lasi"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -800,7 +813,7 @@ msgstr "Säilytä kuvat eri istunnoissa"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -1027,6 +1040,10 @@ msgstr "Avaa kansio"
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
 msgstr "Toiminto käynnissä"
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1340,11 +1357,11 @@ msgstr "Skannaa Oletusprofiililla"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Skannaa Uudella Profiili"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "Skannaa Profiililla {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1436,6 +1453,10 @@ msgstr "Jaettuja skannereita voidaan käyttää muista paikallisessa verkossa ol
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Terävöitä"
+
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Pikavalinta"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1619,7 +1640,7 @@ msgstr ""
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Poista määritys"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1753,10 +1774,6 @@ msgstr "{0}:sta"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
 msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message

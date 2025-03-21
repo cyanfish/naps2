@@ -19,7 +19,7 @@
     <value>Scanerul selectat este deconectat.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>A fost întreruptă comunicarea cu dispozitivul de scanare.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -79,9 +79,9 @@
     <value>Operațiunea OCR a expirat.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Procesul worker s-a oprit neașteptat.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Procesul worker s-a oprit neașteptat. Verificați Windows event viewer.</value>
   </data>
 </root>

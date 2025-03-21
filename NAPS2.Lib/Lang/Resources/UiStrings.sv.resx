@@ -648,6 +648,12 @@
   <data name="Dimensions" xml:space="preserve">
     <value>Dimensioner</value>
   </data>
+  <data name="ResolutionFormTitle" xml:space="preserve">
+    <value>Custom Resolution</value>
+  </data>
+  <data name="Dpi" xml:space="preserve">
+    <value>Dpi</value>
+  </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Väntar på att TWAIN skall slutföras...</value>
   </data>
@@ -835,27 +841,30 @@
     <value>Hittar du inte din skanner? Läs om begränsningar i NAPS2 som Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Kortkommandon</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Kortkommandon</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Skanna med profilen {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Skanna med standardprofil</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
-  </data>
-  <data name="KeyboardShortcutLabelFormat" xml:space="preserve">
-    <value>{0} ({1})</value>
+    <value>Skanna med ny profil</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Tilldela</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Ta bort tilldelning</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Åtgärd</value>
+  </data>
+  <data name="Shortcut" xml:space="preserve">
+    <value>Genväg</value>
   </data>
 </root>

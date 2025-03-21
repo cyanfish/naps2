@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
 "Language: ar\n"
@@ -59,6 +59,10 @@ msgstr "حول"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "الحصول على البيانات..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr ""
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -168,7 +172,7 @@ msgstr "هناك عملية قيد التنفيذ الآن. هل أنت متأك
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr ""
+msgstr "حدث خطأ غير معروف أثناء مسح الدفعة."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -459,6 +463,10 @@ msgstr "مخصص ({0} × {1} {2})"
 msgid "Custom Page Size"
 msgstr "حجم صفحة مخصص"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr ""
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "استدارة مخصصة"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "بروتوكول نقل البريد البسيط المخصص"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "مخصص..."
 
@@ -551,6 +560,10 @@ msgstr "تحميل اللوازم"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "التقدم التنزيل"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr ""
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -1028,6 +1041,10 @@ msgstr "فتح المجلد"
 msgid "Operation in Progress"
 msgstr "العملية قيد التقدم"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr ""
@@ -1437,6 +1454,10 @@ msgstr ""
 msgid "Sharpen"
 msgstr ""
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr ""
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "إظهار"
@@ -1753,10 +1774,6 @@ msgstr "من {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
 msgstr ""
 
 #: MiscResources.resx$NamedPageSizeFormat$Message

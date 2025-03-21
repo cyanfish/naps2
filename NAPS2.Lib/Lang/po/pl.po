@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-02-02 18:25\n"
+"PO-Revision-Date: 2025-03-21 00:20\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -59,6 +59,10 @@ msgstr "O programie"
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
 msgstr "Pozyskiwanie danych..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "Czynność"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -459,6 +463,10 @@ msgstr "Niestandardowy ({0} x {1} {2})"
 msgid "Custom Page Size"
 msgstr "Niestandardowy rozmiar strony"
 
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr "Rozdzielczość niestandardowa"
+
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
 msgstr "Własne obracanie"
@@ -468,6 +476,7 @@ msgid "Custom SMTP"
 msgstr "Niestandardowy SMTP"
 
 #: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
 msgstr "Niestandardowy..."
 
@@ -551,6 +560,10 @@ msgstr "Potrzebne pobranie"
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Postęp pobierania"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr "dpi"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -1028,6 +1041,10 @@ msgstr "Otwórz folder"
 msgid "Operation in Progress"
 msgstr "Operacja w toku"
 
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr "Outlook (nowy)"
+
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
 msgstr "Outlook Web Access"
@@ -1437,6 +1454,10 @@ msgstr "Udostępnionych skanerów można używać z innych komputerów w sieci l
 msgid "Sharpen"
 msgstr "Wyostrzanie"
 
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "Skrót"
+
 #: UiStrings.resx$Show$Message
 msgid "Show"
 msgstr "Wyświetl"
@@ -1754,10 +1775,6 @@ msgstr "z {0}"
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
 msgstr "x64"
-
-#: UiStrings.resx$KeyboardShortcutLabelFormat$Message
-msgid "{0} ({1})"
-msgstr "{0} ({1})"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
