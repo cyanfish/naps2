@@ -122,7 +122,7 @@ public abstract class EtoPlatform
         clipboard.Image = etoBitmap;
     }
 
-    public virtual void ConfigureDropDown(DropDown dropDown)
+    public virtual void ConfigureDropDown(DropDown dropDown, bool scale)
     {
     }
 

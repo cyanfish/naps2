@@ -371,7 +371,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         WF.Clipboard.SetDataObject(handler.Control, true);
     }
 
-    public override void ConfigureDropDown(DropDown dropDown)
+    public override void ConfigureDropDown(DropDown dropDown, bool scale)
     {
         ((WF.ComboBox) dropDown.ControlObject).DrawMode = WF.DrawMode.Normal;
     }

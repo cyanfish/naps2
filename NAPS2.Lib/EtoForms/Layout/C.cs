@@ -159,10 +159,10 @@ public static class C
 
     public static Label Label(string text) => new() { Text = text };
 
-    public static DropDown DropDown()
+    public static DropDown DropDown(bool scale = true)
     {
         var dropDown = new DropDown();
-        EtoPlatform.Current.ConfigureDropDown(dropDown);
+        EtoPlatform.Current.ConfigureDropDown(dropDown, scale);
         return dropDown;
     }
 

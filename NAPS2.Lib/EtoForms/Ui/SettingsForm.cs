@@ -13,8 +13,8 @@ internal class SettingsForm : EtoDialogBase
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
     private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
-    private readonly EnumDropDownWidget<ScanButtonDefaultAction> _scanButtonDefaultAction = new();
-    private readonly EnumDropDownWidget<SaveButtonDefaultAction> _saveButtonDefaultAction = new();
+    private readonly EnumDropDownWidget<ScanButtonDefaultAction> _scanButtonDefaultAction = new(scale: false);
+    private readonly EnumDropDownWidget<SaveButtonDefaultAction> _saveButtonDefaultAction = new(scale: false);
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
     private readonly CheckBox _keepSession = C.CheckBox(UiStrings.KeepSession);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);

@@ -230,14 +230,17 @@ public class GtkEtoPlatform : EtoPlatform
         gtkLabel.Ellipsize = Pango.EllipsizeMode.End;
     }
 
-    public override void ConfigureDropDown(DropDown dropDown)
+    public override void ConfigureDropDown(DropDown dropDown, bool scale)
     {
-        var native = (GTK.ComboBox) ((GTK.EventBox) dropDown.ToNative()).Child;
-        var cell = native.Cells.OfType<GTK.CellRendererText>().FirstOrDefault()!;
-        // TODO: I should probably test this on more desktop environments
-        // Setting the renderer width to 1 allows the width to be set properly as part of layouting
-        cell.Width = 1;
-        cell.Height = 25;
+        if (scale)
+        {
+            var native = (GTK.ComboBox) ((GTK.EventBox) dropDown.ToNative()).Child;
+            var cell = native.Cells.OfType<GTK.CellRendererText>().FirstOrDefault()!;
+            // TODO: I should probably test this on more desktop environments
+            // Setting the renderer width to 1 allows the width to be set properly as part of layouting
+            cell.Width = 1;
+            cell.Height = 25;
+        }
     }
 
     public override Size GetClientSize(Window window, bool excludeToolbars)

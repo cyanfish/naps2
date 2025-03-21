@@ -13,9 +13,9 @@ public class DropDownWidget<T> where T : notnull
     private T? _userPreferredItem;
     private bool _changingItems;
 
-    public DropDownWidget()
+    public DropDownWidget(bool scale = true)
     {
-        EtoPlatform.Current.ConfigureDropDown(_dropDown);
+        EtoPlatform.Current.ConfigureDropDown(_dropDown, scale);
         _dropDown.SelectedIndexChanged += DropDown_SelectedIndexChanged;
         if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)))
         {
