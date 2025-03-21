@@ -30,7 +30,7 @@ public class ResolutionForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.Dpi),
-            _dpiTextbox,
+            _dpiTextbox.NaturalWidth(EtoPlatform.Current.IsWinForms ? 0 : 250),
             L.Row(
                 C.Filler(),
                 L.OkCancel(
