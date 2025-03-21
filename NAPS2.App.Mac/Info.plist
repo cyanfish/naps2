@@ -9,7 +9,7 @@
     <key>CFBundleIdentifier</key>
     <string>com.naps2.desktop</string>
     <key>CFBundleShortVersionString</key>
-    <string>8.0.3</string>
+    <string>8.1.0</string>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
     <key>CFBundleDevelopmentRegion</key>

@@ -1,3 +1,11 @@
+Changes in 8.1.0:
+- Added the ability to pick a custom resolution
+- Added email provider for "New Outlook"
+- Improved "Keyboard Shortcuts" interface
+- Fixed an issue with shared TWAIN scanners
+- Fixed missing screen reader text for some buttons
+- Fixed excessive Flatpak size
+
 Changes in 8.0b3:
 - Added "Keyboard Shortcuts" settings
 - Added "--waitscan" and "--firstnow" console options
