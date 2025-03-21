@@ -31,9 +31,6 @@ public class SetVersionCommand : ICommand<SetVersionOptions>
             $@"<key>CFBundleShortVersionString</key>{Environment.NewLine}    <string>.*</string>",
             $"<key>CFBundleShortVersionString</key>{Environment.NewLine}    <string>{versionNumber}</string>");
 
-        var appxManifest = Path.Combine(Paths.SetupWindows, "msix", "appxmanifest.xml");
-        ReplaceInFile(appxManifest, @" Version=""[0-9]+.[0-9]+.[0-9]+.[0-9]+""", @$" Version=""{versionNumber}.0""");
-
         Output.OperationEnd("Version set.");
         return 0;
     }

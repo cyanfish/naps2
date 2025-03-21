@@ -6,7 +6,7 @@
         xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
         xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
-    <Identity Name="NAPS2Software.NAPS2-NotAnotherPDFScanner" Version="8.0.3.0"
+    <Identity Name="NAPS2Software.NAPS2-NotAnotherPDFScanner" Version="1.0.0.0"
               Publisher="CN=1D624E39-8523-4AAC-B3B6-1452E653A003" ProcessorArchitecture="x64" />
     <Properties>
         <DisplayName>NAPS2 - Not Another PDF Scanner</DisplayName>

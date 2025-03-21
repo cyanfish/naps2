@@ -6,16 +6,16 @@ public static class MsixPackager
 {
     public static void PackageMsix(Func<PackageInfo> pkgInfoFunc, bool noSign)
     {
-        Output.Verbose("Building binaries");
-        Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.WinForms -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.Console -c Release");
-        Cli.Run("dotnet",
-            "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        Cli.Run("dotnet",
-            "publish NAPS2.App.WinForms -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        Cli.Run("dotnet",
-            "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+        // Output.Verbose("Building binaries");
+        // Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
+        // Cli.Run("dotnet", "clean NAPS2.App.WinForms -c Release");
+        // Cli.Run("dotnet", "clean NAPS2.App.Console -c Release");
+        // Cli.Run("dotnet",
+        //     "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+        // Cli.Run("dotnet",
+        //     "publish NAPS2.App.WinForms -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+        // Cli.Run("dotnet",
+        //     "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
 
@@ -65,6 +65,9 @@ public static class MsixPackager
         Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixPath}\"");
 
         File.WriteAllText(manifestPath, File.ReadAllText(manifestPath)
+            .Replace(
+                "Version=\"1.0.0.0\"",
+                $"Version=\"{pkgInfo.VersionNumber}.0\"")
             .Replace(
                 "CN=1D624E39-8523-4AAC-B3B6-1452E653A003",
                 N2Config.WindowsIdentity)
