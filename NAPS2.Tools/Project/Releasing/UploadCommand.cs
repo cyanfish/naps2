@@ -180,7 +180,7 @@ public class UploadCommand : ICommand<UploadOptions>
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         await httpClient.PutAsync(
-            $"https://sourceforge.net/projects/naps2/files/{version}/naps2-{version}-win.exe",
+            $"https://sourceforge.net/projects/naps2/files/{version}/naps2-{version}-win-x64.exe",
             new FormUrlEncodedContent([
                 new("default", "windows"),
                 new("default", "android"),
