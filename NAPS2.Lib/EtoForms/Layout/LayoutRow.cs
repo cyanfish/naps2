@@ -9,7 +9,8 @@ public class LayoutRow : LayoutLine
     }
 
     public LayoutRow(LayoutRow original, Padding? padding = null, int? spacing = null, int? spacingAfter = null,
-        bool? scale = null, bool? aligned = null, LayoutVisibility? visibility = null)
+        bool? scale = null, bool? aligned = null, LayoutAlignment? alignment = null,
+        LayoutVisibility? visibility = null)
         : base(original.Children)
     {
         Padding = padding ?? original.Padding;
@@ -17,6 +18,7 @@ public class LayoutRow : LayoutLine
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
         Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;
+        Alignment = alignment ?? original.Alignment;
         Visibility = visibility ?? original.Visibility;
         Width = original.Width;
         Height = original.Height;

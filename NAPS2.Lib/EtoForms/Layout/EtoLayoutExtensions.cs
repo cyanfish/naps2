@@ -79,6 +79,30 @@ public static class EtoLayoutExtensions
     public static LayoutControl Align(this Control control, LayoutAlignment alignment) =>
         new LayoutControl(control, alignment: alignment);
 
+    public static LayoutColumn AlignCenter(this LayoutColumn column) =>
+        new LayoutColumn(column, alignment: LayoutAlignment.Center);
+
+    public static LayoutColumn AlignLeading(this LayoutColumn column) =>
+        new LayoutColumn(column, alignment: LayoutAlignment.Leading);
+
+    public static LayoutColumn AlignTrailing(this LayoutColumn column) =>
+        new LayoutColumn(column, alignment: LayoutAlignment.Trailing);
+
+    public static LayoutColumn Align(this LayoutColumn column, LayoutAlignment alignment) =>
+        new LayoutColumn(column, alignment: alignment);
+
+    public static LayoutRow AlignCenter(this LayoutRow row) =>
+        new LayoutRow(row, alignment: LayoutAlignment.Center);
+
+    public static LayoutRow AlignLeading(this LayoutRow row) =>
+        new LayoutRow(row, alignment: LayoutAlignment.Leading);
+
+    public static LayoutRow AlignTrailing(this LayoutRow row) =>
+        new LayoutRow(row, alignment: LayoutAlignment.Trailing);
+
+    public static LayoutRow Align(this LayoutRow row, LayoutAlignment alignment) =>
+        new LayoutRow(row, alignment: alignment);
+
     public static LayoutControl Padding(this Control control, Padding padding) =>
         new LayoutControl(control, padding: padding);
 
