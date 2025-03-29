@@ -19,12 +19,12 @@ public class MessageBoxErrorOutput : ErrorOutput
             MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxType.Error));
     }
 
-    public override void DisplayError(string errorMessage, string details, string? link = null)
+    public override void DisplayError(string errorMessage, string details)
     {
-        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, details, link));
+        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, details));
     }
 
-    public override void DisplayError(string errorMessage, Exception exception, string? link = null)
+    public override void DisplayError(string errorMessage, Exception exception)
     {
         // If the error is wrapped in ScanDriverUnknownException, we only need to display the inner exception
         var displayException =
@@ -33,14 +33,13 @@ public class MessageBoxErrorOutput : ErrorOutput
                 : exception;
         // Note we don't want to use the ToStringDemystified() helper
         // https://github.com/benaadams/Ben.Demystifier/issues/85
-        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, displayException.Demystify().ToString(), link));
+        Invoker.Current.Invoke(() => ShowErrorWithDetails(errorMessage, displayException.Demystify().ToString()));
     }
 
-    private void ShowErrorWithDetails(string errorMessage, string details, string? link = null)
+    private void ShowErrorWithDetails(string errorMessage, string details)
     {
         var form = _formFactory.Create<ErrorForm>();
         form.ErrorMessage = errorMessage;
-        form.Link = link;
         form.Details = details;
         form.ShowModal();
     }

@@ -17,13 +17,13 @@ public class ConsoleErrorOutput : ErrorOutput
         _output.Writer.WriteLine(errorMessage);
     }
 
-    public override void DisplayError(string errorMessage, string details, string? link = null)
+    public override void DisplayError(string errorMessage, string details)
     {
-        DisplayError(errorMessage + (link == null ? "" : " " + link));
+        DisplayError(errorMessage);
     }
 
-    public override void DisplayError(string errorMessage, Exception exception, string? link = null)
+    public override void DisplayError(string errorMessage, Exception exception)
     {
-        DisplayError(errorMessage + (link == null ? "" : " " + link));
+        DisplayError(errorMessage);
     }
 }
