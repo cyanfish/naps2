@@ -7,6 +7,7 @@ public class ErrorForm : EtoDialogBase
 {
     private readonly ImageView _image = new();
     private readonly Label _message = new();
+    private LinkButton? _link;
     private readonly TextArea _details = new() { ReadOnly = true };
     private readonly LayoutVisibility _detailsVisibility = new(false);
 
@@ -26,7 +27,10 @@ public class ErrorForm : EtoDialogBase
         LayoutController.Content = L.Column(
             L.Row(
                 _image.AlignCenter().Padding(right: 5),
-                _message.DynamicWrap(350).NaturalWidth(350).AlignCenter().Scale()
+                L.Column(
+                    _message.DynamicWrap(350).NaturalWidth(350),
+                    _link ?? C.None()
+                ).AlignCenter().Scale()
             ),
             L.Row(
                 C.Link(UiStrings.TechnicalDetails, ToggleDetails).AlignCenter(),
@@ -47,6 +51,12 @@ public class ErrorForm : EtoDialogBase
     {
         get => _message.Text;
         set => _message.Text = value;
+    }
+
+    public string? Link
+    {
+        get => _link?.Text;
+        set => _link = value == null ? null : C.UrlLink(value);
     }
 
     public string Details

@@ -7,7 +7,7 @@ public abstract class ErrorOutput
 {
     public abstract void DisplayError(string errorMessage);
 
-    public abstract void DisplayError(string errorMessage, string details);
+    public abstract void DisplayError(string errorMessage, string details, string? link = null);
 
-    public abstract void DisplayError(string errorMessage, Exception exception);
+    public abstract void DisplayError(string errorMessage, Exception exception, string? link = null);
 }
