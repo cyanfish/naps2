@@ -1,3 +1,9 @@
+Changes in 8.1.2:
+- Added "Apply to all selected" for Split action
+- Fixed "unsaved changes" prompt after auto saving
+- Windows: Fixed OCR errors on some systems
+- Windows: Fixed crash with right-to-left languages 
+
 Changes in 8.1.1:
 - Fixed an issue with dpi selection 
 
