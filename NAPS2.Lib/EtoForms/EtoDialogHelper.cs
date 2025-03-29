@@ -1,4 +1,5 @@
 ﻿using Eto.Forms;
+using NAPS2.ImportExport;
 
 namespace NAPS2.EtoForms;
 
@@ -86,7 +87,7 @@ public class EtoDialogHelper : DialogHelper
         {
             return _addExt ? $".{ext}" : null;
         }
-        return defaultPath;
+        return Placeholders.NonNumeric.Substitute(defaultPath);
     }
 
     private void SetDir(SaveFileDialog dialog, string? defaultPath)
@@ -100,7 +101,7 @@ public class EtoDialogHelper : DialogHelper
         else
         {
             path = Path.IsPathRooted(defaultPath)
-                ? Path.GetDirectoryName(defaultPath)
+                ? Path.GetDirectoryName(Placeholders.NonNumeric.Substitute(defaultPath))
                 : null;
         }
         if (path != null)

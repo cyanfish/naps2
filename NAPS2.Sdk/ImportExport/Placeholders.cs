@@ -27,17 +27,22 @@ internal abstract class Placeholders
     /// Substitutes all the standard placeholders. For example, "$(YYYY)-$(MM)-$(DD) $(hh):$(mm):$(ss)" is substituted with the current date and time. Substitutes environment variables. Handles auto-numbering for multiple files,
     /// using the numeric placeholders ("$(n)", "$(nn)", "$(nnn)", or "$(nnnn)") if specified; otherwise, the number is appended to the file name.
     /// </summary>
-    public static DefaultPlaceholders All => new DefaultPlaceholders();
+    public static DefaultPlaceholders All => new();
+
+    /// <summary>
+    /// Substitutes all the standard placeholders. For example, "$(YYYY)-$(MM)-$(DD) $(hh):$(mm):$(ss)" is substituted with the current date and time. Substitutes environment variables.
+    /// </summary>
+    public static DefaultPlaceholders NonNumeric => new(includeNumeric: false);
 
     /// <summary>
     /// Substitutes environment variables in file names. Not recommended if you may be saving multiple files.
     /// </summary>
-    public static EnvironmentPlaceholders Env => new EnvironmentPlaceholders();
+    public static EnvironmentPlaceholders Env => new();
 
     /// <summary>
     /// Does not make any changes to the file name. Not recommended if you may be saving multiple files.
     /// </summary>
-    public static StubPlaceholders None => new StubPlaceholders();
+    public static StubPlaceholders None => new();
 
     /// <summary>
     /// Performs substitutions on the given file path.
@@ -70,7 +75,7 @@ internal abstract class Placeholders
     public class DefaultPlaceholders : Placeholders
     {
         private static readonly Dictionary<string, Func<DateTime, string>> Replacements =
-            new Dictionary<string, Func<DateTime, string>>
+            new()
             {
                 { YEAR_4_DIGITS, dateTime => dateTime.ToString("yyyy") },
                 { YEAR_2_DIGITS, dateTime => dateTime.ToString("yy") },
@@ -81,13 +86,15 @@ internal abstract class Placeholders
                 { SECOND_2_DIGITS, dateTime => dateTime.ToString("ss") },
             };
 
-        private static readonly Regex NumberPlaceholderPattern = new Regex(@"\$\(n+\)");
+        private static readonly Regex NumberPlaceholderPattern = new(@"\$\(n+\)");
 
         private readonly DateTime? _dateTimeOverride;
+        private readonly bool _includeNumeric;
 
-        public DefaultPlaceholders(DateTime? dateTimeOverride = null)
+        public DefaultPlaceholders(DateTime? dateTimeOverride = null, bool includeNumeric = true)
         {
             _dateTimeOverride = dateTimeOverride;
+            _includeNumeric = includeNumeric;
         }
 
         /// <summary>
@@ -95,7 +102,7 @@ internal abstract class Placeholders
         /// </summary>
         /// <param name="dateTime">The date and time to use.</param>
         /// <returns>The new DefaultPlaceholders object.</returns>
-        public DefaultPlaceholders WithDate(DateTime dateTime) => new DefaultPlaceholders(dateTime);
+        public DefaultPlaceholders WithDate(DateTime dateTime) => new(dateTime, _includeNumeric);
 
         [return: NotNullIfNotNull("filePath")]
         public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
@@ -112,17 +119,21 @@ internal abstract class Placeholders
             // Most placeholders don't need a special case
             result = Replacements.Aggregate(result, (current, ph) => current.Replace(ph.Key, ph.Value(dateTime)));
             // One does, however
-            var match = NumberPlaceholderPattern.Match(result);
-            if (match.Success)
+            if (_includeNumeric)
             {
-                result = NumberPlaceholderPattern.Replace(result, "");
-                result = SubstituteNumber(result, match.Index, match.Length - 3, numberSkip, true);
-            }
-            else if (autoNumberDigits > 0)
-            {
-                result = result.Insert(result.Length - Path.GetExtension(result).Length, ".");
-                result = SubstituteNumber(result, result.Length - Path.GetExtension(result).Length, autoNumberDigits,
-                    numberSkip, incrementIfExists);
+                var match = NumberPlaceholderPattern.Match(result);
+                if (match.Success)
+                {
+                    result = NumberPlaceholderPattern.Replace(result, "");
+                    result = SubstituteNumber(result, match.Index, match.Length - 3, numberSkip, true);
+                }
+                else if (autoNumberDigits > 0)
+                {
+                    result = result.Insert(result.Length - Path.GetExtension(result).Length, ".");
+                    result = SubstituteNumber(result, result.Length - Path.GetExtension(result).Length,
+                        autoNumberDigits,
+                        numberSkip, incrementIfExists);
+                }
             }
 
             return result;
