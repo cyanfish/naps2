@@ -91,7 +91,7 @@ public class CombineForm : ImageFormBase
         // If there's an image after this one, then this is the first image, and the subsequent image is the second.
         // Otherwise, we look for the previous image in the list, which should be considered the first image, and then
         // this image is the second.
-        var nextImage = SelectedImages?.ElementAtOrDefault(1) ??
+        var nextImage = SelectedImages.ElementAtOrDefault(1) ??
                         ImageList.Images.ElementAtOrDefault(ImageList.Images.IndexOf(Image) + 1);
         Image1 = nextImage != null
             ? Image

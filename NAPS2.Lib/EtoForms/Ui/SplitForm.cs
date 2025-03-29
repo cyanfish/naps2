@@ -28,7 +28,8 @@ public class SplitForm : UnaryImageFormBase
     private bool _dragging;
     private SplitOrientation _orientation;
 
-    public SplitForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController, ColorScheme colorScheme) :
+    public SplitForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+        ColorScheme colorScheme) :
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Split;
@@ -72,10 +73,13 @@ public class SplitForm : UnaryImageFormBase
 
     protected override LayoutElement CreateControls()
     {
-        return L.Row(
-            C.Filler(),
-            L.Row(_vSplit, _hSplit),
-            C.Filler()
+        return L.Column(
+            L.Row(
+                C.Filler(),
+                L.Row(_vSplit, _hSplit),
+                C.Filler()
+            ),
+            ApplyToSelectedControl
         );
     }
 
@@ -221,25 +225,34 @@ public class SplitForm : UnaryImageFormBase
             ? new CropTransform(0, 0, (int) Math.Round(_realY), 0, RealImageWidth, RealImageHeight)
             : new CropTransform((int) Math.Round(_realX), 0, 0, 0, RealImageWidth, RealImageHeight);
 
-        var thumb1 = WorkingImage!.Clone()
+        DoSplit(Image, WorkingImage, transform1, transform2);
+        foreach (var image in SelectedImages.Skip(1))
+        {
+            DoSplit(image, null, transform1, transform2);
+        }
+
+        _lastTransform = transform2;
+    }
+
+    private void DoSplit(UiImage originalImage, IMemoryImage? workingImage, CropTransform transform1, CropTransform transform2)
+    {
+        var thumb1 = workingImage?.Clone()
             .PerformAllTransforms([transform1, new ThumbnailTransform(ThumbnailController.RenderSize)]);
-        var thumb2 = WorkingImage.Clone()
+        var thumb2 = workingImage?.Clone()
             .PerformAllTransforms([transform2, new ThumbnailTransform(ThumbnailController.RenderSize)]);
 
         // We keep the second image as the original UiImage reference so that any InsertAfter points come after the
         // pair of images. For example, if I'm in the middle of scanning and I split the most-recently scanned image,
         // the next scanned image should appear at the end of the list, not in between the split images.
-        var oldTransforms = Image.TransformState;
-        var image1 = new UiImage(Image.GetClonedImage());
-        var image2 = Image;
+        var oldTransforms = originalImage.TransformState;
+        var image1 = new UiImage(originalImage.GetClonedImage(), useThumbnail: false);
+        var image2 = originalImage;
         image1.AddTransform(transform1, thumb1);
         image2.AddTransform(transform2, thumb2);
         ImageList.Mutate(new ListMutation<UiImage>.InsertBefore(image1, image2));
         ImageList.AddToSelection(image1);
         ImageList.PushUndoElement(
             new SplitUndoElement(ImageList, image1, image2, oldTransforms, transform1, transform2));
-
-        _lastTransform = transform2;
     }
 
     private enum SplitOrientation

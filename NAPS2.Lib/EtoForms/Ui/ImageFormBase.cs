@@ -25,7 +25,7 @@ public abstract class ImageFormBase : EtoDialogBase
     }
 
     public UiImage Image { get; set; } = null!;
-    public List<UiImage>? SelectedImages { get; set; }
+    public List<UiImage> SelectedImages { get; set; } = null!;
 
     protected UiImageList ImageList { get; }
     protected ThumbnailController ThumbnailController { get; }

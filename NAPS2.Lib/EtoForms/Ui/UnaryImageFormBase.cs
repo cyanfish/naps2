@@ -27,7 +27,7 @@ public abstract class UnaryImageFormBase(
 
     protected override void OnPreLoad(EventArgs e)
     {
-        _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages?.Count);
+        _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages.Count);
         _revert.Click += (_, _) =>
         {
             Revert();
@@ -50,15 +50,15 @@ public abstract class UnaryImageFormBase(
     {
         return L.Column([
             ..Sliders.Select(x => (LayoutElement) x),
-            SelectedImages is { Count: > 1 } ? _applyToSelected : C.None()
+            ApplyToSelectedControl
         ]);
     }
 
+    protected LayoutElement ApplyToSelectedControl => SelectedImages.Count > 1 ? _applyToSelected : C.None();
+
     protected override LayoutElement CreateExtraButtons() => _revert;
 
-    private List<UiImage> ImagesToTransform => SelectedImages != null && _applyToSelected.IsChecked()
-        ? SelectedImages!
-        : [Image];
+    private List<UiImage> ImagesToTransform => _applyToSelected.IsChecked() ? SelectedImages : [Image];
 
     protected override IMemoryImage RenderPreview()
     {

@@ -11,11 +11,11 @@ public class UiImage : IDisposable
     private TransformState? _thumbnailTransformState;
     private bool _saved;
 
-    public UiImage(ProcessedImage image)
+    public UiImage(ProcessedImage image, bool useThumbnail = true)
     {
         _processedImage = image;
         var ppd = _processedImage.PostProcessingData;
-        if (ppd.Thumbnail != null && ppd.ThumbnailTransformState != null)
+        if (useThumbnail && ppd.Thumbnail != null && ppd.ThumbnailTransformState != null)
         {
             _thumbnail = _processedImage.PostProcessingData.Thumbnail;
             _thumbnailTransformState = _processedImage.PostProcessingData.ThumbnailTransformState;
