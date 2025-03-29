@@ -77,9 +77,18 @@ public class PackageCommand : ICommand<PackageOptions>
         AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
         // Special case as we have a 64 bit main app and a 32 bit worker
         AddPlatformFile(pkgInfo, appBuildPath, "_win32", "twaindsm.dll");
+
+        // Include VC++ redistributable files for Tesseract so the user doesn't need to install them separately
+        var vcRedistPath = Path.Combine(Paths.SolutionRoot, "NAPS2.Setup", "lib", "win64", "vcredist");
+        foreach (var file in new DirectoryInfo(vcRedistPath).EnumerateFiles())
+        {
+            pkgInfo.AddFile(new PackageFile(file.DirectoryName!, Path.Combine("lib", "_win64"), file.Name));
+        }
+
         pkgInfo.AddFile(new PackageFile(appBuildPath, "", "appsettings.xml"));
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "LICENSE", "license.txt"));
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "CONTRIBUTORS", "contributors.txt"));
+
         return pkgInfo;
     }
 
