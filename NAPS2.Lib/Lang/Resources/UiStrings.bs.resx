@@ -649,10 +649,10 @@
     <value>Dimenzije</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>Prilagođena rezolucija</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>TPI</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Čekanje TWAIN-a da završi...</value>

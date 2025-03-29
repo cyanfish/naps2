@@ -649,10 +649,10 @@
     <value>Dimensioner</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>Anpassad upplösning</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>DPI</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Väntar på att TWAIN skall slutföras...</value>
@@ -667,10 +667,10 @@
     <value>Maximal kvalitet (stora filer)</value>
   </data>
   <data name="BlankPages" xml:space="preserve">
-    <value>Blanka sidor</value>
+    <value>Tomma sidor</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Undanta blanka sidor</value>
+    <value>Utelämna tomma sidor</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
     <value>Vittröskelvärde:</value>
@@ -688,13 +688,13 @@
     <value>Tillämpa ljus/kontrast efter skanning</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
-    <value>Offset breddbaserad vid justering (WIA)</value>
+    <value>Förskjutningsbredd baserad på justering (WIA)</value>
   </data>
   <data name="StretchToPageSize" xml:space="preserve">
     <value>Anpassa till sidstorlek</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Ändra till sidstorlek </value>
+    <value>Beskär till sidstorlek</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
     <value>Vänd duplexsidor</value>
@@ -706,7 +706,7 @@
     <value>WIA-version:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
-    <value>Twain-implementering:</value>
+    <value>TWAIN-implementering:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Mängdskanning</value>
@@ -865,6 +865,6 @@
     <value>Åtgärd</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
-    <value>Genväg</value>
+    <value>Kortkommando</value>
   </data>
 </root>

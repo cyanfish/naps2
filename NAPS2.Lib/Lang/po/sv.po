@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-03-21 00:20\n"
+"PO-Revision-Date: 2025-03-29 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -323,7 +323,7 @@ msgstr "Svartvitt"
 
 #: UiStrings.resx$BlankPages$Message
 msgid "Blank Pages"
-msgstr "Blanka sidor"
+msgstr "Tomma sidor"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -453,7 +453,7 @@ msgstr "Beskär"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr "Ändra till sidstorlek "
+msgstr "Beskär till sidstorlek"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -465,7 +465,7 @@ msgstr "Anpassad sidstorlek"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr ""
+msgstr "Anpassad upplösning"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
@@ -563,7 +563,7 @@ msgstr "Nedladdningsförlopp"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr ""
+msgstr "DPI"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -651,7 +651,7 @@ msgstr "Exchangeable Image File (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr "Undanta blanka sidor"
+msgstr "Utelämna tomma sidor"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
@@ -1011,7 +1011,7 @@ msgstr "OK"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr "Offset breddbaserad vid justering (WIA)"
+msgstr "Förskjutningsbredd baserad på justering (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
@@ -1043,7 +1043,7 @@ msgstr "Tjänsten körs"
 
 #: SettingsResources.resx$EmailProviderType_OutlookNew$Message
 msgid "Outlook (new)"
-msgstr ""
+msgstr "Outlook (ny)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1456,7 +1456,7 @@ msgstr "Skarpare"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
-msgstr "Genväg"
+msgstr "Kortkommando"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1628,7 +1628,7 @@ msgstr "Verktyg"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr "Twain-implementering:"
+msgstr "TWAIN-implementering:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"

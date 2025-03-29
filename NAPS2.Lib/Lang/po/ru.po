@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-03-21 00:20\n"
+"PO-Revision-Date: 2025-03-29 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -62,7 +62,7 @@ msgstr "Получение данных..."
 
 #: UiStrings.resx$Action$Message
 msgid "Action"
-msgstr ""
+msgstr "Действие"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -236,7 +236,7 @@ msgstr "Вы действительно хотите отменить измен
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Назначить"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -339,7 +339,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "Не удается найти сканер? Читайте об ограничениях NAPS2 Flatpak."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -417,11 +417,11 @@ msgstr "Сжатие:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Подключиться"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Ошибка подключения."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -465,7 +465,7 @@ msgstr "Другой размер страницы"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr ""
+msgstr "Пользовательское разрешение"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
@@ -563,7 +563,7 @@ msgstr "Загрузка..."
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr ""
+msgstr "Dpi"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -723,7 +723,7 @@ msgstr "Оттенок / Насыщенность"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Хост"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -813,7 +813,7 @@ msgstr "Сохранять изображения между сеансами"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Горячие клавиши"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -846,7 +846,7 @@ msgstr "Создать PDF с возможностью поиска текста
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Ручной IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -1043,7 +1043,7 @@ msgstr "Операция в процессе"
 
 #: SettingsResources.resx$EmailProviderType_OutlookNew$Message
 msgid "Outlook (new)"
-msgstr ""
+msgstr "Outlook (новый)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1357,11 +1357,11 @@ msgstr "Сканировать с профилем по умолчанию"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Сканировать с новым профилем"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "Сканировать с профилем {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1387,7 +1387,7 @@ msgstr "Сканирование страницы {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Поиск устройств..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1456,7 +1456,7 @@ msgstr "Резкость"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
-msgstr ""
+msgstr "Горячая клавиша"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1476,7 +1476,7 @@ msgstr "Показывать номера страниц"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "Боковая панель"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1600,11 +1600,11 @@ msgstr "Выбранный сканер отключён."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Рабочий процесс завершился сбоем."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr ""
+msgstr "Рабочий процесс завершился сбоем. Проверьте средство просмотра событий Windows."
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1640,7 +1640,7 @@ msgstr "US Letter (8.5x11 дюймов)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Сбросить"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1794,7 +1794,7 @@ msgstr "{0} / {1} файлов"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "Найдено устройств: {0}."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

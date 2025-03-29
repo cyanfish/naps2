@@ -700,7 +700,7 @@
     <value>Retourner les pages recto-verso</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Retourner le verso des pages duplex</value>
+    <value>Retourner les pages recto-verso</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Version WIA :</value>

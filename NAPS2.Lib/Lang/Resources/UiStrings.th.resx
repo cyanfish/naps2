@@ -58,7 +58,7 @@
     <value>Undo</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>ทำซ้ำ</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
     <value>Undo {0}</value>
@@ -94,7 +94,7 @@
     <value>PDF Settings</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Save Images</value>
+    <value>บันทึกภาพ</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
     <value>Image Settings</value>
@@ -115,7 +115,7 @@
     <value>View</value>
   </data>
   <data name="Crop" xml:space="preserve">
-    <value>Crop</value>
+    <value>ครอบตัด</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
     <value>Brightness / Contrast</value>
@@ -136,19 +136,19 @@
     <value>Reset</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>Rotate</value>
+    <value>หมุน</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
-    <value>Rotate Left</value>
+    <value>หมุนซ้าย</value>
   </data>
   <data name="RotateRight" xml:space="preserve">
-    <value>Rotate Right</value>
+    <value>หมุนขวา</value>
   </data>
   <data name="Flip" xml:space="preserve">
     <value>Flip</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Deskew</value>
+    <value>ปรับให้ตรง</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
     <value>Custom Rotation</value>
@@ -241,19 +241,19 @@
     <value>บันทึก</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>บันทึกทั้งหมด</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
     <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>บันทึกทั้งหมดเป็น PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
     <value>Save Selected as PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>บันทึกทั้งหมดเป็นภาพ</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
     <value>Save Selected as Images</value>
@@ -415,7 +415,7 @@
     <value>Preview</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Next</value>
+    <value>ถัดไป</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
@@ -829,7 +829,7 @@
     <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>พบ 1 อุปกรณ์</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
     <value>No devices found.</value>

@@ -649,10 +649,10 @@
     <value>Dimensões</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>Resolução personalizada</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>PPP</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Aguardar que o TWAIN termine...</value>

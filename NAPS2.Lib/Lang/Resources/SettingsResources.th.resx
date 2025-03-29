@@ -49,7 +49,7 @@
     <value>Center</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Left</value>
+    <value>ซ้าย</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
     <value>Right</value>
@@ -154,7 +154,7 @@
     <value>ดีที่สุด</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>บันทึกทั้งหมด</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
     <value>Save Selected</value>

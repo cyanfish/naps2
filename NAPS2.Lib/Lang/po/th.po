@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-03-21 00:20\n"
+"PO-Revision-Date: 2025-03-29 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Thai\n"
 "Language: th\n"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "พบ 1 อุปกรณ์"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -449,7 +449,7 @@ msgstr ""
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
-msgstr ""
+msgstr "ครอบตัด"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
@@ -506,7 +506,7 @@ msgstr "ลบ"
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
-msgstr ""
+msgstr "ปรับให้ตรง"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
@@ -518,7 +518,7 @@ msgstr ""
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr ""
+msgstr "กำลังปรับให้ตรง..."
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
@@ -829,7 +829,7 @@ msgstr "ภาษา"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr ""
+msgstr "ซ้าย"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
@@ -932,7 +932,7 @@ msgstr ""
 
 #: UiStrings.resx$Next$Message
 msgid "Next"
-msgstr ""
+msgstr "ถัดไป"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
@@ -1195,7 +1195,7 @@ msgstr ""
 
 #: UiStrings.resx$Redo$Message
 msgid "Redo"
-msgstr ""
+msgstr "ทำซ้ำ"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
@@ -1247,15 +1247,15 @@ msgstr ""
 
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
-msgstr ""
+msgstr "หมุน"
 
 #: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
-msgstr ""
+msgstr "หมุนซ้าย"
 
 #: UiStrings.resx$RotateRight$Message
 msgid "Rotate Right"
-msgstr ""
+msgstr "หมุนขวา"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
@@ -1276,20 +1276,20 @@ msgstr "บันทึก"
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "บันทึกทั้งหมด"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "บันทึกทั้งหมดเป็นภาพ"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "บันทึกทั้งหมดเป็น PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
 msgid "Save Images"
-msgstr ""
+msgstr "บันทึกภาพ"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
