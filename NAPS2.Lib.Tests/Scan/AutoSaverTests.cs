@@ -37,7 +37,8 @@ public class AutoSaverTests : ContextualTests
             new PdfExporter(ScanningContext),
             _overwritePrompt,
             _config,
-            ImageContext
+            ImageContext,
+            new UiImageList()
         );
     }
 
