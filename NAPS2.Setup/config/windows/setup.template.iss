@@ -1,8 +1,5 @@
 ; !defs
 
-; Set up for InnoDependencyInstaller
-#define public Dependency_NoExampleSetup
-#include "..\config\windows\CodeDependencies.iss"
 #include "..\config\windows\setup.languages.iss"
 
 #define AppShortName             "NAPS2"
@@ -57,14 +54,6 @@ Filename: "{app}\{#ExeName}"; Flags: nowait postinstall
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-
-; Impl for InnoDependencyInstaller
-[Code]
-function InitializeSetup: Boolean;
-begin
-  Dependency_AddVC2015To2022;
-  Result := True;
-end;
 
 [Files]                              
 ; !files
