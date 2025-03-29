@@ -1,6 +1,7 @@
 Changes in 8.1.2:
 - Added "Apply to all selected" for Split action
 - Fixed "unsaved changes" prompt after auto saving
+- Fixed issues with Placeholders in Default File Path
 - Windows: Fixed OCR errors on some systems
 - Windows: Fixed crash with right-to-left languages 
 
