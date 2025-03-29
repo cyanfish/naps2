@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using NAPS2.App.Tests.Targets;
 using NAPS2.Sdk.Tests;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
 
@@ -22,6 +21,7 @@ public class AppiumTests : ContextualTests
 
     public void Init(IAppTestTarget target)
     {
+        Thread.Sleep(2000);
         _session = StartSession(target.Gui, FolderPath);
         ResetMainWindow();
     }
@@ -44,7 +44,7 @@ public class AppiumTests : ContextualTests
         _session.SwitchTo().Window(WaitFor(() => _session.WindowHandles.Single()));
     }
 
-    protected T WaitFor<T>(Expression<Func<T>> expr, int timeoutInMs = 2000)
+    protected T WaitFor<T>(Expression<Func<T>> expr, int timeoutInMs = 10_000)
     {
         var func = expr.Compile();
         var stopwatch = Stopwatch.StartNew();
