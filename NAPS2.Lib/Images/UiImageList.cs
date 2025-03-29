@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.Threading;
 
 namespace NAPS2.Images;
 
@@ -34,6 +33,10 @@ public class UiImageList
         private set => _selection = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    // The logic around HasUnsavedChanges has to consider a few things:
+    // 1. Has the state of the world changed since the last save operation? For example, images have been moved around.
+    // 2. Are there any individual images that have not been saved? For example, the user might have selected and saved
+    //    only a few images.
     public bool HasUnsavedChanges => _savedState != CurrentState || Images.Any(x => x.HasUnsavedChanges);
 
     public bool CanUndo => _undoStack.CanUndo;
@@ -141,6 +144,8 @@ public class UiImageList
             }
             currentSelection = ListSelection.From(currentSelection.Except(allRemoved));
 
+            // Generally we want to allow the mutation to be undone, but if we're mutating the list as part of undoing
+            // or redoing a previous mutation, then we'll leave the undo stack intact.
             if (updateUndoStack)
             {
                 MaybeAddToUndoStack(before, beforeTransforms, after, afterTransforms);

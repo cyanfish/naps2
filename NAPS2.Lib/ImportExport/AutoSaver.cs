@@ -16,10 +16,11 @@ public class AutoSaver
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly Naps2Config _config;
     private readonly ImageContext _imageContext;
+    private readonly UiImageList _imageList;
 
     public AutoSaver(ErrorOutput errorOutput, DialogHelper dialogHelper,
         OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter,
-        IOverwritePrompt overwritePrompt, Naps2Config config, ImageContext imageContext)
+        IOverwritePrompt overwritePrompt, Naps2Config config, ImageContext imageContext, UiImageList imageList)
     {
         _errorOutput = errorOutput;
         _dialogHelper = dialogHelper;
@@ -29,6 +30,7 @@ public class AutoSaver
         _overwritePrompt = overwritePrompt;
         _config = config;
         _imageContext = imageContext;
+        _imageList = imageList;
     }
 
     public IAsyncEnumerable<ProcessedImage> Save(AutoSaveSettings settings, IAsyncEnumerable<ProcessedImage> images)
@@ -77,17 +79,22 @@ public class AutoSaver
             int i = 0;
             string? firstFileSaved = null;
             var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
-            foreach (var imageList in scans)
+            foreach (var imagesToSave in scans)
             {
                 (bool success, string? filePath) =
-                    await SaveOneFile(settings, placeholders, i++, imageList, scans.Count == 1);
-                if (!success)
+                    await SaveOneFile(settings, placeholders, i++, imagesToSave, scans.Count == 1);
+                if (success)
+                {
+                    // Normally we're supposed to take the CurrentState before the save operation starts, but that
+                    // doesn't really work here since populating the UiImageList happens asynchronously so the images
+                    // we're saving might not be present yet. In practice waiting until after saving will ensure the
+                    // list is populated so that this logic works correctly.
+                    _imageList.MarkSaved(_imageList.CurrentState, imagesToSave);
+                    firstFileSaved ??= filePath;
+                }
+                else
                 {
                     ok = false;
-                }
-                if (success && firstFileSaved == null)
-                {
-                    firstFileSaved = filePath;
                 }
             }
             // TODO: Shouldn't this give duplicate notifications?
