@@ -152,7 +152,8 @@ public class Sidebar
             ).Visible(_onboardingVis),
             L.Column(
                 L.Row(
-                    C.Label(UiStrings.ProfileLabel).Scale().AlignTrailing(),
+                    C.Label(UiStrings.ProfileLabel).AlignTrailing(),
+                    C.Filler(),
                     // On Mac we set an explicit height as for some reason it fixes the button style after hide+show
                     C.Button(EditProfileCommand, ButtonImagePosition.Overlay)
                         .Height(EtoPlatform.Current.IsMac ? 20 : null).Width(30),

@@ -151,7 +151,7 @@ public class DeviceSelectorWidget
                 L.Column(
                     C.Filler(),
                     ShowChooseDevice ? _deviceName.DynamicWrap(300) : _deviceName.Ellipsize().MaxWidth(150),
-                    _deviceDriver,
+                    ShowChooseDevice ? _deviceDriver.DynamicWrap(300) : _deviceDriver.Ellipsize().MaxWidth(150),
                     C.Filler()
                 ).Spacing(5).Visible(_deviceVis).Scale(),
                 // TODO: We can consider a compact choose-device button for the sidebar, but maybe simpler to force

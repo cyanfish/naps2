@@ -150,26 +150,34 @@ public class WinFormsDesktopForm : DesktopForm
         _mainToolStrip.TabStop = true;
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _mainToolStrip.ImageScalingSize = new Size((int) (32 * scale), (int) (32 * scale)));
-        _container.TopToolStripPanel.Controls.Add(_mainToolStrip);
-        _mainToolStrip.ParentChanged += (_, _) =>
-        {
-            _toolbarFormatter.RelayoutToolbar(_mainToolStrip, EtoPlatform.Current.GetScaleFactor(this));
-            LayoutController.Invalidate();
-        };
 
         _profilesToolStrip.ShowItemToolTips = false;
         _profilesToolStrip.TabStop = true;
         _profilesToolStrip.Location = new Point(0, 1000);
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _profilesToolStrip.ImageScalingSize = new Size((int) (16 * scale), (int) (16 * scale)));
-        PlaceProfilesToolbar();
-        _profilesToolStrip.ParentChanged += (_, _) => LayoutController.Invalidate();
 
         foreach (var panel in _container.Controls.OfType<WF.ToolStripPanel>())
         {
             // Allow tabbing through the toolbar for accessibility
             WinFormsHacks.SetControlStyle(panel, WF.ControlStyles.Selectable, true);
         }
+
+        // We defer this to the Load event because otherwise with RTL languages we get a very weird crash (.NET bug not
+        // preset with .NET framework). Ideally I could file an issue but it's very hard to get a minimum reproducible
+        // test case.
+        // See https://github.com/cyanfish/naps2/issues/586
+        Load += (_, _) =>
+        {
+            _container.TopToolStripPanel.Controls.Add(_mainToolStrip);
+            _mainToolStrip.ParentChanged += (_, _) =>
+            {
+                _toolbarFormatter.RelayoutToolbar(_mainToolStrip, EtoPlatform.Current.GetScaleFactor(this));
+                LayoutController.Invalidate();
+            };
+            PlaceProfilesToolbar();
+            _profilesToolStrip.ParentChanged += (_, _) => LayoutController.Invalidate();
+        };
     }
 
     public override void PlaceProfilesToolbar()

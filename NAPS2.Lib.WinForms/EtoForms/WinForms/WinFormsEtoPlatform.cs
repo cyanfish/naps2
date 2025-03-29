@@ -143,7 +143,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         var y = location.Y;
         if (CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
         {
-            x = container.Width - x - size.Width;
+            x = container.ToNative().Width - x - size.Width;
         }
         native.Location = new SD.Point(x, y);
         native.AutoSize = false;
