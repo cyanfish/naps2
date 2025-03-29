@@ -21,7 +21,7 @@ public class AppiumTests : ContextualTests
 
     public void Init(IAppTestTarget target)
     {
-        Thread.Sleep(2000);
+        Thread.Sleep(5000);
         _session = StartSession(target.Gui, FolderPath);
         ResetMainWindow();
     }
