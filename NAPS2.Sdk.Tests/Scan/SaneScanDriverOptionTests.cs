@@ -80,6 +80,23 @@ public class SaneScanDriverOptionTests : ContextualTests
     }
 
     [Fact]
+    public void SetOptions_DuplexWithAdfMode()
+    {
+        var device = new DeviceOptionsMock(new[]
+        {
+            SaneOption.CreateForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF"]),
+            SaneOption.CreateForTesting(2, SaneOptionNames.ADF_MODE1, ["Simplex", "Duplex"])
+        });
+        var options = new ScanOptions { PaperSource = PaperSource.Duplex };
+
+        var optionData = _driver.SetOptions(device, options);
+
+        Assert.True(optionData.IsFeeder);
+        Assert.Equal("ADF", device.GetValue(1));
+        Assert.Equal("Duplex", device.GetValue(2));
+    }
+
+    [Fact]
     public void SetOptions_AutoWithFlatbed()
     {
         var device = new DeviceOptionsMock(new[]

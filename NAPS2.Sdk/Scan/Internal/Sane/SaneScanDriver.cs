@@ -386,7 +386,12 @@ internal class SaneScanDriver : IScanDriver
         }
         else if (options.PaperSource == PaperSource.Duplex)
         {
-            controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex);
+            if (!controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex))
+            {
+                // If we can't set the source to Duplex, set it to Feeder instead.
+                // We can then set AdfMode to Duplex.
+                controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder);
+            }
             controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex);
             controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex);
         }
