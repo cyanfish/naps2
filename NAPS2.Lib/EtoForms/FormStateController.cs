@@ -114,14 +114,14 @@ public class FormStateController
             throw new InvalidOperationException();
         }
         var location = new Point(_formState.Location.X, _formState.Location.Y);
-        if (!location.IsZero)
+        if (!location.IsZero &&
+            // Restoring location causes DPI mismatches if there are multiple monitors with different DPI (WinForms bug)
+            !DifferentMonitorScales &&
+            // Only move to the specified location if it's onscreen
+            // It might be offscreen if the user has disconnected a monitor
+            Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
         {
-            if (Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
-            {
-                // Only move to the specified location if it's onscreen
-                // It might be offscreen if the user has disconnected a monitor
-                EtoPlatform.Current.SetFormLocation(_window, location);
-            }
+            EtoPlatform.Current.SetFormLocation(_window, location);
         }
         var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
         var size = new Size(
@@ -151,6 +151,8 @@ public class FormStateController
             Invoker.Current.InvokeDispatch(() => _window.WindowState = WindowState.Maximized);
         }
     }
+
+    public bool DifferentMonitorScales => Screen.Screens.Select(x => x.RealDPI).Distinct().Count() > 1;
 
     private void OnResize(object? sender, EventArgs eventArgs)
     {
