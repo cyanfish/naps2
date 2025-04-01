@@ -99,7 +99,8 @@ internal class TwainScanRunner
             }
 
             _cancelToken.Register(() => _handleManager.Invoker.Invoke(FinishWithCancellation));
-            _sourceDisabledTcs.Task.ContinueWith(_ => _handleManager.Invoker.Invoke(FinishWithCompletion)).AssertNoAwait();
+            _sourceDisabledTcs.Task.ContinueWith(_ => _handleManager.Invoker.Invoke(FinishWithCompletion))
+                .AssertNoAwait();
         }
         catch (Exception ex)
         {
@@ -220,19 +221,10 @@ internal class TwainScanRunner
         _logger.LogDebug("NAPS2.TW - DataTransferred");
         try
         {
-            // TODO: We probably want to support native transfer for net6
             if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory && e.MemoryData == null)
             {
                 _logger.LogDebug("NAPS2.TW - Expected memory transfer, but got native transfer?");
             }
-#if NET6_0_OR_GREATER
-            if (e.MemoryData == null)
-            {
-                _logger.LogError("NAPS2.TW - Native transfer is not yet supported with the net6 build.");
-                return;
-            }
-            _twainEvents.MemoryBufferTransferred(ToMemoryBuffer(e.MemoryData, e.MemoryInfo));
-#else
             if (e.MemoryData != null)
             {
                 _twainEvents.MemoryBufferTransferred(ToMemoryBuffer(e.MemoryData, e.MemoryInfo));
@@ -244,7 +236,6 @@ internal class TwainScanRunner
                     Buffer = ByteString.FromStream(e.GetNativeImageStream())
                 });
             }
-#endif
         }
         catch (Exception ex)
         {
@@ -258,14 +249,10 @@ internal class TwainScanRunner
         try
         {
             var pageStart = new TwainPageStart();
-#if NET6_0_OR_GREATER
-            pageStart.ImageData = ToImageData(e.PendingImageInfo);
-#else
             if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
             {
                 pageStart.ImageData = ToImageData(e.PendingImageInfo);
             }
-#endif
             _twainEvents.PageStart(pageStart);
             if (_cancelToken.IsCancellationRequested)
             {
@@ -309,15 +296,11 @@ internal class TwainScanRunner
 
     private void ConfigureSource(DataSource source)
     {
-#if NET6_0_OR_GREATER
-        source.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
-#else
         // Transfer Mode
         if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
         {
             source.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
         }
-#endif
 
         if (_options.UseNativeUI)
         {
