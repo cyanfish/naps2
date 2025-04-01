@@ -297,9 +297,29 @@ internal class TwainScanRunner
     private void ConfigureSource(DataSource source)
     {
         // Transfer Mode
+        if (_options.TwainOptions.TransferMode == TwainTransferMode.Default)
+        {
+            if (source.Manufacturer.Contains("Kyocera", StringComparison.InvariantCultureIgnoreCase) &&
+                (source.ProductFamily.Contains("Ecosys", StringComparison.InvariantCultureIgnoreCase) ||
+                 source.Name.Contains("Ecosys", StringComparison.InvariantCultureIgnoreCase)))
+            {
+                _logger.LogDebug("Detected Kyocera Ecosys scanner. Defaulting to Native transfer mode.");
+                _options.TwainOptions.TransferMode = TwainTransferMode.Native;
+            }
+            else
+            {
+                _logger.LogDebug("Defaulting to Memory transfer mode.");
+                _options.TwainOptions.TransferMode = TwainTransferMode.Memory;
+            }
+        }
         if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
         {
+            _logger.LogDebug("Transfer mode: Memory");
             source.Capabilities.ICapXferMech.SetValue(XferMech.Memory);
+        }
+        else
+        {
+            _logger.LogDebug("Transfer mode: Native");
         }
 
         if (_options.UseNativeUI)

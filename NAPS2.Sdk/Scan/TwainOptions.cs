@@ -58,7 +58,13 @@ public enum TwainDsm
 public enum TwainTransferMode
 {
     /// <summary>
-    /// Transfers the image in strips. Recommended.
+    /// Transfers the image using the recommended mode. Usually this is Memory, but some scanner drivers have known bugs
+    /// with that mode, and where we can detect that we use Native instead.
+    /// </summary>
+    Default,
+
+    /// <summary>
+    /// Transfers the image in strips.
     /// </summary>
     Memory,
 

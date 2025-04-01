@@ -57,7 +57,8 @@ internal class ScanPerformer : IScanPerformer
         _ocrOperationManager = ocrOperationManager;
     }
 
-    public async Task<DeviceChoice> PromptForDevice(ScanProfile scanProfile, bool allowAlwaysAsk, IntPtr dialogParent = default)
+    public async Task<DeviceChoice> PromptForDevice(ScanProfile scanProfile, bool allowAlwaysAsk,
+        IntPtr dialogParent = default)
     {
         try
         {
@@ -232,15 +233,18 @@ internal class ScanPerformer : IScanPerformer
             },
             TwainOptions =
             {
-                Dsm = scanProfile.TwainImpl == TwainImpl.X64
-                    ? TwainDsm.NewX64
-                    : scanProfile.TwainImpl is TwainImpl.OldDsm or TwainImpl.Legacy
-                        ? TwainDsm.Old
-                        : TwainDsm.New,
-                // MemXfer is the default
-                TransferMode = scanProfile.TwainImpl is TwainImpl.Default or TwainImpl.MemXfer
-                    ? TwainTransferMode.Memory
-                    : TwainTransferMode.Native,
+                Dsm = scanProfile.TwainImpl switch
+                {
+                    TwainImpl.X64 => TwainDsm.NewX64,
+                    TwainImpl.OldDsm or TwainImpl.Legacy => TwainDsm.Old,
+                    _ => TwainDsm.New
+                },
+                TransferMode = scanProfile.TwainImpl switch
+                {
+                    TwainImpl.Default => TwainTransferMode.Default,
+                    TwainImpl.MemXfer => TwainTransferMode.Memory,
+                    _ => TwainTransferMode.Native
+                },
                 ShowProgress = scanProfile.TwainProgress,
                 IncludeWiaDevices = false
             },
@@ -286,7 +290,7 @@ internal class ScanPerformer : IScanPerformer
             StretchToPageSize = scanProfile.ForcePageSize,
             UseNativeUI = scanProfile.UseNativeUI,
             Device = null, // Set after
-            PageSize = null, // Set after
+            PageSize = null // Set after
         };
 
         var pageDimensions = scanProfile.PageSize.PageDimensions() ?? scanProfile.CustomPageSize;
