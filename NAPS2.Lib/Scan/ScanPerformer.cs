@@ -241,7 +241,7 @@ internal class ScanPerformer : IScanPerformer
                 },
                 TransferMode = scanProfile.TwainImpl switch
                 {
-                    TwainImpl.Default => TwainTransferMode.Default,
+                    TwainImpl.Default or TwainImpl.X64 => TwainTransferMode.Default,
                     TwainImpl.MemXfer => TwainTransferMode.Memory,
                     _ => TwainTransferMode.Native
                 },
