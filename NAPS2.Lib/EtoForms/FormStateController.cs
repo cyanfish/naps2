@@ -123,7 +123,7 @@ public class FormStateController
         {
             EtoPlatform.Current.SetFormLocation(_window, location);
         }
-        var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
+        var scale = FixWinFormsDpiIssues ? 1f : EtoPlatform.Current.GetLayoutScaleFactor(_window);
         var size = new Size(
             (int) Math.Round(_formState.Size.Width * scale),
             (int) Math.Round(_formState.Size.Height * scale));
@@ -164,7 +164,7 @@ public class FormStateController
             if (_window.WindowState == WindowState.Normal)
             {
                 var size = EtoPlatform.Current.GetClientSize(_window);
-                var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
+                var scale = FixWinFormsDpiIssues ? 1f : EtoPlatform.Current.GetLayoutScaleFactor(_window);
                 _formState.Size = new FormState.FormSize(
                     (int) Math.Round(size.Width / scale),
                     (int) Math.Round(size.Height / scale));
