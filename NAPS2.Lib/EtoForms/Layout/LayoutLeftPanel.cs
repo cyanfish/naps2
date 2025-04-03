@@ -13,6 +13,8 @@ public class LayoutLeftPanel : LayoutContainer
     private Action<int> _widthSetter = _ => { };
     private int? _minWidth;
     private bool _isInitialized;
+    private bool _inLayout;
+    private float _lastScale;
 
     public LayoutLeftPanel(LayoutElement left, LayoutElement right) : base([left, right])
     {
@@ -43,24 +45,31 @@ public class LayoutLeftPanel : LayoutContainer
         Splitter.Panel1MinimumSize = w;
         Splitter.Panel2MinimumSize = (int) (100 * context.Scale);
 
-        if (!_isInitialized)
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
+        if (!_isInitialized || context.Scale != _lastScale)
         {
-            int initialWidth = Math.Max(_widthGetter(), w);
+            _lastScale = context.Scale;
+            int initialWidth = Math.Max((int) (_widthGetter() * context.Scale), w);
+            _inLayout = true;
             EtoPlatform.Current.SetSplitterPosition(Splitter, initialWidth);
+            _inLayout = false;
             _left.Width = initialWidth;
-            Splitter.PositionChanged += (_, _) =>
+            if (!_isInitialized)
             {
-                if (_left.Width != Splitter.Position)
+                Splitter.PositionChanged += (_, _) =>
                 {
-                    _left.Width = Splitter.Position;
-                    _widthSetter(Splitter.Position);
-                    context.Invalidate();
-                }
-            };
-            // TODO: We could hide the splitter based on the side panel's visibility, but currently on WinForms it's
-            // responsible for drawing content borders so we don't want to do that. The splitter is hidden behind the
-            // listview in any case.
-            _isInitialized = true;
+                    if (!_inLayout && _left.Width != Splitter.Position)
+                    {
+                        _left.Width = Splitter.Position;
+                        _widthSetter((int) (Splitter.Position / context.Scale));
+                        context.Invalidate();
+                    }
+                };
+                // TODO: We could hide the splitter based on the side panel's visibility, but currently on WinForms it's
+                // responsible for drawing content borders so we don't want to do that. The splitter is hidden behind the
+                // listview in any case.
+                _isInitialized = true;
+            }
         }
 
         _overlay.DoLayout(context, bounds);
