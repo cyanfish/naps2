@@ -40,6 +40,8 @@ public class FormStateController
 
     public bool Loaded { get; private set; }
 
+    public bool Shown { get; private set; }
+
     public string FormName => _window.GetType().Name;
 
     public void UpdateLayoutSize(LayoutController layoutController)
@@ -105,6 +107,7 @@ public class FormStateController
             EtoPlatform.Current.SetMinimumClientSize(_window, _minimumClientSize);
         }
         _window.Resizable = Resizable;
+        Shown = true;
     }
 
     protected void DoRestoreFormState()
@@ -158,7 +161,7 @@ public class FormStateController
 
     private void OnResize(object? sender, EventArgs eventArgs)
     {
-        if (Loaded && _formState != null && SaveFormState)
+        if (Shown && _formState != null && SaveFormState)
         {
             _formState.Maximized = (_window.WindowState == WindowState.Maximized);
             if (_window.WindowState == WindowState.Normal)
@@ -174,7 +177,7 @@ public class FormStateController
 
     private void OnMove(object? sender, EventArgs eventArgs)
     {
-        if (Loaded && _formState != null && SaveFormState)
+        if (Shown && _formState != null && SaveFormState)
         {
             if (_window.WindowState == WindowState.Normal)
             {
