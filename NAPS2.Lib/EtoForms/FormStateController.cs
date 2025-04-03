@@ -116,7 +116,7 @@ public class FormStateController
         var location = new Point(_formState.Location.X, _formState.Location.Y);
         if (!location.IsZero &&
             // Restoring location causes DPI mismatches if there are multiple monitors with different DPI (WinForms bug)
-            !DifferentMonitorScales &&
+            !FixWinFormsDpiIssues &&
             // Only move to the specified location if it's onscreen
             // It might be offscreen if the user has disconnected a monitor
             Screen.Screens.Any(x => x.WorkingArea.Contains(location)))
@@ -152,7 +152,9 @@ public class FormStateController
         }
     }
 
-    public bool DifferentMonitorScales => Screen.Screens.Select(x => x.RealDPI).Distinct().Count() > 1;
+    private bool FixWinFormsDpiIssues => EtoPlatform.Current.IsWinForms && DifferentMonitorScales;
+
+    private bool DifferentMonitorScales => Screen.Screens.Select(x => x.RealDPI).Distinct().Count() > 1;
 
     private void OnResize(object? sender, EventArgs eventArgs)
     {
