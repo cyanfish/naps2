@@ -1,3 +1,8 @@
+Changes in 8.1.3:
+- Twain: Fixed issues with Kyocera Ecosys scanners
+- Sane: Fixed duplex with some scanners
+- Windows: Fixed issues with multiple monitors with different DPI
+
 Changes in 8.1.2:
 - Added "Apply to all selected" for Split action
 - Fixed "unsaved changes" prompt after auto saving
