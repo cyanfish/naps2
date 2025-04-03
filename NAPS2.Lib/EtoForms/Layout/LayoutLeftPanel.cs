@@ -11,6 +11,7 @@ public class LayoutLeftPanel : LayoutContainer
 
     private Func<int> _widthGetter = () => 0;
     private Action<int> _widthSetter = _ => { };
+    private int? _minWidth;
     private bool _isInitialized;
 
     public LayoutLeftPanel(LayoutElement left, LayoutElement right) : base([left, right])
@@ -33,7 +34,7 @@ public class LayoutLeftPanel : LayoutContainer
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
-        var w = MeasureWidth(context, bounds, _left);
+        var w = _minWidth.HasValue ? (int) (_minWidth * context.Scale) : MeasureWidth(context, bounds, _left);
         if (Splitter.Position < w)
         {
             EtoPlatform.Current.SetSplitterPosition(Splitter, w);
@@ -84,10 +85,11 @@ public class LayoutLeftPanel : LayoutContainer
         return _overlay.GetPreferredSize(context, parentBounds);
     }
 
-    public LayoutLeftPanel SizeConfig(Func<int> getter, Action<int> setter)
+    public LayoutLeftPanel SizeConfig(Func<int> getter, Action<int> setter, int? minWidth = null)
     {
         _widthGetter = getter;
         _widthSetter = setter;
+        _minWidth = minWidth;
         return this;
     }
 }

@@ -140,7 +140,8 @@ public abstract class DesktopForm : EtoFormBase
             ).Scale()
         ).SizeConfig(
             () => Config.Get(c => c.SidebarWidth),
-            width => Config.User.Set(c => c.SidebarWidth, width));
+            width => Config.User.Set(c => c.SidebarWidth, width),
+            200);
     }
 
     private void OpeningContextMenu(object? sender, EventArgs e)
