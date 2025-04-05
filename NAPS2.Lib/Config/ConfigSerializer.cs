@@ -100,6 +100,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.StartupMessageText, c.StartupMessageText);
         storage.Set(x => x.StartupMessageIcon, c.StartupMessageIcon);
         storage.Set(x => x.DefaultProfileSettings, c.DefaultProfileSettings);
+        storage.Set(x => x.Theme, c.Theme);
         storage.Set(x => x.ShowPageNumbers, c.ShowPageNumbers);
         storage.Set(x => x.ShowProfilesToolbar, c.ShowProfilesToolbar);
         storage.Set(x => x.ScanChangesDefaultProfile, c.ScanChangesDefaultProfile);
@@ -165,6 +166,7 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
                 storage.Set(accessor, value);
             }
         }
+        SetIfLocked(x => x.Theme, c.Theme, nameof(c.Theme));
         SetIfLocked(x => x.ShowPageNumbers, c.ShowPageNumbers, nameof(c.ShowPageNumbers));
         SetIfLocked(x => x.ShowProfilesToolbar, c.ShowProfilesToolbar, nameof(c.ShowProfilesToolbar));
         SetIfLocked(x => x.ScanChangesDefaultProfile, c.ScanChangesDefaultProfile, nameof(c.ScanChangesDefaultProfile));

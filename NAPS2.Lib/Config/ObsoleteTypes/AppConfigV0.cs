@@ -21,6 +21,8 @@ public class AppConfigV0
 
     public ScanProfile? DefaultProfileSettings { get; set; }
 
+    public Theme Theme { get; set; }
+
     public bool ShowPageNumbers { get; set; }
 
     public bool ShowProfilesToolbar { get; set; }

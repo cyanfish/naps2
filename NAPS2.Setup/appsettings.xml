@@ -5,6 +5,7 @@
   <StartupMessageTitle></StartupMessageTitle>
   <StartupMessageText></StartupMessageText>
   <StartupMessageIcon>Information</StartupMessageIcon>
+  <Theme mode="default">Default</Theme>
   <ShowPageNumbers mode="default">false</ShowPageNumbers>
   <ShowProfilesToolbar mode="default">false</ShowProfilesToolbar>
   <ScanChangesDefaultProfile mode="default">true</ScanChangesDefaultProfile>
