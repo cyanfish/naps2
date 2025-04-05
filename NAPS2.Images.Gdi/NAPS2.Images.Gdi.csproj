@@ -17,7 +17,8 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+        <PackageReference Include="System.Drawing.Common" Version="8.0.7" Condition="$(TargetFramework) == 'net6'" />
+        <PackageReference Include="System.Drawing.Common" Version="9.0.3" Condition="$(TargetFramework) != 'net6'" />
     </ItemGroup>
     
     <ItemGroup>
