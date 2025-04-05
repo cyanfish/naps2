@@ -40,6 +40,7 @@ public class CommonModule : Module
         var config = new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
             Path.Combine(Paths.AppData, "config.xml"));
         builder.RegisterInstance(config);
+        builder.RegisterBuildCallback(ctx => EtoPlatform.Current.ColorScheme.Config = ctx.Resolve<Naps2Config>());
 
         // Remoting
         builder.Register<IWorkerFactory>(_ => WorkerFactory.CreateDefault()).SingleInstance();

@@ -33,7 +33,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         WF.Application.SetHighDpiMode(WF.HighDpiMode.PerMonitorV2);
         // WinForms dark mode is experimental
 #pragma warning disable WFO5001
-        WF.Application.SetColorMode(WF.SystemColorMode.System);
+        WF.Application.SetColorMode(ColorScheme.DarkMode ? WF.SystemColorMode.Dark : WF.SystemColorMode.Classic);
 #pragma warning restore WFO5001
         return new Application(Eto.Platforms.WinForms);
     }

@@ -10,6 +10,7 @@ namespace NAPS2.EtoForms.Ui;
 internal class SettingsForm : EtoDialogBase
 {
     private readonly DesktopFormProvider _desktopFormProvider;
+    private readonly EnumDropDownWidget<Theme> _theme = new(scale: false);
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
     private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
@@ -65,6 +66,10 @@ internal class SettingsForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.Interface,
                 L.Column(
+                    L.Row(
+                        C.Label(UiStrings.ThemeLabel).AlignCenter().Padding(right: 10),
+                        _theme.AsControl().MinWidth(100)
+                    ),
                     PlatformCompat.System.SupportsShowPageNumbers ? _showPageNumbers : C.None(),
                     PlatformCompat.System.SupportsProfilesToolbar ? _showProfilesToolbar : C.None(),
                     _scanChangesDefaultProfile,
@@ -119,6 +124,8 @@ internal class SettingsForm : EtoDialogBase
             checkBox.Enabled = !config.AppLocked.Has(accessor);
         }
 
+        _theme.SelectedItem = config.Get(c => c.Theme);
+        _theme.Enabled = !config.AppLocked.Has(c => c.Theme);
         UpdateCheckbox(_scanChangesDefaultProfile, c => c.ScanChangesDefaultProfile);
         UpdateCheckbox(_showProfilesToolbar, c => c.ShowProfilesToolbar);
         UpdateCheckbox(_showPageNumbers, c => c.ShowPageNumbers);
@@ -142,6 +149,7 @@ internal class SettingsForm : EtoDialogBase
                 transact.Set(accessor, value);
             }
         }
+        SetIfChanged(c => c.Theme, _theme.SelectedItem);
         SetIfChanged(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
         SetIfChanged(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
         SetIfChanged(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
@@ -154,6 +162,7 @@ internal class SettingsForm : EtoDialogBase
 
         _desktopFormProvider.DesktopForm.Invalidate();
         _desktopFormProvider.DesktopForm.PlaceProfilesToolbar();
+        EtoPlatform.Current.ColorScheme.UserThemeChanged();
     }
 
     private void RestoreDefaults_Click(object? sender, EventArgs e)

@@ -21,7 +21,19 @@ public class ColorScheme
         _darkModeProvider.DarkModeChanged += (_, _) => ColorSchemeChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private bool DarkMode => _darkModeProvider.IsDarkModeEnabled;
+    public bool DarkMode => (Config ?? throw new InvalidOperationException()).Get(c => c.Theme) switch
+    {
+        Theme.Light => false,
+        Theme.Dark => true,
+        _ => _darkModeProvider.IsDarkModeEnabled,
+    };
+
+    public Naps2Config? Config { get; set; }
+
+    public void UserThemeChanged()
+    {
+        ColorSchemeChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     public Color ForegroundColor => DarkMode ? Colors.White : Colors.Black;
 

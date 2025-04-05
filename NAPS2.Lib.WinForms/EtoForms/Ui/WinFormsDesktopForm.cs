@@ -58,6 +58,11 @@ public class WinFormsDesktopForm : DesktopForm
 
     private void ColorSchemeChanged(object? sender, EventArgs e)
     {
+        // WinForms dark mode is experimental
+#pragma warning disable WFO5001
+        WF.Application.SetColorMode(_colorScheme.DarkMode ? WF.SystemColorMode.Dark : WF.SystemColorMode.Classic);
+#pragma warning restore WFO5001
+        Invoker.Current.Invoke(WinFormsHacks.ClearCachedBrushesAndPens);
         Invoker.Current.InvokeDispatch(() =>
         {
             if (WF.Application.OpenForms.Count == 1)

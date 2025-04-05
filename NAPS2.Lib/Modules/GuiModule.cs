@@ -33,6 +33,7 @@ public class GuiModule : Module
         builder.RegisterType<DesktopFormProvider>().AsSelf().SingleInstance();
         builder.RegisterType<ImageListActions>().AsSelf().SingleInstance();
         builder.RegisterInstance(EtoPlatform.Current.DarkModeProvider);
+        builder.RegisterInstance(EtoPlatform.Current.ColorScheme);
 
         builder.RegisterBuildCallback(ctx =>
         {

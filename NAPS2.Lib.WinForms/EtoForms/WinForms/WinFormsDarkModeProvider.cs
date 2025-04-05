@@ -38,31 +38,7 @@ public class WinFormsDarkModeProvider : IDarkModeProvider
         if (newValue != _value)
         {
             _value = newValue;
-            // WinForms dark mode is experimental
-#pragma warning disable WFO5001
-            Application.SetColorMode(newValue ? SystemColorMode.Dark : SystemColorMode.Classic);
-#pragma warning restore WFO5001
-            Invoker.Current.Invoke(ClearCachedBrushesAndPens);
             DarkModeChanged?.Invoke(this, EventArgs.Empty);
         }
-    }
-
-    // Workaround for https://github.com/dotnet/winforms/issues/12027
-    private void ClearCachedBrushesAndPens()
-    {
-        var threadData = (IDictionary<object, object?>) typeof(SystemBrushes).Assembly.GetType("System.Drawing.Gdip")!
-            .GetProperty("ThreadData", BindingFlags.Static | BindingFlags.NonPublic)!
-            .GetValue(null)!;
-
-        var systemBrushesKey = typeof(SystemBrushes)
-            .GetField("s_systemBrushesKey", BindingFlags.Static | BindingFlags.NonPublic)!
-            .GetValue(null)!;
-
-        var systemPensKey = typeof(SystemPens)
-            .GetField("s_systemPensKey", BindingFlags.Static | BindingFlags.NonPublic)!
-            .GetValue(null)!;
-
-        threadData[systemBrushesKey] = null;
-        threadData[systemPensKey] = null;
     }
 }
