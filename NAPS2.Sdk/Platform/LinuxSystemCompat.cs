@@ -18,6 +18,8 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool IsEsclDriverSupported => true;
 
+    public bool SupportsTheme => false;
+
     public bool SupportsShowPageNumbers => false;
 
     public bool SupportsProfilesToolbar => true;

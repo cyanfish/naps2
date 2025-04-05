@@ -11,6 +11,8 @@ internal interface ISystemCompat
     bool IsSaneDriverSupported { get; }
 
     bool IsEsclDriverSupported { get; }
+
+    bool SupportsTheme { get; }
     
     bool SupportsShowPageNumbers { get; }
     

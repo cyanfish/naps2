@@ -18,6 +18,8 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool IsEsclDriverSupported => true;
 
+    public bool SupportsTheme => false;
+
     public bool SupportsShowPageNumbers => false;
 
     public bool SupportsProfilesToolbar => false;

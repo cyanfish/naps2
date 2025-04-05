@@ -66,10 +66,12 @@ internal class SettingsForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.Interface,
                 L.Column(
-                    L.Row(
-                        C.Label(UiStrings.ThemeLabel).AlignCenter().Padding(right: 10),
-                        _theme.AsControl().MinWidth(100)
-                    ),
+                    PlatformCompat.System.SupportsTheme
+                        ? L.Row(
+                            C.Label(UiStrings.ThemeLabel).AlignCenter().Padding(right: 10),
+                            _theme.AsControl().MinWidth(100)
+                        )
+                        : C.None(),
                     PlatformCompat.System.SupportsShowPageNumbers ? _showPageNumbers : C.None(),
                     PlatformCompat.System.SupportsProfilesToolbar ? _showProfilesToolbar : C.None(),
                     _scanChangesDefaultProfile,

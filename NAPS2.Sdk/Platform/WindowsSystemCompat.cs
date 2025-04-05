@@ -15,6 +15,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool IsEsclDriverSupported => true;
 
+    public bool SupportsTheme => true;
+
     public bool SupportsShowPageNumbers => true;
 
     public bool SupportsProfilesToolbar => true;
