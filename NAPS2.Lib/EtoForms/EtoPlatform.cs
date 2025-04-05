@@ -9,6 +9,8 @@ public abstract class EtoPlatform
 {
     private static EtoPlatform? _current;
 
+    public static bool HasCurrent => _current != null;
+
     public static EtoPlatform Current
     {
         get => _current ?? throw new InvalidOperationException();
