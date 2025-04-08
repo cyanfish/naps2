@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-03-29 18:52\n"
+"PO-Revision-Date: 2025-04-08 23:02\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -33,7 +33,7 @@ msgstr "\"Tara\" menüsü öntanımlı profili değiştirir"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 aygıt bulundu."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -62,7 +62,7 @@ msgstr "Veri ediniliyor..."
 
 #: UiStrings.resx$Action$Message
 msgid "Action"
-msgstr ""
+msgstr "Eylem"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -122,7 +122,7 @@ msgstr "Alternatif Yığım"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Her Zaman Sor"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -236,7 +236,7 @@ msgstr "{0} adet resimde yapılan değişiklikleri geri almak istediğinize emin
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Ata"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -339,7 +339,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "Tarayıcınızı bulamıyor musunuz? NAPS2 Flatpak'ın kısıtlamalarını okuyun."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -405,7 +405,7 @@ msgstr "Birleştir"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr ""
+msgstr "Tarayıcıyla olan iletişim kesintiye uğradı."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -417,11 +417,11 @@ msgstr "Sıkıştırma:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "Bağlan"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "Bağlantı hatası."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -465,7 +465,7 @@ msgstr "Özel Sayfa Boyutu"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr ""
+msgstr "Özel Çözünürlük"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
@@ -480,11 +480,16 @@ msgstr "Özel SMTP"
 msgid "Custom..."
 msgstr "Özel..."
 
+#: SettingsResources.resx$Theme_Dark$Message
+msgid "Dark"
+msgstr ""
+
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
 msgstr "Gün (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
+#: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$WiaVersion_Default$Message
 #: UiStrings.resx$Default$Message
@@ -563,7 +568,7 @@ msgstr "İndirme Süreci"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr ""
+msgstr "Dpi"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -671,7 +676,7 @@ msgstr "Dosya Yolu:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr ""
+msgstr "Beyaz dengesini düzelt ve gürültüyü kaldır"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -723,7 +728,7 @@ msgstr "Renk Tonu / Doygunluk"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr ""
+msgstr "IP/Host"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -813,7 +818,7 @@ msgstr "Görüntüleri oturumlar arasında sakla"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Klavye Kısayolları"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -835,6 +840,10 @@ msgstr "Sol"
 msgid "Legacy (native UI only)"
 msgstr "Eski (yalnızca yerli kullanıcı arayüzü)"
 
+#: SettingsResources.resx$Theme_Light$Message
+msgid "Light"
+msgstr ""
+
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
 msgstr "Resimleri NAPS2'ye yükle"
@@ -846,7 +855,7 @@ msgstr "OKT kullanarak aranabilir PDF oluştur"
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr ""
+msgstr "Elle IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -945,7 +954,7 @@ msgstr "Hiçbir aygıt seçilmedi."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "Hiçbir aygıt bulunamadı."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1043,7 +1052,7 @@ msgstr "İşlem Sürüyor"
 
 #: SettingsResources.resx$EmailProviderType_OutlookNew$Message
 msgid "Outlook (new)"
-msgstr ""
+msgstr "Outlook (yeni)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1117,7 +1126,7 @@ msgstr "Yer Tutucular"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1125,7 +1134,7 @@ msgstr "İleri İşleme"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr ""
+msgstr "Taramadan sonra OKT'yi kendiliğinden çalıştır"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1199,7 +1208,7 @@ msgstr "Yinele"
 
 #: UiStrings.resx$RedoFormat$Message
 msgid "Redo {0}"
-msgstr ""
+msgstr "Geri al: {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
@@ -1357,11 +1366,11 @@ msgstr "Öntanımlı Profille Tara"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Yeni Profille Tara"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "{0} Profiliyle Tara"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1387,7 +1396,7 @@ msgstr "{0}. sayfa taranıyor..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "Aygıtlar aranıyor..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1403,7 +1412,7 @@ msgstr "Tümünü Seç"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Aygıt Seç"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1456,7 +1465,7 @@ msgstr "Keskinleştir"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
-msgstr ""
+msgstr "Kısayol"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1468,7 +1477,7 @@ msgstr "\"Profiller\" araç çubuğunu göster"
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
-msgstr ""
+msgstr "Özgün TWAIN ilerlemesini göster"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
@@ -1476,7 +1485,7 @@ msgstr "Sayfa numaralarını göster"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "Kenar çubuğu"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1600,10 +1609,14 @@ msgstr "Seçilen tarayıcı çevrim dışı."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
-msgstr ""
+msgstr "Çalışma işlemi çöktü."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
+msgstr "Çalışma işlemi çöktü. Windows olay görüntüleyicisini kontrol edin."
+
+#: UiStrings.resx$ThemeLabel$Message
+msgid "Theme:"
 msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
@@ -1640,7 +1653,7 @@ msgstr "US Letter (8.5x11 inç)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Atamayı Kaldır"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1648,7 +1661,7 @@ msgstr "Geri al"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr ""
+msgstr "Geri al: {0}"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1794,7 +1807,7 @@ msgstr "{0} / {1} dosya"
 
 #: UiStrings.resx$DevicesFound$Message
 msgid "{0} devices found."
-msgstr ""
+msgstr "{0} aygıt bulundu."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"

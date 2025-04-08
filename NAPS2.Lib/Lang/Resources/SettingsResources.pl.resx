@@ -171,4 +171,13 @@
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>Zawsze pytaj</value>
   </data>
+  <data name="Theme_Default" xml:space="preserve">
+    <value>Domyślna</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Jasny</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Ciemny</value>
+  </data>
 </root>

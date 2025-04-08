@@ -19,7 +19,7 @@
     <value>Seçilen tarayıcı çevrim dışı.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Tarayıcıyla olan iletişim kesintiye uğradı.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -79,9 +79,9 @@
     <value>OKT işlemi zaman aşımına uğradı.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Çalışma işlemi çöktü.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Çalışma işlemi çöktü. Windows olay görüntüleyicisini kontrol edin.</value>
   </data>
 </root>

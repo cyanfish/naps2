@@ -867,4 +867,7 @@
   <data name="Shortcut" xml:space="preserve">
     <value>Skrót</value>
   </data>
+  <data name="ThemeLabel" xml:space="preserve">
+    <value>Motyw:</value>
+  </data>
 </root>

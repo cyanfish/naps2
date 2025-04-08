@@ -171,4 +171,13 @@
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>תמיד לבקש אישור</value>
   </data>
+  <data name="Theme_Default" xml:space="preserve">
+    <value>ברירת מחדל</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
 </root>

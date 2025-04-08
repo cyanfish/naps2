@@ -171,4 +171,13 @@
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>Vienmēr atgādināt</value>
   </data>
+  <data name="Theme_Default" xml:space="preserve">
+    <value>Noklusētais</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
 </root>

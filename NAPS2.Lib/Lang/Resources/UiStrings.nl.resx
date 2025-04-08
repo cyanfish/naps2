@@ -867,4 +867,7 @@
   <data name="Shortcut" xml:space="preserve">
     <value>Sneltoets</value>
   </data>
+  <data name="ThemeLabel" xml:space="preserve">
+    <value>Thema:</value>
+  </data>
 </root>

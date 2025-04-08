@@ -867,4 +867,7 @@
   <data name="Shortcut" xml:space="preserve">
     <value>Atalho</value>
   </data>
+  <data name="ThemeLabel" xml:space="preserve">
+    <value>Theme:</value>
+  </data>
 </root>

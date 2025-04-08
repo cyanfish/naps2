@@ -867,4 +867,7 @@
   <data name="Shortcut" xml:space="preserve">
     <value>Billentyűparancs</value>
   </data>
+  <data name="ThemeLabel" xml:space="preserve">
+    <value>Téma:</value>
+  </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-03-29 18:52\n"
+"PO-Revision-Date: 2025-04-08 23:02\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Nynorsk\n"
 "Language: nn_NO\n"
@@ -480,11 +480,16 @@ msgstr "Eigen SMTP"
 msgid "Custom..."
 msgstr "Eigendefinert..."
 
+#: SettingsResources.resx$Theme_Dark$Message
+msgid "Dark"
+msgstr ""
+
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
 msgstr "Dag (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
+#: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
 #: SettingsResources.resx$WiaVersion_Default$Message
 #: UiStrings.resx$Default$Message
@@ -834,6 +839,10 @@ msgstr "Venstre"
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
 msgstr "Gammal (bare maskinen sitt oppsettvindu)"
+
+#: SettingsResources.resx$Theme_Light$Message
+msgid "Light"
+msgstr ""
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1605,6 +1614,10 @@ msgstr "Arbeidsprosessen krasja."
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
 msgstr "Arbeidsprosessen krasja Sjekk Windows-hendingsvisaren."
+
+#: UiStrings.resx$ThemeLabel$Message
+msgid "Theme:"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
