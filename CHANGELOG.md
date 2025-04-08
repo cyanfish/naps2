@@ -1,3 +1,8 @@
+Changes in 8.1.4:
+- Windows: Added a "Theme" setting to switch between Light and Dark mode
+- Linux: Fixed OCR on older Linux versions (e.g. Ubuntu 20.04)
+  - Ubuntu 18.04 is no longer supported (use NAPS2 7.5.3 if needed)
+
 Changes in 8.1.3:
 - Twain: Fixed issues with Kyocera Ecosys scanners
 - Sane: Fixed duplex with some scanners
