@@ -143,15 +143,17 @@ internal class SettingsForm : EtoDialogBase
     private void Save()
     {
         var transact = Config.User.BeginTransaction();
-        void SetIfChanged<T>(Expression<Func<CommonConfig, T>> accessor, T value)
+        bool SetIfChanged<T>(Expression<Func<CommonConfig, T>> accessor, T value)
         {
             var oldValue = Config.Get(accessor);
             if (!Equals(value, oldValue))
             {
                 transact.Set(accessor, value);
+                return true;
             }
+            return false;
         }
-        SetIfChanged(c => c.Theme, _theme.SelectedItem);
+        bool themeChanged = SetIfChanged(c => c.Theme, _theme.SelectedItem);
         SetIfChanged(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
         SetIfChanged(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
         SetIfChanged(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
@@ -164,7 +166,10 @@ internal class SettingsForm : EtoDialogBase
 
         _desktopFormProvider.DesktopForm.Invalidate();
         _desktopFormProvider.DesktopForm.PlaceProfilesToolbar();
-        EtoPlatform.Current.ColorScheme.UserThemeChanged();
+        if (themeChanged)
+        {
+            EtoPlatform.Current.ColorScheme.UserThemeChanged();
+        }
     }
 
     private void RestoreDefaults_Click(object? sender, EventArgs e)
