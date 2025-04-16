@@ -771,6 +771,24 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit with....
+        /// </summary>
+        internal static string EditWith {
+            get {
+                return ResourceManager.GetString("EditWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit with {0}.
+        /// </summary>
+        internal static string EditWithAppName {
+            get {
+                return ResourceManager.GetString("EditWithAppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ....
         /// </summary>
         internal static string Ellipsis {

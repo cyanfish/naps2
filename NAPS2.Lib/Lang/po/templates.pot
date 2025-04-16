@@ -584,6 +584,14 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr ""
+
+#: UiStrings.resx$EditWith$Message
+msgid "Edit with..."
+msgstr ""
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr ""

@@ -978,4 +978,10 @@
   <data name="ThemeLabel" xml:space="preserve">
     <value>Theme:</value>
   </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Edit with...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Edit with {0}</value>
+  </data>
 </root>
