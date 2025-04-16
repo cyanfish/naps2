@@ -5,6 +5,8 @@ namespace NAPS2.Platform;
 /// </summary>
 public interface IOsServiceManager
 {
+    bool CanRegister { get; }
+
     bool IsRegistered { get; }
 
     void Register();

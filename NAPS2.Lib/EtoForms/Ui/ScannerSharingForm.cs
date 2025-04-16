@@ -55,9 +55,11 @@ public class ScannerSharingForm : EtoDialogBase
         sharingKsm.Assign("Del", _deleteCommand);
         EtoPlatform.Current.HandleKeyDown(_listView.Control, sharingKsm.Perform);
 
-        // TODO: Enable
-        // _shareAsService.Checked = _osServiceManager.IsRegistered;
-        // _shareAsService.CheckedChanged += ShareAsServiceCheckedChanged;
+        if (_osServiceManager.CanRegister)
+        {
+            _shareAsService.Checked = _osServiceManager.IsRegistered;
+            _shareAsService.CheckedChanged += ShareAsServiceCheckedChanged;
+        }
         EtoPlatform.Current.AttachDpiDependency(this, _ => _listView.RegenerateImages());
         _listView.ImageSize = new Size(48, 48);
         _listView.SelectionChanged += SelectionChanged;
@@ -80,7 +82,7 @@ public class ScannerSharingForm : EtoDialogBase
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.ScannerSharingIntro).DynamicWrap(400),
-            // _shareAsService,
+            _osServiceManager.CanRegister ? _shareAsService : C.None(),
             C.Spacer(),
             _listView.Control.Scale().NaturalHeight(80),
             L.Row(

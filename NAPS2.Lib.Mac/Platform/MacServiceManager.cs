@@ -3,7 +3,6 @@ namespace NAPS2.Platform;
 /// <summary>
 /// Manages a user-level launchd (https://www.launchd.info/) service on macOS.
 /// </summary>
-// TODO: Is it feasible to run a system-level service?
 public class MacServiceManager : IOsServiceManager
 {
     private const string SERVICE_NAME = "com.naps2.ScannerSharing";
@@ -12,6 +11,8 @@ public class MacServiceManager : IOsServiceManager
         Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             $"Library/LaunchAgents/{SERVICE_NAME}.plist");
+
+    public bool CanRegister => true;
 
     public bool IsRegistered => File.Exists(PlistPath);
 
