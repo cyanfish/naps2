@@ -51,7 +51,7 @@ internal class RemoteTwainController : ITwainController
             throw new InvalidOperationException();
         }
         return _scanningContext.CreateWorker(
-            options.TwainOptions.Dsm == TwainDsm.NewX64
+            options.TwainOptions.Dsm == TwainDsm.NewX64 || !PlatformCompat.System.SupportsWinX86Worker
                 ? WorkerType.Native
                 : WorkerType.WinX86)!;
     }

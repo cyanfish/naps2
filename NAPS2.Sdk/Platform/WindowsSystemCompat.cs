@@ -39,7 +39,7 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool RenderInWorker => true;
 
-    public bool SupportsWinX86Worker => true;
+    public virtual bool SupportsWinX86Worker => true;
 
     // Due to weird MSIX permission issues, we need to run worker processes using their aliases so that Windows sets
     // them up with "package identity" which will allow them to load their DLLs.
@@ -67,7 +67,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public string GetLoadError() => Marshal.GetLastWin32Error().ToString();
 
-    public abstract IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);
+    public virtual IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) =>
+        Win32.GetProcAddress(libraryHandle, symbol);
 
     public void SetEnv(string name, string value) => throw new NotSupportedException();
 

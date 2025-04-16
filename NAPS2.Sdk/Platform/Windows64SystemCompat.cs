@@ -1,6 +1,4 @@
-﻿using NAPS2.Platform.Windows;
-
-namespace NAPS2.Platform;
+﻿namespace NAPS2.Platform;
 
 internal class Windows64SystemCompat : WindowsSystemCompat
 {
@@ -8,9 +6,4 @@ internal class Windows64SystemCompat : WindowsSystemCompat
     public override string[] ExeSearchPaths => new[] { "_win64", "_win32" };
 
     public override string[] LibrarySearchPaths => new[] { "_win64" };
-    
-    public override IntPtr LoadSymbol(IntPtr libraryHandle, string symbol)
-    {
-        return Win32.GetProcAddress(libraryHandle, symbol);
-    }
 }

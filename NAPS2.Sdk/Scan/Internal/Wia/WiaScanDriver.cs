@@ -315,7 +315,8 @@ internal class WiaScanDriver : IScanDriver
         {
             if (_options.UseNativeUI)
             {
-                bool useWorker = Environment.Is64BitProcess && device.Version == WiaVersion.Wia10;
+                bool useWorker = PlatformCompat.System.SupportsWinX86Worker &&
+                                 device.Version == WiaVersion.Wia10;
                 if (useWorker)
                 {
                     if (_scanningContext.WorkerFactory == null)

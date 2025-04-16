@@ -42,11 +42,14 @@ internal class MapiDispatcher
             worker1.Dispose();
         }
 
-        // If 64-bit failed, try 32-bit
-        using var worker2 = _scanningContext.CreateWorker(WorkerType.WinX86)!;
-        if (await worker2.Service.CanLoadMapi(clientName))
+        if (PlatformCompat.System.SupportsWinX86Worker)
         {
-            return await worker2.Service.SendMapiEmail(clientName, message);
+            // If 64-bit failed, try 32-bit
+            using var worker2 = _scanningContext.CreateWorker(WorkerType.WinX86)!;
+            if (await worker2.Service.CanLoadMapi(clientName))
+            {
+                return await worker2.Service.SendMapiEmail(clientName, message);
+            }
         }
 
         throw new Exception($"Could not load MAPI dll: {clientName}");

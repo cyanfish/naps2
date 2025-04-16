@@ -1,4 +1,6 @@
-﻿namespace NAPS2.Platform;
+﻿using System.Runtime.InteropServices;
+
+namespace NAPS2.Platform;
 
 internal class PlatformCompat
 {
@@ -30,9 +32,12 @@ internal class PlatformCompat
     }
 
     private static ISystemCompat GetWindowsSystemCompat() =>
-        Environment.Is64BitProcess
-            ? new Windows64SystemCompat()
-            : new Windows32SystemCompat();
+        RuntimeInformation.ProcessArchitecture switch
+        {
+            Architecture.Arm64 => new WindowsArm64SystemCompat(),
+            Architecture.X86 => new Windows32SystemCompat(),
+            _ => new Windows64SystemCompat()
+        };
 
     public static ISystemCompat System
     {

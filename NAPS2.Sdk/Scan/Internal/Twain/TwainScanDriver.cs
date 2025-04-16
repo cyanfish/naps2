@@ -82,6 +82,11 @@ internal class TwainScanDriver : IScanDriver
             // Arch doesn't matter if we can run in a worker process of the correct arch.
             return;
         }
+        if (!PlatformCompat.System.SupportsWinX86Worker)
+        {
+            // No need for an x86 worker (i.e. if we're on arm64)
+            return;
+        }
         var dsm = options.TwainOptions.Dsm;
         if (dsm is TwainDsm.New or TwainDsm.Old && Environment.Is64BitProcess)
         {
