@@ -9,7 +9,7 @@
     <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
     <SelfContained>true</SelfContained>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <!-- TODO: Re-enable trimming if we can fix startup time as well as WIA being broken -->
     <PublishTrimmed>false</PublishTrimmed>
     <TrimMode>none</TrimMode>
