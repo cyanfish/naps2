@@ -33,7 +33,7 @@
     <PackageReference Include="Grpc.Tools" Version="2.65.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-    <PackageReference Include="NAPS2.NTwain" Version="1.0.0" Condition="'$(TargetFramework)' != 'net8-macos'" />
+    <PackageReference Include="NAPS2.NTwain" Version="1.0.1" Condition="'$(TargetFramework)' != 'net8-macos'" />
     <PackageReference Include="NAPS2.PdfSharp" Version="1.0.1" />
     <PackageReference Include="NAPS2.Wia" Version="2.0.3" Condition="'$(TargetFramework)' != 'net8-macos'" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
