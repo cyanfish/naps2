@@ -95,8 +95,9 @@ public class PackageCommand : ICommand<PackageOptions>
         }
         if (platform == Platform.WinArm64)
         {
-            // AddPlatformFiles(pkgInfo, appBuildPath, "_winarm");
-            //
+            AddPlatformFiles(pkgInfo, appBuildPath, "_winarm");
+
+            // TODO: Bundle VC++ redist files for arm64
             // // Include VC++ redistributable files for Tesseract so the user doesn't need to install them separately
             // var vcRedistPath = Path.Combine(Paths.SolutionRoot, "NAPS2.Setup", "lib", "winarm", "vcredist");
             // foreach (var file in new DirectoryInfo(vcRedistPath).EnumerateFiles())
