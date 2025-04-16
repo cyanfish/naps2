@@ -7,7 +7,7 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 {
     public bool IsWiaDriverSupported => true;
 
-    public bool IsTwainDriverSupported => true;
+    public virtual bool IsTwainDriverSupported => true;
 
     public bool IsAppleDriverSupported => false;
 
