@@ -7,6 +7,7 @@ public static class TargetsHelper
     public static string PackageName(this Platform platform) => platform switch
     {
         Platform.Win64 => "win-x64",
+        Platform.WinArm64 => "win-arm64",
         Platform.Mac => "mac-univ",
         Platform.MacIntel => "mac-x64",
         Platform.MacArm => "mac-arm64",
@@ -61,6 +62,10 @@ public static class TargetsHelper
                     if (allPlat || platform == "win" || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Exe, Platform.Win64);
+                    }
+                    if (allPlat || platform == "winarm")
+                    {
+                        yield return new PackageTarget(PackageType.Exe, Platform.WinArm64);
                     }
                 }
                 if ((allPkg || packageType == "msi") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))

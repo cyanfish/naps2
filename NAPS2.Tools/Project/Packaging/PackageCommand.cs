@@ -17,7 +17,7 @@ public class PackageCommand : ICommand<PackageOptions>
             switch (target.Type)
             {
                 case PackageType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig, opts.NoSign);
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig, target.Platform, opts.NoSign);
                     break;
                 case PackageType.Msi:
                     WixToolsetPackager.PackageMsi(GetPackageInfoForConfig, opts.NoSign);
@@ -26,7 +26,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     MsixPackager.PackageMsix(GetPackageInfoForConfig, opts.NoSign);
                     break;
                 case PackageType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig, opts.NoSign);
+                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig, target.Platform, opts.NoSign);
                     break;
                 case PackageType.Deb:
                     DebPackager.PackageDeb(GetPackageInfoForConfig(), opts.NoSign);
@@ -56,10 +56,12 @@ public class PackageCommand : ICommand<PackageOptions>
             return pkgInfo;
         }
 
+        string arch = platform == Platform.WinArm64 ? "win-arm64" : "win-x64";
+
         foreach (var project in new[]
                      { "NAPS2.App.WinForms", "NAPS2.App.Console" })
         {
-            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release", "net9-windows", "win-x64",
+            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release", "net9-windows", arch,
                 "publish");
             if (!Directory.Exists(buildPath))
             {
@@ -68,21 +70,39 @@ public class PackageCommand : ICommand<PackageOptions>
             PopulatePackageInfo(buildPath, platform, pkgInfo);
         }
 
-        var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net9-windows",
-            "win-x86", "publish");
-        pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
+        if (platform == Platform.Win64)
+        {
+            // No need for a 32-bit worker on ARM64
+            var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net9-windows",
+                "win-x86", "publish");
+            pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
+        }
 
         var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net9-windows",
-            "win-x64", "publish");
-        AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
-        // Special case as we have a 64 bit main app and a 32 bit worker
-        AddPlatformFile(pkgInfo, appBuildPath, "_win32", "twaindsm.dll");
-
-        // Include VC++ redistributable files for Tesseract so the user doesn't need to install them separately
-        var vcRedistPath = Path.Combine(Paths.SolutionRoot, "NAPS2.Setup", "lib", "win64", "vcredist");
-        foreach (var file in new DirectoryInfo(vcRedistPath).EnumerateFiles())
+            arch, "publish");
+        if (platform == Platform.Win64)
         {
-            pkgInfo.AddFile(new PackageFile(file.DirectoryName!, Path.Combine("lib", "_win64"), file.Name));
+            AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
+            // Special case as we have a 64 bit main app and a 32 bit worker
+            AddPlatformFile(pkgInfo, appBuildPath, "_win32", "twaindsm.dll");
+
+            // Include VC++ redistributable files for Tesseract so the user doesn't need to install them separately
+            var vcRedistPath = Path.Combine(Paths.SolutionRoot, "NAPS2.Setup", "lib", "win64", "vcredist");
+            foreach (var file in new DirectoryInfo(vcRedistPath).EnumerateFiles())
+            {
+                pkgInfo.AddFile(new PackageFile(file.DirectoryName!, Path.Combine("lib", "_win64"), file.Name));
+            }
+        }
+        if (platform == Platform.WinArm64)
+        {
+            // AddPlatformFiles(pkgInfo, appBuildPath, "_winarm");
+            //
+            // // Include VC++ redistributable files for Tesseract so the user doesn't need to install them separately
+            // var vcRedistPath = Path.Combine(Paths.SolutionRoot, "NAPS2.Setup", "lib", "winarm", "vcredist");
+            // foreach (var file in new DirectoryInfo(vcRedistPath).EnumerateFiles())
+            // {
+            //     pkgInfo.AddFile(new PackageFile(file.DirectoryName!, Path.Combine("lib", "_winarm"), file.Name));
+            // }
         }
 
         pkgInfo.AddFile(new PackageFile(appBuildPath, "", "appsettings.xml"));
@@ -131,7 +151,8 @@ public class PackageCommand : ICommand<PackageOptions>
         using (var stream = depsFile.OpenText())
         using (var reader = new JsonTextReader(stream))
             deps = (JObject) JToken.ReadFrom(reader);
-        var targets = (JObject) deps["targets"]![".NETCoreApp,Version=v9.0/win-x64"]!;
+        string arch = platform == Platform.WinArm64 ? "win-arm64" : "win-x64";
+        var targets = (JObject) deps["targets"]![$".NETCoreApp,Version=v9.0/{arch}"]!;
         foreach (var pair in targets)
         {
             var target = (JObject) pair.Value!;

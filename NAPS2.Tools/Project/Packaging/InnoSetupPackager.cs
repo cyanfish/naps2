@@ -1,18 +1,28 @@
 using System.Text;
+using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
 
 public static class InnoSetupPackager
 {
-    public static void PackageExe(Func<PackageInfo> pkgInfoFunc, bool noSign)
+    public static void PackageExe(Func<PackageInfo> pkgInfoFunc, Platform platform, bool noSign)
     {
+        string arch = platform == Platform.WinArm64 ? "arm64" : "x64";
+
         Output.Verbose("Building binaries");
-        Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.WinForms -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.Console -c Release");
-        Cli.Run("dotnet", "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false");
-        Cli.Run("dotnet", "publish NAPS2.App.WinForms -c Release /p:DebugType=None /p:DebugSymbols=false");
-        Cli.Run("dotnet", "publish NAPS2.App.Console -c Release /p:DebugType=None /p:DebugSymbols=false");
+        if (platform != Platform.WinArm64)
+        {
+            Cli.Run("dotnet", $"clean NAPS2.App.Worker -r win-{arch} -c Release");
+        }
+        Cli.Run("dotnet", $"clean NAPS2.App.WinForms -r win-{arch} -c Release");
+        Cli.Run("dotnet", $"clean NAPS2.App.Console -r win-{arch} -c Release");
+        if (platform != Platform.WinArm64)
+        {
+            Cli.Run("dotnet",
+                $"publish NAPS2.App.Worker -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false");
+        }
+        Cli.Run("dotnet", $"publish NAPS2.App.WinForms -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false");
+        Cli.Run("dotnet", $"publish NAPS2.App.Console -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false");
 
         var pkgInfo = pkgInfoFunc();
         if (!noSign)
@@ -24,7 +34,7 @@ public static class InnoSetupPackager
         var exePath = pkgInfo.GetPath("exe");
         Output.Info($"Packaging exe installer: {exePath}");
 
-        var innoDefPath = GenerateInnoDef(pkgInfo);
+        var innoDefPath = GenerateInnoDef(pkgInfo, arch);
 
         // TODO: Use https://github.com/DomGries/InnoDependencyInstaller for .net dependency
         var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/Inno Setup 6/iscc.exe");
@@ -39,7 +49,7 @@ public static class InnoSetupPackager
         Output.OperationEnd($"Packaged exe installer: {exePath}");
     }
 
-    private static string GenerateInnoDef(PackageInfo packageInfo)
+    private static string GenerateInnoDef(PackageInfo packageInfo, string arch)
     {
         var template = File.ReadAllText(Path.Combine(Paths.SetupWindows, "setup.template.iss"));
 
@@ -49,11 +59,11 @@ public static class InnoSetupPackager
         defLines.AppendLine($"#define AppPlatform \"{packageInfo.PackageName}\"");
         template = template.Replace("; !defs", defLines.ToString());
 
-        var arch = new StringBuilder();
-        arch.AppendLine("ArchitecturesInstallIn64BitMode=x64");
+        var archLines = new StringBuilder();
+        archLines.AppendLine($"ArchitecturesInstallIn64BitMode={arch}");
         template = template.Replace("; !clean32", @"Type: filesandordirs; Name: ""{commonpf32}\NAPS2""");
-        arch.AppendLine("ArchitecturesAllowed=x64");
-        template = template.Replace("; !arch", arch.ToString());
+        archLines.AppendLine($"ArchitecturesAllowed={arch}");
+        template = template.Replace("; !arch", archLines.ToString());
 
         var fileLines = new StringBuilder();
         foreach (var pkgFile in packageInfo.Files)
