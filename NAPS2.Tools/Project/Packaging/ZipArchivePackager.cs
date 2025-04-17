@@ -12,16 +12,16 @@ public static class ZipArchivePackager
         Output.Verbose("Building binaries");
         if (platform != Platform.WinArm64)
         {
-            Cli.Run("dotnet", $"clean NAPS2.App.Worker -r win-{arch} -c Release");
+            Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
         }
         Cli.Run("dotnet", $"clean NAPS2.App.WinForms -r win-{arch} -c Release");
         Cli.Run("dotnet", $"clean NAPS2.App.Console -r win-{arch} -c Release");
         if (platform != Platform.WinArm64)
         {
             Cli.Run("dotnet",
-                $"publish NAPS2.App.Worker -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
+                "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
         }
-        Cli.Run("dotnet", $"publish NAPS2.App.WinForm -r win-{arch}s -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
+        Cli.Run("dotnet", $"publish NAPS2.App.WinForms -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
         Cli.Run("dotnet", $"publish NAPS2.App.Console -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=ZIP");
         Cli.Run("dotnet", "build NAPS2.App.PortableLauncher -c Release");
 
