@@ -7,6 +7,7 @@ import "google/protobuf/empty.proto";
 service ProcessCoordinatorService {
 	rpc Activate (ActivateRequest) returns (google.protobuf.Empty) {}
 	rpc CloseWindow (CloseWindowRequest) returns (google.protobuf.Empty) {}
+	rpc StopSharingServer (StopSharingServerRequest) returns (google.protobuf.Empty) {}
 	rpc ScanWithDevice (ScanWithDeviceRequest) returns (google.protobuf.Empty) {}
 	rpc OpenFile (OpenFileRequest) returns (google.protobuf.Empty) {}
 }
@@ -15,6 +16,9 @@ message ActivateRequest {
 }
 
 message CloseWindowRequest {
+}
+
+message StopSharingServerRequest {
 }
 
 message ScanWithDeviceRequest {

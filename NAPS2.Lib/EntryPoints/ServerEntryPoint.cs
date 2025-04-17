@@ -1,6 +1,9 @@
 using System.Threading;
 using Autofac;
+using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using NAPS2.Modules;
+using NAPS2.Remoting;
 using NAPS2.Remoting.Server;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
@@ -25,16 +28,21 @@ public static class ServerEntryPoint
 
         run ??= _ =>
         {
+            var reset = new ManualResetEvent(false);
             var sharedDeviceManager = container.Resolve<ISharedDeviceManager>();
             sharedDeviceManager.StartSharing();
+            var processCoordinator = container.Resolve<ProcessCoordinator>();
+            processCoordinator.StartServer(new ProcessCoordinatorServiceImpl(reset));
             AppDomain.CurrentDomain.ProcessExit += (_, _) =>
             {
                 // TODO: Actually wait for sharing to stop
                 sharedDeviceManager.StopSharing();
+                processCoordinator.KillServer();
             };
-            var reset = new ManualResetEvent(false);
             Console.CancelKeyPress += (_, _) => reset.Set();
             reset.WaitOne();
+            // TODO: Why is this needed?
+            Environment.Exit(0);
         };
         run(container);
 
@@ -45,5 +53,15 @@ public static class ServerEntryPoint
     {
         Log.FatalException("An error occurred that caused the server task to terminate.", e.Exception);
         e.SetObserved();
+    }
+
+    private class ProcessCoordinatorServiceImpl(ManualResetEvent reset)
+        : ProcessCoordinatorService.ProcessCoordinatorServiceBase
+    {
+        public override Task<Empty> StopSharingServer(StopSharingServerRequest request, ServerCallContext context)
+        {
+            reset.Set();
+            return Task.FromResult(new Empty());
+        }
     }
 }

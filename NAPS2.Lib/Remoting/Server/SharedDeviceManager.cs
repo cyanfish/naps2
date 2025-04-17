@@ -60,6 +60,7 @@ public class SharedDeviceManager : ISharedDeviceManager
         }
         lock (this)
         {
+            if (_userStarted) return;
             _userStarted = true;
             if (!TryStart())
             {
@@ -90,6 +91,7 @@ public class SharedDeviceManager : ISharedDeviceManager
     {
         lock (this)
         {
+            if (!_userStarted) return;
             _userStarted = false;
             ResetStartTimer();
             _server.Stop().ContinueWith(t =>

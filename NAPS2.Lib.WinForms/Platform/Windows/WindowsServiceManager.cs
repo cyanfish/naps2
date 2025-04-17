@@ -1,11 +1,16 @@
 using System.Runtime.InteropServices.ComTypes;
+using NAPS2.Remoting;
+using NAPS2.Remoting.Server;
 
 namespace NAPS2.Platform.Windows;
 
 /// <summary>
 /// Manages a user startup item on Windows.
 /// </summary>
-public class WindowsServiceManager : IOsServiceManager
+public class WindowsServiceManager(
+    ProcessCoordinator processCoordinator,
+    ISharedDeviceManager sharedDeviceManager)
+    : IOsServiceManager
 {
     private static string ShortcutPath =>
         Path.Combine(
@@ -21,17 +26,64 @@ public class WindowsServiceManager : IOsServiceManager
         // ReSharper disable SuspiciousTypeConversion.Global
         var shortcut = (Win32.IShellLink) new Win32.ShellLink();
         shortcut.SetWorkingDirectory(AssemblyHelper.EntryFolder);
-        shortcut.SetPath(AssemblyHelper.EntryFile);
+        shortcut.SetPath(Environment.ProcessPath!);
         shortcut.SetArguments("server");
-        shortcut.SetIconLocation(AssemblyHelper.EntryFile, 0);
+        shortcut.SetIconLocation(Environment.ProcessPath!, 0);
         var persistFile = (IPersistFile) shortcut;
-        persistFile.Save(ShortcutPath, false);
-        // TODO: Start process
+        try
+        {
+            persistFile.Save(ShortcutPath, false);
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException($"Error saving startup shortcut to {ShortcutPath}", ex);
+        }
+        try
+        {
+            var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = Environment.ProcessPath,
+                Arguments = "server"
+            });
+            if (process != null)
+            {
+                // Switch to the background process for sharing
+                sharedDeviceManager.StopSharing();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error starting NAPS2 server process", ex);
+        }
     }
 
     public void Unregister()
     {
-        File.Delete(ShortcutPath);
-        // TODO: Kill running process (using ProcessCoordinator?)
+        try
+        {
+            File.Delete(ShortcutPath);
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException($"Error deleting startup shortcut at {ShortcutPath}", ex);
+        }
+        try
+        {
+            int stopped = 0;
+            foreach (var process in WindowsApplicationLifecycle.GetOtherNaps2Processes())
+            {
+                if (processCoordinator.StopSharingServer(process, 100))
+                {
+                    stopped++;
+                }
+            }
+            Log.Debug($"Stopped {stopped} NAPS2 sharing server processes");
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error stopping NAPS2 server process", ex);
+        }
+        // Switch back to this process for sharing
+        sharedDeviceManager.StartSharing();
     }
 }

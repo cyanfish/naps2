@@ -184,7 +184,7 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
         }
     }
 
-    private static IEnumerable<Process> GetOtherNaps2Processes()
+    public static IEnumerable<Process> GetOtherNaps2Processes()
     {
         Process currentProcess = Process.GetCurrentProcess();
         var otherProcesses = Process.GetProcessesByName(currentProcess.ProcessName)

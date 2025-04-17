@@ -79,6 +79,9 @@ public class ProcessCoordinator(string basePath, string pipeNameFormat)
         return TrySendMessage(recipient, timeout, client => client.OpenFile(req));
     }
 
+    public bool StopSharingServer(Process recipient, int timeout) =>
+        TrySendMessage(recipient, timeout, client => client.StopSharingServer(new StopSharingServerRequest()));
+
     public bool TryTakeInstanceLock()
     {
         if (_instanceLock != null)
