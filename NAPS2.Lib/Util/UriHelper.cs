@@ -28,7 +28,7 @@ public class UriHelper
         if (uri.Length >= 2 && uri[0] == '/' && uri[1] == '/') // UNC path
             uri.Insert(0, "file:");
         else
-            uri.Insert(0, "file:///");
+            uri.Insert(0, uri.Length > 0 && uri[0] == '/' ? "file://" : "file:///");
         return uri.ToString();
     }
 
