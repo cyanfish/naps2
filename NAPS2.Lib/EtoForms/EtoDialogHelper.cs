@@ -87,27 +87,40 @@ public class EtoDialogHelper : DialogHelper
         {
             return _addExt ? $".{ext}" : null;
         }
-        return Placeholders.NonNumeric.Substitute(defaultPath);
+        var normPath = NormalizePath(defaultPath);
+        return _addExt && !Path.HasExtension(normPath)
+            ? $"{normPath}.{ext}"
+            : normPath;
     }
 
     private void SetDir(SaveFileDialog dialog, string? defaultPath)
     {
-        string? path;
+        string? path = null;
         if (Paths.IsTestAppDataPath)
         {
             // For UI test automation we choose the appdata folder for test isolation and consistency
             path = Paths.AppData;
         }
-        else
+        else if (Path.IsPathRooted(defaultPath))
         {
-            path = Path.IsPathRooted(defaultPath)
-                ? Path.GetDirectoryName(Placeholders.NonNumeric.Substitute(defaultPath))
-                : null;
+            path = Path.GetDirectoryName(NormalizePath(defaultPath));
         }
         if (path != null)
         {
             dialog.Directory = UriHelper.FilePathToFileUri(Path.GetFullPath(path));
         }
+    }
+
+    private static string NormalizePath(string path)
+    {
+        string normPath = Placeholders.NonNumeric.Substitute(path);
+        // If the path points to a directory, it should end in a trailing slash.
+        // Otherwise, path functions will assume that the directory name is a file name.
+        if (Directory.Exists(normPath) && !normPath.EndsWith(Path.DirectorySeparatorChar))
+        {
+            normPath += Path.DirectorySeparatorChar;
+        }
+        return normPath;
     }
 
     public override bool PromptToImport(out string[]? filePaths)
