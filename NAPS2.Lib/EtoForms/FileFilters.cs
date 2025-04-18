@@ -38,7 +38,8 @@ public class FileFilters
             filters.Add(new FileFilter(MiscResources.FileTypePng, ".png"));
             filters.Add(new FileFilter(MiscResources.FileTypeTiff, ".tiff", ".tif"));
         }
-        if (selectedExt != null)
+        // TODO: Fix setting current filter on Eto GTK
+        if (selectedExt != null && !EtoPlatform.Current.IsGtk)
         {
             selectedExt = selectedExt.Replace(".", "");
             foreach (var filter in filters)
