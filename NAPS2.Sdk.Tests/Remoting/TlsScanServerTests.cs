@@ -12,13 +12,13 @@ namespace NAPS2.Sdk.Tests.Remoting;
 public class TlsScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper,
     EsclSecurityPolicy.RequireHttps, X509CertificateLoader.LoadPkcs12(BinaryResources.testcert, null))
 {
-    [Fact(Timeout = TIMEOUT)]
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task FindDevice()
     {
         Assert.True(await TryFindClientDevice());
     }
 
-    [Fact(Timeout = TIMEOUT)]
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task Scan()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
@@ -34,7 +34,7 @@ public class TlsScanServerTests(ITestOutputHelper testOutputHelper) : ScanServer
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    [Fact(Timeout = TIMEOUT)]
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task ScanPreventedByTrustedCertificateSecurityPolicy()
     {
         var scanResult = _client.Scan(new ScanOptions

@@ -12,7 +12,7 @@ namespace NAPS2.Sdk.Tests.Remoting;
 public class FallbackScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper,
     EsclSecurityPolicy.None, X509CertificateLoader.LoadPkcs12(BinaryResources.testcert, null))
 {
-    [Fact(Timeout = TIMEOUT)]
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task ScanFallbackFromHttpsToHttp()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
@@ -30,7 +30,7 @@ public class FallbackScanServerTests(ITestOutputHelper testOutputHelper) : ScanS
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    [Fact(Timeout = TIMEOUT)]
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task ScanPreventedByTrustedCertificateSecurityPolicy()
     {
         var scanResult = _client.Scan(new ScanOptions

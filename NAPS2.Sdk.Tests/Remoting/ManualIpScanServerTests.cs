@@ -10,7 +10,7 @@ namespace NAPS2.Sdk.Tests.Remoting;
 public class ManualIpScanServerTests(ITestOutputHelper testOutputHelper) : ScanServerTestsBase(testOutputHelper,
     EsclSecurityPolicy.None, X509CertificateLoader.LoadPkcs12(BinaryResources.testcert, null))
 {
-    [Fact(Timeout = TIMEOUT)]
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task ScanHttpIpv4()
     {
         var httpPort = _server.GetDevicePorts(_serverDevice, _serverDisplayName).port;
@@ -25,7 +25,7 @@ public class ManualIpScanServerTests(ITestOutputHelper testOutputHelper) : ScanS
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    [Fact(Timeout = TIMEOUT)]
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task ScanHttpsIpv4()
     {
         var httpsPort = _server.GetDevicePorts(_serverDevice, _serverDisplayName).tlsPort;
