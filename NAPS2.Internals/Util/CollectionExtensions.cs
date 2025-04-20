@@ -259,4 +259,12 @@ public static class CollectionExtensions
     {
         return new DisposableList<T>(enumerable.ToImmutableList());
     }
+
+    public static void DisposeAll(this IEnumerable<IDisposable> enumerable)
+    {
+        foreach (var item in enumerable)
+        {
+            item.Dispose();
+        }
+    }
 }

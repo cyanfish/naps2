@@ -242,7 +242,7 @@ public class RecoveryManagerTests : ContextualTests
         var processedImages = imageRefs.Distinct().ToDictionary(x => x, _ => CreateRecoveryImage(recoveryContext));
         var images = imageRefs.Select(x => new UiImage(processedImages[x].Clone()))
             .ToList();
-        processedImages.Values.ToDisposableList().Dispose();
+        processedImages.Values.DisposeAll();
         imageList.Mutate(new ListMutation<UiImage>.Append(images));
         rsm1.ReleaseLockForTesting();
         return images;
