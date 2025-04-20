@@ -24,5 +24,4 @@ jobs:
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
     - name: Test
-      if: matrix.os != 'macos-15'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui
