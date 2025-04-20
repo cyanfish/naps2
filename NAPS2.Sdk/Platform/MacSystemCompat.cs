@@ -63,7 +63,8 @@ internal class MacSystemCompat : ISystemCompat
             {
                 "",
                 prefix,
-                $"../Resources/{prefix}" // Path in .app bundle
+                $"../Resources/{prefix}", // Path in .app bundle,
+                $"../NAPS2.App/Contents/Resources/{prefix}" // Path to universal .app bundle for tests
             };
         }
     }
