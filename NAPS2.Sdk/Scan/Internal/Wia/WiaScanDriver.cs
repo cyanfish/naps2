@@ -27,7 +27,15 @@ internal class WiaScanDriver : IScanDriver
             {
                 using (deviceInfo)
                 {
-                    callback(new ScanDevice(Driver.Wia, deviceInfo.Id(), deviceInfo.Name()));
+                    string id = deviceInfo.Id();
+                    string name = deviceInfo.Name();
+                    if (name.Equals(@"No friendly name", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        // Some Windows/driver issues can result in the scanner name appearing as "No friendly name".
+                        // Better to replace with a generic "Unknown Scanner" string.
+                        name = SdkResources.UnknownScanner;
+                    }
+                    callback(new ScanDevice(Driver.Wia, id, name));
                 }
             }
         });

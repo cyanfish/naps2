@@ -249,6 +249,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown Scanner.
+        /// </summary>
+        internal static string UnknownScanner {
+            get {
+                return ResourceManager.GetString("UnknownScanner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version {0}.
         /// </summary>
         internal static string Version {
