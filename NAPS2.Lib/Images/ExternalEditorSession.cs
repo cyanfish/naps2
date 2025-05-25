@@ -77,7 +77,7 @@ public class ExternalEditorSession : IDisposable
         {
             newMemoryImage = _scanningContext.ImageContext.Load(_tempPath);
         }
-        catch (IOException ex) when (ex is not FileNotFoundException)
+        catch (Exception ex) when (ex is not FileNotFoundException)
         {
             // We might have tried to read the file while the application is still writing it
             // If we re-run the throttle it will try again after a delay

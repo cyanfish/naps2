@@ -1,6 +1,4 @@
 using Autofac;
-using NAPS2.EtoForms;
-using NAPS2.EtoForms.Gtk;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 
@@ -15,6 +13,7 @@ public class GtkModule : GuiModule
         builder.RegisterType<LinuxApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<GtkScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<LinuxServiceManager>().As<IOsServiceManager>();
+        builder.RegisterType<LinuxOpenWith>().As<IOsOpenWith>();
 
         builder.RegisterType<GtkDesktopForm>().As<DesktopForm>();
         builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();
