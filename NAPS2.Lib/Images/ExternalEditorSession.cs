@@ -4,29 +4,35 @@ namespace NAPS2.Images;
 
 public class ExternalEditorSession : IDisposable
 {
-    public class Factory(ScanningContext scanningContext, UiImageList imageList, ErrorOutput errorOutput)
+    public class Factory(
+        ScanningContext scanningContext,
+        UiImageList imageList,
+        ErrorOutput errorOutput,
+        IOsOpenWith openWith)
     {
-        public ExternalEditorSession Create(UiImage uiImage, string externalEditorPath) =>
-            new(scanningContext, imageList, errorOutput, uiImage, externalEditorPath);
+        public ExternalEditorSession Create(UiImage uiImage, string appPath) =>
+            new(scanningContext, imageList, errorOutput, openWith, uiImage, appPath);
     }
 
     private readonly ScanningContext _scanningContext;
     private readonly UiImageList _imageList;
     private readonly ErrorOutput _errorOutput;
+    private readonly IOsOpenWith _openWith;
     private readonly UiImage _uiImage;
-    private readonly string _externalEditorPath;
+    private readonly string _appPath;
     private readonly string _tempPath;
     private readonly FileSystemWatcher _watcher;
     private readonly TimedThrottle _throttle;
 
     private ExternalEditorSession(ScanningContext scanningContext, UiImageList imageList, ErrorOutput errorOutput,
-        UiImage uiImage, string externalEditorPath)
+        IOsOpenWith openWith, UiImage uiImage, string appPath)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
         _errorOutput = errorOutput;
+        _openWith = openWith;
         _uiImage = uiImage;
-        _externalEditorPath = externalEditorPath;
+        _appPath = appPath;
         _tempPath = CreateUserEditableFile();
         _watcher = CreateWatcher();
         _throttle = new TimedThrottle(ExternalImageEdited, TimeSpan.FromSeconds(1));
@@ -99,19 +105,11 @@ public class ExternalEditorSession : IDisposable
     {
         try
         {
-            var process = Process.Start(new ProcessStartInfo
-            {
-                FileName = _externalEditorPath,
-                Arguments = _tempPath,
-            });
-            if (process == null)
-            {
-                throw new InvalidOperationException("Could not start process");
-            }
+            _openWith.OpenWith(_appPath, _tempPath);
         }
         catch (Exception ex)
         {
-            _errorOutput.DisplayError(string.Format(UiStrings.ErrorStartingApplication, _externalEditorPath), ex);
+            _errorOutput.DisplayError(string.Format(UiStrings.ErrorStartingApplication, _appPath), ex);
         }
     }
 

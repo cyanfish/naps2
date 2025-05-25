@@ -184,11 +184,13 @@ public class DesktopCommands
         };
         EditWithApp = new ActionCommand(desktopController.EditWithApp)
         {
-            Text = UiStrings.EditWithAppName
+            Text = UiStrings.EditWithAppName,
+            IconName = "pencil_small"
         };
         EditWithPick = new ActionCommand(desktopController.EditWithPick)
         {
-            Text = UiStrings.EditWith
+            Text = UiStrings.EditWith,
+            IconName = "pencil_small"
         };
         ResetImage = new ActionCommand(desktopController.ResetImage)
         {

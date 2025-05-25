@@ -984,6 +984,9 @@
   <data name="EditWithAppName" xml:space="preserve">
     <value>Edit with {0}</value>
   </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Edit with...</value>
+  </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
     <value>Error starting application {0}</value>
   </data>

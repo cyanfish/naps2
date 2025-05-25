@@ -4,6 +4,7 @@ using Eto.Forms;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using NAPS2.EtoForms.Notifications;
+using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -39,6 +40,7 @@ public class DesktopController
     private readonly RecoveryManager _recoveryManager;
     private readonly ImageTransfer _imageTransfer = new();
     private readonly ExternalEditorSession.Factory _externalEditorSessionFactory;
+    private readonly IFormFactory _formFactory;
 
     private bool _closed;
     private bool _preInitialized;
@@ -55,7 +57,8 @@ public class DesktopController
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
         ISharedDeviceManager sharedDeviceManager, ProcessCoordinator processCoordinator,
-        RecoveryManager recoveryManager, ExternalEditorSession.Factory externalEditorSessionFactory)
+        RecoveryManager recoveryManager, ExternalEditorSession.Factory externalEditorSessionFactory,
+        IFormFactory formFactory)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -78,6 +81,7 @@ public class DesktopController
         _processCoordinator = processCoordinator;
         _recoveryManager = recoveryManager;
         _externalEditorSessionFactory = externalEditorSessionFactory;
+        _formFactory = formFactory;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
@@ -441,13 +445,32 @@ public class DesktopController
 
     public void EditWithApp()
     {
-        // TODO: Extract this to a separate controller/helper or whatever
-        string? appPath = _config.Get(c => c.EditWithAppPath);
-        if (string.IsNullOrEmpty(appPath))
+        string? appId = _config.Get(c => c.EditWithAppPath);
+        if (string.IsNullOrEmpty(appId))
         {
             EditWithPick();
             return;
         }
+        EditWithPath(appId);
+    }
+
+    public void EditWithPick()
+    {
+        var pickForm = _formFactory.Create<EditWithForm>();
+        pickForm.ShowModal();
+        var entry = pickForm.Result;
+        if (entry != null)
+        {
+            var transact = _config.User.BeginTransaction();
+            transact.Set(c => c.EditWithAppPath, entry.Id);
+            transact.Set(c => c.EditWithAppName, entry.Name);
+            transact.Commit();
+            EditWithPath(entry.Id);
+        }
+    }
+
+    private void EditWithPath(string appPath)
+    {
         var uiImage = _imageList.Selection.FirstOrDefault();
         if (uiImage == null)
         {
@@ -460,10 +483,6 @@ public class DesktopController
                 uiImage.EditorSessions.Add(_externalEditorSessionFactory.Create(uiImage, appPath));
             }
         }
-    }
-
-    public void EditWithPick()
-    {
     }
 
     public async Task SavePdf()

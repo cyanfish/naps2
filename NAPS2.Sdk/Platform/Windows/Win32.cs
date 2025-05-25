@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace NAPS2.Platform.Windows;
@@ -159,4 +160,46 @@ internal static class Win32
         void Resolve(IntPtr hwnd, int fFlags);
         void SetPath([MarshalAs(UnmanagedType.LPWStr)] string pszFile);
     }
+    
+    [Flags]
+    public enum ASSOC_FILTER
+    {
+        ASSOC_FILTER_NONE = 0x00000000,
+        ASSOC_FILTER_RECOMMENDED = 0x00000001
+    }
+
+    [Guid("973810ae-9599-4b88-9e4d-6ee98c9552da"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IEnumAssocHandlers
+    {
+        [PreserveSig]
+        int Next(int celt, out IAssocHandler rgelt, out int pceltFetched);
+    }
+
+    [Guid("f04061ac-1659-4a3f-a954-775aa57fc083"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IAssocHandler
+    {
+        void GetName([MarshalAs(UnmanagedType.LPWStr)] out string ppsz);
+        void GetUIName([MarshalAs(UnmanagedType.LPWStr)] out string ppsz);
+        void GetIconLocation([MarshalAs(UnmanagedType.LPWStr)] out string ppszPath, out int pIndex);
+        [PreserveSig]
+        int IsRecommended();
+        void MakeDefault([MarshalAs(UnmanagedType.LPWStr)] string pszDescription);
+        void Invoke(IDataObject pdo);
+        void CreateInvoker(IDataObject pdo, out /*IAssocHandlerInvoker*/ object invoker);
+    }
+
+    [Guid("43826d1e-e718-42ee-bc55-a1e261c37bfe"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IShellItem
+    {
+        IDataObject BindToHandler(IBindCtx? pbc, [MarshalAs(UnmanagedType.LPStruct)] Guid bhid, [MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+    }
+    
+    [DllImport("shlwapi.dll", BestFitMapping = false, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = false, ThrowOnUnmappableChar = true)]
+    public static extern int SHLoadIndirectString(string pszSource, StringBuilder pszOutBuf, int cchOutBuf, IntPtr ppvReserved);
+
+    [DllImport("shell32", CharSet = CharSet.Unicode)]
+    public extern static int SHCreateItemFromParsingName(string pszPath, IBindCtx? pbc, [MarshalAs(UnmanagedType.LPStruct)] Guid riid, out IShellItem ppv);
+
+    [DllImport("shell32", CharSet = CharSet.Unicode)]
+    public extern static int SHAssocEnumHandlers(string pszExtra, ASSOC_FILTER afFilter, out IEnumAssocHandlers ppEnumHandler);
 }

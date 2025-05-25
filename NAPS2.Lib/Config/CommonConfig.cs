@@ -218,4 +218,7 @@ public class CommonConfig
 
     [User]
     public string? EditWithAppPath { get; set; }
+
+    [User]
+    public string? EditWithAppName { get; set; }
 }

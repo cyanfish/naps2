@@ -16,6 +16,7 @@ public class WinFormsModule : GuiModule
         builder.RegisterType<WindowsApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<PrintDocumentPrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<WindowsServiceManager>().As<IOsServiceManager>().SingleInstance();
+        builder.RegisterType<WindowsOpenWith>().As<IOsOpenWith>();
 
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
         builder.RegisterType<WinFormsPreviewForm>().As<PreviewForm>();
