@@ -38,6 +38,7 @@ public class DesktopController
     private readonly ProcessCoordinator _processCoordinator;
     private readonly RecoveryManager _recoveryManager;
     private readonly ImageTransfer _imageTransfer = new();
+    private readonly ExternalEditorSession.Factory _externalEditorSessionFactory;
 
     private bool _closed;
     private bool _preInitialized;
@@ -53,7 +54,8 @@ public class DesktopController
         DialogHelper dialogHelper,
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
-        ISharedDeviceManager sharedDeviceManager, ProcessCoordinator processCoordinator, RecoveryManager recoveryManager)
+        ISharedDeviceManager sharedDeviceManager, ProcessCoordinator processCoordinator,
+        RecoveryManager recoveryManager, ExternalEditorSession.Factory externalEditorSessionFactory)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -75,6 +77,7 @@ public class DesktopController
         _sharedDeviceManager = sharedDeviceManager;
         _processCoordinator = processCoordinator;
         _recoveryManager = recoveryManager;
+        _externalEditorSessionFactory = externalEditorSessionFactory;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
@@ -181,6 +184,7 @@ public class DesktopController
             {
                 _scanningContext.Dispose();
                 _recoveryStorageManager.Dispose();
+                _imageList.Images.DisposeAll();
             }
             catch (Exception ex)
             {
@@ -435,6 +439,33 @@ public class DesktopController
         }
     }
 
+    public void EditWithApp()
+    {
+        // TODO: Extract this to a separate controller/helper or whatever
+        string? appPath = _config.Get(c => c.EditWithAppPath);
+        if (string.IsNullOrEmpty(appPath))
+        {
+            EditWithPick();
+            return;
+        }
+        var uiImage = _imageList.Selection.FirstOrDefault();
+        if (uiImage == null)
+        {
+            return;
+        }
+        lock (uiImage)
+        {
+            if (!uiImage.IsDisposed)
+            {
+                uiImage.EditorSessions.Add(_externalEditorSessionFactory.Create(uiImage, appPath));
+            }
+        }
+    }
+
+    public void EditWithPick()
+    {
+    }
+
     public async Task SavePdf()
     {
         var action = _config.Get(c => c.SaveButtonDefaultAction);
@@ -524,7 +555,8 @@ public class DesktopController
         _suspended = false;
     }
 
-    private class ProcessCoordinatorServiceImpl(DesktopController controller) : ProcessCoordinatorService.ProcessCoordinatorServiceBase
+    private class ProcessCoordinatorServiceImpl(DesktopController controller)
+        : ProcessCoordinatorService.ProcessCoordinatorServiceBase
     {
         public override Task<Empty> Activate(ActivateRequest request, ServerCallContext context)
         {
@@ -553,11 +585,11 @@ public class DesktopController
             {
                 controller._desktopFormProvider.DesktopForm.Close();
 #if NET6_0_OR_GREATER
-            if (OperatingSystem.IsMacOS())
-            {
-                // Closing the main window isn't enough to quit the app on Mac
-                Application.Instance.Quit();
-            }
+                if (OperatingSystem.IsMacOS())
+                {
+                    // Closing the main window isn't enough to quit the app on Mac
+                    Application.Instance.Quit();
+                }
 #endif
             });
             return Task.FromResult(new Empty());

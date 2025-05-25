@@ -924,6 +924,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error starting application {0}.
+        /// </summary>
+        internal static string ErrorStartingApplication {
+            get {
+                return ResourceManager.GetString("ErrorStartingApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ESCL Driver.
         /// </summary>
         internal static string EsclDriver {

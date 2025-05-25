@@ -984,4 +984,7 @@
   <data name="EditWithAppName" xml:space="preserve">
     <value>Edit with {0}</value>
   </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Error starting application {0}</value>
+  </data>
 </root>

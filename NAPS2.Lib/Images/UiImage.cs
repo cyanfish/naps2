@@ -67,6 +67,7 @@ public class UiImage : IDisposable
             }
             IsDisposed = true;
             _processedImage.Dispose();
+            EditorSessions.DisposeAll();
 
             if (_thumbnail != null)
             {
@@ -128,7 +129,9 @@ public class UiImage : IDisposable
     {
         lock (this)
         {
+            _processedImage.Dispose();
             _processedImage = newImage;
+            _thumbnailTransformState = null;
             _saved = false;
         }
         ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
@@ -190,6 +193,8 @@ public class UiImage : IDisposable
     public bool HasUnsavedChanges => !_saved;
 
     public TransformState TransformState => _processedImage.TransformState;
+
+    public List<ExternalEditorSession> EditorSessions { get; } = new();
 
     public EventHandler? ThumbnailChanged;
 

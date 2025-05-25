@@ -182,6 +182,14 @@ public class DesktopCommands
             Text = UiStrings.Combine,
             IconName = "combine_small"
         };
+        EditWithApp = new ActionCommand(desktopController.EditWithApp)
+        {
+            Text = UiStrings.EditWithAppName
+        };
+        EditWithPick = new ActionCommand(desktopController.EditWithPick)
+        {
+            Text = UiStrings.EditWith
+        };
         ResetImage = new ActionCommand(desktopController.ResetImage)
         {
             Text = UiStrings.Reset
@@ -374,6 +382,8 @@ public class DesktopCommands
     public ActionCommand DocumentCorrection { get; set; }
     public ActionCommand Split { get; set; }
     public ActionCommand Combine { get; set; }
+    public ActionCommand EditWithApp { get; set; }
+    public ActionCommand EditWithPick { get; set; }
     public ActionCommand ResetImage { get; set; }
     public ActionCommand RotateMenu { get; set; }
     public ActionCommand RotateLeft { get; set; }

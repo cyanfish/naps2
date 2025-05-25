@@ -61,6 +61,7 @@ public static class InternalDefaults
             ShowPageNumbers = false,
             SidebarVisible = true,
             SidebarWidth = 230,
+            EditWithAppPath = "",
             PdfSettings = new PdfSettings
             {
                 Metadata = new PdfMetadata

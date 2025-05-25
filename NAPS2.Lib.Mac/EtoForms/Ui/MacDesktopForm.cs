@@ -129,6 +129,9 @@ public class MacDesktopForm : DesktopForm
                         Commands.Deskew,
                         Commands.CustomRotate,
                         new SeparatorMenuItem(),
+                        Commands.EditWithApp,
+                        Commands.EditWithPick,
+                        new SeparatorMenuItem(),
                         Commands.ResetImage
                     }
                 },

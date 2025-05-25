@@ -215,4 +215,7 @@ public class CommonConfig
 
     [User]
     public int SidebarWidth { get; set; }
+
+    [User]
+    public string? EditWithAppPath { get; set; }
 }
