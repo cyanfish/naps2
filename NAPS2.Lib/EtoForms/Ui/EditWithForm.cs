@@ -22,18 +22,19 @@ internal class EditWithForm : EtoDialogBase
 
         LayoutController.DefaultSpacing = 0;
         LayoutController.Content = L.Column(
-            _openWith.GetEntries(".jpg").Select(entry => C.Button(new ActionCommand(() =>
-                {
-                    Result = entry;
-                    Close();
-                })
-                {
-                    Text = entry.Name,
-                    Image = _openWith.LoadIcon(entry)?.ToEtoImage(),
-                    // TODO: Provide a default icon if it couldn't be loaded?
-                    // IconName = ??
-                }, ButtonImagePosition.Left, ButtonFlags.LargeText | ButtonFlags.LargeIcon).NaturalWidth(500)
-                .Height(50))
+            _openWith.GetEntries(".jpg")
+                .Where(entry => !entry.Name.StartsWith("NAPS2"))
+                .Select(entry => C.Button(new ActionCommand(() =>
+                    {
+                        Result = entry;
+                        Close();
+                    })
+                    {
+                        Text = entry.Name,
+                        Image = _openWith.LoadIcon(entry)?.ToEtoImage(),
+                        IconName = "pencil"
+                    }, ButtonImagePosition.Left, ButtonFlags.LargeText | ButtonFlags.LargeIcon).NaturalWidth(500)
+                    .Height(50))
                 .Expand()
         );
     }

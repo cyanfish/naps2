@@ -229,6 +229,7 @@ public class PreviewForm : EtoDialogBase
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.Split),
                 MakeToolButton(Commands.Combine),
+                MakeToolButton(Commands.EditWithApp),
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.SaveSelectedPdf, "file_extension_pdf"),
                 MakeToolButton(Commands.SaveSelectedImages, "picture_small"),
@@ -355,6 +356,7 @@ public class PreviewForm : EtoDialogBase
         _previewKsm.Assign(ks.ImageDocumentCorrection, Commands.DocumentCorrection);
         _previewKsm.Assign(ks.ImageSplit, Commands.Split);
         _previewKsm.Assign(ks.ImageCombine, Commands.Combine);
+        _previewKsm.Assign(ks.ImageEditWith, Commands.EditWithApp);
 
         _previewKsm.Assign(ks.RotateCustom, Commands.CustomRotate);
         _previewKsm.Assign(ks.RotateDeskew, Commands.Deskew);

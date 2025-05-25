@@ -55,6 +55,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.DocumentCorrection, c => c.KeyboardShortcuts.ImageDocumentCorrection),
         new(UiStrings.Split, c => c.KeyboardShortcuts.ImageSplit),
         new(UiStrings.Combine, c => c.KeyboardShortcuts.ImageCombine),
+        new(UiStrings.EditWith, c => c.KeyboardShortcuts.ImageEditWith),
         new(UiStrings.Reset, c => c.KeyboardShortcuts.ImageReset),
         Shortcut.Separator,
         new(UiStrings.RotateLeft, c => c.KeyboardShortcuts.RotateLeft),

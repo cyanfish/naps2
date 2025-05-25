@@ -182,9 +182,12 @@ public class DesktopCommands
             Text = UiStrings.Combine,
             IconName = "combine_small"
         };
+        string? editWithAppName = _config.Get(c => c.EditWithAppName);
         EditWithApp = new ActionCommand(desktopController.EditWithApp)
         {
-            Text = UiStrings.EditWithAppName,
+            Text = string.IsNullOrEmpty(editWithAppName)
+                ? UiStrings.EditWith
+                : string.Format(UiStrings.EditWithAppName, editWithAppName),
             IconName = "pencil_small"
         };
         EditWithPick = new ActionCommand(desktopController.EditWithPick)

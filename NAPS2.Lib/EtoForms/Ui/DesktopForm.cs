@@ -33,6 +33,7 @@ public abstract class DesktopForm : EtoFormBase
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
+    protected readonly ListProvider<Command> _editWithCommands = new();
     private readonly ContextMenu _contextMenu = new();
 
     private readonly NotificationArea _notificationArea;
@@ -82,6 +83,7 @@ public abstract class DesktopForm : EtoFormBase
         _keyboardShortcuts.Assign(Commands);
         CreateToolbarsAndMenus();
         UpdateScanButton();
+        UpdateEditWith(null, EventArgs.Empty);
         UpdateProfilesToolbar();
         InitLanguageDropdown();
 
@@ -113,6 +115,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
         _notificationArea = new NotificationArea(_notificationManager, LayoutController);
+        _desktopController.EditWithAppChanged += UpdateEditWith;
     }
 
     protected override void BuildLayout()
@@ -260,6 +263,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated -= ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
+        _desktopController.EditWithAppChanged -= UpdateEditWith;
         _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
     }
@@ -328,7 +332,7 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.Split)
                 .Append(Commands.Combine)
                 .Separator()
-                .Append(Commands.EditWithApp)
+                .Dynamic(_editWithCommands)
                 .Append(Commands.EditWithPick)
                 .Separator()
                 .Append(Commands.ResetImage));
@@ -554,6 +558,20 @@ public abstract class DesktopForm : EtoFormBase
             _keyboardShortcuts.AssignProfileShortcut(i + 1, commandList[i]);
         }
         _scanMenuCommands.Value = commandList;
+    }
+
+    private void UpdateEditWith(object? sender, EventArgs args)
+    {
+        var appName = Config.Get(c => c.EditWithAppName);
+        if (!string.IsNullOrEmpty(appName))
+        {
+            Commands.EditWithApp.Text = string.Format(UiStrings.EditWithAppName, appName);
+            _editWithCommands.Value = ImmutableList.Create((Command) Commands.EditWithApp);
+        }
+        else
+        {
+            _editWithCommands.Value = ImmutableList<Command>.Empty;
+        }
     }
 
     protected virtual void UpdateTitle(ScanProfile? defaultProfile)

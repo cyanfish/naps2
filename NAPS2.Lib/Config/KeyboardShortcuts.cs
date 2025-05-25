@@ -51,6 +51,7 @@ public class KeyboardShortcuts
     public string? ImageDocumentCorrection { get; set; }
     public string? ImageSplit { get; set; }
     public string? ImageCombine { get; set; }
+    public string? ImageEditWith { get; set; }
     public string? ImageReset { get; set; }
 
     public string? RotateLeft { get; set; }

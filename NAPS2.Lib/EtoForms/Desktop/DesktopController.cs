@@ -465,6 +465,7 @@ public class DesktopController
             transact.Set(c => c.EditWithAppPath, entry.Id);
             transact.Set(c => c.EditWithAppName, entry.Name);
             transact.Commit();
+            EditWithAppChanged?.Invoke(this, EventArgs.Empty);
             EditWithPath(entry.Id);
         }
     }
@@ -484,6 +485,8 @@ public class DesktopController
             }
         }
     }
+
+    public event EventHandler? EditWithAppChanged;
 
     public async Task SavePdf()
     {
