@@ -124,6 +124,10 @@
     <ImageHue></ImageHue>
     <ImageSaturation></ImageSaturation>
     <ImageSharpen></ImageSharpen>
+    <ImageDocumentCorrection></ImageDocumentCorrection>
+    <ImageSplit></ImageSplit>
+    <ImageCombine></ImageCombine>
+    <ImageEditWith></ImageEditWith>
     <ImageReset></ImageReset>
     <RotateLeft>Ctrl+Shift+Left</RotateLeft>
     <RotateRight>Ctrl+Shift+Right</RotateRight>
