@@ -1,24 +1,30 @@
-﻿using NAPS2.Unmanaged;
+﻿using System.Runtime.InteropServices;
+using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
+using NAPS2.Platform.Windows;
+using NAPS2.Unmanaged;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
 internal class MapiWrapper : IMapiWrapper
 {
-    private readonly SystemEmailClients _systemEmailClients;
+    private const string DEFAULT_MAPI_DLL = "mapi32.dll";
 
-    public MapiWrapper(SystemEmailClients systemEmailClients)
+    private readonly ILogger _logger;
+
+    public MapiWrapper(ILogger logger)
     {
-        _systemEmailClients = systemEmailClients;
+        _logger = logger;
     }
 
-    public bool CanLoadClient(string? clientName) => _systemEmailClients.GetLibrary(clientName) != IntPtr.Zero;
+    public bool CanLoadClient(string? clientName) => GetLibrary(clientName) != IntPtr.Zero;
 
     public Task<MapiSendMailReturnCode> SendEmail(string? clientName, EmailMessage message)
     {
         return Task.Run(() =>
         {
-            var (mapiSendMail, mapiSendMailW) = _systemEmailClients.GetDelegate(clientName, out bool unicode);
+            var (mapiSendMail, mapiSendMailW) = GetDelegate(clientName, out bool unicode);
 
             // Determine the flags used to send the message
             var flags = MapiSendMailFlags.None;
@@ -37,7 +43,7 @@ internal class MapiWrapper : IMapiWrapper
         });
     }
 
-    private static MapiSendMailReturnCode SendMail(SystemEmailClients.MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)
+    private static MapiSendMailReturnCode SendMail(MapiSendMailDelegate mapiSendMail, EmailMessage message, MapiSendMailFlags flags)
     {
         using var files = UnmanagedTypes.CopyOf(GetFiles(message));
         using var recips = UnmanagedTypes.CopyOf(GetRecips(message));
@@ -56,7 +62,7 @@ internal class MapiWrapper : IMapiWrapper
         return mapiSendMail(IntPtr.Zero, IntPtr.Zero, mapiMessage, flags, 0);
     }
 
-    private static MapiSendMailReturnCode SendMailW(SystemEmailClients.MapiSendMailDelegateW mapiSendMailW, EmailMessage message, MapiSendMailFlags flags)
+    private static MapiSendMailReturnCode SendMailW(MapiSendMailDelegateW mapiSendMailW, EmailMessage message, MapiSendMailFlags flags)
     {
         using var files = UnmanagedTypes.CopyOf(GetFilesW(message));
         using var recips = UnmanagedTypes.CopyOf(GetRecipsW(message));
@@ -118,4 +124,58 @@ internal class MapiWrapper : IMapiWrapper
             name = attachment.AttachmentName
         }).ToArray();
     }
+
+    internal IntPtr GetLibrary(string? clientName)
+    {
+        var dllPath = GetDllPath(clientName);
+        return Win32.LoadLibrary(dllPath);
+    }
+
+    internal (MapiSendMailDelegate?, MapiSendMailDelegateW?) GetDelegate(string? clientName, out bool unicode)
+    {
+        _logger.LogDebug($"Using MAPI client {clientName ?? "<default>"}");
+        var dllPath = GetDllPath(clientName);
+        _logger.LogDebug($"Loading MAPI DLL {dllPath}");
+        var module = Win32.LoadLibrary(dllPath);
+        if (module == IntPtr.Zero)
+        {
+            throw new Exception($"Could not load dll for email: {dllPath}");
+        }
+        var addr = Win32.GetProcAddress(module, "MAPISendMailW");
+        if (addr != IntPtr.Zero)
+        {
+            _logger.LogDebug("Using unicode function MAPISendMailW");
+            unicode = true;
+            return (null, (MapiSendMailDelegateW)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegateW)));
+        }
+        addr = Win32.GetProcAddress(module, "MAPISendMail");
+        if (addr != IntPtr.Zero)
+        {
+            _logger.LogDebug("Using ansi function MAPISendMail");
+            unicode = false;
+            return ((MapiSendMailDelegate)Marshal.GetDelegateForFunctionPointer(addr, typeof(MapiSendMailDelegate)), null);
+        }
+        throw new Exception($"Could not find an entry point in dll for email: {dllPath}");
+    }
+
+    private string GetDllPath(string? clientName)
+    {
+        if (string.IsNullOrEmpty(clientName) || clientName == GetDefaultName())
+        {
+            return DEFAULT_MAPI_DLL;
+        }
+        using var clientKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Clients\Mail\{clientName}");
+        return clientKey?.GetValue("DllPathEx")?.ToString() ?? clientKey?.GetValue("DllPath")?.ToString() ?? DEFAULT_MAPI_DLL;
+    }
+
+    private string? GetDefaultName()
+    {
+        using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
+        return key?.GetValue(null)?.ToString();
+    }
+
+    // MAPISendMail is documented at:
+    // http://msdn.microsoft.com/en-us/library/windows/desktop/dd296721%28v=vs.85%29.aspx
+    internal delegate MapiSendMailReturnCode MapiSendMailDelegate(IntPtr session, IntPtr hwnd, MapiMessage message, MapiSendMailFlags flags, int reserved);
+    internal delegate MapiSendMailReturnCode MapiSendMailDelegateW(IntPtr session, IntPtr hwnd, MapiMessageW message, MapiSendMailFlags flags, int reserved);
 }

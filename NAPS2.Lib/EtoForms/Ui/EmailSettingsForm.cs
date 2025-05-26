@@ -3,20 +3,19 @@ using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport.Email;
-using NAPS2.ImportExport.Email.Mapi;
 
 namespace NAPS2.EtoForms.Ui;
 
 internal class EmailSettingsForm : EtoDialogBase
 {
-    private readonly SystemEmailClients _systemEmailClients;
+    private readonly ISystemEmailClients _systemEmailClients;
 
     private readonly Label _provider = new() { Text = " \n " };
     private readonly FilePathWithPlaceholders _attachmentName;
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
-    public EmailSettingsForm(Naps2Config config, SystemEmailClients systemEmailClients, IIconProvider iconProvider) :
+    public EmailSettingsForm(Naps2Config config, ISystemEmailClients systemEmailClients, IIconProvider iconProvider) :
         base(config)
     {
         Title = UiStrings.EmailSettingsFormTitle;
@@ -90,15 +89,9 @@ internal class EmailSettingsForm : EtoDialogBase
                 _provider.Text = config.Get(c => c.EmailSetup.SmtpHost) + '\n' + config.Get(c => c.EmailSetup.SmtpUser);
                 break;
             case EmailProviderType.System:
-#if NET6_0_OR_GREATER
-                if (!OperatingSystem.IsWindowsVersionAtLeast(7))
-                {
-                    _provider.Text = SettingsResources.EmailProvider_NotSelected;
-                    break;
-                }
-#endif
                 _provider.Text = config.Get(c => c.EmailSetup.SystemProviderName) ??
-                                 _systemEmailClients.GetDefaultName();
+                                 _systemEmailClients.GetDefaultName() ??
+                                 SettingsResources.EmailProvider_NotSelected;
                 break;
             default:
                 _provider.Text = SettingsResources.EmailProvider_NotSelected;

@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using NAPS2.ImportExport.Email;
-using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Email.Oauth;
 
 namespace NAPS2;
@@ -29,7 +28,7 @@ internal class AutofacEmailProviderFactory : IEmailProviderFactory
             case EmailProviderType.AppleMail:
                 return _container.Resolve<IAppleMailEmailProvider>();
             default:
-                return _container.Resolve<MapiEmailProvider>();
+                return _container.Resolve<IEmailProvider>(new NamedParameter("systemDefault", true));
         }
     }
 

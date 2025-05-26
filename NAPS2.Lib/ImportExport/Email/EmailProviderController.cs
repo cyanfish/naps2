@@ -1,7 +1,6 @@
 using Eto.Drawing;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
-using NAPS2.ImportExport.Email.Mapi;
 using NAPS2.ImportExport.Email.Oauth;
 using NAPS2.Scan;
 
@@ -11,14 +10,14 @@ internal class EmailProviderController
 {
     private readonly IFormFactory _formFactory;
     private readonly Naps2Config _config;
-    private readonly SystemEmailClients _systemEmailClients;
+    private readonly ISystemEmailClients _systemEmailClients;
     private readonly GmailOauthProvider _gmailOauthProvider;
     private readonly OutlookNewEmailProvider _outlookNewEmailProvider;
     private readonly OutlookWebOauthProvider _outlookWebOauthProvider;
     private readonly ThunderbirdEmailProvider _thunderbirdProvider;
     private readonly IIconProvider _iconProvider;
 
-    public EmailProviderController(IFormFactory formFactory, Naps2Config config, SystemEmailClients systemEmailClients,
+    public EmailProviderController(IFormFactory formFactory, Naps2Config config, ISystemEmailClients systemEmailClients,
         GmailOauthProvider gmailOauthProvider, OutlookNewEmailProvider outlookNewEmailProvider,
         OutlookWebOauthProvider outlookWebOauthProvider, ThunderbirdEmailProvider thunderbirdProvider,
         IIconProvider iconProvider)
@@ -38,16 +37,13 @@ internal class EmailProviderController
         var providerWidgets = new List<EmailProviderWidget>();
         var userSetup = _config.Get(c => c.EmailSetup);
 
-        if (OperatingSystem.IsWindowsVersionAtLeast(7))
-        {
-            var systemClientNames = _systemEmailClients.GetNames();
-            var defaultSystemClientName = _systemEmailClients.GetDefaultName();
+        var systemClientNames = _systemEmailClients.GetNames();
+        var defaultSystemClientName = _systemEmailClients.GetDefaultName();
 
-            foreach (var clientName in systemClientNames.OrderBy(x =>
-                         x == userSetup.SystemProviderName ? 0 : x == defaultSystemClientName ? 1 : 2))
-            {
-                providerWidgets.Add(GetWidget(EmailProviderType.System, clientName));
-            }
+        foreach (var clientName in systemClientNames.OrderBy(x =>
+                     x == userSetup.SystemProviderName ? 0 : x == defaultSystemClientName ? 1 : 2))
+        {
+            providerWidgets.Add(GetWidget(EmailProviderType.System, clientName));
         }
 
         void MaybeAddWidget(EmailProviderType type, bool condition)
@@ -76,7 +72,7 @@ internal class EmailProviderController
             EmailProviderType.System => new EmailProviderWidget
             {
                 ProviderType = EmailProviderType.System,
-                ProviderIcon = GetSystemIcon(clientName!),
+                ProviderIcon = _systemEmailClients.LoadIcon(clientName!)?.ToEtoImage(),
                 ProviderIconName = "mail_yellow",
                 ProviderName = clientName!,
                 Choose = () => ChooseSystem(clientName!)
@@ -128,18 +124,6 @@ internal class EmailProviderController
             // },
             _ => throw new ArgumentException()
         };
-    }
-
-    private Bitmap? GetSystemIcon(string clientName)
-    {
-#if NET6_0_OR_GREATER
-        if (!OperatingSystem.IsWindowsVersionAtLeast(7))
-        {
-            throw new InvalidOperationException();
-        }
-#endif
-        var exePath = _systemEmailClients.GetExePath(clientName);
-        return exePath == null ? null : EtoPlatform.Current.ExtractAssociatedIcon(exePath);
     }
 
     private bool ChooseSystem(string clientName)
