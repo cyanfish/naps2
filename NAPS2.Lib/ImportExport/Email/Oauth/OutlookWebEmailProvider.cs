@@ -60,4 +60,6 @@ internal class OutlookWebEmailProvider : IEmailProvider
             }
         }));
     }
+
+    public bool IsAvailable => _outlookWebOauthProvider.HasClientCreds;
 }

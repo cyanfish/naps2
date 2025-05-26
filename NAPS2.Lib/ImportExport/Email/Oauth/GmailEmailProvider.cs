@@ -26,4 +26,6 @@ internal class GmailEmailProvider : MimeEmailProvider
                 $"https://mail.google.com/mail/?authuser={userEmail}#drafts?compose={draft.MessageId}");
         }
     }
+
+    public override bool IsAvailable => _gmailOauthProvider.HasClientCreds;
 }

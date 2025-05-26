@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport.Email.Oauth;
@@ -12,24 +11,22 @@ internal class EmailProviderController
     private readonly Naps2Config _config;
     private readonly ISystemEmailClients _systemEmailClients;
     private readonly GmailOauthProvider _gmailOauthProvider;
-    private readonly OutlookNewEmailProvider _outlookNewEmailProvider;
     private readonly OutlookWebOauthProvider _outlookWebOauthProvider;
     private readonly ThunderbirdEmailProvider _thunderbirdProvider;
-    private readonly IIconProvider _iconProvider;
+    private readonly IEmailProviderFactory _emailProviderFactory;
 
     public EmailProviderController(IFormFactory formFactory, Naps2Config config, ISystemEmailClients systemEmailClients,
-        GmailOauthProvider gmailOauthProvider, OutlookNewEmailProvider outlookNewEmailProvider,
+        GmailOauthProvider gmailOauthProvider,
         OutlookWebOauthProvider outlookWebOauthProvider, ThunderbirdEmailProvider thunderbirdProvider,
-        IIconProvider iconProvider)
+        IEmailProviderFactory emailProviderFactory)
     {
         _formFactory = formFactory;
         _config = config;
         _systemEmailClients = systemEmailClients;
         _gmailOauthProvider = gmailOauthProvider;
-        _outlookNewEmailProvider = outlookNewEmailProvider;
         _outlookWebOauthProvider = outlookWebOauthProvider;
         _thunderbirdProvider = thunderbirdProvider;
-        _iconProvider = iconProvider;
+        _emailProviderFactory = emailProviderFactory;
     }
 
     public List<EmailProviderWidget> GetWidgets()
@@ -46,9 +43,9 @@ internal class EmailProviderController
             providerWidgets.Add(GetWidget(EmailProviderType.System, clientName));
         }
 
-        void MaybeAddWidget(EmailProviderType type, bool condition)
+        void MaybeAddWidget(EmailProviderType type, bool condition = true)
         {
-            if (condition)
+            if (condition && _emailProviderFactory.Create(type).IsAvailable)
             {
                 providerWidgets.Add(GetWidget(type));
             }
@@ -57,9 +54,9 @@ internal class EmailProviderController
         // For Windows we expect Thunderbird to be used through MAPI. For Linux we need to handle it specially.
         MaybeAddWidget(EmailProviderType.Thunderbird, OperatingSystem.IsLinux());
         MaybeAddWidget(EmailProviderType.AppleMail, OperatingSystem.IsMacOS());
-        MaybeAddWidget(EmailProviderType.OutlookNew, _outlookNewEmailProvider.IsAvailable);
-        MaybeAddWidget(EmailProviderType.Gmail, _gmailOauthProvider.HasClientCreds);
-        MaybeAddWidget(EmailProviderType.OutlookWeb, _outlookWebOauthProvider.HasClientCreds);
+        MaybeAddWidget(EmailProviderType.OutlookNew);
+        MaybeAddWidget(EmailProviderType.Gmail);
+        MaybeAddWidget(EmailProviderType.OutlookWeb);
 
         // Sort the currently-selected provider to the top
         return providerWidgets.OrderBy(widget => widget.ProviderType == userSetup.ProviderType ? 0 : 1).ToList();
@@ -85,7 +82,7 @@ internal class EmailProviderController
                 Choose = () => ChooseProviderType(EmailProviderType.Thunderbird),
                 // When Thunderbird isn't available, we disable it rather than hide it.
                 // The point is to give a hint to the user that Thunderbird support is present.
-                Enabled = _thunderbirdProvider.IsAvailable
+                Enabled = _thunderbirdProvider.IsActuallyAvailable
             },
             EmailProviderType.AppleMail => new EmailProviderWidget
             {

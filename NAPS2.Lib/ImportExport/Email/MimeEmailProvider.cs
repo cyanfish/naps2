@@ -38,4 +38,6 @@ internal abstract class MimeEmailProvider : IEmailProvider
             outputList.Add(new MailboxAddress(Encoding.UTF8, recip.Name, recip.Address));
         }
     }
+
+    public abstract bool IsAvailable { get; }
 }

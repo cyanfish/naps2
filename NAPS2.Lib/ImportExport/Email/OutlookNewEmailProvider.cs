@@ -31,7 +31,7 @@ internal class OutlookNewEmailProvider : MimeEmailProvider
         }
     }
 
-    public bool IsAvailable => ExecutablePath != null;
+    public override bool IsAvailable => ExecutablePath != null;
 
     protected override async Task SendMimeMessage(MimeMessage message, ProgressHandler progress, bool autoSend)
     {

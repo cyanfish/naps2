@@ -45,4 +45,6 @@ internal class MapiEmailProvider : IEmailProvider
             return true;
         });
     }
+
+    public bool IsAvailable => true;
 }

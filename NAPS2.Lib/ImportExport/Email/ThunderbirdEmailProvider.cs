@@ -11,9 +11,12 @@ internal class ThunderbirdEmailProvider : IEmailProvider
         _errorOutput = errorOutput;
     }
 
+    // Even if Thunderbird is unavailable, we will show it (disabled) to hint to the user it's supported
+    public bool IsAvailable => true;
+
     // Note we can't really support the Flatpak version of Thunderbird as it won't have access to attachment files from
     // the sandbox.
-    public bool IsAvailable => ProcessHelper.TryRun("thunderbird", "-v", 1000);
+    public bool IsActuallyAvailable => ProcessHelper.TryRun("thunderbird", "-v", 1000);
 
     public Task<bool> SendEmail(EmailMessage message, ProgressHandler progress = default)
     {
