@@ -6,7 +6,7 @@ using NAPS2.Images.Gdi;
 
 namespace NAPS2.Platform.Windows;
 
-public class WindowsOpenWith : IOsOpenWith
+public class WindowsOpenWith : IOpenWith
 {
     private static readonly Guid BHID_DataObject = new("b8c0bd9f-ed24-455c-83e6-d5390c4fe8c4");
     

@@ -13,7 +13,7 @@ public class GtkModule : GuiModule
         builder.RegisterType<LinuxApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<GtkScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<LinuxServiceManager>().As<IOsServiceManager>();
-        builder.RegisterType<LinuxOpenWith>().As<IOsOpenWith>();
+        builder.RegisterType<LinuxOpenWith>().As<IOpenWith>();
 
         builder.RegisterType<GtkDesktopForm>().As<DesktopForm>();
         builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();

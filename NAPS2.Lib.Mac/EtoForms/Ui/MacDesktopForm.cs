@@ -104,37 +104,31 @@ public class MacDesktopForm : DesktopForm
                     .Separator()
                     .Append(Commands.NewProfile)
                     .Append(Commands.BatchScan)),
-                new SubMenuItem
-                {
-                    Text = UiStrings.Image,
-                    Items =
-                    {
-                        Commands.ViewImage,
-                        Commands.ZoomIn,
-                        Commands.ZoomOut,
-                        new SeparatorMenuItem(),
-                        Commands.Crop,
-                        Commands.BrightCont,
-                        Commands.HueSat,
-                        Commands.BlackWhite,
-                        Commands.Sharpen,
-                        Commands.DocumentCorrection,
-                        new SeparatorMenuItem(),
-                        Commands.Split,
-                        Commands.Combine,
-                        new SeparatorMenuItem(),
-                        Commands.RotateLeft,
-                        Commands.RotateRight,
-                        Commands.Flip,
-                        Commands.Deskew,
-                        Commands.CustomRotate,
-                        new SeparatorMenuItem(),
-                        Commands.EditWithApp,
-                        Commands.EditWithPick,
-                        new SeparatorMenuItem(),
-                        Commands.ResetImage
-                    }
-                },
+                CreateSubMenu(Commands.ImageMenu, new MenuProvider()
+                    .Append(Commands.ViewImage)
+                    .Append(Commands.ZoomIn)
+                    .Append(Commands.ZoomOut)
+                    .Separator()
+                    .Append(Commands.Crop)
+                    .Append(Commands.BrightCont)
+                    .Append(Commands.HueSat)
+                    .Append(Commands.BlackWhite)
+                    .Append(Commands.Sharpen)
+                    .Append(Commands.DocumentCorrection)
+                    .Separator()
+                    .Append(Commands.Split)
+                    .Append(Commands.Combine)
+                    .Separator()
+                    .Append(Commands.RotateLeft)
+                    .Append(Commands.RotateRight)
+                    .Append(Commands.Flip)
+                    .Append(Commands.Deskew)
+                    .Append(Commands.CustomRotate)
+                    .Separator()
+                    .Dynamic(_editWithCommands)
+                    .Append(Commands.EditWithPick)
+                    .Separator()
+                    .Append(Commands.ResetImage)),
                 new SubMenuItem
                 {
                     Text = UiStrings.Reorder,

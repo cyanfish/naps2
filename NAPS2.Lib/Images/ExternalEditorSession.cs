@@ -8,7 +8,7 @@ public class ExternalEditorSession : IDisposable
         ScanningContext scanningContext,
         UiImageList imageList,
         ErrorOutput errorOutput,
-        IOsOpenWith openWith)
+        IOpenWith openWith)
     {
         public ExternalEditorSession Create(UiImage uiImage, string appPath) =>
             new(scanningContext, imageList, errorOutput, openWith, uiImage, appPath);
@@ -17,7 +17,7 @@ public class ExternalEditorSession : IDisposable
     private readonly ScanningContext _scanningContext;
     private readonly UiImageList _imageList;
     private readonly ErrorOutput _errorOutput;
-    private readonly IOsOpenWith _openWith;
+    private readonly IOpenWith _openWith;
     private readonly UiImage _uiImage;
     private readonly string _appPath;
     private readonly string _tempPath;
@@ -25,7 +25,7 @@ public class ExternalEditorSession : IDisposable
     private readonly TimedThrottle _throttle;
 
     private ExternalEditorSession(ScanningContext scanningContext, UiImageList imageList, ErrorOutput errorOutput,
-        IOsOpenWith openWith, UiImage uiImage, string appPath)
+        IOpenWith openWith, UiImage uiImage, string appPath)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;

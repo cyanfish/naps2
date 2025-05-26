@@ -1,6 +1,6 @@
 namespace NAPS2.Platform;
 
-public interface IOsOpenWith
+public interface IOpenWith
 {
     public IEnumerable<OpenWithEntry> GetEntries(string fileExt);
     public void OpenWith(string entryId, string filePath);

@@ -5,7 +5,7 @@ using NAPS2.Images.Gtk;
 
 namespace NAPS2.Platform;
 
-public class LinuxOpenWith : IOsOpenWith
+public class LinuxOpenWith : IOpenWith
 {
     private readonly ImageContext _imageContext;
 

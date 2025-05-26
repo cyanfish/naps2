@@ -5,9 +5,9 @@ namespace NAPS2.EtoForms.Ui;
 
 internal class EditWithForm : EtoDialogBase
 {
-    private readonly IOsOpenWith _openWith;
+    private readonly IOpenWith _openWith;
 
-    public EditWithForm(Naps2Config config, IOsOpenWith openWith) :
+    public EditWithForm(Naps2Config config, IOpenWith openWith) :
         base(config)
     {
         Title = UiStrings.EditWithFormTitle;
