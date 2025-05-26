@@ -8,20 +8,17 @@ namespace NAPS2.EtoForms.Ui;
 
 internal class EmailSettingsForm : EtoDialogBase
 {
-    private readonly ISystemEmailClients _systemEmailClients;
-
     private readonly Label _provider = new() { Text = " \n " };
     private readonly FilePathWithPlaceholders _attachmentName;
     private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
-    public EmailSettingsForm(Naps2Config config, ISystemEmailClients systemEmailClients, IIconProvider iconProvider) :
+    public EmailSettingsForm(Naps2Config config) :
         base(config)
     {
         Title = UiStrings.EmailSettingsFormTitle;
         IconName = "email_small";
 
-        _systemEmailClients = systemEmailClients;
         _attachmentName = new(this);
 
         UpdateValues(Config);
@@ -66,6 +63,11 @@ internal class EmailSettingsForm : EtoDialogBase
 
     private void UpdateProvider(Naps2Config config)
     {
+        if (!config.User.Has(c => c.EmailSetup.ProviderType))
+        {
+            _provider.Text = SettingsResources.EmailProvider_NotSelected;
+            return;
+        }
         switch (config.Get(c => c.EmailSetup.ProviderType))
         {
             case EmailProviderType.Gmail:
@@ -89,12 +91,7 @@ internal class EmailSettingsForm : EtoDialogBase
                 _provider.Text = config.Get(c => c.EmailSetup.SmtpHost) + '\n' + config.Get(c => c.EmailSetup.SmtpUser);
                 break;
             case EmailProviderType.System:
-                _provider.Text = config.Get(c => c.EmailSetup.SystemProviderName) ??
-                                 _systemEmailClients.GetDefaultName() ??
-                                 SettingsResources.EmailProvider_NotSelected;
-                break;
-            default:
-                _provider.Text = SettingsResources.EmailProvider_NotSelected;
+                _provider.Text = config.Get(c => c.EmailSetup.SystemProviderName);
                 break;
         }
     }
