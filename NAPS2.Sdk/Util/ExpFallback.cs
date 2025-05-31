@@ -17,6 +17,8 @@ internal class ExpFallback
 
     public int Value { get; private set; }
 
+    public bool IsAtMax => Value == Max;
+
     public void Reset()
     {
         Value = Min;

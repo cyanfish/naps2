@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using NAPS2.Scan;
 
 namespace NAPS2.Images;
@@ -56,16 +57,23 @@ public class ExternalEditorSession : IDisposable
     private void ExternalImageEdited()
     {
         IMemoryImage newMemoryImage;
-        try
+        var fallback = new ExpFallback(50, 1000);
+        while (true)
         {
-            newMemoryImage = _scanningContext.ImageContext.Load(TempFilePath);
-        }
-        catch (Exception ex) when (ex is not FileNotFoundException)
-        {
-            // We might have tried to read the file while the application is still writing it
-            // If we re-run the throttle it will try again after a delay
-            _throttle.RunAction(null);
-            return;
+            try
+            {
+                newMemoryImage = _scanningContext.ImageContext.Load(TempFilePath);
+                break;
+            }
+            catch (Exception ex) when (ex is not FileNotFoundException)
+            {
+                if (fallback.IsAtMax)
+                {
+                    _scanningContext.Logger.LogError(ex, "Error loading externally-edited image");
+                    return;
+                }
+                fallback.Increase();
+            }
         }
         using (newMemoryImage)
         {
