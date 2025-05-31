@@ -83,7 +83,7 @@ public abstract class DesktopForm : EtoFormBase
         _keyboardShortcuts.Assign(Commands);
         CreateToolbarsAndMenus();
         UpdateScanButton();
-        UpdateEditWith(null, EventArgs.Empty);
+        EditWithAppChanged();
         UpdateProfilesToolbar();
         InitLanguageDropdown();
 
@@ -115,7 +115,6 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
         _notificationArea = new NotificationArea(_notificationManager, LayoutController);
-        _desktopController.EditWithAppChanged += UpdateEditWith;
     }
 
     protected override void BuildLayout()
@@ -263,7 +262,6 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated -= ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
-        _desktopController.EditWithAppChanged -= UpdateEditWith;
         _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
     }
@@ -560,7 +558,7 @@ public abstract class DesktopForm : EtoFormBase
         _scanMenuCommands.Value = commandList;
     }
 
-    private void UpdateEditWith(object? sender, EventArgs args)
+    public void EditWithAppChanged()
     {
         var appName = Config.Get(c => c.EditWithAppName);
         if (!string.IsNullOrEmpty(appName))

@@ -13,10 +13,11 @@ public class ImageListActions
     private readonly ThumbnailController _thumbnailController;
     private readonly IExportController _exportController;
     private readonly INotify _notify;
+    private readonly EditWithController _editWithController;
 
     public ImageListActions(UiImageList imageList, IOperationFactory operationFactory,
         OperationProgress operationProgress, Naps2Config config, ThumbnailController thumbnailController,
-        IExportController exportController, INotify notify)
+        IExportController exportController, INotify notify, EditWithController editWithController)
     {
         _imageList = imageList;
         _operationFactory = operationFactory;
@@ -25,6 +26,7 @@ public class ImageListActions
         _thumbnailController = thumbnailController;
         _exportController = exportController;
         _notify = notify;
+        _editWithController = editWithController;
     }
 
     private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
@@ -34,7 +36,7 @@ public class ImageListActions
     public ImageListActions WithSelection(Func<ListSelection<UiImage>> selectionFunc)
     {
         return new ImageListActions(_imageList, _operationFactory, _operationProgress, _config, _thumbnailController,
-            _exportController, _notify)
+            _exportController, _notify, _editWithController)
         {
             SelectionFunc = selectionFunc
         };
@@ -109,4 +111,7 @@ public class ImageListActions
     public Task SaveSelectedAsPdfOrImages() => _exportController.SavePdfOrImages(_imageList.Selection, _notify);
     public Task EmailAllAsPdf() => _exportController.EmailPdf(_imageList.Images);
     public Task EmailSelectedAsPdf() => _exportController.EmailPdf(_imageList.Selection);
+    
+    public void EditWithApp() => _editWithController.EditWithApp(Selection ?? _imageList.Selection);
+    public void EditWithPick() => _editWithController.EditWithPick(Selection ?? _imageList.Selection);
 }

@@ -78,7 +78,7 @@ public class DesktopControllerTests : ContextualTests
             _notify,
             _imageClipboard,
             new ImageListActions(_imageList, _operationFactory, _operationProgress,
-                _config, _thumbnailController, _exportHelper, _notify),
+                _config, _thumbnailController, _exportHelper, _notify, null!),
             _dialogHelper,
             _desktopImagesController,
             _desktopScanController,
@@ -86,9 +86,7 @@ public class DesktopControllerTests : ContextualTests
             _scannedImagePrinter,
             _sharedDeviceManager,
             _processCoordinator,
-            new RecoveryManager(ScanningContext),
-            null!,
-            null!
+            new RecoveryManager(ScanningContext)
         );
 
         _operationFactory.Create<RecoveryOperation>().Returns(

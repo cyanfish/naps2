@@ -4,7 +4,6 @@ using Eto.Forms;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using NAPS2.EtoForms.Notifications;
-using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Platform.Windows;
@@ -39,9 +38,6 @@ public class DesktopController
     private readonly ProcessCoordinator _processCoordinator;
     private readonly RecoveryManager _recoveryManager;
     private readonly ImageTransfer _imageTransfer = new();
-    private readonly IOpenWith _openWith;
-    private readonly ErrorOutput _errorOutput;
-    private readonly IFormFactory _formFactory;
 
     private bool _closed;
     private bool _preInitialized;
@@ -58,7 +54,7 @@ public class DesktopController
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
         ISharedDeviceManager sharedDeviceManager, ProcessCoordinator processCoordinator,
-        RecoveryManager recoveryManager, IOpenWith openWith, ErrorOutput errorOutput, IFormFactory formFactory)
+        RecoveryManager recoveryManager)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -80,9 +76,6 @@ public class DesktopController
         _sharedDeviceManager = sharedDeviceManager;
         _processCoordinator = processCoordinator;
         _recoveryManager = recoveryManager;
-        _openWith = openWith;
-        _errorOutput = errorOutput;
-        _formFactory = formFactory;
     }
 
     public bool SkipRecoveryCleanup { get; set; }
@@ -443,57 +436,6 @@ public class DesktopController
             }
         }
     }
-
-    public void EditWithApp()
-    {
-        string? appId = _config.Get(c => c.EditWithAppPath);
-        if (string.IsNullOrEmpty(appId))
-        {
-            EditWithPick();
-            return;
-        }
-        EditWithPath(appId);
-    }
-
-    public void EditWithPick()
-    {
-        var pickForm = _formFactory.Create<EditWithForm>();
-        pickForm.ShowModal();
-        var entry = pickForm.Result;
-        if (entry != null)
-        {
-            var transact = _config.User.BeginTransaction();
-            transact.Set(c => c.EditWithAppPath, entry.Id);
-            transact.Set(c => c.EditWithAppName, entry.Name);
-            transact.Commit();
-            EditWithAppChanged?.Invoke(this, EventArgs.Empty);
-            EditWithPath(entry.Id);
-        }
-    }
-
-    private void EditWithPath(string appPath)
-    {
-        var tempFilePaths = new List<string>();
-        foreach (var uiImage in _imageList.Selection)
-        {
-            if (!uiImage.IsDisposed)
-            {
-                var editorSession = new ExternalEditorSession(_scanningContext, _imageList, uiImage);
-                uiImage.EditorSessions.Add(editorSession);
-                tempFilePaths.Add(editorSession.TempFilePath);
-            }
-        }
-        try
-        {
-            _openWith.OpenWith(appPath, tempFilePaths);
-        }
-        catch (Exception ex)
-        {
-            _errorOutput.DisplayError(string.Format(UiStrings.ErrorStartingApplication, appPath), ex);
-        }
-    }
-
-    public event EventHandler? EditWithAppChanged;
 
     public async Task SavePdf()
     {
