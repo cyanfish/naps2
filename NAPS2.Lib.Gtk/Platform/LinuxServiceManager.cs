@@ -26,6 +26,9 @@ public class LinuxServiceManager : IOsServiceManager
                           Restart=always
                           RestartSec=1
                           ExecStart={Environment.ProcessPath} server
+                          
+                          [Install]
+                          WantedBy=default.target
                           """;
         try
         {
