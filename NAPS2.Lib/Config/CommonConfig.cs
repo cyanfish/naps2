@@ -221,4 +221,7 @@ public class CommonConfig
 
     [User]
     public string? EditWithAppName { get; set; }
+
+    [User]
+    public bool ApplyToAllSelected { get; set; }
 }

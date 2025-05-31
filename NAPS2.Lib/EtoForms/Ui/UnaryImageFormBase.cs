@@ -19,7 +19,7 @@ public abstract class UnaryImageFormBase(
 
     protected int RealImageHeight { get; private set; }
 
-    protected SliderWithTextBox[] Sliders { get; set; } = Array.Empty<SliderWithTextBox>();
+    protected SliderWithTextBox[] Sliders { get; set; } = [];
 
     protected bool CanScaleWorkingImage { get; set; } = true;
 
@@ -28,6 +28,9 @@ public abstract class UnaryImageFormBase(
     protected override void OnPreLoad(EventArgs e)
     {
         _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages.Count);
+        _applyToSelected.Checked = Config.Get(c => c.ApplyToAllSelected);
+        _applyToSelected.CheckedChanged +=
+            (_, _) => Config.User.Set(c => c.ApplyToAllSelected, _applyToSelected.IsChecked());
         _revert.Click += (_, _) =>
         {
             Revert();
