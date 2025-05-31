@@ -46,5 +46,7 @@ internal class MapiEmailProvider : IEmailProvider
         });
     }
 
-    public bool IsAvailable => true;
+    public bool ShowInList => true;
+
+    public bool CanSelectInList => true;
 }

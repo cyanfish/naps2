@@ -45,9 +45,15 @@ internal class EmailProviderController
 
         void MaybeAddWidget(EmailProviderType type, bool condition = true)
         {
-            if (condition && _emailProviderFactory.Create(type).IsAvailable)
+            if (condition)
             {
-                providerWidgets.Add(GetWidget(type));
+                var provider = _emailProviderFactory.Create(type);
+                if (provider.ShowInList)
+                {
+                    var widget = GetWidget(type);
+                    widget.Enabled = provider.CanSelectInList;
+                    providerWidgets.Add(widget);
+                }
             }
         }
 
@@ -80,9 +86,6 @@ internal class EmailProviderController
                 ProviderIconName = "thunderbird",
                 ProviderName = EmailProviderType.Thunderbird.Description(),
                 Choose = () => ChooseProviderType(EmailProviderType.Thunderbird),
-                // When Thunderbird isn't available, we disable it rather than hide it.
-                // The point is to give a hint to the user that Thunderbird support is present.
-                Enabled = _thunderbirdProvider.IsActuallyAvailable
             },
             EmailProviderType.AppleMail => new EmailProviderWidget
             {

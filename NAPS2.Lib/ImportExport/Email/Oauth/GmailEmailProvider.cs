@@ -27,5 +27,5 @@ internal class GmailEmailProvider : MimeEmailProvider
         }
     }
 
-    public override bool IsAvailable => _gmailOauthProvider.HasClientCreds;
+    public override bool ShowInList => _gmailOauthProvider.HasClientCreds;
 }

@@ -7,8 +7,10 @@ internal class AppleMailEmailProvider : IAppleMailEmailProvider
     [DllImport("/System/Library/Frameworks/CoreServices.framework/CoreServices")]
     static extern IntPtr LSCopyDefaultHandlerForURLScheme(IntPtr urlScheme);
 
+    public bool ShowInList => true;
+
     // Apple Mail only works if it's set as the default email reader
-    public bool IsAvailable
+    public bool CanSelectInList
     {
         get
         {

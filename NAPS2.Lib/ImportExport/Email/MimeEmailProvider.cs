@@ -39,5 +39,7 @@ internal abstract class MimeEmailProvider : IEmailProvider
         }
     }
 
-    public abstract bool IsAvailable { get; }
+    public abstract bool ShowInList { get; }
+
+    public virtual bool CanSelectInList => true;
 }
