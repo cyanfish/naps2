@@ -9,7 +9,7 @@ namespace NAPS2.Platform.Windows;
 public class WindowsOpenWith : IOpenWith
 {
     private static readonly Guid BHID_DataObject = new("b8c0bd9f-ed24-455c-83e6-d5390c4fe8c4");
-    
+
     private readonly ImageContext _imageContext;
 
     public WindowsOpenWith(ImageContext imageContext)
@@ -28,19 +28,35 @@ public class WindowsOpenWith : IOpenWith
         }
     }
 
-    public void OpenWith(string entryId, string filePath)
+    public void OpenWith(string entryId, IEnumerable<string> filePaths)
     {
-        int hr = Win32.SHCreateItemFromParsingName(filePath, null, typeof(Win32.IShellItem).GUID,
-            out Win32.IShellItem item);
-        if (hr != 0) throw new Win32Exception(hr);
-        foreach (var handler in EnumerateHandlers(Path.GetExtension(filePath)))
+        var pidls = new List<IntPtr>();
+        foreach (var path in filePaths)
         {
-            handler.GetName(out var internalName);
-            if (internalName == entryId)
+            int hr = Win32.SHParseDisplayName(path, IntPtr.Zero, out var pidl, 0, out _);
+            if (hr != 0) throw new Win32Exception(hr);
+            pidls.Add(pidl);
+        }
+        try
+        {
+            int hr = Win32.SHCreateShellItemArrayFromIDLists(pidls.Count, pidls.ToArray(), out var shellItemArray);
+            if (hr != 0) throw new Win32Exception(hr);
+
+            foreach (var handler in EnumerateHandlers(Path.GetExtension(filePaths.First())))
             {
-                
-                var dao = item.BindToHandler(null, BHID_DataObject, typeof(IDataObject).GUID);
-                handler.Invoke(dao);
+                handler.GetName(out var internalName);
+                if (internalName == entryId)
+                {
+                    var dao = shellItemArray.BindToHandler(null, BHID_DataObject, typeof(IDataObject).GUID);
+                    handler.Invoke(dao);
+                }
+            }
+        }
+        finally
+        {
+            foreach (var pidl in pidls)
+            {
+                Win32.ILFree(pidl);
             }
         }
     }
@@ -61,7 +77,8 @@ public class WindowsOpenWith : IOpenWith
 
     private IEnumerable<Win32.IAssocHandler> EnumerateHandlers(string fileExt)
     {
-        int hr = Win32.SHAssocEnumHandlers(fileExt, Win32.ASSOC_FILTER.ASSOC_FILTER_RECOMMENDED, out Win32.IEnumAssocHandlers eah);
+        int hr = Win32.SHAssocEnumHandlers(fileExt, Win32.ASSOC_FILTER.ASSOC_FILTER_RECOMMENDED,
+            out Win32.IEnumAssocHandlers eah);
         if (hr != 0) throw new Win32Exception(hr);
         while (eah.Next(1, out var handler, out var fetched) == 0 && fetched > 0)
         {

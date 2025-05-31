@@ -39,7 +39,8 @@ public class DesktopController
     private readonly ProcessCoordinator _processCoordinator;
     private readonly RecoveryManager _recoveryManager;
     private readonly ImageTransfer _imageTransfer = new();
-    private readonly ExternalEditorSession.Factory _externalEditorSessionFactory;
+    private readonly IOpenWith _openWith;
+    private readonly ErrorOutput _errorOutput;
     private readonly IFormFactory _formFactory;
 
     private bool _closed;
@@ -57,8 +58,7 @@ public class DesktopController
         DesktopImagesController desktopImagesController, IDesktopScanController desktopScanController,
         DesktopFormProvider desktopFormProvider, IScannedImagePrinter scannedImagePrinter,
         ISharedDeviceManager sharedDeviceManager, ProcessCoordinator processCoordinator,
-        RecoveryManager recoveryManager, ExternalEditorSession.Factory externalEditorSessionFactory,
-        IFormFactory formFactory)
+        RecoveryManager recoveryManager, IOpenWith openWith, ErrorOutput errorOutput, IFormFactory formFactory)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
@@ -80,7 +80,8 @@ public class DesktopController
         _sharedDeviceManager = sharedDeviceManager;
         _processCoordinator = processCoordinator;
         _recoveryManager = recoveryManager;
-        _externalEditorSessionFactory = externalEditorSessionFactory;
+        _openWith = openWith;
+        _errorOutput = errorOutput;
         _formFactory = formFactory;
     }
 
@@ -472,17 +473,23 @@ public class DesktopController
 
     private void EditWithPath(string appPath)
     {
-        var uiImage = _imageList.Selection.FirstOrDefault();
-        if (uiImage == null)
-        {
-            return;
-        }
-        lock (uiImage)
+        var tempFilePaths = new List<string>();
+        foreach (var uiImage in _imageList.Selection)
         {
             if (!uiImage.IsDisposed)
             {
-                uiImage.EditorSessions.Add(_externalEditorSessionFactory.Create(uiImage, appPath));
+                var editorSession = new ExternalEditorSession(_scanningContext, _imageList, uiImage);
+                uiImage.EditorSessions.Add(editorSession);
+                tempFilePaths.Add(editorSession.TempFilePath);
             }
+        }
+        try
+        {
+            _openWith.OpenWith(appPath, tempFilePaths);
+        }
+        catch (Exception ex)
+        {
+            _errorOutput.DisplayError(string.Format(UiStrings.ErrorStartingApplication, appPath), ex);
         }
     }
 

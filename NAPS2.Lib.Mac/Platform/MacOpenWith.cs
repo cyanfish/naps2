@@ -24,9 +24,10 @@ public class MacOpenWith : IOpenWith
         }
     }
 
-    public void OpenWith(string entryId, string filePath)
+    public void OpenWith(string entryId, IEnumerable<string> filePaths)
     {
-        Process.Start("open", $"-a \"{entryId}\" \"{filePath}\"");
+        string expandedFilePaths = string.Join(" ", filePaths.Select(path => $"\"{path}\""));
+        Process.Start("open", $"-a \"{entryId}\" {expandedFilePaths}");
     }
 
     public IMemoryImage LoadIcon(OpenWithEntry entry)

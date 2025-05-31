@@ -62,7 +62,7 @@ public class LinuxOpenWith : IOpenWith
         return data;
     }
 
-    public void OpenWith(string entryId, string filePath)
+    public void OpenWith(string entryId, IEnumerable<string> filePaths)
     {
         var data = ParseDesktopFile(new FileInfo(entryId));
         var exec = data.Get("Exec");
@@ -72,7 +72,8 @@ public class LinuxOpenWith : IOpenWith
         string argsSpec = parts.Length > 1 ? parts[1]: "";
         // https://specifications.freedesktop.org/desktop-entry-spec/latest/exec-variables.html
         var match = Regex.Match(argsSpec, "%[ufUF]");
-        string args = match.Success ? match.Result(filePath) : $"{argsSpec} {filePath}";
+        string expandedFilePaths = string.Join(" ", filePaths.Select(path => $"\"{path}\""));
+        string args = match.Success ? match.Result(expandedFilePaths) : $"{argsSpec} {expandedFilePaths}";
         Process.Start(exe, args);
     }
 

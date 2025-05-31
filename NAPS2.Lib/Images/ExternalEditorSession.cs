@@ -4,40 +4,23 @@ namespace NAPS2.Images;
 
 public class ExternalEditorSession : IDisposable
 {
-    public class Factory(
-        ScanningContext scanningContext,
-        UiImageList imageList,
-        ErrorOutput errorOutput,
-        IOpenWith openWith)
-    {
-        public ExternalEditorSession Create(UiImage uiImage, string appPath) =>
-            new(scanningContext, imageList, errorOutput, openWith, uiImage, appPath);
-    }
-
     private readonly ScanningContext _scanningContext;
     private readonly UiImageList _imageList;
-    private readonly ErrorOutput _errorOutput;
-    private readonly IOpenWith _openWith;
     private readonly UiImage _uiImage;
-    private readonly string _appPath;
-    private readonly string _tempPath;
     private readonly FileSystemWatcher _watcher;
     private readonly TimedThrottle _throttle;
 
-    private ExternalEditorSession(ScanningContext scanningContext, UiImageList imageList, ErrorOutput errorOutput,
-        IOpenWith openWith, UiImage uiImage, string appPath)
+    public ExternalEditorSession(ScanningContext scanningContext, UiImageList imageList, UiImage uiImage)
     {
         _scanningContext = scanningContext;
         _imageList = imageList;
-        _errorOutput = errorOutput;
-        _openWith = openWith;
         _uiImage = uiImage;
-        _appPath = appPath;
-        _tempPath = CreateUserEditableFile();
+        TempFilePath = CreateUserEditableFile();
         _watcher = CreateWatcher();
         _throttle = new TimedThrottle(ExternalImageEdited, TimeSpan.FromSeconds(1));
-        StartExternalEditor();
     }
+
+    public string TempFilePath { get; }
 
     private string CreateUserEditableFile()
     {
@@ -51,7 +34,7 @@ public class ExternalEditorSession : IDisposable
 
     private FileSystemWatcher CreateWatcher()
     {
-        var watcher = new FileSystemWatcher(Path.GetDirectoryName(_tempPath)!, Path.GetFileName(_tempPath))
+        var watcher = new FileSystemWatcher(Path.GetDirectoryName(TempFilePath)!, Path.GetFileName(TempFilePath))
         {
             NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName,
             EnableRaisingEvents = true,
@@ -62,7 +45,7 @@ public class ExternalEditorSession : IDisposable
         watcher.Changed += (_, _) => _throttle.RunAction(null);
         watcher.Renamed += (_, e) =>
         {
-            if (Path.GetFileName(e.FullPath) == Path.GetFileName(_tempPath))
+            if (Path.GetFileName(e.FullPath) == Path.GetFileName(TempFilePath))
             {
                 _throttle.RunAction(null);
             }
@@ -75,7 +58,7 @@ public class ExternalEditorSession : IDisposable
         IMemoryImage newMemoryImage;
         try
         {
-            newMemoryImage = _scanningContext.ImageContext.Load(_tempPath);
+            newMemoryImage = _scanningContext.ImageContext.Load(TempFilePath);
         }
         catch (Exception ex) when (ex is not FileNotFoundException)
         {
@@ -102,25 +85,13 @@ public class ExternalEditorSession : IDisposable
         }
     }
 
-    private void StartExternalEditor()
-    {
-        try
-        {
-            _openWith.OpenWith(_appPath, _tempPath);
-        }
-        catch (Exception ex)
-        {
-            _errorOutput.DisplayError(string.Format(UiStrings.ErrorStartingApplication, _appPath), ex);
-        }
-    }
-
     public void Dispose()
     {
         _watcher.Dispose();
         try
         {
-            File.Delete(_tempPath);
-            Directory.Delete(Path.GetDirectoryName(_tempPath)!, true);
+            File.Delete(TempFilePath);
+            Directory.Delete(Path.GetDirectoryName(TempFilePath)!, true);
         }
         catch (IOException)
         {

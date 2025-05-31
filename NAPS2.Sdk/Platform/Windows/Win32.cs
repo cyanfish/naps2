@@ -124,10 +124,8 @@ internal static class Win32
         public IntPtr hIcon;
         public IntPtr hCursor;
         public IntPtr hbrBackground;
-        [MarshalAs(UnmanagedType.LPWStr)]
-        public string lpszMenuName;
-        [MarshalAs(UnmanagedType.LPWStr)]
-        public string lpszClassName;
+        [MarshalAs(UnmanagedType.LPWStr)] public string lpszMenuName;
+        [MarshalAs(UnmanagedType.LPWStr)] public string lpszClassName;
     }
 
     public delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
@@ -141,7 +139,9 @@ internal static class Win32
     [Guid("000214F9-0000-0000-C000-000000000046")]
     public interface IShellLink
     {
-        void GetPath([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile, int cchMaxPath, out IntPtr pfd, int fFlags);
+        void GetPath([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile, int cchMaxPath, out IntPtr pfd,
+            int fFlags);
+
         void GetIDList(out IntPtr ppidl);
         void SetIDList(IntPtr pidl);
         void GetDescription([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszName, int cchMaxName);
@@ -154,13 +154,16 @@ internal static class Win32
         void SetHotkey(short wHotkey);
         void GetShowCmd(out int piShowCmd);
         void SetShowCmd(int iShowCmd);
-        void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszIconPath, int cchIconPath, out int piIcon);
+
+        void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszIconPath, int cchIconPath,
+            out int piIcon);
+
         void SetIconLocation([MarshalAs(UnmanagedType.LPWStr)] string pszIconPath, int iIcon);
         void SetRelativePath([MarshalAs(UnmanagedType.LPWStr)] string pszPathRel, int dwReserved);
         void Resolve(IntPtr hwnd, int fFlags);
         void SetPath([MarshalAs(UnmanagedType.LPWStr)] string pszFile);
     }
-    
+
     [Flags]
     public enum ASSOC_FILTER
     {
@@ -181,8 +184,10 @@ internal static class Win32
         void GetName([MarshalAs(UnmanagedType.LPWStr)] out string ppsz);
         void GetUIName([MarshalAs(UnmanagedType.LPWStr)] out string ppsz);
         void GetIconLocation([MarshalAs(UnmanagedType.LPWStr)] out string ppszPath, out int pIndex);
+
         [PreserveSig]
         int IsRecommended();
+
         void MakeDefault([MarshalAs(UnmanagedType.LPWStr)] string pszDescription);
         void Invoke(IDataObject pdo);
         void CreateInvoker(IDataObject pdo, out /*IAssocHandlerInvoker*/ object invoker);
@@ -191,15 +196,38 @@ internal static class Win32
     [Guid("43826d1e-e718-42ee-bc55-a1e261c37bfe"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IShellItem
     {
-        IDataObject BindToHandler(IBindCtx? pbc, [MarshalAs(UnmanagedType.LPStruct)] Guid bhid, [MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+        IDataObject BindToHandler(IBindCtx? pbc, [MarshalAs(UnmanagedType.LPStruct)] Guid bhid,
+            [MarshalAs(UnmanagedType.LPStruct)] Guid riid);
     }
-    
-    [DllImport("shlwapi.dll", BestFitMapping = false, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = false, ThrowOnUnmappableChar = true)]
-    public static extern int SHLoadIndirectString(string pszSource, StringBuilder pszOutBuf, int cchOutBuf, IntPtr ppvReserved);
 
-    [DllImport("shell32", CharSet = CharSet.Unicode)]
-    public extern static int SHCreateItemFromParsingName(string pszPath, IBindCtx? pbc, [MarshalAs(UnmanagedType.LPStruct)] Guid riid, out IShellItem ppv);
+    [Guid("B63EA76D-1F85-456F-A19C-48159EFA858B"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IShellItemArray
+    {
+        IDataObject BindToHandler(IBindCtx? pbc, [MarshalAs(UnmanagedType.LPStruct)] Guid bhid,
+            [MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+    }
 
-    [DllImport("shell32", CharSet = CharSet.Unicode)]
-    public extern static int SHAssocEnumHandlers(string pszExtra, ASSOC_FILTER afFilter, out IEnumAssocHandlers ppEnumHandler);
+    [DllImport("shell32.dll")]
+    public static extern int SHCreateShellItemArrayFromIDLists(int cidl, [MarshalAs(UnmanagedType.LPArray)] IntPtr[] rgpidl,
+        out IShellItemArray ppsiItemArray);
+
+    [DllImport("shlwapi.dll", BestFitMapping = false, CharSet = CharSet.Unicode, ExactSpelling = true,
+        SetLastError = false, ThrowOnUnmappableChar = true)]
+    public static extern int SHLoadIndirectString(string pszSource, StringBuilder pszOutBuf, int cchOutBuf,
+        IntPtr ppvReserved);
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+    public static extern int SHCreateItemFromParsingName(string pszPath, IBindCtx? pbc,
+        [MarshalAs(UnmanagedType.LPStruct)] Guid riid, out IShellItem ppv);
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    public static extern int SHParseDisplayName([MarshalAs(UnmanagedType.LPWStr)] string name, IntPtr bindingContext,
+        out IntPtr pidl, uint sfgaoIn, out uint psfgaoOut);
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+    public static extern int SHAssocEnumHandlers(string pszExtra, ASSOC_FILTER afFilter,
+        out IEnumAssocHandlers ppEnumHandler);
+
+    [DllImport("shell32.dll")]
+    public static extern void ILFree(IntPtr pidl);
 }
