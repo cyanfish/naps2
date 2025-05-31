@@ -43,6 +43,8 @@ public class UiImageList
 
     public bool CanRedo => _undoStack.CanRedo;
 
+    public void ClearUndoStack() => _undoStack.ClearBoth();
+
     public event EventHandler? SelectionChanged;
 
     public event EventHandler<ImageListEventArgs>? ImagesUpdated;

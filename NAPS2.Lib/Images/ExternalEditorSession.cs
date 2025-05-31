@@ -92,6 +92,7 @@ public class ExternalEditorSession : IDisposable
                 if (!_uiImage.IsDisposed)
                 {
                     _uiImage.ReplaceInternalImage(newImage);
+                    _imageList.ClearUndoStack();
                 }
                 else
                 {
