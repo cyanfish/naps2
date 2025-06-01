@@ -1,7 +1,8 @@
-using System.Threading;
 using Autofac;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using NAPS2.EtoForms;
+using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
 using NAPS2.Remoting;
 using NAPS2.Remoting.Server;
@@ -15,7 +16,7 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class ServerEntryPoint
 {
-    public static int Run(string[] args, Module imageModule, Module platformModule, Action<IContainer>? run = null)
+    public static int Run(string[] args, Module imageModule, Module platformModule)
     {
         // Initialize Autofac (the DI framework)
         var container =
@@ -24,35 +25,56 @@ public static class ServerEntryPoint
         // Start a pending worker process
         container.Resolve<IWorkerFactory>().Init(container.Resolve<ScanningContext>());
 
-        run ??= _ =>
+        container.Resolve<CultureHelper>().SetCulturesFromConfig();
+
+        // We need to set up an Eto application in order to display a tray indicator
+        var application = EtoPlatform.Current.CreateApplication();
+        application.Initialized += (_, _) =>
         {
-            var reset = new ManualResetEvent(false);
             var sharedDeviceManager = container.Resolve<ISharedDeviceManager>();
-            sharedDeviceManager.StartSharing();
             var processCoordinator = container.Resolve<ProcessCoordinator>();
-            processCoordinator.StartServer(new ProcessCoordinatorServiceImpl(reset));
-            AppDomain.CurrentDomain.ProcessExit += (_, _) =>
+            var trayIndicator = container.Resolve<ServerTrayIndicator>();
+
+            void Stop()
             {
-                // TODO: Actually wait for sharing to stop
-                sharedDeviceManager.StopSharing();
                 processCoordinator.KillServer();
+                sharedDeviceManager.StopSharing();
+                application.Quit();
+            }
+
+            // Start the actual sharing server
+            sharedDeviceManager.StartSharing();
+            // Listen for the StopSharingServer event, which is sent if the user unchecks
+            // "Share even when NAPS2 is closed"
+            processCoordinator.StartServer(new ProcessCoordinatorServiceImpl(Stop));
+
+            // Set up and show the tray indicator, which has a single "Stop Scanner Sharing" menu item
+            trayIndicator.StopClicked += (_, _) =>
+            {
+                // If the user manually stops the background app, treat it the same as if they unchecked
+                // "Share even when NAPS2 is closed".
+                container.Resolve<IOsServiceManager>().Unregister();
+                // Note that does NOT result in a StopSharingServer event being sent to this process, as it's only sent
+                // to OTHER processes. So we still need to call Stop ourselves.
+                Stop();
             };
-            Console.CancelKeyPress += (_, _) => reset.Set();
-            reset.WaitOne();
-            // TODO: Why is this needed?
-            Environment.Exit(0);
+            trayIndicator.Show();
+
+            // If the server was started on the command-line, allow Ctrl+C to terminate it
+            Console.CancelKeyPress += (_, _) => Stop();
         };
-        run(container);
+        Invoker.Current = new EtoInvoker(application);
+        application.Run();
 
         return 0;
     }
 
-    private class ProcessCoordinatorServiceImpl(ManualResetEvent reset)
+    private class ProcessCoordinatorServiceImpl(Action stop)
         : ProcessCoordinatorService.ProcessCoordinatorServiceBase
     {
         public override Task<Empty> StopSharingServer(StopSharingServerRequest request, ServerCallContext context)
         {
-            reset.Set();
+            stop();
             return Task.FromResult(new Empty());
         }
     }

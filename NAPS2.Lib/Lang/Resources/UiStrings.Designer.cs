@@ -2409,6 +2409,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stop Scanner Sharing.
+        /// </summary>
+        internal static string StopScannerSharing {
+            get {
+                return ResourceManager.GetString("StopScannerSharing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stretch to page size.
         /// </summary>
         internal static string StretchToPageSize {

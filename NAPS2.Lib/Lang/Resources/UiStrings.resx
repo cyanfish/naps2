@@ -990,4 +990,7 @@
   <data name="ErrorStartingApplication" xml:space="preserve">
     <value>Error starting application {0}</value>
   </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Stop Scanner Sharing</value>
+  </data>
 </root>
