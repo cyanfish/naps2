@@ -16,7 +16,7 @@ public static class WorkerEntryPoint
     {
             // Initialize Autofac (the DI framework)
             var container = AutoFacHelper.FromModules(
-                new CommonModule(), imageModule, new WorkerModule(), new ContextModule());
+                new CommonModule(), imageModule, new WorkerModule(), new StaticInitModule());
 
             var logger = container.Resolve<ILogger>();
             var serviceImpl = container.Resolve<WorkerServiceImpl>();

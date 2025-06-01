@@ -3,6 +3,9 @@ using NAPS2.Recovery;
 
 namespace NAPS2.Modules;
 
+/// <summary>
+/// Recovery folder setup used by all entry points except the worker (which initializes based on the parent process).
+/// </summary>
 public class RecoveryModule : Module
 {
     protected override void Load(ContainerBuilder builder)

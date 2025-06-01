@@ -11,6 +11,9 @@ using NAPS2.Update;
 
 namespace NAPS2.Modules;
 
+/// <summary>
+/// GUI-specific module used by GuiEntryPoint.
+/// </summary>
 public class GuiModule : Module
 {
     protected override void Load(ContainerBuilder builder)

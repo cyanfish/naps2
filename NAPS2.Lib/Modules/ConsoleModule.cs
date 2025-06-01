@@ -8,6 +8,9 @@ using NAPS2.Scan;
 
 namespace NAPS2.Modules;
 
+/// <summary>
+/// Console-specific module used by ConsoleEntryPoint.
+/// </summary>
 public class ConsoleModule : Module
 {
     private readonly AutomatedScanningOptions _options;

@@ -28,7 +28,7 @@ public static class ConsoleEntryPoint
 
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(new CommonModule(), imageModule, platformModule,
-            new ConsoleModule(options), new RecoveryModule(), new ContextModule());
+            new ConsoleModule(options), new RecoveryModule(), new StaticInitModule());
 
         Paths.ClearTemp();
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;

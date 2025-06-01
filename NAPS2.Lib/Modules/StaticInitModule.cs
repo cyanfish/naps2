@@ -4,7 +4,10 @@ using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace NAPS2.Modules;
 
-public class ContextModule : Module
+/// <summary>
+/// Static class initialization module used by all entry points except tests.
+/// </summary>
+public class StaticInitModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

@@ -16,7 +16,7 @@ public static class GuiEntryPoint
     {
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
-            new CommonModule(), imageModule, platformModule, new GuiModule(), new RecoveryModule(), new ContextModule());
+            new CommonModule(), imageModule, platformModule, new GuiModule(), new RecoveryModule(), new StaticInitModule());
 
         Paths.ClearTemp();
 

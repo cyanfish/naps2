@@ -16,6 +16,9 @@ using NAPS2.Scan.Internal;
 
 namespace NAPS2.Modules;
 
+/// <summary>
+/// Core module used by all entry points.
+/// </summary>
 public class CommonModule : Module
 {
     protected override void Load(ContainerBuilder builder)

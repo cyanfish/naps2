@@ -19,7 +19,7 @@ public static class ServerEntryPoint
     {
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(new CommonModule(), imageModule, platformModule, new WorkerModule(),
-            new ContextModule());
+            new StaticInitModule());
 
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
