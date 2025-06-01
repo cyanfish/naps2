@@ -13,7 +13,7 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class ConsoleEntryPoint
 {
-    public static int Run(string[] args, Module imageModule)
+    public static int Run(string[] args, Module imageModule, Module platformModule)
     {
         // Parse the command-line arguments (and display help text if appropriate)
         var options = new Parser(settings =>
@@ -27,8 +27,8 @@ public static class ConsoleEntryPoint
         }
 
         // Initialize Autofac (the DI framework)
-        var container = AutoFacHelper.FromModules(
-            new CommonModule(), imageModule, new ConsoleModule(options), new RecoveryModule(), new ContextModule());
+        var container = AutoFacHelper.FromModules(new CommonModule(), imageModule, platformModule,
+            new ConsoleModule(options), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;

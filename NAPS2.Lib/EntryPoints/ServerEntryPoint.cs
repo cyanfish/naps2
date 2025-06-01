@@ -15,11 +15,11 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class ServerEntryPoint
 {
-    public static int Run(string[] args, Module imageModule, Action<IContainer>? run = null)
+    public static int Run(string[] args, Module imageModule, Module platformModule, Action<IContainer>? run = null)
     {
         // Initialize Autofac (the DI framework)
-        var container = AutoFacHelper.FromModules(
-            new CommonModule(), imageModule, new WorkerModule(), new ContextModule());
+        var container = AutoFacHelper.FromModules(new CommonModule(), imageModule, platformModule, new WorkerModule(),
+            new ContextModule());
 
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 

@@ -17,7 +17,7 @@ public static class WinFormsEntryPoint
         return args switch
         {
             ["worker", ..] => WindowsNativeWorkerEntryPoint.Run(subArgs),
-            ["server", ..] => ServerEntryPoint.Run(subArgs, new GdiModule()),
+            ["server", ..] => ServerEntryPoint.Run(subArgs, new GdiModule(), new WinFormsModule()),
             _ => GuiEntryPoint.Run(args, new GdiModule(), new WinFormsModule())
         };
     }

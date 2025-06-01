@@ -26,9 +26,9 @@ public static class MacEntryPoint
         var subArgs = args.Skip(1).ToArray();
         return args switch
         {
-            ["cli" or "console", ..] => ConsoleEntryPoint.Run(subArgs, new MacImagesModule()),
+            ["cli" or "console", ..] => ConsoleEntryPoint.Run(subArgs, new MacImagesModule(), new MacModule()),
             ["worker", ..] => MacWorkerEntryPoint.Run(subArgs),
-            ["server", ..] => ServerEntryPoint.Run(subArgs, new MacImagesModule()),
+            ["server", ..] => ServerEntryPoint.Run(subArgs, new MacImagesModule(), new MacModule()),
             _ => GuiEntryPoint.Run(args, new MacImagesModule(), new MacModule())
         };
     }

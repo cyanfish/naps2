@@ -18,9 +18,9 @@ public static class GtkEntryPoint
         var subArgs = args.Skip(1).ToArray();
         return args switch
         {
-            ["cli" or "console", ..] => ConsoleEntryPoint.Run(subArgs, new GtkImagesModule()),
+            ["cli" or "console", ..] => ConsoleEntryPoint.Run(subArgs, new GtkImagesModule(), new GtkModule()),
             ["worker", ..] => WorkerEntryPoint.Run(subArgs, new GtkImagesModule()),
-            ["server", ..] => ServerEntryPoint.Run(subArgs, new GtkImagesModule()),
+            ["server", ..] => ServerEntryPoint.Run(subArgs, new GtkImagesModule(), new GtkModule()),
             _ => GuiEntryPoint.Run(args, new GtkImagesModule(), new GtkModule())
         };
     }

@@ -12,6 +12,6 @@ public static class WindowsConsoleEntryPoint
     public static int Run(string[] args)
     {
         EtoPlatform.Current = new WinFormsEtoPlatform();
-        return ConsoleEntryPoint.Run(args, new GdiModule());
+        return ConsoleEntryPoint.Run(args, new GdiModule(), new WinFormsModule());
     }
 }
