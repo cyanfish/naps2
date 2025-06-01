@@ -44,7 +44,7 @@ public static class ConsoleEntryPoint
         if (options.Progress)
         {
             // We need to set up an Eto application in order to be able to display a progress GUI
-            EtoPlatform.Current.InitializePlatform();
+            EtoPlatform.Current.InitializeForegroundApp();
             container.Resolve<CultureHelper>().SetCulturesFromConfig();
 
             var application = EtoPlatform.Current.CreateApplication();

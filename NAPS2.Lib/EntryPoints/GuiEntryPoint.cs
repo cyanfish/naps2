@@ -25,7 +25,7 @@ public static class GuiEntryPoint
         lifecycle.ParseArgs(args);
         lifecycle.ExitIfRedundant();
 
-        EtoPlatform.Current.InitializePlatform();
+        EtoPlatform.Current.InitializeForegroundApp();
 
         // Set up basic application configuration
         container.Resolve<CultureHelper>().SetCulturesFromConfig();

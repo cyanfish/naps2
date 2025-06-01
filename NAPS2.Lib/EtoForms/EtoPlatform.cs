@@ -43,7 +43,7 @@ public abstract class EtoPlatform
 
     public abstract void ConfigureDonateButton(Button button);
 
-    public virtual void InitializePlatform()
+    public virtual void InitializeForegroundApp()
     {
     }
 

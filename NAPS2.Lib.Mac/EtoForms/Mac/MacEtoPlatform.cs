@@ -17,7 +17,7 @@ public class MacEtoPlatform : EtoPlatform
     public override IIconProvider IconProvider { get; } = new MacIconProvider(new DefaultIconProvider());
     public override IDarkModeProvider DarkModeProvider { get; } = new MacDarkModeProvider();
 
-    public override void InitializePlatform()
+    public override void InitializeForegroundApp()
     {
         // We start the process as a background process (by setting LSBackgroundOnly in Info.plist) and only turn it
         // into a foreground process once we know we're not in worker or console mode. This ensures workers don't have
