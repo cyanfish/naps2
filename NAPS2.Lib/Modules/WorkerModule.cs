@@ -11,7 +11,6 @@ public class WorkerModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.Register(ctx => new ScanningContext(ctx.Resolve<ImageContext>()));
         // Bindings for ITwainController as used by WorkerServiceImpl
 #if MAC
         builder.RegisterType<StubTwainController>().As<ITwainController>();
