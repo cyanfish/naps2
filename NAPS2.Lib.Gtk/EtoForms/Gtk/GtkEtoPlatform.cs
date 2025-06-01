@@ -21,7 +21,7 @@ public class GtkEtoPlatform : EtoPlatform
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
     public override IDarkModeProvider DarkModeProvider { get; } = new GtkDarkModeProvider();
 
-    public override Application CreateApplication()
+    public override Application CreateApplicationCore()
     {
         var application = new Application(Platforms.Gtk);
         application.Initialized += (_, _) =>

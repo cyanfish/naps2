@@ -31,7 +31,6 @@ public static class ConsoleEntryPoint
             new ConsoleModule(options), new RecoveryModule(), new StaticInitModule());
 
         Paths.ClearTemp();
-        TaskScheduler.UnobservedTaskException += UnhandledTaskException;
 
         // Start a pending worker process
         container.Resolve<IWorkerFactory>().Init(
@@ -48,7 +47,6 @@ public static class ConsoleEntryPoint
             container.Resolve<CultureHelper>().SetCulturesFromConfig();
 
             var application = EtoPlatform.Current.CreateApplication();
-            application.UnhandledException += UnhandledException;
             application.Initialized += (_, _) => scanning.Execute().ContinueWith(_ => application.Quit());
             Invoker.Current = new EtoInvoker(application);
             application.Run();
@@ -59,17 +57,5 @@ public static class ConsoleEntryPoint
         }
 
         return ((ConsoleErrorOutput) container.Resolve<ErrorOutput>()).HasError ? 1 : 0;
-    }
-
-    private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
-    {
-        Log.FatalException("An error occurred that caused the task to terminate.", e.Exception);
-        e.SetObserved();
-    }
-
-    private static void UnhandledException(object? sender, Eto.UnhandledExceptionEventArgs e)
-    {
-        Log.FatalException("An error occurred that caused the application to close.",
-            e.ExceptionObject as Exception ?? new Exception());
     }
 }

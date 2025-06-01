@@ -25,7 +25,7 @@ public class MacEtoPlatform : EtoPlatform
         MacProcessHelper.TransformThisProcessToForeground();
     }
 
-    public override Application CreateApplication()
+    public override Application CreateApplicationCore()
     {
         var application = new Application(Platforms.macOS);
         ((NSApplication) application.ControlObject).Delegate = new MacAppDelegate();

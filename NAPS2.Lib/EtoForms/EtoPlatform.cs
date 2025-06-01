@@ -30,7 +30,20 @@ public abstract class EtoPlatform
     public abstract IDarkModeProvider DarkModeProvider { get; }
     public ColorScheme ColorScheme { get; }
 
-    public abstract Application CreateApplication();
+    public Application CreateApplication()
+    {
+        var app = CreateApplicationCore();
+        app.UnhandledException += UnhandledException;
+        return app;
+    }
+
+    private static void UnhandledException(object? sender, Eto.UnhandledExceptionEventArgs e)
+    {
+        Log.FatalException("An error occurred that caused the application to close.",
+            e.ExceptionObject as Exception ?? new Exception());
+    }
+
+    public abstract Application CreateApplicationCore();
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button, ButtonFlags flags);
     public abstract Bitmap ToBitmap(IMemoryImage image);
@@ -177,6 +190,6 @@ public abstract class EtoPlatform
     public virtual Control? MaybeCreateOverlayContainer() => null;
 
     public virtual Control? GetOverlayContainer(Control? container, bool inOverlay) => null;
-    
+
     public virtual void SetSplitterPosition(Splitter splitter, int pos) => splitter.Position = pos;
 }

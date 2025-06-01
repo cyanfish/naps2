@@ -29,7 +29,6 @@ public static class GuiEntryPoint
 
         // Set up basic application configuration
         container.Resolve<CultureHelper>().SetCulturesFromConfig();
-        TaskScheduler.UnobservedTaskException += UnhandledTaskException;
         Trace.Listeners.Add(new ConsoleTraceListener());
 
         // Start a pending worker process
@@ -37,24 +36,11 @@ public static class GuiEntryPoint
 
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();
-        application.UnhandledException += UnhandledException;
         Invoker.Current = new EtoInvoker(application);
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
 
         application.Run(desktop);
         return 0;
-    }
-
-    private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
-    {
-        Log.FatalException("An error occurred that caused the task to terminate.", e.Exception);
-        e.SetObserved();
-    }
-
-    private static void UnhandledException(object? sender, Eto.UnhandledExceptionEventArgs e)
-    {
-        Log.FatalException("An error occurred that caused the application to close.",
-            e.ExceptionObject as Exception ?? new Exception());
     }
 }

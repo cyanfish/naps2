@@ -21,8 +21,6 @@ public static class ServerEntryPoint
         var container =
             AutoFacHelper.FromModules(new CommonModule(), imageModule, platformModule, new StaticInitModule());
 
-        TaskScheduler.UnobservedTaskException += UnhandledTaskException;
-
         // Start a pending worker process
         container.Resolve<IWorkerFactory>().Init(container.Resolve<ScanningContext>());
 
@@ -47,12 +45,6 @@ public static class ServerEntryPoint
         run(container);
 
         return 0;
-    }
-
-    private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
-    {
-        Log.FatalException("An error occurred that caused the server task to terminate.", e.Exception);
-        e.SetObserved();
     }
 
     private class ProcessCoordinatorServiceImpl(ManualResetEvent reset)

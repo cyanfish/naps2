@@ -26,7 +26,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
     public override IDarkModeProvider DarkModeProvider { get; } = new WinFormsDarkModeProvider();
 
-    public override Application CreateApplication()
+    public override Application CreateApplicationCore()
     {
         WF.Application.EnableVisualStyles();
         WF.Application.SetCompatibleTextRenderingDefault(false);
