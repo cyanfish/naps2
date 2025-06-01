@@ -2,7 +2,10 @@
 
 namespace NAPS2.Platform;
 
-public class LinuxApplicationLifecycle(ProcessCoordinator processCoordinator, Naps2Config config)
-    : ApplicationLifecycle(processCoordinator, config)
+public class LinuxApplicationLifecycle(
+    ProcessCoordinator processCoordinator,
+    IOsServiceManager serviceManager,
+    Naps2Config config)
+    : ApplicationLifecycle(processCoordinator, serviceManager, config)
 {
 }

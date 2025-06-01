@@ -36,7 +36,12 @@ internal class AssemblyHelper
     }
 
     public static string EntryFile =>
-        Assembly.GetEntryAssembly()?.Location ?? throw new InvalidOperationException("No entry file");
+#if NET6_0_OR_GREATER
+        Environment.ProcessPath
+#else
+        Assembly.GetEntryAssembly()?.Location
+#endif
+        ?? throw new InvalidOperationException("No entry file");
 
     private static string GetAssemblyAttributeValue<T>(Func<T, string> selector)
     {

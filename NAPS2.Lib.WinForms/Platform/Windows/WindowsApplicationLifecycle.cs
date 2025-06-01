@@ -15,7 +15,8 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
     private int _returnCode;
 
     public WindowsApplicationLifecycle(StillImage sti, WindowsEventLogger windowsEventLogger,
-        ProcessCoordinator processCoordinator, Naps2Config config) : base(processCoordinator, config)
+        ProcessCoordinator processCoordinator, IOsServiceManager serviceManager, Naps2Config config)
+        : base(processCoordinator, serviceManager, config)
     {
         _sti = sti;
         _windowsEventLogger = windowsEventLogger;
@@ -28,6 +29,8 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
     /// <param name="args"></param>
     public override void ParseArgs(string[] args)
     {
+        base.ParseArgs(args);
+
         bool silent = args.Any(x => x.Equals("/Silent", StringComparison.InvariantCultureIgnoreCase));
         bool noElevation = args.Any(x => x.Equals("/NoElevation", StringComparison.InvariantCultureIgnoreCase));
         bool failedUpdate = args.Any(x => x.Equals("/FailedUpdate", StringComparison.InvariantCultureIgnoreCase));

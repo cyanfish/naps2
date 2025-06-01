@@ -2,8 +2,11 @@
 
 namespace NAPS2.Platform;
 
-public class MacApplicationLifecycle(ProcessCoordinator processCoordinator, Naps2Config config)
-    : ApplicationLifecycle(processCoordinator, config)
+public class MacApplicationLifecycle(
+    ProcessCoordinator processCoordinator,
+    IOsServiceManager serviceManager,
+    Naps2Config config)
+    : ApplicationLifecycle(processCoordinator, serviceManager, config)
 {
     protected override void HandleSingleInstance()
     {

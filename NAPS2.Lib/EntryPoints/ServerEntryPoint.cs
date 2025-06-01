@@ -51,12 +51,12 @@ public static class ServerEntryPoint
             // Set up and show the tray indicator, which has a single "Stop Scanner Sharing" menu item
             trayIndicator.StopClicked += (_, _) =>
             {
+                Stop();
                 // If the user manually stops the background app, treat it the same as if they unchecked
                 // "Share even when NAPS2 is closed".
-                container.Resolve<IOsServiceManager>().Unregister();
-                // Note that does NOT result in a StopSharingServer event being sent to this process, as it's only sent
-                // to OTHER processes. So we still need to call Stop ourselves.
-                Stop();
+                // We need to do this in a separate process as on Mac/Linux this process will die as soon as the service
+                // is unregistered and the full cleanup won't happen.
+                Process.Start(AssemblyHelper.EntryFile, "/UnregisterSharingService");
             };
             trayIndicator.Show();
 

@@ -8,20 +8,35 @@ namespace NAPS2.Platform;
 public abstract class ApplicationLifecycle
 {
     private readonly ProcessCoordinator _processCoordinator;
+    private readonly IOsServiceManager _serviceManager;
     private readonly Naps2Config _config;
 
-    protected ApplicationLifecycle(ProcessCoordinator processCoordinator, Naps2Config config)
+    private bool _unregisterSharingService;
+
+    protected ApplicationLifecycle(ProcessCoordinator processCoordinator, IOsServiceManager serviceManager,
+        Naps2Config config)
     {
         _processCoordinator = processCoordinator;
+        _serviceManager = serviceManager;
         _config = config;
     }
 
     public virtual void ParseArgs(string[] args)
     {
+        _unregisterSharingService = args.Any(x =>
+            x.Equals("/UnregisterSharingService", StringComparison.InvariantCultureIgnoreCase));
+        if (_unregisterSharingService)
+        {
+            _serviceManager.Unregister();
+        }
     }
 
     public virtual void ExitIfRedundant()
     {
+        if (_unregisterSharingService)
+        {
+            Environment.Exit(0);
+        }
         HandleSingleInstance();
     }
 
