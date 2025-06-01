@@ -12,11 +12,11 @@ namespace NAPS2.EntryPoints;
 /// </summary>
 public static class GuiEntryPoint
 {
-    public static int Run(string[] args, Module imageModule, Module guiModule)
+    public static int Run(string[] args, Module imageModule, Module platformModule)
     {
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
-            new CommonModule(), imageModule, guiModule, new RecoveryModule(), new ContextModule());
+            new CommonModule(), imageModule, platformModule, new GuiModule(), new RecoveryModule(), new ContextModule());
 
         Paths.ClearTemp();
 

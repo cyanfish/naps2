@@ -5,12 +5,10 @@ using NAPS2.ImportExport.Email;
 
 namespace NAPS2.Modules;
 
-public class GtkModule : GuiModule
+public class GtkModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        base.Load(builder);
-
         builder.RegisterType<LinuxApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<GtkScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<LinuxServiceManager>().As<IOsServiceManager>();

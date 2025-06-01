@@ -7,12 +7,10 @@ using NAPS2.ImportExport.Email;
 
 namespace NAPS2.Modules;
 
-public class MacModule : GuiModule
+public class MacModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        base.Load(builder);
-
         builder.RegisterType<MacApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<MacScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<AppleMailEmailProvider>().As<IAppleMailEmailProvider>();

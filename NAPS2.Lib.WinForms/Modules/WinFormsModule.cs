@@ -7,12 +7,10 @@ using NAPS2.Platform.Windows;
 
 namespace NAPS2.Modules;
 
-public class WinFormsModule : GuiModule
+public class WinFormsModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        base.Load(builder);
-
         builder.RegisterType<WindowsApplicationLifecycle>().As<ApplicationLifecycle>();
         builder.RegisterType<PrintDocumentPrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<WindowsServiceManager>().As<IOsServiceManager>().SingleInstance();
