@@ -5,6 +5,7 @@ public class MacAppTestTarget : IAppTestTarget
     public AppTestExe Console => GetAppTestExe("console");
     public AppTestExe Gui => GetAppTestExe(null);
     public AppTestExe Worker => GetAppTestExe("worker");
+    public AppTestExe Server => GetAppTestExe("server");
     public bool IsWindows => false;
 
     private AppTestExe GetAppTestExe(string argPrefix)

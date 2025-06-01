@@ -5,5 +5,6 @@ public interface IAppTestTarget
     AppTestExe Console { get; }
     AppTestExe Gui { get; }
     AppTestExe Worker { get; }
+    AppTestExe Server { get; }
     bool IsWindows { get; }
 }
