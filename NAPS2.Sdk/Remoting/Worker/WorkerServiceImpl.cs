@@ -162,11 +162,12 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
                         Value = progress
                     }
                 }),
-                uri => sequencedWriter.Write(new ScanResponse
+                (iconUri, connectionUri) => sequencedWriter.Write(new ScanResponse
                 {
-                    ConnectionUriChanged = new ConnectionUriChangedEvent
+                    DeviceUriChanged = new DeviceUriChangedEvent
                     {
-                        Uri = uri
+                        IconUri = iconUri,
+                        ConnectionUri = connectionUri
                     }
                 })
             );

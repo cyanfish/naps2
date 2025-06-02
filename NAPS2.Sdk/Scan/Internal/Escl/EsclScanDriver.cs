@@ -242,12 +242,13 @@ internal class EsclScanDriver : IScanDriver
             client.Logger = _logger;
             client.CancelToken = cancelToken;
         }
-        void MaybeSendNewConnectionUri()
+        void MaybeSendNewUris()
         {
-            string uri = client.ConnectionUri;
-            if (uri != options.Device.ConnectionUri)
+            string? iconUri = client.IconUri;
+            string connectionUri = client.ConnectionUri;
+            if (iconUri != options.Device.IconUri || connectionUri != options.Device.ConnectionUri)
             {
-                scanEvents.ConnectionUriChanged(uri);
+                scanEvents.DeviceUriChanged(iconUri, connectionUri);
             }
         }
 
@@ -282,7 +283,7 @@ internal class EsclScanDriver : IScanDriver
         if (cancelToken.IsCancellationRequested) return (null, null);
         if (service == null) throw new DeviceOfflineException();
         client = new EsclClient(service);
-        MaybeSendNewConnectionUri();
+        MaybeSendNewUris();
         SetUpClient();
         return (client, await client.GetCapabilities());
     }

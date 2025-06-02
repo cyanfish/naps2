@@ -161,8 +161,8 @@ public class ScanController
         void PageProgressCallback(double progress) =>
             PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
         void PageEndCallback(ProcessedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
-        void ConnectionUriChangedCallback(string uri) =>
-            ConnectionUriChanged?.Invoke(this, new ConnectionUriChangedEventArgs(uri));
+        void ConnectionUriChangedCallback(string? iconUri, string? connectionUri) =>
+            DeviceUriChanged?.Invoke(this, new DeviceUriChangedEventArgs(iconUri, connectionUri));
 
         _scanningContext.Logger.LogDebug("Scanning with {Device}", options.Device);
         _scanningContext.Logger.LogDebug(
@@ -277,7 +277,8 @@ public class ScanController
     public event EventHandler<PageEndEventArgs>? PageEnd;
 
     /// <summary>
-    ///
+    /// Occurs when an ESCL scan occurs and the device has a new icon or connection URI (e.g. the IP has changed). This
+    /// can be used to update the ScanDevice object for future scans.
     /// </summary>
-    public event EventHandler<ConnectionUriChangedEventArgs>? ConnectionUriChanged;
+    public event EventHandler<DeviceUriChangedEventArgs>? DeviceUriChanged;
 }

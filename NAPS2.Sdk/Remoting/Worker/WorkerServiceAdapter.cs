@@ -119,9 +119,9 @@ internal class WorkerServiceAdapter
                         new DeserializeImageOptions());
                     imageCallback?.Invoke(renderableImage, resp.Image.RenderedFilePath);
                 }
-                if (resp.ConnectionUriChanged != null)
+                if (resp.DeviceUriChanged != null)
                 {
-                    scanEvents.ConnectionUriChanged(resp.ConnectionUriChanged.Uri);
+                    scanEvents.DeviceUriChanged(resp.DeviceUriChanged.IconUri, resp.DeviceUriChanged.ConnectionUri);
                 }
             }
         }

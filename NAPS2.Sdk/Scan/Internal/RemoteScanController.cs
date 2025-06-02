@@ -45,7 +45,7 @@ internal class RemoteScanController : IRemoteScanController
         {
             scanEvents.PageStart();
             progressThrottle.Reset();
-        }, progressThrottle.OnlyIfChanged, scanEvents.ConnectionUriChanged);
+        }, progressThrottle.OnlyIfChanged, scanEvents.DeviceUriChanged);
         int pageNumber = 0;
         await driver.Scan(options, cancelToken, driverScanEvents, image =>
         {

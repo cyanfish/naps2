@@ -4,18 +4,18 @@ namespace NAPS2.Scan;
 
 internal class ScanEvents : IScanEvents
 {
-    public static readonly IScanEvents Stub = new ScanEvents(() => { }, _ => { }, _ => { });
+    public static readonly IScanEvents Stub = new ScanEvents(() => { }, _ => { }, (_, _) => { });
 
     private readonly Action _pageStartCallback;
     private readonly Action<double> _pageProgressCallback;
-    private readonly Action<string> _connectionUriChangedCallback;
+    private readonly Action<string?, string?> _deviceUriChangedCallback;
 
     public ScanEvents(Action pageStartCallback, Action<double> pageProgressCallback,
-        Action<string> connectionUriChangedCallback)
+        Action<string?, string?> deviceUriChangedCallback)
     {
         _pageStartCallback = pageStartCallback;
         _pageProgressCallback = pageProgressCallback;
-        _connectionUriChangedCallback = connectionUriChangedCallback;
+        _deviceUriChangedCallback = deviceUriChangedCallback;
     }
 
     public void PageStart()
@@ -28,8 +28,8 @@ internal class ScanEvents : IScanEvents
         _pageProgressCallback(progress);
     }
 
-    public void ConnectionUriChanged(string uri)
+    public void DeviceUriChanged(string? iconUri, string? connectionUri)
     {
-        _connectionUriChangedCallback(uri);
+        _deviceUriChangedCallback(iconUri, connectionUri);
     }
 }

@@ -77,7 +77,7 @@ message ScanResponse {
 		NAPS2.Serialization.SerializedImage image = 2;
 		ProgressEvent progress = 3;
 		PageStartEvent pageStart = 4;
-		ConnectionUriChangedEvent connectionUriChanged = 5;
+		DeviceUriChangedEvent deviceUriChanged = 5;
 	}
 }
 
@@ -88,8 +88,9 @@ message ProgressEvent {
 message PageStartEvent {
 }
 
-message ConnectionUriChangedEvent {
-	string uri = 1;
+message DeviceUriChangedEvent {
+	string iconUri = 1;
+	string connectionUri = 2;
 }
 
 message LoadMapiRequest {

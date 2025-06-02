@@ -5,5 +5,5 @@ internal interface IScanEvents
     // This only includes events that can't be otherwise inferred.
     void PageStart();
     void PageProgress(double progress);
-    void ConnectionUriChanged(string uri);
+    void DeviceUriChanged(string? iconUri, string? connectionUri);
 }

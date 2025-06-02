@@ -113,11 +113,15 @@ internal class ScanPerformer : IScanPerformer
                 HandleError(args.Error);
             }
         };
-        controller.ConnectionUriChanged += (sender, args) =>
+        controller.DeviceUriChanged += (sender, args) =>
         {
             if (scanProfile.Device != null)
             {
-                scanProfile.Device = scanProfile.Device with { ConnectionUri = args.NewConnectionUri };
+                scanProfile.Device = scanProfile.Device with
+                {
+                    IconUri = args.IconUri,
+                    ConnectionUri = args.ConnectionUri
+                };
                 _profileManager.Save();
             }
         };
