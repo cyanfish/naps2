@@ -322,6 +322,8 @@ public class EsclClient
         }
     }
 
+    public string ConnectionUri => GetUrl($"/{_rootUrl}");
+
     private async Task<XDocument> DoRequest(string endpoint)
     {
         // TODO: Retry logic

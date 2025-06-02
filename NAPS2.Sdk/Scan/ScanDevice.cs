@@ -3,7 +3,12 @@ namespace NAPS2.Scan;
 /// <summary>
 /// The representation of a scanning device and its corresponding driver.
 /// </summary>
-public sealed record ScanDevice(Driver Driver, string ID, string Name, string? IconUri = null)
+public sealed record ScanDevice(
+    Driver Driver,
+    string ID,
+    string Name,
+    string? IconUri = null,
+    string? ConnectionUri = null)
 {
     private ScanDevice() : this(Driver.Default, "", "")
     {

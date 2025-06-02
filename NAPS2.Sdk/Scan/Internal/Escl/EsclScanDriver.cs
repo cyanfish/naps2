@@ -58,7 +58,8 @@ internal class EsclScanDriver : IScanDriver
             var name = string.IsNullOrEmpty(service.ScannerName)
                 ? $"{ip}"
                 : $"{service.ScannerName} ({ip})";
-            callback(new ScanDevice(Driver.Escl, id, name, new EsclClient(service).IconUri));
+            var client = new EsclClient(service);
+            callback(new ScanDevice(Driver.Escl, id, name, client.IconUri, client.ConnectionUri));
         });
         locator.Logger = _logger;
         locator.Start();
@@ -240,6 +241,10 @@ internal class EsclScanDriver : IScanDriver
         {
             client = new EsclClient(new Uri(deviceId));
             // TODO: Handle device offline?
+        }
+        else if (options.Device.ConnectionUri != null)
+        {
+            client = new EsclClient(new Uri(options.Device.ConnectionUri));
         }
         else
         {
