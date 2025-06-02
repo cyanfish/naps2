@@ -161,6 +161,13 @@ internal class WorkerServiceImpl : WorkerService.WorkerServiceBase
                     {
                         Value = progress
                     }
+                }),
+                uri => sequencedWriter.Write(new ScanResponse
+                {
+                    ConnectionUriChanged = new ConnectionUriChangedEvent
+                    {
+                        Uri = uri
+                    }
                 })
             );
             await _remoteScanController.Scan(request.OptionsXml.FromXml<ScanOptions>(),

@@ -161,9 +161,12 @@ public class ScanController
         void PageProgressCallback(double progress) =>
             PageProgress?.Invoke(this, new PageProgressEventArgs(pageNumber, progress));
         void PageEndCallback(ProcessedImage image) => PageEnd?.Invoke(this, new PageEndEventArgs(pageNumber, image));
+        void ConnectionUriChangedCallback(string uri) =>
+            ConnectionUriChanged?.Invoke(this, new ConnectionUriChangedEventArgs(uri));
 
         _scanningContext.Logger.LogDebug("Scanning with {Device}", options.Device);
-        _scanningContext.Logger.LogDebug("Scan source: {Source}; bit depth: {BitDepth}; dpi: {Dpi}; page size: {PageSize}",
+        _scanningContext.Logger.LogDebug(
+            "Scan source: {Source}; bit depth: {BitDepth}; dpi: {Dpi}; page size: {PageSize}",
             options.PaperSource, options.BitDepth, options.Dpi, options.PageSize);
         ScanStartCallback();
         return AsyncProducers.RunProducer<ProcessedImage>(async produceImage =>
@@ -172,7 +175,8 @@ public class ScanController
 
             async Task DoScan(ScanOptions actualOptions)
             {
-                await bridge.Scan(actualOptions, cancelToken, new ScanEvents(PageStartCallback, PageProgressCallback),
+                await bridge.Scan(actualOptions, cancelToken,
+                    new ScanEvents(PageStartCallback, PageProgressCallback, ConnectionUriChangedCallback),
                     (image, postProcessingContext) =>
                     {
                         image = _localPostProcessor.PostProcess(image, actualOptions, postProcessingContext);
@@ -271,4 +275,9 @@ public class ScanController
     /// during a single Scan operation if it is a feeder scanner.
     /// </summary>
     public event EventHandler<PageEndEventArgs>? PageEnd;
+
+    /// <summary>
+    ///
+    /// </summary>
+    public event EventHandler<ConnectionUriChangedEventArgs>? ConnectionUriChanged;
 }

@@ -78,7 +78,7 @@ internal class EsclScanDriver : IScanDriver
 
         try
         {
-            var (client, caps) = await GetEsclClientWithCaps(options, cancelToken);
+            var (client, caps) = await GetEsclClientWithCaps(options, cancelToken, ScanEvents.Stub);
             if (client == null || caps == null) return new ScanCaps();
             return new ScanCaps
             {
@@ -166,7 +166,7 @@ internal class EsclScanDriver : IScanDriver
 
         try
         {
-            var (client, caps) = await GetEsclClientWithCaps(options, cancelToken);
+            var (client, caps) = await GetEsclClientWithCaps(options, cancelToken, scanEvents);
             if (client == null || caps == null) return;
             var status = await client.GetStatus();
             bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
@@ -231,7 +231,7 @@ internal class EsclScanDriver : IScanDriver
     }
 
     private async Task<(EsclClient?, EsclCapabilities?)> GetEsclClientWithCaps(ScanOptions options,
-        CancellationToken cancelToken)
+        CancellationToken cancelToken, IScanEvents scanEvents)
     {
         EsclClient client;
         string deviceId = options.Device!.ID;
@@ -241,6 +241,14 @@ internal class EsclScanDriver : IScanDriver
             client.SecurityPolicy = options.EsclOptions.SecurityPolicy;
             client.Logger = _logger;
             client.CancelToken = cancelToken;
+        }
+        void MaybeSendNewConnectionUri()
+        {
+            string uri = client.ConnectionUri;
+            if (uri != options.Device.ConnectionUri)
+            {
+                scanEvents.ConnectionUriChanged(uri);
+            }
         }
 
         // If we only have a URI to connect, just use it.
@@ -274,6 +282,7 @@ internal class EsclScanDriver : IScanDriver
         if (cancelToken.IsCancellationRequested) return (null, null);
         if (service == null) throw new DeviceOfflineException();
         client = new EsclClient(service);
+        MaybeSendNewConnectionUri();
         SetUpClient();
         return (client, await client.GetCapabilities());
     }
