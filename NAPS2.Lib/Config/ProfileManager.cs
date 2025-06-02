@@ -105,7 +105,7 @@ public class ProfileManager : IProfileManager
         {
             _userScope.Set(c => c, ImmutableList.CreateRange(_profiles!));
         }
-        ProfilesUpdated?.Invoke(this, EventArgs.Empty);
+        Invoker.Current.InvokeDispatch(() => ProfilesUpdated?.Invoke(this, EventArgs.Empty));
     }
 
     private List<ScanProfile> GetProfiles()
