@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text;
 using GrpcDotNetNamedPipes;
 using static NAPS2.Remoting.ProcessCoordinatorService;
@@ -17,7 +18,7 @@ public class ProcessCoordinator(string basePath, string pipeNameFormat)
 {
     private const string LOCK_FILE_NAME = "instance.lock";
     private const string PROC_FILE_NAME = "instance.proc";
-    
+
     public static ProcessCoordinator CreateDefault() =>
         new(Paths.AppData, "NAPS2_PIPE_v2_{0}");
 
@@ -48,39 +49,42 @@ public class ProcessCoordinator(string basePath, string pipeNameFormat)
         new(new NamedPipeChannel(".", GetPipeName(recipient),
             new NamedPipeChannelOptions { ConnectionTimeout = timeout }));
 
-    private bool TrySendMessage(Process recipient, int timeout, Action<ProcessCoordinatorServiceClient> send)
+    private bool TrySendMessage<TResponse>(Process recipient, int timeout,
+        Func<ProcessCoordinatorServiceClient, TResponse> send, [NotNullWhen(true)] out TResponse? response)
     {
         var client = GetClient(recipient, timeout);
         try
         {
-            send(client);
+            response = send(client)!;
             return true;
         }
         catch (Exception)
         {
+            response = default;
             return false;
         }
     }
 
     public bool Activate(Process recipient, int timeout) =>
-        TrySendMessage(recipient, timeout, client => client.Activate(new ActivateRequest()));
+        TrySendMessage(recipient, timeout, client => client.Activate(new ActivateRequest()), out _);
 
     public bool CloseWindow(Process recipient, int timeout) =>
-        TrySendMessage(recipient, timeout, client => client.CloseWindow(new CloseWindowRequest()));
+        TrySendMessage(recipient, timeout, client => client.CloseWindow(new CloseWindowRequest()), out _);
 
     public bool ScanWithDevice(Process recipient, int timeout, string device) =>
         TrySendMessage(recipient, timeout,
-            client => client.ScanWithDevice(new ScanWithDeviceRequest { Device = device }));
+            client => client.ScanWithDevice(new ScanWithDeviceRequest { Device = device }), out _);
 
     public bool OpenFile(Process recipient, int timeout, params string[] paths)
     {
         var req = new OpenFileRequest();
         req.Path.AddRange(paths);
-        return TrySendMessage(recipient, timeout, client => client.OpenFile(req));
+        return TrySendMessage(recipient, timeout, client => client.OpenFile(req), out _);
     }
 
     public bool StopSharingServer(Process recipient, int timeout) =>
-        TrySendMessage(recipient, timeout, client => client.StopSharingServer(new StopSharingServerRequest()));
+        TrySendMessage(recipient, timeout, client => client.StopSharingServer(new StopSharingServerRequest()),
+            out var response) && response.Stopped;
 
     public bool TryTakeInstanceLock()
     {

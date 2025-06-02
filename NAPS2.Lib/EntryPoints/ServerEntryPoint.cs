@@ -72,10 +72,11 @@ public static class ServerEntryPoint
     private class ProcessCoordinatorServiceImpl(Action stop)
         : ProcessCoordinatorService.ProcessCoordinatorServiceBase
     {
-        public override Task<Empty> StopSharingServer(StopSharingServerRequest request, ServerCallContext context)
+        public override Task<StopSharingServerResponse> StopSharingServer(StopSharingServerRequest request,
+            ServerCallContext context)
         {
             stop();
-            return Task.FromResult(new Empty());
+            return Task.FromResult(new StopSharingServerResponse { Stopped = true });
         }
     }
 }
