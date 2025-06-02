@@ -232,6 +232,9 @@
   <data name="scanner_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-32-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="scanner_gray_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\scanner-32-gray.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="scanner_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-48-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

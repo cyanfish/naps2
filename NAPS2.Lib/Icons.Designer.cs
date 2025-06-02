@@ -1298,6 +1298,16 @@ namespace NAPS2 {
                 return ((byte[])(obj));
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] scanner_gray_32 {
+            get {
+                object obj = ResourceManager.GetObject("scanner_gray_32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
