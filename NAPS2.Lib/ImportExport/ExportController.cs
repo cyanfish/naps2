@@ -43,7 +43,7 @@ public class ExportController : IExportController
         }
         else
         {
-            if (!_dialogHelper.PromptToSavePdf(defaultFileName, out savePath!))
+            if (!_dialogHelper.PromptToSavePdf(GetDefaultPath(defaultFileName, uiImages, true), out savePath!))
             {
                 return false;
             }
@@ -74,7 +74,7 @@ public class ExportController : IExportController
         }
         else
         {
-            if (!_dialogHelper.PromptToSaveImage(defaultFileName, out savePath!))
+            if (!_dialogHelper.PromptToSaveImage(GetDefaultPath(defaultFileName, uiImages, false), out savePath!))
             {
                 return false;
             }
@@ -109,7 +109,7 @@ public class ExportController : IExportController
             var defaultFileName = string.IsNullOrWhiteSpace(pdfDefaultFileName)
                 ? imageDefaultFileName
                 : pdfDefaultFileName;
-            if (!_dialogHelper.PromptToSavePdfOrImage(defaultFileName, out savePath!))
+            if (!_dialogHelper.PromptToSavePdfOrImage(GetDefaultPath(defaultFileName, uiImages, null), out savePath!))
             {
                 return false;
             }
@@ -242,5 +242,24 @@ public class ExportController : IExportController
         {
             _imageList.Mutate(new ImageListMutation.DeleteSelected(), ListSelection.From(uiImages));
         }
+    }
+
+    private string? GetDefaultPath(string? defaultFileName, ICollection<UiImage> uiImages, bool? pdf)
+    {
+        if (!string.IsNullOrEmpty(defaultFileName))
+        {
+            return defaultFileName;
+        }
+        var originalFilePaths = uiImages
+            .Select(x => x.GetImageWeakReference().ProcessedImage.PostProcessingData.OriginalFilePath)
+            .WhereNotNull()
+            .Where(x => pdf == null || pdf == (Path.GetExtension(x).ToLowerInvariant() == ".pdf"))
+            .Distinct()
+            .ToList();
+        if (originalFilePaths.Count == 1)
+        {
+            return originalFilePaths[0];
+        }
+        return null;
     }
 }
