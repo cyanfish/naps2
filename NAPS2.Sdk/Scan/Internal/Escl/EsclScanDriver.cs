@@ -75,12 +75,11 @@ internal class EsclScanDriver : IScanDriver
     public async Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
         if (cancelToken.IsCancellationRequested) return new ScanCaps();
-        var client = await GetEsclClient(options, cancelToken);
-        if (client == null) return new ScanCaps();
 
         try
         {
-            var caps = await client.GetCapabilities();
+            var (client, caps) = await GetEsclClientWithCaps(options, cancelToken);
+            if (client == null || caps == null) return new ScanCaps();
             return new ScanCaps
             {
                 MetadataCaps = new()
@@ -164,12 +163,11 @@ internal class EsclScanDriver : IScanDriver
         Action<IMemoryImage> callback)
     {
         if (cancelToken.IsCancellationRequested) return;
-        var client = await GetEsclClient(options, cancelToken);
-        if (client == null) return;
 
         try
         {
-            var caps = await client.GetCapabilities();
+            var (client, caps) = await GetEsclClientWithCaps(options, cancelToken);
+            if (client == null || caps == null) return;
             var status = await client.GetStatus();
             bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
             bool hasErrorDetailsExtension = caps.Naps2Extensions?.Contains("ErrorDetails") ?? false;
@@ -232,33 +230,52 @@ internal class EsclScanDriver : IScanDriver
         }
     }
 
-    private async Task<EsclClient?> GetEsclClient(ScanOptions options, CancellationToken cancelToken)
+    private async Task<(EsclClient?, EsclCapabilities?)> GetEsclClientWithCaps(ScanOptions options,
+        CancellationToken cancelToken)
     {
         EsclClient client;
         string deviceId = options.Device!.ID;
 
+        void SetUpClient()
+        {
+            client.SecurityPolicy = options.EsclOptions.SecurityPolicy;
+            client.Logger = _logger;
+            client.CancelToken = cancelToken;
+        }
+
+        // If we only have a URI to connect, just use it.
         if (deviceId.StartsWith("http://") || deviceId.StartsWith("https://"))
         {
             client = new EsclClient(new Uri(deviceId));
-            // TODO: Handle device offline?
+            SetUpClient();
+            return (client, await client.GetCapabilities());
         }
-        else if (options.Device.ConnectionUri != null)
+
+        // If we have both a UUID and a ConnectionUri, race an mDNS request with a GetCapabilities request.
+        // This is the best of both worlds:
+        // - If the connection info is up to date, we connect directly immediately.
+        // - If the IP has changed, we find out and fall back to that
+        // TODO: Maybe racing [GetCapabilities] with [mDNS + GetCapabilities] is slightly more optimal
+        var serviceTask = FindDeviceEsclService(options, cancelToken);
+        if (options.Device!.ConnectionUri != null)
         {
             client = new EsclClient(new Uri(options.Device.ConnectionUri));
-        }
-        else
-        {
-            var service = await FindDeviceEsclService(options, cancelToken);
-            if (cancelToken.IsCancellationRequested) return null;
-            if (service == null) throw new DeviceOfflineException();
-            client = new EsclClient(service);
+            SetUpClient();
+            var capsTask = client.GetCapabilities();
+            await Task.WhenAny(capsTask, serviceTask);
+            if (capsTask.Status == TaskStatus.RanToCompletion)
+            {
+                return (client, await capsTask);
+            }
         }
 
-        client.SecurityPolicy = options.EsclOptions.SecurityPolicy;
-        client.Logger = _logger;
-        client.CancelToken = cancelToken;
-
-        return client;
+        // If we have no known connection info (or failed to connect with it), use the mDNS response for the client
+        var service = await serviceTask;
+        if (cancelToken.IsCancellationRequested) return (null, null);
+        if (service == null) throw new DeviceOfflineException();
+        client = new EsclClient(service);
+        SetUpClient();
+        return (client, await client.GetCapabilities());
     }
 
     private async Task<EsclJob> CreateScanJobAndCorrectInvalidSettings(EsclClient client, EsclScanSettings scanSettings)
