@@ -59,6 +59,7 @@ public class ScannerSharingForm : EtoDialogBase
         {
             _shareAsService.Checked = _osServiceManager.IsRegistered;
             _shareAsService.CheckedChanged += ShareAsServiceCheckedChanged;
+            _sharedDeviceManager.SharingServerStopped += SharingServerStopped;
         }
         EtoPlatform.Current.AttachDpiDependency(this, _ => _listView.RegenerateImages());
         _listView.ImageSize = new Size(48, 48);
@@ -74,6 +75,12 @@ public class ScannerSharingForm : EtoDialogBase
             C.ButtonMenuItem(this, _editCommand),
             C.ButtonMenuItem(this, _deleteCommand));
         contextMenu.Opening += ContextMenuOpening;
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        _sharedDeviceManager.SharingServerStopped -= SharingServerStopped;
     }
 
     protected override void BuildLayout()
@@ -151,6 +158,17 @@ public class ScannerSharingForm : EtoDialogBase
         {
             _suppressChangeEvent = false;
         }
+    }
+    
+    private void SharingServerStopped(object? sender, EventArgs e)
+    {
+        Invoker.Current.InvokeDispatch(() =>
+        {
+            if (_suppressChangeEvent) return;
+            _suppressChangeEvent = true;
+            _shareAsService.Checked = false;
+            _suppressChangeEvent = false;
+        });
     }
 
     private void DoAdd()

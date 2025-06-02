@@ -181,6 +181,9 @@ public class SharedDeviceManager : ISharedDeviceManager
         }
     }
 
+    public event EventHandler? SharingServerStopped;
+    public void InvokeSharingServerStopped() => SharingServerStopped?.Invoke(this, EventArgs.Empty);
+
     private void RegisterDevicesFromConfig()
     {
         foreach (var device in SharedDevices)

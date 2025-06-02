@@ -578,5 +578,12 @@ public class DesktopController
                 await controller._desktopScanController.ScanWithDevice(request.Device));
             return Task.FromResult(new Empty());
         }
+
+        public override Task<StopSharingServerResponse> StopSharingServer(StopSharingServerRequest request,
+            ServerCallContext context)
+        {
+            controller._sharedDeviceManager.InvokeSharingServerStopped();
+            return Task.FromResult(new StopSharingServerResponse());
+        }
     }
 }

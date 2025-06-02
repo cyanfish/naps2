@@ -11,4 +11,6 @@ public interface ISharedDeviceManager
     void RemoveSharedDevice(SharedDevice device);
     void ReplaceSharedDevice(SharedDevice original, SharedDevice replacement);
     ImmutableList<SharedDevice> SharedDevices { get; }
+    event EventHandler SharingServerStopped;
+    void InvokeSharingServerStopped();
 }
