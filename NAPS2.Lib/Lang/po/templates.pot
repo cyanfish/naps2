@@ -589,6 +589,7 @@ msgid "Edit with {0}"
 msgstr ""
 
 #: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
 msgid "Edit with..."
 msgstr ""
 
@@ -645,6 +646,10 @@ msgstr ""
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
+msgstr ""
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
 msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
@@ -1509,6 +1514,10 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr ""
+
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
 msgstr ""
@@ -1663,6 +1672,10 @@ msgstr ""
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
+msgstr ""
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
 msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
