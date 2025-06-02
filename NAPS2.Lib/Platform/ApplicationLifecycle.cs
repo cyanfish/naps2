@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using NAPS2.Remoting;
 
 namespace NAPS2.Platform;
@@ -27,9 +28,17 @@ public abstract class ApplicationLifecycle
             x.Equals("/UnregisterSharingService", StringComparison.InvariantCultureIgnoreCase));
         if (_unregisterSharingService)
         {
+            if (OperatingSystem.IsMacOS())
+            {
+                // Avoid terminating our own process if we were spawned from the server process
+                setsid();
+            }
             _serviceManager.Unregister();
         }
     }
+
+    [DllImport("libc")]
+    private static extern int setsid();
 
     public virtual void ExitIfRedundant()
     {
