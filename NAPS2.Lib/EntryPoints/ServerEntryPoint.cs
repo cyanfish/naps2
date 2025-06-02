@@ -35,10 +35,18 @@ public static class ServerEntryPoint
             var processCoordinator = container.Resolve<ProcessCoordinator>();
             var trayIndicator = container.Resolve<ServerTrayIndicator>();
 
-            void Stop()
+            void Stop(bool unregister = false)
             {
                 processCoordinator.KillServer();
                 sharedDeviceManager.StopSharing();
+                if (unregister)
+                {
+                    // If the user manually stops the background app, treat it the same as if they unchecked
+                    // "Share even when NAPS2 is closed".
+                    // We need to do this in a separate process as on Mac/Linux this process will die as soon as the service
+                    // is unregistered and the full cleanup won't happen.
+                    Process.Start(AssemblyHelper.EntryFile, "/UnregisterSharingService").WaitForExit(5000);
+                }
                 application.Quit();
             }
 
@@ -46,18 +54,10 @@ public static class ServerEntryPoint
             sharedDeviceManager.StartSharing();
             // Listen for the StopSharingServer event, which is sent if the user unchecks
             // "Share even when NAPS2 is closed"
-            processCoordinator.StartServer(new ProcessCoordinatorServiceImpl(Stop));
+            processCoordinator.StartServer(new ProcessCoordinatorServiceImpl(() => Stop()));
 
             // Set up and show the tray indicator, which has a single "Stop Scanner Sharing" menu item
-            trayIndicator.StopClicked += (_, _) =>
-            {
-                Stop();
-                // If the user manually stops the background app, treat it the same as if they unchecked
-                // "Share even when NAPS2 is closed".
-                // We need to do this in a separate process as on Mac/Linux this process will die as soon as the service
-                // is unregistered and the full cleanup won't happen.
-                Process.Start(AssemblyHelper.EntryFile, "/UnregisterSharingService");
-            };
+            trayIndicator.StopClicked += (_, _) => Stop(true);
             trayIndicator.Show();
 
             // If the server was started on the command-line, allow Ctrl+C to terminate it
