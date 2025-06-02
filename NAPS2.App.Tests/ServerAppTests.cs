@@ -7,7 +7,7 @@ namespace NAPS2.App.Tests;
 
 public class ServerAppTests : ContextualTests
 {
-    [Theory]
+    [GuiTheory]
     [ClassData(typeof(AppTestData))]
     public void StartAndStopServer(IAppTestTarget target)
     {
