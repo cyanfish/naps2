@@ -142,6 +142,7 @@ public class Sidebar
             }
             UpdateUiForProfile();
         };
+        _profileManager.ProfilesUpdated += (_, _) => UpdateUiForProfile();
 
         UpdateUiForProfile();
 
