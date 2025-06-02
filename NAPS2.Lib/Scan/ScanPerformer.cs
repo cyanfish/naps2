@@ -62,7 +62,7 @@ internal class ScanPerformer : IScanPerformer
     {
         try
         {
-            var options = BuildOptions(scanProfile, new ScanParams(), dialogParent);
+            var options = BuildOptions(scanProfile, new ScanParams(), dialogParent, true);
             return await _devicePrompt.PromptForDevice(options, allowAlwaysAsk);
         }
         catch (Exception error)
@@ -74,14 +74,14 @@ internal class ScanPerformer : IScanPerformer
 
     public IAsyncEnumerable<ScanDevice> GetDevices(ScanProfile scanProfile, CancellationToken cancelToken = default)
     {
-        var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero);
+        var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero, true);
         var controller = CreateScanController(new ScanParams());
         return controller.GetDevices(options, cancelToken);
     }
 
     public async Task<ScanCaps> GetCaps(ScanProfile scanProfile, CancellationToken cancelToken = default)
     {
-        var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero);
+        var options = BuildOptions(scanProfile, new ScanParams(), IntPtr.Zero, false);
         options.Device = scanProfile.Device?.ToScanDevice(options.Driver);
         var controller = CreateScanController(new ScanParams());
         return await controller.GetCaps(options, cancelToken);
@@ -90,7 +90,7 @@ internal class ScanPerformer : IScanPerformer
     public async IAsyncEnumerable<ProcessedImage> PerformScan(ScanProfile scanProfile, ScanParams scanParams,
         IntPtr dialogParent = default, [EnumeratorCancellation] CancellationToken cancelToken = default)
     {
-        var options = BuildOptions(scanProfile, scanParams, dialogParent);
+        var options = BuildOptions(scanProfile, scanParams, dialogParent, false);
         // Make sure we get a real driver value (not just "Default")
         options = _scanOptionsValidator.ValidateAll(options, _scanningContext, false);
 
@@ -221,7 +221,8 @@ internal class ScanPerformer : IScanPerformer
             (_, args) => op.Progress((int) Math.Round(args.Value * 1000), 1000);
     }
 
-    private ScanOptions BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent)
+    private ScanOptions BuildOptions(ScanProfile scanProfile, ScanParams scanParams, IntPtr dialogParent,
+        bool isDeviceQuery)
     {
         var options = new ScanOptions
         {
@@ -255,7 +256,8 @@ internal class ScanPerformer : IScanPerformer
             },
             EsclOptions =
             {
-                SecurityPolicy = _config.Get(c => c.EsclSecurityPolicy)
+                SecurityPolicy = _config.Get(c => c.EsclSecurityPolicy),
+                SearchTimeout = isDeviceQuery ? 60_000 : 5000
             },
             KeyValueOptions = scanProfile.KeyValueOptions != null
                 ? new KeyValueScanOptions(scanProfile.KeyValueOptions)
