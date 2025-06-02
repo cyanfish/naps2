@@ -11,9 +11,10 @@ public record PostProcessingData(
     int PageNumber,
     PageSide PageSide,
     Barcode Barcode,
-    CancellationTokenSource? OcrCts)
+    CancellationTokenSource? OcrCts,
+    string? OriginalFilePath)
 {
-    public PostProcessingData() : this(null, null, 0, PageSide.Unknown, Barcode.NoDetection, null)
+    public PostProcessingData() : this(null, null, 0, PageSide.Unknown, Barcode.NoDetection, null, null)
     {
     }
 }

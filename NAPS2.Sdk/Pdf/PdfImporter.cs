@@ -53,6 +53,11 @@ public class PdfImporter
                 {
                     if (progress.IsCancellationRequested) return;
                     var image = GetImageFromPage(page, importParams);
+                    if (input.FilePath != null)
+                    {
+                        image = image.WithPostProcessingData(
+                            image.PostProcessingData with { OriginalFilePath = input.FilePath }, true);
+                    }
                     progress.Report(++i, document.PageCount);
                     produceImage(image);
                 }

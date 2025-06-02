@@ -68,6 +68,11 @@ public class ImageImporter
                             importParams.ThumbnailSize,
                             importParams.BarcodeDetectionOptions,
                             true);
+                        if (input.FilePath != null)
+                        {
+                            image = image.WithPostProcessingData(
+                                image.PostProcessingData with { OriginalFilePath = input.FilePath }, true);
+                        }
 
                         progress.Report(++i, frameCount);
                         produceImage(image);
