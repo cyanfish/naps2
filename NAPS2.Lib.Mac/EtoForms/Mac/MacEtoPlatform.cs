@@ -200,4 +200,11 @@ public class MacEtoPlatform : EtoPlatform
                 ProcessCoordinator.CreateDefault().OpenFile(Process.GetCurrentProcess(), 100, filenames));
         }
     }
+
+    public override void ConfigureSaveDialog(SaveFileDialog sd)
+    {
+        var savePanel = (NSSavePanel) sd.ControlObject;
+        // Ensure the correct extension is added on save
+        savePanel.AllowsOtherFileTypes = false;
+    }
 }

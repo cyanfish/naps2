@@ -192,4 +192,8 @@ public abstract class EtoPlatform
     public virtual Control? GetOverlayContainer(Control? container, bool inOverlay) => null;
 
     public virtual void SetSplitterPosition(Splitter splitter, int pos) => splitter.Position = pos;
+
+    public virtual void ConfigureSaveDialog(SaveFileDialog sd)
+    {
+    }
 }

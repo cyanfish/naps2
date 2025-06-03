@@ -28,6 +28,7 @@ public class EtoDialogHelper : DialogHelper
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt);
         SetDir(sd, defaultPath);
+        EtoPlatform.Current.ConfigureSaveDialog(sd);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
@@ -46,6 +47,7 @@ public class EtoDialogHelper : DialogHelper
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
+        EtoPlatform.Current.ConfigureSaveDialog(sd);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
@@ -71,6 +73,7 @@ public class EtoDialogHelper : DialogHelper
             : FileFilterGroup.Image;
         _fileFilters.Set(sd, filterGroups, lastExt);
         SetDir(sd, defaultPath);
+        EtoPlatform.Current.ConfigureSaveDialog(sd);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
