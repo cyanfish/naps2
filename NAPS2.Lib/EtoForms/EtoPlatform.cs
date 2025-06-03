@@ -193,7 +193,7 @@ public abstract class EtoPlatform
 
     public virtual void SetSplitterPosition(Splitter splitter, int pos) => splitter.Position = pos;
 
-    public virtual void ConfigureSaveDialog(SaveFileDialog sd)
+    public virtual void ConfigureFileDialog(FileDialog fileDialog)
     {
     }
 }

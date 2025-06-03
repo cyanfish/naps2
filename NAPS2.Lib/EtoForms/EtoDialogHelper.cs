@@ -28,7 +28,7 @@ public class EtoDialogHelper : DialogHelper
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt);
         SetDir(sd, defaultPath);
-        EtoPlatform.Current.ConfigureSaveDialog(sd);
+        EtoPlatform.Current.ConfigureFileDialog(sd);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
@@ -47,7 +47,7 @@ public class EtoDialogHelper : DialogHelper
         };
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
-        EtoPlatform.Current.ConfigureSaveDialog(sd);
+        EtoPlatform.Current.ConfigureFileDialog(sd);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
@@ -73,7 +73,7 @@ public class EtoDialogHelper : DialogHelper
             : FileFilterGroup.Image;
         _fileFilters.Set(sd, filterGroups, lastExt);
         SetDir(sd, defaultPath);
-        EtoPlatform.Current.ConfigureSaveDialog(sd);
+        EtoPlatform.Current.ConfigureFileDialog(sd);
         if (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
@@ -140,6 +140,7 @@ public class EtoDialogHelper : DialogHelper
             // For UI test automation we choose the appdata folder to find the prepared files to import
             ofd.Directory = UriHelper.FilePathToFileUri(Path.GetFullPath(Paths.AppData));
         }
+        EtoPlatform.Current.ConfigureFileDialog(ofd);
         if (ofd.ShowDialog(null) == DialogResult.Ok)
         {
             filePaths = ofd.Filenames.ToArray();
