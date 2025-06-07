@@ -236,4 +236,37 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         mockHandler.Received()(Arg.Any<object>(),
             Arg.Is<DeviceUriChangedEventArgs>(args => args.ConnectionUri.EndsWith(":12147/eSCL")));
     }
+
+    [NetworkFact(Timeout = TIMEOUT)]
+    public async Task ScanWithOfflineDevice()
+    {
+        var device = new ScanDevice(Driver.Escl, "bad_uuid", _serverDisplayName);
+        await Assert.ThrowsAsync<DeviceOfflineException>(async () => await _client.Scan(new ScanOptions
+        {
+            Device = device,
+            EsclOptions = { SearchTimeout = 1000 }
+        }).ToListAsync());
+    }
+
+    [NetworkFact(Timeout = TIMEOUT)]
+    public async Task ScanWithOfflineDeviceAndIncorrectConnectionUri()
+    {
+        var device = new ScanDevice(Driver.Escl, "bad_uuid", _serverDisplayName,
+            ConnectionUri: "http://127.0.0.1:31233/eSCL");
+        await Assert.ThrowsAsync<DeviceOfflineException>(async () => await _client.Scan(new ScanOptions
+        {
+            Device = device,
+            EsclOptions = { SearchTimeout = 1000 }
+        }).ToListAsync());
+    }
+
+    [NetworkFact(Timeout = TIMEOUT)]
+    public async Task ScanWithOfflineDeviceAndIpInId()
+    {
+        var device = new ScanDevice(Driver.Escl, "http://127.0.0.1:31233/eSCL", _serverDisplayName);
+        await Assert.ThrowsAsync<DeviceOfflineException>(async () => await _client.Scan(new ScanOptions
+        {
+            Device = device
+        }).ToListAsync());
+    }
 }

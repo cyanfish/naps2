@@ -257,7 +257,16 @@ internal class EsclScanDriver : IScanDriver
         {
             client = new EsclClient(new Uri(deviceId));
             SetUpClient();
-            return (client, await client.GetCapabilities());
+            EsclCapabilities caps;
+            try
+            {
+                caps = await client.GetCapabilities();
+            }
+            catch (HttpRequestException)
+            {
+                throw new DeviceOfflineException();
+            }
+            return (client, caps);
         }
 
         // If we have both a UUID and a ConnectionUri, race an mDNS request with a GetCapabilities request.
