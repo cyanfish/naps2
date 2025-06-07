@@ -9,7 +9,7 @@ public interface IOsServiceManager
 
     bool IsRegistered { get; }
 
-    void Register();
+    bool Register();
 
     void Unregister();
 }

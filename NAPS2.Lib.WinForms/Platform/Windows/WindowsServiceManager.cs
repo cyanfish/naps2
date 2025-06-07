@@ -1,15 +1,12 @@
 using System.Runtime.InteropServices.ComTypes;
 using NAPS2.Remoting;
-using NAPS2.Remoting.Server;
 
 namespace NAPS2.Platform.Windows;
 
 /// <summary>
 /// Manages a user startup item on Windows.
 /// </summary>
-public class WindowsServiceManager(
-    ProcessCoordinator processCoordinator,
-    ISharedDeviceManager sharedDeviceManager)
+public class WindowsServiceManager(ProcessCoordinator processCoordinator)
     : IOsServiceManager
 {
     private static string ShortcutPath =>
@@ -21,17 +18,17 @@ public class WindowsServiceManager(
 
     public bool IsRegistered => File.Exists(ShortcutPath);
 
-    public void Register()
+    public bool Register()
     {
-        // ReSharper disable SuspiciousTypeConversion.Global
-        var shortcut = (Win32.IShellLink) new Win32.ShellLink();
-        shortcut.SetWorkingDirectory(AssemblyHelper.EntryFolder);
-        shortcut.SetPath(Environment.ProcessPath!);
-        shortcut.SetArguments("server");
-        shortcut.SetIconLocation(Environment.ProcessPath!, 0);
-        var persistFile = (IPersistFile) shortcut;
         try
         {
+            // ReSharper disable SuspiciousTypeConversion.Global
+            var shortcut = (Win32.IShellLink) new Win32.ShellLink();
+            shortcut.SetWorkingDirectory(AssemblyHelper.EntryFolder);
+            shortcut.SetPath(Environment.ProcessPath!);
+            shortcut.SetArguments("server");
+            shortcut.SetIconLocation(Environment.ProcessPath!, 0);
+            var persistFile = (IPersistFile) shortcut;
             persistFile.Save(ShortcutPath, false);
         }
         catch (Exception ex)
@@ -45,15 +42,12 @@ public class WindowsServiceManager(
                 FileName = Environment.ProcessPath,
                 Arguments = "server"
             });
-            if (process != null)
-            {
-                // Switch to the background process for sharing
-                sharedDeviceManager.StopSharing();
-            }
+            return process != null;
         }
         catch (Exception ex)
         {
             Log.ErrorException("Error starting NAPS2 server process", ex);
+            return false;
         }
     }
 
@@ -83,7 +77,5 @@ public class WindowsServiceManager(
         {
             Log.ErrorException("Error stopping NAPS2 server process", ex);
         }
-        // Switch back to this process for sharing
-        sharedDeviceManager.StartSharing();
     }
 }

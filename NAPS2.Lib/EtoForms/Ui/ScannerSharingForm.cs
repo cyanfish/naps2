@@ -140,11 +140,16 @@ public class ScannerSharingForm : EtoDialogBase
         {
             if (_shareAsService.IsChecked())
             {
-                _osServiceManager.Register();
+                if (_osServiceManager.Register())
+                {
+                    _sharedDeviceManager.StopSharing();
+                }
+                
             }
             else
             {
                 _osServiceManager.Unregister();
+                _sharedDeviceManager.StartSharing();
             }
         }
         catch (Exception ex)

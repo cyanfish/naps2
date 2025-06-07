@@ -15,7 +15,7 @@ public class LinuxServiceManager : IOsServiceManager
     
     public bool IsRegistered => File.Exists(UnitPath);
 
-    public void Register()
+    public bool Register()
     {
         var unitDef = $"""
                           [Unit]
@@ -51,7 +51,9 @@ public class LinuxServiceManager : IOsServiceManager
         if (!ProcessHelper.TryRun("systemctl", "--user start naps2-sharing-server", 1000))
         {
             Log.Error("Could not start service naps2-sharing-server");
+            return false;
         }
+        return true;
     }
 
     public void Unregister()
