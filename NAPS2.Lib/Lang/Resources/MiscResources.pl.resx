@@ -160,10 +160,10 @@
     <value>Zresetuj obraz</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>Masz niezapisane zmiany. Czy na pewno chcesz wyjść i odrzucić te zmiany?</value>
+    <value>Masz niezapisane zmiany. Czy na pewno chcesz wyjść i odrzucić te zmiany?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?</value>
+    <value>Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Niezapisane zmiany</value>

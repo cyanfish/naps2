@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -590,6 +590,15 @@ msgstr "ESCL USB-ajuri"
 msgid "Edit"
 msgstr "Muokkaa"
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr "Muokkaa sovelluksella {0}"
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr "Muokkaa sovelluksella..."
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr "Lähetä kaikki sähköpostitse"
@@ -644,6 +653,10 @@ msgstr "Edistynyt Windows-metatiedosto (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Virhe"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -1507,6 +1520,10 @@ msgstr "Jaa"
 msgid "Start"
 msgstr "Aloita"
 
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr ""
+
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
 msgstr "Venytä sivun kokoon"
@@ -1662,6 +1679,10 @@ msgstr "Kumoa"
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
 msgstr "Kumoa {0}"
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

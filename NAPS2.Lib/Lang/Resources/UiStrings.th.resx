@@ -31,13 +31,13 @@
     <value>บริจาค</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
-    <value>Profiles</value>
+    <value>โปรไฟล์</value>
   </data>
   <data name="New" xml:space="preserve">
     <value>ใหม่</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>แก้ไข</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>ลบ</value>
@@ -67,7 +67,7 @@
     <value>Redo {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Done</value>
+    <value>เสร็จ</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>ค่าเริ่มต้น</value>
@@ -82,16 +82,16 @@
     <value>OCR</value>
   </data>
   <data name="Profiles" xml:space="preserve">
-    <value>Profiles</value>
+    <value>โปรไฟล์</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Import</value>
+    <value>นำเข้า</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Save PDF</value>
+    <value>บันทึก</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
-    <value>PDF Settings</value>
+    <value>การตั้งค่า PDF</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>บันทึกภาพ</value>
@@ -100,37 +100,37 @@
     <value>Image Settings</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Email PDF</value>
+    <value>ส่งอีเมล PDF</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>ตั้งค่าอีเมล</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>พิมพ์</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>รูปภาพ</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>View</value>
+    <value>เปิดดูภาพ</value>
   </data>
   <data name="Crop" xml:space="preserve">
     <value>ครอบตัด</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
-    <value>Brightness / Contrast</value>
+    <value>ความสว่าง / ความเปรียบต่าง</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>เฉดสี / ความอิ่มตัว</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
     <value>ขาวดำ</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>Sharpen</value>
+    <value>ความ​คม​ชัด</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>ปรับแก้เอกสาร</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -145,7 +145,7 @@
     <value>หมุนขวา</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Flip</value>
+    <value>กลับด้าน</value>
   </data>
   <data name="Deskew" xml:space="preserve">
     <value>ปรับให้ตรง</value>
@@ -160,19 +160,19 @@
     <value>เลื่อนลง</value>
   </data>
   <data name="Reorder" xml:space="preserve">
-    <value>Reorder</value>
+    <value>จัดเรียงหน้าใหม่</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Interleave</value>
+    <value>แทรกสลับหน้า</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Deinterleave</value>
+    <value>แยกหน้าแบบสลับ</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Alternate Interleave</value>
+    <value>แทรกสลับหน้าแบบสลับทิศทาง</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternate Deinterleave</value>
+    <value>แยกหน้าแบบสลับทิศทาง</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>Reverse</value>
@@ -184,16 +184,16 @@
     <value>Reverse Selected</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
+    <value>ล้าง</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>ล้างทั้งหมด</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>ภาษา</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>ตั้งค่า</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Interface</value>
@@ -250,7 +250,7 @@
     <value>บันทึกทั้งหมดเป็น PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>บันทึกรายการที่เลือกเป็น PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
     <value>บันทึกทั้งหมดเป็นภาพ</value>
@@ -265,7 +265,7 @@
     <value>Email Selected</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>ส่งอีเมลทั้งหมดเป็น PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
     <value>Email Selected as PDF</value>
@@ -301,7 +301,7 @@
     <value>อุปกรณ์:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Choose device</value>
+    <value>เลือกอุปกรณ์</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Use predefined settings</value>
@@ -310,19 +310,19 @@
     <value>Use native UI</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
-    <value>Paper source:</value>
+    <value>แหล่งกระดาษ:</value>
   </data>
   <data name="PageSizeLabel" xml:space="preserve">
-    <value>Page size:</value>
+    <value>ขนาดหน้า:</value>
   </data>
   <data name="ResolutionLabel" xml:space="preserve">
-    <value>Resolution:</value>
+    <value>ความละเอียด:</value>
   </data>
   <data name="BrightnessLabel" xml:space="preserve">
-    <value>Brightness:</value>
+    <value>ความสว่าง:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>ความลึกบิต</value>
+    <value>ความลึกบิต:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
     <value>Horizontal align:</value>
@@ -334,7 +334,7 @@
     <value>Contrast:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
-    <value>Enable Auto Save</value>
+    <value>บันทึกอัตโนมัติ</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
     <value>การตั้งค่าบันทึกอัตโนมัติ</value>
@@ -409,10 +409,10 @@
     <value>ดาวน์โหลด</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Download Progress</value>
+    <value>ความคืบหน้าการดาวน์โหลด</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
-    <value>Preview</value>
+    <value>ดูตัวอย่าง</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>ถัดไป</value>
@@ -454,7 +454,7 @@
     <value>Single page files</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Encrypt PDF</value>
+    <value>เข้ารหัส PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Show</value>
@@ -463,7 +463,7 @@
     <value>Restore Defaults</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>PDF Settings</value>
+    <value>การตั้งค่า PDF</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>Allow Printing</value>
@@ -490,7 +490,7 @@
     <value>Allow Form Filling</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>Default File Path:</value>
+    <value>ที่อยู่ไฟล์เริ่มต้น:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
     <value>File Path:</value>
@@ -520,7 +520,7 @@
     <value>Metadata</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Encryption</value>
+    <value>การเข้ารหัส</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
     <value>Compatibility</value>
@@ -562,7 +562,7 @@
     <value>การเพิ่มจำนวนอัตโนมัติ (1 หลัก)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>File Name:</value>
+    <value>ชื่อไฟล์:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Preview:</value>
@@ -577,28 +577,28 @@
     <value>Tiff Options</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
-    <value>Compression:</value>
+    <value>การบีบอัด:</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
     <value>Image Settings</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>ตั้งค่าอีเมล</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>ตั้งค่า</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provider</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Change</value>
+    <value>เปลี่ยนแปลง</value>
   </data>
   <data name="AttachmentNameLabel" xml:space="preserve">
     <value>Attachment Name:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Choose Email Provider</value>
+    <value>เลือกผู้ให้บริการอีเมล</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
     <value>อนุญาต</value>
@@ -607,7 +607,7 @@
     <value>Waiting for authorization...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>ผิดพลาด</value>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
     <value>Technical Details</value>
@@ -631,10 +631,10 @@
     <value>Separate files by Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>More info</value>
+    <value>ข้อมูลเพิ่มเติม</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Clear images after saving</value>
+    <value>ล้างภาพหลังจากบันทึก</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
     <value>Keep images across sessions</value>
@@ -643,7 +643,7 @@
     <value>Custom Page Size</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
-    <value>Name (optional)</value>
+    <value>ชื่อ (ถ้ามี)</value>
   </data>
   <data name="Dimensions" xml:space="preserve">
     <value>Dimensions</value>
@@ -721,7 +721,7 @@
     <value>Output</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
-    <value>Profile:</value>
+    <value>โปรไฟล์:</value>
   </data>
   <data name="SingleScan" xml:space="preserve">
     <value>Single scan</value>
@@ -748,7 +748,7 @@
     <value>Save to multiple files</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Start</value>
+    <value>เริ่ม</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
     <value>Next Scan</value>
@@ -799,7 +799,7 @@
     <value>Split</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>รวมเอกสาร</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
     <value>Manual IP</value>
@@ -814,10 +814,10 @@
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>เชื่อมต่อ</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>การเชื่อมต่อผิดพลาด</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Always Ask</value>
@@ -869,5 +869,20 @@
   </data>
   <data name="ThemeLabel" xml:space="preserve">
     <value>Theme:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Edit with...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Edit with {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Edit with...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Error starting application {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Stop Scanner Sharing</value>
   </data>
 </root>

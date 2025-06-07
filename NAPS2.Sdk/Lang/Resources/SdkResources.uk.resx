@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>Збій робочого процесу. Перегляньте журнал подій Windows.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Невідомий сканер</value>
+  </data>
 </root>

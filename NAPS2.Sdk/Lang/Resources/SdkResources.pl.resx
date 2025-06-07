@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>Proces roboczy uległ awarii. Sprawdź podgląd zdarzeń systemu Windows.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Skaner nieznany</value>
+  </data>
 </root>

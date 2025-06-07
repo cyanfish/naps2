@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -482,7 +482,7 @@ msgstr "Personalizzato..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "Scuro"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -590,6 +590,15 @@ msgstr "Driver USB ESCL"
 msgid "Edit"
 msgstr "Modifica"
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr "Modifica con {0}"
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr "Modifica con..."
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr "Invia email a tutti"
@@ -644,6 +653,10 @@ msgstr "Enhanced MetaFile di Windows (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Errore"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr "Errore avvio applicazione {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -842,7 +855,7 @@ msgstr "Legacy (solo interfaccia grafica nativa)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "Chiaro"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1507,6 +1520,10 @@ msgstr "Dividi"
 msgid "Start"
 msgstr "Avvia"
 
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr "Stop condivisione scanner"
+
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
 msgstr "Adatta a dimensione pagina"
@@ -1618,7 +1635,7 @@ msgstr "Il processo di elaborazione si è bloccato. \n"
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
-msgstr ""
+msgstr "Tema:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1663,6 +1680,10 @@ msgstr "Annulla operazione"
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
 msgstr "Annulla operazione {0}"
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr "Scanner sconosciuto"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

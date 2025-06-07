@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -168,7 +168,7 @@ msgstr "Wystąpił błąd w sterowniku skanowania."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?"
+msgstr "Operacja jest w toku. Czy na pewno chcesz zakończyć i anulować operację?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
@@ -590,6 +590,15 @@ msgstr "Sterownik USB ESCL"
 msgid "Edit"
 msgstr "Modyfikuj"
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr "Edytuj w {0}"
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr "Edytuj w..."
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr "Wyślij wszystkie"
@@ -644,6 +653,10 @@ msgstr "Plik Enhanced Windows MetaFile (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Błąd"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr "Błąd podczas uruchamiania aplikacji {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -1507,6 +1520,10 @@ msgstr "Podziel"
 msgid "Start"
 msgstr "Rozpocznij"
 
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr "Zatrzymaj udostępnianie skanera"
+
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
 msgstr "Rozciągnij do rozmiaru strony"
@@ -1663,6 +1680,10 @@ msgstr "Cofnij"
 msgid "Undo {0}"
 msgstr "Cofnij {0}"
 
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr "Skaner nieznany"
+
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "Niezapisane zmiany"
@@ -1751,7 +1772,7 @@ msgstr "Nie masz uprawnień do zapisywania plików we wskazanym położeniu."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
-msgstr "Masz niezapisane zmiany. Czy na pewno chcesz wyjść i odrzucić te zmiany?"
+msgstr "Masz niezapisane zmiany. Czy na pewno chcesz wyjść i odrzucić te zmiany?"
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"

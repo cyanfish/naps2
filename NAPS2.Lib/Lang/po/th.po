@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Thai\n"
 "Language: th\n"
@@ -58,7 +58,7 @@ msgstr "เกี่ยวกับ"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
-msgstr ""
+msgstr "กำลังรับข้อมูล..."
 
 #: UiStrings.resx$Action$Message
 msgid "Action"
@@ -114,11 +114,11 @@ msgstr ""
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr ""
+msgstr "แยกหน้าแบบสลับทิศทาง"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr ""
+msgstr "แทรกสลับหน้าแบบสลับทิศทาง"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
@@ -131,7 +131,7 @@ msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr ""
+msgstr "จำเป็นต้องมีส่วนประกอบเพิ่มเติมเพื่อนำเข้าไฟล์ PDF นี้ คุณต้องการดาวน์โหลดทันทีหรือไม่"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -176,11 +176,11 @@ msgstr ""
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
-msgstr ""
+msgstr "มีการอัปเดตใหม่พร้อมใช้งาน"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr ""
+msgstr "มีการอัปเดต OCR ใหม่ให้ใช้งานแล้ว"
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
@@ -310,11 +310,11 @@ msgstr "ดีที่สุด"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
-msgstr "ความลึกบิต"
+msgstr "ความลึกบิต:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr ""
+msgstr "ไฟล์บิตแมป (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
@@ -327,11 +327,11 @@ msgstr "หน้าว่าง"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "ความสว่าง / ความเปรียบต่าง"
 
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
-msgstr ""
+msgstr "ความสว่าง:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -348,7 +348,7 @@ msgstr "ยกเลิก"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr ""
+msgstr "ยกเลิกคำสั่งชุด"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
@@ -356,11 +356,11 @@ msgstr "กำลังยกเลิก...."
 
 #: SettingsResources.resx$HorizontalAlign_Center$Message
 msgid "Center"
-msgstr ""
+msgstr "กึ่งกลาง"
 
 #: UiStrings.resx$Change$Message
 msgid "Change"
-msgstr ""
+msgstr "เปลี่ยนแปลง"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
@@ -368,32 +368,32 @@ msgstr "ตรวจสอบเวอร์ชันใหม่"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr ""
+msgstr "กำลังตรวจสอบ..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr ""
+msgstr "เลือกผู้ให้บริการอีเมล"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
-msgstr ""
+msgstr "เลือกโปรไฟล์"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr ""
+msgstr "เลือกอุปกรณ์"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
 msgid "Clear"
-msgstr ""
+msgstr "ล้าง"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "ล้างทั้งหมด"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
-msgstr ""
+msgstr "ล้างภาพหลังจากบันทึก"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -401,7 +401,7 @@ msgstr "ปิด"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "รวมเอกสาร"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
@@ -413,15 +413,15 @@ msgstr ""
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
-msgstr ""
+msgstr "การบีบอัด:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "เชื่อมต่อ"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "การเชื่อมต่อผิดพลาด"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -433,7 +433,7 @@ msgstr "คัดลอก"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr ""
+msgstr "กำลังคัดลอก"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
@@ -482,7 +482,7 @@ msgstr ""
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "มืด"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -498,11 +498,11 @@ msgstr "ค่าเริ่มต้น"
 
 #: UiStrings.resx$DefaultFilePathLabel$Message
 msgid "Default File Path:"
-msgstr ""
+msgstr "ที่อยู่ไฟล์เริ่มต้น:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
-msgstr ""
+msgstr "แยกหน้าแบบสลับ"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
@@ -539,7 +539,7 @@ msgstr ""
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr ""
+msgstr "ปรับแก้เอกสาร"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
@@ -548,7 +548,7 @@ msgstr "บริจาค"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
-msgstr ""
+msgstr "เสร็จ"
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -564,7 +564,7 @@ msgstr ""
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr ""
+msgstr "ความคืบหน้าการดาวน์โหลด"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
@@ -588,6 +588,15 @@ msgstr ""
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
+msgstr "แก้ไข"
+
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr ""
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
 msgstr ""
 
 #: UiStrings.resx$EmailAll$Message
@@ -596,16 +605,16 @@ msgstr ""
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "ส่งอีเมลทั้งหมดเป็น PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr ""
+msgstr "ส่งอีเมล PDF"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr ""
+msgstr "ความคืบหน้าการส่งอีเมล PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
@@ -618,11 +627,11 @@ msgstr ""
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
-msgstr ""
+msgstr "ตั้งค่าอีเมล"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
-msgstr ""
+msgstr "บันทึกอัตโนมัติ"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
@@ -630,11 +639,11 @@ msgstr ""
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
-msgstr ""
+msgstr "เข้ารหัส PDF"
 
 #: UiStrings.resx$Encryption$Message
 msgid "Encryption"
-msgstr ""
+msgstr "การเข้ารหัส"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -643,6 +652,10 @@ msgstr ""
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
+msgstr "ผิดพลาด"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
 msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
@@ -664,11 +677,11 @@ msgstr ""
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr ""
+msgstr "ตัวป้อนอัตโนมัติ"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr ""
+msgstr "ชื่อไฟล์:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -680,7 +693,7 @@ msgstr ""
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
-msgstr ""
+msgstr "กลับด้าน"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
@@ -704,7 +717,7 @@ msgstr ""
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr ""
+msgstr "หน้ากระจก"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
@@ -712,7 +725,7 @@ msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
-msgstr ""
+msgstr "โทนสีเทา"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -724,7 +737,7 @@ msgstr "ชั่วโมง (0-23)"
 
 #: UiStrings.resx$HueSaturation$Message
 msgid "Hue / Saturation"
-msgstr ""
+msgstr "เฉดสี / ความอิ่มตัว"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
@@ -736,11 +749,11 @@ msgstr ""
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
-msgstr ""
+msgstr "รูปภาพ"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
-msgstr ""
+msgstr "ไฟล์รูปภาพ"
 
 #: UiStrings.resx$ImageQuality$Message
 msgid "Image Quality"
@@ -757,19 +770,19 @@ msgstr ""
 
 #: UiStrings.resx$Import$Message
 msgid "Import"
-msgstr ""
+msgstr "นำเข้า"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr ""
+msgstr "ความคืบหน้าการนำเข้า"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
-msgstr ""
+msgstr "กำลังนำเข้า {0}..."
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
-msgstr ""
+msgstr "กำลังนำเข้า...."
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
@@ -797,7 +810,7 @@ msgstr ""
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr ""
+msgstr "แทรกสลับหน้า"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -842,7 +855,7 @@ msgstr ""
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "สว่าง"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -879,7 +892,7 @@ msgstr "เดือน (01-12)"
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
-msgstr ""
+msgstr "ข้อมูลเพิ่มเติม"
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -921,7 +934,7 @@ msgstr ""
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "ชื่อ (ถ้ามี)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
@@ -972,7 +985,7 @@ msgstr ""
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr ""
+msgstr "ยังไม่มีเวอร์ชันใหม่"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -1072,16 +1085,16 @@ msgstr ""
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
-msgstr ""
+msgstr "เอกสาร PDF (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
-msgstr ""
+msgstr "การตั้งค่า PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
-msgstr ""
+msgstr "PDF บันทึกแล้ว"
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
@@ -1105,11 +1118,11 @@ msgstr "PNG File (*.png)"
 
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
-msgstr ""
+msgstr "ขนาดหน้า:"
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
-msgstr ""
+msgstr "แหล่งกระดาษ:"
 
 #: UiStrings.resx$PdfPasswordFormTitle$Message
 msgid "Password"
@@ -1142,7 +1155,7 @@ msgstr ""
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
-msgstr ""
+msgstr "ดูตัวอย่าง"
 
 #: UiStrings.resx$PreviewLabel$Message
 msgid "Preview:"
@@ -1163,12 +1176,12 @@ msgstr ""
 
 #: UiStrings.resx$ProfileLabel$Message
 msgid "Profile:"
-msgstr ""
+msgstr "โปรไฟล์:"
 
 #: UiStrings.resx$Profiles$Message
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
-msgstr ""
+msgstr "โปรไฟล์"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1216,7 +1229,7 @@ msgstr ""
 
 #: UiStrings.resx$Reorder$Message
 msgid "Reorder"
-msgstr ""
+msgstr "จัดเรียงหน้าใหม่"
 
 #: UiStrings.resx$Reset$Message
 msgid "Reset"
@@ -1228,7 +1241,7 @@ msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
-msgstr ""
+msgstr "ความละเอียด:"
 
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
@@ -1307,11 +1320,11 @@ msgstr ""
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
 msgid "Save PDF"
-msgstr ""
+msgstr "บันทึก"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr ""
+msgstr "ความคืบหน้าการบันทึก PDF"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
@@ -1324,7 +1337,7 @@ msgstr ""
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr ""
+msgstr "บันทึกรายการที่เลือกเป็น PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1441,7 +1454,7 @@ msgstr ""
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "ตั้งค่า"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
@@ -1461,7 +1474,7 @@ msgstr ""
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
-msgstr ""
+msgstr "ความ​คม​ชัด"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1505,6 +1518,10 @@ msgstr ""
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
+msgstr "เริ่ม"
+
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
 msgstr ""
 
 #: UiStrings.resx$StretchToPageSize$Message
@@ -1544,11 +1561,11 @@ msgstr ""
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
-msgstr ""
+msgstr "ไม่สามารถนำเข้าไฟล์ '{0}' ได้"
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr ""
+msgstr "ไม่สามารถนำเข้าไฟล์ '{0}' ได้ สามารถนำเข้าได้เฉพาะไฟล์ PDF ที่สร้างโดย NAPS2 เท่านั้น"
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1663,17 +1680,21 @@ msgstr ""
 msgid "Undo {0}"
 msgstr ""
 
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr ""
+
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr ""
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr ""
+msgstr "ความคืบหน้าการอัปเดต"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr ""
+msgstr "การตรวจสอบการอัปเดตถูกปิดใช้งาน"
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1706,7 +1727,7 @@ msgstr "เวอร์ชั่น {0}"
 
 #: UiStrings.resx$View$Message
 msgid "View"
-msgstr ""
+msgstr "เปิดดูภาพ"
 
 #: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"

@@ -868,6 +868,21 @@
     <value>Collegamento</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Tema:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Modifica con...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Modifica con {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Modifica con...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Errore avvio applicazione {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Stop condivisione scanner</value>
   </data>
 </root>

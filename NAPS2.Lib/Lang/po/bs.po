@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Bosnian\n"
 "Language: bs\n"
@@ -482,7 +482,7 @@ msgstr "Prilagođeno..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "Tamna"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -590,6 +590,15 @@ msgstr "ESCL USB drajver"
 msgid "Edit"
 msgstr "Uredi"
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr "Uredi pomoću {0}"
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr "Uredi pomoću..."
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr "Pošalji sve e-mailom"
@@ -644,6 +653,10 @@ msgstr "Poboljšana Windows metadatoteka (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Greška"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr "Greška pri pokretanju aplikacije {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -842,7 +855,7 @@ msgstr "Legat (samo nativni KI)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "Svijetla"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1507,6 +1520,10 @@ msgstr "Podijeli"
 msgid "Start"
 msgstr "Start"
 
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr "Zaustavi dijeljenje skenera"
+
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
 msgstr "Raširi na veličinu stranice"
@@ -1617,7 +1634,7 @@ msgstr "Radni proces je prekinut. Provjerite preglednik događaja u Windowsu."
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
-msgstr ""
+msgstr "Tema:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1662,6 +1679,10 @@ msgstr "Poništi radnju"
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
 msgstr "Poništi {0}"
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr "Nepoznat skener"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

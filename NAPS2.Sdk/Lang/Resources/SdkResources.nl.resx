@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>Het werkproces is gecrasht. Controleer het Windows Gebeurtenis-logboek.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Onbekende scanner</value>
+  </data>
 </root>

@@ -19,7 +19,7 @@
     <value>สี 24 บิต</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Grayscale</value>
+    <value>โทนสีเทา</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
     <value>{0} dpi</value>
@@ -46,7 +46,7 @@
     <value>No provider selected.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
-    <value>Center</value>
+    <value>กึ่งกลาง</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
     <value>ซ้าย</value>
@@ -109,10 +109,10 @@
     <value>Duplex</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Feeder</value>
+    <value>ตัวป้อนอัตโนมัติ</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Glass</value>
+    <value>หน้ากระจก</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
     <value>อัตโนมัติ</value>
@@ -175,9 +175,9 @@
     <value>ค่าเริ่มต้น</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>สว่าง</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>มืด</value>
   </data>
 </root>

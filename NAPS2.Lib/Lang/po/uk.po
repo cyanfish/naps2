@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -236,7 +236,7 @@ msgstr "Дійсно скасувати зміни в {0} зображеннях
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Призначити"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -339,7 +339,7 @@ msgstr ""
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "Не знаходите ваш сканер? Перегляньте обмеження збірки Flatpak NAPS2."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -465,7 +465,7 @@ msgstr "Розмір сторінки користувача"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr ""
+msgstr "Власна роздільна здатність"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
@@ -482,7 +482,7 @@ msgstr "Інший..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "Темна"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -568,7 +568,7 @@ msgstr "Поступ звантаження"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr ""
+msgstr "точок на дюйм"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -589,6 +589,15 @@ msgstr "Драйвер USB для ESCL"
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
 msgstr "Редагувати"
+
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr "Редагувати у {0}"
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr "Редагувати у..."
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -644,6 +653,10 @@ msgstr "Розширений метафайл (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Помилка"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr "Помилка під час запуску застосунку {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -818,7 +831,7 @@ msgstr "Зберігати зображення між сесіями"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Клавіатурні скорочення"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -842,7 +855,7 @@ msgstr "Режим сумісности (лише рідний інтерфей�
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "Світла"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1293,7 +1306,7 @@ msgstr "Зберегти все як зображення"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr "Зберегти все як PDF"
+msgstr "Зберегти все у PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1307,7 +1320,7 @@ msgstr "Виконується збереження зображень"
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
 msgid "Save PDF"
-msgstr "Зберегти PDF"
+msgstr "Зберегти у PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
@@ -1324,7 +1337,7 @@ msgstr "Зберегти вибране як зображення"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr "Зберегти вибране як PDF"
+msgstr "Зберегти вибране у PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
@@ -1366,11 +1379,11 @@ msgstr "Сканувати з типовим профілем"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "Сканувати з новим профілем"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr ""
+msgstr "Сканувати з профілем {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1485,7 +1498,7 @@ msgstr "Показувати нумерацію сторінок"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "Бічна панель"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
@@ -1506,6 +1519,10 @@ msgstr "Розділити"
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Старт"
+
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr "Зупинити спільний доступ до сканера"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1617,7 +1634,7 @@ msgstr "Збій робочого процесу. Перегляньте жур�
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
-msgstr ""
+msgstr "Тема:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1653,7 +1670,7 @@ msgstr "US Letter (8.5x11 дюймів)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Скинути"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
@@ -1662,6 +1679,10 @@ msgstr "Повернути"
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
 msgstr "Повернути {0}"
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr "Невідомий сканер"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

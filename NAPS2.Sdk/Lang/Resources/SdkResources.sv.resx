@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>Arbetsprocessen kraschade. Se Loggboken i Windows.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Okänd skanner</value>
+  </data>
 </root>

@@ -868,6 +868,21 @@
     <value>快捷键</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>主题：</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>编辑方式...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>使用 {0} 编辑</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>编辑方式...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>启动应用程序 {0} 出错</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>停止扫描仪共享</value>
   </data>
 </root>

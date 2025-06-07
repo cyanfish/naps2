@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>工作进程崩溃。检查 Windows 事件查看器</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>未知扫描仪</value>
+  </data>
 </root>

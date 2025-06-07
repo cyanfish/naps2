@@ -868,6 +868,21 @@
     <value>Atalho</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Tema:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Editar com...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Editar com {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Editar com...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Error starting application {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Stop Scanner Sharing</value>
   </data>
 </root>

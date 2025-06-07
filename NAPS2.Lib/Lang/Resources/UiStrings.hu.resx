@@ -870,4 +870,19 @@
   <data name="ThemeLabel" xml:space="preserve">
     <value>Téma:</value>
   </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Szerkesztés...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Edit with {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Szerkesztés...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Hiba az alkalmazás indításakor {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>A lapolvasó megosztásának leállítása</value>
+  </data>
 </root>

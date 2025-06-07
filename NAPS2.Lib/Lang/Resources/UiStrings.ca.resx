@@ -868,6 +868,21 @@
     <value>Drecera</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Mode:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Edita amb...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Edita amb {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Edita amb...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Error en iniciar l'aplicació {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Atura la compartició d'escàner</value>
   </data>
 </root>

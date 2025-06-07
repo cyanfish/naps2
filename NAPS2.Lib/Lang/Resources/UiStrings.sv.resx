@@ -868,6 +868,21 @@
     <value>Kortkommando</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Tema:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Redigera med...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Redigera med {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Redigera med...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Fel vid applikationsstart {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Stäng av skannerdelning</value>
   </data>
 </root>

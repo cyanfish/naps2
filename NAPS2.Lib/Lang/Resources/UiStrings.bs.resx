@@ -868,6 +868,21 @@
     <value>Prečac</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Tema:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Uredi pomoću...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Uredi pomoću {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Uredi pomoću...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Greška pri pokretanju aplikacije {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Zaustavi dijeljenje skenera</value>
   </data>
 </root>

@@ -868,6 +868,21 @@
     <value>Zkratka</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Motiv:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Upravit pomocí...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Upravit pomocí {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Upravit pomocí...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Chyba při spouštění aplikace {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Zastavit sdílení skeneru</value>
   </data>
 </root>

@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>Procesi i punës u ndërpre. Kontrolloni shikuesin e ngjarjeve të Windows.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Skcaner i panjohur</value>
+  </data>
 </root>

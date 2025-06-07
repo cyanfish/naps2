@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>A munkavégző folyamat összeomlott. Ellenőrizze a Windows eseménynaplóját.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Ismeretlen lapolvasó</value>
+  </data>
 </root>

@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>תהליך הרקע קרס. נא לבדוק את הסיבה במציג האירועים של Windows.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>סורק לא ידוע</value>
+  </data>
 </root>

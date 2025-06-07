@@ -37,7 +37,7 @@
     <value>เวอร์ชั่น {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>The file '{0}' could not be imported.</value>
+    <value>ไม่สามารถนำเข้าไฟล์ '{0}' ได้</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
@@ -83,5 +83,8 @@
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>The worker process crashed. Check the Windows event viewer.</value>
+  </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Unknown Scanner</value>
   </data>
 </root>

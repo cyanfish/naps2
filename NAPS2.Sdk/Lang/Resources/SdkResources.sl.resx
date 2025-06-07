@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>Delovni proces se je zrušil. Preveri pregledovalnik dogodkov v sistemu Windows.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Unknown Scanner</value>
+  </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -590,6 +590,15 @@ msgstr "Dispositivo ESCL USB"
 msgid "Edit"
 msgstr "Editar"
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr ""
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr ""
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr "Enviar a todos"
@@ -644,6 +653,10 @@ msgstr "Metaarchivo mejorado de Windows (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Error"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -992,7 +1005,7 @@ msgstr "Número de escaneos:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr "Reconocimiento óptico de caracteres (OCR)"
+msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -1507,6 +1520,10 @@ msgstr ""
 msgid "Start"
 msgstr "Iniciar"
 
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr ""
+
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
 msgstr "Estirar hasta tamaño de página"
@@ -1661,6 +1678,10 @@ msgstr ""
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
+msgstr ""
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
 msgstr ""
 
 #: MiscResources.resx$UnsavedChanges$Message

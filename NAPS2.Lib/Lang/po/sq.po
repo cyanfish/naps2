@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -482,7 +482,7 @@ msgstr "E personalizuar..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "E errët"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -590,6 +590,15 @@ msgstr "Drejtuesi USB i ESCL"
 msgid "Edit"
 msgstr "Modifiko"
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr ""
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr ""
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr "Dërgoje të gjithë me e-mail"
@@ -644,6 +653,10 @@ msgstr "Metaskedar i përmirësuar i Windows (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Gabim"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr "Gabim në hapjen e aplikacionit {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -842,7 +855,7 @@ msgstr "E vjetër (vetëm ndërfaqja e përdoruesit origjinale)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "E zbardhur"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1507,6 +1520,10 @@ msgstr "Ndaje"
 msgid "Start"
 msgstr "Fillo"
 
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr "Ndalo ndarjen e skanerit"
+
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
 msgstr "Zgjero te madhësia e faqes"
@@ -1617,7 +1634,7 @@ msgstr "Procesi i punës u ndërpre. Kontrolloni shikuesin e ngjarjeve të Windo
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
-msgstr ""
+msgstr "Motivi:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1662,6 +1679,10 @@ msgstr "Zhbëje"
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
 msgstr "Zhbëje {0}"
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr "Skcaner i panjohur"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

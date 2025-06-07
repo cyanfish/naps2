@@ -175,9 +175,9 @@
     <value>Per defecte</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Clar</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Fosc</value>
   </data>
 </root>

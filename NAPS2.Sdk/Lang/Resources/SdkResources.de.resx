@@ -84,4 +84,7 @@
   <data name="WorkerCrashWindows" xml:space="preserve">
     <value>Der Arbeitsprozess ist abgestürzt. Überprüfen Sie die Windows-Ereignisanzeige.</value>
   </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>Unbekannter Scanner</value>
+  </data>
 </root>

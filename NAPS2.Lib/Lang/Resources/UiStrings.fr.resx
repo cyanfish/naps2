@@ -868,6 +868,21 @@
     <value>Raccourci</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Thème :</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Modifier avec...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Modifier avec {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Modifier avec...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Erreur lors du démarrage de l’application {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Arrêt du partage du scanner</value>
   </data>
 </root>

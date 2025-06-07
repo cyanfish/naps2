@@ -172,7 +172,7 @@
     <value>Bewerking wordt uitgevoerd</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>Scannen pagina {0}</value>
+    <value>Pagina {0} aan het scannen</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Deze scanner ondersteunt geen automatische documentinvoer. Als uw scanner dit wel heeft, probeer dan een andere driver.</value>
@@ -205,10 +205,10 @@
     <value>Batch scan gestopt door fout.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>Scannen pagina {0}...</value>
+    <value>Pagina {0} aan het scannen...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>Scant pagina {0} (scan {1})...</value>
+    <value>Pagina {0} (scan {1}) aan het scannen...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
     <value>Wacht op scan {0}...</value>
@@ -388,7 +388,7 @@
     <value>Er was een fout bij het verzenden van de e-mail.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>Scannen pagina {0}...</value>
+    <value>Pagina {0} aan het scannen...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
     <value>Gegevens ophalen...</value>

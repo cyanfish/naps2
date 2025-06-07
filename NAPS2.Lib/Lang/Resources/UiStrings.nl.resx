@@ -91,13 +91,13 @@
     <value>PDF opslaan</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
-    <value>PDF instellingen</value>
+    <value>PDF-instellingen</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>Afbeeldingen opslaan</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
-    <value>Instellingen afbeeldingen</value>
+    <value>Afbeeldingsinstellingen</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>PDF e-mailen</value>
@@ -151,7 +151,7 @@
     <value>Rechtzetten</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>Aangepast roteren</value>
+    <value>Aangepast draaien</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Omhoog</value>
@@ -358,7 +358,7 @@
     <value>Apparaat selecteren</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>In de achtergrond draaien</value>
+    <value>Op de achtergrond uitvoeren</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -463,7 +463,7 @@
     <value>Standaardinstellingen herstellen</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>PDF instellingen</value>
+    <value>PDF-instellingen</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>Afdrukken toestaan</value>
@@ -580,7 +580,7 @@
     <value>Compressie:</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Instellingen afbeeldingen</value>
+    <value>Afbeeldingsinstellingen</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>E-mailinstellingen</value>
@@ -637,7 +637,7 @@
     <value>Afbeeldingen verwijderen na opslaan</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Afbeeldingen over sessies behouden</value>
+    <value>Afbeeldingen behouden tussen sessies</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Aangepaste paginagrootte</value>
@@ -869,5 +869,20 @@
   </data>
   <data name="ThemeLabel" xml:space="preserve">
     <value>Thema:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Bewerken met...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Bewerken met {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Bewerken met...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Fout bij starten van toepassing {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Scanner delen stoppen</value>
   </data>
 </root>

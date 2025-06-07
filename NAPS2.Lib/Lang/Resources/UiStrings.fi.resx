@@ -870,4 +870,19 @@
   <data name="ThemeLabel" xml:space="preserve">
     <value>Theme:</value>
   </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Muokkaa sovelluksella...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Muokkaa sovelluksella {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Muokkaa sovelluksella...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Error starting application {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Stop Scanner Sharing</value>
+  </data>
 </root>

@@ -832,7 +832,7 @@
     <value>تم العثور على جهاز 1.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>لم يتم العثور على أي أجهزة.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar</value>
@@ -869,5 +869,20 @@
   </data>
   <data name="ThemeLabel" xml:space="preserve">
     <value>Theme:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>Edit with...</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>Edit with {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>Edit with...</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>Error starting application {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>Stop Scanner Sharing</value>
   </data>
 </root>

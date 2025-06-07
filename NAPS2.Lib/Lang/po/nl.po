@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-04-08 23:02\n"
+"PO-Revision-Date: 2025-06-07 20:17\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -127,7 +127,7 @@ msgstr "Altijd vragen"
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
-msgstr "Altijd Vragen"
+msgstr "Altijd vragen"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -469,7 +469,7 @@ msgstr "Aangepaste resolutie"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
-msgstr "Aangepast roteren"
+msgstr "Aangepast draaien"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
@@ -590,6 +590,15 @@ msgstr "ESCL USB Driver"
 msgid "Edit"
 msgstr "Bewerken"
 
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr "Bewerken met {0}"
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr "Bewerken met..."
+
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
 msgstr "Alles e-mailen"
@@ -644,6 +653,10 @@ msgstr "Enhanced Windows Metafile (*.emf)"
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
 msgstr "Fout"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr "Fout bij starten van toepassing {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -749,7 +762,7 @@ msgstr "Kwaliteit afbeelding"
 #: UiStrings.resx$ImageSettings$Message
 #: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
-msgstr "Instellingen afbeeldingen"
+msgstr "Afbeeldingsinstellingen"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved."
@@ -813,7 +826,7 @@ msgstr "JPEG kwaliteit"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
-msgstr "Afbeeldingen over sessies behouden"
+msgstr "Afbeeldingen behouden tussen sessies"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
@@ -1077,7 +1090,7 @@ msgstr "PDF-document (*.pdf)"
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
-msgstr "PDF instellingen"
+msgstr "PDF-instellingen"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
@@ -1268,7 +1281,7 @@ msgstr "Rechtsom draaien"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr "In de achtergrond draaien"
+msgstr "Op de achtergrond uitvoeren"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
@@ -1383,16 +1396,16 @@ msgstr "Scanner delen"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
-msgstr "Scannen pagina {0}"
+msgstr "Pagina {0} aan het scannen"
 
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
-msgstr "Scant pagina {0} (scan {1})..."
+msgstr "Pagina {0} (scan {1}) aan het scannen..."
 
 #: MiscResources.resx$BatchStatusPage$Message
 #: MiscResources.resx$ScanProgressPage$Message
 msgid "Scanning page {0}..."
-msgstr "Scannen pagina {0}..."
+msgstr "Pagina {0} aan het scannen..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
@@ -1506,6 +1519,10 @@ msgstr "Splitsen"
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Beginnen"
+
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr "Scanner delen stoppen"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1662,6 +1679,10 @@ msgstr "Ongedaan maken"
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
 msgstr "{0} ongedaan maken"
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr "Onbekende scanner"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

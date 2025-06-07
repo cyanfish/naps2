@@ -868,6 +868,21 @@
     <value>קיצור דרך</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>ערכת עיצוב:</value>
+  </data>
+  <data name="EditWith" xml:space="preserve">
+    <value>עריכה עם…</value>
+  </data>
+  <data name="EditWithAppName" xml:space="preserve">
+    <value>עריכה עם {0}</value>
+  </data>
+  <data name="EditWithFormTitle" xml:space="preserve">
+    <value>עריכה עם…</value>
+  </data>
+  <data name="ErrorStartingApplication" xml:space="preserve">
+    <value>שגיאה בהפעלת היישום {0}</value>
+  </data>
+  <data name="StopScannerSharing" xml:space="preserve">
+    <value>הפסקת שיתוף סורק</value>
   </data>
 </root>

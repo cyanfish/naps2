@@ -175,9 +175,9 @@
     <value>E paracaktuar</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>E zbardhur</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>E errët</value>
   </data>
 </root>

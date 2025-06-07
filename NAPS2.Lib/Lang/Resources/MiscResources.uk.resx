@@ -247,7 +247,7 @@
     <value>Виконується збереження зображень</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Зберегти PDF</value>
+    <value>Зберегти у PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
     <value>Виконується збереження PDF</value>

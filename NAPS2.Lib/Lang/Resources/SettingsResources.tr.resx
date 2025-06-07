@@ -175,9 +175,9 @@
     <value>Öntanımlı</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Açık</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Koyu</value>
   </data>
 </root>
