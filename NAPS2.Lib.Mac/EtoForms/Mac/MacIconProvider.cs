@@ -43,6 +43,18 @@ public class MacIconProvider : IIconProvider
         { "exclamation", "exclamationmark.triangle" },
         { "application_side_list", "sidebar.left" },
         { "ask", "questionmark" },
+        { "split_ver", "square.split.2x1" },
+        { "split_hor", "square.split.1x2" },
+        { "shape_align_left", "align.horizontal.left" },
+        { "shape_align_center", "align.horizontal.center" },
+        { "shape_align_right", "align.horizontal.right" },
+        { "shape_align_top", "align.vertical.top" },
+        { "shape_align_middle", "align.vertical.center" },
+        { "shape_align_bottom", "align.vertical.bottom" },
+        { "combine_hor", "square.split.2x1" },
+        { "combine_ver", "square.split.1x2" },
+        { "switch_hor", "arrow.left.and.right" },
+        { "switch_ver", "arrow.up.and.down" }
         // TODO: This doesn't render properly as it's very wide and gets squished
         // { "keyboard", "keyboard" },
         // TODO: Consider these

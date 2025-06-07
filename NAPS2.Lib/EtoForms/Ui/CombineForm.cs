@@ -40,9 +40,9 @@ public class CombineForm : ImageFormBase
                     C.IconButton("shape_align_center_small", () => SetHOffset(0.5)),
                     C.IconButton("shape_align_right_small", () => SetHOffset(1.0))
                 ).Visible(_alignVis),
+                C.Spacer().Width(14),
                 C.IconButton("combine_hor_small",
-                        () => SetOrientation(CombineOrientation.Horizontal))
-                    .Padding(left: 20),
+                        () => SetOrientation(CombineOrientation.Horizontal)),
                 C.IconButton("switch_ver_small", SwapImages)
             ).Visible(!_horizontalOrientationVis),
             L.Row(
@@ -51,9 +51,9 @@ public class CombineForm : ImageFormBase
                     C.IconButton("shape_align_middle_small", () => SetVOffset(0.5)),
                     C.IconButton("shape_align_bottom_small", () => SetVOffset(1.0))
                 ).Visible(_alignVis),
+                C.Spacer().Width(14),
                 C.IconButton("combine_ver_small",
-                        () => SetOrientation(CombineOrientation.Vertical))
-                    .Padding(left: 20),
+                        () => SetOrientation(CombineOrientation.Vertical)),
                 C.IconButton("switch_hor_small", SwapImages)
             ).Visible(_horizontalOrientationVis),
             C.Filler()

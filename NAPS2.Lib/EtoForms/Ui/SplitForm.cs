@@ -13,8 +13,8 @@ public class SplitForm : UnaryImageFormBase
     private static CropTransform? _lastTransform;
 
     private readonly ColorScheme _colorScheme;
-    private readonly Button _vSplit;
-    private readonly Button _hSplit;
+    private readonly LayoutControl _vSplit;
+    private readonly LayoutControl _hSplit;
 
     // Mouse down location
     private PointF _mouseOrigin;
@@ -94,7 +94,10 @@ public class SplitForm : UnaryImageFormBase
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        (_orientation == SplitOrientation.Horizontal ? _hSplit : _vSplit).Focus();
+        if (!EtoPlatform.Current.IsMac)
+        {
+            (_orientation == SplitOrientation.Horizontal ? _hSplit : _vSplit).Control!.Focus();
+        }
     }
 
     private void SetOrientation(SplitOrientation orientation)

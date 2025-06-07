@@ -211,7 +211,7 @@ public static class C
         return new SkipLayoutElement();
     }
 
-    public static Button IconButton(string iconName, Action onClick)
+    public static LayoutControl IconButton(string iconName, Action onClick)
     {
         var button = new Button
         {
@@ -224,7 +224,7 @@ public static class C
             button.MinimumSize = new Size(icon.Width + 30, 0);
         });
         button.Click += (_, _) => onClick();
-        return button;
+        return button.Width(40);
     }
 
     public static MenuItem ButtonMenuItem(Window window, ActionCommand command)

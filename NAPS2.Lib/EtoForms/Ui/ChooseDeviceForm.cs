@@ -164,9 +164,9 @@ public class ChooseDeviceForm : EtoDialogBase
                 [
                     ..driverElements,
                     C.IconButton("large_tiles_small", () => SetListView(false))
-                        .Visible(_textListVis).Width(40),
+                        .Visible(_textListVis),
                     C.IconButton("text_align_justify_small", () => SetListView(true))
-                        .Visible(!_textListVis).Width(40)
+                        .Visible(!_textListVis)
                 ]
             ),
             _deviceIconList.Control.NaturalSize(150, 100).Scale().Visible(!_textListVis),
