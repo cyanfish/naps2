@@ -188,4 +188,52 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         });
         await Assert.ThrowsAsync<EsclSecurityPolicyViolationException>(async () => await scanResult.ToListAsync());
     }
+
+    [NetworkFact(Timeout = TIMEOUT)]
+    public async Task ScanWithIpInId()
+    {
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
+        UseServerPort(12145);
+
+        var device = new ScanDevice(Driver.Escl, "http://127.0.0.1:12145/eSCL", _serverDisplayName);
+        var images = await _client.Scan(new ScanOptions { Device = device }).ToListAsync();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+    }
+
+    [NetworkFact(Timeout = TIMEOUT)]
+    public async Task ScanWithCorrectConnectionUri()
+    {
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
+        var mockHandler = Substitute.For<EventHandler<DeviceUriChangedEventArgs>>();
+        _client.DeviceUriChanged += mockHandler;
+        UseServerPort(12146);
+
+        var device = new ScanDevice(Driver.Escl, "bad_uuid", _serverDisplayName,
+            ConnectionUri: "http://127.0.0.1:12146/eSCL");
+        var images = await _client.Scan(new ScanOptions { Device = device }).ToListAsync();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+        mockHandler.DidNotReceive()(Arg.Any<object>(), Arg.Any<DeviceUriChangedEventArgs>());
+    }
+
+    [NetworkFact(Timeout = TIMEOUT)]
+    public async Task ScanWithIncorrectConnectionUri()
+    {
+        _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
+        var mockHandler = Substitute.For<EventHandler<DeviceUriChangedEventArgs>>();
+        _client.DeviceUriChanged += mockHandler;
+        UseServerPort(12147);
+
+        var device = new ScanDevice(Driver.Escl, _uuid, _serverDisplayName,
+            ConnectionUri: "http://127.0.0.1:31233/eSCL");
+        var images = await _client.Scan(new ScanOptions { Device = device }).ToListAsync();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(ImageResources.dog, images[0]);
+        mockHandler.Received()(Arg.Any<object>(),
+            Arg.Is<DeviceUriChangedEventArgs>(args => args.ConnectionUri.EndsWith(":12147/eSCL")));
+    }
 }

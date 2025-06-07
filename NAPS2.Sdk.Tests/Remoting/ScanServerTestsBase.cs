@@ -22,6 +22,7 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
     protected readonly string _serverDisplayName;
     private protected readonly MockScanBridge _bridge;
     protected readonly ScanController _client;
+    protected readonly string _uuid;
     protected readonly ScanDevice _clientDevice;
 
     public ScanServerTestsBase(ITestOutputHelper testOutputHelper,
@@ -46,8 +47,8 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
 
         // Set up a client ScanController for scanning through EsclScanDriver -> network -> ScanServer
         _client = new ScanController(ScanningContext);
-        var uuid = new ScanServerDevice { Device = _serverDevice, Name = _serverDisplayName }.GetUuid(_server.InstanceId);
-        _clientDevice = new ScanDevice(Driver.Escl, uuid, _serverDisplayName);
+        _uuid = new ScanServerDevice { Device = _serverDevice, Name = _serverDisplayName }.GetUuid(_server.InstanceId);
+        _clientDevice = new ScanDevice(Driver.Escl, _uuid, _serverDisplayName);
     }
 
     public Task InitializeAsync() => _server.Start();
@@ -62,5 +63,11 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
             .AnyAsync(device => device.Name.StartsWith(_clientDevice.Name) && device.ID == _clientDevice.ID);
         cts.Cancel();
         return found;
+    }
+
+    protected void UseServerPort(int port)
+    {
+        _server.UnregisterDevice(_serverDevice, _serverDisplayName);
+        _server.RegisterDevice(_serverDevice, _serverDisplayName, port);
     }
 }
