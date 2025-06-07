@@ -1,3 +1,21 @@
+Changes in 8.2.0:
+- NAPS2 is [now available](https://apps.microsoft.com/detail/9N3QQ9W0B23Q?cid=changelog) on the Microsoft Store
+  - It costs a small fee to support the developer and provide automatic updates
+  - NAPS2 will continue to be freely available at www.naps2.com
+- Added "Edit with" under the "Image" menu for using an external image editor
+- Added "Share even when NAPS2 is closed" option for Scanner Sharing
+  - This will show a system tray icon and restart on login
+- Imported file names are now used as the default file name when saving
+- The "Apply to all selected" checkbox now stays checked
+- Escl: Increased maximum time searching for devices from 5s to 60s
+- Escl: Scanner IPs are now cached for faster and more reliable scanning
+- Windows: Added an arm64 installer
+- Windows: Replaced the "No friendly name" device name from some drivers with "Unknown Scanner"
+- Mac: Fixed an issue where saved files didn't always have the right extension
+- Mac: Disabled the "Apple Mail" email provider when not the default email reader
+- Mac: Updated icons for Split/Combine
+- Linux: Fixed issues with the Save dialog
+
 Changes in 8.1.4:
 - Windows: Added a "Theme" setting to switch between Light and Dark mode
 - Linux: Fixed OCR on older Linux versions (e.g. Ubuntu 20.04)
