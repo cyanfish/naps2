@@ -65,9 +65,11 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
         return found;
     }
 
-    protected void UseServerPort(int port)
+    protected async Task UseServerPort(int port)
     {
         _server.UnregisterDevice(_serverDevice, _serverDisplayName);
+        await _server.Stop();
         _server.RegisterDevice(_serverDevice, _serverDisplayName, port);
+        await _server.Start();
     }
 }

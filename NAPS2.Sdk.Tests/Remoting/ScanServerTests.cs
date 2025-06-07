@@ -193,7 +193,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
     public async Task ScanWithIpInId()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
-        UseServerPort(12145);
+        await UseServerPort(12145);
 
         var device = new ScanDevice(Driver.Escl, "http://127.0.0.1:12145/eSCL", _serverDisplayName);
         var images = await _client.Scan(new ScanOptions { Device = device }).ToListAsync();
@@ -208,7 +208,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
         var mockHandler = Substitute.For<EventHandler<DeviceUriChangedEventArgs>>();
         _client.DeviceUriChanged += mockHandler;
-        UseServerPort(12146);
+        await UseServerPort(12146);
 
         var device = new ScanDevice(Driver.Escl, "bad_uuid", _serverDisplayName,
             ConnectionUri: "http://127.0.0.1:12146/eSCL");
@@ -225,7 +225,7 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
         var mockHandler = Substitute.For<EventHandler<DeviceUriChangedEventArgs>>();
         _client.DeviceUriChanged += mockHandler;
-        UseServerPort(12147);
+        await UseServerPort(12147);
 
         var device = new ScanDevice(Driver.Escl, _uuid, _serverDisplayName,
             ConnectionUri: "http://127.0.0.1:31233/eSCL");
