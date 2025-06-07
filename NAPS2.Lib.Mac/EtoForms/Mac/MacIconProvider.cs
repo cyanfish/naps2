@@ -51,6 +51,7 @@ public class MacIconProvider : IIconProvider
         { "shape_align_top", "align.vertical.top" },
         { "shape_align_middle", "align.vertical.center" },
         { "shape_align_bottom", "align.vertical.bottom" },
+        { "combine", "square.split.1x2" },
         { "combine_hor", "square.split.2x1" },
         { "combine_ver", "square.split.1x2" },
         { "switch_hor", "arrow.left.and.right" },

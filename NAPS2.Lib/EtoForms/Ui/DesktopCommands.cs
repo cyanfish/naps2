@@ -73,7 +73,8 @@ public class DesktopCommands
         };
         SaveSelected = new ActionCommand(imageListActions.SaveSelectedAsPdfOrImages)
         {
-            Text = UiStrings.SaveSelected
+            Text = UiStrings.SaveSelected,
+            IconName = "diskette"
         };
         SavePdf = new ActionCommand(desktopController.SavePdf)
         {
