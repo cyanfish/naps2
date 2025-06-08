@@ -62,18 +62,20 @@ public static class MsixPackager
         Cli.Run(makePri,
             $"new /pr \"{msixConfig}\" /cf \"{msixConfig}\\priconfig.xml\" /o /of \"{resourcesPriPath}\" /mn \"{manifestPath}\"");
 
-        Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixStorePath}\"");
-
         File.WriteAllText(manifestPath, File.ReadAllText(manifestPath)
             .Replace(
                 "Version=\"1.0.0.0\"",
                 $"Version=\"{pkgInfo.VersionNumber}.0\"")
             .Replace(
-                "CN=1D624E39-8523-4AAC-B3B6-1452E653A003",
-                N2Config.WindowsIdentity)
-            .Replace(
                 "<Resource Language=\"en-us\" />",
                 GetSupportedLanguages(pkgInfo)));
+
+        Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixStorePath}\"");
+
+        File.WriteAllText(manifestPath, File.ReadAllText(manifestPath)
+            .Replace(
+                "CN=1D624E39-8523-4AAC-B3B6-1452E653A003",
+                N2Config.WindowsIdentity));
 
         Cli.Run(makeAppx, $"pack /f \"{mappingFilePath}\" /p \"{msixPath}\"");
 
