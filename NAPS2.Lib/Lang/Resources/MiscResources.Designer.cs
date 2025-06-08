@@ -789,6 +789,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leave a Review.
+        /// </summary>
+        internal static string LeaveAReview {
+            get {
+                return ResourceManager.GetString("LeaveAReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} ({1}x{2} {3}).
         /// </summary>
         internal static string NamedPageSizeFormat {
@@ -983,6 +992,15 @@ namespace NAPS2.Lang.Resources {
         internal static string ResetImage {
             get {
                 return ResourceManager.GetString("ResetImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Like NAPS2?.
+        /// </summary>
+        internal static string ReviewPrompt {
+            get {
+                return ResourceManager.GetString("ReviewPrompt", resourceCulture);
             }
         }
         

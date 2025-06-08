@@ -16,6 +16,10 @@ public class StubNotify : INotify
     {
     }
 
+    public void ReviewPrompt()
+    {
+    }
+
     public void OperationProgress(OperationProgress progress, IOperation op)
     {
     }

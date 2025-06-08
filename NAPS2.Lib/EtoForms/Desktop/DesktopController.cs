@@ -99,12 +99,25 @@ public class DesktopController
         InitThumbnailRendering();
         await RunStillImageEvents();
         SetFirstRunDate();
-        ShowDonationPrompt();
+        ShowDonationOrReviewPrompt();
         ShowUpdatePrompt();
     }
 
-    private void ShowDonationPrompt()
+    private void ShowDonationOrReviewPrompt()
     {
+        // Show a review prompt after a month of using the Microsoft Store msix version
+#if MSI
+        if (WindowsEnvironment.IsRunningAsMsix &&
+            !_config.Get(c => c.HasBeenPromptedForReview) &&
+            DateTime.Now - _config.Get(c => c.FirstRunDate) > TimeSpan.FromDays(30))
+        {
+            var transact = _config.User.BeginTransaction();
+            transact.Set(c => c.HasBeenPromptedForReview, true);
+            transact.Set(c => c.LastReviewPromptDate, DateTime.Now);
+            transact.Commit();
+            _notify.ReviewPrompt();
+        }
+#endif
         // Show a donation prompt after a month of use
 #if !MSI
         if (!_config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate) &&

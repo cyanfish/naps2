@@ -29,6 +29,11 @@ public class Notify : INotify
         _notificationManager.Show(new DonateNotification());
     }
 
+    public void ReviewPrompt()
+    {
+        _notificationManager.Show(new ReviewNotification());
+    }
+
     public void OperationProgress(OperationProgress progress, IOperation op)
     {
         _notificationManager.Show(new ProgressNotification(progress, op));

@@ -102,6 +102,12 @@ public class CommonConfig
     [User]
     public DateTime? LastDonatePromptDate { get; set; }
 
+    [User]
+    public bool HasBeenPromptedForReview { get; set; }
+
+    [User]
+    public DateTime? LastReviewPromptDate { get; set; }
+
     [Common]
     public bool DeleteAfterSaving { get; set; }
 
