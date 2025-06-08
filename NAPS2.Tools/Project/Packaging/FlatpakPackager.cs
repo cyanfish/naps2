@@ -58,7 +58,7 @@ public static class FlatpakPackager
             _ => "x86_64"
         };
         var stateDir = Path.Combine(packageDir, "builder-state");
-        Cli.Run("flatpak-builder", $"--arch {arch} --force-clean --state-dir {stateDir} {buildDir} {manifestPath}");
+        Cli.Run("flatpak", $"run org.flatpak.Builder --arch {arch} --force-clean --state-dir {stateDir} {buildDir} {manifestPath}");
 
         // Generate a temp repo with the package info
         Output.Verbose("Creating flatpak repo");
