@@ -28,13 +28,13 @@ public static class WixToolsetPackager
 
         var wxsPath = GenerateWxs(pkgInfo);
 
-        var candle = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.11/bin/candle.exe");
+        var candle = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.14/bin/candle.exe");
         var arch = pkgInfo.Platform == Platform.Win64 ? "x64" : "x86";
         Cli.Run(candle, $"\"{wxsPath}\" -o \"{Paths.SetupObj}/\" -arch {arch}");
 
         var wixobjPath = wxsPath.Replace(".wxs", ".wixobj");
 
-        var light = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.11/bin/light.exe");
+        var light = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/WiX Toolset v3.14/bin/light.exe");
         Cli.Run(light, $"\"{wixobjPath}\" -spdb -ext WixUIExtension -o \"{msiPath}\"");
 
         if (!noSign)

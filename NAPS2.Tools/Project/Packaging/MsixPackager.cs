@@ -55,7 +55,7 @@ public static class MsixPackager
         mappingFile.WriteLine($"\"{resourcesPriPath}\" \"resources.pri\"");
         mappingFile.Close();
 
-        var makePri = @"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\makepri.exe";
+        var makePri = @"C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\makepri.exe";
         var makeAppx = @"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\makeappx.exe";
 
         if (File.Exists(resourcesPriPath)) File.Delete(resourcesPriPath);
