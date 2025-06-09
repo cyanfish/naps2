@@ -29,11 +29,23 @@ public static class CurrentPlatformFlags
         }
         if (TestImageContextFactory.Get().ImageType.Name == "ImageSharpImage")
         {
-            p |= PlatformFlags.ImageSharp;
+            p |= PlatformFlags.ImageSharpImage;
         }
         if (TestImageContextFactory.Get().ImageType.Name == "WpfImage")
         {
-            p |= PlatformFlags.Wpf;
+            p |= PlatformFlags.WpfImage;
+        }
+        if (TestImageContextFactory.Get().ImageType.Name == "GdiImage")
+        {
+            p |= PlatformFlags.GdiImage;
+        }
+        if (TestImageContextFactory.Get().ImageType.Name == "MacImage")
+        {
+            p |= PlatformFlags.MacImage;
+        }
+        if (TestImageContextFactory.Get().ImageType.Name == "GtkImage")
+        {
+            p |= PlatformFlags.GtkImage;
         }
         return p;
     }

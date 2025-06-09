@@ -15,8 +15,10 @@ public class LoadSaveTests : ContextualTests
     [Theory]
     [MemberData(nameof(TestCases))]
     public void LoadFromFile(ImageFileFormat format, string ext, string resource, string[] compare,
-        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
+        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes, PlatformFactAttribute platforms = null)
     {
+        if (platforms is { DoSkip: true }) return;
+
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
 
         if (!ImageContext.SupportsFormat(format))
@@ -34,8 +36,10 @@ public class LoadSaveTests : ContextualTests
     [Theory]
     [MemberData(nameof(TestCases))]
     public void LoadFromStream(ImageFileFormat format, string ext, string resource, string[] compare,
-        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
+        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes, PlatformFactAttribute platforms = null)
     {
+        if (platforms is { DoSkip: true }) return;
+
         var stream = new MemoryStream(GetResource(resource));
 
         if (!ImageContext.SupportsFormat(format))
@@ -53,8 +57,10 @@ public class LoadSaveTests : ContextualTests
     [Theory]
     [MemberData(nameof(TestCases))]
     public async Task LoadFramesFromFile(ImageFileFormat format, string ext, string resource, string[] compare,
-        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
+        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes, PlatformFactAttribute platforms = null)
     {
+        if (platforms is { DoSkip: true }) return;
+
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
         var progressMock = Substitute.For<ProgressCallback>();
 
@@ -80,8 +86,10 @@ public class LoadSaveTests : ContextualTests
     [Theory]
     [MemberData(nameof(TestCases))]
     public async Task LoadFramesFromStream(ImageFileFormat format, string ext, string resource, string[] compare,
-        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
+        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes, PlatformFactAttribute platforms = null)
     {
+        if (platforms is { DoSkip: true }) return;
+
         var stream = new MemoryStream(GetResource(resource));
         var progressMock = Substitute.For<ProgressCallback>();
 
@@ -107,8 +115,10 @@ public class LoadSaveTests : ContextualTests
     [Theory]
     [MemberData(nameof(TestCases))]
     public void SaveToFile(ImageFileFormat format, string ext, string resource, string[] compare,
-        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
+        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes, PlatformFactAttribute platforms = null)
     {
+        if (platforms is { DoSkip: true }) return;
+
         var path = Path.Combine(FolderPath, $"image{ext}");
         var expected = LoadImage(GetResource(compare[0]));
 
@@ -129,8 +139,10 @@ public class LoadSaveTests : ContextualTests
     [Theory]
     [MemberData(nameof(TestCases))]
     public void SaveToStream(ImageFileFormat format, string ext, string resource, string[] compare,
-        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes)
+        ImagePixelFormat[] logicalPixelFormats, bool ignoreRes, PlatformFactAttribute platforms = null)
     {
+        if (platforms is { DoSkip: true }) return;
+
         var stream = new MemoryStream();
         var expected = LoadImage(GetResource(compare[0]));
 
@@ -215,7 +227,7 @@ public class LoadSaveTests : ContextualTests
     }
 
     // Gtk does not support saving with 1bpp/8bpp
-    [PlatformFact(exclude: PlatformFlags.Linux)]
+    [PlatformFact(exclude: PlatformFlags.GtkImage)]
     public void SavePngWithUnoptimizedBitDepth()
     {
         var image32Bpp = LoadImage(ImageResources.dog_bw).CopyWithPixelFormat(ImagePixelFormat.ARGB32);
@@ -244,7 +256,7 @@ public class LoadSaveTests : ContextualTests
         // All optimized values should be less than their unoptimized counterparts.
         Assert.True(optimized32Bpp < unoptimized32Bpp);
         Assert.True(optimized24Bpp < unoptimized24Bpp);
-        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharp | PlatformFlags.Wpf))
+        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharpImage | PlatformFlags.WpfImage))
         {
             Assert.True(optimized8Bpp < unoptimized8Bpp);
             Assert.Equal(optimized1Bpp, unoptimized1Bpp);
@@ -280,118 +292,93 @@ public class LoadSaveTests : ContextualTests
     // TODO: Ignore resolution by default in the existing tests, but have separate tests/test cases for resolution
     public static IEnumerable<object[]> TestCases =
     [
-        new object[]
-        {
+        [
             ImageFileFormat.Png, ".png", "dog_alpha",
             new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, false
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Png, ".png", "dog_png",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Png, ".png", "dog_gray_png",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
-        },
-        // TODO: Can we improve this for WPF?
-#if MAC || LINUX
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Png, ".png", "dog_gray_24bit_png",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
-        },
-#endif
-        new object[]
-        {
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false,
+            // TODO: Can we improve this for WPF?
+            new PlatformFactAttribute(exclude: PlatformFlags.WpfImage)
+        ],
+        [
             ImageFileFormat.Png, ".png", "dog_bw",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Png, ".png", "dog_bw_24bit",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Jpeg, ".jpg", "dog",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Jpeg, ".jpg", "dog_gray_8bit",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true // Gtk fails to load resolution
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Jpeg, ".jpg", "dog_bw_jpg",
             new[] { "dog_bw_jpg" }, new[] { ImagePixelFormat.Gray8 }, false
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Jpeg2000, ".jp2", "dog_jp2",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Bmp, ".bmp", "dog_bmp",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, true
-        },
-        // TODO: Re-enable this for macOS - seems like a bug in 12.6, 12.5 was fine and apparently 13.0 works ok
-#if !MAC
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Bmp, ".bmp", "dog_gray_bmp",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Bmp, ".bmp", "dog_bw_bmp",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Bmp, ".bmp", "dog_bw_invertpal",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
-        },
-#endif
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Tiff, ".tiff", "dog_tiff",
             new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, true
-        },
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Tiff, ".tiff", "dog_gray_tiff",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
-        },
-        // TODO: Can we improve this for WPF?
-#if MAC || LINUX
-        new object[]
-        {
+        ],
+        [
             ImageFileFormat.Tiff, ".tiff", "dog_gray_24bit_tiff",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
-        },
-#endif
-        new object[]
-        {
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true,
+            // TODO: Can we improve this for WPF?
+            new PlatformFactAttribute(exclude: PlatformFlags.WpfImage)
+        ],
+        [
             ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
-        },
-// TODO: Any way to improve these cases for ImageSharp?
-#if MAC || LINUX || !NET6_0_OR_GREATER
-        new object[]
-        {
+        ],
+        // TODO: Any way to improve these cases for ImageSharp?
+        [
             ImageFileFormat.Tiff, ".tiff", "dog_alpha_tiff",
-            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true
-        },
-        new object[]
-        {
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true,
+            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+        ],
+        [
             ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
-            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true
-        },
-#endif
+            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true,
+            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+        ],
     ];
 }

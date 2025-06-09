@@ -25,7 +25,7 @@ public class TestCommand : ICommand<TestOptions>
                     { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
                     { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" },
                     { "NAPS2_TEST_NONETWORK", opts.NoNetwork ? "1" : "0" },
-                    { "NAPS2_TEST_IMAGES", opts.Images }
+                    { "NAPS2_TEST_IMAGES", opts.Images ?? "" }
                 });
             }
             catch (Exception)

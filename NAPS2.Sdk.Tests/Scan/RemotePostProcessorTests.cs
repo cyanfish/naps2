@@ -132,7 +132,7 @@ public class RemotePostProcessorTests : ContextualTests
     }
 
     // Only Linux can have zero resolution images
-    [PlatformFact(include: PlatformFlags.Linux)]
+    [PlatformFact(include: PlatformFlags.GtkImage)]
     public void CropToPageSize_NoResolution()
     {
         var image = LoadImage(ImageResources.patcht);

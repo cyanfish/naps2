@@ -113,7 +113,7 @@ public class ImageImporterTests : ContextualTests
         Assert.False(File.Exists(storage.FullPath));
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharp)]
+    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
     public async Task ImportTiffImage()
     {
         var filePath = CopyResourceToFile(ImageResources.animals_tiff, "image.tiff");

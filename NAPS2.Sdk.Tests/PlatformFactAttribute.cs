@@ -16,4 +16,6 @@ public sealed class PlatformFactAttribute : FactAttribute
             Skip = $"Doesn't run on platform(s): {exclude}";
         }
     }
+
+    public bool DoSkip => !string.IsNullOrEmpty(Skip);
 }
