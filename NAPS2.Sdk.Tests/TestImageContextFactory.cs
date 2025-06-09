@@ -1,5 +1,3 @@
-using NAPS2.Images.ImageSharp;
-
 namespace NAPS2.Sdk.Tests;
 
 public static class TestImageContextFactory
@@ -17,7 +15,7 @@ public static class TestImageContextFactory
             "mac" => new NAPS2.Images.Mac.MacImageContext(),
 #endif
 #if LINUX
-            "gtk" or "gdk" or "linux" => new NAPS2.Images.Gtk.GtkImageContext()
+            "gtk" or "gdk" or "linux" => new NAPS2.Images.Gtk.GtkImageContext(),
 #endif
             _ =>
 #if MAC
@@ -25,7 +23,7 @@ public static class TestImageContextFactory
 #elif LINUX
                 new NAPS2.Images.Gtk.GtkImageContext()
 #else
-                new ImageSharpImageContext()
+                new NAPS2.Images.Gdi.GdiImageContext()
 #endif
         };
     }
