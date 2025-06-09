@@ -7,6 +7,9 @@ namespace NAPS2.Sdk.Tests.Asserts;
 
 public static class ImageAsserts
 {
+    // For bigger cross-platform differences
+    public const double XL_RMSE_THRESHOLD = 9.5;
+
     // For slight cross-platform differences
     public const double XPLAT_RMSE_THRESHOLD = 6.9;
     

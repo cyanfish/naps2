@@ -64,7 +64,7 @@ public class RemotePostProcessorTests : ContextualTests
             AutoDeskew = true
         };
         var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
-        ImageAsserts.Similar(ImageResources.deskewed, result, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(ImageResources.deskewed, result, ImageAsserts.XL_RMSE_THRESHOLD);
     }
 
     [Fact]

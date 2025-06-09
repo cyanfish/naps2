@@ -1,3 +1,5 @@
+using NAPS2.Images.ImageSharp;
+
 namespace NAPS2.Sdk.Tests;
 
 public static class TestImageContextFactory
@@ -23,7 +25,7 @@ public static class TestImageContextFactory
 #elif LINUX
                 new NAPS2.Images.Gtk.GtkImageContext()
 #else
-                new NAPS2.Images.Gdi.GdiImageContext()
+                new ImageSharpImageContext()
 #endif
         };
     }

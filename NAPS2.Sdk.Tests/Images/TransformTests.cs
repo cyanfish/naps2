@@ -472,7 +472,7 @@ public class TransformTests : ContextualTests
         var expected = LoadImage(ImageResources.dog_cat_combined);
 
         var transformed = MoreImageTransforms.Combine(first, second, CombineOrientation.Vertical);
-        Assert.Equal(ImagePixelFormat.RGB24, transformed.PixelFormat);
+        Assert.Equal(ImagePixelFormat.RGB24, transformed.UpdateLogicalPixelFormat());
 
         ImageAsserts.Similar(expected, transformed, ImageAsserts.GENERAL_RMSE_THRESHOLD);
     }

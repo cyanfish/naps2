@@ -74,7 +74,7 @@ public class RemoteScanControllerTests : ContextualTests
         await controller.Scan(options, CancellationToken.None, ScanEvents.Stub, Callback);
 
         Assert.Single(images);
-        ImageAsserts.Similar(ImageResources.deskewed, images[0], ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(ImageResources.deskewed, images[0], ImageAsserts.XL_RMSE_THRESHOLD);
     }
 
     private RemoteScanController CreateControllerWithMockDriver(IScanDriver scanDriver)
