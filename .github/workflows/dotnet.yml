@@ -29,3 +29,9 @@ jobs:
     - name: Test (mac)
       if: matrix.os == 'macos-15'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui --nonetwork
+    - name: Test (WPF images)
+      if: matrix.os == 'windows-2022'
+      run: dotnet run --project NAPS2.Tools -- test -v --nogui --images wpf --scope sdk
+    - name: Test (ImageSharp images)
+      if: matrix.os == 'ubuntu-24.04'
+      run: dotnet run --project NAPS2.Tools -- test -v --nogui --images is --scope sdk
