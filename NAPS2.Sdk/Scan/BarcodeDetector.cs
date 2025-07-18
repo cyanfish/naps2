@@ -37,19 +37,19 @@ internal static class BarcodeDetector
         };
         if (options.PatchTOnly)
         {
+            zxingOptions.PossibleFormats ??= [];
             zxingOptions.PossibleFormats = [PATCH_T_FORMAT];
         }
         else
         {
+            // map the PossibleFormats bitfield to the matching ZXing.BarcodeFormat's
             foreach (ZXing.BarcodeFormat format in Enum.GetValues(typeof(ZXing.BarcodeFormat)))
             {
-#pragma warning disable CA2248 // Provide correct 'enum' argument to 'Enum.HasFlag'
-                if (options.PossibleFormats.HasFlag(format))
+                if ((((int) options.PossibleFormats) & (int) format) > 0)
                 {
                     zxingOptions.PossibleFormats ??= [];
                     zxingOptions.PossibleFormats.Add(format);
                 }
-#pragma warning restore CA2248 // Provide correct 'enum' argument to 'Enum.HasFlag'
             }
         }
  
