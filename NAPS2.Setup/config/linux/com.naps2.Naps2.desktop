@@ -6,4 +6,5 @@ Comment=Not Another PDF Scanner
 Exec=naps2
 Icon=com.naps2.Naps2
 Categories=Graphics;Office;Scanning;OCR;
+Keywords=scan,scanner,scanning,document,pdf,ocr
 MimeType=application/pdf;image/jpeg;image/png;image/tiff;image/bmp;
