@@ -70,13 +70,10 @@ public class PackageCommand : ICommand<PackageOptions>
             PopulatePackageInfo(buildPath, platform, pkgInfo);
         }
 
-        if (platform == Platform.Win64)
-        {
-            // No need for a 32-bit worker on ARM64
-            var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net9-windows",
-                "win-x86", "publish");
-            pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
-        }
+        // Include the 32-bit worker (on both x64 and arm64) for TWAIN support
+        var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net9-windows",
+            "win-x86", "publish");
+        pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
 
         var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net9-windows",
             arch, "publish");
