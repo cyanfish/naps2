@@ -196,13 +196,23 @@ public class LayoutControl : LayoutElement
         {
             EtoPlatform.Current.AddToContainer(context.Container, Control, context.InOverlay);
             _isAdded = true;
+            void OnVisibleChanged(object? sender, EventArgs args)
+            {
+                context.Invalidate();
+                // TODO: This is suuuper hacky. But I don't have the time right now to figure out a better fix.
+                // See https://github.com/cyanfish/naps2/issues/652
+                if (EtoPlatform.Current.IsGtk)
+                {
+                    Task.Delay(100).ContinueWith(_ => context.Invalidate());
+                }
+            }
             if (Visibility != null)
             {
-                Visibility.IsVisibleChanged += (_, _) => context.Invalidate();
+                Visibility.IsVisibleChanged += OnVisibleChanged;
             }
             if (context.ParentVisibility != null)
             {
-                context.ParentVisibility.IsVisibleChanged += (_, _) => context.Invalidate();
+                context.ParentVisibility.IsVisibleChanged += OnVisibleChanged;
             }
         }
         if (!_isWindowSet && context.Window != null)
