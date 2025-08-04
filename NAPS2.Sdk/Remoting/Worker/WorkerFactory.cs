@@ -141,7 +141,7 @@ internal class WorkerFactory : IWorkerFactory
         return proc;
     }
 
-    private void StartWorkerService(ScanningContext scanningContext, WorkerType workerType)
+    private void StartWorkerService(ScanningContext scanningContext, WorkerType workerType, bool spare)
     {
         Task.Run(() =>
         {
@@ -158,14 +158,19 @@ internal class WorkerFactory : IWorkerFactory
             }
             catch (Exception ex)
             {
-                scanningContext.Logger.LogError(ex, "Could not start worker");
+                // If we're just starting a spare worker, don't log errors (e.g. if we're using the SDK and don't even
+                // need a worker)
+                if (!spare)
+                {
+                    scanningContext.Logger.LogError(ex, "Could not start worker");
+                }
             }
         });
     }
 
     private WorkerContext NextWorker(ScanningContext scanningContext, WorkerType workerType)
     {
-        StartWorkerService(scanningContext, workerType);
+        StartWorkerService(scanningContext, workerType, false);
         if (!_workerQueues![workerType]!.TryTake(out var worker, TAKE_WORKER_TIMEOUT))
         {
             throw new InvalidOperationException("Could not start a worker process; see logs for details");
@@ -196,12 +201,12 @@ internal class WorkerFactory : IWorkerFactory
             {
                 // We start a "spare" worker so that when we need one, it's immediately ready (and then we'll start another
                 // spare for the next request).
-                StartWorkerService(scanningContext, WorkerType.Native);
+                StartWorkerService(scanningContext, WorkerType.Native, true);
                 if (PlatformCompat.System.SupportsWinX86Worker)
                 {
                     // On windows as we need 32-bit and 64-bit workers for different things, we will have two spare workers,
                     // which isn't ideal but not a big deal.
-                    StartWorkerService(scanningContext, WorkerType.WinX86);
+                    StartWorkerService(scanningContext, WorkerType.WinX86, true);
                 }
             }
         }
