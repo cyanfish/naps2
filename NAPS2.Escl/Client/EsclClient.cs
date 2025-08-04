@@ -337,6 +337,8 @@ public class EsclClient
         response.EnsureSuccessStatusCode();
         Logger.LogDebug("GET OK");
         var text = await response.Content.ReadAsStringAsync();
+        // Fix for invalid doctype declarations
+        text = text.Replace("<!doctype", "<!DOCTYPE");
         var doc = XDocument.Parse(text);
         return doc;
     }
