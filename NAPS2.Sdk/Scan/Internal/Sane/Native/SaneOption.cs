@@ -33,10 +33,16 @@ internal class SaneOption
         }
     }
 
-    internal static SaneOption CreateForTesting(int index, string name, string[] stringList)
+    internal static SaneOption CreateStringListForTesting(int index, string name, string[] stringList)
     {
         return new SaneOption(index, name, "", "", SaneValueType.String, SaneUnit.None, 0, SaneCapabilities.SoftSelect,
             SaneConstraintType.StringList, stringList.ToList(), null, null);
+    }
+
+    internal static SaneOption CreateBooleanForTesting(int index, string name)
+    {
+        return new SaneOption(index, name, "", "", SaneValueType.Bool, SaneUnit.None, 0, SaneCapabilities.SoftSelect,
+            SaneConstraintType.None, null, null, null);
     }
 
     internal SaneOption(SaneOptionDescriptor descriptor, int index)

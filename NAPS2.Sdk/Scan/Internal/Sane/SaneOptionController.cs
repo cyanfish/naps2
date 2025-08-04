@@ -29,6 +29,31 @@ internal class SaneOptionController
             .ToDictionary(x => x.Key, x => x.First());
     }
 
+    public bool TrySet(string name, bool value)
+    {
+        _logger.LogDebug($"Maybe setting {name}");
+        if (!_options.ContainsKey(name))
+            return false;
+        var opt = _options[name];
+        if (!opt.IsActive || !opt.IsSettable || opt.Type != SaneValueType.Bool)
+            return false;
+        try
+        {
+            _logger.LogDebug($"Setting {name} to {value}");
+            _device.SetOption(_options[name], value, out var info);
+            if (info.HasFlag(SaneOptionSetInfo.ReloadOptions))
+            {
+                LoadOptions();
+            }
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error writing SANE option {OptionName}", name);
+            return false;
+        }
+    }
+
     public bool TrySet(string name, double value)
     {
         _logger.LogDebug($"Maybe setting {name}");

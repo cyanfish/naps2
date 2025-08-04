@@ -394,6 +394,7 @@ internal class SaneScanDriver : IScanDriver
             }
             controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex);
             controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex);
+            controller.TrySet(SaneOptionNames.DUPLEX, true);
         }
 
         var mode = options.BitDepth switch

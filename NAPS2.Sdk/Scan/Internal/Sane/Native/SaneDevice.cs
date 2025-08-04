@@ -58,6 +58,13 @@ internal class SaneDevice : SaneNativeObject, ISaneDevice
         }
     }
 
+    public unsafe void SetOption(SaneOption option, bool value, out SaneOptionSetInfo info)
+    {
+        int word = value ? 1 : 0;
+        int* ptr = &word;
+        HandleStatus(Native.sane_control_option(Handle, option.Index, SaneOptionAction.SetValue, (IntPtr) ptr, out info));
+    }
+
     public unsafe void SetOption(SaneOption option, double value, out SaneOptionSetInfo info)
     {
         int word = option.Type == SaneValueType.Fixed ? SaneFixedPoint.ToFixed(value) : (int) value;
