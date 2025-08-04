@@ -10,7 +10,8 @@ internal static class CapabilitiesParser
     public static EsclCapabilities Parse(XDocument doc)
     {
         var root = doc.Root;
-        if (root?.Name != ScanNs + "ScannerCapabilities")
+        if (root?.Name.LocalName != "ScannerCapabilities" ||
+            !root.Name.NamespaceName.StartsWith("http://schemas.hp.com/imaging/escl/"))
         {
             throw new InvalidOperationException("Unexpected root element: " + doc.Root?.Name);
         }
@@ -125,7 +126,8 @@ internal static class CapabilitiesParser
         return list;
     }
 
-    private static EsclInputCaps? ParseInputCaps(XElement? element, Dictionary<string, EsclSettingProfile> settingProfilesMap)
+    private static EsclInputCaps? ParseInputCaps(XElement? element,
+        Dictionary<string, EsclSettingProfile> settingProfilesMap)
     {
         if (element == null)
         {
