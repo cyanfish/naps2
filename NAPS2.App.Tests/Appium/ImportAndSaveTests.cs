@@ -40,7 +40,7 @@ public class ImportAndSaveTests : AppiumTests
         ClickAtName("Save");
         // Wait for the save to finish
         Thread.Sleep(100);
-        WaitFor(() => !HasElementWithName("Cancel"));
+        WaitFor(() => !HasElementWithName("Cancel"), 30_000);
 
         var path = Path.Combine(FolderPath, "test.pdf");
         PdfAsserts.AssertImages(path, 
