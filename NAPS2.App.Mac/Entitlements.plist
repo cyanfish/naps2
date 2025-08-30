@@ -8,5 +8,9 @@
          From a security perspective this should be ok as libraries will still need to have the right signature. -->
     <key>com.apple.security.cs.allow-dyld-environment-variables</key>
     <true/>
+    <!-- Needed for SANE to work properly.
+         Unfortunate, but .NET is a managed language so the potential attack surface is minimal. -->
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <true/>
   </dict>
 </plist>
