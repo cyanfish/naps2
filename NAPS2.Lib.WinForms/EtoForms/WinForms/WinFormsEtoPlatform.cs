@@ -212,6 +212,10 @@ public class WinFormsEtoPlatform : EtoPlatform
                 left.Concat(right).Sum(x => x.Width),
                 top.Concat(bottom).Sum(x => x.Height));
         }
+        else if (excludeToolbars && window.ToolBar is { ControlObject: ToolStripEx toolStripEx })
+        {
+            size.Height -= toolStripEx.Height;
+        }
         return size;
     }
 
