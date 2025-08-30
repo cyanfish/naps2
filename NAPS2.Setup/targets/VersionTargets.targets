@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <Version>8.2.0</Version>
-        <VersionName>8.2.0</VersionName>
+        <Version>8.2.1</Version>
+        <VersionName>8.2.1</VersionName>
     </PropertyGroup>
 </Project>

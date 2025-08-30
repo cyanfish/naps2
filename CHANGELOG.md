@@ -1,3 +1,15 @@
+Changes in 8.2.1:
+- Added a review prompt in the Microsoft Store version after a month's use
+- Windows: Added TWAIN support to arm64 installer
+- Windows: Fixed some OCR compatibility issues
+- Windows: Fixed preview window being cut off
+- Mac: Fixed SANE crash
+- Escl: Fixed some compatibility issues
+- Sane: Fixed some duplex compability issues
+- Linux: Fixed Gmail/Outlook Web options not showing
+- Linux: Fixed hidden buttons after disabling PDF encryption
+- Sdk: Fixed extraneous error log
+
 Changes in 8.2.0:
 - NAPS2 is [now available](https://apps.microsoft.com/detail/9N3QQ9W0B23Q?cid=changelog) on the Microsoft Store
   - It costs a small fee to support the developer and provide automatic updates
