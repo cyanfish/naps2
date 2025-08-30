@@ -4,6 +4,10 @@
     <TargetFrameworks>net8;net462</TargetFrameworks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="lib\winarm\" />
+  </ItemGroup>
+
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   
 </Project>
