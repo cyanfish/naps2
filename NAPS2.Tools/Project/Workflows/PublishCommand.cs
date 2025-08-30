@@ -27,7 +27,8 @@ public class PublishCommand : ICommand<PublishOptions>
         new PackageCommand().Run(new PackageOptions
         {
             PackageType = opts.PackageType,
-            Platform = opts.Platform
+            Platform = opts.Platform,
+            XCompile = opts.XCompile
         });
         if (!opts.NoVerify)
         {

@@ -16,4 +16,7 @@ public class PublishOptions : OptionsBase
 
     [Option("nogui", Required = false, HelpText = "Only run headless (no gui) tests")]
     public bool NoGui { get; set; }
+
+    [Option("xcompile", Required = false, HelpText = "Cross-compile packages where possible (e.g. build linux-arm64 on linux-x64)")]
+    public bool XCompile { get; set; }
 }
