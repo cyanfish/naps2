@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>Το NAPS2 είναι ελεύθερο λογισμικό. Αξιολογήστε την επιλογή μιας δωρεάς.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Leave a Review</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Like NAPS2?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Ο οδηγός SANE δεν είναι διαθέσιμος. Βεβαιωθείτε ότι έχετε εγκαταστήσει τα απαιτούμενα πακέτα:</value>
   </data>

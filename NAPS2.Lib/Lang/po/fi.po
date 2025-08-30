@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -845,6 +845,10 @@ msgstr ""
 msgid "Language"
 msgstr "Kieli"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Jätä arviosi"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Vasen"
@@ -856,6 +860,10 @@ msgstr "Perinteinen (vain natiivikäyttöliittymä)"
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
 msgstr ""
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "Pidätkö NAPS2:sta?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"

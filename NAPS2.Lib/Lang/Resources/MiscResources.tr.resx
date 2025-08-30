@@ -97,7 +97,7 @@
     <value>Taranmış Resim</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Taraya tıklamadan önce profil seçin.</value>
+    <value>Taraya tıklamadan önce profil seç.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
     <value>Tarayıcı sürücüsü ile ilgili bir hata oluştu.</value>
@@ -338,6 +338,12 @@
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 tümüyle ücretsizdir. Bağış yapmayı düşünün.</value>
+  </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Yorum Yap</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>NAPS2'yi Beğendiniz Mi?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE sürücüsü kullanılamıyor. Gerekli paketlerin kuruluduğundan emin olun:</value>

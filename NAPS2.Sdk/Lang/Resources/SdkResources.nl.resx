@@ -67,7 +67,7 @@
     <value>De SANE driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>De OCR engine is niet beschikbaar. Installeer het vereiste pakket:</value>
+    <value>De OCR-engine is niet beschikbaar. Installeer het vereiste pakket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>De gekozen driver wordt niet ondersteund op dit systeem.</value>
@@ -76,7 +76,7 @@
     <value>Er is een fout opgetreden bij het uitvoeren van OCR.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>Het OCR proces is uitgelopen.</value>
+    <value>De OCR-bewerking is verlopen.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
     <value>Het werkproces is gecrasht.</value>

@@ -880,9 +880,9 @@
     <value>Endre med...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>Feil under oppstart av programmet {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>Stopp skannerdeling</value>
   </data>
 </root>

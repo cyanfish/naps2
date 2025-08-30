@@ -370,16 +370,16 @@
     <value>Not Another PDF Scanner</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
-    <value>OCR instellingen</value>
+    <value>OCR-instellingen</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
-    <value>PDFs doorzoekbaar maken middels OCR</value>
+    <value>Maak PDF's doorzoekbaar met OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
-    <value>OCR taal:</value>
+    <value>OCR-taal:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR modus:</value>
+    <value>OCR-modus:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
     <value>Witbalans verbeteren en ruis verminderen</value>
@@ -388,7 +388,7 @@
     <value>Start OCR automatisch na het scannen</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>OCR vooraf uitvoeren na scannen</value>
+    <value>Start OCR automatisch na het scannen</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Meer talen installeren</value>
@@ -400,7 +400,7 @@
     <value>Voor OCR moet u elke taal downloaden die u wilt laten herkennen.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Kies een of meer talen:</value>
+    <value>Kies één of meer talen:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Geschatte omvang: {0} MB</value>

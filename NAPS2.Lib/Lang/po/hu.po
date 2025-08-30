@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -592,7 +592,7 @@ msgstr "Szerkesztés"
 
 #: UiStrings.resx$EditWithAppName$Message
 msgid "Edit with {0}"
-msgstr ""
+msgstr "Szerkesztés a következővel: {0}"
 
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
@@ -845,6 +845,10 @@ msgstr "LZW"
 msgid "Language"
 msgstr "Nyelv"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Hagyjon egy értékelést"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Balra"
@@ -856,6 +860,10 @@ msgstr "Régi (csak natív felhasználói felület)"
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
 msgstr "Világos"
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "Kedveli a NAPS2-t?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"

@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 on täysin ilmainen. Harkitsethan lahjoitusta.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Jätä arviosi</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Pidätkö NAPS2:sta?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE - ajuri ei ole käytettävissä. Asenna tarvittava osat:</value>
   </data>

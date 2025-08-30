@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 是完全免费的。请考虑捐款资助.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>撰写评论</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>喜欢NAPS2吗？</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE 驱动不可用。请确认已安装所需的软件包:</value>
   </data>

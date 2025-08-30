@@ -133,7 +133,7 @@
     <value>Eski (yalnızca yerli kullanıcı arayüzü)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Alternatif Aktarım</value>
+    <value>Yerli Aktarım</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
     <value>Bellek Aktarımı</value>

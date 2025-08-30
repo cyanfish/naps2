@@ -55,16 +55,16 @@
     <value>Pegar</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Deshacer</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Rehacer</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>Deshacer {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>Rehacer {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Terminado</value>
@@ -355,7 +355,7 @@
     <value>Seleccione el origen</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Seleccionar dispositivo</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Ejecutar en segundo plano</value>
@@ -388,7 +388,7 @@
     <value>Ejecutar OCR automáticamente después del escaneo</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>Ejecutar OCR automáticamente después de escanear</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Obtener más idiomas</value>
@@ -649,10 +649,10 @@
     <value>Dimensiones</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>Resolución predeterminada</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>PPP</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Esperando que TWAIN finalice...</value>
@@ -793,10 +793,10 @@
     <value>Varios idiomas</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>Mostrar progreso nativo de TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>Dividir</value>
   </data>
   <data name="Combine" xml:space="preserve">
     <value>Combinar</value>
@@ -823,10 +823,10 @@
     <value>Preguntar siempre</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>Buscando dispositivo...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>{0} Dispositivos encontrados.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
     <value>1 dispositivo encontrado.</value>
@@ -835,54 +835,54 @@
     <value>No se han encontrado dispositivos.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sidebar</value>
+    <value>Barra lateral</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
     <value>¿No encuentras tu escáner? Lee las limitaciones del Flatpak NAPS2.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Atajos del teclado</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>Atajos del teclado</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>Escanear con perfil {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Escanear con perfil predeterminado</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
+    <value>Escanear con perfil nuevo</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Asignar</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Sin asignar</value>
   </data>
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
-    <value>Shortcut</value>
+    <value>Atajo</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Tema:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Editar con...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>Editar con {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Editar con...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>Error al iniciar la aplicación {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>Detener escáner compartido</value>
   </data>
 </root>

@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 är helt gratis. Överväg gärna att donera.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Skriv en recension</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Gillar du NAPS2?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE drivrutin är inte tillgänglig. Kontroller och installera nödvändigt paket:</value>
   </data>

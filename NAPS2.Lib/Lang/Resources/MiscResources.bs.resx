@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 je potpuno besplatan. Razmotrite donaciju kao podršku.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Napišite recenziju</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Sviđa Vam se NAPS2?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE drajver nije dostupan. Pobrinite se da instalirate potrebne pakete:</value>
   </data>

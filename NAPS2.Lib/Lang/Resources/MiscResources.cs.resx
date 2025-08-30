@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 je zcela zdarma. Zvažte poskytnutí daru.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Napsat recenzi</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Líbí se vám NAPS2?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Ovladač SANE není dostupný. Ověřte instalaci požadovaných balíčků:</value>
   </data>

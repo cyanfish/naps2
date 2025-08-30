@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -845,6 +845,10 @@ msgstr "LZW"
 msgid "Language"
 msgstr "Langue"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Laisser un avis"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "À gauche"
@@ -856,6 +860,10 @@ msgstr "Ancienne (interface native seulement)"
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
 msgstr "Clair"
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "Aimez-vous NAPS2 ?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Nynorsk\n"
 "Language: nn_NO\n"
@@ -656,7 +656,7 @@ msgstr "Feil"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
-msgstr ""
+msgstr "Feil under oppstart av programmet {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -845,6 +845,10 @@ msgstr "LZW"
 msgid "Language"
 msgstr "Språk"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Legg igjen en omtale"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Venstre"
@@ -856,6 +860,10 @@ msgstr "Gammal (bare maskinen sitt oppsettvindu)"
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
 msgstr "Lyst"
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "Liker du: NAPS2?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1522,7 +1530,7 @@ msgstr "Start"
 
 #: UiStrings.resx$StopScannerSharing$Message
 msgid "Stop Scanner Sharing"
-msgstr ""
+msgstr "Stopp skannerdeling"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1682,7 +1690,7 @@ msgstr "Angre {0}"
 
 #: SdkResources.resx$UnknownScanner$Message
 msgid "Unknown Scanner"
-msgstr ""
+msgstr "Ukjent skanner"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

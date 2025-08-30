@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 est gratuit, mais il est possible de faire un don.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Laisser un avis</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Aimez-vous NAPS2 ?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets nécessaires :</value>
   </data>

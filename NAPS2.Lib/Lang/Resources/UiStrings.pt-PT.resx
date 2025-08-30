@@ -388,7 +388,7 @@
     <value>Executar OCR após a digitalização</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Efetuar OCR após a digitalização</value>
+    <value>Antecipar execução OCR após a digitalização</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Obter mais idiomas</value>
@@ -880,9 +880,9 @@
     <value>Editar com...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>Erro ao iniciar aplicação {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>Parar partilha de digitalizador</value>
   </data>
 </root>

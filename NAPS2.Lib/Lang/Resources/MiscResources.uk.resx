@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 є вільним програмним забезпеченням. Запрошуємо зробити ваш внесок.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Leave a Review</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Подобається NAPS2?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Драйвер SANE не доступний. Перевірте, чи встановлено такі пакети:</value>
   </data>

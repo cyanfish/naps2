@@ -211,7 +211,7 @@
     <value>Действие кнопки "Сканировать" по умолчанию:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>Действие кнопки "Сохранить" по умолчанию:</value>
+    <value>Действие кнопки «Сохранить»:</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Приложение</value>
@@ -868,21 +868,21 @@
     <value>Горячая клавиша</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Тема:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Редактировать с помощью...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>Редактировать с помощью {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Редактировать с помощью...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>Ошибка при запуске приложения {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>Отключить общий доступ к сканеру</value>
   </data>
 </root>

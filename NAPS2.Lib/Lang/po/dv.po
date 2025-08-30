@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Dhivehi\n"
 "Language: dv\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "\"ސްކޭން\" ފިތުގެ ޑިފޯލްޓް އަމަލު:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr ""
+msgstr "އޭ 3 (297x420 މމ)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
@@ -49,12 +49,12 @@ msgstr ""
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "އޭ5 (148x210 މމ)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr ""
+msgstr "ތަޢާރަފު"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
@@ -192,7 +192,7 @@ msgstr ""
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr ""
+msgstr "އެޕްލިކޭޝަން"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
@@ -421,7 +421,7 @@ msgstr ""
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "ގުޅުމުގެ އެރަރެއް."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -845,6 +845,10 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr ""
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr ""
@@ -855,6 +859,10 @@ msgstr ""
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
+msgstr ""
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
 msgstr ""
 
 #: UiStrings.resx$LoadIn$Message

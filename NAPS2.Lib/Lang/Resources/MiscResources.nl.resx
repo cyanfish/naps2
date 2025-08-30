@@ -295,7 +295,7 @@
     <value>De scanner warmt op.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Er is een OCR update beschikbaar.</value>
+    <value>Er is een update voor OCR beschikbaar.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Afbeelding opgeslagen.</value>
@@ -339,17 +339,23 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 is helemaal gratis. Overweeg een donatie.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Schrijf een recensie</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Vind je NAPS2 leuk?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>De SANE driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>De OCR engine is niet beschikbaar. Installeer het vereiste pakket:</value>
+    <value>De OCR-engine is niet beschikbaar. Installeer het vereiste pakket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>De gekozen driver wordt niet ondersteund op dit systeem.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>Voortgang OCR</value>
+    <value>Voortgang van OCR</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
     <value>OCR uitvoeren...</value>

@@ -247,7 +247,7 @@
     <value>Save Images Progress</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>บันทึก</value>
+    <value>บันทึก PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
     <value>ความคืบหน้าการบันทึก PDF</value>
@@ -338,6 +338,12 @@
   </data>
   <data name="DonatePrompt" xml:space="preserve">
     <value>NAPS2 is completely free. Consider making a donation.</value>
+  </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Leave a Review</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Like NAPS2?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>The SANE driver is not available. Make sure to install the required packages:</value>

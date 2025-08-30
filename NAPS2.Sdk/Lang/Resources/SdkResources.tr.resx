@@ -19,7 +19,7 @@
     <value>Seçilen tarayıcı çevrim dışı.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Tarayıcıyla olan iletişim kesintiye uğradı.</value>
+    <value>Tarayıcıyla iletişim kesildi.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -82,9 +82,9 @@
     <value>Çalışma işlemi çöktü.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>Çalışma işlemi çöktü. Windows olay görüntüleyicisini kontrol edin.</value>
+    <value>Çalışma işlemi çöktü. Windows olay görüntüleyicisini denetleyin.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>Bilinmeyen Tarayıcı</value>
   </data>
 </root>

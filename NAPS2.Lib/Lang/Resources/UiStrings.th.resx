@@ -88,7 +88,7 @@
     <value>นำเข้า</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>บันทึก</value>
+    <value>บันทึก PDF</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
     <value>การตั้งค่า PDF</value>

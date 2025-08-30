@@ -301,7 +301,7 @@
     <value>Aygıt:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Aygıtı seç</value>
+    <value>Aygıt seç</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
     <value>Öntanımlı ayarları kullan</value>
@@ -394,13 +394,13 @@
     <value>Daha çok dil yükle</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>OKT Dili Yükle</value>
+    <value>OKT İndir</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
     <value>OKT kullanmak için taramak istediğiniz dili indirmeniz gerekir.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Bir ya da daha çok dil seçin:</value>
+    <value>Bir ya da daha çok dil seç:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Öngörülen indirme boyutu: {0} MB</value>
@@ -412,7 +412,7 @@
     <value>İndirme Süreci</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
-    <value>Önizleme</value>
+    <value>Ön İzle</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>İleri</value>
@@ -565,7 +565,7 @@
     <value>Dosya Adı</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
-    <value>Önizleme:</value>
+    <value>Ön İzleme:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
     <value>Yüksek JPEG kalitesi için (80+), ayrıca en iyi sonuçlar için profilinizdeki Resim Kalitesi'ni yükseltin.</value>
@@ -808,7 +808,7 @@
     <value>Elle IP</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP/Ana Makine</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
@@ -880,9 +880,9 @@
     <value>Şununla düzenle...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>Uygulama başlatılırken hata {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>Tarayıcı Paylaşımını Durdur</value>
   </data>
 </root>

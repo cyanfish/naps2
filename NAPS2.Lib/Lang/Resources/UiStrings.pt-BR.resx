@@ -388,7 +388,7 @@
     <value>Executar automaticamente o OCR após a digitalização</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Execute o OCR preventivamente após a digitalização</value>
+    <value>Antecipar execução do OCR durante a digitalização</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Instalar mais idiomas</value>

@@ -79,12 +79,12 @@
     <value>La operación OCR demoró</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>El proceso de trabajo falló.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>El proceso de trabajo falló. Verifique el visor de eventos de Windows.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>Escáner desconocido</value>
   </data>
 </root>

@@ -82,7 +82,7 @@
     <value>Другой...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 дюймов)</value>
+    <value>US Letter (8.5x11 дюймов)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
     <value>US Letter (8.5x11 дюймов)</value>
@@ -175,9 +175,9 @@
     <value>По умолчанию</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Светлая</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Темная</value>
   </data>
 </root>

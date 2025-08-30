@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr "Действие кнопки \"Сохранить\" по умолчанию:"
+msgstr "Действие кнопки «Сохранить»:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
@@ -482,7 +482,7 @@ msgstr "Другой..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "Темная"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -592,12 +592,12 @@ msgstr "Правка"
 
 #: UiStrings.resx$EditWithAppName$Message
 msgid "Edit with {0}"
-msgstr ""
+msgstr "Редактировать с помощью {0}"
 
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
 msgid "Edit with..."
-msgstr ""
+msgstr "Редактировать с помощью..."
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -656,7 +656,7 @@ msgstr "Ошибка"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
-msgstr ""
+msgstr "Ошибка при запуске приложения {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -845,6 +845,10 @@ msgstr "LZW"
 msgid "Language"
 msgstr "Язык"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Оставить отзыв"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Повернуть влево"
@@ -855,7 +859,11 @@ msgstr "Устаревшая (только нативный UI)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "Светлая"
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "Нравится NAPS2?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1522,7 +1530,7 @@ msgstr "Запустить"
 
 #: UiStrings.resx$StopScannerSharing$Message
 msgid "Stop Scanner Sharing"
-msgstr ""
+msgstr "Отключить общий доступ к сканеру"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1634,7 +1642,7 @@ msgstr "Рабочий процесс завершился сбоем. Пров�
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
-msgstr ""
+msgstr "Тема:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1662,7 +1670,7 @@ msgstr "Реализация TWAIN:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 дюймов)"
+msgstr "US Letter (8.5x11 дюймов)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
@@ -1682,7 +1690,7 @@ msgstr "Отменить {0}"
 
 #: SdkResources.resx$UnknownScanner$Message
 msgid "Unknown Scanner"
-msgstr ""
+msgstr "Не найден сканер"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

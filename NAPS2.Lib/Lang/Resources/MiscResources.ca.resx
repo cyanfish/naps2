@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>El NAPS2 és completament gratuït. Considereu fer una donació.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Deixeu una ressenya</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Us agrada el NAPS2?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>No s'ha trobat el controlador SANE. Assegureu-vos d'instal·lar les dependències necessàries:</value>
   </data>

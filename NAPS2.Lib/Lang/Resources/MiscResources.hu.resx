@@ -339,6 +339,12 @@
   <data name="DonatePrompt" xml:space="preserve">
     <value>A NAPS2 teljesen ingyenes. Fontolja meg az adományozást.</value>
   </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Hagyjon egy értékelést</value>
+  </data>
+  <data name="ReviewPrompt" xml:space="preserve">
+    <value>Kedveli a NAPS2-t?</value>
+  </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>A SANE illesztőprogram nem áll rendelkezésre. Győződjön meg róla, hogy telepítette a szükséges csomagokat:</value>
   </data>

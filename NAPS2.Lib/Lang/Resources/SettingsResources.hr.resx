@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Crno/bijelo</value>
+    <value>Crno-bijelo</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
     <value>24-bitna Boja</value>
@@ -25,7 +25,7 @@
     <value>{0} dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Prilagođeni SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -43,7 +43,7 @@
     <value>Apple Mail</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Nije odabran nijedan pružatelj usluga.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Sredina</value>
@@ -79,7 +79,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Custom...</value>
+    <value>Prilagođeno...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -88,10 +88,10 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
-    <value>Custom...</value>
+    <value>Prilagođeno...</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Zadano</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -109,7 +109,7 @@
     <value>Dvostrano</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Umetač</value>
+    <value>Ulagač papira</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
     <value>Staklo</value>
@@ -127,7 +127,7 @@
     <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Zadano</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Legacy (native UI only)</value>
@@ -139,45 +139,45 @@
     <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Old DSM</value>
+    <value>Stari DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Zadano</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Brzo</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Best</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Spremi sve</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Spremi odabrano</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Uvijek upitaj</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Pitaj ako je odabrano</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Skeniraj sa zadanim profilom</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Uvijek upitaj</value>
   </data>
   <data name="Theme_Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Zadano</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Svjetla</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Tamna</value>
   </data>
 </root>

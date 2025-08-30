@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -693,11 +693,11 @@ msgstr "Weißabgleich korrigieren und Rauschen entfernen"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
-msgstr "Spiegeln"
+msgstr "um 180° drehen"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr "Rückseite von Duplex-Seiten spiegeln"
+msgstr "Rückseite von Duplex-Seiten um 180° drehen"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
@@ -845,6 +845,10 @@ msgstr "LZW"
 msgid "Language"
 msgstr "Sprache"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Eine Bewertung hinterlassen"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Links"
@@ -856,6 +860,10 @@ msgstr "Altsystem (nur native Oberfläche)"
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
 msgstr "Hell"
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "Gefällt Ihnen NAPS2?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"

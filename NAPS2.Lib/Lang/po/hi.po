@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -845,6 +845,10 @@ msgstr ""
 msgid "Language"
 msgstr "भाषा"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr ""
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "बाएं"
@@ -855,6 +859,10 @@ msgstr "लीगेसी (केवल मूल यूआई)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
+msgstr ""
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
 msgstr ""
 
 #: UiStrings.resx$LoadIn$Message

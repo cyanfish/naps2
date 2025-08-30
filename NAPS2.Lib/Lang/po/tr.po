@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -380,7 +380,7 @@ msgstr "Profil Seç"
 
 #: UiStrings.resx$ChooseDevice$Message
 msgid "Choose device"
-msgstr "Aygıtı seç"
+msgstr "Aygıt seç"
 
 #: MiscResources.resx$Clear$Message
 #: UiStrings.resx$Clear$Message
@@ -405,7 +405,7 @@ msgstr "Birleştir"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr "Tarayıcıyla olan iletişim kesintiye uğradı."
+msgstr "Tarayıcıyla iletişim kesildi."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -656,7 +656,7 @@ msgstr "Hata"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
-msgstr ""
+msgstr "Uygulama başlatılırken hata {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -741,7 +741,7 @@ msgstr "Renk Tonu / Doygunluk"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr "IP/Host"
+msgstr "IP/Ana Makine"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
@@ -845,6 +845,10 @@ msgstr "LZW"
 msgid "Language"
 msgstr "Dil"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Yorum Yap"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Sol"
@@ -856,6 +860,10 @@ msgstr "Eski (yalnızca yerli kullanıcı arayüzü)"
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
 msgstr "Açık"
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "NAPS2'yi Beğendiniz Mi?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -942,7 +950,7 @@ msgstr "Ad eksik."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr "Alternatif Aktarım"
+msgstr "Yerli Aktarım"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -1009,7 +1017,7 @@ msgstr "OKT"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
-msgstr "OKT Dili Yükle"
+msgstr "OKT İndir"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
@@ -1155,11 +1163,11 @@ msgstr "Hazır olduğunda Başlat'a basın."
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
-msgstr "Önizleme"
+msgstr "Ön İzle"
 
 #: UiStrings.resx$PreviewLabel$Message
 msgid "Preview:"
-msgstr "Önizleme:"
+msgstr "Ön İzleme:"
 
 #: UiStrings.resx$Previous$Message
 msgid "Previous"
@@ -1433,11 +1441,11 @@ msgstr "Kaynağı Seç"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
-msgstr "Taraya tıklamadan önce profil seçin."
+msgstr "Taraya tıklamadan önce profil seç."
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
-msgstr "Bir ya da daha çok dil seçin:"
+msgstr "Bir ya da daha çok dil seç:"
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1522,7 +1530,7 @@ msgstr "Başlat"
 
 #: UiStrings.resx$StopScannerSharing$Message
 msgid "Stop Scanner Sharing"
-msgstr ""
+msgstr "Tarayıcı Paylaşımını Durdur"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1630,7 +1638,7 @@ msgstr "Çalışma işlemi çöktü."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr "Çalışma işlemi çöktü. Windows olay görüntüleyicisini kontrol edin."
+msgstr "Çalışma işlemi çöktü. Windows olay görüntüleyicisini denetleyin."
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
@@ -1682,7 +1690,7 @@ msgstr "Geri al: {0}"
 
 #: SdkResources.resx$UnknownScanner$Message
 msgid "Unknown Scanner"
-msgstr ""
+msgstr "Bilinmeyen Tarayıcı"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

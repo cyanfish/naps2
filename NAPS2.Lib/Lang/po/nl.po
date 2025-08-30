@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-06-07 20:17\n"
+"PO-Revision-Date: 2025-08-30 22:28\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -180,7 +180,7 @@ msgstr "Een update is beschikbaar."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "Er is een OCR update beschikbaar."
+msgstr "Er is een update voor OCR beschikbaar."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
@@ -845,6 +845,10 @@ msgstr "LZW"
 msgid "Language"
 msgstr "Taal"
 
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "Schrijf een recensie"
+
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Links"
@@ -857,13 +861,17 @@ msgstr "Legacy (alleen eigen interface)"
 msgid "Light"
 msgstr "Licht"
 
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "Vind je NAPS2 leuk?"
+
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
 msgstr "Afbeeldingen laden in NAPS2"
 
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "PDFs doorzoekbaar maken middels OCR"
+msgstr "Maak PDF's doorzoekbaar met OCR"
 
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
@@ -1013,19 +1021,19 @@ msgstr "OCR downloaden"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr "Voortgang OCR"
+msgstr "Voortgang van OCR"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
-msgstr "OCR instellingen"
+msgstr "OCR-instellingen"
 
 #: UiStrings.resx$OcrLanguageLabel$Message
 msgid "OCR language:"
-msgstr "OCR taal:"
+msgstr "OCR-taal:"
 
 #: UiStrings.resx$OcrModeLabel$Message
 msgid "OCR mode:"
-msgstr "OCR modus:"
+msgstr "OCR-modus:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
@@ -1147,7 +1155,7 @@ msgstr "Nabewerking"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr "OCR vooraf uitvoeren na scannen"
+msgstr "Start OCR automatisch na het scannen"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
@@ -1437,7 +1445,7 @@ msgstr "Kies een profiel voor het scannen."
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
-msgstr "Kies een of meer talen:"
+msgstr "Kies één of meer talen:"
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1547,11 +1555,11 @@ msgstr "Technische details"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "De OCR engine is niet beschikbaar. Installeer het vereiste pakket:"
+msgstr "De OCR-engine is niet beschikbaar. Installeer het vereiste pakket:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr "Het OCR proces is uitgelopen."
+msgstr "De OCR-bewerking is verlopen."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message

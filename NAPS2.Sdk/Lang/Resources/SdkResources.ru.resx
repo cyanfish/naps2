@@ -85,6 +85,6 @@
     <value>Рабочий процесс завершился сбоем. Проверьте средство просмотра событий Windows.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>Не найден сканер</value>
   </data>
 </root>

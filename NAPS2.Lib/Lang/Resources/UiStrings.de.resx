@@ -145,7 +145,7 @@
     <value>Rechts drehen</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Spiegeln</value>
+    <value>um 180° drehen</value>
   </data>
   <data name="Deskew" xml:space="preserve">
     <value>Schräglagenkorrektur</value>
@@ -700,7 +700,7 @@
     <value>Doppelseiten umdrehen</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Rückseite von Duplex-Seiten spiegeln</value>
+    <value>Rückseite von Duplex-Seiten um 180° drehen</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Wia Version:</value>

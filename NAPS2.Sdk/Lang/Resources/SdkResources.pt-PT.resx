@@ -85,6 +85,6 @@
     <value>O processo de trabalho falhou. Analise o visualizador de eventos Windows,</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>Digitalizador desconhecido</value>
   </data>
 </root>

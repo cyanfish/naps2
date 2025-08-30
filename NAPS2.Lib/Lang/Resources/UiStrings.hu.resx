@@ -874,7 +874,7 @@
     <value>Szerkesztés...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>Szerkesztés a következővel: {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
     <value>Szerkesztés...</value>
