@@ -174,10 +174,26 @@ internal class RemotePostProcessor : IRemotePostProcessor
         if (!data.Barcode.IsDetected)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
-            data = data with
+            try
             {
-                Barcode = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
-            };
+                data = data with
+                {
+                    Barcode = DetectBarcode(image, options.BarcodeDetectionOptions)
+                };
+            }
+            catch (FileNotFoundException ex)
+            {
+                if (data.Barcode == Barcode.NoDetection)
+                {
+                    // If we don't want a barcode we can ignore this
+                    _logger.LogError(ex, "ZXing library not found. But Barcode detection is not enabled anyway.");
+                }
+                else
+                {
+                    // If we want a barcode we should throw
+                    throw;
+                }
+            }
         }
         if (options.ThumbnailSize.HasValue)
         {
@@ -191,6 +207,12 @@ internal class RemotePostProcessor : IRemotePostProcessor
             };
         }
         processedImage = processedImage.WithPostProcessingData(data, true);
+    }
+
+    // Do the barcode detection
+    private static Barcode DetectBarcode(IMemoryImage image, BarcodeDetectionOptions options)
+    {
+        return BarcodeDetector.Detect(image, options);
     }
 
     private string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
