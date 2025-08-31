@@ -136,7 +136,8 @@ internal class SaneScanDriver : IScanDriver
         }
         if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex) ||
             controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex) ||
-            controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex))
+            controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex) ||
+            controller.TrySet(SaneOptionNames.DUPLEX, true))
         {
             duplex = GetPerSourceCaps(controller);
         }
