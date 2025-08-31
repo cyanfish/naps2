@@ -39,10 +39,22 @@ internal class SaneOption
             SaneConstraintType.StringList, stringList.ToList(), null, null);
     }
 
+    internal static SaneOption CreateWordListForTesting(int index, string name, double[] wordList)
+    {
+        return new SaneOption(index, name, "", "", SaneValueType.Int, SaneUnit.None, 0, SaneCapabilities.SoftSelect,
+            SaneConstraintType.WordList, null, wordList.ToList(), null);
+    }
+
     internal static SaneOption CreateBooleanForTesting(int index, string name)
     {
         return new SaneOption(index, name, "", "", SaneValueType.Bool, SaneUnit.None, 0, SaneCapabilities.SoftSelect,
             SaneConstraintType.None, null, null, null);
+    }
+
+    internal static SaneOption CreateFixedForTesting(int index, string name, SaneRange range)
+    {
+        return new SaneOption(index, name, "", "", SaneValueType.Fixed, SaneUnit.Mm, 0, SaneCapabilities.SoftSelect,
+            SaneConstraintType.Range, null, null, range);
     }
 
     internal SaneOption(SaneOptionDescriptor descriptor, int index)

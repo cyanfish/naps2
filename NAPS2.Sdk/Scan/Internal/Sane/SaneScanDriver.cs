@@ -95,46 +95,7 @@ internal class SaneScanDriver : IScanDriver
                 _scanningContext.Logger.LogDebug("Opening SANE Device \"{ID}\" for caps", options.Device!.ID);
                 using var device = client.OpenDevice(options.Device.ID);
                 if (cancelToken.IsCancellationRequested) return new ScanCaps();
-
-                var controller = new SaneOptionController(device, _scanningContext.Logger);
-
-                PerSourceCaps? flatbed = null;
-                PerSourceCaps? feeder = null;
-                PerSourceCaps? duplex = null;
-
-                if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Flatbed))
-                {
-                    flatbed = GetPerSourceCaps(controller);
-                }
-                if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder))
-                {
-                    feeder = GetPerSourceCaps(controller);
-                }
-                if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex) ||
-                    controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex) ||
-                    controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex))
-                {
-                    duplex = GetPerSourceCaps(controller);
-                }
-
-                return new ScanCaps
-                {
-                    MetadataCaps = new MetadataCaps
-                    {
-                        DriverSubtype = GetBackend(options.Device)
-                    },
-                    PaperSourceCaps = flatbed != null || feeder != null || duplex != null
-                        ? new PaperSourceCaps
-                        {
-                            SupportsFlatbed = flatbed != null,
-                            SupportsFeeder = feeder != null,
-                            SupportsDuplex = duplex != null
-                        }
-                        : null,
-                    FlatbedCaps = flatbed,
-                    FeederCaps = feeder,
-                    DuplexCaps = duplex
-                };
+                return GetSaneCaps(device, GetBackend(options.Device));
             }
             catch (SaneException ex)
             {
@@ -157,6 +118,49 @@ internal class SaneScanDriver : IScanDriver
         });
     }
 
+    internal ScanCaps GetSaneCaps(ISaneDevice device, string backend)
+    {
+        var controller = new SaneOptionController(device, _scanningContext.Logger);
+
+        PerSourceCaps? flatbed = null;
+        PerSourceCaps? feeder = null;
+        PerSourceCaps? duplex = null;
+
+        if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Flatbed))
+        {
+            flatbed = GetPerSourceCaps(controller);
+        }
+        if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder))
+        {
+            feeder = GetPerSourceCaps(controller);
+        }
+        if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex) ||
+            controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex) ||
+            controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex))
+        {
+            duplex = GetPerSourceCaps(controller);
+        }
+
+        return new ScanCaps
+        {
+            MetadataCaps = new MetadataCaps
+            {
+                DriverSubtype = backend
+            },
+            PaperSourceCaps = flatbed != null || feeder != null || duplex != null
+                ? new PaperSourceCaps
+                {
+                    SupportsFlatbed = flatbed != null,
+                    SupportsFeeder = feeder != null,
+                    SupportsDuplex = duplex != null
+                }
+                : null,
+            FlatbedCaps = flatbed,
+            FeederCaps = feeder,
+            DuplexCaps = duplex
+        };
+    }
+
     private PerSourceCaps GetPerSourceCaps(SaneOptionController controller)
     {
         var resOpt = controller.GetOption(SaneOptionNames.RESOLUTION);
@@ -169,7 +173,12 @@ internal class SaneScanDriver : IScanDriver
                 : null;
 
         var scanAreaController = new SaneScanAreaController(controller);
-        var (minX, minY, maxX, maxY) = scanAreaController.GetBounds();
+        PageSize? scanArea = null;
+        if (scanAreaController.CanSetArea)
+        {
+            var (minX, minY, maxX, maxY) = scanAreaController.GetBounds();
+            scanArea = new PageSize((decimal) (maxX - minX), (decimal) (maxY - minY), PageSizeUnit.Millimetre);
+        }
 
         return new PerSourceCaps
         {
@@ -187,9 +196,7 @@ internal class SaneScanDriver : IScanDriver
             },
             PageSizeCaps = new PageSizeCaps
             {
-                ScanArea = scanAreaController.CanSetArea
-                    ? new PageSize((decimal) (maxX - minX), (decimal) (maxY - minY), PageSizeUnit.Millimetre)
-                    : null
+                ScanArea = scanArea
             }
         };
     }
