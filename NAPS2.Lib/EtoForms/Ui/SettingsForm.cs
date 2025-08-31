@@ -24,6 +24,7 @@ internal class SettingsForm : EtoDialogBase
     private readonly ActionCommand _emailSettingsCommand;
     private readonly ActionCommand _keyboardShortcutsCommand;
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
+    private readonly CheckBox _promptBeforeDeletePage = C.CheckBox(UiStrings.PromptBeforeDeletePage);
 
     public SettingsForm(Naps2Config config, DesktopSubFormController desktopSubFormController,
         DesktopFormProvider desktopFormProvider, IIconProvider iconProvider) : base(config)
@@ -99,7 +100,8 @@ internal class SettingsForm : EtoDialogBase
                     _keepSession,
                     PlatformCompat.System.SupportsSingleInstance
                         ? _singleInstance
-                        : C.None()
+                        : C.None(),
+                    _promptBeforeDeletePage
                 )
             ),
             // TODO: Probably only show these after we start adding tabs
@@ -138,6 +140,7 @@ internal class SettingsForm : EtoDialogBase
         UpdateCheckbox(_clearAfterSaving, c => c.DeleteAfterSaving);
         UpdateCheckbox(_keepSession, c => c.KeepSession);
         UpdateCheckbox(_singleInstance, c => c.SingleInstance);
+        UpdateCheckbox(_promptBeforeDeletePage, c => c.PromptBeforeDeletePage);
     }
 
     private void Save()
@@ -162,6 +165,7 @@ internal class SettingsForm : EtoDialogBase
         SetIfChanged(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
         SetIfChanged(c => c.KeepSession, _keepSession.IsChecked());
         SetIfChanged(c => c.SingleInstance, _singleInstance.IsChecked());
+        SetIfChanged(c => c.PromptBeforeDeletePage, _promptBeforeDeletePage.IsChecked());
         transact.Commit();
 
         _desktopFormProvider.DesktopForm.Invalidate();
