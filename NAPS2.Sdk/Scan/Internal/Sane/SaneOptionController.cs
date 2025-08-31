@@ -35,7 +35,7 @@ internal class SaneOptionController
         if (!_options.ContainsKey(name))
             return false;
         var opt = _options[name];
-        if (!opt.IsActive || !opt.IsSettable || opt.Type != SaneValueType.Bool)
+        if (!opt.IsSettable || opt.Type != SaneValueType.Bool)
             return false;
         try
         {
@@ -60,7 +60,7 @@ internal class SaneOptionController
         if (!_options.ContainsKey(name))
             return false;
         var opt = _options[name];
-        if (!opt.IsActive || !opt.IsSettable || opt.Type is not (SaneValueType.Int or SaneValueType.Fixed))
+        if (!opt.IsSettable || opt.Type is not (SaneValueType.Int or SaneValueType.Fixed))
             return false;
         try
         {
@@ -91,7 +91,7 @@ internal class SaneOptionController
         if (!_options.ContainsKey(name))
             return false;
         var opt = _options[name];
-        if (!opt.IsActive || !opt.IsSettable || opt.Type != SaneValueType.String)
+        if (!opt.IsSettable || opt.Type != SaneValueType.String)
             return false;
         try
         {
@@ -128,7 +128,7 @@ internal class SaneOptionController
         if (!_options.ContainsKey(name))
             return false;
         var opt = _options[name];
-        if (!opt.IsActive || opt.Type is not (SaneValueType.Int or SaneValueType.Fixed))
+        if (opt.Type is not (SaneValueType.Int or SaneValueType.Fixed))
             return false;
         try
         {
