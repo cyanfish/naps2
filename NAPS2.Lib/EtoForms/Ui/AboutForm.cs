@@ -2,7 +2,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
-using NAPS2.Remoting.Worker;
+using NAPS2.Scan;
 using NAPS2.Update;
 
 namespace NAPS2.EtoForms.Ui;
@@ -17,7 +17,7 @@ public class AboutForm : EtoDialogBase
     private readonly UpdateChecker _updateChecker;
     private readonly CheckBox _enableDebugLogging = C.CheckBox(UiStrings.EnableDebugLogging);
 
-    public AboutForm(Naps2Config config, IIconProvider iconProvider, UpdateChecker updateChecker)
+    public AboutForm(Naps2Config config, UpdateChecker updateChecker, ScanningContext scanningContext)
         : base(config)
     {
         Title = UiStrings.AboutFormTitle;
@@ -34,6 +34,8 @@ public class AboutForm : EtoDialogBase
         _enableDebugLogging.CheckedChanged += (_, _) =>
         {
             config.User.Set(c => c.EnableDebugLogging, _enableDebugLogging.IsChecked());
+            NLogConfig.EnvDebugLogging = _enableDebugLogging.IsChecked();
+            scanningContext.WorkerFactory?.RecreateSpareWorkers();
         };
 
         _updateChecker = updateChecker;

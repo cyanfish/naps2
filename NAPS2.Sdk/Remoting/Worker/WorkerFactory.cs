@@ -223,6 +223,19 @@ internal class WorkerFactory : IWorkerFactory
         return worker;
     }
 
+    public void RecreateSpareWorkers()
+    {
+        if (_workerQueues == null) return;
+        foreach (var queue in _workerQueues.Values)
+        {
+            if (queue.TryTake(out var worker))
+            {
+                worker.Stop().AssertNoAwait();
+                StartWorkerService(worker.ScanningContext, worker.Type, true);
+            }
+        }
+    }
+
     public void StopSpareWorkers()
     {
         if (_workerQueues == null) return;

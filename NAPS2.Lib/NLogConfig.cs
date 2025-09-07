@@ -44,6 +44,16 @@ public static class NLogConfig
         return new NLogLoggerFactory().CreateLogger("NAPS2");
     }
 
+    /// <summary>
+    /// The debug logging flag as stored in an environment variable. This is used by worker processes to propagate from
+    /// the parent process without needing to access the config directly.
+    /// </summary>
+    public static bool EnvDebugLogging
+    {
+        get => Environment.GetEnvironmentVariable("NAPS2_DEBUG_LOGGING") == "1";
+        set => Environment.SetEnvironmentVariable("NAPS2_DEBUG_LOGGING", value ? "1" : "0");
+    }
+
     private class CustomExceptionLayoutRenderer : ExceptionLayoutRenderer
     {
         protected override void AppendToString(StringBuilder sb, Exception ex)

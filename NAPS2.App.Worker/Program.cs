@@ -28,7 +28,7 @@ static class Program
         //
         // Thus the simplest solution is just to pull in a bit of code from NAPS2.Lib that has what we need
         // (pretty much only paths, logging, and the worker setup) and avoid using Autofac.
-        var logger = NLogConfig.CreateLogger(() => true);
+        var logger = NLogConfig.CreateLogger(() => NLogConfig.EnvDebugLogging);
         var messagePump = Win32MessagePump.Create();
         messagePump.Logger = logger;
         var scanningContext = new ScanningContext(new GdiImageContext());

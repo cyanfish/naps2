@@ -20,11 +20,14 @@ internal class WorkerContext : IDisposable
     internal WorkerContext(ScanningContext scanningContext, WorkerType workerType, WorkerServiceAdapter service,
         Process process)
     {
+        ScanningContext = scanningContext;
         _logger = scanningContext.Logger;
         Type = workerType;
         Service = service;
         Process = process;
     }
+    
+    public ScanningContext ScanningContext { get; }
 
     public WorkerType Type { get; }
 

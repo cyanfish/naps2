@@ -63,6 +63,7 @@ public class CommonModule : Module
         // Logging
         var lazyLogger = new LazyLogger(() =>
             NLogConfig.CreateLogger(() => config.Get(c => c.EnableDebugLogging)));
+        NLogConfig.EnvDebugLogging = config.Get(c => c.EnableDebugLogging);
         builder.RegisterInstance<ILogger>(lazyLogger);
 
         // Misc
