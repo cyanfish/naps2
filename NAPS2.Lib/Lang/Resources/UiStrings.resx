@@ -993,4 +993,7 @@
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Stop Scanner Sharing</value>
   </data>
+  <data name="UseExistingImages" xml:space="preserve">
+    <value>Use existing NAPS2 images</value>
+  </data>
 </root>

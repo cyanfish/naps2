@@ -103,6 +103,11 @@ public class DesktopController
         ShowUpdatePrompt();
     }
 
+    public UiImageList GetImages()
+    {
+        return _imageList;
+    }
+
     private void ShowDonationOrReviewPrompt()
     {
         // Show a review prompt after a month of using the Microsoft Store msix version

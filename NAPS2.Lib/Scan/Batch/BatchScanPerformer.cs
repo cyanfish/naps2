@@ -1,11 +1,14 @@
-﻿using System.Threading;
-using Eto.Forms;
+﻿using Eto.Forms;
 using NAPS2.EtoForms;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Ui;
+using NAPS2.Images;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
+using System;
+using System.Threading;
 
 namespace NAPS2.Scan.Batch;
 
@@ -18,11 +21,13 @@ public class BatchScanPerformer : IBatchScanPerformer
     private readonly Naps2Config _config;
     private readonly IProfileManager _profileManager;
     private readonly ThumbnailController _thumbnailController;
+    private readonly UiImageList _imageList;
 
     public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter,
         IOperationFactory operationFactory,
         IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
-        ThumbnailController thumbnailController)
+        ThumbnailController thumbnailController,
+        UiImageList imageList)
     {
         _scanPerformer = scanPerformer;
         _pdfExporter = pdfExporter;
@@ -31,13 +36,15 @@ public class BatchScanPerformer : IBatchScanPerformer
         _config = config;
         _profileManager = profileManager;
         _thumbnailController = thumbnailController;
+        _imageList = imageList;
     }
+        
 
     public async Task PerformBatchScan(BatchSettings settings, IFormBase batchForm,
         Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _formFactory, _config,
-            _profileManager, _thumbnailController, settings, progressCallback, cancelToken, batchForm, imageCallback);
+            _profileManager, _thumbnailController, settings, progressCallback, cancelToken, batchForm, imageCallback, _imageList);
         await state.Do();
     }
 
@@ -59,12 +66,13 @@ public class BatchScanPerformer : IBatchScanPerformer
         private ScanProfile _profile;
         private ScanParams _scanParams;
         private List<List<ProcessedImage>> _scans;
+        private UiImageList _imageList;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
             IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
             ThumbnailController thumbnailController, BatchSettings settings,
             Action<string> progressCallback, CancellationToken cancelToken, IFormBase batchForm,
-            Action<ProcessedImage> loadImageCallback)
+            Action<ProcessedImage> loadImageCallback, UiImageList imageList)
         {
             _scanPerformer = scanPerformer;
             _pdfExporter = pdfExporter;
@@ -77,6 +85,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             _cancelToken = cancelToken;
             _batchForm = batchForm;
             _loadImageCallback = loadImageCallback;
+            _imageList = imageList;
 
             _profile = _profileManager.Profiles.First(x => x.DisplayName == _settings.ProfileDisplayName);
             _scanParams = new ScanParams
@@ -129,7 +138,11 @@ public class BatchScanPerformer : IBatchScanPerformer
         {
             await Task.Run(async () =>
             {
-                if (_settings.ScanType == BatchScanType.Single)
+                if (_settings.ScanType == BatchScanType.UseExistingImages)
+                {
+                    _scans.Add(_imageList.Images.Select(x => x.GetClonedImage()).ToList());
+                }
+                else if (_settings.ScanType == BatchScanType.Single)
                 {
                     await InputOneScan(-1);
                 }

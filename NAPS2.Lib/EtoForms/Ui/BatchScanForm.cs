@@ -30,6 +30,7 @@ public class BatchScanForm : EtoDialogBase
     private readonly Button _start = new() { Text = UiStrings.Start };
     private readonly Button _cancel = new() { Text = UiStrings.Cancel };
     private readonly DropDownWidget<ScanProfile> _profile = new();
+    private readonly RadioButton _UseExistingImages;
     private readonly RadioButton _singleScan;
     private readonly RadioButton _multipleScansPrompt;
     private readonly RadioButton _multipleScansDelay;
@@ -63,6 +64,7 @@ public class BatchScanForm : EtoDialogBase
         _batchScanPerformer = batchScanPerformer;
         _errorOutput = errorOutput;
         _singleScan = new RadioButton { Text = UiStrings.SingleScan };
+        _UseExistingImages = new RadioButton(_singleScan) { Text = UiStrings.UseExistingImages };
         _multipleScansPrompt = new RadioButton(_singleScan) { Text = UiStrings.MultipleScansPrompt };
         _multipleScansDelay = new RadioButton(_singleScan) { Text = UiStrings.MultipleScansDelay };
         _load = new RadioButton { Text = UiStrings.LoadIn };
@@ -76,9 +78,12 @@ public class BatchScanForm : EtoDialogBase
 
         _start.Click += Start;
         _cancel.Click += Cancel;
+        _UseExistingImages.CheckedChanged += UpdateExisting;
         _multipleScansDelay.CheckedChanged += UpdateVisibility;
         _saveToSingleFile.CheckedChanged += UpdateVisibility;
+        _saveToSingleFile.CheckedChanged += UpdateExisting;
         _saveToMultipleFiles.CheckedChanged += UpdateVisibility;
+        _saveToMultipleFiles.CheckedChanged += UpdateExisting; 
 
         _userTransact = Config.User.BeginTransaction();
         _transactionConfig = Config.WithTransaction(_userTransact);
@@ -100,7 +105,21 @@ public class BatchScanForm : EtoDialogBase
         _delayVis.IsVisible = _multipleScansDelay.Checked;
         _multiVis.IsVisible = _saveToMultipleFiles.Checked;
         _fileVis.IsVisible = _saveToSingleFile.Checked || _saveToMultipleFiles.Checked;
+
         LayoutController.Invalidate();
+    }
+
+    private void UpdateExisting(object? sender, EventArgs e)
+    {
+        if (_UseExistingImages.Checked)
+        {
+            _load.Enabled = false;
+            _load.Checked = false;
+        }
+        else
+        {
+            _load.Enabled = true;
+        }
     }
 
     public Action<ProcessedImage> ImageCallback { get; set; } = null!;
@@ -129,12 +148,14 @@ public class BatchScanForm : EtoDialogBase
             L.GroupBox(
                 UiStrings.ScanConfig,
                 L.Column(
+                    _UseExistingImages,
                     C.Label(UiStrings.ProfileLabel),
                     L.Row(
                         _profile.AsControl().Scale().NaturalWidth(100),
                         C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(30),
                         C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(30)
                     ),
+                    
                     _singleScan,
                     _multipleScansPrompt,
                     _multipleScansDelay,
@@ -172,6 +193,16 @@ public class BatchScanForm : EtoDialogBase
     {
         UpdateProfiles();
 
+        _UseExistingImages.Checked = _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.UseExistingImages;
+        if (_UseExistingImages.Checked)
+        {
+            _load.Enabled = false;
+            _load.Checked = false;
+        }
+        else
+        {
+            _load.Enabled = true;
+        }
         _singleScan.Checked = _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.Single;
         _multipleScansPrompt.Checked =
             _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithPrompt;
@@ -195,6 +226,7 @@ public class BatchScanForm : EtoDialogBase
         _separateByPatchT.Checked = _transactionConfig.Get(c => c.BatchSettings.SaveSeparator) == SaveSeparator.PatchT;
 
         _filePath.Text = _transactionConfig.Get(c => c.BatchSettings.SavePath);
+
     }
 
     private bool ValidateSettings()
@@ -212,7 +244,10 @@ public class BatchScanForm : EtoDialogBase
             ? BatchScanType.MultipleWithPrompt
             : _multipleScansDelay.Checked
                 ? BatchScanType.MultipleWithDelay
+                : _UseExistingImages.Checked ? BatchScanType.UseExistingImages
                 : BatchScanType.Single);
+
+
 
         if (_multipleScansDelay.Checked)
         {
@@ -330,7 +365,7 @@ public class BatchScanForm : EtoDialogBase
     {
         var controls = new Control[]
         {
-            _profile.AsControl(), _singleScan, _multipleScansPrompt, _multipleScansDelay, _numberOfScans,
+            _profile.AsControl(), _UseExistingImages, _singleScan, _multipleScansPrompt, _multipleScansDelay, _numberOfScans,
             _timeBetweenScans, _load, _saveToSingleFile, _saveToMultipleFiles, _filePerScan, _filePerPage,
             _separateByPatchT, _moreInfo
         };
