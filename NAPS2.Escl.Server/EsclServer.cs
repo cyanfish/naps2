@@ -120,10 +120,14 @@ public class EsclServer : IEsclServer
                 .WithMode(HttpListenerMode.EmbedIO)
                 .WithUrlPrefix(url)
                 .WithCertificate((tls ? Certificate : null)!))
-            .HandleUnhandledException(UnhandledServerException)
-            .WithWebApi("/eSCL",
-                m => m.WithController(() =>
-                    new EsclApiController(deviceCtx.Config, deviceCtx.ServerState, SecurityPolicy, Logger)));
+            .HandleUnhandledException(UnhandledServerException);
+        if (SecurityPolicy.HasFlag(EsclSecurityPolicy.ServerAllowAnyOrigin))
+        {
+            server.WithCors();
+        }
+        server.WithWebApi("/eSCL",
+            m => m.WithController(() =>
+                new EsclApiController(deviceCtx.Config, deviceCtx.ServerState, SecurityPolicy, Logger)));
         await server.StartAsync(cancelToken);
     }
 
