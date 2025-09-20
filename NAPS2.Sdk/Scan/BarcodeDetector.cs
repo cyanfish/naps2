@@ -10,7 +10,7 @@ namespace NAPS2.Scan;
 /// </summary>
 internal static class BarcodeDetector
 {
-    private static readonly BarcodeFormat PATCH_T_FORMAT = BarcodeFormat.CODE_39;
+    private static readonly ZXing.BarcodeFormat PATCH_T_FORMAT = ZXing.BarcodeFormat.CODE_39;
 
     public static Barcode Detect(IMemoryImage image, BarcodeDetectionOptions options)
     {
@@ -20,11 +20,39 @@ internal static class BarcodeDetector
             return Barcode.NoDetection;
         }
 
-        var zxingOptions = options.ZXingOptions ?? new DecodingOptions
+        // Create a ZXing DecodingOptions object based on the provided options.
+        var zxingOptions = new DecodingOptions
         {
             TryHarder = true,
-            PossibleFormats = options.PatchTOnly ? [PATCH_T_FORMAT] : null
+            PureBarcode = options.PureBarcode,
+            CharacterSet = options.CharacterSet,
+            UseCode39ExtendedMode = options.UseCode39ExtendedMode,
+            UseCode39RelaxedExtendedMode = options.UseCode39RelaxedExtendedMode,
+            AssumeCode39CheckDigit = options.AssumeCode39CheckDigit,
+            ReturnCodabarStartEnd = options.ReturnCodabarStartEnd,
+            AssumeGS1 = options.AssumeGS1,
+            AssumeMSICheckDigit = options.AssumeMSICheckDigit,
+            AllowedLengths = options.AllowedLengths,
+            AllowedEANExtensions = options.AllowedEANExtensions
         };
+        if (options.PatchTOnly)
+        {
+            zxingOptions.PossibleFormats ??= [];
+            zxingOptions.PossibleFormats = [PATCH_T_FORMAT];
+        }
+        else
+        {
+            // map the PossibleFormats bitfield to the matching ZXing.BarcodeFormat's
+            foreach (ZXing.BarcodeFormat format in Enum.GetValues(typeof(ZXing.BarcodeFormat)))
+            {
+                if ((((int) options.PossibleFormats) & (int) format) > 0)
+                {
+                    zxingOptions.PossibleFormats ??= [];
+                    zxingOptions.PossibleFormats.Add(format);
+                }
+            }
+        }
+ 
         var reader = new BarcodeReader<IMemoryImage>(x => new MemoryImageLuminanceSource(x))
         {
              Options = zxingOptions
