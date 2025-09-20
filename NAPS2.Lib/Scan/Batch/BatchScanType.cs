@@ -2,6 +2,7 @@
 
 public enum BatchScanType
 {
+    UseExistingImages,
     Single,
     MultipleWithPrompt,
     MultipleWithDelay
