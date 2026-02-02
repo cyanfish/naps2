@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6;net8;net8-macos</TargetFrameworks>
+        <TargetFrameworks>net6;net8;net9-macos</TargetFrameworks>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <CheckEolTargetFramework>false</CheckEolTargetFramework>
@@ -17,14 +17,14 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="Eto.Platform.Mac64" Version="2.8.3" Condition="'$(TargetFramework)' != 'net8-macos'" />
+        <PackageReference Include="Eto.Platform.Mac64" Version="2.8.3" Condition="'$(TargetFramework)' != 'net9-macos'" />
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)' != 'net8-macos'">
+    <PropertyGroup Condition="'$(TargetFramework)' != 'net9-macos'">
         <DefineConstants>MONOMAC</DefineConstants>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' != 'net8-macos'">
+    <ItemGroup Condition="'$(TargetFramework)' != 'net9-macos'">
         <Using Include="MonoMac.AppKit" />
         <Using Include="MonoMac.CoreGraphics" />
         <Using Include="MonoMac.Foundation" />
@@ -32,7 +32,7 @@
         <Using Include="MonoMac.MobileCoreServices" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net8-macos'">
+    <ItemGroup Condition="'$(TargetFramework)' == 'net9-macos'">
         <Using Include="AppKit" />
         <Using Include="CoreGraphics" />
         <Using Include="Foundation" />
