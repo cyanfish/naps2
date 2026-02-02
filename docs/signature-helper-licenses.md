@@ -4,7 +4,13 @@ This document provides a comprehensive analysis of all licenses for components b
 
 ## Summary
 
-The NAPS2 signature helper is a standalone executable that bundles several open-source components. All bundled components use permissive licenses (MIT, Apache 2.0, BSD) that are compatible with NAPS2's GPLv2 license.
+The NAPS2 signature helper is a standalone executable that bundles several open-source components. All bundled components use permissive licenses (MIT, Apache 2.0, BSD, PSF) that are compatible with NAPS2's GPLv2 license.
+
+**Key Points:**
+- The executable is compiled using Nuitka (Apache 2.0), which converts Python code to C
+- Nuitka itself is NOT included in the executable - only the compiled application code
+- The Python runtime (CPython) IS included and uses the PSF License
+- All dependencies use permissive licenses compatible with GPLv2
 
 ## License Compatibility
 
@@ -86,12 +92,33 @@ The NAPS2 signature helper is a standalone executable that bundles several open-
 - **PyPI**: https://pypi.org/project/uritools/
 - **Compatibility**: ✅ MIT is compatible with GPLv2
 
-### 11. Nuitka (Build Tool Only)
+### 11. Nuitka (Compiler)
 - **License**: Apache License 2.0
 - **Copyright**: Copyright (c) Kay Hayen and Nuitka Contributors
 - **Source**: https://github.com/Nuitka/Nuitka
-- **Note**: Nuitka is only used as a build tool to compile Python to C. The resulting executable does not contain Nuitka code, only the compiled application code and Python runtime.
+- **PyPI**: https://pypi.org/project/Nuitka/
+- **Purpose**: Python-to-C compiler used to create standalone executables
+- **What's Included in the Executable**:
+  - ✅ Compiled application code (our Python scripts converted to C)
+  - ✅ Python runtime (CPython, PSF License - compatible with GPLv2)
+  - ✅ Application dependencies (listed above)
+  - ❌ Nuitka compiler code itself (NOT included in the executable)
+- **License Implications**:
+  - Nuitka is a build tool, similar to GCC or Clang
+  - The Apache 2.0 license applies to Nuitka's compiler code
+  - Executables created by Nuitka do NOT contain Nuitka code
+  - The executable's license is determined by the application code and bundled dependencies
+  - Nuitka explicitly allows commercial and closed-source use of compiled executables
 - **Compatibility**: ✅ Apache 2.0 is compatible with GPLv2
+- **Reference**: [Nuitka License FAQ](https://nuitka.net/doc/user-manual.html#license)
+
+### 12. Python Runtime (CPython)
+- **License**: Python Software Foundation License (PSF License)
+- **Copyright**: Copyright (c) 2001-2025 Python Software Foundation
+- **Source**: https://www.python.org/
+- **Note**: The Python runtime is embedded in the Nuitka-compiled executable
+- **Compatibility**: ✅ PSF License is compatible with GPLv2
+- **Reference**: [Python License](https://docs.python.org/3/license.html)
 
 ## License Obligations
 
