@@ -37,33 +37,55 @@ public class SignatureFieldEmbedder
         }
 
         // Find Python executable
+        Console.WriteLine("=== Starting signature field embedding ===");
+        Console.WriteLine($"Input PDF: {inputPdfPath}");
+        Console.WriteLine($"Output PDF: {outputPdfPath}");
+        Console.WriteLine($"Number of fields to embed: {fields.Count}");
+        
+        _logger.LogInformation("=== Starting signature field embedding ===");
+        _logger.LogInformation("Input PDF: {InputPath}", inputPdfPath);
+        _logger.LogInformation("Output PDF: {OutputPath}", outputPdfPath);
+        _logger.LogInformation("Number of fields to embed: {FieldCount}", fields.Count);
+        
         var pythonExe = FindPythonExecutable();
         if (pythonExe == null)
         {
+            Console.WriteLine("ERROR: Python executable not found");
             _logger.LogWarning("Python executable not found. Signature fields will not be embedded.");
             File.Copy(inputPdfPath, outputPdfPath, true);
             return false;
         }
+        Console.WriteLine($"Using Python: {pythonExe}");
+        _logger.LogInformation("Using Python: {PythonExe}", pythonExe);
 
         // Find the script path
         var scriptPath = FindScriptPath();
         if (scriptPath == null || !File.Exists(scriptPath))
         {
+            Console.WriteLine($"ERROR: Script not found at: {scriptPath}");
             _logger.LogWarning("Signature field embedding script not found at: {ScriptPath}", scriptPath);
             File.Copy(inputPdfPath, outputPdfPath, true);
             return false;
         }
+        Console.WriteLine($"Using script: {scriptPath}");
+        _logger.LogInformation("Using script: {ScriptPath}", scriptPath);
 
         // Convert fields to JSON format expected by Python script
         var fieldsJson = ConvertFieldsToJson(fields, pageHeights);
+        Console.WriteLine($"Fields JSON: {fieldsJson}");
+        _logger.LogInformation("Fields JSON: {FieldsJson}", fieldsJson);
 
         try
         {
             // Invoke Python script
+            var arguments = $"\"{scriptPath}\" \"{inputPdfPath}\" \"{outputPdfPath}\" \"{fieldsJson.Replace("\"", "\\\"")}\"";
+            Console.WriteLine($"Executing: {pythonExe} {arguments}");
+            _logger.LogInformation("Executing: {PythonExe} {Arguments}", pythonExe, arguments);
+            
             var startInfo = new ProcessStartInfo
             {
                 FileName = pythonExe,
-                Arguments = $"\"{scriptPath}\" \"{inputPdfPath}\" \"{outputPdfPath}\" \"{fieldsJson.Replace("\"", "\\\"")}\"",
+                Arguments = arguments,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -82,21 +104,36 @@ public class SignatureFieldEmbedder
             var error = process.StandardError.ReadToEnd();
             process.WaitForExit();
 
+            Console.WriteLine($"Python process exited with code: {process.ExitCode}");
+            _logger.LogInformation("Python process exited with code: {ExitCode}", process.ExitCode);
+            if (!string.IsNullOrEmpty(output))
+            {
+                Console.WriteLine($"Python stdout: {output}");
+                _logger.LogInformation("Python stdout: {Output}", output);
+            }
+            if (!string.IsNullOrEmpty(error))
+            {
+                Console.WriteLine($"Python stderr: {error}");
+                _logger.LogWarning("Python stderr: {Error}", error);
+            }
+
             if (process.ExitCode == 0)
             {
-                _logger.LogInformation("Signature fields embedded successfully: {Output}", output);
+                Console.WriteLine("Signature fields embedded successfully!");
+                _logger.LogInformation("Signature fields embedded successfully");
                 return true;
             }
             else if (process.ExitCode == 2)
             {
+                Console.WriteLine("ERROR: pyHanko not installed. Install with: pip install pyHanko");
                 _logger.LogWarning("pyHanko not installed. Signature fields will not be embedded. Install with: pip install pyHanko");
                 File.Copy(inputPdfPath, outputPdfPath, true);
                 return false;
             }
             else
             {
-                _logger.LogError("Failed to embed signature fields. Exit code: {ExitCode}, Error: {Error}", 
-                    process.ExitCode, error);
+                Console.WriteLine($"ERROR: Failed to embed signature fields. Exit code: {process.ExitCode}");
+                _logger.LogError("Failed to embed signature fields. Exit code: {ExitCode}", process.ExitCode);
                 File.Copy(inputPdfPath, outputPdfPath, true);
                 return false;
             }
@@ -111,7 +148,24 @@ public class SignatureFieldEmbedder
 
     private string? FindPythonExecutable()
     {
-        // Try common Python executable names
+        // First, try to find Python in a virtual environment relative to the script
+        var scriptPath = FindScriptPath();
+        if (scriptPath != null)
+        {
+            var scriptDir = Path.GetDirectoryName(scriptPath);
+            if (scriptDir != null)
+            {
+                var repoRoot = Path.GetFullPath(Path.Combine(scriptDir, ".."));
+                var venvPython = Path.Combine(repoRoot, ".venv", "bin", "python");
+                if (File.Exists(venvPython))
+                {
+                    _logger.LogInformation("Found Python in virtual environment: {VenvPython}", venvPython);
+                    return venvPython;
+                }
+            }
+        }
+        
+        // Try common Python executable names in PATH
         var pythonNames = new[] { "python3", "python", "py" };
         
         foreach (var name in pythonNames)
@@ -151,6 +205,8 @@ public class SignatureFieldEmbedder
     {
         // Try to find the script relative to the application directory
         var appDir = AppDomain.CurrentDomain.BaseDirectory;
+        Console.WriteLine($"App directory: {appDir}");
+        
         var possiblePaths = new[]
         {
             Path.Combine(appDir, "scripts", "embed_signature_fields.py"),
@@ -158,17 +214,23 @@ public class SignatureFieldEmbedder
             Path.Combine(appDir, "..", "..", "scripts", "embed_signature_fields.py"),
             Path.Combine(appDir, "..", "..", "..", "scripts", "embed_signature_fields.py"),
             Path.Combine(appDir, "..", "..", "..", "..", "scripts", "embed_signature_fields.py"),
+            Path.Combine(appDir, "..", "..", "..", "..", "..", "scripts", "embed_signature_fields.py"),
+            Path.Combine(appDir, "..", "..", "..", "..", "..", "..", "scripts", "embed_signature_fields.py"),
+            Path.Combine(appDir, "..", "..", "..", "..", "..", "..", "..", "scripts", "embed_signature_fields.py"),
         };
 
         foreach (var path in possiblePaths)
         {
             var fullPath = Path.GetFullPath(path);
+            Console.WriteLine($"Checking: {fullPath}");
             if (File.Exists(fullPath))
             {
+                Console.WriteLine($"Found script at: {fullPath}");
                 return fullPath;
             }
         }
 
+        Console.WriteLine("Script not found in any of the checked paths");
         return null;
     }
 

@@ -201,6 +201,7 @@ public class PdfExporter
     private bool EmbedSignatureFields(OutputPathOrStream output, List<PageExportState> allPages,
         PdfExportParams exportParams, ProgressHandler progress)
     {
+        Console.WriteLine("=== EmbedSignatureFields called ===");
         if (progress.IsCancellationRequested) return false;
 
         // Collect all signature fields from all pages
@@ -212,6 +213,8 @@ public class PdfExporter
             var state = allPages[i];
             var signatureFields = state.Image.PostProcessingData.SignatureFields;
             
+            Console.WriteLine($"Page {i}: SignatureFields = {signatureFields?.Count ?? 0}");
+            
             if (signatureFields != null && signatureFields.Count > 0)
             {
                 // Get page height from the PDF page
@@ -220,6 +223,7 @@ public class PdfExporter
 
                 foreach (var field in signatureFields)
                 {
+                    Console.WriteLine($"  Field: {field.FieldName} at ({field.NormalizedX}, {field.NormalizedY}) size ({field.NormalizedWidth}, {field.NormalizedHeight})");
                     fieldsToEmbed.Add((i, field, pageHeight));
                 }
             }
@@ -228,8 +232,11 @@ public class PdfExporter
         // If no fields to embed, we're done
         if (fieldsToEmbed.Count == 0)
         {
+            Console.WriteLine("No signature fields to embed");
             return true;
         }
+        
+        Console.WriteLine($"Total fields to embed: {fieldsToEmbed.Count}");
 
         // We need to work with a file, so if output is a stream, save to temp file first
         string? tempInputPath = null;
@@ -245,11 +252,13 @@ public class PdfExporter
             {
                 // Save stream to temp file
                 tempInputPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ".pdf");
+                Console.WriteLine($"Saving stream to temp file: {tempInputPath}");
                 using (var fileStream = new FileStream(tempInputPath, FileMode.Create, FileAccess.Write))
                 {
                     output.Stream!.Position = 0;
                     output.Stream.CopyTo(fileStream);
                 }
+                Console.WriteLine($"Stream saved, file size: {new FileInfo(tempInputPath).Length} bytes");
                 inputPath = tempInputPath;
 
                 tempOutputPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ".pdf");

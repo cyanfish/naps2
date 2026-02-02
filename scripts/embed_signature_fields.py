@@ -54,27 +54,88 @@ def embed_signature_fields(input_pdf, output_pdf, fields_data):
         fields_data: List of field dictionaries
     """
     from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
-    from pyhanko.sign.fields import SigFieldSpec
+    from pyhanko.sign.fields import SigFieldSpec, append_signature_field
+    from pyhanko.pdf_utils import generic
+    from pyhanko.pdf_utils.content import RawContent
+    from pyhanko.pdf_utils.layout import BoxConstraints
+    from pyhanko.pdf_utils.generic import pdf_name
     
     with open(input_pdf, 'rb') as inf:
         writer = IncrementalPdfFileWriter(inf)
         
         for field in fields_data:
-            # Create signature field specification
+            # Create signature field specification with empty appearance
             # pyHanko uses bottom-left origin, coordinates in PDF points
+            width = field['width']
+            height = field['height']
+            
             spec = SigFieldSpec(
                 sig_field_name=field['name'],
                 on_page=field['page'],
                 box=(
                     field['x'],
                     field['y'],
-                    field['x'] + field['width'],
-                    field['y'] + field['height']
-                )
+                    field['x'] + width,
+                    field['y'] + height
+                ),
+                empty_field_appearance=False  # We'll create our own appearance
             )
             
             # Add the field to the PDF
-            writer.add_sigfield(spec)
+            append_signature_field(writer, spec)
+            
+            # Now find the field we just added and enhance its appearance
+            # Get the field reference from the AcroForm
+            fields_array = writer.root['/AcroForm']['/Fields']
+            sig_field_ref = fields_array[-1]  # The field we just added
+            sig_field = sig_field_ref.get_object()
+            
+            # Create a custom appearance stream with text and border
+            appearance_cmds = [
+                b'q',  # Save graphics state
+                # Draw light gray background
+                b'0.95 0.95 0.95 rg',
+                b'0 0 %g %g re f' % (width, height),
+                # Draw border
+                b'0.5 w',  # Line width
+                b'0.3 0.3 0.3 RG',  # Dark gray border
+                b'0 0 %g %g re S' % (width, height),
+                # Add text "Sign here"
+                b'BT',  # Begin text
+                b'/Helvetica 12 Tf',  # Font and size
+                b'0.3 0.3 0.3 rg',  # Text color (dark gray)
+                b'%g %g Td' % (10, height / 2 - 6),  # Position text
+                b'(Sign here) Tj',  # Draw text
+                b'ET',  # End text
+                b'Q',  # Restore graphics state
+            ]
+            
+            # Create the appearance stream
+            # Build the form XObject manually since RawContent expects a specific resource format
+            ap_stream = generic.StreamObject(stream_data=b' '.join(appearance_cmds))
+            ap_stream[pdf_name('/Type')] = pdf_name('/XObject')
+            ap_stream[pdf_name('/Subtype')] = pdf_name('/Form')
+            ap_stream[pdf_name('/BBox')] = generic.ArrayObject([
+                generic.NumberObject(0),
+                generic.NumberObject(0),
+                generic.NumberObject(width),
+                generic.NumberObject(height)
+            ])
+            ap_stream[pdf_name('/Resources')] = generic.DictionaryObject({
+                pdf_name('/Font'): generic.DictionaryObject({
+                    pdf_name('/Helvetica'): generic.DictionaryObject({
+                        pdf_name('/Type'): pdf_name('/Font'),
+                        pdf_name('/Subtype'): pdf_name('/Type1'),
+                        pdf_name('/BaseFont'): pdf_name('/Helvetica'),
+                    })
+                })
+            })
+            
+            # Update the appearance dictionary
+            if pdf_name('/AP') not in sig_field:
+                sig_field[pdf_name('/AP')] = generic.DictionaryObject()
+            sig_field[pdf_name('/AP')][pdf_name('/N')] = writer.add_object(ap_stream)
+            writer.update_container(sig_field)
         
         # Write the modified PDF
         with open(output_pdf, 'wb') as outf:

@@ -46,39 +46,8 @@ public class SignatureFieldForm : UnaryImageFormBase
 
     protected override void Apply()
     {
-        if (!_hasPlacement)
-        {
-            // No field placed, nothing to do
-            return;
-        }
-
-        // Create signature field placement
-        var fieldPlacement = SignatureFieldPlacement.FromPixels(
-            $"Signature_{Guid.NewGuid():N}",
-            _realX,
-            _realY,
-            _realW,
-            _realH,
-            RealImageWidth,
-            RealImageHeight);
-
-        // Get the current processed image
-        using var processedImage = Image.GetClonedImage();
-        
-        // Update the post-processing data with the signature field
-        var currentFields = processedImage.PostProcessingData.SignatureFields ?? new List<SignatureFieldPlacement>();
-        var updatedFields = new List<SignatureFieldPlacement>(currentFields) { fieldPlacement };
-
-        var updatedPostProcessingData = processedImage.PostProcessingData with
-        {
-            SignatureFields = updatedFields
-        };
-
-        // Create updated processed image
-        var updatedProcessedImage = processedImage.WithPostProcessingData(updatedPostProcessingData, false);
-        
-        // Replace the internal image in the UiImage
-        Image.ReplaceInternalImage(updatedProcessedImage);
+        // Fields are now saved immediately on mouse up, so nothing to do here
+        // Just close the form
     }
 
     protected override void Revert()
@@ -112,9 +81,55 @@ public class SignatureFieldForm : UnaryImageFormBase
             _realW = _fieldW * RealImageWidth;
             _realH = _fieldH * RealImageHeight;
             _hasPlacement = true;
+            
+            // Immediately save the field to PostProcessingData
+            SaveCurrentField();
+            
+            // Reset for next field placement
+            _fieldX = _fieldY = _fieldW = _fieldH = 0;
+            _realX = _realY = _realW = _realH = 0;
+            _hasPlacement = false;
         }
         _isDragging = false;
         Overlay.Invalidate();
+    }
+    
+    private void SaveCurrentField()
+    {
+        if (!_hasPlacement)
+        {
+            return;
+        }
+        
+        // Create signature field placement
+        var fieldPlacement = SignatureFieldPlacement.FromPixels(
+            $"Signature_{Guid.NewGuid():N}",
+            _realX,
+            _realY,
+            _realW,
+            _realH,
+            RealImageWidth,
+            RealImageHeight);
+
+        // Get the current processed image
+        using var processedImage = Image.GetClonedImage();
+        
+        // Update the post-processing data with the signature field
+        var currentFields = processedImage.PostProcessingData.SignatureFields ?? new List<SignatureFieldPlacement>();
+        var updatedFields = new List<SignatureFieldPlacement>(currentFields) { fieldPlacement };
+
+        var updatedPostProcessingData = processedImage.PostProcessingData with
+        {
+            SignatureFields = updatedFields
+        };
+
+        // Create updated processed image
+        var updatedProcessedImage = processedImage.WithPostProcessingData(updatedPostProcessingData, false);
+        
+        // Replace the internal image in the UiImage
+        Image.ReplaceInternalImage(updatedProcessedImage);
+        
+        Console.WriteLine($"Saved signature field: {fieldPlacement.FieldName} at ({fieldPlacement.NormalizedX}, {fieldPlacement.NormalizedY})");
     }
 
     private void UpdateFieldPlacement(PointF mousePos)
