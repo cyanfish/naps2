@@ -91,6 +91,7 @@ public class SignatureFieldForm : UnaryImageFormBase
             _hasPlacement = false;
         }
         _isDragging = false;
+        // Invalidate overlay to redraw with the saved field in green
         Overlay.Invalidate();
     }
     

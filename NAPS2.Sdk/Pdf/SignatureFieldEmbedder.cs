@@ -23,11 +23,11 @@ public class SignatureFieldEmbedder
     /// <param name="inputPdfPath">Path to the input PDF file</param>
     /// <param name="outputPdfPath">Path to the output PDF file</param>
     /// <param name="fields">List of signature field placements with page dimensions</param>
-    /// <param name="pageHeights">Dictionary mapping page index to page height in PDF points</param>
+    /// <param name="pageDimensions">Dictionary mapping page index to page dimensions (width, height) in PDF points</param>
     /// <returns>True if successful, false otherwise</returns>
-    public bool EmbedFields(string inputPdfPath, string outputPdfPath, 
-        List<(int pageIndex, SignatureFieldPlacement field, double pageHeight)> fields,
-        Dictionary<int, double> pageHeights)
+    public bool EmbedFields(string inputPdfPath, string outputPdfPath,
+        List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight)> fields,
+        Dictionary<int, (double width, double height)> pageDimensions)
     {
         if (fields.Count == 0)
         {
@@ -71,7 +71,7 @@ public class SignatureFieldEmbedder
         _logger.LogInformation("Using script: {ScriptPath}", scriptPath);
 
         // Convert fields to JSON format expected by Python script
-        var fieldsJson = ConvertFieldsToJson(fields, pageHeights);
+        var fieldsJson = ConvertFieldsToJson(fields, pageDimensions);
         Console.WriteLine($"Fields JSON: {fieldsJson}");
         _logger.LogInformation("Fields JSON: {FieldsJson}", fieldsJson);
 
@@ -235,16 +235,17 @@ public class SignatureFieldEmbedder
     }
 
     private string ConvertFieldsToJson(
-        List<(int pageIndex, SignatureFieldPlacement field, double pageHeight)> fields,
-        Dictionary<int, double> pageHeights)
+        List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight)> fields,
+        Dictionary<int, (double width, double height)> pageDimensions)
     {
         var jsonFields = fields.Select(f =>
         {
             // Convert normalized coordinates to PDF points
             // PDF uses bottom-left origin, so we need to flip Y coordinate
+            var pageWidth = f.pageWidth;
             var pageHeight = f.pageHeight;
             var (pixelX, pixelY, pixelWidth, pixelHeight) = f.field.ToPixels(
-                (float)pageHeight, // Using page height as a proxy for width (will be scaled correctly)
+                (float)pageWidth,
                 (float)pageHeight);
 
             // In PDF coordinates (bottom-left origin)

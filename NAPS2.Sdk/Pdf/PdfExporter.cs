@@ -205,8 +205,8 @@ public class PdfExporter
         if (progress.IsCancellationRequested) return false;
 
         // Collect all signature fields from all pages
-        var fieldsToEmbed = new List<(int pageIndex, SignatureFieldPlacement field, double pageHeight)>();
-        var pageHeights = new Dictionary<int, double>();
+        var fieldsToEmbed = new List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight)>();
+        var pageDimensions = new Dictionary<int, (double width, double height)>();
 
         for (int i = 0; i < allPages.Count; i++)
         {
@@ -217,14 +217,15 @@ public class PdfExporter
             
             if (signatureFields != null && signatureFields.Count > 0)
             {
-                // Get page height from the PDF page
+                // Get page dimensions from the PDF page
+                double pageWidth = state.Page.Width;
                 double pageHeight = state.Page.Height;
-                pageHeights[i] = pageHeight;
+                pageDimensions[i] = (pageWidth, pageHeight);
 
                 foreach (var field in signatureFields)
                 {
                     Console.WriteLine($"  Field: {field.FieldName} at ({field.NormalizedX}, {field.NormalizedY}) size ({field.NormalizedWidth}, {field.NormalizedHeight})");
-                    fieldsToEmbed.Add((i, field, pageHeight));
+                    fieldsToEmbed.Add((i, field, pageWidth, pageHeight));
                 }
             }
         }
@@ -274,7 +275,7 @@ public class PdfExporter
 
             // Embed signature fields using Python/pyHanko
             var embedder = new SignatureFieldEmbedder(_logger);
-            var success = embedder.EmbedFields(inputPath, outputPath, fieldsToEmbed, pageHeights);
+            var success = embedder.EmbedFields(inputPath, outputPath, fieldsToEmbed, pageDimensions);
 
             if (success && File.Exists(outputPath))
             {
