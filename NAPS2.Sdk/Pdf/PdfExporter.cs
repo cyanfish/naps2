@@ -204,40 +204,34 @@ public class PdfExporter
         Console.WriteLine("=== EmbedSignatureFields called ===");
         if (progress.IsCancellationRequested) return false;
 
-        // Collect all signature fields from all pages
-        var fieldsToEmbed = new List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight)>();
-        var pageDimensions = new Dictionary<int, (double width, double height)>();
-
-        for (int i = 0; i < allPages.Count; i++)
+        // Collect all signature fields from all pages (without assuming PdfSharp page dimensions).
+        // For passthrough pages, PdfSharp's Page.Width/Height can remain at defaults unless OCR runs.
+        // We'll read the *actual* page dimensions from the generated PDF file instead.
+        var rawFields = new List<(int pageIndex, SignatureFieldPlacement field, double imageWidth, double imageHeight)>();
+        foreach (var state in allPages)
         {
-            var state = allPages[i];
             var signatureFields = state.Image.PostProcessingData.SignatureFields;
-            
-            Console.WriteLine($"Page {i}: SignatureFields = {signatureFields?.Count ?? 0}");
-            
-            if (signatureFields != null && signatureFields.Count > 0)
-            {
-                // Get page dimensions from the PDF page
-                double pageWidth = state.Page.Width;
-                double pageHeight = state.Page.Height;
-                pageDimensions[i] = (pageWidth, pageHeight);
+            Console.WriteLine($"Page {state.PageIndex}: SignatureFields = {signatureFields?.Count ?? 0}");
 
-                foreach (var field in signatureFields)
-                {
-                    Console.WriteLine($"  Field: {field.FieldName} at ({field.NormalizedX}, {field.NormalizedY}) size ({field.NormalizedWidth}, {field.NormalizedHeight})");
-                    fieldsToEmbed.Add((i, field, pageWidth, pageHeight));
-                }
+            if (signatureFields == null || signatureFields.Count == 0)
+            {
+                continue;
+            }
+
+            foreach (var field in signatureFields)
+            {
+                rawFields.Add((state.PageIndex, field, field.OriginalImageWidth, field.OriginalImageHeight));
             }
         }
 
         // If no fields to embed, we're done
-        if (fieldsToEmbed.Count == 0)
+        if (rawFields.Count == 0)
         {
             Console.WriteLine("No signature fields to embed");
             return true;
         }
-        
-        Console.WriteLine($"Total fields to embed: {fieldsToEmbed.Count}");
+
+        Console.WriteLine($"Total fields to embed: {rawFields.Count}");
 
         // We need to work with a file, so if output is a stream, save to temp file first
         string? tempInputPath = null;
@@ -272,6 +266,29 @@ public class PdfExporter
                 tempOutputPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ".pdf");
                 outputPath = tempOutputPath;
             }
+
+            // Read actual page dimensions from the PDF file that we're about to post-process.
+            // This avoids mismatches on passthrough pages where PdfSharp page dimensions may not be updated.
+            var pageDimensions = new Dictionary<int, (double width, double height)>();
+            var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
+            lock (PdfiumNativeLibrary.Instance)
+            {
+                using var doc = Pdfium.PdfDocument.Load(inputPath, password);
+                for (int pageIndex = 0; pageIndex < doc.PageCount; pageIndex++)
+                {
+                    using var page = doc.GetPage(pageIndex);
+                    pageDimensions[pageIndex] = (page.Width, page.Height);
+                }
+            }
+
+            var fieldsToEmbed = rawFields.Select(f =>
+            {
+                var (pageWidth, pageHeight) = pageDimensions[f.pageIndex];
+                Console.WriteLine($"  Field: {f.field.FieldName} at ({f.field.NormalizedX}, {f.field.NormalizedY}) size ({f.field.NormalizedWidth}, {f.field.NormalizedHeight})");
+                Console.WriteLine($"  Page dimensions (actual PDF): {pageWidth}x{pageHeight} points");
+                Console.WriteLine($"  Image dimensions: {f.imageWidth}x{f.imageHeight} pixels (from field)");
+                return (f.pageIndex, f.field, pageWidth, pageHeight, f.imageWidth, f.imageHeight);
+            }).ToList();
 
             // Embed signature fields using Python/pyHanko
             var embedder = new SignatureFieldEmbedder(_logger);

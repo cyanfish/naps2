@@ -9,7 +9,9 @@ public record SignatureFieldPlacement(
     float NormalizedX,
     float NormalizedY,
     float NormalizedWidth,
-    float NormalizedHeight)
+    float NormalizedHeight,
+    float OriginalImageWidth,
+    float OriginalImageHeight)
 {
     /// <summary>
     /// Creates a signature field placement from pixel coordinates on a page.
@@ -28,7 +30,9 @@ public record SignatureFieldPlacement(
             pixelX / pageWidth,
             pixelY / pageHeight,
             pixelWidth / pageWidth,
-            pixelHeight / pageHeight);
+            pixelHeight / pageHeight,
+            pageWidth,
+            pageHeight);
     }
 
     /// <summary>

@@ -52,6 +52,30 @@ public class SignatureFieldForm : UnaryImageFormBase
 
     protected override void Revert()
     {
+        // Undo last field (like Ctrl+Z)
+        using var processedImage = Image.GetClonedImage();
+        var currentFields = processedImage.PostProcessingData.SignatureFields;
+        
+        if (currentFields != null && currentFields.Count > 0)
+        {
+            // Remove the last field
+            var updatedFields = currentFields.Take(currentFields.Count - 1).ToList();
+            
+            var updatedPostProcessingData = processedImage.PostProcessingData with
+            {
+                SignatureFields = updatedFields.Count > 0 ? updatedFields : null
+            };
+            
+            // Create updated processed image
+            var updatedProcessedImage = processedImage.WithPostProcessingData(updatedPostProcessingData, false);
+            
+            // Replace the internal image in the UiImage
+            Image.ReplaceInternalImage(updatedProcessedImage);
+            
+            Console.WriteLine($"Reverted last signature field. Remaining fields: {updatedFields.Count}");
+        }
+        
+        // Also clear any in-progress field
         _fieldX = _fieldY = _fieldW = _fieldH = 0;
         _realX = _realY = _realW = _realH = 0;
         _hasPlacement = false;
@@ -101,6 +125,12 @@ public class SignatureFieldForm : UnaryImageFormBase
         {
             return;
         }
+        
+        Console.WriteLine($"SaveCurrentField DEBUG:");
+        Console.WriteLine($"  _realX={_realX}, _realY={_realY}, _realW={_realW}, _realH={_realH}");
+        Console.WriteLine($"  RealImageWidth={RealImageWidth}, RealImageHeight={RealImageHeight}");
+        Console.WriteLine($"  _overlayW={_overlayW}, _overlayH={_overlayH}");
+        Console.WriteLine($"  _fieldX={_fieldX}, _fieldY={_fieldY}, _fieldW={_fieldW}, _fieldH={_fieldH}");
         
         // Create signature field placement
         var fieldPlacement = SignatureFieldPlacement.FromPixels(
@@ -185,9 +215,15 @@ public class SignatureFieldForm : UnaryImageFormBase
 
         // Draw existing signature fields from post-processing data
         using var processedImage = Image.GetClonedImage();
+        var fieldCount = processedImage.PostProcessingData.SignatureFields?.Count ?? 0;
+        Console.WriteLine($"PaintOverlay: Drawing {fieldCount} existing fields");
+        
         if (processedImage.PostProcessingData.SignatureFields != null)
         {
-            var existingFieldPen = new Pen(Color.FromArgb(100, 0, 200, 0), BORDER_WIDTH);
+            // Use the SAME color as dragging so it's visible on Mac
+            var existingFieldPen = new Pen(_colorScheme.CropColor, BORDER_WIDTH * 2);
+            var fillColor = new Color(_colorScheme.CropColor, 0.3f);
+            
             foreach (var field in processedImage.PostProcessingData.SignatureFields)
             {
                 var (x, y, w, h) = field.ToPixels(RealImageWidth, RealImageHeight);
@@ -196,6 +232,11 @@ public class SignatureFieldForm : UnaryImageFormBase
                 var overlayW = (w / RealImageWidth) * _overlayW;
                 var overlayH = (h / RealImageHeight) * _overlayH;
                 
+                Console.WriteLine($"  Drawing field at overlay ({overlayX}, {overlayY}) size ({overlayW}, {overlayH})");
+                Console.WriteLine($"  Overlay bounds: L={_overlayL}, T={_overlayT}, W={_overlayW}, H={_overlayH}");
+                
+                // Draw fill first, then border (same as dragging)
+                e.Graphics.FillRectangle(fillColor, overlayX, overlayY, overlayW, overlayH);
                 e.Graphics.DrawRectangle(existingFieldPen, overlayX, overlayY, overlayW, overlayH);
             }
         }

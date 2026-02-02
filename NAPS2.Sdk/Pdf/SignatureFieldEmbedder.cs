@@ -26,7 +26,7 @@ public class SignatureFieldEmbedder
     /// <param name="pageDimensions">Dictionary mapping page index to page dimensions (width, height) in PDF points</param>
     /// <returns>True if successful, false otherwise</returns>
     public bool EmbedFields(string inputPdfPath, string outputPdfPath,
-        List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight)> fields,
+        List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight, double imageWidth, double imageHeight)> fields,
         Dictionary<int, (double width, double height)> pageDimensions)
     {
         if (fields.Count == 0)
@@ -235,30 +235,65 @@ public class SignatureFieldEmbedder
     }
 
     private string ConvertFieldsToJson(
-        List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight)> fields,
+        List<(int pageIndex, SignatureFieldPlacement field, double pageWidth, double pageHeight, double imageWidth, double imageHeight)> fields,
         Dictionary<int, (double width, double height)> pageDimensions)
     {
         var jsonFields = fields.Select(f =>
         {
             // Convert normalized coordinates to PDF points
-            // PDF uses bottom-left origin, so we need to flip Y coordinate
+            // The normalized coordinates were created using the original image dimensions (in pixels),
+            // but we need to convert them to PDF page dimensions (in points).
+            // PDF uses bottom-left origin, so we need to flip Y coordinate.
+            
             var pageWidth = f.pageWidth;
             var pageHeight = f.pageHeight;
-            var (pixelX, pixelY, pixelWidth, pixelHeight) = f.field.ToPixels(
-                (float)pageWidth,
-                (float)pageHeight);
+            var imageWidth = f.imageWidth;
+            var imageHeight = f.imageHeight;
+            
+            Console.WriteLine($"Converting field {f.field.FieldName}:");
+            Console.WriteLine($"  Normalized: X={f.field.NormalizedX}, Y={f.field.NormalizedY}, W={f.field.NormalizedWidth}, H={f.field.NormalizedHeight}");
+            Console.WriteLine($"  Image dimensions (pixels): W={imageWidth}, H={imageHeight}");
+            Console.WriteLine($"  Page dimensions (PDF points): W={pageWidth}, H={pageHeight}");
+            
+            // First convert from normalized to image pixel coordinates
+            var (imagePixelX, imagePixelY, imagePixelWidth, imagePixelHeight) = f.field.ToPixels(
+                (float)imageWidth,
+                (float)imageHeight);
 
-            // In PDF coordinates (bottom-left origin)
-            var pdfY = pageHeight - pixelY - pixelHeight;
+            Console.WriteLine($"  Image pixel coords: X={imagePixelX}, Y={imagePixelY}, W={imagePixelWidth}, H={imagePixelHeight}");
+            
+            // Then scale from image pixels to PDF points
+            var scaleX = pageWidth / imageWidth;
+            var scaleY = pageHeight / imageHeight;
+            
+            var pdfX = imagePixelX * scaleX;
+            var pdfWidth = imagePixelWidth * scaleX;
+            var pdfHeight = imagePixelHeight * scaleY;
+            
+            // Convert Y coordinate from top-left origin (UI) to bottom-left origin (PDF).
+            //
+            // UI coordinates:
+            //   imagePixelY = distance from TOP of the image.
+            // PDF coordinates:
+            //   y = distance from BOTTOM of the page.
+            //
+            // We want the lower-left corner of the widget rectangle in PDF user space:
+            //   bottomOfFieldFromTop = imagePixelY + imagePixelHeight
+            //   bottomOfFieldFromBottom = imageHeight - bottomOfFieldFromTop
+            //   pdfY = bottomOfFieldFromBottom * scaleY
+            var pdfY = (imageHeight - imagePixelY - imagePixelHeight) * scaleY;
+            
+            Console.WriteLine($"  Scale factors: X={scaleX}, Y={scaleY}");
+            Console.WriteLine($"  PDF coordinates: X={pdfX}, Y={pdfY}, W={pdfWidth}, H={pdfHeight}");
 
             return new
             {
                 name = f.field.FieldName,
                 page = f.pageIndex,
-                x = pixelX,
+                x = pdfX,
                 y = pdfY,
-                width = pixelWidth,
-                height = pixelHeight
+                width = pdfWidth,
+                height = pdfHeight
             };
         }).ToList();
 
