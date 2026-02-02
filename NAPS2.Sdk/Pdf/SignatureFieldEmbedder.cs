@@ -46,7 +46,92 @@ public class SignatureFieldEmbedder
         _logger.LogInformation("Input PDF: {InputPath}", inputPdfPath);
         _logger.LogInformation("Output PDF: {OutputPath}", outputPdfPath);
         _logger.LogInformation("Number of fields to embed: {FieldCount}", fields.Count);
-        
+
+        // Prefer bundled helper executable (no Python interpreter needed)
+        var helperExe = FindBundledHelper();
+        if (helperExe != null)
+        {
+            Console.WriteLine($"Using bundled helper: {helperExe}");
+            _logger.LogInformation("Using bundled signature helper: {HelperExe}", helperExe);
+
+            // Convert fields to JSON format expected by the helper
+            var helperFieldsJson = ConvertFieldsToJson(fields, pageDimensions);
+            Console.WriteLine($"Fields JSON: {helperFieldsJson}");
+            _logger.LogInformation("Fields JSON: {FieldsJson}", helperFieldsJson);
+
+            try
+            {
+                var arguments = $"\"{inputPdfPath}\" \"{outputPdfPath}\" \"{helperFieldsJson.Replace("\"", "\\\"")}\"";
+                Console.WriteLine($"Executing: {helperExe} {arguments}");
+                _logger.LogInformation("Executing: {HelperExe} {Arguments}", helperExe, arguments);
+
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = helperExe,
+                    Arguments = arguments,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
+
+                using var process = Process.Start(startInfo);
+                if (process == null)
+                {
+                    _logger.LogError("Failed to start signature helper process");
+                    File.Copy(inputPdfPath, outputPdfPath, true);
+                    return false;
+                }
+
+                var output = process.StandardOutput.ReadToEnd();
+                var error = process.StandardError.ReadToEnd();
+                process.WaitForExit();
+
+                Console.WriteLine($"Signature helper process exited with code: {process.ExitCode}");
+                _logger.LogInformation("Signature helper process exited with code: {ExitCode}", process.ExitCode);
+                if (!string.IsNullOrEmpty(output))
+                {
+                    Console.WriteLine($"Helper stdout: {output}");
+                    _logger.LogInformation("Helper stdout: {Output}", output);
+                }
+                if (!string.IsNullOrEmpty(error))
+                {
+                    Console.WriteLine($"Helper stderr: {error}");
+                    _logger.LogWarning("Helper stderr: {Error}", error);
+                }
+
+                if (process.ExitCode == 0)
+                {
+                    Console.WriteLine("Signature fields embedded successfully!");
+                    _logger.LogInformation("Signature fields embedded successfully");
+                    return true;
+                }
+                else if (process.ExitCode == 2)
+                {
+                    Console.WriteLine("ERROR: pyHanko not installed. Install with: pip install pyHanko");
+                    _logger.LogWarning("pyHanko not installed. Signature fields will not be embedded. Install with: pip install pyHanko");
+                    File.Copy(inputPdfPath, outputPdfPath, true);
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine($"ERROR: Failed to embed signature fields. Exit code: {process.ExitCode}");
+                    _logger.LogError("Failed to embed signature fields. Exit code: {ExitCode}", process.ExitCode);
+                    File.Copy(inputPdfPath, outputPdfPath, true);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception while embedding signature fields");
+                File.Copy(inputPdfPath, outputPdfPath, true);
+                return false;
+            }
+        }
+
+        Console.WriteLine("Bundled helper not found, falling back to Python script");
+        _logger.LogInformation("Bundled signature helper not found, falling back to Python script");
+
         var pythonExe = FindPythonExecutable();
         if (pythonExe == null)
         {
@@ -144,6 +229,73 @@ public class SignatureFieldEmbedder
             File.Copy(inputPdfPath, outputPdfPath, true);
             return false;
         }
+    }
+
+    /// <summary>
+    /// Attempts to find the bundled signature helper executable shipped alongside the application.
+    /// </summary>
+    /// <remarks>
+    /// This is preferred over the Python script path because it does not require a Python interpreter.
+    /// Search is performed relative to <see cref="AppDomain.CurrentDomain" />.<see cref="AppDomain.BaseDirectory" />.
+    /// </remarks>
+    /// <returns>The full path to the helper executable if found; otherwise, <c>null</c>.</returns>
+    private string? FindBundledHelper()
+    {
+        var appDir = AppDomain.CurrentDomain.BaseDirectory;
+        Console.WriteLine($"App directory: {appDir}");
+
+        var helperBaseName = "naps2-signature-helper";
+        var helperNames = new[] { helperBaseName + ".exe", helperBaseName };
+
+        var possibleDirs = new List<string>
+        {
+            appDir,
+            Path.Combine(appDir, "tools"),
+            Path.Combine(appDir, "..", "tools"),
+            Path.Combine(appDir, "..", "..", "tools"),
+        };
+
+        // Additional macOS bundle-specific checks
+        // If running from within a .app bundle, locate the Contents directory.
+        var dirInfo = new DirectoryInfo(Path.GetFullPath(appDir));
+        DirectoryInfo? contentsDir = null;
+        while (dirInfo != null)
+        {
+            if (string.Equals(dirInfo.Name, "Contents", StringComparison.OrdinalIgnoreCase) &&
+                dirInfo.Parent != null &&
+                dirInfo.Parent.Name.EndsWith(".app", StringComparison.OrdinalIgnoreCase))
+            {
+                contentsDir = dirInfo;
+                break;
+            }
+
+            dirInfo = dirInfo.Parent;
+        }
+
+        if (contentsDir != null)
+        {
+            possibleDirs.Add(Path.Combine(contentsDir.FullName, "MacOS"));
+            possibleDirs.Add(Path.Combine(contentsDir.FullName, "tools"));
+        }
+
+        foreach (var dir in possibleDirs)
+        {
+            foreach (var helperName in helperNames)
+            {
+                var fullPath = Path.GetFullPath(Path.Combine(dir, helperName));
+                Console.WriteLine($"Checking bundled helper: {fullPath}");
+                if (File.Exists(fullPath))
+                {
+                    Console.WriteLine($"Found bundled helper at: {fullPath}");
+                    _logger.LogInformation("Found bundled signature helper at: {HelperPath}", fullPath);
+                    return fullPath;
+                }
+            }
+        }
+
+        Console.WriteLine("Bundled signature helper not found in any of the checked paths");
+        _logger.LogInformation("Bundled signature helper not found in any of the checked paths");
+        return null;
     }
 
     private string? FindPythonExecutable()

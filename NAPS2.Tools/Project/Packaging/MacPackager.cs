@@ -36,6 +36,8 @@ public static class MacPackager
             Cli.Run("dotnet", $"build NAPS2.App.Mac -c Release -r {runtimeId}");
         }
 
+        IncludeSignatureHelper(bundlePath);
+
         Output.Verbose("Building package");
         var applicationIdentity = noSign ? "" : N2Config.MacApplicationIdentity;
         if (string.IsNullOrEmpty(applicationIdentity) && !noSign)
@@ -85,6 +87,31 @@ public static class MacPackager
         }
 
         Output.OperationEnd($"Packaged installer: {pkgPath}");
+    }
+
+    private static void IncludeSignatureHelper(string bundlePath)
+    {
+        var sourcePath = Path.Combine(Paths.SolutionRoot, "build", "macos", "naps2-signature-helper");
+        if (!File.Exists(sourcePath))
+        {
+            Output.Info($"Skipping signature helper inclusion as it was not found: {sourcePath}");
+            return;
+        }
+
+        var toolsDir = Path.Combine(bundlePath, "Contents", "tools");
+        var destPath = Path.Combine(toolsDir, "naps2-signature-helper");
+
+        try
+        {
+            Directory.CreateDirectory(toolsDir);
+            File.Copy(sourcePath, destPath, true);
+            Cli.Run("chmod", $"+x \"{destPath}\"");
+            Output.Info($"Included signature helper in app bundle: {destPath}");
+        }
+        catch (Exception ex)
+        {
+            Output.Info($"Failed to include signature helper in app bundle; continuing without it. {ex}");
+        }
     }
 
     private static void SignBundleContents(string bundlePath, string signingIdentity)

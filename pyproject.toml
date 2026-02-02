@@ -14,3 +14,10 @@ dependencies = [
     "tzlocal>=4.3",
     "uritools>=3.0.1",
 ]
+
+[project.optional-dependencies]
+# Build dependencies for creating standalone executables
+build = [
+    "nuitka>=2.0",
+    "ordered-set>=4.1.0",  # Required by Nuitka
+]
