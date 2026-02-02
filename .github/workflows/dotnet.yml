@@ -15,6 +15,8 @@ jobs:
       if: matrix.os == 'ubuntu-24.04'
       run: sudo apt-get install -y fonts-liberation2 fonts-noto-core fonts-noto-cjk
     - uses: actions/checkout@v4
+      with:
+        submodules: recursive
     - name: Setup .NET 9
       uses: actions/setup-dotnet@v4
       with:

@@ -1,4 +1,5 @@
 using System.Threading;
+using NAPS2.Pdf;
 
 namespace NAPS2.Images;
 
@@ -12,9 +13,10 @@ public record PostProcessingData(
     PageSide PageSide,
     Barcode Barcode,
     CancellationTokenSource? OcrCts,
-    string? OriginalFilePath)
+    string? OriginalFilePath,
+    List<SignatureFieldPlacement>? SignatureFields)
 {
-    public PostProcessingData() : this(null, null, 0, PageSide.Unknown, Barcode.NoDetection, null, null)
+    public PostProcessingData() : this(null, null, 0, PageSide.Unknown, Barcode.NoDetection, null, null, null)
     {
     }
 }
