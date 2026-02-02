@@ -8,6 +8,7 @@
     <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
     <SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
+    <TargetPlatformVersion>15.0</TargetPlatformVersion>
     <RuntimeIdentifiers Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx-x64;osx-arm64</RuntimeIdentifiers>
     <TrimMode>partial</TrimMode>
 
