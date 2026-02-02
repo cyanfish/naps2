@@ -62,18 +62,23 @@ public class SignatureFieldForm : UnaryImageFormBase
             RealImageWidth,
             RealImageHeight);
 
-        // Update the image's post-processing data with the signature field
-        var currentFields = Image.PostProcessingData.SignatureFields ?? new List<SignatureFieldPlacement>();
+        // Get the current processed image
+        using var processedImage = Image.GetClonedImage();
+        
+        // Update the post-processing data with the signature field
+        var currentFields = processedImage.PostProcessingData.SignatureFields ?? new List<SignatureFieldPlacement>();
         var updatedFields = new List<SignatureFieldPlacement>(currentFields) { fieldPlacement };
 
-        var updatedPostProcessingData = Image.PostProcessingData with
+        var updatedPostProcessingData = processedImage.PostProcessingData with
         {
             SignatureFields = updatedFields
         };
 
-        // Update the image in the list
-        var updatedImage = Image.WithPostProcessingData(updatedPostProcessingData, false);
-        ImageList.Mutate(new ImageListMutation.Replace(Image, updatedImage), ListSelection.Empty);
+        // Create updated processed image
+        var updatedProcessedImage = processedImage.WithPostProcessingData(updatedPostProcessingData, false);
+        
+        // Replace the internal image in the UiImage
+        Image.ReplaceInternalImage(updatedProcessedImage);
     }
 
     protected override void Revert()
@@ -163,10 +168,11 @@ public class SignatureFieldForm : UnaryImageFormBase
         }
 
         // Draw existing signature fields from post-processing data
-        if (Image.PostProcessingData.SignatureFields != null)
+        using var processedImage = Image.GetClonedImage();
+        if (processedImage.PostProcessingData.SignatureFields != null)
         {
             var existingFieldPen = new Pen(Color.FromArgb(100, 0, 200, 0), BORDER_WIDTH);
-            foreach (var field in Image.PostProcessingData.SignatureFields)
+            foreach (var field in processedImage.PostProcessingData.SignatureFields)
             {
                 var (x, y, w, h) = field.ToPixels(RealImageWidth, RealImageHeight);
                 var overlayX = _overlayL + (x / RealImageWidth) * _overlayW;
