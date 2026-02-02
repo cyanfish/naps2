@@ -57,6 +57,12 @@ internal class AssemblyHelper
 
     public static Version Version => Assembly.GetEntryAssembly()!.GetName().Version!;
 
+    public static string InformationalVersion =>
+        GetAssemblyAttributeValue<AssemblyInformationalVersionAttribute>(x => x.InformationalVersion);
+
+    public static string DisplayVersion =>
+        string.IsNullOrWhiteSpace(InformationalVersion) ? Version.ToString() : InformationalVersion;
+
     public static string Description => GetAssemblyAttributeValue<AssemblyDescriptionAttribute>(x => x.Description);
 
     public static string Product => GetAssemblyAttributeValue<AssemblyProductAttribute>(x => x.Product);

@@ -53,7 +53,7 @@ public class AboutForm : EtoDialogBase
                 C.NoWrap(AssemblyHelper.Product),
                 L.Row(
                     L.Column(
-                        C.NoWrap(string.Format(MiscResources.Version, AssemblyHelper.Version)),
+                        C.NoWrap(string.Format(MiscResources.Version, AssemblyHelper.DisplayVersion)),
                         C.UrlLink(NAPS2_HOMEPAGE)
                     ),
                     Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Donate)
