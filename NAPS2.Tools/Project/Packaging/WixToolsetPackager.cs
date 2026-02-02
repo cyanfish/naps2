@@ -66,6 +66,13 @@ public static class WixToolsetPackager
         }
         template = template.Replace("<!-- !lib -->", libLines.ToString());
 
+        var toolsLines = new StringBuilder();
+        foreach (var toolsFile in packageInfo.Files.Where(x => x.DestDir == "tools"))
+        {
+            DeclareFile(toolsLines, toolsFile);
+        }
+        template = template.Replace("<!-- !tools -->", toolsLines.ToString());
+
         var win32Lines = new StringBuilder();
         foreach (var win32File in packageInfo.Files.Where(x => x.DestDir == Path.Combine("lib", "_win32")))
         {

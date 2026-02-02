@@ -65,6 +65,7 @@ Type: files; Name: "{app}\*.exe.config"
 Type: files; Name: "{app}\*.dll"
 Type: files; Name: "{app}\*.json"
 Type: filesandordirs; Name: "{app}\lib"
+Type: filesandordirs; Name: "{app}\tools"
 ; !clean32
 
 [Icons]

@@ -3,7 +3,7 @@
 # Build Helper Script for NAPS2 Signature Helper
 #
 # This script ensures the uv environment is properly activated and runs
-# the Python build script to create a standalone macOS executable.
+# the Python build script to create a standalone executable.
 #
 # Usage:
 #   ./scripts/build_helper.sh

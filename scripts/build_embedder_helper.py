@@ -1,22 +1,32 @@
 #!/usr/bin/env python3
-"""
-Build script for creating a standalone macOS executable of the signature field embedder.
+"""scripts/build_embedder_helper.py
 
-This script uses Nuitka to compile embed_signature_fields.py into a self-contained
-executable that bundles all dependencies, including the vendored pyHanko library.
+Build script for creating a self-contained executable of the signature field embedder.
 
-Requirements:
-    - Nuitka installed (pip install nuitka)
-    - macOS development tools (Xcode Command Line Tools)
-    - Python 3.11+
+This script uses Nuitka to compile [`scripts/embed_signature_fields.py`](scripts/embed_signature_fields.py:1)
+into a single-file executable that bundles all runtime dependencies (including the vendored pyHanko source).
+
+Supported platforms:
+  - macOS  (outputs to build/macos/)
+  - Linux  (outputs to build/linux/)
+  - Windows (outputs to build/windows/)
+
+Prerequisites:
+  - Python 3.11+
+  - Nuitka installed (recommended: `pip install -e ".[build]"`)
+  - Platform build toolchain:
+      macOS: Xcode Command Line Tools
+      Linux: GCC/Clang toolchain
+      Windows: MSVC Build Tools
 
 Output:
-    - Standalone executable: build/macos/naps2-signature-helper
+  - build/<platform>/naps2-signature-helper[.exe]
 """
 
-import sys
+import argparse
 import os
 import subprocess
+import sys
 from pathlib import Path
 from typing import NoReturn
 
@@ -68,15 +78,23 @@ def check_prerequisites() -> None:
     print("✓ All prerequisites met")
 
 
-def build_executable() -> None:
+def detect_platform() -> str:
+    if sys.platform.startswith("darwin"):
+        return "macos"
+    if sys.platform.startswith("win"):
+        return "windows"
+    return "linux"
+
+
+def build_executable(platform: str, macos_target_arch: str | None, output_dir: Path | None) -> None:
     """Build the standalone executable using Nuitka."""
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
     source_script = script_dir / "embed_signature_fields.py"
-    output_dir = repo_root / "build" / "macos"
+    resolved_output_dir = output_dir or (repo_root / "build" / platform)
 
     # Create output directory if it doesn't exist
-    output_dir.mkdir(parents=True, exist_ok=True)
+    resolved_output_dir.mkdir(parents=True, exist_ok=True)
 
     # Paths to vendored dependencies
     pyhanko_src = repo_root / "third_party" / "pyHanko" / "pkgs" / "pyhanko" / "src"
@@ -85,13 +103,14 @@ def build_executable() -> None:
     )
 
     print(f"Building executable from: {source_script}")
-    print(f"Output directory: {output_dir}")
+    print(f"Platform: {platform}")
+    print(f"Output directory: {resolved_output_dir}")
     print(f"Including vendored pyHanko from: {pyhanko_src}")
     print(f"Including vendored certvalidator from: {certvalidator_src}")
 
     # Nuitka command-line arguments
     # Using subprocess instead of Python API for better control and error reporting
-    nuitka_args = [
+    nuitka_args: list[str] = [
         sys.executable,
         "-m",
         "nuitka",
@@ -99,11 +118,8 @@ def build_executable() -> None:
         "--standalone",  # Create standalone distribution with all dependencies
         "--onefile",  # Create a single executable file
         # Output configuration
-        f"--output-dir={output_dir}",
+        f"--output-dir={resolved_output_dir}",
         "--output-filename=naps2-signature-helper",
-        # Platform-specific options
-        "--macos-create-app-bundle",  # Create macOS app bundle
-        "--macos-target-arch=arm64",  # Build for Apple Silicon (arm64)
         # Optimization options
         "--assume-yes-for-downloads",  # Auto-accept dependency downloads
         "--remove-output",  # Remove build directory after successful build
@@ -133,7 +149,7 @@ def build_executable() -> None:
         "--nofollow-import-to=tkinter",
         "--nofollow-import-to=unittest",
         "--nofollow-import-to=test",
-        # Disable console window on macOS (optional, can be removed if debugging needed)
+        # Disable console window (optional, can be removed if debugging needed)
         "--disable-console",
         # Show progress
         "--show-progress",
@@ -141,6 +157,13 @@ def build_executable() -> None:
         # Source file
         str(source_script),
     ]
+
+    # Platform-specific switches
+    if platform == "macos":
+        arch = macos_target_arch or "arm64"
+        # Insert after module invocation (sys.executable -m nuitka)
+        # Final argv starts with: python -m nuitka --macos-target-arch=... <other args>
+        nuitka_args[3:3] = [f"--macos-target-arch={arch}"]
 
     print("\nStarting Nuitka compilation...")
     print("This may take several minutes...\n")
@@ -163,11 +186,11 @@ def build_executable() -> None:
 
         if result.returncode == 0:
             print("\n✓ Build completed successfully!")
-            print(f"Executable location: {output_dir / 'naps2-signature-helper'}")
+            exe_name = "naps2-signature-helper.exe" if platform == "windows" else "naps2-signature-helper"
+            print(f"Executable location: {resolved_output_dir / exe_name}")
+            exe_name = "naps2-signature-helper.exe" if platform == "windows" else "naps2-signature-helper"
             print("\nUsage:")
-            print(
-                "  ./build/macos/naps2-signature-helper <input_pdf> <output_pdf> <fields_json>"
-            )
+            print(f"  {resolved_output_dir / exe_name} <input_pdf> <output_pdf> <fields_json>")
         else:
             error_exit(f"Nuitka compilation failed with code {result.returncode}", code=5)
 
@@ -189,13 +212,35 @@ def main() -> None:
     print("=" * 70)
     print()
 
+    parser = argparse.ArgumentParser(add_help=True)
+    parser.add_argument(
+        "--platform",
+        choices=["macos", "linux", "windows", "auto"],
+        default="auto",
+        help="Target platform (default: auto-detect)",
+    )
+    parser.add_argument(
+        "--macos-target-arch",
+        default="arm64",
+        help="macOS target architecture for Nuitka (default: arm64)",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=None,
+        help="Override output directory (default: build/<platform>/)",
+    )
+    args = parser.parse_args()
+
+    platform = detect_platform() if args.platform == "auto" else args.platform
+    out_dir = Path(args.output_dir).expanduser().resolve() if args.output_dir else None
+
     # Check prerequisites
     print("Checking prerequisites...")
     check_prerequisites()
     print()
 
     # Build executable
-    build_executable()
+    build_executable(platform=platform, macos_target_arch=args.macos_target_arch, output_dir=out_dir)
 
 
 if __name__ == "__main__":

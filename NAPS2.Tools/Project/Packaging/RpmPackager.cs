@@ -44,6 +44,18 @@ public static class RpmPackager
         var targetDir = Path.Combine(filesDir, "usr/lib/naps2");
         ProjectHelper.CopyDirectory(publishDir, targetDir);
 
+        // Optional: include the signature helper executable (built via Nuitka) if present.
+        // Runtime lookup prefers appDir/tools (see SignatureFieldEmbedder.FindBundledHelper()).
+        var signatureHelperPath = Path.Combine(Paths.SolutionRoot, "build", "linux", "naps2-signature-helper");
+        if (File.Exists(signatureHelperPath))
+        {
+            var toolsDir = Path.Combine(targetDir, "tools");
+            Directory.CreateDirectory(toolsDir);
+            var destPath = Path.Combine(toolsDir, "naps2-signature-helper");
+            File.Copy(signatureHelperPath, destPath, true);
+            Cli.Run("chmod", $"+x \"{destPath}\"");
+        }
+
         // Copy metadata files
         var iconDir = Path.Combine(filesDir, "usr/share/icons/hicolor/128x128/apps");
         Directory.CreateDirectory(iconDir);

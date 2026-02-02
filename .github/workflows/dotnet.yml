@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -13,16 +13,27 @@ jobs:
     steps:
     - name: Install OS dependencies
       if: matrix.os == 'ubuntu-24.04'
-      run: sudo apt-get install -y fonts-liberation2 fonts-noto-core fonts-noto-cjk
+      run: sudo apt-get update && sudo apt-get install -y fonts-liberation2 fonts-noto-core fonts-noto-cjk patchelf
     - uses: actions/checkout@v4
       with:
         submodules: recursive
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
+        python-version: '3.11'
     - name: Install Python dependencies for signature fields
       run: pip install -r scripts/requirements-signature-fields.txt
+    - name: Install Python build dependencies for signature helper
+      run: pip install nuitka ordered-set
+    - name: Build signature helper (macOS/Linux)
+      if: matrix.os != 'windows-2022'
+      run: python scripts/build_embedder_helper.py --platform auto
+    - name: Build signature helper (Windows)
+      if: matrix.os == 'windows-2022'
+      shell: cmd
+      run: |
+        for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set VSINSTALL=%%i
+        call "%VSINSTALL%\Common7\Tools\VsDevCmd.bat" && python scripts\build_embedder_helper.py --platform windows
     - name: Setup .NET 9
       uses: actions/setup-dotnet@v4
       with:
@@ -32,6 +43,36 @@ jobs:
       run: dotnet workload install macos
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
+    - name: Copy signature helper into debug output (Windows)
+      if: matrix.os == 'windows-2022'
+      shell: pwsh
+      run: |
+        Get-ChildItem -Path "NAPS2.App.WinForms/bin" -Recurse -Directory -Filter "net9-windows" |
+          ForEach-Object {
+            $toolsDir = Join-Path $_.FullName "tools"
+            New-Item -ItemType Directory -Force -Path $toolsDir | Out-Null
+            Copy-Item -Force "build/windows/naps2-signature-helper.exe" (Join-Path $toolsDir "naps2-signature-helper.exe")
+          }
+    - name: Copy signature helper into debug output (Linux)
+      if: matrix.os == 'ubuntu-24.04'
+      shell: bash
+      run: |
+        set -euo pipefail
+        while IFS= read -r -d '' dir; do
+          mkdir -p "$dir/tools"
+          cp build/linux/naps2-signature-helper "$dir/tools/naps2-signature-helper"
+          chmod +x "$dir/tools/naps2-signature-helper"
+        done < <(find NAPS2.App.Gtk/bin -type d -name net9 -path '*/Debug*/*' -print0)
+    - name: Copy signature helper into debug output (macOS)
+      if: matrix.os == 'macos-15'
+      shell: bash
+      run: |
+        set -euo pipefail
+        while IFS= read -r -d '' app; do
+          mkdir -p "$app/Contents/tools"
+          cp build/macos/naps2-signature-helper "$app/Contents/tools/naps2-signature-helper"
+          chmod +x "$app/Contents/tools/naps2-signature-helper"
+        done < <(find NAPS2.App.Mac/bin -type d -name "NAPS2.app" -path '*/Debug*/*' -print0)
     - name: Test
       if: matrix.os != 'macos-15'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui
@@ -49,16 +90,16 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: naps2-windows-debug
-        path: NAPS2.App.WinForms/bin/Debug/net9-windows/
+        path: NAPS2.App.WinForms/bin/Debug*/net9-windows/
     - name: Upload Linux binary
       if: matrix.os == 'ubuntu-24.04'
       uses: actions/upload-artifact@v4
       with:
         name: naps2-linux-debug
-        path: NAPS2.App.Gtk/bin/Debug/net9/
+        path: NAPS2.App.Gtk/bin/Debug*/net9/
     - name: Upload macOS binary
       if: matrix.os == 'macos-15'
       uses: actions/upload-artifact@v4
       with:
         name: naps2-macos-debug
-        path: NAPS2.App.Mac/bin/Debug/net9-macos/
+        path: NAPS2.App.Mac/bin/Debug*/net9-macos/

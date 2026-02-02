@@ -1,6 +1,6 @@
-# Building & Updating the macOS Signature Helper
+# Building & Updating the Signature Helper (macOS / Linux / Windows)
 
-This document explains how to build and update the **signature helper** executable shipped with the macOS build of NAPS2.
+This document explains how to build and update the **signature helper** executable shipped with NAPS2.
 
 Primary entry points:
 
@@ -16,7 +16,7 @@ Primary entry points:
 
 ### What is the signature helper?
 
-The signature helper is a small macOS executable that embeds **AcroForm signature fields** into a PDF.
+The signature helper is a small executable that embeds **AcroForm signature fields** into a PDF.
 
 Functionally, it is a compiled form of the Python script [`scripts/embed_signature_fields.py`](../scripts/embed_signature_fields.py:1), which uses the vendored pyHanko source tree to modify PDFs.
 
@@ -62,10 +62,11 @@ The fallback to Python remains useful for development and for environments where
      xcode-select --install
      ```
 
-### macOS requirements
+### Platform notes
 
-* The helper build is macOS-specific.
-* The current build configuration targets Apple Silicon (`arm64`) via [`--macos-target-arch=arm64`](../scripts/build_embedder_helper.py:106).
+* The helper can be built for macOS, Linux, and Windows.
+* On macOS, the build configuration targets Apple Silicon (`arm64`) by default via [`--macos-target-arch=arm64`](../scripts/build_embedder_helper.py:223).
+* On Windows, Nuitka requires a working C toolchain (MSVC Build Tools).
 
 ### Git submodules (pyHanko)
 

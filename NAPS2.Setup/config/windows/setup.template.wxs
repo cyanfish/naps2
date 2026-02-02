@@ -22,6 +22,7 @@
 
     <Feature Id="MainApplication" Title="NAPS2" Level="1">
       <ComponentRef Id="Exec" />
+      <ComponentRef Id="Tools" />
       <ComponentRef Id="Deps" />
       <ComponentRef Id="DepsWin32" />
       <ComponentRef Id="DepsWin64" />
@@ -43,6 +44,7 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFiles64Folder">
         <Directory Id="INSTALLFOLDER" Name="NAPS2">
+          <Directory Id="TOOLSFOLDER" Name="tools" />
           <Directory Id="LIBFOLDER" Name="lib">
             <Directory Id="LIBWIN32FOLDER" Name="_win32" />
             <Directory Id="LIBWIN64FOLDER" Name="_win64" />
@@ -108,6 +110,12 @@
     <DirectoryRef Id="INSTALLFOLDER">
       <Component Id="Exec" Guid="3ED24800-E1D9-4D64-A106-6DC3597D9266">
         <!-- !root -->
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="TOOLSFOLDER">
+      <Component Id="Tools" Guid="DAD50BA8-55EF-4BA7-BC9D-839A6E508EDB">
+        <!-- !tools -->
       </Component>
     </DirectoryRef>
 

@@ -92,6 +92,15 @@ public class PackageCommand : ICommand<PackageOptions>
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "LICENSE", "license.txt"));
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "CONTRIBUTORS", "contributors.txt"));
 
+        // Optional: include the signature helper executable (built via Nuitka) if present.
+        // Runtime lookup prefers appDir/tools (see SignatureFieldEmbedder.FindBundledHelper()).
+        var signatureHelperPath = Path.Combine(Paths.SolutionRoot, "build", "windows", "naps2-signature-helper.exe");
+        if (File.Exists(signatureHelperPath))
+        {
+            pkgInfo.AddFile(new PackageFile(Path.GetDirectoryName(signatureHelperPath)!, "tools",
+                Path.GetFileName(signatureHelperPath)));
+        }
+
         return pkgInfo;
     }
 
