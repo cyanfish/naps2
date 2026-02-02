@@ -44,3 +44,21 @@ jobs:
     - name: Test (ImageSharp images)
       if: matrix.os == 'ubuntu-24.04'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui --images is --scope sdk
+    - name: Upload Windows binary
+      if: matrix.os == 'windows-2022'
+      uses: actions/upload-artifact@v4
+      with:
+        name: naps2-windows-debug
+        path: NAPS2.App.WinForms/bin/Debug/net9-windows/
+    - name: Upload Linux binary
+      if: matrix.os == 'ubuntu-24.04'
+      uses: actions/upload-artifact@v4
+      with:
+        name: naps2-linux-debug
+        path: NAPS2.App.Gtk/bin/Debug/net9/
+    - name: Upload macOS binary
+      if: matrix.os == 'macos-15'
+      uses: actions/upload-artifact@v4
+      with:
+        name: naps2-macos-debug
+        path: NAPS2.App.Mac/bin/Debug/net9-macos/
