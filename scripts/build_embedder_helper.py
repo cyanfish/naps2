@@ -75,7 +75,7 @@ def check_prerequisites() -> None:
     if not source_script.exists():
         error_exit(f"Source script not found: {source_script}", code=4)
 
-    print("✓ All prerequisites met")
+    print("[OK] All prerequisites met")
 
 
 def detect_platform() -> str:
@@ -185,7 +185,7 @@ def build_executable(platform: str, macos_target_arch: str | None, output_dir: P
         )
 
         if result.returncode == 0:
-            print("\n✓ Build completed successfully!")
+            print("\n[OK] Build completed successfully!")
             exe_name = "naps2-signature-helper.exe" if platform == "windows" else "naps2-signature-helper"
             print(f"Executable location: {resolved_output_dir / exe_name}")
             exe_name = "naps2-signature-helper.exe" if platform == "windows" else "naps2-signature-helper"
