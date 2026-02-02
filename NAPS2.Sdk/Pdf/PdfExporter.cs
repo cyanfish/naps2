@@ -139,7 +139,12 @@ public class PdfExporter
                 var stream = FinalizeAndSaveDocument(document, exportParams, producer);
                 if (progress.IsCancellationRequested) return false;
 
-                return MergePassthroughPages(stream, output, pdfPages, exportParams, progress);
+                var result = MergePassthroughPages(stream, output, pdfPages, exportParams, progress);
+                if (!result) return false;
+
+                // Embed signature fields if any exist
+                result = EmbedSignatureFields(output, imagePages.Concat(pdfPages).ToList(), exportParams, progress);
+                return result;
             }
             finally
             {
@@ -190,6 +195,139 @@ public class PdfExporter
             }
             output.SavePdfDoc(destDoc);
             return true;
+        }
+    }
+
+    private bool EmbedSignatureFields(OutputPathOrStream output, List<PageExportState> allPages,
+        PdfExportParams exportParams, ProgressHandler progress)
+    {
+        Console.WriteLine("=== EmbedSignatureFields called ===");
+        if (progress.IsCancellationRequested) return false;
+
+        // Collect all signature fields from all pages (without assuming PdfSharp page dimensions).
+        // For passthrough pages, PdfSharp's Page.Width/Height can remain at defaults unless OCR runs.
+        // We'll read the *actual* page dimensions from the generated PDF file instead.
+        var rawFields = new List<(int pageIndex, SignatureFieldPlacement field, double imageWidth, double imageHeight)>();
+        foreach (var state in allPages)
+        {
+            var signatureFields = state.Image.PostProcessingData.SignatureFields;
+            Console.WriteLine($"Page {state.PageIndex}: SignatureFields = {signatureFields?.Count ?? 0}");
+
+            if (signatureFields == null || signatureFields.Count == 0)
+            {
+                continue;
+            }
+
+            foreach (var field in signatureFields)
+            {
+                rawFields.Add((state.PageIndex, field, field.OriginalImageWidth, field.OriginalImageHeight));
+            }
+        }
+
+        // If no fields to embed, we're done
+        if (rawFields.Count == 0)
+        {
+            Console.WriteLine("No signature fields to embed");
+            return true;
+        }
+
+        Console.WriteLine($"Total fields to embed: {rawFields.Count}");
+
+        // We need to work with a file, so if output is a stream, save to temp file first
+        string? tempInputPath = null;
+        string? tempOutputPath = null;
+        bool needsStreamHandling = output.Stream != null;
+
+        try
+        {
+            string inputPath;
+            string outputPath;
+
+            if (needsStreamHandling)
+            {
+                // Save stream to temp file
+                tempInputPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ".pdf");
+                Console.WriteLine($"Saving stream to temp file: {tempInputPath}");
+                using (var fileStream = new FileStream(tempInputPath, FileMode.Create, FileAccess.Write))
+                {
+                    output.Stream!.Position = 0;
+                    output.Stream.CopyTo(fileStream);
+                }
+                Console.WriteLine($"Stream saved, file size: {new FileInfo(tempInputPath).Length} bytes");
+                inputPath = tempInputPath;
+
+                tempOutputPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ".pdf");
+                outputPath = tempOutputPath;
+            }
+            else
+            {
+                // Working with file paths
+                inputPath = output.Path!;
+                tempOutputPath = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName() + ".pdf");
+                outputPath = tempOutputPath;
+            }
+
+            // Read actual page dimensions from the PDF file that we're about to post-process.
+            // This avoids mismatches on passthrough pages where PdfSharp page dimensions may not be updated.
+            var pageDimensions = new Dictionary<int, (double width, double height)>();
+            var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
+            lock (PdfiumNativeLibrary.Instance)
+            {
+                using var doc = Pdfium.PdfDocument.Load(inputPath, password);
+                for (int pageIndex = 0; pageIndex < doc.PageCount; pageIndex++)
+                {
+                    using var page = doc.GetPage(pageIndex);
+                    pageDimensions[pageIndex] = (page.Width, page.Height);
+                }
+            }
+
+            var fieldsToEmbed = rawFields.Select(f =>
+            {
+                var (pageWidth, pageHeight) = pageDimensions[f.pageIndex];
+                Console.WriteLine($"  Field: {f.field.FieldName} at ({f.field.NormalizedX}, {f.field.NormalizedY}) size ({f.field.NormalizedWidth}, {f.field.NormalizedHeight})");
+                Console.WriteLine($"  Page dimensions (actual PDF): {pageWidth}x{pageHeight} points");
+                Console.WriteLine($"  Image dimensions: {f.imageWidth}x{f.imageHeight} pixels (from field)");
+                return (f.pageIndex, f.field, pageWidth, pageHeight, f.imageWidth, f.imageHeight);
+            }).ToList();
+
+            // Embed signature fields using Python/pyHanko
+            var embedder = new SignatureFieldEmbedder(_logger);
+            var success = embedder.EmbedFields(inputPath, outputPath, fieldsToEmbed, pageDimensions);
+
+            if (success && File.Exists(outputPath))
+            {
+                // Copy result back
+                if (needsStreamHandling)
+                {
+                    output.Stream!.SetLength(0);
+                    output.Stream.Position = 0;
+                    using var resultStream = new FileStream(outputPath, FileMode.Open, FileAccess.Read);
+                    resultStream.CopyTo(output.Stream);
+                }
+                else
+                {
+                    File.Copy(outputPath, output.Path!, true);
+                }
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error embedding signature fields");
+            return true; // Don't fail the export, just log the error
+        }
+        finally
+        {
+            // Clean up temp files
+            if (tempInputPath != null && File.Exists(tempInputPath))
+            {
+                try { File.Delete(tempInputPath); } catch { }
+            }
+            if (tempOutputPath != null && File.Exists(tempOutputPath))
+            {
+                try { File.Delete(tempOutputPath); } catch { }
+            }
         }
     }
 

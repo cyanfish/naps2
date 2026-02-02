@@ -6,3 +6,6 @@ packages/
 .vs/
 .idea/
 .nuget/
+build_output.log
+build/*
+naps2.egg-info/*

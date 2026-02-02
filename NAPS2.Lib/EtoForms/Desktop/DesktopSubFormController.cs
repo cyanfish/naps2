@@ -39,6 +39,7 @@ public class DesktopSubFormController : IDesktopSubFormController
     public void ShowSharpenForm() => ShowImageForm<SharpenForm>();
     public void ShowSplitForm() => ShowImageForm<SplitForm>();
     public void ShowRotateForm() => ShowImageForm<RotateForm>();
+    public void ShowSignatureFieldForm() => ShowImageForm<SignatureFieldForm>();
 
     public void ShowCombineForm()
     {

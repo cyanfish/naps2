@@ -1,0 +1,15 @@
+# Runtime dependencies for NAPS2 signature field embedding
+# These are the dependencies required by pyHanko (vendored in third_party/pyHanko)
+# Install with: pip install -r scripts/requirements-signature-fields.txt
+
+# Core dependencies from pyHanko
+asn1crypto>=1.5.1
+tzlocal>=4.3
+requests>=2.31.0
+pyyaml>=6.0
+cryptography>=43.0.3
+lxml>=5.4.0
+
+# Dependencies from pyhanko-certvalidator
+oscrypto>=1.1.0
+uritools>=3.0.1

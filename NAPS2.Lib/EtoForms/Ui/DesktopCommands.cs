@@ -147,6 +147,11 @@ public class DesktopCommands
             Text = UiStrings.Crop,
             IconName = "transform_crop_small"
         };
+        SignatureField = new ActionCommand(desktopSubFormController.ShowSignatureFieldForm)
+        {
+            Text = "Place Signature Field",
+            IconName = "document_sign_small"
+        };
         BrightCont = new ActionCommand(desktopSubFormController.ShowBrightnessContrastForm)
         {
             Text = UiStrings.BrightnessContrast,
@@ -381,6 +386,7 @@ public class DesktopCommands
     public ActionCommand ImageMenu { get; set; }
     public ActionCommand ViewImage { get; set; }
     public ActionCommand Crop { get; set; }
+    public ActionCommand SignatureField { get; set; }
     public ActionCommand BrightCont { get; set; }
     public ActionCommand HueSat { get; set; }
     public ActionCommand BlackWhite { get; set; }

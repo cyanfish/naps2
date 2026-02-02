@@ -11,6 +11,7 @@ public interface IDesktopSubFormController
     void ShowSplitForm();
     void ShowCombineForm();
     void ShowRotateForm();
+    void ShowSignatureFieldForm();
     void ShowProfilesForm();
     void ShowOcrForm();
     void ShowBatchScanForm();

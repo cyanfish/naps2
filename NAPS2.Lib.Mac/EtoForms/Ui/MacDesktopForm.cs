@@ -110,6 +110,7 @@ public class MacDesktopForm : DesktopForm
                     .Append(Commands.ZoomOut)
                     .Separator()
                     .Append(Commands.Crop)
+                    .Append(Commands.SignatureField)
                     .Append(Commands.BrightCont)
                     .Append(Commands.HueSat)
                     .Append(Commands.BlackWhite)

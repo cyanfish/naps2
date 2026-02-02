@@ -1,6 +1,12 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <Version>8.2.1</Version>
-        <VersionName>8.2.1</VersionName>
+        <!--
+          Version: numeric version used for assembly versioning & comparisons.
+          VersionName: release label used by NAPS2.Tools packaging (supports beta notation like 8.3.0b1).
+          InformationalVersion: human-readable version shown in About dialog.
+        -->
+        <Version>8.3.0</Version>
+        <VersionName>8.3.0b1</VersionName>
+        <InformationalVersion>V8.3.0-Beta</InformationalVersion>
     </PropertyGroup>
 </Project>

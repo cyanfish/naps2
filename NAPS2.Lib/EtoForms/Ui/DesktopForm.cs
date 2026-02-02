@@ -321,6 +321,7 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.ViewImage)
                 .Separator()
                 .Append(Commands.Crop)
+                .Append(Commands.SignatureField)
                 .Append(Commands.BrightCont)
                 .Append(Commands.HueSat)
                 .Append(Commands.BlackWhite)
