@@ -1,0 +1,16 @@
+[project]
+name = "naps2"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "asn1crypto>=1.5.1",
+    "cryptography>=43.0.3",
+    "lxml>=5.4.0",
+    "oscrypto>=1.1.0",
+    "pyyaml>=6.0",
+    "requests>=2.31.0",
+    "tzlocal>=4.3",
+    "uritools>=3.0.1",
+]
