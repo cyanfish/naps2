@@ -36,6 +36,7 @@
     <PackageReference Include="NAPS2.NTwain" Version="1.0.1" Condition="'$(TargetFramework)' != 'net8-macos'" />
     <PackageReference Include="NAPS2.PdfSharp" Version="1.0.1" />
     <PackageReference Include="NAPS2.Wia" Version="2.0.3" Condition="'$(TargetFramework)' != 'net8-macos'" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="SixLabors.Fonts" Version="1.0.1" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
