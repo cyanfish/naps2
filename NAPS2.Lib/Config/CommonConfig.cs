@@ -168,6 +168,18 @@ public class CommonConfig
     [Common]
     public string? EsclServerCertificatePath { get; set; }
 
+    [User]
+    public int ApiServerPort { get; set; } = 8080;
+
+    [User]
+    public bool ApiServerEnableHttps { get; set; }
+
+    [User]
+    public bool ApiServerEnableCors { get; set; } = true;
+
+    [User]
+    public string ApiServerHost { get; set; } = "localhost";
+
     [App]
     public EventType EventLogging { get; set; }
 

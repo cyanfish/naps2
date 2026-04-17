@@ -8,28 +8,28 @@ assignees: ''
 ---
 
 <!--
-Welcome! If you're having an issue with your particular scanner (e.g. can't find scanner, or error scanning), please don't create an issue here. Instead, you can ask for help in the support forum:
+欢迎！如果您遇到特定扫描仪的问题（例如：找不到扫描仪或扫描出错），请不要在此处创建问题。您可以在支持论坛寻求帮助：
 https://github.com/cyanfish/naps2/discussions/categories/support
 -->
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**描述该错误**
+清晰简明地描述错误是什么。
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. See error
+**复现步骤**
+重现该行为的步骤：
+1. 转到 '...'
+2. 单击 '....'
+3. 查看错误
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**期望行为**
+清晰简明地描述您期望发生的情况。
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**截图**
+如果适用，请添加截图以帮助解释问题。
 
-**Desktop (please complete the following information):**
- - OS: [e.g. Windows 10, macOS 12, Ubuntu 22.04]
- - Version [e.g. 7.1.0]
+**桌面环境（请完成以下信息）：**
+ - 操作系统：例如 Windows 10、macOS 12、Ubuntu 22.04
+ - 版本：例如 7.1.0
 
-**Additional context**
-Add any other context about the problem here.
+**附加背景**
+在此处添加有关该问题的任何其他上下文。

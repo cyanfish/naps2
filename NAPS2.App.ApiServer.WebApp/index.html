@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAPS2 Web 扫描客户端</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>NAPS2 Web 扫描客户端</h1>
+    <p>通过 NAPS2 API Server 控制扫描器、查询能力、启动作业并导出 PDF。</p>
+  </header>
+
+  <section class="card">
+    <h2>服务器与状态</h2>
+    <div class="row">
+      <label>API 地址
+        <input id="apiUrl" type="text" value="http://localhost:8080/api" />
+      </label>
+      <button id="btnHealth">健康检查</button>
+      <button id="btnStatus">服务状态</button>
+      <button id="btnVersion">版本信息</button>
+      <button id="btnSettings">当前配置</button>
+    </div>
+    <pre id="statusOutput" class="output"></pre>
+  </section>
+
+  <section class="card">
+    <h2>扫描驱动与设备</h2>
+    <div class="row">
+      <label>驱动程序
+        <select id="driverSelect"></select>
+      </label>
+      <button id="btnRefreshDevices">刷新设备</button>
+    </div>
+    <div class="row">
+      <label>设备列表</label>
+    </div>
+    <div id="deviceList" class="table-container"></div>
+    <div id="deviceCaps" class="caps"></div>
+  </section>
+
+  <section class="card">
+    <h2>扫描设置</h2>
+    <div class="row">
+      <label>选定设备
+        <input id="selectedDevice" readonly placeholder="请选择设备" />
+      </label>
+    </div>
+    <div class="row">
+      <label>纸张源
+        <select id="paperSourceSelect">
+          <option value="Auto">Auto</option>
+          <option value="Flatbed">Flatbed</option>
+          <option value="Feeder">Feeder</option>
+        </select>
+      </label>
+      <label>页面尺寸
+        <select id="pageSizeSelect">
+          <option value="A4">A4</option>
+          <option value="Letter">Letter</option>
+          <option value="Legal">Legal</option>
+          <option value="A5">A5</option>
+        </select>
+      </label>
+      <label>颜色模式
+        <select id="colorModeSelect">
+          <option value="Color">Color</option>
+          <option value="Grayscale">Grayscale</option>
+          <option value="BlackAndWhite">BlackAndWhite</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label>DPI
+        <input id="dpiInput" type="number" min="75" max="1200" step="25" value="300" />
+      </label>
+      <label>质量
+        <input id="qualityInput" type="number" min="10" max="100" step="5" value="85" />
+      </label>
+    </div>
+    <div class="row">
+      <button id="btnStartScan">启动扫描</button>
+    </div>
+    <pre id="scanOutput" class="output"></pre>
+  </section>
+
+  <section class="card">
+    <h2>扫描作业</h2>
+    <div class="row">
+      <button id="btnRefreshJobs">刷新作业</button>
+    </div>
+    <div id="jobsList" class="table-container"></div>
+    <div id="jobDetails" class="caps"></div>
+  </section>
+
+  <section class="card">
+    <h2>日志与响应</h2>
+    <pre id="logOutput" class="output"></pre>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

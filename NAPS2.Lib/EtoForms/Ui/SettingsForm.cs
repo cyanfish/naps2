@@ -19,6 +19,10 @@ internal class SettingsForm : EtoDialogBase
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
     private readonly CheckBox _keepSession = C.CheckBox(UiStrings.KeepSession);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);
+    private readonly CheckBox _apiEnableHttps = C.CheckBox("启用 API HTTPS");
+    private readonly CheckBox _apiEnableCors = C.CheckBox("启用 API CORS");
+    private readonly TextBox _apiHost = new();
+    private readonly NumericUpDown _apiPort = new() { MinValue = 1024, MaxValue = 65535 };
     private readonly ActionCommand _pdfSettingsCommand;
     private readonly ActionCommand _imageSettingsCommand;
     private readonly ActionCommand _emailSettingsCommand;
@@ -62,58 +66,87 @@ internal class SettingsForm : EtoDialogBase
         FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
         FormStateController.FixedHeightLayout = true;
 
+        var themeLabel = C.Label(UiStrings.ThemeLabel);
+        themeLabel.TextAlignment = TextAlignment.Right;
+
+        var scanButtonDefaultActionLabel = C.Label(UiStrings.ScanButtonDefaultAction);
+        scanButtonDefaultActionLabel.TextAlignment = TextAlignment.Right;
+
+        var saveButtonDefaultActionLabel = C.Label(UiStrings.SaveButtonDefaultAction);
+        saveButtonDefaultActionLabel.TextAlignment = TextAlignment.Right;
+
+        var interfacePage = new TabPage { Text = UiStrings.Interface };
+        interfacePage.Content = new TableLayout
+        {
+            Padding = new Padding(10),
+            Spacing = new Size(10, 10),
+            Rows =
+            {
+                PlatformCompat.System.SupportsTheme
+                    ? new TableRow(themeLabel, _theme.AsControl())
+                    : new TableRow(),
+                PlatformCompat.System.SupportsShowPageNumbers ? new TableRow(_showPageNumbers) : new TableRow(),
+                PlatformCompat.System.SupportsProfilesToolbar ? new TableRow(_showProfilesToolbar) : new TableRow(),
+                new TableRow(_scanChangesDefaultProfile),
+                PlatformCompat.System.SupportsButtonActions
+                    ? new TableRow(scanButtonDefaultActionLabel, _scanButtonDefaultAction.AsControl())
+                    : new TableRow(),
+                PlatformCompat.System.SupportsButtonActions
+                    ? new TableRow(saveButtonDefaultActionLabel, _saveButtonDefaultAction.AsControl())
+                    : new TableRow(),
+                PlatformCompat.System.SupportsKeyboardShortcuts
+                    ? new TableRow(C.Button(_keyboardShortcutsCommand, ButtonImagePosition.Left))
+                    : new TableRow()
+            }
+        };
+
+        var applicationPage = new TabPage { Text = UiStrings.Application };
+        applicationPage.Content = new TableLayout
+        {
+            Padding = new Padding(10),
+            Spacing = new Size(10, 10),
+            Rows =
+            {
+                new TableRow(_clearAfterSaving),
+                new TableRow(_keepSession),
+                PlatformCompat.System.SupportsSingleInstance
+                    ? new TableRow(_singleInstance)
+                    : new TableRow()
+            }
+        };
+
+        var apiHostLabel = C.Label("Host:");
+        apiHostLabel.TextAlignment = TextAlignment.Right;
+
+        var apiPortLabel = C.Label("端口:");
+        apiPortLabel.TextAlignment = TextAlignment.Right;
+
+        var apiPage = new TabPage { Text = "API 服务" };
+        apiPage.Content = new TableLayout
+        {
+            Padding = new Padding(10),
+            Spacing = new Size(10, 10),
+            Rows =
+            {
+                new TableRow(apiHostLabel, _apiHost),
+                new TableRow(apiPortLabel, _apiPort),
+                new TableRow(_apiEnableHttps),
+                new TableRow(_apiEnableCors)
+            }
+        };
+
+        var tabControl = new TabControl { Pages = { interfacePage, applicationPage, apiPage } };
+
         LayoutController.Content = L.Column(
-            L.GroupBox(
-                UiStrings.Interface,
-                L.Column(
-                    PlatformCompat.System.SupportsTheme
-                        ? L.Row(
-                            C.Label(UiStrings.ThemeLabel).AlignCenter().Padding(right: 10),
-                            _theme.AsControl().MinWidth(100)
-                        )
-                        : C.None(),
-                    PlatformCompat.System.SupportsShowPageNumbers ? _showPageNumbers : C.None(),
-                    PlatformCompat.System.SupportsProfilesToolbar ? _showProfilesToolbar : C.None(),
-                    _scanChangesDefaultProfile,
-                    PlatformCompat.System.SupportsButtonActions
-                        ? L.Row(
-                            C.Label(UiStrings.ScanButtonDefaultAction).AlignCenter().Padding(right: 20),
-                            _scanButtonDefaultAction
-                        ).Aligned()
-                        : C.None(),
-                    PlatformCompat.System.SupportsButtonActions
-                        ? L.Row(
-                            C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
-                            _saveButtonDefaultAction
-                        ).Aligned()
-                        : C.None(),
-                    PlatformCompat.System.SupportsKeyboardShortcuts
-                        ? C.Button(_keyboardShortcutsCommand, ButtonImagePosition.Left).AlignLeading()
-                        : C.None()
-                )
-            ),
-            L.GroupBox(
-                UiStrings.Application,
-                L.Column(
-                    _clearAfterSaving,
-                    _keepSession,
-                    PlatformCompat.System.SupportsSingleInstance
-                        ? _singleInstance
-                        : C.None()
-                )
-            ),
-            // TODO: Probably only show these after we start adding tabs
-            // L.Row(
-            //     C.Button(_pdfSettingsCommand, ButtonImagePosition.Left),
-            //     C.Button(_imageSettingsCommand, ButtonImagePosition.Left),
-            //     C.Button(_emailSettingsCommand, ButtonImagePosition.Left)),
+            tabControl,
             C.Filler(),
             L.Row(
                 _restoreDefaults.MinWidth(140),
                 C.Filler(),
                 L.OkCancel(
                     C.OkButton(this, Save),
-                    C.CancelButton(this))
+                    C.CancelButton(this)
+                )
             )
         );
     }
@@ -138,6 +171,10 @@ internal class SettingsForm : EtoDialogBase
         UpdateCheckbox(_clearAfterSaving, c => c.DeleteAfterSaving);
         UpdateCheckbox(_keepSession, c => c.KeepSession);
         UpdateCheckbox(_singleInstance, c => c.SingleInstance);
+        _apiHost.Text = config.Get(c => c.ApiServerHost) ?? string.Empty;
+        _apiPort.Value = config.Get(c => c.ApiServerPort);
+        _apiEnableHttps.Checked = config.Get(c => c.ApiServerEnableHttps);
+        _apiEnableCors.Checked = config.Get(c => c.ApiServerEnableCors);
     }
 
     private void Save()
@@ -162,6 +199,10 @@ internal class SettingsForm : EtoDialogBase
         SetIfChanged(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
         SetIfChanged(c => c.KeepSession, _keepSession.IsChecked());
         SetIfChanged(c => c.SingleInstance, _singleInstance.IsChecked());
+        SetIfChanged(c => c.ApiServerHost, string.IsNullOrWhiteSpace(_apiHost.Text) ? "localhost" : _apiHost.Text.Trim());
+        SetIfChanged(c => c.ApiServerPort, (int)_apiPort.Value);
+        SetIfChanged(c => c.ApiServerEnableHttps, _apiEnableHttps.IsChecked());
+        SetIfChanged(c => c.ApiServerEnableCors, _apiEnableCors.IsChecked());
         transact.Commit();
 
         _desktopFormProvider.DesktopForm.Invalidate();
