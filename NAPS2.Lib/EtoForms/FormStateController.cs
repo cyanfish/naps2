@@ -107,6 +107,7 @@ public class FormStateController
             EtoPlatform.Current.SetMinimumClientSize(_window, _minimumClientSize);
         }
         _window.Resizable = Resizable;
+        EtoPlatform.Current.SetFormMaximizable(_window, Resizable);
         Shown = true;
     }
 

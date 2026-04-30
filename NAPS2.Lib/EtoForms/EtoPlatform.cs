@@ -119,6 +119,10 @@ public abstract class EtoPlatform
     {
     }
 
+    public virtual void SetFormMaximizable(Window window, bool maximizable)
+    {
+    }
+
     public virtual void ConfigureZoomButton(Button button, string icon)
     {
     }

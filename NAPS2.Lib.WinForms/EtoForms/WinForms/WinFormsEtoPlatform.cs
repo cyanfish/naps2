@@ -268,6 +268,13 @@ public class WinFormsEtoPlatform : EtoPlatform
         form.DpiChanged += (_, _) => (window as IFormBase)?.LayoutController.Invalidate();
     }
 
+    public override void SetFormMaximizable(Window window, bool maximizable)
+    {
+        var form = window.ToNative();
+        form.MaximizeBox = maximizable;
+        form.MinimizeBox = maximizable;
+    }
+
     public override float GetScaleFactor(Window window)
     {
         var form = window.ToNative();
