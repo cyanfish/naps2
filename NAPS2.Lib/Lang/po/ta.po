@@ -1,0 +1,1851 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: naps2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-19 21:51+0000\n"
+"PO-Revision-Date: 2026-05-06 00:00\n"
+"Last-Translator: \n"
+"Language-Team: Tamil\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: NAPS2 local generation\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: UiStrings.resx$SaveButtonDefaultAction$Message
+msgid "\"Save\" button default action:"
+msgstr "\"சேமி\" பொத்தான் இயல்புநிலை செயல்:"
+
+#: UiStrings.resx$ScanButtonDefaultAction$Message
+msgid "\"Scan\" button default action:"
+msgstr "\"ஸ்கேன்\" பொத்தான் இயல்புநிலை செயல்:"
+
+#: UiStrings.resx$ScanChangesDefaultProfile$Message
+msgid "\"Scan\" menu changes default profile"
+msgstr "\"ஸ்கேன்\" மெனு இயல்புநிலை சுயவிவரத்தை மாற்றுகிறது"
+
+#: UiStrings.resx$DeviceFoundSingular$Message
+msgid "1 device found."
+msgstr "1 சாதனம் கண்டறியப்பட்டது."
+
+#: SettingsResources.resx$BitDepth_24Color$Message
+msgid "24-bit Color"
+msgstr "24-bit நிறம்"
+
+#: SettingsResources.resx$PageSize_A3$Message
+msgid "A3 (297x420 mm)"
+msgstr "A3 (297x420 mm)"
+
+#: SettingsResources.resx$PageSize_A4$Message
+msgid "A4 (210x297 mm)"
+msgstr "A4 (210x297 mm)"
+
+#: SettingsResources.resx$PageSize_A5$Message
+msgid "A5 (148x210 mm)"
+msgstr "A5 (148x210 mm)"
+
+#: UiStrings.resx$About$Message
+#: UiStrings.resx$AboutFormTitle$Message
+msgid "About"
+msgstr "பற்றி"
+
+#: MiscResources.resx$AcquiringData$Message
+msgid "Acquiring data..."
+msgstr "தரவு பெறப்படுகிறது..."
+
+#: UiStrings.resx$Action$Message
+msgid "Action"
+msgstr "செயல்"
+
+#: UiStrings.resx$Advanced$Message
+msgid "Advanced"
+msgstr "மேம்பட்டவை"
+
+#: UiStrings.resx$AdvancedProfileFormTitle$Message
+msgid "Advanced Profile Settings"
+msgstr "மேம்பட்ட சுயவிவர அமைப்புகள்"
+
+#: MiscResources.resx$AllCount$Message
+msgid "All ({0})"
+msgstr "அனைத்தும் ({0})"
+
+#: MiscResources.resx$FileTypeAllFiles$Message
+msgid "All Files"
+msgstr "அனைத்து கோப்புகள்"
+
+#: UiStrings.resx$AllowAnnotations$Message
+msgid "Allow Annotations"
+msgstr "சிறுகுறிப்புகளை அனுமதி"
+
+#: UiStrings.resx$AllowContentCopying$Message
+msgid "Allow Content Copying"
+msgstr "உள்ளடக்க நகலெடுப்பை அனுமதி"
+
+#: UiStrings.resx$AllowContentCopyingForAccessibility$Message
+msgid "Allow Content Copying for Accessibility"
+msgstr "அணுகலுக்காக உள்ளடக்க நகலெடுப்பை அனுமதி"
+
+#: UiStrings.resx$AllowDocumentAssembly$Message
+msgid "Allow Document Assembly"
+msgstr "ஆவண இணைப்பை அனுமதி"
+
+#: UiStrings.resx$AllowDocumentModification$Message
+msgid "Allow Document Modification"
+msgstr "ஆவண மாற்றத்தை அனுமதி"
+
+#: UiStrings.resx$AllowFormFilling$Message
+msgid "Allow Form Filling"
+msgstr "படிவம் நிரப்புதலை அனுமதி"
+
+#: UiStrings.resx$AllowFullQualityPrinting$Message
+msgid "Allow Full Quality Printing"
+msgstr "முழு தரத்தில் அச்சிடுவதை அனுமதி"
+
+#: UiStrings.resx$AllowPrinting$Message
+msgid "Allow Printing"
+msgstr "அச்சிடுவதை அனுமதி"
+
+#: UiStrings.resx$AltDeinterleave$Message
+msgid "Alternate Deinterleave"
+msgstr "மாற்று டீஇன்டர்லீவ்"
+
+#: UiStrings.resx$AltInterleave$Message
+msgid "Alternate Interleave"
+msgstr "மாற்று இன்டர்லீவ்"
+
+#: UiStrings.resx$AlwaysAsk$Message
+msgid "Always Ask"
+msgstr "எப்போதும் கேள்"
+
+#: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
+#: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
+msgid "Always Prompt"
+msgstr "எப்போதும் கேள்"
+
+#: MiscResources.resx$PdfImportComponentNeeded$Message
+msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
+msgstr "இந்த PDF கோப்பை இறக்குமதி செய்ய ஒரு கூடுதல் கூறு தேவை. அதை இப்போது பதிவிறக்க விரும்புகிறீர்களா?"
+
+#: SdkResources.resx$OcrError$Message
+msgid "An error occurred running OCR."
+msgstr "OCR இயக்கும்போது ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$AuthError$Message
+msgid "An error occurred when trying to authorize."
+msgstr "அங்கீகரிக்க முயற்சிக்கும்போது ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$AutoSaveError$Message
+msgid "An error occurred when trying to auto save."
+msgstr "தானாகச் சேமிக்க முயற்சிக்கும்போது ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$UpdateError$Message
+msgid "An error occurred when trying to install the update."
+msgstr "புதுப்பிப்பை நிறுவ முயற்சிக்கும்போது ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$ErrorSaving$Message
+msgid "An error occurred when trying to save the file."
+msgstr "கோப்பைச் சேமிக்க முயற்சிக்கும்போது ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$ErrorEmailing$Message
+msgid "An error occurred when trying to send the email."
+msgstr "மின்னஞ்சலை அனுப்ப முயற்சிக்கும்போது ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$EmailError$Message
+msgid "An error occurred while trying to send an email."
+msgstr "மின்னஞ்சலை அனுப்ப முயற்சிக்கும்போது ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$UnknownDriverError$Message
+#: SdkResources.resx$UnknownDriverError$Message
+msgid "An error occurred with the scanning driver."
+msgstr "ஸ்கேனிங் இயக்கியில் ஒரு பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$ExitWithActiveOperations$Message
+msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
+msgstr "ஒரு செயல்பாடு நடந்துகொண்டிருக்கிறது. வெளியேறி செயல்பாட்டை ரத்துசெய்ய விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$BatchError$Message
+msgid "An unknown error occurred during the batch scan."
+msgstr "பேட்ச் ஸ்கேனின் போது ஒரு அறியப்படாத பிழை ஏற்பட்டது."
+
+#: MiscResources.resx$UpdateAvailable$Message
+msgid "An update is available."
+msgstr "ஒரு புதுப்பிப்பு கிடைக்கிறது."
+
+#: MiscResources.resx$OcrUpdateAvailable$Message
+msgid "An update to OCR is available."
+msgstr "OCR-க்கான புதுப்பிப்பு கிடைக்கிறது."
+
+#: UiStrings.resx$AppleDriver$Message
+msgid "Apple Driver"
+msgstr "Apple இயக்கி"
+
+#: SettingsResources.resx$EmailProviderType_AppleMail$Message
+msgid "Apple Mail"
+msgstr "Apple Mail"
+
+#: UiStrings.resx$Application$Message
+msgid "Application"
+msgstr "பயன்பாடு"
+
+#: UiStrings.resx$BrightnessContrastAfterScan$Message
+msgid "Apply brightness/contrast after scan"
+msgstr "ஸ்கேனுக்குப் பிறகு பிரகாசம்/மாறுபாட்டைப் பயன்படுத்து"
+
+#: UiStrings.resx$ApplyToSelected$Message
+msgid "Apply to all {0} selected images"
+msgstr "தேர்ந்தெடுக்கப்பட்ட அனைத்து {0} படங்களுக்கும் பயன்படுத்து"
+
+#: MiscResources.resx$ConfirmCancelBatch$Message
+msgid "Are you sure you want to cancel the batch scan?"
+msgstr "பேட்ச் ஸ்கேனை ரத்துசெய்ய விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$ConfirmClearItems$Message
+msgid "Are you sure you want to clear {0} item(s)?"
+msgstr "நீங்கள் {0} உருப்படிகளை அழிக்க விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$ConfirmDelete$Message
+msgid "Are you sure you want to delete \"{0}\"?"
+msgstr "\"{0}\" ஐ நீக்க விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$ConfirmDeleteSingleProfile$Message
+msgid "Are you sure you want to delete the profile {0}?"
+msgstr "{0} சுயவிவரத்தை நீக்க விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$ConfirmDeleteItems$Message
+msgid "Are you sure you want to delete {0} item(s)?"
+msgstr "நீங்கள் {0} உருப்படிகளை நீக்க விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
+msgid "Are you sure you want to delete {0} profiles?"
+msgstr "நீங்கள் {0} சுயவிவரங்களை நீக்க விரும்புகிறீர்களா?"
+
+#: UiStrings.resx$ConfirmDeleteSharedDevice$Message
+msgid "Are you sure you want to stop sharing {0}?"
+msgstr "{0} ஐப் பகிர்வதை நிறுத்த விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$ConfirmResetImages$Message
+msgid "Are you sure you want undo your changes to {0} image(s)?"
+msgstr "நீங்கள் {0} படங்களில் செய்த மாற்றங்களை செயல்தவிர்க்க விரும்புகிறீர்களா?"
+
+#: UiStrings.resx$Assign$Message
+msgid "Assign"
+msgstr "ஒதுக்கு"
+
+#: UiStrings.resx$AttachmentNameLabel$Message
+msgid "Attachment Name:"
+msgstr "இணைப்பின் பெயர்:"
+
+#: UiStrings.resx$AuthorLabel$Message
+msgid "Author:"
+msgstr "ஆசிரியர்:"
+
+#: UiStrings.resx$AuthorizeFormTitle$Message
+msgid "Authorize"
+msgstr "அங்கீகரி"
+
+#: SettingsResources.resx$TiffComp_Auto$Message
+msgid "Auto"
+msgstr "தானாக"
+
+#: UiStrings.resx$AutoSaveSettings$Message
+#: UiStrings.resx$AutoSaveSettingsFormTitle$Message
+msgid "Auto Save Settings"
+msgstr "தானாகச் சேமிக்கும் அமைப்புகள்"
+
+#: UiStrings.resx$AutoIncrementing1Digit$Message
+msgid "Auto-incrementing number (1 digits)"
+msgstr "தானாக அதிகரிக்கும் எண் (1 இலக்கம்)"
+
+#: UiStrings.resx$AutoIncrementing2Digit$Message
+msgid "Auto-incrementing number (2 digits)"
+msgstr "தானாக அதிகரிக்கும் எண் (2 இலக்கங்கள்)"
+
+#: UiStrings.resx$AutoIncrementing3Digit$Message
+msgid "Auto-incrementing number (3 digits)"
+msgstr "தானாக அதிகரிக்கும் எண் (3 இலக்கங்கள்)"
+
+#: UiStrings.resx$AutoIncrementing4Digit$Message
+msgid "Auto-incrementing number (4 digits)"
+msgstr "தானாக அதிகரிக்கும் எண் (4 இலக்கங்கள்)"
+
+#: UiStrings.resx$RunOcrAfterScanning$Message
+msgid "Automatically run OCR after scanning"
+msgstr "ஸ்கேன் செய்த பிறகு தானாக OCR இயக்கு"
+
+#: SettingsResources.resx$PageSize_B4$Message
+msgid "B4 (250x353 mm)"
+msgstr "B4 (250x353 mm)"
+
+#: SettingsResources.resx$PageSize_B5$Message
+msgid "B5 (176x250 mm)"
+msgstr "B5 (176x250 mm)"
+
+#: UiStrings.resx$BatchScan$Message
+#: UiStrings.resx$BatchScanFormTitle$Message
+msgid "Batch Scan"
+msgstr "பேட்ச் ஸ்கேன்"
+
+#: MiscResources.resx$BatchStatusCancelled$Message
+msgid "Batch cancelled."
+msgstr "பேட்ச் ரத்துசெய்யப்பட்டது."
+
+#: MiscResources.resx$BatchStatusComplete$Message
+msgid "Batch completed successfully."
+msgstr "பேட்ச் வெற்றிகரமாக முடிந்தது."
+
+#: MiscResources.resx$BatchStatusError$Message
+msgid "Batch scan stopped due to error."
+msgstr "பிழை காரணமாக பேட்ச் ஸ்கேன் நிறுத்தப்பட்டது."
+
+#: SettingsResources.resx$OcrMode_Best$Message
+msgid "Best"
+msgstr "சிறந்தது"
+
+#: UiStrings.resx$BitDepthLabel$Message
+msgid "Bit depth:"
+msgstr "பிட் ஆழம்:"
+
+#: MiscResources.resx$FileTypeBmp$Message
+msgid "Bitmap Files (*.bmp)"
+msgstr "Bitmap கோப்புகள் (*.bmp)"
+
+#: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
+#: UiStrings.resx$BlackAndWhite$Message
+msgid "Black and White"
+msgstr "கருப்பு வெள்ளை"
+
+#: UiStrings.resx$BlankPages$Message
+msgid "Blank Pages"
+msgstr "வெற்று பக்கங்கள்"
+
+#: UiStrings.resx$BrightnessContrast$Message
+msgid "Brightness / Contrast"
+msgstr "பிரகாசம் / மாறுபாடு"
+
+#: UiStrings.resx$BrightnessLabel$Message
+msgid "Brightness:"
+msgstr "பிரகாசம்:"
+
+#: SettingsResources.resx$TiffComp_Ccitt4$Message
+msgid "CCITT4"
+msgstr "CCITT4"
+
+#: UiStrings.resx$CantFindScannerFlatpak$Message
+msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
+msgstr "உங்கள் ஸ்கேனரைக் கண்டுபிடிக்க முடியவில்லையா? NAPS2 Flatpak-இன் வரம்புகள் பற்றி வாசிக்கவும்."
+
+#: MiscResources.resx$Cancel$Message
+#: UiStrings.resx$Cancel$Message
+msgid "Cancel"
+msgstr "ரத்துசெய்"
+
+#: MiscResources.resx$CancelBatch$Message
+msgid "Cancel Batch"
+msgstr "பேட்ச் ரத்துசெய்"
+
+#: MiscResources.resx$BatchStatusCancelling$Message
+msgid "Cancelling...."
+msgstr "ரத்துசெய்யப்படுகிறது...."
+
+#: SettingsResources.resx$HorizontalAlign_Center$Message
+msgid "Center"
+msgstr "மையம்"
+
+#: UiStrings.resx$Change$Message
+msgid "Change"
+msgstr "மாற்று"
+
+#: UiStrings.resx$CheckForUpdates$Message
+msgid "Check for updates"
+msgstr "புதுப்பிப்புகளை சரிபார்"
+
+#: MiscResources.resx$CheckingForUpdates$Message
+msgid "Checking..."
+msgstr "சரிபார்க்கப்படுகிறது..."
+
+#: UiStrings.resx$EmailProviderFormTitle$Message
+msgid "Choose Email Provider"
+msgstr "மின்னஞ்சல் வழங்குநரைத் தேர்ந்தெடு"
+
+#: MiscResources.resx$ChooseProfile$Message
+msgid "Choose Profile"
+msgstr "சுயவிவரத்தைத் தேர்ந்தெடு"
+
+#: UiStrings.resx$ChooseDevice$Message
+msgid "Choose device"
+msgstr "சாதனத்தைத் தேர்ந்தெடு"
+
+#: MiscResources.resx$Clear$Message
+#: UiStrings.resx$Clear$Message
+msgid "Clear"
+msgstr "அழி"
+
+#: UiStrings.resx$ClearAll$Message
+msgid "Clear All"
+msgstr "அனைத்தையும் அழி"
+
+#: UiStrings.resx$ClearAfterSaving$Message
+msgid "Clear images after saving"
+msgstr "சேமித்த பிறகு படங்களை அழி"
+
+#: MiscResources.resx$Close$Message
+msgid "Close"
+msgstr "மூடு"
+
+#: UiStrings.resx$Combine$Message
+msgid "Combine"
+msgstr "இணை"
+
+#: SdkResources.resx$DeviceCommunicationFailure$Message
+msgid "Communication with the scanning device was interrupted."
+msgstr "ஸ்கேனிங் சாதனத்துடனான தொடர்பு தடைப்பட்டது."
+
+#: UiStrings.resx$Compatibility$Message
+msgid "Compatibility"
+msgstr "இணக்கத்தன்மை"
+
+#: UiStrings.resx$CompressionLabel$Message
+msgid "Compression:"
+msgstr "சுருக்கம்:"
+
+#: UiStrings.resx$Connect$Message
+msgid "Connect"
+msgstr "இணை"
+
+#: UiStrings.resx$ConnectionError$Message
+msgid "Connection error."
+msgstr "இணைப்புப் பிழை."
+
+#: UiStrings.resx$ContrastLabel$Message
+msgid "Contrast:"
+msgstr "மாறுபாடு:"
+
+#: UiStrings.resx$Copy$Message
+msgid "Copy"
+msgstr "நகலெடு"
+
+#: MiscResources.resx$CopyProgress$Message
+msgid "Copy Progress"
+msgstr "நகலெடுப்பு முன்னேற்றம்"
+
+#: MiscResources.resx$Copying$Message
+msgid "Copying..."
+msgstr "நகலெடுக்கப்படுகிறது..."
+
+#: UiStrings.resx$CopyrightFormat$Message
+msgid "Copyright {0} NAPS2 Contributors"
+msgstr "பதிப்புரிமை {0} NAPS2 பங்களிப்பாளர்கள்"
+
+#: UiStrings.resx$CoverageThreshold$Message
+msgid "Coverage Threshold"
+msgstr "கவரேஜ் வரம்பு"
+
+#: UiStrings.resx$Crop$Message
+msgid "Crop"
+msgstr "வெட்டு"
+
+#: UiStrings.resx$CropToPageSize$Message
+msgid "Crop to page size"
+msgstr "பக்க அளவுக்கு வெட்டு"
+
+#: MiscResources.resx$CustomPageSizeFormat$Message
+msgid "Custom ({0}x{1} {2})"
+msgstr "தனிப்பயன் ({0}x{1} {2})"
+
+#: UiStrings.resx$PageSizeFormTitle$Message
+msgid "Custom Page Size"
+msgstr "தனிப்பயன் பக்க அளவு"
+
+#: UiStrings.resx$ResolutionFormTitle$Message
+msgid "Custom Resolution"
+msgstr "தனிப்பயன் தெளிவுத்திறன்"
+
+#: UiStrings.resx$CustomRotation$Message
+msgid "Custom Rotation"
+msgstr "தனிப்பயன் சுழற்சி"
+
+#: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
+msgid "Custom SMTP"
+msgstr "தனிப்பயன் SMTP"
+
+#: SettingsResources.resx$PageSize_Custom$Message
+#: SettingsResources.resx$Resolution_Custom$Message
+msgid "Custom..."
+msgstr "தனிப்பயன்..."
+
+#: SettingsResources.resx$Theme_Dark$Message
+msgid "Dark"
+msgstr "இருண்ட"
+
+#: UiStrings.resx$Day2Digit$Message
+msgid "Day (01-31)"
+msgstr "நாள் (01-31)"
+
+#: SettingsResources.resx$PdfCompat_Default$Message
+#: SettingsResources.resx$Theme_Default$Message
+#: SettingsResources.resx$TwainImpl_Default$Message
+#: SettingsResources.resx$WiaVersion_Default$Message
+#: UiStrings.resx$Default$Message
+msgid "Default"
+msgstr "இயல்புநிலை"
+
+#: UiStrings.resx$DefaultFilePathLabel$Message
+msgid "Default File Path:"
+msgstr "இயல்புநிலை கோப்பு பாதை:"
+
+#: UiStrings.resx$Deinterleave$Message
+msgid "Deinterleave"
+msgstr "டீஇன்டர்லீவ்"
+
+#: MiscResources.resx$Delete$Message
+#: UiStrings.resx$Delete$Message
+msgid "Delete"
+msgstr "நீக்கு"
+
+#: UiStrings.resx$Deskew$Message
+msgid "Deskew"
+msgstr "சீரமை"
+
+#: MiscResources.resx$AutoDeskewProgress$Message
+msgid "Deskew Progress"
+msgstr "சீரமைப்பு முன்னேற்றம்"
+
+#: UiStrings.resx$DeskewScannedPages$Message
+msgid "Deskew scanned pages"
+msgstr "ஸ்கேன் செய்யப்பட்ட பக்கங்களை சீரமை"
+
+#: MiscResources.resx$AutoDeskewing$Message
+msgid "Deskewing..."
+msgstr "சீரமைக்கப்படுகிறது..."
+
+#: UiStrings.resx$DeviceLabel$Message
+msgid "Device:"
+msgstr "சாதனம்:"
+
+#: UiStrings.resx$Dimensions$Message
+msgid "Dimensions"
+msgstr "பரிமாணங்கள்"
+
+#: UiStrings.resx$DisplayNameLabel$Message
+msgid "Display name:"
+msgstr "காட்டப்படும் பெயர்:"
+
+#: UiStrings.resx$DocumentCorrection$Message
+msgid "Document Correction"
+msgstr "ஆவண திருத்தம்"
+
+#: MiscResources.resx$Donate$Message
+#: UiStrings.resx$Donate$Message
+msgid "Donate"
+msgstr "நன்கொடை அளி"
+
+#: UiStrings.resx$Done$Message
+msgid "Done"
+msgstr "முடிந்தது"
+
+#: UiStrings.resx$Download$Message
+msgid "Download"
+msgstr "பதிவிறக்கு"
+
+#: MiscResources.resx$DownloadError$Message
+msgid "Download Error"
+msgstr "பதிவிறக்கப் பிழை"
+
+#: MiscResources.resx$DownloadNeeded$Message
+msgid "Download Needed"
+msgstr "பதிவிறக்கம் தேவை"
+
+#: UiStrings.resx$DownloadProgressFormTitle$Message
+msgid "Download Progress"
+msgstr "பதிவிறக்க முன்னேற்றம்"
+
+#: UiStrings.resx$Dpi$Message
+msgid "Dpi"
+msgstr "DPI"
+
+#: SettingsResources.resx$Source_Duplex$Message
+msgid "Duplex"
+msgstr "டூப்ளக்ஸ்"
+
+#: UiStrings.resx$EsclDriver$Message
+msgid "ESCL Driver"
+msgstr "ESCL இயக்கி"
+
+#: UiStrings.resx$EsclNetworkDriver$Message
+msgid "ESCL Network Driver"
+msgstr "ESCL நெட்வொர்க் இயக்கி"
+
+#: UiStrings.resx$EsclUsbDriver$Message
+msgid "ESCL USB Driver"
+msgstr "ESCL USB இயக்கி"
+
+#: UiStrings.resx$Edit$Message
+msgid "Edit"
+msgstr "திருத்து"
+
+#: UiStrings.resx$EditWithAppName$Message
+msgid "Edit with {0}"
+msgstr "{0} கொண்டு திருத்து"
+
+#: UiStrings.resx$EditWith$Message
+#: UiStrings.resx$EditWithFormTitle$Message
+msgid "Edit with..."
+msgstr "இதனுடன் திருத்து..."
+
+#: UiStrings.resx$EmailAll$Message
+msgid "Email All"
+msgstr "அனைத்தையும் மின்னஞ்சல் செய்"
+
+#: UiStrings.resx$EmailAllAsPdf$Message
+msgid "Email All as PDF"
+msgstr "அனைத்தையும் PDF ஆக மின்னஞ்சல் செய்"
+
+#: MiscResources.resx$EmailPdf$Message
+#: UiStrings.resx$EmailPdf$Message
+msgid "Email PDF"
+msgstr "PDF மின்னஞ்சல்"
+
+#: MiscResources.resx$EmailPdfProgress$Message
+msgid "Email PDF Progress"
+msgstr "PDF மின்னஞ்சல் முன்னேற்றம்"
+
+#: UiStrings.resx$EmailSelected$Message
+msgid "Email Selected"
+msgstr "தேர்ந்தெடுத்தவற்றை மின்னஞ்சல் செய்"
+
+#: UiStrings.resx$EmailSelectedAsPdf$Message
+msgid "Email Selected as PDF"
+msgstr "தேர்ந்தெடுத்தவற்றை PDF ஆக மின்னஞ்சல் செய்"
+
+#: UiStrings.resx$EmailSettings$Message
+#: UiStrings.resx$EmailSettingsFormTitle$Message
+msgid "Email Settings"
+msgstr "மின்னஞ்சல் அமைப்புகள்"
+
+#: UiStrings.resx$EnableAutoSave$Message
+msgid "Enable Auto Save"
+msgstr "தானாகச் சேமிப்பை இயக்கு"
+
+#: UiStrings.resx$EnableDebugLogging$Message
+msgid "Enable debug logging"
+msgstr "பிழைத்திருத்தப் பதிவை இயக்கு"
+
+#: UiStrings.resx$EncryptPdf$Message
+msgid "Encrypt PDF"
+msgstr "PDF ஐ குறியாக்கு"
+
+#: UiStrings.resx$Encryption$Message
+msgid "Encryption"
+msgstr "குறியாக்கம்"
+
+#: MiscResources.resx$FileTypeEmf$Message
+msgid "Enhanced Windows MetaFile (*.emf)"
+msgstr "மேம்பட்ட Windows MetaFile (*.emf)"
+
+#: MiscResources.resx$Error$Message
+#: UiStrings.resx$ErrorFormTitle$Message
+msgid "Error"
+msgstr "பிழை"
+
+#: UiStrings.resx$ErrorStartingApplication$Message
+msgid "Error starting application {0}"
+msgstr "{0} பயன்பாட்டைத் தொடங்குவதில் பிழை"
+
+#: MiscResources.resx$EstimatedDownloadSize$Message
+#: UiStrings.resx$EstimatedDownloadSize$Message
+msgid "Estimated download size: {0} MB"
+msgstr "மதிப்பிடப்பட்ட பதிவிறக்க அளவு: {0} MB"
+
+#: MiscResources.resx$FileTypeExif$Message
+msgid "Exchangeable Image File (*.exif)"
+msgstr "Exchangeable Image File (*.exif)"
+
+#: UiStrings.resx$ExcludeBlankPages$Message
+msgid "Exclude blank pages"
+msgstr "வெற்றுப் பக்கங்களை விலக்கு"
+
+#: SettingsResources.resx$OcrMode_Fast$Message
+msgid "Fast"
+msgstr "வேகமான"
+
+#: SettingsResources.resx$Source_Feeder$Message
+msgid "Feeder"
+msgstr "ஊட்டி"
+
+#: UiStrings.resx$FileNameLabel$Message
+msgid "File Name:"
+msgstr "கோப்பின் பெயர்:"
+
+#: UiStrings.resx$FilePathLabel$Message
+msgid "File Path:"
+msgstr "கோப்பு பாதை:"
+
+#: UiStrings.resx$OcrPreProcessing$Message
+msgid "Fix white balance and remove noise"
+msgstr "வெள்ளை சமநிலையை சரிசெய்து சத்தத்தை அகற்று"
+
+#: UiStrings.resx$Flip$Message
+msgid "Flip"
+msgstr "புரட்டு"
+
+#: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
+msgid "Flip back sides of duplex pages"
+msgstr "டூப்ளக்ஸ் பக்கங்களின் பின் பக்கங்களைப் புரட்டு"
+
+#: UiStrings.resx$FlipDuplexedPages$Message
+msgid "Flip duplexed pages"
+msgstr "டூப்ளக்ஸ் பக்கங்களைப் புரட்டு"
+
+#: UiStrings.resx$JpegQualityHelp$Message
+msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
+msgstr "உயர் JPEG தரத்திற்கு (80+), சிறந்த முடிவுகளுக்காக உங்கள் சுயவிவரத்தில் படத்தின் தரத்தையும் அதிகரிக்கவும்."
+
+#: MiscResources.resx$FileTypeGif$Message
+msgid "GIF File (*.gif)"
+msgstr "GIF கோப்பு (*.gif)"
+
+#: UiStrings.resx$GetMoreLanguages$Message
+msgid "Get more languages"
+msgstr "மேலும் மொழிகளைப் பெறு"
+
+#: SettingsResources.resx$Source_Glass$Message
+msgid "Glass"
+msgstr "கண்ணாடி"
+
+#: SettingsResources.resx$EmailProviderType_Gmail$Message
+msgid "Gmail"
+msgstr "Gmail"
+
+#: SettingsResources.resx$BitDepth_8Grayscale$Message
+msgid "Grayscale"
+msgstr "சாம்பல் நிறம்"
+
+#: UiStrings.resx$HorizontalAlignLabel$Message
+msgid "Horizontal align:"
+msgstr "கிடைமட்ட சீரமைவு:"
+
+#: UiStrings.resx$Hour2Digit$Message
+msgid "Hour (0-23)"
+msgstr "மணி (0-23)"
+
+#: UiStrings.resx$HueSaturation$Message
+msgid "Hue / Saturation"
+msgstr "வண்ணம் / செறிவு"
+
+#: UiStrings.resx$IpHost$Message
+msgid "IP/Host"
+msgstr "IP/ஹோஸ்ட்"
+
+#: UiStrings.resx$IconsFrom$Message
+msgid "Icons from:"
+msgstr "ஐகான்கள் இங்கிருந்து:"
+
+#: UiStrings.resx$Image$Message
+msgid "Image"
+msgstr "படம்"
+
+#: MiscResources.resx$FileTypeImageFiles$Message
+msgid "Image Files"
+msgstr "பட கோப்புகள்"
+
+#: UiStrings.resx$ImageQuality$Message
+msgid "Image Quality"
+msgstr "படத்தின் தரம்"
+
+#: UiStrings.resx$ImageSettings$Message
+#: UiStrings.resx$ImageSettingsFormTitle$Message
+msgid "Image Settings"
+msgstr "பட அமைப்புகள்"
+
+#: MiscResources.resx$ImageSaved$Message
+msgid "Image saved."
+msgstr "படம் சேமிக்கப்பட்டது."
+
+#: UiStrings.resx$Import$Message
+msgid "Import"
+msgstr "இறக்குமதி"
+
+#: MiscResources.resx$ImportProgress$Message
+msgid "Import Progress"
+msgstr "இறக்குமதி முன்னேற்றம்"
+
+#: MiscResources.resx$ImportingFormat$Message
+msgid "Importing {0}..."
+msgstr "{0} இறக்குமதி செய்யப்படுகிறது..."
+
+#: MiscResources.resx$Importing$Message
+msgid "Importing..."
+msgstr "இறக்குமதி செய்யப்படுகிறது..."
+
+#: MiscResources.resx$Install$Message
+msgid "Install {0}"
+msgstr "{0} ஐ நிறுவு"
+
+#: MiscResources.resx$InstallComplete$Message
+msgid "Installation Complete"
+msgstr "நிறுவல் முடிந்தது"
+
+#: MiscResources.resx$InstallFailedTitle$Message
+msgid "Installation Failed"
+msgstr "நிறுவல் தோல்வியடைந்தது"
+
+#: MiscResources.resx$InstallCompletePromptRestart$Message
+msgid "Installation complete. Do you want to restart NAPS2 now?"
+msgstr "நிறுவல் முடிந்தது. NAPS2 ஐ இப்போது மறுதொடக்கம் செய்ய விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$InstallFailed$Message
+msgid "Installation failed."
+msgstr "நிறுவல் தோல்வியடைந்தது."
+
+#: UiStrings.resx$Interface$Message
+msgid "Interface"
+msgstr "இடைமுகம்"
+
+#: UiStrings.resx$Interleave$Message
+msgid "Interleave"
+msgstr "இன்டர்லீவ்"
+
+#: MiscResources.resx$FileTypeJpeg$Message
+msgid "JPEG File (*.jpg, *.jpeg)"
+msgstr "JPEG கோப்பு (*.jpg, *.jpeg)"
+
+#: MiscResources.resx$FileTypeJp2$Message
+msgid "JPEG2000 File (*.jp2, *.jpx)"
+msgstr "JPEG2000 கோப்பு (*.jp2, *.jpx)"
+
+#: UiStrings.resx$JpegQuality$Message
+msgid "Jpeg Quality"
+msgstr "JPEG தரம்"
+
+#: UiStrings.resx$KeepSession$Message
+msgid "Keep images across sessions"
+msgstr "அமர்வுகளுக்கு இடையில் படங்களை வைத்திரு"
+
+#: UiStrings.resx$KeyboardShortcuts$Message
+#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
+msgid "Keyboard Shortcuts"
+msgstr "விசைப்பலகை குறுக்குவழிகள்"
+
+#: UiStrings.resx$KeywordsLabel$Message
+msgid "Keywords:"
+msgstr "முக்கிய வார்த்தைகள்:"
+
+#: SettingsResources.resx$TiffComp_Lzw$Message
+msgid "LZW"
+msgstr "LZW"
+
+#: UiStrings.resx$Language$Message
+msgid "Language"
+msgstr "மொழி"
+
+#: MiscResources.resx$LeaveAReview$Message
+msgid "Leave a Review"
+msgstr "ஒரு மதிப்புரை அளி"
+
+#: SettingsResources.resx$HorizontalAlign_Left$Message
+msgid "Left"
+msgstr "இடது"
+
+#: SettingsResources.resx$TwainImpl_Legacy$Message
+msgid "Legacy (native UI only)"
+msgstr "பழைய (உள்ளமை UI மட்டும்)"
+
+#: SettingsResources.resx$Theme_Light$Message
+msgid "Light"
+msgstr "வெளிச்சம்"
+
+#: MiscResources.resx$ReviewPrompt$Message
+msgid "Like NAPS2?"
+msgstr "NAPS2 பிடித்திருக்கிறதா?"
+
+#: UiStrings.resx$LoadIn$Message
+msgid "Load images into NAPS2"
+msgstr "NAPS2-இல் படங்களை ஏற்று"
+
+#: UiStrings.resx$MakePdfsSearchable$Message
+msgid "Make PDFs searchable using OCR"
+msgstr "OCR பயன்படுத்தி PDF-களை தேடக்கூடியதாக மாற்று"
+
+#: UiStrings.resx$ManualIp$Message
+#: UiStrings.resx$ManualIpFormTitle$Message
+msgid "Manual IP"
+msgstr "கைமுறை IP"
+
+#: UiStrings.resx$MaximumQuality$Message
+msgid "Maximum quality (large files)"
+msgstr "அதிகபட்ச தரம் (பெரிய கோப்புகள்)"
+
+#: SettingsResources.resx$TwainImpl_MemXfer$Message
+msgid "Memory Transfer"
+msgstr "நினைவக பரிமாற்றம்"
+
+#: UiStrings.resx$Metadata$Message
+msgid "Metadata"
+msgstr "மெட்டாடேட்டா"
+
+#: UiStrings.resx$Minute2Digit$Message
+msgid "Minute (00-59)"
+msgstr "நிமிடம் (00-59)"
+
+#: UiStrings.resx$Month2Digit$Message
+msgid "Month (01-12)"
+msgstr "மாதம் (01-12)"
+
+#: UiStrings.resx$MoreInfo$Message
+msgid "More info"
+msgstr "மேலும் தகவல்"
+
+#: UiStrings.resx$MoveDown$Message
+msgid "Move Down"
+msgstr "கீழே நகர்த்து"
+
+#: UiStrings.resx$MoveUp$Message
+msgid "Move Up"
+msgstr "மேலே நகர்த்து"
+
+#: UiStrings.resx$OcrMultiLangFormTitle$Message
+msgid "Multiple Languages"
+msgstr "பல மொழிகள்"
+
+#: UiStrings.resx$MultipleLanguages$Message
+msgid "Multiple Languages..."
+msgstr "பல மொழிகள்..."
+
+#: UiStrings.resx$MultipleScansDelay$Message
+msgid "Multiple scans (fixed delay between scans)"
+msgstr "பல ஸ்கேன்கள் (ஸ்கேன்களுக்கிடையே நிலையான தாமதம்)"
+
+#: UiStrings.resx$MultipleScansPrompt$Message
+msgid "Multiple scans (prompt between scans)"
+msgstr "பல ஸ்கேன்கள் (ஸ்கேன்களுக்கிடையே கேள்)"
+
+#: MiscResources.resx$NAPS2$Message
+#: SdkResources.resx$NAPS2$Message
+#: UiStrings.resx$Naps2$Message
+msgid "NAPS2"
+msgstr "NAPS2"
+
+#: UiStrings.resx$Naps2TitleFormat$Message
+msgid "NAPS2 - {0}"
+msgstr "NAPS2 - {0}"
+
+#: MiscResources.resx$DonatePrompt$Message
+msgid "NAPS2 is completely free. Consider making a donation."
+msgstr "NAPS2 முற்றிலும் இலவசம். நன்கொடை அளிப்பதைக் கருத்தில் கொள்ளுங்கள்."
+
+#: UiStrings.resx$NameOptional$Message
+msgid "Name (optional)"
+msgstr "பெயர் (விருப்பத்தேர்வு)"
+
+#: MiscResources.resx$NameMissing$Message
+msgid "Name missing."
+msgstr "பெயர் இல்லை."
+
+#: SettingsResources.resx$TwainImpl_NativeXfer$Message
+msgid "Native Transfer"
+msgstr "உள்ளமை பரிமாற்றம்"
+
+#: UiStrings.resx$New$Message
+msgid "New"
+msgstr "புதிய"
+
+#: UiStrings.resx$NewProfile$Message
+msgid "New Profile"
+msgstr "புதிய சுயவிவரம்"
+
+#: UiStrings.resx$Next$Message
+msgid "Next"
+msgstr "அடுத்து"
+
+#: UiStrings.resx$BatchPromptFormTitle$Message
+msgid "Next Scan"
+msgstr "அடுத்த ஸ்கேன்"
+
+#: MiscResources.resx$NoDeviceSelected$Message
+#: SdkResources.resx$NoDeviceSelected$Message
+msgid "No device selected."
+msgstr "எந்த சாதனமும் தேர்ந்தெடுக்கப்படவில்லை."
+
+#: UiStrings.resx$NoDevicesFound$Message
+msgid "No devices found."
+msgstr "எந்த சாதனங்களும் கண்டறியப்படவில்லை."
+
+#: MiscResources.resx$NoPagesInFeeder$Message
+#: SdkResources.resx$NoPagesInFeeder$Message
+msgid "No pages are in the feeder."
+msgstr "ஊட்டியில் பக்கங்கள் எதுவும் இல்லை."
+
+#: SettingsResources.resx$EmailProvider_NotSelected$Message
+msgid "No provider selected."
+msgstr "எந்த வழங்குநரும் தேர்ந்தெடுக்கப்படவில்லை."
+
+#: MiscResources.resx$NoDevicesFound$Message
+#: SdkResources.resx$NoDevicesFound$Message
+msgid "No scanning device was found."
+msgstr "எந்த ஸ்கேனிங் சாதனமும் கண்டறியப்படவில்லை."
+
+#: MiscResources.resx$NoUpdates$Message
+msgid "No updates available."
+msgstr "புதுப்பிப்புகள் எதுவும் கிடைக்கவில்லை."
+
+#: SettingsResources.resx$TiffComp_None$Message
+msgid "None"
+msgstr "எதுவுமில்லை"
+
+#: UiStrings.resx$Naps2FullName$Message
+msgid "Not Another PDF Scanner"
+msgstr "Not Another PDF Scanner"
+
+#: UiStrings.resx$NotNow$Message
+msgid "Not Now"
+msgstr "இப்போது இல்லை"
+
+#: UiStrings.resx$NumberOfScansLabel$Message
+msgid "Number of scans:"
+msgstr "ஸ்கேன்களின் எண்ணிக்கை:"
+
+#: UiStrings.resx$Ocr$Message
+msgid "OCR"
+msgstr "OCR"
+
+#: UiStrings.resx$OcrDownloadFormTitle$Message
+msgid "OCR Download"
+msgstr "OCR பதிவிறக்கம்"
+
+#: MiscResources.resx$OcrProgress$Message
+msgid "OCR Progress"
+msgstr "OCR முன்னேற்றம்"
+
+#: UiStrings.resx$OcrSetupFormTitle$Message
+msgid "OCR Setup"
+msgstr "OCR அமைவு"
+
+#: UiStrings.resx$OcrLanguageLabel$Message
+msgid "OCR language:"
+msgstr "OCR மொழி:"
+
+#: UiStrings.resx$OcrModeLabel$Message
+msgid "OCR mode:"
+msgstr "OCR முறை:"
+
+#: UiStrings.resx$OK$Message
+msgid "OK"
+msgstr "OK"
+
+#: UiStrings.resx$OffsetWidth$Message
+msgid "Offset width based on alignment (WIA)"
+msgstr "சீரமைவின் அடிப்படையில் ஆஃப்செட் அகலம் (WIA)"
+
+#: SettingsResources.resx$TwainImpl_OldDsm$Message
+msgid "Old DSM"
+msgstr "பழைய DSM"
+
+#: UiStrings.resx$OneFilePerPage$Message
+msgid "One file per page"
+msgstr "ஒரு பக்கத்திற்கு ஒரு கோப்பு"
+
+#: UiStrings.resx$OneFilePerScan$Message
+msgid "One file per scan"
+msgstr "ஒரு ஸ்கேனுக்கு ஒரு கோப்பு"
+
+#: MiscResources.resx$FilesCouldNotBeDownloaded$Message
+msgid "One or more files could not be downloaded."
+msgstr "ஒன்று அல்லது அதற்கு மேற்பட்ட கோப்புகளைப் பதிவிறக்க முடியவில்லை."
+
+#: UiStrings.resx$SingleInstanceDesc$Message
+msgid "Only allow a single NAPS2 instance"
+msgstr "ஒரே ஒரு NAPS2 நிகழ்வை மட்டும் அனுமதி"
+
+#: UiStrings.resx$OpenFolder$Message
+msgid "Open Folder"
+msgstr "கோப்புறையைத் திற"
+
+#: MiscResources.resx$ActiveOperations$Message
+msgid "Operation in Progress"
+msgstr "செயல்பாடு நடைபெறுகிறது"
+
+#: SettingsResources.resx$EmailProviderType_OutlookNew$Message
+msgid "Outlook (new)"
+msgstr "Outlook (புதிய)"
+
+#: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
+msgid "Outlook Web Access"
+msgstr "Outlook Web Access"
+
+#: UiStrings.resx$Output$Message
+msgid "Output"
+msgstr "வெளியீடு"
+
+#: MiscResources.resx$OverwriteFile$Message
+msgid "Overwrite File"
+msgstr "கோப்பை மேலெழுது"
+
+#: UiStrings.resx$OwnerPasswordLabel$Message
+msgid "Owner Password:"
+msgstr "உரிமையாளர் கடவுச்சொல்:"
+
+#: MiscResources.resx$FileTypePdf$Message
+msgid "PDF Document (*.pdf)"
+msgstr "PDF ஆவணம் (*.pdf)"
+
+#: UiStrings.resx$PdfSettings$Message
+#: UiStrings.resx$PdfSettingsFormTitle$Message
+msgid "PDF Settings"
+msgstr "PDF அமைப்புகள்"
+
+#: MiscResources.resx$PdfSaved$Message
+msgid "PDF saved."
+msgstr "PDF சேமிக்கப்பட்டது."
+
+#: SettingsResources.resx$PdfCompat_PdfA1B$Message
+msgid "PDF/A-1b"
+msgstr "PDF/A-1b"
+
+#: SettingsResources.resx$PdfCompat_PdfA2B$Message
+msgid "PDF/A-2b"
+msgstr "PDF/A-2b"
+
+#: SettingsResources.resx$PdfCompat_PdfA3B$Message
+msgid "PDF/A-3b"
+msgstr "PDF/A-3b"
+
+#: SettingsResources.resx$PdfCompat_PdfA3U$Message
+msgid "PDF/A-3u"
+msgstr "PDF/A-3u"
+
+#: MiscResources.resx$FileTypePng$Message
+msgid "PNG File (*.png)"
+msgstr "PNG கோப்பு (*.png)"
+
+#: UiStrings.resx$PageSizeLabel$Message
+msgid "Page size:"
+msgstr "பக்க அளவு:"
+
+#: UiStrings.resx$PaperSourceLabel$Message
+msgid "Paper source:"
+msgstr "காகித மூலம்:"
+
+#: UiStrings.resx$PdfPasswordFormTitle$Message
+msgid "Password"
+msgstr "கடவுச்சொல்"
+
+#: UiStrings.resx$Paste$Message
+msgid "Paste"
+msgstr "ஒட்டு"
+
+#: UiStrings.resx$Placeholders$Message
+#: UiStrings.resx$PlaceholdersFormTitle$Message
+msgid "Placeholders"
+msgstr "இடப்பிடிப்பாளர்கள்"
+
+#: UiStrings.resx$Port$Message
+msgid "Port"
+msgstr "போர்ட்"
+
+#: UiStrings.resx$PostProcessing$Message
+msgid "Post-processing"
+msgstr "பிந்தைய செயலாக்கம்"
+
+#: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
+msgid "Pre-emptively run OCR after scanning"
+msgstr "ஸ்கேன் செய்த பிறகு முன்னெச்சரிக்கையாக OCR இயக்கு"
+
+#: UiStrings.resx$PressStartWhenReady$Message
+msgid "Press Start when ready."
+msgstr "தயாரானதும் தொடங்கு என்பதை அழுத்தவும்."
+
+#: UiStrings.resx$PreviewFormTitle$Message
+msgid "Preview"
+msgstr "முன்னோட்டம்"
+
+#: UiStrings.resx$PreviewLabel$Message
+msgid "Preview:"
+msgstr "முன்னோட்டம்:"
+
+#: UiStrings.resx$Previous$Message
+msgid "Previous"
+msgstr "முந்தையது"
+
+#: MiscResources.resx$Print$Message
+#: UiStrings.resx$Print$Message
+msgid "Print"
+msgstr "அச்சிடு"
+
+#: UiStrings.resx$EditProfileFormTitle$Message
+msgid "Profile Settings"
+msgstr "சுயவிவர அமைப்புகள்"
+
+#: UiStrings.resx$ProfileLabel$Message
+msgid "Profile:"
+msgstr "சுயவிவரம்:"
+
+#: UiStrings.resx$Profiles$Message
+#: UiStrings.resx$ProfilesFormTitle$Message
+msgid "Profiles"
+msgstr "சுயவிவரங்கள்"
+
+#: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
+msgid "Prompt If Selected"
+msgstr "தேர்ந்தெடுக்கப்பட்டால் கேள்"
+
+#: UiStrings.resx$PromptForFilePath$Message
+msgid "Prompt for file path"
+msgstr "கோப்பு பாதைக்காக கேள்"
+
+#: UiStrings.resx$Provider$Message
+msgid "Provider"
+msgstr "வழங்குநர்"
+
+#: UiStrings.resx$ReadyForScan$Message
+msgid "Ready for scan {0}."
+msgstr "ஸ்கேன் {0}-க்கு தயார்."
+
+#: UiStrings.resx$Recover$Message
+msgid "Recover"
+msgstr "மீட்டெடு"
+
+#: UiStrings.resx$RecoverFormTitle$Message
+msgid "Recover Scanned Images"
+msgstr "ஸ்கேன் செய்யப்பட்ட படங்களை மீட்டெடு"
+
+#: MiscResources.resx$Recovering$Message
+msgid "Recovering..."
+msgstr "மீட்டெடுக்கப்படுகிறது..."
+
+#: MiscResources.resx$RecoveryProgress$Message
+msgid "Recovery Progress"
+msgstr "மீட்டெடுப்பு முன்னேற்றம்"
+
+#: UiStrings.resx$Redo$Message
+msgid "Redo"
+msgstr "மீண்டும் செய்"
+
+#: UiStrings.resx$RedoFormat$Message
+msgid "Redo {0}"
+msgstr "{0} ஐ மீண்டும் செய்"
+
+#: UiStrings.resx$RememberTheseSettings$Message
+msgid "Remember these settings"
+msgstr "இந்த அமைப்புகளை நினைவில் வைத்துக்கொள்"
+
+#: UiStrings.resx$Reorder$Message
+msgid "Reorder"
+msgstr "மறுவரிசையாக்கு"
+
+#: UiStrings.resx$Reset$Message
+msgid "Reset"
+msgstr "மீட்டமை"
+
+#: MiscResources.resx$ResetImage$Message
+msgid "Reset Image"
+msgstr "படத்தை மீட்டமை"
+
+#: UiStrings.resx$ResolutionLabel$Message
+msgid "Resolution:"
+msgstr "தெளிவுத்திறன்:"
+
+#: UiStrings.resx$RestoreDefaults$Message
+msgid "Restore Defaults"
+msgstr "இயல்புநிலைகளை மீட்டமை"
+
+#: UiStrings.resx$Reverse$Message
+msgid "Reverse"
+msgstr "தலைகீழ்"
+
+#: UiStrings.resx$ReverseAll$Message
+msgid "Reverse All"
+msgstr "அனைத்தையும் தலைகீழாக்கு"
+
+#: UiStrings.resx$ReverseSelected$Message
+msgid "Reverse Selected"
+msgstr "தேர்ந்தெடுத்தவற்றை தலைகீழாக்கு"
+
+#: UiStrings.resx$Revert$Message
+msgid "Revert"
+msgstr "திரும்பப் பெறு"
+
+#: SettingsResources.resx$HorizontalAlign_Right$Message
+msgid "Right"
+msgstr "வலது"
+
+#: UiStrings.resx$Rotate$Message
+msgid "Rotate"
+msgstr "சுழற்று"
+
+#: UiStrings.resx$RotateLeft$Message
+msgid "Rotate Left"
+msgstr "இடப்பக்கம் சுழற்று"
+
+#: UiStrings.resx$RotateRight$Message
+msgid "Rotate Right"
+msgstr "வலப்பக்கம் சுழற்று"
+
+#: UiStrings.resx$RunInBackground$Message
+msgid "Run in Background"
+msgstr "பின்னணியில் இயக்கு"
+
+#: MiscResources.resx$RunningOcr$Message
+msgid "Running OCR..."
+msgstr "OCR இயங்குகிறது..."
+
+#: UiStrings.resx$SaneDriver$Message
+msgid "SANE Driver"
+msgstr "SANE இயக்கி"
+
+#: UiStrings.resx$Save$Message
+msgid "Save"
+msgstr "சேமி"
+
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
+#: UiStrings.resx$SaveAll$Message
+msgid "Save All"
+msgstr "அனைத்தையும் சேமி"
+
+#: UiStrings.resx$SaveAllAsImages$Message
+msgid "Save All as Images"
+msgstr "அனைத்தையும் படங்களாக சேமி"
+
+#: UiStrings.resx$SaveAllAsPdf$Message
+msgid "Save All as PDF"
+msgstr "அனைத்தையும் PDF ஆக சேமி"
+
+#: MiscResources.resx$SaveImages$Message
+#: UiStrings.resx$SaveImages$Message
+msgid "Save Images"
+msgstr "படங்களைச் சேமி"
+
+#: MiscResources.resx$SaveImagesProgress$Message
+msgid "Save Images Progress"
+msgstr "படங்கள் சேமிப்பு முன்னேற்றம்"
+
+#: MiscResources.resx$SavePdf$Message
+#: UiStrings.resx$SavePdf$Message
+msgid "Save PDF"
+msgstr "PDF ஐ சேமி"
+
+#: MiscResources.resx$SavePdfProgress$Message
+msgid "Save PDF Progress"
+msgstr "PDF சேமிப்பு முன்னேற்றம்"
+
+#: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
+#: UiStrings.resx$SaveSelected$Message
+msgid "Save Selected"
+msgstr "தேர்ந்தெடுத்தவற்றை சேமி"
+
+#: UiStrings.resx$SaveSelectedAsImages$Message
+msgid "Save Selected as Images"
+msgstr "தேர்ந்தெடுத்தவற்றை படங்களாக சேமி"
+
+#: UiStrings.resx$SaveSelectedAsPdf$Message
+msgid "Save Selected as PDF"
+msgstr "தேர்ந்தெடுத்தவற்றை PDF ஆக சேமி"
+
+#: UiStrings.resx$SaveToSingleFile$Message
+msgid "Save to a single file"
+msgstr "ஒரே கோப்புக்கு சேமி"
+
+#: UiStrings.resx$SaveToMultipleFiles$Message
+msgid "Save to multiple files"
+msgstr "பல கோப்புகளுக்கு சேமி"
+
+#: MiscResources.resx$BatchStatusSaving$Message
+msgid "Saving batch results..."
+msgstr "பேட்ச் முடிவுகள் சேமிக்கப்படுகின்றன..."
+
+#: MiscResources.resx$SavingFormat$Message
+msgid "Saving {0}..."
+msgstr "{0} சேமிக்கப்படுகிறது..."
+
+#: UiStrings.resx$ScaleWithWindow$Message
+msgid "Scale With Window"
+msgstr "சாளரத்துடன் அளவிடு"
+
+#: UiStrings.resx$ScaleLabel$Message
+msgid "Scale:"
+msgstr "அளவு:"
+
+#: MiscResources.resx$Scan$Message
+#: UiStrings.resx$Scan$Message
+msgid "Scan"
+msgstr "ஸ்கேன்"
+
+#: UiStrings.resx$ScanConfig$Message
+msgid "Scan Configuration"
+msgstr "ஸ்கேன் கட்டமைப்பு"
+
+#: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
+#: UiStrings.resx$ScanWithDefaultProfile$Message
+msgid "Scan With Default Profile"
+msgstr "இயல்புநிலை சுயவிவரத்துடன் ஸ்கேன் செய்"
+
+#: UiStrings.resx$ScanWithNewProfile$Message
+msgid "Scan With New Profile"
+msgstr "புதிய சுயவிவரத்துடன் ஸ்கேன் செய்"
+
+#: UiStrings.resx$ScanWithProfile$Message
+msgid "Scan With Profile {0}"
+msgstr "{0} சுயவிவரத்துடன் ஸ்கேன் செய்"
+
+#: MiscResources.resx$ScannedImage$Message
+msgid "Scanned Image"
+msgstr "ஸ்கேன் செய்யப்பட்ட படம்"
+
+#: UiStrings.resx$ScannerSharing$Message
+#: UiStrings.resx$ScannerSharingFormTitle$Message
+msgid "Scanner Sharing"
+msgstr "ஸ்கேனர் பகிர்வு"
+
+#: MiscResources.resx$ScanPageProgress$Message
+msgid "Scanning page {0}"
+msgstr "{0} பக்கம் ஸ்கேன் செய்யப்படுகிறது"
+
+#: MiscResources.resx$BatchStatusScanPage$Message
+msgid "Scanning page {0} (scan {1})..."
+msgstr "{0} பக்கம் ஸ்கேன் செய்யப்படுகிறது (ஸ்கேன் {1})..."
+
+#: MiscResources.resx$BatchStatusPage$Message
+#: MiscResources.resx$ScanProgressPage$Message
+msgid "Scanning page {0}..."
+msgstr "{0} பக்கம் ஸ்கேன் செய்யப்படுகிறது..."
+
+#: UiStrings.resx$SearchingForDevices$Message
+msgid "Searching for devices..."
+msgstr "சாதனங்கள் தேடப்படுகின்றன..."
+
+#: UiStrings.resx$Second2Digit$Message
+msgid "Second (00-59)"
+msgstr "வினாடி (00-59)"
+
+#: UiStrings.resx$Select$Message
+msgid "Select"
+msgstr "தேர்ந்தெடு"
+
+#: UiStrings.resx$SelectAll$Message
+msgid "Select All"
+msgstr "அனைத்தையும் தேர்ந்தெடு"
+
+#: UiStrings.resx$SelectDevice$Message
+msgid "Select Device"
+msgstr "சாதனத்தைத் தேர்ந்தெடு"
+
+#: UiStrings.resx$SelectSource$Message
+msgid "Select Source"
+msgstr "மூலத்தைத் தேர்ந்தெடு"
+
+#: MiscResources.resx$SelectProfileBeforeScan$Message
+msgid "Select a profile before clicking Scan."
+msgstr "ஸ்கேன் என்பதைக் கிளிக் செய்வதற்கு முன் ஒரு சுயவிவரத்தைத் தேர்ந்தெடுக்கவும்."
+
+#: UiStrings.resx$OcrSelectLanguageLabel$Message
+msgid "Select one or more languages:"
+msgstr "ஒன்று அல்லது அதற்கு மேற்பட்ட மொழிகளைத் தேர்ந்தெடுக்கவும்:"
+
+#: MiscResources.resx$SelectedCount$Message
+msgid "Selected ({0})"
+msgstr "தேர்ந்தெடுக்கப்பட்டது ({0})"
+
+#: UiStrings.resx$SeparateByPatchT$Message
+msgid "Separate files by Patch-T"
+msgstr "Patch-T மூலம் கோப்புகளைப் பிரி"
+
+#: UiStrings.resx$SetDefault$Message
+msgid "Set Default"
+msgstr "இயல்புநிலையாக அமை"
+
+#: UiStrings.resx$Settings$Message
+#: UiStrings.resx$SettingsFormTitle$Message
+msgid "Settings"
+msgstr "அமைப்புகள்"
+
+#: UiStrings.resx$Share$Message
+msgid "Share"
+msgstr "பகிர்"
+
+#: UiStrings.resx$ShareAsService$Message
+msgid "Share even when NAPS2 is closed"
+msgstr "NAPS2 மூடப்பட்டாலும் பகிர்"
+
+#: UiStrings.resx$SharedDeviceFormTitle$Message
+msgid "Shared Scanner Settings"
+msgstr "பகிரப்பட்ட ஸ்கேனர் அமைப்புகள்"
+
+#: UiStrings.resx$ScannerSharingIntro$Message
+msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
+msgstr "உள்ளூர் நெட்வொர்க்கில் உள்ள மற்ற கணினிகளிலிருந்து பகிரப்பட்ட ஸ்கேனர்களைப் பயன்படுத்த, மற்ற கணினியின் NAPS2 சுயவிவர அமைப்புகளில் \"ESCL Driver\" ஐத் தேர்ந்தெடுக்கவும்."
+
+#: UiStrings.resx$Sharpen$Message
+msgid "Sharpen"
+msgstr "கூர்மையாக்கு"
+
+#: UiStrings.resx$Shortcut$Message
+msgid "Shortcut"
+msgstr "குறுக்குவழி"
+
+#: UiStrings.resx$Show$Message
+msgid "Show"
+msgstr "காட்டு"
+
+#: UiStrings.resx$ShowProfilesToolbar$Message
+msgid "Show \"Profiles\" toolbar"
+msgstr "\"சுயவிவரங்கள்\" கருவிப்பட்டியைக் காட்டு"
+
+#: UiStrings.resx$ShowNativeTwainProgress$Message
+msgid "Show native TWAIN progress"
+msgstr "உள்ளமை TWAIN முன்னேற்றத்தைக் காட்டு"
+
+#: UiStrings.resx$ShowPageNumbers$Message
+msgid "Show page numbers"
+msgstr "பக்க எண்களைக் காட்டு"
+
+#: UiStrings.resx$ToggleSidebar$Message
+msgid "Sidebar"
+msgstr "பக்கப்பட்டி"
+
+#: UiStrings.resx$SinglePageFiles$Message
+msgid "Single page files"
+msgstr "ஒற்றை பக்க கோப்புகள்"
+
+#: UiStrings.resx$SingleScan$Message
+msgid "Single scan"
+msgstr "ஒற்றை ஸ்கேன்"
+
+#: UiStrings.resx$SkipSavePrompt$Message
+msgid "Skip save prompt"
+msgstr "சேமிப்பு கேள்வியைத் தவிர்"
+
+#: UiStrings.resx$Split$Message
+msgid "Split"
+msgstr "பிரி"
+
+#: UiStrings.resx$Start$Message
+msgid "Start"
+msgstr "தொடங்கு"
+
+#: UiStrings.resx$StopScannerSharing$Message
+msgid "Stop Scanner Sharing"
+msgstr "ஸ்கேனர் பகிர்வை நிறுத்து"
+
+#: UiStrings.resx$StretchToPageSize$Message
+msgid "Stretch to page size"
+msgstr "பக்க அளவுக்கு நீட்டு"
+
+#: UiStrings.resx$SubjectLabel$Message
+msgid "Subject:"
+msgstr "பொருள்:"
+
+#: MiscResources.resx$FileTypeTiff$Message
+msgid "TIFF File (*.tiff, *.tif)"
+msgstr "TIFF கோப்பு (*.tiff, *.tif)"
+
+#: UiStrings.resx$TwainDriver$Message
+msgid "TWAIN Driver"
+msgstr "TWAIN இயக்கி"
+
+#: UiStrings.resx$TechnicalDetails$Message
+msgid "Technical Details"
+msgstr "தொழில்நுட்ப விவரங்கள்"
+
+#: MiscResources.resx$TesseractNotAvailable$Message
+#: SdkResources.resx$TesseractNotAvailable$Message
+msgid "The OCR engine is not available. Make sure to install the required package:"
+msgstr "OCR இயந்திரம் கிடைக்கவில்லை. தேவையான தொகுப்பை நிறுவியுள்ளதை உறுதிசெய்யவும்:"
+
+#: SdkResources.resx$OcrTimeout$Message
+msgid "The OCR operation timed out."
+msgstr "OCR செயல்பாடு காலாவதியானது."
+
+#: MiscResources.resx$SaneNotAvailable$Message
+#: SdkResources.resx$SaneNotAvailable$Message
+msgid "The SANE driver is not available. Make sure to install the required packages:"
+msgstr "SANE இயக்கி கிடைக்கவில்லை. தேவையான தொகுப்புகளை நிறுவியுள்ளதை உறுதிசெய்யவும்:"
+
+#: MiscResources.resx$ImportErrorCouldNot$Message
+#: SdkResources.resx$ImportErrorCouldNot$Message
+msgid "The file '{0}' could not be imported."
+msgstr "'{0}' கோப்பை இறக்குமதி செய்ய முடியவில்லை."
+
+#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
+msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
+msgstr "'{0}' கோப்பை இறக்குமதி செய்ய முடியவில்லை. NAPS2 உருவாக்கிய PDF கோப்புகளை மட்டுமே இறக்குமதி செய்ய முடியும்."
+
+#: MiscResources.resx$FileInUse$Message
+msgid "The file could not be overwritten because it is currently in use."
+msgstr "கோப்பு தற்போது பயன்பாட்டில் இருப்பதால் அதை மேலெழுத முடியவில்லை."
+
+#: MiscResources.resx$ConfirmOverwriteFile$Message
+msgid "The file {0} already exists. Do you want to overwrite it?"
+msgstr "{0} கோப்பு ஏற்கனவே உள்ளது. அதை மேலெழுத விரும்புகிறீர்களா?"
+
+#: UiStrings.resx$EncryptedFilePrompt$Message
+msgid "The following file is encrypted and requires a password to open:"
+msgstr "பின்வரும் கோப்பு குறியாக்கம் செய்யப்பட்டுள்ளது மற்றும் திறக்க கடவுச்சொல் தேவை:"
+
+#: MiscResources.resx$DevicePaperJam$Message
+#: SdkResources.resx$DevicePaperJam$Message
+msgid "The scanner has a paper jam."
+msgstr "ஸ்கேனரில் காகித நெரிசல் உள்ளது."
+
+#: MiscResources.resx$DeviceWarmingUp$Message
+#: SdkResources.resx$DeviceWarmingUp$Message
+msgid "The scanner is warming up."
+msgstr "ஸ்கேனர் சூடாகிக்கொண்டிருக்கிறது."
+
+#: MiscResources.resx$DeviceCoverOpen$Message
+#: SdkResources.resx$DeviceCoverOpen$Message
+msgid "The scanner's cover is open."
+msgstr "ஸ்கேனரின் மூடி திறந்துள்ளது."
+
+#: MiscResources.resx$DriverNotSupported$Message
+#: SdkResources.resx$DriverNotSupported$Message
+msgid "The selected driver is not supported on this system."
+msgstr "தேர்ந்தெடுத்த இயக்கி இந்த அமைப்பில் ஆதரிக்கப்படவில்லை."
+
+#: MiscResources.resx$DeviceNotFound$Message
+#: SdkResources.resx$DeviceNotFound$Message
+msgid "The selected scanner could not be found."
+msgstr "தேர்ந்தெடுத்த ஸ்கேனரைக் கண்டுபிடிக்க முடியவில்லை."
+
+#: MiscResources.resx$NoFeederSupport$Message
+#: SdkResources.resx$NoFeederSupport$Message
+msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
+msgstr "தேர்ந்தெடுத்த ஸ்கேனர் ஊட்டியைப் பயன்படுத்துவதை ஆதரிக்கவில்லை. உங்கள் ஸ்கேனரில் ஊட்டி இருந்தால், வேறு இயக்கியைப் பயன்படுத்த முயற்சிக்கவும்."
+
+#: MiscResources.resx$NoDuplexSupport$Message
+#: SdkResources.resx$NoDuplexSupport$Message
+msgid "The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver."
+msgstr "தேர்ந்தெடுத்த ஸ்கேனர் டூப்ளக்ஸைப் பயன்படுத்துவதை ஆதரிக்கவில்லை. உங்கள் ஸ்கேனர் டூப்ளக்ஸ் ஆதரிக்க வேண்டும் என்றால், வேறு இயக்கியைப் பயன்படுத்த முயற்சிக்கவும்."
+
+#: MiscResources.resx$DeviceBusy$Message
+#: SdkResources.resx$DeviceBusy$Message
+msgid "The selected scanner is busy."
+msgstr "தேர்ந்தெடுத்த ஸ்கேனர் பயன்பாட்டில் உள்ளது."
+
+#: MiscResources.resx$DeviceOffline$Message
+#: SdkResources.resx$DeviceOffline$Message
+msgid "The selected scanner is offline."
+msgstr "தேர்ந்தெடுத்த ஸ்கேனர் ஆஃப்லைனில் உள்ளது."
+
+#: SdkResources.resx$WorkerCrash$Message
+msgid "The worker process crashed."
+msgstr "வொர்க்கர் செயல்முறை செயலிழந்தது."
+
+#: SdkResources.resx$WorkerCrashWindows$Message
+msgid "The worker process crashed. Check the Windows event viewer."
+msgstr "வொர்க்கர் செயல்முறை செயலிழந்தது. Windows event viewer ஐ சரிபார்க்கவும்."
+
+#: UiStrings.resx$ThemeLabel$Message
+msgid "Theme:"
+msgstr "தீம்:"
+
+#: SettingsResources.resx$EmailProviderType_Thunderbird$Message
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: UiStrings.resx$TiffOptions$Message
+msgid "Tiff Options"
+msgstr "TIFF விருப்பங்கள்"
+
+#: UiStrings.resx$TimeBetweenScansLabel$Message
+msgid "Time between scans (seconds):"
+msgstr "ஸ்கேன்களுக்கு இடையேயான நேரம் (வினாடிகள்):"
+
+#: UiStrings.resx$TitleLabel$Message
+msgid "Title:"
+msgstr "தலைப்பு:"
+
+#: UiStrings.resx$Tools$Message
+msgid "Tools"
+msgstr "கருவிகள்"
+
+#: UiStrings.resx$TwainImplLabel$Message
+msgid "Twain Implementation:"
+msgstr "TWAIN செயலாக்கம்:"
+
+#: SettingsResources.resx$PageSize_Legal$Message
+msgid "US Legal (8.5x14 in)"
+msgstr "US Legal (8.5x14 in)"
+
+#: SettingsResources.resx$PageSize_Letter$Message
+msgid "US Letter (8.5x11 in)"
+msgstr "US Letter (8.5x11 in)"
+
+#: UiStrings.resx$Unassign$Message
+msgid "Unassign"
+msgstr "ஒதுக்கீட்டை நீக்கு"
+
+#: UiStrings.resx$Undo$Message
+msgid "Undo"
+msgstr "செயல்தவிர்"
+
+#: UiStrings.resx$UndoFormat$Message
+msgid "Undo {0}"
+msgstr "{0} ஐ செயல்தவிர்"
+
+#: SdkResources.resx$UnknownScanner$Message
+msgid "Unknown Scanner"
+msgstr "அறியப்படாத ஸ்கேனர்"
+
+#: MiscResources.resx$UnsavedChanges$Message
+msgid "Unsaved Changes"
+msgstr "சேமிக்கப்படாத மாற்றங்கள்"
+
+#: MiscResources.resx$UpdateProgress$Message
+msgid "Update Progress"
+msgstr "புதுப்பிப்பு முன்னேற்றம்"
+
+#: MiscResources.resx$UpdateCheckDisabled$Message
+msgid "Update checking is disabled."
+msgstr "புதுப்பிப்பு சரிபார்ப்பு முடக்கப்பட்டுள்ளது."
+
+#: MiscResources.resx$Updating$Message
+msgid "Updating..."
+msgstr "புதுப்பிக்கப்படுகிறது..."
+
+#: MiscResources.resx$UploadingEmail$Message
+msgid "Uploading email..."
+msgstr "மின்னஞ்சல் பதிவேற்றப்படுகிறது..."
+
+#: UiStrings.resx$UseNativeUi$Message
+msgid "Use native UI"
+msgstr "உள்ளமை UI ஐப் பயன்படுத்து"
+
+#: UiStrings.resx$UsePredefinedSettings$Message
+msgid "Use predefined settings"
+msgstr "முன்வரையறுக்கப்பட்ட அமைப்புகளைப் பயன்படுத்து"
+
+#: UiStrings.resx$UserPasswordLabel$Message
+msgid "User Password:"
+msgstr "பயனர் கடவுச்சொல்:"
+
+#: UiStrings.resx$OcrDownloadSummaryText$Message
+msgid "Using OCR requires you to download each language you want to scan."
+msgstr "OCR ஐப் பயன்படுத்த, நீங்கள் ஸ்கேன் செய்ய விரும்பும் ஒவ்வொரு மொழியையும் பதிவிறக்க வேண்டும்."
+
+#: MiscResources.resx$Version$Message
+#: SdkResources.resx$Version$Message
+msgid "Version {0}"
+msgstr "பதிப்பு {0}"
+
+#: UiStrings.resx$View$Message
+msgid "View"
+msgstr "பார்வை"
+
+#: UiStrings.resx$WiaDriver$Message
+msgid "WIA Driver"
+msgstr "WIA இயக்கி"
+
+#: UiStrings.resx$WaitingForTwain$Message
+msgid "Waiting for TWAIN to complete..."
+msgstr "TWAIN முடிவதற்காக காத்திருக்கிறது..."
+
+#: UiStrings.resx$WaitingForAuthorization$Message
+msgid "Waiting for authorization..."
+msgstr "அங்கீகாரத்திற்காக காத்திருக்கிறது..."
+
+#: MiscResources.resx$BatchStatusWaitingForScan$Message
+msgid "Waiting for scan {0}..."
+msgstr "ஸ்கேன் {0}-க்காக காத்திருக்கிறது..."
+
+#: UiStrings.resx$WhiteThreshold$Message
+msgid "White Threshold"
+msgstr "வெள்ளை வரம்பு"
+
+#: UiStrings.resx$WiaVersionLabel$Message
+msgid "Wia Version:"
+msgstr "WIA பதிப்பு:"
+
+#: UiStrings.resx$Year4Digit$Message
+msgid "Year"
+msgstr "வருடம்"
+
+#: UiStrings.resx$Year2Digit$Message
+msgid "Year (00-99)"
+msgstr "வருடம் (00-99)"
+
+#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
+#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
+msgid "You do not have permission to copy content from the file '{0}'."
+msgstr "'{0}' கோப்பிலிருந்து உள்ளடக்கத்தை நகலெடுக்க உங்களுக்கு அனுமதி இல்லை."
+
+#: MiscResources.resx$DontHavePermission$Message
+msgid "You don't have permission to save files at this location."
+msgstr "இந்த இடத்தில் கோப்புகளைச் சேமிக்க உங்களுக்கு அனுமதி இல்லை."
+
+#: MiscResources.resx$ExitWithUnsavedChanges$Message
+msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
+msgstr "சேமிக்கப்படாத மாற்றங்கள் உள்ளன. வெளியேறி அந்த மாற்றங்களை நிராகரிக்க விரும்புகிறீர்களா?"
+
+#: UiStrings.resx$Zoom$Message
+msgid "Zoom"
+msgstr "பெரிதாக்கு"
+
+#: UiStrings.resx$ZoomActual$Message
+msgid "Zoom Actual"
+msgstr "உண்மையான அளவு"
+
+#: UiStrings.resx$ZoomIn$Message
+msgid "Zoom In"
+msgstr "பெரிதாக்கு"
+
+#: UiStrings.resx$ZoomOut$Message
+msgid "Zoom Out"
+msgstr "சிறிதாக்கு"
+
+#: SettingsResources.resx$PageSizeUnit_Centimetre$Message
+msgid "cm"
+msgstr "cm"
+
+#: SettingsResources.resx$PageSizeUnit_Inch$Message
+msgid "in"
+msgstr "in"
+
+#: SettingsResources.resx$PageSizeUnit_Millimetre$Message
+msgid "mm"
+msgstr "mm"
+
+#: MiscResources.resx$OfN$Message
+msgid "of {0}"
+msgstr "{0}-இல்"
+
+#: SettingsResources.resx$TwainImpl_X64$Message
+msgid "x64"
+msgstr "x64"
+
+#: MiscResources.resx$NamedPageSizeFormat$Message
+msgid "{0} ({1}x{2} {3})"
+msgstr "{0} ({1}x{2} {3})"
+
+#: MiscResources.resx$ProgressFormat$Message
+msgid "{0} / {1}"
+msgstr "{0} / {1}"
+
+#: MiscResources.resx$SizeProgress$Message
+msgid "{0} / {1} MB"
+msgstr "{0} / {1} MB"
+
+#: MiscResources.resx$FilesProgressFormat$Message
+msgid "{0} / {1} files"
+msgstr "{0} / {1} கோப்புகள்"
+
+#: UiStrings.resx$DevicesFound$Message
+msgid "{0} devices found."
+msgstr "{0} சாதனங்கள் கண்டறியப்பட்டன."
+
+#: SettingsResources.resx$DpiFormat$Message
+msgid "{0} dpi"
+msgstr "{0} dpi"
+
+#: UiStrings.resx$RecoverPrompt$Message
+msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
+msgstr "{1} அன்று {2} மணிக்கு ஸ்கேன் செய்யப்பட்ட {0} படங்கள் சேமிக்கப்படாமல் இருக்கலாம், மீட்டெடுக்கக்கூடியவை. அவற்றை மீட்டெடுக்க விரும்புகிறீர்களா?"
+
+#: MiscResources.resx$ImagesSaved$Message
+msgid "{0} images saved."
+msgstr "{0} படங்கள் சேமிக்கப்பட்டன."
+
+#: MiscResources.resx$PdfStatus$Message
+#: UiStrings.resx$XOfY$Message
+msgid "{0} of {1}"
+msgstr "{1}-இல் {0}"
