@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
+    <value>கருப்பு வெள்ளை</value>
+  </data>
+  <data name="BitDepth_24Color" xml:space="preserve">
+    <value>24-bit நிறம்</value>
+  </data>
+  <data name="BitDepth_8Grayscale" xml:space="preserve">
+    <value>சாம்பல் நிறம்</value>
+  </data>
+  <data name="DpiFormat" xml:space="preserve">
+    <value>{0} dpi</value>
+  </data>
+  <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
+    <value>தனிப்பயன் SMTP</value>
+  </data>
+  <data name="EmailProviderType_Gmail" xml:space="preserve">
+    <value>Gmail</value>
+  </data>
+  <data name="EmailProviderType_OutlookNew" xml:space="preserve">
+    <value>Outlook (புதிய)</value>
+  </data>
+  <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
+    <value>Outlook Web Access</value>
+  </data>
+  <data name="EmailProviderType_Thunderbird" xml:space="preserve">
+    <value>Thunderbird</value>
+  </data>
+  <data name="EmailProviderType_AppleMail" xml:space="preserve">
+    <value>Apple Mail</value>
+  </data>
+  <data name="EmailProvider_NotSelected" xml:space="preserve">
+    <value>எந்த வழங்குநரும் தேர்ந்தெடுக்கப்படவில்லை.</value>
+  </data>
+  <data name="HorizontalAlign_Center" xml:space="preserve">
+    <value>மையம்</value>
+  </data>
+  <data name="HorizontalAlign_Left" xml:space="preserve">
+    <value>இடது</value>
+  </data>
+  <data name="HorizontalAlign_Right" xml:space="preserve">
+    <value>வலது</value>
+  </data>
+  <data name="PageSizeUnit_Centimetre" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="PageSizeUnit_Inch" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="PageSizeUnit_Millimetre" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="PageSize_A3" xml:space="preserve">
+    <value>A3 (297x420 mm)</value>
+  </data>
+  <data name="PageSize_A4" xml:space="preserve">
+    <value>A4 (210x297 mm)</value>
+  </data>
+  <data name="PageSize_A5" xml:space="preserve">
+    <value>A5 (148x210 mm)</value>
+  </data>
+  <data name="PageSize_B4" xml:space="preserve">
+    <value>B4 (250x353 mm)</value>
+  </data>
+  <data name="PageSize_B5" xml:space="preserve">
+    <value>B5 (176x250 mm)</value>
+  </data>
+  <data name="PageSize_Custom" xml:space="preserve">
+    <value>தனிப்பயன்...</value>
+  </data>
+  <data name="PageSize_Legal" xml:space="preserve">
+    <value>US Legal (8.5x14 in)</value>
+  </data>
+  <data name="PageSize_Letter" xml:space="preserve">
+    <value>US Letter (8.5x11 in)</value>
+  </data>
+  <data name="Resolution_Custom" xml:space="preserve">
+    <value>தனிப்பயன்...</value>
+  </data>
+  <data name="PdfCompat_Default" xml:space="preserve">
+    <value>இயல்புநிலை</value>
+  </data>
+  <data name="PdfCompat_PdfA1B" xml:space="preserve">
+    <value>PDF/A-1b</value>
+  </data>
+  <data name="PdfCompat_PdfA2B" xml:space="preserve">
+    <value>PDF/A-2b</value>
+  </data>
+  <data name="PdfCompat_PdfA3B" xml:space="preserve">
+    <value>PDF/A-3b</value>
+  </data>
+  <data name="PdfCompat_PdfA3U" xml:space="preserve">
+    <value>PDF/A-3u</value>
+  </data>
+  <data name="Source_Duplex" xml:space="preserve">
+    <value>டூப்ளக்ஸ்</value>
+  </data>
+  <data name="Source_Feeder" xml:space="preserve">
+    <value>ஊட்டி</value>
+  </data>
+  <data name="Source_Glass" xml:space="preserve">
+    <value>கண்ணாடி</value>
+  </data>
+  <data name="TiffComp_Auto" xml:space="preserve">
+    <value>தானாக</value>
+  </data>
+  <data name="TiffComp_Ccitt4" xml:space="preserve">
+    <value>CCITT4</value>
+  </data>
+  <data name="TiffComp_Lzw" xml:space="preserve">
+    <value>LZW</value>
+  </data>
+  <data name="TiffComp_None" xml:space="preserve">
+    <value>எதுவுமில்லை</value>
+  </data>
+  <data name="TwainImpl_Default" xml:space="preserve">
+    <value>இயல்புநிலை</value>
+  </data>
+  <data name="TwainImpl_Legacy" xml:space="preserve">
+    <value>பழைய (உள்ளமை UI மட்டும்)</value>
+  </data>
+  <data name="TwainImpl_NativeXfer" xml:space="preserve">
+    <value>உள்ளமை பரிமாற்றம்</value>
+  </data>
+  <data name="TwainImpl_MemXfer" xml:space="preserve">
+    <value>நினைவக பரிமாற்றம்</value>
+  </data>
+  <data name="TwainImpl_OldDsm" xml:space="preserve">
+    <value>பழைய DSM</value>
+  </data>
+  <data name="TwainImpl_X64" xml:space="preserve">
+    <value>x64</value>
+  </data>
+  <data name="WiaVersion_Default" xml:space="preserve">
+    <value>இயல்புநிலை</value>
+  </data>
+  <data name="OcrMode_Fast" xml:space="preserve">
+    <value>வேகமான</value>
+  </data>
+  <data name="OcrMode_Best" xml:space="preserve">
+    <value>சிறந்தது</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
+    <value>அனைத்தையும் சேமி</value>
+  </data>
+  <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
+    <value>தேர்ந்தெடுத்தவற்றை சேமி</value>
+  </data>
+  <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
+    <value>எப்போதும் கேள்</value>
+  </data>
+  <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
+    <value>தேர்ந்தெடுக்கப்பட்டால் கேள்</value>
+  </data>
+  <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
+    <value>இயல்புநிலை சுயவிவரத்துடன் ஸ்கேன் செய்</value>
+  </data>
+  <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
+    <value>எப்போதும் கேள்</value>
+  </data>
+  <data name="Theme_Default" xml:space="preserve">
+    <value>இயல்புநிலை</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>வெளிச்சம்</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>இருண்ட</value>
+  </data>
+</root>
