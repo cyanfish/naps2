@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>தேர்ந்தெடுத்த ஸ்கேனரைக் கண்டுபிடிக்க முடியவில்லை.</value>
+  </data>
+  <data name="DeviceOffline" xml:space="preserve">
+    <value>தேர்ந்தெடுத்த ஸ்கேனர் ஆஃப்லைனில் உள்ளது.</value>
+  </data>
+  <data name="DeviceCommunicationFailure" xml:space="preserve">
+    <value>ஸ்கேனிங் சாதனத்துடனான தொடர்பு தடைப்பட்டது.</value>
+  </data>
+  <data name="NAPS2" xml:space="preserve">
+    <value>NAPS2</value>
+  </data>
+  <data name="NoDeviceSelected" xml:space="preserve">
+    <value>எந்த சாதனமும் தேர்ந்தெடுக்கப்படவில்லை.</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>எந்த ஸ்கேனிங் சாதனமும் கண்டறியப்படவில்லை.</value>
+  </data>
+  <data name="UnknownDriverError" xml:space="preserve">
+    <value>ஸ்கேனிங் இயக்கியில் ஒரு பிழை ஏற்பட்டது.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>பதிப்பு {0}</value>
+  </data>
+  <data name="ImportErrorCouldNot" xml:space="preserve">
+    <value>'{0}' கோப்பை இறக்குமதி செய்ய முடியவில்லை.</value>
+  </data>
+  <data name="NoFeederSupport" xml:space="preserve">
+    <value>தேர்ந்தெடுத்த ஸ்கேனர் ஊட்டியைப் பயன்படுத்துவதை ஆதரிக்கவில்லை. உங்கள் ஸ்கேனரில் ஊட்டி இருந்தால், வேறு இயக்கியைப் பயன்படுத்த முயற்சிக்கவும்.</value>
+  </data>
+  <data name="NoPagesInFeeder" xml:space="preserve">
+    <value>ஊட்டியில் பக்கங்கள் எதுவும் இல்லை.</value>
+  </data>
+  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
+    <value>'{0}' கோப்பிலிருந்து உள்ளடக்கத்தை நகலெடுக்க உங்களுக்கு அனுமதி இல்லை.</value>
+  </data>
+  <data name="NoDuplexSupport" xml:space="preserve">
+    <value>தேர்ந்தெடுத்த ஸ்கேனர் டூப்ளக்ஸைப் பயன்படுத்துவதை ஆதரிக்கவில்லை. உங்கள் ஸ்கேனர் டூப்ளக்ஸ் ஆதரிக்க வேண்டும் என்றால், வேறு இயக்கியைப் பயன்படுத்த முயற்சிக்கவும்.</value>
+  </data>
+  <data name="DeviceBusy" xml:space="preserve">
+    <value>தேர்ந்தெடுத்த ஸ்கேனர் பயன்பாட்டில் உள்ளது.</value>
+  </data>
+  <data name="DeviceCoverOpen" xml:space="preserve">
+    <value>ஸ்கேனரின் மூடி திறந்துள்ளது.</value>
+  </data>
+  <data name="DevicePaperJam" xml:space="preserve">
+    <value>ஸ்கேனரில் காகித நெரிசல் உள்ளது.</value>
+  </data>
+  <data name="DeviceWarmingUp" xml:space="preserve">
+    <value>ஸ்கேனர் சூடாகிக்கொண்டிருக்கிறது.</value>
+  </data>
+  <data name="SaneNotAvailable" xml:space="preserve">
+    <value>SANE இயக்கி கிடைக்கவில்லை. தேவையான தொகுப்புகளை நிறுவியுள்ளதை உறுதிசெய்யவும்:</value>
+  </data>
+  <data name="TesseractNotAvailable" xml:space="preserve">
+    <value>OCR இயந்திரம் கிடைக்கவில்லை. தேவையான தொகுப்பை நிறுவியுள்ளதை உறுதிசெய்யவும்:</value>
+  </data>
+  <data name="DriverNotSupported" xml:space="preserve">
+    <value>தேர்ந்தெடுத்த இயக்கி இந்த அமைப்பில் ஆதரிக்கப்படவில்லை.</value>
+  </data>
+  <data name="OcrError" xml:space="preserve">
+    <value>OCR இயக்கும்போது ஒரு பிழை ஏற்பட்டது.</value>
+  </data>
+  <data name="OcrTimeout" xml:space="preserve">
+    <value>OCR செயல்பாடு காலாவதியானது.</value>
+  </data>
+  <data name="WorkerCrash" xml:space="preserve">
+    <value>வொர்க்கர் செயல்முறை செயலிழந்தது.</value>
+  </data>
+  <data name="WorkerCrashWindows" xml:space="preserve">
+    <value>வொர்க்கர் செயல்முறை செயலிழந்தது. Windows event viewer ஐ சரிபார்க்கவும்.</value>
+  </data>
+  <data name="UnknownScanner" xml:space="preserve">
+    <value>அறியப்படாத ஸ்கேனர்</value>
+  </data>
+</root>
