@@ -1,4 +1,4 @@
-﻿using Eto.Forms;
+using Eto.Forms;
 using NAPS2.ImportExport;
 
 namespace NAPS2.EtoForms;
@@ -88,7 +88,8 @@ public class EtoDialogHelper : DialogHelper
     {
         if (string.IsNullOrEmpty(defaultPath))
         {
-            return _addExt ? $".{ext}" : null;
+            // Provide a default timestamped placeholder when no path is configured
+            return _addExt ? $"NAPS2_Scanned_$(YYYY)-$(MM)-$(DD)$(hh)-$(mm)-$(ss).{ext}" : null;
         }
         var normPath = NormalizePath(defaultPath);
         return _addExt && !Path.HasExtension(normPath)
