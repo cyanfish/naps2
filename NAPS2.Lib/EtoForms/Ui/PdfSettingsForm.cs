@@ -10,6 +10,7 @@ public class PdfSettingsForm : EtoDialogBase
 {
     private readonly FilePathWithPlaceholders _defaultFilePath;
     private readonly CheckBox _skipSavePrompt = new() { Text = UiStrings.SkipSavePrompt };
+    private readonly CheckBox _useDefaultFileNamePlaceholder = new() { Text = UiStrings.UseDefaultFileNamePlaceholder };
     private readonly CheckBox _singlePagePdfs = new() { Text = UiStrings.SinglePageFiles };
     private readonly TextBox _title = new();
     private readonly TextBox _author = new();
@@ -69,6 +70,7 @@ public class PdfSettingsForm : EtoDialogBase
             C.Label(UiStrings.DefaultFilePathLabel),
             _defaultFilePath,
             _skipSavePrompt,
+            _useDefaultFileNamePlaceholder,
             _singlePagePdfs,
             L.GroupBox(
                 UiStrings.Metadata,
@@ -114,6 +116,7 @@ public class PdfSettingsForm : EtoDialogBase
     {
         _defaultFilePath.Text = config.Get(c => c.PdfSettings.DefaultFileName);
         _skipSavePrompt.Checked = config.Get(c => c.PdfSettings.SkipSavePrompt);
+        _useDefaultFileNamePlaceholder.Checked = config.Get(c => c.PdfSettings.UseDefaultFileNamePlaceholder);
         _singlePagePdfs.Checked = config.Get(c => c.PdfSettings.SinglePagePdfs);
         _title.Text = config.Get(c => c.PdfSettings.Metadata.Title);
         _author.Text = config.Get(c => c.PdfSettings.Metadata.Author);
@@ -148,6 +151,7 @@ public class PdfSettingsForm : EtoDialogBase
         {
             DefaultFileName = _defaultFilePath.Text,
             SkipSavePrompt = _skipSavePrompt.IsChecked(),
+            UseDefaultFileNamePlaceholder = _useDefaultFileNamePlaceholder.IsChecked(),
             SinglePagePdfs = _singlePagePdfs.IsChecked(),
             Metadata = new PdfMetadata
             {
