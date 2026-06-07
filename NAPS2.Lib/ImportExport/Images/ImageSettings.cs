@@ -1,4 +1,4 @@
-﻿namespace NAPS2.ImportExport.Images;
+namespace NAPS2.ImportExport.Images;
 
 public record ImageSettings
 {
@@ -11,4 +11,6 @@ public record ImageSettings
     public TiffCompression TiffCompression { get; init; } = TiffCompression.Auto;
 
     public bool SinglePageTiff { get; init; }
+
+    public bool UseDefaultFileNamePlaceholder { get; init; } = true;
 }
