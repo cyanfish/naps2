@@ -1,0 +1,65 @@
+From fcde905182aa0b4e7ce6c61df98e3e3e7f44f132 Mon Sep 17 00:00:00 2001
+From: Arne <arne@diracting.com>
+Date: Wed, 10 Jun 2026 15:14:05 +0000
+Subject: [PATCH] Batch wait-for-paper: don't show error dialog on empty feeder
+
+On macOS the empty-feeder result is reported through the scan error callback
+(a modal dialog) rather than thrown, so the wait-for-paper loop kept popping
+'No pages are in the feeder' instead of silently retrying. Add
+ScanParams.SuppressFeederEmptyError, set it for WaitForPaper batches, and skip
+the dialog for DeviceFeederEmptyException in that mode. The scan yields zero
+pages and the batch loop waits and polls again.
+---
+ NAPS2.Lib/Scan/Batch/BatchScanPerformer.cs | 3 ++-
+ NAPS2.Lib/Scan/ScanParams.cs               | 7 +++++++
+ NAPS2.Lib/Scan/ScanPerformer.cs            | 3 ++-
+ 3 files changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/NAPS2.Lib/Scan/Batch/BatchScanPerformer.cs b/NAPS2.Lib/Scan/Batch/BatchScanPerformer.cs
+index 8c21e48..0797eab 100644
+--- a/NAPS2.Lib/Scan/Batch/BatchScanPerformer.cs
++++ b/NAPS2.Lib/Scan/Batch/BatchScanPerformer.cs
+@@ -92,7 +92,8 @@ public class BatchScanPerformer : IBatchScanPerformer
+                         ? _config.DefaultOcrParams()
+                         : OcrParams.Empty,
+                 OcrCancelToken = _cancelToken,
+-                ThumbnailSize = thumbnailController.RenderSize
++                ThumbnailSize = thumbnailController.RenderSize,
++                SuppressFeederEmptyError = _settings.ScanType == BatchScanType.WaitForPaper
+             };
+             _scans = [];
+         }
+diff --git a/NAPS2.Lib/Scan/ScanParams.cs b/NAPS2.Lib/Scan/ScanParams.cs
+index ef75d37..9419e14 100644
+--- a/NAPS2.Lib/Scan/ScanParams.cs
++++ b/NAPS2.Lib/Scan/ScanParams.cs
+@@ -24,4 +24,11 @@ public class ScanParams
+     public OcrParams? OcrParams { get; set; }
+ 
+     public CancellationToken OcrCancelToken { get; set; }
++
++    /// <summary>
++    /// When true, an empty-feeder result (DeviceFeederEmptyException) is treated as a normal
++    /// "nothing scanned this time" outcome instead of showing an error dialog. Used by the
++    /// batch "wait for paper in feeder" mode, which polls the feeder repeatedly.
++    /// </summary>
++    public bool SuppressFeederEmptyError { get; set; }
+ }
+\ No newline at end of file
+diff --git a/NAPS2.Lib/Scan/ScanPerformer.cs b/NAPS2.Lib/Scan/ScanPerformer.cs
+index 59a5ab5..433a0a2 100644
+--- a/NAPS2.Lib/Scan/ScanPerformer.cs
++++ b/NAPS2.Lib/Scan/ScanPerformer.cs
+@@ -108,7 +108,8 @@ internal class ScanPerformer : IScanPerformer
+         {
+             // Close the progress window before showing the error dialog
+             op.Completed();
+-            if (args.Error != null)
++            if (args.Error != null &&
++                !(scanParams.SuppressFeederEmptyError && args.Error is DeviceFeederEmptyException))
+             {
+                 HandleError(args.Error);
+             }
+-- 
+2.34.1
+

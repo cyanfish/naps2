@@ -187,6 +187,10 @@ public class CommonConfig
 
     [Config]
     [Common]
+    public AutoCropConfig AutoCrop { get; set; } = new();
+
+    [Config]
+    [Common]
     public EmailSettings EmailSettings { get; set; } = new();
 
     [User]

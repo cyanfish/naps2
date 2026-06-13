@@ -24,4 +24,11 @@ public class ScanParams
     public OcrParams? OcrParams { get; set; }
 
     public CancellationToken OcrCancelToken { get; set; }
+
+    /// <summary>
+    /// When true, an empty-feeder result (DeviceFeederEmptyException) is treated as a normal
+    /// "nothing scanned this time" outcome instead of showing an error dialog. Used by the
+    /// batch "wait for paper in feeder" mode, which polls the feeder repeatedly.
+    /// </summary>
+    public bool SuppressFeederEmptyError { get; set; }
 }

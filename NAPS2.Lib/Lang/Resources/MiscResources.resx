@@ -318,6 +318,9 @@
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
     <value>Waiting for scan {0}...</value>
   </data>
+  <data name="BatchStatusWaitingForPaper" xml:space="preserve">
+    <value>Waiting for paper in feeder (scan #{0})...</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -425,6 +428,12 @@
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Deskew Progress</value>
+  </data>
+  <data name="AutoCropping" xml:space="preserve">
+    <value>Cropping...</value>
+  </data>
+  <data name="AutoCropProgress" xml:space="preserve">
+    <value>Auto Crop Progress</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
     <value>Download Needed</value>

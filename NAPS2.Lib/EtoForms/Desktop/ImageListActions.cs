@@ -92,6 +92,31 @@ public class ImageListActions
         }
     }
 
+    public void AutoCrop()
+    {
+        var images = Selection ?? _imageList.Selection;
+        if (!images.Any())
+        {
+            return;
+        }
+
+        var cfg = _config.Get(c => c.AutoCrop);
+        var autoCropParams = new AutoCropParams
+        {
+            WidthMode = cfg.WidthMode,
+            HeightMode = cfg.HeightMode,
+            FixedWidthMm = cfg.FixedWidthMm,
+            FixedHeightMm = cfg.FixedHeightMm,
+            PaddingMm = cfg.PaddingMm,
+            ThumbnailSize = _thumbnailController.RenderSize
+        };
+        var op = _operationFactory.Create<AutoCropOperation>();
+        if (op.Start(_imageList, images.ToList(), autoCropParams))
+        {
+            _operationProgress.ShowProgress(op);
+        }
+    }
+
     public async Task RotateFlip(double angle) =>
         await _imageList.MutateAsync(new ImageListMutation.RotateFlip(angle), Selection);
 
