@@ -109,8 +109,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     public override void DidSelectFunctionalUnit(
         ICScannerDevice scanner, ICScannerFunctionalUnit functionalUnit, NSError? error)
     {
-        _logger.LogDebug("DidSelectFunctionalUnit {Unit} {Error}", functionalUnit.GetType().Name, error);
-        SetResultOrError(_unitTcs, functionalUnit, error);
+        _logger.LogDebug("DidSelectFunctionalUnit {Unit} {Error}", functionalUnit?.GetType().Name, error);
+        SetResultOrError(_unitTcs, functionalUnit ?? _device.SelectedFunctionalUnit, error);
     }
 
     public override void DidScanToBandData(ICScannerDevice scanner, ICScannerBandData data)
