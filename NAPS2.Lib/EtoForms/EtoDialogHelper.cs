@@ -22,10 +22,8 @@ public class EtoDialogHelper : DialogHelper
         {
             lastExt = "pdf";
         }
-        var sd = new SaveFileDialog
-        {
-            FileName = GetDefaultFileName(defaultPath, lastExt!)
-        };
+        var sd = CreateSaveFileDialog();
+        sd.FileName = GetDefaultFileName(defaultPath, lastExt!);
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt);
         SetDir(sd, defaultPath);
         EtoPlatform.Current.ConfigureFileDialog(sd);
@@ -41,10 +39,8 @@ public class EtoDialogHelper : DialogHelper
 
     public override bool PromptToSavePdf(string? defaultPath, out string? savePath)
     {
-        var sd = new SaveFileDialog
-        {
-            FileName = GetDefaultFileName(defaultPath, "pdf")
-        };
+        var sd = CreateSaveFileDialog();
+        sd.FileName = GetDefaultFileName(defaultPath, "pdf");
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
         EtoPlatform.Current.ConfigureFileDialog(sd);
@@ -64,10 +60,8 @@ public class EtoDialogHelper : DialogHelper
         {
             lastExt = "jpg";
         }
-        var sd = new SaveFileDialog
-        {
-            FileName = GetDefaultFileName(defaultPath, lastExt!)
-        };
+        var sd = CreateSaveFileDialog();
+        sd.FileName = GetDefaultFileName(defaultPath, lastExt!);
         var filterGroups = EtoPlatform.Current.IsGtk
             ? FileFilterGroup.AllImages | FileFilterGroup.Image
             : FileFilterGroup.Image;
@@ -94,6 +88,46 @@ public class EtoDialogHelper : DialogHelper
         return _addExt && !Path.HasExtension(normPath)
             ? $"{normPath}.{ext}"
             : normPath;
+    }
+
+    private static SaveFileDialog CreateSaveFileDialog()
+    {
+        EnsureCurrentDirectoryIsAccessible();
+        try
+        {
+            return new SaveFileDialog();
+        }
+        catch (FileNotFoundException)
+        {
+            SetSafeCurrentDirectory();
+            return new SaveFileDialog();
+        }
+    }
+
+    private static void EnsureCurrentDirectoryIsAccessible()
+    {
+        try
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            if (!Directory.Exists(currentDirectory))
+            {
+                SetSafeCurrentDirectory();
+            }
+        }
+        catch
+        {
+            SetSafeCurrentDirectory();
+        }
+    }
+
+    private static void SetSafeCurrentDirectory()
+    {
+        var fallbackDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        if (string.IsNullOrWhiteSpace(fallbackDirectory) || !Directory.Exists(fallbackDirectory))
+        {
+            fallbackDirectory = Path.GetTempPath();
+        }
+        Environment.CurrentDirectory = fallbackDirectory;
     }
 
     private void SetDir(SaveFileDialog dialog, string? defaultPath)
@@ -128,6 +162,7 @@ public class EtoDialogHelper : DialogHelper
 
     public override bool PromptToImport(out string[]? filePaths)
     {
+        EnsureCurrentDirectoryIsAccessible();
         var ofd = new OpenFileDialog
         {
             MultiSelect = true,
