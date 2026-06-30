@@ -103,7 +103,15 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("DeviceOffline", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to The scanner rejected the scan settings. Check page size, alignment, and resolution in your profile.
+        /// </summary>
+        internal static string DeviceInvalidParameter {
+            get {
+                return ResourceManager.GetString("DeviceInvalidParameter", resourceCulture);
+            }
+        }        
         /// <summary>
         ///   Looks up a localized string similar to The scanner has a paper jam..
         /// </summary>
