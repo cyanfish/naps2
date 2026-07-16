@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -33,11 +33,6 @@ jobs:
         dotnet run --project NAPS2.Tools -- pkg deb -p linux
         dotnet run --project NAPS2.Tools -- pkg rpm -p linux
         
-    - name: Build macOS (pkg)
-      if: matrix.os == 'macos-latest'
-      run: |
-        dotnet run --project NAPS2.Tools -- pkg pkg -p mac
-
     - name: Upload to GitHub Release
       uses: softprops/action-gh-release@v2
       with:
