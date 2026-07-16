@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
@@ -89,7 +89,7 @@ public class PdfExporter
                 {
                     var pageState = new PageExportState(
                         image, pageIndex++, document, document.AddPage(), ocrEngine, ocrParams, IncrementProgress,
-                        progress.CancelToken, exportParams.Compat);
+                        progress.CancelToken, exportParams);
                     // TODO: To improve our ability to passthrough, we could consider using Pdfium to apply the transform to
                     // the underlying PDF file. For example, doing color shifting on individual text + image objects, or
                     // applying matrix changes.
@@ -248,7 +248,8 @@ public class PdfExporter
 
     private IEmbedder GetRenderedImageOrDirectJpegEmbedder(PageExportState state)
     {
-        if (state.Image.IsUntransformedJpegFile(out var jpegPath))
+        var exportParams = state.ExportParams;
+        if (exportParams.ResolutionScale == 100 && state.Image.IsUntransformedJpegFile(out var jpegPath))
         {
             // Special case if we have an un-transformed JPEG - just use the original file instead of re-encoding
             using var fileStream = new FileStream(jpegPath, FileMode.Open, FileAccess.Read);
@@ -259,7 +260,12 @@ public class PdfExporter
                 return new DirectJpegEmbedder(jpegHeader, jpegPath);
             }
         }
-        return new RenderedImageEmbedder(state.Image.Render());
+        var renderedImage = state.Image.Render();
+        if (exportParams.ResolutionScale is >= 10 and < 100)
+        {
+            renderedImage = renderedImage.PerformTransform(new ScaleTransform(exportParams.ResolutionScale / 100.0));
+        }
+        return new RenderedImageEmbedder(renderedImage, exportParams.JpegQuality);
     }
 
     private PageExportState WriteToPdfSharpStep(PageExportState state)
@@ -601,7 +607,7 @@ public class PdfExporter
     {
         public PageExportState(ProcessedImage image, int pageIndex, PdfDocument document, PdfPage page,
             IOcrEngine? ocrEngine, OcrParams? ocrParams, Action incrementProgress, CancellationToken cancelToken,
-            PdfCompat compat)
+            PdfExportParams exportParams)
         {
             Image = image;
             PageIndex = pageIndex;
@@ -611,7 +617,7 @@ public class PdfExporter
             OcrParams = ocrParams;
             IncrementProgress = incrementProgress;
             CancelToken = cancelToken;
-            Compat = compat;
+            ExportParams = exportParams;
         }
 
         public ProcessedImage Image { get; }
@@ -623,7 +629,8 @@ public class PdfExporter
         public OcrParams? OcrParams { get; }
         public Action IncrementProgress { get; }
         public CancellationToken CancelToken { get; }
-        public PdfCompat Compat { get; }
+        public PdfExportParams ExportParams { get; }
+        public PdfCompat Compat => ExportParams.Compat;
 
         public bool NeedsOcr { get; set; }
         public IEmbedder? Embedder { get; set; }
@@ -717,9 +724,12 @@ public class PdfExporter
 
     private class RenderedImageEmbedder : IEmbedder
     {
-        public RenderedImageEmbedder(IMemoryImage image)
+        private readonly int _jpegQuality;
+
+        public RenderedImageEmbedder(IMemoryImage image, int jpegQuality = 75)
         {
             Image = image;
+            _jpegQuality = jpegQuality;
         }
 
         public IMemoryImage Image { get; private set; }
@@ -732,7 +742,7 @@ public class PdfExporter
         public void CopyToStream(Stream stream)
         {
             // PDFs require RGB channels so we need to make sure we're exporting that.
-            Image.Save(stream, ImageFileFormat.Jpeg, new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24 });
+            Image.Save(stream, ImageFileFormat.Jpeg, new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24, Quality = _jpegQuality });
         }
 
         public ImageExportFormat PrepareForExport(ImageMetadata metadata)

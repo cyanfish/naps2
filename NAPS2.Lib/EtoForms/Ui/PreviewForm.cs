@@ -65,6 +65,11 @@ public class PreviewForm : EtoDialogBase
             Text = UiStrings.Delete,
             IconName = "cross_small"
         };
+        ApplyToAllCommand = new ActionCommand(ApplyToAllImages)
+        {
+            Text = "Apply to all Images",
+            IconName = "tick_small"
+        };
 
         _previewKsm = new KeyboardShortcutManager();
         EtoPlatform.Current.HandleKeyDown(this, _previewKsm.Perform);
@@ -143,6 +148,7 @@ public class PreviewForm : EtoDialogBase
     protected ActionCommand ZoomOutCommand { get; }
     protected ActionCommand ZoomWindowCommand { get; }
     protected ActionCommand ZoomActualCommand { get; }
+    protected ActionCommand ApplyToAllCommand { get; }
 
     protected UiImageList ImageList { get; }
 
@@ -226,6 +232,7 @@ public class PreviewForm : EtoDialogBase
                 MakeToolButton(Commands.BlackWhite),
                 MakeToolButton(Commands.Sharpen),
                 MakeToolButton(Commands.DocumentCorrection),
+                MakeToolButton(ApplyToAllCommand),
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.Split),
                 MakeToolButton(Commands.Combine),
@@ -378,6 +385,32 @@ public class PreviewForm : EtoDialogBase
 
         _previewKsm.Assign(ks.ZoomIn, ZoomInCommand);
         _previewKsm.Assign(ks.ZoomOut, ZoomOutCommand);
+    }
+
+    private void ApplyToAllImages()
+    {
+        if (CurrentImage == null) return;
+        var transforms = CurrentImage.TransformState.Transforms.ToList();
+        if (!transforms.Any())
+        {
+            MessageBox.Show(this, "No adjustments have been made to the current image yet.", "Apply to all Images", MessageBoxButtons.OK, MessageBoxType.Information);
+            return;
+        }
+
+        var otherImages = ImageList.Images.Where(img => img != CurrentImage).ToList();
+        if (otherImages.Any())
+        {
+            if (MessageBox.Show(this, $"Apply all adjustments from the current image to the other {otherImages.Count} image(s)?", "Apply to all Images", MessageBoxButtons.OKCancel, MessageBoxType.Question) == DialogResult.Ok)
+            {
+                var mutation = new ImageListMutation.AddTransforms(transforms);
+                ImageList.Mutate(mutation, ListSelection.From(otherImages));
+                MessageBox.Show(this, "Adjustments successfully applied to all other images.", "Apply to all Images", MessageBoxButtons.OK, MessageBoxType.Information);
+            }
+        }
+        else
+        {
+            MessageBox.Show(this, "There are no other images loaded to apply adjustments to.", "Apply to all Images", MessageBoxButtons.OK, MessageBoxType.Information);
+        }
     }
 
     protected override void Dispose(bool disposing)

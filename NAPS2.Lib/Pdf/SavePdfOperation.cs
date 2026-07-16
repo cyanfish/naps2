@@ -1,4 +1,4 @@
-﻿using NAPS2.ImportExport;
+using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.Ocr;
 
@@ -87,7 +87,7 @@ internal class SavePdfOperation : OperationBase
                     var progress = new ProgressHandler(singleFile ? OnProgress : null, CancelToken);
                     result = await _pdfExporter.Export(currentFileName, imagesForFile,
                         new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
-                            pdfSettings.Compat), ocrParams, progress);
+                            pdfSettings.Compat, pdfSettings.JpegQuality, pdfSettings.ResolutionScale), ocrParams, progress);
                     if (!result || CancelToken.IsCancellationRequested)
                     {
                         break;

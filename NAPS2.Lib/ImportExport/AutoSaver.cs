@@ -143,8 +143,9 @@ public class AutoSaver
             {
                 subPath = placeholders.Substitute(subPath, true, 0, 1);
             }
+            var pdfSettings = _config.Get(c => c.PdfSettings);
             var op = new SavePdfOperation(_pdfExporter, _overwritePrompt);
-            if (op.Start(subPath, placeholders, images, _config.Get(c => c.PdfSettings), _config.DefaultOcrParams()))
+            if (op.Start(subPath, placeholders, images, pdfSettings, _config.DefaultOcrParams(pdfSettings)))
             {
                 _operationProgress.ShowProgress(op);
             }

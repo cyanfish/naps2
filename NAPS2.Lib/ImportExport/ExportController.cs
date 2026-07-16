@@ -1,4 +1,4 @@
-﻿using NAPS2.EtoForms;
+using NAPS2.EtoForms;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport.Email;
@@ -222,9 +222,10 @@ public class ExportController : IExportController
         EmailMessage? emailMessage = null, string? originalFilename = null)
     {
         var op = _operationFactory.Create<SavePdfOperation>();
+        var pdfSettings = _config.Get(c => c.PdfSettings);
 
-        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings),
-                _config.DefaultOcrParams(), emailMessage, originalFilename ?? filename))
+        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, pdfSettings,
+                _config.DefaultOcrParams(pdfSettings), emailMessage, originalFilename ?? filename))
         {
             _operationProgress.ShowProgress(op);
         }

@@ -172,6 +172,12 @@ public static class EtoLayoutExtensions
     public static LayoutControl Scale(this LayoutControl control) =>
         new LayoutControl(control, scale: true);
 
+    public static LayoutElement Scale(this LayoutElement element)
+    {
+        element.Scale = true;
+        return element;
+    }
+
     public static LayoutControl SpacingAfter(this LayoutControl control, int spacingAfter) =>
         new LayoutControl(control, spacingAfter: spacingAfter);
 

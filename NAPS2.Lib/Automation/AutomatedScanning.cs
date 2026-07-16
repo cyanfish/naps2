@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using NAPS2.Dependencies;
 using NAPS2.EtoForms;
 using NAPS2.ImportExport;
@@ -191,6 +191,7 @@ internal class AutomatedScanning
         {
             // Don't use OCR-enabled settings from the GUI if --noprofile is set
             _config.Run.Set(c => c.EnableOcr, false);
+            _config.Run.Set(c => c.PdfSettings.Ocr, false);
         }
         bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName);
         if (!canUseOcr)
@@ -200,16 +201,18 @@ internal class AutomatedScanning
         if (_options.DisableOcr)
         {
             _config.Run.Set(c => c.EnableOcr, false);
+            _config.Run.Set(c => c.PdfSettings.Ocr, false);
         }
         else if (_options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang))
         {
             _config.Run.Set(c => c.EnableOcr, true);
+            _config.Run.Set(c => c.PdfSettings.Ocr, true);
         }
         if (!string.IsNullOrEmpty(_options.OcrLang))
         {
             _config.Run.Set(c => c.OcrLanguageCode, _options.OcrLang);
         }
-        _ocrParams = _config.DefaultOcrParams();
+        _ocrParams = _config.DefaultOcrParams(_config.Get(c => c.PdfSettings));
     }
 
     private async Task InstallComponents()
