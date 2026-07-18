@@ -1,6 +1,7 @@
 ﻿using System.IO.Compression;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using Polyfills;
 
 namespace NAPS2.ImportExport;
 
@@ -53,14 +54,14 @@ public class FileImporter
         if (input.Stream != null)
         {
             input.Stream.Seek(0, SeekOrigin.Begin);
-            input.Stream.Read(firstBytes, 0, 8);
+            input.Stream.ReadExactly(firstBytes, 0, 8);
             input.Stream.Seek(0, SeekOrigin.Begin);
         }
         else
         {
             using var stream = new FileStream(input.FilePath!, FileMode.Open, FileAccess.Read);
             stream.Seek(0, SeekOrigin.Begin);
-            stream.Read(firstBytes, 0, 8);
+            stream.ReadExactly(firstBytes, 0, 8);
             stream.Seek(0, SeekOrigin.Begin);
         }
 

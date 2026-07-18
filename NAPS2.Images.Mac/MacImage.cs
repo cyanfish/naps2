@@ -40,7 +40,7 @@ public class MacImage : IMemoryImage
             var newColorSpace = Rep.ColorSpace.ColorComponents == 1
                 ? NSColorSpace.DeviceGrayColorSpace
                 : NSColorSpace.DeviceRGBColorSpace;
-            var rep = Rep.ConvertingToColorSpace(newColorSpace, NSColorRenderingIntent.Default);
+            var rep = Rep.ConvertingToColorSpace(newColorSpace, NSColorRenderingIntent.Default)!;
             rep.Size = Rep.Size;
             ReplaceRep(rep);
         }
@@ -171,7 +171,7 @@ public class MacImage : IMemoryImage
                 targetFormat = ImagePixelFormat.RGB24;
             }
             using var helper = PixelFormatHelper.Create(this, targetFormat);
-            var cgImage = helper.Image.Rep.CGImage; //RepresentationUsingTypeProperties(fileType, props);
+            var cgImage = helper.Image.Rep.CGImage!; //RepresentationUsingTypeProperties(fileType, props);
             var data = new NSMutableData();
             var props = new NSMutableDictionary();
             props.Add((NSString) "DPIWidth", NSObject.FromObject(HorizontalResolution));

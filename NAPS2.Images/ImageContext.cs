@@ -27,7 +27,7 @@ public abstract class ImageContext
         }
         var firstBytes = new byte[8];
         stream.Seek(0, SeekOrigin.Begin);
-        stream.Read(firstBytes, 0, 8);
+        stream.ReadExactly(firstBytes, 0, 8);
         stream.Seek(0, SeekOrigin.Begin);
 
         return GetFileFormatFromFirstBytes(firstBytes);

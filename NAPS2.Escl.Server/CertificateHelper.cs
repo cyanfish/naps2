@@ -44,7 +44,9 @@ internal static class CertificateHelper
             var now = DateTimeOffset.UtcNow;
             var cert = (X509Certificate2) CreateSelfSignedMethod!.Invoke(request,
                 new object[] { now.AddDays(-1), now.AddYears(10) })!;
+#pragma warning disable SYSLIB0057 // X509CertificateLoader doesn't work for this
             var pfxCert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
+#pragma warning restore SYSLIB0057
 
             return pfxCert;
         }

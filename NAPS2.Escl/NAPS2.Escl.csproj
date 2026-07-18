@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>14</LangVersion>
+        <NoWarn>PolyfillTargetsForNuget</NoWarn>
 
         <Title>NAPS2.Escl</Title>
         <Product>NAPS2.Escl</Product>

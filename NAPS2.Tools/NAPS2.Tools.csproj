@@ -18,7 +18,6 @@
     <PackageReference Include="NuGet.Protocol" Version="7.6.0" />
     <PackageReference Include="Octokit" Version="14.0.0" />
     <PackageReference Include="SSH.NET" Version="2025.1.0" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="VirusTotalNet" Version="2.2.0" />
   </ItemGroup>
 

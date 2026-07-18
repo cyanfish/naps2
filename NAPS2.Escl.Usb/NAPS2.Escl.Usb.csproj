@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>14</LangVersion>
+        <NoWarn>PolyfillTargetsForNuget</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>

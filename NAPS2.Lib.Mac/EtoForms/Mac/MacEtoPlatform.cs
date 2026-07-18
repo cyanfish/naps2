@@ -4,6 +4,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
 using Eto.Mac.Drawing;
+using Eto.Mac.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Mac;
@@ -212,7 +213,7 @@ public class MacEtoPlatform : EtoPlatform
         }
 
         // Add some padding to the left of the file type selector
-        var createMethod = fileDialog.Handler.GetType().BaseType?
+        var createMethod = typeof(MacFileDialog<,>)
             .GetMethod("Create", BindingFlags.Instance | BindingFlags.NonPublic);
         // Ensure the accessory view is created first
         createMethod?.Invoke(fileDialog.Handler, []);

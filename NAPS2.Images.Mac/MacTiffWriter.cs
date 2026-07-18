@@ -64,7 +64,7 @@ internal class MacTiffWriter : ITiffWriter
                         new NSNumber((int) comp),
                         NSBitmapImageRep.CompressionMethod);
                 }
-                dest.AddImage(imageToWrite.Rep.CGImage, props);
+                dest.AddImage(imageToWrite.Rep.CGImage!, props);
             }
             finally
             {

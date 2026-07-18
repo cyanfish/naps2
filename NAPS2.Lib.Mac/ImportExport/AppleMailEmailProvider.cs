@@ -45,7 +45,8 @@ internal class AppleMailEmailProvider : IAppleMailEmailProvider
                 }
                 if (emailMessage.Recipients.Any())
                 {
-                    service.Recipients = emailMessage.Recipients.Select(x => (NSObject) new NSString(x.Address))
+                    service.Recipients = emailMessage.Recipients.Select(x => x.Address).WhereNotNull()
+                        .Select(x => (NSObject) new NSString(x))
                         .ToArray();
                 }
                 var items = new List<NSObject>();

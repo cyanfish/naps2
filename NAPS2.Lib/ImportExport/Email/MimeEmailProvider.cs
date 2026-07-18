@@ -35,7 +35,10 @@ internal abstract class MimeEmailProvider : IEmailProvider
     {
         foreach (var recip in recips.Where(x => x.Type == type))
         {
-            outputList.Add(new MailboxAddress(Encoding.UTF8, recip.Name, recip.Address));
+            if (recip.Address != null)
+            {
+                outputList.Add(new MailboxAddress(Encoding.UTF8, recip.Name, recip.Address));
+            }
         }
     }
 
