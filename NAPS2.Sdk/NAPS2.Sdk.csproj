@@ -22,7 +22,7 @@
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkPackageTargets.targets" />
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net8-macos'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-macos'">
     <DefineConstants>MAC</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(AddDebugConstant)' == '1' or '$(Configuration)' == 'DebugLang' or '$(Configuration)' == 'DebugNoMac'">
