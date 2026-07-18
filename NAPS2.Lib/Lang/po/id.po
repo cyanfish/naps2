@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Indonesian\n"
 "Language: id\n"
@@ -62,7 +62,7 @@ msgstr "Mengumpulkan Data..."
 
 #: UiStrings.resx$Action$Message
 msgid "Action"
-msgstr ""
+msgstr "Aksi"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -236,7 +236,7 @@ msgstr "Lakukan Undo perubahan terhadap gambar: {0}, anda yakin?"
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "Tetapkan"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -618,11 +618,11 @@ msgstr "Emailkan Progres PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr "Emailkan Pilihan"
+msgstr "Email Terpilih"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr "Emailkan Pilihan sebagai PDF"
+msgstr "Email Terpilih sebagai PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -749,7 +749,7 @@ msgstr "Ikon dari:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
-msgstr ""
+msgstr "Gambar"
 
 #: MiscResources.resx$FileTypeImageFiles$Message
 msgid "Image Files"
@@ -757,12 +757,12 @@ msgstr ""
 
 #: UiStrings.resx$ImageQuality$Message
 msgid "Image Quality"
-msgstr ""
+msgstr "Kualitas Gambar"
 
 #: UiStrings.resx$ImageSettings$Message
 #: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
-msgstr ""
+msgstr "Pengaturan Gambar"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved."
@@ -843,15 +843,15 @@ msgstr ""
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 #: MiscResources.resx$LeaveAReview$Message
 msgid "Leave a Review"
-msgstr ""
+msgstr "Tinggalkan Ulasan"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
-msgstr ""
+msgstr "Kiri"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
@@ -904,11 +904,11 @@ msgstr ""
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
-msgstr ""
+msgstr "Pindah ke Bawah"
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
-msgstr ""
+msgstr "Pindah ke Atas"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -942,7 +942,7 @@ msgstr ""
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
-msgstr ""
+msgstr "Nama (opsional)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
@@ -1273,19 +1273,19 @@ msgstr ""
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr ""
+msgstr "Kanan"
 
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
-msgstr ""
+msgstr "Putar"
 
 #: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
-msgstr ""
+msgstr "Putar ke Kiri"
 
 #: UiStrings.resx$RotateRight$Message
 msgid "Rotate Right"
-msgstr ""
+msgstr "Putar ke Kanan"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
@@ -1678,7 +1678,7 @@ msgstr ""
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr ""
+msgstr "Batalkan penetapan"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"

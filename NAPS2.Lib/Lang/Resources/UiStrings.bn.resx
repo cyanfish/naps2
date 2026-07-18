@@ -13,352 +13,352 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutFormTitle" xml:space="preserve">
-    <value>Tietoja</value>
+    <value>পরিচিতি</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Tekijänoikeudet {0} NAPS2 Avustajat</value>
+    <value>স্বত্বাধিকার {0} NAPS2 তৈরিতে অবদানকারীগণের</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Käytettyjen kuvakkeiden lähde:</value>
+    <value>Icons from:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Tarkista päivitykset</value>
+    <value>নতুন আপডেট দেখুন</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Lahjoita</value>
+    <value>Donate</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
-    <value>Profiilit</value>
+    <value>Profiles</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>Uusi</value>
+    <value>New</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Muokkaa</value>
+    <value>Edit</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Poista</value>
+    <value>Delete</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Skannaa</value>
+    <value>Scan</value>
   </data>
   <data name="SetDefault" xml:space="preserve">
-    <value>Aseta oletus</value>
+    <value>Set Default</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>Kopioi</value>
+    <value>অনুলিপি</value>
   </data>
   <data name="Paste" xml:space="preserve">
-    <value>Liitä</value>
+    <value>Paste</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Kumoa</value>
+    <value>Undo</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Tee uudelleen</value>
+    <value>Redo</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Kumoa {0}</value>
+    <value>Undo {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Tee Uudelleen {0}</value>
+    <value>Redo {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Valmis</value>
+    <value>Done</value>
   </data>
   <data name="Default" xml:space="preserve">
-    <value>Oletus</value>
+    <value>Default</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
-    <value>Uusi profiili</value>
+    <value>New Profile</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
-    <value>Sarjaskannaus</value>
+    <value>ব্যাচ স্ক্যান</value>
   </data>
   <data name="Ocr" xml:space="preserve">
     <value>OCR</value>
   </data>
   <data name="Profiles" xml:space="preserve">
-    <value>Profiilit</value>
+    <value>Profiles</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Tuo</value>
+    <value>Import</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Tallenna PDF</value>
+    <value>Save PDF</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
-    <value>PDF - asetukset</value>
+    <value>PDF Settings</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Tallenna kuvat</value>
+    <value>Save Images</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
-    <value>Kuva-asetukset</value>
+    <value>Image Settings</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>Liitä PDF sähköpostiin</value>
+    <value>Email PDF</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
-    <value>Sähköpostiasetukset</value>
+    <value>Email Settings</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Tulosta</value>
+    <value>Print</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Kuva</value>
+    <value>Image</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>Näytä</value>
+    <value>View</value>
   </data>
   <data name="Crop" xml:space="preserve">
-    <value>Rajaa</value>
+    <value>পার্শ্ব ছাঁটাই</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
-    <value>Kirkkaus / kontrasti</value>
+    <value>উজ্জ্বলতা / বৈপরীত্য</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Sävy / kylläisyys</value>
+    <value>Hue / Saturation</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
-    <value>Mustavalkoinen</value>
+    <value>সাদা-কালো</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>Terävöitä</value>
+    <value>Sharpen</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Dokumentin Korjaus</value>
+    <value>Document Correction</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Palauta</value>
+    <value>Reset</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>Käännä</value>
+    <value>Rotate</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
-    <value>Käännä vasemmalle</value>
+    <value>Rotate Left</value>
   </data>
   <data name="RotateRight" xml:space="preserve">
-    <value>Käännä oikealle</value>
+    <value>Rotate Right</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Käännä</value>
+    <value>Flip</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Suorista</value>
+    <value>Deskew</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>Mukautettu kääntäminen</value>
+    <value>Custom Rotation</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Siirrä ylös</value>
+    <value>Move Up</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Siirrä alas</value>
+    <value>Move Down</value>
   </data>
   <data name="Reorder" xml:space="preserve">
-    <value>Järjestä uudelleen</value>
+    <value>Reorder</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Lomita</value>
+    <value>Interleave</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
-    <value>Lomituksen poisto</value>
+    <value>Deinterleave</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Vaihtoehtoinen lomitus</value>
+    <value>অন্যরূপে পৃষ্ঠা মিশ্রণ (Interleave)</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Vaihtoehtoinen lomituksen poisto</value>
+    <value>অন্যরূপে পৃষ্ঠা আলাদা করা (Deinterleave)</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Taaksepäin</value>
+    <value>Reverse</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Vaihda kaikkien arvot</value>
+    <value>Reverse All</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Vaihda valittujen arvot</value>
+    <value>Reverse Selected</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Tyhjennä</value>
+    <value>অপসারন করুন</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Poista kaikki</value>
+    <value>সবকিছু অপসারন করুন</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Kieli</value>
+    <value>Language</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Asetukset</value>
+    <value>Settings</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Käyttöliittymä</value>
+    <value>Interface</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Skannaa" valikko muuttaa oletusprofiilia</value>
+    <value>"স্ক্যান" মেনু ডিফল্ট প্রোফাইল পরিবর্তন করবে</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Näytä "Profiilit" työkalupalkki</value>
+    <value>Show "Profiles" toolbar</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Näytä sivunnumerot</value>
+    <value>Show page numbers</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Skannaa" painikkeen oletustoiminto:</value>
+    <value>"স্ক্যান" বাটনের পূর্বনির্ধারিত কাজ:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Tallenna" painikkeen oletustoiminto:</value>
+    <value>"সংরক্ষণ" বাটনের পূর্বনির্ধারিত কাজ:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Sovellus</value>
+    <value>অ্যাপ্লিকেশন</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Salli vain yksi NAPS2-instanssi</value>
+    <value>Only allow a single NAPS2 instance</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>Tietoja</value>
+    <value>পরিচিতি</value>
   </data>
   <data name="Zoom" xml:space="preserve">
-    <value>Muuta kokoa</value>
+    <value>Zoom</value>
   </data>
   <data name="ZoomIn" xml:space="preserve">
-    <value>Suurenna</value>
+    <value>Zoom In</value>
   </data>
   <data name="ZoomOut" xml:space="preserve">
-    <value>Pienennä</value>
+    <value>Zoom Out</value>
   </data>
   <data name="ZoomActual" xml:space="preserve">
-    <value>Alkuperäiseen kokoon</value>
+    <value>Zoom Actual</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Skaalaa ikkunan mukaan</value>
+    <value>Scale With Window</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Tallenna</value>
+    <value>Save</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Tallenna kaikki</value>
+    <value>Save All</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Tallenna valitut</value>
+    <value>Save Selected</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Tallenna kaikki PDF-muodossa</value>
+    <value>Save All as PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Tallenna valitut PDF-muodossa</value>
+    <value>Save Selected as PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Tallenna kaikki kuvina</value>
+    <value>Save All as Images</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Tallenna valitut kuvina</value>
+    <value>Save Selected as Images</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Lähetä kaikki sähköpostitse</value>
+    <value>Email All</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Lähetä valittu sähköpostilla</value>
+    <value>Email Selected</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Lähetä kaikki sähköpostilla PDF-muodossa</value>
+    <value>Email All as PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Lähetä valittu PDF-tiedostona</value>
+    <value>Email Selected as PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
-    <value>Profiiliasetukset</value>
+    <value>Profile Settings</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Näyttönimi:</value>
+    <value>Display name:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
-    <value>WIA-ajuri</value>
+    <value>WIA Driver</value>
   </data>
   <data name="TwainDriver" xml:space="preserve">
-    <value>TWAIN-ajuri</value>
+    <value>TWAIN Driver</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL- Ajuri</value>
+    <value>ESCL Driver</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Verkkoajuri</value>
+    <value>ESCL Network Driver</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB-ajuri</value>
+    <value>ESCL USB Driver</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Applen Ajuri</value>
+    <value>Apple ড্রাইভার</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE - ajuri</value>
+    <value>SANE Driver</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
-    <value>Laite:</value>
+    <value>Device:</value>
   </data>
   <data name="ChooseDevice" xml:space="preserve">
-    <value>Valitse laite</value>
+    <value>ডিভাইস নির্বাচন করুন</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
-    <value>Käytä esimääritettyjä asetuksia</value>
+    <value>Use predefined settings</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
-    <value>Käytä laitteen käyttöliittymää</value>
+    <value>Use native UI</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
-    <value>Paperilähde:</value>
+    <value>Paper source:</value>
   </data>
   <data name="PageSizeLabel" xml:space="preserve">
-    <value>Sivun koko:</value>
+    <value>Page size:</value>
   </data>
   <data name="ResolutionLabel" xml:space="preserve">
-    <value>Tarkkuus:</value>
+    <value>Resolution:</value>
   </data>
   <data name="BrightnessLabel" xml:space="preserve">
-    <value>Kirkkaus:</value>
+    <value>উজ্জ্বলতা:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Bittisyvyys:</value>
+    <value>বিট ডেপথ:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
-    <value>Vaaka-asettelu:</value>
+    <value>Horizontal align:</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
-    <value>Kuvasuhde:</value>
+    <value>Scale:</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
-    <value>Kontrasti:</value>
+    <value>বৈপরীত্য:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
-    <value>Salli automaattinen tallennus</value>
+    <value>Enable Auto Save</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Automaattisen tallennuksen asetukset</value>
+    <value>স্বয়ংক্রিয় সংরক্ষণ সেটিংস</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Automaattisen tallennuksen asetukset</value>
+    <value>স্বয়ংক্রিয় সংরক্ষণ সেটিংস</value>
   </data>
   <data name="Advanced" xml:space="preserve">
-    <value>Lisäasetukset</value>
+    <value>উন্নত</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Peruuta</value>
+    <value>বাতিল করুন</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Valitse</value>
+    <value>Select</value>
   </data>
   <data name="SelectSource" xml:space="preserve">
-    <value>Valitse mistä</value>
+    <value>Select Source</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Valitse laite</value>
+    <value>Select Device</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Aja taustalla</value>
+    <value>Run in Background</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -370,519 +370,519 @@
     <value>Not Another PDF Scanner</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
-    <value>OCR asetus</value>
+    <value>OCR Setup</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
-    <value>Mahdollista haku PDF:issä optisen tekstintunnistuksen avulla</value>
+    <value>Make PDFs searchable using OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
-    <value>OCR kieli:</value>
+    <value>OCR language:</value>
   </data>
   <data name="OcrModeLabel" xml:space="preserve">
-    <value>OCR muoto:</value>
+    <value>OCR mode:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Korjaa valkotasapaino ja poista kohinaa</value>
+    <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Tunnista teksti optisesti automaattisesti skannauksen jälkeen</value>
+    <value>স্ক্যান করার পর অটো-OCR চালু করুন</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Suorita OCR ennalta skannauksen jälkeen</value>
+    <value>Pre-emptively run OCR after scanning</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
-    <value>Hae lisää kieliä</value>
+    <value>Get more languages</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>OCR lataus</value>
+    <value>OCR Download</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>OCR:n käyttäminen vaatii, että lataat kaikki kielet, joilla haluat skannata.</value>
+    <value>Using OCR requires you to download each language you want to scan.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Valitse yksi tai useampi kieli:</value>
+    <value>Select one or more languages:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Arvioitu latauskoko {0} MB</value>
+    <value>Estimated download size: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Lataa</value>
+    <value>Download</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Latauksen eteneminen</value>
+    <value>Download Progress</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
-    <value>Esikatsele</value>
+    <value>Preview</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Seuraava</value>
+    <value>Next</value>
   </data>
   <data name="Previous" xml:space="preserve">
-    <value>Edellinen</value>
+    <value>Previous</value>
   </data>
   <data name="XOfY" xml:space="preserve">
-    <value>{0} / {1}</value>
+    <value>{0} of {1}</value>
   </data>
   <data name="Revert" xml:space="preserve">
-    <value>Palauta</value>
+    <value>Revert</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
-    <value>Käytä kaikissa  {0} valitussa kuvassa</value>
+    <value>নির্বাচিত সব {0} ছবিতে প্রয়োগ করুন</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
-    <value>Valitse kaikki</value>
+    <value>সব নির্বাচন করুন</value>
   </data>
   <data name="Recover" xml:space="preserve">
-    <value>Palauta</value>
+    <value>Recover</value>
   </data>
   <data name="NotNow" xml:space="preserve">
-    <value>Ei nyt</value>
+    <value>Not Now</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Palauta skannatut kuvat</value>
+    <value>Recover Scanned Images</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} kuva(a) skannattu {1} {2} ei ehkä ole tallennettu ja voidaan palauttaa. Haluatko palauttaa?</value>
+    <value>{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
-    <value>Paikkamerkit</value>
+    <value>Placeholders</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
-    <value>Ohita talleta - kysymys</value>
+    <value>Skip save prompt</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
-    <value>Yhden sivun tiedostot</value>
+    <value>Single page files</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Salaa PDF</value>
+    <value>Encrypt PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
-    <value>Näytä</value>
+    <value>Show</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
-    <value>Palauta oletusarvoihin</value>
+    <value>Restore Defaults</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>PDF - asetukset</value>
+    <value>PDF Settings</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
-    <value>Salli tulostaminen</value>
+    <value>প্রিন্টিং-এর অনুমতি দিন</value>
   </data>
   <data name="AllowFullQualityPrinting" xml:space="preserve">
-    <value>Salli korkealaatuinen tulostus</value>
+    <value>ফুল কোয়ালিটি প্রিন্টিং-এর অনুমতি দিন</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
-    <value>Salli asiakirjan muokkaus</value>
+    <value>ডকুমেন্ট পরিবর্তনের অনুমতি দিন</value>
   </data>
   <data name="AllowDocumentAssembly" xml:space="preserve">
-    <value>Salli asiakirjan kokoaminen</value>
+    <value>ডকুমেন্ট একত্রিত করার অনুমতি দিন</value>
   </data>
   <data name="AllowContentCopying" xml:space="preserve">
-    <value>Salli sisällön kopiointi</value>
+    <value>বিষয়বস্তু কপি অনুমতি দিন</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Salli sisällön kopioiminen helppokäyttötoimintoja varten</value>
+    <value>অ্যাক্সেসিবিলিটির জন্য বিষয়বস্তু কপি অনুমতি দিন</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
-    <value>Salli kommentit</value>
+    <value>টীকা অনুমতি দিন</value>
   </data>
   <data name="AllowFormFilling" xml:space="preserve">
-    <value>Salli lomakkeiden täyttäminen</value>
+    <value>ফর্ম পূরণের অনুমতি দিন</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>Oletuspolku:</value>
+    <value>Default File Path:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
-    <value>Tiedostopolku:</value>
+    <value>File Path:</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
-    <value>Otsikko:</value>
+    <value>Title:</value>
   </data>
   <data name="AuthorLabel" xml:space="preserve">
-    <value>Tekijä:</value>
+    <value>রচয়িতা:</value>
   </data>
   <data name="SubjectLabel" xml:space="preserve">
-    <value>Aihe:</value>
+    <value>Subject:</value>
   </data>
   <data name="KeywordsLabel" xml:space="preserve">
-    <value>Avainsanat:</value>
+    <value>Keywords:</value>
   </data>
   <data name="OwnerPasswordLabel" xml:space="preserve">
-    <value>Omistajan salasana:</value>
+    <value>Owner Password:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
-    <value>Käyttäjän salasana:</value>
+    <value>User Password:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
-    <value>Muista asetukset</value>
+    <value>Remember these settings</value>
   </data>
   <data name="Metadata" xml:space="preserve">
-    <value>Metatiedot</value>
+    <value>Metadata</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Salaus</value>
+    <value>Encryption</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
-    <value>Yhteensopivuus</value>
+    <value>উপযোগিতা (Compatibility)</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
-    <value>Paikkamerkit</value>
+    <value>Placeholders</value>
   </data>
   <data name="Year4Digit" xml:space="preserve">
-    <value>Vuosi</value>
+    <value>Year</value>
   </data>
   <data name="Year2Digit" xml:space="preserve">
-    <value>Vuosi (00-99)</value>
+    <value>Year (00-99)</value>
   </data>
   <data name="Month2Digit" xml:space="preserve">
-    <value>Kuukausi (01-12)</value>
+    <value>Month (01-12)</value>
   </data>
   <data name="Day2Digit" xml:space="preserve">
-    <value>Päivä (01-31)</value>
+    <value>Day (01-31)</value>
   </data>
   <data name="Hour2Digit" xml:space="preserve">
-    <value>Tunti (0-23)</value>
+    <value>Hour (0-23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
-    <value>Minuutti (00-59)</value>
+    <value>Minute (00-59)</value>
   </data>
   <data name="Second2Digit" xml:space="preserve">
-    <value>Sekunti (00-59)</value>
+    <value>Second (00-59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
-    <value>Automaattinen lisäys (4 numeroa)</value>
+    <value>স্বয়ংক্রিয়-বর্ধনশীল সংখ্যা (৪ অঙ্কের)</value>
   </data>
   <data name="AutoIncrementing3Digit" xml:space="preserve">
-    <value>Automaattinen lisäys (3 numeroa)</value>
+    <value>স্বয়ংক্রিয়-বর্ধনশীল সংখ্যা (৩ অঙ্কের)</value>
   </data>
   <data name="AutoIncrementing2Digit" xml:space="preserve">
-    <value>Automaattinen lisäys (2 numeroa)</value>
+    <value>স্বয়ংক্রিয়-বর্ধনশীল সংখ্যা (২ অঙ্কের)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Automaattinen lisäys (1 numero)</value>
+    <value>স্বয়ংক্রিয়-বর্ধনশীল সংখ্যা (১ অঙ্কের)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Tiedoston nimi</value>
+    <value>File Name:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
-    <value>Esikatsele:</value>
+    <value>Preview:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>Lisää myös kuvan laatua profiilissasi laadukkaita JPEG (80+) kuvia varten.</value>
+    <value>For high JPEG qualities (80+), also increase Image Quality in your profile for best results.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
-    <value>Jpeg - laatu</value>
+    <value>Jpeg Quality</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
-    <value>Tiff - vaihtoehdot</value>
+    <value>Tiff Options</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
-    <value>Pakkaus:</value>
+    <value>সংকোচন:</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Kuva-asetukset</value>
+    <value>Image Settings</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Sähköpostiasetukset</value>
+    <value>Email Settings</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Asetukset</value>
+    <value>Settings</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Palveluntarjoaja</value>
+    <value>Provider</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Muuta</value>
+    <value>পরিবর্তন করুন</value>
   </data>
   <data name="AttachmentNameLabel" xml:space="preserve">
-    <value>Liitteen nimi:</value>
+    <value>সংযুক্তির নাম:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Valitse sähköpostin lähetystapa</value>
+    <value>ইমেইল প্লাটফর্ম নির্বাচন করুন</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Valtuuta</value>
+    <value>অনুমোদন করুন</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
-    <value>Odotetaan valtuutusta...</value>
+    <value>Waiting for authorization...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
-    <value>Virhe</value>
+    <value>Error</value>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Tekniset yksityiskohdat</value>
+    <value>Technical Details</value>
   </data>
   <data name="PdfPasswordFormTitle" xml:space="preserve">
-    <value>Salasana</value>
+    <value>Password</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>Seuraava tiedosto on salattu ja tarvitsee salasanan avaukseen:</value>
+    <value>The following file is encrypted and requires a password to open:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Kysy tiedostopolkua</value>
+    <value>Prompt for file path</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
-    <value>Tiedosto joka sivusta</value>
+    <value>One file per page</value>
   </data>
   <data name="OneFilePerScan" xml:space="preserve">
-    <value>Skannauksesta yksi tiedosto</value>
+    <value>One file per scan</value>
   </data>
   <data name="SeparateByPatchT" xml:space="preserve">
-    <value>Erota tiedostot Patch-T - koodilla</value>
+    <value>Separate files by Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>Lisätietoja</value>
+    <value>More info</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Pyyhi kuvat tallennukset jälkeen</value>
+    <value>সংরক্ষণের পর চিত্রসমূহ অপসারন করুন</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Säilytä kuvat eri istunnoissa</value>
+    <value>Keep images across sessions</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
-    <value>Mukautettu sivun koko</value>
+    <value>Custom Page Size</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
-    <value>Nimi (valinnainen)</value>
+    <value>Name (optional)</value>
   </data>
   <data name="Dimensions" xml:space="preserve">
-    <value>Mittasuhteet</value>
+    <value>Dimensions</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Mukautettu tarkkuus</value>
+    <value>Custom Resolution</value>
   </data>
   <data name="Dpi" xml:space="preserve">
     <value>Dpi</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
-    <value>Odotetaan TWAINin valmistumista...</value>
+    <value>Waiting for TWAIN to complete...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>Profiilin lisäasetukset</value>
+    <value>উন্নত প্রোফাইল সেটিংস</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
-    <value>Kuvan laatu</value>
+    <value>Image Quality</value>
   </data>
   <data name="MaximumQuality" xml:space="preserve">
-    <value>Korkein laatu (suuret tiedostot)</value>
+    <value>Maximum quality (large files)</value>
   </data>
   <data name="BlankPages" xml:space="preserve">
-    <value>Tyhjät sivut</value>
+    <value>খালি পৃষ্ঠা</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Ohita tyhjät sivut</value>
+    <value>Exclude blank pages</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>Valkoisen raja-arvo</value>
+    <value>White Threshold</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
-    <value>Peitto</value>
+    <value>কাভারেজের সর্বনিম্ন মাত্রা</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
-    <value>Jälkikäsittely</value>
+    <value>Post-processing</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Suorista skannatut sivut</value>
+    <value>Deskew scanned pages</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
-    <value>Käytä kirkkautta/kontrastia skannauksen jälkeen</value>
+    <value>স্ক্যান করার পর উজ্জ্বলতা/বৈপরীত্য প্রয়োগ করুন</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
-    <value>Siirtymän suurus kohdistuksen perusteella (WIA)</value>
+    <value>Offset width based on alignment (WIA)</value>
   </data>
   <data name="StretchToPageSize" xml:space="preserve">
-    <value>Venytä sivun kokoon</value>
+    <value>Stretch to page size</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Rajaa sivun kokoon</value>
+    <value>পৃষ্ঠার আকারে ছাঁটাই</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Käännä kaksipuoleiset sivut</value>
+    <value>Flip duplexed pages</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
     <value>Flip back sides of duplex pages</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia-versio:</value>
+    <value>Wia Version:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
-    <value>Twain - toteutus:</value>
+    <value>Twain Implementation:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
-    <value>Sarjaskannaus</value>
+    <value>ব্যাচ স্ক্যান</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Paina Aloita, kun olet vlamis.</value>
+    <value>Press Start when ready.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
-    <value>Skannausasetukset</value>
+    <value>Scan Configuration</value>
   </data>
   <data name="Output" xml:space="preserve">
-    <value>Tulos</value>
+    <value>Output</value>
   </data>
   <data name="ProfileLabel" xml:space="preserve">
-    <value>Profiilit:</value>
+    <value>Profile:</value>
   </data>
   <data name="SingleScan" xml:space="preserve">
-    <value>Yksittäisskannaus</value>
+    <value>Single scan</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Monta skannausta (kysy skannausten välillä)</value>
+    <value>Multiple scans (prompt between scans)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
-    <value>Monta skannausta (vakioviive skannausten välillä)</value>
+    <value>Multiple scans (fixed delay between scans)</value>
   </data>
   <data name="NumberOfScansLabel" xml:space="preserve">
-    <value>Skannauksia:</value>
+    <value>Number of scans:</value>
   </data>
   <data name="TimeBetweenScansLabel" xml:space="preserve">
-    <value>Aika skannausten välillä (sekuntia):</value>
+    <value>Time between scans (seconds):</value>
   </data>
   <data name="LoadIn" xml:space="preserve">
-    <value>Lataa kuvia NAPS2:een</value>
+    <value>Load images into NAPS2</value>
   </data>
   <data name="SaveToSingleFile" xml:space="preserve">
-    <value>Tallenna yhteen tiedostoon</value>
+    <value>Save to a single file</value>
   </data>
   <data name="SaveToMultipleFiles" xml:space="preserve">
-    <value>Tallenna useaan tiedostoon</value>
+    <value>Save to multiple files</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Aloita</value>
+    <value>Start</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
-    <value>Seuraava skannaus</value>
+    <value>Next Scan</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
-    <value>Valmis skannaamaan {0}.</value>
+    <value>Ready for scan {0}.</value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
-    <value>Avaa kansio</value>
+    <value>Open Folder</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Työkalut</value>
+    <value>Tools</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Ota virheenkorjausloki käyttöön</value>
+    <value>Enable debug logging</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Jaa</value>
+    <value>Share</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Skannerin Jakaminen</value>
+    <value>Scanner Sharing</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Skannerin Jakaminen</value>
+    <value>Scanner Sharing</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Jaettuja skannereita voidaan käyttää muista paikallisessa verkossa olevista tietokoneista valitsemalla "ESCL Driver" toisen tietokoneen NAPS2-profiiliasetuksista.</value>
+    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Jaetut Skannerin Asetukset</value>
+    <value>Shared Scanner Settings</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Haluatko varmasti lopettaa jakamisen {0}?</value>
+    <value>আপনি কি নিশ্চিত যে আপনি {0} শেয়ার করা বন্ধ করতে চান?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Jaa vaikka NAPS2 olisi suljettu</value>
+    <value>Share even when NAPS2 is closed</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Useita kieliä...</value>
+    <value>Multiple Languages...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Useita kieliä</value>
+    <value>Multiple Languages</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
     <value>Show native TWAIN progress</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Jaa</value>
+    <value>Split</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Yhdistä</value>
+    <value>একত্রে জুড়ুন</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manuaalinen IP</value>
+    <value>Manual IP</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manuaalinen IP</value>
+    <value>Manual IP</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Isäntä</value>
+    <value>IP/Host</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Portti</value>
+    <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Yhdistä</value>
+    <value>সংযোগ করুন</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Yhteysvirhe.</value>
+    <value>সংযোগ ত্রুটি.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Kysy aina</value>
+    <value>সবসময় জিজ্ঞেস করুন</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Etsitään laitteita...</value>
+    <value>Searching for devices...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} laitetta löytyi.</value>
+    <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 laite löytyi.</value>
+    <value>১টি ডিভাইস পাওয়া গেছে.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Laitteita ei löytynyt.</value>
+    <value>No devices found.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sivupalkki</value>
+    <value>Sidebar</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Skanneria ei löytynyt? Lue NAPS2 Flatpakin rajoituksista.</value>
+    <value>আপনার স্ক্যানার খুঁজে পাচ্ছেন না? NAPS2 Flatpak-এর সীমাবদ্ধতাসমূহ জানুন.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Pikanäppäimet</value>
+    <value>Keyboard Shortcuts</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Pikanäppäimet</value>
+    <value>Keyboard Shortcuts</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Skannaa Profiililla {0}</value>
+    <value>Scan With Profile {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
-    <value>Skannaa Oletusprofiililla</value>
+    <value>Scan With Default Profile</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Skannaa Uudella Profiili</value>
+    <value>Scan With New Profile</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Määritä</value>
+    <value>নির্ধারণ করুন</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Poista määritys</value>
+    <value>Unassign</value>
   </data>
   <data name="Action" xml:space="preserve">
-    <value>Toiminto</value>
+    <value>অ্যাকশন</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
-    <value>Pikavalinta</value>
+    <value>Shortcut</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Teema:</value>
+    <value>Theme:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Muokkaa sovelluksella...</value>
+    <value>Edit with...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Muokkaa sovelluksella {0}</value>
+    <value>Edit with {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Muokkaa sovelluksella...</value>
+    <value>Edit with...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Virhe käynnistettäessä sovellusta {0}</value>
+    <value>Error starting application {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Lopeta skannerin jako</value>
+    <value>Stop Scanner Sharing</value>
   </data>
 </root>

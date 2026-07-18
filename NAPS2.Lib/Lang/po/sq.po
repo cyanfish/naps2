@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -62,7 +62,7 @@ msgstr "Po merr të dhënat..."
 
 #: UiStrings.resx$Action$Message
 msgid "Action"
-msgstr ""
+msgstr "Veprim"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -339,7 +339,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "Nuk mund të gjeni skanerin? Lexoni rreth kufizimeve të NAPS2 Flatpak."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -592,12 +592,12 @@ msgstr "Modifiko"
 
 #: UiStrings.resx$EditWithAppName$Message
 msgid "Edit with {0}"
-msgstr ""
+msgstr "Redakto me {0}"
 
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
 msgid "Edit with..."
-msgstr ""
+msgstr "Redakto me..."
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -847,7 +847,7 @@ msgstr "Gjuha"
 
 #: MiscResources.resx$LeaveAReview$Message
 msgid "Leave a Review"
-msgstr ""
+msgstr "Lër një vlerësim"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
@@ -863,7 +863,7 @@ msgstr "E zbardhur"
 
 #: MiscResources.resx$ReviewPrompt$Message
 msgid "Like NAPS2?"
-msgstr ""
+msgstr "A të pëlqen NAPS2?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1486,7 +1486,7 @@ msgstr "Thekso"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
-msgstr ""
+msgstr "Shkurtore"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1506,7 +1506,7 @@ msgstr "Shfaqi numrat e faqeve"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
-msgstr ""
+msgstr "Rreshti anësor"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"

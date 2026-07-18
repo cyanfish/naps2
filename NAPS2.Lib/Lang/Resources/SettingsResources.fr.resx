@@ -79,7 +79,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Personnalisée…</value>
+    <value>Personnaliser…</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 p)</value>
@@ -88,10 +88,10 @@
     <value>US Letter (8.5x11 p)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
-    <value>Personnalisée…</value>
+    <value>Personnaliser…</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Prédéfinie</value>
+    <value>Prédéfini(e)</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -127,7 +127,7 @@
     <value>Aucun</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Prédéfinie</value>
+    <value>Prédéfini(e)</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
     <value>Ancienne (interface native seulement)</value>
@@ -145,7 +145,7 @@
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Prédéfinie</value>
+    <value>Prédéfini(e)</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
     <value>Plus rapide</value>
@@ -172,7 +172,7 @@
     <value>Toujours demander</value>
   </data>
   <data name="Theme_Default" xml:space="preserve">
-    <value>Prédéfinie</value>
+    <value>Prédéfini(e)</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
     <value>Clair</value>

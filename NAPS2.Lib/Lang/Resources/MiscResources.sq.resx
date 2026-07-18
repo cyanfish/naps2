@@ -340,10 +340,10 @@
     <value>NAPS2 is tërësisht falas. Mendoni të dhuroni.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
-    <value>Leave a Review</value>
+    <value>Lër një vlerësim</value>
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
-    <value>Like NAPS2?</value>
+    <value>A të pëlqen NAPS2?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e duhura:</value>

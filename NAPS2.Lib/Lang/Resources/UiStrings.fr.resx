@@ -70,7 +70,7 @@
     <value>Fermer</value>
   </data>
   <data name="Default" xml:space="preserve">
-    <value>Prédéfinie</value>
+    <value>Prédéfini(e)</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
     <value>Nouveau profil</value>
@@ -349,7 +349,7 @@
     <value>Annuler</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Sélectionner</value>
+    <value>Sélectionner…</value>
   </data>
   <data name="SelectSource" xml:space="preserve">
     <value>Sélectionner une source</value>
@@ -643,10 +643,10 @@
     <value>Taille de page personnalisée</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
-    <value>Nom (optionnel)</value>
+    <value>Nom (optionnel) :</value>
   </data>
   <data name="Dimensions" xml:space="preserve">
-    <value>Dimensions</value>
+    <value>Dimensions :</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
     <value>Résolution personnalisée</value>
@@ -856,10 +856,10 @@
     <value>Numériser avec un nouveau profil</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Affecter</value>
+    <value>Assigner</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Désaffecter</value>
+    <value>Désassigner</value>
   </data>
   <data name="Action" xml:space="preserve">
     <value>Action</value>
@@ -871,18 +871,18 @@
     <value>Thème :</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Modifier avec...</value>
+    <value>Modifier avec…</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
     <value>Modifier avec {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Modifier avec...</value>
+    <value>Modifier avec…</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
     <value>Erreur lors du démarrage de l’application {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Arrêt du partage du scanner</value>
+    <value>Arrêter le partage de scanner</value>
   </data>
 </root>

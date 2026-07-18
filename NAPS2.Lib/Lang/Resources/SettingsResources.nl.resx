@@ -82,10 +82,10 @@
     <value>Aangepast...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8,5x14 in)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8,5x11 in)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
     <value>Aangepast...</value>
@@ -130,13 +130,13 @@
     <value>Standaard</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (alleen eigen interface)</value>
+    <value>Legacy (alleen native UI)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Oorspronkelijke overdracht</value>
+    <value>Native Transfer</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Geheugen overdracht</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Oude DSM</value>

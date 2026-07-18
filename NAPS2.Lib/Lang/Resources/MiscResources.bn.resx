@@ -13,28 +13,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseProfile" xml:space="preserve">
-    <value>เลือกโปรไฟล์</value>
+    <value>প্রোফাইল নির্বাচন করুন</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>ล้าง</value>
+    <value>অপসারন করুন</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>คุณต้องการ ล้างไฟล์จำนวน "{0}" ใช่หรือไม่?</value>
+    <value>আপনি কি নিশ্চিত যে {0} টি জিনিস মুছে ফেলতে চান?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการลบ {0} รายการ?</value>
+    <value>আপনি কি নিশ্চিত যে আপনি "{0}"টি জিনিসকে অবলুপ্ত করতে চান?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>คุณต้องการ ลบโปรไฟล์จำนวน "{0}" ใช่หรือไม่?</value>
+    <value>আপনি কি নিশ্চিত যে আপনি "{0}"টি প্রোফাইলকে অবলুপ্ত করতে চান?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>คุณต้องการ ลบโปรไฟล์ "{0}" ใช่หรือไม่?</value>
+    <value>আপনি কি নিশ্চিত "{0}" টি প্রোফাইল অবলুপ্ত করতে চান?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
     <value>The file {0} already exists. Do you want to overwrite it?</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>ลบ</value>
+    <value>Delete</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
     <value>The selected scanner could not be found.</value>
@@ -46,10 +46,10 @@
     <value>You don't have permission to save files at this location.</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>ผิดพลาด</value>
+    <value>Error</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>ไฟล์บิตแมป (*.bmp)</value>
+    <value>বিটম্যাপ ফাইল (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
     <value>Enhanced Windows MetaFile (*.emf)</value>
@@ -64,7 +64,7 @@
     <value>JPEG File (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>เอกสาร PDF (*.pdf)</value>
+    <value>PDF Document (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>PNG File (*.png)</value>
@@ -76,16 +76,16 @@
     <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>ชื่อหายไป</value>
+    <value>Name missing.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>ไม่ได้เลือกอุปกรณ์</value>
+    <value>No device selected.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>ตรวจไม่พบเครื่องสแกน</value>
+    <value>No scanning device was found.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
     <value>Overwrite File</value>
@@ -94,34 +94,34 @@
     <value>{0} of {1}</value>
   </data>
   <data name="ScannedImage" xml:space="preserve">
-    <value>ชื่อรูปสแกน</value>
+    <value>Scanned Image</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>เลือกโปรไฟล์ก่อนเริ่มสแกน</value>
+    <value>Select a profile before clicking Scan.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>เกิด error กับ scanning driver</value>
+    <value>স্ক্যানিং ড্রাইভারের সাথে একটি ত্রুটি ঘটেছে.</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>เวอร์ชั่น {0}</value>
+    <value>Version {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>เกิด error ระหว่างการส่งอีเมล์</value>
+    <value>একটি ইমেইল পাঠানোর চেষ্টা করার সময় একটি ত্রুটি হয়েছে.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
-    <value>การติดตั้งเสร็จสมบูรณ์</value>
+    <value>Installation Complete</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>การติดตั้งเสร็จสมบูรณ์. คุณต้องการรีสตาร์ท NAPS2 ไหม?</value>
+    <value>Installation complete. Do you want to restart NAPS2 now?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
-    <value>การติดตั้งล้มเหลว</value>
+    <value>Installation failed.</value>
   </data>
   <data name="InstallFailedTitle" xml:space="preserve">
-    <value>การติดตั้งล้มเหลว</value>
+    <value>Installation Failed</value>
   </data>
   <data name="AllCount" xml:space="preserve">
-    <value>ทั้งหมด ({0})</value>
+    <value>সব ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
     <value>Selected ({0})</value>
@@ -130,31 +130,31 @@
     <value>Estimated download size: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
-    <value>{0} / {1} ไฟล์</value>
+    <value>{0} / {1} files</value>
   </data>
   <data name="SizeProgress" xml:space="preserve">
     <value>{0} / {1} MB</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>ไม่สามารถนำเข้าไฟล์ '{0}' ได้</value>
+    <value>The file '{0}' could not be imported.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>ไม่สามารถนำเข้าไฟล์ '{0}' ได้ สามารถนำเข้าได้เฉพาะไฟล์ PDF ที่สร้างโดย NAPS2 เท่านั้น</value>
+    <value>The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>การดาวน์โหลดผิดพลาด</value>
+    <value>Download Error</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
     <value>One or more files could not be downloaded.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>ตั้งค่าเอง ({0}x{1} {2})</value>
+    <value>নিজের মতো ({0}x{1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>สแกน</value>
+    <value>Scan</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>คุณต้องการ เปลี่ยนกลับ การแก้ไขรูป "{0}" ใช่หรือไม่?</value>
+    <value>নিশ্চিতভাবে {0} টি ছবির পরিবর্তনগুলো পূর্বাবস্থায় ফিরিয়ে নিতে চান?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
     <value>Reset Image</value>
@@ -163,7 +163,7 @@
     <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>กำลังอยู่ในระหว่างการดำเนิน คุณแน่ใจว่าต้องการออกและหยุดการดำเนินการ?</value>
+    <value>একটি অপারেশন চলছে। আপনি কি নিশ্চিত যে আপনি প্রস্থান করে অপারেশনটি বাতিল করতে চান?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Unsaved Changes</value>
@@ -172,55 +172,55 @@
     <value>Operation in Progress</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
-    <value>กำลังสแกนหน้า {0}</value>
+    <value>Scanning page {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>ไม่มีหน้ากระดาษในเครื่องป้อน</value>
+    <value>No pages are in the feeder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>เกิด error ระหว่างการบันทึกไฟล์</value>
+    <value>ফাইল সংরক্ষণ করার সময় একটি ত্রুটি হয়েছে.</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>error ไม่ทราบสาเหตุระหว่างการสแกนจำนวนมาก</value>
+    <value>ব্যাচ স্ক্যানের সময় একটি অজানা ত্রুটি হয়েছে.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>ยกเลิกการสแกนจำนวนมาก</value>
+    <value>ব্যাচ বাতিল হয়েছে.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
-    <value>กำลังยกเลิก....</value>
+    <value>বাতিল করা হচ্ছে....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>การสแกนจำนวนมาก เสร็จสิ้น</value>
+    <value>ব্যাচ সফলভাবে সম্পন্ন হয়েছে.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>การสแกนจำนวนมากถูกหยุดเนื่องจากการทำงานขัดข้อง</value>
+    <value>ত্রুটির কারণে ব্যাচ স্ক্যান বন্ধ হয়ে গেছে.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
-    <value>กำลังสแกนหน้า {0}...</value>
+    <value>Scanning page {0}...</value>
   </data>
   <data name="BatchStatusScanPage" xml:space="preserve">
-    <value>กำลังสแกน {0} หน้า (สแกนแล้ว {1} หน้า)...</value>
+    <value>Scanning page {0} (scan {1})...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
     <value>Waiting for scan {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>ยกเลิก</value>
+    <value>বাতিল করুন</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>ปิด</value>
+    <value>বন্ধ করুন</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>กำลังบันทึกผลจำนวนมาก...</value>
+    <value>Saving batch results...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
@@ -229,10 +229,10 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>กำลังนำเข้า {0}...</value>
+    <value>Importing {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>ความคืบหน้าการนำเข้า</value>
+    <value>Import Progress</value>
   </data>
   <data name="Recovering" xml:space="preserve">
     <value>Recovering...</value>
@@ -241,46 +241,46 @@
     <value>Recovery Progress</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>บันทึกภาพ</value>
+    <value>Save Images</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>ความคืบหน้าการบันทึกภาพ</value>
+    <value>Save Images Progress</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>บันทึก PDF</value>
+    <value>Save PDF</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>ความคืบหน้าการบันทึก PDF</value>
+    <value>Save PDF Progress</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>กำลังบันทึก {0}...</value>
+    <value>Saving {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>พิมพ์</value>
+    <value>Print</value>
   </data>
   <data name="Copying" xml:space="preserve">
-    <value>กำลังคัดลอก...</value>
+    <value>অনুলিপি করা হচ্ছে...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>กำลังคัดลอก</value>
+    <value>অনুলিপি করার অগ্রগতি</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>กำลังนำเข้า....</value>
+    <value>Importing...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>ส่งอีเมล PDF</value>
+    <value>Email PDF</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>ความคืบหน้าการส่งอีเมล PDF</value>
+    <value>Email PDF Progress</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>เกิด error ระหว่างบันทึกอัตโนมัติ</value>
+    <value>স্বয়ংক্রিয়ভাবে সংরক্ষণ করার সময় একটি ত্রুটি হয়েছে.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
-    <value>ไฟล์ทั้งหมด</value>
+    <value>সব ফাইল</value>
   </data>
   <data name="FileTypeImageFiles" xml:space="preserve">
-    <value>ไฟล์รูปภาพ</value>
+    <value>Image Files</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
     <value>The selected scanner is busy.</value>
@@ -295,28 +295,28 @@
     <value>The scanner is warming up.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>มีการอัปเดต OCR ใหม่ให้ใช้งานแล้ว</value>
+    <value>OCR-এর একটি আপডেট পাওয়া যাচ্ছে.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>บันทึกภาพแล้ว</value>
+    <value>Image saved.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>บันทึกรูปจำนวน {0} แล้ว</value>
+    <value>{0} images saved.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF บันทึกแล้ว</value>
+    <value>PDF saved.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>คุณต้องการ ลบ "{0}" ใช่หรือไม่</value>
+    <value>আপনি কি নিশ্চিত যে আপনি "{0}" টি অবলুপ্ত করতে চান?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
     <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>กำลังปรับให้ตรง...</value>
+    <value>Deskewing...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Deskew Progress</value>
@@ -325,22 +325,22 @@
     <value>Download Needed</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>จำเป็นต้องมีส่วนประกอบเพิ่มเติมเพื่อนำเข้าไฟล์ PDF นี้ คุณต้องการดาวน์โหลดทันทีหรือไม่</value>
+    <value>এই PDF ফাইলটি আমদানি করতে একটি অতিরিক্ত উপাদান প্রয়োজন। আপনি কি এখনই এটি ডাউনলোড করতে চান?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการสแกนแบบต่อเนื่อง?</value>
+    <value>আপনি কি নিশ্চিত যে আপনি ব্যাচ স্ক্যান বাতিল করতে চান?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>ยกเลิกคำสั่งชุด</value>
+    <value>ব্যাচ বাতিল করুন</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>บริจาค</value>
+    <value>Donate</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 เป็นโปรแกรมฟรี สามารถช่วยบริจาคเงินได้</value>
+    <value>NAPS2 is completely free. Consider making a donation.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
-    <value>เขียนรีวิว</value>
+    <value>Leave a Review</value>
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Like NAPS2?</value>
@@ -358,45 +358,45 @@
     <value>OCR Progress</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>ทำการ OCR...</value>
+    <value>Running OCR...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>ความคืบหน้าการอัปเดต</value>
+    <value>Update Progress</value>
   </data>
   <data name="Updating" xml:space="preserve">
     <value>Updating...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>ยังไม่มีเวอร์ชันใหม่</value>
+    <value>No updates available.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>กำลังตรวจสอบ...</value>
+    <value>চেক করা হচ্ছে...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>การตรวจสอบการอัปเดตถูกปิดใช้งาน</value>
+    <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>เกิด error ระหว่างติดตั้งอัพเดท</value>
+    <value>আপডেট ইনস্টল করার সময় একটি ত্রুটি হয়েছে.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>ติดตั้ง {0}</value>
+    <value>Install {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>มีการอัปเดตใหม่พร้อมใช้งาน</value>
+    <value>একটি আপডেট পাওয়া যাচ্ছে.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>เกิด error ระหว่างการขออนุญาต</value>
+    <value>অনুমোদন করার চেষ্টা করার সময় একটি ত্রুটি হয়েছে.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>Uploading email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>เกิด error ระหว่างการส่งอีเมล์</value>
+    <value>ইমেইল পাঠানোর সময় একটি ত্রুটি হয়েছে.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
-    <value>กำลังสแกนหน้า {0}...</value>
+    <value>Scanning page {0}...</value>
   </data>
   <data name="AcquiringData" xml:space="preserve">
-    <value>กำลังรับข้อมูล...</value>
+    <value>তথ্য সংগ্রহ করা হচ্ছে...</value>
   </data>
 </root>

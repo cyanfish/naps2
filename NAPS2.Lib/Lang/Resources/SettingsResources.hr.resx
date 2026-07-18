@@ -31,10 +31,10 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookNew" xml:space="preserve">
-    <value>Outlook (new)</value>
+    <value>Outlook (novi)</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook preko Web-a</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
@@ -124,19 +124,19 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>None</value>
+    <value>Nijedan</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>Zadano</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>Zastarjelo (samo za nativno sučelje)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Nativni prijenos</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Prijenos memorije</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Stari DSM</value>
@@ -151,7 +151,7 @@
     <value>Brzo</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Najbolje</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
     <value>Spremi sve</value>

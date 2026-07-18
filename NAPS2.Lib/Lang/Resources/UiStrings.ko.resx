@@ -649,7 +649,7 @@
     <value>크기</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>사용자 정의 회전</value>
   </data>
   <data name="Dpi" xml:space="preserve">
     <value>Dpi</value>
@@ -874,13 +874,13 @@
     <value>Edit with...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>{0}(으)로 편집하기</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
     <value>Edit with...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>{0} 어플리케이션 시작 오류</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Stop Scanner Sharing</value>

@@ -442,7 +442,7 @@
     <value>Återställ skannade bilder</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} bild(er) skannad(e) på {1} i {2} kanske inte har sparats, och är återställningsbara. Vill du återställa dem?</value>
+    <value>{0} bild(er) skannad(e) {1} kl. {2} kanske inte har sparats och går att återställa. Vill du återställa dem?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Platshållare</value>

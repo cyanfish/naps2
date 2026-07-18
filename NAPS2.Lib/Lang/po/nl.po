@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -94,7 +94,7 @@ msgstr "Inhoud kopiëren voor toegankelijkheid toestaan"
 
 #: UiStrings.resx$AllowDocumentAssembly$Message
 msgid "Allow Document Assembly"
-msgstr "Documentassemblage toestaan"
+msgstr "Samenstellen van document toestaan"
 
 #: UiStrings.resx$AllowDocumentModification$Message
 msgid "Allow Document Modification"
@@ -131,7 +131,7 @@ msgstr "Altijd vragen"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Er is een additioneel component nodig om deze PDF te importeren. Nu downloaden?"
+msgstr "Er is een extra onderdeel nodig om dit PDF-bestand te importeren. Wilt u het nu downloaden?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -164,7 +164,7 @@ msgstr "Fout bij het versturen van de e-mail."
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "Fout met het stuurprogramma van de scanner."
+msgstr "Er is een fout opgetreden met het stuurprogramma van de scanner."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
@@ -172,11 +172,11 @@ msgstr "Er is een bewerking bezig. Weet u zeker dat u wilt stoppen en de bewerki
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr "Er is een onbekende fout opgetreden tijdens de batch scan."
+msgstr "Er is een onbekende fout opgetreden tijdens de batchscan."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
-msgstr "Een update is beschikbaar."
+msgstr "Er is een nieuwe update beschikbaar."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
@@ -184,7 +184,7 @@ msgstr "Er is een update voor OCR beschikbaar."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
-msgstr "Apple driver"
+msgstr "Apple-driver"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -204,7 +204,7 @@ msgstr "Toepassen op {0} geselecteerde afbeeldingen"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "Weet u zeker dat u de batch scan wilt annuleren?"
+msgstr "Weet u zeker dat u de batchscan wilt annuleren?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -261,19 +261,19 @@ msgstr "Instellingen voor automatisch opslaan"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
-msgstr "Automatisch toenemend nummer (1 cijfer)"
+msgstr "Automatisch oplopend nummer (1 cijfer)"
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "Automatisch ophogend nummer (2 cijfers)"
+msgstr "Automatisch oplopend nummer (2 cijfers)"
 
 #: UiStrings.resx$AutoIncrementing3Digit$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "Automatisch ophogend nummer (3 cijfers)"
+msgstr "Automatisch oplopend nummer (3 cijfers)"
 
 #: UiStrings.resx$AutoIncrementing4Digit$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "Automatisch ophogend nummer (4 cijfers)"
+msgstr "Automatisch oplopend nummer (4 cijfers)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
@@ -290,19 +290,19 @@ msgstr "B5 (176x250 mm)"
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
-msgstr "Automatisch scannen"
+msgstr "Batchscan"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled."
-msgstr "Batch geannuleerd."
+msgstr "Batchscan geannuleerd."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "Batch succesvol voltooid."
+msgstr "Batchscan succesvol voltooid."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "Batch scan gestopt door fout."
+msgstr "Batchscan gestopt vanwege een fout."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
@@ -314,7 +314,7 @@ msgstr "Kleurdiepte:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Bitmapbestanden (*.bmp)"
+msgstr "Bitmap-bestanden (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
@@ -339,7 +339,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr "Kun je je scanner niet vinden? Lees dan over de beperkingen van NAPS2 Flatpak."
+msgstr "Kunt u uw scanner niet vinden? Lees dan over de beperkingen van NAPS2 Flatpak."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -348,7 +348,7 @@ msgstr "Annuleren"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr "Annuleer batch"
+msgstr "Annuleer batchscan"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
@@ -372,7 +372,7 @@ msgstr "Controleren..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr "Kies e-mail provider"
+msgstr "Kies e-mailprovider"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -433,7 +433,7 @@ msgstr "Kopiëren"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr "Voortgang kopiëren"
+msgstr "Voortgang van kopiëren"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
@@ -441,7 +441,7 @@ msgstr "Kopiëren..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr "Copyright {0} NAPS2 bijdragers"
+msgstr "Copyright {0} NAPS2-bijdragers"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -457,11 +457,11 @@ msgstr "Bijsnijden naar paginagrootte"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
-msgstr "Aangepast ({0}x{1} {2})"
+msgstr "Aangepast ({0}x{1}{2})"
 
 #: UiStrings.resx$PageSizeFormTitle$Message
 msgid "Custom Page Size"
-msgstr "Aangepaste paginagrootte"
+msgstr "Aangepast paginaformaat"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
@@ -515,7 +515,7 @@ msgstr "Rechtzetten"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr "Voortgang rechtzetten"
+msgstr "Voortgang van rechtzetten"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
@@ -535,7 +535,7 @@ msgstr "Afmetingen"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
-msgstr "Schermnaam:"
+msgstr "Weergavenaam:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
@@ -564,11 +564,11 @@ msgstr "Download vereist"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr "Voortgang downloaden"
+msgstr "Voortgang van downloaden"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr "Dpi"
+msgstr "DPI"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -614,7 +614,7 @@ msgstr "PDF e-mailen"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "Voortgang PDF e-mailen"
+msgstr "Voortgang van PDF e-mailen"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
@@ -635,7 +635,7 @@ msgstr "Automatisch opslaan inschakelen"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr "Debug logging toestaan"
+msgstr "Debug-logging inschakelen"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -656,12 +656,12 @@ msgstr "Fout"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
-msgstr "Fout bij starten van toepassing {0}"
+msgstr "Fout bij starten van NAPS2 {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
-msgstr "Geschatte omvang: {0} MB"
+msgstr "Geschatte grootte: {0} MB"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
@@ -681,7 +681,7 @@ msgstr "Automatische documentinvoer"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Bestandsnaam"
+msgstr "Bestandsnaam:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -693,7 +693,7 @@ msgstr "Witbalans verbeteren en ruis verminderen"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
-msgstr "Spiegelen"
+msgstr "180° omdraaien"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
@@ -705,7 +705,7 @@ msgstr "Dubbelzijdige pagina's omdraaien"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
-msgstr "Voor hoge-kwaliteit JPEG (80+), verhoog ook de afbeeldingskwaliteit in uw profiel voor het beste resultaat."
+msgstr "Voor hoge JPEG-kwaliteit (80+) kunt u voor het beste resultaat ook de beeldkwaliteit in uw profiel verhogen."
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
@@ -774,11 +774,11 @@ msgstr "Importeren"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr "Voortgang importeren"
+msgstr "Voortgang van importeren"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
-msgstr "Importeren {0}..."
+msgstr "{0} importeren..."
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
@@ -822,7 +822,7 @@ msgstr "JPEG2000-bestand(*.jp2, *.jpx)"
 
 #: UiStrings.resx$JpegQuality$Message
 msgid "Jpeg Quality"
-msgstr "JPEG kwaliteit"
+msgstr "JPEG-kwaliteit"
 
 #: UiStrings.resx$KeepSession$Message
 msgid "Keep images across sessions"
@@ -855,7 +855,7 @@ msgstr "Links"
 
 #: SettingsResources.resx$TwainImpl_Legacy$Message
 msgid "Legacy (native UI only)"
-msgstr "Legacy (alleen eigen interface)"
+msgstr "Legacy (alleen native UI)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
@@ -863,7 +863,7 @@ msgstr "Licht"
 
 #: MiscResources.resx$ReviewPrompt$Message
 msgid "Like NAPS2?"
-msgstr "Vind je NAPS2 leuk?"
+msgstr "Vind u NAPS2 leuk?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -884,7 +884,7 @@ msgstr "Maximale kwaliteit (grote bestanden)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr "Geheugen overdracht"
+msgstr "Memory Transfer"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -924,7 +924,7 @@ msgstr "Meerdere scans (vaste pauze tussen scans)"
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "Meerdere scans (vraag tussen 2 scans)"
+msgstr "Meerdere scans (vraag tussen scans)"
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
@@ -938,7 +938,7 @@ msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 is helemaal gratis. Overweeg een donatie."
+msgstr "NAPS2 is helemaal gratis. U kunt het project steunen door een donatie te overwegen."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -950,7 +950,7 @@ msgstr "Naam ontbreekt."
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
-msgstr "Oorspronkelijke overdracht"
+msgstr "Native Transfer"
 
 #: UiStrings.resx$New$Message
 msgid "New"
@@ -980,7 +980,7 @@ msgstr "Geen apparaten gevonden."
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder."
-msgstr "Geen pagina's in de invoerlade."
+msgstr "Invoerlade is leeg."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
@@ -1057,7 +1057,7 @@ msgstr "Eén bestand per scan"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded."
-msgstr "Download mislukt voor 1 of meerdere bestanden."
+msgstr "Eén of meer bestanden konden niet worden gedownload."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
@@ -1089,7 +1089,7 @@ msgstr "Bestand overschrijven"
 
 #: UiStrings.resx$OwnerPasswordLabel$Message
 msgid "Owner Password:"
-msgstr "Wachtwoord eigenaar:"
+msgstr "Beheerderswachtwoord:"
 
 #: MiscResources.resx$FileTypePdf$Message
 msgid "PDF Document (*.pdf)"
@@ -1143,7 +1143,7 @@ msgstr "Plakken"
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
-msgstr "Placeholders"
+msgstr "Plaatshouders"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
@@ -1151,7 +1151,7 @@ msgstr "Poort"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr "Nabewerking"
+msgstr "Post-processing"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
@@ -1205,7 +1205,7 @@ msgstr "Provider"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
-msgstr "Klaar voor scannen {0}."
+msgstr "Klaar voor scan {0}."
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
@@ -1213,7 +1213,7 @@ msgstr "Herstellen"
 
 #: UiStrings.resx$RecoverFormTitle$Message
 msgid "Recover Scanned Images"
-msgstr "Herstel gescande afbeeldingen"
+msgstr "Gescande afbeeldingen herstellen"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
@@ -1245,7 +1245,7 @@ msgstr "Reset"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "Afbeeldingen resetten"
+msgstr "Afbeelding herstellen"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1257,11 +1257,11 @@ msgstr "Standaardinstellingen herstellen"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
-msgstr "Omdraaien"
+msgstr "Volgorde omkeren"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr "Alles ongedaan maken"
+msgstr "Alles omkeren"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
@@ -1323,7 +1323,7 @@ msgstr "Afbeeldingen opslaan"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
-msgstr "Voortgang afbeeldingen opslaan"
+msgstr "Voortgang van afbeeldingen opslaan"
 
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
@@ -1332,7 +1332,7 @@ msgstr "PDF opslaan"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
-msgstr "Voortgang PDF opslaan"
+msgstr "Voortgang van PDF opslaan"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
@@ -1357,19 +1357,19 @@ msgstr "Opslaan naar meerdere bestanden"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr "Batchresultaten opslaan..."
+msgstr "Batchresultaten aan het opslaan..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
-msgstr "Opslaan {0}..."
+msgstr "{0} aan het opslaan..."
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
-msgstr "Schalen"
+msgstr "Meeschalen met venster"
 
 #: UiStrings.resx$ScaleLabel$Message
 msgid "Scale:"
-msgstr "Schalen:"
+msgstr "Schaal:"
 
 #: MiscResources.resx$Scan$Message
 #: UiStrings.resx$Scan$Message
@@ -1391,7 +1391,7 @@ msgstr "Scannen met nieuw profiel"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr "Scannen met Profiel {0}"
+msgstr "Scannen met profiel {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
@@ -1400,7 +1400,7 @@ msgstr "Gescande afbeelding"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr "Scanner delen"
+msgstr "Gedeelde scanner"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1417,7 +1417,7 @@ msgstr "Pagina {0} aan het scannen..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr "Zoeken naar apparaten..."
+msgstr "Apparaten zoeken..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1478,7 +1478,7 @@ msgstr "Instellingen gedeelde scanner"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr "Gedeelde scanners kunnen worden gebruikt vanaf andere computers op het lokale netwerk door \"ESCL Driver\" te selecteren in de NAPS2-profielinstellingen van de andere computer."
+msgstr "Gedeelde scanners kunnen worden gebruikt vanaf andere computers op het lokale netwerk door \"ESCL-driver\" te selecteren in de NAPS2-profielinstellingen van de andere computer."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1498,7 +1498,7 @@ msgstr "Werkbalk \"Profielen\" weergeven"
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
-msgstr "TWAIN-voortgang weergegeven"
+msgstr "Native TWAIN-voortgang weergeven"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
@@ -1555,7 +1555,7 @@ msgstr "Technische details"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "De OCR-engine is niet beschikbaar. Installeer het vereiste pakket:"
+msgstr "Het OCR-programma is niet beschikbaar. Installeer het vereiste pakket:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
@@ -1564,7 +1564,7 @@ msgstr "De OCR-bewerking is verlopen."
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "De SANE driver is niet beschikbaar. Installeer de vereiste pakketten:"
+msgstr "De SANE-driver is niet beschikbaar. Installeer de vereiste pakketten:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
@@ -1577,11 +1577,11 @@ msgstr "Import mislukt voor bestand '{0}'. Alleen PDFs gemaakt met NAPS2 kunnen 
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
-msgstr "Overschrijven bestand mislukt want het is in gebruik."
+msgstr "Het bestand kon niet worden overschreven omdat het momenteel in gebruik is."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Bestand {0} bestaat al. Wilt u het bestand overschrijven?"
+msgstr "Het bestand {0} bestaat al. Wilt u het overschrijven?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
@@ -1590,7 +1590,7 @@ msgstr "Het volgende bestand is versleuteld en heeft een wachtwoord nodig om te 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam."
-msgstr "Er is papier vastgelopen in de scanner."
+msgstr "De scanner heeft een papierstoring."
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 #: SdkResources.resx$DeviceWarmingUp$Message
@@ -1610,7 +1610,7 @@ msgstr "De gekozen driver wordt niet ondersteund op dit systeem."
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found."
-msgstr "Kan de geselecteerde scanner niet vinden."
+msgstr "De geselecteerde scanner kon niet worden gevonden."
 
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
@@ -1638,7 +1638,7 @@ msgstr "Het werkproces is gecrasht."
 
 #: SdkResources.resx$WorkerCrashWindows$Message
 msgid "The worker process crashed. Check the Windows event viewer."
-msgstr "Het werkproces is gecrasht. Controleer het Windows Gebeurtenis-logboek."
+msgstr "Het werkproces is gecrasht. Controleer de Windows-logboeken (Event Viewer)."
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
@@ -1650,7 +1650,7 @@ msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr "Tiff opties"
+msgstr "TIFF-opties"
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
@@ -1666,15 +1666,15 @@ msgstr "Hulpmiddelen"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr "Twain-implementatie:"
+msgstr "TWAIN-implementatie:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x14 in)"
+msgstr "US Legal (8,5x14 in)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Letter (8.5x11 in)"
+msgstr "US Letter (8,5x11 in)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
@@ -1698,11 +1698,11 @@ msgstr "Niet-opgeslagen wijzigingen"
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
-msgstr "Voortgang bijwerken"
+msgstr "Updatevoortgang"
 
 #: MiscResources.resx$UpdateCheckDisabled$Message
 msgid "Update checking is disabled."
-msgstr "Controleren van updates is uitgeschakeld."
+msgstr "Controleren op updates is uitgeschakeld."
 
 #: MiscResources.resx$Updating$Message
 msgid "Updating..."
@@ -1714,15 +1714,15 @@ msgstr "E-mail uploaden..."
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
-msgstr "Gebruik native interface"
+msgstr "Systeeminterface gebruiken"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "Gebruik voorgedefinieerd"
+msgstr "Instellingen aanpassen"
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
-msgstr "Wachtwoord gebruiker:"
+msgstr "Gebruikerswachtwoord:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
@@ -1739,27 +1739,27 @@ msgstr "Beeld"
 
 #: UiStrings.resx$WiaDriver$Message
 msgid "WIA Driver"
-msgstr "WIA driver"
+msgstr "WIA-driver"
 
 #: UiStrings.resx$WaitingForTwain$Message
 msgid "Waiting for TWAIN to complete..."
-msgstr "Wachten op TWAIN scan..."
+msgstr "Wachten op voltooiing van TWAIN-scan..."
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
-msgstr "Wacht op autorisatie..."
+msgstr "Wachten op autorisatie..."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
-msgstr "Wacht op scan {0}..."
+msgstr "Wachten op scan {0}..."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
-msgstr "Witdrempel"
+msgstr "Witheidsdrempel"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr "Wia versie:"
+msgstr "WIA-versie:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1772,11 +1772,11 @@ msgstr "Jaar (00-99)"
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 #: SdkResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "U heeft geen toestemming voor kopiëren van inhoud uit bestand '{0}'."
+msgstr "U hebt geen toestemming om inhoud van het bestand '{0}' te kopiëren."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
-msgstr "U heeft geen rechten om hier bestanden op te slaan."
+msgstr "U hebt geen toestemming om bestanden op deze locatie op te slaan."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
@@ -1844,7 +1844,7 @@ msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "{0} afbeelding(en) gescand op {1} om {2} zijn mogelijk niet opgeslagen en zijn te herstellen. Wilt u herstellen?"
+msgstr "{0} afbeelding(en) gescand op {1} om {2} zijn mogelijk niet opgeslagen en kunnen worden hersteld. Wilt u ze herstellen?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Kan de geselecteerde scanner niet vinden.</value>
+    <value>De geselecteerde scanner kon niet worden gevonden.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
     <value>De geselecteerde scanner is offline.</value>
@@ -31,7 +31,7 @@
     <value>Geen scanapparaat gevonden.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Fout met het stuurprogramma van de scanner.</value>
+    <value>Er is een fout opgetreden met het stuurprogramma van de scanner.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versie {0}</value>
@@ -43,10 +43,10 @@
     <value>Deze scanner ondersteunt geen automatische documentinvoer. Als uw scanner dit wel heeft, probeer dan een andere driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Geen pagina's in de invoerlade.</value>
+    <value>Invoerlade is leeg.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>U heeft geen toestemming voor kopiëren van inhoud uit bestand '{0}'.</value>
+    <value>U hebt geen toestemming om inhoud van het bestand '{0}' te kopiëren.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>De geselecteerde scanner ondersteunt geen dubbelzijdig scannen. Als uw scanner dit hoort te ondersteunen, probeer dan een andere driver.</value>
@@ -58,16 +58,16 @@
     <value>Het deksel van de scanner is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>Er is papier vastgelopen in de scanner.</value>
+    <value>De scanner heeft een papierstoring.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>De scanner warmt op.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>De SANE driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
+    <value>De SANE-driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>De OCR-engine is niet beschikbaar. Installeer het vereiste pakket:</value>
+    <value>Het OCR-programma is niet beschikbaar. Installeer het vereiste pakket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>De gekozen driver wordt niet ondersteund op dit systeem.</value>
@@ -82,7 +82,7 @@
     <value>Het werkproces is gecrasht.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>Het werkproces is gecrasht. Controleer het Windows Gebeurtenis-logboek.</value>
+    <value>Het werkproces is gecrasht. Controleer de Windows-logboeken (Event Viewer).</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
     <value>Onbekende scanner</value>

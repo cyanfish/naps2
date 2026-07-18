@@ -61,7 +61,7 @@
     <value>U skeneru se zaglavio papir.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Skener se zagrijava.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE upravljački program nije dostupan. Provjerite jeste li instalirali potrebne pakete:</value>

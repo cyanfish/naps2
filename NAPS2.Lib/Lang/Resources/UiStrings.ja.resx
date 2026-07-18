@@ -16,10 +16,10 @@
     <value>NAPS2について</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Copyright {0} NAPS2 貢献者</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Icons from:</value>
+    <value>アイコン提供：</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>更新のチェック</value>
@@ -46,7 +46,7 @@
     <value>スキャン</value>
   </data>
   <data name="SetDefault" xml:space="preserve">
-    <value>既定の設定</value>
+    <value>標準に設定</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>コピー</value>
@@ -55,22 +55,22 @@
     <value>貼り付け</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>元に戻す</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>やり直し</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>{0} を元に戻す</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>{0} をやり直し</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>完了しました</value>
   </data>
   <data name="Default" xml:space="preserve">
-    <value>デフォルト</value>
+    <value>標準</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
     <value>新規プロファイル</value>
@@ -85,22 +85,22 @@
     <value>プロファイル</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>読み込み</value>
+    <value>インポート</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>PDFを保存</value>
+    <value>PDF を保存</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
-    <value>PDFの設定</value>
+    <value>PDF 設定</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>複数の画像を保存</value>
+    <value>画像を保存</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
     <value>画像設定</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>PDFをEmailで送信</value>
+    <value>PDF 形式でメール送信</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
     <value>メールの設定</value>
@@ -109,7 +109,7 @@
     <value>印刷</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>イメージ</value>
+    <value>画像</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>表示</value>
@@ -127,10 +127,10 @@
     <value>白黒</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
-    <value>シャープに</value>
+    <value>シャープにする</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>ドキュメントの補正</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>リセット</value>
@@ -139,10 +139,10 @@
     <value>回転させる</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
-    <value>左に回転させる</value>
+    <value>左に回転</value>
   </data>
   <data name="RotateRight" xml:space="preserve">
-    <value>右に回転させる</value>
+    <value>右に回転</value>
   </data>
   <data name="Flip" xml:space="preserve">
     <value>反転</value>
@@ -151,7 +151,7 @@
     <value>傾き補正</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>回転設定</value>
+    <value>カスタム回転</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>上へ</value>
@@ -172,52 +172,52 @@
     <value>デインターリーブの変更</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Alternate Deinterleave</value>
+    <value>別のデインターリーブ</value>
   </data>
   <data name="Reverse" xml:space="preserve">
     <value>反転させる</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>すべて反転</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>選択を反転</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>クリア</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>すべてクリア</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>言語</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>設定</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>インターフェース</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>"Scan" menu changes default profile</value>
+    <value>「スキャン」メニューが標準プロファイルを変更する</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Show "Profiles" toolbar</value>
+    <value>「プロファイル」ツールバーを表示</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>ページ番号を表示</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>"Scan" button default action:</value>
+    <value>「スキャン」ボタンの標準動作：</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>"Save" button default action:</value>
+    <value>「保存」ボタンの標準動作：</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>アプリケーション</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Only allow a single NAPS2 instance</value>
+    <value>NAPS2 インスタンスを複数開かない</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>NAPS2について</value>
@@ -238,37 +238,37 @@
     <value>ウインドウに合わせる</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>保存</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>すべて保存</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>選択したものを保存</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>すべてを PDF 形式で保存</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Save Selected as PDF</value>
+    <value>選択したものを PDF 形式で保存</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>すべて画像として保存</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
-    <value>Save Selected as Images</value>
+    <value>選択したものを画像として保存</value>
   </data>
   <data name="EmailAll" xml:space="preserve">
-    <value>Email All</value>
+    <value>すべてメールで送信</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>選択したものをメール送信</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>すべてを PDF 形式でメール送信</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>選択したものを PDF 形式で送信</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>プロファイル設定</value>
@@ -280,19 +280,19 @@
     <value>WIAドライバー</value>
   </data>
   <data name="TwainDriver" xml:space="preserve">
-    <value>TWAINドライバ</value>
+    <value>TWAINドライバー</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>ESCL ドライバー</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>ESCL ネットワークドライバー</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
+    <value>ESCL USBドライバー</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple Driver</value>
+    <value>Appleドライバー</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>SANE ドライバ</value>
@@ -307,7 +307,7 @@
     <value>以前の設定を利用</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
-    <value>元のUIを利用</value>
+    <value>ネイティブ UI を使用する</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
     <value>給紙元:</value>
@@ -355,7 +355,7 @@
     <value>ソースの選択</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>デバイスを選択</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>バックグラウンドで実行</value>
@@ -367,7 +367,7 @@
     <value>NAPS2 - {0}</value>
   </data>
   <data name="Naps2FullName" xml:space="preserve">
-    <value>Not Another PDF Scanner</value>
+    <value>他の PDF スキャナーではなく</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
     <value>OCRのセットアップ</value>
@@ -382,13 +382,13 @@
     <value>OCRモード:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Fix white balance and remove noise</value>
+    <value>ホワイトバランスの修正とノイズの除去</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>スキャン後にOCRを自動適用する</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>スキャン後、事前実行的に OCR 処理をはじめる</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>他の言語を追加</value>
@@ -397,7 +397,7 @@
     <value>OCRのダウンロード</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>OCRを使用するにはそれぞれの言語ファイルが必要です.</value>
+    <value>OCR の使用には、スキャンしたい言語ごとにダウンロードが必要です。</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
     <value>言語を選択してください:</value>
@@ -421,13 +421,13 @@
     <value>前へ</value>
   </data>
   <data name="XOfY" xml:space="preserve">
-    <value>{1} 個中 {0}</value>
+    <value>{0} / {1}</value>
   </data>
   <data name="Revert" xml:space="preserve">
     <value>元に戻す</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
-    <value>選択されたイメージ{0}個すべてに適用</value>
+    <value>選択した {0} 個の画像、すべてに適用</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>すべて選択</value>
@@ -442,28 +442,28 @@
     <value>スキャンイメージを回復する</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{2} に {1} でスキャンされた {0} 個の画像は保存されませんでした。回復可能ですが、回復しますか?</value>
+    <value>{2} {1} にスキャンした {0} 個の画像は保存していない可能性があり、復元可能です。復元しますか？</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>プレースホルダー</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
-    <value>保存確認をスキップ</value>
+    <value>保存の確認をしない</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>単一ページのファイル</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>暗号化されたPDF</value>
+    <value>暗号化 PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
-    <value>見せる</value>
+    <value>表示</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
     <value>標準設定に戻す</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>PDFの設定</value>
+    <value>PDF 設定</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>印刷を許可する</value>
@@ -490,7 +490,7 @@
     <value>フォームへの書き込みを許可</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>デフォルトのパス:</value>
+    <value>標準のパス :</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
     <value>ファイルのパス:</value>
@@ -502,7 +502,7 @@
     <value>作成者:</value>
   </data>
   <data name="SubjectLabel" xml:space="preserve">
-    <value>件名:</value>
+    <value>件名：</value>
   </data>
   <data name="KeywordsLabel" xml:space="preserve">
     <value>キーワード:</value>
@@ -514,7 +514,7 @@
     <value>ユーザーのパスワード:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
-    <value>設定を保存する</value>
+    <value>この設定を記憶する</value>
   </data>
   <data name="Metadata" xml:space="preserve">
     <value>メタデータ</value>
@@ -532,22 +532,22 @@
     <value>年</value>
   </data>
   <data name="Year2Digit" xml:space="preserve">
-    <value>(00-99) 年</value>
+    <value>年 (00-99)</value>
   </data>
   <data name="Month2Digit" xml:space="preserve">
-    <value>(01-12)月</value>
+    <value>月 (01-12)</value>
   </data>
   <data name="Day2Digit" xml:space="preserve">
-    <value>(01-31)日</value>
+    <value>日 (01-31)</value>
   </data>
   <data name="Hour2Digit" xml:space="preserve">
-    <value>(0-23)時間</value>
+    <value>時 (0-23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
-    <value>(00-59)分</value>
+    <value>分 (00-59)</value>
   </data>
   <data name="Second2Digit" xml:space="preserve">
-    <value>(00-59)秒</value>
+    <value>秒 (00-59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
     <value>連番の自動付与 (4 ケタ)</value>
@@ -559,7 +559,7 @@
     <value>連番の自動付与 (2 ケタ)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>連番の自動付与 (1 ケタ)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>ファイル名</value>
@@ -568,13 +568,13 @@
     <value>プレビュー:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>80以上の高画質JPEGを得るためには、プロファイル内の画質設定をあげてください。.</value>
+    <value>80 以上の高画質 JPEG 用、また最高の結果のためには、プロファイル内の画質設定もあげてください。</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
-    <value>JPEG画像の品質</value>
+    <value>Jpeg 品質</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
-    <value>TIFF形式の設定</value>
+    <value>Tiff 設定</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
     <value>圧縮:</value>
@@ -586,7 +586,7 @@
     <value>メールの設定</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>設定</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>プロバイダー</value>
@@ -604,7 +604,7 @@
     <value>認証</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
-    <value>認証待ち...</value>
+    <value>認証を待っています…</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
     <value>エラー</value>
@@ -616,10 +616,10 @@
     <value>パスワード</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>次のファイルは暗号化されており、開くにはパスワードが必要です：</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Prompt for file path</value>
+    <value>ファイルパスの確認を表示する</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>ページごとに1つファイルを作成</value>
@@ -637,7 +637,7 @@
     <value>保存後にイメージをクリア</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>セッション間で画像を保持する</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>ページサイズ設定</value>
@@ -649,13 +649,13 @@
     <value>大きさ</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>カスタム解像度</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>DPI</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
-    <value>TWAINの完了を待機中です...</value>
+    <value>TWAIN の完了を待っています...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
     <value>プロファイル設定(詳細)</value>
@@ -673,7 +673,7 @@
     <value>余白ページを除去</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>白さのしきい値</value>
+    <value>白のしきい値</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
     <value>閾値</value>
@@ -682,16 +682,16 @@
     <value>後処理</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>歪み補正をする</value>
+    <value>スキャンしたページを歪み補正する</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
-    <value>スキャン後に明度とコントラストの処理を行う</value>
+    <value>スキャン後に明るさ・コントラストを適用する</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
-    <value>Offset width based on alignment (WIA)</value>
+    <value>配置をもとにしたオフセット (WIA)</value>
   </data>
   <data name="StretchToPageSize" xml:space="preserve">
-    <value>ページの大きさに合わせる</value>
+    <value>ページサイズに合わせる</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
     <value>ページサイズに切り抜く</value>
@@ -700,19 +700,19 @@
     <value>両面のページを反転</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Flip back sides of duplex pages</value>
+    <value>両面の裏面側を反転</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia Version:</value>
+    <value>Wiaバージョン：</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
-    <value>Twainの補助機能:</value>
+    <value>Twain 実装：</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>一括スキャン</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>準備ができたらスタートを押してください.</value>
+    <value>準備ができたらスタートを押してください。</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>スキャン設定</value>
@@ -724,7 +724,7 @@
     <value>プロファイル:</value>
   </data>
   <data name="SingleScan" xml:space="preserve">
-    <value>1枚だけスキャン</value>
+    <value>単一スキャン</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
     <value>複数をスキャン(スキャン毎に通知する)</value>
@@ -736,7 +736,7 @@
     <value>スキャンの数:</value>
   </data>
   <data name="TimeBetweenScansLabel" xml:space="preserve">
-    <value>スキャン間の時間 (seconds):</value>
+    <value>スキャン間隔 (秒)：</value>
   </data>
   <data name="LoadIn" xml:space="preserve">
     <value>NAPS2にイメージを読み込む</value>
@@ -748,7 +748,7 @@
     <value>複数のファイルに保存</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>開始</value>
+    <value>スタート</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
     <value>次のスキャン</value>
@@ -760,129 +760,129 @@
     <value>フォルダーを開く</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>ツール</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Enable debug logging</value>
+    <value>デバッグログを有効化</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>共有</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>スキャナー共有</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>スキャナー共有</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
+    <value>共有スキャナーは、ローカルネットワーク上の他のコンピュータから利用できます。そのコンピューター上の NAPS2 プロファイル設定で「ESCL ドライバー」を選択してください。</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
-    <value>Shared Scanner Settings</value>
+    <value>共有スキャナー設定</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Are you sure you want to stop sharing {0}?</value>
+    <value>{0} の共有を停止しますか？</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>NAPS2 を閉じていても共有</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>複数言語...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>複数言語</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>ネイティブ TWAIN の進捗を表示</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>分割</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>結合</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>手動 IP</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Manual IP</value>
+    <value>手動 IP</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP/Host</value>
+    <value>IP / ホスト</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>ポート</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>接続</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>接続エラー。</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>毎回確認する</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>デバイスを検索しています…</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
-    <value>{0} devices found.</value>
+    <value>{0} 台のデバイスを検出しました。</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>1 台のデバイスが見つかりました。</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>デバイスは検出されませんでした。</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sidebar</value>
+    <value>サイドバー</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+    <value>スキャナーが見つからない場合は、NAPS2 Flatpak の制限事項をお読みください。</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>キーボード ショートカット</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>キーボード ショートカット</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scan With Profile {0}</value>
+    <value>{0} プロファイルでスキャン</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>標準プロファイルでスキャン</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
+    <value>新しいプロファイルでスキャン</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>割り当て</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>割り当てを解除</value>
   </data>
   <data name="Action" xml:space="preserve">
-    <value>Action</value>
+    <value>操作</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
-    <value>Shortcut</value>
+    <value>ショートカット</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>テーマ：</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>編集する…</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>{0} で編集</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>編集する…</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>{0} アプリケーションの起動でエラー</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>スキャナー共有を停止</value>
   </data>
 </root>

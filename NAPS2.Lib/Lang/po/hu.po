@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -372,7 +372,7 @@ msgstr "Ellenőrzés..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr "E-mail szolgáltató kiválasztása"
+msgstr "Levelezőprogram kiválasztása"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -984,7 +984,7 @@ msgstr "Nincs lap a lapadagolóban."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr "Nincs szolgáltató kiválasztva."
+msgstr "Nincs levelező kiválasztva."
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
@@ -1061,7 +1061,7 @@ msgstr "Egy vagy több fájlt nem sikerült letölteni."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
-msgstr "Csak egyetlen NAPS2 példány engedélyezése"
+msgstr "Csak egyetlen NAPS2 példány lehet nyitva"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
@@ -1143,7 +1143,7 @@ msgstr "Beillesztés"
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
-msgstr "Helyettesítők"
+msgstr "Kiegészítések"
 
 #: UiStrings.resx$Port$Message
 msgid "Port"
@@ -1201,7 +1201,7 @@ msgstr "Kérdezzen rá a fájl elérési útvonalára"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
-msgstr "Szolgáltató"
+msgstr "Levelező"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
@@ -1387,11 +1387,11 @@ msgstr "Beolvasás az alapértelmezett profillal"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr "Lapolvasás új profillal"
+msgstr "Beolvasás új profillal"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
-msgstr "Lapolvasás a {0} profillal"
+msgstr "Beolvasás a {0}. profillal"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"

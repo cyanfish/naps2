@@ -100,13 +100,13 @@
     <value>Selectați un profil înainte de a apăsa Scanare.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>A apărut o eroare la driver-ul de scanare..</value>
+    <value>A apărut o eroare la driver-ul de scanare.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versiune {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>A intervenit o eroare la trimiterea email-ului..</value>
+    <value>A intervenit o eroare la trimiterea email-ului.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Instalare încheiată</value>
@@ -340,10 +340,10 @@
     <value>NAPS2 este complet gratuit. Luați în considerare să faceți o donație.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
-    <value>Leave a Review</value>
+    <value>Scrieți o Recenzie</value>
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
-    <value>Like NAPS2?</value>
+    <value>Vă place NAPS2?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Driverul SANE nu este disponibil. Asigurați-vă că instalați pachetele necesare:</value>

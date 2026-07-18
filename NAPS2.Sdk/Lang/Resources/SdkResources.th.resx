@@ -19,19 +19,19 @@
     <value>The selected scanner is offline.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>การสื่อสารกับเครื่อง scanner ถูกรบกวน</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>No device selected.</value>
+    <value>ไม่ได้เลือกอุปกรณ์</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No scanning device was found.</value>
+    <value>ตรวจไม่พบเครื่องสแกน</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>An error occurred with the scanning driver.</value>
+    <value>เกิด error กับ scanning driver</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>เวอร์ชั่น {0}</value>
@@ -43,7 +43,7 @@
     <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>No pages are in the feeder.</value>
+    <value>ไม่มีหน้ากระดาษในเครื่องป้อน</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>You do not have permission to copy content from the file '{0}'.</value>
@@ -73,7 +73,7 @@
     <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>เกิด error ระหว่างที่ OCR ทำงาน</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
     <value>The OCR operation timed out.</value>

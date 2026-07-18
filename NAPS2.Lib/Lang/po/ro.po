@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Romanian\n"
 "Language: ro\n"
@@ -159,12 +159,12 @@ msgstr "A survenit o eroare la încercarea de trimitere email."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
-msgstr "A intervenit o eroare la trimiterea email-ului.."
+msgstr "A intervenit o eroare la trimiterea email-ului."
 
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "A apărut o eroare la driver-ul de scanare.."
+msgstr "A apărut o eroare la driver-ul de scanare."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
@@ -465,7 +465,7 @@ msgstr "Mărime personalizată a paginii"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr ""
+msgstr "Rezoluție personalizată"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
@@ -482,7 +482,7 @@ msgstr "Personalizat..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "Închisă la culoare"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -568,7 +568,7 @@ msgstr "Progresul descărcării"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr ""
+msgstr "Dpi"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -592,12 +592,12 @@ msgstr "Editare"
 
 #: UiStrings.resx$EditWithAppName$Message
 msgid "Edit with {0}"
-msgstr ""
+msgstr "Editează cu {0}"
 
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
 msgid "Edit with..."
-msgstr ""
+msgstr "Editează cu..."
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -656,7 +656,7 @@ msgstr "Eroare"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
-msgstr ""
+msgstr "Eroare la pornirea aplicației {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -847,7 +847,7 @@ msgstr "Limbă"
 
 #: MiscResources.resx$LeaveAReview$Message
 msgid "Leave a Review"
-msgstr ""
+msgstr "Scrieți o Recenzie"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
@@ -859,11 +859,11 @@ msgstr "Vechi (numai interfața de utilizare nativă)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "Deschisă la culoare"
 
 #: MiscResources.resx$ReviewPrompt$Message
 msgid "Like NAPS2?"
-msgstr ""
+msgstr "Vă place NAPS2?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
@@ -1073,7 +1073,7 @@ msgstr "Operaţiune în desfăşurare"
 
 #: SettingsResources.resx$EmailProviderType_OutlookNew$Message
 msgid "Outlook (new)"
-msgstr ""
+msgstr "Outlook (nou)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1530,7 +1530,7 @@ msgstr "Începe"
 
 #: UiStrings.resx$StopScannerSharing$Message
 msgid "Stop Scanner Sharing"
-msgstr ""
+msgstr "Oprește distribuirea scanerului"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1642,7 +1642,7 @@ msgstr "Procesul worker s-a oprit neașteptat. Verificați Windows event viewer.
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
-msgstr ""
+msgstr "Tema:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1690,7 +1690,7 @@ msgstr "Anulează {0}"
 
 #: SdkResources.resx$UnknownScanner$Message
 msgid "Unknown Scanner"
-msgstr ""
+msgstr "Scaner necunoscut"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

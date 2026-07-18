@@ -16,19 +16,19 @@
     <value>Про програму</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Всі права застережено {0} Розробники NAPS2</value>
+    <value>Авторське право належить {0} авторам NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Використання значків:</value>
+    <value>Іконки з:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Перевірка оновлень</value>
+    <value>Перевірити наявність оновлень</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>Гаразд</value>
+    <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Ваш внесок</value>
+    <value>Пожертвувати</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Профілі</value>
@@ -40,13 +40,13 @@
     <value>Редагувати</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Вилучити</value>
+    <value>Видалити</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Сканувати</value>
   </data>
   <data name="SetDefault" xml:space="preserve">
-    <value>Зробити типовим</value>
+    <value>Встановити за замовчуванням</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Копіювати</value>
@@ -55,22 +55,22 @@
     <value>Вставити</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Повернути</value>
+    <value>Скасувати</value>
   </data>
   <data name="Redo" xml:space="preserve">
     <value>Повторити</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Повернути {0}</value>
+    <value>Скасувати {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
     <value>Повторити {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Завершити</value>
+    <value>Готово</value>
   </data>
   <data name="Default" xml:space="preserve">
-    <value>Типово</value>
+    <value>За замовчуванням</value>
   </data>
   <data name="NewProfile" xml:space="preserve">
     <value>Створити профіль</value>
@@ -88,19 +88,19 @@
     <value>Імпортувати</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
-    <value>Зберегти у PDF</value>
+    <value>Зберегти PDF</value>
   </data>
   <data name="PdfSettings" xml:space="preserve">
-    <value>Налаштування PDF </value>
+    <value>Налаштування PDF</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
-    <value>Зберегти як зображення</value>
+    <value>Зберегти зображення</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
     <value>Налаштування зображення</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
-    <value>PDF поштою</value>
+    <value>Надіслати PDF поштою</value>
   </data>
   <data name="EmailSettings" xml:space="preserve">
     <value>Параметри електронної пошти</value>
@@ -118,7 +118,7 @@
     <value>Обрізати</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
-    <value>Яскравість / контрастність</value>
+    <value>Яскравість / Контрастність</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
     <value>Відтінок / насиченість</value>
@@ -130,58 +130,58 @@
     <value>Різкість</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Зміни до документу</value>
+    <value>Виправлення документа</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Перезавантажити зображення</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>Обернути</value>
+    <value>Повернути</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
-    <value>Обернути ліворуч</value>
+    <value>Повернути вліво</value>
   </data>
   <data name="RotateRight" xml:space="preserve">
-    <value>Обернути праворуч</value>
+    <value>Повернути вправо</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Віддзеркалити</value>
+    <value>Перевернути</value>
   </data>
   <data name="Deskew" xml:space="preserve">
     <value>Вирівняти перекіс</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
-    <value>Ротація користувачем</value>
+    <value>Налаштування повороту</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Перемістити вище</value>
+    <value>Перемістити вгору</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Перемістити нижче</value>
+    <value>Перемістити вниз</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Змінити порядок</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Чергування</value>
+    <value>Чергувати</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
     <value>Позбавити чергування</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Альтернативна міжчерговість</value>
+    <value>Альтернативне чергування</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
-    <value>Альтенативна віддаленість</value>
+    <value>Альтернативне усунення чергування</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Зворотній порядок</value>
+    <value>У зворотному порядку</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Всі у зворотньому порядку</value>
+    <value>Всі у зворотному порядку</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Вибрані у зворотньому порядку</value>
+    <value>Вибрані у зворотному порядку</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистити</value>
@@ -199,22 +199,22 @@
     <value>Інтерфейс</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>Вибір в меню "Сканувати" змінює типовий профіль</value>
+    <value>Меню «Сканувати» змінює профіль за замовчуванням</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Показувати панель "Профілі"</value>
+    <value>Показати панель інструментів «Профілі»</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Показувати нумерацію сторінок</value>
+    <value>Показати номери сторінок</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>Типова поведінка, коли натиснуто кнопку "Сканувати":</value>
+    <value>Стандартна дія кнопки «Сканувати»:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>Типова поведінка, коли натиснуто кнопку "Зберегти":</value>
+    <value>Стандартна дія кнопки «Зберегти»:</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Застосунок</value>
+    <value>Програма</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
     <value>Дозволити лише один примірник NAPS2</value>
@@ -232,7 +232,7 @@
     <value>Зменшити</value>
   </data>
   <data name="ZoomActual" xml:space="preserve">
-    <value>Справжній розмір</value>
+    <value>Фактичний масштаб</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
     <value>Масштабувати у вікні</value>
@@ -247,10 +247,10 @@
     <value>Зберегти вибране</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Зберегти все у PDF</value>
+    <value>Зберегти все як PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
-    <value>Зберегти вибране у PDF</value>
+    <value>Зберегти вибране як PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
     <value>Зберегти все як зображення</value>
@@ -262,13 +262,13 @@
     <value>Надіслати все</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Вибрано ел. пошту</value>
+    <value>Відправити позначені</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Надіслати все як PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Вибрано надіслати PDF ел. поштою</value>
+    <value>Надіслати вибране як PDF через електронну пошту</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Налаштовування профілю</value>
@@ -289,7 +289,7 @@
     <value>Мережевий драйвер ESCL</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
-    <value>Драйвер USB для ESCL</value>
+    <value>USB-драйвер ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Драйвер Apple</value>
@@ -322,13 +322,13 @@
     <value>Яскравість:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Глибина в бітах:</value>
+    <value>Глибина кольору:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
     <value>Горизонтальне вирівнювання:</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
-    <value>Масштабувати:</value>
+    <value>Масштаб:</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
     <value>Контрастність:</value>
@@ -337,10 +337,10 @@
     <value>Увімкнути автоматичне збереження</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Автоматично зберігати налаштування</value>
+    <value>Налаштування автоматичного збереження</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Автоматично зберігати налаштування</value>
+    <value>Налаштування автоматичного збереження</value>
   </data>
   <data name="Advanced" xml:space="preserve">
     <value>Додатково</value>
@@ -355,10 +355,10 @@
     <value>Вибрати джерело</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Виберіть пристрій</value>
+    <value>Вибір пристрою</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
-    <value>Виконувати на задньому фоні</value>
+    <value>Виконувати у фоновому режимі</value>
   </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
@@ -370,10 +370,10 @@
     <value>Not Another PDF Scanner</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
-    <value>Налаштування параметрів розпізнавання</value>
+    <value>Налаштування розпізнавання тексту</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
-    <value>Створити PDF файл з можливістю пошуку</value>
+    <value>Створити PDF-файли з можливістю пошуку за допомогою OCR</value>
   </data>
   <data name="OcrLanguageLabel" xml:space="preserve">
     <value>Мова розпізнавання:</value>
@@ -382,49 +382,49 @@
     <value>Режим розпізнавання:</value>
   </data>
   <data name="OcrPreProcessing" xml:space="preserve">
-    <value>Виправляти баланс білого кольору та прибирати шум</value>
+    <value>Виправити баланс білого та видалити шум</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Автоматично розпізнавати після сканування</value>
+    <value>Автоматично запускати розпізнавання тексту (OCR) після сканування</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Автоматично розпізнавати після сканування</value>
+    <value>Попередньо запускати розпізнавання тексту (OCR) після сканування</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Встановити інші мови</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
-    <value>Звантаження файлів для розпізнавання</value>
+    <value>Завантаження файлів для розпізнавання</value>
   </data>
   <data name="OcrDownloadSummaryText" xml:space="preserve">
-    <value>Для розпізнавання потрібно звантажити відповідні мовні файли.</value>
+    <value>Для розпізнавання тексту за допомогою OCR необхідно завантажити кожну мову, яку ви хочете сканувати.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>Виберіть одну або кілька мов::</value>
+    <value>Виберіть одну або декілька мов:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Приблизний розмір звантаження: {0} МБ</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Звантаження</value>
+    <value>Завантажити</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Поступ звантаження</value>
+    <value>Виконується завантаження</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
-    <value>Перегляд</value>
+    <value>Попередній перегляд</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Далі</value>
+    <value>Наступний</value>
   </data>
   <data name="Previous" xml:space="preserve">
-    <value>Попередня</value>
+    <value>Попередній</value>
   </data>
   <data name="XOfY" xml:space="preserve">
     <value>{0} із {1}</value>
   </data>
   <data name="Revert" xml:space="preserve">
-    <value>Повернути</value>
+    <value>Відновити</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Застосувати до всіх {0} вибраних зображень</value>
@@ -439,19 +439,19 @@
     <value>Не зараз</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Відновити відскановані зображення</value>
+    <value>Відновлення сканованих зображень</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>Зображення ({0} шт.), відскановані на {1} в {2}, можливо не були збережені та можуть бути відновлені. Бажаєте їх відновити?</value>
+    <value>{0} зображень, відскановані {1} на {2}, можливо, не були збережені та можуть бути відновлені. Бажаєте їх відновити?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Заповнювачі</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
-    <value>Пропускати запит на збереження</value>
+    <value>Пропустити запит на збереження</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
-    <value>Файли з одинарною сторінкою</value>
+    <value>Файли з однією сторінкою</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Шифрувати PDF</value>
@@ -460,10 +460,10 @@
     <value>Показати</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
-    <value>Скинути до типових</value>
+    <value>Відновити стандартні налаштування</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>Налаштування PDF </value>
+    <value>Налаштування PDF</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>Дозволити друк</value>
@@ -472,7 +472,7 @@
     <value>Дозволити високоякісний друк</value>
   </data>
   <data name="AllowDocumentModification" xml:space="preserve">
-    <value>Дозволити модифікацію документу</value>
+    <value>Дозволити змінювати документ</value>
   </data>
   <data name="AllowDocumentAssembly" xml:space="preserve">
     <value>Дозволити складання документу</value>
@@ -484,16 +484,16 @@
     <value>Дозволити копіювати вміст для доступу</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
-    <value>Дозволити аннотації</value>
+    <value>Дозволити примітки</value>
   </data>
   <data name="AllowFormFilling" xml:space="preserve">
     <value>Дозволити заповнення форм</value>
   </data>
   <data name="DefaultFilePathLabel" xml:space="preserve">
-    <value>Типовий шлях до файлу:</value>
+    <value>Шлях до файлу за замовчуванням:</value>
   </data>
   <data name="FilePathLabel" xml:space="preserve">
-    <value>Шлях файлу:</value>
+    <value>Шлях до файлу:</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Заголовок:</value>
@@ -514,7 +514,7 @@
     <value>Пароль користувача:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
-    <value>Зберегти налаштуваання</value>
+    <value>Зберегти налаштування</value>
   </data>
   <data name="Metadata" xml:space="preserve">
     <value>Метадані</value>
@@ -532,22 +532,22 @@
     <value>Рік</value>
   </data>
   <data name="Year2Digit" xml:space="preserve">
-    <value>Рік  (00-99)</value>
+    <value>Рік (00-99)</value>
   </data>
   <data name="Month2Digit" xml:space="preserve">
-    <value>Місяць (1-12)</value>
+    <value>Місяць (01-12)</value>
   </data>
   <data name="Day2Digit" xml:space="preserve">
-    <value>День (1-31)</value>
+    <value>День (01-31)</value>
   </data>
   <data name="Hour2Digit" xml:space="preserve">
     <value>Година (0-23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
-    <value>Хвилини (00-59)</value>
+    <value>Хвилина (00-59)</value>
   </data>
   <data name="Second2Digit" xml:space="preserve">
-    <value>Секунда (1-59)</value>
+    <value>Секунда (00-59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
     <value>Автоматичне збільшення номера (4 цифри)</value>
@@ -562,10 +562,10 @@
     <value>Автоматичне збільшення номера (1 цифра)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Назва файлу</value>
+    <value>Ім'я файлу:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
-    <value>Перегляд:</value>
+    <value>Попередній перегляд:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
     <value>Для отримання кращої якості зображень JPEG (80+) рекомендується збільшити якість зображення у вашому профілі сканування.</value>
@@ -574,7 +574,7 @@
     <value>Якість JPEG</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
-    <value>Параметри Tiff</value>
+    <value>Параметри TIFF</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
     <value>Стиснення:</value>
@@ -598,7 +598,7 @@
     <value>Ім'я вкладення:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Виберіть постачальника послуг ел. пошти</value>
+    <value>Виберіть постачальника електронної пошти</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
     <value>Авторизація</value>
@@ -616,31 +616,31 @@
     <value>Пароль</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>Цей файл зашифровано. Щоби його відкрити, потрібно зазначити пароль:</value>
+    <value>Наступний файл зашифровано, і для його відкриття потрібен пароль:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Запит на шлях до файлу</value>
+    <value>Запитати шлях до файлу</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
-    <value>Кожна сторінка в окремий файл</value>
+    <value>Один файл на сторінку</value>
   </data>
   <data name="OneFilePerScan" xml:space="preserve">
-    <value>Все відскановане в одному файлі</value>
+    <value>Один файл на сканування</value>
   </data>
   <data name="SeparateByPatchT" xml:space="preserve">
     <value>Розділити файли за допомогою Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>Докладно</value>
+    <value>Більше інформації</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Прибирати зображення після збереження</value>
+    <value>Очистити зображення після збереження</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
     <value>Зберігати зображення між сесіями</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
-    <value>Розмір сторінки користувача</value>
+    <value>Налаштування розміру сторінки</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
     <value>Ім'я (необов'язково)</value>
@@ -649,16 +649,16 @@
     <value>Розміри</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Власна роздільна здатність</value>
+    <value>Роздільна здатність</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>точок на дюйм</value>
+    <value>Dpi</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
-    <value>Очікування завершення від TWAIN...</value>
+    <value>Очікування завершення роботи TWAIN...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>Розширені параметри профілю</value>
+    <value>Додаткові параметри профілю</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
     <value>Якість зображення</value>
@@ -670,7 +670,7 @@
     <value>Порожні сторінки</value>
   </data>
   <data name="ExcludeBlankPages" xml:space="preserve">
-    <value>Прибрати порожні сторінки</value>
+    <value>Виключити порожні сторінки</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
     <value>Поріг білого кольору</value>
@@ -679,40 +679,40 @@
     <value>Поріг покриття</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
-    <value>Післяобробка</value>
+    <value>Пост-обробка</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Вирівняти перекіс відсканованих сторінок</value>
+    <value>Вирівняти відскановані сторінки</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
-    <value>Визначити яскравість/контрастність після сканування</value>
+    <value>Застосувати яскравість/контрастність після сканування</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
-    <value>Ширина зсуву на основі вирівнювання (WIA)</value>
+    <value>Ширина зміщення на основі вирівнювання (WIA)</value>
   </data>
   <data name="StretchToPageSize" xml:space="preserve">
     <value>Розтягнути до розміру сторінки</value>
   </data>
   <data name="CropToPageSize" xml:space="preserve">
-    <value>Обрізати за розмірами стоірнки</value>
+    <value>Обрізати до розміру сторінки</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Віддзеркалити двосторонні сторінки</value>
+    <value>Перевернути двосторонні сторінки</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Віддзеркалити задній бік двосторонніх сторінок</value>
+    <value>Перевернути зворотні сторони двосторонніх сторінок</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Версія Wia:</value>
+    <value>Версія WIA:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
-    <value>Реалізація Twain:</value>
+    <value>Реалізація TWAIN:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Пакетне сканування</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Натисніть Старт, коли будете готові.</value>
+    <value>Натисніть «Запустити», коли будете готові.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>Налаштування сканування</value>
@@ -727,43 +727,43 @@
     <value>Одноразове сканування</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Сканування багатьох сторінок (запит на продовження між скануваннями)</value>
+    <value>Багаторазове сканування (запит на продовження між скануваннями)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
-    <value>Сканування багатьох сторінок (фіксована затримка між скануваннями)</value>
+    <value>Багаторазове сканування (фіксована затримка між скануваннями)</value>
   </data>
   <data name="NumberOfScansLabel" xml:space="preserve">
     <value>Кількість сторінок:</value>
   </data>
   <data name="TimeBetweenScansLabel" xml:space="preserve">
-    <value>Затримка між скануванням (у секундах)</value>
+    <value>Затримка між скануванням (у секундах):</value>
   </data>
   <data name="LoadIn" xml:space="preserve">
-    <value>Завантажити зображення до NAPS2</value>
+    <value>Завантажити зображення в NAPS2</value>
   </data>
   <data name="SaveToSingleFile" xml:space="preserve">
-    <value>Зберегти все в один файл</value>
+    <value>Зберегти в один файл</value>
   </data>
   <data name="SaveToMultipleFiles" xml:space="preserve">
-    <value>Зберегти все в різні файли</value>
+    <value>Зберегти в декількох файлах</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Старт</value>
+    <value>Запустити</value>
   </data>
   <data name="BatchPromptFormTitle" xml:space="preserve">
     <value>Наступна сторінка</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
-    <value>Готовий сканувати {0).</value>
+    <value>Готовий сканувати {0}.</value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
-    <value>Відкрити каталог</value>
+    <value>Відкрити папку</value>
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Інструменти</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Увімкнути журнал зневадження</value>
+    <value>Увімкнути журнал налагодження</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Спільний доступ</value>
@@ -775,16 +775,16 @@
     <value>Спільний доступ до сканера</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Сканери у спільному доступі можна використовувати на віддалених комп'ютерах локальної мережі. Для цього потрібно вибрати "Драйвер ESCL" в налаштуваннях профіля віддаленого комп'ютерау. </value>
+    <value>Сканери, що використовуються спільно, можна використовувати з інших комп'ютерів у локальній мережі, вибравши «Драйвер ESCL» у налаштуваннях профілю NAPS2 іншого комп'ютера.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Налаштування сканера у спільному доступі</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Дійсно прибрати спільний доступ {0}?</value>
+    <value>Ви впевнені, що хочете скасувати спільний доступ до {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Надавати доступ навіть тоді, коли NAPS2 буде закрито</value>
+    <value>Надавати спільний доступ навіть тоді, коли NAPS2 закрито</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
     <value>Декілька мов...</value>
@@ -793,7 +793,7 @@
     <value>Декілька мов</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Показувати нативне сканування TWAIN</value>
+    <value>Показати нативне сканування TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
     <value>Розділити</value>
@@ -802,25 +802,25 @@
     <value>Об'єднати</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>Вручну IP</value>
+    <value>Ручна IP-адреса</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>Вручну IP</value>
+    <value>Ручна IP-адреса</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP-адреса/назва хосту</value>
+    <value>IP-адреса/Хост</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Порт</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>З'єднатися</value>
+    <value>Підключитися</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Помилка під час з'єднання.</value>
+    <value>Помилка підключення.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Завжди питати</value>
+    <value>Завжди запитувати</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
     <value>Пошук пристроїв...</value>
@@ -838,19 +838,19 @@
     <value>Бічна панель</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Не знаходите ваш сканер? Перегляньте обмеження збірки Flatpak NAPS2.</value>
+    <value>Не можете знайти свій сканер? Прочитайте про обмеження NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Клавіатурні скорочення</value>
+    <value>Комбінації клавіш</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Клавіатурні скорочення</value>
+    <value>Комбінації клавіш</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
     <value>Сканувати з профілем {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
-    <value>Сканувати з типовим профілем</value>
+    <value>Сканувати з профілем за замовчуванням</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
     <value>Сканувати з новим профілем</value>
@@ -865,22 +865,22 @@
     <value>Дія</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
-    <value>Скорочення</value>
+    <value>Гарячі клавіші</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
     <value>Тема:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Редагувати у...</value>
+    <value>Редагувати за допомогою...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Редагувати у {0}</value>
+    <value>Редагувати за допомогою {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Редагувати у...</value>
+    <value>Редагувати за допомогою...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Помилка під час запуску застосунку {0}</value>
+    <value>Помилка під час запуску програми {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Зупинити спільний доступ до сканера</value>

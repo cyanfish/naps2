@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -236,7 +236,7 @@ msgstr "Faut-il vraiment défaire les modifications sur {0} image(s) ?"
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr "Affecter"
+msgstr "Assigner"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -478,7 +478,7 @@ msgstr "SMTP personnalisé"
 #: SettingsResources.resx$PageSize_Custom$Message
 #: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
-msgstr "Personnalisée…"
+msgstr "Personnaliser…"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -494,7 +494,7 @@ msgstr "Jour (01-31)"
 #: SettingsResources.resx$WiaVersion_Default$Message
 #: UiStrings.resx$Default$Message
 msgid "Default"
-msgstr "Prédéfinie"
+msgstr "Prédéfini(e)"
 
 #: UiStrings.resx$DefaultFilePathLabel$Message
 msgid "Default File Path:"
@@ -531,7 +531,7 @@ msgstr "Périphérique"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
-msgstr "Dimensions"
+msgstr "Dimensions :"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -597,7 +597,7 @@ msgstr "Modifier avec {0}"
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
 msgid "Edit with..."
-msgstr "Modifier avec..."
+msgstr "Modifier avec…"
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -942,7 +942,7 @@ msgstr "NAPS2 est gratuit, mais il est possible de faire un don."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
-msgstr "Nom (optionnel)"
+msgstr "Nom (optionnel) :"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
@@ -1425,7 +1425,7 @@ msgstr "Seconde (00-59)"
 
 #: UiStrings.resx$Select$Message
 msgid "Select"
-msgstr "Sélectionner"
+msgstr "Sélectionner…"
 
 #: UiStrings.resx$SelectAll$Message
 msgid "Select All"
@@ -1530,7 +1530,7 @@ msgstr "Démarrer"
 
 #: UiStrings.resx$StopScannerSharing$Message
 msgid "Stop Scanner Sharing"
-msgstr "Arrêt du partage du scanner"
+msgstr "Arrêter le partage de scanner"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1678,7 +1678,7 @@ msgstr "US Letter (8.5x11 p)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
-msgstr "Désaffecter"
+msgstr "Désassigner"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"

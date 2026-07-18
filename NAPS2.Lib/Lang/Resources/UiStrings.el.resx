@@ -283,7 +283,7 @@
     <value>Οδηγός TWAIN</value>
   </data>
   <data name="EsclDriver" xml:space="preserve">
-    <value>ESCL Driver</value>
+    <value>Οδηγός ESCL</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
     <value>ESCL Network Driver</value>
@@ -355,7 +355,7 @@
     <value>Επιλογή Προέλευσης</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>Επιλέξτε συσκευή</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>Εκτέλεση στο Παρασκήνιο</value>
@@ -652,7 +652,7 @@
     <value>Custom Resolution</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>DPI</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Αναμονή ολοκλήρωσης TWAIN...</value>
@@ -820,7 +820,7 @@
     <value>Connection error.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>Ερώτηση πάντα</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
     <value>Searching for devices...</value>

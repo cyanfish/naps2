@@ -85,6 +85,6 @@
     <value>작업 프로세스가 튕겼습니다. Windows 이벤트 뷰어를 확인하십시오.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>모르는 스캐너</value>
   </data>
 </root>

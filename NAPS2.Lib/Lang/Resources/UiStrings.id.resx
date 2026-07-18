@@ -97,7 +97,7 @@
     <value>Save Images</value>
   </data>
   <data name="ImageSettings" xml:space="preserve">
-    <value>Image Settings</value>
+    <value>Pengaturan Gambar</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>Emailkan PDF</value>
@@ -109,7 +109,7 @@
     <value>Print</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>Gambar</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>View</value>
@@ -136,13 +136,13 @@
     <value>Reset</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>Rotate</value>
+    <value>Putar</value>
   </data>
   <data name="RotateLeft" xml:space="preserve">
-    <value>Rotate Left</value>
+    <value>Putar ke Kiri</value>
   </data>
   <data name="RotateRight" xml:space="preserve">
-    <value>Rotate Right</value>
+    <value>Putar ke Kanan</value>
   </data>
   <data name="Flip" xml:space="preserve">
     <value>Putar Balik</value>
@@ -154,10 +154,10 @@
     <value>Rotasi custom</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Move Up</value>
+    <value>Pindah ke Atas</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Move Down</value>
+    <value>Pindah ke Bawah</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Reorder</value>
@@ -190,7 +190,7 @@
     <value>Bersihkan semua</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Bahasa</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -262,13 +262,13 @@
     <value>Emailkan Semua</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Emailkan Pilihan</value>
+    <value>Email Terpilih</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
     <value>Emailkan Semua sebagai PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Emailkan Pilihan sebagai PDF</value>
+    <value>Email Terpilih sebagai PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>Profile Settings</value>
@@ -580,7 +580,7 @@
     <value>Kompresi:</value>
   </data>
   <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Image Settings</value>
+    <value>Pengaturan Gambar</value>
   </data>
   <data name="EmailSettingsFormTitle" xml:space="preserve">
     <value>Pengaturan Email</value>
@@ -643,7 +643,7 @@
     <value>Ukuran halaman Custom</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
-    <value>Name (optional)</value>
+    <value>Nama (opsional)</value>
   </data>
   <data name="Dimensions" xml:space="preserve">
     <value>Dimensi</value>
@@ -661,7 +661,7 @@
     <value>Pengaturan Profile Tingkat Lanjut</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
-    <value>Image Quality</value>
+    <value>Kualitas Gambar</value>
   </data>
   <data name="MaximumQuality" xml:space="preserve">
     <value>Maximum quality (large files)</value>
@@ -856,13 +856,13 @@
     <value>Scan With New Profile</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>Tetapkan</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>Batalkan penetapan</value>
   </data>
   <data name="Action" xml:space="preserve">
-    <value>Action</value>
+    <value>Aksi</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
     <value>Shortcut</value>

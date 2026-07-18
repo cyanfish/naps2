@@ -13,13 +13,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Не знайдено вибраний сканер.</value>
+    <value>Не вдалося знайти вибраний сканер.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Вибраний сканер вимкнено.</value>
+    <value>Вибраний сканер не підключений до мережі.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Обмін інформацією зі сканером було перервано.</value>
+    <value>Зв'язок з пристроєм сканування було перервано.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -31,22 +31,22 @@
     <value>Не знайдено жодного сканера.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Помилка драйвера сканування.</value>
+    <value>Сталася помилка з драйвером сканування.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Версія {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>Неможливо імпортувати файл '{0}'.</value>
+    <value>Не вдалося імпортувати файл «{0}».</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Вибраний сканер не підтримує автоматичну подачу паперу. Якщо ваш сканер все ж має автоматичну подачу паперу, спробуйте вибрати інший драйвер..</value>
+    <value>Вибраний сканер не підтримує автоматичну подачу паперу. Якщо ваш сканер все ж має автоматичну подачу паперу, спробуйте вибрати інший драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>У пристрої відсутній папір.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Відсутні права на копіювання вмісту файлу '{0}'.</value>
+    <value>Ви не маєте дозволу на копіювання вмісту з файлу «{0}».</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Вибраний сканер не підтримує двостороннє сканування. Якщо ваш сканер все ж підтримує двостороннє сканування, спробуйте вибрати інший драйвер.</value>
@@ -58,25 +58,25 @@
     <value>Відкрито кришку сканеру.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>Зминання паперу у сканері.</value>
+    <value>У сканері застряг папір.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Прогрівання сканеру.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Драйвер SANE не доступний. Перевірте, чи встановлено такі пакети:</value>
+    <value>Драйвер SANE недоступний. Переконайтеся, що встановлено необхідні пакети:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Рушій розпізнавання (OCR) не доступний. Перевірте, чи встановлено такі пакети::</value>
+    <value>Механізм розпізнавання тексту (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>Вибраний драйвер не підтримується системою.</value>
+    <value>Вибраний драйвер не підтримується в цій системі.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>Під час цифрового розпізнавання трапилася помилка.</value>
+    <value>Під час розпізнавання тексту сталася помилка.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>Час операції з розпізнавання вичерпано.</value>
+    <value>Час очікування розпізнавання тексту закінчився.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
     <value>Збій робочого процесу.</value>

@@ -649,7 +649,7 @@
     <value>Dimensiuni</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>Rezoluție personalizată</value>
   </data>
   <data name="Dpi" xml:space="preserve">
     <value>Dpi</value>
@@ -868,21 +868,21 @@
     <value>Comandă rapidă</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Tema:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Editează cu...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>Editează cu {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Editează cu...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Error starting application {0}</value>
+    <value>Eroare la pornirea aplicației {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>Oprește distribuirea scanerului</value>
   </data>
 </root>

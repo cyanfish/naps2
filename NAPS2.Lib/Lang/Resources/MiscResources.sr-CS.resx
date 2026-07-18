@@ -64,7 +64,7 @@
     <value>JPEG datoteka (*.jpg, *.jpeg)</value>
   </data>
   <data name="FileTypePdf" xml:space="preserve">
-    <value>PDF Document (*.pdf)</value>
+    <value>PDF dokument (*.pdf)</value>
   </data>
   <data name="FileTypePng" xml:space="preserve">
     <value>PNG datoteka (*.png)</value>
@@ -73,7 +73,7 @@
     <value>TIFF datoteka (*.tiff, *tif)</value>
   </data>
   <data name="FileTypeJp2" xml:space="preserve">
-    <value>JPEG2000 File (*.jp2, *.jpx)</value>
+    <value>JPEG2000 datoteka (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Nedostaje ime.</value>
@@ -163,13 +163,13 @@
     <value>Promene nisu snimljene. Da li ste sigurni da želite da napustite program i odbacite promene?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>An operation is in progress. Are you sure you want to exit and cancel the operation?</value>
+    <value>Radnja je u toku. Jeste li sigurni da želite da izađete i otkažete radnju?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Nesnimljene promene</value>
   </data>
   <data name="ActiveOperations" xml:space="preserve">
-    <value>Operation in Progress</value>
+    <value>Radnja u toku</value>
   </data>
   <data name="ScanPageProgress" xml:space="preserve">
     <value>Skeniranje strane {0}</value>
@@ -190,7 +190,7 @@
     <value>od {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Došlo je do nepoznate greške prilikom serijskog skeniranja.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Paketna obrada otkazana.</value>
@@ -220,7 +220,7 @@
     <value>Zatvori</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Saving batch results...</value>
+    <value>Čuvanje serijskih rezultata...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Odabrani skener ne podržava dvostrano skeniranje. Ako vaš skener nema duplekser, pokušajte da instalirate drugi drajver.</value>
@@ -283,46 +283,46 @@
     <value>Slikovne datoteke</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>Izabrani skener je zauzet.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>Poklopac skenera je otvoren.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>U skeneru se zaglavio papir.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Skener se zagrejava.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
     <value>Dostupno je ažuriranje za OCR..</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>Slika je sačuvana.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} images saved.</value>
+    <value>Simljena(o) {0} slika(e).</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF saved.</value>
+    <value>PDF sačuvan.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
-    <value>{0} ({1}x{2} {3})</value>
+    <value>{0} ({1}×{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete "{0}"?</value>
+    <value>Da li ste sigurni da želite da obrišete "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>The file could not be overwritten because it is currently in use.</value>
+    <value>Datoteka se ne može prepisati jer je trenutno u upotrebi.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>Pravnanje u toku...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>Napredak poravnanja</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
+    <value>Potrebno preuzimanje</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
     <value>Potrebna je dodatna komponenta za uvoz ovog PDF fajla. Da li želite da je sada preuzmete?</value>
@@ -334,64 +334,64 @@
     <value>Otkazivanje kolektivnog skeniranja</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Doniraj</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is completely free. Consider making a donation.</value>
+    <value>NAPS2 je potpuno besplatan. Razmotrite mogućnost donacije.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
-    <value>Leave a Review</value>
+    <value>Ostavite recenziju</value>
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
-    <value>Like NAPS2?</value>
+    <value>Sviđa Vam se NAPS2?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>SANE upravljački program nije dostupan. Proverite jeste li instalirali potrebne pakete:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR program nije dostupan. Proverite jeste li instalirali potrebni paket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Izabrani upravljački program nije podržan na ovom sistemu.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR Progress</value>
+    <value>Napredak OCR-a</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>OCR u toku...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Update Progress</value>
+    <value>Napredak ažuriranja</value>
   </data>
   <data name="Updating" xml:space="preserve">
-    <value>Updating...</value>
+    <value>Ažuriranje...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>No updates available.</value>
+    <value>Nema dostupnih ažuriranja.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Provera u toku...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Update checking is disabled.</value>
+    <value>Provera ažuriranja je isključena.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Nastala je greška prilikom pokušaja instalacije nadogradnje.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Instaliraj {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>An update is available.</value>
+    <value>Ažuriranje je dostupno.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>An error occurred when trying to authorize.</value>
+    <value>Došlo je do greške prilikom odobrenja.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Slanje e-pošte...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>An error occurred when trying to send the email.</value>
+    <value>Došlo je do greške prilikom pokušaja slanja mejla.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Skeniranje strane {0}...</value>

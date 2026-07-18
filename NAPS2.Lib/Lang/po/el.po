@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "Language: el\n"
@@ -122,7 +122,7 @@ msgstr "Εναλλακτική Παρεμβολή"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "Ερώτηση πάντα"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -482,7 +482,7 @@ msgstr "Προσαρμογή..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "Σκοτεινό"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -568,7 +568,7 @@ msgstr "Πρόοδος Λήψης"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr ""
+msgstr "DPI"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -576,7 +576,7 @@ msgstr "Διπλή Όψη"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
+msgstr "Οδηγός ESCL"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
@@ -1433,7 +1433,7 @@ msgstr "Επιλογή Όλων"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "Επιλέξτε συσκευή"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"

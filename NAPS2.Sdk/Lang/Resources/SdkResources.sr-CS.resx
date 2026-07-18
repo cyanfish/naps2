@@ -19,7 +19,7 @@
     <value>Odabrani skener nije uključen.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Communication with the scanning device was interrupted.</value>
+    <value>Prekinuta je komunikacija sa uređajem za skeniranje.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
@@ -52,39 +52,39 @@
     <value>Odabrani skener ne podržava dvostrano skeniranje. Ako vaš skener nema duplekser, pokušajte da instalirate drugi drajver.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>Izabrani skener je zauzet.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>Poklopac skenera je otvoren.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>U skeneru se zaglavio papir.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Skener se zagrejava.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>SANE upravljački program nije dostupan. Proverite jeste li instalirali potrebne pakete:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>OCR program nije dostupan. Proverite jeste li instalirali potrebni paket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>Izabrani upravljački program nije podržan na ovom sistemu.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>An error occurred running OCR.</value>
+    <value>Došlo je do greške prilikom pokretanja OCR-a.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>The OCR operation timed out.</value>
+    <value>Isteklo je vreme za izvršenje OCR-a.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>The worker process crashed.</value>
+    <value>Radni proces je prekinut.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>The worker process crashed. Check the Windows event viewer.</value>
+    <value>Radni proces je prekinut. Provjerite pregledač događaja u Windowsu.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>Nepoznat skener</value>
   </data>
 </root>

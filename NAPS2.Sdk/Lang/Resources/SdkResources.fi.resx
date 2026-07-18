@@ -85,6 +85,6 @@
     <value>Työprosessi kaatui. Tarkista Windows-tapahtuman katselija.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>Tuntematon skanneri</value>
   </data>
 </root>

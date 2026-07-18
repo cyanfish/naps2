@@ -31,7 +31,7 @@
     <value>Nu a fost găsit nici un dispozitiv scaner.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>A apărut o eroare la driver-ul de scanare..</value>
+    <value>A apărut o eroare la driver-ul de scanare.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versiune {0}</value>
@@ -85,6 +85,6 @@
     <value>Procesul worker s-a oprit neașteptat. Verificați Windows event viewer.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>Scaner necunoscut</value>
   </data>
 </root>

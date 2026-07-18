@@ -16,7 +16,7 @@
     <value>Over</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 bijdragers</value>
+    <value>Copyright {0} NAPS2-bijdragers</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Pictogrammen van:</value>
@@ -76,7 +76,7 @@
     <value>Nieuw profiel</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
-    <value>Automatisch scannen</value>
+    <value>Batchscan</value>
   </data>
   <data name="Ocr" xml:space="preserve">
     <value>OCR</value>
@@ -145,7 +145,7 @@
     <value>Rechtsom draaien</value>
   </data>
   <data name="Flip" xml:space="preserve">
-    <value>Spiegelen</value>
+    <value>180° omdraaien</value>
   </data>
   <data name="Deskew" xml:space="preserve">
     <value>Rechtzetten</value>
@@ -175,10 +175,10 @@
     <value>Alternatief terug tussenvoegen</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Omdraaien</value>
+    <value>Volgorde omkeren</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Alles ongedaan maken</value>
+    <value>Alles omkeren</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
     <value>Selectie omkeren</value>
@@ -235,7 +235,7 @@
     <value>Zoom 100%</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Schalen</value>
+    <value>Meeschalen met venster</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Opslaan</value>
@@ -274,10 +274,10 @@
     <value>Profielinstellingen</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Schermnaam:</value>
+    <value>Weergavenaam:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
-    <value>WIA driver</value>
+    <value>WIA-driver</value>
   </data>
   <data name="TwainDriver" xml:space="preserve">
     <value>TWAIN driver</value>
@@ -292,7 +292,7 @@
     <value>ESCL USB Driver</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
-    <value>Apple driver</value>
+    <value>Apple-driver</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
     <value>SANE driver</value>
@@ -304,10 +304,10 @@
     <value>Apparaat kiezen</value>
   </data>
   <data name="UsePredefinedSettings" xml:space="preserve">
-    <value>Gebruik voorgedefinieerd</value>
+    <value>Instellingen aanpassen</value>
   </data>
   <data name="UseNativeUi" xml:space="preserve">
-    <value>Gebruik native interface</value>
+    <value>Systeeminterface gebruiken</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
     <value>Papierbron:</value>
@@ -328,7 +328,7 @@
     <value>Horizontaal uitlijnen:</value>
   </data>
   <data name="ScaleLabel" xml:space="preserve">
-    <value>Schalen:</value>
+    <value>Schaal:</value>
   </data>
   <data name="ContrastLabel" xml:space="preserve">
     <value>Contrast:</value>
@@ -403,13 +403,13 @@
     <value>Kies één of meer talen:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Geschatte omvang: {0} MB</value>
+    <value>Geschatte grootte: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Downloaden</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
-    <value>Voortgang downloaden</value>
+    <value>Voortgang van downloaden</value>
   </data>
   <data name="PreviewFormTitle" xml:space="preserve">
     <value>Voorbeeld</value>
@@ -439,13 +439,13 @@
     <value>Niet nu</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Herstel gescande afbeeldingen</value>
+    <value>Gescande afbeeldingen herstellen</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} afbeelding(en) gescand op {1} om {2} zijn mogelijk niet opgeslagen en zijn te herstellen. Wilt u herstellen?</value>
+    <value>{0} afbeelding(en) gescand op {1} om {2} zijn mogelijk niet opgeslagen en kunnen worden hersteld. Wilt u ze herstellen?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Plaatshouders</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
     <value>Opslaanvenster overslaan</value>
@@ -475,7 +475,7 @@
     <value>Document bewerken toestaan</value>
   </data>
   <data name="AllowDocumentAssembly" xml:space="preserve">
-    <value>Documentassemblage toestaan</value>
+    <value>Samenstellen van document toestaan</value>
   </data>
   <data name="AllowContentCopying" xml:space="preserve">
     <value>Inhoud kopiëren toestaan</value>
@@ -508,10 +508,10 @@
     <value>Sleutelwoorden:</value>
   </data>
   <data name="OwnerPasswordLabel" xml:space="preserve">
-    <value>Wachtwoord eigenaar:</value>
+    <value>Beheerderswachtwoord:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
-    <value>Wachtwoord gebruiker:</value>
+    <value>Gebruikerswachtwoord:</value>
   </data>
   <data name="RememberTheseSettings" xml:space="preserve">
     <value>Onthoud deze instellingen</value>
@@ -526,7 +526,7 @@
     <value>Compatibiliteit</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Plaatshouders</value>
   </data>
   <data name="Year4Digit" xml:space="preserve">
     <value>Jaar</value>
@@ -550,31 +550,31 @@
     <value>Seconde (00-59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
-    <value>Automatisch ophogend nummer (4 cijfers)</value>
+    <value>Automatisch oplopend nummer (4 cijfers)</value>
   </data>
   <data name="AutoIncrementing3Digit" xml:space="preserve">
-    <value>Automatisch ophogend nummer (3 cijfers)</value>
+    <value>Automatisch oplopend nummer (3 cijfers)</value>
   </data>
   <data name="AutoIncrementing2Digit" xml:space="preserve">
-    <value>Automatisch ophogend nummer (2 cijfers)</value>
+    <value>Automatisch oplopend nummer (2 cijfers)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Automatisch toenemend nummer (1 cijfer)</value>
+    <value>Automatisch oplopend nummer (1 cijfer)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>Bestandsnaam</value>
+    <value>Bestandsnaam:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>Voorbeeld:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>Voor hoge-kwaliteit JPEG (80+), verhoog ook de afbeeldingskwaliteit in uw profiel voor het beste resultaat.</value>
+    <value>Voor hoge JPEG-kwaliteit (80+) kunt u voor het beste resultaat ook de beeldkwaliteit in uw profiel verhogen.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
-    <value>JPEG kwaliteit</value>
+    <value>JPEG-kwaliteit</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
-    <value>Tiff opties</value>
+    <value>TIFF-opties</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
     <value>Compressie:</value>
@@ -598,13 +598,13 @@
     <value>Naam bijlage:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>Kies e-mail provider</value>
+    <value>Kies e-mailprovider</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
     <value>Autoriseren</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
-    <value>Wacht op autorisatie...</value>
+    <value>Wachten op autorisatie...</value>
   </data>
   <data name="ErrorFormTitle" xml:space="preserve">
     <value>Fout</value>
@@ -640,7 +640,7 @@
     <value>Afbeeldingen behouden tussen sessies</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
-    <value>Aangepaste paginagrootte</value>
+    <value>Aangepast paginaformaat</value>
   </data>
   <data name="NameOptional" xml:space="preserve">
     <value>Naam (optioneel)</value>
@@ -652,10 +652,10 @@
     <value>Aangepaste resolutie</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>DPI</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
-    <value>Wachten op TWAIN scan...</value>
+    <value>Wachten op voltooiing van TWAIN-scan...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
     <value>Geavanceerde profielinstellingen</value>
@@ -673,13 +673,13 @@
     <value>Lege pagina's uitsluiten</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>Witdrempel</value>
+    <value>Witheidsdrempel</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
     <value>Dekkingsdrempel</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
-    <value>Nabewerking</value>
+    <value>Post-processing</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
     <value>Gescande pagina's rechtzetten</value>
@@ -703,13 +703,13 @@
     <value>Achterzijde van dubbelzijdige pagina's omdraaien</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
-    <value>Wia versie:</value>
+    <value>WIA-versie:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
-    <value>Twain-implementatie:</value>
+    <value>TWAIN-implementatie:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
-    <value>Automatisch scannen</value>
+    <value>Batchscan</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
     <value>Klik 'Beginnen' om te starten.</value>
@@ -727,7 +727,7 @@
     <value>Enkele scan</value>
   </data>
   <data name="MultipleScansPrompt" xml:space="preserve">
-    <value>Meerdere scans (vraag tussen 2 scans)</value>
+    <value>Meerdere scans (vraag tussen scans)</value>
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
     <value>Meerdere scans (vaste pauze tussen scans)</value>
@@ -754,7 +754,7 @@
     <value>Volgende scan</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
-    <value>Klaar voor scannen {0}.</value>
+    <value>Klaar voor scan {0}.</value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
     <value>Map openen</value>
@@ -763,19 +763,19 @@
     <value>Hulpmiddelen</value>
   </data>
   <data name="EnableDebugLogging" xml:space="preserve">
-    <value>Debug logging toestaan</value>
+    <value>Debug-logging inschakelen</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Delen</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner delen</value>
+    <value>Gedeelde scanner</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner delen</value>
+    <value>Gedeelde scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Gedeelde scanners kunnen worden gebruikt vanaf andere computers op het lokale netwerk door "ESCL Driver" te selecteren in de NAPS2-profielinstellingen van de andere computer.</value>
+    <value>Gedeelde scanners kunnen worden gebruikt vanaf andere computers op het lokale netwerk door "ESCL-driver" te selecteren in de NAPS2-profielinstellingen van de andere computer.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Instellingen gedeelde scanner</value>
@@ -793,7 +793,7 @@
     <value>Meerdere talen</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>TWAIN-voortgang weergegeven</value>
+    <value>Native TWAIN-voortgang weergeven</value>
   </data>
   <data name="Split" xml:space="preserve">
     <value>Splitsen</value>
@@ -823,7 +823,7 @@
     <value>Altijd vragen</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Zoeken naar apparaten...</value>
+    <value>Apparaten zoeken...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
     <value>{0} apparaten gevonden.</value>
@@ -838,7 +838,7 @@
     <value>Zijbalk</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Kun je je scanner niet vinden? Lees dan over de beperkingen van NAPS2 Flatpak.</value>
+    <value>Kunt u uw scanner niet vinden? Lees dan over de beperkingen van NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
     <value>Sneltoetsen</value>
@@ -847,7 +847,7 @@
     <value>Sneltoetsen</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scannen met Profiel {0}</value>
+    <value>Scannen met profiel {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Scannen met standaardprofiel</value>
@@ -880,7 +880,7 @@
     <value>Bewerken met...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Fout bij starten van toepassing {0}</value>
+    <value>Fout bij starten van NAPS2 {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Scanner delen stoppen</value>

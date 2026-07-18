@@ -16,7 +16,7 @@
     <value>O programu</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
-    <value>Copyright {0} NAPS2 Contributors</value>
+    <value>Autorska prava {0} NAPS2 suradnici</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
     <value>Ikone sa:</value>
@@ -121,7 +121,7 @@
     <value>Svjetlina / Kontrast</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Hue / Saturation</value>
+    <value>Nijansa / Zasićenost</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
     <value>Crno-bijelo</value>
@@ -130,7 +130,7 @@
     <value>Izoštri</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>Ispravak dokumenta</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Resetiraj</value>
@@ -163,7 +163,7 @@
     <value>Prerasporedi</value>
   </data>
   <data name="Interleave" xml:space="preserve">
-    <value>Interleave</value>
+    <value>Isprepletano</value>
   </data>
   <data name="Deinterleave" xml:space="preserve">
     <value>Raspletanje</value>
@@ -175,19 +175,19 @@
     <value>Alternativno Raspletanje</value>
   </data>
   <data name="Reverse" xml:space="preserve">
-    <value>Reverse</value>
+    <value>Obrni redoslijed</value>
   </data>
   <data name="ReverseAll" xml:space="preserve">
-    <value>Reverse All</value>
+    <value>Obrni redoslijed za sve</value>
   </data>
   <data name="ReverseSelected" xml:space="preserve">
-    <value>Reverse Selected</value>
+    <value>Obrni redoslijed za izabrane</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Izbriši</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Izbriši sve</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Jezik (language)</value>
@@ -235,7 +235,7 @@
     <value>Stvarna veličina</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Scale With Window</value>
+    <value>Skaliraj sa veličinom prozora</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Spremi</value>
@@ -445,7 +445,7 @@
     <value>{0} slika(e) skenirana(e) {1} u {2} možda nisu spremljene i mogu se oporaviti. Želite li ih oporaviti?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Šablonski nazivi</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
     <value>Preskoči upit za spremanje</value>
@@ -526,7 +526,7 @@
     <value>Kompatibilnost</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
-    <value>Placeholders</value>
+    <value>Šablonski nazivi</value>
   </data>
   <data name="Year4Digit" xml:space="preserve">
     <value>Godina</value>
@@ -559,7 +559,7 @@
     <value>Samo-povećavajući brojač (2 znamenke)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
-    <value>Auto-incrementing number (1 digits)</value>
+    <value>Samo-povećavajući brojač (1 znamenka)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
     <value>Naziv datoteke:</value>
@@ -637,7 +637,7 @@
     <value>Obriši slike nakon spremanja</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
-    <value>Keep images across sessions</value>
+    <value>Zadrži slike kroz sesije</value>
   </data>
   <data name="PageSizeFormTitle" xml:space="preserve">
     <value>Prilagođena veličina stranice</value>
@@ -673,7 +673,7 @@
     <value>Izuzmi prazne stranice</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>White Threshold</value>
+    <value>Prag bjeline</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
     <value>Prag Pokrivanja</value>
@@ -799,7 +799,7 @@
     <value>Podijeli</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>Kombiniraj</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
     <value>Ručna IP adresa</value>
@@ -838,7 +838,7 @@
     <value>Bočni izbornik</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+    <value>Ne možete pronaći svoj skener? Pročitajte o ograničenjima NAPS2 Flatpaka.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
     <value>Tipkovni prečaci</value>
@@ -871,13 +871,13 @@
     <value>Tema:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Uredi pomoću...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>Uredi pomoću {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Uredi pomoću...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
     <value>Greška pri pokretanju aplikacije {0}</value>

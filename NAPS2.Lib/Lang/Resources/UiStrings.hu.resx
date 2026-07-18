@@ -217,7 +217,7 @@
     <value>Alkalmazás</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
-    <value>Csak egyetlen NAPS2 példány engedélyezése</value>
+    <value>Csak egyetlen NAPS2 példány lehet nyitva</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Névjegy</value>
@@ -445,7 +445,7 @@
     <value>A {1} {2}-kor beolvasott {0} kép lehet, hogy nem került mentésre, és visszaállítható. Szeretné visszaállítani őket?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
-    <value>Helyettesítők</value>
+    <value>Kiegészítések</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
     <value>Mentési felszólítás kihagyása</value>
@@ -526,7 +526,7 @@
     <value>Kompatibilitás</value>
   </data>
   <data name="PlaceholdersFormTitle" xml:space="preserve">
-    <value>Helyettesítők</value>
+    <value>Kiegészítések</value>
   </data>
   <data name="Year4Digit" xml:space="preserve">
     <value>Év</value>
@@ -589,7 +589,7 @@
     <value>Beállítások</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Szolgáltató</value>
+    <value>Levelező</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>Változtatás</value>
@@ -598,7 +598,7 @@
     <value>Melléklet neve:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
-    <value>E-mail szolgáltató kiválasztása</value>
+    <value>Levelezőprogram kiválasztása</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
     <value>Engedélyezés</value>
@@ -847,13 +847,13 @@
     <value>Billentyűparancsok</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Lapolvasás a {0} profillal</value>
+    <value>Beolvasás a {0}. profillal</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Beolvasás az alapértelmezett profillal</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Lapolvasás új profillal</value>
+    <value>Beolvasás új profillal</value>
   </data>
   <data name="Assign" xml:space="preserve">
     <value>Hozzárendelés</value>

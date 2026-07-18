@@ -835,10 +835,10 @@
     <value>Nuk u gjet asnjë pajisje.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sidebar</value>
+    <value>Rreshti anësor</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+    <value>Nuk mund të gjeni skanerin? Lexoni rreth kufizimeve të NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
     <value>Shkurtimet nga tastiera</value>
@@ -862,22 +862,22 @@
     <value>Mos cakto</value>
   </data>
   <data name="Action" xml:space="preserve">
-    <value>Action</value>
+    <value>Veprim</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
-    <value>Shortcut</value>
+    <value>Shkurtore</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
     <value>Motivi:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Redakto me...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>Redakto me {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>Redakto me...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
     <value>Gabim në hapjen e aplikacionit {0}</value>

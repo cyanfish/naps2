@@ -148,7 +148,7 @@
     <value>Jednu ili više datoteka nije bilo moguće preuzeti.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>Custom ({0}x{1} {2})</value>
+    <value>Prilagođeno ({0}x{1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Skeniraj</value>
@@ -190,7 +190,7 @@
     <value>od {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>An unknown error occurred during the batch scan.</value>
+    <value>Nepoznata pogreška prilikom serijskog skeniranja.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
     <value>Serijsko Skeniranje otkazano.</value>
@@ -220,7 +220,7 @@
     <value>Zatvori</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Saving batch results...</value>
+    <value>Pohrana serijskih rezultata...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Odabrani skener ne podržava obostrano skeniranje. Ako bi vaš skener trebao podržavati obostrano skeniranje, pokušajte upotrijebiti drugi upravljački program.</value>
@@ -229,7 +229,7 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Importing {0}...</value>
+    <value>Uvozi se {0}...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
     <value>Napredak uvoza</value>
@@ -253,7 +253,7 @@
     <value>Napredak spremanja PDF-a</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Saving {0}...</value>
+    <value>Pohrana {0}...</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Ispis</value>
@@ -265,7 +265,7 @@
     <value>Napredak kopiranja</value>
   </data>
   <data name="Importing" xml:space="preserve">
-    <value>Importing...</value>
+    <value>Uvozi se...</value>
   </data>
   <data name="EmailPdf" xml:space="preserve">
     <value>Pošalji PDF e-poštom</value>
@@ -292,7 +292,7 @@
     <value>U skeneru se zaglavio papir.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>Skener se zagrijava.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
     <value>Dostupno je ažuriranje za OCR.</value>
@@ -313,7 +313,7 @@
     <value>Jeste li sigurni da želite izbrisati "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>Datoteka se ne može prebrisati jer je trenutno u upotrebi.</value>
+    <value>Datoteka se ne može prepisati jer je trenutno u upotrebi.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
     <value>Proces popravljanja iskrivljene perspektive...</value>
@@ -358,7 +358,7 @@
     <value>Napredak OCR-a</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
-    <value>Running OCR...</value>
+    <value>OCR u tijeku...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
     <value>Napredak ažuriranja</value>
@@ -370,7 +370,7 @@
     <value>Nema dostupnih ažuriranja.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking...</value>
+    <value>Provjeravam...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
     <value>Provjera ažuriranja je onemogućena.</value>
@@ -379,7 +379,7 @@
     <value>Došlo je do pogreške prilikom pokušaja instaliranja ažuriranja.</value>
   </data>
   <data name="Install" xml:space="preserve">
-    <value>Install {0}</value>
+    <value>Instaliranje {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Dostupno je ažuriranje.</value>
@@ -388,7 +388,7 @@
     <value>Došlo je do pogreške prilikom pokušaja autorizacije.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
-    <value>Uploading email...</value>
+    <value>Prijenos e-pošte...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
     <value>Došlo je do pogreške prilikom pokušaja slanja e-pošte.</value>

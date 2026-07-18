@@ -13,25 +13,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Fekete-fehér</value>
+    <value>সাদা-কালো</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>24 bites szín</value>
+    <value>২৪-বিট রঙ</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
-    <value>Szürkeárnyalatos</value>
+    <value>Grayscale</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
-    <value>{0} dpi</value>
+    <value>{0} ডিপিআই</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Egyéni SMTP</value>
+    <value>Custom SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookNew" xml:space="preserve">
-    <value>Outlook (új)</value>
+    <value>Outlook (new)</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Web Access</value>
@@ -40,58 +40,58 @@
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Apple Mail</value>
+    <value>Apple মেইল</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>Nincs levelező kiválasztva.</value>
+    <value>No provider selected.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
-    <value>Középre</value>
+    <value>মধ্যখানে</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Balra</value>
+    <value>Left</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Jobbra</value>
+    <value>Right</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>cm</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
-    <value>hüvelyk</value>
+    <value>in</value>
   </data>
   <data name="PageSizeUnit_Millimetre" xml:space="preserve">
     <value>mm</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297x420 mm)</value>
+    <value>এ৩ (২৯৭x৪২০ এমএম)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210x297 mm)</value>
+    <value>এ৪ (২১০x২৯৭ এমএম)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148x210 mm)</value>
+    <value>এ৫ (১৪৮x২১০ এমএম)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (250 x 353 mm)</value>
+    <value>B4 (২৫০x৩৫৩ মিমি)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
-    <value>B5 (176 x 250 mm)</value>
+    <value>B5 (১৭৬x২৫০ মিমি)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Egyéni...</value>
+    <value>Custom...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 hüvelyk)</value>
+    <value>US Legal (8.5x14 in)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8,5x11 hüvelyk)</value>
+    <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
-    <value>Egyéni...</value>
+    <value>Custom...</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
-    <value>Alapértelmezett</value>
+    <value>Default</value>
   </data>
   <data name="PdfCompat_PdfA1B" xml:space="preserve">
     <value>PDF/A-1b</value>
@@ -106,16 +106,16 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Kétoldalas</value>
+    <value>Duplex</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Lapadagoló</value>
+    <value>Feeder</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Síkágy</value>
+    <value>Glass</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
-    <value>Automatikus</value>
+    <value>স্বয়ংক্রিয়</value>
   </data>
   <data name="TiffComp_Ccitt4" xml:space="preserve">
     <value>CCITT4</value>
@@ -124,60 +124,60 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Nincs</value>
+    <value>None</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
-    <value>Alapértelmezett</value>
+    <value>Default</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Régi (csak natív felhasználói felület)</value>
+    <value>Legacy (native UI only)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Natív átvitel</value>
+    <value>Native Transfer</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memória átvitel</value>
+    <value>Memory Transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Régi DSM</value>
+    <value>Old DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
   <data name="WiaVersion_Default" xml:space="preserve">
-    <value>Alapértelmezett</value>
+    <value>Default</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Gyors</value>
+    <value>Fast</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Legjobb</value>
+    <value>উৎকৃষ্ট</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Összes mentése</value>
+    <value>Save All</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Kiválasztott mentése</value>
+    <value>Save Selected</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Mindig kérdezzen rá</value>
+    <value>সবসময় প্রম্পট করুন</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Kérdezzen rá, ha kiválasztva</value>
+    <value>Prompt If Selected</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Beolvasás az alapértelmezett profillal</value>
+    <value>Scan With Default Profile</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Mindig kérdezzen rá</value>
+    <value>সবসময় প্রম্পট করুন</value>
   </data>
   <data name="Theme_Default" xml:space="preserve">
-    <value>Alapértelmezett</value>
+    <value>Default</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Világos</value>
+    <value>Light</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Sötét</value>
+    <value>Dark</value>
   </data>
 </root>

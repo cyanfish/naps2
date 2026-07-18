@@ -25,7 +25,7 @@
     <value>{0} dpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>กำหนดค่า SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -43,7 +43,7 @@
     <value>Apple Mail</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>ไม่ได้เลือกผู้ให้บริการ</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>กึ่งกลาง</value>
@@ -52,7 +52,7 @@
     <value>ซ้าย</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Right</value>
+    <value>ขวา</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>ซม.</value>
@@ -79,7 +79,7 @@
     <value>B5 (176x250 มม.)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Custom...</value>
+    <value>กำหนดเอง...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8.5x14 in)</value>
@@ -88,7 +88,7 @@
     <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
-    <value>Custom...</value>
+    <value>กำหนดเอง...</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>ค่าเริ่มต้น</value>
@@ -124,7 +124,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>None</value>
+    <value>ไม่มี</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>ค่าเริ่มต้น</value>
@@ -148,7 +148,7 @@
     <value>ค่าเริ่มต้น</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>รวดเร็ว</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
     <value>ดีที่สุด</value>
@@ -157,19 +157,19 @@
     <value>บันทึกทั้งหมด</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>บันทึกรายการที่เลือกไว้</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>แจ้งเตือนเสมอ</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
     <value>Prompt If Selected</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>สแกนด้วยโปรไฟล์เริ่มต้น</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>แจ้งเตือนเสมอ</value>
   </data>
   <data name="Theme_Default" xml:space="preserve">
     <value>ค่าเริ่มต้น</value>

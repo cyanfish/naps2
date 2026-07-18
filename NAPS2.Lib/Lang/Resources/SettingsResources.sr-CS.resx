@@ -22,28 +22,28 @@
     <value>Nijanse sive</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
-    <value>{0} dpi</value>
+    <value>{0} tpi</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Custom SMTP</value>
+    <value>Prilagođeni SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookNew" xml:space="preserve">
-    <value>Outlook (new)</value>
+    <value>Outlook (novi)</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Outlook Web Access</value>
+    <value>Outlook preko Web-a</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Apple Mail</value>
+    <value>Apple mejl</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>No provider selected.</value>
+    <value>Nije izabran pružalac usluge.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>Centrirano</value>
@@ -82,10 +82,10 @@
     <value>Proizvoljno...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8,5x14 in)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8,5x11 in)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
     <value>Proizvoljno...</value>
@@ -124,22 +124,22 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>None</value>
+    <value>Nijedan</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>Podrazumevano</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Legacy (native UI only)</value>
+    <value>Zastarelo (samo za nativno korisničko okruženje)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Native Transfer</value>
+    <value>Nativni transfer</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Memory Transfer</value>
+    <value>Memorijski transfer</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
-    <value>Old DSM</value>
+    <value>Stari DSM</value>
   </data>
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
@@ -148,36 +148,36 @@
     <value>Podrazumevano</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>Brzo</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>Najbolje</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>Sačuvaj sve</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>Sačuvaj izabrano</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Uvek pitaj</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Prompt If Selected</value>
+    <value>Pitaj ako je izabrano</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>Skeniraj s podrazumevanim profilom</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
-    <value>Always Prompt</value>
+    <value>Uvek pitaj</value>
   </data>
   <data name="Theme_Default" xml:space="preserve">
     <value>Podrazumevano</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Svetlo</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Tamna</value>
   </data>
 </root>

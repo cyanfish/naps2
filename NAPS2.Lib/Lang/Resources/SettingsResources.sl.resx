@@ -31,7 +31,7 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookNew" xml:space="preserve">
-    <value>Outlook (new)</value>
+    <value>Outlook (novo)</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Splet</value>
@@ -175,9 +175,9 @@
     <value>Privzeto</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Svetla</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Temna</value>
   </data>
 </root>

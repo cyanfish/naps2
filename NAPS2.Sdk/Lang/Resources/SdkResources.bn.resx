@@ -13,78 +13,78 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>選択したスキャナが見つかりません。</value>
+    <value>The selected scanner could not be found.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>選択したスキャナーと接続できません。</value>
+    <value>The selected scanner is offline.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>スキャナーとの通信が中断されました。</value>
+    <value>স্ক্যানিং ডিভাইসের সাথে যোগাযোগ বিঘ্নিত হয়েছে.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>デバイスが選択されていません.</value>
+    <value>No device selected.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>スキャンできるデバイスが検出されませんでした.</value>
+    <value>No scanning device was found.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>スキャナドライバにエラーが発生しました.</value>
+    <value>স্ক্যানিং ড্রাইভারের সাথে একটি ত্রুটি ঘটেছে.</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>{0} バージョン</value>
+    <value>Version {0}</value>
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
-    <value>「{0}」ファイルをインポートできませんでした。</value>
+    <value>The file '{0}' could not be imported.</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>選択したスキャナはフィーダーを利用できません。スキャナーにフィーダーが備わっている場合は、別のドライバを試してみてください。</value>
+    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>フィーダーが空です.</value>
+    <value>No pages are in the feeder.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>'{0}'からのコピーは許可されていません.</value>
+    <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>このスキャナでは両面スキャンできません。スキャナーに両面機能が備わっている場合は、別のドライバーを試してみてください。</value>
+    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>選択したスキャナーは使用中です。</value>
+    <value>The selected scanner is busy.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>スキャナーのカバーが開いています。</value>
+    <value>The scanner's cover is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>スキャナーが紙詰まりです。</value>
+    <value>The scanner has a paper jam.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>スキャナーが準備をしています。</value>
+    <value>The scanner is warming up.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANEドライバは利用不可能です。必要なパッケージをインストールしてください：</value>
+    <value>The SANE driver is not available. Make sure to install the required packages:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCRエンジンを利用できません。言語パッケージをインストールしてください：</value>
+    <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>選択したドライバはこのシステムではサポートされていません。</value>
+    <value>The selected driver is not supported on this system.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>OCR 実行中にエラーが発生しました。</value>
+    <value>OCR চালানোর সময় একটি ত্রুটি হয়েছে.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>OCR 操作 がタイムアウトしました。</value>
+    <value>The OCR operation timed out.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>ワーカープロセスがクラッシュしました。</value>
+    <value>The worker process crashed.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>ワーカープロセスがクラッシュしました。Windows イベントビューアーを確認してください。</value>
+    <value>The worker process crashed. Check the Windows event viewer.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>不明なスキャナー</value>
+    <value>Unknown Scanner</value>
   </data>
 </root>

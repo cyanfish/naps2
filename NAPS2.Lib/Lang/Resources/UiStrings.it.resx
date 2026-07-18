@@ -169,7 +169,7 @@
     <value>Deinterleave</value>
   </data>
   <data name="AltInterleave" xml:space="preserve">
-    <value>Interfoliazione alternativa</value>
+    <value>intercalare alternativo</value>
   </data>
   <data name="AltDeinterleave" xml:space="preserve">
     <value>Inverti interfoliazione alternativa</value>

@@ -211,7 +211,7 @@
     <value>Zadana funckija dugmeta "Skeniraj":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>Zadana funckija dugmeta "Saćuvaj":</value>
+    <value>Zadana funckija dugmeta "Sačuvaj":</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Aplikacija</value>
@@ -802,10 +802,10 @@
     <value>Kombinuj</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
-    <value>IP adresa</value>
+    <value>Ručna IP adresa</value>
   </data>
   <data name="ManualIpFormTitle" xml:space="preserve">
-    <value>IP adresa</value>
+    <value>Ručna IP adresa</value>
   </data>
   <data name="IpHost" xml:space="preserve">
     <value>IP/Host</value>

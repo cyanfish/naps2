@@ -49,10 +49,10 @@
     <value>Center</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Left</value>
+    <value>Kiri</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Right</value>
+    <value>Kanan</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>cm</value>

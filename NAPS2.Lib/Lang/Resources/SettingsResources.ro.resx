@@ -31,7 +31,7 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookNew" xml:space="preserve">
-    <value>Outlook (new)</value>
+    <value>Outlook (nou)</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Acces Outlook Web</value>
@@ -175,9 +175,9 @@
     <value>Implicit</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Deschisă la culoare</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Închisă la culoare</value>
   </data>
 </root>

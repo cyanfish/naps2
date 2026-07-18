@@ -340,10 +340,10 @@
     <value>NAPS2 je popolnoma brezplačen. Razmislite o donaciji.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
-    <value>Leave a Review</value>
+    <value>Pustite oceno</value>
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
-    <value>Like NAPS2?</value>
+    <value>Vam je NAPS2 všeč?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>SANE gonilnik ni na voljo. Preverite namestitev potrebnega dodatka:</value>

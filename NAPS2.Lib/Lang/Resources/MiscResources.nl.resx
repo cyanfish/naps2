@@ -31,25 +31,25 @@
     <value>Weet u zeker dat u profiel {0} wilt verwijderen?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>Bestand {0} bestaat al. Wilt u het bestand overschrijven?</value>
+    <value>Het bestand {0} bestaat al. Wilt u het overschrijven?</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Verwijderen</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>Kan de geselecteerde scanner niet vinden.</value>
+    <value>De geselecteerde scanner kon niet worden gevonden.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
     <value>De geselecteerde scanner is offline.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>U heeft geen rechten om hier bestanden op te slaan.</value>
+    <value>U hebt geen toestemming om bestanden op deze locatie op te slaan.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Fout</value>
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
-    <value>Bitmapbestanden (*.bmp)</value>
+    <value>Bitmap-bestanden (*.bmp)</value>
   </data>
   <data name="FileTypeEmf" xml:space="preserve">
     <value>Enhanced Windows Metafile (*.emf)</value>
@@ -100,7 +100,7 @@
     <value>Kies een profiel voor het scannen.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Fout met het stuurprogramma van de scanner.</value>
+    <value>Er is een fout opgetreden met het stuurprogramma van de scanner.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versie {0}</value>
@@ -127,7 +127,7 @@
     <value>Geselecteerd ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
-    <value>Geschatte omvang: {0} MB</value>
+    <value>Geschatte grootte: {0} MB</value>
   </data>
   <data name="FilesProgressFormat" xml:space="preserve">
     <value>{0} / {1} bestanden</value>
@@ -145,10 +145,10 @@
     <value>Fout bij downloaden</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>Download mislukt voor 1 of meerdere bestanden.</value>
+    <value>Eén of meer bestanden konden niet worden gedownload.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>Aangepast ({0}x{1} {2})</value>
+    <value>Aangepast ({0}x{1}{2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Scannen</value>
@@ -157,7 +157,7 @@
     <value>Weet u zeker dat u wijzigingen ongedaan wilt maken aan {0} afbeelding(en)?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Afbeeldingen resetten</value>
+    <value>Afbeelding herstellen</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
     <value>U heeft niet-opgeslagen wijzigingen. Weet u zeker dat u wilt afsluiten en wijzigingen annuleren?</value>
@@ -178,10 +178,10 @@
     <value>Deze scanner ondersteunt geen automatische documentinvoer. Als uw scanner dit wel heeft, probeer dan een andere driver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Geen pagina's in de invoerlade.</value>
+    <value>Invoerlade is leeg.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>U heeft geen toestemming voor kopiëren van inhoud uit bestand '{0}'.</value>
+    <value>U hebt geen toestemming om inhoud van het bestand '{0}' te kopiëren.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Er was een fout bij het opslaan van het bestand.</value>
@@ -190,19 +190,19 @@
     <value>van {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Er is een onbekende fout opgetreden tijdens de batch scan.</value>
+    <value>Er is een onbekende fout opgetreden tijdens de batchscan.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Batch geannuleerd.</value>
+    <value>Batchscan geannuleerd.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
     <value>Annuleren....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Batch succesvol voltooid.</value>
+    <value>Batchscan succesvol voltooid.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Batch scan gestopt door fout.</value>
+    <value>Batchscan gestopt vanwege een fout.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>Pagina {0} aan het scannen...</value>
@@ -211,7 +211,7 @@
     <value>Pagina {0} (scan {1}) aan het scannen...</value>
   </data>
   <data name="BatchStatusWaitingForScan" xml:space="preserve">
-    <value>Wacht op scan {0}...</value>
+    <value>Wachten op scan {0}...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuleren</value>
@@ -220,7 +220,7 @@
     <value>Sluiten</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Batchresultaten opslaan...</value>
+    <value>Batchresultaten aan het opslaan...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>De geselecteerde scanner ondersteunt geen dubbelzijdig scannen. Als uw scanner dit hoort te ondersteunen, probeer dan een andere driver.</value>
@@ -229,10 +229,10 @@
     <value>{0} / {1}</value>
   </data>
   <data name="ImportingFormat" xml:space="preserve">
-    <value>Importeren {0}...</value>
+    <value>{0} importeren...</value>
   </data>
   <data name="ImportProgress" xml:space="preserve">
-    <value>Voortgang importeren</value>
+    <value>Voortgang van importeren</value>
   </data>
   <data name="Recovering" xml:space="preserve">
     <value>Herstellen...</value>
@@ -244,16 +244,16 @@
     <value>Afbeeldingen opslaan</value>
   </data>
   <data name="SaveImagesProgress" xml:space="preserve">
-    <value>Voortgang afbeeldingen opslaan</value>
+    <value>Voortgang van afbeeldingen opslaan</value>
   </data>
   <data name="SavePdf" xml:space="preserve">
     <value>PDF opslaan</value>
   </data>
   <data name="SavePdfProgress" xml:space="preserve">
-    <value>Voortgang PDF opslaan</value>
+    <value>Voortgang van PDF opslaan</value>
   </data>
   <data name="SavingFormat" xml:space="preserve">
-    <value>Opslaan {0}...</value>
+    <value>{0} aan het opslaan...</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Afdrukken</value>
@@ -262,7 +262,7 @@
     <value>Kopiëren...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>Voortgang kopiëren</value>
+    <value>Voortgang van kopiëren</value>
   </data>
   <data name="Importing" xml:space="preserve">
     <value>Importeren...</value>
@@ -271,7 +271,7 @@
     <value>PDF e-mailen</value>
   </data>
   <data name="EmailPdfProgress" xml:space="preserve">
-    <value>Voortgang PDF e-mailen</value>
+    <value>Voortgang van PDF e-mailen</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
     <value>Er was een fout bij het automatisch opslaan.</value>
@@ -289,7 +289,7 @@
     <value>Het deksel van de scanner is open.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>Er is papier vastgelopen in de scanner.</value>
+    <value>De scanner heeft een papierstoring.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>De scanner warmt op.</value>
@@ -313,43 +313,43 @@
     <value>Weet u zeker dat u "{0}" wilt verwijderen?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>Overschrijven bestand mislukt want het is in gebruik.</value>
+    <value>Het bestand kon niet worden overschreven omdat het momenteel in gebruik is.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
     <value>Rechtzetten...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Voortgang rechtzetten</value>
+    <value>Voortgang van rechtzetten</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
     <value>Download vereist</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Er is een additioneel component nodig om deze PDF te importeren. Nu downloaden?</value>
+    <value>Er is een extra onderdeel nodig om dit PDF-bestand te importeren. Wilt u het nu downloaden?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Weet u zeker dat u de batch scan wilt annuleren?</value>
+    <value>Weet u zeker dat u de batchscan wilt annuleren?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Annuleer batch</value>
+    <value>Annuleer batchscan</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Doneren</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 is helemaal gratis. Overweeg een donatie.</value>
+    <value>NAPS2 is helemaal gratis. U kunt het project steunen door een donatie te overwegen.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
     <value>Schrijf een recensie</value>
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
-    <value>Vind je NAPS2 leuk?</value>
+    <value>Vind u NAPS2 leuk?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>De SANE driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
+    <value>De SANE-driver is niet beschikbaar. Installeer de vereiste pakketten:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>De OCR-engine is niet beschikbaar. Installeer het vereiste pakket:</value>
+    <value>Het OCR-programma is niet beschikbaar. Installeer het vereiste pakket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>De gekozen driver wordt niet ondersteund op dit systeem.</value>
@@ -361,7 +361,7 @@
     <value>OCR uitvoeren...</value>
   </data>
   <data name="UpdateProgress" xml:space="preserve">
-    <value>Voortgang bijwerken</value>
+    <value>Updatevoortgang</value>
   </data>
   <data name="Updating" xml:space="preserve">
     <value>Bijwerken...</value>
@@ -373,7 +373,7 @@
     <value>Controleren...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Controleren van updates is uitgeschakeld.</value>
+    <value>Controleren op updates is uitgeschakeld.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
     <value>Er was een fout bij het installeren van de update.</value>
@@ -382,7 +382,7 @@
     <value>Installeer {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>Een update is beschikbaar.</value>
+    <value>Er is een nieuwe update beschikbaar.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
     <value>Er was een fout bij het autoriseren.</value>

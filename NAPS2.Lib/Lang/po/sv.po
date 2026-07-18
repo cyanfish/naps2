@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -1844,7 +1844,7 @@ msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "{0} bild(er) skannad(e) på {1} i {2} kanske inte har sparats, och är återställningsbara. Vill du återställa dem?"
+msgstr "{0} bild(er) skannad(e) {1} kl. {2} kanske inte har sparats och går att återställa. Vill du återställa dem?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

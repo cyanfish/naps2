@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr "Типова поведінка, коли натиснуто кнопку \"Зберегти\":"
+msgstr "Стандартна дія кнопки «Зберегти»:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr "Типова поведінка, коли натиснуто кнопку \"Сканувати\":"
+msgstr "Стандартна дія кнопки «Сканувати»:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr "Вибір в меню \"Сканувати\" змінює типовий профіль"
+msgstr "Меню «Сканувати» змінює профіль за замовчуванням"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
@@ -37,19 +37,19 @@ msgstr "Знайдено 1 пристрій."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "Кольорове 24 біти"
+msgstr "Кольоровий, 24-бітний"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr "A3 (297 x 420 мм)"
+msgstr "A3 (297x420 мм)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr "A4 (210 x 297 мм)"
+msgstr "A4 (210x297 мм)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5 (148 x 210 мм)"
+msgstr "A5 (148x210 мм)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
@@ -70,7 +70,7 @@ msgstr "Додатково"
 
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
-msgstr "Розширені параметри профілю"
+msgstr "Додаткові параметри профілю"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -78,11 +78,11 @@ msgstr "Всі ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr "Всі файли"
+msgstr "Усі файли"
 
 #: UiStrings.resx$AllowAnnotations$Message
 msgid "Allow Annotations"
-msgstr "Дозволити аннотації"
+msgstr "Дозволити примітки"
 
 #: UiStrings.resx$AllowContentCopying$Message
 msgid "Allow Content Copying"
@@ -98,7 +98,7 @@ msgstr "Дозволити складання документу"
 
 #: UiStrings.resx$AllowDocumentModification$Message
 msgid "Allow Document Modification"
-msgstr "Дозволити модифікацію документу"
+msgstr "Дозволити змінювати документ"
 
 #: UiStrings.resx$AllowFormFilling$Message
 msgid "Allow Form Filling"
@@ -114,15 +114,15 @@ msgstr "Дозволити друк"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
-msgstr "Альтенативна віддаленість"
+msgstr "Альтернативне усунення чергування"
 
 #: UiStrings.resx$AltInterleave$Message
 msgid "Alternate Interleave"
-msgstr "Альтернативна міжчерговість"
+msgstr "Альтернативне чергування"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr "Завжди питати"
+msgstr "Завжди запитувати"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -131,48 +131,48 @@ msgstr "Завжди запитувати"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Для імпорту цього файлу PDF потрбно встановити додатковий компонент. Чи завантажити його зараз?"
+msgstr "Для імпорту цього PDF-файлу потрібен додатковий компонент. Бажаєте завантажити його зараз?"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr "Під час цифрового розпізнавання трапилася помилка."
+msgstr "Під час розпізнавання тексту сталася помилка."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr "Під час спроби авторизації трапилася помилка."
+msgstr "Під час спроби авторизації сталася помилка."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
-msgstr "Під час спроби автоматичного збереження трапилася помилка."
+msgstr "Під час спроби автоматичного збереження сталася помилка."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
-msgstr "Під час встановлення оновлення трапилася помилка."
+msgstr "Під час спроби встановити оновлення сталася помилка."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
-msgstr "Під час збереження файлу трапилась помилка."
+msgstr "Під час спроби зберегти файл сталася помилка."
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr "Під час надсилання ел. пошти сталася помилка."
+msgstr "Під час спроби надіслати електронного листа сталася помилка."
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
-msgstr "Під час надсилання ел. пошти сталася помилка."
+msgstr "Під час спроби надіслати електронного листа сталася помилка."
 
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "Помилка драйвера сканування."
+msgstr "Сталася помилка з драйвером сканування."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "Операція в процесі виконання. Дійсно скасувати цю операцію та вийти?"
+msgstr "Операція виконується. Ви впевнені, що хочете вийти та скасувати операцію?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr "Під час пакетного сканування трапилася невідома помилка."
+msgstr "Під час пакетного сканування сталася невідома помилка."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -180,7 +180,7 @@ msgstr "Доступне оновлення."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "Доступне оновлення пакету розпізнавання."
+msgstr "Доступне оновлення для розпізнавання тексту (OCR)."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
@@ -192,11 +192,11 @@ msgstr "Пошта Apple"
 
 #: UiStrings.resx$Application$Message
 msgid "Application"
-msgstr "Застосунок"
+msgstr "Програма"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "Визначити яскравість/контрастність після сканування"
+msgstr "Застосувати яскравість/контрастність після сканування"
 
 #: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
@@ -204,35 +204,35 @@ msgstr "Застосувати до всіх {0} вибраних зображе
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "Дійсно скасувати пакетне сканування"
+msgstr "Ви впевнені, що хочете скасувати пакетне сканування?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
-msgstr "Дійсно очистити профіль(лі) {0}?"
+msgstr "Ви впевнені, що хочете очистити {0} елементів?"
 
 #: MiscResources.resx$ConfirmDelete$Message
 msgid "Are you sure you want to delete \"{0}\"?"
-msgstr "Дійсно вилучити \"{0}\"?"
+msgstr "Ви впевнені, що хочете видалити «{0}»?"
 
 #: MiscResources.resx$ConfirmDeleteSingleProfile$Message
 msgid "Are you sure you want to delete the profile {0}?"
-msgstr "Дійсно вилучити профіль {0}?"
+msgstr "Ви впевнені, що хочете видалити профіль {0}?"
 
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
-msgstr "Дійсно вилучити {0} профілі(в)?"
+msgstr "Ви впевнені, що хочете видалити {0} елементів?"
 
 #: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
 msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Дійсно вилучити {0} профілів?"
+msgstr "Ви впевнені, що хочете видалити {0} профілів?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr "Дійсно прибрати спільний доступ {0}?"
+msgstr "Ви впевнені, що хочете скасувати спільний доступ до {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
-msgstr "Дійсно скасувати зміни в {0} зображеннях ?"
+msgstr "Ви впевнені, що хочете скасувати зміни, внесені до {0} зображень?"
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
@@ -257,7 +257,7 @@ msgstr "Автоматично"
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr "Автоматично зберігати налаштування"
+msgstr "Налаштування автоматичного збереження"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -277,7 +277,7 @@ msgstr "Автоматичне збільшення номера (4 цифри)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "Автоматично розпізнавати після сканування"
+msgstr "Автоматично запускати розпізнавання тексту (OCR) після сканування"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -298,7 +298,7 @@ msgstr "Пакетне сканування скасовано."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "Пакетне сканування успішно виконано."
+msgstr "Пакетне сканування успішно завершено."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
@@ -306,15 +306,15 @@ msgstr "Пакетне сканування зупинено через поми
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr "Найкраще"
+msgstr "Найкращий"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
-msgstr "Глибина в бітах:"
+msgstr "Глибина кольору:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
-msgstr "Файли зображень *.bmp"
+msgstr "Файли зображень (*.bmp)"
 
 #: SettingsResources.resx$BitDepth_1BlackAndWhite$Message
 #: UiStrings.resx$BlackAndWhite$Message
@@ -327,7 +327,7 @@ msgstr "Порожні сторінки"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
-msgstr "Яскравість / контрастність"
+msgstr "Яскравість / Контрастність"
 
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
@@ -335,11 +335,11 @@ msgstr "Яскравість:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr "Не знаходите ваш сканер? Перегляньте обмеження збірки Flatpak NAPS2."
+msgstr "Не можете знайти свій сканер? Прочитайте про обмеження NAPS2 Flatpak."
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -364,7 +364,7 @@ msgstr "Змінити"
 
 #: UiStrings.resx$CheckForUpdates$Message
 msgid "Check for updates"
-msgstr "Перевірка оновлень"
+msgstr "Перевірити наявність оновлень"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
@@ -372,7 +372,7 @@ msgstr "Виконується перевірка..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
-msgstr "Виберіть постачальника послуг ел. пошти"
+msgstr "Виберіть постачальника електронної пошти"
 
 #: MiscResources.resx$ChooseProfile$Message
 msgid "Choose Profile"
@@ -393,7 +393,7 @@ msgstr "Очистити все"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
-msgstr "Прибирати зображення після збереження"
+msgstr "Очистити зображення після збереження"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -405,7 +405,7 @@ msgstr "Об'єднати"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
-msgstr "Обмін інформацією зі сканером було перервано."
+msgstr "Зв'язок з пристроєм сканування було перервано."
 
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
@@ -417,11 +417,11 @@ msgstr "Стиснення:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr "З'єднатися"
+msgstr "Підключитися"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr "Помилка під час з'єднання."
+msgstr "Помилка підключення."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -433,15 +433,15 @@ msgstr "Копіювати"
 
 #: MiscResources.resx$CopyProgress$Message
 msgid "Copy Progress"
-msgstr "Копіювання"
+msgstr "Виконується копіювання"
 
 #: MiscResources.resx$Copying$Message
 msgid "Copying..."
-msgstr "Виконується копіювання..."
+msgstr "Копіювання..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr "Всі права застережено {0} Розробники NAPS2"
+msgstr "Авторське право належить {0} авторам NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -453,7 +453,7 @@ msgstr "Обрізати"
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
-msgstr "Обрізати за розмірами стоірнки"
+msgstr "Обрізати до розміру сторінки"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -461,15 +461,15 @@ msgstr "Користувача ({0}x{1} {2})"
 
 #: UiStrings.resx$PageSizeFormTitle$Message
 msgid "Custom Page Size"
-msgstr "Розмір сторінки користувача"
+msgstr "Налаштування розміру сторінки"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr "Власна роздільна здатність"
+msgstr "Роздільна здатність"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
-msgstr "Ротація користувачем"
+msgstr "Налаштування повороту"
 
 #: SettingsResources.resx$EmailProviderType_CustomSmtp$Message
 msgid "Custom SMTP"
@@ -486,7 +486,7 @@ msgstr "Темна"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
-msgstr "День (1-31)"
+msgstr "День (01-31)"
 
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
@@ -494,11 +494,11 @@ msgstr "День (1-31)"
 #: SettingsResources.resx$WiaVersion_Default$Message
 #: UiStrings.resx$Default$Message
 msgid "Default"
-msgstr "Типово"
+msgstr "За замовчуванням"
 
 #: UiStrings.resx$DefaultFilePathLabel$Message
 msgid "Default File Path:"
-msgstr "Типовий шлях до файлу:"
+msgstr "Шлях до файлу за замовчуванням:"
 
 #: UiStrings.resx$Deinterleave$Message
 msgid "Deinterleave"
@@ -507,7 +507,7 @@ msgstr "Позбавити чергування"
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
 msgid "Delete"
-msgstr "Вилучити"
+msgstr "Видалити"
 
 #: UiStrings.resx$Deskew$Message
 msgid "Deskew"
@@ -515,15 +515,15 @@ msgstr "Вирівняти перекіс"
 
 #: MiscResources.resx$AutoDeskewProgress$Message
 msgid "Deskew Progress"
-msgstr "Вирівнювання перекосу"
+msgstr "Виконується вирівнювання"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr "Вирівняти перекіс відсканованих сторінок"
+msgstr "Вирівняти відскановані сторінки"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
-msgstr "Вирівнювання виконується..."
+msgstr "Вирівнювання..."
 
 #: UiStrings.resx$DeviceLabel$Message
 msgid "Device:"
@@ -539,36 +539,36 @@ msgstr "Назва:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
-msgstr "Зміни до документу"
+msgstr "Виправлення документа"
 
 #: MiscResources.resx$Donate$Message
 #: UiStrings.resx$Donate$Message
 msgid "Donate"
-msgstr "Ваш внесок"
+msgstr "Пожертвувати"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
-msgstr "Завершити"
+msgstr "Готово"
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
-msgstr "Звантаження"
+msgstr "Завантажити"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
-msgstr "Помилка звантаження"
+msgstr "Помилка завантаження"
 
 #: MiscResources.resx$DownloadNeeded$Message
 msgid "Download Needed"
-msgstr "Потрібно звантажити"
+msgstr "Необхідно завантажити"
 
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
-msgstr "Поступ звантаження"
+msgstr "Виконується завантаження"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr "точок на дюйм"
+msgstr "Dpi"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -584,7 +584,7 @@ msgstr "Мережевий драйвер ESCL"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
-msgstr "Драйвер USB для ESCL"
+msgstr "USB-драйвер ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -592,12 +592,12 @@ msgstr "Редагувати"
 
 #: UiStrings.resx$EditWithAppName$Message
 msgid "Edit with {0}"
-msgstr "Редагувати у {0}"
+msgstr "Редагувати за допомогою {0}"
 
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
 msgid "Edit with..."
-msgstr "Редагувати у..."
+msgstr "Редагувати за допомогою..."
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -610,19 +610,19 @@ msgstr "Надіслати все як PDF"
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
 msgid "Email PDF"
-msgstr "PDF поштою"
+msgstr "Надіслати PDF поштою"
 
 #: MiscResources.resx$EmailPdfProgress$Message
 msgid "Email PDF Progress"
-msgstr "Надсилання PDF ел. поштою"
+msgstr "Надсилання PDF через електронну пошту"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr "Вибрано ел. пошту"
+msgstr "Відправити позначені"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr "Вибрано надіслати PDF ел. поштою"
+msgstr "Надіслати вибране як PDF через електронну пошту"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -635,7 +635,7 @@ msgstr "Увімкнути автоматичне збереження"
 
 #: UiStrings.resx$EnableDebugLogging$Message
 msgid "Enable debug logging"
-msgstr "Увімкнути журнал зневадження"
+msgstr "Увімкнути журнал налагодження"
 
 #: UiStrings.resx$EncryptPdf$Message
 msgid "Encrypt PDF"
@@ -656,7 +656,7 @@ msgstr "Помилка"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
-msgstr "Помилка під час запуску застосунку {0}"
+msgstr "Помилка під час запуску програми {0}"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -665,15 +665,15 @@ msgstr "Приблизний розмір звантаження: {0} МБ"
 
 #: MiscResources.resx$FileTypeExif$Message
 msgid "Exchangeable Image File (*.exif)"
-msgstr "Файл зображень для обміну (*.exif)"
+msgstr "Файл метаданих (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr "Прибрати порожні сторінки"
+msgstr "Виключити порожні сторінки"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr "Швидко"
+msgstr "Швидкий"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -681,27 +681,27 @@ msgstr "Автоподача"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "Назва файлу"
+msgstr "Ім'я файлу:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
-msgstr "Шлях файлу:"
+msgstr "Шлях до файлу:"
 
 #: UiStrings.resx$OcrPreProcessing$Message
 msgid "Fix white balance and remove noise"
-msgstr "Виправляти баланс білого кольору та прибирати шум"
+msgstr "Виправити баланс білого та видалити шум"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
-msgstr "Віддзеркалити"
+msgstr "Перевернути"
 
 #: UiStrings.resx$FlipBackSidesOfDuplexPages$Message
 msgid "Flip back sides of duplex pages"
-msgstr "Віддзеркалити задній бік двосторонніх сторінок"
+msgstr "Перевернути зворотні сторони двосторонніх сторінок"
 
 #: UiStrings.resx$FlipDuplexedPages$Message
 msgid "Flip duplexed pages"
-msgstr "Віддзеркалити двосторонні сторінки"
+msgstr "Перевернути двосторонні сторінки"
 
 #: UiStrings.resx$JpegQualityHelp$Message
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
@@ -709,7 +709,7 @@ msgstr "Для отримання кращої якості зображень J
 
 #: MiscResources.resx$FileTypeGif$Message
 msgid "GIF File (*.gif)"
-msgstr "GIF файл (*.gif)"
+msgstr "Файл GIF (*.gif)"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -721,7 +721,7 @@ msgstr "Зі скла"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
-msgstr ""
+msgstr "Gmail"
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
@@ -741,11 +741,11 @@ msgstr "Відтінок / насиченість"
 
 #: UiStrings.resx$IpHost$Message
 msgid "IP/Host"
-msgstr "IP-адреса/назва хосту"
+msgstr "IP-адреса/Хост"
 
 #: UiStrings.resx$IconsFrom$Message
 msgid "Icons from:"
-msgstr "Використання значків:"
+msgstr "Іконки з:"
 
 #: UiStrings.resx$Image$Message
 msgid "Image"
@@ -774,11 +774,11 @@ msgstr "Імпортувати"
 
 #: MiscResources.resx$ImportProgress$Message
 msgid "Import Progress"
-msgstr "Імпорт"
+msgstr "Виконання імпорту"
 
 #: MiscResources.resx$ImportingFormat$Message
 msgid "Importing {0}..."
-msgstr "Виконується імпорт {0}..."
+msgstr "Виконується імпорт «{0}»..."
 
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
@@ -798,11 +798,11 @@ msgstr "Помилка при встановленні"
 
 #: MiscResources.resx$InstallCompletePromptRestart$Message
 msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Встановлення завершено. Перезапустити NAPS2?"
+msgstr "Встановлення завершено. Бажаєте перезапустити NAPS2 зараз?"
 
 #: MiscResources.resx$InstallFailed$Message
 msgid "Installation failed."
-msgstr "Встановлення завершилося невдало."
+msgstr "Помилка під час встановлення."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
@@ -810,7 +810,7 @@ msgstr "Інтерфейс"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
-msgstr "Чергування"
+msgstr "Чергувати"
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
@@ -831,7 +831,7 @@ msgstr "Зберігати зображення між сесіями"
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr "Клавіатурні скорочення"
+msgstr "Комбінації клавіш"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -839,7 +839,7 @@ msgstr "Ключові слова:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -847,7 +847,7 @@ msgstr "Мова"
 
 #: MiscResources.resx$LeaveAReview$Message
 msgid "Leave a Review"
-msgstr ""
+msgstr "Залишити відгук"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
@@ -867,16 +867,16 @@ msgstr "Подобається NAPS2?"
 
 #: UiStrings.resx$LoadIn$Message
 msgid "Load images into NAPS2"
-msgstr "Завантажити зображення до NAPS2"
+msgstr "Завантажити зображення в NAPS2"
 
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Створити PDF файл з можливістю пошуку"
+msgstr "Створити PDF-файли з можливістю пошуку за допомогою OCR"
 
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr "Вручну IP"
+msgstr "Ручна IP-адреса"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -884,7 +884,7 @@ msgstr "Максимальна якість (великий розмір)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
-msgstr "Передача засобами пам'яти"
+msgstr "Передача через пам'ять"
 
 #: UiStrings.resx$Metadata$Message
 msgid "Metadata"
@@ -892,23 +892,23 @@ msgstr "Метадані"
 
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
-msgstr "Хвилини (00-59)"
+msgstr "Хвилина (00-59)"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
-msgstr "Місяць (1-12)"
+msgstr "Місяць (01-12)"
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
-msgstr "Докладно"
+msgstr "Більше інформації"
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
-msgstr "Перемістити нижче"
+msgstr "Перемістити вниз"
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
-msgstr "Перемістити вище"
+msgstr "Перемістити вгору"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -920,25 +920,25 @@ msgstr "Декілька мов..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
-msgstr "Сканування багатьох сторінок (фіксована затримка між скануваннями)"
+msgstr "Багаторазове сканування (фіксована затримка між скануваннями)"
 
 #: UiStrings.resx$MultipleScansPrompt$Message
 msgid "Multiple scans (prompt between scans)"
-msgstr "Сканування багатьох сторінок (запит на продовження між скануваннями)"
+msgstr "Багаторазове сканування (запит на продовження між скануваннями)"
 
 #: MiscResources.resx$NAPS2$Message
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr ""
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 є вільним програмним забезпеченням. Запрошуємо зробити ваш внесок."
+msgstr "NAPS2 є повністю безкоштовним. Розгляньте можливість зробити пожертвування."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -962,7 +962,7 @@ msgstr "Створити профіль"
 
 #: UiStrings.resx$Next$Message
 msgid "Next"
-msgstr "Далі"
+msgstr "Наступний"
 
 #: UiStrings.resx$BatchPromptFormTitle$Message
 msgid "Next Scan"
@@ -984,7 +984,7 @@ msgstr "У пристрої відсутній папір."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr "Відсутній постачальник послуг"
+msgstr "Відсутній постачальник послуг."
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
@@ -993,7 +993,7 @@ msgstr "Не знайдено жодного сканера."
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr "Відсутні оновлення"
+msgstr "Немає доступних оновлень."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -1001,7 +1001,7 @@ msgstr "Нічого"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Not Another PDF Scanner"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -1017,15 +1017,15 @@ msgstr "Розпізнати"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
-msgstr "Звантаження файлів для розпізнавання"
+msgstr "Завантаження файлів для розпізнавання"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr "Виконується розпізнавання"
+msgstr "Виконується розпізнавання тексту"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
-msgstr "Налаштування параметрів розпізнавання"
+msgstr "Налаштування розпізнавання тексту"
 
 #: UiStrings.resx$OcrLanguageLabel$Message
 msgid "OCR language:"
@@ -1037,11 +1037,11 @@ msgstr "Режим розпізнавання:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr "Гаразд"
+msgstr "OK"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
-msgstr "Ширина зсуву на основі вирівнювання (WIA)"
+msgstr "Ширина зміщення на основі вирівнювання (WIA)"
 
 #: SettingsResources.resx$TwainImpl_OldDsm$Message
 msgid "Old DSM"
@@ -1049,15 +1049,15 @@ msgstr "Застарілий DSM"
 
 #: UiStrings.resx$OneFilePerPage$Message
 msgid "One file per page"
-msgstr "Кожна сторінка в окремий файл"
+msgstr "Один файл на сторінку"
 
 #: UiStrings.resx$OneFilePerScan$Message
 msgid "One file per scan"
-msgstr "Все відскановане в одному файлі"
+msgstr "Один файл на сканування"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded."
-msgstr "Не вдалося звантажити один або більше файлів."
+msgstr "Не вдалося завантажити один або декілька файлів."
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
@@ -1065,7 +1065,7 @@ msgstr "Дозволити лише один примірник NAPS2"
 
 #: UiStrings.resx$OpenFolder$Message
 msgid "Open Folder"
-msgstr "Відкрити каталог"
+msgstr "Відкрити папку"
 
 #: MiscResources.resx$ActiveOperations$Message
 msgid "Operation in Progress"
@@ -1077,7 +1077,7 @@ msgstr "Outlook (новий)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
-msgstr ""
+msgstr "Веб-доступ до Outlook"
 
 #: UiStrings.resx$Output$Message
 msgid "Output"
@@ -1085,7 +1085,7 @@ msgstr "Результат"
 
 #: MiscResources.resx$OverwriteFile$Message
 msgid "Overwrite File"
-msgstr "Перезаписати файл"
+msgstr "Перезаписування файлу"
 
 #: UiStrings.resx$OwnerPasswordLabel$Message
 msgid "Owner Password:"
@@ -1098,27 +1098,27 @@ msgstr "Документ PDF (*.pdf)"
 #: UiStrings.resx$PdfSettings$Message
 #: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
-msgstr "Налаштування PDF "
+msgstr "Налаштування PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
-msgstr "Файл PDF збережено."
+msgstr "PDF збережено."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1151,27 +1151,27 @@ msgstr "Порт"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr "Післяобробка"
+msgstr "Пост-обробка"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr "Автоматично розпізнавати після сканування"
+msgstr "Попередньо запускати розпізнавання тексту (OCR) після сканування"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
-msgstr "Натисніть Старт, коли будете готові."
+msgstr "Натисніть «Запустити», коли будете готові."
 
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
-msgstr "Перегляд"
+msgstr "Попередній перегляд"
 
 #: UiStrings.resx$PreviewLabel$Message
 msgid "Preview:"
-msgstr "Перегляд:"
+msgstr "Попередній перегляд:"
 
 #: UiStrings.resx$Previous$Message
 msgid "Previous"
-msgstr "Попередня"
+msgstr "Попередній"
 
 #: MiscResources.resx$Print$Message
 #: UiStrings.resx$Print$Message
@@ -1193,11 +1193,11 @@ msgstr "Профілі"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
-msgstr "Запит на продовження, якщо вибрано"
+msgstr "Запитати, якщо вибрано"
 
 #: UiStrings.resx$PromptForFilePath$Message
 msgid "Prompt for file path"
-msgstr "Запит на шлях до файлу"
+msgstr "Запитати шлях до файлу"
 
 #: UiStrings.resx$Provider$Message
 msgid "Provider"
@@ -1205,7 +1205,7 @@ msgstr "Постачальник"
 
 #: UiStrings.resx$ReadyForScan$Message
 msgid "Ready for scan {0}."
-msgstr "Готовий сканувати {0)."
+msgstr "Готовий сканувати {0}."
 
 #: UiStrings.resx$Recover$Message
 msgid "Recover"
@@ -1213,7 +1213,7 @@ msgstr "Відновити"
 
 #: UiStrings.resx$RecoverFormTitle$Message
 msgid "Recover Scanned Images"
-msgstr "Відновити відскановані зображення"
+msgstr "Відновлення сканованих зображень"
 
 #: MiscResources.resx$Recovering$Message
 msgid "Recovering..."
@@ -1233,7 +1233,7 @@ msgstr "Повторити {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
-msgstr "Зберегти налаштуваання"
+msgstr "Зберегти налаштування"
 
 #: UiStrings.resx$Reorder$Message
 msgid "Reorder"
@@ -1245,7 +1245,7 @@ msgstr "Перезавантажити зображення"
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
-msgstr "Перевантажити зображення"
+msgstr "Перезавантажити зображення"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1253,23 +1253,23 @@ msgstr "Роздільна здатність:"
 
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
-msgstr "Скинути до типових"
+msgstr "Відновити стандартні налаштування"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
-msgstr "Зворотній порядок"
+msgstr "У зворотному порядку"
 
 #: UiStrings.resx$ReverseAll$Message
 msgid "Reverse All"
-msgstr "Всі у зворотньому порядку"
+msgstr "Всі у зворотному порядку"
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
-msgstr "Вибрані у зворотньому порядку"
+msgstr "Вибрані у зворотному порядку"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
-msgstr "Повернути"
+msgstr "Відновити"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
@@ -1277,23 +1277,23 @@ msgstr "Вправо"
 
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
-msgstr "Обернути"
+msgstr "Повернути"
 
 #: UiStrings.resx$RotateLeft$Message
 msgid "Rotate Left"
-msgstr "Обернути ліворуч"
+msgstr "Повернути вліво"
 
 #: UiStrings.resx$RotateRight$Message
 msgid "Rotate Right"
-msgstr "Обернути праворуч"
+msgstr "Повернути вправо"
 
 #: UiStrings.resx$RunInBackground$Message
 msgid "Run in Background"
-msgstr "Виконувати на задньому фоні"
+msgstr "Виконувати у фоновому режимі"
 
 #: MiscResources.resx$RunningOcr$Message
 msgid "Running OCR..."
-msgstr "Виконується розпізнавання..."
+msgstr "Виконується розпізнавання тексту..."
 
 #: UiStrings.resx$SaneDriver$Message
 msgid "SANE Driver"
@@ -1314,12 +1314,12 @@ msgstr "Зберегти все як зображення"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr "Зберегти все у PDF"
+msgstr "Зберегти все як PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
 msgid "Save Images"
-msgstr "Зберегти як зображення"
+msgstr "Зберегти зображення"
 
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
@@ -1328,7 +1328,7 @@ msgstr "Виконується збереження зображень"
 #: MiscResources.resx$SavePdf$Message
 #: UiStrings.resx$SavePdf$Message
 msgid "Save PDF"
-msgstr "Зберегти у PDF"
+msgstr "Зберегти PDF"
 
 #: MiscResources.resx$SavePdfProgress$Message
 msgid "Save PDF Progress"
@@ -1345,23 +1345,23 @@ msgstr "Зберегти вибране як зображення"
 
 #: UiStrings.resx$SaveSelectedAsPdf$Message
 msgid "Save Selected as PDF"
-msgstr "Зберегти вибране у PDF"
+msgstr "Зберегти вибране як PDF"
 
 #: UiStrings.resx$SaveToSingleFile$Message
 msgid "Save to a single file"
-msgstr "Зберегти все в один файл"
+msgstr "Зберегти в один файл"
 
 #: UiStrings.resx$SaveToMultipleFiles$Message
 msgid "Save to multiple files"
-msgstr "Зберегти все в різні файли"
+msgstr "Зберегти в декількох файлах"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr "Збереження результатиів пакетного сканування..."
+msgstr "Збереження результатів пакетного сканування..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
-msgstr "Збереження {0}..."
+msgstr "Збереження «{0}»..."
 
 #: UiStrings.resx$ScaleWithWindow$Message
 msgid "Scale With Window"
@@ -1369,7 +1369,7 @@ msgstr "Масштабувати у вікні"
 
 #: UiStrings.resx$ScaleLabel$Message
 msgid "Scale:"
-msgstr "Масштабувати:"
+msgstr "Масштаб:"
 
 #: MiscResources.resx$Scan$Message
 #: UiStrings.resx$Scan$Message
@@ -1383,7 +1383,7 @@ msgstr "Налаштування сканування"
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 #: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr "Сканувати з типовим профілем"
+msgstr "Сканувати з профілем за замовчуванням"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
@@ -1395,7 +1395,7 @@ msgstr "Сканувати з профілем {0}"
 
 #: MiscResources.resx$ScannedImage$Message
 msgid "Scanned Image"
-msgstr "Зіскановане зображення"
+msgstr "Відскановане зображення"
 
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
@@ -1421,7 +1421,7 @@ msgstr "Пошук пристроїв..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
-msgstr "Секунда (1-59)"
+msgstr "Секунда (00-59)"
 
 #: UiStrings.resx$Select$Message
 msgid "Select"
@@ -1433,7 +1433,7 @@ msgstr "Вибрати все"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr "Виберіть пристрій"
+msgstr "Вибір пристрою"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1441,15 +1441,15 @@ msgstr "Вибрати джерело"
 
 #: MiscResources.resx$SelectProfileBeforeScan$Message
 msgid "Select a profile before clicking Scan."
-msgstr "Виберіть профіль перед скануванням."
+msgstr "Виберіть профіль перед натисканням кнопки «Сканувати»."
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
-msgstr "Виберіть одну або кілька мов::"
+msgstr "Виберіть одну або декілька мов:"
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
-msgstr "Вибрані ({0})"
+msgstr "Вибрано ({0})"
 
 #: UiStrings.resx$SeparateByPatchT$Message
 msgid "Separate files by Patch-T"
@@ -1457,7 +1457,7 @@ msgstr "Розділити файли за допомогою Patch-T"
 
 #: UiStrings.resx$SetDefault$Message
 msgid "Set Default"
-msgstr "Зробити типовим"
+msgstr "Встановити за замовчуванням"
 
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
@@ -1470,7 +1470,7 @@ msgstr "Спільний доступ"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr "Надавати доступ навіть тоді, коли NAPS2 буде закрито"
+msgstr "Надавати спільний доступ навіть тоді, коли NAPS2 закрито"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
@@ -1478,7 +1478,7 @@ msgstr "Налаштування сканера у спільному досту
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr "Сканери у спільному доступі можна використовувати на віддалених комп'ютерах локальної мережі. Для цього потрібно вибрати \"Драйвер ESCL\" в налаштуваннях профіля віддаленого комп'ютерау. "
+msgstr "Сканери, що використовуються спільно, можна використовувати з інших комп'ютерів у локальній мережі, вибравши «Драйвер ESCL» у налаштуваннях профілю NAPS2 іншого комп'ютера."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1486,7 +1486,7 @@ msgstr "Різкість"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
-msgstr "Скорочення"
+msgstr "Гарячі клавіші"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1494,15 +1494,15 @@ msgstr "Показати"
 
 #: UiStrings.resx$ShowProfilesToolbar$Message
 msgid "Show \"Profiles\" toolbar"
-msgstr "Показувати панель \"Профілі\""
+msgstr "Показати панель інструментів «Профілі»"
 
 #: UiStrings.resx$ShowNativeTwainProgress$Message
 msgid "Show native TWAIN progress"
-msgstr "Показувати нативне сканування TWAIN"
+msgstr "Показати нативне сканування TWAIN"
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr "Показувати нумерацію сторінок"
+msgstr "Показати номери сторінок"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
@@ -1510,7 +1510,7 @@ msgstr "Бічна панель"
 
 #: UiStrings.resx$SinglePageFiles$Message
 msgid "Single page files"
-msgstr "Файли з одинарною сторінкою"
+msgstr "Файли з однією сторінкою"
 
 #: UiStrings.resx$SingleScan$Message
 msgid "Single scan"
@@ -1518,7 +1518,7 @@ msgstr "Одноразове сканування"
 
 #: UiStrings.resx$SkipSavePrompt$Message
 msgid "Skip save prompt"
-msgstr "Пропускати запит на збереження"
+msgstr "Пропустити запит на збереження"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
@@ -1526,7 +1526,7 @@ msgstr "Розділити"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
-msgstr "Старт"
+msgstr "Запустити"
 
 #: UiStrings.resx$StopScannerSharing$Message
 msgid "Stop Scanner Sharing"
@@ -1555,42 +1555,42 @@ msgstr "Технічні деталі"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "Рушій розпізнавання (OCR) не доступний. Перевірте, чи встановлено такі пакети::"
+msgstr "Механізм розпізнавання тексту (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr "Час операції з розпізнавання вичерпано."
+msgstr "Час очікування розпізнавання тексту закінчився."
 
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "Драйвер SANE не доступний. Перевірте, чи встановлено такі пакети:"
+msgstr "Драйвер SANE недоступний. Переконайтеся, що встановлено необхідні пакети:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
-msgstr "Неможливо імпортувати файл '{0}'."
+msgstr "Не вдалося імпортувати файл «{0}»."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Неможливо імпортувати файл '{0}'. Можливо імпортувати лише файли PDF, які було створено NAPS2.."
+msgstr "Не вдалося імпортувати файл «{0}». Імпортувати можна лише PDF-файли, створені за допомогою NAPS2."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
-msgstr "Неможливо перезаписати файл, оскільки він зараз використовується."
+msgstr "Файл не вдалося перезаписати, оскільки він наразі використовується."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
-msgstr "Файл {0} вже існує. Перезаписати його?"
+msgstr "Файл {0} вже існує. Бажаєте замінити його?"
 
 #: UiStrings.resx$EncryptedFilePrompt$Message
 msgid "The following file is encrypted and requires a password to open:"
-msgstr "Цей файл зашифровано. Щоби його відкрити, потрібно зазначити пароль:"
+msgstr "Наступний файл зашифровано, і для його відкриття потрібен пароль:"
 
 #: MiscResources.resx$DevicePaperJam$Message
 #: SdkResources.resx$DevicePaperJam$Message
 msgid "The scanner has a paper jam."
-msgstr "Зминання паперу у сканері."
+msgstr "У сканері застряг папір."
 
 #: MiscResources.resx$DeviceWarmingUp$Message
 #: SdkResources.resx$DeviceWarmingUp$Message
@@ -1605,17 +1605,17 @@ msgstr "Відкрито кришку сканеру."
 #: MiscResources.resx$DriverNotSupported$Message
 #: SdkResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system."
-msgstr "Вибраний драйвер не підтримується системою."
+msgstr "Вибраний драйвер не підтримується в цій системі."
 
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
 msgid "The selected scanner could not be found."
-msgstr "Не знайдено вибраний сканер."
+msgstr "Не вдалося знайти вибраний сканер."
 
 #: MiscResources.resx$NoFeederSupport$Message
 #: SdkResources.resx$NoFeederSupport$Message
 msgid "The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver."
-msgstr "Вибраний сканер не підтримує автоматичну подачу паперу. Якщо ваш сканер все ж має автоматичну подачу паперу, спробуйте вибрати інший драйвер.."
+msgstr "Вибраний сканер не підтримує автоматичну подачу паперу. Якщо ваш сканер все ж має автоматичну подачу паперу, спробуйте вибрати інший драйвер."
 
 #: MiscResources.resx$NoDuplexSupport$Message
 #: SdkResources.resx$NoDuplexSupport$Message
@@ -1630,7 +1630,7 @@ msgstr "Вибраний сканер зайнятий."
 #: MiscResources.resx$DeviceOffline$Message
 #: SdkResources.resx$DeviceOffline$Message
 msgid "The selected scanner is offline."
-msgstr "Вибраний сканер вимкнено."
+msgstr "Вибраний сканер не підключений до мережі."
 
 #: SdkResources.resx$WorkerCrash$Message
 msgid "The worker process crashed."
@@ -1646,15 +1646,15 @@ msgstr "Тема:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
-msgstr "Параметри Tiff"
+msgstr "Параметри TIFF"
 
 #: UiStrings.resx$TimeBetweenScansLabel$Message
 msgid "Time between scans (seconds):"
-msgstr "Затримка між скануванням (у секундах)"
+msgstr "Затримка між скануванням (у секундах):"
 
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
@@ -1666,15 +1666,15 @@ msgstr "Інструменти"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
-msgstr "Реалізація Twain:"
+msgstr "Реалізація TWAIN:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr "US Legal (8.5x11 дюймів)"
+msgstr "US Legal (8,5x14 дюймів)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Letter (8.5x11 дюймів)"
+msgstr "US Letter (8,5x11 дюймів)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
@@ -1682,11 +1682,11 @@ msgstr "Скинути"
 
 #: UiStrings.resx$Undo$Message
 msgid "Undo"
-msgstr "Повернути"
+msgstr "Скасувати"
 
 #: UiStrings.resx$UndoFormat$Message
 msgid "Undo {0}"
-msgstr "Повернути {0}"
+msgstr "Скасувати {0}"
 
 #: SdkResources.resx$UnknownScanner$Message
 msgid "Unknown Scanner"
@@ -1710,7 +1710,7 @@ msgstr "Оновлення..."
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
-msgstr "Завантаження ел.пошти..."
+msgstr "Завантаження електронного листа..."
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1726,7 +1726,7 @@ msgstr "Пароль користувача:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
-msgstr "Для розпізнавання потрібно звантажити відповідні мовні файли."
+msgstr "Для розпізнавання тексту за допомогою OCR необхідно завантажити кожну мову, яку ви хочете сканувати."
 
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
@@ -1743,7 +1743,7 @@ msgstr "Драйвер WIA"
 
 #: UiStrings.resx$WaitingForTwain$Message
 msgid "Waiting for TWAIN to complete..."
-msgstr "Очікування завершення від TWAIN..."
+msgstr "Очікування завершення роботи TWAIN..."
 
 #: UiStrings.resx$WaitingForAuthorization$Message
 msgid "Waiting for authorization..."
@@ -1751,7 +1751,7 @@ msgstr "Очікування авторизації..."
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
-msgstr "Очікування на скан {0}..."
+msgstr "Очікування сканування {0}..."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
@@ -1759,7 +1759,7 @@ msgstr "Поріг білого кольору"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
-msgstr "Версія Wia:"
+msgstr "Версія WIA:"
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -1767,20 +1767,20 @@ msgstr "Рік"
 
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
-msgstr "Рік  (00-99)"
+msgstr "Рік (00-99)"
 
 #: MiscResources.resx$PdfNoPermissionToExtractContent$Message
 #: SdkResources.resx$PdfNoPermissionToExtractContent$Message
 msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "Відсутні права на копіювання вмісту файлу '{0}'."
+msgstr "Ви не маєте дозволу на копіювання вмісту з файлу «{0}»."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
-msgstr "Відсутні права для створення файлів у цьому каталозі.."
+msgstr "Ви не маєте дозволу на збереження файлів у цьому каталозі."
 
 #: MiscResources.resx$ExitWithUnsavedChanges$Message
 msgid "You have unsaved changes. Are you sure you want to exit and discard those changes?"
-msgstr "Є незбережені зміни. Дійсно вийти та відмовитись від них?"
+msgstr "У вас є незбережені зміни. Ви впевнені, що хочете вийти та відмовитися від цих змін?"
 
 #: UiStrings.resx$Zoom$Message
 msgid "Zoom"
@@ -1788,7 +1788,7 @@ msgstr "Масштаб"
 
 #: UiStrings.resx$ZoomActual$Message
 msgid "Zoom Actual"
-msgstr "Справжній розмір"
+msgstr "Фактичний масштаб"
 
 #: UiStrings.resx$ZoomIn$Message
 msgid "Zoom In"
@@ -1816,15 +1816,15 @@ msgstr "із {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
@@ -1840,11 +1840,11 @@ msgstr "Знайдено {0} пристроїв."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr "{0} т/д"
+msgstr "{0} dpi"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"
-msgstr "Зображення ({0} шт.), відскановані на {1} в {2}, можливо не були збережені та можуть бути відновлені. Бажаєте їх відновити?"
+msgstr "{0} зображень, відскановані {1} на {2}, можливо, не були збережені та можуть бути відновлені. Бажаєте їх відновити?"
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."

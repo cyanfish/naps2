@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-07-18 19:02\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -465,7 +465,7 @@ msgstr "페이지 크기 사용자 설정"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr ""
+msgstr "사용자 정의 회전"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
@@ -592,7 +592,7 @@ msgstr "편집"
 
 #: UiStrings.resx$EditWithAppName$Message
 msgid "Edit with {0}"
-msgstr ""
+msgstr "{0}(으)로 편집하기"
 
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
@@ -656,7 +656,7 @@ msgstr "오류"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
-msgstr ""
+msgstr "{0} 어플리케이션 시작 오류"
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -1690,7 +1690,7 @@ msgstr "{0} 실행취소"
 
 #: SdkResources.resx$UnknownScanner$Message
 msgid "Unknown Scanner"
-msgstr ""
+msgstr "모르는 스캐너"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"

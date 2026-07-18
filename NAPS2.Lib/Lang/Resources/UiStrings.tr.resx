@@ -811,7 +811,7 @@
     <value>IP/Ana Makine</value>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>Port</value>
+    <value>Bağlantı Noktası</value>
   </data>
   <data name="Connect" xml:space="preserve">
     <value>Bağlan</value>
