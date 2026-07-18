@@ -61,7 +61,7 @@ public class PackageCommand : ICommand<PackageOptions>
         foreach (var project in new[]
                      { "NAPS2.App.WinForms", "NAPS2.App.Console" })
         {
-            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release", "net9-windows", arch,
+            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release", "net10.0-windows", arch,
                 "publish");
             if (!Directory.Exists(buildPath))
             {
@@ -71,11 +71,11 @@ public class PackageCommand : ICommand<PackageOptions>
         }
 
         // Include the 32-bit worker (on both x64 and arm64) for TWAIN support
-        var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net9-windows",
+        var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net10.0-windows",
             "win-x86", "publish");
         pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
 
-        var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net9-windows",
+        var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net10.0-windows",
             arch, "publish");
         if (platform == Platform.Win64)
         {

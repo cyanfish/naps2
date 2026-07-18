@@ -36,7 +36,7 @@ public static class MsixPackager
         var resourcesPriPath = Path.Combine(Paths.SetupObj, "resources.pri");
         var msixConfig = Path.Combine(Paths.SetupWindows, "msix");
         File.Copy(Path.Combine(msixConfig, "appxmanifest.xml"), manifestPath, true);
-        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net9", "win-x64",
+        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net10.0", "win-x64",
             "publish");
         var mappingFilePath = Path.Combine(Paths.SetupObj, "msixmapping.txt");
 

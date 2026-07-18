@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6;net8;net462</TargetFrameworks>
+    <TargetFrameworks>net8;net10.0;net462</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-      $(TargetFrameworks);net8-macos
+      $(TargetFrameworks);net10.0-macos
     </TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -33,9 +33,9 @@
     <PackageReference Include="Grpc.Tools" Version="2.65.0" PrivateAssets="all" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-    <PackageReference Include="NAPS2.NTwain" Version="1.0.1" Condition="'$(TargetFramework)' != 'net8-macos'" />
+    <PackageReference Include="NAPS2.NTwain" Version="1.0.1" Condition="'$(TargetFramework)' != 'net10.0-macos'" />
     <PackageReference Include="NAPS2.PdfSharp" Version="1.0.1" />
-    <PackageReference Include="NAPS2.Wia" Version="2.0.3" Condition="'$(TargetFramework)' != 'net8-macos'" />
+    <PackageReference Include="NAPS2.Wia" Version="2.0.3" Condition="'$(TargetFramework)' != 'net10.0-macos'" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="SixLabors.Fonts" Version="1.0.1" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
@@ -78,7 +78,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
-    <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="'$(TargetFramework)' == 'net8-macos'" />
+    <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="'$(TargetFramework)' == 'net10.0-macos'" />
     <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
     <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
   </ItemGroup>

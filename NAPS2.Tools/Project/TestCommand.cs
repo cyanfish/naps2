@@ -8,11 +8,11 @@ public class TestCommand : ICommand<TestOptions>
     {
         var arch = RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant();
         var depsRootPath = OperatingSystem.IsMacOS()
-            ? $"NAPS2.App.Mac/bin/Debug/net9-macos/osx-{arch}"
+            ? $"NAPS2.App.Mac/bin/Debug/net10.0-macos/osx-{arch}"
             : OperatingSystem.IsLinux()
-                ? $"NAPS2.App.Gtk/bin/Debug/net9/linux-{arch}"
-                : $"NAPS2.App.WinForms/bin/Debug/net9-windows/win-{arch}";
-        var frameworkArg = OperatingSystem.IsWindows() ? "" : "-f net9";
+                ? $"NAPS2.App.Gtk/bin/Debug/net10.0/linux-{arch}"
+                : $"NAPS2.App.WinForms/bin/Debug/net10.0-windows/win-{arch}";
+        var frameworkArg = OperatingSystem.IsWindows() ? "" : "-f net10.0";
         bool ranTests = false;
 
         void RunTests(string project, bool isRetry = false)

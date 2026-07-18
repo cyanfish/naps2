@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8;net462</TargetFrameworks>
+    <TargetFrameworks>net10.0;net462</TargetFrameworks>
     <!-- As these are just samples, no need for "windows only api" warnings for GdiImageContext -->
     <NoWarn>CA1416</NoWarn>
   </PropertyGroup>
