@@ -1,9 +1,9 @@
 app-id: com.naps2.Naps2
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.dotnet9
+  - org.freedesktop.Sdk.Extension.dotnet10
 command: naps2
 copy-icon: true
 cleanup:
@@ -23,16 +23,16 @@ modules:
     sources:
       - type: git
         url: https://github.com/libusb/libusb
-        tag: v1.0.27
-        commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b
+        tag: v1.0.30
+        commit: 87a55632db62c9bdc58cd31d3ccfa673f1bb017f
   - name: leptonica
     buildsystem: cmake-ninja
     builddir: true
     sources:
       - type: git
         url: https://github.com/DanBloomberg/leptonica
-        tag: 1.85.0
-        commit: 63aef18d98432b8582a1565e241f7bd2ee9cc8d9
+        tag: 1.87.0
+        commit: 13275a278eb55b5746e33f95fbf5a2c8f604b3ab
   - name: tesseract
     buildsystem: cmake-ninja
     builddir: true
@@ -68,8 +68,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/sane-project/backends
-        tag: 1.3.1
-        commit: 3ff55fd8ee04ae459e199088ebe11ac979671d0e
+        tag: 1.4.0
+        commit: c7e4b5e35e3d614d2b1181d760a717bfc395a203
       - type: patch
         path: sane-streamdevices.patch
   - name: sane-airscan
@@ -77,15 +77,15 @@ modules:
     sources:
       - type: git
         url: https://github.com/alexpevzner/sane-airscan
-        tag: 0.99.31
-        commit: a086d81a1222194804a075cac496c821023ae23a
+        tag: 0.99.37
+        commit: 03eddd0d8058c482462bccabadad0e56e8400cb4
   - name: main
     buildsystem: simple
     build-options:
-      append-path: /usr/lib/sdk/dotnet9/bin
-      append-ld-library-path: /usr/lib/sdk/dotnet9/lib
+      append-path: /usr/lib/sdk/dotnet10/bin
+      append-ld-library-path: /usr/lib/sdk/dotnet10/lib
       env:
-        PKG_CONFIG_PATH: /app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib/dotnet9/lib/pkgconfig
+        PKG_CONFIG_PATH: /app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib/dotnet10/lib/pkgconfig
         DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
       arch:
@@ -98,7 +98,7 @@ modules:
     build-commands:
       - mkdir -p /app/bin
       - dotnet publish NAPS2.App.Gtk -c Release -r $RUNTIME --self-contained /p:DebugType=None /p:DebugSymbols=false --source ./nuget-sources
-      - cp -r --remove-destination /run/build/main/NAPS2.App.Gtk/bin/Release/net9/$RUNTIME/publish/. /app/bin/
+      - cp -r --remove-destination /run/build/main/NAPS2.App.Gtk/bin/Release/net10.0/$RUNTIME/publish/. /app/bin/
       - install -Dm644 com.naps2.Naps2.png /app/share/icons/hicolor/128x128/apps/com.naps2.Naps2.png
       - install -Dm644 com.naps2.Naps2.metainfo.xml /app/share/metainfo/com.naps2.Naps2.metainfo.xml
       - install -Dm644 com.naps2.Naps2.desktop /app/share/applications/com.naps2.Naps2.desktop
