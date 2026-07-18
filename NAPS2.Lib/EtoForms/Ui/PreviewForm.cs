@@ -20,6 +20,7 @@ public class PreviewForm : EtoDialogBase
     {
         Title = UiStrings.PreviewFormTitle;
         Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
+        Maximizable = true;
 
         _desktopCommands = desktopCommands;
         ImageList = imageList;

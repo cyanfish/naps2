@@ -22,6 +22,7 @@ public abstract class ImageFormBase : EtoDialogBase
         Overlay.Paint += PaintOverlay;
         Overlay.SizeChanged += (_, _) => UpdateImageCoords();
         FormStateController.DefaultExtraLayoutSize = new Size(400, 400);
+        Maximizable = true;
     }
 
     public UiImage Image { get; set; } = null!;
