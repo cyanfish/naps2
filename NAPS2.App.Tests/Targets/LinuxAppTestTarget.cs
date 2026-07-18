@@ -14,7 +14,7 @@ public class LinuxAppTestTarget : IAppTestTarget
     {
         var runtime = RuntimeInformation.OSArchitecture == Architecture.Arm64 ? "linux-arm64" : "linux-x64";
         return new AppTestExe(
-            Path.Combine(AppTestHelper.SolutionRoot, "NAPS2.App.Gtk", "bin", "Debug", "net9", runtime),
+            Path.Combine(AppTestHelper.SolutionRoot, "NAPS2.App.Gtk", "bin", "Debug", "net10.0", runtime),
             "naps2",
             argPrefix);
     }

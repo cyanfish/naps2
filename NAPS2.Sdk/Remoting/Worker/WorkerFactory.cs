@@ -45,7 +45,7 @@ internal class WorkerFactory : IWorkerFactory
         {
 #if DEBUG
             Path.Combine(AssemblyHelper.EntryFolder,
-                @"..\..\..\..\..\NAPS2.App.Worker\bin\Debug\net9-windows\win-x86\NAPS2.Worker.exe"),
+                @"..\..\..\..\..\NAPS2.App.Worker\bin\Debug\net10.0-windows\win-x86\NAPS2.Worker.exe"),
 #endif
             Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.Worker.exe"),
             Path.Combine(AssemblyHelper.EntryFolder, "lib", "NAPS2.Worker.exe")

@@ -12,7 +12,7 @@ public class WindowsAppTestTarget : IAppTestTarget
         string testRootSubPath = null)
     {
         return new AppTestExe(
-            Path.Combine(AppTestHelper.SolutionRoot, project, "bin", "Debug", "net9-windows", arch),
+            Path.Combine(AppTestHelper.SolutionRoot, project, "bin", "Debug", "net10.0-windows", arch),
             exeName,
             argPrefix,
             testRootSubPath);
