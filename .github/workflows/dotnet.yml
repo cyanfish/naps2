@@ -9,29 +9,34 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2022, ubuntu-24.04, macos-15]
+        os: [windows-2025, ubuntu-24.04, macos-26]
     steps:
     - name: Install OS dependencies
       if: matrix.os == 'ubuntu-24.04'
       run: sudo apt-get install -y fonts-liberation2 fonts-noto-core fonts-noto-cjk
     - uses: actions/checkout@v4
-    - name: Setup .NET 9
-      uses: actions/setup-dotnet@v4
+    - name: Set Xcode version
+      if: matrix.os == 'macos-26'
+      uses: maxim-lobanov/setup-xcode@v1
       with:
-        dotnet-version: 9.0.x
+        xcode-version: '26.6'
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v6
+      with:
+        dotnet-version: 10.0.x
     - name: Install workloads
-      if: matrix.os == 'macos-15'
+      if: matrix.os == 'macos-26'
       run: dotnet workload install macos
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
     - name: Test
-      if: matrix.os != 'macos-15'
+      if: matrix.os != 'macos-26'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui
     - name: Test (mac)
-      if: matrix.os == 'macos-15'
+      if: matrix.os == 'macos-26'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui --nonetwork
     - name: Test (WPF images)
-      if: matrix.os == 'windows-2022'
+      if: matrix.os == 'windows-2025'
       run: dotnet run --project NAPS2.Tools -- test -v --nogui --images wpf --scope sdk
     - name: Test (ImageSharp images)
       if: matrix.os == 'ubuntu-24.04'
