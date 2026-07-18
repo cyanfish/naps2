@@ -63,16 +63,24 @@ public class WindowsOpenWith : IOpenWith
 
     public IMemoryImage? LoadIcon(OpenWithEntry entry)
     {
-        if (entry.IconPath.StartsWith("@"))
+        try
         {
-            StringBuilder outBuff = new StringBuilder(1024);
-            int hr = Win32.SHLoadIndirectString(entry.IconPath, outBuff, outBuff.Capacity, IntPtr.Zero);
-            if (hr != 0) throw new Win32Exception(hr);
-            return _imageContext.Load(outBuff.ToString());
+            if (entry.IconPath.StartsWith("@"))
+            {
+                StringBuilder outBuff = new StringBuilder(1024);
+                int hr = Win32.SHLoadIndirectString(entry.IconPath, outBuff, outBuff.Capacity, IntPtr.Zero);
+                if (hr != 0) throw new Win32Exception(hr);
+                return _imageContext.Load(outBuff.ToString());
+            }
+            var icon = Icon.ExtractIcon(entry.IconPath, entry.IconIndex);
+            if (icon == null) return null;
+            return new GdiImage(icon.ToBitmap());
         }
-        var icon = Icon.ExtractIcon(entry.IconPath, entry.IconIndex);
-        if (icon == null) return null;
-        return new GdiImage(icon.ToBitmap());
+        catch (Exception)
+        {
+            Log.Debug($"Couldn't load OpenWith icon for {entry.Name}");
+            return null;
+        }
     }
 
     private IEnumerable<Win32.IAssocHandler> EnumerateHandlers(string fileExt)

@@ -79,14 +79,22 @@ public class LinuxOpenWith : IOpenWith
 
     public IMemoryImage? LoadIcon(OpenWithEntry entry)
     {
-        if (entry.IconPath.StartsWith("/"))
+        try
         {
-            return _imageContext.Load(entry.IconPath);
+            if (entry.IconPath.StartsWith("/"))
+            {
+                return _imageContext.Load(entry.IconPath);
+            }
+            Pixbuf? resolvedIcon = IconTheme.Default.LookupIcon(entry.IconPath, 64, IconLookupFlags.UseBuiltin)
+                ?.LoadIcon();
+            if (resolvedIcon != null)
+            {
+                return new GtkImage(resolvedIcon);
+            }
         }
-        Pixbuf? resolvedIcon = IconTheme.Default.LookupIcon(entry.IconPath, 64, IconLookupFlags.UseBuiltin)?.LoadIcon();
-        if (resolvedIcon != null)
+        catch (Exception)
         {
-            return new GtkImage(resolvedIcon);
+            Log.Debug($"Couldn't load OpenWith icon for {entry.Name}");
         }
         return null;
     }

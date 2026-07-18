@@ -30,13 +30,21 @@ public class MacOpenWith : IOpenWith
         Process.Start("open", $"-a \"{entryId}\" {expandedFilePaths}");
     }
 
-    public IMemoryImage LoadIcon(OpenWithEntry entry)
+    public IMemoryImage? LoadIcon(OpenWithEntry entry)
     {
-        NSImage allReps = NSWorkspace.SharedWorkspace.IconForFile(entry.Id);
-        // TODO: Any cleaner way to do this conversion?
-        NSImageRep rep = allReps.BestRepresentation(new CGRect(0, 0, 64, 64), null, null);
-        NSImage image = new NSImage();
-        image.AddRepresentation(new NSBitmapImageRep(rep.CGImage));
-        return new MacImage(image);
+        try
+        {
+            NSImage allReps = NSWorkspace.SharedWorkspace.IconForFile(entry.Id);
+            // TODO: Any cleaner way to do this conversion?
+            NSImageRep rep = allReps.BestRepresentation(new CGRect(0, 0, 64, 64), null, null);
+            NSImage image = new NSImage();
+            image.AddRepresentation(new NSBitmapImageRep(rep.CGImage));
+            return new MacImage(image);
+        }
+        catch (Exception)
+        {
+            Log.Debug($"Couldn't load OpenWith icon for {entry.Name}");
+            return null;
+        }
     }
 }
