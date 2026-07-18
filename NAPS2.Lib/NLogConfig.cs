@@ -18,7 +18,7 @@ public static class NLogConfig
             ext.RegisterLayoutRenderer<CustomExceptionLayoutRenderer>("exception");
         });
         var config = new LoggingConfiguration();
-        var target = new FileTarget
+        var target = new AtomicFileTarget
         {
             FileName = Path.Combine(Paths.AppData, "errorlog.txt"),
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
@@ -26,7 +26,7 @@ public static class NLogConfig
             MaxArchiveFiles = 1,
             ConcurrentWrites = true
         };
-        var debugTarget = new FileTarget
+        var debugTarget = new AtomicFileTarget
         {
             FileName = Path.Combine(Paths.AppData, "debuglog.txt"),
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",

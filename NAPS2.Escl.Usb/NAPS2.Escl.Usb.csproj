@@ -10,8 +10,8 @@
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Escl\NAPS2.Escl.csproj" />
 
-        <PackageReference Include="LibUsbDotNet" Version="3.0.102-alpha" />
-         <PackageReference Include="Polyfill" Version="4.9.0" PrivateAssets="all" />
+        <PackageReference Include="LibUsbDotNet" Version="3.0.224" />
+         <PackageReference Include="Polyfill" Version="11.0.1" PrivateAssets="all" />
     </ItemGroup>
 
 </Project>
