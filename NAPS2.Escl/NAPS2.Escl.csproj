@@ -4,7 +4,7 @@
         <TargetFrameworks>net8;net10.0;net462;netstandard2.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>12</LangVersion>
+        <LangVersion>14</LangVersion>
 
         <Title>NAPS2.Escl</Title>
         <Product>NAPS2.Escl</Product>
