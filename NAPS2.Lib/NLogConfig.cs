@@ -24,7 +24,8 @@ public static class NLogConfig
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
             MaxArchiveFiles = 1,
-            ConcurrentWrites = true
+            // ConcurrentWrites = true seems bugged on macOS
+            ConcurrentWrites = !OperatingSystem.IsMacOS()
         };
         var debugTarget = new AtomicFileTarget
         {
@@ -32,7 +33,7 @@ public static class NLogConfig
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
             MaxArchiveFiles = 1,
-            ConcurrentWrites = true
+            ConcurrentWrites = !OperatingSystem.IsMacOS()
         };
         config.AddTarget("errorlogfile", target);
         config.AddTarget("debuglogfile", debugTarget);
