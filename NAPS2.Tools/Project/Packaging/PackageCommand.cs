@@ -135,7 +135,7 @@ public class PackageCommand : ICommand<PackageOptions>
         using (var reader = new JsonTextReader(stream))
             deps = (JObject) JToken.ReadFrom(reader);
         string arch = platform == Platform.WinArm64 ? "win-arm64" : "win-x64";
-        var targets = (JObject) deps["targets"]![$".NETCoreApp,Version=v9.0/{arch}"]!;
+        var targets = (JObject) deps["targets"]![$".NETCoreApp,Version=v10.0/{arch}"]!;
         foreach (var pair in targets)
         {
             var target = (JObject) pair.Value!;
