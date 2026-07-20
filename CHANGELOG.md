@@ -1,3 +1,16 @@
+Changes in 8.3.0:
+- Image windows can now be maximized
+- Fixed an error with "Open With"
+- Fixed some debug logging being enabled unexpectedly
+- Sane: Fixed some duplex compability issues
+- Escl: Fixed an issue with CORS config
+- Dependency updates, including:
+  - .NET 10
+  - Flatpak runtime 25.08
+  - SANE 1.4.0
+  - Pdfium
+- Added Bengali language
+  
 Changes in 8.2.1:
 - Added a review prompt in the Microsoft Store version after a month's use
 - Windows: Added TWAIN support to arm64 installer
