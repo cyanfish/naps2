@@ -41,10 +41,8 @@
     <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
     <PackageReference Include="MimeKitLite" Version="4.17.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="NLog" Version="6.1.4" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="6.1.4" />
-    <PackageReference Include="NLog.Targets.AtomicFile" Version="6.1.4" />
-    <PackageReference Include="NLog.Targets.Trace" Version="6.0.3" />
+    <PackageReference Include="NLog" Version="5.5.1" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.5.0" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.10" />
   </ItemGroup>
   

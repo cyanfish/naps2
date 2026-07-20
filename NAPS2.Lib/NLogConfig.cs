@@ -18,22 +18,21 @@ public static class NLogConfig
             ext.RegisterLayoutRenderer<CustomExceptionLayoutRenderer>("exception");
         });
         var config = new LoggingConfiguration();
-        var target = new AtomicFileTarget
+        var target = new FileTarget
         {
             FileName = Path.Combine(Paths.AppData, "errorlog.txt"),
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
             MaxArchiveFiles = 1,
-            // ConcurrentWrites = true seems bugged on macOS
-            ConcurrentWrites = !OperatingSystem.IsMacOS()
+            ConcurrentWrites = true
         };
-        var debugTarget = new AtomicFileTarget
+        var debugTarget = new FileTarget
         {
             FileName = Path.Combine(Paths.AppData, "debuglog.txt"),
             Layout = "${longdate} ${processid} ${message} ${exception:format=tostring}",
             ArchiveAboveSize = 100000,
             MaxArchiveFiles = 1,
-            ConcurrentWrites = !OperatingSystem.IsMacOS()
+            ConcurrentWrites = true
         };
         config.AddTarget("errorlogfile", target);
         config.AddTarget("debuglogfile", debugTarget);
