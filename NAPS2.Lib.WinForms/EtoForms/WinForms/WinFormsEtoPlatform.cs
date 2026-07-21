@@ -344,6 +344,10 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
         else
         {
+            // Calling the callback here shouldn't be necessary, but for some reason with net10 (dark mode)
+            // we get weird handle errors if we don't. It should have no negative effect as we will call it
+            // again with the correct scale factor before it renders.
+            callback(1f);
             control.HandleCreated += (_, _) => Register();
         }
         control.HandleDestroyed += (_, _) => Unregister();
