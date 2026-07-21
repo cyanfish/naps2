@@ -107,10 +107,10 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     }
 
     public override void DidSelectFunctionalUnit(
-        ICScannerDevice scanner, ICScannerFunctionalUnit functionalUnit, NSError? error)
+        ICScannerDevice scanner, ICScannerFunctionalUnit? functionalUnit, NSError? error)
     {
         _logger.LogDebug("DidSelectFunctionalUnit {Unit} {Error}", functionalUnit?.GetType().Name, error);
-        SetResultOrError(_unitTcs, functionalUnit ?? _device.SelectedFunctionalUnit, error);
+        SetResultOrError(_unitTcs, functionalUnit, error);
     }
 
     public override void DidScanToBandData(ICScannerDevice scanner, ICScannerBandData data)
@@ -268,7 +268,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         }
     }
 
-    private void SetResultOrError<T>(TaskCompletionSource<T> tcs, T value, NSError? error)
+    private void SetResultOrError<T>(TaskCompletionSource<T> tcs, T? value, NSError? error)
     {
         if (error != null)
         {
@@ -276,7 +276,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         }
         else
         {
-            tcs.TrySetResult(value);
+            tcs.TrySetResult(value!);
         }
     }
 
