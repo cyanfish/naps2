@@ -29,7 +29,7 @@ internal class SaneOption
         int count = Marshal.ReadInt32(arrayPtr);
         for (int i = 0; i < count; i++)
         {
-            yield return SaneFixedPoint.ToFixed(Marshal.ReadInt32(arrayPtr + (i + 1) * 4));
+            yield return SaneFixedPoint.ToDouble(Marshal.ReadInt32(arrayPtr + (i + 1) * 4));
         }
     }
 
