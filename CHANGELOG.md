@@ -1,3 +1,8 @@
+Changes in 8.3.1:
+- Windows: Fixed a crash with dark mode enabled
+- Mac: Fixed an error with some scanners
+- Sane: Fixed an error with some scanner options 
+
 Changes in 8.3.0:
 - Image windows can now be maximized
 - Fixed an error with "Open With"
