@@ -110,6 +110,9 @@ public class CommonConfig
 
     [Common]
     public bool DeleteAfterSaving { get; set; }
+    
+    [Common]
+    public bool PromptBeforeDeletePage { get; set; }
 
     [Common]
     public bool KeepSession { get; set; }

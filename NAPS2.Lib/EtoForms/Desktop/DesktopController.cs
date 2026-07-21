@@ -425,10 +425,15 @@ public class DesktopController
     {
         if (_imageList.Selection.Any())
         {
-            if (MessageBox.Show(_desktopFormProvider.DesktopForm,
-                    string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
-                    MiscResources.Delete, MessageBoxButtons.OKCancel,
-                    MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
+
+
+            if (!_config.Get(c => c.PromptBeforeDeletePage) ||
+                                (MessageBox.Show(_desktopFormProvider.DesktopForm,
+                                    string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
+                                    MiscResources.Delete,
+                                    MessageBoxButtons.OKCancel,
+                                    MessageBoxType.Question,
+                                    MessageBoxDefaultButton.OK) == DialogResult.Ok))
             {
                 _imageListActions.DeleteSelected();
                 GC.Collect();

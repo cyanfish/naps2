@@ -993,4 +993,7 @@
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Stop Scanner Sharing</value>
   </data>
+  <data name="PromptBeforeDeletePage" xml:space="preserve">
+    <value>Prompt before deleting a page</value>
+  </data>
 </root>
