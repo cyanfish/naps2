@@ -268,10 +268,10 @@ public class WinFormsEtoPlatform : EtoPlatform
         form.DpiChanged += (_, _) => (window as IFormBase)?.LayoutController.Invalidate();
     }
 
-    public override float GetScaleFactor(Window window)
+    public override float GetScaleFactor(Window? window)
     {
         var form = window.ToNative();
-        return form.DeviceDpi / 96f;
+        return form == null ? 1 : form.DeviceDpi / 96f;
     }
 
     public override bool ScaleLayout => true;
