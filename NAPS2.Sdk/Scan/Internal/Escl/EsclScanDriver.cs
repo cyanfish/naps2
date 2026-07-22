@@ -169,6 +169,14 @@ internal class EsclScanDriver : IScanDriver
             var (client, caps) = await GetEsclClientWithCaps(options, cancelToken, scanEvents);
             if (client == null || caps == null) return;
             var status = await client.GetStatus();
+            
+            options.PaperSource =
+                options.PaperSource == PaperSource.FeederToFlatbed
+                    ? status.AdfState == EsclAdfState.ScannerAdfEmpty
+                        ? PaperSource.Flatbed
+                        : PaperSource.Feeder
+                    : options.PaperSource;
+
             bool hasProgressExtension = caps.Naps2Extensions?.Contains("Progress") ?? false;
             bool hasErrorDetailsExtension = caps.Naps2Extensions?.Contains("ErrorDetails") ?? false;
             bool hasShortTimeoutExtension = caps.Naps2Extensions?.Contains("ShortTimeout") ?? false;

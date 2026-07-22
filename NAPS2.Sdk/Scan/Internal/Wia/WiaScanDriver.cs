@@ -179,14 +179,28 @@ internal class WiaScanDriver : IScanDriver
                     ? PaperSource.Flatbed
                     : PaperSource.Feeder;
             }
-
-            using var item = GetItem(device);
-            if (item == null)
+            
+            // there is no reliable way of knowing if pages are in the feeder or not (DOCUMENT_HANDLING_STATUS & FEED_READY not always implemented correctly)
+            PaperSource? retryWith = null;
+            if (_options.PaperSource == PaperSource.FeederToFlatbed)
             {
-                return;
+                _options.PaperSource = PaperSource.Feeder;
+                retryWith = PaperSource.Flatbed;
             }
+            
+            while (true)
+            {
+                using var item = GetItem(device);
+                if (item == null)
+                {
+                    return;
+                }
 
-            DoTransfer(device, item);
+                if (DoTransfer(device, item) || !retryWith.HasValue) return;
+                
+                _options.PaperSource = retryWith.Value;
+                retryWith = null;
+            }
         }
 
         private async Task DoWia20NativeTransfer(WiaDeviceManager deviceManager, WiaDevice device)
@@ -230,7 +244,7 @@ internal class WiaScanDriver : IScanDriver
             }
         }
 
-        private void DoTransfer(WiaDevice device, WiaItem item)
+        private bool DoTransfer(WiaDevice device, WiaItem item)
         {
             if (_options.PaperSource != PaperSource.Flatbed && !device.SupportsFeeder())
             {
@@ -240,8 +254,9 @@ internal class WiaScanDriver : IScanDriver
             {
                 throw new NoDuplexSupportException();
             }
-
+            
             ConfigureProps(device, item);
+
 
             using var transfer = item.StartTransfer();
             Exception? scanException = null;
@@ -292,6 +307,11 @@ internal class WiaScanDriver : IScanDriver
                 {
                     // This error code is undocumented but seems to mean "no more pages" which can be ignored
                 }
+                catch (WiaException e) when (e.ErrorCode == 0x801901F4)
+                {
+                    // This error code is undocumented but seems to mean "feeder empty" on which we fall back to flatbed
+                    return false;
+                }
 
                 if (device.Version == WiaVersion.Wia10 && _options.PaperSource != PaperSource.Flatbed)
                 {
@@ -317,6 +337,7 @@ internal class WiaScanDriver : IScanDriver
             {
                 throw new DeviceFeederEmptyException();
             }
+            return true;
         }
 
         private WiaItem? GetItem(WiaDevice device)
@@ -400,7 +421,7 @@ internal class WiaScanDriver : IScanDriver
                     case PaperSource.Flatbed:
                         SafeSetProperty(device, WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
                         break;
-                    case PaperSource.Feeder:
+                    case PaperSource.Feeder or PaperSource.FeederToFlatbed:
                         SafeSetProperty(device, WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
                         break;
                     case PaperSource.Duplex:
@@ -413,7 +434,7 @@ internal class WiaScanDriver : IScanDriver
             {
                 switch (_options.PaperSource)
                 {
-                    case PaperSource.Feeder:
+                    case PaperSource.Feeder or PaperSource.FeederToFlatbed:
                         SafeSetProperty(item, WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
                         break;
                     case PaperSource.Duplex:
