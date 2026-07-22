@@ -1,3 +1,8 @@
+Changes in 8.3.2:
+- The first page scanned is now auto-selected
+- Mac: Fixed error with save/import
+- Linux: Fixed error with invalid cwd
+
 Changes in 8.3.1:
 - Windows: Fixed a crash with dark mode enabled
 - Mac: Fixed an error with some scanners
