@@ -92,45 +92,48 @@ public class EtoDialogHelper : DialogHelper
 
     private static SaveFileDialog CreateSaveFileDialog()
     {
-        EnsureCurrentDirectoryIsAccessible();
         try
         {
             return new SaveFileDialog();
         }
-        catch (FileNotFoundException)
+        catch (FileNotFoundException) when (TrySetCurrentDirectoryForDialogFallback())
         {
-            SetSafeCurrentDirectory();
             return new SaveFileDialog();
         }
     }
 
-    private static void EnsureCurrentDirectoryIsAccessible()
+    private static OpenFileDialog CreateOpenFileDialog()
     {
         try
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            if (!Directory.Exists(currentDirectory))
-            {
-                SetSafeCurrentDirectory();
-            }
+            return new OpenFileDialog();
         }
-        catch
+        catch (FileNotFoundException) when (TrySetCurrentDirectoryForDialogFallback())
         {
-            SetSafeCurrentDirectory();
+            return new OpenFileDialog();
         }
     }
 
-    private static void SetSafeCurrentDirectory()
+    private static bool TrySetCurrentDirectoryForDialogFallback()
     {
-        var fallbackDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        if (string.IsNullOrWhiteSpace(fallbackDirectory) || !Directory.Exists(fallbackDirectory))
+        var fallbackDirectory = GetDialogFallbackDirectory();
+        if (fallbackDirectory == null)
         {
-            fallbackDirectory = Path.GetTempPath();
+            return false;
         }
         Environment.CurrentDirectory = fallbackDirectory;
+        return true;
     }
 
-    private void SetDir(SaveFileDialog dialog, string? defaultPath)
+    private static string? GetDialogFallbackDirectory()
+    {
+        var fallbackDirectory = Environment.GetFolderPath(OperatingSystem.IsWindows()
+            ? Environment.SpecialFolder.MyDocuments
+            : Environment.SpecialFolder.UserProfile);
+        return Directory.Exists(fallbackDirectory) ? fallbackDirectory : null;
+    }
+
+    private void SetDir(FileDialog dialog, string? defaultPath)
     {
         string? path = null;
         if (Paths.IsTestAppDataPath)
@@ -138,10 +141,11 @@ public class EtoDialogHelper : DialogHelper
             // For UI test automation we choose the appdata folder for test isolation and consistency
             path = Paths.AppData;
         }
-        else if (Path.IsPathRooted(defaultPath))
+        else if (!string.IsNullOrEmpty(defaultPath) && Path.IsPathRooted(defaultPath))
         {
             path = Path.GetDirectoryName(NormalizePath(defaultPath));
         }
+        path ??= GetDialogFallbackDirectory();
         if (path != null)
         {
             dialog.Directory = UriHelper.FilePathToFileUri(Path.GetFullPath(path));
@@ -162,19 +166,12 @@ public class EtoDialogHelper : DialogHelper
 
     public override bool PromptToImport(out string[]? filePaths)
     {
-        EnsureCurrentDirectoryIsAccessible();
-        var ofd = new OpenFileDialog
-        {
-            MultiSelect = true,
-            CheckFileExists = true
-        };
+        var ofd = CreateOpenFileDialog();
+        ofd.MultiSelect = true;
+        ofd.CheckFileExists = true;
         _fileFilters.Set(ofd,
             FileFilterGroup.AllFiles | FileFilterGroup.Pdf | FileFilterGroup.AllImages | FileFilterGroup.Image);
-        if (Paths.IsTestAppDataPath)
-        {
-            // For UI test automation we choose the appdata folder to find the prepared files to import
-            ofd.Directory = UriHelper.FilePathToFileUri(Path.GetFullPath(Paths.AppData));
-        }
+        SetDir(ofd, defaultPath: null);
         EtoPlatform.Current.ConfigureFileDialog(ofd);
         if (ofd.ShowDialog(null) == DialogResult.Ok)
         {
