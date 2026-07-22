@@ -213,7 +213,10 @@ public class MacEtoPlatform : EtoPlatform
         }
 
         // Add some padding to the left of the file type selector
-        var createMethod = typeof(MacFileDialog<,>)
+        var dialogType = fileDialog is SaveFileDialog
+            ? typeof(MacFileDialog<NSSavePanel, SaveFileDialog>)
+            : typeof(MacFileDialog<NSOpenPanel, OpenFileDialog>);
+        var createMethod = dialogType
             .GetMethod("Create", BindingFlags.Instance | BindingFlags.NonPublic);
         // Ensure the accessory view is created first
         createMethod?.Invoke(fileDialog.Handler, []);
