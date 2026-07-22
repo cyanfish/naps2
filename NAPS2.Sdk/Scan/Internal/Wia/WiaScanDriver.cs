@@ -179,7 +179,7 @@ internal class WiaScanDriver : IScanDriver
                     ? PaperSource.Flatbed
                     : PaperSource.Feeder;
             }
-            
+
             // there is no reliable way of knowing if pages are in the feeder or not (DOCUMENT_HANDLING_STATUS & FEED_READY not always implemented correctly)
             PaperSource? retryWith = null;
             if (_options.PaperSource == PaperSource.FeederToFlatbed)
@@ -187,19 +187,24 @@ internal class WiaScanDriver : IScanDriver
                 _options.PaperSource = PaperSource.Feeder;
                 retryWith = PaperSource.Flatbed;
             }
-            
+
             while (true)
             {
                 using var item = GetItem(device);
                 if (item == null)
-                {
-                    return;
-                }
+                    break;
 
-                if (DoTransfer(device, item) || !retryWith.HasValue) return;
+                if (DoTransfer(device, item) || _cancelToken.IsCancellationRequested) break;
                 
-                _options.PaperSource = retryWith.Value;
-                retryWith = null;
+                if (retryWith != null)
+                {
+                    _options.PaperSource = retryWith.Value;
+                    retryWith = null;
+                }
+                else if (_options.PaperSource != PaperSource.Flatbed)
+                {
+                    throw new DeviceFeederEmptyException();
+                }
             }
         }
 
@@ -254,7 +259,7 @@ internal class WiaScanDriver : IScanDriver
             {
                 throw new NoDuplexSupportException();
             }
-            
+
             ConfigureProps(device, item);
 
 
@@ -328,16 +333,7 @@ internal class WiaScanDriver : IScanDriver
                     }
                 }
             }
-            if (scanException != null)
-            {
-                throw scanException;
-            }
-            if (!hasAtLeastOneImage && !_cancelToken.IsCancellationRequested &&
-                _options.PaperSource != PaperSource.Flatbed)
-            {
-                throw new DeviceFeederEmptyException();
-            }
-            return true;
+            return scanException != null ? throw scanException : hasAtLeastOneImage;
         }
 
         private WiaItem? GetItem(WiaDevice device)
