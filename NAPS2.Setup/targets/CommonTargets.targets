@@ -2,7 +2,6 @@
     
     <PropertyGroup>
         <LangVersion>14</LangVersion>
-        <EnablePreviewFeatures>true</EnablePreviewFeatures>
         <Copyright>Copyright 2009-2026 NAPS2 Contributors</Copyright>
     </PropertyGroup>
 
