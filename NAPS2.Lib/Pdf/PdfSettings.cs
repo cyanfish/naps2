@@ -19,6 +19,12 @@ public class PdfSettings
 
     public bool SinglePagePdfs { get; set; }
 
+    public bool? Ocr { get; set; }
+
+    public int JpegQuality { get; set; } = 75;
+
+    public int ResolutionScale { get; set; } = 100;
+
     [Config]
     public PdfMetadata Metadata
     {

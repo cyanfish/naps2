@@ -423,6 +423,12 @@
   <data name="ResolutionLabel" xml:space="preserve">
     <value>Resolution:</value>
   </data>
+  <data name="ResolutionScale" xml:space="preserve">
+    <value>Resolution Scale</value>
+  </data>
+  <data name="ResolutionScaleHelp" xml:space="preserve">
+    <value>Preserves aspect ratio. 100% by default, can be reduced down to 10%.</value>
+  </data>
   <data name="BrightnessLabel" xml:space="preserve">
     <value>Brightness:</value>
   </data>

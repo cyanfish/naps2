@@ -1,13 +1,15 @@
-﻿using NAPS2.Ocr;
+using NAPS2.Ocr;
+using NAPS2.Pdf;
 using NAPS2.Scan;
 
 namespace NAPS2.Config;
 
 public static class ConfigExtensions
 {
-    public static OcrParams DefaultOcrParams(this Naps2Config config)
+    public static OcrParams DefaultOcrParams(this Naps2Config config, PdfSettings? pdfSettings = null)
     {
-        if (!config.Get(c => c.EnableOcr))
+        bool enableOcr = pdfSettings?.Ocr ?? config.Get(c => c.EnableOcr);
+        if (!enableOcr)
         {
             return OcrParams.Empty;
         }

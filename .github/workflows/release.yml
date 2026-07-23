@@ -1,0 +1,46 @@
+name: Build and Release NAPS2
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers the workflow when you push a tag starting with 'v' (e.g., v1.0.0-custom)
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build Windows (exe, zip)
+      if: matrix.os == 'windows-latest'
+      run: |
+        dotnet run --project NAPS2.Tools -- pkg exe
+        dotnet run --project NAPS2.Tools -- pkg zip
+      
+    - name: Build Linux (deb, rpm)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        dotnet run --project NAPS2.Tools -- pkg deb -p linux
+        dotnet run --project NAPS2.Tools -- pkg rpm -p linux
+        
+    - name: Upload to GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          **/*.exe
+          **/*.zip
+          **/*.deb
+          **/*.rpm
+          **/*.pkg
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

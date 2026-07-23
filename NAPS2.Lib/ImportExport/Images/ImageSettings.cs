@@ -1,4 +1,4 @@
-﻿namespace NAPS2.ImportExport.Images;
+namespace NAPS2.ImportExport.Images;
 
 public record ImageSettings
 {
@@ -7,6 +7,8 @@ public record ImageSettings
     public bool SkipSavePrompt { get; init; }
 
     public int JpegQuality { get; init; } = 75;
+
+    public int ResolutionScale { get; init; } = 100;
 
     public TiffCompression TiffCompression { get; init; } = TiffCompression.Auto;
 

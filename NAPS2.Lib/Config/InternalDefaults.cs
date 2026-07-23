@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Oauth;
@@ -93,7 +93,9 @@ public static class InternalDefaults
                 Compat = PdfCompat.Default,
                 DefaultFileName = "",
                 SkipSavePrompt = false,
-                SinglePagePdfs = false
+                SinglePagePdfs = false,
+                JpegQuality = 75,
+                ResolutionScale = 100
             },
             RememberPdfSettings = false,
             ImageSettings = new ImageSettings
@@ -101,6 +103,7 @@ public static class InternalDefaults
                 DefaultFileName = "",
                 SkipSavePrompt = false,
                 JpegQuality = 75,
+                ResolutionScale = 100,
                 SinglePageTiff = false,
                 TiffCompression = TiffCompression.Auto
             },

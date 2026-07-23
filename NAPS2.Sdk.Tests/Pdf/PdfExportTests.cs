@@ -446,4 +446,35 @@ public class PdfExporterTests : ContextualTests
         // If the page size is too far off, we should ignore it and go by the actual resolution (precision is less important here)
         PdfAsserts.AssertPageSize(new PageSize(8.7m, 11.2m, PageSizeUnit.Inch), 1, filePath);
     }
+
+    [Fact]
+    public async Task ExportWithQualityAndResolutionScale()
+    {
+        SetUpFileStorage();
+
+        var origFilePath = Path.Combine(FolderPath, "orig.pdf");
+        var scaledFilePath = Path.Combine(FolderPath, "scaled.pdf");
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+
+        // Export at 100% scale and default 75% quality
+        await _exporter.Export(origFilePath, [image], new PdfExportParams { JpegQuality = 75, ResolutionScale = 100 });
+
+        // Export at 50% scale and 10% quality
+        await _exporter.Export(scaledFilePath, [image], new PdfExportParams { JpegQuality = 10, ResolutionScale = 50 });
+
+        var origFileInfo = new FileInfo(origFilePath);
+        var scaledFileInfo = new FileInfo(scaledFilePath);
+
+        // Verify that the file size is significantly smaller due to lower quality and resolution
+        Assert.True(scaledFileInfo.Length < origFileInfo.Length);
+
+        // Verify the scaled image's dimension using PdfiumPdfRenderer
+        var renderer = new PdfiumPdfRenderer();
+        using var origRenderedImage = renderer.RenderPage(ImageContext, origFilePath, PdfRenderSize.Default);
+        using var scaledRenderedImage = renderer.RenderPage(ImageContext, scaledFilePath, PdfRenderSize.Default);
+
+        // The image dimensions should be reduced by half (ratio preserved)
+        Assert.Equal(origRenderedImage.Width / 2, scaledRenderedImage.Width);
+        Assert.Equal(origRenderedImage.Height / 2, scaledRenderedImage.Height);
+    }
 }

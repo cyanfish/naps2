@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using Eto.Forms;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
@@ -88,7 +88,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                 OcrParams = _settings.OutputType == BatchOutputType.Load
                     ? _config.OcrAfterScanningParams()
                     : GetSavePathExtension().ToLower() == ".pdf"
-                        ? _config.DefaultOcrParams()
+                        ? _config.DefaultOcrParams(_config.Get(c => c.PdfSettings))
                         : OcrParams.Empty,
                 OcrCancelToken = _cancelToken,
                 ThumbnailSize = thumbnailController.RenderSize
@@ -275,11 +275,14 @@ public class BatchScanPerformer : IBatchScanPerformer
                 }
                 try
                 {
+                    var pdfSettings = _config.Get(c => c.PdfSettings);
                     var exportParams = new PdfExportParams(
-                        _config.Get(c => c.PdfSettings.Metadata),
-                        _config.Get(c => c.PdfSettings.Encryption),
-                        _config.Get(c => c.PdfSettings.Compat));
-                    await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(), _cancelToken);
+                        pdfSettings.Metadata,
+                        pdfSettings.Encryption,
+                        pdfSettings.Compat,
+                        pdfSettings.JpegQuality,
+                        pdfSettings.ResolutionScale);
+                    await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(pdfSettings), _cancelToken);
                 }
                 finally
                 {
