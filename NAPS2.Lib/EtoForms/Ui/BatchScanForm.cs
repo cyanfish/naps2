@@ -33,6 +33,7 @@ public class BatchScanForm : EtoDialogBase
     private readonly RadioButton _singleScan;
     private readonly RadioButton _multipleScansPrompt;
     private readonly RadioButton _multipleScansDelay;
+    private readonly RadioButton _waitForPaper;
     private readonly LayoutVisibility _delayVis = new(false);
     private readonly NumericMaskedTextBox<int> _numberOfScans = new();
     private readonly NumericMaskedTextBox<decimal> _timeBetweenScans = new();
@@ -65,6 +66,7 @@ public class BatchScanForm : EtoDialogBase
         _singleScan = new RadioButton { Text = UiStrings.SingleScan };
         _multipleScansPrompt = new RadioButton(_singleScan) { Text = UiStrings.MultipleScansPrompt };
         _multipleScansDelay = new RadioButton(_singleScan) { Text = UiStrings.MultipleScansDelay };
+        _waitForPaper = new RadioButton(_singleScan) { Text = UiStrings.BatchWaitForPaper };
         _load = new RadioButton { Text = UiStrings.LoadIn };
         _saveToSingleFile = new RadioButton(_load) { Text = UiStrings.SaveToSingleFile };
         _saveToMultipleFiles = new RadioButton(_load) { Text = UiStrings.SaveToMultipleFiles };
@@ -138,6 +140,7 @@ public class BatchScanForm : EtoDialogBase
                     _singleScan,
                     _multipleScansPrompt,
                     _multipleScansDelay,
+                    _waitForPaper,
                     L.Column(
                         C.Label(UiStrings.NumberOfScansLabel),
                         _numberOfScans.Width(50),
@@ -177,6 +180,8 @@ public class BatchScanForm : EtoDialogBase
             _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithPrompt;
         _multipleScansDelay.Checked =
             _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.MultipleWithDelay;
+        _waitForPaper.Checked =
+            _transactionConfig.Get(c => c.BatchSettings.ScanType) == BatchScanType.WaitForPaper;
 
         // TODO: Verify culture (+ vaildation ofc)
         _numberOfScans.Text =
@@ -212,7 +217,9 @@ public class BatchScanForm : EtoDialogBase
             ? BatchScanType.MultipleWithPrompt
             : _multipleScansDelay.Checked
                 ? BatchScanType.MultipleWithDelay
-                : BatchScanType.Single);
+                : _waitForPaper.Checked
+                    ? BatchScanType.WaitForPaper
+                    : BatchScanType.Single);
 
         if (_multipleScansDelay.Checked)
         {
@@ -330,7 +337,7 @@ public class BatchScanForm : EtoDialogBase
     {
         var controls = new Control[]
         {
-            _profile.AsControl(), _singleScan, _multipleScansPrompt, _multipleScansDelay, _numberOfScans,
+            _profile.AsControl(), _singleScan, _multipleScansPrompt, _multipleScansDelay, _waitForPaper, _numberOfScans,
             _timeBetweenScans, _load, _saveToSingleFile, _saveToMultipleFiles, _filePerScan, _filePerPage,
             _separateByPatchT, _moreInfo
         };

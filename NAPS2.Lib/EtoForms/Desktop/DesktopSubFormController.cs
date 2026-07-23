@@ -125,6 +125,14 @@ public class DesktopSubFormController : IDesktopSubFormController
         _formFactory.Create<SettingsForm>().ShowModal();
     }
 
+    public void ShowAutoCropForm()
+    {
+        if (Selection.Any())
+        {
+            _formFactory.Create<AutoCropForm>().ShowModal();
+        }
+    }
+
     public void ShowAboutForm()
     {
         _formFactory.Create<AboutForm>().ShowModal();

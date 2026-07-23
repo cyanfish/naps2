@@ -171,6 +171,27 @@ internal class RemotePostProcessor : IRemotePostProcessor
             processedImage = processedImage.WithTransform(Deskewer.GetDeskewTransform(image), true);
         }
 
+        if (options.AutoCrop)
+        {
+            // Detect content on the current (post-deskew/rotate) state of the image.
+            using var current = image.Clone().PerformAllTransforms(processedImage.TransformState.Transforms);
+            float xDpi = current.HorizontalResolution > 0 ? current.HorizontalResolution : options.Dpi;
+            float yDpi = current.VerticalResolution > 0 ? current.VerticalResolution : options.Dpi;
+            var autoCropSettings = new AutoCropSettings
+            {
+                WidthMode = options.AutoCropWidthMode,
+                HeightMode = options.AutoCropHeightMode,
+                FixedWidthPx = MmToPx(options.AutoCropFixedWidthMm, xDpi),
+                FixedHeightPx = MmToPx(options.AutoCropFixedHeightMm, yDpi),
+                PaddingPx = MmToPx(options.AutoCropPaddingMm, Math.Min(xDpi > 0 ? xDpi : 300, yDpi > 0 ? yDpi : 300)) ?? 0
+            };
+            var cropTransform = AutoCropper.GetCropTransform(current, autoCropSettings);
+            if (cropTransform != null)
+            {
+                processedImage = processedImage.WithTransform(cropTransform, true);
+            }
+        }
+
         if (!data.Barcode.IsDetected)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
@@ -203,4 +224,14 @@ internal class RemotePostProcessor : IRemotePostProcessor
         }
         return null;
     }
+
+    private static int? MmToPx(double? mm, float dpi)
+    {
+        if (mm is not { } value || value <= 0 || dpi <= 0)
+        {
+            return null;
+        }
+        return (int) Math.Round(value / 25.4 * dpi);
+    }
+
 }

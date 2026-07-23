@@ -1,6 +1,8 @@
+using System.Globalization;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
+using NAPS2.Images;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Lang;
 using NAPS2.Scan;
@@ -15,6 +17,11 @@ public class AdvancedProfileForm : EtoDialogBase
     private readonly SliderWithTextBox _whiteThreshold = new(new SliderWithTextBox.IntConstraints(0, 100, 10));
     private readonly SliderWithTextBox _coverageThreshold = new(new SliderWithTextBox.IntConstraints(0, 100, 10));
     private readonly CheckBox _deskew = new() { Text = UiStrings.DeskewScannedPages };
+    private readonly CheckBox _autoCrop = new() { Text = UiStrings.AutoCropScannedPages };
+    private readonly EnumDropDownWidget<AutoCropAxisMode> _autoCropWidthMode = new();
+    private readonly EnumDropDownWidget<AutoCropAxisMode> _autoCropHeightMode = new();
+    private readonly TextBox _autoCropWidth = new();
+    private readonly TextBox _autoCropHeight = new();
     private readonly CheckBox _brightContAfterScan = new() { Text = UiStrings.BrightnessContrastAfterScan };
     private readonly CheckBox _offsetWidth = new() { Text = UiStrings.OffsetWidth };
     private readonly CheckBox _stretchToPageSize = new() { Text = UiStrings.StretchToPageSize };
@@ -41,6 +48,11 @@ public class AdvancedProfileForm : EtoDialogBase
         _restoreDefaults.Click += RestoreDefaults_Click;
         _maximumQuality.CheckedChanged += MaximumQuality_CheckedChanged;
         _excludeBlank.CheckedChanged += ExcludeBlank_CheckedChanged;
+        _autoCrop.CheckedChanged += (_, _) => UpdateEnabled();
+        _autoCropWidthMode.Format = AutoCropAxisModeText;
+        _autoCropHeightMode.Format = AutoCropAxisModeText;
+        _autoCropWidthMode.SelectedItemChanged += (_, _) => UpdateEnabled();
+        _autoCropHeightMode.SelectedItemChanged += (_, _) => UpdateEnabled();
         _wiaVersion.Format = value => value switch
         {
             WiaApiVersion.Default => SettingsResources.WiaVersion_Default,
@@ -84,7 +96,22 @@ public class AdvancedProfileForm : EtoDialogBase
             ),
             L.GroupBox(
                 UiStrings.PostProcessing,
-                _deskew
+                L.Column(
+                    _deskew,
+                    _autoCrop,
+                    C.Label(UiStrings.AutoCropWidthLabel),
+                    _autoCropWidthMode,
+                    L.Row(
+                        C.Label(UiStrings.AutoCropFixedSizeLabel).AlignCenter(),
+                        _autoCropWidth.Width(70)
+                    ),
+                    C.Label(UiStrings.AutoCropHeightLabel),
+                    _autoCropHeightMode,
+                    L.Row(
+                        C.Label(UiStrings.AutoCropFixedSizeLabel).AlignCenter(),
+                        _autoCropHeight.Width(70)
+                    )
+                )
             ),
             L.GroupBox(
                 UiStrings.Compatibility,
@@ -119,6 +146,11 @@ public class AdvancedProfileForm : EtoDialogBase
         _quality.IntValue = scanProfile.Quality;
         _brightContAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
         _deskew.Checked = scanProfile.AutoDeskew;
+        _autoCrop.Checked = scanProfile.AutoCrop;
+        _autoCropWidthMode.SelectedItem = scanProfile.AutoCropWidthMode;
+        _autoCropHeightMode.SelectedItem = scanProfile.AutoCropHeightMode;
+        _autoCropWidth.Text = scanProfile.AutoCropFixedWidthMm?.ToString(CultureInfo.CurrentCulture) ?? "";
+        _autoCropHeight.Text = scanProfile.AutoCropFixedHeightMm?.ToString(CultureInfo.CurrentCulture) ?? "";
         _offsetWidth.Checked = scanProfile.WiaOffsetWidth;
         _wiaVersion.SelectedItem = scanProfile.WiaVersion;
         _stretchToPageSize.Checked = scanProfile.ForcePageSize;
@@ -136,6 +168,11 @@ public class AdvancedProfileForm : EtoDialogBase
         _quality.Enabled = !_maximumQuality.IsChecked();
         _whiteThreshold.Enabled = _excludeBlank.IsChecked() && ScanProfile!.BitDepth != ScanBitDepth.BlackWhite;
         _coverageThreshold.Enabled = _excludeBlank.IsChecked();
+        var autoCrop = _autoCrop.IsChecked();
+        _autoCropWidthMode.Enabled = autoCrop;
+        _autoCropHeightMode.Enabled = autoCrop;
+        _autoCropWidth.Enabled = autoCrop && _autoCropWidthMode.SelectedItem == AutoCropAxisMode.Fixed;
+        _autoCropHeight.Enabled = autoCrop && _autoCropHeightMode.SelectedItem == AutoCropAxisMode.Fixed;
     }
 
     public ScanProfile? ScanProfile { get; set; }
@@ -146,6 +183,11 @@ public class AdvancedProfileForm : EtoDialogBase
         ScanProfile.MaxQuality = _maximumQuality.IsChecked();
         ScanProfile.BrightnessContrastAfterScan = _brightContAfterScan.IsChecked();
         ScanProfile.AutoDeskew = _deskew.IsChecked();
+        ScanProfile.AutoCrop = _autoCrop.IsChecked();
+        ScanProfile.AutoCropWidthMode = _autoCropWidthMode.SelectedItem;
+        ScanProfile.AutoCropHeightMode = _autoCropHeightMode.SelectedItem;
+        ScanProfile.AutoCropFixedWidthMm = ParseMm(_autoCropWidth.Text);
+        ScanProfile.AutoCropFixedHeightMm = ParseMm(_autoCropHeight.Text);
         ScanProfile.WiaOffsetWidth = _offsetWidth.IsChecked();
         ScanProfile.WiaVersion = _wiaVersion.SelectedItem;
         ScanProfile.ForcePageSize = _stretchToPageSize.IsChecked();
@@ -156,6 +198,25 @@ public class AdvancedProfileForm : EtoDialogBase
         ScanProfile.ExcludeBlankPages = _excludeBlank.IsChecked();
         ScanProfile.BlankPageWhiteThreshold = _whiteThreshold.IntValue;
         ScanProfile.BlankPageCoverageThreshold = _coverageThreshold.IntValue;
+    }
+
+    private static string AutoCropAxisModeText(AutoCropAxisMode mode) => mode switch
+    {
+        AutoCropAxisMode.Off => UiStrings.AutoCropModeOff,
+        AutoCropAxisMode.Auto => UiStrings.AutoCropModeAuto,
+        AutoCropAxisMode.Fixed => UiStrings.AutoCropModeFixed,
+        _ => mode.ToString()
+    };
+
+    private static double? ParseMm(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return null;
+        }
+        return double.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out var value) && value > 0
+            ? value
+            : null;
     }
 
     private void MaximumQuality_CheckedChanged(object? sender, EventArgs e)

@@ -645,6 +645,105 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto Crop.
+        /// </summary>
+        internal static string AutoCrop {
+            get {
+                return ResourceManager.GetString("AutoCrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto crop scanned pages.
+        /// </summary>
+        internal static string AutoCropScannedPages {
+            get {
+                return ResourceManager.GetString("AutoCropScannedPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto Crop.
+        /// </summary>
+        internal static string AutoCropFormTitle {
+            get {
+                return ResourceManager.GetString("AutoCropFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width and height are cropped independently....
+        /// </summary>
+        internal static string AutoCropHelp {
+            get {
+                return ResourceManager.GetString("AutoCropHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        internal static string AutoCropWidthLabel {
+            get {
+                return ResourceManager.GetString("AutoCropWidthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        internal static string AutoCropHeightLabel {
+            get {
+                return ResourceManager.GetString("AutoCropHeightLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed size (mm).
+        /// </summary>
+        internal static string AutoCropFixedSizeLabel {
+            get {
+                return ResourceManager.GetString("AutoCropFixedSizeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Padding (mm).
+        /// </summary>
+        internal static string AutoCropPaddingLabel {
+            get {
+                return ResourceManager.GetString("AutoCropPaddingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don't crop.
+        /// </summary>
+        internal static string AutoCropModeOff {
+            get {
+                return ResourceManager.GetString("AutoCropModeOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-detect.
+        /// </summary>
+        internal static string AutoCropModeAuto {
+            get {
+                return ResourceManager.GetString("AutoCropModeAuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed size.
+        /// </summary>
+        internal static string AutoCropModeFixed {
+            get {
+                return ResourceManager.GetString("AutoCropModeFixed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deskew scanned pages.
         /// </summary>
         internal static string DeskewScannedPages {
@@ -1325,6 +1424,15 @@ namespace NAPS2.Lang.Resources {
         internal static string MultipleScansDelay {
             get {
                 return ResourceManager.GetString("MultipleScansDelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wait for paper (scan until stopped).
+        /// </summary>
+        internal static string BatchWaitForPaper {
+            get {
+                return ResourceManager.GetString("BatchWaitForPaper", resourceCulture);
             }
         }
         

@@ -255,6 +255,39 @@
   <data name="Deskew" xml:space="preserve">
     <value>Deskew</value>
   </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto Crop</value>
+  </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto crop scanned pages</value>
+  </data>
+  <data name="AutoCropFormTitle" xml:space="preserve">
+    <value>Auto Crop</value>
+  </data>
+  <data name="AutoCropHelp" xml:space="preserve">
+    <value>Width and height are cropped independently. Use a fixed width for receipts that share the same width, and auto-detect height for receipts scanned with an over-long scan area — the blank tail is trimmed back to where the content ends.</value>
+  </data>
+  <data name="AutoCropWidthLabel" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="AutoCropHeightLabel" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="AutoCropFixedSizeLabel" xml:space="preserve">
+    <value>Fixed size (mm)</value>
+  </data>
+  <data name="AutoCropPaddingLabel" xml:space="preserve">
+    <value>Padding (mm)</value>
+  </data>
+  <data name="AutoCropModeOff" xml:space="preserve">
+    <value>Don't crop</value>
+  </data>
+  <data name="AutoCropModeAuto" xml:space="preserve">
+    <value>Auto-detect</value>
+  </data>
+  <data name="AutoCropModeFixed" xml:space="preserve">
+    <value>Fixed size</value>
+  </data>
   <data name="CustomRotation" xml:space="preserve">
     <value>Custom Rotation</value>
   </data>
@@ -839,6 +872,9 @@
   </data>
   <data name="MultipleScansDelay" xml:space="preserve">
     <value>Multiple scans (fixed delay between scans)</value>
+  </data>
+  <data name="BatchWaitForPaper" xml:space="preserve">
+    <value>Wait for paper in feeder (scan until stopped)</value>
   </data>
   <data name="NumberOfScansLabel" xml:space="preserve">
     <value>Number of scans:</value>

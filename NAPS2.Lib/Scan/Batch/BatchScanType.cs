@@ -4,5 +4,6 @@ public enum BatchScanType
 {
     Single,
     MultipleWithPrompt,
-    MultipleWithDelay
+    MultipleWithDelay,
+    WaitForPaper
 }
