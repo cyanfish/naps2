@@ -54,3 +54,9 @@ public class DeviceNotFoundException() : DeviceException(SdkResources.DeviceNotF
 /// Indicates the scanning device's automatic document feeder (ADF) has a paper jam that needs to be cleared.
 /// </summary>
 public class DevicePaperJamException() : DeviceException(SdkResources.DevicePaperJam);
+/// <summary>
+/// Indicates the scanner rejected the scan parameters at scan start time.
+/// This typically occurs when page size, geometry, resolution, or other settings
+/// are incompatible with the scanner or backend.
+/// </summary>
+public class DeviceInvalidParameterException() : DeviceException(SdkResources.DeviceInvalidParameter);
