@@ -370,6 +370,9 @@ internal class SaneScanDriver : IScanDriver
 
     internal OptionData SetOptions(ISaneDevice device, ScanOptions options)
     {
+        if (options.PaperSource == PaperSource.FeederToFlatbed)
+            throw new NotImplementedException("The FeederToFlatbed PaperSource is not yet implemented for the Sane driver.");
+        
         var controller = new SaneOptionController(device, _scanningContext.Logger);
         var optionData = new OptionData
         {

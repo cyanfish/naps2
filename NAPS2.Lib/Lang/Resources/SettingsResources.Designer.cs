@@ -465,6 +465,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Feeder-&gt;Glass.
+        /// </summary>
+        internal static string Source_FeederToGlass {
+            get {
+                return ResourceManager.GetString("Source_FeederToGlass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Glass.
         /// </summary>
         internal static string Source_Glass {

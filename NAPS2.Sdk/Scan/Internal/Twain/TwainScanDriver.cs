@@ -87,6 +87,10 @@ internal class TwainScanDriver : IScanDriver
             // No need for an x86 worker (i.e. if we're on arm64)
             return;
         }
+        
+        if (options.PaperSource == PaperSource.FeederToFlatbed)
+            throw new NotImplementedException("The FeederToFlatbed PaperSource is not yet implemented for the Twain driver.");
+        
         var dsm = options.TwainOptions.Dsm;
         if (dsm is TwainDsm.New or TwainDsm.Old && Environment.Is64BitProcess)
         {

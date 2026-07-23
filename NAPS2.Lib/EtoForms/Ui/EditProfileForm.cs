@@ -233,6 +233,7 @@ public class EditProfileForm : EtoDialogBase
             paperSources = new List<ScanSource>();
             if (paperSourceCaps.SupportsFlatbed) paperSources.Add(ScanSource.Glass);
             if (paperSourceCaps.SupportsFeeder) paperSources.Add(ScanSource.Feeder);
+            if (DeviceDriver is Driver.Escl or Driver.Wia && paperSourceCaps is { SupportsFeeder: true, SupportsFlatbed: true }) paperSources.Add(ScanSource.FeederToGlass);
             if (paperSourceCaps.SupportsDuplex) paperSources.Add(ScanSource.Duplex);
         }
 

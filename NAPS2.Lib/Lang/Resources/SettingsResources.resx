@@ -228,6 +228,9 @@
   <data name="Source_Feeder" xml:space="preserve">
     <value>Feeder</value>
   </data>
+  <data name="Source_FeederToGlass" xml:space="preserve">
+    <value>Feeder-&gt;Glass</value>
+  </data>
   <data name="Source_Glass" xml:space="preserve">
     <value>Glass</value>
   </data>
