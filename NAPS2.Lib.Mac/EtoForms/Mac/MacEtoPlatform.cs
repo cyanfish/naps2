@@ -156,12 +156,13 @@ public class MacEtoPlatform : EtoPlatform
         var view = control.ToNative();
         var monitor = NSEvent.AddLocalMonitorForEventsMatchingMask(NSEventMask.KeyDown, evt =>
         {
-            if (ReferenceEquals(evt.Window, view.Window))
-            {
-                var args = evt.ToEtoKeyEventArgs();
-                return handle(args.KeyData) ? null! : evt;
-            }
-            return evt;
+            var args = evt.ToEtoKeyEventArgs();
+            return RouteKeyDown(
+                args.KeyData,
+                () => NSApplication.SharedApplication.MainMenu?.PerformKeyEquivalent(evt) == true,
+                keys => ReferenceEquals(evt.Window, view.Window) && handle(keys))
+                ? null!
+                : evt;
         });
         control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
     }
