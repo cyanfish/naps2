@@ -163,6 +163,12 @@ public abstract class EtoPlatform
         control.KeyDown += (_, args) => args.Handled = handle(args.KeyData);
     }
 
+    internal static bool RouteKeyDown(Keys keyData, Func<bool> handlePlatformShortcut,
+        Func<Keys, bool> handleAppShortcut)
+    {
+        return handlePlatformShortcut() || handleAppShortcut(keyData);
+    }
+
     public virtual void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
     {
         control.MouseWheel += eventHandler;
