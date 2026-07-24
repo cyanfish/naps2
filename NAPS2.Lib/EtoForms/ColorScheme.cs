@@ -18,7 +18,11 @@ public class ColorScheme
     public ColorScheme(IDarkModeProvider darkModeProvider)
     {
         _darkModeProvider = darkModeProvider;
-        _darkModeProvider.DarkModeChanged += (_, _) => ColorSchemeChanged?.Invoke(this, EventArgs.Empty);
+        _darkModeProvider.DarkModeChanged += (_, _) =>
+        {
+            EtoPlatform.Current.SetSystemTheme();
+            ColorSchemeChanged?.Invoke(this, EventArgs.Empty);
+        };
     }
 
     public bool DarkMode => (Config ?? throw new InvalidOperationException()).Get(c => c.Theme) switch
@@ -32,6 +36,7 @@ public class ColorScheme
 
     public void UserThemeChanged()
     {
+        EtoPlatform.Current.SetSystemTheme();
         ColorSchemeChanged?.Invoke(this, EventArgs.Empty);
     }
 

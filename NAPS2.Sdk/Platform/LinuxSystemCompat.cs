@@ -18,7 +18,7 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool IsEsclDriverSupported => true;
 
-    public bool SupportsTheme => false;
+    public bool SupportsTheme => true;
 
     public bool SupportsShowPageNumbers => false;
 

@@ -31,11 +31,13 @@ public class WinFormsEtoPlatform : EtoPlatform
         WF.Application.EnableVisualStyles();
         WF.Application.SetCompatibleTextRenderingDefault(false);
         WF.Application.SetHighDpiMode(WF.HighDpiMode.PerMonitorV2);
-        // WinForms dark mode is experimental
-#pragma warning disable WFO5001
-        WF.Application.SetColorMode(ColorScheme.DarkMode ? WF.SystemColorMode.Dark : WF.SystemColorMode.Classic);
-#pragma warning restore WFO5001
+        SetSystemTheme();
         return new Application(Eto.Platforms.WinForms);
+    }
+
+    public override void SetSystemTheme()
+    {
+        WF.Application.SetColorMode(ColorScheme.DarkMode ? WF.SystemColorMode.Dark : WF.SystemColorMode.Classic);
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>

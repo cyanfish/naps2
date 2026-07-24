@@ -34,6 +34,10 @@ public class MacEtoPlatform : EtoPlatform
         return application;
     }
 
+    public override void SetSystemTheme()
+    {
+    }
+
     public override void Invoke(Application application, Action action)
     {
         // TODO: Eto PR to always use InvokeOnMainThread, don't execute the action directly

@@ -26,12 +26,19 @@ public class GtkEtoPlatform : EtoPlatform
         var application = new Application(Platforms.Gtk);
         application.Initialized += (_, _) =>
         {
+            SetSystemTheme();
             // Hack to force Eto to use normal title bars for dialogs
             var type = Assembly.GetAssembly(typeof(Eto.GtkSharp.Platform))!.GetType("Eto.GtkSharp.Helper");
             var prop = type!.GetField("UseHeaderBar", BindingFlags.Public | BindingFlags.Static);
             prop!.SetValue(null, false);
         };
         return application;
+    }
+
+    public override void SetSystemTheme()
+    {
+        PlatformCompat.System.SetEnv("GTK_THEME", "Adwaita:" + (ColorScheme.DarkMode ? "dark" : "light"));
+        GTK.Settings.GetForScreen(Gdk.Screen.Default).ApplicationPreferDarkTheme = ColorScheme.DarkMode;
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>

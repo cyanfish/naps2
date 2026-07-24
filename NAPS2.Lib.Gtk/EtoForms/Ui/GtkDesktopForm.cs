@@ -47,11 +47,24 @@ public class GtkDesktopForm : DesktopForm
     {
         ((GtkDarkModeProvider) darkModeProvider).StyleContext =
             Eto.Forms.Gtk3Helpers.ToNative(this).StyleContext;
+        LoadCss();
+        
+        Load += (_, _) => colorScheme.ColorSchemeChanged += ColorSchemeChanged;
+        UnLoad += (_, _) => colorScheme.ColorSchemeChanged -= ColorSchemeChanged;
+    }
+
+    private void ColorSchemeChanged(object? sender, EventArgs e)
+    {
+        LoadCss();
+    }
+
+    private void LoadCss()
+    {
         var cssProvider = new CssProvider();
-        var bgColor = colorScheme.BackgroundColor.ToHex(false);
-        var fgColor = colorScheme.ForegroundColor.ToHex(false);
-        var sepColor = colorScheme.SeparatorColor.ToHex(false);
-        var brdColor = colorScheme.BorderColor.ToHex(false);
+        var bgColor = _colorScheme.BackgroundColor.ToHex(false);
+        var fgColor = _colorScheme.ForegroundColor.ToHex(false);
+        var sepColor = _colorScheme.SeparatorColor.ToHex(false);
+        var brdColor = _colorScheme.BorderColor.ToHex(false);
         cssProvider.LoadFromData(@"
             .desktop-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .image-button { min-width: 50px; padding-left: 0; padding-right: 0; }

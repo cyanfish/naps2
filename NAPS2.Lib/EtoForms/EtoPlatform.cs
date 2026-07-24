@@ -44,6 +44,7 @@ public abstract class EtoPlatform
     }
 
     public abstract Application CreateApplicationCore();
+    public abstract void SetSystemTheme();
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract void ConfigureImageButton(Button button, ButtonFlags flags);
     public abstract Bitmap ToBitmap(IMemoryImage image);
