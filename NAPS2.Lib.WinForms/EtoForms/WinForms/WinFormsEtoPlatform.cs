@@ -1,5 +1,6 @@
 using System.Drawing.Imaging;
 using System.Globalization;
+using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.WinForms;
