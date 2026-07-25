@@ -17,7 +17,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
-        <PackageReference Include="Eto.Platform.Mac64" Version="2.8.3" Condition="'$(TargetFramework)' != 'net10.0-macos'" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)' != 'net10.0-macos'">
@@ -45,6 +44,14 @@
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
             <_Parameter1>NAPS2.Sdk.Tests</_Parameter1>
         </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+      <PackageReference Include="Eto.Platform.Mac64" Version="2.11.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8'">
+      <PackageReference Include="Eto.Platform.Mac64" Version="2.11.0" />
     </ItemGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
