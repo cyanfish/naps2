@@ -49,6 +49,14 @@ public abstract class UnaryImageFormBase(
         WorkingImage?.Dispose();
     }
 
+    protected override void SetDefaultFocus()
+    {
+        if (!Sliders.Any())
+        {
+            base.SetDefaultFocus();
+        }
+    }
+
     protected override LayoutElement CreateControls()
     {
         return L.Column([

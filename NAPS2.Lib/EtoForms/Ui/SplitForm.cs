@@ -91,15 +91,6 @@ public class SplitForm : UnaryImageFormBase
             : SplitOrientation.Horizontal;
     }
 
-    protected override void OnShown(EventArgs e)
-    {
-        base.OnShown(e);
-        if (!EtoPlatform.Current.IsMac)
-        {
-            (_orientation == SplitOrientation.Horizontal ? _hSplit : _vSplit).Control!.Focus();
-        }
-    }
-
     private void SetOrientation(SplitOrientation orientation)
     {
         _orientation = orientation;

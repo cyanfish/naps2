@@ -83,7 +83,13 @@ public abstract class ImageFormBase : EtoDialogBase
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
+        SetDefaultFocus();
         UpdateImageCoords();
+    }
+
+    protected virtual void SetDefaultFocus()
+    {
+        DefaultButton.Focus();
     }
 
     private void UpdateImageCoords()
