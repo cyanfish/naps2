@@ -5,6 +5,7 @@ public static class Paths
     private static readonly string ExecutablePath = AssemblyHelper.EntryFolder;
     private static readonly string AppDataPath;
     private static readonly string TempPath;
+    private static readonly string TempSubfolderPath;
     private static readonly string RecoveryPath;
     private static readonly string ComponentsPath;
 
@@ -49,6 +50,7 @@ public static class Paths
         }
 
         TempPath = Path.Combine(AppDataPath, "temp");
+        TempSubfolderPath = Path.Combine(TempPath, Path.GetRandomFileName());
         RecoveryPath = Path.Combine(AppDataPath, "recovery");
         ComponentsPath = Path.Combine(AppDataPath, "components");
     }
@@ -63,6 +65,11 @@ public static class Paths
     public static string Executable => EnsureFolderExists(ExecutablePath);
 
     public static string Temp => EnsureFolderExists(TempPath);
+
+    /// <summary>
+    /// A subfolder of Temp that is tied to the process and is specifically deleted before the process exits.
+    /// </summary>
+    public static string TempSubfolder => EnsureFolderExists(TempSubfolderPath);
 
     public static string Recovery => EnsureFolderExists(RecoveryPath);
 
@@ -85,6 +92,19 @@ public static class Paths
                 Directory.Delete(TempPath, true);
                 Directory.CreateDirectory(TempPath);
             }
+        }
+        catch (Exception)
+        {
+            // Ignore errors clearing temp files
+        }
+    }
+
+    public static void DeleteTempSubfolder()
+    {
+        try
+        {
+            if (!Directory.Exists(TempSubfolderPath)) return;
+            Directory.Delete(TempSubfolderPath, true);
         }
         catch (Exception)
         {

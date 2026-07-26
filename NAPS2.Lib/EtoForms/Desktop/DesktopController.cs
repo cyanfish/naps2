@@ -202,6 +202,7 @@ public class DesktopController
                 Log.ErrorException("Recovery cleanup failed", ex);
             }
         }
+        Paths.DeleteTempSubfolder();
         _closed = true;
         _thumbnailController.Dispose();
         _scanningContext.WorkerFactory!.StopSpareWorkers();

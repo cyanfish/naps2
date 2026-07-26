@@ -28,8 +28,17 @@ internal class ThunderbirdEmailProvider : IEmailProvider
             {
                 if (message.Attachments.Any())
                 {
-                    // TODO: Need to use name if different than path (i.e. copy to temp)
-                    arguments.Add($"attachment='{string.Join(",", message.Attachments.Select(x => x.FilePath))}'");
+                    var attachmentFiles = message.Attachments.Select(x =>
+                    {
+                        // Move the attachment to a separate temp dir that is deleted when NAPS2 closes
+                        // (not immediately after email since Thunderbird doesn't make its own copy)
+                        string tempDir = Path.Combine(Paths.TempSubfolder, Path.GetRandomFileName());
+                        Directory.CreateDirectory(tempDir);
+                        string destPath = Path.Combine(tempDir, Path.GetFileName(x.FilePath));
+                        File.Move(x.FilePath, destPath);
+                        return destPath;
+                    });
+                    arguments.Add($"attachment='{string.Join(",", attachmentFiles)}'");
                 }
                 if (!string.IsNullOrEmpty(message.BodyText))
                 {
