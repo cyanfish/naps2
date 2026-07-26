@@ -147,6 +147,10 @@ public class DesktopCommands
             Text = UiStrings.Crop,
             IconName = "transform_crop_small"
         };
+        AutoCrop = new ActionCommand(desktopSubFormController.ShowAutoCropForm)
+        {
+            Text = UiStrings.AutoCrop
+        };
         BrightCont = new ActionCommand(desktopSubFormController.ShowBrightnessContrastForm)
         {
             Text = UiStrings.BrightnessContrast,
@@ -381,6 +385,7 @@ public class DesktopCommands
     public ActionCommand ImageMenu { get; set; }
     public ActionCommand ViewImage { get; set; }
     public ActionCommand Crop { get; set; }
+    public ActionCommand AutoCrop { get; set; }
     public ActionCommand BrightCont { get; set; }
     public ActionCommand HueSat { get; set; }
     public ActionCommand BlackWhite { get; set; }

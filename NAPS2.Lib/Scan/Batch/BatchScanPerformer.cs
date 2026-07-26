@@ -6,6 +6,7 @@ using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
+using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Scan.Batch;
 
@@ -91,7 +92,8 @@ public class BatchScanPerformer : IBatchScanPerformer
                         ? _config.DefaultOcrParams()
                         : OcrParams.Empty,
                 OcrCancelToken = _cancelToken,
-                ThumbnailSize = thumbnailController.RenderSize
+                ThumbnailSize = thumbnailController.RenderSize,
+                SuppressFeederEmptyError = _settings.ScanType == BatchScanType.WaitForPaper
             };
             _scans = [];
         }
@@ -105,20 +107,27 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
             catch (OperationCanceledException)
             {
+                if (_settings.ScanType == BatchScanType.WaitForPaper)
+                {
+                    // In "wait for paper" mode, stopping the batch is the normal way to finish,
+                    // so save everything that was scanned (using a fresh token so the cancellation
+                    // doesn't also abort the save).
+                    await Output(CancellationToken.None);
+                }
                 return;
             }
             catch (Exception)
             {
                 _cancelToken.ThrowIfCancellationRequested();
                 // Save at least some data so it isn't lost
-                await Output();
+                await Output(_cancelToken);
                 throw;
             }
 
             try
             {
                 _cancelToken.ThrowIfCancellationRequested();
-                await Output();
+                await Output(_cancelToken);
             }
             catch (OperationCanceledException)
             {
@@ -148,6 +157,39 @@ public class BatchScanPerformer : IBatchScanPerformer
                         if (!await InputOneScan(i))
                         {
                             return;
+                        }
+                    }
+                }
+                else if (_settings.ScanType == BatchScanType.WaitForPaper)
+                {
+                    int i = 0;
+                    while (true)
+                    {
+                        _cancelToken.ThrowIfCancellationRequested();
+                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForPaper, i + 1));
+                        bool gotPages;
+                        try
+                        {
+                            gotPages = await InputOneScan(i);
+                        }
+                        catch (ScanDriverException)
+                        {
+                            // The feeder is empty or not ready yet. Instead of failing the whole
+                            // batch (the old behaviour), wait and try again so the user can keep
+                            // feeding pages at their own pace until they stop the batch.
+                            gotPages = false;
+                        }
+                        if (gotPages)
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            double interval = _settings.ScanIntervalSeconds > 0
+                                ? _settings.ScanIntervalSeconds
+                                : 2;
+                            ThreadSleepWithCancel(TimeSpan.FromSeconds(interval), _cancelToken);
+                            _cancelToken.ThrowIfCancellationRequested();
                         }
                     }
                 }
@@ -224,7 +266,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             });
         }
 
-        private async Task Output()
+        private async Task Output(CancellationToken cancelToken)
         {
             _progressCallback(MiscResources.BatchStatusSaving);
 
@@ -240,7 +282,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
             else if (_settings.OutputType == BatchOutputType.SingleFile)
             {
-                await Save(placeholders, 0, allImages);
+                await Save(placeholders, 0, allImages, cancelToken);
                 foreach (var img in allImages)
                 {
                     img.Dispose();
@@ -251,7 +293,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                 int i = 0;
                 foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator))
                 {
-                    await Save(placeholders, i++, imageList);
+                    await Save(placeholders, i++, imageList, cancelToken);
                     foreach (var img in imageList)
                     {
                         img.Dispose();
@@ -260,7 +302,8 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
         }
 
-        private async Task Save(Placeholders placeholders, int i, List<ProcessedImage> images)
+        private async Task Save(Placeholders placeholders, int i, List<ProcessedImage> images,
+            CancellationToken cancelToken)
         {
             if (images.Count == 0)
             {
@@ -279,7 +322,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                         _config.Get(c => c.PdfSettings.Metadata),
                         _config.Get(c => c.PdfSettings.Encryption),
                         _config.Get(c => c.PdfSettings.Compat));
-                    await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(), _cancelToken);
+                    await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(), cancelToken);
                 }
                 finally
                 {

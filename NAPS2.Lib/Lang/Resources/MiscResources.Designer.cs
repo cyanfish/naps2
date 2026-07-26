@@ -112,6 +112,24 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("AutoDeskewProgress", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Cropping....
+        /// </summary>
+        internal static string AutoCropping {
+            get {
+                return ResourceManager.GetString("AutoCropping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto Crop Progress.
+        /// </summary>
+        internal static string AutoCropProgress {
+            get {
+                return ResourceManager.GetString("AutoCropProgress", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to An error occurred when trying to auto save..
@@ -197,6 +215,12 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Waiting for scan {0}....
         /// </summary>
+        internal static string BatchStatusWaitingForPaper {
+            get {
+                return ResourceManager.GetString("BatchStatusWaitingForPaper", resourceCulture);
+            }
+        }
+        
         internal static string BatchStatusWaitingForScan {
             get {
                 return ResourceManager.GetString("BatchStatusWaitingForScan", resourceCulture);

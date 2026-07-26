@@ -1,6 +1,8 @@
 ﻿using NAPS2.Ocr;
 using NAPS2.Serialization;
 
+using NAPS2.Images;
+
 namespace NAPS2.Scan;
 
 /// <summary>
@@ -130,6 +132,28 @@ public class ScanOptions
     /// Whether scanned images should go through automatic deskewing to straighten pages that are at a slight angle.
     /// </summary>
     public bool AutoDeskew { get; set; }
+
+    /// <summary>
+    /// Whether each scanned page should be automatically cropped to its content. The width and height are handled
+    /// independently (see the AutoCrop* properties), which allows e.g. forcing a fixed width for same-width receipts
+    /// while auto-detecting the height of receipts scanned with an over-long scan area.
+    /// </summary>
+    public bool AutoCrop { get; set; }
+
+    /// <summary>How the width is handled when <see cref="AutoCrop"/> is enabled.</summary>
+    public AutoCropAxisMode AutoCropWidthMode { get; set; } = AutoCropAxisMode.Fixed;
+
+    /// <summary>How the height is handled when <see cref="AutoCrop"/> is enabled.</summary>
+    public AutoCropAxisMode AutoCropHeightMode { get; set; } = AutoCropAxisMode.Auto;
+
+    /// <summary>Target width in millimetres when <see cref="AutoCropWidthMode"/> is Fixed.</summary>
+    public double? AutoCropFixedWidthMm { get; set; }
+
+    /// <summary>Target height in millimetres when <see cref="AutoCropHeightMode"/> is Fixed.</summary>
+    public double? AutoCropFixedHeightMm { get; set; }
+
+    /// <summary>Margin in millimetres kept around detected content on auto-cropped edges.</summary>
+    public double AutoCropPaddingMm { get; set; } = 2.0;
 
     /// <summary>
     /// A fixed number of degrees to rotate each scanned page clockwise. If AutoDeskew is true, the fixed rotation

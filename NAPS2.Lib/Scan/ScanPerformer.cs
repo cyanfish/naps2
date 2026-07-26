@@ -108,7 +108,8 @@ internal class ScanPerformer : IScanPerformer
         {
             // Close the progress window before showing the error dialog
             op.Completed();
-            if (args.Error != null)
+            if (args.Error != null &&
+                !(scanParams.SuppressFeederEmptyError && args.Error is DeviceFeederEmptyException))
             {
                 HandleError(args.Error);
             }
@@ -287,6 +288,11 @@ internal class ScanPerformer : IScanPerformer
             Dpi = scanProfile.Resolution.Dpi,
             Quality = scanProfile.Quality,
             AutoDeskew = scanProfile.AutoDeskew,
+            AutoCrop = scanProfile.AutoCrop,
+            AutoCropWidthMode = scanProfile.AutoCropWidthMode,
+            AutoCropHeightMode = scanProfile.AutoCropHeightMode,
+            AutoCropFixedWidthMm = scanProfile.AutoCropFixedWidthMm,
+            AutoCropFixedHeightMm = scanProfile.AutoCropFixedHeightMm,
             RotateDegrees = scanProfile.RotateDegrees,
             BitDepth = scanProfile.BitDepth.ToBitDepth(),
             DialogParent = dialogParent,

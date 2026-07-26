@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Xml.Serialization;
 using NAPS2.ImportExport;
 using NAPS2.Serialization;
+using NAPS2.Images;
 
 namespace NAPS2.Scan;
 
@@ -96,6 +97,16 @@ public class ScanProfile
     public int Quality { get; set; }
 
     public bool AutoDeskew { get; set; }
+
+    public bool AutoCrop { get; set; }
+
+    public AutoCropAxisMode AutoCropWidthMode { get; set; } = AutoCropAxisMode.Fixed;
+
+    public AutoCropAxisMode AutoCropHeightMode { get; set; } = AutoCropAxisMode.Auto;
+
+    public double? AutoCropFixedWidthMm { get; set; }
+
+    public double? AutoCropFixedHeightMm { get; set; }
 
     public double RotateDegrees { get; set; }
 
