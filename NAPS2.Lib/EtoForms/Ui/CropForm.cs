@@ -44,6 +44,7 @@ public class CropForm : UnaryImageFormBase
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
+        KeyDown += CropForm_KeyDown;
     }
 
     // The handle length is proportional to the window size
@@ -95,6 +96,92 @@ public class CropForm : UnaryImageFormBase
             RealImageHeight)
     ];
 
+    private void CropForm_KeyDown(object? sender, KeyEventArgs e)
+    {
+        bool accelerate = e.Modifiers.HasFlag(Keys.Shift);
+        bool moveOtherHandle = e.Modifiers.HasFlag(Keys.Control);
+        bool moveWhole = e.Modifiers.HasFlag(Keys.Alt);
+        int d = accelerate ? 10 : 1;
+
+        if (e.Key == Keys.Up)
+        {
+            if (moveWhole)
+            {
+                // We move one handle, then make the other handle match.
+                // Compared to moving both handles independently, this ensures the overall crop size doesn't change once
+                // we hit the end of the image.
+                float sum = _cropB + _cropT;
+                MoveCropTop(-d);
+                _cropB = sum - _cropT;
+            }
+            else if (moveOtherHandle)
+            {
+                MoveCropTop(-d);
+            }
+            else
+            {
+                MoveCropBottom(-d);
+            }
+        }
+        if (e.Key == Keys.Down)
+        {
+            if (moveWhole)
+            {
+                float sum = _cropB + _cropT;
+                MoveCropBottom(d);
+                _cropT = sum - _cropB;
+            }
+            else if (moveOtherHandle)
+            {
+                MoveCropTop(d);
+            }
+            else
+            {
+                MoveCropBottom(d);
+            }
+        }
+        if (e.Key == Keys.Left)
+        {
+            if (moveWhole)
+            {
+                float sum = _cropR + _cropL;
+                MoveCropLeft(-d);
+                _cropR = sum - _cropL;
+            }
+            else if (moveOtherHandle)
+            {
+                MoveCropLeft(-d);
+            }
+            else
+            {
+                MoveCropRight(-d);
+            }
+        }
+        if (e.Key == Keys.Right)
+        {
+            if (moveWhole)
+            {
+                float sum = _cropR + _cropL;
+                MoveCropRight(d);
+                _cropL = sum - _cropR;
+            }
+            else if (moveOtherHandle)
+            {
+                MoveCropLeft(d);
+            }
+            else
+            {
+                MoveCropRight(d);
+            }
+        }
+        if (e.Key is Keys.Up or Keys.Down or Keys.Left or Keys.Right)
+        {
+            UpdateRealCoords();
+            Overlay.Invalidate();
+            e.Handled = true;
+        }
+    }
+
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
     {
         _activeHandle = GetHandleUnderMouse(e);
@@ -141,14 +228,19 @@ public class CropForm : UnaryImageFormBase
 
     private void Overlay_MouseUp(object? sender, MouseEventArgs e)
     {
-        _realT = _cropT * RealImageHeight;
-        _realB = _cropB * RealImageHeight;
-        _realL = _cropL * RealImageWidth;
-        _realR = _cropR * RealImageWidth;
+        UpdateRealCoords();
         _activeHandle = Handle.None;
         _freeformAvailable = false;
         _freeformActive = false;
         Overlay.Invalidate();
+    }
+
+    private void UpdateRealCoords()
+    {
+        _realT = _cropT * RealImageHeight;
+        _realB = _cropB * RealImageHeight;
+        _realL = _cropL * RealImageWidth;
+        _realR = _cropR * RealImageWidth;
     }
 
     private void UpdateCrop(PointF mousePos)
@@ -183,21 +275,41 @@ public class CropForm : UnaryImageFormBase
         {
             if (_activeHandle.HasFlag(Handle.Top))
             {
-                _cropT = (_realT / RealImageHeight + delta.Y / _overlayH).Clamp(0, 1 - _cropB);
+                MoveCropTop(delta.Y);
             }
             if (_activeHandle.HasFlag(Handle.Right))
             {
-                _cropR = (_realR / RealImageWidth - delta.X / _overlayW).Clamp(0, 1 - _cropL);
+                MoveCropRight(delta.X);
             }
             if (_activeHandle.HasFlag(Handle.Bottom))
             {
-                _cropB = (_realB / RealImageHeight - delta.Y / _overlayH).Clamp(0, 1 - _cropT);
+                MoveCropBottom(delta.Y);
             }
             if (_activeHandle.HasFlag(Handle.Left))
             {
-                _cropL = (_realL / RealImageWidth + delta.X / _overlayW).Clamp(0, 1 - _cropR);
+                MoveCropLeft(delta.X);
             }
         }
+    }
+
+    private void MoveCropTop(float deltaY)
+    {
+        _cropT = (_realT / RealImageHeight + deltaY / _overlayH).Clamp(0, 1 - _cropB);
+    }
+
+    private void MoveCropRight(float deltaX)
+    {
+        _cropR = (_realR / RealImageWidth - deltaX / _overlayW).Clamp(0, 1 - _cropL);
+    }
+
+    private void MoveCropBottom(float deltaY)
+    {
+        _cropB = (_realB / RealImageHeight - deltaY / _overlayH).Clamp(0, 1 - _cropT);
+    }
+
+    private void MoveCropLeft(float deltaX)
+    {
+        _cropL = (_realL / RealImageWidth + deltaX / _overlayW).Clamp(0, 1 - _cropR);
     }
 
     private void Overlay_MouseMove(object? sender, MouseEventArgs e)

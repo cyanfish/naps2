@@ -1,4 +1,5 @@
 using Eto.Drawing;
+using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.Scan;
 
@@ -22,6 +23,7 @@ public class CombineForm : ImageFormBase
         IconName = "combine_small";
 
         _scanningContext = scanningContext;
+        KeyDown += CombineForm_KeyDown;
     }
 
     private UiImage Image1 { get; set; } = null!;
@@ -42,7 +44,7 @@ public class CombineForm : ImageFormBase
                 ).Visible(_alignVis),
                 C.Spacer().Width(14),
                 C.IconButton("combine_hor_small",
-                        () => SetOrientation(CombineOrientation.Horizontal)),
+                    () => SetOrientation(CombineOrientation.Horizontal)),
                 C.IconButton("switch_ver_small", SwapImages)
             ).Visible(!_horizontalOrientationVis),
             L.Row(
@@ -53,7 +55,7 @@ public class CombineForm : ImageFormBase
                 ).Visible(_alignVis),
                 C.Spacer().Width(14),
                 C.IconButton("combine_ver_small",
-                        () => SetOrientation(CombineOrientation.Vertical)),
+                    () => SetOrientation(CombineOrientation.Vertical)),
                 C.IconButton("switch_hor_small", SwapImages)
             ).Visible(_horizontalOrientationVis),
             C.Filler()
@@ -69,13 +71,13 @@ public class CombineForm : ImageFormBase
 
     private void SetHOffset(double value)
     {
-        _hOffset = value;
+        _hOffset = value.Clamp(0, 1);
         UpdatePreviewBox();
     }
 
     private void SetVOffset(double value)
     {
-        _vOffset = value;
+        _vOffset = value.Clamp(0, 1);
         UpdatePreviewBox();
     }
 
@@ -84,6 +86,45 @@ public class CombineForm : ImageFormBase
         _orientation = orientation;
         _horizontalOrientationVis.IsVisible = _orientation == CombineOrientation.Horizontal;
         UpdatePreviewBox();
+    }
+
+    private void CombineForm_KeyDown(object? sender, KeyEventArgs e)
+    {
+        HandleArrowKeyEvent(e, Keys.Left, CombineOrientation.Horizontal, CombineOrientation.Vertical,
+            () => SetHOffset(_hOffset - 0.5));
+        HandleArrowKeyEvent(e, Keys.Right, CombineOrientation.Horizontal, CombineOrientation.Vertical,
+            () => SetHOffset(_hOffset + 0.5));
+        HandleArrowKeyEvent(e, Keys.Up, CombineOrientation.Vertical, CombineOrientation.Horizontal,
+            () => SetVOffset(_vOffset - 0.5));
+        HandleArrowKeyEvent(e, Keys.Down, CombineOrientation.Vertical, CombineOrientation.Horizontal,
+            () => SetVOffset(_vOffset + 0.5));
+    }
+
+    private void HandleArrowKeyEvent(KeyEventArgs e, Keys key, CombineOrientation orientation,
+        CombineOrientation otherOrientation, Action setOffset)
+    {
+        if (e.Key == key)
+        {
+            if (e.Modifiers != Keys.None)
+            {
+                if (_orientation == otherOrientation)
+                {
+                    setOffset();
+                }
+            }
+            else
+            {
+                if (_orientation == otherOrientation)
+                {
+                    SetOrientation(orientation);
+                }
+                else
+                {
+                    SwapImages();
+                }
+            }
+            e.Handled = true;
+        }
     }
 
     protected override void InitDisplayImage()

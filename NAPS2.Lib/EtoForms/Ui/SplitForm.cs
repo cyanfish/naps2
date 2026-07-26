@@ -42,6 +42,7 @@ public class SplitForm : UnaryImageFormBase
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
+        KeyDown += SplitForm_KeyDown;
     }
 
     protected override List<Transform> Transforms => throw new NotSupportedException();
@@ -108,6 +109,20 @@ public class SplitForm : UnaryImageFormBase
         _realX = RealImageWidth / 2f;
         _realY = RealImageHeight / 2f;
         Overlay.Invalidate();
+    }
+
+    private void SplitForm_KeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.Key is Keys.Left or Keys.Right)
+        {
+            SetOrientation(SplitOrientation.Vertical);
+            e.Handled = true;
+        }
+        if (e.Key is Keys.Up or Keys.Down)
+        {
+            SetOrientation(SplitOrientation.Horizontal);
+            e.Handled = true;
+        }
     }
 
     private void Overlay_MouseDown(object? sender, MouseEventArgs e)
