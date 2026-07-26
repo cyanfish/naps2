@@ -389,6 +389,10 @@ msgstr ""
 msgid "Clear images after saving"
 msgstr ""
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr ""
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr ""
@@ -894,6 +898,14 @@ msgstr ""
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
+msgstr ""
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\nClick and drag to move the crop handles.\nOr click and drag to draw the full area.\n\nKeyboard:\nArrow keys move the bottom-right crop handle.\nHold \"Ctrl\" to move the top-left handle instead.\nHold \"Alt\" to move the whole selection at once.\nHold \"Shift\" to move faster."
+msgstr ""
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\nClick the buttons to change the combine orientation and alignment.\n\nKeyboard:\nArrow keys change the combine orientation.\nHold \"Shift\" to change the alignment instead (if the images aren't the same size)."
 msgstr ""
 
 #: UiStrings.resx$MoveDown$Message
@@ -1439,6 +1451,10 @@ msgstr ""
 
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
+msgstr ""
+
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\nOr click and drag to draw a line aligned with the page (vertically or horizontally)."
 msgstr ""
 
 #: MiscResources.resx$SelectedCount$Message

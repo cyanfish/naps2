@@ -60,7 +60,7 @@ msgstr """"
             {
                 writer.Write($"#: {context}\r\n");
             }
-            writer.Write($"msgid \"{str.Original.Replace("\"", "\\\"")}\"\r\n");
+            writer.Write($"msgid \"{str.Original.Replace("\"", "\\\"").Replace("\n", "\\n")}\"\r\n");
             writer.Write($"msgstr \"\"\r\n");
             writer.Write("\r\n");
         }
