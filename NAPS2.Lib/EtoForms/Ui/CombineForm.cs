@@ -21,6 +21,7 @@ public class CombineForm : ImageFormBase
     {
         Title = UiStrings.Combine;
         IconName = "combine_small";
+        HelpText = UiStrings.CombineHelp;
 
         _scanningContext = scanningContext;
         KeyDown += CombineForm_KeyDown;

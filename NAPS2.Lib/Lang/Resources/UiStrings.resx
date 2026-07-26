@@ -993,4 +993,30 @@
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Stop Scanner Sharing</value>
   </data>
+  <data name="CropHelp" xml:space="preserve">
+    <value>Mouse:
+Click and drag to move the crop handles.
+Or click and drag to draw the full area.
+
+Keyboard:
+Arrow keys move the bottom-right crop handle.
+Hold "Ctrl" to move the top-left handle instead.
+Hold "Alt" to move the whole selection at once.
+Hold "Shift" to move faster.</value>
+  </data>
+  <data name="SplitHelp" xml:space="preserve">
+    <value>Click the buttons or use the arrow keys to change the split orientation.</value>
+  </data>
+  <data name="CombineHelp" xml:space="preserve">
+    <value>Mouse:
+Click the buttons to change the combine orientation and alignment.
+
+Keyboard:
+Arrow keys change the combine orientation.
+Hold "Shift" to change the alignment instead (if the images aren't the same size).</value>
+  </data>
+  <data name="CustomRotationHelp" xml:space="preserve">
+    <value>Select the angle to rotate.
+Or click and drag to draw a line aligned with the page (vertically or horizontally).</value>
+  </data>
 </root>

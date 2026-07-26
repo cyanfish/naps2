@@ -34,6 +34,7 @@ public class SplitForm : UnaryImageFormBase
     {
         Title = UiStrings.Split;
         IconName = "split_small";
+        HelpText = UiStrings.SplitHelp;
 
         _colorScheme = colorScheme;
 

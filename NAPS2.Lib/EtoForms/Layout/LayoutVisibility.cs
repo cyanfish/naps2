@@ -33,6 +33,11 @@ public class LayoutVisibility
         }
     }
 
+    public void Toggle()
+    {
+        IsVisible = !IsVisible;
+    }
+
     public static LayoutVisibility operator !(LayoutVisibility value)
     {
         var negation = new LayoutVisibility(!value.IsVisible);

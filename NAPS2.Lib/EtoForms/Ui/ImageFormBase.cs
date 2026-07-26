@@ -7,6 +7,8 @@ namespace NAPS2.EtoForms.Ui;
 public abstract class ImageFormBase : EtoDialogBase
 {
     private readonly ImageView _imageView = new();
+    private readonly Label _helpLabel = new();
+    private readonly LayoutVisibility _helpVis = new(false);
 
     private readonly RefreshThrottle _renderThrottle;
 
@@ -37,14 +39,17 @@ public abstract class ImageFormBase : EtoDialogBase
     protected IMemoryImage? DisplayImage { get; set; }
     protected Drawable Overlay { get; } = new();
     protected int OverlayBorderSize { get; set; }
+    protected string? HelpText { get; set; }
 
     protected override void BuildLayout()
     {
         LayoutController.Content = L.Column(
             Overlay.Scale(),
             CreateControls(),
+            HelpText == null ? C.None() : _helpLabel.Visible(_helpVis),
             L.Row(
                 CreateExtraButtons(),
+                HelpText == null ? C.None() : CreateHelpButton(),
                 C.Filler(),
                 L.OkCancel(
                     C.OkButton(this, beforeClose: Apply),
@@ -151,6 +156,12 @@ public abstract class ImageFormBase : EtoDialogBase
     protected abstract void InitDisplayImage();
 
     protected abstract void Apply();
+
+    private LayoutElement CreateHelpButton()
+    {
+        _helpLabel.Text = HelpText;
+        return C.IconButton("information_small", _helpVis.Toggle);
+    }
 
     protected void UpdatePreviewBox()
     {

@@ -37,6 +37,7 @@ public class CropForm : UnaryImageFormBase
     {
         Title = UiStrings.Crop;
         IconName = "transform_crop_small";
+        HelpText = UiStrings.CropHelp;
 
         _colorScheme = colorScheme;
 

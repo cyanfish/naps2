@@ -19,6 +19,7 @@ public class RotateForm : UnaryImageFormBase
     {
         Title = UiStrings.Rotate;
         IconName = "arrow_rotate_anticlockwise_small";
+        HelpText = UiStrings.CustomRotationHelp;
 
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small", scale));

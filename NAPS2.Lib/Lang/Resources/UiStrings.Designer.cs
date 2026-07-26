@@ -483,6 +483,20 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mouse:
+        ///Click the buttons to change the combine orientation and alignment.
+        ///
+        ///Keyboard:
+        ///Arrow keys change the combine orientation.
+        ///Hold &quot;Shift&quot; to change the alignment instead (if the images aren&apos;t the same size)..
+        /// </summary>
+        internal static string CombineHelp {
+            get {
+                return ResourceManager.GetString("CombineHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compatibility.
         /// </summary>
         internal static string Compatibility {
@@ -573,6 +587,23 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mouse:
+        ///Click and drag to move the crop handles.
+        ///Or click and drag to draw the full area.
+        ///
+        ///Keyboard:
+        ///Arrow keys move the bottom-right crop handle.
+        ///Hold &quot;Ctrl&quot; to move the top-left handle instead.
+        ///Hold &quot;Alt&quot; to move the whole selection at once.
+        ///Hold &quot;Shift&quot; to move faster..
+        /// </summary>
+        internal static string CropHelp {
+            get {
+                return ResourceManager.GetString("CropHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crop to page size.
         /// </summary>
         internal static string CropToPageSize {
@@ -587,6 +618,16 @@ namespace NAPS2.Lang.Resources {
         internal static string CustomRotation {
             get {
                 return ResourceManager.GetString("CustomRotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the angle to rotate.
+        ///Or click and drag to draw a line aligned with the page (vertically or horizontally)..
+        /// </summary>
+        internal static string CustomRotationHelp {
+            get {
+                return ResourceManager.GetString("CustomRotationHelp", resourceCulture);
             }
         }
         
@@ -2396,6 +2437,15 @@ namespace NAPS2.Lang.Resources {
         internal static string Split {
             get {
                 return ResourceManager.GetString("Split", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click the buttons or use the arrow keys to change the split orientation..
+        /// </summary>
+        internal static string SplitHelp {
+            get {
+                return ResourceManager.GetString("SplitHelp", resourceCulture);
             }
         }
         
