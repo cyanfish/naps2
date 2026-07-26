@@ -108,12 +108,7 @@ public class CropForm : UnaryImageFormBase
         {
             if (moveWhole)
             {
-                // We move one handle, then make the other handle match.
-                // Compared to moving both handles independently, this ensures the overall crop size doesn't change once
-                // we hit the end of the image.
-                float sum = _cropB + _cropT;
-                MoveCropTop(-d);
-                _cropB = sum - _cropT;
+                MoveWholeArea(0, -d);
             }
             else if (moveOtherHandle)
             {
@@ -128,9 +123,7 @@ public class CropForm : UnaryImageFormBase
         {
             if (moveWhole)
             {
-                float sum = _cropB + _cropT;
-                MoveCropBottom(d);
-                _cropT = sum - _cropB;
+                MoveWholeArea(0, d);
             }
             else if (moveOtherHandle)
             {
@@ -145,9 +138,7 @@ public class CropForm : UnaryImageFormBase
         {
             if (moveWhole)
             {
-                float sum = _cropR + _cropL;
-                MoveCropLeft(-d);
-                _cropR = sum - _cropL;
+                MoveWholeArea(-d, 0);
             }
             else if (moveOtherHandle)
             {
@@ -162,9 +153,7 @@ public class CropForm : UnaryImageFormBase
         {
             if (moveWhole)
             {
-                float sum = _cropR + _cropL;
-                MoveCropRight(d);
-                _cropL = sum - _cropR;
+                MoveWholeArea(d, 0);
             }
             else if (moveOtherHandle)
             {
@@ -223,6 +212,7 @@ public class CropForm : UnaryImageFormBase
             if (dyM == dyMin && dxL == dxMin) return Handle.Left;
             if (dyB == dyMin && dxM == dxMin) return Handle.Bottom;
             if (dyM == dyMin && dxR == dxMin) return Handle.Right;
+            if (dyM == dyMin && dxM == dxMin) return Handle.Middle;
         }
         return Handle.None;
     }
@@ -290,6 +280,38 @@ public class CropForm : UnaryImageFormBase
             {
                 MoveCropLeft(delta.X);
             }
+            if (_activeHandle.HasFlag(Handle.Middle))
+            {
+                MoveWholeArea(delta.X, delta.Y);
+            }
+        }
+    }
+
+    private void MoveWholeArea(float deltaX, float deltaY)
+    {
+        // We move one handle, then make the other handle match.
+        // Compared to moving both handles independently, this ensures the overall crop size doesn't change once
+        // we hit the end of the image.
+        float ySum = _cropB + _cropT;
+        float xSum = _cropL + _cropR;
+        if (deltaY < 0)
+        {
+            MoveCropTop(deltaY);
+            _cropB = ySum - _cropT;
+        }
+        else if (deltaY > 0)
+        {
+            MoveCropBottom(deltaY);
+            _cropT = ySum - _cropB;
+        }
+        if (deltaX < 0)
+        {
+            MoveCropLeft(deltaX);
+            _cropR = xSum - _cropL;
+        } else  if (deltaX > 0)
+        {
+            MoveCropRight(deltaX);
+            _cropL = xSum - _cropR;
         }
     }
 
@@ -368,6 +390,7 @@ public class CropForm : UnaryImageFormBase
         // For a small crop selection, we shrink the handles so they don't overlap
         var xHandleLen = Math.Min(HandleLength, (x2 - x1) / 5);
         var yHandleLen = Math.Min(HandleLength, (y2 - y1) / 5);
+        var midHandleLen = Math.Min(xHandleLen, yHandleLen) / 3;
 
         if (_freeformActive)
         {
@@ -399,6 +422,10 @@ public class CropForm : UnaryImageFormBase
             e.Graphics.DrawLine(handlePen, x2, yMid - yHandleLen / 2f, x2, yMid + yHandleLen / 2f);
             e.Graphics.DrawLine(handlePen, xMid - xHandleLen / 2f, y1, xMid + xHandleLen / 2f, y1);
             e.Graphics.DrawLine(handlePen, xMid - xHandleLen / 2f, y2, xMid + xHandleLen / 2f, y2);
+            
+            // Draw middle handle
+            e.Graphics.DrawLine(handlePen, xMid, yMid - midHandleLen / 2f, xMid, yMid + midHandleLen / 2f);
+            e.Graphics.DrawLine(handlePen, xMid - midHandleLen / 2f, yMid, xMid + midHandleLen / 2f, yMid);
         }
     }
 
@@ -410,6 +437,7 @@ public class CropForm : UnaryImageFormBase
         Right = 2,
         Top = 4,
         Bottom = 8,
+        Middle = 16,
         TopLeft = Top | Left,
         TopRight = Top | Right,
         BottomLeft = Bottom | Left,
