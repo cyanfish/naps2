@@ -22,7 +22,7 @@ public class HelpWidget
     
     public LayoutControl Button => _helpButton;
     
-    public LayoutControl Label =>  _helpLabel.Visible(_helpVis);
+    public LayoutControl Label =>  _helpLabel.Visible(_helpVis).Padding(bottom: 6);
 
     public bool IsVisible
     {
