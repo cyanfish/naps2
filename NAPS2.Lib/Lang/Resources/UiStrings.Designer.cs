@@ -1681,6 +1681,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pages reordered..
+        /// </summary>
+        internal static string PagesReordered {
+            get {
+                return ResourceManager.GetString("PagesReordered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paper source:.
         /// </summary>
         internal static string PaperSourceLabel {

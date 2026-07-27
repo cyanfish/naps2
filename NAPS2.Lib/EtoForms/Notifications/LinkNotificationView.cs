@@ -14,7 +14,7 @@ public class LinkNotificationView : NotificationView
     private readonly LinkButton _link;
 
     protected LinkNotificationView(
-        NotificationModel model, string title, string linkLabel, string? linkTarget, string? folderTarget)
+        NotificationModel model, string title, string linkLabel, string? linkTarget = null, string? folderTarget = null)
         : base(model)
     {
         _label.Text = title;

@@ -1045,4 +1045,7 @@ Or click and drag to draw a line aligned with the page (vertically or horizontal
   <data name="Preview" xml:space="preserve">
     <value>Preview</value>
   </data>
+  <data name="PagesReordered" xml:space="preserve">
+    <value>Pages reordered.</value>
+  </data>
 </root>

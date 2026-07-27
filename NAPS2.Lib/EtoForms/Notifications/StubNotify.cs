@@ -27,4 +27,8 @@ public class StubNotify : INotify
     public void UpdateAvailable(IUpdateChecker updateChecker, UpdateInfo update)
     {
     }
+
+    public void PagesReordered()
+    {
+    }
 }

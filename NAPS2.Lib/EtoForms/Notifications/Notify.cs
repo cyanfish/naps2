@@ -5,10 +5,12 @@ namespace NAPS2.EtoForms.Notifications;
 public class Notify : INotify
 {
     private readonly NotificationManager _notificationManager;
+    private readonly UiImageList _imageList;
 
-    public Notify(NotificationManager notificationManager)
+    public Notify(NotificationManager notificationManager, UiImageList imageList)
     {
         _notificationManager = notificationManager;
+        _imageList = imageList;
     }
 
     public void PdfSaved(string path)
@@ -42,5 +44,10 @@ public class Notify : INotify
     public void UpdateAvailable(IUpdateChecker updateChecker, UpdateInfo update)
     {
         _notificationManager.Show(new UpdateNotification(updateChecker, update));
+    }
+
+    public void PagesReordered()
+    {
+        _notificationManager.Show(new ReorderNotification(_imageList));
     }
 }

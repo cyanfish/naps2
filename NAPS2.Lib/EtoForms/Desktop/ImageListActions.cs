@@ -115,8 +115,14 @@ public class ImageListActions
     public void EditWithApp() => _editWithController.EditWithApp(Selection ?? _imageList.Selection);
     public void EditWithPick() => _editWithController.EditWithPick(Selection ?? _imageList.Selection);
 
-    public void ManualDuplex() =>
-        _imageList.Mutate(new ImageListMutation.ManualDuplex(
-                _config.Get(c => c.ManualDuplexSettings.ReverseBackSides)),
-            Selection);
+    public void ManualDuplex()
+    {
+        if (_imageList.Images.Count > 2)
+        {
+            _imageList.Mutate(new ImageListMutation.ManualDuplex(
+                    _config.Get(c => c.ManualDuplexSettings.ReverseBackSides)),
+                Selection);
+            _notify.PagesReordered();
+        }
+    }
 }

@@ -8,4 +8,5 @@ public interface INotify : ISaveNotify
     void ReviewPrompt();
     void OperationProgress(OperationProgress progress, IOperation op);
     void UpdateAvailable(IUpdateChecker updateChecker, UpdateInfo update);
+    void PagesReordered();
 }
