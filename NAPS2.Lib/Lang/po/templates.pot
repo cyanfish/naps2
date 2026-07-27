@@ -123,6 +123,10 @@ msgstr ""
 msgid "Always Prompt"
 msgstr ""
 
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr ""
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr ""
@@ -871,6 +875,15 @@ msgstr ""
 msgid "Make PDFs searchable using OCR"
 msgstr ""
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr ""
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr ""
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -1134,6 +1147,10 @@ msgstr ""
 msgid "Page size:"
 msgstr ""
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr ""
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr ""
@@ -1167,6 +1184,7 @@ msgstr ""
 msgid "Press Start when ready."
 msgstr ""
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr ""
@@ -1271,6 +1289,10 @@ msgstr ""
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
+msgstr ""
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
 msgstr ""
 
 #: UiStrings.resx$Revert$Message
@@ -1668,6 +1690,10 @@ msgstr ""
 
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
+msgstr ""
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n      \nIf your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n1. Scan the front sides of the document\n2. Flip the document over\n3. Scan the back sides of the document\n4. Click \"Manual Duplex\"\n5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
 msgstr ""
 
 #: UiStrings.resx$Tools$Message
