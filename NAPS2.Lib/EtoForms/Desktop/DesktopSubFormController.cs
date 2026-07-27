@@ -58,6 +58,11 @@ public class DesktopSubFormController : IDesktopSubFormController
         }
     }
 
+    public void ShowManualDuplexForm()
+    {
+        _formFactory.Create<ManualDuplexForm>().ShowModal();
+    }
+
     public void ShowProfilesForm()
     {
         var form = _formFactory.Create<ProfilesForm>();

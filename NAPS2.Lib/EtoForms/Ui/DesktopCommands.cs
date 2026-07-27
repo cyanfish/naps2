@@ -259,6 +259,24 @@ public class DesktopCommands
         {
             Text = UiStrings.AltDeinterleave
         };
+        ManualDuplex = new ActionCommand(() =>
+        {
+            if (_config.Get(c => c.ManualDuplexSettings.AlwaysShowPreview))
+            {
+                desktopSubFormController.ShowManualDuplexForm();
+            }
+            else
+            {
+                imageListActions.ManualDuplex();
+            }
+        })
+        {
+            Text = UiStrings.ManualDuplex
+        };
+        ManualDuplexPreview = new ActionCommand(desktopSubFormController.ShowManualDuplexForm)
+        {
+            Text = UiStrings.ManualDuplexPreview
+        };
         ReverseMenu = new ActionCommand
         {
             Text = UiStrings.Reverse
@@ -404,6 +422,8 @@ public class DesktopCommands
     public ActionCommand Deinterleave { get; set; }
     public ActionCommand AltInterleave { get; set; }
     public ActionCommand AltDeinterleave { get; set; }
+    public ActionCommand ManualDuplex { get; set; }
+    public ActionCommand ManualDuplexPreview { get; set; }
     public ActionCommand ReverseMenu { get; set; }
     public ActionCommand ReverseAll { get; set; }
     public ActionCommand ReverseSelected { get; set; }

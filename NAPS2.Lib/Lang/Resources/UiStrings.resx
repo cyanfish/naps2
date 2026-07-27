@@ -1019,4 +1019,30 @@ Hold "Shift" to change the alignment instead (if the images aren't the same size
     <value>Select the angle to rotate.
 Or click and drag to draw a line aligned with the page (vertically or horizontally).</value>
   </data>
+  <data name="ManualDuplex" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="ManualDuplexPreview" xml:space="preserve">
+    <value>Manual Duplex (preview)</value>
+  </data>
+  <data name="ManualDuplexFormTitle" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="AlwaysShowPreview" xml:space="preserve">
+    <value>Always show preview</value>
+  </data>
+  <data name="ReverseBackSides" xml:space="preserve">
+    <value>Reverse back sides</value>
+  </data>
+  <data name="ManualDuplexHelp" xml:space="preserve">
+    <value>Want to scan both sides of a document but don't have a scanner capable of Duplex scanning?
+1. Scan the front sides of the document
+2. Flip the document over
+3. Scan the back sides of the document
+4. Click "Manual Duplex"
+5. Depending on the physical orientation of your scanner, you may need to check "Reverse back sides"</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
 </root>

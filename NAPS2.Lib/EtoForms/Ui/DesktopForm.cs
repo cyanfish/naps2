@@ -34,6 +34,7 @@ public abstract class DesktopForm : EtoFormBase
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
     protected readonly ListProvider<Command> _editWithCommands = new();
+    protected readonly ListProvider<Command> _manualDuplexPreviewCommands = new();
     private readonly ContextMenu _contextMenu = new();
 
     private readonly NotificationArea _notificationArea;
@@ -86,6 +87,7 @@ public abstract class DesktopForm : EtoFormBase
         EditWithAppChanged();
         UpdateProfilesToolbar();
         InitLanguageDropdown();
+        UpdateManualDuplex();
 
         _listView = EtoPlatform.Current.CreateListView(imageListViewBehavior);
         _listView.Selection = ImageList.Selection;
@@ -340,9 +342,11 @@ public abstract class DesktopForm : EtoFormBase
             CreateToolbarStackedButtons(Commands.MoveUp, Commands.MoveDown);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Reorder))
             CreateToolbarMenu(Commands.ReorderMenu, new MenuProvider()
+                .Append(Commands.ManualDuplex)
+                .Dynamic(_manualDuplexPreviewCommands)
+                .Separator()
                 .Append(Commands.Interleave)
                 .Append(Commands.Deinterleave)
-                .Separator()
                 .Append(Commands.AltInterleave)
                 .Append(Commands.AltDeinterleave)
                 .Separator()
@@ -570,6 +574,13 @@ public abstract class DesktopForm : EtoFormBase
         {
             _editWithCommands.Value = ImmutableList<Command>.Empty;
         }
+    }
+
+    public void UpdateManualDuplex()
+    {
+        _manualDuplexPreviewCommands.Value = Config.Get(c => c.ManualDuplexSettings.AlwaysShowPreview)
+            ? []
+            : [Commands.ManualDuplexPreview];
     }
 
     protected virtual void UpdateTitle(ScanProfile? defaultProfile)

@@ -173,6 +173,10 @@ public class CommonConfig
 
     [Config]
     [Common]
+    public ManualDuplexSettings ManualDuplexSettings { get; set; } = new();
+
+    [Config]
+    [Common]
     public PdfSettings PdfSettings { get; set; } = new();
 
     [User]

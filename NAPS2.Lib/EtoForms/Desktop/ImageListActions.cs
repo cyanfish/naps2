@@ -114,4 +114,9 @@ public class ImageListActions
     
     public void EditWithApp() => _editWithController.EditWithApp(Selection ?? _imageList.Selection);
     public void EditWithPick() => _editWithController.EditWithPick(Selection ?? _imageList.Selection);
+
+    public void ManualDuplex()
+    {
+        // TODO
+    }
 }

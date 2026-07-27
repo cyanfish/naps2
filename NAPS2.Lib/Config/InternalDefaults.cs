@@ -66,6 +66,11 @@ public static class InternalDefaults
             EditWithAppPath = "",
             EditWithAppName = "",
             ApplyToAllSelected = false,
+            ManualDuplexSettings = new ManualDuplexSettings
+            {
+                AlwaysShowPreview = true,
+                ReverseBackSides = false
+            },
             PdfSettings = new PdfSettings
             {
                 Metadata = new PdfMetadata

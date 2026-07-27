@@ -204,6 +204,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Always show preview.
+        /// </summary>
+        internal static string AlwaysShowPreview {
+            get {
+                return ResourceManager.GetString("AlwaysShowPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apple Driver.
         /// </summary>
         internal static string AppleDriver {
@@ -1271,6 +1280,47 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manual Duplex.
+        /// </summary>
+        internal static string ManualDuplex {
+            get {
+                return ResourceManager.GetString("ManualDuplex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual Duplex.
+        /// </summary>
+        internal static string ManualDuplexFormTitle {
+            get {
+                return ResourceManager.GetString("ManualDuplexFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Want to scan both sides of a document but don&apos;t have a scanner capable of Duplex scanning?
+        ///1. Scan the front sides of the document
+        ///2. Flip the document over
+        ///3. Scan the back sides of the document
+        ///4. Click &quot;Manual Duplex&quot;
+        ///5. Depending on the physical orientation of your scanner, you may need to check &quot;Reverse back sides&quot;.
+        /// </summary>
+        internal static string ManualDuplexHelp {
+            get {
+                return ResourceManager.GetString("ManualDuplexHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual Duplex (preview).
+        /// </summary>
+        internal static string ManualDuplexPreview {
+            get {
+                return ResourceManager.GetString("ManualDuplexPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manual IP.
         /// </summary>
         internal static string ManualIp {
@@ -1732,6 +1782,15 @@ namespace NAPS2.Lang.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Preview.
         /// </summary>
+        internal static string Preview {
+            get {
+                return ResourceManager.GetString("Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
         internal static string PreviewFormTitle {
             get {
                 return ResourceManager.GetString("PreviewFormTitle", resourceCulture);
@@ -1933,6 +1992,15 @@ namespace NAPS2.Lang.Resources {
         internal static string ReverseAll {
             get {
                 return ResourceManager.GetString("ReverseAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reverse back sides.
+        /// </summary>
+        internal static string ReverseBackSides {
+            get {
+                return ResourceManager.GetString("ReverseBackSides", resourceCulture);
             }
         }
         
