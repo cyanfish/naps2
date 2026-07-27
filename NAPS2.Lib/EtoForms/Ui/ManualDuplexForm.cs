@@ -8,52 +8,51 @@ namespace NAPS2.EtoForms.Ui;
 
 public class ManualDuplexForm : EtoDialogBase
 {
-    private const int PREVIEW_IMAGE_COUNT = 6;
-    private const int PREVIEW_THUMBNAIL_SIZE = 128;
+    private const int PREVIEW_THUMBNAIL_SIZE = 192;
 
     private readonly UiImageList _uiImageList;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly ImageListActions _imageListActions;
-    private readonly UiThumbnailProvider _thumbnailProvider;
+    private readonly IListView<UiImage> _listView;
     private readonly CheckBox _alwaysShowPreview = new() { Text = UiStrings.AlwaysShowPreview };
     private readonly CheckBox _reverseBackSides = new() { Text = UiStrings.ReverseBackSides };
     private readonly HelpWidget _help = new() { Text = UiStrings.ManualDuplexHelp };
-    private readonly ImageView[] _imageViews =
-        Enumerable.Range(0, PREVIEW_IMAGE_COUNT).Select(_ => new ImageView()).ToArray();
 
     public ManualDuplexForm(Naps2Config config, UiImageList uiImageList, DesktopFormProvider desktopFormProvider,
-        ImageListActions imageListActions, UiThumbnailProvider thumbnailProvider)
+        ImageListActions imageListActions, ManualDuplexListViewBehavior listViewBehavior)
         : base(config)
     {
         _uiImageList = uiImageList;
         _desktopFormProvider = desktopFormProvider;
         _imageListActions = imageListActions;
-        _thumbnailProvider = thumbnailProvider;
         Title = UiStrings.ManualDuplexFormTitle;
         IconName = "column_double_small";
 
+        _listView = EtoPlatform.Current.CreateListView(listViewBehavior);
         _alwaysShowPreview.Checked = Config.Get(c => c.ManualDuplexSettings.AlwaysShowPreview);
         _reverseBackSides.Checked = Config.Get(c => c.ManualDuplexSettings.ReverseBackSides);
-        
+
         _reverseBackSides.CheckedChanged += ReverseCheckedChanged;
+
+        EtoPlatform.Current.AttachDpiDependency(this, _ => _listView.RegenerateImages());
+        _listView.ImageSize = new Size(PREVIEW_THUMBNAIL_SIZE, PREVIEW_THUMBNAIL_SIZE);
     }
 
     private void ReverseCheckedChanged(object? sender, EventArgs e)
     {
-        UpdatePreviewImages();
+        ReloadPages();
     }
 
     protected override void BuildLayout()
-    {
-        FormStateController.Resizable = false;
+    {        
+        FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
 
         LayoutController.Content = L.Column(
             _reverseBackSides,
             _alwaysShowPreview,
             C.Spacer(),
             C.Label(UiStrings.Preview),
-            L.Row(_imageViews.Select(x => (LayoutElement) x).ToArray()),
-            C.Filler(),
+            _listView.Control.Scale().NaturalSize(400, PREVIEW_THUMBNAIL_SIZE + 28),
             _help.Label,
             L.Row(
                 _help.Button,
@@ -65,20 +64,15 @@ public class ManualDuplexForm : EtoDialogBase
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
-        UpdatePreviewImages();
+        ReloadPages();
     }
 
-    private void UpdatePreviewImages()
+    private void ReloadPages()
     {
         var images = _uiImageList.Images.ToList();
         new ListMutation<UiImage>.ManualDuplex(_reverseBackSides.IsChecked()).Apply(images,
             Selectable.Empty<UiImage>());
-        for (int i = 0; i < PREVIEW_IMAGE_COUNT; i++)
-        {
-            _imageViews[i].Image = images.Count > i
-                ? _thumbnailProvider.GetThumbnail(images[i], PREVIEW_THUMBNAIL_SIZE).ToEtoImage()
-                : null;
-        }
+        _listView.SetItems(images);
     }
 
     private void Apply()
