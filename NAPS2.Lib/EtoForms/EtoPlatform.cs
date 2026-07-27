@@ -197,4 +197,9 @@ public abstract class EtoPlatform
     public virtual void ConfigureFileDialog(FileDialog fileDialog)
     {
     }
+
+    public virtual byte[] GetData(IDataObject dataObject, string typeName)
+    {
+        return dataObject.GetData(typeName);
+    }
 }

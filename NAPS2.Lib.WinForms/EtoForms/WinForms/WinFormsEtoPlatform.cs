@@ -382,6 +382,18 @@ public class WinFormsEtoPlatform : EtoPlatform
         WF.Clipboard.SetDataObject(handler.Control, true);
     }
 
+    public override byte[] GetData(IDataObject dataObject, string typeName)
+    {
+        var obj = dataObject as Widget;
+        if (obj?.ControlObject is WF.DataObject wfObj)
+        {
+#pragma warning disable WFDEV005
+            return (byte[]) wfObj.GetData(typeName);
+#pragma warning restore WFDEV005
+        }
+        return base.GetData(dataObject, typeName);
+    }
+
     public override void ConfigureDropDown(DropDown dropDown, bool scale)
     {
         ((WF.ComboBox) dropDown.ControlObject).DrawMode = WF.DrawMode.Normal;

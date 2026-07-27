@@ -1,5 +1,6 @@
 using Eto.Forms;
 using Google.Protobuf;
+using NAPS2.EtoForms;
 
 namespace NAPS2.ImportExport;
 
@@ -36,7 +37,7 @@ public abstract class TransferHelper<TInput, TData> where TData : IMessage<TData
         return dataObject.Contains(TypeName);
     }
 
-    public TData GetFrom(IDataObject dataObject) => FromBinaryData(dataObject.GetData(TypeName));
+    public TData GetFrom(IDataObject dataObject) => FromBinaryData(EtoPlatform.Current.GetData(dataObject, TypeName));
 
     /// <summary>
     /// Converts the domain type to the protobuf type for serialization.

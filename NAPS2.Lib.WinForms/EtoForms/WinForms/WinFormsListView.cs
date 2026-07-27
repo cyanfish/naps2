@@ -209,7 +209,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
         {
             if (data.Contains(_behavior.CustomDragDataType) && _behavior.AllowDragDrop)
             {
-                e.Effect = _behavior.GetCustomDragEffect(data.GetData(_behavior.CustomDragDataType)).ToSwf();
+                e.Effect = _behavior.GetCustomDragEffect(EtoPlatform.Current.GetData(data, _behavior.CustomDragDataType)).ToSwf();
                 return;
             }
         }
@@ -441,7 +441,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             {
                 if (data.Contains(_behavior.CustomDragDataType))
                 {
-                    Drop?.Invoke(this, new DropEventArgs(index, data.GetData(_behavior.CustomDragDataType)));
+                    Drop?.Invoke(this, new DropEventArgs(index, EtoPlatform.Current.GetData(data, _behavior.CustomDragDataType)));
                 }
             }
             catch (COMException)
