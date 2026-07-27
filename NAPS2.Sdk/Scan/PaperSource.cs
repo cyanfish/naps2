@@ -25,10 +25,5 @@ public enum PaperSource
     /// Use the automatic document feeder component of the scanner with double-sided scanning, potentially scanning
     /// multiple pages.
     /// </summary>
-    Duplex,
-    
-    /// <summary>
-    /// Tries to use the automatic document feeder and falls back to the flatbed if its empty
-    /// </summary>
-    FeederToFlatbed
+    Duplex
 }

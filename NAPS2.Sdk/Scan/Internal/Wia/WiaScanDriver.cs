@@ -172,39 +172,17 @@ internal class WiaScanDriver : IScanDriver
                 return;
             }
 
-            if (_options.PaperSource == PaperSource.Auto)
+            if (_options.PaperSource != PaperSource.Auto)
             {
-                // Default to flatbed if supported (or if both support checks fail)
-                _options.PaperSource = device.SupportsFlatbed() || !device.SupportsFeeder()
-                    ? PaperSource.Flatbed
-                    : PaperSource.Feeder;
-            }
-
-            // there is no reliable way of knowing if pages are in the feeder or not (DOCUMENT_HANDLING_STATUS & FEED_READY not always implemented correctly)
-            PaperSource? retryWith = null;
-            if (_options.PaperSource == PaperSource.FeederToFlatbed)
-            {
-                _options.PaperSource = PaperSource.Feeder;
-                retryWith = PaperSource.Flatbed;
-            }
-
-            while (true)
-            {
-                using var item = GetItem(device);
-                if (item == null)
-                    break;
-
-                if (DoTransfer(device, item) || _cancelToken.IsCancellationRequested) break;
-                
-                if (retryWith != null)
-                {
-                    _options.PaperSource = retryWith.Value;
-                    retryWith = null;
-                }
-                else if (_options.PaperSource != PaperSource.Flatbed)
-                {
+                if (!DoTransferWithPaperSource(device, _options.PaperSource) && !_cancelToken.IsCancellationRequested &&
+                    _options.PaperSource != PaperSource.Flatbed)
                     throw new DeviceFeederEmptyException();
-                }
+            }
+            else
+            {
+                if (!device.SupportsFeeder() || !device.FeederReady() ||
+                    !DoTransferWithPaperSource(device, PaperSource.Feeder))
+                    DoTransferWithPaperSource(device, PaperSource.Flatbed);
             }
         }
 
@@ -249,6 +227,12 @@ internal class WiaScanDriver : IScanDriver
             }
         }
 
+        private bool DoTransferWithPaperSource(WiaDevice device, PaperSource source)
+        {
+            using var item = GetItem(device, source);
+            return item != null && DoTransfer(device, item);
+        }
+
         private bool DoTransfer(WiaDevice device, WiaItem item)
         {
             if (_options.PaperSource != PaperSource.Flatbed && !device.SupportsFeeder())
@@ -261,7 +245,6 @@ internal class WiaScanDriver : IScanDriver
             }
 
             ConfigureProps(device, item);
-
 
             using var transfer = item.StartTransfer();
             Exception? scanException = null;
@@ -303,7 +286,6 @@ internal class WiaScanDriver : IScanDriver
             transfer.Progress += (sender, args) => _scanEvents.PageProgress(args.Percent / 100.0);
             using (_cancelToken.Register(transfer.Cancel))
             {
-                _scanEvents.PageStart();
                 try
                 {
                     transfer.Download();
@@ -312,11 +294,15 @@ internal class WiaScanDriver : IScanDriver
                 {
                     // This error code is undocumented but seems to mean "no more pages" which can be ignored
                 }
-                catch (WiaException e) when (e.ErrorCode == 0x801901F4)
+                catch (WiaException e) when (e.ErrorCode == 0x801901F4 && _options.PaperSource != PaperSource.Flatbed)
                 {
-                    // This error code is undocumented but seems to mean "feeder empty" on which we fall back to flatbed
-                    return false;
+                    // This error code isnt specific to wia but is returned when attempting to scan with an empty feeder
+                    // This is more reliable than WIA_DPS_DOCUMENT_HANDLING_STATUS & FEED_READY, because in some models its used to indicate a feeder is "installed" not "has pages in it"
+                    return hasAtLeastOneImage;
                 }
+
+                _scanEvents.PageStart();
+
 
                 if (device.Version == WiaVersion.Wia10 && _options.PaperSource != PaperSource.Flatbed)
                 {
@@ -336,7 +322,7 @@ internal class WiaScanDriver : IScanDriver
             return scanException != null ? throw scanException : hasAtLeastOneImage;
         }
 
-        private WiaItem? GetItem(WiaDevice device)
+        private WiaItem? GetItem(WiaDevice device, PaperSource source)
         {
             if (_options.UseNativeUI)
             {
@@ -386,7 +372,7 @@ internal class WiaScanDriver : IScanDriver
                 // The "Feeder" child may also have a pair of children (for front/back sides with duplex)
                 // https://docs.microsoft.com/en-us/windows-hardware/drivers/image/simple-duplex-capable-document-feeder
                 var items = device.GetSubItems();
-                var preferredItemName = _options.PaperSource == PaperSource.Flatbed ? "Flatbed" : "Feeder";
+                var preferredItemName = source == PaperSource.Flatbed ? "Flatbed" : "Feeder";
                 return items.FirstOrDefault(x => x.Name() == preferredItemName) ?? items.First();
             }
         }
@@ -417,7 +403,7 @@ internal class WiaScanDriver : IScanDriver
                     case PaperSource.Flatbed:
                         SafeSetProperty(device, WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FLATBED);
                         break;
-                    case PaperSource.Feeder or PaperSource.FeederToFlatbed:
+                    case PaperSource.Feeder:
                         SafeSetProperty(device, WiaPropertyId.DPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FEEDER);
                         break;
                     case PaperSource.Duplex:
@@ -430,7 +416,7 @@ internal class WiaScanDriver : IScanDriver
             {
                 switch (_options.PaperSource)
                 {
-                    case PaperSource.Feeder or PaperSource.FeederToFlatbed:
+                    case PaperSource.Feeder:
                         SafeSetProperty(item, WiaPropertyId.IPS_DOCUMENT_HANDLING_SELECT, WiaPropertyValue.FRONT_ONLY);
                         break;
                     case PaperSource.Duplex:

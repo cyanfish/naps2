@@ -222,14 +222,14 @@
   <data name="Scale_1_8" xml:space="preserve">
     <value>1:8</value>
   </data>
+  <data name="Source_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
   <data name="Source_Duplex" xml:space="preserve">
     <value>Duplex</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
     <value>Feeder</value>
-  </data>
-  <data name="Source_FeederToGlass" xml:space="preserve">
-    <value>Feeder-&gt;Glass</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
     <value>Glass</value>

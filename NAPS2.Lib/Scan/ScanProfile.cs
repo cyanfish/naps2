@@ -172,8 +172,8 @@ public enum ScanSource
     Feeder,
     [LocalizedDescription(typeof(SettingsResources), "Source_Duplex")]
     Duplex,
-    [LocalizedDescription(typeof(SettingsResources), "Source_FeederToGlass")]
-    FeederToGlass
+    [LocalizedDescription(typeof(SettingsResources), "Source_Auto")]
+    Auto
 }
 
 /// <summary>
@@ -439,8 +439,8 @@ public static class ScanEnumExtensions
                 return PaperSource.Feeder;
             case ScanSource.Duplex:
                 return PaperSource.Duplex;
-            case ScanSource.FeederToGlass:
-                return PaperSource.FeederToFlatbed;
+            case ScanSource.Auto:
+                return PaperSource.Auto;
             default:
                 throw new ArgumentException();
         }

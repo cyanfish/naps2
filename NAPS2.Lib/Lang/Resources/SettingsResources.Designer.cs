@@ -447,6 +447,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto.
+        /// </summary>
+        internal static string Source_Auto {
+            get {
+                return ResourceManager.GetString("Source_Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplex.
         /// </summary>
         internal static string Source_Duplex {
@@ -461,15 +470,6 @@ namespace NAPS2.Lang.Resources {
         internal static string Source_Feeder {
             get {
                 return ResourceManager.GetString("Source_Feeder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Feeder-&gt;Glass.
-        /// </summary>
-        internal static string Source_FeederToGlass {
-            get {
-                return ResourceManager.GetString("Source_FeederToGlass", resourceCulture);
             }
         }
         

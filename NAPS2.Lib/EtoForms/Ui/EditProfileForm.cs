@@ -160,9 +160,7 @@ public class EditProfileForm : EtoDialogBase
     {
         _suppressChangeEvent = true;
 
-        _paperSource.Items = ScanProfile.Caps?.PaperSources?.Values is [_, ..] paperSources
-            ? paperSources
-            : EnumDropDownWidget<ScanSource>.DefaultItems;
+        _paperSource.Items = ScanSourceHelper.GetCompatibleScanSources(ScanProfile, DeviceDriver);
 
         var selectedSource = _paperSource.SelectedItem;
         var perSource = selectedSource switch
@@ -233,8 +231,8 @@ public class EditProfileForm : EtoDialogBase
             paperSources = new List<ScanSource>();
             if (paperSourceCaps.SupportsFlatbed) paperSources.Add(ScanSource.Glass);
             if (paperSourceCaps.SupportsFeeder) paperSources.Add(ScanSource.Feeder);
-            if (DeviceDriver is Driver.Escl or Driver.Wia && paperSourceCaps is { SupportsFeeder: true, SupportsFlatbed: true }) paperSources.Add(ScanSource.FeederToGlass);
             if (paperSourceCaps.SupportsDuplex) paperSources.Add(ScanSource.Duplex);
+            if (paperSourceCaps is { SupportsFeeder: true, SupportsFlatbed: true, CanCheckIfFeederHasPaper: true }) paperSources.Add(ScanSource.Auto);
         }
 
         return new ScanProfileCaps
