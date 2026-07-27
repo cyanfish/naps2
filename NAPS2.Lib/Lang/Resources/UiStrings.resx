@@ -1035,7 +1035,9 @@ Or click and drag to draw a line aligned with the page (vertically or horizontal
     <value>Reverse back sides</value>
   </data>
   <data name="ManualDuplexHelp" xml:space="preserve">
-    <value>Want to scan both sides of a document but don't have a scanner capable of Duplex scanning?
+    <value>To scan both sides of a multi-page document with your feeder scanner, you can select "Duplex" as your paper source if your scanner supports it.
+      
+If your scanner doesn't support "Duplex" scanning, follow these instructions:
 1. Scan the front sides of the document
 2. Flip the document over
 3. Scan the back sides of the document

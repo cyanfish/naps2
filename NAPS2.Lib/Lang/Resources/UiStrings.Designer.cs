@@ -1298,7 +1298,9 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Want to scan both sides of a document but don&apos;t have a scanner capable of Duplex scanning?
+        ///   Looks up a localized string similar to To scan both sides of a multi-page document with your feeder scanner, you can select &quot;Duplex&quot; as your paper source if your scanner supports it.
+        ///      
+        ///If your scanner doesn&apos;t support &quot;Duplex&quot; scanning, follow these instructions:
         ///1. Scan the front sides of the document
         ///2. Flip the document over
         ///3. Scan the back sides of the document
