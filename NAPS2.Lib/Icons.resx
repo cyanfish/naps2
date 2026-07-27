@@ -685,4 +685,10 @@
   <data name="column_double_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\column_double-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\column_double.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="help_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\help-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

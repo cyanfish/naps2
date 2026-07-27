@@ -11,7 +11,7 @@ public class HelpWidget
 
     public HelpWidget()
     {
-        _helpButton = C.IconButton("information_small", _helpVis.Toggle);
+        _helpButton = C.IconButton("help_small", _helpVis.Toggle);
     }
 
     public string? Text
