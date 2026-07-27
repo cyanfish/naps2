@@ -314,8 +314,11 @@ internal class SaneScanDriver : IScanDriver
                     case SaneStatus.DeviceBusy:
                         throw new DeviceBusyException();
                     case SaneStatus.Invalid:
-                        // TODO: Maybe not always correct? e.g. when setting options
-                        throw new DeviceOfflineException();
+                        // SaneStatus.Invalid at this point originates from sane_start (via ScanFrame),
+                        // since SaneOptionController.TrySet handles its own exceptions internally and never
+                        // propagates them. This indicates the scanner rejected the configured scan parameters
+                        // (e.g. page size, geometry, resolution) rather than a connectivity failure.
+                        throw new DeviceInvalidParameterException();
                     case SaneStatus.Jammed:
                         throw new DevicePaperJamException();
                     case SaneStatus.CoverOpen:
@@ -424,8 +427,9 @@ internal class SaneScanDriver : IScanDriver
             var deltaX = maxX - minX - width;
             var offsetX = options.PageAlign switch
             {
-                HorizontalAlign.Left => deltaX,
+                HorizontalAlign.Left => 0,
                 HorizontalAlign.Center => deltaX / 2,
+                HorizontalAlign.Right => deltaX,
                 _ => 0
             };
             scanAreaController.SetArea(minX + offsetX, minY, minX + offsetX + width, minY + height);
