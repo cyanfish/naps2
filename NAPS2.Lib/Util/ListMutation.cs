@@ -98,6 +98,32 @@ public abstract class ListMutation<T> where T : notnull
     /// <summary>
     /// Converts lists in the order 1,3,5,2,4,6 to 1,2,3,4,5,6.
     /// </summary>
+    public class ManualDuplex(bool reverseBackSides) : ListMutation<T>
+    {
+        public override void Apply(List<T> list, ref ListSelection<T> selection)
+        {
+            // Partition the list in two
+            int count = list.Count;
+            int split = (count + 1) / 2;
+            var p1 = list.Take(split).ToList();
+            var p2 = list.Skip(split).ToList();
+
+            // Rebuild the list, taking alternating items from each the partitions
+            list.Clear();
+            for (int i = 0; i < count; ++i)
+            {
+                int p1Index = i / 2;
+                int p2Index = reverseBackSides ? p2.Count - 1 - i / 2 : i / 2;
+                list.Add(i % 2 == 0 ? p1[p1Index] : p2[p2Index]);
+            }
+
+            selection = ListSelection.Empty<T>();
+        }
+    }
+
+    /// <summary>
+    /// Converts lists in the order 1,3,5,2,4,6 to 1,2,3,4,5,6.
+    /// </summary>
     public class Interleave : ListMutation<T>
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
