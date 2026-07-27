@@ -73,6 +73,12 @@ public interface ISelectable<T> where T : notnull
     ListSelection<T> Selection { get; set; }
 }
 
+public static class Selectable
+{
+    public static Selectable<T> Empty<T>() where T : notnull =>
+        new() { Selection = ListSelection.Empty<T>() };
+}
+
 public class Selectable<T> : ISelectable<T> where T : notnull
 {
     private ListSelection<T> _selection = ListSelection.Empty<T>();
