@@ -14,9 +14,7 @@ public class ManualDuplexForm : EtoDialogBase
     private readonly IListView<UiImage> _listView;
     private readonly CheckBox _alwaysShowPreview = new() { Text = UiStrings.AlwaysShowPreview };
     private readonly CheckBox _reverseBackSides = new() { Text = UiStrings.ReverseBackSides };
-    private readonly Label _helpLabel = new() { Text = UiStrings.ManualDuplexHelp };
-    private readonly LayoutControl _helpButton;
-    private readonly LayoutVisibility _helpVis = new(false);
+    private readonly HelpWidget _help = new() { Text = UiStrings.ManualDuplexHelp };
 
     public ManualDuplexForm(Naps2Config config, ManualDuplexListViewBehavior listViewBehavior, UiImageList uiImageList,
         DesktopFormProvider desktopFormProvider, ImageListActions imageListActions)
@@ -29,7 +27,6 @@ public class ManualDuplexForm : EtoDialogBase
         IconName = "column_double_small";
 
         _listView = EtoPlatform.Current.CreateListView(listViewBehavior);
-        _helpButton = C.IconButton("information_small", _helpVis.Toggle);
         _alwaysShowPreview.Checked = Config.Get(c => c.ManualDuplexSettings.AlwaysShowPreview);
         _reverseBackSides.Checked = Config.Get(c => c.ManualDuplexSettings.ReverseBackSides);
 
@@ -47,9 +44,9 @@ public class ManualDuplexForm : EtoDialogBase
             C.Spacer(),
             C.Label(UiStrings.Preview),
             _listView.Control.Scale().NaturalHeight(80),
-            _helpLabel.Visible(_helpVis),
+            _help.Label,
             L.Row(
-                _helpButton,
+                _help.Button,
                 C.Filler(),
                 L.OkCancel(C.OkButton(this, Apply), C.CancelButton(this))
             ));
