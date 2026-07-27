@@ -9,8 +9,11 @@ namespace NAPS2.EtoForms.Ui;
 public class PdfSettingsForm : EtoDialogBase
 {
     private readonly FilePathWithPlaceholders _defaultFilePath;
+    private readonly CheckBox _ocr = new() { Text = UiStrings.Ocr };
     private readonly CheckBox _skipSavePrompt = new() { Text = UiStrings.SkipSavePrompt };
     private readonly CheckBox _singlePagePdfs = new() { Text = UiStrings.SinglePageFiles };
+    private readonly SliderWithTextBox _jpegQuality = new(new SliderWithTextBox.IntConstraints(0, 100, 25));
+    private readonly SliderWithTextBox _resolutionScale = new(new SliderWithTextBox.IntConstraints(10, 100, 10));
     private readonly TextBox _title = new();
     private readonly TextBox _author = new();
     private readonly TextBox _subject = new();
@@ -36,12 +39,19 @@ public class PdfSettingsForm : EtoDialogBase
 
     private readonly EnumDropDownWidget<PdfCompat> _compat = new();
 
-    public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper, IIconProvider iconProvider) : base(config)
+    private readonly UiImageList? _imageList;
+    private readonly List<(int Width, int Height, int Dpi)> _imageDimensions = new();
+    private readonly Label _resolutionLabel = new() { Font = Fonts.Sans(9.0f), TextColor = Colors.Gray };
+    private readonly Label _sizeLabel = new() { Font = Fonts.Sans(9.0f), TextColor = Colors.Gray };
+
+    public PdfSettingsForm(Naps2Config config, DialogHelper dialogHelper, IIconProvider iconProvider, UiImageList imageList) : base(config)
     {
+        _imageList = imageList;
         Title = UiStrings.PdfSettingsFormTitle;
         IconName = "file_extension_pdf_small";
 
         _defaultFilePath = new(this, dialogHelper) { PdfOnly = true };
+        _defaultFilePath.ShowPlaceholdersLink = false;
         _compat.Format = compat => compat switch
         {
             PdfCompat.Default => UiStrings.Default,
@@ -58,45 +68,74 @@ public class PdfSettingsForm : EtoDialogBase
         _restoreDefaults.Click += RestoreDefaults_Click;
         _defaultFilePath.TextChanged += DefaultFilePath_TextChanged;
         _encryptPdf.CheckedChanged += EncryptPdf_CheckedChanged;
+
+        _jpegQuality.ValueChanged += UpdateResolutionAndSizeEstimation;
+        _resolutionScale.ValueChanged += UpdateResolutionAndSizeEstimation;
     }
 
     protected override void BuildLayout()
     {
-        FormStateController.DefaultExtraLayoutSize = new Size(60, 0);
+        FormStateController.DefaultExtraLayoutSize = new Size(150, 0);
         FormStateController.FixedHeightLayout = true;
 
         LayoutController.Content = L.Column(
             C.Label(UiStrings.DefaultFilePathLabel),
             _defaultFilePath,
-            _skipSavePrompt,
-            _singlePagePdfs,
+            L.Row(
+                _defaultFilePath.Placeholders.AlignCenter(),
+                _ocr.AlignCenter(),
+                _skipSavePrompt.AlignCenter(),
+                _singlePagePdfs.AlignCenter()
+            ).Spacing(20),
+            L.GroupBox(
+                UiStrings.JpegQuality,
+                L.Column(
+                    _jpegQuality.AsControl().SpacingAfter(0),
+                    C.Label(UiStrings.JpegQualityHelp).DynamicWrap(300).SpacingAfter(5),
+                    _sizeLabel
+                )
+            ),
+            L.GroupBox(
+                UiStrings.ResolutionScale,
+                L.Column(
+                    _resolutionScale.AsControl().SpacingAfter(0),
+                    C.Label(UiStrings.ResolutionScaleHelp).DynamicWrap(300).SpacingAfter(5),
+                    _resolutionLabel
+                )
+            ),
             L.GroupBox(
                 UiStrings.Metadata,
                 L.Column(
-                    C.Label(UiStrings.TitleLabel),
-                    _title,
-                    C.Label(UiStrings.AuthorLabel),
-                    _author,
-                    C.Label(UiStrings.SubjectLabel),
-                    _subject,
-                    C.Label(UiStrings.KeywordsLabel),
-                    _keywords
+                    L.Row(
+                        C.Label(UiStrings.TitleLabel).AlignCenter().Padding(right: 5),
+                        _title.Scale().Padding(right: 15),
+                        C.Label(UiStrings.AuthorLabel).AlignCenter().Padding(right: 5),
+                        _author.Scale()
+                    ).Aligned(),
+                    L.Row(
+                        C.Label(UiStrings.SubjectLabel).AlignCenter().Padding(right: 5),
+                        _subject.Scale().Padding(right: 15),
+                        C.Label(UiStrings.KeywordsLabel).AlignCenter().Padding(right: 5),
+                        _keywords.Scale()
+                    ).Aligned()
                 )
             ),
-            L.GroupBox(
-                UiStrings.Encryption,
-                L.Column(
-                    _encryptPdf,
+            L.Row(
+                L.GroupBox(
+                    UiStrings.Encryption,
                     L.Column(
-                        _ownerPassword,
-                        _userPassword,
-                        L.Column(_permissions.Expand()).Spacing(0)
-                    ).Visible(_encryptVis)
-                )
-            ),
-            L.GroupBox(
-                UiStrings.Compatibility,
-                _compat
+                        _encryptPdf,
+                        L.Column(
+                            _ownerPassword,
+                            _userPassword,
+                            L.Column(_permissions.Expand()).Spacing(0)
+                        ).Visible(_encryptVis)
+                    )
+                ).Scale(),
+                L.GroupBox(
+                    UiStrings.Compatibility,
+                    _compat
+                ).Scale()
             ),
             C.Filler(),
             _rememberSettings,
@@ -112,9 +151,29 @@ public class PdfSettingsForm : EtoDialogBase
 
     private void UpdateValues(Naps2Config config)
     {
+        _imageDimensions.Clear();
+        if (_imageList?.Images.Count > 0)
+        {
+            foreach (var img in _imageList.Images)
+            {
+                try
+                {
+                    using var rendered = img.GetClonedImage().Render();
+                    _imageDimensions.Add((rendered.Width, rendered.Height, (int)Math.Round(rendered.HorizontalResolution)));
+                }
+                catch
+                {
+                    _imageDimensions.Add((2480, 3508, 300));
+                }
+            }
+        }
+
         _defaultFilePath.Text = config.Get(c => c.PdfSettings.DefaultFileName);
+        _ocr.Checked = config.Get(c => c.PdfSettings.Ocr) ?? config.Get(c => c.EnableOcr);
         _skipSavePrompt.Checked = config.Get(c => c.PdfSettings.SkipSavePrompt);
         _singlePagePdfs.Checked = config.Get(c => c.PdfSettings.SinglePagePdfs);
+        _jpegQuality.IntValue = config.Get(c => c.PdfSettings.JpegQuality);
+        _resolutionScale.IntValue = Math.Max(10, config.Get(c => c.PdfSettings.ResolutionScale));
         _title.Text = config.Get(c => c.PdfSettings.Metadata.Title);
         _author.Text = config.Get(c => c.PdfSettings.Metadata.Author);
         _subject.Text = config.Get(c => c.PdfSettings.Metadata.Subject);
@@ -133,6 +192,71 @@ public class PdfSettingsForm : EtoDialogBase
         _permissions[7].Checked = config.Get(c => c.PdfSettings.Encryption.AllowFormFilling);
         _compat.SelectedItem = config.Get(c => c.PdfSettings.Compat);
         _rememberSettings.Checked = config.Get(c => c.RememberPdfSettings);
+
+        UpdateResolutionAndSizeEstimation();
+    }
+
+    private void UpdateResolutionAndSizeEstimation()
+    {
+        int scale = _resolutionScale.IntValue;
+        int quality = _jpegQuality.IntValue;
+
+        int baseDpi = 300;
+        int baseWidth = 2480;
+        int baseHeight = 3508;
+        int imageCount = _imageDimensions.Count;
+
+        if (imageCount > 0)
+        {
+            baseDpi = _imageDimensions[0].Dpi;
+            baseWidth = _imageDimensions[0].Width;
+            baseHeight = _imageDimensions[0].Height;
+        }
+
+        int newDpi = (int)Math.Round(baseDpi * scale / 100.0);
+        int newWidth = (int)Math.Round(baseWidth * scale / 100.0);
+        int newHeight = (int)Math.Round(baseHeight * scale / 100.0);
+
+        _resolutionLabel.Text = $"Resolution: {newDpi} DPI (Original: {baseDpi} DPI)  |  Dimensions: {newWidth}x{newHeight} px";
+
+        double mq;
+        if (quality >= 75)
+        {
+            mq = 1.0 + 1.2 * (quality - 75) / 25.0;
+        }
+        else if (quality >= 50)
+        {
+            mq = 0.6 + 0.4 * (quality - 50) / 25.0;
+        }
+        else
+        {
+            mq = 0.15 + 0.45 * quality / 50.0;
+        }
+
+        double singlePageBytes = baseWidth * baseHeight * 0.07 * Math.Pow(scale / 100.0, 2) * mq;
+
+        if (imageCount > 0)
+        {
+            double totalBytes = 0;
+            foreach (var dim in _imageDimensions)
+            {
+                totalBytes += dim.Width * dim.Height * 0.07 * Math.Pow(scale / 100.0, 2) * mq;
+            }
+            _sizeLabel.Text = $"Estimated PDF size (for {imageCount} page(s)): ~{FormatSize(totalBytes)}";
+        }
+        else
+        {
+            _sizeLabel.Text = $"Estimated PDF size (per standard page): ~{FormatSize(singlePageBytes)}";
+        }
+    }
+
+    private string FormatSize(double bytes)
+    {
+        if (bytes >= 1024 * 1024)
+        {
+            return $"{bytes / (1024 * 1024):F1} MB";
+        }
+        return $"{bytes / 1024:F0} KB";
     }
 
     private void UpdateEnabled()
@@ -149,6 +273,9 @@ public class PdfSettingsForm : EtoDialogBase
             DefaultFileName = _defaultFilePath.Text,
             SkipSavePrompt = _skipSavePrompt.IsChecked(),
             SinglePagePdfs = _singlePagePdfs.IsChecked(),
+            Ocr = _ocr.IsChecked(),
+            JpegQuality = _jpegQuality.IntValue,
+            ResolutionScale = _resolutionScale.IntValue,
             Metadata = new PdfMetadata
             {
                 Title = _title.Text,

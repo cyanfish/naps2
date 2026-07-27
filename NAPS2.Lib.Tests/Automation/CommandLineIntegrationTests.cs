@@ -200,6 +200,31 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ScanPdfSettings_OcrFromPdfSettings()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
+        });
+        var path = $"{FolderPath}/test.pdf";
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.OcrLanguageCode, "eng");
+            config.User.Set(c => c.PdfSettings.Ocr, true);
+            config.User.Set(c => c.EnableOcr, false);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true
+            },
+            ImageResources.ocr_test);
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ScanPdfSettings_DefaultMetadata()
     {
         var path = $"{FolderPath}/test.pdf";

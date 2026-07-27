@@ -44,6 +44,10 @@ public class FilePathWithPlaceholders
 
     public bool ImagesOnly { get; set; }
 
+    public bool ShowPlaceholdersLink { get; set; } = true;
+
+    public LinkButton Placeholders => _placeholders;
+
     public event EventHandler? TextChanged;
 
     public static implicit operator LayoutElement(FilePathWithPlaceholders control)
@@ -60,7 +64,7 @@ public class FilePathWithPlaceholders
                     ? _choose.Width(EtoPlatform.Current.IsGtk ? null : 40).MaxHeight(22).Visible(_visibility)
                     : C.None()
             ).SpacingAfter(2),
-            _placeholders.Visible(_visibility)
+            ShowPlaceholdersLink ? _placeholders.Visible(_visibility) : C.None()
         );
     }
 

@@ -1,4 +1,4 @@
-﻿namespace NAPS2.ImportExport.Images;
+namespace NAPS2.ImportExport.Images;
 
 internal class SaveImagesOperation : OperationBase
 {
@@ -70,7 +70,16 @@ internal class SaveImagesOperation : OperationBase
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                     FirstFileSaved = subFileName;
                     FileSystemHelper.EnsureParentDirExists(subFileName);
-                    using var renderedImages = images.Select(x => x.Render()).ToDisposableList();
+                    using var renderedImages = images.Select(x =>
+                    {
+                        var img = x.Render();
+                        if (imageSettings.ResolutionScale >= 10 && imageSettings.ResolutionScale < 100)
+                        {
+                            var scaleFactor = imageSettings.ResolutionScale / 100.0;
+                            return img.PerformTransform(new ScaleTransform(scaleFactor));
+                        }
+                        return img;
+                    }).ToDisposableList();
                     return _imageContext.TiffWriter.SaveTiff(renderedImages.InnerList, subFileName,
                         imageSettings.TiffCompression.ToTiffCompressionType(), ProgressHandler);
                 }
@@ -160,18 +169,30 @@ internal class SaveImagesOperation : OperationBase
     private void DoSaveImage(ProcessedImage image, string path, ImageFileFormat format, ImageSettings imageSettings)
     {
         FileSystemHelper.EnsureParentDirExists(path);
-        using var renderedImage = image.Render();
-        if (format == ImageFileFormat.Tiff)
+        var renderedImage = image.Render();
+        try
         {
-            _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
-                imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
+            if (imageSettings.ResolutionScale >= 10 && imageSettings.ResolutionScale < 100)
+            {
+                var scaleFactor = imageSettings.ResolutionScale / 100.0;
+                renderedImage = renderedImage.PerformTransform(new ScaleTransform(scaleFactor));
+            }
+            if (format == ImageFileFormat.Tiff)
+            {
+                _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
+                    imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
+            }
+            else
+            {
+                // Quality will be ignored when not needed
+                // TODO: Scale quality differently for jpeg2000?
+                var quality = imageSettings.JpegQuality.Clamp(0, 100);
+                renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
+            }
         }
-        else
+        finally
         {
-            // Quality will be ignored when not needed
-            // TODO: Scale quality differently for jpeg2000?
-            var quality = imageSettings.JpegQuality.Clamp(0, 100);
-            renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
+            renderedImage.Dispose();
         }
     }
 }
