@@ -19,6 +19,8 @@ public class PdfSettings
 
     public bool SinglePagePdfs { get; set; }
 
+    public bool UseDefaultFileNamePlaceholder { get; set; } = true;
+
     [Config]
     public PdfMetadata Metadata
     {
