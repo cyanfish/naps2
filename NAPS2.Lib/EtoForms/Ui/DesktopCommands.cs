@@ -271,11 +271,13 @@ public class DesktopCommands
             }
         })
         {
-            Text = UiStrings.ManualDuplex
+            Text = UiStrings.ManualDuplex,
+            IconName = "column_double_small"
         };
         ManualDuplexPreview = new ActionCommand(desktopSubFormController.ShowManualDuplexForm)
         {
-            Text = UiStrings.ManualDuplexPreview
+            Text = UiStrings.ManualDuplexPreview,
+            IconName = "column_double_small"
         };
         ReverseMenu = new ActionCommand
         {
