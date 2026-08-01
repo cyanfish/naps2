@@ -1000,9 +1000,9 @@ Or click and drag to draw the full area.
 
 Keyboard:
 Arrow keys move the bottom-right crop handle.
-Hold "Ctrl" to move the top-left handle instead.
-Hold "Alt" to move the whole selection at once.
-Hold "Shift" to move faster.</value>
+Hold "{0}" to move the top-left handle instead.
+Hold "{1}" to move the whole selection at once.
+Hold "{2}" to move faster.</value>
   </data>
   <data name="SplitHelp" xml:space="preserve">
     <value>Click the buttons or use the arrow keys to change the split orientation.</value>
@@ -1049,5 +1049,20 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="PagesReordered" xml:space="preserve">
     <value>Pages reordered.</value>
+  </data>
+  <data name="ControlKey" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="AltKey" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="ShiftKey" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="CommandKey" xml:space="preserve">
+    <value>⌘</value>
+  </data>
+  <data name="OptionKey" xml:space="preserve">
+    <value>⌥</value>
   </data>
 </root>

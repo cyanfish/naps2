@@ -37,7 +37,10 @@ public class CropForm : UnaryImageFormBase
     {
         Title = UiStrings.Crop;
         IconName = "transform_crop_small";
-        HelpText = UiStrings.CropHelp;
+        HelpText = string.Format(UiStrings.CropHelp,
+            EtoPlatform.Current.IsMac ? UiStrings.CommandKey : UiStrings.ControlKey,
+            EtoPlatform.Current.IsMac ? UiStrings.OptionKey : UiStrings.AltKey,
+            UiStrings.ShiftKey);
 
         _colorScheme = colorScheme;
 
@@ -100,7 +103,7 @@ public class CropForm : UnaryImageFormBase
     private void CropForm_KeyDown(object? sender, KeyEventArgs e)
     {
         bool accelerate = e.Modifiers.HasFlag(Keys.Shift);
-        bool moveOtherHandle = e.Modifiers.HasFlag(Keys.Control);
+        bool moveOtherHandle = e.Modifiers.HasFlag(Application.Instance.CommonModifier);
         bool moveWhole = e.Modifiers.HasFlag(Keys.Alt);
         int d = accelerate ? 10 : 1;
 
@@ -308,7 +311,8 @@ public class CropForm : UnaryImageFormBase
         {
             MoveCropLeft(deltaX);
             _cropR = xSum - _cropL;
-        } else  if (deltaX > 0)
+        }
+        else if (deltaX > 0)
         {
             MoveCropRight(deltaX);
             _cropL = xSum - _cropR;
@@ -422,7 +426,7 @@ public class CropForm : UnaryImageFormBase
             e.Graphics.DrawLine(handlePen, x2, yMid - yHandleLen / 2f, x2, yMid + yHandleLen / 2f);
             e.Graphics.DrawLine(handlePen, xMid - xHandleLen / 2f, y1, xMid + xHandleLen / 2f, y1);
             e.Graphics.DrawLine(handlePen, xMid - xHandleLen / 2f, y2, xMid + xHandleLen / 2f, y2);
-            
+
             // Draw middle handle
             e.Graphics.DrawLine(handlePen, xMid, yMid - midHandleLen / 2f, xMid, yMid + midHandleLen / 2f);
             e.Graphics.DrawLine(handlePen, xMid - midHandleLen / 2f, yMid, xMid + midHandleLen / 2f, yMid);
