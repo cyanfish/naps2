@@ -23,6 +23,8 @@
   <HideSettingsButton>false</HideSettingsButton>
   <HideDonateButton>false</HideDonateButton>
   <HideSidebar>false</HideSidebar>
+  <HideManualDuplex>false</HideManualDuplex>
+  <HideInterleave>true</HideInterleave>
   <DisableAutoSave>false</DisableAutoSave>
   <LockSystemProfiles>false</LockSystemProfiles>
   <LockUnspecifiedDevices>false</LockUnspecifiedDevices>

@@ -341,18 +341,29 @@ public abstract class DesktopForm : EtoFormBase
         if (!hiddenButtons.HasFlag(ToolbarButtons.Move))
             CreateToolbarStackedButtons(Commands.MoveUp, Commands.MoveDown);
         if (!hiddenButtons.HasFlag(ToolbarButtons.Reorder))
-            CreateToolbarMenu(Commands.ReorderMenu, new MenuProvider()
-                .Append(Commands.ManualDuplex)
-                .Dynamic(_manualDuplexPreviewCommands)
-                .Separator()
-                .Append(Commands.Interleave)
-                .Append(Commands.Deinterleave)
-                .Append(Commands.AltInterleave)
-                .Append(Commands.AltDeinterleave)
-                .Separator()
-                .SubMenu(Commands.ReverseMenu, new MenuProvider()
-                    .Append(Commands.ReverseAll)
-                    .Append(Commands.ReverseSelected)));
+        {
+            var menuProvider = new MenuProvider();
+            if (!hiddenButtons.HasFlag(ToolbarButtons.ManualDuplex))
+            {
+                menuProvider
+                    .Append(Commands.ManualDuplex)
+                    .Dynamic(_manualDuplexPreviewCommands)
+                    .Separator();
+            }
+            if (!hiddenButtons.HasFlag(ToolbarButtons.Interleave))
+            {
+                menuProvider
+                    .Append(Commands.Interleave)
+                    .Append(Commands.Deinterleave)
+                    .Append(Commands.AltInterleave)
+                    .Append(Commands.AltDeinterleave)
+                    .Separator();
+            }
+            menuProvider.SubMenu(Commands.ReverseMenu, new MenuProvider()
+                .Append(Commands.ReverseAll)
+                .Append(Commands.ReverseSelected));
+            CreateToolbarMenu(Commands.ReorderMenu, menuProvider);
+        }
         CreateToolbarSeparator();
         if (!hiddenButtons.HasFlag(ToolbarButtons.Delete))
             CreateToolbarButton(Commands.Delete);

@@ -57,6 +57,10 @@ public class AppConfigV0
 
     public bool HideSidebar { get; set; }
 
+    public bool HideManualDuplex { get; set; }
+
+    public bool HideInterleave { get; set; }
+
     public bool DisableAutoSave { get; set; }
 
     public bool LockSystemProfiles { get; set; }

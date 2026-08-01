@@ -192,6 +192,8 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         if (c.HideSettingsButton) flags |= ToolbarButtons.Settings;
         if (c.HideDonateButton) flags |= ToolbarButtons.Donate;
         if (c.HideSidebar) flags |= ToolbarButtons.Sidebar;
+        if (c.HideManualDuplex) flags |= ToolbarButtons.ManualDuplex;
+        if (c.HideInterleave)  flags |= ToolbarButtons.Interleave;
         return flags;
     }
 
