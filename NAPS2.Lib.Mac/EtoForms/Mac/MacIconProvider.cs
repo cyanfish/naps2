@@ -55,7 +55,8 @@ public class MacIconProvider : IIconProvider
         { "combine_hor", "square.split.2x1" },
         { "combine_ver", "square.split.1x2" },
         { "switch_hor", "arrow.left.and.right" },
-        { "switch_ver", "arrow.up.and.down" }
+        { "switch_ver", "arrow.up.and.down" },
+        { "help",  "questionmark.circle" },
         // TODO: This doesn't render properly as it's very wide and gets squished
         // { "keyboard", "keyboard" },
         // TODO: Consider these
