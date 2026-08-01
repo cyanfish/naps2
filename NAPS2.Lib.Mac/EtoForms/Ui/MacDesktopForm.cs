@@ -129,24 +129,20 @@ public class MacDesktopForm : DesktopForm
                     .Append(Commands.EditWithPick)
                     .Separator()
                     .Append(Commands.ResetImage)),
-                new SubMenuItem
-                {
-                    Text = UiStrings.Reorder,
-                    Items =
-                    {
-                        Commands.MoveUp,
-                        Commands.MoveDown,
-                        new SeparatorMenuItem(),
-                        Commands.Interleave,
-                        Commands.Deinterleave,
-                        new SeparatorMenuItem(),
-                        Commands.AltInterleave,
-                        Commands.AltDeinterleave,
-                        new SeparatorMenuItem(),
-                        Commands.ReverseAll,
-                        Commands.ReverseSelected
-                    }
-                },
+                CreateSubMenu(Commands.ReorderMenu, new MenuProvider()
+                    .Append(Commands.MoveUp)
+                    .Append(Commands.MoveDown)
+                    .Separator()
+                    .Append(Commands.ManualDuplex)
+                    .Dynamic(_manualDuplexPreviewCommands)
+                    .Separator()
+                    .Append(Commands.Interleave)
+                    .Append(Commands.Deinterleave)
+                    .Append(Commands.AltInterleave)
+                    .Append(Commands.AltDeinterleave)
+                    .Separator()
+                    .Append(Commands.ReverseAll)
+                    .Append(Commands.ReverseSelected)),
                 new SubMenuItem
                 {
                     Text = UiStrings.Tools,
