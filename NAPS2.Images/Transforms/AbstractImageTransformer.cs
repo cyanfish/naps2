@@ -173,6 +173,7 @@ internal abstract class AbstractImageTransformer<TImage> where TImage : IMemoryI
 
         var result = ImageContext.Create(width, height, image.PixelFormat);
         result.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        result.OriginalFileFormat = image.OriginalFileFormat;
         new CopyBitwiseImageOp
         {
             SourceXOffset = x,
