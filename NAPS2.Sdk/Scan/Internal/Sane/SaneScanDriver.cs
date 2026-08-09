@@ -438,7 +438,10 @@ internal class SaneScanDriver : IScanDriver
             var opt = controller.GetOption(name);
             if (opt != null)
             {
-                // TODO: Also implement bool value type
+                if (opt.Type == SaneValueType.Bool && bool.TryParse(value, out var boolValue))
+                {
+                    controller.TrySet(name, boolValue);
+                }
                 if (opt.Type == SaneValueType.String)
                 {
                     controller.TrySet(name, new SaneOptionMatcher([value]));
