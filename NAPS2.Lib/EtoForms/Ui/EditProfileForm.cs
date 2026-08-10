@@ -397,7 +397,11 @@ public class EditProfileForm : EtoDialogBase
 
             ExcludeBlankPages = ScanProfile.ExcludeBlankPages,
             BlankPageWhiteThreshold = ScanProfile.BlankPageWhiteThreshold,
-            BlankPageCoverageThreshold = ScanProfile.BlankPageCoverageThreshold
+            BlankPageCoverageThreshold = ScanProfile.BlankPageCoverageThreshold,
+
+            // Not editable in the UI, but users can set these by hand in profiles.xml, so they
+            // need to survive an edit here.
+            KeyValueOptions = ScanProfile.KeyValueOptions
         };
     }
 
