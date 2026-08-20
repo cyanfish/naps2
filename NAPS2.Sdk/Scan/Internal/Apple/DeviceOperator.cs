@@ -301,8 +301,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             await _readyTcs.Task;
 
             var unitTypes = _device.AvailableFunctionalUnitTypes;
-            bool supportsFeeder = unitTypes.Contains((NSNumber) (int) ICScannerFunctionalUnitType.Flatbed);
-            bool supportsFlatbed = unitTypes.Contains((NSNumber) (int) ICScannerFunctionalUnitType.DocumentFeeder);
+            bool supportsFlatbed = unitTypes.Contains((NSNumber) (int) ICScannerFunctionalUnitType.Flatbed);
+            bool supportsFeeder = unitTypes.Contains((NSNumber) (int) ICScannerFunctionalUnitType.DocumentFeeder);
             bool supportsDuplex = false;
             PerSourceCaps? flatbedCaps = null;
             PerSourceCaps? feederCaps = null;
