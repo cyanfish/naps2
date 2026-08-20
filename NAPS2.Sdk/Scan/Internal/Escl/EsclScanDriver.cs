@@ -398,7 +398,7 @@ internal class EsclScanDriver : IScanDriver
                 throw new DevicePaperJamException();
             }
             if (status.AdfState is not (EsclAdfState.Unknown or EsclAdfState.ScannerAdfProcessing
-                or EsclAdfState.ScannedAdfLoaded))
+                or EsclAdfState.ScannerAdfLoaded))
             {
                 throw new DeviceException(status.AdfState.ToString());
             }

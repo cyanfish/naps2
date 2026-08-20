@@ -6,7 +6,7 @@ public enum EsclAdfState
     ScannerAdfProcessing,
     ScannerAdfEmpty,
     ScannerAdfJam,
-    ScannedAdfLoaded,
+    ScannerAdfLoaded,
     ScannerAdfMispick,
     ScannerAdfHatchOpen,
     ScannerAdfDuplexPageTooShort,
