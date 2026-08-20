@@ -30,7 +30,7 @@ internal class EsclApiController : WebApiController
     [Route(HttpVerbs.Get, "/ScannerCapabilities")]
     public async Task GetScannerCapabilities()
     {
-        var caps = _deviceConfig.Capabilities;
+        var caps = await GetCapabilities();
         var protocol = _securityPolicy.HasFlag(EsclSecurityPolicy.ServerRequireHttps) ? "https" : "http";
         var iconUri = caps.IconPng != null ? $"{protocol}://naps2-{caps.Uuid}.local.:{_deviceConfig.Port}/eSCL/icon.png" : "";
         var doc =
@@ -44,11 +44,7 @@ internal class EsclApiController : WebApiController
                     new XElement(ScanNs + "AdminURI", ""),
                     new XElement(ScanNs + "IconURI", iconUri),
                     new XElement(ScanNs + "Naps2Extensions", "Progress;ErrorDetails;ShortTimeout;AnyDpi"),
-                    new XElement(ScanNs + "Platen",
-                        new XElement(ScanNs + "PlatenInputCaps", GetCommonInputCaps())),
-                    new XElement(ScanNs + "Adf",
-                        new XElement(ScanNs + "AdfSimplexInputCaps", GetCommonInputCaps()),
-                        new XElement(ScanNs + "AdfDuplexInputCaps", GetCommonInputCaps())),
+                    GetInputSourceCaps(caps),
                     new XElement(ScanNs + "CompressionFactorSupport",
                         new XElement(ScanNs + "Min", 0),
                         new XElement(ScanNs + "Max", 100),
@@ -59,22 +55,92 @@ internal class EsclApiController : WebApiController
         await writer.WriteAsync(doc);
     }
 
-    private object[] GetCommonInputCaps()
+    private async Task<EsclCapabilities> GetCapabilities()
     {
-        // TODO: After implementing scanner capabilities this should be scanner-specific
+        if (_deviceConfig.CapabilitiesProvider != null)
+        {
+            try
+            {
+                return await _deviceConfig.CapabilitiesProvider(HttpContext.CancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "ESCL server error getting device capabilities; using defaults");
+            }
+        }
+        return _deviceConfig.Capabilities;
+    }
+
+    private object[] GetInputSourceCaps(EsclCapabilities caps)
+    {
+        bool hasKnownSources = caps.PlatenCaps != null || caps.AdfSimplexCaps != null || caps.AdfDuplexCaps != null;
+        if (!hasKnownSources)
+        {
+            // If we don't know the actual device capabilities, advertise all sources with default input caps
+            return
+            [
+                new XElement(ScanNs + "Platen",
+                    new XElement(ScanNs + "PlatenInputCaps", GetInputCaps(null))),
+                new XElement(ScanNs + "Adf",
+                    new XElement(ScanNs + "AdfSimplexInputCaps", GetInputCaps(null)),
+                    new XElement(ScanNs + "AdfDuplexInputCaps", GetInputCaps(null)))
+            ];
+        }
+        var sourceElements = new List<XElement>();
+        if (caps.PlatenCaps != null)
+        {
+            sourceElements.Add(new XElement(ScanNs + "Platen",
+                new XElement(ScanNs + "PlatenInputCaps", GetInputCaps(caps.PlatenCaps))));
+        }
+        if (caps.AdfSimplexCaps != null || caps.AdfDuplexCaps != null)
+        {
+            var adfElement = new XElement(ScanNs + "Adf",
+                new XElement(ScanNs + "AdfSimplexInputCaps", GetInputCaps(caps.AdfSimplexCaps)));
+            if (caps.AdfDuplexCaps != null)
+            {
+                adfElement.Add(new XElement(ScanNs + "AdfDuplexInputCaps", GetInputCaps(caps.AdfDuplexCaps)));
+            }
+            sourceElements.Add(adfElement);
+        }
+        return sourceElements.ToArray<object>();
+    }
+
+    private object[] GetInputCaps(EsclInputCaps? inputCaps)
+    {
+        var profile = inputCaps?.SettingProfiles.FirstOrDefault();
+        object[] colorModes = profile?.ColorModes is { Count: > 0 } modes
+            ? modes.Select(mode => (object) new XElement(ScanNs + "ColorMode", mode.ToString())).ToArray()
+            :
+            [
+                new XElement(ScanNs + "ColorMode", "BlackAndWhite1"),
+                new XElement(ScanNs + "ColorMode", "Grayscale8"),
+                new XElement(ScanNs + "ColorMode", "RGB24")
+            ];
+        object[] resolutions = profile?.DiscreteResolutions is { Count: > 0 } discreteResolutions
+            ? discreteResolutions.Select(res => (object) CreateResolution(res.XResolution, res.YResolution)).ToArray()
+            :
+            [
+                CreateResolution(100),
+                CreateResolution(150),
+                CreateResolution(200),
+                CreateResolution(300),
+                CreateResolution(400),
+                CreateResolution(600),
+                CreateResolution(800),
+                CreateResolution(1200),
+                CreateResolution(2400),
+                CreateResolution(4800)
+            ];
         return
         [
-            new XElement(ScanNs + "MinWidth", "1"),
-            new XElement(ScanNs + "MaxWidth", EsclInputCaps.DEFAULT_MAX_WIDTH),
-            new XElement(ScanNs + "MinHeight", "1"),
-            new XElement(ScanNs + "MaxHeight", EsclInputCaps.DEFAULT_MAX_HEIGHT),
+            new XElement(ScanNs + "MinWidth", inputCaps?.MinWidth ?? 1),
+            new XElement(ScanNs + "MaxWidth", inputCaps?.MaxWidth ?? EsclInputCaps.DEFAULT_MAX_WIDTH),
+            new XElement(ScanNs + "MinHeight", inputCaps?.MinHeight ?? 1),
+            new XElement(ScanNs + "MaxHeight", inputCaps?.MaxHeight ?? EsclInputCaps.DEFAULT_MAX_HEIGHT),
             new XElement(ScanNs + "MaxScanRegions", "1"),
             new XElement(ScanNs + "SettingProfiles",
                 new XElement(ScanNs + "SettingProfile",
-                    new XElement(ScanNs + "ColorModes",
-                        new XElement(ScanNs + "ColorMode", "BlackAndWhite1"),
-                        new XElement(ScanNs + "ColorMode", "Grayscale8"),
-                        new XElement(ScanNs + "ColorMode", "RGB24")),
+                    new XElement(ScanNs + "ColorModes", colorModes),
                     new XElement(ScanNs + "DocumentFormats",
                         new XElement(PwgNs + "DocumentFormat", "application/pdf"),
                         new XElement(PwgNs + "DocumentFormat", "image/jpeg"),
@@ -84,25 +150,16 @@ internal class EsclApiController : WebApiController
                         new XElement(ScanNs + "DocumentFormatExt", "image/png")
                     ),
                     new XElement(ScanNs + "SupportedResolutions",
-                        new XElement(ScanNs + "DiscreteResolutions",
-                            CreateResolution(100),
-                            CreateResolution(150),
-                            CreateResolution(200),
-                            CreateResolution(300),
-                            CreateResolution(400),
-                            CreateResolution(600),
-                            CreateResolution(800),
-                            CreateResolution(1200),
-                            CreateResolution(2400),
-                            CreateResolution(4800)
-                        ))))
+                        new XElement(ScanNs + "DiscreteResolutions", resolutions))))
         ];
     }
 
-    private XElement CreateResolution(int res) =>
+    private XElement CreateResolution(int res) => CreateResolution(res, res);
+
+    private XElement CreateResolution(int xRes, int yRes) =>
         new(ScanNs + "DiscreteResolution",
-            new XElement(ScanNs + "XResolution", res.ToString()),
-            new XElement(ScanNs + "YResolution", res.ToString()));
+            new XElement(ScanNs + "XResolution", xRes.ToString()),
+            new XElement(ScanNs + "YResolution", yRes.ToString()));
 
     [Route(HttpVerbs.Get, "/icon.png")]
     public async Task GetIcon()
