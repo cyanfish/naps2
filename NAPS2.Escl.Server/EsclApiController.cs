@@ -138,7 +138,7 @@ internal class EsclApiController : WebApiController
                         jobInfo.State == EsclJobState.Processing ? "JobScanning" : "JobCompletedSuccessfully"))));
         }
         var scannerState = _serverState.IsProcessing ? EsclScannerState.Processing : EsclScannerState.Idle;
-        var adfState = _serverState.IsProcessing ? EsclAdfState.ScannerAdfProcessing : EsclAdfState.ScannedAdfLoaded;
+        var adfState = _serverState.IsProcessing ? EsclAdfState.ScannerAdfProcessing : EsclAdfState.ScannerAdfLoaded;
         var doc =
             EsclXmlHelper.CreateDocAsString(
                 new XElement(ScanNs + "ScannerStatus",

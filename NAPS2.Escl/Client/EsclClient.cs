@@ -118,10 +118,16 @@ public class EsclClient
         return new EsclScannerStatus
         {
             State = ParseHelper.MaybeParseEnum(root.Element(PwgNs + "State"), EsclScannerState.Unknown),
-            AdfState = ParseHelper.MaybeParseEnum(root.Element(ScanNs + "AdfState"), EsclAdfState.Unknown),
+            AdfState = ParseAdfState(root.Element(ScanNs + "AdfState")),
             JobStates = jobStates
         };
     }
+
+    private static EsclAdfState ParseAdfState(XElement? element) =>
+        // NAPS2 servers before this fix misspelled ScannerAdfLoaded as "ScannedAdfLoaded"
+        element?.Value == "ScannedAdfLoaded"
+            ? EsclAdfState.ScannerAdfLoaded
+            : ParseHelper.MaybeParseEnum(element, EsclAdfState.Unknown);
 
     public async Task<EsclJob> CreateScanJob(EsclScanSettings settings)
     {
