@@ -6,7 +6,7 @@ namespace NAPS2.Sdk.Tests.Scan;
 public class PerSourceCapsTests
 {
     [Fact]
-    public void UnionAllEmpty()
+    public void UnionAll_Empty()
     {
         var emptyCaps = new PerSourceCaps();
         var union = PerSourceCaps.UnionAll([emptyCaps]);
@@ -46,5 +46,6 @@ public class PerSourceCapsTests
         Assert.False(union.BitDepthCaps!.SupportsBlackAndWhite);
         Assert.Equal(8.5m, union.PageSizeCaps!.ScanArea!.WidthInInches);
         Assert.Equal(297m, union.PageSizeCaps!.ScanArea!.HeightInMm, 3);
+        Assert.True(union.PageSizeCaps.SupportsCustomPageSize);
     }
 }

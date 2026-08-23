@@ -11,6 +11,7 @@ public class PerSourceProfileCaps
     }
 
     public PageSize? ScanArea { get; set; }
+    public bool SupportsCustomPageSize { get; set; } = true;
     public List<int>? Resolutions { get; set; }
 
     private class Serializer : CustomXmlSerializer<PerSourceProfileCaps>
@@ -20,6 +21,10 @@ public class PerSourceProfileCaps
             if (obj.ScanArea != null)
             {
                 element.Add(new XElement("ScanArea", obj.ScanArea));
+            }
+            if (!obj.SupportsCustomPageSize)
+            {
+                element.Add(new XElement("SupportsCustomPageSize", obj.SupportsCustomPageSize));
             }
             if (obj.Resolutions is { Count: > 0 })
             {
@@ -34,6 +39,10 @@ public class PerSourceProfileCaps
             if (element.Element("ScanArea") is { Value.Length: > 0 } scanArea)
             {
                 caps.ScanArea = PageSize.Parse(scanArea.Value);
+            }
+            if (element.Element("SupportsCustomPageSize") is { Value.Length: > 0 } supportsCustom)
+            {
+                caps.SupportsCustomPageSize = bool.Parse(supportsCustom.Value);
             }
             if (element.Element("Resolutions") is { Value.Length: > 0 } resolutions)
             {

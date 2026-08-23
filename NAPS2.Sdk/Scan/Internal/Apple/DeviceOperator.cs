@@ -377,7 +377,8 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                 ScanArea = new PageSize(
                     (decimal) unit.PhysicalSize.Width,
                     (decimal) unit.PhysicalSize.Height,
-                    PageSizeUnit.Inch)
+                    PageSizeUnit.Inch),
+                SupportsCustomPageSize = unit is not ICScannerFunctionalUnitDocumentFeeder
             }
         };
     }

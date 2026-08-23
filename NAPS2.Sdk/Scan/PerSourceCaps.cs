@@ -32,24 +32,29 @@ public class PerSourceCaps
                 SupportsBlackAndWhite = (bitDepthCaps?.SupportsBlackAndWhite ?? false) || bd.SupportsBlackAndWhite,
             };
         }
-        PageSizeCaps? pageSizeCaps = null;
-        foreach (var area in capsColl.Select(x => x.PageSizeCaps?.ScanArea).WhereNotNull())
+        PageSizeCaps? mergedPageSizeCaps = null;
+        foreach (var perSourcePageSizeCaps in capsColl.Select(x => x.PageSizeCaps).WhereNotNull())
         {
-            pageSizeCaps = new PageSizeCaps
+            var perSourceArea = perSourcePageSizeCaps.ScanArea;
+            mergedPageSizeCaps = new PageSizeCaps
             {
-                ScanArea = pageSizeCaps?.ScanArea == null
-                    ? area
-                    : new PageSize(
-                        Math.Max(pageSizeCaps.ScanArea.WidthInInches, area.WidthInInches),
-                        Math.Max(pageSizeCaps.ScanArea.HeightInInches, area.HeightInInches),
-                        PageSizeUnit.Inch)
+                ScanArea = mergedPageSizeCaps?.ScanArea == null
+                    ? perSourceArea
+                    : perSourceArea == null
+                        ? mergedPageSizeCaps.ScanArea
+                        : new PageSize(
+                            Math.Max(mergedPageSizeCaps.ScanArea.WidthInInches, perSourceArea.WidthInInches),
+                            Math.Max(mergedPageSizeCaps.ScanArea.HeightInInches, perSourceArea.HeightInInches),
+                            PageSizeUnit.Inch),
+                SupportsCustomPageSize = (mergedPageSizeCaps?.SupportsCustomPageSize ?? false) ||
+                                         perSourcePageSizeCaps.SupportsCustomPageSize
             };
         }
         return new PerSourceCaps
         {
             DpiCaps = dpiCaps,
             BitDepthCaps = bitDepthCaps,
-            PageSizeCaps = pageSizeCaps
+            PageSizeCaps = mergedPageSizeCaps
         };
     }
 

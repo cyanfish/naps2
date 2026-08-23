@@ -143,6 +143,7 @@ public class Sidebar
             UpdateUiForProfile();
         };
         _profileManager.ProfilesUpdated += (_, _) => UpdateUiForProfile();
+        _paperSource.SelectedItemChanged += (_, _) => UpdateUiForSource();
 
         UpdateUiForProfile();
 
@@ -221,6 +222,14 @@ public class Sidebar
             ? paperSources
             : EnumDropDownWidget<ScanSource>.DefaultItems;
 
+        UpdateUiForSource();
+    }
+
+    private void UpdateUiForSource()
+    {
+        var profile = _profile.SelectedItem;
+        if (profile == null) return;
+
         var selectedSource = _paperSource.SelectedItem;
         var perSource = selectedSource switch
         {
@@ -231,7 +240,7 @@ public class Sidebar
         };
 
         var validResolutions = perSource?.Resolutions;
-        _resolution.VisiblePresets = validResolutions is [_, ..]
+        _resolution!.VisiblePresets = validResolutions is [_, ..]
             ? validResolutions
             : EnumDropDownWidget<ScanDpi>.DefaultItems.Select(x => x.ToIntDpi());
 
@@ -240,8 +249,9 @@ public class Sidebar
 
         var allPresets = EnumDropDownWidget<ScanPageSize>.DefaultItems.SkipLast(2).ToList();
         var conditionalPresets = new[] { ScanPageSize.A3, ScanPageSize.B4 };
-        _pageSize.VisiblePresets = allPresets.Where(preset =>
+        _pageSize!.VisiblePresets = allPresets.Where(preset =>
             !conditionalPresets.Contains(preset) || sizeCaps.Fits(preset.PageDimensions()!.ToPageSize()));
+        _pageSize.ShowCustom = perSource?.SupportsCustomPageSize ?? true;
     }
 
     public void ToggleVisibility()

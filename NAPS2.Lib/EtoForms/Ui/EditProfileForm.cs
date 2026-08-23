@@ -185,6 +185,7 @@ public class EditProfileForm : EtoDialogBase
         var conditionalPresets = new[] { ScanPageSize.A3, ScanPageSize.B4 };
         _pageSize.VisiblePresets = allPresets.Where(preset =>
             !conditionalPresets.Contains(preset) || sizeCaps.Fits(preset.PageDimensions()!.ToPageSize()));
+        _pageSize.ShowCustom = perSource?.SupportsCustomPageSize ?? true;
 
         _suppressChangeEvent = false;
     }
@@ -243,16 +244,19 @@ public class EditProfileForm : EtoDialogBase
             Glass = new PerSourceProfileCaps
             {
                 ScanArea = caps?.FlatbedCaps?.PageSizeCaps?.ScanArea,
+                SupportsCustomPageSize = caps?.FlatbedCaps?.PageSizeCaps?.SupportsCustomPageSize ?? true,
                 Resolutions = caps?.FlatbedCaps?.DpiCaps?.CommonValues?.ToList()
             },
             Feeder = new PerSourceProfileCaps
             {
                 ScanArea = caps?.FeederCaps?.PageSizeCaps?.ScanArea,
+                SupportsCustomPageSize = caps?.FeederCaps?.PageSizeCaps?.SupportsCustomPageSize ?? true,
                 Resolutions = caps?.FeederCaps?.DpiCaps?.CommonValues?.ToList()
             },
             Duplex = new PerSourceProfileCaps
             {
                 ScanArea = caps?.DuplexCaps?.PageSizeCaps?.ScanArea,
+                SupportsCustomPageSize = caps?.DuplexCaps?.PageSizeCaps?.SupportsCustomPageSize ?? true,
                 Resolutions = caps?.DuplexCaps?.DpiCaps?.CommonValues?.ToList()
             }
         };

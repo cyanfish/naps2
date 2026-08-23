@@ -11,6 +11,11 @@ public class PageSizeCaps
     public PageSize? ScanArea { get; init; }
 
     /// <summary>
+    /// Whether the scanner allows custom page sizes to be set (as opposed to standard page sizes like Letter/A4).
+    /// </summary>
+    public bool SupportsCustomPageSize { get; init; } = true;
+
+    /// <summary>
     /// Determines whether the provided page size fits within the full scan area (with 1% margin of error).
     /// </summary>
     public bool Fits(PageSize pageSize)

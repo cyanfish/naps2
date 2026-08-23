@@ -29,25 +29,41 @@ public class PageSizeDropDownWidget : DropDownWidget<PageSizeDropDownWidget.Page
         }
     }
 
+    public bool ShowCustom
+    {
+        get;
+        set
+        {
+            field = value;
+            RegenerateItems();
+        }
+    }
+
     private void RegenerateItems()
     {
         var presetSizes = _visiblePresets.Select(size => new PageSizeListItem(size)).ToList();
-        var customSizes = _window.Config.Get(c => c.CustomPageSizePresets)
-            .OrderBy(x => x.Name)
-            .Select(preset => new PageSizeListItem
-            {
-                Type = ScanPageSize.Custom,
-                Text = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width,
-                    preset.Dimens.Height, preset.Dimens.Unit.Description()),
-                CustomName = preset.Name,
-                CustomDimens = preset.Dimens
-            }).ToList();
+        var customSizes = new List<PageSizeListItem>();
 
-        if (_customPageSize != null && !customSizes.Contains(_customPageSize))
+        if (ShowCustom)
         {
-            customSizes.Add(_customPageSize);
+            customSizes = _window.Config.Get(c => c.CustomPageSizePresets)
+                .OrderBy(x => x.Name)
+                .Select(preset => new PageSizeListItem
+                {
+                    Type = ScanPageSize.Custom,
+                    Text = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width,
+                        preset.Dimens.Height, preset.Dimens.Unit.Description()),
+                    CustomName = preset.Name,
+                    CustomDimens = preset.Dimens
+                }).ToList();
+            if (_customPageSize != null && !customSizes.Contains(_customPageSize))
+            {
+                customSizes.Add(_customPageSize);
+            }
+            customSizes.Add(new PageSizeListItem(ScanPageSize.Custom));
         }
-        Items = presetSizes.Concat(customSizes).Append(new PageSizeListItem(ScanPageSize.Custom));
+
+        Items = presetSizes.Concat(customSizes);
     }
 
     private void OnSelectedItemChanged(object? sender, EventArgs e)
