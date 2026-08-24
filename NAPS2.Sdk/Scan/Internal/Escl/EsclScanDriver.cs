@@ -173,7 +173,7 @@ internal class EsclScanDriver : IScanDriver
             bool hasErrorDetailsExtension = caps.Naps2Extensions?.Contains("ErrorDetails") ?? false;
             bool hasShortTimeoutExtension = caps.Naps2Extensions?.Contains("ShortTimeout") ?? false;
             bool hasAnyDpiExtension = caps.Naps2Extensions?.Contains("AnyDpi") ?? false;
-            var scanSettings = GetScanSettings(options, caps, hasAnyDpiExtension);
+            var scanSettings = GetScanSettings(options, caps, hasAnyDpiExtension, status);
             Action<double>? progressCallback = hasProgressExtension ? scanEvents.PageProgress : null;
 
             if (cancelToken.IsCancellationRequested) return;
@@ -441,7 +441,7 @@ internal class EsclScanDriver : IScanDriver
         }
     }
 
-    private EsclScanSettings GetScanSettings(ScanOptions options, EsclCapabilities caps, bool hasAnyDpiExtension)
+    private EsclScanSettings GetScanSettings(ScanOptions options, EsclCapabilities caps, bool hasAnyDpiExtension, EsclScannerStatus status)
     {
         if (options.PaperSource == PaperSource.Feeder && caps.AdfSimplexCaps == null)
         {
@@ -451,10 +451,16 @@ internal class EsclScanDriver : IScanDriver
         {
             throw new NoDuplexSupportException();
         }
-        if (options.PaperSource is PaperSource.Flatbed or PaperSource.Auto
-            && caps.PlatenCaps == null && caps.AdfSimplexCaps != null)
+
+        if (options.PaperSource == PaperSource.Auto)
         {
-            options.PaperSource = PaperSource.Feeder;
+            options.PaperSource = caps switch
+            {
+                { PlatenCaps: not null, AdfSimplexCaps: null } => PaperSource.Flatbed,
+                { PlatenCaps: null, AdfSimplexCaps: not null } => PaperSource.Feeder,
+                _ when status is { AdfState: not EsclAdfState.ScannerAdfEmpty } => PaperSource.Feeder,
+                _ => PaperSource.Flatbed
+            };
         }
 
         var (inputCaps, inputSource, duplex) = options.PaperSource switch
