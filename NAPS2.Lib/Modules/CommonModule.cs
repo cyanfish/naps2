@@ -39,9 +39,30 @@ public class CommonModule : Module
         builder.RegisterType<WorkerScanBridge>().AsSelf();
 
         // Config
+        string configFileName = "config";
+        string? configName = null;  // Default: standard config file
+        // Config file suffix specified via command line argument?
+        string? configFileOption = Environment.GetCommandLineArgs()
+                                             .FirstOrDefault(s => s.ToLower().StartsWith("/config="));
+        if (configFileOption != null)
+        {
+            configName = configFileOption.Substring("/config=".Length).Trim();
+            if (configName == "")
+                configName = null;
+            else
+            {
+                if (Path.GetInvalidFileNameChars().Any(configName.Contains))
+                    configName = null;
+                else
+                    configFileName += "_" + configName;
+            }
+        }
+        configFileName += ".xml";
+
         // TODO: Make this a usable path on Mac/Linux
         var config = new Naps2Config(Path.Combine(Paths.Executable, "appsettings.xml"),
-            Path.Combine(Paths.AppData, "config.xml"));
+            Path.Combine(Paths.AppData, configFileName), 
+            configName);   // Remember optional config name
         builder.RegisterInstance(config);
         builder.RegisterBuildCallback(ctx =>
         {
