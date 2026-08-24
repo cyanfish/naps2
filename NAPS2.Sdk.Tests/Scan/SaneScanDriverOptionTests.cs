@@ -34,6 +34,60 @@ public class SaneScanDriverOptionTests : ContextualTests
         VerifyCapPaperSources(device, true, true, true);
     }
 
+    [Theory]
+    [InlineData("true", true)]
+    [InlineData("True", true)]
+    [InlineData("false", false)]
+    [InlineData("False", false)]
+    public void SetOptions_BoolKeyValueOption(string value, bool expected)
+    {
+        var device = BoolOptionDeviceMock();
+        var options = new ScanOptions
+        {
+            PaperSource = PaperSource.Feeder,
+            PageSize = PageSize.A4,
+            KeyValueOptions = { ["adf-crp"] = value }
+        };
+
+        _driver.SetOptions(device, options);
+
+        // Note this must be applied after the scan area is set, as some backends (e.g. epsonds)
+        // reset auto-crop when br-x/br-y is written.
+        Assert.Equal(expected, device.GetValue(6));
+    }
+
+    [Theory]
+    [InlineData("maybe")]
+    [InlineData("yes")]
+    [InlineData("1")]
+    public void SetOptions_BoolKeyValueOption_IgnoresUnparseableValue(string value)
+    {
+        var device = BoolOptionDeviceMock();
+        var options = new ScanOptions
+        {
+            PaperSource = PaperSource.Feeder,
+            PageSize = PageSize.A4,
+            KeyValueOptions = { ["adf-crp"] = value }
+        };
+
+        _driver.SetOptions(device, options);
+
+        Assert.Throws<KeyNotFoundException>(() => device.GetValue(6));
+    }
+
+    private static DeviceOptionsMock BoolOptionDeviceMock() => new([
+        SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF"]),
+        SaneOption.CreateFixedForTesting(2, SaneOptionNames.TOP_LEFT_X,
+            new SaneRange { Min = 0, Max = 100, Quant = 1 }),
+        SaneOption.CreateFixedForTesting(3, SaneOptionNames.TOP_LEFT_Y,
+            new SaneRange { Min = 0, Max = 100, Quant = 1 }),
+        SaneOption.CreateFixedForTesting(4, SaneOptionNames.BOT_RIGHT_X,
+            new SaneRange { Min = 0, Max = 100, Quant = 1 }),
+        SaneOption.CreateFixedForTesting(5, SaneOptionNames.BOT_RIGHT_Y,
+            new SaneRange { Min = 0, Max = 100, Quant = 1 }),
+        SaneOption.CreateBooleanForTesting(6, "adf-crp")
+    ]);
+
     [Fact]
     public void GetSaneCaps()
     {
