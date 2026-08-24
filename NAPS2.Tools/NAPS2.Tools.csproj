@@ -16,7 +16,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NuGet.Protocol" Version="7.6.0" />
     <PackageReference Include="Octokit" Version="14.0.0" />
-    <PackageReference Include="SSH.NET" Version="2025.1.0" />
+    <PackageReference Include="SSH.NET" Version="2026.0.0" />
     <PackageReference Include="VirusTotalNet" Version="2.2.0" />
   </ItemGroup>
 
