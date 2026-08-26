@@ -38,7 +38,7 @@ public class BatchScanPerformer : IBatchScanPerformer
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _formFactory, _config,
             _profileManager, _thumbnailController, settings, progressCallback, cancelToken, batchForm, imageCallback);
-        await state.Do();
+        await state.DoIter();
     }
 
     private class BatchState
@@ -58,7 +58,6 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private ScanProfile _profile;
         private ScanParams _scanParams;
-        private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
             IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
@@ -93,78 +92,48 @@ public class BatchScanPerformer : IBatchScanPerformer
                 OcrCancelToken = _cancelToken,
                 ThumbnailSize = thumbnailController.RenderSize
             };
-            _scans = [];
         }
 
-        public async Task Do()
-        {
-            try
-            {
-                _cancelToken.ThrowIfCancellationRequested();
-                await Input();
-            }
-            catch (OperationCanceledException)
-            {
-                return;
-            }
-            catch (Exception)
-            {
-                _cancelToken.ThrowIfCancellationRequested();
-                // Save at least some data so it isn't lost
-                await Output();
-                throw;
-            }
-
-            try
-            {
-                _cancelToken.ThrowIfCancellationRequested();
-                await Output();
-            }
-            catch (OperationCanceledException)
-            {
-            }
-        }
-
-        private async Task Input()
+        public async Task DoIter()
         {
             await Task.Run(async () =>
             {
-                if (_settings.ScanType == BatchScanType.Single)
-                {
-                    await InputOneScan(-1);
-                }
-                else if (_settings.ScanType == BatchScanType.MultipleWithDelay)
-                {
-                    for (int i = 0; i < _settings.ScanCount; i++)
-                    {
-                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
-                        if (i != 0)
-                        {
-                            ThreadSleepWithCancel(TimeSpan.FromSeconds(_settings.ScanIntervalSeconds),
-                                _cancelToken);
-                            _cancelToken.ThrowIfCancellationRequested();
-                        }
-
-                        if (!await InputOneScan(i))
-                        {
-                            return;
-                        }
-                    }
-                }
-                else if (_settings.ScanType == BatchScanType.MultipleWithPrompt)
-                {
-                    int i = 0;
-                    do
-                    {
-                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
-                        if (!await InputOneScan(i++))
-                        {
-                            return;
-                        }
-                        _cancelToken.ThrowIfCancellationRequested();
-                    } while (PromptForNextScan());
-                }
+                var scans = InputIter();
+                await OutputIter(scans);
             });
+        }
+
+        private async IAsyncEnumerable<IAsyncEnumerable<ProcessedImage>> InputIter()
+        {
+            if (_settings.ScanType == BatchScanType.Single)
+            {
+                yield return DoScanIter();
+            }
+            else if (_settings.ScanType == BatchScanType.MultipleWithDelay)
+            {
+                for (int i = 0; i < _settings.ScanCount; i++)
+                {
+                    _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                    if (i != 0)
+                    {
+                        ThreadSleepWithCancel(TimeSpan.FromSeconds(_settings.ScanIntervalSeconds),
+                            _cancelToken);
+                        _cancelToken.ThrowIfCancellationRequested();
+                    }
+
+                    yield return InputOneScanIter(i);
+                }
+            }
+            else if (_settings.ScanType == BatchScanType.MultipleWithPrompt)
+            {
+                int i = 0;
+                do
+                {
+                    _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                    yield return InputOneScanIter(i++);
+                    _cancelToken.ThrowIfCancellationRequested();
+                } while (PromptForNextScan(i));
+            }
         }
 
         private void ThreadSleepWithCancel(TimeSpan sleepDuration, CancellationToken cancelToken)
@@ -172,90 +141,162 @@ public class BatchScanPerformer : IBatchScanPerformer
             cancelToken.WaitHandle.WaitOne(sleepDuration);
         }
 
-        private async Task<bool> InputOneScan(int scanNumber)
+        private async IAsyncEnumerable<ProcessedImage> InputOneScanIter(int scanNumber)
         {
-            var scan = new List<ProcessedImage>();
-            int pageNumber = 1;
-            _progressCallback(scanNumber == -1
-                ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-            _cancelToken.ThrowIfCancellationRequested();
-            try
+            var pageNumber = 1;
+            await foreach (var image in DoScanIter())
             {
-                await DoScan(scanNumber, scan, pageNumber);
+                yield return image;
+                _cancelToken.ThrowIfCancellationRequested();
+                _progressCallback(string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
             }
-            catch (OperationCanceledException)
-            {
-                _scans.Add(scan);
-                throw;
-            }
-            if (scan.Count == 0)
-            {
-                // Presume cancelled
-                return false;
-            }
-            _scans.Add(scan);
-            return true;
         }
 
-        private async Task DoScan(int scanNumber, List<ProcessedImage> scan, int pageNumber)
+        private async IAsyncEnumerable<ProcessedImage> DoScanIter()
         {
             var handle = Invoker.Current.InvokeGet(() => (_batchForm as Window)?.NativeHandle ?? IntPtr.Zero);
             var images =
                 _scanPerformer.PerformScan(_profile, _scanParams, handle, _cancelToken);
             await foreach(var image in images)
             {
-                scan.Add(image);
+                yield return image;
                 _cancelToken.ThrowIfCancellationRequested();
-                _progressCallback(scanNumber == -1
-                    ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
             }
         }
 
-        private bool PromptForNextScan()
+        private bool PromptForNextScan(int scanNumber)
         {
             return Invoker.Current.InvokeGet(() =>
             {
                 var promptForm = _formFactory.Create<BatchPromptForm>();
-                promptForm.ScanNumber = _scans.Count + 1;
+                promptForm.ScanNumber = scanNumber + 1;
                 promptForm.ShowModal();
                 return promptForm.Result;
             });
         }
 
-        private async Task Output()
+        private async Task OutputIter(IAsyncEnumerable<IAsyncEnumerable<ProcessedImage>> scans)
         {
             _progressCallback(MiscResources.BatchStatusSaving);
 
-            var placeholders = Placeholders.All.WithDate(DateTime.Now);
-            var allImages = _scans.SelectMany(x => x).ToList();
-
             if (_settings.OutputType == BatchOutputType.Load)
             {
-                foreach (var image in allImages)
+                // TODO: do we need to collect here, or can we call the callback in an async loop?
+                await OutputIterLoad(scans);
+            }
+            else if (_settings.OutputType == BatchOutputType.SingleFile)
+            {
+                await OutputIterSingleFile(scans);
+            }
+            else if (_settings.OutputType == BatchOutputType.MultipleFiles)
+            {
+                await OutputIterMultipleFiles(scans);
+            }
+                
+        }
+        private async Task OutputIterLoad(IAsyncEnumerable<IAsyncEnumerable<ProcessedImage>> scans)
+        {
+            await foreach (var scan in scans)
+            {
+                await foreach (var image in scan)
                 {
                     _loadImageCallback(image);
                 }
             }
-            else if (_settings.OutputType == BatchOutputType.SingleFile)
+        }
+
+        private async Task OutputIterSingleFile(IAsyncEnumerable<IAsyncEnumerable<ProcessedImage>> scans)
+        {
+            var allImages = new List<ProcessedImage>();
+            var placeholders = Placeholders.All.WithDate(DateTime.Now);
+            try
             {
+                await foreach (var scan in scans)
+                {
+                    await foreach (var image in scan)
+                    {
+                        allImages.Add(image);
+                    }
+                }
+
                 await Save(placeholders, 0, allImages);
+            }
+            catch (OperationCanceledException)
+            {
+                // Cancelled, discard everything
+                return;
+            }
+            catch (Exception)
+            {
+                // Even if we got an exception, try to output what we've got
+                await Save(placeholders, 0, allImages);
+            }
+            finally
+            {
                 foreach (var img in allImages)
                 {
                     img.Dispose();
                 }
             }
-            else if (_settings.OutputType == BatchOutputType.MultipleFiles)
+        }
+
+        private async Task OutputIterMultipleFiles(IAsyncEnumerable<IAsyncEnumerable<ProcessedImage>> scans)
+        {
+            // We are not using SaveSeparatorHelper here because it expects IEnumerable instead of IAsyncEnumerable
+            // Reimplementing it to accept IAsyncEnumerable ended up being way more code than just implementing the logic here
+            var currentImages = new List<ProcessedImage>();
+            try
             {
-                int i = 0;
-                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator))
+                await foreach (var scan in scans)
                 {
-                    await Save(placeholders, i++, imageList);
-                    foreach (var img in imageList)
+                    if (_settings.SaveSeparator == SaveSeparator.FilePerScan)
                     {
-                        img.Dispose();
+                        await foreach (var image in scan)
+                        {
+                            currentImages.Add(image);
+                        }
+                        await Save(Placeholders.All.WithDate(DateTime.Now), 0, currentImages);
+                        currentImages.Clear();
                     }
+                    else if (_settings.SaveSeparator == SaveSeparator.FilePerPage)
+                    {
+                        await foreach (var image in scan)
+                        {
+                            await Save(Placeholders.All.WithDate(DateTime.Now), 0, [image]);
+                        }
+                    }
+                    else if (_settings.SaveSeparator == SaveSeparator.PatchT)
+                    {
+                        await foreach (var image in scan)
+                        {
+                            if (image.PostProcessingData.Barcode.IsPatchT)
+                            {
+                                image.Dispose();
+                                await Save(Placeholders.All.WithDate(DateTime.Now), 0, currentImages);
+                            }
+                            else
+                            {
+                                currentImages.Add(image);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                // Cancelled, discard everything
+                return;
+            }
+            catch (Exception)
+            {
+                // Even if we got an exception, try to output what we've got
+                await Save(Placeholders.All.WithDate(DateTime.Now), 0, currentImages);
+            }
+            finally
+            {
+                foreach (var img in currentImages)
+                {
+                    img.Dispose();
                 }
             }
         }
