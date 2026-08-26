@@ -58,7 +58,6 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private ScanProfile _profile;
         private ScanParams _scanParams;
-        private List<List<ProcessedImage>> _scans;
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
             IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
@@ -93,37 +92,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                 OcrCancelToken = _cancelToken,
                 ThumbnailSize = thumbnailController.RenderSize
             };
-            _scans = [];
         }
-
-        //public async Task Do()
-        //{
-        //    try
-        //    {
-        //        _cancelToken.ThrowIfCancellationRequested();
-        //        await Input();
-        //    }
-        //    catch (OperationCanceledException)
-        //    {
-        //        return;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        _cancelToken.ThrowIfCancellationRequested();
-        //        // Save at least some data so it isn't lost
-        //        await Output();
-        //        throw;
-        //    }
-
-        //    try
-        //    {
-        //        _cancelToken.ThrowIfCancellationRequested();
-        //        await Output();
-        //    }
-        //    catch (OperationCanceledException)
-        //    {
-        //    }
-        //}
 
         public async Task DoIter()
         {
@@ -131,48 +100,6 @@ public class BatchScanPerformer : IBatchScanPerformer
             {
                 var scans = InputIter();
                 await OutputIter(scans);
-            });
-        }
-
-        private async Task Input()
-        {
-            await Task.Run(async () =>
-            {
-                if (_settings.ScanType == BatchScanType.Single)
-                {
-                    await InputOneScan(-1);
-                }
-                else if (_settings.ScanType == BatchScanType.MultipleWithDelay)
-                {
-                    for (int i = 0; i < _settings.ScanCount; i++)
-                    {
-                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
-                        if (i != 0)
-                        {
-                            ThreadSleepWithCancel(TimeSpan.FromSeconds(_settings.ScanIntervalSeconds),
-                                _cancelToken);
-                            _cancelToken.ThrowIfCancellationRequested();
-                        }
-
-                        if (!await InputOneScan(i))
-                        {
-                            return;
-                        }
-                    }
-                }
-                else if (_settings.ScanType == BatchScanType.MultipleWithPrompt)
-                {
-                    int i = 0;
-                    do
-                    {
-                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
-                        if (!await InputOneScan(i++))
-                        {
-                            return;
-                        }
-                        _cancelToken.ThrowIfCancellationRequested();
-                    } while (PromptForNextScan());
-                }
             });
         }
 
@@ -205,39 +132,13 @@ public class BatchScanPerformer : IBatchScanPerformer
                     _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
                     yield return InputOneScanIter(i++);
                     _cancelToken.ThrowIfCancellationRequested();
-                } while (PromptForNextScan());
+                } while (PromptForNextScan(i));
             }
         }
 
         private void ThreadSleepWithCancel(TimeSpan sleepDuration, CancellationToken cancelToken)
         {
             cancelToken.WaitHandle.WaitOne(sleepDuration);
-        }
-
-        private async Task<bool> InputOneScan(int scanNumber)
-        {
-            var scan = new List<ProcessedImage>();
-            int pageNumber = 1;
-            _progressCallback(scanNumber == -1
-                ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-            _cancelToken.ThrowIfCancellationRequested();
-            try
-            {
-                await DoScan(scanNumber, scan, pageNumber);
-            }
-            catch (OperationCanceledException)
-            {
-                _scans.Add(scan);
-                throw;
-            }
-            if (scan.Count == 0)
-            {
-                // Presume cancelled
-                return false;
-            }
-            _scans.Add(scan);
-            return true;
         }
 
         private async IAsyncEnumerable<ProcessedImage> InputOneScanIter(int scanNumber)
@@ -248,21 +149,6 @@ public class BatchScanPerformer : IBatchScanPerformer
                 yield return image;
                 _cancelToken.ThrowIfCancellationRequested();
                 _progressCallback(string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
-            }
-        }
-
-        private async Task DoScan(int scanNumber, List<ProcessedImage> scan, int pageNumber)
-        {
-            var handle = Invoker.Current.InvokeGet(() => (_batchForm as Window)?.NativeHandle ?? IntPtr.Zero);
-            var images =
-                _scanPerformer.PerformScan(_profile, _scanParams, handle, _cancelToken);
-            await foreach(var image in images)
-            {
-                scan.Add(image);
-                _cancelToken.ThrowIfCancellationRequested();
-                _progressCallback(scanNumber == -1
-                    ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
             }
         }
 
@@ -278,51 +164,15 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
         }
 
-        private bool PromptForNextScan()
+        private bool PromptForNextScan(int scanNumber)
         {
             return Invoker.Current.InvokeGet(() =>
             {
                 var promptForm = _formFactory.Create<BatchPromptForm>();
-                promptForm.ScanNumber = _scans.Count + 1;
+                promptForm.ScanNumber = scanNumber + 1;
                 promptForm.ShowModal();
                 return promptForm.Result;
             });
-        }
-
-        private async Task Output()
-        {
-            _progressCallback(MiscResources.BatchStatusSaving);
-
-            var placeholders = Placeholders.All.WithDate(DateTime.Now);
-            var allImages = _scans.SelectMany(x => x).ToList();
-
-            if (_settings.OutputType == BatchOutputType.Load)
-            {
-                foreach (var image in allImages)
-                {
-                    _loadImageCallback(image);
-                }
-            }
-            else if (_settings.OutputType == BatchOutputType.SingleFile)
-            {
-                await Save(placeholders, 0, allImages);
-                foreach (var img in allImages)
-                {
-                    img.Dispose();
-                }
-            }
-            else if (_settings.OutputType == BatchOutputType.MultipleFiles)
-            {
-                int i = 0;
-                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator))
-                {
-                    await Save(placeholders, i++, imageList);
-                    foreach (var img in imageList)
-                    {
-                        img.Dispose();
-                    }
-                }
-            }
         }
 
         private async Task OutputIter(IAsyncEnumerable<IAsyncEnumerable<ProcessedImage>> scans)
@@ -392,6 +242,8 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task OutputIterMultipleFiles(IAsyncEnumerable<IAsyncEnumerable<ProcessedImage>> scans)
         {
+            // We are not using SaveSeparatorHelper here because it expects IEnumerable instead of IAsyncEnumerable
+            // Reimplementing it to accept IAsyncEnumerable ended up being way more code than just implementing the logic here
             var currentImages = new List<ProcessedImage>();
             try
             {
