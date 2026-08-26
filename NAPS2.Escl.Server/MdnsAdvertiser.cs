@@ -114,6 +114,11 @@ public class MdnsAdvertiser : IDisposable
                     : $"representation=https://naps2-{caps.Uuid}.local.:{deviceConfig.TlsPort}/eSCL/icon.png");
         }
         record.Strings.Add("rs=eSCL");
+        if (!string.IsNullOrEmpty(caps.AdminUri))
+        {
+            // Some eSCL clients (e.g. SwiftESCL-based apps) ignore advertisements without an adminurl key
+            record.Strings.Add($"adminurl={caps.AdminUri}");
+        }
         record.Strings.Add($"ty={name}");
         record.Strings.Add("pdl=application/pdf,image/jpeg,image/png");
         // TODO: Actual adf/duplex, etc.

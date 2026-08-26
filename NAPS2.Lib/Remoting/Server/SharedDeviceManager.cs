@@ -193,7 +193,7 @@ public class SharedDeviceManager : ISharedDeviceManager
     }
 
     private void RegisterOnServer(SharedDevice device) =>
-        _server.RegisterDevice(device.Device, device.Name, device.Port, device.TlsPort);
+        _server.RegisterDevice(device.Device, device.Name, device.Port, device.TlsPort, device.AdminUri);
 
     private void UnregisterOnServer(SharedDevice device) =>
         _server.UnregisterDevice(device.Device, device.Name);

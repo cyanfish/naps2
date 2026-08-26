@@ -41,7 +41,7 @@ internal class EsclApiController : WebApiController
                     new XElement(PwgNs + "SerialNumber", caps.SerialNumber),
                     new XElement(ScanNs + "Manufacturer", caps.Manufacturer),
                     new XElement(ScanNs + "UUID", caps.Uuid),
-                    new XElement(ScanNs + "AdminURI", ""),
+                    new XElement(ScanNs + "AdminURI", caps.AdminUri ?? ""),
                     new XElement(ScanNs + "IconURI", iconUri),
                     new XElement(ScanNs + "Naps2Extensions", "Progress;ErrorDetails;ShortTimeout;AnyDpi"),
                     new XElement(ScanNs + "Platen",
