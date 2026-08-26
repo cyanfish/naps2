@@ -55,9 +55,11 @@ public class ScanServer : IDisposable
 
     public void SetDefaultIcon(byte[] iconPng) => _defaultIconPng = iconPng;
 
-    public void RegisterDevice(ScanDevice device, string? displayName = null, int port = 0, int tlsPort = 0) =>
+    public void RegisterDevice(ScanDevice device, string? displayName = null, int port = 0, int tlsPort = 0,
+        string? adminUri = null) =>
         RegisterDevice(new ScanServerDevice
-            { Device = device, Name = displayName ?? device.Name, Port = port, TlsPort = tlsPort });
+            { Device = device, Name = displayName ?? device.Name, Port = port, TlsPort = tlsPort,
+                AdminUri = adminUri });
 
     private void RegisterDevice(ScanServerDevice sharedDevice)
     {
@@ -95,6 +97,7 @@ public class ScanServer : IDisposable
             {
                 MakeAndModel = device.Name,
                 Uuid = device.GetUuid(InstanceId),
+                AdminUri = device.AdminUri,
                 IconPng = _defaultIconPng,
                 // TODO: Ideally we want to get the actual device capabilities (flatbed/feeder, resolution etc.)
             },

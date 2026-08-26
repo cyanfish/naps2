@@ -8,6 +8,7 @@ public record SharedDevice
     public required ScanDevice Device { get; init; }
     public int Port { get; init; }
     public int TlsPort { get; init; }
+    public string? AdminUri { get; init; }
 
     public virtual bool Equals(SharedDevice? other) =>
         other is not null && Name == other.Name && Device == other.Device;
