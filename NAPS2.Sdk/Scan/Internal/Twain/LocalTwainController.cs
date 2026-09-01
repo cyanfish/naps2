@@ -138,7 +138,8 @@ internal class LocalTwainController : ITwainController
                         {
                             Manufacturer = ds.Manufacturer,
                             Model = ds.Name,
-                            SerialNumber = ds.Capabilities.CapSerialNumber.GetCurrent()
+                            SerialNumber = ds.Capabilities.CapSerialNumber.GetCurrent(),
+                            ProtocolVersion = ds.ProtocolVersion.ToString()
                         },
                         PaperSourceCaps = new PaperSourceCaps
                         {
