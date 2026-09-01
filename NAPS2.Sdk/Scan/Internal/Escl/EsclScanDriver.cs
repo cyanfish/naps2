@@ -87,7 +87,8 @@ internal class EsclScanDriver : IScanDriver
                     Model = caps.MakeAndModel,
                     Manufacturer = caps.Manufacturer,
                     SerialNumber = caps.SerialNumber,
-                    IconUri = client.IconUri
+                    IconUri = client.IconUri,
+                    ProtocolVersion = caps.Version
                 },
                 PaperSourceCaps = new()
                 {
