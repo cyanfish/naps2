@@ -8,7 +8,6 @@ namespace NAPS2.Sdk.Tests.Scan;
 public class SaneScanDriverOptionTests : ContextualTests
 {
     private readonly SaneScanDriver _driver;
-
     public SaneScanDriverOptionTests()
     {
         _driver = new SaneScanDriver(ScanningContext);
@@ -19,6 +18,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     [Fact]
     public void SetOptions_Flatbed()
     {
+        var libraryVersion = "1.3.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         ]);
@@ -31,7 +31,7 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.False(optionData.IsFeeder);
         Assert.Equal("Flatbed", device.GetValue(1));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Theory]
@@ -90,7 +90,8 @@ public class SaneScanDriverOptionTests : ContextualTests
 
     [Fact]
     public void GetSaneCaps()
-    {
+    {        
+        var libraryVersion = "1.2.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateFixedForTesting(1, SaneOptionNames.TOP_LEFT_X,
                 new SaneRange { Min = 0, Max = 100, Quant = 1 }),
@@ -105,10 +106,11 @@ public class SaneScanDriverOptionTests : ContextualTests
             SaneOption.CreateStringListForTesting(7, SaneOptionNames.MODE, ["Gray", "Color"])
         ]);
 
-        var caps = _driver.GetSaneCaps(device, "pixma");
+        var caps = _driver.GetSaneCaps(device, "pixma", libraryVersion);
 
         Assert.Equal("pixma", caps.MetadataCaps?.DriverSubtype);
-        VerifyCapPaperSources(device, true, false, false);
+        Assert.Equal(libraryVersion, caps.MetadataCaps?.ProtocolVersion);
+        VerifyCapPaperSources(device, true, false, false, libraryVersion);
         var flatbedCaps = caps.FlatbedCaps;
         Assert.NotNull(flatbedCaps);
         Assert.Equal(100, flatbedCaps.PageSizeCaps?.ScanArea?.Width);
@@ -123,6 +125,7 @@ public class SaneScanDriverOptionTests : ContextualTests
     [Fact]
     public void SetOptions_Feeder()
     {
+        var libraryVersion = "1.4.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         ]);
@@ -132,12 +135,13 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_FeederWithDuplexMatch()
     {
+        var libraryVersion = "1.3.5";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF Duplex", "ADF"])
         ]);
@@ -147,12 +151,13 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_Duplex()
     {
+        var libraryVersion = "1.3.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         ]);
@@ -162,12 +167,13 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.True(optionData.IsFeeder);
         Assert.Equal("Duplex", device.GetValue(1));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_DuplexWithAdfMode()
     {
+        var libraryVersion = "1.1.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF"]),
             SaneOption.CreateStringListForTesting(2, SaneOptionNames.ADF_MODE1, ["Simplex", "Duplex"])
@@ -179,12 +185,13 @@ public class SaneScanDriverOptionTests : ContextualTests
         Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
         Assert.Equal("Duplex", device.GetValue(2));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_AutoWithFlatbed()
     {
+        var libraryVersion = "1.4.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
         ]);
@@ -194,12 +201,13 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.False(optionData.IsFeeder);
         Assert.Equal("Flatbed", device.GetValue(1));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_AutoWithNoFlatbed()
     {
+        var libraryVersion = "1.4.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["ADF", "Duplex"])
         ]);
@@ -209,12 +217,13 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
-        VerifyCapPaperSources(device, false, true, true);
+        VerifyCapPaperSources(device, false, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_DuplexWithPartialMatch()
     {
+        var libraryVersion = "1.3.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE,
                 ["Feeder(left aligned)", "Feeder(left aligned,Duplex)"])
@@ -225,12 +234,13 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.True(optionData.IsFeeder);
         Assert.Equal("Feeder(left aligned,Duplex)", device.GetValue(1));
-        VerifyCapPaperSources(device, false, true, true);
+        VerifyCapPaperSources(device, false, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_DuplexBoolean()
     {
+        var libraryVersion = "1.3.0";
         // Settings from Epson WF-3520 with epsonscan2 backend
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE,
@@ -244,12 +254,13 @@ public class SaneScanDriverOptionTests : ContextualTests
         Assert.True(optionData.IsFeeder);
         Assert.Equal("ADF", device.GetValue(1));
         Assert.Equal(true, device.GetValue(2));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Fact]
     public void SetOptions_DuplicateOptions()
     {
+        var libraryVersion = "1.2.0";
         var device = new DeviceOptionsMock([
             SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"]),
             SaneOption.CreateStringListForTesting(2, SaneOptionNames.SOURCE, ["Flatbed", "ADF", "Duplex"])
@@ -263,7 +274,7 @@ public class SaneScanDriverOptionTests : ContextualTests
 
         Assert.False(optionData.IsFeeder);
         Assert.Equal("Flatbed", device.GetValue(1));
-        VerifyCapPaperSources(device, true, true, true);
+        VerifyCapPaperSources(device, true, true, true, libraryVersion);
     }
 
     [Fact]
@@ -342,12 +353,13 @@ public class SaneScanDriverOptionTests : ContextualTests
         }
     }
 
-    private void VerifyCapPaperSources(DeviceOptionsMock device, bool flatbed, bool feeder, bool duplex)
+    private void VerifyCapPaperSources(DeviceOptionsMock device, bool flatbed, bool feeder, bool duplex, string libraryVersion)
     {
-        var caps = _driver.GetSaneCaps(device, "");
-        Assert.NotNull(caps.PaperSourceCaps);
+        var caps = _driver.GetSaneCaps(device, "", libraryVersion);        
+        Assert.NotNull(caps.PaperSourceCaps);        
         Assert.Equal(flatbed, caps.PaperSourceCaps.SupportsFlatbed);
         Assert.Equal(feeder, caps.PaperSourceCaps.SupportsFeeder);
         Assert.Equal(duplex, caps.PaperSourceCaps.SupportsDuplex);
+        Assert.Equal(libraryVersion, caps.MetadataCaps.ProtocolVersion);
     }
 }
