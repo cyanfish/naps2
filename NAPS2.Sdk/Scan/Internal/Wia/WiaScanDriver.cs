@@ -59,7 +59,8 @@ internal class WiaScanDriver : IScanDriver
                     MetadataCaps = new MetadataCaps
                     {
                         Manufacturer = device.Properties.GetOrNull(WiaPropertyId.DIP_VEND_DESC)?.Value as string,
-                        Model = device.Properties.GetOrNull(WiaPropertyId.DIP_DEV_DESC)?.Value as string
+                        Model = device.Properties.GetOrNull(WiaPropertyId.DIP_DEV_DESC)?.Value as string,
+                        ProtocolVersion = WiaProtocolVersionParser.Parse(device.Version)
                     },
                     PaperSourceCaps = new PaperSourceCaps
                     {
