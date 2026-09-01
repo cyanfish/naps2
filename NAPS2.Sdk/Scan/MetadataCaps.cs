@@ -29,4 +29,10 @@ public class MetadataCaps
     /// The URI for an icon associated with the device.
     /// </summary>
     public string? IconUri { get; init; }
+
+    /// <summary>
+    /// The version of the protocol or driver interface reported for the device.
+    /// The meaning and format are specific to the device's <see cref="Driver"/>.
+    /// </summary>
+    public string? ProtocolVersion { get; init; }
 }
