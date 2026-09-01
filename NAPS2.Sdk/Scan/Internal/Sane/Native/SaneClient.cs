@@ -7,6 +7,7 @@ internal class SaneClient : SaneNativeObject
 {
     private static readonly object SaneLock = new();
     private static bool _isInitialized;
+    private readonly int _versionCode;
 
     private readonly bool _keepInitialized;
 
@@ -26,10 +27,12 @@ internal class SaneClient : SaneNativeObject
         Monitor.Enter(SaneLock);
         if (!_isInitialized)
         {
-            Native.sane_init(out _, IntPtr.Zero);
+            Native.sane_init(out _versionCode, IntPtr.Zero);
             _isInitialized = true;
         }
     }
+
+    public string LibraryVersion => SaneVersionCodeParser.Parse(_versionCode);
 
     public IEnumerable<SaneDeviceInfo> GetDevices()
     {
