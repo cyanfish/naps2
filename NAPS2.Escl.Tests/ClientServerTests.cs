@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http;
 using NAPS2.Escl.Client;
 using NAPS2.Escl.Server;
 using NSubstitute;
