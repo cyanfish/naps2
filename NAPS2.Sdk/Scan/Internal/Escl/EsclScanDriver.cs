@@ -80,27 +80,7 @@ internal class EsclScanDriver : IScanDriver
         {
             var (client, caps) = await GetEsclClientWithCaps(options, cancelToken, ScanEvents.Stub);
             if (client == null || caps == null) return new ScanCaps();
-            return new ScanCaps
-            {
-                MetadataCaps = new()
-                {
-                    Model = caps.MakeAndModel,
-                    Manufacturer = caps.Manufacturer,
-                    SerialNumber = caps.SerialNumber,
-                    IconUri = client.IconUri,
-                    ProtocolVersion = caps.Version
-                },
-                PaperSourceCaps = new()
-                {
-                    SupportsFlatbed = caps.PlatenCaps != null,
-                    SupportsFeeder = caps.AdfSimplexCaps != null,
-                    SupportsDuplex = caps.AdfDuplexCaps != null,
-                    CanCheckIfFeederHasPaper = true
-                },
-                FlatbedCaps = MapCaps(caps.PlatenCaps),
-                FeederCaps = MapCaps(caps.AdfSimplexCaps),
-                DuplexCaps = MapCaps(caps.AdfDuplexCaps)
-            };
+            return GetEsclScanCaps(caps, client.IconUri);
         }
         catch (HttpRequestException ex) when (ex.InnerException is TaskCanceledException or SocketException)
         {
@@ -112,6 +92,31 @@ internal class EsclScanDriver : IScanDriver
         {
         }
         return new ScanCaps();
+    }
+
+    internal ScanCaps GetEsclScanCaps(EsclCapabilities caps, string? iconUri)
+    {
+        return new ScanCaps
+        {
+            MetadataCaps = new()
+            {
+                Model = caps.MakeAndModel,
+                Manufacturer = caps.Manufacturer,
+                SerialNumber = caps.SerialNumber,
+                IconUri = iconUri,
+                ProtocolVersion = caps.Version
+            },
+            PaperSourceCaps = new()
+            {
+                SupportsFlatbed = caps.PlatenCaps != null,
+                SupportsFeeder = caps.AdfSimplexCaps != null,
+                SupportsDuplex = caps.AdfDuplexCaps != null,
+                CanCheckIfFeederHasPaper = true
+            },
+            FlatbedCaps = MapCaps(caps.PlatenCaps),
+            FeederCaps = MapCaps(caps.AdfSimplexCaps),
+            DuplexCaps = MapCaps(caps.AdfDuplexCaps)
+        };
     }
 
     private PerSourceCaps? MapCaps(EsclInputCaps? caps)
@@ -504,8 +509,8 @@ internal class EsclScanDriver : IScanDriver
                 string.Join(",", settingProfile.DocumentFormats.Concat(settingProfile.DocumentFormatsExt).Distinct()));
         }
 
-        var width = (int) Math.Round(options.PageSize!.WidthInInches * 300);
-        var height = (int) Math.Round(options.PageSize!.HeightInInches * 300);
+        var width = (int)Math.Round(options.PageSize!.WidthInInches * 300);
+        var height = (int)Math.Round(options.PageSize!.HeightInInches * 300);
         if (inputCaps.MaxWidth is > 0)
         {
             width = Math.Min(width, inputCaps.MaxWidth.Value);
