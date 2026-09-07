@@ -22,7 +22,7 @@ internal class WiaScanDriver : IScanDriver
     {
         return Task.Run(() =>
         {
-            using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
+            using var deviceManager = new WiaDeviceManager((WiaVersion)options.WiaOptions.WiaApiVersion);
             foreach (var deviceInfo in deviceManager.GetDeviceInfos())
             {
                 using (deviceInfo)
@@ -47,32 +47,19 @@ internal class WiaScanDriver : IScanDriver
         {
             try
             {
-                using var deviceManager = new WiaDeviceManager((WiaVersion) options.WiaOptions.WiaApiVersion);
+                using var deviceManager = new WiaDeviceManager((WiaVersion)options.WiaOptions.WiaApiVersion);
                 using var device = deviceManager.FindDevice(options.Device!.ID);
                 using var items = device.GetSubItems().ToDisposableList();
                 var flatbed = items.FirstOrDefault(x => x.Name() == "Flatbed");
                 var feeder = items.FirstOrDefault(x => x.Name() == "Feeder");
                 var flatbedCaps = flatbed != null ? GetItemCaps(device, flatbed, true) : null;
                 var feederCaps = feeder != null ? GetItemCaps(device, feeder, false) : null;
-                return new ScanCaps
-                {
-                    MetadataCaps = new MetadataCaps
-                    {
-                        Manufacturer = device.Properties.GetOrNull(WiaPropertyId.DIP_VEND_DESC)?.Value as string,
-                        Model = device.Properties.GetOrNull(WiaPropertyId.DIP_DEV_DESC)?.Value as string,
-                        ProtocolVersion = WiaProtocolVersionParser.Parse(device.Version)
-                    },
-                    PaperSourceCaps = new PaperSourceCaps
-                    {
-                        SupportsFlatbed = device.SupportsFlatbed(),
-                        SupportsFeeder = device.SupportsFeeder(),
-                        SupportsDuplex = device.SupportsDuplex(),
-                        CanCheckIfFeederHasPaper = true
-                    },
-                    FlatbedCaps = device.SupportsFlatbed() ? flatbedCaps : null,
-                    FeederCaps = device.SupportsFeeder() ? feederCaps : null,
-                    DuplexCaps = device.SupportsDuplex() ? feederCaps : null
-                };
+                return GetWiaScanCaps(
+                    device.Properties.GetOrNull(WiaPropertyId.DIP_VEND_DESC)?.Value as string,
+                    device.Properties.GetOrNull(WiaPropertyId.DIP_DEV_DESC)?.Value as string,
+                    device.Version,
+                    device.SupportsFlatbed(), device.SupportsFeeder(), device.SupportsDuplex(),
+                    flatbedCaps, feederCaps);
             }
             catch (WiaException e)
             {
@@ -80,6 +67,36 @@ internal class WiaScanDriver : IScanDriver
                 throw;
             }
         });
+    }
+
+    internal ScanCaps GetWiaScanCaps(string? manufacturer, string? model, WiaVersion wiaVersion,
+        bool supportsFlatbed, bool supportsFeeder, bool supportsDuplex,
+        PerSourceCaps? flatbedCaps, PerSourceCaps? feederCaps)
+    {
+        return new ScanCaps
+        {
+            MetadataCaps = new MetadataCaps
+            {
+                Manufacturer = manufacturer,
+                Model = model,
+                ProtocolVersion = wiaVersion switch
+                {
+                    WiaVersion.Wia10 => "1.0",
+                    WiaVersion.Wia20 => "2.0",
+                    _ => null
+                }
+            },
+            PaperSourceCaps = new PaperSourceCaps
+            {
+                SupportsFlatbed = supportsFlatbed,
+                SupportsFeeder = supportsFeeder,
+                SupportsDuplex = supportsDuplex,
+                CanCheckIfFeederHasPaper = true
+            },
+            FlatbedCaps = supportsFlatbed ? flatbedCaps : null,
+            FeederCaps = supportsFeeder ? feederCaps : null,
+            DuplexCaps = supportsDuplex ? feederCaps : null
+        };
     }
 
     private PerSourceCaps GetItemCaps(WiaDevice device, WiaItem item, bool flatbed)
@@ -121,7 +138,7 @@ internal class WiaScanDriver : IScanDriver
             var context = new WiaScanContext(_scanningContext, options, cancelToken, scanEvents, callback);
             try
             {
-                var version = (WiaVersion) options.WiaOptions.WiaApiVersion;
+                var version = (WiaVersion)options.WiaOptions.WiaApiVersion;
                 try
                 {
                     await context.Scan(version);
@@ -524,18 +541,18 @@ internal class WiaScanDriver : IScanDriver
         if (device.Version == WiaVersion.Wia10)
         {
             horizontalSize =
-                (int) device.Properties[flatbed
+                (int)device.Properties[flatbed
                     ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
                     : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
             verticalSize =
-                (int) device.Properties[flatbed
+                (int)device.Properties[flatbed
                     ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
                     : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
         }
         else
         {
-            horizontalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
-            verticalSize = (int) item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
+            horizontalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
+            verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
         }
         return (horizontalSize, verticalSize);
     }
