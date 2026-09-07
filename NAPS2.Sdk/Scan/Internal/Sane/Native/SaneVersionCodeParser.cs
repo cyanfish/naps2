@@ -3,14 +3,6 @@
 internal static class SaneVersionCodeParser
 {
     /// <summary>
-    /// Parses a SANE version code (as signed int) into a semantic version string.
-    /// </summary>
-    public static string Parse(int versionCode)
-    {
-        return Parse(unchecked((uint)versionCode));
-    }
-
-    /// <summary>
     /// Parses a SANE version code (as unsigned int) into a semantic version string.
     /// The version code format: (major << 24) | (minor << 16) | patch
     /// </summary>

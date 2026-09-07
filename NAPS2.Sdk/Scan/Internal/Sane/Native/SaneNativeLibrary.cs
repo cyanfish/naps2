@@ -11,7 +11,7 @@ internal class SaneNativeLibrary : Unmanaged.NativeLibrary
     {
     }
 
-    public delegate SaneStatus sane_init_delegate(out int version_code, IntPtr authorize);
+    public delegate SaneStatus sane_init_delegate(out uint version_code, IntPtr authorize);
 
     public delegate void sane_exit_delegate();
 

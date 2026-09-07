@@ -16,13 +16,4 @@ public class SaneVersionCodeParserTests
         var result = SaneVersionCodeParser.Parse(versionCode);
         Assert.Equal(expected, result);
     }
-
-    [Theory]
-    [InlineData(-1, "255.255.65535")]                       // Tests int overflow case
-    [InlineData(int.MaxValue, "127.255.65535")]             // Edge case: int.MaxValue
-    public void Parse_SignedInt_ConvertsAndReturnsCorrectFormat(int versionCode, string expected)
-    {
-        var result = SaneVersionCodeParser.Parse(versionCode);
-        Assert.Equal(expected, result);
-    }
 }

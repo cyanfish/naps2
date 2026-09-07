@@ -7,7 +7,7 @@ internal class SaneClient : SaneNativeObject
 {
     private static readonly object SaneLock = new();
     private static bool _isInitialized;
-    private readonly int _versionCode;
+    private readonly uint _versionCode;
 
     private readonly bool _keepInitialized;
 
