@@ -43,6 +43,13 @@ public class ClientServerTests
         Assert.Equal("2.0", caps.Version);
         Assert.Equal("HP Blah", caps.MakeAndModel);
         Assert.Equal("123abc", caps.SerialNumber);
+        Assert.Equal($"http://naps2-{uuid}.local.:{deviceConfig.Port}/eSCL/admin", caps.AdminUri);
+
+        using var httpClient = new HttpClient();
+        var adminResponse =
+            await httpClient.GetAsync($"http://[{IPAddress.IPv6Loopback}]:{deviceConfig.Port}/eSCL/admin");
+        Assert.Equal(HttpStatusCode.OK, adminResponse.StatusCode);
+        Assert.Contains("HP Blah", await adminResponse.Content.ReadAsStringAsync());
     }
 
     [Fact]
