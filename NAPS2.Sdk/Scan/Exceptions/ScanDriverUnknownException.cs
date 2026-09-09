@@ -14,6 +14,11 @@ public class ScanDriverUnknownException : ScanDriverException
     {
     }
 
+    public ScanDriverUnknownException(string message)
+        : base(message)
+    {
+    }
+
     public ScanDriverUnknownException(string message, Exception innerException)
         : base(message, innerException)
     {
