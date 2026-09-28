@@ -1186,6 +1186,53 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ScanWithDeviceId()
+    {
+        var (scanDriverMock, scanDriverFactoryMock) = CreateDriverMocks();
+
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                Driver = "escl",
+                Device = "test_id2",
+                OutputPath = $"{FolderPath}/test.jpg",
+                Verbose = true
+            },
+            scanDriverFactoryMock);
+
+        _ = scanDriverMock.Received().Scan(
+            Arg.Is<ScanOptions>(options =>
+                options.Device.ID == "test_id2" &&
+                options.Device.Name == "test_name2"),
+            Arg.Any<CancellationToken>(),
+            Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>());
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithPartialDeviceIdDoesNotMatch()
+    {
+        var (scanDriverMock, scanDriverFactoryMock) = CreateDriverMocks();
+
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                Driver = "escl",
+                Device = "test_id",
+                OutputPath = $"{FolderPath}/test.jpg",
+                Verbose = true
+            },
+            scanDriverFactoryMock);
+
+        _ = scanDriverMock.DidNotReceive().Scan(
+            Arg.Any<ScanOptions>(),
+            Arg.Any<CancellationToken>(),
+            Arg.Any<IScanEvents>(),
+            Arg.Any<Action<IMemoryImage>>());
+    }
+
+    [Fact]
     public async Task ListDevices()
     {
         var (_, scanDriverFactoryMock) = CreateDriverMocks();
