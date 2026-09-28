@@ -69,7 +69,7 @@ public class AutomatedScanningOptions
     [Option("driver", HelpText = "Scanning driver (wia/twain/escl/sane/apple).")]
     public string? Driver { get; set; }
 
-    [Option("device", HelpText = "Scanning device name (can be inexact).")]
+    [Option("device", HelpText = "Scanning device name (can be inexact) or exact ID.")]
     public string? Device { get; set; }
 
     [Option("listdevices", HelpText = "Instead of scanning, list available devices.")]

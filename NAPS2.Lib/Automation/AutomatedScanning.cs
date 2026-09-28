@@ -841,7 +841,7 @@ internal class AutomatedScanning
             bool foundDevice = false;
             await foreach (var device in _scanPerformer.GetDevices(profile, cts.Token))
             {
-                if (device.Name.ContainsInvariantIgnoreCase(_options.Device!))
+                if (device.ID == _options.Device || device.Name.ContainsInvariantIgnoreCase(_options.Device!))
                 {
                     cts.Cancel();
                     profile.Device = new ScanProfileDevice(device.ID, device.Name);
