@@ -26,7 +26,7 @@ jobs:
         dotnet-version: 10.0.x
     - name: Install workloads
       if: matrix.os == 'macos-26'
-      run: dotnet workload install macos
+      run: dotnet workload install macos --version 10.0.401
     - name: Build
       run: dotnet run --project NAPS2.Tools -- build debug -v
     - name: Test
