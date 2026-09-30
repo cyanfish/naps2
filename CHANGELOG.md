@@ -1,3 +1,24 @@
+Changes in 8.4.0:
+- Added "Manual Duplex" (under "Reorder") as a clearer way to combine front and back sides scanned separately
+  - This is meant to replace the "Interleave" buttons, which will be removed in a future version
+  - Checking "Reverse back sides" is equivalent to using "Alternative Interleave"
+  - Unchecking "Always show preview" will add a separate button for one-click actions like before
+  - Admins can use "HideManualDuplex"/"HideInterleave" to control visibility
+- Crop: Added a middle handle for moving the whole selection
+- Crop/Split/Combine: Added arrow key controls
+- Added help text to some image forms
+- Linux: Added a "Theme" setting to manually switch between Light and Dark mode
+- Mac: Custom page sizes are no longer shown for feeders with the Apple driver (as they don't work)
+- Mac: Fixed keyboard shortcuts for non-QWERTY keyboard layouts
+- Mac: Fixed flatbed/feeder detection with the Apple driver
+- Fixed the "Maximum quality" option not being retained after cropping
+- Fixed the "Black and White" keyboard shortcut not being editable in Keyboard Shortcuts
+- Fixed an issue with email attachments not working when Thunderbird is already open
+- Console: The --device option can now match the device ID as well as the name
+- Sane: KeyValueOptions set in profile XML now support true/false and are retained when editing a profile
+- Escl: Fixed a misspelled feeder status value and added an admin page for better compatibility
+- Sdk: Added MetadataCaps.ProtocolVersion
+
 Changes in 8.3.2:
 - The first page scanned is now auto-selected
 - Mac: Fixed error with save/import
