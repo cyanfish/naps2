@@ -258,8 +258,8 @@ public class GtkEtoPlatform : EtoPlatform
         if (excludeToolbars && window.ToolBar != null)
         {
             var toolbar = (GTK.Toolbar) window.ToolBar.ControlObject;
-            var vbox = (GTK.VBox) toolbar.Parent;
-            var heights = vbox.Children.OfType<GTK.Toolbar>().Select(x =>
+            var box = (GTK.Box) toolbar.Parent;
+            var heights = box.Children.OfType<GTK.Toolbar>().Select(x =>
             {
                 x.GetPreferredHeight(out _, out int naturalHeight);
                 return naturalHeight;
