@@ -19,19 +19,19 @@
     <value>Вибраний сканер не підключений до мережі.</value>
   </data>
   <data name="DeviceCommunicationFailure" xml:space="preserve">
-    <value>Зв'язок з пристроєм сканування було перервано.</value>
+    <value>Зв’язок зі сканувальним пристроєм було перервано.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Не вибрано пристрій.</value>
+    <value>Пристрій не вибрано.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Не знайдено жодного сканера.</value>
+    <value>Сканувальний пристрій не знайдено.</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Сталася помилка з драйвером сканування.</value>
+    <value>Сталася помилка драйвера сканера.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Версія {0}</value>
@@ -40,13 +40,13 @@
     <value>Не вдалося імпортувати файл «{0}».</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>Вибраний сканер не підтримує автоматичну подачу паперу. Якщо ваш сканер все ж має автоматичну подачу паперу, спробуйте вибрати інший драйвер.</value>
+    <value>Вибраний сканер не підтримує автоматичну подачу документа. Якщо ваш сканер все ж має автоматичну подачу документа, спробуйте вибрати інший драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>У пристрої відсутній папір.</value>
+    <value>Автоподавач порожній.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Ви не маєте дозволу на копіювання вмісту з файлу «{0}».</value>
+    <value>У вас немає дозволу на копіювання вмісту з файлу «{0}».</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Вибраний сканер не підтримує двостороннє сканування. Якщо ваш сканер все ж підтримує двостороннє сканування, спробуйте вибрати інший драйвер.</value>
@@ -55,34 +55,34 @@
     <value>Вибраний сканер зайнятий.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>Відкрито кришку сканеру.</value>
+    <value>Кришку сканера відкрито.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>У сканері застряг папір.</value>
+    <value>У сканері застряг документ.</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>Прогрівання сканеру.</value>
+    <value>Сканер прогрівається.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
     <value>Драйвер SANE недоступний. Переконайтеся, що встановлено необхідні пакети:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Механізм розпізнавання тексту (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:</value>
+    <value>Механізм розпізнавання (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>Вибраний драйвер не підтримується в цій системі.</value>
+    <value>Вибраний драйвер не підтримується цією системою.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>Під час розпізнавання тексту сталася помилка.</value>
+    <value>Під час розпізнавання сталася помилка.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
-    <value>Час очікування розпізнавання тексту закінчився.</value>
+    <value>Час очікування розпізнавання закінчився.</value>
   </data>
   <data name="WorkerCrash" xml:space="preserve">
-    <value>Збій робочого процесу.</value>
+    <value>Робочий процес аварійно завершився.</value>
   </data>
   <data name="WorkerCrashWindows" xml:space="preserve">
-    <value>Збій робочого процесу. Перегляньте журнал подій Windows.</value>
+    <value>Робочий процес аварійно завершився. Перевірте засіб перегляду подій Windows.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
     <value>Невідомий сканер</value>

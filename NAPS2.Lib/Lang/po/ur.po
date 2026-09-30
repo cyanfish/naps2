@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Urdu (Pakistan)\n"
 "Language: ur\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr ""
+msgstr "\"محفوط\" بٹن کا خودکار عمل:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr ""
+msgstr "\"عکس\" بٹن کا خودکار عمل:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
@@ -33,11 +33,11 @@ msgstr ""
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "۱ آلہ ملا۔"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr ""
+msgstr "۲۴-بٹ رنگ"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -75,11 +75,11 @@ msgstr ""
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
-msgstr ""
+msgstr "سب ({0})"
 
 #: MiscResources.resx$FileTypeAllFiles$Message
 msgid "All Files"
-msgstr ""
+msgstr "ساری مثلیں"
 
 #: UiStrings.resx$AllowAnnotations$Message
 msgid "Allow Annotations"
@@ -87,7 +87,7 @@ msgstr ""
 
 #: UiStrings.resx$AllowContentCopying$Message
 msgid "Allow Content Copying"
-msgstr ""
+msgstr "مواد نقل کرنے کی اجازت"
 
 #: UiStrings.resx$AllowContentCopyingForAccessibility$Message
 msgid "Allow Content Copying for Accessibility"
@@ -111,6 +111,10 @@ msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
+msgstr "پرنٹ کی اجازت"
+
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
 msgstr ""
 
 #: UiStrings.resx$AltDeinterleave$Message
@@ -123,11 +127,15 @@ msgstr ""
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "ہمیشہ پوچھیں"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
+msgstr "ہمیشہ پوچھیں"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
@@ -396,6 +404,10 @@ msgstr ""
 msgid "Clear images after saving"
 msgstr ""
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr ""
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr ""
@@ -454,6 +466,10 @@ msgstr ""
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
+msgstr ""
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
 msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
@@ -874,6 +890,15 @@ msgstr ""
 msgid "Make PDFs searchable using OCR"
 msgstr ""
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr ""
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr ""
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -901,6 +926,25 @@ msgstr ""
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
+msgstr ""
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr ""
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
 msgstr ""
 
 #: UiStrings.resx$MoveDown$Message
@@ -1129,6 +1173,10 @@ msgstr ""
 msgid "Page size:"
 msgstr ""
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr ""
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr ""
@@ -1162,6 +1210,7 @@ msgstr ""
 msgid "Press Start when ready."
 msgstr ""
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr ""
@@ -1266,6 +1315,10 @@ msgstr ""
 
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
+msgstr ""
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
 msgstr ""
 
 #: UiStrings.resx$Revert$Message
@@ -1448,6 +1501,11 @@ msgstr ""
 msgid "Select one or more languages:"
 msgstr ""
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr ""
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr ""
@@ -1483,6 +1541,10 @@ msgstr ""
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
+msgstr ""
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
 msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
@@ -1659,6 +1721,17 @@ msgstr ""
 
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
+msgstr ""
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
 msgstr ""
 
 #: UiStrings.resx$Tools$Message

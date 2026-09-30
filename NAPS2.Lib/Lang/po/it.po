@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-07-18 19:02\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -112,6 +112,10 @@ msgstr "Consenti stampa in alta qualità"
 msgid "Allow Printing"
 msgstr "Consenti stampa"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Inverti interfoliazione alternativa"
@@ -128,6 +132,10 @@ msgstr "Chiedi sempre"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "Chiedi sempre"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "Visualizza sempre anteprima"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -395,6 +403,10 @@ msgstr "Azzera tutto"
 msgid "Clear images after saving"
 msgstr "Cancella immagini dopo il salvataggio"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "Fare clic sui pulsanti o utilizzare i tasti freccia per modificare l'orientamento della divisione."
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "Chiudi"
@@ -454,6 +466,10 @@ msgstr "Ritaglia"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "Ritaglia alla dimensione pagina"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -873,6 +889,15 @@ msgstr "Carica immagini in NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "Rendi PDF ricercabili usando l'OCR"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "Fronte/retro manuale"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "Fronte/retro manuale (anteprima)"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -901,6 +926,32 @@ msgstr "Mese (01-12)"
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
 msgstr "Maggiori informazioni"
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "Mouse:\n"
+"Fare clic e trascinare per spostare le maniglie di ritaglio.\n"
+"Oppure fare clic e trascinare per disegnare l'area completa.\n\n"
+"Tastiera:\n"
+"I tasti freccia spostano la maniglia di ritaglio in basso a destra.\n"
+"Tieni premuto \"{0}\" per spostare invece la maniglia in alto a sinistra.\n"
+"Tieni premuto \"{1}\" per spostare l'intera selezione in una sola volta.\n"
+"Tieni premuto \"{2}\" per muoversi più velocemente."
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr ""
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -1128,6 +1179,10 @@ msgstr "File PNG (*.png)"
 msgid "Page size:"
 msgstr "Dimensione pagina:"
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "Pagine riordinate."
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr "Alimentazione carta:"
@@ -1161,6 +1216,7 @@ msgstr "Esegui preventivamente OCR dopo la scansione"
 msgid "Press Start when ready."
 msgstr "Seleziona 'Avvia' quando sei pronto."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Anteprima"
@@ -1266,6 +1322,10 @@ msgstr "Inverti tutto"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "Inverti selezionati"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "Rovescio lati posteriori"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1507,11 @@ msgstr "Seleziona profilo prima della scansione."
 msgid "Select one or more languages:"
 msgstr "Seleziona una o più lingue:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr ""
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Selezionato ({0})"
@@ -1483,6 +1548,10 @@ msgstr "Gli scanner condivisi possono essere usati da altri computer nella rete 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Nitidezza"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1660,6 +1729,24 @@ msgstr "Intervallo tra le scansioni (secondi):"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "Titolo:"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "Per eseguire la scansione di entrambi i lati di un documento di più pagine con lo l'alimentatore fogli dello scanner, è possibile, se lo scanner lo supporta, selezionare come sorgente carta \"Fronte/retro\".\n"
+"      \n"
+"Se lo scanner non supporta la scansione \"Fronte/retro\", segui queste istruzioni:\n"
+"1. Esegui la scansione dei lati anteriori del documento\n"
+"2. Capovolgi il documento\n"
+"3. Esegui la scansione del retro del documento\n"
+"4. Seleziona \"Fronte/retro manuale\"\n"
+"5. A seconda dell'orientamento fisico dello scanner, potrebbe essere necessario selezionare \"Rovescio lati posteriori\""
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"

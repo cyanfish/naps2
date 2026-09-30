@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-07-18 19:02\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -112,6 +112,10 @@ msgstr "Afdrukken met volledige kwaliteit toestaan"
 msgid "Allow Printing"
 msgstr "Afdrukken toestaan"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Alternatief terug tussenvoegen"
@@ -128,6 +132,10 @@ msgstr "Altijd vragen"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "Altijd vragen"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "Altijd voorbeeld weergeven"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -395,6 +403,10 @@ msgstr "Alles wissen"
 msgid "Clear images after saving"
 msgstr "Afbeeldingen verwijderen na opslaan"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "Klik op de knoppen of gebruik de pijltoetsen om de gesplitste oriëntatie te wijzigen."
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "Sluiten"
@@ -454,6 +466,10 @@ msgstr "Bijsnijden"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "Bijsnijden naar paginagrootte"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -873,6 +889,15 @@ msgstr "Afbeeldingen laden in NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "Maak PDF's doorzoekbaar met OCR"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "Handmatige Duplex"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "Handmatige Duplex (voorbeeld)"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -901,6 +926,36 @@ msgstr "Maand (01-12)"
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
 msgstr "Meer informatie"
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "Muis:\n"
+"Klik en sleep om de bijsnijdingen te verplaatsen.\n"
+"of klik en sleep om het volledige gebied te tekenen.\n\n"
+"Toetsenbord:\n"
+"Gebruik de pijltoetsen om de bijsnijding rechtsonder te verplaatsen.\n"
+"Houd \"{0}\" ingedrukt om in plaats daarvan de linker bovenhoek te verplaatsen.\n"
+"Houd \"{1}\" ingedrukt om de hele selectie tegelijk te verplaatsen.\n"
+"Houd \"{2}\" ingedrukt om sneller te bewegen."
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr "Muis:\n"
+"Klik op de knoppen om de gecombineerde oriëntatie en uitlijning te wijzigen.\n\n"
+"Toetsenbord:\n"
+"Gebruik de pijltoetsen om de gecombineerde oriëntatie te wijzigen.\n"
+"Houd \"Shift\" ingedrukt om de uitlijning te wijzigen (als de afbeeldingen niet dezelfde grootte hebben)."
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -1128,6 +1183,10 @@ msgstr "PNG-bestand (*.png)"
 msgid "Page size:"
 msgstr "Paginaformaat:"
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "Pagina's opnieuw geordend."
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr "Papierbron:"
@@ -1161,6 +1220,7 @@ msgstr "Start OCR automatisch na het scannen"
 msgid "Press Start when ready."
 msgstr "Klik 'Beginnen' om te starten."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Voorbeeld"
@@ -1266,6 +1326,10 @@ msgstr "Alles omkeren"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "Selectie omkeren"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "Achterkanten omkeren"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1511,12 @@ msgstr "Kies een profiel voor het scannen."
 msgid "Select one or more languages:"
 msgstr "Kies één of meer talen:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr "Selecteer de hoek om te draaien.\n"
+"Of klik en sleep om een lijn te tekenen die uitgelijnd is met de pagina (verticaal of horizontaal)."
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Geselecteerd ({0})"
@@ -1483,6 +1553,10 @@ msgstr "Gedeelde scanners kunnen worden gebruikt vanaf andere computers op het l
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Verscherpen"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1659,6 +1733,24 @@ msgstr "Tijd tussen scans (seconden):"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "Titel:"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "Om beide kanten van een multi-pagina document te scannen met uw feeder scanner, kunt u \"Duplex\" als papieren bron kiezen als uw scanner dit ondersteunt.\n"
+"      \n"
+"Als de scanner geen \"Duplex\" ondersteunt, volg dan deze instructies:\n"
+"1. Scan de voorzijden van het document\n"
+"2. Draai het document om\n"
+"3. Scan de achterzijden van het document\n"
+"4. Klik op \"Handmatige Duplex\"\n"
+"5. Afhankelijk van de fysieke oriëntatie van de scanner moet u de \"Achterkanten omkeren\" selecteren"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"

@@ -187,16 +187,16 @@
     <value>پاک‌کردن</value>
   </data>
   <data name="ClearAll" xml:space="preserve">
-    <value>Clear All</value>
+    <value>پاک کردن همه</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>زبان</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>تنظیمات</value>
   </data>
   <data name="Interface" xml:space="preserve">
-    <value>Interface</value>
+    <value>رابط کاربری</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
     <value>"Scan" menu changes default profile</value>
@@ -205,7 +205,7 @@
     <value>Show "Profiles" toolbar</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
-    <value>Show page numbers</value>
+    <value>نمایش شماره صفحه‌</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
     <value>"Scan" button default action:</value>
@@ -238,22 +238,22 @@
     <value>بزرگنمایی اندازه پنجره</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>ذخیره</value>
   </data>
   <data name="SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>ذخیره همه</value>
   </data>
   <data name="SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>ذخیره انتخاب شده‌ها</value>
   </data>
   <data name="SaveAllAsPdf" xml:space="preserve">
-    <value>Save All as PDF</value>
+    <value>ذخیره همه به عنوان PDF</value>
   </data>
   <data name="SaveSelectedAsPdf" xml:space="preserve">
     <value>Save Selected as PDF</value>
   </data>
   <data name="SaveAllAsImages" xml:space="preserve">
-    <value>Save All as Images</value>
+    <value>ذخیره همه به عنوان تصویر</value>
   </data>
   <data name="SaveSelectedAsImages" xml:space="preserve">
     <value>Save Selected as Images</value>
@@ -262,13 +262,13 @@
     <value>Email All</value>
   </data>
   <data name="EmailSelected" xml:space="preserve">
-    <value>Email Selected</value>
+    <value>ایمیل کردن انتخاب شده‌ها</value>
   </data>
   <data name="EmailAllAsPdf" xml:space="preserve">
-    <value>Email All as PDF</value>
+    <value>ایمیل کردن همه به عنوان PDF</value>
   </data>
   <data name="EmailSelectedAsPdf" xml:space="preserve">
-    <value>Email Selected as PDF</value>
+    <value>ایمیل کردن انتخاب شده‌ها به عنوان PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
     <value>تنظیمات پروفایل</value>
@@ -355,7 +355,7 @@
     <value>انتخاب منبع</value>
   </data>
   <data name="SelectDevice" xml:space="preserve">
-    <value>Select Device</value>
+    <value>انتخاب دستگاه</value>
   </data>
   <data name="RunInBackground" xml:space="preserve">
     <value>اجرا در پس‌زمینه</value>
@@ -385,7 +385,7 @@
     <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>پس از اسکن OCR بصورت خودکار اجرا شود.</value>
+    <value>پس از اسکن OCR به صورت خودکار اجرا شود</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
     <value>Pre-emptively run OCR after scanning</value>
@@ -550,19 +550,19 @@
     <value>ثانیه (۰۰-۵۹)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
-    <value>افزایش خودکار شماره ( ۴ رقم)</value>
+    <value>افزایش خودکار شماره (۴ رقم)</value>
   </data>
   <data name="AutoIncrementing3Digit" xml:space="preserve">
-    <value>افزایش خودکار شماره ( ۳ رقم)</value>
+    <value>افزایش خودکار شماره (۳ رقم)</value>
   </data>
   <data name="AutoIncrementing2Digit" xml:space="preserve">
-    <value>افزایش خودکار شماره ( ۲ رقم)</value>
+    <value>افزایش خودکار شماره (۲ رقم)</value>
   </data>
   <data name="AutoIncrementing1Digit" xml:space="preserve">
     <value>Auto-incrementing number (1 digits)</value>
   </data>
   <data name="FileNameLabel" xml:space="preserve">
-    <value>نام پرونده</value>
+    <value>نام پرونده:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
     <value>پیش‌نمایش:</value>
@@ -586,7 +586,7 @@
     <value>تنظیمات رایانامه</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>تنظیمات</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>ارائه‌دهنده</value>
@@ -766,13 +766,13 @@
     <value>Enable debug logging</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>اشتراک گذاری</value>
   </data>
   <data name="ScannerSharing" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>اشتراک گذاری اسکنر</value>
   </data>
   <data name="ScannerSharingFormTitle" xml:space="preserve">
-    <value>Scanner Sharing</value>
+    <value>اشتراک گذاری اسکنر</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
     <value>Shared scanners can be used from other computers on the local network by selecting "ESCL Driver" in the other computer's NAPS2 profile settings.</value>
@@ -784,22 +784,22 @@
     <value>Are you sure you want to stop sharing {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Share even when NAPS2 is closed</value>
+    <value>اشتراک گذاری حتی اگر NAPS2 بسته است</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
-    <value>Multiple Languages...</value>
+    <value>چند زبان...</value>
   </data>
   <data name="OcrMultiLangFormTitle" xml:space="preserve">
-    <value>Multiple Languages</value>
+    <value>چند زبان</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
     <value>Show native TWAIN progress</value>
   </data>
   <data name="Split" xml:space="preserve">
-    <value>Split</value>
+    <value>تقسیم کردن</value>
   </data>
   <data name="Combine" xml:space="preserve">
-    <value>Combine</value>
+    <value>ادغام کردن</value>
   </data>
   <data name="ManualIp" xml:space="preserve">
     <value>Manual IP</value>
@@ -814,25 +814,25 @@
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>اتصال</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>خطا در اتصال.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>همیشه بپرس</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
-    <value>Searching for devices...</value>
+    <value>در حال جستجوی دستگاه‌ها...</value>
   </data>
   <data name="DevicesFound" xml:space="preserve">
     <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>۱ دستگاه پیدا شد.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>No devices found.</value>
+    <value>دستگاهی پیدا نشد.</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar</value>
@@ -841,19 +841,19 @@
     <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>کلیدهای میانبر</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
+    <value>کلیدهای میانبر</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
     <value>Scan With Profile {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>اسکن با پروفایل پیشفرض</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
-    <value>Scan With New Profile</value>
+    <value>اسکن با پروفایل جدید</value>
   </data>
   <data name="Assign" xml:space="preserve">
     <value>Assign</value>
@@ -865,24 +865,90 @@
     <value>Action</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
-    <value>Shortcut</value>
+    <value>میانبر</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>پوسته:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>ویرایش با...</value>
   </data>
   <data name="EditWithAppName" xml:space="preserve">
-    <value>Edit with {0}</value>
+    <value>ویرایش با {0}</value>
   </data>
   <data name="EditWithFormTitle" xml:space="preserve">
-    <value>Edit with...</value>
+    <value>ویرایش با...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
     <value>Error starting application {0}</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
-    <value>Stop Scanner Sharing</value>
+    <value>توقف به اشتراک گذاری اسکنر</value>
+  </data>
+  <data name="CropHelp" xml:space="preserve">
+    <value>Mouse:
+Click and drag to move the crop handles.
+Or click and drag to draw the full area.
+
+Keyboard:
+Arrow keys move the bottom-right crop handle.
+Hold "{0}" to move the top-left handle instead.
+Hold "{1}" to move the whole selection at once.
+Hold "{2}" to move faster.</value>
+  </data>
+  <data name="SplitHelp" xml:space="preserve">
+    <value>Click the buttons or use the arrow keys to change the split orientation.</value>
+  </data>
+  <data name="CombineHelp" xml:space="preserve">
+    <value>Mouse:
+Click the buttons to change the combine orientation and alignment.
+
+Keyboard:
+Arrow keys change the combine orientation.
+Hold "Shift" to change the alignment instead (if the images aren't the same size).</value>
+  </data>
+  <data name="CustomRotationHelp" xml:space="preserve">
+    <value>Select the angle to rotate.
+Or click and drag to draw a line aligned with the page (vertically or horizontally).</value>
+  </data>
+  <data name="ManualDuplex" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="ManualDuplexPreview" xml:space="preserve">
+    <value>Manual Duplex (preview)</value>
+  </data>
+  <data name="ManualDuplexFormTitle" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="AlwaysShowPreview" xml:space="preserve">
+    <value>Always show preview</value>
+  </data>
+  <data name="ReverseBackSides" xml:space="preserve">
+    <value>Reverse back sides</value>
+  </data>
+  <data name="ManualDuplexHelp" xml:space="preserve">
+    <value>To scan both sides of a multi-page document with your feeder scanner, you can select "Duplex" as your paper source if your scanner supports it.
+      
+If your scanner doesn't support "Duplex" scanning, follow these instructions:
+1. Scan the front sides of the document
+2. Flip the document over
+3. Scan the back sides of the document
+4. Click "Manual Duplex"
+5. Depending on the physical orientation of your scanner, you may need to check "Reverse back sides"</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>پیش‌نمایش</value>
+  </data>
+  <data name="PagesReordered" xml:space="preserve">
+    <value>Pages reordered.</value>
+  </data>
+  <data name="ControlKey" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="AltKey" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="ShiftKey" xml:space="preserve">
+    <value>Shift</value>
   </data>
 </root>

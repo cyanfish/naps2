@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "۱ دستگاه پیدا شد."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -112,6 +112,10 @@ msgstr "اجازه چاپ با کیفیت کامل"
 msgid "Allow Printing"
 msgstr "اجازه چاپ"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "صفحات سفید را بصورت متناوب حذف کردن"
@@ -122,11 +126,15 @@ msgstr "جایگذاری متناوب"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "همیشه بپرس"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
+msgstr ""
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
 msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
@@ -135,11 +143,11 @@ msgstr "برای درون‌ریزی این پرونده PDF به کامپونت
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
-msgstr "خطایی در OCR  رخ داد."
+msgstr "خطایی در OCR رخ داد."
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr "خطایی هنگام تلاش برای احراز هویت رخ داد.."
+msgstr "خطایی هنگام تلاش برای احراز هویت رخ داد."
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
@@ -147,7 +155,7 @@ msgstr "یک خطا هنگام ذخیره خودکار رخ داد."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
-msgstr "خطایی هنگام تلاش برای بروزرسانی رخ داد.."
+msgstr "خطایی هنگام تلاش برای نصب بروزرسانی رخ داد."
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
@@ -180,7 +188,7 @@ msgstr "یک بروزرسانی موجود است."
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "یک بروزرسانی برای OCR موجود است.."
+msgstr "یک بروزرسانی برای OCR موجود است."
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
@@ -265,19 +273,19 @@ msgstr ""
 
 #: UiStrings.resx$AutoIncrementing2Digit$Message
 msgid "Auto-incrementing number (2 digits)"
-msgstr "افزایش خودکار شماره ( ۲ رقم)"
+msgstr "افزایش خودکار شماره (۲ رقم)"
 
 #: UiStrings.resx$AutoIncrementing3Digit$Message
 msgid "Auto-incrementing number (3 digits)"
-msgstr "افزایش خودکار شماره ( ۳ رقم)"
+msgstr "افزایش خودکار شماره (۳ رقم)"
 
 #: UiStrings.resx$AutoIncrementing4Digit$Message
 msgid "Auto-incrementing number (4 digits)"
-msgstr "افزایش خودکار شماره ( ۴ رقم)"
+msgstr "افزایش خودکار شماره (۴ رقم)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "پس از اسکن OCR بصورت خودکار اجرا شود."
+msgstr "پس از اسکن OCR به صورت خودکار اجرا شود"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -306,7 +314,7 @@ msgstr "اسکن دسته‌ای به دلیل بروز خطا متوقف شد."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
-msgstr ""
+msgstr "بهترین"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
@@ -368,7 +376,7 @@ msgstr "بررسی وجود نسخه جدید"
 
 #: MiscResources.resx$CheckingForUpdates$Message
 msgid "Checking..."
-msgstr "درحال بررسی......"
+msgstr "درحال بررسی..."
 
 #: UiStrings.resx$EmailProviderFormTitle$Message
 msgid "Choose Email Provider"
@@ -389,11 +397,15 @@ msgstr "پاک‌کردن"
 
 #: UiStrings.resx$ClearAll$Message
 msgid "Clear All"
-msgstr ""
+msgstr "پاک کردن همه"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
 msgstr "پاک کردن تصویر پس از ذخیره سازی"
+
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr ""
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -401,7 +413,7 @@ msgstr "بستن"
 
 #: UiStrings.resx$Combine$Message
 msgid "Combine"
-msgstr ""
+msgstr "ادغام کردن"
 
 #: SdkResources.resx$DeviceCommunicationFailure$Message
 msgid "Communication with the scanning device was interrupted."
@@ -417,11 +429,11 @@ msgstr "فشردگی:"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "اتصال"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "خطا در اتصال."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -455,6 +467,10 @@ msgstr "برش کناره‌ها"
 msgid "Crop to page size"
 msgstr "برش به اندازه صفحه"
 
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
+
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
 msgstr "سفارشی ({0}x{1} {2})"
@@ -482,7 +498,7 @@ msgstr "سفارشی..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "تاریک"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -592,12 +608,12 @@ msgstr "ویرایش"
 
 #: UiStrings.resx$EditWithAppName$Message
 msgid "Edit with {0}"
-msgstr ""
+msgstr "ویرایش با {0}"
 
 #: UiStrings.resx$EditWith$Message
 #: UiStrings.resx$EditWithFormTitle$Message
 msgid "Edit with..."
-msgstr ""
+msgstr "ویرایش با..."
 
 #: UiStrings.resx$EmailAll$Message
 msgid "Email All"
@@ -605,7 +621,7 @@ msgstr ""
 
 #: UiStrings.resx$EmailAllAsPdf$Message
 msgid "Email All as PDF"
-msgstr ""
+msgstr "ایمیل کردن همه به عنوان PDF"
 
 #: MiscResources.resx$EmailPdf$Message
 #: UiStrings.resx$EmailPdf$Message
@@ -618,11 +634,11 @@ msgstr "پیشرفت رایانامه PDF"
 
 #: UiStrings.resx$EmailSelected$Message
 msgid "Email Selected"
-msgstr ""
+msgstr "ایمیل کردن انتخاب شده‌ها"
 
 #: UiStrings.resx$EmailSelectedAsPdf$Message
 msgid "Email Selected as PDF"
-msgstr ""
+msgstr "ایمیل کردن انتخاب شده‌ها به عنوان PDF"
 
 #: UiStrings.resx$EmailSettings$Message
 #: UiStrings.resx$EmailSettingsFormTitle$Message
@@ -673,7 +689,7 @@ msgstr "جلوگیری از صفحات خالی"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
-msgstr ""
+msgstr "سریع"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
@@ -681,7 +697,7 @@ msgstr "خوراننده"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
-msgstr "نام پرونده"
+msgstr "نام پرونده:"
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
@@ -806,7 +822,7 @@ msgstr "نصب شکست خورد."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
-msgstr ""
+msgstr "رابط کاربری"
 
 #: UiStrings.resx$Interleave$Message
 msgid "Interleave"
@@ -831,7 +847,7 @@ msgstr ""
 #: UiStrings.resx$KeyboardShortcuts$Message
 #: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "کلیدهای میانبر"
 
 #: UiStrings.resx$KeywordsLabel$Message
 msgid "Keywords:"
@@ -859,7 +875,7 @@ msgstr "ارث (فقط رابط کاربری بومی)"
 
 #: SettingsResources.resx$Theme_Light$Message
 msgid "Light"
-msgstr ""
+msgstr "روشن"
 
 #: MiscResources.resx$ReviewPrompt$Message
 msgid "Like NAPS2?"
@@ -872,6 +888,15 @@ msgstr "بارگذاری تصویر در NAPS2"
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
 msgstr "ایجاد PDF قابل جستجو بوسیله OCR"
+
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr ""
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr ""
 
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
@@ -902,6 +927,25 @@ msgstr "ماه (۱۲-۰۱)"
 msgid "More info"
 msgstr "اطلاعات بیشتر"
 
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "\n"
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr ""
+
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
 msgstr "بردن به پایین"
@@ -912,11 +956,11 @@ msgstr "بردن به بالا"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
-msgstr ""
+msgstr "چند زبان"
 
 #: UiStrings.resx$MultipleLanguages$Message
 msgid "Multiple Languages..."
-msgstr ""
+msgstr "چند زبان..."
 
 #: UiStrings.resx$MultipleScansDelay$Message
 msgid "Multiple scans (fixed delay between scans)"
@@ -938,7 +982,7 @@ msgstr ""
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
-msgstr "NAPS2 کاملا رایگان است. کمک مالی کنید.."
+msgstr "NAPS2 کاملا رایگان است. کمک مالی را در نظر داشته باشید."
 
 #: UiStrings.resx$NameOptional$Message
 msgid "Name (optional)"
@@ -975,7 +1019,7 @@ msgstr "هیچ دستگاهی انتخاب نشده."
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
-msgstr ""
+msgstr "دستگاهی پیدا نشد."
 
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
@@ -1102,7 +1146,7 @@ msgstr "تنظیمات پی‌دی‌اف"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
-msgstr "PDF ذخیره شد.."
+msgstr "PDF ذخیره شد."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
@@ -1127,6 +1171,10 @@ msgstr "پرونده PNG  (*.png)"
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "اندازه صفحه:"
+
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr ""
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
@@ -1161,6 +1209,7 @@ msgstr ""
 msgid "Press Start when ready."
 msgstr "وقتی آماده شدید، شروع را فشار دهید."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "پیش‌نمایش"
@@ -1267,6 +1316,10 @@ msgstr ""
 msgid "Reverse Selected"
 msgstr ""
 
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr ""
+
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
 msgstr "برگرداندن"
@@ -1301,20 +1354,20 @@ msgstr "درایور SANE"
 
 #: UiStrings.resx$Save$Message
 msgid "Save"
-msgstr ""
+msgstr "ذخیره"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveAll$Message
 #: UiStrings.resx$SaveAll$Message
 msgid "Save All"
-msgstr ""
+msgstr "ذخیره همه"
 
 #: UiStrings.resx$SaveAllAsImages$Message
 msgid "Save All as Images"
-msgstr ""
+msgstr "ذخیره همه به عنوان تصویر"
 
 #: UiStrings.resx$SaveAllAsPdf$Message
 msgid "Save All as PDF"
-msgstr ""
+msgstr "ذخیره همه به عنوان PDF"
 
 #: MiscResources.resx$SaveImages$Message
 #: UiStrings.resx$SaveImages$Message
@@ -1337,7 +1390,7 @@ msgstr "پیشرفت ذخیره PDF"
 #: SettingsResources.resx$SaveButtonDefaultAction_SaveSelected$Message
 #: UiStrings.resx$SaveSelected$Message
 msgid "Save Selected"
-msgstr ""
+msgstr "ذخیره انتخاب شده‌ها"
 
 #: UiStrings.resx$SaveSelectedAsImages$Message
 msgid "Save Selected as Images"
@@ -1383,11 +1436,11 @@ msgstr "پیکربندی اسکن"
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 #: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr ""
+msgstr "اسکن با پروفایل پیشفرض"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
-msgstr ""
+msgstr "اسکن با پروفایل جدید"
 
 #: UiStrings.resx$ScanWithProfile$Message
 msgid "Scan With Profile {0}"
@@ -1400,7 +1453,7 @@ msgstr "تصویر اسکن شده"
 #: UiStrings.resx$ScannerSharing$Message
 #: UiStrings.resx$ScannerSharingFormTitle$Message
 msgid "Scanner Sharing"
-msgstr ""
+msgstr "اشتراک گذاری اسکنر"
 
 #: MiscResources.resx$ScanPageProgress$Message
 msgid "Scanning page {0}"
@@ -1417,7 +1470,7 @@ msgstr "اسکن صفحه {0}..."
 
 #: UiStrings.resx$SearchingForDevices$Message
 msgid "Searching for devices..."
-msgstr ""
+msgstr "در حال جستجوی دستگاه‌ها..."
 
 #: UiStrings.resx$Second2Digit$Message
 msgid "Second (00-59)"
@@ -1433,7 +1486,7 @@ msgstr "انتخاب همه"
 
 #: UiStrings.resx$SelectDevice$Message
 msgid "Select Device"
-msgstr ""
+msgstr "انتخاب دستگاه"
 
 #: UiStrings.resx$SelectSource$Message
 msgid "Select Source"
@@ -1446,6 +1499,11 @@ msgstr "قبل از اسکن پروفایلی را انتخاب کنید."
 #: UiStrings.resx$OcrSelectLanguageLabel$Message
 msgid "Select one or more languages:"
 msgstr "یک یا چند زبان انتخاب کنید:"
+
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr ""
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1462,15 +1520,15 @@ msgstr "پیش‌فرض کن"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr ""
+msgstr "تنظیمات"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
-msgstr ""
+msgstr "اشتراک گذاری"
 
 #: UiStrings.resx$ShareAsService$Message
 msgid "Share even when NAPS2 is closed"
-msgstr ""
+msgstr "اشتراک گذاری حتی اگر NAPS2 بسته است"
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
@@ -1484,9 +1542,13 @@ msgstr ""
 msgid "Sharpen"
 msgstr "وضوح"
 
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
+
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
-msgstr ""
+msgstr "میانبر"
 
 #: UiStrings.resx$Show$Message
 msgid "Show"
@@ -1502,7 +1564,7 @@ msgstr ""
 
 #: UiStrings.resx$ShowPageNumbers$Message
 msgid "Show page numbers"
-msgstr ""
+msgstr "نمایش شماره صفحه‌"
 
 #: UiStrings.resx$ToggleSidebar$Message
 msgid "Sidebar"
@@ -1522,7 +1584,7 @@ msgstr "اعلان ذخیره‌سازی را نادیده بگیر"
 
 #: UiStrings.resx$Split$Message
 msgid "Split"
-msgstr ""
+msgstr "تقسیم کردن"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1530,7 +1592,7 @@ msgstr "شروع"
 
 #: UiStrings.resx$StopScannerSharing$Message
 msgid "Stop Scanner Sharing"
-msgstr ""
+msgstr "توقف به اشتراک گذاری اسکنر"
 
 #: UiStrings.resx$StretchToPageSize$Message
 msgid "Stretch to page size"
@@ -1555,7 +1617,7 @@ msgstr "جزئیات فنی"
 #: MiscResources.resx$TesseractNotAvailable$Message
 #: SdkResources.resx$TesseractNotAvailable$Message
 msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:"
+msgstr "موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید:"
 
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
@@ -1564,7 +1626,7 @@ msgstr ""
 #: MiscResources.resx$SaneNotAvailable$Message
 #: SdkResources.resx$SaneNotAvailable$Message
 msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:"
+msgstr "درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌ای:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
@@ -1573,11 +1635,11 @@ msgstr "پرونده '{0}' را نمی‌توان وارد کرد."
 
 #: MiscResources.resx$ImportErrorNAPS2Pdf$Message
 msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "پروندهٔ '{0}' را نمی‌توان درون‌ریزی کرد. فقط پرونده‌های ایجاد شده بوسیله NAPS2 را می‌توان درون‌ریزی کرد.."
+msgstr "پروندهٔ '{0}' را نمی‌توان درون‌ریزی کرد. فقط پرونده‌های ایجاد شده بوسیله NAPS2 را می‌توان درون‌ریزی کرد."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
-msgstr "پرونده قابل بازنویسی نیست زیاد در حال استفاده است.."
+msgstr "پرونده قابل بازنویسی نیست چون در حال استفاده است."
 
 #: MiscResources.resx$ConfirmOverwriteFile$Message
 msgid "The file {0} already exists. Do you want to overwrite it?"
@@ -1600,12 +1662,12 @@ msgstr "اسکنر در حال گرم شدن است."
 #: MiscResources.resx$DeviceCoverOpen$Message
 #: SdkResources.resx$DeviceCoverOpen$Message
 msgid "The scanner's cover is open."
-msgstr "درب اسکنر باز است."
+msgstr "در اسکنر باز است."
 
 #: MiscResources.resx$DriverNotSupported$Message
 #: SdkResources.resx$DriverNotSupported$Message
 msgid "The selected driver is not supported on this system."
-msgstr "درایور انتخابیدر این سیستم قابل استفاده نیست.."
+msgstr "درایور انتخابی در این سیستم قابل استفاده نیست."
 
 #: MiscResources.resx$DeviceNotFound$Message
 #: SdkResources.resx$DeviceNotFound$Message
@@ -1642,7 +1704,7 @@ msgstr ""
 
 #: UiStrings.resx$ThemeLabel$Message
 msgid "Theme:"
-msgstr ""
+msgstr "پوسته:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
@@ -1659,6 +1721,17 @@ msgstr "زمان بین اسکن‌ها (ثانیه):"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "عنوان:"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr ""
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1690,7 +1763,7 @@ msgstr ""
 
 #: SdkResources.resx$UnknownScanner$Message
 msgid "Unknown Scanner"
-msgstr ""
+msgstr "اسکنر ناشناس"
 
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
@@ -1848,7 +1921,7 @@ msgstr "{0} تصویر اسکن شده از {1} روی {2} ذخیره نشده�
 
 #: MiscResources.resx$ImagesSaved$Message
 msgid "{0} images saved."
-msgstr "{0} تصویر ذخیره شد.."
+msgstr "{0} تصویر ذخیره شد."
 
 #: MiscResources.resx$PdfStatus$Message
 #: UiStrings.resx$XOfY$Message

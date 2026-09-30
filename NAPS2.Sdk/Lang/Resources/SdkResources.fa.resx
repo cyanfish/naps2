@@ -55,7 +55,7 @@
     <value>اسکنر انتخابی مشغول است.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>درب اسکنر باز است.</value>
+    <value>در اسکنر باز است.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
     <value>کاغذ داخل اسکنر گیر کرده است.</value>
@@ -64,16 +64,16 @@
     <value>اسکنر در حال گرم شدن است.</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:</value>
+    <value>درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌ای:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:</value>
+    <value>موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>درایور انتخابیدر این سیستم قابل استفاده نیست..</value>
+    <value>درایور انتخابی در این سیستم قابل استفاده نیست.</value>
   </data>
   <data name="OcrError" xml:space="preserve">
-    <value>خطایی در OCR  رخ داد.</value>
+    <value>خطایی در OCR رخ داد.</value>
   </data>
   <data name="OcrTimeout" xml:space="preserve">
     <value>The OCR operation timed out.</value>
@@ -85,6 +85,6 @@
     <value>The worker process crashed. Check the Windows event viewer.</value>
   </data>
   <data name="UnknownScanner" xml:space="preserve">
-    <value>Unknown Scanner</value>
+    <value>اسکنر ناشناس</value>
   </data>
 </root>

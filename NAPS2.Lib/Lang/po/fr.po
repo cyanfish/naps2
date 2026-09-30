@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-07-18 19:02\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -112,6 +112,10 @@ msgstr "Permettre l'impression en qualité maximale"
 msgid "Allow Printing"
 msgstr "Permettre l'impression"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Désappairer alternativement [162534>123456]"
@@ -128,6 +132,10 @@ msgstr "Toujours demander"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "Toujours demander"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "Toujours afficher l’aperçu"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -395,6 +403,10 @@ msgstr "Tout effacer"
 msgid "Clear images after saving"
 msgstr "Effacer les images après l'enregistrement"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "Cliquer sur les boutons ou utiliser les touches fléchées pour modifier l’orientation."
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "Fermer"
@@ -454,6 +466,10 @@ msgstr "Recadrer"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "Recadrer aux dimensions de la page"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -873,6 +889,15 @@ msgstr "Charger les images dans NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "Rendre possible la recherche dans les PDF issus d'OCR"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "Duplex manuel"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "Duplex manuel (aperçu)"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -901,6 +926,36 @@ msgstr "Mois (01-12)"
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
 msgstr "Plus d'informations"
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "Souris :\n"
+"Cliquer et glisser pour déplacer les poignées de cadrage.\n"
+"Ou cliquer et glisser pour définir toute la zone.\n\n"
+"Clavier :\n"
+"Les touches fléchées déplacent la poignée de cadrage en bas à droite.\n"
+"Maintenir {0} pour déplacer la poignée en haut à gauche à la place.\n"
+"Maintenir {1} pour déplacer toute la sélection en une fois.\n"
+"Maintenir {2} pour déplacer plus vite."
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr "Souris :\n"
+"Cliquer sur les boutons pour modifier l’orientation et l’alignement de la combinaison.\n\n"
+"Clavier :\n"
+"Les touches fléchées modifient l’orientation de la combinaison.\n"
+"Maintenir [Shift] pour modifier l’alignement à la place (si les images n’ont pas la même taille)."
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -1128,6 +1183,10 @@ msgstr "Fichier PNG (*.png)"
 msgid "Page size:"
 msgstr "Taille de la page :"
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "Page réorganisées."
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr "Source du papier :"
@@ -1161,6 +1220,7 @@ msgstr "Exécuter l'OCR immédiatement après la numérisation"
 msgid "Press Start when ready."
 msgstr "Presser « Démarrer » une fois prêt."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Aperçu"
@@ -1266,6 +1326,10 @@ msgstr "Tout inverser"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "Inverser la sélection"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "Versos inversés"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1511,12 @@ msgstr "Sélectionner un profil avant de cliquer sur « Numériser »."
 msgid "Select one or more languages:"
 msgstr "Sélectionner une ou plusieurs langues :"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr "Choisir l’angle à tourner.\n"
+"Ou cliquer et glisser pour dessiner une ligne alignée avec la page (verticalement ou horizontalement)."
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Sélection ({0})"
@@ -1483,6 +1553,10 @@ msgstr "Les scanners partagés peuvent être utilisés à partir d'autres ordina
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Améliorer la netteté"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1659,6 +1733,23 @@ msgstr "Délai entre 2 numérisations (secondes) :"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "Titre :"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "Pour numériser les deux côtés d’un document multipages avec le chargeur du scanner, il est possible de choisir « Duplex » comme source de papier si le scanner le prend en charge.\n\n"
+"Si le scanner ne prend pas en charge le mode « Duplex », suivre ces instructions :\n"
+"1. Numériser les rectos du document\n"
+"2. Retourner le document\n"
+"3. Numériser les rectos du document\n"
+"4. Cliquer sur « Duplex manuel »\n"
+"5. Selon l’orientation physique du scanner, il faudra peut-être cocher « Inverser les versos »"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"

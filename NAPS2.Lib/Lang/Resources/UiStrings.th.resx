@@ -22,7 +22,7 @@
     <value>ไอค่อน จาก:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>ตรวจสอบเวอร์ชันใหม่</value>
+    <value>ตรวจสอบการอัปเดต</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>ตกลง</value>
@@ -55,16 +55,16 @@
     <value>วาง</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>เลิกทำ</value>
   </data>
   <data name="Redo" xml:space="preserve">
     <value>ทำซ้ำ</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Undo {0}</value>
+    <value>เลิกทำ {0}</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
-    <value>Redo {0}</value>
+    <value>ทำซ้ำ {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>เสร็จ</value>
@@ -76,7 +76,7 @@
     <value>โปรไฟล์ใหม่</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
-    <value>สแกนจำนวนมาก</value>
+    <value>สแกนชุดเอกสาร</value>
   </data>
   <data name="Ocr" xml:space="preserve">
     <value>OCR</value>
@@ -133,7 +133,7 @@
     <value>ปรับแก้เอกสาร</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
+    <value>รีเซ็ต</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>หมุน</value>
@@ -214,7 +214,7 @@
     <value>ค่าเริ่มต้นของปุ่ม "บันทึก"</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>แอพลิเคชัน</value>
+    <value>แอปพลิเคชัน</value>
   </data>
   <data name="SingleInstanceDesc" xml:space="preserve">
     <value>Only allow a single NAPS2 instance</value>
@@ -235,7 +235,7 @@
     <value>Zoom Actual</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Scale With Window</value>
+    <value>ปรับขนาดตามหน้าต่างโปรแกรม</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>บันทึก</value>
@@ -271,7 +271,7 @@
     <value>Email Selected as PDF</value>
   </data>
   <data name="EditProfileFormTitle" xml:space="preserve">
-    <value>Profile Settings</value>
+    <value>ตั้งค่าโปรไฟล์</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
     <value>Display name:</value>
@@ -295,7 +295,7 @@
     <value>Apple Driver</value>
   </data>
   <data name="SaneDriver" xml:space="preserve">
-    <value>SANE Driver</value>
+    <value>ไดรเวอร์ SANE</value>
   </data>
   <data name="DeviceLabel" xml:space="preserve">
     <value>อุปกรณ์:</value>
@@ -337,10 +337,10 @@
     <value>บันทึกอัตโนมัติ</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>การตั้งค่าบันทึกอัตโนมัติ</value>
+    <value>ตั้งค่าการบันทึกอัตโนมัติ</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>การตั้งค่าบันทึกอัตโนมัติ</value>
+    <value>ตั้งค่าการบันทึกอัตโนมัติ</value>
   </data>
   <data name="Advanced" xml:space="preserve">
     <value>ขั้นสูง</value>
@@ -370,7 +370,7 @@
     <value>Not Another PDF Scanner</value>
   </data>
   <data name="OcrSetupFormTitle" xml:space="preserve">
-    <value>OCR Setup</value>
+    <value>ตั้งค่า OCR</value>
   </data>
   <data name="MakePdfsSearchable" xml:space="preserve">
     <value>ทำให้ PDF ค้นหาได้ด้วย OCR</value>
@@ -388,7 +388,7 @@
     <value>OCR ทำงานอัตโนมัติหลังจากสแกนเสร็จ</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Pre-emptively run OCR after scanning</value>
+    <value>OCR ทำงานอัตโนมัติหลังจากสแกนเสร็จ</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>เพิ่มภาษา</value>
@@ -400,7 +400,7 @@
     <value>Using OCR requires you to download each language you want to scan.</value>
   </data>
   <data name="OcrSelectLanguageLabel" xml:space="preserve">
-    <value>เลือก 1 ภาษา หรือมากกว่า:</value>
+    <value>เลือกหนึ่งภาษา หรือมากกว่า:</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Estimated download size: {0} MB</value>
@@ -418,7 +418,7 @@
     <value>ถัดไป</value>
   </data>
   <data name="Previous" xml:space="preserve">
-    <value>Previous</value>
+    <value>ก่อนหน้า</value>
   </data>
   <data name="XOfY" xml:space="preserve">
     <value>{0} of {1}</value>
@@ -433,13 +433,13 @@
     <value>เลือกทั้งหมด</value>
   </data>
   <data name="Recover" xml:space="preserve">
-    <value>Recover</value>
+    <value>กู้คืน</value>
   </data>
   <data name="NotNow" xml:space="preserve">
     <value>ไม่ใช่ตอนนี้</value>
   </data>
   <data name="RecoverFormTitle" xml:space="preserve">
-    <value>Recover Scanned Images</value>
+    <value>กู้คืนรูปภาพที่สแกน</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
     <value>รูปสแกนจำนวน {0} รูป ช่วงวันที่ {1} เวลา {2} ไม่สามารถบันทึกได้ และสามารถกู้คืนได้. คุณต้องการกู้คืนหรือไม่?</value>
@@ -460,7 +460,7 @@
     <value>แสดง</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
-    <value>Restore Defaults</value>
+    <value>คืนค่าเริ่มต้น</value>
   </data>
   <data name="PdfSettingsFormTitle" xml:space="preserve">
     <value>การตั้งค่า PDF</value>
@@ -499,7 +499,7 @@
     <value>ชื่อเรื่อง:</value>
   </data>
   <data name="AuthorLabel" xml:space="preserve">
-    <value>ผู้แต่ง:</value>
+    <value>ผู้สร้างเอกสาร:</value>
   </data>
   <data name="SubjectLabel" xml:space="preserve">
     <value>หัวเรื่อง:</value>
@@ -508,7 +508,7 @@
     <value>คีย์เวิร์ด:</value>
   </data>
   <data name="OwnerPasswordLabel" xml:space="preserve">
-    <value>Owner Password:</value>
+    <value>รหัสผ่านของเจ้าของไฟล์:</value>
   </data>
   <data name="UserPasswordLabel" xml:space="preserve">
     <value>รหัสผ่านผู้ใช้:</value>
@@ -565,7 +565,7 @@
     <value>ชื่อไฟล์:</value>
   </data>
   <data name="PreviewLabel" xml:space="preserve">
-    <value>Preview:</value>
+    <value>ดูตัวอย่าง:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
     <value>สำหรับ JPG คุณภาพสูง (80+) จะเพิ่มคุณภาพของรูปใน โปรไฟล์ของคุณ ให้ได้ผลลัพท์ดีที่สุด</value>
@@ -574,7 +574,7 @@
     <value>คุณภาพของ Jpeg</value>
   </data>
   <data name="TiffOptions" xml:space="preserve">
-    <value>Tiff Options</value>
+    <value>ตั้งค่าไฟล์ TIFF</value>
   </data>
   <data name="CompressionLabel" xml:space="preserve">
     <value>การบีบอัด:</value>
@@ -589,19 +589,19 @@
     <value>ตั้งค่า</value>
   </data>
   <data name="Provider" xml:space="preserve">
-    <value>Provider</value>
+    <value>ผู้ให้บริการ</value>
   </data>
   <data name="Change" xml:space="preserve">
     <value>เปลี่ยนแปลง</value>
   </data>
   <data name="AttachmentNameLabel" xml:space="preserve">
-    <value>ชื่อไฟล์:</value>
+    <value>ชื่อไฟล์แนบ:</value>
   </data>
   <data name="EmailProviderFormTitle" xml:space="preserve">
     <value>เลือกผู้ให้บริการอีเมล</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>อนุญาต</value>
+    <value>ให้สิทธิ์ใช้งาน</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Waiting for authorization...</value>
@@ -610,16 +610,16 @@
     <value>ผิดพลาด</value>
   </data>
   <data name="TechnicalDetails" xml:space="preserve">
-    <value>Technical Details</value>
+    <value>รายละเอียดทางเทคนิค</value>
   </data>
   <data name="PdfPasswordFormTitle" xml:space="preserve">
     <value>รหัสผ่าน</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>The following file is encrypted and requires a password to open:</value>
+    <value>ไฟล์ต่อไปนี้ถูกเข้ารหัสไว้และจำเป็นต้องใส่รหัสผ่านเพื่อเปิด:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
-    <value>Prompt for file path</value>
+    <value>ถามตำแหน่งที่จะบันทึกไฟล์</value>
   </data>
   <data name="OneFilePerPage" xml:space="preserve">
     <value>One file per page</value>
@@ -634,7 +634,7 @@
     <value>ข้อมูลเพิ่มเติม</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>ล้างภาพหลังจากบันทึก</value>
+    <value>ล้างรูปภาพหลังจากบันทึกเสร็จสิ้น</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
     <value>Keep images across sessions</value>
@@ -676,7 +676,7 @@
     <value>White Threshold</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
-    <value>Coverage Threshold</value>
+    <value>เกณฑ์ความครอบคลุม</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
     <value>Post-processing</value>
@@ -685,7 +685,7 @@
     <value>Deskew scanned pages</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
-    <value>ปรับค่าความสว่าง/ความคมชัดโดยอัตโนมัติหลังจากสแกนเสร็จ</value>
+    <value>ปรับความสว่าง/ความคมชัดหลังสแกนทันที</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
     <value>Offset width based on alignment (WIA)</value>
@@ -706,13 +706,13 @@
     <value>Wia Version:</value>
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
-    <value>Twain Implementation:</value>
+    <value>การทำงานของ TWAIN:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
-    <value>สแกนจำนวนมาก</value>
+    <value>สแกนชุดเอกสาร</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Press Start when ready.</value>
+    <value>กดปุ่มเริ่มเมื่อพร้อม</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>ตั้งค่าการสแกน</value>
@@ -736,7 +736,7 @@
     <value>Number of scans:</value>
   </data>
   <data name="TimeBetweenScansLabel" xml:space="preserve">
-    <value>Time between scans (seconds):</value>
+    <value>ระยะเวลารอก่อนสแกนแผ่นถัดไป (วินาที):</value>
   </data>
   <data name="LoadIn" xml:space="preserve">
     <value>โหลดรูปเข้าสู่ NAPS2</value>
@@ -754,7 +754,7 @@
     <value>สแกนครั้งต่อไป</value>
   </data>
   <data name="ReadyForScan" xml:space="preserve">
-    <value>Ready for scan {0}.</value>
+    <value>พร้อมสำหรับการสแกนหน้า {0}</value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
     <value>Open Folder</value>
@@ -781,7 +781,7 @@
     <value>แชร์การตั้งค่า Scanner</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>คุณต้องการ หยุดการแชร์ "{0}" ใช่หรือไม่?</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการหยุดแชร์ {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>แชร์ แม้ว่า NAPS2 จะถูกปิดอยู่</value>
@@ -793,7 +793,7 @@
     <value>หลายภาษา</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Show native TWAIN progress</value>
+    <value>แสดงหน้าต่างความคืบหน้าดั้งเดิมของ TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
     <value>แยก</value>
@@ -835,10 +835,10 @@
     <value>ไม่พบอุปกรณ์</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sidebar</value>
+    <value>แถบด้านข้าง</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>หา Scanner ไม่เจอ? ลองอ่านเกี่ยวกับ ข้อจำกัด ของ NAPS2 Flatpak</value>
+    <value>ไม่พบเครื่องสแกนของคุณ? สามารถอ่านข้อมูลเพิ่มเติมเกี่ยวกับข้อจำกัดของ NAPS2 Flatpak ได้ที่นี่</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
     <value>คีย์บอร์ดลัด</value>
@@ -856,10 +856,10 @@
     <value>สแกนด้วยโปรไฟล์ใหม่</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>กำหนด</value>
+    <value>กำหนดค่า</value>
   </data>
   <data name="Unassign" xml:space="preserve">
-    <value>Unassign</value>
+    <value>ยกเลิกการกำหนด</value>
   </data>
   <data name="Action" xml:space="preserve">
     <value>กิจกรรม</value>
@@ -868,7 +868,7 @@
     <value>ปุ่มลัด</value>
   </data>
   <data name="ThemeLabel" xml:space="preserve">
-    <value>Theme:</value>
+    <value>ธีม:</value>
   </data>
   <data name="EditWith" xml:space="preserve">
     <value>Edit with...</value>
@@ -884,5 +884,71 @@
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
     <value>หยุด Scanner Sharing</value>
+  </data>
+  <data name="CropHelp" xml:space="preserve">
+    <value>Mouse:
+Click and drag to move the crop handles.
+Or click and drag to draw the full area.
+
+Keyboard:
+Arrow keys move the bottom-right crop handle.
+Hold "{0}" to move the top-left handle instead.
+Hold "{1}" to move the whole selection at once.
+Hold "{2}" to move faster.</value>
+  </data>
+  <data name="SplitHelp" xml:space="preserve">
+    <value>Click the buttons or use the arrow keys to change the split orientation.</value>
+  </data>
+  <data name="CombineHelp" xml:space="preserve">
+    <value>Mouse:
+Click the buttons to change the combine orientation and alignment.
+
+Keyboard:
+Arrow keys change the combine orientation.
+Hold "Shift" to change the alignment instead (if the images aren't the same size).</value>
+  </data>
+  <data name="CustomRotationHelp" xml:space="preserve">
+    <value>Select the angle to rotate.
+Or click and drag to draw a line aligned with the page (vertically or horizontally).</value>
+  </data>
+  <data name="ManualDuplex" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="ManualDuplexPreview" xml:space="preserve">
+    <value>Manual Duplex (preview)</value>
+  </data>
+  <data name="ManualDuplexFormTitle" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="AlwaysShowPreview" xml:space="preserve">
+    <value>Always show preview</value>
+  </data>
+  <data name="ReverseBackSides" xml:space="preserve">
+    <value>Reverse back sides</value>
+  </data>
+  <data name="ManualDuplexHelp" xml:space="preserve">
+    <value>To scan both sides of a multi-page document with your feeder scanner, you can select "Duplex" as your paper source if your scanner supports it.
+      
+If your scanner doesn't support "Duplex" scanning, follow these instructions:
+1. Scan the front sides of the document
+2. Flip the document over
+3. Scan the back sides of the document
+4. Click "Manual Duplex"
+5. Depending on the physical orientation of your scanner, you may need to check "Reverse back sides"</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>ดูตัวอย่าง</value>
+  </data>
+  <data name="PagesReordered" xml:space="preserve">
+    <value>Pages reordered.</value>
+  </data>
+  <data name="ControlKey" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="AltKey" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="ShiftKey" xml:space="preserve">
+    <value>Shift</value>
   </data>
 </root>

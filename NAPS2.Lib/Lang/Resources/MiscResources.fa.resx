@@ -139,7 +139,7 @@
     <value>پرونده '{0}' را نمی‌توان وارد کرد.</value>
   </data>
   <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>پروندهٔ '{0}' را نمی‌توان درون‌ریزی کرد. فقط پرونده‌های ایجاد شده بوسیله NAPS2 را می‌توان درون‌ریزی کرد..</value>
+    <value>پروندهٔ '{0}' را نمی‌توان درون‌ریزی کرد. فقط پرونده‌های ایجاد شده بوسیله NAPS2 را می‌توان درون‌ریزی کرد.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>خطای بارگیری</value>
@@ -286,7 +286,7 @@
     <value>اسکنر انتخابی مشغول است.</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>درب اسکنر باز است.</value>
+    <value>در اسکنر باز است.</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
     <value>کاغذ داخل اسکنر گیر کرده است.</value>
@@ -295,16 +295,16 @@
     <value>اسکنر در حال گرم شدن است.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>یک بروزرسانی برای OCR موجود است..</value>
+    <value>یک بروزرسانی برای OCR موجود است.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>تصویر ذخیره شد.</value>
   </data>
   <data name="ImagesSaved" xml:space="preserve">
-    <value>{0} تصویر ذخیره شد..</value>
+    <value>{0} تصویر ذخیره شد.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF ذخیره شد..</value>
+    <value>PDF ذخیره شد.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1}x{2} {3})</value>
@@ -313,7 +313,7 @@
     <value>آیا مطمئنید که می‌خواهید {0} حذف کنید؟</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>پرونده قابل بازنویسی نیست زیاد در حال استفاده است..</value>
+    <value>پرونده قابل بازنویسی نیست چون در حال استفاده است.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
     <value>مرتب‌سازی...</value>
@@ -337,7 +337,7 @@
     <value>کمک مالی</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 کاملا رایگان است. کمک مالی کنید..</value>
+    <value>NAPS2 کاملا رایگان است. کمک مالی را در نظر داشته باشید.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
     <value>Leave a Review</value>
@@ -346,13 +346,13 @@
     <value>Like NAPS2?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:</value>
+    <value>درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌ای:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید.:</value>
+    <value>موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>درایور انتخابیدر این سیستم قابل استفاده نیست..</value>
+    <value>درایور انتخابی در این سیستم قابل استفاده نیست.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>در حال اجرای OCR</value>
@@ -370,13 +370,13 @@
     <value>هیچ بروزرسانی‌ای موجود نیست.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
-    <value>درحال بررسی......</value>
+    <value>درحال بررسی...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
     <value>Update checking is disabled.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>خطایی هنگام تلاش برای بروزرسانی رخ داد..</value>
+    <value>خطایی هنگام تلاش برای نصب بروزرسانی رخ داد.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>نصب {0}</value>
@@ -385,7 +385,7 @@
     <value>یک بروزرسانی موجود است.</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>خطایی هنگام تلاش برای احراز هویت رخ داد..</value>
+    <value>خطایی هنگام تلاش برای احراز هویت رخ داد.</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>بارگزاری ایمیل...</value>

@@ -148,16 +148,16 @@
     <value>پیش‌فرض</value>
   </data>
   <data name="OcrMode_Fast" xml:space="preserve">
-    <value>Fast</value>
+    <value>سریع</value>
   </data>
   <data name="OcrMode_Best" xml:space="preserve">
-    <value>Best</value>
+    <value>بهترین</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>ذخیره همه</value>
   </data>
   <data name="SaveButtonDefaultAction_SaveSelected" xml:space="preserve">
-    <value>Save Selected</value>
+    <value>ذخیره انتخاب شده‌ها</value>
   </data>
   <data name="SaveButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>Always Prompt</value>
@@ -166,7 +166,7 @@
     <value>Prompt If Selected</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scan With Default Profile</value>
+    <value>اسکن با پروفایل پیشفرض</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>Always Prompt</value>
@@ -175,9 +175,9 @@
     <value>پیش‌فرض</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
-    <value>Light</value>
+    <value>روشن</value>
   </data>
   <data name="Theme_Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>تاریک</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-07-18 19:02\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Slovenian\n"
 "Language: sl\n"
@@ -112,6 +112,10 @@ msgstr "Dovolite tiskanje v najboljši kvaliteti"
 msgid "Allow Printing"
 msgstr "Dovolite tiskanje"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Drugačno razpletanje"
@@ -128,6 +132,10 @@ msgstr "Vedno vprašaj"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "Vedno vprašaj"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "Vedno prikaži predogled"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -395,6 +403,10 @@ msgstr "Počisti vse"
 msgid "Clear images after saving"
 msgstr "Po shranjevanju počisti slike"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "Kliknite gumbe ali uporabite puščične tipke, da spremenite usmerjenost razdelitve."
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "Zapri"
@@ -454,6 +466,10 @@ msgstr "Obreži"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "Obreži na velikost strani"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -873,6 +889,15 @@ msgstr "Naloži slike v NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "Naredi PDF z možnostjo iskanja z uporabo OCR"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "Ročno obojestransko tiskanje"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "Ročno obojestransko tiskanje (predogled)"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -901,6 +926,36 @@ msgstr "Mesec (01-12)"
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
 msgstr "Več informacij"
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "Miška:\n"
+"Kliknite in povlecite, da premaknete ročice za obrezovanje.\n"
+"Ali pa kliknite in povlecite, da narišete celotno območje.\n\n"
+"Tipkovnica:\n"
+"S puščičnimi tipkami premaknete spodnjo desno ročico za obrezovanje.\n"
+"Držite tipko \"{0}\", da premaknete zgornjo levo ročico.\n"
+"Držite tipko \"{1}\", da premaknete celotno izbiro naenkrat.\n"
+"Držite tipko \"{2}\", da se premikate hitreje."
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr "Miška:\n"
+"Kliknite gumbe za spremembo orientacije in poravnave združevanja.\n\n"
+"Tipkovnica:\n"
+"S puščičnimi tipkami spremenite orientacijo združevanja.\n"
+"Za spremembo poravnave držite tipko \"Shift\" (če slike niso enake velikosti)."
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -1128,6 +1183,10 @@ msgstr "PNG Datoteka (*.png)"
 msgid "Page size:"
 msgstr "Velikost strani:"
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "Strani so bile prerazporejene."
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr "Izvor papirja:"
@@ -1161,6 +1220,7 @@ msgstr "Izvedi OCR po skeniranju"
 msgid "Press Start when ready."
 msgstr "Pritisnite Začni, ko boste pripravljeni."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Predogled"
@@ -1266,6 +1326,10 @@ msgstr "Obrnite vse"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "Obratno izbrano"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "Obrni hrbtne strani"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1511,12 @@ msgstr "Izberite profil preden pritisnete Skeniraj."
 msgid "Select one or more languages:"
 msgstr "Izberite enega ali več jezikov:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr "Izberite kot zasuka.\n"
+"Ali pa kliknite in povlecite, da narišete črto, poravnano s stranjo (navpično ali vodoravno)."
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Izbranih ({0})"
@@ -1483,6 +1553,10 @@ msgstr "Skenerje v skupni rabi lahko uporabljajo drugi računalniki v lokalnem o
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Izostritev"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1659,6 +1733,24 @@ msgstr "Čas med posameznimi skeni (v sekundah):"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "Naslov:"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "Če želite s podajalnikom optičnega bralnika skenirati obe strani večstranskega dokumenta, lahko kot vir papirja izberete \"Dupleks\", če vaš skener to podpira.\n"
+"      \n"
+"Če vaš skener ne podpira obojestranskega skeniranja, sledite tem navodilom:\n"
+"1. Skenirajte sprednje strani dokumenta\n"
+"2. Obrnite dokument\n"
+"3. Skenirajte zadnje strani dokumenta\n"
+"4. Kliknite \"Ročno obojestransko skeniranje\"\n"
+"5. Glede na fizično orientacijo skenerja boste morda morali označiti možnost \"Obrnite zadnje strani\""
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"

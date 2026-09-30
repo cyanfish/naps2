@@ -885,4 +885,70 @@
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Stop Scanner Sharing</value>
   </data>
+  <data name="CropHelp" xml:space="preserve">
+    <value>Mouse:
+Click and drag to move the crop handles.
+Or click and drag to draw the full area.
+
+Keyboard:
+Arrow keys move the bottom-right crop handle.
+Hold "{0}" to move the top-left handle instead.
+Hold "{1}" to move the whole selection at once.
+Hold "{2}" to move faster.</value>
+  </data>
+  <data name="SplitHelp" xml:space="preserve">
+    <value>Click the buttons or use the arrow keys to change the split orientation.</value>
+  </data>
+  <data name="CombineHelp" xml:space="preserve">
+    <value>Mouse:
+Click the buttons to change the combine orientation and alignment.
+
+Keyboard:
+Arrow keys change the combine orientation.
+Hold "Shift" to change the alignment instead (if the images aren't the same size).</value>
+  </data>
+  <data name="CustomRotationHelp" xml:space="preserve">
+    <value>Select the angle to rotate.
+Or click and drag to draw a line aligned with the page (vertically or horizontally).</value>
+  </data>
+  <data name="ManualDuplex" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="ManualDuplexPreview" xml:space="preserve">
+    <value>Manual Duplex (preview)</value>
+  </data>
+  <data name="ManualDuplexFormTitle" xml:space="preserve">
+    <value>Manual Duplex</value>
+  </data>
+  <data name="AlwaysShowPreview" xml:space="preserve">
+    <value>Always show preview</value>
+  </data>
+  <data name="ReverseBackSides" xml:space="preserve">
+    <value>Reverse back sides</value>
+  </data>
+  <data name="ManualDuplexHelp" xml:space="preserve">
+    <value>To scan both sides of a multi-page document with your feeder scanner, you can select "Duplex" as your paper source if your scanner supports it.
+      
+If your scanner doesn't support "Duplex" scanning, follow these instructions:
+1. Scan the front sides of the document
+2. Flip the document over
+3. Scan the back sides of the document
+4. Click "Manual Duplex"
+5. Depending on the physical orientation of your scanner, you may need to check "Reverse back sides"</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Eksempel</value>
+  </data>
+  <data name="PagesReordered" xml:space="preserve">
+    <value>Pages reordered.</value>
+  </data>
+  <data name="ControlKey" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="AltKey" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="ShiftKey" xml:space="preserve">
+    <value>Shift</value>
+  </data>
 </root>

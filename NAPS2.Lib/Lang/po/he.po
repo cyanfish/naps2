@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.13.0\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n==2 ? 1 : 2);\n"
 "X-Crowdin-Project: naps2\n"
 "X-Crowdin-Project-ID: 531762\n"
 "X-Crowdin-Language: he\n"
@@ -112,6 +112,10 @@ msgstr "לאפשר הדפסה באיכות מירבית"
 msgid "Allow Printing"
 msgstr "לאפשר הדפסה"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "ביטול הפרדה מסורג"
@@ -128,6 +132,10 @@ msgstr "תמיד לשאול"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "תמיד לבקש אישור"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "תמיד להציג תצוגה מקדימה"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -395,6 +403,10 @@ msgstr "לפנות הכול"
 msgid "Clear images after saving"
 msgstr "פינוי תמונות לאחר שמירה"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "לחיצה על הכפתורים או שימוש בחיצים יאפשרו לשנות את כיוון הפיצול."
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "סגירה"
@@ -441,7 +453,7 @@ msgstr "העתקה..."
 
 #: UiStrings.resx$CopyrightFormat$Message
 msgid "Copyright {0} NAPS2 Contributors"
-msgstr "כל הזכויות שמורות {0} לתורמים של לא עוד סתם סורק 2"
+msgstr "כל הזכויות שמורות {0} לתורמים של NAPS2"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
@@ -454,6 +466,10 @@ msgstr "חיתוך"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "חיתוך לגודל הדף"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -873,6 +889,15 @@ msgstr "טעינת תמונות לתוך NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "הפקת קובצי PDF שאפשר לחפש בהם עם זיהוי תווים אופטי"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "דו־צדדי ידני"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "דו־צדדי ידני (תצוגה מקדימה)"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -902,6 +927,36 @@ msgstr "חודש (01-12)"
 msgid "More info"
 msgstr "מידע נוסף"
 
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "עכבר:\n"
+"יש ללחוץ ולגרור כדי להזיז את ידיות החיתוך.\n"
+"או ללחוץ ולגרור כדי לכסות את האזור המלא.\n\n"
+"מקלדת:\n"
+"מקשי החצים מזיזים את ידית החיתוך הימנית התחתונה.\n"
+"לחיצה ממושכת על „{0}” מזיזה את ידית החיתוך השמאלית העליונה במקום זאת.\n"
+"לחיצה ממושכת על „{1}” מזיזה את כל הבחירה בבת אחת.\n"
+"לחיצה ממושכת על „{2}” מאיצה את התנועה."
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr "עכבר:\n"
+"לחיצה על הכפתורים מאפשרת לשנות את כיוון ויישור השילוב.\n\n"
+"מקלדת:\n"
+"מקשי החצים משנים את כיוון השילוב.\n"
+"החזקת המקש „Shift” מאפשרת לשנות את היישור במקום זאת (אם התמונות אינן באותו גודל)."
+
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
 msgstr "להזיז למטה"
@@ -930,11 +985,11 @@ msgstr "ריבוי סריקות (הצגת בקשה בין הסריקות)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr "לא עוד סתם סורק 2"
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
-msgstr "לא עוד סתם סורק 2 - {0}"
+msgstr "NAPS2 - {0}"
 
 #: MiscResources.resx$DonatePrompt$Message
 msgid "NAPS2 is completely free. Consider making a donation."
@@ -1106,19 +1161,19 @@ msgstr "PDF נשמר."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr "PDF/A-1b"
+msgstr "תקן PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr "PDF/A-2b"
+msgstr "תקן PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr "PDF/A-3b"
+msgstr "תקן PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr "PDF/A-3u"
+msgstr "תקן PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1127,6 +1182,10 @@ msgstr "קובץ PNG (*.png)"
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "גודל עמוד:"
+
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "הדפים סודרו מחדש."
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
@@ -1161,6 +1220,7 @@ msgstr "הרצת זיהוי תווים אופטי מקדים בסוף הסריק
 msgid "Press Start when ready."
 msgstr "נא ללחוץ על התחלה כשאפשר להתחיל."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "תצוגה מקדימה"
@@ -1266,6 +1326,10 @@ msgstr "היפוך של הכול"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "היפוך הנבחרים"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "היפוך לצדדים אחוריים"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1511,12 @@ msgstr "יש לבחור פרופיל לפני לחיצה על כפתור סרי�
 msgid "Select one or more languages:"
 msgstr "נא לבחור שפה אחת או יותר:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr "נא לבחור את זווית ההטיה.\n"
+"או ללחוץ ולגרור כדי לצייר קו שמיושר עם העמוד (אנכית או אופקית)."
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "מסומנים ({0})"
@@ -1483,6 +1553,10 @@ msgstr "אפשר להשתמש בסורקים משותפים במחשבים אח�
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "חידוד"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1659,6 +1733,23 @@ msgstr "זמן בין סריקות (שניות):"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "כותרת:"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "כדי לסרוק את שני צידי מסמך מרובה עמודים באמצעות סורק מזין הנייר, ניתן לבחור „Duplex” (דו־צדדי) כמקור הנייר אם הסורק תומך בכך.\n\n"
+"אם הסורק אינו תומך בסריקה דו־צדדית, יש לבצע את ההוראות הבאות:\n"
+"1. לסרוק את הצדדים הקדמיים של המסמך\n"
+"2. להפוך את המסמך\n"
+"3. לסרוק את הצדדים האחוריים של המסמך\n"
+"4. ללחוץ על „Manual Duplex” (דו־צדדי ידני)\n"
+"5. בהתאם לכיוון הפיזי של הסורק, ייתכן שצריך לסמן את „Reverse back sides” (היפוך לצדדים אחוריים)"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"

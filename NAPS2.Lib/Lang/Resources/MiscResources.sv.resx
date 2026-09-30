@@ -316,10 +316,10 @@
     <value>Filen kunde inte skrivas över eftersom den används.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Rättar...</value>
+    <value>Rätar upp...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Rättar upp framsteg</value>
+    <value>Förlopp för Räta upp</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
     <value>Nerladdning behövs</value>

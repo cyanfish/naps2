@@ -82,10 +82,10 @@
     <value>Anpassad...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8,5x14 tum)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8,5x11 tum)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
     <value>Anpassad...</value>

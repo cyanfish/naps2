@@ -76,16 +76,16 @@
     <value>JPEG ファイル (*.jpg, *.jpeg)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>名前がありません.</value>
+    <value>名前がありません。</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>デバイスが選択されていません.</value>
+    <value>デバイスが選択されていません。</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>スキャンできるデバイスが検出されませんでした.</value>
+    <value>スキャンデバイスが検出されませんでした。</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
     <value>ファイルを上書きする</value>
@@ -100,13 +100,13 @@
     <value>スキャンをクリックする前にプロファイルを選択してください。</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>スキャナドライバにエラーが発生しました.</value>
+    <value>スキャナドライバにエラーが発生しました。</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>{0} バージョン</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>メール送信中にエラーが発生しました.</value>
+    <value>メール送信でエラーが発生しました。</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>インストールが完了しました</value>
@@ -145,7 +145,7 @@
     <value>ダウンロードエラー</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>1つ以上のファイルをダウンロードできませんでした.</value>
+    <value>ファイルをダウンロードできませんでした。</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
     <value>ユーザー設定 ({0}x{1} {2})</value>
@@ -163,7 +163,7 @@
     <value>未保存の変更があります。変更を破棄しますか?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>作業が進行中です。それでも終了しますか？</value>
+    <value>作業が進行中です。操作を中止し、終了しますか？</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>未保存の変更</value>
@@ -178,31 +178,31 @@
     <value>選択したスキャナはフィーダーを利用できません。スキャナーにフィーダーが備わっている場合は、別のドライバを試してみてください。</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>フィーダーが空です.</value>
+    <value>フィーダーが空です。</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>'{0}'からのコピーは許可されていません.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>保存中にエラーが発生しました.</value>
+    <value>ファイルの保存でエラーが発生しました。</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value>{0} の</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>バッチスキャン中に不明なエラーが発生しました。</value>
+    <value>一括スキャン中に不明なエラーが発生しました。</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>一括スキャンはキャンセルされました.</value>
+    <value>一括スキャンをキャンセルしました。</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
     <value>キャンセルしています…。</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>一括スキャンが正常に終了しました.</value>
+    <value>一括スキャンが終了しました。</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>エラーのために一括スキャンは異常終了しました.</value>
+    <value>一括スキャンはエラーのために停止しました。</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>{0} ページをスキャンしています…</value>
@@ -295,7 +295,7 @@
     <value>スキャナーが準備をしています。</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>新しいOCRのアップデートがあります.</value>
+    <value>OCR のアップデートがあります。</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>画像を保存しました。</value>
@@ -355,7 +355,7 @@
     <value>選択したドライバはこのシステムではサポートされていません。</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
-    <value>OCR適用中</value>
+    <value>OCR 進行状況</value>
   </data>
   <data name="RunningOcr" xml:space="preserve">
     <value>OCR を実行しています...</value>
@@ -367,7 +367,7 @@
     <value>更新しています…</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>有効な更新はありません.</value>
+    <value>アップデートはありません。</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>確認中です...</value>
@@ -376,22 +376,22 @@
     <value>アップデートのチェックは無効です。</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>アップデートをインストールする際にエラーが発生しました.</value>
+    <value>アップデートのインストールするでエラーが発生しました。</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>{0} をインストール</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>利用可能なアップデートがあります.</value>
+    <value>アップデートがあります。</value>
   </data>
   <data name="AuthError" xml:space="preserve">
-    <value>認証中にエラーが発生しました.</value>
+    <value>認証でエラーが発生しました。</value>
   </data>
   <data name="UploadingEmail" xml:space="preserve">
     <value>メールをアップロードしています…</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>メール送信時にエラーが発生しました.</value>
+    <value>メール送信でエラーが発生しました。</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>{0} ページをスキャンしています…</value>

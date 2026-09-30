@@ -19,28 +19,28 @@
     <value>ล้าง</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>คุณต้องการ ล้างไฟล์จำนวน "{0}" ใช่หรือไม่?</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูล {0} รายการ?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>คุณแน่ใจหรือไม่ว่าต้องการลบ {0} รายการ?</value>
   </data>
   <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>คุณต้องการ ลบโปรไฟล์จำนวน "{0}" ใช่หรือไม่?</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการลบโปรไฟล์ทั้ง {0} รายการ?</value>
   </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
-    <value>คุณต้องการ ลบโปรไฟล์ "{0}" ใช่หรือไม่?</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการลบโปรไฟล์ {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>The file {0} already exists. Do you want to overwrite it?</value>
+    <value>มีไฟล์ชื่อ {0} อยู่แล้ว คุณต้องการบันทึกทับหรือไม่?</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>ลบ</value>
   </data>
   <data name="DeviceNotFound" xml:space="preserve">
-    <value>The selected scanner could not be found.</value>
+    <value>ไม่พบเครื่องสแกนเนอร์ที่เลือก</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>The selected scanner is offline.</value>
+    <value>เครื่องสแกนเนอร์ที่เลือกออฟไลน์อยู่</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
     <value>You don't have permission to save files at this location.</value>
@@ -100,13 +100,13 @@
     <value>เลือกโปรไฟล์ก่อนเริ่มสแกน</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>เกิด error กับ scanning driver</value>
+    <value>เกิดข้อผิดพลาดที่ไดรเวอร์ของเครื่องสแกน</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>เวอร์ชั่น {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>เกิด error ระหว่างการส่งอีเมล์</value>
+    <value>เกิดข้อผิดพลาดขณะส่งอีเมล</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>การติดตั้งเสร็จสมบูรณ์</value>
@@ -124,7 +124,7 @@
     <value>ทั้งหมด ({0})</value>
   </data>
   <data name="SelectedCount" xml:space="preserve">
-    <value>Selected ({0})</value>
+    <value>เลือกแล้ว ({0})</value>
   </data>
   <data name="EstimatedDownloadSize" xml:space="preserve">
     <value>Estimated download size: {0} MB</value>
@@ -154,16 +154,16 @@
     <value>สแกน</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>คุณต้องการ เปลี่ยนกลับ การแก้ไขรูป "{0}" ใช่หรือไม่?</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการแก้ไขของภาพทั้ง {0} ภาพ?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Reset Image</value>
+    <value>รีเซ็ตรูปภาพ</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
     <value>You have unsaved changes. Are you sure you want to exit and discard those changes?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>กำลังอยู่ในระหว่างการดำเนิน คุณแน่ใจว่าต้องการออกและหยุดการดำเนินการ?</value>
+    <value>ระบบกำลังทำงานอยู่ คุณแน่ใจหรือไม่ว่าต้องการออกจากโปรแกรมและยกเลิกการทำงานนี้?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Unsaved Changes</value>
@@ -175,7 +175,7 @@
     <value>กำลังสแกนหน้า {0}</value>
   </data>
   <data name="NoFeederSupport" xml:space="preserve">
-    <value>The selected scanner does not support using a feeder. If your scanner does have a feeder, try using a different driver.</value>
+    <value>เครื่องสแกนเนอร์ที่เลือกไม่รองรับการใช้ถาดป้อนกระดาษอัตโนมัติ (Feeder) หากเครื่องของคุณมีถาดป้อนกระดาษ ให้ลองเปลี่ยนไปใช้ไดรเวอร์อื่น</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>ไม่มีหน้ากระดาษในเครื่องป้อน</value>
@@ -184,25 +184,25 @@
     <value>You do not have permission to copy content from the file '{0}'.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>เกิด error ระหว่างการบันทึกไฟล์</value>
+    <value>เกิดข้อผิดพลาดขณะบันทึกไฟล์</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>error ไม่ทราบสาเหตุระหว่างการสแกนจำนวนมาก</value>
+    <value>เกิดข้อผิดพลาดไม่ทราบสาเหตุระหว่างการสแกนชุดเอกสาร</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>ยกเลิกการสแกนจำนวนมาก</value>
+    <value>ยกเลิกการสแกนชุดเอกสารแล้ว</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
     <value>กำลังยกเลิก....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>การสแกนจำนวนมาก เสร็จสิ้น</value>
+    <value>สแกนชุดเอกสารเสร็จสมบูรณ์แล้ว</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>การสแกนจำนวนมากถูกหยุดเนื่องจากการทำงานขัดข้อง</value>
+    <value>การสแกนชุดเอกสารถูกระงับเนื่องจากเกิดข้อผิดพลาด</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>กำลังสแกนหน้า {0}...</value>
@@ -223,7 +223,7 @@
     <value>กำลังบันทึกผลจำนวนมาก...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
-    <value>The selected scanner does not support using duplex. If your scanner is supposed to support duplex, try using a different driver.</value>
+    <value>เครื่องสแกนเนอร์ที่เลือกไม่รองรับการสแกนสองหน้า (Duplex) หากเครื่องของคุณสแกนสองหน้าได้ ให้ลองเปลี่ยนไปใช้ไดรเวอร์อื่น</value>
   </data>
   <data name="ProgressFormat" xml:space="preserve">
     <value>{0} / {1}</value>
@@ -235,10 +235,10 @@
     <value>ความคืบหน้าการนำเข้า</value>
   </data>
   <data name="Recovering" xml:space="preserve">
-    <value>Recovering...</value>
+    <value>กำลังกู้ข้อมูลคืน...</value>
   </data>
   <data name="RecoveryProgress" xml:space="preserve">
-    <value>Recovery Progress</value>
+    <value>ความคืบหน้าการกู้ข้อมูล</value>
   </data>
   <data name="SaveImages" xml:space="preserve">
     <value>บันทึกภาพ</value>
@@ -262,7 +262,7 @@
     <value>กำลังคัดลอก...</value>
   </data>
   <data name="CopyProgress" xml:space="preserve">
-    <value>กำลังคัดลอก</value>
+    <value>ความคืบหน้าการคัดลอก</value>
   </data>
   <data name="Importing" xml:space="preserve">
     <value>กำลังนำเข้า....</value>
@@ -274,7 +274,7 @@
     <value>ความคืบหน้าการส่งอีเมล PDF</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>เกิด error ระหว่างบันทึกอัตโนมัติ</value>
+    <value>เกิดข้อผิดพลาดขณะบันทึกข้อมูลอัตโนมัติ</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
     <value>ไฟล์ทั้งหมด</value>
@@ -283,19 +283,19 @@
     <value>ไฟล์รูปภาพ</value>
   </data>
   <data name="DeviceBusy" xml:space="preserve">
-    <value>The selected scanner is busy.</value>
+    <value>เครื่องสแกนเนอร์ที่เลือกกำลังทำงานอยู่</value>
   </data>
   <data name="DeviceCoverOpen" xml:space="preserve">
-    <value>The scanner's cover is open.</value>
+    <value>ฝาปิดเครื่องสแกนเนอร์เปิดอยู่</value>
   </data>
   <data name="DevicePaperJam" xml:space="preserve">
-    <value>The scanner has a paper jam.</value>
+    <value>เครื่องสแกนเนอร์กระดาษติด</value>
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
-    <value>The scanner is warming up.</value>
+    <value>เครื่องสแกนเนอร์กำลังอุ่นเครื่อง</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>มีการอัปเดต OCR ใหม่ให้ใช้งานแล้ว</value>
+    <value>มีตัวอัปเดตสำหรับระบบ OCR พร้อมใช้งาน</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>บันทึกภาพแล้ว</value>
@@ -310,16 +310,16 @@
     <value>{0} ({1}x{2} {3})</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>คุณต้องการ ลบ "{0}" ใช่หรือไม่</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการลบ "{0}"?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>The file could not be overwritten because it is currently in use.</value>
+    <value>ไม่สามารถบันทึกทับไฟล์ได้ เนื่องจากไฟล์กำลังถูกใช้งานอยู่</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
     <value>กำลังปรับให้ตรง...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>ความคืบหน้าการปรับภาพตรง</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
     <value>Download Needed</value>
@@ -328,10 +328,10 @@
     <value>จำเป็นต้องมีส่วนประกอบเพิ่มเติมเพื่อนำเข้าไฟล์ PDF นี้ คุณต้องการดาวน์โหลดทันทีหรือไม่</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการสแกนแบบต่อเนื่อง?</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการสแกนชุดเอกสารนี้?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>ยกเลิกคำสั่งชุด</value>
+    <value>ยกเลิกการสแกนชุดเอกสาร</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>บริจาค</value>
@@ -346,13 +346,13 @@
     <value>Like NAPS2?</value>
   </data>
   <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
+    <value>ไม่พบระบบ OCR กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งแพ็กเกจที่จำเป็นเรียบร้อยแล้ว:</value>
   </data>
   <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
+    <value>ไม่พบระบบ OCR กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งแพ็กเกจที่จำเป็นเรียบร้อยแล้ว:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>The selected driver is not supported on this system.</value>
+    <value>ระบบนี้ไม่รองรับไดรเวอร์ที่เลือก</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>OCR Progress</value>
@@ -376,13 +376,13 @@
     <value>การตรวจสอบการอัปเดตถูกปิดใช้งาน</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>เกิด error ระหว่างติดตั้งอัพเดท</value>
+    <value>เกิดข้อผิดพลาดขณะติดตั้งตัวอัปเดต</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>ติดตั้ง {0}</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>มีการอัปเดตใหม่พร้อมใช้งาน</value>
+    <value>มีเวอร์ชันใหม่พร้อมให้อัปเดต</value>
   </data>
   <data name="AuthError" xml:space="preserve">
     <value>เกิด error ระหว่างการขออนุญาต</value>
@@ -391,7 +391,7 @@
     <value>Uploading email...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>เกิด error ระหว่างการส่งอีเมล์</value>
+    <value>เกิดข้อผิดพลาดขณะส่งอีเมล</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>กำลังสแกนหน้า {0}...</value>

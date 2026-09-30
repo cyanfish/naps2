@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr "Acció predeterminada del botó \"Desa\":"
+msgstr "Acció predeterminada del botó «Desa»:"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr "Acció predeterminada del botó \"Escaneja\":"
+msgstr "Acció predeterminada del botó «Escaneja»:"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
-msgstr "El menú \"Escaneja\" canvia el perfil per defecte"
+msgstr "El menú «Escaneja» canvia el perfil per defecte"
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
@@ -112,6 +112,10 @@ msgstr "Permet la impressió en alta resolució"
 msgid "Allow Printing"
 msgstr "Permet la impressió"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Desintercalat alternatiu"
@@ -128,6 +132,10 @@ msgstr "Demana sempre"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "Demana sempre"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "Mostra sempre la vista prèvia"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -395,6 +403,10 @@ msgstr "Neteja-ho tot"
 msgid "Clear images after saving"
 msgstr "Neteja les imatges després de desar"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "Feu clic als botons o utilitzeu les fletxes del vostre teclat per a canviar l'orientació de l'eina."
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "Tanca"
@@ -454,6 +466,10 @@ msgstr "Escapça"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "Escapça a la mida de la pàgina"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -873,6 +889,15 @@ msgstr "Carrega les imatges al NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "Crea documents PDF amb opció de cerca mitjançant l'OCR"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "Dúplex manual"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "Dúplex manual (vista prèvia)"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -901,6 +926,36 @@ msgstr "Mes (01-12)"
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
 msgstr "Més informació"
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "Amb el ratolí:\n"
+"Feu clic i arrossegueu per a moure els controls de retall.\n"
+"O bé feu clic i arrossegueu per a definir tota l'àrea.\n\n"
+"Amb el teclat:\n"
+"Les fletxes del vostre teclat mouen el control de retall de la cantonada inferior dreta.\n"
+"Mantingueu premuda la tecla «{0}» per a moure el control a la cantonada superior esquerra.\n"
+"Mantingueu premuda la tecla «{1}» per a moure tota la selecció alhora.\n"
+"Mantingueu premuda la tecla «{2}» per a moure-us més ràpid."
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr "Amb el ratolí:\n"
+"Feu clic als botons per a canviar l'orientació i l'alineació de la combinació.\n\n"
+"Amb el teclat:\n"
+"Les fletxes del vostre teclat canvien l'orientació de la combinació.\n"
+"Mantingueu premuda la tecla «Maj» per a canviar l'alineació (si les imatges no tenen la mateixa mida)."
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -1128,6 +1183,10 @@ msgstr "Fitxer PNG (*.png)"
 msgid "Page size:"
 msgstr "Mida de la pàgina:"
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "Pàgines reorganitzades."
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr "Origen del paper:"
@@ -1161,6 +1220,7 @@ msgstr "Inicia l'OCR de forma preventiva després de l'escaneig"
 msgid "Press Start when ready."
 msgstr "Premeu Inicia per continuar."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Previsualitza"
@@ -1266,6 +1326,10 @@ msgstr "Inverteix-ho tot"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "Selecció inversa"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "Inverteix el revers"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1511,12 @@ msgstr "Seleccioneu un perfil abans de fer clic a Escaneja."
 msgid "Select one or more languages:"
 msgstr "Seleccioneu un o més idiomes:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr "Seleccioneu l'angle de rotació.\n"
+"O bé feu clic i arrossegueu per a dibuixar una línia alineada amb la pàgina (verticalment o horitzontalment)."
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Selecció ({0})"
@@ -1483,6 +1553,10 @@ msgstr "Els escàners compartits es poden utilitzar des d'altres ordinadors de l
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Nitidesa"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1659,6 +1733,24 @@ msgstr "Temps entre escanejos (segons):"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "Títol:"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "Per a escanejar les dues cares d'un document de diverses pàgines amb l'alimentador, podeu seleccionar «Dúplex» com a font de paper si l'escàner ho admet.\n"
+"      \n"
+"Si l'escàner no admet l'opció «Dúplex», seguiu aquestes instruccions:\n"
+"1. Escanegeu les cares frontals del document\n"
+"2. Gireu el document\n"
+"3. Escanegeu el revers del document\n"
+"4. Feu clic a «Dúplex manual»\n"
+"5. Segons l'orientació física de l'escàner, potser heu de marcar l'opció «Inverteix el revers»"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"

@@ -31,7 +31,7 @@
     <value>Gmail</value>
   </data>
   <data name="EmailProviderType_OutlookNew" xml:space="preserve">
-    <value>Outlook (new)</value>
+    <value>Outlook (uusi)</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
     <value>Outlook Web-käyttö</value>
@@ -82,10 +82,10 @@
     <value>Mukautettu...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Legal (8,5x14 tuumaa)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8.5x11 in)</value>
+    <value>US Letter (8,5x11 tuumaa)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
     <value>Mukautettu...</value>

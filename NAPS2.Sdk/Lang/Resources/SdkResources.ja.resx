@@ -25,13 +25,13 @@
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>デバイスが選択されていません.</value>
+    <value>デバイスが選択されていません。</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>スキャンできるデバイスが検出されませんでした.</value>
+    <value>スキャンデバイスが検出されませんでした。</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>スキャナドライバにエラーが発生しました.</value>
+    <value>スキャナドライバにエラーが発生しました。</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>{0} バージョン</value>
@@ -43,7 +43,7 @@
     <value>選択したスキャナはフィーダーを利用できません。スキャナーにフィーダーが備わっている場合は、別のドライバを試してみてください。</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>フィーダーが空です.</value>
+    <value>フィーダーが空です。</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
     <value>'{0}'からのコピーは許可されていません.</value>

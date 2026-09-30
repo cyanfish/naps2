@@ -106,6 +106,10 @@ msgstr ""
 msgid "Allow Printing"
 msgstr ""
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr ""
@@ -455,6 +459,10 @@ msgstr ""
 
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
+msgstr ""
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
 msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
@@ -914,7 +922,7 @@ msgid "More info"
 msgstr ""
 
 #: UiStrings.resx$CropHelp$Message
-msgid "Mouse:\nClick and drag to move the crop handles.\nOr click and drag to draw the full area.\n\nKeyboard:\nArrow keys move the bottom-right crop handle.\nHold \"Ctrl\" to move the top-left handle instead.\nHold \"Alt\" to move the whole selection at once.\nHold \"Shift\" to move faster."
+msgid "Mouse:\nClick and drag to move the crop handles.\nOr click and drag to draw the full area.\n\nKeyboard:\nArrow keys move the bottom-right crop handle.\nHold \"{0}\" to move the top-left handle instead.\nHold \"{1}\" to move the whole selection at once.\nHold \"{2}\" to move faster."
 msgstr ""
 
 #: UiStrings.resx$CombineHelp$Message
@@ -1514,6 +1522,10 @@ msgstr ""
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
+msgstr ""
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
 msgstr ""
 
 #: UiStrings.resx$Shortcut$Message

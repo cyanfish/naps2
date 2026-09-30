@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-07-18 19:02\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -70,7 +70,7 @@ msgstr "詳細設定"
 
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
-msgstr "プロファイル設定(詳細)"
+msgstr "詳細プロファイル設定"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -112,6 +112,10 @@ msgstr "オリジナル画質の印刷を許可する"
 msgid "Allow Printing"
 msgstr "印刷を許可する"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "別のデインターリーブ"
@@ -129,6 +133,10 @@ msgstr "毎回確認する"
 msgid "Always Prompt"
 msgstr "常に確認する"
 
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "常にプレビューを表示"
+
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
 msgstr "PDFファイルをインポートするのに必要なファイルがあります。ダウンロードしますか?"
@@ -139,7 +147,7 @@ msgstr "OCR 実行中にエラーが発生しました。"
 
 #: MiscResources.resx$AuthError$Message
 msgid "An error occurred when trying to authorize."
-msgstr "認証中にエラーが発生しました."
+msgstr "認証でエラーが発生しました。"
 
 #: MiscResources.resx$AutoSaveError$Message
 msgid "An error occurred when trying to auto save."
@@ -147,40 +155,40 @@ msgstr "自動保存中にエラーが発生しました."
 
 #: MiscResources.resx$UpdateError$Message
 msgid "An error occurred when trying to install the update."
-msgstr "アップデートをインストールする際にエラーが発生しました."
+msgstr "アップデートのインストールするでエラーが発生しました。"
 
 #: MiscResources.resx$ErrorSaving$Message
 msgid "An error occurred when trying to save the file."
-msgstr "保存中にエラーが発生しました."
+msgstr "ファイルの保存でエラーが発生しました。"
 
 #: MiscResources.resx$ErrorEmailing$Message
 msgid "An error occurred when trying to send the email."
-msgstr "メール送信時にエラーが発生しました."
+msgstr "メール送信でエラーが発生しました。"
 
 #: MiscResources.resx$EmailError$Message
 msgid "An error occurred while trying to send an email."
-msgstr "メール送信中にエラーが発生しました."
+msgstr "メール送信でエラーが発生しました。"
 
 #: MiscResources.resx$UnknownDriverError$Message
 #: SdkResources.resx$UnknownDriverError$Message
 msgid "An error occurred with the scanning driver."
-msgstr "スキャナドライバにエラーが発生しました."
+msgstr "スキャナドライバにエラーが発生しました。"
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "作業が進行中です。それでも終了しますか？"
+msgstr "作業が進行中です。操作を中止し、終了しますか？"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr "バッチスキャン中に不明なエラーが発生しました。"
+msgstr "一括スキャン中に不明なエラーが発生しました。"
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
-msgstr "利用可能なアップデートがあります."
+msgstr "アップデートがあります。"
 
 #: MiscResources.resx$OcrUpdateAvailable$Message
 msgid "An update to OCR is available."
-msgstr "新しいOCRのアップデートがあります."
+msgstr "OCR のアップデートがあります。"
 
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
@@ -277,7 +285,7 @@ msgstr "連番の自動付与 (4 ケタ)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "スキャン後にOCRを自動適用する"
+msgstr "スキャン後に OCR を自動実行する"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -294,15 +302,15 @@ msgstr "一括スキャン"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled."
-msgstr "一括スキャンはキャンセルされました."
+msgstr "一括スキャンをキャンセルしました。"
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "一括スキャンが正常に終了しました."
+msgstr "一括スキャンが終了しました。"
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "エラーのために一括スキャンは異常終了しました."
+msgstr "一括スキャンはエラーのために停止しました。"
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
@@ -323,7 +331,7 @@ msgstr "白黒"
 
 #: UiStrings.resx$BlankPages$Message
 msgid "Blank Pages"
-msgstr "空白のページ"
+msgstr "空白ページ"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -395,6 +403,10 @@ msgstr "すべてクリア"
 msgid "Clear images after saving"
 msgstr "保存後にイメージをクリア"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "ボタンクリックか、矢印キーで分割方向を変更します。"
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "閉じる"
@@ -445,7 +457,7 @@ msgstr "Copyright {0} NAPS2 貢献者"
 
 #: UiStrings.resx$CoverageThreshold$Message
 msgid "Coverage Threshold"
-msgstr "閾値"
+msgstr "占有度のしきい値"
 
 #: UiStrings.resx$Crop$Message
 msgid "Crop"
@@ -454,6 +466,10 @@ msgstr "切り抜き"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "ページサイズに切り抜く"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -669,7 +685,7 @@ msgstr "Exif ファイル (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
-msgstr "余白ページを除去"
+msgstr "空白ページを除外"
 
 #: SettingsResources.resx$OcrMode_Fast$Message
 msgid "Fast"
@@ -717,7 +733,7 @@ msgstr "他の言語を追加"
 
 #: SettingsResources.resx$Source_Glass$Message
 msgid "Glass"
-msgstr "フラットヘッド"
+msgstr "フラットベッド"
 
 #: SettingsResources.resx$EmailProviderType_Gmail$Message
 msgid "Gmail"
@@ -873,6 +889,15 @@ msgstr "NAPS2にイメージを読み込む"
 msgid "Make PDFs searchable using OCR"
 msgstr "OCRを利用して検索可能なPDFを作成"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "手動両面スキャン"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "手動両面スキャン（プレビュー）"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -880,7 +905,7 @@ msgstr "手動 IP"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
-msgstr "最大画質(ファイルサイズ大)"
+msgstr "最高画質(ファイルサイズ大)"
 
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
@@ -901,6 +926,36 @@ msgstr "月 (01-12)"
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
 msgstr "詳細情報"
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "マウス:\n"
+"クリック & ドラッグで、切り抜きハンドルを動かします。\n"
+"または、全エリアをクリック & ドラッグで切り抜き範囲を指定します。\n\n"
+"キーボード:\n"
+"矢印キーで右下の切り抜きハンドルを動かします。\n"
+"「{0}」を押したままで、左上の切り抜きハンドルを動かします。\n"
+"「{1}」を押したままで、選択範囲全体を一度に動かします。\n"
+"「{2}」を押したままだと、速く移動します。"
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr "マウス:\n"
+"ボタンクリックで結合の向き・そろえを変更します。\n\n"
+"キーボード:\n"
+"矢印キーで結合の向きを変更します。\n"
+"「シフト(Shift)」キーを押したままだと（両方の画像のサイズが異なる際の）そろえを変更します。"
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -946,7 +1001,7 @@ msgstr "名前 (オプション)"
 
 #: MiscResources.resx$NameMissing$Message
 msgid "Name missing."
-msgstr "名前がありません."
+msgstr "名前がありません。"
 
 #: SettingsResources.resx$TwainImpl_NativeXfer$Message
 msgid "Native Transfer"
@@ -971,7 +1026,7 @@ msgstr "次のスキャン"
 #: MiscResources.resx$NoDeviceSelected$Message
 #: SdkResources.resx$NoDeviceSelected$Message
 msgid "No device selected."
-msgstr "デバイスが選択されていません."
+msgstr "デバイスが選択されていません。"
 
 #: UiStrings.resx$NoDevicesFound$Message
 msgid "No devices found."
@@ -980,20 +1035,20 @@ msgstr "デバイスは検出されませんでした。"
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder."
-msgstr "フィーダーが空です."
+msgstr "フィーダーが空です。"
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
-msgstr "プロバイダが選択されていません。."
+msgstr "プロバイダが選択されていません。"
 
 #: MiscResources.resx$NoDevicesFound$Message
 #: SdkResources.resx$NoDevicesFound$Message
 msgid "No scanning device was found."
-msgstr "スキャンできるデバイスが検出されませんでした."
+msgstr "スキャンデバイスが検出されませんでした。"
 
 #: MiscResources.resx$NoUpdates$Message
 msgid "No updates available."
-msgstr "有効な更新はありません."
+msgstr "アップデートはありません。"
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
@@ -1021,11 +1076,11 @@ msgstr "OCRのダウンロード"
 
 #: MiscResources.resx$OcrProgress$Message
 msgid "OCR Progress"
-msgstr "OCR適用中"
+msgstr "OCR 進行状況"
 
 #: UiStrings.resx$OcrSetupFormTitle$Message
 msgid "OCR Setup"
-msgstr "OCRのセットアップ"
+msgstr "OCR 設定"
 
 #: UiStrings.resx$OcrLanguageLabel$Message
 msgid "OCR language:"
@@ -1057,7 +1112,7 @@ msgstr "スキャンごとに1つのファイルを作成"
 
 #: MiscResources.resx$FilesCouldNotBeDownloaded$Message
 msgid "One or more files could not be downloaded."
-msgstr "1つ以上のファイルをダウンロードできませんでした."
+msgstr "ファイルをダウンロードできませんでした。"
 
 #: UiStrings.resx$SingleInstanceDesc$Message
 msgid "Only allow a single NAPS2 instance"
@@ -1128,6 +1183,10 @@ msgstr "PNG ファイル (*.png)"
 msgid "Page size:"
 msgstr "ページサイズ:"
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "ページを並べ替えました。"
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr "給紙元:"
@@ -1155,12 +1214,13 @@ msgstr "後処理"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr "スキャン後、事前実行的に OCR 処理をはじめる"
+msgstr "スキャンの後に OCR を実行する（チェックを外すと保存時）"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
 msgstr "準備ができたらスタートを押してください。"
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "プレビュー"
@@ -1267,13 +1327,17 @@ msgstr "すべて反転"
 msgid "Reverse Selected"
 msgstr "選択を反転"
 
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "逆順"
+
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
 msgstr "元に戻す"
 
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
-msgstr "右ぞろえ"
+msgstr "右寄せ"
 
 #: UiStrings.resx$Rotate$Message
 msgid "Rotate"
@@ -1447,6 +1511,12 @@ msgstr "スキャンをクリックする前にプロファイルを選択して
 msgid "Select one or more languages:"
 msgstr "言語を選択してください:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr "回転角度を選びます。\n"
+"またはクリック & ドラッグしてページ合わせする線を描画します（垂直方向または水平方向）。"
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "選択している {0} 個"
@@ -1483,6 +1553,10 @@ msgstr "共有スキャナーは、ローカルネットワーク上の他のコ
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "シャープにする"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1660,6 +1734,24 @@ msgstr "スキャン間隔 (秒)："
 msgid "Title:"
 msgstr "タイトル:"
 
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "ペーパーフィーダー付スキャナーで複数ページの文書の両面をスキャンする場合、スキャナーが対応していれば「両面」を選択できます。\n"
+"      \n"
+"スキャナーが「両面」スキャンにに対応していない場合、以下の説明に従ってください:\n"
+"1. 文書の表面をスキャンします\n"
+"2. 文書を裏返します\n"
+"3. 文書の裏面をスキャンします\n"
+"4. 「手動両面スキャン」をクリック\n"
+"5. スキャナーにセットする文書の向き次第では、「逆順」にチェックを入れる必要があるかもしれません"
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "ツール"
@@ -1726,7 +1818,7 @@ msgstr "ユーザーのパスワード:"
 
 #: UiStrings.resx$OcrDownloadSummaryText$Message
 msgid "Using OCR requires you to download each language you want to scan."
-msgstr "OCR の使用には、スキャンしたい言語ごとにダウンロードが必要です。"
+msgstr "OCR の使用には、スキャンする言語ごとにダウンロードが必要です。"
 
 #: MiscResources.resx$Version$Message
 #: SdkResources.resx$Version$Message
@@ -1755,7 +1847,7 @@ msgstr "{0} のスキャンを待っています…"
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
-msgstr "白のしきい値"
+msgstr "白さのしきい値"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"

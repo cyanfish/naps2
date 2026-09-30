@@ -13,19 +13,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BitDepth_1BlackAndWhite" xml:space="preserve">
-    <value>Чорно-білий</value>
+    <value>Чорно-біле</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>Кольоровий, 24-бітний</value>
+    <value>Кольорове (24-бітне)</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Відтінки сірого</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
-    <value>{0} dpi</value>
+    <value>{0} DPI (точок на дюйм)</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
-    <value>Користувацький SMTP</value>
+    <value>Власний SMTP</value>
   </data>
   <data name="EmailProviderType_Gmail" xml:space="preserve">
     <value>Gmail</value>
@@ -34,25 +34,25 @@
     <value>Outlook (новий)</value>
   </data>
   <data name="EmailProviderType_OutlookWeb" xml:space="preserve">
-    <value>Веб-доступ до Outlook</value>
+    <value>Outlook Web Access</value>
   </data>
   <data name="EmailProviderType_Thunderbird" xml:space="preserve">
     <value>Thunderbird</value>
   </data>
   <data name="EmailProviderType_AppleMail" xml:space="preserve">
-    <value>Пошта Apple</value>
+    <value>Apple Mail</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>Відсутній постачальник послуг.</value>
+    <value>Постачальника не вибрано.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>По центру</value>
   </data>
   <data name="HorizontalAlign_Left" xml:space="preserve">
-    <value>Вліво</value>
+    <value>Ліворуч</value>
   </data>
   <data name="HorizontalAlign_Right" xml:space="preserve">
-    <value>Вправо</value>
+    <value>Праворуч</value>
   </data>
   <data name="PageSizeUnit_Centimetre" xml:space="preserve">
     <value>см</value>
@@ -64,28 +64,28 @@
     <value>мм</value>
   </data>
   <data name="PageSize_A3" xml:space="preserve">
-    <value>A3 (297x420 мм)</value>
+    <value>A3 (297 x 420 мм)</value>
   </data>
   <data name="PageSize_A4" xml:space="preserve">
-    <value>A4 (210x297 мм)</value>
+    <value>A4 (210 x 297 мм)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5 (148x210 мм)</value>
+    <value>A5 (148 x 210 мм)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
-    <value>B4 (250x353 мм)</value>
+    <value>B4 (250 x 353 мм)</value>
   </data>
   <data name="PageSize_B5" xml:space="preserve">
-    <value>B5 (176x250 мм)</value>
+    <value>B5 (176 x 250 мм)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
     <value>Інший...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
-    <value>US Legal (8,5x14 дюймів)</value>
+    <value>US Legal (8,5 x 14 дюймів)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Letter (8,5x11 дюймів)</value>
+    <value>US Letter (8,5 x 11 дюймів)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
     <value>Інший...</value>
@@ -106,13 +106,13 @@
     <value>PDF/A-3u</value>
   </data>
   <data name="Source_Duplex" xml:space="preserve">
-    <value>Двосторонній</value>
+    <value>Двостороннє</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Автоподача</value>
+    <value>Автоподавач</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
-    <value>Зі скла</value>
+    <value>Скло сканера</value>
   </data>
   <data name="TiffComp_Auto" xml:space="preserve">
     <value>Автоматично</value>
@@ -130,13 +130,13 @@
     <value>За замовчуванням</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Режим сумісности (лише рідний інтерфейс користувача)</value>
+    <value>Застарілий (лише рідний інтерфейс)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
-    <value>Передача засобами програми</value>
+    <value>Стандартне передавання</value>
   </data>
   <data name="TwainImpl_MemXfer" xml:space="preserve">
-    <value>Передача через пам'ять</value>
+    <value>Передавання через пам'ять</value>
   </data>
   <data name="TwainImpl_OldDsm" xml:space="preserve">
     <value>Застарілий DSM</value>
@@ -163,7 +163,7 @@
     <value>Завжди запитувати</value>
   </data>
   <data name="SaveButtonDefaultAction_PromptIfSelected" xml:space="preserve">
-    <value>Запитати, якщо вибрано</value>
+    <value>Запитувати, якщо вибрано</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
     <value>Сканувати з профілем за замовчуванням</value>

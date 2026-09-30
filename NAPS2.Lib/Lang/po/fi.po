@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-07-18 19:02\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -41,15 +41,15 @@ msgstr "24-bittinen väri"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
-msgstr ""
+msgstr "A3 (297x420 mm)"
 
 #: SettingsResources.resx$PageSize_A4$Message
 msgid "A4 (210x297 mm)"
-msgstr ""
+msgstr "A4 (210x297 mm)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr ""
+msgstr "A5 (148x210 mm)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
@@ -112,6 +112,10 @@ msgstr "Salli korkealaatuinen tulostus"
 msgid "Allow Printing"
 msgstr "Salli tulostaminen"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "Vaihtoehtoinen lomituksen poisto"
@@ -128,6 +132,10 @@ msgstr "Kysy aina"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "Kysy aina"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr ""
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -281,11 +289,11 @@ msgstr "Tunnista teksti optisesti automaattisesti skannauksen jälkeen"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
-msgstr ""
+msgstr "B4 (250x353 mm)"
 
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
-msgstr ""
+msgstr "B5 (176x250 mm)"
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -335,7 +343,7 @@ msgstr "Kirkkaus:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
-msgstr ""
+msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
@@ -394,6 +402,10 @@ msgstr "Poista kaikki"
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
 msgstr "Pyyhi kuvat tallennukset jälkeen"
+
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr ""
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -454,6 +466,10 @@ msgstr "Rajaa"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "Rajaa sivun kokoon"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -839,7 +855,7 @@ msgstr "Avainsanat:"
 
 #: SettingsResources.resx$TiffComp_Lzw$Message
 msgid "LZW"
-msgstr ""
+msgstr "LZW"
 
 #: UiStrings.resx$Language$Message
 msgid "Language"
@@ -873,6 +889,15 @@ msgstr "Lataa kuvia NAPS2:een"
 msgid "Make PDFs searchable using OCR"
 msgstr "Mahdollista haku PDF:issä optisen tekstintunnistuksen avulla"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr ""
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr ""
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -902,6 +927,25 @@ msgstr "Kuukausi (01-12)"
 msgid "More info"
 msgstr "Lisätietoja"
 
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr ""
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr ""
+
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
 msgstr "Siirrä alas"
@@ -930,7 +974,7 @@ msgstr "Monta skannausta (kysy skannausten välillä)"
 #: SdkResources.resx$NAPS2$Message
 #: UiStrings.resx$Naps2$Message
 msgid "NAPS2"
-msgstr ""
+msgstr "NAPS2"
 
 #: UiStrings.resx$Naps2TitleFormat$Message
 msgid "NAPS2 - {0}"
@@ -1001,7 +1045,7 @@ msgstr "Ei mitään"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
-msgstr ""
+msgstr "Not Another PDF Scanner"
 
 #: UiStrings.resx$NotNow$Message
 msgid "Not Now"
@@ -1013,7 +1057,7 @@ msgstr "Skannauksia:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -1073,7 +1117,7 @@ msgstr "Toiminto käynnissä"
 
 #: SettingsResources.resx$EmailProviderType_OutlookNew$Message
 msgid "Outlook (new)"
-msgstr ""
+msgstr "Outlook (uusi)"
 
 #: SettingsResources.resx$EmailProviderType_OutlookWeb$Message
 msgid "Outlook Web Access"
@@ -1106,19 +1150,19 @@ msgstr "PDF talletettu."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
-msgstr ""
+msgstr "PDF/A-1b"
 
 #: SettingsResources.resx$PdfCompat_PdfA2B$Message
 msgid "PDF/A-2b"
-msgstr ""
+msgstr "PDF/A-2b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3B$Message
 msgid "PDF/A-3b"
-msgstr ""
+msgstr "PDF/A-3b"
 
 #: SettingsResources.resx$PdfCompat_PdfA3U$Message
 msgid "PDF/A-3u"
-msgstr ""
+msgstr "PDF/A-3u"
 
 #: MiscResources.resx$FileTypePng$Message
 msgid "PNG File (*.png)"
@@ -1127,6 +1171,10 @@ msgstr "PNG-tiedosto (*.png)"
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Sivun koko:"
+
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr ""
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
@@ -1161,6 +1209,7 @@ msgstr "Suorita OCR ennalta skannauksen jälkeen"
 msgid "Press Start when ready."
 msgstr "Paina Aloita, kun olet vlamis."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "Esikatsele"
@@ -1266,6 +1315,10 @@ msgstr "Vaihda kaikkien arvot"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "Vaihda valittujen arvot"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr ""
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1500,11 @@ msgstr "Valitse profiili ennen kuin painat Skannaa."
 msgid "Select one or more languages:"
 msgstr "Valitse yksi tai useampi kieli:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr ""
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "Valittu ({0})"
@@ -1483,6 +1541,10 @@ msgstr "Jaettuja skannereita voidaan käyttää muista paikallisessa verkossa ol
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "Terävöitä"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1646,7 +1708,7 @@ msgstr "Teema:"
 
 #: SettingsResources.resx$EmailProviderType_Thunderbird$Message
 msgid "Thunderbird"
-msgstr ""
+msgstr "Thunderbird"
 
 #: UiStrings.resx$TiffOptions$Message
 msgid "Tiff Options"
@@ -1660,6 +1722,17 @@ msgstr "Aika skannausten välillä (sekuntia):"
 msgid "Title:"
 msgstr "Otsikko:"
 
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "Työkalut"
@@ -1670,11 +1743,11 @@ msgstr "Twain - toteutus:"
 
 #: SettingsResources.resx$PageSize_Legal$Message
 msgid "US Legal (8.5x14 in)"
-msgstr ""
+msgstr "US Legal (8,5x14 tuumaa)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr ""
+msgstr "US Letter (8,5x11 tuumaa)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
@@ -1800,7 +1873,7 @@ msgstr "Pienennä"
 
 #: SettingsResources.resx$PageSizeUnit_Centimetre$Message
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
@@ -1808,7 +1881,7 @@ msgstr "tuuma"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: MiscResources.resx$OfN$Message
 msgid "of {0}"
@@ -1816,19 +1889,19 @@ msgstr "{0}:sta"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"
-msgstr ""
+msgstr "x64"
 
 #: MiscResources.resx$NamedPageSizeFormat$Message
 msgid "{0} ({1}x{2} {3})"
-msgstr ""
+msgstr "{0} ({1}x{2} {3})"
 
 #: MiscResources.resx$ProgressFormat$Message
 msgid "{0} / {1}"
-msgstr ""
+msgstr "{0} / {1}"
 
 #: MiscResources.resx$SizeProgress$Message
 msgid "{0} / {1} MB"
-msgstr ""
+msgstr "{0} / {1} MB"
 
 #: MiscResources.resx$FilesProgressFormat$Message
 msgid "{0} / {1} files"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2025-08-30 22:28\n"
+"PO-Revision-Date: 2026-09-30 23:16\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -112,6 +112,10 @@ msgstr "允许完全质量打印"
 msgid "Allow Printing"
 msgstr "允许打印"
 
+#: UiStrings.resx$AltKey$Message
+msgid "Alt"
+msgstr ""
+
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
 msgstr "奇偶页分别排列（偶数页逆序）"
@@ -128,6 +132,10 @@ msgstr "总是询问"
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
 msgid "Always Prompt"
 msgstr "总是提示"
+
+#: UiStrings.resx$AlwaysShowPreview$Message
+msgid "Always show preview"
+msgstr "始终显示预览"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -395,6 +403,10 @@ msgstr "清除全部"
 msgid "Clear images after saving"
 msgstr "保存后清除图片"
 
+#: UiStrings.resx$SplitHelp$Message
+msgid "Click the buttons or use the arrow keys to change the split orientation."
+msgstr "点击按钮或使用方向键更改分割方向。"
+
 #: MiscResources.resx$Close$Message
 msgid "Close"
 msgstr "关闭"
@@ -454,6 +466,10 @@ msgstr "裁剪"
 #: UiStrings.resx$CropToPageSize$Message
 msgid "Crop to page size"
 msgstr "裁剪到页面大小"
+
+#: UiStrings.resx$ControlKey$Message
+msgid "Ctrl"
+msgstr ""
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -873,6 +889,15 @@ msgstr "载入图片至 NAPS2"
 msgid "Make PDFs searchable using OCR"
 msgstr "通过 OCR 生成可搜索的 PDF 文件"
 
+#: UiStrings.resx$ManualDuplex$Message
+#: UiStrings.resx$ManualDuplexFormTitle$Message
+msgid "Manual Duplex"
+msgstr "手动双印"
+
+#: UiStrings.resx$ManualDuplexPreview$Message
+msgid "Manual Duplex (preview)"
+msgstr "手动双面 (预览)"
+
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
@@ -901,6 +926,36 @@ msgstr "月份 (01-12)"
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
 msgstr "更多信息"
+
+#: UiStrings.resx$CropHelp$Message
+msgid "Mouse:\n"
+"Click and drag to move the crop handles.\n"
+"Or click and drag to draw the full area.\n\n"
+"Keyboard:\n"
+"Arrow keys move the bottom-right crop handle.\n"
+"Hold \"{0}\" to move the top-left handle instead.\n"
+"Hold \"{1}\" to move the whole selection at once.\n"
+"Hold \"{2}\" to move faster."
+msgstr "鼠标：\n"
+"单击并拖动移动裁剪区域。\n"
+"或者单击并拖动绘制完整区域。\n\n"
+"键盘：\n"
+"方向键移动右下方的裁剪区域。\n"
+"按住 \"Ctrl\" 移动左上角裁剪区域。\n"
+"按住 \"Alt\" 同时移动整个所选区域。\n"
+"按住 \"Shift\" 加速移动。"
+
+#: UiStrings.resx$CombineHelp$Message
+msgid "Mouse:\n"
+"Click the buttons to change the combine orientation and alignment.\n\n"
+"Keyboard:\n"
+"Arrow keys change the combine orientation.\n"
+"Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
+msgstr "鼠标：\n"
+"单击按钮更改合并方向和对齐。\n\n"
+"键盘：\n"
+"方向键更改合并方向。\n"
+"按住 \"Shift\" 更改对齐 (如果推按尺寸不同)。"
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -1128,6 +1183,10 @@ msgstr "PNG 文件 (*.png)"
 msgid "Page size:"
 msgstr "纸张大小:"
 
+#: UiStrings.resx$PagesReordered$Message
+msgid "Pages reordered."
+msgstr "页面顺序已调整。"
+
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
 msgstr "纸张来源:"
@@ -1161,6 +1220,7 @@ msgstr "扫描后自动运行 OCR"
 msgid "Press Start when ready."
 msgstr "准备好后点击开始."
 
+#: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
 msgid "Preview"
 msgstr "预览"
@@ -1266,6 +1326,10 @@ msgstr "反转全部"
 #: UiStrings.resx$ReverseSelected$Message
 msgid "Reverse Selected"
 msgstr "反转所选项"
+
+#: UiStrings.resx$ReverseBackSides$Message
+msgid "Reverse back sides"
+msgstr "颠倒背面"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1447,6 +1511,12 @@ msgstr "请先选择配置文件，然后点击 [扫描] ."
 msgid "Select one or more languages:"
 msgstr "请选择一个或多个语言:"
 
+#: UiStrings.resx$CustomRotationHelp$Message
+msgid "Select the angle to rotate.\n"
+"Or click and drag to draw a line aligned with the page (vertically or horizontally)."
+msgstr "选择要旋转的角度。\n"
+"或单击并拖动以绘制与页面对齐的线(垂直或水平)。"
+
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
 msgstr "已选择 ({0})"
@@ -1483,6 +1553,10 @@ msgstr "共享的扫描仪可以通过在其他计算机的 NAPS2 配置中选�
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
 msgstr "锐化"
+
+#: UiStrings.resx$ShiftKey$Message
+msgid "Shift"
+msgstr ""
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1659,6 +1733,24 @@ msgstr "扫描之间的间隔（秒）:"
 #: UiStrings.resx$TitleLabel$Message
 msgid "Title:"
 msgstr "标题:"
+
+#: UiStrings.resx$ManualDuplexHelp$Message
+msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n"
+"      \n"
+"If your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n"
+"1. Scan the front sides of the document\n"
+"2. Flip the document over\n"
+"3. Scan the back sides of the document\n"
+"4. Click \"Manual Duplex\"\n"
+"5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "要用 feeder 扫描仪扫描多页文档的两面，如果你的扫描仪支持，你可以选择“双面”作为纸张源。\n"
+"      \n"
+"如果你的扫描仪不支持“双面”扫描，请照着这些步骤做：\n"
+"1. 扫描文档的正面\n"
+"2. 翻转文档\n"
+"3. 扫描文档背面\n"
+"4. 单击 \"手动双面\"\n"
+"5. 根据扫描仪的物理方向，可能需要勾选 \"颠倒背面\""
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
