@@ -138,6 +138,8 @@
     <RotateCustom></RotateCustom>
     <MoveUp>Ctrl+Up</MoveUp>
     <MoveDown>Ctrl+Down</MoveDown>
+    <ReorderManualDuplex></ReorderManualDuplex>
+    <ReorderManualDuplexPreview></ReorderManualDuplexPreview>
     <ReorderInterleave></ReorderInterleave>
     <ReorderDeinterleave></ReorderDeinterleave>
     <ReorderAltInterleave></ReorderAltInterleave>

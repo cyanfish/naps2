@@ -75,6 +75,8 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.ReorderAltInterleave, commands.AltInterleave);
         _ksm.Assign(ks.ReorderDeinterleave, commands.Deinterleave);
         _ksm.Assign(ks.ReorderInterleave, commands.Interleave);
+        _ksm.Assign(ks.ReorderManualDuplex, commands.ManualDuplex);
+        _ksm.Assign(ks.ReorderManualDuplexPreview, commands.ManualDuplexPreview);
         _ksm.Assign(ks.ReorderReverseAll, commands.ReverseAll);
         _ksm.Assign(ks.ReorderReverseSelected, commands.ReverseSelected);
         _ksm.Assign(ks.RotateCustom, commands.CustomRotate);

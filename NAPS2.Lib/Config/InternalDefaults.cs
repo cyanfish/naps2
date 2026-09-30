@@ -194,6 +194,8 @@ public static class InternalDefaults
                 RotateDeskew = "",
                 MoveUp = "Mod+Up",
                 MoveDown = "Mod+Down",
+                ReorderManualDuplex = "",
+                ReorderManualDuplexPreview = "",
                 ReorderInterleave = "",
                 ReorderDeinterleave = "",
                 ReorderAltInterleave = "",

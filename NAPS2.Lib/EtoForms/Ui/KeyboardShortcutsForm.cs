@@ -67,6 +67,8 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.MoveUp, c => c.KeyboardShortcuts.MoveUp),
         new(UiStrings.MoveDown, c => c.KeyboardShortcuts.MoveDown),
         Shortcut.Separator,
+        new(UiStrings.ManualDuplex, c => c.KeyboardShortcuts.ReorderManualDuplex),
+        new(UiStrings.ManualDuplexPreview, c => c.KeyboardShortcuts.ReorderManualDuplexPreview),
         new(UiStrings.Interleave, c => c.KeyboardShortcuts.ReorderInterleave),
         new(UiStrings.Deinterleave, c => c.KeyboardShortcuts.ReorderDeinterleave),
         new(UiStrings.AltInterleave, c => c.KeyboardShortcuts.ReorderAltInterleave),

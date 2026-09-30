@@ -63,6 +63,8 @@ public class KeyboardShortcuts
     public string? MoveUp { get; set; }
     public string? MoveDown { get; set; }
 
+    public string? ReorderManualDuplex { get; set; }
+    public string? ReorderManualDuplexPreview { get; set; }
     public string? ReorderInterleave { get; set; }
     public string? ReorderDeinterleave { get; set; }
     public string? ReorderAltInterleave { get; set; }
