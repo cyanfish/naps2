@@ -131,7 +131,8 @@ public static class TargetsHelper
                                                               xCompile ||
                                                               RuntimeInformation.OSArchitecture == Architecture.Arm64))
                     {
-                        yield return new PackageTarget(PackageType.Flatpak, Platform.LinuxArm);
+                        // Building the arm64 flatpak is not working atm
+                        // yield return new PackageTarget(PackageType.Flatpak, Platform.LinuxArm);
                     }
                 }
                 if ((allPkg || packageType == "pkg") && (!requireCompatiblePlatform || OperatingSystem.IsMacOS()))
