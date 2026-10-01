@@ -95,7 +95,7 @@ internal class SaneScanAreaController
     public void SetArea(double x1, double y1, double x2, double y2)
     {
         if (!CanSetArea) throw new InvalidOperationException();
-        // Setting just tl/br should be enough, but some backends have an issue where we need to set width/height too
+        // Checking just tl/br should be enough, but some backends have an issue where we need to set width/height too
         // https://gitlab.com/sane-project/backends/-/issues/730
         _optionController.TrySet(SaneOptionNames.PAGE_WIDTH, x2 - x1);
         _optionController.TrySet(SaneOptionNames.PAGE_HEIGHT, y2 - y1);
