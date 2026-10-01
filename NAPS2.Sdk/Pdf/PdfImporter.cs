@@ -114,7 +114,7 @@ public class PdfImporter
         using var storage = PdfiumImageExtractor.GetSingleImage(_scanningContext.ImageContext, page, false);
         if (storage != null)
         {
-            var pageSize = new PageSize((decimal) page.Width * 72, (decimal) page.Height * 72, PageSizeUnit.Inch);
+            var pageSize = new PageSize((decimal) page.Width / 72, (decimal) page.Height / 72, PageSizeUnit.Inch);
             var image = _scanningContext.CreateProcessedImage(storage, false, -1, pageSize);
             return ImportPostProcessor.AddPostProcessingData(
                 image,

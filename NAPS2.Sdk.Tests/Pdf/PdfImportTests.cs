@@ -64,6 +64,8 @@ public class PdfImportTests : ContextualTests
         Assert.Single(images);
         storageConfig.AssertJpegStorage(images[0].Storage);
         ImageAsserts.Similar(ImageResources.dog, images[0]);
+        Assert.Equal(10.9m, images[0].Metadata.PageSize!.WidthInInches, 1);
+        Assert.Equal(7.3m, images[0].Metadata.PageSize!.HeightInInches, 1);
     }
 
     [Theory]
