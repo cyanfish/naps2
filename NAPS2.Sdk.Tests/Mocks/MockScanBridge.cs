@@ -11,7 +11,9 @@ internal class MockScanBridge : IScanBridge
     public List<ProcessedImage> MockOutput { get; set; } = [];
 
     public List<double> ProgressReports { get; set; } = [];
-        
+
+    public ScanCaps MockCaps { get; set; } = new();
+
     public Exception Error { get; set; }
 
     public ScanOptions LastOptions { get; private set; }
@@ -35,7 +37,12 @@ internal class MockScanBridge : IScanBridge
 
     public Task<ScanCaps> GetCaps(ScanOptions options, CancellationToken cancelToken)
     {
-        return null!;
+        LastOptions = options;
+        if (Error != null)
+        {
+            return Task.FromException<ScanCaps>(Error);
+        }
+        return Task.FromResult(MockCaps);
     }
 
     public Task Scan(ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<ProcessedImage, PostProcessingContext> callback)
