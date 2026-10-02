@@ -222,6 +222,9 @@
   <data name="Scale_1_8" xml:space="preserve">
     <value>1:8</value>
   </data>
+  <data name="Source_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
   <data name="Source_Duplex" xml:space="preserve">
     <value>Duplex</value>
   </data>
