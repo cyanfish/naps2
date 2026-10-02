@@ -60,6 +60,8 @@ public class Sidebar
             Text = UiStrings.Scan,
             IconName = "control_play_blue_small"
         };
+        _desktopScanController.IsScanningChanged += (_, _) =>
+            Invoker.Current.Invoke(() => ScanCommand.Enabled = !_desktopScanController.IsScanning);
     }
 
     private ActionCommand NewProfileCommand { get; }

@@ -66,6 +66,7 @@ public static class InternalDefaults
             EditWithAppPath = "",
             EditWithAppName = "",
             ApplyToAllSelected = false,
+            ScanInBackground = false,
             ManualDuplexSettings = new ManualDuplexSettings
             {
                 AlwaysShowPreview = true,

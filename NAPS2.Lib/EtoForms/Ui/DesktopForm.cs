@@ -116,6 +116,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
+        _desktopScanController.IsScanningChanged += (_, _) => Invoker.Current.Invoke(UpdateToolbar);
         _notificationArea = new NotificationArea(_notificationManager, LayoutController);
     }
 
@@ -544,6 +545,7 @@ public abstract class DesktopForm : EtoFormBase
             Commands.EmailSelected.Enabled = Commands.ReverseSelected.Enabled = ImageList.Selection.Any();
 
         // Other
+        Commands.Scan.Enabled = !_desktopScanController.IsScanning;
         Commands.SelectAll.Enabled = ImageList.Images.Any();
         Commands.Undo.Enabled = ImageList.CanUndo;
         Commands.Redo.Enabled = ImageList.CanRedo;
