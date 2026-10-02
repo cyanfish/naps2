@@ -32,6 +32,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
     private readonly TaskCompletionSource _closeTcs = new();
     private Task? _writeToCallback;
     private MemoryStream? _buffer;
+    private string? _tempDir;
 
     public DeviceOperator(ScanningContext scanningContext, ICScannerDevice device, DeviceReader reader,
         ScanOptions options, CancellationToken cancelToken, IScanEvents scanEvents, Action<IMemoryImage> callback)
@@ -127,17 +128,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             var fullBuffer = _buffer;
             _buffer = null;
             var tcs = new TaskCompletionSource<IMemoryImage?>();
-            // Ensure sequencing is maintained when writing to the callback even if copy tasks finish out of order
-            var previousCallback = _writeToCallback ?? Task.CompletedTask;
-            _writeToCallback = Task.Run(async () =>
-            {
-                await previousCallback;
-                var image = await tcs.Task;
-                if (image != null)
-                {
-                    _callback(image);
-                }
-            });
+            ChainToCallback(tcs);
             Task.Run(() =>
             {
                 try
@@ -185,69 +176,120 @@ internal class DeviceOperator : ICScannerDeviceDelegate
         }
     }
 
-    private void FlushImageDirectly(TaskCompletionSource<IMemoryImage?> tcs, MemoryStream fullBuffer,
-        ICScannerBandData data, SubPixelType subPixelType,
-        ImagePixelFormat pixelFormat)
+    private void ChainToCallback(TaskCompletionSource<IMemoryImage?> tcs)
     {
-        var image = _scanningContext.ImageContext.Create(
-            (int) data.FullImageWidth, (int) data.FullImageHeight, pixelFormat);
-        var bufferInfo = new PixelInfo(
-            (int) data.FullImageWidth,
-            (int) data.FullImageHeight,
-            subPixelType!,
-            (int) data.BytesPerRow);
-        _buffer ??= new MemoryStream((int) bufferInfo.Length);
-        new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
-        _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
-        image.SetResolution(_resolution, _resolution);
-        tcs.SetResult(image);
+        // Ensure sequencing is maintained when writing to the callback even if copy tasks finish out of order
+        var previousCallback = _writeToCallback ?? Task.CompletedTask;
+        _writeToCallback = Task.Run(async () =>
+        {
+            await previousCallback;
+            var image = await tcs.Task;
+            if (image != null)
+            {
+                _callback(image);
+            }
+        });
     }
 
-    private void FlushImageWithColorSpace(TaskCompletionSource<IMemoryImage?> tcs, MemoryStream fullBuffer,
-        ICScannerBandData data, SubPixelType? subPixelType)
+    public override void DidScanToUrl(ICScannerDevice scanner, NSUrl url)
     {
-        var colorSpace = CGColorSpace.CreateIccData(NSData.FromFile(data.ColorSyncProfilePath!));
-        var w = (int) data.FullImageWidth;
-        var h = (int) data.FullImageHeight;
-        var bitsPerComponent = (int) data.BitsPerComponent;
-        var bitsPerPixel = (int) data.BitsPerPixel;
-        var bytesPerRow = (int) data.BytesPerRow;
-        var flags = (bitsPerPixel == 32 ? CGBitmapFlags.NoneSkipLast : CGBitmapFlags.None) |
-                    CGBitmapFlags.ByteOrderDefault;
-        var buffer = fullBuffer.GetBuffer();
-        var dataProvider = new CGDataProvider(buffer, 0, buffer.Length);
+        _logger.LogDebug("DidScanToUrl {Url}", url.Path);
+        var tcs = new TaskCompletionSource<IMemoryImage?>();
+        ChainToCallback(tcs);
 
-        // There is an apparent bug in ImageCaptureCore where grayscale images can report a bytesPerRow value that is
-        // aligned to a word boundary (and the buffer is sized to match), but the actual data is stored as if that
-        // wasn't the case, leaving a block of zeros at the end of the buffer. We correct for this here.
-        // TODO: Is there any case where this will backfire? Can we detect the problem (e.g. by checking for zeros at
-        // the end of the buffer)?
-        if (subPixelType == SubPixelType.Gray)
+        Task.Run(() =>
         {
-            bytesPerRow = w;
-        }
+            try
+            {
+                var nsImage = new NSImage(url);
+                var image = FromNsImage(nsImage);
+                tcs.SetResult(image);
+                _scanEvents.PageStart();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing scanned file at {Url}", url.Path);
+            }
+            finally
+            {
+                tcs.TrySetResult(null);
+                try
+                {
+                    File.Delete(url.Path!);
+                }
+                catch
+                {
+                    // Ignore
+                }
+            }
+        });
+    }
 
-        var cgImage = new CGImage(w, h, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace, flags,
-            dataProvider, null, true, CGColorRenderingIntent.Default);
-        var imageRep = new NSBitmapImageRep(cgImage);
-        var nsImage = new NSImage();
-        nsImage.AddRepresentation(imageRep);
-        // TODO: Could maybe do this without the NAPS2.Images.Mac reference but that would require duplicating
-        // a bunch of logic to normalize image reps etc.
-        var macImage = new MacImage(nsImage);
-        _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
-        macImage.SetResolution(_resolution, _resolution);
-        if (_scanningContext.ImageContext is MacImageContext)
+    private void FlushImageDirectly(TaskCompletionSource<IMemoryImage?> tcs, MemoryStream fullBuffer,
+            ICScannerBandData data, SubPixelType subPixelType,
+            ImagePixelFormat pixelFormat)
         {
-            tcs.SetResult(macImage);
-        }
-        else
-        {
-            var image = macImage.Copy(_scanningContext.ImageContext);
-            macImage.Dispose();
+            var image = _scanningContext.ImageContext.Create(
+                (int) data.FullImageWidth, (int) data.FullImageHeight, pixelFormat);
+            var bufferInfo = new PixelInfo(
+                (int) data.FullImageWidth,
+                (int) data.FullImageHeight,
+                subPixelType!,
+                (int) data.BytesPerRow);
+            _buffer ??= new MemoryStream((int) bufferInfo.Length);
+            new CopyBitwiseImageOp().Perform(fullBuffer.GetBuffer(), bufferInfo, image);
+            _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
+            image.SetResolution(_resolution, _resolution);
             tcs.SetResult(image);
         }
-    }
+
+        private void FlushImageWithColorSpace(TaskCompletionSource<IMemoryImage?> tcs, MemoryStream fullBuffer,
+            ICScannerBandData data, SubPixelType? subPixelType)
+        {
+            var colorSpace = CGColorSpace.CreateIccData(NSData.FromFile(data.ColorSyncProfilePath!));
+            var w = (int) data.FullImageWidth;
+            var h = (int) data.FullImageHeight;
+            var bitsPerComponent = (int) data.BitsPerComponent;
+            var bitsPerPixel = (int) data.BitsPerPixel;
+            var bytesPerRow = (int) data.BytesPerRow;
+            var flags = (bitsPerPixel == 32 ? CGBitmapFlags.NoneSkipLast : CGBitmapFlags.None) |
+                        CGBitmapFlags.ByteOrderDefault;
+            var buffer = fullBuffer.GetBuffer();
+            var dataProvider = new CGDataProvider(buffer, 0, buffer.Length);
+
+            // There is an apparent bug in ImageCaptureCore where grayscale images can report a bytesPerRow value that is
+            // aligned to a word boundary (and the buffer is sized to match), but the actual data is stored as if that
+            // wasn't the case, leaving a block of zeros at the end of the buffer. We correct for this here.
+            // TODO: Is there any case where this will backfire? Can we detect the problem (e.g. by checking for zeros at
+            // the end of the buffer)?
+            if (subPixelType == SubPixelType.Gray)
+            {
+                bytesPerRow = w;
+            }
+
+            var cgImage = new CGImage(w, h, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace, flags,
+                dataProvider, null, true, CGColorRenderingIntent.Default);
+            var imageRep = new NSBitmapImageRep(cgImage);
+            var nsImage = new NSImage();
+            nsImage.AddRepresentation(imageRep);
+            tcs.SetResult(FromNsImage(nsImage));
+        }
+
+        private IMemoryImage FromNsImage(NSImage nsImage)
+        {
+            // TODO: Could maybe do this without the NAPS2.Images.Mac reference but that would require duplicating
+            // a bunch of logic to normalize image reps etc.
+            var macImage = new MacImage(nsImage);
+            _logger.LogDebug("Setting resolution to {Dpi}", _resolution);
+            macImage.SetResolution(_resolution, _resolution);
+            if (_scanningContext.ImageContext is MacImageContext)
+            {
+                return macImage;
+            }
+            var image = macImage.Copy(_scanningContext.ImageContext);
+            macImage.Dispose();
+            return image;
+        }
 
     public override void DidCompleteScan(ICScannerDevice scanner, NSError? error)
     {
@@ -297,7 +339,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _logger.LogDebug("ICC: Opening session for caps");
             _device.RequestOpenSession();
             await _openSessionTcs.Task;
-            _logger.LogDebug("ICC: Waiting for ready");
+            _logger.LogDebug("ICC: Waiting for ready on device {0}", _device.Name);
             await _readyTcs.Task;
 
             var unitTypes = _device.AvailableFunctionalUnitTypes;
@@ -333,6 +375,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             {
                 MetadataCaps = new()
                 {
+                    Model = _device.Name,
                     SerialNumber = _device.SerialNumber
                 },
                 PaperSourceCaps = new()
@@ -391,7 +434,7 @@ internal class DeviceOperator : ICScannerDeviceDelegate
             _logger.LogDebug("ICC: Opening session");
             _device.RequestOpenSession();
             await _openSessionTcs.Task;
-            _logger.LogDebug("ICC: Waiting for ready");
+            _logger.LogDebug("ICC: Waiting for ready on device {0}", _device.Name);
             await _readyTcs.Task;
             _logger.LogDebug("ICC: Selecting unit");
             _unit = await SelectUnit(_options.PaperSource is PaperSource.Flatbed or PaperSource.Auto
@@ -414,8 +457,20 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                 BitDepth.Grayscale => ICScannerPixelDataType.Gray,
                 _ => ICScannerPixelDataType.Rgb
             };
-            _device.TransferMode = ICScannerTransferMode.MemoryBased;
-            _device.MaxMemoryBandSize = 65536;
+            if (ShouldUseFileTransfer())
+            {
+                _logger.LogDebug("ICC: Transfer mode FILE");
+                _device.TransferMode = ICScannerTransferMode.FileBased;
+                _tempDir = Path.Combine(_scanningContext.TempFolderPath, Path.GetRandomFileName());
+                Directory.CreateDirectory(_tempDir);
+                _device.DownloadsDirectory = NSUrl.FromFilename(_tempDir);
+            }
+            else
+            {
+                _logger.LogDebug("ICC: Transfer mode MEMORY");
+                _device.TransferMode = ICScannerTransferMode.MemoryBased;
+                _device.MaxMemoryBandSize = 65536;
+            }
             _logger.LogDebug("ICC: Requesting scan");
             _device.RequestScan();
             await _scanSuccessTcs.Task;
@@ -452,7 +507,24 @@ internal class DeviceOperator : ICScannerDeviceDelegate
                 _logger.LogDebug("ICC: Closing session (in finally)");
                 _device.RequestCloseSession();
             }
+            if (_tempDir != null)
+            {
+                try
+                {
+                    Directory.Delete(_tempDir, true);
+                }
+                catch (Exception)
+                {
+                    // Ignore
+                }
+            }
         }
+    }
+
+    private bool ShouldUseFileTransfer()
+    {
+        // https://github.com/cyanfish/naps2/issues/720
+        return _device.Name?.ContainsInvariantIgnoreCase("Samsung") ?? false;
     }
 
     private ICScannerDocumentType GetDocumentTypeFromPageSize(PageSize? pageSize)
