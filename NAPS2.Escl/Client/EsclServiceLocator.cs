@@ -85,24 +85,21 @@ public class EsclServiceLocator : IDisposable
     private EsclService ParseService(ServiceInstanceDiscoveryEventArgs args)
     {
         string name = args.ServiceInstanceName.Labels[0];
+        var serviceNames = new[]
+        {
+            new DomainName(new[] { name, "_uscan", "_tcp", "local" }),
+            new DomainName(new[] { name, "_uscans", "_tcp", "local" })
+        };
         bool isTls = false;
         IPAddress? ipv4 = null, ipv6 = null;
         int port = -1;
         int tlsPort = -1;
-        string? host = null;
+        DomainName? host = null;
         var props = new Dictionary<string, string>();
         foreach (var record in args.Message.Answers.Concat(args.Message.AdditionalRecords))
         {
             Logger.LogTrace("{Type} {Record}", record.GetType().Name, record);
-            if (record is ARecord a)
-            {
-                ipv4 = a.Address;
-            }
-            if (record is AAAARecord aaaa)
-            {
-                ipv6 = aaaa.Address;
-            }
-            if (record is SRVRecord srv)
+            if (record is SRVRecord srv && serviceNames.Contains(srv.Name))
             {
                 bool recordIsTls = srv.Name.IsSubdomainOf(DomainName.Join("_uscans", "_tcp", "local"));
                 if (recordIsTls)
@@ -116,11 +113,11 @@ public class EsclServiceLocator : IDisposable
                 if (host == null || recordIsTls)
                 {
                     // HTTPS overrides HTTP but not the other way around
-                    host = srv.Target.ToString();
+                    host = srv.Target;
                     isTls = recordIsTls;
                 }
             }
-            if (record is TXTRecord txt)
+            if (record is TXTRecord txt && serviceNames.Contains(txt.Name))
             {
                 foreach (var str in txt.Strings)
                 {
@@ -130,6 +127,17 @@ public class EsclServiceLocator : IDisposable
                         props[str.Substring(0, eq).ToLowerInvariant()] = str.Substring(eq + 1);
                     }
                 }
+            }
+        }
+        foreach (var record in args.Message.Answers.Concat(args.Message.AdditionalRecords))
+        {
+            if (record is ARecord a && a.Name.Equals(host))
+            {
+                ipv4 = a.Address;
+            }
+            if (record is AAAARecord aaaa && aaaa.Name.Equals(host))
+            {
+                ipv6 = aaaa.Address;
             }
         }
         string? uuid = Get(props, "uuid");
@@ -142,7 +150,7 @@ public class EsclServiceLocator : IDisposable
         {
             IpV4 = ipv4,
             IpV6 = ipv6,
-            Host = host,
+            Host = host.ToString(),
             RemoteEndpoint = args.RemoteEndPoint.Address,
             Port = port,
             TlsPort = tlsPort,
