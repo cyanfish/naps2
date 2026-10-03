@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Text;
 using System.Xml.Linq;
@@ -391,7 +392,13 @@ public class EsclClient
     private string GetHostAndPort(bool tls)
     {
         var port = tls ? _service!.TlsPort : _service!.Port;
-        var host = new IPEndPoint(_service.RemoteEndpoint, port).ToString();
+        // The response may come from an mDNS reflector. Prefer the advertised address.
+        var ip = _service.RemoteEndpoint.AddressFamily == AddressFamily.InterNetworkV6
+            ? _service.IpV6 ?? _service.IpV4
+            : _service.IpV4 ?? _service.IpV6;
+        // Link-local AAAA records don't carry the scope ID from the receiving socket.
+        ip = ip is { IsIPv6LinkLocal: false } resolvedIp ? resolvedIp : _service.RemoteEndpoint;
+        var host = new IPEndPoint(ip, port).ToString();
 #if NET6_0_OR_GREATER
         if (OperatingSystem.IsMacOS())
         {
