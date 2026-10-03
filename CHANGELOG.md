@@ -1,3 +1,8 @@
+Changes in 8.4.1:
+- Linux: Fixed a crash when "Show Profiles Toolbar" is enabled
+- Mac: Fixed a scanning issue with Samsung scanners and Apple Driver
+- Escl: Fixed an issue connecting to the wrong IP with mDNS responders
+  
 Changes in 8.4.0:
 - Added "Manual Duplex" (under "Reorder") as a clearer way to combine front and back sides scanned separately
   - This is meant to replace the "Interleave" buttons, which will be removed in a future version
