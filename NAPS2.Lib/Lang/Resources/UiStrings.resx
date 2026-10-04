@@ -1065,4 +1065,7 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="OptionKey" xml:space="preserve">
     <value>⌥</value>
   </data>
+  <data name="ScanInBackground" xml:space="preserve">
+    <value>No scan progress pop-up (show it in the main window instead)</value>
+  </data>
 </root>

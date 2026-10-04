@@ -234,4 +234,7 @@ public class CommonConfig
 
     [User]
     public bool ApplyToAllSelected { get; set; }
+
+    [Common]
+    public bool ScanInBackground { get; set; }
 }

@@ -12,6 +12,7 @@ internal class SettingsForm : EtoDialogBase
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly EnumDropDownWidget<Theme> _theme = new(scale: false);
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
+    private readonly CheckBox _scanInBackground = C.CheckBox(UiStrings.ScanInBackground);
     private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
     private readonly EnumDropDownWidget<ScanButtonDefaultAction> _scanButtonDefaultAction = new(scale: false);
@@ -75,6 +76,7 @@ internal class SettingsForm : EtoDialogBase
                     PlatformCompat.System.SupportsShowPageNumbers ? _showPageNumbers : C.None(),
                     PlatformCompat.System.SupportsProfilesToolbar ? _showProfilesToolbar : C.None(),
                     _scanChangesDefaultProfile,
+                    _scanInBackground,
                     PlatformCompat.System.SupportsButtonActions
                         ? L.Row(
                             C.Label(UiStrings.ScanButtonDefaultAction).AlignCenter().Padding(right: 20),
@@ -129,6 +131,7 @@ internal class SettingsForm : EtoDialogBase
         _theme.SelectedItem = config.Get(c => c.Theme);
         _theme.Enabled = !config.AppLocked.Has(c => c.Theme);
         UpdateCheckbox(_scanChangesDefaultProfile, c => c.ScanChangesDefaultProfile);
+        UpdateCheckbox(_scanInBackground, c => c.ScanInBackground);
         UpdateCheckbox(_showProfilesToolbar, c => c.ShowProfilesToolbar);
         UpdateCheckbox(_showPageNumbers, c => c.ShowPageNumbers);
         _scanButtonDefaultAction.SelectedItem = config.Get(c => c.ScanButtonDefaultAction);
@@ -155,6 +158,7 @@ internal class SettingsForm : EtoDialogBase
         }
         bool themeChanged = SetIfChanged(c => c.Theme, _theme.SelectedItem);
         SetIfChanged(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
+        SetIfChanged(c => c.ScanInBackground, _scanInBackground.IsChecked());
         SetIfChanged(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
         SetIfChanged(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
         SetIfChanged(c => c.ScanButtonDefaultAction, _scanButtonDefaultAction.SelectedItem);

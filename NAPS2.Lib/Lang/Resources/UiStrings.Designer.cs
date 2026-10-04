@@ -435,6 +435,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string ScanInBackground {
+            get {
+                return ResourceManager.GetString("ScanInBackground", resourceCulture);
+            }
+        }
+        
         internal static string ScanButtonDefaultAction {
             get {
                 return ResourceManager.GetString("ScanButtonDefaultAction", resourceCulture);
