@@ -218,9 +218,7 @@ public class Sidebar
         _bitDepth.SelectedItem = profile.BitDepth;
         _resolution!.SetDpi(profile.Resolution.Dpi);
 
-        _paperSource.Items = profile.Caps?.PaperSources?.Values is [_, ..] paperSources
-            ? paperSources
-            : EnumDropDownWidget<ScanSource>.DefaultItems;
+        _paperSource.Items = ScanSourceHelper.GetCompatibleScanSources(profile, deviceDriver);
 
         UpdateUiForSource();
     }

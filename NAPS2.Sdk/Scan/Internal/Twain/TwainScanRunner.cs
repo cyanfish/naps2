@@ -336,7 +336,26 @@ internal class TwainScanRunner
         // Paper Source
         switch (_options.PaperSource)
         {
-            case PaperSource.Auto: // Assume the data source will ignore if unsupported
+            case PaperSource.Auto:
+                if (source.Capabilities.CapFeederEnabled.IsSupported)
+                {
+                    source.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
+                }
+                if (source.Capabilities.CapAutomaticSenseMedium.IsSupported)
+                {
+                    source.Capabilities.CapAutomaticSenseMedium.SetValue(BoolType.True);
+                }
+                else
+                {
+                    // Only set if CAP_AUTOMATICSENSEMEDIUM is unsupported (https://epson.com/Support/wa00954e?pg=6#:~:text=CAP_AUTOMATICSENSEMEDIUM,to%20CAP_FEEDERENABLED%20dynamically.)
+                    // CAP_FEEDERLOADED is depending on CAP_FEEDERENABLED being set to TRUE (https://epson.com/Support/wa00954e?pg=6#:~:text=TWCC_BADCAP.-,CAP_FEEDERLOADED,TRUE.,-CAP_FEEDPAGE)
+                    if (!source.Capabilities.CapFeederLoaded.IsSupported || source.Capabilities.CapFeederLoaded.GetCurrent() == BoolType.False)
+                    {
+                        source.Capabilities.CapFeederEnabled.SetValue(BoolType.False);
+                    }
+                    source.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
+                }
+                break;
             case PaperSource.Flatbed:
                 source.Capabilities.CapFeederEnabled.SetValue(BoolType.False);
                 source.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
@@ -351,20 +370,6 @@ internal class TwainScanRunner
                 break;
         }
 
-        // TODO: Should we add an "Automatic" option in the NAPS2 GUI instead of making "Glass" = Auto?
-        // For "Auto", choose the feeder if it has paper, otherwise the flatbed.
-        if (_options.PaperSource == PaperSource.Auto)
-        {
-            if (source.Capabilities.CapAutomaticSenseMedium.IsSupported)
-            {
-                source.Capabilities.CapAutomaticSenseMedium.SetValue(BoolType.True);
-            }
-            else if (source.Capabilities.CapFeederLoaded.IsSupported &&
-                     source.Capabilities.CapFeederLoaded.GetCurrent() == BoolType.True)
-            {
-                source.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
-            }
-        }
 
         // Bit Depth
         switch (_options.BitDepth)

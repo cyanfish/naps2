@@ -447,6 +447,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto.
+        /// </summary>
+        internal static string Source_Auto {
+            get {
+                return ResourceManager.GetString("Source_Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplex.
         /// </summary>
         internal static string Source_Duplex {
