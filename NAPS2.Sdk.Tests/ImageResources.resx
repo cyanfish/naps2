@@ -313,4 +313,16 @@
   <data name="dog_cat_combined_bw" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_cat_combined_bw.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="autocrop_doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\autocrop_doc.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autocrop_photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\autocrop_photo.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autocrop_receipt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\autocrop_receipt.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autocrop_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\autocrop_table.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

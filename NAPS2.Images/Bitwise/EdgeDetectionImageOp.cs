@@ -1,0 +1,379 @@
+namespace NAPS2.Images.Bitwise;
+
+/// <summary>
+/// Detects the bounds of a document within a scan whose scan area is larger than the document itself (i.e. the image
+/// has a border of scanner background around the real page). The results are the number of pixels to crop from each
+/// side, with the same semantics as CropTransform.
+/// </summary>
+internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
+{
+    // Each side of the image is split into strips, so we can find documents that don't span the whole scan (e.g. a
+    // receipt in a corner) and tolerate slight skew. For each strip, the background is the median luma of the outermost
+    // lines, and we scan inward until we find one of:
+    //
+    // - An edge: a straight line along which the luma consistently changes. For white paper on a white background this
+    // is often a shadow or highlight too faint to see pixel-by-pixel through the noise. So we sum the signed gradient
+    // along the line, clamping each pixel's gradient to a small value; noise cancels out while a real edge adds up.
+    // - Content: pixels that differ a lot from the background, i.e. text or a printed line. This means the
+    // "background" is actually part of the page.
+    //
+    // Then the strips vote. If at least two strips agree on an edge (and fewer strips found content outside of it), we
+    // crop there. Otherwise the page extends past the side of the image and we don't crop.
+
+    // Ignore a bit of the outside of the image so that artifacts from the edge of the scan area aren't counted.
+    private const double IGNORE_EDGE_FRACTION = 0.005;
+    // The fraction of each side used to estimate the background color.
+    private const double BG_BAND_FRACTION = 0.01;
+    // The number of strips each side is split into.
+    private const int STRIPS = 8;
+    // Luma (0-255) difference from the background for a pixel to count as content.
+    private const int CONTENT_THRESHOLD = 40;
+    // The fraction of content pixels for a line (in a strip) to stop the scan. This is high enough to ignore dust.
+    private const double MIN_CONTENT_FRACTION = 0.05;
+    // The fraction of content pixels for a line to count as having any ink.
+    private const double MIN_INK_FRACTION = 0.01;
+    // A page that contrasts with the background (e.g. a photo) is mostly content pixels for some distance.
+    private const double MIN_SOLID_FRACTION = 0.5;
+    private const double SUSTAINED_CONTENT_FRACTION = 0.02;
+    // The luma gradient at a pixel is the difference between the pixels this distance away on either side. Each
+    // pixel's gradient is clamped to a small magnitude when looking for edges.
+    private const int EDGE_GRADIENT_SPAN = 2;
+    private const int EDGE_GRADIENT_CLAMP = 4;
+    // The minimum fraction of a line (in a strip) that needs a consistent gradient for it to count as an edge.
+    private const double MIN_EDGE_COVERAGE = 0.45;
+    // The number of lines a sharp edge can span, given the gradient span.
+    private const int EDGE_WIDTH = 2 * EDGE_GRADIENT_SPAN + 1;
+    // How close (as a fraction of the dimension) edges in different strips need to be to count as the same edge.
+    private const double EDGE_AGREEMENT_FRACTION = 0.01;
+    private const int EDGE_AGREEMENT_MIN = 3;
+    // If the detected page is smaller than this fraction of the image in either dimension, we don't crop.
+    private const double MIN_PAGE_FRACTION = 0.1;
+
+    private int _w;
+    private int _h;
+    private bool _invertY;
+    // Background luma for each strip on each side
+    private int[] _bgLeft = null!, _bgRight = null!, _bgTop = null!, _bgBottom = null!;
+    // Content pixel counts for each line in each strip, indexed by [strip * w + x] or [strip * h + y]
+    private int[] _contentLeft = null!, _contentRight = null!, _contentTop = null!, _contentBottom = null!;
+    // Clamped gradient sums for each line in each strip, indexed by [strip * w + x] or [strip * h + y]
+    private int[] _colGradients = null!, _rowGradients = null!;
+
+    protected override LockMode LockMode => LockMode.ReadOnly;
+
+    /// <summary>
+    /// The number of pixels to crop from the left side.
+    /// </summary>
+    public int Left { get; private set; }
+
+    /// <summary>
+    /// The number of pixels to crop from the top side.
+    /// </summary>
+    public int Top { get; private set; }
+
+    /// <summary>
+    /// The number of pixels to crop from the right side.
+    /// </summary>
+    public int Right { get; private set; }
+
+    /// <summary>
+    /// The number of pixels to crop from the bottom side.
+    /// </summary>
+    public int Bottom { get; private set; }
+
+    protected override void ValidateCore(BitwiseImageData data)
+    {
+    }
+
+    protected override void StartCore(BitwiseImageData data)
+    {
+        _w = data.w;
+        _h = data.h;
+        _invertY = data.invertY;
+        _contentLeft = new int[STRIPS * data.w];
+        _contentRight = new int[STRIPS * data.w];
+        _contentTop = new int[STRIPS * data.h];
+        _contentBottom = new int[STRIPS * data.h];
+        _colGradients = new int[STRIPS * data.w];
+        _rowGradients = new int[STRIPS * data.h];
+        EstimateBackground(data);
+    }
+
+    private void EstimateBackground(BitwiseImageData data)
+    {
+        int bandW = Math.Max((int) Math.Round(data.w * BG_BAND_FRACTION), 2);
+        int bandH = Math.Max((int) Math.Round(data.h * BG_BAND_FRACTION), 2);
+        var left = new long[STRIPS, 256];
+        var right = new long[STRIPS, 256];
+        var top = new long[STRIPS, 256];
+        var bottom = new long[STRIPS, 256];
+        var luma = new int[data.w];
+        for (int y = 0; y < data.h; y++)
+        {
+            // Only read the pixels in the bands
+            if (y < bandH || y >= data.h - bandH)
+            {
+                ReadLumaRow(data, y, luma);
+            }
+            else
+            {
+                ReadLumaRow(data, y, luma, 0, bandW);
+                ReadLumaRow(data, y, luma, data.w - bandW, data.w);
+            }
+            int sy = y * STRIPS / data.h;
+            for (int x = 0; x < bandW; x++)
+            {
+                left[sy, luma[x]]++;
+                right[sy, luma[data.w - 1 - x]]++;
+            }
+            if (y < bandH || y >= data.h - bandH)
+            {
+                var hist = y < bandH ? top : bottom;
+                for (int x = 0; x < data.w; x++)
+                {
+                    hist[x * STRIPS / data.w, luma[x]]++;
+                }
+            }
+        }
+        _bgLeft = Medians(left);
+        _bgRight = Medians(right);
+        _bgTop = Medians(top);
+        _bgBottom = Medians(bottom);
+    }
+
+    private static int[] Medians(long[,] histograms)
+    {
+        var medians = new int[STRIPS];
+        for (int s = 0; s < STRIPS; s++)
+        {
+            long total = 0;
+            for (int i = 0; i < 256; i++) total += histograms[s, i];
+            long cumulative = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                cumulative += histograms[s, i];
+                if (cumulative * 2 >= total)
+                {
+                    medians[s] = i;
+                    break;
+                }
+            }
+        }
+        return medians;
+    }
+
+    protected override void PerformCore(BitwiseImageData data, int partStart, int partEnd)
+    {
+        if (!(data.bytesPerPixel is 1 or 3 or 4 || data.bitsPerPixel == 1))
+        {
+            throw new InvalidOperationException("Unsupported pixel format");
+        }
+
+        int w = data.w, h = data.h;
+        // Content in the ignored area around the outside of the image (e.g. scanner artifacts) isn't counted
+        int ignoreX = Math.Max((int) Math.Round(w * IGNORE_EDGE_FRACTION), 1);
+        int ignoreY = Math.Max((int) Math.Round(h * IGNORE_EDGE_FRACTION), 1);
+        // Column-indexed values need to be summed across partitions, while row-indexed values are written directly
+        // (each partition has a distinct range of rows)
+        var contentLeft = new int[STRIPS * w];
+        var contentRight = new int[STRIPS * w];
+        var colGradients = new int[STRIPS * w];
+        var stripX = new int[w];
+        for (int x = 0; x < w; x++)
+        {
+            stripX[x] = x * STRIPS / w;
+        }
+        const int d = EDGE_GRADIENT_SPAN;
+        // A window of rows from y - d to y + d
+        var rows = new int[2 * d + 1][];
+        for (int k = 0; k < rows.Length; k++)
+        {
+            rows[k] = new int[w];
+            int ry = partStart - d + k;
+            if (ry >= 0 && ry < h && k < rows.Length - 1) ReadLumaRow(data, ry, rows[k]);
+        }
+
+        for (int y = partStart; y < partEnd; y++)
+        {
+            if (y + d < h) ReadLumaRow(data, y + d, rows[rows.Length - 1]);
+            var prev = rows[0];
+            var cur = rows[d];
+            var next = rows[rows.Length - 1];
+            bool hasPrev = y - d >= 0;
+            bool hasNext = y + d < h;
+            int sy = y * STRIPS / h;
+            bool countContentY = y >= ignoreY && y < h - ignoreY;
+            int bgLeft = _bgLeft[sy], bgRight = _bgRight[sy];
+            int colOffset = sy * w;
+
+            for (int x = 0; x < w; x++)
+            {
+                int v = cur[x];
+                int sx = stripX[x];
+                int rowIndex = sx * h + y;
+                if (countContentY && x >= ignoreX && x < w - ignoreX)
+                {
+                    if (Math.Abs(v - bgLeft) > CONTENT_THRESHOLD) contentLeft[colOffset + x]++;
+                    if (Math.Abs(v - bgRight) > CONTENT_THRESHOLD) contentRight[colOffset + x]++;
+                    if (Math.Abs(v - _bgTop[sx]) > CONTENT_THRESHOLD) _contentTop[rowIndex]++;
+                    if (Math.Abs(v - _bgBottom[sx]) > CONTENT_THRESHOLD) _contentBottom[rowIndex]++;
+                }
+
+                int gx = x >= d && x < w - d ? cur[x + d] - cur[x - d] : 0;
+                int gy = hasPrev && hasNext ? next[x] - prev[x] : 0;
+                colGradients[colOffset + x] += Math.Max(Math.Min(gx, EDGE_GRADIENT_CLAMP), -EDGE_GRADIENT_CLAMP);
+                _rowGradients[rowIndex] += Math.Max(Math.Min(gy, EDGE_GRADIENT_CLAMP), -EDGE_GRADIENT_CLAMP);
+            }
+
+            var first = rows[0];
+            Array.Copy(rows, 1, rows, 0, rows.Length - 1);
+            rows[rows.Length - 1] = first;
+        }
+
+        lock (this)
+        {
+            for (int i = 0; i < colGradients.Length; i++)
+            {
+                _contentLeft[i] += contentLeft[i];
+                _contentRight[i] += contentRight[i];
+                _colGradients[i] += colGradients[i];
+            }
+        }
+    }
+
+    private static void ReadLumaRow(BitwiseImageData data, int y, int[] luma) => ReadLumaRow(data, y, luma, 0, data.w);
+
+    private static unsafe void ReadLumaRow(BitwiseImageData data, int y, int[] luma, int start, int end)
+    {
+        var row = data.ptr + data.stride * y;
+        if (data.bytesPerPixel is 3 or 4)
+        {
+            for (int x = start; x < end; x++)
+            {
+                var pixel = row + x * data.bytesPerPixel;
+                int r = *(pixel + data.rOff);
+                int g = *(pixel + data.gOff);
+                int b = *(pixel + data.bOff);
+                luma[x] = (r * R_MULT + g * G_MULT + b * B_MULT) / 1000;
+            }
+        }
+        else if (data.bytesPerPixel == 1)
+        {
+            for (int x = start; x < end; x++)
+            {
+                luma[x] = *(row + x);
+            }
+        }
+        else
+        {
+            for (int x = start; x < end; x++)
+            {
+                var bit = (*(row + x / 8) >> (7 - x % 8)) & 1;
+                luma[x] = bit == 0 ? 0 : 255;
+            }
+        }
+        if (data.invertColorSpace)
+        {
+            for (int x = start; x < end; x++)
+            {
+                luma[x] = 255 - luma[x];
+            }
+        }
+    }
+
+    protected override void FinishCore()
+    {
+        int left = FindSide(_contentLeft, _colGradients, _w, _h, false);
+        int right = FindSide(_contentRight, _colGradients, _w, _h, true);
+        int top = FindSide(_contentTop, _rowGradients, _h, _w, false);
+        int bottom = FindSide(_contentBottom, _rowGradients, _h, _w, true);
+        if (_invertY)
+        {
+            (top, bottom) = (bottom, top);
+        }
+
+        if (_w - left - right < _w * MIN_PAGE_FRACTION || _h - top - bottom < _h * MIN_PAGE_FRACTION)
+        {
+            // Couldn't find a plausible page
+            left = right = top = bottom = 0;
+        }
+
+        Left = left;
+        Right = right;
+        Top = top;
+        Bottom = bottom;
+    }
+
+    /// <summary>
+    /// Scans inward from one side (from the end if reverse is true) over n lines of the given length, and returns the
+    /// number of lines before the page starts.
+    /// </summary>
+    private static int FindSide(int[] content, int[] gradients, int n, int lineLength, bool reverse)
+    {
+        // Gradients look a few pixels to either side, so start a bit further in to fully ignore the outside
+        int start = Math.Max((int) Math.Round(n * IGNORE_EDGE_FRACTION), 1) + EDGE_GRADIENT_SPAN;
+        // Don't look further than would leave a plausible page
+        int end = n - Math.Max((int) Math.Ceiling(n * MIN_PAGE_FRACTION), start);
+        int sustained = Math.Max((int) Math.Round(n * SUSTAINED_CONTENT_FRACTION), EDGE_WIDTH);
+        int agreement = Math.Max((int) Math.Round(n * EDGE_AGREEMENT_FRACTION), EDGE_AGREEMENT_MIN);
+
+        var edges = new List<int>();
+        var contents = new List<int>();
+        for (int s = 0; s < STRIPS; s++)
+        {
+            int stripLength = (s + 1) * lineLength / STRIPS - s * lineLength / STRIPS;
+            double minGradient = stripLength * EDGE_GRADIENT_CLAMP * MIN_EDGE_COVERAGE;
+            bool HasContent(int i, double fraction) =>
+                i < n && content[s * n + (reverse ? n - 1 - i : i)] >= stripLength * fraction;
+            bool IsContent(int i) => HasContent(i, MIN_CONTENT_FRACTION);
+            bool IsInk(int i) => HasContent(i, MIN_INK_FRACTION);
+            bool IsSolid(int i) => HasContent(i, MIN_SOLID_FRACTION);
+            bool IsEdge(int i) => i < n && Math.Abs(gradients[s * n + (reverse ? n - 1 - i : i)]) >= minGradient;
+
+            for (int i = start; i < end; i++)
+            {
+                if (!IsContent(i) && !IsEdge(i))
+                {
+                    continue;
+                }
+                // A page starts with an edge, which either has no ink (a blank margin) or is followed by solid content
+                // (a contrasting page). Otherwise it's text or a printed line on the page. Edges may be blurry, so we
+                // check for ink up to the end of the edge; a blurry printed line has ink within its edge.
+                bool hasEdge = Enumerable.Range(i, EDGE_WIDTH).Any(IsEdge);
+                int edgeEnd = i;
+                while (edgeEnd < end && Enumerable.Range(edgeEnd + 1, EDGE_GRADIENT_SPAN + 1).Any(IsEdge)) edgeEnd++;
+                bool blankMargin = !Enumerable.Range(i, edgeEnd - i + EDGE_GRADIENT_SPAN + 1).Any(IsInk);
+                int solidStart = Enumerable.Range(i, agreement).FirstOrDefault(IsSolid, -1);
+                bool contrastingPage = solidStart != -1 && Enumerable.Range(solidStart, sustained).All(IsSolid);
+                // The gradient at a line looks ahead by the gradient span, so that's where the edge actually starts
+                int position = IsEdge(i) ? i + EDGE_GRADIENT_SPAN : i;
+                if (hasEdge && (contrastingPage || blankMargin))
+                {
+                    edges.Add(position);
+                }
+                else
+                {
+                    contents.Add(position);
+                }
+                break;
+            }
+        }
+
+        // Find the outermost edge that's confirmed by another strip
+        edges.Sort();
+        for (int i = 0; i < edges.Count - 1; i++)
+        {
+            if (edges[i + 1] - edges[i] > agreement) continue;
+            int edge = edges[i];
+            if (contents.Count(x => x < edge) >= edges.Count(x => x <= edge + agreement))
+            {
+                // Other strips found content outside the edge, so it's not actually the edge of the page (e.g. it's a
+                // faint printed line)
+                return 0;
+            }
+            // If the page starts right at the ignored area, it likely extends to the edge of the image
+            return edge <= start + EDGE_GRADIENT_SPAN ? 0 : edge;
+        }
+        return 0;
+    }
+}

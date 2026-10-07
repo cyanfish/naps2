@@ -692,6 +692,46 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] autocrop_doc {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_doc", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] autocrop_photo {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_photo", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] autocrop_receipt {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_receipt", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] autocrop_table {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_table", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] skewed_bw {
             get {
                 object obj = ResourceManager.GetObject("skewed_bw", resourceCulture);

@@ -1,5 +1,7 @@
 using Eto.Drawing;
 using Eto.Forms;
+using NAPS2.EtoForms.Layout;
+using NAPS2.Images.Bitwise;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -13,6 +15,7 @@ public class CropForm : UnaryImageFormBase
     private const int FREEFORM_MIN_SIZE = 10;
 
     private readonly ColorScheme _colorScheme;
+    private readonly Button _autoCrop = C.Button(UiStrings.AutoCrop);
 
     // TODO: Textboxes for direct editing
 
@@ -49,6 +52,7 @@ public class CropForm : UnaryImageFormBase
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;
         KeyDown += CropForm_KeyDown;
+        _autoCrop.Click += AutoCrop_Click;
     }
 
     // The handle length is proportional to the window size
@@ -81,6 +85,24 @@ public class CropForm : UnaryImageFormBase
     protected override void Revert()
     {
         _cropT = _cropL = _cropB = _cropR = _realT = _realL = _realB = _realR = 0;
+        Overlay.Invalidate();
+    }
+
+    protected override LayoutElement CreateExtraButtons() => L.Row(base.CreateExtraButtons(), _autoCrop);
+
+    private void AutoCrop_Click(object? sender, EventArgs e)
+    {
+        // The working image is scaled down to the screen size, which is too low resolution for reliable detection, so
+        // we use the original image instead
+        using var imageToRender = Image.GetClonedImage();
+        using var image = imageToRender.Render();
+        var op = new EdgeDetectionImageOp();
+        op.Perform(image);
+        _cropL = op.Left / (float) image.Width;
+        _cropR = op.Right / (float) image.Width;
+        _cropT = op.Top / (float) image.Height;
+        _cropB = op.Bottom / (float) image.Height;
+        UpdateRealCoords();
         Overlay.Invalidate();
     }
 

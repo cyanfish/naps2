@@ -873,6 +873,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string AutoCrop {
+            get {
+                return ResourceManager.GetString("AutoCrop", resourceCulture);
+            }
+        }
+        
         internal static string ApplyToSelected {
             get {
                 return ResourceManager.GetString("ApplyToSelected", resourceCulture);

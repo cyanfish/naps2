@@ -531,6 +531,9 @@
   <data name="Revert" xml:space="preserve">
     <value>Revert</value>
   </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto-Crop</value>
+  </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Apply to all {0} selected images</value>
   </data>
