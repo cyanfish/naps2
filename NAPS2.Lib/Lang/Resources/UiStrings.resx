@@ -795,6 +795,9 @@
   <data name="DeskewScannedPages" xml:space="preserve">
     <value>Deskew scanned pages</value>
   </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto-crop scanned pages</value>
+  </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Apply brightness/contrast after scan</value>
   </data>

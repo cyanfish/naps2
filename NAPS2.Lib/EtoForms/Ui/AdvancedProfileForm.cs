@@ -15,6 +15,7 @@ public class AdvancedProfileForm : EtoDialogBase
     private readonly SliderWithTextBox _whiteThreshold = new(new SliderWithTextBox.IntConstraints(0, 100, 10));
     private readonly SliderWithTextBox _coverageThreshold = new(new SliderWithTextBox.IntConstraints(0, 100, 10));
     private readonly CheckBox _deskew = new() { Text = UiStrings.DeskewScannedPages };
+    private readonly CheckBox _autoCrop = new() { Text = UiStrings.AutoCropScannedPages };
     private readonly CheckBox _brightContAfterScan = new() { Text = UiStrings.BrightnessContrastAfterScan };
     private readonly CheckBox _offsetWidth = new() { Text = UiStrings.OffsetWidth };
     private readonly CheckBox _stretchToPageSize = new() { Text = UiStrings.StretchToPageSize };
@@ -84,7 +85,10 @@ public class AdvancedProfileForm : EtoDialogBase
             ),
             L.GroupBox(
                 UiStrings.PostProcessing,
-                _deskew
+                L.Column(
+                    _deskew,
+                    _autoCrop
+                )
             ),
             L.GroupBox(
                 UiStrings.Compatibility,
@@ -119,6 +123,7 @@ public class AdvancedProfileForm : EtoDialogBase
         _quality.IntValue = scanProfile.Quality;
         _brightContAfterScan.Checked = scanProfile.BrightnessContrastAfterScan;
         _deskew.Checked = scanProfile.AutoDeskew;
+        _autoCrop.Checked = scanProfile.AutoCrop;
         _offsetWidth.Checked = scanProfile.WiaOffsetWidth;
         _wiaVersion.SelectedItem = scanProfile.WiaVersion;
         _stretchToPageSize.Checked = scanProfile.ForcePageSize;
@@ -146,6 +151,7 @@ public class AdvancedProfileForm : EtoDialogBase
         ScanProfile.MaxQuality = _maximumQuality.IsChecked();
         ScanProfile.BrightnessContrastAfterScan = _brightContAfterScan.IsChecked();
         ScanProfile.AutoDeskew = _deskew.IsChecked();
+        ScanProfile.AutoCrop = _autoCrop.IsChecked();
         ScanProfile.WiaOffsetWidth = _offsetWidth.IsChecked();
         ScanProfile.WiaVersion = _wiaVersion.SelectedItem;
         ScanProfile.ForcePageSize = _stretchToPageSize.IsChecked();

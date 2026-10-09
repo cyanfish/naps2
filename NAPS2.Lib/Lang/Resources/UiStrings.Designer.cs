@@ -1401,6 +1401,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string AutoCropScannedPages {
+            get {
+                return ResourceManager.GetString("AutoCropScannedPages", resourceCulture);
+            }
+        }
+        
         internal static string BrightnessContrastAfterScan {
             get {
                 return ResourceManager.GetString("BrightnessContrastAfterScan", resourceCulture);
