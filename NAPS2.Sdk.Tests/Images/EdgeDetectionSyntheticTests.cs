@@ -81,6 +81,47 @@ public class EdgeDetectionSyntheticTests : ContextualTests
         AssertBounds(op, 0, 0, 0, 0);
     }
 
+    [Fact]
+    public void ItemWithHalo()
+    {
+        // A dark item (e.g. a card) in the corner of a light background, with a soft bright halo around it
+        const int itemW = 160, itemH = 100, halo = 8;
+        var image = CreateImage(ImagePixelFormat.RGB24, 230, image =>
+        {
+            for (int k = halo - 1; k >= 0; k--)
+            {
+                byte color = (byte) (244 - k * 14 / halo);
+                FillRect(image, 0, 0, itemW + k + 1, itemH + k + 1, color);
+            }
+            DrawPage(image, 0, 0, itemW, itemH, 100);
+        });
+
+        var op = Detect(image);
+
+        // The crop should be at the item, not the outside of the halo
+        AssertBounds(op, 0, 0, W - itemW, H - itemH);
+    }
+
+    [Fact]
+    public void ItemInMiddleWithScannerBorder()
+    {
+        // An item in the middle of the scan area, with a dark border along the left side of the scan that gradually
+        // fades out (further than the ignored area at the edge of the image)
+        byte[] border = [60, 225, 230, 233, 235, 237];
+        var image = CreateImage(ImagePixelFormat.RGB24, 238, image =>
+        {
+            for (int x = 0; x < border.Length; x++)
+            {
+                FillRect(image, x, 0, x + 1, H, border[x]);
+            }
+            DrawPage(image, 150, 200, 300, 350, 100);
+        });
+
+        var op = Detect(image);
+
+        AssertBounds(op, 150, 200, W - 300, H - 350);
+    }
+
     private static EdgeDetectionImageOp Detect(IMemoryImage image)
     {
         var op = new EdgeDetectionImageOp();

@@ -414,6 +414,8 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
             bool IsSolid(int i) => HasContent(i, MIN_SOLID_FRACTION);
             bool IsEdge(int i) => i < n && Math.Abs(gradients[s * n + (reverse ? n - 1 - i : i)]) >= minGradient;
 
+            // Edges up to here are part of an artifact from the edge of the scan area
+            int skipUntil = start + EDGE_WIDTH - 1;
             for (int i = start; i < end; i++)
             {
                 if (!IsContent(i) && !IsEdge(i))
@@ -426,18 +428,27 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
                 bool hasEdge = Enumerable.Range(i, EDGE_WIDTH).Any(IsEdge);
                 int edgeEnd = i;
                 while (edgeEnd < end && Enumerable.Range(edgeEnd + 1, EDGE_GRADIENT_SPAN + 1).Any(IsEdge)) edgeEnd++;
+                if (i <= skipUntil && IsEdge(i) && !IsContent(i))
+                {
+                    // An edge that's there when we start (or soon after the last one) is part of an artifact from the
+                    // edge of the scan area (e.g. a dark border that gradually fades out), so skip past it
+                    skipUntil = edgeEnd + agreement;
+                    i = edgeEnd;
+                    continue;
+                }
                 bool blankMargin = !Enumerable.Range(i, edgeEnd - i + EDGE_GRADIENT_SPAN + 1).Any(IsInk);
-                int solidStart = Enumerable.Range(i, agreement).FirstOrDefault(IsSolid, -1);
+                int solidStart = Enumerable.Range(i, edgeEnd - i + agreement).FirstOrDefault(IsSolid, -1);
                 bool contrastingPage = solidStart != -1 && Enumerable.Range(solidStart, sustained).All(IsSolid);
-                // The gradient at a line looks ahead by the gradient span, so that's where the edge actually starts
-                int position = IsEdge(i) ? i + EDGE_GRADIENT_SPAN : i;
                 if (hasEdge && (contrastingPage || blankMargin))
                 {
-                    edges.Add(position);
+                    // The page starts after any shadow/highlight/blur around the edge. That's either where solid
+                    // content starts, or the end of the edge (adjusted as the gradient looks behind by the span).
+                    edges.Add(contrastingPage ? solidStart : edgeEnd - EDGE_GRADIENT_SPAN + 1);
                 }
                 else
                 {
-                    contents.Add(position);
+                    // The gradient at a line looks ahead by the gradient span, so that's where the content starts
+                    contents.Add(IsEdge(i) ? i + EDGE_GRADIENT_SPAN : i);
                 }
                 break;
             }
@@ -455,8 +466,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
                 // probably not the edge of the page (e.g. it's a faint printed line, or part of a photo)
                 return 0;
             }
-            // If the page starts right at the ignored area, it likely extends to the edge of the image
-            return edge <= start + EDGE_GRADIENT_SPAN ? 0 : edge;
+            return edge;
         }
         return 0;
     }
