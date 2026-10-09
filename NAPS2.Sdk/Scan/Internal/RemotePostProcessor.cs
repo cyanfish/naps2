@@ -171,6 +171,19 @@ internal class RemotePostProcessor : IRemotePostProcessor
             processedImage = processedImage.WithTransform(Deskewer.GetDeskewTransform(image), true);
         }
 
+        if (options.AutoCrop)
+        {
+            // Detect the page on the image with the transforms so far (e.g. deskewing) applied
+            using var transformed = image.Clone().PerformAllTransforms(processedImage.TransformState.Transforms);
+            var op = new EdgeDetectionImageOp();
+            op.Perform(transformed);
+            if (op.Left != 0 || op.Top != 0 || op.Right != 0 || op.Bottom != 0)
+            {
+                processedImage = processedImage.WithTransform(new CropTransform(
+                    op.Left, op.Right, op.Top, op.Bottom, transformed.Width, transformed.Height), true);
+            }
+        }
+
         if (!data.Barcode.IsDetected)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.

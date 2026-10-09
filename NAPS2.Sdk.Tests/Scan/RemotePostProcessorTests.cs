@@ -68,6 +68,23 @@ public class RemotePostProcessorTests : ContextualTests
     }
 
     [Fact]
+    public void AutoCrop()
+    {
+        var image = LoadImage(ImageResources.autocrop_doc);
+        var options = new ScanOptions
+        {
+            AutoCrop = true
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        using var rendered = result!.Render();
+        // The page fills the width of the scan, with some scanner background at the bottom
+        Assert.Equal(2550, rendered.Width);
+        const int expectedHeight = 3318;
+        const int autoCropTolerance = 20;
+        Assert.InRange(rendered.Height, expectedHeight - autoCropTolerance, expectedHeight + autoCropTolerance);
+    }
+
+    [Fact]
     public void Rotate()
     {
         var image = LoadImage(ImageResources.dog);

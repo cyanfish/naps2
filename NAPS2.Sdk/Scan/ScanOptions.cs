@@ -132,6 +132,12 @@ public class ScanOptions
     public bool AutoDeskew { get; set; }
 
     /// <summary>
+    /// Whether scanned images should be automatically cropped to the page, if the scan area is larger than the page.
+    /// If AutoDeskew is true, deskewing happens first.
+    /// </summary>
+    public bool AutoCrop { get; set; }
+
+    /// <summary>
     /// A fixed number of degrees to rotate each scanned page clockwise. If AutoDeskew is true, the fixed rotation
     /// happens first.
     /// </summary>
