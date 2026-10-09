@@ -17,8 +17,10 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     // - Content: pixels that differ a lot from the background, i.e. text or a printed line. This means the
     // "background" is actually part of the page.
     //
-    // Then the strips vote. If at least two strips agree on an edge (and fewer strips found content outside of it), we
-    // crop there. Otherwise the page extends past the side of the image and we don't crop.
+    // Then the strips vote. If at least two strips agree on an edge (and fewer strips found content elsewhere), we crop
+    // there. Otherwise the page extends past the side of the image and we don't crop.
+    //
+    // If the image has been deskewed, the white fill in its corners isn't part of the scan, so it's ignored.
 
     // Ignore a bit of the outside of the image so that artifacts from the edge of the scan area aren't counted.
     private const double IGNORE_EDGE_FRACTION = 0.005;
@@ -48,10 +50,16 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     private const int EDGE_AGREEMENT_MIN = 3;
     // If the detected page is smaller than this fraction of the image in either dimension, we don't crop.
     private const double MIN_PAGE_FRACTION = 0.1;
+    // Deskewing fills the corners of the image with white, which shouldn't count as part of the image. The fill along
+    // each side is a triangle; its depth may differ from a straight line by this many pixels.
+    private const int FILL = 255;
+    private const int FILL_TOLERANCE = 2;
 
     private int _w;
     private int _h;
     private bool _invertY;
+    // The depth of deskew fill from each side, indexed by y (for left/right) or x (for top/bottom)
+    private int[]? _fillLeft, _fillRight, _fillTop, _fillBottom;
     // Background luma for each strip on each side
     private int[] _bgLeft = null!, _bgRight = null!, _bgTop = null!, _bgBottom = null!;
     // Content pixel counts for each line in each strip, indexed by [strip * w + x] or [strip * h + y]
@@ -96,6 +104,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
         _contentBottom = new int[STRIPS * data.h];
         _colGradients = new int[STRIPS * data.w];
         _rowGradients = new int[STRIPS * data.h];
+        FindDeskewFill(data);
         EstimateBackground(data);
     }
 
@@ -113,25 +122,25 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
             // Only read the pixels in the bands
             if (y < bandH || y >= data.h - bandH)
             {
-                ReadLumaRow(data, y, luma);
+                ReadDataRow(data, y, luma, 0, data.w);
             }
             else
             {
-                ReadLumaRow(data, y, luma, 0, bandW);
-                ReadLumaRow(data, y, luma, data.w - bandW, data.w);
+                ReadDataRow(data, y, luma, 0, bandW);
+                ReadDataRow(data, y, luma, data.w - bandW, data.w);
             }
             int sy = y * STRIPS / data.h;
             for (int x = 0; x < bandW; x++)
             {
-                left[sy, luma[x]]++;
-                right[sy, luma[data.w - 1 - x]]++;
+                if (luma[x] >= 0) left[sy, luma[x]]++;
+                if (luma[data.w - 1 - x] >= 0) right[sy, luma[data.w - 1 - x]]++;
             }
             if (y < bandH || y >= data.h - bandH)
             {
                 var hist = y < bandH ? top : bottom;
                 for (int x = 0; x < data.w; x++)
                 {
-                    hist[x * STRIPS / data.w, luma[x]]++;
+                    if (luma[x] >= 0) hist[x * STRIPS / data.w, luma[x]]++;
                 }
             }
         }
@@ -146,10 +155,11 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
         var medians = new int[STRIPS];
         for (int s = 0; s < STRIPS; s++)
         {
+            medians[s] = -1;
             long total = 0;
             for (int i = 0; i < 256; i++) total += histograms[s, i];
             long cumulative = 0;
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < 256 && total > 0; i++)
             {
                 cumulative += histograms[s, i];
                 if (cumulative * 2 >= total)
@@ -159,7 +169,80 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
                 }
             }
         }
+        // Strips that are entirely deskew fill use the typical background of the other strips
+        var known = medians.Where(x => x != -1).OrderBy(x => x).ToList();
+        for (int s = 0; s < STRIPS; s++)
+        {
+            if (medians[s] == -1) medians[s] = known.Count > 0 ? known[known.Count / 2] : FILL;
+        }
         return medians;
+    }
+
+    private void FindDeskewFill(BitwiseImageData data)
+    {
+        int w = data.w, h = data.h;
+        var luma = new int[w];
+        int Luma(int x, int y)
+        {
+            ReadLumaRow(data, y, luma, x, x + 1);
+            return luma[x];
+        }
+        // The depth of white from each side
+        var left = new int[h];
+        var right = new int[h];
+        var top = new int[w];
+        var bottom = new int[w];
+        for (int y = 0; y < h; y++)
+        {
+            while (left[y] < w && Luma(left[y], y) == FILL) left[y]++;
+            while (right[y] < w && Luma(w - 1 - right[y], y) == FILL) right[y]++;
+        }
+        for (int x = 0; x < w; x++)
+        {
+            while (top[x] < h && Luma(x, top[x]) == FILL) top[x]++;
+            while (bottom[x] < h && Luma(x, h - 1 - bottom[x]) == FILL) bottom[x]++;
+        }
+        // Deskewing leaves a triangle of fill along every side
+        if (IsTriangle(left) && IsTriangle(right) && IsTriangle(top) && IsTriangle(bottom))
+        {
+            (_fillLeft, _fillRight, _fillTop, _fillBottom) = (left, right, top, bottom);
+        }
+    }
+
+    /// <summary>
+    /// Checks whether the depth along a side goes in a straight line from one end down to zero (deskewing rotates the
+    /// image around its center, so this is about halfway along the side), and stays at zero. The ends are skipped, as
+    /// the fill from the adjacent sides overlaps there.
+    /// </summary>
+    private static bool IsTriangle(int[] depth)
+    {
+        int t1 = depth.Length / 10, t2 = depth.Length - 1 - depth.Length / 10;
+        // Check from the deeper end
+        if (depth[t1] < depth[t2]) depth = depth.Reverse().ToArray();
+        int zero = Array.FindIndex(depth, t1, t2 - t1, x => x == 0);
+        if (depth[t1] <= FILL_TOLERANCE || zero == -1) return false;
+        double slope = depth[t1] / (double) (zero - t1);
+        for (int t = t1; t <= t2; t++)
+        {
+            if (Math.Abs(depth[t] - Math.Max(depth[t1] - slope * (t - t1), 0)) > FILL_TOLERANCE) return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Reads the luma for part of a row, with deskew fill pixels set to -1.
+    /// </summary>
+    private void ReadDataRow(BitwiseImageData data, int y, int[] luma, int start, int end)
+    {
+        ReadLumaRow(data, y, luma, start, end);
+        if (_fillLeft == null) return;
+        for (int x = start; x < end; x++)
+        {
+            if (x < _fillLeft[y] || x >= _w - _fillRight![y] || y < _fillTop![x] || y >= _h - _fillBottom![x])
+            {
+                luma[x] = -1;
+            }
+        }
     }
 
     protected override void PerformCore(BitwiseImageData data, int partStart, int partEnd)
@@ -190,12 +273,12 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
         {
             rows[k] = new int[w];
             int ry = partStart - d + k;
-            if (ry >= 0 && ry < h && k < rows.Length - 1) ReadLumaRow(data, ry, rows[k]);
+            if (ry >= 0 && ry < h && k < rows.Length - 1) ReadDataRow(data, ry, rows[k], 0, w);
         }
 
         for (int y = partStart; y < partEnd; y++)
         {
-            if (y + d < h) ReadLumaRow(data, y + d, rows[rows.Length - 1]);
+            if (y + d < h) ReadDataRow(data, y + d, rows[rows.Length - 1], 0, w);
             var prev = rows[0];
             var cur = rows[d];
             var next = rows[rows.Length - 1];
@@ -211,7 +294,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
                 int v = cur[x];
                 int sx = stripX[x];
                 int rowIndex = sx * h + y;
-                if (countContentY && x >= ignoreX && x < w - ignoreX)
+                if (countContentY && x >= ignoreX && x < w - ignoreX && v >= 0)
                 {
                     if (Math.Abs(v - bgLeft) > CONTENT_THRESHOLD) contentLeft[colOffset + x]++;
                     if (Math.Abs(v - bgRight) > CONTENT_THRESHOLD) contentRight[colOffset + x]++;
@@ -219,8 +302,9 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
                     if (Math.Abs(v - _bgBottom[sx]) > CONTENT_THRESHOLD) _contentBottom[rowIndex]++;
                 }
 
-                int gx = x >= d && x < w - d ? cur[x + d] - cur[x - d] : 0;
-                int gy = hasPrev && hasNext ? next[x] - prev[x] : 0;
+                // Deskew fill pixels are -1, and don't count towards gradients
+                int gx = x >= d && x < w - d && cur[x + d] >= 0 && cur[x - d] >= 0 ? cur[x + d] - cur[x - d] : 0;
+                int gy = hasPrev && hasNext && next[x] >= 0 && prev[x] >= 0 ? next[x] - prev[x] : 0;
                 colGradients[colOffset + x] += Math.Max(Math.Min(gx, EDGE_GRADIENT_CLAMP), -EDGE_GRADIENT_CLAMP);
                 _rowGradients[rowIndex] += Math.Max(Math.Min(gy, EDGE_GRADIENT_CLAMP), -EDGE_GRADIENT_CLAMP);
             }
@@ -365,10 +449,10 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
         {
             if (edges[i + 1] - edges[i] > agreement) continue;
             int edge = edges[i];
-            if (contents.Count(x => x < edge) >= edges.Count(x => x <= edge + agreement))
+            if (contents.Count(x => Math.Abs(x - edge) > agreement) >= edges.Count(x => x <= edge + agreement))
             {
-                // Other strips found content outside the edge, so it's not actually the edge of the page (e.g. it's a
-                // faint printed line)
+                // As many strips found content elsewhere (without an edge before it) as found this edge, so it's
+                // probably not the edge of the page (e.g. it's a faint printed line, or part of a photo)
                 return 0;
             }
             // If the page starts right at the ignored area, it likely extends to the edge of the image

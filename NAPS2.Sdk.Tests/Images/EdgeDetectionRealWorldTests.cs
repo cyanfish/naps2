@@ -98,6 +98,33 @@ public class EdgeDetectionRealWorldTests : ContextualTests
     }
 
     [Theory]
+    [MemberData(nameof(DeskewCases))]
+    public void Deskewed(string name, double angle)
+    {
+        // Simulate deskewing a crooked scan: rotate the scan, crop off the corners (as a real scan would only have
+        // scanner background there), then rotate back. The page ends up straight, but there are angled white wedges
+        // along the sides of the image where the scan area doesn't cover.
+        var scanCase = Cases[name];
+        var image = LoadImage(scanCase.Resource);
+        int margin = (int) Math.Ceiling(Math.Max(image.Width, image.Height) * Math.Sin(Math.Abs(angle) * Math.PI / 180));
+        var deskewed = image
+            .PerformTransform(new RotationTransform(angle))
+            .PerformTransform(new CropTransform(margin, margin, margin, margin))
+            .PerformTransform(new RotationTransform(-angle));
+
+        var expected = scanCase.Expected;
+        int Adjust(int crop) => Math.Max(crop - margin, 0);
+        AssertCrop(
+            new Crop(Adjust(expected.Left), Adjust(expected.Top), Adjust(expected.Right), Adjust(expected.Bottom)),
+            Detect(deskewed));
+    }
+
+    public static IEnumerable<object[]> DeskewCases =>
+        from name in Cases.Keys
+        from angle in new[] { 1.0, -2.0 }
+        select new object[] { name, angle };
+
+    [Theory]
     [MemberData(nameof(PaddingCases))]
     public void CroppedAndPadded(string name, string color, string axes)
     {
