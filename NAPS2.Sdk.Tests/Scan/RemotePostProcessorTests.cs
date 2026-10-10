@@ -85,6 +85,18 @@ public class RemotePostProcessorTests : ContextualTests
     }
 
     [Fact]
+    public void DocumentCorrection()
+    {
+        var image = LoadImage(ImageResources.dog);
+        var options = new ScanOptions
+        {
+            CorrectionMode = CorrectionMode.Document
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        Assert.Contains(new CorrectionTransform(CorrectionMode.Document), result!.TransformState.Transforms);
+    }
+
+    [Fact]
     public void Rotate()
     {
         var image = LoadImage(ImageResources.dog);

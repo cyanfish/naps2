@@ -107,6 +107,8 @@ public class ScanProfile
 
     public bool AutoCrop { get; set; }
 
+    public bool DocumentCorrection { get; set; }
+
     public double RotateDegrees { get; set; }
 
     public bool BrightnessContrastAfterScan { get; set; }

@@ -184,6 +184,11 @@ internal class RemotePostProcessor : IRemotePostProcessor
             }
         }
 
+        if (options.CorrectionMode != CorrectionMode.None)
+        {
+            processedImage = processedImage.WithTransform(new CorrectionTransform(options.CorrectionMode), true);
+        }
+
         if (!data.Barcode.IsDetected)
         {
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.

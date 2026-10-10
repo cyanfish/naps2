@@ -288,6 +288,7 @@ internal class ScanPerformer : IScanPerformer
             Quality = scanProfile.Quality,
             AutoDeskew = scanProfile.AutoDeskew,
             AutoCrop = scanProfile.AutoCrop,
+            CorrectionMode = scanProfile.DocumentCorrection ? CorrectionMode.Document : CorrectionMode.None,
             RotateDegrees = scanProfile.RotateDegrees,
             BitDepth = scanProfile.BitDepth.ToBitDepth(),
             DialogParent = dialogParent,

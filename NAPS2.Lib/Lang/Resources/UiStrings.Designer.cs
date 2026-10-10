@@ -783,9 +783,9 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string OcrPreProcessing {
+        internal static string FixWhiteBalanceAndRemoveNoise {
             get {
-                return ResourceManager.GetString("OcrPreProcessing", resourceCulture);
+                return ResourceManager.GetString("FixWhiteBalanceAndRemoveNoise", resourceCulture);
             }
         }
         

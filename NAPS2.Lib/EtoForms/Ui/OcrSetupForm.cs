@@ -16,7 +16,7 @@ public class OcrSetupForm : EtoDialogBase
     private readonly DropDown _ocrLang = C.DropDown();
     private readonly EnumDropDownWidget<LocalizedOcrMode> _ocrMode = new()
         { Items = [LocalizedOcrMode.Fast, LocalizedOcrMode.Best] };
-    private readonly CheckBox _ocrPreProcessing = C.CheckBox(UiStrings.OcrPreProcessing);
+    private readonly CheckBox _ocrPreProcessing = C.CheckBox(UiStrings.FixWhiteBalanceAndRemoveNoise);
     private readonly CheckBox _ocrAfterScanning = C.CheckBox(
         TranslationMigrator.PickTranslated(
             UiStrings.ResourceManager,

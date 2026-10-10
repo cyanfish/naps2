@@ -138,6 +138,12 @@ public class ScanOptions
     public bool AutoCrop { get; set; }
 
     /// <summary>
+    /// The type of automatic correction (e.g. fixing white balance and removing noise) that scanned images should go
+    /// through, or CorrectionMode.None for no correction. If AutoDeskew or AutoCrop are true, those happen first.
+    /// </summary>
+    public CorrectionMode CorrectionMode { get; set; }
+
+    /// <summary>
     /// A fixed number of degrees to rotate each scanned page clockwise. If AutoDeskew is true, the fixed rotation
     /// happens first.
     /// </summary>
