@@ -392,21 +392,37 @@ public class PdfExporter
         var content = new StringBuilder();
         // Render mode 3 = invisible
         content.Append("q BT 3 Tr\n");
+        // To keep the content stream small, we only set the font size when it changes, and position each word relative
+        // to the previous one (Td moves relative to the start of the previous Td, starting from the origin)
+        double? lastFontSize = null;
+        double lastX = 0, lastY = 0;
         foreach (var info in GetGlyphlessOcrTextToDraw(page, ocrResult))
         {
+            var fontSize = RoundPdfNumber(info.FontSize);
+            if (fontSize != lastFontSize)
+            {
+                content.Append($"{GlyphlessFont.ResourceName} {FormatPdfNumber(fontSize)} Tf ");
+                lastFontSize = fontSize;
+            }
+            // Use rounded positions so the rounding error doesn't accumulate across relative moves
+            var x = RoundPdfNumber(info.X);
+            var y = RoundPdfNumber(pageHeight - info.Y);
             content.Append(
-                $"{GlyphlessFont.ResourceName} {FormatPdfNumber(info.FontSize)} Tf " +
                 $"{FormatPdfNumber(100 * info.HorizontalScale)} Tz " +
-                $"1 0 0 1 {FormatPdfNumber(info.X)} {FormatPdfNumber(pageHeight - info.Y)} Tm " +
+                $"{FormatPdfNumber(x - lastX)} {FormatPdfNumber(y - lastY)} Td " +
                 $"{GlyphlessFont.EncodeText(info.Text)} Tj\n");
+            lastX = x;
+            lastY = y;
         }
         content.Append("ET Q\n");
-        var pdfContent = page.Contents.PrependContent();
-        pdfContent.CreateStream(Encoding.ASCII.GetBytes(content.ToString()));
+        page.Contents.PrependContent().CreateStream(Encoding.ASCII.GetBytes(content.ToString()));
     }
 
+    // 2 decimal places (1/100 pt) is far more precise than OCR bounds
+    private static double RoundPdfNumber(double value) => Math.Round(value, 2);
+
     private static string FormatPdfNumber(double value) =>
-        value.ToString("0.###", CultureInfo.InvariantCulture);
+        value.ToString("0.##", CultureInfo.InvariantCulture);
 
     private static IEnumerable<GlyphlessTextDrawInfo> GetGlyphlessOcrTextToDraw(PdfPage page, OcrResult ocrResult)
     {
