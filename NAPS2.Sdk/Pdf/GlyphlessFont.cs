@@ -49,13 +49,7 @@ internal static class GlyphlessFont
             }
         });
 
-        // Map every CID to glyph 1 (the rectangle). We avoid glyph 0 as PDF/A disallows referencing .notdef.
-        var cidToGidMapBytes = new byte[65536 * 2];
-        for (int i = 1; i < cidToGidMapBytes.Length; i += 2)
-        {
-            cidToGidMapBytes[i] = 1;
-        }
-        var cidToGidMap = AddStream(document, cidToGidMapBytes);
+        var cidToGidMap = AddStream(document, CreateCidToGidMap());
 
         var cidFont = AddObject(document, new PdfDictionary(document)
         {
@@ -96,10 +90,30 @@ internal static class GlyphlessFont
     }
 
     /// <summary>
+    /// Loads the font into a Pdfium document. Pdfium generates the font dictionaries itself (with equivalent values),
+    /// using the CIDToGIDMap and ToUnicode CMap we provide.
+    /// </summary>
+    public static Pdfium.PdfFont AddToPdfiumDocument(Pdfium.PdfDocument document)
+    {
+        return document.LoadCidType2Font(LoadFontProgram(), BuildToUnicodeCMap(), CreateCidToGidMap());
+    }
+
+    /// <summary>
     /// Encodes the text as a PDF hex string for use with the Tj operator. Each UTF-16 code unit is one character code.
     /// </summary>
     public static string EncodeText(string text) =>
         "<" + string.Concat(text.Select(c => ((int) c).ToString("X4"))) + ">";
+
+    private static byte[] CreateCidToGidMap()
+    {
+        // Map every CID to glyph 1 (the rectangle). We avoid glyph 0 as PDF/A disallows referencing .notdef.
+        var map = new byte[65536 * 2];
+        for (int i = 1; i < map.Length; i += 2)
+        {
+            map[i] = 1;
+        }
+        return map;
+    }
 
     private static string BuildToUnicodeCMap()
     {

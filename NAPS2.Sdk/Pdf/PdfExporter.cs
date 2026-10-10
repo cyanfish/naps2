@@ -14,7 +14,6 @@ using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using PdfDocument = PdfSharpCore.Pdf.PdfDocument;
 using PdfPage = PdfSharpCore.Pdf.PdfPage;
-using Alphabet = NAPS2.Pdf.PdfFontPicker.Alphabet;
 
 namespace NAPS2.Pdf;
 
@@ -170,8 +169,9 @@ public class PdfExporter
         {
             var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
             using var destDoc = Pdfium.PdfDocument.Load(stream, password);
-            using var fontSubsets =
-                new PdfiumFontSubsets(destDoc, passthroughPages.Select(state => state.OcrTask?.Result));
+            using var glyphlessFont = passthroughPages.Any(state => state.OcrTask?.Result != null)
+                ? GlyphlessFont.AddToPdfiumDocument(destDoc)
+                : null;
             foreach (var state in passthroughPages)
             {
                 destDoc.DeletePage(state.PageIndex);
@@ -188,7 +188,7 @@ public class PdfExporter
                 if (state.OcrTask?.Result != null)
                 {
                     using var page = destDoc.GetPage(state.PageIndex);
-                    DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, fontSubsets, state.OcrTask.Result);
+                    DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, glyphlessFont!, state.OcrTask.Result);
                 }
                 if (progress.IsCancellationRequested) return false;
             }
@@ -393,12 +393,9 @@ public class PdfExporter
         content.Append("q BT 3 Tr\n");
         foreach (var info in GetGlyphlessOcrTextToDraw(page, ocrResult))
         {
-            // As every glyph has the same width, we can use horizontal scaling (Tz) to make the text exactly fit the
-            // target width.
-            var naturalWidth = info.Text.Length * info.FontSize * GlyphlessFont.GlyphWidth / 1000.0;
-            var horizontalScale = 100 * info.Width / naturalWidth;
             content.Append(
-                $"{GlyphlessFont.ResourceName} {FormatPdfNumber(info.FontSize)} Tf {FormatPdfNumber(horizontalScale)} Tz " +
+                $"{GlyphlessFont.ResourceName} {FormatPdfNumber(info.FontSize)} Tf " +
+                $"{FormatPdfNumber(100 * info.HorizontalScale)} Tz " +
                 $"1 0 0 1 {FormatPdfNumber(info.X)} {FormatPdfNumber(pageHeight - info.Y)} Tm " +
                 $"{GlyphlessFont.EncodeText(info.Text)} Tj\n");
         }
@@ -464,98 +461,33 @@ public class PdfExporter
     }
 
     private static void DrawOcrTextOnPdfiumPage(PdfPage page, Pdfium.PdfDocument pdfiumDocument,
-        Pdfium.PdfPage pdfiumPage, PdfiumFontSubsets fontSubsets, OcrResult ocrResult)
+        Pdfium.PdfPage pdfiumPage, Pdfium.PdfFont glyphlessFont, OcrResult ocrResult)
     {
-        // Set the page measurements so the coordinates are scaled correctly in GetOcrTextToDraw
+        // Set the page measurements so the coordinates are scaled correctly in GetGlyphlessOcrTextToDraw
         page.Width = pdfiumPage.Width;
         page.Height = pdfiumPage.Height;
-        using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
-        foreach (var info in GetOcrTextToDraw(page, ocrResult, gfx))
+        foreach (var info in GetGlyphlessOcrTextToDraw(page, ocrResult))
         {
-            var textObj = pdfiumDocument.NewText(fontSubsets[info.FontFamily], info.FontSize);
-#if DEBUG && DEBUGOCR
-            textObj.FillColor = (0, 0, 255, 255);
-#else
+            var textObj = pdfiumDocument.NewText(glyphlessFont, (float) info.FontSize);
             textObj.TextRenderMode = TextRenderMode.Invisible;
-#endif
-            textObj.SetText(info.Text);
-            // The matrix alignment here is equivalent to the PDFSharp BaseLineLeft alignment
-            textObj.Matrix = new PdfMatrix(1, 0, 0, 1, info.X, (float) page.Height - info.Y);
+            // Each UTF-16 code unit is one character code
+            textObj.SetCharcodes(info.Text.Select(c => (uint) c).ToArray());
+            // Pdfium doesn't support setting the horizontal scaling (Tz), but scaling the text matrix is equivalent
+            textObj.Matrix = new PdfMatrix((float) info.HorizontalScale, 0, 0, 1, (float) info.X,
+                (float) (page.Height.Point - info.Y));
             pdfiumPage.InsertObject(textObj);
         }
         pdfiumPage.GenerateContent();
     }
 
-    // TODO: Remove this once the Pdfium path also uses the glyphless font
-    private static IEnumerable<TextDrawInfo> GetOcrTextToDraw(PdfPage page, OcrResult ocrResult, XGraphics gfx)
-    {
-        double hAdjust = page.Width / ocrResult.PageBounds.w;
-        double vAdjust = page.Height / ocrResult.PageBounds.h;
-        foreach (var line in ocrResult.Lines)
-        {
-            var lineFontFamily = PdfFontPicker.GetBestFont(line.LanguageCode);
-            var lineFontSize = line.FontSize;
-            // Chinese/Japanese/Korean languages don't need font size alignment as words are generally just 1 char
-            if (!IsCjk(line.LanguageCode))
-            {
-                // Only measure words with at least 3 characters to avoid noise
-                var eligibleWords = line.Children.Where(word => word.Text.Length >= 3).ToList();
-                if (eligibleWords.Count > 1)
-                {
-                    // In case Tesseract underestimated the font size, keep increasing it as long as all words are still
-                    // within their bounds.
-                    while (true)
-                    {
-                        var font = new XFont(lineFontFamily, lineFontSize + 1, XFontStyle.Regular);
-                        if (eligibleWords.All(
-                                word => gfx.MeasureString(word.Text, font).Width < word.Bounds.w * hAdjust))
-                        {
-                            lineFontSize++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-            for (int i = 0; i < line.Children.Count; i++)
-            {
-                var word = line.Children[i];
-                if (string.IsNullOrEmpty(word.Text)) continue;
-
-                bool hasNextWord = i + 1 < line.Children.Count;
-                var rightBound = hasNextWord ? line.Children[i + 1].Bounds.x : ocrResult.PageBounds.w;
-                var adjustedRightBound = rightBound * hAdjust;
-                var adjustedX = word.Bounds.x * hAdjust;
-                var adjustedY = word.Baseline * vAdjust;
-
-                // We make sure there's enough distance between this word and the next to fit a space (" "), so that
-                // when you Ctrl+A and Ctrl+C in a PDF file, the words don't blend together
-                var wordFontSize = ClampFontSizeByRightBound(word, lineFontSize, adjustedX, adjustedRightBound,
-                    hasNextWord, gfx);
-
-                // Special case to avoid accidentally recognizing big lines as dashes/underscores
-                if (wordFontSize > 100 && (word.Text == "-" || word.Text == "_")) continue;
-
-                yield return new TextDrawInfo(
-                    word.RightToLeft ? ReverseText(word.Text) : word.Text,
-                    lineFontFamily,
-                    wordFontSize,
-                    (int) Math.Round(adjustedX),
-                    (int) Math.Round(adjustedY));
-            }
-        }
-    }
-
     private static bool IsCjk(string langCode)
     {
-        var alphabet = PdfFontPicker.MapLanguageCodeToAlphabet(langCode);
+        var alphabet = OcrAlphabet.FromLanguageCode(langCode);
         return alphabet is
-            Alphabet.ChineseSimplified or
-            Alphabet.ChineseTraditional or
-            Alphabet.Japanese or
-            Alphabet.Korean;
+            OcrAlphabet.ChineseSimplified or
+            OcrAlphabet.ChineseTraditional or
+            OcrAlphabet.Japanese or
+            OcrAlphabet.Korean;
     }
 
     private static string ReverseText(string text)
@@ -620,38 +552,6 @@ public class PdfExporter
         return (realWidth, realHeight);
     }
 
-    private static int ClampFontSizeByRightBound(OcrResultElement element, int initialFontSize, double x,
-        double rightBound, bool includeSpace,
-        XGraphics gfx)
-    {
-        var fontSize = initialFontSize;
-        if (IsCjk(element.LanguageCode))
-        {
-            // No word separators so no need to ensure space between words
-            return fontSize;
-        }
-        if (rightBound < 0)
-        {
-            // No word to the right
-            return fontSize;
-        }
-        var fontFamily = PdfFontPicker.GetBestFont(element.LanguageCode);
-        while (fontSize > 2)
-        {
-            var spaceWidth = includeSpace
-                ? gfx.MeasureString(" ", new XFont(fontFamily, fontSize, XFontStyle.Regular)).Width
-                : 0;
-            var measuredBounds =
-                gfx.MeasureString(element.Text, new XFont(fontFamily, fontSize, XFontStyle.Regular));
-            if (measuredBounds.Width + x <= rightBound - spaceWidth)
-            {
-                break;
-            }
-            fontSize--;
-        }
-        return fontSize;
-    }
-
     private static bool IsPdfStorage(IImageStorage storage) => storage switch
     {
         ImageFileStorage fileStorage => Path.GetExtension(fileStorage.FullPath).ToLowerInvariant() == ".pdf",
@@ -659,9 +559,14 @@ public class PdfExporter
         _ => false
     };
 
-    private record TextDrawInfo(string Text, string FontFamily, int FontSize, int X, int Y);
-
-    private record GlyphlessTextDrawInfo(string Text, double FontSize, double X, double Y, double Width);
+    private record GlyphlessTextDrawInfo(string Text, double FontSize, double X, double Y, double Width)
+    {
+        /// <summary>
+        /// The horizontal scale factor (1 = unscaled) that makes the text exactly fit the target width. This works as
+        /// every glyph has the same width.
+        /// </summary>
+        public double HorizontalScale => Width / (Text.Length * FontSize * GlyphlessFont.GlyphWidth / 1000.0);
+    }
 
     private class PageExportState
     {

@@ -62,8 +62,22 @@ public class PdfATests : ContextualTests
         await PdfAsserts.AssertCompliant(profile, _path);
     }
 
-    // Note that we don't have a Pdfium OCR test as we fail compliance due to the way Pdfium embeds fonts, which isn't
-    // practical to fix.
+    [PlatformTheory(exclude: PlatformFlags.Mac)]
+    [MemberData(nameof(TestCases))]
+    public async Task ValidateWithPdfiumAndOcr(PdfCompat pdfCompat, string profile, int version)
+    {
+        SetUpFakeOcr(ifNoMatch: "hello world");
+        var images = await new PdfImporter(ScanningContext).Import(_importPath).ToListAsync();
+
+        await _pdfExporter.Export(_path, images, new PdfExportParams
+        {
+            Compat = pdfCompat
+        }, new OcrParams("eng"));
+
+        PdfAsserts.AssertContainsTextOnce("hello world", _path);
+        PdfAsserts.AssertVersion(version, _path);
+        await PdfAsserts.AssertCompliant(profile, _path);
+    }
 
     public static IEnumerable<object[]> TestCases =
     [

@@ -118,11 +118,17 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate IntPtr FPDFText_LoadFont_delegate(IntPtr document, byte[] data, int size, int font_type, bool cid);
 
+    public delegate IntPtr FPDFText_LoadCidType2Font_delegate(IntPtr document, byte[] font_data, uint font_data_size,
+        [MarshalAs(UnmanagedType.LPStr)]
+        string to_unicode_cmap, byte[] cid_to_gid_map_data, uint cid_to_gid_map_data_size);
+
     public delegate void FPDFFont_Close_delegate(IntPtr font);
 
     public delegate bool FPDFText_SetText_delegate(IntPtr text_object,
         [MarshalAs(UnmanagedType.LPWStr)]
         string text);
+
+    public delegate bool FPDFText_SetCharcodes_delegate(IntPtr text_object, uint[] charcodes, UIntPtr count);
 
     public delegate void FPDFPageObj_Destroy_delegate(IntPtr page_obj);
 
@@ -235,8 +241,11 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPageObj_NewTextObj_delegate FPDFPageObj_NewTextObj => Load<FPDFPageObj_NewTextObj_delegate>();
     public FPDFPageObj_CreateTextObj_delegate FPDFPageObj_CreateTextObj => Load<FPDFPageObj_CreateTextObj_delegate>();
     public FPDFText_LoadFont_delegate FPDFText_LoadFont => Load<FPDFText_LoadFont_delegate>();
+    public FPDFText_LoadCidType2Font_delegate FPDFText_LoadCidType2Font =>
+        Load<FPDFText_LoadCidType2Font_delegate>();
     public FPDFFont_Close_delegate FPDFFont_Close => Load<FPDFFont_Close_delegate>();
     public FPDFText_SetText_delegate FPDFText_SetText => Load<FPDFText_SetText_delegate>();
+    public FPDFText_SetCharcodes_delegate FPDFText_SetCharcodes => Load<FPDFText_SetCharcodes_delegate>();
     public FPDFPageObj_Destroy_delegate FPDFPageObj_Destroy => Load<FPDFPageObj_Destroy_delegate>();
     public FPDFPage_InsertObject_delegate FPDFPage_InsertObject => Load<FPDFPage_InsertObject_delegate>();
     public FPDFImageObj_SetBitmap_delegate FPDFImageObj_SetBitmap => Load<FPDFImageObj_SetBitmap_delegate>();

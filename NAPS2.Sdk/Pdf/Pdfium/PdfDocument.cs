@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
 
 namespace NAPS2.Pdf.Pdfium;
@@ -98,7 +98,7 @@ internal class PdfDocument : NativePdfiumObject
         return new PdfPageObject(Native.FPDFPageObj_NewTextObj(Handle, font, fontSize), this, null, true);
     }
 
-    public PdfPageObject NewText(PdfFont font, int fontSize)
+    public PdfPageObject NewText(PdfFont font, float fontSize)
     {
         return new PdfPageObject(Native.FPDFPageObj_CreateTextObj(Handle, font.Handle, fontSize), this, null, true);
     }
@@ -141,6 +141,17 @@ internal class PdfDocument : NativePdfiumObject
     {
         return new PdfFont(Native.FPDFText_LoadFont(Handle, data, data.Length, PdfiumNativeLibrary.FPDF_FONT_TRUETYPE,
             true));
+    }
+
+    public PdfFont LoadCidType2Font(byte[] fontData, string toUnicodeCMap, byte[] cidToGidMap)
+    {
+        var handle = Native.FPDFText_LoadCidType2Font(Handle, fontData, (uint) fontData.Length, toUnicodeCMap,
+            cidToGidMap, (uint) cidToGidMap.Length);
+        if (handle == IntPtr.Zero)
+        {
+            throw new Exception("Could not load font");
+        }
+        return new PdfFont(handle);
     }
 
     public void Save(string path)

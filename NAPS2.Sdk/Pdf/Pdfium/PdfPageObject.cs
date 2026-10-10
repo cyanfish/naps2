@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
 
 namespace NAPS2.Pdf.Pdfium;
@@ -122,6 +122,14 @@ internal class PdfPageObject : NativePdfiumObject
     public void SetText(string text)
     {
         if (!Native.FPDFText_SetText(Handle, text))
+        {
+            throw new Exception("Could not set text");
+        }
+    }
+
+    public void SetCharcodes(uint[] charcodes)
+    {
+        if (!Native.FPDFText_SetCharcodes(Handle, charcodes, (UIntPtr) charcodes.Length))
         {
             throw new Exception("Could not set text");
         }
