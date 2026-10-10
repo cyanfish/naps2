@@ -48,6 +48,8 @@ internal abstract class AbstractImageTransformer<TImage> where TImage : IMemoryI
                 return PerformTransform(image, colorBitDepthTransform);
             case CorrectionTransform correctionTransform:
                 return PerformTransform(image, correctionTransform);
+            case ResolutionTransform resolutionTransform:
+                return PerformTransform(image, resolutionTransform);
             default:
                 throw new ArgumentException($"Unsupported transform type: {transform.GetType().FullName}");
         }
@@ -246,6 +248,12 @@ internal abstract class AbstractImageTransformer<TImage> where TImage : IMemoryI
         var colorBitmap = image.CopyWithPixelFormat(ImagePixelFormat.RGB24);
         image.Dispose();
         return (TImage) colorBitmap;
+    }
+
+    protected virtual TImage PerformTransform(TImage image, ResolutionTransform transform)
+    {
+        image.SetResolution(transform.Dpi, transform.Dpi);
+        return image;
     }
 
     /// <summary>

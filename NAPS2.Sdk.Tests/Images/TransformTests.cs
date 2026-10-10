@@ -311,6 +311,20 @@ public class TransformTests : ContextualTests
     }
 
     [Fact]
+    public void Resolution()
+    {
+        var original = LoadImage(ImageResources.dog);
+        var expected = LoadImage(ImageResources.dog);
+
+        var transformed = original.PerformTransform(new ResolutionTransform(150));
+
+        Assert.Equal(150, transformed.HorizontalResolution);
+        Assert.Equal(150, transformed.VerticalResolution);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD, ignoreResolution: true);
+        AssertOwnership(original, transformed);
+    }
+
+    [Fact]
     public void Scale50PercentWithAlpha()
     {
         var original = LoadImage(ImageResources.dog_alpha);
