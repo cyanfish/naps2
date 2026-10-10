@@ -290,7 +290,11 @@ internal class WiaScanDriver : IScanDriver
                     {
                         _callback(image);
                     }
-                    _scanEvents.PageStart();
+                    if (_options.PaperSource != PaperSource.Flatbed)
+                    {
+                        // Feeder scans may have more pages, so signal the start of the next one
+                        _scanEvents.PageStart();
+                    }
                 }
                 catch (Exception e)
                 {
