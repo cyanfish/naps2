@@ -139,4 +139,49 @@ public class PageSizeTests
         var pageSize = new PageSize(21000m, 29700m, PageSizeUnit.Millimetre);
         Assert.Equal("21000x29700 mm", pageSize.ToString());
     }
+
+    [Fact]
+    public void Centimetres()
+    {
+        Assert.Equal(21.59m, PageSize.Letter.WidthInCm);
+        Assert.Equal(27.94m, PageSize.Letter.HeightInCm);
+        Assert.Equal(21m, PageSize.A4.WidthInCm);
+        Assert.Equal(29.7m, PageSize.A4.HeightInCm);
+        var cmSize = new PageSize(21m, 29.7m, PageSizeUnit.Centimetre);
+        Assert.Equal(21m, cmSize.WidthInCm);
+        Assert.Equal(29.7m, cmSize.HeightInCm);
+    }
+
+    [Fact]
+    public void ConvertInchesToMillimetres()
+    {
+        var pageSize = PageSize.Letter.ConvertTo(PageSizeUnit.Millimetre);
+        Assert.Equal(215.9m, pageSize.Width);
+        Assert.Equal(279.4m, pageSize.Height);
+        Assert.Equal(PageSizeUnit.Millimetre, pageSize.Unit);
+    }
+
+    [Fact]
+    public void ConvertMillimetresToCentimetres()
+    {
+        var pageSize = PageSize.A4.ConvertTo(PageSizeUnit.Centimetre);
+        Assert.Equal(21m, pageSize.Width);
+        Assert.Equal(29.7m, pageSize.Height);
+        Assert.Equal(PageSizeUnit.Centimetre, pageSize.Unit);
+    }
+
+    [Fact]
+    public void ConvertMillimetresToInches()
+    {
+        var pageSize = PageSize.A4.ConvertTo(PageSizeUnit.Inch);
+        Assert.Equal(8.27m, Math.Round(pageSize.Width, 2));
+        Assert.Equal(11.69m, Math.Round(pageSize.Height, 2));
+        Assert.Equal(PageSizeUnit.Inch, pageSize.Unit);
+    }
+
+    [Fact]
+    public void ConvertToSameUnit()
+    {
+        Assert.Equal(PageSize.A4, PageSize.A4.ConvertTo(PageSizeUnit.Millimetre));
+    }
 }

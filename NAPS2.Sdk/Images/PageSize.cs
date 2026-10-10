@@ -129,6 +129,24 @@ public record PageSize
         }
     }
 
+    public decimal WidthInCm
+    {
+        get
+        {
+            switch (Unit)
+            {
+                case PageSizeUnit.Inch:
+                    return Width * 2.54m;
+                case PageSizeUnit.Centimetre:
+                    return Width;
+                case PageSizeUnit.Millimetre:
+                    return Width / 10;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+    }
+
     public int WidthInThousandthsOfAnInch => (int)(WidthInInches * 1000);
 
     public decimal HeightInMm
@@ -167,7 +185,43 @@ public record PageSize
         }
     }
 
+    public decimal HeightInCm
+    {
+        get
+        {
+            switch (Unit)
+            {
+                case PageSizeUnit.Inch:
+                    return Height * 2.54m;
+                case PageSizeUnit.Centimetre:
+                    return Height;
+                case PageSizeUnit.Millimetre:
+                    return Height / 10;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+    }
+
     public int HeightInThousandthsOfAnInch => (int)(HeightInInches * 1000);
+
+    /// <summary>
+    /// Gets the same page size expressed in the specified unit.
+    /// </summary>
+    public PageSize ConvertTo(PageSizeUnit unit)
+    {
+        switch (unit)
+        {
+            case PageSizeUnit.Inch:
+                return new PageSize(WidthInInches, HeightInInches, unit);
+            case PageSizeUnit.Centimetre:
+                return new PageSize(WidthInCm, HeightInCm, unit);
+            case PageSizeUnit.Millimetre:
+                return new PageSize(WidthInMm, HeightInMm, unit);
+            default:
+                throw new ArgumentException();
+        }
+    }
 
     public override string ToString()
     {
