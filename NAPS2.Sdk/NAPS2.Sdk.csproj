@@ -88,6 +88,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Pdf\GlyphlessFont.ttf" LogicalName="NAPS2.Pdf.GlyphlessFont.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
 
     <EmbeddedResource Remove="Lang\Resources\SdkResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\SdkResources.fr.resx" Condition="'$(Configuration)' == 'Debug'" />

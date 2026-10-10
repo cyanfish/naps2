@@ -77,20 +77,37 @@ public class ContextualTests : IDisposable
         ScanningContext.OcrEngine = TesseractOcrEngine.CustomWithModes(tesseractPath, FolderPath);
     }
 
-    public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage = null, string ifNoMatch = null, int delay = 200)
+    public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage = null, string ifNoMatch = null, int delay = 200,
+        bool splitWords = false)
     {
         var ocrMock = Substitute.For<IOcrEngine>();
         ocrMock.ProcessImage(ScanningContext, Arg.Any<string>(), Arg.Any<OcrParams>(), Arg.Any<CancellationToken>())
             .Returns(
                 async x =>
                 {
-                    var path = (string) x[1];
-                    var ocrParams = (OcrParams) x[2];
+                    var path = (string) x[1]!;
+                    var ocrParams = (OcrParams) x[2]!;
                     var ocrImage = ImageContext.Load(path);
                     await Task.Delay(delay);
 
                     OcrResult CreateOcrResult(string text)
                     {
+                        if (splitWords)
+                        {
+                            var words = new List<OcrResultElement>();
+                            int x = 10;
+                            foreach (var wordText in text.Split(' '))
+                            {
+                                // Width proportional to the word length, with a gap between words
+                                int w = wordText.Length * 2;
+                                words.Add(new OcrResultElement(wordText, ocrParams.LanguageCode!, false,
+                                    (x, 10, w, 10), 20, 10, ImmutableList<OcrResultElement>.Empty));
+                                x += w + 2;
+                            }
+                            var splitLine = new OcrResultElement(text, ocrParams.LanguageCode!, false,
+                                (10, 10, x - 12, 10), 20, 10, words.ToImmutableList());
+                            return new((0, 0, 100, 100), words.ToImmutableList(), ImmutableList.Create(splitLine));
+                        }
                         var word = new OcrResultElement(text, ocrParams.LanguageCode!, false,
                             (10, 10, 10, 10), 20, 10, ImmutableList<OcrResultElement>.Empty);
                         var line = new OcrResultElement(text, ocrParams.LanguageCode!, false,

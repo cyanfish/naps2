@@ -67,7 +67,7 @@ public static class PdfAsserts
             int startIndex = 0;
             int index;
             var normalized = Regex.Replace(pageText, "\\s+", " ");
-            while ((index = normalized.IndexOf(text, startIndex, StringComparison.InvariantCulture)) != -1)
+            while ((index = normalized.IndexOf(text, startIndex, StringComparison.Ordinal)) != -1)
             {
                 count++;
                 startIndex = index + 1;

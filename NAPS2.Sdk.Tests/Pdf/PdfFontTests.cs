@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
@@ -79,6 +79,42 @@ public class PdfFontTests : ContextualTests
         // Rough verification that a font subset is used instead of embedding the whole font
         // TODO: It seems like Pdfium fonts are bigger than PdfSharp - maybe not compressed? Can we improve that?
         Assert.InRange(new FileInfo(_exportPath).Length, 1, 700_000);
+    }
+
+    [Fact]
+    public async Task ExportSeparateWordsWithPdfSharp()
+    {
+        SetUpFakeOcr(ifNoMatch: "Hello world", delay: 0, splitWords: true);
+
+        using var image = CreateScannedImage();
+        await _exporter.Export(_exportPath, [image], ocrParams: new OcrParams("eng"));
+
+        PdfAsserts.AssertContainsTextOnce("Hello world", _exportPath);
+    }
+
+    [Fact]
+    public async Task ExportCjkWordsWithPdfSharp()
+    {
+        SetUpFakeOcr(ifNoMatch: "你 好 世 界", delay: 0, splitWords: true);
+
+        using var image = CreateScannedImage();
+        await _exporter.Export(_exportPath, [image], ocrParams: new OcrParams("chi_sim"));
+
+        // No spaces should be added between CJK words
+        PdfAsserts.AssertContainsTextOnce("你好世界", _exportPath);
+    }
+
+    [Fact]
+    public async Task ExportNonBmpWithPdfSharp()
+    {
+        // CJK Unified Ideographs Extension B, which need surrogate pairs in UTF-16
+        var text = "\U00020000\U00020001";
+        SetUpFakeOcr(ifNoMatch: text, delay: 0);
+
+        using var image = CreateScannedImage();
+        await _exporter.Export(_exportPath, [image], ocrParams: new OcrParams("chi_sim"));
+
+        PdfAsserts.AssertContainsTextOnce(text, _exportPath);
     }
 
     public static IEnumerable<object[]> AlphabetTestCases =

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Images.Bitwise;
@@ -8,6 +9,7 @@ using NAPS2.Pdf.Pdfium;
 using NAPS2.Scan;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
+using PdfSharpCore.Pdf.Advanced;
 using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using PdfDocument = PdfSharpCore.Pdf.PdfDocument;
@@ -64,6 +66,8 @@ public class PdfExporter
 
             exportParams ??= new PdfExportParams();
             var document = InitializeDocument(exportParams);
+            // The OCR text font is only added to the document if it's used
+            var glyphlessFont = new Lazy<PdfReference>(() => GlyphlessFont.AddToDocument(document));
 
             // TODO: Consider storing text from imported image-based pages in PostProcessingData so it can be saved even
             // when not exporting with OCR (assuming no transforms).
@@ -88,8 +92,8 @@ public class PdfExporter
                 foreach (var image in images)
                 {
                     var pageState = new PageExportState(
-                        image, pageIndex++, document, document.AddPage(), ocrEngine, ocrParams, IncrementProgress,
-                        progress.CancelToken, exportParams.Compat);
+                        image, pageIndex++, document, document.AddPage(), glyphlessFont, ocrEngine, ocrParams,
+                        IncrementProgress, progress.CancelToken, exportParams.Compat);
                     // TODO: To improve our ability to passthrough, we could consider using Pdfium to apply the transform to
                     // the underlying PDF file. For example, doing color shifting on individual text + image objects, or
                     // applying matrix changes.
@@ -271,7 +275,7 @@ public class PdfExporter
             DrawImageOnPage(state.Page, state.Embedder, state.Image.Metadata.PageSize, exportFormat, state.Compat);
             if (state.OcrTask?.Result != null)
             {
-                DrawOcrTextOnPage(state.Page, state.OcrTask.Result);
+                DrawOcrTextOnPage(state.Page, state.OcrTask.Result, state.GlyphlessFont.Value);
             }
         }
         state.IncrementProgress();
@@ -287,14 +291,12 @@ public class PdfExporter
         document.Info.ModificationDate = now;
         if (compat == PdfCompat.PdfA1B)
         {
-            PdfAHelper.SetCidStream(document);
             PdfAHelper.DisableTransparency(document);
         }
 
         if (compat != PdfCompat.Default)
         {
             PdfAHelper.SetColorProfile(document);
-            PdfAHelper.SetCidMap(document);
             PdfAHelper.CreateXmpMetadata(document, compat, producer);
         }
 
@@ -380,23 +382,84 @@ public class PdfExporter
         return state;
     }
 
-    private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult)
+    private static void DrawOcrTextOnPage(PdfPage page, OcrResult ocrResult, PdfReference glyphlessFont)
     {
-#if DEBUG && DEBUGOCR
-        using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Append);
-#else
-        using XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
-#endif
-        foreach (var info in GetOcrTextToDraw(page, ocrResult, gfx))
+        var fonts = (PdfDictionary) page.Resources.Elements.GetValue("/Font", VCF.Create);
+        fonts.Elements[GlyphlessFont.ResourceName] = glyphlessFont;
+
+        var pageHeight = page.Height.Point;
+        var content = new StringBuilder();
+        // Render mode 3 = invisible
+        content.Append("q BT 3 Tr\n");
+        foreach (var info in GetGlyphlessOcrTextToDraw(page, ocrResult))
         {
-            var font = new XFont(info.FontFamily, info.FontSize, XFontStyle.Regular,
-                new XPdfFontOptions(PdfFontEncoding.Unicode));
-#if DEBUG && DEBUGOCR
-            gfx.DrawRectangle(new XPen(XColor.FromArgb(255, 0, 0)), info.Bounds);
-            gfx.DrawString(info.Text, font, XBrushes.Blue, info.X, info.Y, XStringFormats.BaseLineLeft);
-#else
-            gfx.DrawString(info.Text, font, XBrushes.Transparent, info.X, info.Y, XStringFormats.BaseLineLeft);
-#endif
+            // As every glyph has the same width, we can use horizontal scaling (Tz) to make the text exactly fit the
+            // target width.
+            var naturalWidth = info.Text.Length * info.FontSize * GlyphlessFont.GlyphWidth / 1000.0;
+            var horizontalScale = 100 * info.Width / naturalWidth;
+            content.Append(
+                $"{GlyphlessFont.ResourceName} {FormatPdfNumber(info.FontSize)} Tf {FormatPdfNumber(horizontalScale)} Tz " +
+                $"1 0 0 1 {FormatPdfNumber(info.X)} {FormatPdfNumber(pageHeight - info.Y)} Tm " +
+                $"{GlyphlessFont.EncodeText(info.Text)} Tj\n");
+        }
+        content.Append("ET Q\n");
+        var pdfContent = page.Contents.PrependContent();
+        pdfContent.CreateStream(Encoding.ASCII.GetBytes(content.ToString()));
+    }
+
+    private static string FormatPdfNumber(double value) =>
+        value.ToString("0.###", CultureInfo.InvariantCulture);
+
+    private static IEnumerable<GlyphlessTextDrawInfo> GetGlyphlessOcrTextToDraw(PdfPage page, OcrResult ocrResult)
+    {
+        double hAdjust = page.Width.Point / ocrResult.PageBounds.w;
+        double vAdjust = page.Height.Point / ocrResult.PageBounds.h;
+        foreach (var line in ocrResult.Lines)
+        {
+            // The glyphless font's glyph goes from the baseline up to 1 em, so sizing the font to the distance from the
+            // baseline to the top of the line makes text selection cover the line above the baseline
+            var fontSize = (line.Baseline - line.Bounds.y) * vAdjust;
+            if (fontSize <= 0)
+            {
+                fontSize = line.Bounds.h * vAdjust;
+            }
+            if (fontSize <= 0) continue;
+            // Chinese/Japanese/Korean languages don't use spaces between words
+            var useSpaces = !IsCjk(line.LanguageCode);
+            foreach (var word in line.Children)
+            {
+                if (string.IsNullOrEmpty(word.Text)) continue;
+                // Special case to avoid accidentally recognizing big lines as dashes/underscores
+                if (line.FontSize > 100 && word.Text is "-" or "_") continue;
+
+                var text = word.RightToLeft ? ReverseText(word.Text) : word.Text;
+                var x = word.Bounds.x * hAdjust;
+                var width = word.Bounds.w * hAdjust;
+                // Add a trailing space so that when you Ctrl+A and Ctrl+C in a PDF file, the words (and lines) don't
+                // blend together
+                var rightWordX = line.Children
+                    .Where(other => other.Bounds.x > word.Bounds.x)
+                    .Select(other => (int?) other.Bounds.x)
+                    .Min();
+                if (rightWordX != null)
+                {
+                    // Extend the text (including the space) up to the next word
+                    width = rightWordX.Value * hAdjust - x;
+                    if (useSpaces)
+                    {
+                        text += " ";
+                    }
+                }
+                else if (useSpaces)
+                {
+                    // At the end of the line, the space extends past the word at the same horizontal scale
+                    width *= (text.Length + 1) / (double) text.Length;
+                    text += " ";
+                }
+                if (width <= 0) continue;
+
+                yield return new GlyphlessTextDrawInfo(text, fontSize, x, word.Baseline * vAdjust, width);
+            }
         }
     }
 
@@ -423,6 +486,7 @@ public class PdfExporter
         pdfiumPage.GenerateContent();
     }
 
+    // TODO: Remove this once the Pdfium path also uses the glyphless font
     private static IEnumerable<TextDrawInfo> GetOcrTextToDraw(PdfPage page, OcrResult ocrResult, XGraphics gfx)
     {
         double hAdjust = page.Width / ocrResult.PageBounds.w;
@@ -597,16 +661,19 @@ public class PdfExporter
 
     private record TextDrawInfo(string Text, string FontFamily, int FontSize, int X, int Y);
 
+    private record GlyphlessTextDrawInfo(string Text, double FontSize, double X, double Y, double Width);
+
     private class PageExportState
     {
         public PageExportState(ProcessedImage image, int pageIndex, PdfDocument document, PdfPage page,
-            IOcrEngine? ocrEngine, OcrParams? ocrParams, Action incrementProgress, CancellationToken cancelToken,
+            Lazy<PdfReference> glyphlessFont, IOcrEngine? ocrEngine, OcrParams? ocrParams, Action incrementProgress, CancellationToken cancelToken,
             PdfCompat compat)
         {
             Image = image;
             PageIndex = pageIndex;
             Document = document;
             Page = page;
+            GlyphlessFont = glyphlessFont;
             OcrEngine = ocrEngine;
             OcrParams = ocrParams;
             IncrementProgress = incrementProgress;
@@ -619,6 +686,7 @@ public class PdfExporter
 
         public PdfDocument Document { get; }
         public PdfPage Page { get; set; }
+        public Lazy<PdfReference> GlyphlessFont { get; }
         public IOcrEngine? OcrEngine { get; }
         public OcrParams? OcrParams { get; }
         public Action IncrementProgress { get; }

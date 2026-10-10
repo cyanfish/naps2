@@ -18,7 +18,9 @@ internal class PdfText : NativePdfiumObject
         var sb = new StringBuilder();
         for (int i = 0; i < charCount; i++)
         {
-            string str = char.ConvertFromUtf32(ReadUtf32(i));
+            int value = ReadUtf32(i);
+            // Characters outside the BMP may be returned as separate UTF-16 surrogates
+            string str = value is >= 0xD800 and <= 0xDFFF ? ((char) value).ToString() : char.ConvertFromUtf32(value);
             // Exclude control characters apart from whitespace
             if (str.Length != 1 || !char.IsControl(str[0]) || char.IsWhiteSpace(str[0]))
             {
