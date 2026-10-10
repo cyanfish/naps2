@@ -89,6 +89,13 @@ public class CompressForm : UnaryImageFormBase
             _ => ScanBitDepth.C24Bit
         };
         Revert();
+        // If the image is a well-known paper size (in either orientation), show the size in that paper's unit (e.g. mm
+        // for A4), otherwise use the unit of the system's default paper size
+        var unitSize = PageSize.FindWellKnownSize(_size.Width, _size.Height, _size.Unit) ??
+                       PageSize.FindWellKnownSize(_size.Height, _size.Width, _size.Unit) ??
+                       PageSize.SystemDefault;
+        _unit.SelectedItem = (LocalizedPageSizeUnit) unitSize.Unit;
+        UpdateFields();
     }
 
     protected override LayoutElement CreateControls()
