@@ -328,6 +328,7 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.BlackWhite)
                 .Append(Commands.Sharpen)
                 .Append(Commands.DocumentCorrection)
+                .Append(Commands.Compress)
                 .Separator()
                 .Append(Commands.Split)
                 .Append(Commands.Combine)

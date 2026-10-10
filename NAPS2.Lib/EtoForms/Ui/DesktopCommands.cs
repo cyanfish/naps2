@@ -173,6 +173,11 @@ public class DesktopCommands
             Text = UiStrings.DocumentCorrection,
             IconName = "document_small"
         };
+        Compress = new ActionCommand(desktopSubFormController.ShowCompressForm)
+        {
+            Text = UiStrings.Compress,
+            IconName = "spring_small"
+        };
         Split = new ActionCommand(desktopSubFormController.ShowSplitForm)
         {
             Text = UiStrings.Split,
@@ -406,6 +411,7 @@ public class DesktopCommands
     public ActionCommand BlackWhite { get; set; }
     public ActionCommand Sharpen { get; set; }
     public ActionCommand DocumentCorrection { get; set; }
+    public ActionCommand Compress { get; set; }
     public ActionCommand Split { get; set; }
     public ActionCommand Combine { get; set; }
     public ActionCommand EditWithApp { get; set; }

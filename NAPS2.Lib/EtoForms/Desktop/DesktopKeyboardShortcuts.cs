@@ -55,6 +55,7 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.ImageSaturation, commands.HueSat);
         _ksm.Assign(ks.ImageSharpen, commands.Sharpen);
         _ksm.Assign(ks.ImageDocumentCorrection, commands.DocumentCorrection);
+        _ksm.Assign(ks.ImageCompress, commands.Compress);
         _ksm.Assign(ks.ImageSplit, commands.Split);
         _ksm.Assign(ks.ImageCombine, commands.Combine);
         _ksm.Assign(ks.ImageEditWith, commands.EditWithApp);

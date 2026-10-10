@@ -355,6 +355,7 @@ public class PreviewForm : EtoDialogBase
         _previewKsm.Assign(ks.ImageSaturation, Commands.HueSat);
         _previewKsm.Assign(ks.ImageSharpen, Commands.Sharpen);
         _previewKsm.Assign(ks.ImageDocumentCorrection, Commands.DocumentCorrection);
+        _previewKsm.Assign(ks.ImageCompress, Commands.Compress);
         _previewKsm.Assign(ks.ImageSplit, Commands.Split);
         _previewKsm.Assign(ks.ImageCombine, Commands.Combine);
         _previewKsm.Assign(ks.ImageEditWith, Commands.EditWithApp);

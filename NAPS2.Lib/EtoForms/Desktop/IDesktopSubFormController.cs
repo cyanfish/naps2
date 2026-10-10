@@ -8,6 +8,7 @@ public interface IDesktopSubFormController
     void ShowHueSaturationForm();
     void ShowBlackWhiteForm();
     void ShowSharpenForm();
+    void ShowCompressForm();
     void ShowSplitForm();
     void ShowCombineForm();
     void ShowRotateForm();

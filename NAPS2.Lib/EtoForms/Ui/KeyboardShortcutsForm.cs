@@ -53,6 +53,7 @@ public class KeyboardShortcutsForm : EtoDialogBase
         new(UiStrings.HueSaturation, c => c.KeyboardShortcuts.ImageHue),
         new(UiStrings.Sharpen, c => c.KeyboardShortcuts.ImageSharpen),
         new(UiStrings.DocumentCorrection, c => c.KeyboardShortcuts.ImageDocumentCorrection),
+        new(UiStrings.Compress, c => c.KeyboardShortcuts.ImageCompress),
         new(UiStrings.Split, c => c.KeyboardShortcuts.ImageSplit),
         new(UiStrings.Combine, c => c.KeyboardShortcuts.ImageCombine),
         new(UiStrings.EditWith, c => c.KeyboardShortcuts.ImageEditWith),

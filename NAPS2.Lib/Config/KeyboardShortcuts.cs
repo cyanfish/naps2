@@ -49,6 +49,7 @@ public class KeyboardShortcuts
     public string? ImageSaturation { get; set; }
     public string? ImageSharpen { get; set; }
     public string? ImageDocumentCorrection { get; set; }
+    public string? ImageCompress { get; set; }
     public string? ImageSplit { get; set; }
     public string? ImageCombine { get; set; }
     public string? ImageEditWith { get; set; }

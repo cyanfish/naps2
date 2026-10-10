@@ -184,6 +184,7 @@ public static class InternalDefaults
                 ImageSaturation = "",
                 ImageSharpen = "",
                 ImageDocumentCorrection = "",
+                ImageCompress = "",
                 ImageSplit = "",
                 ImageCombine = "",
                 ImageEditWith = "",
