@@ -1,12 +1,13 @@
 using System.Globalization;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
+using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
 public class ResolutionForm : EtoDialogBase
 {
-    private readonly NumericMaskedTextBox<int> _dpiTextbox = new();
+    private readonly UndoableNumericMaskedTextBox<int> _dpiTextbox = new();
 
     public ResolutionForm(Naps2Config config)
         : base(config)

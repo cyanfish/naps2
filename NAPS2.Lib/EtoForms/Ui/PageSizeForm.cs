@@ -10,8 +10,8 @@ namespace NAPS2.EtoForms.Ui;
 public class PageSizeForm : EtoDialogBase
 {
     private readonly ComboBox _name = new();
-    private readonly NumericMaskedTextBox<decimal> _width = new();
-    private readonly NumericMaskedTextBox<decimal> _height = new();
+    private readonly UndoableNumericMaskedTextBox<decimal> _width = new();
+    private readonly UndoableNumericMaskedTextBox<decimal> _height = new();
     private readonly EnumDropDownWidget<LocalizedPageSizeUnit> _unit = new();
 
     private PageDimensions? _initialDimens;

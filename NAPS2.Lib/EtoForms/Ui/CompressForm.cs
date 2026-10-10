@@ -12,12 +12,12 @@ public class CompressForm : UnaryImageFormBase
 {
     private const float DEFAULT_DPI = 96;
 
-    private readonly NumericMaskedTextBox<decimal> _dpi = new();
-    private readonly NumericMaskedTextBox<decimal> _width = new();
-    private readonly NumericMaskedTextBox<decimal> _height = new();
+    private readonly UndoableNumericMaskedTextBox<decimal> _dpi = new();
+    private readonly UndoableNumericMaskedTextBox<decimal> _width = new();
+    private readonly UndoableNumericMaskedTextBox<decimal> _height = new();
     private readonly EnumDropDownWidget<LocalizedPageSizeUnit> _unit = new();
-    private readonly NumericMaskedTextBox<int> _pixelWidth = new();
-    private readonly NumericMaskedTextBox<int> _pixelHeight = new();
+    private readonly UndoableNumericMaskedTextBox<int> _pixelWidth = new();
+    private readonly UndoableNumericMaskedTextBox<int> _pixelHeight = new();
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
 
     private float _originalDpi;

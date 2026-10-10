@@ -34,8 +34,8 @@ public class BatchScanForm : EtoDialogBase
     private readonly RadioButton _multipleScansPrompt;
     private readonly RadioButton _multipleScansDelay;
     private readonly LayoutVisibility _delayVis = new(false);
-    private readonly NumericMaskedTextBox<int> _numberOfScans = new();
-    private readonly NumericMaskedTextBox<decimal> _timeBetweenScans = new();
+    private readonly UndoableNumericMaskedTextBox<int> _numberOfScans = new();
+    private readonly UndoableNumericMaskedTextBox<decimal> _timeBetweenScans = new();
     private readonly RadioButton _load;
     private readonly RadioButton _saveToSingleFile;
     private readonly RadioButton _saveToMultipleFiles;

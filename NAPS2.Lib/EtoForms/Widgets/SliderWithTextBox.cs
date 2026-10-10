@@ -24,8 +24,8 @@ public class SliderWithTextBox
     {
         _constraints = constraints;
         _textBox = constraints.IsInteger
-            ? new NumericMaskedTextBox<int>()
-            : new NumericMaskedTextBox<double>();
+            ? new UndoableNumericMaskedTextBox<int>()
+            : new UndoableNumericMaskedTextBox<double>();
         _slider.MinValue = constraints.SliderMinValue;
         _slider.MaxValue = constraints.SliderMaxValue;
         _slider.TickFrequency = constraints.SliderTickFrequency;
