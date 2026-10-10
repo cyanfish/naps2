@@ -1658,7 +1658,27 @@ namespace NAPS2 {
                 return ((byte[])(obj));
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] spring {
+            get {
+                object obj = ResourceManager.GetObject("spring", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] spring_small {
+            get {
+                object obj = ResourceManager.GetObject("spring_small", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>

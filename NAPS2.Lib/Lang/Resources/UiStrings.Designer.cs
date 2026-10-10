@@ -1910,5 +1910,29 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("OptionKey", resourceCulture);
             }
         }
+
+        internal static string Compress {
+            get {
+                return ResourceManager.GetString("Compress", resourceCulture);
+            }
+        }
+
+        internal static string ResolutionDpiLabel {
+            get {
+                return ResourceManager.GetString("ResolutionDpiLabel", resourceCulture);
+            }
+        }
+
+        internal static string DimensionsLabel {
+            get {
+                return ResourceManager.GetString("DimensionsLabel", resourceCulture);
+            }
+        }
+
+        internal static string PixelDimensionsLabel {
+            get {
+                return ResourceManager.GetString("PixelDimensionsLabel", resourceCulture);
+            }
+        }
     }
 }

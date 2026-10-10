@@ -83,6 +83,7 @@ public abstract class UnaryImageFormBase(
         WorkingImage = imageToRender.Render();
         RealImageWidth = WorkingImage.Width;
         RealImageHeight = WorkingImage.Height;
+        OnFullSizeImageRendered(WorkingImage);
 
         if (CanScaleWorkingImage)
         {
@@ -97,6 +98,13 @@ public abstract class UnaryImageFormBase(
         }
 
         DisplayImage = WorkingImage.Clone();
+    }
+
+    /// <summary>
+    /// Called with the full-size rendered image, before it may be scaled down for display.
+    /// </summary>
+    protected virtual void OnFullSizeImageRendered(IMemoryImage realImage)
+    {
     }
 
     protected override void Apply()

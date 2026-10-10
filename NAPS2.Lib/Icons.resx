@@ -601,6 +601,12 @@
   <data name="split_hor_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split_hor-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="spring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\spring.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="spring_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\spring-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="combine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

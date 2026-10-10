@@ -1071,4 +1071,16 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="OptionKey" xml:space="preserve">
     <value>⌥</value>
   </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="ResolutionDpiLabel" xml:space="preserve">
+    <value>Resolution (dpi):</value>
+  </data>
+  <data name="DimensionsLabel" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="PixelDimensionsLabel" xml:space="preserve">
+    <value>Pixel dimensions:</value>
+  </data>
 </root>
