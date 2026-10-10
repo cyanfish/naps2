@@ -58,6 +58,12 @@ internal interface ISystemCompat
 
     bool IsLibUsbReliable { get; }
 
+    /// <summary>
+    /// The default paper size for the user's system (e.g. Letter in the US, A4 in most other places), or null if it
+    /// can't be determined or isn't a well-known size.
+    /// </summary>
+    PageSize? SystemDefaultPageSize { get; }
+
     IntPtr LoadLibrary(string path);
 
     IntPtr LoadSymbol(IntPtr libraryHandle, string symbol);

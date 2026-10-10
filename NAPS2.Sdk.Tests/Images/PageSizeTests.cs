@@ -1,3 +1,4 @@
+using System.Globalization;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
@@ -183,5 +184,41 @@ public class PageSizeTests
     public void ConvertToSameUnit()
     {
         Assert.Equal(PageSize.A4, PageSize.A4.ConvertTo(PageSizeUnit.Millimetre));
+    }
+
+    [Theory]
+    [InlineData("210", "297", PageSizeUnit.Millimetre, "210x297 mm")] // A4 exactly
+    [InlineData("216", "279", PageSizeUnit.Millimetre, "8.5x11 in")] // Letter as rounded mm (e.g. from glibc)
+    [InlineData("209.9", "297", PageSizeUnit.Millimetre, "210x297 mm")] // A4 from points (595 x 842 pt)
+    [InlineData("216", "356", PageSizeUnit.Millimetre, "8.5x14 in")] // Legal as rounded mm
+    [InlineData("8.5", "11", PageSizeUnit.Inch, "8.5x11 in")] // Letter exactly
+    [InlineData("8.27", "11.69", PageSizeUnit.Inch, "210x297 mm")] // A4 as rounded inches
+    [InlineData("21", "29.7", PageSizeUnit.Centimetre, "210x297 mm")] // A4 in cm
+    public void FindWellKnownSize(string width, string height, PageSizeUnit unit, string expected)
+    {
+        var pageSize = PageSize.FindWellKnownSize(decimal.Parse(width, CultureInfo.InvariantCulture),
+            decimal.Parse(height, CultureInfo.InvariantCulture), unit);
+        Assert.Equal(expected, pageSize?.ToString());
+    }
+
+    [Theory]
+    [InlineData("100", "150", PageSizeUnit.Millimetre)]
+    [InlineData("297", "210", PageSizeUnit.Millimetre)] // A4 landscape
+    [InlineData("4", "6", PageSizeUnit.Inch)]
+    public void FindWellKnownSizeNoMatch(string width, string height, PageSizeUnit unit)
+    {
+        Assert.Null(PageSize.FindWellKnownSize(decimal.Parse(width, CultureInfo.InvariantCulture),
+            decimal.Parse(height, CultureInfo.InvariantCulture), unit));
+    }
+
+    [Fact]
+    public void SystemDefaultPageSize()
+    {
+        // The actual value depends on the system's settings, but if present it should be a well-known size
+        var pageSize = PageSize.SystemDefault;
+        Assert.Contains(pageSize, new[]
+        {
+            PageSize.Letter, PageSize.Legal, PageSize.A5, PageSize.A4, PageSize.A3, PageSize.B5, PageSize.B4
+        });
     }
 }

@@ -17,6 +17,15 @@ internal static class LinuxInterop
     public static extern int setenv(string name, string value, int overwrite);
 
     [DllImport("libc.so.6")]
+    public static extern IntPtr newlocale(int categoryMask, string locale, IntPtr baseLocale);
+
+    [DllImport("libc.so.6")]
+    public static extern IntPtr nl_langinfo_l(int item, IntPtr locale);
+
+    [DllImport("libc.so.6")]
+    public static extern void freelocale(IntPtr locale);
+
+    [DllImport("libc.so.6")]
     public static extern int readlink(string path, byte[] buffer, int bufferSize);
     
     [DllImport("libc.so.6")]

@@ -29,6 +29,9 @@ internal static class Win32
     public static extern bool ShowWindow(IntPtr hWnd, ShowWindowCommands nCmdShow);
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    public static extern int GetLocaleInfoEx(string? lpLocaleName, uint lcType, out int lpLcData, int cchData);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     public static extern IntPtr AddDllDirectory(string directory);
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]

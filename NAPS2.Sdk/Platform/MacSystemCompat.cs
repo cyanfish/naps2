@@ -79,6 +79,33 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool IsLibUsbReliable => false;
 
+    public PageSize? SystemDefaultPageSize
+    {
+        get
+        {
+#if MAC
+            try
+            {
+                // The "Default paper size" from the system's printer settings, which is based on the region by default
+                var size = AppKit.NSPrintInfo.SharedPrintInfo.PaperSize;
+                double widthPoints = size.Width, heightPoints = size.Height;
+                if (widthPoints > 0 && heightPoints > 0)
+                {
+                    // There are 72 points per inch
+                    return PageSize.FindWellKnownSize((decimal) (widthPoints / 72), (decimal) (heightPoints / 72),
+                        PageSizeUnit.Inch);
+                }
+            }
+            catch (Exception)
+            {
+                // Ignore
+            }
+#endif
+            // Without AppKit (e.g. a non-macOS-specific build of the SDK) there's no simple way to query this
+            return null;
+        }
+    }
+
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => MacInterop.dlsym(libraryHandle, symbol);

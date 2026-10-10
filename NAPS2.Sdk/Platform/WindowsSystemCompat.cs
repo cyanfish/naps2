@@ -63,6 +63,31 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool IsLibUsbReliable => true;
 
+    public PageSize? SystemDefaultPageSize
+    {
+        get
+        {
+            const uint LOCALE_IPAPERSIZE = 0x100A;
+            const uint LOCALE_RETURN_NUMBER = 0x20000000;
+            // A null locale name means the user's default locale. With LOCALE_RETURN_NUMBER the result is a DWORD,
+            // which is 2 characters in size.
+            if (Win32.GetLocaleInfoEx(null, LOCALE_IPAPERSIZE | LOCALE_RETURN_NUMBER, out int paperSize, 2) == 0)
+            {
+                return null;
+            }
+            // These are the documented values (DMPAPER_* constants)
+            return paperSize switch
+            {
+                1 => PageSize.Letter,
+                5 => PageSize.Legal,
+                8 => PageSize.A3,
+                9 => PageSize.A4,
+                11 => PageSize.A5,
+                _ => null
+            };
+        }
+    }
+
     public IntPtr LoadLibrary(string path) => Win32.LoadLibrary(path);
 
     public string GetLoadError() => Marshal.GetLastWin32Error().ToString();

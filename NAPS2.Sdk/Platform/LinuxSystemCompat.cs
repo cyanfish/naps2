@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿#if NET6_0_OR_GREATER
+using System.Runtime.InteropServices;
 using NAPS2.Platform.Linux;
 
 namespace NAPS2.Platform;
@@ -67,6 +68,45 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool IsLibUsbReliable => true;
 
+    public PageSize? SystemDefaultPageSize
+    {
+        get
+        {
+            const int LC_PAPER = 7;
+            const int LC_PAPER_MASK = 1 << LC_PAPER;
+            const int _NL_PAPER_HEIGHT = LC_PAPER << 16;
+            const int _NL_PAPER_WIDTH = (LC_PAPER << 16) | 1;
+            try
+            {
+                // Use a separate locale object rather than setlocale so we don't change the process-wide locale
+                var locale = LinuxInterop.newlocale(LC_PAPER_MASK, "", IntPtr.Zero);
+                if (locale == IntPtr.Zero)
+                {
+                    return null;
+                }
+                try
+                {
+                    // For these items, glibc returns the value in mm in place of a string pointer
+                    long height = LinuxInterop.nl_langinfo_l(_NL_PAPER_HEIGHT, locale);
+                    long width = LinuxInterop.nl_langinfo_l(_NL_PAPER_WIDTH, locale);
+                    if (width is > 0 and < 10000 && height is > 0 and < 10000)
+                    {
+                        return PageSize.FindWellKnownSize(width, height, PageSizeUnit.Millimetre);
+                    }
+                }
+                finally
+                {
+                    LinuxInterop.freelocale(locale);
+                }
+            }
+            catch (Exception)
+            {
+                // Ignore
+            }
+            return null;
+        }
+    }
+
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
 
     public IntPtr LoadSymbol(IntPtr libraryHandle, string symbol) => LinuxInterop.dlsym(libraryHandle, symbol);
@@ -79,3 +119,4 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public IDisposable FileWriteLock(string path) => new FileStream(path, FileMode.Open, FileAccess.Write);
 }
+#endif

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using NAPS2.Platform;
 
 namespace NAPS2.Images;
 
@@ -20,6 +21,28 @@ public record PageSize
     public static PageSize B5 = new("176", "250", PageSizeUnit.Millimetre);
 
     public static PageSize B4 = new("250", "353", PageSizeUnit.Millimetre);
+
+    private static readonly PageSize[] WellKnownSizes = [Letter, Legal, A5, A4, A3, B5, B4];
+
+    private static readonly Lazy<PageSize?> LazySystemDefault = new(() => PlatformCompat.System.SystemDefaultPageSize);
+
+    /// <summary>
+    /// Gets the default paper size for the user's system (e.g. Letter in the US, A4 in most other places), or Letter by default.
+    /// </summary>
+    public static PageSize SystemDefault => LazySystemDefault.Value ?? Letter;
+
+    /// <summary>
+    /// Finds the well-known page size (e.g. A4) matching the given dimensions within a small tolerance (1 mm), or null
+    /// if there's no match.
+    /// </summary>
+    internal static PageSize? FindWellKnownSize(decimal width, decimal height, PageSizeUnit unit)
+    {
+        const decimal toleranceMm = 1;
+        var size = new PageSize(width, height, unit);
+        return WellKnownSizes.FirstOrDefault(x =>
+            Math.Abs(x.WidthInMm - size.WidthInMm) <= toleranceMm &&
+            Math.Abs(x.HeightInMm - size.HeightInMm) <= toleranceMm);
+    }
 
     public static PageSize? Parse(string? size)
     {
