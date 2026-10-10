@@ -210,6 +210,11 @@ internal class EsclScanDriver : IScanDriver
                         callback(image);
                     }
                 }
+                // Some devices (e.g. Kyocera) stay busy until the completed job is deleted
+                // (https://github.com/cyanfish/naps2/issues/906), so we always send DELETE for
+                // the job. This should be safe to do in general as despite not being the spec,
+                // other implementations like sane-airscan do the same.
+                cancelOnce.Run();
             }
             catch (Exception ex)
             {
@@ -509,8 +514,8 @@ internal class EsclScanDriver : IScanDriver
                 string.Join(",", settingProfile.DocumentFormats.Concat(settingProfile.DocumentFormatsExt).Distinct()));
         }
 
-        var width = (int)Math.Round(options.PageSize!.WidthInInches * 300);
-        var height = (int)Math.Round(options.PageSize!.HeightInInches * 300);
+        var width = (int) Math.Round(options.PageSize!.WidthInInches * 300);
+        var height = (int) Math.Round(options.PageSize!.HeightInInches * 300);
         if (inputCaps.MaxWidth is > 0)
         {
             width = Math.Min(width, inputCaps.MaxWidth.Value);
