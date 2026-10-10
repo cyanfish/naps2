@@ -55,7 +55,7 @@
     <UseNativeUI>false</UseNativeUI>
     <PaperSource>Glass</PaperSource>
     <BitDepth>C24Bit</BitDepth>
-    <PageSize>Letter</PageSize>
+    <PageSize>SystemDefault</PageSize>
     <!--
     <CustomPageSizeName></CustomPageSizeName>
     <CustomPageSize>

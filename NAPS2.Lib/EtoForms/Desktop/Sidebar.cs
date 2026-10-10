@@ -247,7 +247,8 @@ public class Sidebar
         var scanArea = perSource?.ScanArea;
         var sizeCaps = new PageSizeCaps { ScanArea = scanArea };
 
-        var allPresets = EnumDropDownWidget<ScanPageSize>.DefaultItems.SkipLast(2).ToList();
+        // Exclude non-preset values (Custom, SystemDefault)
+        var allPresets = EnumDropDownWidget<ScanPageSize>.DefaultItems.Where(x => x.PageDimensions() != null).ToList();
         var conditionalPresets = new[] { ScanPageSize.A3, ScanPageSize.B4 };
         _pageSize!.VisiblePresets = allPresets.Where(preset =>
             !conditionalPresets.Contains(preset) || sizeCaps.Fits(preset.PageDimensions()!.ToPageSize()));

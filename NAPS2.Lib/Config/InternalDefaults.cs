@@ -210,6 +210,7 @@ public static class InternalDefaults
                 ZoomIn = "Mod+Oemplus",
                 ZoomOut = "Mod+OemMinus"
             },
-            DefaultProfileSettings = new ScanProfile { Version = ScanProfile.CURRENT_VERSION }
+            DefaultProfileSettings = new ScanProfile
+                { Version = ScanProfile.CURRENT_VERSION, PageSize = ScanPageSize.SystemDefault }
         };
 }

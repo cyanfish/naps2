@@ -79,7 +79,15 @@ public class ScanProfile
 
     public ScanHorizontalAlign PageAlign { get; set; }
 
-    public ScanPageSize PageSize { get; set; }
+    public ScanPageSize PageSize
+    {
+        get;
+        // SystemDefault is only a placeholder, so store the actual page size. We only use Letter/A4 as other sizes
+        // (e.g. A3) may not be supported by the scanner.
+        set => field = value != ScanPageSize.SystemDefault ? value
+            : Images.PageSize.SystemDefault == Images.PageSize.A4 ? ScanPageSize.A4
+            : ScanPageSize.Letter;
+    }
 
     public string? CustomPageSizeName { get; set; }
 
@@ -261,7 +269,12 @@ public enum ScanPageSize
     [PageDimensions("250", "353", LocalizedPageSizeUnit.Millimetre)]
     B4,
     [LocalizedDescription(typeof(SettingsResources), "PageSize_Custom")]
-    Custom
+    Custom,
+    /// <summary>
+    /// A placeholder for config files (e.g. appsettings.xml) that is replaced with the system's default page size
+    /// (Letter or A4) when set on a ScanProfile. It isn't a selectable page size.
+    /// </summary>
+    SystemDefault
 }
 
 /// <summary>
