@@ -169,6 +169,25 @@ public class PdfExporterTests : ContextualTests
         await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_bw);
+        PdfAsserts.AssertImageFilter(filePath, 0, "JBIG2Decode");
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public async Task ExportBlackAndWhiteImageWithoutJbig2(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var storageImage = LoadImage(ImageResources.dog_bw);
+        using var image = ScanningContext.CreateProcessedImage(storageImage);
+
+        await _exporter.Export(filePath, [image], new PdfExportParams
+        {
+            Compression = new PdfCompression { AllowJbig2 = false }
+        });
+
+        PdfAsserts.AssertImages(filePath, ImageResources.dog_bw);
         PdfAsserts.AssertImageFilter(filePath, 0, "CCITTFaxDecode");
     }
 
@@ -182,7 +201,10 @@ public class PdfExporterTests : ContextualTests
         var storageImage = LoadImage(ImageResources.bw_alternating);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
-        await _exporter.Export(filePath, [image]);
+        await _exporter.Export(filePath, [image], new PdfExportParams
+        {
+            Compression = new PdfCompression { AllowJbig2 = false }
+        });
 
         PdfAsserts.AssertImages(filePath, ImageResources.bw_alternating);
         // Alternating black & white pixels is the worst case for CCITT encoding (i.e. the encoded size is bigger than
@@ -219,7 +241,7 @@ public class PdfExporterTests : ContextualTests
         await _exporter.Export(filePath, [image]);
 
         PdfAsserts.AssertImages(filePath, ImageResources.dog_bw);
-        PdfAsserts.AssertImageFilter(filePath, 0, "CCITTFaxDecode");
+        PdfAsserts.AssertImageFilter(filePath, 0, "JBIG2Decode");
     }
 
     [Theory]

@@ -205,6 +205,7 @@ public class PdfExporter
     private static PdfDocument InitializeDocument(PdfExportParams exportParams)
     {
         var document = new PdfDocument();
+        document.Options.EnableJbig2CompressionForBilevelImages = exportParams.Compression.AllowJbig2;
         var creator = exportParams.Metadata.Creator;
         document.Info.Creator = string.IsNullOrEmpty(creator) ? "NAPS2" : creator;
         document.Info.Author = exportParams.Metadata.Author;
