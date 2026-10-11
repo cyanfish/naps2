@@ -61,9 +61,9 @@ internal class BilateralFilterOp : BinaryBitwiseImageOp
                     {
                         int rTotal = 0, gTotal = 0, bTotal = 0;
                         int weightTotal = 0;
-                        for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
+                        for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
                         {
-                            for (int filterY = 0; filterY < FILTER_SIZE; filterY++)
+                            for (int filterX = 0; filterX < FILTER_SIZE; filterX++)
                             {
                                 int imageX = j - s + filterX;
                                 int imageY = i - s + filterY;
