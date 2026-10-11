@@ -23,7 +23,8 @@ public class TransformSerializationTests : ContextualTests
             new SharpenTransform(14),
             new ThumbnailTransform(15),
             new TrueContrastTransform(16),
-            new ResolutionTransform(17.5f)
+            new ResolutionTransform(17.5f),
+            new FileFormatTransform(ImageFileFormat.Jpeg)
         };
 
         var doc = serializer.SerializeToXDocument(original);
@@ -40,5 +41,6 @@ public class TransformSerializationTests : ContextualTests
         Assert.True(copy[7] is SharpenTransform sht && sht.Sharpness == 14);
         Assert.True(copy[8] is ThumbnailTransform tt && tt.Size == 15);
         Assert.True(copy[9] is TrueContrastTransform tct && tct.Contrast == 16);
-        Assert.True(copy[10] is ResolutionTransform rst && Math.Abs(rst.Dpi - 17.5) < TOLERANCE);    }
+        Assert.True(copy[10] is ResolutionTransform rst && Math.Abs(rst.Dpi - 17.5) < TOLERANCE);
+        Assert.True(copy[11] is FileFormatTransform fft && fft.Format == ImageFileFormat.Jpeg);    }
 }

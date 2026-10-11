@@ -311,6 +311,20 @@ public class TransformTests : ContextualTests
     }
 
     [Fact]
+    public void FileFormat()
+    {
+        var original = LoadImage(ImageResources.dog_png);
+        var expected = LoadImage(ImageResources.dog_png);
+        Assert.Equal(ImageFileFormat.Png, original.OriginalFileFormat);
+
+        var transformed = original.PerformTransform(new FileFormatTransform(ImageFileFormat.Jpeg));
+
+        Assert.Equal(ImageFileFormat.Jpeg, transformed.OriginalFileFormat);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
+    }
+
+    [Fact]
     public void Resolution()
     {
         var original = LoadImage(ImageResources.dog);

@@ -50,6 +50,8 @@ internal abstract class AbstractImageTransformer<TImage> where TImage : IMemoryI
                 return PerformTransform(image, correctionTransform);
             case ResolutionTransform resolutionTransform:
                 return PerformTransform(image, resolutionTransform);
+            case FileFormatTransform fileFormatTransform:
+                return PerformTransform(image, fileFormatTransform);
             default:
                 throw new ArgumentException($"Unsupported transform type: {transform.GetType().FullName}");
         }
@@ -253,6 +255,12 @@ internal abstract class AbstractImageTransformer<TImage> where TImage : IMemoryI
     protected virtual TImage PerformTransform(TImage image, ResolutionTransform transform)
     {
         image.SetResolution(transform.Dpi, transform.Dpi);
+        return image;
+    }
+
+    protected virtual TImage PerformTransform(TImage image, FileFormatTransform transform)
+    {
+        image.OriginalFileFormat = transform.Format;
         return image;
     }
 
