@@ -1083,8 +1083,8 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="PixelDimensionsLabel" xml:space="preserve">
     <value>Pixel dimensions:</value>
   </data>
-  <data name="ConvertToLossy" xml:space="preserve">
-    <value>Convert to lossy</value>
+  <data name="UseJpegCompression" xml:space="preserve">
+    <value>Use JPEG compression</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
     <value>JPEG quality:</value>

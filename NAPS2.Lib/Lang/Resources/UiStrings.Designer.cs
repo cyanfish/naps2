@@ -1935,9 +1935,9 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string ConvertToLossy {
+        internal static string UseJpegCompression {
             get {
-                return ResourceManager.GetString("ConvertToLossy", resourceCulture);
+                return ResourceManager.GetString("UseJpegCompression", resourceCulture);
             }
         }
 

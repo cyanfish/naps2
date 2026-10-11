@@ -19,7 +19,7 @@ public class CompressForm : UnaryImageFormBase
     private readonly UndoableNumericMaskedTextBox<int> _pixelWidth = new();
     private readonly UndoableNumericMaskedTextBox<int> _pixelHeight = new();
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
-    private readonly CheckBox _convertToLossy = C.CheckBox(UiStrings.ConvertToLossy);
+    private readonly CheckBox _useJpegCompression = C.CheckBox(UiStrings.UseJpegCompression);
     private readonly UndoableNumericMaskedTextBox<int> _jpegQuality = new();
     private readonly LayoutVisibility _jpegQualityVis = new(false);
 
@@ -49,11 +49,11 @@ public class CompressForm : UnaryImageFormBase
             _bitDepthValue = _bitDepth.SelectedItem;
             RefreshPreview();
         };
-        _convertToLossy.CheckedChanged += (_, _) => UpdateJpegQualityVisibility();
+        _useJpegCompression.CheckedChanged += (_, _) => UpdateJpegQualityVisibility();
     }
 
     private void UpdateJpegQualityVisibility() =>
-        _jpegQualityVis.IsVisible = !Image.Metadata.Lossless || _convertToLossy.IsChecked();
+        _jpegQualityVis.IsVisible = !Image.Metadata.Lossless || _useJpegCompression.IsChecked();
 
     private int JpegQuality => _jpegQuality.Value is >= 1 and <= 100 ? _jpegQuality.Value : _originalJpegQuality;
 
@@ -87,7 +87,7 @@ public class CompressForm : UnaryImageFormBase
                     _ => new ColorBitDepthTransform()
                 });
             }
-            if (_convertToLossy.IsChecked() || JpegQualityChanged)
+            if (_useJpegCompression.IsChecked() || JpegQualityChanged)
             {
                 // This also ensures an untransformed JPEG file is re-encoded (rather than copied) when the quality
                 // changes
@@ -156,7 +156,7 @@ public class CompressForm : UnaryImageFormBase
                 ).Scale()
             ).Aligned(),
             // Only lossless images (e.g. imported from PNG) can be converted
-            Image.Metadata.Lossless ? _convertToLossy : C.None(),
+            Image.Metadata.Lossless ? _useJpegCompression : C.None(),
             L.Row(
                 C.Label(UiStrings.JpegQualityLabel).AlignCenter(),
                 L.Row(
@@ -174,7 +174,7 @@ public class CompressForm : UnaryImageFormBase
         _size = new PageSize((decimal) (RealImageWidth / _dpiValue), (decimal) (RealImageHeight / _dpiValue),
             PageSizeUnit.Inch);
         _bitDepth.SelectedItem = _bitDepthValue = _originalBitDepth;
-        _convertToLossy.Checked = false;
+        _useJpegCompression.Checked = false;
         _jpegQuality.Value = _originalJpegQuality;
         UpdateJpegQualityVisibility();
         UpdateFields();
@@ -183,14 +183,14 @@ public class CompressForm : UnaryImageFormBase
     protected override ListMutation<UiImage> CreateMutation()
     {
         var mutation = base.CreateMutation();
-        bool convertToLossy = _convertToLossy.IsChecked();
-        if (convertToLossy || JpegQualityChanged)
+        bool useJpegCompression = _useJpegCompression.IsChecked();
+        if (useJpegCompression || JpegQualityChanged)
         {
             int quality = JpegQuality;
             return new CompoundListMutation<UiImage>(
                 new ImageListMutation.UpdateMetadata(metadata => metadata with
                 {
-                    Lossless = metadata.Lossless && !convertToLossy,
+                    Lossless = metadata.Lossless && !useJpegCompression,
                     Quality = quality
                 }),
                 mutation);
