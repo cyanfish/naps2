@@ -83,6 +83,10 @@ public class GtkImage : IMemoryImage
             return;
         }
         ImageContext.CheckSupportsFormat(imageFormat);
+        if (ImageContext.TryBundledEncode(this, path, imageFormat, options))
+        {
+            return;
+        }
         options ??= new ImageSaveOptions();
         var type = GetType(imageFormat);
         var (keys, values) = GetSaveOptions(imageFormat, options.Quality);
@@ -102,6 +106,10 @@ public class GtkImage : IMemoryImage
             return;
         }
         ImageContext.CheckSupportsFormat(imageFormat);
+        if (ImageContext.TryBundledEncode(this, stream, imageFormat, options))
+        {
+            return;
+        }
         options ??= new ImageSaveOptions();
         var type = GetType(imageFormat);
         var (keys, values) = GetSaveOptions(imageFormat, options.Quality);

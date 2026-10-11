@@ -71,9 +71,13 @@ public class PackageCommand : ICommand<PackageOptions>
         }
 
         // Include the 32-bit worker (on both x64 and arm64) for TWAIN support
-        var workerPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net10.0-windows",
-            "win-x86", "publish");
+        var workerBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net10.0-windows",
+            "win-x86");
+        var workerPath = Path.Combine(workerBuildPath, "publish");
         pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
+        // The worker encodes scanned images as JPEG, so it needs its own (32-bit) copy of the encoder. This isn't in the
+        // publish folder as the worker is published as a single file.
+        AddPlatformFile(pkgInfo, workerBuildPath, "_win32", "naps2_jpeg.dll");
 
         var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net10.0-windows",
             arch, "publish");

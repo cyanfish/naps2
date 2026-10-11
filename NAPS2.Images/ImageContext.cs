@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using NAPS2.Util;
 
@@ -237,6 +238,47 @@ public abstract class ImageContext
     }
 
     public virtual ITiffWriter TiffWriter => throw new NotSupportedException();
+
+    /// <summary>
+    /// Encoders to use instead of the platform encoder for specific file formats. This is process-wide, as images
+    /// don't necessarily share the ImageContext instance they were created from.
+    /// </summary>
+    internal static ConcurrentDictionary<ImageFileFormat, IBundledEncoder> BundledEncoders { get; } = new();
+
+    /// <summary>
+    /// Saves the image with a bundled encoder if there's one for the given format. Returns false if the platform encoder
+    /// should be used instead.
+    /// </summary>
+    internal bool TryBundledEncode(IMemoryImage image, Stream stream, ImageFileFormat format,
+        ImageSaveOptions? options)
+    {
+        return BundledEncoders.TryGetValue(format, out var encoder) &&
+               encoder.TryEncode(image, stream, options ?? new ImageSaveOptions());
+    }
+
+    /// <summary>
+    /// Saves the image with a bundled encoder if there's one for the given format. Returns false if the platform encoder
+    /// should be used instead.
+    /// </summary>
+    internal bool TryBundledEncode(IMemoryImage image, string path, ImageFileFormat format,
+        ImageSaveOptions? options)
+    {
+        if (!BundledEncoders.TryGetValue(format, out var encoder))
+        {
+            return false;
+        }
+        bool success;
+        using (var stream = new FileStream(path, FileMode.Create))
+        {
+            success = encoder.TryEncode(image, stream, options ?? new ImageSaveOptions());
+        }
+        if (!success)
+        {
+            // Don't leave an empty file behind if the platform encoder fails too
+            File.Delete(path);
+        }
+        return success;
+    }
 
     public IMemoryImage Render(IRenderableImage image)
     {

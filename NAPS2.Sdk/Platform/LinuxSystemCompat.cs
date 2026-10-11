@@ -62,6 +62,8 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public string PdfiumLibraryName => "libpdfium.so";
 
+    public string JpegLibraryName => "libnaps2_jpeg.so";
+
     public string[]? SaneLibraryDeps => null;
 
     public string SaneLibraryName => "libsane.so.1";

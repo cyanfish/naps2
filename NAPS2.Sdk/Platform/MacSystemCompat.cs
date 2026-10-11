@@ -73,6 +73,8 @@ internal class MacSystemCompat : ISystemCompat
 
     public string PdfiumLibraryName => "libpdfium.dylib";
 
+    public string JpegLibraryName => "libnaps2_jpeg.dylib";
+
     public string[] SaneLibraryDeps => new[] { "libusb-1.0.0.dylib", "libjpeg.62.dylib" };
 
     public string SaneLibraryName => "libsane.1.dylib";

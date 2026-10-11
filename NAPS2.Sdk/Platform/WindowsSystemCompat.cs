@@ -57,6 +57,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public string PdfiumLibraryName => "pdfium.dll";
 
+    public string JpegLibraryName => "naps2_jpeg.dll";
+
     public string[]? SaneLibraryDeps => null;
 
     public string SaneLibraryName => "sane.dll";

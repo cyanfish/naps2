@@ -52,6 +52,8 @@ internal interface ISystemCompat
 
     string PdfiumLibraryName { get; }
 
+    string JpegLibraryName { get; }
+
     string[]? SaneLibraryDeps { get; }
 
     string SaneLibraryName { get; }

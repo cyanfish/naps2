@@ -114,6 +114,10 @@ public class ImageSharpImage : IMemoryImage
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
         ImageContext.CheckSupportsFormat(imageFormat);
+        if (ImageContext.TryBundledEncode(this, path, imageFormat, options))
+        {
+            return;
+        }
 
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
@@ -128,6 +132,10 @@ public class ImageSharpImage : IMemoryImage
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
         ImageContext.CheckSupportsFormat(imageFormat);
+        if (ImageContext.TryBundledEncode(this, stream, imageFormat, options))
+        {
+            return;
+        }
 
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
