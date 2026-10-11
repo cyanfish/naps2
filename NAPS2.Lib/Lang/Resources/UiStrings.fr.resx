@@ -381,7 +381,7 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Mode de l'OCR :</value>
   </data>
-  <data name="OcrPreProcessing" xml:space="preserve">
+  <data name="FixWhiteBalanceAndRemoveNoise" xml:space="preserve">
     <value>Corriger la balance des blancs et supprimer le bruit</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
@@ -425,6 +425,9 @@
   </data>
   <data name="Revert" xml:space="preserve">
     <value>Rétablir</value>
+  </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto-Crop</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Appliquer aux {0} images sélectionnées</value>
@@ -684,6 +687,9 @@
   <data name="DeskewScannedPages" xml:space="preserve">
     <value>Réaligner les pages numérisées</value>
   </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto-crop scanned pages</value>
+  </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Appliquer la luminosité/contraste après acquisition</value>
   </data>
@@ -897,7 +903,7 @@ Hold "{1}" to move the whole selection at once.
 Hold "{2}" to move faster.</value>
   </data>
   <data name="SplitHelp" xml:space="preserve">
-    <value>Cliquer sur les boutons ou utiliser les touches fléchées pour modifier l’orientation.</value>
+    <value>Cliquer sur les boutons ou utiliser les touches fléchées pour modifier l’orientation de l'outil.</value>
   </data>
   <data name="CombineHelp" xml:space="preserve">
     <value>Mouse:
@@ -924,7 +930,7 @@ Or click and drag to draw a line aligned with the page (vertically or horizontal
     <value>Toujours afficher l’aperçu</value>
   </data>
   <data name="ReverseBackSides" xml:space="preserve">
-    <value>Versos inversés</value>
+    <value>Inverser les versos</value>
   </data>
   <data name="ManualDuplexHelp" xml:space="preserve">
     <value>To scan both sides of a multi-page document with your feeder scanner, you can select "Duplex" as your paper source if your scanner supports it.
@@ -949,6 +955,24 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Alt</value>
   </data>
   <data name="ShiftKey" xml:space="preserve">
-    <value>Shift</value>
+    <value>Maj</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="ResolutionDpiLabel" xml:space="preserve">
+    <value>Resolution (dpi):</value>
+  </data>
+  <data name="DimensionsLabel" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="PixelDimensionsLabel" xml:space="preserve">
+    <value>Pixel dimensions:</value>
+  </data>
+  <data name="UseJpegCompression" xml:space="preserve">
+    <value>Use JPEG compression</value>
+  </data>
+  <data name="JpegQualityLabel" xml:space="preserve">
+    <value>JPEG quality:</value>
   </data>
 </root>

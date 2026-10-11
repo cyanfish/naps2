@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutFormTitle" xml:space="preserve">
-    <value>Info sul programma</value>
+    <value>Info programma</value>
   </data>
   <data name="CopyrightFormat" xml:space="preserve">
     <value>Copyright {0} contributori NAPS2</value>
@@ -67,7 +67,7 @@
     <value>Ripeti operazione {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Fatto</value>
+    <value>OK</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>Predefinito</value>
@@ -76,7 +76,7 @@
     <value>Nuovo profilo</value>
   </data>
   <data name="BatchScan" xml:space="preserve">
-    <value>Scansione in serie</value>
+    <value>Scansione batch</value>
   </data>
   <data name="Ocr" xml:space="preserve">
     <value>OCR</value>
@@ -208,10 +208,10 @@
     <value>Visualizza numeri di pagina</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>Azione predefinita del tasto "Scansiona":</value>
+    <value>Azione predefinita tasto "Scansiona":</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>Azione predefinita del tasto "Salva":</value>
+    <value>Azione predefinita tasto "Salva":</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Applicazione</value>
@@ -220,7 +220,7 @@
     <value>Consenti una sola istanza di NAPS2</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>Info sul programma</value>
+    <value>Info programma</value>
   </data>
   <data name="Zoom" xml:space="preserve">
     <value>Zoom</value>
@@ -274,7 +274,7 @@
     <value>Impostazioni profilo</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Nome visualizzato:</value>
+    <value>Nome profilo:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>Driver WIA</value>
@@ -310,7 +310,7 @@
     <value>Usa UI nativa</value>
   </data>
   <data name="PaperSourceLabel" xml:space="preserve">
-    <value>Alimentazione carta:</value>
+    <value>Sorgente scansione:</value>
   </data>
   <data name="PageSizeLabel" xml:space="preserve">
     <value>Dimensione pagina:</value>
@@ -322,7 +322,7 @@
     <value>Luminosità:</value>
   </data>
   <data name="BitDepthLabel" xml:space="preserve">
-    <value>Profondità di bit:</value>
+    <value>Bit profondità:</value>
   </data>
   <data name="HorizontalAlignLabel" xml:space="preserve">
     <value>Allineamento orizzontale:</value>
@@ -381,14 +381,14 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Modalità OCR:</value>
   </data>
-  <data name="OcrPreProcessing" xml:space="preserve">
+  <data name="FixWhiteBalanceAndRemoveNoise" xml:space="preserve">
     <value>Correggi bilanciamento del bianco e rimuovi il rumore</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Dopo la scansione avvia automaticamente l'OCR</value>
+    <value>Dopo la scansione avvia automaticamente OCR</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Esegui preventivamente OCR dopo la scansione</value>
+    <value>Dopo la scansione eseguire preventivamente OCR</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Installa altre lingue</value>
@@ -406,7 +406,7 @@
     <value>Dimensione stimata download: {0} MB</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Scarica</value>
+    <value>Download</value>
   </data>
   <data name="DownloadProgressFormTitle" xml:space="preserve">
     <value>Progresso download</value>
@@ -425,6 +425,9 @@
   </data>
   <data name="Revert" xml:space="preserve">
     <value>Inverti</value>
+  </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto-Crop</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Applica a tutte le {0} immagini selezionate</value>
@@ -520,7 +523,7 @@
     <value>Metadati</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Crifratura</value>
+    <value>Cifratura</value>
   </data>
   <data name="Compatibility" xml:space="preserve">
     <value>Compatibilità</value>
@@ -631,10 +634,10 @@
     <value>Separa file tramite Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>Maggiori informazioni</value>
+    <value>Maggiori info</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
-    <value>Cancella immagini dopo il salvataggio</value>
+    <value>Dopo il salvataggio cancella immagini</value>
   </data>
   <data name="KeepSession" xml:space="preserve">
     <value>Mantieni le immagini tra una sezione e l'altra</value>
@@ -682,10 +685,13 @@
     <value>Post-processo</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Pagine allineate scansionate</value>
+    <value>Allinea pagine scansionate</value>
+  </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto-crop scanned pages</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
-    <value>Applica luminosità/contrasto dopo la scansione</value>
+    <value>Dopo la scansione applica luminosità/contrasto</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
     <value>Offset larghezza in base ad allineamento (WIA)</value>
@@ -709,10 +715,10 @@
     <value>Implementazione Twain:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
-    <value>Scansione in serie</value>
+    <value>Scansione batch</value>
   </data>
   <data name="PressStartWhenReady" xml:space="preserve">
-    <value>Seleziona 'Avvia' quando sei pronto.</value>
+    <value>Quando sei pronto seleziona 'Avvia'.</value>
   </data>
   <data name="ScanConfig" xml:space="preserve">
     <value>Configurazione scansione</value>
@@ -781,7 +787,7 @@
     <value>Impostazioni scanner condiviso</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Sei sicuro di voler interrompere la condivisione di {0}?</value>
+    <value>Vuoi interrompere la condivisione di {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Condividi anche quando NAPS2 è chiuso</value>
@@ -850,7 +856,7 @@
     <value>Scansiona con il profilo {0}</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scansiona con Profilo Predefinito</value>
+    <value>Scansiona con profilo predefinito</value>
   </data>
   <data name="ScanWithNewProfile" xml:space="preserve">
     <value>Scansiona con nuovo profilo</value>
@@ -897,7 +903,7 @@ Hold "{1}" to move the whole selection at once.
 Hold "{2}" to move faster.</value>
   </data>
   <data name="SplitHelp" xml:space="preserve">
-    <value>Fare clic sui pulsanti o utilizzare i tasti freccia per modificare l'orientamento della divisione.</value>
+    <value>Per modificare l'orientamento della divisione fai clic sui pulsanti o usa i tasti freccia.</value>
   </data>
   <data name="CombineHelp" xml:space="preserve">
     <value>Mouse:
@@ -949,6 +955,24 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Alt</value>
   </data>
   <data name="ShiftKey" xml:space="preserve">
-    <value>Shift</value>
+    <value>Maiusc</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="ResolutionDpiLabel" xml:space="preserve">
+    <value>Resolution (dpi):</value>
+  </data>
+  <data name="DimensionsLabel" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="PixelDimensionsLabel" xml:space="preserve">
+    <value>Pixel dimensions:</value>
+  </data>
+  <data name="UseJpegCompression" xml:space="preserve">
+    <value>Use JPEG compression</value>
+  </data>
+  <data name="JpegQualityLabel" xml:space="preserve">
+    <value>JPEG quality:</value>
   </data>
 </root>

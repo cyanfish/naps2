@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -267,6 +267,14 @@ msgstr "Auto"
 msgid "Auto Save Settings"
 msgstr "Nastavení automatického uložení"
 
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
+
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
 msgstr "Automatický přírůstek čísla (1 znak)"
@@ -423,6 +431,10 @@ msgstr "Komunikace se skenovacím zařízením byla přerušena."
 msgid "Compatibility"
 msgstr "Kompatibilita"
 
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
+
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "Komprese:"
@@ -548,6 +560,10 @@ msgstr "Zařízení:"
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
 msgstr "Rozměry"
+
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
+msgstr ""
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -703,7 +719,7 @@ msgstr "Název souboru:"
 msgid "File Path:"
 msgstr "Cesta k souboru:"
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Opravit vyvážení bílé a odstranění šumu"
 
@@ -831,6 +847,10 @@ msgstr "Vložit listy"
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "Soubor JPEG (*.jpg, *.jpeg)"
+
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1188,6 +1208,10 @@ msgstr "Heslo"
 msgid "Paste"
 msgstr "Vložit"
 
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
+
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
@@ -1295,6 +1319,10 @@ msgstr "Resetovat"
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
 msgstr "Resetovat obrázek"
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
+msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1784,6 +1812,10 @@ msgstr "Aktualizace..."
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
 msgstr "Odesílání emailu..."
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
+msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

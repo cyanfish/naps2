@@ -381,7 +381,7 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR-Modus:</value>
   </data>
-  <data name="OcrPreProcessing" xml:space="preserve">
+  <data name="FixWhiteBalanceAndRemoveNoise" xml:space="preserve">
     <value>Weißabgleich korrigieren und Rauschen entfernen</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
@@ -425,6 +425,9 @@
   </data>
   <data name="Revert" xml:space="preserve">
     <value>Rückgängig</value>
+  </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto-Crop</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Auf alle {0} ausgewählten Bilder anwenden</value>
@@ -684,6 +687,9 @@
   <data name="DeskewScannedPages" xml:space="preserve">
     <value>Schräglagenkorrektur gescannter Seiten</value>
   </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto-crop scanned pages</value>
+  </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Passe Helligkeit und Kontrast nach dem Scannen an</value>
   </data>
@@ -912,13 +918,13 @@ Hold "Shift" to change the alignment instead (if the images aren't the same size
 Or click and drag to draw a line aligned with the page (vertically or horizontally).</value>
   </data>
   <data name="ManualDuplex" xml:space="preserve">
-    <value>Manual Duplex</value>
+    <value>Manuell Duplex</value>
   </data>
   <data name="ManualDuplexPreview" xml:space="preserve">
-    <value>Manual Duplex (preview)</value>
+    <value>Manuell Duplex (Vorschau)</value>
   </data>
   <data name="ManualDuplexFormTitle" xml:space="preserve">
-    <value>Manual Duplex</value>
+    <value>Manuell Duplex</value>
   </data>
   <data name="AlwaysShowPreview" xml:space="preserve">
     <value>Vorschau immer anzeigen</value>
@@ -943,12 +949,30 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Seiten neu angeordnet.</value>
   </data>
   <data name="ControlKey" xml:space="preserve">
-    <value>Ctrl</value>
+    <value>Strg</value>
   </data>
   <data name="AltKey" xml:space="preserve">
     <value>Alt</value>
   </data>
   <data name="ShiftKey" xml:space="preserve">
-    <value>Shift</value>
+    <value>Umschalt</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="ResolutionDpiLabel" xml:space="preserve">
+    <value>Resolution (dpi):</value>
+  </data>
+  <data name="DimensionsLabel" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="PixelDimensionsLabel" xml:space="preserve">
+    <value>Pixel dimensions:</value>
+  </data>
+  <data name="UseJpegCompression" xml:space="preserve">
+    <value>Use JPEG compression</value>
+  </data>
+  <data name="JpegQualityLabel" xml:space="preserve">
+    <value>JPEG quality:</value>
   </data>
 </root>

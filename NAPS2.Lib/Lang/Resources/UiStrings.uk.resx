@@ -19,7 +19,7 @@
     <value>Авторські права {0} Розробники NAPS2</value>
   </data>
   <data name="IconsFrom" xml:space="preserve">
-    <value>Піктограми з:</value>
+    <value>Піктограми від:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Перевірити наявність оновлень</value>
@@ -28,7 +28,7 @@
     <value>OK</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Зробити пожертву</value>
+    <value>Підтримати проєкт</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Профілі</value>
@@ -118,10 +118,10 @@
     <value>Обрізати</value>
   </data>
   <data name="BrightnessContrast" xml:space="preserve">
-    <value>Яскравість / Контрастність</value>
+    <value>Яскравість / контрастність</value>
   </data>
   <data name="HueSaturation" xml:space="preserve">
-    <value>Відтінок / Насиченість</value>
+    <value>Відтінок / насиченість</value>
   </data>
   <data name="BlackAndWhite" xml:space="preserve">
     <value>Чорно-біле</value>
@@ -133,7 +133,7 @@
     <value>Виправити документ</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Перезавантажити зображення</value>
+    <value>Скинути</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Повернути</value>
@@ -148,7 +148,7 @@
     <value>Віддзеркалити</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Вирівняти перекіс</value>
+    <value>Виправити нахил</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
     <value>Довільний кут повороту</value>
@@ -208,10 +208,10 @@
     <value>Показувати номери сторінок</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>Дія за замовчуванням для кнопки «Сканувати»:</value>
+    <value>Дія кнопки «Сканувати» за замовчуванням:</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>Дія за замовчуванням для кнопки «Зберегти»:</value>
+    <value>Дія кнопки «Зберегти» за замовчуванням:</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Програма</value>
@@ -235,7 +235,7 @@
     <value>Фактичний масштаб</value>
   </data>
   <data name="ScaleWithWindow" xml:space="preserve">
-    <value>Масштабувати разом із вікном</value>
+    <value>Масштабувати відповідно до вікна</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Зберегти</value>
@@ -274,7 +274,7 @@
     <value>Налаштовування профілю</value>
   </data>
   <data name="DisplayNameLabel" xml:space="preserve">
-    <value>Назва:</value>
+    <value>Відображуване ім’я:</value>
   </data>
   <data name="WiaDriver" xml:space="preserve">
     <value>Драйвер WIA</value>
@@ -334,13 +334,13 @@
     <value>Контрастність:</value>
   </data>
   <data name="EnableAutoSave" xml:space="preserve">
-    <value>Увімкнути автозбереження</value>
+    <value>Увімкнути автоматичне збереження</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Налаштування автозбереження</value>
+    <value>Налаштування автоматичного збереження</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Налаштування автозбереження</value>
+    <value>Налаштування автоматичного збереження</value>
   </data>
   <data name="Advanced" xml:space="preserve">
     <value>Додатково</value>
@@ -381,17 +381,17 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>Режим розпізнавання:</value>
   </data>
-  <data name="OcrPreProcessing" xml:space="preserve">
+  <data name="FixWhiteBalanceAndRemoveNoise" xml:space="preserve">
     <value>Виправляти баланс білого та видаляти шум</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
-    <value>Автоматично запускати розпізнавання (OCR) після сканування</value>
+    <value>Автоматично виконувати розпізнавання після сканування</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Автоматично запускати OCR після сканування</value>
+    <value>Попередньо виконувати розпізнавання після сканування</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
-    <value>Завантажити більше мов</value>
+    <value>Отримати додаткові мови</value>
   </data>
   <data name="OcrDownloadFormTitle" xml:space="preserve">
     <value>Завантаження файлів для розпізнавання</value>
@@ -426,6 +426,9 @@
   <data name="Revert" xml:space="preserve">
     <value>Скасувати зміни</value>
   </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto-Crop</value>
+  </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Застосувати до всіх {0} вибраних зображень</value>
   </data>
@@ -442,13 +445,13 @@
     <value>Відновлення відсканованих зображень</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>Можливо, {0} відсканованих зображень, отриманих {1} о {2}, не було збережено. Їх можна відновити. Бажаєте відновити їх?</value>
+    <value>Можливо, {0} відсканованих зображень, отриманих {1} о {2}, не було збережено. Їх можна відновити. Відновити їх?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Заповнювачі</value>
   </data>
   <data name="SkipSavePrompt" xml:space="preserve">
-    <value>Пропустити запит на збереження</value>
+    <value>Не запитувати підтвердження збереження</value>
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Файли з однією сторінкою</value>
@@ -481,7 +484,7 @@
     <value>Дозволити копіювання вмісту</value>
   </data>
   <data name="AllowContentCopyingForAccessibility" xml:space="preserve">
-    <value>Дозволити копіювання вмісту для забезпечення доступності</value>
+    <value>Дозволити копіювання вмісту для спеціальних можливостей</value>
   </data>
   <data name="AllowAnnotations" xml:space="preserve">
     <value>Дозволити примітки</value>
@@ -532,22 +535,22 @@
     <value>Рік</value>
   </data>
   <data name="Year2Digit" xml:space="preserve">
-    <value>Рік (00-99)</value>
+    <value>Рік (00–99)</value>
   </data>
   <data name="Month2Digit" xml:space="preserve">
-    <value>Місяць (01-12)</value>
+    <value>Місяць (01–12)</value>
   </data>
   <data name="Day2Digit" xml:space="preserve">
-    <value>День (01-31)</value>
+    <value>День (01–31)</value>
   </data>
   <data name="Hour2Digit" xml:space="preserve">
-    <value>Година (0-23)</value>
+    <value>Година (0–23)</value>
   </data>
   <data name="Minute2Digit" xml:space="preserve">
-    <value>Хвилина (00-59)</value>
+    <value>Хвилина (00–59)</value>
   </data>
   <data name="Second2Digit" xml:space="preserve">
-    <value>Секунда (00-59)</value>
+    <value>Секунда (00–59)</value>
   </data>
   <data name="AutoIncrementing4Digit" xml:space="preserve">
     <value>Номер з автоматичним збільшенням (4 цифри)</value>
@@ -568,7 +571,7 @@
     <value>Попередній перегляд:</value>
   </data>
   <data name="JpegQualityHelp" xml:space="preserve">
-    <value>Для високої якості JPEG (80+), також збільште параметр «Якість зображення» у своєму профілі для отримання найкращих результатів.</value>
+    <value>Для високої якості JPEG (80+) для отримання найкращих результатів також підвищите якість зображення у своєму профілі.</value>
   </data>
   <data name="JpegQuality" xml:space="preserve">
     <value>Якість JPEG</value>
@@ -616,7 +619,7 @@
     <value>Пароль</value>
   </data>
   <data name="EncryptedFilePrompt" xml:space="preserve">
-    <value>Наступний файл зашифровано, і для його відкриття потрібен пароль:</value>
+    <value>Наведений нижче файл зашифровано, і для його відкриття потрібен пароль:</value>
   </data>
   <data name="PromptForFilePath" xml:space="preserve">
     <value>Запитувати шлях до файлу</value>
@@ -631,7 +634,7 @@
     <value>Розділяти файли за допомогою Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>Більше інформації</value>
+    <value>Додаткова інформація</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
     <value>Очищати зображення після збереження</value>
@@ -673,19 +676,22 @@
     <value>Виключати порожні сторінки</value>
   </data>
   <data name="WhiteThreshold" xml:space="preserve">
-    <value>Поріг білого кольору</value>
+    <value>Порогове значення білого кольору</value>
   </data>
   <data name="CoverageThreshold" xml:space="preserve">
-    <value>Поріг заповнення</value>
+    <value>Порогове значення покриття</value>
   </data>
   <data name="PostProcessing" xml:space="preserve">
     <value>Постобробка</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Вирівняти відскановані сторінки</value>
+    <value>Виправляти нахил відсканованих сторінок</value>
+  </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto-crop scanned pages</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
-    <value>Застосувати яскравість/контрастність після сканування</value>
+    <value>Застосовувати яскравість і контраст після сканування</value>
   </data>
   <data name="OffsetWidth" xml:space="preserve">
     <value>Зміщення ширини залежно від вирівнювання (WIA)</value>
@@ -697,10 +703,10 @@
     <value>Обрізати до розміру сторінки</value>
   </data>
   <data name="FlipDuplexedPages" xml:space="preserve">
-    <value>Перевертати двосторонні сторінки</value>
+    <value>Віддзеркалювати сторінки, відскановані з обох боків</value>
   </data>
   <data name="FlipBackSidesOfDuplexPages" xml:space="preserve">
-    <value>Перевертати зворотні сторони двосторонніх сторінок</value>
+    <value>Віддзеркалювати зворотні сторони двосторонніх сторінок</value>
   </data>
   <data name="WiaVersionLabel" xml:space="preserve">
     <value>Версія WIA:</value>
@@ -745,7 +751,7 @@
     <value>Зберегти в один файл</value>
   </data>
   <data name="SaveToMultipleFiles" xml:space="preserve">
-    <value>Зберегти у кілька окремих файлів</value>
+    <value>Зберегти у кілька файлів</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Почати</value>
@@ -784,7 +790,7 @@
     <value>Ви впевнені, що хочете скасувати спільний доступ до {0}?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
-    <value>Надавати спільний доступ навіть коли NAPS2 закрито</value>
+    <value>Надавати спільний доступ, навіть коли NAPS2 закрито</value>
   </data>
   <data name="MultipleLanguages" xml:space="preserve">
     <value>Кілька мов...</value>
@@ -793,7 +799,7 @@
     <value>Кілька мов</value>
   </data>
   <data name="ShowNativeTwainProgress" xml:space="preserve">
-    <value>Показувати вікно перебігу TWAIN</value>
+    <value>Показувати перебіг сканування в інтерфейсі TWAIN</value>
   </data>
   <data name="Split" xml:space="preserve">
     <value>Розділити</value>
@@ -808,7 +814,7 @@
     <value>Ручна IP-адреса</value>
   </data>
   <data name="IpHost" xml:space="preserve">
-    <value>IP-адреса/Хост</value>
+    <value>IP-адреса / ім’я вузла</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Порт</value>
@@ -841,10 +847,10 @@
     <value>Не вдається знайти сканер? Ознайомтеся з обмеженнями Flatpak-версії NAPS2.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Комбінації клавіш</value>
+    <value>Клавіатурні скорочення</value>
   </data>
   <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Комбінації клавіш</value>
+    <value>Клавіатурні скорочення</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
     <value>Сканувати з профілем {0}</value>
@@ -897,7 +903,7 @@ Hold "{1}" to move the whole selection at once.
 Hold "{2}" to move faster.</value>
   </data>
   <data name="SplitHelp" xml:space="preserve">
-    <value>Натискайте кнопки або використовуйте клавіші зі стрілками, щоб змінити напрямок розділення.</value>
+    <value>Натисніть кнопки або скористайтеся клавішами зі стрілками, щоб змінити орієнтацію розділення.</value>
   </data>
   <data name="CombineHelp" xml:space="preserve">
     <value>Mouse:
@@ -912,13 +918,13 @@ Hold "Shift" to change the alignment instead (if the images aren't the same size
 Or click and drag to draw a line aligned with the page (vertically or horizontally).</value>
   </data>
   <data name="ManualDuplex" xml:space="preserve">
-    <value>Ручне двостороннє сканування</value>
+    <value>Двостороннє сканування вручну</value>
   </data>
   <data name="ManualDuplexPreview" xml:space="preserve">
-    <value>Ручне двостороннє сканування (попередній перегляд)</value>
+    <value>Двостороннє сканування вручну (попередній перегляд)</value>
   </data>
   <data name="ManualDuplexFormTitle" xml:space="preserve">
-    <value>Ручне двостороннє сканування</value>
+    <value>Двостороннє сканування вручну</value>
   </data>
   <data name="AlwaysShowPreview" xml:space="preserve">
     <value>Завжди показувати попередній перегляд</value>
@@ -940,7 +946,7 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Попередній перегляд</value>
   </data>
   <data name="PagesReordered" xml:space="preserve">
-    <value>Змінено порядок сторінок.</value>
+    <value>Порядок сторінок змінено.</value>
   </data>
   <data name="ControlKey" xml:space="preserve">
     <value>Ctrl</value>
@@ -950,5 +956,23 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="ShiftKey" xml:space="preserve">
     <value>Shift</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="ResolutionDpiLabel" xml:space="preserve">
+    <value>Resolution (dpi):</value>
+  </data>
+  <data name="DimensionsLabel" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="PixelDimensionsLabel" xml:space="preserve">
+    <value>Pixel dimensions:</value>
+  </data>
+  <data name="UseJpegCompression" xml:space="preserve">
+    <value>Use JPEG compression</value>
+  </data>
+  <data name="JpegQualityLabel" xml:space="preserve">
+    <value>JPEG quality:</value>
   </data>
 </root>

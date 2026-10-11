@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -114,7 +114,7 @@ msgstr "Afdrukken toestaan"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -266,6 +266,14 @@ msgstr "Automatisch"
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
 msgstr "Instellingen voor automatisch opslaan"
+
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -423,6 +431,10 @@ msgstr "Communicatie met het scanapparaat is onderbroken."
 msgid "Compatibility"
 msgstr "Compatibiliteit"
 
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
+
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "Compressie:"
@@ -469,7 +481,7 @@ msgstr "Bijsnijden naar paginagrootte"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -548,6 +560,10 @@ msgstr "Apparaat:"
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
 msgstr "Afmetingen"
+
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
+msgstr ""
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -703,7 +719,7 @@ msgstr "Bestandsnaam:"
 msgid "File Path:"
 msgstr "Bestandspad:"
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Witbalans verbeteren en ruis verminderen"
 
@@ -832,6 +848,10 @@ msgstr "Afwisselend tussenvoegen"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG-bestand (*.jpg, *.jpeg)"
 
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
+
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
 msgstr "JPEG2000-bestand(*.jp2, *.jpx)"
@@ -863,7 +883,7 @@ msgstr "Taal"
 
 #: MiscResources.resx$LeaveAReview$Message
 msgid "Leave a Review"
-msgstr "Schrijf een recensie"
+msgstr "Recensie Achterlaten"
 
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
@@ -1199,6 +1219,10 @@ msgstr "Wachtwoord"
 msgid "Paste"
 msgstr "Plakken"
 
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
+
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
@@ -1306,6 +1330,10 @@ msgstr "Reset"
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
 msgstr "Afbeelding herstellen"
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
+msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1556,7 +1584,7 @@ msgstr "Verscherpen"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1803,6 +1831,10 @@ msgstr "Bijwerken..."
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
 msgstr "E-mail uploaden..."
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
+msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

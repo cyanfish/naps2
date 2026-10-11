@@ -16,7 +16,7 @@
     <value>Bianco e nero</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>Colore a 24bit</value>
+    <value>Colore 24bit</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Scala di grigi</value>
@@ -79,7 +79,7 @@
     <value>B5 (176x250 mm)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Personalizzato...</value>
+    <value>Personalizzata...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>Legale USA (8.5x14 pollici)</value>
@@ -88,7 +88,7 @@
     <value>Lettera USA (8.5x11 pollici)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
-    <value>Personalizzato...</value>
+    <value>Personalizzata...</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>Predefinito</value>
@@ -109,7 +109,7 @@
     <value>Fronte/retro</value>
   </data>
   <data name="Source_Feeder" xml:space="preserve">
-    <value>Alimentatore automatico</value>
+    <value>Alimentatore automatico (ADF)</value>
   </data>
   <data name="Source_Glass" xml:space="preserve">
     <value>Piano fisso</value>
@@ -166,7 +166,7 @@
     <value>Chiedi se selezionato</value>
   </data>
   <data name="ScanButtonDefaultAction_ScanWithDefaultProfile" xml:space="preserve">
-    <value>Scansiona con Profilo Predefinito</value>
+    <value>Scansiona con profilo predefinito</value>
   </data>
   <data name="ScanButtonDefaultAction_AlwaysPrompt" xml:space="preserve">
     <value>Chiedi sempre</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -114,7 +114,7 @@ msgstr "Permettre l'impression"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -267,6 +267,14 @@ msgstr "Auto"
 msgid "Auto Save Settings"
 msgstr "Paramètres d'enregistrement automatique"
 
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
+
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
 msgstr "Numéro auto-incrémenté (1 chiffre)"
@@ -405,7 +413,7 @@ msgstr "Effacer les images après l'enregistrement"
 
 #: UiStrings.resx$SplitHelp$Message
 msgid "Click the buttons or use the arrow keys to change the split orientation."
-msgstr "Cliquer sur les boutons ou utiliser les touches fléchées pour modifier l’orientation."
+msgstr "Cliquer sur les boutons ou utiliser les touches fléchées pour modifier l’orientation de l'outil."
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -422,6 +430,10 @@ msgstr "La communication avec le périphérique de numérisation a été interro
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilité"
+
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -469,7 +481,7 @@ msgstr "Recadrer aux dimensions de la page"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -548,6 +560,10 @@ msgstr "Périphérique"
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
 msgstr "Dimensions :"
+
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
+msgstr ""
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -703,7 +719,7 @@ msgstr "Nom du fichier :"
 msgid "File Path:"
 msgstr "Chemin du fichier :"
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Corriger la balance des blancs et supprimer le bruit"
 
@@ -831,6 +847,10 @@ msgstr "Appairer [135246>123456]"
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "Fichier JPEG (*.jpg, *.jpeg)"
+
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1199,6 +1219,10 @@ msgstr "Mot de passe"
 msgid "Paste"
 msgstr "Coller"
 
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
+
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
@@ -1307,6 +1331,10 @@ msgstr "Réinitialiser"
 msgid "Reset Image"
 msgstr "Réinitialiser l'image"
 
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
+msgstr ""
+
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
 msgstr "Résolution :"
@@ -1329,7 +1357,7 @@ msgstr "Inverser la sélection"
 
 #: UiStrings.resx$ReverseBackSides$Message
 msgid "Reverse back sides"
-msgstr "Versos inversés"
+msgstr "Inverser les versos"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1514,7 +1542,7 @@ msgstr "Sélectionner une ou plusieurs langues :"
 #: UiStrings.resx$CustomRotationHelp$Message
 msgid "Select the angle to rotate.\n"
 "Or click and drag to draw a line aligned with the page (vertically or horizontally)."
-msgstr "Choisir l’angle à tourner.\n"
+msgstr "Choisir l’angle de rotation.\n"
 "Ou cliquer et glisser pour dessiner une ligne alignée avec la page (verticalement ou horizontalement)."
 
 #: MiscResources.resx$SelectedCount$Message
@@ -1556,7 +1584,7 @@ msgstr "Améliorer la netteté"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Maj"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1743,11 +1771,11 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "3. Scan the back sides of the document\n"
 "4. Click \"Manual Duplex\"\n"
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
-msgstr "Pour numériser les deux côtés d’un document multipages avec le chargeur du scanner, il est possible de choisir « Duplex » comme source de papier si le scanner le prend en charge.\n\n"
+msgstr "Pour numériser les deux côtés d’un document multipages avec le chargeur du scanner, choisir « Duplex » comme source de papier si le scanner le prend en charge.\n\n"
 "Si le scanner ne prend pas en charge le mode « Duplex », suivre ces instructions :\n"
-"1. Numériser les rectos du document\n"
+"1. Numériser tous les rectos du document\n"
 "2. Retourner le document\n"
-"3. Numériser les rectos du document\n"
+"3. Numériser tous les versos du document\n"
 "4. Cliquer sur « Duplex manuel »\n"
 "5. Selon l’orientation physique du scanner, il faudra peut-être cocher « Inverser les versos »"
 
@@ -1802,6 +1830,10 @@ msgstr "Mise à jour…"
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
 msgstr "Envoi du courriel…"
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
+msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

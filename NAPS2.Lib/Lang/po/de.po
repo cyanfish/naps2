@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -114,7 +114,7 @@ msgstr "Drucken erlauben"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -266,6 +266,14 @@ msgstr "Automatisch"
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
 msgstr "Einstellungen zum automatischen Speichern"
+
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -423,6 +431,10 @@ msgstr "Die Kommunikation mit dem Scan-Gerät wurde unterbrochen."
 msgid "Compatibility"
 msgstr "Kompatibilität"
 
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
+
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "Komprimierung:"
@@ -469,7 +481,7 @@ msgstr "Auf Seitengröße zuschneiden"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Strg"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -548,6 +560,10 @@ msgstr "Gerät:"
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
 msgstr "Abmessungen"
+
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
+msgstr ""
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -703,7 +719,7 @@ msgstr "Dateiname:"
 msgid "File Path:"
 msgstr "Dateipfad:"
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Weißabgleich korrigieren und Rauschen entfernen"
 
@@ -832,6 +848,10 @@ msgstr "Ineinander-Fächern"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG Datei (*.jpg, *.jpeg)"
 
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
+
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
 msgstr "JPEG2000 Datei (*.jp2, *.jpx)"
@@ -892,11 +912,11 @@ msgstr "PDF mittels OCR durchsuchbar machen"
 #: UiStrings.resx$ManualDuplex$Message
 #: UiStrings.resx$ManualDuplexFormTitle$Message
 msgid "Manual Duplex"
-msgstr ""
+msgstr "Manuell Duplex"
 
 #: UiStrings.resx$ManualDuplexPreview$Message
 msgid "Manual Duplex (preview)"
-msgstr ""
+msgstr "Manuell Duplex (Vorschau)"
 
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
@@ -1199,6 +1219,10 @@ msgstr "Passwort"
 msgid "Paste"
 msgstr "Einfügen"
 
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
+
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
@@ -1306,6 +1330,10 @@ msgstr "Zurücksetzen"
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
 msgstr "Bild zurücksetzen"
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
+msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1556,7 +1584,7 @@ msgstr "Schärfen"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Umschalt"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1796,6 +1824,10 @@ msgstr "Aktualisiere..."
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
 msgstr "Hochladen der E-Mail..."
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
+msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

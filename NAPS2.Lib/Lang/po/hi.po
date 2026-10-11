@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -33,7 +33,7 @@ msgstr "\"स्कैन\" मेनू डिफ़ॉल्ट प्रो�
 
 #: UiStrings.resx$DeviceFoundSingular$Message
 msgid "1 device found."
-msgstr ""
+msgstr "1 डिवाइस मिला।"
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
@@ -62,7 +62,7 @@ msgstr "डेटा प्राप्त किया जा रहा है.
 
 #: UiStrings.resx$Action$Message
 msgid "Action"
-msgstr ""
+msgstr "कार्य"
 
 #: UiStrings.resx$Advanced$Message
 msgid "Advanced"
@@ -114,7 +114,7 @@ msgstr "मुद्रण की अनुमति दें"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "ऑल्ट"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -126,7 +126,7 @@ msgstr "वैकल्पिक इंटरलीव"
 
 #: UiStrings.resx$AlwaysAsk$Message
 msgid "Always Ask"
-msgstr ""
+msgstr "हमेशा पूछिये"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_AlwaysPrompt$Message
 #: SettingsResources.resx$ScanButtonDefaultAction_AlwaysPrompt$Message
@@ -135,7 +135,7 @@ msgstr "हमेशा पूछें"
 
 #: UiStrings.resx$AlwaysShowPreview$Message
 msgid "Always show preview"
-msgstr ""
+msgstr "हमेशा प्रीव्यू दिखाएं"
 
 #: MiscResources.resx$PdfImportComponentNeeded$Message
 msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
@@ -244,7 +244,7 @@ msgstr "क्या आप वाकई {0} छवि(छवियों) म�
 
 #: UiStrings.resx$Assign$Message
 msgid "Assign"
-msgstr ""
+msgstr "निर्धारण"
 
 #: UiStrings.resx$AttachmentNameLabel$Message
 msgid "Attachment Name:"
@@ -266,6 +266,14 @@ msgstr "स्वतः"
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
 msgstr "स्वतः सहेजें सेटिंग्स"
+
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -347,7 +355,7 @@ msgstr "CCITT4"
 
 #: UiStrings.resx$CantFindScannerFlatpak$Message
 msgid "Can't find your scanner? Read about limitations of the NAPS2 Flatpak."
-msgstr ""
+msgstr "क्या आपको अपना स्कैनर नहीं मिल रहा है? नैप्स2 फ्लैटपैक की सीमाओं के बारे में पढ़ें।"
 
 #: MiscResources.resx$Cancel$Message
 #: UiStrings.resx$Cancel$Message
@@ -405,7 +413,7 @@ msgstr "सहेजने के बाद छवियाँ साफ़ क�
 
 #: UiStrings.resx$SplitHelp$Message
 msgid "Click the buttons or use the arrow keys to change the split orientation."
-msgstr ""
+msgstr "स्प्लिट ओरिएंटेशन बदलने के लिए बटन पर क्लिक करें या एरो कीज़ का इस्तेमाल करें।"
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -423,17 +431,21 @@ msgstr "स्कैनिंग डिवाइस के साथ संच�
 msgid "Compatibility"
 msgstr "संगतता"
 
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
+
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "कम्प्रेशन"
 
 #: UiStrings.resx$Connect$Message
 msgid "Connect"
-msgstr ""
+msgstr "जोड़े"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
-msgstr ""
+msgstr "संपर्क मे त्रुटि हुई ।"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -469,7 +481,7 @@ msgstr "पृष्ठ आकार के अनुसार काटें"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "कंट्रोल"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -481,7 +493,7 @@ msgstr "कस्टम पेज आकार"
 
 #: UiStrings.resx$ResolutionFormTitle$Message
 msgid "Custom Resolution"
-msgstr ""
+msgstr "कस्टम रिज़ॉल्यूशन"
 
 #: UiStrings.resx$CustomRotation$Message
 msgid "Custom Rotation"
@@ -498,7 +510,7 @@ msgstr "कस्टम..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
-msgstr ""
+msgstr "अँधेरा"
 
 #: UiStrings.resx$Day2Digit$Message
 msgid "Day (01-31)"
@@ -549,6 +561,10 @@ msgstr "उपकरण:"
 msgid "Dimensions"
 msgstr "आयाम"
 
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
+msgstr ""
+
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
 msgstr "प्रदर्शित होने वाला नाम:"
@@ -584,7 +600,7 @@ msgstr "डाउनलोड प्रगति"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr ""
+msgstr "डीपीआई"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -596,7 +612,7 @@ msgstr "ईएससीएल (ESCL) ड्राइवर"
 
 #: UiStrings.resx$EsclNetworkDriver$Message
 msgid "ESCL Network Driver"
-msgstr ""
+msgstr "इ एस सी एल नेटवर्क ड्राइवर"
 
 #: UiStrings.resx$EsclUsbDriver$Message
 msgid "ESCL USB Driver"
@@ -703,7 +719,7 @@ msgstr "फ़ाइल का नाम"
 msgid "File Path:"
 msgstr ""
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr ""
 
@@ -831,6 +847,10 @@ msgstr ""
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG File (*.jpg, *.jpeg)"
+
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1188,6 +1208,10 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
+
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
@@ -1294,6 +1318,10 @@ msgstr ""
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
+msgstr ""
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
 msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
@@ -1544,7 +1572,7 @@ msgstr ""
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "शिफ्ट"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1783,6 +1811,10 @@ msgstr ""
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
+msgstr ""
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
 msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message

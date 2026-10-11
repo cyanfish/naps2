@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: UiStrings.resx$SaveButtonDefaultAction$Message
 msgid "\"Save\" button default action:"
-msgstr "Azione predefinita del tasto \"Salva\":"
+msgstr "Azione predefinita tasto \"Salva\":"
 
 #: UiStrings.resx$ScanButtonDefaultAction$Message
 msgid "\"Scan\" button default action:"
-msgstr "Azione predefinita del tasto \"Scansiona\":"
+msgstr "Azione predefinita tasto \"Scansiona\":"
 
 #: UiStrings.resx$ScanChangesDefaultProfile$Message
 msgid "\"Scan\" menu changes default profile"
@@ -37,7 +37,7 @@ msgstr "1 dispositivo trovato."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "Colore a 24bit"
+msgstr "Colore 24bit"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -54,7 +54,7 @@ msgstr "A5 (148x210 mm)"
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
 msgid "About"
-msgstr "Info sul programma"
+msgstr "Info programma"
 
 #: MiscResources.resx$AcquiringData$Message
 msgid "Acquiring data..."
@@ -114,7 +114,7 @@ msgstr "Consenti stampa"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -176,11 +176,11 @@ msgstr "Si è verificato un errore con il driver di scansione."
 
 #: MiscResources.resx$ExitWithActiveOperations$Message
 msgid "An operation is in progress. Are you sure you want to exit and cancel the operation?"
-msgstr "È in corso un'operazione. Sicuro di volere uscire e annullare questa operazione?"
+msgstr "È in corso un'operazione. Vuoi uscire e annullare questa operazione?"
 
 #: MiscResources.resx$BatchError$Message
 msgid "An unknown error occurred during the batch scan."
-msgstr "Si è verificato un errore sconosciuto durante la scansione in serie."
+msgstr "Si è verificato un errore sconosciuto durante la scansione batch."
 
 #: MiscResources.resx$UpdateAvailable$Message
 msgid "An update is available."
@@ -204,7 +204,7 @@ msgstr "Applicazione"
 
 #: UiStrings.resx$BrightnessContrastAfterScan$Message
 msgid "Apply brightness/contrast after scan"
-msgstr "Applica luminosità/contrasto dopo la scansione"
+msgstr "Dopo la scansione applica luminosità/contrasto"
 
 #: UiStrings.resx$ApplyToSelected$Message
 msgid "Apply to all {0} selected images"
@@ -212,7 +212,7 @@ msgstr "Applica a tutte le {0} immagini selezionate"
 
 #: MiscResources.resx$ConfirmCancelBatch$Message
 msgid "Are you sure you want to cancel the batch scan?"
-msgstr "Vuoi annullare la scansione in serie?"
+msgstr "Vuoi annullare la scansione batch?"
 
 #: MiscResources.resx$ConfirmClearItems$Message
 msgid "Are you sure you want to clear {0} item(s)?"
@@ -236,7 +236,7 @@ msgstr "Vuoi eliminare {0} profilo/i?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
-msgstr "Sei sicuro di voler interrompere la condivisione di {0}?"
+msgstr "Vuoi interrompere la condivisione di {0}?"
 
 #: MiscResources.resx$ConfirmResetImages$Message
 msgid "Are you sure you want undo your changes to {0} image(s)?"
@@ -267,6 +267,14 @@ msgstr "Automatico"
 msgid "Auto Save Settings"
 msgstr "Salva automaticamente impostazioni"
 
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
+
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
 msgstr "Incremento automatico numero (1 cifra)"
@@ -285,7 +293,7 @@ msgstr "Incremento automatico numero (4 cifre)"
 
 #: UiStrings.resx$RunOcrAfterScanning$Message
 msgid "Automatically run OCR after scanning"
-msgstr "Dopo la scansione avvia automaticamente l'OCR"
+msgstr "Dopo la scansione avvia automaticamente OCR"
 
 #: SettingsResources.resx$PageSize_B4$Message
 msgid "B4 (250x353 mm)"
@@ -298,19 +306,19 @@ msgstr "B5 (176x250 mm)"
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
-msgstr "Scansione in serie"
+msgstr "Scansione batch"
 
 #: MiscResources.resx$BatchStatusCancelled$Message
 msgid "Batch cancelled."
-msgstr "Scansione in serie annullata."
+msgstr "Scansione batch annullata."
 
 #: MiscResources.resx$BatchStatusComplete$Message
 msgid "Batch completed successfully."
-msgstr "Scansione in serie completata."
+msgstr "Scansione batch completata."
 
 #: MiscResources.resx$BatchStatusError$Message
 msgid "Batch scan stopped due to error."
-msgstr "Scansione in serie arrestata a causa di un errore."
+msgstr "Scansione batch interrotta a causa di un errore."
 
 #: SettingsResources.resx$OcrMode_Best$Message
 msgid "Best"
@@ -318,7 +326,7 @@ msgstr "Migliore"
 
 #: UiStrings.resx$BitDepthLabel$Message
 msgid "Bit depth:"
-msgstr "Profondità di bit:"
+msgstr "Bit profondità:"
 
 #: MiscResources.resx$FileTypeBmp$Message
 msgid "Bitmap Files (*.bmp)"
@@ -356,7 +364,7 @@ msgstr "Annulla"
 
 #: MiscResources.resx$CancelBatch$Message
 msgid "Cancel Batch"
-msgstr "Annulla operazione in serie"
+msgstr "Annulla operazione batch"
 
 #: MiscResources.resx$BatchStatusCancelling$Message
 msgid "Cancelling...."
@@ -401,11 +409,11 @@ msgstr "Azzera tutto"
 
 #: UiStrings.resx$ClearAfterSaving$Message
 msgid "Clear images after saving"
-msgstr "Cancella immagini dopo il salvataggio"
+msgstr "Dopo il salvataggio cancella immagini"
 
 #: UiStrings.resx$SplitHelp$Message
 msgid "Click the buttons or use the arrow keys to change the split orientation."
-msgstr "Fare clic sui pulsanti o utilizzare i tasti freccia per modificare l'orientamento della divisione."
+msgstr "Per modificare l'orientamento della divisione fai clic sui pulsanti o usa i tasti freccia."
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -422,6 +430,10 @@ msgstr "La comunicazione con il dispositivo di scansione è stata interrotta."
 #: UiStrings.resx$Compatibility$Message
 msgid "Compatibility"
 msgstr "Compatibilità"
+
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -469,7 +481,7 @@ msgstr "Ritaglia alla dimensione pagina"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -494,7 +506,7 @@ msgstr "SMTP personalizzato"
 #: SettingsResources.resx$PageSize_Custom$Message
 #: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
-msgstr "Personalizzato..."
+msgstr "Personalizzata..."
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -535,7 +547,7 @@ msgstr "Progresso allineamento"
 
 #: UiStrings.resx$DeskewScannedPages$Message
 msgid "Deskew scanned pages"
-msgstr "Pagine allineate scansionate"
+msgstr "Allinea pagine scansionate"
 
 #: MiscResources.resx$AutoDeskewing$Message
 msgid "Deskewing..."
@@ -549,9 +561,13 @@ msgstr "Dispositivo:"
 msgid "Dimensions"
 msgstr "Dimensioni"
 
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
+msgstr ""
+
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
-msgstr "Nome visualizzato:"
+msgstr "Nome profilo:"
 
 #: UiStrings.resx$DocumentCorrection$Message
 msgid "Document Correction"
@@ -564,11 +580,11 @@ msgstr "Dona"
 
 #: UiStrings.resx$Done$Message
 msgid "Done"
-msgstr "Fatto"
+msgstr "OK"
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: MiscResources.resx$DownloadError$Message
 msgid "Download Error"
@@ -659,7 +675,7 @@ msgstr "Cifra il PDF"
 
 #: UiStrings.resx$Encryption$Message
 msgid "Encryption"
-msgstr "Crifratura"
+msgstr "Cifratura"
 
 #: MiscResources.resx$FileTypeEmf$Message
 msgid "Enhanced Windows MetaFile (*.emf)"
@@ -693,7 +709,7 @@ msgstr "Veloce"
 
 #: SettingsResources.resx$Source_Feeder$Message
 msgid "Feeder"
-msgstr "Alimentatore automatico"
+msgstr "Alimentatore automatico (ADF)"
 
 #: UiStrings.resx$FileNameLabel$Message
 msgid "File Name:"
@@ -703,7 +719,7 @@ msgstr "Nome file:"
 msgid "File Path:"
 msgstr "Percorso file:"
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Correggi bilanciamento del bianco e rimuovi il rumore"
 
@@ -832,6 +848,10 @@ msgstr "Interleave"
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "File JPEG (*.jpg, *.jpeg)"
 
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
+
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
 msgstr "File JPEG2000 (*.jp2, *.jpx)"
@@ -925,7 +945,7 @@ msgstr "Mese (01-12)"
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
-msgstr "Maggiori informazioni"
+msgstr "Maggiori info"
 
 #: UiStrings.resx$CropHelp$Message
 msgid "Mouse:\n"
@@ -951,7 +971,11 @@ msgid "Mouse:\n"
 "Keyboard:\n"
 "Arrow keys change the combine orientation.\n"
 "Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
-msgstr ""
+msgstr "Mouse:\n"
+"Fai clic sui pulsanti per modificare l'orientamento e l'allineamento della combinazione.\n\n"
+"Tastiera:\n"
+"I tasti freccia cambiano l'orientamento della combinazione.\n"
+"Per cambiare l'allineamento (se le immagini non hanno le stesse dimensioni) tieni premuto \"Maiusc\"."
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -1185,7 +1209,7 @@ msgstr "Pagine riordinate."
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
-msgstr "Alimentazione carta:"
+msgstr "Sorgente scansione:"
 
 #: UiStrings.resx$PdfPasswordFormTitle$Message
 msgid "Password"
@@ -1194,6 +1218,10 @@ msgstr "Password"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "Incolla"
+
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1210,11 +1238,11 @@ msgstr "Post-processo"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
-msgstr "Esegui preventivamente OCR dopo la scansione"
+msgstr "Dopo la scansione eseguire preventivamente OCR"
 
 #: UiStrings.resx$PressStartWhenReady$Message
 msgid "Press Start when ready."
-msgstr "Seleziona 'Avvia' quando sei pronto."
+msgstr "Quando sei pronto seleziona 'Avvia'."
 
 #: UiStrings.resx$Preview$Message
 #: UiStrings.resx$PreviewFormTitle$Message
@@ -1302,6 +1330,10 @@ msgstr "Ripristina"
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
 msgstr "Ripristina immagine"
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
+msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1417,7 +1449,7 @@ msgstr "Salva in file multipli"
 
 #: MiscResources.resx$BatchStatusSaving$Message
 msgid "Saving batch results..."
-msgstr "Salvataggio risultati operazioni in serie..."
+msgstr "Salvataggio risultati operazioni batch..."
 
 #: MiscResources.resx$SavingFormat$Message
 msgid "Saving {0}..."
@@ -1443,7 +1475,7 @@ msgstr "Configurazione scansione"
 #: SettingsResources.resx$ScanButtonDefaultAction_ScanWithDefaultProfile$Message
 #: UiStrings.resx$ScanWithDefaultProfile$Message
 msgid "Scan With Default Profile"
-msgstr "Scansiona con Profilo Predefinito"
+msgstr "Scansiona con profilo predefinito"
 
 #: UiStrings.resx$ScanWithNewProfile$Message
 msgid "Scan With New Profile"
@@ -1510,7 +1542,8 @@ msgstr "Seleziona una o più lingue:"
 #: UiStrings.resx$CustomRotationHelp$Message
 msgid "Select the angle to rotate.\n"
 "Or click and drag to draw a line aligned with the page (vertically or horizontally)."
-msgstr ""
+msgstr "Selezionare l'angolo da ruotare.\n"
+"O fai clic e trascina per disegnare una linea allineata con la pagina (verticalmente o orizzontalmente)."
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1551,7 +1584,7 @@ msgstr "Nitidezza"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Maiusc"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1799,6 +1832,10 @@ msgstr "Aggiornamento..."
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
 msgstr "Caricamento email..."
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
+msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

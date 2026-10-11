@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: Urdu (Pakistan)\n"
 "Language: ur\n"
@@ -268,6 +268,14 @@ msgstr "خودکار"
 msgid "Auto Save Settings"
 msgstr "خود کار طریقے سے محفوظ کرنے کی ترتیبات"
 
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
+
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
 msgstr ""
@@ -424,6 +432,10 @@ msgstr ""
 msgid "Compatibility"
 msgstr ""
 
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
+
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr ""
@@ -548,6 +560,10 @@ msgstr ""
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
+msgstr ""
+
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
 msgstr ""
 
 #: UiStrings.resx$DisplayNameLabel$Message
@@ -704,7 +720,7 @@ msgstr ""
 msgid "File Path:"
 msgstr ""
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr ""
 
@@ -831,6 +847,10 @@ msgstr ""
 
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
+msgstr ""
+
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
 msgstr ""
 
 #: MiscResources.resx$FileTypeJp2$Message
@@ -1189,6 +1209,10 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
+
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
@@ -1295,6 +1319,10 @@ msgstr ""
 
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
+msgstr ""
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
 msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
@@ -1784,6 +1812,10 @@ msgstr ""
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
+msgstr ""
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
 msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message

@@ -43,7 +43,7 @@
     <value>Apple Mail</value>
   </data>
   <data name="EmailProvider_NotSelected" xml:space="preserve">
-    <value>Постачальника не вибрано.</value>
+    <value>Не вибрано постачальника.</value>
   </data>
   <data name="HorizontalAlign_Center" xml:space="preserve">
     <value>По центру</value>
@@ -79,7 +79,7 @@
     <value>B5 (176 x 250 мм)</value>
   </data>
   <data name="PageSize_Custom" xml:space="preserve">
-    <value>Інший...</value>
+    <value>Власний розмір...</value>
   </data>
   <data name="PageSize_Legal" xml:space="preserve">
     <value>US Legal (8,5 x 14 дюймів)</value>
@@ -88,7 +88,7 @@
     <value>US Letter (8,5 x 11 дюймів)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
-    <value>Інший...</value>
+    <value>Власний розмір...</value>
   </data>
   <data name="PdfCompat_Default" xml:space="preserve">
     <value>За замовчуванням</value>
@@ -130,7 +130,7 @@
     <value>За замовчуванням</value>
   </data>
   <data name="TwainImpl_Legacy" xml:space="preserve">
-    <value>Застарілий (лише рідний інтерфейс)</value>
+    <value>Застарілий (лише вбудований інтерфейс)</value>
   </data>
   <data name="TwainImpl_NativeXfer" xml:space="preserve">
     <value>Стандартне передавання</value>

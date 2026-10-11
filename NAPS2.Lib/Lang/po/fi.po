@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -114,7 +114,7 @@ msgstr "Salli tulostaminen"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -266,6 +266,14 @@ msgstr "Automaattinen"
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
 msgstr "Automaattisen tallennuksen asetukset"
+
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -423,6 +431,10 @@ msgstr "Yhteys skannauslaitteen kanssa keskeytyi."
 msgid "Compatibility"
 msgstr "Yhteensopivuus"
 
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
+
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "Pakkaus:"
@@ -469,7 +481,7 @@ msgstr "Rajaa sivun kokoon"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -548,6 +560,10 @@ msgstr "Laite:"
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
 msgstr "Mittasuhteet"
+
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
+msgstr ""
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -703,7 +719,7 @@ msgstr "Tiedoston nimi"
 msgid "File Path:"
 msgstr "Tiedostopolku:"
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Korjaa valkotasapaino ja poista kohinaa"
 
@@ -831,6 +847,10 @@ msgstr "Lomita"
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG-tiedosto (*.jpg, *.jpeg)"
+
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1081,7 +1101,7 @@ msgstr "OCR muoto:"
 
 #: UiStrings.resx$OK$Message
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: UiStrings.resx$OffsetWidth$Message
 msgid "Offset width based on alignment (WIA)"
@@ -1187,6 +1207,10 @@ msgstr "Salasana"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "Liitä"
+
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1295,6 +1319,10 @@ msgstr "Palauta"
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
 msgstr "Palauta kuva"
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
+msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1544,7 +1572,7 @@ msgstr "Terävöitä"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Vaihto"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1784,6 +1812,10 @@ msgstr "Päivitetään..."
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
 msgstr "Lähetään sähköpostia..."
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
+msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

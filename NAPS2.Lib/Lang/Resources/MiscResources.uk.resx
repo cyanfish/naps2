@@ -19,7 +19,7 @@
     <value>Очистити</value>
   </data>
   <data name="ConfirmClearItems" xml:space="preserve">
-    <value>Ви дійсно хочете очистити {0} елементів?</value>
+    <value>Ви впевнені, що хочете очистити {0} елементів?</value>
   </data>
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Ви впевнені, що хочете видалити {0} елементів?</value>
@@ -31,7 +31,7 @@
     <value>Ви впевнені, що хочете видалити профіль {0}?</value>
   </data>
   <data name="ConfirmOverwriteFile" xml:space="preserve">
-    <value>Файл {0} уже існує. Бажаєте перезаписати його?</value>
+    <value>Файл {0} уже існує. Перезаписати його?</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Видалити</value>
@@ -40,10 +40,10 @@
     <value>Не вдалося знайти вибраний сканер.</value>
   </data>
   <data name="DeviceOffline" xml:space="preserve">
-    <value>Вибраний сканер не підключений до мережі.</value>
+    <value>Вибраний сканер не в мережі.</value>
   </data>
   <data name="DontHavePermission" xml:space="preserve">
-    <value>У вас немає дозволу на збереження файлів у цьому розташуванні.</value>
+    <value>У вас немає дозволу зберігати файли в цьому розташуванні.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Помилка</value>
@@ -76,16 +76,16 @@
     <value>JPEG 2000-файл (*.jp2, *.jpx)</value>
   </data>
   <data name="NameMissing" xml:space="preserve">
-    <value>Відсутнє ім'я.</value>
+    <value>Не вказано ім’я.</value>
   </data>
   <data name="NAPS2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
   <data name="NoDeviceSelected" xml:space="preserve">
-    <value>Пристрій не вибрано.</value>
+    <value>Не вибрано пристрій.</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
-    <value>Сканувальний пристрій не знайдено.</value>
+    <value>Сканувального пристрою не знайдено.</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
     <value>Перезаписування файлу</value>
@@ -97,28 +97,28 @@
     <value>Відскановане зображення</value>
   </data>
   <data name="SelectProfileBeforeScan" xml:space="preserve">
-    <value>Виберіть профіль перед натисканням «Сканувати».</value>
+    <value>Виберіть профіль, перш ніж натискати «Сканувати».</value>
   </data>
   <data name="UnknownDriverError" xml:space="preserve">
-    <value>Сталася помилка драйвера сканера.</value>
+    <value>Сталася помилка драйвера сканування.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Версія {0}</value>
   </data>
   <data name="EmailError" xml:space="preserve">
-    <value>Під час спроби надсилання електронного листа сталася помилка.</value>
+    <value>Під час спроби надіслати електронний лист сталася помилка.</value>
   </data>
   <data name="InstallComplete" xml:space="preserve">
     <value>Встановлення завершено</value>
   </data>
   <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Встановлення завершено. Бажаєте перезапустити NAPS2 зараз?</value>
+    <value>Встановлення завершено. Перезапустити NAPS2 зараз?</value>
   </data>
   <data name="InstallFailed" xml:space="preserve">
-    <value>Помилка під час встановлення.</value>
+    <value>Не вдалося виконати встановлення.</value>
   </data>
   <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Помилка при встановленні</value>
+    <value>Не вдалося встановити</value>
   </data>
   <data name="AllCount" xml:space="preserve">
     <value>Усі ({0})</value>
@@ -145,25 +145,25 @@
     <value>Помилка завантаження</value>
   </data>
   <data name="FilesCouldNotBeDownloaded" xml:space="preserve">
-    <value>Не вдалося завантажити один або декілька файлів.</value>
+    <value>Не вдалося завантажити один або кілька файлів.</value>
   </data>
   <data name="CustomPageSizeFormat" xml:space="preserve">
-    <value>Інший ({0} x {1} {2})</value>
+    <value>Власний розмір ({0} x {1} {2})</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Сканувати</value>
   </data>
   <data name="ConfirmResetImages" xml:space="preserve">
-    <value>Ви впевнені, що хочете скасувати зміни, внесені до {0} зображень?</value>
+    <value>Ви впевнені, що хочете скасувати внесені зміни до {0} зображень?</value>
   </data>
   <data name="ResetImage" xml:space="preserve">
-    <value>Перезавантажити зображення</value>
+    <value>Скидання зображення</value>
   </data>
   <data name="ExitWithUnsavedChanges" xml:space="preserve">
-    <value>У вас є незбережені зміни. Ви впевнені, що хочете вийти й скасувати ці зміни?</value>
+    <value>У вас є незбережені зміни. Ви впевнені, що хочете вийти та скасувати ці зміни?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>Операція виконується. Ви впевнені, що хочете вийти та скасувати операцію?</value>
+    <value>Виконується операція. Ви впевнені, що хочете вийти та скасувати операцію?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Незбережені зміни</value>
@@ -178,13 +178,13 @@
     <value>Вибраний сканер не підтримує автоматичну подачу документа. Якщо ваш сканер все ж має автоматичну подачу документа, спробуйте вибрати інший драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>Автоподавач порожній.</value>
+    <value>У подавачі немає сторінок.</value>
   </data>
   <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>У вас немає дозволу на копіювання вмісту з файлу «{0}».</value>
+    <value>У вас немає дозволу копіювати вміст із файлу «{0}».</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
-    <value>Під час спроби збереження файлу сталася помилка.</value>
+    <value>Під час спроби зберегти файл сталася помилка.</value>
   </data>
   <data name="OfN" xml:space="preserve">
     <value>із {0}</value>
@@ -274,7 +274,7 @@
     <value>Надсилання PDF електронною поштою</value>
   </data>
   <data name="AutoSaveError" xml:space="preserve">
-    <value>Під час спроби автозбереження сталася помилка.</value>
+    <value>Під час спроби автоматичного збереження сталася помилка.</value>
   </data>
   <data name="FileTypeAllFiles" xml:space="preserve">
     <value>Усі файли</value>
@@ -295,7 +295,7 @@
     <value>Сканер прогрівається.</value>
   </data>
   <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Доступне оновлення для розпізнавання (OCR).</value>
+    <value>Доступне оновлення компонента розпізнавання тексту.</value>
   </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Зображення збережено.</value>
@@ -313,19 +313,19 @@
     <value>Ви впевнені, що хочете видалити «{0}»?</value>
   </data>
   <data name="FileInUse" xml:space="preserve">
-    <value>Не вдалося перезаписати файл, оскільки він зараз використовується.</value>
+    <value>Не вдалося перезаписати файл, оскільки він наразі використовується.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Вирівнювання...</value>
+    <value>Виправлення нахилу...</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Виконання вирівнювання</value>
+    <value>Виконання виправлення нахилу</value>
   </data>
   <data name="DownloadNeeded" xml:space="preserve">
     <value>Необхідно завантажити</value>
   </data>
   <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Для імпорту цього PDF-файлу потрібен додатковий компонент. Бажаєте завантажити його зараз?</value>
+    <value>Для імпорту цього PDF-файлу потрібен додатковий компонент. Завантажити його зараз?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Ви впевнені, що хочете скасувати пакетне сканування?</value>
@@ -334,10 +334,10 @@
     <value>Скасувати пакетне сканування</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Зробити пожертву</value>
+    <value>Підтримати проєкт</value>
   </data>
   <data name="DonatePrompt" xml:space="preserve">
-    <value>NAPS2 є повністю безкоштовною програмою. Розгляньте можливість підтримати проєкт пожертвою.</value>
+    <value>NAPS2 є повністю безкоштовною програмою. Розгляньте можливість зробити пожертву.</value>
   </data>
   <data name="LeaveAReview" xml:space="preserve">
     <value>Залишити відгук</value>
@@ -352,7 +352,7 @@
     <value>Механізм розпізнавання (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
-    <value>Вибраний драйвер не підтримується цією системою.</value>
+    <value>Вибраний драйвер не підтримується в цій системі.</value>
   </data>
   <data name="OcrProgress" xml:space="preserve">
     <value>Виконання розпізнавання</value>
@@ -367,16 +367,16 @@
     <value>Оновлення...</value>
   </data>
   <data name="NoUpdates" xml:space="preserve">
-    <value>Доступних оновлень немає.</value>
+    <value>Оновлень немає.</value>
   </data>
   <data name="CheckingForUpdates" xml:space="preserve">
     <value>Виконується перевірка...</value>
   </data>
   <data name="UpdateCheckDisabled" xml:space="preserve">
-    <value>Перевірку оновлень вимкнено.</value>
+    <value>Перевірку наявності оновлень вимкнено.</value>
   </data>
   <data name="UpdateError" xml:space="preserve">
-    <value>Під час спроби встановлення оновлення сталася помилка.</value>
+    <value>Під час спроби встановити оновлення сталася помилка.</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>Встановити {0}</value>
@@ -391,7 +391,7 @@
     <value>Завантаження електронного листа...</value>
   </data>
   <data name="ErrorEmailing" xml:space="preserve">
-    <value>Під час спроби надсилання електронного листа сталася помилка.</value>
+    <value>Під час спроби надіслати електронний лист сталася помилка.</value>
   </data>
   <data name="ScanProgressPage" xml:space="preserve">
     <value>Сканування сторінки {0}...</value>

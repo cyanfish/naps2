@@ -286,7 +286,7 @@
     <value>ईएससीएल (ESCL) ड्राइवर</value>
   </data>
   <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
+    <value>इ एस सी एल नेटवर्क ड्राइवर</value>
   </data>
   <data name="EsclUsbDriver" xml:space="preserve">
     <value>ESCL USB Driver</value>
@@ -381,7 +381,7 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR mode:</value>
   </data>
-  <data name="OcrPreProcessing" xml:space="preserve">
+  <data name="FixWhiteBalanceAndRemoveNoise" xml:space="preserve">
     <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
@@ -425,6 +425,9 @@
   </data>
   <data name="Revert" xml:space="preserve">
     <value>Revert</value>
+  </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto-Crop</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>सभी {0} चयनित छवियों पर लागू करें</value>
@@ -649,10 +652,10 @@
     <value>आयाम</value>
   </data>
   <data name="ResolutionFormTitle" xml:space="preserve">
-    <value>Custom Resolution</value>
+    <value>कस्टम रिज़ॉल्यूशन</value>
   </data>
   <data name="Dpi" xml:space="preserve">
-    <value>Dpi</value>
+    <value>डीपीआई</value>
   </data>
   <data name="WaitingForTwain" xml:space="preserve">
     <value>Waiting for TWAIN to complete...</value>
@@ -683,6 +686,9 @@
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
     <value>स्कैन किए गए पृष्ठों से तिरछापन दूर करें</value>
+  </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto-crop scanned pages</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>स्कैन के बाद चमक/कंट्रास्ट लागू करें</value>
@@ -814,13 +820,13 @@
     <value>Port</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect</value>
+    <value>जोड़े</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Connection error.</value>
+    <value>संपर्क मे त्रुटि हुई ।</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
-    <value>Always Ask</value>
+    <value>हमेशा पूछिये</value>
   </data>
   <data name="SearchingForDevices" xml:space="preserve">
     <value>Searching for devices...</value>
@@ -829,7 +835,7 @@
     <value>{0} devices found.</value>
   </data>
   <data name="DeviceFoundSingular" xml:space="preserve">
-    <value>1 device found.</value>
+    <value>1 डिवाइस मिला।</value>
   </data>
   <data name="NoDevicesFound" xml:space="preserve">
     <value>No devices found.</value>
@@ -838,7 +844,7 @@
     <value>Sidebar</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Can't find your scanner? Read about limitations of the NAPS2 Flatpak.</value>
+    <value>क्या आपको अपना स्कैनर नहीं मिल रहा है? नैप्स2 फ्लैटपैक की सीमाओं के बारे में पढ़ें।</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
     <value>Keyboard Shortcuts</value>
@@ -856,13 +862,13 @@
     <value>Scan With New Profile</value>
   </data>
   <data name="Assign" xml:space="preserve">
-    <value>Assign</value>
+    <value>निर्धारण</value>
   </data>
   <data name="Unassign" xml:space="preserve">
     <value>Unassign</value>
   </data>
   <data name="Action" xml:space="preserve">
-    <value>Action</value>
+    <value>कार्य</value>
   </data>
   <data name="Shortcut" xml:space="preserve">
     <value>Shortcut</value>
@@ -897,7 +903,7 @@ Hold "{1}" to move the whole selection at once.
 Hold "{2}" to move faster.</value>
   </data>
   <data name="SplitHelp" xml:space="preserve">
-    <value>Click the buttons or use the arrow keys to change the split orientation.</value>
+    <value>स्प्लिट ओरिएंटेशन बदलने के लिए बटन पर क्लिक करें या एरो कीज़ का इस्तेमाल करें।</value>
   </data>
   <data name="CombineHelp" xml:space="preserve">
     <value>Mouse:
@@ -921,7 +927,7 @@ Or click and drag to draw a line aligned with the page (vertically or horizontal
     <value>Manual Duplex</value>
   </data>
   <data name="AlwaysShowPreview" xml:space="preserve">
-    <value>Always show preview</value>
+    <value>हमेशा प्रीव्यू दिखाएं</value>
   </data>
   <data name="ReverseBackSides" xml:space="preserve">
     <value>Reverse back sides</value>
@@ -943,12 +949,30 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Pages reordered.</value>
   </data>
   <data name="ControlKey" xml:space="preserve">
-    <value>Ctrl</value>
+    <value>कंट्रोल</value>
   </data>
   <data name="AltKey" xml:space="preserve">
-    <value>Alt</value>
+    <value>ऑल्ट</value>
   </data>
   <data name="ShiftKey" xml:space="preserve">
-    <value>Shift</value>
+    <value>शिफ्ट</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="ResolutionDpiLabel" xml:space="preserve">
+    <value>Resolution (dpi):</value>
+  </data>
+  <data name="DimensionsLabel" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="PixelDimensionsLabel" xml:space="preserve">
+    <value>Pixel dimensions:</value>
+  </data>
+  <data name="UseJpegCompression" xml:space="preserve">
+    <value>Use JPEG compression</value>
+  </data>
+  <data name="JpegQualityLabel" xml:space="preserve">
+    <value>JPEG quality:</value>
   </data>
 </root>

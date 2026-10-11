@@ -163,7 +163,7 @@
     <value>Ci sono modifiche non salvate. Sei sicuro di voler uscire e abbandonare tali modifiche?</value>
   </data>
   <data name="ExitWithActiveOperations" xml:space="preserve">
-    <value>È in corso un'operazione. Sicuro di volere uscire e annullare questa operazione?</value>
+    <value>È in corso un'operazione. Vuoi uscire e annullare questa operazione?</value>
   </data>
   <data name="UnsavedChanges" xml:space="preserve">
     <value>Modifiche non salvate</value>
@@ -190,19 +190,19 @@
     <value>di {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
-    <value>Si è verificato un errore sconosciuto durante la scansione in serie.</value>
+    <value>Si è verificato un errore sconosciuto durante la scansione batch.</value>
   </data>
   <data name="BatchStatusCancelled" xml:space="preserve">
-    <value>Scansione in serie annullata.</value>
+    <value>Scansione batch annullata.</value>
   </data>
   <data name="BatchStatusCancelling" xml:space="preserve">
     <value>Annullamento....</value>
   </data>
   <data name="BatchStatusComplete" xml:space="preserve">
-    <value>Scansione in serie completata.</value>
+    <value>Scansione batch completata.</value>
   </data>
   <data name="BatchStatusError" xml:space="preserve">
-    <value>Scansione in serie arrestata a causa di un errore.</value>
+    <value>Scansione batch interrotta a causa di un errore.</value>
   </data>
   <data name="BatchStatusPage" xml:space="preserve">
     <value>Scansione pagina {0}...</value>
@@ -220,7 +220,7 @@
     <value>Chiudi</value>
   </data>
   <data name="BatchStatusSaving" xml:space="preserve">
-    <value>Salvataggio risultati operazioni in serie...</value>
+    <value>Salvataggio risultati operazioni batch...</value>
   </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Lo scanner selezionato non supporta la scansione fronte retro. Se lo scanner dovrebbe supportare la scansione fronte retro, prova a usare un driver differente.</value>
@@ -328,10 +328,10 @@
     <value>Per importare questo file PDF è necessario un componente aggiuntivo. Vuoi scaricarlo ora?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
-    <value>Vuoi annullare la scansione in serie?</value>
+    <value>Vuoi annullare la scansione batch?</value>
   </data>
   <data name="CancelBatch" xml:space="preserve">
-    <value>Annulla operazione in serie</value>
+    <value>Annulla operazione batch</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Dona</value>

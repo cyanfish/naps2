@@ -381,7 +381,7 @@
   <data name="OcrModeLabel" xml:space="preserve">
     <value>OCR mode:</value>
   </data>
-  <data name="OcrPreProcessing" xml:space="preserve">
+  <data name="FixWhiteBalanceAndRemoveNoise" xml:space="preserve">
     <value>Fix white balance and remove noise</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
@@ -425,6 +425,9 @@
   </data>
   <data name="Revert" xml:space="preserve">
     <value>Revert</value>
+  </data>
+  <data name="AutoCrop" xml:space="preserve">
+    <value>Auto-Crop</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Apply to all {0} selected images</value>
@@ -683,6 +686,9 @@
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
     <value>Deskew scanned pages</value>
+  </data>
+  <data name="AutoCropScannedPages" xml:space="preserve">
+    <value>Auto-crop scanned pages</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Apply brightness/contrast after scan</value>
@@ -950,5 +956,23 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="ShiftKey" xml:space="preserve">
     <value>Shift</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Compress</value>
+  </data>
+  <data name="ResolutionDpiLabel" xml:space="preserve">
+    <value>Resolution (dpi):</value>
+  </data>
+  <data name="DimensionsLabel" xml:space="preserve">
+    <value>Dimensions:</value>
+  </data>
+  <data name="PixelDimensionsLabel" xml:space="preserve">
+    <value>Pixel dimensions:</value>
+  </data>
+  <data name="UseJpegCompression" xml:space="preserve">
+    <value>Use JPEG compression</value>
+  </data>
+  <data name="JpegQualityLabel" xml:space="preserve">
+    <value>JPEG quality:</value>
   </data>
 </root>

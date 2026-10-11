@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-09-30 23:16\n"
+"PO-Revision-Date: 2026-10-11 22:01\n"
 "Last-Translator: \n"
 "Language-Team: Thai\n"
 "Language: th\n"
@@ -267,6 +267,14 @@ msgstr "อัตโนมัติ"
 msgid "Auto Save Settings"
 msgstr "ตั้งค่าการบันทึกอัตโนมัติ"
 
+#: UiStrings.resx$AutoCrop$Message
+msgid "Auto-Crop"
+msgstr ""
+
+#: UiStrings.resx$AutoCropScannedPages$Message
+msgid "Auto-crop scanned pages"
+msgstr ""
+
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
 msgstr "การเพิ่มจำนวนอัตโนมัติ (1 หลัก)"
@@ -423,6 +431,10 @@ msgstr "การเชื่อมต่อกับเครื่องสแ
 msgid "Compatibility"
 msgstr "ความเข้ากันได้"
 
+#: UiStrings.resx$Compress$Message
+msgid "Compress"
+msgstr ""
+
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
 msgstr "การบีบอัด:"
@@ -547,6 +559,10 @@ msgstr "อุปกรณ์:"
 
 #: UiStrings.resx$Dimensions$Message
 msgid "Dimensions"
+msgstr ""
+
+#: UiStrings.resx$DimensionsLabel$Message
+msgid "Dimensions:"
 msgstr ""
 
 #: UiStrings.resx$DisplayNameLabel$Message
@@ -703,7 +719,7 @@ msgstr "ชื่อไฟล์:"
 msgid "File Path:"
 msgstr "ที่ตั้งของไฟล์"
 
-#: UiStrings.resx$OcrPreProcessing$Message
+#: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "แก้ไข สมดุลแสงสีขาว และ ลบจุดขาวดำ"
 
@@ -831,6 +847,10 @@ msgstr "แทรกสลับหน้า"
 #: MiscResources.resx$FileTypeJpeg$Message
 msgid "JPEG File (*.jpg, *.jpeg)"
 msgstr "JPEG File (*.jpg, *.jpeg)"
+
+#: UiStrings.resx$JpegQualityLabel$Message
+msgid "JPEG quality:"
+msgstr ""
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1188,6 +1208,10 @@ msgstr "รหัสผ่าน"
 msgid "Paste"
 msgstr "วาง"
 
+#: UiStrings.resx$PixelDimensionsLabel$Message
+msgid "Pixel dimensions:"
+msgstr ""
+
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
 msgid "Placeholders"
@@ -1295,6 +1319,10 @@ msgstr "รีเซ็ต"
 #: MiscResources.resx$ResetImage$Message
 msgid "Reset Image"
 msgstr "รีเซ็ตรูปภาพ"
+
+#: UiStrings.resx$ResolutionDpiLabel$Message
+msgid "Resolution (dpi):"
+msgstr ""
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1783,6 +1811,10 @@ msgstr ""
 
 #: MiscResources.resx$UploadingEmail$Message
 msgid "Uploading email..."
+msgstr ""
+
+#: UiStrings.resx$UseJpegCompression$Message
+msgid "Use JPEG compression"
 msgstr ""
 
 #: UiStrings.resx$UseNativeUi$Message
