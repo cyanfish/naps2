@@ -205,7 +205,7 @@ internal class EsclScanDriver : IScanDriver
                     }
                     var doc = await GetNextDocumentWithRetries(client, job, progressCallback, hasShortTimeoutExtension);
                     if (doc == null) break;
-                    foreach (var image in GetImagesFromRawDocument(options, doc))
+                    foreach (var image in GetImagesFromRawDocument(options, scanSettings, doc))
                     {
                         callback(image);
                     }
@@ -434,7 +434,8 @@ internal class EsclScanDriver : IScanDriver
         return await foundTcs.Task;
     }
 
-    private IEnumerable<IMemoryImage> GetImagesFromRawDocument(ScanOptions options, RawDocument doc)
+    private IEnumerable<IMemoryImage> GetImagesFromRawDocument(ScanOptions options, EsclScanSettings scanSettings,
+        RawDocument doc)
     {
         if (doc.ContentType == ContentTypes.PDF)
         {
@@ -446,9 +447,37 @@ internal class EsclScanDriver : IScanDriver
                 yield return image;
             }
         }
+        else if (doc.ContentType == ContentTypes.JPEG)
+        {
+            var image = _scanningContext.ImageContext.Load(doc.Data);
+            // Manually read the DPI from the headers, if it's not available, fall back to the scanned DPI. 
+            var header = ReadJpegHeader(doc.Data);
+            if (header is { HorizontalDpi: > 0, VerticalDpi: > 0 })
+            {
+                image.SetResolution((float) header.HorizontalDpi, (float) header.VerticalDpi);
+            }
+            else
+            {
+                image.SetResolution(scanSettings.XResolution, scanSettings.YResolution);
+            }
+            yield return image;
+        }
         else
         {
             yield return _scanningContext.ImageContext.Load(doc.Data);
+        }
+    }
+
+    private JpegFormatHelper.JpegHeader? ReadJpegHeader(byte[] data)
+    {
+        try
+        {
+            return JpegFormatHelper.ReadHeader(new MemoryStream(data));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogDebug(ex, "Could not read ESCL JPEG header");
+            return null;
         }
     }
 
