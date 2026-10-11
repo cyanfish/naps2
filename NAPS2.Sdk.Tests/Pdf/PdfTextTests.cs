@@ -9,14 +9,14 @@ namespace NAPS2.Sdk.Tests.Pdf;
 // As we use the same data for multiple methods, some parameters may be unused
 #pragma warning disable xUnit1026
 
-public class PdfFontTests : ContextualTests
+public class PdfTextTests : ContextualTests
 {
     private readonly PdfImporter _importer;
     private readonly PdfExporter _exporter;
     private readonly string _exportPath;
     private readonly string _pdfiumImportPath;
 
-    public PdfFontTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+    public PdfTextTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
     {
         _importer = new PdfImporter(ScanningContext);
         _exporter = new PdfExporter(ScanningContext);
@@ -100,6 +100,32 @@ public class PdfFontTests : ContextualTests
         await _exporter.Export(_exportPath, [image], ocrParams: new OcrParams("chi_sim"));
 
         PdfAsserts.AssertContainsTextOnce(text, _exportPath);
+    }
+
+    [Fact]
+    public async Task ExportMultipleLinesWithPdfSharp()
+    {
+        var text = "Hello world\nfoo bar baz";
+        SetUpFakeOcr(ifNoMatch: text, delay: 0, splitWords: true);
+
+        using var image = CreateScannedImage();
+        await _exporter.Export(_exportPath, [image], ocrParams: new OcrParams("eng"));
+
+        PdfAsserts.AssertContainsTextOnce("Hello world foo bar baz", _exportPath);
+        PdfAsserts.AssertOcrText(CreateFakeOcrResult(text, "eng", true), _exportPath);
+    }
+
+    [Fact]
+    public async Task ExportMultipleLinesWithPdfium()
+    {
+        var text = "Hello world\nfoo bar baz";
+        SetUpFakeOcr(ifNoMatch: text, delay: 0, splitWords: true);
+
+        var images = await _importer.Import(_pdfiumImportPath).ToListAsync();
+        await _exporter.Export(_exportPath, images, ocrParams: new OcrParams("eng"));
+
+        PdfAsserts.AssertContainsTextOnce("Hello world foo bar baz", _exportPath);
+        PdfAsserts.AssertOcrText(CreateFakeOcrResult(text, "eng", true), _exportPath);
     }
 
     private async Task AssertSmallOcrOverhead(ICollection<ProcessedImage> images)

@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Codeuctivity;
+using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Pdf.Pdfium;
 using PdfSharpCore.Pdf.IO;
@@ -74,6 +75,37 @@ public static class PdfAsserts
             }
         }
         return count;
+    }
+
+    public static void AssertOcrText(OcrResult ocrResult, string filePath)
+    {
+        Assert.True(File.Exists(filePath));
+        var expectedChars = ocrResult.Words
+            .SelectMany(word => word.Text.Where(c => !char.IsWhiteSpace(c)).Select(c => (c, word.Bounds)))
+            .ToList();
+        lock (PdfiumNativeLibrary.Instance)
+        {
+            using var doc = PdfDocument.Load(filePath);
+            using var page = doc.GetPage(0);
+            using var text = page.GetText();
+            int j = 0;
+            for (int i = 0; i < text.CharCount; i++)
+            {
+                var c = (char) text.ReadUtf32(i);
+                if (char.IsWhiteSpace(c) || char.IsControl(c)) continue;
+                Assert.True(j < expectedChars.Count, $"Unexpected extra char '{c}'");
+                var (expectedChar, bounds) = expectedChars[j++];
+                Assert.Equal(expectedChar, c);
+                // The center of the char box (scaled to the OCR page bounds, with the origin at the top-left) should be
+                // within the word bounds. This assumes the page isn't cropped or rotated.
+                var box = text.GetCharBox(i);
+                var x = (box.Left + box.Right) / 2 * (ocrResult.PageBounds.w / page.Width);
+                var y = (page.Height - (box.Top + box.Bottom) / 2) * (ocrResult.PageBounds.h / page.Height);
+                Assert.InRange(x, bounds.x, bounds.x + bounds.w);
+                Assert.InRange(y, bounds.y, bounds.y + bounds.h);
+            }
+            Assert.Equal(expectedChars.Count, j);
+        }
     }
 
     public static void AssertMetadata(PdfMetadata expected, string filePath, string password = null)

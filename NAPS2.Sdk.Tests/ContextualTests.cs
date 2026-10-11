@@ -90,31 +90,8 @@ public class ContextualTests : IDisposable
                     var ocrImage = ImageContext.Load(path);
                     await Task.Delay(delay);
 
-                    OcrResult CreateOcrResult(string text)
-                    {
-                        if (splitWords)
-                        {
-                            var words = new List<OcrResultElement>();
-                            int x = 10;
-                            foreach (var wordText in text.Split(' '))
-                            {
-                                // Width proportional to the word length, with a gap between words
-                                int w = wordText.Length * 2;
-                                words.Add(new OcrResultElement(wordText, ocrParams.LanguageCode!, false,
-                                    (x, 10, w, 10), 20, 10, ImmutableList<OcrResultElement>.Empty));
-                                x += w + 2;
-                            }
-                            var splitLine = new OcrResultElement(text, ocrParams.LanguageCode!, false,
-                                (10, 10, x - 12, 10), 20, 10, words.ToImmutableList());
-                            return new((0, 0, 100, 100), words.ToImmutableList(), ImmutableList.Create(splitLine));
-                        }
-                        var word = new OcrResultElement(text, ocrParams.LanguageCode!, false,
-                            (10, 10, 10, 10), 20, 10, ImmutableList<OcrResultElement>.Empty);
-                        var line = new OcrResultElement(text, ocrParams.LanguageCode!, false,
-                            (10, 10, 10, 10), 20, 10, ImmutableList.Create(word));
-                        var list = ImmutableList.Create(line);
-                        return new((0, 0, 100, 100), list, list);
-                    }
+                    OcrResult CreateOcrResult(string text) =>
+                        CreateFakeOcrResult(text, ocrParams.LanguageCode!, splitWords);
 
                     if (ocrTextByImage != null)
                     {
@@ -137,6 +114,45 @@ public class ContextualTests : IDisposable
                     return null;
                 });
         ScanningContext.OcrEngine = ocrMock;
+    }
+
+    /// <summary>
+    /// Creates the OCR result used by SetUpFakeOcr, with page bounds of 100x100. If splitWords is true, the text is
+    /// split into lines (by "\n") and words (by " "), with each word's width proportional to its length.
+    /// Otherwise, the whole text is a single word.
+    /// </summary>
+    public static OcrResult CreateFakeOcrResult(string text, string languageCode, bool splitWords)
+    {
+        if (splitWords)
+        {
+            var allWords = new List<OcrResultElement>();
+            var lines = new List<OcrResultElement>();
+            int y = 10;
+            foreach (var lineText in text.Split('\n'))
+            {
+                var words = new List<OcrResultElement>();
+                int x = 10;
+                foreach (var wordText in lineText.Split(' '))
+                {
+                    // Width proportional to the word length, with a gap between words
+                    int w = wordText.Length * 2;
+                    words.Add(new OcrResultElement(wordText, languageCode, false,
+                        (x, y, w, 10), y + 10, 10, ImmutableList<OcrResultElement>.Empty));
+                    x += w + 2;
+                }
+                lines.Add(new OcrResultElement(lineText, languageCode, false,
+                    (10, y, x - 12, 10), y + 10, 10, words.ToImmutableList()));
+                allWords.AddRange(words);
+                y += 15;
+            }
+            return new((0, 0, 100, 100), allWords.ToImmutableList(), lines.ToImmutableList());
+        }
+        var word = new OcrResultElement(text, languageCode, false,
+            (10, 10, 10, 10), 20, 10, ImmutableList<OcrResultElement>.Empty);
+        var line = new OcrResultElement(text, languageCode, false,
+            (10, 10, 10, 10), 20, 10, ImmutableList.Create(word));
+        var list = ImmutableList.Create(line);
+        return new((0, 0, 100, 100), list, list);
     }
 
     public string CopyResourceToFile(byte[] resource, string folder, string fileName)

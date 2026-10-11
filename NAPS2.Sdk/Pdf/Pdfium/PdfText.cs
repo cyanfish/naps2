@@ -12,6 +12,15 @@ internal class PdfText : NativePdfiumObject
 
     public int ReadUtf32(int i) => Native.FPDFText_GetUnicode(Handle, i);
 
+    public PdfRect GetCharBox(int i)
+    {
+        if (!Native.FPDFText_GetCharBox(Handle, i, out var left, out var right, out var bottom, out var top))
+        {
+            throw new Exception("Could not get char box");
+        }
+        return new PdfRect((float) left, (float) top, (float) right, (float) bottom);
+    }
+
     public string ReadAll()
     {
         var charCount = CharCount;
