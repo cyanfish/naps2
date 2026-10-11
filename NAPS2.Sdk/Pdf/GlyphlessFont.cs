@@ -126,7 +126,7 @@ internal static class GlyphlessFont
                 {string.Join("\n", block.Select(hi => $"<{hi:X2}00> <{hi:X2}FF> <{hi:X2}00>"))}
                 endbfrange
                 """));
-        return $"""
+        var cmap = $"""
             /CIDInit /ProcSet findresource begin
             12 dict begin
             begincmap
@@ -142,6 +142,8 @@ internal static class GlyphlessFont
             end
             end
             """;
+        // Raw string literals use the source file's line endings, so normalize them for consistent output
+        return cmap.Replace("\r\n", "\n");
     }
 
     private static PdfReference AddObject(PdfDocument document, PdfDictionary dict)
