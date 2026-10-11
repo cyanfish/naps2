@@ -79,13 +79,14 @@ public class RecoveryStorageManagerTests : ContextualTests
             ScanningContext.CreateProcessedImage(
                 ImageContext.Create(100, 100, ImagePixelFormat.RGB24),
                 true,
-                -1,
+                60,
                 PageSize.A4));
 
         _imageList.Mutate(new ListMutation<UiImage>.Append(image1));
         var indexFileContent = File.ReadAllText(Path.Combine(_recoveryFolder, "index.xml"));
         Assert.Contains("<HighQuality>true</HighQuality>", indexFileContent);
         Assert.Contains("<PageSize>210x297 mm</PageSize>", indexFileContent);
+        Assert.Contains("<Quality>60</Quality>", indexFileContent);
     }
 
     [Fact]

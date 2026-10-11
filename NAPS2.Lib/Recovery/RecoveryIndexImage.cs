@@ -10,5 +10,7 @@ public class RecoveryIndexImage
 
     public bool HighQuality { get; set; }
 
+    public int Quality { get; set; }
+
     public string? PageSize { get; set; }
 }

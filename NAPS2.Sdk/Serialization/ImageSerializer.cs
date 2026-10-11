@@ -31,15 +31,17 @@ internal static class ImageSerializer
             thumbStream = thumb.SaveToMemoryStream(ImageFileFormat.Png);
         }
 
+        var metadata = new SerializedImageMetadata
+        {
+            TransformListXml = image.TransformState.Transforms.ToXml(),
+            Lossless = image.Metadata.Lossless,
+            PageSize = image.Metadata.PageSize?.ToString() ?? "",
+            Quality = image.Metadata.Quality
+        };
         var result = new SerializedImage
         {
             TransferOwnership = options.TransferOwnership || options.ReturnOwnership,
-            Metadata = new SerializedImageMetadata
-            {
-                TransformListXml = image.TransformState.Transforms.ToXml(),
-                Lossless = image.Metadata.Lossless,
-                PageSize = image.Metadata.PageSize?.ToString() ?? ""
-            },
+            Metadata = metadata,
             Thumbnail = thumbStream != null ? ByteString.FromStream(thumbStream) : ByteString.Empty,
             BarcodeDetectionXml = image.PostProcessingData.Barcode?.ToXml(),
             RenderedFilePath = options.RenderedFilePath ?? ""
@@ -142,7 +144,7 @@ internal static class ImageSerializer
         var processedImage = scanningContext.CreateProcessedImage(
             storage,
             serializedImage.Metadata.Lossless,
-            -1,
+            serializedImage.Metadata.Quality > 0 ? serializedImage.Metadata.Quality : -1,
             PageSize.Parse(serializedImage.Metadata.PageSize),
             serializedImage.Metadata.TransformListXml.FromXml<List<Transform>>());
 

@@ -136,7 +136,7 @@ internal class PdfiumPdfExporter
                     return false;
                 }
                 using var page = document.NewPage(renderedImage.Width, renderedImage.Height); // TODO: width/heigth scaling
-                DrawImageOnPage(document, page, renderedImage, compat, image.Metadata.Lossless);
+                DrawImageOnPage(document, page, renderedImage, compat, image.Metadata);
             }
             done++;
             progress.Report(done, images.Count);
@@ -338,9 +338,9 @@ internal class PdfiumPdfExporter
 //     }
 
     private static void DrawImageOnPage(PdfDocument document, PdfPage page, IMemoryImage img, PdfCompat compat,
-        bool lossless)
+        ImageMetadata metadata)
     {
-        if (lossless)
+        if (metadata.Lossless)
         {
             using var locked = img.Lock(LockMode.ReadOnly, out var data);
             // var (realWidth, realHeight) = GetRealSize(img);
@@ -363,7 +363,8 @@ internal class PdfiumPdfExporter
             // require keeping the FileAccess structure/stream intact until Save is called - unless GenerateContent is
             // enough?).
 
-            using var stream = img.SaveToMemoryStream(ImageFileFormat.Jpeg);
+            using var stream = img.SaveToMemoryStream(ImageFileFormat.Jpeg,
+                new ImageSaveOptions { Quality = metadata.Quality });
             using var imageObj = document.NewImage();
             imageObj.LoadJpegFileInline(stream);
             imageObj.Matrix = PdfMatrix.FillPage(img.Width,img.Height);

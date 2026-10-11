@@ -264,7 +264,7 @@ public class PdfExporter
                 return new DirectJpegEmbedder(jpegHeader, jpegPath);
             }
         }
-        return new RenderedImageEmbedder(state.Image.Render());
+        return new RenderedImageEmbedder(state.Image.Render(), state.Image.Metadata);
     }
 
     private PageExportState WriteToPdfSharpStep(PageExportState state)
@@ -707,9 +707,12 @@ public class PdfExporter
 
     private class RenderedImageEmbedder : IEmbedder
     {
-        public RenderedImageEmbedder(IMemoryImage image)
+        private readonly ImageMetadata _metadata;
+
+        public RenderedImageEmbedder(IMemoryImage image, ImageMetadata metadata)
         {
             Image = image;
+            _metadata = metadata;
         }
 
         public IMemoryImage Image { get; private set; }
@@ -722,7 +725,8 @@ public class PdfExporter
         public void CopyToStream(Stream stream)
         {
             // PDFs require RGB channels so we need to make sure we're exporting that.
-            Image.Save(stream, ImageFileFormat.Jpeg, new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24 });
+            Image.Save(stream, ImageFileFormat.Jpeg,
+                new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24, Quality = _metadata.Quality });
         }
 
         public ImageExportFormat PrepareForExport(ImageMetadata metadata)

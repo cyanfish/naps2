@@ -91,6 +91,7 @@ public class RecoveryManagerTests : ContextualTests
 
         Assert.Equal(2, images.Count);
         ImageAsserts.Similar(ImageResources.dog, images[0]);
+        Assert.Equal(85, images[0].Metadata.Quality);
 
         mockProgressCallback.Received()(0, 2);
         mockProgressCallback.Received()(1, 2);
@@ -252,6 +253,6 @@ public class RecoveryManagerTests : ContextualTests
 
     private ProcessedImage CreateRecoveryImage(ScanningContext recoveryContext)
     {
-        return recoveryContext.CreateProcessedImage(ImageContext.Load(ImageResources.dog));
+        return recoveryContext.CreateProcessedImage(ImageContext.Load(ImageResources.dog), false, 85);
     }
 }

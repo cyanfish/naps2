@@ -88,7 +88,7 @@ public class ScanningContext : IDisposable
         RefCount? refCount = null)
     {
         var convertedStorage = ConvertStorageIfNeeded(storage, lossless, quality);
-        var metadata = new ImageMetadata(lossless, pageSize);
+        var metadata = new ImageMetadata(lossless, pageSize, quality);
         var postProcessingData = new PostProcessingData();
         refCount ??=
             new RefCount(

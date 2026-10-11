@@ -93,6 +93,28 @@ public class PdfExporterTests : ContextualTests
         ImageAsserts.Similar(image.Render(), pdfImage, 0);
     }
 
+    [Fact]
+    public async Task ExportEditedJpegWithStoredQuality()
+    {
+        SetUpFileStorage();
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        // The image is edited, so it needs to be re-encoded, which should use the quality it was stored with
+        using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog), false, 50)
+            .WithTransform(new RotationTransform(90), true);
+
+        await _exporter.Export(filePath, [image]);
+
+        using var rendered = image.Render();
+        var expected = rendered.SaveToMemoryStream(ImageFileFormat.Jpeg,
+            new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24, Quality = 50 }).ToArray();
+        var defaultQuality = rendered.SaveToMemoryStream(ImageFileFormat.Jpeg,
+            new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24 }).ToArray();
+        Assert.NotEqual(defaultQuality, expected);
+        Assert.True(File.ReadAllBytes(filePath).AsSpan().IndexOf(expected) >= 0,
+            "Expected the PDF to contain the image re-encoded at quality 50");
+    }
+
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportPngImage(StorageConfig storageConfig)

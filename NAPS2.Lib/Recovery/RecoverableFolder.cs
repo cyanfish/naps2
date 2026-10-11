@@ -169,7 +169,7 @@ public class RecoverableFolder : IDisposable
         var processedImage = _scanningContext.CreateProcessedImage(
             storageKey.CreateStorage(),
             indexImage.HighQuality,
-            -1,
+            indexImage.Quality > 0 ? indexImage.Quality : -1,
             PageSize.Parse(indexImage.PageSize),
             indexImage.TransformList!.ToImmutableList(),
             storageKey.RefCount);
