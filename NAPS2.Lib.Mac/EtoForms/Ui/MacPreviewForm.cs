@@ -70,6 +70,7 @@ public class MacPreviewForm : PreviewForm
             MacToolbarItems.Create("blackwhite", Commands.BlackWhite),
             MacToolbarItems.Create("sharpen", Commands.Sharpen),
             MacToolbarItems.Create("documentcorrection", Commands.DocumentCorrection),
+            MacToolbarItems.Create("compress", Commands.Compress),
             MacToolbarItems.Create("split", Commands.Split),
             MacToolbarItems.Create("combine", Commands.Combine),
             MacToolbarItems.Create("editwith", Commands.EditWithApp),

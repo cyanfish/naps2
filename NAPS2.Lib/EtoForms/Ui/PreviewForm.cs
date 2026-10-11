@@ -227,6 +227,7 @@ public class PreviewForm : EtoDialogBase
                 MakeToolButton(Commands.BlackWhite),
                 MakeToolButton(Commands.Sharpen),
                 MakeToolButton(Commands.DocumentCorrection),
+                MakeToolButton(Commands.Compress),
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.Split),
                 MakeToolButton(Commands.Combine),

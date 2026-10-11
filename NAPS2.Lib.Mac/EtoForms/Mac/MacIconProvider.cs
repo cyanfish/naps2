@@ -34,6 +34,7 @@ public class MacIconProvider : IIconProvider
         { "contrast", "circle.righthalf.filled" },
         { "contrast_high", "circle.righthalf.filled" },
         { "sharpen", "rhombus" },
+        { "spring", "rectangle.compress.vertical" },
         { "file_extension_pdf", "doc.richtext" },
         { "pictures", "photo" },
         { "document", "doc.text" },
