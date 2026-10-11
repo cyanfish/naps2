@@ -7,6 +7,49 @@ namespace NAPS2.Lib.Tests.Images;
 public class UiImageListTests : ContextualTests
 {
     [Fact]
+    public async Task UndoRedo_Metadata()
+    {
+        var list = new UiImageList();
+        var item = new UiImage(ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_png), lossless: true));
+        list.Mutate(new ListMutation<UiImage>.Append(item));
+
+        list.Mutate(new ImageListMutation.UpdateMetadata(metadata => metadata with { Lossless = false }),
+            ListSelection.Of(item));
+        Assert.False(item.Metadata.Lossless);
+
+        await list.Undo();
+        Assert.True(item.Metadata.Lossless);
+
+        await list.Redo();
+        Assert.False(item.Metadata.Lossless);
+    }
+
+    [Fact]
+    public async Task UndoRedo_CompoundTransformsAndMetadata()
+    {
+        var list = new UiImageList();
+        var item = new UiImage(ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_png), lossless: true));
+        list.Mutate(new ListMutation<UiImage>.Append(item));
+        var transform = new FileFormatTransform(ImageFileFormat.Jpeg);
+
+        list.Mutate(new CompoundListMutation<UiImage>(
+                new ImageListMutation.UpdateMetadata(metadata => metadata with { Lossless = false }),
+                new ImageListMutation.AddTransforms([transform])),
+            ListSelection.Of(item));
+        Assert.False(item.Metadata.Lossless);
+        Assert.Equal([transform], item.TransformState.Transforms);
+
+        // A single undo should revert both the transform and the metadata
+        await list.Undo();
+        Assert.True(item.Metadata.Lossless);
+        Assert.True(item.TransformState.IsEmpty);
+
+        await list.Redo();
+        Assert.False(item.Metadata.Lossless);
+        Assert.Equal([transform], item.TransformState.Transforms);
+    }
+
+    [Fact]
     public void HasUnsavedChanges_EmptyList()
     {
         var list = new UiImageList();

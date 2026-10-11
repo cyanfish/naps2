@@ -31,6 +31,17 @@ public abstract class ImageListMutation : ListMutation<UiImage>
         }
     }
 
+    public class UpdateMetadata(Func<ImageMetadata, ImageMetadata> update) : ListMutation<UiImage>
+    {
+        public override void Apply(List<UiImage> list, ref ListSelection<UiImage> selection)
+        {
+            foreach (UiImage img in selection)
+            {
+                img.ReplaceMetadata(update(img.Metadata));
+            }
+        }
+    }
+
     public class ResetTransforms : ListMutation<UiImage>
     {
         public override void Apply(List<UiImage> list, ref ListSelection<UiImage> selection)

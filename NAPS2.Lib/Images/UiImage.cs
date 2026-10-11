@@ -125,6 +125,20 @@ public class UiImage : IDisposable
         ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
     }
 
+    public void ReplaceMetadata(ImageMetadata metadata)
+    {
+        lock (this)
+        {
+            if (Metadata == metadata)
+            {
+                return;
+            }
+            _processedImage = _processedImage.WithMetadata(metadata, true);
+            _saved = false;
+        }
+        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+    }
+
     public void ReplaceInternalImage(ProcessedImage newImage)
     {
         lock (this)
@@ -193,6 +207,8 @@ public class UiImage : IDisposable
     public bool HasUnsavedChanges => !_saved;
 
     public TransformState TransformState => _processedImage.TransformState;
+
+    public ImageMetadata Metadata => _processedImage.Metadata;
 
     public List<ExternalEditorSession> EditorSessions { get; } = new();
 

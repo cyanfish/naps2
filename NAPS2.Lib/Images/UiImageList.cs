@@ -115,6 +115,7 @@ public class UiImageList
             var currentSelection = _selection;
             var before = Images.ToList();
             var beforeTransforms = before.Select(img => img.TransformState).ToList();
+            var beforeMetadata = before.Select(img => img.Metadata).ToList();
             var mutableImages = Images.ToList();
             if (!ReferenceEquals(selectionToMutate, null))
             {
@@ -127,6 +128,7 @@ public class UiImageList
             Images = mutableImages.ToImmutableList();
             var after = Images.ToList();
             var afterTransforms = after.Select(img => img.TransformState).ToList();
+            var afterMetadata = after.Select(img => img.Metadata).ToList();
 
             var allAdded = after.Except(before).ToList();
             foreach (var added in allAdded)
@@ -150,7 +152,7 @@ public class UiImageList
             // or redoing a previous mutation, then we'll leave the undo stack intact.
             if (updateUndoStack)
             {
-                MaybeAddToUndoStack(before, beforeTransforms, after, afterTransforms);
+                MaybeAddToUndoStack(before, beforeTransforms, beforeMetadata, after, afterTransforms, afterMetadata);
             }
 
             if (currentSelection != _selection)
@@ -162,18 +164,33 @@ public class UiImageList
     }
 
     private void MaybeAddToUndoStack(
-        List<UiImage> before, List<TransformState> beforeTransforms,
-        List<UiImage> after, List<TransformState> afterTransforms)
+        List<UiImage> before, List<TransformState> beforeTransforms, List<ImageMetadata> beforeMetadata,
+        List<UiImage> after, List<TransformState> afterTransforms, List<ImageMetadata> afterMetadata)
     {
+        var undoElements = new List<IUndoElement>();
         if (ReplaceRangeUndoElement.FromFullList(this, before, after)
             is { } replaceRangeUndoElement)
         {
-            _undoStack.Push(replaceRangeUndoElement);
+            undoElements.Add(replaceRangeUndoElement);
         }
         if (TransformImagesUndoElement.FromFullList(before, beforeTransforms, after, afterTransforms)
             is { } replaceTransformsUndoElement)
         {
-            _undoStack.Push(replaceTransformsUndoElement);
+            undoElements.Add(replaceTransformsUndoElement);
+        }
+        if (ImageMetadataUndoElement.FromFullList(before, beforeMetadata, after, afterMetadata)
+            is { } metadataUndoElement)
+        {
+            undoElements.Add(metadataUndoElement);
+        }
+        switch (undoElements.Count)
+        {
+            case > 1:
+                _undoStack.Push(CompoundUndoElement.Of(undoElements));
+                break;
+            case 1:
+                _undoStack.Push(undoElements[0]);
+                break;
         }
     }
 
