@@ -1086,4 +1086,7 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="ConvertToLossy" xml:space="preserve">
     <value>Convert to lossy</value>
   </data>
+  <data name="JpegQualityLabel" xml:space="preserve">
+    <value>JPEG quality:</value>
+  </data>
 </root>

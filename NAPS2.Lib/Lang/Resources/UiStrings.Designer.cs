@@ -1940,5 +1940,11 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("ConvertToLossy", resourceCulture);
             }
         }
+
+        internal static string JpegQualityLabel {
+            get {
+                return ResourceManager.GetString("JpegQualityLabel", resourceCulture);
+            }
+        }
     }
 }

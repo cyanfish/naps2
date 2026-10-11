@@ -20,9 +20,12 @@ public class CompressForm : UnaryImageFormBase
     private readonly UndoableNumericMaskedTextBox<int> _pixelHeight = new();
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
     private readonly CheckBox _convertToLossy = C.CheckBox(UiStrings.ConvertToLossy);
+    private readonly UndoableNumericMaskedTextBox<int> _jpegQuality = new();
+    private readonly LayoutVisibility _jpegQualityVis = new(false);
 
     private float _originalDpi;
     private ScanBitDepth _originalBitDepth;
+    private int _originalJpegQuality;
 
     private double _dpiValue;
     private PageSize _size = new(0, 0, PageSizeUnit.Inch);
@@ -46,7 +49,15 @@ public class CompressForm : UnaryImageFormBase
             _bitDepthValue = _bitDepth.SelectedItem;
             RefreshPreview();
         };
+        _convertToLossy.CheckedChanged += (_, _) => UpdateJpegQualityVisibility();
     }
+
+    private void UpdateJpegQualityVisibility() =>
+        _jpegQualityVis.IsVisible = !Image.Metadata.Lossless || _convertToLossy.IsChecked();
+
+    private int JpegQuality => _jpegQuality.Value is >= 1 and <= 100 ? _jpegQuality.Value : _originalJpegQuality;
+
+    private bool JpegQualityChanged => _jpegQualityVis.IsVisible && JpegQuality != _originalJpegQuality;
 
     private int TargetPixelWidth => Math.Max((int) Math.Round((double) _size.WidthInInches * _dpiValue), 1);
 
@@ -76,8 +87,10 @@ public class CompressForm : UnaryImageFormBase
                     _ => new ColorBitDepthTransform()
                 });
             }
-            if (_convertToLossy.IsChecked())
+            if (_convertToLossy.IsChecked() || JpegQualityChanged)
             {
+                // This also ensures an untransformed JPEG file is re-encoded (rather than copied) when the quality
+                // changes
                 transforms.Add(new FileFormatTransform(ImageFileFormat.Jpeg));
             }
             return transforms;
@@ -87,6 +100,9 @@ public class CompressForm : UnaryImageFormBase
     protected override void OnFullSizeImageRendered(IMemoryImage realImage)
     {
         _originalDpi = realImage.HorizontalResolution > 0 ? realImage.HorizontalResolution : DEFAULT_DPI;
+        _originalJpegQuality = Image.Metadata.Quality > 0
+            ? Image.Metadata.Quality
+            : ScanOptions.DEFAULT_QUALITY;
         _originalBitDepth = realImage.UpdateLogicalPixelFormat() switch
         {
             ImagePixelFormat.BW1 => ScanBitDepth.BlackWhite,
@@ -141,6 +157,13 @@ public class CompressForm : UnaryImageFormBase
             ).Aligned(),
             // Only lossless images (e.g. imported from PNG) can be converted
             Image.Metadata.Lossless ? _convertToLossy : C.None(),
+            L.Row(
+                C.Label(UiStrings.JpegQualityLabel).AlignCenter(),
+                L.Row(
+                    _jpegQuality.Width(60).AlignCenter(),
+                    C.Filler()
+                ).Scale()
+            ).Aligned().Visible(_jpegQualityVis),
             ApplyToSelectedControl
         );
     }
@@ -152,16 +175,24 @@ public class CompressForm : UnaryImageFormBase
             PageSizeUnit.Inch);
         _bitDepth.SelectedItem = _bitDepthValue = _originalBitDepth;
         _convertToLossy.Checked = false;
+        _jpegQuality.Value = _originalJpegQuality;
+        UpdateJpegQualityVisibility();
         UpdateFields();
     }
 
     protected override ListMutation<UiImage> CreateMutation()
     {
         var mutation = base.CreateMutation();
-        if (_convertToLossy.IsChecked())
+        bool convertToLossy = _convertToLossy.IsChecked();
+        if (convertToLossy || JpegQualityChanged)
         {
+            int quality = JpegQuality;
             return new CompoundListMutation<UiImage>(
-                new ImageListMutation.UpdateMetadata(metadata => metadata with { Lossless = false }),
+                new ImageListMutation.UpdateMetadata(metadata => metadata with
+                {
+                    Lossless = metadata.Lossless && !convertToLossy,
+                    Quality = quality
+                }),
                 mutation);
         }
         return mutation;

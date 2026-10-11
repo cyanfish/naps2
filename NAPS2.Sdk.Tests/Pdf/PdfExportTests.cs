@@ -115,6 +115,26 @@ public class PdfExporterTests : ContextualTests
             "Expected the PDF to contain the image re-encoded at quality 50");
     }
 
+    [Fact]
+    public async Task ExportJpegWithChangedQuality()
+    {
+        SetUpFileStorage();
+
+        var filePath = Path.Combine(FolderPath, "test.pdf");
+        // Without the FileFormatTransform, the JPEG file would be copied directly and the new quality ignored
+        using var jpegImage = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+        using var image = jpegImage.WithMetadata(jpegImage.Metadata with { Quality = 50 })
+            .WithTransform(new FileFormatTransform(ImageFileFormat.Jpeg), true);
+
+        await _exporter.Export(filePath, [image]);
+
+        using var rendered = image.Render();
+        var expected = rendered.SaveToMemoryStream(ImageFileFormat.Jpeg,
+            new ImageSaveOptions { PixelFormatHint = ImagePixelFormat.RGB24, Quality = 50 }).ToArray();
+        Assert.True(File.ReadAllBytes(filePath).AsSpan().IndexOf(expected) >= 0,
+            "Expected the PDF to contain the image re-encoded at quality 50");
+    }
+
     [Theory]
     [ClassData(typeof(StorageAwareTestData))]
     public async Task ExportPngImage(StorageConfig storageConfig)
