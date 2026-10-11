@@ -150,8 +150,7 @@ public class PdfTextTests : ContextualTests
         new object[] { OcrAlphabet.CanadianAboriginal, "iku", "ᐃᓄᒃᑎᑐᑦ", false },
         new object[] { OcrAlphabet.Cherokee, "chr", "ᏣᎳᎩ ᎦᏬᏂᎯᏍᏗ", false },
         new object[] { OcrAlphabet.Devanagari, "hin", "ह\u0948ल\u094b वर\u094dल\u094dड", false },
-        // Currently failing on mac for some reason
-        // new object[] { OcrAlphabet.Ethiopic, "amh", "ሰላም ልዑል", false },
+        new object[] { OcrAlphabet.Ethiopic, "amh", "ሰላም ልዑል", false },
         new object[] { OcrAlphabet.Georgian, "kat", "Გამარჯობა მსოფლიო", false },
         new object[] { OcrAlphabet.Gujarati, "guj", "હ\u0ac7લ\u0acb વર\u0acdલ\u0acdડ", false },
         new object[] { OcrAlphabet.Gurmukhi, "pan", "ਸਤ\u0a3f ਸ\u0a4dਰ\u0a40 ਅਕ\u0a3eਲ ਦ\u0a41ਨ\u0a3fਆ", false },
@@ -161,8 +160,7 @@ public class PdfTextTests : ContextualTests
         new object[] { OcrAlphabet.Malayalam, "mal", "ഹല\u0d47\u0d3e വ\u0d47ൾഡ\u0d4d", false },
         new object[] { OcrAlphabet.Myanmar, "mya", "မင\u103a\u1039ဂလ\u102cပ\u102bကမ\u1039ဘ\u102cလ\u1031\u102cက", false },
         new object[] { OcrAlphabet.Sinhala, "sin", "හ\u0dd9ල\u0dddවර\u0dcaල\u0dcaඩ\u0dca", false },
-        // Not running by default as it requires a supplemental font on Windows
-        // new object[] { OcrAlphabet.Syriac, "syr", "ܐܘ ܢ\u0733ܫܐ ܟ\u0737ܬܠ\u0736ܗ", true },
+        new object[] { OcrAlphabet.Syriac, "syr", "ܐܘ ܢ\u0733ܫܐ ܟ\u0737ܬܠ\u0736ܗ", true },
         new object[] { OcrAlphabet.Tamil, "tam", "வணக\u0bcdகம\u0bcdஉலகம\u0bcd", false },
         new object[] { OcrAlphabet.Telugu, "tel", "హల\u0c4bవరల\u0c4dడ\u0c4d", false },
         new object[] { OcrAlphabet.Thaana, "div", "ހ\u07acލ\u07afދ\u07aaނ\u07a8ޔ\u07ac", true },
