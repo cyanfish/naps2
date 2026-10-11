@@ -7,8 +7,8 @@ namespace NAPS2.Images;
 internal interface IBundledEncoder
 {
     /// <summary>
-    /// Encodes the image to the stream. Returns false (without writing anything to the stream) if the image couldn't
-    /// be encoded, in which case the platform encoder is used instead.
+    /// Encodes the image to the stream. Returns false (without writing anything to the stream) if the encoder doesn't
+    /// support the image, in which case the platform encoder is used instead.
     /// </summary>
     bool TryEncode(IMemoryImage image, Stream stream, ImageSaveOptions options);
 }

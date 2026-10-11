@@ -63,15 +63,16 @@ public class JpegliEncoderTests : ContextualTests
     }
 
     [Fact]
-    public void EncoderErrorReturnsFalse()
+    public void EncoderErrorThrows()
     {
         // JPEG doesn't support dimensions over 65500, so this fails inside jpegli
         using var image = ImageContext.Create(70000, 1, ImagePixelFormat.RGB24);
         var stream = new MemoryStream();
 
-        var result = ImageContext.BundledEncoders[ImageFileFormat.Jpeg].TryEncode(image, stream, new ImageSaveOptions());
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ImageContext.BundledEncoders[ImageFileFormat.Jpeg].TryEncode(image, stream, new ImageSaveOptions()));
 
-        Assert.False(result);
+        Assert.Contains("Input image too big", ex.Message);
         Assert.Equal(0, stream.Length);
     }
 

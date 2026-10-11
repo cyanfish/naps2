@@ -18,6 +18,15 @@ public class ScanningContext : IDisposable
 {
     private readonly ProcessedImageOwner _processedImageOwner = new();
 
+    static ScanningContext()
+    {
+        // Use jpegli for JPEG encoding if the NAPS2.Jpeg.Binaries package is present
+        if (JpegliEncoder.TryCreate() is { } jpegliEncoder)
+        {
+            ImageContext.BundledEncoders.TryAdd(ImageFileFormat.Jpeg, jpegliEncoder);
+        }
+    }
+
     /// <summary>
     /// Initializes a new instance of the ScanningContext class with the specified ImageContext.
     /// </summary>
@@ -26,12 +35,6 @@ public class ScanningContext : IDisposable
     public ScanningContext(ImageContext imageContext)
     {
         ImageContext = imageContext;
-        // Use jpegli for JPEG encoding if the NAPS2.Jpeg.Binaries package is present
-        if (!ImageContext.BundledEncoders.ContainsKey(ImageFileFormat.Jpeg) &&
-            JpegliEncoder.TryCreate(this) is { } jpegliEncoder)
-        {
-            ImageContext.BundledEncoders.TryAdd(ImageFileFormat.Jpeg, jpegliEncoder);
-        }
     }
 
     /// <summary>
