@@ -13,12 +13,18 @@ internal class WhiteBlackPointPreOp : UnaryBitwiseImageOp
     public CorrectionMode Mode { get; }
     public long PixelTotalCount { get; private set; }
     public int[] PixelLumCounts { get; } = new int[256];
+    public long[] PixelRSums { get; } = new long[256];
+    public long[] PixelGSums { get; } = new long[256];
+    public long[] PixelBSums { get; } = new long[256];
     public double HorizontalNoise { get; private set; }
     public double VerticalNoise { get; private set; }
 
     protected override unsafe void PerformCore(BitwiseImageData data, int partStart, int partEnd)
     {
         var partitionCounts = new int[256];
+        var partitionRSums = new long[256];
+        var partitionGSums = new long[256];
+        var partitionBSums = new long[256];
         bool rgb = data.bytesPerPixel is 3 or 4;
         for (int i = partStart; i < partEnd; i++)
         {
@@ -42,10 +48,16 @@ internal class WhiteBlackPointPreOp : UnaryBitwiseImageOp
                     // TODO: Not sure whether it's best to use this or just an average, though it probably doesn't matter
                     // much as the lows/highs should be black/white.
                     value = (r * R_MULT + g * G_MULT + b * B_MULT) / 1000;
+                    partitionRSums[value] += r;
+                    partitionGSums[value] += g;
+                    partitionBSums[value] += b;
                 }
                 else
                 {
                     value = *pixel;
+                    partitionRSums[value] += value;
+                    partitionGSums[value] += value;
+                    partitionBSums[value] += value;
                 }
                 partitionCounts[value]++;
             }
@@ -55,6 +67,9 @@ internal class WhiteBlackPointPreOp : UnaryBitwiseImageOp
             for (int i = 0; i < PixelLumCounts.Length; i++)
             {
                 PixelLumCounts[i] += partitionCounts[i];
+                PixelRSums[i] += partitionRSums[i];
+                PixelGSums[i] += partitionGSums[i];
+                PixelBSums[i] += partitionBSums[i];
                 PixelTotalCount += partitionCounts[i];
             }
         }

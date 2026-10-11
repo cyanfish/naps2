@@ -12,6 +12,11 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
     // of the variability/noise.
     private const double PERCENTILE = 0.2;
 
+    // If the paper color has a channel spread (max - min) larger than this, we consider it to be tinted (e.g. yellowed
+    // or colored paper). Stretching each channel to the same white point would amplify the tint, so instead we only
+    // correct the black point and leave the paper color as-is.
+    private const int MAX_PAPER_TINT = 16;
+
     /// <summary>
     /// Performs this operation including pre-processing steps.
     /// </summary>
@@ -27,7 +32,13 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
     private readonly CorrectionMode _mode;
     private readonly bool _valid;
     private readonly int _whitePoint;
+
     private readonly int _blackPoint;
+
+    // Per-channel lookup tables (Document mode only)
+    private readonly byte[]? _rTable;
+    private readonly byte[]? _gTable;
+    private readonly byte[]? _bTable;
 
     public WhiteBlackPointOp(WhiteBlackPointPreOp preOp)
     {
@@ -47,9 +58,89 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
 
         _whitePoint = GetWhitePoint(counts, whitePeak);
         _blackPoint = GetBlackPoint(counts, blackPeak);
+        if (_whitePoint <= _blackPoint)
+        {
+            _valid = false;
+            return;
+        }
+        if (_mode == CorrectionMode.Document)
+        {
+            var (paperR, paperG, paperB) = GetPaperColor(preOp, whitePeak);
+            var paperMax = Math.Max(paperR, Math.Max(paperG, paperB));
+            var paperMin = Math.Min(paperR, Math.Min(paperG, paperB));
+            if (paperMax - paperMin > MAX_PAPER_TINT)
+            {
+                // Preserve tinted paper color (rather than doing a correction that's likely to result in an oversaturated background) 
+                var paperLum = Math.Max((paperR * R_MULT + paperG * G_MULT + paperB * B_MULT) / 1000, 1);
+                var whiteR = Math.Min(paperR * _whitePoint / paperLum, 255);
+                var whiteG = Math.Min(paperG * _whitePoint / paperLum, 255);
+                var whiteB = Math.Min(paperB * _whitePoint / paperLum, 255);
+                if (whiteR <= _blackPoint || whiteG <= _blackPoint || whiteB <= _blackPoint)
+                {
+                    // The paper is so strongly colored that one channel is darker than the black point, so we can't
+                    // correct it without shifting the colors
+                    _valid = false;
+                    return;
+                }
+                _rTable = BuildColorChannelLookupTable(_blackPoint, whiteR, whiteR);
+                _gTable = BuildColorChannelLookupTable(_blackPoint, whiteG, whiteG);
+                _bTable = BuildColorChannelLookupTable(_blackPoint, whiteB, whiteB);
+            }
+            else
+            {
+                // Flatten everything at or above the white point to pure white
+                _rTable = _gTable = _bTable = BuildColorChannelLookupTable(_blackPoint, _whitePoint, 255);
+            }
+        }
         _valid = true;
 
         // Console.WriteLine($"Correcting with whitepoint {_whitePoint} blackpoint {_blackPoint}");
+    }
+
+    private static (int r, int g, int b) GetPaperColor(WhiteBlackPointPreOp preOp, Peak whitePeak)
+    {
+        long count = 0, rSum = 0, gSum = 0, bSum = 0;
+        for (int i = whitePeak.Left; i < 256; i++)
+        {
+            count += preOp.PixelLumCounts[i];
+            rSum += preOp.PixelRSums[i];
+            gSum += preOp.PixelGSums[i];
+            bSum += preOp.PixelBSums[i];
+        }
+        if (count == 0)
+        {
+            return (255, 255, 255);
+        }
+        return ((int) (rSum / count), (int) (gSum / count), (int) (bSum / count));
+    }
+
+    private static byte[] BuildColorChannelLookupTable(int blackPoint, int whitePoint, int target)
+    {
+        var table = new byte[256];
+        var iToL = GammaTables.IntensityToLum;
+        var lToI = GammaTables.LumToIntensity;
+        var blackL = iToL[blackPoint];
+        var whiteL = iToL[whitePoint];
+        var targetL = iToL[target];
+        for (int i = 0; i < 256; i++)
+        {
+            if (i < whitePoint)
+            {
+                // Use a gamma function to convert to the luminescence space, scale the value, then convert back to the
+                // intensity space
+                var l = iToL[Math.Max(i, blackPoint)];
+                table[i] = lToI[(l - blackL) * targetL / (whiteL - blackL)];
+            }
+            else if (whitePoint == 255)
+            {
+                table[i] = (byte) target;
+            }
+            else
+            {
+                table[i] = (byte) (target + (i - whitePoint) * (255 - target) / (255 - whitePoint));
+            }
+        }
+        return table;
     }
 
     private static int GetWhitePoint(int[] counts, Peak whitePeak)
@@ -161,12 +252,11 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
     {
         if (!_valid)
             return;
+        var rTable = _rTable;
+        var gTable = _gTable;
+        var bTable = _bTable;
         bool flatten = _mode == CorrectionMode.Document;
         bool retainColor = _mode == CorrectionMode.Photo;
-        var iToL = GammaTables.IntensityToLum;
-        var lToI = GammaTables.LumToIntensity;
-        var blackL = iToL[_blackPoint];
-        var whiteL = iToL[_whitePoint];
         for (int i = partStart; i < partEnd; i++)
         {
             var row = data.ptr + data.stride * i;
@@ -179,35 +269,9 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
 
                 if (flatten)
                 {
-                    var white = _whitePoint;
-                    var black = _blackPoint;
-
-                    if (r < black)
-                        r = black;
-                    if (g < black)
-                        g = black;
-                    if (b < black)
-                        b = black;
-
-                    if (r > white)
-                        r = white;
-                    if (g > white)
-                        g = white;
-                    if (b > white)
-                        b = white;
-
-                    // Use a gamma function to convert to the luminescence space
-                    int rL = iToL[r];
-                    int gL = iToL[g];
-                    int bL = iToL[b];
-                    // Scale the color values in the luminescence space
-                    rL = (rL - blackL) * GammaTables.MAX_LUM / (whiteL - blackL);
-                    gL = (gL - blackL) * GammaTables.MAX_LUM / (whiteL - blackL);
-                    bL = (bL - blackL) * GammaTables.MAX_LUM / (whiteL - blackL);
-                    // Convert back to the intensity space
-                    r = lToI[rL];
-                    g = lToI[gL];
-                    b = lToI[bL];
+                    r = rTable![r];
+                    g = gTable![g];
+                    b = bTable![b];
                 }
 
                 if (retainColor)
