@@ -109,6 +109,14 @@ public abstract class UnaryImageFormBase(
 
     protected override void Apply()
     {
+        ImageList.Mutate(CreateMutation(), ListSelection.From(ImagesToTransform));
+    }
+
+    /// <summary>
+    /// Creates the mutation to apply to the images being transformed. By default this adds the transforms.
+    /// </summary>
+    protected virtual ListMutation<UiImage> CreateMutation()
+    {
         IMemoryImage? firstImageThumb = null;
         if (WorkingImage != null)
         {
@@ -117,10 +125,9 @@ public abstract class UnaryImageFormBase(
             firstImageThumb =
                 transformed.PerformTransform(new ThumbnailTransform(ThumbnailController.RenderSize));
         }
-        var mutation = new ImageListMutation.AddTransforms(
+        return new ImageListMutation.AddTransforms(
             Transforms.ToList(),
             new Dictionary<UiImage, IMemoryImage?> { [Image] = firstImageThumb });
-        ImageList.Mutate(mutation, ListSelection.From(ImagesToTransform));
     }
 
     protected virtual void Revert()

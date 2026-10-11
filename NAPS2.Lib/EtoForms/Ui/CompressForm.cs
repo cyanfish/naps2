@@ -19,6 +19,7 @@ public class CompressForm : UnaryImageFormBase
     private readonly UndoableNumericMaskedTextBox<int> _pixelWidth = new();
     private readonly UndoableNumericMaskedTextBox<int> _pixelHeight = new();
     private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
+    private readonly CheckBox _convertToLossy = C.CheckBox(UiStrings.ConvertToLossy);
 
     private float _originalDpi;
     private ScanBitDepth _originalBitDepth;
@@ -74,6 +75,10 @@ public class CompressForm : UnaryImageFormBase
                     ScanBitDepth.Grayscale => new GrayscaleTransform(),
                     _ => new ColorBitDepthTransform()
                 });
+            }
+            if (_convertToLossy.IsChecked())
+            {
+                transforms.Add(new FileFormatTransform(ImageFileFormat.Jpeg));
             }
             return transforms;
         }
@@ -134,6 +139,8 @@ public class CompressForm : UnaryImageFormBase
                     C.Filler()
                 ).Scale()
             ).Aligned(),
+            // Only lossless images (e.g. imported from PNG) can be converted
+            Image.Metadata.Lossless ? _convertToLossy : C.None(),
             ApplyToSelectedControl
         );
     }
@@ -144,7 +151,20 @@ public class CompressForm : UnaryImageFormBase
         _size = new PageSize((decimal) (RealImageWidth / _dpiValue), (decimal) (RealImageHeight / _dpiValue),
             PageSizeUnit.Inch);
         _bitDepth.SelectedItem = _bitDepthValue = _originalBitDepth;
+        _convertToLossy.Checked = false;
         UpdateFields();
+    }
+
+    protected override ListMutation<UiImage> CreateMutation()
+    {
+        var mutation = base.CreateMutation();
+        if (_convertToLossy.IsChecked())
+        {
+            return new CompoundListMutation<UiImage>(
+                new ImageListMutation.UpdateMetadata(metadata => metadata with { Lossless = false }),
+                mutation);
+        }
+        return mutation;
     }
 
     // Changing the resolution keeps the physical size, so the image is resampled

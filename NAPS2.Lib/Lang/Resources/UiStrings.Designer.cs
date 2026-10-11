@@ -1934,5 +1934,11 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("PixelDimensionsLabel", resourceCulture);
             }
         }
+        
+        internal static string ConvertToLossy {
+            get {
+                return ResourceManager.GetString("ConvertToLossy", resourceCulture);
+            }
+        }
     }
 }
