@@ -56,23 +56,7 @@ internal class BilateralFilterOp : BinaryBitwiseImageOp
 
                 if (j > s && j < src.w - s && i > s && i < src.h - s)
                 {
-                    bool skipPixel = false;
-                    if (r == 255 && g == 255 & b == 255)
-                    {
-                        var prevPixel = src.ptr + src.stride * i + src.bytesPerPixel * j - 1;
-                        var nextPixel = src.ptr + src.stride * i + src.bytesPerPixel * j + 1;
-                        byte prevR = *(prevPixel + src.rOff);
-                        byte prevG = *(prevPixel + src.gOff);
-                        byte prevB = *(prevPixel + src.bOff);
-                        byte nextR = *(nextPixel + src.rOff);
-                        byte nextG = *(nextPixel + src.gOff);
-                        byte nextB = *(nextPixel + src.bOff);
-                        if (prevR == 255 && prevG == 255 && prevB == 255 && nextR == 255 && nextG == 255 &&
-                            nextB == 255)
-                        {
-                            skipPixel = true;
-                        }
-                    }
+                    bool skipPixel = r == 255 && g == 255 && b == 255;
                     if (!skipPixel)
                     {
                         int rTotal = 0, gTotal = 0, bTotal = 0;
