@@ -17,6 +17,14 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
     // correct the black point and leave the paper color as-is.
     private const int MAX_PAPER_TINT = 16;
 
+    // Stretching each channel separately amplifies small color differences, e.g. the colored fringes that scanners
+    // produce around text and the page edges (from the color channels being slightly misaligned). So for pixels with
+    // low chroma (max - min channel value) we instead stretch just the luminance and scale down the chroma based on
+    // how close the pixel gets to black/white. Between these two chroma values we blend into the per-channel result,
+    // so that genuinely colored content (charts, highlighters, etc.) keeps its color.
+    private const int CHROMA_BLEND_MIN = 16;
+    private const int CHROMA_BLEND_MAX = 48;
+
     /// <summary>
     /// Performs this operation including pre-processing steps.
     /// </summary>
@@ -36,9 +44,11 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
     private readonly int _blackPoint;
 
     // Per-channel lookup tables (Document mode only)
+    private readonly byte[]? _lumTable;
     private readonly byte[]? _rTable;
     private readonly byte[]? _gTable;
     private readonly byte[]? _bTable;
+    private readonly int[]? _chromaScales;
 
     public WhiteBlackPointOp(WhiteBlackPointPreOp preOp)
     {
@@ -89,7 +99,9 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
             else
             {
                 // Flatten everything at or above the white point to pure white
-                _rTable = _gTable = _bTable = BuildColorChannelLookupTable(_blackPoint, _whitePoint, 255);
+                var table = BuildColorChannelLookupTable(_blackPoint, _whitePoint, 255);
+                _rTable = _gTable = _bTable = _lumTable = table;
+                _chromaScales = BuildChromaScales(table);
             }
         }
         _valid = true;
@@ -112,6 +124,23 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
             return (255, 255, 255);
         }
         return ((int) (rSum / count), (int) (gSum / count), (int) (bSum / count));
+    }
+
+    /// <summary>
+    /// For each luminance value, gets how much the lookup table moves it toward black or white, as a scale factor
+    /// (x256) for the pixel's chroma. E.g. luminance mapped to pure white or black gets 0 (no chroma).
+    /// </summary>
+    private static int[] BuildChromaScales(byte[] lumTable)
+    {
+        var scales = new int[256];
+        for (int lum = 0; lum < 256; lum++)
+        {
+            int newLum = lumTable[lum];
+            scales[lum] = newLum < lum ? newLum * 256 / lum
+                : newLum > lum ? (255 - newLum) * 256 / (255 - lum)
+                : 256;
+        }
+        return scales;
     }
 
     private static byte[] BuildColorChannelLookupTable(int blackPoint, int whitePoint, int target)
@@ -255,6 +284,8 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
         var rTable = _rTable;
         var gTable = _gTable;
         var bTable = _bTable;
+        var lumTable = _lumTable;
+        var chromaScales = _chromaScales;
         bool flatten = _mode == CorrectionMode.Document;
         bool retainColor = _mode == CorrectionMode.Photo;
         for (int i = partStart; i < partEnd; i++)
@@ -269,9 +300,29 @@ internal class WhiteBlackPointOp : UnaryBitwiseImageOp
 
                 if (flatten)
                 {
-                    r = rTable![r];
-                    g = gTable![g];
-                    b = bTable![b];
+                    int chroma = Math.Max(r, Math.Max(g, b)) - Math.Min(r, Math.Min(g, b));
+                    if (lumTable != null && chroma < CHROMA_BLEND_MAX)
+                    {
+                        // Stretch the luminance and scale the chroma (see CHROMA_BLEND_MIN/MAX)
+                        int lum = (r * R_MULT + g * G_MULT + b * B_MULT) / 1000;
+                        int newLum = lumTable[lum];
+                        int scale = chromaScales![lum];
+                        int lumR = Math.Clamp(newLum + ((r - lum) * scale >> 8), 0, 255);
+                        int lumG = Math.Clamp(newLum + ((g - lum) * scale >> 8), 0, 255);
+                        int lumB = Math.Clamp(newLum + ((b - lum) * scale >> 8), 0, 255);
+                        // Blend with the per-channel result based on the chroma (weight x256)
+                        int weight = Math.Max(chroma - CHROMA_BLEND_MIN, 0) * 256 /
+                                     (CHROMA_BLEND_MAX - CHROMA_BLEND_MIN);
+                        r = (lumR * (256 - weight) + rTable![r] * weight) >> 8;
+                        g = (lumG * (256 - weight) + gTable![g] * weight) >> 8;
+                        b = (lumB * (256 - weight) + bTable![b] * weight) >> 8;
+                    }
+                    else
+                    {
+                        r = rTable![r];
+                        g = gTable![g];
+                        b = bTable![b];
+                    }
                 }
 
                 if (retainColor)
