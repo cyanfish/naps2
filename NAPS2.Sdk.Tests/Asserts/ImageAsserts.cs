@@ -145,11 +145,11 @@ public static class ImageAsserts
         }
     }
 
-    public class PixelColorData : IEnumerable<((int x, int y), (int r, int g, int b))>
+    public class PixelColorData : IEnumerable<((int x, int y), Rgb)>
     {
-        private readonly List<((int x, int y), (int r, int g, int b))> _colors = [];
+        private readonly List<((int x, int y), Rgb)> _colors = [];
 
-        public void Add((int x, int y) pos, (int r, int g, int b) color)
+        public void Add((int x, int y) pos, Rgb color)
         {
             _colors.Add((pos, color));
         }
@@ -159,7 +159,7 @@ public static class ImageAsserts
             _colors.Add((pos, (r, g, b)));
         }
 
-        public IEnumerator<((int x, int y), (int r, int g, int b))> GetEnumerator()
+        public IEnumerator<((int x, int y), Rgb)> GetEnumerator()
         {
             return _colors.GetEnumerator();
         }

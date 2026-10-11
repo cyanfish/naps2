@@ -1,5 +1,6 @@
 using NAPS2.Images.Bitwise;
 using Xunit;
+using static NAPS2.Sdk.Tests.Images.SyntheticImageGenerator;
 
 namespace NAPS2.Sdk.Tests.Images;
 
@@ -35,11 +36,11 @@ public class EdgeDetectionRealWorldTests : ContextualTests
         ["receipt"] = new(ImageResources.autocrop_receipt, new Crop(0, 0, 1608, 2038)),
     };
 
-    private static readonly Dictionary<string, byte> FillColors = new()
+    private static readonly Dictionary<string, Rgb> FillColors = new()
     {
-        ["white"] = 255,
-        ["grey"] = 128,
-        ["black"] = 0,
+        ["white"] = WHITE,
+        ["grey"] = GRAY,
+        ["black"] = BLACK,
     };
 
     public static IEnumerable<object[]> CaseNames => Cases.Keys.Select(x => new object[] { x });
@@ -144,15 +145,6 @@ public class EdgeDetectionRealWorldTests : ContextualTests
         // The padding has a sharp edge, so it should be detected exactly
         if (padX > 0) Assert.Equal(padX, actual.Right);
         if (padY > 0) Assert.Equal(padY, actual.Bottom);
-    }
-
-    private IMemoryImage Pad(IMemoryImage image, int padX, int padY, byte color)
-    {
-        var padded = ImageContext.Create(image.Width + padX, image.Height + padY, ImagePixelFormat.RGB24);
-        padded.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-        new FillColorImageOp(color, color, color, 255).Perform(padded);
-        new CopyBitwiseImageOp().Perform(image, padded);
-        return padded;
     }
 
     private static Crop Detect(IMemoryImage image)

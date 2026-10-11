@@ -1,5 +1,6 @@
 using NAPS2.Images.Bitwise;
 using Xunit;
+using static NAPS2.Sdk.Tests.Images.SyntheticImageGenerator;
 
 namespace NAPS2.Sdk.Tests.Images;
 
@@ -13,7 +14,7 @@ public class EdgeDetectionSyntheticTests : ContextualTests
     [MemberData(nameof(AllFormats))]
     public void PageOnBlackBackground(ImagePixelFormat pixelFormat)
     {
-        var image = CreateImage(pixelFormat, 0, image =>
+        var image = CreateSyntheticImage(ImageContext, pixelFormat, W, H, 0, image =>
         {
             DrawPage(image, 40, 50, 340, 470, 255);
         });
@@ -27,7 +28,7 @@ public class EdgeDetectionSyntheticTests : ContextualTests
     [MemberData(nameof(AllFormats))]
     public void BlankImage(ImagePixelFormat pixelFormat)
     {
-        var image = CreateImage(pixelFormat, 255, _ => { });
+        var image = CreateSyntheticImage(ImageContext, pixelFormat, W, H, 255);
 
         var op = Detect(image);
 
@@ -38,7 +39,7 @@ public class EdgeDetectionSyntheticTests : ContextualTests
     [MemberData(nameof(AllFormats))]
     public void IgnoresDust(ImagePixelFormat pixelFormat)
     {
-        var image = CreateImage(pixelFormat, 0, image =>
+        var image = CreateSyntheticImage(ImageContext, pixelFormat, W, H, 0, image =>
         {
             DrawPage(image, 40, 50, 340, 470, 255);
             FillRect(image, 10, 10, 13, 13, 255);
@@ -55,7 +56,7 @@ public class EdgeDetectionSyntheticTests : ContextualTests
     [MemberData(nameof(AllFormats))]
     public void IgnoresScannerEdgeArtifacts(ImagePixelFormat pixelFormat)
     {
-        var image = CreateImage(pixelFormat, 0, image =>
+        var image = CreateSyntheticImage(ImageContext, pixelFormat, W, H, 0, image =>
         {
             DrawPage(image, 40, 50, 340, 470, 255);
             FillRect(image, 0, 0, 1, H, 255);
@@ -71,7 +72,7 @@ public class EdgeDetectionSyntheticTests : ContextualTests
     [MemberData(nameof(AllFormats))]
     public void TooSmallPage(ImagePixelFormat pixelFormat)
     {
-        var image = CreateImage(pixelFormat, 0, image =>
+        var image = CreateSyntheticImage(ImageContext, pixelFormat, W, H, 0, image =>
         {
             FillRect(image, 150, 150, 180, 400, 255);
         });
@@ -86,7 +87,7 @@ public class EdgeDetectionSyntheticTests : ContextualTests
     {
         // A dark item (e.g. a card) in the corner of a light background, with a soft bright halo around it
         const int itemW = 160, itemH = 100, halo = 8;
-        var image = CreateImage(ImagePixelFormat.RGB24, 230, image =>
+        var image = CreateSyntheticImage(ImageContext, ImagePixelFormat.RGB24, W, H, 230, image =>
         {
             for (int k = halo - 1; k >= 0; k--)
             {
@@ -108,7 +109,7 @@ public class EdgeDetectionSyntheticTests : ContextualTests
         // An item in the middle of the scan area, with a dark border along the left side of the scan that gradually
         // fades out (further than the ignored area at the edge of the image)
         byte[] border = [60, 225, 230, 233, 235, 237];
-        var image = CreateImage(ImagePixelFormat.RGB24, 238, image =>
+        var image = CreateSyntheticImage(ImageContext, ImagePixelFormat.RGB24, W, H, 238, image =>
         {
             for (int x = 0; x < border.Length; x++)
             {
@@ -135,33 +136,6 @@ public class EdgeDetectionSyntheticTests : ContextualTests
         Assert.InRange(op.Top, top - TOLERANCE, top + TOLERANCE);
         Assert.InRange(op.Right, right - TOLERANCE, right + TOLERANCE);
         Assert.InRange(op.Bottom, bottom - TOLERANCE, bottom + TOLERANCE);
-    }
-
-    // Draws a page with some dark "text" lines on it
-    private void DrawPage(IMemoryImage image, int x1, int y1, int x2, int y2, byte color)
-    {
-        FillRect(image, x1, y1, x2, y2, color);
-        int marginX = (x2 - x1) / 8;
-        int marginY = (y2 - y1) / 8;
-        for (int y = y1 + marginY; y < y2 - marginY; y += 12)
-        {
-            FillRect(image, x1 + marginX, y, x2 - marginX, y + 4, 30);
-        }
-    }
-
-    private void FillRect(IMemoryImage image, int x1, int y1, int x2, int y2, byte color)
-    {
-        using var rect = ImageContext.Create(x2 - x1, y2 - y1, ImagePixelFormat.RGB24);
-        new FillColorImageOp(color, color, color, 255).Perform(rect);
-        new CopyBitwiseImageOp { DestXOffset = x1, DestYOffset = y1 }.Perform(rect, image);
-    }
-
-    private IMemoryImage CreateImage(ImagePixelFormat pixelFormat, byte background, Action<IMemoryImage> draw)
-    {
-        var image = ImageContext.Create(W, H, ImagePixelFormat.RGB24);
-        new FillColorImageOp(background, background, background, 255).Perform(image);
-        draw(image);
-        return pixelFormat == ImagePixelFormat.RGB24 ? image : image.CopyWithPixelFormat(pixelFormat);
     }
 
     public static IEnumerable<object[]> AllFormats =
