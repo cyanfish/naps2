@@ -15,6 +15,24 @@ public class UndoStackTests
     }
 
     [Fact]
+    public void CompoundUndoRedoOrder()
+    {
+        var calls = new List<string>();
+        var element1 = Substitute.For<IUndoElement>();
+        element1.When(x => x.ApplyUndo()).Do(_ => calls.Add("undo1"));
+        element1.When(x => x.ApplyRedo()).Do(_ => calls.Add("redo1"));
+        var element2 = Substitute.For<IUndoElement>();
+        element2.When(x => x.ApplyUndo()).Do(_ => calls.Add("undo2"));
+        element2.When(x => x.ApplyRedo()).Do(_ => calls.Add("redo2"));
+        var compound = new CompoundUndoElement([element1, element2]);
+
+        compound.ApplyUndo();
+        compound.ApplyRedo();
+
+        Assert.Equal(["undo2", "undo1", "redo1", "redo2"], calls);
+    }
+
+    [Fact]
     public void PushUndoRedoUndo()
     {
         var stack = new UndoStack(10);
