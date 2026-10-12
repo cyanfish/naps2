@@ -14,6 +14,7 @@
     <PublishTrimmed>false</PublishTrimmed>
     <TrimMode>none</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <CETCompat>false</CETCompat>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
