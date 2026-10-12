@@ -61,6 +61,11 @@ public class UploadCommand : ICommand<UploadOptions>
             UpdateAptMetadata(version);
             didSomething = true;
         }
+        if (opts.Target is "all" or "msstore" && !version.Contains('b'))
+        {
+            Output.Info("Upload manually to the Microsoft Store: https://partner.microsoft.com/en-us/dashboard/products/9N3QQ9W0B23Q/overview");
+            didSomething = true;
+        }
         if (opts.Target is "sdk")
         {
             UploadToNuget().Wait();
