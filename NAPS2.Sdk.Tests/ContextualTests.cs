@@ -227,10 +227,17 @@ public class ContextualTests : IDisposable
             // We don't log tracing to the test output as it fills up the limited output space too quickly
             if (logLevel == LogLevel.Trace) return;
 
-            _testOutputHelper.WriteLine(state.ToString());
-            if (exception != null)
+            try
             {
-                _testOutputHelper.WriteLine(exception.ToString());
+                _testOutputHelper.WriteLine(state.ToString());
+                if (exception != null)
+                {
+                    _testOutputHelper.WriteLine(exception.ToString());
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                // Background work (e.g. timers) can log after the test has finished, which xunit doesn't allow
             }
         }
 
