@@ -1,3 +1,6 @@
+Changes in 8.5.1:
+- Windows: Fixed an issue with Smart App Control blocking naps2_jpeg.dll
+
 Changes in 8.5.0:
 - Added "Auto-Crop" feature (for scanning varying-size items like receipts, photos, etc.)
   - Click the button in the Crop window
