@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 
 namespace NAPS2.Tools.Project.Packaging;
@@ -29,15 +28,6 @@ public static class WindowsSigning
         if (Path.GetExtension(file.FileName) == ".exe")
         {
             return true;
-        }
-        try
-        {
-            AssemblyName.GetAssemblyName(file.SourcePath);
-        }
-        catch (Exception)
-        {
-            // Not a .NET assembly
-            return false;
         }
         try
         {
