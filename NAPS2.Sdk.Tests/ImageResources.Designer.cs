@@ -342,6 +342,26 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] dog_jfif {
+            get {
+                object obj = ResourceManager.GetObject("dog_jfif", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_headerless {
+            get {
+                object obj = ResourceManager.GetObject("dog_headerless", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] dog_exif {
             get {
                 object obj = ResourceManager.GetObject("dog_exif", resourceCulture);
