@@ -382,7 +382,7 @@
     <value>Режим розпізнавання:</value>
   </data>
   <data name="FixWhiteBalanceAndRemoveNoise" xml:space="preserve">
-    <value>Виправляти баланс білого та видаляти шум</value>
+    <value>Виправляти баланс білого кольору та видаляти шум</value>
   </data>
   <data name="RunOcrAfterScanning" xml:space="preserve">
     <value>Автоматично виконувати розпізнавання після сканування</value>
@@ -427,7 +427,7 @@
     <value>Скасувати зміни</value>
   </data>
   <data name="AutoCrop" xml:space="preserve">
-    <value>Auto-Crop</value>
+    <value>Автоматичне обрізання</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Застосувати до всіх {0} вибраних зображень</value>
@@ -688,7 +688,7 @@
     <value>Виправляти нахил відсканованих сторінок</value>
   </data>
   <data name="AutoCropScannedPages" xml:space="preserve">
-    <value>Auto-crop scanned pages</value>
+    <value>Автоматично обрізати відскановані сторінки</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Застосовувати яскравість і контраст після сканування</value>
@@ -958,21 +958,21 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Shift</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>Compress</value>
+    <value>Стиснення</value>
   </data>
   <data name="ResolutionDpiLabel" xml:space="preserve">
-    <value>Resolution (dpi):</value>
+    <value>Роздільна здатність (dpi):</value>
   </data>
   <data name="DimensionsLabel" xml:space="preserve">
-    <value>Dimensions:</value>
+    <value>Розміри:</value>
   </data>
   <data name="PixelDimensionsLabel" xml:space="preserve">
-    <value>Pixel dimensions:</value>
+    <value>Розміри в пікселях:</value>
   </data>
   <data name="UseJpegCompression" xml:space="preserve">
-    <value>Use JPEG compression</value>
+    <value>Використовувати стиснення JPEG</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
-    <value>JPEG quality:</value>
+    <value>Якість JPEG:</value>
   </data>
 </root>

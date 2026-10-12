@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-12 17:47\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -269,11 +269,11 @@ msgstr "Salva automaticamente impostazioni"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "Ritaglio automatico"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "Ritaglio automatico pagine scansionate"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -433,7 +433,7 @@ msgstr "Compatibilità"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "Compressione"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -563,7 +563,7 @@ msgstr "Dimensioni"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "Dimensioni:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -850,7 +850,7 @@ msgstr "File JPEG (*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "Qualità JPEG:"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1221,7 +1221,7 @@ msgstr "Incolla"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "Dimensioni in pixel:"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1333,7 +1333,7 @@ msgstr "Ripristina immagine"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "Risoluzione (dpi):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1835,7 +1835,7 @@ msgstr "Caricamento email..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "Usa compressione JPEG"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

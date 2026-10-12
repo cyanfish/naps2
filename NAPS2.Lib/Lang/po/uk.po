@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-12 17:47\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -269,11 +269,11 @@ msgstr "Налаштування автоматичного збереження
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "Автоматичне обрізання"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "Автоматично обрізати відскановані сторінки"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -433,7 +433,7 @@ msgstr "Сумісність"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "Стиснення"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -563,7 +563,7 @@ msgstr "Розміри"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "Розміри:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -721,7 +721,7 @@ msgstr "Шлях до файлу:"
 
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
-msgstr "Виправляти баланс білого та видаляти шум"
+msgstr "Виправляти баланс білого кольору та видаляти шум"
 
 #: UiStrings.resx$Flip$Message
 msgid "Flip"
@@ -850,7 +850,7 @@ msgstr "JPEG-файл (*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "Якість JPEG:"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1221,7 +1221,7 @@ msgstr "Вставити"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "Розміри в пікселях:"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1333,7 +1333,7 @@ msgstr "Скидання зображення"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "Роздільна здатність (dpi):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1833,7 +1833,7 @@ msgstr "Завантаження електронного листа..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "Використовувати стиснення JPEG"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

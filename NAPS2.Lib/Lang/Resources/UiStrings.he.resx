@@ -427,7 +427,7 @@
     <value>ביטול שינויים</value>
   </data>
   <data name="AutoCrop" xml:space="preserve">
-    <value>Auto-Crop</value>
+    <value>חיתוך אוטומטי</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>החלה על כל {0} התמונות שנבחרו</value>
@@ -688,7 +688,7 @@
     <value>תיקון הטיית דפים שנסרקו</value>
   </data>
   <data name="AutoCropScannedPages" xml:space="preserve">
-    <value>Auto-crop scanned pages</value>
+    <value>חיתוך של עמודים שנסרקו אוטומטית</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>החלת בהירות/ניגודיות לאחר הסריקה</value>
@@ -958,21 +958,21 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Shift</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>Compress</value>
+    <value>דחיסה</value>
   </data>
   <data name="ResolutionDpiLabel" xml:space="preserve">
-    <value>Resolution (dpi):</value>
+    <value>רזולוציה (נק׳ לאינץ׳):</value>
   </data>
   <data name="DimensionsLabel" xml:space="preserve">
-    <value>Dimensions:</value>
+    <value>ממדים:</value>
   </data>
   <data name="PixelDimensionsLabel" xml:space="preserve">
-    <value>Pixel dimensions:</value>
+    <value>ממדי פיקסלים:</value>
   </data>
   <data name="UseJpegCompression" xml:space="preserve">
-    <value>Use JPEG compression</value>
+    <value>להשתמש בדחיסת JPEG</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
-    <value>JPEG quality:</value>
+    <value>איכות JPEG:</value>
   </data>
 </root>

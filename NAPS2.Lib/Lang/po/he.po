@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-12 17:47\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -269,11 +269,11 @@ msgstr "הגדרות שמירה אוטומטית"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "חיתוך אוטומטי"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "חיתוך של עמודים שנסרקו אוטומטית"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -433,7 +433,7 @@ msgstr "תאימות"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "דחיסה"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -563,7 +563,7 @@ msgstr "ממדים"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "ממדים:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -850,7 +850,7 @@ msgstr "קובץ JPEG‏ (‎*.jpg,‏ ‎*.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "איכות JPEG:"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -1221,7 +1221,7 @@ msgstr "הדבקה"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "ממדי פיקסלים:"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1333,7 +1333,7 @@ msgstr "איפוס תמונה"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "רזולוציה (נק׳ לאינץ׳):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1833,7 +1833,7 @@ msgstr "ההודעה נשלחת בדוא״ל…"
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "להשתמש בדחיסת JPEG"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

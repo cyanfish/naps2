@@ -427,7 +427,7 @@
     <value>Przywróć</value>
   </data>
   <data name="AutoCrop" xml:space="preserve">
-    <value>Auto-Crop</value>
+    <value>Automatyczne przycinanie</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Zastosuj do wszystkich {0} wybranych obrazów</value>
@@ -688,7 +688,7 @@
     <value>Prostuj zeskanowane strony</value>
   </data>
   <data name="AutoCropScannedPages" xml:space="preserve">
-    <value>Auto-crop scanned pages</value>
+    <value>Automatyczne przycinanie stron</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Zastosuj jasność/kontrast po skanowaniu</value>
@@ -958,21 +958,21 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Shift</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>Compress</value>
+    <value>Kompresuj</value>
   </data>
   <data name="ResolutionDpiLabel" xml:space="preserve">
-    <value>Resolution (dpi):</value>
+    <value>Rozdzielczość (dpi):</value>
   </data>
   <data name="DimensionsLabel" xml:space="preserve">
-    <value>Dimensions:</value>
+    <value>Wymiary:</value>
   </data>
   <data name="PixelDimensionsLabel" xml:space="preserve">
-    <value>Pixel dimensions:</value>
+    <value>Wymiary w pikselach:</value>
   </data>
   <data name="UseJpegCompression" xml:space="preserve">
-    <value>Use JPEG compression</value>
+    <value>Użyj kompresji JPEG</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
-    <value>JPEG quality:</value>
+    <value>Jakość JPEG:</value>
   </data>
 </root>
