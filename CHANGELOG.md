@@ -1,3 +1,25 @@
+Changes in 8.5.0:
+- Added "Auto-Crop" feature (for scanning varying-size items like receipts, photos, etc.)
+  - Click the button in the Crop window
+  - Or check "Auto-crop scanned pages" in your Advanced profile settings
+- Significant PDF compression improvements
+  - JPEG images are now encoded with Jpegli (~25% smaller)
+  - Black and white images now use JBIG2 compression (~30% smaller)
+  - OCR adds less size (~80% less overhead)
+  - Fixed an issue where edited images are saved at the wrong quality level
+- New "Compress" window (under the Image menu)
+  - Allows changing an image's resolution, dimensions, color depth, and quality
+- Better OCR text alignment (now more like Tesseract)
+- Added "Fix white balance and remove noise" to advanced profile settings
+  - This is equivalent to "Document Correction" under the Image menu
+  - Also made some improvements and speedups to Document Correction
+- New profiles now default to the page size for your locale (Letter or A4)
+  - This can be overridden in appsettings.xml (the base value is now SystemDefault instead of Letter)
+- Mac: Fixed an issue with the SANE driver
+- Escl: Fixed resolution being lost from some devices
+- Escl: Fixed some devices (e.g. Kyocera) staying busy after a scan
+- Sdk: Fixed a duplicate WIA page start event
+
 Changes in 8.4.1:
 - Linux: Fixed a crash when "Show Profiles Toolbar" is enabled
 - Mac: Fixed a scanning issue with Samsung scanners and Apple Driver
