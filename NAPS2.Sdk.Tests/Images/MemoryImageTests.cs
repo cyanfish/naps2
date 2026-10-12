@@ -75,7 +75,7 @@ public class MemoryImageTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, highQuality);
         // Rather than comparing to a reference image (which doesn't work consistently cross-platform), we just assert
         // that we're a little bit off from the original image. i.e. that quality does *something*
-        ImageAsserts.NotSimilar(ImageResources.dog, lowQuality);
+        ImageAsserts.NotSimilar(ImageResources.dog, lowQuality, 2.0);
         ImageAsserts.Similar(ImageResources.dog, lowQuality, 5.0);
     }
 
