@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-12 01:07\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -1827,7 +1827,7 @@ msgstr "Hochladen der E-Mail..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "JPEG Kompression verwenden"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"

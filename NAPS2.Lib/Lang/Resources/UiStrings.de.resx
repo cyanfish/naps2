@@ -970,7 +970,7 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Pixel dimensions:</value>
   </data>
   <data name="UseJpegCompression" xml:space="preserve">
-    <value>Use JPEG compression</value>
+    <value>JPEG Kompression verwenden</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
     <value>JPEG quality:</value>
