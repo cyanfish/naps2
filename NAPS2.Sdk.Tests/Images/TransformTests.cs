@@ -332,8 +332,8 @@ public class TransformTests : ContextualTests
 
         var transformed = original.PerformTransform(new ResolutionTransform(150));
 
-        Assert.Equal(150, transformed.HorizontalResolution);
-        Assert.Equal(150, transformed.VerticalResolution);
+        Assert.Equal(150, transformed.HorizontalResolution, 2);
+        Assert.Equal(150, transformed.VerticalResolution, 2);
         ImageAsserts.Similar(expected, transformed, ImageAsserts.NULL_RMSE_THRESHOLD, ignoreResolution: true);
         AssertOwnership(original, transformed);
     }

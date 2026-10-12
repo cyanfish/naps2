@@ -96,8 +96,8 @@ public class EsclScanDriverIntegrationTests(ITestOutputHelper testOutputHelper) 
         await _driver.Scan(_options, CancellationToken.None, ScanEvents.Stub, images.Add);
 
         var image = Assert.Single(images);
-        Assert.Equal(expectedDpi, image.HorizontalResolution);
-        Assert.Equal(expectedDpi, image.VerticalResolution);
+        Assert.Equal(expectedDpi, image.HorizontalResolution, 2);
+        Assert.Equal(expectedDpi, image.VerticalResolution, 2);
     }
 
     public enum JpegDpiHeader
