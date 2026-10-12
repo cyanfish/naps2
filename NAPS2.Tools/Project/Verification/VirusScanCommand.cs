@@ -12,7 +12,8 @@ public class VirusScanCommand : ICommand<VirusScanOptions>
         var version = ProjectHelper.GetCurrentVersionName();
 
         var tasks = new List<Task>();
-        foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, false))
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(
+                     new TargetParams { PackageType = opts.PackageType, Platform = opts.Platform }))
         {
             var ext = target.Type.ToString().ToLowerInvariant();
             tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath(ext, target.Platform, version)));

@@ -10,8 +10,13 @@ public class PackageCommand : ICommand<PackageOptions>
 {
     public int Run(PackageOptions opts)
     {
-        foreach (var target in TargetsHelper.EnumeratePackageTargets(
-                     opts.PackageType, opts.Platform, true, opts.XCompile))
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(new TargetParams
+                 {
+                     PackageType = opts.PackageType,
+                     Platform = opts.Platform,
+                     RequireBuildable = true,
+                     XCompile = opts.XCompile
+                 }))
         {
             PackageInfo GetPackageInfoForConfig() => GetPackageInfo(target.Platform, opts.Name);
             switch (target.Type)

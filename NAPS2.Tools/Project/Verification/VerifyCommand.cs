@@ -16,7 +16,8 @@ public class VerifyCommand : ICommand<VerifyOptions>
         
         using var appDriverRunner = AppDriverRunner.Start();
 
-        foreach (var target in TargetsHelper.EnumeratePackageTargets(opts.PackageType, opts.Platform, true))
+        foreach (var target in TargetsHelper.EnumeratePackageTargets(
+                     new TargetParams { PackageType = opts.PackageType, Platform = opts.Platform, RequireRunnable = true }))
         {
             switch (target.Type)
             {

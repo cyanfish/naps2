@@ -223,7 +223,7 @@ public class UploadCommand : ICommand<UploadOptions>
     {
         Cli.Run("ssh", $"user@downloads.naps2.com \"mkdir -p /var/www/html/{version}/\"");
         // Only upload packages that are needed (e.g. for Microsoft store, Apt repo)
-        foreach (var package in TargetsHelper.EnumeratePackageTargets(packageType, null, false)
+        foreach (var package in TargetsHelper.EnumeratePackageTargets(new TargetParams { PackageType = packageType })
                      .Where(x => Path.GetExtension(x.PackagePath(version)) is ".msi" or ".deb"))
         {
             var path = package.PackagePath(version);

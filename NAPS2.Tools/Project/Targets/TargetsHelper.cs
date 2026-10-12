@@ -32,24 +32,30 @@ public static class TargetsHelper
             };
     }
 
-    public static IEnumerable<PackageTarget> EnumeratePackageTargets() => EnumeratePackageTargets(null, null, false);
-
-    public static IEnumerable<PackageTarget> EnumeratePackageTargets(string? packageTypeOpt, string? platformOpt,
-        bool requireCompatiblePlatform, bool xCompile = false)
+    public static IEnumerable<PackageTarget> EnumeratePackageTargets(TargetParams? targetParams = null)
     {
-        var targets = DoEnumeratePackageTargets(packageTypeOpt, platformOpt, requireCompatiblePlatform, xCompile).ToList();
+        targetParams ??= new TargetParams();
+        var targets = DoEnumeratePackageTargets(targetParams).ToList();
         if (targets.Count == 0)
         {
-            throw new Exception($"Invalid package/platform combination: {packageTypeOpt}/{platformOpt}");
+            throw new Exception(
+                $"Invalid package/platform combination: {targetParams.PackageType}/{targetParams.Platform}");
         }
         return targets;
     }
 
-    private static IEnumerable<PackageTarget> DoEnumeratePackageTargets(string? packageTypeOpt, string? platformOpt,
-        bool requireCompatiblePlatform, bool xCompile)
+    private static IEnumerable<PackageTarget> DoEnumeratePackageTargets(TargetParams targetParams)
     {
-        packageTypeOpt = packageTypeOpt?.ToLowerInvariant() ?? "";
-        platformOpt = platformOpt?.ToLowerInvariant() ?? "";
+        var packageTypeOpt = targetParams.PackageType?.ToLowerInvariant() ?? "";
+        var platformOpt = targetParams.Platform?.ToLowerInvariant() ?? "";
+        // Both building and running require the current OS to match the target
+        bool requireOs = targetParams.RequireBuildable || targetParams.RequireRunnable;
+        // Windows arm64 can be built on x64, but only run on arm64 (while x64 can be run on arm64 via emulation)
+        bool winArmOk = !targetParams.RequireRunnable || RuntimeInformation.OSArchitecture == Architecture.Arm64;
+        // Linux packages need a matching architecture, unless only building and cross-compiling is enabled
+        bool LinuxArchOk(Architecture arch) => !requireOs ||
+                                               (targetParams.XCompile && !targetParams.RequireRunnable) ||
+                                               RuntimeInformation.OSArchitecture == arch;
 
         foreach (var packageType in packageTypeOpt.Split("+"))
         {
@@ -57,86 +63,74 @@ public static class TargetsHelper
             {
                 bool allPkg = string.IsNullOrEmpty(packageType) || packageType == "all";
                 bool allPlat = string.IsNullOrEmpty(platform) || platform == "all";
-                if ((allPkg || packageType == "exe") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                if ((allPkg || packageType == "exe") && (!requireOs || OperatingSystem.IsWindows()))
                 {
                     if (allPlat || platform == "win" || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Exe, Platform.Win64);
                     }
-                    if (allPlat || platform == "winarm")
+                    if ((allPlat || platform == "winarm") && winArmOk)
                     {
                         yield return new PackageTarget(PackageType.Exe, Platform.WinArm64);
                     }
                 }
-                if ((allPkg || packageType == "msi") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                if ((allPkg || packageType == "msi") && (!requireOs || OperatingSystem.IsWindows()))
                 {
                     if (allPlat || platform == "win" || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Msi, Platform.Win64);
                     }
                 }
-                if ((allPkg || packageType == "msix") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                if ((allPkg || packageType == "msix") && (!requireOs || OperatingSystem.IsWindows()))
                 {
                     if (allPlat || platform == "win" || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Msix, Platform.Win64);
                     }
                 }
-                if ((allPkg || packageType == "zip") && (!requireCompatiblePlatform || OperatingSystem.IsWindows()))
+                if ((allPkg || packageType == "zip") && (!requireOs || OperatingSystem.IsWindows()))
                 {
                     if (allPlat || platform == "win64")
                     {
                         yield return new PackageTarget(PackageType.Zip, Platform.Win64);
                     }
                 }
-                if ((allPkg || packageType == "deb") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
+                if ((allPkg || packageType == "deb") && (!requireOs || OperatingSystem.IsLinux()))
                 {
-                    if ((allPlat || platform == "linux") && (!requireCompatiblePlatform ||
-                                                           xCompile ||
-                                                           RuntimeInformation.OSArchitecture == Architecture.X64))
+                    if ((allPlat || platform == "linux") && LinuxArchOk(Architecture.X64))
                     {
                         yield return new PackageTarget(PackageType.Deb, Platform.Linux);
                     }
-                    if ((allPlat || platform == "linuxarm") && (!requireCompatiblePlatform ||
-                                                              xCompile ||
-                                                              RuntimeInformation.OSArchitecture == Architecture.Arm64))
+                    if ((allPlat || platform == "linuxarm") && LinuxArchOk(Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Deb, Platform.LinuxArm);
                     }
                 }
-                if ((allPkg || packageType == "rpm") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
+                if ((allPkg || packageType == "rpm") && (!requireOs || OperatingSystem.IsLinux()))
                 {
-                    if ((allPlat || platform == "linux") && (!requireCompatiblePlatform ||
-                                                           xCompile ||
-                                                           RuntimeInformation.OSArchitecture == Architecture.X64))
+                    if ((allPlat || platform == "linux") && LinuxArchOk(Architecture.X64))
                     {
                         yield return new PackageTarget(PackageType.Rpm, Platform.Linux);
                     }
-                    if ((allPlat || platform == "linuxarm") && (!requireCompatiblePlatform ||
-                                                              xCompile ||
-                                                              RuntimeInformation.OSArchitecture == Architecture.Arm64))
+                    if ((allPlat || platform == "linuxarm") && LinuxArchOk(Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Rpm, Platform.LinuxArm);
                     }
                 }
-                if ((allPkg || packageType == "flatpak") && (!requireCompatiblePlatform || OperatingSystem.IsLinux()))
+                if ((allPkg || packageType == "flatpak") && (!requireOs || OperatingSystem.IsLinux()))
                 {
-                    if ((allPlat || platform == "linux") && (!requireCompatiblePlatform ||
-                                                           xCompile ||
-                                                           RuntimeInformation.OSArchitecture == Architecture.X64))
+                    if ((allPlat || platform == "linux") && LinuxArchOk(Architecture.X64))
                     {
                         yield return new PackageTarget(PackageType.Flatpak, Platform.Linux);
                     }
-                    if ((allPlat || platform == "linuxarm") && (!requireCompatiblePlatform ||
-                                                              xCompile ||
-                                                              RuntimeInformation.OSArchitecture == Architecture.Arm64))
+                    if ((allPlat || platform == "linuxarm") && LinuxArchOk(Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Flatpak, Platform.LinuxArm);
                     }
                 }
-                if ((allPkg || packageType == "pkg") && (!requireCompatiblePlatform || OperatingSystem.IsMacOS()))
+                if ((allPkg || packageType == "pkg") && (!requireOs || OperatingSystem.IsMacOS()))
                 {
-                    if ((allPlat || platform == "mac") && (!requireCompatiblePlatform ||
+                    if ((allPlat || platform == "mac") && (!requireOs ||
                                                            RuntimeInformation.OSArchitecture == Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Pkg, Platform.Mac);
@@ -145,7 +139,7 @@ public static class TargetsHelper
                     {
                         yield return new PackageTarget(PackageType.Pkg, Platform.MacIntel);
                     }
-                    if ((allPlat || platform == "macarm") && (!requireCompatiblePlatform ||
+                    if ((allPlat || platform == "macarm") && (!requireOs ||
                                                               RuntimeInformation.OSArchitecture == Architecture.Arm64))
                     {
                         yield return new PackageTarget(PackageType.Pkg, Platform.MacArm);
@@ -157,11 +151,12 @@ public static class TargetsHelper
 
     public static IEnumerable<string?> GetBuildTypesFromPackageType(string? packageType)
     {
-        return EnumeratePackageTargets(packageType, null, true).Select(x => (x.Type switch
-        {
-            PackageType.Msi => BuildType.Msi,
-            PackageType.Zip => BuildType.Zip,
-            _ => BuildType.Release
-        }).ToString().ToLowerInvariant()).Distinct();
+        return EnumeratePackageTargets(new TargetParams { PackageType = packageType, RequireBuildable = true })
+            .Select(x => (x.Type switch
+            {
+                PackageType.Msi => BuildType.Msi,
+                PackageType.Zip => BuildType.Zip,
+                _ => BuildType.Release
+            }).ToString().ToLowerInvariant()).Distinct();
     }
 }
