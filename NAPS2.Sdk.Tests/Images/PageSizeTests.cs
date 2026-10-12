@@ -221,4 +221,61 @@ public class PageSizeTests
             PageSize.Letter, PageSize.Legal, PageSize.A5, PageSize.A4, PageSize.A3, PageSize.B5, PageSize.B4
         });
     }
+
+    [PlatformFact(include: PlatformFlags.Windows)]
+    public void SystemDefaultPageSizeWindows()
+    {
+        // The user's locale should always have a known paper size
+        Assert.NotNull(PlatformCompat.System.SystemDefaultPageSize);
+    }
+
+    [PlatformTheory(include: PlatformFlags.Windows)]
+    [InlineData("en-US", "Letter")]
+    [InlineData("en-CA", "Letter")]
+    [InlineData("de-DE", "A4")]
+    [InlineData("en-GB", "A4")]
+    [InlineData("ja-JP", "A4")]
+    public void GetPaperSizeWindows(string localeName, string expectedSize)
+    {
+        Assert.Equal(PageSize.Parse(expectedSize), WindowsSystemCompat.GetPaperSize(localeName));
+    }
+
+    [PlatformFact(include: PlatformFlags.Windows)]
+    public void GetPaperSizeWindowsInvalidLocale()
+    {
+        Assert.Null(WindowsSystemCompat.GetPaperSize("xx-INVALID"));
+    }
+
+    [PlatformTheory(include: PlatformFlags.Linux)]
+    [InlineData("C")]
+    [InlineData("POSIX")]
+    public void GetPaperSizeLinux(string localeName)
+    {
+        // Other locales may not be installed, but the C locale is always available and uses A4
+        Assert.Equal(PageSize.A4, LinuxSystemCompat.GetPaperSize(localeName));
+    }
+
+    [PlatformFact(include: PlatformFlags.Linux)]
+    public void GetPaperSizeLinuxInvalidLocale()
+    {
+        Assert.Null(LinuxSystemCompat.GetPaperSize("xx_INVALID.UTF-8"));
+    }
+
+    [PlatformFact(include: PlatformFlags.Mac)]
+    public void SystemDefaultPageSizeMac()
+    {
+        // The user's locale should always have a known paper size
+        Assert.NotNull(PlatformCompat.System.SystemDefaultPageSize);
+    }
+
+    [PlatformTheory(include: PlatformFlags.Mac)]
+    [InlineData("en-US", "Letter")]
+    [InlineData("en-CA", "Letter")]
+    [InlineData("de-DE", "A4")]
+    [InlineData("en-GB", "A4")]
+    [InlineData("ja-JP", "A4")]
+    public void GetPaperSizeMac(string localeId, string expectedSize)
+    {
+        Assert.Equal(PageSize.Parse(expectedSize), MacSystemCompat.GetPaperSize(localeId));
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Globalization;
 using NAPS2.Platform.Mac;
 
 namespace NAPS2.Platform;
@@ -81,31 +82,25 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool IsLibUsbReliable => false;
 
-    public PageSize? SystemDefaultPageSize
+    public PageSize? SystemDefaultPageSize => GetPaperSize(CultureInfo.InstalledUICulture.Name);
+
+    internal static PageSize? GetPaperSize(string localeId)
     {
-        get
+        try
         {
-#if MAC
-            try
+            int error = 0;
+            MacInterop.ulocdata_getPaperSize(localeId, out int height, out int width, ref error);
+            // Positive error codes are failures (negative are warnings)
+            if (error <= 0 && width is > 0 and < 10000 && height is > 0 and < 10000)
             {
-                // The "Default paper size" from the system's printer settings, which is based on the region by default
-                var size = AppKit.NSPrintInfo.SharedPrintInfo.PaperSize;
-                double widthPoints = size.Width, heightPoints = size.Height;
-                if (widthPoints > 0 && heightPoints > 0)
-                {
-                    // There are 72 points per inch
-                    return PageSize.FindWellKnownSize((decimal) (widthPoints / 72), (decimal) (heightPoints / 72),
-                        PageSizeUnit.Inch);
-                }
+                return PageSize.FindWellKnownSize(width, height, PageSizeUnit.Millimetre);
             }
-            catch (Exception)
-            {
-                // Ignore
-            }
-#endif
-            // Without AppKit (e.g. a non-macOS-specific build of the SDK) there's no simple way to query this
-            return null;
         }
+        catch (Exception)
+        {
+            // Ignore
+        }
+        return null;
     }
 
     public IntPtr LoadLibrary(string path) => MacInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);

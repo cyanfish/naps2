@@ -70,43 +70,47 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool IsLibUsbReliable => true;
 
-    public PageSize? SystemDefaultPageSize
+    // An empty locale name means the user's locale from the environment (LC_ALL/LC_PAPER/LANG)
+    public PageSize? SystemDefaultPageSize => GetPaperSize("");
+
+    /// <summary>
+    /// Gets the paper size for the given locale (e.g. "en_US.UTF-8"), or null if the locale isn't available.
+    /// </summary>
+    internal static PageSize? GetPaperSize(string localeName)
     {
-        get
+        const int LC_PAPER = 7;
+        const int LC_PAPER_MASK = 1 << LC_PAPER;
+        const int _NL_PAPER_HEIGHT = LC_PAPER << 16;
+        const int _NL_PAPER_WIDTH = (LC_PAPER << 16) | 1;
+        try
         {
-            const int LC_PAPER = 7;
-            const int LC_PAPER_MASK = 1 << LC_PAPER;
-            const int _NL_PAPER_HEIGHT = LC_PAPER << 16;
-            const int _NL_PAPER_WIDTH = (LC_PAPER << 16) | 1;
+            // Use a separate locale object rather than setlocale so we don't change the process-wide locale
+            var locale = LinuxInterop.newlocale(LC_PAPER_MASK, localeName, IntPtr.Zero);
+            if (locale == IntPtr.Zero)
+            {
+                return null;
+            }
             try
             {
-                // Use a separate locale object rather than setlocale so we don't change the process-wide locale
-                var locale = LinuxInterop.newlocale(LC_PAPER_MASK, "", IntPtr.Zero);
-                if (locale == IntPtr.Zero)
+                // For these items, glibc returns the value in mm in place of a string pointer. The value is a
+                // 32-bit int in a union with the pointer, so the upper bits can be garbage and must be discarded.
+                int height = unchecked((int) LinuxInterop.nl_langinfo_l(_NL_PAPER_HEIGHT, locale));
+                int width = unchecked((int) LinuxInterop.nl_langinfo_l(_NL_PAPER_WIDTH, locale));
+                if (width is > 0 and < 10000 && height is > 0 and < 10000)
                 {
-                    return null;
-                }
-                try
-                {
-                    // For these items, glibc returns the value in mm in place of a string pointer
-                    long height = LinuxInterop.nl_langinfo_l(_NL_PAPER_HEIGHT, locale);
-                    long width = LinuxInterop.nl_langinfo_l(_NL_PAPER_WIDTH, locale);
-                    if (width is > 0 and < 10000 && height is > 0 and < 10000)
-                    {
-                        return PageSize.FindWellKnownSize(width, height, PageSizeUnit.Millimetre);
-                    }
-                }
-                finally
-                {
-                    LinuxInterop.freelocale(locale);
+                    return PageSize.FindWellKnownSize(width, height, PageSizeUnit.Millimetre);
                 }
             }
-            catch (Exception)
+            finally
             {
-                // Ignore
+                LinuxInterop.freelocale(locale);
             }
-            return null;
         }
+        catch (Exception)
+        {
+            // Ignore
+        }
+        return null;
     }
 
     public IntPtr LoadLibrary(string path) => LinuxInterop.dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
