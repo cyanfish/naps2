@@ -120,13 +120,11 @@ internal class WiaScanDriver : IScanDriver
                 SupportsBlackAndWhite = validDataTypes.Contains(0)
             }
             : null;
-        var (horizontalSize, verticalSize) = GetScanArea(device, item, flatbed);
-        var scanArea = new PageSize(horizontalSize / 1000m, verticalSize / 1000m, PageSizeUnit.Inch);
         return new PerSourceCaps
         {
             DpiCaps = dpiCaps,
             BitDepthCaps = bitDepthCaps,
-            PageSizeCaps = new PageSizeCaps { ScanArea = scanArea }
+            PageSizeCaps = new PageSizeCaps { ScanArea = GetScanArea(device, item, flatbed) }
         };
     }
 
@@ -469,19 +467,25 @@ internal class WiaScanDriver : IScanDriver
             int pageWidth = _options.PageSize!.WidthInThousandthsOfAnInch * xRes / 1000;
             int pageHeight = _options.PageSize.HeightInThousandthsOfAnInch * yRes / 1000;
 
-            var (horizontalSize, verticalSize) = GetScanArea(device, item, _options.PaperSource == PaperSource.Flatbed);
-
-            int pagemaxwidth = horizontalSize * xRes / 1000;
-            int pagemaxheight = verticalSize * yRes / 1000;
-
             int horizontalPos = 0;
-            if (_options.PageAlign == HorizontalAlign.Center)
-                horizontalPos = (pagemaxwidth - pageWidth) / 2;
-            else if (_options.PageAlign == HorizontalAlign.Left)
-                horizontalPos = (pagemaxwidth - pageWidth);
+            var scanArea = GetScanArea(device, item, _options.PaperSource == PaperSource.Flatbed);
+            if (scanArea != null)
+            {
+                int pagemaxwidth = scanArea.WidthInThousandthsOfAnInch * xRes / 1000;
+                int pagemaxheight = scanArea.HeightInThousandthsOfAnInch * yRes / 1000;
 
-            pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
-            pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
+                if (_options.PageAlign == HorizontalAlign.Center)
+                    horizontalPos = (pagemaxwidth - pageWidth) / 2;
+                else if (_options.PageAlign == HorizontalAlign.Left)
+                    horizontalPos = (pagemaxwidth - pageWidth);
+
+                pageWidth = pageWidth < pagemaxwidth ? pageWidth : pagemaxwidth;
+                pageHeight = pageHeight < pagemaxheight ? pageHeight : pagemaxheight;
+            }
+            else
+            {
+                _logger.LogDebug("Could not determine WIA scan area");
+            }
 
             if (_options.WiaOptions.OffsetWidth)
             {
@@ -539,26 +543,33 @@ internal class WiaScanDriver : IScanDriver
         }
     }
 
-    private static (int, int) GetScanArea(WiaDevice device, WiaItem item, bool flatbed)
+    private static PageSize? GetScanArea(WiaDevice device, WiaItem item, bool flatbed)
     {
-        int horizontalSize, verticalSize;
-        if (device.Version == WiaVersion.Wia10)
+        try
         {
-            horizontalSize =
-                (int)device.Properties[flatbed
-                    ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
-                    : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
-            verticalSize =
-                (int)device.Properties[flatbed
-                    ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
-                    : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
+            int horizontalSize, verticalSize;
+            if (device.Version == WiaVersion.Wia10)
+            {
+                horizontalSize =
+                    (int)device.Properties[flatbed
+                        ? WiaPropertyId.DPS_HORIZONTAL_BED_SIZE
+                        : WiaPropertyId.DPS_HORIZONTAL_SHEET_FEED_SIZE].Value;
+                verticalSize =
+                    (int)device.Properties[flatbed
+                        ? WiaPropertyId.DPS_VERTICAL_BED_SIZE
+                        : WiaPropertyId.DPS_VERTICAL_SHEET_FEED_SIZE].Value;
+            }
+            else
+            {
+                horizontalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
+                verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
+            }
+            return new PageSize(horizontalSize / 1000m, verticalSize / 1000m, PageSizeUnit.Inch);
         }
-        else
+        catch (Exception)
         {
-            horizontalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_HORIZONTAL_SIZE].Value;
-            verticalSize = (int)item.Properties[WiaPropertyId.IPS_MAX_VERTICAL_SIZE].Value;
+            return null;
         }
-        return (horizontalSize, verticalSize);
     }
 }
 #endif
