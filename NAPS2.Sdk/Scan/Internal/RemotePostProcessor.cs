@@ -70,15 +70,15 @@ internal class RemotePostProcessor : IRemotePostProcessor
         }
 
         var scaled = original;
+        if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
+        {
+            scaled = CropAndStretch(original, options, scaled);
+        }
+
         if (!options.UseNativeUI && options.ScaleRatio > 1)
         {
             var scaleFactor = 1.0 / options.ScaleRatio;
             scaled = scaled.PerformTransform(new ScaleTransform(scaleFactor));
-        }
-
-        if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
-        {
-            scaled = CropAndStretch(original, options, scaled);
         }
 
         return scaled;

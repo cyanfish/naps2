@@ -160,6 +160,39 @@ public class RemotePostProcessorTests : ContextualTests
         ImageAsserts.Similar(ImageResources.patcht_cropped_bl, result!.Render().PerformTransform(new RotationTransform(90)));
     }
 
+    [Fact]
+    public void CropToPageSize_Scaled()
+    {
+        var image = LoadImage(ImageResources.patcht);
+        var options = new ScanOptions
+        {
+            CropToPageSize = true,
+            ScaleRatio = 2,
+            PageSize = new PageSize(8m, 10m, PageSizeUnit.Inch)
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        using var expected = LoadImage(ImageResources.patcht_cropped_br).PerformTransform(new ScaleTransform(0.5));
+        using var rendered = result!.Render();
+        ImageAsserts.Similar(expected, rendered, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+    }
+
+    [Fact]
+    public void StretchToPageSize_Scaled()
+    {
+        var image = LoadImage(ImageResources.patcht);
+        int originalWidth = image.Width, originalHeight = image.Height;
+        var options = new ScanOptions
+        {
+            StretchToPageSize = true,
+            ScaleRatio = 2,
+            PageSize = new PageSize(8m, 10m, PageSizeUnit.Inch)
+        };
+        var result = _remotePostProcessor.PostProcess(image, options, new PostProcessingContext());
+        using var rendered = result!.Render();
+        Assert.Equal(Math.Round(originalWidth / 2.0), rendered.Width);
+        Assert.Equal(Math.Round(originalHeight / 2.0), rendered.Height);
+    }
+
     // Only Linux can have zero resolution images
     [PlatformFact(include: PlatformFlags.GtkImage)]
     public void CropToPageSize_NoResolution()
