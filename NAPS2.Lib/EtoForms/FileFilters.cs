@@ -25,7 +25,7 @@ public class FileFilters
         if (groups.HasFlag(FileFilterGroup.AllImages))
         {
             filters.Add(new FileFilter(MiscResources.FileTypeImageFiles,
-                ".bmp", "jpg", ".jpeg", ".png", ".tiff", ".tif"));
+                ".bmp", ".jpg", ".jpeg", ".png", ".tiff", ".tif"));
         }
         if (groups.HasFlag(FileFilterGroup.Image))
         {
