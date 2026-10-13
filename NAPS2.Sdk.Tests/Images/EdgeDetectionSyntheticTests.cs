@@ -143,6 +143,74 @@ public class EdgeDetectionSyntheticTests : ContextualTests
         AssertBounds(op, 0, 0, W - pageW, H - pageH);
     }
 
+    [Theory]
+    [InlineData(255, false)]
+    [InlineData(255, true)]
+    [InlineData(190, false)]
+    [InlineData(190, true)]
+    public void PageOnDarkBackgroundWithPadding(int fill, bool jpeg)
+    {
+        // The scan area only goes down to the bottom of the page (and not all the way to the right), and the rest of
+        // the image is padded with a single color. From the top, white padding looks like a page on the dark
+        // background. With JPEG compression, the padding isn't exactly one color near the scan area.
+        const int pageW = 150, pageH = 300, scanW = 320;
+        var image = CreateSyntheticImage(ImageContext, ImagePixelFormat.RGB24, W, H, 35, image =>
+        {
+            DrawPage(image, 0, 0, pageW, pageH, 245);
+            FillRect(image, scanW, 0, W, H, fill);
+            FillRect(image, 0, pageH, W, H, fill);
+        });
+        if (jpeg)
+        {
+            image = ImageContext.Load(image.SaveToMemoryStream(ImageFileFormat.Jpeg,
+                new ImageSaveOptions { Quality = 75 }));
+        }
+
+        var op = Detect(image);
+
+        AssertBounds(op, 0, 0, W - pageW, H - pageH);
+    }
+
+    [Theory]
+    [MemberData(nameof(AllFormats))]
+    public void PaddedOnLeftAndTop(ImagePixelFormat pixelFormat)
+    {
+        // White padding on the left and top, where the scan area is smaller than the image. The left padding isn't a
+        // multiple of 8 so that black & white images are read across byte boundaries.
+        var image = CreateSyntheticImage(ImageContext, pixelFormat, W, H, 0, image =>
+        {
+            FillRect(image, 0, 0, 13, H, 255);
+            FillRect(image, 0, 0, W, 9, 255);
+            DrawPage(image, 60, 70, 300, 400, 255);
+        });
+
+        var op = Detect(image);
+
+        AssertBounds(op, 60, 70, W - 300, H - 400);
+    }
+
+    [Theory]
+    [MemberData(nameof(AllFormats))]
+    public void SaturatedPage(ImagePixelFormat pixelFormat)
+    {
+        // A page that fills the scan, where the paper is pure white. The blank margins aren't padding. The text is drawn
+        // as words with gaps, as solid lines would look like a dark scan area padded with white.
+        var image = CreateSyntheticImage(ImageContext, pixelFormat, W, H, 255, image =>
+        {
+            for (int y = 60; y < H - 60; y += 12)
+            {
+                for (int x = 50; x < W - 50; x += 30)
+                {
+                    FillRect(image, x, y, x + 20, y + 4, 30);
+                }
+            }
+        });
+
+        var op = Detect(image);
+
+        AssertBounds(op, 0, 0, 0, 0);
+    }
+
     private static EdgeDetectionImageOp Detect(IMemoryImage image)
     {
         var op = new EdgeDetectionImageOp();

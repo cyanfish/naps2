@@ -21,7 +21,9 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     // Then the strips vote. If at least two strips agree on an edge (and fewer strips found content elsewhere), we crop
     // there. Otherwise the page extends past the side of the image and we don't crop.
     //
-    // If the image has been deskewed, the white fill in its corners isn't part of the scan, so it's ignored.
+    // If the image has been deskewed, the white fill in its corners isn't part of the scan, so it's ignored. Similarly,
+    // if the scanner padded the image with a single color (as the scan area was smaller than the image), that's cropped
+    // and the rest of the image is treated as the whole scan.
 
     // Ignore a bit of the outside of the image so that artifacts from the edge of the scan area aren't counted.
     private const double IGNORE_EDGE_FRACTION = 0.005;
@@ -57,10 +59,23 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     // each side is a triangle; its depth may differ from a straight line by this many pixels.
     private const int FILL = 255;
     private const int FILL_TOLERANCE = 2;
+    // Padding is a single color, give or take this much luma (e.g. from rounding in JPEG compression).
+    private const int PADDING_NOISE = 2;
+    // Scanned data bleeds into the padding for a few lines (from blur, or JPEG compression, which works in blocks of up
+    // to 16 pixels). Those lines are mostly within a larger tolerance of the padding color.
+    private const int MAX_PADDING_BLEED = 16;
+    private const int PADDING_BLEED_TOLERANCE = 10;
+    private const double MIN_PADDING_BLEED_FRACTION = 0.95;
+    // Padding is next to scanned data, where hardly any pixels are the padding color. Otherwise it could be e.g. a
+    // page where the paper is pure white (like a black & white image), with a line of text next to its margin.
+    private const double MAX_FILL_NEXT_TO_PADDING = 0.1;
 
+    // The size of the scanned area, i.e. the image without padding
     private int _w;
     private int _h;
     private bool _invertY;
+    // The depth of padding (full lines of a single color) on each side
+    private int _padLeft, _padTop, _padRight, _padBottom;
     // The depth of deskew fill from each side, indexed by y (for left/right) or x (for top/bottom)
     private int[]? _fillLeft, _fillRight, _fillTop, _fillBottom;
     // Background luma for each strip on each side
@@ -71,6 +86,8 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     private int[] _colGradients = null!, _rowGradients = null!;
 
     protected override LockMode LockMode => LockMode.ReadOnly;
+
+    protected override int GetPartitionSize(BitwiseImageData data) => _h;
 
     /// <summary>
     /// The number of pixels to crop from the left side.
@@ -98,52 +115,53 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
 
     protected override void StartCore(BitwiseImageData data)
     {
-        _w = data.w;
-        _h = data.h;
         _invertY = data.invertY;
-        _contentLeft = new int[STRIPS * data.w];
-        _contentRight = new int[STRIPS * data.w];
-        _contentTop = new int[STRIPS * data.h];
-        _contentBottom = new int[STRIPS * data.h];
-        _colGradients = new int[STRIPS * data.w];
-        _rowGradients = new int[STRIPS * data.h];
+        FindPadding(data);
+        _w = data.w - _padLeft - _padRight;
+        _h = data.h - _padTop - _padBottom;
+        _contentLeft = new int[STRIPS * _w];
+        _contentRight = new int[STRIPS * _w];
+        _contentTop = new int[STRIPS * _h];
+        _contentBottom = new int[STRIPS * _h];
+        _colGradients = new int[STRIPS * _w];
+        _rowGradients = new int[STRIPS * _h];
         FindDeskewFill(data);
         EstimateBackground(data);
     }
 
     private void EstimateBackground(BitwiseImageData data)
     {
-        int bandW = Math.Max((int) Math.Round(data.w * BG_BAND_FRACTION), 2);
-        int bandH = Math.Max((int) Math.Round(data.h * BG_BAND_FRACTION), 2);
+        int bandW = Math.Max((int) Math.Round(_w * BG_BAND_FRACTION), 2);
+        int bandH = Math.Max((int) Math.Round(_h * BG_BAND_FRACTION), 2);
         var left = new long[STRIPS, 256];
         var right = new long[STRIPS, 256];
         var top = new long[STRIPS, 256];
         var bottom = new long[STRIPS, 256];
-        var luma = new int[data.w];
-        for (int y = 0; y < data.h; y++)
+        var luma = new int[_w];
+        for (int y = 0; y < _h; y++)
         {
             // Only read the pixels in the bands
-            if (y < bandH || y >= data.h - bandH)
+            if (y < bandH || y >= _h - bandH)
             {
-                ReadDataRow(data, y, luma, 0, data.w);
+                ReadDataRow(data, y, luma, 0, _w);
             }
             else
             {
                 ReadDataRow(data, y, luma, 0, bandW);
-                ReadDataRow(data, y, luma, data.w - bandW, data.w);
+                ReadDataRow(data, y, luma, _w - bandW, _w);
             }
-            int sy = y * STRIPS / data.h;
+            int sy = y * STRIPS / _h;
             for (int x = 0; x < bandW; x++)
             {
                 if (luma[x] >= 0) left[sy, luma[x]]++;
-                if (luma[data.w - 1 - x] >= 0) right[sy, luma[data.w - 1 - x]]++;
+                if (luma[_w - 1 - x] >= 0) right[sy, luma[_w - 1 - x]]++;
             }
-            if (y < bandH || y >= data.h - bandH)
+            if (y < bandH || y >= _h - bandH)
             {
                 var hist = y < bandH ? top : bottom;
-                for (int x = 0; x < data.w; x++)
+                for (int x = 0; x < _w; x++)
                 {
-                    if (luma[x] >= 0) hist[x * STRIPS / data.w, luma[x]]++;
+                    if (luma[x] >= 0) hist[x * STRIPS / _w, luma[x]]++;
                 }
             }
         }
@@ -181,13 +199,98 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
         return medians;
     }
 
-    private void FindDeskewFill(BitwiseImageData data)
+    /// <summary>
+    /// Finds full lines of a single color along each side, which some scanners use to pad the image when the scan area
+    /// is smaller than the requested size. It only counts as padding if it's next to scanned data (rather than e.g. a
+    /// saturated white page), and is deeper than the ignored area at the edge of the image (to keep edge artifacts as
+    /// they are).
+    /// </summary>
+    private void FindPadding(BitwiseImageData data)
     {
         int w = data.w, h = data.h;
+        int ignoreX = Math.Max((int) Math.Round(w * IGNORE_EDGE_FRACTION), 1);
+        int ignoreY = Math.Max((int) Math.Round(h * IGNORE_EDGE_FRACTION), 1);
+        // The lines from each side, indexed by depth, are read into a buffer (which is reused for the next line)
+        var row = new int[w];
+        var col = new int[h];
+        int[] TopLine(int i) => ReadRow(i);
+        int[] BottomLine(int i) => ReadRow(h - 1 - i);
+        int[] LeftLine(int i) => ReadCol(i);
+        int[] RightLine(int i) => ReadCol(w - 1 - i);
+        int[] ReadRow(int y)
+        {
+            ReadLumaRow(data, y, row, 0, w);
+            return row;
+        }
+        int[] ReadCol(int x)
+        {
+            for (int y = 0; y < h; y++)
+            {
+                ReadLumaRow(data, y, row, x, x + 1);
+                col[y] = row[x];
+            }
+            return col;
+        }
+
+        // The fraction of a line (from start to end along it) within the tolerance of the padding color
+        double FillFraction(int[] line, int start, int end, int fill, int tolerance)
+        {
+            int count = 0;
+            for (int t = start; t < end; t++)
+            {
+                if (Math.Abs(line[t] - fill) <= tolerance) count++;
+            }
+            return count / (double) (end - start);
+        }
+
+        // The depth of padding along one side, with n lines of the given length, excluding the ignored area. We stop
+        // looking once the padding would leave too little of the image, and return -1 (e.g. for a blank page).
+        (int depth, int fill) Depth(Func<int, int[]> lines, int n, int ignore, int length, int lengthIgnore)
+        {
+            int maxDepth = n - (int) Math.Ceiling(n * MIN_PAGE_FRACTION);
+            int fill = lines(ignore)[length / 2];
+            double Fraction(int i, int tolerance) =>
+                FillFraction(lines(i), lengthIgnore, length - lengthIgnore, fill, tolerance);
+            int depth = ignore;
+            while (depth < maxDepth && Fraction(depth, PADDING_NOISE) == 1) depth++;
+            if (depth == ignore) return (0, fill);
+            int bleedEnd = Math.Min(depth + MAX_PADDING_BLEED, maxDepth);
+            while (depth < bleedEnd && Fraction(depth, PADDING_BLEED_TOLERANCE) >= MIN_PADDING_BLEED_FRACTION) depth++;
+            return (depth < maxDepth ? depth : -1, fill);
+        }
+        _padLeft = _padTop = _padRight = _padBottom = 0;
+        var (top, topFill) = Depth(TopLine, h, ignoreY, w, ignoreX);
+        // The image is (almost) all one color, so there's no padding
+        if (top == -1) return;
+        var (bottom, bottomFill) = Depth(BottomLine, h, ignoreY, w, ignoreX);
+        var (left, leftFill) = Depth(LeftLine, w, ignoreX, h, ignoreY);
+        var (right, rightFill) = Depth(RightLine, w, ignoreX, h, ignoreY);
+
+        // Check for scanned data past any blur, excluding the padding on the adjacent sides
+        bool NextToScan(Func<int, int[]> lines, int depth, int n, int start, int end, int fill) =>
+            depth > 0 && depth + EDGE_GRADIENT_SPAN < n && start < end &&
+            FillFraction(lines(depth + EDGE_GRADIENT_SPAN), start, end, fill, PADDING_NOISE) <= MAX_FILL_NEXT_TO_PADDING;
+        int x1 = Math.Max(left, ignoreX), x2 = w - Math.Max(right, ignoreX);
+        int y1 = Math.Max(top, ignoreY), y2 = h - Math.Max(bottom, ignoreY);
+        _padTop = NextToScan(TopLine, top, h, x1, x2, topFill) ? top : 0;
+        _padBottom = NextToScan(BottomLine, bottom, h, x1, x2, bottomFill) ? bottom : 0;
+        _padLeft = NextToScan(LeftLine, left, w, y1, y2, leftFill) ? left : 0;
+        _padRight = NextToScan(RightLine, right, w, y1, y2, rightFill) ? right : 0;
+
+        // If there's barely anything left (e.g. the image is split into two colors), it's not padding
+        if (w - _padLeft - _padRight < w * MIN_PAGE_FRACTION || h - _padTop - _padBottom < h * MIN_PAGE_FRACTION)
+        {
+            _padLeft = _padTop = _padRight = _padBottom = 0;
+        }
+    }
+
+    private void FindDeskewFill(BitwiseImageData data)
+    {
+        int w = _w, h = _h;
         var luma = new int[w];
         int Luma(int x, int y)
         {
-            ReadLumaRow(data, y, luma, x, x + 1);
+            ReadScanRow(data, y, luma, x, x + 1);
             return luma[x];
         }
         // The depth of white from each side
@@ -237,7 +340,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     /// </summary>
     private void ReadDataRow(BitwiseImageData data, int y, int[] luma, int start, int end)
     {
-        ReadLumaRow(data, y, luma, start, end);
+        ReadScanRow(data, y, luma, start, end);
         if (_fillLeft == null) return;
         for (int x = start; x < end; x++)
         {
@@ -255,7 +358,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
             throw new InvalidOperationException("Unsupported pixel format");
         }
 
-        int w = data.w, h = data.h;
+        int w = _w, h = _h;
         // Content in the ignored area around the outside of the image (e.g. scanner artifacts) isn't counted
         int ignoreX = Math.Max((int) Math.Round(w * IGNORE_EDGE_FRACTION), 1);
         int ignoreY = Math.Max((int) Math.Round(h * IGNORE_EDGE_FRACTION), 1);
@@ -330,14 +433,21 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
 
     private static void ReadLumaRow(BitwiseImageData data, int y, int[] luma) => ReadLumaRow(data, y, luma, 0, data.w);
 
-    private static unsafe void ReadLumaRow(BitwiseImageData data, int y, int[] luma, int start, int end)
+    /// <summary>
+    /// Reads the luma for part of a row of the scanned area (i.e. offset by the padding).
+    /// </summary>
+    private void ReadScanRow(BitwiseImageData data, int y, int[] luma, int start, int end) =>
+        ReadLumaRow(data, y, luma, start, end, _padLeft, _padTop);
+
+    private static unsafe void ReadLumaRow(BitwiseImageData data, int y, int[] luma, int start, int end,
+        int xOffset = 0, int yOffset = 0)
     {
-        var row = data.ptr + data.stride * y;
+        var row = data.ptr + data.stride * (y + yOffset);
         if (data.bytesPerPixel is 3 or 4)
         {
             for (int x = start; x < end; x++)
             {
-                var pixel = row + x * data.bytesPerPixel;
+                var pixel = row + (x + xOffset) * data.bytesPerPixel;
                 int r = *(pixel + data.rOff);
                 int g = *(pixel + data.gOff);
                 int b = *(pixel + data.bOff);
@@ -348,14 +458,15 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
         {
             for (int x = start; x < end; x++)
             {
-                luma[x] = *(row + x);
+                luma[x] = *(row + x + xOffset);
             }
         }
         else
         {
             for (int x = start; x < end; x++)
             {
-                var bit = (*(row + x / 8) >> (7 - x % 8)) & 1;
+                int px = x + xOffset;
+                var bit = (*(row + px / 8) >> (7 - px % 8)) & 1;
                 luma[x] = bit == 0 ? 0 : 255;
             }
         }
@@ -374,15 +485,21 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
         int right = FindSide(_contentRight, _colGradients, _bgRight, _w, _h, true);
         int top = FindSide(_contentTop, _rowGradients, _bgTop, _h, _w, false);
         int bottom = FindSide(_contentBottom, _rowGradients, _bgBottom, _h, _w, true);
-        if (_invertY)
-        {
-            (top, bottom) = (bottom, top);
-        }
 
         if (_w - left - right < _w * MIN_PAGE_FRACTION || _h - top - bottom < _h * MIN_PAGE_FRACTION)
         {
             // Couldn't find a plausible page
             left = right = top = bottom = 0;
+        }
+
+        // The padding isn't part of the scan, so it's always cropped
+        left += _padLeft;
+        right += _padRight;
+        top += _padTop;
+        bottom += _padBottom;
+        if (_invertY)
+        {
+            (top, bottom) = (bottom, top);
         }
 
         Left = left;
