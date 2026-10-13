@@ -55,28 +55,28 @@ public class ManualIpForm : EtoDialogBase
 
     private bool Connect()
     {
-        string ipHost = _ipHost.Text;
-        if (string.IsNullOrWhiteSpace(ipHost))
+        string ipHost = _ipHost.Text.Trim();
+        if (string.IsNullOrEmpty(ipHost))
         {
             _ipHost.Focus();
             return false;
         }
 
-        int port = int.TryParse(_port.Text, out int p) ? p : -1;
+        int port = int.TryParse(_port.Text.Trim(), out int p) ? p : -1;
         bool https = _https.IsChecked();
 
         Task.Run(async () =>
         {
-            var uri = new UriBuilder
-            {
-                Scheme = https ? "https" : "http",
-                Host = ipHost,
-                Port = port,
-                Path = "eSCL"
-            }.Uri;
-
+            Uri? uri = null;
             try
             {
+                uri = new UriBuilder
+                {
+                    Scheme = https ? "https" : "http",
+                    Host = ipHost,
+                    Port = port,
+                    Path = "eSCL"
+                }.Uri;
                 var client = new EsclClient(uri);
                 var caps = await client.GetCapabilities();
                 if (caps.Uuid != null && caps.MakeAndModel != null)
@@ -88,7 +88,7 @@ public class ManualIpForm : EtoDialogBase
             }
             catch (Exception ex)
             {
-                Log.DebugException($"Error connecting to manual IP/host {uri.ToString()}", ex);
+                Log.DebugException($"Error connecting to manual IP/host {uri?.ToString() ?? ipHost}", ex);
                 _errorOutput.DisplayError(UiStrings.ConnectionError, ex);
             }
         });
