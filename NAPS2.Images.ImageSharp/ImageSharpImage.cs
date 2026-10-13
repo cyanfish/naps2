@@ -33,7 +33,7 @@ public class ImageSharpImage : IMemoryImage
 
     public float HorizontalResolution => (float) (Image.Metadata.HorizontalResolution * ResolutionMultiplier);
 
-    public float VerticalResolution => (float) (Image.Metadata.HorizontalResolution * ResolutionMultiplier);
+    public float VerticalResolution => (float) (Image.Metadata.VerticalResolution * ResolutionMultiplier);
 
     private double ResolutionMultiplier => Image.Metadata.ResolutionUnits switch
     {
