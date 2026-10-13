@@ -14,6 +14,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     // - An edge: a straight line along which the luma consistently changes. For white paper on a white background this
     // is often a shadow or highlight too faint to see pixel-by-pixel through the noise. So we sum the signed gradient
     // along the line, clamping each pixel's gradient to a small value; noise cancels out while a real edge adds up.
+    // A page on a dark background always contrasts with it, so there we only look for edges followed by content.
     // - Content: pixels that differ a lot from the background, i.e. text or a printed line. This means the
     // "background" is actually part of the page.
     //
@@ -30,6 +31,8 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     private const int STRIPS = 8;
     // Luma (0-255) difference from the background for a pixel to count as content.
     private const int CONTENT_THRESHOLD = 40;
+    // Background luma (0-255) below which pages are expected to contrast with the background.
+    private const int DARK_BACKGROUND = 128;
     // The fraction of content pixels for a line (in a strip) to stop the scan. This is high enough to ignore dust.
     private const double MIN_CONTENT_FRACTION = 0.05;
     // The fraction of content pixels for a line to count as having any ink.
@@ -367,10 +370,10 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
 
     protected override void FinishCore()
     {
-        int left = FindSide(_contentLeft, _colGradients, _w, _h, false);
-        int right = FindSide(_contentRight, _colGradients, _w, _h, true);
-        int top = FindSide(_contentTop, _rowGradients, _h, _w, false);
-        int bottom = FindSide(_contentBottom, _rowGradients, _h, _w, true);
+        int left = FindSide(_contentLeft, _colGradients, _bgLeft, _w, _h, false);
+        int right = FindSide(_contentRight, _colGradients, _bgRight, _w, _h, true);
+        int top = FindSide(_contentTop, _rowGradients, _bgTop, _h, _w, false);
+        int bottom = FindSide(_contentBottom, _rowGradients, _bgBottom, _h, _w, true);
         if (_invertY)
         {
             (top, bottom) = (bottom, top);
@@ -392,7 +395,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
     /// Scans inward from one side (from the end if reverse is true) over n lines of the given length, and returns the
     /// number of lines before the page starts.
     /// </summary>
-    private static int FindSide(int[] content, int[] gradients, int n, int lineLength, bool reverse)
+    private static int FindSide(int[] content, int[] gradients, int[] bg, int n, int lineLength, bool reverse)
     {
         // Gradients look a few pixels to either side, so start a bit further in to fully ignore the outside
         int start = Math.Max((int) Math.Round(n * IGNORE_EDGE_FRACTION), 1) + EDGE_GRADIENT_SPAN;
@@ -413,12 +416,15 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
             bool IsInk(int i) => HasContent(i, MIN_INK_FRACTION);
             bool IsSolid(int i) => HasContent(i, MIN_SOLID_FRACTION);
             bool IsEdge(int i) => i < n && Math.Abs(gradients[s * n + (reverse ? n - 1 - i : i)]) >= minGradient;
+            // A page on a dark background always contrasts with it, so we only look for faint edges (without content)
+            // on a light background. A dark background can have faint stripes that would otherwise look like edges.
+            bool dark = bg[s] < DARK_BACKGROUND;
 
             // Edges up to here are part of an artifact from the edge of the scan area
             int skipUntil = start + EDGE_WIDTH - 1;
             for (int i = start; i < end; i++)
             {
-                if (!IsContent(i) && !IsEdge(i))
+                if (!IsContent(i) && (dark || !IsEdge(i)))
                 {
                     continue;
                 }
@@ -439,7 +445,7 @@ internal class EdgeDetectionImageOp : UnaryBitwiseImageOp
                 bool blankMargin = !Enumerable.Range(i, edgeEnd - i + EDGE_GRADIENT_SPAN + 1).Any(IsInk);
                 int solidStart = Enumerable.Range(i, edgeEnd - i + agreement).FirstOrDefault(IsSolid, -1);
                 bool contrastingPage = solidStart != -1 && Enumerable.Range(solidStart, sustained).All(IsSolid);
-                if (hasEdge && (contrastingPage || blankMargin))
+                if (hasEdge && (contrastingPage || blankMargin && !dark))
                 {
                     // The page starts after any shadow/highlight/blur around the edge. That's either where solid
                     // content starts, or the end of the edge (adjusted as the gradient looks behind by the span).

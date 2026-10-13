@@ -123,6 +123,26 @@ public class EdgeDetectionSyntheticTests : ContextualTests
         AssertBounds(op, 150, 200, W - 300, H - 350);
     }
 
+    [Fact]
+    public void PageOnStripedDarkBackground()
+    {
+        // Noise on a black background can look like faint lines, which is different than white backgrounds
+        const int pageW = 150, pageH = 300;
+        var random = new Random(0);
+        var image = CreateSyntheticImage(ImageContext, ImagePixelFormat.RGB24, W, H, 35, image =>
+        {
+            for (int x = 0; x < W; x++)
+            {
+                FillRect(image, x, 0, x + 1, H, 35 + random.Next(-6, 7));
+            }
+            DrawPage(image, 0, 0, pageW, pageH, 245);
+        });
+
+        var op = Detect(image);
+
+        AssertBounds(op, 0, 0, W - pageW, H - pageH);
+    }
+
     private static EdgeDetectionImageOp Detect(IMemoryImage image)
     {
         var op = new EdgeDetectionImageOp();
