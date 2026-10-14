@@ -346,6 +346,7 @@ public class EditProfileForm : EtoDialogBase
             if (!ScanProfile.IsDeviceLocked)
             {
                 ScanProfile.Device = ScanProfileDevice.FromScanDevice(_deviceSelectorWidget.Choice.Device);
+                ScanProfile.DriverName = DeviceDriver.ToString().ToLowerInvariant();
             }
             return true;
         }

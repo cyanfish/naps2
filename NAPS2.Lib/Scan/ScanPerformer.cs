@@ -331,11 +331,13 @@ internal class ScanPerformer : IScanPerformer
             {
                 return false;
             }
+            options.Driver = options.Device.Driver;
 
             // Persist the device in the profile if configured to do so
             if (_config.Get(c => c.AlwaysRememberDevice))
             {
                 scanProfile.Device = ScanProfileDevice.FromScanDevice(options.Device);
+                scanProfile.DriverName = options.Driver.ToString().ToLowerInvariant();
                 _profileManager.Save();
             }
         }
