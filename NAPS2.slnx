@@ -1,0 +1,570 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Debug-Linux" />
+    <BuildType Name="Debug-Mac" />
+    <BuildType Name="Debug-Windows" />
+    <BuildType Name="DebugLang" />
+    <BuildType Name="Release-Linux" />
+    <BuildType Name="Release-Mac" />
+    <BuildType Name="Release-Msi" />
+    <BuildType Name="Release-Windows" />
+    <BuildType Name="Release-Zip" />
+    <BuildType Name="Sdk" />
+    <BuildType Name="Tools" />
+  </Configurations>
+  <Folder Name="/app/">
+    <Project Path="NAPS2.App.Console/NAPS2.App.Console.csproj">
+      <BuildDependency Project="NAPS2.App.Worker/NAPS2.App.Worker.csproj" />
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.App.Gtk/NAPS2.App.Gtk.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Debug-Windows|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.App.Mac/NAPS2.App.Mac.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Windows|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.App.PortableLauncher/NAPS2.App.PortableLauncher.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Msi|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.App.Tests/NAPS2.App.Tests.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Msi|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Release-Zip|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.App.WinForms/NAPS2.App.WinForms.csproj">
+      <BuildDependency Project="NAPS2.App.Worker/NAPS2.App.Worker.csproj" />
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.App.Worker/NAPS2.App.Worker.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+  </Folder>
+  <Folder Name="/escl/">
+    <Project Path="NAPS2.Escl.Server/NAPS2.Escl.Server.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Escl.Tests/NAPS2.Escl.Tests.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Msi|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Release-Zip|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Escl.Usb/NAPS2.Escl.Usb.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Escl/NAPS2.Escl.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+  </Folder>
+  <Folder Name="/images/">
+    <Project Path="NAPS2.Images.Gdi/NAPS2.Images.Gdi.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Images.Gtk/NAPS2.Images.Gtk.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Debug-Windows|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Images.ImageSharp/NAPS2.Images.ImageSharp.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Images.Mac/NAPS2.Images.Mac.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Windows|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Images.Wpf/NAPS2.Images.Wpf.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+    <Project Path="NAPS2.Images/NAPS2.Images.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
+  </Folder>
+  <Project Path="NAPS2.Internals/NAPS2.Internals.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Lib.Gtk/NAPS2.Lib.Gtk.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Debug-Mac|*" Project="false" />
+    <Build Solution="Debug-Windows|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Lib.Mac/NAPS2.Lib.Mac.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Debug-Linux|*" Project="false" />
+    <Build Solution="Debug-Windows|*" Project="false" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Lib.Tests/NAPS2.Lib.Tests.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Release-Msi|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Release-Zip|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Lib.WinForms/NAPS2.Lib.WinForms.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Debug-Linux|*" Project="false" />
+    <Build Solution="Debug-Mac|*" Project="false" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Lib/NAPS2.Lib.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Sdk.Samples/NAPS2.Sdk.Samples.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Debug-Linux|*" Project="false" />
+    <Build Solution="Debug-Mac|*" Project="false" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Release-Zip|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Sdk.ScannerTests/NAPS2.Sdk.ScannerTests.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Release-Msi|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Release-Zip|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Sdk.Tests/NAPS2.Sdk.Tests.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Release-Msi|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Release-Zip|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Sdk.Worker.Build/NAPS2.Sdk.Worker.Build.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Project="false" />
+  </Project>
+  <Project Path="NAPS2.Sdk.Worker.Win32/NAPS2.Sdk.Worker.Win32.csproj">
+    <BuildDependency Project="NAPS2.Sdk.Worker.Build/NAPS2.Sdk.Worker.Build.csproj" />
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Debug-Linux|*" Project="false" />
+    <Build Solution="Debug-Mac|*" Project="false" />
+    <Build Solution="Debug-Windows|*" Project="false" />
+    <Build Solution="DebugLang|*" Project="false" />
+    <Build Solution="Debug|*" Project="false" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Release-Msi|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Release-Zip|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Sdk/NAPS2.Sdk.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="DebugNoMac" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="DebugNoMac" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Setup/NAPS2.Setup.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Project="false" />
+  </Project>
+  <Project Path="NAPS2.Tools/NAPS2.Tools.csproj">
+    <BuildType Project="Debug" />
+    <Build Solution="Debug-Linux|*" Project="false" />
+    <Build Solution="Debug-Mac|*" Project="false" />
+    <Build Solution="Debug-Windows|*" Project="false" />
+    <Build Solution="DebugLang|*" Project="false" />
+    <Build Solution="Debug|*" Project="false" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Release-Msi|*" Project="false" />
+    <Build Solution="Release-Windows|*" Project="false" />
+    <Build Solution="Release-Zip|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+  </Project>
+</Solution>
