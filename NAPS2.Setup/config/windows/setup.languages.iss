@@ -47,3 +47,12 @@ Name: "Turkish";              MessagesFile: "C:\Program Files (x86)\Inno Setup 6
 Name: "Ukrainian";            MessagesFile: "C:\Program Files (x86)\Inno Setup 6\Languages\Ukrainian.isl";
 ; Name: "Urdu";                 MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Urdu.isl";
 Name: "Vietnamese";           MessagesFile: "..\..\NAPS2.Setup\config\windows\inno-lang\Vietnamese.isl";
+
+[CustomMessages]
+Italian.NameAndVersion={#AppShortName} {#AppVersion}
+Italian.LaunchProgram=Esegui {#AppShortName}
+Italian.AdditionalIcons=Collegamenti:
+Italian.CreateDesktopIcon=Crea collegamento programma sul &desktop
+Italian.CreateQuickLaunchIcon=Crea collegamento programma nella &barra 'Avvio veloce'
+Italian.AssocFileExtension=&Associa i file con estensione '%2' a '%1'
+Italian.AssocingFileExtension=Associazione file con estensione '%2' a '%1'..
