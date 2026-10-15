@@ -7,9 +7,11 @@ namespace NAPS2.Sdk.Worker;
 [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
 public class Program
 {
-    public static async Task Main()
+    [STAThread]
+    public static void Main()
     {
         var scanningContext = new ScanningContext(new GdiImageContext());
-        await WorkerServer.Run(scanningContext);
+        // We can't use "async Main" with STAThread
+        WorkerServer.Run(scanningContext).GetAwaiter().GetResult();
     }
 }
