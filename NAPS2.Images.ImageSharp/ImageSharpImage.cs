@@ -121,7 +121,7 @@ public class ImageSharpImage : IMemoryImage
 
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
-        var encoder = GetImageEncoder(imageFormat, options);
+        var encoder = GetImageEncoder(imageFormat, options, helper.Image.PixelFormat);
         helper.Image.Image.Save(path, encoder);
     }
 
@@ -139,16 +139,26 @@ public class ImageSharpImage : IMemoryImage
 
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
-        var encoder = GetImageEncoder(imageFormat, options);
+        var encoder = GetImageEncoder(imageFormat, options, helper.Image.PixelFormat);
         helper.Image.Image.Save(stream, encoder);
     }
 
-    private static ImageEncoder GetImageEncoder(ImageFileFormat imageFormat, ImageSaveOptions options)
+    private static ImageEncoder GetImageEncoder(ImageFileFormat imageFormat, ImageSaveOptions options,
+        ImagePixelFormat pixelFormat)
     {
         var encoder = imageFormat switch
         {
             ImageFileFormat.Bmp => (ImageEncoder) new BmpEncoder(),
-            ImageFileFormat.Png => new PngEncoder(),
+            ImageFileFormat.Png => new PngEncoder
+            {
+                ColorType = pixelFormat switch
+                {
+                    ImagePixelFormat.Gray8 => PngColorType.Grayscale,
+                    ImagePixelFormat.RGB24 => PngColorType.Rgb,
+                    _ => PngColorType.RgbWithAlpha
+                },
+                BitDepth = PngBitDepth.Bit8
+            },
             ImageFileFormat.Jpeg => new JpegEncoder
             {
                 Quality = options.Quality == -1 ? 75 : options.Quality,
@@ -156,7 +166,10 @@ public class ImageSharpImage : IMemoryImage
                 // We prevent that here if the caller specified an RGB PixelFormatHint.
                 ColorType = options.PixelFormatHint >= ImagePixelFormat.RGB24 ? JpegColorType.Rgb : null
             },
-            ImageFileFormat.Tiff => new TiffEncoder(),
+            ImageFileFormat.Tiff => new TiffEncoder
+            {
+                BitsPerPixel = pixelFormat == ImagePixelFormat.Gray8 ? TiffBitsPerPixel.Bit8 : null
+            },
             _ => throw new InvalidOperationException()
         };
         return encoder;

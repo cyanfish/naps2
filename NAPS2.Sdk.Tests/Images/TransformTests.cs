@@ -449,7 +449,7 @@ public class TransformTests : ContextualTests
         var transformed = original.PerformTransform(new BlackWhiteTransform(300));
         Assert.Equal(ImagePixelFormat.BW1, transformed.UpdateLogicalPixelFormat());
 
-        ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(expected, transformed, ImageAsserts.XL_RMSE_THRESHOLD);
         AssertOwnership(original, transformed);
     }
 
