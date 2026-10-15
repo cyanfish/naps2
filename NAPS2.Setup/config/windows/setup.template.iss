@@ -39,7 +39,7 @@ MinVersion=10.0.14393
 
 DefaultDirName={commonpf}\{#AppShortName}
 DefaultGroupName={#AppShortName}
-LicenseFile=..\..\LICENSE.rtf
+LicenseFile=..\license.rtf
 
 UninstallDisplayName={#AppShortName}
 UninstallDisplayIcon={app}\{#ExeName}
