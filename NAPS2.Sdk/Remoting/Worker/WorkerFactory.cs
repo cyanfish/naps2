@@ -152,7 +152,8 @@ internal class WorkerFactory : IWorkerFactory
                 {
                     ConnectionTimeout = PIPE_CONNECTION_TIMEOUT
                 };
-                var channel = new NamedPipeChannel(".", string.Format(PIPE_NAME_FORMAT, proc.Id), options);
+                var pipeName = PipeNames.Get(string.Format(PIPE_NAME_FORMAT, proc.Id));
+                var channel = new NamedPipeChannel(".", pipeName, options);
                 _workerQueues![workerType]
                     .Add(new WorkerContext(scanningContext, workerType, new WorkerServiceAdapter(channel), proc));
             }

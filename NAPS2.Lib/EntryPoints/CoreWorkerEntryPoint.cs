@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using GrpcDotNetNamedPipes;
 using Microsoft.Extensions.Logging;
+using NAPS2.Remoting;
 using NAPS2.Remoting.Worker;
 
 namespace NAPS2.EntryPoints;
@@ -35,7 +36,8 @@ public static class CoreWorkerEntryPoint
 
             // Connect to the main NAPS2 process and listen for assigned work
             var server =
-                new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
+                new NamedPipeServer(
+                    PipeNames.Get(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id)));
             serviceImpl.OnStop += (_, _) => stop();
             using var parentCheckTimer = new Timer(_ =>
             {

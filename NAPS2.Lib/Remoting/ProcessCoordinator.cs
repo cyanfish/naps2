@@ -30,7 +30,7 @@ public class ProcessCoordinator(string basePath, string pipeNameFormat)
 
     private string GetPipeName(Process process)
     {
-        return string.Format(pipeNameFormat, process.Id);
+        return PipeNames.Get(string.Format(pipeNameFormat, process.Id));
     }
 
     public void StartServer(ProcessCoordinatorServiceBase service)

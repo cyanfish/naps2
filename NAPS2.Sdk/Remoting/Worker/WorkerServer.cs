@@ -41,7 +41,8 @@ public static class WorkerServer
 #endif
 
             var server =
-                new NamedPipeServer(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id));
+                new NamedPipeServer(
+                    PipeNames.Get(string.Format(WorkerFactory.PIPE_NAME_FORMAT, Process.GetCurrentProcess().Id)));
             var serviceImpl = new WorkerServiceImpl(scanningContext,
                 new ThumbnailRenderer(scanningContext.ImageContext), new StubMapiWrapper(),
 #if MAC
