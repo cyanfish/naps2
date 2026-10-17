@@ -293,6 +293,33 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ScanPdfSettings_MetadataPlaceholders()
+    {
+        var path = $"{FolderPath}/test.pdf";
+        var year = DateTime.Now.ToString("yyyy");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                PdfAuthor = "author $(YYYY)",
+                PdfSubject = "subject $(YYYY)",
+                PdfTitle = "title $(YYYY)",
+                PdfKeywords = "keywords $(YYYY)",
+                Verbose = true
+            },
+            Image1);
+        PdfAsserts.AssertMetadata(new PdfMetadata
+        {
+            Author = $"author {year}",
+            Creator = "NAPS2",
+            Keywords = $"keywords {year}",
+            Subject = $"subject {year}",
+            Title = $"title {year}"
+        }, path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ScanPdfSettings_SavedEncryptConfig()
     {
         var path = $"{FolderPath}/test.pdf";

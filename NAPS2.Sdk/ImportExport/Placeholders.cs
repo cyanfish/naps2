@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace NAPS2.ImportExport;
 
 /// <summary>
-/// Class for handling substitution of special values in file paths. For example, "$(YYYY)" can be substituted with the current year.
+/// Class for handling substitution of special values in strings like file paths or PDF metadata. For example, "$(YYYY)" can be substituted with the current year.
 /// Use Placeholders.All for recommended substitutions. Alternatively, you can use Placeholders.Env or Placeholders.None if you prefer.
 /// </summary>
 internal abstract class Placeholders
@@ -35,40 +35,40 @@ internal abstract class Placeholders
     public static DefaultPlaceholders NonNumeric => new(includeNumeric: false);
 
     /// <summary>
-    /// Substitutes environment variables in file names. Not recommended if you may be saving multiple files.
+    /// Substitutes environment variables only. Not recommended if you may be saving multiple files.
     /// </summary>
     public static EnvironmentPlaceholders Env => new();
 
     /// <summary>
-    /// Does not make any changes to the file name. Not recommended if you may be saving multiple files.
+    /// Does not make any changes to the input. Not recommended if you may be saving multiple files.
     /// </summary>
     public static StubPlaceholders None => new();
 
     /// <summary>
-    /// Performs substitutions on the given file path.
+    /// Performs substitutions on the given input string (e.g. a file path).
     /// </summary>
-    /// <param name="filePath">The file path to perform substitutions on.</param>
-    /// <param name="incrementIfExists">Whether to use an auto-incrementing file number to make the file name unique.</param>
+    /// <param name="input">The string to perform substitutions on.</param>
+    /// <param name="incrementIfExists">If the input is a file path, whether to use an auto-incrementing file number to make the file name unique.</param>
     /// <param name="numberSkip">The file number will be at least one bigger than this value.</param>
-    /// <param name="autoNumberDigits">The minimum number of digits in the file number. Only has an effect if the path does not contain a numeric placeholder like $(n) or $(nnn).</param>
-    /// <returns>The file path with substitutions.</returns>
-    [return: NotNullIfNotNull("filePath")]
-    public abstract string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
+    /// <param name="autoNumberDigits">If the input is a file path, the minimum number of digits in the file number. Only has an effect if the input does not contain a numeric placeholder like $(n) or $(nnn).</param>
+    /// <returns>The input with substitutions.</returns>
+    [return: NotNullIfNotNull("input")]
+    public abstract string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
         int autoNumberDigits = 0);
 
     public class StubPlaceholders : Placeholders
     {
-        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0) => filePath;
+        public override string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
+            int autoNumberDigits = 0) => input;
     }
 
     public class EnvironmentPlaceholders : Placeholders
     {
-        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
+        public override string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
             int autoNumberDigits = 0)
         {
-            if (filePath == null) return null;
-            return Environment.ExpandEnvironmentVariables(filePath);
+            if (input == null) return null;
+            return Environment.ExpandEnvironmentVariables(input);
         }
     }
 
@@ -104,18 +104,18 @@ internal abstract class Placeholders
         /// <returns>The new DefaultPlaceholders object.</returns>
         public DefaultPlaceholders WithDate(DateTime dateTime) => new(dateTime, _includeNumeric);
 
-        [return: NotNullIfNotNull("filePath")]
-        public override string? Substitute(string? filePath, bool incrementIfExists = true, int numberSkip = 0,
+        [return: NotNullIfNotNull("input")]
+        public override string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
             int autoNumberDigits = 0)
         {
-            if (filePath == null)
+            if (input == null)
             {
                 return null;
             }
 
             var dateTime = _dateTimeOverride ?? DateTime.Now;
             // Start with environment variables
-            string result = Environment.ExpandEnvironmentVariables(filePath);
+            string result = Environment.ExpandEnvironmentVariables(input);
             // Most placeholders don't need a special case
             result = Replacements.Aggregate(result, (current, ph) => current.Replace(ph.Key, ph.Value(dateTime)));
             // One does, however

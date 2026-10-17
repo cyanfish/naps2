@@ -86,7 +86,7 @@ internal class SavePdfOperation : OperationBase
 
                     var progress = new ProgressHandler(singleFile ? OnProgress : null, CancelToken);
                     result = await _pdfExporter.Export(currentFileName, imagesForFile,
-                        new PdfExportParams(pdfSettings.Metadata, pdfSettings.Encryption,
+                        new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders), pdfSettings.Encryption,
                             pdfSettings.Compat), ocrParams, progress);
                     if (!result || CancelToken.IsCancellationRequested)
                     {
