@@ -822,6 +822,9 @@
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Twain Implementation:</value>
   </data>
+  <data name="AppleImplLabel" xml:space="preserve">
+    <value>Apple Driver Implementation:</value>
+  </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Batch Scan</value>
   </data>

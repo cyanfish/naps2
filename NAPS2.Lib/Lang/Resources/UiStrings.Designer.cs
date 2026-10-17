@@ -1454,6 +1454,12 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("TwainImplLabel", resourceCulture);
             }
         }
+
+        internal static string AppleImplLabel {
+            get {
+                return ResourceManager.GetString("AppleImplLabel", resourceCulture);
+            }
+        }
         
         internal static string BatchScanFormTitle {
             get {

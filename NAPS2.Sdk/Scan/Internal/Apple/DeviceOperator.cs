@@ -523,8 +523,13 @@ internal class DeviceOperator : ICScannerDeviceDelegate
 
     private bool ShouldUseFileTransfer()
     {
-        // https://github.com/cyanfish/naps2/issues/720
-        return _device.Name?.ContainsInvariantIgnoreCase("Samsung") ?? false;
+        return _options.AppleOptions.TransferMode switch
+        {
+            AppleTransferMode.File => true,
+            AppleTransferMode.Memory => false,
+            // https://github.com/cyanfish/naps2/issues/720
+            _ => _device.Name?.ContainsInvariantIgnoreCase("Samsung") ?? false
+        };
     }
 
     private ICScannerDocumentType GetDocumentTypeFromPageSize(PageSize? pageSize)

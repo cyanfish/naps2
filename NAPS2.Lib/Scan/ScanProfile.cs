@@ -121,6 +121,8 @@ public class ScanProfile
 
     public bool TwainProgress { get; set; }
 
+    public AppleImpl AppleImpl { get; set; }
+
     public bool ExcludeBlankPages { get; set; }
 
     public int BlankPageWhiteThreshold { get; set; }
@@ -171,6 +173,19 @@ public enum TwainImpl
     Legacy,
     [LocalizedDescription(typeof(SettingsResources), "TwainImpl_X64")]
     X64
+}
+
+/// <summary>
+/// The type of Apple driver implementation (this option is provided for compatibility).
+/// </summary>
+public enum AppleImpl
+{
+    [LocalizedDescription(typeof(SettingsResources), "AppleImpl_Default")]
+    Default,
+    [LocalizedDescription(typeof(SettingsResources), "AppleImpl_FileTransfer")]
+    FileTransfer,
+    [LocalizedDescription(typeof(SettingsResources), "AppleImpl_MemoryTransfer")]
+    MemoryTransfer
 }
 
 /// <summary>

@@ -261,6 +261,15 @@ internal class ScanPerformer : IScanPerformer
                 ShowProgress = scanProfile.TwainProgress,
                 IncludeWiaDevices = false
             },
+            AppleOptions =
+            {
+                TransferMode = scanProfile.AppleImpl switch
+                {
+                    AppleImpl.FileTransfer => AppleTransferMode.File,
+                    AppleImpl.MemoryTransfer => AppleTransferMode.Memory,
+                    _ => AppleTransferMode.Default
+                }
+            },
             SaneOptions =
             {
                 // We use a worker process for SANE so we should clean up after each operation

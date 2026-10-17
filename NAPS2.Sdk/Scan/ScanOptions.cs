@@ -73,6 +73,11 @@ public class ScanOptions
     public EsclOptions EsclOptions { get; set; } = new();
 
     /// <summary>
+    /// Options specific to the Apple driver.
+    /// </summary>
+    public AppleOptions AppleOptions { get; set; } = new();
+
+    /// <summary>
     /// When querying devices, ignore networked devices that are at the same IP as the current computer (so that devices
     /// shared with ScanServer aren't given duplicate entries).
     /// </summary>

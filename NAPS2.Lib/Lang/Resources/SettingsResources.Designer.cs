@@ -60,6 +60,33 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        internal static string AppleImpl_Default {
+            get {
+                return ResourceManager.GetString("AppleImpl_Default", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to File Transfer.
+        /// </summary>
+        internal static string AppleImpl_FileTransfer {
+            get {
+                return ResourceManager.GetString("AppleImpl_FileTransfer", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Memory Transfer.
+        /// </summary>
+        internal static string AppleImpl_MemoryTransfer {
+            get {
+                return ResourceManager.GetString("AppleImpl_MemoryTransfer", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Black and White.
         /// </summary>
         internal static string BitDepth_1BlackAndWhite {

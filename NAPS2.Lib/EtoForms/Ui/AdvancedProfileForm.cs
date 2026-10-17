@@ -33,6 +33,7 @@ public class AdvancedProfileForm : EtoDialogBase
 
     private readonly EnumDropDownWidget<TwainImpl> _twainImpl = new();
     private readonly CheckBox _twainProgress = new() { Text = UiStrings.ShowNativeTwainProgress };
+    private readonly EnumDropDownWidget<AppleImpl> _appleImpl = new();
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
 
     public AdvancedProfileForm(Naps2Config config, IIconProvider iconProvider) : base(config)
@@ -106,7 +107,9 @@ public class AdvancedProfileForm : EtoDialogBase
                     PlatformCompat.System.IsWiaDriverSupported ? _wiaVersion : C.None(),
                     PlatformCompat.System.IsTwainDriverSupported ? C.Label(UiStrings.TwainImplLabel) : C.None(),
                     PlatformCompat.System.IsTwainDriverSupported ? _twainImpl : C.None(),
-                    PlatformCompat.System.IsTwainDriverSupported ? _twainProgress : C.None()
+                    PlatformCompat.System.IsTwainDriverSupported ? _twainProgress : C.None(),
+                    PlatformCompat.System.IsAppleDriverSupported ? C.Label(UiStrings.AppleImplLabel) : C.None(),
+                    PlatformCompat.System.IsAppleDriverSupported ? _appleImpl : C.None()
                 )
             ),
             L.Row(
@@ -134,6 +137,7 @@ public class AdvancedProfileForm : EtoDialogBase
         _flipDuplexed.Checked = scanProfile.FlipDuplexedPages;
         _twainImpl.SelectedItem = scanProfile.TwainImpl == TwainImpl.Legacy ? TwainImpl.OldDsm : scanProfile.TwainImpl;
         _twainProgress.Checked = scanProfile.TwainProgress;
+        _appleImpl.SelectedItem = scanProfile.AppleImpl;
         _excludeBlank.Checked = scanProfile.ExcludeBlankPages;
         _whiteThreshold.IntValue = scanProfile.BlankPageWhiteThreshold;
         _coverageThreshold.IntValue = scanProfile.BlankPageCoverageThreshold;
@@ -163,6 +167,7 @@ public class AdvancedProfileForm : EtoDialogBase
         ScanProfile.FlipDuplexedPages = _flipDuplexed.IsChecked();
         ScanProfile.TwainImpl = _twainImpl.SelectedItem;
         ScanProfile.TwainProgress = _twainProgress.IsChecked();
+        ScanProfile.AppleImpl = _appleImpl.SelectedItem;
         ScanProfile.ExcludeBlankPages = _excludeBlank.IsChecked();
         ScanProfile.BlankPageWhiteThreshold = _whiteThreshold.IntValue;
         ScanProfile.BlankPageCoverageThreshold = _coverageThreshold.IntValue;

@@ -402,6 +402,7 @@ public class EditProfileForm : EtoDialogBase
             FlipDuplexedPages = ScanProfile.FlipDuplexedPages,
             TwainImpl = ScanProfile.TwainImpl,
             TwainProgress = ScanProfile.TwainProgress,
+            AppleImpl = ScanProfile.AppleImpl,
 
             ExcludeBlankPages = ScanProfile.ExcludeBlankPages,
             BlankPageWhiteThreshold = ScanProfile.BlankPageWhiteThreshold,

@@ -188,6 +188,10 @@ msgstr ""
 msgid "Apple Driver"
 msgstr ""
 
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr ""
+
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
 msgstr ""
@@ -510,6 +514,7 @@ msgstr ""
 msgid "Day (01-31)"
 msgstr ""
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -711,6 +716,10 @@ msgstr ""
 
 #: UiStrings.resx$FilePathLabel$Message
 msgid "File Path:"
+msgstr ""
+
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
 msgstr ""
 
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
@@ -921,6 +930,7 @@ msgstr ""
 msgid "Maximum quality (large files)"
 msgstr ""
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr ""
