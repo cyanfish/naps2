@@ -11,9 +11,10 @@ class Program
         if (portableExeDir != null)
         {
             bool failedUpdate = false;
+            bool isUpdate = args.Length == 3 && args[0] == "/Update";
             try
             {
-                if (args.Length == 3 && args[0] == "/Update")
+                if (isUpdate)
                 {
                     failedUpdate = true;
                     UpdatePortableApp(portableExeDir, args[1], args[2]);
@@ -27,12 +28,27 @@ class Program
                 {
                     Process.Start(portableExePath, "/FailedUpdate");
                 }
-                else
+                else if (isUpdate)
                 {
                     Process.Start(portableExePath);
                 }
+                else
+                {
+                    Process.Start(portableExePath, GetRawArgs());
+                }
             }
         }
+    }
+
+    // Gets the original command line without the exe path, so arguments are forwarded exactly as given
+    private static string GetRawArgs()
+    {
+        var commandLine = Environment.CommandLine;
+        // The exe path is either quoted or ends at the first whitespace (with no escaping)
+        int end = commandLine.StartsWith("\"")
+            ? commandLine.IndexOf('"', 1)
+            : commandLine.IndexOfAny([' ', '\t']);
+        return end == -1 ? "" : commandLine.Substring(end + 1).TrimStart();
     }
 
     private static void UpdatePortableApp(string portableExeDir, string procId, string newAppFolderPath)
