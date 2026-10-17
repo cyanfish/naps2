@@ -158,8 +158,8 @@ public class CombineForm : ImageFormBase
         var workingArea = GetScreenWorkingArea();
         var widthRatio1 = WorkingImage1.Width / workingArea.Width;
         var heightRatio1 = WorkingImage1.Height / workingArea.Height;
-        var widthRatio2 = WorkingImage1.Width / workingArea.Width;
-        var heightRatio2 = WorkingImage1.Height / workingArea.Height;
+        var widthRatio2 = WorkingImage2.Width / workingArea.Width;
+        var heightRatio2 = WorkingImage2.Height / workingArea.Height;
         var maxRatio = new[] { widthRatio1, heightRatio1, widthRatio2, heightRatio2 }.Max();
         if (maxRatio > 1)
         {
