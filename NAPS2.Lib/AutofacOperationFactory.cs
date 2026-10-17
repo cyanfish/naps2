@@ -16,7 +16,17 @@ public class AutofacOperationFactory : IOperationFactory
     public T Create<T>() where T : IOperation
     {
         var op = _container.Resolve<T>();
-        op.Error += (sender, args) => _errorOutput.DisplayError(args.ErrorMessage, args.Exception);
+        op.Error += (sender, args) =>
+        {
+            if (args.CanRetry)
+            {
+                args.RetryTask = _errorOutput.DisplayErrorWithRetry(args.ErrorMessage, args.Exception);
+            }
+            else
+            {
+                _errorOutput.DisplayError(args.ErrorMessage, args.Exception);
+            }
+        };
         return op;
     }
 }

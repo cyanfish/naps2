@@ -75,6 +75,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
+            }
+        }
+        
         internal static string Donate {
             get {
                 return ResourceManager.GetString("Donate", resourceCulture);

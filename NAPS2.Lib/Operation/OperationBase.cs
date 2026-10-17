@@ -113,6 +113,72 @@ public abstract class OperationBase : IOperation
         Error?.Invoke(this, args);
     }
 
+    /// <summary>
+    /// Reports an error with an option for the user to retry. Returns true if the operation should retry.
+    /// </summary>
+    protected async Task<bool> InvokeErrorWithRetry(string message, Exception exception)
+    {
+        var args = new OperationErrorEventArgs(message, exception, true);
+        Error?.Invoke(this, args);
+        bool retry = await args.RetryTask;
+        if (!retry)
+        {
+            LastError = args;
+        }
+        return retry;
+    }
+
+    /// <summary>
+    /// Runs the action, and if it throws, reports the error with an option for the user to retry. Returns the result
+    /// of the action, or false if it failed and the user didn't retry.
+    /// </summary>
+    protected async Task<bool> RunWithRetry(Func<Task<bool>> action, Func<Exception, string> getErrorMessage)
+    {
+        while (true)
+        {
+            try
+            {
+                return await action();
+            }
+            catch (OperationCanceledException)
+            {
+                return false;
+            }
+            catch (Exception ex)
+            {
+                if (CancelToken.IsCancellationRequested)
+                {
+                    return false;
+                }
+                var message = getErrorMessage(ex);
+                Log.ErrorException(message, ex);
+                if (!await InvokeErrorWithRetry(message, ex))
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Waits for the file to not be in use (if it exists), reporting an error with an option for the user to retry
+    /// while it is. Returns false if the user didn't retry.
+    /// </summary>
+    protected async Task<bool> WaitForFileNotInUse(string filePath)
+    {
+        while (FileSystemHelper.IsFileInUse(filePath, out var ex))
+        {
+            if (!await InvokeErrorWithRetry(MiscResources.FileInUse, ex!))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected static string GetSaveErrorMessage(Exception ex) =>
+        ex is UnauthorizedAccessException ? MiscResources.DontHavePermission : MiscResources.ErrorSaving;
+
     protected void OnProgress(int current, int max)
     {
         Status.CurrentProgress = current;

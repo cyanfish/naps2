@@ -1273,6 +1273,10 @@ msgstr ""
 msgid "Restore Defaults"
 msgstr ""
 
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
+
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr ""

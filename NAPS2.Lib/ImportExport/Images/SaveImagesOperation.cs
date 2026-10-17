@@ -35,7 +35,7 @@ internal class SaveImagesOperation : OperationBase
             MaxProgress = images.Count
         };
 
-        RunAsync(() =>
+        RunAsync(async () =>
         {
             try
             {
@@ -61,18 +61,20 @@ internal class SaveImagesOperation : OperationBase
                         {
                             return false;
                         }
-                        if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
-                        {
-                            InvokeError(MiscResources.FileInUse, ex!);
-                            return false;
-                        }
                     }
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                     FirstFileSaved = subFileName;
-                    FileSystemHelper.EnsureParentDirExists(subFileName);
-                    using var renderedImages = images.Select(x => x.Render()).ToDisposableList();
-                    return _imageContext.TiffWriter.SaveTiff(renderedImages.InnerList, subFileName,
-                        imageSettings.TiffCompression.ToTiffCompressionType(), ProgressHandler);
+                    return await RunWithRetry(async () =>
+                    {
+                        if (!await WaitForFileNotInUse(subFileName))
+                        {
+                            return false;
+                        }
+                        FileSystemHelper.EnsureParentDirExists(subFileName);
+                        using var renderedImages = images.Select(x => x.Render()).ToDisposableList();
+                        return _imageContext.TiffWriter.SaveTiff(renderedImages.InnerList, subFileName,
+                            imageSettings.TiffCompression.ToTiffCompressionType(), ProgressHandler);
+                    }, GetSaveErrorMessage);
                 }
 
                 int i = 0;
@@ -99,17 +101,15 @@ internal class SaveImagesOperation : OperationBase
                         {
                             return false;
                         }
-                        if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
-                        {
-                            InvokeError(MiscResources.FileInUse, ex!);
-                            return false;
-                        }
                     }
                     if (images.Count == 1)
                     {
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName));
                         InvokeStatusChanged();
-                        DoSaveImage(image, subFileName, format, imageSettings);
+                        if (!await SaveImageWithRetry(image, subFileName, format, imageSettings))
+                        {
+                            return false;
+                        }
                         FirstFileSaved = subFileName;
                     }
                     else
@@ -118,7 +118,10 @@ internal class SaveImagesOperation : OperationBase
                             digits);
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                         InvokeStatusChanged();
-                        DoSaveImage(image, fileNameN, format, imageSettings);
+                        if (!await SaveImageWithRetry(image, fileNameN, format, imageSettings))
+                        {
+                            return false;
+                        }
 
                         if (i == 0)
                         {
@@ -155,6 +158,21 @@ internal class SaveImagesOperation : OperationBase
         }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
         return true;
+    }
+
+    private Task<bool> SaveImageWithRetry(ProcessedImage image, string path, ImageFileFormat format,
+        ImageSettings imageSettings)
+    {
+        return RunWithRetry(async () =>
+        {
+            // Check if the file is in use before saving (including on retries) to avoid unnecessary work
+            if (!await WaitForFileNotInUse(path))
+            {
+                return false;
+            }
+            DoSaveImage(image, path, format, imageSettings);
+            return true;
+        }, GetSaveErrorMessage);
     }
 
     private void DoSaveImage(ProcessedImage image, string path, ImageFileFormat format, ImageSettings imageSettings)

@@ -9,6 +9,7 @@ public class ErrorForm : EtoDialogBase
     private readonly Label _message = new();
     private readonly TextArea _details = new() { ReadOnly = true };
     private readonly LayoutVisibility _detailsVisibility = new(false);
+    private readonly TaskCompletionSource<bool> _retryTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
     public ErrorForm(Naps2Config config, IIconProvider iconProvider)
         : base(config)
@@ -31,10 +32,22 @@ public class ErrorForm : EtoDialogBase
             L.Row(
                 C.Link(UiStrings.TechnicalDetails, ToggleDetails).AlignCenter(),
                 C.Filler(),
-                C.OkButton(this)
+                ShowRetry
+                    ? L.OkCancel(
+                        C.DialogButton(this, UiStrings.Retry, isDefault: true,
+                            beforeClose: () => _retryTcs.TrySetResult(true)),
+                        C.CancelButton(this))
+                    : C.OkButton(this)
             ),
             _details.NaturalHeight(120).Visible(_detailsVisibility).Scale()
         );
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        // Any way of closing the form other than the Retry button means we don't retry
+        _retryTcs.TrySetResult(false);
     }
 
     private void ToggleDetails()
@@ -54,4 +67,14 @@ public class ErrorForm : EtoDialogBase
         get => _details.Text;
         set => _details.Text = value;
     }
+
+    /// <summary>
+    /// Whether to show Retry/Cancel buttons instead of OK. Must be set before the form is shown.
+    /// </summary>
+    public bool ShowRetry { get; set; }
+
+    /// <summary>
+    /// Resolves to true if the user selected Retry, or false if the form was closed any other way.
+    /// </summary>
+    public Task<bool> RetryTask => _retryTcs.Task;
 }

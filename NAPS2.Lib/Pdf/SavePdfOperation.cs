@@ -53,12 +53,6 @@ internal class SavePdfOperation : OperationBase
                     FailedToStart();
                     return false;
                 }
-                if (FileSystemHelper.IsFileInUse(subFileName, out var ex))
-                {
-                    InvokeError(MiscResources.FileInUse, ex!);
-                    FailedToStart();
-                    return false;
-                }
             }
         }
 
@@ -78,16 +72,14 @@ internal class SavePdfOperation : OperationBase
                     // TODO: Overwrite prompt non-single file?
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
-                    if (singleFile && IsFileInUse(currentFileName, out var ex))
-                    {
-                        InvokeError(MiscResources.FileInUse, ex!);
-                        break;
-                    }
 
                     var progress = new ProgressHandler(singleFile ? OnProgress : null, CancelToken);
-                    result = await _pdfExporter.Export(currentFileName, imagesForFile,
-                        new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders), pdfSettings.Encryption,
-                            pdfSettings.Compat), ocrParams, progress);
+                    result = await RunWithRetry(async () =>
+                            await WaitForFileNotInUse(currentFileName) &&
+                            await _pdfExporter.Export(currentFileName, imagesForFile,
+                                new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders),
+                                    pdfSettings.Encryption, pdfSettings.Compat), ocrParams, progress),
+                        GetSaveErrorMessage);
                     if (!result || CancelToken.IsCancellationRequested)
                     {
                         break;
@@ -130,18 +122,9 @@ internal class SavePdfOperation : OperationBase
                 Status.ProgressType = OperationProgressType.MB;
                 InvokeStatusChanged();
 
-                try
-                {
-                    result = await _emailProviderFactory.Default.SendEmail(emailMessage, ProgressHandler);
-                }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (Exception ex)
-                {
-                    Log.ErrorException(MiscResources.ErrorEmailing, ex);
-                    InvokeError(MiscResources.ErrorEmailing, ex);
-                }
+                result = await RunWithRetry(
+                    () => _emailProviderFactory.Default.SendEmail(emailMessage, ProgressHandler),
+                    _ => MiscResources.ErrorEmailing);
             }
 
             return result;
@@ -172,26 +155,5 @@ internal class SavePdfOperation : OperationBase
         }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
         return true;
-    }
-
-    private bool IsFileInUse(string filePath, out Exception? exception)
-    {
-        // TODO: Generalize this for images too
-        exception = null;
-        if (File.Exists(filePath))
-        {
-            try
-            {
-                using (new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-                {
-                }
-            }
-            catch (IOException ex)
-            {
-                exception = ex;
-                return true;
-            }
-        }
-        return false;
     }
 }
