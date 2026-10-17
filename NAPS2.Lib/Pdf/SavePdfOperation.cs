@@ -68,6 +68,11 @@ internal class SavePdfOperation : OperationBase
                 int i = 0;
                 foreach (var imagesForFile in imagesByFile)
                 {
+                    if (CancelToken.IsCancellationRequested)
+                    {
+                        result = false;
+                        break;
+                    }
                     var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
                     // TODO: Overwrite prompt non-single file?
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
@@ -80,11 +85,7 @@ internal class SavePdfOperation : OperationBase
                                 new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders),
                                     pdfSettings.Encryption, pdfSettings.Compat), ocrParams, progress),
                         GetSaveErrorMessage);
-                    if (result && i == 0)
-                    {
-                        FirstFileSaved = currentFileName;
-                    }
-                    if (!result || CancelToken.IsCancellationRequested)
+                    if (!result)
                     {
                         break;
                     }
@@ -93,6 +94,10 @@ internal class SavePdfOperation : OperationBase
                         FilePath = currentFileName,
                         AttachmentName = Path.GetFileName(currentFileName)
                     });
+                    if (i == 0)
+                    {
+                        FirstFileSaved = currentFileName;
+                    }
                     i++;
                     if (!singleFile)
                     {
@@ -116,6 +121,10 @@ internal class SavePdfOperation : OperationBase
 
             if (result && emailMessage != null && _emailProviderFactory != null)
             {
+                if (CancelToken.IsCancellationRequested)
+                {
+                    return false;
+                }
                 Status.StatusText = MiscResources.UploadingEmail;
                 Status.CurrentProgress = 0;
                 Status.MaxProgress = 1;
