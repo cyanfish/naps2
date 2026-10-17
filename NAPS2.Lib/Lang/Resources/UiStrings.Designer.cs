@@ -591,18 +591,6 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string EsclNetworkDriver {
-            get {
-                return ResourceManager.GetString("EsclNetworkDriver", resourceCulture);
-            }
-        }
-        
-        internal static string EsclUsbDriver {
-            get {
-                return ResourceManager.GetString("EsclUsbDriver", resourceCulture);
-            }
-        }
-        
         internal static string AppleDriver {
             get {
                 return ResourceManager.GetString("AppleDriver", resourceCulture);

@@ -213,33 +213,6 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have permission to copy content from the file &apos;{0}&apos;..
-        /// </summary>
-        internal static string PdfNoPermissionToExtractContent {
-            get {
-                return ResourceManager.GetString("PdfNoPermissionToExtractContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The SANE driver is not available. Make sure to install the required packages:.
-        /// </summary>
-        internal static string SaneNotAvailable {
-            get {
-                return ResourceManager.GetString("SaneNotAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The OCR engine is not available. Make sure to install the required package:.
-        /// </summary>
-        internal static string TesseractNotAvailable {
-            get {
-                return ResourceManager.GetString("TesseractNotAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to An error occurred with the scanning driver..
         /// </summary>
         internal static string UnknownDriverError {
