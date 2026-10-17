@@ -29,6 +29,14 @@ internal static class SaneOptionMatchers
     public static readonly SaneOptionMatcher Feeder =
         new SaneOptionMatcher(FeederStrs, "feeder", "adf").Exclude(Duplex);
 
+    public static readonly SaneOptionMatcher FeederFront =
+        new SaneOptionMatcher(SaneOptionTranslations.ADF_Front);
+
+    // Values for a string "duplex" option, e.g. kds_s2000 has front/back/both
+    public static readonly SaneOptionMatcher DuplexOptionFront = new(["front"]);
+
+    public static readonly SaneOptionMatcher DuplexOptionBoth = new(["both"]);
+
     public static readonly SaneOptionMatcher Flatbed =
         new SaneOptionMatcher(FlatbedStrs, "flatbed");
 

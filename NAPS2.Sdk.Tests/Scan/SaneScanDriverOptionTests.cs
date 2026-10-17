@@ -262,6 +262,63 @@ public class SaneScanDriverOptionTests : ContextualTests
     }
 
     [Fact]
+    public void SetOptions_FeederFrontSource()
+    {
+        // Settings from Epson WF-3520 with epsonscan2 backend
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE,
+                ["Auto", "Flatbed", "ADF", "ADF Front"]),
+            SaneOption.CreateBooleanForTesting(2, SaneOptionNames.DUPLEX)
+        ]);
+        var options = new ScanOptions { PaperSource = PaperSource.Feeder };
+
+        var optionData = _driver.SetOptions(device, options);
+
+        Assert.True(optionData.IsFeeder);
+        Assert.Equal("ADF Front", device.GetValue(1));
+        Assert.Throws<KeyNotFoundException>(() => device.GetValue(2));
+        VerifyCapPaperSources(device, true, true, true);
+    }
+
+    [Fact]
+    public void SetOptions_FeederWithStringDuplex()
+    {
+        // Settings from Kodak Alaris S2050 with kds_s2000 backend
+        // https://github.com/cyanfish/naps2/issues/904
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE,
+                ["ADF", "ADF Front", "ADF Back", "ADF Both", "ADF Duplex"]),
+            SaneOption.CreateStringListForTesting(2, SaneOptionNames.DUPLEX, ["front", "back", "both"])
+        ]);
+        var options = new ScanOptions { PaperSource = PaperSource.Feeder };
+
+        var optionData = _driver.SetOptions(device, options);
+
+        Assert.True(optionData.IsFeeder);
+        Assert.Equal("ADF Front", device.GetValue(1));
+        Assert.Equal("front", device.GetValue(2));
+        VerifyCapPaperSources(device, false, true, true);
+    }
+
+    [Fact]
+    public void SetOptions_DuplexWithStringDuplex()
+    {
+        // No duplex source, so the duplex option is the only way to scan both sides
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE, ["Flatbed", "ADF"]),
+            SaneOption.CreateStringListForTesting(2, SaneOptionNames.DUPLEX, ["front", "back", "both"])
+        ]);
+        var options = new ScanOptions { PaperSource = PaperSource.Duplex };
+
+        var optionData = _driver.SetOptions(device, options);
+
+        Assert.True(optionData.IsFeeder);
+        Assert.Equal("ADF", device.GetValue(1));
+        Assert.Equal("both", device.GetValue(2));
+        VerifyCapPaperSources(device, true, true, true);
+    }
+
+    [Fact]
     public void SetOptions_DuplicateOptions()
     {
         var device = new DeviceOptionsMock([

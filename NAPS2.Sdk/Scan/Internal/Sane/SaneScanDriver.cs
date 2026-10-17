@@ -137,7 +137,8 @@ internal class SaneScanDriver : IScanDriver
         if (controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Duplex) ||
             controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex) ||
             controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex) ||
-            controller.TrySet(SaneOptionNames.DUPLEX, true))
+            controller.TrySet(SaneOptionNames.DUPLEX, true) ||
+            controller.TrySet(SaneOptionNames.DUPLEX, SaneOptionMatchers.DuplexOptionBoth))
         {
             duplex = GetPerSourceCaps(controller);
         }
@@ -391,7 +392,11 @@ internal class SaneScanDriver : IScanDriver
         else if (options.PaperSource == PaperSource.Feeder)
         {
             // We could throw NoFeederSupportException on failure, except this might be a feeder-only scanner.
-            controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder);
+            if (!controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.FeederFront))
+            {
+                controller.TrySet(SaneOptionNames.SOURCE, SaneOptionMatchers.Feeder);
+            }
+            controller.TrySet(SaneOptionNames.DUPLEX, SaneOptionMatchers.DuplexOptionFront);
         }
         else if (options.PaperSource == PaperSource.Duplex)
         {
@@ -404,6 +409,7 @@ internal class SaneScanDriver : IScanDriver
             controller.TrySet(SaneOptionNames.ADF_MODE1, SaneOptionMatchers.Duplex);
             controller.TrySet(SaneOptionNames.ADF_MODE2, SaneOptionMatchers.Duplex);
             controller.TrySet(SaneOptionNames.DUPLEX, true);
+            controller.TrySet(SaneOptionNames.DUPLEX, SaneOptionMatchers.DuplexOptionBoth);
         }
 
         var mode = options.BitDepth switch
