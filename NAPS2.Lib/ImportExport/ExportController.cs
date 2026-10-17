@@ -169,10 +169,11 @@ public class ExportController : IExportController
     {
         var subSavePath = Placeholders.All.Substitute(savePath);
         var state = _imageList.CurrentState;
-        if (await RunSavePdfOperation(subSavePath, images, originalFilename: savePath))
+        var (success, firstFileSaved) = await RunSavePdfOperation(subSavePath, images, originalFilename: savePath);
+        if (success)
         {
             _imageList.MarkSaved(state, images);
-            notify.PdfSaved(subSavePath);
+            notify.PdfSaved(firstFileSaved!);
             return true;
         }
         return false;
@@ -205,7 +206,7 @@ public class ExportController : IExportController
             string targetPath = Path.Combine(tempFolder.FullName, attachmentName);
             var state = _imageList.CurrentState;
 
-            if (await RunSavePdfOperation(targetPath, images, new EmailMessage()))
+            if ((await RunSavePdfOperation(targetPath, images, new EmailMessage())).Success)
             {
                 _imageList.MarkSaved(state, images);
                 return true;
@@ -218,7 +219,7 @@ public class ExportController : IExportController
         return false;
     }
 
-    private async Task<bool> RunSavePdfOperation(string filename, IList<ProcessedImage> images,
+    private async Task<(bool Success, string? FirstFileSaved)> RunSavePdfOperation(string filename, IList<ProcessedImage> images,
         EmailMessage? emailMessage = null, string? originalFilename = null)
     {
         var op = _operationFactory.Create<SavePdfOperation>();
@@ -228,7 +229,7 @@ public class ExportController : IExportController
         {
             _operationProgress.ShowProgress(op);
         }
-        return await op.Success;
+        return (await op.Success, op.FirstFileSaved);
     }
 
     private DisposableList<ProcessedImage> GetSnapshots(IEnumerable<UiImage> uiImages)

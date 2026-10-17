@@ -21,7 +21,6 @@ internal class SavePdfOperation : OperationBase
         AllowBackground = true;
     }
 
-    // TODO: Do something with this re: notifications?
     public string? FirstFileSaved { get; private set; }
 
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
@@ -40,7 +39,8 @@ internal class SavePdfOperation : OperationBase
         if (Directory.Exists(subFileName))
         {
             // Not supposed to be a directory, but ok...
-            subFileName = placeholders.Substitute(Path.Combine(subFileName, "$(n).pdf"));
+            fileName = Path.Combine(subFileName, "$(n).pdf");
+            subFileName = placeholders.Substitute(fileName);
         }
         var singleFile = !pdfSettings.SinglePagePdfs || images.Count == 1;
         if (singleFile)
@@ -80,6 +80,10 @@ internal class SavePdfOperation : OperationBase
                                 new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders),
                                     pdfSettings.Encryption, pdfSettings.Compat), ocrParams, progress),
                         GetSaveErrorMessage);
+                    if (result && i == 0)
+                    {
+                        FirstFileSaved = currentFileName;
+                    }
                     if (!result || CancelToken.IsCancellationRequested)
                     {
                         break;
@@ -89,10 +93,6 @@ internal class SavePdfOperation : OperationBase
                         FilePath = currentFileName,
                         AttachmentName = Path.GetFileName(currentFileName)
                     });
-                    if (i == 0)
-                    {
-                        FirstFileSaved = subFileName;
-                    }
                     i++;
                     if (!singleFile)
                     {

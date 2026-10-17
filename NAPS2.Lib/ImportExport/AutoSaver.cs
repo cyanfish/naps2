@@ -149,11 +149,11 @@ public class AutoSaver
                 _operationProgress.ShowProgress(op);
             }
             bool success = await op.Success;
-            if (success && doNotify)
+            if (success && doNotify && op.FirstFileSaved != null)
             {
-                _notify.PdfSaved(subPath);
+                _notify.PdfSaved(op.FirstFileSaved);
             }
-            return (success, subPath);
+            return (success, op.FirstFileSaved);
         }
         else
         {
@@ -167,7 +167,7 @@ public class AutoSaver
             {
                 _notify.ImagesSaved(images.Count, op.FirstFileSaved);
             }
-            return (success, subPath);
+            return (success, op.FirstFileSaved);
         }
     }
 }
