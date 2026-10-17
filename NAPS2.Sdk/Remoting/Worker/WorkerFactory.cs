@@ -237,9 +237,9 @@ internal class WorkerFactory : IWorkerFactory
         }
     }
 
-    public void StopSpareWorkers()
+    public Task StopSpareWorkers()
     {
-        if (_workerQueues == null) return;
+        if (_workerQueues == null) return Task.CompletedTask;
         var stopTasks = new List<Task>();
         foreach (var queue in _workerQueues.Values)
         {
@@ -248,6 +248,6 @@ internal class WorkerFactory : IWorkerFactory
                 stopTasks.Add(worker.Stop());
             }
         }
-        Task.WhenAll(stopTasks).Wait();
+        return Task.WhenAll(stopTasks);
     }
 }

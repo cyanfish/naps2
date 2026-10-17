@@ -205,7 +205,7 @@ public class DesktopController
         Paths.DeleteTempSubfolder();
         _closed = true;
         _thumbnailController.Dispose();
-        _scanningContext.WorkerFactory!.StopSpareWorkers();
+        _scanningContext.WorkerFactory!.StopSpareWorkers().Wait();
     }
 
     public bool PrepareForClosing(bool userClosing)

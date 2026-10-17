@@ -79,6 +79,7 @@ public class ScanningContext : IDisposable
     {
         _processedImageOwner.Dispose();
         FileStorageManager?.Dispose();
+        WorkerFactory?.StopSpareWorkers().AssertNoAwait();
     }
 
     internal WorkerContext? CreateWorker(WorkerType workerType)
