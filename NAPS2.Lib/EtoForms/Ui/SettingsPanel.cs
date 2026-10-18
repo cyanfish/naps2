@@ -16,7 +16,13 @@ internal abstract class SettingsPanel
 
     protected Naps2Config Config => Form.Config;
 
-    public abstract LayoutColumn BuildLayout();
+    public abstract string Title { get; }
+
+    public abstract string IconName { get; }
+
+    public virtual LayoutElement? BuildScrollableLayout() => null;
+
+    public virtual LayoutElement? BuildFixedLayout() => null;
 
     public abstract void Save();
 

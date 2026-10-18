@@ -157,7 +157,7 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override Control CreateScrollContainer()
     {
-        var scrolledWindow = new GTK.ScrolledWindow();
+        var scrolledWindow = new GTK.ScrolledWindow { OverlayScrolling = false };
         // External = no horizontal scrollbar, and the content width doesn't affect the scrolled window's size request
         scrolledWindow.SetPolicy(GTK.PolicyType.External, GTK.PolicyType.Automatic);
         var viewport = new GTK.Viewport { ShadowType = GTK.ShadowType.None };
@@ -182,24 +182,10 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override int GetVerticalScrollBarWidth(Control scrollContainer)
     {
-        if (UseOverlayScrolling())
-        {
-            return 0;
-        }
         var scrolledWindow = (GTK.ScrolledWindow) scrollContainer.ToNative();
         scrolledWindow.VScrollbar.GetPreferredWidth(out _, out var scrollbarWidth);
         var spacing = Convert.ToInt32(scrolledWindow.StyleGetProperty("scrollbar-spacing"));
         return scrollbarWidth + spacing;
-    }
-
-    private static bool UseOverlayScrolling()
-    {
-        // This matches GtkScrolledWindow's own logic
-        if (Environment.GetEnvironmentVariable("GTK_OVERLAY_SCROLLING") == "0")
-        {
-            return false;
-        }
-        return GTK.Settings.Default.GetProperty("gtk-overlay-scrolling").Val is true;
     }
 
     public override void SetContainerSize(Window _window, Control container, Size size, int padding)

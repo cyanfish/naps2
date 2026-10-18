@@ -2,7 +2,7 @@ using NAPS2.Config.Model;
 
 namespace NAPS2.Pdf;
 
-public class PdfSettings
+public record PdfSettings
 {
     private PdfMetadata _metadata;
     private PdfEncryption _encryption;

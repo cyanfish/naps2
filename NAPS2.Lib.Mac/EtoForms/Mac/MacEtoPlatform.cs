@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Eto;
 using Eto.Drawing;
 using Eto.Forms;
@@ -95,7 +96,10 @@ public class MacEtoPlatform : EtoPlatform
             control.Width = size.Width;
             control.Height = size.Height;
         }
-        var y = container.ToNative().IsFlipped ? location.Y : container.Height - location.Y - size.Height;
+        // Use the native frame as the Eto height can be stale (e.g. if the container has been moved into a sidebar's
+        // detail pane)
+        var nsContainer = container.ToNative();
+        var y = nsContainer.IsFlipped ? location.Y : nsContainer.Frame.Height - location.Y - size.Height;
         var rect = new CGRect(location.X, y, size.Width, size.Height);
         var view = control.ToNative();
         view.Frame = view.GetFrameForAlignmentRect(rect);
@@ -149,6 +153,97 @@ public class MacEtoPlatform : EtoPlatform
         return (int) Math.Ceiling(NSScroller.GetScrollerWidth(NSControlSize.Regular, NSScrollerStyle.Legacy));
     }
 
+    // Windows with a sidebar, mapped to the Eto content view (which is moved into the sidebar's detail pane)
+    private readonly ConditionalWeakTable<Window, NSView> _sidebarContentViews = new();
+
+    public override bool SupportsWindowSidebar => true;
+
+    public override void AttachWindowSidebar(Window window, Control sidebar, int width)
+    {
+        var nsWindow = window.ToNative();
+        var etoContentView = nsWindow.ContentView!;
+        var layoutContainer = ((IFormBase) window).LayoutController.Container.ToNative();
+        var frame = nsWindow.Frame;
+
+        // A split view sidebar item gets the standard sidebar appearance (e.g. Liquid Glass on macOS 26)
+        var sidebarItem = NSSplitViewItem.CreateSidebar(new NSViewController { View = sidebar.ToNative() });
+        sidebarItem.MinimumThickness = width;
+        sidebarItem.MaximumThickness = width + 100;
+        sidebarItem.CanCollapse = false;
+        var detailView = new NSView();
+        var splitViewController = new NSSplitViewController();
+        splitViewController.AddSplitViewItem(sidebarItem);
+        splitViewController.AddSplitViewItem(
+            NSSplitViewItem.FromViewController(new NSViewController { View = detailView }));
+
+        // Extend the sidebar under the title bar
+        nsWindow.StyleMask |= NSWindowStyle.FullSizeContentView;
+        nsWindow.TitlebarAppearsTransparent = true;
+        nsWindow.ContentViewController = splitViewController;
+
+        // Keep the Eto content below the title bar
+        etoContentView.TranslatesAutoresizingMaskIntoConstraints = false;
+        detailView.AddSubview(etoContentView);
+        NSLayoutConstraint.ActivateConstraints([
+            etoContentView.TopAnchor.ConstraintEqualTo(((NSLayoutGuide) nsWindow.ContentLayoutGuide!).TopAnchor),
+            etoContentView.BottomAnchor.ConstraintEqualTo(detailView.BottomAnchor),
+            etoContentView.LeadingAnchor.ConstraintEqualTo(detailView.LeadingAnchor),
+            etoContentView.TrailingAnchor.ConstraintEqualTo(detailView.TrailingAnchor)
+        ]);
+
+        // Eto sizes its content views to the window's full content size, so we need to keep them sized to the detail
+        // pane instead
+        void FitEtoContent()
+        {
+            for (var view = etoContentView.Subviews.FirstOrDefault(); view != null; view = view.Subviews.FirstOrDefault())
+            {
+                view.Frame = view.Superview!.Bounds;
+                if (view == layoutContainer) break;
+            }
+            ((IFormBase) window).LayoutController.Invalidate();
+        }
+        // Fit as soon as the detail pane resizes rather than waiting for Eto to resize its views, to avoid flicker
+        etoContentView.PostsFrameChangedNotifications = true;
+        layoutContainer.PostsFrameChangedNotifications = true;
+        NSObject[] observers =
+        [
+            NSNotificationCenter.DefaultCenter.AddObserver(NSView.FrameChangedNotification, _ => FitEtoContent(),
+                etoContentView),
+            NSNotificationCenter.DefaultCenter.AddObserver(NSView.FrameChangedNotification, _ =>
+            {
+                if (layoutContainer.Frame != layoutContainer.Superview?.Bounds) FitEtoContent();
+            }, layoutContainer)
+        ];
+        window.Closed += (_, _) => NSNotificationCenter.DefaultCenter.RemoveObservers(observers);
+        _sidebarContentViews.AddOrUpdate(window, etoContentView);
+
+        frame.Width += width;
+        nsWindow.SetFrame(frame, true);
+        FitEtoContent();
+    }
+
+    public override Size GetClientSize(Window window, bool excludeToolbars = false)
+    {
+        if (_sidebarContentViews.TryGetValue(window, out var contentView))
+        {
+            return contentView.Frame.Size.ToEtoSize();
+        }
+        return base.GetClientSize(window, excludeToolbars);
+    }
+
+    public override void SetMinimumClientSize(Window window, Size minSize)
+    {
+        if (_sidebarContentViews.TryGetValue(window, out var contentView))
+        {
+            window.ToNative().ContentMinSize = (minSize + GetSidebarSizeDelta(window, contentView)).ToNS();
+            return;
+        }
+        base.SetMinimumClientSize(window, minSize);
+    }
+
+    private Size GetSidebarSizeDelta(Window window, NSView contentView) =>
+        window.ToNative().ContentView!.Frame.Size.ToEtoSize() - contentView.Frame.Size.ToEtoSize();
+
     private class FlippedView : NSView
     {
         public override bool IsFlipped => true;
@@ -182,6 +277,11 @@ public class MacEtoPlatform : EtoPlatform
 
     public override void SetClientSize(Window window, Size clientSize)
     {
+        if (_sidebarContentViews.TryGetValue(window, out var contentView))
+        {
+            window.ToNative().SetContentSize((clientSize + GetSidebarSizeDelta(window, contentView)).ToNS());
+            return;
+        }
         if (window.Loaded)
         {
             // The Eto ClientSize setter also changes the y-position and causes jumps

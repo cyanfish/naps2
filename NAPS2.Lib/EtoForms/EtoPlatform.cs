@@ -47,6 +47,11 @@ public abstract class EtoPlatform
     public abstract void SetSystemTheme();
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract ISettingsNavigator CreateSettingsNavigator();
+
+    public virtual bool SupportsWindowSidebar => false;
+    public virtual void AttachWindowSidebar(Window window, Control sidebar, int width) =>
+        throw new NotSupportedException();
+
     public abstract void ConfigureImageButton(Button button, ButtonFlags flags);
     public abstract Bitmap ToBitmap(IMemoryImage image);
     public abstract IMemoryImage FromBitmap(Bitmap bitmap);

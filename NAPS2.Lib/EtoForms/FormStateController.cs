@@ -34,6 +34,12 @@ public class FormStateController
 
     public SizeF DefaultClientSize { get; set; }
 
+    /// <summary>
+    /// If set, the default client size is fixed (as long as it's at least the minimum size) instead of being derived
+    /// from the layout size.
+    /// </summary>
+    public SizeF? FixedDefaultClientSize { get; set; }
+
     public bool FixedHeightLayout { get; set; }
 
     public bool Resizable { get; set; } = true;
@@ -52,7 +58,9 @@ public class FormStateController
             _minimumClientSize = layoutController.GetLayoutSize();
             var oldDefaultClientSize = DefaultClientSize;
             var oldMaximumClientSize = _maximumClientSize;
-            DefaultClientSize = (SizeF) _minimumClientSize / scale + DefaultExtraLayoutSize;
+            DefaultClientSize = FixedDefaultClientSize is { } fixedSize
+                ? SizeF.Max(fixedSize, (SizeF) _minimumClientSize / scale)
+                : (SizeF) _minimumClientSize / scale + DefaultExtraLayoutSize;
             _maximumClientSize = FixedHeightLayout || !Resizable ? new Size(0, _minimumClientSize.Height) : Size.Empty;
 
             if (Loaded)

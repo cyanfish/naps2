@@ -111,7 +111,7 @@ internal class KeyboardShortcutsPanel : SettingsPanel
                 {
                     HeaderText = UiStrings.Action,
                     DataCell = new TextBoxCell { Binding = new PropertyBinding<string>("Label") },
-                    Width = 280
+                    Expand = true
                 },
                 new()
                 {
@@ -129,25 +129,27 @@ internal class KeyboardShortcutsPanel : SettingsPanel
         UpdateUi();
     }
 
+    public override string Title => UiStrings.KeyboardShortcuts;
+
+    public override string IconName => "keyboard_small";
+
     public override void OnShown()
     {
         _gridView.DataStore = Shortcuts;
     }
 
-    public override LayoutColumn BuildLayout()
+    public override LayoutElement BuildFixedLayout()
     {
-        return L.Column(
-            L.Row(
-                _gridView.NaturalSize(450, 500).Scale(),
-                L.Column(
-                    C.Filler(),
-                    _shortcutText.Width(150),
-                    _assign,
-                    _unassign,
-                    C.Filler()
-                )
-            ).Scale()
-        );
+        return L.Row(
+            _gridView.NaturalSize(244, 200).Scale(),
+            L.Column(
+                C.Filler(),
+                _shortcutText.Width(150),
+                _assign,
+                _unassign,
+                C.Filler()
+            )
+        ).Scale();
     }
 
     private void Assign_Click(object? sender, EventArgs e)

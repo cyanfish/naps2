@@ -6,7 +6,7 @@ namespace NAPS2.EtoForms.Mac;
 
 public class MacSettingsNavigator : NSTableViewDelegate, ISettingsNavigator
 {
-    private const float IconSize = 16;
+    private const float IconSize = 20;
 
     private readonly NSTableView _tableView;
     private readonly DataSource _dataSource = new();
@@ -17,7 +17,7 @@ public class MacSettingsNavigator : NSTableViewDelegate, ISettingsNavigator
         {
             Style = NSTableViewStyle.SourceList,
             HeaderView = null,
-            RowHeight = 28,
+            RowHeight = 32,
             AllowsEmptySelection = false,
             DataSource = _dataSource,
             Delegate = this
@@ -79,7 +79,7 @@ public class MacSettingsNavigator : NSTableViewDelegate, ISettingsNavigator
             imageView.CenterYAnchor.ConstraintEqualTo(cell.CenterYAnchor),
             imageView.WidthAnchor.ConstraintEqualTo(IconSize),
             imageView.HeightAnchor.ConstraintEqualTo(IconSize),
-            textField.LeadingAnchor.ConstraintEqualTo(imageView.TrailingAnchor, 8),
+            textField.LeadingAnchor.ConstraintEqualTo(imageView.TrailingAnchor, 10),
             textField.TrailingAnchor.ConstraintLessThanOrEqualTo(cell.TrailingAnchor, -4),
             textField.CenterYAnchor.ConstraintEqualTo(cell.CenterYAnchor)
         ]);

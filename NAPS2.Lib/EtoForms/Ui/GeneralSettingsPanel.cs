@@ -3,6 +3,7 @@ using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
+using NAPS2.Lang;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -25,12 +26,12 @@ internal class GeneralSettingsPanel : SettingsPanel
         UpdateValues(Config);
     }
 
-    /// <summary>
-    /// If set, a button for this command is shown in the interface section.
-    /// </summary>
-    public ActionCommand? KeyboardShortcutsCommand { get; set; }
+    public override string Title => TranslationMigrator.PickTranslated(UiStrings.ResourceManager,
+        nameof(UiStrings.Settings), nameof(UiStrings.GeneralSettings));
 
-    public override LayoutColumn BuildLayout()
+    public override string IconName => "cog_small";
+
+    public override LayoutElement BuildScrollableLayout()
     {
         return L.Column(
             L.GroupBox(
@@ -56,9 +57,6 @@ internal class GeneralSettingsPanel : SettingsPanel
                             C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
                             _saveButtonDefaultAction
                         ).Aligned()
-                        : C.None(),
-                    PlatformCompat.System.SupportsKeyboardShortcuts && KeyboardShortcutsCommand != null
-                        ? C.Button(KeyboardShortcutsCommand, ButtonImagePosition.Left).AlignLeading()
                         : C.None()
                 )
             ),
@@ -71,8 +69,7 @@ internal class GeneralSettingsPanel : SettingsPanel
                         ? _singleInstance
                         : C.None()
                 )
-            ),
-            C.Filler()
+            )
         );
     }
 
@@ -101,25 +98,15 @@ internal class GeneralSettingsPanel : SettingsPanel
     public override void Save()
     {
         var transact = Config.User.BeginTransaction();
-        bool SetIfChanged<T>(Expression<Func<CommonConfig, T>> accessor, T value)
-        {
-            var oldValue = Config.Get(accessor);
-            if (!Equals(value, oldValue))
-            {
-                transact.Set(accessor, value);
-                return true;
-            }
-            return false;
-        }
-        bool themeChanged = SetIfChanged(c => c.Theme, _theme.SelectedItem);
-        SetIfChanged(c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
-        SetIfChanged(c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
-        SetIfChanged(c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
-        SetIfChanged(c => c.ScanButtonDefaultAction, _scanButtonDefaultAction.SelectedItem);
-        SetIfChanged(c => c.SaveButtonDefaultAction, _saveButtonDefaultAction.SelectedItem);
-        SetIfChanged(c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
-        SetIfChanged(c => c.KeepSession, _keepSession.IsChecked());
-        SetIfChanged(c => c.SingleInstance, _singleInstance.IsChecked());
+        bool themeChanged = transact.SetIfChanged(Config, c => c.Theme, _theme.SelectedItem);
+        transact.SetIfChanged(Config, c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
+        transact.SetIfChanged(Config, c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
+        transact.SetIfChanged(Config, c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
+        transact.SetIfChanged(Config, c => c.ScanButtonDefaultAction, _scanButtonDefaultAction.SelectedItem);
+        transact.SetIfChanged(Config, c => c.SaveButtonDefaultAction, _saveButtonDefaultAction.SelectedItem);
+        transact.SetIfChanged(Config, c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
+        transact.SetIfChanged(Config, c => c.KeepSession, _keepSession.IsChecked());
+        transact.SetIfChanged(Config, c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
 
         _desktopFormProvider.DesktopForm.Invalidate();

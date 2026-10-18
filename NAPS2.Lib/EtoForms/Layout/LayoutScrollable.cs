@@ -65,12 +65,19 @@ public class LayoutScrollable : LayoutContainer
         var height = MeasureContentHeight(childContext, width);
         if (height > bounds.Height)
         {
-            width -= EtoPlatform.Current.GetVerticalScrollBarWidth(_scrollContainer);
+            width -= GetScrollBarSpace(context, _scrollContainer);
             height = MeasureContentHeight(childContext, width);
         }
         var contentSize = Size.Ceiling(new SizeF(Math.Max(width, 0), Math.Max(height, bounds.Height)));
         EtoPlatform.Current.SetScrollContentSize(_scrollContainer, contentSize);
         _content.DoLayout(childContext, new RectangleF(0, 0, contentSize.Width, contentSize.Height));
+    }
+
+    private static float GetScrollBarSpace(LayoutContext context, Control scrollContainer)
+    {
+        // The width is 0 for overlay scrollbars (e.g. on Mac), which don't need any spacing
+        var scrollBarWidth = EtoPlatform.Current.GetVerticalScrollBarWidth(scrollContainer);
+        return scrollBarWidth > 0 ? scrollBarWidth + context.DefaultSpacing * context.Scale : 0;
     }
 
     private float MeasureContentHeight(LayoutContext childContext, float width)
@@ -94,7 +101,7 @@ public class LayoutScrollable : LayoutContainer
         if (contentSize.Height > height && _scrollContainer != null)
         {
             // Leave room for the scrollbar so the content doesn't need to shrink horizontally
-            width += EtoPlatform.Current.GetVerticalScrollBarWidth(_scrollContainer);
+            width += GetScrollBarSpace(context, _scrollContainer);
         }
         if (Width != null)
         {

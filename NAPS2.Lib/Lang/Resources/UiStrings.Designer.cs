@@ -417,6 +417,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string GeneralSettings {
+            get {
+                return ResourceManager.GetString("GeneralSettings", resourceCulture);
+            }
+        }
+        
         internal static string Interface {
             get {
                 return ResourceManager.GetString("Interface", resourceCulture);
@@ -951,12 +957,6 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string PdfSettingsFormTitle {
-            get {
-                return ResourceManager.GetString("PdfSettingsFormTitle", resourceCulture);
-            }
-        }
-        
         internal static string AllowPrinting {
             get {
                 return ResourceManager.GetString("AllowPrinting", resourceCulture);
@@ -1182,18 +1182,6 @@ namespace NAPS2.Lang.Resources {
         internal static string CompressionLabel {
             get {
                 return ResourceManager.GetString("CompressionLabel", resourceCulture);
-            }
-        }
-        
-        internal static string ImageSettingsFormTitle {
-            get {
-                return ResourceManager.GetString("ImageSettingsFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string EmailSettingsFormTitle {
-            get {
-                return ResourceManager.GetString("EmailSettingsFormTitle", resourceCulture);
             }
         }
         
@@ -1722,12 +1710,6 @@ namespace NAPS2.Lang.Resources {
         internal static string KeyboardShortcuts {
             get {
                 return ResourceManager.GetString("KeyboardShortcuts", resourceCulture);
-            }
-        }
-        
-        internal static string KeyboardShortcutsFormTitle {
-            get {
-                return ResourceManager.GetString("KeyboardShortcutsFormTitle", resourceCulture);
             }
         }
         

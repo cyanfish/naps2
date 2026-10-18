@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
@@ -5,21 +6,28 @@ using NAPS2.ImportExport.Email;
 
 namespace NAPS2.EtoForms.Ui;
 
-internal class EmailSettingsPanel : SettingsPanel
+internal class EmailSettingsPanel : SettingsPanelWithRememberCheckbox<EmailSettings>
 {
     private readonly Label _provider = new() { Text = " \n " };
     private readonly FilePathWithPlaceholders _attachmentName;
-    private readonly CheckBox _rememberSettings = new() { Text = UiStrings.RememberTheseSettings };
 
     public EmailSettingsPanel(IFormBase form) : base(form)
     {
         _attachmentName = new(form);
 
-        UpdateValues(Config);
+        LoadValues(Config);
         UpdateProvider(Config);
     }
 
-    public override LayoutColumn BuildLayout()
+    public override string Title => UiStrings.EmailSettings;
+
+    public override string IconName => "email_small";
+
+    protected override Expression<Func<CommonConfig, EmailSettings>> SettingsAccessor => c => c.EmailSettings;
+
+    protected override Expression<Func<CommonConfig, bool>> RememberAccessor => c => c.RememberEmailSettings;
+
+    public override LayoutElement BuildScrollableLayout()
     {
         return L.Column(
             L.GroupBox(
@@ -31,16 +39,18 @@ internal class EmailSettingsPanel : SettingsPanel
                 )
             ),
             C.Label(UiStrings.AttachmentNameLabel),
-            _attachmentName,
-            C.Filler(),
-            _rememberSettings
+            _attachmentName
         );
     }
 
-    private void UpdateValues(Naps2Config config)
+    protected override EmailSettings SettingsValues
     {
-        _attachmentName.Text = config.Get(c => c.EmailSettings.AttachmentName);
-        _rememberSettings.Checked = config.Get(c => c.RememberEmailSettings);
+        get =>
+            new()
+            {
+                AttachmentName = _attachmentName.Text ?? ""
+            };
+        set => _attachmentName.Text = value.AttachmentName;
     }
 
     private void UpdateProvider(Naps2Config config)
@@ -76,32 +86,6 @@ internal class EmailSettingsPanel : SettingsPanel
                 _provider.Text = config.Get(c => c.EmailSetup.SystemProviderName);
                 break;
         }
-    }
-
-    public override void Save()
-    {
-        var emailSettings = new EmailSettings
-        {
-            AttachmentName = _attachmentName.Text ?? ""
-        };
-
-        var runTransact = Config.Run.BeginTransaction();
-        var userTransact = Config.User.BeginTransaction();
-        bool remember = _rememberSettings.IsChecked();
-        var transactToWrite = remember ? userTransact : runTransact;
-
-        runTransact.Remove(c => c.EmailSettings);
-        userTransact.Remove(c => c.EmailSettings);
-        transactToWrite.Set(c => c.EmailSettings, emailSettings);
-        userTransact.Set(c => c.RememberEmailSettings, remember);
-
-        runTransact.Commit();
-        userTransact.Commit();
-    }
-
-    public override void RestoreDefaults()
-    {
-        UpdateValues(Config.DefaultsOnly);
     }
 
     private void ChangeProvider()

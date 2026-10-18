@@ -43,12 +43,31 @@ public class TransactionConfigScope<TConfig> : ConfigScope<TConfig>
     public event EventHandler? HasChangesChanged;
 
     /// <summary>
+    /// Sets the value only if it differs from the current value in the given config.
+    /// </summary>
+    /// <returns>Whether the value was set.</returns>
+    public bool SetIfChanged<T>(ScopedConfig<TConfig> config, Expression<Func<TConfig, T>> accessor, T value)
+    {
+        if (Equals(value, config.Get(accessor)))
+        {
+            return false;
+        }
+        Set(accessor, value);
+        return true;
+    }
+
+    /// <summary>
     /// Flushes all changes to the underlying scope.
     /// </summary>
     public void Commit()
     {
         lock (this)
         {
+            if (!HasChanges)
+            {
+                // Avoid unnecessary writes
+                return;
+            }
             lock (OriginalScope)
             {
                 OriginalScope.CopyFrom(_changes);

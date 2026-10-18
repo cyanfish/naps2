@@ -111,24 +111,19 @@ public class DesktopSubFormController : IDesktopSubFormController
         }
     }
 
-    public void ShowPdfSettingsForm()
-    {
-        _formFactory.Create<PdfSettingsForm>().ShowModal();
-    }
+    public void ShowPdfSettingsForm() => ShowSettingsForm<PdfSettingsPanel>();
 
-    public void ShowImageSettingsForm()
-    {
-        _formFactory.Create<ImageSettingsForm>().ShowModal();
-    }
+    public void ShowImageSettingsForm() => ShowSettingsForm<ImageSettingsPanel>();
 
-    public void ShowEmailSettingsForm()
-    {
-        _formFactory.Create<EmailSettingsForm>().ShowModal();
-    }
+    public void ShowEmailSettingsForm() => ShowSettingsForm<EmailSettingsPanel>();
 
-    public void ShowSettingsForm()
+    public void ShowSettingsForm() => ShowSettingsForm<GeneralSettingsPanel>();
+
+    private void ShowSettingsForm<T>() where T : SettingsPanel
     {
-        _formFactory.Create<SettingsForm>().ShowModal();
+        var form = _formFactory.Create<CombinedSettingsForm>();
+        form.SelectPanel<T>();
+        form.ShowModal();
     }
 
     public void ShowAboutForm()
