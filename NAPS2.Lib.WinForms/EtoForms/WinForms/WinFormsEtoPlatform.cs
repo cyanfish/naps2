@@ -44,6 +44,8 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new WinFormsListView<T>(behavior);
 
+    public override ISettingsNavigator CreateSettingsNavigator() => new WinFormsSettingsNavigator();
+
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         if (string.IsNullOrEmpty(button.Text))

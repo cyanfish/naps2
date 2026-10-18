@@ -44,6 +44,8 @@ public class GtkEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new GtkListView<T>(behavior);
 
+    public override ISettingsNavigator CreateSettingsNavigator() => new GtkSettingsNavigator();
+
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         AttachDpiDependency(button, _ => button.ScaleImage());

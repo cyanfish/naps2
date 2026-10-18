@@ -51,6 +51,8 @@ public class MacEtoPlatform : EtoPlatform
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new MacListView<T>(behavior);
 
+    public override ISettingsNavigator CreateSettingsNavigator() => new MacSettingsNavigator();
+
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         var nsButton = (NSButton) button.ToNative();

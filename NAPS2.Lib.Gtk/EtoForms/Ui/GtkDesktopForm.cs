@@ -76,6 +76,8 @@ public class GtkDesktopForm : DesktopForm
             .listview .drop-before { border-radius: 0; border-left: 3px solid " + fgColor + @"; padding-left: 0; }
             .listview .drop-after { border-radius: 0; border-right: 3px solid " + fgColor + @"; padding-right: 0; }
             .desktop-listview .listview-item image { border: 1px solid " + brdColor + @"; }
+            .settings-navigator { background-color: @theme_base_color; border: 1px solid @borders; border-radius: 8px; padding: 4px; }
+            .settings-navigator row { padding: 8px 10px; border-radius: 6px; }
             .link { padding: 0; }
             .donate-button { border: 1px solid #fbad5f; background: #feda96; }
             .donate-button:hover { background: #eeca86; }
