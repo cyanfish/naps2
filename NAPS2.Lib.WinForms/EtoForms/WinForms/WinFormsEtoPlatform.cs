@@ -255,6 +255,28 @@ public class WinFormsEtoPlatform : EtoPlatform
         container.ToNative().Controls.Remove(control.ToNative());
     }
 
+    public override Control CreateScrollContainer()
+    {
+        var scrollPanel = new WF.Panel { AutoScroll = true };
+        scrollPanel.Controls.Add(new WF.Panel());
+        return scrollPanel.ToEto();
+    }
+
+    public override Control GetScrollContentContainer(Control scrollContainer)
+    {
+        return scrollContainer.ToNative().Controls[0].ToEto();
+    }
+
+    public override void SetScrollContentSize(Control scrollContainer, Size size)
+    {
+        scrollContainer.ToNative().Controls[0].Size = size.ToSD();
+    }
+
+    public override int GetVerticalScrollBarWidth(Control scrollContainer)
+    {
+        return WF.SystemInformation.GetVerticalScrollBarWidthForDpi(scrollContainer.ToNative().DeviceDpi);
+    }
+
     public override LayoutElement FormatProgressBar(ProgressBar progressBar)
     {
         return progressBar.Size(420, 40);

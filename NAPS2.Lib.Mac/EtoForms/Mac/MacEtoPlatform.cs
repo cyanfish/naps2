@@ -93,7 +93,8 @@ public class MacEtoPlatform : EtoPlatform
             control.Width = size.Width;
             control.Height = size.Height;
         }
-        var rect = new CGRect(location.X, container.Height - location.Y - size.Height, size.Width, size.Height);
+        var y = container.ToNative().IsFlipped ? location.Y : container.Height - location.Y - size.Height;
+        var rect = new CGRect(location.X, y, size.Width, size.Height);
         var view = control.ToNative();
         view.Frame = view.GetFrameForAlignmentRect(rect);
     }
@@ -111,6 +112,44 @@ public class MacEtoPlatform : EtoPlatform
     public override void RemoveFromContainer(Control container, Control control)
     {
         control.ToNative().RemoveFromSuperview();
+    }
+
+    public override Control CreateScrollContainer()
+    {
+        return new NSScrollView
+        {
+            HasVerticalScroller = true,
+            AutohidesScrollers = true,
+            DrawsBackground = false,
+            // Use a flipped view so the content is anchored to the top
+            DocumentView = new FlippedView()
+        }.ToEto();
+    }
+
+    public override Control GetScrollContentContainer(Control scrollContainer)
+    {
+        return ((NSScrollView) scrollContainer.ToNative()).DocumentView!.ToEto();
+    }
+
+    public override void SetScrollContentSize(Control scrollContainer, Size size)
+    {
+        var documentView = ((NSScrollView) scrollContainer.ToNative()).DocumentView!;
+        documentView.SetFrameSize(new CGSize(size.Width, size.Height));
+    }
+
+    public override int GetVerticalScrollBarWidth(Control scrollContainer)
+    {
+        var scrollView = (NSScrollView) scrollContainer.ToNative();
+        if (scrollView.ScrollerStyle == NSScrollerStyle.Overlay)
+        {
+            return 0;
+        }
+        return (int) Math.Ceiling(NSScroller.GetScrollerWidth(NSControlSize.Regular, NSScrollerStyle.Legacy));
+    }
+
+    private class FlippedView : NSView
+    {
+        public override bool IsFlipped => true;
     }
 
     public override float GetScaleFactor(Window window) => 2f;

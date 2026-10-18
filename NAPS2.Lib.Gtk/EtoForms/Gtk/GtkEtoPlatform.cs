@@ -153,6 +153,53 @@ public class GtkEtoPlatform : EtoPlatform
         widget.Unrealize();
     }
 
+    public override Control CreateScrollContainer()
+    {
+        var scrolledWindow = new GTK.ScrolledWindow();
+        // External = no horizontal scrollbar, and the content width doesn't affect the scrolled window's size request
+        scrolledWindow.SetPolicy(GTK.PolicyType.External, GTK.PolicyType.Automatic);
+        var viewport = new GTK.Viewport { ShadowType = GTK.ShadowType.None };
+        var panel = new GTK.Fixed();
+        // Scroll focused controls into view
+        panel.FocusVadjustment = scrolledWindow.Vadjustment;
+        viewport.Add(panel);
+        scrolledWindow.Add(viewport);
+        return scrolledWindow.AsEto();
+    }
+
+    public override Control GetScrollContentContainer(Control scrollContainer)
+    {
+        var scrolledWindow = (GTK.ScrolledWindow) scrollContainer.ToNative();
+        return ((GTK.Viewport) scrolledWindow.Child).Child.AsEto();
+    }
+
+    public override void SetScrollContentSize(Control scrollContainer, Size size)
+    {
+        GetScrollContentContainer(scrollContainer).ToNative().SetSizeRequest(size.Width, size.Height);
+    }
+
+    public override int GetVerticalScrollBarWidth(Control scrollContainer)
+    {
+        if (UseOverlayScrolling())
+        {
+            return 0;
+        }
+        var scrolledWindow = (GTK.ScrolledWindow) scrollContainer.ToNative();
+        scrolledWindow.VScrollbar.GetPreferredWidth(out _, out var scrollbarWidth);
+        var spacing = Convert.ToInt32(scrolledWindow.StyleGetProperty("scrollbar-spacing"));
+        return scrollbarWidth + spacing;
+    }
+
+    private static bool UseOverlayScrolling()
+    {
+        // This matches GtkScrolledWindow's own logic
+        if (Environment.GetEnvironmentVariable("GTK_OVERLAY_SCROLLING") == "0")
+        {
+            return false;
+        }
+        return GTK.Settings.Default.GetProperty("gtk-overlay-scrolling").Val is true;
+    }
+
     public override void SetContainerSize(Window _window, Control container, Size size, int padding)
     {
         var native = (GTK.Fixed) container.ToNative();

@@ -252,6 +252,18 @@ public static class EtoLayoutExtensions
     public static LayoutOverlay Scale(this LayoutOverlay overlay) =>
         new LayoutOverlay(overlay, scale: true);
 
+    public static LayoutScrollable Scale(this LayoutScrollable scrollable) =>
+        new LayoutScrollable(scrollable, scale: true);
+
+    public static LayoutScrollable SpacingAfter(this LayoutScrollable scrollable, int spacingAfter) =>
+        new LayoutScrollable(scrollable, spacingAfter: spacingAfter);
+
+    public static LayoutScrollable Height(this LayoutScrollable scrollable, int height) =>
+        new LayoutScrollable(scrollable, height: height);
+
+    public static LayoutScrollable Visible(this LayoutScrollable scrollable, LayoutVisibility visibility) =>
+        new LayoutScrollable(scrollable, visibility: visibility);
+
     public static LayoutElement Expand(this IEnumerable<LayoutElement> elements) =>
         new ExpandLayoutElement(elements.ToArray());
 

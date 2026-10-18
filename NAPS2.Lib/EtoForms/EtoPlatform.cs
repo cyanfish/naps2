@@ -55,6 +55,11 @@ public abstract class EtoPlatform
     public abstract void AddToContainer(Control container, Control control, bool inOverlay);
     public abstract void RemoveFromContainer(Control container, Control control);
 
+    public abstract Control CreateScrollContainer();
+    public abstract Control GetScrollContentContainer(Control scrollContainer);
+    public abstract void SetScrollContentSize(Control scrollContainer, Size size);
+    public abstract int GetVerticalScrollBarWidth(Control scrollContainer);
+
     public abstract void ConfigureDonateButton(Button button);
 
     public virtual void InitializeForegroundApp()
