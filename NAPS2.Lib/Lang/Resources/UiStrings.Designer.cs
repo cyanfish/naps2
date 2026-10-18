@@ -1946,5 +1946,11 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("JpegQualityLabel", resourceCulture);
             }
         }
+        
+        internal static string MissingFileExtension {
+            get {
+                return ResourceManager.GetString("MissingFileExtension", resourceCulture);
+            }
+        }
     }
 }

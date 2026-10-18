@@ -24,6 +24,7 @@ public class AutoSaveSettingsForm : EtoDialogBase
         _filePerPage = new() { Text = UiStrings.OneFilePerPage, Checked = true };
         _filePerScan = new(_filePerPage) { Text = UiStrings.OneFilePerScan };
         _separateByPatchT = new RadioButton(_filePerPage) { Text = UiStrings.SeparateByPatchT };
+        _promptForFilePath.CheckedChanged += UpdateRequireExtension;
     }
 
     public ScanProfile? ScanProfile { get; set; }
@@ -50,6 +51,8 @@ public class AutoSaveSettingsForm : EtoDialogBase
                 _filePerPage.Checked = true;
             }
         }
+
+        UpdateRequireExtension(this, EventArgs.Empty);
 
         Title = UiStrings.AutoSaveSettingsFormTitle;
 
@@ -80,7 +83,8 @@ public class AutoSaveSettingsForm : EtoDialogBase
 
     private bool Save()
     {
-        if (string.IsNullOrWhiteSpace(_filePath.Text) && !_promptForFilePath.IsChecked())
+        if (string.IsNullOrWhiteSpace(_filePath.Text) && !_promptForFilePath.IsChecked() ||
+            _filePath.IsMissingExtension)
         {
             _filePath.Focus();
             return false;
@@ -97,5 +101,11 @@ public class AutoSaveSettingsForm : EtoDialogBase
         };
         Result = true;
         return true;
+    }
+
+    private void UpdateRequireExtension(object? sender, EventArgs e)
+    {
+        // If we prompt for the file path, the path is only a default for the save dialog, which handles extensions
+        _filePath.RequireExtension = !_promptForFilePath.IsChecked();
     }
 }

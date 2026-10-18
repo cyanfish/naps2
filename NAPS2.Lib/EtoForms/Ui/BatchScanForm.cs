@@ -71,7 +71,7 @@ public class BatchScanForm : EtoDialogBase
         _filePerScan = new RadioButton { Text = UiStrings.OneFilePerScan };
         _filePerPage = new RadioButton(_filePerScan) { Text = UiStrings.OneFilePerPage };
         _separateByPatchT = new RadioButton(_filePerScan) { Text = UiStrings.SeparateByPatchT };
-        _filePath = new(this, dialogHelper);
+        _filePath = new(this, dialogHelper) { RequireExtension = true };
         _profile.Format = x => x.DisplayName;
 
         _start.Click += Start;
@@ -243,7 +243,8 @@ public class BatchScanForm : EtoDialogBase
 
         _userTransact.Set(c => c.BatchSettings.SavePath, _filePath.Text);
         if (_transactionConfig.Get(c => c.BatchSettings.OutputType) != BatchOutputType.Load &&
-            string.IsNullOrWhiteSpace(_transactionConfig.Get(c => c.BatchSettings.SavePath)))
+            (string.IsNullOrWhiteSpace(_transactionConfig.Get(c => c.BatchSettings.SavePath)) ||
+             _filePath.IsMissingExtension))
         {
             ok = false;
             _filePath.Focus();

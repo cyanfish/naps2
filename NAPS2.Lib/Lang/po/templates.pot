@@ -891,6 +891,10 @@ msgstr ""
 msgid "Minute (00-59)"
 msgstr ""
 
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr ""
+
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
 msgstr ""

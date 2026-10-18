@@ -1089,4 +1089,7 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="JpegQualityLabel" xml:space="preserve">
     <value>JPEG quality:</value>
   </data>
+  <data name="MissingFileExtension" xml:space="preserve">
+    <value>Missing file extension (e.g. ".pdf")</value>
+  </data>
 </root>
