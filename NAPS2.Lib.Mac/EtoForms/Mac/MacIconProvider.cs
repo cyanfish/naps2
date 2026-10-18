@@ -58,8 +58,11 @@ public class MacIconProvider : IIconProvider
         { "switch_hor", "arrow.left.and.right" },
         { "switch_ver", "arrow.up.and.down" },
         { "help",  "questionmark.circle" },
-        // TODO: This doesn't render properly as it's very wide and gets squished
-        // { "keyboard", "keyboard" },
+        { "cog", "gearshape" },
+        { "picture", "photo" },
+        { "email", "envelope" },
+        // This is very wide, so it gets squished unless the image view preserves the aspect ratio
+        { "keyboard", "keyboard" },
         // TODO: Consider these
         // { "network_ip", "wifi.router" },
         // { "device", "scanner" },
