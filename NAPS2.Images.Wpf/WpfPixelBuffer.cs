@@ -23,14 +23,19 @@ internal sealed class WpfPixelBuffer : SafeHandleZeroOrMinusOneIsInvalid
 
     public static WpfPixelBuffer Allocate(int width, int height, PixelFormat format, bool zeroed)
     {
-        int stride = (width * format.BitsPerPixel + 31) / 32 * 4;
+        long stride = ((long) width * format.BitsPerPixel + 31) / 32 * 4;
+        long size = stride * height;
+        if (size > int.MaxValue)
+        {
+            throw new NotSupportedException("Images larger than 2GB are not supported.");
+        }
         // Equivalent to Marshal.AllocHGlobal, but can also zero the memory
-        var ptr = LocalAlloc(zeroed ? LPTR : LMEM_FIXED, (UIntPtr) (ulong) ((long) stride * height));
+        var ptr = LocalAlloc(zeroed ? LPTR : LMEM_FIXED, (UIntPtr) (ulong) size);
         if (ptr == IntPtr.Zero)
         {
             throw new OutOfMemoryException();
         }
-        var buffer = new WpfPixelBuffer(ptr, width, height, format, stride);
+        var buffer = new WpfPixelBuffer(ptr, width, height, format, (int) stride);
         // Let the GC know about the native memory, so undisposed images are still collected reasonably promptly
         GC.AddMemoryPressure(buffer.Size);
         return buffer;

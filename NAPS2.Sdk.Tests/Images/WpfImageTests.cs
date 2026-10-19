@@ -27,6 +27,15 @@ public class WpfImageTests
     }
 
     [Fact]
+    public void ImageContextCreateLargerThan2GB()
+    {
+        // ~3GB, which would otherwise crash when using image operations
+        // TODO: Maybe support images over 2GB?
+        Assert.Throws<NotSupportedException>(() =>
+            new WpfImageContext().Create(32000, 33000, ImagePixelFormat.RGB24));
+    }
+
+    [Fact]
     public void LoadInvertedPaletteBlackAndWhiteImage()
     {
         var decoder = BitmapDecoder.Create(new MemoryStream(ImageResources.dog_bw_invertpal),
