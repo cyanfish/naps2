@@ -7,7 +7,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <UseWPF>true</UseWPF>
-    <UseWindowsForms>true</UseWindowsForms>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <!-- Application.ThemeMode (Fluent) is still marked experimental -->
     <NoWarn>$(NoWarn);WPF0001</NoWarn>
@@ -21,11 +20,20 @@
   <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
   <ItemGroup>
-    <!-- Non-UI platform services (printing, email, etc.) are shared with WinForms -->
-    <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
+    <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" />
     <PackageReference Include="Eto.Forms" Version="2.11.0" />
     <PackageReference Include="Eto.Platform.Wpf" Version="2.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Windows platform services shared with NAPS2.Lib.WinForms -->
+    <!-- TODO: Move these to a shared project (e.g. NAPS2.Lib.WindowsCommon) -->
+    <Compile Include="..\NAPS2.Lib.WinForms\EtoForms\WinForms\WindowsDarkModeProvider.cs" LinkBase="Windows\EtoForms" />
+    <Compile Include="..\NAPS2.Lib.WinForms\ImportExport\Email\Mapi\*.cs" LinkBase="Windows\ImportExport\Email\Mapi" />
+    <Compile Include="..\NAPS2.Lib.WinForms\Logging\WindowsEventLogger.cs" LinkBase="Windows\Logging" />
+    <Compile Include="..\NAPS2.Lib.WinForms\Platform\Windows\WindowsOpenWith.cs" LinkBase="Windows\Platform\Windows" />
+    <Compile Include="..\NAPS2.Lib.WinForms\Platform\Windows\WindowsServiceManager.cs" LinkBase="Windows\Platform\Windows" />
   </ItemGroup>
 
 </Project>

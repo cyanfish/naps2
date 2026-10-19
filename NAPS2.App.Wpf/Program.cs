@@ -10,7 +10,6 @@ static class Program
     [STAThread]
     static void Main(string[] args)
     {
-        // TODO: Use the WPF entry point once it's implemented
-        WinFormsEntryPoint.Run(args);
+        WpfEntryPoint.Run(args);
     }
 }
