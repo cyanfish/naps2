@@ -7,6 +7,8 @@ namespace NAPS2.EtoForms.Wpf;
 
 public class WpfEtoPlatform : EtoPlatform
 {
+    public override bool IsWpf => true;
+
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
 
     public override IDarkModeProvider DarkModeProvider { get; } = new WindowsDarkModeProvider();

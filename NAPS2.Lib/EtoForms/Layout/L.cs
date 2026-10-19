@@ -23,7 +23,7 @@ public static class L
     public static LayoutElement OkCancel(LayoutElement ok, LayoutElement cancel)
     {
         bool okFirst;
-        if (EtoPlatform.Current.IsWinForms)
+        if (EtoPlatform.Current.IsWindows)
         {
             okFirst = true;
         }

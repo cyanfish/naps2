@@ -25,6 +25,8 @@ public abstract class EtoPlatform
     public virtual bool IsGtk => false;
     public virtual bool IsMac => false;
     public virtual bool IsWinForms => false;
+    public virtual bool IsWpf => false;
+    public bool IsWindows => IsWinForms || IsWpf;
 
     public abstract IIconProvider IconProvider { get; }
     public abstract IDarkModeProvider DarkModeProvider { get; }
