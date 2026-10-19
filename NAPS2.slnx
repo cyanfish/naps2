@@ -132,6 +132,26 @@
       <Build Solution="Sdk|*" Project="false" />
       <Build Solution="Tools|*" Project="false" />
     </Project>
+    <Project Path="NAPS2.App.Wpf/NAPS2.App.Wpf.csproj">
+      <BuildDependency Project="NAPS2.App.Worker/NAPS2.App.Worker.csproj" />
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Debug-Linux|*" Project="false" />
+      <Build Solution="Debug-Mac|*" Project="false" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Sdk|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
     <Project Path="NAPS2.App.Worker/NAPS2.App.Worker.csproj">
       <BuildType Solution="Debug-Linux|*" Project="Debug" />
       <BuildType Solution="Debug-Mac|*" Project="Debug" />
@@ -397,6 +417,24 @@
     <Build Solution="Tools|*" Project="false" />
   </Project>
   <Project Path="NAPS2.Lib.WinForms/NAPS2.Lib.WinForms.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Debug-Linux|*" Project="false" />
+    <Build Solution="Debug-Mac|*" Project="false" />
+    <Build Solution="Release-Linux|*" Project="false" />
+    <Build Solution="Release-Mac|*" Project="false" />
+    <Build Solution="Sdk|*" Project="false" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
+  <Project Path="NAPS2.Lib.Wpf/NAPS2.Lib.Wpf.csproj">
     <BuildType Solution="Debug-Linux|*" Project="Debug" />
     <BuildType Solution="Debug-Mac|*" Project="Debug" />
     <BuildType Solution="Debug-Windows|*" Project="Debug" />

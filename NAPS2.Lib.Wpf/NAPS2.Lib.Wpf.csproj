@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <RootNamespace>NAPS2</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <!-- Application.ThemeMode (Fluent) is still marked experimental -->
+    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+
+    <Title>NAPS2 - Not Another PDF Scanner</Title>
+    <Product>NAPS2 - Not Another PDF Scanner</Product>
+    <Configurations>Debug;Release;DebugLang</Configurations>
+  </PropertyGroup>
+
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
+
+  <ItemGroup>
+    <!-- Non-UI platform services (printing, email, etc.) are shared with WinForms -->
+    <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
+    <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" />
+    <PackageReference Include="Eto.Forms" Version="2.11.0" />
+    <PackageReference Include="Eto.Platform.Wpf" Version="2.11.0" />
+  </ItemGroup>
+
+</Project>
