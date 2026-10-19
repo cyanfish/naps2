@@ -181,6 +181,16 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
+    // Gdi and ImageSharp don't currently apply embedded color profiles
+    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.ImageSharpImage)]
+    public void LoadWithColorProfile()
+    {
+        // The image has an embedded ICC profile with the primaries rotated (i.e. the stored red channel is green, etc.),
+        // so the colors are only correct if the profile is applied.
+        var image = LoadImage(ImageResources.dog_icc);
+        ImageAsserts.Similar(ImageResources.dog, image, ignoreResolution: true);
+    }
+
     [Fact]
     public void SetResolutionAndSaveJpeg()
     {
@@ -303,6 +313,10 @@ public class LoadSaveTests : ContextualTests
         [
             ImageFileFormat.Png, ".png", "dog_gray_png",
             new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
+        ],
+        [
+            ImageFileFormat.Png, ".png", "dog_palette",
+            new[] { "dog_palette_rgb" }, new[] { ImagePixelFormat.RGB24 }, false
         ],
         [
             ImageFileFormat.Png, ".png", "dog_gray_24bit_png",

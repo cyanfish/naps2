@@ -313,6 +313,15 @@
   <data name="dog_exif" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_exif.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="dog_icc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_palette" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_palette.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_palette_rgb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_palette_rgb.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dog_cat_combined" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_cat_combined.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

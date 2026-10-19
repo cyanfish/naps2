@@ -72,6 +72,46 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] autocrop_doc {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_doc", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] autocrop_photo {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_photo", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] autocrop_receipt {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_receipt", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] autocrop_table {
+            get {
+                object obj = ResourceManager.GetObject("autocrop_table", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] blank1 {
             get {
                 object obj = ResourceManager.GetObject("blank1", resourceCulture);
@@ -342,26 +382,6 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] dog_jfif {
-            get {
-                object obj = ResourceManager.GetObject("dog_jfif", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] dog_headerless {
-            get {
-                object obj = ResourceManager.GetObject("dog_headerless", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] dog_exif {
             get {
                 object obj = ResourceManager.GetObject("dog_exif", resourceCulture);
@@ -462,6 +482,16 @@ namespace NAPS2.Sdk.Tests {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] dog_headerless {
+            get {
+                object obj = ResourceManager.GetObject("dog_headerless", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] dog_huge {
             get {
                 object obj = ResourceManager.GetObject("dog_huge", resourceCulture);
@@ -475,6 +505,26 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] dog_huge_png {
             get {
                 object obj = ResourceManager.GetObject("dog_huge_png", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_icc {
+            get {
+                object obj = ResourceManager.GetObject("dog_icc", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_jfif {
+            get {
+                object obj = ResourceManager.GetObject("dog_jfif", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -505,6 +555,26 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] dog_mask {
             get {
                 object obj = ResourceManager.GetObject("dog_mask", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_palette {
+            get {
+                object obj = ResourceManager.GetObject("dog_palette", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_palette_rgb {
+            get {
+                object obj = ResourceManager.GetObject("dog_palette_rgb", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -705,46 +775,6 @@ namespace NAPS2.Sdk.Tests {
         internal static byte[] skewed {
             get {
                 object obj = ResourceManager.GetObject("skewed", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] autocrop_doc {
-            get {
-                object obj = ResourceManager.GetObject("autocrop_doc", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] autocrop_photo {
-            get {
-                object obj = ResourceManager.GetObject("autocrop_photo", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] autocrop_receipt {
-            get {
-                object obj = ResourceManager.GetObject("autocrop_receipt", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] autocrop_table {
-            get {
-                object obj = ResourceManager.GetObject("autocrop_table", resourceCulture);
                 return ((byte[])(obj));
             }
         }
