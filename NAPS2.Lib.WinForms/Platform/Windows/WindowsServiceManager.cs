@@ -64,7 +64,7 @@ public class WindowsServiceManager(ProcessCoordinator processCoordinator)
         try
         {
             int stopped = 0;
-            foreach (var process in WindowsApplicationLifecycle.GetOtherNaps2Processes())
+            foreach (var process in ApplicationLifecycle.GetOtherNaps2Processes())
             {
                 if (processCoordinator.StopSharingServer(process, 100))
                 {

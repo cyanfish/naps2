@@ -186,13 +186,4 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
             Win32.SetForegroundWindow(process.MainWindowHandle);
         }
     }
-
-    public static IEnumerable<Process> GetOtherNaps2Processes()
-    {
-        Process currentProcess = Process.GetCurrentProcess();
-        var otherProcesses = Process.GetProcessesByName(currentProcess.ProcessName)
-            .Where(x => x.Id != currentProcess.Id)
-            .OrderByDescending(x => x.StartTime);
-        return otherProcesses;
-    }
 }
