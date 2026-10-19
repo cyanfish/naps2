@@ -2,7 +2,7 @@ using System.Windows.Media.Imaging;
 
 namespace NAPS2.Images.Wpf;
 
-public static class WpfExtensions
+public static class WpfImageExtensions
 {
     public static BitmapSource RenderToBitmapSource(this IRenderableImage image)
     {
