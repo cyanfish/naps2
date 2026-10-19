@@ -122,7 +122,9 @@ public class Sidebar
         _desktopScanController.ScanWithProfile(profile);
     }
 
-    public LayoutElement CreateView(IFormBase parentWindow)
+    public bool IsVisible => _sidebarVis.IsVisible;
+
+    public LayoutElement CreateView(IFormBase parentWindow, bool nativeSidebarHost = false)
     {
         _sidebarVis.IsVisible = _config.Get(c => c.SidebarVisible);
         _profile.SelectedItem = _profileManager.DefaultProfile ?? _profileManager.Profiles.FirstOrDefault();
@@ -147,7 +149,7 @@ public class Sidebar
 
         UpdateUiForProfile();
 
-        return L.Column(
+        var view = L.Column(
             C.Filler().NaturalWidth(100),
             L.Column(
                 C.Button(NewProfileCommand, ButtonImagePosition.Left).Height(30).AlignCenter()
@@ -180,7 +182,8 @@ public class Sidebar
                 C.Button(ScanCommand, ButtonImagePosition.Left).AlignCenter().Height(30)
             ).Visible(!_onboardingVis),
             C.Filler()
-        ).Padding(left: parentWindow.LayoutController.DefaultSpacing + 10, right: 10).Visible(_sidebarVis);
+        ).Padding(left: nativeSidebarHost ? 10 : parentWindow.LayoutController.DefaultSpacing + 10, right: 10);
+        return nativeSidebarHost ? view : view.Visible(_sidebarVis);
     }
 
     private void UpdateUiForProfile()

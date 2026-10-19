@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Layout;
@@ -10,7 +11,10 @@ namespace NAPS2.EtoForms.Ui;
 
 public class MacDesktopForm : DesktopForm
 {
+    private readonly Sidebar _sidebar;
     private NSSlider? _zoomSlider;
+    // The native sidebar (see EtoPlatform.AttachWindowSidebar) has its own layout
+    private LayoutController? _sidebarLayout;
 
     public MacDesktopForm(
         Naps2Config config,
@@ -35,6 +39,52 @@ public class MacDesktopForm : DesktopForm
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider)
     {
+        _sidebar = sidebar;
+    }
+
+    protected override LayoutElement BuildSidebarLayout(LayoutElement mainContent)
+    {
+        if (SidebarHidden)
+        {
+            return base.BuildSidebarLayout(mainContent);
+        }
+        if (_sidebarLayout == null)
+        {
+            _sidebarLayout = new LayoutController { RootPadding = 0 };
+            _sidebarLayout.BindHosted(this);
+            LayoutController.Invalidated += (_, _) => _sidebarLayout.Invalidate();
+        }
+        _sidebarLayout.Content = _sidebar.CreateView(this, true);
+        FormStateController.DefaultClientSize -= new Size(Config.Get(c => c.SidebarWidth), 0);
+        return mainContent;
+    }
+
+    protected override void OnLoadComplete(EventArgs e)
+    {
+        base.OnLoadComplete(e);
+        if (_sidebarLayout != null)
+        {
+            EtoPlatform.Current.AttachWindowSidebar(this, _sidebarLayout.Container,
+                new WindowSidebarOptions
+                {
+                    Width = Math.Max(Config.Get(c => c.SidebarWidth), 200),
+                    MinWidth = 200,
+                    MaxWidth = 400,
+                    CanHide = true,
+                    Visible = _sidebar.IsVisible,
+                    ContentUnderTitleBar = true,
+                    WidthChanged = width => Config.User.Set(c => c.SidebarWidth, width)
+                });
+        }
+    }
+
+    public override void ToggleSidebar()
+    {
+        base.ToggleSidebar();
+        if (_sidebarLayout != null)
+        {
+            EtoPlatform.Current.SetWindowSidebarVisible(this, _sidebar.IsVisible);
+        }
     }
 
     protected override void UpdateTitle(ScanProfile? defaultProfile)

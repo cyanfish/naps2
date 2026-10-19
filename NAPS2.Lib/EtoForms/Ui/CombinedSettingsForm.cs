@@ -98,7 +98,11 @@ internal class CombinedSettingsForm : EtoDialogBase
         base.OnLoadComplete(e);
         if (EtoPlatform.Current.SupportsWindowSidebar)
         {
-            EtoPlatform.Current.AttachWindowSidebar(this, _navigator.Control, NAVIGATOR_WIDTH);
+            EtoPlatform.Current.AttachWindowSidebar(this, _navigator.Control, new WindowSidebarOptions
+            {
+                Width = NAVIGATOR_WIDTH,
+                MaxWidth = NAVIGATOR_WIDTH + 100
+            });
         }
     }
 

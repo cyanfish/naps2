@@ -12,6 +12,7 @@ public class LayoutController
     private LayoutElement? _content;
     private Window? _window;
     private bool _isShown;
+    private bool _isHosted;
     private bool _layoutQueued;
     private HashSet<Control> _controlSet = new();
 
@@ -38,9 +39,26 @@ public class LayoutController
 
     public void Bind(Window window)
     {
+        BindCore(window);
+        window.Content = _layout;
+        window.SizeChanged += (_, _) => DoLayout();
+    }
+
+    /// <summary>
+    /// Binds to the window without making the layout container the window content. The container can then be hosted
+    /// somewhere else (e.g. a native sidebar) and is laid out based on its own size.
+    /// </summary>
+    public void BindHosted(Window window)
+    {
+        BindCore(window);
+        _isHosted = true;
+        EtoPlatform.Current.AttachContainerSizeChanged(window, _layout, DoLayout);
+    }
+
+    private void BindCore(Window window)
+    {
         if (_window != null) throw new InvalidOperationException();
         _window = window;
-        window.Content = _layout;
         window.LoadComplete += (_, _) =>
         {
             if (window is not Form)
@@ -59,7 +77,6 @@ public class LayoutController
                 DoLayout();
             }
         };
-        window.SizeChanged += (_, _) => DoLayout();
     }
 
     public Size GetLayoutSize()
@@ -94,7 +111,7 @@ public class LayoutController
     private void DoLayout()
     {
         if (_window == null || _content == null || !_isShown || _layoutQueued) return;
-        var size = EtoPlatform.Current.GetClientSize(_window, true);
+        var size = _isHosted ? EtoPlatform.Current.GetContainerSize(_layout) : EtoPlatform.Current.GetClientSize(_window, true);
         int p = RootPadding;
         var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
         if (bounds.Width < 0 || bounds.Height < 0)
@@ -111,7 +128,10 @@ public class LayoutController
         _content.DoLayout(context, bounds);
         RemoveControls();
         _window.ResumeLayout();
-        EtoPlatform.Current.SetContainerSize(_window, _layout, size, p);
+        if (!_isHosted)
+        {
+            EtoPlatform.Current.SetContainerSize(_window, _layout, size, p);
+        }
     }
 
     private void RemoveControls()

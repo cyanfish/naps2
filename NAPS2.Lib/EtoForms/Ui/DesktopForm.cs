@@ -127,21 +127,27 @@ public abstract class DesktopForm : EtoFormBase
             MinimumSize = Size.Round(new SizeF(600, 300) * EtoPlatform.Current.GetLayoutScaleFactor(this)));
 
         LayoutController.RootPadding = 0;
-        LayoutController.Content = L.LeftPanel(
-            Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Sidebar)
-                ? C.None()
-                : _sidebar.CreateView(this),
-            L.Overlay(
-                // For WinForms, we add 1px of top padding to give us room to draw a border above the listview
-                _listView.Control.Padding(top: EtoPlatform.Current.IsWinForms ? 1 : 0),
-                L.Column(
+        var mainContent = L.Overlay(
+            // For WinForms, we add 1px of top padding to give us room to draw a border above the listview
+            _listView.Control.Padding(top: EtoPlatform.Current.IsWinForms ? 1 : 0),
+            L.Column(
+                C.Filler(),
+                L.Row(
+                    GetControlButtons(),
                     C.Filler(),
-                    L.Row(
-                        GetControlButtons(),
-                        C.Filler(),
-                        _notificationArea.Content)
-                ).Padding(8)
-            ).Scale()
+                    _notificationArea.Content)
+            ).Padding(8)
+        ).Scale();
+        LayoutController.Content = BuildSidebarLayout(mainContent);
+    }
+
+    protected bool SidebarHidden => Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Sidebar);
+
+    protected virtual LayoutElement BuildSidebarLayout(LayoutElement mainContent)
+    {
+        return L.LeftPanel(
+            SidebarHidden ? C.None() : _sidebar.CreateView(this),
+            mainContent
         ).SizeConfig(
             () => Config.Get(c => c.SidebarWidth),
             width => Config.User.Set(c => c.SidebarWidth, width),
@@ -658,7 +664,7 @@ public abstract class DesktopForm : EtoFormBase
         }
     }
 
-    public void ToggleSidebar()
+    public virtual void ToggleSidebar()
     {
         _sidebar.ToggleVisibility();
     }

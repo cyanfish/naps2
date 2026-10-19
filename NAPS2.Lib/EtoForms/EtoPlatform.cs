@@ -49,7 +49,9 @@ public abstract class EtoPlatform
     public abstract ISettingsNavigator CreateSettingsNavigator();
 
     public virtual bool SupportsWindowSidebar => false;
-    public virtual void AttachWindowSidebar(Window window, Control sidebar, int width) =>
+    public virtual void AttachWindowSidebar(Window window, Control sidebar, WindowSidebarOptions options) =>
+        throw new NotSupportedException();
+    public virtual void SetWindowSidebarVisible(Window window, bool visible) =>
         throw new NotSupportedException();
 
     public abstract void ConfigureImageButton(Button button, ButtonFlags flags);
@@ -80,6 +82,13 @@ public abstract class EtoPlatform
     public virtual void AsyncInvoke(Application application, Action action)
     {
         application.AsyncInvoke(action);
+    }
+
+    public virtual Size GetContainerSize(Control container) => container.Size;
+
+    public virtual void AttachContainerSizeChanged(Window window, Control container, Action action)
+    {
+        container.SizeChanged += (_, _) => action();
     }
 
     public virtual void SetContainerSize(Window window, Control container, Size size, int padding)

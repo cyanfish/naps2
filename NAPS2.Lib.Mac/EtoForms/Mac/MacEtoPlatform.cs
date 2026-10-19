@@ -110,6 +110,25 @@ public class MacEtoPlatform : EtoPlatform
         return new NSView().ToEto();
     }
 
+    public override Size GetContainerSize(Control container) => container.ToNative().Frame.Size.ToEtoSize();
+
+    public override void AttachContainerSizeChanged(Window window, Control container, Action action)
+    {
+        var view = container.ToNative();
+        var lastSize = view.Frame.Size;
+        view.PostsFrameChangedNotifications = true;
+        var observer = NSNotificationCenter.DefaultCenter.AddObserver(NSView.FrameChangedNotification, _ =>
+        {
+            // The notification is also posted when the view moves, so only update if the size changes
+            if (view.Frame.Size != lastSize)
+            {
+                lastSize = view.Frame.Size;
+                action();
+            }
+        }, view);
+        window.Closed += (_, _) => NSNotificationCenter.DefaultCenter.RemoveObserver(observer);
+    }
+
     public override void AddToContainer(Control container, Control control, bool inOverlay)
     {
         container.ToNative().AddSubview(control.ToNative());
@@ -153,39 +172,42 @@ public class MacEtoPlatform : EtoPlatform
         return (int) Math.Ceiling(NSScroller.GetScrollerWidth(NSControlSize.Regular, NSScrollerStyle.Legacy));
     }
 
-    // Windows with a sidebar, mapped to the Eto content view (which is moved into the sidebar's detail pane)
-    private readonly ConditionalWeakTable<Window, NSView> _sidebarContentViews = new();
+    // Windows with a sidebar
+    private readonly ConditionalWeakTable<Window, SidebarState> _sidebars = new();
 
     public override bool SupportsWindowSidebar => true;
 
-    public override void AttachWindowSidebar(Window window, Control sidebar, int width)
+    public override void AttachWindowSidebar(Window window, Control sidebar, WindowSidebarOptions options)
     {
         var nsWindow = window.ToNative();
         var etoContentView = nsWindow.ContentView!;
         var layoutContainer = ((IFormBase) window).LayoutController.Container.ToNative();
+        var sidebarView = sidebar.ToNative();
         var frame = nsWindow.Frame;
 
         // A split view sidebar item gets the standard sidebar appearance (e.g. Liquid Glass on macOS 26)
-        var sidebarItem = NSSplitViewItem.CreateSidebar(new NSViewController { View = sidebar.ToNative() });
-        sidebarItem.MinimumThickness = width;
-        sidebarItem.MaximumThickness = width + 100;
-        sidebarItem.CanCollapse = false;
+        var sidebarItem = NSSplitViewItem.CreateSidebar(new NSViewController { View = sidebarView });
+        sidebarItem.MinimumThickness = options.MinWidth ?? options.Width;
+        sidebarItem.MaximumThickness = options.MaxWidth ?? options.Width;
+        sidebarItem.CanCollapse = options.CanHide;
         var detailView = new NSView();
         var splitViewController = new NSSplitViewController();
         splitViewController.AddSplitViewItem(sidebarItem);
         splitViewController.AddSplitViewItem(
             NSSplitViewItem.FromViewController(new NSViewController { View = detailView }));
+        sidebarItem.Collapsed = !options.Visible;
 
         // Extend the sidebar under the title bar
         nsWindow.StyleMask |= NSWindowStyle.FullSizeContentView;
         nsWindow.TitlebarAppearsTransparent = true;
         nsWindow.ContentViewController = splitViewController;
 
-        // Keep the Eto content below the title bar
         etoContentView.TranslatesAutoresizingMaskIntoConstraints = false;
         detailView.AddSubview(etoContentView);
         NSLayoutConstraint.ActivateConstraints([
-            etoContentView.TopAnchor.ConstraintEqualTo(((NSLayoutGuide) nsWindow.ContentLayoutGuide!).TopAnchor),
+            options.ContentUnderTitleBar
+                ? etoContentView.TopAnchor.ConstraintEqualTo(detailView.TopAnchor)
+                : etoContentView.TopAnchor.ConstraintEqualTo(((NSLayoutGuide) nsWindow.ContentLayoutGuide!).TopAnchor),
             etoContentView.BottomAnchor.ConstraintEqualTo(detailView.BottomAnchor),
             etoContentView.LeadingAnchor.ConstraintEqualTo(detailView.LeadingAnchor),
             etoContentView.TrailingAnchor.ConstraintEqualTo(detailView.TrailingAnchor)
@@ -202,9 +224,22 @@ public class MacEtoPlatform : EtoPlatform
             }
             ((IFormBase) window).LayoutController.Invalidate();
         }
+        var lastWidth = options.Width;
+        void SidebarResized()
+        {
+            // The sidebar view itself may be inset within the split view pane
+            var pane = splitViewController.SplitView.ArrangedSubviews[0];
+            var sidebarWidth = (int) Math.Round(pane.Frame.Width);
+            if (!sidebarItem.Collapsed && sidebarWidth > 0 && sidebarWidth != lastWidth)
+            {
+                lastWidth = sidebarWidth;
+                options.WidthChanged?.Invoke(sidebarWidth);
+            }
+        }
         // Fit as soon as the detail pane resizes rather than waiting for Eto to resize its views, to avoid flicker
         etoContentView.PostsFrameChangedNotifications = true;
         layoutContainer.PostsFrameChangedNotifications = true;
+        sidebarView.PostsFrameChangedNotifications = true;
         NSObject[] observers =
         [
             NSNotificationCenter.DefaultCenter.AddObserver(NSView.FrameChangedNotification, _ => FitEtoContent(),
@@ -212,30 +247,50 @@ public class MacEtoPlatform : EtoPlatform
             NSNotificationCenter.DefaultCenter.AddObserver(NSView.FrameChangedNotification, _ =>
             {
                 if (layoutContainer.Frame != layoutContainer.Superview?.Bounds) FitEtoContent();
-            }, layoutContainer)
+            }, layoutContainer),
+            NSNotificationCenter.DefaultCenter.AddObserver(NSView.FrameChangedNotification, _ => SidebarResized(),
+                sidebarView)
         ];
         window.Closed += (_, _) => NSNotificationCenter.DefaultCenter.RemoveObservers(observers);
-        _sidebarContentViews.AddOrUpdate(window, etoContentView);
+        _sidebars.AddOrUpdate(window, new SidebarState(etoContentView, splitViewController, sidebarItem));
 
-        frame.Width += width;
-        nsWindow.SetFrame(frame, true);
+        if (options.Visible)
+        {
+            frame.Width += options.Width;
+            nsWindow.SetFrame(frame, true);
+            splitViewController.SplitView.SetPositionOfDivider(options.Width, 0);
+        }
         FitEtoContent();
     }
 
+    public override void SetWindowSidebarVisible(Window window, bool visible)
+    {
+        if (_sidebars.TryGetValue(window, out var state) && state.SidebarItem.Collapsed == visible)
+        {
+            // Animates the change
+            state.SplitViewController.ToggleSidebar(null);
+        }
+    }
+
+    private record SidebarState(
+        NSView ContentView,
+        NSSplitViewController SplitViewController,
+        NSSplitViewItem SidebarItem);
+
     public override Size GetClientSize(Window window, bool excludeToolbars = false)
     {
-        if (_sidebarContentViews.TryGetValue(window, out var contentView))
+        if (_sidebars.TryGetValue(window, out var sidebar))
         {
-            return contentView.Frame.Size.ToEtoSize();
+            return sidebar.ContentView.Frame.Size.ToEtoSize();
         }
         return base.GetClientSize(window, excludeToolbars);
     }
 
     public override void SetMinimumClientSize(Window window, Size minSize)
     {
-        if (_sidebarContentViews.TryGetValue(window, out var contentView))
+        if (_sidebars.TryGetValue(window, out var sidebar))
         {
-            window.ToNative().ContentMinSize = (minSize + GetSidebarSizeDelta(window, contentView)).ToNS();
+            window.ToNative().ContentMinSize = (minSize + GetSidebarSizeDelta(window, sidebar.ContentView)).ToNS();
             return;
         }
         base.SetMinimumClientSize(window, minSize);
@@ -277,9 +332,9 @@ public class MacEtoPlatform : EtoPlatform
 
     public override void SetClientSize(Window window, Size clientSize)
     {
-        if (_sidebarContentViews.TryGetValue(window, out var contentView))
+        if (_sidebars.TryGetValue(window, out var sidebar))
         {
-            window.ToNative().SetContentSize((clientSize + GetSidebarSizeDelta(window, contentView)).ToNS());
+            window.ToNative().SetContentSize((clientSize + GetSidebarSizeDelta(window, sidebar.ContentView)).ToNS());
             return;
         }
         if (window.Loaded)
