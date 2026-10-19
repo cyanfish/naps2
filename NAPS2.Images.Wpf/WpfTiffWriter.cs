@@ -34,11 +34,11 @@ internal class WpfTiffWriter : ITiffWriter
             if (compression == TiffCompressionType.Ccitt4 && image.LogicalPixelFormat != ImagePixelFormat.BW1)
             {
                 using var bwCopy = image.Clone().PerformTransform(new BlackWhiteTransform());
-                tiffEncoder.Frames.Add(BitmapFrame.Create(((WpfImage) bwCopy).Bitmap));
+                tiffEncoder.Frames.Add(BitmapFrame.Create(((WpfImage) bwCopy).ToBitmapSource()));
             }
             else
             {
-                tiffEncoder.Frames.Add(BitmapFrame.Create(((WpfImage) image).Bitmap));
+                tiffEncoder.Frames.Add(BitmapFrame.Create(((WpfImage) image).ToBitmapSource()));
             }
             progress.Report(++i, images.Count);
             if (progress.IsCancellationRequested) return false;

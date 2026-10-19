@@ -1,60 +1,49 @@
-using System.Reflection;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using NAPS2.Images.Bitwise;
 using NAPS2.Util;
 
 namespace NAPS2.Images.Wpf;
 
 public class WpfImage : IMemoryImage
 {
-    private static MethodInfo? _detachFromDispatcher;
+    private readonly WpfPixelBuffer _buffer;
+    private bool _disposed;
+    private double _xDpi, _yDpi;
 
-    private static void DetachFromDispatcher(DispatcherObject dispatcherObject)
+    public WpfImage(BitmapSource bitmap) : this(WpfPixelBuffer.FromSource(bitmap), bitmap.DpiX, bitmap.DpiY)
     {
-        _detachFromDispatcher ??=
-            typeof(DispatcherObject).GetMethod("DetachFromDispatcher", BindingFlags.Instance | BindingFlags.NonPublic);
-        _detachFromDispatcher!.Invoke(dispatcherObject, Array.Empty<object>());
     }
 
-    private bool _disposed;
-
-    public WpfImage(WriteableBitmap bitmap)
+    internal WpfImage(WpfPixelBuffer buffer, double xDpi, double yDpi)
     {
         LeakTracer.StartTracking(this);
-        // TODO: Something similar to MacImage where if it's not a supported pixel type we convert
-        WpfPixelFormatFixer.MaybeFixPixelFormat(ref bitmap);
-        Bitmap = bitmap;
-        DetachFromDispatcher(Bitmap);
+        _buffer = buffer;
+        _xDpi = xDpi;
+        _yDpi = yDpi;
     }
 
     public ImageContext ImageContext { get; } = new WpfImageContext();
 
-    public WriteableBitmap Bitmap { get; private set; }
+    public BitmapSource ToBitmapSource()
+    {
+        if (_disposed) throw new InvalidOperationException();
+        return _buffer.ToBitmapSource(_xDpi, _yDpi);
+    }
 
-    public int Width => Bitmap.PixelWidth;
+    public int Width => _buffer.Width;
 
-    public int Height => Bitmap.PixelHeight;
+    public int Height => _buffer.Height;
 
-    public float HorizontalResolution => (float) Bitmap.DpiX;
+    public float HorizontalResolution => (float) _xDpi;
 
-    public float VerticalResolution => (float) Bitmap.DpiY;
+    public float VerticalResolution => (float) _yDpi;
 
     public void SetResolution(float xDpi, float yDpi)
     {
-        var src = Bitmap.BackBuffer;
-        var srcInfo = new PixelInfo(Width, Height, GetSubPixelType(), Bitmap.BackBufferStride);
-
-        var newImage = new WriteableBitmap(Width, Height, xDpi, yDpi, Bitmap.Format, null);
-        var dst = newImage.BackBuffer;
-        var dstInfo = new PixelInfo(Width, Height, GetSubPixelType(), newImage.BackBufferStride);
-
-        new CopyBitwiseImageOp().Perform(src, srcInfo, dst, dstInfo);
-        DetachFromDispatcher(newImage);
-        Bitmap = newImage;
+        _xDpi = xDpi;
+        _yDpi = yDpi;
     }
 
-    public ImagePixelFormat PixelFormat => Bitmap.Format switch
+    public ImagePixelFormat PixelFormat => _buffer.Format switch
     {
         { BitsPerPixel: 1 } => ImagePixelFormat.BW1,
         { BitsPerPixel: 8 } => ImagePixelFormat.Gray8,
@@ -71,15 +60,23 @@ public class WpfImage : IMemoryImage
             LogicalPixelFormat = ImagePixelFormat.Unknown;
         }
         var subPixelType = GetSubPixelType();
-        imageData = new BitwiseImageData((byte*) Bitmap.BackBuffer,
-            new PixelInfo(Width, Height, subPixelType, Bitmap.BackBufferStride));
-        return new WpfImageLockState();
+        // Hold a reference so the memory isn't freed if the image is disposed while locked
+        bool addedRef = false;
+        _buffer.DangerousAddRef(ref addedRef);
+        imageData = new BitwiseImageData((byte*) _buffer.Ptr,
+            new PixelInfo(Width, Height, subPixelType, _buffer.Stride));
+        return new WpfImageLockState(_buffer);
     }
 
-    private class WpfImageLockState : ImageLockState
+    private class WpfImageLockState(WpfPixelBuffer buffer) : ImageLockState
     {
+        private bool _disposed;
+
         public override void Dispose()
         {
+            if (_disposed) return;
+            _disposed = true;
+            buffer.DangerousRelease();
         }
     }
 
@@ -113,7 +110,7 @@ public class WpfImage : IMemoryImage
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
         var encoder = GetImageEncoder(imageFormat, options);
-        encoder.Frames.Add(BitmapFrame.Create(helper.Image.Bitmap));
+        encoder.Frames.Add(BitmapFrame.Create(helper.Image.ToBitmapSource()));
         using var stream = new FileStream(path, FileMode.Create, FileAccess.Write);
         encoder.Save(stream);
     }
@@ -134,7 +131,7 @@ public class WpfImage : IMemoryImage
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
         var encoder = GetImageEncoder(imageFormat, options);
-        encoder.Frames.Add(BitmapFrame.Create(helper.Image.Bitmap));
+        encoder.Frames.Add(BitmapFrame.Create(helper.Image.ToBitmapSource()));
         SaveMaybeWithoutSeeking(stream, encoder);
     }
 
@@ -172,7 +169,7 @@ public class WpfImage : IMemoryImage
     public IMemoryImage Clone()
     {
         if (_disposed) throw new InvalidOperationException();
-        return new WpfImage(Bitmap.Clone())
+        return new WpfImage(_buffer.Clone(), _xDpi, _yDpi)
         {
             OriginalFileFormat = OriginalFileFormat,
             LogicalPixelFormat = LogicalPixelFormat
@@ -182,6 +179,7 @@ public class WpfImage : IMemoryImage
     public void Dispose()
     {
         _disposed = true;
+        _buffer.Dispose();
         LeakTracer.StopTracking(this);
     }
 }

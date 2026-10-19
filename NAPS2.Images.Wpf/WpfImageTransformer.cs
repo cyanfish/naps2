@@ -12,6 +12,23 @@ internal class WpfImageTransformer : AbstractImageTransformer<WpfImage>
 
     protected override WpfImage PerformTransform(WpfImage image, RotationTransform transform)
     {
+        if (Math.Abs(transform.Angle - 0.0) < RotationTransform.TOLERANCE)
+        {
+            return image;
+        }
+        if (Math.Abs(transform.Angle - 90.0) < RotationTransform.TOLERANCE)
+        {
+            return RotateRightAngle(image, 90);
+        }
+        if (Math.Abs(transform.Angle - 180.0) < RotationTransform.TOLERANCE)
+        {
+            return RotateRightAngle(image, 180);
+        }
+        if (Math.Abs(transform.Angle - 270.0) < RotationTransform.TOLERANCE)
+        {
+            return RotateRightAngle(image, 270);
+        }
+
         var width = image.Width;
         var height = image.Height;
         float xres = image.HorizontalResolution, yres = image.VerticalResolution;
@@ -28,13 +45,14 @@ internal class WpfImageTransformer : AbstractImageTransformer<WpfImage>
             dc.PushTransform(new TranslateTransform(width / 2.0, height / 2.0));
             dc.PushTransform(new RotateTransform(transform.Angle));
             dc.PushTransform(new TranslateTransform(-image.Width / 2.0, -image.Height / 2.0));
-            dc.DrawImage(image.Bitmap, new Rect(0, 0, image.Width, image.Height));
+            dc.DrawImage(image.ToBitmapSource(), new Rect(0, 0, image.Width, image.Height));
         }
 
-        var rtb = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Default);
+        var rtb = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32);
         rtb.Render(visual);
 
-        var newImage = new WpfImage(new WriteableBitmap(rtb));
+        // The result is always opaque (with a white background), so we can use 24-bit unconditionally
+        var newImage = new WpfImage(new FormatConvertedBitmap(rtb, PixelFormats.Bgr24, null, 0));
         // TODO: In Gdi, we convert this back to BW1 (or the original pixel format). Should we do the same?
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
@@ -44,12 +62,31 @@ internal class WpfImageTransformer : AbstractImageTransformer<WpfImage>
         return newImage;
     }
 
+    private static WpfImage RotateRightAngle(WpfImage image, int angle)
+    {
+        var rotated = new TransformedBitmap(image.ToBitmapSource(), new RotateTransform(angle));
+        var newImage = new WpfImage(rotated)
+        {
+            LogicalPixelFormat = image.LogicalPixelFormat
+        };
+        if (angle == 180)
+        {
+            newImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+        }
+        else
+        {
+            newImage.SetResolution(image.VerticalResolution, image.HorizontalResolution);
+        }
+        image.Dispose();
+        return newImage;
+    }
+
     protected override WpfImage PerformTransform(WpfImage image, ResizeTransform transform)
     {
-        var copy = new TransformedBitmap(image.Bitmap,
+        var copy = new TransformedBitmap(image.ToBitmapSource(),
             new System.Windows.Media.ScaleTransform(transform.Width / (double) image.Width,
                 transform.Height / (double) image.Height));
-        var newImage = new WpfImage(new WriteableBitmap(copy));
+        var newImage = new WpfImage(copy);
         newImage.LogicalPixelFormat = image.LogicalPixelFormat == ImagePixelFormat.BW1
             ? ImagePixelFormat.Gray8
             : image.LogicalPixelFormat;

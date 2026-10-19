@@ -11,9 +11,12 @@ public static class WpfExtensions
         return wpfImageContext.RenderToBitmapSource(image);
     }
 
-    public static BitmapSource AsBitmapSource(this IMemoryImage image)
+    public static BitmapSource ToBitmapSource(this IMemoryImage image)
     {
         var wpfImage = image as WpfImage ?? throw new ArgumentException("Expected a WpfImage", nameof(image));
-        return wpfImage.Bitmap;
+        return wpfImage.ToBitmapSource();
     }
+
+    [Obsolete("Use ToBitmapSource instead. This has been renamed since it now returns a copy of the image.")]
+    public static BitmapSource AsBitmapSource(this IMemoryImage image) => image.ToBitmapSource();
 }
