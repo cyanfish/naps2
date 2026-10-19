@@ -239,4 +239,43 @@ public static class C
         });
         return menuItem;
     }
+
+    public static SubMenuItem SubMenuItem(Window window, Command menuCommand, MenuProvider menuProvider)
+    {
+        var menuItem = new SubMenuItem
+        {
+            Text = menuCommand.MenuText
+        };
+        EtoPlatform.Current.AttachDpiDependency(window,
+            scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(scale));
+        menuProvider.Handle(subItems => SetMenuItems(window, menuItem.Items, subItems));
+        return menuItem;
+    }
+
+    public static ContextMenu ContextMenu(Window window, MenuProvider menuProvider)
+    {
+        var contextMenu = new ContextMenu();
+        menuProvider.Handle(subItems => SetMenuItems(window, contextMenu.Items, subItems));
+        return contextMenu;
+    }
+
+    private static void SetMenuItems(Window window, MenuItemCollection items, List<MenuProvider.Item> subItems)
+    {
+        items.Clear();
+        foreach (var subItem in subItems)
+        {
+            switch (subItem)
+            {
+                case MenuProvider.CommandItem { Command: var command }:
+                    items.Add(ButtonMenuItem(window, (ActionCommand) command));
+                    break;
+                case MenuProvider.SeparatorItem:
+                    items.Add(new SeparatorMenuItem());
+                    break;
+                case MenuProvider.SubMenuItem { Command: var command, MenuProvider: var subMenuProvider }:
+                    items.Add(SubMenuItem(window, command, subMenuProvider));
+                    break;
+            }
+        }
+    }
 }

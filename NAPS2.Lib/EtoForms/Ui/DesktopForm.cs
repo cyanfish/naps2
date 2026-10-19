@@ -443,36 +443,8 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void CreateToolbarSeparator() => throw new InvalidOperationException();
 
-    // TODO: Can we generalize this kind of logic?
-    protected SubMenuItem CreateSubMenu(Command menuCommand, MenuProvider menuProvider)
-    {
-        var menuItem = new SubMenuItem
-        {
-            Text = menuCommand.MenuText
-        };
-        EtoPlatform.Current.AttachDpiDependency(this,
-            scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(scale));
-        menuProvider.Handle(subItems =>
-        {
-            menuItem.Items.Clear();
-            foreach (var subItem in subItems)
-            {
-                switch (subItem)
-                {
-                    case MenuProvider.CommandItem { Command: var command }:
-                        menuItem.Items.Add(C.ButtonMenuItem(this, (ActionCommand) command));
-                        break;
-                    case MenuProvider.SeparatorItem:
-                        menuItem.Items.Add(new SeparatorMenuItem());
-                        break;
-                    case MenuProvider.SubMenuItem { Command: var command, MenuProvider: var subMenuProvider }:
-                        menuItem.Items.Add(CreateSubMenu(command, subMenuProvider));
-                        break;
-                }
-            }
-        });
-        return menuItem;
-    }
+    protected SubMenuItem CreateSubMenu(Command menuCommand, MenuProvider menuProvider) =>
+        C.SubMenuItem(this, menuCommand, menuProvider);
 
     protected virtual LayoutElement GetControlButtons()
     {
