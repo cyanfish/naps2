@@ -1,7 +1,10 @@
+using System.Threading;
+using System.Windows.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
+using SW = System.Windows;
 
 namespace NAPS2.EtoForms.Wpf;
 
@@ -13,9 +16,25 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override IDarkModeProvider DarkModeProvider { get; } = new WindowsDarkModeProvider();
 
-    public override Application CreateApplicationCore() => throw new NotImplementedException();
+    public override Application CreateApplicationCore()
+    {
+        // Eto.Wpf reuses an existing System.Windows.Application if there is one, so we create it first to configure
+        // the Fluent theme before any windows are created.
+        _ = new SW.Application { ShutdownMode = SW.ShutdownMode.OnExplicitShutdown };
+        var application = new Application(Eto.Platforms.Wpf);
+        SynchronizationContext.SetSynchronizationContext(
+            new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+        SetSystemTheme();
+        return application;
+    }
 
-    public override void SetSystemTheme() => throw new NotImplementedException();
+    public override void SetSystemTheme()
+    {
+        if (SW.Application.Current is { } app)
+        {
+            app.ThemeMode = ColorScheme.DarkMode ? SW.ThemeMode.Dark : SW.ThemeMode.Light;
+        }
+    }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         throw new NotImplementedException();
