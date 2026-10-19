@@ -9,7 +9,7 @@ namespace NAPS2.EntryPoints;
 /// <summary>
 /// The entry point logic for NAPS2.exe when running in worker mode.
 /// </summary>
-public static class WindowsNativeWorkerEntryPoint
+public static class WinFormsNativeWorkerEntryPoint
 {
     public static int Run(string[] args)
     {

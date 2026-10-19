@@ -1,15 +1,12 @@
-using System.Drawing;
-using System.Reflection;
-using System.Windows.Forms;
 using Microsoft.Win32;
 
 namespace NAPS2.EtoForms.WinForms;
 
-public class WinFormsDarkModeProvider : IDarkModeProvider
+public class WindowsDarkModeProvider : IDarkModeProvider
 {
     private bool? _value;
 
-    public WinFormsDarkModeProvider()
+    public WindowsDarkModeProvider()
     {
         SystemEvents.UserPreferenceChanged += OnUserPreferenceChanged;
     }

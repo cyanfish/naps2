@@ -7,7 +7,7 @@ namespace NAPS2.EntryPoints;
 /// <summary>
 /// The entry point for NAPS2.Console.exe, the NAPS2 CLI.
 /// </summary>
-public static class WindowsConsoleEntryPoint
+public static class WinFormsConsoleEntryPoint
 {
     public static int Run(string[] args)
     {

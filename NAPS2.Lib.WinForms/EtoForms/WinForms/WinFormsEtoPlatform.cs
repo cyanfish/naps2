@@ -25,7 +25,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override bool IsWinForms => true;
 
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
-    public override IDarkModeProvider DarkModeProvider { get; } = new WinFormsDarkModeProvider();
+    public override IDarkModeProvider DarkModeProvider { get; } = new WindowsDarkModeProvider();
 
     public override Application CreateApplicationCore()
     {

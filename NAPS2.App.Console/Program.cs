@@ -16,6 +16,6 @@ static class Program
         ProfileOptimization.SetProfileRoot(profilesPath);
         ProfileOptimization.StartProfile("naps2.console.jit");
 
-        return WindowsConsoleEntryPoint.Run(args);
+        return WinFormsConsoleEntryPoint.Run(args);
     }
 }
