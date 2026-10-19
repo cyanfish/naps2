@@ -1,8 +1,6 @@
 using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
-using NAPS2.Images.Gdi;
 
 namespace NAPS2.Platform.Windows;
 
@@ -72,9 +70,7 @@ public class WindowsOpenWith : IOpenWith
                 if (hr != 0) throw new Win32Exception(hr);
                 return _imageContext.Load(outBuff.ToString());
             }
-            var icon = Icon.ExtractIcon(entry.IconPath, entry.IconIndex);
-            if (icon == null) return null;
-            return new GdiImage(icon.ToBitmap());
+            return WindowsIcons.ExtractIcon(_imageContext, entry.IconPath, entry.IconIndex);
         }
         catch (Exception)
         {

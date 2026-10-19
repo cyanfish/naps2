@@ -1,11 +1,17 @@
-﻿using System.Drawing;
-using Microsoft.Win32;
-using NAPS2.Images.Gdi;
+﻿using Microsoft.Win32;
+using NAPS2.Platform.Windows;
 
 namespace NAPS2.ImportExport.Email.Mapi;
 
 internal class MapiEmailClients : ISystemEmailClients
 {
+    private readonly ImageContext _imageContext;
+
+    public MapiEmailClients(ImageContext imageContext)
+    {
+        _imageContext = imageContext;
+    }
+
     public string? GetDefaultName()
     {
         using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Clients\Mail", false);
@@ -27,9 +33,7 @@ internal class MapiEmailClients : ISystemEmailClients
     {
         var exePath = GetExePath(clientName);
         if (exePath == null) return null;
-        var icon = Icon.ExtractAssociatedIcon(exePath);
-        if (icon == null) return null;
-        return new GdiImage(icon.ToBitmap());
+        return WindowsIcons.ExtractAssociatedIcon(_imageContext, exePath);
     }
 
     private string? GetExePath(string clientName)
