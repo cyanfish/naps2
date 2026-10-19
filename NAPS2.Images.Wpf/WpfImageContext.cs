@@ -70,7 +70,7 @@ public class WpfImageContext : ImageContext
         }
         var wpfPixelFormat = pixelFormat switch
         {
-            ImagePixelFormat.ARGB32 => PixelFormats.Bgr32,
+            ImagePixelFormat.ARGB32 => PixelFormats.Bgra32,
             ImagePixelFormat.RGB24 => PixelFormats.Bgr24,
             ImagePixelFormat.Gray8 => PixelFormats.Gray8,
             ImagePixelFormat.BW1 => PixelFormats.BlackWhite,

@@ -375,6 +375,23 @@ public class TransformTests : ContextualTests
     }
 
     [Fact]
+    public void CropWithAlpha()
+    {
+        var original = LoadImage(ImageResources.dog_alpha);
+
+        var transformed = original.PerformTransform(new CropTransform(10, 20, 15, 5));
+
+        Assert.Equal(ImagePixelFormat.ARGB32, transformed.PixelFormat);
+        // Round-trip through PNG to check that the platform treats the result as having alpha (not just that the alpha
+        // bytes are present in memory)
+        using var stream = transformed.SaveToMemoryStream(ImageFileFormat.Png);
+        using var reloaded = ImageContext.Load(stream);
+        Assert.Equal(ImagePixelFormat.ARGB32, reloaded.PixelFormat);
+        ImageAsserts.Similar(transformed, reloaded, ImageAsserts.NULL_RMSE_THRESHOLD);
+        AssertOwnership(original, transformed);
+    }
+
+    [Fact]
     public void CropBlackWhiteBeforeAfter()
     {
         var first = LoadImage(ImageResources.dog);
