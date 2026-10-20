@@ -179,8 +179,6 @@ public abstract class EtoPlatform
         // TODO: Maybe implement our own ellipsis logic that uses text-measuring to strip trailing characters and add "..."?
     }
 
-    public virtual Bitmap? ExtractAssociatedIcon(string exePath) => throw new NotSupportedException();
-
     public virtual void HandleKeyDown(Control control, Func<Keys, bool> handle)
     {
         control.KeyDown += (_, args) => args.Handled = handle(args.KeyData);

@@ -434,11 +434,6 @@ public class WinFormsEtoPlatform : EtoPlatform
         handler.Control.AutoEllipsis = true;
     }
 
-    public override Bitmap? ExtractAssociatedIcon(string exePath)
-    {
-        return SD.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
-    }
-
     public override void HandleKeyDown(Control control, Func<Keys, bool> handle)
     {
         control.ToNative().KeyDown += (_, args) => args.Handled = handle(args.KeyData.ToEto());
