@@ -194,7 +194,7 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) => new WpfListView<T>(behavior);
 
-    public override ISettingsNavigator CreateSettingsNavigator() => throw new NotImplementedException();
+    public override ISettingsNavigator CreateSettingsNavigator() => new WpfSettingsNavigator();
 
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
