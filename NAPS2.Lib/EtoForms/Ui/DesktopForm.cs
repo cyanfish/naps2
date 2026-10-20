@@ -242,12 +242,13 @@ public abstract class DesktopForm : EtoFormBase
         EtoPlatform.Current.AttachDpiDependency(_listView.Control,
             scale => SetThumbnailSpacing(_thumbnailController.VisibleSize, scale));
         _desktopController.PreInitialize();
+        // Set the toolbar state before the form is rendered so it doesn't visibly change
+        UpdateToolbar();
     }
 
     protected override async void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        UpdateToolbar();
         await _desktopController.Initialize();
     }
 

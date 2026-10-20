@@ -12,6 +12,7 @@ using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.Images.Wpf;
+using NAPS2.Platform.Windows;
 using MouseEventArgs = Eto.Forms.MouseEventArgs;
 using Keyboard = System.Windows.Input.Keyboard;
 using SW = System.Windows;
@@ -421,6 +422,11 @@ public class WpfEtoPlatform : EtoPlatform
         {
             form.LayoutController.Container.ToNative().SizeChanged += (_, _) => form.LayoutController.Invalidate();
         }
+        // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
+        var native = window.ToNative();
+        var interop = new SW.Interop.WindowInteropHelper(native);
+        native.SourceInitialized += (_, _) => WindowCloaking.SetCloaked(interop.Handle, true);
+        native.ContentRendered += (_, _) => WindowCloaking.SetCloaked(interop.Handle, false);
     }
 
     public override Size GetClientSize(Window window, bool excludeToolbars = false)

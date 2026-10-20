@@ -78,11 +78,17 @@ public class WpfDesktopForm : DesktopForm
         WpfListView.NativeControl.Focus();
     }
 
+    protected override void OnLoadComplete(EventArgs e)
+    {
+        // Lay out the toolbar before the form is rendered so it doesn't visibly change
+        _toolbarFormatter.RelayoutToolbar(_mainToolBar);
+        base.OnLoadComplete(e);
+    }
+
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
         this.ToNative().SizeToContent = SizeToContent.Manual;
-        _toolbarFormatter.RelayoutToolbar(_mainToolBar);
     }
 
     protected override void RecreateToolbarsAndMenus()
