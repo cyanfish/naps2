@@ -1,10 +1,15 @@
 using System.Threading;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.Wpf;
+using Eto.Wpf.Drawing;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
+using NAPS2.Images.Wpf;
 using SW = System.Windows;
+using SWM = System.Windows.Media;
 
 namespace NAPS2.EtoForms.Wpf;
 
@@ -44,11 +49,29 @@ public class WpfEtoPlatform : EtoPlatform
     public override void ConfigureImageButton(Button button, ButtonFlags flags) =>
         throw new NotImplementedException();
 
-    public override Bitmap ToBitmap(IMemoryImage image) => throw new NotImplementedException();
+    public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToBitmapSource()));
 
-    public override IMemoryImage FromBitmap(Bitmap bitmap) => throw new NotImplementedException();
+    public override IMemoryImage FromBitmap(Bitmap bitmap) => new WpfImage(bitmap.ToWpf());
 
-    public override IMemoryImage DrawHourglass(IMemoryImage thumb) => throw new NotImplementedException();
+    public override IMemoryImage DrawHourglass(IMemoryImage image)
+    {
+        var visual = new SWM.DrawingVisual();
+        using (var dc = visual.RenderOpen())
+        {
+            dc.PushOpacity(0.3);
+            dc.DrawImage(image.ToBitmapSource(), new SW.Rect(0, 0, image.Width, image.Height));
+            dc.Pop();
+            var hourglass = BitmapFrame.Create(new MemoryStream(Icons.hourglass_grey), BitmapCreateOptions.None,
+                BitmapCacheOption.OnLoad);
+            // Use whole pixels so the icon isn't blurred
+            int left = (image.Width - 32) / 2, top = (image.Height - 32) / 2;
+            dc.DrawImage(hourglass, new SW.Rect(left, top, 32, 32));
+        }
+        var bitmap = new RenderTargetBitmap(image.Width, image.Height, 96, 96, SWM.PixelFormats.Pbgra32);
+        bitmap.Render(visual);
+        image.Dispose();
+        return new WpfImage(bitmap);
+    }
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay) =>
         throw new NotImplementedException();
