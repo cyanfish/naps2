@@ -9,4 +9,41 @@
         </Border>
     </ControlTemplate>
 
+    <!-- A minimal button template. -->
+    <ControlTemplate x:Key="SubtleButtonTemplate" TargetType="Button">
+        <Border x:Name="bd" Background="Transparent" CornerRadius="4">
+            <ContentPresenter Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+            </Trigger>
+            <!-- WPF doesn't grey out images in disabled buttons -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="bd" Property="Opacity" Value="0.45" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- A Fluent-like focus rectangle drawn inside the button (the default one extends outside, which gets clipped at
+         the edges of the toolbar) -->
+    <Style x:Key="InsetFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderBrush="{DynamicResource FocusStrokeColorOuterBrush}" BorderThickness="2"
+                            CornerRadius="4" SnapsToDevicePixels="True">
+                        <Border BorderBrush="{DynamicResource FocusStrokeColorInnerBrush}" BorderThickness="1"
+                                CornerRadius="2" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

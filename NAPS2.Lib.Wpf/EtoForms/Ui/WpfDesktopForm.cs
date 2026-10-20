@@ -1,11 +1,32 @@
-﻿using NAPS2.EtoForms.Desktop;
+﻿using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using Eto.Forms;
+using Eto.Wpf;
+using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
+using NAPS2.EtoForms.Wpf;
+using Button = System.Windows.Controls.Button;
+using VerticalAlignment = System.Windows.VerticalAlignment;
+using Command = Eto.Forms.Command;
+using ContextMenu = System.Windows.Controls.ContextMenu;
+using Image = System.Windows.Controls.Image;
+using Orientation = System.Windows.Controls.Orientation;
+using Separator = System.Windows.Controls.Separator;
+using ToolBar = System.Windows.Controls.ToolBar;
 
 namespace NAPS2.EtoForms.Ui;
 
 public class WpfDesktopForm : DesktopForm
 {
+    private readonly WpfToolbarFormatter _toolbarFormatter = new();
+    private readonly Dictionary<DesktopToolbarMenuType, (FrameworkElement target, ContextMenu menu)> _menus = new();
+    private readonly ToolBar _profilesToolBar = new() { Visibility = Visibility.Collapsed };
+    private readonly Border _toolbarBorder = new() { BorderThickness = new Thickness(0, 0, 0, 1) };
+    private ToolBar _mainToolBar = null!;
+
     public WpfDesktopForm(
         Naps2Config config,
         DesktopKeyboardShortcuts keyboardShortcuts,
@@ -29,5 +50,176 @@ public class WpfDesktopForm : DesktopForm
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider)
     {
+        this.ToNative().SizeChanged += (_, e) =>
+        {
+            if (e.WidthChanged) _toolbarFormatter.RelayoutToolbar(_mainToolBar);
+        };
+        Load += (_, _) => colorScheme.ColorSchemeChanged += ColorSchemeChanged;
+        UnLoad += (_, _) => colorScheme.ColorSchemeChanged -= ColorSchemeChanged;
+        UpdateColors();
     }
+
+    private WpfListView<UiImage> WpfListView => (WpfListView<UiImage>) _listView;
+
+    private void ColorSchemeChanged(object? sender, EventArgs e) => this.ToNative().Dispatcher.Invoke(UpdateColors);
+
+    private void UpdateColors()
+    {
+        _toolbarBorder.BorderBrush = _colorScheme.SeparatorColor.ToWpfBrush();
+    }
+
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        PlaceProfilesToolbar();
+        // Separator between the sidebar and the listview
+        WpfListView.NativeControl.BorderThickness = new Thickness(1, 0, 0, 0);
+        WpfListView.NativeControl.Focus();
+    }
+
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        this.ToNative().SizeToContent = SizeToContent.Manual;
+        _toolbarFormatter.RelayoutToolbar(_mainToolBar);
+    }
+
+    protected override void RecreateToolbarsAndMenus()
+    {
+        _toolbarFormatter.Clear();
+        base.RecreateToolbarsAndMenus();
+        _toolbarFormatter.RelayoutToolbar(_mainToolBar);
+    }
+
+    protected override void ConfigureToolbars()
+    {
+        _mainToolBar = (ToolBar) ToolBar.ControlObject;
+        ToolBarTray.SetIsLocked(_profilesToolBar, true);
+
+        var holder = (ContentControl) _mainToolBar.Parent;
+        holder.Content = null;
+        _toolbarBorder.Child = new StackPanel { Children = { _mainToolBar, _profilesToolBar } };
+        holder.Content = _toolbarBorder;
+    }
+
+    public override void PlaceProfilesToolbar()
+    {
+        _profilesToolBar.Visibility =
+            Config.Get(c => c.ShowProfilesToolbar) ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    protected override void UpdateProfilesToolbar()
+    {
+        _profilesToolBar.Items.Clear();
+        foreach (var profile in _profileManager.Profiles)
+        {
+            var (content, image, _) = _toolbarFormatter.CreateButtonContent(profile.DisplayName, false);
+            SetIcon(image, scale => _iconProvider.GetIcon("control_play_blue_small", scale));
+            var button = _toolbarFormatter.CreateProfileButton(content);
+            button.Click += (_, _) => _desktopScanController.ScanWithProfile(profile);
+            _profilesToolBar.Items.Add(button);
+        }
+    }
+
+    protected override void SetThumbnailSpacing(int thumbnailSize, float scale)
+    {
+        const int MIN_PADDING = 6;
+        const int MAX_PADDING = 66;
+        // Linearly scale the padding with the thumbnail size
+        int padding = MIN_PADDING + (MAX_PADDING - MIN_PADDING) * (thumbnailSize - ThumbnailSizes.MIN_SIZE) /
+            (ThumbnailSizes.MAX_SIZE - ThumbnailSizes.MIN_SIZE);
+        WpfListView.ItemMargin = new Thickness(padding / 2.0);
+    }
+
+    protected override void CreateToolbarButton(Command command)
+    {
+        var button = _toolbarFormatter.CreateLargeButton(CreateButtonContent(command, true));
+        button.BindCommand(command);
+        _mainToolBar.Items.Add(button);
+    }
+
+    protected override void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
+        MenuProvider menu)
+    {
+        // WPF has no split button, so we put a regular button next to a narrow dropdown button
+        var mainButton = _toolbarFormatter.CreateLargeButton(
+            CreateButtonContent(command, true), isSplit: true);
+        mainButton.BindCommand(command);
+        var arrowButton = _toolbarFormatter.CreateArrowButton();
+        AutomationProperties.SetName(arrowButton, command.ToolBarText);
+        var group = new StackPanel { Orientation = Orientation.Horizontal, Children = { mainButton, arrowButton } };
+        var contextMenu = menu.ToWpfContextMenu(this);
+        arrowButton.Click += (_, _) => ShowMenu(group, contextMenu);
+        arrowButton.BindEnabled(command);
+        _menus[menuType] = (group, contextMenu);
+        _mainToolBar.Items.Add(group);
+    }
+
+    protected override void CreateToolbarMenu(Command command, MenuProvider menu)
+    {
+        var button = _toolbarFormatter.CreateLargeButton(CreateButtonContent(command, true));
+        var contextMenu = menu.ToWpfContextMenu(this);
+        button.Click += (_, _) => ShowMenu(button, contextMenu);
+        AutomationProperties.SetName(button, command.ToolBarText);
+        button.BindEnabled(command);
+        _mainToolBar.Items.Add(button);
+    }
+
+    protected override void CreateToolbarStackedButtons(Command command1, Command command2)
+    {
+        _mainToolBar.Items.Add(new StackPanel
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            Children = { CreateStackedButton(command1), CreateStackedButton(command2) }
+        });
+    }
+
+    private Button CreateStackedButton(Command command)
+    {
+        var button = _toolbarFormatter.CreateStackedButton(CreateButtonContent(command, false));
+        button.BindCommand(command);
+        return button;
+    }
+
+    protected override void CreateToolbarSeparator()
+    {
+        _mainToolBar.Items.Add(new Separator());
+    }
+
+    public override void ShowToolbarMenu(DesktopToolbarMenuType menuType)
+    {
+        if (_menus.TryGetValue(menuType, out var menu))
+        {
+            ShowMenu(menu.target, menu.menu);
+        }
+    }
+
+    private static void ShowMenu(FrameworkElement target, ContextMenu menu)
+    {
+        menu.PlacementTarget = target;
+        menu.Placement = PlacementMode.Bottom;
+        menu.IsOpen = true;
+        // Clicking the button while the menu is open should only close the menu, so while it's open, clicks go through
+        // the button (closing the menu as with any outside click) instead of re-opening it
+        target.IsHitTestVisible = false;
+        menu.Closed += OnClosed;
+
+        void OnClosed(object sender, RoutedEventArgs e)
+        {
+            target.IsHitTestVisible = true;
+            menu.Closed -= OnClosed;
+        }
+    }
+
+    private FrameworkElement CreateButtonContent(Command command, bool large)
+    {
+        var (content, image, label) = _toolbarFormatter.CreateButtonContent(command.ToolBarText, large);
+        var actionCommand = (ActionCommand) command;
+        SetIcon(image, actionCommand.GetIconImage);
+        actionCommand.TextChanged += (_, _) => label.Text = command.ToolBarText;
+        return content;
+    }
+
+    private void SetIcon(Image image, Func<float, Eto.Drawing.Image?> getIcon) =>
+        EtoPlatform.Current.AttachDpiDependency(this, scale => image.Source = getIcon(scale)?.ToWpf());
 }

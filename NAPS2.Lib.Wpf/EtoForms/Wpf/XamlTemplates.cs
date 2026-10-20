@@ -18,4 +18,15 @@ internal static class XamlTemplates
     /// </summary>
     public static ControlTemplate ThumbnailItemTemplate { get; } =
         (ControlTemplate) Templates["ThumbnailItemTemplate"]!;
+
+    /// <summary>
+    /// A minimal button template (content + rounded hover/pressed background using the Fluent "subtle" fills).
+    /// </summary>
+    public static ControlTemplate SubtleButtonTemplate { get; } =
+        (ControlTemplate) Templates["SubtleButtonTemplate"]!;
+
+    /// <summary>
+    /// A focus rectangle drawn inside the control's bounds, for controls at the edge of a clipping container.
+    /// </summary>
+    public static Style InsetFocusVisualStyle { get; } = (Style) Templates["InsetFocusVisualStyle"]!;
 }
