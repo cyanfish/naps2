@@ -78,6 +78,10 @@ public class WpfEtoPlatform : EtoPlatform
             {
                 CopyEtoStyle((SW.Style) etoDictionary[type]!, style);
             }
+            if (typeof(SWC.CheckBox).IsAssignableFrom(type) || typeof(SWC.RadioButton).IsAssignableFrom(type))
+            {
+                MakeToggleCompact(style);
+            }
             app.Resources[type] = style;
         }
     }
@@ -138,6 +142,53 @@ public class WpfEtoPlatform : EtoPlatform
         foreach (var trigger in etoStyle.Triggers)
         {
             style.Triggers.Add(trigger);
+        }
+    }
+
+    private static void MakeToggleCompact(SW.Style style)
+    {
+        // Check boxes and radio buttons are too big by default for NAPS2's layouts
+        style.Setters.Add(new SW.Setter(SW.FrameworkElement.MinHeightProperty, 0.0));
+        style.Setters.Add(new SW.Setter(SW.FrameworkElement.MinWidthProperty, 0.0));
+        style.Setters.Add(new SW.Setter(SWC.Control.PaddingProperty, new SW.Thickness(6, 0, 0, 0)));
+        style.Setters.Add(new SW.Setter(SWC.Control.VerticalContentAlignmentProperty, SW.VerticalAlignment.Center));
+        // Fallback for controls that aren't measured by our layout
+        style.Setters.Add(new SW.EventSetter(SW.FrameworkElement.LoadedEvent,
+            new SW.RoutedEventHandler((sender, _) => ApplyCompactToggleTemplate((SW.FrameworkElement) sender))));
+    }
+
+    private static void ApplyCompactToggleTemplate(SW.FrameworkElement native)
+    {
+        // The size of the checkbox square / radio button outer circle
+        const int boxSize = 16;
+        // The size of the check mark and the radio button inner dot
+        const int checkGlyphSize = 11;
+        const int radioGlyphSize = 10;
+
+        if (native is not (SWC.CheckBox or SWC.RadioButton)) return;
+        var toggle = (SWC.Control) native;
+        toggle.ApplyTemplate();
+        if (toggle.Template == null) return;
+        object? Part(string name) => toggle.Template.FindName(name, toggle);
+        if (Part("ControlBorderIconPresenter") is SW.FrameworkElement box)
+        {
+            box.Width = box.Height = boxSize;
+        }
+        if (Part("ControlIcon") is SWC.TextBlock checkGlyph)
+        {
+            // The check mark is a font glyph
+            checkGlyph.FontSize = checkGlyphSize;
+        }
+        if (Part("OuterEllipse") is SW.FrameworkElement { Parent: SWC.Grid { Parent: SWC.Grid rootGrid } ellipseGrid })
+        {
+            // Radio button: the circles are in a fixed-height cell in a fixed-width column
+            ellipseGrid.Height = double.NaN;
+            ellipseGrid.VerticalAlignment = SW.VerticalAlignment.Center;
+            rootGrid.ColumnDefinitions[0].Width = new SW.GridLength(boxSize);
+            foreach (var ellipse in ellipseGrid.Children.OfType<SW.Shapes.Ellipse>())
+            {
+                ellipse.Width = ellipse.Height = ellipse.Name == "CheckGlyph" ? radioGlyphSize : boxSize;
+            }
         }
     }
 
@@ -251,6 +302,7 @@ public class WpfEtoPlatform : EtoPlatform
     public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
     {
         var native = control.ToNative();
+        ApplyCompactToggleTemplate(native);
         try
         {
             native.Measure(new SW.Size(double.PositiveInfinity, double.PositiveInfinity));
