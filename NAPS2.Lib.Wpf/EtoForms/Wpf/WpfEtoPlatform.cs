@@ -5,10 +5,13 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.Wpf;
 using Eto.Wpf.Drawing;
+using Eto.Wpf.Forms;
+using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.Images.Wpf;
 using SW = System.Windows;
+using SWC = System.Windows.Controls;
 using SWM = System.Windows.Media;
 
 namespace NAPS2.EtoForms.Wpf;
@@ -73,26 +76,91 @@ public class WpfEtoPlatform : EtoPlatform
         return new WpfImage(bitmap);
     }
 
-    public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay) =>
-        throw new NotImplementedException();
+    private static FramePanel GetPanel(Control container) => (FramePanel) container.ControlObject;
 
-    public override Control CreateContainer() => throw new NotImplementedException();
+    public override Control CreateContainer() => new FramePanel { ClipToBounds = true }.ToEto();
 
-    public override void AddToContainer(Control container, Control control, bool inOverlay) =>
-        throw new NotImplementedException();
+    public override void AddToContainer(Control container, Control control, bool inOverlay)
+    {
+        // Signal Eto that it doesn't need to manage width/height
+        control.GetWpfFrameworkElement()?.SetScale(true, true);
+        var native = control.ToNative();
+        if (inOverlay)
+        {
+            // Keeps overlays above any non-overlay controls added later
+            SWC.Panel.SetZIndex(native, 1);
+        }
+        GetPanel(container).Children.Add(native);
+    }
 
-    public override void RemoveFromContainer(Control container, Control control) =>
-        throw new NotImplementedException();
+    public override void RemoveFromContainer(Control container, Control control)
+    {
+        GetPanel(container).Children.Remove(control.ToNative());
+    }
 
-    public override Control CreateScrollContainer() => throw new NotImplementedException();
+    public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
+    {
+        FramePanel.SetFrame(control.ToNative(), new SW.Rect(location.X, location.Y, size.Width, size.Height));
+    }
 
-    public override Control GetScrollContentContainer(Control scrollContainer) =>
-        throw new NotImplementedException();
+    public override SizeF GetPreferredSize(Control control, SizeF availableSpace)
+    {
+        var native = control.ToNative();
+        try
+        {
+            native.Measure(new SW.Size(double.PositiveInfinity, double.PositiveInfinity));
+            var desired = native.DesiredSize;
+            var availableWidth = ToMeasureLength(availableSpace.Width);
+            if (desired.Width > availableWidth && control is Label { Wrap: not WrapMode.None })
+            {
+                native.Measure(new SW.Size(availableWidth, double.PositiveInfinity));
+                desired = native.DesiredSize;
+            }
+            else if (control is Label or LinkButton or CheckBox or RadioButton)
+            {
+                // With layout rounding, the desired size can be rounded down (e.g. 145.3 -> 145), and Eto.Wpf's text
+                // in these controls wraps (and the second line is clipped) if it's even slightly too narrow
+                desired.Width += 1;
+            }
+            return new SizeF((float) Math.Ceiling(desired.Width), (float) Math.Ceiling(desired.Height));
+        }
+        finally
+        {
+            // Measure again at its frame size (if it has one) in the next layout pass
+            (SWM.VisualTreeHelper.GetParent(native) as SW.UIElement)?.InvalidateMeasure();
+        }
+    }
 
-    public override void SetScrollContentSize(Control scrollContainer, Size size) =>
-        throw new NotImplementedException();
+    private static double ToMeasureLength(float length) =>
+        length >= LayoutController.MAX_SIZE ? double.PositiveInfinity : Math.Max(length, 0);
 
-    public override int GetVerticalScrollBarWidth(Control scrollContainer) => throw new NotImplementedException();
+    public override Control CreateScrollContainer()
+    {
+        var scrollViewer = new SWC.ScrollViewer
+        {
+            VerticalScrollBarVisibility = SWC.ScrollBarVisibility.Auto,
+            HorizontalScrollBarVisibility = SWC.ScrollBarVisibility.Disabled,
+            Content = new FramePanel()
+        };
+        return scrollViewer.ToEto();
+    }
+
+    public override Control GetScrollContentContainer(Control scrollContainer)
+    {
+        var scrollViewer = (SWC.ScrollViewer) scrollContainer.ControlObject;
+        return ((FramePanel) scrollViewer.Content).ToEto();
+    }
+
+    public override void SetScrollContentSize(Control scrollContainer, Size size)
+    {
+        var scrollViewer = (SWC.ScrollViewer) scrollContainer.ControlObject;
+        var panel = (FramePanel) scrollViewer.Content;
+        panel.Width = size.Width;
+        panel.Height = size.Height;
+    }
+
+    public override int GetVerticalScrollBarWidth(Control scrollContainer) =>
+        (int) Math.Ceiling(SW.SystemParameters.VerticalScrollBarWidth);
 
     public override void ConfigureDonateButton(Button button) => throw new NotImplementedException();
 }
