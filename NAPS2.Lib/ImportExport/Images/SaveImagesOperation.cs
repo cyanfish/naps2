@@ -1,14 +1,20 @@
-﻿namespace NAPS2.ImportExport.Images;
+﻿using NAPS2.Ocr;
+using NAPS2.Scan;
+
+namespace NAPS2.ImportExport.Images;
 
 internal class SaveImagesOperation : OperationBase
 {
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly ImageContext _imageContext;
+    private readonly ScanningContext _scanningContext;
 
-    public SaveImagesOperation(IOverwritePrompt overwritePrompt, ImageContext imageContext)
+    public SaveImagesOperation(IOverwritePrompt overwritePrompt, ImageContext imageContext,
+        ScanningContext scanningContext)
     {
         _overwritePrompt = overwritePrompt;
         _imageContext = imageContext;
+        _scanningContext = scanningContext;
 
         ProgressTitle = MiscResources.SaveImagesProgress;
         AllowCancel = true;
@@ -27,8 +33,9 @@ internal class SaveImagesOperation : OperationBase
     /// <param name="overwriteFile"></param>
     /// <param name="batch"></param>
     /// <param name="imageSettings"></param>
+    /// <param name="ocrParams"></param>
     public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images,
-        ImageSettings imageSettings, string? overwriteFile = null, bool batch = false)
+        ImageSettings imageSettings, string? overwriteFile = null, bool batch = false, OcrParams? ocrParams = null)
     {
         Status = new OperationStatus
         {
@@ -110,6 +117,10 @@ internal class SaveImagesOperation : OperationBase
                         {
                             return false;
                         }
+                        if (!await SaveOcrTextIfRequested(image, subFileName, format, ocrParams))
+                        {
+                            return false;
+                        }
                         FirstFileSaved = subFileName;
                     }
                     else
@@ -119,6 +130,10 @@ internal class SaveImagesOperation : OperationBase
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                         InvokeStatusChanged();
                         if (!await SaveImageWithRetry(image, fileNameN, format, imageSettings))
+                        {
+                            return false;
+                        }
+                        if (!await SaveOcrTextIfRequested(image, fileNameN, format, ocrParams))
                         {
                             return false;
                         }
@@ -157,6 +172,36 @@ internal class SaveImagesOperation : OperationBase
             }
         }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
+        return true;
+    }
+
+    private async Task<bool> SaveOcrTextIfRequested(ProcessedImage image, string imagePath,
+        ImageFileFormat format, OcrParams? ocrParams)
+    {
+        if (format != ImageFileFormat.Jpeg || string.IsNullOrEmpty(ocrParams?.LanguageCode))
+        {
+            return true;
+        }
+        var ocrEngine = _scanningContext.OcrEngine ??
+                       throw new InvalidOperationException("OCR is enabled but no OCR engine is set.");
+        var tempImagePath = Path.Combine(_scanningContext.TempFolderPath,
+            Path.GetRandomFileName() + Path.GetExtension(imagePath));
+        if (!_scanningContext.OcrRequestQueue.HasCachedResult(ocrEngine, image, ocrParams))
+        {
+            File.Copy(imagePath, tempImagePath);
+        }
+        var ocrResult = await _scanningContext.OcrRequestQueue.Enqueue(_scanningContext, ocrEngine, image,
+            tempImagePath, ocrParams, OcrPriority.Foreground, CancelToken);
+        if (ocrResult == null)
+        {
+            if (CancelToken.IsCancellationRequested)
+            {
+                return false;
+            }
+            throw new InvalidOperationException($"OCR did not return text for {Path.GetFileName(imagePath)}.");
+        }
+        var text = string.Join(Environment.NewLine, ocrResult.Lines.Select(line => line.Text));
+        File.WriteAllText(Path.ChangeExtension(imagePath, ".txt"), text);
         return true;
     }
 
