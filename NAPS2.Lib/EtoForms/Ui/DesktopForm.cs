@@ -462,7 +462,7 @@ public abstract class DesktopForm : EtoFormBase
         return toggleSidebar.AlignTrailing();
     }
 
-    protected LayoutElement GetZoomButtons()
+    protected virtual LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
         EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small");

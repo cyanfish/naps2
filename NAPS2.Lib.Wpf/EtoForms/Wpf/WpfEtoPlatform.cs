@@ -1,4 +1,5 @@
 using System.Threading;
+using System.Windows.Automation;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -22,6 +23,7 @@ namespace NAPS2.EtoForms.Wpf;
 public class WpfEtoPlatform : EtoPlatform
 {
     private const int SMALL_BUTTON_PADDING = 7;
+    private const double ZOOM_BUTTON_OPACITY = 0.85;
 
     private static readonly Size MinImageButtonSize = new(75, 32);
 
@@ -264,6 +266,42 @@ public class WpfEtoPlatform : EtoPlatform
         var native = (SWC.Control) button.ToNative();
         native.BorderBrush = new SWM.SolidColorBrush(SWM.Color.FromRgb(0xfb, 0xad, 0x5f));
         native.BorderThickness = new SW.Thickness(2);
+    }
+
+    public override void ConfigureZoomButton(Button button, string icon)
+    {
+        var native = (SWC.Control) button.ToNative();
+        AutomationProperties.SetName(native, button.Text);
+        button.Text = "";
+        button.Size = new Size(32, 32);
+        native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING);
+        native.MinWidth = native.MinHeight = 0;
+        SetIconProps(button, 16);
+        AttachDpiDependency(button, scale => button.Image = IconProvider.GetIcon(icon, scale));
+        // These buttons are over the thumbnails, so make them (mostly) opaque, with a higher contrast border
+        void UpdateBackground(object? sender, EventArgs e) => SetOpaqueButtonBackground(native);
+        SetOpaqueButtonBackground(native);
+        native.Loaded += (_, _) => ColorScheme.ColorSchemeChanged += UpdateBackground;
+        native.Unloaded += (_, _) => ColorScheme.ColorSchemeChanged -= UpdateBackground;
+    }
+
+    private static void SetOpaqueButtonBackground(SWC.Control native)
+    {
+        // Look up the theme brushes from the application, as the button's own resources have the previous overrides
+        var app = SW.Application.Current;
+        var back = ((SWM.SolidColorBrush) app.FindResource("SolidBackgroundFillColorBaseBrush")!).Color;
+        var border = app.FindResource("ControlStrongStrokeColorDefaultBrush");
+        foreach (var state in new[] { "", "PointerOver", "Pressed", "Disabled" })
+        {
+            var fore = ((SWM.SolidColorBrush) app.FindResource($"ButtonBackground{state}")!).Color;
+            double a = fore.A / 255.0;
+            byte Blend(byte f, byte b) => (byte) Math.Round(f * a + b * (1 - a));
+            var brush = new SWM.SolidColorBrush(SWM.Color.FromArgb((byte) Math.Round(255 * ZOOM_BUTTON_OPACITY),
+                Blend(fore.R, back.R), Blend(fore.G, back.G), Blend(fore.B, back.B)));
+            brush.Freeze();
+            native.Resources[$"ButtonBackground{state}"] = brush;
+            native.Resources[$"ButtonBorderBrush{state}"] = border;
+        }
     }
 
     public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToBitmapSource()));

@@ -5,6 +5,7 @@ using System.Windows.Controls.Primitives;
 using Eto.Forms;
 using Eto.Wpf;
 using NAPS2.EtoForms.Desktop;
+using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.Wpf;
@@ -153,6 +154,21 @@ public class WpfDesktopForm : DesktopForm
         arrowButton.BindEnabled(command);
         _menus[menuType] = (group, contextMenu);
         _mainToolBar.Items.Add(group);
+    }
+
+    protected override LayoutElement GetZoomButtons()
+    {
+        var zoomIn = C.ImageButton(Commands.ZoomIn);
+        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small");
+        var zoomOut = C.ImageButton(Commands.ZoomOut);
+        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small");
+        // Join the buttons into a single "pill", with one divider line (the border is translucent, so overlapping the
+        // buttons would make the divider darker)
+        zoomOut.ToNative().SetValue(Border.CornerRadiusProperty, new CornerRadius(4, 0, 0, 4));
+        var zoomInNative = (System.Windows.Controls.Control) zoomIn.ToNative();
+        zoomInNative.SetValue(Border.CornerRadiusProperty, new CornerRadius(0, 4, 4, 0));
+        zoomInNative.BorderThickness = new Thickness(0, 1, 1, 1);
+        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(0);
     }
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
