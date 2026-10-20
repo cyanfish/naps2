@@ -1,4 +1,5 @@
 using System.Threading;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Eto.Drawing;
@@ -10,6 +11,8 @@ using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
 using NAPS2.Images.Wpf;
+using MouseEventArgs = Eto.Forms.MouseEventArgs;
+using Keyboard = System.Windows.Input.Keyboard;
 using SW = System.Windows;
 using SWC = System.Windows.Controls;
 using SWM = System.Windows.Media;
@@ -213,6 +216,86 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override int GetVerticalScrollBarWidth(Control scrollContainer) =>
         (int) Math.Ceiling(SW.SystemParameters.VerticalScrollBarWidth);
+
+    public override void InitForm(Window window)
+    {
+        if (window is IFormBase form)
+        {
+            form.LayoutController.Container.ToNative().SizeChanged += (_, _) => form.LayoutController.Invalidate();
+        }
+    }
+
+    public override Size GetClientSize(Window window, bool excludeToolbars = false)
+    {
+        if (excludeToolbars && window is IFormBase form && form.LayoutController.Container.ToNative() is
+                { IsLoaded: true, ActualWidth: > 0, ActualHeight: > 0 } container)
+        {
+            return new Size((int) container.ActualWidth, (int) container.ActualHeight);
+        }
+        return base.GetClientSize(window, excludeToolbars);
+    }
+
+    public override float GetScaleFactor(Window? window)
+    {
+        var native = window?.ToNative();
+        return native == null ? 1f : (float) SWM.VisualTreeHelper.GetDpi(native).DpiScaleX;
+    }
+
+    public override void AttachDpiDependency(Control control, Action<float> callback)
+    {
+        var native = control is Window window ? window.ToNative() : control.ToNative();
+
+        void Update() => callback((float) SWM.VisualTreeHelper.GetDpi(native).DpiScaleX);
+        void OnDpiChanged(object? sender, SW.DpiChangedEventArgs e) => Update();
+
+        Update();
+        native.Loaded += (_, _) =>
+        {
+            Update();
+            if (SW.Window.GetWindow(native) is { } nativeWindow)
+            {
+                nativeWindow.DpiChanged -= OnDpiChanged;
+                nativeWindow.DpiChanged += OnDpiChanged;
+            }
+        };
+    }
+
+    public override void HandleKeyDown(Control control, Func<Keys, bool> handle)
+    {
+        void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            var key = e.Key == Key.System ? e.SystemKey : e.Key;
+            e.Handled = handle(key.ToEtoWithModifier(Keyboard.Modifiers));
+        }
+
+        if (control is Window window)
+        {
+            window.ToNative().KeyDown += OnKeyDown;
+        }
+        else
+        {
+            // Use the preview event so controls don't handle keys first
+            control.ToNative().PreviewKeyDown += OnKeyDown;
+        }
+    }
+
+    public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
+    {
+        var native = control.ToNative();
+        // Use the preview event so the ListBox's ScrollViewer doesn't swallow it first
+        native.PreviewMouseWheel += (sender, e) =>
+        {
+            var args = e.ToEto(native);
+            eventHandler(sender, args);
+            e.Handled = args.Handled;
+        };
+    }
+
+    public override void AttachMouseMoveEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
+    {
+        var native = control.ToNative();
+        native.MouseMove += (sender, e) => eventHandler(sender, e.ToEto(native));
+    }
 
     public override void ConfigureDonateButton(Button button) => throw new NotImplementedException();
 }
