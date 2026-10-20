@@ -18,6 +18,10 @@ namespace NAPS2.EtoForms.Wpf;
 
 public class WpfEtoPlatform : EtoPlatform
 {
+    private const int SMALL_BUTTON_PADDING = 7;
+
+    private static readonly Size MinImageButtonSize = new(75, 32);
+
     public override bool IsWpf => true;
 
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
@@ -49,8 +53,57 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override ISettingsNavigator CreateSettingsNavigator() => throw new NotImplementedException();
 
-    public override void ConfigureImageButton(Button button, ButtonFlags flags) =>
-        throw new NotImplementedException();
+    public override void ConfigureImageButton(Button button, ButtonFlags flags)
+    {
+        var native = (SWC.Control) button.ToNative();
+        if (string.IsNullOrEmpty(button.Text))
+        {
+            native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING - 1, SMALL_BUTTON_PADDING,
+                SMALL_BUTTON_PADDING - 1, SMALL_BUTTON_PADDING);
+            SetIconProps(button, 16);
+        }
+        else
+        {
+            native.Padding = new SW.Thickness(14, 5, 16, 6);
+            button.MinimumSize = MinImageButtonSize;
+            int iconSize = flags.HasFlag(ButtonFlags.LargeIcon) ? 32 : 16;
+            if (button.ImagePosition == ButtonImagePosition.Left && iconSize == 16)
+            {
+                SetIconProps(button, iconSize,
+                    new SW.Setter(SW.FrameworkElement.MarginProperty, new SW.Thickness(0, 2, 4, 0)),
+                    new SW.Setter(SW.FrameworkElement.VerticalAlignmentProperty, SW.VerticalAlignment.Top));
+            }
+            else if (button.ImagePosition == ButtonImagePosition.Left)
+            {
+                SetIconProps(button, iconSize,
+                    new SW.Setter(SW.FrameworkElement.MarginProperty, new SW.Thickness(0, 0, 4, 0)));
+            }
+            else
+            {
+                // Eto top-aligns the content, so center it for buttons taller than their natural height
+                native.VerticalContentAlignment = SW.VerticalAlignment.Center;
+                SetIconProps(button, iconSize);
+            }
+        }
+    }
+
+    private static void SetIconProps(Button button, int size, params SW.Setter[] extraSetters)
+    {
+        var style = new SW.Style(typeof(SWC.Image))
+        {
+            Setters =
+            {
+                new SW.Setter(SW.FrameworkElement.WidthProperty, (double) size),
+                new SW.Setter(SW.FrameworkElement.HeightProperty, (double) size),
+                new SW.Setter(SWM.RenderOptions.BitmapScalingModeProperty, SWM.BitmapScalingMode.HighQuality)
+            }
+        };
+        foreach (var setter in extraSetters)
+        {
+            style.Setters.Add(setter);
+        }
+        button.ToNative().Resources[typeof(SWC.Image)] = style;
+    }
 
     public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToBitmapSource()));
 
