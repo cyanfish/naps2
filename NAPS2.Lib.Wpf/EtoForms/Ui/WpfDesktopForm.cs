@@ -115,6 +115,11 @@ public class WpfDesktopForm : DesktopForm
             Config.Get(c => c.ShowProfilesToolbar) ? Visibility.Visible : Visibility.Collapsed;
     }
 
+    public override void UpdateListView()
+    {
+        WpfListView.Update();
+    }
+
     protected override void UpdateProfilesToolbar()
     {
         _profilesToolBar.Items.Clear();

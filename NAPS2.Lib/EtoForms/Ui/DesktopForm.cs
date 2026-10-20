@@ -430,6 +430,8 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
+    public virtual void UpdateListView() => Invalidate();
+
     protected virtual void CreateToolbarButton(Command command) => throw new InvalidOperationException();
 
     protected virtual void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,

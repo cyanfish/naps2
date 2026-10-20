@@ -49,8 +49,7 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
             TextAlignment = TextAlignment.Center,
             TextTrimming = TextTrimming.CharacterEllipsis,
             TextWrapping = behavior.ShowLabels ? TextWrapping.Wrap : TextWrapping.NoWrap,
-            Margin = new Thickness(0, PAGE_NUMBER_PADDING, 0, 0),
-            Visibility = behavior.ShowLabels || behavior.ShowPageNumbers ? Visibility.Visible : Visibility.Collapsed
+            Margin = new Thickness(0, PAGE_NUMBER_PADDING, 0, 0)
         };
         // The label goes at the bottom, with the image centered in the remaining space
         DockPanel.SetDock(_label, Dock.Bottom);
@@ -71,8 +70,17 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
             BorderThickness = new Thickness(1);
             Selected += (_, _) => UpdateVisuals();
             Unselected += (_, _) => UpdateVisuals();
+        }
+        Update();
+    }
+
+    public void Update()
+    {
+        _label.Visibility = _behavior.ShowLabels || _behavior.ShowPageNumbers ? Visibility.Visible : Visibility.Collapsed;
+        if (!_behavior.ShowLabels)
+        {
             // With page numbers, the selection box always fills the vertical space; otherwise we just center
-            VerticalAlignment = behavior.ShowPageNumbers ? VerticalAlignment.Stretch : VerticalAlignment.Center;
+            VerticalAlignment = _behavior.ShowPageNumbers ? VerticalAlignment.Stretch : VerticalAlignment.Center;
         }
         UpdateVisuals();
     }
@@ -121,8 +129,12 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
             Background = IsSelected ? colors.HighlightBackgroundColor.ToWpfBrush() : Brushes.Transparent;
             BorderBrush = IsSelected ? colors.HighlightBorderColor.ToWpfBrush() : Brushes.Transparent;
             _imageBorder.BorderBrush = IsSelected ? Brushes.Transparent : colors.ForegroundColor.ToWpfBrush();
+            _imageBorder.BorderThickness = new Thickness(BORDER_THICKNESS);
+            _imageBorder.Margin = new Thickness(0);
             return;
         }
+        Background = Brushes.Transparent;
+        BorderBrush = Brushes.Transparent;
         // Grow the border outwards so the image doesn't move
         int extra = SELECTED_BORDER_THICKNESS - BORDER_THICKNESS;
         _imageBorder.BorderBrush = IsSelected ? SelectedBorderBrush : colors.ForegroundColor.ToWpfBrush();

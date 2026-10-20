@@ -109,7 +109,7 @@ internal class GeneralSettingsPanel : SettingsPanel
         transact.SetIfChanged(Config, c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
 
-        _desktopFormProvider.DesktopForm.Invalidate();
+        _desktopFormProvider.DesktopForm.UpdateListView();
         _desktopFormProvider.DesktopForm.PlaceProfilesToolbar();
         if (themeChanged)
         {

@@ -137,6 +137,15 @@ public class WpfListView<T> : IListView<T> where T : notnull
         _refreshing = false;
     }
 
+    public void Update()
+    {
+        foreach (var listBoxItem in Items)
+        {
+            listBoxItem.Update();
+        }
+        UpdatePageNumbers();
+    }
+
     public void RegenerateImages()
     {
         if (_refreshing) return;
