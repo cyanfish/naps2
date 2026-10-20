@@ -48,8 +48,7 @@ public class WpfEtoPlatform : EtoPlatform
         }
     }
 
-    public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
-        throw new NotImplementedException();
+    public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) => new WpfListView<T>(behavior);
 
     public override ISettingsNavigator CreateSettingsNavigator() => throw new NotImplementedException();
 
