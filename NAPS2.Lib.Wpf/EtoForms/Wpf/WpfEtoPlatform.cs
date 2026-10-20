@@ -48,6 +48,96 @@ public class WpfEtoPlatform : EtoPlatform
         if (SW.Application.Current is { } app)
         {
             app.ThemeMode = ColorScheme.DarkMode ? SW.ThemeMode.Dark : SW.ThemeMode.Light;
+            ApplyFluentStylesToEtoControls(app);
+            MakeSplittersUnfocusable(app);
+        }
+    }
+
+    /// <summary>
+    /// Makes Eto.Wpf controls pick up the Fluent theme. There are two problems:
+    /// 1. Fluent provides implicit styles keyed by type (e.g. Button), which WPF only applies to that exact type, while
+    ///    Eto.Wpf uses its own subclasses (e.g. EtoButton).
+    /// 2. Eto's themes/generic.xaml (merged into the application resources) has its own implicit styles without BasedOn
+    ///    (e.g. for EtoButton, CheckBox, EtoFormWindow), which replace the Fluent styles entirely.
+    /// So for each Eto control type (and each type Eto styles), we add an application-level style based on the Fluent
+    /// style of the nearest base type, merged with Eto's own setters/triggers.
+    /// </summary>
+    private static void ApplyFluentStylesToEtoControls(SW.Application app)
+    {
+        var etoDictionaries = app.Resources.MergedDictionaries.Where(IsEtoDictionary).SelectMany(Flatten).ToList();
+        var themeDictionaries = app.Resources.MergedDictionaries.Where(d => !IsEtoDictionary(d)).Reverse().ToList();
+
+        var types = GetEtoControlTypes().Concat(etoDictionaries.SelectMany(d => d.Keys.OfType<Type>())).Distinct();
+        foreach (var type in types)
+        {
+            // Remove the style from any previous call (e.g. when the theme changes) so it isn't found as a theme style
+            app.Resources.Remove(type);
+            if (FindThemeStyle(themeDictionaries, type) is not { } themeStyle) continue;
+            var style = new SW.Style(type, themeStyle);
+            foreach (var etoDictionary in etoDictionaries.Where(d => d.Contains(type)))
+            {
+                CopyEtoStyle((SW.Style) etoDictionary[type]!, style);
+            }
+            app.Resources[type] = style;
+        }
+    }
+
+    private static void MakeSplittersUnfocusable(SW.Application app)
+    {
+        // The splitter randomly stealing focus when items are deleted is bad UX for the desktop form 
+        app.Resources.Remove(typeof(SWC.GridSplitter));
+        app.Resources[typeof(SWC.GridSplitter)] =
+            new SW.Style(typeof(SWC.GridSplitter), app.TryFindResource(typeof(SWC.GridSplitter)) as SW.Style)
+            {
+                Setters = { new SW.Setter(SW.UIElement.FocusableProperty, false) }
+            };
+    }
+
+    private static bool IsEtoDictionary(SW.ResourceDictionary dict) =>
+        dict.Source?.OriginalString.Contains("Eto.Wpf") == true;
+
+    private static IEnumerable<SW.ResourceDictionary> Flatten(SW.ResourceDictionary dict) =>
+        dict.MergedDictionaries.SelectMany(Flatten).Prepend(dict);
+
+    private static IEnumerable<Type> GetEtoControlTypes()
+    {
+        Type[] types;
+        try
+        {
+            types = typeof(Eto.Wpf.Platform).Assembly.GetTypes();
+        }
+        catch (System.Reflection.ReflectionTypeLoadException ex)
+        {
+            // Optional dependencies aren't present
+            types = ex.Types.OfType<Type>().ToArray();
+        }
+        return types.Where(t =>
+            typeof(SW.FrameworkElement).IsAssignableFrom(t) && t is { IsAbstract: false, ContainsGenericParameters: false });
+    }
+
+    private static SW.Style? FindThemeStyle(List<SW.ResourceDictionary> themeDictionaries, Type type)
+    {
+        for (var t = type; t != null && t != typeof(SW.FrameworkElement); t = t.BaseType)
+        {
+            if (themeDictionaries.Select(d => d[t]).OfType<SW.Style>().FirstOrDefault() is { } style) return style;
+        }
+        return null;
+    }
+
+    private static void CopyEtoStyle(SW.Style etoStyle, SW.Style style)
+    {
+        foreach (var setter in etoStyle.Setters.OfType<SW.Setter>())
+        {
+            if (setter.Property == SWC.Control.BackgroundProperty || setter.Property == SWC.Control.PaddingProperty)
+            {
+                // Eto backgrounds and padding don't fit the Fluent look
+                continue;
+            }
+            style.Setters.Add(new SW.Setter(setter.Property, setter.Value, setter.TargetName));
+        }
+        foreach (var trigger in etoStyle.Triggers)
+        {
+            style.Triggers.Add(trigger);
         }
     }
 
