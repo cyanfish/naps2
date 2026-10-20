@@ -259,6 +259,13 @@ public class WpfEtoPlatform : EtoPlatform
         return L.Overlay(groupBox, L.Buffer(content, p, GROUP_BOX_HEADER_HEIGHT + p, p, p));
     }
 
+    public override void ConfigureDonateButton(Button button)
+    {
+        var native = (SWC.Control) button.ToNative();
+        native.BorderBrush = new SWM.SolidColorBrush(SWM.Color.FromRgb(0xfb, 0xad, 0x5f));
+        native.BorderThickness = new SW.Thickness(2);
+    }
+
     public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToBitmapSource()));
 
     public override IMemoryImage FromBitmap(Bitmap bitmap) => new WpfImage(bitmap.ToWpf());
@@ -449,6 +456,4 @@ public class WpfEtoPlatform : EtoPlatform
         var native = control.ToNative();
         native.MouseMove += (sender, e) => eventHandler(sender, e.ToEto(native));
     }
-
-    public override void ConfigureDonateButton(Button button) => throw new NotImplementedException();
 }
