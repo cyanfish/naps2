@@ -69,7 +69,7 @@ public class PageSizeForm : EtoDialogBase
             C.Label(UiStrings.NameOptional),
             L.Row(
                 _name.Scale().NaturalWidth(200).AlignCenter(),
-                C.Button(DeletePageSizeCommand, ButtonImagePosition.Overlay).AlignCenter().Width(30)
+                C.Button(DeletePageSizeCommand, ButtonImagePosition.Overlay).AlignCenter()
             ),
             C.Spacer(),
             C.Label(UiStrings.Dimensions),
