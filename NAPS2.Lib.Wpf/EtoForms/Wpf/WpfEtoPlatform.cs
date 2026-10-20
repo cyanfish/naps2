@@ -248,6 +248,17 @@ public class WpfEtoPlatform : EtoPlatform
         button.ToNative().Resources[typeof(SWC.Image)] = style;
     }
 
+    private const int GROUP_BOX_HEADER_HEIGHT = 26;
+    private const int GROUP_BOX_PADDING = 8;
+
+    public override LayoutElement CreateGroupBox(string title, LayoutElement content)
+    {
+        var groupBox = new GroupBox { Text = title };
+        ((SWC.GroupBox) groupBox.ControlObject).Template = XamlTemplates.CardGroupBoxTemplate;
+        int p = GROUP_BOX_PADDING;
+        return L.Overlay(groupBox, L.Buffer(content, p, GROUP_BOX_HEADER_HEIGHT + p, p, p));
+    }
+
     public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToBitmapSource()));
 
     public override IMemoryImage FromBitmap(Bitmap bitmap) => new WpfImage(bitmap.ToWpf());

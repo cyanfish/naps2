@@ -29,4 +29,9 @@ internal static class XamlTemplates
     /// A focus rectangle drawn inside the control's bounds, for controls at the edge of a clipping container.
     /// </summary>
     public static Style InsetFocusVisualStyle { get; } = (Style) Templates["InsetFocusVisualStyle"]!;
+
+    /// <summary>
+    /// A group box template with the header above a rounded border.
+    /// </summary>
+    public static ControlTemplate CardGroupBoxTemplate { get; } = (ControlTemplate) Templates["CardGroupBoxTemplate"]!;
 }

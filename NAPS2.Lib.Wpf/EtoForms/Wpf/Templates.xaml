@@ -30,6 +30,19 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!-- The Fluent GroupBox has no border, so this puts the header above a rounded "card" border. The header height
+         must match GROUP_BOX_HEADER_HEIGHT in WpfEtoPlatform. -->
+    <ControlTemplate x:Key="CardGroupBoxTemplate" TargetType="GroupBox">
+        <DockPanel>
+            <ContentPresenter DockPanel.Dock="Top" Height="26" Margin="2,0,0,0" ContentSource="Header"
+                              RecognizesAccessKey="True" />
+            <Border CornerRadius="4" BorderThickness="1" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}">
+                <ContentPresenter />
+            </Border>
+        </DockPanel>
+    </ControlTemplate>
+
     <!-- A Fluent-like focus rectangle drawn inside the button (the default one extends outside, which gets clipped at
          the edges of the toolbar) -->
     <Style x:Key="InsetFocusVisualStyle">
