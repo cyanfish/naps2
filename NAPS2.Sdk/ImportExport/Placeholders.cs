@@ -4,7 +4,8 @@ using System.Text.RegularExpressions;
 namespace NAPS2.ImportExport;
 
 /// <summary>
-/// Class for handling substitution of special values in strings like file paths or PDF metadata. For example, "$(YYYY)" can be substituted with the current year.
+/// Class for handling substitution of special values in file paths. For example, "$(YYYY)" can be substituted with the current year.
+/// The $(barcode) placeholder uses the barcode that separated the current document.
 /// Use Placeholders.All for recommended substitutions. Alternatively, you can use Placeholders.Env or Placeholders.None if you prefer.
 /// </summary>
 internal abstract class Placeholders
@@ -20,6 +21,7 @@ internal abstract class Placeholders
     public const string NUMBER_3_DIGITS = "$(nnn)";
     public const string NUMBER_2_DIGITS = "$(nn)";
     public const string NUMBER_1_DIGIT = "$(n)";
+    public const string BARCODE = "$(barcode)";
     public const string FULL_DATE = "$(YYYY)-$(MM)-$(DD)";
     public const string FULL_TIME = "$(hh)_$(mm)_$(ss)";
 
@@ -51,21 +53,22 @@ internal abstract class Placeholders
     /// <param name="incrementIfExists">If the input is a file path, whether to use an auto-incrementing file number to make the file name unique.</param>
     /// <param name="numberSkip">The file number will be at least one bigger than this value.</param>
     /// <param name="autoNumberDigits">If the input is a file path, the minimum number of digits in the file number. Only has an effect if the input does not contain a numeric placeholder like $(n) or $(nnn).</param>
+    /// <param name="barcodeValue">The value to use for the $(barcode) placeholder.</param>
     /// <returns>The input with substitutions.</returns>
     [return: NotNullIfNotNull("input")]
     public abstract string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
-        int autoNumberDigits = 0);
+        int autoNumberDigits = 0, string? barcodeValue = null);
 
     public class StubPlaceholders : Placeholders
     {
         public override string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0) => input;
+            int autoNumberDigits = 0, string? barcodeValue = null) => input;
     }
 
     public class EnvironmentPlaceholders : Placeholders
     {
         public override string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0)
+            int autoNumberDigits = 0, string? barcodeValue = null)
         {
             if (input == null) return null;
             return Environment.ExpandEnvironmentVariables(input);
@@ -90,11 +93,14 @@ internal abstract class Placeholders
 
         private readonly DateTime? _dateTimeOverride;
         private readonly bool _includeNumeric;
+        private readonly bool _filterBarcode;
 
-        public DefaultPlaceholders(DateTime? dateTimeOverride = null, bool includeNumeric = true)
+        public DefaultPlaceholders(DateTime? dateTimeOverride = null, bool includeNumeric = true,
+            bool filterBarcode = true)
         {
             _dateTimeOverride = dateTimeOverride;
             _includeNumeric = includeNumeric;
+            _filterBarcode = filterBarcode;
         }
 
         /// <summary>
@@ -102,11 +108,17 @@ internal abstract class Placeholders
         /// </summary>
         /// <param name="dateTime">The date and time to use.</param>
         /// <returns>The new DefaultPlaceholders object.</returns>
-        public DefaultPlaceholders WithDate(DateTime dateTime) => new(dateTime, _includeNumeric);
+        public DefaultPlaceholders WithDate(DateTime dateTime) => new(dateTime, _includeNumeric, _filterBarcode);
+
+        /// <summary>
+        /// Creates a copy that optionally replaces filename-invalid characters in barcode values with underscores.
+        /// </summary>
+        public DefaultPlaceholders WithBarcodeFilter(bool filterBarcode) =>
+            new(_dateTimeOverride, _includeNumeric, filterBarcode);
 
         [return: NotNullIfNotNull("input")]
         public override string? Substitute(string? input, bool incrementIfExists = true, int numberSkip = 0,
-            int autoNumberDigits = 0)
+            int autoNumberDigits = 0, string? barcodeValue = null)
         {
             if (input == null)
             {
@@ -136,7 +148,20 @@ internal abstract class Placeholders
                 }
             }
 
+            if (barcodeValue != null)
+            {
+                string value = _filterBarcode ? SanitizeBarcodeValue(barcodeValue) : barcodeValue;
+                result = result.Replace(BARCODE, value, StringComparison.Ordinal);
+            }
+
             return result;
+        }
+
+        private static string SanitizeBarcodeValue(string value)
+        {
+            const string invalidChars = "<>:\"/\\|?*";
+            return new string(value.Select(c =>
+                char.IsControl(c) || invalidChars.Contains(c) ? '_' : c).ToArray());
         }
 
         private string SubstituteNumber(string path, int insertionIndex, int minDigits, int skip,

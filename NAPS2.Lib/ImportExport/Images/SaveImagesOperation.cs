@@ -28,7 +28,7 @@ internal class SaveImagesOperation : OperationBase
     /// <param name="batch"></param>
     /// <param name="imageSettings"></param>
     public bool Start(string fileName, Placeholders placeholders, IList<ProcessedImage> images,
-        ImageSettings imageSettings, string? overwriteFile = null, bool batch = false)
+        ImageSettings imageSettings, string? overwriteFile = null, bool batch = false, string? barcodeValue = null)
     {
         Status = new OperationStatus
         {
@@ -39,7 +39,7 @@ internal class SaveImagesOperation : OperationBase
         {
             try
             {
-                var subFileName = placeholders.Substitute(fileName, batch);
+                var subFileName = placeholders.Substitute(fileName, batch, barcodeValue: barcodeValue);
                 if (Directory.Exists(subFileName))
                 {
                     // Not supposed to be a directory, but ok...
@@ -115,7 +115,7 @@ internal class SaveImagesOperation : OperationBase
                     else
                     {
                         var fileNameN = placeholders.Substitute(fileName, true, i,
-                            digits);
+                                digits, barcodeValue);
                         Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNameN));
                         InvokeStatusChanged();
                         if (!await SaveImageWithRetry(image, fileNameN, format, imageSettings))

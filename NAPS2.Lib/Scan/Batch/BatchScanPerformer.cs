@@ -83,6 +83,10 @@ public class BatchScanPerformer : IBatchScanPerformer
             {
                 DetectPatchT = _settings.OutputType == BatchOutputType.MultipleFiles &&
                                _settings.SaveSeparator == SaveSeparator.PatchT,
+                BarcodeSeparatorOptions = _settings.OutputType == BatchOutputType.MultipleFiles &&
+                                          _settings.SaveSeparator == SaveSeparator.Barcode
+                    ? _settings.BarcodeSeparatorOptions
+                    : null,
                 NoUI = true,
                 NoAutoSave = _config.Get(c => c.DisableAutoSave),
                 OcrParams = _settings.OutputType == BatchOutputType.Load
@@ -249,7 +253,8 @@ public class BatchScanPerformer : IBatchScanPerformer
             else if (_settings.OutputType == BatchOutputType.MultipleFiles)
             {
                 int i = 0;
-                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator))
+                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator,
+                             barcodeSeparatorOptions: _settings.BarcodeSeparatorOptions))
                 {
                     await Save(placeholders, i++, imageList);
                     foreach (var img in imageList)

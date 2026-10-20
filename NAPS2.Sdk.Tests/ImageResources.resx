@@ -226,6 +226,15 @@
   <data name="image_upc_barcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\image_upc_barcode.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="barcodes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\barcodes.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="barcode_code128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\barcode_code128.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="barcode_code39" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\barcode_code39.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dog_low_quality" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_low_quality.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
