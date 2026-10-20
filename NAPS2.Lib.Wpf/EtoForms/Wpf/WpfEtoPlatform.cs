@@ -27,7 +27,7 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override bool IsWpf => true;
 
-    public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
+    public override IIconProvider IconProvider { get; } = new FluentIconProvider(new DefaultIconProvider());
 
     public override IDarkModeProvider DarkModeProvider { get; } = new WindowsDarkModeProvider();
 
