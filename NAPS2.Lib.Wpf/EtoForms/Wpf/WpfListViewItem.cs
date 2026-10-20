@@ -52,7 +52,9 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
             Margin = new Thickness(0, PAGE_NUMBER_PADDING, 0, 0),
             Visibility = behavior.ShowLabels || behavior.ShowPageNumbers ? Visibility.Visible : Visibility.Collapsed
         };
-        Content = new StackPanel { Children = { _imageHost, _label } };
+        // The label goes at the bottom, with the image centered in the remaining space
+        DockPanel.SetDock(_label, Dock.Bottom);
+        Content = new DockPanel { Children = { _label, _imageHost } };
         Cursor = behavior.UseHandCursor ? Cursors.Hand : null;
         // Keyboard focus is already clear enough from the selection
         FocusVisualStyle = null;
@@ -69,6 +71,8 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
             BorderThickness = new Thickness(1);
             Selected += (_, _) => UpdateVisuals();
             Unselected += (_, _) => UpdateVisuals();
+            // With page numbers, the selection box always fills the vertical space; otherwise we just center
+            VerticalAlignment = behavior.ShowPageNumbers ? VerticalAlignment.Stretch : VerticalAlignment.Center;
         }
         UpdateVisuals();
     }
@@ -100,6 +104,11 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
         double scale = Math.Min(imageSize.Width / source.Width, imageSize.Height / source.Height);
         _image.Width = Math.Round(source.Width * scale);
         _image.Height = Math.Round(source.Height * scale);
+        if (_behavior.ShowLabels) return;
+        // Shrink thumbnails around the image (plus its border)
+        _imageHost.Width = _image.Width + 2 * BORDER_THICKNESS;
+        _imageHost.Height = _image.Height + 2 * BORDER_THICKNESS;
+        _label.MaxWidth = Math.Max(_imageHost.Width, imageSize.Width / 2.0);
     }
 
     public void UpdateVisuals()
