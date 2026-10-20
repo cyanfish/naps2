@@ -425,8 +425,23 @@ public class WpfEtoPlatform : EtoPlatform
         // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var native = window.ToNative();
         var interop = new SW.Interop.WindowInteropHelper(native);
-        native.SourceInitialized += (_, _) => WindowCloaking.SetCloaked(interop.Handle, true);
+        native.SourceInitialized += (_, _) =>
+        {
+            WindowCloaking.SetCloaked(interop.Handle, true);
+            UndoBlurBehind(interop.Handle);
+        };
         native.ContentRendered += (_, _) => WindowCloaking.SetCloaked(interop.Handle, false);
+    }
+
+    private static void UndoBlurBehind(IntPtr hwnd)
+    {
+        // Fix compat between Eto and the WPF Fluent theme for maximized windows
+        const uint DWM_BB_ENABLE = 0x1;
+        const int DWMWA_TRANSITIONS_FORCEDISABLED = 3;
+        var blurBehind = new Win32.DwmBlurBehind { dwFlags = DWM_BB_ENABLE, fEnable = false };
+        Win32.DwmEnableBlurBehindWindow(hwnd, ref blurBehind);
+        int transitionsDisabled = 0;
+        Win32.DwmSetWindowAttribute(hwnd, DWMWA_TRANSITIONS_FORCEDISABLED, ref transitionsDisabled, sizeof(int));
     }
 
     public override Size GetClientSize(Window window, bool excludeToolbars = false)
