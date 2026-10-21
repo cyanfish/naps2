@@ -133,7 +133,7 @@ public class DeviceSelectorWidget
     private void UpdateDeviceIconImage()
     {
         float scale = EtoPlatform.Current.GetScaleFactor((Window) _parentWindow);
-        _deviceIcon.Image = _deviceIconImage ?? _iconProvider.GetIcon(_deviceIconName, scale);
+        _deviceIcon.Image = _deviceIconImage ?? _iconProvider.GetIcon(_deviceIconName, IconScenario.Inline32, scale);
         var size = _deviceIconImage != null ? new SizeF(48, 48) : new SizeF(32, 32);
         _deviceIcon.Size = Size.Round(size * EtoPlatform.Current.GetLayoutScaleFactor((Window) _parentWindow));
     }
@@ -157,7 +157,7 @@ public class DeviceSelectorWidget
                 // TODO: We can consider a compact choose-device button for the sidebar, but maybe simpler to force
                 // creation of separate profiles
                 ShowChooseDevice ? _chooseDevice.AlignCenter() : C.None()
-            )
-        );
+            ),
+            GroupBoxHeaderStyle.Regular);
     }
 }

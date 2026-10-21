@@ -17,6 +17,6 @@ public class SharedDevicesListViewBehavior : ListViewBehavior<SharedDevice>
     public override Image GetImage(IListView<SharedDevice> listView, SharedDevice item)
     {
         var scale = EtoPlatform.Current.GetScaleFactor(listView.Control.ParentWindow);
-        return EtoPlatform.Current.IconProvider.GetIcon("scanner_wireless_48", scale)!;
+        return EtoPlatform.Current.IconProvider.GetIcon("scanner_wireless", IconScenario.Inline48, scale)!;
     }
 }

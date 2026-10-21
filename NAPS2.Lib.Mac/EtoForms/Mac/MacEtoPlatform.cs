@@ -312,22 +312,27 @@ public class MacEtoPlatform : EtoPlatform
         native.Bordered = false;
     }
 
-    public override LayoutElement CreateGroupBox(string title, LayoutElement content)
+    public override void SetAccessibleName(Control control, string name) =>
+        control.ToNative().AccessibilityLabel = name;
+
+    public override LayoutElement CreateGroupBox(string title, LayoutElement content, GroupBoxHeaderStyle headerStyle)
     {
+        bool bold = headerStyle == GroupBoxHeaderStyle.Bold;
         var titleLabel = new Label
         {
             Text = title,
-            Font = NSFont.BoldSystemFontOfSize(12).ToEto()
+            Font = (bold ? NSFont.BoldSystemFontOfSize(12) : NSFont.SystemFontOfSize(12)).ToEto()
         };
         var groupBox = new GroupBox();
 
+        // Bold headers have a bit more spacing above them
         return L.Overlay(
             L.Column(
-                titleLabel.Padding(top: 8).SpacingAfter(6),
+                titleLabel.SpacingAfter(6),
                 groupBox.Scale()
             ),
-            L.Buffer(content, 6, 32, 6, 6)
-        );
+            L.Buffer(content, 6, 24, 6, 6)
+        ).SpacingBefore(bold ? 8 : 0);
     }
 
     public override void SetClientSize(Window window, Size clientSize)

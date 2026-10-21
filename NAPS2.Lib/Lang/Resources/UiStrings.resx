@@ -1083,4 +1083,40 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="MissingFileExtension" xml:space="preserve">
     <value>Missing file extension (e.g. ".pdf")</value>
   </data>
+  <data name="AlignLeft" xml:space="preserve">
+    <value>Align Left</value>
+  </data>
+  <data name="AlignCenter" xml:space="preserve">
+    <value>Align Center</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Align Right</value>
+  </data>
+  <data name="AlignTop" xml:space="preserve">
+    <value>Align Top</value>
+  </data>
+  <data name="AlignMiddle" xml:space="preserve">
+    <value>Align Middle</value>
+  </data>
+  <data name="AlignBottom" xml:space="preserve">
+    <value>Align Bottom</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Swap</value>
+  </data>
+  <data name="SplitVertically" xml:space="preserve">
+    <value>Split Vertically</value>
+  </data>
+  <data name="SplitHorizontally" xml:space="preserve">
+    <value>Split Horizontally</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="ToggleOrientation" xml:space="preserve">
+    <value>Toggle Orientation</value>
+  </data>
+  <data name="ToggleView" xml:space="preserve">
+    <value>Toggle View</value>
+  </data>
 </root>

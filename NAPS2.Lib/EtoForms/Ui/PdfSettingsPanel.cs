@@ -55,7 +55,7 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
 
     public override string Title => UiStrings.PdfSettings;
 
-    public override string IconName => "file_extension_pdf_small";
+    public override string IconName => "file_extension_pdf";
 
     protected override Expression<Func<CommonConfig, PdfSettings>> SettingsAccessor => c => c.PdfSettings;
 

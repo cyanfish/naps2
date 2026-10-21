@@ -11,6 +11,7 @@ using Eto.WinForms.Forms.ToolBar;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gdi;
+using NAPS2.Platform.Windows;
 using SD = System.Drawing;
 using WF = System.Windows.Forms;
 
@@ -134,7 +135,7 @@ public class WinFormsEtoPlatform : EtoPlatform
                 image.Height,
                 SD.GraphicsUnit.Pixel,
                 attrs);
-            using var hourglass = new SD.Bitmap(new MemoryStream(Icons.hourglass_grey));
+            using var hourglass = new SD.Bitmap(new MemoryStream(Icons.hourglass_grey_32));
             g.DrawImage(hourglass, new SD.Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
         }
         image.Dispose();
@@ -293,6 +294,20 @@ public class WinFormsEtoPlatform : EtoPlatform
         form.RightToLeftLayout = isRtl;
 
         form.DpiChanged += (_, _) => (window as IFormBase)?.LayoutController.Invalidate();
+
+        // Hide the window until it's fully laid out and painted, as WinForms shows it first (and maximizes it after)
+        bool shown = false;
+        form.HandleCreated += (_, _) =>
+        {
+            // The handle can be recreated later (e.g. if RightToLeft changes), but Shown is only fired once
+            if (!shown) WindowCloaking.SetCloaked(form.Handle, true);
+        };
+        window.Shown += (_, _) =>
+        {
+            shown = true;
+            WindowCloaking.PaintNow(form.Handle);
+            WindowCloaking.SetCloaked(form.Handle, false);
+        };
     }
 
     public override float GetScaleFactor(Window? window)
@@ -321,15 +336,17 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
     }
 
+    public override void SetAccessibleName(Control control, string name) =>
+        control.ToNative().AccessibleName = name;
+
     public override void ConfigureZoomButton(Button button, string icon)
     {
         AttachDpiDependency(button, scale =>
         {
             button.Size = new Size((int) (25 * scale), (int) (25 * scale));
-            button.Image = IconProvider.GetIcon(icon, scale);
+            button.Image = IconProvider.GetIcon(icon, IconScenario.Button, scale);
         });
         var wfButton = (WF.Button) button.ToNative();
-        wfButton.AccessibleName = button.Text;
         wfButton.Text = "";
         wfButton.BackColor = ColorScheme.BackgroundColor.ToSD();
         wfButton.FlatStyle = WF.FlatStyle.Flat;
@@ -432,11 +449,6 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         var handler = (LabelHandler) label.Handler;
         handler.Control.AutoEllipsis = true;
-    }
-
-    public override Bitmap? ExtractAssociatedIcon(string exePath)
-    {
-        return SD.Icon.ExtractAssociatedIcon(exePath)?.ToBitmap().ToEto();
     }
 
     public override void HandleKeyDown(Control control, Func<Keys, bool> handle)

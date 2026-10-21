@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.59"/></filter>
+    <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.6"/></filter>
+    <linearGradient id="ringA" gradientUnits="userSpaceOnUse" x1="5" y1="4" x2="27" y2="26">
+      <stop offset="0" stop-color="#b5e2ff"/><stop offset="1" stop-color="#1c6dbc"/>
+    </linearGradient>
+    <linearGradient id="ringB" gradientUnits="userSpaceOnUse" x1="5" y1="4" x2="27" y2="26">
+      <stop offset="0" stop-color="#d3ffff"/><stop offset="1" stop-color="#9cccff"/>
+    </linearGradient>
+    <linearGradient id="fill" gradientUnits="userSpaceOnUse" x1="0" y1="3" x2="0" y2="27">
+      <stop offset="0" stop-color="#2372c0"/><stop offset="0.07" stop-color="#2a79c3"/><stop offset="1" stop-color="#72afe2"/>
+    </linearGradient>
+    <path id="glyph" d="M15.4 7h1.2a1.4 1.4 0 0 1 1.4 1.4v1.2a1.4 1.4 0 0 1-1.4 1.4h-1.2a1.4 1.4 0 0 1-1.4-1.4v-1.2a1.4 1.4 0 0 1 1.4-1.4zM13 13h5v9h1v1h-6v-1h1v-8h-1z"/>
+  </defs>
+  <circle cx="15.993" cy="16.061" r="15.094" fill="#000" fill-opacity="0.368" filter="url(#shadow)"/>
+  <circle cx="15.993" cy="14.952" r="15.135" fill="#1862b8"/>
+  <circle cx="15.993" cy="14.952" r="14.042" fill="url(#ringA)"/>
+  <circle cx="15.993" cy="14.952" r="13.103" fill="url(#ringB)"/>
+  <circle cx="15.993" cy="14.952" r="12.157" fill="url(#fill)"/>
+  <use href="#glyph" fill="#00ffc4" fill-opacity="0.181" filter="url(#halo)"/>
+  <use href="#glyph" fill="#fff"/>
+</svg>

@@ -181,8 +181,8 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    // Gdi and ImageSharp don't currently apply embedded color profiles
-    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.ImageSharpImage)]
+    // Gdi/Gtk/ImageSharp don't currently apply embedded color profiles
+    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.ImageSharpImage | PlatformFlags.GtkImage)]
     public void LoadWithColorProfile()
     {
         // The image has an embedded ICC profile with the primaries rotated (i.e. the stored red channel is green, etc.),

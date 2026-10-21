@@ -29,6 +29,13 @@ public class WpfImage : IMemoryImage
         return _buffer.ToBitmapSource(_xDpi, _yDpi);
     }
 
+    public BitmapSource ToDisplayBitmapSource()
+    {
+        if (_disposed) throw new InvalidOperationException();
+        // WPF's high-quality scaling is very blurry for bitmaps whose DPI is far from 96 (e.g. 300 DPI scans)
+        return _buffer.ToBitmapSource(96, 96);
+    }
+
     public int Width => _buffer.Width;
 
     public int Height => _buffer.Height;

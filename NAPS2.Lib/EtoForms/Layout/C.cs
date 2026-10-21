@@ -102,6 +102,11 @@ public static class C
         ButtonFlags flags = default)
     {
         var button = Button(imagePosition == ButtonImagePosition.Overlay ? "" : command.MenuText, command);
+        if (imagePosition == ButtonImagePosition.Overlay && !string.IsNullOrEmpty(command.MenuText))
+        {
+            // The text isn't shown, so use it as the accessible name
+            EtoPlatform.Current.SetAccessibleName(button, command.MenuText);
+        }
         if (command.Image != null)
         {
             EtoPlatform.Current.AttachDpiDependency(button,
@@ -113,9 +118,9 @@ public static class C
         }
         else if (iconName != null)
         {
-            bool oversized = imagePosition == ButtonImagePosition.Above && flags.HasFlag(ButtonFlags.LargeIcon);
+            var scenario = flags.HasFlag(ButtonFlags.LargeIcon) ? IconScenario.LargeButton : IconScenario.Button;
             EtoPlatform.Current.AttachDpiDependency(button,
-                scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale, oversized));
+                scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scenario, scale));
         }
         button.ImagePosition = imagePosition;
         if (flags.HasFlag(ButtonFlags.LargeText))
@@ -129,13 +134,17 @@ public static class C
     }
 
     // TODO: Clean up button overloads
-    public static Button ImageButton(Command command) =>
-        new Button
+    public static Button ImageButton(Command command)
+    {
+        var button = new Button
         {
             Text = command.MenuText,
             Command = command,
             Image = command.Image
         };
+        EtoPlatform.Current.SetAccessibleName(button, command.MenuText);
+        return button;
+    }
 
     /// <summary>
     /// Creates a null placeholder for Eto layouts that absorbs scaling.
@@ -211,15 +220,17 @@ public static class C
         return new SkipLayoutElement();
     }
 
-    public static LayoutControl IconButton(string iconName, Action onClick)
+    public static LayoutControl IconButton(string iconName, string name, Action onClick)
     {
         var button = new Button
         {
-            ImagePosition = ButtonImagePosition.Overlay
+            ImagePosition = ButtonImagePosition.Overlay,
+            ToolTip = name
         };
+        EtoPlatform.Current.SetAccessibleName(button, name);
         EtoPlatform.Current.AttachDpiDependency(button, scale =>
         {
-            var icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale)!;
+            var icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, IconScenario.Button, scale)!;
             button.Image = icon;
             button.MinimumSize = new Size(icon.Width + 30, 0);
         });
@@ -235,8 +246,47 @@ public static class C
         EtoPlatform.Current.AttachDpiDependency(window, scale =>
         {
             EtoPlatform.Current.SetImageSize(menuItem, (int) (16 * scale));
-            menuItem.Image = command.GetIconImage(scale);
+            menuItem.Image = command.GetIconImage(IconScenario.Menu, scale);
         });
         return menuItem;
+    }
+
+    public static SubMenuItem SubMenuItem(Window window, Command menuCommand, MenuProvider menuProvider)
+    {
+        var menuItem = new SubMenuItem
+        {
+            Text = menuCommand.MenuText
+        };
+        EtoPlatform.Current.AttachDpiDependency(window,
+            scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(IconScenario.Menu, scale));
+        menuProvider.Handle(subItems => SetMenuItems(window, menuItem.Items, subItems));
+        return menuItem;
+    }
+
+    public static ContextMenu ContextMenu(Window window, MenuProvider menuProvider)
+    {
+        var contextMenu = new ContextMenu();
+        menuProvider.Handle(subItems => SetMenuItems(window, contextMenu.Items, subItems));
+        return contextMenu;
+    }
+
+    private static void SetMenuItems(Window window, MenuItemCollection items, List<MenuProvider.Item> subItems)
+    {
+        items.Clear();
+        foreach (var subItem in subItems)
+        {
+            switch (subItem)
+            {
+                case MenuProvider.CommandItem { Command: var command }:
+                    items.Add(ButtonMenuItem(window, (ActionCommand) command));
+                    break;
+                case MenuProvider.SeparatorItem:
+                    items.Add(new SeparatorMenuItem());
+                    break;
+                case MenuProvider.SubMenuItem { Command: var command, MenuProvider: var subMenuProvider }:
+                    items.Add(SubMenuItem(window, command, subMenuProvider));
+                    break;
+            }
+        }
     }
 }

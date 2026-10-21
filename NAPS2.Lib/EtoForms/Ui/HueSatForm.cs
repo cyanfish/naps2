@@ -11,13 +11,13 @@ public class HueSatForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        IconName = "color_management_small";
+        IconName = "color_management";
         Title = UiStrings.HueSaturation;
 
         EtoPlatform.Current.AttachDpiDependency(this, scale =>
         {
-            _hueSlider.Icon = iconProvider.GetIcon("color_wheel_small", scale);
-            _saturationSlider.Icon = iconProvider.GetIcon("color_gradient_small", scale);
+            _hueSlider.Icon = iconProvider.GetIcon("color_wheel", IconScenario.Inline16, scale);
+            _saturationSlider.Icon = iconProvider.GetIcon("color_gradient", IconScenario.Inline16, scale);
         });
         Sliders = [_hueSlider, _saturationSlider];
     }

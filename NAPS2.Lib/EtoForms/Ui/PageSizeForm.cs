@@ -16,12 +16,13 @@ public class PageSizeForm : EtoDialogBase
 
     private PageDimensions? _initialDimens;
 
-    public PageSizeForm(Naps2Config config, IIconProvider iconProvider)
+    public PageSizeForm(Naps2Config config)
         : base(config)
     {
         DeletePageSizeCommand = new ActionCommand(DeletePageSize)
         {
-            Image = iconProvider.GetIcon("cross_small")
+            Text = UiStrings.Delete,
+            IconName = "cross"
         };
         _name.SelectedValueChanged += Name_SelectionChange;
         _name.TextChanged += Name_TextChanged;
@@ -69,7 +70,8 @@ public class PageSizeForm : EtoDialogBase
             C.Label(UiStrings.NameOptional),
             L.Row(
                 _name.Scale().NaturalWidth(250).AlignCenter(),
-                C.Button(DeletePageSizeCommand, ButtonImagePosition.Overlay).AlignCenter().Width(30)
+                C.Button(DeletePageSizeCommand, ButtonImagePosition.Overlay).AlignCenter()
+                    .Width(EtoPlatform.Current.IsWpf ? 32 : 30)
             ),
             C.Spacer(),
             C.Label(UiStrings.Dimensions),

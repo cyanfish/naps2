@@ -39,7 +39,7 @@ public class CropForm : UnaryImageFormBase
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Crop;
-        IconName = "transform_crop_small";
+        IconName = "transform_crop";
         HelpText = string.Format(UiStrings.CropHelp,
             EtoPlatform.Current.IsMac ? UiStrings.CommandKey : UiStrings.ControlKey,
             EtoPlatform.Current.IsMac ? UiStrings.OptionKey : UiStrings.AltKey,

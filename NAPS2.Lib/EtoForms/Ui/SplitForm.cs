@@ -33,13 +33,13 @@ public class SplitForm : UnaryImageFormBase
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Split;
-        IconName = "split_small";
+        IconName = "split";
         HelpText = UiStrings.SplitHelp;
 
         _colorScheme = colorScheme;
 
-        _vSplit = C.IconButton("split_ver_small", () => SetOrientation(SplitOrientation.Vertical));
-        _hSplit = C.IconButton("split_hor_small", () => SetOrientation(SplitOrientation.Horizontal));
+        _vSplit = C.IconButton("split_ver", UiStrings.SplitVertically, () => SetOrientation(SplitOrientation.Vertical));
+        _hSplit = C.IconButton("split_hor", UiStrings.SplitHorizontally, () => SetOrientation(SplitOrientation.Horizontal));
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;

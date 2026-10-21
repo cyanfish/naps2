@@ -57,7 +57,7 @@ public class BatchScanForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.BatchScanFormTitle;
-        IconName = "application_cascade_small";
+        IconName = "application_cascade";
 
         _profileManager = profileManager;
         _batchScanPerformer = batchScanPerformer;
@@ -85,13 +85,13 @@ public class BatchScanForm : EtoDialogBase
 
         EditProfileCommand = new ActionCommand(EditProfile)
         {
-            ToolTip = UiStrings.Edit,
-            IconName = "pencil_small"
+            Text = UiStrings.Edit,
+            IconName = "pencil"
         };
         NewProfileCommand = new ActionCommand(NewProfile)
         {
-            ToolTip = UiStrings.New,
-            IconName = "add_small"
+            Text = UiStrings.NewProfile,
+            IconName = "add"
         };
     }
 
@@ -118,6 +118,7 @@ public class BatchScanForm : EtoDialogBase
         FormStateController.FixedHeightLayout = true;
         AbortButton = _cancel;
 
+        int profileButtonWidth = EtoPlatform.Current.IsWpf ? 32 : 30;
         LayoutController.Content = L.Column(
             L.Row(
                 _status.Scale().AlignCenter().NaturalWidth(200),
@@ -132,8 +133,8 @@ public class BatchScanForm : EtoDialogBase
                     C.Label(UiStrings.ProfileLabel),
                     L.Row(
                         _profile.AsControl().Scale().NaturalWidth(100),
-                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(30),
-                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(30)
+                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(profileButtonWidth),
+                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(profileButtonWidth)
                     ),
                     _singleScan,
                     _multipleScansPrompt,
