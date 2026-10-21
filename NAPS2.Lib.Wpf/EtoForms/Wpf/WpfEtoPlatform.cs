@@ -53,6 +53,7 @@ public class WpfEtoPlatform : EtoPlatform
             app.ThemeMode = ColorScheme.DarkMode ? SW.ThemeMode.Dark : SW.ThemeMode.Light;
             ApplyFluentStylesToEtoControls(app);
             MakeSplittersUnfocusable(app);
+            MakeComboBoxItemsHitTestable(app);
         }
     }
 
@@ -91,13 +92,32 @@ public class WpfEtoPlatform : EtoPlatform
 
     private static void MakeSplittersUnfocusable(SW.Application app)
     {
-        // The splitter randomly stealing focus when items are deleted is bad UX for the desktop form 
-        app.Resources.Remove(typeof(SWC.GridSplitter));
-        app.Resources[typeof(SWC.GridSplitter)] =
-            new SW.Style(typeof(SWC.GridSplitter), app.TryFindResource(typeof(SWC.GridSplitter)) as SW.Style)
+        // The splitter randomly stealing focus when items are deleted is bad UX for the desktop form
+        ExtendThemeStyle(app, typeof(SWC.GridSplitter), new SW.Setter(SW.UIElement.FocusableProperty, false));
+    }
+
+    private static void MakeComboBoxItemsHitTestable(SW.Application app)
+    {
+        // Fix combobox items not responding to mouseover outside the text content
+        var borderStyle = new SW.Style(typeof(SWC.Border))
+        {
+            Setters = { new SW.Setter(SWC.Border.BackgroundProperty, SWM.Brushes.Transparent) }
+        };
+        ExtendThemeStyle(app, typeof(SWC.ComboBoxItem), new SW.EventSetter(SW.FrameworkElement.LoadedEvent,
+            new SW.RoutedEventHandler((sender, _) =>
             {
-                Setters = { new SW.Setter(SW.UIElement.FocusableProperty, false) }
-            };
+                var item = (SWC.ComboBoxItem) sender;
+                if (item.Template?.FindName("ContentBorder", item) is SWC.Border border)
+                {
+                    border.Style = borderStyle;
+                }
+            })));
+    }
+
+    private static void ExtendThemeStyle(SW.Application app, Type type, SW.SetterBase setter)
+    {
+        app.Resources.Remove(type);
+        app.Resources[type] = new SW.Style(type, app.TryFindResource(type) as SW.Style) { Setters = { setter } };
     }
 
     private static bool IsEtoDictionary(SW.ResourceDictionary dict) =>
