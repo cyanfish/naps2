@@ -104,7 +104,14 @@ public class TesseractOcrEngine : IOcrEngine
                 return null;
             }
             // Improve main window responsiveness
-            tesseractProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+            try
+            {
+                tesseractProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+            }
+            catch (Exception)
+            {
+                // Some platforms won't let us change priority
+            }
 
             var waitTasks = new List<Task>
             {
