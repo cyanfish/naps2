@@ -335,9 +335,16 @@ public class WpfEtoPlatform : EtoPlatform
         }
     }
 
-    public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToBitmapSource()));
+    public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToDisplayBitmapSource()));
 
     public override IMemoryImage FromBitmap(Bitmap bitmap) => new WpfImage(bitmap.ToWpf());
+
+    public override void SetClipboardImage(Clipboard clipboard, ProcessedImage processedImage, IMemoryImage memoryImage)
+    {
+        // Unlike ToBitmap (for display), keep the image's resolution
+        using var etoBitmap = new Bitmap(new BitmapHandler(memoryImage.ToBitmapSource()));
+        clipboard.Image = etoBitmap;
+    }
 
     public override IMemoryImage DrawHourglass(IMemoryImage image)
     {
@@ -345,7 +352,7 @@ public class WpfEtoPlatform : EtoPlatform
         using (var dc = visual.RenderOpen())
         {
             dc.PushOpacity(0.3);
-            dc.DrawImage(image.ToBitmapSource(), new SW.Rect(0, 0, image.Width, image.Height));
+            dc.DrawImage(image.ToDisplayBitmapSource(), new SW.Rect(0, 0, image.Width, image.Height));
             dc.Pop();
             var hourglass = BitmapFrame.Create(new MemoryStream(Icons.hourglass_grey_32), BitmapCreateOptions.None,
                 BitmapCacheOption.OnLoad);
