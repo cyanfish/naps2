@@ -15,10 +15,10 @@ public class CompressForm : UnaryImageFormBase
     private readonly UndoableNumericMaskedTextBox<decimal> _dpi = new();
     private readonly UndoableNumericMaskedTextBox<decimal> _width = new();
     private readonly UndoableNumericMaskedTextBox<decimal> _height = new();
-    private readonly EnumDropDownWidget<LocalizedPageSizeUnit> _unit = new();
+    private readonly EnumDropDownWidget<LocalizedPageSizeUnit> _unit = new(scale: false);
     private readonly UndoableNumericMaskedTextBox<int> _pixelWidth = new();
     private readonly UndoableNumericMaskedTextBox<int> _pixelHeight = new();
-    private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new();
+    private readonly EnumDropDownWidget<ScanBitDepth> _bitDepth = new(scale: false);
     private readonly CheckBox _useJpegCompression = C.CheckBox(UiStrings.UseJpegCompression);
     private readonly UndoableNumericMaskedTextBox<int> _jpegQuality = new();
     private readonly LayoutVisibility _jpegQualityVis = new(false);
