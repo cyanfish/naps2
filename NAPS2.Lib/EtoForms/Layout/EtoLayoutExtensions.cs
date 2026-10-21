@@ -34,19 +34,19 @@ public static class EtoLayoutExtensions
     public static LayoutControl Width(this Control control, int? width) =>
         new LayoutControl(control, width: width);
 
-    public static LayoutControl MinWidth(this Control control, int minWidth) =>
+    public static LayoutControl MinWidth(this Control control, int? minWidth) =>
         new LayoutControl(control, minWidth: minWidth);
 
-    public static LayoutControl MaxWidth(this Control control, int maxWidth) =>
+    public static LayoutControl MaxWidth(this Control control, int? maxWidth) =>
         new LayoutControl(control, maxWidth: maxWidth);
 
     public static LayoutControl Height(this Control control, int? height) =>
         new LayoutControl(control, height: height);
 
-    public static LayoutControl MinHeight(this Control control, int minHeight) =>
+    public static LayoutControl MinHeight(this Control control, int? minHeight) =>
         new LayoutControl(control, minHeight: minHeight);
 
-    public static LayoutControl MaxHeight(this Control control, int maxHeight) =>
+    public static LayoutControl MaxHeight(this Control control, int? maxHeight) =>
         new LayoutControl(control, maxHeight: maxHeight);
 
     public static LayoutControl Size(this Control control, int width, int height) =>
@@ -145,19 +145,19 @@ public static class EtoLayoutExtensions
     public static LayoutControl Width(this LayoutControl control, int width) =>
         new LayoutControl(control, width: width);
 
-    public static LayoutControl MinWidth(this LayoutControl control, int minWidth) =>
+    public static LayoutControl MinWidth(this LayoutControl control, int? minWidth) =>
         new LayoutControl(control, minWidth: minWidth);
 
-    public static LayoutControl MaxWidth(this LayoutControl control, int maxWidth) =>
+    public static LayoutControl MaxWidth(this LayoutControl control, int? maxWidth) =>
         new LayoutControl(control, maxWidth: maxWidth);
 
     public static LayoutControl Height(this LayoutControl control, int height) =>
         new LayoutControl(control, height: height);
 
-    public static LayoutControl MinHeight(this LayoutControl control, int minHeight) =>
+    public static LayoutControl MinHeight(this LayoutControl control, int? minHeight) =>
         new LayoutControl(control, minHeight: minHeight);
 
-    public static LayoutControl MaxHeight(this LayoutControl control, int maxHeight) =>
+    public static LayoutControl MaxHeight(this LayoutControl control, int? maxHeight) =>
         new LayoutControl(control, maxHeight: maxHeight);
 
     public static LayoutControl NaturalSize(this LayoutControl control, int width, int height) =>
