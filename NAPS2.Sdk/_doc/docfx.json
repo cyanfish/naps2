@@ -55,7 +55,7 @@
     "globalMetadata": {
       "_appName": "NAPS2 SDK",
       "_appTitle": "NAPS2 SDK",
-      "_appLogoPath": "scanner-48-rev2.png",
+      "_appLogoPath": "scanner_48.png",
       "_appFaviconPath": "favicon.ico",
       "_enableSearch": true,
       "_disableContribution": true
@@ -78,7 +78,7 @@
       {
         "files": [
           "favicon.ico",
-          "scanner-48-rev2.png"
+          "scanner_48.png"
         ],
         "src": "../../NAPS2.Lib/Icons"
       }
