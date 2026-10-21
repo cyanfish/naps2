@@ -280,15 +280,14 @@ public class WpfEtoPlatform : EtoPlatform
         var groupBox = new GroupBox { Text = title };
         var native = (SWC.GroupBox) groupBox.ControlObject;
         native.Template = XamlTemplates.CardGroupBoxTemplate;
-        int top = 0;
-        if (headerStyle == GroupBoxHeaderStyle.Bold)
+        bool bold = headerStyle == GroupBoxHeaderStyle.Bold;
+        if (bold)
         {
             ((SWC.Control) native.Header).FontWeight = SW.FontWeights.SemiBold;
-            // Bold headers have a bit more spacing above them
-            top = GROUP_BOX_BOLD_HEADER_SPACING;
         }
         int p = GROUP_BOX_PADDING;
-        return L.Overlay(groupBox.Padding(top: top), L.Buffer(content, p, top + GROUP_BOX_HEADER_HEIGHT + p, p, p));
+        return L.Overlay(groupBox, L.Buffer(content, p, GROUP_BOX_HEADER_HEIGHT + p, p, p))
+            .SpacingBefore(bold ? GROUP_BOX_BOLD_HEADER_SPACING : 0);
     }
 
     public override void ConfigureDonateButton(Button button)

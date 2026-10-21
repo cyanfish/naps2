@@ -35,6 +35,7 @@ public class LayoutControl : LayoutElement
         Control = control.Control;
         Scale = scale ?? control.Scale;
         Padding = padding ?? control.Padding;
+        SpacingBefore = control.SpacingBefore;
         SpacingAfter = spacingAfter ?? control.SpacingAfter;
         Width = width ?? control.Width;
         MinWidth = minWidth ?? control.MinWidth;

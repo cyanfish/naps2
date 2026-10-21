@@ -13,10 +13,12 @@ public class LayoutOverlay : LayoutContainer
     {
     }
 
-    public LayoutOverlay(LayoutOverlay original, bool? scale = null, int? spacingAfter = null)
+    public LayoutOverlay(LayoutOverlay original, bool? scale = null, int? spacingBefore = null,
+        int? spacingAfter = null)
         : base(original.Children)
     {
         Scale = scale ?? original.Scale;
+        SpacingBefore = spacingBefore ?? original.SpacingBefore;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
         Width = original.Width;
         Height = original.Height;

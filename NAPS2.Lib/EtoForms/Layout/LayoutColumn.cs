@@ -17,6 +17,7 @@ public class LayoutColumn : LayoutLine
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
         LabelSpacing = spacing ?? original.LabelSpacing;
+        SpacingBefore = original.SpacingBefore;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
         Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;

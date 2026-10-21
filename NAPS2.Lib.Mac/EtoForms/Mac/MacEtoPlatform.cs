@@ -323,14 +323,13 @@ public class MacEtoPlatform : EtoPlatform
         var groupBox = new GroupBox();
 
         // Bold headers have a bit more spacing above them
-        int top = bold ? 8 : 0;
         return L.Overlay(
             L.Column(
-                titleLabel.Padding(top: top).SpacingAfter(6),
+                titleLabel.SpacingAfter(6),
                 groupBox.Scale()
             ),
-            L.Buffer(content, 6, top + 24, 6, 6)
-        );
+            L.Buffer(content, 6, 24, 6, 6)
+        ).SpacingBefore(bold ? 8 : 0);
     }
 
     public override void SetClientSize(Window window, Size clientSize)

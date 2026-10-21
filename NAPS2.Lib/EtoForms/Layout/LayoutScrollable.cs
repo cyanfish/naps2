@@ -30,6 +30,7 @@ public class LayoutScrollable : LayoutContainer
     {
         _content = original._content;
         Scale = scale ?? original.Scale;
+        SpacingBefore = original.SpacingBefore;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
         Width = original.Width;
         Height = height ?? original.Height;

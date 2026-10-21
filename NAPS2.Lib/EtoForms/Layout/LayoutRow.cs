@@ -15,6 +15,7 @@ public class LayoutRow : LayoutLine
     {
         Padding = padding ?? original.Padding;
         Spacing = spacing ?? original.Spacing;
+        SpacingBefore = original.SpacingBefore;
         SpacingAfter = spacingAfter ?? original.SpacingAfter;
         Scale = scale ?? original.Scale;
         Aligned = aligned ?? original.Aligned;

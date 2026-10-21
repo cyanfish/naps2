@@ -252,6 +252,9 @@ public static class EtoLayoutExtensions
     public static LayoutOverlay Scale(this LayoutOverlay overlay) =>
         new LayoutOverlay(overlay, scale: true);
 
+    public static LayoutOverlay SpacingBefore(this LayoutOverlay overlay, int spacingBefore) =>
+        new LayoutOverlay(overlay, spacingBefore: spacingBefore);
+
     public static LayoutScrollable Scale(this LayoutScrollable scrollable) =>
         new LayoutScrollable(scrollable, scale: true);
 
