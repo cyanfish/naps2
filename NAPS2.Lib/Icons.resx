@@ -238,9 +238,6 @@
   <data name="scanner_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-48-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="scanner_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\scanner-64-rev2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="scanner_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner-96.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -430,9 +427,6 @@
   <data name="application_cascade_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_cascade-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\close.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="color_gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_gradient.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -540,12 +534,6 @@
   </data>
   <data name="exclamation_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\exclamation-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="draw_ellipse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\draw_ellipse.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="draw_ellipse_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\draw_ellipse-small.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

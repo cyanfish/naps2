@@ -452,16 +452,6 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] close {
-            get {
-                object obj = ResourceManager.GetObject("close", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] cog {
             get {
                 object obj = ResourceManager.GetObject("cog", resourceCulture);
@@ -795,26 +785,6 @@ namespace NAPS2 {
         internal static byte[] document_small {
             get {
                 object obj = ResourceManager.GetObject("document_small", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] draw_ellipse {
-            get {
-                object obj = ResourceManager.GetObject("draw_ellipse", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] draw_ellipse_small {
-            get {
-                object obj = ResourceManager.GetObject("draw_ellipse_small", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -1345,16 +1315,6 @@ namespace NAPS2 {
         internal static byte[] scanner_48 {
             get {
                 object obj = ResourceManager.GetObject("scanner_48", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] scanner_64 {
-            get {
-                object obj = ResourceManager.GetObject("scanner_64", resourceCulture);
                 return ((byte[])(obj));
             }
         }
