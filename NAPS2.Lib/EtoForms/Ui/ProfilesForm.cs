@@ -34,7 +34,7 @@ public class ProfilesForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.ProfilesFormTitle;
-        IconName = "blueprints_small";
+        IconName = "blueprints";
 
         _scanPerformer = scanPerformer;
         _profileNameTracker = profileNameTracker;
@@ -55,27 +55,27 @@ public class ProfilesForm : EtoDialogBase
         _scanCommand = new ActionCommand(DoScan)
         {
             MenuText = UiStrings.Scan,
-            IconName = "control_play_blue_small",
+            IconName = "control_play_blue",
         };
         _addCommand = new ActionCommand(DoAdd)
         {
             MenuText = UiStrings.New,
-            IconName = "add_small"
+            IconName = "add"
         };
         _editCommand = new ActionCommand(DoEdit)
         {
             MenuText = UiStrings.Edit,
-            IconName = "pencil_small"
+            IconName = "pencil"
         };
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            IconName = "cross_small"
+            IconName = "cross"
         };
         _setDefaultCommand = new ActionCommand(DoSetDefault)
         {
             MenuText = UiStrings.SetDefault,
-            IconName = "accept_small"
+            IconName = "accept"
         };
         _copyCommand = new ActionCommand(DoCopy)
         {
@@ -88,7 +88,7 @@ public class ProfilesForm : EtoDialogBase
         _scannerSharingCommand = new ActionCommand(OpenScannerSharingForm)
         {
             MenuText = UiStrings.ScannerSharing,
-            IconName = "wireless_small"
+            IconName = "wireless"
         };
 
         var profilesKsm = new KeyboardShortcutManager();

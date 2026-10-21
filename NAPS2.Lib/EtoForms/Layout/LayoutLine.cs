@@ -76,12 +76,13 @@ public abstract class LayoutLine : LayoutContainer
 
     private int GetSpacing(int i, LayoutContext context)
     {
-        if (Children.Skip(i + 1).All(child => !child.IsVisible))
+        var next = Children.Skip(i + 1).FirstOrDefault(child => child.IsVisible);
+        if (next == null)
         {
             return 0;
         }
         if (!Children[i].IsVisible) return 0;
-        return GetSpacingCore(i, context);
+        return GetSpacingCore(i, context) + (int) (context.Scale * next.SpacingBefore);
     }
 
     protected virtual int GetSpacingCore(int i, LayoutContext context)

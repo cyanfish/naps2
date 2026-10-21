@@ -61,9 +61,11 @@ public class LayoutController
         _window = window;
         window.LoadComplete += (_, _) =>
         {
-            if (window is not Form)
+            // For dialogs loading is equivalent to being shown. On Windows, forms are visible before Shown is fired, so
+            // we also lay them out now to avoid rendering an empty window (and lay out again on Shown in case they're
+            // maximized in between).
+            if (window is not Form || EtoPlatform.Current.IsWindows)
             {
-                // For dialogs loading is equivalent to being shown
                 _isShown = true;
             }
             DoLayout();

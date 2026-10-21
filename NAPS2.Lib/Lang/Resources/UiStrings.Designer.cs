@@ -1934,5 +1934,77 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("MissingFileExtension", resourceCulture);
             }
         }
+        
+        internal static string AlignLeft {
+            get {
+                return ResourceManager.GetString("AlignLeft", resourceCulture);
+            }
+        }
+        
+        internal static string AlignCenter {
+            get {
+                return ResourceManager.GetString("AlignCenter", resourceCulture);
+            }
+        }
+        
+        internal static string AlignRight {
+            get {
+                return ResourceManager.GetString("AlignRight", resourceCulture);
+            }
+        }
+        
+        internal static string AlignTop {
+            get {
+                return ResourceManager.GetString("AlignTop", resourceCulture);
+            }
+        }
+        
+        internal static string AlignMiddle {
+            get {
+                return ResourceManager.GetString("AlignMiddle", resourceCulture);
+            }
+        }
+        
+        internal static string AlignBottom {
+            get {
+                return ResourceManager.GetString("AlignBottom", resourceCulture);
+            }
+        }
+        
+        internal static string Swap {
+            get {
+                return ResourceManager.GetString("Swap", resourceCulture);
+            }
+        }
+        
+        internal static string SplitVertically {
+            get {
+                return ResourceManager.GetString("SplitVertically", resourceCulture);
+            }
+        }
+        
+        internal static string SplitHorizontally {
+            get {
+                return ResourceManager.GetString("SplitHorizontally", resourceCulture);
+            }
+        }
+        
+        internal static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        internal static string ToggleOrientation {
+            get {
+                return ResourceManager.GetString("ToggleOrientation", resourceCulture);
+            }
+        }
+        
+        internal static string ToggleView {
+            get {
+                return ResourceManager.GetString("ToggleView", resourceCulture);
+            }
+        }
     }
 }

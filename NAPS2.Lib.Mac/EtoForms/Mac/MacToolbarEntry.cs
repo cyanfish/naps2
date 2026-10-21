@@ -16,7 +16,7 @@ public static class MacToolbarItems
     {
         var item = new NSToolbarItem(id)
         {
-            Image = command.GetIconImage(1)?.ToNS(),
+            Image = command.GetIconImage(IconScenario.Toolbar, 1)?.ToNS(),
             Title = title ?? "",
             Label = command.ToolBarText ?? "",
             // TODO: Verify this fixes label display on macOS 10.15
@@ -36,7 +36,7 @@ public static class MacToolbarItems
     {
         return new NSMenuToolbarItem(id)
         {
-            Image = menuCommand.GetIconImage(1)?.ToNS(),
+            Image = menuCommand.GetIconImage(IconScenario.Toolbar, 1)?.ToNS(),
             Label = menuCommand.ToolBarText ?? "",
             Title = title ?? "",
             ToolTip = tooltip ?? menuCommand.ToolBarText ?? "",

@@ -21,7 +21,7 @@ internal class EmailSettingsPanel : SettingsPanelWithRememberCheckbox<EmailSetti
 
     public override string Title => UiStrings.EmailSettings;
 
-    public override string IconName => "email_small";
+    public override string IconName => "email";
 
     protected override Expression<Func<CommonConfig, EmailSettings>> SettingsAccessor => c => c.EmailSettings;
 

@@ -131,7 +131,7 @@ internal class KeyboardShortcutsPanel : SettingsPanel
 
     public override string Title => UiStrings.KeyboardShortcuts;
 
-    public override string IconName => "keyboard_small";
+    public override string IconName => "keyboard";
 
     public override void OnShown()
     {

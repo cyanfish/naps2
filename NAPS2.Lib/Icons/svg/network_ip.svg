@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <filter id="blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="0.6"/></filter>
+    <linearGradient id="inner" gradientUnits="userSpaceOnUse" x1="0" y1="8" x2="0" y2="14">
+      <stop offset="0" stop-color="#e3e4e5"/><stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="text" gradientUnits="userSpaceOnUse" x1="0" y1="9" x2="0" y2="14">
+      <stop offset="0" stop-color="#6a6c6f"/><stop offset="1" stop-color="#1c1c1e"/>
+    </linearGradient>
+    <linearGradient id="stem" gradientUnits="userSpaceOnUse" x1="0" y1="17" x2="0" y2="21">
+      <stop offset="0" stop-color="#737477"/><stop offset="1" stop-color="#6a7791"/>
+    </linearGradient>
+    <linearGradient id="stemDark" gradientUnits="userSpaceOnUse" x1="0" y1="17" x2="0" y2="21">
+      <stop offset="0" stop-color="#121415"/><stop offset="1" stop-color="#0b172d"/>
+    </linearGradient>
+  </defs>
+  <g fill="#000" fill-opacity="0.296" filter="url(#blur)" transform="translate(0 1.3)">
+    <rect x="1" y="6" width="30" height="11"/>
+    <rect x="2" y="22" width="28" height="2"/>
+  </g>
+  <rect x="1" y="6" width="30" height="11" fill="#a8a8a8"/>
+  <rect x="2" y="7" width="28" height="9" fill="#fff"/>
+  <rect x="3" y="8" width="26" height="6" fill="url(#inner)"/>
+  <path fill="url(#text)" d="M4 9h2v1h-2zM8 9h3v1h-3zM12 9h3v1h-3zM18 9h1v1h-1zM20 9h1v1h-1zM24 9h1v1h-1zM26 9h1v1h-1zM5 10h1v1h-1zM8 10h1v1h-1zM10 10h1v1h-1zM14 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM5 11h1v1h-1zM8 11h3v1h-3zM12 11h3v1h-3zM19 11h1v1h-1zM25 11h1v1h-1zM5 12h1v1h-1zM10 12h1v1h-1zM12 12h1v1h-1zM18 12h1v1h-1zM20 12h1v1h-1zM24 12h1v1h-1zM26 12h1v1h-1zM4 13h3v1h-3zM8 13h3v1h-3zM12 13h3v1h-3zM16 13h1v1h-1zM18 13h1v1h-1zM20 13h1v1h-1zM22 13h1v1h-1zM24 13h1v1h-1zM26 13h1v1h-1z"/>
+  <rect x="15" y="17" width="1" height="5" fill="url(#stem)"/>
+  <rect x="16" y="17" width="1" height="5" fill="url(#stemDark)"/>
+  <rect x="2" y="22" width="28" height="1" fill="#808184"/>
+  <rect x="2" y="23" width="28" height="1" fill="#262728"/>
+  <rect x="14" y="21" width="4" height="4" rx="0.5" fill="#f4a01d"/>
+  <rect x="15" y="22" width="2" height="2" fill="#ff0"/>
+</svg>

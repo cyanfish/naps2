@@ -4,38 +4,16 @@ namespace NAPS2.EtoForms;
 
 public class DefaultIconProvider : IIconProvider
 {
-    public Bitmap? GetIcon(string name, float scale = 1f, bool oversized = false)
+    public Bitmap? GetIcon(string name, IconScenario scenario, float scale = 1f)
     {
-        if (scale > 1)
+        int size = scenario.ToSize();
+        // Prefer downscaling a double-size icon over upscaling (or when there's no icon of the requested size)
+        var hires = GetIconData(name, size * 2);
+        var data = GetIconData(name, size);
+        if (hires != null && (scale > 1 || data == null))
         {
-            // TODO: Maybe generalize everything with a numeric pixel size suffix?
-            if (name.EndsWith("_small"))
-            {
-                var norm = (byte[]?) Icons.ResourceManager.GetObject(name.Substring(0, name.Length - 6));
-                if (norm != null)
-                {
-                    return new Bitmap(norm).ResizeTo((int) (16 * scale));
-                }
-            }
-            else if (name.EndsWith("_48"))
-            {
-                var hires = (byte[]?) Icons.ResourceManager.GetObject(name.Substring(0, name.Length - 3) + "_96");
-                if (hires != null)
-                {
-                    return new Bitmap(hires).ResizeTo((int) (48 * scale));
-                }
-            }
-            else
-            {
-                var hires = (byte[]?) Icons.ResourceManager.GetObject(name + "_hires");
-                if (hires != null)
-                {
-                    return new Bitmap(hires).ResizeTo((int) (32 * scale));
-                }
-            }
+            return new Bitmap(hires).ResizeTo((int) (size * scale));
         }
-
-        var data = (byte[]?) Icons.ResourceManager.GetObject(name);
         if (data != null)
         {
             var bitmap = new Bitmap(data);
@@ -45,13 +23,11 @@ public class DefaultIconProvider : IIconProvider
             }
             return bitmap;
         }
-
         return null;
     }
 
-    public Icon? GetFormIcon(string name, float scale = 1f)
-    {
-        var icon = GetIcon(name, scale);
-        return icon != null ? new Icon(1f, icon) : null;
-    }
+    private static byte[]? GetIconData(string name, int size) =>
+        (byte[]?) Icons.ResourceManager.GetObject($"{name}_{size}");
+
+    public Icon ToFormIcon(Bitmap bitmap) => new(1f, bitmap);
 }

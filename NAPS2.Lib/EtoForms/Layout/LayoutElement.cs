@@ -18,6 +18,7 @@ public abstract class LayoutElement
     protected internal LayoutAlignment Alignment { get; set; }
     protected internal LayoutVisibility? Visibility { get; set; }
     protected internal bool IsVisible => Visibility?.IsVisible ?? true;
+    protected internal int SpacingBefore { get; set; }
     protected internal int? SpacingAfter { get; set; }
     protected internal int? Width { get; set; }
     protected internal int? Height { get; set; }

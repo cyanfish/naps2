@@ -26,7 +26,7 @@ public class ManualDuplexForm : EtoDialogBase
         _desktopFormProvider = desktopFormProvider;
         _imageListActions = imageListActions;
         Title = UiStrings.ManualDuplexFormTitle;
-        IconName = "column_double_small";
+        IconName = "column_double";
 
         _listView = EtoPlatform.Current.CreateListView(listViewBehavior);
         _alwaysShowPreview.Checked = Config.Get(c => c.ManualDuplexSettings.AlwaysShowPreview);

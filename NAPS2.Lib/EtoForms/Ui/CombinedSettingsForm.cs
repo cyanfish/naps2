@@ -27,7 +27,7 @@ internal class CombinedSettingsForm : EtoDialogBase
         DesktopFormProvider desktopFormProvider, KeyboardShortcutManager ksm) : base(config)
     {
         Title = UiStrings.SettingsFormTitle;
-        IconName = "cog_small";
+        IconName = "cog";
 
         _panels =
         [

@@ -18,11 +18,11 @@ public class RotateForm : UnaryImageFormBase
         base(config, imageList, thumbnailController)
     {
         Title = UiStrings.Rotate;
-        IconName = "arrow_rotate_anticlockwise_small";
+        IconName = "arrow_rotate_anticlockwise";
         HelpText = UiStrings.CustomRotationHelp;
 
         EtoPlatform.Current.AttachDpiDependency(this,
-            scale => _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise_small", scale));
+            scale => _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise", IconScenario.Inline16, scale));
         Sliders = [_angleSlider];
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;

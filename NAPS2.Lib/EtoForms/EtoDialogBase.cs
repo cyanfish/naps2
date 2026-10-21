@@ -47,8 +47,9 @@ public abstract class EtoDialogBase : Dialog, IFormBase
     {
         set
         {
+            var iconProvider = EtoPlatform.Current.IconProvider;
             EtoPlatform.Current.AttachDpiDependency(this,
-                scale => Icon = EtoPlatform.Current.IconProvider.GetFormIcon(value, scale));
+                scale => Icon = iconProvider.GetIcon(value, IconScenario.Inline16, scale) is { } icon ? iconProvider.ToFormIcon(icon) : null);
         }
     }
 }

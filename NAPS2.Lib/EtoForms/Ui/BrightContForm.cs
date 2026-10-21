@@ -11,13 +11,13 @@ public class BrightContForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        IconName = "contrast_with_sun_small";
+        IconName = "contrast_with_sun";
         Title = UiStrings.BrightnessContrast;
 
         EtoPlatform.Current.AttachDpiDependency(this, scale =>
         {
-            _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun_small", scale);
-            _contrastSlider.Icon = iconProvider.GetIcon("contrast_small", scale);
+            _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun", IconScenario.Inline16, scale);
+            _contrastSlider.Icon = iconProvider.GetIcon("contrast", IconScenario.Inline16, scale);
         });
         Sliders = [_brightnessSlider, _contrastSlider];
     }
