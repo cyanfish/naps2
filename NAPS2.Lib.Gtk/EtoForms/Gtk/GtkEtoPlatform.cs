@@ -346,6 +346,9 @@ public class GtkEtoPlatform : EtoPlatform
         native.StyleContext.AddClass("donate-button");
     }
 
+    public override void SetAccessibleName(Control control, string name) =>
+        control.ToNative().Accessible.Name = name;
+
     public override void ConfigureZoomButton(Button button, string icon)
     {
         var gtkButton = button.ToNative();

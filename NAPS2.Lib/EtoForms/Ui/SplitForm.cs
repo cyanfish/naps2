@@ -38,8 +38,8 @@ public class SplitForm : UnaryImageFormBase
 
         _colorScheme = colorScheme;
 
-        _vSplit = C.IconButton("split_ver_small", () => SetOrientation(SplitOrientation.Vertical));
-        _hSplit = C.IconButton("split_hor_small", () => SetOrientation(SplitOrientation.Horizontal));
+        _vSplit = C.IconButton("split_ver_small", UiStrings.SplitVertically, () => SetOrientation(SplitOrientation.Vertical));
+        _hSplit = C.IconButton("split_hor_small", UiStrings.SplitHorizontally, () => SetOrientation(SplitOrientation.Horizontal));
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;
         Overlay.MouseUp += Overlay_MouseUp;

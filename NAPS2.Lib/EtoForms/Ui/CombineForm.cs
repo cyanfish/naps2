@@ -39,25 +39,25 @@ public class CombineForm : ImageFormBase
             C.Filler(),
             L.Row(
                 L.Row(
-                    C.IconButton("shape_align_left_small", () => SetHOffset(0)),
-                    C.IconButton("shape_align_center_small", () => SetHOffset(0.5)),
-                    C.IconButton("shape_align_right_small", () => SetHOffset(1.0))
+                    C.IconButton("shape_align_left_small", UiStrings.AlignLeft, () => SetHOffset(0)),
+                    C.IconButton("shape_align_center_small", UiStrings.AlignCenter, () => SetHOffset(0.5)),
+                    C.IconButton("shape_align_right_small", UiStrings.AlignRight, () => SetHOffset(1.0))
                 ).Visible(_alignVis),
                 C.Spacer().Width(14),
-                C.IconButton("combine_hor_small",
+                C.IconButton("combine_hor_small", UiStrings.ToggleOrientation,
                     () => SetOrientation(CombineOrientation.Horizontal)),
-                C.IconButton("switch_ver_small", SwapImages)
+                C.IconButton("switch_ver_small", UiStrings.Swap, SwapImages)
             ).Visible(!_horizontalOrientationVis),
             L.Row(
                 L.Row(
-                    C.IconButton("shape_align_top_small", () => SetVOffset(0)),
-                    C.IconButton("shape_align_middle_small", () => SetVOffset(0.5)),
-                    C.IconButton("shape_align_bottom_small", () => SetVOffset(1.0))
+                    C.IconButton("shape_align_top_small", UiStrings.AlignTop, () => SetVOffset(0)),
+                    C.IconButton("shape_align_middle_small", UiStrings.AlignMiddle, () => SetVOffset(0.5)),
+                    C.IconButton("shape_align_bottom_small", UiStrings.AlignBottom, () => SetVOffset(1.0))
                 ).Visible(_alignVis),
                 C.Spacer().Width(14),
-                C.IconButton("combine_ver_small",
+                C.IconButton("combine_ver_small", UiStrings.ToggleOrientation,
                     () => SetOrientation(CombineOrientation.Vertical)),
-                C.IconButton("switch_hor_small", SwapImages)
+                C.IconButton("switch_hor_small", UiStrings.Swap, SwapImages)
             ).Visible(_horizontalOrientationVis),
             C.Filler()
         );

@@ -46,13 +46,12 @@ public class Sidebar
 
         EditProfileCommand = new ActionCommand(EditProfile)
         {
-            ToolTip = UiStrings.Edit,
+            Text = UiStrings.Edit,
             IconName = "pencil_small"
         };
         NewProfileCommand = new ActionCommand(NewProfile)
         {
             Text = UiStrings.NewProfile,
-            ToolTip = UiStrings.New,
             IconName = "add_small"
         };
         ScanCommand = new ActionCommand(DoScan)

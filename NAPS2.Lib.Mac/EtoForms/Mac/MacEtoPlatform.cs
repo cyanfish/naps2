@@ -312,6 +312,9 @@ public class MacEtoPlatform : EtoPlatform
         native.Bordered = false;
     }
 
+    public override void SetAccessibleName(Control control, string name) =>
+        control.ToNative().AccessibilityLabel = name;
+
     public override LayoutElement CreateGroupBox(string title, LayoutElement content, GroupBoxHeaderStyle headerStyle)
     {
         bool bold = headerStyle == GroupBoxHeaderStyle.Bold;

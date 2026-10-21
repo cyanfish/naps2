@@ -102,6 +102,11 @@ public static class C
         ButtonFlags flags = default)
     {
         var button = Button(imagePosition == ButtonImagePosition.Overlay ? "" : command.MenuText, command);
+        if (imagePosition == ButtonImagePosition.Overlay && !string.IsNullOrEmpty(command.MenuText))
+        {
+            // The text isn't shown, so use it as the accessible name
+            EtoPlatform.Current.SetAccessibleName(button, command.MenuText);
+        }
         if (command.Image != null)
         {
             EtoPlatform.Current.AttachDpiDependency(button,
@@ -129,13 +134,17 @@ public static class C
     }
 
     // TODO: Clean up button overloads
-    public static Button ImageButton(Command command) =>
-        new Button
+    public static Button ImageButton(Command command)
+    {
+        var button = new Button
         {
             Text = command.MenuText,
             Command = command,
             Image = command.Image
         };
+        EtoPlatform.Current.SetAccessibleName(button, command.MenuText);
+        return button;
+    }
 
     /// <summary>
     /// Creates a null placeholder for Eto layouts that absorbs scaling.
@@ -211,12 +220,14 @@ public static class C
         return new SkipLayoutElement();
     }
 
-    public static LayoutControl IconButton(string iconName, Action onClick)
+    public static LayoutControl IconButton(string iconName, string name, Action onClick)
     {
         var button = new Button
         {
-            ImagePosition = ButtonImagePosition.Overlay
+            ImagePosition = ButtonImagePosition.Overlay,
+            ToolTip = name
         };
+        EtoPlatform.Current.SetAccessibleName(button, name);
         EtoPlatform.Current.AttachDpiDependency(button, scale =>
         {
             var icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale)!;

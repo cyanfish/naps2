@@ -297,10 +297,12 @@ public class WpfEtoPlatform : EtoPlatform
         native.BorderThickness = new SW.Thickness(2);
     }
 
+    public override void SetAccessibleName(Control control, string name) =>
+        AutomationProperties.SetName(control.ToNative(), name);
+
     public override void ConfigureZoomButton(Button button, string icon)
     {
         var native = (SWC.Control) button.ToNative();
-        AutomationProperties.SetName(native, button.Text);
         button.Text = "";
         button.Size = new Size(32, 32);
         native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING);

@@ -146,6 +146,10 @@ public abstract class EtoPlatform
     {
     }
 
+    public virtual void SetAccessibleName(Control control, string name)
+    {
+    }
+
     public virtual void AttachDpiDependency(Control control, Action<float> callback) =>
         callback(GetScaleFactor(control.ParentWindow));
 

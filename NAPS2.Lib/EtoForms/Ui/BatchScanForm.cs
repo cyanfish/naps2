@@ -85,12 +85,12 @@ public class BatchScanForm : EtoDialogBase
 
         EditProfileCommand = new ActionCommand(EditProfile)
         {
-            ToolTip = UiStrings.Edit,
+            Text = UiStrings.Edit,
             IconName = "pencil_small"
         };
         NewProfileCommand = new ActionCommand(NewProfile)
         {
-            ToolTip = UiStrings.New,
+            Text = UiStrings.NewProfile,
             IconName = "add_small"
         };
     }
