@@ -123,12 +123,13 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
     {
         if (_behavior.ShowLabels) return;
         var colors = _behavior.ColorScheme;
+        var imageBorderBrush = (SolidColorBrush) Application.Current.FindResource("ControlStrongStrokeColorDefaultBrush")!;
         if (_behavior.ShowPageNumbers)
         {
             // Highlight the whole item (including the page number), with no image border
             Background = IsSelected ? colors.HighlightBackgroundColor.ToWpfBrush() : Brushes.Transparent;
             BorderBrush = IsSelected ? colors.HighlightBorderColor.ToWpfBrush() : Brushes.Transparent;
-            _imageBorder.BorderBrush = IsSelected ? Brushes.Transparent : colors.ForegroundColor.ToWpfBrush();
+            _imageBorder.BorderBrush = IsSelected ? Brushes.Transparent : imageBorderBrush;
             _imageBorder.BorderThickness = new Thickness(BORDER_THICKNESS);
             _imageBorder.Margin = new Thickness(0);
             return;
@@ -137,7 +138,7 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
         BorderBrush = Brushes.Transparent;
         // Grow the border outwards so the image doesn't move
         int extra = SELECTED_BORDER_THICKNESS - BORDER_THICKNESS;
-        _imageBorder.BorderBrush = IsSelected ? SelectedBorderBrush : colors.ForegroundColor.ToWpfBrush();
+        _imageBorder.BorderBrush = IsSelected ? SelectedBorderBrush : imageBorderBrush;
         _imageBorder.BorderThickness = new Thickness(IsSelected ? SELECTED_BORDER_THICKNESS : BORDER_THICKNESS);
         _imageBorder.Margin = new Thickness(IsSelected ? -extra : 0);
     }
