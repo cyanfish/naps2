@@ -353,7 +353,7 @@ public class GtkEtoPlatform : EtoPlatform
     {
         var gtkButton = button.ToNative();
         button.Text = "";
-        button.Image = IconProvider.GetIcon(icon, 16, gtkButton.ScaleFactor);
+        button.Image = IconProvider.GetIcon(icon, IconScenario.Button, gtkButton.ScaleFactor);
         button.ScaleImage();
         button.Size = Size.Empty;
         gtkButton.StyleContext.AddClass("zoom-button");

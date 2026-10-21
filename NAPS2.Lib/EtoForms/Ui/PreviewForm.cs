@@ -263,7 +263,7 @@ public class PreviewForm : EtoDialogBase
             scale =>
             {
                 EtoPlatform.Current.SetImageSize(toolItem, (int) (16 * scale));
-                toolItem.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, 16, scale);
+                toolItem.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, IconScenario.SmallToolbar, scale);
             });
         return toolItem;
     }

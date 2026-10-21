@@ -16,8 +16,8 @@ public class HueSatForm : UnaryImageFormBase
 
         EtoPlatform.Current.AttachDpiDependency(this, scale =>
         {
-            _hueSlider.Icon = iconProvider.GetIcon("color_wheel", 16, scale);
-            _saturationSlider.Icon = iconProvider.GetIcon("color_gradient", 16, scale);
+            _hueSlider.Icon = iconProvider.GetIcon("color_wheel", IconScenario.Inline16, scale);
+            _saturationSlider.Icon = iconProvider.GetIcon("color_gradient", IconScenario.Inline16, scale);
         });
         Sliders = [_hueSlider, _saturationSlider];
     }

@@ -16,8 +16,8 @@ public class BrightContForm : UnaryImageFormBase
 
         EtoPlatform.Current.AttachDpiDependency(this, scale =>
         {
-            _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun", 16, scale);
-            _contrastSlider.Icon = iconProvider.GetIcon("contrast", 16, scale);
+            _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun", IconScenario.Inline16, scale);
+            _contrastSlider.Icon = iconProvider.GetIcon("contrast", IconScenario.Inline16, scale);
         });
         Sliders = [_brightnessSlider, _contrastSlider];
     }

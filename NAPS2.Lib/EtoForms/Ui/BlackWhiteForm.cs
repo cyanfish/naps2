@@ -14,7 +14,7 @@ public class BlackWhiteForm : UnaryImageFormBase
         Title = UiStrings.BlackAndWhite;
 
         EtoPlatform.Current.AttachDpiDependency(this,
-            scale => _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high", 16, scale));
+            scale => _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high", IconScenario.Inline16, scale));
         Sliders = [_thresholdSlider];
         // BlackWhiteTransform is not commutative with scaling
         CanScaleWorkingImage = false;

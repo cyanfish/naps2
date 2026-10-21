@@ -63,7 +63,7 @@ public class MacSettingsNavigator : NSTableViewDelegate, ISettingsNavigator
             ImageScaling = NSImageScale.ProportionallyUpOrDown,
             TranslatesAutoresizingMaskIntoConstraints = false
         };
-        if (EtoPlatform.Current.IconProvider.GetIcon(item.IconName, 16) is { } icon)
+        if (EtoPlatform.Current.IconProvider.GetIcon(item.IconName, IconScenario.Inline16) is { } icon)
         {
             imageView.Image = icon.ToNS();
         }

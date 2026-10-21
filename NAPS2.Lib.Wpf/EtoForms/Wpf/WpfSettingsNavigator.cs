@@ -32,7 +32,7 @@ public class WpfSettingsNavigator : ISettingsNavigator
         foreach (var item in items)
         {
             var panel = new StackPanel { Orientation = Orientation.Horizontal };
-            var icon = EtoPlatform.Current.IconProvider.GetIcon(item.IconName, 16);
+            var icon = EtoPlatform.Current.IconProvider.GetIcon(item.IconName, IconScenario.Inline16);
             if (icon != null)
             {
                 panel.Children.Add(new Image

@@ -74,13 +74,14 @@ public class MacIconProvider : IIconProvider
         _defaultIconProvider = defaultIconProvider;
     }
 
-    public Bitmap? GetIcon(string name, int size, float scale = 1f, bool oversized = false)
+    public Bitmap? GetIcon(string name, IconScenario scenario, float scale = 1f)
     {
+        int size = scenario.ToSize();
         if (!OperatingSystem.IsMacOSVersionAtLeast(11) && name == "arrow_rotate_anticlockwise" && size == 32)
         {
             // TODO: Verify this fixes the rotate menu on macOS 10.15
             // TODO: Also maybe map other icons to 16x16 versions (e.g. control_play_blue) for better rendering
-            return _defaultIconProvider.GetIcon(name, 16);
+            return _defaultIconProvider.GetIcon(name, IconScenario.Menu);
         }
         if (OperatingSystem.IsMacOSVersionAtLeast(11))
         {
@@ -90,7 +91,7 @@ public class MacIconProvider : IIconProvider
                 var symbol = NSImage.GetSystemSymbol(symbolName, null);
                 if (symbol != null)
                 {
-                    if (oversized)
+                    if (scenario == IconScenario.LargeButton)
                     {
                         symbol = symbol.GetImage(NSImageSymbolConfiguration.Create(32, 0.1))!;
                     }
@@ -104,7 +105,7 @@ public class MacIconProvider : IIconProvider
                 }
             }
         }
-        return _defaultIconProvider.GetIcon(name, size, scale);
+        return _defaultIconProvider.GetIcon(name, scenario, scale);
     }
 
     public Icon? ToFormIcon(Bitmap bitmap) => null;

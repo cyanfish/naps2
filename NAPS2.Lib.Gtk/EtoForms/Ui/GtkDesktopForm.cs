@@ -185,7 +185,7 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void CreateToolbarButton(Command command)
     {
-        var button = new ToolButton(GetCommandImage(command, 32), command.ToolBarText)
+        var button = new ToolButton(GetCommandImage(command, IconScenario.Toolbar), command.ToolBarText)
         {
             Homogeneous = false,
             Sensitive = command.Enabled
@@ -234,7 +234,7 @@ public class GtkDesktopForm : DesktopForm
     protected override void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
         MenuProvider menu)
     {
-        var button = new MenuToolButton(GetCommandImage(command, 32), command.ToolBarText)
+        var button = new MenuToolButton(GetCommandImage(command, IconScenario.Toolbar), command.ToolBarText)
         {
             Homogeneous = false,
             Sensitive = command.Enabled
@@ -251,7 +251,7 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
     {
-        var button = new ToolButton(GetCommandImage(command, 32), command.ToolBarText)
+        var button = new ToolButton(GetCommandImage(command, IconScenario.Toolbar), command.ToolBarText)
         {
             Homogeneous = false,
             Sensitive = command.Enabled
@@ -286,7 +286,7 @@ public class GtkDesktopForm : DesktopForm
         int spacing = 4)
     {
         var box = new Box(orientation, spacing);
-        box.Add(GetCommandImage(command, 16));
+        box.Add(GetCommandImage(command, IconScenario.SmallToolbar));
         var label = new Label(command.ToolBarText);
         box.Add(label);
         var button = new Button(box)
@@ -300,10 +300,10 @@ public class GtkDesktopForm : DesktopForm
         return button;
     }
 
-    private Image GetCommandImage(Command command, int size)
+    private Image GetCommandImage(Command command, IconScenario scenario)
     {
         var scale = EtoPlatform.Current.GetScaleFactor(this);
-        var image = ((ActionCommand) command).GetIconImage(size, scale);
+        var image = ((ActionCommand) command).GetIconImage(scenario, scale);
         return image.ToGdk().ToScaledImage((int) scale);
     }
 }

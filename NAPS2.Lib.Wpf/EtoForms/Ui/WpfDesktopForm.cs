@@ -126,7 +126,7 @@ public class WpfDesktopForm : DesktopForm
         foreach (var profile in _profileManager.Profiles)
         {
             var (content, image, _) = _toolbarFormatter.CreateButtonContent(profile.DisplayName, false);
-            SetIcon(image, scale => _iconProvider.GetIcon("control_play_blue", 16, scale));
+            SetIcon(image, scale => _iconProvider.GetIcon("control_play_blue", IconScenario.SmallToolbar, scale));
             var button = _toolbarFormatter.CreateProfileButton(content);
             button.Click += (_, _) => _desktopScanController.ScanWithProfile(profile);
             _profilesToolBar.Items.Add(button);
@@ -242,7 +242,7 @@ public class WpfDesktopForm : DesktopForm
     {
         var (content, image, label) = _toolbarFormatter.CreateButtonContent(command.ToolBarText, large);
         var actionCommand = (ActionCommand) command;
-        SetIcon(image, scale => actionCommand.GetIconImage(large ? 32 : 16, scale));
+        SetIcon(image, scale => actionCommand.GetIconImage(large ? IconScenario.Toolbar : IconScenario.SmallToolbar, scale));
         actionCommand.TextChanged += (_, _) => label.Text = command.ToolBarText;
         return content;
     }

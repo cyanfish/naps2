@@ -43,7 +43,7 @@ public class GtkSettingsNavigator : ISettingsNavigator
         foreach (var item in items)
         {
             var box = new Box(Orientation.Horizontal, 10);
-            var icon = EtoPlatform.Current.IconProvider.GetIcon(item.IconName, 16);
+            var icon = EtoPlatform.Current.IconProvider.GetIcon(item.IconName, IconScenario.Inline16);
             if (icon != null)
             {
                 box.PackStart(new Image(icon.ToGdk()), false, false, 0);

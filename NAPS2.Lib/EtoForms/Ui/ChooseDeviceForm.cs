@@ -80,7 +80,7 @@ public class ChooseDeviceForm : EtoDialogBase
     {
         if (_statusIconName != null)
         {
-            _statusIcon.Image = _iconProvider.GetIcon(_statusIconName, 16, EtoPlatform.Current.GetScaleFactor(this));
+            _statusIcon.Image = _iconProvider.GetIcon(_statusIconName, IconScenario.Inline16, EtoPlatform.Current.GetScaleFactor(this));
             _statusIcon.Size = Size.Round(new SizeF(16, 16) * EtoPlatform.Current.GetLayoutScaleFactor(this));
         }
     }

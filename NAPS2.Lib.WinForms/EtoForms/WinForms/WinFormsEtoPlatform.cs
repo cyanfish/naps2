@@ -344,7 +344,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         AttachDpiDependency(button, scale =>
         {
             button.Size = new Size((int) (25 * scale), (int) (25 * scale));
-            button.Image = IconProvider.GetIcon(icon, 16, scale);
+            button.Image = IconProvider.GetIcon(icon, IconScenario.Button, scale);
         });
         var wfButton = (WF.Button) button.ToNative();
         wfButton.Text = "";

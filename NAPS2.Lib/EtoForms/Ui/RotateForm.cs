@@ -22,7 +22,7 @@ public class RotateForm : UnaryImageFormBase
         HelpText = UiStrings.CustomRotationHelp;
 
         EtoPlatform.Current.AttachDpiDependency(this,
-            scale => _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise", 16, scale));
+            scale => _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise", IconScenario.Inline16, scale));
         Sliders = [_angleSlider];
         Overlay.MouseDown += Overlay_MouseDown;
         Overlay.MouseMove += Overlay_MouseMove;

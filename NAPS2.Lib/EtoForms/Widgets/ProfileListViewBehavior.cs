@@ -30,7 +30,7 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
             (false, false) => "scanner"
         };
         var scale = EtoPlatform.Current.GetScaleFactor(listView.Control.ParentWindow);
-        return EtoPlatform.Current.IconProvider.GetIcon(iconName, 48, scale)!;
+        return EtoPlatform.Current.IconProvider.GetIcon(iconName, IconScenario.Inline48, scale)!;
     }
 
     public override bool AllowDragDrop => true;

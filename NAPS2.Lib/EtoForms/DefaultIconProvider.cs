@@ -4,8 +4,9 @@ namespace NAPS2.EtoForms;
 
 public class DefaultIconProvider : IIconProvider
 {
-    public Bitmap? GetIcon(string name, int size, float scale = 1f, bool oversized = false)
+    public Bitmap? GetIcon(string name, IconScenario scenario, float scale = 1f)
     {
+        int size = scenario.ToSize();
         // Prefer downscaling a double-size icon over upscaling (or when there's no icon of the requested size)
         var hires = GetIconData(name, size * 2);
         var data = GetIconData(name, size);

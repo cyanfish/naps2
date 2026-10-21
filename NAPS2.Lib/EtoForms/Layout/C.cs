@@ -118,10 +118,9 @@ public static class C
         }
         else if (iconName != null)
         {
-            bool oversized = imagePosition == ButtonImagePosition.Above && flags.HasFlag(ButtonFlags.LargeIcon);
-            int iconSize = flags.HasFlag(ButtonFlags.LargeIcon) ? 32 : 16;
+            var scenario = flags.HasFlag(ButtonFlags.LargeIcon) ? IconScenario.LargeButton : IconScenario.Button;
             EtoPlatform.Current.AttachDpiDependency(button,
-                scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, iconSize, scale, oversized));
+                scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scenario, scale));
         }
         button.ImagePosition = imagePosition;
         if (flags.HasFlag(ButtonFlags.LargeText))
@@ -231,7 +230,7 @@ public static class C
         EtoPlatform.Current.SetAccessibleName(button, name);
         EtoPlatform.Current.AttachDpiDependency(button, scale =>
         {
-            var icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, 16, scale)!;
+            var icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, IconScenario.Button, scale)!;
             button.Image = icon;
             button.MinimumSize = new Size(icon.Width + 30, 0);
         });
@@ -247,7 +246,7 @@ public static class C
         EtoPlatform.Current.AttachDpiDependency(window, scale =>
         {
             EtoPlatform.Current.SetImageSize(menuItem, (int) (16 * scale));
-            menuItem.Image = command.GetIconImage(16, scale);
+            menuItem.Image = command.GetIconImage(IconScenario.Menu, scale);
         });
         return menuItem;
     }
@@ -259,7 +258,7 @@ public static class C
             Text = menuCommand.MenuText
         };
         EtoPlatform.Current.AttachDpiDependency(window,
-            scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(16, scale));
+            scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(IconScenario.Menu, scale));
         menuProvider.Handle(subItems => SetMenuItems(window, menuItem.Items, subItems));
         return menuItem;
     }
