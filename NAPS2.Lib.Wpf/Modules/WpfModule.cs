@@ -1,5 +1,7 @@
 using Autofac;
+using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
+using NAPS2.EtoForms.Wpf;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
@@ -17,6 +19,7 @@ public class WpfModule : Module
         builder.RegisterType<WindowsOpenWith>().As<IOpenWith>();
         builder.RegisterType<MapiEmailProvider>().As<IEmailProvider>().WithParameter("systemDefault", true);
         builder.RegisterType<MapiEmailClients>().As<ISystemEmailClients>();
+        builder.RegisterType<FluentIconProvider>().As<IIconProvider>();
 
         builder.RegisterType<WpfDesktopForm>().As<DesktopForm>();
 
