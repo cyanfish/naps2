@@ -452,6 +452,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] cog_64 {
+            get {
+                object obj = ResourceManager.GetObject("cog_64", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] cog_32 {
             get {
                 object obj = ResourceManager.GetObject("cog_32", resourceCulture);
@@ -842,6 +852,16 @@ namespace NAPS2 {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] exclamation_64 {
+            get {
+                object obj = ResourceManager.GetObject("exclamation_64", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] exclamation_32 {
             get {
                 object obj = ResourceManager.GetObject("exclamation_32", resourceCulture);
@@ -965,6 +985,16 @@ namespace NAPS2 {
         internal static byte[] hourglass_grey_32 {
             get {
                 object obj = ResourceManager.GetObject("hourglass_grey_32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] information_64 {
+            get {
+                object obj = ResourceManager.GetObject("information_64", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -1155,6 +1185,16 @@ namespace NAPS2 {
         internal static byte[] paste_16 {
             get {
                 object obj = ResourceManager.GetObject("paste_16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pencil_64 {
+            get {
+                object obj = ResourceManager.GetObject("pencil_64", resourceCulture);
                 return ((byte[])(obj));
             }
         }

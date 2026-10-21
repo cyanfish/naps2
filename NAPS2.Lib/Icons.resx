@@ -214,6 +214,9 @@
   <data name="file_extension_pdf_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\file_extension_pdf_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="information_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\information_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="information_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\information_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -318,6 +321,9 @@
   </data>
   <data name="broom_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\broom_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pencil_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\pencil_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pencil_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pencil_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -514,6 +520,9 @@
   <data name="network_ip_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\network_ip_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cog_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\cog_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cog_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cog_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -528,6 +537,9 @@
   </data>
   <data name="ask_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\ask_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="exclamation_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\exclamation_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="exclamation_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\exclamation_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
