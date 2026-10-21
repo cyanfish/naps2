@@ -164,7 +164,7 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual LayoutElement CreateGroupBox(string title, LayoutElement content)
+    public virtual LayoutElement CreateGroupBox(string title, LayoutElement content, GroupBoxHeaderStyle headerStyle)
     {
         var groupBox = new GroupBox { Text = title };
         return L.Overlay(groupBox, L.Buffer(content, 6, IsGtk ? 21 : 18, 6, 6));

@@ -157,7 +157,7 @@ public class DeviceSelectorWidget
                 // TODO: We can consider a compact choose-device button for the sidebar, but maybe simpler to force
                 // creation of separate profiles
                 ShowChooseDevice ? _chooseDevice.AlignCenter() : C.None()
-            )
-        );
+            ),
+            GroupBoxHeaderStyle.Regular);
     }
 }

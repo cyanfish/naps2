@@ -272,14 +272,23 @@ public class WpfEtoPlatform : EtoPlatform
     }
 
     private const int GROUP_BOX_HEADER_HEIGHT = 26;
+    private const int GROUP_BOX_BOLD_HEADER_SPACING = 8;
     private const int GROUP_BOX_PADDING = 8;
 
-    public override LayoutElement CreateGroupBox(string title, LayoutElement content)
+    public override LayoutElement CreateGroupBox(string title, LayoutElement content, GroupBoxHeaderStyle headerStyle)
     {
         var groupBox = new GroupBox { Text = title };
-        ((SWC.GroupBox) groupBox.ControlObject).Template = XamlTemplates.CardGroupBoxTemplate;
+        var native = (SWC.GroupBox) groupBox.ControlObject;
+        native.Template = XamlTemplates.CardGroupBoxTemplate;
+        int top = 0;
+        if (headerStyle == GroupBoxHeaderStyle.Bold)
+        {
+            ((SWC.Control) native.Header).FontWeight = SW.FontWeights.SemiBold;
+            // Bold headers have a bit more spacing above them
+            top = GROUP_BOX_BOLD_HEADER_SPACING;
+        }
         int p = GROUP_BOX_PADDING;
-        return L.Overlay(groupBox, L.Buffer(content, p, GROUP_BOX_HEADER_HEIGHT + p, p, p));
+        return L.Overlay(groupBox.Padding(top: top), L.Buffer(content, p, top + GROUP_BOX_HEADER_HEIGHT + p, p, p));
     }
 
     public override void ConfigureDonateButton(Button button)
