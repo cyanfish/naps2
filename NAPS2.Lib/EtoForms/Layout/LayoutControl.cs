@@ -187,6 +187,23 @@ public class LayoutControl : LayoutElement
         {
             size.Height = NaturalHeight.Value * context.Scale;
         }
+        // Fixed dimensions can't shrink a control below the platform's minimum size (e.g. Gtk always allocates widgets
+        // at least their minimum size), so account for that or the control overflows its layout cell. This is per
+        // dimension as e.g. a wrapping label's minimum height (at its minimum width) is much more than its real height.
+        bool fixedWidth = (Width ?? MaxWidth ?? NaturalWidth) != null;
+        bool fixedHeight = (Height ?? MaxHeight ?? NaturalHeight) != null;
+        if (Control != null && (fixedWidth || fixedHeight))
+        {
+            var minSize = EtoPlatform.Current.GetMinimumSize(Control);
+            if (fixedWidth)
+            {
+                size.Width = Math.Max(size.Width, minSize.Width);
+            }
+            if (fixedHeight)
+            {
+                size.Height = Math.Max(size.Height, minSize.Height);
+            }
+        }
         return size;
     }
 

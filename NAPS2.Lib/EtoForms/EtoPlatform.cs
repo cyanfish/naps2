@@ -128,6 +128,8 @@ public abstract class EtoPlatform
         return control.GetPreferredSize(availableSpace);
     }
 
+    public virtual SizeF GetMinimumSize(Control control) => SizeF.Empty;
+
     public virtual LayoutElement FormatProgressBar(ProgressBar progressBar)
     {
         return progressBar.Width(420).Padding(top: 10, bottom: 10);
