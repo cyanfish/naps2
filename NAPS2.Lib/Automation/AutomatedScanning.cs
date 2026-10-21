@@ -599,6 +599,7 @@ internal class AutomatedScanning
                 : TiffCompression.Auto
         });
 
+        int scanIndex = 0;
         foreach (var scan in _scanList)
         {
             var op = _operationFactory.Create<SaveImagesOperation>();
@@ -612,7 +613,10 @@ internal class AutomatedScanning
                     i = op.Status.CurrentProgress;
                 }
             };
-            op.Start(outputPath, _placeholders, scan, _config.Get(c => c.ImageSettings));
+            int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
+            string actualPath = _placeholders.Substitute(outputPath, true, scanIndex++,
+                _scanList.Count > 1 ? digits : 0);
+            op.Start(actualPath, _placeholders, scan, _config.Get(c => c.ImageSettings));
             await op.Success;
         }
     }

@@ -669,6 +669,28 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
+    [Theory]
+    [InlineData("test.tiff", "test.1.tiff", "test.2.tiff")]
+    [InlineData("test$(n).tiff", "test1.tiff", "test2.tiff")]
+    public async Task SplitImportedTiffFiles(string outputName, string firstName, string secondName)
+    {
+        var firstInput = CopyResourceToFile(Image1, "first.png");
+        var secondInput = CopyResourceToFile(Image2, "second.png");
+        await _automationHelper.RunCommand(new AutomatedScanningOptions
+        {
+            Number = 0,
+            ImportPath = $"{firstInput};{secondInput}",
+            OutputPath = Path.Combine(FolderPath, outputName),
+            Split = true,
+            ForceOverwrite = true
+        });
+
+        ImageAsserts.Similar(Image1, Path.Combine(FolderPath, firstName));
+        ImageAsserts.Similar(Image2, Path.Combine(FolderPath, secondName));
+        Assert.Equal(2, Directory.GetFiles(FolderPath, "*.tiff").Length);
+        AssertRecoveryCleanedUp();
+    }
+
     [Fact]
     public async Task SplitWithPlaceholder()
     {
