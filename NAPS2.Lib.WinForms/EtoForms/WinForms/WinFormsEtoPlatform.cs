@@ -135,7 +135,7 @@ public class WinFormsEtoPlatform : EtoPlatform
                 image.Height,
                 SD.GraphicsUnit.Pixel,
                 attrs);
-            using var hourglass = new SD.Bitmap(new MemoryStream(Icons.hourglass_grey));
+            using var hourglass = new SD.Bitmap(new MemoryStream(Icons.hourglass_grey_32));
             g.DrawImage(hourglass, new SD.Rectangle((bitmap.Width - 32) / 2, (bitmap.Height - 32) / 2, 32, 32));
         }
         image.Dispose();
@@ -344,7 +344,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         AttachDpiDependency(button, scale =>
         {
             button.Size = new Size((int) (25 * scale), (int) (25 * scale));
-            button.Image = IconProvider.GetIcon(icon, scale);
+            button.Image = IconProvider.GetIcon(icon, 16, scale);
         });
         var wfButton = (WF.Button) button.ToNative();
         wfButton.Text = "";

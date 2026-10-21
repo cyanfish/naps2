@@ -35,7 +35,7 @@ public class CompressForm : UnaryImageFormBase
     public CompressForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController) :
         base(config, imageList, thumbnailController)
     {
-        IconName = "spring_small";
+        IconName = "spring";
         Title = UiStrings.Compress;
 
         _dpi.TextChanged += (_, _) => DpiChanged();

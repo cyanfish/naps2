@@ -16,7 +16,7 @@ public class BatchPromptForm : EtoDialogBase
         })
         {
             Text = UiStrings.Scan,
-            IconName = "control_play_blue_small"
+            IconName = "control_play_blue"
         };
         _scanButton = C.Button(scanNextCommand, ButtonImagePosition.Left);
         DefaultButton = _scanButton;

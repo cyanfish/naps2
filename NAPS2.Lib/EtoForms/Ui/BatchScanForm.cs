@@ -57,7 +57,7 @@ public class BatchScanForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.BatchScanFormTitle;
-        IconName = "application_cascade_small";
+        IconName = "application_cascade";
 
         _profileManager = profileManager;
         _batchScanPerformer = batchScanPerformer;
@@ -86,12 +86,12 @@ public class BatchScanForm : EtoDialogBase
         EditProfileCommand = new ActionCommand(EditProfile)
         {
             Text = UiStrings.Edit,
-            IconName = "pencil_small"
+            IconName = "pencil"
         };
         NewProfileCommand = new ActionCommand(NewProfile)
         {
             Text = UiStrings.NewProfile,
-            IconName = "add_small"
+            IconName = "add"
         };
     }
 

@@ -21,7 +21,7 @@ public class AboutForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.AboutFormTitle;
-        IconName = "information_small";
+        IconName = "information";
 
         _donateButton = C.Button(UiStrings.Donate, () => ProcessHelper.OpenUrl(DONATE_URL));
         _donateButton.BackgroundColor = Color.FromRgb(0xfeda96);

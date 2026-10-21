@@ -461,16 +461,16 @@ public abstract class DesktopForm : EtoFormBase
             return C.None();
         }
         var toggleSidebar = C.ImageButton(Commands.ToggleSidebar);
-        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list_small");
+        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list");
         return toggleSidebar.AlignTrailing();
     }
 
     protected virtual LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out");
         return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(-1);
     }
 
@@ -545,7 +545,7 @@ public abstract class DesktopForm : EtoFormBase
                 new ActionCommand(() => _desktopScanController.ScanWithProfile(profile))
                 {
                     MenuText = profile.DisplayName.Replace("&", "&&"),
-                    IconName = profile == defaultProfile ? "accept_small" : null
+                    IconName = profile == defaultProfile ? "accept" : null
                 })
             .ToImmutableList<Command>();
         for (int i = 0; i < commandList.Count; i++)

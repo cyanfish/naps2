@@ -33,38 +33,38 @@ public class PreviewForm : EtoDialogBase
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
             Text = UiStrings.Previous,
-            IconName = "arrow_left_small"
+            IconName = "arrow_left"
         };
         GoToNextCommand = new ActionCommand(() => GoTo(ImageIndex + 1))
         {
             Text = UiStrings.Next,
-            IconName = "arrow_right_small"
+            IconName = "arrow_right"
         };
         ZoomInCommand = new ActionCommand(() => ImageViewer.ChangeZoom(1))
         {
             Text = UiStrings.ZoomIn,
-            IconName = "zoom_in_small"
+            IconName = "zoom_in"
         };
         ZoomOutCommand = new ActionCommand(() => ImageViewer.ChangeZoom(-1))
         {
             Text = UiStrings.ZoomOut,
-            IconName = "zoom_out_small"
+            IconName = "zoom_out"
         };
         ZoomWindowCommand = new ActionCommand(ImageViewer.ZoomToContainer)
         {
             // TODO: Update this string as it's now a button and not a toggle
             Text = UiStrings.ScaleWithWindow,
-            IconName = "arrow_out_small"
+            IconName = "arrow_out"
         };
         ZoomActualCommand = new ActionCommand(ImageViewer.ZoomToActual)
         {
             Text = UiStrings.ZoomActual,
-            IconName = "zoom_actual_small"
+            IconName = "zoom_actual"
         };
         DeleteCurrentImageCommand = new ActionCommand(DeleteCurrentImage)
         {
             Text = UiStrings.Delete,
-            IconName = "cross_small"
+            IconName = "cross"
         };
 
         _previewKsm = new KeyboardShortcutManager();
@@ -220,7 +220,7 @@ public class PreviewForm : EtoDialogBase
                         Commands.Deskew,
                         Commands.CustomRotate
                     }
-                }, "arrow_rotate_anticlockwise_small"),
+                }, "arrow_rotate_anticlockwise"),
                 MakeToolButton(Commands.Crop),
                 MakeToolButton(Commands.BrightCont),
                 MakeToolButton(Commands.HueSat),
@@ -234,7 +234,7 @@ public class PreviewForm : EtoDialogBase
                 MakeToolButton(Commands.EditWithApp),
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.SaveSelectedPdf, "file_extension_pdf"),
-                MakeToolButton(Commands.SaveSelectedImages, "picture_small"),
+                MakeToolButton(Commands.SaveSelectedImages, "picture"),
                 new SeparatorToolItem(),
                 MakeToolButton(DeleteCurrentImageCommand),
             }
@@ -263,7 +263,7 @@ public class PreviewForm : EtoDialogBase
             scale =>
             {
                 EtoPlatform.Current.SetImageSize(toolItem, (int) (16 * scale));
-                toolItem.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scale);
+                toolItem.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, 16, scale);
             });
         return toolItem;
     }

@@ -30,6 +30,6 @@ public class DeviceListViewBehavior : ListViewBehavior<ScanDevice>
             return image.Clone().ResizeTo(scaledSize).PadTo(Size.Round(listView.ImageSize * scale));
         }
         string iconName = _iconNameMap.Get(item) ?? "device";
-        return EtoPlatform.Current.IconProvider.GetIcon(iconName, scale)!.PadTo(Size.Round(listView.ImageSize * scale));
+        return EtoPlatform.Current.IconProvider.GetIcon(iconName, 32, scale)!.PadTo(Size.Round(listView.ImageSize * scale));
     }
 }

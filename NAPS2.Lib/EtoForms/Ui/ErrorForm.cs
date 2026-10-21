@@ -14,7 +14,7 @@ public class ErrorForm : EtoDialogBase
     public ErrorForm(Naps2Config config, IIconProvider iconProvider)
         : base(config)
     {
-        _image.Image = iconProvider.GetIcon("exclamation");
+        _image.Image = iconProvider.GetIcon("exclamation", 32);
     }
 
     protected override void BuildLayout()

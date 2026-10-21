@@ -27,7 +27,7 @@ public class ScannerSharingForm : EtoDialogBase
         : base(config)
     {
         Title = UiStrings.ScannerSharingFormTitle;
-        IconName = "wireless_small";
+        IconName = "wireless";
 
         _sharedDeviceManager = sharedDeviceManager;
         _osServiceManager = osServiceManager;
@@ -37,17 +37,17 @@ public class ScannerSharingForm : EtoDialogBase
         _addCommand = new ActionCommand(DoAdd)
         {
             MenuText = UiStrings.Share,
-            IconName = "add_small"
+            IconName = "add"
         };
         _editCommand = new ActionCommand(DoEdit)
         {
             MenuText = UiStrings.Edit,
-            IconName = "pencil_small"
+            IconName = "pencil"
         };
         _deleteCommand = new ActionCommand(DoDelete)
         {
             MenuText = UiStrings.Delete,
-            IconName = "cross_small"
+            IconName = "cross"
         };
 
         var sharingKsm = new KeyboardShortcutManager();

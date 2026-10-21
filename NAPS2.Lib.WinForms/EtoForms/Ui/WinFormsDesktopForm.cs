@@ -212,7 +212,7 @@ public class WinFormsDesktopForm : DesktopForm
                 TextAlign = ContentAlignment.MiddleLeft
             };
             EtoPlatform.Current.AttachDpiDependency(this,
-                scale => item.Image = _iconProvider.GetIcon("control_play_blue_small", scale).ToSD());
+                scale => item.Image = _iconProvider.GetIcon("control_play_blue", 16, scale).ToSD());
             item.Click += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Tag!);
             toolbarItems.Add(item);
         }
@@ -355,8 +355,8 @@ public class WinFormsDesktopForm : DesktopForm
         item.AccessibleName = string.Join(" ", command1.ToolBarText, command2.ToolBarText);
         EtoPlatform.Current.AttachDpiDependency(this, scale =>
         {
-            item.FirstImage = ((ActionCommand) command1).GetIconImage(scale).ToSD();
-            item.SecondImage = ((ActionCommand) command2).GetIconImage(scale).ToSD();
+            item.FirstImage = ((ActionCommand) command1).GetIconImage(16, scale).ToSD();
+            item.SecondImage = ((ActionCommand) command2).GetIconImage(16, scale).ToSD();
         });
         command1.EnabledChanged += (_, _) => item.Enabled = command1.Enabled;
         item.FirstClick += (_, _) => command1.Execute();
@@ -368,7 +368,8 @@ public class WinFormsDesktopForm : DesktopForm
     {
         void SetItemText() => item.Text = item is WF.ToolStripMenuItem ? command.MenuText : command.ToolBarText;
         EtoPlatform.Current.AttachDpiDependency(this,
-            scale => item.Image = ((ActionCommand) command).GetIconImage(scale).ToSD());
+            scale => item.Image = ((ActionCommand) command).GetIconImage(item is WF.ToolStripMenuItem ? 16 : 32, scale)
+                .ToSD());
         SetItemText();
         if (command is ActionCommand actionCommand)
         {

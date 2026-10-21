@@ -308,7 +308,7 @@ public class WpfEtoPlatform : EtoPlatform
         native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING);
         native.MinWidth = native.MinHeight = 0;
         SetIconProps(button, 16);
-        AttachDpiDependency(button, scale => button.Image = IconProvider.GetIcon(icon, scale));
+        AttachDpiDependency(button, scale => button.Image = IconProvider.GetIcon(icon, 16, scale));
         // These buttons are over the thumbnails, so make them (mostly) opaque, with a higher contrast border
         void UpdateBackground(object? sender, EventArgs e) => SetOpaqueButtonBackground(native);
         SetOpaqueButtonBackground(native);
@@ -347,7 +347,7 @@ public class WpfEtoPlatform : EtoPlatform
             dc.PushOpacity(0.3);
             dc.DrawImage(image.ToBitmapSource(), new SW.Rect(0, 0, image.Width, image.Height));
             dc.Pop();
-            var hourglass = BitmapFrame.Create(new MemoryStream(Icons.hourglass_grey), BitmapCreateOptions.None,
+            var hourglass = BitmapFrame.Create(new MemoryStream(Icons.hourglass_grey_32), BitmapCreateOptions.None,
                 BitmapCacheOption.OnLoad);
             // Use whole pixels so the icon isn't blurred
             int left = (image.Width - 32) / 2, top = (image.Height - 32) / 2;

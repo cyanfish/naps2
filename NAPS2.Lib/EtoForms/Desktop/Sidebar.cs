@@ -47,17 +47,17 @@ public class Sidebar
         EditProfileCommand = new ActionCommand(EditProfile)
         {
             Text = UiStrings.Edit,
-            IconName = "pencil_small"
+            IconName = "pencil"
         };
         NewProfileCommand = new ActionCommand(NewProfile)
         {
             Text = UiStrings.NewProfile,
-            IconName = "add_small"
+            IconName = "add"
         };
         ScanCommand = new ActionCommand(DoScan)
         {
             Text = UiStrings.Scan,
-            IconName = "control_play_blue_small"
+            IconName = "control_play_blue"
         };
     }
 

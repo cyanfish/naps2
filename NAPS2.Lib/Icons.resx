@@ -118,112 +118,112 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="arrow_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_down_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_down_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_down_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_down_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_down_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_out_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_out_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_out_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_out_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_out_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_rotate_anticlockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_rotate_anticlockwise_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_anticlockwise_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_rotate_anticlockwise_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_rotate_anticlockwise_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_anticlockwise_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_rotate_anticlockwise_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_rotate_anticlockwise_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_anticlockwise_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_rotate_clockwise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_rotate_clockwise_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_clockwise_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_rotate_clockwise_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_rotate_clockwise_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_rotate_clockwise_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_switch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_switch_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_switch_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_switch_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_switch_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_switch_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_up_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_up_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_up_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_up_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_up_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_left_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_left_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_left_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_left_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_left_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_right_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_right_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_right_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_right_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_right_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="blueprints" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="blueprints_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\blueprints_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="blueprints_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="blueprints_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\blueprints_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="blueprints_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="blueprints_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\blueprints_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cross_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cross_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cross_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cross_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cross_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cross_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cross_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cross_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="key_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\key_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="key_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="key_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\key_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="email" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="email_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="email_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="email_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="email_attach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="email_attach_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_attach_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="email_attach_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="email_attach_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_attach_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="file_extension_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_extension_pdf_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\file_extension_pdf_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="file_extension_pdf_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_extension_pdf_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\file_extension_pdf_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="file_extension_pdf_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="file_extension_pdf_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\file_extension_pdf_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="information_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\information_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="information_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="information_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\information_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="picture_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="picture_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="picture_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="scanner_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -268,421 +268,421 @@
   <data name="scanner_wireless_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\scanner_wireless_96.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="device" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="device_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\device_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="device_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="device_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\device_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom_actual" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_actual_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_actual_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom_actual_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_actual_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_actual_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom_in" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_in_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_in_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom_in_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_in_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_in_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_out_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_out_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom_out_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_out_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_out_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="accept_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\accept_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="accept_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="accept_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\accept_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="add_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\add_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="add_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="add_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\add_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cancel_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cancel_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cancel_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cancel_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cancel_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cancel_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cancel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cancel_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="broom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="broom_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\broom_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="broom_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="broom_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\broom_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="pencil_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pencil_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pencil_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="pencil_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pencil_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tick_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\tick_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tick_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tick_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\tick_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="world" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="world_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\world_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="world_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="world_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\world_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="folder_picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="folder_picture_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\folder_picture_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="folder_picture_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="folder_picture_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\folder_picture_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_refresh_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_refresh_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="arrow_refresh_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="arrow_refresh_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\arrow_refresh_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="text" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="text_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="text_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="text_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="text_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="text_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="text_align_justify" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="text_align_justify_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text_align_justify_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="text_align_justify_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="text_align_justify_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\text_align_justify_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="large_tiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="large_tiles_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\large_tiles_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="large_tiles_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="large_tiles_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\large_tiles_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="control_play_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="control_play_blue_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\control_play_blue_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="control_play_blue_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="control_play_blue_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\control_play_blue_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="control_play_blue_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="control_play_blue_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\control_play_blue_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="color_wheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="color_wheel_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_wheel_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="color_wheel_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="color_wheel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_wheel_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="contrast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="contrast_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\contrast_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="contrast_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="contrast_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\contrast_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="transform_crop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="transform_crop_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\transform_crop_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="transform_crop_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="transform_crop_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\transform_crop_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="weather_sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="weather_sun_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\weather_sun_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="weather_sun_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="weather_sun_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\weather_sun_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pictures" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="pictures_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pictures_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pictures_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="pictures_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\pictures_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="picture_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="picture_edit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture_edit_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="picture_edit_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="picture_edit_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\picture_edit_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="printer_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\printer_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="printer_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="printer_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\printer_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="application_cascade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="application_cascade_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_cascade_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="application_cascade_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="application_cascade_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_cascade_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="color_gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="color_gradient_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_gradient_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="color_gradient_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="color_gradient_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_gradient_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="color_management" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="color_management_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_management_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="color_management_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="color_management_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_management_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="contrast_high" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="contrast_high_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\contrast_high_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="contrast_high_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="contrast_high_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\contrast_high_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="contrast_with_sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="contrast_with_sun_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\contrast_with_sun_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="contrast_with_sun_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="contrast_with_sun_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\contrast_with_sun_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="sharpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="sharpen_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\sharpen_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="sharpen_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="sharpen_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\sharpen_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="gmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="gmail_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\gmail_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="gmail_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="gmail_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\gmail_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="outlooknew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="outlooknew_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\outlooknew_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="outlooknew_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="outlooknew_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\outlooknew_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="outlookweb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="outlookweb_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\outlookweb_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="outlookweb_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="outlookweb_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\outlookweb_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="thunderbird" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="thunderbird_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\thunderbird_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="thunderbird_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="thunderbird_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\thunderbird_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="apple_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="apple_mail_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\apple_mail_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="apple_mail_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="apple_mail_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\apple_mail_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="email_setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="email_setting_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\email_setting_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mail_yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="mail_yellow_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\mail_yellow_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mail_yellow_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="mail_yellow_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\mail_yellow_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="hourglass_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="hourglass_grey_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\hourglass_grey_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="wireless" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="wireless_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\wireless_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="wireless_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="wireless_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\wireless_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="network_ip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="network_ip_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\network_ip_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="network_ip_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="network_ip_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\network_ip_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="network_ip_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="network_ip_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\network_ip_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cog_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cog_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cog_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="cog_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\cog_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="favicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\favicon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ask" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="ask_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\ask_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ask_hires" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="ask_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\ask_64.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="exclamation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="exclamation_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\exclamation_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="exclamation_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="exclamation_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\exclamation_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="zoom_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="zoom_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\zoom_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="copy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\copy_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="copy_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="copy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\copy_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="paste_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\paste_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="paste_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="paste_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\paste_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="undo_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\undo_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="undo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="undo_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\undo_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="redo_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\redo_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="redo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="redo_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\redo_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="document" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="document_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\document_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="document_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="document_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\document_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="split" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="split_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="split_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="split_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="split_ver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\split_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="split_ver_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\split_ver_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="split_ver_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\split_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="split_ver_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\split_ver_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="split_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="split_hor_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split_hor_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="split_hor_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="split_hor_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\split_hor_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="spring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="spring_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\spring_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="spring_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="spring_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\spring_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="combine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="combine_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="combine_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="combine_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="combine_ver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\combine_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="combine_ver_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\combine_ver_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="combine_ver_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\combine_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="combine_ver_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\combine_ver_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="combine_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="combine_hor_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine_hor_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="combine_hor_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="combine_hor_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\combine_hor_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="switch_ver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\switch_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="switch_ver_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\switch_ver_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="switch_ver_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\switch_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="switch_ver_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\switch_ver_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="switch_hor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="switch_hor_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\switch_hor_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="switch_hor_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="switch_hor_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\switch_hor_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_top_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_top_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_top_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_top_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_top_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_middle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_middle_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_middle_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_middle_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_middle_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_middle_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_bottom_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_bottom_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_bottom_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_bottom_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_bottom_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_left_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_left_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_left_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_left_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_left_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_center" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_center_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_center_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_center_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_center_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_center_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_right_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_right_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="shape_align_right_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="shape_align_right_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\shape_align_right_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="application_side_list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="application_side_list_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_side_list_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="application_side_list_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="application_side_list_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_side_list_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="keyboard_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\keyboard_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="keyboard_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="keyboard_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\keyboard_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="column_double" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="column_double_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\column_double_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="column_double_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="column_double_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\column_double_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Icons\column_double_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="help_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="help_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\help_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="help_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\help_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

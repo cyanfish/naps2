@@ -16,13 +16,15 @@ namespace NAPS2.EtoForms.Wpf;
 /// </summary>
 internal class FluentIconProvider : IIconProvider
 {
-    // Unlike Mac (where we map all icons), here we're only mapping the small versions (i.e. not the toolbar icons)
+    // Unlike Mac (where we map all icons), here we're only mapping the small icons (i.e. not the toolbar icons)
+    private const int GLYPH_SIZE = 16;
+
     private static readonly Dictionary<string, string> GlyphMap = new()
     {
-        { "pencil_small", FluentIcons.Edit },
-        { "add_small", FluentIcons.Add },
-        { "control_play_blue_small", FluentIcons.Play },
-        { "cross_small", FluentIcons.Delete }
+        { "pencil", FluentIcons.Edit },
+        { "add", FluentIcons.Add },
+        { "control_play_blue", FluentIcons.Play },
+        { "cross", FluentIcons.Delete }
     };
 
     private readonly DefaultIconProvider _defaultIconProvider;
@@ -32,22 +34,18 @@ internal class FluentIconProvider : IIconProvider
         _defaultIconProvider = defaultIconProvider;
     }
 
-    public Bitmap? GetIcon(string name, float scale = 1f, bool oversized = false) =>
-        GlyphMap.TryGetValue(name, out var glyph)
+    public Bitmap? GetIcon(string name, int size, float scale = 1f, bool oversized = false) =>
+        size == GLYPH_SIZE && GlyphMap.TryGetValue(name, out var glyph)
             ? RenderGlyph(glyph, scale)
-            : _defaultIconProvider.GetIcon(name, scale, oversized);
+            : _defaultIconProvider.GetIcon(name, size, scale, oversized);
 
-    public Icon? GetFormIcon(string name, float scale = 1f)
-    {
-        using var bitmap = _defaultIconProvider.GetIcon(name, scale);
-        return bitmap != null ? new Icon(new IconHandler(BitmapFrame.Create(bitmap.ToWpf()))) : null;
-    }
+    public Icon ToFormIcon(Bitmap bitmap) => new(new IconHandler(BitmapFrame.Create(bitmap.ToWpf())));
 
     private static Bitmap RenderGlyph(string glyph, float scale)
     {
         // The Fluent text color for the current theme
         var brush = Application.Current.TryFindResource("TextFillColorPrimaryBrush") as Brush ?? Brushes.Black;
-        int size = (int) Math.Round(16 * scale);
+        int size = (int) Math.Round(GLYPH_SIZE * scale);
         var text = new FormattedText(glyph, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
             new Typeface(FluentIcons.FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
             size, brush, 1);

@@ -111,7 +111,7 @@ public class WinFormsSettingsNavigator : ISettingsNavigator
     {
         if (!_icons.TryGetValue(iconName, out var icon))
         {
-            icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, _scale)?.ToSD();
+            icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, 16, _scale)?.ToSD();
             _icons[iconName] = icon;
         }
         return icon;

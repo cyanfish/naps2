@@ -126,7 +126,7 @@ public class WpfDesktopForm : DesktopForm
         foreach (var profile in _profileManager.Profiles)
         {
             var (content, image, _) = _toolbarFormatter.CreateButtonContent(profile.DisplayName, false);
-            SetIcon(image, scale => _iconProvider.GetIcon("control_play_blue_small", scale));
+            SetIcon(image, scale => _iconProvider.GetIcon("control_play_blue", 16, scale));
             var button = _toolbarFormatter.CreateProfileButton(content);
             button.Click += (_, _) => _desktopScanController.ScanWithProfile(profile);
             _profilesToolBar.Items.Add(button);
@@ -170,9 +170,9 @@ public class WpfDesktopForm : DesktopForm
     protected override LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out");
         // Join the buttons into a single "pill", with one divider line (the border is translucent, so overlapping the
         // buttons would make the divider darker)
         zoomOut.ToNative().SetValue(Border.CornerRadiusProperty, new CornerRadius(4, 0, 0, 4));
@@ -242,7 +242,7 @@ public class WpfDesktopForm : DesktopForm
     {
         var (content, image, label) = _toolbarFormatter.CreateButtonContent(command.ToolBarText, large);
         var actionCommand = (ActionCommand) command;
-        SetIcon(image, actionCommand.GetIconImage);
+        SetIcon(image, scale => actionCommand.GetIconImage(large ? 32 : 16, scale));
         actionCommand.TextChanged += (_, _) => label.Text = command.ToolBarText;
         return content;
     }

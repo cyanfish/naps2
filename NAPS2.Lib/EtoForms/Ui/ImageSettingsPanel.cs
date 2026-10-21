@@ -25,7 +25,7 @@ internal class ImageSettingsPanel : SettingsPanelWithRememberCheckbox<ImageSetti
 
     public override string Title => UiStrings.ImageSettings;
 
-    public override string IconName => "picture_small";
+    public override string IconName => "picture";
 
     protected override Expression<Func<CommonConfig, ImageSettings>> SettingsAccessor => c => c.ImageSettings;
 

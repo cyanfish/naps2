@@ -22,7 +22,7 @@ public class PageSizeForm : EtoDialogBase
         DeletePageSizeCommand = new ActionCommand(DeletePageSize)
         {
             Text = UiStrings.Delete,
-            Image = iconProvider.GetIcon("cross_small")
+            Image = iconProvider.GetIcon("cross", 16)
         };
         _name.SelectedValueChanged += Name_SelectionChange;
         _name.TextChanged += Name_TextChanged;

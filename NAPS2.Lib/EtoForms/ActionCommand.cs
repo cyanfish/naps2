@@ -32,6 +32,6 @@ public class ActionCommand : Command
 
     public string? IconName { get; set; }
 
-    public Image? GetIconImage(float scale) =>
-        IconName != null ? EtoPlatform.Current.IconProvider.GetIcon(IconName, scale) : null;
+    public Image? GetIconImage(int size, float scale) =>
+        IconName != null ? EtoPlatform.Current.IconProvider.GetIcon(IconName, size, scale) : null;
 }

@@ -29,7 +29,7 @@ internal class GeneralSettingsPanel : SettingsPanel
     public override string Title => TranslationMigrator.PickTranslated(UiStrings.ResourceManager,
         nameof(UiStrings.Settings), nameof(UiStrings.GeneralSettings));
 
-    public override string IconName => "cog_small";
+    public override string IconName => "cog";
 
     public override LayoutElement BuildScrollableLayout()
     {
