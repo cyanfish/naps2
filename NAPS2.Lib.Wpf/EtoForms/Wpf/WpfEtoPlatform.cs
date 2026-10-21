@@ -422,7 +422,7 @@ public class WpfEtoPlatform : EtoPlatform
         {
             VerticalScrollBarVisibility = SWC.ScrollBarVisibility.Auto,
             HorizontalScrollBarVisibility = SWC.ScrollBarVisibility.Disabled,
-            Content = new FramePanel()
+            Content = new FramePanel { HorizontalAlignment = SW.HorizontalAlignment.Left }
         };
         return scrollViewer.ToEto();
     }
