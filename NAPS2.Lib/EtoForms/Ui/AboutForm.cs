@@ -10,7 +10,8 @@ namespace NAPS2.EtoForms.Ui;
 public class AboutForm : EtoDialogBase
 {
     private const string NAPS2_HOMEPAGE = "https://www.naps2.com";
-    private const string ICONS_HOMEPAGE = "https://www.fatcow.com/free-icons";
+    private const string ICONS_HOMEPAGE = "https://web.archive.org/web/20230301031953/https://www.fatcow.com/free-icons";
+    private const string ICONS_HOMEPAGE_LABEL = "FatCow";
     private const string DONATE_URL = "https://www.naps2.com/donate?src=about";
 
     private readonly Button _donateButton;
@@ -73,7 +74,7 @@ public class AboutForm : EtoDialogBase
                 L.Row(
                     L.Column(
                         C.NoWrap(UiStrings.IconsFrom),
-                        C.UrlLink(ICONS_HOMEPAGE)
+                        C.UrlLink(ICONS_HOMEPAGE, ICONS_HOMEPAGE_LABEL)
                     ).Scale(),
                     L.Column(
                         C.Filler(),
