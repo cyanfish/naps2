@@ -18,7 +18,7 @@ public class OcrDownloadForm : EtoDialogBase
         OcrLanguagesListViewBehavior ocrLanguagesListViewBehavior, IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.OcrDownloadFormTitle;
-        IconName = "text_small";
+        IconName = "text";
 
         _tesseractLanguageManager = tesseractLanguageManager;
         _languageList = EtoPlatform.Current.CreateListView(ocrLanguagesListViewBehavior);

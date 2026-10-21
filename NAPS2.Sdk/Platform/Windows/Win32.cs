@@ -28,6 +28,16 @@ internal static class Win32
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool ShowWindow(IntPtr hWnd, ShowWindowCommands nCmdShow);
 
+    [DllImport("dwmapi.dll")]
+    public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, ref int pvAttribute, int cbAttribute);
+
+    [DllImport("dwmapi.dll")]
+    public static extern int DwmEnableBlurBehindWindow(IntPtr hwnd, ref DwmBlurBehind pBlurBehind);
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, uint flags);
+
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     public static extern int GetLocaleInfoEx(string? lpLocaleName, uint lcType, out int lpLcData, int cchData);
 
@@ -98,6 +108,14 @@ internal static class Win32
         Restore = 9,
         ShowDefault = 10,
         ForceMinimize = 11
+    }
+
+    public struct DwmBlurBehind
+    {
+        public uint dwFlags;
+        [MarshalAs(UnmanagedType.Bool)] public bool fEnable;
+        public IntPtr hRgnBlur;
+        [MarshalAs(UnmanagedType.Bool)] public bool fTransitionOnMaximized;
     }
 
     public struct Message

@@ -11,7 +11,7 @@ internal class EditWithForm : EtoDialogBase
         base(config)
     {
         Title = UiStrings.EditWithFormTitle;
-        IconName = "pencil_small";
+        IconName = "pencil";
 
         _openWith = openWith;
     }

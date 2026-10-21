@@ -58,6 +58,12 @@ public class WpfImageContext : ImageContext
         return rendered.ToBitmapSource();
     }
 
+    public BitmapSource RenderToDisplayBitmapSource(IRenderableImage image)
+    {
+        using var rendered = (WpfImage) Render(image);
+        return rendered.ToDisplayBitmapSource();
+    }
+
     public override IMemoryImage Create(int width, int height, ImagePixelFormat pixelFormat)
     {
         if (pixelFormat == ImagePixelFormat.Unknown)

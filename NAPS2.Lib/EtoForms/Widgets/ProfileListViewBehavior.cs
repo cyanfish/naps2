@@ -24,13 +24,13 @@ public class ProfileListViewBehavior : ListViewBehavior<ScanProfile>
     {
         var iconName = (item.IsDefault, item.IsLocked) switch
         {
-            (true, true) => "scanner_lock_default_48",
-            (true, false) => "scanner_default_48",
-            (false, true) => "scanner_lock_48",
-            (false, false) => "scanner_48"
+            (true, true) => "scanner_lock_default",
+            (true, false) => "scanner_default",
+            (false, true) => "scanner_lock",
+            (false, false) => "scanner"
         };
         var scale = EtoPlatform.Current.GetScaleFactor(listView.Control.ParentWindow);
-        return EtoPlatform.Current.IconProvider.GetIcon(iconName, scale)!;
+        return EtoPlatform.Current.IconProvider.GetIcon(iconName, IconScenario.Inline48, scale)!;
     }
 
     public override bool AllowDragDrop => true;

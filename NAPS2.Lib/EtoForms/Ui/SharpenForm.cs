@@ -11,11 +11,11 @@ public class SharpenForm : UnaryImageFormBase
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
-        IconName = "sharpen_small";
+        IconName = "sharpen";
         Title = UiStrings.Sharpen;
 
         EtoPlatform.Current.AttachDpiDependency(this,
-            scale => _sharpenSlider.Icon = iconProvider.GetIcon("sharpen_small", scale));
+            scale => _sharpenSlider.Icon = iconProvider.GetIcon("sharpen", IconScenario.Inline16, scale));
         Sliders = [_sharpenSlider];
     }
 

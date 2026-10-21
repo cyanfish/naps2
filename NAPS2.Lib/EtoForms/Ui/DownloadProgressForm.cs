@@ -18,7 +18,7 @@ public class DownloadProgressForm : EtoDialogBase
         base(config)
     {
         Title = UiStrings.DownloadProgressFormTitle;
-        IconName = "text_small";
+        IconName = "text";
 
         Controller = new DownloadController(scanningContext);
         Controller.DownloadError += OnDownloadError;

@@ -13,7 +13,7 @@ public class OcrMultiLangForm : EtoDialogBase
         OcrLanguagesListViewBehavior ocrLanguagesListViewBehavior, IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.OcrMultiLangFormTitle;
-        IconName = "text_small";
+        IconName = "text";
 
         _languageList = EtoPlatform.Current.CreateListView(ocrLanguagesListViewBehavior);
         _languageList.SetItems(tesseractLanguageManager.InstalledLanguages.OrderBy(x => x.Name));

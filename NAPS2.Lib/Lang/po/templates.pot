@@ -66,6 +66,30 @@ msgstr ""
 msgid "Advanced Profile Settings"
 msgstr ""
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr ""
@@ -632,7 +656,6 @@ msgid "Email Selected as PDF"
 msgstr ""
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr ""
 
@@ -710,6 +733,10 @@ msgstr ""
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr ""
 
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr ""
+
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
 msgstr ""
@@ -724,6 +751,10 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
+msgstr ""
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
 msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
@@ -759,7 +790,6 @@ msgid "Image Quality"
 msgstr ""
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr ""
 
@@ -816,7 +846,6 @@ msgid "Keep images across sessions"
 msgstr ""
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -1105,7 +1134,6 @@ msgid "PDF Document (*.pdf)"
 msgstr ""
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr ""
 
@@ -1562,6 +1590,14 @@ msgstr ""
 msgid "Split"
 msgstr ""
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr ""
@@ -1576,6 +1612,10 @@ msgstr ""
 
 #: UiStrings.resx$SubjectLabel$Message
 msgid "Subject:"
+msgstr ""
+
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
 msgstr ""
 
 #: MiscResources.resx$FileTypeTiff$Message
@@ -1686,6 +1726,14 @@ msgstr ""
 
 #: UiStrings.resx$ManualDuplexHelp$Message
 msgid "To scan both sides of a multi-page document with your feeder scanner, you can select \"Duplex\" as your paper source if your scanner supports it.\n      \nIf your scanner doesn't support \"Duplex\" scanning, follow these instructions:\n1. Scan the front sides of the document\n2. Flip the document over\n3. Scan the back sides of the document\n4. Click \"Manual Duplex\"\n5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr ""
+
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
 msgstr ""
 
 #: UiStrings.resx$Tools$Message

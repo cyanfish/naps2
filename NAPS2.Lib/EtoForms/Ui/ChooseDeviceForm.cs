@@ -80,7 +80,7 @@ public class ChooseDeviceForm : EtoDialogBase
     {
         if (_statusIconName != null)
         {
-            _statusIcon.Image = _iconProvider.GetIcon(_statusIconName, EtoPlatform.Current.GetScaleFactor(this));
+            _statusIcon.Image = _iconProvider.GetIcon(_statusIconName, IconScenario.Inline16, EtoPlatform.Current.GetScaleFactor(this));
             _statusIcon.Size = Size.Round(new SizeF(16, 16) * EtoPlatform.Current.GetLayoutScaleFactor(this));
         }
     }
@@ -163,9 +163,9 @@ public class ChooseDeviceForm : EtoDialogBase
             L.Row(
                 [
                     ..driverElements,
-                    C.IconButton("large_tiles_small", () => SetListView(false))
+                    C.IconButton("large_tiles", UiStrings.ToggleView, () => SetListView(false))
                         .Visible(_textListVis),
-                    C.IconButton("text_align_justify_small", () => SetListView(true))
+                    C.IconButton("text_align_justify", UiStrings.ToggleView, () => SetListView(true))
                         .Visible(!_textListVis)
                 ]
             ),
@@ -287,7 +287,7 @@ public class ChooseDeviceForm : EtoDialogBase
             if (!cts.IsCancellationRequested)
             {
                 _spinnerVis.IsVisible = false;
-                _statusIconName = DeviceList.Count > 0 ? "accept_small" : "exclamation_small";
+                _statusIconName = DeviceList.Count > 0 ? "accept" : "exclamation";
                 UpdateStatusIcon();
                 _statusLabel.Text = DeviceList.Count switch
                 {
@@ -302,7 +302,7 @@ public class ChooseDeviceForm : EtoDialogBase
             if (!cts.IsCancellationRequested)
             {
                 _spinnerVis.IsVisible = false;
-                _statusIconName = "exclamation_small";
+                _statusIconName = "exclamation";
                 UpdateStatusIcon();
                 _statusLabel.Text = ex.Message;
             }

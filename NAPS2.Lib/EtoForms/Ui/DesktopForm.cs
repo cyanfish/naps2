@@ -242,12 +242,13 @@ public abstract class DesktopForm : EtoFormBase
         EtoPlatform.Current.AttachDpiDependency(_listView.Control,
             scale => SetThumbnailSpacing(_thumbnailController.VisibleSize, scale));
         _desktopController.PreInitialize();
+        // Set the toolbar state before the form is rendered so it doesn't visibly change
+        UpdateToolbar();
     }
 
     protected override async void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        UpdateToolbar();
         await _desktopController.Initialize();
     }
 
@@ -429,6 +430,8 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
+    public virtual void UpdateListView() => Invalidate();
+
     protected virtual void CreateToolbarButton(Command command) => throw new InvalidOperationException();
 
     protected virtual void CreateToolbarButtonWithMenu(Command command, DesktopToolbarMenuType menuType,
@@ -443,36 +446,8 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void CreateToolbarSeparator() => throw new InvalidOperationException();
 
-    // TODO: Can we generalize this kind of logic?
-    protected SubMenuItem CreateSubMenu(Command menuCommand, MenuProvider menuProvider)
-    {
-        var menuItem = new SubMenuItem
-        {
-            Text = menuCommand.MenuText
-        };
-        EtoPlatform.Current.AttachDpiDependency(this,
-            scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(scale));
-        menuProvider.Handle(subItems =>
-        {
-            menuItem.Items.Clear();
-            foreach (var subItem in subItems)
-            {
-                switch (subItem)
-                {
-                    case MenuProvider.CommandItem { Command: var command }:
-                        menuItem.Items.Add(C.ButtonMenuItem(this, (ActionCommand) command));
-                        break;
-                    case MenuProvider.SeparatorItem:
-                        menuItem.Items.Add(new SeparatorMenuItem());
-                        break;
-                    case MenuProvider.SubMenuItem { Command: var command, MenuProvider: var subMenuProvider }:
-                        menuItem.Items.Add(CreateSubMenu(command, subMenuProvider));
-                        break;
-                }
-            }
-        });
-        return menuItem;
-    }
+    protected SubMenuItem CreateSubMenu(Command menuCommand, MenuProvider menuProvider) =>
+        C.SubMenuItem(this, menuCommand, menuProvider);
 
     protected virtual LayoutElement GetControlButtons()
     {
@@ -486,16 +461,16 @@ public abstract class DesktopForm : EtoFormBase
             return C.None();
         }
         var toggleSidebar = C.ImageButton(Commands.ToggleSidebar);
-        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list_small");
+        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list");
         return toggleSidebar.AlignTrailing();
     }
 
-    protected LayoutElement GetZoomButtons()
+    protected virtual LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out_small");
+        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out");
         return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(-1);
     }
 
@@ -570,7 +545,7 @@ public abstract class DesktopForm : EtoFormBase
                 new ActionCommand(() => _desktopScanController.ScanWithProfile(profile))
                 {
                     MenuText = profile.DisplayName.Replace("&", "&&"),
-                    IconName = profile == defaultProfile ? "accept_small" : null
+                    IconName = profile == defaultProfile ? "accept" : null
                 })
             .ToImmutableList<Command>();
         for (int i = 0; i < commandList.Count; i++)

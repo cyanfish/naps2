@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <path id="s" fill-rule="evenodd" d="M12.007 3.752L12.007 -0.238L19.061 -0.238L19.061 3.752A11.267 11.267 0 0 1 20.607 4.392L23.428 1.571L28.416 6.559L25.595 9.380A11.267 11.267 0 0 1 26.235 10.926L30.225 10.926L30.225 17.980L26.235 17.980A11.267 11.267 0 0 1 25.595 19.526L28.416 22.347L23.428 27.335L20.607 24.514A11.267 11.267 0 0 1 19.061 25.154L19.061 29.144L12.007 29.144L12.007 25.154A11.267 11.267 0 0 1 10.461 24.514L7.640 27.335L2.652 22.347L5.473 19.526A11.267 11.267 0 0 1 4.833 17.980L0.843 17.980L0.843 10.926L4.833 10.926A11.267 11.267 0 0 1 5.473 9.380L2.652 6.559L7.640 1.571L10.461 4.392A11.267 11.267 0 0 1 12.007 3.752ZM19.194 14.453A3.660 3.660 0 1 0 11.874 14.453A3.660 3.660 0 1 0 19.194 14.453Z"/>
+    <clipPath id="clip"><use href="#s"/></clipPath>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.6"/></filter>
+    <linearGradient id="fill" gradientUnits="userSpaceOnUse" x1="0" y1="6" x2="0" y2="26">
+      <stop offset="0" stop-color="#aeb0b3"/><stop offset="1" stop-color="#d4d5d7"/>
+    </linearGradient>
+    <linearGradient id="hilite" gradientUnits="userSpaceOnUse" x1="0" y1="1" x2="0" y2="28">
+      <stop offset="0" stop-color="#f6f7f8"/><stop offset="1" stop-color="#dfe0e1"/>
+    </linearGradient>
+    <linearGradient id="outline" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="29">
+      <stop offset="0" stop-color="#8b8d90"/><stop offset="1" stop-color="#66686a"/>
+    </linearGradient>
+  </defs>
+  <use href="#s" x="0" y="1.19" fill="#000" fill-opacity="0.378" filter="url(#blur)"/>
+  <g clip-path="url(#clip)">
+    <rect width="32" height="32" fill="url(#fill)"/>
+    <use href="#s" fill="none" stroke="url(#hilite)" stroke-width="3.006"/>
+    <use href="#s" fill="none" stroke="url(#outline)" stroke-width="1.778"/>
+  </g>
+</svg>

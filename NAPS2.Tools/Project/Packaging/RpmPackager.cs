@@ -52,7 +52,7 @@ public static class RpmPackager
         var metainfoDir = Path.Combine(filesDir, "usr/share/metainfo");
         Directory.CreateDirectory(metainfoDir);
         File.Copy(
-            Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Icons", "scanner-128.png"),
+            Path.Combine(Paths.SolutionRoot, "NAPS2.Lib", "Icons", "scanner_128.png"),
             Path.Combine(iconDir, "com.naps2.Naps2.png"));
         File.Copy(
             Path.Combine(Paths.SetupLinux, "com.naps2.Naps2.desktop"),

@@ -90,7 +90,8 @@ public class FilePathWithPlaceholders
             L.Row(
                 _path.Scale().AlignCenter().Visible(_visibility),
                 _dialogHelper != null
-                    ? _choose.Width(EtoPlatform.Current.IsGtk ? null : 40).MaxHeight(22).Visible(_visibility)
+                    ? _choose.Width(EtoPlatform.Current.IsGtk ? null : 40)
+                        .MaxHeight(EtoPlatform.Current.IsWpf ? null : 22).Visible(_visibility)
                     : C.None()
             ).SpacingAfter(2),
             L.Row(

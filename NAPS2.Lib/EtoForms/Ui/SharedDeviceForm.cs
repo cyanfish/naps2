@@ -24,7 +24,7 @@ public class SharedDeviceForm : EtoDialogBase
         IIconProvider iconProvider) : base(config)
     {
         Title = UiStrings.SharedDeviceFormTitle;
-        IconName = "wireless_small";
+        IconName = "wireless";
 
         _errorOutput = errorOutput;
         _sharedDeviceManager = sharedDeviceManager;
