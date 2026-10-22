@@ -133,7 +133,14 @@ public static class PdfAsserts
     public static void AssertImages(string filePath, params byte[][] expectedImages) =>
         AssertImages(filePath, null, expectedImages);
 
-    public static void AssertImages(string filePath, string password, params byte[][] expectedImages)
+    public static void AssertImages(string filePath, double rmseThreshold, params byte[][] expectedImages) =>
+        AssertImages(filePath, null, rmseThreshold, expectedImages);
+
+    public static void AssertImages(string filePath, string password, params byte[][] expectedImages) =>
+        AssertImages(filePath, password, ImageAsserts.GENERAL_RMSE_THRESHOLD, expectedImages);
+
+    public static void AssertImages(string filePath, string password, double rmseThreshold,
+        params byte[][] expectedImages)
     {
         Assert.True(File.Exists(filePath));
         var renderer = new PdfiumPdfRenderer { NoExtraction = true };
@@ -146,7 +153,7 @@ public static class PdfAsserts
         for (int i = 0; i < expectedImages.Length; i++)
         {
             // TODO: Try and fix resolution here
-            ImageAsserts.Similar(expectedImagesRendered[i], actualImages[i], ignoreResolution: true);
+            ImageAsserts.Similar(expectedImagesRendered[i], actualImages[i], rmseThreshold, ignoreResolution: true);
         }
     }
 
