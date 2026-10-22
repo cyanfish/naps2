@@ -49,7 +49,12 @@ public class CompressForm : UnaryImageFormBase
             _bitDepthValue = _bitDepth.SelectedItem;
             RefreshPreview();
         };
-        _useJpegCompression.CheckedChanged += (_, _) => UpdateJpegQualityVisibility();
+        _useJpegCompression.CheckedChanged += (_, _) =>
+        {
+            UpdateJpegQualityVisibility();
+            RefreshPreview();
+        };
+        _jpegQuality.TextChanged += (_, _) => RefreshPreview();
     }
 
     private void UpdateJpegQualityVisibility() =>
@@ -58,6 +63,8 @@ public class CompressForm : UnaryImageFormBase
     private int JpegQuality => _jpegQuality.Value is >= 1 and <= 100 ? _jpegQuality.Value : _originalJpegQuality;
 
     private bool JpegQualityChanged => _jpegQualityVis.IsVisible && JpegQuality != _originalJpegQuality;
+
+    private bool UseJpeg => _useJpegCompression.IsChecked() || JpegQualityChanged;
 
     private int TargetPixelWidth => Math.Max((int) Math.Round((double) _size.WidthInInches * _dpiValue), 1);
 
@@ -87,13 +94,27 @@ public class CompressForm : UnaryImageFormBase
                     _ => new ColorBitDepthTransform()
                 });
             }
-            if (Invoker.Current.InvokeGet(() => _useJpegCompression.IsChecked() || JpegQualityChanged))
+            if (Invoker.Current.InvokeGet(() => UseJpeg))
             {
                 // This also ensures an untransformed JPEG file is re-encoded (rather than copied) when the quality
                 // changes
                 transforms.Add(new FileFormatTransform(ImageFileFormat.Jpeg));
             }
             return transforms;
+        }
+    }
+
+    protected override IMemoryImage RenderPreview()
+    {
+        var preview = base.RenderPreview();
+        var (useJpeg, quality) = Invoker.Current.InvokeGet(() => (UseJpeg, JpegQuality));
+        if (!useJpeg) return preview;
+        // Round-trip through JPEG so the preview shows the compression artifacts
+        using (preview)
+        {
+            using var stream =
+                preview.SaveToMemoryStream(ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = quality });
+            return preview.ImageContext.Load(stream);
         }
     }
 
