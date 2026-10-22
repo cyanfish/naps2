@@ -397,6 +397,9 @@ public class WpfEtoPlatform : EtoPlatform
     {
         var native = control.ToNative();
         ApplyCompactToggleTemplate(native);
+        // A control can be measured just before the layout makes it visible, and collapsed elements measure as empty
+        bool collapsed = native.Visibility == SW.Visibility.Collapsed;
+        if (collapsed) native.Visibility = SW.Visibility.Hidden;
         try
         {
             native.Measure(new SW.Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -417,6 +420,7 @@ public class WpfEtoPlatform : EtoPlatform
         }
         finally
         {
+            if (collapsed) native.Visibility = SW.Visibility.Collapsed;
             // Measure again at its frame size (if it has one) in the next layout pass
             (SWM.VisualTreeHelper.GetParent(native) as SW.UIElement)?.InvalidateMeasure();
         }
