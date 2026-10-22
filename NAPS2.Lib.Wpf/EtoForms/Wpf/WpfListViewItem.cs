@@ -51,10 +51,17 @@ internal class WpfListViewItem<T> : ListBoxItem where T : notnull
             TextWrapping = behavior.ShowLabels ? TextWrapping.Wrap : TextWrapping.NoWrap,
             Margin = new Thickness(0, PAGE_NUMBER_PADDING, 0, 0)
         };
+        Cursor = behavior.UseHandCursor ? Cursors.Hand : null;
+        if (behavior.Checkboxes)
+        {
+            // The selection is shown as the checkbox state
+            Template = XamlTemplates.CheckBoxItemTemplate;
+            Content = behavior.GetLabel(value);
+            return;
+        }
         // The label goes at the bottom, with the image centered in the remaining space
         DockPanel.SetDock(_label, Dock.Bottom);
         Content = new DockPanel { Children = { _label, _imageHost } };
-        Cursor = behavior.UseHandCursor ? Cursors.Hand : null;
         // Keyboard focus is already clear enough from the selection
         FocusVisualStyle = null;
         if (behavior.ShowLabels)

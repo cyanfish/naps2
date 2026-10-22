@@ -20,6 +20,11 @@ internal static class XamlTemplates
         (ControlTemplate) Templates["ThumbnailItemTemplate"]!;
 
     /// <summary>
+    /// A list item template that shows the content as a checkbox, checked when the item is selected.
+    /// </summary>
+    public static ControlTemplate CheckBoxItemTemplate { get; } = (ControlTemplate) Templates["CheckBoxItemTemplate"]!;
+
+    /// <summary>
     /// A minimal button template (content + rounded hover/pressed background using the Fluent "subtle" fills).
     /// </summary>
     public static ControlTemplate SubtleButtonTemplate { get; } =
