@@ -87,7 +87,7 @@ public class CompressForm : UnaryImageFormBase
                     _ => new ColorBitDepthTransform()
                 });
             }
-            if (_useJpegCompression.IsChecked() || JpegQualityChanged)
+            if (Invoker.Current.InvokeGet(() => _useJpegCompression.IsChecked() || JpegQualityChanged))
             {
                 // This also ensures an untransformed JPEG file is re-encoded (rather than copied) when the quality
                 // changes
