@@ -345,6 +345,14 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override void SetClipboardImage(Clipboard clipboard, ProcessedImage processedImage, IMemoryImage memoryImage)
     {
+        // We also add the JPEG/PNG format to the clipboard as some applications care about the actual format
+        // https://github.com/cyanfish/naps2/issues/264
+        var jpegOrPng = ImageExportHelper.SaveSmallestFormatToMemoryStream(memoryImage,
+            processedImage.Metadata.Lossless, -1, out var fileFormat);
+        var handler = (ClipboardHandler) clipboard.Handler;
+        // Note this only updates the DataObject, the clipboard is set along with the image below
+        handler.Control.SetData(fileFormat == ImageFileFormat.Jpeg ? "JFIF" : "PNG", jpegOrPng);
+
         // Unlike ToBitmap (for display), keep the image's resolution
         using var etoBitmap = new Bitmap(new BitmapHandler(memoryImage.ToBitmapSource()));
         clipboard.Image = etoBitmap;
