@@ -243,6 +243,9 @@ internal static class Win32
     public static extern int SHLoadIndirectString(string pszSource, StringBuilder pszOutBuf, int cchOutBuf,
         IntPtr ppvReserved);
 
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+    public static extern int GetPackagePathByFullName(string packageFullName, ref int pathLength, StringBuilder path);
+
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     public static extern int SHCreateItemFromParsingName(string pszPath, IBindCtx? pbc,
         [MarshalAs(UnmanagedType.LPStruct)] Guid riid, out IShellItem ppv);

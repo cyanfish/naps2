@@ -10,13 +10,15 @@ public class PreviewForm : EtoDialogBase
     private readonly DesktopCommands _desktopCommands;
     private readonly IIconProvider _iconProvider;
     private readonly KeyboardShortcutManager _previewKsm;
+    private readonly EditWithController _editWithController;
 
     private readonly ButtonToolItem _pageNumberButton = new();
     private readonly ButtonToolItem _zoomPercentButton = new();
+    private readonly ButtonToolItem _editWithAppButton = new();
     private UiImage? _currentImage;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, ColorScheme colorScheme) : base(config)
+        IIconProvider iconProvider, ColorScheme colorScheme, EditWithController editWithController) : base(config)
     {
         Title = UiStrings.PreviewFormTitle;
         Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
@@ -25,10 +27,12 @@ public class PreviewForm : EtoDialogBase
         _desktopCommands = desktopCommands;
         ImageList = imageList;
         _iconProvider = iconProvider;
+        _editWithController = editWithController;
 
         ImageViewer.ColorScheme = colorScheme;
         ImageViewer.ZoomChanged += ImageViewerZoomChanged;
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
+        _editWithController.AppChanged += EditWithController_AppChanged;
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -195,6 +199,7 @@ public class PreviewForm : EtoDialogBase
 
     protected virtual void CreateToolbar()
     {
+        EtoPlatform.Current.AttachDpiDependency(this, UpdateEditWithAppButton);
         ToolBar = new ToolBar
         {
             Items =
@@ -232,7 +237,8 @@ public class PreviewForm : EtoDialogBase
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.Split),
                 MakeToolButton(Commands.Combine),
-                MakeToolButton(Commands.EditWithApp),
+                _editWithAppButton,
+                MakeToolButton(Commands.EditWithPick),
                 new SeparatorToolItem(),
                 MakeToolButton(Commands.SaveSelectedPdf, "file_extension_pdf"),
                 MakeToolButton(Commands.SaveSelectedImages, "picture"),
@@ -249,6 +255,19 @@ public class PreviewForm : EtoDialogBase
             ToolBar.Items.Remove(ToolBar.Items.Single(x => x.Command == Commands.SaveSelectedImages));
         }
     }
+
+    private void UpdateEditWithAppButton(float scale)
+    {
+        var command = Commands.CreateEditWithApp();
+        _editWithAppButton.Command = command;
+        _editWithAppButton.ToolTip = command.Text;
+        _editWithAppButton.Visible = _editWithController.HasApp;
+        EtoPlatform.Current.SetImageSize(_editWithAppButton, (int) (16 * scale));
+        _editWithAppButton.Image = command.GetIconImage(IconScenario.SmallToolbar, scale);
+    }
+
+    private void EditWithController_AppChanged(object? sender, EventArgs e) =>
+        UpdateEditWithAppButton(EtoPlatform.Current.GetScaleFactor(this));
 
     private ToolItem MakeToolButton(ActionCommand command, string? iconName = null) =>
         WithToolItemIcon(new ButtonToolItem
@@ -360,7 +379,7 @@ public class PreviewForm : EtoDialogBase
         _previewKsm.Assign(ks.ImageCompress, Commands.Compress);
         _previewKsm.Assign(ks.ImageSplit, Commands.Split);
         _previewKsm.Assign(ks.ImageCombine, Commands.Combine);
-        _previewKsm.Assign(ks.ImageEditWith, Commands.EditWithApp);
+        _previewKsm.Assign(ks.ImageEditWith, Commands.CreateEditWithApp());
 
         _previewKsm.Assign(ks.RotateCustom, Commands.CustomRotate);
         _previewKsm.Assign(ks.RotateDeskew, Commands.Deskew);
@@ -391,6 +410,7 @@ public class PreviewForm : EtoDialogBase
             ImageViewer.Image?.Dispose();
             ImageViewer.Image = null;
             ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
+            _editWithController.AppChanged -= EditWithController_AppChanged;
         }
         base.Dispose(disposing);
     }

@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using NAPS2.EtoForms.Ui;
 using NAPS2.Scan;
 
@@ -9,9 +10,44 @@ public class EditWithController(
     Naps2Config config,
     IOpenWith openWith,
     ErrorOutput errorOutput,
-    IFormFactory formFactory,
-    DesktopFormProvider desktopFormProvider)
+    IFormFactory formFactory)
 {
+    public event EventHandler? AppChanged;
+
+    public bool HasApp => !string.IsNullOrEmpty(config.Get(c => c.EditWithAppName));
+
+    public Image? AppIcon { get; private set; }
+
+    public async Task LoadAppIcon()
+    {
+        // Load the icon of the configured app in the background
+        string? appId = config.Get(c => c.EditWithAppPath);
+        if (string.IsNullOrEmpty(appId))
+        {
+            return;
+        }
+        using var icon = await Task.Run(() =>
+        {
+            try
+            {
+                var entry = openWith.GetEntries(".jpg").FirstOrDefault(entry => entry.Id == appId);
+                return entry != null ? openWith.LoadIcon(entry) : null;
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorException($"Error loading icon for {appId}", ex);
+                return null;
+            }
+        });
+        SetAppIcon(icon);
+    }
+
+    private void SetAppIcon(IMemoryImage? icon)
+    {
+        AppIcon = icon?.ToEtoImage();
+        AppChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public void EditWithApp(IEnumerable<UiImage> selection)
     {
         string? appId = config.Get(c => c.EditWithAppPath);
@@ -34,7 +70,8 @@ public class EditWithController(
             transact.Set(c => c.EditWithAppPath, entry.Id);
             transact.Set(c => c.EditWithAppName, entry.Name);
             transact.Commit();
-            desktopFormProvider.DesktopForm.EditWithAppChanged();
+            using var icon = openWith.LoadIcon(entry);
+            SetAppIcon(icon);
             EditWithPath(entry.Id, selection);
         }
     }

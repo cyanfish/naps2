@@ -86,7 +86,9 @@ public class DesktopControllerTests : ContextualTests
             _scannedImagePrinter,
             _sharedDeviceManager,
             _processCoordinator,
-            new RecoveryManager(ScanningContext)
+            new RecoveryManager(ScanningContext),
+            new EditWithController(ScanningContext, _imageList, _config, Substitute.For<IOpenWith>(),
+                Substitute.For<ErrorOutput>(), Substitute.For<IFormFactory>())
         );
 
         _operationFactory.Create<RecoveryOperation>().Returns(

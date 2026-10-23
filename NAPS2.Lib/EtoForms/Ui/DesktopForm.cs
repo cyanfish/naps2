@@ -30,6 +30,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly Lazy<DesktopCommands> _commands;
     private readonly Sidebar _sidebar;
     protected readonly IIconProvider _iconProvider;
+    private readonly EditWithController _editWithController;
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
@@ -59,7 +60,8 @@ public abstract class DesktopForm : EtoFormBase
         IDesktopSubFormController desktopSubFormController,
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
-        IIconProvider iconProvider) : base(config)
+        IIconProvider iconProvider,
+        EditWithController editWithController) : base(config)
     {
         Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
 
@@ -79,12 +81,13 @@ public abstract class DesktopForm : EtoFormBase
         _sidebar = sidebar;
         _iconProvider = iconProvider;
         _commands = commands;
+        _editWithController = editWithController;
 
         _desktopFormProvider.DesktopForm = this;
         _keyboardShortcuts.Assign(Commands);
         CreateToolbarsAndMenus();
         UpdateScanButton();
-        EditWithAppChanged();
+        UpdateEditWithApp();
         UpdateProfilesToolbar();
         InitLanguageDropdown();
         UpdateManualDuplex();
@@ -116,7 +119,8 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
-        _notificationArea = new NotificationArea(_notificationManager, LayoutController);
+        _editWithController.AppChanged += EditWithController_AppChanged;
+        _notificationArea =new NotificationArea(_notificationManager, LayoutController);
     }
 
     protected override void BuildLayout()
@@ -274,6 +278,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated -= ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
+        _editWithController.AppChanged -= EditWithController_AppChanged;
         _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
     }
@@ -558,13 +563,13 @@ public abstract class DesktopForm : EtoFormBase
         _scanMenuCommands.Value = commandList;
     }
 
-    public void EditWithAppChanged()
+    private void EditWithController_AppChanged(object? sender, EventArgs e) => UpdateEditWithApp();
+
+    private void UpdateEditWithApp()
     {
-        var appName = Config.Get(c => c.EditWithAppName);
-        if (!string.IsNullOrEmpty(appName))
+        if (_editWithController.HasApp)
         {
-            Commands.EditWithApp.Text = string.Format(UiStrings.EditWithAppName, appName);
-            _editWithCommands.Value = ImmutableList.Create((Command) Commands.EditWithApp);
+            _editWithCommands.Value = ImmutableList.Create((Command) Commands.CreateEditWithApp());
         }
         else
         {
