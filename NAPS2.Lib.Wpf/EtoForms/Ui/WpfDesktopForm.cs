@@ -55,8 +55,16 @@ public class WpfDesktopForm : DesktopForm
         {
             if (e.WidthChanged) _toolbarFormatter.RelayoutToolbar(_mainToolBar);
         };
-        Load += (_, _) => colorScheme.ColorSchemeChanged += ColorSchemeChanged;
-        UnLoad += (_, _) => colorScheme.ColorSchemeChanged -= ColorSchemeChanged;
+        Load += (_, _) =>
+        {
+            colorScheme.ColorSchemeChanged += ColorSchemeChanged;
+            System.Windows.Application.Current.SessionEnding += SessionEnding;
+        };
+        UnLoad += (_, _) =>
+        {
+            colorScheme.ColorSchemeChanged -= ColorSchemeChanged;
+            System.Windows.Application.Current.SessionEnding -= SessionEnding;
+        };
         UpdateColors();
     }
 
@@ -90,6 +98,9 @@ public class WpfDesktopForm : DesktopForm
         base.OnShown(e);
         this.ToNative().SizeToContent = SizeToContent.Manual;
     }
+
+    // The entire app is being forced to close (e.g. for a system restart)
+    private void SessionEnding(object? sender, SessionEndingCancelEventArgs e) => UserClosing = false;
 
     protected override void RecreateToolbarsAndMenus()
     {

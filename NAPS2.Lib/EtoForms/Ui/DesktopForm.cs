@@ -253,9 +253,11 @@ public abstract class DesktopForm : EtoFormBase
         await _desktopController.Initialize();
     }
 
+    protected bool UserClosing { get; set; } = true;
+
     protected override void OnClosing(CancelEventArgs e)
     {
-        if (!_desktopController.PrepareForClosing(true))
+        if (!_desktopController.PrepareForClosing(UserClosing))
         {
             e.Cancel = true;
         }
