@@ -32,14 +32,10 @@ public class WpfSettingsNavigator : ISettingsNavigator
         foreach (var item in items)
         {
             var panel = new StackPanel { Orientation = Orientation.Horizontal };
-            var icon = EtoPlatform.Current.IconProvider.GetIcon(item.IconName, IconScenario.Inline16);
-            if (icon != null)
-            {
-                panel.Children.Add(new Image
-                {
-                    Source = icon.ToWpf(), Width = 16, Height = 16, Margin = new Thickness(0, 0, 10, 0)
-                });
-            }
+            var image = new Image { Width = 16, Height = 16, Margin = new Thickness(0, 0, 10, 0) };
+            EtoPlatform.Current.AttachDpiDependency(Control, scale => image.Source =
+                EtoPlatform.Current.IconProvider.GetIcon(item.IconName, IconScenario.Inline16, scale)?.ToWpf());
+            panel.Children.Add(image);
             panel.Children.Add(new TextBlock { Text = item.Label, VerticalAlignment = VerticalAlignment.Center });
             _listView.Items.Add(new ListViewItem { Content = panel });
         }
