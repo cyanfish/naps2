@@ -1,6 +1,8 @@
 ﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport;
+using NAPS2.ImportExport.Images;
+using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests;
@@ -38,6 +40,7 @@ public class AutoSaverTests : ContextualTests
             _overwritePrompt,
             _config,
             ImageContext,
+            ScanningContext,
             new UiImageList()
         );
     }
@@ -91,6 +94,27 @@ public class AutoSaverTests : ContextualTests
         Assert.True(IsDisposed(scanned[0]));
         Assert.Single(Folder.GetFiles());
         ImageAsserts.Similar(ImageResources.dog, Path.Combine(FolderPath, "test1.jpg"));
+    }
+
+    [Fact]
+    public async Task JpegWithOcrSavesMatchingTextSidecarsForEachPage()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.autocrop_doc), "First page text" },
+            { LoadImage(ImageResources.autocrop_receipt), "Second page text" }
+        }, delay: 0, splitWords: true);
+        var scanned = CreateScannedImages(ImageResources.autocrop_doc, ImageResources.autocrop_receipt);
+        var operation = new SaveImagesOperation(_overwritePrompt, ImageContext, ScanningContext);
+        operation.Start(Path.Combine(FolderPath, "test$(n).jpg"), Placeholders.All, scanned, new ImageSettings(),
+            ocrParams: new OcrParams("eng"));
+
+        Assert.True(await operation.Success);
+        Assert.Equal(4, Folder.GetFiles().Length);
+        ImageAsserts.Similar(ImageResources.autocrop_doc, Path.Combine(FolderPath, "test1.jpg"));
+        ImageAsserts.Similar(ImageResources.autocrop_receipt, Path.Combine(FolderPath, "test2.jpg"));
+        Assert.Equal("First page text", File.ReadAllText(Path.Combine(FolderPath, "test1.txt")));
+        Assert.Equal("Second page text", File.ReadAllText(Path.Combine(FolderPath, "test2.txt")));
     }
 
     [Fact]

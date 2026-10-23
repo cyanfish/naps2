@@ -1,8 +1,10 @@
-﻿using NAPS2.EtoForms;
+﻿using Eto.Forms;
+using NAPS2.EtoForms;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Ui;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Images;
+using NAPS2.Ocr;
 using NAPS2.Pdf;
 
 namespace NAPS2.ImportExport;
@@ -80,7 +82,8 @@ public class ExportController : IExportController
             }
         }
 
-        if (await DoSaveImages(images, notify, savePath))
+        var ocrParams = PromptForOcrTextSidecars(savePath);
+        if (await DoSaveImages(images, notify, savePath, ocrParams))
         {
             MaybeDeleteAfterSaving(uiImages);
             return true;
@@ -115,9 +118,11 @@ public class ExportController : IExportController
             }
         }
 
-        if (Path.GetExtension(savePath).ToLowerInvariant() == ".pdf"
+        var isPdf = Path.GetExtension(savePath).Equals(".pdf", StringComparison.OrdinalIgnoreCase);
+        var ocrParams = isPdf ? null : PromptForOcrTextSidecars(savePath);
+        if (isPdf
                 ? await DoSavePdf(images, notify, savePath)
-                : await DoSaveImages(images, notify, savePath))
+                : await DoSaveImages(images, notify, savePath, ocrParams))
         {
             MaybeDeleteAfterSaving(uiImages);
             return true;
@@ -179,12 +184,32 @@ public class ExportController : IExportController
         return false;
     }
 
-    private async Task<bool> DoSaveImages(IList<ProcessedImage> images, ISaveNotify notify, string savePath)
+    private OcrParams? PromptForOcrTextSidecars(string savePath)
+    {
+        var extension = Path.GetExtension(savePath);
+        if (!extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) &&
+            !extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+        var ocrParams = _config.DefaultOcrParams();
+        if (string.IsNullOrEmpty(ocrParams.LanguageCode))
+        {
+            return null;
+        }
+        return MessageBox.Show(MiscResources.SaveOcrTextAlongsideImages, MiscResources.SaveImages,
+                   MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes
+            ? ocrParams
+            : null;
+    }
+
+    private async Task<bool> DoSaveImages(IList<ProcessedImage> images, ISaveNotify notify, string savePath,
+        OcrParams? ocrParams = null)
     {
         var op = _operationFactory.Create<SaveImagesOperation>();
         var state = _imageList.CurrentState;
         if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings),
-                savePath))
+                savePath, ocrParams: ocrParams))
         {
             _operationProgress.ShowProgress(op);
         }
