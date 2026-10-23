@@ -1,5 +1,4 @@
 ﻿using System.Security.Principal;
-using System.Windows.Forms;
 using NAPS2.Remoting;
 
 namespace NAPS2.Platform.Windows;
@@ -40,7 +39,8 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
         {
             if (!silent)
             {
-                MessageBox.Show(message);
+                // This runs before the UI framework is initialized, so use the Win32 message box directly
+                Win32.MessageBox(IntPtr.Zero, message, "", 0);
             }
         }
 
