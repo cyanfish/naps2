@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NAPS2.Platform.Windows;
 
@@ -65,6 +66,10 @@ public class WindowsOpenWith : IOpenWith
         {
             if (entry.IconPath.StartsWith("@"))
             {
+                if (GetUnplatedIconPath(entry.IconPath) is { } unplatedPath)
+                {
+                    return _imageContext.Load(unplatedPath);
+                }
                 StringBuilder outBuff = new StringBuilder(1024);
                 int hr = Win32.SHLoadIndirectString(entry.IconPath, outBuff, outBuff.Capacity, IntPtr.Zero);
                 if (hr != 0) throw new Win32Exception(hr);
@@ -77,6 +82,27 @@ public class WindowsOpenWith : IOpenWith
             Log.Debug($"Couldn't load OpenWith icon for {entry.Name}");
             return null;
         }
+    }
+
+    private static string? GetUnplatedIconPath(string indirectIconPath)
+    {
+        // Store app icons (e.g. "@{Microsoft.Paint_..._x64__8wekyb3d8bbwe?ms-resource://Microsoft.Paint/Files/Assets/
+        // PaintAppList.png}") resolve to a tile with lots of padding, which looks tiny at small sizes. So prefer the
+        // unpadded variant from the package if there is one.
+        var match = Regex.Match(indirectIconPath, @"^@\{([^?]+)\?ms-resource://[^/]+/Files/(.+)\.png\}$");
+        if (!match.Success)
+        {
+            return null;
+        }
+        var packagePath = new StringBuilder(1024);
+        int length = packagePath.Capacity;
+        if (Win32.GetPackagePathByFullName(match.Groups[1].Value, ref length, packagePath) != 0)
+        {
+            return null;
+        }
+        var unplatedPath = Path.Combine(packagePath.ToString(),
+            $"{match.Groups[2].Value}.targetsize-48_altform-unplated.png");
+        return File.Exists(unplatedPath) ? unplatedPath : null;
     }
 
     private IEnumerable<Win32.IAssocHandler> EnumerateHandlers(string fileExt)
