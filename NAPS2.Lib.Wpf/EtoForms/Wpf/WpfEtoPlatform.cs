@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Threading;
 using System.Windows.Automation;
 using System.Windows.Input;
@@ -40,6 +41,9 @@ public class WpfEtoPlatform : EtoPlatform
         // the Fluent theme before any windows are created.
         _ = new SW.Application { ShutdownMode = SW.ShutdownMode.OnExplicitShutdown };
         var application = new Application(Eto.Platforms.Wpf);
+        // Drawables paint their own content (e.g. the preview image), which a right-to-left window would mirror
+        Eto.Style.Add<Eto.Wpf.Forms.Controls.DrawableHandler>(null,
+            handler => handler.Control.FlowDirection = SW.FlowDirection.LeftToRight);
         SynchronizationContext.SetSynchronizationContext(
             new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
         SetSystemTheme();
@@ -463,8 +467,12 @@ public class WpfEtoPlatform : EtoPlatform
         {
             form.LayoutController.Container.ToNative().SizeChanged += (_, _) => form.LayoutController.Invalidate();
         }
-        // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var native = window.ToNative();
+        // This mirrors the whole window, including the positions from the layout
+        native.FlowDirection = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+            ? SW.FlowDirection.RightToLeft
+            : SW.FlowDirection.LeftToRight;
+        // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var interop = new SW.Interop.WindowInteropHelper(native);
         native.SourceInitialized += (_, _) =>
         {
