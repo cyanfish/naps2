@@ -190,6 +190,24 @@ public class PdfImportExportTests : ContextualTests
 
     [Theory]
     [ClassData(typeof(OcrTestData))]
+    public async Task ImportExportAnnotationPopups(OcrTestConfig config)
+    {
+        config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
+
+        // The popup annotations reference their parent annotations, which Pdfium doesn't remap when copying pages
+        var importPath = CopyResourceToFile(PdfResources.filled_form_annotated, "annotated.pdf");
+        var images = await _importer.Import(importPath).ToListAsync();
+        images.AddRange(await _importer.Import(importPath).ToListAsync());
+        Assert.Equal(2, images.Count);
+        await _exporter.Export(_exportPath, images, ocrParams: config.OcrParams);
+
+        PdfAsserts.AssertImages(_exportPath, ImageAsserts.XPLAT_RMSE_THRESHOLD,
+            ImageResources.filled_form_annotated, ImageResources.filled_form_annotated);
+    }
+
+    [Theory]
+    [ClassData(typeof(OcrTestData))]
     public async Task ImportVariousAndExport(OcrTestConfig config)
     {
         config.StorageConfig.Apply(this);

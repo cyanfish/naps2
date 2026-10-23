@@ -13,11 +13,12 @@ public class DesktopCommands
     private readonly IIconProvider _iconProvider;
     private readonly Naps2Config _config;
     private readonly DesktopFormProvider _desktopFormProvider;
+    private readonly EditWithController _editWithController;
 
     public DesktopCommands(DesktopController desktopController, DesktopScanController desktopScanController,
         IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions,
         ThumbnailController thumbnailController, IIconProvider iconProvider, Naps2Config config,
-        DesktopFormProvider desktopFormProvider)
+        DesktopFormProvider desktopFormProvider, EditWithController editWithController)
     {
         _desktopController = desktopController;
         _desktopScanController = desktopScanController;
@@ -28,6 +29,7 @@ public class DesktopCommands
         _iconProvider = iconProvider;
         _config = config;
         _desktopFormProvider = desktopFormProvider;
+        _editWithController = editWithController;
 
 
         Scan = new ActionCommand(desktopScanController.ScanDefault)
@@ -186,14 +188,6 @@ public class DesktopCommands
         {
             Text = UiStrings.Combine,
             IconName = "combine"
-        };
-        string? editWithAppName = _config.Get(c => c.EditWithAppName);
-        EditWithApp = new ActionCommand(imageListActions.EditWithApp)
-        {
-            Text = string.IsNullOrEmpty(editWithAppName)
-                ? UiStrings.EditWith
-                : string.Format(UiStrings.EditWithAppName, editWithAppName),
-            IconName = "pencil"
         };
         EditWithPick = new ActionCommand(imageListActions.EditWithPick)
         {
@@ -373,8 +367,18 @@ public class DesktopCommands
             _thumbnailController,
             _iconProvider,
             _config,
-            _desktopFormProvider);
+            _desktopFormProvider,
+            _editWithController);
     }
+
+    public ActionCommand CreateEditWithApp() => new(_imageListActions.EditWithApp)
+    {
+        Text = _editWithController.HasApp
+            ? string.Format(UiStrings.EditWithAppName, _config.Get(c => c.EditWithAppName))
+            : UiStrings.EditWith,
+        IconName = "pencil",
+        Image = _editWithController.AppIcon
+    };
 
     public ImageListActions ImageListActions => _imageListActions;
 
@@ -411,7 +415,6 @@ public class DesktopCommands
     public ActionCommand Compress { get; set; }
     public ActionCommand Split { get; set; }
     public ActionCommand Combine { get; set; }
-    public ActionCommand EditWithApp { get; set; }
     public ActionCommand EditWithPick { get; set; }
     public ActionCommand ResetImage { get; set; }
     public ActionCommand RotateMenu { get; set; }

@@ -9,8 +9,8 @@ public class MacPreviewForm : PreviewForm
     private readonly NSSlider _zoomSlider;
 
     public MacPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, ColorScheme colorScheme) : base(config,
-        desktopCommands, imageList, iconProvider, colorScheme)
+        IIconProvider iconProvider, ColorScheme colorScheme, EditWithController editWithController) : base(config,
+        desktopCommands, imageList, iconProvider, colorScheme, editWithController)
     {
         _zoomSlider = new NSSlider
         {
@@ -73,7 +73,7 @@ public class MacPreviewForm : PreviewForm
             MacToolbarItems.Create("compress", Commands.Compress),
             MacToolbarItems.Create("split", Commands.Split),
             MacToolbarItems.Create("combine", Commands.Combine),
-            MacToolbarItems.Create("editwith", Commands.EditWithApp),
+            MacToolbarItems.Create("editwith", Commands.CreateEditWithApp()),
             MacToolbarItems.CreateSeparator("sep0"),
             MacToolbarItems.Create("save", Commands.SaveSelected),
             // TODO: Fix this

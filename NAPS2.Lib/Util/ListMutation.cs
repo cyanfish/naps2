@@ -22,7 +22,7 @@ public abstract class ListMutation<T> where T : notnull
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
             int upperBound = list.Count - 1;
-            foreach (int i in selection.ToSelectedIndices(list).Reverse())
+            foreach (int i in selection.ToSelectedIndices(list).OrderDescending())
             {
                 // TODO: How do we want to handle this in mutations? Is it a real error case?
                 if (i == -1) break;
@@ -44,7 +44,7 @@ public abstract class ListMutation<T> where T : notnull
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
             int lowerBound = 0;
-            foreach (int i in selection.ToSelectedIndices(list))
+            foreach (int i in selection.ToSelectedIndices(list).Order())
             {
                 if (i == -1) break;
                 if (i != lowerBound++)
@@ -243,7 +243,7 @@ public abstract class ListMutation<T> where T : notnull
     {
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
-            var indexList = selection.ToSelectedIndices(list).Where(x => x != -1).ToList();
+            var indexList = selection.ToSelectedIndices(list).Where(x => x != -1).Order().ToList();
             int pairCount = indexList.Count / 2;
 
             // Swap pairs in the selection, excluding the middle element (if the total count is odd)
@@ -416,7 +416,7 @@ public abstract class ListMutation<T> where T : notnull
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
             int index = -1;
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i <= list.Count - _oldRange.Count; i++)
             {
                 if (EqualityComparer<T>.Default.Equals(list[i], _oldRange[0]))
                 {
@@ -435,6 +435,10 @@ public abstract class ListMutation<T> where T : notnull
                         break;
                     }
                 }
+            }
+            if (index == -1)
+            {
+                return;
             }
             list.RemoveRange(index, _oldRange.Count);
             list.InsertRange(index, _newRange);

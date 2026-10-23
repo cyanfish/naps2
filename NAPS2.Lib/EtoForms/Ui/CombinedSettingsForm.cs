@@ -101,7 +101,8 @@ internal class CombinedSettingsForm : EtoDialogBase
             EtoPlatform.Current.AttachWindowSidebar(this, _navigator.Control, new WindowSidebarOptions
             {
                 Width = NAVIGATOR_WIDTH,
-                MaxWidth = NAVIGATOR_WIDTH + 100
+                MinWidth = NAVIGATOR_WIDTH,
+                MaxWidth = NAVIGATOR_WIDTH
             });
         }
     }

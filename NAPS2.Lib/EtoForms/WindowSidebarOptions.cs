@@ -11,6 +11,8 @@ public record WindowSidebarOptions
 
     public int? MaxWidth { get; init; }
 
+    public int? MinContentWidth { get; init; }
+
     public bool CanHide { get; init; }
 
     public bool Visible { get; init; } = true;
@@ -18,4 +20,6 @@ public record WindowSidebarOptions
     public bool ContentUnderTitleBar { get; init; }
 
     public Action<int>? WidthChanged { get; init; }
+
+    public Action<bool>? VisibleChanged { get; init; }
 }

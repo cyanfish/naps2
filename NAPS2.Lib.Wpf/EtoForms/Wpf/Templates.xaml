@@ -9,6 +9,12 @@
         </Border>
     </ControlTemplate>
 
+    <!-- A list item template that shows the content as a checkbox, checked when the item is selected. -->
+    <ControlTemplate x:Key="CheckBoxItemTemplate" TargetType="ListBoxItem">
+        <CheckBox Content="{TemplateBinding Content}" Focusable="False" Margin="4,0"
+                  IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+    </ControlTemplate>
+
     <!-- A minimal button template. -->
     <ControlTemplate x:Key="SubtleButtonTemplate" TargetType="Button">
         <Border x:Name="bd" Background="Transparent" CornerRadius="4">

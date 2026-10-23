@@ -29,7 +29,7 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign("Mod+C", commands.Copy);
         _ksm.Assign("Mod+V", commands.Paste);
         _ksm.Assign("Mod+Z", commands.Undo);
-        _ksm.Assign(EtoPlatform.Current.IsWinForms ? "Mod+Y" : "Mod+Shift+Z", commands.Redo);
+        _ksm.Assign(EtoPlatform.Current.IsWindows ? "Mod+Y" : "Mod+Shift+Z", commands.Redo);
 
         // Configured defaults
 
@@ -58,7 +58,7 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign(ks.ImageCompress, commands.Compress);
         _ksm.Assign(ks.ImageSplit, commands.Split);
         _ksm.Assign(ks.ImageCombine, commands.Combine);
-        _ksm.Assign(ks.ImageEditWith, commands.EditWithApp);
+        _ksm.Assign(ks.ImageEditWith, commands.CreateEditWithApp());
         _ksm.Assign(ks.ImageReset, commands.ResetImage);
         _ksm.Assign(ks.ImageView, commands.ViewImage);
         _ksm.Assign(ks.Import, commands.Import);

@@ -168,32 +168,46 @@ public class PdfExporter
         lock (PdfiumNativeLibrary.Instance)
         {
             var password = exportParams.Encryption.EncryptPdf ? exportParams.Encryption.OwnerPassword : null;
-            using var destDoc = Pdfium.PdfDocument.Load(stream, password);
-            using var glyphlessFont = passthroughPages.Any(state => state.OcrTask?.Result != null)
-                ? GlyphlessFont.AddToPdfiumDocument(destDoc)
-                : null;
-            foreach (var state in passthroughPages)
+            // Retain source doc references until we save
+            var sourceDocs = new List<Pdfium.PdfDocument>();
+            try
             {
-                destDoc.DeletePage(state.PageIndex);
-                if (state.Image.Storage is ImageFileStorage fileStorage)
+                using var destDoc = Pdfium.PdfDocument.Load(stream, password);
+                using var glyphlessFont = passthroughPages.Any(state => state.OcrTask?.Result != null)
+                    ? GlyphlessFont.AddToPdfiumDocument(destDoc)
+                    : null;
+                foreach (var state in passthroughPages)
                 {
-                    using var sourceDoc = Pdfium.PdfDocument.Load(fileStorage.FullPath);
-                    CopyPage(destDoc, sourceDoc, state);
+                    destDoc.DeletePage(state.PageIndex);
+                    if (state.Image.Storage is ImageFileStorage fileStorage)
+                    {
+                        var sourceDoc = Pdfium.PdfDocument.Load(fileStorage.FullPath);
+                        sourceDocs.Add(sourceDoc);
+                        CopyPage(destDoc, sourceDoc, state);
+                    }
+                    else if (state.Image.Storage is ImageMemoryStorage memoryStorage)
+                    {
+                        var sourceDoc = Pdfium.PdfDocument.Load(memoryStorage.Stream);
+                        sourceDocs.Add(sourceDoc);
+                        CopyPage(destDoc, sourceDoc, state);
+                    }
+                    if (state.OcrTask?.Result != null)
+                    {
+                        using var page = destDoc.GetPage(state.PageIndex);
+                        DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, glyphlessFont!, state.OcrTask.Result);
+                    }
+                    if (progress.IsCancellationRequested) return false;
                 }
-                else if (state.Image.Storage is ImageMemoryStorage memoryStorage)
-                {
-                    using var sourceDoc = Pdfium.PdfDocument.Load(memoryStorage.Stream);
-                    CopyPage(destDoc, sourceDoc, state);
-                }
-                if (state.OcrTask?.Result != null)
-                {
-                    using var page = destDoc.GetPage(state.PageIndex);
-                    DrawOcrTextOnPdfiumPage(state.Page, destDoc, page, glyphlessFont!, state.OcrTask.Result);
-                }
-                if (progress.IsCancellationRequested) return false;
+                output.SavePdfDoc(destDoc);
+                return true;
             }
-            output.SavePdfDoc(destDoc);
-            return true;
+            finally
+            {
+                foreach (var sourceDoc in sourceDocs)
+                {
+                    sourceDoc.Dispose();
+                }
+            }
         }
     }
 

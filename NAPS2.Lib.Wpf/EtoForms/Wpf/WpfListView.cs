@@ -37,9 +37,10 @@ public class WpfListView<T> : IListView<T> where T : notnull
                 : behavior.MultiSelect ? SelectionMode.Extended
                 : SelectionMode.Single,
             BorderThickness = new Thickness(0),
-            AllowDrop = behavior.AllowDragDrop || behavior.AllowFileDrop,
-            ItemsPanel = new ItemsPanelTemplate(new FrameworkElementFactory(typeof(WrapPanel)))
+            AllowDrop = behavior.AllowDragDrop || behavior.AllowFileDrop
         };
+        _listBox.ItemsPanel = new ItemsPanelTemplate(new FrameworkElementFactory(
+            behavior.Checkboxes ? typeof(UniformWrapPanel) : typeof(WrapPanel)));
         ScrollViewer.SetHorizontalScrollBarVisibility(_listBox, ScrollBarVisibility.Disabled);
         _listBox.FocusVisualStyle = null;
         _listBox.SelectionChanged += OnSelectionChanged;
@@ -269,6 +270,7 @@ public class WpfListView<T> : IListView<T> where T : notnull
 
     private void SetImage(WpfListViewItem<T> listBoxItem)
     {
+        if (_behavior.Checkboxes) return;
         using var etoImage = _behavior.GetImage(this, listBoxItem.Value);
         listBoxItem.SetImage(etoImage.ToWpf(), ImageSize);
     }
@@ -324,7 +326,7 @@ public class WpfListView<T> : IListView<T> where T : notnull
         {
             if (element is ScrollBar) return;
         }
-        if (Keyboard.Modifiers == ModifierKeys.None)
+        if (Keyboard.Modifiers == ModifierKeys.None && !_behavior.Checkboxes)
         {
             _listBox.UnselectAll();
         }
@@ -470,6 +472,24 @@ public class WpfListView<T> : IListView<T> where T : notnull
         if (_insertionAdorner == null) return;
         AdornerLayer.GetAdornerLayer(_insertionAdorner.AdornedElement)?.Remove(_insertionAdorner);
         _insertionAdorner = null;
+    }
+
+    /// <summary>
+    /// A WrapPanel where every item is as wide as the widest one, so the items line up in columns.
+    /// </summary>
+    private class UniformWrapPanel : WrapPanel
+    {
+        protected override Size MeasureOverride(Size constraint)
+        {
+            double itemWidth = 0;
+            foreach (UIElement child in InternalChildren)
+            {
+                child.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                itemWidth = Math.Max(itemWidth, child.DesiredSize.Width);
+            }
+            ItemWidth = itemWidth;
+            return base.MeasureOverride(constraint);
+        }
     }
 
     private class InsertionAdorner(UIElement adornedElement, bool after) : Adorner(adornedElement)

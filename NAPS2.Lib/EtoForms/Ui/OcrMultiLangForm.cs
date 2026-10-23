@@ -27,7 +27,7 @@ public class OcrMultiLangForm : EtoDialogBase
         FormStateController.DefaultExtraLayoutSize = new Size(150, 20);
 
         LayoutController.Content = L.Column(
-            _languageList.Control.Scale(),
+            _languageList.Control.NaturalSize(150, 100).Scale(),
             C.Spacer(),
             L.Row(
                 C.Filler(),
