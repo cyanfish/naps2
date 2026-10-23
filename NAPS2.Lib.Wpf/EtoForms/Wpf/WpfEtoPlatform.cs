@@ -25,6 +25,7 @@ namespace NAPS2.EtoForms.Wpf;
 public class WpfEtoPlatform : EtoPlatform
 {
     private const int SMALL_BUTTON_PADDING = 7;
+    private const int SMALL_TOOLBAR_BUTTON_PADDING = 4;
     private const double ZOOM_BUTTON_OPACITY = 0.85;
     private const double NARROW_TEXT_BOX_WIDTH = 100;
 
@@ -314,6 +315,26 @@ public class WpfEtoPlatform : EtoPlatform
         int p = GROUP_BOX_PADDING;
         return L.Overlay(groupBox, L.Buffer(content, p, GROUP_BOX_HEADER_HEIGHT + p, p, p))
             .SpacingBefore(bold ? GROUP_BOX_BOLD_HEADER_SPACING : 0);
+    }
+
+    public override void ConfigureSmallToolBar(ToolBar toolBar)
+    {
+        // The Fluent toolbar button template has a fixed padding (12,6) meant for text buttons, so icon buttons take up
+        // too much space
+        foreach (var item in toolBar.Items)
+        {
+            if (item.ControlObject is SWC.Control native)
+            {
+                native.Loaded += (_, _) =>
+                {
+                    if (SWM.VisualTreeHelper.GetChildrenCount(native) > 0 &&
+                        SWM.VisualTreeHelper.GetChild(native, 0) is SWC.Border border)
+                    {
+                        border.Padding = new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING);
+                    }
+                };
+            }
+        }
     }
 
     public override void ConfigureDonateButton(Button button)

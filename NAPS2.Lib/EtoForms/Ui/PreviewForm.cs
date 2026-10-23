@@ -181,6 +181,7 @@ public class PreviewForm : EtoDialogBase
         // dialog only show the editing controls. So it feels more like an image editor. Clicking e.g. "Crop" in the
         // desktop form should still open the full image editing form (for now at least).
         CreateToolbar();
+        EtoPlatform.Current.ConfigureSmallToolBar(ToolBar);
 
         await UpdateImage();
         UpdatePage();
