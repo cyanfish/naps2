@@ -29,7 +29,7 @@ public class DesktopKeyboardShortcuts
         _ksm.Assign("Mod+C", commands.Copy);
         _ksm.Assign("Mod+V", commands.Paste);
         _ksm.Assign("Mod+Z", commands.Undo);
-        _ksm.Assign(EtoPlatform.Current.IsWinForms ? "Mod+Y" : "Mod+Shift+Z", commands.Redo);
+        _ksm.Assign(EtoPlatform.Current.IsWindows ? "Mod+Y" : "Mod+Shift+Z", commands.Redo);
 
         // Configured defaults
 

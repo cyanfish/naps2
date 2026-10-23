@@ -333,7 +333,7 @@ public class PreviewForm : EtoDialogBase
         _previewKsm.Assign("Del", DeleteCurrentImageCommand);
         _previewKsm.Assign("Mod+0", ZoomActualCommand);
         _previewKsm.Assign("Mod+Z", Commands.Undo);
-        _previewKsm.Assign(EtoPlatform.Current.IsWinForms ? "Mod+Y" : "Mod+Shift+Z", Commands.Redo);
+        _previewKsm.Assign(EtoPlatform.Current.IsWindows ? "Mod+Y" : "Mod+Shift+Z", Commands.Redo);
 
         _previewKsm.Assign("PageDown", () => _ = GoTo(ImageIndex + 1));
         _previewKsm.Assign("Right", () => _ = GoTo(ImageIndex + 1));
