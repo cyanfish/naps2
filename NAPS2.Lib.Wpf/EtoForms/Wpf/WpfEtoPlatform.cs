@@ -480,6 +480,16 @@ public class WpfEtoPlatform : EtoPlatform
         native.FlowDirection = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
             ? SW.FlowDirection.RightToLeft
             : SW.FlowDirection.LeftToRight;
+        if (window is Dialog dialog)
+        {
+            // Like WinForms, use the active window as the owner (so the dialog is centered on it).
+            dialog.PreLoad += (_, _) =>
+            {
+                var activeWindow = Win32.GetActiveWindow();
+                dialog.Owner ??= Application.Instance.Windows.FirstOrDefault(x =>
+                    x != dialog && x.NativeHandle == activeWindow);
+            };
+        }
         // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var interop = new SW.Interop.WindowInteropHelper(native);
         native.SourceInitialized += (_, _) =>
