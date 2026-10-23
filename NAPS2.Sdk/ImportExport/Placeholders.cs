@@ -151,10 +151,19 @@ internal abstract class Placeholders
             if (barcodeValue != null)
             {
                 string value = _filterBarcode ? SanitizeBarcodeValue(barcodeValue) : barcodeValue;
-                result = result.Replace(BARCODE, value, StringComparison.Ordinal);
+                result = ReplaceOrdinal(result, BARCODE, value);
             }
 
             return result;
+        }
+
+        private static string ReplaceOrdinal(string input, string oldValue, string newValue)
+        {
+#if NETFRAMEWORK
+            return input.Replace(oldValue, newValue);
+#else
+            return input.Replace(oldValue, newValue, StringComparison.Ordinal);
+#endif
         }
 
         private static string SanitizeBarcodeValue(string value)
