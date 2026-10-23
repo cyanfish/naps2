@@ -439,6 +439,15 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press Enter to scan, or Ctrl+Z then Enter to stop and save..
+        /// </summary>
+        internal static string PressEnterToScanWindows {
+            get {
+                return ResourceManager.GetString("PressEnterToScanWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified profile is unavailable or ambiguous.
         ///Use the --profile option to specify a profile by name..
         /// </summary>
