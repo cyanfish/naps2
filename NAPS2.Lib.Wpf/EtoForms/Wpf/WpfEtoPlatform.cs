@@ -26,6 +26,7 @@ public class WpfEtoPlatform : EtoPlatform
 {
     private const int SMALL_BUTTON_PADDING = 7;
     private const double ZOOM_BUTTON_OPACITY = 0.85;
+    private const double NARROW_TEXT_BOX_WIDTH = 100;
 
     private static readonly Size MinImageButtonSize = new(75, 32);
 
@@ -47,7 +48,28 @@ public class WpfEtoPlatform : EtoPlatform
         SynchronizationContext.SetSynchronizationContext(
             new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
         SetSystemTheme();
+        HideClearButtonInNarrowTextBoxes();
         return application;
+    }
+
+    private static void HideClearButtonInNarrowTextBoxes()
+    {
+        // The Fluent clear button covers too much of the text in narrow text boxes (e.g. for numbers). A local value
+        // takes precedence over the template triggers that show it.
+        SW.EventManager.RegisterClassHandler(typeof(SWC.TextBox), SW.FrameworkElement.SizeChangedEvent,
+            new SW.SizeChangedEventHandler((sender, _) =>
+            {
+                var textBox = (SWC.TextBox) sender;
+                if (textBox.Template?.FindName("DeleteButton", textBox) is not SW.UIElement deleteButton) return;
+                if (textBox.ActualWidth < NARROW_TEXT_BOX_WIDTH)
+                {
+                    deleteButton.Visibility = SW.Visibility.Collapsed;
+                }
+                else
+                {
+                    deleteButton.ClearValue(SW.UIElement.VisibilityProperty);
+                }
+            }));
     }
 
     public override void SetSystemTheme()
