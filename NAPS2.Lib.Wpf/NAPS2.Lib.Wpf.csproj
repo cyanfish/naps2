@@ -24,6 +24,7 @@
     <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" />
     <PackageReference Include="Eto.Forms" Version="2.11.0" />
     <PackageReference Include="Eto.Platform.Wpf" Version="2.11.0" />
+    <PackageReference Include="NAPS2.Windows.Printing" Version="0.9.0" />
   </ItemGroup>
 
   <ItemGroup>
