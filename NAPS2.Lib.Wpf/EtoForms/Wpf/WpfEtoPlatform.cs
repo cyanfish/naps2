@@ -422,7 +422,7 @@ public class WpfEtoPlatform : EtoPlatform
                 native.Measure(new SW.Size(availableWidth, double.PositiveInfinity));
                 desired = native.DesiredSize;
             }
-            else if (control is Label or LinkButton or CheckBox or RadioButton)
+            else if (control is Label or LinkButton or CheckBox or RadioButton or Button)
             {
                 // With layout rounding, the desired size can be rounded down (e.g. 145.3 -> 145), and Eto.Wpf's text
                 // in these controls wraps (and the second line is clipped) if it's even slightly too narrow
