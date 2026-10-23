@@ -25,11 +25,11 @@ internal class SavePdfOperation : OperationBase
 
     public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
         PdfSettings pdfSettings, OcrParams ocrParams, EmailMessage? emailMessage = null,
-        string? overwriteFile = null)
+        string? overwriteFile = null, string? barcodeValue = null)
     {
         // TODO: This needs tests. And ideally simplification.
         ProgressTitle = emailMessage != null ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
-        var subFileName = placeholders.Substitute(fileName);
+        var subFileName = placeholders.Substitute(fileName, barcodeValue: barcodeValue);
         Status = new OperationStatus
         {
             StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName)),
@@ -73,7 +73,8 @@ internal class SavePdfOperation : OperationBase
                         result = false;
                         break;
                     }
-                    var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
+                    var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits,
+                        barcodeValue);
                     // TODO: Overwrite prompt non-single file?
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
@@ -82,7 +83,7 @@ internal class SavePdfOperation : OperationBase
                     result = await RunWithRetry(async () =>
                             await WaitForFileNotInUse(currentFileName) &&
                             await _pdfExporter.Export(currentFileName, imagesForFile,
-                                new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders),
+                                new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders, barcodeValue),
                                     pdfSettings.Encryption, pdfSettings.Compat), ocrParams, progress),
                         GetSaveErrorMessage);
                     if (!result)

@@ -78,7 +78,8 @@ public class AutoSaver
             var placeholders = Placeholders.All.WithDate(DateTime.Now);
             int i = 0;
             string? firstFileSaved = null;
-            var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator).ToList();
+            var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator,
+                barcodeSeparatorOptions: settings.BarcodeSeparatorOptions).ToList();
             foreach (var imagesToSave in scans)
             {
                 (bool success, string? filePath) =

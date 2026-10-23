@@ -287,8 +287,10 @@ internal class ScanPerformer : IScanPerformer
             BarcodeDetectionOptions =
             {
                 DetectBarcodes = scanParams.DetectPatchT ||
-                                 scanProfile.AutoSaveSettings?.Separator == SaveSeparator.PatchT,
-                PatchTOnly = true
+                                 scanParams.BarcodeSeparatorOptions != null ||
+                                 scanProfile.AutoSaveSettings?.Separator is SaveSeparator.PatchT or SaveSeparator.Barcode,
+                PatchTOnly = scanParams.BarcodeSeparatorOptions == null &&
+                             scanProfile.AutoSaveSettings?.Separator != SaveSeparator.Barcode
             },
             OcrParams = scanParams.OcrParams ?? OcrParams.Empty,
             Brightness = scanProfile.Brightness,
