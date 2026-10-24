@@ -36,7 +36,7 @@ public static class InnoSetupPackager
         var innoDefPath = GenerateInnoDef(pkgInfo, arch);
 
         // TODO: Use https://github.com/DomGries/InnoDependencyInstaller for .net dependency
-        var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES(X86)%/Inno Setup 6/iscc.exe");
+        var iscc = Environment.ExpandEnvironmentVariables("%PROGRAMFILES%/Inno Setup 7/ISCC.exe");
         Cli.Run(iscc, $"\"{innoDefPath}\"");
 
         if (!noSign)
