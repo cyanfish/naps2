@@ -4,6 +4,7 @@ using Gdk;
 using Gtk;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
+using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Scan;
@@ -20,6 +21,7 @@ public class GtkDesktopForm : DesktopForm
     private int _toolbarPadding;
     private CssProvider? _toolbarPaddingCssProvider;
     private Toolbar _profilesToolbar = null!;
+    private Eto.Forms.ContextMenu _toolbarContextMenu = null!;
 
     public GtkDesktopForm(
         Naps2Config config,
@@ -132,6 +134,16 @@ public class GtkDesktopForm : DesktopForm
 
         _profilesToolbar = new Toolbar();
         _profilesToolbar.Style = ToolbarStyle.BothHoriz;
+
+        _toolbarContextMenu = C.ContextMenu(this, GetToolbarContextMenuProvider());
+        foreach (var toolbar in new[] { _toolbar, _profilesToolbar })
+        {
+            toolbar.PopupContextMenu += (_, args) =>
+            {
+                _toolbarContextMenu.Show();
+                args.RetVal = true;
+            };
+        }
     }
 
     public override void PlaceProfilesToolbar()

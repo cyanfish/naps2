@@ -484,6 +484,9 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
+    protected MenuProvider GetToolbarContextMenuProvider() =>
+        new MenuProvider().Append(Commands.CustomizeToolbar);
+
     public virtual void UpdateListView() => Invalidate();
 
     protected virtual void CreateToolbarButton(Command command) => throw new InvalidOperationException();

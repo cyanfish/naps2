@@ -310,6 +310,10 @@ public class DesktopCommands
             Text = UiStrings.Settings,
             IconName = "cog"
         };
+        CustomizeToolbar = new ActionCommand(desktopSubFormController.ShowToolbarSettingsForm)
+        {
+            Text = UiStrings.CustomizeToolbar
+        };
         About = new ActionCommand(desktopSubFormController.ShowAboutForm)
         {
             Text = UiStrings.About,
@@ -439,6 +443,7 @@ public class DesktopCommands
     public ActionCommand ClearAll { get; set; }
     public ActionCommand LanguageMenu { get; set; }
     public ActionCommand Settings { get; set; }
+    public ActionCommand CustomizeToolbar { get; set; }
     public ActionCommand About { get; set; }
     public ActionCommand ZoomIn { get; set; }
     public ActionCommand ZoomOut { get; set; }

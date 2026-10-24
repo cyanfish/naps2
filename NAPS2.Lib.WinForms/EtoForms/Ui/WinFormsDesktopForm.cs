@@ -160,10 +160,14 @@ public class WinFormsDesktopForm : DesktopForm
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _profilesToolStrip.ImageScalingSize = new Size((int) (16 * scale), (int) (16 * scale)));
 
+        var contextMenu = (WF.ContextMenuStrip) C.ContextMenu(this, GetToolbarContextMenuProvider()).ControlObject;
+        _mainToolStrip.ContextMenuStrip = contextMenu;
+        _profilesToolStrip.ContextMenuStrip = contextMenu;
         foreach (var panel in _container.Controls.OfType<WF.ToolStripPanel>())
         {
             // Allow tabbing through the toolbar for accessibility
             WinFormsHacks.SetControlStyle(panel, WF.ControlStyles.Selectable, true);
+            panel.ContextMenuStrip = contextMenu;
         }
 
         // We defer this to the Load event because otherwise with RTL languages we get a very weird crash (.NET bug not

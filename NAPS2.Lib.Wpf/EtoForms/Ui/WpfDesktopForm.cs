@@ -120,6 +120,7 @@ public class WpfDesktopForm : DesktopForm
         holder.Content = null;
         _toolbarBorder.Child = new StackPanel { Children = { _mainToolBar, _profilesToolBar } };
         holder.Content = _toolbarBorder;
+        _toolbarBorder.ContextMenu = GetToolbarContextMenuProvider().ToWpfContextMenu(this);
     }
 
     public override void PlaceProfilesToolbar()
