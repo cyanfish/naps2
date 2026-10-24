@@ -25,6 +25,8 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool SupportsProfilesToolbar => true;
 
+    public bool SupportsToolbarCustomization => true;
+
     public bool SupportsButtonActions => true;
 
     public bool SupportsKeyboardShortcuts => true;
