@@ -1664,13 +1664,31 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("Connect", resourceCulture);
             }
         }
-        
+
+        internal static string WaitingToConnect {
+            get {
+                return ResourceManager.GetString("WaitingToConnect", resourceCulture);
+            }
+        }
+
+        internal static string Connecting {
+            get {
+                return ResourceManager.GetString("Connecting", resourceCulture);
+            }
+        }
+
         internal static string ConnectionError {
             get {
                 return ResourceManager.GetString("ConnectionError", resourceCulture);
             }
         }
-        
+
+        internal static string ConnectionTimedOut {
+            get {
+                return ResourceManager.GetString("ConnectionTimedOut", resourceCulture);
+            }
+        }
+
         internal static string AlwaysAsk {
             get {
                 return ResourceManager.GetString("AlwaysAsk", resourceCulture);
