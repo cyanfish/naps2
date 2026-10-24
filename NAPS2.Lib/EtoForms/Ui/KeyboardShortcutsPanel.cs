@@ -136,6 +136,11 @@ internal class KeyboardShortcutsPanel : SettingsPanel
     public override void OnShown()
     {
         _gridView.DataStore = Shortcuts;
+        if (EtoPlatform.Current.IsWinForms)
+        {
+            // Fix a WF-specific render glitch
+            Invoker.Current.InvokeDispatch(() => _gridView.Invalidate());
+        }
     }
 
     public override LayoutElement BuildFixedLayout()
