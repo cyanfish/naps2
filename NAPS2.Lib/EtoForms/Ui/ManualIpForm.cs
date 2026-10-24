@@ -104,8 +104,30 @@ public class ManualIpForm : EtoDialogBase
             return false;
         }
 
-        int port = int.TryParse(_port.Text.Trim(), out int p) ? p : -1;
-        bool https = _https.IsChecked();
+        string portText = _port.Text.Trim();
+        int port = -1;
+        if (portText != "" && (!int.TryParse(portText, out port) || port is < 1 or > 65535))
+        {
+            _port.Focus();
+            return false;
+        }
+
+        Uri uri;
+        try
+        {
+            uri = new UriBuilder
+            {
+                Scheme = _https.IsChecked() ? "https" : "http",
+                Host = ipHost,
+                Port = port,
+                Path = "eSCL"
+            }.Uri;
+        }
+        catch (Exception ex) when (ex is UriFormatException or ArgumentException)
+        {
+            _ipHost.Focus();
+            return false;
+        }
 
         // Pressing Connect again restarts the connection with the current input
         _connectCts?.Cancel();
@@ -115,16 +137,8 @@ public class ManualIpForm : EtoDialogBase
         SetConnecting();
         Task.Run(async () =>
         {
-            Uri? uri = null;
             try
             {
-                uri = new UriBuilder
-                {
-                    Scheme = https ? "https" : "http",
-                    Host = ipHost,
-                    Port = port,
-                    Path = "eSCL"
-                }.Uri;
                 var client = new EsclClient(uri) { CancelToken = cts.Token };
                 var caps = await client.GetCapabilities();
                 if (caps.Uuid != null && caps.MakeAndModel != null)
@@ -151,7 +165,7 @@ public class ManualIpForm : EtoDialogBase
                 Invoker.Current.Invoke(() =>
                 {
                     if (cts.IsCancellationRequested) return;
-                    Log.DebugException($"Error connecting to manual IP/host {uri?.ToString() ?? ipHost}", ex);
+                    Log.DebugException($"Error connecting to manual IP/host {uri}", ex);
                     bool isTimeout = ex.AnyMatch(e => e is OperationCanceledException or TimeoutException);
                     SetError(isTimeout ? UiStrings.ConnectionTimedOut : UiStrings.ConnectionError);
                 });
