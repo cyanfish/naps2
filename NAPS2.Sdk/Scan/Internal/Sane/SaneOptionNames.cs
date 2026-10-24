@@ -10,6 +10,7 @@ internal static class SaneOptionNames
     public const string ADF_MODE1 = "adf_mode";
     public const string ADF_MODE2 = "adf-mode";
     public const string DUPLEX = "duplex"; // Not commonly used (usually adf_mode is used instead)
+    public const string EPSONDS_ES60W_AUTO_LENGTH = "es60w-auto-length";
 
     public const string PAGE_WIDTH = "page-width";
     public const string PAGE_HEIGHT = "page-height";
