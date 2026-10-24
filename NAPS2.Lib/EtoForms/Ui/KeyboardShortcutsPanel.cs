@@ -241,6 +241,7 @@ internal class KeyboardShortcutsPanel : SettingsPanel
 
     public override void Save()
     {
+        if (!_transact.HasChanges) return;
         _transact.Commit();
         _desktopFormProvider.DesktopForm.ReassignKeyboardShortcuts();
     }
