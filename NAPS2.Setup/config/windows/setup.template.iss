@@ -14,9 +14,7 @@
 AppName={#AppLongName}
 AppVersion={#AppVersion}
 AppVerName={#AppShortName} {#AppVersionName}
-
 AppPublisher={#AppCompany}
-
 AppPublisherURL=https://www.naps2.com
 AppSupportURL=https://www.naps2.com/support
 AppUpdatesURL=https://www.naps2.com/download
@@ -31,9 +29,7 @@ VersionInfoCopyright=(c) {#AppCopyrightStartYear}-{#AppCopyrightEndYear}
 ShowLanguageDialog=yes
 UsePreviousLanguage=no
 LanguageDetectionMethod=uilanguage
-
 WizardStyle=modern
-
 ; Require Windows 10 1607+
 MinVersion=10.0.14393
 
@@ -54,7 +50,7 @@ SolidCompression=yes
 ChangesAssociations=yes
 
 [Run]
-Filename: "{app}\{#ExeName}"; Flags: nowait postinstall
+Filename: "{app}\{#ExeName}"; Description: "{cm:LaunchProgram,{#AppShortName}}"; Flags: nowait postinstall
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -73,7 +69,7 @@ Type: filesandordirs; Name: "{app}\lib"
 
 [Icons]
 Name: "{group}\NAPS2"; Filename: "{app}\{#ExeName}"
-Name: "{commondesktop}\NAPS2"; Filename: "{app}\{#AppShortName}"; Tasks: desktopicon
+Name: "{commondesktop}\NAPS2"; Filename: "{app}\{#ExeName}"; Tasks: desktopicon
 
 [Registry]
 Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\Handlers\WIA_{{1c3a7177-f3a7-439e-be47-e304a185f932}"; Flags: uninsdeletekey
