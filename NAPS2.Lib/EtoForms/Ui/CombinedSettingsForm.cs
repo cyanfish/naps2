@@ -22,6 +22,7 @@ internal class CombinedSettingsForm : EtoDialogBase
     private readonly List<LayoutVisibility> _panelVisibilities;
     private readonly ISettingsNavigator _navigator = EtoPlatform.Current.CreateSettingsNavigator();
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
+    private bool _saved;
 
     public CombinedSettingsForm(Naps2Config config, DialogHelper dialogHelper,
         DesktopFormProvider desktopFormProvider, KeyboardShortcutManager ksm) : base(config)
@@ -39,6 +40,10 @@ internal class CombinedSettingsForm : EtoDialogBase
         if (PlatformCompat.System.SupportsKeyboardShortcuts)
         {
             _panels.Add(new KeyboardShortcutsPanel(this, ksm, desktopFormProvider));
+        }
+        if (PlatformCompat.System.SupportsToolbarCustomization)
+        {
+            _panels.Add(new ToolbarSettingsPanel(this, desktopFormProvider));
         }
         _panelVisibilities = _panels.Select(_ => new LayoutVisibility(false)).ToList();
 
@@ -116,6 +121,18 @@ internal class CombinedSettingsForm : EtoDialogBase
         }
     }
 
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        if (!_saved)
+        {
+            foreach (var panel in _panels)
+            {
+                panel.Cancel();
+            }
+        }
+    }
+
     private void UpdateSelectedPanel()
     {
         var selected = SelectedPanel;
@@ -136,5 +153,6 @@ internal class CombinedSettingsForm : EtoDialogBase
         {
             panel.Save();
         }
+        _saved = true;
     }
 }

@@ -345,6 +345,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string MoveUpDown {
+            get {
+                return ResourceManager.GetString("MoveUpDown", resourceCulture);
+            }
+        }
+        
         internal static string Reorder {
             get {
                 return ResourceManager.GetString("Reorder", resourceCulture);
@@ -2004,6 +2010,36 @@ namespace NAPS2.Lang.Resources {
         internal static string ToggleView {
             get {
                 return ResourceManager.GetString("ToggleView", resourceCulture);
+            }
+        }
+        
+        internal static string ToolbarSettings {
+            get {
+                return ResourceManager.GetString("ToolbarSettings", resourceCulture);
+            }
+        }
+        
+        internal static string CustomizeToolbar {
+            get {
+                return ResourceManager.GetString("CustomizeToolbar", resourceCulture);
+            }
+        }
+        
+        internal static string MainToolbarPositionLabel {
+            get {
+                return ResourceManager.GetString("MainToolbarPositionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ProfilesToolbarPositionLabel {
+            get {
+                return ResourceManager.GetString("ProfilesToolbarPositionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Buttons {
+            get {
+                return ResourceManager.GetString("Buttons", resourceCulture);
             }
         }
     }

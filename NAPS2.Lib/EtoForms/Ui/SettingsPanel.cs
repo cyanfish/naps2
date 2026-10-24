@@ -28,6 +28,10 @@ internal abstract class SettingsPanel
 
     public abstract void RestoreDefaults();
 
+    public virtual void Cancel()
+    {
+    }
+
     public virtual void OnShown()
     {
     }

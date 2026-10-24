@@ -267,6 +267,9 @@
   <data name="MoveDown" xml:space="preserve">
     <value>Move Down</value>
   </data>
+  <data name="MoveUpDown" xml:space="preserve">
+    <value>Move Up/Down</value>
+  </data>
   <data name="Reorder" xml:space="preserve">
     <value>Reorder</value>
   </data>
@@ -1118,5 +1121,20 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="ToggleView" xml:space="preserve">
     <value>Toggle View</value>
+  </data>
+  <data name="ToolbarSettings" xml:space="preserve">
+    <value>Toolbar Settings</value>
+  </data>
+  <data name="CustomizeToolbar" xml:space="preserve">
+    <value>Customize Toolbar</value>
+  </data>
+  <data name="MainToolbarPositionLabel" xml:space="preserve">
+    <value>Main toolbar position:</value>
+  </data>
+  <data name="ProfilesToolbarPositionLabel" xml:space="preserve">
+    <value>Profiles toolbar position:</value>
+  </data>
+  <data name="Buttons" xml:space="preserve">
+    <value>Buttons</value>
   </data>
 </root>
