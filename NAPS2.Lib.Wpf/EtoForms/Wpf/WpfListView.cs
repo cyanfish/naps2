@@ -426,20 +426,9 @@ public class WpfListView<T> : IListView<T> where T : notnull
     private void AutoScroll(Point position)
     {
         const double edge = 30;
-        if (FindScrollViewer(_listBox) is not { } scrollViewer) return;
+        if (_listBox.FindDescendant<ScrollViewer>() is not { } scrollViewer) return;
         if (position.Y < edge) scrollViewer.LineUp();
         else if (position.Y > _listBox.ActualHeight - edge) scrollViewer.LineDown();
-    }
-
-    private static ScrollViewer? FindScrollViewer(DependencyObject parent)
-    {
-        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-        {
-            var child = VisualTreeHelper.GetChild(parent, i);
-            if (child is ScrollViewer scrollViewer) return scrollViewer;
-            if (FindScrollViewer(child) is { } result) return result;
-        }
-        return null;
     }
 
     private int GetDragIndex(Point position)
