@@ -734,8 +734,16 @@ internal class AutomatedScanning
             {
                 if (_options.WaitScan)
                 {
-                    OutputVerbose(ConsoleResources.PressEnterToScan);
-                    Console.ReadLine();
+                    OutputVerbose(OperatingSystem.IsWindows()
+                        ? ConsoleResources.PressEnterToScanWindows
+                        : ConsoleResources.PressEnterToScan);
+                    var input = Console.ReadLine();
+                    if (input == null)
+                    {
+                        // Ctrl+D or Ctrl+Z then Enter (EOF) detected - stop scanning and save
+                        OutputVerbose(ConsoleResources.StoppingScan);
+                        break;
+                    }
                 }
                 if (_options.Delay > 0)
                 {
