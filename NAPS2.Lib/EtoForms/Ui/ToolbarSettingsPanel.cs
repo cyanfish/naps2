@@ -12,6 +12,8 @@ internal class ToolbarSettingsPanel : SettingsPanel
     private readonly EnumDropDownWidget<DockStyle> _mainPosition = new(scale: false);
     private readonly EnumDropDownWidget<DockStyle> _profilesPosition = new(scale: false);
     private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
+    private readonly List<CheckBox> _allCheckBoxes;
+    // The checkboxes that can be changed, i.e. excluding Settings
     private readonly List<(ToolbarButtons button, CheckBox checkBox)> _buttonCheckBoxes;
     // Updating the preview is relatively slow, so it's done on a timer to let the UI update first, and to batch
     // multiple changes
@@ -22,7 +24,14 @@ internal class ToolbarSettingsPanel : SettingsPanel
     public ToolbarSettingsPanel(IFormBase form, DesktopFormProvider desktopFormProvider) : base(form)
     {
         _desktopFormProvider = desktopFormProvider;
-        _buttonCheckBoxes = GetButtons().Select(x => (x.button, C.CheckBox(x.label))).ToList();
+        var buttons = GetButtons().Select(x => (x.button, checkBox: C.CheckBox(x.label))).ToList();
+        _allCheckBoxes = buttons.Select(x => x.checkBox).ToList();
+        // Settings can't be removed (except by an admin with HideSettingsButton) so people don't accidentally lock
+        // themselves out of toolbar settings
+        var settingsCheckBox = buttons.Single(x => x.button == ToolbarButtons.Settings).checkBox;
+        settingsCheckBox.Checked = Config.IsToolbarButtonShown(ToolbarButtons.Settings);
+        settingsCheckBox.Enabled = false;
+        _buttonCheckBoxes = buttons.Where(x => x.button != ToolbarButtons.Settings).ToList();
         UpdateValues(Config);
         _previewTimer.Elapsed += (_, _) => ApplyPreview();
         _mainPosition.SelectedItemChanged += (_, _) => UpdatePreview();
@@ -62,35 +71,40 @@ internal class ToolbarSettingsPanel : SettingsPanel
         yield return (ToolbarButtons.Delete, UiStrings.Delete);
         yield return (ToolbarButtons.Clear, UiStrings.Clear);
         yield return (ToolbarButtons.Language, UiStrings.Language);
-        // Settings isn't listed so it can't be removed (except by an admin with HideSettingsButton)
-        // Don't want people accidentally locking themselves out of toolbar settings
+        yield return (ToolbarButtons.Settings, UiStrings.Settings);
         yield return (ToolbarButtons.About, UiStrings.About);
     }
 
     public override LayoutElement BuildScrollableLayout()
     {
-        var checkBoxes = _buttonCheckBoxes.Select(x => x.checkBox).ToList();
-        int half = (checkBoxes.Count + 1) / 2;
-        bool profilesToolbar = PlatformCompat.System.SupportsProfilesToolbar;
+        int half = (_allCheckBoxes.Count + 1) / 2;
         return L.Column(
-            L.Row(
-                C.Label(UiStrings.MainToolbarPositionLabel).AlignCenter().Padding(right: 10),
-                _mainPosition.AsControl().MinWidth(100)
-            ).Aligned(),
-            profilesToolbar
-                ? L.Row(
-                    C.Label(UiStrings.ProfilesToolbarPositionLabel).AlignCenter().Padding(right: 10),
-                    _profilesPosition.AsControl().MinWidth(100)
-                ).Aligned()
-                : C.None(),
-            profilesToolbar ? _showProfilesToolbar : C.None(),
             L.GroupBox(
-                UiStrings.Buttons,
-                L.Row(
-                    L.Column(checkBoxes.Take(half).Expand()).Scale(),
-                    L.Column(checkBoxes.Skip(half).Expand()).Scale()
+                UiStrings.Toolbar,
+                L.Column(
+                    L.Row(
+                        C.Label(UiStrings.PositionLabel).AlignCenter().Padding(right: 10),
+                        _mainPosition.AsControl().MinWidth(100)
+                    ).SpacingAfter(6),
+                    C.Label(UiStrings.ButtonsLabel).SpacingAfter(6),
+                    L.Row(
+                        L.Column(_allCheckBoxes.Take(half).Expand()).Scale(),
+                        L.Column(_allCheckBoxes.Skip(half).Expand()).Scale()
+                    )
                 )
-            )
+            ),
+            PlatformCompat.System.SupportsProfilesToolbar
+                ? L.GroupBox(
+                    UiStrings.ProfilesToolbar,
+                    L.Column(
+                        _showProfilesToolbar,
+                        L.Row(
+                            C.Label(UiStrings.PositionLabel).AlignCenter().Padding(right: 10),
+                            _profilesPosition.AsControl().MinWidth(100)
+                        )
+                    )
+                )
+                : C.None()
         );
     }
 

@@ -2043,21 +2043,27 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string MainToolbarPositionLabel {
+        internal static string Toolbar {
             get {
-                return ResourceManager.GetString("MainToolbarPositionLabel", resourceCulture);
+                return ResourceManager.GetString("Toolbar", resourceCulture);
             }
         }
         
-        internal static string ProfilesToolbarPositionLabel {
+        internal static string ProfilesToolbar {
             get {
-                return ResourceManager.GetString("ProfilesToolbarPositionLabel", resourceCulture);
+                return ResourceManager.GetString("ProfilesToolbar", resourceCulture);
             }
         }
         
-        internal static string Buttons {
+        internal static string PositionLabel {
             get {
-                return ResourceManager.GetString("Buttons", resourceCulture);
+                return ResourceManager.GetString("PositionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonsLabel {
+            get {
+                return ResourceManager.GetString("ButtonsLabel", resourceCulture);
             }
         }
     }

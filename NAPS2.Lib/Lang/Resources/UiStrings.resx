@@ -1137,13 +1137,16 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="CustomizeToolbar" xml:space="preserve">
     <value>Customize Toolbar</value>
   </data>
-  <data name="MainToolbarPositionLabel" xml:space="preserve">
-    <value>Main toolbar position:</value>
+  <data name="Toolbar" xml:space="preserve">
+    <value>Toolbar</value>
   </data>
-  <data name="ProfilesToolbarPositionLabel" xml:space="preserve">
-    <value>Profiles toolbar position:</value>
+  <data name="ProfilesToolbar" xml:space="preserve">
+    <value>Profiles toolbar</value>
   </data>
-  <data name="Buttons" xml:space="preserve">
-    <value>Buttons</value>
+  <data name="PositionLabel" xml:space="preserve">
+    <value>Position:</value>
+  </data>
+  <data name="ButtonsLabel" xml:space="preserve">
+    <value>Buttons:</value>
   </data>
 </root>
