@@ -62,7 +62,8 @@ internal class ToolbarSettingsPanel : SettingsPanel
         yield return (ToolbarButtons.Delete, UiStrings.Delete);
         yield return (ToolbarButtons.Clear, UiStrings.Clear);
         yield return (ToolbarButtons.Language, UiStrings.Language);
-        yield return (ToolbarButtons.Settings, UiStrings.Settings);
+        // Settings isn't listed so it can't be removed (except by an admin with HideSettingsButton)
+        // Don't want people accidentally locking themselves out of toolbar settings
         yield return (ToolbarButtons.About, UiStrings.About);
     }
 
