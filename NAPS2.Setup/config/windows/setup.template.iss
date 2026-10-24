@@ -35,7 +35,7 @@ MinVersion=10.0.14393
 
 DefaultDirName={commonpf}\{#AppShortName}
 DefaultGroupName={#AppShortName}
-LicenseFile=..\..\LICENSE
+LicenseFile=..\license.rtf
 
 UninstallDisplayName={#AppShortName}
 UninstallDisplayIcon={app}\{#ExeName}
@@ -50,7 +50,7 @@ SolidCompression=yes
 ChangesAssociations=yes
 
 [Run]
-Filename: "{app}\{#ExeName}"; Flags: nowait postinstall
+Filename: "{app}\{#ExeName}"; Description: "{cm:LaunchProgram,{#AppShortName}}"; Flags: nowait postinstall
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
