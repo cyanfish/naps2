@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Không trang sau nằm trong máng.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Bạn không có quyền sao chép nội dung từ file '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Máy quét chọn không hỗ trợ sử dụng hai mặt. Nếu máy quét của bạn phải hỗ trợ hai mặt, hãy thử sử dụng một trình điều khiển khác nhau.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Máy quét đang ấm dần lên.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR chưa được cài. Vui lòng cài đặt gói liên quan để thao tác.:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Driver bạn đang chọn không hỗ trợ hệ điều hành này..</value>

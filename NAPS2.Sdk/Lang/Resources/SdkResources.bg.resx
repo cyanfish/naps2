@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Няма листoве в устройството за подаване.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Нямате разрешение да копирате съдържание от файл '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Избраният скенер не поддържа двустранно сканиране. Ако тази функция би трябвало да се поддържа, използвайте различен драйвер..</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Подготовка на скенера.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Драйверът SANE не е наличен. Уверете се, че сте инсталирали необходимите пакети:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR двигател не е наличен. Уверете се, че сте инсталирали необходимия пакет:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Избраният драйвер не се поддържа от тази система.</value>

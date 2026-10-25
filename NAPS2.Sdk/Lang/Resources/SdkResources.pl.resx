@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Nie ma stron w podajniku.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Nie masz zezwolenia na skopiowanie zawartości z pliku '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Wybrany skaner nie obsługuje druku obustronnego. Jeśli twój skaner powinien wspierać druk obustronny, spróbuj użyć innego sterownika.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skaner się rozgrzewa.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Sterownik SANE nie jest dostępny. Upewnij się, że zainstalowałeś wymagane pakiety:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Silnik OCR nie jest dostępny. Upewnij się, że zainstalowałeś wymagany pakiet:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Wybrany sterownik nie jest obsługiwany w tym systemie.</value>

@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Вы действительно хотите удалить эти объекты ({0} шт.)?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Вы действительно хотите удалить выбранные профили ({0} шт.)?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Вы действительно хотите удалить профиль {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Bitmap-файлы (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Расширенный метафайл (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Файл метаданных (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>Файл GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>Файл JPEG (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Ошибка при отправке электронной почты.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Установка завершена</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Установка завершена. Перезапустить NAPS2?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Ошибка при установке.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Ошибка при установке</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Все ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Файл '{0}' не может быть импортирован.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Не удалось импортировать файл '{0}'. Можно импортировать только PDF-файлы, созданные NAPS2..</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Ошибка загрузки</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Операция в процессе</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Сканирование страницы {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Выбранный сканер не поддерживает использование автоподатчика. Если ваш сканер имеет АПД, попробуйте другой драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>В податчике нет листов.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>У вас нет разрешения копировать содержимое из файла '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Ошибка при сохранении файла.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>из {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Произошла неизвестная ошибка при пакетном сканировании.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Разогрев сканера.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Доступно обновление средства распознавания текста (OCR).</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Изображение сохранено.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Выравниваем...</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Необходимо скачать</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Для импорта этого PDF файла необходим доп. компонент. Загрузить его сейчас?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Отменить пакетное сканирование?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Нравится NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Драйвер SANE недоступен. Убедитесь, что необходимые пакеты установлены:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Инструменты распознавания текста (OCR) недоступны. Убедитесь, что необходимые пакеты установлены:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Выбранный драйвер не поддерживается в этой системе.</value>

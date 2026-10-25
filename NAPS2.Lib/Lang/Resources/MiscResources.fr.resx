@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Faut-il vraiment supprimer {0} élément(s) ?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Faut-il vraiment supprimer {0} profil(s) ?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Faut-il vraiment supprimer le profil « {0} » ?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Fichiers Bitmap (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Fichier EMF (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Fichier EXIF (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>Fichier GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>Fichier JPEG (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Une erreur est survenue en essayant d'envoyer un courriel.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Installation terminée</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installation terminée. Faut-il redémarrer NAPS2 maintenant ?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Échec de l'installation.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Échec de l'installation</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Tout ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Le fichier « {0} » n'a pas pu être importé.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Le fichier « {0} » n'a pas pu être importé. Seuls les fichiers PDF générés par NAPS2 peuvent être importés.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Erreur de téléchargement</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Progression de l'opération</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Acquisition de la page {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Le scanner sélectionné ne semble pas disposer de dispositif d'alimentation. S'il en possède un, essayer d'utiliser un autre pilote.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Il n'y a aucune page dans le dispositif d'alimentation.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Vous n'avez pas la permission de copier le contenu du fichier « {0} ».</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Une erreur est survenue en essayant d'enregistrer le fichier.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Une erreur inconnue s'est produite lors de l'acquisition par lot.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Le scanner est en train de préchauffer.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Une mise à jour pour l'OCR est disponible.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Image enregistrée.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Progression du réalignement</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Téléchargement requis</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Un composant supplémentaire est requis pour importer ce fichier PDF. Faut-il le télécharger maintenant ?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Faut-il vraiment annuler l'acquisition par lot ?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Aimez-vous NAPS2 ?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets nécessaires :</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis :</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Le pilote sélectionné n'est pas pris en charge sur ce système.</value>

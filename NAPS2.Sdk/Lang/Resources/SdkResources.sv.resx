@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Det finns inga sidor i mataren.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Du har inte behörighet att kopiera innehåll från filen '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Den valda skannern stöder inte användning av duplex. Försök med en annan drivrutin, om din skanner sägs stödja duplex.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skannern värmer upp.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE drivrutin är inte tillgänglig. Kontroller och installera nödvändigt paket:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR motorn är inte tillgänglig. Kontrollera och installera paketet som krävs:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Valda drivrutinen är inte supporterad för detta system.</value>

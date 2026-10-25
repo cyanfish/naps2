@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>کاغذی داخل خوراک‌دهنده نیست.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>شما اجاره کپی محتویات از داخل پرونده '{0}' را ندارید.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>اسکنر انتخاب شده استفاده از  اسکن دورو را پشتیبانی نمی‌کند. اگر اسکنر پشتیبانی از اسکن دورو را پیشنهاد می‌دهد، تلاش کنید از درایور دیگری استفاده کنید.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>اسکنر در حال گرم شدن است.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>درایور SANE موجود نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌ای:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>موتور OCR در دسترس نیست. مطمئن شوید بسته‌های مورد نیاز را نصب کرده‌اید:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>درایور انتخابی در این سیستم قابل استفاده نیست.</value>

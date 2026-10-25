@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-12 17:47\n"
+"PO-Revision-Date: 2026-10-25 18:53\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -72,6 +72,30 @@ msgstr "Додатково"
 msgid "Advanced Profile Settings"
 msgstr "Додаткові параметри профілю"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr "Вирівняти за нижнім краєм"
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr "Вирівняти по центру горизонтально"
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr "Вирівняти за лівим краєм"
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr "Вирівняти по центру вертикально"
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr "Вирівняти за правим краєм"
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr "Вирівняти за верхнім краєм"
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Усі ({0})"
@@ -137,10 +161,6 @@ msgstr "Завжди запитувати"
 msgid "Always show preview"
 msgstr "Завжди показувати попередній перегляд"
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Для імпорту цього PDF-файлу потрібен додатковий компонент. Завантажити його зараз?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "Під час розпізнавання сталася помилка."
@@ -186,13 +206,13 @@ msgstr "Під час пакетного сканування сталася н�
 msgid "An update is available."
 msgstr "Доступне оновлення."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "Доступне оновлення компонента розпізнавання тексту."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Драйвер Apple"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr "Реалізація драйвера Apple:"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -229,10 +249,6 @@ msgstr "Ви впевнені, що хочете видалити профіль
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "Ви впевнені, що хочете видалити {0} елементів?"
-
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Ви впевнені, що хочете видалити {0} профілів?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
@@ -341,6 +357,10 @@ msgstr "Чорно-біле"
 msgid "Blank Pages"
 msgstr "Порожні сторінки"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr "Знизу"
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Яскравість / контрастність"
@@ -348,6 +368,10 @@ msgstr "Яскравість / контрастність"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "Яскравість:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr "Кнопки:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -443,9 +467,17 @@ msgstr "Стиснення:"
 msgid "Connect"
 msgstr "Підключити"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr "Підключення..."
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "Помилка підключення."
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr "Час очікування підключення минув."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "Власний SMTP"
 msgid "Custom..."
 msgstr "Власний розмір..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr "Налаштування панелі інструментів"
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr "Темна"
@@ -516,6 +552,7 @@ msgstr "Темна"
 msgid "Day (01-31)"
 msgstr "День (01–31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -590,10 +627,6 @@ msgstr "Завантажити"
 msgid "Download Error"
 msgstr "Помилка завантаження"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "Необхідно завантажити"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Виконується завантаження"
@@ -609,14 +642,6 @@ msgstr "Двостороннє"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "Драйвер ESCL"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "Мережевий драйвер ESCL"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "USB-драйвер ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "Надіслати вибране як PDF електронною поштою"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "Налаштування електронної пошти"
 
@@ -677,10 +701,6 @@ msgstr "Шифрувати PDF"
 msgid "Encryption"
 msgstr "Шифрування"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Розширений метафайл Windows (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "Помилка запуску програми {0}"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Орієнтовний розмір завантаження: {0} МБ"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "Файл метаданих (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "Ім'я файлу:"
 msgid "File Path:"
 msgstr "Шлях до файлу:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr "Передача файлів"
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Виправляти баланс білого кольору та видаляти шум"
@@ -739,9 +759,9 @@ msgstr "Віддзеркалювати сторінки, відсканован�
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "Для високої якості JPEG (80+) для отримання найкращих результатів також підвищите якість зображення у своєму профілі."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "GIF-файл (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr "Загальні налаштування"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Відтінки сірого"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr "Довідка"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "Якість зображення"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "Налаштування зображення"
 
@@ -819,22 +842,6 @@ msgstr "Виконується імпорт..."
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "Встановити {0}"
-
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "Встановлення завершено"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "Не вдалося встановити"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Встановлення завершено. Перезапустити NAPS2 зараз?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "Не вдалося виконати встановлення."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "Зберігати зображення між сеансами"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
@@ -885,6 +891,7 @@ msgstr "Мова"
 msgid "Leave a Review"
 msgstr "Залишити відгук"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Ліворуч"
@@ -927,6 +934,7 @@ msgstr "Ручна IP-адреса"
 msgid "Maximum quality (large files)"
 msgstr "Максимальна якість (великі файли)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "Передавання через пам'ять"
@@ -939,13 +947,17 @@ msgstr "Метадані"
 msgid "Minute (00-59)"
 msgstr "Хвилина (00–59)"
 
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr "Не вказано розширення файлу (наприклад, «.pdf»)"
+
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
 msgstr "Місяць (01–12)"
 
 #: UiStrings.resx$MoreInfo$Message
 msgid "More info"
-msgstr "Додаткова інформація"
+msgstr "Більше інформації"
 
 #: UiStrings.resx$CropHelp$Message
 msgid "Mouse:\n"
@@ -984,6 +996,10 @@ msgstr "Перемістити вниз"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Перемістити вгору"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr "Перемістити вгору/вниз"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1088,7 +1104,7 @@ msgstr "Кількість сторінок:"
 
 #: UiStrings.resx$Ocr$Message
 msgid "OCR"
-msgstr "Розпізнавання тексту"
+msgstr "Розпізнати текст (OCR)"
 
 #: UiStrings.resx$OcrDownloadFormTitle$Message
 msgid "OCR Download"
@@ -1171,13 +1187,12 @@ msgid "PDF Document (*.pdf)"
 msgstr "PDF-документ (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "Налаштування PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
-msgstr "PDF збережено."
+msgstr "PDF-файл збережено."
 
 #: SettingsResources.resx$PdfCompat_PdfA1B$Message
 msgid "PDF/A-1b"
@@ -1232,6 +1247,10 @@ msgstr "Заповнювачі"
 msgid "Port"
 msgstr "Порт"
 
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr "Положення:"
+
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Постобробка"
@@ -1274,6 +1293,10 @@ msgstr "Профіль:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Профілі"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr "Панель інструментів профілів"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1343,6 +1366,10 @@ msgstr "Роздільна здатність:"
 msgid "Restore Defaults"
 msgstr "Відновити стандартні налаштування"
 
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr "Повторити"
+
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr "Розташувати у зворотному порядку"
@@ -1363,6 +1390,7 @@ msgstr "Розвернути зворотні сторони"
 msgid "Revert"
 msgstr "Скасувати зміни"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Праворуч"
@@ -1494,10 +1522,6 @@ msgstr "Відскановане зображення"
 msgid "Scanner Sharing"
 msgstr "Спільний доступ до сканера"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "Сканування сторінки {0}"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "Сканування сторінки {0} (скан {1})..."
@@ -1626,6 +1650,14 @@ msgstr "Не запитувати підтвердження збереженн�
 msgid "Split"
 msgstr "Розділити"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr "Розділити горизонтально"
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr "Розділити вертикально"
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Почати"
@@ -1642,6 +1674,10 @@ msgstr "Розтягнути до розміру сторінки"
 msgid "Subject:"
 msgstr "Тема:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr "Поміняти місцями"
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF-файл (*.tiff, *.tif)"
@@ -1654,28 +1690,14 @@ msgstr "Драйвер TWAIN"
 msgid "Technical Details"
 msgstr "Технічні відомості"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "Механізм розпізнавання (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "Час очікування розпізнавання закінчився."
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "Драйвер SANE недоступний. Переконайтеся, що встановлено необхідні пакети:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "Не вдалося імпортувати файл «{0}»."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Не вдалося імпортувати файл «{0}». Можна імпортувати лише PDF-файли, створені за допомогою NAPS2."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1779,9 +1801,29 @@ msgstr "Щоб відсканувати обидві сторони багато
 "4. Натисніть «Двостороннє сканування вручну»\n"
 "5. Залежно від фізичної орієнтації вашого сканера може знадобитися встановити прапорець «Розвернути зворотні сторони»"
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr "Змінити орієнтацію"
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr "Перемкнути режим перегляду"
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr "Панель інструментів"
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr "Налаштування панелі інструментів"
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "Інструменти"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr "Зверху"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1876,6 +1918,10 @@ msgstr "Очікування авторизації..."
 msgid "Waiting for scan {0}..."
 msgstr "Очікування сканування {0}..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr "Очікування підключення."
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "Порогове значення білого кольору"
@@ -1891,11 +1937,6 @@ msgstr "Рік"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "Рік (00–99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "У вас немає дозволу копіювати вміст із файлу «{0}»."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1932,10 +1973,6 @@ msgstr "дюйм"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "мм"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "із {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

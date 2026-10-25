@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Ar tikrai norite pašalinti {0} objektą(-us)?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Ar tikrai norite ištrinti {0} profilius?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Ar tikrai norite pašalinti profilį {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Bitmap bylos (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Patobulintas metafailas (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Keičiamo vaizdo byla (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF byla (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG byla (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Įvyko klaida siunčiant elektroninį laišką.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Diegimas baigtas</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Diegimas baigtas. Ar norite paleisti NAPS2 dabar?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Diegimas nepavyko.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Diegimas nepavyko</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Viską ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Negalima importuoti bylos '{0}'.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Negalima importuoti bylos '{0}' . Įmanomas tik PDF bylų, sugeneruotų NAPS2, importavimas.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Siuntimo klaida</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Operation in Progress</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skenuojamas puslapis {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Pasirinktas skeneris nepalaiko padavimo mechanizmo. Jei jūsų skeneris tikrai turi padavimo mechanizmą, pabandykite naudoti kitą tvarkyklę.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Padavimo mechanizme nėra lapų.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Neturite leidimo kopijuoti turinio iš failo '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Įvyko klaida bandant išsaugoti bylą.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>iš {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>An unknown error occurred during the batch scan.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>The scanner is warming up.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>An update to OCR is available.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Image saved.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Deskew Progress</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Norint importuoti šį PDF failą reikalingas papildomas komponentas. Ar norėtumėte jį atsisiųsti?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Are you sure you want to cancel the batch scan?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Like NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>The selected driver is not supported on this system.</value>

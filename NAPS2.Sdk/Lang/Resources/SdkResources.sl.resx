@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>V podajalniku ni listov.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Nimate pravic za kopiranje vsebine iz datoteke '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Izbran skener ne podpira obojestranskega skeniranja. Če bi naj vaš skener podpiral obojestransko skeniranje, poizkusite z drugim gonilnikom.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skener se ogreva.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE gonilnik ni na voljo. Preverite namestitev potrebnega dodatka:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR ni na voljo. Preverite namestitev potrebnega dodatka:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Izbran gonilnik ni na voljo v tem sistemu.</value>

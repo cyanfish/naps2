@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -72,6 +72,30 @@ msgstr "I avancuar"
 msgid "Advanced Profile Settings"
 msgstr "Cilësimet e avancuara të profilit"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr "Drejto në fund"
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr "Drejto në qendër"
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr "Drejto majtas"
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr "Drejto në mes"
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr "Drejto djathtas"
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr "Drejto në krye"
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Të gjitha ({0})"
@@ -137,10 +161,6 @@ msgstr "Всегда спрашивать"
 msgid "Always show preview"
 msgstr ""
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A dëshiron ta shkarkosh tani?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "Ndodhi një gabim gjatë ekzekutimit të OCR."
@@ -186,13 +206,13 @@ msgstr "Ndodhi një gabim i panjohur gjatë ekzekutimit të skanimit në grup."
 msgid "An update is available."
 msgstr "Një përditësim i disponueshëm."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "Një përditësim i OCR është i disponueshëm."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Drejtuesi i Apple"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr "Imlementimi i drejtuesit të Apple:"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -230,10 +250,6 @@ msgstr "A je i sigurt se dëshiron të fshish profilin {0}?"
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "A je i sigurt se dëshiron të fshish {0} element(e)?"
 
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "A je i sigurt se dëshiron të fshish {0} profile?"
-
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
 msgstr "Je i sigurt se dëshiron të ndalosh disponueshmërinë e {0}?"
@@ -269,11 +285,11 @@ msgstr "Cilësimet e ruajtjes automatike"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "Prerje automatike"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "Prerje automatike e faqeve të skanuara"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -341,6 +357,10 @@ msgstr "Bardhë e zi"
 msgid "Blank Pages"
 msgstr "Faqet bosh"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Ndriçimi/Kontrasti"
@@ -348,6 +368,10 @@ msgstr "Ndriçimi/Kontrasti"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "Shkëlqimi:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -433,7 +457,7 @@ msgstr "Pajtueshmëria"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "Ngjesh"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -443,9 +467,17 @@ msgstr "Ngjeshja:"
 msgid "Connect"
 msgstr "Lidhu"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "Gabim në lidhje."
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "SMTP e personalizuar"
 msgid "Custom..."
 msgstr "E personalizuar..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr "E errët"
@@ -516,6 +552,7 @@ msgstr "E errët"
 msgid "Day (01-31)"
 msgstr "Dita (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -563,7 +600,7 @@ msgstr "Dimensionet"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "Përmasat:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -590,10 +627,6 @@ msgstr "Shkarko"
 msgid "Download Error"
 msgstr "Gabim gjatë shkarkimit"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "Nevojitet shkarkim"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Progresi i shkarkimit"
@@ -609,14 +642,6 @@ msgstr "Dupleks"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "Drejtuesi ESCL"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "Drejtuesi i rrjetit të ESCL"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "Drejtuesi USB i ESCL"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "Dërgo me e-mail pjesë e zgjedhur si PDF"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "Cilësimet e emailit"
 
@@ -677,10 +701,6 @@ msgstr "Shifro PDF"
 msgid "Encryption"
 msgstr "Shifrimi"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Metaskedar i përmirësuar i Windows (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "Gabim në hapjen e aplikacionit {0}"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Madhësia e vlerësuar e shkarkimit: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "Skedar imazhi i shkëmbyeshëm (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "Emri i skedarit"
 msgid "File Path:"
 msgstr "Shtegu i skedarit:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr "Transferim skedarësh"
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Rregullo balancimin e ngjyrës së bardhë dhe hiq zhurmën"
@@ -739,9 +759,9 @@ msgstr "Kthe përmbys faqet duplekse"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "Për cilësi të larta të JPEG (80+), gjithashtu rrisni Cilësinë e imazhit te profili juaj për rezultatet më të mira."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "Skedar GIF (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr "Cilësimet e përgjithshme"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "E hirtë"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr "Ndihmë"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "Cilësia e imazhit"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "Cilësimet e imazhit"
 
@@ -820,22 +843,6 @@ msgstr "Po importon..."
 msgid "Install {0}"
 msgstr "Instalo {0}"
 
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "Instalimi përfundoi"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "Instalimi dështoi"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Instalimi përfundoi. A dëshiron ta rihapësh NAPS2 tani?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "Instalimi dështoi."
-
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
 msgstr "Ndërfaqja"
@@ -850,7 +857,7 @@ msgstr "Skedar JPEG (*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "Cilësia e JPEG:"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "Mbaji imazhet ndërmjet sesioneve"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "Shkurtimet nga tastiera"
 
@@ -885,6 +891,7 @@ msgstr "Gjuha"
 msgid "Leave a Review"
 msgstr "Lër një vlerësim"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Majtas"
@@ -927,6 +934,7 @@ msgstr "IP statike"
 msgid "Maximum quality (large files)"
 msgstr "Cilësi maksimale (skedarë të mëdhenj)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "Transferim në kujtesë"
@@ -938,6 +946,10 @@ msgstr "Të dhëna mbi të dhënat"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "Minuta (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr "Mungon prapashtesa e skedarit (p.sh. \".pdf\")"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -973,6 +985,10 @@ msgstr "Lëviz poshtë"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Lëviz lart"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1160,7 +1176,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "Dokument PDF (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "Cilësimet e PDF"
 
@@ -1210,7 +1225,7 @@ msgstr "Ngjit"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "Përmasat në piksel:"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1220,6 +1235,10 @@ msgstr "Vendmbajtëset"
 #: UiStrings.resx$Port$Message
 msgid "Port"
 msgstr "Porta"
+
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1263,6 +1282,10 @@ msgstr "Profili:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Profilet"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1322,7 +1345,7 @@ msgstr "Rivendos imazhin"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "Rezolucioni (dpi):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1331,6 +1354,10 @@ msgstr "Rezolucioni:"
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
 msgstr "Rikthe të paracaktuarat"
+
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1352,6 +1379,7 @@ msgstr ""
 msgid "Revert"
 msgstr "Rikthe"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Djathtas"
@@ -1483,10 +1511,6 @@ msgstr "Imazhi i skanuar"
 msgid "Scanner Sharing"
 msgstr "Disponueshmëria e skanerit"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "Po skanon faqen {0}"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "Po skanon faqen {0} (skanimi {1})..."
@@ -1614,6 +1638,14 @@ msgstr "Kapërce shenjën e ruajtjes"
 msgid "Split"
 msgstr "Ndaje"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr "Ndaj horizontalisht"
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr "Ndaj vertikalisht"
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Fillo"
@@ -1630,6 +1662,10 @@ msgstr "Zgjero te madhësia e faqes"
 msgid "Subject:"
 msgstr "Subjekti:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr "Ndërro"
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Skedar TIFF (*.tiff, *.tif)"
@@ -1642,28 +1678,14 @@ msgstr "Drejtuesi TWAIN"
 msgid "Technical Details"
 msgstr "Detajet teknike"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketën e kërkuar:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "Afati i veprimit të OCR skadoi."
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e duhura:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "Skedari '{0}' nuk mund të importohej."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Skedari '{0}' nuk mund të importohej. Vetëm skedarët PDF të gjeneruar nga NAPS2 mund të importohen."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1761,9 +1783,29 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
 msgstr ""
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr "Ndrysho orientimin"
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr "Ndrysho pamjen"
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "Mjetet"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1815,7 +1857,7 @@ msgstr "Po ngarkon emailin..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "Përdor ngjeshjen e JPEG"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1858,6 +1900,10 @@ msgstr "Po pret për autorizim..."
 msgid "Waiting for scan {0}..."
 msgstr "Po pret për skanimin {0}..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "Kufiri i bardhë"
@@ -1873,11 +1919,6 @@ msgstr "Viti"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "Viti (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "Nuk ke të drejta të kopjosh përmbajtjen nga skedari '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1914,10 +1955,6 @@ msgstr "inç"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "mm"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "nga {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

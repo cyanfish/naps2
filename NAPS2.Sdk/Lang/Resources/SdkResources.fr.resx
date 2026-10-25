@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Il n'y a aucune page dans le dispositif d'alimentation.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Vous n'avez pas la permission de copier le contenu du fichier « {0} ».</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Le scanner sélectionné ne semble pas gérer pas le recto-verso (duplex). S'il est supposé le prendre en charge, essayer d'utiliser un autre pilote.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Le scanner est en train de préchauffer.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Le pilote SANE n'est pas disponible. Merci d'installer les paquets nécessaires :</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Le moteur OCR n'est pas disponible. Merci d'installer le paquet requis :</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Le pilote sélectionné n'est pas pris en charge sur ce système.</value>
