@@ -25,7 +25,7 @@ public class Naps2Config : ScopedConfig<CommonConfig>
             ConfigScope.Memory<CommonConfig>(),
             ConfigScope.Defaults(InternalDefaults.GetCommonConfig()));
 
-    public Naps2Config(string appConfigPath, string userConfigPath)
+    public Naps2Config(string appConfigPath, string userConfigPath, string? userConfigName = null)
     {
         AppLocked = ConfigScope.File(appConfigPath,
             new ConfigSerializer(ConfigReadMode.LockedOnly, ConfigRootName.AppConfig),
@@ -33,12 +33,14 @@ public class Naps2Config : ScopedConfig<CommonConfig>
         Run = ConfigScope.Memory<CommonConfig>();
         User = ConfigScope.File(userConfigPath, new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig),
             ConfigScopeMode.ReadWrite);
+        UserConfigName = userConfigName;
         AppDefault = ConfigScope.File(appConfigPath,
             new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig),
             ConfigScopeMode.ReadOnly);
         InternalDefault = ConfigScope.Defaults(InternalDefaults.GetCommonConfig());
 
         Scopes = new[] { AppLocked, Run, User, AppDefault, InternalDefault };
+        UserConfigName = userConfigName;
     }
 
     public Naps2Config(ConfigScope<CommonConfig> appLocked, ConfigScope<CommonConfig> run,
@@ -87,4 +89,6 @@ public class Naps2Config : ScopedConfig<CommonConfig>
     public ConfigScope<CommonConfig> User { get; }
     public ConfigScope<CommonConfig> AppDefault { get; }
     public ConfigScope<CommonConfig> InternalDefault { get; }
+
+    public string? UserConfigName { get; }
 }
