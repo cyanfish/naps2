@@ -234,7 +234,7 @@ public class GtkEtoPlatform : EtoPlatform
             }
             widget.GetPreferredSize(out _, out var naturalSize);
             return new SizeF(naturalSize.Width, naturalSize.Height);
-        }, clearSizeRequest: widget.IsRealized && widget is not GTK.DrawingArea);
+        }, clearSizeRequest: widget is not GTK.DrawingArea);
     }
 
     public override SizeF GetMinimumSize(Control control)
