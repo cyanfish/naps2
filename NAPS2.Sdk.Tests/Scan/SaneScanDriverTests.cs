@@ -172,6 +172,74 @@ public class SaneScanDriverTests : ContextualTests
         Assert.Null(result);
     }
 
+    [Fact]
+    public void ScanFeeder_StopsAtMaxPages()
+    {
+        var deviceMock = Substitute.For<ISaneDevice>();
+        var eventsMock = Substitute.For<IScanEvents>();
+        SetupFeederMock(deviceMock, int.MaxValue);
+        var pages = new List<IMemoryImage>();
+
+        _driver.ScanFeeder(deviceMock, eventsMock, new SaneScanDriver.OptionData(), 3, pages.Add);
+
+        Assert.Equal(3, pages.Count);
+        // No fourth sheet is fed
+        deviceMock.Received(3).Start();
+        pages.ForEach(x => x.Dispose());
+    }
+
+    [Fact]
+    public void ScanFeeder_NoLimit_ScansUntilFeederIsEmpty()
+    {
+        var deviceMock = Substitute.For<ISaneDevice>();
+        var eventsMock = Substitute.For<IScanEvents>();
+        SetupFeederMock(deviceMock, 5);
+        var pages = new List<IMemoryImage>();
+
+        var error = Assert.Throws<SaneException>(() =>
+            _driver.ScanFeeder(deviceMock, eventsMock, new SaneScanDriver.OptionData(), 0, pages.Add));
+
+        Assert.Equal(SaneStatus.NoDocs, error.Status);
+        Assert.Equal(5, pages.Count);
+        pages.ForEach(x => x.Dispose());
+    }
+
+    private static void SetupFeederMock(ISaneDevice deviceMock, int pagesInFeeder)
+    {
+        int started = 0;
+        int reads = 0;
+        deviceMock.When(x => x.Start()).Do(_ =>
+        {
+            if (started == pagesInFeeder)
+            {
+                throw new SaneException(SaneStatus.NoDocs);
+            }
+            started++;
+            reads = 0;
+        });
+        deviceMock.GetParameters().Returns(new SaneReadParameters
+        {
+            Depth = 8,
+            Frame = SaneFrameType.Rgb,
+            Lines = 8,
+            BytesPerLine = 10,
+            PixelsPerLine = 3
+        });
+        deviceMock.Read(Arg.Any<byte[]>(), out Arg.Any<int>())
+            .Returns(x =>
+            {
+                var buffer = (byte[]) x[0];
+                int len = reads switch { 0 => 64, 1 => 16, _ => 0 };
+                for (int i = 0; i < len; i++)
+                {
+                    buffer[i] = (byte) i;
+                }
+                x[1] = len;
+                reads++;
+                return len > 0;
+            });
+    }
+
     private static void SetupDeviceMock(ISaneDevice deviceMock, int? lines = null)
     {
         deviceMock.GetParameters().Returns(new SaneReadParameters
