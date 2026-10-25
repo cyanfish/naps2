@@ -43,11 +43,11 @@ public record NameContext
     public static NameContext FromSaveParams(SaveParams saveParams) => new()
     {
         DateTime = saveParams.DateTime,
-        Numbering = saveParams.BatchCount > 1 ? Numbering.Always
+        Numbering = saveParams.OpenEndedSequence || saveParams.BatchCount > 1 ? Numbering.Always
             : saveParams.OverwriteMode == OverwriteMode.Never ? Numbering.OnConflict
             : Numbering.Placeholder,
         BatchIndex = saveParams.BatchIndex,
-        BatchCount = saveParams.BatchCount,
+        BatchCount = saveParams.OpenEndedSequence ? null : saveParams.BatchCount,
         Overwrite = saveParams.OverwriteMode == OverwriteMode.Force
     };
 }

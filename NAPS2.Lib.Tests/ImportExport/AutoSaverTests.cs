@@ -238,6 +238,31 @@ public class AutoSaverTests : ContextualTests
     }
 
     [Fact]
+    public async Task PdfFilePerPage_NoPlaceholder_ContinuesSequence()
+    {
+        var settings = new AutoSaveSettings
+        {
+            FilePath = P("test.pdf"),
+            Separator = SaveSeparator.FilePerPage
+        };
+
+        var scanned = Enumerable.Range(0, 10).Select(_ => CreateScannedImage()).ToList();
+        await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
+        // Numbers aren't padded to the batch size so the next save can continue the sequence
+        Assert.Equal(10, Folder.GetFiles().Length);
+        Assert.True(File.Exists(P("test.1.pdf")));
+        Assert.True(File.Exists(P("test.10.pdf")));
+
+        scanned = CreateScannedImages(ImageResources.dog, ImageResources.dog_gray);
+        await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
+        Assert.Equal(12, Folder.GetFiles().Length);
+        PdfAsserts.AssertImages(P("test.11.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test.12.pdf"), ImageResources.dog_gray);
+    }
+
+    [Fact]
     public async Task PdfNoPlaceholder_Existing()
     {
         File.WriteAllText(P("test.pdf"), "blah");
@@ -284,7 +309,25 @@ public class AutoSaverTests : ContextualTests
         var scanned = CreateScannedImages(ImageResources.dog);
         await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.1.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task PdfNoPlaceholder_FirstFileIsNumbered()
+    {
+        // Auto save is a sequence of saves to the same name, so even the first file is numbered
+        var settings = new AutoSaveSettings
+        {
+            FilePath = P("test.pdf")
+        };
+
+        await _autoSaver.Save(settings, CreateScannedImages(ImageResources.dog).ToAsyncEnumerable()).ToListAsync();
+        await _autoSaver.Save(settings, CreateScannedImages(ImageResources.dog_gray).ToAsyncEnumerable())
+            .ToListAsync();
+
+        Assert.Equal(2, Folder.GetFiles().Length);
+        PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test.2.pdf"), ImageResources.dog_gray);
     }
 
     [Fact]

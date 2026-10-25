@@ -20,6 +20,13 @@ public record SaveParams
     public int? BatchIndex { get; init; }
 
     /// <summary>
+    /// Whether this save is part of an open-ended sequence of saves to the same name (e.g. auto save) rather than a
+    /// self-contained batch. Every file is then numbered without zero-padding to the batch size, like a "$(n)"
+    /// placeholder, so that later saves continue the sequence.
+    /// </summary>
+    public bool OpenEndedSequence { get; init; }
+
+    /// <summary>
     /// The date and time used for placeholders. The same value should be used for all files saved together.
     /// </summary>
     public DateTime DateTime { get; init; } = DateTime.Now;

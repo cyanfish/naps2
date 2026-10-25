@@ -81,7 +81,7 @@ public class AutoSaver
             string? firstFileSaved = null;
             var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator)
                 .Where(x => x.Count > 0).ToList();
-            var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never, BatchCount = scans.Count };
+            var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never, OpenEndedSequence = true };
             foreach (var (imagesToSave, i) in scans.Select((x, i) => (x, i)))
             {
                 (bool success, string? filePath) = await SaveOneFile(settings, saveParams with { BatchIndex = i },
@@ -130,11 +130,11 @@ public class AutoSaver
             {
                 path = newPath!;
                 // The user chose (and confirmed overwriting) this exact name, so it shouldn't be numbered as part of
-                // the batch
+                // the sequence
                 saveParams = saveParams with
                 {
                     OverwriteMode = OverwriteMode.Confirmed,
-                    BatchCount = null,
+                    OpenEndedSequence = false,
                     BatchIndex = null
                 };
             }
