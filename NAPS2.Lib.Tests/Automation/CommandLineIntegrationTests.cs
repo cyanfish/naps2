@@ -451,6 +451,38 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ExistingPdf_NumberPlaceholder()
+    {
+        File.WriteAllText(P("test1.pdf"), "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test$(n).pdf"),
+                Verbose = true
+            },
+            Image1);
+        Assert.Equal("blah", File.ReadAllText(P("test1.pdf")));
+        PdfAsserts.AssertImages(P("test2.pdf"), Image1);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ExistingPdf_DatePlaceholder_NoOverwrite()
+    {
+        var path = P($"test_{DateTime.Now:yyyy}.pdf");
+        File.WriteAllText(path, "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test_$(YYYY).pdf"),
+                Verbose = true
+            },
+            Image1);
+        Assert.Equal("blah", File.ReadAllText(path));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ExistingImage_NoOverwrite()
     {
         var path = P("test.jpg");
@@ -689,6 +721,87 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task SplitWithNoPlaceholder_Existing()
+    {
+        File.WriteAllText(P("test.1.pdf"), "blah");
+        File.WriteAllText(P("test.2.pdf"), "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test.pdf"),
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2 });
+        Assert.Equal("blah", File.ReadAllText(P("test.1.pdf")));
+        Assert.Equal("blah", File.ReadAllText(P("test.2.pdf")));
+        PdfAsserts.AssertImages(P("test.3.pdf"), Image1);
+        PdfAsserts.AssertImages(P("test.4.pdf"), Image2);
+        Assert.False(File.Exists(P("test.5.pdf")));
+        AssertRecoveryCleanedUp();
+    }
+
+    // Known bug: https://github.com/cyanfish/naps2/issues/135
+    [Fact(Skip = "Known bug")]
+    public async Task SplitWithNoPlaceholder_ForceOverwrite()
+    {
+        File.WriteAllText(P("test.1.pdf"), "blah");
+        File.WriteAllText(P("test.2.pdf"), "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test.pdf"),
+                Split = true,
+                ForceOverwrite = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2 });
+        PdfAsserts.AssertImages(P("test.1.pdf"), Image1);
+        PdfAsserts.AssertImages(P("test.2.pdf"), Image2);
+        Assert.False(File.Exists(P("test.3.pdf")));
+        AssertRecoveryCleanedUp();
+    }
+
+    // Known bug: https://github.com/cyanfish/naps2/issues/135
+    [Fact(Skip = "Known bug")]
+    public async Task SplitWithPlaceholder_ForceOverwrite()
+    {
+        File.WriteAllText(P("test1.pdf"), "blah");
+        File.WriteAllText(P("test2.pdf"), "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test$(n).pdf"),
+                Split = true,
+                ForceOverwrite = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2 });
+        PdfAsserts.AssertImages(P("test1.pdf"), Image1);
+        PdfAsserts.AssertImages(P("test2.pdf"), Image2);
+        Assert.False(File.Exists(P("test3.pdf")));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitWithPlaceholder_Existing()
+    {
+        File.WriteAllText(P("test1.pdf"), "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test$(n).pdf"),
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2 });
+        Assert.Equal("blah", File.ReadAllText(P("test1.pdf")));
+        PdfAsserts.AssertImages(P("test2.pdf"), Image1);
+        PdfAsserts.AssertImages(P("test3.pdf"), Image2);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task SplitSize()
     {
         var path = P("test$(n).pdf");
@@ -852,6 +965,45 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
+    // Known bug: https://github.com/cyanfish/naps2/issues/135
+    [Fact(Skip = "Known bug")]
+    public async Task ScanToImageFiles_ForceOverwrite()
+    {
+        File.WriteAllText(P("test1.jpg"), "blah");
+        File.WriteAllText(P("test2.jpg"), "blah");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test$(n).jpg"),
+                Split = true,
+                ForceOverwrite = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2 });
+        ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
+        ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
+        Assert.False(File.Exists(P("test3.jpg")));
+        AssertRecoveryCleanedUp();
+    }
+
+    // Known bug: each split image is saved to the same path
+    [Fact(Skip = "Known bug")]
+    public async Task SplitToImageFilesWithNoPlaceholder()
+    {
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P("test.jpg"),
+                Split = true,
+                Verbose = true
+            },
+            new[] { Image1, Image2 });
+        ImageAsserts.Similar(Image1, ImageContext.Load(P("test.1.jpg")));
+        ImageAsserts.Similar(Image2, ImageContext.Load(P("test.2.jpg")));
+        Assert.False(File.Exists(P("test.jpg")));
+        AssertRecoveryCleanedUp();
+    }
+
     [Fact]
     public async Task EmailPdf()
     {
@@ -888,6 +1040,36 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             Image1, Image2);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task EmailPlaceholders()
+    {
+        var year = DateTime.Now.ToString("yyyy");
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Equal($"Subject {year}", message.Subject);
+            Assert.Equal($"Body {year}", message.BodyText);
+            Assert.Single(message.Attachments);
+            Assert.Equal($"attachment_{year}.pdf", message.Attachments[0].AttachmentName);
+        });
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                EmailFileName = "attachment_$(YYYY).pdf",
+                EmailSubject = "Subject $(YYYY)",
+                EmailBody = "Body $(YYYY)",
+                Verbose = true
+            },
+            Image1);
 
         emailProviderFactory.CheckAsserts();
         emailProviderFactory.VerifyExactlyOneMessageSent();
