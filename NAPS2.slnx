@@ -326,7 +326,6 @@
       <Build Solution="Debug-Mac|*" Project="false" />
       <Build Solution="Release-Linux|*" Project="false" />
       <Build Solution="Release-Mac|*" Project="false" />
-      <Build Solution="Release-Windows|*" Project="false" />
       <Build Solution="Tools|*" Project="false" />
     </Project>
     <Project Path="NAPS2.Images/NAPS2.Images.csproj">
