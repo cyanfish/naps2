@@ -605,6 +605,13 @@ public class WpfEtoPlatform : EtoPlatform
         return native == null ? 1f : (float) SWM.VisualTreeHelper.GetDpi(native).DpiScaleX;
     }
 
+    public override void SetImageSize(ImageView imageView, int size)
+    {
+        // Icons are rendered at the display scale, so they need a fixed logical size or they'd show at their pixel
+        // size in DIPs (e.g. double-size at 200%)
+        imageView.Size = new Size(size, size);
+    }
+
     public override void AttachDpiDependency(Control control, Action<float> callback)
     {
         var native = control is Window window ? window.ToNative() : control.ToNative();

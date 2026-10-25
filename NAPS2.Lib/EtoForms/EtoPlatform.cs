@@ -218,6 +218,10 @@ public abstract class EtoPlatform
     {
     }
 
+    public virtual void SetImageSize(ImageView imageView, int size)
+    {
+    }
+
     public virtual Control? MaybeCreateOverlayContainer() => null;
 
     public virtual Control? GetOverlayContainer(Control? container, bool inOverlay) => null;

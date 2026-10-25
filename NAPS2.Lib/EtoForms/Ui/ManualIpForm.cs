@@ -1,5 +1,4 @@
 using System.Threading;
-using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.Escl.Client;
 using NAPS2.EtoForms.Layout;
@@ -30,6 +29,7 @@ public class ManualIpForm : EtoDialogBase
 
         _iconProvider = iconProvider;
 
+        EtoPlatform.Current.SetImageSize(_statusIcon, 16);
         EtoPlatform.Current.AttachDpiDependency(this, _ => UpdateStatusIcon());
     }
 
@@ -78,7 +78,6 @@ public class ManualIpForm : EtoDialogBase
     private void UpdateStatusIcon()
     {
         _statusIcon.Image = _iconProvider.GetIcon("exclamation", IconScenario.Inline16, EtoPlatform.Current.GetScaleFactor(this));
-        _statusIcon.Size = Size.Round(new SizeF(16, 16) * EtoPlatform.Current.GetLayoutScaleFactor(this));
     }
 
     private void SetConnecting()

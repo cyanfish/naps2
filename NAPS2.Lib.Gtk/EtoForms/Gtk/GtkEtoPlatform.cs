@@ -368,6 +368,12 @@ public class GtkEtoPlatform : EtoPlatform
         return window.ToNative().ScaleFactor;
     }
 
+    public override void SetImageSize(ImageView imageView, int size)
+    {
+        // Icons are rendered at the display scale, and the image view draws them to fit its logical size
+        imageView.Size = new Size(size, size);
+    }
+
     public override void AttachDpiDependency(Control control, Action<float> callback)
     {
         if (control.Loaded)
