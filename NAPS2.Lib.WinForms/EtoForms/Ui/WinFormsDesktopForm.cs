@@ -92,13 +92,13 @@ public class WinFormsDesktopForm : DesktopForm
 
         NativeListView.TabIndex = 7;
         NativeListView.BorderStyle = WF.BorderStyle.None;
-        NativeListView.Focus();
     }
 
     protected override void OnShown(EventArgs e)
     {
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _toolbarFormatter.RelayoutToolbar(_mainToolStrip, scale));
+        NativeListView.Focus();
         base.OnShown(e);
     }
 
