@@ -28,8 +28,8 @@ public class SetVersionCommand : ICommand<SetVersionOptions>
         var macProj = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Mac", "Info.plist");
         ReplaceInFile(
             macProj,
-            $@"<key>CFBundleShortVersionString</key>{Environment.NewLine}    <string>.*</string>",
-            $"<key>CFBundleShortVersionString</key>{Environment.NewLine}    <string>{versionNumber}</string>");
+            @"(<key>CFBundleShortVersionString</key>\r?\n    <string>).*(</string>)",
+            $"${{1}}{versionNumber}${{2}}");
 
         Output.OperationEnd("Version set.");
         return 0;
