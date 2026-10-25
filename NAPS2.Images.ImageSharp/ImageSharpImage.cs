@@ -1,5 +1,5 @@
 using System.Buffers;
-using NAPS2.Images.Bitwise;
+using System.Reflection;
 using NAPS2.Util;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -49,11 +49,11 @@ public class ImageSharpImage : IMemoryImage
         Image.Metadata.VerticalResolution = yDpi;
     }
 
-    public ImagePixelFormat PixelFormat => Image.PixelType switch
+    public ImagePixelFormat PixelFormat => Image switch
     {
-        { BitsPerPixel: 8 } => ImagePixelFormat.Gray8,
-        { BitsPerPixel: 24 } => ImagePixelFormat.RGB24,
-        { BitsPerPixel: 32 } => ImagePixelFormat.ARGB32,
+        Image<L8> => ImagePixelFormat.Gray8,
+        Image<Rgb24> => ImagePixelFormat.RGB24,
+        Image<Rgba32> => ImagePixelFormat.ARGB32,
         _ => throw new InvalidOperationException("Unsupported pixel format")
     };
 
@@ -159,13 +159,7 @@ public class ImageSharpImage : IMemoryImage
                 },
                 BitDepth = PngBitDepth.Bit8
             },
-            ImageFileFormat.Jpeg => new JpegEncoder
-            {
-                Quality = options.Quality == -1 ? 75 : options.Quality,
-                // ImageSharp will automatically save an RGB24 image as Grayscale if the actual image colors are gray.
-                // We prevent that here if the caller specified an RGB PixelFormatHint.
-                ColorType = options.PixelFormatHint >= ImagePixelFormat.RGB24 ? JpegColorType.Rgb : null
-            },
+            ImageFileFormat.Jpeg => GetJpegEncoder(options),
             ImageFileFormat.Tiff => new TiffEncoder
             {
                 BitsPerPixel = pixelFormat == ImagePixelFormat.Gray8 ? TiffBitsPerPixel.Bit8 : null
@@ -174,6 +168,29 @@ public class ImageSharpImage : IMemoryImage
         };
         return encoder;
     }
+
+    private static JpegEncoder GetJpegEncoder(ImageSaveOptions options)
+    {
+        var encoder = new JpegEncoder
+        {
+            Quality = options.Quality == -1 ? 75 : options.Quality
+        };
+        // ImageSharp will automatically save an RGB24 image as Grayscale if the actual image colors are gray.
+        // We prevent that here if the caller specified an RGB PixelFormatHint.
+        if (options.PixelFormatHint >= ImagePixelFormat.RGB24)
+        {
+            // The ColorType enum is JpegEncodingColor in ImageSharp 3.x and JpegColorType in 4.x (with the same
+            // values), so we set it via reflection to be binary compatible with both.
+            var colorType = Nullable.GetUnderlyingType(JpegColorTypeProperty.PropertyType)!;
+            JpegColorTypeProperty.SetValue(encoder, Enum.ToObject(colorType, JpegColorTypeRgb));
+        }
+        return encoder;
+    }
+
+    private static readonly PropertyInfo JpegColorTypeProperty =
+        typeof(JpegEncoder).GetProperty(nameof(JpegEncoder.ColorType))!;
+
+    private const byte JpegColorTypeRgb = 6;
 
     public IMemoryImage Clone() => new ImageSharpImage(Image.Clone(_ => { }))
     {
