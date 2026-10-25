@@ -1,4 +1,4 @@
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
@@ -12,26 +12,28 @@ public class SaveImagesOperationTests : ContextualTests
     private static readonly DateTime TestDate = new(2024, 3, 7, 21, 5, 2);
 
     private readonly IOverwritePrompt _overwritePrompt;
+    private readonly NameManager _nameManager;
 
     public SaveImagesOperationTests()
     {
         _overwritePrompt = Substitute.For<IOverwritePrompt>();
+        _nameManager = new NameManager();
     }
 
-    private SaveImagesOperation CreateOperation() => new(_overwritePrompt, ImageContext);
+    private SaveImagesOperation CreateOperation() => new(_overwritePrompt, ImageContext, _nameManager);
 
     private bool Start(SaveImagesOperation op, string fileName, IList<ProcessedImage> images,
-        ImageSettings? imageSettings = null, string? overwriteFile = null)
+        ImageSettings imageSettings = null, OverwriteMode overwriteMode = OverwriteMode.Prompt, int? batchCount = null)
     {
-        return op.Start(fileName, Placeholders.All.WithDate(TestDate), images, imageSettings ?? new ImageSettings(),
-            overwriteFile);
+        return op.Start(fileName, images, imageSettings ?? new ImageSettings(),
+            new SaveParams { OverwriteMode = overwriteMode, BatchCount = batchCount, DateTime = TestDate });
     }
 
     private async Task<bool> Save(string fileName, IList<ProcessedImage> images,
-        ImageSettings? imageSettings = null, string? overwriteFile = null)
+        ImageSettings imageSettings = null, OverwriteMode overwriteMode = OverwriteMode.Prompt, int? batchCount = null)
     {
         var op = CreateOperation();
-        Assert.True(Start(op, fileName, images, imageSettings, overwriteFile));
+        Assert.True(Start(op, fileName, images, imageSettings, overwriteMode, batchCount));
         return await op.Success;
     }
 
@@ -143,10 +145,87 @@ public class SaveImagesOperationTests : ContextualTests
         // e.g. the user already confirmed overwriting in the save dialog
         File.WriteAllText(P("test.jpg"), "blah");
 
-        Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog), overwriteFile: P("test.jpg")));
+        Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Confirmed));
 
         _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
+    }
+
+    [Fact]
+    public async Task Existing_Never()
+    {
+        File.WriteAllText(P("test.jpg"), "blah");
+
+        Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Never));
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        Assert.Equal("blah", File.ReadAllText(P("test.jpg")));
+        ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.1.jpg")));
+    }
+
+    [Fact]
+    public async Task Existing_Force()
+    {
+        File.WriteAllText(P("test.jpg"), "blah");
+
+        Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Force));
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
+    }
+
+    [Fact]
+    public async Task MultipleImages_Force_OverwritesExisting()
+    {
+        File.WriteAllText(P("test1.jpg"), "blah");
+        File.WriteAllText(P("test2.jpg"), "blah");
+
+        Assert.True(await Save(P("test$(n).jpg"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray),
+            overwriteMode: OverwriteMode.Force));
+
+        ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test1.jpg")));
+        ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test2.jpg")));
+        Assert.Equal(2, Folder.GetFiles().Length);
+    }
+
+    [Fact]
+    public async Task BatchCount_SingleFileIsNumbered()
+    {
+        Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog), batchCount: 2));
+        Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog_gray), batchCount: 2));
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.1.jpg")));
+        ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test.2.jpg")));
+        Assert.Equal(2, Folder.GetFiles().Length);
+    }
+
+    [Fact]
+    public async Task BatchCount_PadsDigits()
+    {
+        Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray),
+            batchCount: 10));
+
+        Assert.True(File.Exists(P("test.01.jpg")));
+        Assert.True(File.Exists(P("test.02.jpg")));
+    }
+
+    [Fact]
+    public async Task Concurrent_NumberPlaceholder_ChoosesDistinctFiles()
+    {
+        var op1 = CreateOperation();
+        Assert.True(Start(op1, P("test$(n).jpg"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray)));
+        var op2 = CreateOperation();
+        Assert.True(Start(op2, P("test$(n).jpg"), CreateScannedImages(ImageResources.dog_bw)));
+        Assert.True(await op1.Success);
+        Assert.True(await op2.Success);
+
+        Assert.Equal(P("test1.jpg"), op1.FirstFileSaved);
+        Assert.Equal(P("test3.jpg"), op2.FirstFileSaved);
+        Assert.Equal(3, Folder.GetFiles().Length);
     }
 
     [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]

@@ -1,4 +1,4 @@
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.Lib.Tests.Automation;
 using NAPS2.Ocr;
@@ -16,28 +16,38 @@ public class SavePdfOperationTests : ContextualTests
 
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly PdfExporter _pdfExporter;
+    private readonly NameManager _nameManager;
 
     public SavePdfOperationTests()
     {
         _overwritePrompt = Substitute.For<IOverwritePrompt>();
         _pdfExporter = new PdfExporter(ScanningContext);
+        _nameManager = new NameManager();
     }
 
-    private SavePdfOperation CreateOperation() => new(_pdfExporter, _overwritePrompt);
+    private SavePdfOperation CreateOperation() => new(_pdfExporter, _overwritePrompt, _nameManager);
 
     private bool Start(SavePdfOperation op, string fileName, ICollection<ProcessedImage> images,
-        PdfSettings? pdfSettings = null, OcrParams? ocrParams = null, EmailMessage? emailMessage = null,
-        string? overwriteFile = null)
+        PdfSettings pdfSettings = null, OcrParams ocrParams = null, EmailMessage emailMessage = null,
+        OverwriteMode overwriteMode = OverwriteMode.Prompt, int? batchCount = null, int? batchIndex = null)
     {
-        return op.Start(fileName, Placeholders.All.WithDate(TestDate), images, pdfSettings ?? new PdfSettings(),
-            ocrParams ?? OcrParams.Empty, emailMessage, overwriteFile);
+        return op.Start(fileName, images, pdfSettings ?? new PdfSettings(), ocrParams ?? OcrParams.Empty,
+            emailMessage, new SaveParams
+            {
+                OverwriteMode = overwriteMode,
+                BatchCount = batchCount,
+                BatchIndex = batchIndex,
+                DateTime = TestDate
+            });
     }
 
     private async Task<bool> Save(string fileName, ICollection<ProcessedImage> images,
-        PdfSettings? pdfSettings = null, string? overwriteFile = null)
+        PdfSettings pdfSettings = null, OverwriteMode overwriteMode = OverwriteMode.Prompt, int? batchCount = null,
+        int? batchIndex = null)
     {
         var op = CreateOperation();
-        if (!Start(op, fileName, images, pdfSettings, overwriteFile: overwriteFile))
+        if (!Start(op, fileName, images, pdfSettings, overwriteMode: overwriteMode, batchCount: batchCount,
+                batchIndex: batchIndex))
         {
             return false;
         }
@@ -105,10 +115,98 @@ public class SavePdfOperationTests : ContextualTests
         // e.g. the user already confirmed overwriting in the save dialog
         File.WriteAllText(P("test.pdf"), "blah");
 
-        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog), overwriteFile: P("test.pdf")));
+        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Confirmed));
 
         _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
         PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task Existing_Confirmed_NumberPlaceholder()
+    {
+        // Confirming only skips the prompt; auto-numbered files still skip existing files
+        File.WriteAllText(P("test1.pdf"), "blah");
+
+        Assert.True(await Save(P("test$(n).pdf"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Confirmed));
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        Assert.Equal("blah", File.ReadAllText(P("test1.pdf")));
+        PdfAsserts.AssertImages(P("test2.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task Existing_Never()
+    {
+        File.WriteAllText(P("test.pdf"), "blah");
+
+        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Never));
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        Assert.Equal("blah", File.ReadAllText(P("test.pdf")));
+        PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task Existing_Force()
+    {
+        File.WriteAllText(P("test.pdf"), "blah");
+
+        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Force));
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task Existing_Force_NumberPlaceholder()
+    {
+        File.WriteAllText(P("test1.pdf"), "blah");
+
+        Assert.True(await Save(P("test$(n).pdf"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Force));
+
+        PdfAsserts.AssertImages(P("test1.pdf"), ImageResources.dog);
+        Assert.Single(Folder.GetFiles());
+    }
+
+    [Fact]
+    public async Task Force_BatchIndex()
+    {
+        File.WriteAllText(P("test1.pdf"), "blah");
+        File.WriteAllText(P("test2.pdf"), "blah");
+
+        Assert.True(await Save(P("test$(n).pdf"), CreateScannedImages(ImageResources.dog),
+            overwriteMode: OverwriteMode.Force, batchCount: 2, batchIndex: 0));
+        Assert.True(await Save(P("test$(n).pdf"), CreateScannedImages(ImageResources.dog_gray),
+            overwriteMode: OverwriteMode.Force, batchCount: 2, batchIndex: 1));
+
+        PdfAsserts.AssertImages(P("test1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test2.pdf"), ImageResources.dog_gray);
+        Assert.Equal(2, Folder.GetFiles().Length);
+    }
+
+    [Fact]
+    public async Task BatchCount_SingleFileIsNumbered()
+    {
+        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog), batchCount: 2));
+        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog_gray), batchCount: 2));
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test.2.pdf"), ImageResources.dog_gray);
+        Assert.Equal(2, Folder.GetFiles().Length);
+    }
+
+    [Fact]
+    public async Task BatchCount_PadsDigits()
+    {
+        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog), batchCount: 10));
+
+        PdfAsserts.AssertImages(P("test.01.pdf"), ImageResources.dog);
     }
 
     [Fact]
@@ -187,6 +285,21 @@ public class SavePdfOperationTests : ContextualTests
     }
 
     [Fact]
+    public async Task SinglePagePdfs_MetadataNotNumbered()
+    {
+        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray),
+            new PdfSettings
+            {
+                SinglePagePdfs = true,
+                Metadata = new PdfMetadata { Title = "title", Creator = "creator", Keywords = "" }
+            }));
+
+        var expected = new PdfMetadata { Title = "title", Creator = "creator", Keywords = "" };
+        PdfAsserts.AssertMetadata(expected, P("test.1.pdf"));
+        PdfAsserts.AssertMetadata(expected, P("test.2.pdf"));
+    }
+
+    [Fact]
     public async Task Directory_UsesNumberedFileName()
     {
         File.WriteAllText(P("1.pdf"), "blah");
@@ -206,7 +319,7 @@ public class SavePdfOperationTests : ContextualTests
             Assert.Equal("attachment_2024.pdf", message.Attachments[0].AttachmentName);
         });
 
-        var op = new SavePdfOperation(_pdfExporter, _overwritePrompt, emailProviderFactory);
+        var op = new SavePdfOperation(_pdfExporter, _overwritePrompt, _nameManager, emailProviderFactory);
         Assert.True(Start(op, P("attachment_$(YYYY).pdf"), CreateScannedImages(ImageResources.dog),
             emailMessage: new EmailMessage()));
         Assert.True(await op.Success);
@@ -215,8 +328,7 @@ public class SavePdfOperationTests : ContextualTests
         emailProviderFactory.VerifyExactlyOneMessageSent();
     }
 
-    // Known bug: https://github.com/cyanfish/naps2/issues/823
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task Concurrent_NumberPlaceholder_ChoosesDistinctFiles()
     {
         // The first file isn't written until OCR finishes, so the second save can't rely on the file existing

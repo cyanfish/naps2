@@ -1,4 +1,4 @@
-using NAPS2.EtoForms;
+﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
@@ -28,14 +28,16 @@ public class ExportControllerTests : ContextualTests
         _notify = Substitute.For<ISaveNotify>();
         _config = Naps2Config.Stub();
 
+        var nameManager = new NameManager();
         var operationFactory = Substitute.For<IOperationFactory>();
         operationFactory.Create<SavePdfOperation>().Returns(_ =>
-            new SavePdfOperation(new PdfExporter(ScanningContext), _overwritePrompt, _emailProviderFactory));
+            new SavePdfOperation(new PdfExporter(ScanningContext), _overwritePrompt, nameManager,
+                _emailProviderFactory));
         operationFactory.Create<SaveImagesOperation>().Returns(_ =>
-            new SaveImagesOperation(_overwritePrompt, ImageContext));
+            new SaveImagesOperation(_overwritePrompt, ImageContext, nameManager));
 
         _controller = new ExportController(_dialogHelper, operationFactory, Substitute.For<IFormFactory>(),
-            Substitute.For<OperationProgress>(), _config, new UiImageList());
+            Substitute.For<OperationProgress>(), _config, new UiImageList(), nameManager);
     }
 
     private static string Year => DateTime.Now.ToString("yyyy");

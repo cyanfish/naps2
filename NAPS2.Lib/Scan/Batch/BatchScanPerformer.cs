@@ -18,11 +18,12 @@ public class BatchScanPerformer : IBatchScanPerformer
     private readonly Naps2Config _config;
     private readonly IProfileManager _profileManager;
     private readonly ThumbnailController _thumbnailController;
+    private readonly NameManager _nameManager;
 
     public BatchScanPerformer(IScanPerformer scanPerformer, PdfExporter pdfExporter,
         IOperationFactory operationFactory,
         IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
-        ThumbnailController thumbnailController)
+        ThumbnailController thumbnailController, NameManager nameManager)
     {
         _scanPerformer = scanPerformer;
         _pdfExporter = pdfExporter;
@@ -31,13 +32,15 @@ public class BatchScanPerformer : IBatchScanPerformer
         _config = config;
         _profileManager = profileManager;
         _thumbnailController = thumbnailController;
+        _nameManager = nameManager;
     }
 
     public async Task PerformBatchScan(BatchSettings settings, IFormBase batchForm,
         Action<ProcessedImage> imageCallback, Action<string> progressCallback, CancellationToken cancelToken)
     {
         var state = new BatchState(_scanPerformer, _pdfExporter, _operationFactory, _formFactory, _config,
-            _profileManager, _thumbnailController, settings, progressCallback, cancelToken, batchForm, imageCallback);
+            _profileManager, _thumbnailController, _nameManager, settings, progressCallback, cancelToken, batchForm,
+            imageCallback);
         await state.Do();
     }
 
@@ -49,6 +52,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         private readonly IFormFactory _formFactory;
         private readonly Naps2Config _config;
         private readonly IProfileManager _profileManager;
+        private readonly NameManager _nameManager;
 
         private readonly BatchSettings _settings;
         private readonly Action<string> _progressCallback;
@@ -62,7 +66,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         public BatchState(IScanPerformer scanPerformer, PdfExporter pdfExporter, IOperationFactory operationFactory,
             IFormFactory formFactory, Naps2Config config, IProfileManager profileManager,
-            ThumbnailController thumbnailController, BatchSettings settings,
+            ThumbnailController thumbnailController, NameManager nameManager, BatchSettings settings,
             Action<string> progressCallback, CancellationToken cancelToken, IFormBase batchForm,
             Action<ProcessedImage> loadImageCallback)
         {
@@ -72,6 +76,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             _formFactory = formFactory;
             _config = config;
             _profileManager = profileManager;
+            _nameManager = nameManager;
             _settings = settings;
             _progressCallback = progressCallback;
             _cancelToken = cancelToken;
@@ -228,7 +233,7 @@ public class BatchScanPerformer : IBatchScanPerformer
         {
             _progressCallback(MiscResources.BatchStatusSaving);
 
-            var placeholders = Placeholders.All.WithDate(DateTime.Now);
+            var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never };
             var allImages = _scans.SelectMany(x => x).ToList();
 
             if (_settings.OutputType == BatchOutputType.Load)
@@ -240,7 +245,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
             else if (_settings.OutputType == BatchOutputType.SingleFile)
             {
-                await Save(placeholders, 0, allImages);
+                await Save(allImages, saveParams);
                 foreach (var img in allImages)
                 {
                     img.Dispose();
@@ -248,10 +253,12 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
             else if (_settings.OutputType == BatchOutputType.MultipleFiles)
             {
-                int i = 0;
-                foreach (var imageList in SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator))
+                var imageLists = SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator)
+                    .Where(x => x.Count > 0).ToList();
+                saveParams = saveParams with { BatchCount = imageLists.Count };
+                foreach (var (imageList, i) in imageLists.Select((x, i) => (x, i)))
                 {
-                    await Save(placeholders, i++, imageList);
+                    await Save(imageList, saveParams with { BatchIndex = i });
                     foreach (var img in imageList)
                     {
                         img.Dispose();
@@ -260,26 +267,24 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
         }
 
-        private async Task Save(Placeholders placeholders, int i, List<ProcessedImage> images)
+        private async Task Save(List<ProcessedImage> images, SaveParams saveParams)
         {
             if (images.Count == 0)
             {
                 return;
             }
-            var subPath = placeholders.Substitute(_settings.SavePath!, true, i);
             if (GetSavePathExtension().ToLower() == ".pdf")
             {
-                if (File.Exists(subPath))
-                {
-                    subPath = placeholders.Substitute(subPath, true, 0, 1);
-                }
+                using var reservation =
+                    _nameManager.Reserve(_settings.SavePath!, NameContext.FromSaveParams(saveParams));
                 try
                 {
                     var exportParams = new PdfExportParams(
-                        _config.Get(c => c.PdfSettings.Metadata).Substitute(placeholders),
+                        _config.Get(c => c.PdfSettings.Metadata).Substitute(_nameManager, saveParams.DateTime),
                         _config.Get(c => c.PdfSettings.Encryption),
                         _config.Get(c => c.PdfSettings.Compat));
-                    await _pdfExporter.Export(subPath, images, exportParams, _config.DefaultOcrParams(), _cancelToken);
+                    await _pdfExporter.Export(reservation.Name, images, exportParams, _config.DefaultOcrParams(),
+                        _cancelToken);
                 }
                 finally
                 {
@@ -292,7 +297,7 @@ public class BatchScanPerformer : IBatchScanPerformer
             else
             {
                 var op = _operationFactory.Create<SaveImagesOperation>();
-                op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings), batch: true);
+                op.Start(_settings.SavePath!, images, _config.Get(c => c.ImageSettings), saveParams);
                 await op.Success;
             }
         }

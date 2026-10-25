@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 using Autofac;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Email;
@@ -741,8 +741,7 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
-    // Known bug: https://github.com/cyanfish/naps2/issues/135
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task SplitWithNoPlaceholder_ForceOverwrite()
     {
         File.WriteAllText(P("test.1.pdf"), "blah");
@@ -762,8 +761,7 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
-    // Known bug: https://github.com/cyanfish/naps2/issues/135
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task SplitWithPlaceholder_ForceOverwrite()
     {
         File.WriteAllText(P("test1.pdf"), "blah");
@@ -965,8 +963,7 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
-    // Known bug: https://github.com/cyanfish/naps2/issues/135
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task ScanToImageFiles_ForceOverwrite()
     {
         File.WriteAllText(P("test1.jpg"), "blah");
@@ -986,8 +983,7 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
-    // Known bug: each split image is saved to the same path
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task SplitToImageFilesWithNoPlaceholder()
     {
         await _automationHelper.RunCommand(

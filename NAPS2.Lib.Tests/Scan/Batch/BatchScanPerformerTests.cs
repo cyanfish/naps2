@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Threading;
 using NAPS2.EtoForms;
 using NAPS2.ImportExport;
@@ -29,9 +29,10 @@ public class BatchScanPerformerTests : ContextualTests
         _overwritePrompt = Substitute.For<IOverwritePrompt>();
         _config = Naps2Config.Stub();
 
+        var nameManager = new NameManager();
         var operationFactory = Substitute.For<IOperationFactory>();
         operationFactory.Create<SaveImagesOperation>()
-            .Returns(_ => new SaveImagesOperation(_overwritePrompt, ImageContext));
+            .Returns(_ => new SaveImagesOperation(_overwritePrompt, ImageContext, nameManager));
         var profileManager = Substitute.For<IProfileManager>();
         profileManager.Profiles.Returns(ImmutableList.Create(new ScanProfile { DisplayName = "profile" }));
 
@@ -43,7 +44,8 @@ public class BatchScanPerformerTests : ContextualTests
             _config,
             profileManager,
             new ThumbnailController(new ThumbnailRenderQueue(ScanningContext, new ThumbnailRenderer(ImageContext)),
-                _config));
+                _config),
+            nameManager);
     }
 
     private async Task Run(BatchOutputType outputType, SaveSeparator separator, string savePath,
@@ -135,8 +137,7 @@ public class BatchScanPerformerTests : ContextualTests
         PdfAsserts.AssertImages(P("test4.pdf"), ImageResources.dog_bw);
     }
 
-    // Known bug: the first file isn't numbered (test.pdf, test.1.pdf, test.2.pdf)
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task MultipleFiles_PerPage_Pdf_NoPlaceholder()
     {
         await Run(BatchOutputType.MultipleFiles, SaveSeparator.FilePerPage, P("test.pdf"),
@@ -170,8 +171,7 @@ public class BatchScanPerformerTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test.2.jpg")));
     }
 
-    // Known bug: each page is saved to the same path, so all but the first prompt to overwrite
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task MultipleFiles_PerPage_Images_NoPlaceholder()
     {
         await Run(BatchOutputType.MultipleFiles, SaveSeparator.FilePerPage, P("test.jpg"),

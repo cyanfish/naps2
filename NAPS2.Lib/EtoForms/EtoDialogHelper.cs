@@ -7,12 +7,14 @@ public class EtoDialogHelper : DialogHelper
 {
     private readonly Naps2Config _config;
     private readonly FileFilters _fileFilters;
+    private readonly NameManager _nameManager;
     private bool _addExt = EtoPlatform.Current.IsGtk;
 
-    public EtoDialogHelper(Naps2Config config, FileFilters fileFilters)
+    public EtoDialogHelper(Naps2Config config, FileFilters fileFilters, NameManager nameManager)
     {
         _config = config;
         _fileFilters = fileFilters;
+        _nameManager = nameManager;
     }
 
     public override bool PromptToSavePdfOrImage(string? defaultPath, out string? savePath)
@@ -141,9 +143,10 @@ public class EtoDialogHelper : DialogHelper
         }
     }
 
-    private static string NormalizePath(string path)
+    private string NormalizePath(string path)
     {
-        string normPath = Placeholders.NonNumeric.Substitute(path);
+        // The number is chosen when the file is actually saved, so number placeholders are left for the user to see
+        string normPath = _nameManager.Get(path, new NameContext { DateTime = DateTime.Now, Numbering = Numbering.None });
         // If the path points to a directory, it should end in a trailing slash.
         // Otherwise, path functions will assume that the directory name is a file name.
         if (Directory.Exists(normPath) && !normPath.EndsWith(Path.DirectorySeparatorChar))

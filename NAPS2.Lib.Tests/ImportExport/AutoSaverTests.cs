@@ -39,7 +39,8 @@ public class AutoSaverTests : ContextualTests
             _overwritePrompt,
             _config,
             ImageContext,
-            new UiImageList()
+            new UiImageList(),
+            new NameManager()
         );
     }
 
@@ -114,8 +115,7 @@ public class AutoSaverTests : ContextualTests
             ImageResources.dog, ImageResources.dog_gray);
     }
 
-    // Known bug: the scan's path is substituted first (test1.jpg), then numbered again per image (test1.1.jpg)
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task JpegFilePerScan()
     {
         var settings = new AutoSaveSettings
@@ -218,8 +218,7 @@ public class AutoSaverTests : ContextualTests
         PdfAsserts.AssertImages(P("test3.pdf"), ImageResources.dog_gray);
     }
 
-    // Known bug: the first file isn't numbered (test.pdf, test.1.pdf)
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task PdfFilePerPage_NoPlaceholder()
     {
         var settings = new AutoSaveSettings
@@ -258,6 +257,23 @@ public class AutoSaverTests : ContextualTests
     }
 
     [Fact]
+    public async Task JpegNoPlaceholder_Existing()
+    {
+        File.WriteAllText(P("test.jpg"), "blah");
+        var settings = new AutoSaveSettings
+        {
+            FilePath = P("test.jpg")
+        };
+
+        var scanned = CreateScannedImages(ImageResources.dog);
+        await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        Assert.Equal("blah", File.ReadAllText(P("test.jpg")));
+        ImageAsserts.Similar(ImageResources.dog, P("test.1.jpg"));
+    }
+
+    [Fact]
     public async Task DatePlaceholders()
     {
         var settings = new AutoSaveSettings
@@ -271,8 +287,7 @@ public class AutoSaverTests : ContextualTests
         PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.pdf"), ImageResources.dog);
     }
 
-    // Known bug: https://github.com/cyanfish/naps2/issues/823
-    [Fact(Skip = "Known bug")]
+    [Fact]
     public async Task ConcurrentPdfs()
     {
         // The first file isn't written until OCR finishes, so the second save can't rely on the file existing
@@ -350,8 +365,56 @@ public class AutoSaverTests : ContextualTests
         PdfAsserts.AssertImages(P("test_b_1.pdf"), ImageResources.dog);
     }
 
-    // Known bug: the save dialog already confirmed overwriting, but a number is appended anyway
-    [Fact(Skip = "Known bug")]
+    [Fact]
+    public async Task PromptForFilePath_DefaultPathIgnoresExisting()
+    {
+        File.WriteAllText(P("test.pdf"), "blah");
+        var settings = new AutoSaveSettings
+        {
+            FilePath = P("test.pdf"),
+            PromptForFilePath = true
+        };
+        string defaultPath = null;
+        _dialogHelper.PromptToSavePdfOrImage(Arg.Any<string>(), out Arg.Any<string>()).Returns(x =>
+        {
+            defaultPath = (string) x[0];
+            x[1] = P("other.pdf");
+            return true;
+        });
+
+        var scanned = CreateScannedImages(ImageResources.dog);
+        await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
+        Assert.Equal(P("test.pdf"), defaultPath);
+        PdfAsserts.AssertImages(P("other.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task PromptForFilePath_FilePerPage()
+    {
+        // The user chooses each file name, so the chosen names aren't numbered
+        var settings = new AutoSaveSettings
+        {
+            FilePath = P("test.pdf"),
+            Separator = SaveSeparator.FilePerPage,
+            PromptForFilePath = true
+        };
+        var dialogPaths = new Queue<string>([P("first.pdf"), P("second.pdf")]);
+        _dialogHelper.PromptToSavePdfOrImage(Arg.Any<string>(), out Arg.Any<string>()).Returns(x =>
+        {
+            x[1] = dialogPaths.Dequeue();
+            return true;
+        });
+
+        var scanned = CreateScannedImages(ImageResources.dog, ImageResources.dog_gray);
+        await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
+        Assert.Equal(2, Folder.GetFiles().Length);
+        PdfAsserts.AssertImages(P("first.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("second.pdf"), ImageResources.dog_gray);
+    }
+
+    [Fact]
     public async Task PromptForFilePath_Existing()
     {
         File.WriteAllText(P("test.pdf"), "blah");

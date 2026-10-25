@@ -8,13 +8,15 @@ internal class SavePdfOperation : OperationBase
 {
     private readonly PdfExporter _pdfExporter;
     private readonly IOverwritePrompt _overwritePrompt;
+    private readonly NameManager _nameManager;
     private readonly IEmailProviderFactory? _emailProviderFactory;
 
-    public SavePdfOperation(PdfExporter pdfExporter, IOverwritePrompt overwritePrompt,
+    public SavePdfOperation(PdfExporter pdfExporter, IOverwritePrompt overwritePrompt, NameManager nameManager,
         IEmailProviderFactory? emailProviderFactory = null)
     {
         _pdfExporter = pdfExporter;
         _overwritePrompt = overwritePrompt;
+        _nameManager = nameManager;
         _emailProviderFactory = emailProviderFactory;
 
         AllowCancel = true;
@@ -23,48 +25,58 @@ internal class SavePdfOperation : OperationBase
 
     public string? FirstFileSaved { get; private set; }
 
-    public bool Start(string fileName, Placeholders placeholders, ICollection<ProcessedImage> images,
-        PdfSettings pdfSettings, OcrParams ocrParams, EmailMessage? emailMessage = null,
-        string? overwriteFile = null)
+    /// <summary>
+    /// Saves the provided images to a PDF file with the given name, or one PDF per image if specified by the settings.
+    /// </summary>
+    /// <param name="fileName">The file name to save to, which may contain placeholders.</param>
+    /// <param name="images">The images to save.</param>
+    /// <param name="pdfSettings">The PDF settings.</param>
+    /// <param name="ocrParams">The OCR parameters.</param>
+    /// <param name="emailMessage">If specified, the saved file(s) are attached to the message and it is sent.</param>
+    /// <param name="saveParams">How files are named and existing files are handled.</param>
+    public bool Start(string fileName, ICollection<ProcessedImage> images, PdfSettings pdfSettings,
+        OcrParams ocrParams, EmailMessage? emailMessage = null, SaveParams? saveParams = null)
     {
-        // TODO: This needs tests. And ideally simplification.
         ProgressTitle = emailMessage != null ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
-        var subFileName = placeholders.Substitute(fileName);
-        Status = new OperationStatus
-        {
-            StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(subFileName)),
-            MaxProgress = images.Count
-        };
+        saveParams ??= new SaveParams();
 
+        var subFileName = _nameManager.Get(fileName, NameContext.FromSaveParams(saveParams));
         if (Directory.Exists(subFileName))
         {
             // Not supposed to be a directory, but ok...
             fileName = Path.Combine(subFileName, "$(n).pdf");
-            subFileName = placeholders.Substitute(fileName);
         }
-        var singleFile = !pdfSettings.SinglePagePdfs || images.Count == 1;
-        if (singleFile)
-        {
-            if (File.Exists(subFileName))
-            {
-                if (subFileName != overwriteFile &&
-                    _overwritePrompt.ConfirmOverwrite(subFileName) != OverwriteResponse.Yes)
-                {
-                    FailedToStart();
-                    return false;
-                }
-            }
-        }
-
         var imagesByFile = pdfSettings.SinglePagePdfs
             ? images.Select(x => new[] { x }).ToArray()
             : new[] { images.ToArray() };
+        saveParams = saveParams with { BatchCount = Math.Max(saveParams.BatchCount ?? 1, imagesByFile.Length) };
+        var context = NameContext.FromSaveParams(saveParams);
+
+        var reservations = Enumerable.Range(0, imagesByFile.Length)
+            .Select(i => _nameManager.Reserve(fileName, context with { BatchIndex = (context.BatchIndex ?? 0) + i }))
+            .ToDisposableList();
+        var fileNames = reservations.Select(x => x.Name).ToArray();
+
+        Status = new OperationStatus
+        {
+            StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNames[0])),
+            MaxProgress = images.Count
+        };
+
+        var singleFile = imagesByFile.Length == 1;
+        if (singleFile && saveParams.OverwriteMode.ShouldPromptForPath(fileNames[0]) &&
+            _overwritePrompt.ConfirmOverwrite(fileNames[0]) != OverwriteResponse.Yes)
+        {
+            reservations.Dispose();
+            FailedToStart();
+            return false;
+        }
+
         RunAsync(async () =>
         {
             bool result = false;
             try
             {
-                int digits = (int) Math.Floor(Math.Log10(images.Count)) + 1;
                 int i = 0;
                 foreach (var imagesForFile in imagesByFile)
                 {
@@ -73,8 +85,7 @@ internal class SavePdfOperation : OperationBase
                         result = false;
                         break;
                     }
-                    var currentFileName = placeholders.Substitute(fileName, true, i, singleFile ? 0 : digits);
-                    // TODO: Overwrite prompt non-single file?
+                    var currentFileName = fileNames[i];
                     Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
 
@@ -82,7 +93,7 @@ internal class SavePdfOperation : OperationBase
                     result = await RunWithRetry(async () =>
                             await WaitForFileNotInUse(currentFileName) &&
                             await _pdfExporter.Export(currentFileName, imagesForFile,
-                                new PdfExportParams(pdfSettings.Metadata.Substitute(placeholders),
+                                new PdfExportParams(pdfSettings.Metadata.Substitute(_nameManager, context.DateTime),
                                     pdfSettings.Encryption, pdfSettings.Compat), ocrParams, progress),
                         GetSaveErrorMessage);
                     if (!result)
@@ -116,6 +127,7 @@ internal class SavePdfOperation : OperationBase
             }
             finally
             {
+                reservations.Dispose();
                 GC.Collect();
             }
 
