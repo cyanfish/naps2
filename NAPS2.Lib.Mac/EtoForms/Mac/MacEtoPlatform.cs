@@ -207,9 +207,6 @@ public class MacEtoPlatform : EtoPlatform
         splitViewController.AddSplitViewItem(detailItem);
         sidebarItem.Collapsed = !options.Visible;
 
-        // Extend the sidebar under the title bar
-        nsWindow.StyleMask |= NSWindowStyle.FullSizeContentView;
-        nsWindow.TitlebarAppearsTransparent = true;
         nsWindow.ContentViewController = splitViewController;
 
         etoContentView.TranslatesAutoresizingMaskIntoConstraints = false;
