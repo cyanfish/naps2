@@ -26,6 +26,7 @@ internal class TwainScanRunner
     private readonly TaskCompletionSource<bool> _tcs;
     private readonly TaskCompletionSource<bool> _sourceDisabledTcs;
     private DataSource? _source;
+    private int _pagesStarted;
 
     public TwainScanRunner(ILogger logger, TWIdentity twainAppId, TwainDsm dsm, ScanOptions options,
         CancellationToken cancelToken, ITwainEvents twainEvents)
@@ -248,6 +249,14 @@ internal class TwainScanRunner
         _logger.LogDebug("NAPS2.TW - TransferReady");
         try
         {
+            if (_options.MaxPages > 0 && _pagesStarted >= _options.MaxPages)
+            {
+                // The source didn't stop at CAP_XFERCOUNT, so don't transfer more pages than were asked for.
+                _logger.LogDebug("NAPS2.TW - Page limit reached, cancelling the remaining transfers");
+                e.CancelAll = true;
+                return;
+            }
+            _pagesStarted++;
             var pageStart = new TwainPageStart();
             if (_options.TwainOptions.TransferMode == TwainTransferMode.Memory)
             {
@@ -349,6 +358,14 @@ internal class TwainScanRunner
                 source.Capabilities.CapFeederEnabled.SetValue(BoolType.True);
                 source.Capabilities.CapDuplexEnabled.SetValue(BoolType.True);
                 break;
+        }
+
+        // Page limit. TWAIN sources must support CAP_XFERCOUNT; the source then ends the batch by itself after this many
+        // pages, so nothing has to be cancelled. TransferReady also stops at the limit in case a source ignores it.
+        if (_options.MaxPages > 0 && _options.PaperSource != PaperSource.Flatbed &&
+            source.Capabilities.CapXferCount.IsSupported)
+        {
+            source.Capabilities.CapXferCount.SetValue(_options.MaxPages);
         }
 
         // TODO: Should we add an "Automatic" option in the NAPS2 GUI instead of making "Glass" = Auto?

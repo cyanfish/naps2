@@ -44,6 +44,10 @@ internal class ScanOptionsValidator
         {
             throw new ArgumentException("Invalid value for ScanOptions.Dpi.");
         }
+        if (options.MaxPages < 0)
+        {
+            throw new ArgumentException("Invalid value for ScanOptions.MaxPages.");
+        }
         if (options.Brightness != options.Brightness.Clamp(-1000, 1000))
         {
             throw new ArgumentException("Invalid value for ScanOptions.Brightness.");
