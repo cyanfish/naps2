@@ -37,7 +37,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanSanity()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -52,7 +52,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanWithNoImages()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -70,7 +70,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -89,7 +89,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -109,7 +109,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
             var config = container.Resolve<Naps2Config>();
@@ -133,7 +133,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
             var config = container.Resolve<Naps2Config>();
@@ -158,7 +158,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
             var config = container.Resolve<Naps2Config>();
@@ -184,9 +184,9 @@ public class CommandLineIntegrationTests : ContextualTests
             { LoadImage(PdfResources.word_p2), "Page two." },
             { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled" }
         });
-        var importPath = $"{FolderPath}/import.pdf";
+        var importPath = P("import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_patcht_pdf);
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -202,7 +202,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanPdfSettings_DefaultMetadata()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
             var config = container.Resolve<Naps2Config>();
@@ -235,7 +235,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanPdfSettings_SavedMetadata()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
             var config = container.Resolve<Naps2Config>();
@@ -269,7 +269,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanPdfSettings_CustomMetadata()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -295,7 +295,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanPdfSettings_MetadataPlaceholders()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         var year = DateTime.Now.ToString("yyyy");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -322,7 +322,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanPdfSettings_SavedEncryptConfig()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
             var config = container.Resolve<Naps2Config>();
@@ -353,7 +353,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanPdfSettings_FileEncryptConfig()
     {
-        var encryptConfigPath = $"{FolderPath}/encrypt.xml";
+        var encryptConfigPath = P("encrypt.xml");
         File.WriteAllText(encryptConfigPath, @"
 <PdfEncryption>
     <EncryptPdf>true</EncryptPdf>
@@ -363,7 +363,7 @@ public class CommandLineIntegrationTests : ContextualTests
     <AllowContentCopying>false</AllowContentCopying>
 </PdfEncryption>");
 
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -383,10 +383,10 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanPdfSettings_InvalidEncryptConfig()
     {
-        var encryptConfigPath = $"{FolderPath}/encrypt.xml";
+        var encryptConfigPath = P("encrypt.xml");
         File.WriteAllText(encryptConfigPath, "blah blah");
 
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -402,7 +402,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ExistingPdf_NoOverwrite()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         File.WriteAllText(path, "blah");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -418,7 +418,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ExistingPdf_ForceOverwrite()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         File.WriteAllText(path, "blah");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -435,7 +435,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ExistingPdf_ForceOverwrite_InUse()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         File.WriteAllText(path, "blah");
         using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
         await _automationHelper.RunCommand(
@@ -453,7 +453,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ExistingImage_NoOverwrite()
     {
-        var path = $"{FolderPath}/test.jpg";
+        var path = P("test.jpg");
         File.WriteAllText(path, "blah");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -469,7 +469,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ExistingImage_ForceOverwrite()
     {
-        var path = $"{FolderPath}/test.jpg";
+        var path = P("test.jpg");
         File.WriteAllText(path, "blah");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -486,7 +486,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ExistingImage_ForceOverwrite_InUse()
     {
-        var path = $"{FolderPath}/test.jpg";
+        var path = P("test.jpg");
         File.WriteAllText(path, "blah");
         using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
         await _automationHelper.RunCommand(
@@ -504,7 +504,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -519,7 +519,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages_Interleave()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -535,7 +535,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages_AltInterleave()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -551,7 +551,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages_Deinterleave()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -567,7 +567,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages_AltDeinterleave()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -583,7 +583,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages_Reverse()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -599,7 +599,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages_MultipleInterleaveOptions()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -616,7 +616,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task MultipleImages_InterleaveAndReverse()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -633,7 +633,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task NoSplitWithMultipleScans()
     {
-        var path = $"{FolderPath}/test$(n).pdf";
+        var path = P("test$(n).pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -646,14 +646,14 @@ public class CommandLineIntegrationTests : ContextualTests
                 .WithScannedImages(Image4, Image5)
                 .WithScannedImages()
                 .Build());
-        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1, Image2, Image3, Image4, Image5);
+        PdfAsserts.AssertImages(P("test1.pdf"), Image1, Image2, Image3, Image4, Image5);
         AssertRecoveryCleanedUp();
     }
 
     [Fact]
     public async Task SplitWithNoPlaceholder()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -662,17 +662,17 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             new[] { Image1, Image2, Image3 });
-        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.1.pdf");
-        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.2.pdf");
-        PdfAsserts.AssertPageCount(1, $"{FolderPath}/test.3.pdf");
-        Assert.False(File.Exists($"{FolderPath}/test.4.pdf"));
+        PdfAsserts.AssertPageCount(1, P("test.1.pdf"));
+        PdfAsserts.AssertPageCount(1, P("test.2.pdf"));
+        PdfAsserts.AssertPageCount(1, P("test.3.pdf"));
+        Assert.False(File.Exists(P("test.4.pdf")));
         AssertRecoveryCleanedUp();
     }
 
     [Fact]
     public async Task SplitWithPlaceholder()
     {
-        var path = $"{FolderPath}/test$(n).pdf";
+        var path = P("test$(n).pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -681,17 +681,17 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             new[] { Image1, Image2, Image3 });
-        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1);
-        PdfAsserts.AssertImages($"{FolderPath}/test2.pdf", Image2);
-        PdfAsserts.AssertImages($"{FolderPath}/test3.pdf", Image3);
-        Assert.False(File.Exists($"{FolderPath}/test4.pdf"));
+        PdfAsserts.AssertImages(P("test1.pdf"), Image1);
+        PdfAsserts.AssertImages(P("test2.pdf"), Image2);
+        PdfAsserts.AssertImages(P("test3.pdf"), Image3);
+        Assert.False(File.Exists(P("test4.pdf")));
         AssertRecoveryCleanedUp();
     }
 
     [Fact]
     public async Task SplitSize()
     {
-        var path = $"{FolderPath}/test$(n).pdf";
+        var path = P("test$(n).pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -700,17 +700,17 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             new[] { Image1, Image2, Image3, Image4, Image5 });
-        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1, Image2);
-        PdfAsserts.AssertImages($"{FolderPath}/test2.pdf", Image3, Image4);
-        PdfAsserts.AssertImages($"{FolderPath}/test3.pdf", Image5);
-        Assert.False(File.Exists($"{FolderPath}/test4.pdf"));
+        PdfAsserts.AssertImages(P("test1.pdf"), Image1, Image2);
+        PdfAsserts.AssertImages(P("test2.pdf"), Image3, Image4);
+        PdfAsserts.AssertImages(P("test3.pdf"), Image5);
+        Assert.False(File.Exists(P("test4.pdf")));
         AssertRecoveryCleanedUp();
     }
 
     [Fact]
     public async Task SplitSizeWithMultipleScans()
     {
-        var path = $"{FolderPath}/test$(n).pdf";
+        var path = P("test$(n).pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -724,17 +724,17 @@ public class CommandLineIntegrationTests : ContextualTests
                 .WithScannedImages(Image4, Image5)
                 .WithScannedImages()
                 .Build());
-        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1, Image2);
-        PdfAsserts.AssertImages($"{FolderPath}/test2.pdf", Image3);
-        PdfAsserts.AssertImages($"{FolderPath}/test3.pdf", Image4, Image5);
-        Assert.False(File.Exists($"{FolderPath}/test4.pdf"));
+        PdfAsserts.AssertImages(P("test1.pdf"), Image1, Image2);
+        PdfAsserts.AssertImages(P("test2.pdf"), Image3);
+        PdfAsserts.AssertImages(P("test3.pdf"), Image4, Image5);
+        Assert.False(File.Exists(P("test4.pdf")));
         AssertRecoveryCleanedUp();
     }
 
     [Fact]
     public async Task SplitScans()
     {
-        var path = $"{FolderPath}/test$(n).pdf";
+        var path = P("test$(n).pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -749,10 +749,10 @@ public class CommandLineIntegrationTests : ContextualTests
                 .WithScannedImages(Image2, Image3)
                 .WithScannedImages(Image4)
                 .Build());
-        PdfAsserts.AssertImages($"{FolderPath}/test1.pdf", Image1);
-        PdfAsserts.AssertImages($"{FolderPath}/test2.pdf", Image2, Image3);
-        PdfAsserts.AssertImages($"{FolderPath}/test3.pdf", Image4);
-        Assert.False(File.Exists($"{FolderPath}/test4.pdf"));
+        PdfAsserts.AssertImages(P("test1.pdf"), Image1);
+        PdfAsserts.AssertImages(P("test2.pdf"), Image2, Image3);
+        PdfAsserts.AssertImages(P("test3.pdf"), Image4);
+        Assert.False(File.Exists(P("test4.pdf")));
         AssertRecoveryCleanedUp();
     }
 
@@ -763,14 +763,14 @@ public class CommandLineIntegrationTests : ContextualTests
             new AutomatedScanningOptions
             {
                 SplitPatchT = true,
-                OutputPath = $"{FolderPath}/$(n).pdf",
+                OutputPath = P("$(n).pdf"),
                 Verbose = true
             },
             Image1, Image2, PatchT, Image3, PatchT, PatchT, Image4, PatchT);
-        PdfAsserts.AssertImages($"{FolderPath}/1.pdf", Image1, Image2);
-        PdfAsserts.AssertImages($"{FolderPath}/2.pdf", Image3);
-        PdfAsserts.AssertImages($"{FolderPath}/3.pdf", Image4);
-        Assert.False(File.Exists($"{FolderPath}/4.pdf"));
+        PdfAsserts.AssertImages(P("1.pdf"), Image1, Image2);
+        PdfAsserts.AssertImages(P("2.pdf"), Image3);
+        PdfAsserts.AssertImages(P("3.pdf"), Image4);
+        Assert.False(File.Exists(P("4.pdf")));
         AssertRecoveryCleanedUp();
     }
 
@@ -778,9 +778,9 @@ public class CommandLineIntegrationTests : ContextualTests
     public async Task Rotate90()
     {
         // Test both import and scanning paths
-        var importPath = $"{FolderPath}/import.png";
+        var importPath = P("import.png");
         File.WriteAllBytes(importPath, ImageResources.dog_png);
-        var outputPath = $"{FolderPath}/test.pdf";
+        var outputPath = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -798,9 +798,9 @@ public class CommandLineIntegrationTests : ContextualTests
     public async Task Deskew()
     {
         // Test both import and scanning paths
-        var importPath = $"{FolderPath}/import.jpg";
+        var importPath = P("import.jpg");
         File.WriteAllBytes(importPath, ImageResources.skewed);
-        var outputPath = $"{FolderPath}/test.pdf";
+        var outputPath = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -817,7 +817,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task IgnoreSinglePagePdfSetting()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
             var config = container.Resolve<Naps2Config>();
@@ -836,7 +836,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task ScanToImageFiles()
     {
-        var path = $"{FolderPath}/test$(n).jpg";
+        var path = P("test$(n).jpg");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
@@ -845,10 +845,10 @@ public class CommandLineIntegrationTests : ContextualTests
                 Verbose = true
             },
             new[] { Image1, Image2, Image3 });
-        ImageAsserts.Similar(Image1, ImageContext.Load($"{FolderPath}/test1.jpg"));
-        ImageAsserts.Similar(Image2, ImageContext.Load($"{FolderPath}/test2.jpg"));
-        ImageAsserts.Similar(Image3, ImageContext.Load($"{FolderPath}/test3.jpg"));
-        Assert.False(File.Exists($"{FolderPath}/test4.jpg"));
+        ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
+        ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
+        ImageAsserts.Similar(Image3, ImageContext.Load(P("test3.jpg")));
+        Assert.False(File.Exists(P("test4.jpg")));
         AssertRecoveryCleanedUp();
     }
 
@@ -955,7 +955,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task EmailAndSavePdf()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         var emailProviderFactory = new MockEmailProviderFactory(message =>
         {
             Assert.Single(message.Attachments);
@@ -984,7 +984,7 @@ public class CommandLineIntegrationTests : ContextualTests
     [Fact]
     public async Task EmailAndSaveImageFiles()
     {
-        var path = $"{FolderPath}/test$(n).jpg";
+        var path = P("test$(n).jpg");
         var emailProviderFactory = new MockEmailProviderFactory(message =>
         {
             Assert.Equal(2, message.Attachments.Count);
@@ -1008,16 +1008,16 @@ public class CommandLineIntegrationTests : ContextualTests
 
         emailProviderFactory.CheckAsserts();
         emailProviderFactory.VerifyExactlyOneMessageSent();
-        ImageAsserts.Similar(Image1, ImageContext.Load($"{FolderPath}/test1.jpg"));
-        ImageAsserts.Similar(Image2, ImageContext.Load($"{FolderPath}/test2.jpg"));
-        Assert.False(File.Exists($"{FolderPath}/test3.jpg"));
+        ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
+        ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
+        Assert.False(File.Exists(P("test3.jpg")));
         AssertRecoveryCleanedUp();
     }
 
     [Fact]
     public async Task EmailPdfAndSaveImageFiles()
     {
-        var path = $"{FolderPath}/test$(n).jpg";
+        var path = P("test$(n).jpg");
         var emailProviderFactory = new MockEmailProviderFactory(message =>
         {
             Assert.Single(message.Attachments);
@@ -1039,16 +1039,16 @@ public class CommandLineIntegrationTests : ContextualTests
 
         emailProviderFactory.CheckAsserts();
         emailProviderFactory.VerifyExactlyOneMessageSent();
-        ImageAsserts.Similar(Image1, ImageContext.Load($"{FolderPath}/test1.jpg"));
-        ImageAsserts.Similar(Image2, ImageContext.Load($"{FolderPath}/test2.jpg"));
-        Assert.False(File.Exists($"{FolderPath}/test3.jpg"));
+        ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
+        ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
+        Assert.False(File.Exists(P("test3.jpg")));
         AssertRecoveryCleanedUp();
     }
 
     [Fact]
     public async Task EmailImageFilesAndSavePdf()
     {
-        var path = $"{FolderPath}/test.pdf";
+        var path = P("test.pdf");
         var emailProviderFactory = new MockEmailProviderFactory(message =>
         {
             Assert.Equal(2, message.Attachments.Count);
@@ -1084,7 +1084,7 @@ public class CommandLineIntegrationTests : ContextualTests
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
             {
-                OutputPath = $"{FolderPath}/test.jpg",
+                OutputPath = P("test.jpg"),
                 Verbose = true
             },
             scanDriverFactoryMock);
@@ -1122,7 +1122,7 @@ public class CommandLineIntegrationTests : ContextualTests
             new AutomatedScanningOptions
             {
                 ProfileName = "second_profile",
-                OutputPath = $"{FolderPath}/test.jpg",
+                OutputPath = P("test.jpg"),
                 Verbose = true
             },
             scanDriverFactoryMock);
@@ -1161,7 +1161,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 NoProfile = true,
                 Driver = ScanPerformer.SystemDefaultDriverName,
                 Device = "name1",
-                OutputPath = $"{FolderPath}/test.pdf",
+                OutputPath = P("test.pdf"),
                 Verbose = true
             },
             scanDriverFactoryMock);
@@ -1193,7 +1193,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 PageSize = "a4",
                 Driver = "escl",
                 Device = "name1",
-                OutputPath = $"{FolderPath}/test.jpg",
+                OutputPath = P("test.jpg"),
                 Verbose = true
             },
             scanDriverFactoryMock);
@@ -1222,7 +1222,7 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 Driver = "escl",
                 Device = "test_id2",
-                OutputPath = $"{FolderPath}/test.jpg",
+                OutputPath = P("test.jpg"),
                 Verbose = true
             },
             scanDriverFactoryMock);
@@ -1247,7 +1247,7 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 Driver = "escl",
                 Device = "test_id",
-                OutputPath = $"{FolderPath}/test.jpg",
+                OutputPath = P("test.jpg"),
                 Verbose = true
             },
             scanDriverFactoryMock);
@@ -1299,7 +1299,7 @@ public class CommandLineIntegrationTests : ContextualTests
 
     private void AssertRecoveryCleanedUp()
     {
-        Assert.False(Directory.Exists(Path.Combine(FolderPath, "recovery")));
+        Assert.False(Directory.Exists(P("recovery")));
     }
 
     // TODO: Add tests for all options, as well as key combinations

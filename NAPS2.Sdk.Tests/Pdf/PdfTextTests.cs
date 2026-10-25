@@ -20,8 +20,8 @@ public class PdfTextTests : ContextualTests
     {
         _importer = new PdfImporter(ScanningContext);
         _exporter = new PdfExporter(ScanningContext);
-        _exportPath = Path.Combine(FolderPath, "test.pdf");
-        _pdfiumImportPath = Path.Combine(FolderPath, "import_ocr.pdf");
+        _exportPath = P("test.pdf");
+        _pdfiumImportPath = P("import_ocr.pdf");
         File.WriteAllBytes(_pdfiumImportPath, PdfResources.word_ocr_test);
     }
 

@@ -8,7 +8,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task PdfSharpExport300()
     {
-        var filePath = Path.Combine(FolderPath, "test");
+        var filePath = P("test");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         var pdfExporter = new PdfExporter(ScanningContext);
@@ -21,7 +21,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task PdfSharpExportHuge()
     {
-        var filePath = Path.Combine(FolderPath, "test");
+        var filePath = P("test");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge));
 
         var pdfExporter = new PdfExporter(ScanningContext);
@@ -31,7 +31,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task PdfSharpExportHugePng()
     {
-        var filePath = Path.Combine(FolderPath, "test");
+        var filePath = P("test");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png));
 
         var pdfExporter = new PdfExporter(ScanningContext);
@@ -41,7 +41,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task PdfiumExport300()
     {
-        var filePath = Path.Combine(FolderPath, "test");
+        var filePath = P("test");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
@@ -54,7 +54,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task PdfiumExportHuge()
     {
-        var filePath = Path.Combine(FolderPath, "test");
+        var filePath = P("test");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge));
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);
@@ -64,7 +64,7 @@ public class PdfBenchmarkTests : ContextualTests
     [BenchmarkFact]
     public async Task PdfiumExportHugePng()
     {
-        var filePath = Path.Combine(FolderPath, "test");
+        var filePath = P("test");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_huge_png));
 
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);

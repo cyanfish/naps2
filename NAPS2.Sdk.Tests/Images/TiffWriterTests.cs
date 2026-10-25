@@ -18,7 +18,7 @@ public class TiffWriterTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
     public async Task SaveSinglePageTiffToFile()
     {
-        var path = Path.Combine(FolderPath, "image.tiff");
+        var path = P("image.tiff");
         var original = LoadImage(ImageResources.dog);
 
         _tiffWriter.SaveTiff(new[] { original }, path);
@@ -28,7 +28,7 @@ public class TiffWriterTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
     public async Task SaveMultiPageTiffToFile()
     {
-        var path = Path.Combine(FolderPath, "image.tiff");
+        var path = P("image.tiff");
         var original = new[]
         {
             LoadImage(ImageResources.dog),
@@ -68,7 +68,7 @@ public class TiffWriterTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
     public async Task SaveBlackAndWhiteTiff()
     {
-        var path = Path.Combine(FolderPath, "image.tiff");
+        var path = P("image.tiff");
         var original = LoadImage(ImageResources.dog_bw);
 
         _tiffWriter.SaveTiff(new[] { original }, path);
@@ -78,7 +78,7 @@ public class TiffWriterTests : ContextualTests
     [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
     public async Task SaveColorTiffWithG4()
     {
-        var path = Path.Combine(FolderPath, "image.tiff");
+        var path = P("image.tiff");
         var original = LoadImage(ImageResources.dog_png);
 
         _tiffWriter.SaveTiff(new[] { original }, path, TiffCompressionType.Ccitt4);

@@ -119,7 +119,7 @@ public class LoadSaveTests : ContextualTests
     {
         if (platforms is { DoSkip: true }) return;
 
-        var path = Path.Combine(FolderPath, $"image{ext}");
+        var path = P($"image{ext}");
         var expected = LoadImage(GetResource(compare[0]));
 
         if (!ImageContext.SupportsFormat(format))

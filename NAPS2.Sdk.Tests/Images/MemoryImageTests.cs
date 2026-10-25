@@ -18,7 +18,7 @@ public class MemoryImageTests : ContextualTests
     public void Save()
     {
         var image = LoadImage(ImageResources.dog);
-        var path = Path.Combine(FolderPath, "test.jpg");
+        var path = P("test.jpg");
         
         image.Save(path, ImageFileFormat.Jpeg);
 
@@ -30,8 +30,8 @@ public class MemoryImageTests : ContextualTests
     public void SaveWithQuality()
     {
         var image = LoadImage(ImageResources.dog);
-        var highQualityPath = Path.Combine(FolderPath, "highq.jpg");
-        var lowQualityPath = Path.Combine(FolderPath, "lowq.jpg");
+        var highQualityPath = P("highq.jpg");
+        var lowQualityPath = P("lowq.jpg");
         
         image.Save(highQualityPath, ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = 75 });
         image.Save(lowQualityPath, ImageFileFormat.Jpeg, new ImageSaveOptions { Quality = 25 });
@@ -50,7 +50,7 @@ public class MemoryImageTests : ContextualTests
     public void SaveToStream()
     {
         var image = LoadImage(ImageResources.dog);
-        var path = Path.Combine(FolderPath, "test.jpg");
+        var path = P("test.jpg");
 
         using var stream = new FileStream(path, FileMode.CreateNew);
         image.Save(stream, ImageFileFormat.Jpeg);
@@ -83,7 +83,7 @@ public class MemoryImageTests : ContextualTests
     public void SaveWithUnspecifiedFormatToPng()
     {
         var image = LoadImage(ImageResources.dog);
-        var path = Path.Combine(FolderPath, "test.png");
+        var path = P("test.png");
         
         image.Save(path);
 
@@ -96,7 +96,7 @@ public class MemoryImageTests : ContextualTests
     public void SaveWithUnspecifiedFormatToJpeg()
     {
         var image = LoadImage(ImageResources.dog);
-        var path = Path.Combine(FolderPath, "test.jpg");
+        var path = P("test.jpg");
         
         image.Save(path);
 
@@ -108,7 +108,7 @@ public class MemoryImageTests : ContextualTests
     public void SaveWithUnspecifiedFormatToStream()
     {
         var image = LoadImage(ImageResources.dog);
-        var path = Path.Combine(FolderPath, "test.png");
+        var path = P("test.png");
         
         using var stream = new FileStream(path, FileMode.CreateNew);
         Assert.Throws<ArgumentException>(() => image.Save(stream, ImageFileFormat.Unknown));

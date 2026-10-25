@@ -21,7 +21,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         await _exporter.Export(filePath, [image]);
@@ -36,7 +36,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var fileStream = File.OpenWrite(filePath);
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
@@ -53,7 +53,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "blah", "test.pdf");
+        var filePath = P("blah", "test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         await _exporter.Export(filePath, [image]);
@@ -68,7 +68,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_gray_8bit)
             .PerformTransform(new GrayscaleTransform()));
 
@@ -83,7 +83,7 @@ public class PdfExporterTests : ContextualTests
     {
         SetUpFileStorage();
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         await _exporter.Export(filePath, [image]);
@@ -98,7 +98,7 @@ public class PdfExporterTests : ContextualTests
     {
         SetUpFileStorage();
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         // The image is edited, so it needs to be re-encoded, which should use the quality it was stored with
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog), false, 50)
             .WithTransform(new RotationTransform(90), true);
@@ -120,7 +120,7 @@ public class PdfExporterTests : ContextualTests
     {
         SetUpFileStorage();
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         // Without the FileFormatTransform, the JPEG file would be copied directly and the new quality ignored
         using var jpegImage = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         using var image = jpegImage.WithMetadata(jpegImage.Metadata with { Quality = 50 })
@@ -141,7 +141,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_png), lossless: true);
 
         await _exporter.Export(filePath, [image]);
@@ -156,7 +156,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         // Width is 99 (not divisible by 4)
         var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_99w), lossless: true);
 
@@ -172,7 +172,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_alpha));
 
         await _exporter.Export(filePath, [image]);
@@ -188,7 +188,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_mask));
 
         await _exporter.Export(filePath, [image]);
@@ -204,7 +204,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var storageImage = LoadImage(ImageResources.dog_bw);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
@@ -220,7 +220,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var storageImage = LoadImage(ImageResources.dog_bw);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
@@ -239,7 +239,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var storageImage = LoadImage(ImageResources.bw_alternating);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
@@ -260,7 +260,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var storageImage = LoadImage(ImageResources.dog_clustered_gray);
         using var image = ScanningContext.CreateProcessedImage(storageImage);
 
@@ -276,7 +276,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog_bw_24bit),
             true, -1, null);
 
@@ -292,7 +292,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
@@ -314,7 +314,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
@@ -336,7 +336,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "מְחַבֵּר.pdf");
+        var filePath = P("מְחַבֵּר.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         await _exporter.Export(filePath, [image]);
@@ -350,7 +350,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
 
         await _exporter.Export(filePath, [image], new PdfExportParams
@@ -372,7 +372,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
@@ -403,7 +403,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
         var metadata = new PdfMetadata
         {
@@ -437,7 +437,7 @@ public class PdfExporterTests : ContextualTests
 
         var progressMock = Substitute.For<ProgressCallback>();
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var images = new[] { CreateScannedImage(), CreateScannedImage(), CreateScannedImage() };
         var result = await _exporter.Export(filePath, images, ocrParams: config.OcrParams,
             progress: progressMock);
@@ -466,7 +466,7 @@ public class PdfExporterTests : ContextualTests
             if (current == 1) cts.Cancel();
         }
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var images = new[] { CreateScannedImage(), CreateScannedImage(), CreateScannedImage() };
         var result = await _exporter.Export(filePath, images, ocrParams: config.OcrParams,
             progress: new ProgressHandler(Progress, cts.Token));
@@ -483,7 +483,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var sourceImage = ImageContext.Create(850, 1100, ImagePixelFormat.RGB24);
         sourceImage.SetResolution(99.4f, 99.4f);
         using var image = ScanningContext.CreateProcessedImage(sourceImage, false, -1, PageSize.Letter);
@@ -500,7 +500,7 @@ public class PdfExporterTests : ContextualTests
     {
         storageConfig.Apply(this);
 
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         var sourceImage = ImageContext.Create(850, 1100, ImagePixelFormat.RGB24);
         sourceImage.SetResolution(98, 98);
         using var image = ScanningContext.CreateProcessedImage(sourceImage, false, -1, PageSize.Letter);

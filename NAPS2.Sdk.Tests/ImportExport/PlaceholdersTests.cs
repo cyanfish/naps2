@@ -30,8 +30,8 @@ public class PlaceholdersTests : ContextualTests
     [Fact]
     public void DateInDirectory()
     {
-        var path = Path.Combine(FolderPath, "$(YYYY)", "$(MM)", "scan.pdf");
-        Assert.Equal(Path.Combine(FolderPath, "2024", "03", "scan.pdf"), _placeholders.Substitute(path));
+        var path = P("$(YYYY)", "$(MM)", "scan.pdf");
+        Assert.Equal(P("2024", "03", "scan.pdf"), _placeholders.Substitute(path));
     }
 
     [Fact]
@@ -65,93 +65,93 @@ public class PlaceholdersTests : ContextualTests
     [InlineData("$(nnnn)", "scan0001.pdf")]
     public void NumberPlaceholder(string placeholder, string expected)
     {
-        var path = Path.Combine(FolderPath, $"scan{placeholder}.pdf");
-        Assert.Equal(Path.Combine(FolderPath, expected), _placeholders.Substitute(path));
+        var path = P($"scan{placeholder}.pdf");
+        Assert.Equal(P(expected), _placeholders.Substitute(path));
     }
 
     [Fact]
     public void NumberPlaceholder_IncrementsPastExistingFiles()
     {
-        File.WriteAllText(Path.Combine(FolderPath, "scan001.pdf"), "");
-        File.WriteAllText(Path.Combine(FolderPath, "scan002.pdf"), "");
-        File.WriteAllText(Path.Combine(FolderPath, "scan004.pdf"), "");
+        File.WriteAllText(P("scan001.pdf"), "");
+        File.WriteAllText(P("scan002.pdf"), "");
+        File.WriteAllText(P("scan004.pdf"), "");
 
-        var path = Path.Combine(FolderPath, "scan$(nnn).pdf");
-        Assert.Equal(Path.Combine(FolderPath, "scan003.pdf"), _placeholders.Substitute(path));
+        var path = P("scan$(nnn).pdf");
+        Assert.Equal(P("scan003.pdf"), _placeholders.Substitute(path));
     }
 
     [Fact]
     public void NumberPlaceholder_IncrementsEvenIfIncrementIfExistsIsFalse()
     {
-        File.WriteAllText(Path.Combine(FolderPath, "scan001.pdf"), "");
+        File.WriteAllText(P("scan001.pdf"), "");
 
         // incrementIfExists only applies when there isn't a numeric placeholder
-        var path = Path.Combine(FolderPath, "scan$(nnn).pdf");
-        Assert.Equal(Path.Combine(FolderPath, "scan002.pdf"),
+        var path = P("scan$(nnn).pdf");
+        Assert.Equal(P("scan002.pdf"),
             _placeholders.Substitute(path, incrementIfExists: false));
     }
 
     [Fact]
     public void NumberPlaceholder_NumberSkip()
     {
-        var path = Path.Combine(FolderPath, "scan$(nnn).pdf");
-        Assert.Equal(Path.Combine(FolderPath, "scan005.pdf"), _placeholders.Substitute(path, numberSkip: 4));
+        var path = P("scan$(nnn).pdf");
+        Assert.Equal(P("scan005.pdf"), _placeholders.Substitute(path, numberSkip: 4));
     }
 
     [Fact]
     public void NumberPlaceholder_ExceedsDigits()
     {
-        var path = Path.Combine(FolderPath, "scan$(n).pdf");
-        Assert.Equal(Path.Combine(FolderPath, "scan10.pdf"), _placeholders.Substitute(path, numberSkip: 9));
+        var path = P("scan$(n).pdf");
+        Assert.Equal(P("scan10.pdf"), _placeholders.Substitute(path, numberSkip: 9));
     }
 
     [Fact]
     public void NumberPlaceholder_IgnoresAutoNumberDigits()
     {
-        var path = Path.Combine(FolderPath, "scan$(n).pdf");
-        Assert.Equal(Path.Combine(FolderPath, "scan1.pdf"), _placeholders.Substitute(path, autoNumberDigits: 3));
+        var path = P("scan$(n).pdf");
+        Assert.Equal(P("scan1.pdf"), _placeholders.Substitute(path, autoNumberDigits: 3));
     }
 
     [Fact]
     public void NumberPlaceholder_WithDate()
     {
-        var path = Path.Combine(FolderPath, "$(YYYY)-$(MM)-$(DD)_$(nn).pdf");
-        Assert.Equal(Path.Combine(FolderPath, "2024-03-07_01.pdf"), _placeholders.Substitute(path));
+        var path = P("$(YYYY)-$(MM)-$(DD)_$(nn).pdf");
+        Assert.Equal(P("2024-03-07_01.pdf"), _placeholders.Substitute(path));
     }
 
     [Fact]
     public void AutoNumber()
     {
-        var path = Path.Combine(FolderPath, "scan.pdf");
-        Assert.Equal(Path.Combine(FolderPath, "scan.001.pdf"), _placeholders.Substitute(path, autoNumberDigits: 3));
-        Assert.Equal(Path.Combine(FolderPath, "scan.3.pdf"),
+        var path = P("scan.pdf");
+        Assert.Equal(P("scan.001.pdf"), _placeholders.Substitute(path, autoNumberDigits: 3));
+        Assert.Equal(P("scan.3.pdf"),
             _placeholders.Substitute(path, numberSkip: 2, autoNumberDigits: 1));
     }
 
     [Fact]
     public void AutoNumber_IncrementsPastExistingFiles()
     {
-        File.WriteAllText(Path.Combine(FolderPath, "scan.1.pdf"), "");
+        File.WriteAllText(P("scan.1.pdf"), "");
 
-        var path = Path.Combine(FolderPath, "scan.pdf");
-        Assert.Equal(Path.Combine(FolderPath, "scan.2.pdf"), _placeholders.Substitute(path, autoNumberDigits: 1));
-        Assert.Equal(Path.Combine(FolderPath, "scan.1.pdf"),
+        var path = P("scan.pdf");
+        Assert.Equal(P("scan.2.pdf"), _placeholders.Substitute(path, autoNumberDigits: 1));
+        Assert.Equal(P("scan.1.pdf"),
             _placeholders.Substitute(path, incrementIfExists: false, autoNumberDigits: 1));
     }
 
     [Fact]
     public void AutoNumber_NoExtension()
     {
-        var path = Path.Combine(FolderPath, "scan");
-        Assert.Equal(Path.Combine(FolderPath, "scan.01"), _placeholders.Substitute(path, autoNumberDigits: 2));
+        var path = P("scan");
+        Assert.Equal(P("scan.01"), _placeholders.Substitute(path, autoNumberDigits: 2));
     }
 
     [Fact]
     public void NoNumber_WithoutPlaceholderOrAutoNumber()
     {
-        File.WriteAllText(Path.Combine(FolderPath, "scan.pdf"), "");
+        File.WriteAllText(P("scan.pdf"), "");
 
-        var path = Path.Combine(FolderPath, "scan.pdf");
+        var path = P("scan.pdf");
         Assert.Equal(path, _placeholders.Substitute(path));
     }
 

@@ -12,8 +12,8 @@ public class ProfileManagerTests : ContextualTests
 
     public ProfileManagerTests()
     {
-        _userPath = Path.Combine(FolderPath, Path.GetRandomFileName());
-        _systemPath = Path.Combine(FolderPath, Path.GetRandomFileName());
+        _userPath = P(Path.GetRandomFileName());
+        _systemPath = P(Path.GetRandomFileName());
         _profileManager = new ProfileManager(_userPath, _systemPath, false, false, false);
     }
 

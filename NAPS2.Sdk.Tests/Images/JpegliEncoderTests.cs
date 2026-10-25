@@ -44,7 +44,7 @@ public class JpegliEncoderTests : ContextualTests
     public void SaveToFile(string resourceName)
     {
         using var image = LoadTestImage(resourceName);
-        var path = Path.Combine(FolderPath, "test.jpg");
+        var path = P("test.jpg");
 
         image.Save(path, options: new ImageSaveOptions { Quality = 90 });
 
@@ -107,7 +107,7 @@ public class JpegliEncoderTests : ContextualTests
         try
         {
             using var image = LoadImage(ImageResources.dog);
-            var path = Path.Combine(FolderPath, "test.jpg");
+            var path = P("test.jpg");
 
             image.Save(path);
 

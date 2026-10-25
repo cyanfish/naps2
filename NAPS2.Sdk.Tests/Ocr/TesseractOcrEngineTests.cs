@@ -90,9 +90,9 @@ public class TesseractOcrEngineTests : ContextualTests
     [Fact]
     public async Task Mode()
     {
-        CopyResourceToFile(BinaryResources.eng_traineddata, Path.Combine(FolderPath, "best"), "eng.traineddata");
+        CopyResourceToFile(BinaryResources.eng_traineddata, P("best"), "eng.traineddata");
         // Bad data for unused mode
-        CopyResourceToFile(BinaryResources.heb_traineddata, Path.Combine(FolderPath, "fast"), "eng.traineddata");
+        CopyResourceToFile(BinaryResources.heb_traineddata, P("fast"), "eng.traineddata");
 
         var mode = OcrMode.Best;
         var result = await _engine.ProcessImage(ScanningContext, _testImagePath, new OcrParams("eng", mode, 0), CancellationToken.None);

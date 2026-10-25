@@ -47,7 +47,7 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).jpg")
+            FilePath = P("test$(n).jpg")
         };
         var scanned = CreateScannedImages().ToAsyncEnumerable();
 
@@ -62,7 +62,7 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).pdf")
+            FilePath = P("test$(n).pdf")
         };
 
         var scanned = CreateScannedImages(ImageResources.dog);
@@ -72,7 +72,7 @@ public class AutoSaverTests : ContextualTests
         Assert.False(IsDisposed(output[0]));
         Assert.True(IsDisposed(scanned[0]));
         Assert.Single(Folder.GetFiles());
-        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test1.pdf"), ImageResources.dog);
     }
 
     [Fact]
@@ -80,7 +80,7 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).jpg")
+            FilePath = P("test$(n).jpg")
         };
 
         var scanned = CreateScannedImages(ImageResources.dog);
@@ -90,7 +90,7 @@ public class AutoSaverTests : ContextualTests
         Assert.False(IsDisposed(output[0]));
         Assert.True(IsDisposed(scanned[0]));
         Assert.Single(Folder.GetFiles());
-        ImageAsserts.Similar(ImageResources.dog, Path.Combine(FolderPath, "test1.jpg"));
+        ImageAsserts.Similar(ImageResources.dog, P("test1.jpg"));
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).pdf"),
+            FilePath = P("test$(n).pdf"),
             Separator = SaveSeparator.FilePerScan
         };
         var scanned = CreateScannedImages(
@@ -109,7 +109,7 @@ public class AutoSaverTests : ContextualTests
 
         Assert.Equal(2, (await output.ToListAsync()).Count);
         Assert.Single(Folder.GetFiles());
-        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test1.pdf"),
+        PdfAsserts.AssertImages(P("test1.pdf"),
             ImageResources.dog, ImageResources.dog_gray);
     }
 
@@ -119,7 +119,7 @@ public class AutoSaverTests : ContextualTests
     // {
     //     var settings = new AutoSaveSettings
     //     {
-    //         FilePath = Path.Combine(FolderPath, "test$(n).jpg"),
+    //         FilePath = P("test$(n).jpg"),
     //         Separator = SaveSeparator.FilePerScan
     //     };
     //     var scanned = CreateScannedImages(
@@ -131,8 +131,8 @@ public class AutoSaverTests : ContextualTests
     //     // Jpeg can't store multiple pages so we split anyway
     //     Assert.Equal(2, (await output.ToListAsync()).Count);
     //     Assert.Equal(2, Folder.GetFiles().Length);
-    //     ImageAsserts.Similar(ImageResources.dog, Path.Combine(FolderPath, "test1.jpg"));
-    //     ImageAsserts.Similar(ImageResources.dog_gray, Path.Combine(FolderPath, "test2.jpg"));
+    //     ImageAsserts.Similar(ImageResources.dog, P("test1.jpg"));
+    //     ImageAsserts.Similar(ImageResources.dog_gray, P("test2.jpg"));
     // }
 
     [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
@@ -140,7 +140,7 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).tiff"),
+            FilePath = P("test$(n).tiff"),
             Separator = SaveSeparator.FilePerScan
         };
         var scanned = CreateScannedImages(
@@ -151,7 +151,7 @@ public class AutoSaverTests : ContextualTests
 
         Assert.Equal(2, (await output.ToListAsync()).Count);
         Assert.Single(Folder.GetFiles());
-        var frames = await ImageContext.LoadFrames(Path.Combine(FolderPath, "test1.tiff")).ToListAsync();
+        var frames = await ImageContext.LoadFrames(P("test1.tiff")).ToListAsync();
         Assert.Equal(2, frames.Count);
         ImageAsserts.Similar(ImageResources.dog, frames[0], ignoreResolution: true);
         ImageAsserts.Similar(ImageResources.dog_gray, frames[1], ignoreResolution: true);
@@ -162,7 +162,7 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).pdf"),
+            FilePath = P("test$(n).pdf"),
             Separator = SaveSeparator.FilePerPage
         };
 
@@ -172,8 +172,8 @@ public class AutoSaverTests : ContextualTests
         var output = _autoSaver.Save(settings, scanned);
         Assert.Equal(2, (await output.ToListAsync()).Count);
         Assert.Equal(2, Folder.GetFiles().Length);
-        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test1.pdf"), ImageResources.dog);
-        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test2.pdf"), ImageResources.dog_gray);
+        PdfAsserts.AssertImages(P("test1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test2.pdf"), ImageResources.dog_gray);
     }
 
     [Fact]
@@ -181,7 +181,7 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).pdf"),
+            FilePath = P("test$(n).pdf"),
             Separator = SaveSeparator.PatchT
         };
         var scanned = CreateScannedImages(
@@ -196,8 +196,8 @@ public class AutoSaverTests : ContextualTests
         var output = _autoSaver.Save(settings, scanned.ToAsyncEnumerable());
         Assert.Equal(4, (await output.ToListAsync()).Count);
         Assert.Equal(2, Folder.GetFiles().Length);
-        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test1.pdf"), ImageResources.dog, ImageResources.dog_gray);
-        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test2.pdf"), ImageResources.dog_h_n300);
+        PdfAsserts.AssertImages(P("test1.pdf"), ImageResources.dog, ImageResources.dog_gray);
+        PdfAsserts.AssertImages(P("test2.pdf"), ImageResources.dog_h_n300);
     }
 
     [Fact]
@@ -205,12 +205,12 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test_a_$(n).pdf"),
+            FilePath = P("test_a_$(n).pdf"),
             PromptForFilePath = true
         };
         _dialogHelper.PromptToSavePdfOrImage(Arg.Any<string>(), out Arg.Any<string>()).Returns(x =>
         {
-            x[1] = Path.Combine(FolderPath, "test_b_$(n).pdf");
+            x[1] = P("test_b_$(n).pdf");
             return true;
         });
 
@@ -221,7 +221,7 @@ public class AutoSaverTests : ContextualTests
         Assert.False(IsDisposed(output[0]));
         Assert.True(IsDisposed(scanned[0]));
         Assert.Single(Folder.GetFiles());
-        PdfAsserts.AssertImages(Path.Combine(FolderPath, "test_b_1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test_b_1.pdf"), ImageResources.dog);
     }
 
     [Fact]
@@ -229,12 +229,12 @@ public class AutoSaverTests : ContextualTests
     {
         var settings = new AutoSaveSettings
         {
-            FilePath = Path.Combine(FolderPath, "test$(n).pdf"),
+            FilePath = P("test$(n).pdf"),
             PromptForFilePath = true
         };
         _dialogHelper.PromptToSavePdfOrImage(Arg.Any<string>(), out Arg.Any<string>()).Returns(x =>
         {
-            x[1] = Path.Combine(FolderPath, "test$(n).pdf");
+            x[1] = P("test$(n).pdf");
             return false;
         });
 
@@ -258,7 +258,7 @@ public class AutoSaverTests : ContextualTests
     //
     //     var scanProfile = Profile(new AutoSaveSettings
     //     {
-    //         FilePath = Path.Combine(FolderPath, "test$(n).pdf"),
+    //         FilePath = P("test$(n).pdf"),
     //         Separator = SaveSeparator.FilePerPage
     //     });
     //     var scanParams = new ScanParams();
@@ -280,7 +280,7 @@ public class AutoSaverTests : ContextualTests
     //
     //     var scanProfile = Profile(new AutoSaveSettings
     //     {
-    //         FilePath = Path.Combine(FolderPath, "test$(n).jpg")
+    //         FilePath = P("test$(n).jpg")
     //     });
     //     var scanParams = new ScanParams();
     //     var scannedImages = await driver.Scan(scanProfile, scanParams).ToList();
@@ -299,7 +299,7 @@ public class AutoSaverTests : ContextualTests
     //
     //     var scanProfile = Profile(new AutoSaveSettings
     //     {
-    //         FilePath = Path.Combine(FolderPath, "test$(n).jpg"),
+    //         FilePath = P("test$(n).jpg"),
     //         ClearImagesAfterSaving = true
     //     });
     //     var scanParams = new ScanParams();
