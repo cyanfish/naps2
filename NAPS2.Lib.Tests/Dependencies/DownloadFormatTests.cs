@@ -9,7 +9,7 @@ public class DownloadFormatTests : ContextualTests
     [Fact]
     public void Gzip()
     {
-        var path = Path.Combine(FolderPath, "f.gz");
+        var path = P("f.gz");
 
         string extractedPath;
         using (MemoryStream stream = new(BinaryResources.stock_dog_jpeg))
@@ -24,7 +24,7 @@ public class DownloadFormatTests : ContextualTests
     [Fact]
     public void Zip()
     {
-        var path = Path.Combine(FolderPath, "f.zip");
+        var path = P("f.zip");
 
         string extractedPath;
         using (MemoryStream stream = new(BinaryResources.animals))

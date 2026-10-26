@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>フィーダーが空です。</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>'{0}'からのコピーは許可されていません.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>このスキャナでは両面スキャンできません。スキャナーに両面機能が備わっている場合は、別のドライバーを試してみてください。</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>スキャナーが準備をしています。</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANEドライバは利用不可能です。必要なパッケージをインストールしてください：</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCRエンジンを利用できません。言語パッケージをインストールしてください：</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>選択したドライバはこのシステムではサポートされていません。</value>

@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -16,17 +17,21 @@ public class WpfToolbarFormatter
     // Progressively more compact toolbar layouts, used when the toolbar doesn't fit in the window
     private static readonly ToolbarDensity[] Densities =
     [
-        new(ButtonPadding: 10, ContentMinWidth: 56, ArrowWidth: 22, StackedPadding: 8),
-        new(ButtonPadding: 8, ContentMinWidth: 52, ArrowWidth: 21, StackedPadding: 7),
-        new(ButtonPadding: 7, ContentMinWidth: 48, ArrowWidth: 21, StackedPadding: 6),
-        new(ButtonPadding: 5, ContentMinWidth: 44, ArrowWidth: 20, StackedPadding: 5),
-        new(ButtonPadding: 4, ContentMinWidth: 40, ArrowWidth: 19, StackedPadding: 4)
+        new(ButtonPadding: 10, ContentMinWidth: 56, ArrowWidth: 22, StackedPadding: 8, VerticalPadding: 6),
+        new(ButtonPadding: 8, ContentMinWidth: 52, ArrowWidth: 21, StackedPadding: 7, VerticalPadding: 4),
+        new(ButtonPadding: 7, ContentMinWidth: 48, ArrowWidth: 21, StackedPadding: 6, VerticalPadding: 2),
+        new(ButtonPadding: 5, ContentMinWidth: 44, ArrowWidth: 20, StackedPadding: 5, VerticalPadding: 1),
+        new(ButtonPadding: 4, ContentMinWidth: 40, ArrowWidth: 19, StackedPadding: 4, VerticalPadding: 0)
     ];
+
+    // The padding that isn't compacted, i.e. horizontal padding for a vertical toolbar and vice versa
+    private const int FIXED_PADDING = 4;
 
     private readonly List<(Button button, FrameworkElement content, bool isSplit)> _largeButtons = [];
     private readonly List<Button> _arrowButtons = [];
     private readonly List<Button> _stackedButtons = [];
     private int _density = -1;
+    private bool _vertical;
 
     /// <summary>
     /// Creates the content for a toolbar button: a large icon with text below, or a small icon with text to the right.
@@ -62,7 +67,12 @@ public class WpfToolbarFormatter
     /// </summary>
     public Button CreateLargeButton(FrameworkElement content, bool isSplit = false)
     {
-        var button = StyleButton(new Button { Content = content });
+        var button = StyleButton(new Button
+        {
+            Content = content,
+            // Centers the content when the button is stretched in a vertical toolbar
+            HorizontalContentAlignment = HorizontalAlignment.Center
+        });
         _largeButtons.Add((button, content, isSplit));
         return button;
     }
@@ -88,12 +98,16 @@ public class WpfToolbarFormatter
 
     public Button CreateStackedButton(FrameworkElement content)
     {
+        var contentGrid = new Grid
+        {
+            ColumnDefinitions = { new ColumnDefinition { Width = GridLength.Auto, SharedSizeGroup = "StackedContent" } },
+            Children = { content }
+        };
         var button = StyleButton(new Button
         {
-            Content = content,
-            // Stretch so both buttons have the same width and their icons line up
+            Content = contentGrid,
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            HorizontalContentAlignment = HorizontalAlignment.Left
+            HorizontalContentAlignment = HorizontalAlignment.Center
         });
         _stackedButtons.Add(button);
         return button;
@@ -117,6 +131,13 @@ public class WpfToolbarFormatter
     public void RelayoutToolbar(ToolBar toolBar)
     {
         if (!toolBar.IsLoaded) return;
+        bool vertical = toolBar.Orientation == Orientation.Vertical;
+        if (vertical != _vertical)
+        {
+            _vertical = vertical;
+            _density = -1;
+            PlaceOverflowButton(toolBar);
+        }
         for (int i = 0; i < Densities.Length; i++)
         {
             ApplyDensity(i);
@@ -130,9 +151,16 @@ public class WpfToolbarFormatter
         if (density == _density) return;
         _density = density;
         var d = Densities[density];
+        // Only compact along the toolbar's orientation, as that's where it might not fit
+        int h = _vertical ? FIXED_PADDING : d.ButtonPadding;
+        int v = _vertical ? d.VerticalPadding : FIXED_PADDING;
         foreach (var (button, content, isSplit) in _largeButtons)
         {
-            button.Padding = new Thickness(d.ButtonPadding, 4, isSplit ? 2 : d.ButtonPadding, 4);
+            // In a vertical toolbar, split buttons get extra left padding to balance the arrow, so their content is
+            // centered in the toolbar like other buttons
+            button.Padding = isSplit
+                ? new Thickness(_vertical ? d.ArrowWidth + 2 : h, v, 2, v)
+                : new Thickness(h, v, h, v);
             content.MinWidth = d.ContentMinWidth;
         }
         foreach (var arrow in _arrowButtons)
@@ -141,7 +169,25 @@ public class WpfToolbarFormatter
         }
         foreach (var button in _stackedButtons)
         {
-            button.Padding = new Thickness(d.StackedPadding, 4, d.StackedPadding, 4);
+            button.Padding = _vertical
+                ? new Thickness(FIXED_PADDING * 2, FIXED_PADDING, FIXED_PADDING * 2, FIXED_PADDING)
+                : new Thickness(d.StackedPadding, FIXED_PADDING, d.StackedPadding, FIXED_PADDING);
+        }
+    }
+
+    private void PlaceOverflowButton(ToolBar toolBar)
+    {
+        var overflowButton = toolBar.FindDescendant<ToggleButton>(x => x.TemplatedParent == toolBar);
+        if (overflowButton != null)
+        {
+            DockPanel.SetDock(overflowButton, _vertical ? Dock.Bottom : Dock.Right);
+            if (overflowButton.FindDescendant<TextBlock>(x => x.TemplatedParent == overflowButton) is { } arrow)
+            {
+                if (_vertical)
+                    arrow.HorizontalAlignment = HorizontalAlignment.Center;
+                else
+                    arrow.ClearValue(FrameworkElement.HorizontalAlignmentProperty);
+            }
         }
     }
 
@@ -161,5 +207,6 @@ public class WpfToolbarFormatter
         return button;
     }
 
-    private record ToolbarDensity(int ButtonPadding, int ContentMinWidth, int ArrowWidth, int StackedPadding);
+    private record ToolbarDensity(
+        int ButtonPadding, int ContentMinWidth, int ArrowWidth, int StackedPadding, int VerticalPadding);
 }

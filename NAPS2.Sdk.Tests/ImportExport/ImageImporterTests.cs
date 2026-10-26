@@ -30,7 +30,7 @@ public class ImageImporterTests : ContextualTests
         Assert.Single(result);
         var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
         Assert.True(File.Exists(storage.FullPath));
-        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
+        Assert.Equal(P("recovery"), Path.GetDirectoryName(storage.FullPath));
         Assert.True(result[0].Metadata.Lossless);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
         Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
@@ -51,7 +51,7 @@ public class ImageImporterTests : ContextualTests
         Assert.Single(result);
         var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
         Assert.True(File.Exists(storage.FullPath));
-        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
+        Assert.Equal(P("recovery"), Path.GetDirectoryName(storage.FullPath));
         Assert.False(result[0].Metadata.Lossless);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
         Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
@@ -77,7 +77,7 @@ public class ImageImporterTests : ContextualTests
         Assert.Single(result);
         var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
         Assert.True(File.Exists(storage.FullPath));
-        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
+        Assert.Equal(P("recovery"), Path.GetDirectoryName(storage.FullPath));
         Assert.True(result[0].Metadata.Lossless);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
         Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
@@ -98,7 +98,7 @@ public class ImageImporterTests : ContextualTests
         Assert.Single(result);
         var storage = Assert.IsType<ImageFileStorage>(result[0].Storage);
         Assert.True(File.Exists(storage.FullPath));
-        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(storage.FullPath));
+        Assert.Equal(P("recovery"), Path.GetDirectoryName(storage.FullPath));
         Assert.False(result[0].Metadata.Lossless);
         Assert.Null(result[0].PostProcessingData.Thumbnail);
         Assert.False(result[0].PostProcessingData.Barcode.IsDetectionAttempted);
@@ -225,7 +225,7 @@ public class ImageImporterTests : ContextualTests
         var fileStorage = Assert.IsType<ImageFileStorage>(storage);
         Assert.EndsWith(expectedFileName, fileStorage.FullPath);
         Assert.True(File.Exists(fileStorage.FullPath));
-        Assert.Equal(Path.Combine(FolderPath, "recovery"), Path.GetDirectoryName(fileStorage.FullPath));
+        Assert.Equal(P("recovery"), Path.GetDirectoryName(fileStorage.FullPath));
     }
 
     private void AssertRecoveryStorageCleanedUp(IImageStorage storage)
@@ -237,7 +237,7 @@ public class ImageImporterTests : ContextualTests
     [Fact]
     public async Task ImportMissingFile()
     {
-        var filePath = Path.Combine(FolderPath, "missing.png");
+        var filePath = P("missing.png");
         var source = _imageImporter.Import(filePath, new ImportParams());
 
         var ex = await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToListAsync());

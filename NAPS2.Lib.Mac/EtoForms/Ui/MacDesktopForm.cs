@@ -34,10 +34,12 @@ public class MacDesktopForm : DesktopForm
         IDesktopSubFormController desktopSubFormController,
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
-        IIconProvider iconProvider)
+        IIconProvider iconProvider,
+        EditWithController editWithController)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
-            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider)
+            imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider,
+            editWithController)
     {
         _sidebar = sidebar;
     }
@@ -55,9 +57,15 @@ public class MacDesktopForm : DesktopForm
             LayoutController.Invalidated += (_, _) => _sidebarLayout.Invalidate();
         }
         _sidebarLayout.Content = _sidebar.CreateView(this, true);
-        FormStateController.DefaultClientSize -= new Size(Config.Get(c => c.SidebarWidth), 0);
+        if (_sidebar.IsVisible)
+        {
+            // The native sidebar is outside the layout, so it's added to the window size separately
+            FormStateController.DefaultClientSize -= new Size(SidebarWidth, 0);
+        }
         return mainContent;
     }
+
+    private int SidebarWidth => Math.Max(Config.Get(c => c.SidebarWidth), Sidebar.MIN_SIDEBAR_WIDTH);
 
     protected override void OnLoadComplete(EventArgs e)
     {
@@ -67,13 +75,20 @@ public class MacDesktopForm : DesktopForm
             EtoPlatform.Current.AttachWindowSidebar(this, _sidebarLayout.Container,
                 new WindowSidebarOptions
                 {
-                    Width = Math.Max(Config.Get(c => c.SidebarWidth), 200),
-                    MinWidth = 200,
-                    MaxWidth = 400,
+                    Width = SidebarWidth,
+                    MinWidth = Sidebar.MIN_SIDEBAR_WIDTH,
+                    MinContentWidth = Sidebar.MIN_CONTENT_WIDTH,
                     CanHide = true,
                     Visible = _sidebar.IsVisible,
                     ContentUnderTitleBar = true,
-                    WidthChanged = width => Config.User.Set(c => c.SidebarWidth, width)
+                    WidthChanged = width => Config.User.Set(c => c.SidebarWidth, width),
+                    VisibleChanged = visible =>
+                    {
+                        if (visible != _sidebar.IsVisible)
+                        {
+                            base.ToggleSidebar();
+                        }
+                    }
                 });
         }
     }

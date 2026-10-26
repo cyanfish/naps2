@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Da li ste sigurni da želite da obrišete sledeći broj datoteka: {0}?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Da li ste sigurni da želite da obrišete {0} profila?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Da li ste sigurni da želite da obrišete profil {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Bitmap datoteka (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Poboljšani Windows MetaFile (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Razmenjiva slika (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF datoteka (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG datoteka (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Došlo je do greške u pokušaju slanja mejla..</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Instalacija završena</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Instalacija uspešna. Da li želite restart aplikacije?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Instalacija nije uspela.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Instalacija nije uspela</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Sve ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Datoteka '{0}' nije mogla biti uvezena.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Datoteka '{0}' nije mogla biti uvezena. Samo PDF datoteke generisane od strane ove aplikacije mogu biti uvezene.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Greška u preuzimanju</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Radnja u toku</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skeniranje strane {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Odabrani skener ne podržava korišćenje uvlakača. Ako vaš skener nema uvlakač, pokušajte da instalirate drugi drajver.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Nema listova u uvlakaču.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Nije vam dopušteno da kopirate sadržaj datoteke '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Došlo je do greške u pokušaju snimanja datoteke.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>od {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Došlo je do nepoznate greške prilikom serijskog skeniranja.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skener se zagrejava.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Dostupno je ažuriranje za OCR..</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Slika je sačuvana.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Napredak poravnanja</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Potrebno preuzimanje</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Potrebna je dodatna komponenta za uvoz ovog PDF fajla. Da li želite da je sada preuzmete?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Da li ste sigurni da želite otkazati kolektivno skeniranje?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Sviđa Vam se NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE upravljački program nije dostupan. Proverite jeste li instalirali potrebne pakete:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR program nije dostupan. Proverite jeste li instalirali potrebni paket:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Izabrani upravljački program nije podržan na ovom sistemu.</value>

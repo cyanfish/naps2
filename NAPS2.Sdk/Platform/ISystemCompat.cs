@@ -17,6 +17,8 @@ internal interface ISystemCompat
     bool SupportsShowPageNumbers { get; }
     
     bool SupportsProfilesToolbar { get; }
+
+    bool SupportsToolbarCustomization { get; }
     
     bool SupportsButtonActions { get; }
 

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Threading;
 using System.Windows.Automation;
 using System.Windows.Input;
@@ -24,7 +25,9 @@ namespace NAPS2.EtoForms.Wpf;
 public class WpfEtoPlatform : EtoPlatform
 {
     private const int SMALL_BUTTON_PADDING = 7;
+    private const int SMALL_TOOLBAR_BUTTON_PADDING = 4;
     private const double ZOOM_BUTTON_OPACITY = 0.85;
+    private const double NARROW_TEXT_BOX_WIDTH = 100;
 
     private static readonly Size MinImageButtonSize = new(75, 32);
 
@@ -40,10 +43,34 @@ public class WpfEtoPlatform : EtoPlatform
         // the Fluent theme before any windows are created.
         _ = new SW.Application { ShutdownMode = SW.ShutdownMode.OnExplicitShutdown };
         var application = new Application(Eto.Platforms.Wpf);
+        // Drawables paint their own content (e.g. the preview image), which a right-to-left window would mirror
+        Eto.Style.Add<Eto.Wpf.Forms.Controls.DrawableHandler>(null,
+            handler => handler.Control.FlowDirection = SW.FlowDirection.LeftToRight);
         SynchronizationContext.SetSynchronizationContext(
             new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
         SetSystemTheme();
+        HideClearButtonInNarrowTextBoxes();
         return application;
+    }
+
+    private static void HideClearButtonInNarrowTextBoxes()
+    {
+        // The Fluent clear button covers too much of the text in narrow text boxes (e.g. for numbers). A local value
+        // takes precedence over the template triggers that show it.
+        SW.EventManager.RegisterClassHandler(typeof(SWC.TextBox), SW.FrameworkElement.SizeChangedEvent,
+            new SW.SizeChangedEventHandler((sender, _) =>
+            {
+                var textBox = (SWC.TextBox) sender;
+                if (textBox.Template?.FindName("DeleteButton", textBox) is not SW.UIElement deleteButton) return;
+                if (textBox.ActualWidth < NARROW_TEXT_BOX_WIDTH)
+                {
+                    deleteButton.Visibility = SW.Visibility.Collapsed;
+                }
+                else
+                {
+                    deleteButton.ClearValue(SW.UIElement.VisibilityProperty);
+                }
+            }));
     }
 
     public override void SetSystemTheme()
@@ -290,6 +317,26 @@ public class WpfEtoPlatform : EtoPlatform
             .SpacingBefore(bold ? GROUP_BOX_BOLD_HEADER_SPACING : 0);
     }
 
+    public override void ConfigureSmallToolBar(ToolBar toolBar)
+    {
+        // The Fluent toolbar button template has a fixed padding (12,6) meant for text buttons, so icon buttons take up
+        // too much space
+        foreach (var item in toolBar.Items)
+        {
+            if (item.ControlObject is SWC.Control native)
+            {
+                native.Loaded += (_, _) =>
+                {
+                    if (SWM.VisualTreeHelper.GetChildrenCount(native) > 0 &&
+                        SWM.VisualTreeHelper.GetChild(native, 0) is SWC.Border border)
+                    {
+                        border.Padding = new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING);
+                    }
+                };
+            }
+        }
+    }
+
     public override void ConfigureDonateButton(Button button)
     {
         var native = (SWC.Control) button.ToNative();
@@ -341,6 +388,14 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override void SetClipboardImage(Clipboard clipboard, ProcessedImage processedImage, IMemoryImage memoryImage)
     {
+        // We also add the JPEG/PNG format to the clipboard as some applications care about the actual format
+        // https://github.com/cyanfish/naps2/issues/264
+        var jpegOrPng = ImageExportHelper.SaveSmallestFormatToMemoryStream(memoryImage,
+            processedImage.Metadata.Lossless, -1, out var fileFormat);
+        var handler = (ClipboardHandler) clipboard.Handler;
+        // Note this only updates the DataObject, the clipboard is set along with the image below
+        handler.Control.SetData(fileFormat == ImageFileFormat.Jpeg ? "JFIF" : "PNG", jpegOrPng);
+
         // Unlike ToBitmap (for display), keep the image's resolution
         using var etoBitmap = new Bitmap(new BitmapHandler(memoryImage.ToBitmapSource()));
         clipboard.Image = etoBitmap;
@@ -397,6 +452,9 @@ public class WpfEtoPlatform : EtoPlatform
     {
         var native = control.ToNative();
         ApplyCompactToggleTemplate(native);
+        // A control can be measured just before the layout makes it visible, and collapsed elements measure as empty
+        bool collapsed = native.Visibility == SW.Visibility.Collapsed;
+        if (collapsed) native.Visibility = SW.Visibility.Hidden;
         try
         {
             native.Measure(new SW.Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -407,7 +465,7 @@ public class WpfEtoPlatform : EtoPlatform
                 native.Measure(new SW.Size(availableWidth, double.PositiveInfinity));
                 desired = native.DesiredSize;
             }
-            else if (control is Label or LinkButton or CheckBox or RadioButton)
+            else if (control is Label or LinkButton or CheckBox or RadioButton or Button)
             {
                 // With layout rounding, the desired size can be rounded down (e.g. 145.3 -> 145), and Eto.Wpf's text
                 // in these controls wraps (and the second line is clipped) if it's even slightly too narrow
@@ -417,6 +475,7 @@ public class WpfEtoPlatform : EtoPlatform
         }
         finally
         {
+            if (collapsed) native.Visibility = SW.Visibility.Collapsed;
             // Measure again at its frame size (if it has one) in the next layout pass
             (SWM.VisualTreeHelper.GetParent(native) as SW.UIElement)?.InvalidateMeasure();
         }
@@ -459,8 +518,22 @@ public class WpfEtoPlatform : EtoPlatform
         {
             form.LayoutController.Container.ToNative().SizeChanged += (_, _) => form.LayoutController.Invalidate();
         }
-        // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var native = window.ToNative();
+        // This mirrors the whole window, including the positions from the layout
+        native.FlowDirection = CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
+            ? SW.FlowDirection.RightToLeft
+            : SW.FlowDirection.LeftToRight;
+        if (window is Dialog dialog)
+        {
+            // Like WinForms, use the active window as the owner (so the dialog is centered on it).
+            dialog.PreLoad += (_, _) =>
+            {
+                var activeWindow = Win32.GetActiveWindow();
+                dialog.Owner ??= Application.Instance.Windows.FirstOrDefault(x =>
+                    x != dialog && x.NativeHandle == activeWindow);
+            };
+        }
+        // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var interop = new SW.Interop.WindowInteropHelper(native);
         native.SourceInitialized += (_, _) =>
         {
@@ -488,13 +561,55 @@ public class WpfEtoPlatform : EtoPlatform
         {
             return new Size((int) container.ActualWidth, (int) container.ActualHeight);
         }
+        if (!excludeToolbars && window.ToNative() is { IsLoaded: true, Content: SW.FrameworkElement content })
+        {
+            // Eto's ClientSize excludes toolbars, so we use the window content (which includes them)
+            return new Size((int) content.ActualWidth, (int) content.ActualHeight);
+        }
         return base.GetClientSize(window, excludeToolbars);
+    }
+
+    public override void SetClientSize(Window window, Size clientSize)
+    {
+        var native = window.ToNative();
+        if (native.Content is not SW.FrameworkElement content)
+        {
+            base.SetClientSize(window, clientSize);
+            return;
+        }
+        if (native.IsLoaded)
+        {
+            native.SizeToContent = SW.SizeToContent.Manual;
+            native.Width = clientSize.Width + native.ActualWidth - content.ActualWidth;
+            native.Height = clientSize.Height + native.ActualHeight - content.ActualHeight;
+            return;
+        }
+        // Before the window is loaded, it sizes itself to fit its content. Constraining the content (rather than
+        // using Eto's ClientSize) means toolbars are included in the size and don't widen the window.
+        content.MinWidth = content.MaxWidth = clientSize.Width;
+        content.MinHeight = content.MaxHeight = clientSize.Height;
+        native.Loaded += OnLoaded;
+
+        void OnLoaded(object? sender, SW.RoutedEventArgs e)
+        {
+            native.Loaded -= OnLoaded;
+            native.SizeToContent = SW.SizeToContent.Manual;
+            content.MinWidth = content.MinHeight = 0;
+            content.MaxWidth = content.MaxHeight = double.PositiveInfinity;
+        }
     }
 
     public override float GetScaleFactor(Window? window)
     {
         var native = window?.ToNative();
         return native == null ? 1f : (float) SWM.VisualTreeHelper.GetDpi(native).DpiScaleX;
+    }
+
+    public override void SetImageSize(ImageView imageView, int size)
+    {
+        // Icons are rendered at the display scale, so they need a fixed logical size or they'd show at their pixel
+        // size in DIPs (e.g. double-size at 200%)
+        imageView.Size = new Size(size, size);
     }
 
     public override void AttachDpiDependency(Control control, Action<float> callback)

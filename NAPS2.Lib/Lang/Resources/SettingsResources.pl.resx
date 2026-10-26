@@ -144,6 +144,15 @@
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
+  <data name="AppleImpl_Default" xml:space="preserve">
+    <value>Domyślna</value>
+  </data>
+  <data name="AppleImpl_FileTransfer" xml:space="preserve">
+    <value>Transfer plików</value>
+  </data>
+  <data name="AppleImpl_MemoryTransfer" xml:space="preserve">
+    <value>Transfer pamięciowy</value>
+  </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Domyślna</value>
   </data>
@@ -179,5 +188,17 @@
   </data>
   <data name="Theme_Dark" xml:space="preserve">
     <value>Ciemny</value>
+  </data>
+  <data name="DockStyle_Top" xml:space="preserve">
+    <value>Góra</value>
+  </data>
+  <data name="DockStyle_Left" xml:space="preserve">
+    <value>Do lewej</value>
+  </data>
+  <data name="DockStyle_Bottom" xml:space="preserve">
+    <value>Dół</value>
+  </data>
+  <data name="DockStyle_Right" xml:space="preserve">
+    <value>Do prawej</value>
   </data>
 </root>

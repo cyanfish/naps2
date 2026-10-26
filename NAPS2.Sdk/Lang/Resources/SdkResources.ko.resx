@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>공급장치에 용지가 없습니다.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>'{0}' 파일의 내용을 복사하기 위한 권한을 가지고 있지 않습니다..</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>선택된 스캐너에서는 양면 기능을 사용할 수 없습니다. 만약 스캐너가 양면 기능을 지원한다면, 다른 드라이버를 선택 해 주세요.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>스캐너 예열 중.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE 드라이버를 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR 엔진을 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>선택한 드라이버는 이 시스템에서 사용할 수 없습니다.</value>

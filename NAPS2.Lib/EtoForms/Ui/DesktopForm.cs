@@ -30,6 +30,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly Lazy<DesktopCommands> _commands;
     private readonly Sidebar _sidebar;
     protected readonly IIconProvider _iconProvider;
+    private readonly EditWithController _editWithController;
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
@@ -40,6 +41,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly NotificationArea _notificationArea;
     protected IListView<UiImage> _listView;
     private ImageListSyncer? _imageListSyncer;
+    private Naps2Config? _toolbarPreviewConfig;
 
     public DesktopForm(
         Naps2Config config,
@@ -59,7 +61,8 @@ public abstract class DesktopForm : EtoFormBase
         IDesktopSubFormController desktopSubFormController,
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
-        IIconProvider iconProvider) : base(config)
+        IIconProvider iconProvider,
+        EditWithController editWithController) : base(config)
     {
         Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
 
@@ -79,12 +82,13 @@ public abstract class DesktopForm : EtoFormBase
         _sidebar = sidebar;
         _iconProvider = iconProvider;
         _commands = commands;
+        _editWithController = editWithController;
 
         _desktopFormProvider.DesktopForm = this;
         _keyboardShortcuts.Assign(Commands);
         CreateToolbarsAndMenus();
         UpdateScanButton();
-        EditWithAppChanged();
+        UpdateEditWithApp();
         UpdateProfilesToolbar();
         InitLanguageDropdown();
         UpdateManualDuplex();
@@ -116,7 +120,8 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated += ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
-        _notificationArea = new NotificationArea(_notificationManager, LayoutController);
+        _editWithController.AppChanged += EditWithController_AppChanged;
+        _notificationArea =new NotificationArea(_notificationManager, LayoutController);
     }
 
     protected override void BuildLayout()
@@ -151,7 +156,8 @@ public abstract class DesktopForm : EtoFormBase
         ).SizeConfig(
             () => Config.Get(c => c.SidebarWidth),
             width => Config.User.Set(c => c.SidebarWidth, width),
-            200);
+            Sidebar.MIN_SIDEBAR_WIDTH,
+            Sidebar.MIN_CONTENT_WIDTH);
     }
 
     private void OpeningContextMenu(object? sender, EventArgs e)
@@ -235,6 +241,36 @@ public abstract class DesktopForm : EtoFormBase
 
     protected virtual void RecreateToolbarsAndMenus() => CreateToolbarsAndMenus();
 
+    /// <summary>
+    /// Updates the toolbars to reflect the current toolbar settings (buttons, position, etc.).
+    /// </summary>
+    public void ApplyToolbarSettings()
+    {
+        RecreateToolbarsAndMenus();
+        PlaceToolbars();
+    }
+
+    /// <summary>
+    /// Shows the toolbars using the given config (e.g. with uncommitted settings), or the actual config if null.
+    /// </summary>
+    public void PreviewToolbarSettings(Naps2Config? previewConfig)
+    {
+        var oldConfig = ToolbarConfig;
+        _toolbarPreviewConfig = previewConfig;
+        // Recreating the toolbar is relatively slow, so only do it if the buttons have changed
+        if (ToolbarConfig.Get(c => c.HiddenButtons) != oldConfig.Get(c => c.HiddenButtons) ||
+            ToolbarConfig.Get(c => c.ExtraButtons) != oldConfig.Get(c => c.ExtraButtons))
+        {
+            RecreateToolbarsAndMenus();
+        }
+        PlaceToolbars();
+    }
+
+    /// <summary>
+    /// The config used for toolbar settings, which may include uncommitted settings being previewed.
+    /// </summary>
+    protected Naps2Config ToolbarConfig => _toolbarPreviewConfig ?? Config;
+
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
@@ -252,9 +288,11 @@ public abstract class DesktopForm : EtoFormBase
         await _desktopController.Initialize();
     }
 
+    protected bool UserClosing { get; set; } = true;
+
     protected override void OnClosing(CancelEventArgs e)
     {
-        if (!_desktopController.PrepareForClosing(true))
+        if (!_desktopController.PrepareForClosing(UserClosing))
         {
             e.Cancel = true;
         }
@@ -271,6 +309,7 @@ public abstract class DesktopForm : EtoFormBase
         ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
         ImageList.ImagesThumbnailInvalidated -= ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
+        _editWithController.AppChanged -= EditWithController_AppChanged;
         _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
     }
@@ -287,45 +326,48 @@ public abstract class DesktopForm : EtoFormBase
             ToolBar.Items.Clear();
         }
 
-        var hiddenButtons = Config.Get(c => c.HiddenButtons);
+        var hiddenButtons = ToolbarConfig.Get(c => c.HiddenButtons);
+        // Separators are only added between non-empty groups of buttons
+        bool hasButtons = false;
+        bool separatorPending = false;
 
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Scan))
+        if (ShowButton(ToolbarButtons.Scan))
             CreateToolbarButtonWithMenu(Commands.Scan, DesktopToolbarMenuType.Scan, new MenuProvider()
                 .Dynamic(_scanMenuCommands)
                 .Separator()
                 .Append(Commands.NewProfile)
                 .Append(Commands.BatchScan)
                 .Append(Config.Get(c => c.DisableScannerSharing) ? null : Commands.ScannerSharing));
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Profiles))
+        if (ShowButton(ToolbarButtons.Profiles))
             CreateToolbarButton(Commands.Profiles);
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Ocr))
+        if (ShowButton(ToolbarButtons.Ocr))
             CreateToolbarButton(Commands.Ocr);
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Import))
+        if (ShowButton(ToolbarButtons.Import))
             CreateToolbarButton(Commands.Import);
-        CreateToolbarSeparator();
-        if (!hiddenButtons.HasFlag(ToolbarButtons.SavePdf))
+        separatorPending = true;
+        if (ShowButton(ToolbarButtons.SavePdf))
             CreateToolbarButtonWithMenu(Commands.SavePdf, DesktopToolbarMenuType.SavePdf, new MenuProvider()
                 .Append(Commands.SaveAllPdf)
                 .Append(Commands.SaveSelectedPdf)
                 .Separator()
                 .Append(Commands.PdfSettings));
-        if (!hiddenButtons.HasFlag(ToolbarButtons.SaveImages))
+        if (ShowButton(ToolbarButtons.SaveImages))
             CreateToolbarButtonWithMenu(Commands.SaveImages, DesktopToolbarMenuType.SaveImages, new MenuProvider()
                 .Append(Commands.SaveAllImages)
                 .Append(Commands.SaveSelectedImages)
                 .Separator()
                 .Append(Commands.ImageSettings));
-        if (!hiddenButtons.HasFlag(ToolbarButtons.EmailPdf) && PlatformCompat.System.CanEmail)
+        if (PlatformCompat.System.CanEmail && ShowButton(ToolbarButtons.EmailPdf))
             CreateToolbarButtonWithMenu(Commands.EmailPdf, DesktopToolbarMenuType.EmailPdf, new MenuProvider()
                 .Append(Commands.EmailAll)
                 .Append(Commands.EmailSelected)
                 .Separator()
                 .Append(Commands.EmailSettings)
                 .Append(Commands.PdfSettings));
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Print) && PlatformCompat.System.CanPrint)
+        if (PlatformCompat.System.CanPrint && ShowButton(ToolbarButtons.Print))
             CreateToolbarButton(Commands.Print);
-        CreateToolbarSeparator();
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Image))
+        separatorPending = true;
+        if (ShowButton(ToolbarButtons.Image))
             CreateToolbarMenu(Commands.ImageMenu, new MenuProvider()
                 .Append(Commands.ViewImage)
                 .Separator()
@@ -344,11 +386,11 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.EditWithPick)
                 .Separator()
                 .Append(Commands.ResetImage));
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Rotate))
+        if (ShowButton(ToolbarButtons.Rotate))
             CreateToolbarMenu(Commands.RotateMenu, GetRotateMenuProvider());
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Move))
+        if (ShowButton(ToolbarButtons.Move))
             CreateToolbarStackedButtons(Commands.MoveUp, Commands.MoveDown);
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Reorder))
+        if (ShowButton(ToolbarButtons.Reorder))
         {
             var menuProvider = new MenuProvider();
             if (!hiddenButtons.HasFlag(ToolbarButtons.ManualDuplex))
@@ -372,17 +414,29 @@ public abstract class DesktopForm : EtoFormBase
                 .Append(Commands.ReverseSelected));
             CreateToolbarMenu(Commands.ReorderMenu, menuProvider);
         }
-        CreateToolbarSeparator();
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Delete))
+        separatorPending = true;
+        if (ShowButton(ToolbarButtons.Delete))
             CreateToolbarButton(Commands.Delete);
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Clear))
+        if (ShowButton(ToolbarButtons.Clear))
             CreateToolbarButton(Commands.ClearAll);
-        CreateToolbarSeparator();
-        if (!hiddenButtons.HasFlag(ToolbarButtons.Language))
+        separatorPending = true;
+        if (ShowButton(ToolbarButtons.Language))
             CreateToolbarMenu(Commands.LanguageMenu, GetLanguageMenuProvider());
         MaybeCreateToolbarStackedButtons(
-            Commands.Settings, !hiddenButtons.HasFlag(ToolbarButtons.Settings),
-            Commands.About, !hiddenButtons.HasFlag(ToolbarButtons.About));
+            Commands.Settings, ShowButton(ToolbarButtons.Settings),
+            Commands.About, ShowButton(ToolbarButtons.About));
+
+        bool ShowButton(ToolbarButtons button)
+        {
+            if (!ToolbarConfig.IsToolbarButtonShown(button)) return false;
+            if (separatorPending && hasButtons)
+            {
+                CreateToolbarSeparator();
+            }
+            separatorPending = false;
+            hasButtons = true;
+            return true;
+        }
     }
 
     private void MaybeCreateToolbarStackedButtons(Command command1, bool show1, Command command2, bool show2)
@@ -426,9 +480,12 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
-    public virtual void PlaceProfilesToolbar()
+    public virtual void PlaceToolbars()
     {
     }
+
+    protected MenuProvider GetToolbarContextMenuProvider() =>
+        new MenuProvider().Append(Commands.CustomizeToolbar);
 
     public virtual void UpdateListView() => Invalidate();
 
@@ -555,13 +612,13 @@ public abstract class DesktopForm : EtoFormBase
         _scanMenuCommands.Value = commandList;
     }
 
-    public void EditWithAppChanged()
+    private void EditWithController_AppChanged(object? sender, EventArgs e) => UpdateEditWithApp();
+
+    private void UpdateEditWithApp()
     {
-        var appName = Config.Get(c => c.EditWithAppName);
-        if (!string.IsNullOrEmpty(appName))
+        if (_editWithController.HasApp)
         {
-            Commands.EditWithApp.Text = string.Format(UiStrings.EditWithAppName, appName);
-            _editWithCommands.Value = ImmutableList.Create((Command) Commands.EditWithApp);
+            _editWithCommands.Value = ImmutableList.Create((Command) Commands.CreateEditWithApp());
         }
         else
         {

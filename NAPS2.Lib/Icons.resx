@@ -433,6 +433,12 @@
   <data name="application_cascade_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\application_cascade_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="application_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\application_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="application_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\application_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="color_gradient_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\color_gradient_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

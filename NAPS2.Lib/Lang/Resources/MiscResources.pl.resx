@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć {0} element(y/ów)?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Czy na pewno chcesz usunąć {0} profile/profilów?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć profil {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Pliki bitmapowe (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Plik Enhanced Windows MetaFile (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Plik Exchangeable Image File (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>Plik GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>Plik JPEG (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Wystąpił błąd podczas wysyłania do wiadomości e-mail.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Instalacja zakończona</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Instalacja zakończona. Czy chcesz teraz uruchomić ponownie NAPS2?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Instalacja zakończona niepowodzeniem.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Instalacja nieudana</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Wszystkie ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Nie można zaimportować pliku '{0}'.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Nie można zaimportować pliku '{0}'. Tylko pliki PDF wygenerowane prez NAPS2 mogą być zaimportowane.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Błąd pobierania</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Operacja w toku</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skanowanie strony {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Wybrany skaner nie obsługuje podajnika. Jeżeli twój skaner ma podajnik, spróbuj użyć innego sterownika.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Nie ma stron w podajniku.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Nie masz zezwolenia na skopiowanie zawartości z pliku '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Wystąpił błąd podczas próby zapisania pliku.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>z {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Wystąpił nieznany błąd podczas skanowania wsadowego.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skaner się rozgrzewa.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Dostępna jest aktualizacja OCR.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Zapisano obraz.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Postęp prostowania</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Potrzebne pobranie</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Do zaimportowania tego pliku PDF potrzebny jest dodatkowy składnik. Czy chcesz go teraz pobrać?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Czy na pewno chcesz anulować skanowanie wsadowe?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Lubisz NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Sterownik SANE nie jest dostępny. Upewnij się, że zainstalowałeś wymagane pakiety:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Silnik OCR nie jest dostępny. Upewnij się, że zainstalowałeś wymagany pakiet:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Wybrany sterownik nie jest obsługiwany w tym systemie.</value>

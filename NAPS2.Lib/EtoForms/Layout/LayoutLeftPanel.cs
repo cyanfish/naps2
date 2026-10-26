@@ -11,7 +11,8 @@ public class LayoutLeftPanel : LayoutContainer
 
     private Func<int> _widthGetter = () => 0;
     private Action<int> _widthSetter = _ => { };
-    private int? _minWidth;
+    private int? _minLeftWidth;
+    private int? _minRightWidth;
     private bool _isInitialized;
     private bool _inLayout;
     private float _lastScale;
@@ -36,14 +37,14 @@ public class LayoutLeftPanel : LayoutContainer
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
-        var w = _minWidth.HasValue ? (int) (_minWidth * context.Scale) : MeasureWidth(context, bounds, _left);
+        var w = _minLeftWidth.HasValue ? (int) (_minLeftWidth * context.Scale) : MeasureWidth(context, bounds, _left);
         if (Splitter.Position < w)
         {
             EtoPlatform.Current.SetSplitterPosition(Splitter, w);
             _left.Width = w;
         }
         Splitter.Panel1MinimumSize = w;
-        Splitter.Panel2MinimumSize = (int) (100 * context.Scale);
+        Splitter.Panel2MinimumSize = (int) ((_minRightWidth ?? 0) * context.Scale);
 
         // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (!_isInitialized || context.Scale != _lastScale)
@@ -94,11 +95,13 @@ public class LayoutLeftPanel : LayoutContainer
         return _overlay.GetPreferredSize(context, parentBounds);
     }
 
-    public LayoutLeftPanel SizeConfig(Func<int> getter, Action<int> setter, int? minWidth = null)
+    public LayoutLeftPanel SizeConfig(Func<int> getter, Action<int> setter, int? minLeftWidth = null,
+        int? minRightWidth = null)
     {
         _widthGetter = getter;
         _widthSetter = setter;
-        _minWidth = minWidth;
+        _minLeftWidth = minLeftWidth;
+        _minRightWidth = minRightWidth;
         return this;
     }
 }

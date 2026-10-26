@@ -27,6 +27,9 @@
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
   <data name="Donate" xml:space="preserve">
     <value>Dhuro</value>
   </data>
@@ -159,6 +162,9 @@
   <data name="MoveDown" xml:space="preserve">
     <value>Lëviz poshtë</value>
   </data>
+  <data name="MoveUpDown" xml:space="preserve">
+    <value>Move Up/Down</value>
+  </data>
   <data name="Reorder" xml:space="preserve">
     <value>Rirendit</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Cilësimet</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>Cilësimet e përgjithshme</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Ndërfaqja</value>
@@ -284,12 +293,6 @@
   </data>
   <data name="EsclDriver" xml:space="preserve">
     <value>Drejtuesi ESCL</value>
-  </data>
-  <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>Drejtuesi i rrjetit të ESCL</value>
-  </data>
-  <data name="EsclUsbDriver" xml:space="preserve">
-    <value>Drejtuesi USB i ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Drejtuesi i Apple</value>
@@ -427,7 +430,7 @@
     <value>Rikthe</value>
   </data>
   <data name="AutoCrop" xml:space="preserve">
-    <value>Auto-Crop</value>
+    <value>Prerje automatike</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Zbato te të gjithë imazhet e zgjedhura {0}</value>
@@ -464,9 +467,6 @@
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
     <value>Rikthe të paracaktuarat</value>
-  </data>
-  <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>Cilësimet e PDF</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>Lejo printimin</value>
@@ -582,12 +582,6 @@
   <data name="CompressionLabel" xml:space="preserve">
     <value>Ngjeshja:</value>
   </data>
-  <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Cilësimet e imazhit</value>
-  </data>
-  <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Cilësimet e emailit</value>
-  </data>
   <data name="SettingsFormTitle" xml:space="preserve">
     <value>Cilësimet</value>
   </data>
@@ -688,7 +682,7 @@
     <value>Drejto faqet e skanuara</value>
   </data>
   <data name="AutoCropScannedPages" xml:space="preserve">
-    <value>Auto-crop scanned pages</value>
+    <value>Prerje automatike e faqeve të skanuara</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Zbato shkëlqimin/kontrastin pas skanimit</value>
@@ -713,6 +707,9 @@
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementimi i Twain:</value>
+  </data>
+  <data name="AppleImplLabel" xml:space="preserve">
+    <value>Imlementimi i drejtuesit të Apple:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Skanim në grup</value>
@@ -822,8 +819,17 @@
   <data name="Connect" xml:space="preserve">
     <value>Lidhu</value>
   </data>
+  <data name="WaitingToConnect" xml:space="preserve">
+    <value>Waiting to connect.</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>Gabim në lidhje.</value>
+  </data>
+  <data name="ConnectionTimedOut" xml:space="preserve">
+    <value>Connection timed out.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Pyet gjithmonë</value>
@@ -847,9 +853,6 @@
     <value>Nuk mund të gjeni skanerin? Lexoni rreth kufizimeve të NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Shkurtimet nga tastiera</value>
-  </data>
-  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
     <value>Shkurtimet nga tastiera</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
@@ -958,21 +961,78 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Shift</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>Compress</value>
+    <value>Ngjesh</value>
   </data>
   <data name="ResolutionDpiLabel" xml:space="preserve">
-    <value>Resolution (dpi):</value>
+    <value>Rezolucioni (dpi):</value>
   </data>
   <data name="DimensionsLabel" xml:space="preserve">
-    <value>Dimensions:</value>
+    <value>Përmasat:</value>
   </data>
   <data name="PixelDimensionsLabel" xml:space="preserve">
-    <value>Pixel dimensions:</value>
+    <value>Përmasat në piksel:</value>
   </data>
   <data name="UseJpegCompression" xml:space="preserve">
-    <value>Use JPEG compression</value>
+    <value>Përdor ngjeshjen e JPEG</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
-    <value>JPEG quality:</value>
+    <value>Cilësia e JPEG:</value>
+  </data>
+  <data name="MissingFileExtension" xml:space="preserve">
+    <value>Mungon prapashtesa e skedarit (p.sh. ".pdf")</value>
+  </data>
+  <data name="AlignLeft" xml:space="preserve">
+    <value>Drejto majtas</value>
+  </data>
+  <data name="AlignCenter" xml:space="preserve">
+    <value>Drejto në qendër</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Drejto djathtas</value>
+  </data>
+  <data name="AlignTop" xml:space="preserve">
+    <value>Drejto në krye</value>
+  </data>
+  <data name="AlignMiddle" xml:space="preserve">
+    <value>Drejto në mes</value>
+  </data>
+  <data name="AlignBottom" xml:space="preserve">
+    <value>Drejto në fund</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Ndërro</value>
+  </data>
+  <data name="SplitVertically" xml:space="preserve">
+    <value>Ndaj vertikalisht</value>
+  </data>
+  <data name="SplitHorizontally" xml:space="preserve">
+    <value>Ndaj horizontalisht</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Ndihmë</value>
+  </data>
+  <data name="ToggleOrientation" xml:space="preserve">
+    <value>Ndrysho orientimin</value>
+  </data>
+  <data name="ToggleView" xml:space="preserve">
+    <value>Ndrysho pamjen</value>
+  </data>
+  <data name="ToolbarSettings" xml:space="preserve">
+    <value>Toolbar Settings</value>
+  </data>
+  <data name="CustomizeToolbar" xml:space="preserve">
+    <value>Customize Toolbar</value>
+  </data>
+  <data name="Toolbar" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="ProfilesToolbar" xml:space="preserve">
+    <value>Profiles toolbar</value>
+  </data>
+  <data name="PositionLabel" xml:space="preserve">
+    <value>Position:</value>
+  </data>
+  <data name="ButtonsLabel" xml:space="preserve">
+    <value>Buttons:</value>
   </data>
 </root>

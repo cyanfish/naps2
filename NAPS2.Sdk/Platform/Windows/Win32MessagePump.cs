@@ -13,6 +13,7 @@ internal class Win32MessagePump : IInvoker, IDisposable
 {
     private const string WND_CLASS_NAME = "MPWndClass";
     private const string RUN_QUEUED_ACTIONS_MESSAGE_NAME = "MPRunQueuedActions";
+    private const uint WM_CLOSE = 0x0010;
 
     public static Win32MessagePump Create()
     {
@@ -136,6 +137,11 @@ internal class Win32MessagePump : IInvoker, IDisposable
         if (msg == _runQueuedActionsMessage)
         {
             RunQueuedActions();
+            return IntPtr.Zero;
+        }
+        if (msg == WM_CLOSE && hWnd == Handle)
+        {
+            // Don't let other processes shut down the message pump window as we need it to handle cleanup tasks
             return IntPtr.Zero;
         }
         return Win32.DefWindowProcW(hWnd, msg, wParam, lParam);

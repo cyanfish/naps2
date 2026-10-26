@@ -12,7 +12,6 @@ internal class GeneralSettingsPanel : SettingsPanel
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly EnumDropDownWidget<Theme> _theme = new(scale: false);
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
-    private readonly CheckBox _showProfilesToolbar = C.CheckBox(UiStrings.ShowProfilesToolbar);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
     private readonly EnumDropDownWidget<ScanButtonDefaultAction> _scanButtonDefaultAction = new(scale: false);
     private readonly EnumDropDownWidget<SaveButtonDefaultAction> _saveButtonDefaultAction = new(scale: false);
@@ -44,7 +43,6 @@ internal class GeneralSettingsPanel : SettingsPanel
                         )
                         : C.None(),
                     PlatformCompat.System.SupportsShowPageNumbers ? _showPageNumbers : C.None(),
-                    PlatformCompat.System.SupportsProfilesToolbar ? _showProfilesToolbar : C.None(),
                     _scanChangesDefaultProfile,
                     PlatformCompat.System.SupportsButtonActions
                         ? L.Row(
@@ -84,7 +82,6 @@ internal class GeneralSettingsPanel : SettingsPanel
         _theme.SelectedItem = config.Get(c => c.Theme);
         _theme.Enabled = !config.AppLocked.Has(c => c.Theme);
         UpdateCheckbox(_scanChangesDefaultProfile, c => c.ScanChangesDefaultProfile);
-        UpdateCheckbox(_showProfilesToolbar, c => c.ShowProfilesToolbar);
         UpdateCheckbox(_showPageNumbers, c => c.ShowPageNumbers);
         _scanButtonDefaultAction.SelectedItem = config.Get(c => c.ScanButtonDefaultAction);
         _scanButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.ScanButtonDefaultAction);
@@ -100,7 +97,6 @@ internal class GeneralSettingsPanel : SettingsPanel
         var transact = Config.User.BeginTransaction();
         bool themeChanged = transact.SetIfChanged(Config, c => c.Theme, _theme.SelectedItem);
         transact.SetIfChanged(Config, c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
-        transact.SetIfChanged(Config, c => c.ShowProfilesToolbar, _showProfilesToolbar.IsChecked());
         transact.SetIfChanged(Config, c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
         transact.SetIfChanged(Config, c => c.ScanButtonDefaultAction, _scanButtonDefaultAction.SelectedItem);
         transact.SetIfChanged(Config, c => c.SaveButtonDefaultAction, _saveButtonDefaultAction.SelectedItem);
@@ -110,7 +106,6 @@ internal class GeneralSettingsPanel : SettingsPanel
         transact.Commit();
 
         _desktopFormProvider.DesktopForm.UpdateListView();
-        _desktopFormProvider.DesktopForm.PlaceProfilesToolbar();
         if (themeChanged)
         {
             EtoPlatform.Current.ColorScheme.UserThemeChanged();

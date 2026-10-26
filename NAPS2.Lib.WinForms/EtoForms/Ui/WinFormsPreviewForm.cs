@@ -1,13 +1,14 @@
 using System.Drawing;
 using System.Windows.Forms;
+using NAPS2.EtoForms.Desktop;
 
 namespace NAPS2.EtoForms.Ui;
 
 public class WinFormsPreviewForm : PreviewForm
 {
     public WinFormsPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
-        IIconProvider iconProvider, ColorScheme colorScheme) : base(config,
-        desktopCommands, imageList, iconProvider, colorScheme)
+        IIconProvider iconProvider, ColorScheme colorScheme, EditWithController editWithController) : base(config,
+        desktopCommands, imageList, iconProvider, colorScheme, editWithController)
     {
     }
 

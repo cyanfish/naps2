@@ -180,6 +180,10 @@ public abstract class EtoPlatform
     {
     }
 
+    public virtual void ConfigureSmallToolBar(ToolBar toolBar)
+    {
+    }
+
     public virtual void ConfigureEllipsis(Label label)
     {
         // TODO: Maybe implement our own ellipsis logic that uses text-measuring to strip trailing characters and add "..."?
@@ -211,6 +215,10 @@ public abstract class EtoPlatform
     }
 
     public virtual void SetImageSize(ToolItem toolItem, int size)
+    {
+    }
+
+    public virtual void SetImageSize(ImageView imageView, int size)
     {
     }
 

@@ -351,12 +351,20 @@ msgstr ""
 msgid "Blank Pages"
 msgstr ""
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr ""
 
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
+msgstr ""
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
 msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
@@ -453,8 +461,16 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
+msgstr ""
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
 msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
@@ -516,6 +532,10 @@ msgstr ""
 #: SettingsResources.resx$PageSize_Custom$Message
 #: SettingsResources.resx$Resolution_Custom$Message
 msgid "Custom..."
+msgstr ""
+
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
 msgstr ""
 
 #: SettingsResources.resx$Theme_Dark$Message
@@ -865,6 +885,7 @@ msgstr ""
 msgid "Leave a Review"
 msgstr ""
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr ""
@@ -946,6 +967,10 @@ msgstr ""
 
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
+msgstr ""
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
 msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
@@ -1194,6 +1219,10 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
+
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr ""
@@ -1235,6 +1264,10 @@ msgstr ""
 #: UiStrings.resx$Profiles$Message
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
+msgstr ""
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
 msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
@@ -1329,6 +1362,7 @@ msgstr ""
 msgid "Revert"
 msgstr ""
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr ""
@@ -1736,8 +1770,20 @@ msgstr ""
 msgid "Toggle View"
 msgstr ""
 
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
+msgstr ""
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
 msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
@@ -1831,6 +1877,10 @@ msgstr ""
 
 #: MiscResources.resx$BatchStatusWaitingForScan$Message
 msgid "Waiting for scan {0}..."
+msgstr ""
+
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
 msgstr ""
 
 #: UiStrings.resx$WhiteThreshold$Message

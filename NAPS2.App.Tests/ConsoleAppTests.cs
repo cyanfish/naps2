@@ -13,7 +13,7 @@ public class ConsoleAppTests : ContextualTests
     public void ConvertsImportedFile(IAppTestTarget target)
     {
         var importPath = CopyResourceToFile(ImageResources.dog, "in.png");
-        var outputPath = Path.Combine(FolderPath, "out.jpg");
+        var outputPath = P("out.jpg");
         var args = $"-n 0 -i \"{importPath}\" -o \"{outputPath}\"";
 
         var process = AppTestHelper.StartProcess(target.Console, FolderPath, args);
@@ -36,8 +36,8 @@ public class ConsoleAppTests : ContextualTests
     [ClassData(typeof(AppTestData))]
     public void NonZeroExitCodeForError(IAppTestTarget target)
     {
-        var importPath = Path.Combine(FolderPath, "doesnotexist.png");
-        var outputPath = Path.Combine(FolderPath, "out.jpg");
+        var importPath = P("doesnotexist.png");
+        var outputPath = P("out.jpg");
         var args = $"-n 0 -i \"{importPath}\" -o \"{outputPath}\"";
 
         var process = AppTestHelper.StartProcess(target.Console, FolderPath, args);

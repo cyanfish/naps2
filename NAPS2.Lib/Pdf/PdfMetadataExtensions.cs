@@ -1,18 +1,20 @@
-using NAPS2.ImportExport;
+﻿using NAPS2.ImportExport;
 
 namespace NAPS2.Pdf;
 
 internal static class PdfMetadataExtensions
 {
-    public static PdfMetadata Substitute(this PdfMetadata metadata, Placeholders placeholders)
+    public static PdfMetadata Substitute(this PdfMetadata metadata, NameManager nameManager,
+        DateTime? dateTime = null)
     {
+        var context = new NameContext { DateTime = dateTime ?? DateTime.Now, IsFilePath = false };
         return metadata with
         {
-            Author = placeholders.Substitute(metadata.Author, false),
-            Creator = placeholders.Substitute(metadata.Creator, false),
-            Keywords = placeholders.Substitute(metadata.Keywords, false),
-            Subject = placeholders.Substitute(metadata.Subject, false),
-            Title = placeholders.Substitute(metadata.Title, false)
+            Author = nameManager.Get(metadata.Author, context),
+            Creator = nameManager.Get(metadata.Creator, context),
+            Keywords = nameManager.Get(metadata.Keywords, context),
+            Subject = nameManager.Get(metadata.Subject, context),
+            Title = nameManager.Get(metadata.Title, context)
         };
     }
 }

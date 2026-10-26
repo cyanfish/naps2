@@ -52,7 +52,7 @@ public class OcrDownloadForm : EtoDialogBase
             C.Label(UiStrings.OcrDownloadSummaryText),
             C.Spacer(),
             C.Label(UiStrings.OcrSelectLanguageLabel),
-            _languageList.Control.Scale(),
+            _languageList.Control.NaturalSize(150, 100).Scale(),
             C.Spacer(),
             L.Row(
                 _downloadSize.Scale().AlignCenter(),

@@ -7,7 +7,7 @@ public class ServerTrayIndicator : TrayIndicator
     public ServerTrayIndicator()
     {
         // TODO: Maybe use a higher-quality icon with hidpi?
-        Image = EtoPlatform.Current.IsWinForms
+        Image = EtoPlatform.Current.IsWindows
             ? Icons.scanner_16.ToEtoImage() // Windows has small tray icons
             : EtoPlatform.Current.IsMac
                 ? Icons.scanner_gray_32.ToEtoImage() // Gray to match macOS tray style

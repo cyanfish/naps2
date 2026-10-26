@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Vai tiešām vēlaties dzēst {0} vienumu(s)?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Vai tiešām vēlaties dzēst {0} profilus?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Vai tiešām vēlaties dzēst profilu {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Bitmap datnes (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Paplašinātais metafails (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Paplašinātais attēlu fails (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF datne (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG datne (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Notika kļūda mēģinot nosūtīt e-pastu.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Instalēšana pabeigta</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Instalēšana pabeigta. Vai vēlaties tagad pārstartēt NAPS2?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Instalēšana neizdevās.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Instalēšana neizdevās</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Visi ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Datni '{0}' nevarēja importēt.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Datni '{0}' nevarēja importēt. Importēt iespējams tikai ar NAPS2 izveidotas PDF datnes.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Lejupielādes kļūda</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Notiek darbība</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skenē {0}. lappusi</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Izvēlētais skeneris neatbalsta dokumentu padevi. Ja jūsu skenerim ir padeve, mēģiniet izmantot citu draiveri.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Padevē nav lapu.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Jums nav atļaujas kopēt saturu no datnes '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Notika kļūda mēģinot saglabāt datni.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>no {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Pie partijas skenēšanas notika nezināma kļūda.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skeneris uzsilst.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Pieejams OCR atjauninājums.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Attēls saglabāts.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Izlīdzināšanas progress</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Vajadzīga lejupielāde</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Lai importētu šo PDF datni, vajadzīga papildus komponente. Vai vēlaties to lejuplādēt tūlīt?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Vai tiešām vēlaties pārtraukt partijas skenēšanu?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Like NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR (teksta atpazīšanas) dzinis nav pieejams. Instalējiet nepieciešamo spraudni:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Izvēlētais draiveris šajā sistēmā nav atbalstīts.</value>

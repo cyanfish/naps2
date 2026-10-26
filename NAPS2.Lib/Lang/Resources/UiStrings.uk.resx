@@ -27,6 +27,9 @@
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Повторити</value>
+  </data>
   <data name="Donate" xml:space="preserve">
     <value>Підтримати проєкт</value>
   </data>
@@ -79,7 +82,7 @@
     <value>Пакетне сканування</value>
   </data>
   <data name="Ocr" xml:space="preserve">
-    <value>Розпізнавання тексту</value>
+    <value>Розпізнати текст (OCR)</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Профілі</value>
@@ -159,6 +162,9 @@
   <data name="MoveDown" xml:space="preserve">
     <value>Перемістити вниз</value>
   </data>
+  <data name="MoveUpDown" xml:space="preserve">
+    <value>Перемістити вгору/вниз</value>
+  </data>
   <data name="Reorder" xml:space="preserve">
     <value>Змінити порядок</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Налаштування</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>Загальні налаштування</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Інтерфейс</value>
@@ -284,12 +293,6 @@
   </data>
   <data name="EsclDriver" xml:space="preserve">
     <value>Драйвер ESCL</value>
-  </data>
-  <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>Мережевий драйвер ESCL</value>
-  </data>
-  <data name="EsclUsbDriver" xml:space="preserve">
-    <value>USB-драйвер ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Драйвер Apple</value>
@@ -465,9 +468,6 @@
   <data name="RestoreDefaults" xml:space="preserve">
     <value>Відновити стандартні налаштування</value>
   </data>
-  <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>Налаштування PDF</value>
-  </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>Дозволити друк</value>
   </data>
@@ -582,12 +582,6 @@
   <data name="CompressionLabel" xml:space="preserve">
     <value>Стиснення:</value>
   </data>
-  <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Налаштування зображення</value>
-  </data>
-  <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Налаштування електронної пошти</value>
-  </data>
   <data name="SettingsFormTitle" xml:space="preserve">
     <value>Налаштування</value>
   </data>
@@ -634,7 +628,7 @@
     <value>Розділяти файли за допомогою Patch-T</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>Додаткова інформація</value>
+    <value>Більше інформації</value>
   </data>
   <data name="ClearAfterSaving" xml:space="preserve">
     <value>Очищати зображення після збереження</value>
@@ -713,6 +707,9 @@
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Реалізація TWAIN:</value>
+  </data>
+  <data name="AppleImplLabel" xml:space="preserve">
+    <value>Реалізація драйвера Apple:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Пакетне сканування</value>
@@ -822,8 +819,17 @@
   <data name="Connect" xml:space="preserve">
     <value>Підключити</value>
   </data>
+  <data name="WaitingToConnect" xml:space="preserve">
+    <value>Очікування підключення.</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Підключення...</value>
+  </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>Помилка підключення.</value>
+  </data>
+  <data name="ConnectionTimedOut" xml:space="preserve">
+    <value>Час очікування підключення минув.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Завжди запитувати</value>
@@ -847,9 +853,6 @@
     <value>Не вдається знайти сканер? Ознайомтеся з обмеженнями Flatpak-версії NAPS2.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Клавіатурні скорочення</value>
-  </data>
-  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
     <value>Клавіатурні скорочення</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
@@ -974,5 +977,62 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
     <value>Якість JPEG:</value>
+  </data>
+  <data name="MissingFileExtension" xml:space="preserve">
+    <value>Не вказано розширення файлу (наприклад, «.pdf»)</value>
+  </data>
+  <data name="AlignLeft" xml:space="preserve">
+    <value>Вирівняти за лівим краєм</value>
+  </data>
+  <data name="AlignCenter" xml:space="preserve">
+    <value>Вирівняти по центру горизонтально</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Вирівняти за правим краєм</value>
+  </data>
+  <data name="AlignTop" xml:space="preserve">
+    <value>Вирівняти за верхнім краєм</value>
+  </data>
+  <data name="AlignMiddle" xml:space="preserve">
+    <value>Вирівняти по центру вертикально</value>
+  </data>
+  <data name="AlignBottom" xml:space="preserve">
+    <value>Вирівняти за нижнім краєм</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Поміняти місцями</value>
+  </data>
+  <data name="SplitVertically" xml:space="preserve">
+    <value>Розділити вертикально</value>
+  </data>
+  <data name="SplitHorizontally" xml:space="preserve">
+    <value>Розділити горизонтально</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Довідка</value>
+  </data>
+  <data name="ToggleOrientation" xml:space="preserve">
+    <value>Змінити орієнтацію</value>
+  </data>
+  <data name="ToggleView" xml:space="preserve">
+    <value>Перемкнути режим перегляду</value>
+  </data>
+  <data name="ToolbarSettings" xml:space="preserve">
+    <value>Налаштування панелі інструментів</value>
+  </data>
+  <data name="CustomizeToolbar" xml:space="preserve">
+    <value>Налаштування панелі інструментів</value>
+  </data>
+  <data name="Toolbar" xml:space="preserve">
+    <value>Панель інструментів</value>
+  </data>
+  <data name="ProfilesToolbar" xml:space="preserve">
+    <value>Панель інструментів профілів</value>
+  </data>
+  <data name="PositionLabel" xml:space="preserve">
+    <value>Положення:</value>
+  </data>
+  <data name="ButtonsLabel" xml:space="preserve">
+    <value>Кнопки:</value>
   </data>
 </root>

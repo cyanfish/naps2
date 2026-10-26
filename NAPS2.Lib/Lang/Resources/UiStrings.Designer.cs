@@ -345,6 +345,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string MoveUpDown {
+            get {
+                return ResourceManager.GetString("MoveUpDown", resourceCulture);
+            }
+        }
+        
         internal static string Reorder {
             get {
                 return ResourceManager.GetString("Reorder", resourceCulture);
@@ -1658,13 +1664,31 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("Connect", resourceCulture);
             }
         }
-        
+
+        internal static string WaitingToConnect {
+            get {
+                return ResourceManager.GetString("WaitingToConnect", resourceCulture);
+            }
+        }
+
+        internal static string Connecting {
+            get {
+                return ResourceManager.GetString("Connecting", resourceCulture);
+            }
+        }
+
         internal static string ConnectionError {
             get {
                 return ResourceManager.GetString("ConnectionError", resourceCulture);
             }
         }
-        
+
+        internal static string ConnectionTimedOut {
+            get {
+                return ResourceManager.GetString("ConnectionTimedOut", resourceCulture);
+            }
+        }
+
         internal static string AlwaysAsk {
             get {
                 return ResourceManager.GetString("AlwaysAsk", resourceCulture);
@@ -2004,6 +2028,42 @@ namespace NAPS2.Lang.Resources {
         internal static string ToggleView {
             get {
                 return ResourceManager.GetString("ToggleView", resourceCulture);
+            }
+        }
+        
+        internal static string ToolbarSettings {
+            get {
+                return ResourceManager.GetString("ToolbarSettings", resourceCulture);
+            }
+        }
+        
+        internal static string CustomizeToolbar {
+            get {
+                return ResourceManager.GetString("CustomizeToolbar", resourceCulture);
+            }
+        }
+        
+        internal static string Toolbar {
+            get {
+                return ResourceManager.GetString("Toolbar", resourceCulture);
+            }
+        }
+        
+        internal static string ProfilesToolbar {
+            get {
+                return ResourceManager.GetString("ProfilesToolbar", resourceCulture);
+            }
+        }
+        
+        internal static string PositionLabel {
+            get {
+                return ResourceManager.GetString("PositionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonsLabel {
+            get {
+                return ResourceManager.GetString("ButtonsLabel", resourceCulture);
             }
         }
     }

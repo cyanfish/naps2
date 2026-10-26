@@ -10,6 +10,9 @@ namespace NAPS2.EtoForms.Desktop;
 
 public class Sidebar
 {
+    public const int MIN_SIDEBAR_WIDTH = 200;
+    public const int MIN_CONTENT_WIDTH = 100;
+
     private readonly IScanPerformer _scanPerformer;
     private readonly DeviceCapsCache _deviceCapsCache;
     private readonly IProfileManager _profileManager;

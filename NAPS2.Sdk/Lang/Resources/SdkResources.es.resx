@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Sin hojas en el alimentador.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>No tiene permiso para copiar el contenido del archivo '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>El escáner seleccionado no admite el uso dúplex. Si el escáner si admite dúplex, intente utilizar un controlador diferente.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>El escáner se está calentando.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>El controlador SANE no está disponible. Asegúrese de instalar los paquetes necesarios:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>El motor OCR no está disponible. Asegúrese de instalar el paquete necesario:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>El controlador seleccionado no está admitido en este sistema.</value>

@@ -187,19 +187,26 @@ public class MacEtoPlatform : EtoPlatform
 
         // A split view sidebar item gets the standard sidebar appearance (e.g. Liquid Glass on macOS 26)
         var sidebarItem = NSSplitViewItem.CreateSidebar(new NSViewController { View = sidebarView });
-        sidebarItem.MinimumThickness = options.MinWidth ?? options.Width;
-        sidebarItem.MaximumThickness = options.MaxWidth ?? options.Width;
+        if (options.MinWidth is { } minWidth)
+        {
+            sidebarItem.MinimumThickness = minWidth;
+        }
+        if (options.MaxWidth is { } maxWidth)
+        {
+            sidebarItem.MaximumThickness = maxWidth;
+        }
         sidebarItem.CanCollapse = options.CanHide;
         var detailView = new NSView();
         var splitViewController = new NSSplitViewController();
+        var detailItem = NSSplitViewItem.FromViewController(new NSViewController { View = detailView });
+        if (options.MinContentWidth is { } minContentWidth)
+        {
+            detailItem.MinimumThickness = minContentWidth;
+        }
         splitViewController.AddSplitViewItem(sidebarItem);
-        splitViewController.AddSplitViewItem(
-            NSSplitViewItem.FromViewController(new NSViewController { View = detailView }));
+        splitViewController.AddSplitViewItem(detailItem);
         sidebarItem.Collapsed = !options.Visible;
 
-        // Extend the sidebar under the title bar
-        nsWindow.StyleMask |= NSWindowStyle.FullSizeContentView;
-        nsWindow.TitlebarAppearsTransparent = true;
         nsWindow.ContentViewController = splitViewController;
 
         etoContentView.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -251,13 +258,24 @@ public class MacEtoPlatform : EtoPlatform
             NSNotificationCenter.DefaultCenter.AddObserver(NSView.FrameChangedNotification, _ => SidebarResized(),
                 sidebarView)
         ];
-        window.Closed += (_, _) => NSNotificationCenter.DefaultCenter.RemoveObservers(observers);
+        // The sidebar can also be collapsed by dragging the divider, not just by SetWindowSidebarVisible
+        var collapsedObserver = sidebarItem.AddObserver("collapsed", NSKeyValueObservingOptions.New,
+            _ => options.VisibleChanged?.Invoke(!sidebarItem.Collapsed));
+        window.Closed += (_, _) =>
+        {
+            NSNotificationCenter.DefaultCenter.RemoveObservers(observers);
+            collapsedObserver.Dispose();
+        };
         _sidebars.AddOrUpdate(window, new SidebarState(etoContentView, splitViewController, sidebarItem));
 
         if (options.Visible)
         {
             frame.Width += options.Width;
-            nsWindow.SetFrame(frame, true);
+        }
+        // Setting the content view controller resizes the window to fit it, so the frame always needs to be set
+        nsWindow.SetFrame(frame, true);
+        if (options.Visible)
+        {
             splitViewController.SplitView.SetPositionOfDivider(options.Width, 0);
         }
         FitEtoContent();

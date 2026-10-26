@@ -11,8 +11,8 @@ public class TesseractLanguageManagerTests : ContextualTests
 
     public TesseractLanguageManagerTests()
     {
-        _legacyBasePath = Path.Combine(FolderPath, "tesseract-4.0.0b4");
-        _newBasePath = Path.Combine(FolderPath, "tesseract4");
+        _legacyBasePath = P("tesseract-4.0.0b4");
+        _newBasePath = P("tesseract4");
     }
 
     [Fact]

@@ -117,10 +117,16 @@ internal class KeyboardShortcutsPanel : SettingsPanel
                 {
                     HeaderText = UiStrings.Shortcut,
                     DataCell = new TextBoxCell { Binding = new DelegateBinding<Shortcut, string>(GetShortcutLabel) },
-                    Width = 150
+                    Width = ShortcutColumnWidth
                 }
             }
         };
+        if (EtoPlatform.Current.ScaleLayout)
+        {
+            var shortcutColumn = _gridView.Columns[1];
+            EtoPlatform.Current.AttachDpiDependency(_gridView,
+                scale => shortcutColumn.Width = (int) Math.Round(ShortcutColumnWidth * scale));
+        }
         _gridView.SelectionChanged += GridView_SelectionChanged;
         _gridView.CellDoubleClick += Assign_Click;
         _shortcutText.KeyDown += ShortcutText_KeyDown;
@@ -129,6 +135,10 @@ internal class KeyboardShortcutsPanel : SettingsPanel
         UpdateUi();
     }
 
+    // Fits the longest default shortcut ("Ctrl + Shift + Delete") with a small margin
+    private static int ShortcutColumnWidth =>
+        EtoPlatform.Current.IsGtk || EtoPlatform.Current.IsMac ? 140 : EtoPlatform.Current.IsWpf ? 130 : 120;
+
     public override string Title => UiStrings.KeyboardShortcuts;
 
     public override string IconName => "keyboard";
@@ -136,6 +146,11 @@ internal class KeyboardShortcutsPanel : SettingsPanel
     public override void OnShown()
     {
         _gridView.DataStore = Shortcuts;
+        if (EtoPlatform.Current.IsWinForms)
+        {
+            // Fix a WF-specific render glitch
+            Invoker.Current.InvokeDispatch(() => _gridView.Invalidate());
+        }
     }
 
     public override LayoutElement BuildFixedLayout()
@@ -241,6 +256,7 @@ internal class KeyboardShortcutsPanel : SettingsPanel
 
     public override void Save()
     {
+        if (!_transact.HasChanges) return;
         _transact.Commit();
         _desktopFormProvider.DesktopForm.ReassignKeyboardShortcuts();
     }

@@ -13,7 +13,7 @@ public class FileConfigScopeTests : ContextualTests
     [Fact]
     public void FileScope()
     {
-        var configPath = Path.Combine(FolderPath, "config.xml");
+        var configPath = P("config.xml");
         var scope = new FileConfigScope<CommonConfig>(configPath,
             new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite,
             TimeSpan.FromMilliseconds(100));
@@ -88,7 +88,7 @@ public class FileConfigScopeTests : ContextualTests
     [Fact]
     public void ReadWithBadXml()
     {
-        var configPath = Path.Combine(FolderPath, "config.xml");
+        var configPath = P("config.xml");
         File.WriteAllText(configPath, @"blah");
         var scope = new FileConfigScope<CommonConfig>(configPath,
             new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);
@@ -99,7 +99,7 @@ public class FileConfigScopeTests : ContextualTests
     [Fact]
     public void ReadWithBadConfig()
     {
-        var configPath = Path.Combine(FolderPath, "config.xml");
+        var configPath = P("config.xml");
         File.WriteAllText(configPath, @"<?xml version=""1.0"" encoding=""utf-8""?><Blah><Culture>fr</Culture></Blah>");
         var scope = new FileConfigScope<CommonConfig>(configPath,
             new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
@@ -110,7 +110,7 @@ public class FileConfigScopeTests : ContextualTests
     [Fact]
     public void ReadWithMissingFile()
     {
-        var configPath = Path.Combine(FolderPath, "config.xml");
+        var configPath = P("config.xml");
         var scope = new FileConfigScope<CommonConfig>(configPath,
             new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadWrite);
 
@@ -120,7 +120,7 @@ public class FileConfigScopeTests : ContextualTests
     [Fact]
     public void ReadAppSettings()
     {
-        var configPath = Path.Combine(FolderPath, "appsettings.xml");
+        var configPath = P("appsettings.xml");
         File.WriteAllText(configPath, ConfigData.AppSettings);
         var defaultsScope = new FileConfigScope<CommonConfig>(configPath,
             new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
@@ -143,7 +143,7 @@ public class FileConfigScopeTests : ContextualTests
     [Fact]
     public void ReadNewAppSettings()
     {
-        var configPath = Path.Combine(FolderPath, "appsettings.xml");
+        var configPath = P("appsettings.xml");
         File.WriteAllText(configPath, ConfigData.NewAppSettings);
         var defaultsScope = new FileConfigScope<CommonConfig>(configPath,
             new ConfigSerializer(ConfigReadMode.DefaultOnly, ConfigRootName.AppConfig), ConfigScopeMode.ReadOnly);
@@ -162,7 +162,7 @@ public class FileConfigScopeTests : ContextualTests
     [Fact]
     public void ReadWithOldConfig()
     {
-        var configPath = Path.Combine(FolderPath, "config.xml");
+        var configPath = P("config.xml");
         File.WriteAllText(configPath, ConfigData.OldUserConfig);
         var scope = new FileConfigScope<CommonConfig>(configPath,
             new ConfigSerializer(ConfigReadMode.All, ConfigRootName.UserConfig), ConfigScopeMode.ReadWrite);

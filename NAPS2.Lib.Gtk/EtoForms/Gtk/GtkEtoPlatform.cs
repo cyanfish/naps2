@@ -4,6 +4,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
+using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gtk;
 using GTK = Gtk;
@@ -233,7 +234,7 @@ public class GtkEtoPlatform : EtoPlatform
             }
             widget.GetPreferredSize(out _, out var naturalSize);
             return new SizeF(naturalSize.Width, naturalSize.Height);
-        }, clearSizeRequest: widget.IsRealized && widget is not GTK.DrawingArea);
+        }, clearSizeRequest: widget is not GTK.DrawingArea);
     }
 
     public override SizeF GetMinimumSize(Control control)
@@ -322,14 +323,23 @@ public class GtkEtoPlatform : EtoPlatform
         var size = new Size(w, h);
         if (excludeToolbars && window.ToolBar != null)
         {
-            var toolbar = (GTK.Toolbar) window.ToolBar.ControlObject;
-            var box = (GTK.Box) toolbar.Parent;
-            var heights = box.Children.OfType<GTK.Toolbar>().Select(x =>
+            var toolbars = window is GtkDesktopForm desktopForm
+                ? desktopForm.Toolbars
+                : [(GTK.Toolbar) window.ToolBar.ControlObject];
+            foreach (var toolbar in toolbars)
             {
-                x.GetPreferredHeight(out _, out int naturalHeight);
-                return naturalHeight;
-            });
-            size -= new Size(0, heights.Sum());
+                if (toolbar.Orientation == GTK.Orientation.Vertical)
+                {
+                    // Vertical toolbars are docked on the left or right
+                    toolbar.GetPreferredWidth(out _, out int naturalWidth);
+                    size -= new Size(naturalWidth, 0);
+                }
+                else
+                {
+                    toolbar.GetPreferredHeight(out _, out int naturalHeight);
+                    size -= new Size(0, naturalHeight);
+                }
+            }
         }
         return size;
     }
@@ -356,6 +366,12 @@ public class GtkEtoPlatform : EtoPlatform
         // GTK scale factors are integers. Any fractional scaling (e.g. 1.5x) works by rendering at 2x and then scaling
         // down.
         return window.ToNative().ScaleFactor;
+    }
+
+    public override void SetImageSize(ImageView imageView, int size)
+    {
+        // Icons are rendered at the display scale, and the image view draws them to fit its logical size
+        imageView.Size = new Size(size, size);
     }
 
     public override void AttachDpiDependency(Control control, Action<float> callback)

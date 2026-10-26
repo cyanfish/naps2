@@ -34,7 +34,7 @@ public class UndoableNumericMaskedTextBox<T> : NumericMaskedTextBox<T>
     {
         var mod = Application.Instance.CommonModifier;
         // Match the platform conventions (and the app's undo/redo shortcuts): Ctrl+Y on Windows, Mod+Shift+Z elsewhere
-        var redoKeys = EtoPlatform.Current.IsWinForms ? mod | Keys.Y : mod | Keys.Shift | Keys.Z;
+        var redoKeys = EtoPlatform.Current.IsWindows ? mod | Keys.Y : mod | Keys.Shift | Keys.Z;
         if (e.KeyData == (mod | Keys.Z))
         {
             Restore(_index - 1);

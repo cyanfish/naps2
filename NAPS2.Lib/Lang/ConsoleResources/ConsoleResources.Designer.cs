@@ -430,11 +430,20 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Press Enter to scan..
+        ///   Looks up a localized string similar to Press Enter to scan, or Ctrl+D to stop and save..
         /// </summary>
         internal static string PressEnterToScan {
             get {
                 return ResourceManager.GetString("PressEnterToScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press Enter to scan, or Ctrl+Z then Enter to stop and save..
+        /// </summary>
+        internal static string PressEnterToScanWindows {
+            get {
+                return ResourceManager.GetString("PressEnterToScanWindows", resourceCulture);
             }
         }
         
@@ -481,6 +490,15 @@ namespace NAPS2.Lang.ConsoleResources {
         internal static string StartingScan {
             get {
                 return ResourceManager.GetString("StartingScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping scan and saving....
+        /// </summary>
+        internal static string StoppingScan {
+            get {
+                return ResourceManager.GetString("StoppingScan", resourceCulture);
             }
         }
         

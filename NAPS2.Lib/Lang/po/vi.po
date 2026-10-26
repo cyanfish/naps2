@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:53\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
 "Language: vi\n"
@@ -72,6 +72,30 @@ msgstr "Nâng cao"
 msgid "Advanced Profile Settings"
 msgstr "Cài đặt chi tiết"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Tất cả ({0})"
@@ -137,10 +161,6 @@ msgstr ""
 msgid "Always show preview"
 msgstr ""
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Cần phải cài thêm phần mềm để nhập tập tin PDF này vào. Bạn có muốn tải ngay?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr ""
@@ -186,12 +206,12 @@ msgstr ""
 msgid "An update is available."
 msgstr "Đã có phiên bản mới hơn.."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "OCR có bản cập nhật mới.."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
+msgstr ""
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
 msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
@@ -229,10 +249,6 @@ msgstr "Bạn có chắc chắn bạn muốn xóa hồ sơ {0}?"
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "Bạn có chắc chắn muốn xóa {0} mục?"
-
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Bạn có chắc chắn muốn xóa {0} hồ sơ?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
@@ -341,6 +357,10 @@ msgstr "Đen / Trắng"
 msgid "Blank Pages"
 msgstr "Trang Trắng"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Độ Sáng / Tương Phản"
@@ -348,6 +368,10 @@ msgstr "Độ Sáng / Tương Phản"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "Độ sáng:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -443,8 +467,16 @@ msgstr "Nén:"
 msgid "Connect"
 msgstr ""
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
+msgstr ""
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
 msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
@@ -508,6 +540,10 @@ msgstr "SMTP tự điền"
 msgid "Custom..."
 msgstr "Tùy chỉnh..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr ""
@@ -516,6 +552,7 @@ msgstr ""
 msgid "Day (01-31)"
 msgstr "Ngày(01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -590,10 +627,6 @@ msgstr "Tải Về"
 msgid "Download Error"
 msgstr "Tải Về lỗi"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "Cần Tải Về"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Tiến độ tải về"
@@ -608,14 +641,6 @@ msgstr "Hai mặt"
 
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
-msgstr ""
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr ""
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
 msgstr ""
 
 #: UiStrings.resx$Edit$Message
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr ""
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "Cài đặt Email"
 
@@ -677,10 +701,6 @@ msgstr "Mã hóa PDF"
 msgid "Encryption"
 msgstr ""
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr ""
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr ""
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Ước tính kích thước download: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr ""
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "Tên tệp"
 msgid "File Path:"
 msgstr "Đường dẫn:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr ""
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr ""
@@ -739,8 +759,8 @@ msgstr "Lật 2 mặt trang"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "Để JPEG được chất lượng cao, nhớ tăng chất lượng hình trong thiết lập mẫu có sẵn của bạn.."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
 msgstr ""
 
 #: UiStrings.resx$GetMoreLanguages$Message
@@ -757,6 +777,10 @@ msgstr ""
 
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
+msgstr ""
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
 msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "Chất lượng ảnh"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "Cài đặt ảnh"
 
@@ -819,22 +842,6 @@ msgstr "Đang chèn..."
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr ""
-
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "Cài đặt thành công"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "Cài đặt bị lỗi"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Cài đặt hoàn tất. Bạn có muốn khởi động lại NAPS2 bây giờ?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "Cài đặt thất bại."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr ""
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -885,6 +891,7 @@ msgstr "Ngôn ngữ"
 msgid "Leave a Review"
 msgstr ""
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Trái"
@@ -927,6 +934,7 @@ msgstr ""
 msgid "Maximum quality (large files)"
 msgstr "Chất lượng tối đa (tập tin lớn)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr ""
@@ -938,6 +946,10 @@ msgstr ""
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "Phút (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr ""
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -973,6 +985,10 @@ msgstr "Chuyển xuống"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Chuyển lên"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1160,7 +1176,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "Tài liệu PDF  (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "Cài đặt PDF"
 
@@ -1221,6 +1236,10 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
+
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr ""
@@ -1262,6 +1281,10 @@ msgstr "Hồ sơ:"
 #: UiStrings.resx$Profiles$Message
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
+msgstr ""
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
 msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
@@ -1332,6 +1355,10 @@ msgstr "Nghị quyết:"
 msgid "Restore Defaults"
 msgstr "Khôi phục mặc định"
 
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
+
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr "Đảo ngược"
@@ -1352,6 +1379,7 @@ msgstr ""
 msgid "Revert"
 msgstr "Trở lại"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Phải"
@@ -1483,10 +1511,6 @@ msgstr "Quét Ảnh"
 msgid "Scanner Sharing"
 msgstr ""
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "Trang quét {0}"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "Đang quét trang {0} (Quét {1})..."
@@ -1614,6 +1638,14 @@ msgstr "Bỏ qua Lưu nhanh "
 msgid "Split"
 msgstr ""
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Bắt Đầu"
@@ -1630,6 +1662,10 @@ msgstr "Kéo dãn ra vừa kích thước trang"
 msgid "Subject:"
 msgstr "Tiêu đề:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr ""
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr ""
@@ -1642,28 +1678,14 @@ msgstr ""
 msgid "Technical Details"
 msgstr "Chi tiết kỹ thuật"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "OCR chưa được cài. Vui lòng cài đặt gói liên quan để thao tác.:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
-msgstr ""
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
 msgstr ""
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "Các tập tin '{0}' không thể chèn được."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Các tập tin '{0}' không thể chèn được. Chỉ những tập tin PDF được tạo bởi NAPS2 có thể được chèn."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1761,8 +1783,28 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
 msgstr ""
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr ""
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
+msgstr ""
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
 msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
@@ -1858,6 +1900,10 @@ msgstr "Đang đợi cho phép..."
 msgid "Waiting for scan {0}..."
 msgstr "Đang chờ quét {0}..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "Ngưỡng trắng"
@@ -1873,11 +1919,6 @@ msgstr "Năm"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "Năm (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "Bạn không có quyền sao chép nội dung từ file '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1909,14 +1950,10 @@ msgstr ""
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "trong"
+msgstr "inch"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
-msgstr ""
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
 msgstr ""
 
 #: SettingsResources.resx$TwainImpl_X64$Message

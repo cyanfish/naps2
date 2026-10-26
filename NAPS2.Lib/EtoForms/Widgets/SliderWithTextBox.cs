@@ -30,6 +30,7 @@ public class SliderWithTextBox
         _slider.MaxValue = constraints.SliderMaxValue;
         _slider.TickFrequency = constraints.SliderTickFrequency;
         _textBox.Text = 0.ToString("G");
+        EtoPlatform.Current.SetImageSize(_imageView, 16);
 
         _slider.ValueChanged += (_, _) => { IntValue = _slider.Value; };
         _textBox.TextChanged += (_, _) =>

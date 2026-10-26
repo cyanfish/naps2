@@ -9,7 +9,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_BlackAndWhite()
     {
         var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
@@ -20,7 +20,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_BlackAndWhiteWithColorBitDepth()
     {
         var bw = LoadImage(ImageResources.dog_bw).PerformTransform(new BlackWhiteTransform());
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
@@ -31,7 +31,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_ColorHighQuality()
     {
         var color = LoadImage(ImageResources.dog);
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, true, -1, out var format);
 
@@ -42,7 +42,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_LogicalBlackWhite()
     {
         var bw = LoadImage(ImageResources.dog_bw_24bit);
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
@@ -53,7 +53,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_SmallerPng()
     {
         var bw = LoadImage(ImageResources.dog_clustered_gray);
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, bw, false, -1, out var format);
 
@@ -64,7 +64,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_OriginalPng()
     {
         var color = LoadImage(ImageResources.dog_png);
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, false, -1, out var format);
 
@@ -76,7 +76,7 @@ public class ImageExportHelperTests : ContextualTests
     {
         var color = LoadImage(ImageResources.dog_png);
         color.OriginalFileFormat = ImageFileFormat.Unknown;
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, false, -1, out var format);
 
@@ -87,7 +87,7 @@ public class ImageExportHelperTests : ContextualTests
     public void SaveSmallestFormat_OriginalJpeg()
     {
         var color = LoadImage(ImageResources.dog_bw_jpg);
-        var path = Path.Combine(FolderPath, "test");
+        var path = P("test");
 
         var fullPath = ImageExportHelper.SaveSmallestFormat(path, color, false, -1, out var format);
 

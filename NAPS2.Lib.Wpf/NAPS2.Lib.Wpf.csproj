@@ -24,6 +24,7 @@
     <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" />
     <PackageReference Include="Eto.Forms" Version="2.11.0" />
     <PackageReference Include="Eto.Platform.Wpf" Version="2.11.0" />
+    <PackageReference Include="NAPS2.Windows.Printing" Version="0.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,7 @@
     <Compile Include="..\NAPS2.Lib.WinForms\EtoForms\WinForms\WindowsDarkModeProvider.cs" LinkBase="Windows\EtoForms" />
     <Compile Include="..\NAPS2.Lib.WinForms\ImportExport\Email\Mapi\*.cs" LinkBase="Windows\ImportExport\Email\Mapi" />
     <Compile Include="..\NAPS2.Lib.WinForms\Logging\WindowsEventLogger.cs" LinkBase="Windows\Logging" />
+    <Compile Include="..\NAPS2.Lib.WinForms\Platform\Windows\WindowsApplicationLifecycle.cs" LinkBase="Windows\Platform\Windows" />
     <Compile Include="..\NAPS2.Lib.WinForms\Platform\Windows\WindowsOpenWith.cs" LinkBase="Windows\Platform\Windows" />
     <Compile Include="..\NAPS2.Lib.WinForms\Platform\Windows\WindowsServiceManager.cs" LinkBase="Windows\Platform\Windows" />
   </ItemGroup>

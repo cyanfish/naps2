@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>A je i sigurt se dëshiron të fshish {0} element(e)?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>A je i sigurt se dëshiron të fshish {0} profile?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>A je i sigurt se dëshiron të fshish profilin {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Skedarët Bitmap (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Metaskedar i përmirësuar i Windows (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Skedar imazhi i shkëmbyeshëm (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>Skedar GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>Skedar JPEG (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Ndodhi një gabim gjatë provës për të dërguar një email.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Instalimi përfundoi</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Instalimi përfundoi. A dëshiron ta rihapësh NAPS2 tani?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Instalimi dështoi.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Instalimi dështoi</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Të gjitha ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Skedari '{0}' nuk mund të importohej.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Skedari '{0}' nuk mund të importohej. Vetëm skedarët PDF të gjeneruar nga NAPS2 mund të importohen.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Gabim gjatë shkarkimit</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Veprimi në progres</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Po skanon faqen {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Skaneri i zgjedhur nuk e mbështet përdorimin e furnizuesit. Nëse skaneri yt nuk ka një furnizues, provo të përdorësh një drejtues të ndryshëm.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Nuk ka faqe te furnizuesi.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Nuk ke të drejta të kopjosh përmbajtjen nga skedari '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Ndodhi një gabim gjatë provës për ruajtjen e skedarit.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>nga {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Ndodhi një gabim i panjohur gjatë ekzekutimit të skanimit në grup.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skaneri po ngrohet.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Një përditësim i OCR është i disponueshëm.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Imazhi u ruajt.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Progresi i drejtimit</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Nevojitet shkarkim</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Nevojitet një komponent shtesë për të importuar këtë skedar PDF. A dëshiron ta shkarkosh tani?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Je i sigurt se do ta anulosh skanimin në grup?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>A të pëlqen NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e duhura:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketën e kërkuar:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Drejtuesi i zgjedhur nuk mbështetet në këtë sistem.</value>

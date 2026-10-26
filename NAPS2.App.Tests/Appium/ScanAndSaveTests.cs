@@ -41,7 +41,7 @@ public class ScanAndSaveTests : AppiumTests
         // Wait for the save to finish, it should be almost instant
         Thread.Sleep(1000);
 
-        PdfAsserts.AssertPageCount(1, Path.Combine(FolderPath, "test.pdf"));
+        PdfAsserts.AssertPageCount(1, P("test.pdf"));
         AppTestHelper.AssertNoErrorLog(FolderPath);
     }
 
@@ -77,7 +77,7 @@ public class ScanAndSaveTests : AppiumTests
         // Wait for the save to finish, it should be almost instant
         Thread.Sleep(1000);
 
-        ImageAsserts.Inches(Path.Combine(FolderPath, "test.jpg"), 8.5, 11);
+        ImageAsserts.Inches(P("test.jpg"), 8.5, 11);
         AppTestHelper.AssertNoErrorLog(FolderPath);
     }
 }

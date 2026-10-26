@@ -22,6 +22,9 @@ internal class CombinedSettingsForm : EtoDialogBase
     private readonly List<LayoutVisibility> _panelVisibilities;
     private readonly ISettingsNavigator _navigator = EtoPlatform.Current.CreateSettingsNavigator();
     private readonly Button _restoreDefaults = new() { Text = UiStrings.RestoreDefaults };
+    private readonly HashSet<SettingsPanel> _shownPanels = [];
+    private bool _isShown;
+    private bool _saved;
 
     public CombinedSettingsForm(Naps2Config config, DialogHelper dialogHelper,
         DesktopFormProvider desktopFormProvider, KeyboardShortcutManager ksm) : base(config)
@@ -39,6 +42,10 @@ internal class CombinedSettingsForm : EtoDialogBase
         if (PlatformCompat.System.SupportsKeyboardShortcuts)
         {
             _panels.Add(new KeyboardShortcutsPanel(this, ksm, desktopFormProvider));
+        }
+        if (PlatformCompat.System.SupportsToolbarCustomization)
+        {
+            _panels.Add(new ToolbarSettingsPanel(this, desktopFormProvider));
         }
         _panelVisibilities = _panels.Select(_ => new LayoutVisibility(false)).ToList();
 
@@ -101,7 +108,8 @@ internal class CombinedSettingsForm : EtoDialogBase
             EtoPlatform.Current.AttachWindowSidebar(this, _navigator.Control, new WindowSidebarOptions
             {
                 Width = NAVIGATOR_WIDTH,
-                MaxWidth = NAVIGATOR_WIDTH + 100
+                MinWidth = NAVIGATOR_WIDTH,
+                MaxWidth = NAVIGATOR_WIDTH
             });
         }
     }
@@ -109,9 +117,19 @@ internal class CombinedSettingsForm : EtoDialogBase
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        foreach (var panel in _panels)
+        _isShown = true;
+        ShowPanel(SelectedPanel);
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        if (!_saved)
         {
-            panel.OnShown();
+            foreach (var panel in _panels)
+            {
+                panel.Cancel();
+            }
         }
     }
 
@@ -127,6 +145,19 @@ internal class CombinedSettingsForm : EtoDialogBase
             // Per the macOS guidelines, the title should reflect the current pane
             Title = selected.Title;
         }
+        if (_isShown)
+        {
+            ShowPanel(selected);
+        }
+    }
+
+    // Panels aren't shown until they're selected, as showing some panels is relatively slow (e.g. populating a grid)
+    private void ShowPanel(SettingsPanel panel)
+    {
+        if (_shownPanels.Add(panel))
+        {
+            panel.OnShown();
+        }
     }
 
     private void Save()
@@ -135,5 +166,6 @@ internal class CombinedSettingsForm : EtoDialogBase
         {
             panel.Save();
         }
+        _saved = true;
     }
 }

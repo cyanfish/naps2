@@ -21,6 +21,8 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool SupportsProfilesToolbar => true;
 
+    public bool SupportsToolbarCustomization => true;
+
     public bool SupportsButtonActions => true;
 
     public bool SupportsKeyboardShortcuts => true;

@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Vill du verkligen ta bort {0} objekt?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Vill du verkligen ta bort {0} profiler?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Vill du verkligen ta bort profilen {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Bitmap-filer (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Exchangeable Image File (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF-fil (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG-fil (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Ett fel uppstod vid försök att skicka e-post.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Installationen slutförd</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Installationen slutförd. Vill du starta om NAPS2 nu?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Installationen misslyckades.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Installationen misslyckades</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Alla ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Filen '{0}' kunde inte importeras.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Filen '{0}' kunde inte importeras. Endast PDF-filer genererade av NAPS2 kan importeras.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Nedladdningsfel</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Tjänsten körs</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skannar sidan {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Den valda skannern stöder inte användning av matare. Försök med en annan drivrutin, om din skanner har en matare.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Det finns inga sidor i mataren.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Du har inte behörighet att kopiera innehåll från filen '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Ett fel inträffade vid försök att spara filen.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>av {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Ett okänt fel uppstod under mängdskanningen.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skannern värmer upp.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>En uppdatering till OCR finns tillänglig.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Bild sparad.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Förlopp för Räta upp</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Nerladdning behövs</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>En extra komponent behövs för att importera denna PDF-fil. Vill du ladda ner den nu?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Är du säker på du vill avbryta eller avsluta multi scan?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Gillar du NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE drivrutin är inte tillgänglig. Kontroller och installera nödvändigt paket:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR motorn är inte tillgänglig. Kontrollera och installera paketet som krävs:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Valda drivrutinen är inte supporterad för detta system.</value>

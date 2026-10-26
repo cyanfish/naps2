@@ -13,8 +13,8 @@ public class WpfModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterType<StubApplicationLifecycle>().As<ApplicationLifecycle>();
-        builder.RegisterType<StubScannedImagePrinter>().As<IScannedImagePrinter>();
+        builder.RegisterType<WindowsApplicationLifecycle>().As<ApplicationLifecycle>();
+        builder.RegisterType<WpfScannedImagePrinter>().As<IScannedImagePrinter>();
         builder.RegisterType<WindowsServiceManager>().As<IOsServiceManager>().SingleInstance();
         builder.RegisterType<WindowsOpenWith>().As<IOpenWith>();
         builder.RegisterType<MapiEmailProvider>().As<IEmailProvider>().WithParameter("systemDefault", true);

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -49,7 +49,7 @@ msgstr "A4 (210 x 297 毫米)"
 
 #: SettingsResources.resx$PageSize_A5$Message
 msgid "A5 (148x210 mm)"
-msgstr "A5(149 x 210 毫米)"
+msgstr "A5(148 x 210 毫米)"
 
 #: UiStrings.resx$About$Message
 #: UiStrings.resx$AboutFormTitle$Message
@@ -71,6 +71,30 @@ msgstr "高级"
 #: UiStrings.resx$AdvancedProfileFormTitle$Message
 msgid "Advanced Profile Settings"
 msgstr "高级配置文件设置"
+
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr "底部对齐"
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr "居中对齐"
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr "左对齐"
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr "垂直居中"
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr "右对齐"
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr "顶端对齐"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -137,10 +161,6 @@ msgstr "总是提示"
 msgid "Always show preview"
 msgstr "始终显示预览"
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "需要额外的组件来导入这个 PDF 文件，您想要现在开始下载吗？"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "运行OCR时出错。"
@@ -186,13 +206,13 @@ msgstr "批量扫描时发生未知错误."
 msgid "An update is available."
 msgstr "有可用的更新."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "OCR 有可用的更新."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple 驱动程序"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr "苹果驱动器实现："
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -230,10 +250,6 @@ msgstr "您确定要删除这个{0} 配置吗？"
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "您确定要删除{0} 个项目吗?"
 
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "您确定要删除{0} 个配置吗？"
-
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
 msgstr "您确定想要停止分享 {0} 吗？"
@@ -269,11 +285,11 @@ msgstr "自动保存设置"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "自动裁剪"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "自动裁剪已扫描页面"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -341,6 +357,10 @@ msgstr "黑白"
 msgid "Blank Pages"
 msgstr "空白页"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "亮度/对比度"
@@ -348,6 +368,10 @@ msgstr "亮度/对比度"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "亮度:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -433,7 +457,7 @@ msgstr "兼容性"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "压缩"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -443,9 +467,17 @@ msgstr "压缩:"
 msgid "Connect"
 msgstr "连接"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "连接出错"
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "自定义 SMTP"
 msgid "Custom..."
 msgstr "自定义..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr "深色"
@@ -516,6 +552,7 @@ msgstr "深色"
 msgid "Day (01-31)"
 msgstr "日 (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -563,7 +600,7 @@ msgstr "尺寸"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "尺寸:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -590,10 +627,6 @@ msgstr "下载"
 msgid "Download Error"
 msgstr "下载错误"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "需要下载"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "下载进度"
@@ -609,14 +642,6 @@ msgstr "输稿器（双面）"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "ESCL 驱动程序"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "ESCL 网络驱动程序"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "ESCL USB 驱动程序"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "发送所选页（PDF）"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "邮件设置"
 
@@ -677,10 +701,6 @@ msgstr "加密 PDF"
 msgid "Encryption"
 msgstr "加密"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "增强的 Windows 图元文件 (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "启动应用程序 {0} 出错"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "估计下载大小: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "可交换图像文件 (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "文件名"
 msgid "File Path:"
 msgstr "文件路径:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr "文件传输"
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "修复白平衡并移除噪点"
@@ -739,9 +759,9 @@ msgstr "翻转偶数页面"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "对于 JPEG 高质量 (80+)，还可以在配置文件中增加图像质量，以获得最佳效果."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "GIF 文件 (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr "一般设置"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "灰阶"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr "帮助"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "图像质量"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "图像设定"
 
@@ -820,22 +843,6 @@ msgstr "正在导入..."
 msgid "Install {0}"
 msgstr "安装 {0}"
 
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "安装完成"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "安装失败"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "安装完成。您需要立即重新启动 NAPS2 吗？"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "安装失败."
-
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
 msgstr "界面"
@@ -850,7 +857,7 @@ msgstr "JPEG 文件(*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "JPEG 质量："
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "在整个会话期间保留图像"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
@@ -885,6 +891,7 @@ msgstr "语言"
 msgid "Leave a Review"
 msgstr "撰写评论"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "左对齐"
@@ -927,6 +934,7 @@ msgstr "手动IP地址"
 msgid "Maximum quality (large files)"
 msgstr "最佳质量（大文件）"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "内存传输"
@@ -938,6 +946,10 @@ msgstr "元数据"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "分钟 (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr "缺少文件扩展名 (例如\".pdf\")"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -984,6 +996,10 @@ msgstr "下移"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "上移"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1171,7 +1187,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "PDF 文档(*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "PDF 设置"
 
@@ -1221,7 +1236,7 @@ msgstr "粘贴"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "像素尺寸："
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1231,6 +1246,10 @@ msgstr "格式符"
 #: UiStrings.resx$Port$Message
 msgid "Port"
 msgstr "端口"
+
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1274,6 +1293,10 @@ msgstr "配置文件:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "配置文件"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1333,7 +1356,7 @@ msgstr "重置图像"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "分辨率 (dpi)："
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1342,6 +1365,10 @@ msgstr "分辨率:"
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
 msgstr "还原默认值"
+
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr "重试"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1363,6 +1390,7 @@ msgstr "颠倒背面"
 msgid "Revert"
 msgstr "还原"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "右对齐"
@@ -1494,10 +1522,6 @@ msgstr "已扫描的图像"
 msgid "Scanner Sharing"
 msgstr "扫描仪共享"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "正在扫描页面 {0}"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "正在扫描页面 {0} (扫描 {1})..."
@@ -1626,6 +1650,14 @@ msgstr "跳过保存提示"
 msgid "Split"
 msgstr "拆分"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr "水平拆分"
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr "垂直分割"
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "启动"
@@ -1642,6 +1674,10 @@ msgstr "扩展至纸张大小"
 msgid "Subject:"
 msgstr "主题:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr "交换"
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF 文件 (*.tiff, *.tif)"
@@ -1654,28 +1690,14 @@ msgstr "TWAIN 驱动"
 msgid "Technical Details"
 msgstr "技术细节"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "OCR 组件不可用。请确认已安装所需的软件包:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "OCR操作超时"
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "SANE 驱动不可用。请确认已安装所需的软件包:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "无法导入文件 '{0}'."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "无法导入文件 '{0}'。 只有 NAPS2 生成的 PDF 才能被导入."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1780,9 +1802,29 @@ msgstr "要用 feeder 扫描仪扫描多页文档的两面，如果你的扫描�
 "4. 单击 \"手动双面\"\n"
 "5. 根据扫描仪的物理方向，可能需要勾选 \"颠倒背面\""
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr "切换方向"
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr "切换视图"
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "工具"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1794,7 +1836,7 @@ msgstr "US Legal (8.5x14 英寸)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US Legal (8.5x14 英寸)"
+msgstr "US Letter (8.5x11 英寸)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
@@ -1834,7 +1876,7 @@ msgstr "上传邮件..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "使用 JPEG 压缩"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1877,6 +1919,10 @@ msgstr "等待授权..."
 msgid "Waiting for scan {0}..."
 msgstr "正在等待扫描 {0}..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "白色阀值"
@@ -1892,11 +1938,6 @@ msgstr "年份"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "年份 (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "您没有从文件 '{0}' 中复制内容的权限."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1928,15 +1969,11 @@ msgstr "厘米"
 
 #: SettingsResources.resx$PageSizeUnit_Inch$Message
 msgid "in"
-msgstr "单位"
+msgstr "英寸"
 
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "毫米"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "/ {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

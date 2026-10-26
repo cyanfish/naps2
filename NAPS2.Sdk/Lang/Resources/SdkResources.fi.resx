@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Syöttölaite on tyjä.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Sinulla ei ole oikeuksia kopioida tiedoston '{0}' sisältöä.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Valittu skanneri ei tue monipuoleisuutta. Jos skannerisi luultavasti tukee sitä, kokeile toista ajuria.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skanneri lämpiää.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE - ajuri ei ole käytettävissä. Asenna tarvittava osat:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR - moottori ei ole käytettävissä. Asenna tarvittava osat:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Valittua ajuria ei tueta tässä järjestelmässä.</value>

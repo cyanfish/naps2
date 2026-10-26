@@ -19,7 +19,7 @@ public class PdfImportExportTests : ContextualTests
         _importer = new PdfImporter(ScanningContext);
         _exporter = new PdfExporter(ScanningContext);
         _importPath = CopyResourceToFile(PdfResources.word_generated_pdf, "import.pdf");
-        _exportPath = Path.Combine(FolderPath, "export.pdf");
+        _exportPath = P("export.pdf");
     }
 
     [Theory]
@@ -59,7 +59,7 @@ public class PdfImportExportTests : ContextualTests
         config.StorageConfig.Apply(this);
         SetUpFakeOcr();
 
-        var exportPath = Path.Combine(FolderPath, "blah", "export.pdf");
+        var exportPath = P("blah", "export.pdf");
         var images = await _importer.Import(_importPath).ToListAsync();
         Assert.Equal(2, images.Count);
         await _exporter.Export(exportPath, images, ocrParams: config.OcrParams);
@@ -123,7 +123,7 @@ public class PdfImportExportTests : ContextualTests
             { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled"}
         });
 
-        var importPathForOcr = Path.Combine(FolderPath, "import_ocr.pdf");
+        var importPathForOcr = P("import_ocr.pdf");
         File.WriteAllBytes(importPathForOcr, PdfResources.word_patcht_pdf);
         var images = await _importer.Import(_importPath).ToListAsync();
         var imagesForOcr = await _importer.Import(importPathForOcr).ToListAsync();
@@ -186,6 +186,24 @@ public class PdfImportExportTests : ContextualTests
 
         PdfAsserts.AssertEncrypted(_exportPath, "hello", "world");
         PdfAsserts.AssertImages(_exportPath, "world", PdfResources.word_p1, PdfResources.word_p2);
+    }
+
+    [Theory]
+    [ClassData(typeof(OcrTestData))]
+    public async Task ImportExportAnnotationPopups(OcrTestConfig config)
+    {
+        config.StorageConfig.Apply(this);
+        SetUpFakeOcr();
+
+        // The popup annotations reference their parent annotations, which Pdfium doesn't remap when copying pages
+        var importPath = CopyResourceToFile(PdfResources.filled_form_annotated, "annotated.pdf");
+        var images = await _importer.Import(importPath).ToListAsync();
+        images.AddRange(await _importer.Import(importPath).ToListAsync());
+        Assert.Equal(2, images.Count);
+        await _exporter.Export(_exportPath, images, ocrParams: config.OcrParams);
+
+        PdfAsserts.AssertImages(_exportPath, ImageAsserts.XPLAT_RMSE_THRESHOLD,
+            ImageResources.filled_form_annotated, ImageResources.filled_form_annotated);
     }
 
     [Theory]

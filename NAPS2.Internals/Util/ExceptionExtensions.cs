@@ -24,4 +24,19 @@ public static class ExceptionExtensions
             _internalPreserveStackTrace.Invoke(e, new object[] { });
         }
     }
+
+    /// <summary>
+    /// Returns true if the exception or any of its inner exceptions match the predicate.
+    /// </summary>
+    public static bool AnyMatch(this Exception e, Func<Exception, bool> predicate)
+    {
+        for (var current = e; current != null; current = current.InnerException)
+        {
+            if (predicate(current))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
