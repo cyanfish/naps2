@@ -285,6 +285,15 @@ public class SavePdfOperationTests : ContextualTests
     }
 
     [Fact]
+    public void MetadataSubstitute_UsesProvidedDateTime()
+    {
+        var metadata = new PdfMetadata { Title = "title $(YYYY)" }
+            .Substitute(_nameManager, TestDate);
+
+        Assert.Equal("title 2024", metadata.Title);
+    }
+
+    [Fact]
     public async Task SinglePagePdfs_MetadataNotNumbered()
     {
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray),
