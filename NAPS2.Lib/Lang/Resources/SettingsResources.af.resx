@@ -85,7 +85,7 @@
     <value>US Legal (8.5x14 in)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Legal (8.5x14 in)</value>
+    <value>US Letter (8.5x11 in)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
     <value>Tùy chỉnh...</value>
@@ -144,6 +144,15 @@
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
+  <data name="AppleImpl_Default" xml:space="preserve">
+    <value>Verstek</value>
+  </data>
+  <data name="AppleImpl_FileTransfer" xml:space="preserve">
+    <value>File Transfer</value>
+  </data>
+  <data name="AppleImpl_MemoryTransfer" xml:space="preserve">
+    <value>Geheue Oordrag</value>
+  </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>Verstek</value>
   </data>
@@ -179,5 +188,17 @@
   </data>
   <data name="Theme_Dark" xml:space="preserve">
     <value>Dark</value>
+  </data>
+  <data name="DockStyle_Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="DockStyle_Left" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="DockStyle_Bottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="DockStyle_Right" xml:space="preserve">
+    <value>Regs</value>
   </data>
 </root>

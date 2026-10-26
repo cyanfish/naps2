@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>У подавачі немає сторінок.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>У вас немає дозволу копіювати вміст із файлу «{0}».</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Вибраний сканер не підтримує двостороннє сканування. Якщо ваш сканер все ж підтримує двостороннє сканування, спробуйте вибрати інший драйвер.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Сканер прогрівається.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Драйвер SANE недоступний. Переконайтеся, що встановлено необхідні пакети:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Механізм розпізнавання (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Вибраний драйвер не підтримується в цій системі.</value>

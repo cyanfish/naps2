@@ -27,6 +27,9 @@
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Repetir</value>
+  </data>
   <data name="Donate" xml:space="preserve">
     <value>Doar</value>
   </data>
@@ -159,6 +162,9 @@
   <data name="MoveDown" xml:space="preserve">
     <value>Mover abaixo</value>
   </data>
+  <data name="MoveUpDown" xml:space="preserve">
+    <value>Move Up/Down</value>
+  </data>
   <data name="Reorder" xml:space="preserve">
     <value>Reordenar</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Configurações</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>Configurações Gerais</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Interface</value>
@@ -284,12 +293,6 @@
   </data>
   <data name="EsclDriver" xml:space="preserve">
     <value>Driver ESCL</value>
-  </data>
-  <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>ESCL Network Driver</value>
-  </data>
-  <data name="EsclUsbDriver" xml:space="preserve">
-    <value>ESCL USB Driver</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Apple Driver</value>
@@ -427,7 +430,7 @@
     <value>Reverter</value>
   </data>
   <data name="AutoCrop" xml:space="preserve">
-    <value>Auto-Crop</value>
+    <value>Auto-Recortar</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Aplicar para todas as {0} imagens selecionadas</value>
@@ -464,9 +467,6 @@
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
     <value>Restaurar padrões</value>
-  </data>
-  <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>Configurações de PDF</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>Permitir Impressão</value>
@@ -582,12 +582,6 @@
   <data name="CompressionLabel" xml:space="preserve">
     <value>Compressão:</value>
   </data>
-  <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Configurações de imagem</value>
-  </data>
-  <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Configurações de e-mail</value>
-  </data>
   <data name="SettingsFormTitle" xml:space="preserve">
     <value>Configurações</value>
   </data>
@@ -688,7 +682,7 @@
     <value>Endireitar páginas digitalizadas</value>
   </data>
   <data name="AutoCropScannedPages" xml:space="preserve">
-    <value>Auto-crop scanned pages</value>
+    <value>Cortar automaticamente páginas digitalizadas</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Aplicar Brilho/Contraste após digitalizar</value>
@@ -713,6 +707,9 @@
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementação Twain:</value>
+  </data>
+  <data name="AppleImplLabel" xml:space="preserve">
+    <value>Implementação do Apple Driver:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Digitalização em lote</value>
@@ -822,8 +819,17 @@
   <data name="Connect" xml:space="preserve">
     <value>Conectar</value>
   </data>
+  <data name="WaitingToConnect" xml:space="preserve">
+    <value>Waiting to connect.</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>Erro de conexão.</value>
+  </data>
+  <data name="ConnectionTimedOut" xml:space="preserve">
+    <value>Connection timed out.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Sempre Perguntar</value>
@@ -847,9 +853,6 @@
     <value>Não consegue encontrar seu scanner? Leia sobre as limitações do NAPS2 Flatpak.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>Atalhos de Teclado</value>
-  </data>
-  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
     <value>Atalhos de Teclado</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
@@ -958,21 +961,78 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Shift</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>Compress</value>
+    <value>Comprimir</value>
   </data>
   <data name="ResolutionDpiLabel" xml:space="preserve">
-    <value>Resolution (dpi):</value>
+    <value>Resolução (dpi):</value>
   </data>
   <data name="DimensionsLabel" xml:space="preserve">
-    <value>Dimensions:</value>
+    <value>Dimensões:</value>
   </data>
   <data name="PixelDimensionsLabel" xml:space="preserve">
-    <value>Pixel dimensions:</value>
+    <value>Dimensões de pixel:</value>
   </data>
   <data name="UseJpegCompression" xml:space="preserve">
-    <value>Use JPEG compression</value>
+    <value>Usar compressão JPEG</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
-    <value>JPEG quality:</value>
+    <value>Qualidade do JPEG:</value>
+  </data>
+  <data name="MissingFileExtension" xml:space="preserve">
+    <value>Extensão de arquivo ausente (ex: ".pdf")</value>
+  </data>
+  <data name="AlignLeft" xml:space="preserve">
+    <value>Alinhar à esquerda</value>
+  </data>
+  <data name="AlignCenter" xml:space="preserve">
+    <value>Alinhar ao centro</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Alinhar à direita</value>
+  </data>
+  <data name="AlignTop" xml:space="preserve">
+    <value>Alinhar no topo</value>
+  </data>
+  <data name="AlignMiddle" xml:space="preserve">
+    <value>Alinhar no meio</value>
+  </data>
+  <data name="AlignBottom" xml:space="preserve">
+    <value>Alinhar na parte inferior</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Trocar</value>
+  </data>
+  <data name="SplitVertically" xml:space="preserve">
+    <value>Dividir Verticalmente</value>
+  </data>
+  <data name="SplitHorizontally" xml:space="preserve">
+    <value>Dividir Horizontalmente</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="ToggleOrientation" xml:space="preserve">
+    <value>Alternar Orientação</value>
+  </data>
+  <data name="ToggleView" xml:space="preserve">
+    <value>Alternar exibição</value>
+  </data>
+  <data name="ToolbarSettings" xml:space="preserve">
+    <value>Toolbar Settings</value>
+  </data>
+  <data name="CustomizeToolbar" xml:space="preserve">
+    <value>Customize Toolbar</value>
+  </data>
+  <data name="Toolbar" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="ProfilesToolbar" xml:space="preserve">
+    <value>Profiles toolbar</value>
+  </data>
+  <data name="PositionLabel" xml:space="preserve">
+    <value>Position:</value>
+  </data>
+  <data name="ButtonsLabel" xml:space="preserve">
+    <value>Buttons:</value>
   </data>
 </root>

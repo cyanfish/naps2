@@ -561,13 +561,55 @@ public class WpfEtoPlatform : EtoPlatform
         {
             return new Size((int) container.ActualWidth, (int) container.ActualHeight);
         }
+        if (!excludeToolbars && window.ToNative() is { IsLoaded: true, Content: SW.FrameworkElement content })
+        {
+            // Eto's ClientSize excludes toolbars, so we use the window content (which includes them)
+            return new Size((int) content.ActualWidth, (int) content.ActualHeight);
+        }
         return base.GetClientSize(window, excludeToolbars);
+    }
+
+    public override void SetClientSize(Window window, Size clientSize)
+    {
+        var native = window.ToNative();
+        if (native.Content is not SW.FrameworkElement content)
+        {
+            base.SetClientSize(window, clientSize);
+            return;
+        }
+        if (native.IsLoaded)
+        {
+            native.SizeToContent = SW.SizeToContent.Manual;
+            native.Width = clientSize.Width + native.ActualWidth - content.ActualWidth;
+            native.Height = clientSize.Height + native.ActualHeight - content.ActualHeight;
+            return;
+        }
+        // Before the window is loaded, it sizes itself to fit its content. Constraining the content (rather than
+        // using Eto's ClientSize) means toolbars are included in the size and don't widen the window.
+        content.MinWidth = content.MaxWidth = clientSize.Width;
+        content.MinHeight = content.MaxHeight = clientSize.Height;
+        native.Loaded += OnLoaded;
+
+        void OnLoaded(object? sender, SW.RoutedEventArgs e)
+        {
+            native.Loaded -= OnLoaded;
+            native.SizeToContent = SW.SizeToContent.Manual;
+            content.MinWidth = content.MinHeight = 0;
+            content.MaxWidth = content.MaxHeight = double.PositiveInfinity;
+        }
     }
 
     public override float GetScaleFactor(Window? window)
     {
         var native = window?.ToNative();
         return native == null ? 1f : (float) SWM.VisualTreeHelper.GetDpi(native).DpiScaleX;
+    }
+
+    public override void SetImageSize(ImageView imageView, int size)
+    {
+        // Icons are rendered at the display scale, so they need a fixed logical size or they'd show at their pixel
+        // size in DIPs (e.g. double-size at 200%)
+        imageView.Size = new Size(size, size);
     }
 
     public override void AttachDpiDependency(Control control, Action<float> callback)

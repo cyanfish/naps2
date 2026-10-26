@@ -27,6 +27,9 @@
   <data name="OK" xml:space="preserve">
     <value>אישור</value>
   </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
   <data name="Donate" xml:space="preserve">
     <value>תרומה</value>
   </data>
@@ -159,6 +162,9 @@
   <data name="MoveDown" xml:space="preserve">
     <value>להזיז למטה</value>
   </data>
+  <data name="MoveUpDown" xml:space="preserve">
+    <value>Move Up/Down</value>
+  </data>
   <data name="Reorder" xml:space="preserve">
     <value>סידור מחדש</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>הגדרות</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>General Settings</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>מנשק</value>
@@ -284,12 +293,6 @@
   </data>
   <data name="EsclDriver" xml:space="preserve">
     <value>מנהל התקן ESCL</value>
-  </data>
-  <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>מנהל התקן רשת מסוג ESCL</value>
-  </data>
-  <data name="EsclUsbDriver" xml:space="preserve">
-    <value>מנהל התקן USB מסוג ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>מנהל התקן של Apple</value>
@@ -465,9 +468,6 @@
   <data name="RestoreDefaults" xml:space="preserve">
     <value>שחזור ברירות מחדל</value>
   </data>
-  <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>הגדרות PDF</value>
-  </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>לאפשר הדפסה</value>
   </data>
@@ -581,12 +581,6 @@
   </data>
   <data name="CompressionLabel" xml:space="preserve">
     <value>דחיסה:</value>
-  </data>
-  <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>הגדרות תמונה</value>
-  </data>
-  <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>הגדרות דוא״ל</value>
   </data>
   <data name="SettingsFormTitle" xml:space="preserve">
     <value>הגדרות</value>
@@ -714,6 +708,9 @@
   <data name="TwainImplLabel" xml:space="preserve">
     <value>מימושים של TWAIN:</value>
   </data>
+  <data name="AppleImplLabel" xml:space="preserve">
+    <value>מימוש מנהל התקן Apple:</value>
+  </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>סריקה במרוכז</value>
   </data>
@@ -822,8 +819,17 @@
   <data name="Connect" xml:space="preserve">
     <value>התחברות</value>
   </data>
+  <data name="WaitingToConnect" xml:space="preserve">
+    <value>Waiting to connect.</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>שגיאת חיבור.</value>
+  </data>
+  <data name="ConnectionTimedOut" xml:space="preserve">
+    <value>Connection timed out.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>תמיד לשאול</value>
@@ -847,9 +853,6 @@
     <value>הסורק לא נמצא? להלן הפרטים על המגבלות של ה־Flatpak של NAPS2.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
-    <value>קיצורי מקלדת</value>
-  </data>
-  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
     <value>קיצורי מקלדת</value>
   </data>
   <data name="ScanWithProfile" xml:space="preserve">
@@ -974,5 +977,62 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
     <value>איכות JPEG:</value>
+  </data>
+  <data name="MissingFileExtension" xml:space="preserve">
+    <value>Missing file extension (e.g. ".pdf")</value>
+  </data>
+  <data name="AlignLeft" xml:space="preserve">
+    <value>Align Left</value>
+  </data>
+  <data name="AlignCenter" xml:space="preserve">
+    <value>Align Center</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Align Right</value>
+  </data>
+  <data name="AlignTop" xml:space="preserve">
+    <value>Align Top</value>
+  </data>
+  <data name="AlignMiddle" xml:space="preserve">
+    <value>Align Middle</value>
+  </data>
+  <data name="AlignBottom" xml:space="preserve">
+    <value>Align Bottom</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Swap</value>
+  </data>
+  <data name="SplitVertically" xml:space="preserve">
+    <value>Split Vertically</value>
+  </data>
+  <data name="SplitHorizontally" xml:space="preserve">
+    <value>Split Horizontally</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="ToggleOrientation" xml:space="preserve">
+    <value>Toggle Orientation</value>
+  </data>
+  <data name="ToggleView" xml:space="preserve">
+    <value>Toggle View</value>
+  </data>
+  <data name="ToolbarSettings" xml:space="preserve">
+    <value>Toolbar Settings</value>
+  </data>
+  <data name="CustomizeToolbar" xml:space="preserve">
+    <value>Customize Toolbar</value>
+  </data>
+  <data name="Toolbar" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="ProfilesToolbar" xml:space="preserve">
+    <value>Profiles toolbar</value>
+  </data>
+  <data name="PositionLabel" xml:space="preserve">
+    <value>Position:</value>
+  </data>
+  <data name="ButtonsLabel" xml:space="preserve">
+    <value>Buttons:</value>
   </data>
 </root>

@@ -25,6 +25,8 @@ internal class MacSystemCompat : ISystemCompat
 
     public bool SupportsProfilesToolbar => false;
 
+    public bool SupportsToolbarCustomization => false;
+
     public bool SupportsButtonActions => false;
 
     public bool SupportsKeyboardShortcuts => true;

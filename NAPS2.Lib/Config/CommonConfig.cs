@@ -60,6 +60,9 @@ public class CommonConfig
     [Common]
     public ToolbarButtons HiddenButtons { get; set; }
 
+    [Common]
+    public ToolbarButtons ExtraButtons { get; set; }
+
     [App]
     public bool DisableAutoSave { get; set; }
 

@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Ви впевнені, що хочете видалити {0} елементів?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Ви впевнені, що хочете видалити {0} профілів?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Ви впевнені, що хочете видалити профіль {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>BMP-файли (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Розширений метафайл Windows (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Файл метаданих (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF-файл (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG-файл (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Під час спроби надіслати електронний лист сталася помилка.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Встановлення завершено</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Встановлення завершено. Перезапустити NAPS2 зараз?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Не вдалося виконати встановлення.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Не вдалося встановити</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Усі ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Не вдалося імпортувати файл «{0}».</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Не вдалося імпортувати файл «{0}». Можна імпортувати лише PDF-файли, створені за допомогою NAPS2.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Помилка завантаження</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Виконується операція</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Сканування сторінки {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Вибраний сканер не підтримує автоматичну подачу документа. Якщо ваш сканер все ж має автоматичну подачу документа, спробуйте вибрати інший драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>У подавачі немає сторінок.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>У вас немає дозволу копіювати вміст із файлу «{0}».</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Під час спроби зберегти файл сталася помилка.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>із {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Під час пакетного сканування сталася невідома помилка.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Сканер прогрівається.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Доступне оновлення компонента розпізнавання тексту.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Зображення збережено.</value>
   </data>
@@ -304,7 +265,7 @@
     <value>Збережено {0} зображень.</value>
   </data>
   <data name="PdfSaved" xml:space="preserve">
-    <value>PDF збережено.</value>
+    <value>PDF-файл збережено.</value>
   </data>
   <data name="NamedPageSizeFormat" xml:space="preserve">
     <value>{0} ({1} x {2} {3})</value>
@@ -320,12 +281,6 @@
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Виконання виправлення нахилу</value>
-  </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Необхідно завантажити</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Для імпорту цього PDF-файлу потрібен додатковий компонент. Завантажити його зараз?</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Ви впевнені, що хочете скасувати пакетне сканування?</value>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Подобається NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Драйвер SANE недоступний. Переконайтеся, що встановлено необхідні пакети:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Механізм розпізнавання (OCR) недоступний. Переконайтеся, що встановлено необхідний пакет:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Вибраний драйвер не підтримується в цій системі.</value>

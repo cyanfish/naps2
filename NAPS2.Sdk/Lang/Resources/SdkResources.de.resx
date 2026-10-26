@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>In der Zuführung sind keine Seiten.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Fehlende Rechte um den Inhalt der Datei '{0}' zu kopieren.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Der ausgewählte Scanner unterstützt keinen Duplexscan. Sollte der Scanner einen Duplexscan unterstützen, probieren sie einen anderen Treiber aus.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Der Scanner wird vorgewärmt.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Der SANE-Treiber ist nicht verfügbar. Stelle sicher, dass die erforderlichen Pakete installiert sind:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Das OCR-Modul ist nicht verfügbar. Stelle sicher, dass das benötigte Paket installiert ist:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Der ausgewählte Treiber wird auf diesem System nicht unterstützt.</value>

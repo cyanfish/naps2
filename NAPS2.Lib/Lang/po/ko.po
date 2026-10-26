@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko\n"
@@ -72,6 +72,30 @@ msgstr "상세"
 msgid "Advanced Profile Settings"
 msgstr "상세 프로필 설정"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "전체 ({0})"
@@ -137,10 +161,6 @@ msgstr "항상 묻기"
 msgid "Always show preview"
 msgstr ""
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "이 PDF 파일을 불러오기 위해서는 추가적인 컴포넌트가 필요합니다. 지금 다운로드 하시겠습니까?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "OCR 작업 중 오류가 발생했습니다."
@@ -186,13 +206,13 @@ msgstr "일괄 스캔 중 알 수 없는 오류가 발생했습니다."
 msgid "An update is available."
 msgstr "업데이트가 있습니다."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "OCR 업데이트를 사용할 수 있습니다."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple 드라이버"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -229,10 +249,6 @@ msgstr "{0} 프로파일을 삭제하시겠습니까?"
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "{0} 개의 이미지를 삭제하시겠습니까?"
-
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "{0} 개의 프로파일을 삭제하시겠습니까?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
@@ -341,6 +357,10 @@ msgstr "흑백"
 msgid "Blank Pages"
 msgstr "빈 페이지"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "밝기 / 명암"
@@ -348,6 +368,10 @@ msgstr "밝기 / 명암"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "밝기:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -443,9 +467,17 @@ msgstr "압축 방법:"
 msgid "Connect"
 msgstr "연결"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "연결 오류."
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "사용자 설정 SMTP"
 msgid "Custom..."
 msgstr "사용자 설정..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr ""
@@ -516,6 +552,7 @@ msgstr ""
 msgid "Day (01-31)"
 msgstr "일 (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -590,10 +627,6 @@ msgstr "다운로드"
 msgid "Download Error"
 msgstr "다운로드 오류"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "다운로드가 필요합니다"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "다운로드 진행 중"
@@ -609,14 +642,6 @@ msgstr "양방향"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "ESCL 드라이버"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "ESCL 네트워크 드라이버"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "ESCL USB 드라이버"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "선택된 항목을 PDF로 이메일 보내기"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "이메일 설정"
 
@@ -677,10 +701,6 @@ msgstr "PDF 암호화"
 msgid "Encryption"
 msgstr "암호화"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "확장 메타파일 (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "{0} 어플리케이션 시작 오류"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "예상 다운로드 용량: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "교환 가능한 이미지 파일 (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "파일명"
 msgid "File Path:"
 msgstr "파일 경로:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr ""
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "화이트밸런스 조정 및 노이즈 제거"
@@ -739,9 +759,9 @@ msgstr "양면 인쇄 된 페이지 뒤집기"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "높은 JPEG 품질(80 이상)을 선택한 경우 최상의 결과를 위해 프로파일에서 이미지 품질도 높히는 것이 좋습니다."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "GIF 파일 (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr ""
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "회색조"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "이미지 품질"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "이미지 설정"
 
@@ -819,22 +842,6 @@ msgstr "가져오는 중입니다..."
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "{0} 설치"
-
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "설치 완료"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "설치 실패"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "설치가 완료되었습니다. NAPS2 를 재시작 하시겠습니까?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "설치 실패."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "세션간 이미지 유지하기"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "키보드 단축키"
 
@@ -885,6 +891,7 @@ msgstr "언어"
 msgid "Leave a Review"
 msgstr ""
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "왼쪽"
@@ -927,6 +934,7 @@ msgstr "IP 수동 설정"
 msgid "Maximum quality (large files)"
 msgstr "최대 품질 (용량 큼)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "메모리 전송"
@@ -938,6 +946,10 @@ msgstr "메타데이터"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "분 (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr ""
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -973,6 +985,10 @@ msgstr "아래로 이동"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "위로 이동"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1160,7 +1176,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "PDF 문서 (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "PDF 설정"
 
@@ -1221,6 +1236,10 @@ msgstr "파일명 형식"
 msgid "Port"
 msgstr "포트"
 
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
+
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "후처리"
@@ -1263,6 +1282,10 @@ msgstr "프로파일:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "프로파일"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1332,6 +1355,10 @@ msgstr "해상도:"
 msgid "Restore Defaults"
 msgstr "초기 설정으로 복원"
 
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
+
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr "뒤집기"
@@ -1352,6 +1379,7 @@ msgstr ""
 msgid "Revert"
 msgstr "되돌리기"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "오른쪽"
@@ -1483,10 +1511,6 @@ msgstr "스캔된 이미지"
 msgid "Scanner Sharing"
 msgstr "스캐너 공유"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "{0} 페이지 스캔 중"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "{0} 페이지 스캔 중 (스캔 {1})..."
@@ -1614,6 +1638,14 @@ msgstr "저장 확인창 건너뛰기"
 msgid "Split"
 msgstr "나누기"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "시작"
@@ -1630,6 +1662,10 @@ msgstr "용지 사이즈에 맞춰 늘리기"
 msgid "Subject:"
 msgstr "제목:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr ""
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF 파일 (*.tiff, *.tif)"
@@ -1642,28 +1678,14 @@ msgstr "TWAIN 드라이버"
 msgid "Technical Details"
 msgstr "기술 상세"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "OCR 엔진을 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "OCR 작업 시간이 초과되었습니다."
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "SANE 드라이버를 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "'{0}' 파일을 불러올 수 없습니다."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "'{0}' 파일을 불러올 수 없습니다. NAPS2에서 제작한 PDF 파일만 불러올 수 있습니다."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1761,9 +1783,29 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
 msgstr ""
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr ""
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "도구"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1858,6 +1900,10 @@ msgstr "인증을 기다리는 중..."
 msgid "Waiting for scan {0}..."
 msgstr "스캔 {0} 대기중..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "백색 임계값"
@@ -1873,11 +1919,6 @@ msgstr "년도"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "년도 (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "'{0}' 파일의 내용을 복사하기 위한 권한을 가지고 있지 않습니다.."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1914,10 +1955,6 @@ msgstr "인치"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "mm"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "중 {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Croatian\n"
 "Language: hr\n"
@@ -72,6 +72,30 @@ msgstr "Napredno"
 msgid "Advanced Profile Settings"
 msgstr "Napredne postavke profila"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Sve ({0})"
@@ -137,10 +161,6 @@ msgstr "Uvijek upitaj"
 msgid "Always show preview"
 msgstr "Uvijek prikaži pregled"
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Za uvoz ove PDF datoteke potrebna je dodatna komponenta. Želite li je sada preuzeti?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "Došlo je do pogreške prilikom pokretanja OCR-a."
@@ -186,13 +206,13 @@ msgstr "Nepoznata pogreška prilikom serijskog skeniranja."
 msgid "An update is available."
 msgstr "Dostupno je ažuriranje."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "Dostupno je ažuriranje za OCR."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple upr. prog."
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr "Implementacija Apple upravljačkog programa:"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -230,10 +250,6 @@ msgstr "Jeste li sigurni da želite obrisati profil {0}?"
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "Jeste li sigurni da želite obrisati sledeći broj stavki: {0}?"
 
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Jeste li sigurni da želite obrisati {0} profil(a)?"
-
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
 msgstr "Jeste li sigurni da želite zaustaviti dijeljenje {0}?"
@@ -269,11 +285,11 @@ msgstr "Postavke automatskog spremanja"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "Automatsko obrezivanje"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "Automatsko obrezivanje skeniranih stranica"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -341,6 +357,10 @@ msgstr "Crno-bijelo"
 msgid "Blank Pages"
 msgstr "Prazne stranice"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Svjetlina / Kontrast"
@@ -348,6 +368,10 @@ msgstr "Svjetlina / Kontrast"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "Svjetlina:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -433,7 +457,7 @@ msgstr "Kompatibilnost"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "Sažimanje"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -443,9 +467,17 @@ msgstr "Sažimanje:"
 msgid "Connect"
 msgstr "Poveži"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "Greška kod povezivanja."
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "Prilagođeni SMTP"
 msgid "Custom..."
 msgstr "Prilagođeno..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr "Tamna"
@@ -516,6 +552,7 @@ msgstr "Tamna"
 msgid "Day (01-31)"
 msgstr "Dan (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -563,7 +600,7 @@ msgstr "Dimenzije"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "Dimenzije:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -590,10 +627,6 @@ msgstr "Preuzmi"
 msgid "Download Error"
 msgstr "Greška preuzimanja"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "Potrebno preuzimanje"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Napredak preuzimanja"
@@ -609,14 +642,6 @@ msgstr "Dvostrano"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "ESCL upr. prog."
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "ESCL mrežni upr. prog."
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "ESCL USB upr. prog."
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "Pošalji odabrano kao PDF putem e-pošte"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "Postavke e-pošte"
 
@@ -677,10 +701,6 @@ msgstr "Šifriraj PDF"
 msgid "Encryption"
 msgstr "Šifriranje"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Enhanced Windows MetaFile (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "Greška pri pokretanju aplikacije {0}"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Procijenjena veličina preuzimanja: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "Exchangeable Image File (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "Naziv datoteke:"
 msgid "File Path:"
 msgstr "Putanja datoteke:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr "Prijenos datoteka"
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Popravi balans bijele i ukloni šum"
@@ -739,9 +759,9 @@ msgstr "Okreni obostrane stranice"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "Za visoku JPEG kvalitetu (80+), za najbolje rezultate potrebno je povećati i kvalitetu slike na svom profilu."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "GIF datoteka (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr ""
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Sivi tonovi"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "Kvaliteta slike"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "Postavke slike"
 
@@ -820,22 +843,6 @@ msgstr "Uvozi se..."
 msgid "Install {0}"
 msgstr "Instaliranje {0}"
 
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "Instalacija završena"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "Instalacija nije uspjela"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Instalacija je završena. Želite li sada ponovno pokrenuti NAPS2?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "Instalacija nije uspjela."
-
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
 msgstr "Sučelje"
@@ -850,7 +857,7 @@ msgstr "JPEG datoteka (*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "JPEG kvaliteta:"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "Zadrži slike kroz sesije"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "Tipkovni prečaci"
 
@@ -885,6 +891,7 @@ msgstr "Jezik (language)"
 msgid "Leave a Review"
 msgstr "Ostavite recenziju"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Lijevo"
@@ -927,6 +934,7 @@ msgstr "Ručna IP adresa"
 msgid "Maximum quality (large files)"
 msgstr "Maksimalna kvaliteta (velike datoteke)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "Prijenos memorije"
@@ -938,6 +946,10 @@ msgstr "Metapodaci"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "Minuta (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr "Nedostaje ekstenzija datoteke (npr. \".pdf\")"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -984,6 +996,10 @@ msgstr "Pomakni dolje"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Pomakni gore"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1171,7 +1187,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "PDF dokument (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "PDF postavke"
 
@@ -1221,7 +1236,7 @@ msgstr "Zalijepi"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "Dimenzije u pikselima:"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1231,6 +1246,10 @@ msgstr "Šablonski nazivi"
 #: UiStrings.resx$Port$Message
 msgid "Port"
 msgstr "Priključak"
+
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1274,6 +1293,10 @@ msgstr "Profil:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Profili"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1333,7 +1356,7 @@ msgstr "Resetiraj sliku"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "Rezolucija (dpi):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1342,6 +1365,10 @@ msgstr "Rezolucija:"
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
 msgstr "Vrati zadane postavke"
+
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr "Pokušaj ponovno"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1363,6 +1390,7 @@ msgstr "Obrnute stražnje strane"
 msgid "Revert"
 msgstr "Poništi"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Desno"
@@ -1494,10 +1522,6 @@ msgstr "Skenirana slika"
 msgid "Scanner Sharing"
 msgstr "Dijeljenje skenera"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "Skeniranje stranice {0}"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "Skeniranje stranice {0} (skeniraj {1})..."
@@ -1626,6 +1650,14 @@ msgstr "Preskoči upit za spremanje"
 msgid "Split"
 msgstr "Podijeli"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Započni"
@@ -1642,6 +1674,10 @@ msgstr "Raširi na veličinu stranice"
 msgid "Subject:"
 msgstr "Predmet:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr ""
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF datoteka (*.tiff, *tif)"
@@ -1654,28 +1690,14 @@ msgstr "TWAIN upr. prog."
 msgid "Technical Details"
 msgstr "Tehnički detalji"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "OCR program nije dostupan. Provjerite jeste li instalirali potrebni paket:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "Isteklo je vrijeme za OCR operaciju."
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "SANE upravljački program nije dostupan. Provjerite jeste li instalirali potrebne pakete:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "Datoteka '{0}' nije mogla biti uvezena."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Datoteka '{0}' nije mogla biti uvezena. Moguće je uvesti samo PDF datoteke generirane pomoću NAPS2."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1779,9 +1801,29 @@ msgstr "Za skeniranje obje strane višestraničnog dokumenta pomoću skenera s u
 "4. Kliknite \"Ručni duplex\"\n"
 "5. Ovisno o fizičkoj orijentaciji skenera, možda ćete morati označiti \"Reverse back sides\" (Obrnute stražnje strane)"
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr ""
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "Alati"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1833,7 +1875,7 @@ msgstr "Prijenos e-pošte..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "Koristi JPEG kompresiju"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1876,6 +1918,10 @@ msgstr "Čekam na autorizaciju..."
 msgid "Waiting for scan {0}..."
 msgstr "Čekam na skeniranje {0}..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "Prag bjeline"
@@ -1891,11 +1937,6 @@ msgstr "Godina"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "Godina (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "Nemate dopuštenje za kopiranje sadržaja iz datoteke '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1932,10 +1973,6 @@ msgstr "in"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "mm"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "od {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

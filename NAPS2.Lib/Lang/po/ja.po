@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -72,6 +72,30 @@ msgstr "詳細設定"
 msgid "Advanced Profile Settings"
 msgstr "詳細プロファイル設定"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "すべて({0})"
@@ -137,10 +161,6 @@ msgstr "常に確認する"
 msgid "Always show preview"
 msgstr "常にプレビューを表示"
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "PDFファイルをインポートするのに必要なファイルがあります。ダウンロードしますか?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "OCR 実行中にエラーが発生しました。"
@@ -186,13 +206,13 @@ msgstr "一括スキャン中に不明なエラーが発生しました。"
 msgid "An update is available."
 msgstr "アップデートがあります。"
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "OCR のアップデートがあります。"
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Appleドライバー"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -229,10 +249,6 @@ msgstr "プロフィール「{0}」を削除しますか?"
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "{0}個のアイテムを削除しますか?"
-
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "{0} 個のプロファイルを削除しますか？"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
@@ -341,6 +357,10 @@ msgstr "白黒"
 msgid "Blank Pages"
 msgstr "空白ページ"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "明度/コントラスト"
@@ -348,6 +368,10 @@ msgstr "明度/コントラスト"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "明度:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -443,9 +467,17 @@ msgstr "圧縮:"
 msgid "Connect"
 msgstr "接続"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "接続エラー。"
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "カスタムSMTP"
 msgid "Custom..."
 msgstr "カスタム..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr "ダーク"
@@ -516,6 +552,7 @@ msgstr "ダーク"
 msgid "Day (01-31)"
 msgstr "日 (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -590,10 +627,6 @@ msgstr "ダウンロード"
 msgid "Download Error"
 msgstr "ダウンロードエラー"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "ダウンロードが必要です"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "ダウンロードの進捗状況"
@@ -609,14 +642,6 @@ msgstr "両面"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "ESCL ドライバー"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "ESCL ネットワークドライバー"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "ESCL USBドライバー"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "選択したものを PDF 形式で送信"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "メールの設定"
 
@@ -677,10 +701,6 @@ msgstr "暗号化 PDF"
 msgid "Encryption"
 msgstr "暗号化"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "拡張 Windows MetaFile (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "{0} アプリケーションの起動でエラー"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "推定ダウンロードサイズ: 約{0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "Exif ファイル (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "ファイル名"
 msgid "File Path:"
 msgstr "ファイルのパス:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr ""
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "ホワイトバランスの修正とノイズの除去"
@@ -739,9 +759,9 @@ msgstr "両面のページを反転"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "80 以上の高画質 JPEG 用、また最高の結果のためには、プロファイル内の画質設定もあげてください。"
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "GIF ファイル (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr ""
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "グレースケール"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "画質"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "画像設定"
 
@@ -819,22 +842,6 @@ msgstr "インポートしています…"
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "{0} をインストール"
-
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "インストールが完了しました"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "インストールに失敗しました"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "インストールが完了しました。NAPS2を再起動しますか?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "インストールに失敗しました."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "セッション間で画像を保持する"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "キーボード ショートカット"
 
@@ -885,6 +891,7 @@ msgstr "言語"
 msgid "Leave a Review"
 msgstr "このアプリを評価する"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "左寄せ"
@@ -927,6 +934,7 @@ msgstr "手動 IP"
 msgid "Maximum quality (large files)"
 msgstr "最高画質(ファイルサイズ大)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "メモリー転送"
@@ -938,6 +946,10 @@ msgstr "メタデータ"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "分 (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr ""
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -984,6 +996,10 @@ msgstr "下へ"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "上へ"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1171,7 +1187,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "PDF 文書 (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "PDF 設定"
 
@@ -1232,6 +1247,10 @@ msgstr "プレースホルダー"
 msgid "Port"
 msgstr "ポート"
 
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
+
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "後処理"
@@ -1274,6 +1293,10 @@ msgstr "プロファイル:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "プロファイル"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1343,6 +1366,10 @@ msgstr "解像度:"
 msgid "Restore Defaults"
 msgstr "標準設定に戻す"
 
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
+
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr "反転させる"
@@ -1363,6 +1390,7 @@ msgstr "逆順"
 msgid "Revert"
 msgstr "元に戻す"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "右寄せ"
@@ -1494,10 +1522,6 @@ msgstr "スキャンした画像"
 msgid "Scanner Sharing"
 msgstr "スキャナー共有"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "{0} ページをスキャンしています"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "{0} ページをスキャンしています (スキャン {1})…"
@@ -1626,6 +1650,14 @@ msgstr "保存の確認をしない"
 msgid "Split"
 msgstr "分割"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "スタート"
@@ -1642,6 +1674,10 @@ msgstr "ページサイズに合わせる"
 msgid "Subject:"
 msgstr "件名："
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr ""
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF ファイル (*.tiff, *.tif)"
@@ -1654,28 +1690,14 @@ msgstr "TWAINドライバー"
 msgid "Technical Details"
 msgstr "技術的な詳細"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "OCRエンジンを利用できません。言語パッケージをインストールしてください："
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "OCR 操作 がタイムアウトしました。"
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "SANEドライバは利用不可能です。必要なパッケージをインストールしてください："
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "「{0}」ファイルをインポートできませんでした。"
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "'{0}'個のファイルは、NAPS2によって作成されたファイルではありませんので、読み込めませんでした。."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1780,9 +1802,29 @@ msgstr "ペーパーフィーダー付スキャナーで複数ページの文書
 "4. 「手動両面スキャン」をクリック\n"
 "5. スキャナーにセットする文書の向き次第では、「逆順」にチェックを入れる必要があるかもしれません"
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr ""
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "ツール"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1794,7 +1836,7 @@ msgstr "US リーガル (8.5x14 インチ)"
 
 #: SettingsResources.resx$PageSize_Letter$Message
 msgid "US Letter (8.5x11 in)"
-msgstr "US レター (8.5x14 インチ)"
+msgstr "US レター (8.5x11 インチ)"
 
 #: UiStrings.resx$Unassign$Message
 msgid "Unassign"
@@ -1877,6 +1919,10 @@ msgstr "認証を待っています…"
 msgid "Waiting for scan {0}..."
 msgstr "{0} のスキャンを待っています…"
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "白さのしきい値"
@@ -1892,11 +1938,6 @@ msgstr "年"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "年 (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "'{0}'からのコピーは許可されていません."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1933,10 +1974,6 @@ msgstr "インチ"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "ミリ"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "{0} の"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

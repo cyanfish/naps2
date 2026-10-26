@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:53\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -72,6 +72,30 @@ msgstr "Gelişmiş"
 msgid "Advanced Profile Settings"
 msgstr "Gelişmiş Profil Ayarları"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Tümü ({0})"
@@ -114,7 +138,7 @@ msgstr "Baskıya İzin Ver"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -135,11 +159,7 @@ msgstr "Her Zaman Sor"
 
 #: UiStrings.resx$AlwaysShowPreview$Message
 msgid "Always show preview"
-msgstr ""
-
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Bu PDF dosyasını içe aktarmak için ek bileşen gerekiyor. Şimdi indirmek ister misiniz?"
+msgstr "Önizlemeyi her zaman göster"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -186,13 +206,13 @@ msgstr "Toplu tarama sırasında bilinmeyen bir hata oluştu."
 msgid "An update is available."
 msgstr "Güncelleme var."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "OKT için güncelleme var."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple Sürücüsü"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr "Apple Sürücü Uygulaması:"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -230,10 +250,6 @@ msgstr "{0} profilini silmek istediğinize emin misiniz?"
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "{0} adet ögeyi silmek istediğinize emin misiniz?"
 
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "{0} adet profili silmek istediğinize emin misiniz?"
-
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
 msgstr "Paylaşımı durdurmak istediğinize emin misiniz {0}?"
@@ -269,11 +285,11 @@ msgstr "Kendiliğinden Kaydetme Ayarları"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "Otomatik Kırpma"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "Taranan sayfaları otomatik kırp"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -341,6 +357,10 @@ msgstr "Siyah & Beyaz"
 msgid "Blank Pages"
 msgstr "Boş Sayfalar"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Parlaklık / Karşıtlık"
@@ -348,6 +368,10 @@ msgstr "Parlaklık / Karşıtlık"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "Parlaklık:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -413,7 +437,7 @@ msgstr "Kaydettikten sonra resimleri temizle"
 
 #: UiStrings.resx$SplitHelp$Message
 msgid "Click the buttons or use the arrow keys to change the split orientation."
-msgstr ""
+msgstr "Bölme yönünü değiştirmek için düğmelere tıklayın veya ok tuşlarını kullanın."
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -433,7 +457,7 @@ msgstr "Uyumluluk"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "Sıkıştır"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -443,9 +467,17 @@ msgstr "Sıkıştırma:"
 msgid "Connect"
 msgstr "Bağlan"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "Bağlantı hatası."
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -481,7 +513,7 @@ msgstr "Sayfa boyutuna kırp"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -508,6 +540,10 @@ msgstr "Özel SMTP"
 msgid "Custom..."
 msgstr "Özel..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr "Koyu"
@@ -516,6 +552,7 @@ msgstr "Koyu"
 msgid "Day (01-31)"
 msgstr "Gün (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -563,7 +600,7 @@ msgstr "Boyutlar"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "Boyutlar"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -590,10 +627,6 @@ msgstr "İndir"
 msgid "Download Error"
 msgstr "İndirme Hatası"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "İndirme Gerekli"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "İndirme Süreci"
@@ -609,14 +642,6 @@ msgstr "Çift Taraflı"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "ESCL Sürücüsü"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "ESCL Ağ Sürücüsü"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "ESCL USB Sürücüsü"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "Seçileni PDF Olarak E-Postala"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "E-Posta Ayarları"
 
@@ -677,10 +701,6 @@ msgstr "PDF'yi Şifrele"
 msgid "Encryption"
 msgstr "Şifreleme"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Gelişmiş Windows Meta Dosyası (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "Uygulama başlatılırken hata {0}"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Öngörülen indirme boyutu: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "Takas Edilebilir Resim Dosyası (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "Dosya Adı"
 msgid "File Path:"
 msgstr "Dosya Yolu:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr "Dosya Aktarımı"
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Beyaz dengesini düzelt ve gürültüyü kaldır"
@@ -739,9 +759,9 @@ msgstr "Çift taraflı sayfaları ters yüz et"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "Yüksek JPEG kalitesi için (80+), ayrıca en iyi sonuçlar için profilinizdeki Resim Kalitesi'ni yükseltin."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "GIF Dosyası (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr ""
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Gri Tonlama"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "Resim Kalitesi"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "Resim Ayarları"
 
@@ -820,22 +843,6 @@ msgstr "İçe Aktarılıyor..."
 msgid "Install {0}"
 msgstr "{0} Kur"
 
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "Kurulum Tamamlandı"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "Kurulum Başarısız"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Kurulum tamamlandı. Şimdi NAPS2'yi yeniden başlatmak etmek ister misiniz?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "Kurulum başarısız."
-
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
 msgstr "Arayüz"
@@ -850,7 +857,7 @@ msgstr "JPEG Dosyası (*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "JPEG kalitesi"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "Görüntüleri oturumlar arasında sakla"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
@@ -885,6 +891,7 @@ msgstr "Dil"
 msgid "Leave a Review"
 msgstr "Yorum Yap"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Sol"
@@ -912,11 +919,11 @@ msgstr "OKT kullanarak aranabilir PDF oluştur"
 #: UiStrings.resx$ManualDuplex$Message
 #: UiStrings.resx$ManualDuplexFormTitle$Message
 msgid "Manual Duplex"
-msgstr ""
+msgstr "Manuel Çift Taraflı Yazdırma"
 
 #: UiStrings.resx$ManualDuplexPreview$Message
 msgid "Manual Duplex (preview)"
-msgstr ""
+msgstr "Manuel Çift Taraflı Yazdırma (önizleme)"
 
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
@@ -927,6 +934,7 @@ msgstr "Elle IP"
 msgid "Maximum quality (large files)"
 msgstr "En yüksek kalite (büyük dosyalar)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "Bellek Aktarımı"
@@ -938,6 +946,10 @@ msgstr "Üst Veri"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "Dakika (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr ""
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -956,7 +968,14 @@ msgid "Mouse:\n"
 "Hold \"{0}\" to move the top-left handle instead.\n"
 "Hold \"{1}\" to move the whole selection at once.\n"
 "Hold \"{2}\" to move faster."
-msgstr ""
+msgstr "Fare:\n"
+"Kırpma tutamaçlarını hareket ettirmek için tıklayın ve sürükleyin.\n"
+"Veya tüm alanı çizmek için tıklayın ve sürükleyin.\n\n"
+"Klavye:\n"
+"Ok tuşları sağ alt köşedeki kırpma tutamacını hareket ettirir.\n"
+"Bunun yerine sol üst köşedeki tutamacı hareket ettirmek için \"{0}\" tuşunu basılı tutun.\n"
+"Tüm seçimi aynı anda hareket ettirmek için \"{1}\" tuşunu basılı tutun.\n"
+"Daha hızlı hareket ettirmek için \"{2}\" tuşunu basılı tutun."
 
 #: UiStrings.resx$CombineHelp$Message
 msgid "Mouse:\n"
@@ -964,7 +983,11 @@ msgid "Mouse:\n"
 "Keyboard:\n"
 "Arrow keys change the combine orientation.\n"
 "Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
-msgstr ""
+msgstr "Fare:\n"
+"Düğmelere tıklayarak birleştirme yönünü ve hizalamasını değiştirin.\n\n"
+"Klavye:\n"
+"Ok tuşlarıyla birleştirme yönünü değiştirebilirsiniz.\n"
+"Görüntüler aynı boyutta değilse, “Shift” tuşunu basılı tutarak hizalamayı değiştirebilirsiniz."
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -973,6 +996,10 @@ msgstr "Aşağı Taşı"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Yukarı Taşı"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1160,7 +1187,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "PDF Belgesi (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "PDF Ayarları"
 
@@ -1194,7 +1220,7 @@ msgstr "Sayfa boyutu:"
 
 #: UiStrings.resx$PagesReordered$Message
 msgid "Pages reordered."
-msgstr ""
+msgstr "Sayfaların sıralaması değiştirildi."
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
@@ -1210,7 +1236,7 @@ msgstr "Yapıştır"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "Piksel boyutları:"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1220,6 +1246,10 @@ msgstr "Yer Tutucular"
 #: UiStrings.resx$Port$Message
 msgid "Port"
 msgstr "Bağlantı Noktası"
+
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1263,6 +1293,10 @@ msgstr "Profil:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Profiller"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1322,7 +1356,7 @@ msgstr "Resmi Sıfırla"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "Çözünürlük (dpi):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1331,6 +1365,10 @@ msgstr "Çözünürlük:"
 #: UiStrings.resx$RestoreDefaults$Message
 msgid "Restore Defaults"
 msgstr "Öntanımlıları Geri Yükle"
+
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1346,12 +1384,13 @@ msgstr "Seçimi Ters Çevir"
 
 #: UiStrings.resx$ReverseBackSides$Message
 msgid "Reverse back sides"
-msgstr ""
+msgstr "Arka yüzleri ters çevir"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
 msgstr "Geri Al"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Sağ"
@@ -1483,10 +1522,6 @@ msgstr "Taranmış Resim"
 msgid "Scanner Sharing"
 msgstr "Tarayıcı Paylaşımı"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "{0}. sayfa taranıyor"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "{0}. sayfa taranıyor ({1}. tarama)..."
@@ -1531,7 +1566,8 @@ msgstr "Bir ya da daha çok dil seç:"
 #: UiStrings.resx$CustomRotationHelp$Message
 msgid "Select the angle to rotate.\n"
 "Or click and drag to draw a line aligned with the page (vertically or horizontally)."
-msgstr ""
+msgstr "Döndürmek istediğiniz açıyı seçin.\n"
+"Ya da tıklayıp sürükleyerek sayfaya hizalı bir çizgi çizin (dikey veya yatay)."
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1572,7 +1608,7 @@ msgstr "Keskinleştir"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1614,6 +1650,14 @@ msgstr "Kaydetme istemini atla"
 msgid "Split"
 msgstr "Böl"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Başlat"
@@ -1630,6 +1674,10 @@ msgstr "Sayfa boyutuna ger"
 msgid "Subject:"
 msgstr "Konu:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr ""
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF Dosyası (*.tiff, *.tif)"
@@ -1642,28 +1690,14 @@ msgstr "TWAIN Sürücüsü"
 msgid "Technical Details"
 msgstr "Teknik Ayrıntılar"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "OKT motoru kullanılamıyor. Gerekli paketin kurulduğundan emin olun:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "OKT işlemi zaman aşımına uğradı."
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "SANE sürücüsü kullanılamıyor. Gerekli paketlerin kuruluduğundan emin olun:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "'{0}' dosyası içeri aktarılamadı."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "'{0}' dosyası içeri aktarılamadı. Yalnızca NAPS2 tarafından üretilen PDF dosyaları içeri aktarılabilir."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1759,11 +1793,38 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "3. Scan the back sides of the document\n"
 "4. Click \"Manual Duplex\"\n"
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
+msgstr "Otoyüklemeli tarayıcınızla çok sayfalı bir belgenin her iki yüzünü de taramak için, tarayıcınız bu özelliği destekliyorsa kağıt kaynağı olarak “Çift Yüzlü” seçeneğini belirleyebilirsiniz.\n"
+"      \n"
+"Tarayıcınız “Çift Taraflı” taramayı desteklemiyorsa, şu talimatları izleyin:\n"
+"1. Belgenin ön yüzlerini tarayın\n"
+"2. Belgeyi ters çevirin\n"
+"3. Belgenin arka yüzlerini tarayın\n"
+"4. “Manuel Çift Taraflı Yazdırma” seçeneğine tıklayın\n"
+"5. Tarayıcınızın fiziksel yönüne bağlı olarak, “Arka yüzleri ters çevir” seçeneğini işaretlemeniz gerekebilir"
+
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr ""
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
 msgstr ""
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "Araçlar"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1815,7 +1876,7 @@ msgstr "E-posta yükleniyor..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "JPEG sıkılaştırmasını kullan"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1858,6 +1919,10 @@ msgstr "Yetkilendirme bekleniyor..."
 msgid "Waiting for scan {0}..."
 msgstr "{0}. tarama için bekleniyor..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "Beyaz Eşiği"
@@ -1873,11 +1938,6 @@ msgstr "Yıl"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "Yıl (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "'{0}' dosyasından içeriği kopyalamaya yetkiniz yok."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1914,10 +1974,6 @@ msgstr "inç"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "mm"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr " / {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

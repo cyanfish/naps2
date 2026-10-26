@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Δεν υπάρχουν σελίδες στον τροφοδότη.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Δεν υπάρχει δικαίωμα αντιγραφής περιεχομένου από το αρχείο '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Ο επιλεγμένος σαρωτής δεν υποστηρίζει λειτουργία διπλής όψης. Εάν ο σαρωτής πράγματι διαθέτει λειτουργία διπλής όψης, προτείνεται η χρήση διαφορετικού οδηγού.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Προθέρμανση σαρωτή.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Ο οδηγός SANE δεν είναι διαθέσιμος. Βεβαιωθείτε ότι έχετε εγκαταστήσει τα απαιτούμενα πακέτα:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Η εφαρμογή OCR δεν είναι διαθέσιμη. Βεβαιωθείτε ότι έχετε εγκαταστήσει το απαιτούμενο πακέτο:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Ο επιλεγμένος οδηγός δεν υποστηρίζεται σε αυτό το σύστημα.</value>

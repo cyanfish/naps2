@@ -44,7 +44,7 @@ public class WindowsIconsTests : ContextualTests
     [PlatformFact(include: PlatformFlags.Windows)]
     public void ExtractIconFromMissingFile()
     {
-        Assert.Null(WindowsIcons.ExtractIcon(ImageContext, Path.Combine(FolderPath, "missing.exe"), 0));
+        Assert.Null(WindowsIcons.ExtractIcon(ImageContext, P("missing.exe"), 0));
     }
 }
 #endif

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:52\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -72,6 +72,30 @@ msgstr "Haladó"
 msgid "Advanced Profile Settings"
 msgstr "Haladó profilbeállítások"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Összes ({0})"
@@ -137,10 +161,6 @@ msgstr "Mindig kérdezzen rá"
 msgid "Always show preview"
 msgstr ""
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "A PDF-fájl importálásához egy további összetevőre van szükség. Szeretné letölteni most?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "Hiba történt a karakterfelismerő futtatásakor."
@@ -186,13 +206,13 @@ msgstr "Ismeretlen hiba történt a kötegelt lapolvasás során."
 msgid "An update is available."
 msgstr "Elérhető egy frissítés."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "Elérhető egy frissítés a karakterfelismeréshez."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Apple illesztőprogram"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -229,10 +249,6 @@ msgstr "Biztos, hogy törölni szeretné a következő profilt: {0}?"
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "Biztos, hogy törölni szeretne {0} elemet?"
-
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Biztos, hogy törölni szeretne {0} profilt?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
@@ -341,6 +357,10 @@ msgstr "Fekete-fehér"
 msgid "Blank Pages"
 msgstr "Üres oldalak"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Fényerő / Kontraszt"
@@ -348,6 +368,10 @@ msgstr "Fényerő / Kontraszt"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "Fényerő:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -443,9 +467,17 @@ msgstr "Tömörítés:"
 msgid "Connect"
 msgstr "Csatlakozás"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "Csatlakozási hiba."
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "Egyéni SMTP"
 msgid "Custom..."
 msgstr "Egyéni..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr "Sötét"
@@ -516,6 +552,7 @@ msgstr "Sötét"
 msgid "Day (01-31)"
 msgstr "Nap (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -590,10 +627,6 @@ msgstr "Letöltés"
 msgid "Download Error"
 msgstr "Letöltési hiba"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "Letöltés szükséges"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Letöltési folyamat"
@@ -609,14 +642,6 @@ msgstr "Kétoldalas"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "ESCL illesztőprogram"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "ESCL hálózati illesztőprogram"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "ESCL USB illesztőprogram"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "Kiválasztottak elküldése e-mailbenm PDF-ként"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "E-mail beállítások"
 
@@ -677,10 +701,6 @@ msgstr "PDF titkosítása"
 msgid "Encryption"
 msgstr "Titkosítás"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "EMF fájl (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr "Hiba az alkalmazás indításakor {0}"
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Becsült letöltési méret: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "EXIF fájl (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "Fájlnév"
 msgid "File Path:"
 msgstr "Fájl elérési útvonal:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr ""
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Fehéregyensúly javítása és zaj eltávolítása"
@@ -739,9 +759,9 @@ msgstr "Kétoldalas oldalak megfordítása"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "Magas JPEG minőség (80+) elérése érdekében növelje a képminőséget a profilban a legjobb eredmény eléréséhez."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "GIF fájl (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr ""
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Szürkeárnyalatos"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "Képminőség"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "Kép beállítások"
 
@@ -819,22 +842,6 @@ msgstr "Importálás..."
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "{0} telepítése"
-
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "A telepítés befejeződött"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "A telepítés sikertelen"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "A telepítés befejeződött. Szeretné most újraindítani a NAPS2 programot?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "A telepítés sikertelen."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "Képek megtartása a munkamenetek között"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr "Billentyűparancsok"
 
@@ -885,6 +891,7 @@ msgstr "Nyelv"
 msgid "Leave a Review"
 msgstr "Hagyjon egy értékelést"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Balra"
@@ -927,6 +934,7 @@ msgstr "Kézi IP"
 msgid "Maximum quality (large files)"
 msgstr "Legjobb minőség (nagy fájlok)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "Memória átvitel"
@@ -938,6 +946,10 @@ msgstr "Metaadatok"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "Perc (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr ""
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -973,6 +985,10 @@ msgstr "Fel"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Le"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1160,7 +1176,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "PDF dokumentum (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "PDF beállítások"
 
@@ -1221,6 +1236,10 @@ msgstr "Kiegészítések"
 msgid "Port"
 msgstr "Port"
 
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
+
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Utófeldogozás"
@@ -1263,6 +1282,10 @@ msgstr "Profil:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Profilok"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1332,6 +1355,10 @@ msgstr "Felbontás:"
 msgid "Restore Defaults"
 msgstr "Alapértelmezések visszaállítása"
 
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
+
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr "Visszafelé"
@@ -1352,6 +1379,7 @@ msgstr ""
 msgid "Revert"
 msgstr "Alaphelyzet"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Jobbra"
@@ -1483,10 +1511,6 @@ msgstr "Beolvasott kép"
 msgid "Scanner Sharing"
 msgstr "Lapolvasó megosztása"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "{0}. oldal beolvasása"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "{0}. oldal beolvasása ({1}. beolvasás)..."
@@ -1614,6 +1638,14 @@ msgstr "Mentési felszólítás kihagyása"
 msgid "Split"
 msgstr "Felosztás"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Kezdés"
@@ -1630,6 +1662,10 @@ msgstr "Nyújtás az oldal méretére"
 msgid "Subject:"
 msgstr "Tárgy:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr ""
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "TIFF fájl (*.tiff, *.tif)"
@@ -1642,28 +1678,14 @@ msgstr "TWAIN illesztőprogram"
 msgid "Technical Details"
 msgstr "Technikai részletek"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "Az karakterfelismerő motor nem áll rendelkezésre. Győződjön meg róla, hogy telepítette a szükséges csomagot:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "Időtúllépés a karakterfelismerés során."
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "A SANE illesztőprogram nem áll rendelkezésre. Győződjön meg róla, hogy telepítette a szükséges csomagokat:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "A következő fájlt nem lehetett importálni: '{0}'."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "A következő fájlt nem lehetett importálni: '{0}'. Csak a NAPS2 által generált PDF fájlok importálhatók."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1761,9 +1783,29 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
 msgstr ""
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr ""
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "Eszközök"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1858,6 +1900,10 @@ msgstr "Várakozás az engedélyezésre..."
 msgid "Waiting for scan {0}..."
 msgstr "Várakozás a beolvasásra {0}..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "Fehér küszöbérték"
@@ -1873,11 +1919,6 @@ msgstr "Év"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "Év (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "Nincs jogosultsága a következő fájl tartalmát másolni: '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1914,10 +1955,6 @@ msgstr "hüvelyk"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "mm"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "/ {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

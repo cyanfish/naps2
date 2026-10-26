@@ -19,7 +19,7 @@ public class ImportAndSaveTests : AppiumTests
         CopyResourceToFile(PdfResources.word_patcht_pdf, "patcht.pdf");
         CopyResourceToFile(PdfResources.image_pdf, "image.pdf");
         CopyResourceToFile(BinaryResources.ocr_test, "text.jpg");
-        var tessdata = Path.Combine(FolderPath, "components", "tesseract4", "fast");
+        var tessdata = P("components", "tesseract4", "fast");
         Directory.CreateDirectory(tessdata);
         CopyResourceToFile(BinaryResources.eng_traineddata, tessdata, "eng.traineddata");
         
@@ -42,7 +42,7 @@ public class ImportAndSaveTests : AppiumTests
         Thread.Sleep(100);
         WaitFor(() => !HasElementWithName("Cancel"), 30_000);
 
-        var path = Path.Combine(FolderPath, "test.pdf");
+        var path = P("test.pdf");
         PdfAsserts.AssertImages(path, 
             PdfResources.word_p1,
             PdfResources.word_p2,

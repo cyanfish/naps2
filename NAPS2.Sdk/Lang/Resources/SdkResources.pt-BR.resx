@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Sem papel no alimentador.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Você não tem permissão para copiar o conteúdo do arquivo '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>O scanner selecionado não suporta o uso duplex. Se o scanner realmente suporta duplex, tente usar um driver diferente.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>O scanner está aquecendo.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>O driver SANE não está disponível. Certifique-se de instalar os pacotes necessários:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>O mecanismo de OCR não está disponível. Certifique-se de instalar o pacote necessário:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>O driver selecionado não é suportado neste sistema.</value>

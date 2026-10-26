@@ -2,27 +2,22 @@
 
 namespace NAPS2.Automation;
 
+/// <summary>
+/// Overwriting is only done with --force, in which case operations don't prompt at all, so this just reports the
+/// conflict as an error.
+/// </summary>
 public class ConsoleOverwritePrompt : IOverwritePrompt
 {
-    private readonly AutomatedScanningOptions _options;
     private readonly ErrorOutput _errorOutput;
 
-    public ConsoleOverwritePrompt(AutomatedScanningOptions options, ErrorOutput errorOutput)
+    public ConsoleOverwritePrompt(ErrorOutput errorOutput)
     {
-        _options = options;
         _errorOutput = errorOutput;
     }
 
     public OverwriteResponse ConfirmOverwrite(string path)
     {
-        if (_options.ForceOverwrite)
-        {
-            return OverwriteResponse.Yes;
-        }
-        else
-        {
-            _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
-            return OverwriteResponse.No;
-        }
+        _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
+        return OverwriteResponse.No;
     }
 }

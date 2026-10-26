@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>คุณแน่ใจหรือไม่ว่าต้องการลบ {0} รายการ?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการลบโปรไฟล์ทั้ง {0} รายการ?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>คุณแน่ใจหรือไม่ว่าต้องการลบโปรไฟล์ {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>ไฟล์บิตแมป (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Exchangeable Image File (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF File (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG File (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>เกิดข้อผิดพลาดขณะส่งอีเมล</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>การติดตั้งเสร็จสมบูรณ์</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>การติดตั้งเสร็จสมบูรณ์. คุณต้องการรีสตาร์ท NAPS2 ไหม?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>การติดตั้งล้มเหลว</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>การติดตั้งล้มเหลว</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>ทั้งหมด ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>ไม่สามารถนำเข้าไฟล์ '{0}' ได้</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>ไม่สามารถนำเข้าไฟล์ '{0}' ได้ สามารถนำเข้าได้เฉพาะไฟล์ PDF ที่สร้างโดย NAPS2 เท่านั้น</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>การดาวน์โหลดผิดพลาด</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Operation in Progress</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>กำลังสแกนหน้า {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>เครื่องสแกนเนอร์ที่เลือกไม่รองรับการใช้ถาดป้อนกระดาษอัตโนมัติ (Feeder) หากเครื่องของคุณมีถาดป้อนกระดาษ ให้ลองเปลี่ยนไปใช้ไดรเวอร์อื่น</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>ไม่มีหน้ากระดาษในเครื่องป้อน</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>You do not have permission to copy content from the file '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>เกิดข้อผิดพลาดขณะบันทึกไฟล์</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>เกิดข้อผิดพลาดไม่ทราบสาเหตุระหว่างการสแกนชุดเอกสาร</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>เครื่องสแกนเนอร์กำลังอุ่นเครื่อง</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>มีตัวอัปเดตสำหรับระบบ OCR พร้อมใช้งาน</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>บันทึกภาพแล้ว</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>ความคืบหน้าการปรับภาพตรง</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>จำเป็นต้องมีส่วนประกอบเพิ่มเติมเพื่อนำเข้าไฟล์ PDF นี้ คุณต้องการดาวน์โหลดทันทีหรือไม่</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการสแกนชุดเอกสารนี้?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Like NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>ไม่พบระบบ OCR กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งแพ็กเกจที่จำเป็นเรียบร้อยแล้ว:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>ไม่พบระบบ OCR กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งแพ็กเกจที่จำเป็นเรียบร้อยแล้ว:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>ระบบนี้ไม่รองรับไดรเวอร์ที่เลือก</value>

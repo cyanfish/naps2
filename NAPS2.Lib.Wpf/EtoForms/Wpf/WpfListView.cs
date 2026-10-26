@@ -28,6 +28,11 @@ public class WpfListView<T> : IListView<T> where T : notnull
     private WpfListViewItem<T>? _lastFocusedItem;
     private InsertionAdorner? _insertionAdorner;
 
+    // For click-and-drag selection, relative to the items panel (so it moves with scrolling)
+    private Point? _marqueeStart;
+    private HashSet<WpfListViewItem<T>> _marqueeBaseSelection = [];
+    private MarqueeAdorner? _marqueeAdorner;
+
     public WpfListView(ListViewBehavior<T> behavior)
     {
         _behavior = behavior;
@@ -52,6 +57,7 @@ public class WpfListView<T> : IListView<T> where T : notnull
         _listBox.PreviewMouseLeftButtonDown += OnPreviewMouseLeftButtonDown;
         _listBox.PreviewMouseLeftButtonUp += OnPreviewMouseLeftButtonUp;
         _listBox.PreviewMouseMove += OnPreviewMouseMove;
+        _listBox.LostMouseCapture += (_, _) => EndMarquee();
         _listBox.DragEnter += OnDragOver;
         _listBox.DragOver += OnDragOver;
         _listBox.DragLeave += (_, _) => ClearInsertionMark();
@@ -334,11 +340,63 @@ public class WpfListView<T> : IListView<T> where T : notnull
         {
             FocusList();
         }
+        if (_behavior.MultiSelect && !_behavior.Checkboxes)
+        {
+            _marqueeStart = e.GetPosition(ItemsPanel);
+            _marqueeBaseSelection = Items.Where(x => x.IsSelected).ToHashSet();
+            _listBox.CaptureMouse();
+        }
         e.Handled = true;
+    }
+
+    private Panel ItemsPanel => _listBox.FindDescendant<WrapPanel>()!;
+
+    private static bool IsDrag(Vector delta) =>
+        Math.Abs(delta.X) >= SystemParameters.MinimumHorizontalDragDistance ||
+        Math.Abs(delta.Y) >= SystemParameters.MinimumVerticalDragDistance;
+
+    private void UpdateMarquee(Point start, MouseEventArgs e)
+    {
+        AutoScroll(e.GetPosition(_listBox));
+        var panel = ItemsPanel;
+        var end = e.GetPosition(panel);
+        if (_marqueeAdorner == null)
+        {
+            if (!IsDrag(end - start)) return;
+            // The panel's adorner layer is inside the scroll viewer, so the marquee is clipped to the visible area
+            _marqueeAdorner = new MarqueeAdorner(panel);
+            AdornerLayer.GetAdornerLayer(panel)?.Add(_marqueeAdorner);
+        }
+        var rect = new Rect(start, end);
+        _marqueeAdorner.Rect = rect;
+
+        _refreshing = true;
+        foreach (var listBoxItem in Items)
+        {
+            var bounds = listBoxItem.TransformToAncestor(panel).TransformBounds(new Rect(listBoxItem.RenderSize));
+            listBoxItem.IsSelected = _marqueeBaseSelection.Contains(listBoxItem) || rect.IntersectsWith(bounds);
+        }
+        // Keep _refreshing set so the selection change doesn't move the focus (and scroll) while dragging
+        Selection = ListSelection.From(Items.Where(x => x.IsSelected).Select(x => x.Value));
+        _refreshing = false;
+    }
+
+    private void EndMarquee()
+    {
+        if (_marqueeStart == null) return;
+        _marqueeStart = null;
+        _marqueeBaseSelection = [];
+        if (_marqueeAdorner != null)
+        {
+            AdornerLayer.GetAdornerLayer(_marqueeAdorner.AdornedElement)?.Remove(_marqueeAdorner);
+            _marqueeAdorner = null;
+        }
+        _listBox.ReleaseMouseCapture();
     }
 
     private void OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
+        EndMarquee();
         if (_deferredSelectItem != null)
         {
             _listBox.SelectedItems.Clear();
@@ -350,13 +408,14 @@ public class WpfListView<T> : IListView<T> where T : notnull
 
     private void OnPreviewMouseMove(object sender, MouseEventArgs e)
     {
-        if (_dragStartPoint is not { } start || e.LeftButton != MouseButtonState.Pressed) return;
-        var delta = e.GetPosition(_listBox) - start;
-        if (Math.Abs(delta.X) < SystemParameters.MinimumHorizontalDragDistance &&
-            Math.Abs(delta.Y) < SystemParameters.MinimumVerticalDragDistance)
+        // The marquee has the mouse captured until the button is released
+        if (_marqueeStart is { } marqueeStart)
         {
+            UpdateMarquee(marqueeStart, e);
             return;
         }
+        if (_dragStartPoint is not { } start || e.LeftButton != MouseButtonState.Pressed) return;
+        if (!IsDrag(e.GetPosition(_listBox) - start)) return;
         _dragStartPoint = null;
         _deferredSelectItem = null;
         if (Selection.Count == 0) return;
@@ -426,20 +485,9 @@ public class WpfListView<T> : IListView<T> where T : notnull
     private void AutoScroll(Point position)
     {
         const double edge = 30;
-        if (FindScrollViewer(_listBox) is not { } scrollViewer) return;
+        if (_listBox.FindDescendant<ScrollViewer>() is not { } scrollViewer) return;
         if (position.Y < edge) scrollViewer.LineUp();
         else if (position.Y > _listBox.ActualHeight - edge) scrollViewer.LineDown();
-    }
-
-    private static ScrollViewer? FindScrollViewer(DependencyObject parent)
-    {
-        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-        {
-            var child = VisualTreeHelper.GetChild(parent, i);
-            if (child is ScrollViewer scrollViewer) return scrollViewer;
-            if (FindScrollViewer(child) is { } result) return result;
-        }
-        return null;
     }
 
     private int GetDragIndex(Point position)
@@ -504,4 +552,33 @@ public class WpfListView<T> : IListView<T> where T : notnull
             drawingContext.DrawLine(new Pen(brush, 3), new Point(x, 0), new Point(x, size.Height));
         }
     }
+
+    // Click and drag selection rectangle
+    private class MarqueeAdorner : Adorner
+    {
+        public MarqueeAdorner(UIElement adornedElement) : base(adornedElement)
+        {
+            RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+        }
+
+        public Rect Rect
+        {
+            get;
+            set
+            {
+                field = value;
+                InvalidateVisual();
+            }
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            var brush = (Brush) (TryFindResource(SystemColors.HighlightBrushKey) ?? Brushes.DodgerBlue);
+            var fill = brush.Clone();
+            fill.Opacity = 0.2;
+            var pen = new Pen(brush, 1);
+            drawingContext.DrawRectangle(fill, pen, Rect);
+        }
+    }
+
 }

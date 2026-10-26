@@ -60,7 +60,7 @@ public class UpdateVerificationTests : ContextualTests
     [Fact]
     public void VerifyHash_Matches()
     {
-        var path = Path.Combine(FolderPath, "update.exe");
+        var path = P("update.exe");
         var data = "update contents"u8.ToArray();
         File.WriteAllBytes(path, data);
 
@@ -70,7 +70,7 @@ public class UpdateVerificationTests : ContextualTests
     [Fact]
     public void VerifyHash_Mismatch()
     {
-        var path = Path.Combine(FolderPath, "update.exe");
+        var path = P("update.exe");
         File.WriteAllBytes(path, "update contents"u8.ToArray());
 
         Assert.False(UpdateOperation.VerifyHash(path, SHA256.HashData("other contents"u8.ToArray())));

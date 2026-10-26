@@ -159,11 +159,14 @@ public class SaveSeparatorHelperTests : ContextualTests
         Assert.Equal("PATCH1", scans[1].BarcodeValue);
         Assert.True(IsDisposed(images[2]));
 
-        var placeholders = Placeholders.All;
+        var nameManager = new NameManager();
+        var context = new NameContext { DateTime = DateTime.Now, IsFilePath = false };
         Assert.Equal("scanorder-1-ABC-1234.pdf",
-            placeholders.Substitute("scanorder-$(n)-$(barcode).pdf", false, barcodeValue: scans[0].BarcodeValue));
+            nameManager.Get("scanorder-$(n)-$(barcode).pdf",
+                context with { BarcodeValue = scans[0].BarcodeValue }));
         Assert.Equal("scanorder-2-PATCH1.pdf",
-            placeholders.Substitute("scanorder-$(n)-$(barcode).pdf", false, 1, barcodeValue: scans[1].BarcodeValue));
+            nameManager.Get("scanorder-$(n)-$(barcode).pdf",
+                context with { BatchIndex = 1, BarcodeValue = scans[1].BarcodeValue }));
 
         foreach (var image in scans.SelectMany(x => x.Images))
         {

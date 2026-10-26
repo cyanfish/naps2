@@ -58,7 +58,7 @@
     <value>厘米</value>
   </data>
   <data name="PageSizeUnit_Inch" xml:space="preserve">
-    <value>单位</value>
+    <value>英寸</value>
   </data>
   <data name="PageSizeUnit_Millimetre" xml:space="preserve">
     <value>毫米</value>
@@ -70,7 +70,7 @@
     <value>A4 (210 x 297 毫米)</value>
   </data>
   <data name="PageSize_A5" xml:space="preserve">
-    <value>A5(149 x 210 毫米)</value>
+    <value>A5(148 x 210 毫米)</value>
   </data>
   <data name="PageSize_B4" xml:space="preserve">
     <value>B4 (250x353 毫米)</value>
@@ -85,7 +85,7 @@
     <value>US Legal (8.5x14 英寸)</value>
   </data>
   <data name="PageSize_Letter" xml:space="preserve">
-    <value>US Legal (8.5x14 英寸)</value>
+    <value>US Letter (8.5x11 英寸)</value>
   </data>
   <data name="Resolution_Custom" xml:space="preserve">
     <value>自定义...</value>
@@ -144,6 +144,15 @@
   <data name="TwainImpl_X64" xml:space="preserve">
     <value>x64</value>
   </data>
+  <data name="AppleImpl_Default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="AppleImpl_FileTransfer" xml:space="preserve">
+    <value>文件传输</value>
+  </data>
+  <data name="AppleImpl_MemoryTransfer" xml:space="preserve">
+    <value>内存传输</value>
+  </data>
   <data name="WiaVersion_Default" xml:space="preserve">
     <value>默认</value>
   </data>
@@ -179,5 +188,17 @@
   </data>
   <data name="Theme_Dark" xml:space="preserve">
     <value>深色</value>
+  </data>
+  <data name="DockStyle_Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="DockStyle_Left" xml:space="preserve">
+    <value>左对齐</value>
+  </data>
+  <data name="DockStyle_Bottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="DockStyle_Right" xml:space="preserve">
+    <value>右对齐</value>
   </data>
 </root>

@@ -643,5 +643,41 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("WiaVersion_Wia20", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top.
+        /// </summary>
+        internal static string DockStyle_Top {
+            get {
+                return ResourceManager.GetString("DockStyle_Top", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left.
+        /// </summary>
+        internal static string DockStyle_Left {
+            get {
+                return ResourceManager.GetString("DockStyle_Left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bottom.
+        /// </summary>
+        internal static string DockStyle_Bottom {
+            get {
+                return ResourceManager.GetString("DockStyle_Bottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right.
+        /// </summary>
+        internal static string DockStyle_Right {
+            get {
+                return ResourceManager.GetString("DockStyle_Right", resourceCulture);
+            }
+        }
     }
 }

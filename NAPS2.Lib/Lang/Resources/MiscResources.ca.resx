@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Segur que voleu suprimir {0} elements?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Segur que voleu suprimir {0} perfils?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Segur que voleu suprimir el perfil {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Fitxers Bitmap (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Metafitxer millorat (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Fitxer d'intercanvi d'imatge (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>Fitxer GIF (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>Fitxer JPEG (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>S'ha produït un error en enviar un correu electrònic.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Instal·lació completa</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>S'ha instal·lat correctament. Voleu reiniciar el NAPS2 ara per aplicar els canvis?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>S'ha produït un error en la instal·lació.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Ha fallat la instal·lació</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Tot ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>No s'ha pogut importar el fitxer '{0}'.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>No s'ha pogut importar el fitxer '{0}'. Només es poden importar fitxers generats amb el NAPS2.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Error amb la baixada</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Operació en progrés</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>S'està escanejant la pàgina {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>L'escàner seleccionat no suporta alimentació des d'un alimentador. Si el vostre escàner té alimentador de paper, seleccioneu un controlador diferent.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>No hi ha cap pàgina a l'alimentador.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>No teniu prou permisos per a copiar el contingut del fitxer '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>S'ha produït un error en desar el fitxer.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>de {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>S'ha produït un error desconegut en l'escaneig per lots.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>L'escàner s'està escalfant.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>Hi ha una actualització de l'OCR disponible.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>S'ha desat la imatge.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Progrés de l'alineació</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Baixada necessària</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Es requereix un complement extra per a importar aquest fitxer PDF. Voleu baixar-ho ara?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Segur que voleu cancel·lar el procés d'escaneig per lots?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Us agrada el NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>No s'ha trobat el controlador SANE. Assegureu-vos d'instal·lar les dependències necessàries:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>No s'ha trobat el motor OCR. Assegureu-vos d'instal·lar el paquet necessari:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>El controlador seleccionat no és compatible amb aquest sistema.</value>

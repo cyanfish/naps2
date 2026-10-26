@@ -72,6 +72,7 @@ public class CommonModule : Module
         builder.RegisterType<UiImageList>().AsSelf().SingleInstance();
         builder.RegisterType<StillImage>().AsSelf().SingleInstance();
         builder.RegisterType<AutoSaver>().AsSelf().SingleInstance();
+        builder.RegisterType<NameManager>().AsSelf().SingleInstance();
         // TODO: Use PdfiumWorkerCoordinator?
         builder.RegisterType<PdfiumPdfRenderer>().As<IPdfRenderer>();
         builder.RegisterType<OcrOperationManager>().AsSelf().SingleInstance();

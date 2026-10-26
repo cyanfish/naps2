@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Bạn có chắc chắn muốn xóa {0} mục?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Bạn có chắc chắn muốn xóa {0} hồ sơ?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Bạn có chắc chắn bạn muốn xóa hồ sơ {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Bitmap Files (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Enhanced Windows MetaFile (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Exchangeable Image File (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF File (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG File (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Có lỗi xảy ra trong khi đang cố gắng để gửi một email.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Cài đặt thành công</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Cài đặt hoàn tất. Bạn có muốn khởi động lại NAPS2 bây giờ?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Cài đặt thất bại.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Cài đặt bị lỗi</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Tất cả ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Các tập tin '{0}' không thể chèn được.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Các tập tin '{0}' không thể chèn được. Chỉ những tập tin PDF được tạo bởi NAPS2 có thể được chèn.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Tải Về lỗi</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Đang thực thi lệnh</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Trang quét {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Máy quét chọn không hỗ trợ sử dụng một feeder. Nếu máy quét của bạn không có một feeder, hãy thử sử dụng một trình điều khiển khác nhau.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Không trang sau nằm trong máng.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Bạn không có quyền sao chép nội dung từ file '{0}'.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Có lỗi khi lưu tập tin.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>of {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>An unknown error occurred during the batch scan.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Máy quét đang ấm dần lên.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>OCR có bản cập nhật mới..</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Lưu ảnh.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Deskew Progress</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Cần Tải Về</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Cần phải cài thêm phần mềm để nhập tập tin PDF này vào. Bạn có muốn tải ngay?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Bạn chắc chắn là muốn hủy lệnh scan liên tục này?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Like NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR chưa được cài. Vui lòng cài đặt gói liên quan để thao tác.:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Driver bạn đang chọn không hỗ trợ hệ điều hành này..</value>

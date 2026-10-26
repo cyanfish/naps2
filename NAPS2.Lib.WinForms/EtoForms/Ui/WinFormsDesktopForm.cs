@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq.Expressions;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms.ToolBar;
@@ -85,27 +86,19 @@ public class WinFormsDesktopForm : DesktopForm
         }
     }
 
-    protected override void OnClosed(EventArgs e)
-    {
-        SaveToolStripLocation();
-        base.OnClosed(e);
-    }
-
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
 
-        LoadToolStripLocation();
-
         NativeListView.TabIndex = 7;
         NativeListView.BorderStyle = WF.BorderStyle.None;
-        NativeListView.Focus();
     }
 
     protected override void OnShown(EventArgs e)
     {
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _toolbarFormatter.RelayoutToolbar(_mainToolStrip, scale));
+        NativeListView.Focus();
         base.OnShown(e);
     }
 
@@ -131,12 +124,6 @@ public class WinFormsDesktopForm : DesktopForm
 
     private WF.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;
 
-    protected override void SetCulture(string cultureId)
-    {
-        SaveToolStripLocation();
-        base.SetCulture(cultureId);
-    }
-
     protected override void RecreateToolbarsAndMenus()
     {
         base.RecreateToolbarsAndMenus();
@@ -160,10 +147,14 @@ public class WinFormsDesktopForm : DesktopForm
         EtoPlatform.Current.AttachDpiDependency(this,
             scale => _profilesToolStrip.ImageScalingSize = new Size((int) (16 * scale), (int) (16 * scale)));
 
+        var contextMenu = (WF.ContextMenuStrip) C.ContextMenu(this, GetToolbarContextMenuProvider()).ControlObject;
+        _mainToolStrip.ContextMenuStrip = contextMenu;
+        _profilesToolStrip.ContextMenuStrip = contextMenu;
         foreach (var panel in _container.Controls.OfType<WF.ToolStripPanel>())
         {
             // Allow tabbing through the toolbar for accessibility
             WinFormsHacks.SetControlStyle(panel, WF.ControlStyles.Selectable, true);
+            panel.ContextMenuStrip = contextMenu;
         }
 
         // We defer this to the Load event because otherwise with RTL languages we get a very weird crash (.NET bug not
@@ -177,21 +168,40 @@ public class WinFormsDesktopForm : DesktopForm
             {
                 _toolbarFormatter.RelayoutToolbar(_mainToolStrip, EtoPlatform.Current.GetScaleFactor(this));
                 LayoutController.Invalidate();
+                SyncToolStripLocation(_mainToolStrip, c => c.DesktopToolStripDock);
             };
-            PlaceProfilesToolbar();
-            _profilesToolStrip.ParentChanged += (_, _) => LayoutController.Invalidate();
+            PlaceToolbars();
+            _profilesToolStrip.ParentChanged += (_, _) =>
+            {
+                LayoutController.Invalidate();
+                SyncToolStripLocation(_profilesToolStrip, c => c.ProfilesToolStripDock);
+            };
         };
     }
 
-    public override void PlaceProfilesToolbar()
+    private void SyncToolStripLocation(WF.ToolStrip toolStrip, Expression<Func<CommonConfig, DockStyle>> accessor)
     {
-        if (Config.Get(c => c.ShowProfilesToolbar) && _profilesToolStrip.Parent == null)
+        // Save the position if the user drags the toolbar to a different dock
+        if (toolStrip.Parent?.Dock.ToConfig() is { } dock && dock != ToolbarConfig.Get(accessor))
+        {
+            Config.User.Set(accessor, dock);
+        }
+    }
+
+    public override void PlaceToolbars()
+    {
+        if (ToolbarConfig.Get(c => c.ShowProfilesToolbar) && _profilesToolStrip.Parent == null)
         {
             _container.TopToolStripPanel.Controls.Add(_profilesToolStrip);
         }
-        if (!Config.Get(c => c.ShowProfilesToolbar) && _profilesToolStrip.Parent != null)
+        if (!ToolbarConfig.Get(c => c.ShowProfilesToolbar) && _profilesToolStrip.Parent != null)
         {
             _profilesToolStrip.Parent.Controls.Remove(_profilesToolStrip);
+        }
+        SetDock(_mainToolStrip, ToolbarConfig.Get(c => c.DesktopToolStripDock));
+        if (_profilesToolStrip.Parent != null)
+        {
+            SetDock(_profilesToolStrip, ToolbarConfig.Get(c => c.ProfilesToolStripDock));
         }
     }
 
@@ -408,21 +418,6 @@ public class WinFormsDesktopForm : DesktopForm
     public override void ShowToolbarMenu(DesktopToolbarMenuType menuType)
     {
         _menuButtons.Get(menuType)?.ShowDropDown();
-    }
-
-    private void SaveToolStripLocation()
-    {
-        Config.User.Set(c => c.DesktopToolStripDock, _mainToolStrip.Parent!.Dock.ToConfig());
-        Config.User.Set(c => c.ProfilesToolStripDock, _profilesToolStrip.Parent?.Dock.ToConfig() ?? DockStyle.Top);
-    }
-
-    private void LoadToolStripLocation()
-    {
-        SetDock(_mainToolStrip, Config.Get(c => c.DesktopToolStripDock));
-        if (_profilesToolStrip.Parent != null)
-        {
-            SetDock(_profilesToolStrip, Config.Get(c => c.ProfilesToolStripDock));
-        }
     }
 
     private void SetDock(WF.ToolStrip toolStrip, DockStyle dock)

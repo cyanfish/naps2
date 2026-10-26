@@ -312,4 +312,16 @@
   <data name="Theme_Dark" xml:space="preserve">
     <value>Dark</value>
   </data>
+  <data name="DockStyle_Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="DockStyle_Left" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="DockStyle_Bottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="DockStyle_Right" xml:space="preserve">
+    <value>Right</value>
+  </data>
 </root>

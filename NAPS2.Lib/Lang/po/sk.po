@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-11 22:01\n"
+"PO-Revision-Date: 2026-10-25 18:53\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -72,6 +72,30 @@ msgstr "Rozšírené"
 msgid "Advanced Profile Settings"
 msgstr "Rozšírené nastavenia profilu"
 
+#: UiStrings.resx$AlignBottom$Message
+msgid "Align Bottom"
+msgstr ""
+
+#: UiStrings.resx$AlignCenter$Message
+msgid "Align Center"
+msgstr ""
+
+#: UiStrings.resx$AlignLeft$Message
+msgid "Align Left"
+msgstr ""
+
+#: UiStrings.resx$AlignMiddle$Message
+msgid "Align Middle"
+msgstr ""
+
+#: UiStrings.resx$AlignRight$Message
+msgid "Align Right"
+msgstr ""
+
+#: UiStrings.resx$AlignTop$Message
+msgid "Align Top"
+msgstr ""
+
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
 msgstr "Všetko ({0})"
@@ -137,10 +161,6 @@ msgstr "Vždy sa spýtať"
 msgid "Always show preview"
 msgstr ""
 
-#: MiscResources.resx$PdfImportComponentNeeded$Message
-msgid "An additional component is needed to import this PDF file. Would you like to download it now?"
-msgstr "Na import tohto súboru PDF je potrebný ďalší komponent. Chcete ho teraz stiahnuť?"
-
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
 msgstr "Pri spustení OCR došlo k chybe."
@@ -186,13 +206,13 @@ msgstr "Počas dávkového skenovania došlo k neznámej chybe."
 msgid "An update is available."
 msgstr "Je dostupná aktualizácia."
 
-#: MiscResources.resx$OcrUpdateAvailable$Message
-msgid "An update to OCR is available."
-msgstr "Je dostupná aktualizácia OCR."
-
 #: UiStrings.resx$AppleDriver$Message
 msgid "Apple Driver"
 msgstr "Ovládač Apple"
+
+#: UiStrings.resx$AppleImplLabel$Message
+msgid "Apple Driver Implementation:"
+msgstr ""
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -229,10 +249,6 @@ msgstr "Naozaj chcete odstrániť profil {0}?"
 #: MiscResources.resx$ConfirmDeleteItems$Message
 msgid "Are you sure you want to delete {0} item(s)?"
 msgstr "Naozaj chcete odstrániť {0} položky?"
-
-#: MiscResources.resx$ConfirmDeleteMultipleProfiles$Message
-msgid "Are you sure you want to delete {0} profiles?"
-msgstr "Naozaj chcete odstrániť {0} profilov?"
 
 #: UiStrings.resx$ConfirmDeleteSharedDevice$Message
 msgid "Are you sure you want to stop sharing {0}?"
@@ -341,6 +357,10 @@ msgstr "Čiernobiela"
 msgid "Blank Pages"
 msgstr "Prázdne stránky"
 
+#: SettingsResources.resx$DockStyle_Bottom$Message
+msgid "Bottom"
+msgstr ""
+
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
 msgstr "Jas / kontrast"
@@ -348,6 +368,10 @@ msgstr "Jas / kontrast"
 #: UiStrings.resx$BrightnessLabel$Message
 msgid "Brightness:"
 msgstr "Jas:"
+
+#: UiStrings.resx$ButtonsLabel$Message
+msgid "Buttons:"
+msgstr ""
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -443,9 +467,17 @@ msgstr "Kompresia:"
 msgid "Connect"
 msgstr "Pripojiť"
 
+#: UiStrings.resx$Connecting$Message
+msgid "Connecting..."
+msgstr ""
+
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
 msgstr "Chyba pripojenia."
+
+#: UiStrings.resx$ConnectionTimedOut$Message
+msgid "Connection timed out."
+msgstr ""
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -508,6 +540,10 @@ msgstr "Vlastné SMTP"
 msgid "Custom..."
 msgstr "Vlastné..."
 
+#: UiStrings.resx$CustomizeToolbar$Message
+msgid "Customize Toolbar"
+msgstr ""
+
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
 msgstr ""
@@ -516,6 +552,7 @@ msgstr ""
 msgid "Day (01-31)"
 msgstr "Deň (01-31)"
 
+#: SettingsResources.resx$AppleImpl_Default$Message
 #: SettingsResources.resx$PdfCompat_Default$Message
 #: SettingsResources.resx$Theme_Default$Message
 #: SettingsResources.resx$TwainImpl_Default$Message
@@ -590,10 +627,6 @@ msgstr "Stiahnuť"
 msgid "Download Error"
 msgstr "Chyba sťahovania"
 
-#: MiscResources.resx$DownloadNeeded$Message
-msgid "Download Needed"
-msgstr "Potrebné stiahnutie"
-
 #: UiStrings.resx$DownloadProgressFormTitle$Message
 msgid "Download Progress"
 msgstr "Priebeh sťahovania"
@@ -609,14 +642,6 @@ msgstr "Obojsmerne"
 #: UiStrings.resx$EsclDriver$Message
 msgid "ESCL Driver"
 msgstr "Ovládač ESCL"
-
-#: UiStrings.resx$EsclNetworkDriver$Message
-msgid "ESCL Network Driver"
-msgstr "Sieťový ovládač ESCL"
-
-#: UiStrings.resx$EsclUsbDriver$Message
-msgid "ESCL USB Driver"
-msgstr "Ovládač ESCL USB"
 
 #: UiStrings.resx$Edit$Message
 msgid "Edit"
@@ -657,7 +682,6 @@ msgid "Email Selected as PDF"
 msgstr "Poslať e-mail vybraným ako PDF"
 
 #: UiStrings.resx$EmailSettings$Message
-#: UiStrings.resx$EmailSettingsFormTitle$Message
 msgid "Email Settings"
 msgstr "Nastavenie e-mailu"
 
@@ -677,10 +701,6 @@ msgstr "Zašifrovať PDF"
 msgid "Encryption"
 msgstr "Šifrovanie"
 
-#: MiscResources.resx$FileTypeEmf$Message
-msgid "Enhanced Windows MetaFile (*.emf)"
-msgstr "Enhanced Windows MetaFile (*.emf)"
-
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -694,10 +714,6 @@ msgstr ""
 #: UiStrings.resx$EstimatedDownloadSize$Message
 msgid "Estimated download size: {0} MB"
 msgstr "Odhadovaná veľkosť sťahovaného súboru: {0} MB"
-
-#: MiscResources.resx$FileTypeExif$Message
-msgid "Exchangeable Image File (*.exif)"
-msgstr "Exchangeable Image File (*.exif)"
 
 #: UiStrings.resx$ExcludeBlankPages$Message
 msgid "Exclude blank pages"
@@ -719,6 +735,10 @@ msgstr "Názov súboru:"
 msgid "File Path:"
 msgstr "Cesta súboru:"
 
+#: SettingsResources.resx$AppleImpl_FileTransfer$Message
+msgid "File Transfer"
+msgstr ""
+
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
 msgstr "Oprava vyváženia bielej a odstránenie šumu"
@@ -739,9 +759,9 @@ msgstr "Preklopiť obojstranný scan"
 msgid "For high JPEG qualities (80+), also increase Image Quality in your profile for best results."
 msgstr "Pre najlepšie výsledky vysokej kvality obrázkov JPEG (80+), zvýšte tiež Kvalitu obrázku vo svojom profile."
 
-#: MiscResources.resx$FileTypeGif$Message
-msgid "GIF File (*.gif)"
-msgstr "Súbor GIF (*.gif)"
+#: UiStrings.resx$GeneralSettings$Message
+msgid "General Settings"
+msgstr ""
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -758,6 +778,10 @@ msgstr "Gmail"
 #: SettingsResources.resx$BitDepth_8Grayscale$Message
 msgid "Grayscale"
 msgstr "Odtiene sivej"
+
+#: UiStrings.resx$Help$Message
+msgid "Help"
+msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -792,7 +816,6 @@ msgid "Image Quality"
 msgstr "Kvalita obrázku"
 
 #: UiStrings.resx$ImageSettings$Message
-#: UiStrings.resx$ImageSettingsFormTitle$Message
 msgid "Image Settings"
 msgstr "Nastavenia obrázkov"
 
@@ -819,22 +842,6 @@ msgstr "Importuje sa..."
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "Inštalovať {0}"
-
-#: MiscResources.resx$InstallComplete$Message
-msgid "Installation Complete"
-msgstr "Inštalácia dokončená"
-
-#: MiscResources.resx$InstallFailedTitle$Message
-msgid "Installation Failed"
-msgstr "Inštalácia zlyhala"
-
-#: MiscResources.resx$InstallCompletePromptRestart$Message
-msgid "Installation complete. Do you want to restart NAPS2 now?"
-msgstr "Inštalácia dokončená. Chcete teraz reštartovať NAPS2?"
-
-#: MiscResources.resx$InstallFailed$Message
-msgid "Installation failed."
-msgstr "Inštalácia zlyhala."
 
 #: UiStrings.resx$Interface$Message
 msgid "Interface"
@@ -865,7 +872,6 @@ msgid "Keep images across sessions"
 msgstr "Zachovať obrázky naprieč reláciami"
 
 #: UiStrings.resx$KeyboardShortcuts$Message
-#: UiStrings.resx$KeyboardShortcutsFormTitle$Message
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -885,6 +891,7 @@ msgstr "Jazyk"
 msgid "Leave a Review"
 msgstr "Zanechať recenziu"
 
+#: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
 msgid "Left"
 msgstr "Vľavo"
@@ -927,6 +934,7 @@ msgstr "Manuálne IP"
 msgid "Maximum quality (large files)"
 msgstr "Maximálna kvalita (veľké súbory)"
 
+#: SettingsResources.resx$AppleImpl_MemoryTransfer$Message
 #: SettingsResources.resx$TwainImpl_MemXfer$Message
 msgid "Memory Transfer"
 msgstr "Presun pamäte"
@@ -938,6 +946,10 @@ msgstr "Metaúdaje"
 #: UiStrings.resx$Minute2Digit$Message
 msgid "Minute (00-59)"
 msgstr "Minúta (00-59)"
+
+#: UiStrings.resx$MissingFileExtension$Message
+msgid "Missing file extension (e.g. \".pdf\")"
+msgstr ""
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -973,6 +985,10 @@ msgstr "Posunúť nadol"
 #: UiStrings.resx$MoveUp$Message
 msgid "Move Up"
 msgstr "Posunúť nahor"
+
+#: UiStrings.resx$MoveUpDown$Message
+msgid "Move Up/Down"
+msgstr ""
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1160,7 +1176,6 @@ msgid "PDF Document (*.pdf)"
 msgstr "Dokument PDF (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
-#: UiStrings.resx$PdfSettingsFormTitle$Message
 msgid "PDF Settings"
 msgstr "Nastavenia PDF"
 
@@ -1221,6 +1236,10 @@ msgstr "Zástupné symboly"
 msgid "Port"
 msgstr "Port"
 
+#: UiStrings.resx$PositionLabel$Message
+msgid "Position:"
+msgstr ""
+
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
 msgstr "Následné spracovanie"
@@ -1263,6 +1282,10 @@ msgstr "Profil:"
 #: UiStrings.resx$ProfilesFormTitle$Message
 msgid "Profiles"
 msgstr "Profily"
+
+#: UiStrings.resx$ProfilesToolbar$Message
+msgid "Profiles toolbar"
+msgstr ""
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1332,6 +1355,10 @@ msgstr "Rozlíšenie:"
 msgid "Restore Defaults"
 msgstr "Obnoviť pôvodné"
 
+#: UiStrings.resx$Retry$Message
+msgid "Retry"
+msgstr ""
+
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
 msgstr "Opačné poradie"
@@ -1352,6 +1379,7 @@ msgstr ""
 msgid "Revert"
 msgstr "Prevrátiť"
 
+#: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
 msgid "Right"
 msgstr "Vpravo"
@@ -1483,10 +1511,6 @@ msgstr "Naskenovaný obrázok"
 msgid "Scanner Sharing"
 msgstr "Zdieľanie skenera"
 
-#: MiscResources.resx$ScanPageProgress$Message
-msgid "Scanning page {0}"
-msgstr "Skenovanie strany {0}"
-
 #: MiscResources.resx$BatchStatusScanPage$Message
 msgid "Scanning page {0} (scan {1})..."
 msgstr "Skenovanie strany {0} (skenovanie {1})..."
@@ -1614,6 +1638,14 @@ msgstr "Preskočiť výzvu na uloženie"
 msgid "Split"
 msgstr "Rozdeliť"
 
+#: UiStrings.resx$SplitHorizontally$Message
+msgid "Split Horizontally"
+msgstr ""
+
+#: UiStrings.resx$SplitVertically$Message
+msgid "Split Vertically"
+msgstr ""
+
 #: UiStrings.resx$Start$Message
 msgid "Start"
 msgstr "Štart"
@@ -1630,6 +1662,10 @@ msgstr "Roztiahnuť na veľkosť stránky"
 msgid "Subject:"
 msgstr "Predmet:"
 
+#: UiStrings.resx$Swap$Message
+msgid "Swap"
+msgstr ""
+
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
 msgstr "Súbor TIFF (*.tiff, *.tif)"
@@ -1642,28 +1678,14 @@ msgstr "Ovládač TWAIN"
 msgid "Technical Details"
 msgstr "Technické detaily"
 
-#: MiscResources.resx$TesseractNotAvailable$Message
-#: SdkResources.resx$TesseractNotAvailable$Message
-msgid "The OCR engine is not available. Make sure to install the required package:"
-msgstr "Mechanizmus OCR nie je k dispozícii. Určite preverte požadovaný balík pre inštaláciu:"
-
 #: SdkResources.resx$OcrTimeout$Message
 msgid "The OCR operation timed out."
 msgstr "Čas OCR operácie vypršal."
-
-#: MiscResources.resx$SaneNotAvailable$Message
-#: SdkResources.resx$SaneNotAvailable$Message
-msgid "The SANE driver is not available. Make sure to install the required packages:"
-msgstr "Ovládač SANE nie je k dispozícii. Preverte požadované balíky pre inštaláciu:"
 
 #: MiscResources.resx$ImportErrorCouldNot$Message
 #: SdkResources.resx$ImportErrorCouldNot$Message
 msgid "The file '{0}' could not be imported."
 msgstr "Súbor '{0}' nemožno importovať."
-
-#: MiscResources.resx$ImportErrorNAPS2Pdf$Message
-msgid "The file '{0}' could not be imported. Only PDF files generated by NAPS2 can be imported."
-msgstr "Súbor '{0}' nemožno importovať. Možno importovať len PDF súbory vygenerované cez NAPS2."
 
 #: MiscResources.resx$FileInUse$Message
 msgid "The file could not be overwritten because it is currently in use."
@@ -1761,9 +1783,29 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
 msgstr ""
 
+#: UiStrings.resx$ToggleOrientation$Message
+msgid "Toggle Orientation"
+msgstr ""
+
+#: UiStrings.resx$ToggleView$Message
+msgid "Toggle View"
+msgstr ""
+
+#: UiStrings.resx$Toolbar$Message
+msgid "Toolbar"
+msgstr ""
+
+#: UiStrings.resx$ToolbarSettings$Message
+msgid "Toolbar Settings"
+msgstr ""
+
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
 msgstr "Nástroje"
+
+#: SettingsResources.resx$DockStyle_Top$Message
+msgid "Top"
+msgstr ""
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1858,6 +1900,10 @@ msgstr "Čaká sa na autorizáciu..."
 msgid "Waiting for scan {0}..."
 msgstr "Čaká sa na skenovanie {0}..."
 
+#: UiStrings.resx$WaitingToConnect$Message
+msgid "Waiting to connect."
+msgstr ""
+
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
 msgstr "Prah bielej"
@@ -1873,11 +1919,6 @@ msgstr "Rok"
 #: UiStrings.resx$Year2Digit$Message
 msgid "Year (00-99)"
 msgstr "Rok (00-99)"
-
-#: MiscResources.resx$PdfNoPermissionToExtractContent$Message
-#: SdkResources.resx$PdfNoPermissionToExtractContent$Message
-msgid "You do not have permission to copy content from the file '{0}'."
-msgstr "Nemáte povolenie na kopírovanie obsahu zo súboru '{0}'."
 
 #: MiscResources.resx$DontHavePermission$Message
 msgid "You don't have permission to save files at this location."
@@ -1914,10 +1955,6 @@ msgstr "palec"
 #: SettingsResources.resx$PageSizeUnit_Millimetre$Message
 msgid "mm"
 msgstr "mm"
-
-#: MiscResources.resx$OfN$Message
-msgid "of {0}"
-msgstr "z {0}"
 
 #: SettingsResources.resx$TwainImpl_X64$Message
 msgid "x64"

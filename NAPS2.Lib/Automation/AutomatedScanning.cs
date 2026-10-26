@@ -31,6 +31,7 @@ internal class AutomatedScanning
     private readonly RecoveryStorageManager _recoveryStorageManager;
     private readonly ScanningContext _scanningContext;
     private readonly IScanBridgeFactory _scanBridgeFactory;
+    private readonly NameManager _nameManager;
 
     private readonly ConsoleOutput _output;
     private readonly AutomatedScanningOptions _options;
@@ -42,7 +43,8 @@ internal class AutomatedScanning
     private List<string?>? _scanBarcodeValues;
     private int _pagesScanned;
     private int _totalPagesScanned;
-    private Placeholders _placeholders = null!;
+    private SaveParams _saveParams = null!;
+    private NameContext _nameContext = null!;
     private List<string> _actualOutputPaths = null!;
     private OcrParams _ocrParams = null!;
     private PageDimensions? _pageDimensions;
@@ -52,7 +54,7 @@ internal class AutomatedScanning
         FileImporter fileImporter, IOperationFactory operationFactory,
         TesseractLanguageManager tesseractLanguageManager, IFormFactory formFactory, Naps2Config config,
         IProfileManager profileManager, RecoveryStorageManager recoveryStorageManager, ScanningContext scanningContext,
-        IScanBridgeFactory scanBridgeFactory)
+        IScanBridgeFactory scanBridgeFactory, NameManager nameManager)
     {
         _output = output;
         _options = options;
@@ -69,6 +71,7 @@ internal class AutomatedScanning
         _recoveryStorageManager = recoveryStorageManager;
         _scanningContext = scanningContext;
         _scanBridgeFactory = scanBridgeFactory;
+        _nameManager = nameManager;
     }
 
     public IEnumerable<ProcessedImage> AllImages => _scanList.SelectMany(x => x);
@@ -100,8 +103,12 @@ internal class AutomatedScanning
                 return;
             }
 
-            _placeholders = Placeholders.All.WithDate(DateTime.Now)
-                .WithBarcodeFilter(!_options.NoBarcodeFilter);
+            _saveParams = new SaveParams
+            {
+                OverwriteMode = _options.ForceOverwrite ? OverwriteMode.Force : OverwriteMode.Prompt,
+                FilterBarcode = !_options.NoBarcodeFilter
+            };
+            _nameContext = NameContext.FromSaveParams(_saveParams);
 
             if (_options.Install != null)
             {
@@ -334,7 +341,7 @@ internal class AutomatedScanning
             // Email, so no check needed
             return true;
         }
-        var subPath = _placeholders.Substitute(_options.OutputPath);
+        var subPath = _nameManager.Get(_options.OutputPath, _nameContext);
         if (IsPdfFile(subPath)
             && File.Exists(subPath)
             && !_options.ForceOverwrite)
@@ -417,8 +424,8 @@ internal class AutomatedScanning
 
         var message = new EmailMessage
         {
-            Subject = _placeholders.Substitute(_options.EmailSubject, false) ?? "",
-            BodyText = _placeholders.Substitute(_options.EmailBody, false),
+            Subject = _nameManager.Get(_options.EmailSubject, _nameContext with { IsFilePath = false }) ?? "",
+            BodyText = _nameManager.Get(_options.EmailBody, _nameContext with { IsFilePath = false }),
             AutoSend = _options.EmailAutoSend,
             SilentSend = _options.EmailSilentSend
         };
@@ -439,11 +446,12 @@ internal class AutomatedScanning
                 {
                     // The scan has already been exported to PDF, so use that file
                     OutputVerbose(ConsoleResources.AttachingExportedPDF);
-                    int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
+                    var context = NameContext.FromSaveParams(_saveParams with { BatchCount = _scanList.Count })
+                        with { IsFilePath = false };
                     for (int i = 0; i < _actualOutputPaths.Count; i++)
                     {
-                        string attachmentName = _placeholders.Substitute(_options.EmailFileName!, false, i,
-                            _scanList.Count > 1 ? digits : 0, GetScanBarcodeValue(i))!;
+                        string attachmentName = _nameManager.Get(_options.EmailFileName!,
+                            context with { BatchIndex = i, BarcodeValue = GetScanBarcodeValue(i) })!;
                         message.Attachments.Add(new EmailAttachment
                         {
                             FilePath = _actualOutputPaths[i],
@@ -641,7 +649,8 @@ internal class AutomatedScanning
 
     private async Task ExportToImageFiles()
     {
-        var path = _placeholders.Substitute(_options.OutputPath!, barcodeValue: GetScanBarcodeValue(0));
+        var path = _nameManager.Get(_options.OutputPath!,
+            _nameContext with { BarcodeValue = GetScanBarcodeValue(0) })!;
         await DoExportToImageFiles(_options.OutputPath!);
         OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
     }
@@ -656,6 +665,9 @@ internal class AutomatedScanning
                 : TiffCompression.Auto
         });
 
+        var imageSettings = _config.Get(c => c.ImageSettings);
+        int fileCount = _scanList.Sum(scan => SaveImagesOperation.GetFileCount(outputPath, scan.Count, imageSettings));
+        int fileIndex = 0;
         for (int scanIndex = 0; scanIndex < _scanList.Count; scanIndex++)
         {
             var scan = _scanList[scanIndex];
@@ -670,9 +682,15 @@ internal class AutomatedScanning
                     i = op.Status.CurrentProgress;
                 }
             };
-            op.Start(outputPath, _placeholders, scan, _config.Get(c => c.ImageSettings),
-                barcodeValue: GetScanBarcodeValue(scanIndex));
+            op.Start(outputPath, scan, imageSettings,
+                _saveParams with
+                {
+                    BatchCount = fileCount,
+                    BatchIndex = fileIndex,
+                    BarcodeValue = GetScanBarcodeValue(scanIndex)
+                });
             await op.Success;
+            fileIndex += SaveImagesOperation.GetFileCount(outputPath, scan.Count, imageSettings);
         }
     }
 
@@ -740,9 +758,8 @@ internal class AutomatedScanning
         }
         _config.Run.Set(c => c.PdfSettings.Compat, compat);
 
-        int scanIndex = 0;
         _actualOutputPaths = [];
-        foreach (var fileContents in _scanList)
+        foreach (var (fileContents, scanIndex) in _scanList.Select((x, i) => (x, i)))
         {
             string? barcodeValue = GetScanBarcodeValue(scanIndex);
             var op = _operationFactory.Create<SavePdfOperation>();
@@ -756,15 +773,18 @@ internal class AutomatedScanning
                     i = op.Status.CurrentProgress;
                 }
             };
-            int digits = (int) Math.Floor(Math.Log10(_scanList.Count)) + 1;
-            string actualPath = _placeholders.Substitute(path, true, scanIndex++, _scanList.Count > 1 ? digits : 0,
-                barcodeValue);
-            op.Start(actualPath, _placeholders, fileContents, _config.Get(c => c.PdfSettings), _ocrParams,
-                barcodeValue: barcodeValue);
+            op.Start(path, fileContents, _config.Get(c => c.PdfSettings), _ocrParams,
+                saveParams: _saveParams with
+                {
+                    BatchCount = _scanList.Count,
+                    BatchIndex = scanIndex,
+                    BarcodeValue = barcodeValue
+                });
             if (!await op.Success)
             {
                 return false;
             }
+            var actualPath = op.FirstFileSaved!;
             _actualOutputPaths.Add(actualPath);
             if (!email)
             {
@@ -796,8 +816,16 @@ internal class AutomatedScanning
             {
                 if (_options.WaitScan)
                 {
-                    OutputVerbose(ConsoleResources.PressEnterToScan);
-                    Console.ReadLine();
+                    OutputVerbose(OperatingSystem.IsWindows()
+                        ? ConsoleResources.PressEnterToScanWindows
+                        : ConsoleResources.PressEnterToScan);
+                    var input = Console.ReadLine();
+                    if (input == null)
+                    {
+                        // Ctrl+D or Ctrl+Z then Enter (EOF) detected - stop scanning and save
+                        OutputVerbose(ConsoleResources.StoppingScan);
+                        break;
+                    }
                 }
                 if (_options.Delay > 0)
                 {

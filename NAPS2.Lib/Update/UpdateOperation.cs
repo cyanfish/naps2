@@ -168,7 +168,14 @@ public class UpdateOperation : OperationBase
         var cert = X509CertificateLoader.LoadCertificate(ClientCreds_.naps2_public);
         var csp = cert.GetRSAPublicKey();
         if (csp == null) return false;
-        return csp.VerifyHash(sha256, signature256, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        try
+        {
+            return csp.VerifyHash(sha256, signature256, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        }
+        catch (CryptographicException)
+        {
+            return false;
+        }
     }
 
     private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)

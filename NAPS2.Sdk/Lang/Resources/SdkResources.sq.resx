@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Nuk ka faqe te furnizuesi.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Nuk ke të drejta të kopjosh përmbajtjen nga skedari '{0}'.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>Skaneri i zgjedhur nuk e mbështet dupleksin. Nëse skaneri supozohet se e pranon dupleksin, provoni të përdorni një drejtues tjetër.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skaneri po ngrohet.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>Drejtuesi SANE nuk është i disponueshëm. Sigurohuni të instaloni paketat e duhura:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>Motori i OCR nuk është i disponueshëm. Sigurohu të instalosh paketën e kërkuar:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Drejtuesi i zgjedhur nuk mbështetet në këtë sistem.</value>

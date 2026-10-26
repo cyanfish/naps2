@@ -15,9 +15,10 @@ public class ExportController : IExportController
     private readonly OperationProgress _operationProgress;
     private readonly Naps2Config _config;
     private readonly UiImageList _imageList;
+    private readonly NameManager _nameManager;
 
     public ExportController(DialogHelper dialogHelper, IOperationFactory operationFactory, IFormFactory formFactory,
-        OperationProgress operationProgress, Naps2Config config, UiImageList imageList)
+        OperationProgress operationProgress, Naps2Config config, UiImageList imageList, NameManager nameManager)
     {
         _dialogHelper = dialogHelper;
         _operationFactory = operationFactory;
@@ -25,6 +26,7 @@ public class ExportController : IExportController
         _operationProgress = operationProgress;
         _config = config;
         _imageList = imageList;
+        _nameManager = nameManager;
     }
 
     public async Task<bool> SavePdf(ICollection<UiImage> uiImages, ISaveNotify notify)
@@ -155,7 +157,8 @@ public class ExportController : IExportController
         {
             attachmentName += ".pdf";
         }
-        attachmentName = Placeholders.All.Substitute(attachmentName, false);
+        attachmentName = _nameManager.Get(attachmentName,
+            new NameContext { DateTime = DateTime.Now, IsFilePath = false });
 
         if (await DoEmailPdf(images, attachmentName))
         {
@@ -167,9 +170,10 @@ public class ExportController : IExportController
 
     private async Task<bool> DoSavePdf(IList<ProcessedImage> images, ISaveNotify notify, string savePath)
     {
-        var subSavePath = Placeholders.All.Substitute(savePath);
         var state = _imageList.CurrentState;
-        var (success, firstFileSaved) = await RunSavePdfOperation(subSavePath, images, originalFilename: savePath);
+        // The save dialog already confirms overwriting
+        var (success, firstFileSaved) = await RunSavePdfOperation(savePath, images,
+            saveParams: new SaveParams { OverwriteMode = OverwriteMode.Confirmed });
         if (success)
         {
             _imageList.MarkSaved(state, images);
@@ -183,8 +187,9 @@ public class ExportController : IExportController
     {
         var op = _operationFactory.Create<SaveImagesOperation>();
         var state = _imageList.CurrentState;
-        if (op.Start(savePath, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.ImageSettings),
-                savePath))
+        // The save dialog already confirms overwriting
+        if (op.Start(savePath, images, _config.Get(c => c.ImageSettings),
+                new SaveParams { OverwriteMode = OverwriteMode.Confirmed }))
         {
             _operationProgress.ShowProgress(op);
         }
@@ -219,13 +224,13 @@ public class ExportController : IExportController
         return false;
     }
 
-    private async Task<(bool Success, string? FirstFileSaved)> RunSavePdfOperation(string filename, IList<ProcessedImage> images,
-        EmailMessage? emailMessage = null, string? originalFilename = null)
+    private async Task<(bool Success, string? FirstFileSaved)> RunSavePdfOperation(string filename,
+        IList<ProcessedImage> images, EmailMessage? emailMessage = null, SaveParams? saveParams = null)
     {
         var op = _operationFactory.Create<SavePdfOperation>();
 
-        if (op.Start(filename, Placeholders.All.WithDate(DateTime.Now), images, _config.Get(c => c.PdfSettings),
-                _config.DefaultOcrParams(), emailMessage, originalFilename ?? filename))
+        if (op.Start(filename, images, _config.Get(c => c.PdfSettings), _config.DefaultOcrParams(), emailMessage,
+                saveParams))
         {
             _operationProgress.ShowProgress(op);
         }

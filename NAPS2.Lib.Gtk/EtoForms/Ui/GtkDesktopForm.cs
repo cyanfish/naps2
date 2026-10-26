@@ -1,9 +1,11 @@
 using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 using Eto.GtkSharp.Forms.ToolBar;
 using Gdk;
 using Gtk;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Gtk;
+using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Scan;
@@ -20,6 +22,9 @@ public class GtkDesktopForm : DesktopForm
     private int _toolbarPadding;
     private CssProvider? _toolbarPaddingCssProvider;
     private Toolbar _profilesToolbar = null!;
+    private Box _windowContentBox = null!;
+    private Box _innerContentBox = null!;
+    private Eto.Forms.ContextMenu _toolbarContextMenu = null!;
 
     public GtkDesktopForm(
         Naps2Config config,
@@ -74,6 +79,9 @@ public class GtkDesktopForm : DesktopForm
             .preview-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button button { padding: 0 5px; }
             toolbar { border-bottom: 1px solid " + sepColor + @"; }
+            toolbar.dock-left { border-bottom: none; border-right: 1px solid " + sepColor + @"; }
+            toolbar.dock-bottom { border-bottom: none; border-top: 1px solid " + sepColor + @"; }
+            toolbar.dock-right { border-bottom: none; border-left: 1px solid " + sepColor + @"; }
             .listview .frame { background-color: " + bgColor + @"; }
             .listview .drop-before { border-radius: 0; border-left: 3px solid " + fgColor + @"; padding-left: 0; }
             .listview .drop-after { border-radius: 0; border-right: 3px solid " + fgColor + @"; padding-right: 0; }
@@ -93,7 +101,7 @@ public class GtkDesktopForm : DesktopForm
         base.OnLoad(e);
         var listView = (GtkListView<UiImage>) _listView;
         listView.NativeControl.StyleContext.AddClass("desktop-listview");
-        PlaceProfilesToolbar();
+        PlaceToolbars();
     }
 
     protected override void OnSizeChanged(EventArgs e)
@@ -108,7 +116,10 @@ public class GtkDesktopForm : DesktopForm
         _toolbar.GetPreferredWidth(out _, out var toolbarWidth);
         var toolbarWidthLessPadding = toolbarWidth - _toolbarPadding;
         var excessWidth = Width - toolbarWidthLessPadding - 4;
-        var div = excessWidth / (_toolbarButtonCount * 2 + _toolbarMenuToggleCount);
+        // A vertical toolbar has no width constraint
+        var div = _toolbar.Orientation == Orientation.Vertical
+            ? int.MaxValue
+            : excessWidth / Math.Max(_toolbarButtonCount * 2 + _toolbarMenuToggleCount, 1);
         div = div.Clamp(0, 4);
         var buttonPadding = div;
         var togglePadding = div / 2;
@@ -132,22 +143,76 @@ public class GtkDesktopForm : DesktopForm
 
         _profilesToolbar = new Toolbar();
         _profilesToolbar.Style = ToolbarStyle.BothHoriz;
+
+        _toolbarContextMenu = C.ContextMenu(this, GetToolbarContextMenuProvider());
+        foreach (var toolbar in new[] { _toolbar, _profilesToolbar })
+        {
+            toolbar.PopupContextMenu += (_, args) =>
+            {
+                _toolbarContextMenu.Show();
+                args.RetVal = true;
+            };
+        }
+
+        // Eto puts the toolbar in a box above the window content. To support other dock positions, we instead put
+        // the main toolbar next to the window content, and the profiles toolbar next to that in an inner box (so
+        // they can be docked independently).
+        ((Box) _toolbar.Parent).Remove(_toolbar);
+        _windowContentBox = (Box) ((FormHandler) Handler).WindowContentControl;
+        _innerContentBox = new Box(Orientation.Vertical, 0);
+        foreach (var child in _windowContentBox.Children)
+        {
+            _windowContentBox.QueryChildPacking(child, out var expand, out var fill, out var padding, out var packType);
+            _windowContentBox.Remove(child);
+            if (packType == PackType.End)
+            {
+                _innerContentBox.PackEnd(child, expand, fill, padding);
+            }
+            else
+            {
+                _innerContentBox.PackStart(child, expand, fill, padding);
+            }
+        }
+        _windowContentBox.PackStart(_innerContentBox, true, true, 0);
+        _innerContentBox.Show();
     }
 
-    public override void PlaceProfilesToolbar()
+    internal IEnumerable<Toolbar> Toolbars => new[] { _toolbar, _profilesToolbar }.Where(x => x.Parent != null);
+
+    public override void PlaceToolbars()
     {
-        if (Config.Get(c => c.ShowProfilesToolbar) && _profilesToolbar.Parent == null)
+        PlaceToolbar(_toolbar, _windowContentBox, ToolbarConfig.Get(c => c.DesktopToolStripDock));
+        if (ToolbarConfig.Get(c => c.ShowProfilesToolbar))
         {
-            ((Box) _toolbar.Parent).Add(_profilesToolbar);
-            _profilesToolbar.ShowAll();
-            LayoutController.Invalidate();
+            PlaceToolbar(_profilesToolbar, _innerContentBox, ToolbarConfig.Get(c => c.ProfilesToolStripDock));
         }
-        if (!Config.Get(c => c.ShowProfilesToolbar) && _profilesToolbar.Parent != null)
+        else
         {
-            ((Box) _toolbar.Parent).Remove(_profilesToolbar);
-            LayoutController.Invalidate();
+            (_profilesToolbar.Parent as Container)?.Remove(_profilesToolbar);
         }
+        UpdateToolbarPadding();
+        LayoutController.Invalidate();
     }
+
+    private static void PlaceToolbar(Toolbar toolbar, Box box, DockStyle dock)
+    {
+        bool vertical = dock is DockStyle.Left or DockStyle.Right;
+        toolbar.Orientation = vertical ? Orientation.Vertical : Orientation.Horizontal;
+        foreach (var d in Enum.GetValues<DockStyle>())
+        {
+            toolbar.StyleContext.RemoveClass(GetDockClass(d));
+        }
+        toolbar.StyleContext.AddClass(GetDockClass(dock));
+
+        (toolbar.Parent as Container)?.Remove(toolbar);
+        // Toolbars are stacked perpendicular to their orientation
+        box.Orientation = vertical ? Orientation.Horizontal : Orientation.Vertical;
+        box.PackStart(toolbar, false, false, 0);
+        box.ReorderChild(toolbar, dock is DockStyle.Left or DockStyle.Top ? 0 : -1);
+        toolbar.ShowAll();
+    }
+
+    private static string GetDockClass(DockStyle dock) => $"dock-{dock.ToString().ToLowerInvariant()}";
 
     protected override void UpdateProfilesToolbar()
     {
@@ -182,7 +247,17 @@ public class GtkDesktopForm : DesktopForm
 
     protected override void RecreateToolbarsAndMenus()
     {
-        // Recreating toolbars doesn't work well on Gtk and isn't necessary anyway
+        // The toolbar items are added natively rather than through Eto, so we need to remove them natively too
+        foreach (var child in _toolbar.Children)
+        {
+            _toolbar.Remove(child);
+        }
+        _toolbarButtonCount = 0;
+        _toolbarMenuToggleCount = 0;
+        _menuButtons.Clear();
+        base.RecreateToolbarsAndMenus();
+        _toolbar.ShowAll();
+        UpdateToolbarPadding();
     }
 
     protected override void CreateToolbarButton(Command command)
@@ -209,6 +284,13 @@ public class GtkDesktopForm : DesktopForm
         // Simply create a ToolItem with two buttons stacked on top of each other
         var button1 = CreateToolButton(command1, Orientation.Horizontal);
         var button2 = CreateToolButton(command2, Orientation.Horizontal);
+        // The content of both buttons has the same width (so their icons line up), centered in a vertical toolbar
+        var sizeGroup = new SizeGroup(SizeGroupMode.Horizontal);
+        foreach (var content in new[] { button1.Child, button2.Child })
+        {
+            content.Halign = Align.Center;
+            sizeGroup.AddWidget(content);
+        }
         var vbox = new Box(Orientation.Vertical, 0);
         vbox.Add(button1);
         vbox.Add(button2);
@@ -245,10 +327,34 @@ public class GtkDesktopForm : DesktopForm
         command.EnabledChanged += (_, _) => button.Sensitive = command.Enabled;
         button.Menu = CreateMenuWidget(command, menu);
         button.StyleContext.AddClass("desktop-toolbar-button");
+        button.ToolbarReconfigured += (_, _) => PlaceMenuArrow(button);
+        PlaceMenuArrow(button);
         _toolbar.Add(button);
         _toolbarButtonCount++;
         _toolbarMenuToggleCount++;
         _menuButtons[menuType] = button;
+    }
+
+    private static void PlaceMenuArrow(MenuToolButton button)
+    {
+        // In a vertical toolbar, GTK puts the arrow below the button (pointing right), which takes up a lot of space.
+        // Instead we keep it to the side (pointing down) like in a horizontal toolbar.
+        if (button.Orientation != Orientation.Vertical || button.Child is not Box box) return;
+        var arrowButton = box.Children.OfType<ToggleButton>().FirstOrDefault();
+        var mainButton = box.Children.OfType<Button>().FirstOrDefault(x => x is not ToggleButton);
+        if (arrowButton == null || mainButton == null) return;
+        box.Orientation = Orientation.Horizontal;
+        box.SetChildPacking(mainButton, true, true, 0, PackType.Start);
+        (arrowButton.Child as Image)?.SetFromIconName("pan-down-symbolic", IconSize.Button);
+        // Balance the arrow with a spacer of the same width so the content is centered in the toolbar like other
+        // buttons
+        var spacer = new Box(Orientation.Horizontal, 0);
+        box.PackStart(spacer, false, false, 0);
+        box.ReorderChild(spacer, 0);
+        spacer.Show();
+        var sizeGroup = new SizeGroup(SizeGroupMode.Horizontal);
+        sizeGroup.AddWidget(spacer);
+        sizeGroup.AddWidget(arrowButton);
     }
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)

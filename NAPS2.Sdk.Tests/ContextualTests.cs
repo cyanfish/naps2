@@ -20,7 +20,7 @@ public class ContextualTests : IDisposable
 
         ImageContext = TestImageContextFactory.Get();
         ScanningContext = new ScanningContext(ImageContext);
-        ScanningContext.TempFolderPath = Path.Combine(FolderPath, "temp");
+        ScanningContext.TempFolderPath = P("temp");
         Directory.CreateDirectory(ScanningContext.TempFolderPath);
     }
 
@@ -42,6 +42,8 @@ public class ContextualTests : IDisposable
 
     public DirectoryInfo Folder { get; }
 
+    public string P(params string[] paths) => Path.Combine([FolderPath, ..paths]);
+
     public IMemoryImage LoadImage(byte[] resource)
     {
         return ImageContext.Load(new MemoryStream(resource));
@@ -59,15 +61,15 @@ public class ContextualTests : IDisposable
 
     public void SetUpFileStorage()
     {
-        ScanningContext.RecoveryPath = Path.Combine(FolderPath, "recovery");
+        ScanningContext.RecoveryPath = P("recovery");
         ScanningContext.FileStorageManager = FileStorageManager.CreateFolder(ScanningContext.RecoveryPath);
     }
 
     public void SetUpOcr()
     {
-        var best = Path.Combine(FolderPath, "best");
+        var best = P("best");
         Directory.CreateDirectory(best);
-        var fast = Path.Combine(FolderPath, "fast");
+        var fast = P("fast");
         Directory.CreateDirectory(fast);
 
         var depsRoot = Environment.GetEnvironmentVariable("NAPS2_TEST_DEPS");

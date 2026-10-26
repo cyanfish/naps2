@@ -1,4 +1,4 @@
-using NAPS2.EtoForms;
+﻿using NAPS2.EtoForms;
 using NAPS2.EtoForms.Notifications;
 using NAPS2.ImportExport.Images;
 using NAPS2.Pdf;
@@ -17,10 +17,12 @@ public class AutoSaver
     private readonly Naps2Config _config;
     private readonly ImageContext _imageContext;
     private readonly UiImageList _imageList;
+    private readonly NameManager _nameManager;
 
     public AutoSaver(ErrorOutput errorOutput, DialogHelper dialogHelper,
         OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter,
-        IOverwritePrompt overwritePrompt, Naps2Config config, ImageContext imageContext, UiImageList imageList)
+        IOverwritePrompt overwritePrompt, Naps2Config config, ImageContext imageContext, UiImageList imageList,
+        NameManager nameManager)
     {
         _errorOutput = errorOutput;
         _dialogHelper = dialogHelper;
@@ -31,6 +33,7 @@ public class AutoSaver
         _config = config;
         _imageContext = imageContext;
         _imageList = imageList;
+        _nameManager = nameManager;
     }
 
     public IAsyncEnumerable<ProcessedImage> Save(AutoSaveSettings settings, IAsyncEnumerable<ProcessedImage> images)
@@ -75,15 +78,16 @@ public class AutoSaver
         try
         {
             bool ok = true;
-            var placeholders = Placeholders.All.WithDate(DateTime.Now);
-            int i = 0;
             string? firstFileSaved = null;
-            var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator,
-                barcodeSeparatorOptions: settings.BarcodeSeparatorOptions).ToList();
-            foreach (var imagesToSave in scans)
+            var scans = SaveSeparatorHelper.SeparateScansWithBarcodeValues(new[] { images }, settings.Separator,
+                    barcodeSeparatorOptions: settings.BarcodeSeparatorOptions)
+                .Where(x => x.Images.Count > 0).ToList();
+            var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never, OpenEndedSequence = true };
+            foreach (var (scan, i) in scans.Select((x, i) => (x, i)))
             {
-                (bool success, string? filePath) =
-                    await SaveOneFile(settings, placeholders, i++, imagesToSave, scans.Count == 1);
+                var imagesToSave = scan.Images;
+                (bool success, string? filePath) = await SaveOneFile(settings, saveParams with { BatchIndex = i },
+                    imagesToSave, doNotify: scans.Count == 1, barcodeValue: scan.BarcodeValue);
                 if (success)
                 {
                     // Normally we're supposed to take the CurrentState before the save operation starts, but that
@@ -102,7 +106,7 @@ public class AutoSaver
             if (scans.Count > 1 && ok)
             {
                 // Can't just do images.Count because that includes patch codes
-                int imageCount = scans.SelectMany(x => x).Count();
+                int imageCount = scans.SelectMany(x => x.Images).Count();
                 _notify.ImagesSaved(imageCount, firstFileSaved!);
             }
             return ok;
@@ -115,37 +119,39 @@ public class AutoSaver
         }
     }
 
-    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, Placeholders placeholders, int i,
-        List<ProcessedImage> images, bool doNotify)
+    private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, SaveParams saveParams,
+        List<ProcessedImage> images, bool doNotify, string? barcodeValue)
     {
-        if (images.Count == 0)
-        {
-            return (true, null);
-        }
-        string subPath = placeholders.Substitute(settings.FilePath, true, i);
+        saveParams = saveParams with { BarcodeValue = barcodeValue };
+        string path = settings.FilePath;
         if (settings.PromptForFilePath)
         {
+            // The dialog handles conflicts itself, so the default is just the configured name with placeholders filled in
+            var defaultPath = _nameManager.Get(path, NameContext.FromSaveParams(saveParams));
             string? newPath = null!;
-            if (Invoker.Current.InvokeGet(() => _dialogHelper.PromptToSavePdfOrImage(subPath, out newPath)))
+            if (Invoker.Current.InvokeGet(() => _dialogHelper.PromptToSavePdfOrImage(defaultPath, out newPath)))
             {
-                subPath = placeholders.Substitute(newPath!, true, i);
+                path = newPath!;
+                // The user chose (and confirmed overwriting) this exact name, so it shouldn't be numbered as part of
+                // the sequence
+                saveParams = saveParams with
+                {
+                    OverwriteMode = OverwriteMode.Confirmed,
+                    OpenEndedSequence = false,
+                    BatchIndex = null
+                };
             }
             else
             {
                 return (false, null);
             }
         }
-        // TODO: This placeholder handling is complex and wrong in some cases (e.g. FilePerScan with ext = "jpg")
-        // TODO: Maybe have initial placeholders that replace date, then rely on the ops to increment the file num
-        var extension = Path.GetExtension(subPath);
-        if (extension != null && extension.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase))
+        var extension = Path.GetExtension(_nameManager.Get(path, NameContext.FromSaveParams(saveParams)));
+        if (extension.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase))
         {
-            if (File.Exists(subPath))
-            {
-                subPath = placeholders.Substitute(subPath, true, 0, 1);
-            }
-            var op = new SavePdfOperation(_pdfExporter, _overwritePrompt);
-            if (op.Start(subPath, placeholders, images, _config.Get(c => c.PdfSettings), _config.DefaultOcrParams()))
+            var op = new SavePdfOperation(_pdfExporter, _overwritePrompt, _nameManager);
+            if (op.Start(path, images, _config.Get(c => c.PdfSettings), _config.DefaultOcrParams(),
+                    saveParams: saveParams))
             {
                 _operationProgress.ShowProgress(op);
             }
@@ -158,8 +164,8 @@ public class AutoSaver
         }
         else
         {
-            var op = new SaveImagesOperation(_overwritePrompt, _imageContext);
-            if (op.Start(subPath, placeholders, images, _config.Get(c => c.ImageSettings)))
+            var op = new SaveImagesOperation(_overwritePrompt, _imageContext, _nameManager);
+            if (op.Start(path, images, _config.Get(c => c.ImageSettings), saveParams))
             {
                 _operationProgress.ShowProgress(op);
             }

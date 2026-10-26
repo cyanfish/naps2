@@ -22,10 +22,13 @@
     <value>Libreria icone:</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
-    <value>Cerca aggiornamenti</value>
+    <value>Controllo aggiornamenti</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Riprova</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Dona</value>
@@ -61,7 +64,7 @@
     <value>Ripeti operazione</value>
   </data>
   <data name="UndoFormat" xml:space="preserve">
-    <value>Annulla operazione {0}</value>
+    <value>Annulla operazione '{0}'</value>
   </data>
   <data name="RedoFormat" xml:space="preserve">
     <value>Ripeti operazione {0}</value>
@@ -159,6 +162,9 @@
   <data name="MoveDown" xml:space="preserve">
     <value>Sposta giù</value>
   </data>
+  <data name="MoveUpDown" xml:space="preserve">
+    <value>Move Up/Down</value>
+  </data>
   <data name="Reorder" xml:space="preserve">
     <value>Riordina</value>
   </data>
@@ -195,23 +201,26 @@
   <data name="Settings" xml:space="preserve">
     <value>Impostazioni</value>
   </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>Impostazioni generali</value>
+  </data>
   <data name="Interface" xml:space="preserve">
     <value>Interfaccia</value>
   </data>
   <data name="ScanChangesDefaultProfile" xml:space="preserve">
-    <value>Menu "Scansiona" modifica il profilo predefinito</value>
+    <value>Menu 'Scansiona' modifica il profilo predefinito</value>
   </data>
   <data name="ShowProfilesToolbar" xml:space="preserve">
-    <value>Visualizza barra "Profili"</value>
+    <value>Visualizza barra 'Profili'</value>
   </data>
   <data name="ShowPageNumbers" xml:space="preserve">
     <value>Visualizza numeri di pagina</value>
   </data>
   <data name="ScanButtonDefaultAction" xml:space="preserve">
-    <value>Azione predefinita tasto "Scansiona":</value>
+    <value>Azione predefinita tasto 'Scansiona':</value>
   </data>
   <data name="SaveButtonDefaultAction" xml:space="preserve">
-    <value>Azione predefinita tasto "Salva":</value>
+    <value>Azione predefinita tasto 'Salva':</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Applicazione</value>
@@ -284,12 +293,6 @@
   </data>
   <data name="EsclDriver" xml:space="preserve">
     <value>Driver ESCL</value>
-  </data>
-  <data name="EsclNetworkDriver" xml:space="preserve">
-    <value>Driver di rete ESCL</value>
-  </data>
-  <data name="EsclUsbDriver" xml:space="preserve">
-    <value>Driver USB ESCL</value>
   </data>
   <data name="AppleDriver" xml:space="preserve">
     <value>Driver Apple</value>
@@ -388,7 +391,7 @@
     <value>Dopo la scansione avvia automaticamente OCR</value>
   </data>
   <data name="PreemptivelyOcrAfterScanning" xml:space="preserve">
-    <value>Dopo la scansione eseguire preventivamente OCR</value>
+    <value>Dopo la scansione esegui preventivamente OCR</value>
   </data>
   <data name="GetMoreLanguages" xml:space="preserve">
     <value>Installa altre lingue</value>
@@ -430,7 +433,7 @@
     <value>Ritaglio automatico</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
-    <value>Applica a tutte le {0} immagini selezionate</value>
+    <value>Applica a tutte le '{0}' immagini selezionate</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Seleziona tutto</value>
@@ -445,7 +448,7 @@
     <value>Ripristino immagini digitalizzate</value>
   </data>
   <data name="RecoverPrompt" xml:space="preserve">
-    <value>{0} immagine/i digitalizzata/e il {1} alle ore {2} potrebbero non essere state salvate e sono recuperabili. Vuoi recuperarle?</value>
+    <value>'{0}' immagini digitalizzate il '{1}' alle ore '{2}' potrebbero non essere state salvate e sono recuperabili.\nVuoi recuperarle?</value>
   </data>
   <data name="Placeholders" xml:space="preserve">
     <value>Segnaposti</value>
@@ -457,16 +460,13 @@
     <value>File a pagina singola</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
-    <value>Cifra il PDF</value>
+    <value>Cifra PDF</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Visualizza</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
     <value>Ripristina predefiniti</value>
-  </data>
-  <data name="PdfSettingsFormTitle" xml:space="preserve">
-    <value>Impostazioni PDF</value>
   </data>
   <data name="AllowPrinting" xml:space="preserve">
     <value>Consenti stampa</value>
@@ -582,12 +582,6 @@
   <data name="CompressionLabel" xml:space="preserve">
     <value>Compressione:</value>
   </data>
-  <data name="ImageSettingsFormTitle" xml:space="preserve">
-    <value>Impostazioni immagine</value>
-  </data>
-  <data name="EmailSettingsFormTitle" xml:space="preserve">
-    <value>Impostazioni email</value>
-  </data>
   <data name="SettingsFormTitle" xml:space="preserve">
     <value>Impostazioni</value>
   </data>
@@ -661,7 +655,7 @@
     <value>In attesa di TWAIN per completare...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>Impostazioni profilo avanzate</value>
+    <value>Impostazioni avanzate profilo</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
     <value>Qualità immagine</value>
@@ -713,6 +707,9 @@
   </data>
   <data name="TwainImplLabel" xml:space="preserve">
     <value>Implementazione Twain:</value>
+  </data>
+  <data name="AppleImplLabel" xml:space="preserve">
+    <value>Implementazione driver Apple:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Scansione batch</value>
@@ -781,13 +778,13 @@
     <value>Condivisione scanner</value>
   </data>
   <data name="ScannerSharingIntro" xml:space="preserve">
-    <value>Gli scanner condivisi possono essere usati da altri computer nella rete locale selezionando "Driver ESCL" nelle impostazioni del profilo NAPS2 dell'altro computer.</value>
+    <value>Gli scanner condivisi possono essere usati da altri computer nella rete locale selezionando 'Driver ESCL' nelle impostazioni del profilo NAPS2 dell'altro computer.</value>
   </data>
   <data name="SharedDeviceFormTitle" xml:space="preserve">
     <value>Impostazioni scanner condiviso</value>
   </data>
   <data name="ConfirmDeleteSharedDevice" xml:space="preserve">
-    <value>Vuoi interrompere la condivisione di {0}?</value>
+    <value>Vuoi interrompere la condivisione di '{0}'?</value>
   </data>
   <data name="ShareAsService" xml:space="preserve">
     <value>Condividi anche quando NAPS2 è chiuso</value>
@@ -822,8 +819,17 @@
   <data name="Connect" xml:space="preserve">
     <value>Connetti</value>
   </data>
+  <data name="WaitingToConnect" xml:space="preserve">
+    <value>Waiting to connect.</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>Errore connessione.</value>
+  </data>
+  <data name="ConnectionTimedOut" xml:space="preserve">
+    <value>Connection timed out.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Chiedi sempre</value>
@@ -844,16 +850,13 @@
     <value>Barra laterale</value>
   </data>
   <data name="CantFindScannerFlatpak" xml:space="preserve">
-    <value>Non riesci a trovare lo scanner? Leggi le limitazioni del Flatpak NAPS2.</value>
+    <value>Non riesci a trovare lo scanner? \nLeggi le limitazioni del Flatpak NAPS2.</value>
   </data>
   <data name="KeyboardShortcuts" xml:space="preserve">
     <value>Scorciatoie tastiera</value>
   </data>
-  <data name="KeyboardShortcutsFormTitle" xml:space="preserve">
-    <value>Scorciatoie tastiera</value>
-  </data>
   <data name="ScanWithProfile" xml:space="preserve">
-    <value>Scansiona con il profilo {0}</value>
+    <value>Scansiona con il profilo '{0}'</value>
   </data>
   <data name="ScanWithDefaultProfile" xml:space="preserve">
     <value>Scansiona con profilo predefinito</value>
@@ -886,7 +889,7 @@
     <value>Modifica con...</value>
   </data>
   <data name="ErrorStartingApplication" xml:space="preserve">
-    <value>Errore avvio applicazione {0}</value>
+    <value>Errore avvio applicazione '{0}'</value>
   </data>
   <data name="StopScannerSharing" xml:space="preserve">
     <value>Stop condivisione scanner</value>
@@ -930,7 +933,7 @@ Or click and drag to draw a line aligned with the page (vertically or horizontal
     <value>Visualizza sempre anteprima</value>
   </data>
   <data name="ReverseBackSides" xml:space="preserve">
-    <value>Rovescio lati posteriori</value>
+    <value>Ribaltamento lati posteriori</value>
   </data>
   <data name="ManualDuplexHelp" xml:space="preserve">
     <value>To scan both sides of a multi-page document with your feeder scanner, you can select "Duplex" as your paper source if your scanner supports it.
@@ -974,5 +977,62 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
     <value>Qualità JPEG:</value>
+  </data>
+  <data name="MissingFileExtension" xml:space="preserve">
+    <value>Estensione file mancante (ad es. '.PDF')</value>
+  </data>
+  <data name="AlignLeft" xml:space="preserve">
+    <value>Allinea a sinistra</value>
+  </data>
+  <data name="AlignCenter" xml:space="preserve">
+    <value>Allinea al centro</value>
+  </data>
+  <data name="AlignRight" xml:space="preserve">
+    <value>Allinea a destra</value>
+  </data>
+  <data name="AlignTop" xml:space="preserve">
+    <value>Allinea in alto</value>
+  </data>
+  <data name="AlignMiddle" xml:space="preserve">
+    <value>Allinea in mezzo</value>
+  </data>
+  <data name="AlignBottom" xml:space="preserve">
+    <value>Allinea in basso</value>
+  </data>
+  <data name="Swap" xml:space="preserve">
+    <value>Scambia</value>
+  </data>
+  <data name="SplitVertically" xml:space="preserve">
+    <value>Dividi verticalmente</value>
+  </data>
+  <data name="SplitHorizontally" xml:space="preserve">
+    <value>Dividi orizzontalmente</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Aiuto</value>
+  </data>
+  <data name="ToggleOrientation" xml:space="preserve">
+    <value>Abilita/disabilita orientamento</value>
+  </data>
+  <data name="ToggleView" xml:space="preserve">
+    <value>Abilita/disabilita vista</value>
+  </data>
+  <data name="ToolbarSettings" xml:space="preserve">
+    <value>Toolbar Settings</value>
+  </data>
+  <data name="CustomizeToolbar" xml:space="preserve">
+    <value>Customize Toolbar</value>
+  </data>
+  <data name="Toolbar" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="ProfilesToolbar" xml:space="preserve">
+    <value>Profiles toolbar</value>
+  </data>
+  <data name="PositionLabel" xml:space="preserve">
+    <value>Position:</value>
+  </data>
+  <data name="ButtonsLabel" xml:space="preserve">
+    <value>Buttons:</value>
   </data>
 </root>

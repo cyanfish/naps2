@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>Haluatko varmasti poistaa {0} tiedostoa?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>Haluatko varmasti poistaa {0} profiilia?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>Haluatko varmasti poistaa profiilin {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>Bittikarttatiedosto (.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Edistynyt Windows-metatiedosto (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>Exif-tiedosto (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF-tiedosto (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG-tiedosto (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>Virhe lähetettäessä sähköpostia.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>Asennettu</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>Asennus on valmis. Halutatko käynnistään NAPS2:n uudelleen?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>Asennus epäonnistui.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>Asennus epäonnistui</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>Kaikki ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>Tiedostoa '{0}' ei voitu tuoda.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>Tiedostoa '{0}' ei voitu tuoda. Vain NAPS2:lla luotuja PDF - tiedostoja voidaan tuoda.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Latausvirhe</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Toiminto käynnissä</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>Skannataan sivua {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>Valittu skanneri ei tue syöttölaitetta. Jos skannerissasi on syöttölaite, kokeile toista ajuria.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>Syöttölaite on tyjä.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>Sinulla ei ole oikeuksia kopioida tiedoston '{0}' sisältöä.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Virhe tiedoston tallennuksessa.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>{0}:sta</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>Tuntematon virhe sarjaskannauksessa.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>Skanneri lämpiää.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>OCR-päivitys on saatavana.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Kuva talletettu.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Suoristuksen eteneminen</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Tarvitaan lataus</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>Tämän PDF-tiedoston tuomiseen tarvitaan lisäkomponentti. Haluatko ladata sen nyt?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Haluatko varmasti peruuttaa sarjaskannauksen?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Pidätkö NAPS2:sta?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE - ajuri ei ole käytettävissä. Asenna tarvittava osat:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR - moottori ei ole käytettävissä. Asenna tarvittava osat:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>Valittua ajuria ei tueta tässä järjestelmässä.</value>

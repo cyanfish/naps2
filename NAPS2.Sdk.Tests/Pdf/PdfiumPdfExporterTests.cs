@@ -9,7 +9,7 @@ public class PdfiumPdfExporterTests : ContextualTests
     [Fact]
     public async Task ExportSingleImage()
     {
-        var filePath = Path.Combine(FolderPath, "test.pdf");
+        var filePath = P("test.pdf");
         using var image = ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
     
         var pdfExporter = new PdfiumPdfExporter(ScanningContext);

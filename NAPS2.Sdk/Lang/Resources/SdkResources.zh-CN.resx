@@ -45,9 +45,6 @@
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>输稿器中未发现纸张.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>您没有从文件 '{0}' 中复制内容的权限.</value>
-  </data>
   <data name="NoDuplexSupport" xml:space="preserve">
     <value>所选的扫描仪不支持双面扫描。如果您的扫描仪支持双面扫描，请尝试使用不同的驱动程序.</value>
   </data>
@@ -62,12 +59,6 @@
   </data>
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>扫描仪正在预热.</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE 驱动不可用。请确认已安装所需的软件包:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR 组件不可用。请确认已安装所需的软件包:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>所选驱动程序不受本系统支持.</value>

@@ -14,7 +14,7 @@ public class PdfATests : ContextualTests
     public PdfATests()
     {
         _pdfExporter = new PdfExporter(ScanningContext);
-        _path = Path.Combine(FolderPath, "test.pdf");
+        _path = P("test.pdf");
         _importPath = CopyResourceToFile(PdfResources.word_patcht_pdf, "word.pdf");
     }
 

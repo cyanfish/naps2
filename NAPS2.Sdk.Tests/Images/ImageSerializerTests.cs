@@ -261,7 +261,7 @@ public class ImageSerializerTests : ContextualTests
         config.Apply(this);
         using var destContext = CreateDestContextWithFileStorage();
 
-        var importPath = Path.Combine(FolderPath, "import.pdf");
+        var importPath = P("import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_generated_pdf);
 
         using var sourceImage = await new PdfImporter(ScanningContext).Import(importPath).FirstAsync();
@@ -281,7 +281,7 @@ public class ImageSerializerTests : ContextualTests
         config.Apply(this);
         using var destContext = new ScanningContext(TestImageContextFactory.Get());
 
-        var importPath = Path.Combine(FolderPath, "import.pdf");
+        var importPath = P("import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_generated_pdf);
 
         using var sourceImage = await new PdfImporter(ScanningContext).Import(importPath).FirstAsync();
@@ -343,7 +343,7 @@ public class ImageSerializerTests : ContextualTests
     {
         return new ScanningContext(TestImageContextFactory.Get())
         {
-            FileStorageManager = FileStorageManager.CreateFolder(Path.Combine(FolderPath, "dest"))
+            FileStorageManager = FileStorageManager.CreateFolder(P("dest"))
         };
     }
 }

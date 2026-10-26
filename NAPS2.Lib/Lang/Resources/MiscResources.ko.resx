@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>{0} 개의 이미지를 삭제하시겠습니까?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>{0} 개의 프로파일을 삭제하시겠습니까?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>{0} 프로파일을 삭제하시겠습니까?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>비트맵 파일 (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>확장 메타파일 (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>교환 가능한 이미지 파일 (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF 파일 (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG 파일 (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>이메일을 보내는 중 오류가 발생했습니다..</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>설치 완료</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>설치가 완료되었습니다. NAPS2 를 재시작 하시겠습니까?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>설치 실패.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>설치 실패</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>전체 ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>'{0}' 파일을 불러올 수 없습니다.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>'{0}' 파일을 불러올 수 없습니다. NAPS2에서 제작한 PDF 파일만 불러올 수 있습니다.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>다운로드 오류</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>작업 진행 중</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>{0} 페이지 스캔 중</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>선택된 스캐너에서는 지급기를 사용할 수 없습니다. 만약 지급기가 있는 스캐너라면, 다른 드라이버를 선택 해 주세요.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>공급장치에 용지가 없습니다.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>'{0}' 파일의 내용을 복사하기 위한 권한을 가지고 있지 않습니다..</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>파일을 저장하는 중 오류가 발생했습니다..</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>중 {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>일괄 스캔 중 알 수 없는 오류가 발생했습니다.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>스캐너 예열 중.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>OCR 업데이트를 사용할 수 있습니다.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>이미지가 저장되었습니다.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>기울기 보정 중</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>다운로드가 필요합니다</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>이 PDF 파일을 불러오기 위해서는 추가적인 컴포넌트가 필요합니다. 지금 다운로드 하시겠습니까?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>일괄 스캔을 취소하시겠습니까?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Like NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>SANE 드라이버를 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>OCR 엔진을 사용할 수 없습니다. 다음 패키지가 설치 되어 있는지 확인해 주십시오:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>선택한 드라이버는 이 시스템에서 사용할 수 없습니다.</value>

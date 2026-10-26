@@ -2,6 +2,7 @@
 using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using Eto.Forms;
 using Eto.Wpf;
 using NAPS2.EtoForms.Desktop;
@@ -24,8 +25,12 @@ public class WpfDesktopForm : DesktopForm
 {
     private readonly WpfToolbarFormatter _toolbarFormatter = new();
     private readonly Dictionary<DesktopToolbarMenuType, (FrameworkElement target, ContextMenu menu)> _menus = new();
-    private readonly ToolBar _profilesToolBar = new() { Visibility = Visibility.Collapsed };
-    private readonly Border _toolbarBorder = new() { BorderThickness = new Thickness(0, 0, 0, 1) };
+    private readonly ToolBar _profilesToolBar = new();
+    private readonly ToolBarTray _toolbarTray = new() { Background = Brushes.Transparent };
+    private readonly ToolBarTray _profilesToolbarTray = new() { Background = Brushes.Transparent };
+    private readonly Border _toolbarBorder = new();
+    private readonly Border _profilesToolbarBorder = new() { Visibility = Visibility.Collapsed };
+    private ContentControl _toolbarHolder = null!;
     private ToolBar _mainToolBar = null!;
 
     public WpfDesktopForm(
@@ -55,7 +60,10 @@ public class WpfDesktopForm : DesktopForm
     {
         this.ToNative().SizeChanged += (_, e) =>
         {
-            if (e.WidthChanged) _toolbarFormatter.RelayoutToolbar(_mainToolBar);
+            if (_toolbarTray.Orientation == Orientation.Horizontal ? e.WidthChanged : e.HeightChanged)
+            {
+                _toolbarFormatter.RelayoutToolbar(_mainToolBar);
+            }
         };
         Load += (_, _) =>
         {
@@ -76,13 +84,13 @@ public class WpfDesktopForm : DesktopForm
 
     private void UpdateColors()
     {
-        _toolbarBorder.BorderBrush = _colorScheme.SeparatorColor.ToWpfBrush();
+        _toolbarBorder.BorderBrush = _profilesToolbarBorder.BorderBrush = _colorScheme.SeparatorColor.ToWpfBrush();
     }
 
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
-        PlaceProfilesToolbar();
+        PlaceToolbars();
         // Separator between the sidebar and the listview
         WpfListView.NativeControl.BorderThickness = new Thickness(1, 0, 0, 0);
         WpfListView.NativeControl.Focus();
@@ -116,16 +124,52 @@ public class WpfDesktopForm : DesktopForm
         _mainToolBar = (ToolBar) ToolBar.ControlObject;
         ToolBarTray.SetIsLocked(_profilesToolBar, true);
 
-        var holder = (ContentControl) _mainToolBar.Parent;
-        holder.Content = null;
-        _toolbarBorder.Child = new StackPanel { Children = { _mainToolBar, _profilesToolBar } };
-        holder.Content = _toolbarBorder;
+        // Eto puts the toolbar in a holder that's docked (to the top) in the window's DockPanel
+        _toolbarHolder = (ContentControl) _mainToolBar.Parent;
+        _toolbarHolder.Content = null;
+        _toolbarTray.ToolBars.Add(_mainToolBar);
+        _toolbarTray.ContextMenu = GetToolbarContextMenuProvider().ToWpfContextMenu(this);
+        _toolbarBorder.Child = _toolbarTray;
+        _toolbarHolder.Content = _toolbarBorder;
+
+        // The profiles toolbar is docked separately, inside the main toolbar (i.e. later in the DockPanel)
+        var dockPanel = (DockPanel) _toolbarHolder.Parent;
+        _profilesToolbarTray.ToolBars.Add(_profilesToolBar);
+        _profilesToolbarTray.ContextMenu = _toolbarTray.ContextMenu;
+        _profilesToolbarBorder.Child = _profilesToolbarTray;
+        dockPanel.Children.Insert(dockPanel.Children.IndexOf(_toolbarHolder) + 1, _profilesToolbarBorder);
     }
 
-    public override void PlaceProfilesToolbar()
+    public override void PlaceToolbars()
     {
-        _profilesToolBar.Visibility =
-            Config.Get(c => c.ShowProfilesToolbar) ? Visibility.Visible : Visibility.Collapsed;
+        PlaceToolbar(_toolbarHolder, _toolbarTray, _toolbarBorder, ToolbarConfig.Get(c => c.DesktopToolStripDock));
+        PlaceToolbar(_profilesToolbarBorder, _profilesToolbarTray, _profilesToolbarBorder,
+            ToolbarConfig.Get(c => c.ProfilesToolStripDock));
+        _profilesToolbarBorder.Visibility =
+            ToolbarConfig.Get(c => c.ShowProfilesToolbar) ? Visibility.Visible : Visibility.Collapsed;
+        _toolbarFormatter.RelayoutToolbar(_mainToolBar);
+    }
+
+    private static void PlaceToolbar(UIElement dockedElement, ToolBarTray tray, Border border, DockStyle dock)
+    {
+        DockPanel.SetDock(dockedElement, dock switch
+        {
+            DockStyle.Left => Dock.Left,
+            DockStyle.Bottom => Dock.Bottom,
+            DockStyle.Right => Dock.Right,
+            _ => Dock.Top
+        });
+        tray.Orientation = dock is DockStyle.Left or DockStyle.Right
+            ? Orientation.Vertical
+            : Orientation.Horizontal;
+        // Separator between the toolbar and the content
+        border.BorderThickness = dock switch
+        {
+            DockStyle.Left => new Thickness(0, 0, 1, 0),
+            DockStyle.Bottom => new Thickness(0, 1, 0, 0),
+            DockStyle.Right => new Thickness(1, 0, 0, 0),
+            _ => new Thickness(0, 0, 0, 1)
+        };
     }
 
     public override void UpdateListView()
@@ -172,7 +216,8 @@ public class WpfDesktopForm : DesktopForm
         mainButton.BindCommand(command);
         var arrowButton = _toolbarFormatter.CreateArrowButton();
         AutomationProperties.SetName(arrowButton, command.ToolBarText);
-        var group = new StackPanel { Orientation = Orientation.Horizontal, Children = { mainButton, arrowButton } };
+        DockPanel.SetDock(arrowButton, Dock.Right);
+        var group = new DockPanel { Children = { arrowButton, mainButton } };
         var contextMenu = menu.ToWpfContextMenu(this);
         arrowButton.Click += (_, _) => ShowMenu(group, contextMenu);
         arrowButton.BindEnabled(command);
@@ -207,11 +252,13 @@ public class WpfDesktopForm : DesktopForm
 
     protected override void CreateToolbarStackedButtons(Command command1, Command command2)
     {
-        _mainToolBar.Items.Add(new StackPanel
+        var panel = new StackPanel
         {
             VerticalAlignment = VerticalAlignment.Center,
             Children = { CreateStackedButton(command1), CreateStackedButton(command2) }
-        });
+        };
+        System.Windows.Controls.Grid.SetIsSharedSizeScope(panel, true);
+        _mainToolBar.Items.Add(panel);
     }
 
     private Button CreateStackedButton(Command command)

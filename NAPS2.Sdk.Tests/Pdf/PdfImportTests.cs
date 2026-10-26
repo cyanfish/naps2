@@ -161,14 +161,14 @@ public class PdfImportTests : ContextualTests
     [Fact]
     public async Task ImportMissingFile()
     {
-        var source = _importer.Import(Path.Combine(FolderPath, "missing.pdf"));
+        var source = _importer.Import(P("missing.pdf"));
         await Assert.ThrowsAsync<FileNotFoundException>(async () => await source.ToListAsync());
     }
 
     [Fact]
     public async Task ImportInUseFile()
     {
-        var path = Path.Combine(FolderPath, "inuse.pdf");
+        var path = P("inuse.pdf");
         using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
         var source = _importer.Import(path);
         await Assert.ThrowsAsync<IOException>(async () => await source.ToListAsync());

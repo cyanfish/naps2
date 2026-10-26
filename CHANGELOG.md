@@ -1,3 +1,38 @@
+Changes in 8.6.0:
+- New combined Settings window
+- Added toolbar customization (right-click the toolbar > "Customize Toolbar")
+- Batch Scan/Auto Save: Show an error if the file path is missing an extension
+- Added a "Retry" button for errors when saving
+- "Edit with" now shows the icon of the selected app and is visible in the Preview window
+- Escl: "Manual IP" now shows the connection status
+- Mac: Native "Liquid Glass" sidebar in the main window
+- Mac: Added "Apple Driver Implementation" to advanced profile settings (File or Memory transfer)
+  - If scanned pages aren't showing, you can try switching to "File Transfer"
+- Improved quality of some icons with hi-dpi screens
+- Added placeholder support (e.g. "$(YYYY)") to PDF metadata
+- Sdk: ImageSharp 4.x compat
+- Bug fixes:
+  - Auto-crop: Better handling for black backgrounds
+  - Auto-crop: Remove padding added by scanner drivers when the scan size exceeds the sensor
+  - Compress: The preview now shows the effects of JPEG quality
+  - Windows: Potential fix for crashes in the save dialog
+  - Windows: NAPS2.Portable.exe now passes command-line arguments (e.g. for opening a file)
+  - Windows: Fixed flicker on startup
+  - Mac: Fixed scanning when run from Shortcuts (or with a long TMPDIR)
+  - Linux: Fixed "Feeder" scanning both sides with some scanners (e.g. Kodak kds_s2000 driver)
+  - Linux: Fixed layout issues
+  - Sane: Fixed feeder/duplex selection with some scanners
+  - Wia: Fixed an error with devices that don't report their scan area size
+  - Fixed file auto-numbering behavior in some cases
+  - Fixed an error when using Scale with "Stretch/Crop to page size"
+  - Fixed an error with "Always Ask" when selecting a different driver type
+  - Fixed an issue with the "All Images" file filter and .jpg files
+  - Fixed some PDF import crashes
+  - Fixed a broken link to icons in the About window
+  - OCR: Fixed an error on some Linux OS's
+  - Sdk: Fixed TWAIN hangs with NAPS2.Sdk.Worker.Win32 by running the worker on an STA thread
+  - Sdk: Fixed spare worker processes not stopping when disposing ScanningContext
+
 Changes in 8.5.1:
 - Windows: Fixed an issue with Smart App Control blocking naps2_jpeg.dll
 

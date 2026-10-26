@@ -1,9 +1,10 @@
-; *** Inno Setup version 6.1.0+ Serbian (Latin) messages ***
+; *** Inno Setup version 6.5.0+ Serbian (Latin) messages ***
 ;
 ; To download user-contributed translations of this file, go to:
-;   http://www.jrsoftware.org/files/istrans/
+;   https://jrsoftware.org/files/istrans/
 ;
-; Translated by Rancher (theranchcowboy@gmail.com) and Davor (davornik@yahoo.com).
+; Maintained by Davor NikoliÄ‡ (support@trackworktime.com).
+; Based on previous translations of Rancher (theranchcowboy@gmail.com)
 ;
 ; Note: When translating this text, do not add periods (.) to the end of
 ; messages that didn't have them already, because on those messages Inno
@@ -15,75 +16,75 @@
 ; understand the '[LangOptions] section' topic in the help file.
 LanguageName=Srpski
 LanguageID=$081a
+; LanguageCodePage should always be set if possible, even if this file is Unicode
+; For English it's set to zero anyway because English only uses ASCII characters
 LanguageCodePage=1250
 ; If the language you are translating to requires special font faces or
 ; sizes, uncomment any of the following entries and change them accordingly.
 ;DialogFontName=
-;DialogFontSize=8
-;WelcomeFontName=Verdana
-;WelcomeFontSize=12
-;TitleFontName=Arial
-;TitleFontSize=29
-;CopyrightFontName=Arial
-;CopyrightFontSize=8
+;DialogFontSize=9
+;DialogFontBaseScaleWidth=7
+;DialogFontBaseScaleHeight=15
+;WelcomeFontName=Segoe UI
+;WelcomeFontSize=14
 
 [Messages]
 
 ; *** Application titles
 SetupAppTitle=Instalacija
-SetupWindowTitle=Instalacija – %1
+SetupWindowTitle=Instalacija - %1
 UninstallAppTitle=Deinstalacija
 UninstallAppFullTitle=Deinstalacija programa %1
 
 ; *** Misc. common
-InformationTitle=Podaci
+InformationTitle=Informacije
 ConfirmTitle=Potvrda
-ErrorTitle=Greška
+ErrorTitle=GreÅ¡ka
 
 ; *** SetupLdr messages
-SetupLdrStartupMessage=Instaliraæete %1. elite li da nastavite?
-LdrCannotCreateTemp=Ne mogu da napravim privremenu datoteku. Instalacija je prekinuta.
-LdrCannotExecTemp=Ne mogu da pokrenem datoteku u privremenoj fascikli. Instalacija je prekinuta.
+SetupLdrStartupMessage=Program %1 Ä‡e biti instaliran. Å½elite li da nastavite?
+LdrCannotCreateTemp=Nije moguÄ‡e napraviti privremenu datoteku. Instalacija je prekinuta
+LdrCannotExecTemp=Nije moguÄ‡e pokrenuti datoteku u privremenoj fascikli. Instalacija je prekinuta
 HelpTextNote=
 
 ; *** Startup error messages
-LastErrorMessage=%1.%n%nGreška %2: %3
+LastErrorMessage=%1.%n%nGreÅ¡ka %2: %3
 SetupFileMissing=Datoteka %1 nedostaje u instalacionoj fascikli. Ispravite problem ili nabavite novi primerak programa.
-SetupFileCorrupt=Instalacione datoteke su ošteæene. Nabavite novi primerak programa.
-SetupFileCorruptOrWrongVer=Instalacione datoteke su ošteæene ili nisu saglasne s ovom verzijom instalacije. Ispravite problem ili nabavite novi primerak programa.
-InvalidParameter=Neispravan parametar je prenet na komandnu liniju: %n%n%1
-SetupAlreadyRunning=Instalacija je veæ pokrenuta.
-WindowsVersionNotSupported=Program ne podrava izdanje Windows-a koje koristite.
+SetupFileCorrupt=Instalacione datoteke su oÅ¡teÄ‡ene. Nabavite novi primerak programa.
+SetupFileCorruptOrWrongVer=Instalacione datoteke su oÅ¡teÄ‡ene ili nisu kompatibilne s ovom verzijom instalacije. Ispravite problem ili nabavite novi primerak programa.
+InvalidParameter=Neispravan parametar je prosleÄ‘en u komandnoj liniji:%n%n%1
+SetupAlreadyRunning=Instalacija je veÄ‡ pokrenuta.
+WindowsVersionNotSupported=Program ne podrÅ¾ava verziju Windows-a koju koristite.
 WindowsServicePackRequired=Program zahteva %1 servisni paket %2 ili noviji.
-NotOnThisPlatform=Program neæe raditi na %1.
-OnlyOnThisPlatform=Program æe raditi na %1.
-OnlyOnTheseArchitectures=Program se moe instalirati samo na izdanjima Windows-a koji rade na sledeæim arhitekturama procesora:%n%n%1
-WinVersionTooLowError=Program zahteva %1, izdanje %2 ili novije.
-WinVersionTooHighError=Program ne moete instalirati na %1 izdanju %2 ili novijem.
+NotOnThisPlatform=Program neÄ‡e raditi na %1.
+OnlyOnThisPlatform=Program se mora pokrenuti na %1.
+OnlyOnTheseArchitectures=Program se moÅ¾e instalirati samo na verzijama Windows-a namenjenim za sledeÄ‡e arhitekture procesora:%n%n%1
+WinVersionTooLowError=Program zahteva %1 verziju %2 ili noviju.
+WinVersionTooHighError=Program nije moguÄ‡e instalirati na %1 verziju %2 ili noviju.
 AdminPrivilegesRequired=Morate biti prijavljeni kao administrator da biste instalirali program.
-PowerUserPrivilegesRequired=Morate biti prijavljeni kao administrator ili ovlašæeni korisnik da biste instalirali program.
-SetupAppRunningError=Program %1 je trenutno pokrenut.%n%nZatvorite ga i kliknite na dugme „U redu“ da nastavite ili „Otkai“ da napustite instalaciju.
-UninstallAppRunningError=Program %1 je trenutno pokrenut.%n%nZatvorite ga i kliknite na dugme „U redu“ da nastavite ili „Otkai“ da napustite instalaciju.
+PowerUserPrivilegesRequired=Morate biti prijavljeni kao administrator ili kao Älan grupe â€Power Usersâ€œ da biste instalirali ovaj program.
+SetupAppRunningError=Instalacioni program je utvrdio da je %1 trenutno pokrenut.%n%nZatvorite ga i kliknite na dugme â€U reduâ€œ da nastavite ili â€OtkaÅ¾iâ€œ da napustite instalaciju.
+UninstallAppRunningError=Deinstalacioni program je utvrdio da je %1 trenutno pokrenut.%n%nZatvorite ga i kliknite na dugme â€U reduâ€œ da nastavite ili â€OtkaÅ¾iâ€œ da napustite deinstalaciju.
 
 ; *** Startup questions
-PrivilegesRequiredOverrideTitle=Odaberite naèin instalacije
-PrivilegesRequiredOverrideInstruction=Odaberite naèin instalacije
-PrivilegesRequiredOverrideText1=%1 moe biti instaliran za sve korisnike (zahteva administrativne privilegije) ili samo za vas.
-PrivilegesRequiredOverrideText2=%1 moe da se instalira samo za vas ili za sve korisnike (zahteva administrativne privilegije).
+PrivilegesRequiredOverrideTitle=Odaberite naÄin instalacije programa
+PrivilegesRequiredOverrideInstruction=Odaberite naÄin instalacije
+PrivilegesRequiredOverrideText1=%1 moÅ¾e da se instalira za sve korisnike (zahteva administratorske privilegije) ili samo za vas.
+PrivilegesRequiredOverrideText2=%1 moÅ¾e da se instalira samo za vas ili za sve korisnike (zahteva administratorske privilegije).
 PrivilegesRequiredOverrideAllUsers=Instaliraj za &sve korisnike
-PrivilegesRequiredOverrideAllUsersRecommended=Instaliraj za &sve korisnike (preporuèeno)
+PrivilegesRequiredOverrideAllUsersRecommended=Instaliraj za &sve korisnike (preporuÄeno)
 PrivilegesRequiredOverrideCurrentUser=Instaliraj samo za &mene
-PrivilegesRequiredOverrideCurrentUserRecommended=Instaliraj samo za &mene (preporuèeno)
+PrivilegesRequiredOverrideCurrentUserRecommended=Instaliraj samo za &mene (preporuÄeno)
 
 ; *** Misc. errors
-ErrorCreatingDir=Ne mogu da napravim fasciklu „%1“.
-ErrorTooManyFilesInDir=Ne mogu da napravim datoteku u fascikli „%1“ jer sadri previše datoteka.
+ErrorCreatingDir=Nije moguÄ‡e napraviti fasciklu â€%1â€œ
+ErrorTooManyFilesInDir=Nije moguÄ‡e napraviti datoteku u fascikli â€%1â€œ jer sadrÅ¾i previÅ¡e datoteka
 
 ; *** Setup common messages
-ExitSetupTitle=Napuštanje instalacije
-ExitSetupMessage=Instalacija nije završena. Ako sada izağete, program neæe biti instaliran.%n%nInstalaciju moete pokrenuti i dovršiti nekom dugom prilikom.%n%nelite li da je zatvorite?
-AboutSetupMenuItem=&O programu
-AboutSetupTitle=Podaci o programu
+ExitSetupTitle=NapuÅ¡tanje instalacije
+ExitSetupMessage=Instalacija nije zavrÅ¡ena. Ako sada izaÄ‘ete, program neÄ‡e biti instaliran.%n%nInstalaciju moÅ¾ete ponovo pokrenuti i dovrÅ¡iti nekom drugom prilikom.%n%nÅ½elite li da izaÄ‘ete iz instalacije?
+AboutSetupMenuItem=&O instalacionom programu...
+AboutSetupTitle=Podaci o instalacionom programu
 AboutSetupMessage=%1 verzija %2%n%3%n%n%1 internet stranica:%n%4
 AboutSetupNote=
 TranslatorNote=
@@ -92,276 +93,300 @@ TranslatorNote=
 ButtonBack=< &Nazad
 ButtonNext=&Dalje >
 ButtonInstall=&Instaliraj
-ButtonOK=&U redu
-ButtonCancel=&Otkai
+ButtonOK=U redu
+ButtonCancel=OtkaÅ¾i
 ButtonYes=&Da
 ButtonYesToAll=D&a za sve
 ButtonNo=&Ne
 ButtonNoToAll=N&e za sve
-ButtonFinish=&Završi
-ButtonBrowse=&Pretrai…
-ButtonWizardBrowse=&Pretrai…
-ButtonNewFolder=&Napravi fasciklu
+ButtonFinish=&ZavrÅ¡i
+ButtonBrowse=&Izaberi...
+ButtonWizardBrowse=I&zaberi...
+ButtonNewFolder=&Napravi novu fasciklu
 
 ; *** "Select Language" dialog messages
-SelectLanguageTitle=Odabir jezika
-SelectLanguageLabel=Izaberite jezik za korišæenje tokom instalacije:
+SelectLanguageTitle=Odabir jezika instalacije
+SelectLanguageLabel=Izaberite jezik koji Ä‡e se koristiti tokom instalacije.
 
 ; *** Common wizard text
-ClickNext=Kliknite na „Dalje“ da nastavite ili „Otkai“ da napustite instalaciju.
+ClickNext=Kliknite na â€Daljeâ€œ da nastavite ili â€OtkaÅ¾iâ€œ da napustite instalaciju.
 BeveledLabel=
 BrowseDialogTitle=Odabir fascikle
-BrowseDialogLabel=Izaberite fasciklu sa spiska i kliknite na „U redu“.
+BrowseDialogLabel=Izaberite fasciklu sa spiska ispod, a zatim kliknite na â€U reduâ€œ.
 NewFolderName=Nova fascikla
 
 ; *** "Welcome" wizard page
-WelcomeLabel1=Dobro došli na instalaciju programa [name]
-WelcomeLabel2=Instaliraæete [name/ver] na raèunar.%n%nPre nego što nastavite, preporuèujemo vam da zatvorite sve druge programe.
+WelcomeLabel1=Dobro doÅ¡li na instalaciju programa [name]
+WelcomeLabel2=Program [name/ver] Ä‡e biti instaliran na raÄunar.%n%nPre nego Å¡to nastavite, preporuÄujemo vam da zatvorite sve druge programe.
 
 ; *** "Password" wizard page
 WizardPassword=Lozinka
-PasswordLabel1=Instalacija je zaštiæena lozinkom.
-PasswordLabel3=Unesite lozinku i kliknite na „Dalje“ da nastavite. Imajte na umu da je lozinka osetljiva na mala i velika slova.
+PasswordLabel1=Instalacija je zaÅ¡tiÄ‡ena lozinkom.
+PasswordLabel3=Unesite lozinku i kliknite na â€Daljeâ€œ da nastavite. Lozinka je osetljiva na mala i velika slova.
 PasswordEditLabel=&Lozinka:
-IncorrectPassword=Navedena lozinka nije ispravna. Pokušajte ponovo.
+IncorrectPassword=Navedena lozinka nije ispravna. PokuÅ¡ajte ponovo.
 
-; *** "License Agreement" wizard
+; *** "License Agreement" wizard page
 WizardLicense=Ugovor o licenci
-LicenseLabel=Paljivo proèitajte sledeæe pre nego što nastavite.
-LicenseLabel3=Proèitajte Ugovor o licenci koji se nalazi ispod. Morate prihvatiti uslove ovog ugovora pre nego što nastavite.
+LicenseLabel=PaÅ¾ljivo proÄitajte sledeÄ‡e vaÅ¾ne informacije pre nego Å¡to nastavite.
+LicenseLabel3=ProÄitajte Ugovor o licenci koji se nalazi ispod. Morate prihvatiti uslove ovog ugovora pre nego Å¡to nastavite sa instalacijom.
 LicenseAccepted=&Prihvatam ugovor
-LicenseNotAccepted=&Ne prihvatam ugovor
+LicenseNotAccepted=N&e prihvatam ugovor
 
 ; *** "Information" wizard pages
 WizardInfoBefore=Informacije
-InfoBeforeLabel=Paljivo proèitajte sledeæe pre nego što nastavite.
-InfoBeforeClickLabel=Kada budete spremni da nastavite instalaciju, kliknite na „Dalje“.
+InfoBeforeLabel=PaÅ¾ljivo proÄitajte sledeÄ‡e vaÅ¾ne informacije pre nego Å¡to nastavite.
+InfoBeforeClickLabel=Kada budete spremni da nastavite instalaciju, kliknite na â€Daljeâ€œ.
 WizardInfoAfter=Informacije
-InfoAfterLabel=Paljivo proèitajte sledeæe pre nego što nastavite.
-InfoAfterClickLabel=Kada budete spremni da nastavite instalaciju, kliknite na „Dalje“.
+InfoAfterLabel=PaÅ¾ljivo proÄitajte sledeÄ‡e vaÅ¾ne informacije pre nego Å¡to nastavite.
+InfoAfterClickLabel=Kada budete spremni da nastavite instalaciju, kliknite na â€Daljeâ€œ.
 
 ; *** "User Information" wizard page
-WizardUserInfo=Korisnièki podaci
+WizardUserInfo=KorisniÄki podaci
 UserInfoDesc=Unesite svoje podatke.
-UserInfoName=&Korisnik:
+UserInfoName=&Ime korisnika:
 UserInfoOrg=&Organizacija:
 UserInfoSerial=&Serijski broj:
-UserInfoNameRequired=Morate navesti ime.
+UserInfoNameRequired=Morate uneti ime korisnika.
 
 ; *** "Select Destination Location" wizard page
-WizardSelectDir=Odabir odredišne fascikle
-SelectDirDesc=Izaberite mesto na kom elite da instalirate [name].
-SelectDirLabel3=Program æe instalirati [name] u sledeæu fasciklu.
-SelectDirBrowseLabel=Kliknite na „Dalje“ da nastavite. Ako elite da izaberete drugu fasciklu, kliknite na „Potrai…“.
+WizardSelectDir=Odabir odrediÅ¡ne fascikle
+SelectDirDesc=Gde treba instalirati [name]?
+SelectDirLabel3=Program [name] Ä‡e biti instaliran u sledeÄ‡u fasciklu.
+SelectDirBrowseLabel=Kliknite na â€Daljeâ€œ da nastavite. Ako Å¾elite da izaberete drugu fasciklu, kliknite na â€Izaberi...â€œ.
 DiskSpaceGBLabel=Potrebno je najmanje [gb] GB slobodnog prostora na disku.
 DiskSpaceMBLabel=Potrebno je najmanje [mb] MB slobodnog prostora na disku.
-CannotInstallToNetworkDrive=Ne mogu da instaliram na mrenu jedinicu.
-CannotInstallToUNCPath=Ne mogu da instaliram na UNC putanju.
-InvalidPath=Morate navesti punu putanju s obelejem diska (npr.%n%nC:\APP%n%nili putanja u obliku%n%n\\server\share)
-InvalidDrive=Disk koji ste izabrali ne postoji ili nije dostupan. Izaberite neki drugi.
+CannotInstallToNetworkDrive=Nije moguÄ‡e instalirati program na mreÅ¾ni disk.
+CannotInstallToUNCPath=Nije moguÄ‡e instalirati program na mreÅ¾nu lokaciju.
+InvalidPath=Morate navesti punu putanju sa slovom diska; npr.:%n%nC:\APP%n%nili mreÅ¾nu lokaciju u obliku:%n%n\\server\share
+InvalidDrive=Izabrani disk ili mreÅ¾na lokacija ne postoji ili nije dostupna. Izaberite drugu.
 DiskSpaceWarningTitle=Nedovoljno prostora na disku
-DiskSpaceWarning=Program zahteva najmanje %1 kB slobodnog prostora, a izabrani disk na raspolaganju ima samo %2 kB.%n%nelite li ipak da nastavite?
-DirNameTooLong=Naziv fascikle ili putanja je predugaèka.
+DiskSpaceWarning=Za instalaciju je potrebno najmanje %1 KB slobodnog prostora, a izabrani disk na raspolaganju ima samo %2 KB.%n%nÅ½elite li ipak da nastavite?
+DirNameTooLong=Naziv fascikle ili putanja je predugaÄka.
 InvalidDirName=Naziv fascikle nije ispravan.
-BadDirName32=Naziv fascikle ne sme sadrati ništa od sledeæeg:%n%n%1
-DirExistsTitle=Fascikla veæ postoji
-DirExists=Fascikla:%n%n%1%n%nveæ postoji. elite li ipak da instalirate program u nju?
+BadDirName32=Naziv fascikle ne sme sadrÅ¾ati nijedan od sledeÄ‡ih znakova:%n%n%1
+DirExistsTitle=Fascikla veÄ‡ postoji
+DirExists=Fascikla:%n%n%1%n%nveÄ‡ postoji. Å½elite li ipak da instalirate program u nju?
 DirDoesntExistTitle=Fascikla ne postoji
-DirDoesntExist=Fascikla:%n%n%1%n%nne postoji. elite li da je napravite?
+DirDoesntExist=Fascikla:%n%n%1%n%nne postoji. Å½elite li da se napravi?
 
 ; *** "Select Components" wizard page
 WizardSelectComponents=Odabir komponenata
-SelectComponentsDesc=Koje komponente elite da instalirate?
-SelectComponentsLabel2=Izaberite komponente koje elite da instalirate, a oèistite one koje ne elite. Kliknite na „Dalje“ da nastavite.
+SelectComponentsDesc=Koje komponente Å¾elite da instalirate?
+SelectComponentsLabel2=Izaberite komponente koje Å¾elite da instalirate, a poniÅ¡tite izbor onih koje ne Å¾elite. Kliknite na â€Daljeâ€œ kada budete spremni da nastavite.
 FullInstallation=Puna instalacija
 ; if possible don't translate 'Compact' as 'Minimal' (I mean 'Minimal' in your language)
-CompactInstallation=Podrazumevana instalacija
-CustomInstallation=Prilagoğena instalacija
-NoUninstallWarningTitle=Komponente veæ postoje
-NoUninstallWarning=Sledeæe komponente veæ postoje na raèunaru:%n%n%1%n%nDeštrikliranje ovih komponenti ih neæe ukloniti.%n%nelite li da nastavite?
-ComponentSize1=%1 kB
+CompactInstallation=Kompaktna instalacija
+CustomInstallation=PrilagoÄ‘ena instalacija
+NoUninstallWarningTitle=Komponente veÄ‡ postoje
+NoUninstallWarning=Instalacioni program je otkrio da su sledeÄ‡e komponente veÄ‡ instalirane na raÄunaru:%n%n%1%n%nPoniÅ¡tavanje izbora ovih komponenti ih neÄ‡e ukloniti.%n%nÅ½elite li ipak da nastavite?
+ComponentSize1=%1 KB
 ComponentSize2=%1 MB
-ComponentsDiskSpaceGBLabel=Izabrane stavke zahtevaju najmanje [gb] GB slobodnog prostora.
-ComponentsDiskSpaceMBLabel=Izabrane stavke zahtevaju najmanje [mb] MB slobodnog prostora.
+ComponentsDiskSpaceGBLabel=Izabrane stavke zahtevaju najmanje [gb] GB prostora na disku.
+ComponentsDiskSpaceMBLabel=Izabrane stavke zahtevaju najmanje [mb] MB prostora na disku.
 
 ; *** "Select Additional Tasks" wizard page
 WizardSelectTasks=Odabir dodatnih zadataka
-SelectTasksDesc=Izaberite neke dodatne zadatke.
-SelectTasksLabel2=Izaberite dodatne zadatke koje elite da izvršite pri instaliranju programa [name] i kliknite na „Dalje“.
+SelectTasksDesc=Koje dodatne zadatke treba izvrÅ¡iti?
+SelectTasksLabel2=Izaberite dodatne zadatke koje Å¾elite da se izvrÅ¡e pri instaliranju programa [name] i kliknite na â€Daljeâ€œ.
 
 ; *** "Select Start Menu Folder" wizard page
-WizardSelectProgramGroup=Odabir fascikle u meniju „Start“
-SelectStartMenuFolderDesc=Izaberite mesto na kom elite da postavite preèice.
-SelectStartMenuFolderLabel3=Instalacija æe postaviti preèice programa u sledeæoj fascikli u meniju „Start“.
-SelectStartMenuFolderBrowseLabel=Kliknite na „Dalje“ da nastavite. Ako elite da izaberete drugu fasciklu, kliknite na „Potrai…“.
+WizardSelectProgramGroup=Odabir fascikle u meniju â€Startâ€œ
+SelectStartMenuFolderDesc=Gde treba postaviti preÄice programa?
+SelectStartMenuFolderLabel3=PreÄice programa Ä‡e biti postavljene u sledeÄ‡u fasciklu u meniju â€Startâ€œ.
+SelectStartMenuFolderBrowseLabel=Kliknite na â€Daljeâ€œ da nastavite. Ako Å¾elite da izaberete drugu fasciklu, kliknite na â€Izaberi...â€œ.
 MustEnterGroupName=Morate navesti naziv fascikle.
-GroupNameTooLong=Naziv fascikle ili putanja je predugaèka.
+GroupNameTooLong=Naziv fascikle ili putanja je predugaÄka.
 InvalidGroupName=Naziv fascikle nije ispravan.
-BadGroupName=Naziv fascikle ne sme sadrati ništa od sledeæeg:%n%n%1
-NoProgramGroupCheck2=N&e pravi fasciklu u meniju „Start“
+BadGroupName=Naziv fascikle ne sme sadrÅ¾ati nijedan od sledeÄ‡ih znakova:%n%n%1
+NoProgramGroupCheck2=N&e pravi fasciklu u meniju â€Startâ€œ
 
 ; *** "Ready to Install" wizard page
 WizardReady=Instalacija je spremna
-ReadyLabel1=Program je spreman da instalira [name] na raèunar.
-ReadyLabel2a=Kliknite na „Instaliraj“ da zapoènete instalaciju ili „Nazad“ da ponovo pregledate i promenite pojedine postavke.
-ReadyLabel2b=Kliknite na „Instaliraj“ da zapoènete instalaciju.
-ReadyMemoUserInfo=Korisnièki podaci:
-ReadyMemoDir=Odredišna fascikla:
+ReadyLabel1=Program [name] je sada spreman za instalaciju na raÄunar.
+ReadyLabel2a=Kliknite na â€Instalirajâ€œ da zapoÄnete instalaciju ili na â€Nazadâ€œ ako Å¾elite da pregledate ili promenite pojedine postavke.
+ReadyLabel2b=Kliknite na â€Instalirajâ€œ da zapoÄnete instalaciju.
+ReadyMemoUserInfo=KorisniÄki podaci:
+ReadyMemoDir=OdrediÅ¡na fascikla:
 ReadyMemoType=Vrsta instalacije:
 ReadyMemoComponents=Izabrane komponente:
-ReadyMemoGroup=Fascikla u meniju „Start“:
+ReadyMemoGroup=Fascikla u meniju â€Startâ€œ:
 ReadyMemoTasks=Dodatni zadaci:
 
 ; *** TDownloadWizardPage wizard page and DownloadTemporaryFile
-DownloadingLabel=Preuzimanje dodatnih datoteka...
+DownloadingLabel2=Preuzimanje datoteka...
 ButtonStopDownload=&Zaustavi preuzimanje
-StopDownload=Da li ste sigurni da elite da zaustavite preuzimanje?
+StopDownload=Da li ste sigurni da Å¾elite da zaustavite preuzimanje?
 ErrorDownloadAborted=Preuzimanje je prekinuto
 ErrorDownloadFailed=Preuzimanje nije uspelo: %1 %2
-ErrorDownloadSizeFailed=Dobijanje velièine nije uspelo: %1 %2
-ErrorFileHash1=Heš datoteke nije uspeo: %1
-ErrorFileHash2=Neispravan heš datoteke: oèekivan %1, pronağen %2
-ErrorProgress=Neispravan napredak: %1 od %2
-ErrorFileSize=Neispravna velièina datoteke: oèekivan %1, pronağen %2
+ErrorDownloadSizeFailed=Nije moguÄ‡e utvrditi veliÄinu: %1 %2
+ErrorProgress=Neispravna vrednost napretka: %1 od %2
+ErrorFileSize=Neispravna veliÄina datoteke: oÄekivano %1, pronaÄ‘eno %2
+
+; *** TExtractionWizardPage wizard page and ExtractArchive
+ExtractingLabel=Raspakivanje datoteka...
+ButtonStopExtraction=&Zaustavi raspakivanje
+StopExtraction=Da li ste sigurni da Å¾elite da zaustavite raspakivanje?
+ErrorExtractionAborted=Raspakivanje je prekinuto
+ErrorExtractionFailed=Raspakivanje nije uspelo: %1
+
+; *** Archive extraction failure details
+ArchiveIncorrectPassword=Lozinka je netaÄna
+ArchiveIsCorrupted=Arhiva je oÅ¡teÄ‡ena
+ArchiveUnsupportedFormat=Format arhive nije podrÅ¾an
 
 ; *** "Preparing to Install" wizard page
 WizardPreparing=Priprema za instalaciju
-PreparingDesc=Program se priprema da instalira [name] na raèunar.
-PreviousInstallNotCompleted=Instalacija ili deinstalacija prethodnog programa nije završena. Potrebno je da ponovo pokrenete raèunar da bi se instalacija završila.%n%nNakon ponovnog pokretanja, otvorite instalaciju i instalirajte program [name].
-CannotContinue=Ne mogu da nastavim instalaciju. Kliknite na „Otkai“ da izağete.
-ApplicationsFound=Sledeæi programi koriste datoteke koje treba da aurira instalacioni program. Preporuèujemo vam da dozvolite instalacionom programu da zatvori ove programe.
-ApplicationsFound2=Sledeæi programi koriste datoteke koje treba da aurira instalacioni program. Preporuèujemo vam da dozvolite instalacionom programu da zatvori ove programe. Nakon što se instalacija završi, instalacioni program æe pokušati da ponovo pokrene zatvorene programe.
-CloseApplications=&Zatvori programe
-DontCloseApplications=&Ne zatvaraj programe
-ErrorCloseApplications=Ne mogu da zatvorim sve programe. Pre nego što nastavite, preporuèujemo vam da zatvorite sve programe koji koriste datoteke koje treba da aurira instalacioni program.
-PrepareToInstallNeedsRestart=Instalacija mora da ponovo pokrene raèunar. Nakon ponovnog pokretanja raèunara, ponovo pokrenite instalaciju da biste dovršili instalaciju [name].%n%nelite li da ponovo pokrenete raèunar sada?
+PreparingDesc=Priprema se instalacija programa [name] na raÄunar.
+PreviousInstallNotCompleted=Instalacija ili deinstalacija prethodnog programa nije zavrÅ¡ena. Potrebno je da ponovo pokrenete raÄunar da bi se ta instalacija zavrÅ¡ila.%n%nNakon ponovnog pokretanja raÄunara, ponovo pokrenite instalaciju da biste dovrÅ¡ili instaliranje programa [name].
+CannotContinue=Nije moguÄ‡e nastaviti instalaciju. Kliknite na â€OtkaÅ¾iâ€œ da izaÄ‘ete.
+ApplicationsFound=SledeÄ‡i programi koriste datoteke koje treba da aÅ¾urira instalacioni program. PreporuÄujemo vam da dozvolite instalacionom programu da automatski zatvori ove programe.
+ApplicationsFound2=SledeÄ‡i programi koriste datoteke koje treba da aÅ¾urira instalacioni program. PreporuÄujemo vam da dozvolite instalacionom programu da automatski zatvori ove programe. Nakon Å¡to se instalacija zavrÅ¡i, instalacioni program Ä‡e pokuÅ¡ati da ponovo pokrene zatvorene programe.
+CloseApplications=&Automatski zatvori programe
+DontCloseApplications=Ne &zatvaraj programe
+ErrorCloseApplications=Instalacioni program nije mogao automatski da zatvori sve programe. Pre nego Å¡to nastavite, preporuÄujemo vam da zatvorite sve programe koji koriste datoteke koje treba da aÅ¾urira instalacioni program.
+PrepareToInstallNeedsRestart=Instalacioni program mora ponovo pokrenuti raÄunar. Nakon ponovnog pokretanja raÄunara, ponovo pokrenite instalaciju da biste dovrÅ¡ili instaliranje programa [name].%n%nÅ½elite li da ponovo pokrenete raÄunar?
 
 ; *** "Installing" wizard page
 WizardInstalling=Instaliranje
-InstallingLabel=Saèekajte da se [name] instalira na raèunar.
+InstallingLabel=SaÄekajte da se [name] instalira na raÄunar.
 
 ; *** "Setup Completed" wizard page
-FinishedHeadingLabel=[name] – završetak instalacije
-FinishedLabelNoIcons=Instaliranje programa [name] je završeno.
-FinishedLabel=Instaliranje programa [name] je završeno. Moete ga pokrenuti preko postavljenih ikona.
-ClickFinish=Kliknite na „Završi“ da izağete.
-FinishedRestartLabel=Potrebno je ponovno pokretanje raèunara da bi se instalacija završila. elite li da ga ponovo pokrenete?
-FinishedRestartMessage=Potrebno je ponovno pokretanje raèunara da bi se instalacija završila.%n%nelite li da ga ponovo pokrenete?
-ShowReadmeCheck=Da, elim da pogledam tekstualnu datoteku
-YesRadio=&Da, ponovo pokreni raèunar
-NoRadio=&Ne, kasnije æu ga pokrenuti
+FinishedHeadingLabel=ZavrÅ¡etak instalacije programa [name]
+FinishedLabelNoIcons=Instaliranje programa [name] na raÄunar je zavrÅ¡eno.
+FinishedLabel=Instaliranje programa [name] na raÄunar je zavrÅ¡eno. MoÅ¾ete ga pokrenuti preko postavljenih preÄica.
+ClickFinish=Kliknite na â€ZavrÅ¡iâ€œ da izaÄ‘ete iz instalacije.
+FinishedRestartLabel=Da bi se zavrÅ¡ila instalacija programa [name], potrebno je ponovo pokrenuti raÄunar. Å½elite li da ponovo pokrenete raÄunar?
+FinishedRestartMessage=Da bi se zavrÅ¡ila instalacija programa [name], potrebno je ponovo pokrenuti raÄunar.%n%nÅ½elite li da ponovo pokrenete raÄunar?
+ShowReadmeCheck=Da, Å¾elim da pogledam README datoteku
+YesRadio=&Da, pokreni ponovo raÄunar
+NoRadio=Ne, &kasnije Ä‡u ga ponovo pokrenuti
 ; used for example as 'Run MyProg.exe'
-RunEntryExec=&Pokreni %1
+RunEntryExec=Pokreni %1
 ; used for example as 'View Readme.txt'
 RunEntryShellExec=Pogledaj %1
 
 ; *** "Setup Needs the Next Disk" stuff
-ChangeDiskTitle=Sledeæi disk
-SelectDiskLabel2=Ubacite disk %1 i kliknite na „U redu“.%n%nAko se datoteke na ovom disku mogu pronaæi u nekoj drugoj fascikli, unesite odgovarajuæu putanju ili kliknite na „Potrai…“.
-PathLabel=&Putanja:
-FileNotInDir2=Datoteka „%1“ se ne nalazi u „%2“. Ubacite pravi disk ili izaberite drugu fasciklu.
-SelectDirectoryLabel=Izaberite mesto sledeæeg diska.
+ChangeDiskTitle=Instalacionom programu je potreban sledeÄ‡i disk
+SelectDiskLabel2=Ubacite disk %1 i kliknite na â€U reduâ€œ.%n%nAko se datoteke na ovom disku mogu pronaÄ‡i u fascikli koja nije prikazana ispod, unesite ispravnu putanju ili kliknite na â€Izaberi...â€œ.
+PathLabel=Pu&tanja:
+FileNotInDir2=Datoteka â€%1â€œ se ne nalazi u â€%2â€œ. Ubacite odgovarajuÄ‡i disk ili izaberite drugu fasciklu.
+SelectDirectoryLabel=Izaberite putanju do sledeÄ‡eg diska.
 
 ; *** Installation phase messages
-SetupAborted=Instalacija nije završena.%n%nIspravite problem i pokrenite je ponovo.
+SetupAborted=Instalacija nije zavrÅ¡ena.%n%nIspravite problem i pokrenite je ponovo.
 AbortRetryIgnoreSelectAction=Odaberite radnju
-AbortRetryIgnoreRetry=&Pokušaj opet
-AbortRetryIgnoreIgnore=&Zanemari grešku i nastavi
-AbortRetryIgnoreCancel=Prekini instalaciju
+AbortRetryIgnoreRetry=&PokuÅ¡ajte ponovo
+AbortRetryIgnoreIgnore=&Zanemarite greÅ¡ku i nastavite
+AbortRetryIgnoreCancel=OtkaÅ¾ite instalaciju
+RetryCancelSelectAction=Odaberite radnju
+RetryCancelRetry=&PokuÅ¡ajte ponovo
+RetryCancelCancel=OtkaÅ¾i
 
 ; *** Installation status messages
-StatusClosingApplications=Zatvaram programe…
-StatusCreateDirs=Pravim fascikle…
-StatusExtractFiles=Raspakujem datoteke…
-StatusCreateIcons=Postavljam preèice…
-StatusCreateIniEntries=Postavljam INI unose…
-StatusCreateRegistryEntries=Postavljam unose u registar…
-StatusRegisterFiles=Upisujem datoteke…
-StatusSavingUninstall=Èuvam podatke o deinstalaciji…
-StatusRunProgram=Završavam instalaciju…
-StatusRestartingApplications=Ponovo pokreæem programe…
-StatusRollback=Poništavam izmene…
+StatusClosingApplications=Zatvaram programe...
+StatusCreateDirs=Pravim fascikle...
+StatusExtractFiles=Raspakujem datoteke...
+StatusDownloadFiles=Preuzimam datoteke...
+StatusCreateIcons=Postavljam preÄice...
+StatusCreateIniEntries=Postavljam INI unose...
+StatusCreateRegistryEntries=Postavljam unose u registar...
+StatusRegisterFiles=Registrujem datoteke...
+StatusSavingUninstall=ÄŒuvam podatke o deinstalaciji...
+StatusRunProgram=ZavrÅ¡avam instalaciju...
+StatusRestartingApplications=Ponovo pokreÄ‡em programe...
+StatusRollback=PoniÅ¡tavam izmene...
 
 ; *** Misc. errors
-ErrorInternal2=Unutrašnja greška: %1
-ErrorFunctionFailedNoCode=%1 neuspeh
-ErrorFunctionFailed=%1 neuspeh; kod %2
-ErrorFunctionFailedWithMessage=%1 neuspeh; kod %2.%n%3
-ErrorExecutingProgram=Ne mogu da pokrenem datoteku:%n%1
+ErrorInternal2=UnutraÅ¡nja greÅ¡ka: %1
+ErrorFunctionFailedNoCode=%1: neuspeÅ¡no
+ErrorFunctionFailed=%1: neuspeÅ¡no; kod %2
+ErrorFunctionFailedWithMessage=%1: neuspeÅ¡no; kod %2.%n%3
+ErrorExecutingProgram=Nije moguÄ‡e pokrenuti datoteku:%n%1
 
 ; *** Registry errors
-ErrorRegOpenKey=Greška pri otvaranju unosa u registru:%n%1\%2
-ErrorRegCreateKey=Greška pri stvaranju unosa u registru:%n%1\%2
-ErrorRegWriteKey=Greška pri upisivanju unosa u registar:%n%1\%2
+ErrorRegOpenKey=GreÅ¡ka pri otvaranju kljuÄa u registru:%n%1\%2
+ErrorRegCreateKey=GreÅ¡ka pri pravljenju kljuÄa u registru:%n%1\%2
+ErrorRegWriteKey=GreÅ¡ka pri upisivanju u kljuÄ registra:%n%1\%2
 
 ; *** INI errors
-ErrorIniEntry=Greška pri stvaranju INI unosa u datoteci „%1“.
+ErrorIniEntry=GreÅ¡ka pri pravljenju INI unosa u datoteci â€%1â€œ.
 
 ; *** File copying errors
-FileAbortRetryIgnoreSkipNotRecommended=&Preskoèite ovu datoteku (ne preporuèuje se)
-FileAbortRetryIgnoreIgnoreNotRecommended=&Zanemari grešku i nastavi (ne preporuèuje se)
-SourceIsCorrupted=Izvorna datoteka je ošteæena
-SourceDoesntExist=Izvorna datoteka „%1“ ne postoji
-ExistingFileReadOnly2=Postojeæa datoteka ne moe da se zameni jer je samo za èitanje.
-ExistingFileReadOnlyRetry=&Uklonite atribut samo za èitanje i pokušajte ponovo
-ExistingFileReadOnlyKeepExisting=&Zadrite postojeæu datoteku
-ErrorReadingExistingDest=Došlo je do greške pri pokušaju èitanja postojeæe datoteke:
-FileExistsSelectAction=Odaberi akciju
-FileExists2=Datoteka veæ postoji.
-FileExistsOverwriteExisting=&Zameni postojeæu datoteku
-FileExistsKeepExisting=&Zadri postojeæu datoteku
-FileExistsOverwriteOrKeepAll=&Uradi ovo i ubuduæe
-ExistingFileNewerSelectAction=Odaberi akciju
-ExistingFileNewer2=Postojeæa datoteka je novija od one koju treba instalirati.
-ExistingFileNewerOverwriteExisting=&Zameni postojeæu datoteku
-ExistingFileNewerKeepExisting=&Zadri postojeæu datoteku (preporuèeno)
-ExistingFileNewerOverwriteOrKeepAll=&Uradi ovo i ubuduæe
-ErrorChangingAttr=Došlo je do greške pri izmeni osobine sledeæe datoteke:
-ErrorCreatingTemp=Došlo je do greške pri stvaranju datoteke u odredišnoj fascikli:
-ErrorReadingSource=Došlo je do greške pri èitanju izvorne datoteke:
-ErrorCopying=Došlo je do greške pri umnoavanju datoteke:
-ErrorReplacingExistingFile=Došlo je do greške pri zameni postojeæe datoteke:
-ErrorRestartReplace=Ne mogu da zamenim:
-ErrorRenamingTemp=Došlo je do greške pri preimenovanju datoteke u odredišnoj fascikli:
-ErrorRegisterServer=Ne mogu da upišem DLL/OCX: %1
-ErrorRegSvr32Failed=RegSvr32 nije uspeo. Greška %1
-ErrorRegisterTypeLib=Ne mogu da upišem biblioteku tipova: %1
+FileAbortRetryIgnoreSkipNotRecommended=Pre&skoÄite ovu datoteku (ne preporuÄuje se)
+FileAbortRetryIgnoreIgnoreNotRecommended=&Zanemarite greÅ¡ku i nastavite (ne preporuÄuje se)
+SourceIsCorrupted=Izvorna datoteka je oÅ¡teÄ‡ena
+SourceDoesntExist=Izvorna datoteka â€%1â€œ ne postoji
+SourceVerificationFailed=Verifikacija izvorne datoteke nije uspela: %1
+VerificationSignatureDoesntExist=Datoteka potpisa â€%1â€œ ne postoji
+VerificationSignatureInvalid=Datoteka potpisa â€%1â€œ je nevaÅ¾eÄ‡a
+VerificationKeyNotFound=Datoteka potpisa â€%1â€œ koristi nepoznat kljuÄ
+VerificationFileNameIncorrect=Naziv datoteke nije taÄan
+VerificationFileTagIncorrect=Oznaka datoteke nije taÄna
+VerificationFileSizeIncorrect=VeliÄina datoteke nije taÄna
+VerificationFileHashIncorrect=HeÅ¡ datoteke nije taÄan
+ExistingFileReadOnly2=PostojeÄ‡a datoteka ne moÅ¾e da se zameni jer je oznaÄena kao â€samo za Äitanjeâ€œ.
+ExistingFileReadOnlyRetry=&Uklonite atribut samo za Äitanje i pokuÅ¡ajte ponovo
+ExistingFileReadOnlyKeepExisting=&ZadrÅ¾ite postojeÄ‡u datoteku
+ErrorReadingExistingDest=DoÅ¡lo je do greÅ¡ke pri Äitanju postojeÄ‡e datoteke:
+FileExistsSelectAction=Odaberite radnju
+FileExists2=Datoteka veÄ‡ postoji.
+FileExistsOverwriteExisting=&Zameni postojeÄ‡u datoteku
+FileExistsKeepExisting=Zadr&Å¾ite postojeÄ‡u datoteku
+FileExistsOverwriteOrKeepAll=&Uradi ovo i za naredne konflikte
+ExistingFileNewerSelectAction=Odaberite radnju
+ExistingFileNewer2=PostojeÄ‡a datoteka je novija od one koju instalacioni program pokuÅ¡ava da instalira.
+ExistingFileNewerOverwriteExisting=&Zameni postojeÄ‡u datoteku
+ExistingFileNewerKeepExisting=Zadr&Å¾ite postojeÄ‡u datoteku (preporuÄeno)
+ExistingFileNewerOverwriteOrKeepAll=&Uradi ovo i za naredne konflikte
+ErrorChangingAttr=DoÅ¡lo je do greÅ¡ke pri izmeni atributa postojeÄ‡e datoteke:
+ErrorCreatingTemp=DoÅ¡lo je do greÅ¡ke pri pravljenju datoteke u odrediÅ¡noj fascikli:
+ErrorReadingSource=DoÅ¡lo je do greÅ¡ke pri Äitanju izvorne datoteke:
+ErrorCopying=DoÅ¡lo je do greÅ¡ke pri kopiranju datoteke:
+ErrorDownloading=DoÅ¡lo je do greÅ¡ke pri preuzimanju datoteke:
+ErrorExtracting=DoÅ¡lo je do greÅ¡ke pri raspakivanju arhive:
+ErrorReplacingExistingFile=DoÅ¡lo je do greÅ¡ke pri zameni postojeÄ‡e datoteke:
+ErrorRestartReplace=Nije moguÄ‡e zameniti:
+ErrorRenamingTemp=DoÅ¡lo je do greÅ¡ke pri preimenovanju datoteke u odrediÅ¡noj fascikli:
+ErrorRegisterServer=Nije moguÄ‡e registrovati DLL/OCX: %1
+ErrorRegSvr32Failed=RegSvr32 nije uspeo. Izlazni kÃ´d: %1
+ErrorRegisterTypeLib=Nije moguÄ‡e registrovati biblioteku tipova: %1
 
 ; *** Uninstall display name markings
 ; used for example as 'My Program (32-bit)'
 UninstallDisplayNameMark=%1 (%2)
 ; used for example as 'My Program (32-bit, All users)'
 UninstallDisplayNameMarks=%1 (%2, %3)
-UninstallDisplayNameMark32Bit=32-bit
-UninstallDisplayNameMark64Bit=64-bit
+UninstallDisplayNameMark32Bit=32-bitni
+UninstallDisplayNameMark64Bit=64-bitni
 UninstallDisplayNameMarkAllUsers=Svi korisnici
 UninstallDisplayNameMarkCurrentUser=Trenutni korisnik
 
 ; *** Post-installation errors
-ErrorOpeningReadme=Došlo je do greške pri otvaranju tekstualne datoteke.
-ErrorRestartingComputer=Ne mogu ponovo da pokrenem raèunar. Uradite to sami.
+ErrorOpeningReadme=DoÅ¡lo je do greÅ¡ke pri otvaranju README datoteke.
+ErrorRestartingComputer=Instalacioni program nije mogao ponovo da pokrene raÄunar. Uradite to ruÄno.
 
 ; *** Uninstaller messages
-UninstallNotFound=Datoteka „%1“ ne postoji. Ne mogu da deinstaliram program.
-UninstallOpenError=Datoteka „%1“ ne moe da se otvori. Ne mogu da deinstaliram program.
-UninstallUnsupportedVer=Izveštaj „%1“ je u neprepoznatljivom formatu. Ne mogu da deinstaliram program.
-UninstallUnknownEntry=Nepoznat unos (%1) se pojavio u izveštaju deinstalacije.
-ConfirmUninstall=elite li da deinstalirate %1 i sve njegove komponente?
-UninstallOnlyOnWin64=Program se moe deinstalirati samo na 64-bitnom vindousu.
-OnlyAdminCanUninstall=Program moe deinstalirati samo korisnik s administratorskim pravima.
-UninstallStatusLabel=Saèekajte da se %1 deinstalira sa raèunara.
-UninstalledAll=%1 je deinstaliran sa raèunara.
-UninstalledMost=%1 je deinstaliran.%n%nNeke komponente ipak morati sami obrisati.
-UninstalledAndNeedsRestart=Potrebno je ponovno pokretanje raèunara da bi se instalacija završila.%n%nelite li da ponovo pokrenete raèunar?
-UninstallDataCorrupted=Datoteka „%1“ je ošteæena. Ne mogu da deinstaliram program.
+UninstallNotFound=Datoteka â€%1â€œ ne postoji. Deinstalacija nije moguÄ‡a.
+UninstallOpenError=Datoteka â€%1â€œ ne moÅ¾e da se otvori. Deinstalacija nije moguÄ‡a
+UninstallUnsupportedVer=Log datoteka deinstalacije â€%1â€œ je u formatu koji ova verzija deinstalacionog programa ne prepoznaje. Deinstalacija nije moguÄ‡a
+UninstallUnknownEntry=Nepoznat unos (%1) se pojavio u log datoteci deinstalacije
+ConfirmUninstall=Da li ste sigurni da Å¾elite u potpunosti da deinstalirate program %1 i sve njegove komponente?
+UninstallOnlyOnWin64=Ova instalacija moÅ¾e da se deinstalira samo na 64-bitnom Windows-u.
+OnlyAdminCanUninstall=Ovu instalaciju moÅ¾e da deinstalira samo korisnik sa administratorskim privilegijama.
+UninstallStatusLabel=SaÄekajte da se %1 deinstalira sa raÄunara.
+UninstalledAll=Program %1 je uspeÅ¡no deinstaliran sa raÄunara.
+UninstalledMost=Program %1 je deinstaliran.%n%nNeki elementi nisu mogli biti uklonjeni. MoÅ¾ete ih ukloniti ruÄno.
+UninstalledAndNeedsRestart=Da bi se zavrÅ¡ila deinstalacija programa %1, potrebno je ponovo pokrenuti raÄunar.%n%nÅ½elite li da ponovo pokrenete raÄunar?
+UninstallDataCorrupted=Datoteka â€%1â€œ je oÅ¡teÄ‡ena. Deinstalacija nije moguÄ‡a
 
 ; *** Uninstallation phase messages
-ConfirmDeleteSharedFileTitle=Brisanje deljene datoteke
-ConfirmDeleteSharedFile2=Sistem je prijavio da sledeæu deljenu datoteku više ne koristi nijedan program. elite li da je uklonite?%n%nAko nekim programima i dalje treba ova datoteka a ona je obrisana, ti programi moda neæe ispravno raditi. Ako niste sigurni šta da radite, kliknite na „Ne“. Ostavljanje datoteke na disku neæe prouzrokovati nikakvu štetu.
+ConfirmDeleteSharedFileTitle=Ukloniti deljenu datoteku?
+ConfirmDeleteSharedFile2=Sistem prijavljuje da sledeÄ‡u deljenu datoteku viÅ¡e ne koristi nijedan program. Å½elite li da je deinstalacioni program ukloni?%n%nAko neki programi i dalje koriste ovu datoteku, a ona bude uklonjena, ti programi moÅ¾da neÄ‡e ispravno raditi. Ako niste sigurni, izaberite â€Neâ€œ. Ostavljanje datoteke na sistemu neÄ‡e prouzrokovati nikakvu Å¡tetu.
 SharedFileNameLabel=Naziv datoteke:
-SharedFileLocationLabel=Putanja:
+SharedFileLocationLabel=Lokacija:
 WizardUninstalling=Stanje deinstalacije
-StatusUninstalling=Deinstaliram %1…
+StatusUninstalling=Deinstaliram %1...
 
 ; *** Shutdown block reasons
 ShutdownBlockReasonInstallingApp=Instaliram %1.
@@ -373,14 +398,14 @@ ShutdownBlockReasonUninstallingApp=Deinstaliram %1.
 [CustomMessages]
 
 NameAndVersion=%1 verzija %2
-AdditionalIcons=Dodatne ikone:
-CreateDesktopIcon=&Postavi ikonu na radnu površinu
-CreateQuickLaunchIcon=P&ostavi ikonu na traku za brzo pokretanje
+AdditionalIcons=Dodatne preÄice:
+CreateDesktopIcon=Postavi preÄicu na &radnu povrÅ¡inu
+CreateQuickLaunchIcon=P&ostavi preÄicu na traku za brzo pokretanje
 ProgramOnTheWeb=%1 na internetu
 UninstallProgram=Deinstaliraj %1
 LaunchProgram=Pokreni %1
-AssocFileExtension=&Povei %1 sa formatom %2
-AssocingFileExtension=Povezujem %1 sa formatom %2…
+AssocFileExtension=&PoveÅ¾i %1 sa ekstenzijom datoteke %2
+AssocingFileExtension=Povezujem %1 sa ekstenzijom datoteke %2...
 AutoStartProgramGroupDescription=Pokretanje:
 AutoStartProgram=Automatski pokreni %1
-AddonHostProgramNotFound=%1 se ne nalazi u navedenoj fascikli.%n%nelite li ipak da nastavite?
+AddonHostProgramNotFound=%1 se ne nalazi u navedenoj fascikli.%n%nÅ½elite li ipak da nastavite?

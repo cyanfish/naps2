@@ -9,7 +9,7 @@ public class AutomatedScanningOptions
 
     [Option('o', "output", HelpText = "The name and path of the file to save." +
                                       " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
-                                      " Placeholders can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number).")]
+                                      " Placeholders can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number, $(barcode) for a barcode value when splitting by barcode).")]
     public string? OutputPath { get; set; }
 
     [Option('a', "autosave", HelpText = "Use the Auto Save settings from the selected profile." +

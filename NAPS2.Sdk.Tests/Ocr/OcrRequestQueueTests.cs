@@ -368,7 +368,7 @@ public class OcrRequestQueueTests : ContextualTests
 
     private string CreateTempFile()
     {
-        var path = Path.Combine(FolderPath, $"tempocr{Guid.NewGuid()}.jpg");
+        var path = P($"tempocr{Guid.NewGuid()}.jpg");
         File.WriteAllText(path, @"blah");
         return path;
     }

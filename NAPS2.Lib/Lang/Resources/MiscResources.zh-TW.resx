@@ -24,9 +24,6 @@
   <data name="ConfirmDeleteItems" xml:space="preserve">
     <value>您確定要刪除 {0} 個項目嗎?</value>
   </data>
-  <data name="ConfirmDeleteMultipleProfiles" xml:space="preserve">
-    <value>您確定要刪除 {0} 個設定檔嗎?</value>
-  </data>
   <data name="ConfirmDeleteSingleProfile" xml:space="preserve">
     <value>您確定要刪除設定檔 {0}?</value>
   </data>
@@ -50,15 +47,6 @@
   </data>
   <data name="FileTypeBmp" xml:space="preserve">
     <value>點陣圖檔 (*.bmp)</value>
-  </data>
-  <data name="FileTypeEmf" xml:space="preserve">
-    <value>Windows 增強型中繼檔 (*.emf)</value>
-  </data>
-  <data name="FileTypeExif" xml:space="preserve">
-    <value>可交換式影像檔案 (*.exif)</value>
-  </data>
-  <data name="FileTypeGif" xml:space="preserve">
-    <value>GIF 檔 (*.gif)</value>
   </data>
   <data name="FileTypeJpeg" xml:space="preserve">
     <value>JPEG 檔 (*.jpg, *.jpeg)</value>
@@ -108,18 +96,6 @@
   <data name="EmailError" xml:space="preserve">
     <value>嘗試發送電子郵件時發生錯誤.</value>
   </data>
-  <data name="InstallComplete" xml:space="preserve">
-    <value>安裝完成</value>
-  </data>
-  <data name="InstallCompletePromptRestart" xml:space="preserve">
-    <value>安裝完成。您要馬上將 NAPS2 重新啟動嗎?</value>
-  </data>
-  <data name="InstallFailed" xml:space="preserve">
-    <value>安裝失敗.</value>
-  </data>
-  <data name="InstallFailedTitle" xml:space="preserve">
-    <value>安裝失敗</value>
-  </data>
   <data name="AllCount" xml:space="preserve">
     <value>全部 ({0})</value>
   </data>
@@ -137,9 +113,6 @@
   </data>
   <data name="ImportErrorCouldNot" xml:space="preserve">
     <value>檔案 '{0}' 無法匯入.</value>
-  </data>
-  <data name="ImportErrorNAPS2Pdf" xml:space="preserve">
-    <value>檔案 '{0}' 無法匯入。僅能匯入 NAPS2 產生的 PDF 檔.</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
     <value>下載發生錯誤</value>
@@ -171,23 +144,14 @@
   <data name="ActiveOperations" xml:space="preserve">
     <value>Operation in Progress</value>
   </data>
-  <data name="ScanPageProgress" xml:space="preserve">
-    <value>掃瞄頁面 {0}</value>
-  </data>
   <data name="NoFeederSupport" xml:space="preserve">
     <value>所選掃瞄器不支援使用送紙器。如果您的掃瞄器沒有送紙器，請試著使用不同的驅動程式.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
     <value>沒有頁面在送紙器中.</value>
   </data>
-  <data name="PdfNoPermissionToExtractContent" xml:space="preserve">
-    <value>您沒有權限從檔案 '{0}' 複製內容.</value>
-  </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>儲存此檔時發生錯誤.</value>
-  </data>
-  <data name="OfN" xml:space="preserve">
-    <value>/ {0}</value>
   </data>
   <data name="BatchError" xml:space="preserve">
     <value>An unknown error occurred during the batch scan.</value>
@@ -294,9 +258,6 @@
   <data name="DeviceWarmingUp" xml:space="preserve">
     <value>The scanner is warming up.</value>
   </data>
-  <data name="OcrUpdateAvailable" xml:space="preserve">
-    <value>An update to OCR is available.</value>
-  </data>
   <data name="ImageSaved" xml:space="preserve">
     <value>Image saved.</value>
   </data>
@@ -321,12 +282,6 @@
   <data name="AutoDeskewProgress" xml:space="preserve">
     <value>Deskew Progress</value>
   </data>
-  <data name="DownloadNeeded" xml:space="preserve">
-    <value>Download Needed</value>
-  </data>
-  <data name="PdfImportComponentNeeded" xml:space="preserve">
-    <value>An additional component is needed to import this PDF file. Would you like to download it now?</value>
-  </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Are you sure you want to cancel the batch scan?</value>
   </data>
@@ -344,12 +299,6 @@
   </data>
   <data name="ReviewPrompt" xml:space="preserve">
     <value>Like NAPS2?</value>
-  </data>
-  <data name="SaneNotAvailable" xml:space="preserve">
-    <value>The SANE driver is not available. Make sure to install the required packages:</value>
-  </data>
-  <data name="TesseractNotAvailable" xml:space="preserve">
-    <value>The OCR engine is not available. Make sure to install the required package:</value>
   </data>
   <data name="DriverNotSupported" xml:space="preserve">
     <value>The selected driver is not supported on this system.</value>
