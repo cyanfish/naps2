@@ -127,7 +127,12 @@ public class AutoSaver
         if (settings.PromptForFilePath)
         {
             // The dialog handles conflicts itself, so the default is just the configured name with placeholders filled in
-            var defaultPath = _nameManager.Get(path, NameContext.FromSaveParams(saveParams));
+            var defaultPath = _nameManager.Get(path, new NameContext
+            {
+                DateTime = saveParams.DateTime,
+                BarcodeValue = saveParams.BarcodeValue,
+                FilterBarcode = saveParams.FilterBarcode
+            });
             string? newPath = null!;
             if (Invoker.Current.InvokeGet(() => _dialogHelper.PromptToSavePdfOrImage(defaultPath, out newPath)))
             {
