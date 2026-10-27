@@ -1,3 +1,4 @@
+using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Asserts;
@@ -272,5 +273,83 @@ public class RemotePostProcessorTests : ContextualTests
         Assert.Equal(2, result2.PostProcessingData.PageNumber);
         Assert.Equal(PageSide.Back, result2.PostProcessingData.PageSide);
         ImageAsserts.Similar(ImageResources.dog, result2.WithTransform(new RotationTransform(180)));
+    }
+
+    [Theory]
+    [InlineData(PaperSource.Duplex, true, 1, 0, 0)]
+    [InlineData(PaperSource.Duplex, true, 2, 0, 180)]
+    [InlineData(PaperSource.Duplex, false, 2, 0, 0)]
+    [InlineData(PaperSource.Flatbed, true, 2, 0, 0)]
+    [InlineData(PaperSource.Flatbed, false, 1, 90, 90)]
+    [InlineData(PaperSource.Duplex, true, 2, 90, 270)]
+    public void BackgroundOcrUsesPageRotation(PaperSource paperSource, bool flipDuplexedPages, int pageNumber,
+        int rotateDegrees, int expectedRotation)
+    {
+        var options = new ScanOptions
+        {
+            PaperSource = paperSource,
+            FlipDuplexedPages = flipDuplexedPages,
+            RotateDegrees = rotateDegrees,
+            OcrParams = new OcrParams("eng")
+        };
+        var context = new PostProcessingContext { PageNumber = pageNumber };
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.dog), options, context);
+        using var expected = LoadImage(ImageResources.dog).PerformTransform(new RotationTransform(expectedRotation));
+        Assert.NotNull(context.TempPath);
+        using var ocrImage = ImageContext.Load(context.TempPath);
+        ImageAsserts.Similar(expected, ocrImage, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        using var rendered = result!.Render();
+        ImageAsserts.Similar(expected, rendered, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        using var original = result.WithNoTransforms();
+        ImageAsserts.Similar(ImageResources.dog, original);
+    }
+
+    [Fact]
+    public void BackgroundOcrUsesAutoCrop()
+    {
+        var options = new ScanOptions
+        {
+            AutoCrop = true,
+            OcrParams = new OcrParams("eng")
+        };
+        var context = new PostProcessingContext();
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.autocrop_doc), options, context);
+        Assert.NotNull(context.TempPath);
+        using var ocrImage = ImageContext.Load(context.TempPath);
+        Assert.Equal(2550, ocrImage.Width);
+        Assert.InRange(ocrImage.Height, 3298, 3338);
+        using var rendered = result!.Render();
+        ImageAsserts.Similar(rendered, ocrImage, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void BackgroundOcrDisabled()
+    {
+        var options = new ScanOptions
+        {
+            RotateDegrees = 90
+        };
+        var context = new PostProcessingContext();
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.dog), options, context);
+        Assert.Null(context.TempPath);
+        Assert.Empty(Directory.GetFiles(ScanningContext.TempFolderPath));
+        ImageAsserts.Similar(ImageResources.dog_r_p90, result!, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void BackgroundOcrUsesBrightnessWithoutChangingBackingImage()
+    {
+        var options = new ScanOptions
+        {
+            Brightness = 300,
+            OcrParams = new OcrParams("eng")
+        };
+        var context = new PostProcessingContext();
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.dog), options, context);
+        Assert.NotNull(context.TempPath);
+        ImageAsserts.Similar(ImageResources.dog_b_p300, context.TempPath, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        ImageAsserts.Similar(ImageResources.dog_b_p300, result!, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        using var original = result!.WithNoTransforms();
+        ImageAsserts.Similar(ImageResources.dog, original);
     }
 }

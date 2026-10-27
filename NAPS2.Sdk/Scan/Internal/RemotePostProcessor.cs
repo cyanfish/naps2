@@ -51,7 +51,7 @@ internal class RemotePostProcessor : IRemotePostProcessor
             var scannedImage = _scanningContext.CreateProcessedImage(image, options.MaxQuality,
                 options.Quality, options.PageSize);
             DoRevertibleTransforms(ref scannedImage, ref image, options, postProcessingContext);
-            postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
+            postProcessingContext.TempPath = SaveForBackgroundOcr(image, scannedImage.TransformState, options);
             return scannedImage;
         }
         finally
@@ -211,13 +211,14 @@ internal class RemotePostProcessor : IRemotePostProcessor
         processedImage = processedImage.WithPostProcessingData(data, true);
     }
 
-    private string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
+    private string? SaveForBackgroundOcr(IMemoryImage bitmap, TransformState transformState, ScanOptions options)
     {
         if (!string.IsNullOrEmpty(options.OcrParams.LanguageCode))
         {
             // TODO: If we use tesseract as a library, this is something that that could potentially improve (i.e. not having to save to disk)
             // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
-            return _scanningContext.SaveToTempFile(bitmap);
+            using var transformed = bitmap.Clone().PerformAllTransforms(transformState.Transforms);
+            return _scanningContext.SaveToTempFile(transformed);
         }
         return null;
     }
