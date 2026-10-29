@@ -79,13 +79,15 @@ public class AutoSaver
         {
             bool ok = true;
             string? firstFileSaved = null;
-            var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator)
-                .Where(x => x.Count > 0).ToList();
+            var scans = SaveSeparatorHelper.SeparateScansWithBarcodeValues(new[] { images }, settings.Separator,
+                    barcodeSeparatorOptions: settings.BarcodeSeparatorOptions)
+                .Where(x => x.Images.Count > 0).ToList();
             var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never, OpenEndedSequence = true };
-            foreach (var (imagesToSave, i) in scans.Select((x, i) => (x, i)))
+            foreach (var (scan, i) in scans.Select((x, i) => (x, i)))
             {
+                var imagesToSave = scan.Images;
                 (bool success, string? filePath) = await SaveOneFile(settings, saveParams with { BatchIndex = i },
-                    imagesToSave, doNotify: scans.Count == 1);
+                    imagesToSave, doNotify: scans.Count == 1, barcodeValue: scan.BarcodeValue);
                 if (success)
                 {
                     // Normally we're supposed to take the CurrentState before the save operation starts, but that
@@ -104,7 +106,7 @@ public class AutoSaver
             if (scans.Count > 1 && ok)
             {
                 // Can't just do images.Count because that includes patch codes
-                int imageCount = scans.SelectMany(x => x).Count();
+                int imageCount = scans.SelectMany(x => x.Images).Count();
                 _notify.ImagesSaved(imageCount, firstFileSaved!);
             }
             return ok;
@@ -118,13 +120,19 @@ public class AutoSaver
     }
 
     private async Task<(bool, string?)> SaveOneFile(AutoSaveSettings settings, SaveParams saveParams,
-        List<ProcessedImage> images, bool doNotify)
+        List<ProcessedImage> images, bool doNotify, string? barcodeValue)
     {
+        saveParams = saveParams with { BarcodeValue = barcodeValue };
         string path = settings.FilePath;
         if (settings.PromptForFilePath)
         {
             // The dialog handles conflicts itself, so the default is just the configured name with placeholders filled in
-            var defaultPath = _nameManager.Get(path, new NameContext { DateTime = saveParams.DateTime });
+            var defaultPath = _nameManager.Get(path, new NameContext
+            {
+                DateTime = saveParams.DateTime,
+                BarcodeValue = saveParams.BarcodeValue,
+                FilterBarcode = saveParams.FilterBarcode
+            });
             string? newPath = null!;
             if (Invoker.Current.InvokeGet(() => _dialogHelper.PromptToSavePdfOrImage(defaultPath, out newPath)))
             {

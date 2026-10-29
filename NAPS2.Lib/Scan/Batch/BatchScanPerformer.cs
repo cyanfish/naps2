@@ -88,6 +88,10 @@ public class BatchScanPerformer : IBatchScanPerformer
             {
                 DetectPatchT = _settings.OutputType == BatchOutputType.MultipleFiles &&
                                _settings.SaveSeparator == SaveSeparator.PatchT,
+                BarcodeSeparatorOptions = _settings.OutputType == BatchOutputType.MultipleFiles &&
+                                          _settings.SaveSeparator == SaveSeparator.Barcode
+                    ? _settings.BarcodeSeparatorOptions
+                    : null,
                 NoUI = true,
                 NoAutoSave = _config.Get(c => c.DisableAutoSave),
                 OcrParams = _settings.OutputType == BatchOutputType.Load
@@ -253,12 +257,18 @@ public class BatchScanPerformer : IBatchScanPerformer
             }
             else if (_settings.OutputType == BatchOutputType.MultipleFiles)
             {
-                var imageLists = SaveSeparatorHelper.SeparateScans(_scans, _settings.SaveSeparator)
-                    .Where(x => x.Count > 0).ToList();
+                var imageLists = SaveSeparatorHelper.SeparateScansWithBarcodeValues(_scans, _settings.SaveSeparator,
+                        barcodeSeparatorOptions: _settings.BarcodeSeparatorOptions)
+                    .Where(x => x.Images.Count > 0).ToList();
                 saveParams = saveParams with { BatchCount = imageLists.Count };
-                foreach (var (imageList, i) in imageLists.Select((x, i) => (x, i)))
+                foreach (var (scan, i) in imageLists.Select((x, i) => (x, i)))
                 {
-                    await Save(imageList, saveParams with { BatchIndex = i });
+                    await Save(scan.Images, saveParams with
+                    {
+                        BatchIndex = i,
+                        BarcodeValue = scan.BarcodeValue
+                    });
+                    var imageList = scan.Images;
                     foreach (var img in imageList)
                     {
                         img.Dispose();
@@ -280,7 +290,8 @@ public class BatchScanPerformer : IBatchScanPerformer
                 try
                 {
                     var exportParams = new PdfExportParams(
-                        _config.Get(c => c.PdfSettings.Metadata).Substitute(_nameManager, saveParams.DateTime),
+                        _config.Get(c => c.PdfSettings.Metadata).Substitute(_nameManager,
+                            NameContext.FromSaveParams(saveParams)),
                         _config.Get(c => c.PdfSettings.Encryption),
                         _config.Get(c => c.PdfSettings.Compat));
                     await _pdfExporter.Export(reservation.Name, images, exportParams, _config.DefaultOcrParams(),

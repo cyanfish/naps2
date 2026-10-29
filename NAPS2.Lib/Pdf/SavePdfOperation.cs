@@ -93,7 +93,7 @@ internal class SavePdfOperation : OperationBase
                     result = await RunWithRetry(async () =>
                             await WaitForFileNotInUse(currentFileName) &&
                             await _pdfExporter.Export(currentFileName, imagesForFile,
-                                new PdfExportParams(pdfSettings.Metadata.Substitute(_nameManager, context.DateTime),
+                                new PdfExportParams(pdfSettings.Metadata.Substitute(_nameManager, context),
                                     pdfSettings.Encryption, pdfSettings.Compat), ocrParams, progress),
                         GetSaveErrorMessage);
                     if (!result)

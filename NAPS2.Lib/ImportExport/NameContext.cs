@@ -40,6 +40,10 @@ public record NameContext
     /// </summary>
     public bool Overwrite { get; init; }
 
+    public string? BarcodeValue { get; init; }
+
+    public bool FilterBarcode { get; init; } = true;
+
     public static NameContext FromSaveParams(SaveParams saveParams) => new()
     {
         DateTime = saveParams.DateTime,
@@ -48,6 +52,8 @@ public record NameContext
             : Numbering.Placeholder,
         BatchIndex = saveParams.BatchIndex,
         BatchCount = saveParams.OpenEndedSequence ? null : saveParams.BatchCount,
-        Overwrite = saveParams.OverwriteMode == OverwriteMode.Force
+        Overwrite = saveParams.OverwriteMode == OverwriteMode.Force,
+        BarcodeValue = saveParams.BarcodeValue,
+        FilterBarcode = saveParams.FilterBarcode
     };
 }

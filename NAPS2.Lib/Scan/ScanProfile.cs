@@ -153,6 +153,7 @@ public record AutoSaveSettings
     public bool PromptForFilePath { get; init; }
     public bool ClearImagesAfterSaving { get; init; }
     public SaveSeparator Separator { get; init; } = SaveSeparator.FilePerPage;
+    public BarcodeSeparatorOptions BarcodeSeparatorOptions { get; init; } = new();
 }
 
 /// <summary>

@@ -2,6 +2,7 @@
 using Autofac;
 using NAPS2.Automation;
 using NAPS2.ImportExport.Email;
+using NAPS2.Images;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
@@ -11,6 +12,7 @@ using NAPS2.Sdk.Tests.Mocks;
 using NSubstitute;
 using Xunit;
 using Xunit.Abstractions;
+using ZXing;
 
 namespace NAPS2.Lib.Tests.Automation;
 
@@ -886,6 +888,333 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task SplitBarcode_RemovesPatchCodePageByDefault()
+    {
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                OutputPath = $"{FolderPath}/doc-$(barcode)-$(n).pdf",
+                Verbose = true
+            },
+            Image1, PatchT, Image2);
+
+        PdfAsserts.AssertImages($"{FolderPath}/doc--1.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/doc-PATCHT-2.pdf", Image2);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_CanRemoveBarcodePageWithoutLosingFilenameValue()
+    {
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                RemoveBarcodePage = true,
+                OutputPath = $"{FolderPath}/doc-$(barcode)-$(n).pdf",
+                Verbose = true
+            },
+            Image1, PatchT, Image2);
+
+        PdfAsserts.AssertImages($"{FolderPath}/doc--1.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/doc-PATCHT-2.pdf", Image2);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_CanKeepPatchCodePage()
+    {
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                KeepPatch = true,
+                OutputPath = $"{FolderPath}/doc-$(barcode)-$(n).pdf",
+                Verbose = true
+            },
+            Image1, PatchT, Image2);
+
+        PdfAsserts.AssertImages($"{FolderPath}/doc--1.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/doc-PATCHT-2.pdf", PatchT, Image2);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitPatchT_CanKeepSeparatorPageAndUsesValueInFilename()
+    {
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitPatchT = true,
+                KeepPatch = true,
+                OutputPath = $"{FolderPath}/doc-$(barcode)-$(n).pdf",
+                Verbose = true
+            },
+            Image1, PatchT, Image2);
+
+        PdfAsserts.AssertImages($"{FolderPath}/doc--1.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/doc-PATCHT-2.pdf", PatchT, Image2);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_WithoutFiltersMatchesAnyBarcode()
+    {
+        var images = CreateScannedImages(Image1, Image2, PatchT, Image3);
+        images[0] = WithBarcode(images[0], "ABC-1234", BarcodeFormat.CODE_39);
+        images[1] = WithBarcode(images[1], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        images[2] = WithBarcode(images[2], "PATCH1", BarcodeFormat.CODE_39);
+        images[3] = WithBarcode(images[3], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                KeepPatch = true,
+                OutputPath = $"{FolderPath}/scanorder-$(n)-$(barcode).pdf",
+                Verbose = true
+            },
+            Image1);
+
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-1-ABC-1234.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-2-ABC-abc-1234.pdf", Image2);
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-3-PATCH1.pdf", PatchT);
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-4-ABC-abc-1234.pdf", Image3);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_Code39OnlyWithoutPatchRecognitionProducesOneFile()
+    {
+        var images = CreateScannedImages(Image1, Image2, PatchT, Image3);
+        images[0] = WithBarcode(images[0], "ABC-1234", BarcodeFormat.CODE_39);
+        images[1] = WithBarcode(images[1], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        images[2] = images[2].WithPostProcessingData(images[2].PostProcessingData with
+        {
+            Barcode = Barcode.NoDetection
+        }, true);
+        images[3] = WithBarcode(images[3], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                BarcodeTypes = "code3of9",
+                OutputPath = $"{FolderPath}/scanorder-$(n)-$(barcode).pdf",
+                Verbose = true
+            },
+            Image1);
+
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-1-ABC-1234.pdf", Image1, Image2, PatchT, Image3);
+        Assert.False(File.Exists($"{FolderPath}/scanorder-2-ABC-abc-1234.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_Code39InOutputDirectory()
+    {
+        var images = CreateScannedImages(Image1, Image2);
+        images[0] = WithBarcode(images[0], "ABC-1234", BarcodeFormat.CODE_39);
+        images[1] = WithBarcode(images[1], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                BarcodeTypes = "code3of9",
+                OutputPath = $"{FolderPath}/$(barcode)/scan-$(n).pdf",
+                Verbose = true
+            },
+            Image1);
+
+        PdfAsserts.AssertImages($"{FolderPath}/ABC-1234/scan-1.pdf", Image1, Image2);
+        Assert.False(File.Exists($"{FolderPath}/ABC-abc-1234/scan-2.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_QrCodeValueInPdfTitle()
+    {
+        const string barcodeValue = "QR-12345";
+        var images = CreateScannedImages(Image1, Image2);
+        images[0] = WithBarcode(images[0], barcodeValue, BarcodeFormat.QR_CODE);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                BarcodeTypes = "qr_code",
+                OutputPath = $"{FolderPath}/scan-$(n).pdf",
+                PdfTitle = "Document $(barcode)",
+                Verbose = true
+            },
+            Image1);
+
+        var metadata = new PdfiumPdfReader().ReadMetadata($"{FolderPath}/scan-1.pdf");
+        Assert.Equal($"Document {barcodeValue}", metadata.Title);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_Code128OnlyWithoutPatchRecognitionSplitsThreeDocuments()
+    {
+        var images = CreateScannedImages(Image1, Image2, PatchT, Image3);
+        images[0] = WithBarcode(images[0], "ABC-1234", BarcodeFormat.CODE_39);
+        images[1] = WithBarcode(images[1], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        images[2] = images[2].WithPostProcessingData(images[2].PostProcessingData with
+        {
+            Barcode = Barcode.NoDetection
+        }, true);
+        images[3] = WithBarcode(images[3], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                BarcodeTypes = "code128",
+                OutputPath = $"{FolderPath}/scanorder-$(n)-$(barcode).pdf",
+                Verbose = true
+            },
+            Image1);
+
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-1-.pdf", Image1);
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-2-ABC-abc-1234.pdf", Image2, PatchT);
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-3-ABC-abc-1234.pdf", Image3);
+        Assert.False(File.Exists($"{FolderPath}/scanorder-4-ABC-abc-1234.pdf"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_FiltersUnsafeBarcodeFilenameByDefault()
+    {
+        const string barcodeValue = "../safe\\name";
+        var images = CreateScannedImages(Image1, Image2);
+        images[0] = WithBarcode(images[0], barcodeValue, BarcodeFormat.CODE_128);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                BarcodeTypes = "code128",
+                OutputPath = $"{FolderPath}/scanorder-$(barcode)-$(n).pdf",
+                Verbose = true
+            },
+            Image1);
+
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-.._safe_name-1.pdf", Image1, Image2);
+        Assert.Equal(barcodeValue, images[0].PostProcessingData.Barcode.DetectedText);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_CanDisableBarcodeFilenameFilter()
+    {
+        const string barcodeValue = "../safe";
+        var images = CreateScannedImages(Image1, Image2);
+        images[0] = WithBarcode(images[0], barcodeValue, BarcodeFormat.CODE_128);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+        var outputDirectory = Path.Combine(FolderPath, "safe", "inner");
+        Directory.CreateDirectory(outputDirectory);
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                BarcodeTypes = "code128",
+                NoBarcodeFilter = true,
+                OutputPath = $"{outputDirectory}/$(barcode)-$(n).pdf",
+                Verbose = true
+            },
+            Image1);
+
+        PdfAsserts.AssertImages(Path.Combine(FolderPath, "safe", "safe-1.pdf"), Image1, Image2);
+        Assert.Equal(barcodeValue, images[0].PostProcessingData.Barcode.DetectedText);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task SplitBarcode_WithCode39AndPatchIFilters()
+    {
+        var images = CreateScannedImages(Image1, Image2, PatchT, Image3);
+        images[0] = WithBarcode(images[0], "ABC-1234", BarcodeFormat.CODE_39);
+        images[1] = WithBarcode(images[1], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        images[2] = WithBarcode(images[2], "PATCH1", BarcodeFormat.CODE_39);
+        images[3] = WithBarcode(images[3], "ABC-abc-1234", BarcodeFormat.CODE_128);
+        var scanPerformer = Substitute.For<IScanPerformer>();
+        scanPerformer.PerformScan(Arg.Any<ScanProfile>(), Arg.Any<ScanParams>(), Arg.Any<IntPtr>(),
+                Arg.Any<CancellationToken>())
+            .Returns(_ => YieldImages(images));
+
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance(scanPerformer).As<IScanPerformer>();
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                SplitBarcode = true,
+                PatchCodes = "patchi",
+                BarcodeTypes = "code3of9",
+                OutputPath = $"{FolderPath}/scanorder-$(n)-$(barcode).pdf",
+                Verbose = true
+            },
+            Image1);
+
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-1-ABC-1234.pdf", Image1, Image2);
+        PdfAsserts.AssertImages($"{FolderPath}/scanorder-2-PATCH1.pdf", Image3);
+        Assert.True(IsDisposed(images[2]));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task Rotate90()
     {
         // Test both import and scanning paths
@@ -1473,6 +1802,21 @@ public class CommandLineIntegrationTests : ContextualTests
         scanDriverMock.Scan(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<IScanEvents>(),
             Arg.Any<Action<IMemoryImage>>()).Returns(Task.CompletedTask);
         return (scanDriverMock, scanDriverFactoryMock);
+    }
+
+    private static ProcessedImage WithBarcode(ProcessedImage image, string text, BarcodeFormat format) =>
+        image.WithPostProcessingData(image.PostProcessingData with
+        {
+            Barcode = new Barcode(true, true, text) { DetectedFormat = format }
+        }, true);
+
+    private static async IAsyncEnumerable<ProcessedImage> YieldImages(IEnumerable<ProcessedImage> images)
+    {
+        foreach (var image in images)
+        {
+            yield return image;
+            await Task.Yield();
+        }
     }
 
     private void AssertRecoveryCleanedUp()

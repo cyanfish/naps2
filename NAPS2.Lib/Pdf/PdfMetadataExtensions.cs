@@ -7,7 +7,23 @@ internal static class PdfMetadataExtensions
     public static PdfMetadata Substitute(this PdfMetadata metadata, NameManager nameManager,
         DateTime? dateTime = null)
     {
-        var context = new NameContext { DateTime = dateTime ?? DateTime.Now, IsFilePath = false };
+        return Substitute(metadata, nameManager, new NameContext
+        {
+            DateTime = dateTime ?? DateTime.Now,
+            IsFilePath = false
+        });
+    }
+
+    public static PdfMetadata Substitute(this PdfMetadata metadata, NameManager nameManager,
+        NameContext context)
+    {
+        context = context with
+        {
+            IsFilePath = false,
+            Numbering = Numbering.Placeholder,
+            BatchIndex = null,
+            BatchCount = null
+        };
         return metadata with
         {
             Author = nameManager.Get(metadata.Author, context),
