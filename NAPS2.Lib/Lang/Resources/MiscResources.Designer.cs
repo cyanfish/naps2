@@ -231,6 +231,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string prompting for an image file type or extension.
+        /// </summary>
+        internal static string ChooseImageFileType {
+            get {
+                return ResourceManager.GetString("ChooseImageFileType", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Choose Profile.
         /// </summary>
         internal static string ChooseProfile {

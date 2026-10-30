@@ -70,14 +70,45 @@ public class EtoDialogHelper : DialogHelper
         _fileFilters.Set(sd, filterGroups, lastExt);
         SetDir(sd, defaultPath);
         EtoPlatform.Current.ConfigureFileDialog(sd);
-        if (sd.ShowDialog(null) == DialogResult.Ok)
+        while (sd.ShowDialog(null) == DialogResult.Ok)
         {
             savePath = sd.FileName;
-            _config.User.Set(c => c.LastImageExt, (Path.GetExtension(sd.FileName) ?? "").Replace(".", ""));
+            if (EtoPlatform.Current.IsGtk)
+            {
+                savePath = CompleteImageFileName(sd.FileName, sd.CurrentFilter?.Extensions ?? []);
+                if (savePath == null)
+                {
+                    MessageBox.Show(MiscResources.ChooseImageFileType, MessageBoxType.Warning);
+                    continue;
+                }
+                if (savePath != sd.FileName && File.Exists(savePath))
+                {
+                    // The native dialog only confirmed the original name. Show the final
+                    // target again so its overwrite confirmation covers the appended extension.
+                    sd.FileName = savePath;
+                    continue;
+                }
+            }
+            _config.User.Set(c => c.LastImageExt, (Path.GetExtension(savePath) ?? "").Replace(".", ""));
             return true;
         }
         savePath = null;
         return false;
+    }
+
+    internal static string? CompleteImageFileName(string fileName, IEnumerable<string> extensions)
+    {
+        if (Path.HasExtension(fileName))
+        {
+            return fileName;
+        }
+        var filterExtensions = extensions.ToArray();
+        var formats = filterExtensions.Select(ImageContext.GetFileFormatFromExtension).Distinct().ToArray();
+        // Multiple extensions may be aliases for one format, such as .jpg and .jpeg.
+        // An aggregate filter cannot identify which format the user intended.
+        return formats.Length == 1 && formats[0] != ImageFileFormat.Unknown
+            ? fileName + filterExtensions[0]
+            : null;
     }
 
     private string? GetDefaultFileName(string? defaultPath, string ext)
