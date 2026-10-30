@@ -1,6 +1,7 @@
 using NAPS2.Scan;
 using NAPS2.Scan.Internal.Sane;
 using NAPS2.Scan.Internal.Sane.Native;
+using NSubstitute;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Scan;
@@ -16,6 +17,222 @@ public class SaneScanDriverOptionTests : ContextualTests
     }
 
     // TODO: More tests
+
+    [Theory]
+    [InlineData(true, PaperSource.Feeder, BitDepth.Color, true)]
+    [InlineData(false, PaperSource.Feeder, BitDepth.Color, false)]
+    [InlineData(true, PaperSource.Flatbed, BitDepth.Color, false)]
+    [InlineData(true, PaperSource.Duplex, BitDepth.Color, false)]
+    [InlineData(true, PaperSource.Feeder, BitDepth.Grayscale, false)]
+    [InlineData(true, PaperSource.Feeder, BitDepth.BlackAndWhite, false)]
+    public void SetOptions_EpsondsAutoLength(bool autoCrop, PaperSource source,
+        BitDepth bitDepth, bool expected)
+    {
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateBooleanForTesting(1, SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH)
+        ], new() { [1] = !expected });
+
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = autoCrop, PaperSource = source, BitDepth = bitDepth
+        });
+
+        Assert.Equal(expected, device.GetValue(1));
+    }
+
+    [Theory]
+    [InlineData(false, true)]
+    [InlineData(true, false)]
+    public void SetOptions_EpsondsAutoLength_AutoSource(bool hasFlatbed, bool expected)
+    {
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateStringListForTesting(1, SaneOptionNames.SOURCE,
+                hasFlatbed ? ["Flatbed", "ADF"] : ["ADF"]),
+            SaneOption.CreateBooleanForTesting(2, SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH)
+        ], new() { [2] = false });
+
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Auto, BitDepth = BitDepth.Color
+        });
+
+        Assert.Equal(expected, device.GetValue(2));
+    }
+
+    [Fact]
+    public void SetOptions_EpsondsAutoLength_Absent()
+    {
+        var device = new DeviceOptionsMock([]);
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color
+        });
+    }
+
+    [Fact]
+    public void SetOptions_EpsondsAutoLength_Inactive()
+    {
+        var option = new SaneOption(new SaneOptionDescriptor
+        {
+            Name = SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH,
+            Type = SaneValueType.Bool,
+            Capabilities = SaneCapabilities.SoftSelect | SaneCapabilities.Inactive
+        }, 1);
+        var device = new DeviceOptionsMock([option], new() { [1] = false });
+
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color
+        });
+
+        Assert.Equal(false, device.GetValue(1));
+    }
+
+    [Fact]
+    public void SetOptions_EpsondsAutoLength_WrongType()
+    {
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateStringListForTesting(1, SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH, ["off", "on"])
+        ], new() { [1] = "off" });
+
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color
+        });
+
+        Assert.Equal("off", device.GetValue(1));
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void SetOptions_EpsondsAutoLength_ExplicitOverride(bool enabled)
+    {
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateBooleanForTesting(1, SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH)
+        ]);
+
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = !enabled, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color,
+            KeyValueOptions = { [SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH] = enabled.ToString() }
+        });
+
+        Assert.Equal(enabled, device.GetValue(1));
+    }
+
+    [Fact]
+    public void SetOptions_EpsondsAutoLength_BackendRejectsOption()
+    {
+        var option = SaneOption.CreateBooleanForTesting(1, SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH);
+        var device = Substitute.For<ISaneDevice>();
+        device.GetOptions().Returns([option]);
+        device.When(x => x.SetOption(option, Arg.Any<bool>(), out Arg.Any<SaneOptionSetInfo>()))
+            .Do(_ => throw new NotSupportedException());
+
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color
+        });
+
+        device.Received(1).SetOption(option, true, out Arg.Any<SaneOptionSetInfo>());
+    }
+
+    [Fact]
+    public void SetOptions_EpsondsAutoLength_ReusedDevice()
+    {
+        var device = new DeviceOptionsMock([
+            SaneOption.CreateBooleanForTesting(1, SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH)
+        ]);
+        var options = new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color
+        };
+
+        _driver.SetOptions(device, options);
+        Assert.Equal(true, device.GetValue(1));
+
+        options.AutoCrop = false;
+        _driver.SetOptions(device, options);
+        Assert.Equal(false, device.GetValue(1));
+
+        options.AutoCrop = true;
+        _driver.SetOptions(device, options);
+        Assert.Equal(true, device.GetValue(1));
+
+        options.BitDepth = BitDepth.Grayscale;
+        _driver.SetOptions(device, options);
+        Assert.Equal(false, device.GetValue(1));
+    }
+
+    [Fact]
+    public void SetOptions_EpsondsAutoLength_ReadOnly()
+    {
+        var option = new SaneOption(new SaneOptionDescriptor
+        {
+            Name = SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH,
+            Type = SaneValueType.Bool,
+            Capabilities = SaneCapabilities.SoftDetect
+        }, 1);
+        var device = Substitute.For<ISaneDevice>();
+        device.GetOptions().Returns([option]);
+
+        _driver.SetOptions(device, new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color
+        });
+
+        device.DidNotReceive().SetOption(option, Arg.Any<bool>(), out Arg.Any<SaneOptionSetInfo>());
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void SetOptions_EpsondsAutoLength_AfterGeometryReload(bool explicitOverride)
+    {
+        var geometry = new[]
+        {
+            SaneOption.CreateFixedForTesting(1, SaneOptionNames.TOP_LEFT_X,
+                new SaneRange { Min = 0, Max = 216 }),
+            SaneOption.CreateFixedForTesting(2, SaneOptionNames.TOP_LEFT_Y,
+                new SaneRange { Min = 0, Max = 356 }),
+            SaneOption.CreateFixedForTesting(3, SaneOptionNames.BOT_RIGHT_X,
+                new SaneRange { Min = 0, Max = 216 }),
+            SaneOption.CreateFixedForTesting(4, SaneOptionNames.BOT_RIGHT_Y,
+                new SaneRange { Min = 0, Max = 356 })
+        };
+        var length = SaneOption.CreateBooleanForTesting(5, SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH);
+        var geometrySet = false;
+        var writes = new List<bool>();
+        var device = Substitute.For<ISaneDevice>();
+        device.GetOptions().Returns(_ => geometrySet ? geometry.Append(length) : geometry);
+        device.When(x => x.SetOption(geometry[3], Arg.Any<double>(), out Arg.Any<SaneOptionSetInfo>()))
+            .Do(call =>
+            {
+                geometrySet = true;
+                call[2] = SaneOptionSetInfo.ReloadOptions;
+            });
+        device.When(x => x.SetOption(length, Arg.Any<bool>(), out Arg.Any<SaneOptionSetInfo>()))
+            .Do(call =>
+            {
+                Assert.True(geometrySet);
+                writes.Add(call.ArgAt<bool>(1));
+            });
+        var options = new ScanOptions
+        {
+            AutoCrop = true, PaperSource = PaperSource.Feeder, BitDepth = BitDepth.Color,
+            PageSize = PageSize.A4
+        };
+        if (explicitOverride)
+        {
+            options.KeyValueOptions[SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH] = "false";
+        }
+
+        _driver.SetOptions(device, options);
+
+        Assert.True(geometrySet);
+        Assert.Equal(explicitOverride ? new[] { true, false } : new[] { true }, writes);
+    }
 
     [Fact]
     public void SetOptions_Flatbed()
