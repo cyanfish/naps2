@@ -1,7 +1,10 @@
 ﻿using System.Threading;
+using NAPS2.Ocr;
+using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Asserts;
+using NAPS2.Sdk.Tests.Mocks;
 using NSubstitute;
 using Xunit;
 using IScanDriver = NAPS2.Scan.Internal.IScanDriver;
@@ -75,6 +78,51 @@ public class RemoteScanControllerTests : ContextualTests
 
         Assert.Single(images);
         ImageAsserts.Similar(ImageResources.deskewed, images[0], ImageAsserts.XL_RMSE_THRESHOLD);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task BackgroundOcrAfterDuplexFlip(bool fileStorage)
+    {
+        if (fileStorage)
+        {
+            SetUpFileStorage();
+        }
+        SetUpOcr();
+        using var backSide = LoadImage(ImageResources.ocr_test).PerformTransform(new RotationTransform(180));
+        using var backSideData = backSide.SaveToMemoryStream(ImageFileFormat.Png);
+        var factory = new ScanDriverFactoryBuilder()
+            .WithScannedImages(ImageResources.blank1, backSideData.ToArray())
+            .Build();
+        var remoteController = new RemoteScanController(factory, new RemotePostProcessor(ScanningContext));
+        var ocrController = new OcrController(ScanningContext);
+        var ocrTasks = new List<Task<OcrResult>>();
+        ocrController.OcrStarted += (_, args) => ocrTasks.Add(args.ResultTask);
+        var controller = new ScanController(ScanningContext,
+            new LocalPostProcessor(ScanningContext, ocrController), new ScanOptionsValidator(),
+            new InProcScanBridgeFactory(new InProcScanBridge(ScanningContext, remoteController)));
+        var options = new ScanOptions
+        {
+            Device = new ScanDevice(Driver.Escl, "test_id", "test_name"),
+            PaperSource = PaperSource.Duplex,
+            FlipDuplexedPages = true,
+            ExcludeBlankPages = true,
+            OcrParams = new OcrParams("eng", OcrMode.Fast, 60)
+        };
+
+        var images = await controller.Scan(options).ToListAsync();
+
+        using var image = Assert.Single(images);
+        Assert.Equal(2, image.PostProcessingData.PageNumber);
+        Assert.Equal(PageSide.Back, image.PostProcessingData.PageSide);
+        var ocrResult = await Assert.Single(ocrTasks);
+        Assert.NotNull(ocrResult);
+        Assert.Equal("ADVERTISEMENT.", ocrResult.Words[0].Text);
+        Assert.True(ScanningContext.OcrRequestQueue.HasCachedResult(ScanningContext.OcrEngine!, image, options.OcrParams));
+        var pdfPath = P("duplex.pdf");
+        await new PdfExporter(ScanningContext).Export(pdfPath, [image], ocrParams: options.OcrParams);
+        PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", pdfPath);
     }
 
     private RemoteScanController CreateControllerWithMockDriver(IScanDriver scanDriver)
