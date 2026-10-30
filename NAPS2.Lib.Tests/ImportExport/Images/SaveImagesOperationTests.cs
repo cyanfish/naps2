@@ -1,5 +1,6 @@
 ﻿using NAPS2.ImportExport;
 using NAPS2.ImportExport.Images;
+using NAPS2.Ocr;
 using NAPS2.Sdk.Tests;
 using NAPS2.Sdk.Tests.Asserts;
 using NSubstitute;
@@ -20,7 +21,8 @@ public class SaveImagesOperationTests : ContextualTests
         _nameManager = new NameManager();
     }
 
-    private SaveImagesOperation CreateOperation() => new(_overwritePrompt, ImageContext, _nameManager);
+    private SaveImagesOperation CreateOperation() =>
+        new(_overwritePrompt, ImageContext, _nameManager, ScanningContext);
 
     private bool Start(SaveImagesOperation op, string fileName, IList<ProcessedImage> images,
         ImageSettings imageSettings = null, OverwriteMode overwriteMode = OverwriteMode.Prompt, int? batchCount = null)
@@ -47,6 +49,25 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.Equal(P("test.jpg"), op.FirstFileSaved);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
         Assert.Single(Folder.GetFiles());
+    }
+
+    [Fact]
+    public async Task JpegWithOcrSavesTextSidecars()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.autocrop_doc), "First page text" },
+            { LoadImage(ImageResources.autocrop_receipt), "Second page text" }
+        }, delay: 0, splitWords: true);
+        var op = CreateOperation();
+        var images = CreateScannedImages(ImageResources.autocrop_doc, ImageResources.autocrop_receipt);
+        Assert.True(op.Start(P("test$(n).jpg"), images, new ImageSettings(),
+            new SaveParams { DateTime = TestDate }, new OcrParams("eng")));
+
+        Assert.True(await op.Success);
+        Assert.Equal(4, Folder.GetFiles().Length);
+        Assert.Equal("First page text", File.ReadAllText(P("test1.txt")));
+        Assert.Equal("Second page text", File.ReadAllText(P("test2.txt")));
     }
 
     [Fact]

@@ -42,7 +42,7 @@ internal class AutomatedScanning
     private SaveParams _saveParams = null!;
     private NameContext _nameContext = null!;
     private List<string> _actualOutputPaths = null!;
-    private OcrParams _ocrParams = null!;
+    private OcrParams _ocrParams = OcrParams.Empty;
     private PageDimensions? _pageDimensions;
 
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
@@ -194,12 +194,13 @@ internal class AutomatedScanning
 
     private void ConfigureOcr()
     {
+        var jpegOutput = IsJpegFile(_options.OutputPath);
         if (_options.NoProfile)
         {
             // Don't use OCR-enabled settings from the GUI if --noprofile is set
             _config.Run.Set(c => c.EnableOcr, false);
         }
-        bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName);
+        bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName) || jpegOutput;
         if (!canUseOcr)
         {
             return;
@@ -207,6 +208,11 @@ internal class AutomatedScanning
         if (_options.DisableOcr)
         {
             _config.Run.Set(c => c.EnableOcr, false);
+        }
+        else if (jpegOutput)
+        {
+            _config.Run.Set(c => c.EnableOcr,
+                _options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang));
         }
         else if (_options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang))
         {
@@ -590,6 +596,13 @@ internal class AutomatedScanning
         return Path.GetExtension(path)?.ToLower() == ".pdf";
     }
 
+    private bool IsJpegFile(string? path)
+    {
+        var extension = Path.GetExtension(path);
+        return extension?.Equals(".jpg", StringComparison.OrdinalIgnoreCase) == true ||
+               extension?.Equals(".jpeg", StringComparison.OrdinalIgnoreCase) == true;
+    }
+
     private async Task ExportToImageFiles()
     {
         var path = _nameManager.Get(_options.OutputPath!, _nameContext);
@@ -624,7 +637,7 @@ internal class AutomatedScanning
                 }
             };
             op.Start(outputPath, scan, imageSettings,
-                _saveParams with { BatchCount = fileCount, BatchIndex = fileIndex });
+                _saveParams with { BatchCount = fileCount, BatchIndex = fileIndex }, _ocrParams);
             await op.Success;
             fileIndex += SaveImagesOperation.GetFileCount(outputPath, scan.Count, imageSettings);
         }

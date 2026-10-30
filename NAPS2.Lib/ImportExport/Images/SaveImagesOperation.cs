@@ -1,16 +1,22 @@
-﻿namespace NAPS2.ImportExport.Images;
+﻿using NAPS2.Ocr;
+using NAPS2.Scan;
+
+namespace NAPS2.ImportExport.Images;
 
 internal class SaveImagesOperation : OperationBase
 {
     private readonly IOverwritePrompt _overwritePrompt;
     private readonly ImageContext _imageContext;
+    private readonly ScanningContext _scanningContext;
     private readonly NameManager _nameManager;
 
-    public SaveImagesOperation(IOverwritePrompt overwritePrompt, ImageContext imageContext, NameManager nameManager)
+    public SaveImagesOperation(IOverwritePrompt overwritePrompt, ImageContext imageContext, NameManager nameManager,
+        ScanningContext scanningContext)
     {
         _overwritePrompt = overwritePrompt;
         _imageContext = imageContext;
         _nameManager = nameManager;
+        _scanningContext = scanningContext;
 
         ProgressTitle = MiscResources.SaveImagesProgress;
         AllowCancel = true;
@@ -29,7 +35,7 @@ internal class SaveImagesOperation : OperationBase
     /// <param name="imageSettings">The image settings.</param>
     /// <param name="saveParams">How files are named and existing files are handled.</param>
     public bool Start(string fileName, IList<ProcessedImage> images, ImageSettings imageSettings,
-        SaveParams? saveParams = null)
+        SaveParams? saveParams = null, OcrParams? ocrParams = null)
     {
         Status = new OperationStatus
         {
@@ -116,6 +122,10 @@ internal class SaveImagesOperation : OperationBase
                     {
                         return false;
                     }
+                    if (!await SaveOcrTextIfRequested(image, currentFileName, format, ocrParams))
+                    {
+                        return false;
+                    }
                     FirstFileSaved ??= currentFileName;
                     i++;
                 }
@@ -150,6 +160,36 @@ internal class SaveImagesOperation : OperationBase
             }
         }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
+        return true;
+    }
+
+    private async Task<bool> SaveOcrTextIfRequested(ProcessedImage image, string imagePath,
+        ImageFileFormat format, OcrParams? ocrParams)
+    {
+        if (format != ImageFileFormat.Jpeg || string.IsNullOrEmpty(ocrParams?.LanguageCode))
+        {
+            return true;
+        }
+        var ocrEngine = _scanningContext.OcrEngine ??
+                       throw new InvalidOperationException("OCR is enabled but no OCR engine is set.");
+        var tempImagePath = Path.Combine(_scanningContext.TempFolderPath,
+            Path.GetRandomFileName() + Path.GetExtension(imagePath));
+        if (!_scanningContext.OcrRequestQueue.HasCachedResult(ocrEngine, image, ocrParams))
+        {
+            File.Copy(imagePath, tempImagePath);
+        }
+        var ocrResult = await _scanningContext.OcrRequestQueue.Enqueue(_scanningContext, ocrEngine, image,
+            tempImagePath, ocrParams, OcrPriority.Foreground, CancelToken);
+        if (ocrResult == null)
+        {
+            if (CancelToken.IsCancellationRequested)
+            {
+                return false;
+            }
+            throw new InvalidOperationException($"OCR did not return text for {Path.GetFileName(imagePath)}.");
+        }
+        var text = string.Join(Environment.NewLine, ocrResult.Lines.Select(line => line.Text));
+        File.WriteAllText(Path.ChangeExtension(imagePath, ".txt"), text);
         return true;
     }
 

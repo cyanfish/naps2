@@ -18,11 +18,12 @@ public class AutoSaver
     private readonly ImageContext _imageContext;
     private readonly UiImageList _imageList;
     private readonly NameManager _nameManager;
+    private readonly ScanningContext _scanningContext;
 
     public AutoSaver(ErrorOutput errorOutput, DialogHelper dialogHelper,
         OperationProgress operationProgress, ISaveNotify notify, PdfExporter pdfExporter,
         IOverwritePrompt overwritePrompt, Naps2Config config, ImageContext imageContext, UiImageList imageList,
-        NameManager nameManager)
+        NameManager nameManager, ScanningContext scanningContext)
     {
         _errorOutput = errorOutput;
         _dialogHelper = dialogHelper;
@@ -32,6 +33,7 @@ public class AutoSaver
         _overwritePrompt = overwritePrompt;
         _config = config;
         _imageContext = imageContext;
+        _scanningContext = scanningContext;
         _imageList = imageList;
         _nameManager = nameManager;
     }
@@ -161,7 +163,7 @@ public class AutoSaver
         }
         else
         {
-            var op = new SaveImagesOperation(_overwritePrompt, _imageContext, _nameManager);
+            var op = new SaveImagesOperation(_overwritePrompt, _imageContext, _nameManager, _scanningContext);
             if (op.Start(path, images, _config.Get(c => c.ImageSettings), saveParams))
             {
                 _operationProgress.ShowProgress(op);

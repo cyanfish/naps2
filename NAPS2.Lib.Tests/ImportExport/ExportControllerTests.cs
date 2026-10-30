@@ -34,7 +34,7 @@ public class ExportControllerTests : ContextualTests
             new SavePdfOperation(new PdfExporter(ScanningContext), _overwritePrompt, nameManager,
                 _emailProviderFactory));
         operationFactory.Create<SaveImagesOperation>().Returns(_ =>
-            new SaveImagesOperation(_overwritePrompt, ImageContext, nameManager));
+            new SaveImagesOperation(_overwritePrompt, ImageContext, nameManager, ScanningContext));
 
         _controller = new ExportController(_dialogHelper, operationFactory, Substitute.For<IFormFactory>(),
             Substitute.For<OperationProgress>(), _config, new UiImageList(), nameManager);
