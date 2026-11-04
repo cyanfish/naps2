@@ -567,6 +567,9 @@
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Single page files</value>
   </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
+  </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Encrypt PDF</value>
   </data>
