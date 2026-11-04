@@ -11,6 +11,7 @@ public class Naps2ConfigTests
     {
         Assert.Equal("en", _config.Get(c => c.Culture));
         Assert.Equal("NAPS2", _config.Get(c => c.PdfSettings.Metadata.Creator));
+        Assert.True(_config.Get(c => c.PdfSettings.AllowJbig2));
     }
 
     [Fact]
@@ -45,6 +46,7 @@ public class Naps2ConfigTests
         _config.User.Set(c => c.PdfSettings.Metadata.Title, "b");
         _config.AppLocked.Set(c => c.PdfSettings.Metadata.Keywords, null);
         _config.Run.Set(c => c.PdfSettings.Metadata.Subject, "c");
+        _config.User.Set(c => c.PdfSettings.AllowJbig2, false);
         _config.AppDefault.Set(c => c.PdfSettings.DefaultFileName, null);
         _config.User.Set(c => c.ThumbnailSize, 42);
 
@@ -62,6 +64,7 @@ public class Naps2ConfigTests
         Assert.Equal("c", pdfSettings.Metadata.Subject);
         Assert.Equal("NAPS2", pdfSettings.Metadata.Creator);
         Assert.Null(pdfSettings.DefaultFileName);
+        Assert.False(pdfSettings.AllowJbig2);
 
         var commonConfig = _config.Get(c => c);
         Assert.Equal("a", commonConfig.PdfSettings.Metadata.Author);
@@ -70,6 +73,7 @@ public class Naps2ConfigTests
         Assert.Equal("c", commonConfig.PdfSettings.Metadata.Subject);
         Assert.Equal("NAPS2", commonConfig.PdfSettings.Metadata.Creator);
         Assert.Null(commonConfig.PdfSettings.DefaultFileName);
+        Assert.False(commonConfig.PdfSettings.AllowJbig2);
         Assert.Equal(42, commonConfig.ThumbnailSize);
     }
     

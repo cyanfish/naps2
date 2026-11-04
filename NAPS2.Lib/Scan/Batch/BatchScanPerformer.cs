@@ -282,7 +282,13 @@ public class BatchScanPerformer : IBatchScanPerformer
                     var exportParams = new PdfExportParams(
                         _config.Get(c => c.PdfSettings.Metadata).Substitute(_nameManager, saveParams.DateTime),
                         _config.Get(c => c.PdfSettings.Encryption),
-                        _config.Get(c => c.PdfSettings.Compat));
+                        _config.Get(c => c.PdfSettings.Compat))
+                    {
+                        Compression = new PdfCompression
+                        {
+                            AllowJbig2 = _config.Get(c => c.PdfSettings.AllowJbig2)
+                        }
+                    };
                     await _pdfExporter.Export(reservation.Name, images, exportParams, _config.DefaultOcrParams(),
                         _cancelToken);
                 }
