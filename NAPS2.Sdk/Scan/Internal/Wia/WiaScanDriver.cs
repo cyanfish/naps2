@@ -262,6 +262,8 @@ internal class WiaScanDriver : IScanDriver
             using var transfer = item.StartTransfer();
             Exception? scanException = null;
             bool hasAtLeastOneImage = false;
+            int pageCount = 0;
+            bool PageLimitReached() => _options.MaxPages > 0 && pageCount >= _options.MaxPages;
             transfer.PageScanned += (sender, args) =>
             {
                 try
@@ -273,6 +275,7 @@ internal class WiaScanDriver : IScanDriver
                         return;
                     }
                     hasAtLeastOneImage = true;
+                    pageCount++;
                     IMemoryImage image;
                     try
                     {
@@ -288,7 +291,7 @@ internal class WiaScanDriver : IScanDriver
                     {
                         _callback(image);
                     }
-                    if (_options.PaperSource != PaperSource.Flatbed)
+                    if (_options.PaperSource != PaperSource.Flatbed && !PageLimitReached())
                     {
                         // Feeder scans may have more pages, so signal the start of the next one
                         _scanEvents.PageStart();
@@ -318,7 +321,7 @@ internal class WiaScanDriver : IScanDriver
                     // For WIA 1.0 feeder scans, we need to repeatedly call Download until WIA_ERROR_PAPER_EMPTY is received.
                     try
                     {
-                        while (!_cancelToken.IsCancellationRequested && scanException == null)
+                        while (!_cancelToken.IsCancellationRequested && scanException == null && !PageLimitReached())
                         {
                             transfer.Download();
                         }
@@ -409,7 +412,8 @@ internal class WiaScanDriver : IScanDriver
                 }
                 else
                 {
-                    SafeSetProperty(item, WiaPropertyId.IPS_PAGES, 0);
+                    // 0 means all the pages in the feeder
+                    SafeSetProperty(item, WiaPropertyId.IPS_PAGES, Math.Max(_options.MaxPages, 0));
                 }
             }
 

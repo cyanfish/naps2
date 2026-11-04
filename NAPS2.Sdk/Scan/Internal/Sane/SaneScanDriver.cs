@@ -287,11 +287,11 @@ internal class SaneScanDriver : IScanDriver
                     }
                     else
                     {
-                        while (ScanPage(device, scanEvents, optionData) is { } image)
+                        ScanFeeder(device, scanEvents, optionData, options.MaxPages, image =>
                         {
                             hasAtLeastOneImage = true;
                             callback(image);
-                        }
+                        });
                     }
                 }
                 finally
@@ -518,6 +518,21 @@ internal class SaneScanDriver : IScanDriver
             _scanningContext.Logger.LogDebug("Correcting DPI from {InDpi} to {OutDpi}", dpi, targetDpi);
         }
         return targetDpi;
+    }
+
+    /// <summary>
+    /// Scans pages from the feeder until it is empty or maxPages pages have been scanned (0 means no limit). The next
+    /// page isn't started once the limit is reached, so the scanner doesn't feed another sheet.
+    /// </summary>
+    internal void ScanFeeder(ISaneDevice device, IScanEvents scanEvents, OptionData optionData, int maxPages,
+        Action<IMemoryImage> callback)
+    {
+        int pageCount = 0;
+        while ((maxPages <= 0 || pageCount < maxPages) && ScanPage(device, scanEvents, optionData) is { } image)
+        {
+            pageCount++;
+            callback(image);
+        }
     }
 
     internal IMemoryImage? ScanPage(ISaneDevice device, IScanEvents scanEvents, OptionData optionData)
