@@ -4,6 +4,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
 using Eto.Mac.Drawing;
+using Eto.Mac.Forms.Controls;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Mac;
@@ -61,6 +62,10 @@ public class MacEtoPlatform : EtoPlatform
         {
             nsButton.ImageHugsTitle = true;
             nsButton.Title = Environment.NewLine + nsButton.Title;
+        }
+        if (button is { ImagePosition: ButtonImagePosition.Overlay, Handler: ButtonHandler handler })
+        {
+            handler.BezelStyle = NSBezelStyle.Rounded;
         }
         var image = nsButton.Image!;
         if (image.Representations() is [NSBitmapImageRep rep, ..])

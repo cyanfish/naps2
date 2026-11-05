@@ -544,8 +544,7 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 OutputPath = path,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3, Image4, Image5, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -560,8 +559,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Interleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image3, Image5, Image2, Image4, Image6 });
+            }, Image1, Image3, Image5, Image2, Image4, Image6);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3, Image4, Image5, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -576,8 +574,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 AltInterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image3, Image5, Image6, Image4, Image2 });
+            }, Image1, Image3, Image5, Image6, Image4, Image2);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3, Image4, Image5, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -592,8 +589,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Deinterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image1, Image3, Image5, Image2, Image4, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -608,8 +604,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 AltDeinterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image1, Image3, Image5, Image6, Image4, Image2);
         AssertRecoveryCleanedUp();
     }
@@ -624,8 +619,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Reverse = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image6, Image5, Image4, Image3, Image2, Image1);
         AssertRecoveryCleanedUp();
     }
@@ -641,8 +635,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Interleave = true,
                 Deinterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         Assert.False(File.Exists(path));
         AssertRecoveryCleanedUp();
     }
@@ -658,8 +651,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Interleave = true,
                 Reverse = true,
                 Verbose = true
-            },
-            new[] { Image1, Image3, Image5, Image2, Image4, Image6 });
+            }, Image1, Image3, Image5, Image2, Image4, Image6);
         PdfAsserts.AssertImages(path, Image6, Image5, Image4, Image3, Image2, Image1);
         AssertRecoveryCleanedUp();
     }
@@ -694,8 +686,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         PdfAsserts.AssertPageCount(1, P("test.1.pdf"));
         PdfAsserts.AssertPageCount(1, P("test.2.pdf"));
         PdfAsserts.AssertPageCount(1, P("test.3.pdf"));
@@ -713,8 +704,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         PdfAsserts.AssertImages(P("test1.pdf"), Image1);
         PdfAsserts.AssertImages(P("test2.pdf"), Image2);
         PdfAsserts.AssertImages(P("test3.pdf"), Image3);
@@ -733,8 +723,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = P("test.pdf"),
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         Assert.Equal("blah", File.ReadAllText(P("test.1.pdf")));
         Assert.Equal("blah", File.ReadAllText(P("test.2.pdf")));
         PdfAsserts.AssertImages(P("test.3.pdf"), Image1);
@@ -755,8 +744,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Split = true,
                 ForceOverwrite = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         PdfAsserts.AssertImages(P("test.1.pdf"), Image1);
         PdfAsserts.AssertImages(P("test.2.pdf"), Image2);
         Assert.False(File.Exists(P("test.3.pdf")));
@@ -775,8 +763,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Split = true,
                 ForceOverwrite = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         PdfAsserts.AssertImages(P("test1.pdf"), Image1);
         PdfAsserts.AssertImages(P("test2.pdf"), Image2);
         Assert.False(File.Exists(P("test3.pdf")));
@@ -793,8 +780,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = P("test$(n).pdf"),
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         Assert.Equal("blah", File.ReadAllText(P("test1.pdf")));
         PdfAsserts.AssertImages(P("test2.pdf"), Image1);
         PdfAsserts.AssertImages(P("test3.pdf"), Image2);
@@ -811,8 +797,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 SplitSize = 2,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5 });
+            }, Image1, Image2, Image3, Image4, Image5);
         PdfAsserts.AssertImages(P("test1.pdf"), Image1, Image2);
         PdfAsserts.AssertImages(P("test2.pdf"), Image3, Image4);
         PdfAsserts.AssertImages(P("test3.pdf"), Image5);
@@ -1267,8 +1252,7 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 OutputPath = path,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3);
         AssertRecoveryCleanedUp();
     }
@@ -1283,8 +1267,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
         ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
         ImageAsserts.Similar(Image3, ImageContext.Load(P("test3.jpg")));
@@ -1304,8 +1287,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Split = true,
                 ForceOverwrite = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
         ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
         Assert.False(File.Exists(P("test3.jpg")));
@@ -1321,11 +1303,28 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = P("test.jpg"),
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         ImageAsserts.Similar(Image1, ImageContext.Load(P("test.1.jpg")));
         ImageAsserts.Similar(Image2, ImageContext.Load(P("test.2.jpg")));
         Assert.False(File.Exists(P("test.jpg")));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Theory]
+    [InlineData("test.tiff", "test.1.tiff", "test.2.tiff")]
+    [InlineData("test$(n).tiff", "test1.tiff", "test2.tiff")]
+    public async Task SplitToTiffFiles(string outputName, string firstName, string secondName)
+    {
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P(outputName),
+                Split = true,
+                ForceOverwrite = true
+            }, Image1, Image2);
+        ImageAsserts.Similar(Image1, ImageContext.Load(P(firstName)));
+        ImageAsserts.Similar(Image2, ImageContext.Load(P(secondName)));
+        Assert.Equal(2, Directory.GetFiles(FolderPath, "*.tiff").Length);
         AssertRecoveryCleanedUp();
     }
 

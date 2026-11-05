@@ -309,13 +309,12 @@ public class AutoSaverTests : ContextualTests
         var scanned = CreateScannedImages(ImageResources.dog);
         await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.pdf"), ImageResources.dog);
     }
 
     [Fact]
-    public async Task PdfNoPlaceholder_FirstFileIsNumbered()
+    public async Task PdfNoPlaceholder_SingleFileStartsUnnumbered()
     {
-        // Auto save is a sequence of saves to the same name, so even the first file is numbered
         var settings = new AutoSaveSettings
         {
             FilePath = P("test.pdf")
@@ -326,8 +325,8 @@ public class AutoSaverTests : ContextualTests
             .ToListAsync();
 
         Assert.Equal(2, Folder.GetFiles().Length);
-        PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog);
-        PdfAsserts.AssertImages(P("test.2.pdf"), ImageResources.dog_gray);
+        PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog_gray);
     }
 
     [Fact]
