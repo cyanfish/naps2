@@ -18,6 +18,69 @@ public class ScanServerTests(ITestOutputHelper testOutputHelper)
     }
 
     [NetworkFact(Timeout = TIMEOUT)]
+    public async Task GetCaps()
+    {
+        _bridge.MockCaps = new ScanCaps
+        {
+            MetadataCaps = new MetadataCaps
+            {
+                Manufacturer = "testManufacturer",
+                SerialNumber = "testSerialNumber"
+            },
+            PaperSourceCaps = new PaperSourceCaps
+            {
+                SupportsFlatbed = true,
+                SupportsFeeder = false,
+                SupportsDuplex = false
+            },
+            FlatbedCaps = new PerSourceCaps
+            {
+                DpiCaps = new DpiCaps { Values = [100, 300, 600] },
+                BitDepthCaps = new BitDepthCaps
+                {
+                    SupportsColor = true,
+                    SupportsGrayscale = true,
+                    SupportsBlackAndWhite = false
+                },
+                PageSizeCaps = new PageSizeCaps { ScanArea = PageSize.Letter }
+            }
+        };
+        var caps = await _client.GetCaps(_clientDevice);
+        Assert.Equal("testManufacturer", caps.MetadataCaps?.Manufacturer);
+        Assert.Equal("testSerialNumber", caps.MetadataCaps?.SerialNumber);
+        Assert.NotNull(caps.PaperSourceCaps);
+        Assert.True(caps.PaperSourceCaps.SupportsFlatbed);
+        Assert.False(caps.PaperSourceCaps.SupportsFeeder);
+        Assert.False(caps.PaperSourceCaps.SupportsDuplex);
+        Assert.Null(caps.FeederCaps);
+        Assert.Null(caps.DuplexCaps);
+        Assert.NotNull(caps.FlatbedCaps);
+        Assert.Equal(new[] { 100, 300, 600 }, caps.FlatbedCaps.DpiCaps?.Values);
+        Assert.NotNull(caps.FlatbedCaps.BitDepthCaps);
+        Assert.True(caps.FlatbedCaps.BitDepthCaps.SupportsColor);
+        Assert.True(caps.FlatbedCaps.BitDepthCaps.SupportsGrayscale);
+        Assert.False(caps.FlatbedCaps.BitDepthCaps.SupportsBlackAndWhite);
+        Assert.Equal(8.5m, caps.FlatbedCaps.PageSizeCaps?.ScanArea?.WidthInInches);
+        Assert.Equal(11m, caps.FlatbedCaps.PageSizeCaps?.ScanArea?.HeightInInches);
+    }
+
+    [NetworkFact(Timeout = TIMEOUT)]
+    public async Task GetCapsWhenUnavailable()
+    {
+        // If the backend can't provide caps (e.g. the physical device is offline), we should fall back to a default
+        // set of capabilities.
+        _bridge.Error = new DeviceException(SdkResources.DeviceOffline);
+        var caps = await _client.GetCaps(_clientDevice);
+        Assert.NotNull(caps.PaperSourceCaps);
+        Assert.True(caps.PaperSourceCaps.SupportsFlatbed);
+        Assert.True(caps.PaperSourceCaps.SupportsFeeder);
+        Assert.True(caps.PaperSourceCaps.SupportsDuplex);
+        Assert.NotNull(caps.FlatbedCaps);
+        Assert.NotNull(caps.FeederCaps);
+        Assert.NotNull(caps.DuplexCaps);
+    }
+
+    [NetworkFact(Timeout = TIMEOUT)]
     public async Task Scan()
     {
         _bridge.MockOutput = CreateScannedImages(ImageResources.dog);
