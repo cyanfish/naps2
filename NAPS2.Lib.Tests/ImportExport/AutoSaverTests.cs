@@ -315,6 +315,7 @@ public class AutoSaverTests : ContextualTests
     [Fact]
     public async Task PdfNoPlaceholder_FirstFileIsNumbered()
     {
+        // Auto save is a sequence of saves to the same name, so even the first file is numbered
         var settings = new AutoSaveSettings
         {
             FilePath = P("test.pdf")
