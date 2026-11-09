@@ -19,8 +19,6 @@ public record PdfSettings
 
     public bool SinglePagePdfs { get; set; }
 
-    public bool AllowJbig2 { get; set; } = true;
-
     [Config]
     public PdfMetadata Metadata
     {

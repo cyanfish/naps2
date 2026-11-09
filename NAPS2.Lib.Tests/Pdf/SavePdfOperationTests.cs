@@ -67,15 +67,6 @@ public class SavePdfOperationTests : ContextualTests
     }
 
     [Fact]
-    public async Task SingleFileWithoutJbig2()
-    {
-        Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog_bw),
-            new PdfSettings { AllowJbig2 = false }));
-
-        PdfAsserts.AssertImageFilter(P("test.pdf"), 0, "CCITTFaxDecode");
-    }
-
-    [Fact]
     public async Task DatePlaceholders()
     {
         Assert.True(await Save(P("test_$(YYYY)-$(MM)-$(DD)_$(hh)_$(mm)_$(ss).pdf"),
