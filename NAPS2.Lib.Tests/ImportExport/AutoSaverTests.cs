@@ -313,7 +313,7 @@ public class AutoSaverTests : ContextualTests
     }
 
     [Fact]
-    public async Task PdfNoPlaceholder_SingleFileStartsUnnumbered()
+    public async Task PdfNoPlaceholder_SingleFileIsNumbered()
     {
         var settings = new AutoSaveSettings
         {
@@ -325,8 +325,8 @@ public class AutoSaverTests : ContextualTests
             .ToListAsync();
 
         Assert.Equal(2, Folder.GetFiles().Length);
-        PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
-        PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog_gray);
+        PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P("test.2.pdf"), ImageResources.dog_gray);
     }
 
     [Fact]

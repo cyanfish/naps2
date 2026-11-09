@@ -84,7 +84,7 @@ public class AutoSaver
             var saveParams = new SaveParams
             {
                 OverwriteMode = OverwriteMode.Never,
-                OpenEndedSequence = scans.Count > 1
+                OpenEndedSequence = scans.Count > 1 || !NameManager.ContainsPlaceholders(settings.FilePath)
             };
             foreach (var (imagesToSave, i) in scans.Select((x, i) => (x, i)))
             {
