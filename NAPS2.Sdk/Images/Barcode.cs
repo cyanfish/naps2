@@ -1,3 +1,5 @@
+using ZXing;
+
 namespace NAPS2.Images;
 
 /// <summary>
@@ -14,5 +16,28 @@ public record Barcode(bool IsDetectionAttempted, bool IsDetected, string? Detect
     {
     }
 
+    public BarcodeFormat? DetectedFormat { get; init; }
+
+    public PatchCodeType? PatchCode => DetectedText switch
+    {
+        "PATCH1" => PatchCodeType.PatchI,
+        "PATCH2" => PatchCodeType.PatchII,
+        "PATCH3" => PatchCodeType.PatchIII,
+        "PATCH4" => PatchCodeType.PatchIV,
+        "PATCH6" => PatchCodeType.PatchVI,
+        PATCH_T_TEXT => PatchCodeType.PatchT,
+        _ => null
+    };
+
     public bool IsPatchT => DetectedText == PATCH_T_TEXT;
+}
+
+public enum PatchCodeType
+{
+    PatchI,
+    PatchII,
+    PatchIII,
+    PatchIV,
+    PatchVI,
+    PatchT
 }

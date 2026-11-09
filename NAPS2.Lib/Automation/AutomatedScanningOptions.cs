@@ -9,7 +9,7 @@ public class AutomatedScanningOptions
 
     [Option('o', "output", HelpText = "The name and path of the file to save." +
                                       " The extension determines the output type (e.g. .pdf for a PDF file, .jpg for a JPEG)." +
-                                      " Placeholders can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number).")]
+                                      " Placeholders can be used (e.g. $(YYYY)-$(MM)-$(DD) for the date, $(hh)_$(mm)_$(ss) for the time, $(nnnn) for an auto-incrementing number, $(barcode) for a barcode value when splitting by barcode).")]
     public string? OutputPath { get; set; }
 
     [Option('a', "autosave", HelpText = "Use the Auto Save settings from the selected profile." +
@@ -131,8 +131,35 @@ public class AutomatedScanningOptions
     [Option("splitscans", HelpText = "Split the pages into multiple PDF/TIFF files, one for each scan.")]
     public bool SplitScans { get; set; }
 
-    [Option("splitpatcht", HelpText = "Split the pages into multiple PDF/TIFF files, separating by Patch-T.")]
+    [Option("splitpatcht", HelpText = "Split the pages into multiple PDF/TIFF files, separating by Patch-T." +
+                                     " This option is retained for backwards compatibility.")]
     public bool SplitPatchT { get; set; }
+
+    [Option("splitbarcode", HelpText = "Split the pages into multiple PDF/TIFF files, separating by barcode." +
+                                       " Use $(barcode) in the output path to include the barcode value in the file name." +
+                                       " Invalid filename characters in the value are replaced with underscores by default." +
+                                       " Barcode pages are kept unless --removebarcode is specified.")]
+    public bool SplitBarcode { get; set; }
+
+    [Option("nobarcodefilter", HelpText = "Do not replace invalid filename characters in the $(barcode) placeholder." +
+                                         " This can allow barcode values to create paths outside the output directory.")]
+    public bool NoBarcodeFilter { get; set; }
+
+    [Option("removebarcode", HelpText = "Remove barcode separator pages when using --splitbarcode.")]
+    public bool RemoveBarcodePage { get; set; }
+
+    [Option("patchcodes", HelpText = "A comma-separated list of patch codes to split on when using --splitbarcode." +
+                                    " Possible values: patchi, patchii, patchiii, patchiv, patchvi, patcht." +
+                                    " If barcode types are also specified, either filter can match.")]
+    public string? PatchCodes { get; set; }
+
+    [Option("barcodetypes", HelpText = "A comma-separated list of barcode formats to split on when using --splitbarcode." +
+                                      " Possible values include code3of9, code128, qr_code, upc_a, ean_13." +
+                                      " If patch codes are also specified, either filter can match.")]
+    public string? BarcodeTypes { get; set; }
+
+    [Option("keeppatch", HelpText = "Keep patch-code separator pages when splitting by patch code or barcode.")]
+    public bool KeepPatch { get; set; }
 
     [Option("splitsize",
         HelpText = "Split the pages into multiple PDF/TIFF files with the given number of pages per file.")]

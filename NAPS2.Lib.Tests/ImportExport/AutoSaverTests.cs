@@ -309,7 +309,7 @@ public class AutoSaverTests : ContextualTests
         var scanned = CreateScannedImages(ImageResources.dog);
         await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.pdf"), ImageResources.dog);
     }
 
     [Fact]

@@ -718,6 +718,36 @@ namespace NAPS2.Sdk.Tests {
                 return ((byte[])(obj));
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] barcodes {
+            get {
+                object obj = ResourceManager.GetObject("barcodes", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] barcode_code128 {
+            get {
+                object obj = ResourceManager.GetObject("barcode_code128", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] barcode_code39 {
+            get {
+                object obj = ResourceManager.GetObject("barcode_code39", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].

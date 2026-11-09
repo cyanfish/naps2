@@ -5,5 +5,6 @@ public enum SaveSeparator
     None,
     FilePerPage,
     FilePerScan,
-    PatchT
+    PatchT,
+    Barcode
 }

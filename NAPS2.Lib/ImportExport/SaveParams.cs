@@ -30,4 +30,8 @@ public record SaveParams
     /// The date and time used for placeholders. The same value should be used for all files saved together.
     /// </summary>
     public DateTime DateTime { get; init; } = DateTime.Now;
+
+    public string? BarcodeValue { get; init; }
+
+    public bool FilterBarcode { get; init; } = true;
 }
