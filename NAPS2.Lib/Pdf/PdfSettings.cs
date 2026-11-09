@@ -6,11 +6,13 @@ public record PdfSettings
 {
     private PdfMetadata _metadata;
     private PdfEncryption _encryption;
+    private PdfCompression _compression;
 
     public PdfSettings()
     {
         _metadata = new PdfMetadata();
         _encryption = new PdfEncryption();
+        _compression = new PdfCompression();
     }
 
     public string? DefaultFileName { get; set; }
@@ -18,8 +20,6 @@ public record PdfSettings
     public bool SkipSavePrompt { get; set; }
 
     public bool SinglePagePdfs { get; set; }
-
-    public bool AllowJbig2 { get; set; } = true;
 
     [Config]
     public PdfMetadata Metadata
@@ -33,6 +33,13 @@ public record PdfSettings
     {
         get => _encryption;
         set => _encryption = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    [Config]
+    public PdfCompression Compression
+    {
+        get => _compression;
+        set => _compression = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     public PdfCompat Compat { get; set; }

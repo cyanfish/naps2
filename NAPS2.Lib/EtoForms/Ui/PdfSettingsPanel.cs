@@ -69,7 +69,6 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
             _defaultFilePath,
             _skipSavePrompt,
             _singlePagePdfs,
-            _allowJbig2,
             L.GroupBox(
                 UiStrings.Metadata,
                 L.Column(
@@ -96,7 +95,10 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
             ),
             L.GroupBox(
                 UiStrings.Compatibility,
-                _compat
+                L.Column(
+                    _compat,
+                    _allowJbig2
+                )
             )
         );
     }
@@ -109,7 +111,10 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
                 DefaultFileName = _defaultFilePath.Text,
                 SkipSavePrompt = _skipSavePrompt.IsChecked(),
                 SinglePagePdfs = _singlePagePdfs.IsChecked(),
-                AllowJbig2 = _allowJbig2.IsChecked(),
+                Compression = new PdfCompression
+                {
+                    AllowJbig2 = _allowJbig2.IsChecked()
+                },
                 Metadata = new PdfMetadata
                 {
                     Title = _title.Text,
@@ -140,7 +145,7 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
             _defaultFilePath.Text = value.DefaultFileName;
             _skipSavePrompt.Checked = value.SkipSavePrompt;
             _singlePagePdfs.Checked = value.SinglePagePdfs;
-            _allowJbig2.Checked = value.AllowJbig2;
+            _allowJbig2.Checked = value.Compression.AllowJbig2;
             _title.Text = value.Metadata.Title;
             _author.Text = value.Metadata.Author;
             _subject.Text = value.Metadata.Subject;

@@ -96,7 +96,7 @@ internal class SavePdfOperation : OperationBase
                                 new PdfExportParams(pdfSettings.Metadata.Substitute(_nameManager, context.DateTime),
                                     pdfSettings.Encryption, pdfSettings.Compat)
                                 {
-                                    Compression = new PdfCompression { AllowJbig2 = pdfSettings.AllowJbig2 }
+                                    Compression = pdfSettings.Compression
                                 }, ocrParams, progress),
                         GetSaveErrorMessage);
                     if (!result)

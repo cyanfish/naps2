@@ -70,7 +70,7 @@ public class SavePdfOperationTests : ContextualTests
     public async Task SingleFileWithoutJbig2()
     {
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog_bw),
-            new PdfSettings { AllowJbig2 = false }));
+            new PdfSettings { Compression = new PdfCompression { AllowJbig2 = false } }));
 
         PdfAsserts.AssertImageFilter(P("test.pdf"), 0, "CCITTFaxDecode");
     }
