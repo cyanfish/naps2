@@ -313,7 +313,7 @@ public class AutoSaverTests : ContextualTests
     }
 
     [Fact]
-    public async Task PdfNoPlaceholder_SingleFileIsNumbered()
+    public async Task PdfNoPlaceholder_FirstFileIsNumbered()
     {
         var settings = new AutoSaveSettings
         {
