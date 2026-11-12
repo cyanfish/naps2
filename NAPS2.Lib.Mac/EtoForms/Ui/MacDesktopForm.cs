@@ -42,6 +42,8 @@ public class MacDesktopForm : DesktopForm
             editWithController)
     {
         _sidebar = sidebar;
+        // Allow the form to be re-shown after closing if the user clicks it again in the taskbar
+        this.ToNative().ReleaseWhenClosed(false);
     }
 
     protected override LayoutElement BuildSidebarLayout(LayoutElement mainContent)
