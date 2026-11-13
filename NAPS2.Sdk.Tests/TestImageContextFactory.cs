@@ -25,8 +25,10 @@ public static class TestImageContextFactory
                 new NAPS2.Images.Mac.MacImageContext()
 #elif LINUX
                 new NAPS2.Images.Gtk.GtkImageContext()
-#else
+#elif WINDOWS
                 new NAPS2.Images.Gdi.GdiImageContext()
+#else
+                new NAPS2.Images.Skia.SkiaImageContext()
 #endif
         };
     }
