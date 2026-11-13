@@ -27,7 +27,9 @@ public class TestCommand : ICommand<TestOptions>
         Output.Info($"Building test projects ({string.Join(", ", scopes)})");
         foreach (var project in projects)
         {
-            Cli.Run("dotnet", $"build {project}");
+            // On Mac, also build the test projects as app bundles to test AppKit properly
+            // We don't do this by default because IDEs (e.g. Rider) can't handle it.
+            Cli.Run("dotnet", $"build {project}", new() { { "NAPS2_MAC_TEST_APPKIT", "1" } });
         }
 
         // Run all the test modules in a single invocation so they can execute in parallel
