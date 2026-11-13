@@ -37,7 +37,7 @@ public class TestCommand : ICommand<TestOptions>
         var testModules = string.Join(";", projects.Select(project =>
             $"{project}/bin/Debug/{testFramework}/{project}.dll"));
         Cli.Run("dotnet",
-            $"test --test-modules \"{testModules}\" --root-directory \"{Paths.SolutionRoot}\" --output Detailed --retry-failed-tests 1",
+            $"test --test-modules \"{testModules}\" --root-directory \"{Paths.SolutionRoot}\" --output Detailed --retry-failed-tests 1 -- --parallel-algorithm aggressive",
             new()
         {
             { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
