@@ -12,35 +12,40 @@ public class TestCommand : ICommand<TestOptions>
             : OperatingSystem.IsLinux()
                 ? $"NAPS2.App.Gtk/bin/Debug/net10.0/linux-{arch}"
                 : $"NAPS2.App.WinForms/bin/Debug/net10.0-windows/win-{arch}";
-        bool ranTests = false;
-
-        void RunTests(string project)
-        {
-            ranTests = true;
-            Cli.Run("dotnet", $"test --project {project} --output Detailed --retry-failed-tests 1", new()
-            {
-                { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
-                { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" },
-                { "NAPS2_TEST_NONETWORK", opts.NoNetwork ? "1" : "0" },
-                { "NAPS2_TEST_IMAGES", opts.Images ?? "" }
-            });
-        }
+        var testFramework = OperatingSystem.IsWindows() ? "net10.0-windows" : "net10.0";
 
         var scopes = string.IsNullOrEmpty(opts.Scope) ? ["sdk", "lib", "app"] : opts.Scope.Split('+');
+        var projects = new List<string>();
+        if (scopes.Contains("sdk")) projects.Add("NAPS2.Sdk.Tests");
+        if (scopes.Contains("lib")) projects.Add("NAPS2.Lib.Tests");
+        if (scopes.Contains("app")) projects.Add("NAPS2.App.Tests");
+        if (projects.Count == 0)
+        {
+            Output.Info("Invalid scopes, no tests run.");
+            return 0;
+        }
+
+        Output.Info($"Building test projects ({string.Join(", ", scopes)})");
+        foreach (var project in projects)
+        {
+            Cli.Run("dotnet", $"build {project}");
+        }
+
+        // Run all the test modules in a single invocation so they can execute in parallel
         Output.Info($"Running tests ({string.Join(", ", scopes)})");
-        if (scopes.Contains("sdk"))
+        // Module paths are globs relative to the root directory
+        var testModules = string.Join(";", projects.Select(project =>
+            $"{project}/bin/Debug/{testFramework}/{project}.dll"));
+        Cli.Run("dotnet",
+            $"test --test-modules \"{testModules}\" --root-directory \"{Paths.SolutionRoot}\" --output Detailed --retry-failed-tests 1",
+            new()
         {
-            RunTests("NAPS2.Sdk.Tests");
-        }
-        if (scopes.Contains("lib"))
-        {
-            RunTests("NAPS2.Lib.Tests");
-        }
-        if (scopes.Contains("app"))
-        {
-            RunTests("NAPS2.App.Tests");
-        }
-        Output.Info(ranTests ? "Tests passed." : "Invalid scopes, no tests run.");
+            { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
+            { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" },
+            { "NAPS2_TEST_NONETWORK", opts.NoNetwork ? "1" : "0" },
+            { "NAPS2_TEST_IMAGES", opts.Images ?? "" }
+        });
+        Output.Info("Tests passed.");
         return 0;
     }
 }
