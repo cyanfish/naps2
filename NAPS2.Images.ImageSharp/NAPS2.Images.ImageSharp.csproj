@@ -8,7 +8,7 @@
 
         <Title>NAPS2.Images.ImageSharp</Title>
         <Product>NAPS2.Images.ImageSharp</Product>
-        <Description>Images based on ImageSharp for NAPS2.Sdk.</Description>
+        <Description>Images based on ImageSharp for NAPS2.Sdk. DEPRECATED: use NAPS2.Images.Skia instead.</Description>
         <PackageTags>naps2</PackageTags>
     </PropertyGroup>
 

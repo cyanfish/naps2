@@ -5,6 +5,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace NAPS2.Images.ImageSharp;
 
+[Obsolete("NAPS2.Images.ImageSharp is deprecated. Use NAPS2.Images.Skia instead.")]
 public class ImageSharpImageContext : ImageContext
 {
     private readonly ImageSharpImageTransformer _imageTransformer;
