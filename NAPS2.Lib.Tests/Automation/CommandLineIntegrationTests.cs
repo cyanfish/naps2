@@ -10,7 +10,6 @@ using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Mocks;
 using NSubstitute;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Lib.Tests.Automation;
 

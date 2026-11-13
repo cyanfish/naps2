@@ -95,7 +95,7 @@ public class DesktopControllerTests : ContextualTests
             new RecoveryOperation(Substitute.For<IFormFactory>(), new RecoveryManager(ScanningContext)));
     }
 
-    public override async Task DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
         _desktopController.Cleanup();

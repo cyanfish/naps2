@@ -27,7 +27,7 @@ public class DownloadControllerTests : ContextualTests
         _controller = new(ScanningContext, _httpHandler.ToHttpClient());
     }
 
-    public override async Task DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         _animalsZipStream.Dispose();
         _dogsGzipStream.Dispose();

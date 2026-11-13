@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">net10.0-windows</TargetFrameworks>
         <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">net10.0</TargetFrameworks>
+        <OutputType>Exe</OutputType>
         <RootNamespace>NAPS2.Sdk.ScannerTests</RootNamespace>
     </PropertyGroup>
 
@@ -14,10 +15,8 @@
         <ProjectReference Include="..\NAPS2.Sdk.Tests\NAPS2.Sdk.Tests.csproj" />
 
         <PackageReference Include="NAPS2.Sane.Binaries" Version="1.2.3" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
         <PackageReference Include="NSubstitute" Version="6.0.0" />
-        <PackageReference Include="xunit" Version="2.9.3" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" PrivateAssets="all" />
+        <PackageReference Include="xunit.v3" Version="4.0.3" />
     </ItemGroup>
 
     <ItemGroup>

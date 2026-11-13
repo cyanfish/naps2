@@ -8,7 +8,6 @@ using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Unmanaged;
 using NSubstitute;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests;
 
@@ -170,9 +169,9 @@ public class ContextualTests : IAsyncLifetime
         return CopyResourceToFile(resource, FolderPath, fileName);
     }
 
-    public virtual Task InitializeAsync() => Task.CompletedTask;
+    public virtual ValueTask InitializeAsync() => ValueTask.CompletedTask;
 
-    public virtual Task DisposeAsync()
+    public virtual ValueTask DisposeAsync()
     {
         ScanningContext.Dispose();
         try
@@ -190,7 +189,7 @@ public class ContextualTests : IAsyncLifetime
             {
             }
         }
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 
     public bool IsDisposed(ProcessedImage image)

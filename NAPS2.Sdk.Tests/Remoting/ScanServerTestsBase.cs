@@ -9,7 +9,6 @@ using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Mocks;
 using NSubstitute;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 
@@ -51,9 +50,9 @@ public class ScanServerTestsBase : ContextualTests
         _clientDevice = new ScanDevice(Driver.Escl, _uuid, _serverDisplayName);
     }
 
-    public override Task InitializeAsync() => _server.Start();
+    public override async ValueTask InitializeAsync() => await _server.Start();
 
-    public override async Task DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         await _server.Stop();
         await base.DisposeAsync();

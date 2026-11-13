@@ -26,7 +26,7 @@ public class AppiumTests : ContextualTests
         ResetMainWindow();
     }
 
-    public override async Task DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         try
         {

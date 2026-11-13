@@ -5,7 +5,6 @@ using NAPS2.Escl;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 

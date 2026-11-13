@@ -12,7 +12,6 @@ public class TestCommand : ICommand<TestOptions>
             : OperatingSystem.IsLinux()
                 ? $"NAPS2.App.Gtk/bin/Debug/net10.0/linux-{arch}"
                 : $"NAPS2.App.WinForms/bin/Debug/net10.0-windows/win-{arch}";
-        var frameworkArg = OperatingSystem.IsWindows() ? "" : "-f net10.0";
         bool ranTests = false;
 
         void RunTests(string project, bool isRetry = false)
@@ -20,7 +19,7 @@ public class TestCommand : ICommand<TestOptions>
             try
             {
                 ranTests = true;
-                Cli.Run("dotnet", $"test -l \"console;verbosity=normal\" {frameworkArg} {project}", new()
+                Cli.Run("dotnet", $"test --project {project} --output Detailed", new()
                 {
                     { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
                     { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" },

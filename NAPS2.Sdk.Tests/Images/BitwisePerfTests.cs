@@ -1,6 +1,5 @@
 using NAPS2.Images.Bitwise;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Images;
 

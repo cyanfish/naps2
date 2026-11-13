@@ -14,7 +14,7 @@ public class ThumbnailRenderQueueTests : ContextualTests
         _thumbnailRenderQueue = new ThumbnailRenderQueue(ScanningContext, new ThumbnailRenderer(ImageContext));
     }
 
-    public override async Task DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
         _thumbnailRenderQueue.Dispose();

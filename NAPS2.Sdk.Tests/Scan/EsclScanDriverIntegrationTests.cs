@@ -6,7 +6,6 @@ using NAPS2.Scan;
 using NAPS2.Scan.Internal.Escl;
 using NSubstitute;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Scan;
 
@@ -22,7 +21,7 @@ public class EsclScanDriverIntegrationTests(ITestOutputHelper testOutputHelper) 
     private string _contentType = ContentTypes.JPEG;
     private byte[] _contentToReturn = [];
 
-    public override async Task InitializeAsync()
+    public override async ValueTask InitializeAsync()
     {
         _server = new EsclServer();
         _deviceConfig = new EsclDeviceConfig
@@ -59,7 +58,7 @@ public class EsclScanDriverIntegrationTests(ITestOutputHelper testOutputHelper) 
         };
     }
 
-    public override async Task DisposeAsync()
+    public override async ValueTask DisposeAsync()
     {
         _server.Dispose();
         await base.DisposeAsync();
