@@ -42,6 +42,17 @@ public class SkiaImageTests
         Assert.Equal("IHDR", chunks[0].Type);
     }
 
+    [Fact]
+    public void SaveToUnwritableStreamThrows()
+    {
+        var ctx = new SkiaImageContext();
+        using var image = ctx.Load(ImageResources.dog);
+        var readOnlyStream = new MemoryStream([], false);
+
+        // Skia writes to the stream from native code, where an unhandled exception would crash the process
+        Assert.Throws<NotSupportedException>(() => image.Save(readOnlyStream, ImageFileFormat.Png));
+    }
+
     private static List<(string Type, byte[] Data)> ReadPngChunks(byte[] png)
     {
         var chunks = new List<(string, byte[])>();

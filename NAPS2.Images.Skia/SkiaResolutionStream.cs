@@ -1,3 +1,5 @@
+using System.Runtime.ExceptionServices;
+
 namespace NAPS2.Images.Skia;
 
 /// <summary>
@@ -13,6 +15,7 @@ internal class SkiaResolutionStream : Stream
     private readonly float _yDpi;
     private byte[]? _header;
     private int _headerLength;
+    private ExceptionDispatchInfo? _error;
 
     public SkiaResolutionStream(Stream output, ImageFileFormat format, float xDpi, float yDpi)
     {
@@ -31,6 +34,21 @@ internal class SkiaResolutionStream : Stream
     public override void Write(byte[] buffer, int offset, int count) => Write(buffer.AsSpan(offset, count));
 
     public override void Write(ReadOnlySpan<byte> buffer)
+    {
+        if (_error != null) return;
+        try
+        {
+            WriteCore(buffer);
+        }
+        catch (Exception ex)
+        {
+            // This is called from Skia's native code, which an exception can't propagate through (it would crash the
+            // process). Instead we stop writing and rethrow from Complete().
+            _error = ExceptionDispatchInfo.Capture(ex);
+        }
+    }
+
+    private void WriteCore(ReadOnlySpan<byte> buffer)
     {
         if (_header != null)
         {
@@ -51,10 +69,12 @@ internal class SkiaResolutionStream : Stream
     }
 
     /// <summary>
-    /// Writes any held-back data to the output. This must be called once encoding is done.
+    /// Writes any held-back data to the output, and throws if there was an error writing to the output during
+    /// encoding. This must be called once encoding is done.
     /// </summary>
     public void Complete()
     {
+        _error?.Throw();
         if (_header != null)
         {
             // The data was shorter than the expected header, so it can't be patched
@@ -64,7 +84,18 @@ internal class SkiaResolutionStream : Stream
         _output.Flush();
     }
 
-    public override void Flush() => _output.Flush();
+    public override void Flush()
+    {
+        if (_error != null) return;
+        try
+        {
+            _output.Flush();
+        }
+        catch (Exception ex)
+        {
+            _error = ExceptionDispatchInfo.Capture(ex);
+        }
+    }
 
     public override bool CanRead => false;
     public override bool CanSeek => false;
