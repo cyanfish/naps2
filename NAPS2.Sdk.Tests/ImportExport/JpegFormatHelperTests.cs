@@ -1,7 +1,7 @@
-using NAPS2.Pdf;
+using NAPS2.ImportExport;
 using Xunit;
 
-namespace NAPS2.Sdk.Tests.Pdf;
+namespace NAPS2.Sdk.Tests.ImportExport;
 
 public class JpegFormatHelperTests
 {

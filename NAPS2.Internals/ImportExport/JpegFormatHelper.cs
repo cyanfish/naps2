@@ -1,6 +1,8 @@
-namespace NAPS2.Pdf;
+using NAPS2.Util;
 
-internal static class JpegFormatHelper
+namespace NAPS2.ImportExport;
+
+public static class JpegFormatHelper
 {
     // JPEG format doc: https://github.com/corkami/formats/blob/master/image/jpeg.md
 
