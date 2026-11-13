@@ -1,4 +1,5 @@
-﻿using NAPS2.Scan;
+﻿#if !MAC
+using NAPS2.Scan;
 using NAPS2.Scan.Internal.Wia;
 using NAPS2.Wia;
 using Xunit;
@@ -70,3 +71,4 @@ public class WiaScanDriverTests : ContextualTests
         Assert.Null(caps.DuplexCaps);
     }
 }
+#endif

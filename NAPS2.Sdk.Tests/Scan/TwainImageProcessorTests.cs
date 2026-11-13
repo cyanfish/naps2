@@ -1,3 +1,4 @@
+#if !MAC
 using Google.Protobuf;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
@@ -415,3 +416,4 @@ public class TwainImageProcessorTests : ContextualTests
         };
     }
 }
+#endif
