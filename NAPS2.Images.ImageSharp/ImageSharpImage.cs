@@ -23,7 +23,9 @@ public class ImageSharpImage : IMemoryImage
         Image = image;
     }
 
+#pragma warning disable CS0618 // Type or member is obsolete
     public ImageContext ImageContext { get; } = new ImageSharpImageContext();
+#pragma warning restore CS0618
 
     public Image Image { get; }
 
