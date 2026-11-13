@@ -36,7 +36,8 @@ public class SkiaImageContext : ImageContext
         var bitmap = new SKBitmap(new SKImageInfo(codecInfo.Width, codecInfo.Height, bitmapColorType, alphaType));
         try
         {
-            var decodeInfo = new SKImageInfo(codecInfo.Width, codecInfo.Height, decodeColorType, alphaType);
+            using var srgb = SKColorSpace.CreateSrgb();
+            var decodeInfo = new SKImageInfo(codecInfo.Width, codecInfo.Height, decodeColorType, alphaType, srgb);
             var result = codec.GetPixels(decodeInfo, bitmap.GetPixels());
             if (result is not (SKCodecResult.Success or SKCodecResult.IncompleteInput))
             {
