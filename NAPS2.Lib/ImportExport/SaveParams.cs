@@ -22,7 +22,8 @@ public record SaveParams
     /// <summary>
     /// Whether this save is part of an open-ended sequence of saves to the same name (e.g. auto save) rather than a
     /// self-contained batch. Every file is then numbered without zero-padding to the batch size, like a "$(n)"
-    /// placeholder, so that later saves continue the sequence.
+    /// placeholder, so that later saves continue the sequence. The exception is if it has date/time placeholders (in
+    /// which case numbering may be unnecessary).
     /// </summary>
     public bool OpenEndedSequence { get; init; }
 
