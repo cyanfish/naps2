@@ -51,4 +51,4 @@ Name: "Vietnamese";           MessagesFile: "..\..\NAPS2.Setup\config\windows\in
 [CustomMessages]
 ; Temporary overrides until the updated Italian.isl ships in an Inno Setup release
 Italian.AdditionalIcons=Collegamenti aggiuntivi:
-Italian.CreateDesktopIcon=Crea un collegamento sul &desktop
+Italian.CreateDesktopIcon=Crea collegamento programma sul &desktop
