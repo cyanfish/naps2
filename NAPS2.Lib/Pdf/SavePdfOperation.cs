@@ -94,10 +94,8 @@ internal class SavePdfOperation : OperationBase
                             await WaitForFileNotInUse(currentFileName) &&
                             await _pdfExporter.Export(currentFileName, imagesForFile,
                                 new PdfExportParams(pdfSettings.Metadata.Substitute(_nameManager, context.DateTime),
-                                    pdfSettings.Encryption, pdfSettings.Compat)
-                                {
-                                    Compression = pdfSettings.Compression
-                                }, ocrParams, progress),
+                                    pdfSettings.Encryption, pdfSettings.Compat, pdfSettings.Compression),
+                                ocrParams, progress),
                         GetSaveErrorMessage);
                     if (!result)
                     {
