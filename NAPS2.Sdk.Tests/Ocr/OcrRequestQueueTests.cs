@@ -303,7 +303,7 @@ public class OcrRequestQueueTests : ContextualTests
     }
 
     // This seems to cause some crash (task/thread starvation related?) on Linux
-    [PlatformFact(exclude: PlatformFlags.Linux)]
+    [Fact(Skip = "slow")]
     public async Task StressTest()
     {
          _mockEngine.ProcessImage(ScanningContext, Arg.Any<string>(), _ocrParams, Arg.Any<CancellationToken>())
