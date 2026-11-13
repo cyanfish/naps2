@@ -310,6 +310,23 @@
       <Build Solution="Release-Linux|*" Project="false" />
       <Build Solution="Tools|*" Project="false" />
     </Project>
+    <Project Path="NAPS2.Images.Skia/NAPS2.Images.Skia.csproj">
+      <BuildType Solution="Debug-Linux|*" Project="Debug" />
+      <BuildType Solution="Debug-Mac|*" Project="Debug" />
+      <BuildType Solution="Debug-Windows|*" Project="Debug" />
+      <BuildType Solution="DebugLang|*" Project="Debug" />
+      <BuildType Solution="Release-Linux|*" Project="Release" />
+      <BuildType Solution="Release-Mac|*" Project="Release" />
+      <BuildType Solution="Release-Msi|*" Project="Release" />
+      <BuildType Solution="Release-Windows|*" Project="Release" />
+      <BuildType Solution="Release-Zip|*" Project="Release" />
+      <BuildType Solution="Sdk|*" Project="Release" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+      <Build Solution="Release-Linux|*" Project="false" />
+      <Build Solution="Release-Mac|*" Project="false" />
+      <Build Solution="Release-Windows|*" Project="false" />
+      <Build Solution="Tools|*" Project="false" />
+    </Project>
     <Project Path="NAPS2.Images.Wpf/NAPS2.Images.Wpf.csproj">
       <BuildType Solution="Debug-Linux|*" Project="Debug" />
       <BuildType Solution="Debug-Mac|*" Project="Debug" />
