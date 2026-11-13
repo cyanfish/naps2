@@ -10,6 +10,7 @@
     <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
     <RuntimeIdentifiers Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx-x64;osx-arm64</RuntimeIdentifiers>
     <TrimMode>partial</TrimMode>
+    <CheckForIllegalCrossThreadCalls>false</CheckForIllegalCrossThreadCalls>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
