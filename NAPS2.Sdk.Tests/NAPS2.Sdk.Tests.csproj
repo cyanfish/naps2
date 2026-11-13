@@ -32,7 +32,7 @@
     <PackageReference Include="Microsoft.Testing.Extensions.Retry" Version="2.5.2" />
     <PackageReference Include="NSubstitute" Version="6.0.0" />
     <PackageReference Include="PdfAValidator" Version="2.1.109" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.1" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.156.0" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
     <PackageReference Include="System.Linq.Async" Version="7.0.1" />
     <PackageReference Include="xunit.v3" Version="4.0.3" />
   </ItemGroup>
