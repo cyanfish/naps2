@@ -13,5 +13,6 @@ public enum PlatformFlags
     WpfImage = 64,
     GdiImage = 128,
     GtkImage = 256,
-    MacImage = 512
+    MacImage = 512,
+    SkiaImage = 1024
 }

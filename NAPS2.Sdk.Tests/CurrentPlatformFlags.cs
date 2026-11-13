@@ -47,6 +47,10 @@ public static class CurrentPlatformFlags
         {
             p |= PlatformFlags.GtkImage;
         }
+        if (TestImageContextFactory.Get().ImageType.Name == "SkiaImage")
+        {
+            p |= PlatformFlags.SkiaImage;
+        }
         return p;
     }
 

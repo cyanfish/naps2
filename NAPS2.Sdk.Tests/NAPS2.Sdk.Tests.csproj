@@ -22,6 +22,7 @@
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
     <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
     <ProjectReference Include="..\NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" />
+    <ProjectReference Include="..\NAPS2.Images.Skia\NAPS2.Images.Skia.csproj" />
     <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
 
     <PackageReference Include="NAPS2.Jpeg.Binaries" Version="1.0.0" />
@@ -31,6 +32,7 @@
     <PackageReference Include="Microsoft.Testing.Extensions.Retry" Version="2.5.2" />
     <PackageReference Include="NSubstitute" Version="6.0.0" />
     <PackageReference Include="PdfAValidator" Version="2.1.109" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.1" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
     <PackageReference Include="System.Linq.Async" Version="7.0.1" />
     <PackageReference Include="xunit.v3" Version="4.0.3" />
   </ItemGroup>

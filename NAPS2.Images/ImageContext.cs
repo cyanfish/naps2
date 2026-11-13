@@ -122,10 +122,12 @@ public abstract class ImageContext
         format is ImageFileFormat.Bmp or ImageFileFormat.Jpeg or ImageFileFormat.Png ||
         format == ImageFileFormat.Tiff && SupportsTiff || format == ImageFileFormat.Jpeg2000 && SupportsJpeg2000;
 
-    public bool SupportsEncode(ImageFileFormat format) => SupportsDecode(format);
+    public bool SupportsEncode(ImageFileFormat format) =>
+        SupportsDecode(format) && (format != ImageFileFormat.Bmp || SupportsBmpEncode);
 
     protected virtual bool SupportsTiff => false;
     protected virtual bool SupportsJpeg2000 => false;
+    protected virtual bool SupportsBmpEncode => true;
 
     /// <summary>
     /// Loads an image from the given file path.

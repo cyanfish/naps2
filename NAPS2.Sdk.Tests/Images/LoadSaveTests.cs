@@ -266,7 +266,8 @@ public class LoadSaveTests : ContextualTests
         // All optimized values should be less than their unoptimized counterparts.
         Assert.True(optimized32Bpp < unoptimized32Bpp);
         Assert.True(optimized24Bpp < unoptimized24Bpp);
-        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharpImage | PlatformFlags.WpfImage))
+        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharpImage | PlatformFlags.WpfImage |
+                                         PlatformFlags.SkiaImage))
         {
             Assert.True(optimized8Bpp < unoptimized8Bpp);
             Assert.Equal(optimized1Bpp, unoptimized1Bpp);

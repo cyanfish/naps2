@@ -15,7 +15,7 @@ public class TiffWriterTests : ContextualTests
         _tiffWriter = ImageContext.TiffWriter;
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.ImageSharpImage | PlatformFlags.SkiaImage)]
     public async Task SaveSinglePageTiffToFile()
     {
         var path = P("image.tiff");
@@ -25,7 +25,7 @@ public class TiffWriterTests : ContextualTests
         await AssertTiff(path, ImageResources.dog);
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.ImageSharpImage | PlatformFlags.SkiaImage)]
     public async Task SaveMultiPageTiffToFile()
     {
         var path = P("image.tiff");
@@ -40,7 +40,7 @@ public class TiffWriterTests : ContextualTests
         await AssertTiff(path, ImageResources.dog, ImageResources.dog_bw, ImageResources.stock_cat);
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.ImageSharpImage | PlatformFlags.SkiaImage)]
     public async Task SaveSinglePageTiffToStream()
     {
         var stream = new MemoryStream();
@@ -50,7 +50,7 @@ public class TiffWriterTests : ContextualTests
         await AssertTiff(stream, ImageResources.dog);
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.ImageSharpImage | PlatformFlags.SkiaImage)]
     public async Task SaveMultiPageTiffToStream()
     {
         var stream = new MemoryStream();
@@ -65,7 +65,7 @@ public class TiffWriterTests : ContextualTests
         await AssertTiff(stream, ImageResources.dog, ImageResources.dog_bw, ImageResources.stock_cat);
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.ImageSharpImage | PlatformFlags.SkiaImage)]
     public async Task SaveBlackAndWhiteTiff()
     {
         var path = P("image.tiff");
@@ -75,7 +75,7 @@ public class TiffWriterTests : ContextualTests
         await AssertTiff(path, ImageResources.dog_bw);
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.ImageSharpImage | PlatformFlags.SkiaImage)]
     public async Task SaveColorTiffWithG4()
     {
         var path = P("image.tiff");

@@ -11,6 +11,7 @@ public static class TestImageContextFactory
             "wpf" => new NAPS2.Images.Wpf.WpfImageContext(),
 #endif
             "is" or "imagesharp" => new NAPS2.Images.ImageSharp.ImageSharpImageContext(),
+            "skia" => new NAPS2.Images.Skia.SkiaImageContext(),
 #if MAC
             "mac" => new NAPS2.Images.Mac.MacImageContext(),
 #endif
