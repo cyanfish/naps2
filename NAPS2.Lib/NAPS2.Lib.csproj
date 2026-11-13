@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net10.0</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-      $(TargetFrameworks);net10.0-macos
+      $(TargetFrameworks);net11.0-macos
     </TargetFrameworks>
     <Nullable>enable</Nullable>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
@@ -18,7 +18,7 @@
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-macos'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net11.0-macos'">
     <DefineConstants>MAC</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release-Msi'">
