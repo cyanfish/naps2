@@ -980,7 +980,7 @@ public class CommandLineIntegrationTests : ContextualTests
         AssertRecoveryCleanedUp();
     }
 
-    [Theory]
+    [PlatformTheory(exclude: PlatformFlags.SkiaImage)]
     [InlineData("test.tiff", "test.1.tiff", "test.2.tiff")]
     [InlineData("test$(n).tiff", "test1.tiff", "test2.tiff")]
     public async Task SplitToTiffFiles(string outputName, string firstName, string secondName)
