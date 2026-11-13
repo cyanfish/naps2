@@ -16,7 +16,8 @@ internal class SkiaResolutionStream : Stream
 
     public SkiaResolutionStream(Stream output, ImageFileFormat format, float xDpi, float yDpi)
     {
-        _output = output;
+        // Skia writes in lots of small pieces; buffering helps in some cases (e.g. chunked http responses for ESCL)
+        _output = new BufferedStream(output);
         _format = format;
         _xDpi = xDpi;
         _yDpi = yDpi;
@@ -60,16 +61,10 @@ internal class SkiaResolutionStream : Stream
             _output.Write(_header, 0, _headerLength);
             _header = null;
         }
+        _output.Flush();
     }
 
-    public override void Flush()
-    {
-        // The underlying stream isn't flushed until the header has been written, which happens in order anyway
-        if (_header == null)
-        {
-            _output.Flush();
-        }
-    }
+    public override void Flush() => _output.Flush();
 
     public override bool CanRead => false;
     public override bool CanSeek => false;
