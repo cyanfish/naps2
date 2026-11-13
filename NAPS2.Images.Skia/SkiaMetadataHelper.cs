@@ -68,7 +68,7 @@ internal static class SkiaMetadataHelper
         var yPixelsPerUnit = BinaryPrimitives.ReadUInt32BigEndian(data.Slice(offset + 12));
         var unit = data[offset + 16];
         // Unit 1 is meters; unit 0 is unspecified (i.e. only the aspect ratio is meaningful)
-        return unit == 1 ? (xPixelsPerUnit / INCHES_PER_METER, yPixelsPerUnit / INCHES_PER_METER) : (0, 0);
+        return unit == 1 ? (PixelsPerMeterToDpi(xPixelsPerUnit), PixelsPerMeterToDpi(yPixelsPerUnit)) : (0, 0);
     }
 
     /// <summary>
@@ -106,7 +106,19 @@ internal static class SkiaMetadataHelper
         }
         var xPixelsPerMeter = BinaryPrimitives.ReadInt32LittleEndian(data.Slice(38));
         var yPixelsPerMeter = BinaryPrimitives.ReadInt32LittleEndian(data.Slice(42));
-        return (xPixelsPerMeter / INCHES_PER_METER, yPixelsPerMeter / INCHES_PER_METER);
+        return (PixelsPerMeterToDpi(xPixelsPerMeter), PixelsPerMeterToDpi(yPixelsPerMeter));
+    }
+
+    /// <summary>
+    /// Converts to DPI, snapping to a whole number if that's consistent with the stored value. PNG and BMP store
+    /// resolution as an integer number of pixels per meter, so e.g. 300 DPI is stored as 11811, which would otherwise
+    /// be read back as 299.9994.
+    /// </summary>
+    private static double PixelsPerMeterToDpi(long pixelsPerMeter)
+    {
+        var dpi = pixelsPerMeter / INCHES_PER_METER;
+        var wholeDpi = Math.Round(dpi);
+        return Math.Round(wholeDpi * INCHES_PER_METER) == pixelsPerMeter ? wholeDpi : dpi;
     }
 
     /// <summary>
