@@ -21,7 +21,7 @@ public class LoadSaveTests : ContextualTests
 
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             Assert.Throws<NotSupportedException>(() => ImageContext.Load(path));
             return;
@@ -42,7 +42,7 @@ public class LoadSaveTests : ContextualTests
 
         var stream = new MemoryStream(GetResource(resource));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             Assert.Throws<NotSupportedException>(() => ImageContext.Load(stream));
             return;
@@ -64,7 +64,7 @@ public class LoadSaveTests : ContextualTests
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
         var progressMock = Substitute.For<ProgressCallback>();
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await ImageContext.LoadFrames(path, progressMock).ToListAsync());
@@ -93,7 +93,7 @@ public class LoadSaveTests : ContextualTests
         var stream = new MemoryStream(GetResource(resource));
         var progressMock = Substitute.For<ProgressCallback>();
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await ImageContext.LoadFrames(stream, progressMock).ToListAsync());
@@ -122,7 +122,7 @@ public class LoadSaveTests : ContextualTests
         var path = P($"image{ext}");
         var expected = LoadImage(GetResource(compare[0]));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsEncode(format))
         {
             Assert.Throws<NotSupportedException>(() => expected.Save(path));
             return;
@@ -146,7 +146,7 @@ public class LoadSaveTests : ContextualTests
         var stream = new MemoryStream();
         var expected = LoadImage(GetResource(compare[0]));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsEncode(format))
         {
             Assert.Throws<NotSupportedException>(() => expected.Save(stream, format));
             return;

@@ -62,7 +62,7 @@ public class GdiImage : IMemoryImage
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, path, imageFormat, options))
         {
             return;
@@ -86,7 +86,7 @@ public class GdiImage : IMemoryImage
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, stream, imageFormat, options))
         {
             return;

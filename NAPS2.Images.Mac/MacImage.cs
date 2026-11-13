@@ -127,7 +127,7 @@ public class MacImage : IMemoryImage
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, path, imageFormat, options))
         {
             return;
@@ -145,7 +145,7 @@ public class MacImage : IMemoryImage
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, stream, imageFormat, options))
         {
             return;
