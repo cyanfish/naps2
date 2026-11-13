@@ -23,6 +23,9 @@ NAPS2.Sdk is modular, and depending on your needs you may have to reference a di
     - For working with `AppKit.NSImage` images. (Mac)
   - **[NAPS2.Images.ImageSharp](https://www.nuget.org/packages/NAPS2.Images.ImageSharp/)**
     - For working with [`ImageSharp`](https://github.com/SixLabors/ImageSharp) images.
+  - **[NAPS2.Images.Skia](https://www.nuget.org/packages/NAPS2.Images.Skia/)**
+    - For working with [`SkiaSharp`](https://github.com/mono/SkiaSharp) images.
+    - On Linux, you also need to reference a `SkiaSharp.NativeAssets.Linux` package.
 
 ### Optional Packages
 
