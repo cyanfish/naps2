@@ -16,6 +16,21 @@ public class JpegFormatHelperTests
         Assert.Equal(72, header.HorizontalDpi);
         Assert.Equal(72, header.VerticalDpi);
         Assert.True(header.HasJfifHeader);
+        Assert.True(header.IsBaseline);
+    }
+
+    [Fact]
+    public void Progressive()
+    {
+        var header = JpegFormatHelper.ReadHeader(new MemoryStream(ImageResources.dog_progressive));
+        Assert.NotNull(header);
+        Assert.Equal(788, header.Width);
+        Assert.Equal(525, header.Height);
+        Assert.Equal(3, header.NumComponents);
+        Assert.Equal(72, header.HorizontalDpi);
+        Assert.Equal(72, header.VerticalDpi);
+        Assert.True(header.HasJfifHeader);
+        Assert.False(header.IsBaseline);
     }
 
     [Fact]

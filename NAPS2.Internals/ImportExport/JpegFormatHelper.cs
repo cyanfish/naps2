@@ -11,7 +11,7 @@ public static class JpegFormatHelper
         var sig1 = stream.ReadByte();
         var sig2 = stream.ReadByte();
         if (sig1 != 0xFF || sig2 != 0xD8) return null;
-        var header = new JpegHeader(0, 0, 0, 0, 0, false, false);
+        var header = new JpegHeader(0, 0, 0, 0, 0, false, false, false);
         while (true)
         {
             var marker = stream.ReadByte();
@@ -121,18 +121,21 @@ public static class JpegFormatHelper
                     }
                 }
             }
-            if (type == 0xC0 && len >= 6) // Start of frame
+            // Start of frame. 0xC0 is baseline, and the rest of the 0xC0-0xCF range is for other encodings (e.g. 0xC2
+            // is progressive), except for 0xC4/0xC8/0xCC which aren't frame markers.
+            if (type is >= 0xC0 and <= 0xCF and not (0xC4 or 0xC8 or 0xCC) && len >= 6)
             {
                 return header with
                 {
                     Height = buf[1] * 256 + buf[2],
                     Width = buf[3] * 256 + buf[4],
-                    NumComponents = buf[5]
+                    NumComponents = buf[5],
+                    IsBaseline = type == 0xC0
                 };
             }
         }
     }
 
     public record JpegHeader(double HorizontalDpi, double VerticalDpi, int Width, int Height, int NumComponents,
-        bool HasJfifHeader, bool HasExifHeader);
+        bool HasJfifHeader, bool HasExifHeader, bool IsBaseline);
 }

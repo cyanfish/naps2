@@ -192,6 +192,14 @@ public class LoadSaveTests : ContextualTests
     }
 
     [Fact]
+    public void LoadProgressiveJpeg()
+    {
+        // This also verifies the resolution is read, which some image types need to parse from the JPEG header
+        var image = LoadImage(ImageResources.dog_progressive);
+        ImageAsserts.Similar(ImageResources.dog, image);
+    }
+
+    [Fact]
     public void SetResolutionAndSaveJpeg()
     {
         var image = LoadImage(ImageResources.dog);
