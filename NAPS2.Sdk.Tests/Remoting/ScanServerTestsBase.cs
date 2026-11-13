@@ -13,7 +13,7 @@ using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 
-public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
+public class ScanServerTestsBase : ContextualTests
 {
     protected const int TIMEOUT = 60_000;
 
@@ -51,9 +51,13 @@ public class ScanServerTestsBase : ContextualTests, IAsyncLifetime
         _clientDevice = new ScanDevice(Driver.Escl, _uuid, _serverDisplayName);
     }
 
-    public Task InitializeAsync() => _server.Start();
+    public override Task InitializeAsync() => _server.Start();
 
-    public Task DisposeAsync() => _server.Stop();
+    public override async Task DisposeAsync()
+    {
+        await _server.Stop();
+        await base.DisposeAsync();
+    }
 
     protected async Task<bool> TryFindClientDevice()
     {

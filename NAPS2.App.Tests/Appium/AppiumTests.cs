@@ -26,7 +26,7 @@ public class AppiumTests : ContextualTests
         ResetMainWindow();
     }
 
-    public override void Dispose()
+    public override async Task DisposeAsync()
     {
         try
         {
@@ -36,7 +36,7 @@ public class AppiumTests : ContextualTests
         {
             // Ignore disposal errors
         }
-        base.Dispose();
+        await base.DisposeAsync();
     }
 
     protected void ResetMainWindow()

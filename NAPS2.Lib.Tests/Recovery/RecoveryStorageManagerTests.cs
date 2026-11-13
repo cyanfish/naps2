@@ -18,10 +18,10 @@ public class RecoveryStorageManagerTests : ContextualTests
         _recoveryStorageManager = RecoveryStorageManager.CreateFolderWithoutThrottle(_recoveryFolder, _imageList);
     }
 
-    public override void Dispose()
+    public override async Task DisposeAsync()
     {
         _recoveryStorageManager.Dispose();
-        base.Dispose();
+        await base.DisposeAsync();
     }
 
     [Fact]

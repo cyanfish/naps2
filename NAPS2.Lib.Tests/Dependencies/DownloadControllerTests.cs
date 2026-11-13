@@ -27,11 +27,11 @@ public class DownloadControllerTests : ContextualTests
         _controller = new(ScanningContext, _httpHandler.ToHttpClient());
     }
 
-    public override void Dispose()
+    public override async Task DisposeAsync()
     {
         _animalsZipStream.Dispose();
         _dogsGzipStream.Dispose();
-        base.Dispose();
+        await base.DisposeAsync();
     }
 
     [Fact]

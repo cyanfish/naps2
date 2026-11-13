@@ -10,8 +10,7 @@ using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Scan;
 
-public class EsclScanDriverIntegrationTests(ITestOutputHelper testOutputHelper) : ContextualTests(testOutputHelper),
-    IAsyncLifetime
+public class EsclScanDriverIntegrationTests(ITestOutputHelper testOutputHelper) : ContextualTests(testOutputHelper)
 {
     private EsclServer _server = null!;
     private EsclDeviceConfig _deviceConfig = null!;
@@ -23,7 +22,7 @@ public class EsclScanDriverIntegrationTests(ITestOutputHelper testOutputHelper) 
     private string _contentType = ContentTypes.JPEG;
     private byte[] _contentToReturn = [];
 
-    public async Task InitializeAsync()
+    public override async Task InitializeAsync()
     {
         _server = new EsclServer();
         _deviceConfig = new EsclDeviceConfig
@@ -60,10 +59,10 @@ public class EsclScanDriverIntegrationTests(ITestOutputHelper testOutputHelper) 
         };
     }
 
-    public Task DisposeAsync()
+    public override async Task DisposeAsync()
     {
         _server.Dispose();
-        return Task.CompletedTask;
+        await base.DisposeAsync();
     }
 
     [Fact(Timeout = 60_000)]
