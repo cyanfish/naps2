@@ -1,24 +1,23 @@
 namespace NAPS2.Scan.Internal.Sane.Native;
 
+/// <summary>
+/// Converts between doubles and SANE_Fixed values (signed 32-bit integers scaled by 2^16), matching the SANE_FIX and
+/// SANE_UNFIX macros.
+/// </summary>
 internal static class SaneFixedPoint
 {
-    public static double ToDouble(int value)
-    {
-        uint uvalue = (uint) value;
-        short wholePart = (short) (uvalue >> 16);
-        ushort fractionPart = (ushort) (uvalue & 0xFFFF);
-        return wholePart + fractionPart / (double) ushort.MaxValue;
-    }
+    private const double SCALE = 1 << 16;
+
+    public static double ToDouble(int value) => value / SCALE;
 
     public static int ToFixed(double value)
     {
-        if (value is >= short.MaxValue + 1 or < short.MinValue)
+        double scaled = value * SCALE;
+        if (!(scaled is > int.MinValue - 1.0 and < int.MaxValue + 1.0))
         {
             throw new ArgumentOutOfRangeException(nameof(value), value, "Expected SANE fixed point");
         }
-        short wholePart = (short) value;
-        double fraction = value - wholePart;
-        ushort fractionPart = (ushort) (fraction * ushort.MaxValue);
-        return (wholePart << 16) | fractionPart;
+        // Truncates toward zero
+        return (int) scaled;
     }
 }
