@@ -9,11 +9,13 @@ public record PdfExportParams
     {
     }
 
-    public PdfExportParams(PdfMetadata metadata, PdfEncryption encryption, PdfCompat compat)
+    public PdfExportParams(PdfMetadata metadata, PdfEncryption encryption, PdfCompat compat,
+        PdfCompression? compression = null)
     {
         Metadata = metadata;
         Encryption = encryption;
         Compat = compat;
+        Compression = compression ?? new PdfCompression();
     }
 
     public PdfMetadata Metadata { get; init; } = new();
