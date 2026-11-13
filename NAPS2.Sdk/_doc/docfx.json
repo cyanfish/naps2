@@ -43,6 +43,12 @@
             "NAPS2.Images.ImageSharp.csproj"
           ],
           "src": "../../NAPS2.Images.ImageSharp"
+        },
+        {
+          "files": [
+            "NAPS2.Images.Skia.csproj"
+          ],
+          "src": "../../NAPS2.Images.Skia"
         }
       ],
       "dest": "api",
