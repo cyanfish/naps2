@@ -3,23 +3,25 @@
   <PropertyGroup>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">net10.0-windows</TargetFrameworks>
     <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">$(TargetFrameworks);net11.0-macos</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 
-    <DefineConstants Condition="$([MSBuild]::IsOSPlatform('OSX'))">MAC</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.EndsWith('-macos'))">MAC</DefineConstants>
     <DefineConstants Condition="$([MSBuild]::IsOSPlatform('Linux'))">LINUX</DefineConstants>
     <DefineConstants Condition="$([MSBuild]::IsOSPlatform('Windows'))">WINDOWS</DefineConstants>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\MacTestProjects.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
     <ProjectReference Include="..\NAPS2.Images.Wpf\NAPS2.Images.Wpf.csproj" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
-    <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
+    <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="$(TargetFramework.EndsWith('-macos'))" />
     <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
     <ProjectReference Include="..\NAPS2.Images.ImageSharp\NAPS2.Images.ImageSharp.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Skia\NAPS2.Images.Skia.csproj" />

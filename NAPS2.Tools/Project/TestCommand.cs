@@ -12,7 +12,6 @@ public class TestCommand : ICommand<TestOptions>
             : OperatingSystem.IsLinux()
                 ? $"NAPS2.App.Gtk/bin/Debug/net10.0/linux-{arch}"
                 : $"NAPS2.App.WinForms/bin/Debug/net10.0-windows/win-{arch}";
-        var testFramework = OperatingSystem.IsWindows() ? "net10.0-windows" : "net10.0";
 
         var scopes = string.IsNullOrEmpty(opts.Scope) ? ["sdk", "lib", "app"] : opts.Scope.Split('+');
         var projects = new List<string>();
@@ -33,9 +32,7 @@ public class TestCommand : ICommand<TestOptions>
 
         // Run all the test modules in a single invocation so they can execute in parallel
         Output.Info($"Running tests ({string.Join(", ", scopes)})");
-        // Module paths are globs relative to the root directory
-        var testModules = string.Join(";", projects.Select(project =>
-            $"{project}/bin/Debug/{testFramework}/{project}.dll"));
+        var testModules = string.Join(";", projects.Select(project => GetTestModulePath(project, arch)));
         Cli.Run("dotnet",
             $"test --test-modules \"{testModules}\" --root-directory \"{Paths.SolutionRoot}\" --output Detailed --retry-failed-tests 1 -- --parallel-algorithm aggressive",
             new()
@@ -47,5 +44,21 @@ public class TestCommand : ICommand<TestOptions>
         });
         Output.Info("Tests passed.");
         return 0;
+    }
+
+    // Module paths are globs relative to the root directory
+    private static string GetTestModulePath(string project, string arch)
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            return $"{project}/bin/Debug/net10.0-windows/{project}.dll";
+        }
+        if (OperatingSystem.IsMacOS() && project != "NAPS2.App.Tests")
+        {
+            // On Mac, the Sdk/Lib test projects are also built as app bundles (to test native images etc.), so we run
+            // the bundle executable
+            return $"{project}/bin/Debug/net11.0-macos/osx-{arch}/{project}.app/Contents/MacOS/{project}";
+        }
+        return $"{project}/bin/Debug/net10.0/{project}.dll";
     }
 }

@@ -1,0 +1,22 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <!--
+    Settings for the net*-macos build of test projects, which is an app bundle. The plain build of the same projects
+    (which uses non-native images) is for tools like Rider that can't run tests in an app bundle.
+    -->
+    <PropertyGroup Condition="$(TargetFramework.EndsWith('-macos'))">
+        <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
+        <ApplicationId>com.naps2.$(MSBuildProjectName)</ApplicationId>
+        <CheckForIllegalCrossThreadCalls>false</CheckForIllegalCrossThreadCalls>
+        <!-- Launching via 'open' doesn't forward the args/env needed for the 'dotnet test' handshake -->
+        <RunWithOpen>false</RunWithOpen>
+        <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+        <!-- xUnit.net expects an app host, which the macOS SDK disables -->
+        <CustomAfterDirectoryBuildTargets>$(CustomAfterDirectoryBuildTargets);$(MSBuildThisFileDirectory)MacTestAppHost.targets</CustomAfterDirectoryBuildTargets>
+    </PropertyGroup>
+
+    <ItemGroup Condition="$(TargetFramework.EndsWith('-macos'))">
+        <Compile Include="$(MSBuildThisFileDirectory)MacTestModuleInitializer.cs" Link="MacTestModuleInitializer.cs" />
+    </ItemGroup>
+
+</Project>

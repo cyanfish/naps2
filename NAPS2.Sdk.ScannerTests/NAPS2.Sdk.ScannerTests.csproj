@@ -1,13 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">net10.0-windows</TargetFrameworks>
         <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">net10.0</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">$(TargetFrameworks);net11.0-macos</TargetFrameworks>
         <OutputType>Exe</OutputType>
         <RootNamespace>NAPS2.Sdk.ScannerTests</RootNamespace>
     </PropertyGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+    <Import Project="..\NAPS2.Setup\targets\MacTestProjects.targets" />
     <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
     <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
