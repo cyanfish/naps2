@@ -126,8 +126,24 @@ public class SkiaImage : IMemoryImage
         {
             return;
         }
-        var data = Encode(imageFormat, options);
-        File.WriteAllBytes(path, data);
+        try
+        {
+            using var stream = File.Create(path);
+            Encode(stream, imageFormat, options);
+        }
+        catch
+        {
+            // Don't leave a partially-written file around
+            try
+            {
+                File.Delete(path);
+            }
+            catch (Exception)
+            {
+                // Ignore
+            }
+            throw;
+        }
     }
 
     public void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null)
@@ -141,30 +157,34 @@ public class SkiaImage : IMemoryImage
         {
             return;
         }
-        var data = Encode(imageFormat, options);
-        stream.Write(data, 0, data.Length);
+        Encode(stream, imageFormat, options);
     }
 
-    private byte[] Encode(ImageFileFormat imageFormat, ImageSaveOptions? options)
+    private void Encode(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options)
     {
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
         using var pixmap = helper.Image.Bitmap.PeekPixels();
-        using var data = imageFormat switch
+        // Skia encodes directly to the output stream (rather than to an in-memory buffer), with the resolution
+        // added to the file header as it passes through
+        var resolutionStream = new SkiaResolutionStream(
+            stream, imageFormat, HorizontalResolution, VerticalResolution);
+        using var skiaStream = new SKManagedWStream(resolutionStream, false);
+        bool success = imageFormat switch
         {
-            ImageFileFormat.Jpeg => EncodeJpeg(pixmap, options.Quality == -1 ? 75 : options.Quality),
-            ImageFileFormat.Png => pixmap.Encode(SKPngEncoderOptions.Default),
+            ImageFileFormat.Jpeg => EncodeJpeg(pixmap, skiaStream, options.Quality == -1 ? 75 : options.Quality),
+            ImageFileFormat.Png => pixmap.Encode(skiaStream, SKPngEncoderOptions.Default),
             _ => throw new InvalidOperationException("Unsupported file format")
         };
-        if (data == null)
+        skiaStream.Flush();
+        resolutionStream.Complete();
+        if (!success)
         {
             throw new InvalidOperationException($"Skia could not encode the image as {imageFormat}");
         }
-        return SkiaMetadataHelper.WriteResolution(
-            data.ToArray(), imageFormat, HorizontalResolution, VerticalResolution);
     }
 
-    private static SKData? EncodeJpeg(SKPixmap pixmap, int quality)
+    private static bool EncodeJpeg(SKPixmap pixmap, SKWStream stream, int quality)
     {
         var encoderOptions = new SKJpegEncoderOptions(quality);
         if (pixmap.ColorType == SKColorType.Rgb888x)
@@ -172,9 +192,9 @@ public class SkiaImage : IMemoryImage
             // Skia's JPEG encoder doesn't support Rgb888x, but opaque Rgba8888 has the same memory layout
             using var rgbaPixmap = new SKPixmap(
                 pixmap.Info.WithColorType(SKColorType.Rgba8888), pixmap.GetPixels(), pixmap.RowBytes);
-            return rgbaPixmap.Encode(encoderOptions);
+            return rgbaPixmap.Encode(stream, encoderOptions);
         }
-        return pixmap.Encode(encoderOptions);
+        return pixmap.Encode(stream, encoderOptions);
     }
 
     public IMemoryImage Clone() => new SkiaImage(Bitmap.Copy())

@@ -19,6 +19,8 @@ internal static class SkiaMetadataHelper
     // Chunk length (4) + type (4) + IHDR data (13) + CRC (4)
     private const int PNG_IHDR_CHUNK_LENGTH = 25;
     private const int PNG_PHYS_DATA_LENGTH = 9;
+    // SOI (2) + APP0 marker (2) + length (2) + "JFIF\0" (5) + version (2) + units (1) + x density (2) + y density (2)
+    private const int JPEG_JFIF_HEADER_LENGTH = 18;
 
     private static readonly uint[] Crc32Table = CreateCrc32Table();
 
@@ -122,7 +124,19 @@ internal static class SkiaMetadataHelper
     }
 
     /// <summary>
-    /// Returns the encoded image with the resolution set in its metadata.
+    /// Gets the number of bytes from the start of an encoded image that are needed to write the resolution, or 0 if
+    /// the format isn't supported.
+    /// </summary>
+    public static int GetHeaderLength(ImageFileFormat format) => format switch
+    {
+        ImageFileFormat.Jpeg => JPEG_JFIF_HEADER_LENGTH,
+        ImageFileFormat.Png => PNG_SIGNATURE_LENGTH + PNG_IHDR_CHUNK_LENGTH,
+        _ => 0
+    };
+
+    /// <summary>
+    /// Returns the encoded image data with the resolution set in its metadata. Only the header is needed (see
+    /// GetHeaderLength), so the rest of the encoded image doesn't need to be in memory.
     /// </summary>
     public static byte[] WriteResolution(byte[] data, ImageFileFormat format, float xDpi, float yDpi)
     {
@@ -145,7 +159,7 @@ internal static class SkiaMetadataHelper
         var yDensity = (ushort) Math.Round(yDpi);
         // Skia writes a JFIF header directly after the start-of-image marker, so we only need to update the density.
         // Layout: SOI (2), APP0 marker (2), length (2), "JFIF\0" (5), version (2), units (1), x (2), y (2)
-        if (data.Length < 18 || !data.AsSpan(0, 4).SequenceEqual(new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 }) ||
+        if (data.Length < JPEG_JFIF_HEADER_LENGTH || !data.AsSpan(0, 4).SequenceEqual(new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 }) ||
             !data.AsSpan(6, 5).SequenceEqual("JFIF\0"u8))
         {
             return data;
@@ -162,11 +176,6 @@ internal static class SkiaMetadataHelper
         int insertOffset = PNG_SIGNATURE_LENGTH + PNG_IHDR_CHUNK_LENGTH;
         if (data.Length < insertOffset || !data.AsSpan(12, 4).SequenceEqual("IHDR"u8))
         {
-            return data;
-        }
-        if (FindPngChunk(data, "pHYs"u8) != -1)
-        {
-            // Skia doesn't currently write this chunk, but if that changes, a second one would make the file invalid
             return data;
         }
         var chunk = new byte[12 + PNG_PHYS_DATA_LENGTH];
