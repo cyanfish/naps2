@@ -4,7 +4,7 @@ namespace NAPS2.Images.Mac;
 
 public class MacImageContext : ImageContext
 {
-    // We need to lock around MonoMac constructors as they aren't thread safe
+    // We need to lock around AppKit constructors as they aren't thread safe
     internal static readonly object ConstructorLock = new object();
 
     private readonly MacImageTransformer _imageTransformer;

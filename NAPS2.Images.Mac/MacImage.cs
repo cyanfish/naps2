@@ -16,11 +16,7 @@ public class MacImage : IMemoryImage
         }
         lock (MacImageContext.ConstructorLock)
         {
-#if MONOMAC
-            Rep = new NSBitmapImageRep(reps[0].Handle, false);
-#else
             Rep = (NSBitmapImageRep) reps[0];
-#endif
         }
         PixelFormat = GetPixelFormat(Rep);
         // TODO: Any replacement for deprecated ColorSpaceName?
@@ -73,8 +69,8 @@ public class MacImage : IMemoryImage
 
     public int Width => (int) Rep.PixelsWide;
     public int Height => (int) Rep.PixelsHigh;
-    public float HorizontalResolution => (float) (Width / NsImage.Size.Width * 72).ToDouble();
-    public float VerticalResolution => (float) (Height / NsImage.Size.Height * 72).ToDouble();
+    public float HorizontalResolution => (float) (Width / NsImage.Size.Width * 72);
+    public float VerticalResolution => (float) (Height / NsImage.Size.Height * 72);
 
     public void SetResolution(float xDpi, float yDpi)
     {
@@ -186,11 +182,7 @@ public class MacImage : IMemoryImage
             {
                 props.Add((NSString) "kCGImageDestinationLossyCompressionQuality", NSNumber.FromFloat(options.Quality / 100.0f));
             }
-#if MONOMAC
-            using var dest = CGImageDestination.FromData(data, fileType, 1);
-#else
             using var dest = CGImageDestination.Create(data, fileType.ToString(), 1)!;
-#endif
             dest.AddImage(cgImage, props);
             dest.Close();
             return data;
@@ -207,11 +199,7 @@ public class MacImage : IMemoryImage
                 return this.Copy();
             }
 
-#if MONOMAC
-            var nsImage = new NSImage(NsImage.Copy().Handle, true);
-#else
             var nsImage = (NSImage) NsImage.Copy();
-#endif
             return new MacImage(nsImage)
             {
                 OriginalFileFormat = OriginalFileFormat,
