@@ -22,6 +22,7 @@
         <ProjectReference Include="..\NAPS2.Lib.Tests\NAPS2.Lib.Tests.csproj" />
 
         <PackageReference Include="Appium.WebDriver" Version="4.4.5" />
+        <PackageReference Include="Microsoft.Testing.Extensions.Retry" Version="2.5.2" />
         <PackageReference Include="NSubstitute" Version="6.0.0" />
         <PackageReference Include="xunit.v3" Version="4.0.3" />
     </ItemGroup>

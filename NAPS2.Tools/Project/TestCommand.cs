@@ -14,25 +14,16 @@ public class TestCommand : ICommand<TestOptions>
                 : $"NAPS2.App.WinForms/bin/Debug/net10.0-windows/win-{arch}";
         bool ranTests = false;
 
-        void RunTests(string project, bool isRetry = false)
+        void RunTests(string project)
         {
-            try
+            ranTests = true;
+            Cli.Run("dotnet", $"test --project {project} --output Detailed --retry-failed-tests 1", new()
             {
-                ranTests = true;
-                Cli.Run("dotnet", $"test --project {project} --output Detailed", new()
-                {
-                    { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
-                    { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" },
-                    { "NAPS2_TEST_NONETWORK", opts.NoNetwork ? "1" : "0" },
-                    { "NAPS2_TEST_IMAGES", opts.Images ?? "" }
-                });
-            }
-            catch (Exception)
-            {
-                if (isRetry) throw;
-                Output.Info("Tests failed, retrying once");
-                RunTests(project, true);
-            }
+                { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
+                { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" },
+                { "NAPS2_TEST_NONETWORK", opts.NoNetwork ? "1" : "0" },
+                { "NAPS2_TEST_IMAGES", opts.Images ?? "" }
+            });
         }
 
         var scopes = string.IsNullOrEmpty(opts.Scope) ? ["sdk", "lib", "app"] : opts.Scope.Split('+');
