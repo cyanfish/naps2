@@ -1,4 +1,3 @@
-using NAPS2.Images.Bitwise;
 using NAPS2.Util;
 using SkiaSharp;
 

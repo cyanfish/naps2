@@ -1,4 +1,3 @@
-using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.Recovery;

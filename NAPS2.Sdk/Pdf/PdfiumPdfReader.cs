@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using NAPS2.Pdf.Pdfium;
 
 namespace NAPS2.Pdf;

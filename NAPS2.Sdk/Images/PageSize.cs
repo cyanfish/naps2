@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using NAPS2.Platform;
 
 namespace NAPS2.Images;
 

@@ -1,6 +1,4 @@
-﻿using NAPS2.Tools.Project;
-
-namespace NAPS2.Tools.Localization;
+﻿namespace NAPS2.Tools.Localization;
 
 public class ResxCommand : ICommand<ResxOptions>
 {

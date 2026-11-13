@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using NAPS2.Images.Bitwise;
 
 namespace NAPS2.Images;

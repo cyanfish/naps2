@@ -1,4 +1,3 @@
-using System.Linq;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.Sdk.Tests;
 using Xunit;

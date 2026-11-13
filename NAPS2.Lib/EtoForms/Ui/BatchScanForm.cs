@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Threading;
-using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.Config.Model;
 using NAPS2.EtoForms.Layout;

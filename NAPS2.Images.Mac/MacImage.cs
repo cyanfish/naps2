@@ -1,6 +1,4 @@
-﻿using NAPS2.Images.Bitwise;
-
-namespace NAPS2.Images.Mac;
+﻿namespace NAPS2.Images.Mac;
 
 public class MacImage : IMemoryImage
 {

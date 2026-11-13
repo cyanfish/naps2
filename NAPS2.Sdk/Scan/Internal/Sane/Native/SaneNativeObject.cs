@@ -1,6 +1,3 @@
-using System.Threading;
-using NAPS2.Scan.Exceptions;
-
 namespace NAPS2.Scan.Internal.Sane.Native;
 
 internal abstract class SaneNativeObject : IDisposable

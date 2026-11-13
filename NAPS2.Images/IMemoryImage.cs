@@ -1,6 +1,4 @@
-﻿using NAPS2.Images.Bitwise;
-
-namespace NAPS2.Images;
+﻿namespace NAPS2.Images;
 
 /// <summary>
 /// A common interface to wrap around platform-specific implementations of an in-memory image

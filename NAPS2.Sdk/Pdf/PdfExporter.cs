@@ -10,7 +10,6 @@ using NAPS2.Scan;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Pdf.Advanced;
-using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using PdfDocument = PdfSharpCore.Pdf.PdfDocument;
 using PdfPage = PdfSharpCore.Pdf.PdfPage;

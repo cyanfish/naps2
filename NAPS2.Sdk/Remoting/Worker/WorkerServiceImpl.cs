@@ -4,7 +4,6 @@ using Grpc.Core;
 using NAPS2.ImportExport;
 using NAPS2.ImportExport.Email;
 using NAPS2.ImportExport.Email.Mapi;
-using NAPS2.ImportExport.Images;
 using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;

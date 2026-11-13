@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.Dependencies;
 using NAPS2.EtoForms.Layout;

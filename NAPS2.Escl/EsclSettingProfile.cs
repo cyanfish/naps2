@@ -1,5 +1,3 @@
-using NAPS2.Escl.Client;
-
 namespace NAPS2.Escl;
 
 public class EsclSettingProfile

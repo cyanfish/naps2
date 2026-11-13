@@ -2,7 +2,6 @@
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Ocr;
-using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Unmanaged;

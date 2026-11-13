@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-using NAPS2.Tools.Project;
 
 namespace NAPS2.Tools.Localization;
 

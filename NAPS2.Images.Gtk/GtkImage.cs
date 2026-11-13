@@ -1,6 +1,5 @@
 using System.Globalization;
 using Gdk;
-using NAPS2.Images.Bitwise;
 using NAPS2.Util;
 
 namespace NAPS2.Images.Gtk;

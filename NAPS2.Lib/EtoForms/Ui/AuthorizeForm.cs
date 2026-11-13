@@ -1,5 +1,4 @@
 using System.Threading;
-using Eto.Drawing;
 using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Email.Oauth;
 
