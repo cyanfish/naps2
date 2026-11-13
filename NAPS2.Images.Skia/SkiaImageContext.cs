@@ -42,7 +42,10 @@ public class SkiaImageContext : ImageContext
             {
                 throw new IOException($"Could not decode image: {result}");
             }
-            return new SkiaImage(bitmap);
+            var image = new SkiaImage(bitmap);
+            var (xDpi, yDpi) = SkiaMetadataHelper.ReadResolution(data, format);
+            image.SetResolution(xDpi, yDpi);
+            return image;
         }
         catch
         {

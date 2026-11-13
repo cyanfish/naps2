@@ -126,9 +126,8 @@ public class SkiaImage : IMemoryImage
         {
             return;
         }
-        using var data = Encode(imageFormat, options);
-        using var stream = File.Create(path);
-        data.SaveTo(stream);
+        var data = Encode(imageFormat, options);
+        File.WriteAllBytes(path, data);
     }
 
     public void Save(Stream stream, ImageFileFormat imageFormat, ImageSaveOptions? options = null)
@@ -142,22 +141,27 @@ public class SkiaImage : IMemoryImage
         {
             return;
         }
-        using var data = Encode(imageFormat, options);
-        data.SaveTo(stream);
+        var data = Encode(imageFormat, options);
+        stream.Write(data, 0, data.Length);
     }
 
-    private SKData Encode(ImageFileFormat imageFormat, ImageSaveOptions? options)
+    private byte[] Encode(ImageFileFormat imageFormat, ImageSaveOptions? options)
     {
         options ??= new ImageSaveOptions();
         using var helper = PixelFormatHelper.Create(this, options.PixelFormatHint, minFormat: ImagePixelFormat.Gray8);
         using var pixmap = helper.Image.Bitmap.PeekPixels();
-        var data = imageFormat switch
+        using var data = imageFormat switch
         {
             ImageFileFormat.Jpeg => EncodeJpeg(pixmap, options.Quality == -1 ? 75 : options.Quality),
             ImageFileFormat.Png => pixmap.Encode(SKPngEncoderOptions.Default),
             _ => throw new InvalidOperationException("Unsupported file format")
         };
-        return data ?? throw new InvalidOperationException($"Skia could not encode the image as {imageFormat}");
+        if (data == null)
+        {
+            throw new InvalidOperationException($"Skia could not encode the image as {imageFormat}");
+        }
+        return SkiaMetadataHelper.WriteResolution(
+            data.ToArray(), imageFormat, HorizontalResolution, VerticalResolution);
     }
 
     private static SKData? EncodeJpeg(SKPixmap pixmap, int quality)
