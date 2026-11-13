@@ -39,6 +39,11 @@ public class SkiaImageContext : ImageContext
             using var srgb = SKColorSpace.CreateSrgb();
             var decodeInfo = new SKImageInfo(codecInfo.Width, codecInfo.Height, decodeColorType, alphaType, srgb);
             var result = codec.GetPixels(decodeInfo, bitmap.GetPixels());
+            if (result == SKCodecResult.InvalidConversion)
+            {
+                // Skia can't convert from the image's color profile, so decode without applying it
+                result = codec.GetPixels(decodeInfo.WithColorSpace(null), bitmap.GetPixels());
+            }
             if (result is not (SKCodecResult.Success or SKCodecResult.IncompleteInput))
             {
                 throw new IOException($"Could not decode image: {result}");
