@@ -181,8 +181,8 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    // Gdi/Gtk/ImageSharp don't currently apply embedded color profiles
-    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.ImageSharpImage | PlatformFlags.GtkImage)]
+    // Gdi/Gtk don't currently apply embedded color profiles
+    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.GtkImage)]
     public void LoadWithColorProfile()
     {
         // The image has an embedded ICC profile with the primaries rotated (i.e. the stored red channel is green, etc.),
@@ -293,8 +293,7 @@ public class LoadSaveTests : ContextualTests
         // All optimized values should be less than their unoptimized counterparts.
         Assert.True(optimized32Bpp < unoptimized32Bpp);
         Assert.True(optimized24Bpp < unoptimized24Bpp);
-        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharpImage | PlatformFlags.WpfImage |
-                                         PlatformFlags.SkiaImage))
+        if (!CurrentPlatformFlags.HasAny(PlatformFlags.WpfImage | PlatformFlags.SkiaImage))
         {
             Assert.True(optimized8Bpp < unoptimized8Bpp);
             Assert.Equal(optimized1Bpp, unoptimized1Bpp);
@@ -410,17 +409,14 @@ public class LoadSaveTests : ContextualTests
             ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         ],
-        // TODO: Any way to improve these cases for ImageSharp?
         [
             ImageFileFormat.Tiff, ".tiff", "dog_alpha_tiff",
-            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true,
-            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true
         ],
         [
             ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
-            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true,
-            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true
         ],
     ];
 }
