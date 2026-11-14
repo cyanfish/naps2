@@ -1,0 +1,82 @@
+--- a/gdk-pixbuf/gdk-pixbuf-io.c
++++ b/gdk-pixbuf/gdk-pixbuf-io.c
+@@ -668,16 +668,22 @@
+         load_one_builtin_module (gif);
+         load_one_builtin_module (heic);
+         load_one_builtin_module (ico);
++#ifndef INCLUDE_jpeg
+         load_one_builtin_module (jpeg);
++#endif
+         load_one_builtin_module (jxl);
+         load_one_builtin_module (openexr);
++#ifndef INCLUDE_png
+         load_one_builtin_module (png);
++#endif
+         load_one_builtin_module (pnm);
+         load_one_builtin_module (qoi);
+         load_one_builtin_module (raw);
+         load_one_builtin_module (svg);
+         load_one_builtin_module (tga);
++#ifndef INCLUDE_tiff
+         load_one_builtin_module (tiff);
++#endif
+         load_one_builtin_module (webp);
+         load_one_builtin_module (xbm);
+         load_one_builtin_module (xpm);
+@@ -801,27 +807,6 @@
+ #ifdef INCLUDE_gdip_png
+         try_module (png,gdip_png);
+ #endif
+-#ifdef INCLUDE_glycin
+-        try_module (avif,    glycin_avif);
+-        try_module (bmp,     glycin_bmp);
+-        try_module (dds,     glycin_dds);
+-        try_module (gif,     glycin_gif);
+-        try_module (heic,    glycin_heic);
+-        try_module (ico,     glycin_ico);
+-        try_module (jpeg,    glycin_jpeg);
+-        try_module (jxl,     glycin_jxl);
+-        try_module (openexr, glycin_openexr);
+-        try_module (png,     glycin_png);
+-        try_module (pnm,     glycin_pnm);
+-        try_module (qoi,     glycin_qoi);
+-        try_module (raw,     glycin_raw);
+-        try_module (svg,     glycin_svg);
+-        try_module (tga,     glycin_tga);
+-        try_module (tiff,    glycin_tiff);
+-        try_module (webp,    glycin_webp);
+-        try_module (xbm,     glycin_xbm);
+-        try_module (xpm,     glycin_xpm);
+-#endif
+ #ifdef INCLUDE_android
+ 	try_module (jpeg,android_jpeg);
+ 	try_module (png,android_png);
+@@ -871,6 +856,28 @@
+ #ifdef INCLUDE_qtif
+         try_module (qtif,qtif);
+ #endif
++        /* Native loaders take precedence over glycin, which drops x-dpi/y-dpi */
++#ifdef INCLUDE_glycin
++        try_module (avif,    glycin_avif);
++        try_module (bmp,     glycin_bmp);
++        try_module (dds,     glycin_dds);
++        try_module (gif,     glycin_gif);
++        try_module (heic,    glycin_heic);
++        try_module (ico,     glycin_ico);
++        try_module (jpeg,    glycin_jpeg);
++        try_module (jxl,     glycin_jxl);
++        try_module (openexr, glycin_openexr);
++        try_module (png,     glycin_png);
++        try_module (pnm,     glycin_pnm);
++        try_module (qoi,     glycin_qoi);
++        try_module (raw,     glycin_raw);
++        try_module (svg,     glycin_svg);
++        try_module (tga,     glycin_tga);
++        try_module (tiff,    glycin_tiff);
++        try_module (webp,    glycin_webp);
++        try_module (xbm,     glycin_xbm);
++        try_module (xpm,     glycin_xpm);
++#endif
+ 
+ #undef try_module
+         

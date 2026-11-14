@@ -34,6 +34,9 @@ public static class FlatpakPackager
         File.Copy(
             Path.Combine(Paths.SetupLinux, "sane-streamdevices.patch"),
             Path.Combine(packageDir, "sane-streamdevices.patch"), true);
+        File.Copy(
+            Path.Combine(Paths.SetupLinux, "gdk-pixbuf-native-loaders.patch"),
+            Path.Combine(packageDir, "gdk-pixbuf-native-loaders.patch"), true);
 
         if (!noPre)
         {
