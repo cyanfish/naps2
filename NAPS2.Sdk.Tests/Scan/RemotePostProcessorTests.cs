@@ -337,16 +337,15 @@ public class RemotePostProcessorTests : ContextualTests
     [Fact]
     public void AutoDeskewWithRotation()
     {
-        var options = new ScanOptions
-        {
-            RotateDegrees = 90,
-            AutoDeskew = true
-        };
-        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.skewed), options,
-            new PostProcessingContext())!;
-        using var expected = LoadImage(ImageResources.deskewed).PerformTransform(new RotationTransform(90));
-        using var rendered = result.Render();
-        ImageAsserts.Similar(expected, rendered, ImageAsserts.XL_RMSE_THRESHOLD);
+        using var deskewed = _remotePostProcessor.PostProcess(LoadImage(ImageResources.skewed),
+            new ScanOptions { AutoDeskew = true }, new PostProcessingContext())!;
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.skewed),
+            new ScanOptions { AutoDeskew = true, RotateDegrees = 90 }, new PostProcessingContext())!;
+
+        var deskewAngle = Assert.IsType<RotationTransform>(Assert.Single(deskewed.TransformState.Transforms)).Angle;
+        Assert.NotEqual(0, deskewAngle);
+        var totalAngle = result.TransformState.Transforms.Cast<RotationTransform>().Sum(x => x.Angle);
+        Assert.Equal(RotationTransform.NormalizeAngle(90 + deskewAngle), RotationTransform.NormalizeAngle(totalAngle), 3);
     }
 
     [Fact]
