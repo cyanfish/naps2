@@ -275,4 +275,10 @@ Use the "--importpassword" option.</value>
   <data name="StoppingScan" xml:space="preserve">
     <value>Stopping scan and saving...</value>
   </data>
+  <data name="OcrLanguageNotInstalled" xml:space="preserve">
+    <value>The OCR language "{0}" is not installed. Run "NAPS2.Console --install ocr-{0}" to install it.</value>
+  </data>
+  <data name="OcrLanguageNotRecognized" xml:space="preserve">
+    <value>The OCR language "{0}" is not recognized. Use a three-letter language code (e.g. "eng" for English).</value>
+  </data>
 </root>

@@ -88,6 +88,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
+        InstallFakeOcrLanguage("eng");
         var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -108,6 +109,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
+        InstallFakeOcrLanguage("eng");
         var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
@@ -157,6 +159,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
+        InstallFakeOcrLanguage("eng");
         var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
@@ -183,6 +186,7 @@ public class CommandLineIntegrationTests : ContextualTests
             { LoadImage(PdfResources.word_p2), "Page two." },
             { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled" }
         });
+        InstallFakeOcrLanguage("eng");
         var importPath = P("import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_patcht_pdf);
         var path = P("test.pdf");
@@ -195,6 +199,46 @@ public class CommandLineIntegrationTests : ContextualTests
                 OcrLang = "eng"
             });
         PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithOcrLangNotInstalled()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
+        });
+        InstallFakeOcrLanguage("eng");
+        var path = P("test.pdf");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true,
+                OcrLang = "eng+fra"
+            },
+            ImageResources.ocr_test);
+        Assert.False(File.Exists(path));
+        Assert.Contains("The OCR language \"fra\" is not installed. Run \"NAPS2.Console --install ocr-fra\"",
+            _automationHelper.Output);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithOcrLangNotRecognized()
+    {
+        var path = P("test.pdf");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true,
+                OcrLang = "xyz"
+            },
+            ImageResources.ocr_test);
+        Assert.False(File.Exists(path));
+        Assert.Contains("The OCR language \"xyz\" is not recognized.", _automationHelper.Output);
         AssertRecoveryCleanedUp();
     }
 
@@ -1471,6 +1515,13 @@ public class CommandLineIntegrationTests : ContextualTests
         scanDriverMock.Scan(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<IScanEvents>(),
             Arg.Any<Action<IMemoryImage>>()).Returns(Task.CompletedTask);
         return (scanDriverMock, scanDriverFactoryMock);
+    }
+
+    private void InstallFakeOcrLanguage(string code)
+    {
+        var fastPath = Path.Combine(FolderPath, "components", "tesseract4", "fast");
+        Directory.CreateDirectory(fastPath);
+        File.WriteAllText(Path.Combine(fastPath, $"{code}.traineddata"), "");
     }
 
     private void AssertRecoveryCleanedUp()

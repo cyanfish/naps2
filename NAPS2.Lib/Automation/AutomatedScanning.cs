@@ -125,6 +125,11 @@ internal class AutomatedScanning
                 return;
             }
 
+            if (!ConfigureOcr())
+            {
+                return;
+            }
+
             _scanList = [];
 
             if (_options.ImportPath != null)
@@ -133,8 +138,6 @@ internal class AutomatedScanning
             }
 
             if (_cts.IsCancellationRequested) return;
-
-            ConfigureOcr();
 
             if (_options.Number > 0)
             {
@@ -192,8 +195,9 @@ internal class AutomatedScanning
         }
     }
 
-    private void ConfigureOcr()
+    private bool ConfigureOcr()
     {
+        _ocrParams = OcrParams.Empty;
         if (_options.NoProfile)
         {
             // Don't use OCR-enabled settings from the GUI if --noprofile is set
@@ -202,7 +206,7 @@ internal class AutomatedScanning
         bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName);
         if (!canUseOcr)
         {
-            return;
+            return true;
         }
         if (_options.DisableOcr)
         {
@@ -217,6 +221,31 @@ internal class AutomatedScanning
             _config.Run.Set(c => c.OcrLanguageCode, _options.OcrLang);
         }
         _ocrParams = _config.DefaultOcrParams();
+        return ValidateOcrLanguages();
+    }
+
+    private bool ValidateOcrLanguages()
+    {
+        if (string.IsNullOrEmpty(_ocrParams.LanguageCode))
+        {
+            return true;
+        }
+        // Multiple languages can be specified, e.g. "eng+fra"
+        foreach (var code in _ocrParams.LanguageCode!.Split('+'))
+        {
+            var component = _tesseractLanguageManager.LanguageComponents.FirstOrDefault(x => x.Id == $"ocr-{code}");
+            if (component == null)
+            {
+                _errorOutput.DisplayError(string.Format(ConsoleResources.OcrLanguageNotRecognized, code));
+                return false;
+            }
+            if (!component.IsInstalled)
+            {
+                _errorOutput.DisplayError(string.Format(ConsoleResources.OcrLanguageNotInstalled, code));
+                return false;
+            }
+        }
+        return true;
     }
 
     private async Task InstallComponents()

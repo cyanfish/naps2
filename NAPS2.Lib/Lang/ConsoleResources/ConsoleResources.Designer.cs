@@ -385,6 +385,24 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The OCR language &quot;{0}&quot; is not installed. Run &quot;NAPS2.Console --install ocr-{0}&quot; to install it..
+        /// </summary>
+        internal static string OcrLanguageNotInstalled {
+            get {
+                return ResourceManager.GetString("OcrLanguageNotInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The OCR language &quot;{0}&quot; is not recognized. Use a three-letter language code (e.g. &quot;eng&quot; for English)..
+        /// </summary>
+        internal static string OcrLanguageNotRecognized {
+            get {
+                return ResourceManager.GetString("OcrLanguageNotRecognized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only one of --interleave, --deinterleave, --altinterleave, --altdeinterleave can be specified..
         /// </summary>
         internal static string OnlyOneInterleaveOption {
