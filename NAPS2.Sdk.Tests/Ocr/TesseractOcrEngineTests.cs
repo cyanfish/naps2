@@ -52,6 +52,21 @@ public class TesseractOcrEngineTests : ContextualTests
         Assert.Equal("הקדמת", result.Words[0].Text);
     }
 
+    [Theory]
+    [InlineData("Boštjan")]
+    [InlineData("测试")]
+    public async Task ProcessImageInNonAsciiFolder(string folderName)
+    {
+        ScanningContext.TempFolderPath = P(folderName);
+        Directory.CreateDirectory(ScanningContext.TempFolderPath);
+        var imagePath = CopyResourceToFile(BinaryResources.ocr_test, ScanningContext.TempFolderPath, "ocr_test.jpg");
+
+        var result = await _engine.ProcessImage(ScanningContext, imagePath, new OcrParams("eng", OcrMode.Fast, 0),
+            CancellationToken.None);
+        Assert.NotNull(result);
+        Assert.Equal("ADVERTISEMENT.", result.Words[0].Text);
+    }
+
     [Fact(Skip = "flaky")]
     public async Task ImmediateCancel()
     {

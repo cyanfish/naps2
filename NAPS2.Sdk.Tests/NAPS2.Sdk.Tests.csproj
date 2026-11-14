@@ -30,7 +30,7 @@
 
     <PackageReference Include="NAPS2.Jpeg.Binaries" Version="1.0.0" />
     <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.3.0" />
-    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.4.0" />
+    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.5.0" />
     <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Testing.Extensions.Retry" Version="2.5.2" />
     <PackageReference Include="NSubstitute" Version="6.0.0" />
