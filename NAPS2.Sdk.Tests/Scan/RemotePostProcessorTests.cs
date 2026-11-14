@@ -1,3 +1,4 @@
+using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
 using NAPS2.Sdk.Tests.Asserts;
@@ -7,8 +8,6 @@ namespace NAPS2.Sdk.Tests.Scan;
 
 public class RemotePostProcessorTests : ContextualTests
 {
-    // TODO: Add more tests
-
     private readonly RemotePostProcessor _remotePostProcessor;
 
     public RemotePostProcessorTests()
@@ -272,5 +271,130 @@ public class RemotePostProcessorTests : ContextualTests
         Assert.Equal(2, result2.PostProcessingData.PageNumber);
         Assert.Equal(PageSide.Back, result2.PostProcessingData.PageSide);
         ImageAsserts.Similar(ImageResources.dog, result2.WithTransform(new RotationTransform(180)));
+    }
+
+    [Theory]
+    [InlineData(300, 0, false, CorrectionMode.None)]
+    [InlineData(0, 90, true, CorrectionMode.Document)]
+    public void OcrInputAndThumbnailMatchRenderedPage(int brightness, int rotateDegrees, bool autoCrop,
+        CorrectionMode correctionMode)
+    {
+        var options = new ScanOptions
+        {
+            PaperSource = PaperSource.Duplex,
+            FlipDuplexedPages = true,
+            Brightness = brightness,
+            RotateDegrees = rotateDegrees,
+            AutoCrop = autoCrop,
+            CorrectionMode = correctionMode,
+            ThumbnailSize = 256,
+            OcrParams = new OcrParams("eng")
+        };
+        var context = new PostProcessingContext { PageNumber = 2 };
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.autocrop_doc), options, context)!;
+
+        using var rendered = result.Render();
+        Assert.NotNull(context.TempPath);
+        using var ocrImage = ImageContext.Load(context.TempPath);
+        ImageAsserts.Similar(rendered, ocrImage, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+        Assert.Equal(result.TransformState, result.PostProcessingData.ThumbnailTransformState);
+        using var expectedThumbnail = rendered.Clone().PerformTransform(new ThumbnailTransform(256));
+        ImageAsserts.Similar(expectedThumbnail, result.PostProcessingData.Thumbnail!, ImageAsserts.XPLAT_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void NoOcrOrThumbnailByDefault()
+    {
+        var context = new PostProcessingContext();
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.dog), new ScanOptions(), context)!;
+        Assert.Null(context.TempPath);
+        Assert.Null(result.PostProcessingData.Thumbnail);
+        Assert.Null(result.PostProcessingData.ThumbnailTransformState);
+    }
+
+    [Theory]
+    [ClassData(typeof(StorageAwareTestData))]
+    public void TransformsDontChangeStoredImage(StorageConfig storageConfig)
+    {
+        storageConfig.Apply(this);
+        var options = new ScanOptions
+        {
+            MaxQuality = true,
+            RotateDegrees = 90,
+            Brightness = 300,
+            AutoCrop = true,
+            CorrectionMode = CorrectionMode.Document,
+            ThumbnailSize = 256,
+            OcrParams = new OcrParams("eng")
+        };
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.autocrop_doc), options,
+            new PostProcessingContext())!;
+        Assert.NotEmpty(result.TransformState.Transforms);
+        using var original = result.WithNoTransforms();
+        ImageAsserts.Similar(ImageResources.autocrop_doc, original);
+    }
+
+    [Fact]
+    public void AutoDeskewWithRotation()
+    {
+        var options = new ScanOptions
+        {
+            RotateDegrees = 90,
+            AutoDeskew = true
+        };
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.skewed), options,
+            new PostProcessingContext())!;
+        using var expected = LoadImage(ImageResources.deskewed).PerformTransform(new RotationTransform(90));
+        using var rendered = result.Render();
+        ImageAsserts.Similar(expected, rendered, ImageAsserts.XL_RMSE_THRESHOLD);
+    }
+
+    [Fact]
+    public void DetectBarcode()
+    {
+        var options = new ScanOptions
+        {
+            PaperSource = PaperSource.Duplex,
+            FlipDuplexedPages = true,
+            BarcodeDetectionOptions = new BarcodeDetectionOptions { DetectBarcodes = true, PatchTOnly = true }
+        };
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.patcht), options,
+            new PostProcessingContext { PageNumber = 2 })!;
+        Assert.True(result.PostProcessingData.Barcode.IsDetected);
+        Assert.True(result.PostProcessingData.Barcode.IsPatchT);
+    }
+
+    [Fact]
+    public void BarcodeDetectionDisabled()
+    {
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.patcht), new ScanOptions(),
+            new PostProcessingContext())!;
+        Assert.False(result.PostProcessingData.Barcode.IsDetectionAttempted);
+    }
+
+    [Theory]
+    [InlineData(Driver.Escl, false, true)]
+    [InlineData(Driver.Wia, false, false)]
+    [InlineData(Driver.Twain, false, false)]
+    [InlineData(Driver.Wia, true, true)]
+    public void BrightnessContrastAfterScan(Driver driver, bool afterScan, bool expectTransforms)
+    {
+        var options = new ScanOptions
+        {
+            Driver = driver,
+            Brightness = 300,
+            Contrast = 200,
+            BrightnessContrastAfterScan = afterScan
+        };
+        using var result = _remotePostProcessor.PostProcess(LoadImage(ImageResources.dog), options,
+            new PostProcessingContext())!;
+        if (expectTransforms)
+        {
+            Assert.Equal([new BrightnessTransform(300), new TrueContrastTransform(200)], result.TransformState.Transforms);
+        }
+        else
+        {
+            Assert.Empty(result.TransformState.Transforms);
+        }
     }
 }
