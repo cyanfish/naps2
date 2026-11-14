@@ -52,12 +52,6 @@ public class NameManager
         _reserved = new Dictionary<string, int>(comparer);
     }
 
-    internal static bool ContainsPlaceholders(string input)
-    {
-        return NumberPlaceholderPattern.IsMatch(input) ||
-               DateReplacements.Keys.Any(placeholder => input.Contains(placeholder, StringComparison.Ordinal));
-    }
-
     /// <summary>
     /// Computes the name for the given input without reserving it.
     /// </summary>

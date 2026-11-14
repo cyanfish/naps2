@@ -82,11 +82,7 @@ public class AutoSaver
             var scans = SaveSeparatorHelper.SeparateScansWithBarcodeValues(new[] { images }, settings.Separator,
                     barcodeSeparatorOptions: settings.BarcodeSeparatorOptions)
                 .Where(x => x.Images.Count > 0).ToList();
-            var saveParams = new SaveParams
-            {
-                OverwriteMode = OverwriteMode.Never,
-                OpenEndedSequence = scans.Count > 1 || !NameManager.ContainsPlaceholders(settings.FilePath)
-            };
+            var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never, OpenEndedSequence = true };
             foreach (var (scan, i) in scans.Select((x, i) => (x, i)))
             {
                 var imagesToSave = scan.Images;
