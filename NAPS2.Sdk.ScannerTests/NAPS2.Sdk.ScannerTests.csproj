@@ -5,6 +5,7 @@
         <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Windows'))">net10.0</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX')) and '$(NAPS2_MAC_TEST_APPKIT)' == '1'">$(TargetFrameworks);net11.0-macos</TargetFrameworks>
         <OutputType>Exe</OutputType>
+        <NoWarn>$(NoWarn);xUnit1051</NoWarn>
         <RootNamespace>NAPS2.Sdk.ScannerTests</RootNamespace>
     </PropertyGroup>
 
