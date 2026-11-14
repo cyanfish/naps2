@@ -11,7 +11,7 @@ public class TestCommand : ICommand<TestOptions>
             ? $"NAPS2.App.Mac/bin/Debug/net11.0-macos/osx-{arch}"
             : OperatingSystem.IsLinux()
                 ? $"NAPS2.App.Gtk/bin/Debug/net10.0/linux-{arch}"
-                : $"NAPS2.App.WinForms/bin/Debug/net10.0-windows/win-{arch}";
+                : $"NAPS2.App.WinForms/bin/Debug/net11.0-windows/win-{arch}";
 
         var scopes = string.IsNullOrEmpty(opts.Scope) ? ["sdk", "lib", "app"] : opts.Scope.Split('+');
         var projects = new List<string>();
@@ -53,7 +53,7 @@ public class TestCommand : ICommand<TestOptions>
     {
         if (OperatingSystem.IsWindows())
         {
-            return $"{project}/bin/Debug/net10.0-windows/{project}.dll";
+            return $"{project}/bin/Debug/net11.0-windows/{project}.dll";
         }
         if (OperatingSystem.IsMacOS() && project != "NAPS2.App.Tests")
         {
