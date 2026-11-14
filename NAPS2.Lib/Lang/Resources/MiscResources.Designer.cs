@@ -895,6 +895,15 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("SaveImages", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Also save OCR text files alongside the JPEG images?.
+        /// </summary>
+        internal static string SaveOcrTextAlongsideImages {
+            get {
+                return ResourceManager.GetString("SaveOcrTextAlongsideImages", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Save Images Progress.

@@ -174,10 +174,10 @@ public class AutomatedScanningOptions
 
     #region OCR Options
 
-    [Option("enableocr", HelpText = "Enable OCR for generated PDFs.")]
+    [Option("enableocr", HelpText = "Enable OCR for generated PDFs or JPEG text sidecars.")]
     public bool EnableOcr { get; set; }
 
-    [Option("disableocr", HelpText = "Disable OCR for generated PDFs. Overrides --enableocr.")]
+    [Option("disableocr", HelpText = "Disable OCR for generated PDFs and JPEG text sidecars. Overrides --enableocr.")]
     public bool DisableOcr { get; set; }
 
     [Option("ocrlang", HelpText = "The three-letter code for the language used for OCR (e.g. 'eng' for" +

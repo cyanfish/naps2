@@ -312,6 +312,9 @@
   <data name="SaveImages" xml:space="preserve">
     <value>Save Images</value>
   </data>
+  <data name="SaveOcrTextAlongsideImages" xml:space="preserve">
+    <value>Also save OCR text files alongside the JPEG images?</value>
+  </data>
   <data name="SaveImagesProgress" xml:space="preserve">
     <value>Save Images Progress</value>
   </data>
