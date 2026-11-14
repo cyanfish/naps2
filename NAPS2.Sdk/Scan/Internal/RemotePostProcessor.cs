@@ -34,31 +34,34 @@ internal class RemotePostProcessor : IRemotePostProcessor
         PostProcessingContext postProcessingContext)
     {
         image = DoInitialTransforms(image, options);
-        try
+        if (options.ExcludeBlankPages)
         {
-            if (options.ExcludeBlankPages)
+            var op = new BlankDetectionImageOp(options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold);
+            op.Perform(image);
+            if (op.IsBlank)
             {
-                var op = new BlankDetectionImageOp(options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold);
-                op.Perform(image);
-                if (op.IsBlank)
-                {
-                    // TODO: Consider annotating the image as blank via postprocessingdata rather than excluding here
-                    // TODO: In theory we might want to add some functionality to allow the user to correct blank detection
-                    return null;
-                }
+                // TODO: Consider annotating the image as blank via postprocessingdata rather than excluding here
+                // TODO: In theory we might want to add some functionality to allow the user to correct blank detection
+                image.Dispose();
+                return null;
             }
+        }
 
-            var scannedImage = _scanningContext.CreateProcessedImage(image, options.MaxQuality,
-                options.Quality, options.PageSize);
-            DoRevertibleTransforms(ref scannedImage, ref image, options, postProcessingContext);
-            postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
-            return scannedImage;
-        }
-        finally
+        using var page = new PostProcessingPage(
+            _scanningContext.CreateProcessedImage(image, options.MaxQuality, options.Quality, options.PageSize),
+            image);
+        DoRevertibleTransforms(page, options, postProcessingContext);
+        postProcessingContext.TempPath = SaveForBackgroundOcr(page, options);
+        if (options.ThumbnailSize.HasValue)
         {
-            // Can't use "using" as the image reference could change
-            image.Dispose();
+            // This is done last as it consumes the rendered image
+            page.SetPostProcessingData(page.ProcessedImage.PostProcessingData with
+            {
+                ThumbnailTransformState = page.ProcessedImage.TransformState,
+                Thumbnail = page.TakeRendered().PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value))
+            });
         }
+        return page.ProcessedImage;
     }
 
     private IMemoryImage DoInitialTransforms(IMemoryImage original, ScanOptions options)
@@ -134,10 +137,10 @@ internal class RemotePostProcessor : IRemotePostProcessor
     }
 
     // TODO: This is more than just transforms.
-    private void DoRevertibleTransforms(ref ProcessedImage processedImage, ref IMemoryImage image, ScanOptions options,
+    private void DoRevertibleTransforms(PostProcessingPage page, ScanOptions options,
         PostProcessingContext postProcessingContext)
     {
-        var data = processedImage.PostProcessingData with
+        var data = page.ProcessedImage.PostProcessingData with
         {
             PageNumber = postProcessingContext.PageNumber
         };
@@ -145,8 +148,8 @@ internal class RemotePostProcessor : IRemotePostProcessor
         if ((!options.UseNativeUI && options.BrightnessContrastAfterScan) ||
             options.Driver is not (Driver.Wia or Driver.Twain))
         {
-            processedImage = processedImage.WithTransform(new BrightnessTransform(options.Brightness), true);
-            processedImage = processedImage.WithTransform(new TrueContrastTransform(options.Contrast), true);
+            page.AddTransform(new BrightnessTransform(options.Brightness));
+            page.AddTransform(new TrueContrastTransform(options.Contrast));
         }
 
         if (options.PaperSource == PaperSource.Duplex)
@@ -157,36 +160,36 @@ internal class RemotePostProcessor : IRemotePostProcessor
             };
             if (options.FlipDuplexedPages && data.PageSide == PageSide.Back)
             {
-                processedImage = processedImage.WithTransform(new RotationTransform(180), true);
+                page.AddTransform(new RotationTransform(180));
             }
         }
 
         if (options.RotateDegrees != 0)
         {
-            processedImage = processedImage.WithTransform(new RotationTransform(options.RotateDegrees), true);
+            page.AddTransform(new RotationTransform(options.RotateDegrees));
         }
 
         if (options.AutoDeskew)
         {
-            processedImage = processedImage.WithTransform(Deskewer.GetDeskewTransform(image), true);
+            page.AddTransform(Deskewer.GetDeskewTransform(page.GetRendered(TransformState.Empty)));
         }
 
         if (options.AutoCrop)
         {
             // Detect the page on the image with the transforms so far (e.g. deskewing) applied
-            using var transformed = image.Clone().PerformAllTransforms(processedImage.TransformState.Transforms);
+            var rendered = page.GetRendered();
             var op = new EdgeDetectionImageOp();
-            op.Perform(transformed);
+            op.Perform(rendered);
             if (op.Left != 0 || op.Top != 0 || op.Right != 0 || op.Bottom != 0)
             {
-                processedImage = processedImage.WithTransform(new CropTransform(
-                    op.Left, op.Right, op.Top, op.Bottom, transformed.Width, transformed.Height), true);
+                page.AddTransform(new CropTransform(
+                    op.Left, op.Right, op.Top, op.Bottom, rendered.Width, rendered.Height));
             }
         }
 
         if (options.CorrectionMode != CorrectionMode.None)
         {
-            processedImage = processedImage.WithTransform(new CorrectionTransform(options.CorrectionMode), true);
+            page.AddTransform(new CorrectionTransform(options.CorrectionMode));
         }
 
         if (!data.Barcode.IsDetected)
@@ -194,30 +197,21 @@ internal class RemotePostProcessor : IRemotePostProcessor
             // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
             data = data with
             {
-                Barcode = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
+                Barcode = options.BarcodeDetectionOptions.DetectBarcodes
+                    ? BarcodeDetector.Detect(page.GetRendered(), options.BarcodeDetectionOptions)
+                    : Barcode.NoDetection
             };
         }
-        if (options.ThumbnailSize.HasValue)
-        {
-            data = data with
-            {
-                // TODO: Maybe there's a way we can do this without needing to clone
-                Thumbnail = image.Clone()
-                    .PerformAllTransforms(processedImage.TransformState.Transforms)
-                    .PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value)),
-                ThumbnailTransformState = processedImage.TransformState
-            };
-        }
-        processedImage = processedImage.WithPostProcessingData(data, true);
+        page.SetPostProcessingData(data);
     }
 
-    private string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
+    private string? SaveForBackgroundOcr(PostProcessingPage page, ScanOptions options)
     {
         if (!string.IsNullOrEmpty(options.OcrParams.LanguageCode))
         {
             // TODO: If we use tesseract as a library, this is something that that could potentially improve (i.e. not having to save to disk)
             // But then again, that doesn't make as much sense on systems (i.e. linux) where tesseract would be provided as an external package
-            return _scanningContext.SaveToTempFile(bitmap);
+            return _scanningContext.SaveToTempFile(page.GetRendered());
         }
         return null;
     }
