@@ -16,6 +16,7 @@
         <PublishSingleFile>true</PublishSingleFile>
         <PublishTrimmed>true</PublishTrimmed>
         <TrimMode>partial</TrimMode>
+        <PublishReadyToRun>true</PublishReadyToRun>
         <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     </PropertyGroup>
 

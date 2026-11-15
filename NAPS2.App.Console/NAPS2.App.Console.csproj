@@ -12,6 +12,7 @@
     <!-- TODO: Re-enable trimming if we can fix startup time as well as WIA being broken -->
     <PublishTrimmed>false</PublishTrimmed>
     <TrimMode>none</TrimMode>
+    <PublishReadyToRun>true</PublishReadyToRun>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <CETCompat>false</CETCompat>
 
