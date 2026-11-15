@@ -113,17 +113,7 @@ public class PackageCommand : ICommand<PackageOptions>
             "System.Data",
             "System.Private.DataContract",
             "System.Windows.Forms.Design",
-            // For WPF
-            "D3D",
-            "Presentation",
-            "Reach",
-            "System.Windows.Controls.Ribbon",
-            "System.Windows.Input",
-            "System.Windows.Presentation",
-            "System.Xaml",
-            "UIAutomation",
             "WindowsBase",
-            "wpfgfx",
             // For debugging
             "createdump",
             "Microsoft.DiaSymReader",

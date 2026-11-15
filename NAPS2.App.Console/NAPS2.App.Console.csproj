@@ -13,6 +13,8 @@
     <PublishTrimmed>false</PublishTrimmed>
     <TrimMode>none</TrimMode>
     <PublishReadyToRun>true</PublishReadyToRun>
+    <UseWindowsForms>true</UseWindowsForms>
+    <DisableTransitiveFrameworkReferences>true</DisableTransitiveFrameworkReferences>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <CETCompat>false</CETCompat>
 
