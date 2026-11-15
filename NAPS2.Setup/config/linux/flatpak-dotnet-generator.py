@@ -9,6 +9,7 @@ import argparse
 import base64
 import binascii
 import json
+import os
 import subprocess
 import tempfile
 
@@ -30,6 +31,10 @@ def main():
         if args.runtime:
             runtime_args.extend(('-r', args.runtime))
 
+        # "flatpak run" forwards the host environment into the sandbox. When this script is launched via "dotnet run",
+        # that includes MSBuild/.NET variables pointing at the host SDK, which doesn't exist in the sandbox.
+        env = {k: v for k, v in os.environ.items() if not k.upper().startswith(('MSBUILD', 'DOTNET_'))}
+
         def runCommand(cmd):
             subprocess.run([
                 'flatpak', 'run',
@@ -40,7 +45,7 @@ def main():
                 'PATH="${PATH}:/usr/lib/sdk/dotnet10/bin" NUGET_PACKAGES="' +
                 str(Path(tmp).resolve()) +
                 '" LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/sdk/dotnet10/lib" exec dotnet ' + cmd,
-                '--', args.project] + runtime_args)
+                '--', args.project] + runtime_args, env=env, check=True)
 
         runCommand('restore -r linux-x64 "$@"')
         runCommand('restore -r linux-arm64 "$@"')
