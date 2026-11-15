@@ -42,5 +42,15 @@ public class TransformSerializationTests : ContextualTests
         Assert.True(copy[8] is ThumbnailTransform tt && tt.Size == 15);
         Assert.True(copy[9] is TrueContrastTransform tct && tct.Contrast == 16);
         Assert.True(copy[10] is ResolutionTransform rst && Math.Abs(rst.Dpi - 17.5) < TOLERANCE);
-        Assert.True(copy[11] is FileFormatTransform fft && fft.Format == ImageFileFormat.Jpeg);    }
+        Assert.True(copy[11] is FileFormatTransform fft && fft.Format == ImageFileFormat.Jpeg);
+    }
+
+    [Fact]
+    public void KnownTypesIncludesAllTransforms()
+    {
+        var allTransformTypes = typeof(Transform).Assembly.GetTypes()
+            .Where(t => typeof(Transform).IsAssignableFrom(t))
+            .ToHashSet();
+        Assert.Equal(allTransformTypes, Transform.KnownTypes.ToHashSet());
+    }
 }
