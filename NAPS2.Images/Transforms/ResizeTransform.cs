@@ -1,8 +1,10 @@
-﻿
+﻿using NAPS2.Serialization;
+
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace NAPS2.Images.Transforms;
 
+[GeneratePropertyAccessors]
 public record ResizeTransform : Transform
 {
     public ResizeTransform()

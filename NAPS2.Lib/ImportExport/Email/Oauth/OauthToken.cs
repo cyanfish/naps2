@@ -2,6 +2,7 @@
 
 namespace NAPS2.ImportExport.Email.Oauth;
 
+[GeneratePropertyAccessors]
 public class OauthToken
 {
     public SecureString? AccessToken { get; set; }

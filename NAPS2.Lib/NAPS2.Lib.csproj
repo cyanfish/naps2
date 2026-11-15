@@ -36,6 +36,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
     <ProjectReference Include="..\NAPS2.Escl.Server\NAPS2.Escl.Server.csproj" />
+    <ProjectReference Include="..\NAPS2.Generators\NAPS2.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
     <PackageReference Include="Autofac" Version="9.3.1" />
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />

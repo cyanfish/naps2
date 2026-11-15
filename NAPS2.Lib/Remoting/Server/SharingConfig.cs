@@ -1,9 +1,11 @@
 using System.Collections.Immutable;
 using NAPS2.Config.Model;
+using NAPS2.Serialization;
 
 namespace NAPS2.Remoting.Server;
 
 [Config]
+[GeneratePropertyAccessors]
 public class SharingConfig
 {
     /// <summary>

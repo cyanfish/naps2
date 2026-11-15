@@ -5,10 +5,12 @@ using NAPS2.Pdf;
 using NAPS2.Ocr;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
+using NAPS2.Serialization;
 
 namespace NAPS2.Config.ObsoleteTypes;
 
 [XmlType("UserConfig")]
+[GeneratePropertyAccessors]
 public class UserConfigV0
 {
     public int Version { get; set; }

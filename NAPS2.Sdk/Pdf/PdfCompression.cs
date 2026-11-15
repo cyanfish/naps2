@@ -1,8 +1,11 @@
+using NAPS2.Serialization;
+
 namespace NAPS2.Pdf;
 
 /// <summary>
 /// Configuration for how images are compressed in exported PDFs.
 /// </summary>
+[GeneratePropertyAccessors]
 public record PdfCompression
 {
     /// <summary>

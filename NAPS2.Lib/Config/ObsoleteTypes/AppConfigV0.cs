@@ -3,10 +3,12 @@ using NAPS2.Escl;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using NAPS2.Serialization;
 
 namespace NAPS2.Config.ObsoleteTypes;
 
 [XmlType("AppConfig")]
+[GeneratePropertyAccessors]
 public class AppConfigV0
 {
     public int Version { get; set; }
