@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace NAPS2.App.Tests.Verification;
@@ -7,7 +8,9 @@ public sealed class VerifyTheoryAttribute : TheoryAttribute
     private bool _allowDebug;
     private bool _windowsAppium;
     
-    public VerifyTheoryAttribute()
+    public VerifyTheoryAttribute(
+        [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = -1)
+        : base(sourceFilePath, sourceLineNumber)
     {
         if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NAPS2_TEST_VERIFY")))
         {

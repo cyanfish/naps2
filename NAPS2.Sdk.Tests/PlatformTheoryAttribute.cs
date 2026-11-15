@@ -1,10 +1,13 @@
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests;
 
 public sealed class PlatformTheoryAttribute : TheoryAttribute
 {
-    public PlatformTheoryAttribute(PlatformFlags include = PlatformFlags.None, PlatformFlags exclude = PlatformFlags.None)
+    public PlatformTheoryAttribute(PlatformFlags include = PlatformFlags.None, PlatformFlags exclude = PlatformFlags.None,
+        [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = -1)
+        : base(sourceFilePath, sourceLineNumber)
     {
         if (include != PlatformFlags.None && (CurrentPlatformFlags.Get() & include) != include)
         {
