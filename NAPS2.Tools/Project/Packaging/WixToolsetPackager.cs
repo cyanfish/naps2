@@ -57,22 +57,15 @@ public static class WixToolsetPackager
         }
         template = template.Replace("<!-- !root -->", rootLines.ToString());
 
-        var libLines = new StringBuilder();
-        foreach (var libFile in packageInfo.Files.Where(x => x.DestDir == "lib"))
-        {
-            DeclareFile(libLines, libFile);
-        }
-        template = template.Replace("<!-- !lib -->", libLines.ToString());
-
         var win32Lines = new StringBuilder();
-        foreach (var win32File in packageInfo.Files.Where(x => x.DestDir == Path.Combine("lib", "_win32")))
+        foreach (var win32File in packageInfo.Files.Where(x => x.DestDir == "_win32"))
         {
             DeclareFile(win32Lines, win32File);
         }
         template = template.Replace("<!-- !win32 -->", win32Lines.ToString());
 
         var win64Lines = new StringBuilder();
-        foreach (var win64File in packageInfo.Files.Where(x => x.DestDir == Path.Combine("lib", "_win64")))
+        foreach (var win64File in packageInfo.Files.Where(x => x.DestDir == "_win64"))
         {
             DeclareFile(win64Lines, win64File);
         }

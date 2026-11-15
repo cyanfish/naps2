@@ -67,7 +67,7 @@ public class PackageCommand : ICommand<PackageOptions>
         var workerBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net11.0-windows",
             "win-x86");
         var workerPath = Path.Combine(workerBuildPath, "publish");
-        pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
+        pkgInfo.AddFile(new PackageFile(workerPath, "", "NAPS2.Worker.exe"));
         // The worker encodes scanned images as JPEG, so it needs its own (32-bit) copy of the encoder. This isn't in the
         // publish folder as the worker is published as a single file.
         AddPlatformFile(pkgInfo, workerBuildPath, "_win32", "naps2_jpeg.dll");
@@ -118,13 +118,12 @@ public class PackageCommand : ICommand<PackageOptions>
         var folder = new DirectoryInfo(Path.Combine(buildPath, platformPath));
         foreach (var file in folder.EnumerateFiles())
         {
-            pkgInfo.AddFile(new PackageFile(file.DirectoryName ?? "", Path.Combine("lib", platformPath), file.Name));
+            pkgInfo.AddFile(new PackageFile(file.DirectoryName ?? "", platformPath, file.Name));
         }
     }
 
     private static void AddPlatformFile(PackageInfo pkgInfo, string buildPath, string platformPath, string fileName)
     {
-        pkgInfo.AddFile(new PackageFile(Path.Combine(buildPath, platformPath), Path.Combine("lib", platformPath),
-            fileName));
+        pkgInfo.AddFile(new PackageFile(Path.Combine(buildPath, platformPath), platformPath, fileName));
     }
 }

@@ -48,8 +48,7 @@ internal class WorkerFactory : IWorkerFactory
             Path.Combine(AssemblyHelper.EntryFolder,
                 @"..\..\..\..\..\NAPS2.App.Worker\bin\Debug\net11.0-windows\win-x86\NAPS2.Worker.exe"),
 #endif
-            Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.Worker.exe"),
-            Path.Combine(AssemblyHelper.EntryFolder, "lib", "NAPS2.Worker.exe")
+            Path.Combine(AssemblyHelper.EntryFolder, "NAPS2.Worker.exe")
         };
         string workerExePath = "";
         foreach (var candidateWorkerPath in candidateWorkerPaths)
