@@ -40,7 +40,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     RpmPackager.PackageRpm(GetPackageInfoForConfig(), opts.NoSign);
                     break;
                 case PackageType.Flatpak:
-                    FlatpakPackager.Package(GetPackageInfoForConfig(), opts.NoPre);
+                    FlatpakPackager.Package(GetPackageInfoForConfig(), opts.NoPre, opts.NoSign);
                     break;
                 case PackageType.Pkg:
                     MacPackager.Package(GetPackageInfoForConfig(), opts.NoSign, opts.NoNotarize);
