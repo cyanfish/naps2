@@ -356,7 +356,8 @@ public class WinFormsDesktopForm : DesktopForm
                     break;
             }
         }
-        item.DropDown.ResumeLayout();
+        // Only relayout if the menu is already visible
+        item.DropDown.ResumeLayout(item.DropDown.IsHandleCreated);
     }
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
