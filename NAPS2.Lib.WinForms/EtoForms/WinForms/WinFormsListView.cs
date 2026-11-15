@@ -11,12 +11,9 @@ namespace NAPS2.EtoForms.WinForms;
 
 public class WinFormsListView<T> : IListView<T> where T : notnull
 {
-    private Pen DefaultPen => new(_behavior.ColorScheme.ForegroundColor.ToSD(), 1);
     private static readonly Pen BasicSelectionPen = new(Color.FromArgb(0x60, 0xa0, 0xe8), 3);
     private const int PageNumberTextPadding = 6;
     private const int PageNumberSelectionPadding = 3;
-    private SolidBrush PageNumberOutlineBrush => new(_behavior.ColorScheme.HighlightBorderColor.ToSD());
-    private SolidBrush PageNumberSelectionBrush => new(_behavior.ColorScheme.HighlightBackgroundColor.ToSD());
     private static readonly StringFormat PageNumberLabelFormat = new()
         { Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter };
 
@@ -29,6 +26,10 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
     private ContextMenu? _contextMenu;
     private float _dpiScale = 1f;
     private Eto.Drawing.Size _imageSize = new(48, 48);
+    private Pen? _defaultPen;
+    private SolidBrush? _labelBrush;
+    private SolidBrush? _pageNumberOutlineBrush;
+    private SolidBrush? _pageNumberSelectionBrush;
 
     public WinFormsListView(ListViewBehavior<T> behavior)
     {
@@ -84,6 +85,35 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             // Reset internal size based on new scale
             ImageSize = ImageSize;
         });
+
+        UpdateColors();
+        _view.HandleCreated += (_, _) => _behavior.ColorScheme.ColorSchemeChanged += OnColorSchemeChanged;
+        _view.HandleDestroyed += (_, _) => _behavior.ColorScheme.ColorSchemeChanged -= OnColorSchemeChanged;
+        _view.Disposed += (_, _) => DisposeColors();
+    }
+
+    private void OnColorSchemeChanged(object? sender, EventArgs e) => Invoker.Current.Invoke(() =>
+    {
+        UpdateColors();
+        _view.Invalidate();
+    });
+
+    private void UpdateColors()
+    {
+        DisposeColors();
+        var colorScheme = _behavior.ColorScheme;
+        _defaultPen = new Pen(colorScheme.ForegroundColor.ToSD(), 1);
+        _labelBrush = new SolidBrush(colorScheme.ForegroundColor.ToSD());
+        _pageNumberOutlineBrush = new SolidBrush(colorScheme.HighlightBorderColor.ToSD());
+        _pageNumberSelectionBrush = new SolidBrush(colorScheme.HighlightBackgroundColor.ToSD());
+    }
+
+    private void DisposeColors()
+    {
+        _defaultPen?.Dispose();
+        _labelBrush?.Dispose();
+        _pageNumberOutlineBrush?.Dispose();
+        _pageNumberSelectionBrush?.Dispose();
     }
 
     private bool UseCustomRendering => !_behavior.ShowLabels && !_behavior.Checkboxes;
@@ -130,28 +160,27 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
 
                 var outlineRect = selectionRect;
                 outlineRect.Inflate(1, 1);
-                e.Graphics.FillRectangle(PageNumberOutlineBrush, outlineRect);
+                e.Graphics.FillRectangle(_pageNumberOutlineBrush!, outlineRect);
 
-                e.Graphics.FillRectangle(PageNumberSelectionBrush, selectionRect);
+                e.Graphics.FillRectangle(_pageNumberSelectionBrush!, selectionRect);
             }
 
             // Draw image
             e.Graphics.DrawImage(image, new Rectangle(x, y, width, height));
 
             // Draw the text below the image
-            var drawBrush = new SolidBrush(_behavior.ColorScheme.ForegroundColor.ToSD());
             float x1 = x + width / 2f;
             float y1 = y + height + tp;
             RectangleF labelRect = new(x1, y1, 0, textSize.Height);
             float maxLabelWidth = Math.Min(textSize.Width, e.Bounds.Width - 2 * tp);
             labelRect.Inflate(maxLabelWidth / 2, 0);
             labelRect.Width += 2;
-            e.Graphics.DrawString(label, _view.Font, drawBrush, labelRect, PageNumberLabelFormat);
+            e.Graphics.DrawString(label, _view.Font, _labelBrush!, labelRect, PageNumberLabelFormat);
 
             // Draw unselected border
             if (!e.Item.Selected)
             {
-                e.Graphics.DrawRectangle(DefaultPen, x - 1, y - 1, width + 1, height + 1);
+                e.Graphics.DrawRectangle(_defaultPen!, x - 1, y - 1, width + 1, height + 1);
             }
         }
         else
@@ -181,7 +210,7 @@ public class WinFormsListView<T> : IListView<T> where T : notnull
             }
             else
             {
-                e.Graphics.DrawRectangle(DefaultPen, x, y, width, height);
+                e.Graphics.DrawRectangle(_defaultPen!, x, y, width, height);
             }
         }
     }
