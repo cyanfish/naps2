@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,11 @@ namespace NAPS2.Serialization;
 
 public abstract class XmlSerializer
 {
+    // NAPS2 apps are published with TrimMode=partial, which doesn't trim NAPS2 assemblies, so the serialized NAPS2
+    // types keep their members. Members of framework types that are created via reflection are kept with
+    // DynamicDependency.
+    internal const string TrimJustification = "Serialized types aren't trimmed";
+
     protected static readonly XNamespace Xsi = "http://www.w3.org/2001/XMLSchema-instance";
 
     protected static readonly Dictionary<Type, CustomXmlSerializer> CustomSerializerCache = new();
@@ -125,6 +131,8 @@ public abstract class XmlSerializer
         return DeserializeInternalNonNull(element, type);
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = TrimJustification)]
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = TrimJustification)]
     protected static object DeserializeInternalNonNull(XElement element, Type type)
     {
         var actualTypeName = element.Attribute(Xsi + "type")?.Value;
@@ -204,6 +212,8 @@ public abstract class XmlSerializer
         return type.Name;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2059", Justification = TrimJustification)]
+    [UnconditionalSuppressMessage("Trimming", "IL2070", Justification = TrimJustification)]
     protected static XmlTypeInfo GetTypeInfo(Type type)
     {
         lock (TypeInfoCache)
@@ -555,6 +565,11 @@ public abstract class XmlSerializer
             return typeof(object);
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = TrimJustification)]
+        [DynamicDependency("Add(`0)", typeof(List<>))]
+        [DynamicDependency("Add(`0)", typeof(HashSet<>))]
+        [DynamicDependency("Add(`0)", typeof(ImmutableList<>))]
+        [DynamicDependency("Add(`0)", typeof(ImmutableHashSet<>))]
         public override object DeserializeObject(XElement element, Type type)
         {
             var itemType = GetItemType(type);
@@ -580,6 +595,9 @@ public abstract class XmlSerializer
             return list;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = TrimJustification)]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(List<>))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(HashSet<>))]
         protected virtual object CreateInstance(Type type, Type itemType) => Activator.CreateInstance(type, true)!;
     }
 
@@ -622,6 +640,8 @@ public abstract class XmlSerializer
             }
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = TrimJustification)]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(Dictionary<,>))]
         public override object DeserializeObject(XElement element, Type type)
         {
             var typeArgs = type.GetGenericArguments();

@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -8,6 +9,8 @@ public class ConfigLookup
 {
     private static readonly Dictionary<Type, ImmutableList<PropertyData>> PropertyDataCache = new();
 
+    [UnconditionalSuppressMessage("Trimming", "IL2070",
+        Justification = "Config types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     public static ImmutableList<PropertyData> GetPropertyData(Type type)
     {
         lock (PropertyDataCache)

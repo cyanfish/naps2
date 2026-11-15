@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 namespace NAPS2.Config.Model;
@@ -12,6 +13,8 @@ public abstract class ScopedConfig<TConfig>
         return (T) Get(lookup)!;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2072",
+        Justification = "Config types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     private object? Get(ConfigLookup lookup)
     {
         if (!lookup.Tail.IsLeaf)

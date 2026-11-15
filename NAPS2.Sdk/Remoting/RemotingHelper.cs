@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using NAPS2.Scan.Exceptions;
 
 namespace NAPS2.Remoting;
@@ -15,6 +16,8 @@ internal static class RemotingHelper
         }
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026",
+        Justification = "Falls back to a generic Exception if the type isn't available")]
     private static Exception MakeExceptionObject(Error error)
     {
         var exceptionType = Assembly.GetAssembly(typeof(ScanDriverException))!.GetType(error.Type, false);
@@ -35,6 +38,8 @@ internal static class RemotingHelper
         return exception;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2067",
+        Justification = "Falls back to a generic Exception if the type can't be constructed")]
     private static Exception CreateExceptionType(Type? exceptionType)
     {
         if (exceptionType != null && typeof(ScanDriverException).IsAssignableFrom(exceptionType))
