@@ -25,6 +25,7 @@ public class EtoDialogHelper : DialogHelper
             lastExt = "pdf";
         }
         var sd = CreateSaveFileDialog();
+        sd.Title = UiStrings.Save;
         sd.FileName = GetDefaultFileName(defaultPath, lastExt!);
         _fileFilters.Set(sd, FileFilterGroup.Pdf | FileFilterGroup.Image, lastExt);
         SetDir(sd, defaultPath);
@@ -42,6 +43,7 @@ public class EtoDialogHelper : DialogHelper
     public override bool PromptToSavePdf(string? defaultPath, out string? savePath)
     {
         var sd = CreateSaveFileDialog();
+        sd.Title = UiStrings.SavePdf;
         sd.FileName = GetDefaultFileName(defaultPath, "pdf");
         _fileFilters.Set(sd, FileFilterGroup.Pdf);
         SetDir(sd, defaultPath);
@@ -63,6 +65,7 @@ public class EtoDialogHelper : DialogHelper
             lastExt = "jpg";
         }
         var sd = CreateSaveFileDialog();
+        sd.Title = UiStrings.SaveImages;
         sd.FileName = GetDefaultFileName(defaultPath, lastExt!);
         var filterGroups = EtoPlatform.Current.IsGtk
             ? FileFilterGroup.AllImages | FileFilterGroup.Image
@@ -159,6 +162,7 @@ public class EtoDialogHelper : DialogHelper
     public override bool PromptToImport(out string[]? filePaths)
     {
         var ofd = CreateOpenFileDialog();
+        ofd.Title = UiStrings.Import;
         ofd.MultiSelect = true;
         ofd.CheckFileExists = true;
         _fileFilters.Set(ofd,
