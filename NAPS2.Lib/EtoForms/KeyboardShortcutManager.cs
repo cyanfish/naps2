@@ -105,7 +105,7 @@ public class KeyboardShortcutManager
         return Keys.None;
     }
 
-    public string? Stringify(Keys keys)
+    public string? KeysToInvariantString(Keys keys)
     {
         if (keys == Keys.None)
         {
@@ -131,6 +131,53 @@ public class KeyboardShortcutManager
         var keyWithoutMods = keys & ~Keys.ModifierMask;
         sb.Append(_stringifyMap.Get(keyWithoutMods) ?? keyWithoutMods.ToString());
         return sb.ToString();
+    }
+
+    public string? KeysToLocalizedString(Keys keys)
+    {
+        if (keys == Keys.None)
+        {
+            return null;
+        }
+        var parts = new List<string>();
+        if (keys.HasFlag(Keys.Application))
+        {
+            parts.Add(EtoPlatform.Current.IsMac ? UiStrings.CommandKey : UiStrings.WindowsKey);
+        }
+        if (keys.HasFlag(Keys.Control))
+        {
+            parts.Add(UiStrings.ControlKey);
+        }
+        if (keys.HasFlag(Keys.Shift))
+        {
+            parts.Add(UiStrings.ShiftKey);
+        }
+        if (keys.HasFlag(Keys.Alt))
+        {
+            parts.Add(EtoPlatform.Current.IsMac ? UiStrings.OptionKey : UiStrings.AltKey);
+        }
+        var keyWithoutMods = keys & ~Keys.ModifierMask;
+        parts.Add(keyWithoutMods switch
+        {
+            Keys.Enter => UiStrings.EnterKey,
+            Keys.Delete => UiStrings.DeleteKey,
+            Keys.Insert => UiStrings.InsertKey,
+            Keys.Escape => UiStrings.EscapeKey,
+            Keys.Space => UiStrings.SpaceKey,
+            Keys.Tab => UiStrings.TabKey,
+            Keys.Backspace => UiStrings.BackspaceKey,
+            Keys.Home => UiStrings.HomeKey,
+            Keys.End => UiStrings.EndKey,
+            Keys.PageUp => UiStrings.PageUpKey,
+            Keys.PageDown => UiStrings.PageDownKey,
+            Keys.Up => UiStrings.UpArrowKey,
+            Keys.Down => UiStrings.DownArrowKey,
+            Keys.Left => UiStrings.LeftArrowKey,
+            Keys.Right => UiStrings.RightArrowKey,
+            Keys.Pause => UiStrings.PauseKey,
+            _ => _stringifyMap.Get(keyWithoutMods) ?? keyWithoutMods.ToString()
+        });
+        return string.Join(" + ", parts);
     }
 
     public bool Assign(string? value, Action action)
