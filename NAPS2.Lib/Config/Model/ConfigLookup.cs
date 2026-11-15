@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
+using NAPS2.Serialization;
 
 namespace NAPS2.Config.Model;
 
@@ -105,7 +106,12 @@ public class ConfigLookup
         }
     }
 
-    public record PropertyData(string Name, Type Type, bool IsNestedConfig, PropertyInfo PropertyInfo);
+    public record PropertyData(string Name, Type Type, bool IsNestedConfig, PropertyInfo PropertyInfo)
+    {
+        public Func<object, object?> Getter { get; } = PropertyAccessors.GetGetter(PropertyInfo);
+
+        public Action<object, object?> Setter { get; } = PropertyAccessors.GetSetter(PropertyInfo);
+    }
 
     public ConfigLookup Append(PropertyData prop)
     {

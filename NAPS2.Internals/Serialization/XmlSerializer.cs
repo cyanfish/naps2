@@ -113,7 +113,7 @@ public abstract class XmlSerializer
         {
             foreach (var propInfo in typeInfo.Properties!)
             {
-                var child = SerializeInternal(propInfo.Property.GetValue(obj), new XElement(propInfo.Property.Name),
+                var child = SerializeInternal(propInfo.Getter(obj), new XElement(propInfo.Property.Name),
                     propInfo.Property.PropertyType);
                 element.Add(child);
             }
@@ -168,7 +168,7 @@ public abstract class XmlSerializer
             if (child != null)
             {
                 var childObj = DeserializeInternal(child, propInfo.Property.PropertyType);
-                propInfo.Property.SetValue(obj, childObj);
+                propInfo.Setter(obj, childObj);
             }
         }
         return obj;
@@ -304,7 +304,12 @@ public abstract class XmlSerializer
         public Dictionary<string, Type> KnownTypesByElementName { get; set; } = new();
     }
 
-    protected record XmlPropertyInfo(PropertyInfo Property);
+    protected record XmlPropertyInfo(PropertyInfo Property)
+    {
+        public Func<object, object?> Getter { get; } = PropertyAccessors.GetGetter(Property);
+
+        public Action<object, object?> Setter { get; } = PropertyAccessors.GetSetter(Property);
+    }
 
     protected class CharSerializer : CustomXmlSerializer<char>
     {

@@ -1,0 +1,118 @@
+using System.Linq;
+using System.Text;
+using Microsoft.CodeAnalysis;
+
+namespace NAPS2.Generators;
+
+/// <summary>
+/// Generates getter and setter delegates for the properties of types marked with [GeneratePropertyAccessors], and
+/// registers them with NAPS2.Serialization.PropertyAccessors when the assembly is loaded.
+/// </summary>
+[Generator]
+public class PropertyAccessorGenerator : IIncrementalGenerator
+{
+    private const string ATTRIBUTE_NAME = "NAPS2.Serialization.GeneratePropertyAccessorsAttribute";
+
+    public void Initialize(IncrementalGeneratorInitializationContext context)
+    {
+        var sources = context.SyntaxProvider.ForAttributeWithMetadataName(
+            ATTRIBUTE_NAME,
+            static (_, _) => true,
+            static (ctx, _) => Generate((INamedTypeSymbol) ctx.TargetSymbol, ctx.SemanticModel.Compilation));
+        context.RegisterSourceOutput(sources, static (ctx, source) =>
+        {
+            if (source != null)
+            {
+                ctx.AddSource(source.Value.HintName, source.Value.Code);
+            }
+        });
+    }
+
+    private static (string HintName, string Code)? Generate(INamedTypeSymbol type, Compilation compilation)
+    {
+        // Without module initializers (e.g. on .NET Framework) there's no way to register the accessors, so
+        // serialization falls back to reflection
+        if (type.IsGenericType || !compilation.IsSymbolAccessibleWithin(type, compilation.Assembly) ||
+            compilation.GetTypeByMetadataName("System.Runtime.CompilerServices.ModuleInitializerAttribute") == null)
+        {
+            return null;
+        }
+        bool canUnbox = compilation.GetTypeByMetadataName("System.Runtime.CompilerServices.Unsafe")
+            ?.GetMembers("Unbox").Any() == true;
+        bool hasUnsafeAccessor =
+            compilation.GetTypeByMetadataName("System.Runtime.CompilerServices.UnsafeAccessorAttribute") != null;
+        bool IsAccessible(ISymbol? symbol) =>
+            symbol != null && compilation.IsSymbolAccessibleWithin(symbol, compilation.Assembly);
+
+        var typeName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        var unsafeAccessors = new StringBuilder();
+        var accessors = new StringBuilder();
+        foreach (var prop in type.GetMembers().OfType<IPropertySymbol>())
+        {
+            if (prop.IsStatic || prop.IsIndexer || prop.RefKind != RefKind.None || prop.Type.IsRefLikeType ||
+                !prop.ExplicitInterfaceImplementations.IsEmpty || !IsAccessible(prop.Type))
+            {
+                continue;
+            }
+            var propType = prop.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+            bool hasGetter = IsAccessible(prop.GetMethod);
+            bool hasSetter = IsAccessible(prop.SetMethod) && !prop.SetMethod!.IsInitOnly &&
+                             (!type.IsValueType || (canUnbox && !type.IsReadOnly));
+            // Init-only and inaccessible setters can't be called directly, but UnsafeAccessor can call them
+            bool hasUnsafeSetter = !hasSetter && prop.SetMethod != null && hasUnsafeAccessor && !type.IsValueType;
+            if (!hasGetter && !hasSetter && !hasUnsafeSetter)
+            {
+                continue;
+            }
+            var getter = hasGetter ? $"static o => (({typeName}) o).{prop.Name}" : "null";
+            // Reflection sets value types to their default value when given null, so do the same
+            var value = prop.Type.IsValueType &&
+                        prop.Type.OriginalDefinition.SpecialType != SpecialType.System_Nullable_T
+                ? $"v is null ? default : ({propType}) v"
+                : $"({propType}) v";
+            // Structs are boxed, so they need to be modified in place
+            var target = type.IsValueType
+                ? $"global::System.Runtime.CompilerServices.Unsafe.Unbox<{typeName}>(o)"
+                : $"(({typeName}) o)";
+            var setter = "null";
+            if (hasSetter)
+            {
+                setter = $"static (o, v) => {target}.{prop.Name} = {value}";
+            }
+            else if (hasUnsafeSetter)
+            {
+                unsafeAccessors.AppendLine(
+                    "    [global::System.Runtime.CompilerServices.UnsafeAccessor(" +
+                    "global::System.Runtime.CompilerServices.UnsafeAccessorKind.Method, " +
+                    $"Name = \"{prop.SetMethod!.MetadataName}\")]");
+                unsafeAccessors.AppendLine(
+                    $"    private static extern void Set{prop.Name}({typeName} obj, {propType} value);");
+                unsafeAccessors.AppendLine();
+                setter = $"static (o, v) => Set{prop.Name}(({typeName}) o, {value})";
+            }
+            accessors.AppendLine(
+                $"            new global::NAPS2.Serialization.PropertyAccessor(\"{prop.Name}\", {getter}, {setter}),");
+        }
+
+        var code = new StringBuilder();
+        code.AppendLine("// <auto-generated/>");
+        code.AppendLine("#nullable disable");
+        code.AppendLine("#pragma warning disable CA2255");
+        code.AppendLine();
+        code.AppendLine("file static class PropertyAccessorRegistration");
+        code.AppendLine("{");
+        code.Append(unsafeAccessors);
+        code.AppendLine("    [global::System.Runtime.CompilerServices.ModuleInitializer]");
+        code.AppendLine("    internal static void Register()");
+        code.AppendLine("    {");
+        code.AppendLine($"        global::NAPS2.Serialization.PropertyAccessors.Register(typeof({typeName}), static () =>");
+        code.AppendLine("        [");
+        code.Append(accessors);
+        code.AppendLine("        ]);");
+        code.AppendLine("    }");
+        code.AppendLine("}");
+
+        var hintName = typeName.Replace("global::", "") + ".PropertyAccessors.g.cs";
+        return (hintName, code.ToString());
+    }
+}

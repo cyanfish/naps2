@@ -41,11 +41,11 @@ public abstract class ScopedConfig<TConfig>
             var subLookup = lookup.Append(prop);
             if (prop.IsNestedConfig)
             {
-                FillObject(prop.PropertyInfo.GetValue(obj), subLookup);
+                FillObject(prop.Getter(obj!), subLookup);
             }
             else
             {
-                prop.PropertyInfo.SetValue(obj, Get(subLookup));
+                prop.Setter(obj!, Get(subLookup));
             }
         }
     }
