@@ -302,12 +302,27 @@ public class WinFormsEtoPlatform : EtoPlatform
             // The handle can be recreated later (e.g. if RightToLeft changes), but Shown is only fired once
             if (!shown) WindowCloaking.SetCloaked(form.Handle, true);
         };
+        SetEnableRedrawDuringSuspend(window, true);
         window.Shown += (_, _) =>
         {
             shown = true;
             WindowCloaking.PaintNow(form.Handle);
             WindowCloaking.SetCloaked(form.Handle, false);
+            SetEnableRedrawDuringSuspend(window, false);
         };
+    }
+
+    private static void SetEnableRedrawDuringSuspend(Window window, bool value)
+    {
+        switch (window.Handler)
+        {
+            case FormHandler formHandler:
+                formHandler.EnableRedrawDuringSuspend = value;
+                break;
+            case DialogHandler dialogHandler:
+                dialogHandler.EnableRedrawDuringSuspend = value;
+                break;
+        }
     }
 
     public override float GetScaleFactor(Window? window)
