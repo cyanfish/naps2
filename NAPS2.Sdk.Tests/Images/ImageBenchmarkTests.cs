@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Images;
@@ -27,7 +28,9 @@ public class ImageBenchmarkTests : ContextualTests
 
     public class BenchmarkFact : FactAttribute
     {
-        public BenchmarkFact()
+        public BenchmarkFact(
+            [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = -1)
+            : base(sourceFilePath, sourceLineNumber)
         {
             Skip = "comment out this line to run benchmarks";
         }
