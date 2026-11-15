@@ -11,16 +11,19 @@ namespace NAPS2.EtoForms.WinForms;
 public static class WinFormsHacks
 {
     private static readonly FieldInfo? ImageSizeField;
-    private static readonly MethodInfo? PerformRecreateHandleMethod;
-    private static readonly MethodInfo? ControlSetStyle =
-        typeof(Control).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
+    private static readonly Action<ImageList>? PerformRecreateHandle;
+    private static readonly Action<Control, ControlStyles, bool>? ControlSetStyle =
+        typeof(Control).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic)
+            ?.CreateDelegate<Action<Control, ControlStyles, bool>>();
 
     static WinFormsHacks()
     {
         ImageSizeField = typeof(ImageList).GetField("_imageSize", BindingFlags.Instance | BindingFlags.NonPublic);
-        PerformRecreateHandleMethod = typeof(ImageList).GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic);
+        PerformRecreateHandle = typeof(ImageList)
+            .GetMethod("PerformRecreateHandle", BindingFlags.Instance | BindingFlags.NonPublic, Type.EmptyTypes)
+            ?.CreateDelegate<Action<ImageList>>();
 
-        if (ImageSizeField == null || PerformRecreateHandleMethod == null)
+        if (ImageSizeField == null || PerformRecreateHandle == null)
         {
             // No joy, just be happy enough with 256
             ThumbnailSizes.MAX_SIZE = 256;
@@ -29,10 +32,10 @@ public static class WinFormsHacks
 
     public static void SetImageSize(ImageList imageList, Size size)
     {
-        if (ImageSizeField != null && PerformRecreateHandleMethod != null)
+        if (ImageSizeField != null && PerformRecreateHandle != null)
         {
             ImageSizeField.SetValue(imageList, size);
-            PerformRecreateHandleMethod.Invoke(imageList, []);
+            PerformRecreateHandle(imageList);
         }
         else
         {
@@ -48,7 +51,7 @@ public static class WinFormsHacks
         }
         else
         {
-            ControlSetStyle.Invoke(control, new object[] { style, value });
+            ControlSetStyle(control, style, value);
         }
     }
 
