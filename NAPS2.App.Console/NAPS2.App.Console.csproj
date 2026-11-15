@@ -8,7 +8,6 @@
     <Nullable>enable</Nullable>
     <RootNamespace>NAPS2.Console</RootNamespace>
     <AssemblyName>NAPS2.Console</AssemblyName>
-    <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
     <!-- Allow NAPS2.App.WinForms (which is self-contained) to reference this to copy it to its output -->
     <ShouldBeValidatedAsExecutableReference>false</ShouldBeValidatedAsExecutableReference>
 
