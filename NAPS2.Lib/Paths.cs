@@ -15,7 +15,6 @@ public static class Paths
         AppDataPath = Path.Combine(ExecutablePath, "..", "Data");
 #else
         var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-#if NET6_0_OR_GREATER
         var subfolder = OperatingSystem.IsWindows() ? "NAPS2" : "naps2";
         if (string.IsNullOrEmpty(userAppData) && OperatingSystem.IsMacOS())
         {
@@ -30,9 +29,6 @@ public static class Paths
             // TODO: Migrate macOS application data to "~/Library/Application Support"
             userAppData = Environment.ExpandEnvironmentVariables("%HOME%/.config");
         }
-#else
-        var subfolder = "NAPS2";
-#endif
         AppDataPath = Path.Combine(userAppData, subfolder);
 #endif
         var dataPathFromEnv = Environment.GetEnvironmentVariable("NAPS2_TEST_DATA");

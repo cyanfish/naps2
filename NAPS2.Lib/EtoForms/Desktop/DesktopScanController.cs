@@ -67,10 +67,8 @@ public class DesktopScanController : IDesktopScanController
             editSettingsForm.NewProfile = true;
             editSettingsForm.ScanProfile = _config.DefaultProfileSettings();
 #if !MAC
-#if NET6_0_OR_GREATER
             if (OperatingSystem.IsWindows())
             {
-#endif
                 try
                 {
                     // Populate the device field automatically (because we can do that!)
@@ -81,9 +79,7 @@ public class DesktopScanController : IDesktopScanController
                 catch (WiaException)
                 {
                 }
-#if NET6_0_OR_GREATER
             }
-#endif
 #endif
             editSettingsForm.ShowModal();
             if (!editSettingsForm.Result)

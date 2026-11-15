@@ -90,9 +90,7 @@ public class AboutForm : EtoDialogBase
 #if MSI
         return C.None();
 #else
-#if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindows()) return C.None();
-#endif
         return new UpdateCheckWidget(_updateChecker, Config);
 #endif
     }

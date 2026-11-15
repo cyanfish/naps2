@@ -10,7 +10,6 @@ public class InstallDirTestData : IEnumerable<object[]>
         {
             yield break;
         }
-#if NET6_0_OR_GREATER
         if (OperatingSystem.IsWindows())
         {
             yield return new object[] { Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT") };
@@ -23,9 +22,6 @@ public class InstallDirTestData : IEnumerable<object[]>
         {
             // No tests yet
         }
-#else
-        yield return new object[] { Environment.GetEnvironmentVariable("NAPS2_TEST_ROOT") };
-#endif
     }
 
     IEnumerator IEnumerable.GetEnumerator()

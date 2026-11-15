@@ -171,11 +171,9 @@ public class ChooseDeviceForm : EtoDialogBase
             ),
             _deviceIconList.Control.NaturalSize(150, 100).Scale().Visible(!_textListVis),
             _deviceTextList.NaturalSize(150, 100).Scale().Visible(_textListVis),
-#if NET6_0_OR_GREATER
             OperatingSystem.IsLinux() && File.Exists("/.flatpak-info")
                 ? _flatpakMissingDevice.Visible(_saneDriverVis)
                 : C.None(),
-#endif
             L.Row(
                 _spinner.Visible(_spinnerVis).AlignCenter(),
                 _statusIcon.Visible(!_spinnerVis).AlignCenter(),

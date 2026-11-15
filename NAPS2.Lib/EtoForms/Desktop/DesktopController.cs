@@ -572,13 +572,11 @@ public class DesktopController
             Invoker.Current.InvokeDispatch(() =>
             {
                 controller._desktopFormProvider.DesktopForm.Close();
-#if NET6_0_OR_GREATER
                 if (OperatingSystem.IsMacOS())
                 {
                     // Closing the main window isn't enough to quit the app on Mac
                     Application.Instance.Quit();
                 }
-#endif
             });
             return Task.FromResult(new Empty());
         }
