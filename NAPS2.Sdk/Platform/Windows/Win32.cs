@@ -68,6 +68,22 @@ internal static class Win32
     [DllImport("kernel32.dll", EntryPoint = "RtlMoveMemory")]
     public static extern void CopyMemory(IntPtr dst, IntPtr src, uint len);
 
+    public const int ATTACH_PARENT_PROCESS = -1;
+    public const int STD_INPUT_HANDLE = -10;
+    public const int STD_OUTPUT_HANDLE = -11;
+    public const int STD_ERROR_HANDLE = -12;
+
+    [DllImport("kernel32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool AttachConsole(int dwProcessId);
+
+    [DllImport("kernel32.dll")]
+    public static extern IntPtr GetStdHandle(int nStdHandle);
+
+    [DllImport("kernel32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool SetStdHandle(int nStdHandle, IntPtr hHandle);
+
     [DllImport("user32.dll")]
     public static extern int GetMessage(out Message lpMsg, IntPtr hWnd, uint wMsgFilterMin, uint wMsgFilterMax);
 

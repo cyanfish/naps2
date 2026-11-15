@@ -61,17 +61,9 @@ public class PackageCommand : ICommand<PackageOptions>
 
         string arch = platform == Platform.WinArm64 ? "win-arm64" : "win-x64";
 
-        foreach (var project in new[]
-                     { "NAPS2.App.WinForms", "NAPS2.App.Console" })
-        {
-            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release", "net11.0-windows", arch,
-                "publish");
-            if (!Directory.Exists(buildPath))
-            {
-                throw new Exception($"Could not find build path.");
-            }
-            PopulatePackageInfo(buildPath, platform, pkgInfo);
-        }
+        var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net11.0-windows",
+            arch, "publish");
+        PopulatePackageInfo(appBuildPath, platform, pkgInfo);
 
         // Include the 32-bit worker (on both x64 and arm64) for TWAIN support
         var workerBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net11.0-windows",
@@ -82,8 +74,6 @@ public class PackageCommand : ICommand<PackageOptions>
         // publish folder as the worker is published as a single file.
         AddPlatformFile(pkgInfo, workerBuildPath, "_win32", "naps2_jpeg.dll");
 
-        var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net11.0-windows",
-            arch, "publish");
         if (platform == Platform.Win64)
         {
             AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
@@ -114,7 +104,11 @@ public class PackageCommand : ICommand<PackageOptions>
         foreach (var exeFile in dir.EnumerateFiles("*.exe"))
         {
             if (exeFile.Name == "NAPS2.Worker.exe") continue;
-            PatchExe(exeFile);
+            // NAPS2.Console.exe is a .NET Framework exe (not a .NET app host) so it doesn't need patching
+            if (exeFile.Name != "NAPS2.Console.exe")
+            {
+                PatchExe(exeFile);
+            }
             pkgInfo.AddFile(exeFile, "");
         }
         foreach (var configFile in dir.EnumerateFiles("*.json"))

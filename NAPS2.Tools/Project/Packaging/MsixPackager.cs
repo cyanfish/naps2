@@ -9,13 +9,10 @@ public static class MsixPackager
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
         Cli.Run("dotnet", "clean NAPS2.App.WinForms -r win-x64 -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.Console -r win-x64 -c Release");
         Cli.Run("dotnet",
             "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
         Cli.Run("dotnet",
             "publish NAPS2.App.WinForms -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        Cli.Run("dotnet",
-            "publish NAPS2.App.Console -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
 

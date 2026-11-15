@@ -9,13 +9,13 @@ static class Program
     /// The NAPS2.exe main method.
     /// </summary>
     [STAThread]
-    static void Main(string[] args)
+    static int Main(string[] args)
     {
         var profilesPath = Path.Combine(Paths.AppData, "jit");
         Directory.CreateDirectory(profilesPath);
         ProfileOptimization.SetProfileRoot(profilesPath);
-        ProfileOptimization.StartProfile("naps2.jit");
+        ProfileOptimization.StartProfile(args is ["console", ..] ? "naps2.console.jit" : "naps2.jit");
 
-        WinFormsEntryPoint.Run(args);
+        return WinFormsEntryPoint.Run(args);
     }
 }

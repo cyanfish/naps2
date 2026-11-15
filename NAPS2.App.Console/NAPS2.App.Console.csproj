@@ -1,44 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net11.0-windows</TargetFramework>
-    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <!-- TODO: Consider NativeAOT instead if we want to avoid depending on .NET Framework. -->
+    <TargetFramework>net462</TargetFramework>
     <OutputType>Exe</OutputType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Nullable>enable</Nullable>
     <RootNamespace>NAPS2.Console</RootNamespace>
     <AssemblyName>NAPS2.Console</AssemblyName>
-
-    <SelfContained>true</SelfContained>
-    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
-    <!-- TODO: Re-enable trimming if we can fix startup time as well as WIA being broken -->
-    <PublishTrimmed>false</PublishTrimmed>
-    <TrimMode>none</TrimMode>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <UseWindowsForms>true</UseWindowsForms>
-    <DisableTransitiveFrameworkReferences>true</DisableTransitiveFrameworkReferences>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <CETCompat>false</CETCompat>
+    <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
+    <!-- Allow NAPS2.App.WinForms (which is self-contained) to reference this to copy it to its output -->
+    <ShouldBeValidatedAsExecutableReference>false</ShouldBeValidatedAsExecutableReference>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
   </PropertyGroup>
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
-  <Import Project="..\NAPS2.Setup\targets\PublishExclusions.targets" />
-  <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
-  
-  <ItemGroup>
-    <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
-    <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
-    <ProjectReference Include="..\NAPS2.Lib.WinForms\NAPS2.Lib.WinForms.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ContentWithTargetPath Include="..\NAPS2.Setup\appsettings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Link>appsettings.xml</Link>
-      <TargetPath>appsettings.xml</TargetPath>
-    </ContentWithTargetPath>
-  </ItemGroup>
 
 </Project>
