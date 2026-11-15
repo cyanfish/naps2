@@ -124,6 +124,18 @@ public class WinFormsDesktopForm : DesktopForm
 
     private WF.ListView NativeListView => ((WinFormsListView<UiImage>) _listView).NativeControl;
 
+    protected override void CreateToolbarsAndMenus()
+    {
+        if (ToolBar == null)
+        {
+            ToolBar = new ToolBar();
+            ConfigureToolbars();
+        }
+        _mainToolStrip.SuspendLayout();
+        base.CreateToolbarsAndMenus();
+        _mainToolStrip.ResumeLayout();
+    }
+
     protected override void RecreateToolbarsAndMenus()
     {
         base.RecreateToolbarsAndMenus();
@@ -320,6 +332,7 @@ public class WinFormsDesktopForm : DesktopForm
 
     private void SetUpMenu(WF.ToolStripDropDownItem item, List<MenuProvider.Item> subItems)
     {
+        item.DropDown.SuspendLayout();
         item.DropDownItems.Clear();
         foreach (var subItem in subItems)
         {
@@ -343,6 +356,7 @@ public class WinFormsDesktopForm : DesktopForm
                     break;
             }
         }
+        item.DropDown.ResumeLayout();
     }
 
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
