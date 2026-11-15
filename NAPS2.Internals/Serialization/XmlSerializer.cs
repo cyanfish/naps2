@@ -53,8 +53,8 @@ public abstract class XmlSerializer
         { typeof(List<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
         { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
         { typeof(Dictionary<,>), new XmlTypeInfo { CustomSerializer = new DictionarySerializer() } },
-        { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new ImmutableListSerializer() } },
-        { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new ImmutableHashSetSerializer() } },
+        { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+        { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
         { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
         { typeof(Guid), new XmlTypeInfo { CustomSerializer = new GuidSerializer() } },
         { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
@@ -570,61 +570,69 @@ public abstract class XmlSerializer
             return typeof(object);
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = TrimJustification)]
-        [DynamicDependency("Add(`0)", typeof(List<>))]
-        [DynamicDependency("Add(`0)", typeof(HashSet<>))]
-        [DynamicDependency("Add(`0)", typeof(ImmutableList<>))]
-        [DynamicDependency("Add(`0)", typeof(ImmutableHashSet<>))]
         public override object DeserializeObject(XElement element, Type type)
         {
             var itemType = GetItemType(type);
-            var list = CreateInstance(type, itemType);
-            var add = list.GetType().GetMethod("Add", BindingFlags.Public | BindingFlags.Instance) ??
-                      throw new ArgumentException("Collection type has no Add method");
-            if (add.ReturnType == list.GetType())
-            {
-                // Handle immutable collections
-                foreach (var itemElement in element.Elements())
-                {
-                    list = add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) })!;
-                }
-            }
-            else
-            {
-                foreach (var itemElement in element.Elements())
-                {
-                    add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) });
-                }
-            }
-
-            return list;
+            var items = element.Elements().Select(itemElement => DeserializeInternal(itemElement, itemType));
+            return GetBuilder(type, itemType).Build(items);
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = TrimJustification)]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(List<>))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(HashSet<>))]
-        protected virtual object CreateInstance(Type type, Type itemType) => Activator.CreateInstance(type, true)!;
-    }
+        private static readonly Dictionary<Type, CollectionBuilder> Builders = new();
 
-    protected class ImmutableListSerializer : CollectionSerializer
-    {
-        protected override object CreateInstance(Type type, Type itemType)
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = TrimJustification)]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(ListBuilder<>))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(HashSetBuilder<>))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
+            typeof(ImmutableListBuilder<>))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
+            typeof(ImmutableHashSetBuilder<>))]
+        private static CollectionBuilder GetBuilder(Type type, Type itemType)
         {
-            var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType)
-                                 .GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
-                             throw new Exception("No Empty field on ImmutableList");
-            return emptyField.GetValue(null)!;
+            lock (Builders)
+            {
+                return Builders.GetOrSet(type, () =>
+                {
+                    var collectionType = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
+                    var builderType =
+                        collectionType == typeof(List<>) ? typeof(ListBuilder<>) :
+                        collectionType == typeof(HashSet<>) ? typeof(HashSetBuilder<>) :
+                        collectionType == typeof(ImmutableList<>) ? typeof(ImmutableListBuilder<>) :
+                        collectionType == typeof(ImmutableHashSet<>) ? typeof(ImmutableHashSetBuilder<>) :
+                        throw new ArgumentException($"Unsupported collection type: {type.FullName}");
+                    return (CollectionBuilder) Activator.CreateInstance(builderType.MakeGenericType(itemType))!;
+                });
+            }
         }
-    }
 
-    protected class ImmutableHashSetSerializer : CollectionSerializer
-    {
-        protected override object CreateInstance(Type type, Type itemType)
+        private abstract class CollectionBuilder
         {
-            var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType)
-                                 .GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
-                             throw new Exception("No Empty field on ImmutableHashSet");
-            return emptyField.GetValue(null)!;
+            public abstract object Build(IEnumerable<object?> items);
+        }
+
+        private abstract class CollectionBuilder<T> : CollectionBuilder
+        {
+            protected static IEnumerable<T> Cast(IEnumerable<object?> items) =>
+                items.Select(item => item is null ? default! : (T) item);
+        }
+
+        private sealed class ListBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => Cast(items).ToList();
+        }
+
+        private sealed class HashSetBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => new HashSet<T>(Cast(items));
+        }
+
+        private sealed class ImmutableListBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => ImmutableList.CreateRange(Cast(items));
+        }
+
+        private sealed class ImmutableHashSetBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => ImmutableHashSet.CreateRange(Cast(items));
         }
     }
 
