@@ -89,8 +89,7 @@ public static class MsixPackager
     {
         var sb = new StringBuilder();
         sb.AppendLine("<Resource Language=\"en-us\" />");
-        foreach (var language in pkgInfo.Files.Where(x => x.FileName.StartsWith("NAPS2.Lib.resources.dll"))
-                     .Select(x => Path.GetFileName(x.DestDir)))
+        foreach (var language in pkgInfo.Languages.Order())
         {
             // MSIX expects language codes a bit different from NAPS2
             // TODO: Would it be better to use these codes internally? Would it match up more with Windows?

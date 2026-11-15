@@ -9,6 +9,7 @@
     <ApplicationIcon>../NAPS2.Lib/Icons/favicon.ico</ApplicationIcon>
 
     <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <!-- TODO: Re-enable trimming if we can fix startup time as well as WIA being broken -->
     <PublishTrimmed>false</PublishTrimmed>
@@ -48,4 +49,14 @@
       <TargetPath>appsettings.xml</TargetPath>
     </ContentWithTargetPath>
   </ItemGroup>
+
+  <!-- Keep these as separate files instead of bundling them into the single-file exe: native libraries (e.g.
+       "_win64\pdfium.dll") are loaded from their platform folders, and NAPS2.Console.exe needs to be run directly -->
+  <Target Name="Naps2ExcludeFromSingleFile" AfterTargets="ComputeResolvedFilesToPublishList">
+    <ItemGroup>
+      <ResolvedFileToPublish Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(ResolvedFileToPublish.RelativePath)', '^(_win(32|64|arm)[\\/]|NAPS2\.Console\.exe$)'))">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
 </Project>

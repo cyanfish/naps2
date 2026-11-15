@@ -14,7 +14,10 @@ internal class NativeLibrary
     {
         var baseFolders = !string.IsNullOrWhiteSpace(baseFolder)
             ? new[] { baseFolder, Path.Combine(baseFolder, "lib") }
-            : new[] { AssemblyHelper.LibFolder, AssemblyHelper.EntryFolder };
+            : new[]
+            {
+                AssemblyHelper.LibFolder, AssemblyHelper.EntryFolder, Path.Combine(AssemblyHelper.EntryFolder, "lib")
+            };
         foreach (var actualBaseFolder in baseFolders)
         {
             foreach (var searchPath in systemSearchPaths)

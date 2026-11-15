@@ -1,5 +1,3 @@
-using System.Text;
-using System.Text.RegularExpressions;
 using NAPS2.Tools.Project.Targets;
 
 namespace NAPS2.Tools.Project.Packaging;
@@ -85,7 +83,6 @@ public class PackageCommand : ICommand<PackageOptions>
             AddPlatformFiles(pkgInfo, appBuildPath, "_winarm");
         }
 
-        pkgInfo.AddFile(new PackageFile(appBuildPath, "", "appsettings.xml"));
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "LICENSE", "license.txt"));
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "CONTRIBUTORS", "contributors.txt"));
 
@@ -100,75 +97,20 @@ public class PackageCommand : ICommand<PackageOptions>
             throw new Exception($"Could not find path: {dir.FullName}");
         }
 
-        // Add each included file to the package contents
-        foreach (var exeFile in dir.EnumerateFiles("*.exe"))
+        // NAPS2.exe is published as a single file. The other top-level files (NAPS2.Console.exe, appsettings.xml) are
+        // the ones that aren't bundled into it. Native libraries in platform subfolders are added separately.
+        foreach (var file in dir.EnumerateFiles())
         {
-            if (exeFile.Name == "NAPS2.Worker.exe") continue;
-            // NAPS2.Console.exe is a .NET Framework exe (not a .NET app host) so it doesn't need patching
-            if (exeFile.Name != "NAPS2.Console.exe")
-            {
-                PatchExe(exeFile);
-            }
-            pkgInfo.AddFile(exeFile, "");
+            pkgInfo.AddFile(file, "");
         }
-        foreach (var configFile in dir.EnumerateFiles("*.json"))
-        {
-            pkgInfo.AddFile(configFile, "lib");
-        }
-        foreach (var dllFile in dir.EnumerateFiles("*.dll"))
-        {
-            pkgInfo.AddFile(dllFile, "lib");
-        }
-        foreach (var langFolder in dir.EnumerateDirectories()
-                     .Where(x => Regex.IsMatch(x.Name, "[a-z]{2}(-[A-Za-z]+)?")))
-        {
-            foreach (var resourceDll in langFolder.EnumerateFiles("*.resources.dll"))
-            {
-                pkgInfo.AddFile(resourceDll, Path.Combine("lib", langFolder.Name));
-                pkgInfo.Languages.Add(langFolder.Name);
-            }
-        }
-    }
 
-    private static void PatchExe(FileInfo exeFile)
-    {
-        // The dotnet base exes (e.g. NAPS2.exe) have a hard-coded path for the relevant dll (e.g. NAPS2.dll).
-        // This path is also the path at which all the dependencies are searched. By default, the path is in the current
-        // directory, but we can easily replace it with a subpath to the "lib" folder. (Note that the path is padded so
-        // we don't even need to offset the bytes afterward.) This means everything other than the exes can live in
-        // that "lib" subfolder once we do this patch.
-        var bytes = File.ReadAllBytes(exeFile.FullName);
-        var from = Path.ChangeExtension(exeFile.Name, ".dll");
-        var to = @"lib\" + from;
-        var fromBytes = Encoding.UTF8.GetBytes(from);
-        var toBytes = Encoding.UTF8.GetBytes(to);
-        var index = SearchBytes(bytes, fromBytes);
-        if (bytes[(index - 4)..index] is [(byte) 'l', (byte) 'i', (byte) 'b', (byte) '\\'])
+        // Satellite resource assemblies are bundled into NAPS2.exe, but installers still need the list of languages
+        var outputDir = dir.Parent ?? throw new InvalidOperationException();
+        foreach (var langFolder in outputDir.EnumerateDirectories()
+                     .Where(x => File.Exists(Path.Combine(x.FullName, "NAPS2.Lib.resources.dll"))))
         {
-            // Already patched
-            return;
+            pkgInfo.Languages.Add(langFolder.Name);
         }
-        for (int i = 0; i < toBytes.Length; i++)
-        {
-            bytes[index + i] = toBytes[i];
-        }
-        File.WriteAllBytes(exeFile.FullName, bytes);
-    }
-
-    private static int SearchBytes(byte[] haystack, byte[] needle)
-    {
-        var len = needle.Length;
-        var limit = haystack.Length - len;
-        for (var i = 0; i <= limit; i++)
-        {
-            var k = 0;
-            for (; k < len; k++)
-            {
-                if (needle[k] != haystack[i + k]) break;
-            }
-            if (k == len) return i;
-        }
-        return -1;
     }
 
     private static void AddPlatformFiles(PackageInfo pkgInfo, string buildPath, string platformPath)
