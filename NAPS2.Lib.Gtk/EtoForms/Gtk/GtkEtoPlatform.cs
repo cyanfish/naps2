@@ -7,6 +7,7 @@ using Eto.GtkSharp.Drawing;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gtk;
+using NAPS2.Platform.Linux;
 using GTK = Gtk;
 
 namespace NAPS2.EtoForms.Gtk;
@@ -40,6 +41,17 @@ public class GtkEtoPlatform : EtoPlatform
     {
         PlatformCompat.System.SetEnv("GTK_THEME", "Adwaita:" + (ColorScheme.DarkMode ? "dark" : "light"));
         GTK.Settings.GetForScreen(Gdk.Screen.Default).ApplicationPreferDarkTheme = ColorScheme.DarkMode;
+    }
+
+    public override void ConfigureFileDialog(FileDialog fileDialog)
+    {
+        // Set the parent form, which is necessary for portals to behave properly
+        var parent = GTK.Window.ListToplevels().FirstOrDefault(w => w.IsActive)
+                     ?? (GTK.Window?) Application.Instance.MainForm?.ControlObject;
+        if (parent != null && fileDialog.ControlObject is GTK.FileChooserNative dialog)
+        {
+            LinuxInterop.gtk_native_dialog_set_transient_for(dialog.Handle, parent.Handle);
+        }
     }
 
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
