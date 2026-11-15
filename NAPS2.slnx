@@ -343,6 +343,20 @@
       <Build Solution="Tools|*" Project="false" />
     </Project>
   </Folder>
+  <Project Path="NAPS2.Generators/NAPS2.Generators.csproj">
+    <BuildType Solution="Debug-Linux|*" Project="Debug" />
+    <BuildType Solution="Debug-Mac|*" Project="Debug" />
+    <BuildType Solution="Debug-Windows|*" Project="Debug" />
+    <BuildType Solution="DebugLang|*" Project="Debug" />
+    <BuildType Solution="Release-Linux|*" Project="Release" />
+    <BuildType Solution="Release-Mac|*" Project="Release" />
+    <BuildType Solution="Release-Msi|*" Project="Release" />
+    <BuildType Solution="Release-Windows|*" Project="Release" />
+    <BuildType Solution="Release-Zip|*" Project="Release" />
+    <BuildType Solution="Sdk|*" Project="Release" />
+    <BuildType Solution="Tools|*" Project="Debug" />
+    <Build Solution="Tools|*" Project="false" />
+  </Project>
   <Project Path="NAPS2.Internals/NAPS2.Internals.csproj">
     <BuildType Solution="Debug-Linux|*" Project="Debug" />
     <BuildType Solution="Debug-Mac|*" Project="Debug" />
