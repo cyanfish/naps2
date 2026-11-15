@@ -1,8 +1,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using NAPS2.Tools.Project.Targets;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace NAPS2.Tools.Project.Packaging;
 
@@ -106,86 +104,18 @@ public class PackageCommand : ICommand<PackageOptions>
 
     private static void PopulatePackageInfo(string buildPath, Platform platform, PackageInfo pkgInfo)
     {
-        string[] excludeDlls =
-        {
-            // DLLs that are unneeded but missed by the built-in trimming
-            "Microsoft.VisualBasic",
-            "System.Data",
-            "System.Private.DataContract",
-            "System.Windows.Forms.Design",
-            "WindowsBase",
-            // For debugging
-            "createdump",
-            "Microsoft.DiaSymReader",
-            "mscordaccore",
-            "mscordbi",
-        };
-
         var dir = new DirectoryInfo(buildPath);
         if (!dir.Exists)
         {
             throw new Exception($"Could not find path: {dir.FullName}");
         }
 
-        // Parse the NAPS2.deps.json file to strip out dependencies we're "manually" trimming via "excludeDlls"
-        var depsFile = dir.EnumerateFiles("*.deps.json").First();
-        JObject deps;
-        using (var stream = depsFile.OpenText())
-        using (var reader = new JsonTextReader(stream))
-            deps = (JObject) JToken.ReadFrom(reader);
-        var targetName = (string) deps["runtimeTarget"]!["name"]!;
-        var targets = (JObject) deps["targets"]![targetName]!;
-        foreach (var pair in targets)
-        {
-            var target = (JObject) pair.Value!;
-            if (target.TryGetValue("runtime", out var runtime))
-            {
-                foreach (var runtimeDlls in new Dictionary<string, JToken?>((JObject) runtime))
-                {
-                    var parts = runtimeDlls.Key.Split("/");
-                    var dllName = parts.Last();
-                    if (excludeDlls.Any(exclude => dllName.StartsWith(exclude)))
-                    {
-                        ((JObject) runtime).Remove(runtimeDlls.Key);
-                    }
-                }
-            }
-            if (target.TryGetValue("resources", out var resources))
-            {
-                foreach (var runtimeDlls in new Dictionary<string, JToken?>((JObject) resources))
-                {
-                    var dllName = runtimeDlls.Key.Split("/").Last();
-                    if (excludeDlls.Any(exclude => dllName.StartsWith(exclude)))
-                    {
-                        ((JObject) resources).Remove(runtimeDlls.Key);
-                    }
-                }
-            }
-            if (target.TryGetValue("native", out var native))
-            {
-                foreach (var runtimeDlls in new Dictionary<string, JToken?>((JObject) native))
-                {
-                    var dllName = runtimeDlls.Key.Split("/").Last();
-                    if (excludeDlls.Any(exclude => dllName.StartsWith(exclude)))
-                    {
-                        ((JObject) native).Remove(runtimeDlls.Key);
-                    }
-                }
-            }
-        }
-        using (StreamWriter file = depsFile.CreateText())
-        using (JsonTextWriter writer = new JsonTextWriter(file) { Formatting = Formatting.Indented })
-            deps.WriteTo(writer);
-
         // Add each included file to the package contents
         foreach (var exeFile in dir.EnumerateFiles("*.exe"))
         {
-            if (excludeDlls.All(exclude => !exeFile.Name.StartsWith(exclude)))
-            {
-                if (exeFile.Name == "NAPS2.Worker.exe") continue;
-                PatchExe(exeFile);
-                pkgInfo.AddFile(exeFile, "");
-            }
+            if (exeFile.Name == "NAPS2.Worker.exe") continue;
+            PatchExe(exeFile);
+            pkgInfo.AddFile(exeFile, "");
         }
         foreach (var configFile in dir.EnumerateFiles("*.json"))
         {
@@ -193,21 +123,15 @@ public class PackageCommand : ICommand<PackageOptions>
         }
         foreach (var dllFile in dir.EnumerateFiles("*.dll"))
         {
-            if (excludeDlls.All(exclude => !dllFile.Name.StartsWith(exclude)))
-            {
-                pkgInfo.AddFile(dllFile, "lib");
-            }
+            pkgInfo.AddFile(dllFile, "lib");
         }
         foreach (var langFolder in dir.EnumerateDirectories()
                      .Where(x => Regex.IsMatch(x.Name, "[a-z]{2}(-[A-Za-z]+)?")))
         {
             foreach (var resourceDll in langFolder.EnumerateFiles("*.resources.dll"))
             {
-                if (excludeDlls.All(exclude => !resourceDll.Name.StartsWith(exclude)))
-                {
-                    pkgInfo.AddFile(resourceDll, Path.Combine("lib", langFolder.Name));
-                    pkgInfo.Languages.Add(langFolder.Name);
-                }
+                pkgInfo.AddFile(resourceDll, Path.Combine("lib", langFolder.Name));
+                pkgInfo.Languages.Add(langFolder.Name);
             }
         }
     }
