@@ -10,7 +10,7 @@ public class TestCommand : ICommand<TestOptions>
         var depsRootPath = OperatingSystem.IsMacOS()
             ? $"NAPS2.App.Mac/bin/Debug/net11.0-macos/osx-{arch}"
             : OperatingSystem.IsLinux()
-                ? $"NAPS2.App.Gtk/bin/Debug/net10.0/linux-{arch}"
+                ? $"NAPS2.App.Gtk/bin/Debug/net11.0/linux-{arch}"
                 : $"NAPS2.App.WinForms/bin/Debug/net11.0-windows/win-{arch}";
 
         var scopes = string.IsNullOrEmpty(opts.Scope) ? ["sdk", "lib", "app"] : opts.Scope.Split('+');
@@ -61,6 +61,6 @@ public class TestCommand : ICommand<TestOptions>
             // the bundle executable
             return $"{project}/bin/Debug/net11.0-macos/osx-{arch}/{project}.app/Contents/MacOS/{project}";
         }
-        return $"{project}/bin/Debug/net10.0/{project}.dll";
+        return $"{project}/bin/Debug/net11.0/{project}.dll";
     }
 }
