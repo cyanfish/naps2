@@ -72,7 +72,7 @@ public static class Paths
     public static string Components => EnsureFolderExists(ComponentsPath);
 
     /// <summary>
-    /// Safely clears the NAPS2 temp folder. If other NAPS2 or NAPS2.Console processes are running, the folder will be left alone.
+    /// Safely clears the NAPS2 temp folder. If other NAPS2 processes are running, the folder will be left alone.
     /// </summary>
     public static void ClearTemp()
     {
@@ -82,7 +82,7 @@ public static class Paths
             if (!Directory.EnumerateFileSystemEntries(TempPath).Any()) return;
 
             var otherNaps2Processes = Process.GetProcesses().Where(x =>
-                x.ProcessName.IndexOf("NAPS2", StringComparison.OrdinalIgnoreCase) >= 0 &&
+                x.ProcessName.Equals("NAPS2", StringComparison.OrdinalIgnoreCase) &&
                 x.Id != Process.GetCurrentProcess().Id);
             if (!otherNaps2Processes.Any())
             {
