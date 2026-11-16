@@ -492,6 +492,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto (Feeder if loaded, else Glass).
+        /// </summary>
+        internal static string Source_Auto {
+            get {
+                return ResourceManager.GetString("Source_Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Glass.
         /// </summary>
         internal static string Source_Glass {

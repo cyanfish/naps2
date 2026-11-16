@@ -200,7 +200,9 @@ public enum ScanSource
     [LocalizedDescription(typeof(SettingsResources), "Source_Feeder")]
     Feeder,
     [LocalizedDescription(typeof(SettingsResources), "Source_Duplex")]
-    Duplex
+    Duplex,
+    [LocalizedDescription(typeof(SettingsResources), "Source_Auto")]
+    Auto
 }
 
 /// <summary>
@@ -473,6 +475,8 @@ public static class ScanEnumExtensions
                 return PaperSource.Feeder;
             case ScanSource.Duplex:
                 return PaperSource.Duplex;
+            case ScanSource.Auto:
+                return PaperSource.Auto;
             default:
                 throw new ArgumentException();
         }

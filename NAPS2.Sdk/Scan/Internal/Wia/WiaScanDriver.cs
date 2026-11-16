@@ -166,6 +166,8 @@ internal class WiaScanDriver : IScanDriver
         private readonly CancellationToken _cancelToken;
         private readonly IScanEvents _scanEvents;
         private readonly Action<IMemoryImage> _callback;
+        private readonly bool _autoSource;
+        private bool _hasAtLeastOneImage;
 
         public WiaScanContext(ScanningContext scanningContext, ScanOptions options, CancellationToken cancelToken,
             IScanEvents scanEvents, Action<IMemoryImage> callback)
@@ -176,6 +178,7 @@ internal class WiaScanDriver : IScanDriver
             _cancelToken = cancelToken;
             _scanEvents = scanEvents;
             _callback = callback;
+            _autoSource = options.PaperSource == PaperSource.Auto;
         }
 
         public async Task Scan(WiaVersion wiaVersion)
@@ -188,21 +191,62 @@ internal class WiaScanDriver : IScanDriver
                 return;
             }
 
-            if (_options.PaperSource == PaperSource.Auto)
+            bool supportsFlatbed = device.SupportsFlatbed();
+            if (_autoSource)
             {
-                // Default to flatbed if supported (or if both support checks fail)
-                _options.PaperSource = device.SupportsFlatbed() || !device.SupportsFeeder()
-                    ? PaperSource.Flatbed
-                    : PaperSource.Feeder;
+                // Use the feeder if it has paper (or if there is no flatbed), otherwise the flatbed
+                bool supportsFeeder = device.SupportsFeeder();
+                bool useFeeder = supportsFeeder && (!supportsFlatbed || IsFeederReady(device));
+                _options.PaperSource = useFeeder ? PaperSource.Feeder : PaperSource.Flatbed;
+                _logger.LogDebug("WIA auto paper source: using {Source}", _options.PaperSource);
             }
 
-            using var item = GetItem(device);
-            if (item == null)
+            try
             {
-                return;
+                using var item = GetItem(device);
+                if (item == null)
+                {
+                    return;
+                }
+                DoTransfer(device, item);
             }
+            catch (Exception e) when (_autoSource && supportsFlatbed && !_hasAtLeastOneImage &&
+                                      _options.PaperSource == PaperSource.Feeder && IsFeederEmptyError(e))
+            {
+                // Some drivers (e.g. Brother) report FEED_READY even when the feeder is empty.
+                // Nothing was scanned yet, so fall back to the flatbed.
+                _logger.LogDebug("WIA auto paper source: feeder empty, falling back to flatbed");
+                _options.PaperSource = PaperSource.Flatbed;
+                using var flatbedItem = GetItem(device);
+                if (flatbedItem == null)
+                {
+                    return;
+                }
+                // Still the same page from the user's point of view, so don't signal another page start
+                DoTransfer(device, flatbedItem, signalPageStart: false);
+            }
+        }
 
-            DoTransfer(device, item);
+        private static bool IsFeederEmptyError(Exception e)
+        {
+            return e is DeviceFeederEmptyException ||
+                   e is WiaException { ErrorCode: WiaErrorCodes.PAPER_EMPTY };
+        }
+
+        private bool IsFeederReady(WiaDevice device)
+        {
+            try
+            {
+                // Reads WIA_DPS_DOCUMENT_HANDLING_STATUS and checks the FEED_READY flag
+                var status = device.Properties.GetOrNull(WiaPropertyId.DPS_DOCUMENT_HANDLING_STATUS)?.Value;
+                _logger.LogDebug("WIA document handling status: {Status}", status);
+                return device.FeederReady();
+            }
+            catch (Exception e)
+            {
+                _logger.LogDebug(e, "Could not read WIA feeder status, falling back to flatbed");
+                return false;
+            }
         }
 
         private async Task DoWia20NativeTransfer(WiaDeviceManager deviceManager, WiaDevice device)
@@ -246,7 +290,7 @@ internal class WiaScanDriver : IScanDriver
             }
         }
 
-        private void DoTransfer(WiaDevice device, WiaItem item)
+        private void DoTransfer(WiaDevice device, WiaItem item, bool signalPageStart = true)
         {
             if (_options.PaperSource != PaperSource.Flatbed && !device.SupportsFeeder())
             {
@@ -273,6 +317,7 @@ internal class WiaScanDriver : IScanDriver
                         return;
                     }
                     hasAtLeastOneImage = true;
+                    _hasAtLeastOneImage = true;
                     IMemoryImage image;
                     try
                     {
@@ -303,7 +348,10 @@ internal class WiaScanDriver : IScanDriver
             transfer.Progress += (sender, args) => _scanEvents.PageProgress(args.Percent / 100.0);
             using (_cancelToken.Register(transfer.Cancel))
             {
-                _scanEvents.PageStart();
+                if (signalPageStart)
+                {
+                    _scanEvents.PageStart();
+                }
                 try
                 {
                     transfer.Download();
