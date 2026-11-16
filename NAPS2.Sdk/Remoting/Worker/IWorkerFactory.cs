@@ -8,6 +8,7 @@ namespace NAPS2.Remoting.Worker;
 internal interface IWorkerFactory
 {
     void Init(ScanningContext scanningContext, WorkerFactoryInitOptions? options = null);
+    void StartSpareWorkers(ScanningContext scanningContext);
     WorkerContext Create(ScanningContext scanningContext, WorkerType workerType);
     void RecreateSpareWorkers();
     Task StopSpareWorkers();

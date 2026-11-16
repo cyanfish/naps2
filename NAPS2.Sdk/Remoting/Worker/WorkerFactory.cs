@@ -209,16 +209,25 @@ internal class WorkerFactory : IWorkerFactory
             };
             if (options.StartSpareWorkers)
             {
-                // We start a "spare" worker so that when we need one, it's immediately ready (and then we'll start another
-                // spare for the next request).
-                StartWorkerService(scanningContext, WorkerType.Native, true);
-                if (PlatformCompat.System.SupportsWinX86Worker)
-                {
-                    // On windows as we need 32-bit and 64-bit workers for different things, we will have two spare workers,
-                    // which isn't ideal but not a big deal.
-                    StartWorkerService(scanningContext, WorkerType.WinX86, true);
-                }
+                StartSpareWorkers(scanningContext);
             }
+        }
+    }
+
+    public void StartSpareWorkers(ScanningContext scanningContext)
+    {
+        if (_workerQueues == null)
+        {
+            throw new InvalidOperationException("WorkerFactory has not been initialized");
+        }
+        // We start a "spare" worker so that when we need one, it's immediately ready (and then we'll start another
+        // spare for the next request).
+        StartWorkerService(scanningContext, WorkerType.Native, true);
+        if (PlatformCompat.System.SupportsWinX86Worker)
+        {
+            // On windows as we need 32-bit and 64-bit workers for different things, we will have two spare workers,
+            // which isn't ideal but not a big deal.
+            StartWorkerService(scanningContext, WorkerType.WinX86, true);
         }
     }
 
