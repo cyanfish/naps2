@@ -17,4 +17,9 @@
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
 
+  <ItemGroup>
+    <!-- This project is a standalone exe with no references -->
+    <Compile Include="..\NAPS2.Sdk\Remoting\Worker\ProcessJob.cs" Link="ProcessJob.cs" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using NAPS2.Remoting.Worker;
 
 namespace NAPS2.Console;
 
@@ -24,6 +25,7 @@ static class Program
             System.Console.Error.WriteLine($"Could not start {appPath}: {ex.Message}");
             return 1;
         }
+        TieToCurrentProcess(process);
 
         // NAPS2.exe is attached to the same console and handles Ctrl+C itself, so we just keep waiting for it
         System.Console.CancelKeyPress += (_, e) => e.Cancel = true;
@@ -32,6 +34,23 @@ static class Program
         {
             process.WaitForExit();
             return process.ExitCode;
+        }
+    }
+
+    // Never disposed; Windows closes the handle when this process exits
+    private static Job? _job;
+
+    // If NAPS2.Console.exe is killed (e.g. by a script timeout), NAPS2.exe should be killed too
+    private static void TieToCurrentProcess(Process process)
+    {
+        try
+        {
+            _job = new Job(allowBreakaway: true);
+            _job.AddProcess(process.Handle);
+        }
+        catch (Exception)
+        {
+            // Ignore
         }
     }
 
