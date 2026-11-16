@@ -22,5 +22,9 @@ public class MacModule : Module
 
         builder.RegisterType<MacDesktopForm>().As<DesktopForm>();
         builder.RegisterType<MacPreviewForm>().As<PreviewForm>();
+
+#if TEST_SCENARIOS
+        builder.RegisterType<TestScenarios.MacTestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();
+#endif
     }
 }

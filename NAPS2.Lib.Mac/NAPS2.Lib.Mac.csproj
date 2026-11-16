@@ -12,6 +12,7 @@
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
     <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\TestScenarios.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" />

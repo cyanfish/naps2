@@ -17,9 +17,6 @@
     <Configurations>Debug;Release;DebugLang;Release-Msi;Release-Zip</Configurations>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
-
   <PropertyGroup Condition="'$(TargetFramework)' == 'net11.0-macos'">
     <DefineConstants>MAC</DefineConstants>
   </PropertyGroup>
@@ -32,6 +29,10 @@
   <PropertyGroup Condition="'$(AddDebugConstant)' == '1'">
     <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
   </PropertyGroup>
+
+  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
+  <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\TestScenarios.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
@@ -117,5 +118,5 @@
     <EmbeddedResource Remove="ClientCreds_.resx" />
     <Compile Remove="ClientCreds_.Designer.cs" />
   </ItemGroup>
-  
+
 </Project>

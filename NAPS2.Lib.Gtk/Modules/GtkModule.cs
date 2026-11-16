@@ -18,5 +18,9 @@ public class GtkModule : Module
 
         builder.RegisterType<GtkDesktopForm>().As<DesktopForm>();
         builder.RegisterType<GtkPreviewForm>().As<PreviewForm>();
+
+#if TEST_SCENARIOS
+        builder.RegisterType<TestScenarios.GtkTestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();
+#endif
     }
 }
