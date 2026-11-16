@@ -1,9 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
+using NAPS2.Serialization;
 
 namespace NAPS2.Scan;
 
 // ScanDevice used to only have ID and Name, but now it has Driver too. We need ScanProfileDevice for backwards compat
 // when serializing.
+[GeneratePropertyAccessors]
 public record ScanProfileDevice(string ID, string Name, string? IconUri = null, string? ConnectionUri = null)
 {
     [return: NotNullIfNotNull("device")]

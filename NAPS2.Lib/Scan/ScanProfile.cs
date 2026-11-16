@@ -10,6 +10,7 @@ namespace NAPS2.Scan;
 /// <summary>
 /// A class that stores user configuration for scanning, including device selection and other options.
 /// </summary>
+[GeneratePropertyAccessors]
 public class ScanProfile
 {
     public const int CURRENT_VERSION = 2;
@@ -147,6 +148,7 @@ public class ScanProfile
 /// <summary>
 /// User configuration for the Auto Save feature, which saves to a file immediately after scanning.
 /// </summary>
+[GeneratePropertyAccessors]
 public record AutoSaveSettings
 {
     public string FilePath { get; init; } = "";
@@ -298,6 +300,7 @@ public enum ScanPageSize
 /// <summary>
 /// Configuration for a particular page size.
 /// </summary>
+[GeneratePropertyAccessors]
 public record PageDimensions
 {
     public decimal Width { get; init; }
@@ -308,6 +311,7 @@ public record PageDimensions
 /// <summary>
 /// Configuration for a user-created custom page size.
 /// </summary>
+[GeneratePropertyAccessors]
 public record NamedPageSize
 {
     public string Name { get; init; } = "";

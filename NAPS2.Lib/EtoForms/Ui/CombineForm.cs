@@ -81,7 +81,7 @@ public class CombineForm : ImageFormBase
         UpdatePreviewBox();
     }
 
-    private void SetOrientation(CombineOrientation orientation)
+    internal void SetOrientation(CombineOrientation orientation)
     {
         _orientation = orientation;
         _horizontalOrientationVis.IsVisible = _orientation == CombineOrientation.Horizontal;

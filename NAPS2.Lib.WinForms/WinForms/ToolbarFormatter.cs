@@ -20,6 +20,7 @@ public class ToolbarFormatter
     public void RelayoutToolbar(ToolStrip tStrip, float scaleFactor)
     {
         if (tStrip.Parent == null) return;
+        tStrip.SuspendLayout();
         // Resize and wrap text as necessary
         foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
         {
@@ -37,6 +38,7 @@ public class ToolbarFormatter
             }
         }
         ResetToolbarMargin(tStrip, scaleFactor);
+        tStrip.ResumeLayout();
         // Recalculate sizes
         Invoker.Current.InvokeDispatch(() =>
         {
@@ -95,6 +97,7 @@ public class ToolbarFormatter
         int s1 = (int) Math.Round(1 * scaleFactor);
         int s2 = (int) Math.Round(2 * scaleFactor);
         int s5 = (int) Math.Round(5 * scaleFactor);
+        tStrip.SuspendLayout();
         foreach (var btn in tStrip.Items.OfType<ToolStripItem>())
         {
             if (btn is ToolStripSplitButton)
@@ -110,5 +113,6 @@ public class ToolbarFormatter
                 btn.Padding = new Padding(s5, 0, s5, 0);
             }
         }
+        tStrip.ResumeLayout();
     }
 }

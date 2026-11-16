@@ -21,6 +21,11 @@ public class WinFormsModule : Module
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
         builder.RegisterType<WinFormsPreviewForm>().As<PreviewForm>();
 
+#if TEST_SCENARIOS
+        builder.RegisterType<TestScenarios.WinFormsTestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();
+        builder.RegisterType<TestScenarios.WinFormsTestScenarios>().As<TestScenarios.TestScenarioProvider>();
+#endif
+
         // TODO: Can we add a test for this?
         builder.RegisterBuildCallback(ctx =>
             Log.EventLogger = ctx.Resolve<WindowsEventLogger>());

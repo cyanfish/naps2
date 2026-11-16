@@ -288,6 +288,8 @@ public abstract class DesktopForm : EtoFormBase
         await _desktopController.Initialize();
     }
 
+    internal NotificationArea NotificationArea => _notificationArea;
+
     protected bool UserClosing { get; set; } = true;
 
     protected override void OnClosing(CancelEventArgs e)

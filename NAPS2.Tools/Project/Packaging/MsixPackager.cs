@@ -9,13 +9,10 @@ public static class MsixPackager
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
         Cli.Run("dotnet", "clean NAPS2.App.WinForms -r win-x64 -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.Console -r win-x64 -c Release");
         Cli.Run("dotnet",
             "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
         Cli.Run("dotnet",
             "publish NAPS2.App.WinForms -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        Cli.Run("dotnet",
-            "publish NAPS2.App.Console -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
 
@@ -36,7 +33,7 @@ public static class MsixPackager
         var resourcesPriPath = Path.Combine(Paths.SetupObj, "resources.pri");
         var msixConfig = Path.Combine(Paths.SetupWindows, "msix");
         File.Copy(Path.Combine(msixConfig, "appxmanifest.xml"), manifestPath, true);
-        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net10.0", "win-x64",
+        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net11.0-windows", "win-x64",
             "publish");
         var mappingFilePath = Path.Combine(Paths.SetupObj, "msixmapping.txt");
 
@@ -92,8 +89,7 @@ public static class MsixPackager
     {
         var sb = new StringBuilder();
         sb.AppendLine("<Resource Language=\"en-us\" />");
-        foreach (var language in pkgInfo.Files.Where(x => x.FileName.StartsWith("NAPS2.Lib.resources.dll"))
-                     .Select(x => Path.GetFileName(x.DestDir)))
+        foreach (var language in pkgInfo.Languages.Order())
         {
             // MSIX expects language codes a bit different from NAPS2
             // TODO: Would it be better to use these codes internally? Would it match up more with Windows?

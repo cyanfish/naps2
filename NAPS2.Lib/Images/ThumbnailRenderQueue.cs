@@ -74,7 +74,7 @@ public class ThumbnailRenderQueue : IDisposable
     {
         // TODO: Make this run as async?
         // TODO: Verify WorkerFactory is not null? Or handle this better for tests?
-        bool useWorker = PlatformCompat.System.RenderInWorker;
+        bool useWorker = _scanningContext.ImageContext.GetType().Name == "GdiImageContext";
         var worker = useWorker ? _scanningContext.CreateWorker(WorkerType.Native) : null;
         var fallback = new ExpFallback(100, 60 * 1000);
         while (true)

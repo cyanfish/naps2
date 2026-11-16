@@ -166,7 +166,7 @@ public class ConfigStorage<TConfig>
         // TODO: We should probably detect and throw an exception for cycles rather than stack overflowing
         foreach (var propData in ConfigLookup.GetPropertyData(node.ValueType))
         {
-            var childObj = propData.PropertyInfo.GetValue(obj);
+            var childObj = propData.Getter(obj);
             var childNode = node.Children.GetOrSet(propData.Name, () => new StorageNode(propData.Type)
             {
                 Key = propData.Name,

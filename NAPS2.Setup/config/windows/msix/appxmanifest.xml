@@ -81,7 +81,7 @@
                 </uap3:Extension>
             </Extensions>
         </Application>
-        <Application Id="NAPS2.Worker" Executable="lib\NAPS2.Worker.exe"
+        <Application Id="NAPS2.Worker" Executable="NAPS2.Worker.exe"
                      uap10:RuntimeBehavior="win32App"
                      uap10:TrustLevel="mediumIL">
             <uap:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner"

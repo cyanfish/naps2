@@ -10,12 +10,13 @@ public class LayoutControl : LayoutElement
 {
     private static readonly FieldInfo VisualParentField =
         typeof(Control).GetField("VisualParent_Key", BindingFlags.NonPublic | BindingFlags.Static)!;
-    private static readonly MethodInfo TriggerPreLoadMethod =
-        typeof(Control).GetMethod("TriggerPreLoad", BindingFlags.NonPublic | BindingFlags.Instance)!;
-    private static readonly MethodInfo TriggerLoadMethod =
-        typeof(Control).GetMethod("TriggerLoad", BindingFlags.NonPublic | BindingFlags.Instance)!;
-    private static readonly MethodInfo TriggerLoadCompleteMethod =
-        typeof(Control).GetMethod("TriggerLoadComplete", BindingFlags.NonPublic | BindingFlags.Instance)!;
+    private static readonly Action<Control, EventArgs> TriggerPreLoad = GetTriggerMethod("TriggerPreLoad");
+    private static readonly Action<Control, EventArgs> TriggerLoad = GetTriggerMethod("TriggerLoad");
+    private static readonly Action<Control, EventArgs> TriggerLoadComplete = GetTriggerMethod("TriggerLoadComplete");
+
+    private static Action<Control, EventArgs> GetTriggerMethod(string name) =>
+        typeof(Control).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Instance)!
+            .CreateDelegate<Action<Control, EventArgs>>();
 
     private bool _isAdded;
     private bool _isWindowSet;
@@ -236,9 +237,9 @@ public class LayoutControl : LayoutElement
         if (!_isWindowSet && context.Window != null)
         {
             Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
-            TriggerPreLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
-            TriggerLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
-            TriggerLoadCompleteMethod.Invoke(Control, new object[] { EventArgs.Empty });
+            TriggerPreLoad(Control, EventArgs.Empty);
+            TriggerLoad(Control, EventArgs.Empty);
+            TriggerLoadComplete(Control, EventArgs.Empty);
             _isWindowSet = true;
         }
     }

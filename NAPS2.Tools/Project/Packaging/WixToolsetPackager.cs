@@ -11,10 +11,8 @@ public static class WixToolsetPackager
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
         Cli.Run("dotnet", "clean NAPS2.App.WinForms -r win-x64 -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.Console -r win-x64 -c Release");
         Cli.Run("dotnet", "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
         Cli.Run("dotnet", "publish NAPS2.App.WinForms -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        Cli.Run("dotnet", "publish NAPS2.App.Console -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
         if (!noSign)
@@ -59,45 +57,19 @@ public static class WixToolsetPackager
         }
         template = template.Replace("<!-- !root -->", rootLines.ToString());
 
-        var libLines = new StringBuilder();
-        foreach (var libFile in packageInfo.Files.Where(x => x.DestDir == "lib"))
-        {
-            DeclareFile(libLines, libFile);
-        }
-        template = template.Replace("<!-- !lib -->", libLines.ToString());
-
         var win32Lines = new StringBuilder();
-        foreach (var win32File in packageInfo.Files.Where(x => x.DestDir == Path.Combine("lib", "_win32")))
+        foreach (var win32File in packageInfo.Files.Where(x => x.DestDir == "_win32"))
         {
             DeclareFile(win32Lines, win32File);
         }
         template = template.Replace("<!-- !win32 -->", win32Lines.ToString());
 
         var win64Lines = new StringBuilder();
-        foreach (var win64File in packageInfo.Files.Where(x => x.DestDir == Path.Combine("lib", "_win64")))
+        foreach (var win64File in packageInfo.Files.Where(x => x.DestDir == "_win64"))
         {
             DeclareFile(win64Lines, win64File);
         }
         template = template.Replace("<!-- !win64 -->", win64Lines.ToString());
-
-        var langRefsLines = new StringBuilder();
-        var langFilesLines = new StringBuilder();
-        foreach (var language in packageInfo.Languages.OrderBy(x => x))
-        {
-            var id = ToId(language);
-            langFilesLines.AppendLine($"<Directory Id=\"LangFolder_{id}\" Name=\"{language}\">");
-            foreach (var langResource in packageInfo.Files.Where(x => x.DestDir == Path.Combine("lib", language)))
-            {
-                var componentId = $"LangComponent_{ToId(langResource.DestPath)}";
-                langRefsLines.AppendLine($"<ComponentRef Id=\"{componentId}\" />");
-                langFilesLines.AppendLine($"<Component Id=\"{componentId}\" Guid=\"{Guid.NewGuid()}\" >");
-                DeclareFile(langFilesLines, langResource);
-                langFilesLines.AppendLine("</Component>");
-            }
-            langFilesLines.AppendLine("</Directory>");
-        }
-        template = template.Replace("<!-- !langrefs -->", langRefsLines.ToString());
-        template = template.Replace("<!-- !langfiles -->", langFilesLines.ToString());
 
         var wxsPath = Path.Combine(Paths.SetupObj, "setup.wxs");
         File.WriteAllText(wxsPath, template);

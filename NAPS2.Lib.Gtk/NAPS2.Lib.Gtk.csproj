@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net10.0</TargetFrameworks>
+        <TargetFrameworks>net11.0</TargetFrameworks>
+        <!-- The flatpak only has the net10 SDK, which can't restore net11.0 -->
+        <TargetFrameworks Condition="$([MSBuild]::VersionLessThan('$(NETCoreSdkVersion)', '11.0'))">net10.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
         <RootNamespace>NAPS2</RootNamespace>
@@ -12,6 +14,7 @@
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
     <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\TestScenarios.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" />

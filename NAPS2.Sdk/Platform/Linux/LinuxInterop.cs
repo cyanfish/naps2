@@ -30,4 +30,7 @@ internal static class LinuxInterop
     
     [DllImport("libc.so.6")]
     public static extern int symlink(string targetPath, string linkPath);
+
+    [DllImport("libgtk-3.so.0")]
+    public static extern void gtk_native_dialog_set_transient_for(IntPtr dialog, IntPtr parent);
 }

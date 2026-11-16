@@ -24,6 +24,7 @@
         <PackageReference Include="ZXing.Net" Version="0.16.11" />
 
         <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
+        <ProjectReference Include="..\NAPS2.Generators\NAPS2.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>

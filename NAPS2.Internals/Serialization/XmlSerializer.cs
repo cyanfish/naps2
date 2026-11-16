@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,11 @@ namespace NAPS2.Serialization;
 
 public abstract class XmlSerializer
 {
+    // NAPS2 apps are published with TrimMode=partial, which doesn't trim NAPS2 assemblies, so the serialized NAPS2
+    // types keep their members. Members of framework types that are created via reflection are kept with
+    // DynamicDependency.
+    internal const string TrimJustification = "Serialized types aren't trimmed";
+
     protected static readonly XNamespace Xsi = "http://www.w3.org/2001/XMLSchema-instance";
 
     protected static readonly Dictionary<Type, CustomXmlSerializer> CustomSerializerCache = new();
@@ -45,10 +51,10 @@ public abstract class XmlSerializer
         { typeof(IntPtr), new XmlTypeInfo { CustomSerializer = new IntPtrSerializer() } },
         { typeof(UIntPtr), new XmlTypeInfo { CustomSerializer = new UIntPtrSerializer() } },
         { typeof(List<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
-        { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+        { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new SetSerializer() } },
         { typeof(Dictionary<,>), new XmlTypeInfo { CustomSerializer = new DictionarySerializer() } },
-        { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new ImmutableListSerializer() } },
-        { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new ImmutableHashSetSerializer() } },
+        { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+        { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new SetSerializer() } },
         { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
         { typeof(Guid), new XmlTypeInfo { CustomSerializer = new GuidSerializer() } },
         { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
@@ -107,7 +113,7 @@ public abstract class XmlSerializer
         {
             foreach (var propInfo in typeInfo.Properties!)
             {
-                var child = SerializeInternal(propInfo.Property.GetValue(obj), new XElement(propInfo.Property.Name),
+                var child = SerializeInternal(propInfo.Getter(obj), new XElement(propInfo.Property.Name),
                     propInfo.Property.PropertyType);
                 element.Add(child);
             }
@@ -125,6 +131,8 @@ public abstract class XmlSerializer
         return DeserializeInternalNonNull(element, type);
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = TrimJustification)]
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = TrimJustification)]
     protected static object DeserializeInternalNonNull(XElement element, Type type)
     {
         var actualTypeName = element.Attribute(Xsi + "type")?.Value;
@@ -160,7 +168,7 @@ public abstract class XmlSerializer
             if (child != null)
             {
                 var childObj = DeserializeInternal(child, propInfo.Property.PropertyType);
-                propInfo.Property.SetValue(obj, childObj);
+                propInfo.Setter(obj, childObj);
             }
         }
         return obj;
@@ -204,6 +212,8 @@ public abstract class XmlSerializer
         return type.Name;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2059", Justification = TrimJustification)]
+    [UnconditionalSuppressMessage("Trimming", "IL2070", Justification = TrimJustification)]
     protected static XmlTypeInfo GetTypeInfo(Type type)
     {
         lock (TypeInfoCache)
@@ -294,7 +304,12 @@ public abstract class XmlSerializer
         public Dictionary<string, Type> KnownTypesByElementName { get; set; } = new();
     }
 
-    protected record XmlPropertyInfo(PropertyInfo Property);
+    protected record XmlPropertyInfo(PropertyInfo Property)
+    {
+        public Func<object, object?> Getter { get; } = PropertyAccessors.GetGetter(Property);
+
+        public Action<object, object?> Setter { get; } = PropertyAccessors.GetSetter(Property);
+    }
 
     protected class CharSerializer : CustomXmlSerializer<char>
     {
@@ -534,12 +549,13 @@ public abstract class XmlSerializer
         public override void SerializeObject(object obj, XElement element, Type type)
         {
             var itemType = GetItemType(type);
-            var list = (IEnumerable) obj;
-            foreach (var item in list)
+            foreach (var item in GetItemsToSerialize((IEnumerable) obj))
             {
                 element.Add(SerializeInternal(item, new XElement(itemType.Name), itemType));
             }
         }
+
+        protected virtual IEnumerable GetItemsToSerialize(IEnumerable collection) => collection;
 
         protected Type GetItemType(Type type)
         {
@@ -558,51 +574,74 @@ public abstract class XmlSerializer
         public override object DeserializeObject(XElement element, Type type)
         {
             var itemType = GetItemType(type);
-            var list = CreateInstance(type, itemType);
-            var add = list.GetType().GetMethod("Add", BindingFlags.Public | BindingFlags.Instance) ??
-                      throw new ArgumentException("Collection type has no Add method");
-            if (add.ReturnType == list.GetType())
-            {
-                // Handle immutable collections
-                foreach (var itemElement in element.Elements())
-                {
-                    list = add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) })!;
-                }
-            }
-            else
-            {
-                foreach (var itemElement in element.Elements())
-                {
-                    add.Invoke(list, new[] { DeserializeInternal(itemElement, itemType) });
-                }
-            }
-
-            return list;
+            var items = element.Elements().Select(itemElement => DeserializeInternal(itemElement, itemType));
+            return GetBuilder(type, itemType).Build(items);
         }
 
-        protected virtual object CreateInstance(Type type, Type itemType) => Activator.CreateInstance(type, true)!;
+        private static readonly Dictionary<Type, CollectionBuilder> Builders = new();
+
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = TrimJustification)]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(ListBuilder<>))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(HashSetBuilder<>))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
+            typeof(ImmutableListBuilder<>))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor,
+            typeof(ImmutableHashSetBuilder<>))]
+        private static CollectionBuilder GetBuilder(Type type, Type itemType)
+        {
+            lock (Builders)
+            {
+                return Builders.GetOrSet(type, () =>
+                {
+                    var collectionType = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
+                    var builderType =
+                        collectionType == typeof(List<>) ? typeof(ListBuilder<>) :
+                        collectionType == typeof(HashSet<>) ? typeof(HashSetBuilder<>) :
+                        collectionType == typeof(ImmutableList<>) ? typeof(ImmutableListBuilder<>) :
+                        collectionType == typeof(ImmutableHashSet<>) ? typeof(ImmutableHashSetBuilder<>) :
+                        throw new ArgumentException($"Unsupported collection type: {type.FullName}");
+                    return (CollectionBuilder) Activator.CreateInstance(builderType.MakeGenericType(itemType))!;
+                });
+            }
+        }
+
+        private abstract class CollectionBuilder
+        {
+            public abstract object Build(IEnumerable<object?> items);
+        }
+
+        private abstract class CollectionBuilder<T> : CollectionBuilder
+        {
+            protected static IEnumerable<T> Cast(IEnumerable<object?> items) =>
+                items.Select(item => item is null ? default! : (T) item);
+        }
+
+        private sealed class ListBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => Cast(items).ToList();
+        }
+
+        private sealed class HashSetBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => new HashSet<T>(Cast(items));
+        }
+
+        private sealed class ImmutableListBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => ImmutableList.CreateRange(Cast(items));
+        }
+
+        private sealed class ImmutableHashSetBuilder<T> : CollectionBuilder<T>
+        {
+            public override object Build(IEnumerable<object?> items) => ImmutableHashSet.CreateRange(Cast(items));
+        }
     }
 
-    protected class ImmutableListSerializer : CollectionSerializer
+    protected class SetSerializer : CollectionSerializer
     {
-        protected override object CreateInstance(Type type, Type itemType)
-        {
-            var emptyField = typeof(ImmutableList<>).MakeGenericType(itemType)
-                                 .GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
-                             throw new Exception("No Empty field on ImmutableList");
-            return emptyField.GetValue(null)!;
-        }
-    }
-
-    protected class ImmutableHashSetSerializer : CollectionSerializer
-    {
-        protected override object CreateInstance(Type type, Type itemType)
-        {
-            var emptyField = typeof(ImmutableHashSet<>).MakeGenericType(itemType)
-                                 .GetField("Empty", BindingFlags.Public | BindingFlags.Static) ??
-                             throw new Exception("No Empty field on ImmutableHashSet");
-            return emptyField.GetValue(null)!;
-        }
+        // Sort the items to keep the serialized output consistent
+        protected override IEnumerable GetItemsToSerialize(IEnumerable collection) =>
+            collection.Cast<object?>().OrderBy(x => x?.ToString(), StringComparer.Ordinal);
     }
 
     protected class DictionarySerializer : CustomXmlSerializer
@@ -622,6 +661,8 @@ public abstract class XmlSerializer
             }
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = TrimJustification)]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor, typeof(Dictionary<,>))]
         public override object DeserializeObject(XElement element, Type type)
         {
             var typeArgs = type.GetGenericArguments();

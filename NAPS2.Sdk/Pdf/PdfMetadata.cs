@@ -1,8 +1,11 @@
+using NAPS2.Serialization;
+
 namespace NAPS2.Pdf;
 
 /// <summary>
 /// Represents standard PDF metadata (e.g. author, subject, title).
 /// </summary>
+[GeneratePropertyAccessors]
 public record PdfMetadata
 {
     public string Author { get; init; } = "";

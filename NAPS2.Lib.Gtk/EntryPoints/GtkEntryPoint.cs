@@ -13,6 +13,11 @@ public static class GtkEntryPoint
     {
         GLib.ExceptionManager.UnhandledException += UnhandledGtkException;
         GLibLogInterceptor.WriteToDebugLog();
+        if (Environment.GetEnvironmentVariable("GTK_USE_PORTAL") == null)
+        {
+            // Use the desktop's native file dialogs
+            PlatformCompat.System.SetEnv("GTK_USE_PORTAL", "1");
+        }
         EtoPlatform.Current = new GtkEtoPlatform();
 
         var subArgs = args.Skip(1).ToArray();

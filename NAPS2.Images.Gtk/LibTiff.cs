@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using NAPS2.Unmanaged;
 using NAPS2.Util;
 using toff_t = System.IntPtr;
 using tsize_t = System.IntPtr;
@@ -101,33 +102,24 @@ internal static class LibTiff
 
     public static TIFFWriteDirectory_d TIFFWriteDirectory => Load<TIFFWriteDirectory_d>();
 
-    public delegate int TIFFGetField_d1(IntPtr tiff, TiffTag tag, out int field);
+    public delegate int TIFFVGetField_d(IntPtr tiff, TiffTag tag, IntPtr ap);
 
-    public static TIFFGetField_d1 TIFFGetFieldInt => Load<TIFFGetField_d1>();
+    /// <summary>
+    /// Gets a single-valued field. This is only safe if T matches the type libtiff writes for the tag (e.g. short for
+    /// uint16_t, int for uint32_t, float for float). Otherwise libtiff can write past the end of the value.
+    /// </summary>
+    public static unsafe int TIFFGetField<T>(IntPtr tiff, TiffTag tag, out T field) where T : unmanaged
+    {
+        T value = default;
+        int result = VaList.Call(ap => Load<TIFFVGetField_d>()(tiff, tag, ap), (IntPtr) (&value));
+        field = value;
+        return result;
+    }
 
-    public delegate int TIFFGetField_d2(IntPtr tiff, TiffTag tag, out float field);
+    public delegate int TIFFVSetField_d(IntPtr tiff, TiffTag tag, IntPtr ap);
 
-    public static TIFFGetField_d2 TIFFGetFieldFloat => Load<TIFFGetField_d2>();
-
-    public delegate int TIFFGetField_d3(IntPtr tiff, TiffTag tag, out double field);
-
-    public static TIFFGetField_d3 TIFFGetFieldDouble => Load<TIFFGetField_d3>();
-
-    public delegate int TIFFSetField_d1(IntPtr tiff, TiffTag tag, int field);
-
-    public static TIFFSetField_d1 TIFFSetFieldInt => Load<TIFFSetField_d1>();
-
-    public delegate int TIFFSetField_d2(IntPtr tiff, TiffTag tag, float field);
-
-    public static TIFFSetField_d2 TIFFSetFieldFloat => Load<TIFFSetField_d2>();
-
-    public delegate int TIFFSetField_d3(IntPtr tiff, TiffTag tag, double field);
-
-    public static TIFFSetField_d3 TIFFSetFieldDouble => Load<TIFFSetField_d3>();
-
-    public delegate int TIFFSetField_d4(IntPtr tiff, TiffTag tag, short field, short[] array);
-
-    public static TIFFSetField_d4 TIFFSetFieldShortArray => Load<TIFFSetField_d4>();
+    public static int TIFFSetField(IntPtr tiff, TiffTag tag, params VaArg[] args) =>
+        VaList.Call(ap => Load<TIFFVSetField_d>()(tiff, tag, ap), args);
 
     public delegate int TIFFWriteScanline_d(
         IntPtr tiff, tdata_t buf, int row, short sample);

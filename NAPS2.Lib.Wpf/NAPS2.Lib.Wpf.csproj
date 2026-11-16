@@ -9,7 +9,7 @@
     <UseWPF>true</UseWPF>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <!-- Application.ThemeMode (Fluent) is still marked experimental -->
-    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+    <NoWarn>$(NoWarn);WPF0001;NU1701</NoWarn>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
@@ -18,6 +18,7 @@
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\TestScenarios.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />

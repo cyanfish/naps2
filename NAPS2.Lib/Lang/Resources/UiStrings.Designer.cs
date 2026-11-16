@@ -2072,5 +2072,107 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("ButtonsLabel", resourceCulture);
             }
         }
+        
+        internal static string WindowsKey {
+            get {
+                return ResourceManager.GetString("WindowsKey", resourceCulture);
+            }
+        }
+        
+        internal static string EnterKey {
+            get {
+                return ResourceManager.GetString("EnterKey", resourceCulture);
+            }
+        }
+        
+        internal static string DeleteKey {
+            get {
+                return ResourceManager.GetString("DeleteKey", resourceCulture);
+            }
+        }
+        
+        internal static string InsertKey {
+            get {
+                return ResourceManager.GetString("InsertKey", resourceCulture);
+            }
+        }
+        
+        internal static string EscapeKey {
+            get {
+                return ResourceManager.GetString("EscapeKey", resourceCulture);
+            }
+        }
+        
+        internal static string SpaceKey {
+            get {
+                return ResourceManager.GetString("SpaceKey", resourceCulture);
+            }
+        }
+        
+        internal static string TabKey {
+            get {
+                return ResourceManager.GetString("TabKey", resourceCulture);
+            }
+        }
+        
+        internal static string BackspaceKey {
+            get {
+                return ResourceManager.GetString("BackspaceKey", resourceCulture);
+            }
+        }
+        
+        internal static string HomeKey {
+            get {
+                return ResourceManager.GetString("HomeKey", resourceCulture);
+            }
+        }
+        
+        internal static string EndKey {
+            get {
+                return ResourceManager.GetString("EndKey", resourceCulture);
+            }
+        }
+        
+        internal static string PageUpKey {
+            get {
+                return ResourceManager.GetString("PageUpKey", resourceCulture);
+            }
+        }
+        
+        internal static string PageDownKey {
+            get {
+                return ResourceManager.GetString("PageDownKey", resourceCulture);
+            }
+        }
+        
+        internal static string UpArrowKey {
+            get {
+                return ResourceManager.GetString("UpArrowKey", resourceCulture);
+            }
+        }
+        
+        internal static string DownArrowKey {
+            get {
+                return ResourceManager.GetString("DownArrowKey", resourceCulture);
+            }
+        }
+        
+        internal static string LeftArrowKey {
+            get {
+                return ResourceManager.GetString("LeftArrowKey", resourceCulture);
+            }
+        }
+        
+        internal static string RightArrowKey {
+            get {
+                return ResourceManager.GetString("RightArrowKey", resourceCulture);
+            }
+        }
+        
+        internal static string PauseKey {
+            get {
+                return ResourceManager.GetString("PauseKey", resourceCulture);
+            }
+        }
     }
 }

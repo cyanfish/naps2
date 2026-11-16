@@ -1,5 +1,8 @@
+using NAPS2.Serialization;
+
 namespace NAPS2.Config;
 
+[GeneratePropertyAccessors]
 public class KeyboardShortcuts
 {
     public string? ScanDefault { get; set; }

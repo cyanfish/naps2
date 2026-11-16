@@ -1,7 +1,9 @@
 using NAPS2.Config.Model;
+using NAPS2.Serialization;
 
 namespace NAPS2.Pdf;
 
+[GeneratePropertyAccessors]
 public record PdfSettings
 {
     private PdfMetadata _metadata;

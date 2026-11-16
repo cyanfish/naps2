@@ -125,7 +125,7 @@ public class UpdateOperation : OperationBase
     private void InstallZip()
     {
         ZipFile.ExtractToDirectory(_tempPath!, _tempFolder!);
-        string portableLauncherPath = Path.Combine(AssemblyHelper.LibFolder, "..", "..", "NAPS2.Portable.exe");
+        string portableLauncherPath = Path.Combine(AssemblyHelper.EntryFolder, "..", "NAPS2.Portable.exe");
         AtomicReplaceFile(Path.Combine(_tempFolder!, "NAPS2.Portable.exe"), portableLauncherPath);
         Process.Start(new ProcessStartInfo
         {

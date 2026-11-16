@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
+        <!-- The flatpak only has the net10 SDK, which can't restore net11.0 -->
+        <TargetFramework Condition="$([MSBuild]::VersionLessThan('$(NETCoreSdkVersion)', '11.0'))">net10.0</TargetFramework>
         <OutputType>Exe</OutputType>
         <RootNamespace>NAPS2</RootNamespace>
         <AssemblyName>naps2</AssemblyName>
@@ -11,6 +13,7 @@
         <PublishSingleFile>true</PublishSingleFile>
         <PublishTrimmed>true</PublishTrimmed>
         <TrimMode>partial</TrimMode>
+        <PublishReadyToRun>true</PublishReadyToRun>
 
 	<RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>
 
@@ -29,9 +32,6 @@
         <ProjectReference Include="..\NAPS2.Lib.Gtk\NAPS2.Lib.Gtk.csproj" />
 
         <PackageReference Include="Eto.Platform.Gtk" Version="2.11.0" />
-        <!-- This shouldn't need a reference normally, but otherwise "dotnet restore" doesn't pick
-             it up, which breaks the flatpak build. -->
-        <PackageReference Include="Microsoft.NETCore.App" Version="2.1.*" />
     </ItemGroup>
 
     <ItemGroup>

@@ -225,6 +225,19 @@ public class LoadSaveTests : ContextualTests
         Assert.Equal(300, image2.VerticalResolution, 2);
     }
 
+    [PlatformFact(exclude: PlatformFlags.SkiaImage)]
+    public void SetResolutionAndSaveTiff()
+    {
+        var image = LoadImage(ImageResources.dog);
+
+        image.SetResolution(300, 150);
+        var stream = image.SaveToMemoryStream(ImageFileFormat.Tiff);
+        var image2 = ImageContext.Load(stream);
+
+        Assert.Equal(300, image2.HorizontalResolution, 2);
+        Assert.Equal(150, image2.VerticalResolution, 2);
+    }
+
     // PNG stores resolution as whole pixels per meter, so e.g. 300 DPI can be read back as 299.9994. Mac/Skia snap to
     // the whole DPI, but not all image types do.
     [PlatformTheory(include: PlatformFlags.SkiaImage)]

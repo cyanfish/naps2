@@ -20,20 +20,9 @@ internal class AssemblyHelper
         }
     }
 
-    public static string EntryFolder { get; }
-
-    static AssemblyHelper()
-    {
-        // We can't use the assembly location, see
-        // https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli#api-incompatibility
-        EntryFolder = AppContext.BaseDirectory;
-
-        // If this is inside the "lib" subfolder, the base path needs to be the parent folder
-        if (EntryFolder.EndsWith(@"\lib\"))
-        {
-            EntryFolder = EntryFolder.Substring(0, EntryFolder.Length - 4);
-        }
-    }
+    // We can't use the assembly location, see
+    // https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli#api-incompatibility
+    public static string EntryFolder => AppContext.BaseDirectory;
 
     public static string EntryFile =>
 #if NET6_0_OR_GREATER

@@ -377,6 +377,10 @@ internal class EsclApiController : WebApiController
         }
     }
 
+#if NET
+    [UnconditionalSuppressMessage("Trimming", "IL2075",
+        Justification = "The backing field is kept as the property is used, and it's null-checked anyway")]
+#endif
     private void SetChunkedResponse()
     {
         // Bypass https://github.com/unosquare/embedio/issues/510

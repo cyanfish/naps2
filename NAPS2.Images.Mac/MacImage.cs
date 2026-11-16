@@ -176,8 +176,8 @@ public class MacImage : IMemoryImage
             var cgImage = helper.Image.Rep.CGImage!; //RepresentationUsingTypeProperties(fileType, props);
             var data = new NSMutableData();
             var props = new NSMutableDictionary();
-            props.Add((NSString) "DPIWidth", NSObject.FromObject(HorizontalResolution));
-            props.Add((NSString) "DPIHeight", NSObject.FromObject(VerticalResolution));
+            props.Add((NSString) "DPIWidth", NSNumber.FromFloat(HorizontalResolution));
+            props.Add((NSString) "DPIHeight", NSNumber.FromFloat(VerticalResolution));
             if (options.Quality != -1 && imageFormat is ImageFileFormat.Jpeg or ImageFileFormat.Jpeg2000)
             {
                 props.Add((NSString) "kCGImageDestinationLossyCompressionQuality", NSNumber.FromFloat(options.Quality / 100.0f));

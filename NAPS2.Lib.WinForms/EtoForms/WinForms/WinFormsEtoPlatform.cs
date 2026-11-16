@@ -151,9 +151,8 @@ public class WinFormsEtoPlatform : EtoPlatform
         {
             x = container.ToNative().Width - x - size.Width;
         }
-        native.Location = new SD.Point(x, y);
         native.AutoSize = false;
-        native.Size = new SD.Size(size.Width, size.Height);
+        native.SetBounds(x, y, size.Width, size.Height);
         if (inOverlay)
         {
             native.BringToFront();
@@ -302,12 +301,27 @@ public class WinFormsEtoPlatform : EtoPlatform
             // The handle can be recreated later (e.g. if RightToLeft changes), but Shown is only fired once
             if (!shown) WindowCloaking.SetCloaked(form.Handle, true);
         };
+        SetEnableRedrawDuringSuspend(window, true);
         window.Shown += (_, _) =>
         {
             shown = true;
             WindowCloaking.PaintNow(form.Handle);
             WindowCloaking.SetCloaked(form.Handle, false);
+            SetEnableRedrawDuringSuspend(window, false);
         };
+    }
+
+    private static void SetEnableRedrawDuringSuspend(Window window, bool value)
+    {
+        switch (window.Handler)
+        {
+            case FormHandler formHandler:
+                formHandler.EnableRedrawDuringSuspend = value;
+                break;
+            case DialogHandler dialogHandler:
+                dialogHandler.EnableRedrawDuringSuspend = value;
+                break;
+        }
     }
 
     public override float GetScaleFactor(Window? window)
@@ -388,10 +402,6 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
         else
         {
-            // Calling the callback here shouldn't be necessary, but for some reason with net10 (dark mode)
-            // we get weird handle errors if we don't. It should have no negative effect as we will call it
-            // again with the correct scale factor before it renders.
-            callback(1f);
             control.HandleCreated += (_, _) => Register();
         }
         control.HandleDestroyed += (_, _) => Unregister();
@@ -429,7 +439,7 @@ public class WinFormsEtoPlatform : EtoPlatform
         if (obj?.ControlObject is WF.DataObject wfObj)
         {
 #pragma warning disable WFDEV005
-            return (byte[]) wfObj.GetData(typeName);
+            return (byte[]?) wfObj.GetData(typeName) ?? [];
 #pragma warning restore WFDEV005
         }
         return base.GetData(dataObject, typeName);

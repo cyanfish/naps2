@@ -13,7 +13,7 @@ internal class NativeLibrary
     private static string FindPath(string libraryName, string? baseFolder, string[] systemSearchPaths)
     {
         var baseFolders = !string.IsNullOrWhiteSpace(baseFolder)
-            ? new[] { baseFolder, Path.Combine(baseFolder, "lib") }
+            ? new[] { baseFolder }
             : new[] { AssemblyHelper.LibFolder, AssemblyHelper.EntryFolder };
         foreach (var actualBaseFolder in baseFolders)
         {

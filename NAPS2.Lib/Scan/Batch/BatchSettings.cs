@@ -1,7 +1,9 @@
 ﻿using NAPS2.ImportExport;
+using NAPS2.Serialization;
 
 namespace NAPS2.Scan.Batch;
 
+[GeneratePropertyAccessors]
 public class BatchSettings
 {
     public string? ProfileDisplayName { get; set; }

@@ -264,6 +264,15 @@ public class XmlSerializerTests
             true);
     }
 
+    [Fact]
+    public void SerializeImmutableHashSetInConsistentOrder()
+    {
+        var serializer = new XmlSerializer<ImmutableHashSet<string>>();
+        var doc = serializer.SerializeToXDocument(ImmutableHashSet.Create("c", "a", "d", "b"));
+        Assert.NotNull(doc.Root);
+        Assert.Equal(["a", "b", "c", "d"], doc.Root.Elements().Select(x => x.Value));
+    }
+
     private void VerifySerializeCollection<T>(T original, bool unordered = false) where T : IEnumerable<Poco>
     {
         var serializer = new XmlSerializer<T>();

@@ -15,7 +15,6 @@ public static class Paths
         AppDataPath = Path.Combine(ExecutablePath, "..", "Data");
 #else
         var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-#if NET6_0_OR_GREATER
         var subfolder = OperatingSystem.IsWindows() ? "NAPS2" : "naps2";
         if (string.IsNullOrEmpty(userAppData) && OperatingSystem.IsMacOS())
         {
@@ -30,9 +29,6 @@ public static class Paths
             // TODO: Migrate macOS application data to "~/Library/Application Support"
             userAppData = Environment.ExpandEnvironmentVariables("%HOME%/.config");
         }
-#else
-        var subfolder = "NAPS2";
-#endif
         AppDataPath = Path.Combine(userAppData, subfolder);
 #endif
         var dataPathFromEnv = Environment.GetEnvironmentVariable("NAPS2_TEST_DATA");
@@ -76,16 +72,17 @@ public static class Paths
     public static string Components => EnsureFolderExists(ComponentsPath);
 
     /// <summary>
-    /// Safely clears the NAPS2 temp folder. If other NAPS2 or NAPS2.Console processes are running, the folder will be left alone.
+    /// Safely clears the NAPS2 temp folder. If other NAPS2 processes are running, the folder will be left alone.
     /// </summary>
     public static void ClearTemp()
     {
         try
         {
             if (!Directory.Exists(TempPath)) return;
+            if (!Directory.EnumerateFileSystemEntries(TempPath).Any()) return;
 
             var otherNaps2Processes = Process.GetProcesses().Where(x =>
-                x.ProcessName.IndexOf("NAPS2", StringComparison.OrdinalIgnoreCase) >= 0 &&
+                x.ProcessName.Equals("NAPS2", StringComparison.OrdinalIgnoreCase) &&
                 x.Id != Process.GetCurrentProcess().Id);
             if (!otherNaps2Processes.Any())
             {

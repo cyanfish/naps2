@@ -12,8 +12,10 @@
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <PublishTrimmed>false</PublishTrimmed>
     <TrimMode>none</TrimMode>
+    <PublishReadyToRun>true</PublishReadyToRun>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <CETCompat>false</CETCompat>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
