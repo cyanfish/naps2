@@ -31,6 +31,7 @@ public static class Program
             .Add<PublishOptions, PublishCommand>()
             .Add<VirusScanOptions, VirusScanCommand>()
             .Add<ShareOptions, ShareCommand>()
+            .Add<ScenarioOptions, ScenarioCommand>()
             .Add<TemplatesOptions, TemplatesCommand>()
             .Add<ResxOptions, ResxCommand>()
             .Add<PushTemplatesOptions, PushTemplatesCommand>()

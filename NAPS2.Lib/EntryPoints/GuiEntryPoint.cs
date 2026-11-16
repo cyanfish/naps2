@@ -4,6 +4,9 @@ using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
+#if TEST_SCENARIOS
+using NAPS2.TestScenarios;
+#endif
 
 namespace NAPS2.EntryPoints;
 
@@ -14,9 +17,17 @@ public static class GuiEntryPoint
 {
     public static int Run(string[] args, Module imageModule, Module platformModule)
     {
+#if TEST_SCENARIOS
+        var testScenarioModule = TestScenarioModule.CreateFromEnvironment();
+#endif
+
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
-            new CommonModule(), imageModule, platformModule, new GuiModule(), new RecoveryModule(), new StaticInitModule());
+            new CommonModule(), imageModule, platformModule, new GuiModule(), new RecoveryModule(), new StaticInitModule()
+#if TEST_SCENARIOS
+            , testScenarioModule
+#endif
+        );
 
         Paths.ClearTemp();
 
@@ -39,6 +50,9 @@ public static class GuiEntryPoint
         Invoker.Current = new EtoInvoker(application);
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
+#if TEST_SCENARIOS
+        testScenarioModule?.Attach(container, desktop);
+#endif
 
         application.Run(desktop);
         return 0;
