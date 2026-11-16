@@ -43,8 +43,6 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool ShouldRememberBackgroundOperations => true;
 
-    public bool RenderInWorker => false;
-
     public bool SupportsWinX86Worker => false;
 
     public string? NativeWorkerAlias => null;

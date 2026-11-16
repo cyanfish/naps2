@@ -36,8 +36,6 @@ internal interface ISystemCompat
 
     bool ShouldRememberBackgroundOperations { get; }
 
-    bool RenderInWorker { get; }
-
     bool SupportsWinX86Worker { get; }
 
     string? NativeWorkerAlias { get; }
