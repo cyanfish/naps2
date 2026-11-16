@@ -1,4 +1,3 @@
-using Eto.Forms;
 using Eto.Mac;
 using Eto.Mac.Forms.ToolBar;
 

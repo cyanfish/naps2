@@ -1,6 +1,4 @@
-﻿using NAPS2.Scan;
-
-namespace NAPS2.Recovery;
+﻿namespace NAPS2.Recovery;
 
 public class RecoveryIndexImage
 {

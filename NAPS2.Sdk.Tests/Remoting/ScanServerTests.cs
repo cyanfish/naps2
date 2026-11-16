@@ -4,7 +4,6 @@ using NAPS2.Scan.Exceptions;
 using NAPS2.Sdk.Tests.Asserts;
 using NSubstitute;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Sdk.Tests.Remoting;
 

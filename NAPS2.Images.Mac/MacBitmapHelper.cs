@@ -47,14 +47,14 @@ internal static class MacBitmapHelper
             var realSamples = samplesPerPixel == 4 && !hasAlpha ? 3 : samplesPerPixel;
             return new NSBitmapImageRep(
                 IntPtr.Zero,
-                width.ToNInt(),
-                height.ToNInt(),
+                (nint) width,
+                (nint) height,
                 bitsPerSample,
                 realSamples,
                 hasAlpha,
                 false,
                 colorSpace,
-                (samplesPerPixel * width).ToNInt(),
+                (nint) (samplesPerPixel * width),
                 samplesPerPixel * bitsPerSample);
         }
     }

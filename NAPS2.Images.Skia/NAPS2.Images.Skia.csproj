@@ -4,11 +4,11 @@
         <TargetFrameworks>net8;net10.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <RootNamespace>NAPS2.Images.ImageSharp</RootNamespace>
+        <RootNamespace>NAPS2.Images.Skia</RootNamespace>
 
-        <Title>NAPS2.Images.ImageSharp</Title>
-        <Product>NAPS2.Images.ImageSharp</Product>
-        <Description>Images based on ImageSharp for NAPS2.Sdk.</Description>
+        <Title>NAPS2.Images.Skia</Title>
+        <Product>NAPS2.Images.Skia</Product>
+        <Description>Images based on SkiaSharp for NAPS2.Sdk.</Description>
         <PackageTags>naps2</PackageTags>
     </PropertyGroup>
 
@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="SixLabors.ImageSharp" Version="[3.1.12, 5.0.0)" />
+      <PackageReference Include="SkiaSharp" Version="4.156.0" />
     </ItemGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />

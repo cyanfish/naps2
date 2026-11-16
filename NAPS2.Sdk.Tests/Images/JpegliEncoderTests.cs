@@ -1,4 +1,4 @@
-using NAPS2.Pdf;
+using NAPS2.ImportExport;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;
 

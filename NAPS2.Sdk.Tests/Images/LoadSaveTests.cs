@@ -21,7 +21,7 @@ public class LoadSaveTests : ContextualTests
 
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             Assert.Throws<NotSupportedException>(() => ImageContext.Load(path));
             return;
@@ -42,7 +42,7 @@ public class LoadSaveTests : ContextualTests
 
         var stream = new MemoryStream(GetResource(resource));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             Assert.Throws<NotSupportedException>(() => ImageContext.Load(stream));
             return;
@@ -64,7 +64,7 @@ public class LoadSaveTests : ContextualTests
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
         var progressMock = Substitute.For<ProgressCallback>();
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await ImageContext.LoadFrames(path, progressMock).ToListAsync());
@@ -93,7 +93,7 @@ public class LoadSaveTests : ContextualTests
         var stream = new MemoryStream(GetResource(resource));
         var progressMock = Substitute.For<ProgressCallback>();
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await ImageContext.LoadFrames(stream, progressMock).ToListAsync());
@@ -122,7 +122,7 @@ public class LoadSaveTests : ContextualTests
         var path = P($"image{ext}");
         var expected = LoadImage(GetResource(compare[0]));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsEncode(format))
         {
             Assert.Throws<NotSupportedException>(() => expected.Save(path));
             return;
@@ -146,7 +146,7 @@ public class LoadSaveTests : ContextualTests
         var stream = new MemoryStream();
         var expected = LoadImage(GetResource(compare[0]));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsEncode(format))
         {
             Assert.Throws<NotSupportedException>(() => expected.Save(stream, format));
             return;
@@ -181,14 +181,22 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    // Gdi/Gtk/ImageSharp don't currently apply embedded color profiles
-    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.ImageSharpImage | PlatformFlags.GtkImage)]
+    // Gdi/Gtk don't currently apply embedded color profiles
+    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.GtkImage)]
     public void LoadWithColorProfile()
     {
         // The image has an embedded ICC profile with the primaries rotated (i.e. the stored red channel is green, etc.),
         // so the colors are only correct if the profile is applied.
         var image = LoadImage(ImageResources.dog_icc);
         ImageAsserts.Similar(ImageResources.dog, image, ignoreResolution: true);
+    }
+
+    [Fact]
+    public void LoadProgressiveJpeg()
+    {
+        // This also verifies the resolution is read, which some image types need to parse from the JPEG header
+        var image = LoadImage(ImageResources.dog_progressive);
+        ImageAsserts.Similar(ImageResources.dog, image);
     }
 
     [Fact]
@@ -215,6 +223,25 @@ public class LoadSaveTests : ContextualTests
 
         Assert.Equal(300, image2.HorizontalResolution, 2);
         Assert.Equal(300, image2.VerticalResolution, 2);
+    }
+
+    // PNG stores resolution as whole pixels per meter, so e.g. 300 DPI can be read back as 299.9994. Mac/Skia snap to
+    // the whole DPI, but not all image types do.
+    [PlatformTheory(include: PlatformFlags.SkiaImage)]
+    [InlineData(72)]
+    [InlineData(96)]
+    [InlineData(300)]
+    [InlineData(1200)]
+    public void SavePngWithExactResolution(int dpi)
+    {
+        var image = LoadImage(ImageResources.dog);
+
+        image.SetResolution(dpi, dpi);
+        var stream = image.SaveToMemoryStream(ImageFileFormat.Png);
+        var image2 = ImageContext.Load(stream);
+
+        Assert.Equal(dpi, image2.HorizontalResolution);
+        Assert.Equal(dpi, image2.VerticalResolution);
     }
 
     [Fact]
@@ -266,7 +293,7 @@ public class LoadSaveTests : ContextualTests
         // All optimized values should be less than their unoptimized counterparts.
         Assert.True(optimized32Bpp < unoptimized32Bpp);
         Assert.True(optimized24Bpp < unoptimized24Bpp);
-        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharpImage | PlatformFlags.WpfImage))
+        if (!CurrentPlatformFlags.HasAny(PlatformFlags.WpfImage | PlatformFlags.SkiaImage))
         {
             Assert.True(optimized8Bpp < unoptimized8Bpp);
             Assert.Equal(optimized1Bpp, unoptimized1Bpp);
@@ -382,17 +409,14 @@ public class LoadSaveTests : ContextualTests
             ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         ],
-        // TODO: Any way to improve these cases for ImageSharp?
         [
             ImageFileFormat.Tiff, ".tiff", "dog_alpha_tiff",
-            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true,
-            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true
         ],
         [
             ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
-            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true,
-            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true
         ],
     ];
 }

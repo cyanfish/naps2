@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8;net10.0;net10.0-macos</TargetFrameworks>
+        <TargetFrameworks>net10.0-macos;net11.0-macos</TargetFrameworks>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <CheckEolTargetFramework>false</CheckEolTargetFramework>
         <RootNamespace>NAPS2.Images.Mac</RootNamespace>
 
         <Title>NAPS2.Images.Mac</Title>
@@ -19,19 +18,7 @@
         <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)' != 'net10.0-macos'">
-        <DefineConstants>MONOMAC</DefineConstants>
-    </PropertyGroup>
-
-    <ItemGroup Condition="'$(TargetFramework)' != 'net10.0-macos'">
-        <Using Include="MonoMac.AppKit" />
-        <Using Include="MonoMac.CoreGraphics" />
-        <Using Include="MonoMac.Foundation" />
-        <Using Include="MonoMac.ImageIO" />
-        <Using Include="MonoMac.MobileCoreServices" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-macos'">
+    <ItemGroup>
         <Using Include="AppKit" />
         <Using Include="CoreGraphics" />
         <Using Include="Foundation" />
@@ -44,14 +31,6 @@
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
             <_Parameter1>NAPS2.Sdk.Tests</_Parameter1>
         </AssemblyAttribute>
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-      <PackageReference Include="Eto.Platform.Mac64" Version="2.11.0" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(TargetFramework)' == 'net8'">
-      <PackageReference Include="Eto.Platform.Mac64" Version="2.11.0" />
     </ItemGroup>
 
     <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />

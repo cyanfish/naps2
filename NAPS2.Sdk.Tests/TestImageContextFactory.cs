@@ -10,7 +10,7 @@ public static class TestImageContextFactory
             "gdi" => new NAPS2.Images.Gdi.GdiImageContext(),
             "wpf" => new NAPS2.Images.Wpf.WpfImageContext(),
 #endif
-            "is" or "imagesharp" => new NAPS2.Images.ImageSharp.ImageSharpImageContext(),
+            "skia" => new NAPS2.Images.Skia.SkiaImageContext(),
 #if MAC
             "mac" => new NAPS2.Images.Mac.MacImageContext(),
 #endif
@@ -22,8 +22,10 @@ public static class TestImageContextFactory
                 new NAPS2.Images.Mac.MacImageContext()
 #elif LINUX
                 new NAPS2.Images.Gtk.GtkImageContext()
-#else
+#elif WINDOWS
                 new NAPS2.Images.Gdi.GdiImageContext()
+#else
+                new NAPS2.Images.Skia.SkiaImageContext()
 #endif
         };
     }

@@ -10,7 +10,6 @@ using NAPS2.Scan;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Pdf.Advanced;
-using PdfSharpCore.Pdf.IO;
 using PdfSharpCore.Pdf.Security;
 using PdfDocument = PdfSharpCore.Pdf.PdfDocument;
 using PdfPage = PdfSharpCore.Pdf.PdfPage;
@@ -272,8 +271,9 @@ public class PdfExporter
             // Special case if we have an un-transformed JPEG - just use the original file instead of re-encoding
             using var fileStream = new FileStream(jpegPath, FileMode.Open, FileAccess.Read);
             var jpegHeader = JpegFormatHelper.ReadHeader(fileStream);
-            // Ensure it's not a grayscale image as those are known to not be embeddable
-            if (jpegHeader is { NumComponents: > 1 })
+            // Ensure it's not a grayscale image as those are known to not be embeddable. We also only embed baseline
+            // JPEGs (not e.g. progressive) as other encodings aren't widely supported.
+            if (jpegHeader is { NumComponents: > 1, IsBaseline: true })
             {
                 return new DirectJpegEmbedder(jpegHeader, jpegPath);
             }

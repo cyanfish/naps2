@@ -1,4 +1,5 @@
-﻿using System.Runtime;
+﻿// ReSharper disable once RedundantUsingDirective
+using System.Runtime;
 using NAPS2.EntryPoints;
 
 namespace NAPS2.Console;

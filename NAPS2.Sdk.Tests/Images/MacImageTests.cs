@@ -1,6 +1,6 @@
 #if MAC
-using MonoMac.AppKit;
-using MonoMac.CoreGraphics;
+using AppKit;
+using CoreGraphics;
 using NAPS2.Images.Mac;
 using NAPS2.Sdk.Tests.Asserts;
 using Xunit;

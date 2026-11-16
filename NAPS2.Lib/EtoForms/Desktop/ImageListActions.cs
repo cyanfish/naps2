@@ -1,5 +1,4 @@
 using NAPS2.EtoForms.Notifications;
-using NAPS2.EtoForms.Widgets;
 using NAPS2.ImportExport;
 
 namespace NAPS2.EtoForms.Desktop;

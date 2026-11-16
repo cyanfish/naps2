@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Threading;
+using Autofac;
 using CommandLine;
 using NAPS2.Automation;
 using NAPS2.EtoForms;
@@ -53,6 +54,9 @@ public static class ConsoleEntryPoint
         }
         else
         {
+            // On some platforms (e.g. Mac with net11) a synchronization context is installed on the main thread. As we
+            // block the main thread without running an event loop, continuations posted to that context would deadlock.
+            SynchronizationContext.SetSynchronizationContext(null);
             scanning.Execute().Wait();
         }
 

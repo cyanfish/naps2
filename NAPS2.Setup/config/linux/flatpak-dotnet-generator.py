@@ -35,8 +35,8 @@ def main():
                 'flatpak', 'run',
                 '--env=DOTNET_CLI_TELEMETRY_OPTOUT=true',
                 '--env=DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true',
-                '--command=sh', '--runtime=org.freedesktop.Sdk//25.08', '--share=network',
-                '--filesystem=host', 'org.freedesktop.Sdk.Extension.dotnet10//25.08', '-c',
+                '--command=sh', '--runtime=org.freedesktop.Sdk//26.08', '--share=network',
+                '--filesystem=host', 'org.freedesktop.Sdk.Extension.dotnet10//26.08', '-c',
                 'PATH="${PATH}:/usr/lib/sdk/dotnet10/bin" NUGET_PACKAGES="' +
                 str(Path(tmp).resolve()) +
                 '" LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/sdk/dotnet10/lib" exec dotnet ' + cmd,

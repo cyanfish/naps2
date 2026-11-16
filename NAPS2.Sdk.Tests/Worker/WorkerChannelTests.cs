@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using GrpcDotNetNamedPipes;
 using NAPS2.ImportExport.Email.Mapi;
-using NAPS2.ImportExport.Images;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;

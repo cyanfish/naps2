@@ -259,10 +259,10 @@ public class CompressForm : UnaryImageFormBase
         {
             if (skip != _dpi) _dpi.Value = (decimal) Math.Round(_dpiValue);
             var displaySize = _size.ConvertTo((PageSizeUnit) _unit.SelectedItem);
-            int decimals = displaySize.Unit == PageSizeUnit.Millimetre ? 1 : 2;
-            // Round as a double so there are no trailing zeros (e.g. 8.5 rather than 8.50)
-            if (skip != _width) _width.Value = (decimal) Math.Round((double) displaySize.Width, decimals);
-            if (skip != _height) _height.Value = (decimal) Math.Round((double) displaySize.Height, decimals);
+            var format = displaySize.Unit == PageSizeUnit.Millimetre ? "0.#" : "0.##";
+            // Set .Text instead of .Value with our own formatting to avoid trailing zeros (e.g. 8.5 rather than 8.50)
+            if (skip != _width) _width.Text = displaySize.Width.ToString(format, _width.Culture);
+            if (skip != _height) _height.Text = displaySize.Height.ToString(format, _height.Culture);
             if (skip != _pixelWidth) _pixelWidth.Value = TargetPixelWidth;
             if (skip != _pixelHeight) _pixelHeight.Value = TargetPixelHeight;
         }

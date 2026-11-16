@@ -2,16 +2,15 @@
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Ocr;
-using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Unmanaged;
 using NSubstitute;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace NAPS2.Sdk.Tests;
 
-public class ContextualTests : IDisposable
+public class ContextualTests : IAsyncLifetime
 {
     public ContextualTests()
     {
@@ -169,7 +168,9 @@ public class ContextualTests : IDisposable
         return CopyResourceToFile(resource, FolderPath, fileName);
     }
 
-    public virtual void Dispose()
+    public virtual ValueTask InitializeAsync() => ValueTask.CompletedTask;
+
+    public virtual ValueTask DisposeAsync()
     {
         ScanningContext.Dispose();
         try
@@ -187,6 +188,7 @@ public class ContextualTests : IDisposable
             {
             }
         }
+        return ValueTask.CompletedTask;
     }
 
     public bool IsDisposed(ProcessedImage image)

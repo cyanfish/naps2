@@ -1,5 +1,4 @@
 ﻿using NAPS2.Scan.Exceptions;
-using NAPS2.Serialization;
 
 namespace NAPS2.Scan.Internal;
 

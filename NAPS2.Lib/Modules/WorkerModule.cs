@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using NAPS2.Scan;
 using NAPS2.Scan.Internal.Twain;
 
 namespace NAPS2.Modules;

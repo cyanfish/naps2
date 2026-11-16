@@ -24,6 +24,13 @@ public enum Numbering
     OnConflict,
 
     /// <summary>
+    /// As with Always if the name has no date/time placeholders like "$(YYYY)" or "$(hh)", otherwise as with
+    /// OnConflict. This is used for an open-ended sequence of saves to the same name (e.g. auto save), where names
+    /// with date/time placeholders are already expected to differ between saves.
+    /// </summary>
+    AlwaysUnlessDated,
+
+    /// <summary>
     /// The name is always numbered, using the number placeholder if it has one or inserting the number before the
     /// extension otherwise. This is used when saving one of several files.
     /// </summary>

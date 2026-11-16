@@ -116,12 +116,18 @@ public abstract class ImageContext
 
     public Type ImageType { get; }
 
-    public bool SupportsFormat(ImageFileFormat format) =>
+    public bool SupportsFormat(ImageFileFormat format) => SupportsDecode(format) && SupportsEncode(format);
+
+    public bool SupportsDecode(ImageFileFormat format) =>
         format is ImageFileFormat.Bmp or ImageFileFormat.Jpeg or ImageFileFormat.Png ||
         format == ImageFileFormat.Tiff && SupportsTiff || format == ImageFileFormat.Jpeg2000 && SupportsJpeg2000;
 
+    public bool SupportsEncode(ImageFileFormat format) =>
+        SupportsDecode(format) && (format != ImageFileFormat.Bmp || SupportsBmpEncode);
+
     protected virtual bool SupportsTiff => false;
     protected virtual bool SupportsJpeg2000 => false;
+    protected virtual bool SupportsBmpEncode => true;
 
     /// <summary>
     /// Loads an image from the given file path.
@@ -142,7 +148,7 @@ public abstract class ImageContext
     public IMemoryImage Load(Stream stream)
     {
         var format = GetFileFormatFromFirstBytes(stream);
-        CheckSupportsFormat(format);
+        CheckSupportsDecode(format);
         var image = LoadCore(stream, format);
         if (image.OriginalFileFormat == ImageFileFormat.Unknown)
         {
@@ -190,7 +196,7 @@ public abstract class ImageContext
     {
         try
         {
-            CheckSupportsFormat(format);
+            CheckSupportsDecode(format);
         }
         catch (Exception)
         {
@@ -229,11 +235,19 @@ public abstract class ImageContext
         }
     }
 
-    public void CheckSupportsFormat(ImageFileFormat format)
+    public void CheckSupportsDecode(ImageFileFormat format)
     {
-        if (!SupportsFormat(format))
+        if (!SupportsDecode(format))
         {
-            throw new NotSupportedException($"Unsupported file format: {format}");
+            throw new NotSupportedException($"Unsupported file format for loading: {format}");
+        }
+    }
+
+    public void CheckSupportsEncode(ImageFileFormat format)
+    {
+        if (!SupportsEncode(format))
+        {
+            throw new NotSupportedException($"Unsupported file format for saving: {format}");
         }
     }
 

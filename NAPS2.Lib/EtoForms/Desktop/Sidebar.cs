@@ -1,4 +1,3 @@
-using System.Globalization;
 using Eto.Forms;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Ui;
