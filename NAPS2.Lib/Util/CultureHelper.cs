@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Globalization;
+using System.Threading;
 using NAPS2.Lang;
 
 namespace NAPS2.Util;
@@ -10,6 +11,20 @@ namespace NAPS2.Util;
 public class CultureHelper
 {
     private readonly Naps2Config _config;
+
+    /// <summary>
+    /// Loads globalization data on a background thread so it's ready by the time startup code needs it.
+    /// </summary>
+    public static void PreloadGlobalization()
+    {
+        new Thread(() =>
+        {
+            var culture = CultureInfo.CurrentCulture;
+            _ = culture.CompareInfo.Compare("a", "b");
+            _ = "a".ToUpper(culture);
+            _ = DateTime.Now.ToString(culture);
+        }) { IsBackground = true }.Start();
+    }
 
     public CultureHelper(Naps2Config config)
     {
