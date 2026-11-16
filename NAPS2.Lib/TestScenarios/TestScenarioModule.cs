@@ -41,6 +41,7 @@ public class TestScenarioModule : Module
     protected override void Load(ContainerBuilder builder)
     {
         builder.RegisterInstance(_setup);
+        builder.RegisterType<CommonTestScenarios>().As<TestScenarioProvider>();
         builder.RegisterDecorator<FakeScanBridgeFactory, IScanBridgeFactory>();
         builder.RegisterDecorator<FakeUpdateChecker, IUpdateChecker>();
         builder.RegisterDecorator<FakeOpenWith, IOpenWith>();

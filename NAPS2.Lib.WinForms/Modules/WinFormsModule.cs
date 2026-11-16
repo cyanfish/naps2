@@ -23,6 +23,7 @@ public class WinFormsModule : Module
 
 #if TEST_SCENARIOS
         builder.RegisterType<TestScenarios.WinFormsTestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();
+        builder.RegisterType<TestScenarios.WinFormsTestScenarios>().As<TestScenarios.TestScenarioProvider>();
 #endif
 
         // TODO: Can we add a test for this?
