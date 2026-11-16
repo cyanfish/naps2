@@ -6,14 +6,14 @@ namespace NAPS2.EtoForms.Widgets;
 
 public class UpdateCheckWidget
 {
-    private readonly UpdateChecker _updateChecker;
+    private readonly IUpdateChecker _updateChecker;
     private readonly Naps2Config _config;
     private readonly CheckBox _checkForUpdates;
     private readonly Panel _updatePanel;
     private bool _hasCheckedForUpdates;
     private UpdateInfo? _update;
 
-    public UpdateCheckWidget(UpdateChecker updateChecker, Naps2Config config)
+    public UpdateCheckWidget(IUpdateChecker updateChecker, Naps2Config config)
     {
         _updateChecker = updateChecker;
         _config = config;

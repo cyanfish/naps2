@@ -15,10 +15,10 @@ public class AboutForm : EtoDialogBase
     private const string DONATE_URL = "https://www.naps2.com/donate?src=about";
 
     private readonly Button _donateButton;
-    private readonly UpdateChecker _updateChecker;
+    private readonly IUpdateChecker _updateChecker;
     private readonly CheckBox _enableDebugLogging = C.CheckBox(UiStrings.EnableDebugLogging);
 
-    public AboutForm(Naps2Config config, UpdateChecker updateChecker, ScanningContext scanningContext)
+    public AboutForm(Naps2Config config, IUpdateChecker updateChecker, ScanningContext scanningContext)
         : base(config)
     {
         Title = UiStrings.AboutFormTitle;

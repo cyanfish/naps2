@@ -9,7 +9,7 @@ using NAPS2.Scan.Internal;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class ChooseDeviceForm : EtoDialogBase
+internal class ChooseDeviceForm : EtoDialogBase
 {
     private const string FLATPAK_MISSING_SCANNER_URL = "https://www.naps2.com/doc/flatpak-missing-scanner";
 
@@ -24,6 +24,7 @@ public class ChooseDeviceForm : EtoDialogBase
     private readonly IIconProvider _iconProvider;
     private readonly DeviceListViewBehavior _deviceListViewBehavior;
     private readonly ScanningContext _scanningContext;
+    private readonly IScanBridgeFactory _scanBridgeFactory;
     private readonly DeviceCapsCache _deviceCapsCache;
     private readonly LayoutVisibility _textListVis = new(false);
     private readonly ListBox _deviceTextList = new();
@@ -46,11 +47,12 @@ public class ChooseDeviceForm : EtoDialogBase
 
     public ChooseDeviceForm(Naps2Config config, IIconProvider iconProvider,
         DeviceListViewBehavior deviceListViewBehavior, ScanningContext scanningContext,
-        DeviceCapsCache deviceCapsCache) : base(config)
+        DeviceCapsCache deviceCapsCache, IScanBridgeFactory scanBridgeFactory) : base(config)
     {
         _iconProvider = iconProvider;
         _deviceListViewBehavior = deviceListViewBehavior;
         _scanningContext = scanningContext;
+        _scanBridgeFactory = scanBridgeFactory;
         _deviceCapsCache = deviceCapsCache;
         _selectDevice = C.OkButton(this, SelectDevice, UiStrings.Select);
         _deviceIconList = EtoPlatform.Current.CreateListView(deviceListViewBehavior);
@@ -244,7 +246,7 @@ public class ChooseDeviceForm : EtoDialogBase
         _getDevicesCts = cts;
         var optionsWithDriver = ScanOptions!.Clone();
         optionsWithDriver.Driver = DeviceDriver;
-        var controller = new ScanController(_scanningContext);
+        var controller = new ScanController(_scanningContext, _scanBridgeFactory);
 
         try
         {
