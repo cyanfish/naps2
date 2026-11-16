@@ -78,6 +78,8 @@ public class WinFormsDesktopForm : DesktopForm
         // That allows us to check the close reason (which Eto doesn't provide)
     }
 
+    internal WF.ToolStrip MainToolStrip => _mainToolStrip;
+
     private void OnFormClosing(object? sender, WF.FormClosingEventArgs e)
     {
         if (!_desktopController.PrepareForClosing(e.CloseReason == WF.CloseReason.UserClosing))

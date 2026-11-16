@@ -3,6 +3,7 @@ using Eto.Forms;
 using NAPS2.Dependencies;
 using NAPS2.EtoForms.Layout;
 using NAPS2.Scan;
+using NAPS2.TestScenarios;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -52,15 +53,18 @@ public class DownloadProgressForm : EtoDialogBase
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
+        if (TestScenarioFlags.SkipFormWork) return;
         Controller.StartDownloadsAsync().AssertNoAwait();
     }
 
     private void OnDownloadProgress(object? sender, EventArgs e)
     {
-        var f = Controller.FilesDownloaded;
-        var fTot = Controller.TotalFiles;
-        var c = Controller.CurrentFileProgress;
-        var cTot = Controller.CurrentFileSize;
+        UpdateProgress(Controller.FilesDownloaded, Controller.TotalFiles, Controller.CurrentFileProgress,
+            Controller.CurrentFileSize);
+    }
+
+    internal void UpdateProgress(int f, int fTot, long c, long cTot)
+    {
         _totalStatus.Text = string.Format(MiscResources.FilesProgressFormat, f, fTot);
         _totalProgressBar.MaxValue = fTot * 1000;
         _totalProgressBar.Value = f * 1000 + (cTot == 0 ? 0 : (int) (c * 1e3 / cTot));

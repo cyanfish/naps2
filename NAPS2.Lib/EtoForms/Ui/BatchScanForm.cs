@@ -392,6 +392,18 @@ public class BatchScanForm : EtoDialogBase
         Invoker.Current.Invoke(() => { _status.Text = status; });
     }
 
+    /// <summary>
+    /// Shows a status as if a batch scan were in progress (or done, if specified).
+    /// </summary>
+    internal void SimulateStatus(string status, bool done)
+    {
+        _status.Text = status;
+        if (done)
+        {
+            _cancel.Text = MiscResources.Close;
+        }
+    }
+
     private void Cancel(object? sender, EventArgs e)
     {
         if (_batchRunning)

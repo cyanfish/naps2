@@ -6,6 +6,7 @@ using NAPS2.EtoForms.Widgets;
 using NAPS2.Lang;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
+using NAPS2.TestScenarios;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -142,11 +143,11 @@ internal class ChooseDeviceForm : EtoDialogBase
         {
             driverElements.Add(_twainDriver.Scale());
         }
-        if (PlatformCompat.System.IsAppleDriverSupported)
+        if (PlatformCompat.System.IsAppleDriverSupported || TestScenarioFlags.ShowAllDrivers)
         {
             driverElements.Add(_appleDriver.Scale());
         }
-        if (PlatformCompat.System.IsSaneDriverSupported)
+        if (PlatformCompat.System.IsSaneDriverSupported || TestScenarioFlags.ShowAllDrivers)
         {
             driverElements.Add(_saneDriver.Scale());
         }
@@ -173,9 +174,11 @@ internal class ChooseDeviceForm : EtoDialogBase
             ),
             _deviceIconList.Control.NaturalSize(150, 100).Scale().Visible(!_textListVis),
             _deviceTextList.NaturalSize(150, 100).Scale().Visible(_textListVis),
-            OperatingSystem.IsLinux() && File.Exists("/.flatpak-info")
-                ? _flatpakMissingDevice.Visible(_saneDriverVis)
-                : C.None(),
+            TestScenarioFlags.ShowFlatpakLink
+                ? _flatpakMissingDevice
+                : OperatingSystem.IsLinux() && File.Exists("/.flatpak-info")
+                    ? _flatpakMissingDevice.Visible(_saneDriverVis)
+                    : C.None(),
             L.Row(
                 _spinner.Visible(_spinnerVis).AlignCenter(),
                 _statusIcon.Visible(!_spinnerVis).AlignCenter(),

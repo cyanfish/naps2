@@ -193,6 +193,15 @@ public class ProfilesForm : EtoDialogBase
         _listView.SetItems(_profileManager.Profiles);
     }
 
+    /// <summary>
+    /// Selects the profile and shows the profile list's context menu at the given location.
+    /// </summary>
+    internal void ShowContextMenu(ScanProfile profile, PointF location)
+    {
+        _listView.Selection = ListSelection.Of(profile);
+        _listView.ContextMenu!.Show(_listView.Control, location);
+    }
+
     private void SelectionChanged(object? sender, EventArgs e)
     {
         _editCommand.Enabled = _listView.Selection.Count == 1;
