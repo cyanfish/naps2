@@ -151,9 +151,8 @@ public class WinFormsEtoPlatform : EtoPlatform
         {
             x = container.ToNative().Width - x - size.Width;
         }
-        native.Location = new SD.Point(x, y);
         native.AutoSize = false;
-        native.Size = new SD.Size(size.Width, size.Height);
+        native.SetBounds(x, y, size.Width, size.Height);
         if (inOverlay)
         {
             native.BringToFront();
