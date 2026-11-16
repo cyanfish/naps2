@@ -33,4 +33,7 @@ internal static class LinuxInterop
 
     [DllImport("libgtk-3.so.0")]
     public static extern void gtk_native_dialog_set_transient_for(IntPtr dialog, IntPtr parent);
+
+    [DllImport("libglib-2.0.so.0")]
+    public static extern void g_set_prgname(string prgname);
 }

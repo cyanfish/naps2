@@ -26,6 +26,9 @@ public class GtkEtoPlatform : EtoPlatform
     public override Application CreateApplicationCore()
     {
         var application = new Application(Platforms.Gtk);
+        // GtkSharp resets the program name to the executable name when it initializes Gtk, so set it afterwards. The
+        // compositor uses it as the app id to find the desktop file with the icon for the window.
+        LinuxInterop.g_set_prgname("com.naps2.Naps2");
         application.Initialized += (_, _) =>
         {
             SetSystemTheme();
