@@ -79,6 +79,7 @@ public static class Paths
         try
         {
             if (!Directory.Exists(TempPath)) return;
+            if (!Directory.EnumerateFileSystemEntries(TempPath).Any()) return;
 
             var otherNaps2Processes = Process.GetProcesses().Where(x =>
                 x.ProcessName.IndexOf("NAPS2", StringComparison.OrdinalIgnoreCase) >= 0 &&
