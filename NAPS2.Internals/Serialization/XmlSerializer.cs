@@ -51,10 +51,10 @@ public abstract class XmlSerializer
         { typeof(IntPtr), new XmlTypeInfo { CustomSerializer = new IntPtrSerializer() } },
         { typeof(UIntPtr), new XmlTypeInfo { CustomSerializer = new UIntPtrSerializer() } },
         { typeof(List<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
-        { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+        { typeof(HashSet<>), new XmlTypeInfo { CustomSerializer = new SetSerializer() } },
         { typeof(Dictionary<,>), new XmlTypeInfo { CustomSerializer = new DictionarySerializer() } },
         { typeof(ImmutableList<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
-        { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new CollectionSerializer() } },
+        { typeof(ImmutableHashSet<>), new XmlTypeInfo { CustomSerializer = new SetSerializer() } },
         { typeof(DateTime), new XmlTypeInfo { CustomSerializer = new DateTimeSerializer() } },
         { typeof(Guid), new XmlTypeInfo { CustomSerializer = new GuidSerializer() } },
         { typeof(Nullable<>), new XmlTypeInfo { CustomSerializer = new NullableSerializer() } },
@@ -549,12 +549,13 @@ public abstract class XmlSerializer
         public override void SerializeObject(object obj, XElement element, Type type)
         {
             var itemType = GetItemType(type);
-            var list = (IEnumerable) obj;
-            foreach (var item in list)
+            foreach (var item in GetItemsToSerialize((IEnumerable) obj))
             {
                 element.Add(SerializeInternal(item, new XElement(itemType.Name), itemType));
             }
         }
+
+        protected virtual IEnumerable GetItemsToSerialize(IEnumerable collection) => collection;
 
         protected Type GetItemType(Type type)
         {
@@ -634,6 +635,13 @@ public abstract class XmlSerializer
         {
             public override object Build(IEnumerable<object?> items) => ImmutableHashSet.CreateRange(Cast(items));
         }
+    }
+
+    protected class SetSerializer : CollectionSerializer
+    {
+        // Sort the items to keep the serialized output consistent
+        protected override IEnumerable GetItemsToSerialize(IEnumerable collection) =>
+            collection.Cast<object?>().OrderBy(x => x?.ToString(), StringComparer.Ordinal);
     }
 
     protected class DictionarySerializer : CustomXmlSerializer
