@@ -40,6 +40,7 @@ public class WpfEtoPlatform : EtoPlatform
     public override void StartPreloading()
     {
         base.StartPreloading();
+        WpfRenderPreloader.Start();
         _etoControlTypes = Task.Run(FindEtoControlTypes);
     }
 
@@ -97,30 +98,39 @@ public class WpfEtoPlatform : EtoPlatform
     /// 2. Eto's themes/generic.xaml (merged into the application resources) has its own implicit styles without BasedOn
     ///    (e.g. for EtoButton, CheckBox, EtoFormWindow), which replace the Fluent styles entirely.
     /// So for each Eto control type (and each type Eto styles), we add an application-level style based on the Fluent
-    /// style of the nearest base type, merged with Eto's own setters/triggers.
+    /// style of the nearest base type, merged with Eto's own setters/triggers. These are created on first use, as
+    /// creating the Fluent styles for every type would take a while.
     /// </summary>
     private static void ApplyFluentStylesToEtoControls(SW.Application app)
     {
+        // Replace the styles from any previous call (e.g. when the theme changes)
+        if (_fluentEtoStyles != null)
+        {
+            app.Resources.MergedDictionaries.Remove(_fluentEtoStyles);
+        }
         var etoDictionaries = app.Resources.MergedDictionaries.Where(IsEtoDictionary).SelectMany(Flatten).ToList();
         var themeDictionaries = app.Resources.MergedDictionaries.Where(d => !IsEtoDictionary(d)).Reverse().ToList();
 
         var types = GetEtoControlTypes().Concat(etoDictionaries.SelectMany(d => d.Keys.OfType<Type>())).Distinct();
-        foreach (var type in types)
+        _fluentEtoStyles = new LazyStyleDictionary(types,
+            type => CreateFluentEtoStyle(type, themeDictionaries, etoDictionaries));
+        app.Resources.MergedDictionaries.Add(_fluentEtoStyles);
+    }
+
+    private static SW.Style? CreateFluentEtoStyle(Type type, List<SW.ResourceDictionary> themeDictionaries,
+        List<SW.ResourceDictionary> etoDictionaries)
+    {
+        if (FindThemeStyle(themeDictionaries, type) is not { } themeStyle) return null;
+        var style = new SW.Style(type, themeStyle);
+        foreach (var etoDictionary in etoDictionaries.Where(d => d.Contains(type)))
         {
-            // Remove the style from any previous call (e.g. when the theme changes) so it isn't found as a theme style
-            app.Resources.Remove(type);
-            if (FindThemeStyle(themeDictionaries, type) is not { } themeStyle) continue;
-            var style = new SW.Style(type, themeStyle);
-            foreach (var etoDictionary in etoDictionaries.Where(d => d.Contains(type)))
-            {
-                CopyEtoStyle((SW.Style) etoDictionary[type]!, style);
-            }
-            if (typeof(SWC.CheckBox).IsAssignableFrom(type) || typeof(SWC.RadioButton).IsAssignableFrom(type))
-            {
-                MakeToggleCompact(style);
-            }
-            app.Resources[type] = style;
+            CopyEtoStyle((SW.Style) etoDictionary[type]!, style);
         }
+        if (typeof(SWC.CheckBox).IsAssignableFrom(type) || typeof(SWC.RadioButton).IsAssignableFrom(type))
+        {
+            MakeToggleCompact(style);
+        }
+        return style;
     }
 
     private static void MakeSplittersUnfocusable(SW.Application app)
@@ -160,6 +170,7 @@ public class WpfEtoPlatform : EtoPlatform
         dict.MergedDictionaries.SelectMany(Flatten).Prepend(dict);
 
     private static Task<List<Type>>? _etoControlTypes;
+    private static LazyStyleDictionary? _fluentEtoStyles;
 
     private static List<Type> GetEtoControlTypes()
     {

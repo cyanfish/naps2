@@ -19,6 +19,12 @@ internal static class Win32
     [DllImport("user32.dll")]
     public static extern IntPtr GetActiveWindow();
 
+    [DllImport("user32.dll")]
+    public static extern IntPtr GetDesktopWindow();
+
+    [DllImport("d3d9.dll")]
+    public static extern int Direct3DCreate9Ex(uint sdkVersion, out IDirect3D9Ex d3d);
+
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     public static extern int MessageBox(IntPtr hWnd, string lpText, string lpCaption, uint uType);
 
@@ -403,5 +409,59 @@ internal static class Win32
         public int biYPelsPerMeter;
         public uint biClrUsed;
         public uint biClrImportant;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct D3DPresentParameters
+    {
+        public uint BackBufferWidth;
+        public uint BackBufferHeight;
+        public uint BackBufferFormat;
+        public uint BackBufferCount;
+        public uint MultiSampleType;
+        public uint MultiSampleQuality;
+        public uint SwapEffect;
+        public IntPtr DeviceWindow;
+        public int Windowed;
+        public int EnableAutoDepthStencil;
+        public uint AutoDepthStencilFormat;
+        public uint Flags;
+        public uint FullScreenRefreshRateInHz;
+        public uint PresentationInterval;
+    }
+
+    [ComImport]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("02177241-69FC-400C-8FF1-93A44DF6861D")]
+    public interface IDirect3D9Ex
+    {
+        // IDirect3D9
+        void RegisterSoftwareDevice(IntPtr pInitializeFunction);
+        [PreserveSig] uint GetAdapterCount();
+        void GetAdapterIdentifier(uint adapter, uint flags, IntPtr pIdentifier);
+        [PreserveSig] uint GetAdapterModeCount(uint adapter, uint format);
+        void EnumAdapterModes(uint adapter, uint format, uint mode, IntPtr pMode);
+        void GetAdapterDisplayMode(uint adapter, IntPtr pMode);
+        void CheckDeviceType(uint adapter, int devType, uint adapterFormat, uint backBufferFormat, int windowed);
+        void CheckDeviceFormat(uint adapter, int deviceType, uint adapterFormat, uint usage, int rType,
+            uint checkFormat);
+        void CheckDeviceMultiSampleType(uint adapter, int deviceType, uint surfaceFormat, int windowed,
+            uint multiSampleType, IntPtr pQualityLevels);
+        void CheckDepthStencilMatch(uint adapter, int deviceType, uint adapterFormat, uint renderTargetFormat,
+            uint depthStencilFormat);
+        void CheckDeviceFormatConversion(uint adapter, int deviceType, uint sourceFormat, uint targetFormat);
+        void GetDeviceCaps(uint adapter, int deviceType, IntPtr pCaps);
+        [PreserveSig] IntPtr GetAdapterMonitor(uint adapter);
+        void CreateDevice(uint adapter, int deviceType, IntPtr hFocusWindow, uint behaviorFlags,
+            ref D3DPresentParameters presentationParameters, out IntPtr returnedDevice);
+
+        // IDirect3D9Ex
+        [PreserveSig] uint GetAdapterModeCountEx(uint adapter, IntPtr pFilter);
+        void EnumAdapterModesEx(uint adapter, IntPtr pFilter, uint mode, IntPtr pMode);
+        void GetAdapterDisplayModeEx(uint adapter, IntPtr pMode, IntPtr pRotation);
+        [PreserveSig]
+        int CreateDeviceEx(uint adapter, int deviceType, IntPtr hFocusWindow, uint behaviorFlags,
+            ref D3DPresentParameters presentationParameters, IntPtr pFullscreenDisplayMode, out IntPtr returnedDevice);
+        void GetAdapterLUID(uint adapter, out long luid);
     }
 }
