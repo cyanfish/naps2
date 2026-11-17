@@ -32,6 +32,11 @@ public abstract class EtoPlatform
     public abstract IDarkModeProvider DarkModeProvider { get; }
     public ColorScheme ColorScheme { get; }
 
+    public virtual void StartPreloading()
+    {
+        CultureHelper.PreloadGlobalization();
+    }
+
     public Application CreateApplication()
     {
         var app = CreateApplicationCore();

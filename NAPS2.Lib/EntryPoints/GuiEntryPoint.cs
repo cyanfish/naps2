@@ -17,7 +17,7 @@ public static class GuiEntryPoint
 {
     public static int Run(string[] args, Module imageModule, Module platformModule)
     {
-        CultureHelper.PreloadGlobalization();
+        EtoPlatform.Current.StartPreloading();
 
 #if TEST_SCENARIOS
         var testScenarioModule = TestScenarioModule.CreateFromEnvironment();

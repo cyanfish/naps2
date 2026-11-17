@@ -23,8 +23,15 @@ public class GtkEtoPlatform : EtoPlatform
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
     public override IDarkModeProvider DarkModeProvider { get; } = new GtkDarkModeProvider();
 
+    public override void StartPreloading()
+    {
+        base.StartPreloading();
+        GtkSharpPreloader.Start();
+    }
+
     public override Application CreateApplicationCore()
     {
+        GtkSharpPreloader.Wait();
         var application = new Application(Platforms.Gtk);
         LinuxApplicationMetadata.Set();
         application.Initialized += (_, _) =>
