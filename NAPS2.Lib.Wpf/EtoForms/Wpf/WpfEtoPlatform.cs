@@ -37,6 +37,12 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override IDarkModeProvider DarkModeProvider { get; } = new WindowsDarkModeProvider();
 
+    public override void StartPreloading()
+    {
+        base.StartPreloading();
+        _etoControlTypes = Task.Run(FindEtoControlTypes);
+    }
+
     public override Application CreateApplicationCore()
     {
         // Eto.Wpf reuses an existing System.Windows.Application if there is one, so we create it first to configure
@@ -153,7 +159,15 @@ public class WpfEtoPlatform : EtoPlatform
     private static IEnumerable<SW.ResourceDictionary> Flatten(SW.ResourceDictionary dict) =>
         dict.MergedDictionaries.SelectMany(Flatten).Prepend(dict);
 
-    private static IEnumerable<Type> GetEtoControlTypes()
+    private static Task<List<Type>>? _etoControlTypes;
+
+    private static List<Type> GetEtoControlTypes()
+    {
+        _etoControlTypes ??= Task.FromResult(FindEtoControlTypes());
+        return _etoControlTypes.Result;
+    }
+
+    private static List<Type> FindEtoControlTypes()
     {
         Type[] types;
         try
@@ -166,7 +180,8 @@ public class WpfEtoPlatform : EtoPlatform
             types = ex.Types.OfType<Type>().ToArray();
         }
         return types.Where(t =>
-            typeof(SW.FrameworkElement).IsAssignableFrom(t) && t is { IsAbstract: false, ContainsGenericParameters: false });
+                typeof(SW.FrameworkElement).IsAssignableFrom(t) && t is { IsAbstract: false, ContainsGenericParameters: false })
+            .ToList();
     }
 
     private static SW.Style? FindThemeStyle(List<SW.ResourceDictionary> themeDictionaries, Type type)
