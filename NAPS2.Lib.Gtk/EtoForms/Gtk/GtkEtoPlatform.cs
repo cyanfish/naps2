@@ -26,6 +26,7 @@ public class GtkEtoPlatform : EtoPlatform
     public override Application CreateApplicationCore()
     {
         var application = new Application(Platforms.Gtk);
+        LinuxApplicationMetadata.Set();
         application.Initialized += (_, _) =>
         {
             SetSystemTheme();
