@@ -10,4 +10,7 @@ public class VirusScanOptions : OptionsBase
     
     [Option('p', "platform", Required = false, HelpText = "win|win32|win64|mac|macintel|macarm|linux")]
     public string? Platform { get; set; }
+
+    [Option("name", Required = false, HelpText = "Name appended to the package filename (as passed to pkg)")]
+    public string? Name { get; set; }
 }

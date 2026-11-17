@@ -16,7 +16,10 @@ public class VirusScanCommand : ICommand<VirusScanOptions>
                      new TargetParams { PackageType = opts.PackageType, Platform = opts.Platform }))
         {
             var ext = target.Type.ToString().ToLowerInvariant();
-            tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath(ext, target.Platform, version)));
+            var packageName = opts.Name == null
+                ? target.Platform.PackageName()
+                : $"{target.Platform.PackageName()}-{opts.Name}";
+            tasks.Add(StartVirusScan(ProjectHelper.GetPackagePath(ext, target.Platform, version, packageName)));
         }
         Task.WaitAll(tasks.ToArray());
         Output.OperationEnd("No antivirus false positives.");
