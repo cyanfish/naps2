@@ -455,6 +455,13 @@ public class MacEtoPlatform : EtoPlatform
         control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
     }
 
+    public override void AttachFirstDrawnEvent(Window window, EventHandler<EventArgs> eventHandler)
+    {
+        // The window is displayed at the end of the run loop iteration where Shown is raised
+        window.Shown += (sender, args) =>
+            NSApplication.SharedApplication.BeginInvokeOnMainThread(() => eventHandler(sender, args));
+    }
+
     private class MacAppDelegate : AppDelegate
     {
         public override bool OpenFile(NSApplication sender, string filename)

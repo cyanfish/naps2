@@ -452,6 +452,22 @@ public class GtkEtoPlatform : EtoPlatform
         };
     }
 
+    public override void AttachFirstDrawnEvent(Window window, EventHandler<EventArgs> eventHandler)
+    {
+        var gtkWindow = (GTK.Window) window.ToNative();
+        void OnDrawn(object o, GTK.DrawnArgs args)
+        {
+            gtkWindow.Drawn -= OnDrawn;
+            // Drawn is raised before the window's contents are drawn, so wait for the frame to finish
+            GLib.Idle.Add(() =>
+            {
+                eventHandler(window, EventArgs.Empty);
+                return false;
+            });
+        }
+        gtkWindow.Drawn += OnDrawn;
+    }
+
     public override void SetSplitterPosition(Splitter splitter, int pos)
     {
         if (splitter.Width == 1)

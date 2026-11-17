@@ -44,7 +44,7 @@ public static class GuiEntryPoint
         container.Resolve<CultureHelper>().SetCulturesFromConfig();
         Trace.Listeners.Add(new ConsoleTraceListener());
 
-        // Spare worker processes are started once the main form is shown, as they compete with it for CPU
+        // Spare worker processes are started once the main form is drawn, as they compete with it for CPU
         var workerFactory = container.Resolve<IWorkerFactory>();
         var scanningContext = container.Resolve<ScanningContext>();
         workerFactory.Init(scanningContext, new WorkerFactoryInitOptions { StartSpareWorkers = false });
@@ -54,7 +54,7 @@ public static class GuiEntryPoint
         Invoker.Current = new EtoInvoker(application);
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
-        desktop.Shown += (_, _) => workerFactory.StartSpareWorkers(scanningContext);
+        EtoPlatform.Current.AttachFirstDrawnEvent(desktop, (_, _) => workerFactory.StartSpareWorkers(scanningContext));
 #if TEST_SCENARIOS
         testScenarioModule?.Attach(container, desktop);
 #endif
