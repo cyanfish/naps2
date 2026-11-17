@@ -1,4 +1,5 @@
 #if TEST_SCENARIOS
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 using NAPS2.Config.Model;
@@ -74,6 +75,8 @@ public class TestScenarioSetup
         _configActions.Add(config => SetConfig(config.Run, path, getValue));
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2075",
+        Justification = "Config types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     internal static void SetConfig(ConfigScope<CommonConfig> scope, string path, Func<Type, object?> getValue)
     {
         var param = Expression.Parameter(typeof(CommonConfig), "c");

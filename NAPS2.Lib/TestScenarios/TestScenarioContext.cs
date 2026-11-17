@@ -1,4 +1,5 @@
 #if TEST_SCENARIOS
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading;
@@ -317,7 +318,7 @@ public class TestScenarioContext
                     obj["controls"] = new JsonArray(controls
                         .Select((control, i) => (JsonNode) TestScenarioUi.Describe(control, i)).ToArray());
                 }
-                windowsJson.Add(obj);
+                windowsJson.Add((JsonNode) obj);
             }
             var commands = new JsonObject();
             foreach (var (name, command) in GetDesktopCommands())
@@ -412,6 +413,8 @@ public class TestScenarioContext
     /// <summary>
     /// Shows a form by its type name (e.g. "SettingsForm"), modal if it's a dialog.
     /// </summary>
+    [UnconditionalSuppressMessage("Trimming", "IL2026",
+        Justification = "Form types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     public void ShowForm(string typeName)
     {
         var type = typeof(IFormBase).Assembly.GetTypes()

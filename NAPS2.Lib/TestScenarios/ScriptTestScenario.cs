@@ -1,4 +1,5 @@
 #if TEST_SCENARIOS
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -30,6 +31,8 @@ namespace NAPS2.TestScenarios;
 /// </summary>
 internal class ScriptTestScenario
 {
+    [UnconditionalSuppressMessage("Trimming", "IL2026",
+        Justification = "Deserialized types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
@@ -215,6 +218,8 @@ internal class ScriptTestScenario
         return profile;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026",
+        Justification = "Deserialized types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     private static object? Deserialize(JsonElement element, Type type) => element.Deserialize(type, JsonOptions);
 
     private static string? Str(JsonElement element, string name) =>
