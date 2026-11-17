@@ -204,12 +204,8 @@ public abstract class EtoPlatform
         control.MouseWheel += eventHandler;
     }
 
-    /// <summary>
-    /// Attaches a handler that runs once the window has been drawn for the first time.
-    /// </summary>
     public virtual void AttachFirstDrawnEvent(Window window, EventHandler<EventArgs> eventHandler)
     {
-        // On Windows, the window has already been drawn when Shown is raised
         window.Shown += eventHandler;
     }
 
