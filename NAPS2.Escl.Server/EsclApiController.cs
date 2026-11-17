@@ -196,8 +196,10 @@ internal class EsclApiController : WebApiController
             var doc = XDocument.Load(Request.InputStream);
             settings = SettingsParser.Parse(doc);
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            // Log the reason so that a rejected request is diagnosable from the server logs.
+            _logger.LogDebug(e, "ESCL server rejected scan settings");
             Response.StatusCode = 400; // Bad request
             return;
         }

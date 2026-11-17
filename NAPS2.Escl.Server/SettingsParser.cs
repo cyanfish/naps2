@@ -7,10 +7,20 @@ internal static class SettingsParser
     private static readonly XNamespace ScanNs = EsclXmlHelper.ScanNs;
     private static readonly XNamespace PwgNs = EsclXmlHelper.PwgNs;
 
+    // The eSCL specification writes the date part of the scan namespace with hyphens, e.g.
+    // "http://schemas.hp.com/imaging/escl/2011-05-03", which is what other implementations and
+    // hardware clients send. NAPS2 has always used slashes, so both are accepted here - otherwise
+    // standard-compliant clients would be rejected with a 400. This mirrors how the client-side
+    // CapabilitiesParser matches namespaces.
+    private static readonly XNamespace[] ScanNsAll =
+    [
+        ScanNs, XNamespace.Get("http://schemas.hp.com/imaging/escl/2011-05-03")
+    ];
+
     public static EsclScanSettings Parse(XDocument doc)
     {
         var root = doc.Root;
-        if (root?.Name != ScanNs + "ScanSettings")
+        if (root?.Name.LocalName != "ScanSettings" || !ScanNsAll.Contains(root.Name.Namespace))
         {
             throw new InvalidOperationException("Unexpected root element: " + doc.Root?.Name);
         }
@@ -19,17 +29,20 @@ internal static class SettingsParser
         {
             // TODO: Handle intents?
             InputSource = ParseHelper.MaybeParseEnum(root.Element(PwgNs + "InputSource"), EsclInputSource.Platen),
-            ColorMode = ParseHelper.MaybeParseEnum(root.Element(ScanNs + "ColorMode"), EsclColorMode.RGB24),
-            DocumentFormat = root.Element(ScanNs + "DocumentFormatExt")?.Value ??
+            ColorMode = ParseHelper.MaybeParseEnum(ScanElement(root, "ColorMode"), EsclColorMode.RGB24),
+            DocumentFormat = ScanElement(root, "DocumentFormatExt")?.Value ??
                              root.Element(PwgNs + "DocumentFormat")?.Value,
-            Duplex = root.Element(ScanNs + "Duplex")?.Value == "true",
-            XResolution = ParseHelper.MaybeParseInt(root.Element(ScanNs + "XResolution")) ?? 0,
-            YResolution = ParseHelper.MaybeParseInt(root.Element(ScanNs + "YResolution")) ?? 0,
+            Duplex = ScanElement(root, "Duplex")?.Value == "true",
+            XResolution = ParseHelper.MaybeParseInt(ScanElement(root, "XResolution")) ?? 0,
+            YResolution = ParseHelper.MaybeParseInt(ScanElement(root, "YResolution")) ?? 0,
             Width = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "Width")) ?? 0,
             Height = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "Height")) ?? 0,
             XOffset = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "XOffset")) ?? 0,
             YOffset = ParseHelper.MaybeParseInt(scanRegion?.Element(PwgNs + "YOffset")) ?? 0,
-            CompressionFactor = ParseHelper.MaybeParseInt(root.Element(ScanNs + "CompressionFactor"))
+            CompressionFactor = ParseHelper.MaybeParseInt(ScanElement(root, "CompressionFactor"))
         };
     }
+
+    private static XElement? ScanElement(XElement root, string localName) =>
+        root.Elements().FirstOrDefault(e => ScanNsAll.Contains(e.Name.Namespace) && e.Name.LocalName == localName);
 }
