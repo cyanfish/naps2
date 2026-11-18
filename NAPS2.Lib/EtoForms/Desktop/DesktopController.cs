@@ -139,7 +139,8 @@ public class DesktopController
     private void ShowUpdatePrompt()
     {
 #if !MSI
-        if (_config.Get(c => c.CheckForUpdates) &&
+        if (OperatingSystem.IsWindows() &&
+            _config.Get(c => c.CheckForUpdates) &&
             !_config.Get(c => c.NoUpdatePrompt) &&
             (!_config.Get(c => c.HasCheckedForUpdates) ||
              _config.Get(c => c.LastUpdateCheckDate) < DateTime.Now - UpdateChecker.CheckInterval))
