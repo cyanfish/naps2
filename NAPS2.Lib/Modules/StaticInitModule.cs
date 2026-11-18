@@ -1,6 +1,5 @@
 ﻿using System.Runtime.ExceptionServices;
 using Autofac;
-using NLog;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace NAPS2.Modules;
@@ -12,8 +11,11 @@ public class StaticInitModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterBuildCallback(ctx => { Log.Logger = ctx.Resolve<ILogger>(); });
-        Trace.Listeners.Add(new NLogTraceListener());
+        builder.RegisterBuildCallback(ctx =>
+        {
+            Log.Logger = ctx.Resolve<ILogger>();
+            Trace.Listeners.Add(new LoggerTraceListener(Log.Logger));
+        });
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
         ExceptionHandling.SetUnhandledExceptionHandler(UnhandledException);
     }

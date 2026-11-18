@@ -39,6 +39,8 @@
   <ItemGroup>
     <Compile Include="../NAPS2.Lib/Paths.cs" />
     <Compile Include="../NAPS2.Lib/NLogConfig.cs" />
+    <Compile Include="../NAPS2.Lib/Logging/LazyLogger.cs" />
+    <Compile Include="../NAPS2.Lib/Logging/LoggerTraceListener.cs" />
     <Compile Include="../NAPS2.Lib/EntryPoints/CoreWorkerEntryPoint.cs" />
   </ItemGroup>
 </Project>

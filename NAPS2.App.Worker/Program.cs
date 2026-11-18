@@ -2,6 +2,7 @@
 using NAPS2.EntryPoints;
 using NAPS2.Images.Gdi;
 using NAPS2.ImportExport.Email.Mapi;
+using NAPS2.Logging;
 using NAPS2.Platform.Windows;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
@@ -36,7 +37,7 @@ static class Program
         var serviceImpl = new WorkerServiceImpl(scanningContext, new ThumbnailRenderer(scanningContext.ImageContext),
             new MapiWrapper(logger), new LocalTwainController(scanningContext));
 
-        Trace.Listeners.Add(new NLog.NLogTraceListener());
+        Trace.Listeners.Add(new LoggerTraceListener(logger));
         Invoker.Current = messagePump;
         TwainHandleManager.Factory = () => new Win32TwainHandleManager(messagePump);
 

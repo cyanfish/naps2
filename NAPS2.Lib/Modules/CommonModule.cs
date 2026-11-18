@@ -61,10 +61,9 @@ public class CommonModule : Module
         builder.RegisterInstance(ProcessCoordinator.CreateDefault());
 
         // Logging
-        var lazyLogger = new LazyLogger(() =>
-            NLogConfig.CreateLogger(() => config.Get(c => c.EnableDebugLogging)));
+        var logger = NLogConfig.CreateLogger(() => config.Get(c => c.EnableDebugLogging));
         NLogConfig.EnvDebugLogging = config.Get(c => c.EnableDebugLogging);
-        builder.RegisterInstance<ILogger>(lazyLogger);
+        builder.RegisterInstance(logger);
 
         // Misc
         builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();
