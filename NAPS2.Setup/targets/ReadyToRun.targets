@@ -1,0 +1,35 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <PublishReadyToRun>true</PublishReadyToRun>
+    </PropertyGroup>
+
+    <!-- We use ReadyToRun to compile assemblies ahead of time, which significantly improves startup time. However,
+         including every assembly is unnecessary (and adds significant binary size), so only listed ones are compiled. -->
+    <Target Name="Naps2SelectReadyToRunAssemblies" BeforeTargets="_PrepareForReadyToRunCompilation">
+        <ItemGroup>
+            <_Naps2ReadyToRunCandidate Include="@(ResolvedFileToPublish->WithMetadataValue('PostprocessAssembly', 'true'))"
+                                       Naps2FileName="%(Filename)%(Extension)"/>
+            <_Naps2ReadyToRunSelected Include="@(Naps2ReadyToRunAssembly)" Naps2FileName="%(Identity)"/>
+
+            <_Naps2ReadyToRunExcluded Include="@(_Naps2ReadyToRunCandidate)"/>
+            <_Naps2ReadyToRunExcluded Remove="@(_Naps2ReadyToRunSelected)" MatchOnMetadata="Naps2FileName"
+                                      MatchOnMetadataOptions="CaseInsensitive"/>
+            <PublishReadyToRunExclude Include="@(_Naps2ReadyToRunExcluded->'%(Naps2FileName)')"/>
+
+            <_Naps2ReadyToRunMissing Include="@(_Naps2ReadyToRunSelected)"/>
+            <_Naps2ReadyToRunMissing Remove="@(_Naps2ReadyToRunCandidate)" MatchOnMetadata="Naps2FileName"
+                                     MatchOnMetadataOptions="CaseInsensitive"/>
+        </ItemGroup>
+
+        <Warning Condition="'@(_Naps2ReadyToRunMissing)' != ''"
+                 Text="ReadyToRun assemblies not found in the published files: @(_Naps2ReadyToRunMissing)"/>
+
+        <!-- Because we use composite R2R without including every assembly, crossgen needs to read the excluded
+             assemblies (-r) to compile. The SDK doesn't pass them unless composite is off. -->
+        <PropertyGroup Condition="'$(PublishReadyToRunComposite)' == 'true'">
+            <PublishReadyToRunCrossgen2CompositeExtraArgs>$(PublishReadyToRunCrossgen2CompositeExtraArgs);@(_Naps2ReadyToRunExcluded->'-r:%(FullPath)')</PublishReadyToRunCrossgen2CompositeExtraArgs>
+        </PropertyGroup>
+    </Target>
+
+</Project>

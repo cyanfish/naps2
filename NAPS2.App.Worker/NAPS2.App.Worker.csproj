@@ -14,7 +14,6 @@
     <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>partial</TrimMode>
-    <PublishReadyToRun>true</PublishReadyToRun>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
@@ -23,6 +22,7 @@
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
+  <Import Project="..\NAPS2.Setup\targets\ReadyToRun.Worker.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <ItemGroup>

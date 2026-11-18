@@ -12,7 +12,6 @@
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <PublishTrimmed>false</PublishTrimmed>
     <TrimMode>none</TrimMode>
-    <PublishReadyToRun>true</PublishReadyToRun>
     <UseWPF>true</UseWPF>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <CETCompat>false</CETCompat>
@@ -25,6 +24,7 @@
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
   <Import Project="..\NAPS2.Setup\targets\PublishExclusions.targets" />
+  <Import Project="..\NAPS2.Setup\targets\ReadyToRun.Wpf.targets" />
   <Import Project="..\NAPS2.Setup\targets\SingleFile.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
