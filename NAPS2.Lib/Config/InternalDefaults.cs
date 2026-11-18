@@ -23,7 +23,7 @@ public static class InternalDefaults
             StartupMessageTitle = "",
             StartupMessageText = "",
             StartupMessageIcon = MessageBoxIcon.None,
-            Theme = Theme.Default,
+            Theme = AppTheme.Default,
             ScanChangesDefaultProfile = true,
             ScanButtonDefaultAction = ScanButtonDefaultAction.ScanWithDefaultProfile,
             SaveButtonDefaultAction = SaveButtonDefaultAction.SaveAll,

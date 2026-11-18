@@ -2,7 +2,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.Config;
 
-public enum Theme
+public enum AppTheme
 {
     [LocalizedDescription(typeof(SettingsResources), "Theme_Default")]
     Default,

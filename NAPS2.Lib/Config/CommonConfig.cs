@@ -45,7 +45,7 @@ public class CommonConfig
     public MessageBoxIcon StartupMessageIcon { get; set; }
 
     [Common]
-    public Theme Theme { get; set; }
+    public AppTheme Theme { get; set; }
 
     [Common]
     public bool ScanChangesDefaultProfile { get; set; }

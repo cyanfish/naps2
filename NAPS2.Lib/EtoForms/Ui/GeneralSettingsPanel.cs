@@ -10,7 +10,7 @@ namespace NAPS2.EtoForms.Ui;
 internal class GeneralSettingsPanel : SettingsPanel
 {
     private readonly DesktopFormProvider _desktopFormProvider;
-    private readonly EnumDropDownWidget<Theme> _theme = new(scale: false);
+    private readonly EnumDropDownWidget<AppTheme> _theme = new(scale: false);
     private readonly CheckBox _scanChangesDefaultProfile = C.CheckBox(UiStrings.ScanChangesDefaultProfile);
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
     private readonly EnumDropDownWidget<ScanButtonDefaultAction> _scanButtonDefaultAction = new(scale: false);
