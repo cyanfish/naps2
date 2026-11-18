@@ -104,8 +104,6 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
-        // TODO: Getting some errors when starting naps2 with the sidebar hidden then trying to show it
-        if (location.X < 0 || location.Y < 0) throw new InvalidOperationException();
         var overlay = container.ToNative() as GTK.Overlay;
         var panel = container.ToNative() as GTK.Fixed;
         var widget = control.ToNative();
@@ -118,22 +116,26 @@ public class GtkEtoPlatform : EtoPlatform
             xOff = X_OFF;
             yOff = Y_OFF;
         }
+        int x = Math.Max(location.X - xOff, 0);
+        int y = Math.Max(location.Y - yOff, 0);
+        int width = Math.Max(size.Width, 0);
+        int height = Math.Max(size.Height, 0);
         if (overlay != null)
         {
             // TODO: Ideally we would use GetChildPosition instead of margin but that signal is not firing, not sure why
-            widget.MarginTop = location.Y - yOff;
-            widget.MarginStart = location.X - xOff;
+            widget.MarginTop = y;
+            widget.MarginStart = x;
         }
         if (panel != null)
         {
             if (widget.Parent != panel) throw new InvalidOperationException("Invalid parent");
-            panel.Move(widget, location.X - xOff, location.Y - yOff);
+            panel.Move(widget, x, y);
         }
-        widget.SetSizeRequest(size.Width, size.Height);
+        widget.SetSizeRequest(width, height);
         if (widget is GTK.Overlay childOverlay)
         {
             var childPanel = (GTK.Fixed) childOverlay.Child;
-            childPanel.SetSizeRequest(size.Width, size.Height);
+            childPanel.SetSizeRequest(width, height);
         }
     }
 
