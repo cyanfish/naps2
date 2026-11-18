@@ -72,6 +72,7 @@
         <Naps2ReadyToRunAssembly Include="Ben.Demystifier.dll" />
         <Naps2ReadyToRunAssembly Include="Grpc.Core.Api.dll" />
         <Naps2ReadyToRunAssembly Include="GrpcDotNetNamedPipes.dll" />
+        <Naps2ReadyToRunAssembly Include="ICSharpCode.SharpZipLib.dll" />
         <Naps2ReadyToRunAssembly Include="NAPS2.Wia.dll" />
         <Naps2ReadyToRunAssembly Include="NLog.dll" />
         <Naps2ReadyToRunAssembly Include="NLog.Extensions.Logging.dll" />

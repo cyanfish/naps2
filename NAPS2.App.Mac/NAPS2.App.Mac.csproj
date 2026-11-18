@@ -10,7 +10,6 @@
     <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
     <RuntimeIdentifiers Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx-x64;osx-arm64</RuntimeIdentifiers>
     <TrimMode>partial</TrimMode>
-    <PublishReadyToRun Condition="'$(Configuration)' == 'Release'">true</PublishReadyToRun>
     <CheckForIllegalCrossThreadCalls>false</CheckForIllegalCrossThreadCalls>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
@@ -19,6 +18,7 @@
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
+  <Import Project="..\NAPS2.Setup\targets\ReadyToRun.Mac.targets" Condition="'$(Configuration)' == 'Release'" />
   
   <ItemGroup>
     <PackageReference Include="NAPS2.Jpeg.Binaries" Version="1.0.0" />
