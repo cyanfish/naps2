@@ -15,7 +15,6 @@ public class LayoutLeftPanel : LayoutContainer
     private int? _minRightWidth;
     private bool _isInitialized;
     private bool _inLayout;
-    private float _lastScale;
 
     public LayoutLeftPanel(LayoutElement left, LayoutElement right) : base([left, right])
     {
@@ -37,20 +36,18 @@ public class LayoutLeftPanel : LayoutContainer
 
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
-        var w = _minLeftWidth.HasValue ? (int) (_minLeftWidth * context.Scale) : MeasureWidth(context, bounds, _left);
+        var w = _minLeftWidth ?? MeasureWidth(context, bounds, _left);
         if (Splitter.Position < w)
         {
             EtoPlatform.Current.SetSplitterPosition(Splitter, w);
             _left.Width = w;
         }
         Splitter.Panel1MinimumSize = w;
-        Splitter.Panel2MinimumSize = (int) ((_minRightWidth ?? 0) * context.Scale);
+        Splitter.Panel2MinimumSize = _minRightWidth ?? 0;
 
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
-        if (!_isInitialized || context.Scale != _lastScale)
+        if (!_isInitialized)
         {
-            _lastScale = context.Scale;
-            int initialWidth = Math.Max((int) (_widthGetter() * context.Scale), w);
+            int initialWidth = Math.Max(_widthGetter(), w);
             _inLayout = true;
             EtoPlatform.Current.SetSplitterPosition(Splitter, initialWidth);
             _inLayout = false;
@@ -62,7 +59,7 @@ public class LayoutLeftPanel : LayoutContainer
                     if (!_inLayout && _left.Width != Splitter.Position)
                     {
                         _left.Width = Splitter.Position;
-                        _widthSetter((int) (Splitter.Position / context.Scale));
+                        _widthSetter(Splitter.Position);
                         context.Invalidate();
                     }
                 };

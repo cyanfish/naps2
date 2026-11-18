@@ -51,7 +51,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         if (string.IsNullOrEmpty(button.Text))
         {
-            AttachDpiDependency(button, scale => button.MinimumSize = Size.Round(MinImageOnlyButtonSize * scale));
+            AttachDpiDependency(button, _ => button.MinimumSize = MinImageOnlyButtonSize);
             var native = (WF.Button) button.ToNative();
             native.TextImageRelation = WF.TextImageRelation.Overlay;
             native.ImageAlign = SD.ContentAlignment.MiddleCenter;
@@ -60,7 +60,7 @@ public class WinFormsEtoPlatform : EtoPlatform
 
         bool largeText = flags.HasFlag(ButtonFlags.LargeText);
         bool largeIcon = flags.HasFlag(ButtonFlags.LargeIcon);
-        AttachDpiDependency(button, scale => button.MinimumSize = Size.Round(MinImageButtonSize * scale));
+        AttachDpiDependency(button, _ => button.MinimumSize = MinImageButtonSize);
         if (button.ImagePosition == ButtonImagePosition.Left)
         {
             var native = (WF.Button) button.ToNative()!;
@@ -89,7 +89,7 @@ public class WinFormsEtoPlatform : EtoPlatform
                     var widthWithoutRightPadding = p + textWidth + (int) Math.Round((imageWidth + 15) * scale);
                     var width = Math.Max(widthWithoutRightPadding + p,
                         (int) Math.Round(ButtonHandler.DefaultMinimumSize.Width * scale));
-                    button.Width = width;
+                    button.Width = (int) Math.Round(width / scale);
                     var rightPadding = p + (width - widthWithoutRightPadding - p) / 2;
                     native.Padding = native.Padding with { Left = p, Right = rightPadding };
                 }
@@ -145,14 +145,19 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
         var native = control.ToNative();
-        var x = location.X;
-        var y = location.Y;
+        // Our layouts are in logical units like Eto's, so we scale them to pixels. Scaling the edges (rather than the
+        // size) keeps adjacent controls from overlapping or leaving gaps.
+        float scale = GetScale(native);
+        int left = (int) Math.Round(location.X * scale);
+        int top = (int) Math.Round(location.Y * scale);
+        int width = (int) Math.Round((location.X + size.Width) * scale) - left;
+        int height = (int) Math.Round((location.Y + size.Height) * scale) - top;
         if (CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
         {
-            x = container.ToNative().Width - x - size.Width;
+            left = container.ToNative().Width - left - width;
         }
         native.AutoSize = false;
-        native.SetBounds(x, y, size.Width, size.Height);
+        native.SetBounds(left, top, width, height);
         if (inOverlay)
         {
             native.BringToFront();
@@ -170,9 +175,10 @@ public class WinFormsEtoPlatform : EtoPlatform
             }
         }
         var native = control.ToNative();
+        float scale = GetScale(native);
         if (control.GetType() == typeof(Slider))
         {
-            var size = (SizeF) native.PreferredSize.ToEto();
+            var size = ToLogical(native.PreferredSize, scale);
             // Work around a WinForms bug where the preferred size of a Slider/WF.TrackBar is based on the primary
             // screen DPI, not the DPI of the screen it's actually on
             var scaleDelta = (native.FindForm()!.DeviceDpi / 96f) / (Screen.PrimaryScreen.RealDPI / 72f);
@@ -185,11 +191,11 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
         var preferredSize = SizeF.Max(
             base.GetPreferredSize(control, availableSpace),
-            native.PreferredSize.ToEto());
-        if (control.GetType() == typeof(DropDown) && control.Height > 0)
+            ToLogical(native.PreferredSize, scale));
+        if (control.GetType() == typeof(DropDown) && native.Height > 0)
         {
             // Work around a WinForms bug where the preferred height of a DropDown is incorrect
-            preferredSize.Height = control.Height;
+            preferredSize.Height = MathF.Ceiling(native.Height / scale);
         }
         return preferredSize;
     }
@@ -198,15 +204,18 @@ public class WinFormsEtoPlatform : EtoPlatform
     {
         if (control.ControlObject is WF.Label label)
         {
-            return WF.TextRenderer.MeasureText(label.Text, label.Font, new SD.Size(defaultWidth, int.MaxValue),
-                WF.TextFormatFlags.WordBreak).ToEto();
+            float scale = GetScale(label);
+            return ToLogical(WF.TextRenderer.MeasureText(label.Text, label.Font,
+                new SD.Size((int) Math.Round(defaultWidth * scale), int.MaxValue),
+                WF.TextFormatFlags.WordBreak), scale);
         }
         return base.GetWrappedSize(control, defaultWidth);
     }
 
     public override Size GetClientSize(Window window, bool excludeToolbars = false)
     {
-        var size = window.ToNative().ClientSize.ToEto();
+        var form = window.ToNative();
+        var size = form.ClientSize.ToEto();
         if (excludeToolbars && window.Content is { ControlObject: WF.ToolStripContainer container })
         {
             var top = container.TopToolStripPanel.Controls.Cast<WF.ToolStrip>();
@@ -221,17 +230,33 @@ public class WinFormsEtoPlatform : EtoPlatform
         {
             size.Height -= toolStripEx.Height;
         }
-        return size;
+        return Size.Round((SizeF) size / GetScale(form));
     }
 
     public override void SetClientSize(Window window, Size clientSize)
     {
-        window.ToNative().ClientSize = clientSize.ToSD();
+        var native = window.ToNative();
+        native.ClientSize = Size.Round(clientSize * GetScale(native)).ToSD();
         if (window is IFormBase { FormStateController.Loaded: false } form)
         {
             Invoker.Current.InvokeDispatch(() => form.LayoutController.Invalidate());
         }
     }
+
+    public override void SetMinimumClientSize(Window window, Size minSize)
+    {
+        // Eto's ClientSize is in pixels before the window is loaded, so we use the native sizes
+        var form = window.ToNative();
+        var windowDecorationSize = form.Size - form.ClientSize;
+        form.MinimumSize = Size.Round(minSize * GetScale(form)).ToSD() + windowDecorationSize;
+    }
+
+    private static float GetScale(WF.Control control) => control.DeviceDpi / 96f;
+
+    // Rounding up means the size is at least as big as the native size when it's scaled back (otherwise e.g. text could
+    // get cut off)
+    private static SizeF ToLogical(SD.Size size, float scale) =>
+        new(MathF.Ceiling(size.Width / scale), MathF.Ceiling(size.Height / scale));
 
     public override Control CreateContainer()
     {
@@ -271,12 +296,15 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override void SetScrollContentSize(Control scrollContainer, Size size)
     {
-        scrollContainer.ToNative().Controls[0].Size = size.ToSD();
+        var native = scrollContainer.ToNative();
+        native.Controls[0].Size = Size.Round(size * GetScale(native)).ToSD();
     }
 
     public override int GetVerticalScrollBarWidth(Control scrollContainer)
     {
-        return WF.SystemInformation.GetVerticalScrollBarWidthForDpi(scrollContainer.ToNative().DeviceDpi);
+        var native = scrollContainer.ToNative();
+        return (int) Math.Ceiling(WF.SystemInformation.GetVerticalScrollBarWidthForDpi(native.DeviceDpi) /
+                                  GetScale(native));
     }
 
     public override LayoutElement FormatProgressBar(ProgressBar progressBar)
@@ -330,8 +358,6 @@ public class WinFormsEtoPlatform : EtoPlatform
         return form == null ? 1 : form.DeviceDpi / 96f;
     }
 
-    public override bool ScaleLayout => true;
-
     public override void SetImageSize(ButtonMenuItem menuItem, int size)
     {
         var handler = (ButtonMenuItemHandler) menuItem.Handler;
@@ -355,9 +381,9 @@ public class WinFormsEtoPlatform : EtoPlatform
 
     public override void ConfigureZoomButton(Button button, string icon)
     {
+        button.Size = new Size(25, 25);
         AttachDpiDependency(button, scale =>
         {
-            button.Size = new Size((int) (25 * scale), (int) (25 * scale));
             button.Image = IconProvider.GetIcon(icon, IconScenario.Button, scale);
         });
         var wfButton = (WF.Button) button.ToNative();

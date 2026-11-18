@@ -51,8 +51,8 @@ public abstract class LayoutLine : LayoutContainer
         if (Padding is { } padding)
         {
             bounds = new RectangleF(
-                bounds.X + padding.Left * context.Scale, bounds.Y + padding.Top * context.Scale,
-                bounds.Width - padding.Horizontal * context.Scale, bounds.Height - padding.Vertical * context.Scale);
+                bounds.X + padding.Left, bounds.Y + padding.Top,
+                bounds.Width - padding.Horizontal, bounds.Height - padding.Vertical);
         }
         var childContext = GetChildContext(context, bounds, true);
         GetInitialCellLengthsAndScaling(context, childContext, bounds, out var cellLengths, out var cellScaling);
@@ -82,13 +82,13 @@ public abstract class LayoutLine : LayoutContainer
             return 0;
         }
         if (!Children[i].IsVisible) return 0;
-        return GetSpacingCore(i, context) + (int) (context.Scale * next.SpacingBefore);
+        return GetSpacingCore(i, context) + next.SpacingBefore;
     }
 
     protected virtual int GetSpacingCore(int i, LayoutContext context)
     {
         int spacing = Children[i].SpacingAfter ?? Spacing ?? context.DefaultSpacing;
-        return (int) (context.Scale * spacing);
+        return spacing;
     }
 
     private void GetChildSizeAndOrigin(LayoutElement child, LayoutContext childContext,
@@ -126,7 +126,7 @@ public abstract class LayoutLine : LayoutContainer
             var childLayoutSize = GetSize(cellLengths[i], GetBreadth(childSize));
             size = UpdateTotalSize(size, childLayoutSize, GetSpacing(i, context));
         }
-        size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0) * context.Scale;
+        size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0);
         if (Width != null)
         {
             size.Width = Width.Value;
