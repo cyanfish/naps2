@@ -96,7 +96,7 @@ public class LayoutControl : LayoutElement
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
         var size = SizeF.Empty;
-        if (!IsVisible)
+        if (!IsVisible || context.ParentVisibility?.IsVisible == false)
         {
             return size;
         }
