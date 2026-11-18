@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Runtime.ExceptionServices;
+using Autofac;
 using NLog;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
@@ -14,6 +15,13 @@ public class StaticInitModule : Module
         builder.RegisterBuildCallback(ctx => { Log.Logger = ctx.Resolve<ILogger>(); });
         Trace.Listeners.Add(new NLogTraceListener());
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
+        ExceptionHandling.SetUnhandledExceptionHandler(UnhandledException);
+    }
+
+    private static bool UnhandledException(Exception ex)
+    {
+        Log.ErrorException("An unhandled error occurred on a background thread.", ex);
+        return true;
     }
 
     private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)

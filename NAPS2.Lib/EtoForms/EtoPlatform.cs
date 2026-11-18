@@ -46,7 +46,7 @@ public abstract class EtoPlatform
 
     private static void UnhandledException(object? sender, Eto.UnhandledExceptionEventArgs e)
     {
-        Log.FatalException("An error occurred that caused the application to close.",
+        Log.FatalException("An application error occurred.",
             e.ExceptionObject as Exception ?? new Exception());
     }
 
