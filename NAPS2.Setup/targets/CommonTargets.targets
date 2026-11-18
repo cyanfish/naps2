@@ -16,5 +16,11 @@
         <Using Include="System.Threading.Tasks" />
         <Using Include="System.Xml.Linq" />
     </ItemGroup>
+
+    <!-- Crossgen only recompiles assemblies whose inputs changed, so after changing ReadyToRun settings (e.g. which
+         assemblies are compiled or composite) the old images would be reused. Clean doesn't remove them by default. -->
+    <Target Name="Naps2CleanReadyToRun" AfterTargets="Clean">
+        <RemoveDir Directories="$(IntermediateOutputPath)R2R" />
+    </Target>
     
 </Project>
