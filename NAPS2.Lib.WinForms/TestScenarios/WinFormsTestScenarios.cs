@@ -139,7 +139,8 @@ internal class WinFormsTestScenarios : TestScenarioProvider
 
     private void DefineIconButtonToolTips()
     {
-        void Combine(string name, CombineOrientation orientation, (string Key, string Text)[] buttons)
+        void Combine(string name, CombineOrientation orientation, (string Key, string Text)[] buttons,
+            bool variant = false)
         {
             Add(name, () =>
             {
@@ -152,14 +153,14 @@ internal class WinFormsTestScenarios : TestScenarioProvider
                         WF.Application.DoEvents();
                         ShowButtonToolTips(f.ToNative(), buttons.Select(b => b.Text).ToArray());
                     });
-            });
+            }, variant: variant);
         }
         Combine("combine-tooltips-vertical", CombineOrientation.Vertical,
             [P(UiStrings.AlignLeft), P(UiStrings.AlignCenter), P(UiStrings.AlignRight), P(UiStrings.ToggleOrientation),
                 P(UiStrings.Swap)]);
         Combine("combine-tooltips-horizontal", CombineOrientation.Horizontal,
             [P(UiStrings.AlignTop), P(UiStrings.AlignMiddle), P(UiStrings.AlignBottom), P(UiStrings.ToggleOrientation),
-                P(UiStrings.Swap)]);
+                P(UiStrings.Swap)], variant: true);
         Add("split-tooltips", () =>
         {
             var images = LoadImages();

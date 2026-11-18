@@ -16,6 +16,10 @@ public class ScenarioCommand : ICommand<ScenarioOptions>
         {
             throw new InvalidOperationException("Specify exactly one of --name, --path or --list");
         }
+        if (opts.All && !opts.List)
+        {
+            throw new InvalidOperationException("--all only applies to --list");
+        }
         var scriptPath = opts.ScriptPath != null ? Path.GetFullPath(opts.ScriptPath) : null;
         if (scriptPath != null && (!File.Exists(scriptPath) || Path.GetExtension(scriptPath) != ".json"))
         {
@@ -33,7 +37,7 @@ public class ScenarioCommand : ICommand<ScenarioOptions>
             throw new InvalidOperationException($"App not found (use --build): {exePath}");
         }
 
-        var scenarioName = opts.List ? "list" : opts.Name ?? Path.GetFileNameWithoutExtension(scriptPath!);
+        var scenarioName = opts.List ? opts.All ? "list-all" : "list" : opts.Name ?? Path.GetFileNameWithoutExtension(scriptPath!);
         // The app's data folder, with outputs in its "output" subfolder
         var dataPath = Path.GetFullPath(opts.OutputPath ??
                                         Path.Combine(Path.GetTempPath(), "naps2-scenarios", scenarioName));

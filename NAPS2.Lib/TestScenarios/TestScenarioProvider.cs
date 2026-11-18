@@ -16,7 +16,7 @@ namespace NAPS2.TestScenarios;
 /// </summary>
 internal abstract class TestScenarioProvider
 {
-    private readonly List<(string, TestScenario)> _scenarios = [];
+    private readonly List<(string, TestScenario, bool)> _scenarios = [];
 
     protected TestScenarioContext Ctx { get; private set; } = null!;
 
@@ -26,7 +26,7 @@ internal abstract class TestScenarioProvider
 
     protected string DesktopTitle => Ctx.Ui(() => Desktop.Title);
 
-    public IEnumerable<(string Name, TestScenario Scenario)> GetScenarios()
+    public IEnumerable<(string Name, TestScenario Scenario, bool Variant)> GetScenarios()
     {
         Define();
         return _scenarios;
@@ -34,13 +34,18 @@ internal abstract class TestScenarioProvider
 
     protected abstract void Define();
 
-    protected void Add(string name, Func<Task> run, Action<TestScenarioSetup>? setup = null)
+    /// <param name="name">The scenario name.</param>
+    /// <param name="run">Sets up the UI state and calls Ready.</param>
+    /// <param name="setup">Configures the app before it starts (e.g. config values or fake devices).</param>
+    /// <param name="variant">Whether the scenario has the same layout as another one, with only different strings or
+    /// state (e.g. another error message). These are only listed with "list-all".</param>
+    protected void Add(string name, Func<Task> run, Action<TestScenarioSetup>? setup = null, bool variant = false)
     {
         _scenarios.Add((name, new TestScenario(setup, async ctx =>
         {
             Ctx = ctx;
             await run();
-        })));
+        }), variant));
     }
 
     protected T Get<T>() where T : notnull => Ctx.Get<T>();

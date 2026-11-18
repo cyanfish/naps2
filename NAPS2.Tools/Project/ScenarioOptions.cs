@@ -11,8 +11,11 @@ public class ScenarioOptions : OptionsBase
     [Option("path", Required = false, HelpText = "The path to a JSON scenario script (see NAPS2.Lib/TestScenarios/ScriptTestScenario.cs)")]
     public string? ScriptPath { get; set; }
 
-    [Option("list", Required = false, HelpText = "List the scenarios")]
+    [Option("list", Required = false, HelpText = "List the scenarios, except variants (see --all)")]
     public bool List { get; set; }
+
+    [Option("all", Required = false, HelpText = "With --list, also list variants (scenarios with the same layout as another one, e.g. other error messages)")]
+    public bool All { get; set; }
 
     [Option('o', "out", Required = false, HelpText = "The app data folder, with outputs in its output subfolder (cleared first; default: a temp folder)")]
     public string? OutputPath { get; set; }

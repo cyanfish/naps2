@@ -45,15 +45,15 @@ internal class CommonTestScenarios : TestScenarioProvider
         Add("msg-exit-unsaved-changes", () => ShowMessage(
             [K(MiscResources.ExitWithUnsavedChanges), K(MiscResources.UnsavedChanges)],
             MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
-            MessageBoxButtons.YesNo, MessageBoxType.Warning));
+            MessageBoxButtons.YesNo, MessageBoxType.Warning), variant: true);
         Add("msg-confirm-cancel-batch", () => ShowMessage(
             [K(MiscResources.ConfirmCancelBatch), K(MiscResources.CancelBatch)],
             MiscResources.ConfirmCancelBatch, MiscResources.CancelBatch,
-            MessageBoxButtons.YesNo, MessageBoxType.Warning));
+            MessageBoxButtons.YesNo, MessageBoxType.Warning), variant: true);
         Add("msg-confirm-delete-page-size", () => ShowMessage(
             [K(MiscResources.ConfirmDelete)],
             string.Format(MiscResources.ConfirmDelete, "Receipt"), MiscResources.Delete,
-            MessageBoxButtons.OKCancel, MessageBoxType.Warning));
+            MessageBoxButtons.OKCancel, MessageBoxType.Warning), variant: true);
         Add("msg-confirm-delete-profile", () => ShowMessage(
             [K(MiscResources.ConfirmDeleteSingleProfile)],
             string.Format(MiscResources.ConfirmDeleteSingleProfile, "My Scanner"), MiscResources.Delete,
@@ -69,14 +69,15 @@ internal class CommonTestScenarios : TestScenarioProvider
 
     private void DefineErrors()
     {
-        void Simple(string name, string message, [CallerArgumentExpression(nameof(message))] string key = "") =>
-            Add("error-" + name, () => ShowError([key], message));
-
-        void WithDetails(string name, string message, string details,
+        void Simple(string name, string message, bool variant = true,
             [CallerArgumentExpression(nameof(message))] string key = "") =>
-            Add("error-" + name, () => ShowError([key], message, details));
+            Add("error-" + name, () => ShowError([key], message), variant: variant);
 
-        Simple("name-missing", MiscResources.NameMissing);
+        void WithDetails(string name, string message, string details, bool variant = true,
+            [CallerArgumentExpression(nameof(message))] string key = "") =>
+            Add("error-" + name, () => ShowError([key], message, details), variant: variant);
+
+        Simple("name-missing", MiscResources.NameMissing, variant: false);
         Simple("no-device-selected", MiscResources.NoDeviceSelected);
         Simple("device-not-found", SdkResources.DeviceNotFound);
         Simple("update-error", MiscResources.UpdateError);
@@ -92,12 +93,12 @@ internal class CommonTestScenarios : TestScenarioProvider
         Simple("device-offline", SdkResources.DeviceOffline);
         Simple("device-communication", SdkResources.DeviceCommunicationFailure);
         Simple("worker-crash", SdkResources.WorkerCrash);
-        Simple("worker-crash-windows", SdkResources.WorkerCrashWindows);
+        Simple("worker-crash-windows", SdkResources.WorkerCrashWindows, variant: false);
         Simple("ocr-timeout", SdkResources.OcrTimeout);
 
         const string details = "System.Exception: Example error details";
         WithDetails("unknown-driver", SdkResources.UnknownDriverError,
-            "NAPS2.Scan.Exceptions.ScanDriverUnknownException: WIA error code: 80210015");
+            "NAPS2.Scan.Exceptions.ScanDriverUnknownException: WIA error code: 80210015", variant: false);
         WithDetails("auth", MiscResources.AuthError, details);
         WithDetails("auto-save", MiscResources.AutoSaveError, details);
         WithDetails("saving", MiscResources.ErrorSaving, details);
@@ -118,9 +119,10 @@ internal class CommonTestScenarios : TestScenarioProvider
             await Ready([K(MiscResources.FileInUse), K(UiStrings.Retry)], window.Title);
         });
         Add("error-starting-application", () => ShowError([K(UiStrings.ErrorStartingApplication)],
-            string.Format(UiStrings.ErrorStartingApplication, @"C:\Program Files\Example\example.exe"), details));
+            string.Format(UiStrings.ErrorStartingApplication, @"C:\Program Files\Example\example.exe"), details),
+            variant: true);
         Add("error-import-file", () => ShowError([K(MiscResources.ImportErrorCouldNot)],
-            string.Format(MiscResources.ImportErrorCouldNot, "document.pdf"), details));
+            string.Format(MiscResources.ImportErrorCouldNot, "document.pdf"), details), variant: true);
     }
 
     private void DefineProgress()
@@ -128,32 +130,35 @@ internal class CommonTestScenarios : TestScenarioProvider
         Add("progress-ocr", () => ShowProgress([K(MiscResources.OcrProgress), K(MiscResources.RunningOcr)],
             MiscResources.OcrProgress, MiscResources.RunningOcr, 2, 5));
         Add("progress-copy", () => ShowProgress([K(MiscResources.CopyProgress), K(MiscResources.Copying)],
-            MiscResources.CopyProgress, MiscResources.Copying, 3, 8));
+            MiscResources.CopyProgress, MiscResources.Copying, 3, 8), variant: true);
         Add("progress-direct-import", () => ShowProgress([K(MiscResources.Importing)],
-            MiscResources.ImportProgress, MiscResources.Importing, 3, 8));
+            MiscResources.ImportProgress, MiscResources.Importing, 3, 8), variant: true);
         Add("progress-import-file", () => ShowProgress([K(MiscResources.ImportingFormat)],
-            MiscResources.ImportProgress, string.Format(MiscResources.ImportingFormat, "document.pdf"), 1, 4));
+            MiscResources.ImportProgress, string.Format(MiscResources.ImportingFormat, "document.pdf"), 1, 4),
+            variant: true);
         Add("progress-deskew", () => ShowProgress(
             [K(MiscResources.AutoDeskewProgress), K(MiscResources.AutoDeskewing)],
-            MiscResources.AutoDeskewProgress, MiscResources.AutoDeskewing, 2, 6));
+            MiscResources.AutoDeskewProgress, MiscResources.AutoDeskewing, 2, 6), variant: true);
         Add("progress-email-pdf", () => ShowProgress(
             [K(MiscResources.EmailPdfProgress), K(MiscResources.UploadingEmail)],
             MiscResources.EmailPdfProgress, MiscResources.UploadingEmail));
         Add("progress-recovery", () => ShowProgress(
             [K(MiscResources.RecoveryProgress), K(MiscResources.Recovering)],
-            MiscResources.RecoveryProgress, MiscResources.Recovering, 4, 12));
+            MiscResources.RecoveryProgress, MiscResources.Recovering, 4, 12), variant: true);
         Add("progress-save-images", () => ShowProgress(
             [K(MiscResources.SaveImagesProgress), K(MiscResources.SavingFormat)],
-            MiscResources.SaveImagesProgress, string.Format(MiscResources.SavingFormat, "scan_2.jpg"), 2, 4));
+            MiscResources.SaveImagesProgress, string.Format(MiscResources.SavingFormat, "scan_2.jpg"), 2, 4),
+            variant: true);
         Add("progress-save-pdf", () => ShowProgress(
             [K(MiscResources.SavePdfProgress), K(MiscResources.SavingFormat)],
-            MiscResources.SavePdfProgress, string.Format(MiscResources.SavingFormat, "scan.pdf"), 2, 4));
+            MiscResources.SavePdfProgress, string.Format(MiscResources.SavingFormat, "scan.pdf"), 2, 4),
+            variant: true);
         Add("progress-update", () => ShowProgress(
             [K(MiscResources.UpdateProgress), K(MiscResources.Updating), K(MiscResources.SizeProgress)],
             MiscResources.UpdateProgress, MiscResources.Updating, 4_200_000, 52_400_000,
             OperationProgressType.MB));
         Add("progress-scan-acquiring", () => ShowProgress([K(MiscResources.AcquiringData)],
-            "Canon CanoScan LiDE 400", MiscResources.AcquiringData, allowBackground: false));
+            "Canon CanoScan LiDE 400", MiscResources.AcquiringData, allowBackground: false), variant: true);
         Add("progress-scan-page", () => ShowProgress([K(MiscResources.ScanProgressPage)],
             "Canon CanoScan LiDE 400", string.Format(MiscResources.ScanProgressPage, 2), allowBackground: false));
     }
@@ -180,7 +185,7 @@ internal class CommonTestScenarios : TestScenarioProvider
             await Ready([K(UiStrings.StopScannerSharing)], DesktopTitle, popupCrop: 20);
         });
 
-        void Shortcuts(string name, bool bottom)
+        void Shortcuts(string name, bool bottom, bool variant = false)
         {
             string[] top =
             [
@@ -206,26 +211,27 @@ internal class CommonTestScenarios : TestScenarioProvider
                         var grid = TestScenarioUi.GetControls(f).OfType<GridView>().First();
                         grid.ScrollToRow(grid.DataStore.Count() - 1);
                     }
-                }));
+                }), variant: variant);
         }
         Shortcuts("keyboard-shortcuts-top", false);
-        Shortcuts("keyboard-shortcuts-bottom", true);
+        Shortcuts("keyboard-shortcuts-bottom", true, variant: true);
     }
 
     private void DefineNotifications()
     {
-        void Notify(string name, string[] strings, Action<INotify> action) => Add("notify-" + name, async () =>
-        {
-            LoadImages();
-            Ctx.Ui(() => action(Get<INotify>()));
-            await Ready(strings, DesktopTitle);
-        });
+        void Notify(string name, string[] strings, Action<INotify> action, bool variant = false) =>
+            Add("notify-" + name, async () =>
+            {
+                LoadImages();
+                Ctx.Ui(() => action(Get<INotify>()));
+                await Ready(strings, DesktopTitle);
+            }, variant: variant);
 
         Notify("pdf-saved", [K(MiscResources.PdfSaved)], n => n.PdfSaved(@"C:\Users\Example\Documents\scan.pdf"));
         Notify("image-saved", [K(MiscResources.ImageSaved)],
-            n => n.ImagesSaved(1, @"C:\Users\Example\Pictures\scan.jpg"));
+            n => n.ImagesSaved(1, @"C:\Users\Example\Pictures\scan.jpg"), variant: true);
         Notify("images-saved", [K(MiscResources.ImagesSaved)],
-            n => n.ImagesSaved(4, @"C:\Users\Example\Pictures\scan_1.jpg"));
+            n => n.ImagesSaved(4, @"C:\Users\Example\Pictures\scan_1.jpg"), variant: true);
         Notify("donate", [K(MiscResources.DonatePrompt)], n => n.DonatePrompt());
         Notify("review", [K(MiscResources.ReviewPrompt), K(MiscResources.LeaveAReview)], n => n.ReviewPrompt());
         Notify("update", [K(MiscResources.UpdateAvailable), K(MiscResources.Install)],
@@ -253,7 +259,7 @@ internal class CommonTestScenarios : TestScenarioProvider
                 setup.FakeUpdateCheckNeverCompletes = true;
             });
         Add("about-no-updates", () => ShowForm<AboutForm>([K(MiscResources.NoUpdates)]),
-            setup => setup.Config(c => c.CheckForUpdates, true));
+            setup => setup.Config(c => c.CheckForUpdates, true), variant: true);
         Add("about-update", () => ShowForm<AboutForm>([K(MiscResources.Install)]),
             setup =>
             {
@@ -274,14 +280,14 @@ internal class CommonTestScenarios : TestScenarioProvider
             f => f.SelectPanel<ToolbarSettingsPanel>(),
             before: _ => OpenDropDown(SettingsResources.DockStyle_Top)));
 
-        void ManualIp(string name, string[] strings, Action<ManualIpForm>? setState = null) =>
+        void ManualIp(string name, string[] strings, Action<ManualIpForm>? setState = null, bool variant = false) =>
             Add(name, () => ShowForm<ManualIpForm>(strings, before: f =>
             {
                 TestScenarioUi.GetControls(f).OfType<TextBox>().First().Text = "192.168.1.25";
                 setState?.Invoke(f);
-            }));
+            }), variant: variant);
         ManualIp("manual-ip-waiting", [K(UiStrings.WaitingToConnect)]);
-        ManualIp("manual-ip-connecting", [K(UiStrings.Connecting)], f => f.SetConnecting());
+        ManualIp("manual-ip-connecting", [K(UiStrings.Connecting)], f => f.SetConnecting(), variant: true);
         ManualIp("manual-ip-timeout", [K(UiStrings.ConnectionTimedOut)], f => f.SetError(UiStrings.ConnectionTimedOut));
 
         Add("ocr-setup", () =>
@@ -375,25 +381,26 @@ internal class CommonTestScenarios : TestScenarioProvider
                 before: _ => OpenDropDown(SettingsResources.AppleImpl_FileTransfer));
         }, _ => TestScenarioFlags.ShowAllDrivers = true);
 
-        void Batch(string name, string status, bool done, [CallerArgumentExpression(nameof(status))] string key = "")
+        void Batch(string name, string status, bool done, bool variant = true,
+            [CallerArgumentExpression(nameof(status))] string key = "")
         {
             Add("batch-" + name, () =>
             {
                 AddProfile();
                 return ShowForm<BatchScanForm>(done ? [key, K(MiscResources.Close)] : [key],
                     f => f.SimulateStatus(status, done));
-            });
+            }, variant: variant);
         }
         Batch("cancelled", MiscResources.BatchStatusCancelled, true);
-        Batch("complete", MiscResources.BatchStatusComplete, true);
+        Batch("complete", MiscResources.BatchStatusComplete, true, variant: false);
         Batch("error", MiscResources.BatchStatusError, true);
         Batch("cancelling", MiscResources.BatchStatusCancelling, false);
         Batch("saving", MiscResources.BatchStatusSaving, false);
-        Batch("scan-page", string.Format(MiscResources.BatchStatusScanPage, 3, 2), false,
-            K(MiscResources.BatchStatusScanPage));
-        Batch("page", string.Format(MiscResources.BatchStatusPage, 3), false, K(MiscResources.BatchStatusPage));
+        Batch("scan-page", string.Format(MiscResources.BatchStatusScanPage, 3, 2), false, variant: false,
+            key: K(MiscResources.BatchStatusScanPage));
+        Batch("page", string.Format(MiscResources.BatchStatusPage, 3), false, key: K(MiscResources.BatchStatusPage));
         Batch("waiting", string.Format(MiscResources.BatchStatusWaitingForScan, 2), false,
-            K(MiscResources.BatchStatusWaitingForScan));
+            key: K(MiscResources.BatchStatusWaitingForScan));
         Add("batch-missing-extension", () =>
         {
             AddProfile();
@@ -407,7 +414,8 @@ internal class CommonTestScenarios : TestScenarioProvider
 
     private void DefineDevices()
     {
-        void ChooseDevice(string name, List<ScanDevice> devices, bool flatpakLink, string[] strings)
+        void ChooseDevice(string name, List<ScanDevice> devices, bool flatpakLink, string[] strings,
+            bool variant = false)
         {
             Add("choose-device-" + name, () => ShowForm<ChooseDeviceForm>(strings,
                     f => f.ScanOptions = new ScanOptions { Driver = PlatformDriver },
@@ -422,7 +430,7 @@ internal class CommonTestScenarios : TestScenarioProvider
                     TestScenarioFlags.ShowAllDrivers = true;
                     TestScenarioFlags.ShowFlatpakLink = flatpakLink;
                     setup.FakeDevices = devices;
-                });
+                }, variant: variant);
         }
         ChooseDevice("list", ExampleDevices, true,
             [
@@ -430,7 +438,7 @@ internal class CommonTestScenarios : TestScenarioProvider
                 K(UiStrings.DevicesFound), K(UiStrings.CantFindScannerFlatpak)
             ]);
         ChooseDevice("single", [new ScanDevice(PlatformDriver, "unknown", SdkResources.UnknownScanner)], false,
-            [K(UiStrings.DeviceFoundSingular), K(SdkResources.UnknownScanner)]);
+            [K(UiStrings.DeviceFoundSingular), K(SdkResources.UnknownScanner)], variant: true);
         ChooseDevice("none", [], false, [K(UiStrings.NoDevicesFound)]);
     }
 
@@ -442,7 +450,7 @@ internal class CommonTestScenarios : TestScenarioProvider
                 K(MiscResources.FileTypePng), K(MiscResources.FileTypeTiff)
             ], FileFilterGroup.Image));
         Add("file-dialog-save-pdf", () => ShowFileDialog([K(MiscResources.FileTypePdf)],
-            FileFilterGroup.Pdf | FileFilterGroup.Image));
+            FileFilterGroup.Pdf | FileFilterGroup.Image), variant: true);
         Add("file-dialog-import", () => ShowFileDialog(
             [K(MiscResources.FileTypeAllFiles), K(MiscResources.FileTypeImageFiles), K(MiscResources.FileTypePdf)],
             FileFilterGroup.AllFiles | FileFilterGroup.Pdf | FileFilterGroup.AllImages | FileFilterGroup.Image,
