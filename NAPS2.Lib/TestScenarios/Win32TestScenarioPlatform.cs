@@ -112,6 +112,11 @@ internal class Win32TestScenarioPlatform(ImageContext imageContext) : ITestScena
         return new Rectangle(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
     }
 
+    public bool IsActive(TestScenarioWindow window) => GetForegroundWindow() == (IntPtr) window.Handle;
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetForegroundWindow();
+
     private static bool IsCloaked(IntPtr hwnd)
     {
         return Win32.DwmGetWindowAttribute(hwnd, DWMWA_CLOAKED, out int cloaked, sizeof(int)) == 0 && cloaked != 0;

@@ -38,6 +38,10 @@ public class GtkTestScenarioPlatform : ITestScenarioPlatform
         return depth;
     }
 
+    public bool IsActive(TestScenarioWindow window) => ((Gtk.Window) window.Handle).IsActive;
+
+    public void OpenDropDown(Eto.Forms.DropDown dropDown) => ((Gtk.ComboBox) dropDown.ControlObject).Popup();
+
     public void Capture(TestScenarioWindow window, string path)
     {
         var gtkWindow = (Gtk.Window) window.Handle;

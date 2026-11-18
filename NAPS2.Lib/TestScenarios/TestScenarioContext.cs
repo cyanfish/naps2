@@ -273,7 +273,23 @@ public class TestScenarioContext
     public async Task<string> Capture(string path, string? window = null, bool waitForOperations = true)
     {
         await WaitIdle(waitForOperations: waitForOperations);
-        return CaptureWindow(FindWindow(window), path);
+        var target = FindWindow(window);
+        await WaitForActiveWindow(target);
+        return CaptureWindow(target, path);
+    }
+
+    private async Task WaitForActiveWindow(TestScenarioWindow target)
+    {
+        if (!Ui(() => _platform.IsActive(target)))
+        {
+            var stopwatch = Stopwatch.StartNew();
+            while (stopwatch.ElapsedMilliseconds < 1000 && !Ui(() => _platform.IsActive(target)))
+            {
+                await Task.Delay(50);
+            }
+            // Give it time to repaint
+            await Task.Delay(200);
+        }
     }
 
     internal void CaptureAll(string prefix)
