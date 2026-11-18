@@ -397,41 +397,18 @@ public class MacEtoPlatform : EtoPlatform
         {
             if (ReferenceEquals(evt.Window, view.Window))
             {
-                var args = ToEtoKeyEventArgs(evt);
-                return handle(args.KeyData) ? null! : evt;
+                return handle(ToShortcutKeys(evt)) ? null! : evt;
             }
             return evt;
         });
         control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
     }
 
-    private static KeyEventArgs ToEtoKeyEventArgs(NSEvent theEvent)
+    private static Keys ToShortcutKeys(NSEvent evt)
     {
-        // Custom impl until fixed: https://github.com/picoe/Eto/issues/3002
-        char keyChar = !string.IsNullOrEmpty(theEvent.Characters) ? theEvent.Characters[0] : '\0';
-        Keys key = KeyMap.Convert(theEvent.CharactersIgnoringModifiers, 0);
-        if (key == Keys.None)
-        {
-            key = KeyMap.MapKey(theEvent.KeyCode, theEvent.ModifierFlags);
-        }
-        KeyEventArgs kpea;
-        Keys modifiers = theEvent.ModifierFlags.ToEto();
-        key |= modifiers;
-
-        KeyEventType keyEventType = theEvent.Type == NSEventType.KeyUp ? KeyEventType.KeyUp : KeyEventType.KeyDown;
-
-        if (key != Keys.None)
-        {
-            if (((modifiers & ~(Keys.Shift | Keys.Alt)) == 0))
-                kpea = new KeyEventArgs(key, keyEventType, keyChar);
-            else
-                kpea = new KeyEventArgs(key, keyEventType);
-        }
-        else
-        {
-            kpea = new KeyEventArgs(key, keyEventType, keyChar);
-        }
-        return kpea;
+        var keys = evt.ToEtoKeyEventArgs().KeyData;
+        // The key labeled "delete" on Mac keyboards is Backspace, which is what users expect to delete items with
+        return (keys & Keys.KeyMask) == Keys.Backspace ? (keys & Keys.ModifierMask) | Keys.Delete : keys;
     }
 
     public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)

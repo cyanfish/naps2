@@ -181,7 +181,7 @@ public class WinFormsEtoPlatform : EtoPlatform
             var size = ToLogical(native.PreferredSize, scale);
             // Work around a WinForms bug where the preferred size of a Slider/WF.TrackBar is based on the primary
             // screen DPI, not the DPI of the screen it's actually on
-            var scaleDelta = (native.FindForm()!.DeviceDpi / 96f) / (Screen.PrimaryScreen.RealDPI / 72f);
+            var scaleDelta = (native.FindForm()!.DeviceDpi / 96f) / (Screen.PrimaryScreen.RealDPI / 96f);
             size *= scaleDelta;
             // We also want to correct for the idea that sliders should be fully scalable in orthogonal directions
             // depending on the orientation
@@ -457,18 +457,6 @@ public class WinFormsEtoPlatform : EtoPlatform
             handler.Control.SetImage(memoryImage.AsBitmap());
         }
         WF.Clipboard.SetDataObject(handler.Control, true);
-    }
-
-    public override byte[] GetData(IDataObject dataObject, string typeName)
-    {
-        var obj = dataObject as Widget;
-        if (obj?.ControlObject is WF.DataObject wfObj)
-        {
-#pragma warning disable WFDEV005
-            return (byte[]?) wfObj.GetData(typeName) ?? [];
-#pragma warning restore WFDEV005
-        }
-        return base.GetData(dataObject, typeName);
     }
 
     public override void ConfigureDropDown(DropDown dropDown, bool scale)

@@ -49,7 +49,12 @@ public class WpfEtoPlatform : EtoPlatform
         // Eto.Wpf reuses an existing System.Windows.Application if there is one, so we create it first to configure
         // the Fluent theme before any windows are created.
         _ = new SW.Application { ShutdownMode = SW.ShutdownMode.OnExplicitShutdown };
-        var application = new Application(Eto.Platforms.Wpf);
+        // Otherwise Eto applies its non-Fluent theme first
+        ApplicationHandler.EnableCustomThemes = false;
+        var platform = new Eto.Wpf.Platform();
+        // Use system message boxes rather than Eto's themed ones
+        platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
+        var application = new Application(platform);
         // Drawables paint their own content (e.g. the preview image), which a right-to-left window would mirror
         Eto.Style.Add<Eto.Wpf.Forms.Controls.DrawableHandler>(null,
             handler => handler.Control.FlowDirection = SW.FlowDirection.LeftToRight);
@@ -84,19 +89,35 @@ public class WpfEtoPlatform : EtoPlatform
     {
         if (SW.Application.Current is { } app)
         {
-            app.ThemeMode = ColorScheme.DarkMode ? SW.ThemeMode.Dark : SW.ThemeMode.Light;
+            Application.Instance.Theme = ColorScheme.DarkMode
+                ? _fluentDarkTheme ??= new(new BaseStylesFluentThemeHandler(SW.ThemeMode.Dark))
+                : _fluentLightTheme ??= new(new BaseStylesFluentThemeHandler(SW.ThemeMode.Light));
             ApplyFluentStylesToEtoControls(app);
             MakeSplittersUnfocusable(app);
             MakeComboBoxItemsHitTestable(app);
         }
     }
 
+    private static Theme? _fluentLightTheme;
+    private static Theme? _fluentDarkTheme;
+
+    /// <summary>
+    /// Sets the application's ThemeMode like Eto's Fluent themes.
+    /// </summary>
+    private class BaseStylesFluentThemeHandler(SW.ThemeMode mode) : FluentThemeHandler(mode)
+    {
+        public override IEnumerable<Uri> GetResourceUris() =>
+        [
+            new($"pack://application:,,,/{typeof(Eto.Wpf.Platform).Assembly.GetName().Name};component/themes/generic.xaml")
+        ];
+    }
+
     /// <summary>
     /// Makes Eto.Wpf controls pick up the Fluent theme. There are two problems:
     /// 1. Fluent provides implicit styles keyed by type (e.g. Button), which WPF only applies to that exact type, while
     ///    Eto.Wpf uses its own subclasses (e.g. EtoButton).
-    /// 2. Eto's themes/generic.xaml (merged into the application resources) has its own implicit styles without BasedOn
-    ///    (e.g. for EtoButton, CheckBox, EtoFormWindow), which replace the Fluent styles entirely.
+    /// 2. Eto's themes/generic.xaml (merged into the application resources) has its own implicit styles for some types
+    ///    (e.g. EtoButton, CheckBox, EtoFormWindow), which replace the Fluent styles for those types.
     /// So for each Eto control type (and each type Eto styles), we add an application-level style based on the Fluent
     /// style of the nearest base type, merged with Eto's own setters/triggers. These are created on first use, as
     /// creating the Fluent styles for every type would take a while.
@@ -108,8 +129,31 @@ public class WpfEtoPlatform : EtoPlatform
         {
             app.Resources.MergedDictionaries.Remove(_fluentEtoStyles);
         }
-        var etoDictionaries = app.Resources.MergedDictionaries.Where(IsEtoDictionary).SelectMany(Flatten).ToList();
-        var themeDictionaries = app.Resources.MergedDictionaries.Where(d => !IsEtoDictionary(d)).Reverse().ToList();
+        var etoDictionaries = new List<SW.ResourceDictionary>();
+        var themeDictionaries = new List<SW.ResourceDictionary>();
+        void Classify(SW.ResourceDictionary dict, bool inEtoDictionary)
+        {
+            bool isEto = inEtoDictionary || dict.Source?.OriginalString.Contains("Eto.Wpf") == true;
+            if (!isEto && dict.Source != null)
+            {
+                themeDictionaries.Add(dict);
+                return;
+            }
+            if (isEto)
+            {
+                etoDictionaries.Add(dict);
+            }
+            foreach (var merged in dict.MergedDictionaries)
+            {
+                Classify(merged, isEto);
+            }
+        }
+        foreach (var dict in app.Resources.MergedDictionaries)
+        {
+            Classify(dict, false);
+        }
+        // Later dictionaries take precedence
+        themeDictionaries.Reverse();
 
         var types = GetEtoControlTypes().Concat(etoDictionaries.SelectMany(d => d.Keys.OfType<Type>())).Distinct();
         _fluentEtoStyles = new LazyStyleDictionary(types,
@@ -162,12 +206,6 @@ public class WpfEtoPlatform : EtoPlatform
         app.Resources.Remove(type);
         app.Resources[type] = new SW.Style(type, app.TryFindResource(type) as SW.Style) { Setters = { setter } };
     }
-
-    private static bool IsEtoDictionary(SW.ResourceDictionary dict) =>
-        dict.Source?.OriginalString.Contains("Eto.Wpf") == true;
-
-    private static IEnumerable<SW.ResourceDictionary> Flatten(SW.ResourceDictionary dict) =>
-        dict.MergedDictionaries.SelectMany(Flatten).Prepend(dict);
 
     private static Task<List<Type>>? _etoControlTypes;
     private static LazyStyleDictionary? _fluentEtoStyles;
