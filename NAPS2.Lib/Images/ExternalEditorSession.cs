@@ -1,3 +1,4 @@
+using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Scan;
 
@@ -10,6 +11,7 @@ public class ExternalEditorSession : IDisposable
     private readonly UiImage _uiImage;
     private readonly FileSystemWatcher _watcher;
     private readonly TimedThrottle _throttle;
+    private volatile bool _disposed;
 
     public ExternalEditorSession(ScanningContext scanningContext, UiImageList imageList, UiImage uiImage)
     {
@@ -60,18 +62,20 @@ public class ExternalEditorSession : IDisposable
         var fallback = new ExpFallback(50, 1000);
         while (true)
         {
+            if (_disposed) return;
             try
             {
                 newMemoryImage = _scanningContext.ImageContext.Load(TempFilePath);
                 break;
             }
-            catch (Exception ex) when (ex is not FileNotFoundException)
+            catch (Exception ex)
             {
                 if (fallback.IsAtMax)
                 {
                     _scanningContext.Logger.LogError(ex, "Error loading externally-edited image");
                     return;
                 }
+                Thread.Sleep(fallback.Value);
                 fallback.Increase();
             }
         }
@@ -95,6 +99,7 @@ public class ExternalEditorSession : IDisposable
 
     public void Dispose()
     {
+        _disposed = true;
         _watcher.Dispose();
         try
         {
