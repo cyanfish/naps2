@@ -127,10 +127,23 @@ public class LayoutController
             Debug.WriteLine("\n(((Starting layout)))");
         }
         _window.SuspendLayout();
-        _content.Materialize(context);
-        _content.DoLayout(context, bounds);
-        RemoveControls();
-        _window.ResumeLayout();
+        try
+        {
+            _content.Materialize(context);
+            _content.DoLayout(context, bounds);
+            RemoveControls();
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error performing layout", ex);
+#if DEBUG
+            throw;
+#endif
+        }
+        finally
+        {
+            _window.ResumeLayout();
+        }
         if (!_isHosted)
         {
             EtoPlatform.Current.SetContainerSize(_window, _layout, size, p);
