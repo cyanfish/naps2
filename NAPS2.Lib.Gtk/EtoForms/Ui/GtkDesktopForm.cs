@@ -104,6 +104,12 @@ public class GtkDesktopForm : DesktopForm
         PlaceToolbars();
     }
 
+    public override void UpdateListView()
+    {
+        // GTK list items are built widgets rather than custom-drawn, so they must be rebuilt to reflect setting changes
+        _listView.RegenerateImages();
+    }
+
     protected override void OnSizeChanged(EventArgs e)
     {
         base.OnSizeChanged(e);
