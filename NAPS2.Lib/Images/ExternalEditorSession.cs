@@ -81,18 +81,26 @@ public class ExternalEditorSession : IDisposable
         }
         using (newMemoryImage)
         {
-            var newImage = _scanningContext.CreateProcessedImage(newMemoryImage);
-            lock (_uiImage)
+            if (_disposed) return;
+            try
             {
-                if (!_uiImage.IsDisposed)
+                var newImage = _scanningContext.CreateProcessedImage(newMemoryImage);
+                lock (_uiImage)
                 {
-                    _uiImage.ReplaceInternalImage(newImage);
-                    _imageList.ClearUndoStack();
+                    if (!_uiImage.IsDisposed)
+                    {
+                        _uiImage.ReplaceInternalImage(newImage);
+                        _imageList.ClearUndoStack();
+                    }
+                    else
+                    {
+                        newImage.Dispose();
+                    }
                 }
-                else
-                {
-                    newImage.Dispose();
-                }
+            }
+            catch (Exception ex)
+            {
+                _scanningContext.Logger.LogError(ex, "Error updating externally-edited image");
             }
         }
     }
