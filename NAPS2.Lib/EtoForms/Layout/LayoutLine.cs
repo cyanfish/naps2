@@ -112,11 +112,11 @@ public abstract class LayoutLine : LayoutContainer
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
-        var childContext = GetChildContext(context, parentBounds, true);
-        if (childContext.ParentVisibility?.IsVisible == false)
+        if (!IsVisibleInContext(context))
         {
             return SizeF.Empty;
         }
+        var childContext = GetChildContext(context, parentBounds, true);
         var size = SizeF.Empty;
         GetInitialCellLengthsAndScaling(context, childContext, parentBounds, out var cellLengths, out var cellScaling);
         UpdateCellLengthsWithPreferredLength(cellLengths, cellScaling);
