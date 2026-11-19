@@ -13,7 +13,7 @@ internal class JobInfo
             LastUpdated = Stopwatch.StartNew(),
             Job = job
         };
-        job.RegisterStatusTransitionCallback(transition =>
+        job.Start(transition =>
         {
             if (transition == StatusTransition.CancelJob)
             {

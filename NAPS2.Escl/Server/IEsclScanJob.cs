@@ -4,7 +4,7 @@ public interface IEsclScanJob : IDisposable
 {
     string ContentType { get; }
     void Cancel();
-    void RegisterStatusTransitionCallback(Action<StatusTransition> callback);
+    void Start(Action<StatusTransition>? statusCallback = null);
     Task<bool> WaitForNextDocument(CancellationToken cancelToken);
     Task WriteDocumentTo(Stream stream);
     Task WriteProgressTo(Stream stream);

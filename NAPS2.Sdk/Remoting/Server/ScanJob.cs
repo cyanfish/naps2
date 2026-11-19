@@ -15,7 +15,8 @@ internal class ScanJob : IEsclScanJob
 
     private readonly CancellationTokenSource _cts = new();
     private readonly TaskCompletionSource<bool> _completedTcs = new();
-    private readonly IAsyncEnumerator<ProcessedImage> _enumerable;
+    private readonly ScanOptions _options;
+    private IAsyncEnumerator<ProcessedImage>? _enumerable;
     private readonly List<ProcessedImage> _allImages = [];
     private readonly List<ProcessedImage> _pdfImages = [];
     private readonly Dictionary<int, double> _lastProgressByPageNumber = new();
@@ -52,7 +53,7 @@ internal class ScanJob : IEsclScanJob
             ContentTypes.PNG or ContentTypes.PDF => requestedFormat,
             _ => ContentTypes.JPEG
         };
-        var options = new ScanOptions
+        _options = new ScanOptions
         {
             Device = device,
             Dpi = Math.Max(settings.XResolution, settings.YResolution),
@@ -75,17 +76,6 @@ internal class ScanJob : IEsclScanJob
             Quality = settings.CompressionFactor ?? ScanOptions.DEFAULT_QUALITY,
             MaxQuality = ContentType == ContentTypes.PNG
         };
-
-        try
-        {
-            _enumerable = controller.Scan(options, _cts.Token).GetAsyncEnumerator();
-        }
-        catch (Exception)
-        {
-            _statusCallback?.Invoke(StatusTransition.AbortJob);
-            _statusCallback?.Invoke(StatusTransition.ScanComplete);
-            throw;
-        }
     }
 
     private HorizontalAlign SnapToAlignment(int x, int width, int maxWidth)
@@ -108,13 +98,24 @@ internal class ScanJob : IEsclScanJob
         _statusCallback?.Invoke(StatusTransition.CancelJob);
     }
 
-    public void RegisterStatusTransitionCallback(Action<StatusTransition> callback)
+    public void Start(Action<StatusTransition>? statusCallback = null)
     {
-        _statusCallback = callback;
+        _statusCallback = statusCallback;
+        try
+        {
+            _enumerable = _controller.Scan(_options, _cts.Token).GetAsyncEnumerator();
+        }
+        catch (Exception)
+        {
+            _statusCallback?.Invoke(StatusTransition.AbortJob);
+            _statusCallback?.Invoke(StatusTransition.ScanComplete);
+            throw;
+        }
     }
 
     public async Task<bool> WaitForNextDocument(CancellationToken cancelToken)
     {
+        var enumerable = _enumerable ?? throw new InvalidOperationException("The job hasn't been started");
         Task<bool> nextDocumentTask;
         lock (this)
         {
@@ -123,19 +124,19 @@ internal class ScanJob : IEsclScanJob
                 if (ContentType == ContentTypes.PDF)
                 {
                     // For PDFs we merge all the pages into a single PDF document, so we need to wait for the full scan here
-                    if (!await _enumerable.MoveNextAsync())
+                    if (!await enumerable.MoveNextAsync())
                     {
                         return false;
                     }
                     do
                     {
                         _currentPage++;
-                        _pdfImages.Add(_enumerable.Current);
-                    } while (await _enumerable.MoveNextAsync());
+                        _pdfImages.Add(enumerable.Current);
+                    } while (await enumerable.MoveNextAsync());
                     return true;
                 }
 
-                if (await _enumerable.MoveNextAsync())
+                if (await enumerable.MoveNextAsync())
                 {
                     _currentPage++;
                     return true;
@@ -158,17 +159,18 @@ internal class ScanJob : IEsclScanJob
 
     public async Task WriteDocumentTo(Stream stream)
     {
+        var enumerable = _enumerable ?? throw new InvalidOperationException("The job hasn't been started");
         if (ContentType == ContentTypes.JPEG)
         {
-            _enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
+            enumerable.Current.Save(stream, ImageFileFormat.Jpeg);
             stream.Dispose();
-            _enumerable.Current.Dispose();
+            enumerable.Current.Dispose();
         }
         if (ContentType == ContentTypes.PNG)
         {
-            _enumerable.Current.Save(stream, ImageFileFormat.Png);
+            enumerable.Current.Save(stream, ImageFileFormat.Png);
             stream.Dispose();
-            _enumerable.Current.Dispose();
+            enumerable.Current.Dispose();
         }
         if (ContentType == ContentTypes.PDF)
         {
