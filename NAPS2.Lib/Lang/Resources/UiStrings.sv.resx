@@ -28,10 +28,10 @@
     <value>OK</value>
   </data>
   <data name="Retry" xml:space="preserve">
-    <value>Retry</value>
+    <value>Försök igen</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donerar</value>
+    <value>Donera</value>
   </data>
   <data name="ProfilesFormTitle" xml:space="preserve">
     <value>Profiler</value>
@@ -163,7 +163,7 @@
     <value>Flytta ner</value>
   </data>
   <data name="MoveUpDown" xml:space="preserve">
-    <value>Move Up/Down</value>
+    <value>Flytta upp/ner</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Sortera om</value>
@@ -202,7 +202,7 @@
     <value>Inställningar</value>
   </data>
   <data name="GeneralSettings" xml:space="preserve">
-    <value>General Settings</value>
+    <value>Allmänna inställningar</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Gränssnitt</value>
@@ -430,7 +430,7 @@
     <value>Återgå</value>
   </data>
   <data name="AutoCrop" xml:space="preserve">
-    <value>Auto-Crop</value>
+    <value>Beskär automatiskt</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Tillämpa på {0} markerade bilder</value>
@@ -458,6 +458,9 @@
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Enkelsidiga sidfiler</value>
+  </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Kryptera PDF</value>
@@ -682,7 +685,7 @@
     <value>Räta upp skannade sidor</value>
   </data>
   <data name="AutoCropScannedPages" xml:space="preserve">
-    <value>Auto-crop scanned pages</value>
+    <value>Beskär skannade sidor automatiskt</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Tillämpa ljus/kontrast efter skanning</value>
@@ -709,7 +712,7 @@
     <value>TWAIN-implementering:</value>
   </data>
   <data name="AppleImplLabel" xml:space="preserve">
-    <value>Apple Driver Implementation:</value>
+    <value>Implementering av Apple-drivrutin:</value>
   </data>
   <data name="BatchScanFormTitle" xml:space="preserve">
     <value>Mängdskanning</value>
@@ -820,16 +823,16 @@
     <value>Anslut</value>
   </data>
   <data name="WaitingToConnect" xml:space="preserve">
-    <value>Waiting to connect.</value>
+    <value>Väntar på att ansluta.</value>
   </data>
   <data name="Connecting" xml:space="preserve">
-    <value>Connecting...</value>
+    <value>Ansluter...</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>Anslutningsfel.</value>
   </data>
   <data name="ConnectionTimedOut" xml:space="preserve">
-    <value>Connection timed out.</value>
+    <value>Anslutningen tog för lång tid.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Fråga alltid</value>
@@ -961,78 +964,78 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Shift</value>
   </data>
   <data name="Compress" xml:space="preserve">
-    <value>Compress</value>
+    <value>Komprimera</value>
   </data>
   <data name="ResolutionDpiLabel" xml:space="preserve">
-    <value>Resolution (dpi):</value>
+    <value>Upplösning (DPI):</value>
   </data>
   <data name="DimensionsLabel" xml:space="preserve">
-    <value>Dimensions:</value>
+    <value>Mått:</value>
   </data>
   <data name="PixelDimensionsLabel" xml:space="preserve">
-    <value>Pixel dimensions:</value>
+    <value>Pixelmått:</value>
   </data>
   <data name="UseJpegCompression" xml:space="preserve">
-    <value>Use JPEG compression</value>
+    <value>Använd JPEG-komprimering</value>
   </data>
   <data name="JpegQualityLabel" xml:space="preserve">
-    <value>JPEG quality:</value>
+    <value>JPEG-kvalitet:</value>
   </data>
   <data name="MissingFileExtension" xml:space="preserve">
-    <value>Missing file extension (e.g. ".pdf")</value>
+    <value>Filnamnsändelse saknas (t.ex. ".pdf")</value>
   </data>
   <data name="AlignLeft" xml:space="preserve">
-    <value>Align Left</value>
+    <value>Vänsterjustera</value>
   </data>
   <data name="AlignCenter" xml:space="preserve">
-    <value>Align Center</value>
+    <value>Centrera</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
-    <value>Align Right</value>
+    <value>Högerjustera</value>
   </data>
   <data name="AlignTop" xml:space="preserve">
-    <value>Align Top</value>
+    <value>Toppjustera</value>
   </data>
   <data name="AlignMiddle" xml:space="preserve">
-    <value>Align Middle</value>
+    <value>Mittenjustera</value>
   </data>
   <data name="AlignBottom" xml:space="preserve">
-    <value>Align Bottom</value>
+    <value>Bottenjustera</value>
   </data>
   <data name="Swap" xml:space="preserve">
-    <value>Swap</value>
+    <value>Vänd</value>
   </data>
   <data name="SplitVertically" xml:space="preserve">
-    <value>Split Vertically</value>
+    <value>Dela lodrätt</value>
   </data>
   <data name="SplitHorizontally" xml:space="preserve">
-    <value>Split Horizontally</value>
+    <value>Dela vågrätt</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Help</value>
+    <value>Hjälp</value>
   </data>
   <data name="ToggleOrientation" xml:space="preserve">
-    <value>Toggle Orientation</value>
+    <value>Växla orientering</value>
   </data>
   <data name="ToggleView" xml:space="preserve">
-    <value>Toggle View</value>
+    <value>Växla visningsläge</value>
   </data>
   <data name="ToolbarSettings" xml:space="preserve">
-    <value>Toolbar Settings</value>
+    <value>Verktygsfältinställningar</value>
   </data>
   <data name="CustomizeToolbar" xml:space="preserve">
-    <value>Customize Toolbar</value>
+    <value>Anpassa verktygsfält</value>
   </data>
   <data name="Toolbar" xml:space="preserve">
-    <value>Toolbar</value>
+    <value>Verktygsfält</value>
   </data>
   <data name="ProfilesToolbar" xml:space="preserve">
-    <value>Profiles toolbar</value>
+    <value>Verktygsfältet "Profiler"</value>
   </data>
   <data name="PositionLabel" xml:space="preserve">
     <value>Position:</value>
   </data>
   <data name="ButtonsLabel" xml:space="preserve">
-    <value>Buttons:</value>
+    <value>Knappar:</value>
   </data>
 </root>

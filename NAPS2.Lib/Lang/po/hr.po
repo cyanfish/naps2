@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 01:21\n"
 "Last-Translator: \n"
 "Language-Team: Croatian\n"
 "Language: hr\n"
@@ -74,27 +74,27 @@ msgstr "Napredne postavke profila"
 
 #: UiStrings.resx$AlignBottom$Message
 msgid "Align Bottom"
-msgstr ""
+msgstr "Poravnaj dolje"
 
 #: UiStrings.resx$AlignCenter$Message
 msgid "Align Center"
-msgstr ""
+msgstr "Poravnaj po sredini"
 
 #: UiStrings.resx$AlignLeft$Message
 msgid "Align Left"
-msgstr ""
+msgstr "Poravnaj lijevo"
 
 #: UiStrings.resx$AlignMiddle$Message
 msgid "Align Middle"
-msgstr ""
+msgstr "Poravnaj sredinu"
 
 #: UiStrings.resx$AlignRight$Message
 msgid "Align Right"
-msgstr ""
+msgstr "Poravnaj desno"
 
 #: UiStrings.resx$AlignTop$Message
 msgid "Align Top"
-msgstr ""
+msgstr "Poravnaj gore"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -131,6 +131,10 @@ msgstr "Dopusti ispunjavanje obrazaca"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Dozvoli ispis u punoj kvaliteti"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -359,7 +363,7 @@ msgstr "Prazne stranice"
 
 #: SettingsResources.resx$DockStyle_Bottom$Message
 msgid "Bottom"
-msgstr ""
+msgstr "Dno"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -371,7 +375,7 @@ msgstr "Svjetlina:"
 
 #: UiStrings.resx$ButtonsLabel$Message
 msgid "Buttons:"
-msgstr ""
+msgstr "Dugmad:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -469,7 +473,7 @@ msgstr "Poveži"
 
 #: UiStrings.resx$Connecting$Message
 msgid "Connecting..."
-msgstr ""
+msgstr "Povezivanje..."
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
@@ -477,7 +481,7 @@ msgstr "Greška kod povezivanja."
 
 #: UiStrings.resx$ConnectionTimedOut$Message
 msgid "Connection timed out."
-msgstr ""
+msgstr "Isteklo je vrijeme za povezivanje."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -542,7 +546,7 @@ msgstr "Prilagođeno..."
 
 #: UiStrings.resx$CustomizeToolbar$Message
 msgid "Customize Toolbar"
-msgstr ""
+msgstr "Prilagodite alatnu traku"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -761,7 +765,7 @@ msgstr "Za visoku JPEG kvalitetu (80+), za najbolje rezultate potrebno je poveć
 
 #: UiStrings.resx$GeneralSettings$Message
 msgid "General Settings"
-msgstr ""
+msgstr "Opće postavke"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -781,7 +785,7 @@ msgstr "Sivi tonovi"
 
 #: UiStrings.resx$Help$Message
 msgid "Help"
-msgstr ""
+msgstr "Pomoć"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -999,7 +1003,7 @@ msgstr "Pomakni gore"
 
 #: UiStrings.resx$MoveUpDown$Message
 msgid "Move Up/Down"
-msgstr ""
+msgstr "Pomakni dolje/gore"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1249,7 +1253,7 @@ msgstr "Priključak"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr ""
+msgstr "Pozicija:"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1296,7 +1300,7 @@ msgstr "Profili"
 
 #: UiStrings.resx$ProfilesToolbar$Message
 msgid "Profiles toolbar"
-msgstr ""
+msgstr "Alatna traka profila"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1652,11 +1656,11 @@ msgstr "Podijeli"
 
 #: UiStrings.resx$SplitHorizontally$Message
 msgid "Split Horizontally"
-msgstr ""
+msgstr "Podijeli vodoravno"
 
 #: UiStrings.resx$SplitVertically$Message
 msgid "Split Vertically"
-msgstr ""
+msgstr "Podijeli okomito"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1676,7 +1680,7 @@ msgstr "Predmet:"
 
 #: UiStrings.resx$Swap$Message
 msgid "Swap"
-msgstr ""
+msgstr "Zamijeni"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1803,19 +1807,19 @@ msgstr "Za skeniranje obje strane višestraničnog dokumenta pomoću skenera s u
 
 #: UiStrings.resx$ToggleOrientation$Message
 msgid "Toggle Orientation"
-msgstr ""
+msgstr "Promijeni orijentaciju"
 
 #: UiStrings.resx$ToggleView$Message
 msgid "Toggle View"
-msgstr ""
+msgstr "Promijeni prikaz"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
-msgstr ""
+msgstr "Alatna traka"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr ""
+msgstr "Postavke alatne trake"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1823,7 +1827,7 @@ msgstr "Alati"
 
 #: SettingsResources.resx$DockStyle_Top$Message
 msgid "Top"
-msgstr ""
+msgstr "Vrh"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1920,7 +1924,7 @@ msgstr "Čekam na skeniranje {0}..."
 
 #: UiStrings.resx$WaitingToConnect$Message
 msgid "Waiting to connect."
-msgstr ""
+msgstr "Čekanje na povezivanje."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"

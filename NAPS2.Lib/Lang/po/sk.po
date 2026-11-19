@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:53\n"
+"PO-Revision-Date: 2026-11-19 01:21\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -74,27 +74,27 @@ msgstr "Rozšírené nastavenia profilu"
 
 #: UiStrings.resx$AlignBottom$Message
 msgid "Align Bottom"
-msgstr ""
+msgstr "Zarovnať dole"
 
 #: UiStrings.resx$AlignCenter$Message
 msgid "Align Center"
-msgstr ""
+msgstr "Zarovnať v strede"
 
 #: UiStrings.resx$AlignLeft$Message
 msgid "Align Left"
-msgstr ""
+msgstr "Zarovnať vľavo"
 
 #: UiStrings.resx$AlignMiddle$Message
 msgid "Align Middle"
-msgstr ""
+msgstr "Zarovnať v strede"
 
 #: UiStrings.resx$AlignRight$Message
 msgid "Align Right"
-msgstr ""
+msgstr "Zarovnať v pravo"
 
 #: UiStrings.resx$AlignTop$Message
 msgid "Align Top"
-msgstr ""
+msgstr "Zarovnať hore"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -131,6 +131,10 @@ msgstr "Povoliť vyplňovanie formulárov"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Povoliť tlač v plnej kvalite"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -761,7 +765,7 @@ msgstr "Pre najlepšie výsledky vysokej kvality obrázkov JPEG (80+), zvýšte 
 
 #: UiStrings.resx$GeneralSettings$Message
 msgid "General Settings"
-msgstr ""
+msgstr "Všeobecné nastavenia"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -781,7 +785,7 @@ msgstr "Odtiene sivej"
 
 #: UiStrings.resx$Help$Message
 msgid "Help"
-msgstr ""
+msgstr "Pomoc"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -1640,11 +1644,11 @@ msgstr "Rozdeliť"
 
 #: UiStrings.resx$SplitHorizontally$Message
 msgid "Split Horizontally"
-msgstr ""
+msgstr "Rozdeliť horizontálne"
 
 #: UiStrings.resx$SplitVertically$Message
 msgid "Split Vertically"
-msgstr ""
+msgstr "Rozdeliť vertikálne"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1664,7 +1668,7 @@ msgstr "Predmet:"
 
 #: UiStrings.resx$Swap$Message
 msgid "Swap"
-msgstr ""
+msgstr "Vymeniť"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1785,11 +1789,11 @@ msgstr ""
 
 #: UiStrings.resx$ToggleOrientation$Message
 msgid "Toggle Orientation"
-msgstr ""
+msgstr "Zmeniť orientáciu"
 
 #: UiStrings.resx$ToggleView$Message
 msgid "Toggle View"
-msgstr ""
+msgstr "Zmeniť zobrazenie"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"

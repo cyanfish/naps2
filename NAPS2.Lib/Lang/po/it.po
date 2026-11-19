@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 01:21\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -131,6 +131,10 @@ msgstr "Consenti compilazione modulo"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Consenti stampa in alta qualità"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -360,7 +364,7 @@ msgstr "Pagine vuote"
 
 #: SettingsResources.resx$DockStyle_Bottom$Message
 msgid "Bottom"
-msgstr ""
+msgstr "In basso"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -372,7 +376,7 @@ msgstr "Luminosità:"
 
 #: UiStrings.resx$ButtonsLabel$Message
 msgid "Buttons:"
-msgstr ""
+msgstr "Pulsanti:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -471,7 +475,7 @@ msgstr "Connetti"
 
 #: UiStrings.resx$Connecting$Message
 msgid "Connecting..."
-msgstr ""
+msgstr "Connessione..."
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
@@ -479,7 +483,7 @@ msgstr "Errore connessione."
 
 #: UiStrings.resx$ConnectionTimedOut$Message
 msgid "Connection timed out."
-msgstr ""
+msgstr "Timoeut connessione."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -544,7 +548,7 @@ msgstr "Personalizzata..."
 
 #: UiStrings.resx$CustomizeToolbar$Message
 msgid "Customize Toolbar"
-msgstr ""
+msgstr "Personalizza barra strumenti"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -1001,7 +1005,7 @@ msgstr "Sposta su"
 
 #: UiStrings.resx$MoveUpDown$Message
 msgid "Move Up/Down"
-msgstr ""
+msgstr "Sposta su/giù"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1251,7 +1255,7 @@ msgstr "Porta"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr ""
+msgstr "Posizione:"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1298,7 +1302,7 @@ msgstr "Profili"
 
 #: UiStrings.resx$ProfilesToolbar$Message
 msgid "Profiles toolbar"
-msgstr ""
+msgstr "Barra strumenti profili"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1816,11 +1820,11 @@ msgstr "Abilita/disabilita vista"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
-msgstr ""
+msgstr "Barra strumenti"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr ""
+msgstr "Impostazioni barra strumenti"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1828,7 +1832,7 @@ msgstr "Strumenti"
 
 #: SettingsResources.resx$DockStyle_Top$Message
 msgid "Top"
-msgstr ""
+msgstr "In alto"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1925,7 +1929,7 @@ msgstr "In attesa per la scansione {0}..."
 
 #: UiStrings.resx$WaitingToConnect$Message
 msgid "Waiting to connect."
-msgstr ""
+msgstr "In attesa di connessione."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"

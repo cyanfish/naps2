@@ -126,6 +126,10 @@ msgstr ""
 msgid "Allow Full Quality Printing"
 msgstr ""
 
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
+
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
 msgstr ""

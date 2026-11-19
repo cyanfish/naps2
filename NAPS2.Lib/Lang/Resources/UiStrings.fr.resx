@@ -459,6 +459,9 @@
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Fichiers à page unique</value>
   </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
+  </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Chiffrer le PDF</value>
   </data>
@@ -949,7 +952,7 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Aperçu</value>
   </data>
   <data name="PagesReordered" xml:space="preserve">
-    <value>Page réorganisées.</value>
+    <value>Pages réordonnées.</value>
   </data>
   <data name="ControlKey" xml:space="preserve">
     <value>Ctrl</value>

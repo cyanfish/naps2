@@ -148,7 +148,7 @@
     <value>Вибраний сканер не підтримує автоматичну подачу документа. Якщо ваш сканер все ж має автоматичну подачу документа, спробуйте вибрати інший драйвер.</value>
   </data>
   <data name="NoPagesInFeeder" xml:space="preserve">
-    <value>У подавачі немає сторінок.</value>
+    <value>У пристрої подачі немає аркушів.</value>
   </data>
   <data name="ErrorSaving" xml:space="preserve">
     <value>Під час спроби зберегти файл сталася помилка.</value>

@@ -202,7 +202,7 @@
     <value>Nastavenia</value>
   </data>
   <data name="GeneralSettings" xml:space="preserve">
-    <value>General Settings</value>
+    <value>Všeobecné nastavenia</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Rozhranie</value>
@@ -458,6 +458,9 @@
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Jednostránkové súbory</value>
+  </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Zašifrovať PDF</value>
@@ -982,40 +985,40 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Missing file extension (e.g. ".pdf")</value>
   </data>
   <data name="AlignLeft" xml:space="preserve">
-    <value>Align Left</value>
+    <value>Zarovnať vľavo</value>
   </data>
   <data name="AlignCenter" xml:space="preserve">
-    <value>Align Center</value>
+    <value>Zarovnať v strede</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
-    <value>Align Right</value>
+    <value>Zarovnať v pravo</value>
   </data>
   <data name="AlignTop" xml:space="preserve">
-    <value>Align Top</value>
+    <value>Zarovnať hore</value>
   </data>
   <data name="AlignMiddle" xml:space="preserve">
-    <value>Align Middle</value>
+    <value>Zarovnať v strede</value>
   </data>
   <data name="AlignBottom" xml:space="preserve">
-    <value>Align Bottom</value>
+    <value>Zarovnať dole</value>
   </data>
   <data name="Swap" xml:space="preserve">
-    <value>Swap</value>
+    <value>Vymeniť</value>
   </data>
   <data name="SplitVertically" xml:space="preserve">
-    <value>Split Vertically</value>
+    <value>Rozdeliť vertikálne</value>
   </data>
   <data name="SplitHorizontally" xml:space="preserve">
-    <value>Split Horizontally</value>
+    <value>Rozdeliť horizontálne</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Help</value>
+    <value>Pomoc</value>
   </data>
   <data name="ToggleOrientation" xml:space="preserve">
-    <value>Toggle Orientation</value>
+    <value>Zmeniť orientáciu</value>
   </data>
   <data name="ToggleView" xml:space="preserve">
-    <value>Toggle View</value>
+    <value>Zmeniť zobrazenie</value>
   </data>
   <data name="ToolbarSettings" xml:space="preserve">
     <value>Toolbar Settings</value>

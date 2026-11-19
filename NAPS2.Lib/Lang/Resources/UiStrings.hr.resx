@@ -163,7 +163,7 @@
     <value>Pomakni dolje</value>
   </data>
   <data name="MoveUpDown" xml:space="preserve">
-    <value>Move Up/Down</value>
+    <value>Pomakni dolje/gore</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Prerasporedi</value>
@@ -202,7 +202,7 @@
     <value>Postavke</value>
   </data>
   <data name="GeneralSettings" xml:space="preserve">
-    <value>General Settings</value>
+    <value>Opće postavke</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Sučelje</value>
@@ -458,6 +458,9 @@
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Datoteke s jednom stranicom</value>
+  </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Šifriraj PDF</value>
@@ -820,16 +823,16 @@
     <value>Poveži</value>
   </data>
   <data name="WaitingToConnect" xml:space="preserve">
-    <value>Waiting to connect.</value>
+    <value>Čekanje na povezivanje.</value>
   </data>
   <data name="Connecting" xml:space="preserve">
-    <value>Connecting...</value>
+    <value>Povezivanje...</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>Greška kod povezivanja.</value>
   </data>
   <data name="ConnectionTimedOut" xml:space="preserve">
-    <value>Connection timed out.</value>
+    <value>Isteklo je vrijeme za povezivanje.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Uvijek pitaj</value>
@@ -982,57 +985,57 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Nedostaje ekstenzija datoteke (npr. ".pdf")</value>
   </data>
   <data name="AlignLeft" xml:space="preserve">
-    <value>Align Left</value>
+    <value>Poravnaj lijevo</value>
   </data>
   <data name="AlignCenter" xml:space="preserve">
-    <value>Align Center</value>
+    <value>Poravnaj po sredini</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
-    <value>Align Right</value>
+    <value>Poravnaj desno</value>
   </data>
   <data name="AlignTop" xml:space="preserve">
-    <value>Align Top</value>
+    <value>Poravnaj gore</value>
   </data>
   <data name="AlignMiddle" xml:space="preserve">
-    <value>Align Middle</value>
+    <value>Poravnaj sredinu</value>
   </data>
   <data name="AlignBottom" xml:space="preserve">
-    <value>Align Bottom</value>
+    <value>Poravnaj dolje</value>
   </data>
   <data name="Swap" xml:space="preserve">
-    <value>Swap</value>
+    <value>Zamijeni</value>
   </data>
   <data name="SplitVertically" xml:space="preserve">
-    <value>Split Vertically</value>
+    <value>Podijeli okomito</value>
   </data>
   <data name="SplitHorizontally" xml:space="preserve">
-    <value>Split Horizontally</value>
+    <value>Podijeli vodoravno</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Help</value>
+    <value>Pomoć</value>
   </data>
   <data name="ToggleOrientation" xml:space="preserve">
-    <value>Toggle Orientation</value>
+    <value>Promijeni orijentaciju</value>
   </data>
   <data name="ToggleView" xml:space="preserve">
-    <value>Toggle View</value>
+    <value>Promijeni prikaz</value>
   </data>
   <data name="ToolbarSettings" xml:space="preserve">
-    <value>Toolbar Settings</value>
+    <value>Postavke alatne trake</value>
   </data>
   <data name="CustomizeToolbar" xml:space="preserve">
-    <value>Customize Toolbar</value>
+    <value>Prilagodite alatnu traku</value>
   </data>
   <data name="Toolbar" xml:space="preserve">
-    <value>Toolbar</value>
+    <value>Alatna traka</value>
   </data>
   <data name="ProfilesToolbar" xml:space="preserve">
-    <value>Profiles toolbar</value>
+    <value>Alatna traka profila</value>
   </data>
   <data name="PositionLabel" xml:space="preserve">
-    <value>Position:</value>
+    <value>Pozicija:</value>
   </data>
   <data name="ButtonsLabel" xml:space="preserve">
-    <value>Buttons:</value>
+    <value>Dugmad:</value>
   </data>
 </root>

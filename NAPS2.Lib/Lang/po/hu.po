@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 01:21\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -74,27 +74,27 @@ msgstr "Haladó profilbeállítások"
 
 #: UiStrings.resx$AlignBottom$Message
 msgid "Align Bottom"
-msgstr ""
+msgstr "Alulra igazítás"
 
 #: UiStrings.resx$AlignCenter$Message
 msgid "Align Center"
-msgstr ""
+msgstr "Középre igazítás"
 
 #: UiStrings.resx$AlignLeft$Message
 msgid "Align Left"
-msgstr ""
+msgstr "Balra igazítás"
 
 #: UiStrings.resx$AlignMiddle$Message
 msgid "Align Middle"
-msgstr ""
+msgstr "Középre igazítás"
 
 #: UiStrings.resx$AlignRight$Message
 msgid "Align Right"
-msgstr ""
+msgstr "Jobbra igazítás"
 
 #: UiStrings.resx$AlignTop$Message
 msgid "Align Top"
-msgstr ""
+msgstr "Felülre igazítás"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -132,13 +132,17 @@ msgstr "Űrlap kitöltésének engedélyezése"
 msgid "Allow Full Quality Printing"
 msgstr "Legjobb minőségű nyomtatás engedélyezése"
 
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
+
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
 msgstr "Nyomtatás engedélyezése"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -159,7 +163,7 @@ msgstr "Mindig kérdezzen rá"
 
 #: UiStrings.resx$AlwaysShowPreview$Message
 msgid "Always show preview"
-msgstr ""
+msgstr "Mindig mutassa az előnézeti képet"
 
 #: SdkResources.resx$OcrError$Message
 msgid "An error occurred running OCR."
@@ -285,11 +289,11 @@ msgstr "Automatikus mentés beállításai"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "Automatikus körülvágás"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "Beolvasott oldalak automatikus körülvágása"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -359,7 +363,7 @@ msgstr "Üres oldalak"
 
 #: SettingsResources.resx$DockStyle_Bottom$Message
 msgid "Bottom"
-msgstr ""
+msgstr "Alulra"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -371,7 +375,7 @@ msgstr "Fényerő:"
 
 #: UiStrings.resx$ButtonsLabel$Message
 msgid "Buttons:"
-msgstr ""
+msgstr "Gombok:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -457,7 +461,7 @@ msgstr "Kompatibilitás"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "Tömörítés"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -469,7 +473,7 @@ msgstr "Csatlakozás"
 
 #: UiStrings.resx$Connecting$Message
 msgid "Connecting..."
-msgstr ""
+msgstr "Csatlakozás..."
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
@@ -477,7 +481,7 @@ msgstr "Csatlakozási hiba."
 
 #: UiStrings.resx$ConnectionTimedOut$Message
 msgid "Connection timed out."
-msgstr ""
+msgstr "A kapcsolat időtúllépés miatt megszakadt."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -513,7 +517,7 @@ msgstr "Levágás oldalméretre"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -542,7 +546,7 @@ msgstr "Egyéni..."
 
 #: UiStrings.resx$CustomizeToolbar$Message
 msgid "Customize Toolbar"
-msgstr ""
+msgstr "Eszköztár testreszabása"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -600,7 +604,7 @@ msgstr "Méretek"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "Méretek:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -761,7 +765,7 @@ msgstr "Magas JPEG minőség (80+) elérése érdekében növelje a képminősé
 
 #: UiStrings.resx$GeneralSettings$Message
 msgid "General Settings"
-msgstr ""
+msgstr "Általános beállítások"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -781,7 +785,7 @@ msgstr "Szürkeárnyalatos"
 
 #: UiStrings.resx$Help$Message
 msgid "Help"
-msgstr ""
+msgstr "Súgó"
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -857,7 +861,7 @@ msgstr "JPEG fájl (*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "JPEG minőség:"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -919,11 +923,11 @@ msgstr "A PDF-ek kereshetővé tétele karakterfelismeréssel"
 #: UiStrings.resx$ManualDuplex$Message
 #: UiStrings.resx$ManualDuplexFormTitle$Message
 msgid "Manual Duplex"
-msgstr ""
+msgstr "Kézi duplex (kétoldalas)"
 
 #: UiStrings.resx$ManualDuplexPreview$Message
 msgid "Manual Duplex (preview)"
-msgstr ""
+msgstr "Kézi duplex (kétoldalas) (előnézet)"
 
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
@@ -949,7 +953,7 @@ msgstr "Perc (00-59)"
 
 #: UiStrings.resx$MissingFileExtension$Message
 msgid "Missing file extension (e.g. \".pdf\")"
-msgstr ""
+msgstr "Hiányzó fájlkiterjesztés (pl.: \".pdf\")"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -988,7 +992,7 @@ msgstr "Le"
 
 #: UiStrings.resx$MoveUpDown$Message
 msgid "Move Up/Down"
-msgstr ""
+msgstr "Mozgatás fel/le"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1209,7 +1213,7 @@ msgstr "Oldalméret:"
 
 #: UiStrings.resx$PagesReordered$Message
 msgid "Pages reordered."
-msgstr ""
+msgstr "Oldalak átrendezve."
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
@@ -1225,7 +1229,7 @@ msgstr "Beillesztés"
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "Méret (pixelben):"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1238,7 +1242,7 @@ msgstr "Port"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr ""
+msgstr "Elhelyezés:"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1285,7 +1289,7 @@ msgstr "Profilok"
 
 #: UiStrings.resx$ProfilesToolbar$Message
 msgid "Profiles toolbar"
-msgstr ""
+msgstr "Profilok eszköztár"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1345,7 +1349,7 @@ msgstr "Kép visszaállítása"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "Felbontás (dpi):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1357,7 +1361,7 @@ msgstr "Alapértelmezések visszaállítása"
 
 #: UiStrings.resx$Retry$Message
 msgid "Retry"
-msgstr ""
+msgstr "Újra"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1373,7 +1377,7 @@ msgstr "Kiválasztott visszafordítása"
 
 #: UiStrings.resx$ReverseBackSides$Message
 msgid "Reverse back sides"
-msgstr ""
+msgstr "Hátoldalak fordított sorrendben"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1596,7 +1600,7 @@ msgstr "Élesítés"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1640,11 +1644,11 @@ msgstr "Felosztás"
 
 #: UiStrings.resx$SplitHorizontally$Message
 msgid "Split Horizontally"
-msgstr ""
+msgstr "Elválasztás vízszintesen"
 
 #: UiStrings.resx$SplitVertically$Message
 msgid "Split Vertically"
-msgstr ""
+msgstr "Elválasztás függőlegesen"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1664,7 +1668,7 @@ msgstr "Tárgy:"
 
 #: UiStrings.resx$Swap$Message
 msgid "Swap"
-msgstr ""
+msgstr "Felcserél"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1785,19 +1789,19 @@ msgstr ""
 
 #: UiStrings.resx$ToggleOrientation$Message
 msgid "Toggle Orientation"
-msgstr ""
+msgstr "Tájolás váltása"
 
 #: UiStrings.resx$ToggleView$Message
 msgid "Toggle View"
-msgstr ""
+msgstr "Nézet váltása"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
-msgstr ""
+msgstr "Eszköztár"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr ""
+msgstr "Eszköztár beállítások"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1805,7 +1809,7 @@ msgstr "Eszközök"
 
 #: SettingsResources.resx$DockStyle_Top$Message
 msgid "Top"
-msgstr ""
+msgstr "Felülre"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1857,7 +1861,7 @@ msgstr "E-mail feltöltése..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "JPEG tömörítés használata"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1902,7 +1906,7 @@ msgstr "Várakozás a beolvasásra {0}..."
 
 #: UiStrings.resx$WaitingToConnect$Message
 msgid "Waiting to connect."
-msgstr ""
+msgstr "Várakozás a csatlakozásra."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
