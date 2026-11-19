@@ -26,6 +26,7 @@ Changes in 8.6.1:
   - Mac: Fixed the main window not reopening after being closed
   - Mac: Fixed the app not being focused when launched
   - Mac: Fixed icon button styles
+  - Linux: Fixed a crash on Fedora 45 and others
   - Linux: Fixed some layout errors
   - Console: Show an error when using OCR components that aren't installed
 
