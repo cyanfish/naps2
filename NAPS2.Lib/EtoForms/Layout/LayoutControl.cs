@@ -74,6 +74,7 @@ public class LayoutControl : LayoutElement
         }
         bounds.Size = UpdateFixedDimensions(context, bounds.Size);
         UpdateVisibility(context);
+        if (!IsVisibleInContext(context)) return;
         UpdateFrame(context, bounds);
     }
 
