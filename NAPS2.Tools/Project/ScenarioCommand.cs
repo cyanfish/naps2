@@ -127,12 +127,7 @@ public class ScenarioCommand : ICommand<ScenarioOptions>
         string exePath;
         if (OperatingSystem.IsWindows())
         {
-            project = app?.ToLowerInvariant() switch
-            {
-                null or "winforms" => "NAPS2.App.WinForms",
-                "wpf" => "NAPS2.App.Wpf",
-                _ => throw new InvalidOperationException($"Unknown app: {app}")
-            };
+            project = ProjectHelper.GetWindowsAppProject(app);
             exePath = Path.Combine(Paths.SolutionRoot, project, "bin", "Debug", "net11.0-windows", $"win-{arch}",
                 "NAPS2.exe");
         }

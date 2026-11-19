@@ -6,6 +6,7 @@ public class PackageCommand : ICommand<PackageOptions>
 {
     public int Run(PackageOptions opts)
     {
+        var appProject = ProjectHelper.GetWindowsAppProject(opts.App);
         foreach (var target in TargetsHelper.EnumeratePackageTargets(new TargetParams
                  {
                      PackageType = opts.PackageType,
@@ -14,20 +15,20 @@ public class PackageCommand : ICommand<PackageOptions>
                      XCompile = opts.XCompile
                  }))
         {
-            PackageInfo GetPackageInfoForConfig() => GetPackageInfo(target.Platform, opts.Name);
+            PackageInfo GetPackageInfoForConfig() => GetPackageInfo(target.Platform, appProject, opts.Name);
             switch (target.Type)
             {
                 case PackageType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig, target.Platform, opts.NoSign);
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig, target.Platform, appProject, opts.NoSign);
                     break;
                 case PackageType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig, opts.NoSign);
+                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig, appProject, opts.NoSign);
                     break;
                 case PackageType.Msix:
-                    MsixPackager.PackageMsix(GetPackageInfoForConfig, opts.NoSign);
+                    MsixPackager.PackageMsix(GetPackageInfoForConfig, appProject, opts.NoSign);
                     break;
                 case PackageType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig, target.Platform, opts.NoSign);
+                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig, target.Platform, appProject, opts.NoSign);
                     break;
                 case PackageType.Deb:
                     DebPackager.PackageDeb(GetPackageInfoForConfig(), opts.NoSign);
@@ -46,7 +47,7 @@ public class PackageCommand : ICommand<PackageOptions>
         return 0;
     }
 
-    private static PackageInfo GetPackageInfo(Platform platform, string? packageName)
+    private static PackageInfo GetPackageInfo(Platform platform, string appProject, string? packageName)
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName(),
             ProjectHelper.GetCurrentVersion(), packageName);
@@ -59,7 +60,7 @@ public class PackageCommand : ICommand<PackageOptions>
 
         string arch = platform == Platform.WinArm64 ? "win-arm64" : "win-x64";
 
-        var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net11.0-windows",
+        var appBuildPath = Path.Combine(Paths.SolutionRoot, appProject, "bin", "Release", "net11.0-windows",
             arch, "publish");
         PopulatePackageInfo(appBuildPath, platform, pkgInfo);
 

@@ -11,6 +11,9 @@ public class PublishOptions : OptionsBase
     [Option('p', "platform", Required = false, HelpText = "all|win|win32|win64|mac|macintel|macarm|linux")]
     public string? Platform { get; set; }
 
+    [Option("app", Required = false, HelpText = "On Windows, the app to test and package: winforms (default) or wpf")]
+    public string? App { get; set; }
+
     [Option("noverify", Required = false, HelpText = "Don't run verification tests")]
     public bool NoVerify { get; set; }
 

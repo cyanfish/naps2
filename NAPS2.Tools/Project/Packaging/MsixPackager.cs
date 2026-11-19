@@ -4,15 +4,15 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class MsixPackager
 {
-    public static void PackageMsix(Func<PackageInfo> pkgInfoFunc, bool noSign)
+    public static void PackageMsix(Func<PackageInfo> pkgInfoFunc, string appProject, bool noSign)
     {
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.WinForms -r win-x64 -c Release");
+        Cli.Run("dotnet", $"clean {appProject} -r win-x64 -c Release");
         Cli.Run("dotnet",
             "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
         Cli.Run("dotnet",
-            "publish NAPS2.App.WinForms -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+            $"publish {appProject} -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
 
@@ -33,7 +33,7 @@ public static class MsixPackager
         var resourcesPriPath = Path.Combine(Paths.SetupObj, "resources.pri");
         var msixConfig = Path.Combine(Paths.SetupWindows, "msix");
         File.Copy(Path.Combine(msixConfig, "appxmanifest.xml"), manifestPath, true);
-        var publishDir = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net11.0-windows", "win-x64",
+        var publishDir = Path.Combine(Paths.SolutionRoot, appProject, "bin", "Release", "net11.0-windows", "win-x64",
             "publish");
         var mappingFilePath = Path.Combine(Paths.SetupObj, "msixmapping.txt");
 

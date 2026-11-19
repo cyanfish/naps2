@@ -22,11 +22,13 @@ public class PublishCommand : ICommand<PublishOptions>
         }
         new TestCommand().Run(new TestOptions
         {
+            App = opts.App,
             NoGui = opts.NoGui
         });
         new PackageCommand().Run(new PackageOptions
         {
             PackageType = opts.PackageType,
+            App = opts.App,
             Platform = opts.Platform,
             XCompile = opts.XCompile
         });

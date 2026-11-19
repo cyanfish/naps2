@@ -5,7 +5,7 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class InnoSetupPackager
 {
-    public static void PackageExe(Func<PackageInfo> pkgInfoFunc, Platform platform, bool noSign)
+    public static void PackageExe(Func<PackageInfo> pkgInfoFunc, Platform platform, string appProject, bool noSign)
     {
         string arch = platform == Platform.WinArm64 ? "arm64" : "x64";
 
@@ -14,12 +14,12 @@ public static class InnoSetupPackager
         {
             Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
         }
-        Cli.Run("dotnet", $"clean NAPS2.App.WinForms -r win-{arch} -c Release");
+        Cli.Run("dotnet", $"clean {appProject} -r win-{arch} -c Release");
         if (platform != Platform.WinArm64)
         {
             Cli.Run("dotnet", "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false");
         }
-        Cli.Run("dotnet", $"publish NAPS2.App.WinForms -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false");
+        Cli.Run("dotnet", $"publish {appProject} -r win-{arch} -c Release /p:DebugType=None /p:DebugSymbols=false");
 
         var pkgInfo = pkgInfoFunc();
         if (!noSign)
