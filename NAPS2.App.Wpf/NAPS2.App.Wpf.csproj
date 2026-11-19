@@ -34,6 +34,11 @@
     <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.5.0" />
 
     <ProjectReference Include="..\NAPS2.Lib.Wpf\NAPS2.Lib.Wpf.csproj" />
+
+    <ProjectReference Include="..\NAPS2.App.Console\NAPS2.App.Console.csproj"
+                      ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true"
+                      SetTargetFramework="TargetFramework=net462" GlobalPropertiesToRemove="RuntimeIdentifier;SelfContained"
+                      OutputItemType="Content" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
