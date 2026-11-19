@@ -1,6 +1,6 @@
 Changes in 9.0b1:
 - Windows: New WPF-based UI
-  - Please give feedback in [this thread]()
+  - Please give feedback in [this thread](https://github.com/cyanfish/naps2/discussions/981)
 - Mac: The minimum supported version is now macOS 14 (Sonoma)
 - Significantly improved startup time
 - Windows: Fewer files in the installation folder (single-file build)
