@@ -497,6 +497,8 @@ public class PdfExporter
         // Set the page measurements so the coordinates are scaled correctly in GetGlyphlessOcrTextToDraw
         page.Width = pdfiumPage.Width;
         page.Height = pdfiumPage.Height;
+        // The OCR result is relative to the page as displayed, which may be rotated or offset from user space
+        var displayToUserSpace = pdfiumPage.DisplayToUserSpaceMatrix;
         foreach (var info in GetGlyphlessOcrTextToDraw(page, ocrResult))
         {
             var textObj = pdfiumDocument.NewText(glyphlessFont, (float) info.FontSize);
@@ -505,7 +507,7 @@ public class PdfExporter
             textObj.SetCharcodes(info.Text.Select(c => (uint) c).ToArray());
             // Pdfium doesn't support setting the horizontal scaling (Tz), but scaling the text matrix is equivalent
             textObj.Matrix = new PdfMatrix((float) info.HorizontalScale, 0, 0, 1, (float) info.X,
-                (float) (page.Height.Point - info.Y));
+                (float) (page.Height.Point - info.Y)).Then(displayToUserSpace);
             pdfiumPage.InsertObject(textObj);
         }
         pdfiumPage.GenerateContent();
