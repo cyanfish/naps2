@@ -148,7 +148,8 @@ public static class PdfAsserts
             expectedImages.Select(data => TestImageContextFactory.Get().Load(data)).ToDisposableList();
         var renderSizes = PdfRenderSize.FromIndividualPageSizes(
             expectedImagesRendered.Select(image => PdfRenderSize.FromDimensions(image.Width, image.Height)));
-        var actualImages = renderer.Render(TestImageContextFactory.Get(), filePath, renderSizes, password).ToList();
+        using var actualImages =
+            renderer.Render(TestImageContextFactory.Get(), filePath, renderSizes, password).ToDisposableList();
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {

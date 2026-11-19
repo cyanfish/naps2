@@ -12,6 +12,8 @@ namespace NAPS2.Sdk.Tests;
 
 public class ContextualTests : IAsyncLifetime
 {
+    private Dictionary<IMemoryImage, string> _fakeOcrImages;
+
     public ContextualTests()
     {
         FolderPath = Path.GetFullPath(Path.Combine("naps2_test_temp", Path.GetRandomFileName()));
@@ -50,12 +52,17 @@ public class ContextualTests : IAsyncLifetime
 
     public ProcessedImage CreateScannedImage()
     {
-        return ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+        using var image = LoadImage(ImageResources.dog);
+        return ScanningContext.CreateProcessedImage(image);
     }
 
     public List<ProcessedImage> CreateScannedImages(params byte[][] images)
     {
-        return images.Select(image => ScanningContext.CreateProcessedImage(LoadImage(image))).ToList();
+        return images.Select(data =>
+        {
+            using var image = LoadImage(data);
+            return ScanningContext.CreateProcessedImage(image);
+        }).ToList();
     }
 
     public void SetUpFileStorage()
@@ -81,6 +88,7 @@ public class ContextualTests : IAsyncLifetime
     public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage = null, string ifNoMatch = null, int delay = 200,
         bool splitWords = false)
     {
+        _fakeOcrImages = ocrTextByImage;
         var ocrMock = Substitute.For<IOcrEngine>();
         ocrMock.ProcessImage(ScanningContext, Arg.Any<string>(), Arg.Any<OcrParams>(), Arg.Any<CancellationToken>())
             .Returns(
@@ -88,7 +96,7 @@ public class ContextualTests : IAsyncLifetime
                 {
                     var path = (string) x[1]!;
                     var ocrParams = (OcrParams) x[2]!;
-                    var ocrImage = ImageContext.Load(path);
+                    using var ocrImage = ImageContext.Load(path);
                     await Task.Delay(delay);
 
                     OcrResult CreateOcrResult(string text) =>
@@ -173,6 +181,16 @@ public class ContextualTests : IAsyncLifetime
     public virtual ValueTask DisposeAsync()
     {
         ScanningContext.Dispose();
+        if (_fakeOcrImages != null)
+        {
+            lock (_fakeOcrImages)
+            {
+                foreach (var image in _fakeOcrImages.Keys)
+                {
+                    image.Dispose();
+                }
+            }
+        }
         try
         {
             Directory.Delete(FolderPath, true);
