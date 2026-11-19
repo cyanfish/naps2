@@ -163,7 +163,7 @@
     <value>Mou avall</value>
   </data>
   <data name="MoveUpDown" xml:space="preserve">
-    <value>Move Up/Down</value>
+    <value>Mou amunt/avall</value>
   </data>
   <data name="Reorder" xml:space="preserve">
     <value>Organitza</value>
@@ -202,7 +202,7 @@
     <value>Configuració</value>
   </data>
   <data name="GeneralSettings" xml:space="preserve">
-    <value>General Settings</value>
+    <value>Opcions generals</value>
   </data>
   <data name="Interface" xml:space="preserve">
     <value>Interfície</value>
@@ -458,6 +458,9 @@
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Un fitxer per cada pàgina</value>
+  </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Xifra el PDF</value>
@@ -820,16 +823,16 @@
     <value>Connecta</value>
   </data>
   <data name="WaitingToConnect" xml:space="preserve">
-    <value>Waiting to connect.</value>
+    <value>En espera d'una connexió.</value>
   </data>
   <data name="Connecting" xml:space="preserve">
-    <value>Connecting...</value>
+    <value>S'està connectant...</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
     <value>Error de connexió.</value>
   </data>
   <data name="ConnectionTimedOut" xml:space="preserve">
-    <value>Connection timed out.</value>
+    <value>S'ha esgotat el temps de connexió.</value>
   </data>
   <data name="AlwaysAsk" xml:space="preserve">
     <value>Demana sempre</value>
@@ -982,57 +985,108 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
     <value>Falta l'extensió del fitxer (p. ex. «.pdf»)</value>
   </data>
   <data name="AlignLeft" xml:space="preserve">
-    <value>Align Left</value>
+    <value>Alineació esquerra</value>
   </data>
   <data name="AlignCenter" xml:space="preserve">
-    <value>Align Center</value>
+    <value>Alineació al centre</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
-    <value>Align Right</value>
+    <value>Alineació dreta</value>
   </data>
   <data name="AlignTop" xml:space="preserve">
-    <value>Align Top</value>
+    <value>Alineació superior</value>
   </data>
   <data name="AlignMiddle" xml:space="preserve">
-    <value>Align Middle</value>
+    <value>Alineació centrada</value>
   </data>
   <data name="AlignBottom" xml:space="preserve">
-    <value>Align Bottom</value>
+    <value>Alineació inferior</value>
   </data>
   <data name="Swap" xml:space="preserve">
-    <value>Swap</value>
+    <value>Inverteix</value>
   </data>
   <data name="SplitVertically" xml:space="preserve">
-    <value>Split Vertically</value>
+    <value>Divideix verticalment</value>
   </data>
   <data name="SplitHorizontally" xml:space="preserve">
-    <value>Split Horizontally</value>
+    <value>Divideix horitzontalment</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Help</value>
+    <value>Ajuda</value>
   </data>
   <data name="ToggleOrientation" xml:space="preserve">
-    <value>Toggle Orientation</value>
+    <value>Canvia l'orientació</value>
   </data>
   <data name="ToggleView" xml:space="preserve">
-    <value>Toggle View</value>
+    <value>Canvia la vista</value>
   </data>
   <data name="ToolbarSettings" xml:space="preserve">
-    <value>Toolbar Settings</value>
+    <value>Opcions de la Barra d'eines</value>
   </data>
   <data name="CustomizeToolbar" xml:space="preserve">
-    <value>Customize Toolbar</value>
+    <value>Personalitza la barra d'eines</value>
   </data>
   <data name="Toolbar" xml:space="preserve">
-    <value>Toolbar</value>
+    <value>Barra d'eines</value>
   </data>
   <data name="ProfilesToolbar" xml:space="preserve">
-    <value>Profiles toolbar</value>
+    <value>Perfils</value>
   </data>
   <data name="PositionLabel" xml:space="preserve">
-    <value>Position:</value>
+    <value>Posició:</value>
   </data>
   <data name="ButtonsLabel" xml:space="preserve">
-    <value>Buttons:</value>
+    <value>Botons:</value>
+  </data>
+  <data name="WindowsKey" xml:space="preserve">
+    <value>Win</value>
+  </data>
+  <data name="EnterKey" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="DeleteKey" xml:space="preserve">
+    <value>Suprimeix</value>
+  </data>
+  <data name="InsertKey" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="EscapeKey" xml:space="preserve">
+    <value>Esc</value>
+  </data>
+  <data name="SpaceKey" xml:space="preserve">
+    <value>Space</value>
+  </data>
+  <data name="TabKey" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="BackspaceKey" xml:space="preserve">
+    <value>Backspace</value>
+  </data>
+  <data name="HomeKey" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="EndKey" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="PageUpKey" xml:space="preserve">
+    <value>Page Up</value>
+  </data>
+  <data name="PageDownKey" xml:space="preserve">
+    <value>Page Down</value>
+  </data>
+  <data name="UpArrowKey" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="DownArrowKey" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="LeftArrowKey" xml:space="preserve">
+    <value>Esquerra</value>
+  </data>
+  <data name="RightArrowKey" xml:space="preserve">
+    <value>Dreta</value>
+  </data>
+  <data name="PauseKey" xml:space="preserve">
+    <value>Pause</value>
   </data>
 </root>

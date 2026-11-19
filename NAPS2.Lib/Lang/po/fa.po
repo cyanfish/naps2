@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:53\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -131,6 +131,10 @@ msgstr "اجازه پرکردن فرم"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "اجازه چاپ با کیفیت کامل"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -318,6 +322,10 @@ msgstr "ب۴ (۲۵۰ در ۳۵۳ م.م)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "ب۵ (۱۷۶ در ۲۵۰ م.م)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -571,6 +579,7 @@ msgstr "صفحات سفید را حذف کردن"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "حذف"
 
@@ -618,6 +627,10 @@ msgstr "کمک مالی"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "انجام شد"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "رمزگذاری PDF"
 msgid "Encryption"
 msgstr "رمزگذاری"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -708,6 +729,10 @@ msgstr "خطا"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
+msgstr ""
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
 msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
@@ -783,6 +808,10 @@ msgstr "بی‌رنگ"
 msgid "Help"
 msgstr ""
 
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
+
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
 msgstr "چیدمان افقی:"
@@ -839,6 +868,10 @@ msgstr "وارد کردن {0}..."
 msgid "Importing..."
 msgstr "در حال وارد کردن..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "نصب {0}"
@@ -893,6 +926,7 @@ msgstr ""
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "چپ"
 
@@ -1203,6 +1237,14 @@ msgstr ""
 msgid "PNG File (*.png)"
 msgstr "پرونده PNG  (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "اندازه صفحه:"
@@ -1222,6 +1264,10 @@ msgstr "گذرواژه"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "چسباندن"
+
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
@@ -1381,6 +1427,7 @@ msgstr "برگرداندن"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "راست"
 
@@ -1634,6 +1681,10 @@ msgstr "تک اسکن"
 msgid "Skip save prompt"
 msgstr "اعلان ذخیره‌سازی را نادیده بگیر"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "تقسیم کردن"
@@ -1673,6 +1724,10 @@ msgstr "پرونده TIFF (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "درایور TWAIN"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1839,6 +1894,10 @@ msgstr "اسکنر ناشناس"
 msgid "Unsaved Changes"
 msgstr "تغییرات ذخیره نشده"
 
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
+
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
 msgstr "پیشرفت بروزرسانی"
@@ -1910,6 +1969,10 @@ msgstr "آستانه سفید"
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
+msgstr ""
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
 msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message

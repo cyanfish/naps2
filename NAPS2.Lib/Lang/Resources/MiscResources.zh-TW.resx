@@ -277,10 +277,10 @@
     <value>The file could not be overwritten because it is currently in use.</value>
   </data>
   <data name="AutoDeskewing" xml:space="preserve">
-    <value>Deskewing...</value>
+    <value>校正中……</value>
   </data>
   <data name="AutoDeskewProgress" xml:space="preserve">
-    <value>Deskew Progress</value>
+    <value>校正進度</value>
   </data>
   <data name="ConfirmCancelBatch" xml:space="preserve">
     <value>Are you sure you want to cancel the batch scan?</value>

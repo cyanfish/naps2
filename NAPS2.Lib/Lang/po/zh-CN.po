@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh\n"
@@ -131,6 +131,10 @@ msgstr "允许填写表单"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "允许完全质量打印"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -319,6 +323,10 @@ msgstr "B4 (250x353 毫米)"
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 毫米)"
 
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
+
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
@@ -359,7 +367,7 @@ msgstr "空白页"
 
 #: SettingsResources.resx$DockStyle_Bottom$Message
 msgid "Bottom"
-msgstr ""
+msgstr "底部"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -371,7 +379,7 @@ msgstr "亮度:"
 
 #: UiStrings.resx$ButtonsLabel$Message
 msgid "Buttons:"
-msgstr ""
+msgstr "按钮："
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -469,7 +477,7 @@ msgstr "连接"
 
 #: UiStrings.resx$Connecting$Message
 msgid "Connecting..."
-msgstr ""
+msgstr "正在连接……"
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
@@ -477,7 +485,7 @@ msgstr "连接出错"
 
 #: UiStrings.resx$ConnectionTimedOut$Message
 msgid "Connection timed out."
-msgstr ""
+msgstr "连接超时。"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -542,7 +550,7 @@ msgstr "自定义..."
 
 #: UiStrings.resx$CustomizeToolbar$Message
 msgid "Customize Toolbar"
-msgstr ""
+msgstr "自定义工具栏"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -571,6 +579,7 @@ msgstr "奇偶页分别排列"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "删除"
 
@@ -618,6 +627,10 @@ msgstr "捐赠"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "完成"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "加密 PDF"
 msgid "Encryption"
 msgstr "加密"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "错误"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "启动应用程序 {0} 出错"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -783,6 +808,10 @@ msgstr "灰阶"
 msgid "Help"
 msgstr "帮助"
 
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
+
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
 msgstr "水平对齐:"
@@ -839,6 +868,10 @@ msgstr "正在导入 {0}..."
 msgid "Importing..."
 msgstr "正在导入..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "安装 {0}"
@@ -893,6 +926,7 @@ msgstr "撰写评论"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "左对齐"
 
@@ -999,7 +1033,7 @@ msgstr "上移"
 
 #: UiStrings.resx$MoveUpDown$Message
 msgid "Move Up/Down"
-msgstr ""
+msgstr "上移/下移"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1214,6 +1248,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "PNG 文件 (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "纸张大小:"
@@ -1234,6 +1276,10 @@ msgstr "密码"
 msgid "Paste"
 msgstr "粘贴"
 
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
+
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
 msgstr "像素尺寸："
@@ -1249,7 +1295,7 @@ msgstr "端口"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr ""
+msgstr "位置："
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1296,7 +1342,7 @@ msgstr "配置文件"
 
 #: UiStrings.resx$ProfilesToolbar$Message
 msgid "Profiles toolbar"
-msgstr ""
+msgstr "配置文件工具栏"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1392,6 +1438,7 @@ msgstr "还原"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "右对齐"
 
@@ -1646,6 +1693,10 @@ msgstr "单次扫描"
 msgid "Skip save prompt"
 msgstr "跳过保存提示"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "拆分"
@@ -1685,6 +1736,10 @@ msgstr "TIFF 文件 (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "TWAIN 驱动"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1812,11 +1867,11 @@ msgstr "切换视图"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
-msgstr ""
+msgstr "工具栏"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr ""
+msgstr "工具栏设置"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1824,7 +1879,7 @@ msgstr "工具"
 
 #: SettingsResources.resx$DockStyle_Top$Message
 msgid "Top"
-msgstr ""
+msgstr "顶部"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1857,6 +1912,10 @@ msgstr "未知扫描仪"
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "未保存的更改"
+
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
@@ -1921,7 +1980,7 @@ msgstr "正在等待扫描 {0}..."
 
 #: UiStrings.resx$WaitingToConnect$Message
 msgid "Waiting to connect."
-msgstr ""
+msgstr "正在等待连接。"
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
@@ -1930,6 +1989,10 @@ msgstr "白色阀值"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Wia 版本："
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

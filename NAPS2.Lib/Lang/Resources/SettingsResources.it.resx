@@ -190,13 +190,13 @@
     <value>Scuro</value>
   </data>
   <data name="DockStyle_Top" xml:space="preserve">
-    <value>Top</value>
+    <value>In alto</value>
   </data>
   <data name="DockStyle_Left" xml:space="preserve">
     <value>Sinistra</value>
   </data>
   <data name="DockStyle_Bottom" xml:space="preserve">
-    <value>Bottom</value>
+    <value>In basso</value>
   </data>
   <data name="DockStyle_Right" xml:space="preserve">
     <value>Destra</value>

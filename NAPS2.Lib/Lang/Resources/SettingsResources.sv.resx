@@ -148,7 +148,7 @@
     <value>Standard</value>
   </data>
   <data name="AppleImpl_FileTransfer" xml:space="preserve">
-    <value>File Transfer</value>
+    <value>Filöverföring</value>
   </data>
   <data name="AppleImpl_MemoryTransfer" xml:space="preserve">
     <value>Minnesöverföring</value>
@@ -190,13 +190,13 @@
     <value>Mörkt</value>
   </data>
   <data name="DockStyle_Top" xml:space="preserve">
-    <value>Top</value>
+    <value>Uppe</value>
   </data>
   <data name="DockStyle_Left" xml:space="preserve">
     <value>Vänster</value>
   </data>
   <data name="DockStyle_Bottom" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Nere</value>
   </data>
   <data name="DockStyle_Right" xml:space="preserve">
     <value>Höger</value>

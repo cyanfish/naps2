@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -131,6 +131,10 @@ msgstr "Erlaube das Ausfüllen von Formularen"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Erlaube Druck in höchster Qualität"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -318,6 +322,10 @@ msgstr "B4 (250x353 mm)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 mm)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -571,6 +579,7 @@ msgstr "Auseinander-Fächern"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "Löschen"
 
@@ -618,6 +627,10 @@ msgstr "Spenden"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "Fertig"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "PDF verschlüsseln"
 msgid "Encryption"
 msgstr "Verschlüsselung"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "Fehler"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "Fehler beim Starten der Anwendung {0}"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -783,6 +808,10 @@ msgstr "Graustufen"
 msgid "Help"
 msgstr ""
 
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
+
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
 msgstr "Horizontale Ausrichtung:"
@@ -839,6 +868,10 @@ msgstr "Importiere {0}..."
 msgid "Importing..."
 msgstr "Import..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "Installiere {0}"
@@ -893,6 +926,7 @@ msgstr "Eine Bewertung hinterlassen"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "Links"
 
@@ -1214,6 +1248,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "PNG Datei (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Seitengröße:"
@@ -1233,6 +1275,10 @@ msgstr "Passwort"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "Einfügen"
+
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
@@ -1392,6 +1438,7 @@ msgstr "Rückgängig"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "Rechts"
 
@@ -1646,6 +1693,10 @@ msgstr "Einzelner Scan"
 msgid "Skip save prompt"
 msgstr "Überspringe Speicherdialog"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "Teilen"
@@ -1685,6 +1736,10 @@ msgstr "TIFF Datei (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "TWAIN Treiber"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1851,6 +1906,10 @@ msgstr "Unbekannter Scanner"
 msgid "Unsaved Changes"
 msgstr "Ungespeicherte Änderungen"
 
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
+
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
 msgstr "Update-Fortschritt"
@@ -1923,6 +1982,10 @@ msgstr "Weiß Schwellwert"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Wia Version:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

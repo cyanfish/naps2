@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -74,27 +74,27 @@ msgstr "Pokročilé nastavení profilu"
 
 #: UiStrings.resx$AlignBottom$Message
 msgid "Align Bottom"
-msgstr ""
+msgstr "Zarovnat dolu"
 
 #: UiStrings.resx$AlignCenter$Message
 msgid "Align Center"
-msgstr ""
+msgstr "Zarovnat na střed"
 
 #: UiStrings.resx$AlignLeft$Message
 msgid "Align Left"
-msgstr ""
+msgstr "Zarovnat vlevo"
 
 #: UiStrings.resx$AlignMiddle$Message
 msgid "Align Middle"
-msgstr ""
+msgstr "Zarovnat do středu"
 
 #: UiStrings.resx$AlignRight$Message
 msgid "Align Right"
-msgstr ""
+msgstr "Zarovnat vpravo"
 
 #: UiStrings.resx$AlignTop$Message
 msgid "Align Top"
-msgstr ""
+msgstr "Zarovnat nahoru"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -132,13 +132,17 @@ msgstr "Povolit vyplňování formuláře"
 msgid "Allow Full Quality Printing"
 msgstr "Povolit tisk v plné kvalitě"
 
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
+
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
 msgstr "Povolit tisk"
 
 #: UiStrings.resx$AltKey$Message
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: UiStrings.resx$AltDeinterleave$Message
 msgid "Alternate Deinterleave"
@@ -212,7 +216,7 @@ msgstr "Ovladač Apple"
 
 #: UiStrings.resx$AppleImplLabel$Message
 msgid "Apple Driver Implementation:"
-msgstr ""
+msgstr "Zavedení Apple ovladače:"
 
 #: SettingsResources.resx$EmailProviderType_AppleMail$Message
 msgid "Apple Mail"
@@ -285,11 +289,11 @@ msgstr "Nastavení automatického uložení"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
-msgstr ""
+msgstr "Automatické oříznutí"
 
 #: UiStrings.resx$AutoCropScannedPages$Message
 msgid "Auto-crop scanned pages"
-msgstr ""
+msgstr "Automaticky oříznout skenované stránky"
 
 #: UiStrings.resx$AutoIncrementing1Digit$Message
 msgid "Auto-incrementing number (1 digits)"
@@ -318,6 +322,10 @@ msgstr "B4 (250 × 353 mm)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176 × 250 mm)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -359,7 +367,7 @@ msgstr "Prázdné stránky"
 
 #: SettingsResources.resx$DockStyle_Bottom$Message
 msgid "Bottom"
-msgstr ""
+msgstr "Dole"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -371,7 +379,7 @@ msgstr "Jas:"
 
 #: UiStrings.resx$ButtonsLabel$Message
 msgid "Buttons:"
-msgstr ""
+msgstr "Tlačítka:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -437,7 +445,7 @@ msgstr "Vyčistit obrázky po skenování"
 
 #: UiStrings.resx$SplitHelp$Message
 msgid "Click the buttons or use the arrow keys to change the split orientation."
-msgstr ""
+msgstr "Kliknutím na tlačítka nebo pomocí šipek změníte orientaci."
 
 #: MiscResources.resx$Close$Message
 msgid "Close"
@@ -457,7 +465,7 @@ msgstr "Kompatibilita"
 
 #: UiStrings.resx$Compress$Message
 msgid "Compress"
-msgstr ""
+msgstr "Komprimovat"
 
 #: UiStrings.resx$CompressionLabel$Message
 msgid "Compression:"
@@ -469,7 +477,7 @@ msgstr "Připojit"
 
 #: UiStrings.resx$Connecting$Message
 msgid "Connecting..."
-msgstr ""
+msgstr "Připojování..."
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
@@ -477,7 +485,7 @@ msgstr "Chyba připojení."
 
 #: UiStrings.resx$ConnectionTimedOut$Message
 msgid "Connection timed out."
-msgstr ""
+msgstr "Časový limit připojení vypršel"
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -513,7 +521,7 @@ msgstr "Oříznout na velikost stránky"
 
 #: UiStrings.resx$ControlKey$Message
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #: MiscResources.resx$CustomPageSizeFormat$Message
 msgid "Custom ({0}x{1} {2})"
@@ -542,7 +550,7 @@ msgstr "Vlastní..."
 
 #: UiStrings.resx$CustomizeToolbar$Message
 msgid "Customize Toolbar"
-msgstr ""
+msgstr "Upravit panel nástrojů"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -571,6 +579,7 @@ msgstr "Prokládání"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "Odstranit"
 
@@ -600,7 +609,7 @@ msgstr "Rozměry"
 
 #: UiStrings.resx$DimensionsLabel$Message
 msgid "Dimensions:"
-msgstr ""
+msgstr "Rozměry:"
 
 #: UiStrings.resx$DisplayNameLabel$Message
 msgid "Display name:"
@@ -618,6 +627,10 @@ msgstr "Darovat"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "Hotovo"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "Zašifrovat PDF"
 msgid "Encryption"
 msgstr "Šifrování"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "Chyba"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "Chyba při spouštění aplikace {0}"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -737,7 +762,7 @@ msgstr "Cesta k souboru:"
 
 #: SettingsResources.resx$AppleImpl_FileTransfer$Message
 msgid "File Transfer"
-msgstr ""
+msgstr "Přenos souborů"
 
 #: UiStrings.resx$FixWhiteBalanceAndRemoveNoise$Message
 msgid "Fix white balance and remove noise"
@@ -761,7 +786,7 @@ msgstr "Pro nejlepší výsledky při vysokých kvalitách JPEG (80+) zvyšte ve
 
 #: UiStrings.resx$GeneralSettings$Message
 msgid "General Settings"
-msgstr ""
+msgstr "Základní nastavení"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -781,6 +806,10 @@ msgstr "Stupně šedi"
 
 #: UiStrings.resx$Help$Message
 msgid "Help"
+msgstr "Nápověda"
+
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
 msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
@@ -839,6 +868,10 @@ msgstr "Importuje se {0}..."
 msgid "Importing..."
 msgstr "Importuje se..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "Instalovat {0}"
@@ -857,7 +890,7 @@ msgstr "Soubor JPEG (*.jpg, *.jpeg)"
 
 #: UiStrings.resx$JpegQualityLabel$Message
 msgid "JPEG quality:"
-msgstr ""
+msgstr "Kvalita JPEG:"
 
 #: MiscResources.resx$FileTypeJp2$Message
 msgid "JPEG2000 File (*.jp2, *.jpx)"
@@ -893,6 +926,7 @@ msgstr "Napsat recenzi"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "Vlevo"
 
@@ -919,11 +953,11 @@ msgstr "Umožnit prohledávání PDF pomocí OCR"
 #: UiStrings.resx$ManualDuplex$Message
 #: UiStrings.resx$ManualDuplexFormTitle$Message
 msgid "Manual Duplex"
-msgstr ""
+msgstr "Manuální Duplex"
 
 #: UiStrings.resx$ManualDuplexPreview$Message
 msgid "Manual Duplex (preview)"
-msgstr ""
+msgstr "Manuální Duplex (náhled)"
 
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
@@ -949,7 +983,7 @@ msgstr "Minuta (00-59)"
 
 #: UiStrings.resx$MissingFileExtension$Message
 msgid "Missing file extension (e.g. \".pdf\")"
-msgstr ""
+msgstr "Chybí přípona souboru (např. \".pdf\")"
 
 #: UiStrings.resx$Month2Digit$Message
 msgid "Month (01-12)"
@@ -968,7 +1002,14 @@ msgid "Mouse:\n"
 "Hold \"{0}\" to move the top-left handle instead.\n"
 "Hold \"{1}\" to move the whole selection at once.\n"
 "Hold \"{2}\" to move faster."
-msgstr ""
+msgstr "Myš:\n"
+"Kliknutím a tažením posouvejte úchyty výřezu.\n"
+"Nebo kliknutím a tažením vyznačte celou oblast.\n\n"
+"Klávesnice:\n"
+"Šipkami posouvejte pravý dolní úchyt výřezu.\n"
+"Podržením klávesy „{0}“ posouvejte levý horní úchyt.\n"
+"Podržením klávesy „{1}“ posouvejte celý výběr najednou.\n"
+"Podržením klávesy „{2}“ zrychlete posouvání."
 
 #: UiStrings.resx$CombineHelp$Message
 msgid "Mouse:\n"
@@ -976,7 +1017,11 @@ msgid "Mouse:\n"
 "Keyboard:\n"
 "Arrow keys change the combine orientation.\n"
 "Hold \"Shift\" to change the alignment instead (if the images aren't the same size)."
-msgstr ""
+msgstr "Myš:\n"
+"Kliknutím na tlačítka změňte směr orientace a zarovnání.\n\n"
+"Klávesnice:\n"
+"Šipkami měňte směr orientace.\n"
+"Podržením klávesy „Shift“ měňte zarovnání (pokud obrázky nemají stejnou velikost)."
 
 #: UiStrings.resx$MoveDown$Message
 msgid "Move Down"
@@ -988,7 +1033,7 @@ msgstr "Posunout výš"
 
 #: UiStrings.resx$MoveUpDown$Message
 msgid "Move Up/Down"
-msgstr ""
+msgstr "Posunout nahoru/dolů"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1203,13 +1248,21 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "Soubor PNG (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Velikost stránky:"
 
 #: UiStrings.resx$PagesReordered$Message
 msgid "Pages reordered."
-msgstr ""
+msgstr "Řazení stránek"
 
 #: UiStrings.resx$PaperSourceLabel$Message
 msgid "Paper source:"
@@ -1223,9 +1276,13 @@ msgstr "Heslo"
 msgid "Paste"
 msgstr "Vložit"
 
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
+
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
-msgstr ""
+msgstr "Rozměry v pixelech:"
 
 #: UiStrings.resx$Placeholders$Message
 #: UiStrings.resx$PlaceholdersFormTitle$Message
@@ -1238,7 +1295,7 @@ msgstr "Port"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr ""
+msgstr "Pozice:"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1285,7 +1342,7 @@ msgstr "Profily"
 
 #: UiStrings.resx$ProfilesToolbar$Message
 msgid "Profiles toolbar"
-msgstr ""
+msgstr "Panel profilů"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1345,7 +1402,7 @@ msgstr "Resetovat obrázek"
 
 #: UiStrings.resx$ResolutionDpiLabel$Message
 msgid "Resolution (dpi):"
-msgstr ""
+msgstr "Rozlišení (dpi):"
 
 #: UiStrings.resx$ResolutionLabel$Message
 msgid "Resolution:"
@@ -1357,7 +1414,7 @@ msgstr "Obnovit výchozí"
 
 #: UiStrings.resx$Retry$Message
 msgid "Retry"
-msgstr ""
+msgstr "Zkusit znovu"
 
 #: UiStrings.resx$Reverse$Message
 msgid "Reverse"
@@ -1373,7 +1430,7 @@ msgstr "Obrátit vybrané"
 
 #: UiStrings.resx$ReverseBackSides$Message
 msgid "Reverse back sides"
-msgstr ""
+msgstr "Obrácené pořadí"
 
 #: UiStrings.resx$Revert$Message
 msgid "Revert"
@@ -1381,6 +1438,7 @@ msgstr "Vrátit"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "Vpravo"
 
@@ -1555,7 +1613,8 @@ msgstr "Vyberte jeden nebo více jazyků:"
 #: UiStrings.resx$CustomRotationHelp$Message
 msgid "Select the angle to rotate.\n"
 "Or click and drag to draw a line aligned with the page (vertically or horizontally)."
-msgstr ""
+msgstr "Vyberte úhel otočení.\n"
+"Nebo kliknutím a tažením nakreslete čáru ve směru stránky (svisle nebo vodorovně)."
 
 #: MiscResources.resx$SelectedCount$Message
 msgid "Selected ({0})"
@@ -1596,7 +1655,7 @@ msgstr "Zaostřit"
 
 #: UiStrings.resx$ShiftKey$Message
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #: UiStrings.resx$Shortcut$Message
 msgid "Shortcut"
@@ -1634,17 +1693,21 @@ msgstr "Jeden sken"
 msgid "Skip save prompt"
 msgstr "Přeskočit dotaz na uložení"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "Rozdělit"
 
 #: UiStrings.resx$SplitHorizontally$Message
 msgid "Split Horizontally"
-msgstr ""
+msgstr "Rozdělit vodorovně"
 
 #: UiStrings.resx$SplitVertically$Message
 msgid "Split Vertically"
-msgstr ""
+msgstr "Rozdělit svisle"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1664,7 +1727,7 @@ msgstr "Předmět:"
 
 #: UiStrings.resx$Swap$Message
 msgid "Swap"
-msgstr ""
+msgstr "Otočit"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1673,6 +1736,10 @@ msgstr "Soubor TIFF (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "Ovladač TWAIN"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1781,23 +1848,29 @@ msgid "To scan both sides of a multi-page document with your feeder scanner, you
 "3. Scan the back sides of the document\n"
 "4. Click \"Manual Duplex\"\n"
 "5. Depending on the physical orientation of your scanner, you may need to check \"Reverse back sides\""
-msgstr ""
+msgstr "Chcete-li naskenovat obě strany vícestránkového dokumentu pomocí skeneru s podavačem, vyberte jako zdroj papíru „Oboustranně“, pokud to váš skener podporuje.\n\n"
+"Pokud váš skener oboustranné skenování nepodporuje, postupujte takto:\n"
+"1. Naskenujte přední strany dokumentu.\n"
+"2. Otočte dokument.\n"
+"3. Naskenujte zadní strany dokumentu.\n"
+"4. Klikněte na „Manuální duplex“.\n"
+"5. V závislosti na fyzickém uspořádání skeneru může být nutné zaškrtnout možnost „Obrácené pořadí“"
 
 #: UiStrings.resx$ToggleOrientation$Message
 msgid "Toggle Orientation"
-msgstr ""
+msgstr "Přepnout orientaci"
 
 #: UiStrings.resx$ToggleView$Message
 msgid "Toggle View"
-msgstr ""
+msgstr "Přepnout zobrazení"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
-msgstr ""
+msgstr "Panel nástrojů"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr ""
+msgstr "Nastavení panelu nástrojů"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1805,7 +1878,7 @@ msgstr "Nástroje"
 
 #: SettingsResources.resx$DockStyle_Top$Message
 msgid "Top"
-msgstr ""
+msgstr "Nahoře"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1839,6 +1912,10 @@ msgstr "Neznámý skener"
 msgid "Unsaved Changes"
 msgstr "Neuložené změny"
 
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
+
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
 msgstr "Průběh aktualizace"
@@ -1857,7 +1934,7 @@ msgstr "Odesílání emailu..."
 
 #: UiStrings.resx$UseJpegCompression$Message
 msgid "Use JPEG compression"
-msgstr ""
+msgstr "Použít JPEG kompresi"
 
 #: UiStrings.resx$UseNativeUi$Message
 msgid "Use native UI"
@@ -1902,7 +1979,7 @@ msgstr "Čekání na sken {0}..."
 
 #: UiStrings.resx$WaitingToConnect$Message
 msgid "Waiting to connect."
-msgstr ""
+msgstr "Čekání na připojení"
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
@@ -1911,6 +1988,10 @@ msgstr "Práh bílé"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Wia verze:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

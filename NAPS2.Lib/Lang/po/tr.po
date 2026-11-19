@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:53\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -131,6 +131,10 @@ msgstr "Form Doldurmaya İzin Ver"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Tam Kalite Baskıya İzin Ver"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -318,6 +322,10 @@ msgstr "B4 (250x353 mm)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 mm)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -571,6 +579,7 @@ msgstr "Boşluk Çıkar"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "Sil"
 
@@ -618,6 +627,10 @@ msgstr "Bağış Yap"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "Tamam"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "PDF'yi Şifrele"
 msgid "Encryption"
 msgstr "Şifreleme"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "Hata"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "Uygulama başlatılırken hata {0}"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -783,6 +808,10 @@ msgstr "Gri Tonlama"
 msgid "Help"
 msgstr ""
 
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
+
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
 msgstr "Yatay hizalama:"
@@ -839,6 +868,10 @@ msgstr "{0} içe aktarılıyor..."
 msgid "Importing..."
 msgstr "İçe Aktarılıyor..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "{0} Kur"
@@ -893,6 +926,7 @@ msgstr "Yorum Yap"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "Sol"
 
@@ -1214,6 +1248,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "PNG Dosya (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Sayfa boyutu:"
@@ -1233,6 +1275,10 @@ msgstr "Parola"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "Yapıştır"
+
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
@@ -1392,6 +1438,7 @@ msgstr "Geri Al"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "Sağ"
 
@@ -1646,6 +1693,10 @@ msgstr "Tekli tarama"
 msgid "Skip save prompt"
 msgstr "Kaydetme istemini atla"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "Böl"
@@ -1685,6 +1736,10 @@ msgstr "TIFF Dosyası (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "TWAIN Sürücüsü"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1858,6 +1913,10 @@ msgstr "Bilinmeyen Tarayıcı"
 msgid "Unsaved Changes"
 msgstr "Kaydedilmemiş Değişiklikler"
 
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
+
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
 msgstr "Güncelleme Süreci"
@@ -1930,6 +1989,10 @@ msgstr "Beyaz Eşiği"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Wia Sürümü:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
