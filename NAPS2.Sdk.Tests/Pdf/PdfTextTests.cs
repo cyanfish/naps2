@@ -1,6 +1,9 @@
 ﻿using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
+using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf;
+using PdfSharpCore.Pdf.IO;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -120,6 +123,35 @@ public class PdfTextTests : ContextualTests
     {
         var text = "Hello world\nfoo bar baz";
         SetUpFakeOcr(ifNoMatch: text, delay: 0, splitWords: true);
+
+        var images = await _importer.Import(_pdfiumImportPath).ToListAsync();
+        await _exporter.Export(_exportPath, images, ocrParams: new OcrParams("eng"));
+
+        PdfAsserts.AssertContainsTextOnce("Hello world foo bar baz", _exportPath);
+        PdfAsserts.AssertOcrText(CreateFakeOcrResult(text, "eng", true), _exportPath);
+    }
+
+    [Theory]
+    [InlineData(90, false)]
+    [InlineData(180, false)]
+    [InlineData(270, false)]
+    [InlineData(0, true)]
+    [InlineData(90, true)]
+    public async Task ExportMultipleLinesWithPdfiumRotatedOrCropped(int rotation, bool crop)
+    {
+        var text = "Hello world\nfoo bar baz";
+        SetUpFakeOcr(ifNoMatch: text, delay: 0, splitWords: true);
+        using (var doc = PdfReader.Open(_pdfiumImportPath, PdfDocumentOpenMode.Modify))
+        {
+            var page = doc.Pages[0];
+            page.Rotate = rotation;
+            if (crop)
+            {
+                var box = page.MediaBox;
+                page.CropBox = new PdfRectangle(new XPoint(box.X1 + 50, box.Y1 + 30), new XPoint(box.X2 - 20, box.Y2 - 40));
+            }
+            doc.Save(_pdfiumImportPath);
+        }
 
         var images = await _importer.Import(_pdfiumImportPath).ToListAsync();
         await _exporter.Export(_exportPath, images, ocrParams: new OcrParams("eng"));

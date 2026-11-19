@@ -88,7 +88,8 @@ public class LayoutController
         var context = GetLayoutContext();
         _content.Materialize(context);
         var contentSize = _content.GetPreferredSize(context, bounds);
-        var padding = new SizeF(RootPadding * 2, RootPadding * 2);
+        int p = (int) (RootPadding * context.Scale);
+        var padding = new SizeF(p * 2, p * 2);
         var naturalSize = Size.Ceiling(contentSize + padding);
         return naturalSize;
     }
@@ -114,22 +115,35 @@ public class LayoutController
     {
         if (_window == null || _content == null || !_isShown || _layoutQueued) return;
         var size = _isHosted ? EtoPlatform.Current.GetContainerSize(_layout) : EtoPlatform.Current.GetClientSize(_window, true);
-        int p = RootPadding;
+        var context = GetLayoutContext() with { Window = _window, IsLayout = true };
+        int p = (int) (RootPadding * context.Scale);
         var bounds = new Rectangle(p, p, size.Width - 2 * p, size.Height - 2 * p);
         if (bounds.Width < 0 || bounds.Height < 0)
         {
             return;
         }
-        var context = GetLayoutContext() with { Window = _window, IsLayout = true };
         if (LayoutElement.DEBUG_LAYOUT)
         {
             Debug.WriteLine("\n(((Starting layout)))");
         }
         _window.SuspendLayout();
-        _content.Materialize(context);
-        _content.DoLayout(context, bounds);
-        RemoveControls();
-        _window.ResumeLayout();
+        try
+        {
+            _content.Materialize(context);
+            _content.DoLayout(context, bounds);
+            RemoveControls();
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorException("Error performing layout", ex);
+#if DEBUG
+            throw;
+#endif
+        }
+        finally
+        {
+            _window.ResumeLayout();
+        }
         if (!_isHosted)
         {
             EtoPlatform.Current.SetContainerSize(_window, _layout, size, p);

@@ -57,7 +57,7 @@ public class LayoutScrollable : LayoutContainer
             Debug.WriteLine($"{new string(' ', context.Depth)}{GetType().Name} layout with bounds {bounds}");
         }
         if (_scrollContainer == null) throw new InvalidOperationException();
-        _scrollContainer.Visible = IsVisible && (context.ParentVisibility?.IsVisible ?? true);
+        _scrollContainer.Visible = IsVisibleInContext(context);
         EtoPlatform.Current.SetFrame(context.Container, _scrollContainer, Point.Round(bounds.Location),
             Size.Round(bounds.Size), context.InOverlay);
 
@@ -91,7 +91,7 @@ public class LayoutScrollable : LayoutContainer
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
-        if (!IsVisible || context.ParentVisibility?.IsVisible == false)
+        if (!IsVisibleInContext(context))
         {
             return SizeF.Empty;
         }

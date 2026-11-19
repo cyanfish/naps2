@@ -291,4 +291,21 @@ public class NameManagerTests : ContextualTests
 
         Assert.Equal(P("scan2.pdf"), Get(P("scan$(n).pdf"), _context with { Overwrite = true, BatchIndex = 1 }));
     }
+
+    [Fact]
+    public void AlwaysUnlessDated()
+    {
+        var context = _context with { Numbering = Numbering.AlwaysUnlessDated };
+
+        // Without date/time placeholders the name is always numbered
+        Assert.Equal(P("scan.1.pdf"), Get(P("scan.pdf"), context));
+        Assert.Equal(P("scan1.pdf"), Get(P("scan$(n).pdf"), context));
+
+        // With date/time placeholders the name is only numbered on conflict
+        Assert.Equal(P("scan_2024.pdf"), Get(P("scan_$(YYYY).pdf"), context));
+        Assert.Equal(P("scan_210502.pdf"), Get(P("scan_$(hh)$(mm)$(ss).pdf"), context));
+        Assert.Equal(P("scan_2024_1.pdf"), Get(P("scan_$(YYYY)_$(n).pdf"), context));
+        File.WriteAllText(P("scan_2024.pdf"), "");
+        Assert.Equal(P("scan_2024.1.pdf"), Get(P("scan_$(YYYY).pdf"), context));
+    }
 }

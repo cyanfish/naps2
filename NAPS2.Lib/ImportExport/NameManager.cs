@@ -78,18 +78,23 @@ public class NameManager
     {
         reservationKey = null;
         var result = Environment.ExpandEnvironmentVariables(input);
+        var numbering = context.Numbering;
+        if (numbering == Numbering.AlwaysUnlessDated)
+        {
+            numbering = DateReplacements.Keys.Any(result.Contains) ? Numbering.OnConflict : Numbering.Always;
+        }
         foreach (var (placeholder, format) in DateReplacements)
         {
             result = result.Replace(placeholder, format(context.DateTime));
         }
-        if (context.Numbering == Numbering.None)
+        if (numbering == Numbering.None)
         {
             return result;
         }
 
         var numberMatch = NumberPlaceholderPattern.Match(result);
-        bool numberOnConflict = context.Numbering == Numbering.OnConflict && context.IsFilePath;
-        if (!numberMatch.Success && context.Numbering != Numbering.Always && !numberOnConflict)
+        bool numberOnConflict = numbering == Numbering.OnConflict && context.IsFilePath;
+        if (!numberMatch.Success && numbering != Numbering.Always && !numberOnConflict)
         {
             if (reserve && context.IsFilePath)
             {

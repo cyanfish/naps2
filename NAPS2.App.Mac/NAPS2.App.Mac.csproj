@@ -10,6 +10,7 @@
     <SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
     <RuntimeIdentifiers Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx-x64;osx-arm64</RuntimeIdentifiers>
     <TrimMode>partial</TrimMode>
+    <CheckForIllegalCrossThreadCalls>false</CheckForIllegalCrossThreadCalls>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
     <Product>NAPS2 - Not Another PDF Scanner</Product>
@@ -22,7 +23,7 @@
     <PackageReference Include="NAPS2.Jpeg.Binaries" Version="1.0.0" />
     <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.3.0" />
     <PackageReference Include="NAPS2.Sane.Binaries" Version="1.2.3" />
-    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.4.0" />
+    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.5.0" />
 
     <ProjectReference Include="..\NAPS2.Lib.Mac\NAPS2.Lib.Mac.csproj" />
 

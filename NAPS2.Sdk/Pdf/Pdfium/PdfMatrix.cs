@@ -15,8 +15,27 @@ internal record struct PdfMatrix(float a, float b, float c, float d, float e, fl
                Math.Abs(first.f - second.f) < TOLERANCE;
     }
 
+    /// <summary>
+    /// Returns the matrix that applies this transform followed by the other transform (multiplying this × other).
+    /// </summary>
+    public PdfMatrix Then(PdfMatrix other)
+    {
+        return new PdfMatrix(
+            a * other.a + b * other.c,
+            a * other.b + b * other.d,
+            c * other.a + d * other.c,
+            c * other.b + d * other.d,
+            e * other.a + f * other.c + other.e,
+            e * other.b + f * other.d + other.f);
+    }
+
     public static PdfMatrix FillPage(float width, float height)
     {
         return new PdfMatrix(width, 0, 0, height, 0, 0);
+    }
+
+    public static PdfMatrix FillPage(PdfRect box)
+    {
+        return new PdfMatrix(box.Right - box.Left, 0, 0, box.Top - box.Bottom, box.Left, box.Bottom);
     }
 }

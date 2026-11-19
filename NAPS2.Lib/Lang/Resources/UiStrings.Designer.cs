@@ -944,6 +944,12 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("SinglePageFiles", resourceCulture);
             }
         }
+
+        internal static string AllowJbig2Compression {
+            get {
+                return ResourceManager.GetString("AllowJbig2Compression", resourceCulture);
+            }
+        }
         
         internal static string EncryptPdf {
             get {

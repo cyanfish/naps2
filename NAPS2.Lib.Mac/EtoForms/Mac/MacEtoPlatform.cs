@@ -4,6 +4,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Eto.Mac;
 using Eto.Mac.Drawing;
+using Eto.Mac.Forms.Controls;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Mac;
@@ -29,7 +30,20 @@ public class MacEtoPlatform : EtoPlatform
     public override Application CreateApplicationCore()
     {
         var application = new Application(Platforms.macOS);
-        ((NSApplication) application.ControlObject).Delegate = new MacAppDelegate();
+        var nsApp = (NSApplication) application.ControlObject;
+        nsApp.Delegate = new MacAppDelegate();
+        application.Initialized += (_, _) =>
+        {
+            // As we start as a background-only process, the launch doesn't activate us (at least on newer macOS
+            // versions), so we need to explicitly activate once the app has finished launching. This only applies if
+            // we've been transformed into a foreground app (see InitializeForegroundApp).
+            if (nsApp.ActivationPolicy == NSApplicationActivationPolicy.Regular)
+            {
+#pragma warning disable CA1422
+                nsApp.ActivateIgnoringOtherApps(true);
+#pragma warning restore CA1422
+            }
+        };
         return application;
     }
 
@@ -61,6 +75,10 @@ public class MacEtoPlatform : EtoPlatform
         {
             nsButton.ImageHugsTitle = true;
             nsButton.Title = Environment.NewLine + nsButton.Title;
+        }
+        if (button is { ImagePosition: ButtonImagePosition.Overlay, Handler: ButtonHandler handler })
+        {
+            handler.BezelStyle = NSBezelStyle.Rounded;
         }
         var image = nsButton.Image!;
         if (image.Representations() is [NSBitmapImageRep rep, ..])

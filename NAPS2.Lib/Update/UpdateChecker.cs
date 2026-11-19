@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json.Linq;
 
 namespace NAPS2.Update;
@@ -30,10 +31,17 @@ public class UpdateChecker : IUpdateChecker
     {
         var json = await GetJson(UPDATE_CHECK_ENDPOINT);
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-        return GetUpdateInfo(json, currentVersion, UPDATE_FILE_EXT);
+        string fileKey = UPDATE_FILE_EXT;
+#if !ZIP // The user can run the x64 portable on an arm64 machine and it should stay x64
+        if (RuntimeInformation.OSArchitecture == Architecture.Arm64)
+        {
+            fileKey += "-arm64";
+        }
+#endif
+        return GetUpdateInfo(json, currentVersion, fileKey);
     }
 
-    internal static UpdateInfo? GetUpdateInfo(JObject json, Version? currentVersion, string fileExt)
+    internal static UpdateInfo? GetUpdateInfo(JObject json, Version? currentVersion, string fileKey)
     {
         foreach (var release in json.Value<JArray>("versions")!)
         {
@@ -46,7 +54,7 @@ public class UpdateChecker : IUpdateChecker
             var gteVersion = gte != null ? ParseVersion(gte) : null;
             if (gteVersion != null && currentVersion < gteVersion) continue;
 
-            var updateFile = release["files"]!.Value<JToken>(fileExt);
+            var updateFile = release["files"]!.Value<JToken>(fileKey);
             if (updateFile == null) continue;
 
             var sha256 = updateFile.Value<string>("sha256");

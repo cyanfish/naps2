@@ -43,7 +43,8 @@ public record NameContext
     public static NameContext FromSaveParams(SaveParams saveParams) => new()
     {
         DateTime = saveParams.DateTime,
-        Numbering = saveParams.OpenEndedSequence || saveParams.BatchCount > 1 ? Numbering.Always
+        Numbering = saveParams.BatchCount > 1 ? Numbering.Always
+            : saveParams.OpenEndedSequence ? Numbering.AlwaysUnlessDated
             : saveParams.OverwriteMode == OverwriteMode.Never ? Numbering.OnConflict
             : Numbering.Placeholder,
         BatchIndex = saveParams.BatchIndex,

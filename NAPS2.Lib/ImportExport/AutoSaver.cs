@@ -81,7 +81,12 @@ public class AutoSaver
             string? firstFileSaved = null;
             var scans = SaveSeparatorHelper.SeparateScans(new[] { images }, settings.Separator)
                 .Where(x => x.Count > 0).ToList();
-            var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never, OpenEndedSequence = true };
+            var saveParams = new SaveParams
+            {
+                OverwriteMode = OverwriteMode.Never,
+                OpenEndedSequence = true,
+                BatchCount = scans.Count
+            };
             foreach (var (imagesToSave, i) in scans.Select((x, i) => (x, i)))
             {
                 (bool success, string? filePath) = await SaveOneFile(settings, saveParams with { BatchIndex = i },
@@ -135,7 +140,8 @@ public class AutoSaver
                 {
                     OverwriteMode = OverwriteMode.Confirmed,
                     OpenEndedSequence = false,
-                    BatchIndex = null
+                    BatchIndex = null,
+                    BatchCount = null
                 };
             }
             else

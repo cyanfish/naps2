@@ -98,7 +98,7 @@ public abstract class LayoutLine : LayoutContainer
             child.Alignment == LayoutAlignment.Fill
                 ? cellSize
                 : child.GetPreferredSize(childContext, new RectangleF(cellOrigin, cellSize)));
-        var remainingBreadth = GetBreadth(cellSize) - breadth;
+        var remainingBreadth = Math.Max(GetBreadth(cellSize) - breadth, 0);
         var alignmentOffset = child.Alignment switch
         {
             LayoutAlignment.Leading => 0,
@@ -112,11 +112,11 @@ public abstract class LayoutLine : LayoutContainer
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
-        var childContext = GetChildContext(context, parentBounds, true);
-        if (childContext.ParentVisibility?.IsVisible == false)
+        if (!IsVisibleInContext(context))
         {
             return SizeF.Empty;
         }
+        var childContext = GetChildContext(context, parentBounds, true);
         var size = SizeF.Empty;
         GetInitialCellLengthsAndScaling(context, childContext, parentBounds, out var cellLengths, out var cellScaling);
         UpdateCellLengthsWithPreferredLength(cellLengths, cellScaling);
