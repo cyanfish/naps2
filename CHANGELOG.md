@@ -1,3 +1,20 @@
+Changes in 8.6.1:
+- Added an option to disable JBIG2 compression in PDF settings
+- OCR: Upgraded to Tesseract 5.5.4
+- Bug fixes:
+  - Auto Save: Fixed ".1" being added to file names with date placeholders when only one file is saved
+  - Edit with: Fixed edits not applying when editing multiple pages or with some editors
+  - PDF: Fixed rotated or cropped images in imported PDFs
+  - OCR: Fixed wrong OCR results with duplex scanning + "Flip duplexed pages"
+  - OCR: Fixed OCR not working for paths with non-English characters
+  - Windows: Auto-update now installs the ARM64 version on ARM64 PCs
+  - Windows: Fixed window padding on hidpi screens
+  - Mac: Fixed the main window not reopening after being closed
+  - Mac: Fixed the app not being focused when launched
+  - Mac: Fixed icon button styles
+  - Linux: Fixed some layout errors
+  - Console: Show an error when using OCR components that aren't installed
+
 Changes in 8.6.0:
 - New combined Settings window
 - Added toolbar customization (right-click the toolbar > "Customize Toolbar")
