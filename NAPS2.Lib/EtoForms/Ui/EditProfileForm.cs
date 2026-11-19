@@ -166,7 +166,7 @@ public class EditProfileForm : EtoDialogBase
         var selectedSource = _paperSource.SelectedItem;
         var perSource = selectedSource switch
         {
-            ScanSource.Glass => ScanProfile.Caps?.Glass,
+            ScanSource.Glass or ScanSource.Auto => ScanProfile.Caps?.Glass,
             ScanSource.Feeder => ScanProfile.Caps?.Feeder,
             ScanSource.Duplex => ScanProfile.Caps?.Duplex,
             _ => null
@@ -235,6 +235,8 @@ public class EditProfileForm : EtoDialogBase
             if (paperSourceCaps.SupportsFlatbed) paperSources.Add(ScanSource.Glass);
             if (paperSourceCaps.SupportsFeeder) paperSources.Add(ScanSource.Feeder);
             if (paperSourceCaps.SupportsDuplex) paperSources.Add(ScanSource.Duplex);
+            if (paperSourceCaps is { SupportsFlatbed: true, SupportsFeeder: true, CanCheckIfFeederHasPaper: true })
+                paperSources.Add(ScanSource.Auto);
         }
 
         return new ScanProfileCaps

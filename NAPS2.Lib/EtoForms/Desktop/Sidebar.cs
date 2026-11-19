@@ -238,7 +238,7 @@ public class Sidebar
         var selectedSource = _paperSource.SelectedItem;
         var perSource = selectedSource switch
         {
-            ScanSource.Glass => profile.Caps?.Glass,
+            ScanSource.Glass or ScanSource.Auto => profile.Caps?.Glass,
             ScanSource.Feeder => profile.Caps?.Feeder,
             ScanSource.Duplex => profile.Caps?.Duplex,
             _ => null
