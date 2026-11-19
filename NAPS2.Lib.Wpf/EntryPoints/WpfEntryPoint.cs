@@ -16,6 +16,7 @@ public static class WpfEntryPoint
         var subArgs = args.Skip(1).ToArray();
         return args switch
         {
+            ["console", ..] => WpfConsoleEntryPoint.Run(subArgs),
             ["worker", ..] => WpfNativeWorkerEntryPoint.Run(subArgs),
             ["server", ..] => ServerEntryPoint.Run(subArgs, new WpfImagesModule(), new WpfModule()),
             _ => GuiEntryPoint.Run(args, new WpfImagesModule(), new WpfModule())
