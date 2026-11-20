@@ -11,7 +11,6 @@ using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.Wpf;
 using Button = System.Windows.Controls.Button;
-using VerticalAlignment = System.Windows.VerticalAlignment;
 using Command = Eto.Forms.Command;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using Image = System.Windows.Controls.Image;
@@ -258,13 +257,8 @@ public class WpfDesktopForm : DesktopForm
 
     protected override void CreateToolbarStackedButtons(Command command1, Command command2)
     {
-        var panel = new StackPanel
-        {
-            VerticalAlignment = VerticalAlignment.Center,
-            Children = { CreateStackedButton(command1), CreateStackedButton(command2) }
-        };
-        System.Windows.Controls.Grid.SetIsSharedSizeScope(panel, true);
-        _mainToolBar.Items.Add(panel);
+        _mainToolBar.Items.Add(
+            _toolbarFormatter.CreateStackedPanel(CreateStackedButton(command1), CreateStackedButton(command2)));
     }
 
     private Button CreateStackedButton(Command command)
