@@ -14,7 +14,8 @@ public class WpfImageContext : ImageContext
         _imageTransformer = new WpfImageTransformer(this);
     }
 
-    protected override bool SupportsTiff => true;
+    protected override bool SupportsTiffDecode => true;
+    protected override bool SupportsTiffEncode => true;
 
     public override ITiffWriter TiffWriter => new WpfTiffWriter();
 

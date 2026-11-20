@@ -15,7 +15,8 @@ public class GtkImageContext : ImageContext
         _tiffIo = new LibTiffIo(this);
     }
 
-    protected override bool SupportsTiff => true;
+    protected override bool SupportsTiffDecode => true;
+    protected override bool SupportsTiffEncode => true;
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {

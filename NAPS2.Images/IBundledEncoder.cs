@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace NAPS2.Images;
 
 /// <summary>
@@ -7,8 +9,14 @@ namespace NAPS2.Images;
 internal interface IBundledEncoder
 {
     /// <summary>
-    /// Encodes the image to the stream. Returns false (without writing anything to the stream) if the encoder doesn't
-    /// support the image, in which case the platform encoder is used instead.
+    /// Encodes the image to the stream. Returns false (without writing to the stream) if the encoder doesn't support
+    /// the image, in which case the platform encoder is used instead.
     /// </summary>
     bool TryEncode(IMemoryImage image, Stream stream, ImageSaveOptions options);
+
+    /// <summary>
+    /// Decodes an image from the stream. Returns false (without reading from the stream) if the encoder doesn't support
+    /// the image, in which case the platform decoder is used instead.
+    /// </summary>
+    bool TryDecode(ImageContext imageContext, Stream stream, [NotNullWhen(true)] out IMemoryImage? image);
 }

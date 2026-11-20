@@ -164,5 +164,11 @@ public class JpegliEncoderTests : ContextualTests
             Called = true;
             return false;
         }
+
+        public bool TryDecode(ImageContext imageContext, Stream stream, out IMemoryImage? image)
+        {
+            image = null;
+            return false;
+        }
     }
 }

@@ -14,7 +14,8 @@ public class GdiImageContext : ImageContext
         _imageTransformer = new GdiImageTransformer(this);
     }
 
-    protected override bool SupportsTiff => true;
+    protected override bool SupportsTiffDecode => true;
+    protected override bool SupportsTiffEncode => true;
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace NAPS2.Images;
@@ -72,6 +73,12 @@ internal class JpegliEncoder : IBundledEncoder
             _lib.Free(outData);
         }
         return true;
+    }
+
+    public bool TryDecode(ImageContext imageContext, Stream stream, [NotNullWhen(true)] out IMemoryImage? image)
+    {
+        image = null;
+        return false;
     }
 
     private static int? GetPixelFormat(BitwiseImageData data)
