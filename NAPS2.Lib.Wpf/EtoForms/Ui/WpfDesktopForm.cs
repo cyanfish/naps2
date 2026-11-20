@@ -215,8 +215,12 @@ public class WpfDesktopForm : DesktopForm
         mainButton.BindCommand(command);
         var arrowButton = _toolbarFormatter.CreateArrowButton();
         AutomationProperties.SetName(arrowButton, command.ToolBarText);
-        DockPanel.SetDock(arrowButton, Dock.Right);
-        var group = new DockPanel { Children = { arrowButton, mainButton } };
+        var group = new System.Windows.Controls.Grid
+        {
+            ColumnDefinitions = { new ColumnDefinition(), new ColumnDefinition { Width = GridLength.Auto } },
+            Children = { mainButton, arrowButton }
+        };
+        System.Windows.Controls.Grid.SetColumn(arrowButton, 1);
         var contextMenu = menu.ToWpfContextMenu(this);
         arrowButton.Click += (_, _) => ShowMenu(group, contextMenu);
         arrowButton.BindEnabled(command);
