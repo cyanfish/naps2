@@ -438,6 +438,15 @@ internal class SaneScanDriver : IScanDriver
             scanAreaController.SetArea(minX + offsetX, minY, minX + offsetX + width, minY + height);
         }
 
+        // Optional epsonds capability; absent/inactive options keep the existing behavior.
+        // Apply after geometry (which may reload options), before explicit user overrides.
+        if (controller.GetOption(SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH)?.IsActive == true)
+        {
+            controller.TrySet(SaneOptionNames.EPSONDS_ES60W_AUTO_LENGTH,
+                options.AutoCrop && optionData.IsFeeder &&
+                options.PaperSource != PaperSource.Duplex && options.BitDepth == BitDepth.Color);
+        }
+
         foreach (var kvp in options.KeyValueOptions)
         {
             string name = kvp.Key;
