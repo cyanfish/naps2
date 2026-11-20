@@ -39,4 +39,16 @@ internal static class XamlTemplates
     /// A group box template with the header above a rounded border.
     /// </summary>
     public static ControlTemplate CardGroupBoxTemplate { get; } = (ControlTemplate) Templates["CardGroupBoxTemplate"]!;
+
+    /// <summary>
+    /// A Fluent-like context menu template that uses the ItemsPanel (e.g. for multiple columns).
+    /// </summary>
+    public static ControlTemplate PanelContextMenuTemplate { get; } =
+        (ControlTemplate) Templates["PanelContextMenuTemplate"]!;
+
+    /// <summary>
+    /// An items panel with three columns, filled top to bottom.
+    /// </summary>
+    public static ItemsPanelTemplate ThreeColumnItemsPanel { get; } =
+        (ItemsPanelTemplate) Templates["ThreeColumnItemsPanel"]!;
 }

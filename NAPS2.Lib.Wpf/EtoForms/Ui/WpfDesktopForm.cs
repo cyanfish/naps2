@@ -244,6 +244,12 @@ public class WpfDesktopForm : DesktopForm
     {
         var button = _toolbarFormatter.CreateLargeButton(CreateButtonContent(command, true));
         var contextMenu = menu.ToWpfContextMenu(this);
+        if (command == Commands.LanguageMenu)
+        {
+            // There are too many languages to fit in one column on smaller screens
+            contextMenu.Template = XamlTemplates.PanelContextMenuTemplate;
+            contextMenu.ItemsPanel = XamlTemplates.ThreeColumnItemsPanel;
+        }
         button.Click += (_, _) => ShowMenu(button, contextMenu);
         AutomationProperties.SetName(button, command.ToolBarText);
         button.BindEnabled(command);
