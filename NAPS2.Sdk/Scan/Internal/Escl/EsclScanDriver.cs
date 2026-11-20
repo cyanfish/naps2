@@ -198,7 +198,9 @@ internal class EsclScanDriver : IScanDriver
                 {
                     scanEvents.PageStart();
                 }
-                while (true)
+                int pageCount = 0;
+                // Once the page limit is reached no more documents are requested, and the job is deleted below
+                while (options.MaxPages <= 0 || pageCount < options.MaxPages)
                 {
                     if (scanSettings.InputSource != EsclInputSource.Platen)
                     {
@@ -208,6 +210,7 @@ internal class EsclScanDriver : IScanDriver
                     if (doc == null) break;
                     foreach (var image in GetImagesFromRawDocument(options, scanSettings, doc))
                     {
+                        pageCount++;
                         callback(image);
                     }
                 }

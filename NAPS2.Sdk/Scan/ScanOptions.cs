@@ -32,6 +32,14 @@ public class ScanOptions
     public int Dpi { get; set; }
 
     /// <summary>
+    /// For feeder scans, the maximum number of pages to scan. The default value of 0 means no limit (scan until the
+    /// feeder is empty). With TWAIN this is passed to the scanner as CAP_XFERCOUNT and with WIA 2.0 as IPS_PAGES, so a
+    /// scanner that supports it stops by itself. The TWAIN, WIA, SANE and ESCL drivers also stop requesting pages once
+    /// the limit is reached. Not supported by the Apple driver. For duplex scans each side counts as a page.
+    /// </summary>
+    public int MaxPages { get; set; }
+
+    /// <summary>
     /// A factor used to shrink the scanned image. A factor of 2 means to shrink the image by 2x.
     /// </summary>
     public int ScaleRatio { get; set; }
