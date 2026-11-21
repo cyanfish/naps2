@@ -471,6 +471,14 @@ public class LoadSaveTests : ContextualTests
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
         ],
         [
+            ImageFileFormat.Gif, ".gif", "dog_gif",
+            new[] { "dog_palette_rgb" }, new[] { ImagePixelFormat.RGB24 }, true
+        ],
+        [
+            ImageFileFormat.Gif, ".gif", "dog_anim_gif",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
+        ],
+        [
             ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
             new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true

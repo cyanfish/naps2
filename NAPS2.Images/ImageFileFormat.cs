@@ -11,5 +11,6 @@ public enum ImageFileFormat
     WebP,
     JpegXl,
     Heic,
-    Avif
+    Avif,
+    Gif
 }

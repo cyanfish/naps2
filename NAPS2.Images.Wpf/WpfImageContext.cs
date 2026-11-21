@@ -15,7 +15,8 @@ public class WpfImageContext : ImageContext
     }
 
     protected override bool SupportsDecodeCore(ImageFileFormat format) =>
-        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif
+            or ImageFileFormat.Tiff
             || format == ImageFileFormat.Heic && WicCodecSupport.Heic
             || format == ImageFileFormat.Avif && WicCodecSupport.Avif;
 

@@ -15,7 +15,8 @@ public class GdiImageContext : ImageContext
     }
 
     protected override bool SupportsDecodeCore(ImageFileFormat format) =>
-        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff;
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif
+            or ImageFileFormat.Tiff;
 
     protected override bool SupportsEncodeCore(ImageFileFormat format) =>
         format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff;
@@ -36,6 +37,15 @@ public class GdiImageContext : ImageContext
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
         ImageFileFormat format, ProgressHandler progress)
     {
+        // GIF frames are animation frames (FrameDimension.Time) rather than pages, so we only load the first
+        if (format == ImageFileFormat.Gif)
+        {
+            progress.Report(0, 1);
+            if (progress.IsCancellationRequested) return;
+            produceImage(LoadCore(stream, format));
+            progress.Report(1, 1);
+            return;
+        }
         var memoryStream = EnsureMemoryStream(stream);
         using var bitmap = new Bitmap(memoryStream);
         int count = bitmap.GetFrameCount(FrameDimension.Page);

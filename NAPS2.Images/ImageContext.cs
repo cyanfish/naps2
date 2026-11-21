@@ -20,6 +20,7 @@ public abstract class ImageContext
             ".jxl" => ImageFileFormat.JpegXl,
             ".heic" or ".heif" => ImageFileFormat.Heic,
             ".avif" => ImageFileFormat.Avif,
+            ".gif" => ImageFileFormat.Gif,
             _ => ImageFileFormat.Unknown
         };
     }
@@ -60,6 +61,8 @@ public abstract class ImageContext
             [0x49, 0x49, 0x2A, 0x00, ..] => ImageFileFormat.Tiff,
             [0x4D, 0x4D, 0x00, 0x2A, ..] => ImageFileFormat.Tiff,
             [_, _, _, _, 0x6A, 0x50, 0x20, 0x20, ..] => ImageFileFormat.Jpeg2000,
+            // "GIF87a" or "GIF89a"
+            [0x47, 0x49, 0x46, 0x38, ..] => ImageFileFormat.Gif,
             // "RIFF" <size> "WEBP"
             [0x52, 0x49, 0x46, 0x46, _, _, _, _, 0x57, 0x45, 0x42, 0x50, ..] => ImageFileFormat.WebP,
             // JPEG XL codestream, or the container's signature box

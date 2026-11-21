@@ -16,7 +16,8 @@ public class GtkImageContext : ImageContext
     }
 
     protected override bool SupportsDecodeCore(ImageFileFormat format) =>
-        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif
+            or ImageFileFormat.Tiff
         || format == ImageFileFormat.Heic && (PixbufMimeTypes.Value.Contains("image/heic") ||
                                               PixbufMimeTypes.Value.Contains("image/heif"))
         || format == ImageFileFormat.Avif && PixbufMimeTypes.Value.Contains("image/avif");

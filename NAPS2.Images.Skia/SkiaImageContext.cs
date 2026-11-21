@@ -13,7 +13,7 @@ public class SkiaImageContext : ImageContext
     }
 
     protected override bool SupportsDecodeCore(ImageFileFormat format) =>
-        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp;
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif;
 
     protected override bool SupportsEncodeCore(ImageFileFormat format) =>
         format is ImageFileFormat.Jpeg or ImageFileFormat.Png;
