@@ -35,6 +35,7 @@ public class ScanningContext : IDisposable
             ImageContext.BundledEncoders.TryAdd(ImageFileFormat.JpegXl, jxlCodec);
             ImageContext.BundledDecoders.TryAdd(ImageFileFormat.JpegXl, jxlCodec);
         }
+        ImageContext.BundledColorConverter ??= IccColorConverter.TryCreate();
     }
 
     /// <summary>

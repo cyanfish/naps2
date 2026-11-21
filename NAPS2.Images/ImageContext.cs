@@ -321,6 +321,11 @@ public abstract class ImageContext
     internal static ConcurrentDictionary<ImageFileFormat, IBundledCodec> BundledDecoders { get; } = new();
 
     /// <summary>
+    /// Used to apply embedded color profiles on platforms whose decoders don't.
+    /// </summary>
+    internal static IBundledColorConverter? BundledColorConverter { get; set; }
+
+    /// <summary>
     /// Loads the image with a bundled decoder if there's one for the given format. Returns false if the platform decoder
     /// should be used instead.
     /// </summary>

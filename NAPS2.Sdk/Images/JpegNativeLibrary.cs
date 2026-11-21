@@ -69,6 +69,7 @@ internal class JpegNativeLibrary : Unmanaged.NativeLibrary
     public naps2_jxl_compress_delegate JxlCompress => Load<naps2_jxl_compress_delegate>();
     public naps2_jxl_decompress_delegate JxlDecompress => Load<naps2_jxl_decompress_delegate>();
     public naps2_jxl_transcode_jpeg_delegate JxlTranscodeJpeg => Load<naps2_jxl_transcode_jpeg_delegate>();
+    public naps2_icc_to_srgb_delegate IccToSrgb => Load<naps2_icc_to_srgb_delegate>();
 
     public static void ThrowIfError(int ret, byte[] error, string context)
     {
@@ -123,4 +124,8 @@ internal class JpegNativeLibrary : Unmanaged.NativeLibrary
     public delegate int naps2_jxl_decompress_delegate(byte[] data, UIntPtr size, out IntPtr outPixels,
         out int outWidth, out int outHeight, out int outPixelFormat, out IntPtr outExif, out UIntPtr outExifSize,
         byte[] error, int errorSize);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int naps2_icc_to_srgb_delegate(IntPtr pixels, int width, int height, int stride, int pixelFormat,
+        byte[] icc, UIntPtr iccSize, byte[] error, int errorSize);
 }
