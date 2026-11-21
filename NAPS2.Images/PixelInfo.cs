@@ -30,4 +30,5 @@ public class PixelInfo
     public int Stride { get; }
     public long Length { get; }
     public bool InvertY { get; init; }
+    public bool PremultipliedAlpha { get; init; }
 }

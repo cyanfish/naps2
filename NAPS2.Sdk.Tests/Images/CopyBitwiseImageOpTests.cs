@@ -154,4 +154,33 @@ public class CopyBitwiseImageOpTests : ContextualTests
         var expectedBuffer = new byte[] { 0x05, 0xFC };
         Assert.Equal(expectedBuffer, dstBuffer);
     }
+
+    [Fact]
+    public void PremultipliedAlpha()
+    {
+        // Straight alpha: (200, 100, 50) at alpha 128, and fully transparent/opaque pixels
+        byte[] straight = [200, 100, 50, 128, 10, 20, 30, 0, 40, 50, 60, 255];
+        byte[] premultiplied = [100, 50, 25, 128, 0, 0, 0, 0, 40, 50, 60, 255];
+        var straightInfo = new PixelInfo(3, 1, SubPixelType.Rgba);
+        var premultipliedInfo = new PixelInfo(3, 1, SubPixelType.Rgba) { PremultipliedAlpha = true };
+
+        var toPremultiplied = new byte[12];
+        new CopyBitwiseImageOp().Perform(straight, straightInfo, toPremultiplied, premultipliedInfo);
+        Assert.Equal(premultiplied, toPremultiplied);
+
+        var toStraight = new byte[12];
+        new CopyBitwiseImageOp().Perform(premultiplied, premultipliedInfo, toStraight, straightInfo);
+        // Some precision (and the transparent pixel's color) is lost
+        Assert.Equal([199, 100, 50, 128, 0, 0, 0, 0, 40, 50, 60, 255], toStraight);
+
+        // Through an image (which is premultiplied on some platforms), the straight values are kept (within rounding)
+        var image = ImageContext.Create(3, 1, ImagePixelFormat.ARGB32);
+        new CopyBitwiseImageOp().Perform(straight, straightInfo, image);
+        var roundTrip = new byte[12];
+        new CopyBitwiseImageOp().Perform(image, roundTrip, straightInfo);
+        for (int i = 0; i < 4; i++)
+        {
+            Assert.InRange(roundTrip[i], straight[i] - 1, straight[i]);
+        }
+    }
 }
