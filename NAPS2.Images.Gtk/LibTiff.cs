@@ -116,6 +116,24 @@ internal static class LibTiff
         return result;
     }
 
+    /// <summary>
+    /// Gets the embedded ICC color profile, or null if there isn't one.
+    /// </summary>
+    public static unsafe byte[]? GetIccProfile(IntPtr tiff)
+    {
+        uint count = 0;
+        IntPtr data = IntPtr.Zero;
+        int result = VaList.Call(ap => Load<TIFFVGetField_d>()(tiff, TiffTag.IccProfile, ap),
+            (IntPtr) (&count), (IntPtr) (&data));
+        if (result != 1 || count == 0 || data == IntPtr.Zero)
+        {
+            return null;
+        }
+        var profile = new byte[count];
+        Marshal.Copy(data, profile, 0, (int) count);
+        return profile;
+    }
+
     public delegate int TIFFVSetField_d(IntPtr tiff, TiffTag tag, IntPtr ap);
 
     public static int TIFFSetField(IntPtr tiff, TiffTag tag, params VaArg[] args) =>

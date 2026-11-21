@@ -44,7 +44,16 @@ public class GtkImageContext : ImageContext
             _tiffIo.LoadTiff(img => { image = img; cts.Cancel(); }, stream, cts.Token);
             return image;
         }
-        return new GtkImage(new Pixbuf(stream));
+        var pixbuf = new Pixbuf(stream);
+        var gtkImage = new GtkImage(pixbuf);
+        // Legacy gdk-pixbuf loaders provide the embedded color profile (base64-encoded) but don't apply it.
+        // For modern glycin-based gdk-pixbuf, profiles are auto-applied and this option isn't set, so this code
+        // path is ignored.
+        if (pixbuf.GetOption("icc-profile") is { } iccProfile)
+        {
+            BundledColorConverter?.ConvertToSrgb(gtkImage, Convert.FromBase64String(iccProfile));
+        }
+        return gtkImage;
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,

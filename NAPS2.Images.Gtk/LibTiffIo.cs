@@ -155,6 +155,10 @@ internal class LibTiffIo : ITiffWriter
                 imageLock.Dispose();
                 // LibTiff always produces pre-multiplied alpha, which we don't want
                 new UnmultiplyAlphaOp().Perform(img);
+                if (LibTiff.GetIccProfile(tiff) is { } iccProfile)
+                {
+                    ImageContext.BundledColorConverter?.ConvertToSrgb(img, iccProfile);
+                }
                 progress.Report(++i, count);
                 produceImage(img);
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);
