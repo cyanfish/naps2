@@ -1,4 +1,6 @@
-﻿namespace NAPS2.ImportExport.Images;
+﻿using NAPS2.Scan;
+
+namespace NAPS2.ImportExport.Images;
 
 internal class SaveImagesOperation : OperationBase
 {
@@ -183,23 +185,46 @@ internal class SaveImagesOperation : OperationBase
     private void DoSaveImage(ProcessedImage image, string path, ImageFileFormat format, ImageSettings imageSettings)
     {
         FileSystemHelper.EnsureParentDirExists(path);
+        var quality = imageSettings.JpegQuality.Clamp(0, 100);
+        if (format is ImageFileFormat.Jpeg or ImageFileFormat.JpegXl &&
+            GetDirectJpegPath(image, quality) is { } jpegPath)
+        {
+            if (format == ImageFileFormat.Jpeg)
+            {
+                File.Copy(jpegPath, path, true);
+                return;
+            }
+            if (ImageContext.BundledEncoders.Get(ImageFileFormat.JpegXl) is JpegXlCodec jpegXlCodec &&
+                jpegXlCodec.TryTranscodeJpeg(jpegPath, path))
+            {
+                return;
+            }
+        }
         using var renderedImage = image.Render();
         if (format == ImageFileFormat.Tiff)
         {
-            _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
+            _imageContext.TiffWriter.SaveTiff([renderedImage], path,
                 imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
             return;
         }
-        if (format == ImageFileFormat.JpegXl &&
-            ImageContext.BundledEncoders.Get(ImageFileFormat.JpegXl) is JpegXlCodec jpegXlCodec &&
-            jpegXlCodec.TryTranscodeJpeg(image, renderedImage.HorizontalResolution, renderedImage.VerticalResolution,
-                path))
-        {
-            return;
-        }
-        // Quality will be ignored when not needed
-        // TODO: Scale quality differently for jpeg2000?
-        var quality = imageSettings.JpegQuality.Clamp(0, 100);
         renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
+    }
+
+    /// <summary>
+    /// Gets the path of the stored JPEG file if it can be used directly instead of re-encoding the image.
+    /// </summary>
+    private static string? GetDirectJpegPath(ProcessedImage image, int quality)
+    {
+        var storedQuality = image.Metadata.Quality == -1 ? ScanOptions.DEFAULT_QUALITY : image.Metadata.Quality;
+        // Any quality increase is ignored since we can't actually increase quality. It would just be a lossy re-encode.
+        // But a quality reduction implies the user is trying to shrink the file size, in which case we do re-encode.
+        bool noQualityReduction = quality >= storedQuality;
+        if (image.TransformState.IsEmpty && noQualityReduction &&
+            image.Storage is ImageFileStorage fileStorage &&
+            ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
+        {
+            return fileStorage.FullPath;
+        }
+        return null;
     }
 }

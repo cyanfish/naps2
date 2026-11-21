@@ -47,22 +47,16 @@ internal class JpegXlCodec : AbstractBundledCodec
     }
 
     /// <summary>
-    /// If the image is stored as a JPEG without any transforms, losslessly recompresses the stored JPEG as JPEG XL
-    /// instead of re-encoding the pixels (which would lose more quality). The original JPEG file can be reconstructed
-    /// exactly from the result.
+    /// Losslessly recompresses a JPEG file as JPEG XL, instead of re-encoding the pixels (which would lose more
+    /// quality). The original JPEG file can be reconstructed exactly from the result.
     /// </summary>
-    public bool TryTranscodeJpeg(ProcessedImage image, double xDpi, double yDpi, string path)
+    public bool TryTranscodeJpeg(string jpegPath, string path)
     {
-        if (!image.TransformState.IsEmpty || image.Storage is not ImageFileStorage fileStorage ||
-            ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) != ImageFileFormat.Jpeg)
-        {
-            return false;
-        }
-        var jpegData = File.ReadAllBytes(fileStorage.FullPath);
+        var jpegData = File.ReadAllBytes(jpegPath);
         var stream = new MemoryStream();
         try
         {
-            DoTranscodeJpeg(jpegData, xDpi, yDpi, stream);
+            DoTranscodeJpeg(jpegData, stream);
         }
         catch (InvalidOperationException)
         {
@@ -73,14 +67,14 @@ internal class JpegXlCodec : AbstractBundledCodec
         return true;
     }
 
-    private void DoTranscodeJpeg(byte[] jpegData, double xDpi, double yDpi, Stream stream)
+    private void DoTranscodeJpeg(byte[] jpegData, Stream stream)
     {
         // Any Exif metadata in the JPEG is kept, otherwise the resolution is added (as JPEG XL readers don't
         // generally read it from the JFIF header stored for reconstructing the JPEG)
         var header = JpegFormatHelper.ReadHeader(new MemoryStream(jpegData));
-        var exif = header is { HasExifHeader: true } || xDpi <= 0 || yDpi <= 0
-            ? null
-            : ExifHelper.CreateResolutionExif(xDpi, yDpi);
+        var exif = header is { HasExifHeader: false, HorizontalDpi: > 0, VerticalDpi: > 0 }
+            ? ExifHelper.CreateResolutionExif(header.HorizontalDpi, header.VerticalDpi)
+            : null;
         var error = new byte[JpegNativeLibrary.ERROR_SIZE];
         JpegNativeLibrary.ThrowIfError(
             _transcodeJpeg(jpegData, new UIntPtr((uint) jpegData.Length), exif, new UIntPtr((uint) (exif?.Length ?? 0)),

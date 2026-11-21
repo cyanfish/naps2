@@ -250,6 +250,32 @@ public class SaveImagesOperationTests : ContextualTests
     }
 
     [Fact]
+    public async Task Jpeg_CopiesJpegStorage()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath));
+
+        Assert.True(await Save(P("test.jpg"), [image]));
+
+        Assert.Equal(ImageResources.dog, File.ReadAllBytes(P("test.jpg")));
+    }
+
+    [Fact]
+    public async Task Jpeg_LowerThanStoredQuality_ReEncodes()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath), quality: 90);
+
+        Assert.True(await Save(P("test.jpg"), [image], new ImageSettings { JpegQuality = 75 }));
+
+        Assert.NotEqual(ImageResources.dog, File.ReadAllBytes(P("test.jpg")));
+        using var expected = image.Render();
+        ImageAsserts.Similar(expected, ImageContext.Load(P("test.jpg")));
+    }
+
+    [Fact]
     public async Task JpegXl_RecompressesJpegStorage()
     {
         SetUpFileStorage();
@@ -264,8 +290,21 @@ public class SaveImagesOperationTests : ContextualTests
     }
 
     [Fact]
+    public async Task JpegXl_LowerThanStoredQuality_ReEncodes()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath), quality: 90);
+
+        Assert.True(await Save(P("test.jxl"), [image], new ImageSettings { JpegQuality = 75 }));
+
+        Assert.True(File.ReadAllBytes(P("test.jxl")).AsSpan().IndexOf("jbrd"u8) < 0);
+    }
+
+    [Fact]
     public async Task JpegXl_WithTransforms_ReEncodes()
     {
+        SetUpFileStorage();
         var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
         var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath))
             .WithTransform(new RotationTransform(90), true);
