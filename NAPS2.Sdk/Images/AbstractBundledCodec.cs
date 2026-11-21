@@ -47,13 +47,20 @@ internal abstract class AbstractBundledCodec : IBundledCodec
     {
         using var helper = PixelFormatHelper.Create(image,
             minFormat: _allowGray ? ImagePixelFormat.Gray8 : ImagePixelFormat.RGB24);
+        var (targetSubPixelType, targetPixelFormat) = helper.Image.LogicalPixelFormat switch
+        {
+            ImagePixelFormat.BW1 or ImagePixelFormat.Gray8 when _allowGray =>
+                (SubPixelType.Gray, JpegNativeLibrary.NAPS2_JPEG_PIXEL_GRAY8),
+            ImagePixelFormat.ARGB32 => (SubPixelType.Rgba, JpegNativeLibrary.NAPS2_JPEG_PIXEL_RGBA32),
+            _ => (SubPixelType.Rgb, JpegNativeLibrary.NAPS2_JPEG_PIXEL_RGB24)
+        };
         var error = new byte[JpegNativeLibrary.ERROR_SIZE];
         IntPtr outData;
         UIntPtr outSize;
-        BitwiseImageData data;
-        using (helper.Image.Lock(LockMode.ReadOnly, out data))
+        using (helper.Image.Lock(LockMode.ReadOnly, out var data))
         {
-            if (GetDirectPixelFormat(data) is { } directPixelFormat)
+            // Don't directly copy gray since Gtk passes it as RGB (and the format rarely matches exactly anyway)
+            if (targetSubPixelType != SubPixelType.Gray && GetDirectPixelFormat(data) is { } directPixelFormat)
             {
                 JpegNativeLibrary.ThrowIfError(
                     Compress(image, options, data.safePtr, data.stride, directPixelFormat, out outData, out outSize,
@@ -62,19 +69,13 @@ internal abstract class AbstractBundledCodec : IBundledCodec
                 return true;
             }
         }
-        var (subPixelType, pixelFormat) = data switch
-        {
-            { hasAlpha: true } => (SubPixelType.Rgba, JpegNativeLibrary.NAPS2_JPEG_PIXEL_RGBA32),
-            { bytesPerPixel: <= 1 } => (SubPixelType.Gray, JpegNativeLibrary.NAPS2_JPEG_PIXEL_GRAY8),
-            _ => (SubPixelType.Rgb, JpegNativeLibrary.NAPS2_JPEG_PIXEL_RGB24)
-        };
-        var pixelInfo = new PixelInfo(image.Width, image.Height, subPixelType);
+        var pixelInfo = new PixelInfo(image.Width, image.Height, targetSubPixelType);
         var pixels = new byte[pixelInfo.Length];
         new CopyBitwiseImageOp().Perform(helper.Image, pixels, pixelInfo);
         fixed (byte* ptr = pixels)
         {
             JpegNativeLibrary.ThrowIfError(
-                Compress(image, options, (IntPtr) ptr, pixelInfo.Stride, pixelFormat, out outData, out outSize,
+                Compress(image, options, (IntPtr) ptr, pixelInfo.Stride, targetPixelFormat, out outData, out outSize,
                     error), error, $"Error encoding {_format}");
         }
         Lib.CopyNativeBufferToStreamAndFree(outData, outSize, stream);

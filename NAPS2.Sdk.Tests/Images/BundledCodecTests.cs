@@ -10,11 +10,15 @@ public class BundledCodecTests : ContextualTests
     {
         Assert.IsType<WebPCodec>(ImageContext.BundledEncoders[ImageFileFormat.WebP]);
         Assert.IsType<WebPCodec>(ImageContext.BundledDecoders[ImageFileFormat.WebP]);
+        Assert.IsType<JpegXlCodec>(ImageContext.BundledEncoders[ImageFileFormat.JpegXl]);
+        Assert.IsType<JpegXlCodec>(ImageContext.BundledDecoders[ImageFileFormat.JpegXl]);
         Assert.True(ImageContext.SupportsFormat(ImageFileFormat.WebP));
+        Assert.True(ImageContext.SupportsFormat(ImageFileFormat.JpegXl));
     }
 
     [Theory]
     [InlineData(ImageFileFormat.WebP)]
+    [InlineData(ImageFileFormat.JpegXl)]
     public void SavesResolution(ImageFileFormat format)
     {
         using var image = LoadImage(ImageResources.dog);
@@ -28,6 +32,7 @@ public class BundledCodecTests : ContextualTests
 
     [Theory]
     [InlineData(ImageFileFormat.WebP)]
+    [InlineData(ImageFileFormat.JpegXl)]
     public void LosslessForBlackAndWhite(ImageFileFormat format)
     {
         using var image = LoadImage(ImageResources.dog_bw);
@@ -42,7 +47,7 @@ public class BundledCodecTests : ContextualTests
     {
         using var image = LoadImage(ImageResources.dog);
 
-        foreach (var format in new[] { ImageFileFormat.WebP })
+        foreach (var format in new[] { ImageFileFormat.WebP, ImageFileFormat.JpegXl })
         {
             var low = image.SaveToMemoryStream(format, new ImageSaveOptions { Quality = 30 });
             var high = image.SaveToMemoryStream(format, new ImageSaveOptions { Quality = 95 });
@@ -62,9 +67,11 @@ public class BundledCodecTests : ContextualTests
     [Fact]
     public void InvalidDataThrows()
     {
-        // A valid signature followed by garbage
+        // Valid signatures followed by garbage
         byte[] webp = [.."RIFF\0\0\0\0WEBPVP8 "u8.ToArray(), ..new byte[32]];
+        byte[] jxl = [0xFF, 0x0A, ..new byte[32]];
 
         Assert.Throws<InvalidOperationException>(() => ImageContext.Load(webp));
+        Assert.Throws<InvalidOperationException>(() => ImageContext.Load(jxl));
     }
 }

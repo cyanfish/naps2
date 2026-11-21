@@ -6,7 +6,7 @@ using System.Text;
 namespace NAPS2.Images;
 
 /// <summary>
-/// The naps2_jpeg native library (from the NAPS2.Jpeg.Binaries package), which wraps jpegli/libwebp.
+/// The naps2_jpeg native library (from the NAPS2.Jpeg.Binaries package), which wraps jpegli/libwebp/libjxl.
 /// </summary>
 internal class JpegNativeLibrary : Unmanaged.NativeLibrary
 {
@@ -66,6 +66,8 @@ internal class JpegNativeLibrary : Unmanaged.NativeLibrary
 
     public naps2_webp_compress_delegate WebpCompress => Load<naps2_webp_compress_delegate>();
     public naps2_webp_decompress_delegate WebpDecompress => Load<naps2_webp_decompress_delegate>();
+    public naps2_jxl_compress_delegate JxlCompress => Load<naps2_jxl_compress_delegate>();
+    public naps2_jxl_decompress_delegate JxlDecompress => Load<naps2_jxl_decompress_delegate>();
 
     public static void ThrowIfError(int ret, byte[] error, string context)
     {
@@ -104,6 +106,16 @@ internal class JpegNativeLibrary : Unmanaged.NativeLibrary
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int naps2_webp_decompress_delegate(byte[] data, UIntPtr size, out IntPtr outPixels,
+        out int outWidth, out int outHeight, out int outPixelFormat, out IntPtr outExif, out UIntPtr outExifSize,
+        byte[] error, int errorSize);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int naps2_jxl_compress_delegate(IntPtr pixels, int width, int height, int pixelFormat,
+        int quality, int lossless, byte[]? exif, UIntPtr exifSize, out IntPtr outData, out UIntPtr outSize,
+        byte[] error, int errorSize);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int naps2_jxl_decompress_delegate(byte[] data, UIntPtr size, out IntPtr outPixels,
         out int outWidth, out int outHeight, out int outPixelFormat, out IntPtr outExif, out UIntPtr outExifSize,
         byte[] error, int errorSize);
 }

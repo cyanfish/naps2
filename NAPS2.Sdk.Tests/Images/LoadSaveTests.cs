@@ -435,6 +435,18 @@ public class LoadSaveTests : ContextualTests
             new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, false
         ],
         [
+            ImageFileFormat.JpegXl, ".jxl", "dog_jxl",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
+        ],
+        [
+            ImageFileFormat.JpegXl, ".jxl", "dog_gray_jxl",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
+        ],
+        [
+            ImageFileFormat.JpegXl, ".jxl", "dog_bw_jxl",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
+        ],
+        [
             ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
             new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true
