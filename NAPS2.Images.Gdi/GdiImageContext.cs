@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Drawing.Imaging;
 using NAPS2.Util;
 
 namespace NAPS2.Images.Gdi;
@@ -29,9 +28,8 @@ public class GdiImageContext : ImageContext
 
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        var memoryStream = EnsureMemoryStream(stream);
-        using var bitmap = new Bitmap(memoryStream);
-        return new GdiImage(bitmap).Copy();
+        using var loader = new GdiFrameLoader(EnsureMemoryStream(stream));
+        return loader.LoadFrame(0);
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
@@ -46,15 +44,13 @@ public class GdiImageContext : ImageContext
             progress.Report(1, 1);
             return;
         }
-        var memoryStream = EnsureMemoryStream(stream);
-        using var bitmap = new Bitmap(memoryStream);
-        int count = bitmap.GetFrameCount(FrameDimension.Page);
+        using var loader = new GdiFrameLoader(EnsureMemoryStream(stream));
+        int count = loader.FrameCount;
         for (int i = 0; i < count; i++)
         {
             progress.Report(i, count);
             if (progress.IsCancellationRequested) break;
-            bitmap.SelectActiveFrame(FrameDimension.Page, i);
-            produceImage(new GdiImage(bitmap).Copy());
+            produceImage(loader.LoadFrame(i));
         }
         progress.Report(count, count);
     }
