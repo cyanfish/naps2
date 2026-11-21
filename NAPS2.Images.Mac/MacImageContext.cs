@@ -15,10 +15,13 @@ public class MacImageContext : ImageContext
         _imageTransformer = new MacImageTransformer(this);
     }
 
-    protected override bool SupportsTiffDecode => true;
-    protected override bool SupportsTiffEncode => true;
-    protected override bool SupportsJpeg2000Decode => true;
-    protected override bool SupportsJpeg2000Encode => true;
+    protected override bool SupportsDecodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff
+            or ImageFileFormat.Jpeg2000;
+
+    protected override bool SupportsEncodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff
+            or ImageFileFormat.Jpeg2000;
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {

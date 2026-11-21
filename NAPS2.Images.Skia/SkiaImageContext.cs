@@ -12,7 +12,11 @@ public class SkiaImageContext : ImageContext
         _imageTransformer = new SkiaImageTransformer(this);
     }
 
-    protected override bool SupportsBmpEncode => false;
+    protected override bool SupportsDecodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp;
+
+    protected override bool SupportsEncodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png;
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {

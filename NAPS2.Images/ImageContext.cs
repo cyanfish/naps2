@@ -164,39 +164,14 @@ public abstract class ImageContext
     public bool SupportsFormat(ImageFileFormat format) => SupportsDecode(format) && SupportsEncode(format);
 
     public bool SupportsDecode(ImageFileFormat format) =>
-        BundledEncoders.ContainsKey(format) || format switch
-        {
-            ImageFileFormat.Jpeg or ImageFileFormat.Png => true,
-            ImageFileFormat.Bmp => SupportsBmpDecode,
-            ImageFileFormat.Tiff => SupportsTiffDecode,
-            ImageFileFormat.Jpeg2000 => SupportsJpeg2000Decode,
-            ImageFileFormat.Heic => SupportsHeicDecode,
-            ImageFileFormat.Avif => SupportsAvifDecode,
-            _ => false
-        };
+        BundledEncoders.ContainsKey(format) || SupportsDecodeCore(format);
 
     public bool SupportsEncode(ImageFileFormat format) =>
-        BundledEncoders.ContainsKey(format) || format switch
-        {
-            ImageFileFormat.Jpeg or ImageFileFormat.Png => true,
-            ImageFileFormat.Bmp => SupportsBmpEncode,
-            ImageFileFormat.Tiff => SupportsTiffEncode,
-            ImageFileFormat.Jpeg2000 => SupportsJpeg2000Encode,
-            ImageFileFormat.Heic => SupportsHeicEncode,
-            ImageFileFormat.Avif => SupportsAvifEncode,
-            _ => false
-        };
+        BundledEncoders.ContainsKey(format) || SupportsEncodeCore(format);
 
-    protected virtual bool SupportsBmpDecode => true;
-    protected virtual bool SupportsBmpEncode => true;
-    protected virtual bool SupportsTiffDecode => false;
-    protected virtual bool SupportsTiffEncode => false;
-    protected virtual bool SupportsJpeg2000Decode => false;
-    protected virtual bool SupportsJpeg2000Encode => false;
-    protected virtual bool SupportsHeicDecode => false;
-    protected virtual bool SupportsHeicEncode => false;
-    protected virtual bool SupportsAvifDecode => false;
-    protected virtual bool SupportsAvifEncode => false;
+    protected abstract bool SupportsDecodeCore(ImageFileFormat format);
+
+    protected abstract bool SupportsEncodeCore(ImageFileFormat format);
 
     /// <summary>
     /// Loads an image from the given file path.
