@@ -518,7 +518,27 @@ namespace NAPS2.Sdk.Tests {
                 return ((byte[])(obj));
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_icc_alpha_png {
+            get {
+                object obj = ResourceManager.GetObject("dog_icc_alpha_png", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dog_cmyk_icc {
+            get {
+                object obj = ResourceManager.GetObject("dog_cmyk_icc", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>

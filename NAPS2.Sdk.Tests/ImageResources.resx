@@ -391,4 +391,10 @@
   <data name="dog_icc_webp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_icc.webp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="dog_icc_alpha_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc_alpha.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_cmyk_icc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_cmyk_icc.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

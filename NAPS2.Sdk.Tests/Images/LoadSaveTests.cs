@@ -205,14 +205,38 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    // Gdi/Gtk don't currently apply embedded color profiles
-    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.GtkImage)]
-    public void LoadWithColorProfile()
+    [Theory]
+    [InlineData(ImageFileFormat.Jpeg, "dog_icc")]
+    [InlineData(ImageFileFormat.Png, "dog_icc_png")]
+    [InlineData(ImageFileFormat.Tiff, "dog_icc_tiff")]
+    [InlineData(ImageFileFormat.Jpeg2000, "dog_icc_jp2")]
+    [InlineData(ImageFileFormat.WebP, "dog_icc_webp")]
+    [InlineData(ImageFileFormat.JpegXl, "dog_icc_jxl")]
+    [InlineData(ImageFileFormat.Heic, "dog_icc_heic")]
+    [InlineData(ImageFileFormat.Avif, "dog_icc_avif")]
+    [InlineData(ImageFileFormat.Png, "dog_icc_alpha_png")]
+    public async Task LoadWithColorProfile(ImageFileFormat format, string resource)
     {
+        if (!ImageContext.SupportsDecode(format)) return;
+
         // The image has an embedded ICC profile with the primaries rotated (i.e. the stored red channel is green, etc.),
         // so the colors are only correct if the profile is applied.
-        var image = LoadImage(ImageResources.dog_icc);
-        ImageAsserts.Similar(ImageResources.dog, image, ignoreResolution: true);
+        var data = GetResource(resource);
+        var image = LoadImage(data);
+        ImageAsserts.Similar(ImageResources.dog, image, ImageAsserts.XL_RMSE_THRESHOLD, ignoreResolution: true);
+        var frames = await ImageContext.LoadFrames(new MemoryStream(data)).ToListAsync();
+        ImageAsserts.Similar(ImageResources.dog, Assert.Single(frames), ImageAsserts.XL_RMSE_THRESHOLD,
+            ignoreResolution: true);
+    }
+
+    [Fact]
+    public void LoadCmykWithColorProfile()
+    {
+        // Legacy gdk-pixbuf is less accurate so we set a higher threshold, but newer Glycin-based pixbuf should
+        // be much better.
+        var threshold = CurrentPlatformFlags.HasAny(PlatformFlags.GtkImage) ? 15 : ImageAsserts.XPLAT_RMSE_THRESHOLD;
+        var image = LoadImage(ImageResources.dog_cmyk_icc);
+        ImageAsserts.Similar(ImageResources.dog, image, threshold, ignoreResolution: true);
     }
 
     [Fact]
@@ -384,9 +408,7 @@ public class LoadSaveTests : ContextualTests
         ],
         [
             ImageFileFormat.Png, ".png", "dog_gray_24bit_png",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false,
-            // TODO: Can we improve this for WPF?
-            new PlatformFactAttribute(exclude: PlatformFlags.WpfImage)
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
         ],
         [
             ImageFileFormat.Png, ".png", "dog_bw",
@@ -438,9 +460,7 @@ public class LoadSaveTests : ContextualTests
         ],
         [
             ImageFileFormat.Tiff, ".tiff", "dog_gray_24bit_tiff",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true,
-            // TODO: Can we improve this for WPF?
-            new PlatformFactAttribute(exclude: PlatformFlags.WpfImage)
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
         ],
         [
             ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
