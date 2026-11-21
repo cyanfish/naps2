@@ -164,7 +164,7 @@ public abstract class ImageContext
     public bool SupportsFormat(ImageFileFormat format) => SupportsDecode(format) && SupportsEncode(format);
 
     public bool SupportsDecode(ImageFileFormat format) =>
-        BundledEncoders.ContainsKey(format) || SupportsDecodeCore(format);
+        BundledDecoders.ContainsKey(format) || SupportsDecodeCore(format);
 
     public bool SupportsEncode(ImageFileFormat format) =>
         BundledEncoders.ContainsKey(format) || SupportsEncodeCore(format);
@@ -307,19 +307,24 @@ public abstract class ImageContext
     public virtual ITiffWriter TiffWriter => throw new NotSupportedException();
 
     /// <summary>
-    /// Encoders to use instead of the platform encoder for specific file formats. This is process-wide, as images
+    /// Codecs to use instead of the platform encoder for specific file formats. This is process-wide, as images
     /// don't necessarily share the ImageContext instance they were created from.
     /// </summary>
-    internal static ConcurrentDictionary<ImageFileFormat, IBundledEncoder> BundledEncoders { get; } = new();
+    internal static ConcurrentDictionary<ImageFileFormat, IBundledCodec> BundledEncoders { get; } = new();
 
     /// <summary>
-    /// Loads the image with a bundled encoder if there's one for the given format. Returns false if the platform decoder
+    /// Codecs to use instead of the platform decoder for specific file formats.
+    /// </summary>
+    internal static ConcurrentDictionary<ImageFileFormat, IBundledCodec> BundledDecoders { get; } = new();
+
+    /// <summary>
+    /// Loads the image with a bundled decoder if there's one for the given format. Returns false if the platform decoder
     /// should be used instead.
     /// </summary>
     private bool TryBundledDecode(Stream stream, ImageFileFormat format, [NotNullWhen(true)] out IMemoryImage? image)
     {
         image = null;
-        return BundledEncoders.TryGetValue(format, out var encoder) && encoder.TryDecode(this, stream, out image);
+        return BundledDecoders.TryGetValue(format, out var decoder) && decoder.TryDecode(this, stream, out image);
     }
 
     /// <summary>

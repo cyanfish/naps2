@@ -7,15 +7,15 @@ namespace NAPS2.Images;
 /// Encodes JPEG images with jpegli (via the naps2_jpeg native library), which produces significantly smaller files
 /// than the platform encoders at the same quality.
 /// </summary>
-internal class JpegliEncoder : IBundledEncoder
+internal class JpegliCodec : IBundledCodec
 {
     private const int DEFAULT_QUALITY = 75;
     private const int ERROR_BUFFER_SIZE = 256;
 
     /// <summary>
-    /// Creates an encoder if the naps2_jpeg native library is present and can be loaded, otherwise returns null.
+    /// Creates the codec if the naps2_jpeg native library is present and can be loaded, otherwise returns null.
     /// </summary>
-    public static JpegliEncoder? TryCreate()
+    public static JpegliCodec? TryCreate()
     {
         if (JpegNativeLibrary.FindPath() == null)
         {
@@ -23,7 +23,7 @@ internal class JpegliEncoder : IBundledEncoder
         }
         try
         {
-            return new JpegliEncoder(JpegNativeLibrary.Instance);
+            return new JpegliCodec(JpegNativeLibrary.Instance);
         }
         catch (Exception)
         {
@@ -33,7 +33,7 @@ internal class JpegliEncoder : IBundledEncoder
 
     private readonly JpegNativeLibrary _lib;
 
-    private JpegliEncoder(JpegNativeLibrary lib)
+    private JpegliCodec(JpegNativeLibrary lib)
     {
         _lib = lib;
     }

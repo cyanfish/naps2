@@ -6,11 +6,11 @@ namespace NAPS2.Sdk.Tests.Images;
 
 // The bundled encoders are process-wide, and some tests here temporarily replace the JPEG encoder, so don't run in
 // parallel with other tests.
-[CollectionDefinition(nameof(JpegliEncoderTests), DisableParallelization = true)]
-public class JpegliEncoderTestsCollection;
+[CollectionDefinition(nameof(JpegliCodecTests), DisableParallelization = true)]
+public class JpegliCodecTestsCollection;
 
-[Collection(nameof(JpegliEncoderTests))]
-public class JpegliEncoderTests : ContextualTests
+[Collection(nameof(JpegliCodecTests))]
+public class JpegliCodecTests : ContextualTests
 {
     // Images with different color content (color, grayscale, black and white, transparency)
     public static IEnumerable<object[]> TestCases =
@@ -24,7 +24,7 @@ public class JpegliEncoderTests : ContextualTests
     [Fact]
     public void RegisteredByScanningContext()
     {
-        Assert.IsType<JpegliEncoder>(ImageContext.BundledEncoders[ImageFileFormat.Jpeg]);
+        Assert.IsType<JpegliCodec>(ImageContext.BundledEncoders[ImageFileFormat.Jpeg]);
     }
 
     [Theory]
@@ -79,9 +79,9 @@ public class JpegliEncoderTests : ContextualTests
     [Fact]
     public void FallbackToPlatformEncoderForStream()
     {
-        var encoder = new FailingEncoder();
+        var codec = new FailingCodec();
         var original = ImageContext.BundledEncoders[ImageFileFormat.Jpeg];
-        ImageContext.BundledEncoders[ImageFileFormat.Jpeg] = encoder;
+        ImageContext.BundledEncoders[ImageFileFormat.Jpeg] = codec;
         try
         {
             using var image = LoadImage(ImageResources.dog);
@@ -89,7 +89,7 @@ public class JpegliEncoderTests : ContextualTests
             var stream = new MemoryStream();
             image.Save(stream, ImageFileFormat.Jpeg);
 
-            Assert.True(encoder.Called);
+            Assert.True(codec.Called);
             ImageAsserts.Similar(image, ImageContext.Load(stream.ToArray()), ImageAsserts.XL_RMSE_THRESHOLD);
         }
         finally
@@ -101,9 +101,9 @@ public class JpegliEncoderTests : ContextualTests
     [Fact]
     public void FallbackToPlatformEncoderForFile()
     {
-        var encoder = new FailingEncoder();
+        var codec = new FailingCodec();
         var original = ImageContext.BundledEncoders[ImageFileFormat.Jpeg];
-        ImageContext.BundledEncoders[ImageFileFormat.Jpeg] = encoder;
+        ImageContext.BundledEncoders[ImageFileFormat.Jpeg] = codec;
         try
         {
             using var image = LoadImage(ImageResources.dog);
@@ -111,7 +111,7 @@ public class JpegliEncoderTests : ContextualTests
 
             image.Save(path);
 
-            Assert.True(encoder.Called);
+            Assert.True(codec.Called);
             ImageAsserts.Similar(image, ImageContext.Load(path), ImageAsserts.XL_RMSE_THRESHOLD);
         }
         finally
@@ -155,7 +155,7 @@ public class JpegliEncoderTests : ContextualTests
         ImageAsserts.Similar(expected, actual);
     }
 
-    private class FailingEncoder : IBundledEncoder
+    private class FailingCodec : IBundledCodec
     {
         public bool Called { get; private set; }
 
