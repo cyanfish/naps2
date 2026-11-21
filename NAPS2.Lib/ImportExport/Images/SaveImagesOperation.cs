@@ -188,13 +188,18 @@ internal class SaveImagesOperation : OperationBase
         {
             _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
                 imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
+            return;
         }
-        else
+        if (format == ImageFileFormat.JpegXl &&
+            ImageContext.BundledEncoders.Get(ImageFileFormat.JpegXl) is JpegXlCodec jpegXlCodec &&
+            jpegXlCodec.TryTranscodeJpeg(image, renderedImage.HorizontalResolution, renderedImage.VerticalResolution,
+                path))
         {
-            // Quality will be ignored when not needed
-            // TODO: Scale quality differently for jpeg2000?
-            var quality = imageSettings.JpegQuality.Clamp(0, 100);
-            renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
+            return;
         }
+        // Quality will be ignored when not needed
+        // TODO: Scale quality differently for jpeg2000?
+        var quality = imageSettings.JpegQuality.Clamp(0, 100);
+        renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
     }
 }

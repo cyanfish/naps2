@@ -249,6 +249,34 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.Equal("blah", File.ReadAllText(P("test.tiff")));
     }
 
+    [Fact]
+    public async Task JpegXl_RecompressesJpegStorage()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath));
+
+        Assert.True(await Save(P("test.jxl"), [image]));
+
+        // A JPEG reconstruction box is only present when the JPEG is recompressed rather than re-encoded
+        var jxl = File.ReadAllBytes(P("test.jxl"));
+        Assert.True(jxl.AsSpan().IndexOf("jbrd"u8) >= 0);
+    }
+
+    [Fact]
+    public async Task JpegXl_WithTransforms_ReEncodes()
+    {
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath))
+            .WithTransform(new RotationTransform(90), true);
+
+        Assert.True(await Save(P("test.jxl"), [image]));
+
+        Assert.True(File.ReadAllBytes(P("test.jxl")).AsSpan().IndexOf("jbrd"u8) < 0);
+        using var expected = image.Render();
+        ImageAsserts.Similar(expected, ImageContext.Load(P("test.jxl")));
+    }
+
     [PlatformFact(exclude: PlatformFlags.SkiaImage)]
     public async Task SinglePageTiff()
     {

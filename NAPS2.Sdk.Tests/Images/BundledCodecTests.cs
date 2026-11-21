@@ -74,4 +74,42 @@ public class BundledCodecTests : ContextualTests
         Assert.Throws<InvalidOperationException>(() => ImageContext.Load(webp));
         Assert.Throws<InvalidOperationException>(() => ImageContext.Load(jxl));
     }
+
+    [Fact]
+    public void TranscodeJpeg()
+    {
+        SetUpFileStorage();
+        var codec = (JpegXlCodec) ImageContext.BundledEncoders[ImageFileFormat.JpegXl];
+        // jpegli output, which has the resolution in the JFIF header but not Exif
+        using var original = LoadImage(ImageResources.dog);
+        original.SetResolution(300, 300);
+        var jpeg = original.SaveToMemoryStream(ImageFileFormat.Jpeg).ToArray();
+        var stored = ScanningContext.CreateProcessedImage(new ImageFileStorage(CopyResourceToFile(jpeg, "stored.jpg")));
+
+        Assert.True(codec.TryTranscodeJpeg(stored, 300, 300, P("test.jxl")));
+
+        var jxl = File.ReadAllBytes(P("test.jxl"));
+        // Lossless recompression of a JPEG is typically ~20% smaller
+        Assert.True(jxl.Length < jpeg.Length * 0.9);
+        using var image = ImageContext.Load(jxl);
+        Assert.Equal(ImageFileFormat.JpegXl, image.OriginalFileFormat);
+        Assert.Equal(300, image.HorizontalResolution, 2);
+        // The pixels differ slightly from the platform JPEG decoder, but the JPEG itself can be reconstructed exactly
+        ImageAsserts.Similar(ImageContext.Load(jpeg), image);
+    }
+
+    [Fact]
+    public void TranscodeJpegKeepsExif()
+    {
+        SetUpFileStorage();
+        var codec = (JpegXlCodec) ImageContext.BundledEncoders[ImageFileFormat.JpegXl];
+        // dog_exif has a resolution of 72 in its Exif metadata
+        var stored = ScanningContext.CreateProcessedImage(
+            new ImageFileStorage(CopyResourceToFile(ImageResources.dog_exif, "stored.jpg")));
+
+        Assert.True(codec.TryTranscodeJpeg(stored, 300, 300, P("test.jxl")));
+
+        using var image = ImageContext.Load(P("test.jxl"));
+        Assert.Equal(72, image.HorizontalResolution, 2);
+    }
 }

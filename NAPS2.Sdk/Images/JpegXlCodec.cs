@@ -11,12 +11,14 @@ internal class JpegXlCodec : AbstractBundledCodec
 
     private readonly JpegNativeLibrary.naps2_jxl_compress_delegate _compress;
     private readonly JpegNativeLibrary.naps2_jxl_decompress_delegate _decompress;
+    private readonly JpegNativeLibrary.naps2_jxl_transcode_jpeg_delegate _transcodeJpeg;
 
     private JpegXlCodec(JpegNativeLibrary lib)
         : base(lib, ImageFileFormat.JpegXl, allowGray: true)
     {
         _compress = lib.JxlCompress;
         _decompress = lib.JxlDecompress;
+        _transcodeJpeg = lib.JxlTranscodeJpeg;
     }
 
     protected override int? GetDirectPixelFormat(BitwiseImageData data)
@@ -42,6 +44,49 @@ internal class JpegXlCodec : AbstractBundledCodec
             : null;
         return _compress(pixels, image.Width, image.Height, pixelFormat, GetQuality(options), lossless ? 1 : 0, exif,
             new UIntPtr((uint) (exif?.Length ?? 0)), out outData, out outSize, error, error.Length);
+    }
+
+    /// <summary>
+    /// If the image is stored as a JPEG without any transforms, losslessly recompresses the stored JPEG as JPEG XL
+    /// instead of re-encoding the pixels (which would lose more quality). The original JPEG file can be reconstructed
+    /// exactly from the result.
+    /// </summary>
+    public bool TryTranscodeJpeg(ProcessedImage image, double xDpi, double yDpi, string path)
+    {
+        if (!image.TransformState.IsEmpty || image.Storage is not ImageFileStorage fileStorage ||
+            ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) != ImageFileFormat.Jpeg)
+        {
+            return false;
+        }
+        var jpegData = File.ReadAllBytes(fileStorage.FullPath);
+        var stream = new MemoryStream();
+        try
+        {
+            DoTranscodeJpeg(jpegData, xDpi, yDpi, stream);
+        }
+        catch (InvalidOperationException)
+        {
+            // Some JPEGs can't be losslessly recompressed (e.g. with arithmetic coding), so re-encode them instead
+            return false;
+        }
+        File.WriteAllBytes(path, stream.ToArray());
+        return true;
+    }
+
+    private void DoTranscodeJpeg(byte[] jpegData, double xDpi, double yDpi, Stream stream)
+    {
+        // Any Exif metadata in the JPEG is kept, otherwise the resolution is added (as JPEG XL readers don't
+        // generally read it from the JFIF header stored for reconstructing the JPEG)
+        var header = JpegFormatHelper.ReadHeader(new MemoryStream(jpegData));
+        var exif = header is { HasExifHeader: true } || xDpi <= 0 || yDpi <= 0
+            ? null
+            : ExifHelper.CreateResolutionExif(xDpi, yDpi);
+        var error = new byte[JpegNativeLibrary.ERROR_SIZE];
+        JpegNativeLibrary.ThrowIfError(
+            _transcodeJpeg(jpegData, new UIntPtr((uint) jpegData.Length), exif, new UIntPtr((uint) (exif?.Length ?? 0)),
+                out var outData, out var outSize, error, error.Length),
+            error, "Error recompressing JPEG as JPEG XL");
+        Lib.CopyNativeBufferToStreamAndFree(outData, outSize, stream);
     }
 
     protected override int Decompress(byte[] data, UIntPtr size, out IntPtr outPixels, out int outWidth,
