@@ -108,7 +108,8 @@ internal class CopyBitwiseImageOp : BinaryBitwiseImageOp
         bool copyToGray = dst.bytesPerPixel == 1;
         bool resetAlpha = dst.hasAlpha && !src.hasAlpha;
         bool premultiply = copyAlpha && !src.premultipliedAlpha && dst.premultipliedAlpha;
-        bool unpremultiply = copyAlpha && src.premultipliedAlpha && !dst.premultipliedAlpha;
+        // We unpremultiply even when dst has no alpha, so the end result of a RGBA->RGB copy is consistent with ignoring alpha
+        bool unpremultiply = src.premultipliedAlpha && !dst.premultipliedAlpha;
         bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
