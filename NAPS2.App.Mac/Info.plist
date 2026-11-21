@@ -89,6 +89,47 @@
           <string>com.microsoft.bmp</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>WEBP</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>org.webmproject.webp</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>JXL</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.jpeg-xl</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>HEIC</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.heic</string>
+          <string>public.heif</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>AVIF</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.avif</string>
+        </array>
+      </dict>
     </array>
 
   </dict>
