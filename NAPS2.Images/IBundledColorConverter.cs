@@ -7,8 +7,8 @@ namespace NAPS2.Images;
 internal interface IBundledColorConverter
 {
     /// <summary>
-    /// Converts the image's pixels in place from the given ICC profile to sRGB. The image is left unchanged if the
-    /// profile can't be applied.
+    /// Converts the image's pixels in place from the given ICC profile to sRGB. Returns false, leaving the image
+    /// unchanged, if the profile can't be applied (e.g. a CMYK profile, or an unsupported pixel format).
     /// </summary>
-    void ConvertToSrgb(IMemoryImage image, byte[] iccProfile);
+    bool TryConvertToSrgb(IMemoryImage image, byte[] iccProfile);
 }

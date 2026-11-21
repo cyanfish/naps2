@@ -51,7 +51,7 @@ public class GtkImageContext : ImageContext
         // path is ignored.
         if (pixbuf.GetOption("icc-profile") is { } iccProfile)
         {
-            BundledColorConverter?.ConvertToSrgb(gtkImage, Convert.FromBase64String(iccProfile));
+            BundledColorConverter?.TryConvertToSrgb(gtkImage,Convert.FromBase64String(iccProfile));
         }
         return gtkImage;
     }

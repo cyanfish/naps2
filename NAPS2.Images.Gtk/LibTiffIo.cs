@@ -157,7 +157,7 @@ internal class LibTiffIo : ITiffWriter
                 new UnmultiplyAlphaOp().Perform(img);
                 if (LibTiff.GetIccProfile(tiff) is { } iccProfile)
                 {
-                    ImageContext.BundledColorConverter?.ConvertToSrgb(img, iccProfile);
+                    ImageContext.BundledColorConverter?.TryConvertToSrgb(img, iccProfile);
                 }
                 progress.Report(++i, count);
                 produceImage(img);

@@ -15,12 +15,12 @@ internal class IccColorConverter : IBundledColorConverter
         _iccToSrgb = lib.IccToSrgb;
     }
 
-    public void ConvertToSrgb(IMemoryImage image, byte[] iccProfile)
+    public bool TryConvertToSrgb(IMemoryImage image, byte[] iccProfile)
     {
         using var lockState = image.Lock(LockMode.ReadWrite, out var data);
         if (data.invertY || data.invertColorSpace || data.premultipliedAlpha)
         {
-            return;
+            return false;
         }
         // The 4th byte doesn't affect the conversion, so it can be padding rather than alpha
         int? pixelFormat = (data.bytesPerPixel, data.rOff, data.gOff, data.bOff) switch
@@ -33,10 +33,10 @@ internal class IccColorConverter : IBundledColorConverter
         };
         if (pixelFormat == null)
         {
-            return;
+            return false;
         }
         var error = new byte[JpegNativeLibrary.ERROR_SIZE];
-        _iccToSrgb(data.safePtr, data.w, data.h, data.stride, pixelFormat.Value, iccProfile,
-            new UIntPtr((uint) iccProfile.Length), error, error.Length);
+        return _iccToSrgb(data.safePtr, data.w, data.h, data.stride, pixelFormat.Value, iccProfile,
+            new UIntPtr((uint) iccProfile.Length), error, error.Length) == 0;
     }
 }
