@@ -573,11 +573,38 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AVIF File (*.avif).
+        /// </summary>
+        internal static string FileTypeAvif {
+            get {
+                return ResourceManager.GetString("FileTypeAvif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitmap Files (*.bmp).
         /// </summary>
         internal static string FileTypeBmp {
             get {
                 return ResourceManager.GetString("FileTypeBmp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GIF File (*.gif).
+        /// </summary>
+        internal static string FileTypeGif {
+            get {
+                return ResourceManager.GetString("FileTypeGif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HEIC File (*.heic, *.heif).
+        /// </summary>
+        internal static string FileTypeHeic {
+            get {
+                return ResourceManager.GetString("FileTypeHeic", resourceCulture);
             }
         }
         
@@ -609,6 +636,15 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to JPEG XL File (*.jxl).
+        /// </summary>
+        internal static string FileTypeJxl {
+            get {
+                return ResourceManager.GetString("FileTypeJxl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PDF Document (*.pdf).
         /// </summary>
         internal static string FileTypePdf {
@@ -632,6 +668,15 @@ namespace NAPS2.Lang.Resources {
         internal static string FileTypeTiff {
             get {
                 return ResourceManager.GetString("FileTypeTiff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebP File (*.webp).
+        /// </summary>
+        internal static string FileTypeWebp {
+            get {
+                return ResourceManager.GetString("FileTypeWebp", resourceCulture);
             }
         }
         

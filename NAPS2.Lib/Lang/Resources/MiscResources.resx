@@ -168,6 +168,21 @@
   <data name="FileTypeJp2" xml:space="preserve">
     <value>JPEG2000 File (*.jp2, *.jpx)</value>
   </data>
+  <data name="FileTypeAvif" xml:space="preserve">
+    <value>AVIF File (*.avif)</value>
+  </data>
+  <data name="FileTypeGif" xml:space="preserve">
+    <value>GIF File (*.gif)</value>
+  </data>
+  <data name="FileTypeHeic" xml:space="preserve">
+    <value>HEIC File (*.heic, *.heif)</value>
+  </data>
+  <data name="FileTypeJxl" xml:space="preserve">
+    <value>JPEG XL File (*.jxl)</value>
+  </data>
+  <data name="FileTypeWebp" xml:space="preserve">
+    <value>WebP File (*.webp)</value>
+  </data>
   <data name="NameMissing" xml:space="preserve">
     <value>Name missing.</value>
   </data>

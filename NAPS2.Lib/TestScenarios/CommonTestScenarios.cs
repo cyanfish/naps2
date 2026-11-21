@@ -447,7 +447,8 @@ internal class CommonTestScenarios : TestScenarioProvider
         Add("file-dialog-save-images", () => ShowFileDialog(
             [
                 K(MiscResources.FileTypeBmp), K(MiscResources.FileTypeJpeg), K(MiscResources.FileTypeJp2),
-                K(MiscResources.FileTypePng), K(MiscResources.FileTypeTiff)
+                K(MiscResources.FileTypeJxl), K(MiscResources.FileTypePng), K(MiscResources.FileTypeTiff),
+                K(MiscResources.FileTypeWebp)
             ], FileFilterGroup.Image));
         Add("file-dialog-save-pdf", () => ShowFileDialog([K(MiscResources.FileTypePdf)],
             FileFilterGroup.Pdf | FileFilterGroup.Image), variant: true);
