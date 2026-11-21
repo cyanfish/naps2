@@ -3,7 +3,7 @@ namespace NAPS2.Images;
 public record ImageSaveOptions
 {
     /// <summary>
-    /// The quality parameter for JPEG compression, if applicable. -1 for default.
+    /// The quality parameter for JPEG (or WebP/JpegXL) compression, if applicable. -1 for default.
     /// </summary>
     public int Quality { get; init; } = -1;
 

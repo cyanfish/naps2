@@ -20,10 +20,15 @@ public class ScanningContext : IDisposable
 
     static ScanningContext()
     {
-        // Use jpegli for JPEG encoding if the NAPS2.Jpeg.Binaries package is present
+        // Use jpegli/libwebp if the NAPS2.Jpeg.Binaries package is present
         if (JpegliCodec.TryCreate() is { } jpegliCodec)
         {
             ImageContext.BundledEncoders.TryAdd(ImageFileFormat.Jpeg, jpegliCodec);
+        }
+        if (WebPCodec.TryCreate() is { } webpCodec)
+        {
+            ImageContext.BundledEncoders.TryAdd(ImageFileFormat.WebP, webpCodec);
+            ImageContext.BundledDecoders.TryAdd(ImageFileFormat.WebP, webpCodec);
         }
     }
 
