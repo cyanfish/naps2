@@ -160,6 +160,30 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(expected, image2, ignoreResolution: ignoreRes);
     }
 
+    // These formats are decode-only, and support depends on the platform (and on Windows, codecs installed from the
+    // Microsoft Store).
+    [Theory]
+    [InlineData(ImageFileFormat.Heic, "dog_heic")]
+    [InlineData(ImageFileFormat.Avif, "dog_avif")]
+    public async Task LoadDecodeOnlyFormat(ImageFileFormat format, string resource)
+    {
+        var data = GetResource(resource);
+        if (!ImageContext.SupportsDecode(format))
+        {
+            Assert.Throws<NotSupportedException>(() => ImageContext.Load(data));
+            return;
+        }
+        using var image = ImageContext.Load(data);
+        var frames = await ImageContext.LoadFrames(new MemoryStream(data)).ToListAsync();
+
+        Assert.Equal(format, image.OriginalFileFormat);
+        ImageAsserts.Similar(ImageResources.dog, image, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        Assert.Single(frames);
+        ImageAsserts.Similar(image, frames[0], ImageAsserts.NULL_RMSE_THRESHOLD);
+        Assert.False(ImageContext.SupportsEncode(format));
+        Assert.Throws<NotSupportedException>(() => image.SaveToMemoryStream(format));
+    }
+
     [Fact]
     public void LoadFromWrongExtension()
     {

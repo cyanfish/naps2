@@ -16,10 +16,17 @@ public class GtkImageContext : ImageContext
     }
 
     protected override bool SupportsDecodeCore(ImageFileFormat format) =>
-        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff;
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff
+        || format == ImageFileFormat.Heic && (PixbufMimeTypes.Value.Contains("image/heic") ||
+                                              PixbufMimeTypes.Value.Contains("image/heif"))
+        || format == ImageFileFormat.Avif && PixbufMimeTypes.Value.Contains("image/avif");
 
     protected override bool SupportsEncodeCore(ImageFileFormat format) =>
         format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff;
+
+    // HEIC/AVIF are supported if the respective gdk-pixbuf loaders (e.g. from libheif or libavif) are installed
+    private static readonly Lazy<HashSet<string>> PixbufMimeTypes = new(() =>
+        Pixbuf.Formats.SelectMany(format => format.MimeTypes).ToHashSet());
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
