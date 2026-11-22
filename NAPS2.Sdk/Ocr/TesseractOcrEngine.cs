@@ -103,6 +103,9 @@ public class TesseractOcrEngine : IOcrEngine
                 logger.LogError("Couldn't start OCR process.");
                 return null;
             }
+            // Drain the output pipes so tesseract can't block on a full buffer
+            tesseractProcess.BeginOutputReadLine();
+            tesseractProcess.BeginErrorReadLine();
             // Improve main window responsiveness
             try
             {
@@ -144,19 +147,6 @@ public class TesseractOcrEngine : IOcrEngine
                 }
                 return null;
             }
-#if DEBUG && DEBUGTESS
-                Debug.WriteLine("Tesseract stopwatch: " + stopwatch.ElapsedMilliseconds);
-                var output = tesseractProcess.StandardOutput.ReadToEnd();
-                if (output.Length > 0)
-                {
-                    Log.Error("Tesseract stdout: {0}", output);
-                }
-                output = tesseractProcess.StandardError.ReadToEnd();
-                if (output.Length > 0)
-                {
-                    Log.Error("Tesseract stderr: {0}", output);
-                }
-#endif
             XDocument hocrDocument = XDocument.Load(tempHocrFilePathWithExt);
             return CreateOcrResult(hocrDocument);
         }
