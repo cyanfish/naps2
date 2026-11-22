@@ -54,6 +54,7 @@ public class WpfEtoPlatform : EtoPlatform
         var platform = new Eto.Wpf.Platform();
         // Use system message boxes rather than Eto's themed ones
         platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
+        platform.Add<Button.IHandler>(() => new WpfButtonHandler());
         var application = new Application(platform);
         // Drawables paint their own content (e.g. the preview image), which a right-to-left window would mirror
         Eto.Style.Add<Eto.Wpf.Forms.Controls.DrawableHandler>(null,
@@ -449,7 +450,7 @@ public class WpfEtoPlatform : EtoPlatform
         var app = SW.Application.Current;
         var back = ((SWM.SolidColorBrush) app.FindResource("SolidBackgroundFillColorBaseBrush")!).Color;
         var border = app.FindResource("ControlStrongStrokeColorDefaultBrush");
-        foreach (var state in new[] { "", "PointerOver", "Pressed", "Disabled" })
+        foreach (var state in new[] { "", "PointerOver", "Pressed" })
         {
             var fore = ((SWM.SolidColorBrush) app.FindResource($"ButtonBackground{state}")!).Color;
             double a = fore.A / 255.0;
@@ -460,6 +461,8 @@ public class WpfEtoPlatform : EtoPlatform
             native.Resources[$"ButtonBackground{state}"] = brush;
             native.Resources[$"ButtonBorderBrush{state}"] = border;
         }
+        native.Resources["ButtonBackgroundDisabled"] = native.Resources["ButtonBackground"];
+        native.Resources["ButtonBorderBrushDisabled"] = border;
     }
 
     public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToDisplayBitmapSource()));
