@@ -7,27 +7,26 @@ namespace NAPS2.EtoForms.Widgets;
 public class ScrollZoomImageViewer
 {
     private readonly Scrollable _scrollable = new() { Border = BorderType.None };
-    private readonly Drawable _imageView = new() { BackgroundColor = Colors.White };
-    private PointF _scrollableLocation;
+    private readonly Drawable _imageView = new();
     private Size _renderSize;
     private float _renderFactor;
     private PointF? _mousePos;
     private PointF? _initialMousePos;
     private Point? _initialScrollPos;
     private bool _mouseIsDown;
+    private bool _fitToContainer = true;
 
     public ScrollZoomImageViewer()
     {
         _scrollable.Content = _imageView;
-        _scrollable.BackgroundColor = Colors.White;
         _imageView.Paint += ImagePaint;
-        _scrollable.Shown += OnShown;
         _scrollable.MouseEnter += OnMouseEnter;
         _scrollable.MouseLeave += OnMouseLeave;
         _scrollable.MouseMove += OnMouseMove;
         _scrollable.MouseDown += OnMouseDown;
         _scrollable.MouseUp += OnMouseUp;
         EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
+        _scrollable.SizeChanged += OnSizeChanged;
         _scrollable.Cursor = Cursors.Pointer;
     }
 
@@ -62,11 +61,6 @@ public class ScrollZoomImageViewer
     private float XOffset => Math.Max((_imageView.Width - RenderSize.Width) / 2, 0);
     private float YOffset => Math.Max((_imageView.Height - RenderSize.Height) / 2, 0);
 
-    private void OnShown(object? sender, EventArgs e)
-    {
-        _scrollableLocation = _scrollable.Location;
-    }
-
     private void OnMouseEnter(object? sender, MouseEventArgs e)
     {
         // TODO: Mouse enter/leave events aren't firing on WinForms, why?
@@ -99,6 +93,25 @@ public class ScrollZoomImageViewer
         _mousePos = null;
     }
 
+    // An image that was fitted to the viewer stays fitted when the viewer's size changes (the window is resized, or
+    // other controls appear next to it); an explicitly chosen zoom level is kept.
+    private void OnSizeChanged(object? sender, EventArgs e)
+    {
+        if (!_fitToContainer || Image == null) return;
+        if (EtoPlatform.Current.IsGtk)
+        {
+            // Gtk delays adjusting the image view size after the container size changes
+            Invoker.Current.InvokeDispatch(() =>
+            {
+                if (_fitToContainer) ZoomToContainer();
+            });
+        }
+        else
+        {
+            ZoomToContainer();
+        }
+    }
+
     private void OnMouseWheel(object? sender, MouseEventArgs e)
     {
         if (e.Modifiers == Keys.Control)
@@ -110,8 +123,6 @@ public class ScrollZoomImageViewer
 
     private void ImagePaint(object? sender, PaintEventArgs e)
     {
-        var bgColor = ColorScheme?.BackgroundColor ?? Colors.White;
-        e.Graphics.FillRectangle(bgColor, 0, 0, _imageView.Width, _imageView.Height);
         if (Image != null)
         {
             e.Graphics.DrawRectangle(
@@ -133,6 +144,7 @@ public class ScrollZoomImageViewer
 
     public void SetZoom(float value, bool anchorToMouse = false)
     {
+        _fitToContainer = false;
         _renderFactor = value.Clamp(0.01f, MaxZoom);
         _scrollable.SuspendLayout();
         var anchor = GetMouseAnchor(anchorToMouse);
@@ -145,13 +157,19 @@ public class ScrollZoomImageViewer
 
     public void ZoomToActual()
     {
+        _fitToContainer = false;
         RenderSize = new Size(Image!.Width, Image.Height);
         _renderFactor = 1f;
         ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
+    /// <summary>
+    /// Fits the image to the viewer, now and whenever the viewer's size changes (until the zoom is changed). If the
+    /// viewer doesn't have a size yet, the image is fitted once it does.
+    /// </summary>
     public void ZoomToContainer()
     {
+        _fitToContainer = true;
         if (!_scrollable.Loaded || Image == null || _scrollable.Width <= 0 || _scrollable.Height <= 0)
         {
             return;
@@ -182,20 +200,18 @@ public class ScrollZoomImageViewer
     private (PointF imageAnchor, PointF mouseRelativePos) GetMouseAnchor(bool anchorToMouse)
     {
         var anchorMiddle = new PointF(0.5f, 0.5f);
-        var scrollableMiddle = new PointF(
-            _scrollableLocation.X + _scrollable.Width / 2f,
-            _scrollableLocation.Y + _scrollable.Height / 2f);
+        var scrollableMiddle = new PointF(_scrollable.Width / 2f, _scrollable.Height / 2f);
         if (!anchorToMouse ||
             _mousePos is not { } mousePos ||
-            mousePos.X < _scrollableLocation.X ||
-            mousePos.Y < _scrollableLocation.Y ||
-            mousePos.X > _scrollableLocation.X + _scrollable.Width ||
-            mousePos.Y > _scrollableLocation.Y + _scrollable.Height)
+            mousePos.X < 0 ||
+            mousePos.Y < 0 ||
+            mousePos.X > _scrollable.Width ||
+            mousePos.Y > _scrollable.Height)
         {
             // Mouse is outside the scrollable
             return (anchorMiddle, scrollableMiddle);
         }
-        var mouseRelativePos = mousePos - _scrollableLocation - new Point(1, 1);
+        var mouseRelativePos = mousePos - new Point(1, 1);
         var x = (mouseRelativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
         var y = (mouseRelativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
         if (x < 0 || y < 0 || x > 1 || y > 1)

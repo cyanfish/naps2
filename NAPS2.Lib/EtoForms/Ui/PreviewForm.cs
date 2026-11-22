@@ -317,28 +317,10 @@ public class PreviewForm : EtoDialogBase
         ImageViewer.ZoomToContainer();
     }
 
-    protected override void OnSizeChanged(EventArgs e)
-    {
-        base.OnSizeChanged(e);
-        if (EtoPlatform.Current.IsGtk)
-        {
-            // Gtk delays adjusting the imageview size after the container size changes, which messes this up unless
-            // we queue it after the current UI thread options.
-            // We don't want to do this on Windows/Mac as it results in the render size lagging the window size.
-            Invoker.Current.InvokeDispatch(ImageViewer.ZoomToContainer);
-        }
-        else
-        {
-            ImageViewer.ZoomToContainer();
-        }
-    }
-
     private void DeleteCurrentImage()
     {
-        if (MessageBox.Show(this,
-                string.Format(MiscResources.ConfirmDeleteItems, 1),
-                MiscResources.Delete, MessageBoxButtons.OKCancel,
-                MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
+        if (MessageDialog.Confirm(this, string.Format(MiscResources.ConfirmDeleteItems, 1), MiscResources.Delete,
+                UiStrings.Delete, destructive: true))
         {
             // We don't want to run Commands.Delete as that runs on DesktopController and uses that selection.
             Commands.ImageListActions.DeleteSelected();
