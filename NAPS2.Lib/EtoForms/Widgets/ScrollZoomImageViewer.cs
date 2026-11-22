@@ -8,7 +8,6 @@ public class ScrollZoomImageViewer
 {
     private readonly Scrollable _scrollable = new() { Border = BorderType.None };
     private readonly Drawable _imageView = new();
-    private Size _renderSize;
     private float _renderFactor;
     private PointF? _mousePos;
     private PointF? _initialMousePos;
@@ -20,6 +19,9 @@ public class ScrollZoomImageViewer
     {
         _scrollable.Content = _imageView;
         _imageView.Paint += ImagePaint;
+        _imageView.MouseDown += (_, e) => OverlayMouseDown?.Invoke(this, e);
+        _imageView.MouseMove += (_, e) => OverlayMouseMove?.Invoke(this, e);
+        _imageView.MouseUp += (_, e) => OverlayMouseUp?.Invoke(this, e);
         _scrollable.MouseEnter += OnMouseEnter;
         _scrollable.MouseLeave += OnMouseLeave;
         _scrollable.MouseMove += OnMouseMove;
@@ -33,25 +35,89 @@ public class ScrollZoomImageViewer
     // For some reason Gtk can't render a few pixels width around the edge of the image, so we need to correct for that.
     private int BorderOffset { get; } = EtoPlatform.Current.IsGtk ? 6 : 0;
 
-    public Bitmap? Image { get; set; }
+    /// <summary>
+    /// The image shown. The viewer doesn't own it; use SetImage to replace it with the zoom adjusted.
+    /// </summary>
+    public Bitmap? Image { get; private set; }
 
     public ColorScheme? ColorScheme { get; set; }
 
+    public bool PanEnabled { get; set; } = true;
+
+    public int ImagePadding
+    {
+        get;
+        set
+        {
+            field = value;
+            if (Image != null)
+            {
+                RenderSize = RenderSize;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The image's bounds in the coordinate space used by PaintOverlay and the overlay mouse events.
+    /// </summary>
+    public RectangleF ImageRect => new(XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+
+    public Cursor? OverlayCursor
+    {
+        set => _imageView.Cursor = value;
+    }
+
     public event EventHandler<ZoomChangedEventArgs>? ZoomChanged;
+
+    public event EventHandler<PaintEventArgs>? PaintOverlay;
+
+    public event EventHandler<MouseEventArgs>? OverlayMouseDown;
+    public event EventHandler<MouseEventArgs>? OverlayMouseMove;
+    public event EventHandler<MouseEventArgs>? OverlayMouseUp;
 
     private Size RenderSize
     {
-        get => _renderSize;
+        get;
         set
         {
-            _renderSize = value;
-            _imageView.Size = Size.Round(value) + new Size(2, 2);
+            field = value;
+            _imageView.Size = Size.Round(value) + new Size(2 + 2 * ImagePadding, 2 + 2 * ImagePadding);
             _imageView.Invalidate();
         }
     }
 
-    private int AvailableWidth => _scrollable.Width - 2 - BorderOffset;
-    private int AvailableHeight => _scrollable.Height - 2 - BorderOffset;
+    private int AvailableWidth => _scrollable.Width - 2 - BorderOffset - 2 * ImagePadding;
+    private int AvailableHeight => _scrollable.Height - 2 - BorderOffset - 2 * ImagePadding;
+
+    /// <summary>
+    /// Replaces the image. If the new image has the same shape as the old one, it's shown at the same size on screen
+    /// (so a preview can be updated in place); otherwise it's zoomed to fit.
+    /// </summary>
+    public void SetImage(Bitmap? image)
+    {
+        var old = Image;
+        Image = image;
+        if (image == null)
+        {
+            RenderSize = Size.Empty;
+            _renderFactor = 0;
+            return;
+        }
+        bool sameShape = old != null && RenderSize.Width > 0 &&
+                         Math.Abs(old.Width / (float) old.Height - image.Width / (float) image.Height) < 0.01f;
+        if (sameShape)
+        {
+            _renderFactor = RenderSize.Width / (float) image.Width;
+            RenderSize = Size.Round(new SizeF(image.Width * _renderFactor, image.Height * _renderFactor));
+            ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
+        }
+        else
+        {
+            ZoomToContainer();
+        }
+    }
+
+    public void Invalidate() => _imageView.Invalidate();
 
     private bool IsWidthBound =>
         Image!.Width / (float) Image.Height > AvailableWidth / (float) AvailableHeight;
@@ -81,7 +147,7 @@ public class ScrollZoomImageViewer
 
     private void OnMouseMove(object? sender, MouseEventArgs e)
     {
-        if (_mouseIsDown && _initialMousePos.HasValue && _initialScrollPos.HasValue)
+        if (PanEnabled && _mouseIsDown && _initialMousePos.HasValue && _initialScrollPos.HasValue)
         {
             _scrollable.ScrollPosition = _initialScrollPos.Value + Point.Round(_initialMousePos.Value - e.Location);
         }
@@ -129,6 +195,7 @@ public class ScrollZoomImageViewer
                 ColorScheme?.BorderColor ?? Colors.Black,
                 XOffset - 1, YOffset - 1, RenderSize.Width + 1, RenderSize.Height + 1);
             e.Graphics.DrawImage(Image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+            PaintOverlay?.Invoke(this, e);
         }
     }
 
@@ -240,4 +307,6 @@ public class ScrollZoomImageViewer
     {
         return control._scrollable;
     }
+
+    public LayoutControl Scale() => _scrollable.Scale().NaturalSize(0, 0);
 }

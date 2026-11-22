@@ -312,8 +312,9 @@ public class PreviewForm : EtoDialogBase
     {
         using var imageToRender = CurrentImage.GetClonedImage();
         using var rendered = await Task.Run(() => imageToRender.Render());
-        ImageViewer.Image?.Dispose();
-        ImageViewer.Image = rendered.ToEtoImage();
+        var oldImage = ImageViewer.Image;
+        ImageViewer.SetImage(rendered.ToEtoImage());
+        oldImage?.Dispose();
         ImageViewer.ZoomToContainer();
     }
 
@@ -389,8 +390,9 @@ public class PreviewForm : EtoDialogBase
     {
         if (disposing)
         {
-            ImageViewer.Image?.Dispose();
-            ImageViewer.Image = null;
+            var oldImage = ImageViewer.Image;
+            ImageViewer.SetImage(null);
+            oldImage?.Dispose();
             ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
             _editWithController.AppChanged -= EditWithController_AppChanged;
         }
