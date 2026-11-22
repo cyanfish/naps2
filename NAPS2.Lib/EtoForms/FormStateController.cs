@@ -172,6 +172,12 @@ public class FormStateController
                 var size = EtoPlatform.Current.GetClientSize(_window);
                 _formState.Size = new FormState.FormSize(size.Width, size.Height);
             }
+            else if (_formState.Maximized && EtoPlatform.Current.IsWpf)
+            {
+                // WPF moves the window before it reports as maximized, so OnMove saved the maximized location
+                var restoreBounds = _window.RestoreBounds;
+                _formState.Location = new FormState.FormLocation(restoreBounds.X, restoreBounds.Y);
+            }
         }
     }
 
