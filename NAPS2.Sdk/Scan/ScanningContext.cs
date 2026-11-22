@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using NAPS2.Ocr;
@@ -24,6 +25,11 @@ public class ScanningContext : IDisposable
         if (JpegliCodec.TryCreate() is { } jpegliCodec)
         {
             ImageContext.BundledEncoders.TryAdd(ImageFileFormat.Jpeg, jpegliCodec);
+        }
+        // The win-x86 worker only includes jpegli
+        if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+        {
+            return;
         }
         if (WebPCodec.TryCreate() is { } webpCodec)
         {
