@@ -12,9 +12,10 @@ using SWM = System.Windows.Media;
 namespace NAPS2.EtoForms.Wpf;
 
 /// <summary>
-/// A message dialog styled like a WinUI ContentDialog using the WPF Fluent theme resources.
+/// A message dialog styled like a WinUI ContentDialog using the WPF Fluent theme resources. The value of Result is the
+/// index of the selected button.
 /// </summary>
-public class FluentMessageDialog : Dialog<DialogResult>
+public class FluentMessageDialog : Dialog<int>
 {
     private const double MAX_WIDTH = 548;
     private const double PADDING = 24;
@@ -23,22 +24,20 @@ public class FluentMessageDialog : Dialog<DialogResult>
     private const double ICON_SIZE = 32;
     private const double ICON_MARGIN = 16;
 
-    private readonly DialogResult? _cancelResult;
+    private readonly int? _cancelButton;
     private bool _buttonClicked;
 
-    public record Button(string Text, DialogResult Result);
-
-    public FluentMessageDialog(string caption, string text, MessageBoxType type, IReadOnlyList<Button> buttons,
-        DialogResult defaultResult, DialogResult? cancelResult)
+    public FluentMessageDialog(string caption, string text, MessageBoxType type, IReadOnlyList<string> buttons,
+        int defaultButton, int? cancelButton)
     {
-        _cancelResult = cancelResult;
+        _cancelButton = cancelButton;
         Title = caption;
         Resizable = false;
         Minimizable = false;
         Maximizable = false;
         ShowInTaskbar = false;
-        Closeable = cancelResult != null;
-        Result = cancelResult ?? defaultResult;
+        Closeable = cancelButton != null;
+        Result = cancelButton ?? defaultButton;
 
         var icon = CreateIcon(type);
         var textBlock = new SWC.TextBlock
@@ -49,7 +48,7 @@ public class FluentMessageDialog : Dialog<DialogResult>
             HorizontalAlignment = SW.HorizontalAlignment.Left,
             VerticalAlignment = SW.VerticalAlignment.Center
         };
-        var (footer, defaultButton) = CreateFooter(buttons, defaultResult);
+        var (footer, defaultButtonControl) = CreateFooter(buttons, defaultButton);
         var root = new SWC.Grid
         {
             MinWidth = 320,
@@ -72,7 +71,7 @@ public class FluentMessageDialog : Dialog<DialogResult>
             textBlock.Measure(new SW.Size(double.PositiveInfinity, double.PositiveInfinity));
             double maxTextWidth = MAX_WIDTH - 2 * PADDING - (icon != null ? ICON_SIZE + ICON_MARGIN : 0);
             textBlock.Width = Math.Min(Math.Ceiling(textBlock.DesiredSize.Width) + 1, maxTextWidth);
-            defaultButton.Focus();
+            defaultButtonControl.Focus();
         };
         native.KeyDown += (_, e) =>
         {
@@ -87,7 +86,7 @@ public class FluentMessageDialog : Dialog<DialogResult>
     protected override void OnClosing(CancelEventArgs e)
     {
         base.OnClosing(e);
-        if (_cancelResult == null && !_buttonClicked)
+        if (_cancelButton == null && !_buttonClicked)
         {
             e.Cancel = true;
         }
@@ -114,8 +113,8 @@ public class FluentMessageDialog : Dialog<DialogResult>
         return content;
     }
 
-    private (SWC.Border footer, SWC.Button defaultButton) CreateFooter(IReadOnlyList<Button> buttons,
-        DialogResult defaultResult)
+    private (SWC.Border footer, SWC.Button defaultButton) CreateFooter(IReadOnlyList<string> buttons,
+        int defaultIndex)
     {
         var grid = new SWC.Grid { HorizontalAlignment = SW.HorizontalAlignment.Right };
         SWC.Grid.SetIsSharedSizeScope(grid, true);
@@ -126,17 +125,17 @@ public class FluentMessageDialog : Dialog<DialogResult>
             grid.ColumnDefinitions.Add(new SWC.ColumnDefinition
                 { Width = SW.GridLength.Auto, SharedSizeGroup = "Buttons" });
 
-            var result = buttons[i].Result;
+            int result = i;
             var button = new SWC.Button
             {
-                Content = new SWC.AccessText { Text = buttons[i].Text },
+                Content = new SWC.AccessText { Text = buttons[i] },
                 MinWidth = BUTTON_MIN_WIDTH,
                 Padding = new SW.Thickness(11, 3, 11, 4),
-                IsDefault = result == defaultResult,
-                IsCancel = result == _cancelResult
+                IsDefault = result == defaultIndex,
+                IsCancel = result == _cancelButton
             };
-            AutomationProperties.SetName(button, Regex.Replace(buttons[i].Text, "_(.)", "$1"));
-            if (result == defaultResult)
+            AutomationProperties.SetName(button, Regex.Replace(buttons[i], "_(.)", "$1"));
+            if (result == defaultIndex)
             {
                 button.SetResourceReference(SW.FrameworkElement.StyleProperty, "AccentButtonStyle");
                 defaultButton = button;
@@ -188,8 +187,11 @@ public class FluentMessageDialog : Dialog<DialogResult>
         };
     }
 
-    private static readonly SWM.Brush WarningBackground = Frozen(new SWM.SolidColorBrush(SWM.Color.FromRgb(0xFF, 0xB9, 0x00)));
-    private static readonly SWM.Brush WarningForeground = Frozen(new SWM.SolidColorBrush(SWM.Color.FromArgb(0xE4, 0, 0, 0)));
+    private static readonly SWM.Brush WarningBackground =
+        Frozen(new SWM.SolidColorBrush(SWM.Color.FromRgb(0xFF, 0xB9, 0x00)));
+
+    private static readonly SWM.Brush WarningForeground =
+        Frozen(new SWM.SolidColorBrush(SWM.Color.FromArgb(0xE4, 0, 0, 0)));
 
     private static SWM.Brush Frozen(SWM.Brush brush)
     {

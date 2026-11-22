@@ -17,19 +17,21 @@ public class FluentMessageBoxHandler : Eto.WidgetHandler<Eto.Widget>, MessageBox
 
     public DialogResult ShowDialog(Control? parent)
     {
+        var results = GetResults();
+        var cancelResult = GetCancelResult();
         var dialog = new FluentMessageDialog(Caption ?? parent?.ParentWindow?.Title ?? "", Text ?? "", Type,
-            GetButtons(), GetDefaultResult(), GetCancelResult());
-        return parent != null ? dialog.ShowModal(parent) : dialog.ShowModal();
+            results.Select(GetSystemButtonText).ToList(), results.IndexOf(GetDefaultResult()),
+            cancelResult != null ? results.IndexOf(cancelResult.Value) : null);
+        return results[parent != null ? dialog.ShowModal(parent) : dialog.ShowModal()];
     }
 
-    private List<FluentMessageDialog.Button> GetButtons() =>
-        (Buttons switch
-        {
-            MessageBoxButtons.OKCancel => [DialogResult.Ok, DialogResult.Cancel],
-            MessageBoxButtons.YesNo => [DialogResult.Yes, DialogResult.No],
-            MessageBoxButtons.YesNoCancel => [DialogResult.Yes, DialogResult.No, DialogResult.Cancel],
-            _ => new List<DialogResult> { DialogResult.Ok }
-        }).Select(result => new FluentMessageDialog.Button(GetSystemButtonText(result), result)).ToList();
+    private List<DialogResult> GetResults() => Buttons switch
+    {
+        MessageBoxButtons.OKCancel => [DialogResult.Ok, DialogResult.Cancel],
+        MessageBoxButtons.YesNo => [DialogResult.Yes, DialogResult.No],
+        MessageBoxButtons.YesNoCancel => [DialogResult.Yes, DialogResult.No, DialogResult.Cancel],
+        _ => [DialogResult.Ok]
+    };
 
     // Like the native message box, use the Windows display language's button text
     private static string GetSystemButtonText(DialogResult result)
