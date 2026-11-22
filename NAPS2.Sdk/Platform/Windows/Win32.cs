@@ -46,6 +46,9 @@ internal static class Win32
     [DllImport("dwmapi.dll")]
     public static extern int DwmEnableBlurBehindWindow(IntPtr hwnd, ref DwmBlurBehind pBlurBehind);
 
+    [DllImport("dwmapi.dll")]
+    public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref Margins pMarInset);
+
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, uint flags);
@@ -144,6 +147,14 @@ internal static class Win32
         [MarshalAs(UnmanagedType.Bool)] public bool fEnable;
         public IntPtr hRgnBlur;
         [MarshalAs(UnmanagedType.Bool)] public bool fTransitionOnMaximized;
+    }
+
+    public struct Margins
+    {
+        public int cxLeftWidth;
+        public int cxRightWidth;
+        public int cyTopHeight;
+        public int cyBottomHeight;
     }
 
     public struct Message

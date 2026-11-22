@@ -62,7 +62,21 @@ public class WpfEtoPlatform : EtoPlatform
             new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
         SetSystemTheme();
         HideClearButtonInNarrowTextBoxes();
+        FixMaximizedCaptionsOnSettingChange();
         return application;
+    }
+
+    private static void FixMaximizedCaptionsOnSettingChange()
+    {
+        // WPF resets the frame when handling WM_SETTINGCHANGE, right after invalidating this property (which only
+        // raises StaticPropertyChanged if it has been read since the last invalidation)
+        _ = SW.SystemParameters.WindowResizeBorderThickness;
+        SW.SystemParameters.StaticPropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName != nameof(SW.SystemParameters.WindowResizeBorderThickness)) return;
+            _ = SW.SystemParameters.WindowResizeBorderThickness;
+            Dispatcher.CurrentDispatcher.BeginInvoke(FixMaximizedCaptions, DispatcherPriority.Background);
+        };
     }
 
     private static void HideClearButtonInNarrowTextBoxes()
@@ -92,6 +106,8 @@ public class WpfEtoPlatform : EtoPlatform
             Application.Instance.Theme = ColorScheme.DarkMode
                 ? _fluentDarkTheme ??= new(new BaseStylesFluentThemeHandler(SW.ThemeMode.Dark))
                 : _fluentLightTheme ??= new(new BaseStylesFluentThemeHandler(SW.ThemeMode.Light));
+            // Changing the theme resets the frame
+            FixMaximizedCaptions();
             ApplyFluentStylesToEtoControls(app);
             MakeSplittersUnfocusable(app);
             MakeComboBoxItemsHitTestable(app);
@@ -603,8 +619,26 @@ public class WpfEtoPlatform : EtoPlatform
         {
             WindowCloaking.SetCloaked(interop.Handle, true);
             UndoBlurBehind(interop.Handle);
+            FixMaximizedCaption(interop.Handle);
         };
         native.ContentRendered += (_, _) => WindowCloaking.SetCloaked(interop.Handle, false);
+    }
+
+    private static void FixMaximizedCaptions()
+    {
+        foreach (SW.Window window in SW.Application.Current.Windows)
+        {
+            var hwnd = new SW.Interop.WindowInteropHelper(window).Handle;
+            if (hwnd != IntPtr.Zero) FixMaximizedCaption(hwnd);
+        }
+    }
+
+    private static void FixMaximizedCaption(IntPtr hwnd)
+    {
+        // Workaround for https://github.com/dotnet/wpf/issues/12153
+        if (Environment.OSVersion.Version.Build < 22621 || SW.SystemParameters.HighContrast) return;
+        var margins = new Win32.Margins { cyBottomHeight = 100000 };
+        Win32.DwmExtendFrameIntoClientArea(hwnd, ref margins);
     }
 
     private static void UndoBlurBehind(IntPtr hwnd)
