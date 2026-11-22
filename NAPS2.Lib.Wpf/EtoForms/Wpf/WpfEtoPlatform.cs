@@ -52,8 +52,7 @@ public class WpfEtoPlatform : EtoPlatform
         // Otherwise Eto applies its non-Fluent theme first
         ApplicationHandler.EnableCustomThemes = false;
         var platform = new Eto.Wpf.Platform();
-        // Use system message boxes rather than Eto's themed ones
-        platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
+        platform.Add<MessageBox.IHandler>(() => new FluentMessageBoxHandler());
         platform.Add<Button.IHandler>(() => new WpfButtonHandler());
         var application = new Application(platform);
         // Drawables paint their own content (e.g. the preview image), which a right-to-left window would mirror

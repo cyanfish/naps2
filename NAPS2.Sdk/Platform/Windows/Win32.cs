@@ -9,6 +9,8 @@ namespace NAPS2.Platform.Windows;
 /// </summary>
 internal static class Win32
 {
+    public const int WM_SETICON = 0x80;
+
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
@@ -27,6 +29,9 @@ internal static class Win32
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     public static extern int MessageBox(IntPtr hWnd, string lpText, string lpCaption, uint uType);
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    public static extern IntPtr MB_GetString(uint wBtn);
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -297,6 +302,26 @@ internal static class Win32
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     public static extern int SHDefExtractIcon(string pszIconFile, int iIndex, uint uFlags, out IntPtr phiconLarge,
         IntPtr phiconSmall, uint nIconSize);
+
+    public const int GWL_EXSTYLE = -20;
+    public const int WS_EX_DLGMODALFRAME = 0x1;
+
+    [DllImport("user32.dll", EntryPoint = "GetWindowLongW")]
+    public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", EntryPoint = "SetWindowLongW")]
+    public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+    public const uint SWP_NOSIZE = 0x1;
+    public const uint SWP_NOMOVE = 0x2;
+    public const uint SWP_NOZORDER = 0x4;
+    public const uint SWP_NOACTIVATE = 0x10;
+    public const uint SWP_FRAMECHANGED = 0x20;
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy,
+        uint uFlags);
 
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     public static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, StringBuilder pszIconPath, ref ushort piIcon);

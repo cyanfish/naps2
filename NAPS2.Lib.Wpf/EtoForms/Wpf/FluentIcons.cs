@@ -15,4 +15,10 @@ internal static class FluentIcons
     public const string Delete = "\uE74D";
     public const string Edit = "\uE70F";
     public const string Play = "\uE768";
+    public const string StatusCircleOuter = "\uF136";
+    public const string StatusCircleErrorX = "\uF13D";
+    public const string StatusCircleInfo = "\uF13F";
+    public const string StatusCircleQuestionMark = "\uF142";
+    public const string StatusTriangleOuter = "\uF139";
+    public const string StatusTriangleExclamation = "\uF13B";
 }
