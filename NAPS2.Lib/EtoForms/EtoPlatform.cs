@@ -77,6 +77,22 @@ public abstract class EtoPlatform
 
     public abstract void ConfigureDonateButton(Button button);
 
+    public virtual DialogButtonOrder ButtonOrder => DialogButtonOrder.PrimarySecondaryClose;
+
+    public abstract MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options);
+
+    public Window? DefaultDialogOwner
+    {
+        get
+        {
+            // The active window if it's one of ours, otherwise the top of the modal stack
+            var windows = Application.Instance.Windows.Where(x => x.Visible).ToList();
+            return windows.LastOrDefault(IsActiveWindow) ?? windows.LastOrDefault();
+        }
+    }
+
+    protected virtual bool IsActiveWindow(Window window) => window.HasFocus;
+
     public virtual void InitializeForegroundApp()
     {
     }

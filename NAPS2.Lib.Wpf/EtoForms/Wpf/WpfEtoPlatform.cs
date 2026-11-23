@@ -424,6 +424,17 @@ public class WpfEtoPlatform : EtoPlatform
         native.BorderThickness = new SW.Thickness(2);
     }
 
+    public override MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options)
+    {
+        var buttons = options.GetButtons(ButtonOrder).ToList();
+        var dialog = new FluentMessageDialog(options.Title, options.Text, options.Type,
+            buttons.Select(x => x.Text.Replace("_", "__")).ToList(),
+            buttons.FindIndex(x => x.Result == options.EffectiveDefaultButton),
+            buttons.FindIndex(x => x.Result == MessageDialogResult.Close));
+        dialog.Owner = owner ?? DefaultDialogOwner;
+        return buttons[dialog.ShowModal()].Result;
+    }
+
     public override void SetAccessibleName(Control control, string name) =>
         AutomationProperties.SetName(control.ToNative(), name);
 
@@ -608,12 +619,7 @@ public class WpfEtoPlatform : EtoPlatform
         if (window is Dialog dialog)
         {
             // Like WinForms, use the active window as the owner (so the dialog is centered on it).
-            dialog.PreLoad += (_, _) =>
-            {
-                var activeWindow = Win32.GetActiveWindow();
-                dialog.Owner ??= Application.Instance.Windows.FirstOrDefault(x =>
-                    x != dialog && x.NativeHandle == activeWindow);
-            };
+            dialog.PreLoad += (_, _) => dialog.Owner ??= DefaultDialogOwner;
         }
         // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var interop = new SW.Interop.WindowInteropHelper(native);

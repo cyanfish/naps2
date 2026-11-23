@@ -195,6 +195,8 @@ public class MacEtoPlatform : EtoPlatform
 
     public override bool SupportsWindowSidebar => true;
 
+    public override DialogButtonOrder ButtonOrder => DialogButtonOrder.SecondaryClosePrimary;
+
     public override void AttachWindowSidebar(Window window, Control sidebar, WindowSidebarOptions options)
     {
         var nsWindow = window.ToNative();
@@ -346,6 +348,40 @@ public class MacEtoPlatform : EtoPlatform
     {
         var native = (NSButton) button.ToNative();
         native.Bordered = false;
+    }
+
+    public override MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options)
+    {
+        var alert = new NSAlert
+        {
+            AlertStyle = options.Type switch
+            {
+                MessageBoxType.Warning => NSAlertStyle.Warning,
+                MessageBoxType.Error => NSAlertStyle.Critical,
+                _ => NSAlertStyle.Informational
+            },
+            MessageText = options.Title,
+            InformativeText = options.Text
+        };
+        var buttons = options.GetButtons(ButtonOrder, rtlOrder: true);
+        var defaultButton = options.EffectiveDefaultButton;
+        foreach (var (text, result) in buttons)
+        {
+            var button = alert.AddButton(text);
+            // A button can only have one key equivalent, so if the close button is the default it gets Esc, not Return
+            button.KeyEquivalent = result == MessageDialogResult.Close ? "\u001b" : result == defaultButton ? "\r" : "";
+            if (result == MessageDialogResult.Primary && options.Destructive)
+            {
+                button.HasDestructiveAction = true;
+            }
+        }
+        var window = owner?.ToNative();
+        if (window != null)
+        {
+            alert.BeginSheet(window, response => NSApplication.SharedApplication.StopModalWithCode((nint) response));
+        }
+        int index = (int) alert.RunModal() - (int) NSAlertButtonReturn.First;
+        return index >= 0 && index < buttons.Count ? buttons[index].Result : MessageDialogResult.Close;
     }
 
     public override void SetAccessibleName(Control control, string name) =>

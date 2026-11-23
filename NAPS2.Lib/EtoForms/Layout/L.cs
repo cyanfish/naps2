@@ -19,26 +19,7 @@ public static class L
     /// <returns></returns>
     public static LayoutElement OkCancel(LayoutElement ok, LayoutElement cancel)
     {
-        bool okFirst;
-        if (EtoPlatform.Current.IsWindows)
-        {
-            okFirst = true;
-        }
-        else if (EtoPlatform.Current.IsMac)
-        {
-            okFirst = false;
-        }
-        else if (EtoPlatform.Current.IsGtk)
-        {
-            // TODO: Check other desktop environments than gnome (cancel first) / kde (ok first)
-            var desktop = Environment.GetEnvironmentVariable("XDG_SESSION_DESKTOP") ?? "";
-            okFirst = desktop.ToLowerInvariant().Contains("kde");
-        }
-        else
-        {
-            throw new InvalidOperationException();
-        }
-        return okFirst
+        return EtoPlatform.Current.ButtonOrder == DialogButtonOrder.PrimarySecondaryClose
             ? new ExpandLayoutElement(ok, cancel)
             : new ExpandLayoutElement(cancel, ok);
     }

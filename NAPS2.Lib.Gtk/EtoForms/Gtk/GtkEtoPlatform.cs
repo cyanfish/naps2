@@ -20,6 +20,12 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override bool IsGtk => true;
 
+    // TODO: Check other desktop environments than gnome (cancel first) / kde (ok first)
+    public override DialogButtonOrder ButtonOrder =>
+        (Environment.GetEnvironmentVariable("XDG_SESSION_DESKTOP") ?? "").ToLowerInvariant().Contains("kde")
+            ? DialogButtonOrder.PrimarySecondaryClose
+            : DialogButtonOrder.SecondaryClosePrimary;
+
     public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
     public override IDarkModeProvider DarkModeProvider { get; } = new GtkDarkModeProvider();
 
@@ -412,6 +418,53 @@ public class GtkEtoPlatform : EtoPlatform
     {
         var native = (GTK.Button) button.ToNative();
         native.StyleContext.AddClass("donate-button");
+    }
+
+    public override MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options)
+    {
+        var dialog = new GTK.MessageDialog((GTK.Window?) (owner ?? DefaultDialogOwner)?.ControlObject,
+            GTK.DialogFlags.Modal,
+            options.Type switch
+            {
+                MessageBoxType.Warning => GTK.MessageType.Warning,
+                MessageBoxType.Error => GTK.MessageType.Error,
+                MessageBoxType.Question => GTK.MessageType.Question,
+                _ => GTK.MessageType.Info
+            }, GTK.ButtonsType.None, false, "");
+        dialog.Text = options.Text;
+        dialog.Title = options.Title;
+        int GetResponse(MessageDialogResult result) => result switch
+        {
+            MessageDialogResult.Primary => (int) GTK.ResponseType.Accept,
+            MessageDialogResult.Secondary => (int) GTK.ResponseType.Reject,
+            _ => (int) GTK.ResponseType.Cancel
+        };
+        foreach (var (text, result) in options.GetButtons(ButtonOrder))
+        {
+            var button = (GTK.Button) dialog.AddButton(text.Replace("_", "__"), GetResponse(result));
+            if (result == MessageDialogResult.Primary)
+            {
+                button.StyleContext.AddClass(options.Destructive ? "destructive-action" : "suggested-action");
+            }
+        }
+        dialog.DefaultResponse = (GTK.ResponseType) GetResponse(options.EffectiveDefaultButton);
+        var response = (GTK.ResponseType) dialog.Run();
+        dialog.Hide();
+        dialog.Dispose();
+        return response switch
+        {
+            GTK.ResponseType.Accept => MessageDialogResult.Primary,
+            GTK.ResponseType.Reject => MessageDialogResult.Secondary,
+            _ => MessageDialogResult.Close
+        };
+    }
+
+    public override void InitForm(Window window)
+    {
+        if (window is Dialog dialog)
+        {
+            dialog.PreLoad += (_, _) => dialog.Owner ??= DefaultDialogOwner;
+        }
     }
 
     public override void SetAccessibleName(Control control, string name) =>

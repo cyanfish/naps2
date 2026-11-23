@@ -105,6 +105,38 @@ public class WinFormsEtoPlatform : EtoPlatform
         native.FlatAppearance.BorderSize = 2;
     }
 
+    public override MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options)
+    {
+        var page = new WF.TaskDialogPage
+        {
+            Caption = options.Title,
+            Text = options.Text,
+            Icon = options.Type switch
+            {
+                MessageBoxType.Error => WF.TaskDialogIcon.Error,
+                MessageBoxType.Warning => WF.TaskDialogIcon.Warning,
+                MessageBoxType.Question => new WF.TaskDialogIcon(SD.SystemIcons.Question),
+                _ => WF.TaskDialogIcon.Information
+            },
+            AllowCancel = true
+        };
+        var buttons = options.GetButtons(ButtonOrder)
+            .Select(x => (Button: new WF.TaskDialogButton(x.Text.Replace("&", "&&")), x.Result)).ToList();
+        foreach (var (button, result) in buttons)
+        {
+            page.Buttons.Add(button);
+            if (result == options.EffectiveDefaultButton)
+            {
+                page.DefaultButton = button;
+            }
+        }
+        var clicked = WF.TaskDialog.ShowDialog((owner ?? DefaultDialogOwner)?.NativeHandle ?? IntPtr.Zero, page);
+        return buttons.Where(x => x.Button == clicked).Select(x => x.Result).DefaultIfEmpty(MessageDialogResult.Close)
+            .First();
+    }
+
+    protected override bool IsActiveWindow(Window window) => window.NativeHandle == Win32.GetActiveWindow();
+
     public override Bitmap ToBitmap(IMemoryImage image)
     {
         var gdiImage = (GdiImage) image;
