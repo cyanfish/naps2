@@ -12,6 +12,7 @@ public class ScrollZoomImageViewer
     private PointF? _mousePos;
     private PointF? _initialMousePos;
     private Point? _initialScrollPos;
+    private Point? _pendingScrollPosition;
     private bool _mouseIsDown;
     private bool _fitToContainer = true;
 
@@ -84,6 +85,7 @@ public class ScrollZoomImageViewer
         set
         {
             field = value;
+            _pendingScrollPosition = null;
             _imageView.Size = Size.Round(value) + new Size(2 + 2 * ImagePadding, 2 + 2 * ImagePadding);
             _imageView.Invalidate();
         }
@@ -127,8 +129,6 @@ public class ScrollZoomImageViewer
 
     private float FitFactor =>
         IsWidthBound ? AvailableWidth / (float) Image!.Width : AvailableHeight / (float) Image!.Height;
-
-    private bool FitsInBounds => RenderSize.Width <= AvailableWidth && RenderSize.Height <= AvailableHeight;
 
     private float XOffset => Math.Max((_imageView.Width - RenderSize.Width) / 2, 0);
     private float YOffset => Math.Max((_imageView.Height - RenderSize.Height) / 2, 0);
@@ -249,8 +249,8 @@ public class ScrollZoomImageViewer
         var anchor = GetMouseAnchor(anchorToMouse);
         RenderSize =
             Size.Round(new SizeF(Image!.Width * _renderFactor, Image.Height * _renderFactor));
-        SetMouseAnchor(anchor);
         _scrollable.ResumeLayout();
+        SetMouseAnchor(anchor);
         ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
@@ -291,48 +291,71 @@ public class ScrollZoomImageViewer
 
     // When we zoom in/out (e.g. with Ctrl+mousewheel), we want the point in the image underneath the mouse cursor to
     // stay stationary relative to the mouse (as much as permitted by the available scroll region). If the mouse is not
-    // overtop the image, the middle of the image (as currently visible) should stay stationary.
+    // overtop the image, the point in the middle of the viewport should stay stationary.
     //
     // This function calculates the image anchor as a fraction (i.e. a point in the range [<0,0>, <1,1>]). It also
     // returns the mouse position relative to the top left of the Scrollable (or the middle of the scrollable if the
     // mouse is not overtop the image).
-    private (PointF imageAnchor, PointF mouseRelativePos) GetMouseAnchor(bool anchorToMouse)
+    //
+    // The scroll position and content size are computed rather than read back from the control, as some platforms
+    // (e.g. WPF) only apply them on the next layout pass.
+    private (PointF imageAnchor, PointF viewportPos) GetMouseAnchor(bool anchorToMouse)
     {
-        var anchorMiddle = new PointF(0.5f, 0.5f);
-        var scrollableMiddle = new PointF(_scrollable.Width / 2f, _scrollable.Height / 2f);
-        if (!anchorToMouse ||
-            _mousePos is not { } mousePos ||
-            mousePos.X < 0 ||
-            mousePos.Y < 0 ||
-            mousePos.X > _scrollable.Width ||
-            mousePos.Y > _scrollable.Height)
+        var viewport = _scrollable.VisibleRect.Size;
+        if (anchorToMouse && _mousePos is { } mousePos &&
+            mousePos.X >= 0 && mousePos.Y >= 0 && mousePos.X <= viewport.Width && mousePos.Y <= viewport.Height)
         {
-            // Mouse is outside the scrollable
-            return (anchorMiddle, scrollableMiddle);
+            var mouseViewportPos = mousePos - new Point(1, 1);
+            var mouseImageAnchor = GetImagePoint(mouseViewportPos, viewport);
+            if (mouseImageAnchor.X is >= 0 and <= 1 && mouseImageAnchor.Y is >= 0 and <= 1)
+            {
+                return (mouseImageAnchor, mouseViewportPos);
+            }
         }
-        var mouseRelativePos = mousePos - new Point(1, 1);
-        var x = (mouseRelativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
-        var y = (mouseRelativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
-        if (x < 0 || y < 0 || x > 1 || y > 1)
-        {
-            // Mouse is inside the scrollable but outside the area covered by the image
-            return (anchorMiddle, scrollableMiddle);
-        }
-        return (new PointF(x, y), mouseRelativePos);
+        var middle = new PointF(viewport.Width / 2f, viewport.Height / 2f);
+        var middleAnchor = GetImagePoint(middle, viewport);
+        return (new PointF(middleAnchor.X.Clamp(0, 1), middleAnchor.Y.Clamp(0, 1)), middle);
+    }
+
+    private PointF GetImagePoint(PointF viewportPos, Size viewport)
+    {
+        var scroll = _pendingScrollPosition ?? _scrollable.ScrollPosition;
+        var offset = GetImageOffset(viewport);
+        return new PointF(
+            (viewportPos.X + scroll.X - offset.X) / RenderSize.Width,
+            (viewportPos.Y + scroll.Y - offset.Y) / RenderSize.Height);
     }
 
     // This function inverts the calculation done in GetMouseAnchor to get the correct scroll position to move the point
     // in the image that was underneath the mouse back there (after the image size has been changed).
-    private void SetMouseAnchor((PointF imageAnchor, PointF mouseRelativePos) anchor)
+    private void SetMouseAnchor((PointF imageAnchor, PointF viewportPos) anchor)
     {
-        if (FitsInBounds)
+        var viewport = _scrollable.VisibleRect.Size;
+        var offset = GetImageOffset(viewport);
+        var content = GetContentSize(viewport);
+        var scroll = Point.Round(new PointF(
+            (anchor.imageAnchor.X * RenderSize.Width + offset.X - anchor.viewportPos.X)
+            .Clamp(0, content.Width - viewport.Width),
+            (anchor.imageAnchor.Y * RenderSize.Height + offset.Y - anchor.viewportPos.Y)
+            .Clamp(0, content.Height - viewport.Height)));
+        _scrollable.ScrollPosition = scroll;
+        _pendingScrollPosition = scroll;
+        Invoker.Current.InvokeDispatch(() =>
         {
-            return;
-        }
-        // TODO: This is off a bit for the "middle" anchor, probably because the scrollbars themselves appear
-        var xScroll = anchor.imageAnchor.X * RenderSize.Width + XOffset - anchor.mouseRelativePos.X;
-        var yScroll = anchor.imageAnchor.Y * RenderSize.Height + YOffset - anchor.mouseRelativePos.Y;
-        _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));
+            if (_pendingScrollPosition != scroll) return;
+            _scrollable.ScrollPosition = scroll;
+            _pendingScrollPosition = null;
+        });
+    }
+
+    private SizeF GetContentSize(Size viewport) => new(
+        Math.Max(RenderSize.Width + 2 + 2 * ImagePadding, viewport.Width),
+        Math.Max(RenderSize.Height + 2 + 2 * ImagePadding, viewport.Height));
+
+    private PointF GetImageOffset(Size viewport)
+    {
+        var content = GetContentSize(viewport);
+        return new PointF((content.Width - RenderSize.Width) / 2, (content.Height - RenderSize.Height) / 2);
     }
 
     public static implicit operator LayoutElement(ScrollZoomImageViewer control)
