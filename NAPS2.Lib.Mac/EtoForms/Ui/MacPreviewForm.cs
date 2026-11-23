@@ -1,4 +1,5 @@
 using Eto.Forms;
+using Eto.Mac;
 using NAPS2.EtoForms.Desktop;
 using NAPS2.EtoForms.Mac;
 
@@ -6,6 +7,8 @@ namespace NAPS2.EtoForms.Ui;
 
 public class MacPreviewForm : PreviewForm
 {
+    private readonly Dictionary<Type, NSButton> _editToolButtons = new();
+
     private readonly NSSlider _zoomSlider;
 
     public MacPreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
@@ -43,6 +46,28 @@ public class MacPreviewForm : PreviewForm
         window.StyleMask |= NSWindowStyle.UnifiedTitleAndToolbar;
     }
 
+    protected override void UpdateActiveEditTool(Type? editorType)
+    {
+        foreach (var (type, button) in _editToolButtons)
+        {
+            button.State = type == editorType ? NSCellStateValue.On : NSCellStateValue.Off;
+        }
+    }
+
+    private NSToolbarItem CreateEditToolItem<T>(string id, ActionCommand command) where T : ImageEditor
+    {
+        var button = new NSButton
+        {
+            Image = command.GetIconImage(IconScenario.Toolbar, 1)?.ToNS(),
+            BezelStyle = NSBezelStyle.TexturedRounded,
+            ToolTip = command.ToolBarText ?? ""
+        };
+        button.SetButtonType(NSButtonType.PushOnPushOff);
+        button.Activated += (_, _) => command.Execute();
+        _editToolButtons[typeof(T)] = button;
+        return new NSToolbarItem(id) { View = button, Label = command.ToolBarText ?? "" };
+    }
+
     protected override void UpdatePage()
     {
         var window = this.ToNative();
@@ -64,15 +89,15 @@ public class MacPreviewForm : PreviewForm
                 .Append(Commands.Flip)
                 .Append(Commands.Deskew)
                 .Append(Commands.CustomRotate)),
-            MacToolbarItems.Create("crop", Commands.Crop),
-            MacToolbarItems.Create("brightcont", Commands.BrightCont),
-            MacToolbarItems.Create("huesat", Commands.HueSat),
-            MacToolbarItems.Create("blackwhite", Commands.BlackWhite),
-            MacToolbarItems.Create("sharpen", Commands.Sharpen),
+            CreateEditToolItem<CropEditor>("crop", Commands.Crop),
+            CreateEditToolItem<BrightContEditor>("brightcont", Commands.BrightCont),
+            CreateEditToolItem<HueSatEditor>("huesat", Commands.HueSat),
+            CreateEditToolItem<BlackWhiteEditor>("blackwhite", Commands.BlackWhite),
+            CreateEditToolItem<SharpenEditor>("sharpen", Commands.Sharpen),
             MacToolbarItems.Create("documentcorrection", Commands.DocumentCorrection),
-            MacToolbarItems.Create("compress", Commands.Compress),
-            MacToolbarItems.Create("split", Commands.Split),
-            MacToolbarItems.Create("combine", Commands.Combine),
+            CreateEditToolItem<CompressEditor>("compress", Commands.Compress),
+            CreateEditToolItem<SplitEditor>("split", Commands.Split),
+            CreateEditToolItem<CombineEditor>("combine", Commands.Combine),
             MacToolbarItems.Create("editwith", Commands.CreateEditWithApp()),
             MacToolbarItems.CreateSeparator("sep0"),
             MacToolbarItems.Create("save", Commands.SaveSelected),

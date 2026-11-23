@@ -19,9 +19,11 @@ public class PreviewForm : EtoDialogBase
     private readonly ButtonToolItem _editWithAppButton = new();
     private readonly LayoutPlaceholder _editorPlaceholder = new();
     private readonly LayoutVisibility _editVis = new(false);
+    private readonly Dictionary<Type, CheckToolItem> _editToolItems = new();
     private UiImage? _currentImage;
     private Bitmap? _viewBitmap;
     private ImageEditor? _editor;
+    private bool _updatingEditTools;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
         IIconProvider iconProvider, ColorScheme colorScheme, EditWithController editWithController) : base(config)
@@ -242,16 +244,16 @@ public class PreviewForm : EtoDialogBase
                         Commands.CustomRotate
                     }
                 }, "arrow_rotate_anticlockwise"),
-                MakeToolButton(Commands.Crop),
-                MakeToolButton(Commands.BrightCont),
-                MakeToolButton(Commands.HueSat),
-                MakeToolButton(Commands.BlackWhite),
-                MakeToolButton(Commands.Sharpen),
+                MakeEditToolButton<CropEditor>(Commands.Crop),
+                MakeEditToolButton<BrightContEditor>(Commands.BrightCont),
+                MakeEditToolButton<HueSatEditor>(Commands.HueSat),
+                MakeEditToolButton<BlackWhiteEditor>(Commands.BlackWhite),
+                MakeEditToolButton<SharpenEditor>(Commands.Sharpen),
                 MakeToolButton(Commands.DocumentCorrection),
-                MakeToolButton(Commands.Compress),
+                MakeEditToolButton<CompressEditor>(Commands.Compress),
                 new SeparatorToolItem(),
-                MakeToolButton(Commands.Split),
-                MakeToolButton(Commands.Combine),
+                MakeEditToolButton<SplitEditor>(Commands.Split),
+                MakeEditToolButton<CombineEditor>(Commands.Combine),
                 _editWithAppButton,
                 MakeToolButton(Commands.EditWithPick),
                 new SeparatorToolItem(),
@@ -283,6 +285,28 @@ public class PreviewForm : EtoDialogBase
 
     private void EditWithController_AppChanged(object? sender, EventArgs e) =>
         UpdateEditWithAppButton(EtoPlatform.Current.GetScaleFactor(this));
+
+    private ToolItem MakeEditToolButton<T>(ActionCommand command) where T : ImageEditor
+    {
+        var item = new CheckToolItem
+        {
+            Command = command,
+            Text = null,
+            ToolTip = command.Text
+        };
+        _editToolItems[typeof(T)] = item;
+        return WithToolItemIcon(item, command.IconName!);
+    }
+
+    protected virtual void UpdateActiveEditTool(Type? editorType)
+    {
+        _updatingEditTools = true;
+        foreach (var (type, item) in _editToolItems)
+        {
+            item.Checked = type == editorType;
+        }
+        _updatingEditTools = false;
+    }
 
     private ToolItem MakeToolButton(ActionCommand command, string? iconName = null) =>
         WithToolItemIcon(new ButtonToolItem
@@ -340,6 +364,12 @@ public class PreviewForm : EtoDialogBase
 
     private void Edit(ImageEditor editor)
     {
+        if (_updatingEditTools) return;
+        if (_editor?.GetType() == editor.GetType())
+        {
+            _editor.CancelButton.PerformClick();
+            return;
+        }
         EndEdit();
         _editor = editor;
         editor.ParentWindow = this;
@@ -350,6 +380,7 @@ public class PreviewForm : EtoDialogBase
         _editorPlaceholder.Content = editor.CreateLayout();
         _editVis.IsVisible = true;
         DefaultButton = editor.OkButton;
+        UpdateActiveEditTool(editor.GetType());
         Invoker.Current.InvokeDispatch(() =>
         {
             if (_editor == editor)
@@ -367,6 +398,7 @@ public class PreviewForm : EtoDialogBase
         _editorPlaceholder.Content = null;
         _editVis.IsVisible = false;
         DefaultButton = null;
+        UpdateActiveEditTool(null);
         editor.Dispose();
         ImageViewer.SetImage(_viewBitmap);
         ImageViewer.ZoomToContainer();
