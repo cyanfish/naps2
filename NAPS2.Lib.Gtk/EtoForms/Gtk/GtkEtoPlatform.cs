@@ -20,9 +20,11 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override bool IsGtk => true;
 
-    // TODO: Check other desktop environments than gnome (cancel first) / kde (ok first)
+    // Qt-based desktops put OK first, GTK-based ones put Cancel first. XDG_CURRENT_DESKTOP is a colon-separated list
+    // of the names registered in the freedesktop.org menu spec (e.g. "ubuntu:GNOME").
     public override DialogButtonOrder ButtonOrder =>
-        (Environment.GetEnvironmentVariable("XDG_SESSION_DESKTOP") ?? "").ToLowerInvariant().Contains("kde")
+        (Environment.GetEnvironmentVariable("XDG_CURRENT_DESKTOP") ?? "").Split(':')
+            .Any(x => x is "KDE" or "LXQt" or "TDE")
             ? DialogButtonOrder.PrimarySecondaryClose
             : DialogButtonOrder.SecondaryClosePrimary;
 
