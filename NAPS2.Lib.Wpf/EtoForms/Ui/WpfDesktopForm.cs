@@ -234,12 +234,7 @@ public class WpfDesktopForm : DesktopForm
         EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
         EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out");
-        // Join the buttons into a single "pill", with one divider line (the border is translucent, so overlapping the
-        // buttons would make the divider darker)
-        zoomOut.ToNative().SetValue(Border.CornerRadiusProperty, new CornerRadius(4, 0, 0, 4));
-        var zoomInNative = (System.Windows.Controls.Control) zoomIn.ToNative();
-        zoomInNative.SetValue(Border.CornerRadiusProperty, new CornerRadius(0, 4, 4, 0));
-        zoomInNative.BorderThickness = new Thickness(0, 1, 1, 1);
+        EtoPlatform.Current.ConfigureJoinedButtons(zoomOut, zoomIn);
         return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(0);
     }
 

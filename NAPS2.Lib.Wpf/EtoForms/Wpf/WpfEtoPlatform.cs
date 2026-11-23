@@ -454,6 +454,16 @@ public class WpfEtoPlatform : EtoPlatform
         native.Unloaded += (_, _) => ColorScheme.ColorSchemeChanged -= UpdateBackground;
     }
 
+    public override void ConfigureJoinedButtons(Button left, Button right)
+    {
+        // Join the buttons into a single "pill", with one divider line (the border is translucent, so overlapping the
+        // buttons would make the divider darker)
+        left.ToNative().SetValue(SWC.Border.CornerRadiusProperty, new SW.CornerRadius(4, 0, 0, 4));
+        var rightNative = (SWC.Control) right.ToNative();
+        rightNative.SetValue(SWC.Border.CornerRadiusProperty, new SW.CornerRadius(0, 4, 4, 0));
+        rightNative.BorderThickness = new SW.Thickness(0, 1, 1, 1);
+    }
+
     private static void SetOpaqueButtonBackground(SWC.Control native)
     {
         // Look up the theme brushes from the application, as the button's own resources have the previous overrides

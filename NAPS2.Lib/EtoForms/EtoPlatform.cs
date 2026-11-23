@@ -169,6 +169,10 @@ public abstract class EtoPlatform
     {
     }
 
+    public virtual void ConfigureJoinedButtons(Button left, Button right)
+    {
+    }
+
     public virtual void SetAccessibleName(Control control, string name)
     {
     }
