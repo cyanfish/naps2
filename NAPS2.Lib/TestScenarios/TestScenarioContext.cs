@@ -384,12 +384,23 @@ public class TestScenarioContext
     /// </summary>
     public void RunCommand(string name)
     {
-        var command = Ui(() => GetDesktopCommands()
-                                   .FirstOrDefault(x => string.Equals(x.Name, name,
-                                       StringComparison.OrdinalIgnoreCase)).Command
-                               ?? throw new TestScenarioException($"Unknown command: {name}"));
-        RunCommand(command);
+        RunCommand(Ui(() => FindCommand(Get<DesktopCommands>(), name)));
     }
+
+    /// <summary>
+    /// Runs a desktop command (as with RunCommand) from the open preview window, i.e. on the image it's showing.
+    /// </summary>
+    public void RunPreviewCommand(string name)
+    {
+        RunCommand(Ui(() => FindEtoWindow(null) is PreviewForm preview
+            ? FindCommand(preview.Commands, name)
+            : throw new TestScenarioException("The preview window isn't open")));
+    }
+
+    private Command FindCommand(DesktopCommands commands, string name) =>
+        GetDesktopCommands(commands)
+            .FirstOrDefault(x => string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase)).Command
+        ?? throw new TestScenarioException($"Unknown command: {name}");
 
     public void RunCommand(Func<DesktopCommands, Command> getCommand) =>
         RunCommand(Ui(() => getCommand(Get<DesktopCommands>())));
@@ -403,9 +414,10 @@ public class TestScenarioContext
         });
     }
 
-    private List<(string Name, Command Command)> GetDesktopCommands()
+    private List<(string Name, Command Command)> GetDesktopCommands() => GetDesktopCommands(Get<DesktopCommands>());
+
+    private static List<(string Name, Command Command)> GetDesktopCommands(DesktopCommands commands)
     {
-        var commands = Get<DesktopCommands>();
         return typeof(DesktopCommands).GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(p => typeof(Command).IsAssignableFrom(p.PropertyType))
             .Select(p => (p.Name, (Command) p.GetValue(commands)!))

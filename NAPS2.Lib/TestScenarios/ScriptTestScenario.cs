@@ -143,6 +143,9 @@ internal class ScriptTestScenario
             case "command":
                 ctx.RunCommand(Required(step, "name"));
                 break;
+            case "previewCommand":
+                ctx.RunPreviewCommand(Required(step, "name"));
+                break;
             case "showForm":
                 ctx.ShowForm(Required(step, "type"));
                 break;

@@ -140,7 +140,7 @@ public class PreviewForm : EtoDialogBase
         LayoutController.Content = ImageViewer;
     }
 
-    protected DesktopCommands Commands { get; set; } = null!;
+    protected internal DesktopCommands Commands { get; set; } = null!;
     protected ActionCommand DeleteCurrentImageCommand { get; }
     protected ActionCommand GoToPrevCommand { get; }
     protected ActionCommand GoToNextCommand { get; }
