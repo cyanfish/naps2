@@ -10,10 +10,10 @@ public class DeskewOperation : OperationBase
 
     public bool Start(UiImageList imageList, List<UiImage> images, DeskewParams deskewParams)
     {
-        ProgressTitle = MiscResources.AutoDeskewProgress;
+        ProgressTitle = UiStrings.AutoDeskewProgress;
         Status = new OperationStatus
         {
-            StatusText = MiscResources.AutoDeskewing,
+            StatusText = UiStrings.AutoDeskewing,
             MaxProgress = images.Count
         };
 

@@ -116,8 +116,8 @@ public class AutoSaver
         }
         catch (Exception ex)
         {
-            Log.ErrorException(MiscResources.AutoSaveError, ex);
-            _errorOutput.DisplayError(MiscResources.AutoSaveError, ex);
+            Log.ErrorException(UiStrings.AutoSaveError, ex);
+            _errorOutput.DisplayError(UiStrings.AutoSaveError, ex);
             return false;
         }
     }

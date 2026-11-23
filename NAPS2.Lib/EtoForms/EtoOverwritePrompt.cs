@@ -10,8 +10,8 @@ public class EtoOverwritePrompt : IOverwritePrompt
         var dialogResult = Invoker.Current.InvokeGet(() =>
             MessageDialog.Show(new MessageDialogOptions
                 {
-                    Title = MiscResources.OverwriteFile,
-                    Text = string.Format(MiscResources.ConfirmOverwriteFile, fileName),
+                    Title = UiStrings.OverwriteFile,
+                    Text = string.Format(UiStrings.ConfirmOverwriteFile, fileName),
                     Type = MessageBoxType.Warning,
                     PrimaryText = UiStrings.Overwrite,
                     SecondaryText = UiStrings.Skip

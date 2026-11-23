@@ -22,10 +22,10 @@ internal class DirectImportOperation : OperationBase
     public bool Start(ImageTransferData data, bool copy, Action<ProcessedImage> imageCallback,
         DirectImportParams importParams)
     {
-        ProgressTitle = copy ? MiscResources.CopyProgress : MiscResources.ImportProgress;
+        ProgressTitle = copy ? UiStrings.CopyProgress : UiStrings.ImportProgress;
         Status = new OperationStatus
         {
-            StatusText = copy ? MiscResources.Copying : MiscResources.Importing,
+            StatusText = copy ? UiStrings.Copying : UiStrings.Importing,
             MaxProgress = data.SerializedImages.Count
         };
 
@@ -79,7 +79,7 @@ internal class DirectImportOperation : OperationBase
             }
             catch (Exception ex)
             {
-                Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, "<data>"), ex);
+                Log.ErrorException(string.Format(UiStrings.ImportErrorCouldNot, "<data>"), ex);
             }
             return true;
         });

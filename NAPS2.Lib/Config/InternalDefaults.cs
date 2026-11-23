@@ -77,10 +77,10 @@ public static class InternalDefaults
             {
                 Metadata = new PdfMetadata
                 {
-                    Title = MiscResources.ScannedImage,
-                    Subject = MiscResources.ScannedImage,
-                    Author = MiscResources.NAPS2,
-                    Creator = MiscResources.NAPS2,
+                    Title = UiStrings.ScannedImage,
+                    Subject = UiStrings.ScannedImage,
+                    Author = UiStrings.NAPS2,
+                    Creator = UiStrings.NAPS2,
                     Keywords = ""
                 },
                 Encryption = new PdfEncryption

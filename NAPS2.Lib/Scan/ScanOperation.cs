@@ -13,8 +13,8 @@ public class ScanOperation : OperationBase
         Status = new OperationStatus
         {
             StatusText = options.PaperSource == PaperSource.Flatbed
-                ? MiscResources.AcquiringData
-                : string.Format(MiscResources.ScanProgressPage, _pageNumber),
+                ? UiStrings.AcquiringData
+                : string.Format(UiStrings.ScanProgressPage, _pageNumber),
             MaxProgress = 1000,
             ProgressType = OperationProgressType.BarOnly,
             IndeterminateProgress = options.Driver == Driver.Twain && !TwainProgressEstimator.HasTimingInfo(options)
@@ -39,7 +39,7 @@ public class ScanOperation : OperationBase
     public void NextPage(int newPageNumber)
     {
         _pageNumber = newPageNumber;
-        Status.StatusText = string.Format(MiscResources.ScanProgressPage, _pageNumber);
+        Status.StatusText = string.Format(UiStrings.ScanProgressPage, _pageNumber);
         InvokeStatusChanged();
     }
 

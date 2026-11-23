@@ -15,14 +15,14 @@ public class Notify : INotify
 
     public void PdfSaved(string path)
     {
-        _notificationManager.Show(new SaveNotification(MiscResources.PdfSaved, path));
+        _notificationManager.Show(new SaveNotification(UiStrings.PdfSaved, path));
     }
 
     public void ImagesSaved(int imageCount, string path)
     {
         var title = imageCount == 1
-            ? MiscResources.ImageSaved
-            : string.Format(MiscResources.ImagesSaved, imageCount);
+            ? UiStrings.ImageSaved
+            : string.Format(UiStrings.ImagesSaved, imageCount);
         _notificationManager.Show(new SaveNotification(title, path));
     }
 

@@ -10,8 +10,8 @@ public class UpdateNotificationView : LinkNotificationView
     public UpdateNotificationView(UpdateNotification model)
         : base(
             model,
-            MiscResources.UpdateAvailable,
-            string.Format(MiscResources.Install, model.Update.Name),
+            UiStrings.UpdateAvailable,
+            string.Format(UiStrings.Install, model.Update.Name),
             null, null)
     {
         _updateChecker = model.UpdateChecker;

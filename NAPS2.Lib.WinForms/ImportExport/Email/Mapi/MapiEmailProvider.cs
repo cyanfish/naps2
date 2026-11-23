@@ -36,7 +36,7 @@ internal class MapiEmailProvider : IEmailProvider
             if (returnCode != MapiSendMailReturnCode.Success)
             {
                 Log.Error($"Error sending email. MAPI error code: {returnCode}");
-                _errorOutput.DisplayError(MiscResources.EmailError, $"MAPI returned error code: {returnCode}");
+                _errorOutput.DisplayError(UiStrings.EmailError, $"MAPI returned error code: {returnCode}");
                 return false;
             }
 

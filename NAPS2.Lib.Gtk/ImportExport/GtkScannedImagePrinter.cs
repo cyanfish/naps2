@@ -67,7 +67,7 @@ public class GtkScannedImagePrinter : IScannedImagePrinter
         {
             Log.Event(EventType.Print, new EventParams
             {
-                Name = MiscResources.Print,
+                Name = UiStrings.Print,
                 Pages = printOp.NPagesToPrint
             });
         };

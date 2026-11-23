@@ -573,13 +573,13 @@ public abstract class DesktopForm : EtoFormBase
 
         // "All" dropdown items
         Commands.SaveAllPdf.Text = Commands.SaveAllImages.Text = Commands.EmailAll.Text =
-            Commands.ReverseAll.Text = string.Format(MiscResources.AllCount, ImageList.Images.Count);
+            Commands.ReverseAll.Text = string.Format(UiStrings.AllCount, ImageList.Images.Count);
         Commands.SaveAllPdf.Enabled = Commands.SaveAllImages.Enabled = Commands.SaveAll.Enabled =
             Commands.EmailAll.Enabled = Commands.ReverseAll.Enabled = ImageList.Images.Any();
 
         // "Selected" dropdown items
         Commands.SaveSelectedPdf.Text = Commands.SaveSelectedImages.Text = Commands.EmailSelected.Text =
-            Commands.ReverseSelected.Text = string.Format(MiscResources.SelectedCount, ImageList.Selection.Count);
+            Commands.ReverseSelected.Text = string.Format(UiStrings.SelectedCount, ImageList.Selection.Count);
         Commands.SaveSelectedPdf.Enabled = Commands.SaveSelectedImages.Enabled = Commands.SaveSelected.Enabled =
             Commands.EmailSelected.Enabled = Commands.ReverseSelected.Enabled = ImageList.Selection.Any();
 

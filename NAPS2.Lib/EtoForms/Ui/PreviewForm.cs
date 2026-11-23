@@ -320,7 +320,7 @@ public class PreviewForm : EtoDialogBase
 
     private void DeleteCurrentImage()
     {
-        if (MessageDialog.Confirm(this, string.Format(MiscResources.ConfirmDeleteItems, 1), MiscResources.Delete,
+        if (MessageDialog.Confirm(this, string.Format(UiStrings.ConfirmDeleteItems, 1), UiStrings.Delete,
                 UiStrings.Delete, destructive: true))
         {
             // We don't want to run Commands.Delete as that runs on DesktopController and uses that selection.

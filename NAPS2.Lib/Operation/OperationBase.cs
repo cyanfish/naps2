@@ -168,7 +168,7 @@ public abstract class OperationBase : IOperation
     {
         while (FileSystemHelper.IsFileInUse(filePath, out var ex))
         {
-            if (!await InvokeErrorWithRetry(MiscResources.FileInUse, ex!))
+            if (!await InvokeErrorWithRetry(UiStrings.FileInUse, ex!))
             {
                 return false;
             }
@@ -177,7 +177,7 @@ public abstract class OperationBase : IOperation
     }
 
     protected static string GetSaveErrorMessage(Exception ex) =>
-        ex is UnauthorizedAccessException ? MiscResources.DontHavePermission : MiscResources.ErrorSaving;
+        ex is UnauthorizedAccessException ? UiStrings.DontHavePermission : UiStrings.ErrorSaving;
 
     protected void OnProgress(int current, int max)
     {

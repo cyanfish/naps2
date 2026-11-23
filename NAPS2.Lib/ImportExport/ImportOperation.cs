@@ -8,7 +8,7 @@ public class ImportOperation : OperationBase
     {
         _fileImporter = fileImporter;
 
-        ProgressTitle = MiscResources.ImportProgress;
+        ProgressTitle = UiStrings.ImportProgress;
         AllowCancel = true;
         AllowBackground = true;
     }
@@ -29,7 +29,7 @@ public class ImportOperation : OperationBase
                 {
                     try
                     {
-                        Status.StatusText = string.Format(MiscResources.ImportingFormat, Path.GetFileName(fileName));
+                        Status.StatusText = string.Format(UiStrings.ImportingFormat, Path.GetFileName(fileName));
                         InvokeStatusChanged();
                         var images = _fileImporter.Import(fileName, importParams, oneFile ? ProgressHandler : CancelToken);
                         await foreach (var image in images)
@@ -39,8 +39,8 @@ public class ImportOperation : OperationBase
                     }
                     catch (Exception ex)
                     {
-                        Log.ErrorException(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
-                        InvokeError(string.Format(MiscResources.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
+                        Log.ErrorException(string.Format(UiStrings.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
+                        InvokeError(string.Format(UiStrings.ImportErrorCouldNot, Path.GetFileName(fileName)), ex);
                     }
                     if (!oneFile)
                     {

@@ -32,7 +32,7 @@ public class PageSizeForm : EtoDialogBase
 
     private void DeletePageSize()
     {
-        if (MessageDialog.Confirm(this, string.Format(MiscResources.ConfirmDelete, _name.Text), MiscResources.Delete,
+        if (MessageDialog.Confirm(this, string.Format(UiStrings.ConfirmDelete, _name.Text), UiStrings.Delete,
                 UiStrings.Delete, destructive: true))
         {
             var presets = Config.Get(c => c.CustomPageSizePresets);

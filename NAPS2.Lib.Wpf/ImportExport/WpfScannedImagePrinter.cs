@@ -44,7 +44,7 @@ public class WpfScannedImagePrinter : IScannedImagePrinter
 
         Log.Event(EventType.Print, new EventParams
         {
-            Name = MiscResources.Print,
+            Name = UiStrings.Print,
             Pages = result.PageCount,
             DeviceName = result.PrinterName
         });

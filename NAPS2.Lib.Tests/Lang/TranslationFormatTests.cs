@@ -12,7 +12,6 @@ public class TranslationFormatTests
 
     public static IEnumerable<object[]> ResourceManagers =>
     [
-        [nameof(MiscResources), MiscResources.ResourceManager],
         [nameof(SettingsResources), SettingsResources.ResourceManager],
         [nameof(UiStrings), UiStrings.ResourceManager],
         [nameof(SdkResources), SdkResources.ResourceManager]

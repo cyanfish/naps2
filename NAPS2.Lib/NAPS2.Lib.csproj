@@ -79,14 +79,6 @@
       <DependentUpon>SettingsResources.resx</DependentUpon>
     </EmbeddedResource>
 
-    <EmbeddedResource Remove="Lang\Resources\MiscResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.fr.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.he.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.pt-BR.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="Lang\Resources\MiscResources.*.resx">
-      <DependentUpon>MiscResources.resx</DependentUpon>
-    </EmbeddedResource>
-
     <EmbeddedResource Remove="Lang\Resources\UiStrings.*.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\UiStrings.fr.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Include="Lang\Resources\UiStrings.he.resx" Condition="'$(Configuration)' == 'Debug'" />

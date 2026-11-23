@@ -142,7 +142,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                 {
                     for (int i = 0; i < _settings.ScanCount; i++)
                     {
-                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                        _progressCallback(string.Format(UiStrings.BatchStatusWaitingForScan, i + 1));
                         if (i != 0)
                         {
                             ThreadSleepWithCancel(TimeSpan.FromSeconds(_settings.ScanIntervalSeconds),
@@ -161,7 +161,7 @@ public class BatchScanPerformer : IBatchScanPerformer
                     int i = 0;
                     do
                     {
-                        _progressCallback(string.Format(MiscResources.BatchStatusWaitingForScan, i + 1));
+                        _progressCallback(string.Format(UiStrings.BatchStatusWaitingForScan, i + 1));
                         if (!await InputOneScan(i++))
                         {
                             return;
@@ -182,8 +182,8 @@ public class BatchScanPerformer : IBatchScanPerformer
             var scan = new List<ProcessedImage>();
             int pageNumber = 1;
             _progressCallback(scanNumber == -1
-                ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
+                ? string.Format(UiStrings.BatchStatusPage, pageNumber++)
+                : string.Format(UiStrings.BatchStatusScanPage, pageNumber++, scanNumber + 1));
             _cancelToken.ThrowIfCancellationRequested();
             try
             {
@@ -213,8 +213,8 @@ public class BatchScanPerformer : IBatchScanPerformer
                 scan.Add(image);
                 _cancelToken.ThrowIfCancellationRequested();
                 _progressCallback(scanNumber == -1
-                    ? string.Format(MiscResources.BatchStatusPage, pageNumber++)
-                    : string.Format(MiscResources.BatchStatusScanPage, pageNumber++, scanNumber + 1));
+                    ? string.Format(UiStrings.BatchStatusPage, pageNumber++)
+                    : string.Format(UiStrings.BatchStatusScanPage, pageNumber++, scanNumber + 1));
             }
         }
 
@@ -231,7 +231,7 @@ public class BatchScanPerformer : IBatchScanPerformer
 
         private async Task Output()
         {
-            _progressCallback(MiscResources.BatchStatusSaving);
+            _progressCallback(UiStrings.BatchStatusSaving);
 
             var saveParams = new SaveParams { OverwriteMode = OverwriteMode.Never };
             var allImages = _scans.SelectMany(x => x).ToList();

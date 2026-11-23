@@ -14,7 +14,7 @@ internal class SaveImagesOperation : OperationBase
         _imageContext = imageContext;
         _nameManager = nameManager;
 
-        ProgressTitle = MiscResources.SaveImagesProgress;
+        ProgressTitle = UiStrings.SaveImagesProgress;
         AllowCancel = true;
         AllowBackground = true;
     }
@@ -74,7 +74,7 @@ internal class SaveImagesOperation : OperationBase
                     {
                         return false;
                     }
-                    Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(tiffFileName));
+                    Status.StatusText = string.Format(UiStrings.SavingFormat, Path.GetFileName(tiffFileName));
                     FirstFileSaved = tiffFileName;
                     return await RunWithRetry(async () =>
                     {
@@ -112,7 +112,7 @@ internal class SaveImagesOperation : OperationBase
                             return false;
                         }
                     }
-                    Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
+                    Status.StatusText = string.Format(UiStrings.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
                     if (!await SaveImageWithRetry(image, currentFileName, format, imageSettings))
                     {
@@ -126,12 +126,12 @@ internal class SaveImagesOperation : OperationBase
             }
             catch (UnauthorizedAccessException ex)
             {
-                InvokeError(MiscResources.DontHavePermission, ex);
+                InvokeError(UiStrings.DontHavePermission, ex);
             }
             catch (Exception ex)
             {
-                Log.ErrorException(MiscResources.ErrorSaving, ex);
-                InvokeError(MiscResources.ErrorSaving, ex);
+                Log.ErrorException(UiStrings.ErrorSaving, ex);
+                InvokeError(UiStrings.ErrorSaving, ex);
             }
             finally
             {
@@ -145,7 +145,7 @@ internal class SaveImagesOperation : OperationBase
             {
                 Log.Event(EventType.SaveImages, new EventParams
                 {
-                    Name = MiscResources.SaveImages,
+                    Name = UiStrings.SaveImages,
                     Pages = images.Count,
                     FileFormat = Path.GetExtension(fileName)
                 });

@@ -13,16 +13,16 @@ public class FileFilters
 
     private static (ImageFileFormat format, string name, string[] extensions)[] ImageFilters =>
     [
-        (ImageFileFormat.Avif, MiscResources.FileTypeAvif, [".avif"]),
-        (ImageFileFormat.Bmp, MiscResources.FileTypeBmp, [".bmp"]),
-        (ImageFileFormat.Gif, MiscResources.FileTypeGif, [".gif"]),
-        (ImageFileFormat.Heic, MiscResources.FileTypeHeic, [".heic", ".heif"]),
-        (ImageFileFormat.Jpeg, MiscResources.FileTypeJpeg, [".jpg", ".jpeg"]),
-        (ImageFileFormat.Jpeg2000, MiscResources.FileTypeJp2, [".jp2", ".jpx"]),
-        (ImageFileFormat.JpegXl, MiscResources.FileTypeJxl, [".jxl"]),
-        (ImageFileFormat.Png, MiscResources.FileTypePng, [".png"]),
-        (ImageFileFormat.Tiff, MiscResources.FileTypeTiff, [".tiff", ".tif"]),
-        (ImageFileFormat.WebP, MiscResources.FileTypeWebp, [".webp"])
+        (ImageFileFormat.Avif, UiStrings.FileTypeAvif, [".avif"]),
+        (ImageFileFormat.Bmp, UiStrings.FileTypeBmp, [".bmp"]),
+        (ImageFileFormat.Gif, UiStrings.FileTypeGif, [".gif"]),
+        (ImageFileFormat.Heic, UiStrings.FileTypeHeic, [".heic", ".heif"]),
+        (ImageFileFormat.Jpeg, UiStrings.FileTypeJpeg, [".jpg", ".jpeg"]),
+        (ImageFileFormat.Jpeg2000, UiStrings.FileTypeJp2, [".jp2", ".jpx"]),
+        (ImageFileFormat.JpegXl, UiStrings.FileTypeJxl, [".jxl"]),
+        (ImageFileFormat.Png, UiStrings.FileTypePng, [".png"]),
+        (ImageFileFormat.Tiff, UiStrings.FileTypeTiff, [".tiff", ".tif"]),
+        (ImageFileFormat.WebP, UiStrings.FileTypeWebp, [".webp"])
     ];
 
     public void Set(FileDialog fileDialog, FileFilterGroup groups, string? selectedExt = null)
@@ -30,11 +30,11 @@ public class FileFilters
         var filters = fileDialog.Filters;
         if (groups.HasFlag(FileFilterGroup.AllFiles))
         {
-            filters.Add(new FileFilter(MiscResources.FileTypeAllFiles, ".*"));
+            filters.Add(new FileFilter(UiStrings.FileTypeAllFiles, ".*"));
         }
         if (groups.HasFlag(FileFilterGroup.Pdf))
         {
-            filters.Add(new FileFilter(MiscResources.FileTypePdf, ".pdf"));
+            filters.Add(new FileFilter(UiStrings.FileTypePdf, ".pdf"));
         }
         Func<ImageFileFormat, bool> isSupported = fileDialog is SaveFileDialog
             ? _imageContext.SupportsEncode
@@ -42,7 +42,7 @@ public class FileFilters
         var imageFilters = ImageFilters.Where(x => isSupported(x.format)).ToList();
         if (groups.HasFlag(FileFilterGroup.AllImages))
         {
-            filters.Add(new FileFilter(MiscResources.FileTypeImageFiles,
+            filters.Add(new FileFilter(UiStrings.FileTypeImageFiles,
                 imageFilters.SelectMany(x => x.extensions).ToArray()));
         }
         if (groups.HasFlag(FileFilterGroup.Image))

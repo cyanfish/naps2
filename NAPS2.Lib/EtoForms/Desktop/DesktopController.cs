@@ -225,8 +225,8 @@ public class DesktopController
                     var result = MessageDialog.Show(_desktopFormProvider.DesktopForm,
                         new MessageDialogOptions
                         {
-                            Title = MiscResources.ActiveOperations,
-                            Text = MiscResources.ExitWithActiveOperations,
+                            Title = UiStrings.ActiveOperations,
+                            Text = UiStrings.ExitWithActiveOperations,
                             Type = MessageBoxType.Warning,
                             PrimaryText = UiStrings.Exit,
                             DefaultButton = MessageDialogResult.Close,
@@ -250,8 +250,8 @@ public class DesktopController
                 var result = MessageDialog.Show(_desktopFormProvider.DesktopForm,
                     new MessageDialogOptions
                     {
-                        Title = MiscResources.UnsavedChanges,
-                        Text = MiscResources.ExitWithUnsavedChanges,
+                        Title = UiStrings.UnsavedChanges,
+                        Text = UiStrings.ExitWithUnsavedChanges,
                         Type = MessageBoxType.Warning,
                         PrimaryText = UiStrings.DiscardAndExit,
                         DefaultButton = MessageDialogResult.Close,
@@ -428,8 +428,8 @@ public class DesktopController
         if (_imageList.Images.Count > 0)
         {
             if (MessageDialog.Confirm(_desktopFormProvider.DesktopForm,
-                    string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count),
-                    MiscResources.Clear, UiStrings.Clear, destructive: true))
+                    string.Format(UiStrings.ConfirmClearItems, _imageList.Images.Count),
+                    UiStrings.Clear, UiStrings.Clear, destructive: true))
             {
                 _imageListActions.DeleteAll();
                 GC.Collect();
@@ -442,8 +442,8 @@ public class DesktopController
         if (_imageList.Selection.Any())
         {
             if (MessageDialog.Confirm(_desktopFormProvider.DesktopForm,
-                    string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
-                    MiscResources.Delete, UiStrings.Delete, destructive: true))
+                    string.Format(UiStrings.ConfirmDeleteItems, _imageList.Selection.Count),
+                    UiStrings.Delete, UiStrings.Delete, destructive: true))
             {
                 _imageListActions.DeleteSelected();
                 GC.Collect();
@@ -456,8 +456,8 @@ public class DesktopController
         if (_imageList.Selection.Any())
         {
             if (MessageDialog.Confirm(_desktopFormProvider.DesktopForm,
-                    string.Format(MiscResources.ConfirmResetImages, _imageList.Selection.Count),
-                    MiscResources.ResetImage, UiStrings.Reset))
+                    string.Format(UiStrings.ConfirmResetImages, _imageList.Selection.Count),
+                    UiStrings.ResetImage, UiStrings.Reset))
             {
                 _imageListActions.ResetTransforms();
             }

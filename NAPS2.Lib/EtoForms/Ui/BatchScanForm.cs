@@ -346,8 +346,8 @@ public class BatchScanForm : EtoDialogBase
             Invoker.Current.Invoke(() =>
             {
                 _status.Text = _cts.IsCancellationRequested
-                    ? MiscResources.BatchStatusCancelled
-                    : MiscResources.BatchStatusComplete;
+                    ? UiStrings.BatchStatusCancelled
+                    : UiStrings.BatchStatusComplete;
             });
         }
         catch (ScanDriverException ex)
@@ -365,8 +365,8 @@ public class BatchScanForm : EtoDialogBase
         catch (Exception ex)
         {
             Log.ErrorException("Error in batch scan", ex);
-            _errorOutput.DisplayError(MiscResources.BatchError, ex);
-            Invoker.Current.Invoke(() => { _status.Text = MiscResources.BatchStatusError; });
+            _errorOutput.DisplayError(UiStrings.BatchError, ex);
+            Invoker.Current.Invoke(() => { _status.Text = UiStrings.BatchStatusError; });
         }
         Invoker.Current.Invoke(() =>
         {
@@ -374,7 +374,7 @@ public class BatchScanForm : EtoDialogBase
             _cts = new CancellationTokenSource();
             _start.Enabled = true;
             _cancel.Enabled = true;
-            _cancel.Text = MiscResources.Close;
+            _cancel.Text = UiStrings.Close;
             EnableDisableSettings(true);
             Focus();
         });
@@ -393,7 +393,7 @@ public class BatchScanForm : EtoDialogBase
         _status.Text = status;
         if (done)
         {
-            _cancel.Text = MiscResources.Close;
+            _cancel.Text = UiStrings.Close;
         }
     }
 
@@ -405,16 +405,16 @@ public class BatchScanForm : EtoDialogBase
                 new MessageDialogOptions
                 {
                     Title = UiStrings.BatchScanFormTitle,
-                    Text = MiscResources.ConfirmCancelBatch,
+                    Text = UiStrings.ConfirmCancelBatch,
                     Type = MessageBoxType.Question,
-                    PrimaryText = MiscResources.CancelBatch,
+                    PrimaryText = UiStrings.CancelBatch,
                     CloseText = UiStrings.KeepScanning
                 });
             if (result == MessageDialogResult.Primary)
             {
                 _cts.Cancel();
                 _cancel.Enabled = false;
-                _status.Text = MiscResources.BatchStatusCancelling;
+                _status.Text = UiStrings.BatchStatusCancelling;
             }
         }
         else
