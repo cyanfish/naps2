@@ -231,6 +231,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
         internal static string ApplyToSelected {
             get {
                 return ResourceManager.GetString("ApplyToSelected", resourceCulture);

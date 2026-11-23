@@ -360,12 +360,13 @@ public class DesktopCommands
         };
     }
 
-    public DesktopCommands WithSelection(Func<ListSelection<UiImage>> selectionFunc)
+    public DesktopCommands WithSelection(Func<ListSelection<UiImage>> selectionFunc,
+        Action<ImageEditor>? editorHost = null)
     {
         return new DesktopCommands(
             _desktopController,
             _desktopScanController,
-            _desktopSubFormController.WithSelection(selectionFunc),
+            _desktopSubFormController.WithSelection(selectionFunc, editorHost),
             _imageList,
             _imageListActions.WithSelection(selectionFunc),
             _thumbnailController,

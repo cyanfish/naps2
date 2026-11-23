@@ -1,6 +1,7 @@
 using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.EtoForms.Desktop;
+using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
@@ -10,12 +11,17 @@ public class PreviewForm : EtoDialogBase
     private readonly DesktopCommands _desktopCommands;
     private readonly IIconProvider _iconProvider;
     private readonly KeyboardShortcutManager _previewKsm;
+    private readonly KeyboardShortcutManager _editKsm = new();
     private readonly EditWithController _editWithController;
 
     private readonly ButtonToolItem _pageNumberButton = new();
     private readonly ButtonToolItem _zoomPercentButton = new();
     private readonly ButtonToolItem _editWithAppButton = new();
+    private readonly LayoutPlaceholder _editorPlaceholder = new();
+    private readonly LayoutVisibility _editVis = new(false);
     private UiImage? _currentImage;
+    private Bitmap? _viewBitmap;
+    private ImageEditor? _editor;
 
     public PreviewForm(Naps2Config config, DesktopCommands desktopCommands, UiImageList imageList,
         IIconProvider iconProvider, ColorScheme colorScheme, EditWithController editWithController) : base(config)
@@ -72,7 +78,8 @@ public class PreviewForm : EtoDialogBase
         };
 
         _previewKsm = new KeyboardShortcutManager();
-        EtoPlatform.Current.HandleKeyDown(this, _previewKsm.Perform);
+        EtoPlatform.Current.HandleKeyDown(this,
+            keys => _editor != null ? HandleEditorKey(keys) : _previewKsm.Perform(keys));
     }
 
     private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
@@ -88,6 +95,7 @@ public class PreviewForm : EtoDialogBase
                     UpdatePage();
                     return;
                 }
+                EndEdit();
                 if (ImageList.Images.Any())
                 {
                     // Update the GUI for the newly displayed image
@@ -137,7 +145,10 @@ public class PreviewForm : EtoDialogBase
         FormStateController.DefaultClientSize = new Size(800, 600);
 
         LayoutController.RootPadding = 0;
-        LayoutController.Content = ImageViewer;
+        LayoutController.Content = L.Column(
+            ImageViewer.Scale(),
+            L.Column(_editorPlaceholder).Padding(6).Visible(_editVis)
+        ).Spacing(0);
     }
 
     protected internal DesktopCommands Commands { get; set; } = null!;
@@ -162,14 +173,18 @@ public class PreviewForm : EtoDialogBase
             }
             _currentImage = value;
             UpdateImageIndex();
-            Commands = _desktopCommands.WithSelection(() => ListSelection.Of(_currentImage));
+            Commands = _desktopCommands.WithSelection(() => ListSelection.Of(_currentImage), Edit);
             _currentImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
         }
     }
 
     private void ImageThumbnailInvalidated(object? sender, EventArgs e)
     {
-        Invoker.Current.InvokeDispatch(() => UpdateImage().AssertNoAwait());
+        Invoker.Current.InvokeDispatch(() =>
+        {
+            EndEdit();
+            UpdateImage().AssertNoAwait();
+        });
     }
 
     protected int ImageIndex { get; private set; }
@@ -296,6 +311,7 @@ public class PreviewForm : EtoDialogBase
             {
                 return;
             }
+            EndEdit();
             CurrentImage = ImageList.Images[index];
             ImageList.UpdateSelection(ListSelection.Of(CurrentImage));
         }
@@ -312,10 +328,60 @@ public class PreviewForm : EtoDialogBase
     {
         using var imageToRender = CurrentImage.GetClonedImage();
         using var rendered = await Task.Run(() => imageToRender.Render());
-        var oldImage = ImageViewer.Image;
-        ImageViewer.SetImage(rendered.ToEtoImage());
-        oldImage?.Dispose();
+        var oldBitmap = _viewBitmap;
+        _viewBitmap = rendered.ToEtoImage();
+        if (_editor == null)
+        {
+            ImageViewer.SetImage(_viewBitmap);
+            ImageViewer.ZoomToContainer();
+        }
+        oldBitmap?.Dispose();
+    }
+
+    private void Edit(ImageEditor editor)
+    {
+        EndEdit();
+        _editor = editor;
+        editor.ParentWindow = this;
+        editor.Viewer = ImageViewer;
+        editor.Initialize();
+        editor.Finished += (_, _) => EndEdit();
+        editor.OkButton.Text = UiStrings.Apply;
+        _editorPlaceholder.Content = editor.CreateLayout();
+        _editVis.IsVisible = true;
+        DefaultButton = editor.OkButton;
+        Invoker.Current.InvokeDispatch(() =>
+        {
+            if (_editor == editor)
+            {
+                editor.OnShown();
+            }
+        });
+    }
+
+    private void EndEdit()
+    {
+        if (_editor == null) return;
+        var editor = _editor;
+        _editor = null;
+        _editorPlaceholder.Content = null;
+        _editVis.IsVisible = false;
+        DefaultButton = null;
+        editor.Dispose();
+        ImageViewer.SetImage(_viewBitmap);
         ImageViewer.ZoomToContainer();
+    }
+
+    private bool HandleEditorKey(Keys keys)
+    {
+        if (keys == Keys.Escape)
+        {
+            _editor!.CancelButton.PerformClick();
+            return true;
+        }
+        var args = new KeyEventArgs(keys, KeyEventType.KeyDown);
+        _editor!.HandleKeyDown(args);
+        return args.Handled || _editKsm.Perform(keys);
     }
 
     private void DeleteCurrentImage()
@@ -384,15 +450,24 @@ public class PreviewForm : EtoDialogBase
 
         _previewKsm.Assign(ks.ZoomIn, ZoomInCommand);
         _previewKsm.Assign(ks.ZoomOut, ZoomOutCommand);
+
+        _editKsm.Assign("Mod+0", ZoomActualCommand);
+        _editKsm.Assign(ks.ZoomIn, ZoomInCommand);
+        _editKsm.Assign(ks.ZoomOut, ZoomOutCommand);
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        EndEdit();
     }
 
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
-            var oldImage = ImageViewer.Image;
             ImageViewer.SetImage(null);
-            oldImage?.Dispose();
+            _viewBitmap?.Dispose();
             ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
             _editWithController.AppChanged -= EditWithController_AppChanged;
         }

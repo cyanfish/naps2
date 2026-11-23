@@ -24,14 +24,18 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
 
+    private Action<ImageEditor>? EditorHost { get; init; }
+
     private ListSelection<UiImage> Selection => SelectionFunc?.Invoke() ?? _imageList.Selection;
 
-    public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc)
+    public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc,
+        Action<ImageEditor>? editorHost = null)
     {
         return new DesktopSubFormController(_formFactory, _imageEditorFactory, _imageList, _desktopImagesController,
             _tesseractLanguageManager)
         {
-            SelectionFunc = selectionFunc
+            SelectionFunc = selectionFunc,
+            EditorHost = editorHost
         };
     }
 
@@ -58,6 +62,11 @@ public class DesktopSubFormController : IDesktopSubFormController
             var editor = _imageEditorFactory.Create<T>();
             editor.Image = selection.First();
             editor.SelectedImages = selection.ToList();
+            if (EditorHost != null)
+            {
+                EditorHost(editor);
+                return;
+            }
             var form = _formFactory.Create<ImageEditorForm>();
             form.Editor = editor;
             form.ShowModal();

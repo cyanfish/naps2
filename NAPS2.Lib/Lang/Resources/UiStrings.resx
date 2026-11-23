@@ -210,6 +210,9 @@
   <data name="Application" xml:space="preserve">
     <value>Application</value>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Apply to all {0} selected images</value>
   </data>

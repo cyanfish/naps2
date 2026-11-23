@@ -113,7 +113,7 @@ public class LayoutController
 
     private void DoLayout()
     {
-        if (_window == null || _content == null || !_isShown || _layoutQueued) return;
+        if (_window == null || _window.IsDisposed || _content == null || !_isShown || _layoutQueued) return;
         var size = _isHosted ? EtoPlatform.Current.GetContainerSize(_layout) : EtoPlatform.Current.GetClientSize(_window, true);
         var context = GetLayoutContext() with { Window = _window, IsLayout = true };
         int p = RootPadding;
