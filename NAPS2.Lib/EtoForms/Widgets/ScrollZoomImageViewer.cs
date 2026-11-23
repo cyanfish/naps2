@@ -29,6 +29,7 @@ public class ScrollZoomImageViewer
         _scrollable.MouseUp += OnMouseUp;
         EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
         _scrollable.SizeChanged += OnSizeChanged;
+        _scrollable.Scroll += (_, _) => _imageView.Invalidate();
         _scrollable.Cursor = Cursors.Pointer;
     }
 
@@ -199,9 +200,30 @@ public class ScrollZoomImageViewer
             e.Graphics.DrawRectangle(
                 ColorScheme?.BorderColor ?? Colors.Black,
                 XOffset - 1, YOffset - 1, RenderSize.Width + 1, RenderSize.Height + 1);
-            e.Graphics.DrawImage(Image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+            DrawVisiblePart(e.Graphics, Image);
             PaintOverlay?.Invoke(this, e);
         }
+    }
+
+    private void DrawVisiblePart(Graphics graphics, Bitmap image)
+    {
+        float scaleX = RenderSize.Width / (float) image.Width;
+        float scaleY = RenderSize.Height / (float) image.Height;
+        if (scaleX <= 1)
+        {
+            graphics.DrawImage(image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+            return;
+        }
+        var visible = _scrollable.VisibleRect;
+        float left = Math.Max((float) Math.Floor((visible.Left - XOffset) / scaleX), 0);
+        float top = Math.Max((float) Math.Floor((visible.Top - YOffset) / scaleY), 0);
+        float right = Math.Min((float) Math.Ceiling((visible.Right - XOffset) / scaleX), image.Width);
+        float bottom = Math.Min((float) Math.Ceiling((visible.Bottom - YOffset) / scaleY), image.Height);
+        if (right <= left || bottom <= top) return;
+        graphics.DrawImage(image,
+            new RectangleF(left, top, right - left, bottom - top),
+            new RectangleF(XOffset + left * scaleX, YOffset + top * scaleY,
+                (right - left) * scaleX, (bottom - top) * scaleY));
     }
 
     public float ZoomFactor => _renderFactor;
