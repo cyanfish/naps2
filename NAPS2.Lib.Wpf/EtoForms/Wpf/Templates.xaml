@@ -37,6 +37,91 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!-- Small toolbar templates. Buttons, toggle buttons and drop-downs share the same size and hover/pressed fill. -->
+    <ControlTemplate x:Key="ToolBarButtonTemplate" TargetType="Button">
+        <Border x:Name="bd" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4"
+                Padding="{TemplateBinding Padding}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="bd" Property="Opacity" Value="0.45" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ToolBarToggleButtonTemplate" TargetType="ToggleButton">
+        <Border x:Name="bd" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4"
+                Padding="{TemplateBinding Padding}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+            </MultiTrigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="bd" Property="Opacity" Value="0.45" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- For the root item of a single-item Menu acting as a drop-down button. The popup matches the Fluent one. -->
+    <ControlTemplate x:Key="ToolBarDropDownTemplate" TargetType="MenuItem">
+        <Grid>
+            <Border x:Name="bd" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4"
+                    Padding="{TemplateBinding Padding}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" ContentSource="Header"
+                                  RecognizesAccessKey="True" />
+            </Border>
+            <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-12"
+                   IsOpen="{TemplateBinding IsSubmenuOpen}" Placement="Bottom" PlacementTarget="{Binding ElementName=bd}"
+                   PopupAnimation="None" VerticalOffset="1">
+                <Border Margin="12,0,12,18" Padding="0,3,0,3" Background="{DynamicResource FlyoutBackground}"
+                        BorderBrush="{DynamicResource FlyoutBorderBrush}" BorderThickness="1" CornerRadius="8"
+                        SnapsToDevicePixels="True">
+                    <ScrollViewer CanContentScroll="True" Style="{DynamicResource MenuItemScrollViewerStyle}">
+                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"
+                                        KeyboardNavigation.TabNavigation="Cycle" Grid.IsSharedSizeScope="True" />
+                    </ScrollViewer>
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20" Direction="270" Opacity="0.25" ShadowDepth="6" />
+                    </Border.Effect>
+                </Border>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="bd" Property="Opacity" Value="0.45" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <!-- The Fluent GroupBox has no border, so this puts the header above a rounded "card" border. The header height
          must match GROUP_BOX_HEADER_HEIGHT in WpfEtoPlatform. -->
     <ControlTemplate x:Key="CardGroupBoxTemplate" TargetType="GroupBox">

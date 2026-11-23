@@ -25,7 +25,8 @@ namespace NAPS2.EtoForms.Wpf;
 public class WpfEtoPlatform : EtoPlatform
 {
     private const int SMALL_BUTTON_PADDING = 7;
-    private const int SMALL_TOOLBAR_BUTTON_PADDING = 4;
+    private const int SMALL_TOOLBAR_BUTTON_PADDING = 5;
+    private const int SMALL_TOOLBAR_TEXT_BUTTON_V_PADDING = 3;
     private const double ZOOM_BUTTON_OPACITY = 0.85;
     private const double NARROW_TEXT_BOX_WIDTH = 100;
 
@@ -399,21 +400,38 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override void ConfigureSmallToolBar(ToolBar toolBar)
     {
-        // The Fluent toolbar button template has a fixed padding (12,6) meant for text buttons, so icon buttons take up
-        // too much space
+        // The Fluent toolbar templates have fixed padding meant for text buttons, and buttons, toggle buttons and
+        // drop-downs (menus) each look different, so use our own matching templates
         foreach (var item in toolBar.Items)
         {
-            if (item.ControlObject is SWC.Control native)
+            SWC.Control? button = item.ControlObject switch
             {
-                native.Loaded += (_, _) =>
-                {
-                    if (SWM.VisualTreeHelper.GetChildrenCount(native) > 0 &&
-                        SWM.VisualTreeHelper.GetChild(native, 0) is SWC.Border border)
-                    {
-                        border.Padding = new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING);
-                    }
-                };
+                SWC.Button b => SetTemplate(b, XamlTemplates.ToolBarButtonTemplate),
+                SWC.Primitives.ToggleButton b => SetTemplate(b, XamlTemplates.ToolBarToggleButtonTemplate),
+                SWC.Menu { Items: [SWC.MenuItem b] } => SetTemplate(b, XamlTemplates.ToolBarDropDownTemplate),
+                _ => null
+            };
+            if (button != null)
+            {
+                // Text is taller than the icons, so it gets less vertical padding to keep all items the same height
+                button.Padding = item.Image == null
+                    ? new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING, SMALL_TOOLBAR_TEXT_BUTTON_V_PADDING,
+                        SMALL_TOOLBAR_BUTTON_PADDING, SMALL_TOOLBAR_TEXT_BUTTON_V_PADDING)
+                    : new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING);
+                button.Margin = new SW.Thickness(0);
+                button.MinWidth = button.MinHeight = 0;
             }
+            if (item.ControlObject is SWC.Menu menu)
+            {
+                // Unlike buttons, the menu item doesn't stretch to the toolbar height
+                menu.VerticalAlignment = SW.VerticalAlignment.Center;
+            }
+        }
+
+        static SWC.Control SetTemplate(SWC.Control control, SWC.ControlTemplate template)
+        {
+            control.Template = template;
+            return control;
         }
     }
 

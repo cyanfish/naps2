@@ -31,6 +31,24 @@ internal static class XamlTemplates
         (ControlTemplate) Templates["SubtleButtonTemplate"]!;
 
     /// <summary>
+    /// A small toolbar button.
+    /// </summary>
+    public static ControlTemplate ToolBarButtonTemplate { get; } =
+        (ControlTemplate) Templates["ToolBarButtonTemplate"]!;
+
+    /// <summary>
+    /// A small toolbar toggle button, with an accent border when checked.
+    /// </summary>
+    public static ControlTemplate ToolBarToggleButtonTemplate { get; } =
+        (ControlTemplate) Templates["ToolBarToggleButtonTemplate"]!;
+
+    /// <summary>
+    /// The root item of a Menu used as a small toolbar drop-down button.
+    /// </summary>
+    public static ControlTemplate ToolBarDropDownTemplate { get; } =
+        (ControlTemplate) Templates["ToolBarDropDownTemplate"]!;
+
+    /// <summary>
     /// A focus rectangle drawn inside the control's bounds, for controls at the edge of a clipping container.
     /// </summary>
     public static Style InsetFocusVisualStyle { get; } = (Style) Templates["InsetFocusVisualStyle"]!;
