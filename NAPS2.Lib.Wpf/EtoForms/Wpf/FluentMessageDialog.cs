@@ -117,13 +117,11 @@ public class FluentMessageDialog : Dialog<int>
         int defaultIndex)
     {
         var grid = new SWC.Grid { HorizontalAlignment = SW.HorizontalAlignment.Right };
-        SWC.Grid.SetIsSharedSizeScope(grid, true);
         SWC.Button? defaultButton = null;
         for (int i = 0; i < buttons.Count; i++)
         {
             if (i > 0) grid.ColumnDefinitions.Add(new SWC.ColumnDefinition { Width = new SW.GridLength(8) });
-            grid.ColumnDefinitions.Add(new SWC.ColumnDefinition
-                { Width = SW.GridLength.Auto, SharedSizeGroup = "Buttons" });
+            grid.ColumnDefinitions.Add(new SWC.ColumnDefinition { Width = SW.GridLength.Auto });
 
             int result = i;
             var button = new SWC.Button
