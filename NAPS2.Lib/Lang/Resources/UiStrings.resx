@@ -1203,4 +1203,22 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="PauseKey" xml:space="preserve">
     <value>Pause</value>
   </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Overwrite" xml:space="preserve">
+    <value>Overwrite</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="DiscardAndExit" xml:space="preserve">
+    <value>Discard and Exit</value>
+  </data>
+  <data name="KeepScanning" xml:space="preserve">
+    <value>Keep Scanning</value>
+  </data>
+  <data name="StopSharing" xml:space="preserve">
+    <value>Stop Sharing</value>
+  </data>
 </root>

@@ -8,13 +8,6 @@ using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Exceptions;
-using Button = Eto.Forms.Button;
-using Control = Eto.Forms.Control;
-using DialogResult = Eto.Forms.DialogResult;
-using Label = Eto.Forms.Label;
-using MessageBox = Eto.Forms.MessageBox;
-using MessageBoxButtons = Eto.Forms.MessageBoxButtons;
-using RadioButton = Eto.Forms.RadioButton;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -408,8 +401,16 @@ public class BatchScanForm : EtoDialogBase
     {
         if (_batchRunning)
         {
-            if (MessageBox.Show(MiscResources.ConfirmCancelBatch, MiscResources.CancelBatch, MessageBoxButtons.YesNo,
-                    MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
+            var result = MessageDialog.Show(this,
+                new MessageDialogOptions
+                {
+                    Title = UiStrings.BatchScanFormTitle,
+                    Text = MiscResources.ConfirmCancelBatch,
+                    Type = MessageBoxType.Question,
+                    PrimaryText = MiscResources.CancelBatch,
+                    CloseText = UiStrings.KeepScanning
+                });
+            if (result == MessageDialogResult.Primary)
             {
                 _cts.Cancel();
                 _cancel.Enabled = false;

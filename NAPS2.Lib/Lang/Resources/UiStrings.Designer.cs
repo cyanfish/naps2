@@ -2174,5 +2174,41 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("PauseKey", resourceCulture);
             }
         }
+
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+
+        internal static string Overwrite {
+            get {
+                return ResourceManager.GetString("Overwrite", resourceCulture);
+            }
+        }
+
+        internal static string Skip {
+            get {
+                return ResourceManager.GetString("Skip", resourceCulture);
+            }
+        }
+
+        internal static string DiscardAndExit {
+            get {
+                return ResourceManager.GetString("DiscardAndExit", resourceCulture);
+            }
+        }
+
+        internal static string KeepScanning {
+            get {
+                return ResourceManager.GetString("KeepScanning", resourceCulture);
+            }
+        }
+
+        internal static string StopSharing {
+            get {
+                return ResourceManager.GetString("StopSharing", resourceCulture);
+            }
+        }
     }
 }

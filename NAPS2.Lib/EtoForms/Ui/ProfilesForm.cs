@@ -289,7 +289,7 @@ public class ProfilesForm : EtoDialogBase
         }
         if (SelectedProfile == null)
         {
-            MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK,
+            MessageDialog.Show(this, MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile,
                 MessageBoxType.Warning);
             return;
         }
@@ -337,8 +337,8 @@ public class ProfilesForm : EtoDialogBase
         if (SelectedProfile != null && !SelectionLocked)
         {
             string message = string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
-            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxType.Warning,
-                    MessageBoxDefaultButton.OK) == DialogResult.Ok)
+            if (MessageDialog.Confirm(this, message, MiscResources.Delete, UiStrings.Delete, MessageBoxType.Warning,
+                    destructive: true))
             {
                 foreach (var profile in _listView.Selection)
                 {

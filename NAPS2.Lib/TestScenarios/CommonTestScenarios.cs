@@ -34,37 +34,107 @@ internal class CommonTestScenarios : TestScenarioProvider
         Add("msg-reset-images", async () =>
         {
             LoadImages();
-            await ShowMessage([K(MiscResources.ConfirmResetImages), K(MiscResources.ResetImage)],
-                string.Format(MiscResources.ConfirmResetImages, 1), MiscResources.ResetImage,
-                MessageBoxButtons.OKCancel, MessageBoxType.Question);
+            await ShowMessage([K(MiscResources.ConfirmResetImages), K(MiscResources.ResetImage), K(UiStrings.Reset)],
+                new()
+                {
+                    Title = MiscResources.ResetImage,
+                    Text = string.Format(MiscResources.ConfirmResetImages, 1),
+                    Type = MessageBoxType.Question,
+                    PrimaryText = UiStrings.Reset
+                });
         });
         Add("msg-exit-active-operations", () => ShowMessage(
-            [K(MiscResources.ExitWithActiveOperations), K(MiscResources.ActiveOperations)],
-            MiscResources.ExitWithActiveOperations, MiscResources.ActiveOperations,
-            MessageBoxButtons.YesNo, MessageBoxType.Warning));
+            [K(MiscResources.ExitWithActiveOperations), K(MiscResources.ActiveOperations), K(UiStrings.Exit)],
+            new()
+            {
+                Title = MiscResources.ActiveOperations,
+                Text = MiscResources.ExitWithActiveOperations,
+                Type = MessageBoxType.Warning,
+                PrimaryText = UiStrings.Exit,
+                DefaultButton = MessageDialogResult.Close,
+                Destructive = true
+            }));
         Add("msg-exit-unsaved-changes", () => ShowMessage(
-            [K(MiscResources.ExitWithUnsavedChanges), K(MiscResources.UnsavedChanges)],
-            MiscResources.ExitWithUnsavedChanges, MiscResources.UnsavedChanges,
-            MessageBoxButtons.YesNo, MessageBoxType.Warning), variant: true);
+            [K(MiscResources.ExitWithUnsavedChanges), K(MiscResources.UnsavedChanges), K(UiStrings.DiscardAndExit)],
+            new()
+            {
+                Title = MiscResources.UnsavedChanges,
+                Text = MiscResources.ExitWithUnsavedChanges,
+                Type = MessageBoxType.Warning,
+                PrimaryText = UiStrings.DiscardAndExit,
+                DefaultButton = MessageDialogResult.Close,
+                Destructive = true
+            }), variant: true);
         Add("msg-confirm-cancel-batch", () => ShowMessage(
-            [K(MiscResources.ConfirmCancelBatch), K(MiscResources.CancelBatch)],
-            MiscResources.ConfirmCancelBatch, MiscResources.CancelBatch,
-            MessageBoxButtons.YesNo, MessageBoxType.Warning), variant: true);
+            [K(MiscResources.ConfirmCancelBatch), K(UiStrings.BatchScanFormTitle), K(MiscResources.CancelBatch),
+                K(UiStrings.KeepScanning)],
+            new()
+            {
+                Title = UiStrings.BatchScanFormTitle,
+                Text = MiscResources.ConfirmCancelBatch,
+                Type = MessageBoxType.Question,
+                PrimaryText = MiscResources.CancelBatch,
+                CloseText = UiStrings.KeepScanning
+            }));
+        Add("msg-confirm-overwrite", () => ShowMessage(
+            [K(MiscResources.ConfirmOverwriteFile), K(MiscResources.OverwriteFile), K(UiStrings.Overwrite),
+                K(UiStrings.Skip)],
+            new()
+            {
+                Title = MiscResources.OverwriteFile,
+                Text = string.Format(MiscResources.ConfirmOverwriteFile, "scan.pdf"),
+                Type = MessageBoxType.Warning,
+                PrimaryText = UiStrings.Overwrite,
+                SecondaryText = UiStrings.Skip
+            }));
         Add("msg-confirm-delete-page-size", () => ShowMessage(
-            [K(MiscResources.ConfirmDelete)],
-            string.Format(MiscResources.ConfirmDelete, "Receipt"), MiscResources.Delete,
-            MessageBoxButtons.OKCancel, MessageBoxType.Warning), variant: true);
+            [K(MiscResources.ConfirmDelete), K(UiStrings.Delete)],
+            new()
+            {
+                Title = MiscResources.Delete,
+                Text = string.Format(MiscResources.ConfirmDelete, "Receipt"),
+                Type = MessageBoxType.Question,
+                PrimaryText = UiStrings.Delete,
+                Destructive = true
+            }), variant: true);
+        Add("msg-confirm-stop-sharing", () => ShowMessage(
+            [K(UiStrings.ConfirmDeleteSharedDevice), K(UiStrings.StopSharing)],
+            new()
+            {
+                Title = UiStrings.StopSharing,
+                Text = string.Format(UiStrings.ConfirmDeleteSharedDevice, "Canon CanoScan LiDE 400"),
+                Type = MessageBoxType.Warning,
+                PrimaryText = UiStrings.StopSharing,
+                Destructive = true
+            }), variant: true);
         Add("msg-confirm-delete-profile", () => ShowMessage(
-            [K(MiscResources.ConfirmDeleteSingleProfile)],
-            string.Format(MiscResources.ConfirmDeleteSingleProfile, "My Scanner"), MiscResources.Delete,
-            MessageBoxButtons.OKCancel, MessageBoxType.Warning));
+            [K(MiscResources.ConfirmDeleteSingleProfile), K(UiStrings.Delete)],
+            new()
+            {
+                Title = MiscResources.Delete,
+                Text = string.Format(MiscResources.ConfirmDeleteSingleProfile, "My Scanner"),
+                Type = MessageBoxType.Warning,
+                PrimaryText = UiStrings.Delete,
+                Destructive = true
+            }));
         Add("msg-select-profile", () => ShowMessage(
             [K(MiscResources.SelectProfileBeforeScan), K(MiscResources.ChooseProfile)],
-            MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile));
+            new()
+            {
+                Title = MiscResources.ChooseProfile,
+                Text = MiscResources.SelectProfileBeforeScan,
+                Type = MessageBoxType.Warning,
+                CloseText = UiStrings.OK
+            }));
         Add("msg-download-error", () => ShowMessage(
             [K(MiscResources.FilesCouldNotBeDownloaded), K(MiscResources.DownloadError)],
-            MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError,
-            MessageBoxButtons.OK, MessageBoxType.Error));
+            new()
+            {
+                Title = MiscResources.DownloadError,
+                Text = MiscResources.FilesCouldNotBeDownloaded,
+                Type = MessageBoxType.Error,
+                CloseText = UiStrings.OK
+            }));
     }
 
     private void DefineErrors()

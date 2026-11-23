@@ -8,13 +8,18 @@ public class EtoOverwritePrompt : IOverwritePrompt
     {
         string fileName = Path.GetFileName(path);
         var dialogResult = Invoker.Current.InvokeGet(() =>
-            MessageBox.Show(string.Format(MiscResources.ConfirmOverwriteFile, fileName),
-                MiscResources.OverwriteFile, MessageBoxButtons.YesNoCancel, MessageBoxType.Warning,
-                MessageBoxDefaultButton.Yes));
+            MessageDialog.Show(new MessageDialogOptions
+                {
+                    Title = MiscResources.OverwriteFile,
+                    Text = string.Format(MiscResources.ConfirmOverwriteFile, fileName),
+                    Type = MessageBoxType.Warning,
+                    PrimaryText = UiStrings.Overwrite,
+                    SecondaryText = UiStrings.Skip
+                }));
         return dialogResult switch
         {
-            DialogResult.Yes => OverwriteResponse.Yes,
-            DialogResult.No => OverwriteResponse.No,
+            MessageDialogResult.Primary => OverwriteResponse.Yes,
+            MessageDialogResult.Secondary => OverwriteResponse.No,
             _ => OverwriteResponse.Abort
         };
     }

@@ -16,7 +16,7 @@ public class MessageBoxErrorOutput : ErrorOutput
     public override void DisplayError(string errorMessage)
     {
         Invoker.Current.Invoke(() =>
-            MessageBox.Show(errorMessage, MiscResources.Error, MessageBoxButtons.OK, MessageBoxType.Error));
+            MessageDialog.Show(errorMessage, MiscResources.Error, MessageBoxType.Error));
     }
 
     public override void DisplayError(string errorMessage, string details)

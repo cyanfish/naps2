@@ -126,10 +126,9 @@ internal abstract class TestScenarioProvider
             popupCrop: popupCrop, positions: positions == null ? null : () => positions(form));
     }
 
-    protected async Task ShowMessage(string[] strings, string message, string caption,
-        MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxType type = MessageBoxType.Information)
+    protected async Task ShowMessage(string[] strings, MessageDialogOptions options)
     {
-        var window = await Ctx.WaitForNewWindow(() => MessageBox.Show(Desktop, message, caption, buttons, type));
+        var window = await Ctx.WaitForNewWindow(() => MessageDialog.Show(Desktop, options));
         await Ready(strings, window.Title);
     }
 

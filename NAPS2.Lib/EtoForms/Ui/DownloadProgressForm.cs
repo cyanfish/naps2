@@ -28,7 +28,7 @@ public class DownloadProgressForm : EtoDialogBase
 
     private void OnDownloadError(object? sender, EventArgs e)
     {
-        MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK,
+        MessageDialog.Show(this, MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError,
             MessageBoxType.Error);
     }
 
