@@ -4,7 +4,7 @@ using NAPS2.Scan;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class CombineForm : ImageFormBase
+public class CombineEditor : ImageEditor
 {
     private readonly ScanningContext _scanningContext;
 
@@ -14,7 +14,7 @@ public class CombineForm : ImageFormBase
     private double _hOffset = 0.5;
     private double _vOffset = 0.5;
 
-    public CombineForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+    public CombineEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
         ScanningContext scanningContext) :
         base(config, imageList, thumbnailController)
     {
@@ -23,7 +23,6 @@ public class CombineForm : ImageFormBase
         HelpText = UiStrings.CombineHelp;
 
         _scanningContext = scanningContext;
-        KeyDown += CombineForm_KeyDown;
     }
 
     private UiImage Image1 { get; set; } = null!;
@@ -88,7 +87,7 @@ public class CombineForm : ImageFormBase
         UpdatePreviewBox();
     }
 
-    private void CombineForm_KeyDown(object? sender, KeyEventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
         HandleArrowKeyEvent(e, Keys.Left, CombineOrientation.Horizontal, CombineOrientation.Vertical,
             () => SetHOffset(_hOffset - 0.5));
@@ -201,9 +200,9 @@ public class CombineForm : ImageFormBase
         ImageList.Mutate(new ListMutation<UiImage>.DeleteSelected(), ListSelection.Of(Image1, Image2));
     }
 
-    protected override void OnClosed(EventArgs e)
+    public override void Dispose()
     {
-        base.OnClosed(e);
+        base.Dispose();
         WorkingImage1.Dispose();
         WorkingImage2.Dispose();
     }

@@ -22,6 +22,7 @@ public class FormStateController
         window.PreLoad += OnLoadInternal;
         window.Shown += OnShownInternal;
         window.Closed += OnClosed;
+        FormName = window.GetType().Name;
     }
 
     public bool SaveFormState { get; set; } = true;
@@ -48,7 +49,7 @@ public class FormStateController
 
     public bool Shown { get; private set; }
 
-    public string FormName => _window.GetType().Name;
+    public string FormName { get; set; }
 
     public void UpdateLayoutSize(LayoutController layoutController)
     {

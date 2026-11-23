@@ -4,7 +4,7 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class RotateForm : UnaryImageFormBase
+public class RotateEditor : UnaryImageEditor
 {
     private const int MIN_LINE_DISTANCE = 50;
 
@@ -13,7 +13,7 @@ public class RotateForm : UnaryImageFormBase
     private bool _guideExists;
     private PointF _guideStart, _guideEnd;
 
-    public RotateForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+    public RotateEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
@@ -21,24 +21,21 @@ public class RotateForm : UnaryImageFormBase
         IconName = "arrow_rotate_anticlockwise";
         HelpText = UiStrings.CustomRotationHelp;
 
-        EtoPlatform.Current.AttachDpiDependency(this,
-            scale => _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise", IconScenario.Inline16, scale));
+        AttachDpiDependency(scale =>
+            _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise", IconScenario.Inline16, scale));
         Sliders = [_angleSlider];
-        Overlay.MouseDown += Overlay_MouseDown;
-        Overlay.MouseMove += Overlay_MouseMove;
-        Overlay.MouseUp += Overlay_MouseUp;
     }
 
     protected override List<Transform> Transforms => [new RotationTransform((double) _angleSlider.DecimalValue)];
 
-    private void Overlay_MouseDown(object? sender, MouseEventArgs e)
+    protected override void OnMouseDown(MouseEventArgs e)
     {
         _guideExists = true;
         _guideStart = _guideEnd = e.Location;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
-    private void Overlay_MouseUp(object? sender, MouseEventArgs e)
+    protected override void OnMouseUp(MouseEventArgs e)
     {
         _guideExists = false;
         var dx = _guideEnd.X - _guideStart.X;
@@ -67,20 +64,18 @@ public class RotateForm : UnaryImageFormBase
             }
             _angleSlider.DecimalValue = (decimal) newAngle;
         }
-        Overlay.Invalidate();
+        Invalidate();
     }
 
-    private void Overlay_MouseMove(object? sender, MouseEventArgs e)
+    protected override void OnMouseMove(MouseEventArgs e)
     {
-        Overlay.Cursor = Cursors.Crosshair;
+        Cursor = Cursors.Crosshair;
         _guideEnd = e.Location;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
     protected override void PaintOverlay(object? sender, PaintEventArgs e)
     {
-        base.PaintOverlay(sender, e);
-
         if (_guideExists)
         {
             e.Graphics.AntiAlias = true;

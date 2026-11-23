@@ -67,6 +67,7 @@ public class CommonModule : Module
 
         // Misc
         builder.RegisterType<AutofacFormFactory>().As<IFormFactory>();
+        builder.RegisterType<AutofacImageEditorFactory>().As<IImageEditorFactory>();
         builder.RegisterType<AutofacOperationFactory>().As<IOperationFactory>();
         builder.RegisterType<UiImageList>().AsSelf().SingleInstance();
         builder.RegisterType<StillImage>().AsSelf().SingleInstance();

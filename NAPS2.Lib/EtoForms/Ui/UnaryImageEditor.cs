@@ -4,11 +4,11 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
-public abstract class UnaryImageFormBase(
+public abstract class UnaryImageEditor(
     Naps2Config config,
     UiImageList imageList,
     ThumbnailController thumbnailController)
-    : ImageFormBase(config, imageList, thumbnailController)
+    : ImageEditor(config, imageList, thumbnailController)
 {
     private readonly CheckBox _applyToSelected = new();
     private readonly Button _revert = C.Button(UiStrings.Revert);
@@ -25,7 +25,7 @@ public abstract class UnaryImageFormBase(
 
     protected abstract List<Transform> Transforms { get; }
 
-    protected override void OnPreLoad(EventArgs e)
+    protected override void OnInitialize()
     {
         _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages.Count);
         _applyToSelected.Checked = Config.Get(c => c.ApplyToAllSelected);
@@ -40,13 +40,14 @@ public abstract class UnaryImageFormBase(
         {
             slider.ValueChanged += UpdatePreviewBox;
         }
-        base.OnPreLoad(e);
+        base.OnInitialize();
     }
 
-    protected override void OnClosed(EventArgs e)
+    public override void Dispose()
     {
-        base.OnClosed(e);
+        base.Dispose();
         WorkingImage?.Dispose();
+        WorkingImage = null;
     }
 
     protected override void SetDefaultFocus()

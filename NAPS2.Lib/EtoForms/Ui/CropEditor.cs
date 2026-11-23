@@ -5,7 +5,7 @@ using NAPS2.Images.Bitwise;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class CropForm : UnaryImageFormBase
+public class CropEditor : UnaryImageEditor
 {
     private static CropTransform? _lastTransform;
 
@@ -34,7 +34,7 @@ public class CropForm : UnaryImageFormBase
     private bool _freeformAvailable;
     private bool _freeformActive;
 
-    public CropForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+    public CropEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
         ColorScheme colorScheme, IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
@@ -46,22 +46,18 @@ public class CropForm : UnaryImageFormBase
             UiStrings.ShiftKey);
 
         _colorScheme = colorScheme;
-
-        OverlayBorderSize = HANDLE_WIDTH;
-        Overlay.MouseDown += Overlay_MouseDown;
-        Overlay.MouseMove += Overlay_MouseMove;
-        Overlay.MouseUp += Overlay_MouseUp;
-        KeyDown += CropForm_KeyDown;
         _autoCrop.Click += AutoCrop_Click;
     }
 
+    protected override int ImagePadding => HANDLE_WIDTH;
+
     // The handle length is proportional to the window size
     private int HandleLength =>
-        (int) Math.Max(Math.Round(Math.Min(_overlayH, _overlayW) * HANDLE_LENGTH_RATIO), HANDLE_MIN_LENGTH);
+        (int) Math.Max(Math.Round(Math.Min(ViewH, ViewW) * HANDLE_LENGTH_RATIO), HANDLE_MIN_LENGTH);
 
-    protected override void OnPreLoad(EventArgs e)
+    protected override void OnInitialize()
     {
-        base.OnPreLoad(e);
+        base.OnInitialize();
         if (_lastTransform != null && _lastTransform.OriginalWidth == RealImageWidth &&
             _lastTransform.OriginalHeight == RealImageHeight)
         {
@@ -85,7 +81,7 @@ public class CropForm : UnaryImageFormBase
     protected override void Revert()
     {
         _cropT = _cropL = _cropB = _cropR = _realT = _realL = _realB = _realR = 0;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
     protected override LayoutElement CreateExtraButtons() => L.Row(base.CreateExtraButtons(), _autoCrop);
@@ -103,7 +99,7 @@ public class CropForm : UnaryImageFormBase
         _cropT = op.Top / (float) image.Height;
         _cropB = op.Bottom / (float) image.Height;
         UpdateRealCoords();
-        Overlay.Invalidate();
+        Invalidate();
     }
 
     protected override IMemoryImage RenderPreview()
@@ -122,7 +118,7 @@ public class CropForm : UnaryImageFormBase
             RealImageHeight)
     ];
 
-    private void CropForm_KeyDown(object? sender, KeyEventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
         bool accelerate = e.Modifiers.HasFlag(Keys.Shift);
         bool moveOtherHandle = e.Modifiers.HasFlag(Application.Instance.CommonModifier);
@@ -192,12 +188,12 @@ public class CropForm : UnaryImageFormBase
         if (e.Key is Keys.Up or Keys.Down or Keys.Left or Keys.Right)
         {
             UpdateRealCoords();
-            Overlay.Invalidate();
+            Invalidate();
             e.Handled = true;
         }
     }
 
-    private void Overlay_MouseDown(object? sender, MouseEventArgs e)
+    protected override void OnMouseDown(MouseEventArgs e)
     {
         _activeHandle = GetHandleUnderMouse(e);
         if (_activeHandle == Handle.None)
@@ -205,7 +201,7 @@ public class CropForm : UnaryImageFormBase
             _freeformAvailable = true;
         }
         _mouseOrigin = e.Location;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
     private Handle GetHandleUnderMouse(MouseEventArgs e)
@@ -213,10 +209,10 @@ public class CropForm : UnaryImageFormBase
         // We calculate the distance between the mouse and each handle side
         // The 0.1 offset is to provide a bit of affinity so that if the crop size is 0 (so all distances are the same),
         // you can still e.g. pick the top-left handle if you put the mouse a bit top-left of it.
-        var t = _overlayT + _realT * _overlayH / RealImageHeight;
-        var b = _overlayB - _realB * _overlayH / RealImageHeight;
-        var l = _overlayL + _realL * _overlayW / RealImageWidth;
-        var r = _overlayR - _realR * _overlayW / RealImageWidth;
+        var t = ViewT + _realT * ViewH / RealImageHeight;
+        var b = ViewB - _realB * ViewH / RealImageHeight;
+        var l = ViewL + _realL * ViewW / RealImageWidth;
+        var r = ViewR - _realR * ViewW / RealImageWidth;
         var dyT = Math.Abs(e.Location.Y - (t - 0.1f));
         var dyB = Math.Abs(e.Location.Y - (b + 0.1f));
         var dyM = Math.Abs(e.Location.Y - (t + b) / 2);
@@ -242,13 +238,13 @@ public class CropForm : UnaryImageFormBase
         return Handle.None;
     }
 
-    private void Overlay_MouseUp(object? sender, MouseEventArgs e)
+    protected override void OnMouseUp(MouseEventArgs e)
     {
         UpdateRealCoords();
         _activeHandle = Handle.None;
         _freeformAvailable = false;
         _freeformActive = false;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
     private void UpdateRealCoords()
@@ -264,27 +260,27 @@ public class CropForm : UnaryImageFormBase
         var delta = mousePos - _mouseOrigin;
         if (_freeformActive)
         {
-            var origin = _mouseOrigin - new PointF(_overlayL, _overlayT);
-            var current = mousePos - new PointF(_overlayL, _overlayT);
+            var origin = _mouseOrigin - new PointF(ViewL, ViewT);
+            var current = mousePos - new PointF(ViewL, ViewT);
             if (delta.Y > 0)
             {
-                _cropT = (origin.Y / _overlayH).Clamp(0, 1);
-                _cropB = (1 - current.Y / _overlayH).Clamp(0, 1);
+                _cropT = (origin.Y / ViewH).Clamp(0, 1);
+                _cropB = (1 - current.Y / ViewH).Clamp(0, 1);
             }
             else
             {
-                _cropT = (current.Y / _overlayH).Clamp(0, 1);
-                _cropB = (1 - origin.Y / _overlayH).Clamp(0, 1);
+                _cropT = (current.Y / ViewH).Clamp(0, 1);
+                _cropB = (1 - origin.Y / ViewH).Clamp(0, 1);
             }
             if (delta.X > 0)
             {
-                _cropL = (origin.X / _overlayW).Clamp(0, 1);
-                _cropR = (1 - current.X / _overlayW).Clamp(0, 1);
+                _cropL = (origin.X / ViewW).Clamp(0, 1);
+                _cropR = (1 - current.X / ViewW).Clamp(0, 1);
             }
             else
             {
-                _cropL = (current.X / _overlayW).Clamp(0, 1);
-                _cropR = (1 - origin.X / _overlayW).Clamp(0, 1);
+                _cropL = (current.X / ViewW).Clamp(0, 1);
+                _cropR = (1 - origin.X / ViewW).Clamp(0, 1);
             }
         }
         else
@@ -343,27 +339,27 @@ public class CropForm : UnaryImageFormBase
 
     private void MoveCropTop(float deltaY)
     {
-        _cropT = (_realT / RealImageHeight + deltaY / _overlayH).Clamp(0, 1 - _cropB);
+        _cropT = (_realT / RealImageHeight + deltaY / ViewH).Clamp(0, 1 - _cropB);
     }
 
     private void MoveCropRight(float deltaX)
     {
-        _cropR = (_realR / RealImageWidth - deltaX / _overlayW).Clamp(0, 1 - _cropL);
+        _cropR = (_realR / RealImageWidth - deltaX / ViewW).Clamp(0, 1 - _cropL);
     }
 
     private void MoveCropBottom(float deltaY)
     {
-        _cropB = (_realB / RealImageHeight - deltaY / _overlayH).Clamp(0, 1 - _cropT);
+        _cropB = (_realB / RealImageHeight - deltaY / ViewH).Clamp(0, 1 - _cropT);
     }
 
     private void MoveCropLeft(float deltaX)
     {
-        _cropL = (_realL / RealImageWidth + deltaX / _overlayW).Clamp(0, 1 - _cropR);
+        _cropL = (_realL / RealImageWidth + deltaX / ViewW).Clamp(0, 1 - _cropR);
     }
 
-    private void Overlay_MouseMove(object? sender, MouseEventArgs e)
+    protected override void OnMouseMove(MouseEventArgs e)
     {
-        Overlay.Cursor = _freeformAvailable || (_activeHandle == Handle.None && GetHandleUnderMouse(e) == Handle.None)
+        Cursor = _freeformAvailable || (_activeHandle == Handle.None && GetHandleUnderMouse(e) == Handle.None)
             ? Cursors.Crosshair
             : Cursors.Pointer;
         if (_freeformAvailable && (Math.Abs(e.Location.Y - _mouseOrigin.Y) > FREEFORM_MIN_SIZE ||
@@ -372,44 +368,34 @@ public class CropForm : UnaryImageFormBase
             _freeformActive = true;
         }
         UpdateCrop(e.Location);
-        Overlay.Invalidate();
+        Invalidate();
     }
 
     protected override void PaintOverlay(object? sender, PaintEventArgs e)
     {
-        base.PaintOverlay(sender, e);
-
-        if (_overlayW == 0 || _overlayH == 0)
+        if (ViewW == 0 || ViewH == 0)
         {
             return;
         }
 
-        var offsetL = _cropL * _overlayW;
-        var offsetT = _cropT * _overlayH;
-        var offsetR = _cropR * _overlayW;
-        var offsetB = _cropB * _overlayH;
+        var offsetL = _cropL * ViewW;
+        var offsetT = _cropT * ViewH;
+        var offsetR = _cropR * ViewW;
+        var offsetB = _cropB * ViewH;
         var fillColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
         var handlePen = new Pen(_colorScheme.CropColor, HANDLE_WIDTH);
 
-        if (_overlayW >= 1 && _overlayH >= 1)
-        {
-            // Fade out cropped-out portions of the image
-            using var fade = new Bitmap((int) _overlayW, (int) _overlayH, PixelFormat.Format32bppRgba);
-            var fadeGraphics = new Graphics(fade);
-            fadeGraphics.FillRectangle(fillColor, 0, 0, _overlayW, _overlayH);
-            fadeGraphics.SetClip(new RectangleF(
-                offsetL, offsetT,
-                _overlayW - offsetL - offsetR,
-                _overlayH - offsetT - offsetB));
-            fadeGraphics.Clear();
-            fadeGraphics.Dispose();
-            e.Graphics.DrawImage(fade, _overlayL, _overlayT);
-        }
+        // Fade out the cropped-out portions of the image, as one shape so there are no seams where separate fills
+        // would meet
+        using var fade = new GraphicsPath { FillMode = FillMode.Alternate };
+        fade.AddRectangle(ViewL, ViewT, ViewW, ViewH);
+        fade.AddRectangle(ViewL + offsetL, ViewT + offsetT, ViewW - offsetL - offsetR, ViewH - offsetT - offsetB);
+        e.Graphics.FillPath(fillColor, fade);
 
-        var x1 = _overlayL + offsetL - HANDLE_WIDTH / 2f;
-        var y1 = _overlayT + offsetT - HANDLE_WIDTH / 2f;
-        var x2 = _overlayR - offsetR + HANDLE_WIDTH / 2f - 0.5f;
-        var y2 = _overlayB - offsetB + HANDLE_WIDTH / 2f - 0.5f;
+        var x1 = ViewL + offsetL - HANDLE_WIDTH / 2f;
+        var y1 = ViewT + offsetT - HANDLE_WIDTH / 2f;
+        var x2 = ViewR - offsetR + HANDLE_WIDTH / 2f - 0.5f;
+        var y2 = ViewB - offsetB + HANDLE_WIDTH / 2f - 0.5f;
         var xMid = (x1 + x2) / 2;
         var yMid = (y1 + y2) / 2;
 

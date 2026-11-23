@@ -6,14 +6,17 @@ namespace NAPS2.EtoForms.Desktop;
 public class DesktopSubFormController : IDesktopSubFormController
 {
     private readonly IFormFactory _formFactory;
+    private readonly IImageEditorFactory _imageEditorFactory;
     private readonly UiImageList _imageList;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly TesseractLanguageManager _tesseractLanguageManager;
 
-    public DesktopSubFormController(IFormFactory formFactory, UiImageList imageList,
-        DesktopImagesController desktopImagesController, TesseractLanguageManager tesseractLanguageManager)
+    public DesktopSubFormController(IFormFactory formFactory, IImageEditorFactory imageEditorFactory,
+        UiImageList imageList, DesktopImagesController desktopImagesController,
+        TesseractLanguageManager tesseractLanguageManager)
     {
         _formFactory = formFactory;
+        _imageEditorFactory = imageEditorFactory;
         _imageList = imageList;
         _desktopImagesController = desktopImagesController;
         _tesseractLanguageManager = tesseractLanguageManager;
@@ -25,36 +28,38 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc)
     {
-        return new DesktopSubFormController(_formFactory, _imageList, _desktopImagesController,
+        return new DesktopSubFormController(_formFactory, _imageEditorFactory, _imageList, _desktopImagesController,
             _tesseractLanguageManager)
         {
             SelectionFunc = selectionFunc
         };
     }
 
-    public void ShowCropForm() => ShowImageForm<CropForm>();
-    public void ShowBrightnessContrastForm() => ShowImageForm<BrightContForm>();
-    public void ShowHueSaturationForm() => ShowImageForm<HueSatForm>();
-    public void ShowBlackWhiteForm() => ShowImageForm<BlackWhiteForm>();
-    public void ShowSharpenForm() => ShowImageForm<SharpenForm>();
-    public void ShowCompressForm() => ShowImageForm<CompressForm>();
-    public void ShowSplitForm() => ShowImageForm<SplitForm>();
-    public void ShowRotateForm() => ShowImageForm<RotateForm>();
+    public void ShowCropForm() => ShowImageEditor<CropEditor>();
+    public void ShowBrightnessContrastForm() => ShowImageEditor<BrightContEditor>();
+    public void ShowHueSaturationForm() => ShowImageEditor<HueSatEditor>();
+    public void ShowBlackWhiteForm() => ShowImageEditor<BlackWhiteEditor>();
+    public void ShowSharpenForm() => ShowImageEditor<SharpenEditor>();
+    public void ShowCompressForm() => ShowImageEditor<CompressEditor>();
+    public void ShowSplitForm() => ShowImageEditor<SplitEditor>();
+    public void ShowRotateForm() => ShowImageEditor<RotateEditor>();
 
     public void ShowCombineForm()
     {
         if (_imageList.Images.Count < 2) return;
-        ShowImageForm<CombineForm>();
+        ShowImageEditor<CombineEditor>();
     }
 
-    private void ShowImageForm<T>() where T : ImageFormBase
+    private void ShowImageEditor<T>() where T : ImageEditor
     {
         var selection = Selection;
         if (selection.Any())
         {
-            var form = _formFactory.Create<T>();
-            form.Image = selection.First();
-            form.SelectedImages = selection.ToList();
+            var editor = _imageEditorFactory.Create<T>();
+            editor.Image = selection.First();
+            editor.SelectedImages = selection.ToList();
+            var form = _formFactory.Create<ImageEditorForm>();
+            form.Editor = editor;
             form.ShowModal();
         }
     }

@@ -209,10 +209,12 @@ internal abstract class TestScenarioProvider
         return profile;
     }
 
-    protected static void SetImage(ImageFormBase form, UiImage image)
+    protected void SetEditor<T>(ImageEditorForm form, UiImage image) where T : ImageEditor
     {
-        form.Image = image;
-        form.SelectedImages = [image];
+        var editor = Get<IImageEditorFactory>().Create<T>();
+        editor.Image = image;
+        editor.SelectedImages = [image];
+        form.Editor = editor;
     }
 
     protected static readonly List<ScanDevice> ExampleDevices =

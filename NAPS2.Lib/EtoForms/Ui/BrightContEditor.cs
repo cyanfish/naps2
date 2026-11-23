@@ -2,19 +2,19 @@ using NAPS2.EtoForms.Widgets;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class BrightContForm : UnaryImageFormBase
+public class BrightContEditor : UnaryImageEditor
 {
     private readonly SliderWithTextBox _brightnessSlider = new();
     private readonly SliderWithTextBox _contrastSlider = new();
 
-    public BrightContForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+    public BrightContEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
         IIconProvider iconProvider) :
         base(config, imageList, thumbnailController)
     {
         IconName = "contrast_with_sun";
         Title = UiStrings.BrightnessContrast;
 
-        EtoPlatform.Current.AttachDpiDependency(this, scale =>
+        AttachDpiDependency(scale =>
         {
             _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun", IconScenario.Inline16, scale);
             _contrastSlider.Icon = iconProvider.GetIcon("contrast", IconScenario.Inline16, scale);

@@ -412,9 +412,9 @@ internal class CommonTestScenarios : TestScenarioProvider
         Add("crop-help", () =>
         {
             var images = LoadImages();
-            return ShowForm<CropForm>(
+            return ShowForm<ImageEditorForm>(
                 [K(UiStrings.AutoCrop), K(UiStrings.ControlKey), K(UiStrings.AltKey), K(UiStrings.ShiftKey)],
-                f => SetImage(f, images[0]),
+                f => SetEditor<CropEditor>(f, images[0]),
                 before: f => TestScenarioUi.Click(TestScenarioUi.FindControl(f, UiStrings.Help, null, null)));
         });
         Add("profiles-context-menu", () =>

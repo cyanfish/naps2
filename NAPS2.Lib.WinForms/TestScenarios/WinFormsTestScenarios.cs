@@ -145,11 +145,11 @@ internal class WinFormsTestScenarios : TestScenarioProvider
             Add(name, () =>
             {
                 var images = LoadImages(2);
-                return ShowForm<CombineForm>(buttons.Select(b => b.Key).ToArray(),
-                    f => SetImage(f, images[0]),
+                return ShowForm<ImageEditorForm>(buttons.Select(b => b.Key).ToArray(),
+                    f => SetEditor<CombineEditor>(f, images[0]),
                     before: f =>
                     {
-                        f.SetOrientation(orientation);
+                        ((CombineEditor) f.Editor).SetOrientation(orientation);
                         WF.Application.DoEvents();
                         ShowButtonToolTips(f.ToNative(), buttons.Select(b => b.Text).ToArray());
                     });
@@ -164,9 +164,9 @@ internal class WinFormsTestScenarios : TestScenarioProvider
         Add("split-tooltips", () =>
         {
             var images = LoadImages();
-            return ShowForm<SplitForm>(
+            return ShowForm<ImageEditorForm>(
                 [K(UiStrings.SplitVertically), K(UiStrings.SplitHorizontally), K(UiStrings.Help)],
-                f => SetImage(f, images[0]),
+                f => SetEditor<SplitEditor>(f, images[0]),
                 before: f => ShowButtonToolTips(f.ToNative(), UiStrings.SplitVertically, UiStrings.SplitHorizontally,
                     UiStrings.Help));
         });

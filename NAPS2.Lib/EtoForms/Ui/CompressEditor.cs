@@ -8,7 +8,7 @@ namespace NAPS2.EtoForms.Ui;
 /// <summary>
 /// Reduces (or otherwise changes) an image's resolution and color depth.
 /// </summary>
-public class CompressForm : UnaryImageFormBase
+public class CompressEditor : UnaryImageEditor
 {
     private const float DEFAULT_DPI = 96;
 
@@ -32,7 +32,7 @@ public class CompressForm : UnaryImageFormBase
     private ScanBitDepth _bitDepthValue;
     private bool _updatingFields;
 
-    public CompressForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController) :
+    public CompressEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController) :
         base(config, imageList, thumbnailController)
     {
         IconName = "spring";
@@ -275,7 +275,7 @@ public class CompressForm : UnaryImageFormBase
 
     private void RefreshPreview()
     {
-        if (Loaded)
+        if (IsInitialized)
         {
             UpdatePreviewBox();
         }

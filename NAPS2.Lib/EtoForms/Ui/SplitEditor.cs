@@ -4,7 +4,7 @@ using NAPS2.EtoForms.Layout;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class SplitForm : UnaryImageFormBase
+public class SplitEditor : UnaryImageEditor
 {
     private const int HANDLE_WIDTH = 1;
     private const double HANDLE_RADIUS_RATIO = 0.2;
@@ -28,7 +28,7 @@ public class SplitForm : UnaryImageFormBase
     private bool _dragging;
     private SplitOrientation _orientation;
 
-    public SplitForm(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+    public SplitEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
         ColorScheme colorScheme) :
         base(config, imageList, thumbnailController)
     {
@@ -40,22 +40,18 @@ public class SplitForm : UnaryImageFormBase
 
         _vSplit = C.IconButton("split_ver", UiStrings.SplitVertically, () => SetOrientation(SplitOrientation.Vertical));
         _hSplit = C.IconButton("split_hor", UiStrings.SplitHorizontally, () => SetOrientation(SplitOrientation.Horizontal));
-        Overlay.MouseDown += Overlay_MouseDown;
-        Overlay.MouseMove += Overlay_MouseMove;
-        Overlay.MouseUp += Overlay_MouseUp;
-        KeyDown += SplitForm_KeyDown;
     }
 
     protected override List<Transform> Transforms => throw new NotSupportedException();
 
     private int HandleClickRadius =>
         (int) Math.Max(
-            Math.Round((_orientation == SplitOrientation.Horizontal ? _overlayH : _overlayW) * HANDLE_RADIUS_RATIO),
+            Math.Round((_orientation == SplitOrientation.Horizontal ? ViewH : ViewW) * HANDLE_RADIUS_RATIO),
             HANDLE_MIN_RADIUS);
 
-    protected override void OnPreLoad(EventArgs e)
+    protected override void OnInitialize()
     {
-        base.OnPreLoad(e);
+        base.OnInitialize();
         if (_lastTransform != null && _lastTransform.OriginalWidth == RealImageWidth &&
             _lastTransform.OriginalHeight == RealImageHeight)
         {
@@ -109,10 +105,10 @@ public class SplitForm : UnaryImageFormBase
         _cropX = _cropY = 0.5f;
         _realX = RealImageWidth / 2f;
         _realY = RealImageHeight / 2f;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
-    private void SplitForm_KeyDown(object? sender, KeyEventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
         if (e.Key is Keys.Left or Keys.Right)
         {
@@ -126,24 +122,24 @@ public class SplitForm : UnaryImageFormBase
         }
     }
 
-    private void Overlay_MouseDown(object? sender, MouseEventArgs e)
+    protected override void OnMouseDown(MouseEventArgs e)
     {
         _dragging = IsHandleUnderMouse(e);
         _mouseOrigin = e.Location;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
-    private void Overlay_MouseUp(object? sender, MouseEventArgs e)
+    protected override void OnMouseUp(MouseEventArgs e)
     {
         _realX = _cropX * RealImageWidth;
         _realY = _cropY * RealImageHeight;
         _dragging = false;
-        Overlay.Invalidate();
+        Invalidate();
     }
 
-    private void Overlay_MouseMove(object? sender, MouseEventArgs e)
+    protected override void OnMouseMove(MouseEventArgs e)
     {
-        Overlay.Cursor = _dragging || IsHandleUnderMouse(e)
+        Cursor = _dragging || IsHandleUnderMouse(e)
             ? _orientation == SplitOrientation.Horizontal
                 ? Cursors.HorizontalSplit
                 : Cursors.VerticalSplit
@@ -151,46 +147,44 @@ public class SplitForm : UnaryImageFormBase
         if (_dragging)
         {
             UpdateCrop(e.Location);
-            Overlay.Invalidate();
+            Invalidate();
         }
     }
 
     protected override void PaintOverlay(object? sender, PaintEventArgs e)
     {
-        base.PaintOverlay(sender, e);
-
-        if (_overlayW == 0 || _overlayH == 0)
+        if (ViewW == 0 || ViewH == 0)
         {
             return;
         }
 
-        var offsetX = _cropX * _overlayW;
-        var offsetY = _cropY * _overlayH;
+        var offsetX = _cropX * ViewW;
+        var offsetY = _cropY * ViewH;
         var fillColor = new Color(0.3f, 0.3f, 0.3f, 0.3f);
         var handlePen = new Pen(_colorScheme.CropColor, HANDLE_WIDTH);
 
-        if (_overlayW >= 1 && _overlayH >= 1)
+        if (ViewW >= 1 && ViewH >= 1)
         {
             // Fade out cropped-out portions of the image
             if (_orientation == SplitOrientation.Horizontal)
             {
-                e.Graphics.FillRectangle(fillColor, _overlayL, _overlayT + offsetY, _overlayW, _overlayH - offsetY);
+                e.Graphics.FillRectangle(fillColor, ViewL, ViewT + offsetY, ViewW, ViewH - offsetY);
             }
             else
             {
-                e.Graphics.FillRectangle(fillColor, _overlayL + offsetX, _overlayT, _overlayW - offsetX, _overlayH);
+                e.Graphics.FillRectangle(fillColor, ViewL + offsetX, ViewT, ViewW - offsetX, ViewH);
             }
         }
 
         if (_orientation == SplitOrientation.Horizontal)
         {
-            var y = _overlayT + offsetY - HANDLE_WIDTH / 2f;
-            e.Graphics.DrawLine(handlePen, _overlayL, y, _overlayR - 1, y);
+            var y = ViewT + offsetY - HANDLE_WIDTH / 2f;
+            e.Graphics.DrawLine(handlePen, ViewL, y, ViewR - 1, y);
         }
         else
         {
-            var x = _overlayL + offsetX - HANDLE_WIDTH / 2f;
-            e.Graphics.DrawLine(handlePen, x, _overlayT, x, _overlayB - 1);
+            var x = ViewL + offsetX - HANDLE_WIDTH / 2f;
+            e.Graphics.DrawLine(handlePen, x, ViewT, x, ViewB - 1);
         }
     }
 
@@ -199,15 +193,15 @@ public class SplitForm : UnaryImageFormBase
         var radius = HandleClickRadius;
         if (_orientation == SplitOrientation.Horizontal)
         {
-            var y = _overlayT + _cropY * _overlayH;
-            return e.Location.Y > y - radius && e.Location.Y < y + radius && e.Location.X > _overlayL &&
-                   e.Location.X < _overlayR;
+            var y = ViewT + _cropY * ViewH;
+            return e.Location.Y > y - radius && e.Location.Y < y + radius && e.Location.X > ViewL &&
+                   e.Location.X < ViewR;
         }
         else
         {
-            var x = _overlayL + _cropX * _overlayW;
-            return e.Location.X > x - radius && e.Location.X < x + radius && e.Location.Y > _overlayT &&
-                   e.Location.Y < _overlayB;
+            var x = ViewL + _cropX * ViewW;
+            return e.Location.X > x - radius && e.Location.X < x + radius && e.Location.Y > ViewT &&
+                   e.Location.Y < ViewB;
         }
     }
 
@@ -216,12 +210,12 @@ public class SplitForm : UnaryImageFormBase
         var delta = mousePos - _mouseOrigin;
         if (_orientation == SplitOrientation.Vertical)
         {
-            _cropX = (_realX / RealImageWidth + delta.X / _overlayW)
+            _cropX = (_realX / RealImageWidth + delta.X / ViewW)
                 .Clamp(1f / RealImageWidth, (RealImageWidth - 1f) / RealImageWidth);
         }
         else
         {
-            _cropY = (_realY / RealImageHeight + delta.Y / _overlayH)
+            _cropY = (_realY / RealImageHeight + delta.Y / ViewH)
                 .Clamp(1f / RealImageHeight, (RealImageHeight - 1f) / RealImageHeight);
         }
     }
