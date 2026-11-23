@@ -83,6 +83,7 @@ public abstract class ImageEditor : IDisposable
     {
         var viewer = Viewer;
         viewer.PanEnabled = false;
+        viewer.FitIsMinZoom = true;
         viewer.ImagePadding = ImagePadding;
         viewer.PaintOverlay += PaintOverlay;
         viewer.OverlayMouseDown += ViewerMouseDown;
@@ -221,6 +222,7 @@ public abstract class ImageEditor : IDisposable
             _viewer.OverlayMouseMove -= ViewerMouseMove;
             _viewer.OverlayMouseUp -= ViewerMouseUp;
             _viewer.PanEnabled = true;
+            _viewer.FitIsMinZoom = false;
             _viewer.ImagePadding = 0;
             _viewer.OverlayCursor = null;
             if (_viewer.Image == _viewerBitmap)

@@ -44,6 +44,8 @@ public class ScrollZoomImageViewer
 
     public bool PanEnabled { get; set; } = true;
 
+    public bool FitIsMinZoom { get; set; }
+
     public int ImagePadding
     {
         get;
@@ -121,6 +123,9 @@ public class ScrollZoomImageViewer
 
     private bool IsWidthBound =>
         Image!.Width / (float) Image.Height > AvailableWidth / (float) AvailableHeight;
+
+    private float FitFactor =>
+        IsWidthBound ? AvailableWidth / (float) Image!.Width : AvailableHeight / (float) Image!.Height;
 
     private bool FitsInBounds => RenderSize.Width <= AvailableWidth && RenderSize.Height <= AvailableHeight;
 
@@ -211,6 +216,11 @@ public class ScrollZoomImageViewer
 
     public void SetZoom(float value, bool anchorToMouse = false)
     {
+        if (FitIsMinZoom && value <= FitFactor)
+        {
+            ZoomToContainer();
+            return;
+        }
         _fitToContainer = false;
         _renderFactor = value.Clamp(0.01f, MaxZoom);
         _scrollable.SuspendLayout();
