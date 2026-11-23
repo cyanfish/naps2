@@ -40,6 +40,8 @@ public class GtkTestScenarioPlatform : ITestScenarioPlatform
 
     public bool IsActive(TestScenarioWindow window) => ((Gtk.Window) window.Handle).IsActive;
 
+    public string? GetOwner(TestScenarioWindow window) => ((Gtk.Window) window.Handle).TransientFor?.Title;
+
     public void OpenDropDown(Eto.Forms.DropDown dropDown) => ((Gtk.ComboBox) dropDown.ControlObject).Popup();
 
     public void Capture(TestScenarioWindow window, string path)

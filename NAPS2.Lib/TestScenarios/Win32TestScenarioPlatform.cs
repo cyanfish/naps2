@@ -117,6 +117,17 @@ internal class Win32TestScenarioPlatform(ImageContext imageContext) : ITestScena
     [DllImport("user32.dll")]
     private static extern IntPtr GetForegroundWindow();
 
+    public string? GetOwner(TestScenarioWindow window)
+    {
+        var owner = GetWindow((IntPtr) window.Handle, GW_OWNER);
+        return owner == IntPtr.Zero ? null : GetTitle(owner);
+    }
+
+    private const uint GW_OWNER = 4;
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetWindow(IntPtr hwnd, uint cmd);
+
     private static bool IsCloaked(IntPtr hwnd)
     {
         return Win32.DwmGetWindowAttribute(hwnd, DWMWA_CLOAKED, out int cloaked, sizeof(int)) == 0 && cloaked != 0;

@@ -324,7 +324,9 @@ public class TestScenarioContext
                 {
                     ["title"] = window.Title,
                     ["bounds"] = new JsonArray(window.Bounds.X, window.Bounds.Y, window.Bounds.Width,
-                        window.Bounds.Height)
+                        window.Bounds.Height),
+                    ["owner"] = _platform.GetOwner(window),
+                    ["active"] = _platform.IsActive(window)
                 };
                 var etoWindow = GetEtoWindow(window);
                 if (etoWindow != null)

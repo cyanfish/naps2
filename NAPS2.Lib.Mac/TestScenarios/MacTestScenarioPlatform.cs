@@ -25,6 +25,13 @@ public class MacTestScenarioPlatform : ITestScenarioPlatform
             .ToList();
     }
 
+    public string? GetOwner(TestScenarioWindow window)
+    {
+        var native = (NSWindow) window.Handle;
+        if (native.SheetParent != null) return $"sheet of {GetTitle(native.SheetParent)}";
+        return native.ParentWindow != null ? GetTitle(native.ParentWindow) : null;
+    }
+
     private static string GetTitle(NSWindow window)
     {
         if (!string.IsNullOrEmpty(window.Title) || window.ContentView == null) return window.Title ?? "";
