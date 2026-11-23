@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Globalization;
+using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 using Xunit;
@@ -16,6 +17,24 @@ public class TranslationFormatTests
         [nameof(UiStrings), UiStrings.ResourceManager],
         [nameof(SdkResources), SdkResources.ResourceManager]
     ];
+
+    public static IEnumerable<object[]> ResourceTypes =>
+    [
+        [typeof(SettingsResources)],
+        [typeof(UiStrings)],
+        [typeof(SdkResources)]
+    ];
+
+    [Theory]
+    [MemberData(nameof(ResourceTypes))]
+    public void AllResourcePropertiesHaveValues(Type resourceType)
+    {
+        var missing = resourceType.GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+            .Where(p => p.PropertyType == typeof(string) && p.GetValue(null) == null)
+            .Select(p => p.Name)
+            .ToList();
+        Assert.True(missing.Count == 0, $"{resourceType.Name} keys missing from compiled resources (duplicate keys differing only by case?): {string.Join(", ", missing)}");
+    }
 
     [Theory]
     [MemberData(nameof(ResourceManagers))]

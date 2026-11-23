@@ -79,8 +79,8 @@ public static class InternalDefaults
                 {
                     Title = UiStrings.ScannedImage,
                     Subject = UiStrings.ScannedImage,
-                    Author = UiStrings.NAPS2,
-                    Creator = UiStrings.NAPS2,
+                    Author = UiStrings.Naps2,
+                    Creator = UiStrings.Naps2,
                     Keywords = ""
                 },
                 Encryption = new PdfEncryption

@@ -1593,12 +1593,6 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string NAPS2 {
-            get {
-                return ResourceManager.GetString("NAPS2", resourceCulture);
-            }
-        }
-        
         internal static string Naps2FullName {
             get {
                 return ResourceManager.GetString("Naps2FullName", resourceCulture);

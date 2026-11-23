@@ -909,9 +909,6 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="NameOptional" xml:space="preserve">
     <value>Name (optional)</value>
   </data>
-  <data name="NAPS2" xml:space="preserve">
-    <value>NAPS2</value>
-  </data>
   <data name="Naps2" xml:space="preserve">
     <value>NAPS2</value>
   </data>
