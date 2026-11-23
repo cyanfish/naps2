@@ -40,6 +40,11 @@ public static class L
         return new LayoutLeftPanel(left, right);
     }
 
+    public static LayoutRightPanel RightPanel(LayoutElement left, LayoutElement right)
+    {
+        return new LayoutRightPanel(left, right);
+    }
+
     public static LayoutScrollable Scrollable(LayoutElement content)
     {
         return new LayoutScrollable(content);
