@@ -110,7 +110,7 @@ public class SaveImagesOperationTests : ContextualTests
 
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray)));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.1.jpg")));
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.2.jpg")));
         ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test.3.jpg")));
@@ -120,11 +120,11 @@ public class SaveImagesOperationTests : ContextualTests
     public async Task Existing_PromptYes()
     {
         File.WriteAllText(P("test.jpg"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.jpg")).Returns(OverwriteResponse.Yes);
+        _overwritePrompt.ConfirmOverwrite(P("test.jpg"), false).Returns(OverwriteResponse.Overwrite);
 
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog)));
 
-        _overwritePrompt.Received().ConfirmOverwrite(P("test.jpg"));
+        _overwritePrompt.Received().ConfirmOverwrite(P("test.jpg"), false);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
     }
 
@@ -132,7 +132,7 @@ public class SaveImagesOperationTests : ContextualTests
     public async Task Existing_PromptNo()
     {
         File.WriteAllText(P("test.jpg"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.jpg")).Returns(OverwriteResponse.No);
+        _overwritePrompt.ConfirmOverwrite(P("test.jpg"), false).Returns(OverwriteResponse.Skip);
 
         Assert.False(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog)));
 
@@ -148,7 +148,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Confirmed));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
     }
 
@@ -160,7 +160,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Never));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.jpg")));
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.1.jpg")));
     }
@@ -173,7 +173,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Force));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
     }
 
@@ -197,7 +197,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog), batchCount: 2));
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog_gray), batchCount: 2));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.1.jpg")));
         ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test.2.jpg")));
         Assert.Equal(2, Folder.GetFiles().Length);
@@ -242,7 +242,7 @@ public class SaveImagesOperationTests : ContextualTests
     public async Task MultiPageTiff_Existing_PromptNo()
     {
         File.WriteAllText(P("test.tiff"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.tiff")).Returns(OverwriteResponse.No);
+        _overwritePrompt.ConfirmOverwrite(P("test.tiff"), false).Returns(OverwriteResponse.Skip);
 
         Assert.False(await Save(P("test.tiff"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray)));
 

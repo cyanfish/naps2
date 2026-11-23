@@ -4,7 +4,7 @@ namespace NAPS2.EtoForms;
 
 public class EtoOverwritePrompt : IOverwritePrompt
 {
-    public OverwriteResponse ConfirmOverwrite(string path)
+    public OverwriteResponse ConfirmOverwrite(string path, bool multipleFiles)
     {
         string fileName = Path.GetFileName(path);
         var dialogResult = Invoker.Current.InvokeGet(() =>
@@ -14,12 +14,12 @@ public class EtoOverwritePrompt : IOverwritePrompt
                     Text = string.Format(UiStrings.ConfirmOverwriteFile, fileName),
                     Type = MessageBoxType.Warning,
                     PrimaryText = UiStrings.Overwrite,
-                    SecondaryText = UiStrings.Skip
+                    SecondaryText = multipleFiles ? UiStrings.Skip : null
                 }));
         return dialogResult switch
         {
-            MessageDialogResult.Primary => OverwriteResponse.Yes,
-            MessageDialogResult.Secondary => OverwriteResponse.No,
+            MessageDialogResult.Primary => OverwriteResponse.Overwrite,
+            MessageDialogResult.Secondary => OverwriteResponse.Skip,
             _ => OverwriteResponse.Abort
         };
     }

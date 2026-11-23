@@ -65,7 +65,7 @@ internal class SavePdfOperation : OperationBase
 
         var singleFile = imagesByFile.Length == 1;
         if (singleFile && saveParams.OverwriteMode.ShouldPromptForPath(fileNames[0]) &&
-            _overwritePrompt.ConfirmOverwrite(fileNames[0]) != OverwriteResponse.Yes)
+            _overwritePrompt.ConfirmOverwrite(fileNames[0], multipleFiles: false) != OverwriteResponse.Overwrite)
         {
             reservations.Dispose();
             FailedToStart();

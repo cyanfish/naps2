@@ -70,7 +70,7 @@ internal class SaveImagesOperation : OperationBase
                 {
                     var tiffFileName = fileNames[0];
                     if (saveParams.OverwriteMode.ShouldPromptForPath(tiffFileName) &&
-                        _overwritePrompt.ConfirmOverwrite(tiffFileName) != OverwriteResponse.Yes)
+                        _overwritePrompt.ConfirmOverwrite(tiffFileName, multipleFiles: false) != OverwriteResponse.Overwrite)
                     {
                         return false;
                     }
@@ -102,8 +102,9 @@ internal class SaveImagesOperation : OperationBase
                     var currentFileName = fileNames[i];
                     if (saveParams.OverwriteMode.ShouldPromptForPath(currentFileName))
                     {
-                        var overwriteResponse = _overwritePrompt.ConfirmOverwrite(currentFileName);
-                        if (overwriteResponse == OverwriteResponse.No)
+                        var overwriteResponse =
+                            _overwritePrompt.ConfirmOverwrite(currentFileName, fileNames.Length > 1);
+                        if (overwriteResponse == OverwriteResponse.Skip)
                         {
                             continue;
                         }

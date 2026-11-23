@@ -99,11 +99,11 @@ public class SavePdfOperationTests : ContextualTests
     public async Task Existing_PromptYes()
     {
         File.WriteAllText(P("test.pdf"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.pdf")).Returns(OverwriteResponse.Yes);
+        _overwritePrompt.ConfirmOverwrite(P("test.pdf"), false).Returns(OverwriteResponse.Overwrite);
 
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog)));
 
-        _overwritePrompt.Received().ConfirmOverwrite(P("test.pdf"));
+        _overwritePrompt.Received().ConfirmOverwrite(P("test.pdf"), false);
         PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
     }
 
@@ -111,7 +111,7 @@ public class SavePdfOperationTests : ContextualTests
     public void Existing_PromptNo()
     {
         File.WriteAllText(P("test.pdf"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.pdf")).Returns(OverwriteResponse.No);
+        _overwritePrompt.ConfirmOverwrite(P("test.pdf"), false).Returns(OverwriteResponse.Skip);
 
         Assert.False(Start(CreateOperation(), P("test.pdf"), CreateScannedImages(ImageResources.dog)));
 
@@ -127,7 +127,7 @@ public class SavePdfOperationTests : ContextualTests
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Confirmed));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
     }
 
@@ -140,7 +140,7 @@ public class SavePdfOperationTests : ContextualTests
         Assert.True(await Save(P("test$(n).pdf"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Confirmed));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test1.pdf")));
         PdfAsserts.AssertImages(P("test2.pdf"), ImageResources.dog);
     }
@@ -153,7 +153,7 @@ public class SavePdfOperationTests : ContextualTests
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Never));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.pdf")));
         PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog);
     }
@@ -166,7 +166,7 @@ public class SavePdfOperationTests : ContextualTests
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Force));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
     }
 
@@ -204,7 +204,7 @@ public class SavePdfOperationTests : ContextualTests
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog), batchCount: 2));
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog_gray), batchCount: 2));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         PdfAsserts.AssertImages(P("test.1.pdf"), ImageResources.dog);
         PdfAsserts.AssertImages(P("test.2.pdf"), ImageResources.dog_gray);
         Assert.Equal(2, Folder.GetFiles().Length);
@@ -251,7 +251,7 @@ public class SavePdfOperationTests : ContextualTests
         Assert.True(await Save(P("test.pdf"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray),
             new PdfSettings { SinglePagePdfs = true }));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.1.pdf")));
         PdfAsserts.AssertImages(P("test.2.pdf"), ImageResources.dog);
         PdfAsserts.AssertImages(P("test.3.pdf"), ImageResources.dog_gray);
