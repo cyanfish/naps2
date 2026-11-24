@@ -426,9 +426,11 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     private void OnDragMotion(object sender, DragMotionArgs args)
     {
-        if (args.Context.SelectedAction != DragAction.Move) return;
         // Show a visual indicator of the drop location
         ClearDropIndicator();
+        // Only show for moves within this listview
+        if (args.Context.SelectedAction != DragAction.Move) return;
+        if (Drag.GetSourceWidget(args.Context) is not { } source || !source.IsAncestor(_flowBox)) return;
         var index = GetDragIndex();
         if (index == -1) return;
         var widgets = _flowBox.Children;
