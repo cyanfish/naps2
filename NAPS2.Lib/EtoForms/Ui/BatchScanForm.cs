@@ -108,6 +108,7 @@ public class BatchScanForm : EtoDialogBase
         UpdateUIFromSettings();
 
         FormStateController.FixedHeightLayout = true;
+        DefaultButton = _start;
         AbortButton = _cancel;
 
         int profileButtonWidth = EtoPlatform.Current.IsWpf ? 32 : 30;
