@@ -30,7 +30,7 @@ public class ImageListActions
 
     private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
 
-    private ListSelection<UiImage>? Selection => SelectionFunc?.Invoke();
+    public ListSelection<UiImage>? Selection => SelectionFunc?.Invoke();
 
     public ImageListActions WithSelection(Func<ListSelection<UiImage>> selectionFunc)
     {

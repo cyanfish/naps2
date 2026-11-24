@@ -117,8 +117,6 @@ public abstract class DesktopForm : EtoFormBase
         _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
         EtoPlatform.Current.AttachDpiDependency(this, scale => _thumbnailController.Oversample = scale);
         ImageList.SelectionChanged += ImageList_SelectionChanged;
-        ImageList.ImagesUpdated += ImageList_ImagesUpdated;
-        ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
         _editWithController.AppChanged += EditWithController_AppChanged;
         _notificationArea =new NotificationArea(_notificationManager, LayoutController);
@@ -199,21 +197,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ImageList_SelectionChanged(object? sender, EventArgs e)
     {
-        Invoker.Current.InvokeDispatch(() =>
-        {
-            UpdateToolbar();
-            _listView.Selection = ImageList.Selection;
-        });
-    }
-
-    private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
-    {
-        Invoker.Current.InvokeDispatch(UpdateToolbar);
-    }
-
-    private void ImageList_ImagesThumbnailInvalidated(object? sender, ImageListEventArgs e)
-    {
-        Invoker.Current.InvokeDispatch(UpdateToolbar);
+        Invoker.Current.InvokeDispatch(() => _listView.Selection = ImageList.Selection);
     }
 
     private void ProfileManager_ProfilesUpdated(object? sender, EventArgs e)
@@ -225,7 +209,6 @@ public abstract class DesktopForm : EtoFormBase
     private void ThumbnailController_ThumbnailSizeChanged(object? sender, EventArgs e)
     {
         SetThumbnailSpacing(_thumbnailController.VisibleSize, EtoPlatform.Current.GetScaleFactor(this));
-        UpdateToolbar();
     }
 
     protected UiImageList ImageList { get; }
@@ -277,8 +260,6 @@ public abstract class DesktopForm : EtoFormBase
         EtoPlatform.Current.AttachDpiDependency(_listView.Control,
             scale => SetThumbnailSpacing(_thumbnailController.VisibleSize, scale));
         _desktopController.PreInitialize();
-        // Set the toolbar state before the form is rendered so it doesn't visibly change
-        UpdateToolbar();
     }
 
     protected override async void OnShown(EventArgs e)
@@ -307,8 +288,6 @@ public abstract class DesktopForm : EtoFormBase
         // TODO: Make sure we don't have any remaining memory leaks (toolbars? commands?)
         _thumbnailController.ThumbnailSizeChanged -= ThumbnailController_ThumbnailSizeChanged;
         ImageList.SelectionChanged -= ImageList_SelectionChanged;
-        ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
-        ImageList.ImagesThumbnailInvalidated -= ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
         _editWithController.AppChanged -= EditWithController_AppChanged;
         _notificationArea.Dispose();
@@ -561,40 +540,6 @@ public abstract class DesktopForm : EtoFormBase
         // TODO: If we make any other forms non-modal, we will need to refresh them too
     }
 
-    protected virtual void UpdateToolbar()
-    {
-        // Top-level toolbar items
-        Commands.ImageMenu.Enabled =
-            Commands.RotateMenu.Enabled = Commands.MoveUp.Enabled = Commands.MoveDown.Enabled =
-                Commands.Delete.Enabled = ImageList.Selection.Any();
-        Commands.SavePdf.Enabled = Commands.SaveImages.Enabled = Commands.ClearAll.Enabled =
-            Commands.ReorderMenu.Enabled =
-                Commands.EmailPdf.Enabled = Commands.Print.Enabled = ImageList.Images.Any();
-
-        // "All" dropdown items
-        Commands.SaveAllPdf.Text = Commands.SaveAllImages.Text = Commands.EmailAll.Text =
-            Commands.ReverseAll.Text = string.Format(UiStrings.AllCount, ImageList.Images.Count);
-        Commands.SaveAllPdf.Enabled = Commands.SaveAllImages.Enabled = Commands.SaveAll.Enabled =
-            Commands.EmailAll.Enabled = Commands.ReverseAll.Enabled = ImageList.Images.Any();
-
-        // "Selected" dropdown items
-        Commands.SaveSelectedPdf.Text = Commands.SaveSelectedImages.Text = Commands.EmailSelected.Text =
-            Commands.ReverseSelected.Text = string.Format(UiStrings.SelectedCount, ImageList.Selection.Count);
-        Commands.SaveSelectedPdf.Enabled = Commands.SaveSelectedImages.Enabled = Commands.SaveSelected.Enabled =
-            Commands.EmailSelected.Enabled = Commands.ReverseSelected.Enabled = ImageList.Selection.Any();
-
-        // Other
-        Commands.SelectAll.Enabled = ImageList.Images.Any();
-        Commands.Undo.Enabled = ImageList.CanUndo;
-        Commands.Redo.Enabled = ImageList.CanRedo;
-        // TODO: Set undo/redo text here (e.g. "Undo Brightness/Contrast" instead of just "Undo")
-        Commands.ZoomIn.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize < ThumbnailSizes.MAX_SIZE;
-        Commands.ZoomOut.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
-        Commands.NewProfile.Enabled =
-            !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
-        Commands.Combine.Enabled = ImageList.Images.Count > 1;
-    }
-
     private void UpdateScanButton()
     {
         var defaultProfile = _profileManager.DefaultProfile;
@@ -662,7 +607,6 @@ public abstract class DesktopForm : EtoFormBase
     private void ListViewSelectionChanged(object? sender, EventArgs e)
     {
         ImageList.UpdateSelection(_listView.Selection);
-        UpdateToolbar();
     }
 
     private void ListViewDrop(object? sender, DropEventArgs args)

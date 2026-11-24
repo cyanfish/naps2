@@ -21,6 +21,7 @@ public class PreviewForm : EtoDialogBase
     private readonly LayoutVisibility _editVis = new(false);
     private readonly Dictionary<Type, CheckToolItem> _editToolItems = new();
     private UiImage? _currentImage;
+    private DesktopCommands? _commands;
     private Bitmap? _viewBitmap;
     private ImageEditor? _editor;
     private bool _updatingEditTools;
@@ -153,7 +154,7 @@ public class PreviewForm : EtoDialogBase
         ).Spacing(0);
     }
 
-    protected internal DesktopCommands Commands { get; set; } = null!;
+    protected internal DesktopCommands Commands => _commands ?? throw new InvalidOperationException();
     protected ActionCommand DeleteCurrentImageCommand { get; }
     protected ActionCommand GoToPrevCommand { get; }
     protected ActionCommand GoToNextCommand { get; }
@@ -175,7 +176,7 @@ public class PreviewForm : EtoDialogBase
             }
             _currentImage = value;
             UpdateImageIndex();
-            Commands = _desktopCommands.WithSelection(() => ListSelection.Of(_currentImage), Edit);
+            _commands ??= _desktopCommands.WithSelection(() => ListSelection.Of(_currentImage), Edit);
             _currentImage.ThumbnailInvalidated += ImageThumbnailInvalidated;
         }
     }
@@ -501,6 +502,7 @@ public class PreviewForm : EtoDialogBase
             ImageViewer.SetImage(null);
             _viewBitmap?.Dispose();
             ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
+            _commands?.Dispose();
             _editWithController.AppChanged -= EditWithController_AppChanged;
         }
         base.Dispose(disposing);
