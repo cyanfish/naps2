@@ -63,6 +63,10 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
         _scrolledWindow.Add(eventBox);
         _scrolledWindow.StyleContext.AddClass("listview");
+        if (!_behavior.ShowLabels && !_behavior.Checkboxes)
+        {
+            _scrolledWindow.StyleContext.AddClass("image-listview");
+        }
         Control = _scrolledWindow.AsEto();
     }
 
