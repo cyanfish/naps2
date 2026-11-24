@@ -11,13 +11,6 @@ namespace NAPS2.EtoForms.Gtk;
 
 public class GtkListView<T> : IListView<T> where T : notnull
 {
-    private static readonly TargetEntry[] DragTargetEntries =
-    {
-        // TODO: Maybe use a different mime for different list types (profiles/images)?
-        // i.e. something similar to _behavior.CustomDragDataType but in mime format (maybe)
-        new("application/x-naps2-items", 0, 0)
-    };
-
     private readonly ListViewBehavior<T> _behavior;
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
@@ -183,7 +176,8 @@ public class GtkListView<T> : IListView<T> where T : notnull
             {
                 eventBox.DragBegin += OnDragBegin;
                 eventBox.DragDataGet += OnDragDataGet;
-                Drag.SourceSet(eventBox, ModifierType.Button1Mask, DragTargetEntries, DragAction.Move);
+                Drag.SourceSet(eventBox, ModifierType.Button1Mask, [new TargetEntry(CustomDragTarget, 0, 0)],
+                    DragAction.Move);
             }
             flowBoxChild.Add(eventBox);
         }
@@ -374,12 +368,14 @@ public class GtkListView<T> : IListView<T> where T : notnull
         return (CheckButton) ((FlowBoxChild) widget).Child;
     }
 
+    private string CustomDragTarget => $"application/x-naps2-{_behavior.CustomDragDataType}";
+
     private TargetEntry[] GetDropTargetEntries()
     {
         var list = new List<TargetEntry>();
         if (_behavior.AllowDragDrop)
         {
-            list.Add(new("application/x-naps2-items", 0, 0));
+            list.Add(new(CustomDragTarget, 0, 0));
         }
         if (_behavior.AllowFileDrop)
         {
@@ -405,7 +401,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             // TODO: Can we set a pixbuf for the drag?
             args.SelectionData.Set(
-                Atom.Intern(_behavior.CustomDragDataType, false),
+                Atom.Intern(CustomDragTarget, false),
                 8,
                 _behavior.SerializeCustomDragData(Selection.ToArray()));
         }
@@ -414,7 +410,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
     private void OnDragDataReceived(object sender, DragDataReceivedArgs args)
     {
         var index = GetDragIndex();
-        if (args.SelectionData.DataType.Name == _behavior.CustomDragDataType && _behavior.AllowDragDrop)
+        if (_behavior.AllowDragDrop && args.SelectionData.DataType.Name == CustomDragTarget)
         {
             Drop?.Invoke(this, new DropEventArgs(index, args.SelectionData.Data));
         }
