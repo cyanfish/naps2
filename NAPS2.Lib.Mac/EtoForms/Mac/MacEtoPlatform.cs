@@ -498,6 +498,11 @@ public class MacEtoPlatform : EtoPlatform
             var savePanel = (NSSavePanel) sd.ControlObject;
             // Ensure the correct extension is added on save
             savePanel.AllowsOtherFileTypes = false;
+            // Eto sets the name to only an extension when there's no default name, which is then doubled
+            if (Path.GetFileNameWithoutExtension(savePanel.NameFieldStringValue) == "")
+            {
+                savePanel.NameFieldStringValue = "";
+            }
         }
     }
 }
