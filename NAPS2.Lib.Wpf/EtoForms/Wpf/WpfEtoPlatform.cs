@@ -9,6 +9,7 @@ using Eto.Forms;
 using Eto.Wpf;
 using Eto.Wpf.Drawing;
 using Eto.Wpf.Forms;
+using Eto.Wpf.Forms.Controls;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
@@ -57,7 +58,7 @@ public class WpfEtoPlatform : EtoPlatform
         platform.Add<Button.IHandler>(() => new WpfButtonHandler());
         var application = new Application(platform);
         // Drawables paint their own content (e.g. the preview image), which a right-to-left window would mirror
-        Eto.Style.Add<Eto.Wpf.Forms.Controls.DrawableHandler>(null,
+        Eto.Style.Add<DrawableHandler>(null,
             handler => handler.Control.FlowDirection = SW.FlowDirection.LeftToRight);
         SynchronizationContext.SetSynchronizationContext(
             new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
@@ -191,7 +192,64 @@ public class WpfEtoPlatform : EtoPlatform
         {
             MakeToggleCompact(style);
         }
+        if (typeof(SWC.Button).IsAssignableFrom(type) &&
+            themeDictionaries.Select(d => d["AccentButtonStyle"]).OfType<SW.Style>().FirstOrDefault() is { } accentStyle)
+        {
+            AddAccentStyleWhenDefault(style, accentStyle);
+        }
+        if (type == typeof(EtoAccessLabel))
+        {
+            AddDefaultButtonForeground(style);
+        }
         return style;
+    }
+
+    private static void AddAccentStyleWhenDefault(SW.Style style, SW.Style accentStyle)
+    {
+        var whenDefault = new SW.Trigger { Property = SWC.Button.IsDefaultProperty, Value = true };
+        foreach (var setter in accentStyle.Setters)
+        {
+            whenDefault.Setters.Add(setter);
+        }
+        style.Triggers.Add(whenDefault);
+        foreach (var trigger in accentStyle.Triggers)
+        {
+            var (conditions, setters) = trigger switch
+            {
+                SW.Trigger t => ([new SW.Condition(t.Property, t.Value)], t.Setters),
+                SW.MultiTrigger t => (t.Conditions.ToList(), t.Setters),
+                _ => (new List<SW.Condition>(), new SW.SetterBaseCollection())
+            };
+            var multiTrigger = new SW.MultiTrigger
+            {
+                Conditions = { new SW.Condition(SWC.Button.IsDefaultProperty, true) }
+            };
+            foreach (var condition in conditions)
+            {
+                multiTrigger.Conditions.Add(new SW.Condition(condition.Property, condition.Value));
+            }
+            foreach (var setter in setters)
+            {
+                multiTrigger.Setters.Add(setter);
+            }
+            style.Triggers.Add(multiTrigger);
+        }
+    }
+
+    private static void AddDefaultButtonForeground(SW.Style style)
+    {
+        // Eto's button text is a label with its own style, so it doesn't pick up the accent style's foreground
+        var button = new SW.Data.RelativeSource(SW.Data.RelativeSourceMode.FindAncestor, typeof(SWC.Button), 1);
+        style.Triggers.Add(new SW.DataTrigger
+        {
+            Binding = new SW.Data.Binding(nameof(SWC.Button.IsDefault)) { RelativeSource = button },
+            Value = true,
+            Setters =
+            {
+                new SW.Setter(SWC.Control.ForegroundProperty,
+                    new SW.Data.Binding(nameof(SWC.Control.Foreground)) { RelativeSource = button })
+            }
+        });
     }
 
     private static void MakeSplittersUnfocusable(SW.Application app)
