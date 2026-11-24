@@ -111,23 +111,26 @@ public class GtkListView<T> : IListView<T> where T : notnull
         _entries.Clear();
         foreach (var item in items)
         {
-            var widget = GetItemWidget(item);
+            var widget = GetItemWidget(item, out var pageNumberLabel);
             _flowBox.Add(widget);
             _entries.Add(new Entry
             {
                 Index = _entries.Count,
                 Item = item,
-                Widget = widget
+                Widget = widget,
+                PageNumberLabel = pageNumberLabel
             });
         }
         _flowBox.ShowAll();
+        UpdatePageNumberLabels();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
     }
 
-    private Widget GetItemWidget(T item)
+    private Widget GetItemWidget(T item, out Label? pageNumberLabel)
     {
+        pageNumberLabel = null;
         var flowBoxChild = new FlowBoxChild();
         if (_behavior.Checkboxes)
         {
@@ -158,6 +161,17 @@ public class GtkListView<T> : IListView<T> where T : notnull
                 };
                 vframe.Add(label);
             }
+            if (_behavior.ShowPageNumbers)
+            {
+                // The text is filled in by UpdatePageNumberLabels, as the position depends on the other items
+                pageNumberLabel = new Label
+                {
+                    Halign = Align.Center,
+                    Justify = Justification.Center,
+                    MarginTop = 4
+                };
+                vframe.Add(pageNumberLabel);
+            }
             // TODO: Event box around the image instead of the frame?
             var eventBox = new EventBox();
             eventBox.Child = vframe;
@@ -187,11 +201,13 @@ public class GtkListView<T> : IListView<T> where T : notnull
         foreach (var entry in _entries)
         {
             RemoveAndDisposeWidget(entry.Widget);
-            var newWidget = GetItemWidget(entry.Item);
+            var newWidget = GetItemWidget(entry.Item, out var pageNumberLabel);
             entry.Widget = newWidget;
+            entry.PageNumberLabel = pageNumberLabel;
             _flowBox.Add(newWidget);
         }
         _flowBox.ShowAll();
+        UpdatePageNumberLabels();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
@@ -213,23 +229,25 @@ public class GtkListView<T> : IListView<T> where T : notnull
         _refreshing = true;
         foreach (var op in diffs.AppendOperations)
         {
-            var widget = GetItemWidget(op.Item);
+            var widget = GetItemWidget(op.Item, out var pageNumberLabel);
             var index = _entries.Count;
             _flowBox.Add(widget);
             _entries.Add(new Entry
             {
                 Item = op.Item,
                 Widget = widget,
-                Index = index
+                Index = index,
+                PageNumberLabel = pageNumberLabel
             });
         }
         foreach (var op in diffs.ReplaceOperations)
         {
             var entry = _entries[op.Index];
             RemoveAndDisposeWidget(entry.Widget);
-            var newWidget = GetItemWidget(op.Item);
+            var newWidget = GetItemWidget(op.Item, out var pageNumberLabel);
             _flowBox.Insert(newWidget, entry.Index);
             entry.Widget = newWidget;
+            entry.PageNumberLabel = pageNumberLabel;
             entry.Item = op.Item;
         }
         foreach (var op in diffs.TrimOperations)
@@ -241,6 +259,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
             _entries = _entries.Take(_entries.Count - op.Count).ToList();
         }
         _flowBox.ShowAll();
+        UpdatePageNumberLabels();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
@@ -290,6 +309,18 @@ public class GtkListView<T> : IListView<T> where T : notnull
             else
             {
                 _flowBox.SelectChild((FlowBoxChild) entry.Widget);
+            }
+        }
+    }
+
+    private void UpdatePageNumberLabels()
+    {
+        // Page numbers are 1-based positions in the current list, so they're refreshed after every change
+        for (int i = 0; i < _entries.Count; i++)
+        {
+            if (_entries[i].PageNumberLabel is { } label)
+            {
+                label.Text = $"{i + 1} / {_entries.Count}";
             }
         }
     }
@@ -465,5 +496,6 @@ public class GtkListView<T> : IListView<T> where T : notnull
         public required T Item { get; set; }
         public required Widget Widget { get; set; }
         public required int Index { get; init; }
+        public Label? PageNumberLabel { get; set; }
     }
 }
