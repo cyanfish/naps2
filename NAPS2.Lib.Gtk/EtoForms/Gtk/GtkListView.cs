@@ -146,7 +146,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         else
         {
             using var image = _behavior.GetImage(this, item);
-            var imageWidget = image.ToGdk().ToScaledImage(_flowBox.ScaleFactor);
+            var imageWidget = CreateImageWidget(image.ToGdk());
             // TODO: Is there a better way to prevent the image from expanding in both dimensions?
             var hframe = new Box(Orientation.Horizontal, 0);
             hframe.Halign = Align.Center;
@@ -189,6 +189,21 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
         flowBoxChild.StyleContext.AddClass("listview-item");
         return flowBoxChild;
+    }
+
+    private Widget CreateImageWidget(Pixbuf pixbuf)
+    {
+        int scaleFactor = _flowBox.ScaleFactor;
+        // Resize the pixbuf to fit the listview image size
+        // e.g. if we're waiting for thumbnail re-render after zooming 
+        double fit = Math.Min((double) ImageSize.Width * scaleFactor / pixbuf.Width,
+            (double) ImageSize.Height * scaleFactor / pixbuf.Height);
+        int width = Math.Max((int) Math.Round(pixbuf.Width * fit), 1);
+        int height = Math.Max((int) Math.Round(pixbuf.Height * fit), 1);
+        using var fitted = width != pixbuf.Width || height != pixbuf.Height
+            ? pixbuf.ScaleSimple(width, height, InterpType.Bilinear)
+            : null;
+        return (fitted ?? pixbuf).ToScaledImage(scaleFactor);
     }
 
     public void RegenerateImages()
