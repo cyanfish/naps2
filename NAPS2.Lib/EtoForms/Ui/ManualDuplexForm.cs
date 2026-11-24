@@ -47,12 +47,14 @@ public class ManualDuplexForm : EtoDialogBase
     {        
         FormStateController.DefaultExtraLayoutSize = new Size(200, 0);
 
+        bool pageNumbersOutsideItemFrame = EtoPlatform.Current.IsWpf || EtoPlatform.Current.IsGtk;
         LayoutController.Content = L.Column(
             _reverseBackSides,
             _alwaysShowPreview,
             C.Spacer(),
             C.Label(UiStrings.Preview),
-            _listView.Control.Scale().NaturalSize(400, PREVIEW_THUMBNAIL_SIZE + 28),
+            _listView.Control.Scale().NaturalSize(400,
+                PREVIEW_THUMBNAIL_SIZE + (pageNumbersOutsideItemFrame ? 52 : 28)),
             _help.Label,
             L.Row(
                 _help.Button,
