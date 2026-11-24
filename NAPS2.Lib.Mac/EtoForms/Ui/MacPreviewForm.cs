@@ -60,10 +60,12 @@ public class MacPreviewForm : PreviewForm
         {
             Image = command.GetIconImage(IconScenario.Toolbar, 1)?.ToNS(),
             BezelStyle = NSBezelStyle.TexturedRounded,
-            ToolTip = command.ToolBarText ?? ""
+            ToolTip = command.ToolBarText ?? "",
+            Enabled = command.Enabled
         };
         button.SetButtonType(NSButtonType.PushOnPushOff);
         button.Activated += (_, _) => command.Execute();
+        command.EnabledChanged += (_, _) => button.Enabled = command.Enabled;
         _editToolButtons[typeof(T)] = button;
         return new NSToolbarItem(id) { View = button, Label = command.ToolBarText ?? "" };
     }
