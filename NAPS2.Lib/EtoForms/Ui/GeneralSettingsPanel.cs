@@ -97,7 +97,8 @@ internal class GeneralSettingsPanel : SettingsPanel
         var transact = Config.User.BeginTransaction();
         bool themeChanged = transact.SetIfChanged(Config, c => c.Theme, _theme.SelectedItem);
         transact.SetIfChanged(Config, c => c.ScanChangesDefaultProfile, _scanChangesDefaultProfile.IsChecked());
-        transact.SetIfChanged(Config, c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
+        bool showPageNumbersChanged =
+            transact.SetIfChanged(Config, c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
         transact.SetIfChanged(Config, c => c.ScanButtonDefaultAction, _scanButtonDefaultAction.SelectedItem);
         transact.SetIfChanged(Config, c => c.SaveButtonDefaultAction, _saveButtonDefaultAction.SelectedItem);
         transact.SetIfChanged(Config, c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
@@ -105,7 +106,10 @@ internal class GeneralSettingsPanel : SettingsPanel
         transact.SetIfChanged(Config, c => c.SingleInstance, _singleInstance.IsChecked());
         transact.Commit();
 
-        _desktopFormProvider.DesktopForm.UpdateListView();
+        if (showPageNumbersChanged)
+        {
+            _desktopFormProvider.DesktopForm.UpdateListView();
+        }
         if (themeChanged)
         {
             EtoPlatform.Current.ColorScheme.UserThemeChanged();
