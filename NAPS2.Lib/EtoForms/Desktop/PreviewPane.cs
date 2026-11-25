@@ -12,7 +12,8 @@ namespace NAPS2.EtoForms.Desktop;
 /// </summary>
 public class PreviewPane : IDisposable
 {
-    public const int MinWidth = 420;
+    // Gtk icon buttons are a bit bigger
+    public static int MinWidth => EtoPlatform.Current.IsGtk ? 340 : 320;
 
     private readonly Naps2Config _config;
     private readonly UiImageList _imageList;
@@ -180,12 +181,27 @@ public class PreviewPane : IDisposable
 
     private LayoutElement CreateHeader()
     {
-        var edit = EtoPlatform.Current.SupportsInlinePreviewToolBar ? CreateEditToolBar() : CreateEditButtons();
+        LayoutElement edit, narrowEdit;
+        if (EtoPlatform.Current.SupportsInlinePreviewToolBar)
+        {
+            // A toolbar moves the items that don't fit into an overflow menu
+            edit = narrowEdit = CreateEditToolBar();
+        }
+        else
+        {
+            var buttons = CreateEditButtons();
+            int firstRowCount = (buttons.Count + 1) / 2;
+            edit = L.Row(buttons.ToArray()).Spacing(2);
+            narrowEdit = L.Column(
+                L.Row(buttons.Take(firstRowCount).ToArray()).Spacing(2),
+                L.Row(buttons.Skip(firstRowCount).ToArray()).Spacing(2)
+            ).Spacing(2);
+        }
         var centeredEdit = L.Row(C.Filler(), edit, C.Filler());
         if (_windowed && EtoPlatform.Current.IsMac)
         {
             // The rest of the header is in the window toolbar
-            return centeredEdit.Padding(6);
+            return L.Column(L.Adaptive(centeredEdit, narrowEdit)).Padding(6);
         }
         var zoomOut = CreateHeaderButton(ZoomOutCommand);
         var zoomIn = CreateHeaderButton(ZoomInCommand);
@@ -206,7 +222,7 @@ public class PreviewPane : IDisposable
         ).Spacing(2);
         return L.Column(L.Adaptive(
             L.Row(left, centeredEdit.Scale(), right),
-            L.Column(L.Row(left, C.Filler(), right), L.Adaptive(centeredEdit, edit))
+            L.Column(L.Row(left, C.Filler(), right), L.Adaptive(centeredEdit, narrowEdit))
         )).Padding(6);
     }
 
@@ -324,9 +340,9 @@ public class PreviewPane : IDisposable
     }
 
     /// <summary>
-    /// Creates the edit actions as a row of buttons, for platforms where toolbars can't be part of the layout.
+    /// Creates the edit actions as buttons, for platforms where toolbars can't be part of the layout.
     /// </summary>
-    private LayoutElement CreateEditButtons()
+    private List<LayoutElement> CreateEditButtons()
     {
         var rotate = CreateHeaderButton(Commands.RotateMenu);
         var rotateMenu = C.ContextMenu(_window!, new MenuProvider()
@@ -360,7 +376,7 @@ public class PreviewPane : IDisposable
                 HeaderButton(CreateHeaderButton(x.Command, x.IconName)).SpacingAfter(12)));
             buttons.Add(HeaderButton(CreateHeaderButton(DeleteCurrentImageCommand)));
         }
-        return L.Row(buttons.ToArray()).Spacing(2);
+        return buttons;
     }
 
     private LayoutControl EditToggle<T>() where T : ImageEditor
