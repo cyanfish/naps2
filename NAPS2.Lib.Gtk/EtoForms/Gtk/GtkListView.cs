@@ -168,6 +168,10 @@ public class GtkListView<T> : IListView<T> where T : notnull
                     MarginTop = 4
                 };
                 vframe.Add(pageNumberLabel);
+                // Fit the item to its content so the selection highlight doesn't fill the whole cell
+                flowBoxChild.Halign = Align.Center;
+                flowBoxChild.Valign = Align.Center;
+                flowBoxChild.StyleContext.AddClass("numbered");
             }
             // TODO: Event box around the image instead of the frame?
             var eventBox = new EventBox();

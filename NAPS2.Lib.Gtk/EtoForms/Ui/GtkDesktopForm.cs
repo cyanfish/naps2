@@ -73,6 +73,8 @@ public class GtkDesktopForm : DesktopForm
         var fgColor = _colorScheme.ForegroundColor.ToHex(false);
         var sepColor = _colorScheme.SeparatorColor.ToHex(false);
         var brdColor = _colorScheme.BorderColor.ToHex(false);
+        var hlBgColor = _colorScheme.HighlightBackgroundColor.ToHex(false);
+        var hlBrdColor = _colorScheme.HighlightBorderColor.ToHex(false);
         cssProvider.LoadFromData(@"
             .desktop-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .image-button { min-width: 50px; padding-left: 0; padding-right: 0; }
@@ -86,9 +88,18 @@ public class GtkDesktopForm : DesktopForm
             toolbar.dock-bottom { border-bottom: none; border-top: 1px solid " + sepColor + @"; }
             toolbar.dock-right { border-bottom: none; border-left: 1px solid " + sepColor + @"; }
             .listview .frame { background-color: " + bgColor + @"; }
+            .image-listview .numbered { border-radius: 0; border: 1px solid transparent; padding: 4px; }
             .listview .drop-before { border-radius: 0; border-left: 3px solid " + fgColor + @"; padding-left: 0; }
             .listview .drop-after { border-radius: 0; border-right: 3px solid " + fgColor + @"; padding-right: 0; }
+            .image-listview .numbered.drop-before { padding-left: 2px; }
+            .image-listview .numbered.drop-after { padding-right: 2px; }
             .image-listview .listview-item image { border: 1px solid " + brdColor + @"; }
+            .image-listview .listview-item:not(.numbered) image { margin: 2px; }
+            .image-listview .listview-item { outline-style: none; }
+            .image-listview .listview-item:selected { background: none; color: " + fgColor + @"; }
+            .image-listview .listview-item:not(.numbered):selected image { border: 3px solid " + hlBrdColor + @"; margin: 0; }
+            .image-listview .numbered:selected { background: " + hlBgColor + @"; border-color: " + hlBrdColor + @"; }
+            .image-listview .numbered:selected image { border-color: transparent; }
             .settings-navigator { background-color: @theme_base_color; border: 1px solid @borders; border-radius: 8px; padding: 4px; }
             .settings-navigator row { padding: 8px 10px; border-radius: 6px; }
             .link { padding: 0; }
