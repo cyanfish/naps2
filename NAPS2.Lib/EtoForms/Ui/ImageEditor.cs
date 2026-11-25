@@ -107,14 +107,16 @@ public abstract class ImageEditor : IDisposable
     public LayoutElement CreateLayout()
     {
         _help.Text = HelpText ?? "";
+        var extraButtons = L.Row(
+            CreateExtraButtons(),
+            HelpText == null ? C.None() : _help.Button);
+        var okCancel = L.Row(L.OkCancel(OkButton, CancelButton));
         return L.Column(
             CreateControls(),
             HelpText == null ? C.None() : _help.Label,
-            L.Row(
-                CreateExtraButtons(),
-                HelpText == null ? C.None() : _help.Button,
-                C.Filler(),
-                L.OkCancel(OkButton, CancelButton)));
+            L.Adaptive(
+                L.Row(extraButtons, C.Filler(), okCancel),
+                L.Column(L.Row(extraButtons, C.Filler()), L.Row(C.Filler(), okCancel))));
     }
 
     public void OnShown()
