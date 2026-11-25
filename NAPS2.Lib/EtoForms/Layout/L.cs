@@ -45,6 +45,11 @@ public static class L
         return new LayoutRightPanel(left, right);
     }
 
+    public static LayoutAdaptive Adaptive(LayoutElement wide, LayoutElement narrow)
+    {
+        return new LayoutAdaptive(wide, narrow);
+    }
+
     public static LayoutScrollable Scrollable(LayoutElement content)
     {
         return new LayoutScrollable(content);
