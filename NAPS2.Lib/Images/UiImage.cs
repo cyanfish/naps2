@@ -1,3 +1,5 @@
+using System.Threading;
+
 namespace NAPS2.Images;
 
 // TODO: Write tests for this class
@@ -6,9 +8,12 @@ namespace NAPS2.Images;
 /// </summary>
 public class UiImage : IDisposable
 {
+    public static readonly TimeSpan StaleThumbnailDelay = TimeSpan.FromMilliseconds(400);
+
     private ProcessedImage _processedImage;
     private IMemoryImage? _thumbnail;
     private TransformState? _thumbnailTransformState;
+    private CancellationTokenSource? _staleThumbnailCts;
     private bool _saved;
 
     public UiImage(ProcessedImage image, bool useThumbnail = true)
@@ -104,7 +109,7 @@ public class UiImage : IDisposable
             }
             _saved = false;
         }
-        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+        OnThumbnailInvalidated();
         if (prerenderedThumbnail != null)
         {
             ThumbnailChanged?.Invoke(this, EventArgs.Empty);
@@ -122,7 +127,7 @@ public class UiImage : IDisposable
             _processedImage = _processedImage.WithTransformState(newTransformState, true);
             _saved = false;
         }
-        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+        OnThumbnailInvalidated();
     }
 
     public void ReplaceMetadata(ImageMetadata metadata)
@@ -136,7 +141,7 @@ public class UiImage : IDisposable
             _processedImage = _processedImage.WithMetadata(metadata, true);
             _saved = false;
         }
-        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+        OnThumbnailInvalidated();
     }
 
     public void ReplaceInternalImage(ProcessedImage newImage)
@@ -148,7 +153,7 @@ public class UiImage : IDisposable
             _thumbnailTransformState = null;
             _saved = false;
         }
-        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+        OnThumbnailInvalidated();
     }
 
     public void ResetTransforms()
@@ -162,7 +167,7 @@ public class UiImage : IDisposable
             _processedImage = _processedImage.WithNoTransforms(true);
             _saved = false;
         }
-        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+        OnThumbnailInvalidated();
     }
 
     /// <summary>
@@ -197,12 +202,54 @@ public class UiImage : IDisposable
             _thumbnail = image;
             _thumbnailTransformState = transformState;
         }
+        UpdateThumbnailStale();
         ThumbnailChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public bool IsDisposed { get; private set; }
 
+    /// <summary>
+    /// Whether the thumbnail is out of date.
+    /// </summary>
     public bool IsThumbnailDirty => _thumbnailTransformState != _processedImage.TransformState;
+
+    /// <summary>
+    /// Whether the thumbnail has been out of date for long enough that it should be displayed as such.
+    /// </summary>
+    public bool IsThumbnailStale { get; private set; }
+
+    private void OnThumbnailInvalidated()
+    {
+        UpdateThumbnailStale();
+        ThumbnailInvalidated?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void UpdateThumbnailStale()
+    {
+        CancellationToken token;
+        lock (this)
+        {
+            if (!IsThumbnailDirty)
+            {
+                _staleThumbnailCts?.Cancel();
+                _staleThumbnailCts = null;
+                IsThumbnailStale = false;
+                return;
+            }
+            if (_staleThumbnailCts != null) return;
+            _staleThumbnailCts = new CancellationTokenSource();
+            token = _staleThumbnailCts.Token;
+        }
+        Task.Delay(StaleThumbnailDelay, token).ContinueWith(_ =>
+        {
+            lock (this)
+            {
+                if (token.IsCancellationRequested || IsDisposed) return;
+                IsThumbnailStale = true;
+            }
+            ThumbnailChanged?.Invoke(this, EventArgs.Empty);
+        });
+    }
 
     public bool HasUnsavedChanges => !_saved;
 
@@ -220,7 +267,8 @@ public class UiImage : IDisposable
     {
         lock (this)
         {
-            return new ImageRenderState(_processedImage.GetWeakReference(), _thumbnailTransformState, _thumbnail, this);
+            return new ImageRenderState(_processedImage.GetWeakReference(), _thumbnailTransformState, _thumbnail,
+                IsThumbnailStale, this);
         }
     }
 }

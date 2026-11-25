@@ -26,7 +26,7 @@ public class UiThumbnailProvider
             {
                 return RenderPlaceholder(thumbnailSize);
             }
-            if (img.IsThumbnailDirty)
+            if (img.IsThumbnailStale)
             {
                 thumb = EtoPlatform.Current.DrawHourglass(thumb);
             }
