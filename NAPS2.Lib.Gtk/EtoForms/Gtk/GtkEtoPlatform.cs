@@ -527,6 +527,12 @@ public class GtkEtoPlatform : EtoPlatform
         gtkButton.SetSizeRequest(0, 0);
     }
 
+    public override void ConfigureJoinedButtons(Button left, Button right)
+    {
+        left.ToNative().StyleContext.AddClass("joined-left");
+        right.ToNative().StyleContext.AddClass("joined-right");
+    }
+
     public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
     {
         var native = control.ToNative();

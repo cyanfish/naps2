@@ -229,16 +229,6 @@ public class WpfDesktopForm : DesktopForm
         _mainToolBar.Items.Add(group);
     }
 
-    protected override LayoutElement GetZoomButtons()
-    {
-        var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureFloatingButton(zoomIn, "zoom_in");
-        var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureFloatingButton(zoomOut, "zoom_out");
-        EtoPlatform.Current.ConfigureJoinedButtons(zoomOut, zoomIn);
-        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(0);
-    }
-
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
     {
         var button = _toolbarFormatter.CreateLargeButton(CreateButtonContent(command, true));

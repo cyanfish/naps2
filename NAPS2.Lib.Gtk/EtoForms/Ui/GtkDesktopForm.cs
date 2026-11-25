@@ -96,7 +96,12 @@ public class GtkDesktopForm : DesktopForm
             .donate-button:hover { background: #eeca86; }
             .icon-button { min-width: 0; padding-left: 0; padding-right: 0; }
             .icon-button.compact { min-height: 0; padding-top: 6px; padding-bottom: 6px; }
-            .floating-button { background: " + bgColor + @"; border: 1px solid " + brdColor + @"; border-radius: 0; }
+            .floating-button { background: " + bgColor + @"; border: 1px solid alpha(@theme_fg_color, 0.4); border-radius: 5px; }
+            .floating-button:hover { background: mix(" + bgColor + @", @theme_fg_color, 0.06); }
+            .floating-button:active { background: mix(" + bgColor + @", @theme_fg_color, 0.12); }
+            .floating-button:disabled image, .icon-button:disabled image { opacity: 0.4; }
+            .joined-left { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+            .joined-right { border-top-left-radius: 0; border-bottom-left-radius: 0; border-left-style: none; }
         ");
         StyleContext.AddProviderForScreen(Gdk.Screen.Default, cssProvider, 800);
     }

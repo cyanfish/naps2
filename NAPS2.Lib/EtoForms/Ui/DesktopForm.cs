@@ -528,7 +528,9 @@ public abstract class DesktopForm : EtoFormBase
         EtoPlatform.Current.ConfigureFloatingButton(zoomIn, "zoom_in");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
         EtoPlatform.Current.ConfigureFloatingButton(zoomOut, "zoom_out");
-        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(-1);
+        EtoPlatform.Current.ConfigureJoinedButtons(zoomOut, zoomIn);
+        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing())
+            .Spacing(EtoPlatform.Current.IsWinForms ? -1 : 0);
     }
 
     private void InitLanguageDropdown()
