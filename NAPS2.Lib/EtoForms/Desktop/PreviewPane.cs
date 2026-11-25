@@ -615,6 +615,17 @@ public class PreviewPane : IDisposable
         });
     }
 
+    /// <summary>
+    /// Starts editing the current image with the given type of editor, if it isn't already being used.
+    /// </summary>
+    public void StartEdit(Type editorType)
+    {
+        if (ActiveEditorType != editorType)
+        {
+            _editCommands[editorType].Execute();
+        }
+    }
+
     private void EndEdit()
     {
         if (_editor == null) return;

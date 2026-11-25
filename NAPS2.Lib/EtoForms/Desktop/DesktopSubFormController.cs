@@ -64,6 +64,11 @@ public class DesktopSubFormController : IDesktopSubFormController
         var selection = Selection;
         if (selection.Any())
         {
+            if (EditorHost == null && _desktopFormProvider.DesktopForm.PreviewPane is { IsVisible: true } pane)
+            {
+                pane.StartEdit(typeof(T));
+                return;
+            }
             var editor = _imageEditorFactory.Create<T>();
             editor.Image = selection.First();
             editor.SelectedImages = selection.ToList();
