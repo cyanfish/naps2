@@ -374,7 +374,7 @@ public class DesktopCommands : IDisposable
 
     private void ImagesChanged(object? sender, ImageListEventArgs e) => Invoker.Current.InvokeDispatch(UpdateState);
 
-    private void UpdateState()
+    public void UpdateState()
     {
         var images = _imageList.Images;
         var selection = _imageListActions.Selection ?? _imageList.Selection;

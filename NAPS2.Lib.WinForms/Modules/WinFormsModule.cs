@@ -19,7 +19,6 @@ public class WinFormsModule : Module
         builder.RegisterType<MapiEmailClients>().As<ISystemEmailClients>();
 
         builder.RegisterType<WinFormsDesktopForm>().As<DesktopForm>();
-        builder.RegisterType<WinFormsPreviewForm>().As<PreviewForm>();
 
 #if TEST_SCENARIOS
         builder.RegisterType<TestScenarios.WinFormsTestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();

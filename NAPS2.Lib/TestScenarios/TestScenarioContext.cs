@@ -393,7 +393,7 @@ public class TestScenarioContext
     public void RunPreviewCommand(string name)
     {
         RunCommand(Ui(() => FindEtoWindow(null) is PreviewForm preview
-            ? FindCommand(preview.Commands, name)
+            ? FindCommand(preview.Pane.Commands, name)
             : throw new TestScenarioException("The preview window isn't open")));
     }
 
