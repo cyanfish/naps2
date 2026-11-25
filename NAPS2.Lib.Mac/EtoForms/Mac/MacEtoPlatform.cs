@@ -80,6 +80,10 @@ public class MacEtoPlatform : EtoPlatform
         {
             handler.BezelStyle = NSBezelStyle.Rounded;
         }
+        if (button is { ImagePosition: ButtonImagePosition.Overlay, Handler: ToggleButtonHandler toggleHandler })
+        {
+            toggleHandler.BezelStyle = NSBezelStyle.Rounded;
+        }
         var image = nsButton.Image!;
         if (image.Representations() is [NSBitmapImageRep rep, ..])
         {
