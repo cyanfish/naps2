@@ -23,6 +23,7 @@ public class LayoutRightPanel : LayoutContainer
     // The width the user chose, and the width actually used (which may be less if the window is too narrow)
     private int _rightWidth;
     private int _effectiveWidth;
+    private bool _wasRightVisible;
     private Action? _invalidate;
 
     public LayoutRightPanel(LayoutElement left, LayoutElement right) : base([left, right])
@@ -56,18 +57,27 @@ public class LayoutRightPanel : LayoutContainer
             Splitter.PositionChanged += SplitterPositionChanged;
             _isInitialized = true;
         }
+        bool rightVisible = _right.IsVisible;
+        if (rightVisible && !_wasRightVisible)
+        {
+            // Don't let the panel take over most of a small window when it's opened
+            _rightWidth = Math.Min(_widthGetter(), Math.Max(minRight, total / 2));
+        }
+        _wasRightVisible = rightVisible;
         _effectiveWidth = _rightWidth.Clamp(minRight, Math.Max(minRight, total - minLeft - _spacing));
         _lastTotalWidth = total;
 
-        bool rightVisible = _right.IsVisible;
         if (_right.Width != _effectiveWidth)
         {
             // Our parent has already measured the right element at its old width, so lay out again
             _right.Width = _effectiveWidth;
             context.Invalidate();
         }
+        // Changing the minimum sizes can move the splitter (e.g. when the panel is shown), which isn't a user drag
+        _inLayout = true;
         Splitter.Panel1MinimumSize = minLeft;
         Splitter.Panel2MinimumSize = rightVisible ? minRight : 0;
+        _inLayout = false;
 
         _overlay.DoLayout(context, bounds);
 
