@@ -503,8 +503,10 @@ public class PreviewPane : IDisposable
     private void SyncToSelection()
     {
         if (_windowed || !IsVisible || _editor != null) return;
-        var selected = _imageList.Selection.FirstOrDefault();
-        if (selected != null && selected != _currentImage)
+        var selection = _imageList.Selection;
+        if (_currentImage != null && selection.Contains(_currentImage)) return;
+        var selected = selection.FirstOrDefault();
+        if (selected != null)
         {
             Show(selected);
         }
@@ -550,7 +552,10 @@ public class PreviewPane : IDisposable
                 return;
             }
             image = _imageList.Images[index];
-            _imageList.UpdateSelection(ListSelection.Of(image));
+            if (!_imageList.Selection.Contains(image))
+            {
+                _imageList.UpdateSelection(ListSelection.Of(image));
+            }
         }
         Show(image);
     }
