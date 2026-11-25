@@ -44,9 +44,9 @@ public class GtkListView<T> : IListView<T> where T : notnull
             _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         }
         _flowBox.ChildActivated += OnChildActivated;
-        _flowBox.ButtonPressEvent += OnButtonPress;
         var eventBox = new EventBox();
         eventBox.Child = _flowBox;
+        eventBox.ButtonPressEvent += OnButtonPress;
         if (_behavior.AllowDragDrop)
         {
             Drag.DestSet(eventBox, DestDefaults.All, GetDropTargetEntries(), DragAction.Copy | DragAction.Move);
