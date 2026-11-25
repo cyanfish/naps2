@@ -30,7 +30,7 @@ public class PreviewForm : EtoDialogBase
         FormStateController.DefaultClientSize = new Size(800, 600);
 
         LayoutController.RootPadding = 0;
-        LayoutController.Content = Pane.CreateView(this);
+        LayoutController.Content = Pane.CreateView(this, true);
     }
 
     protected override void OnLoad(EventArgs eventArgs)

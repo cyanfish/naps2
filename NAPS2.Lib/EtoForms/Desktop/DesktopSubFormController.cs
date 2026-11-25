@@ -10,16 +10,18 @@ public class DesktopSubFormController : IDesktopSubFormController
     private readonly UiImageList _imageList;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly TesseractLanguageManager _tesseractLanguageManager;
+    private readonly DesktopFormProvider _desktopFormProvider;
 
     public DesktopSubFormController(IFormFactory formFactory, IImageEditorFactory imageEditorFactory,
         UiImageList imageList, DesktopImagesController desktopImagesController,
-        TesseractLanguageManager tesseractLanguageManager)
+        TesseractLanguageManager tesseractLanguageManager, DesktopFormProvider desktopFormProvider)
     {
         _formFactory = formFactory;
         _imageEditorFactory = imageEditorFactory;
         _imageList = imageList;
         _desktopImagesController = desktopImagesController;
         _tesseractLanguageManager = tesseractLanguageManager;
+        _desktopFormProvider = desktopFormProvider;
     }
 
     private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
@@ -32,7 +34,7 @@ public class DesktopSubFormController : IDesktopSubFormController
         Action<ImageEditor>? editorHost = null)
     {
         return new DesktopSubFormController(_formFactory, _imageEditorFactory, _imageList, _desktopImagesController,
-            _tesseractLanguageManager)
+            _tesseractLanguageManager, _desktopFormProvider)
         {
             SelectionFunc = selectionFunc,
             EditorHost = editorHost
@@ -114,15 +116,20 @@ public class DesktopSubFormController : IDesktopSubFormController
         form.ShowModal();
     }
 
-    public void ShowViewerForm()
+    public void ShowPreview(bool newWindow)
     {
-        var selected = Selection.FirstOrDefault();
-        if (selected != null)
+        var image = Selection.FirstOrDefault();
+        if (image == null) return;
+        var pane = _desktopFormProvider.DesktopForm.PreviewPane;
+        if (!newWindow)
         {
-            using var viewer = _formFactory.Create<PreviewForm>();
-            viewer.CurrentImage = selected;
-            viewer.ShowModal();
+            pane.Show(image);
+            return;
         }
+        pane.Hide();
+        using var viewer = _formFactory.Create<PreviewForm>();
+        viewer.CurrentImage = image;
+        viewer.ShowModal();
     }
 
     public void ShowPdfSettingsForm() => ShowSettingsForm<PdfSettingsPanel>();

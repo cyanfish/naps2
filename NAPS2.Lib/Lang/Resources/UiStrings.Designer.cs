@@ -2805,6 +2805,18 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string ClosePreview {
+            get {
+                return ResourceManager.GetString("ClosePreview", resourceCulture);
+            }
+        }
+        
+        internal static string ViewInNewWindow {
+            get {
+                return ResourceManager.GetString("ViewInNewWindow", resourceCulture);
+            }
+        }
+        
         internal static string XOfY {
             get {
                 return ResourceManager.GetString("XOfY", resourceCulture);

@@ -43,11 +43,12 @@ public class WinFormsDesktopForm : DesktopForm
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController)
+        EditWithController editWithController,
+        PreviewPane previewPane)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider,
-            editWithController)
+            editWithController, previewPane)
     {
         _form = this.ToNative();
         _form.FormClosing += OnFormClosing;

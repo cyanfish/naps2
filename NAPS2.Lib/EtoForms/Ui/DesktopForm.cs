@@ -31,6 +31,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly Sidebar _sidebar;
     protected readonly IIconProvider _iconProvider;
     private readonly EditWithController _editWithController;
+    private readonly PreviewPane _previewPane;
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
@@ -62,7 +63,8 @@ public abstract class DesktopForm : EtoFormBase
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController) : base(config)
+        EditWithController editWithController,
+        PreviewPane previewPane) : base(config)
     {
         Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
 
@@ -83,6 +85,7 @@ public abstract class DesktopForm : EtoFormBase
         _iconProvider = iconProvider;
         _commands = commands;
         _editWithController = editWithController;
+        _previewPane = previewPane;
 
         _desktopFormProvider.DesktopForm = this;
         _keyboardShortcuts.Assign(Commands);
@@ -100,14 +103,15 @@ public abstract class DesktopForm : EtoFormBase
         _listView.SelectionChanged += ListViewSelectionChanged;
         _listView.ImageSize = new Size(_thumbnailController.VisibleSize, _thumbnailController.VisibleSize);
         _listView.ContextMenu = _contextMenu;
+        _previewPane.Closed += (_, _) => _listView.Control.Focus();
 
         // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)
         _contextMenu.Items.Add(Commands.SelectAll);
         _contextMenu.Opening += OpeningContextMenu;
         EtoPlatform.Current.AttachMouseWheelEvent(_listView.Control, ListViewMouseWheel);
         EtoPlatform.Current.AttachMouseMoveEvent(_listView.Control, ListViewMouseMove);
-        EtoPlatform.Current.HandleKeyDown(this, _keyboardShortcuts.Perform);
-        EtoPlatform.Current.HandleKeyDown(_listView.Control, _keyboardShortcuts.Perform);
+        EtoPlatform.Current.HandleKeyDown(this, HandleKeyDown);
+        EtoPlatform.Current.HandleKeyDown(_listView.Control, HandleKeyDown);
 
         //
         // Shown += FDesktop_Shown;
@@ -140,8 +144,17 @@ public abstract class DesktopForm : EtoFormBase
                     _notificationArea.Content)
             ).Padding(8)
         ).Scale();
-        LayoutController.Content = BuildSidebarLayout(mainContent);
+        var rightPanel = L.RightPanel(mainContent, _previewPane.CreateView(this, false)).SizeConfig(
+            () => Config.Get(c => c.PreviewPaneWidth),
+            width => Config.User.Set(c => c.PreviewPaneWidth, width),
+            PreviewPane.MinWidth,
+            Sidebar.MIN_CONTENT_WIDTH).MaxShownFraction(0.5);
+        LayoutController.Content = BuildSidebarLayout(rightPanel);
     }
+
+    public PreviewPane PreviewPane => _previewPane;
+
+    private bool HandleKeyDown(Keys keys) => _previewPane.HandleKeyDown(keys) || _keyboardShortcuts.Perform(keys);
 
     protected bool SidebarHidden => Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Sidebar);
 
@@ -170,7 +183,8 @@ public abstract class DesktopForm : EtoFormBase
             // TODO: Is this memory leaking (because of event handlers) when commands are converted to menuitems?
             _contextMenu.Items.AddRange(
             [
-                C.ButtonMenuItem(this, Commands.ViewImage),
+                C.ButtonMenuItem(this, Commands.View),
+                C.ButtonMenuItem(this, Commands.ViewInNewWindow),
                 new SeparatorMenuItem(),
                 C.ButtonMenuItem(this, Commands.SelectAll),
                 C.ButtonMenuItem(this, Commands.Copy),
@@ -292,6 +306,7 @@ public abstract class DesktopForm : EtoFormBase
         _editWithController.AppChanged -= EditWithController_AppChanged;
         _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
+        _previewPane.Dispose();
     }
 
     protected virtual void CreateToolbarsAndMenus()
@@ -349,7 +364,8 @@ public abstract class DesktopForm : EtoFormBase
         separatorPending = true;
         if (ShowButton(ToolbarButtons.Image))
             CreateToolbarMenu(Commands.ImageMenu, new MenuProvider()
-                .Append(Commands.ViewImage)
+                .Append(Commands.View)
+                .Append(Commands.ViewInNewWindow)
                 .Separator()
                 .Append(Commands.Crop)
                 .Append(Commands.BrightCont)
@@ -602,7 +618,7 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
-    private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
+    private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowPreview(false);
 
     private void ListViewSelectionChanged(object? sender, EventArgs e)
     {

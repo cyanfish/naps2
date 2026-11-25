@@ -141,10 +141,15 @@ public class DesktopCommands : IDisposable
             Text = UiStrings.Image,
             IconName = "picture_edit"
         };
-        ViewImage = new ActionCommand(desktopSubFormController.ShowViewerForm)
+        View = new ActionCommand(() => desktopSubFormController.ShowPreview(false))
         {
             Text = UiStrings.View,
             IconName = "zoom"
+        };
+        ViewInNewWindow = new ActionCommand(() => desktopSubFormController.ShowPreview(true))
+        {
+            Text = UiStrings.ViewInNewWindow,
+            IconName = "new_window"
         };
         Crop = new ActionCommand(desktopSubFormController.ShowCropForm)
         {
@@ -469,7 +474,8 @@ public class DesktopCommands : IDisposable
     public ActionCommand EmailSettings { get; set; }
     public ActionCommand Print { get; set; }
     public ActionCommand ImageMenu { get; set; }
-    public ActionCommand ViewImage { get; set; }
+    public ActionCommand View { get; set; }
+    public ActionCommand ViewInNewWindow { get; set; }
     public ActionCommand Crop { get; set; }
     public ActionCommand BrightCont { get; set; }
     public ActionCommand HueSat { get; set; }

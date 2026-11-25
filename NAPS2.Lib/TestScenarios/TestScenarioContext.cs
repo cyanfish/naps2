@@ -392,9 +392,12 @@ public class TestScenarioContext
     /// </summary>
     public void RunPreviewCommand(string name)
     {
-        RunCommand(Ui(() => FindEtoWindow(null) is PreviewForm preview
-            ? FindCommand(preview.Pane.Commands, name)
-            : throw new TestScenarioException("The preview window isn't open")));
+        RunCommand(Ui(() => FindCommand(FindEtoWindow(null) switch
+        {
+            PreviewForm preview => preview.Pane.Commands,
+            DesktopForm { PreviewPane.IsVisible: true } desktop => desktop.PreviewPane.Commands,
+            _ => throw new TestScenarioException("The preview isn't open")
+        }, name)));
     }
 
     private Command FindCommand(DesktopCommands commands, string name) =>

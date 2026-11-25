@@ -7,12 +7,16 @@ using NAPS2.EtoForms.Widgets;
 namespace NAPS2.EtoForms.Desktop;
 
 /// <summary>
-/// Shows an image at full size with navigation, zoom and inline editing. This is the content of the preview window.
+/// Shows an image at full size with navigation, zoom and inline editing. This is hosted either docked in the desktop
+/// form or in the preview window.
 /// </summary>
 public class PreviewPane : IDisposable
 {
+    public const int MinWidth = 420;
+
     private readonly Naps2Config _config;
     private readonly UiImageList _imageList;
+    private readonly ColorScheme _colorScheme;
     private readonly EditWithController _editWithController;
     private readonly KeyboardShortcutManager _previewKsm = new();
     private readonly KeyboardShortcutManager _editKsm = new();
@@ -24,9 +28,12 @@ public class PreviewPane : IDisposable
     private readonly LayoutPlaceholder _editorPlaceholder = new();
     private readonly Label _pageLabel = new();
     private readonly LayoutControl _pageLabelControl;
+    private readonly Panel _separator = new();
+    private readonly LayoutControl _topInset = C.Spacer();
     private readonly Dictionary<Type, CheckToolItem> _editToolItems = new();
     private readonly Dictionary<Type, ToggleButton> _editToggles = new();
     private Window? _window;
+    private bool _windowed;
     private UiImage? _currentImage;
     private Bitmap? _viewBitmap;
     private int _renderVersion;
@@ -38,6 +45,7 @@ public class PreviewPane : IDisposable
     {
         _config = config;
         _imageList = imageList;
+        _colorScheme = colorScheme;
         _editWithController = editWithController;
 
         Commands = desktopCommands.WithSelection(
@@ -58,7 +66,10 @@ public class PreviewPane : IDisposable
         _pageLabelControl = _pageLabel.AlignCenter().Padding(left: 4);
         ImageViewer.ColorScheme = colorScheme;
         _imageList.ImagesUpdated += ImageList_ImagesUpdated;
+        _imageList.SelectionChanged += ImageList_SelectionChanged;
         _editWithController.AppChanged += EditWithController_AppChanged;
+        _colorScheme.ColorSchemeChanged += ColorSchemeChanged;
+        UpdateColors();
 
         GoToPrevCommand = new ActionCommand(() => GoTo(ImageIndex - 1))
         {
@@ -96,6 +107,11 @@ public class PreviewPane : IDisposable
             Text = UiStrings.Delete,
             IconName = "cross"
         };
+        CloseCommand = new ActionCommand(Hide)
+        {
+            Text = UiStrings.ClosePreview,
+            IconName = "cancel"
+        };
     }
 
     public ScrollZoomImageViewer ImageViewer { get; } = new();
@@ -108,6 +124,7 @@ public class PreviewPane : IDisposable
     public ActionCommand ZoomOutCommand { get; }
     public ActionCommand ZoomWindowCommand { get; }
     public ActionCommand ZoomActualCommand { get; }
+    public ActionCommand CloseCommand { get; }
 
     public bool IsVisible => _paneVis.IsVisible;
 
@@ -122,16 +139,21 @@ public class PreviewPane : IDisposable
     public event EventHandler? Closed;
     public event EventHandler? PageChanged;
 
-    public LayoutElement CreateView(Window window)
+    public LayoutElement CreateView(Window window, bool windowed)
     {
         _window = window;
+        _windowed = windowed;
         AssignKeyboardShortcuts();
         // Gtk toolbar items need their icons before they're added to the toolbar, and those need the window scale
         window.LoadComplete += (_, _) => UpdateHeader();
-        return L.Column(
-            _headerPlaceholder,
-            ImageViewer.Scale(),
-            L.Column(_editorPlaceholder).Padding(6).Visible(_editVis)
+        return L.Row(
+            windowed ? C.None() : _separator.Width(1),
+            L.Column(
+                windowed ? C.None() : _topInset,
+                _headerPlaceholder,
+                ImageViewer.Scale(),
+                L.Column(_editorPlaceholder).Padding(6).Visible(_editVis)
+            ).Spacing(0).Scale()
         ).Spacing(0).Visible(_paneVis);
     }
 
@@ -147,7 +169,7 @@ public class PreviewPane : IDisposable
     {
         var edit = EtoPlatform.Current.SupportsInlinePreviewToolBar ? CreateEditToolBar() : CreateEditButtons();
         var centeredEdit = L.Row(C.Filler(), edit, C.Filler());
-        if (EtoPlatform.Current.IsMac)
+        if (_windowed && EtoPlatform.Current.IsMac)
         {
             // The rest of the header is in the window toolbar
             return centeredEdit.Padding(6);
@@ -163,7 +185,8 @@ public class PreviewPane : IDisposable
         var right = L.Row(
             HeaderButton(CreateHeaderButton(ZoomWindowCommand)),
             HeaderButton(zoomOut).SpacingAfter(0),
-            HeaderButton(zoomIn)
+            HeaderButton(zoomIn).SpacingAfter(12),
+            _windowed ? C.None() : HeaderButton(CreateHeaderButton(CloseCommand))
         ).Spacing(2);
         return L.Column(L.Adaptive(
             L.Row(left, centeredEdit.Scale(), right),
@@ -367,11 +390,19 @@ public class PreviewPane : IDisposable
         _updatingEditTools = false;
     }
 
+    private void ColorSchemeChanged(object? sender, EventArgs e) => Invoker.Current.Invoke(UpdateColors);
+
+    private void UpdateColors()
+    {
+        _separator.BackgroundColor = _colorScheme.SeparatorColor;
+    }
+
     public void Show(UiImage image)
     {
         EndEdit();
         SetCurrentImage(image);
         Commands.UpdateState();
+        _topInset.Height = EtoPlatform.Current.GetTopContentInset(_window!);
         _paneVis.IsVisible = true;
         UpdatePage();
         UpdateImage().AssertNoAwait();
@@ -410,6 +441,21 @@ public class PreviewPane : IDisposable
             EndEdit();
             UpdateImage().AssertNoAwait();
         });
+    }
+
+    private void ImageList_SelectionChanged(object? sender, EventArgs e)
+    {
+        Invoker.Current.InvokeDispatch(SyncToSelection);
+    }
+
+    private void SyncToSelection()
+    {
+        if (_windowed || !IsVisible || _editor != null) return;
+        var selected = _imageList.Selection.FirstOrDefault();
+        if (selected != null && selected != _currentImage)
+        {
+            Show(selected);
+        }
     }
 
     private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
@@ -498,7 +544,11 @@ public class PreviewPane : IDisposable
         editor.ParentWindow = _window;
         editor.Viewer = ImageViewer;
         editor.Initialize();
-        editor.Finished += (_, _) => EndEdit();
+        editor.Finished += (_, _) =>
+        {
+            EndEdit();
+            SyncToSelection();
+        };
         editor.OkButton.Text = UiStrings.Apply;
         _editorPlaceholder.Content = editor.CreateLayout();
         _editVis.IsVisible = true;
@@ -539,6 +589,11 @@ public class PreviewPane : IDisposable
             _editor.CancelButton.PerformClick();
             return true;
         }
+        if (keys == Keys.Enter && !_windowed)
+        {
+            _editor.OkButton.PerformClick();
+            return true;
+        }
         var args = new KeyEventArgs(keys, KeyEventType.KeyDown);
         _editor.HandleKeyDown(args);
         return args.Handled || _editKsm.Perform(keys);
@@ -563,6 +618,12 @@ public class PreviewPane : IDisposable
         _previewKsm.Assign("PageDown", GoToNextCommand);
         _previewKsm.Assign("PageUp", GoToPrevCommand);
         _editKsm.Assign("Mod+0", ZoomActualCommand);
+
+        if (!_windowed)
+        {
+            // The desktop form has its own shortcuts for everything else
+            return;
+        }
 
         _previewKsm.Assign("Del", DeleteCurrentImageCommand);
         _previewKsm.Assign("Mod+Z", Commands.Undo);
@@ -623,7 +684,9 @@ public class PreviewPane : IDisposable
         ImageViewer.SetImage(null);
         _viewBitmap?.Dispose();
         _imageList.ImagesUpdated -= ImageList_ImagesUpdated;
+        _imageList.SelectionChanged -= ImageList_SelectionChanged;
         _editWithController.AppChanged -= EditWithController_AppChanged;
+        _colorScheme.ColorSchemeChanged -= ColorSchemeChanged;
         Commands.Dispose();
     }
 }

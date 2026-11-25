@@ -232,6 +232,9 @@ public class CommonConfig
     public int SidebarWidth { get; set; }
 
     [User]
+    public int PreviewPaneWidth { get; set; }
+
+    [User]
     public string? EditWithAppPath { get; set; }
 
     [User]

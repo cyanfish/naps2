@@ -46,11 +46,12 @@ public class GtkDesktopForm : DesktopForm
         IDarkModeProvider darkModeProvider,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController)
+        EditWithController editWithController,
+        PreviewPane previewPane)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider,
-            editWithController)
+            editWithController, previewPane)
     {
         ((GtkDarkModeProvider) darkModeProvider).StyleContext =
             Eto.Forms.Gtk3Helpers.ToNative(this).StyleContext;
