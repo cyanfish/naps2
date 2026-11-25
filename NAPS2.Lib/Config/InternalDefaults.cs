@@ -27,6 +27,8 @@ public static class InternalDefaults
             ScanChangesDefaultProfile = true,
             ScanButtonDefaultAction = ScanButtonDefaultAction.ScanWithDefaultProfile,
             SaveButtonDefaultAction = SaveButtonDefaultAction.SaveAll,
+            EnablePreviewPane = true,
+            PreviewPaneMode = PreviewPaneMode.LastUsed,
             HiddenButtons = ToolbarButtons.None,
             ExtraButtons = ToolbarButtons.None,
             DisableAutoSave = false,

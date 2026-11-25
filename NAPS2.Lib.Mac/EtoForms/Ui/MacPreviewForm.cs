@@ -22,8 +22,9 @@ public class MacPreviewForm : PreviewForm
             MacToolbarItems.Create("zoomfit", Pane.ZoomWindowCommand),
             MacToolbarItems.Create("zoomout", Pane.ZoomOutCommand),
             MacToolbarItems.Create("zoomin", Pane.ZoomInCommand),
-            null,
-            MacToolbarItems.Create("previewpane", Pane.ViewInPreviewPaneCommand)
+            ..Config.Get(c => c.EnablePreviewPane)
+                ? new[] { null, MacToolbarItems.Create("previewpane", Pane.ViewInPreviewPaneCommand) }
+                : []
         ]);
         toolbar.AllowsUserCustomization = true;
         // toolbar.AutosavesConfiguration = true;

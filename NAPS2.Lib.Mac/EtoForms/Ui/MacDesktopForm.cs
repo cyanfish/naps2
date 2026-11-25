@@ -174,7 +174,7 @@ public class MacDesktopForm : DesktopForm
                     .Append(Commands.BatchScan)),
                 CreateSubMenu(Commands.ImageMenu, new MenuProvider()
                     .Append(Commands.View)
-                    .Append(Commands.ViewInNewWindow)
+                    .Dynamic(_viewInNewWindowCommands)
                     .Append(Commands.ZoomIn)
                     .Append(Commands.ZoomOut)
                     .Separator()

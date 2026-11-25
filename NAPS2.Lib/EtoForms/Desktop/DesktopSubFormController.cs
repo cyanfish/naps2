@@ -121,7 +121,13 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public void ShowPreview()
     {
-        if (_config.Get(c => c.PreviewLastShownInPane))
+        bool showInPane = _config.Get(c => c.PreviewPaneMode) switch
+        {
+            PreviewPaneMode.PreviewPane => true,
+            PreviewPaneMode.NewWindow => false,
+            _ => _config.Get(c => c.PreviewLastShownInPane)
+        };
+        if (showInPane)
         {
             ShowPreviewPane();
         }
@@ -133,6 +139,11 @@ public class DesktopSubFormController : IDesktopSubFormController
 
     public void ShowPreviewPane()
     {
+        if (!_config.Get(c => c.EnablePreviewPane))
+        {
+            ShowPreviewWindow();
+            return;
+        }
         if (Selection.FirstOrDefault() is not { } image) return;
         _desktopFormProvider.DesktopForm.PreviewPane.Show(image);
     }

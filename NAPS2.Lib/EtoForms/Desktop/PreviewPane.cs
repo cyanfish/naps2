@@ -199,7 +199,9 @@ public class PreviewPane : IDisposable
             HeaderButton(CreateHeaderButton(ZoomWindowCommand)),
             HeaderButton(zoomOut).SpacingAfter(0),
             HeaderButton(zoomIn).SpacingAfter(12),
-            HeaderButton(CreateHeaderButton(_windowed ? ViewInPreviewPaneCommand : ViewInNewWindowCommand)),
+            _windowed && !_config.Get(c => c.EnablePreviewPane)
+                ? C.None()
+                : HeaderButton(CreateHeaderButton(_windowed ? ViewInPreviewPaneCommand : ViewInNewWindowCommand)),
             _windowed ? C.None() : HeaderButton(CreateHeaderButton(CloseCommand))
         ).Spacing(2);
         return L.Column(L.Adaptive(

@@ -37,6 +37,7 @@ public abstract class DesktopForm : EtoFormBase
     private readonly ListProvider<Command> _languageMenuCommands = new();
     protected readonly ListProvider<Command> _editWithCommands = new();
     protected readonly ListProvider<Command> _manualDuplexPreviewCommands = new();
+    protected readonly ListProvider<Command> _viewInNewWindowCommands = new();
     private readonly ContextMenu _contextMenu = new();
 
     private readonly NotificationArea _notificationArea;
@@ -95,6 +96,7 @@ public abstract class DesktopForm : EtoFormBase
         UpdateProfilesToolbar();
         InitLanguageDropdown();
         UpdateManualDuplex();
+        UpdatePreviewPane();
 
         _listView = EtoPlatform.Current.CreateListView(imageListViewBehavior);
         _listView.Selection = ImageList.Selection;
@@ -184,7 +186,9 @@ public abstract class DesktopForm : EtoFormBase
             _contextMenu.Items.AddRange(
             [
                 C.ButtonMenuItem(this, Commands.View),
-                C.ButtonMenuItem(this, Commands.ViewInNewWindow),
+                ..Config.Get(c => c.EnablePreviewPane)
+                    ? new[] { C.ButtonMenuItem(this, Commands.ViewInNewWindow) }
+                    : [],
                 new SeparatorMenuItem(),
                 C.ButtonMenuItem(this, Commands.SelectAll),
                 C.ButtonMenuItem(this, Commands.Copy),
@@ -365,7 +369,7 @@ public abstract class DesktopForm : EtoFormBase
         if (ShowButton(ToolbarButtons.Image))
             CreateToolbarMenu(Commands.ImageMenu, new MenuProvider()
                 .Append(Commands.View)
-                .Append(Commands.ViewInNewWindow)
+                .Dynamic(_viewInNewWindowCommands)
                 .Separator()
                 .Append(Commands.Crop)
                 .Append(Commands.BrightCont)
@@ -593,6 +597,19 @@ public abstract class DesktopForm : EtoFormBase
         _manualDuplexPreviewCommands.Value = Config.Get(c => c.ManualDuplexSettings.AlwaysShowPreview)
             ? []
             : [Commands.ManualDuplexPreview];
+    }
+
+    public void UpdatePreviewPane()
+    {
+        if (Config.Get(c => c.EnablePreviewPane))
+        {
+            _viewInNewWindowCommands.Value = [Commands.ViewInNewWindow];
+        }
+        else
+        {
+            _viewInNewWindowCommands.Value = [];
+            _previewPane.Hide();
+        }
     }
 
     protected virtual void UpdateTitle(ScanProfile? defaultProfile)

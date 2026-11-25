@@ -15,6 +15,8 @@ internal class GeneralSettingsPanel : SettingsPanel
     private readonly CheckBox _showPageNumbers = C.CheckBox(UiStrings.ShowPageNumbers);
     private readonly EnumDropDownWidget<ScanButtonDefaultAction> _scanButtonDefaultAction = new(scale: false);
     private readonly EnumDropDownWidget<SaveButtonDefaultAction> _saveButtonDefaultAction = new(scale: false);
+    private readonly CheckBox _enablePreviewPane = C.CheckBox(UiStrings.EnablePreviewPane);
+    private readonly EnumDropDownWidget<PreviewPaneMode> _previewPaneMode = new(scale: false);
     private readonly CheckBox _clearAfterSaving = C.CheckBox(UiStrings.ClearAfterSaving);
     private readonly CheckBox _keepSession = C.CheckBox(UiStrings.KeepSession);
     private readonly CheckBox _singleInstance = C.CheckBox(UiStrings.SingleInstanceDesc);
@@ -22,6 +24,7 @@ internal class GeneralSettingsPanel : SettingsPanel
     public GeneralSettingsPanel(IFormBase form, DesktopFormProvider desktopFormProvider) : base(form)
     {
         _desktopFormProvider = desktopFormProvider;
+        _enablePreviewPane.CheckedChanged += (_, _) => UpdateEnabled(Config);
         UpdateValues(Config);
     }
 
@@ -55,7 +58,12 @@ internal class GeneralSettingsPanel : SettingsPanel
                             C.Label(UiStrings.SaveButtonDefaultAction).AlignCenter().Padding(right: 20),
                             _saveButtonDefaultAction
                         ).Aligned()
-                        : C.None()
+                        : C.None(),
+                    _enablePreviewPane,
+                    L.Row(
+                        C.Label(UiStrings.PreviewPaneMode).AlignCenter().Padding(right: 20),
+                        _previewPaneMode
+                    ).Aligned()
                 )
             ),
             L.GroupBox(
@@ -87,9 +95,18 @@ internal class GeneralSettingsPanel : SettingsPanel
         _scanButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.ScanButtonDefaultAction);
         _saveButtonDefaultAction.SelectedItem = config.Get(c => c.SaveButtonDefaultAction);
         _saveButtonDefaultAction.Enabled = !config.AppLocked.Has(c => c.SaveButtonDefaultAction);
+        UpdateCheckbox(_enablePreviewPane, c => c.EnablePreviewPane);
+        _previewPaneMode.SelectedItem = config.Get(c => c.PreviewPaneMode);
+        UpdateEnabled(config);
         UpdateCheckbox(_clearAfterSaving, c => c.DeleteAfterSaving);
         UpdateCheckbox(_keepSession, c => c.KeepSession);
         UpdateCheckbox(_singleInstance, c => c.SingleInstance);
+    }
+
+    private void UpdateEnabled(Naps2Config config)
+    {
+        _previewPaneMode.Enabled =
+            _enablePreviewPane.IsChecked() && !config.AppLocked.Has(c => c.PreviewPaneMode);
     }
 
     public override void Save()
@@ -101,6 +118,9 @@ internal class GeneralSettingsPanel : SettingsPanel
             transact.SetIfChanged(Config, c => c.ShowPageNumbers, _showPageNumbers.IsChecked());
         transact.SetIfChanged(Config, c => c.ScanButtonDefaultAction, _scanButtonDefaultAction.SelectedItem);
         transact.SetIfChanged(Config, c => c.SaveButtonDefaultAction, _saveButtonDefaultAction.SelectedItem);
+        bool previewPaneChanged =
+            transact.SetIfChanged(Config, c => c.EnablePreviewPane, _enablePreviewPane.IsChecked());
+        transact.SetIfChanged(Config, c => c.PreviewPaneMode, _previewPaneMode.SelectedItem);
         transact.SetIfChanged(Config, c => c.DeleteAfterSaving, _clearAfterSaving.IsChecked());
         transact.SetIfChanged(Config, c => c.KeepSession, _keepSession.IsChecked());
         transact.SetIfChanged(Config, c => c.SingleInstance, _singleInstance.IsChecked());
@@ -109,6 +129,10 @@ internal class GeneralSettingsPanel : SettingsPanel
         if (showPageNumbersChanged)
         {
             _desktopFormProvider.DesktopForm.UpdateListView();
+        }
+        if (previewPaneChanged)
+        {
+            _desktopFormProvider.DesktopForm.UpdatePreviewPane();
         }
         if (themeChanged)
         {

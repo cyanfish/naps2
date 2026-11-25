@@ -60,6 +60,12 @@ public class CommonConfig
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
     [Common]
+    public bool EnablePreviewPane { get; set; }
+
+    [Common]
+    public PreviewPaneMode PreviewPaneMode { get; set; }
+
+    [Common]
     public ToolbarButtons HiddenButtons { get; set; }
 
     [Common]

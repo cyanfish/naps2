@@ -2823,6 +2823,18 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string EnablePreviewPane {
+            get {
+                return ResourceManager.GetString("EnablePreviewPane", resourceCulture);
+            }
+        }
+        
+        internal static string PreviewPaneMode {
+            get {
+                return ResourceManager.GetString("PreviewPaneMode", resourceCulture);
+            }
+        }
+        
         internal static string XOfY {
             get {
                 return ResourceManager.GetString("XOfY", resourceCulture);
