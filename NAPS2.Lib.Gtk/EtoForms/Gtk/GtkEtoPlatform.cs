@@ -492,6 +492,15 @@ public class GtkEtoPlatform : EtoPlatform
         return native.AsEto();
     }
 
+    public override void SetDefaultButton(Window window, Button? button)
+    {
+        base.SetDefaultButton(window, button);
+        if (window is not Dialog)
+        {
+            button?.ToNative().StyleContext.AddClass("suggested-action");
+        }
+    }
+
     public override void SetAccessibleName(Control control, string name) =>
         control.ToNative().Accessible.Name = name;
 

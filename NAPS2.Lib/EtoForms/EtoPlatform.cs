@@ -176,6 +176,14 @@ public abstract class EtoPlatform
     {
     }
 
+    public virtual void SetDefaultButton(Window window, Button? button)
+    {
+        if (window is Dialog dialog)
+        {
+            dialog.DefaultButton = button;
+        }
+    }
+
     public virtual void SetAccessibleName(Control control, string name)
     {
     }

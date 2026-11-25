@@ -519,6 +519,15 @@ public class WpfEtoPlatform : EtoPlatform
         return buttons[dialog.ShowModal()].Result;
     }
 
+    public override void SetDefaultButton(Window window, Button? button)
+    {
+        base.SetDefaultButton(window, button);
+        if (window is not Dialog && button != null)
+        {
+            ((SWC.Button) button.ToNative()).IsDefault = true;
+        }
+    }
+
     public override void SetAccessibleName(Control control, string name) =>
         AutomationProperties.SetName(control.ToNative(), name);
 

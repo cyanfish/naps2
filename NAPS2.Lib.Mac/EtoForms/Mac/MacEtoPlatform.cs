@@ -315,6 +315,15 @@ public class MacEtoPlatform : EtoPlatform
         NSSplitViewController SplitViewController,
         NSSplitViewItem SidebarItem);
 
+    public override void SetDefaultButton(Window window, Button? button)
+    {
+        base.SetDefaultButton(window, button);
+        if (window is not Dialog && button != null)
+        {
+            ((NSButton) button.ToNative()).KeyEquivalent = "\r";
+        }
+    }
+
     public override Size GetClientSize(Window window, bool excludeToolbars = false)
     {
         if (_sidebars.TryGetValue(window, out var sidebar))

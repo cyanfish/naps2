@@ -434,6 +434,15 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
     }
 
+    public override void SetDefaultButton(Window window, Button? button)
+    {
+        base.SetDefaultButton(window, button);
+        if (window is not Dialog)
+        {
+            ((WF.Form) window.ControlObject).AcceptButton = (WF.IButtonControl?) button?.ToNative();
+        }
+    }
+
     public override void SetAccessibleName(Control control, string name) =>
         control.ToNative().AccessibleName = name;
 
