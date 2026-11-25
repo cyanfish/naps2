@@ -479,7 +479,7 @@ public class GtkEtoPlatform : EtoPlatform
         var native = (GTK.Toolbar) toolBar.ControlObject;
         native.IconSize = GTK.IconSize.SmallToolbar;
         native.Style = GTK.ToolbarStyle.Icons;
-        native.StyleContext.AddClass("inline-toolbar");
+        native.StyleContext.AddClass("preview-toolbar");
         foreach (var item in native.Children.OfType<GTK.ToolItem>())
         {
             item.Homogeneous = false;
@@ -487,9 +487,13 @@ public class GtkEtoPlatform : EtoPlatform
         }
         native.Mapped += (_, _) =>
         {
-            foreach (var item in native.Children.OfType<GTK.ToolButton>())
+            foreach (var item in toolBar.Items)
             {
-                item.IconWidget?.Show();
+                if (item.ControlObject is GTK.ToolButton button && item.Image != null)
+                {
+                    button.IconWidget = item.Image.ToGdk().ToScaledImage(native.ScaleFactor);
+                    button.IconWidget.Show();
+                }
             }
         };
         return native.AsEto();

@@ -79,8 +79,9 @@ public class GtkDesktopForm : DesktopForm
             .desktop-toolbar .toggle { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button button { padding: 0 5px; }
+            .preview-toolbar-button:disabled image { opacity: 0.4; }
             toolbar { border-bottom: 1px solid " + sepColor + @"; }
-            toolbar.inline-toolbar { border-bottom: none; background: none; padding: 0; }
+            toolbar.preview-toolbar { border-bottom: none; background: none; padding: 0; }
             toolbar.dock-left { border-bottom: none; border-right: 1px solid " + sepColor + @"; }
             toolbar.dock-bottom { border-bottom: none; border-top: 1px solid " + sepColor + @"; }
             toolbar.dock-right { border-bottom: none; border-left: 1px solid " + sepColor + @"; }
