@@ -272,7 +272,7 @@ public class WinFormsDesktopForm : DesktopForm
     {
         var pen = new Pen(_colorScheme.SeparatorColor.ToSD());
 
-        var splitter = ((LayoutLeftPanel) LayoutController.Content!).Splitter;
+        var splitter = ((LayoutSidePanel) LayoutController.Content!).Splitter;
         var panel1 = (WF.Panel) splitter.Panel1.ToNative();
         var panel2 = (WF.Panel) splitter.Panel2.ToNative();
         var split = (WF.SplitContainer) splitter.ToNative();

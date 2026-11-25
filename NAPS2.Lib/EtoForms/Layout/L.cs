@@ -35,14 +35,14 @@ public static class L
         return new BufferLayoutElement(element, left, top, right, bottom);
     }
 
-    public static LayoutLeftPanel LeftPanel(LayoutElement left, LayoutElement right)
+    public static LayoutSidePanel LeftPanel(LayoutElement left, LayoutElement right)
     {
-        return new LayoutLeftPanel(left, right);
+        return new LayoutSidePanel(left, right, false);
     }
 
-    public static LayoutRightPanel RightPanel(LayoutElement left, LayoutElement right)
+    public static LayoutSidePanel RightPanel(LayoutElement left, LayoutElement right)
     {
-        return new LayoutRightPanel(left, right);
+        return new LayoutSidePanel(left, right, true);
     }
 
     public static LayoutAdaptive Adaptive(LayoutElement wide, LayoutElement narrow)
