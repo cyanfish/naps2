@@ -136,6 +136,8 @@ public abstract class EtoPlatform
         return window.ClientSize;
     }
 
+    public virtual int GetTopContentInset(Window window) => 0;
+
     public virtual void SetClientSize(Window window, Size clientSize)
     {
         window.ClientSize = clientSize;

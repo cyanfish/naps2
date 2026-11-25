@@ -324,6 +324,16 @@ public class MacEtoPlatform : EtoPlatform
         }
     }
 
+    public override int GetTopContentInset(Window window)
+    {
+        var nsWindow = window.ToNative();
+        if (nsWindow.ContentView == null || !nsWindow.StyleMask.HasFlag(NSWindowStyle.FullSizeContentView))
+        {
+            return 0;
+        }
+        return (int) Math.Round(nsWindow.ContentView.Frame.Height - nsWindow.ContentLayoutRect.Height);
+    }
+
     public override Size GetClientSize(Window window, bool excludeToolbars = false)
     {
         if (_sidebars.TryGetValue(window, out var sidebar))
