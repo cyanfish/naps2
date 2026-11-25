@@ -217,8 +217,23 @@ public class PreviewPane : IDisposable
 
     private static LayoutControl HeaderButton(Button button) => button.Width(EtoPlatform.Current.IsWpf ? 32 : 30);
 
-    private bool ShowSavePdf => !_config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SavePdf);
-    private bool ShowSaveImages => !_config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.SaveImages);
+    private IEnumerable<(ActionCommand Command, string? IconName)> GetSaveCommands()
+    {
+        if (PlatformCompat.System.CombinedPdfAndImageSaving)
+        {
+            yield return (Commands.SaveSelected, null);
+            yield break;
+        }
+        var hiddenButtons = _config.Get(c => c.HiddenButtons);
+        if (!hiddenButtons.HasFlag(ToolbarButtons.SavePdf))
+        {
+            yield return (Commands.SaveSelectedPdf, "file_extension_pdf");
+        }
+        if (!hiddenButtons.HasFlag(ToolbarButtons.SaveImages))
+        {
+            yield return (Commands.SaveSelectedImages, "picture");
+        }
+    }
 
     private LayoutElement CreateEditToolBar()
     {
@@ -256,22 +271,19 @@ public class PreviewPane : IDisposable
             MakeToolButton(Commands.EditWithPick),
             new SeparatorToolItem(),
             MakeToolButton(Commands.Undo),
-            MakeToolButton(Commands.Redo),
-            new SeparatorToolItem()
+            MakeToolButton(Commands.Redo)
         ]);
-        if (ShowSavePdf)
+        if (_windowed)
         {
-            toolBar.Items.Add(MakeToolButton(Commands.SaveSelectedPdf, "file_extension_pdf"));
-        }
-        if (ShowSaveImages)
-        {
-            toolBar.Items.Add(MakeToolButton(Commands.SaveSelectedImages, "picture"));
-        }
-        if (ShowSavePdf || ShowSaveImages)
-        {
+            var saveCommands = GetSaveCommands().ToList();
             toolBar.Items.Add(new SeparatorToolItem());
+            toolBar.Items.AddRange(saveCommands.Select(x => MakeToolButton(x.Command, x.IconName)));
+            if (saveCommands.Count > 0)
+            {
+                toolBar.Items.Add(new SeparatorToolItem());
+            }
+            toolBar.Items.Add(MakeToolButton(DeleteCurrentImageCommand));
         }
-        toolBar.Items.Add(MakeToolButton(DeleteCurrentImageCommand));
         return EtoPlatform.Current.CreateInlinePreviewToolBar(toolBar);
     }
 
@@ -340,22 +352,12 @@ public class PreviewPane : IDisposable
             buttons.Add(HeaderButton(CreateHeaderButton(Commands.CreateEditWithApp())));
         }
         buttons.Add(HeaderButton(CreateHeaderButton(Commands.EditWithPick)).SpacingAfter(12));
-        if (PlatformCompat.System.CombinedPdfAndImageSaving)
+        if (_windowed)
         {
-            buttons.Add(HeaderButton(CreateHeaderButton(Commands.SaveSelected)).SpacingAfter(12));
+            buttons.AddRange(GetSaveCommands().Select(x =>
+                HeaderButton(CreateHeaderButton(x.Command, x.IconName)).SpacingAfter(12)));
+            buttons.Add(HeaderButton(CreateHeaderButton(DeleteCurrentImageCommand)));
         }
-        else
-        {
-            if (ShowSavePdf)
-            {
-                buttons.Add(HeaderButton(CreateHeaderButton(Commands.SaveSelectedPdf, "file_extension_pdf")));
-            }
-            if (ShowSaveImages)
-            {
-                buttons.Add(HeaderButton(CreateHeaderButton(Commands.SaveSelectedImages, "picture")));
-            }
-        }
-        buttons.Add(HeaderButton(CreateHeaderButton(DeleteCurrentImageCommand)));
         return L.Row(buttons.ToArray()).Spacing(2);
     }
 
