@@ -212,6 +212,11 @@ public class ScrollZoomImageViewer
         float scaleY = RenderSize.Height / (float) image.Height;
         if (scaleX <= 1)
         {
+            if (EtoPlatform.Current.IsGtk)
+            {
+                // The default is plain bilinear, which makes text unreadable when scaled down
+                graphics.ImageInterpolation = ImageInterpolation.Medium;
+            }
             graphics.DrawImage(image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
             return;
         }
