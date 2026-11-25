@@ -469,6 +469,29 @@ public class GtkEtoPlatform : EtoPlatform
         }
     }
 
+    public override bool SupportsInlinePreviewToolBar => true;
+
+    public override Control CreateInlinePreviewToolBar(ToolBar toolBar)
+    {
+        var native = (GTK.Toolbar) toolBar.ControlObject;
+        native.IconSize = GTK.IconSize.SmallToolbar;
+        native.Style = GTK.ToolbarStyle.Icons;
+        native.StyleContext.AddClass("inline-toolbar");
+        foreach (var item in native.Children.OfType<GTK.ToolItem>())
+        {
+            item.Homogeneous = false;
+            item.StyleContext.AddClass("preview-toolbar-button");
+        }
+        native.Mapped += (_, _) =>
+        {
+            foreach (var item in native.Children.OfType<GTK.ToolButton>())
+            {
+                item.IconWidget?.Show();
+            }
+        };
+        return native.AsEto();
+    }
+
     public override void SetAccessibleName(Control control, string name) =>
         control.ToNative().Accessible.Name = name;
 

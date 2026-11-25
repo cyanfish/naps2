@@ -493,6 +493,14 @@ public class WpfEtoPlatform : EtoPlatform
         }
     }
 
+    public override bool SupportsInlinePreviewToolBar => true;
+
+    public override Control CreateInlinePreviewToolBar(ToolBar toolBar)
+    {
+        ConfigureSmallToolBar(toolBar);
+        return ((SWC.ToolBar) toolBar.ControlObject).ToEto();
+    }
+
     public override void ConfigureDonateButton(Button button)
     {
         var native = (SWC.Control) button.ToNative();

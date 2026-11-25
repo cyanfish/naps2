@@ -55,6 +55,9 @@ public abstract class EtoPlatform
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract ISettingsNavigator CreateSettingsNavigator();
 
+    public virtual bool SupportsInlinePreviewToolBar => false;
+    public virtual Control CreateInlinePreviewToolBar(ToolBar toolBar) => throw new NotSupportedException();
+
     public virtual bool SupportsWindowSidebar => false;
     public virtual void AttachWindowSidebar(Window window, Control sidebar, WindowSidebarOptions options) =>
         throw new NotSupportedException();

@@ -79,6 +79,7 @@ public class GtkDesktopForm : DesktopForm
             .preview-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button button { padding: 0 5px; }
             toolbar { border-bottom: 1px solid " + sepColor + @"; }
+            toolbar.inline-toolbar { border-bottom: none; background: none; padding: 0; }
             toolbar.dock-left { border-bottom: none; border-right: 1px solid " + sepColor + @"; }
             toolbar.dock-bottom { border-bottom: none; border-top: 1px solid " + sepColor + @"; }
             toolbar.dock-right { border-bottom: none; border-left: 1px solid " + sepColor + @"; }

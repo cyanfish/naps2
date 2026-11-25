@@ -97,6 +97,32 @@ public class WinFormsEtoPlatform : EtoPlatform
         }
     }
 
+    public override bool SupportsInlinePreviewToolBar => true;
+
+    public override Control CreateInlinePreviewToolBar(ToolBar toolBar)
+    {
+        var toolStrip = (WF.ToolStrip) toolBar.ControlObject;
+        toolStrip.Dock = WF.DockStyle.None;
+        toolStrip.GripStyle = WF.ToolStripGripStyle.Hidden;
+        toolStrip.BackColor = SD.Color.Transparent;
+        toolStrip.Renderer = new PlainToolStripRenderer();
+        var control = toolStrip.ToEto();
+        AttachDpiDependency(control,
+            scale => toolStrip.ImageScalingSize = new SD.Size((int) (16 * scale), (int) (16 * scale)));
+        return control;
+    }
+
+    private class PlainToolStripRenderer : WF.ToolStripProfessionalRenderer
+    {
+        protected override void OnRenderToolStripBackground(WF.ToolStripRenderEventArgs e)
+        {
+        }
+
+        protected override void OnRenderToolStripBorder(WF.ToolStripRenderEventArgs e)
+        {
+        }
+    }
+
     public override void ConfigureDonateButton(Button button)
     {
         var native = (WF.Button) button.ToNative();
