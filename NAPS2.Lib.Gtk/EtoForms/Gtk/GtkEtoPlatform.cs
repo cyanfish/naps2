@@ -90,7 +90,7 @@ public class GtkEtoPlatform : EtoPlatform
                 button.ToNative().StyleContext.AddClass("compact");
             }
         }
-        AttachDpiDependency(button, _ => button.ScaleImage());
+        AttachIconDependency(button, _ => button.ScaleImage());
     }
 
     public override Bitmap ToBitmap(IMemoryImage image)
@@ -422,6 +422,20 @@ public class GtkEtoPlatform : EtoPlatform
         {
             control.Load += (_, _) => callback(GetScaleFactor(control.ParentWindow));
         }
+    }
+
+    public override void AttachIconDependency(Control control, Action<float> callback)
+    {
+        AttachDpiDependency(control, callback);
+        // Icons can use the theme's text color
+        void OnColorSchemeChanged(object? sender, EventArgs e) =>
+            Invoker.Current.Invoke(() => callback(GetScaleFactor(control.ParentWindow)));
+        if (control.Loaded)
+        {
+            ColorScheme.ColorSchemeChanged += OnColorSchemeChanged;
+        }
+        control.Load += (_, _) => ColorScheme.ColorSchemeChanged += OnColorSchemeChanged;
+        control.UnLoad += (_, _) => ColorScheme.ColorSchemeChanged -= OnColorSchemeChanged;
     }
 
     public override void ConfigureDonateButton(Button button)
