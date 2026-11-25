@@ -106,6 +106,8 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         storage.Set(x => x.ScanChangesDefaultProfile, c.ScanChangesDefaultProfile);
         storage.Set(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction);
         storage.Set(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction);
+        storage.Set(x => x.EnablePreviewPane, c.EnablePreviewPane);
+        storage.Set(x => x.PreviewPaneMode, c.PreviewPaneMode);
         storage.Set(x => x.DeleteAfterSaving, c.DeleteAfterSaving);
         storage.Set(x => x.KeepSession, c.KeepSession);
         storage.Set(x => x.SingleInstance, c.SingleInstance);
@@ -172,6 +174,8 @@ public class ConfigSerializer : VersionedSerializer<ConfigStorage<CommonConfig>>
         SetIfLocked(x => x.ScanChangesDefaultProfile, c.ScanChangesDefaultProfile, nameof(c.ScanChangesDefaultProfile));
         SetIfLocked(x => x.ScanButtonDefaultAction, c.ScanButtonDefaultAction, nameof(c.ScanButtonDefaultAction));
         SetIfLocked(x => x.SaveButtonDefaultAction, c.SaveButtonDefaultAction, nameof(c.SaveButtonDefaultAction));
+        SetIfLocked(x => x.EnablePreviewPane, c.EnablePreviewPane, nameof(c.EnablePreviewPane));
+        SetIfLocked(x => x.PreviewPaneMode, c.PreviewPaneMode, nameof(c.PreviewPaneMode));
         SetIfLocked(x => x.DeleteAfterSaving, c.DeleteAfterSaving, nameof(c.DeleteAfterSaving));
         SetIfLocked(x => x.KeepSession, c.KeepSession, nameof(c.KeepSession));
         SetIfLocked(x => x.SingleInstance, c.SingleInstance, nameof(c.SingleInstance));

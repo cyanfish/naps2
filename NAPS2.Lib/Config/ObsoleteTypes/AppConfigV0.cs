@@ -35,6 +35,10 @@ public class AppConfigV0
 
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
 
+    public bool EnablePreviewPane { get; set; } = true;
+
+    public PreviewPaneMode PreviewPaneMode { get; set; }
+
     public bool DeleteAfterSaving { get; set; }
 
     public bool KeepSession { get; set; }
