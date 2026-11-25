@@ -232,9 +232,9 @@ public class WpfDesktopForm : DesktopForm
     protected override LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in");
+        EtoPlatform.Current.ConfigureFloatingButton(zoomIn, "zoom_in");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out");
+        EtoPlatform.Current.ConfigureFloatingButton(zoomOut, "zoom_out");
         EtoPlatform.Current.ConfigureJoinedButtons(zoomOut, zoomIn);
         return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(0);
     }

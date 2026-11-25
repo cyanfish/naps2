@@ -507,14 +507,14 @@ public class GtkEtoPlatform : EtoPlatform
     public override void SetAccessibleName(Control control, string name) =>
         control.ToNative().Accessible.Name = name;
 
-    public override void ConfigureZoomButton(Button button, string icon)
+    public override void ConfigureFloatingButton(Button button, string icon)
     {
         var gtkButton = button.ToNative();
         button.Text = "";
-        button.Image = IconProvider.GetIcon(icon, IconScenario.Button, gtkButton.ScaleFactor);
+        button.Image = IconProvider.GetIcon(icon, IconScenario.FloatingButton, gtkButton.ScaleFactor);
         button.ScaleImage();
         button.Size = Size.Empty;
-        gtkButton.StyleContext.AddClass("zoom-button");
+        gtkButton.StyleContext.AddClass("floating-button");
         gtkButton.SetSizeRequest(0, 0);
     }
 

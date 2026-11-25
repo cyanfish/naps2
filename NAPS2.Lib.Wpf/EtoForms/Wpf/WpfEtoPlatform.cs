@@ -28,7 +28,7 @@ public class WpfEtoPlatform : EtoPlatform
     private const int SMALL_BUTTON_PADDING = 7;
     private const int SMALL_TOOLBAR_BUTTON_PADDING = 5;
     private const int SMALL_TOOLBAR_TEXT_BUTTON_V_PADDING = 3;
-    private const double ZOOM_BUTTON_OPACITY = 0.85;
+    private const double FLOATING_BUTTON_OPACITY = 0.85;
     private const double NARROW_TEXT_BOX_WIDTH = 100;
 
     private static readonly Size MinImageButtonSize = new(75, 32);
@@ -533,7 +533,7 @@ public class WpfEtoPlatform : EtoPlatform
     public override void SetAccessibleName(Control control, string name) =>
         AutomationProperties.SetName(control.ToNative(), name);
 
-    public override void ConfigureZoomButton(Button button, string icon)
+    public override void ConfigureFloatingButton(Button button, string icon)
     {
         var native = (SWC.Control) button.ToNative();
         button.Text = "";
@@ -541,7 +541,8 @@ public class WpfEtoPlatform : EtoPlatform
         native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING);
         native.MinWidth = native.MinHeight = 0;
         SetIconProps(button, 16);
-        AttachDpiDependency(button, scale => button.Image = IconProvider.GetIcon(icon, IconScenario.Button, scale));
+        AttachDpiDependency(button,
+            scale => button.Image = IconProvider.GetIcon(icon, IconScenario.FloatingButton, scale));
         // These buttons are over the thumbnails, so make them (mostly) opaque, with a higher contrast border
         void UpdateBackground(object? sender, EventArgs e) => SetOpaqueButtonBackground(native);
         SetOpaqueButtonBackground(native);
@@ -570,7 +571,7 @@ public class WpfEtoPlatform : EtoPlatform
             var fore = ((SWM.SolidColorBrush) app.FindResource($"ButtonBackground{state}")!).Color;
             double a = fore.A / 255.0;
             byte Blend(byte f, byte b) => (byte) Math.Round(f * a + b * (1 - a));
-            var brush = new SWM.SolidColorBrush(SWM.Color.FromArgb((byte) Math.Round(255 * ZOOM_BUTTON_OPACITY),
+            var brush = new SWM.SolidColorBrush(SWM.Color.FromArgb((byte) Math.Round(255 * FLOATING_BUTTON_OPACITY),
                 Blend(fore.R, back.R), Blend(fore.G, back.G), Blend(fore.B, back.B)));
             brush.Freeze();
             native.Resources[$"ButtonBackground{state}"] = brush;

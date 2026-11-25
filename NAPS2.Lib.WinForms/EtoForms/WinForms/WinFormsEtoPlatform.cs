@@ -446,12 +446,12 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override void SetAccessibleName(Control control, string name) =>
         control.ToNative().AccessibleName = name;
 
-    public override void ConfigureZoomButton(Button button, string icon)
+    public override void ConfigureFloatingButton(Button button, string icon)
     {
         button.Size = new Size(25, 25);
         AttachDpiDependency(button, scale =>
         {
-            button.Image = IconProvider.GetIcon(icon, IconScenario.Button, scale);
+            button.Image = IconProvider.GetIcon(icon, IconScenario.FloatingButton, scale);
         });
         var wfButton = (WF.Button) button.ToNative();
         wfButton.Text = "";
