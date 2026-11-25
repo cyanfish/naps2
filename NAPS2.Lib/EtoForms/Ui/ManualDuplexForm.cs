@@ -34,7 +34,7 @@ public class ManualDuplexForm : EtoDialogBase
 
         _reverseBackSides.CheckedChanged += ReverseCheckedChanged;
 
-        EtoPlatform.Current.AttachDpiDependency(this, _ => _listView.RegenerateImages());
+        EtoPlatform.Current.AttachIconDependency(this, _ => _listView.RegenerateImages());
         _listView.ImageSize = new Size(PREVIEW_THUMBNAIL_SIZE, PREVIEW_THUMBNAIL_SIZE);
     }
 

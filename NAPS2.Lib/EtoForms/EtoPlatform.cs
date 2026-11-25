@@ -195,6 +195,9 @@ public abstract class EtoPlatform
     public virtual void AttachDpiDependency(Control control, Action<float> callback) =>
         callback(GetScaleFactor(control.ParentWindow));
 
+    public virtual void AttachIconDependency(Control control, Action<float> callback) =>
+        AttachDpiDependency(control, callback);
+
     public virtual SizeF GetWrappedSize(Control control, int defaultWidth)
     {
         return GetPreferredSize(control, new SizeF(defaultWidth, LayoutController.MAX_SIZE));

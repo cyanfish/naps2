@@ -298,5 +298,5 @@ public class WpfDesktopForm : DesktopForm
     }
 
     private void SetIcon(Image image, Func<float, Eto.Drawing.Image?> getIcon) =>
-        EtoPlatform.Current.AttachDpiDependency(this, scale => image.Source = getIcon(scale)?.ToWpf());
+        EtoPlatform.Current.AttachIconDependency(this, scale => image.Source = getIcon(scale)?.ToWpf());
 }

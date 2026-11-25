@@ -150,8 +150,8 @@ public abstract class ImageEditor : IDisposable
         OkButton.Focus();
     }
 
-    protected void AttachDpiDependency(Action<float> callback) =>
-        EtoPlatform.Current.AttachDpiDependency(OkButton, callback);
+    protected void AttachIconDependency(Action<float> callback) =>
+        EtoPlatform.Current.AttachIconDependency(OkButton, callback);
 
     private void ViewerMouseDown(object? sender, MouseEventArgs e) => OnMouseDown(e);
     private void ViewerMouseMove(object? sender, MouseEventArgs e) => OnMouseMove(e);

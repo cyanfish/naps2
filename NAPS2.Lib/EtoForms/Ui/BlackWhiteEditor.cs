@@ -13,7 +13,7 @@ public class BlackWhiteEditor : UnaryImageEditor
         IconName = "contrast_high";
         Title = UiStrings.BlackAndWhite;
 
-        AttachDpiDependency(scale =>
+        AttachIconDependency(scale =>
             _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high", IconScenario.Inline16, scale));
         Sliders = [_thresholdSlider];
         // BlackWhiteTransform is not commutative with scaling

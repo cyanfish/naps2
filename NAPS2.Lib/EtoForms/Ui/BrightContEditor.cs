@@ -14,7 +14,7 @@ public class BrightContEditor : UnaryImageEditor
         IconName = "contrast_with_sun";
         Title = UiStrings.BrightnessContrast;
 
-        AttachDpiDependency(scale =>
+        AttachIconDependency(scale =>
         {
             _brightnessSlider.Icon = iconProvider.GetIcon("weather_sun", IconScenario.Inline16, scale);
             _contrastSlider.Icon = iconProvider.GetIcon("contrast", IconScenario.Inline16, scale);

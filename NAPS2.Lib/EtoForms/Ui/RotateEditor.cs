@@ -21,7 +21,7 @@ public class RotateEditor : UnaryImageEditor
         IconName = "arrow_rotate_anticlockwise";
         HelpText = UiStrings.CustomRotationHelp;
 
-        AttachDpiDependency(scale =>
+        AttachIconDependency(scale =>
             _angleSlider.Icon = iconProvider.GetIcon("arrow_rotate_anticlockwise", IconScenario.Inline16, scale));
         Sliders = [_angleSlider];
     }

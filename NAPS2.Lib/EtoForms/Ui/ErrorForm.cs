@@ -15,7 +15,7 @@ public class ErrorForm : EtoDialogBase
         : base(config)
     {
         EtoPlatform.Current.SetImageSize(_image, 32);
-        EtoPlatform.Current.AttachDpiDependency(this,
+        EtoPlatform.Current.AttachIconDependency(this,
             scale => _image.Image = iconProvider.GetIcon("exclamation", IconScenario.Inline32, scale));
     }
 

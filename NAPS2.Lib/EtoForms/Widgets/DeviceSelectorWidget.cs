@@ -32,7 +32,7 @@ public class DeviceSelectorWidget
         _iconProvider = iconProvider;
         _parentWindow = parentWindow;
         _chooseDevice.Click += ChooseDevice;
-        EtoPlatform.Current.AttachDpiDependency(_deviceIcon, _ => UpdateDeviceIconImage());
+        EtoPlatform.Current.AttachIconDependency(_deviceIcon, _ => UpdateDeviceIconImage());
     }
 
     public required Func<ScanProfile> ProfileFunc { get; init; }

@@ -13,7 +13,7 @@ public class SharpenEditor : UnaryImageEditor
         IconName = "sharpen";
         Title = UiStrings.Sharpen;
 
-        AttachDpiDependency(scale =>
+        AttachIconDependency(scale =>
             _sharpenSlider.Icon = iconProvider.GetIcon("sharpen", IconScenario.Inline16, scale));
         Sliders = [_sharpenSlider];
     }

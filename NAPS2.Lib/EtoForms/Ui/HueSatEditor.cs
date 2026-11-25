@@ -14,7 +14,7 @@ public class HueSatEditor : UnaryImageEditor
         IconName = "color_management";
         Title = UiStrings.HueSaturation;
 
-        AttachDpiDependency(scale =>
+        AttachIconDependency(scale =>
         {
             _hueSlider.Icon = iconProvider.GetIcon("color_wheel", IconScenario.Inline16, scale);
             _saturationSlider.Icon = iconProvider.GetIcon("color_gradient", IconScenario.Inline16, scale);

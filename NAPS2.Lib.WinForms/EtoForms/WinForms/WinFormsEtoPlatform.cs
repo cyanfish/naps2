@@ -449,7 +449,7 @@ public class WinFormsEtoPlatform : EtoPlatform
     public override void ConfigureFloatingButton(Button button, string icon)
     {
         button.Size = new Size(25, 25);
-        AttachDpiDependency(button, scale =>
+        AttachIconDependency(button, scale =>
         {
             button.Image = IconProvider.GetIcon(icon, IconScenario.FloatingButton, scale);
         });

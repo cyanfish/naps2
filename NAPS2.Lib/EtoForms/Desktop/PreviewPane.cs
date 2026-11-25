@@ -327,7 +327,7 @@ public class PreviewPane : IDisposable
 
     private ToolItem WithToolItemIcon(ToolItem toolItem, ActionCommand command, string? iconName = null)
     {
-        EtoPlatform.Current.AttachDpiDependency(_window!,
+        EtoPlatform.Current.AttachIconDependency(_window!,
             scale =>
             {
                 EtoPlatform.Current.SetImageSize(toolItem, (int) (16 * scale));
@@ -388,7 +388,7 @@ public class PreviewPane : IDisposable
             Enabled = command.Enabled
         };
         EtoPlatform.Current.SetAccessibleName(toggle, command.Text);
-        EtoPlatform.Current.AttachDpiDependency(toggle,
+        EtoPlatform.Current.AttachIconDependency(toggle,
             scale => toggle.Image = command.GetIconImage(IconScenario.Button, scale));
         EtoPlatform.Current.ConfigureImageButton(toggle, default);
         toggle.Click += (_, _) =>

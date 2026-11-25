@@ -541,7 +541,7 @@ public class WpfEtoPlatform : EtoPlatform
         native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING);
         native.MinWidth = native.MinHeight = 0;
         SetIconProps(button, 16);
-        AttachDpiDependency(button,
+        AttachIconDependency(button,
             scale => button.Image = IconProvider.GetIcon(icon, IconScenario.FloatingButton, scale));
         // These buttons are over the thumbnails, so make them (mostly) opaque, with a higher contrast border
         void UpdateBackground(object? sender, EventArgs e) => SetOpaqueButtonBackground(native);
