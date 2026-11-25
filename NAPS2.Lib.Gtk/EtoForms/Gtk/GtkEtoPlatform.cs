@@ -28,7 +28,7 @@ public class GtkEtoPlatform : EtoPlatform
             ? DialogButtonOrder.PrimarySecondaryClose
             : DialogButtonOrder.SecondaryClosePrimary;
 
-    public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
+    public override IIconProvider IconProvider { get; } = new LucideIconProvider(new DefaultIconProvider());
     public override IDarkModeProvider DarkModeProvider { get; } = new GtkDarkModeProvider();
 
     public override void StartPreloading()
