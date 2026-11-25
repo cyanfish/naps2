@@ -828,7 +828,14 @@ public class WpfEtoPlatform : EtoPlatform
         var native = control is Window window ? window.ToNative() : control.ToNative();
 
         void Update() => callback((float) SWM.VisualTreeHelper.GetDpi(native).DpiScaleX);
-        void OnDpiChanged(object? sender, SW.DpiChangedEventArgs e) => Update();
+        void OnDpiChanged(object? sender, SW.DpiChangedEventArgs e)
+        {
+            // Filter bubbled-up events
+            if (e.OriginalSource is SW.Window)
+            {
+                Update();
+            }
+        }
 
         Update();
         native.Loaded += (_, _) =>
