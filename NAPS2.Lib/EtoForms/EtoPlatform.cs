@@ -66,6 +66,7 @@ public abstract class EtoPlatform
 
     public abstract void ConfigureImageButton(Button button, ButtonFlags flags);
     public virtual int IconButtonSize => 30;
+    public virtual int CompactIconButtonSize => IconButtonSize;
     public abstract Bitmap ToBitmap(IMemoryImage image);
     public abstract IMemoryImage FromBitmap(Bitmap bitmap);
     public abstract IMemoryImage DrawHourglass(IMemoryImage thumb);

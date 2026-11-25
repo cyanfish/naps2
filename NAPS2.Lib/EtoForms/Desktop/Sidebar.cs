@@ -160,10 +160,10 @@ public class Sidebar
                 L.Row(
                     C.Label(UiStrings.ProfileLabel).AlignTrailing(),
                     C.Filler(),
-                    C.Button(EditProfileCommand, ButtonImagePosition.Overlay)
-                        .Height(profileButtonHeight).Width(EtoPlatform.Current.IconButtonSize),
-                    C.Button(NewProfileCommand, ButtonImagePosition.Overlay)
-                        .Height(profileButtonHeight).Width(EtoPlatform.Current.IconButtonSize)
+                    C.Button(EditProfileCommand, ButtonImagePosition.Overlay, ButtonFlags.Compact)
+                        .Height(profileButtonHeight).Width(EtoPlatform.Current.CompactIconButtonSize),
+                    C.Button(NewProfileCommand, ButtonImagePosition.Overlay, ButtonFlags.Compact)
+                        .Height(profileButtonHeight).Width(EtoPlatform.Current.CompactIconButtonSize)
                 ),
                 _profile.AsControl(),
                 C.Spacer(),

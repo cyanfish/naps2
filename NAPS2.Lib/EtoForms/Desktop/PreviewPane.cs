@@ -12,8 +12,7 @@ namespace NAPS2.EtoForms.Desktop;
 /// </summary>
 public class PreviewPane : IDisposable
 {
-    // Gtk icon buttons are a bit bigger
-    public static int MinWidth => EtoPlatform.Current.IsGtk ? 340 : 320;
+    public const int MinWidth = 320;
 
     private readonly Naps2Config _config;
     private readonly UiImageList _imageList;
@@ -228,12 +227,12 @@ public class PreviewPane : IDisposable
 
     private static Button CreateHeaderButton(ActionCommand command, string? iconName = null)
     {
-        var button = C.Button(command, iconName ?? command.IconName, ButtonImagePosition.Overlay);
+        var button = C.Button(command, iconName ?? command.IconName, ButtonImagePosition.Overlay, ButtonFlags.Compact);
         button.ToolTip = command.Text;
         return button;
     }
 
-    private static LayoutControl HeaderButton(Button button) => button.Width(EtoPlatform.Current.IconButtonSize);
+    private static LayoutControl HeaderButton(Button button) => button.Width(EtoPlatform.Current.CompactIconButtonSize);
 
     private IEnumerable<(ActionCommand Command, string? IconName)> GetSaveCommands()
     {

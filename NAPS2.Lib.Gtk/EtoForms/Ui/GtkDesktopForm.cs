@@ -95,6 +95,7 @@ public class GtkDesktopForm : DesktopForm
             .donate-button { border: 1px solid #fbad5f; background: #feda96; }
             .donate-button:hover { background: #eeca86; }
             .icon-button { min-width: 0; padding-left: 0; padding-right: 0; }
+            .icon-button.compact { min-height: 0; padding-top: 6px; padding-bottom: 6px; }
             .floating-button { background: " + bgColor + @"; border: 1px solid " + brdColor + @"; border-radius: 0; }
         ");
         StyleContext.AddProviderForScreen(Gdk.Screen.Default, cssProvider, 800);
