@@ -33,6 +33,7 @@ public class ScrollZoomImageViewer
         EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
         _scrollable.SizeChanged += OnSizeChanged;
         _scrollable.Shown += OnSizeChanged;
+        EtoPlatform.Current.AttachFrameSizeChanged(_scrollable, OnFrameSizeChanged);
         _scrollable.Scroll += (_, _) => _imageView.Invalidate();
         _scrollable.Cursor = Cursors.Pointer;
     }
@@ -94,8 +95,10 @@ public class ScrollZoomImageViewer
         }
     }
 
-    private int AvailableWidth => _scrollable.Width - 2 - BorderOffset - 2 * ImagePadding;
-    private int AvailableHeight => _scrollable.Height - 2 - BorderOffset - 2 * ImagePadding;
+    private Size? _frameSize;
+    private Size ContainerSize => _frameSize ?? _scrollable.Size;
+    private int AvailableWidth => ContainerSize.Width - 2 - BorderOffset - 2 * ImagePadding;
+    private int AvailableHeight => ContainerSize.Height - 2 - BorderOffset - 2 * ImagePadding;
 
     /// <summary>
     /// Replaces the image. If the new image has the same shape as the old one, it's shown at the same size on screen
@@ -124,6 +127,7 @@ public class ScrollZoomImageViewer
         else
         {
             ZoomToContainer();
+            _imageView.Invalidate();
         }
     }
 
@@ -168,6 +172,17 @@ public class ScrollZoomImageViewer
     private void OnMouseLeave(object? sender, MouseEventArgs e)
     {
         _mousePos = null;
+    }
+
+    private void OnFrameSizeChanged(Size size)
+    {
+        // Gtk can only shrink the viewer as far as its content allows, so if we waited for the viewer's size to change
+        // before fitting the image, it would shrink (and repaint) in several steps
+        _frameSize = size;
+        if (_fitToContainer && Image != null)
+        {
+            ZoomToContainer();
+        }
     }
 
     // An image that was fitted to the viewer stays fitted when the viewer's size changes (the window is resized, or
@@ -306,19 +321,15 @@ public class ScrollZoomImageViewer
         {
             return;
         }
-        if (IsWidthBound)
+        var size = IsWidthBound
+            ? new Size(AvailableWidth, (int) Math.Round(Image!.Height * AvailableWidth / (float) Image.Width))
+            : new Size((int) Math.Round(Image!.Width * AvailableHeight / (float) Image.Height), AvailableHeight);
+        if (size == RenderSize)
         {
-            RenderSize = new Size(AvailableWidth,
-                (int) Math.Round(Image!.Height * AvailableWidth / (float) Image.Width));
-            _renderFactor = AvailableWidth / (float) Image.Width;
+            return;
         }
-        else
-        {
-            RenderSize =
-                new Size((int) Math.Round(Image!.Width * AvailableHeight / (float) Image.Height),
-                    AvailableHeight);
-            _renderFactor = AvailableHeight / (float) Image.Height;
-        }
+        RenderSize = size;
+        _renderFactor = FitFactor;
         ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 

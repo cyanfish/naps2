@@ -192,6 +192,10 @@ public abstract class EtoPlatform
     {
     }
 
+    public virtual void AttachFrameSizeChanged(Control control, Action<Size> action)
+    {
+    }
+
     public virtual void AttachDpiDependency(Control control, Action<float> callback) =>
         callback(GetScaleFactor(control.ParentWindow));
 

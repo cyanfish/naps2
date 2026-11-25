@@ -412,6 +412,20 @@ public class GtkEtoPlatform : EtoPlatform
         imageView.Size = new Size(size, size);
     }
 
+    public override void AttachFrameSizeChanged(Control control, Action<Size> action)
+    {
+        var widget = control.ToNative();
+        void OnNotify(object o, GLib.NotifyArgs args)
+        {
+            if (widget.WidthRequest > 0 && widget.HeightRequest > 0)
+            {
+                action(new Size(widget.WidthRequest, widget.HeightRequest));
+            }
+        }
+        widget.AddNotification("width-request", OnNotify);
+        widget.AddNotification("height-request", OnNotify);
+    }
+
     public override void AttachDpiDependency(Control control, Action<float> callback)
     {
         if (control.Loaded)
