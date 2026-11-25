@@ -15,6 +15,8 @@ public class ScrollZoomImageViewer
     private Point? _pendingScrollPosition;
     private bool _mouseIsDown;
     private bool _fitToContainer = true;
+    private Bitmap? _scaledDown;
+    private int _scaledDownLevel;
 
     public ScrollZoomImageViewer()
     {
@@ -103,6 +105,8 @@ public class ScrollZoomImageViewer
     {
         var old = Image;
         Image = image;
+        _scaledDown?.Dispose();
+        _scaledDown = null;
         if (image == null)
         {
             RenderSize = Size.Empty;
@@ -212,12 +216,15 @@ public class ScrollZoomImageViewer
         float scaleY = RenderSize.Height / (float) image.Height;
         if (scaleX <= 1)
         {
+            var source = image;
             if (EtoPlatform.Current.IsGtk)
             {
                 // The default is plain bilinear, which makes text unreadable when scaled down
                 graphics.ImageInterpolation = ImageInterpolation.Medium;
+                // GTK downscale during painting is slow, so do an intermediate render
+                source = GetScaledDownForGtk(image, scaleX * EtoPlatform.Current.GetScaleFactor(_imageView.ParentWindow));
             }
-            graphics.DrawImage(image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+            graphics.DrawImage(source, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
             return;
         }
         var visible = _scrollable.VisibleRect;
@@ -230,6 +237,26 @@ public class ScrollZoomImageViewer
             new RectangleF(left, top, right - left, bottom - top),
             new RectangleF(XOffset + left * scaleX, YOffset + top * scaleY,
                 (right - left) * scaleX, (bottom - top) * scaleY));
+    }
+
+    private Bitmap GetScaledDownForGtk(Bitmap image, float scale)
+    {
+        int level = 1;
+        while (scale * level * 2 <= 1)
+        {
+            level *= 2;
+        }
+        if (level == 1)
+        {
+            return image;
+        }
+        if (_scaledDown == null || _scaledDownLevel != level)
+        {
+            _scaledDown?.Dispose();
+            _scaledDown = new Bitmap(image, image.Width / level, image.Height / level, ImageInterpolation.High);
+            _scaledDownLevel = level;
+        }
+        return _scaledDown;
     }
 
     public float ZoomFactor => _renderFactor;
