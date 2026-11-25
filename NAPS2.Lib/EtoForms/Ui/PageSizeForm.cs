@@ -71,7 +71,7 @@ public class PageSizeForm : EtoDialogBase
             L.Row(
                 _name.Scale().NaturalWidth(250).AlignCenter(),
                 C.Button(DeletePageSizeCommand, ButtonImagePosition.Overlay).AlignCenter()
-                    .Width(EtoPlatform.Current.IsWpf ? 32 : 30)
+                    .Width(EtoPlatform.Current.IconButtonSize)
             ),
             C.Spacer(),
             C.Label(UiStrings.Dimensions),

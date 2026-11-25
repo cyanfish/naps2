@@ -217,7 +217,7 @@ public class PreviewPane : IDisposable
         return button;
     }
 
-    private static LayoutControl HeaderButton(Button button) => button.Width(EtoPlatform.Current.IsWpf ? 32 : 30);
+    private static LayoutControl HeaderButton(Button button) => button.Width(EtoPlatform.Current.IconButtonSize);
 
     private IEnumerable<(ActionCommand Command, string? IconName)> GetSaveCommands()
     {

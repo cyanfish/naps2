@@ -385,6 +385,8 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override ISettingsNavigator CreateSettingsNavigator() => new WpfSettingsNavigator();
 
+    public override int IconButtonSize => 32;
+
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         var native = (SWC.Control) button.ToNative();

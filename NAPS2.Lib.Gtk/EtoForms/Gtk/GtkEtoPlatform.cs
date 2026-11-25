@@ -75,12 +75,15 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override ISettingsNavigator CreateSettingsNavigator() => new GtkSettingsNavigator();
 
+    public override int IconButtonSize => 34;
+
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         if (button.ImagePosition == ButtonImagePosition.Overlay)
         {
             // Eto's default minimum size is meant for text buttons and makes icon-only buttons much wider than needed
             button.MinimumSize = Size.Empty;
+            button.ToNative().StyleContext.AddClass("icon-button");
         }
         AttachDpiDependency(button, _ => button.ScaleImage());
     }

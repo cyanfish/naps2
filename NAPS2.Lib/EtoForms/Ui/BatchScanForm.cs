@@ -111,7 +111,6 @@ public class BatchScanForm : EtoDialogBase
         DefaultButton = _start;
         AbortButton = _cancel;
 
-        int profileButtonWidth = EtoPlatform.Current.IsWpf ? 32 : 30;
         LayoutController.Content = L.Column(
             L.Row(
                 _status.Scale().AlignCenter().NaturalWidth(200),
@@ -126,8 +125,10 @@ public class BatchScanForm : EtoDialogBase
                     C.Label(UiStrings.ProfileLabel),
                     L.Row(
                         _profile.AsControl().Scale().NaturalWidth(100),
-                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(profileButtonWidth),
-                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(profileButtonWidth)
+                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay)
+                            .Width(EtoPlatform.Current.IconButtonSize),
+                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay)
+                            .Width(EtoPlatform.Current.IconButtonSize)
                     ),
                     _singleScan,
                     _multipleScansPrompt,
