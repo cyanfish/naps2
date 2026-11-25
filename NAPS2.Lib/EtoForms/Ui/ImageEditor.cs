@@ -31,7 +31,18 @@ public abstract class ImageEditor : IDisposable
     }
 
     public UiImage Image { get; set; } = null!;
-    public List<UiImage> SelectedImages { get; set; } = null!;
+    public List<UiImage> SelectedImages
+    {
+        get;
+        set
+        {
+            field = value;
+            if (IsInitialized)
+            {
+                OnSelectedImagesChanged();
+            }
+        }
+    } = null!;
 
     public Window? ParentWindow { get; set; }
 
@@ -99,6 +110,10 @@ public abstract class ImageEditor : IDisposable
     protected virtual void OnInitialize()
     {
         InitDisplayImage();
+    }
+
+    protected virtual void OnSelectedImagesChanged()
+    {
     }
 
     /// <summary>

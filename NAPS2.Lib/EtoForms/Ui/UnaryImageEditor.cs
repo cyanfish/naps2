@@ -11,6 +11,7 @@ public abstract class UnaryImageEditor(
     : ImageEditor(config, imageList, thumbnailController)
 {
     private readonly CheckBox _applyToSelected = new();
+    private readonly LayoutVisibility _applyToSelectedVis = new(false);
     private readonly Button _revert = C.Button(UiStrings.Revert);
 
     protected IMemoryImage? WorkingImage { get; set; }
@@ -27,7 +28,7 @@ public abstract class UnaryImageEditor(
 
     protected override void OnInitialize()
     {
-        _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages.Count);
+        OnSelectedImagesChanged();
         _applyToSelected.Checked = Config.Get(c => c.ApplyToAllSelected);
         _applyToSelected.CheckedChanged +=
             (_, _) => Config.User.Set(c => c.ApplyToAllSelected, _applyToSelected.IsChecked());
@@ -41,6 +42,12 @@ public abstract class UnaryImageEditor(
             slider.ValueChanged += UpdatePreviewBox;
         }
         base.OnInitialize();
+    }
+
+    protected override void OnSelectedImagesChanged()
+    {
+        _applyToSelected.Text = string.Format(UiStrings.ApplyToSelected, SelectedImages.Count);
+        _applyToSelectedVis.IsVisible = SelectedImages.Count > 1;
     }
 
     public override void Dispose()
@@ -66,11 +73,12 @@ public abstract class UnaryImageEditor(
         ]);
     }
 
-    protected LayoutElement ApplyToSelectedControl => SelectedImages.Count > 1 ? _applyToSelected : C.None();
+    protected LayoutElement ApplyToSelectedControl => _applyToSelected.Visible(_applyToSelectedVis);
 
     protected override LayoutElement CreateExtraButtons() => _revert;
 
-    private List<UiImage> ImagesToTransform => _applyToSelected.IsChecked() ? SelectedImages : [Image];
+    private List<UiImage> ImagesToTransform =>
+        SelectedImages.Count > 1 && _applyToSelected.IsChecked() ? SelectedImages : [Image];
 
     protected override IMemoryImage RenderPreview()
     {

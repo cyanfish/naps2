@@ -502,7 +502,13 @@ public class PreviewPane : IDisposable
 
     private void SyncToSelection()
     {
-        if (_windowed || !IsVisible || _editor != null) return;
+        if (!IsVisible) return;
+        if (_editor != null)
+        {
+            _editor.SelectedImages = GetEditSelection();
+            return;
+        }
+        if (_windowed) return;
         var selection = _imageList.Selection;
         if (_currentImage != null && selection.Contains(_currentImage)) return;
         var selected = selection.FirstOrDefault();
@@ -510,6 +516,14 @@ public class PreviewPane : IDisposable
         {
             Show(selected);
         }
+    }
+
+    private List<UiImage> GetEditSelection()
+    {
+        var selection = _imageList.Selection;
+        return selection.Count > 1 && selection.Contains(_currentImage!)
+            ? [_currentImage!, ..selection.Where(x => x != _currentImage)]
+            : [_currentImage!];
     }
 
     private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
@@ -598,6 +612,7 @@ public class PreviewPane : IDisposable
         }
         EndEdit();
         _editor = editor;
+        editor.SelectedImages = GetEditSelection();
         editor.ParentWindow = _window;
         editor.Viewer = ImageViewer;
         editor.Initialize();
