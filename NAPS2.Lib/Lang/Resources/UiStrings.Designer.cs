@@ -2805,9 +2805,15 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string ClosePreview {
+        internal static string ViewInPreviewPane {
             get {
-                return ResourceManager.GetString("ClosePreview", resourceCulture);
+                return ResourceManager.GetString("ViewInPreviewPane", resourceCulture);
+            }
+        }
+        
+        internal static string ClosePreviewPane {
+            get {
+                return ResourceManager.GetString("ClosePreviewPane", resourceCulture);
             }
         }
         

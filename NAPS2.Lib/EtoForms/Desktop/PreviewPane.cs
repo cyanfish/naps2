@@ -107,9 +107,19 @@ public class PreviewPane : IDisposable
             Text = UiStrings.Delete,
             IconName = "cross"
         };
+        ViewInNewWindowCommand = new ActionCommand(SwitchView)
+        {
+            Text = UiStrings.ViewInNewWindow,
+            IconName = "new_window"
+        };
+        ViewInPreviewPaneCommand = new ActionCommand(SwitchView)
+        {
+            Text = UiStrings.ViewInPreviewPane,
+            IconName = "application_side_list_right"
+        };
         CloseCommand = new ActionCommand(Hide)
         {
-            Text = UiStrings.ClosePreview,
+            Text = UiStrings.ClosePreviewPane,
             IconName = "cancel"
         };
     }
@@ -124,6 +134,8 @@ public class PreviewPane : IDisposable
     public ActionCommand ZoomOutCommand { get; }
     public ActionCommand ZoomWindowCommand { get; }
     public ActionCommand ZoomActualCommand { get; }
+    public ActionCommand ViewInNewWindowCommand { get; }
+    public ActionCommand ViewInPreviewPaneCommand { get; }
     public ActionCommand CloseCommand { get; }
 
     public bool IsVisible => _paneVis.IsVisible;
@@ -137,6 +149,7 @@ public class PreviewPane : IDisposable
     public Type? ActiveEditorType => _editor?.GetType();
 
     public event EventHandler? Closed;
+    public event EventHandler? ViewInPreviewPaneRequested;
     public event EventHandler? PageChanged;
 
     public LayoutElement CreateView(Window window, bool windowed)
@@ -186,6 +199,7 @@ public class PreviewPane : IDisposable
             HeaderButton(CreateHeaderButton(ZoomWindowCommand)),
             HeaderButton(zoomOut).SpacingAfter(0),
             HeaderButton(zoomIn).SpacingAfter(12),
+            HeaderButton(CreateHeaderButton(_windowed ? ViewInPreviewPaneCommand : ViewInNewWindowCommand)),
             _windowed ? C.None() : HeaderButton(CreateHeaderButton(CloseCommand))
         ).Spacing(2);
         return L.Column(L.Adaptive(
@@ -397,7 +411,7 @@ public class PreviewPane : IDisposable
         _separator.BackgroundColor = _colorScheme.SeparatorColor;
     }
 
-    public void Show(UiImage image)
+    public void Show(UiImage image, Type? editorType = null)
     {
         EndEdit();
         SetCurrentImage(image);
@@ -406,6 +420,10 @@ public class PreviewPane : IDisposable
         _paneVis.IsVisible = true;
         UpdatePage();
         UpdateImage().AssertNoAwait();
+        if (editorType != null)
+        {
+            _editCommands[editorType].Execute();
+        }
     }
 
     public void Hide()
@@ -419,6 +437,20 @@ public class PreviewPane : IDisposable
         _viewBitmap?.Dispose();
         _viewBitmap = null;
         Closed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SwitchView()
+    {
+        if (_currentImage == null) return;
+        _config.User.Set(c => c.PreviewLastShownInPane, _windowed);
+        if (_windowed)
+        {
+            ViewInPreviewPaneRequested?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            Commands.ViewInNewWindow.Execute();
+        }
     }
 
     private void SetCurrentImage(UiImage? image)

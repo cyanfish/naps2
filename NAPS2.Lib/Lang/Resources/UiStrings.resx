@@ -1518,7 +1518,10 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="WindowsKey" xml:space="preserve">
     <value>Win</value>
   </data>
-  <data name="ClosePreview" xml:space="preserve">
+  <data name="ViewInPreviewPane" xml:space="preserve">
+    <value>View in Preview Pane</value>
+  </data>
+  <data name="ClosePreviewPane" xml:space="preserve">
     <value>Close Preview Pane</value>
   </data>
   <data name="ViewInNewWindow" xml:space="preserve">

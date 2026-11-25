@@ -13,6 +13,13 @@ public class PreviewForm : EtoDialogBase
 
         Pane = pane;
         Pane.Closed += (_, _) => Close();
+        Pane.ViewInPreviewPaneRequested += (_, _) =>
+        {
+            CurrentImage = Pane.CurrentImage!;
+            EditorType = Pane.ActiveEditorType;
+            ContinueInPane = true;
+            Close();
+        };
         EtoPlatform.Current.HandleKeyDown(this, Pane.HandleKeyDown);
     }
 
@@ -23,6 +30,13 @@ public class PreviewForm : EtoDialogBase
         get => field ?? throw new InvalidOperationException();
         set;
     }
+
+    public Type? EditorType { get; set; }
+
+    /// <summary>
+    /// Whether the window was closed by "View in Preview Pane".
+    /// </summary>
+    public bool ContinueInPane { get; private set; }
 
     protected override void BuildLayout()
     {
@@ -38,7 +52,7 @@ public class PreviewForm : EtoDialogBase
         base.OnLoad(eventArgs);
 
         CreateToolbar();
-        Pane.Show(CurrentImage);
+        Pane.Show(CurrentImage, EditorType);
     }
 
     protected override void OnShown(EventArgs e)

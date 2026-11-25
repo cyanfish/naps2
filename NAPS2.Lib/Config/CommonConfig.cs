@@ -235,6 +235,9 @@ public class CommonConfig
     public int PreviewPaneWidth { get; set; }
 
     [User]
+    public bool PreviewLastShownInPane { get; set; }
+
+    [User]
     public string? EditWithAppPath { get; set; }
 
     [User]

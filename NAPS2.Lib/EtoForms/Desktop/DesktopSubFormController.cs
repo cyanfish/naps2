@@ -5,6 +5,7 @@ namespace NAPS2.EtoForms.Desktop;
 
 public class DesktopSubFormController : IDesktopSubFormController
 {
+    private readonly Naps2Config _config;
     private readonly IFormFactory _formFactory;
     private readonly IImageEditorFactory _imageEditorFactory;
     private readonly UiImageList _imageList;
@@ -12,10 +13,12 @@ public class DesktopSubFormController : IDesktopSubFormController
     private readonly TesseractLanguageManager _tesseractLanguageManager;
     private readonly DesktopFormProvider _desktopFormProvider;
 
-    public DesktopSubFormController(IFormFactory formFactory, IImageEditorFactory imageEditorFactory,
-        UiImageList imageList, DesktopImagesController desktopImagesController,
-        TesseractLanguageManager tesseractLanguageManager, DesktopFormProvider desktopFormProvider)
+    public DesktopSubFormController(Naps2Config config, IFormFactory formFactory,
+        IImageEditorFactory imageEditorFactory, UiImageList imageList,
+        DesktopImagesController desktopImagesController, TesseractLanguageManager tesseractLanguageManager,
+        DesktopFormProvider desktopFormProvider)
     {
+        _config = config;
         _formFactory = formFactory;
         _imageEditorFactory = imageEditorFactory;
         _imageList = imageList;
@@ -33,8 +36,8 @@ public class DesktopSubFormController : IDesktopSubFormController
     public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc,
         Action<ImageEditor>? editorHost = null)
     {
-        return new DesktopSubFormController(_formFactory, _imageEditorFactory, _imageList, _desktopImagesController,
-            _tesseractLanguageManager, _desktopFormProvider)
+        return new DesktopSubFormController(_config, _formFactory, _imageEditorFactory, _imageList,
+            _desktopImagesController, _tesseractLanguageManager, _desktopFormProvider)
         {
             SelectionFunc = selectionFunc,
             EditorHost = editorHost
@@ -116,20 +119,38 @@ public class DesktopSubFormController : IDesktopSubFormController
         form.ShowModal();
     }
 
-    public void ShowPreview(bool newWindow)
+    public void ShowPreview()
     {
-        var image = Selection.FirstOrDefault();
-        if (image == null) return;
-        var pane = _desktopFormProvider.DesktopForm.PreviewPane;
-        if (!newWindow)
+        if (_config.Get(c => c.PreviewLastShownInPane))
         {
-            pane.Show(image);
-            return;
+            ShowPreviewPane();
         }
+        else
+        {
+            ShowPreviewWindow();
+        }
+    }
+
+    public void ShowPreviewPane()
+    {
+        if (Selection.FirstOrDefault() is not { } image) return;
+        _desktopFormProvider.DesktopForm.PreviewPane.Show(image);
+    }
+
+    public void ShowPreviewWindow()
+    {
+        if (Selection.FirstOrDefault() is not { } image) return;
+        var pane = _desktopFormProvider.DesktopForm.PreviewPane;
+        var editorType = pane.CurrentImage == image ? pane.ActiveEditorType : null;
         pane.Hide();
         using var viewer = _formFactory.Create<PreviewForm>();
         viewer.CurrentImage = image;
+        viewer.EditorType = editorType;
         viewer.ShowModal();
+        if (viewer.ContinueInPane)
+        {
+            pane.Show(viewer.CurrentImage, viewer.EditorType);
+        }
     }
 
     public void ShowPdfSettingsForm() => ShowSettingsForm<PdfSettingsPanel>();

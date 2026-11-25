@@ -618,7 +618,7 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
-    private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowPreview(false);
+    private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowPreview();
 
     private void ListViewSelectionChanged(object? sender, EventArgs e)
     {

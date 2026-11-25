@@ -19,7 +19,9 @@ public interface IDesktopSubFormController
     void ShowOcrForm();
     void ShowBatchScanForm();
     void ShowScannerSharingForm();
-    void ShowPreview(bool newWindow);
+    void ShowPreview();
+    void ShowPreviewPane();
+    void ShowPreviewWindow();
     void ShowPdfSettingsForm();
     void ShowImageSettingsForm();
     void ShowEmailSettingsForm();

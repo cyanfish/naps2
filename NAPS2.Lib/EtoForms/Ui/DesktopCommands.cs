@@ -141,12 +141,12 @@ public class DesktopCommands : IDisposable
             Text = UiStrings.Image,
             IconName = "picture_edit"
         };
-        View = new ActionCommand(() => desktopSubFormController.ShowPreview(false))
+        View = new ActionCommand(desktopSubFormController.ShowPreviewPane)
         {
             Text = UiStrings.View,
             IconName = "zoom"
         };
-        ViewInNewWindow = new ActionCommand(() => desktopSubFormController.ShowPreview(true))
+        ViewInNewWindow = new ActionCommand(desktopSubFormController.ShowPreviewWindow)
         {
             Text = UiStrings.ViewInNewWindow,
             IconName = "new_window"
