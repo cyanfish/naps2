@@ -30,6 +30,7 @@ public class ScrollZoomImageViewer
         _scrollable.MouseUp += OnMouseUp;
         EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
         _scrollable.SizeChanged += OnSizeChanged;
+        _scrollable.Shown += OnSizeChanged;
         _scrollable.Scroll += (_, _) => _imageView.Invalidate();
         _scrollable.Cursor = Cursors.Pointer;
     }
