@@ -1,0 +1,30 @@
+using NAPS2.EtoForms.Widgets;
+
+namespace NAPS2.EtoForms.Ui;
+
+public class HueSatEditor : UnaryImageEditor
+{
+    private readonly SliderWithTextBox _hueSlider = new();
+    private readonly SliderWithTextBox _saturationSlider = new();
+
+    public HueSatEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+        IIconProvider iconProvider) :
+        base(config, imageList, thumbnailController)
+    {
+        IconName = "color_management";
+        Title = UiStrings.HueSaturation;
+
+        AttachIconDependency(scale =>
+        {
+            _hueSlider.Icon = iconProvider.GetIcon("color_wheel", IconScenario.Inline16, scale);
+            _saturationSlider.Icon = iconProvider.GetIcon("color_gradient", IconScenario.Inline16, scale);
+        });
+        Sliders = [_hueSlider, _saturationSlider];
+    }
+
+    protected override List<Transform> Transforms =>
+    [
+        new HueTransform(_hueSlider.IntValue),
+        new SaturationTransform(_saturationSlider.IntValue)
+    ];
+}

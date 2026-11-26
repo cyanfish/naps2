@@ -57,7 +57,7 @@ public class LayoutScrollable : LayoutContainer
             Debug.WriteLine($"{new string(' ', context.Depth)}{GetType().Name} layout with bounds {bounds}");
         }
         if (_scrollContainer == null) throw new InvalidOperationException();
-        _scrollContainer.Visible = IsVisible && (context.ParentVisibility?.IsVisible ?? true);
+        _scrollContainer.Visible = IsVisibleInContext(context);
         EtoPlatform.Current.SetFrame(context.Container, _scrollContainer, Point.Round(bounds.Location),
             Size.Round(bounds.Size), context.InOverlay);
 
@@ -78,7 +78,7 @@ public class LayoutScrollable : LayoutContainer
     {
         // The width is 0 for overlay scrollbars (e.g. on Mac), which don't need any spacing
         var scrollBarWidth = EtoPlatform.Current.GetVerticalScrollBarWidth(scrollContainer);
-        return scrollBarWidth > 0 ? scrollBarWidth + context.DefaultSpacing * context.Scale : 0;
+        return scrollBarWidth > 0 ? scrollBarWidth + context.DefaultSpacing : 0;
     }
 
     private float MeasureContentHeight(LayoutContext childContext, float width)
@@ -91,13 +91,13 @@ public class LayoutScrollable : LayoutContainer
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
-        if (!IsVisible || context.ParentVisibility?.IsVisible == false)
+        if (!IsVisibleInContext(context))
         {
             return SizeF.Empty;
         }
         var childContext = GetChildContext(context) with { UseCache = false };
         var contentSize = _content.GetPreferredSize(childContext, parentBounds);
-        var height = (Height ?? 0) * context.Scale;
+        var height = (Height ?? 0);
         var width = contentSize.Width;
         if (contentSize.Height > height && _scrollContainer != null)
         {
@@ -106,7 +106,7 @@ public class LayoutScrollable : LayoutContainer
         }
         if (Width != null)
         {
-            width = Width.Value * context.Scale;
+            width = Width.Value;
         }
         return new SizeF(width, height);
     }

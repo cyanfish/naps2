@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using NAPS2.Ocr;
@@ -20,11 +21,27 @@ public class ScanningContext : IDisposable
 
     static ScanningContext()
     {
-        // Use jpegli for JPEG encoding if the NAPS2.Jpeg.Binaries package is present
-        if (JpegliEncoder.TryCreate() is { } jpegliEncoder)
+        // Use jpegli/libwebp/libjxl if the NAPS2.Jpeg.Binaries package is present
+        if (JpegliCodec.TryCreate() is { } jpegliCodec)
         {
-            ImageContext.BundledEncoders.TryAdd(ImageFileFormat.Jpeg, jpegliEncoder);
+            ImageContext.BundledEncoders.TryAdd(ImageFileFormat.Jpeg, jpegliCodec);
         }
+        // The win-x86 worker only includes jpegli
+        if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+        {
+            return;
+        }
+        if (WebPCodec.TryCreate() is { } webpCodec)
+        {
+            ImageContext.BundledEncoders.TryAdd(ImageFileFormat.WebP, webpCodec);
+            ImageContext.BundledDecoders.TryAdd(ImageFileFormat.WebP, webpCodec);
+        }
+        if (JpegXlCodec.TryCreate() is { } jxlCodec)
+        {
+            ImageContext.BundledEncoders.TryAdd(ImageFileFormat.JpegXl, jxlCodec);
+            ImageContext.BundledDecoders.TryAdd(ImageFileFormat.JpegXl, jxlCodec);
+        }
+        ImageContext.BundledColorConverter ??= IccColorConverter.TryCreate();
     }
 
     /// <summary>

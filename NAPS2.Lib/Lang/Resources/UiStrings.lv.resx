@@ -459,6 +459,9 @@
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Vienas lappuses datnes</value>
   </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
+  </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>Šifrēt PDF</value>
   </data>
@@ -1034,5 +1037,56 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="ButtonsLabel" xml:space="preserve">
     <value>Buttons:</value>
+  </data>
+  <data name="WindowsKey" xml:space="preserve">
+    <value>Win</value>
+  </data>
+  <data name="EnterKey" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="DeleteKey" xml:space="preserve">
+    <value>Dzēst</value>
+  </data>
+  <data name="InsertKey" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="EscapeKey" xml:space="preserve">
+    <value>Esc</value>
+  </data>
+  <data name="SpaceKey" xml:space="preserve">
+    <value>Space</value>
+  </data>
+  <data name="TabKey" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="BackspaceKey" xml:space="preserve">
+    <value>Backspace</value>
+  </data>
+  <data name="HomeKey" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="EndKey" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="PageUpKey" xml:space="preserve">
+    <value>Page Up</value>
+  </data>
+  <data name="PageDownKey" xml:space="preserve">
+    <value>Page Down</value>
+  </data>
+  <data name="UpArrowKey" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="DownArrowKey" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="LeftArrowKey" xml:space="preserve">
+    <value>Pa kreisi</value>
+  </data>
+  <data name="RightArrowKey" xml:space="preserve">
+    <value>Pa labi</value>
+  </data>
+  <data name="PauseKey" xml:space="preserve">
+    <value>Pause</value>
   </data>
 </root>

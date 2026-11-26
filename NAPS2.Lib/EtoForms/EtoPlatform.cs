@@ -32,6 +32,11 @@ public abstract class EtoPlatform
     public abstract IDarkModeProvider DarkModeProvider { get; }
     public ColorScheme ColorScheme { get; }
 
+    public virtual void StartPreloading()
+    {
+        CultureHelper.PreloadGlobalization();
+    }
+
     public Application CreateApplication()
     {
         var app = CreateApplicationCore();
@@ -41,7 +46,7 @@ public abstract class EtoPlatform
 
     private static void UnhandledException(object? sender, Eto.UnhandledExceptionEventArgs e)
     {
-        Log.FatalException("An error occurred that caused the application to close.",
+        Log.FatalException("An application error occurred.",
             e.ExceptionObject as Exception ?? new Exception());
     }
 
@@ -50,6 +55,9 @@ public abstract class EtoPlatform
     public abstract IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) where T : notnull;
     public abstract ISettingsNavigator CreateSettingsNavigator();
 
+    public virtual bool SupportsInlinePreviewToolBar => false;
+    public virtual Control CreateInlinePreviewToolBar(ToolBar toolBar) => throw new NotSupportedException();
+
     public virtual bool SupportsWindowSidebar => false;
     public virtual void AttachWindowSidebar(Window window, Control sidebar, WindowSidebarOptions options) =>
         throw new NotSupportedException();
@@ -57,6 +65,8 @@ public abstract class EtoPlatform
         throw new NotSupportedException();
 
     public abstract void ConfigureImageButton(Button button, ButtonFlags flags);
+    public virtual int IconButtonSize => 30;
+    public virtual int CompactIconButtonSize => IconButtonSize;
     public abstract Bitmap ToBitmap(IMemoryImage image);
     public abstract IMemoryImage FromBitmap(Bitmap bitmap);
     public abstract IMemoryImage DrawHourglass(IMemoryImage thumb);
@@ -71,6 +81,22 @@ public abstract class EtoPlatform
     public abstract int GetVerticalScrollBarWidth(Control scrollContainer);
 
     public abstract void ConfigureDonateButton(Button button);
+
+    public virtual DialogButtonOrder ButtonOrder => DialogButtonOrder.PrimarySecondaryClose;
+
+    public abstract MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options);
+
+    public Window? DefaultDialogOwner
+    {
+        get
+        {
+            // The active window if it's one of ours, otherwise the top of the modal stack
+            var windows = Application.Instance.Windows.Where(x => x.Visible).ToList();
+            return windows.LastOrDefault(IsActiveWindow) ?? windows.LastOrDefault();
+        }
+    }
+
+    protected virtual bool IsActiveWindow(Window window) => window.HasFocus;
 
     public virtual void InitializeForegroundApp()
     {
@@ -112,6 +138,8 @@ public abstract class EtoPlatform
         return window.ClientSize;
     }
 
+    public virtual int GetTopContentInset(Window window) => 0;
+
     public virtual void SetClientSize(Window window, Size clientSize)
     {
         window.ClientSize = clientSize;
@@ -144,16 +172,35 @@ public abstract class EtoPlatform
     {
     }
 
-    public virtual void ConfigureZoomButton(Button button, string icon)
+    public virtual void ConfigureFloatingButton(Button button, string icon)
     {
+    }
+
+    public virtual void ConfigureJoinedButtons(Button left, Button right)
+    {
+    }
+
+    public virtual void SetDefaultButton(Window window, Button? button)
+    {
+        if (window is Dialog dialog)
+        {
+            dialog.DefaultButton = button;
+        }
     }
 
     public virtual void SetAccessibleName(Control control, string name)
     {
     }
 
+    public virtual void AttachFrameSizeChanged(Control control, Action<Size> action)
+    {
+    }
+
     public virtual void AttachDpiDependency(Control control, Action<float> callback) =>
         callback(GetScaleFactor(control.ParentWindow));
+
+    public virtual void AttachIconDependency(Control control, Action<float> callback) =>
+        AttachDpiDependency(control, callback);
 
     public virtual SizeF GetWrappedSize(Control control, int defaultWidth)
     {
@@ -199,16 +246,17 @@ public abstract class EtoPlatform
         control.MouseWheel += eventHandler;
     }
 
+    public virtual void AttachFirstDrawnEvent(Window window, EventHandler<EventArgs> eventHandler)
+    {
+        window.Shown += eventHandler;
+    }
+
     public virtual void AttachMouseMoveEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
     {
         control.MouseMove += eventHandler;
     }
 
     public virtual float GetScaleFactor(Window window) => 1f;
-
-    public virtual bool ScaleLayout => false;
-
-    public float GetLayoutScaleFactor(Window window) => ScaleLayout ? GetScaleFactor(window) : 1f;
 
     public virtual void SetImageSize(ButtonMenuItem menuItem, int size)
     {
@@ -230,10 +278,5 @@ public abstract class EtoPlatform
 
     public virtual void ConfigureFileDialog(FileDialog fileDialog)
     {
-    }
-
-    public virtual byte[] GetData(IDataObject dataObject, string typeName)
-    {
-        return dataObject.GetData(typeName);
     }
 }

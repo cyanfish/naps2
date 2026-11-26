@@ -16,13 +16,13 @@
     <value>Чорно-біле</value>
   </data>
   <data name="BitDepth_24Color" xml:space="preserve">
-    <value>Кольорове (24-бітне)</value>
+    <value>Кольорове, 24 біти</value>
   </data>
   <data name="BitDepth_8Grayscale" xml:space="preserve">
     <value>Відтінки сірого</value>
   </data>
   <data name="DpiFormat" xml:space="preserve">
-    <value>{0} DPI (точок на дюйм)</value>
+    <value>{0} dpi (точок на дюйм)</value>
   </data>
   <data name="EmailProviderType_CustomSmtp" xml:space="preserve">
     <value>Власний SMTP</value>
@@ -124,7 +124,7 @@
     <value>LZW</value>
   </data>
   <data name="TiffComp_None" xml:space="preserve">
-    <value>Нічого</value>
+    <value>Немає</value>
   </data>
   <data name="TwainImpl_Default" xml:space="preserve">
     <value>За замовчуванням</value>

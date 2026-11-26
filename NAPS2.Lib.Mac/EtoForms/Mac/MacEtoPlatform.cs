@@ -80,6 +80,10 @@ public class MacEtoPlatform : EtoPlatform
         {
             handler.BezelStyle = NSBezelStyle.Rounded;
         }
+        if (button is { ImagePosition: ButtonImagePosition.Overlay, Handler: ToggleButtonHandler toggleHandler })
+        {
+            toggleHandler.BezelStyle = NSBezelStyle.Rounded;
+        }
         var image = nsButton.Image!;
         if (image.Representations() is [NSBitmapImageRep rep, ..])
         {
@@ -194,6 +198,8 @@ public class MacEtoPlatform : EtoPlatform
     private readonly ConditionalWeakTable<Window, SidebarState> _sidebars = new();
 
     public override bool SupportsWindowSidebar => true;
+
+    public override DialogButtonOrder ButtonOrder => DialogButtonOrder.SecondaryClosePrimary;
 
     public override void AttachWindowSidebar(Window window, Control sidebar, WindowSidebarOptions options)
     {
@@ -313,6 +319,25 @@ public class MacEtoPlatform : EtoPlatform
         NSSplitViewController SplitViewController,
         NSSplitViewItem SidebarItem);
 
+    public override void SetDefaultButton(Window window, Button? button)
+    {
+        base.SetDefaultButton(window, button);
+        if (window is not Dialog && button != null)
+        {
+            ((NSButton) button.ToNative()).KeyEquivalent = "\r";
+        }
+    }
+
+    public override int GetTopContentInset(Window window)
+    {
+        var nsWindow = window.ToNative();
+        if (nsWindow.ContentView == null || !nsWindow.StyleMask.HasFlag(NSWindowStyle.FullSizeContentView))
+        {
+            return 0;
+        }
+        return (int) Math.Round(nsWindow.ContentView.Frame.Height - nsWindow.ContentLayoutRect.Height);
+    }
+
     public override Size GetClientSize(Window window, bool excludeToolbars = false)
     {
         if (_sidebars.TryGetValue(window, out var sidebar))
@@ -346,6 +371,40 @@ public class MacEtoPlatform : EtoPlatform
     {
         var native = (NSButton) button.ToNative();
         native.Bordered = false;
+    }
+
+    public override MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options)
+    {
+        var alert = new NSAlert
+        {
+            AlertStyle = options.Type switch
+            {
+                MessageBoxType.Warning => NSAlertStyle.Warning,
+                MessageBoxType.Error => NSAlertStyle.Critical,
+                _ => NSAlertStyle.Informational
+            },
+            MessageText = options.Title,
+            InformativeText = options.Text
+        };
+        var buttons = options.GetButtons(ButtonOrder, rtlOrder: true);
+        var defaultButton = options.EffectiveDefaultButton;
+        foreach (var (text, result) in buttons)
+        {
+            var button = alert.AddButton(text);
+            // A button can only have one key equivalent, so if the close button is the default it gets Esc, not Return
+            button.KeyEquivalent = result == MessageDialogResult.Close ? "\u001b" : result == defaultButton ? "\r" : "";
+            if (result == MessageDialogResult.Primary && options.Destructive)
+            {
+                button.HasDestructiveAction = true;
+            }
+        }
+        var window = owner?.ToNative();
+        if (window != null)
+        {
+            alert.BeginSheet(window, response => NSApplication.SharedApplication.StopModalWithCode((nint) response));
+        }
+        int index = (int) alert.RunModal() - (int) NSAlertButtonReturn.First;
+        return index >= 0 && index < buttons.Count ? buttons[index].Result : MessageDialogResult.Close;
     }
 
     public override void SetAccessibleName(Control control, string name) =>
@@ -397,41 +456,18 @@ public class MacEtoPlatform : EtoPlatform
         {
             if (ReferenceEquals(evt.Window, view.Window))
             {
-                var args = ToEtoKeyEventArgs(evt);
-                return handle(args.KeyData) ? null! : evt;
+                return handle(ToShortcutKeys(evt)) ? null! : evt;
             }
             return evt;
         });
         control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
     }
 
-    private static KeyEventArgs ToEtoKeyEventArgs(NSEvent theEvent)
+    private static Keys ToShortcutKeys(NSEvent evt)
     {
-        // Custom impl until fixed: https://github.com/picoe/Eto/issues/3002
-        char keyChar = !string.IsNullOrEmpty(theEvent.Characters) ? theEvent.Characters[0] : '\0';
-        Keys key = KeyMap.Convert(theEvent.CharactersIgnoringModifiers, 0);
-        if (key == Keys.None)
-        {
-            key = KeyMap.MapKey(theEvent.KeyCode, theEvent.ModifierFlags);
-        }
-        KeyEventArgs kpea;
-        Keys modifiers = theEvent.ModifierFlags.ToEto();
-        key |= modifiers;
-
-        KeyEventType keyEventType = theEvent.Type == NSEventType.KeyUp ? KeyEventType.KeyUp : KeyEventType.KeyDown;
-
-        if (key != Keys.None)
-        {
-            if (((modifiers & ~(Keys.Shift | Keys.Alt)) == 0))
-                kpea = new KeyEventArgs(key, keyEventType, keyChar);
-            else
-                kpea = new KeyEventArgs(key, keyEventType);
-        }
-        else
-        {
-            kpea = new KeyEventArgs(key, keyEventType, keyChar);
-        }
-        return kpea;
+        var keys = evt.ToEtoKeyEventArgs().KeyData;
+        // The key labeled "delete" on Mac keyboards is Backspace, which is what users expect to delete items with
+        return (keys & Keys.KeyMask) == Keys.Backspace ? (keys & Keys.ModifierMask) | Keys.Delete : keys;
     }
 
     public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
@@ -453,6 +489,13 @@ public class MacEtoPlatform : EtoPlatform
             return evt;
         });
         control.UnLoad += (_, _) => NSEvent.RemoveMonitor(monitor);
+    }
+
+    public override void AttachFirstDrawnEvent(Window window, EventHandler<EventArgs> eventHandler)
+    {
+        // The window is displayed at the end of the run loop iteration where Shown is raised
+        window.Shown += (sender, args) =>
+            NSApplication.SharedApplication.BeginInvokeOnMainThread(() => eventHandler(sender, args));
     }
 
     private class MacAppDelegate : AppDelegate
@@ -478,6 +521,11 @@ public class MacEtoPlatform : EtoPlatform
             var savePanel = (NSSavePanel) sd.ControlObject;
             // Ensure the correct extension is added on save
             savePanel.AllowsOtherFileTypes = false;
+            // Eto sets the name to only an extension when there's no default name, which is then doubled
+            if (Path.GetFileNameWithoutExtension(savePanel.NameFieldStringValue) == "")
+            {
+                savePanel.NameFieldStringValue = "";
+            }
         }
     }
 }

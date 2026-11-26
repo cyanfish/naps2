@@ -59,6 +59,7 @@ internal class CopyBitwiseImageOp : BinaryBitwiseImageOp
     protected override void PerformCore(BitwiseImageData src, BitwiseImageData dst, int partStart, int partEnd)
     {
         if (src.BitLayout == dst.BitLayout &&
+            src.premultipliedAlpha == dst.premultipliedAlpha &&
             DestChannel == ColorChannel.All &&
             (src.bytesPerPixel > 0 ||
              // For Black & White images, to use the fast copy path, we must have that:
@@ -106,6 +107,9 @@ internal class CopyBitwiseImageOp : BinaryBitwiseImageOp
         bool copyToBlue = dst.bytesPerPixel != 1 && DestChannel is ColorChannel.All or ColorChannel.Blue;
         bool copyToGray = dst.bytesPerPixel == 1;
         bool resetAlpha = dst.hasAlpha && !src.hasAlpha;
+        bool premultiply = copyAlpha && !src.premultipliedAlpha && dst.premultipliedAlpha;
+        // We unpremultiply even when dst has no alpha, so the end result of a RGBA->RGB copy is consistent with ignoring alpha
+        bool unpremultiply = src.premultipliedAlpha && !dst.premultipliedAlpha;
         bool invertY = src.invertY ^ dst.invertY;
         for (int i = partStart; i < partEnd; i++)
         {
@@ -130,6 +134,31 @@ internal class CopyBitwiseImageOp : BinaryBitwiseImageOp
                     r = *(srcPixel + src.rOff);
                     g = *(srcPixel + src.gOff);
                     b = *(srcPixel + src.bOff);
+                }
+                if (premultiply)
+                {
+                    var a = *(srcPixel + src.aOff);
+                    if (a != 255)
+                    {
+                        r = (byte) ((r * a + 127) / 255);
+                        g = (byte) ((g * a + 127) / 255);
+                        b = (byte) ((b * a + 127) / 255);
+                    }
+                }
+                else if (unpremultiply)
+                {
+                    var a = *(srcPixel + src.aOff);
+                    if (a == 0)
+                    {
+                        r = g = b = 0;
+                    }
+                    else if (a != 255)
+                    {
+                        // Premultiplied values can't exceed the alpha, but clamp in case of invalid data
+                        r = (byte) Math.Min(255, (r * 255 + a / 2) / a);
+                        g = (byte) Math.Min(255, (g * 255 + a / 2) / a);
+                        b = (byte) Math.Min(255, (b * 255 + a / 2) / a);
+                    }
                 }
                 if (copyToGray)
                 {

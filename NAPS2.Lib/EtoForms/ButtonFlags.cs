@@ -5,5 +5,6 @@ public enum ButtonFlags
 {
     None,
     LargeIcon,
-    LargeText
+    LargeText,
+    Compact = 4
 }

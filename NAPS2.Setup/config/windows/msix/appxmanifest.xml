@@ -57,6 +57,8 @@
                             <uap:FileType ContentType="image/tiff">.tiff</uap:FileType>
                             <uap:FileType ContentType="image/tiff">.tif</uap:FileType>
                             <uap:FileType ContentType="image/bmp">.bmp</uap:FileType>
+                            <uap:FileType ContentType="image/webp">.webp</uap:FileType>
+                            <uap:FileType ContentType="image/jxl">.jxl</uap:FileType>
                         </uap:SupportedFileTypes>
                         <uap:DisplayName>Image Files</uap:DisplayName>
                         <uap:Logo>Assets\scanner-44.png</uap:Logo>

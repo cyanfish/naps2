@@ -30,7 +30,7 @@ public class ManualIpForm : EtoDialogBase
         _iconProvider = iconProvider;
 
         EtoPlatform.Current.SetImageSize(_statusIcon, 16);
-        EtoPlatform.Current.AttachDpiDependency(this, _ => UpdateStatusIcon());
+        EtoPlatform.Current.AttachIconDependency(this, _ => UpdateStatusIcon());
     }
 
     public ScanDevice? Device { get; set; }

@@ -1,0 +1,104 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <Import Project="ReadyToRun.targets" />
+
+    <!-- Assemblies loaded during startup (per AppDomain.GetAssemblies()) and common operations like scanning -->
+    <ItemGroup>
+        <Naps2ReadyToRunAssembly Include="Microsoft.Win32.Primitives.dll" />
+        <Naps2ReadyToRunAssembly Include="Microsoft.Win32.Registry.dll" />
+        <Naps2ReadyToRunAssembly Include="Microsoft.Win32.SystemEvents.dll" />
+        <Naps2ReadyToRunAssembly Include="PresentationCore.dll" />
+        <Naps2ReadyToRunAssembly Include="PresentationFramework-SystemXml.dll" />
+        <Naps2ReadyToRunAssembly Include="PresentationFramework.Aero2.dll" />
+        <Naps2ReadyToRunAssembly Include="PresentationFramework.dll" />
+        <Naps2ReadyToRunAssembly Include="PresentationFramework.Fluent.dll" />
+        <Naps2ReadyToRunAssembly Include="ReachFramework.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Collections.Concurrent.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Collections.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Collections.Immutable.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Collections.NonGeneric.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Collections.Specialized.dll" />
+        <Naps2ReadyToRunAssembly Include="System.ComponentModel.dll" />
+        <Naps2ReadyToRunAssembly Include="System.ComponentModel.EventBasedAsync.dll" />
+        <Naps2ReadyToRunAssembly Include="System.ComponentModel.Primitives.dll" />
+        <Naps2ReadyToRunAssembly Include="System.ComponentModel.TypeConverter.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Configuration.ConfigurationManager.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Console.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Diagnostics.DiagnosticSource.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Diagnostics.Process.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Diagnostics.TextWriterTraceListener.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Diagnostics.TraceSource.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Diagnostics.Tracing.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Drawing.Common.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Drawing.Primitives.dll" />
+        <Naps2ReadyToRunAssembly Include="System.IO.Packaging.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Linq.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Linq.Expressions.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Memory.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Net.Http.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Net.Primitives.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Net.Requests.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Net.WebClient.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Net.WebHeaderCollection.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Numerics.Vectors.dll" />
+        <Naps2ReadyToRunAssembly Include="System.ObjectModel.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Private.CoreLib.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Private.Uri.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Private.Windows.Core.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Private.Windows.GdiPlus.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Private.Xml.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Private.Xml.Linq.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Reflection.Emit.ILGeneration.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Reflection.Emit.Lightweight.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Reflection.Metadata.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Reflection.Primitives.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Resources.ResourceManager.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Runtime.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Runtime.Extensions.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Runtime.InteropServices.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Runtime.Loader.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Text.Encoding.Extensions.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Text.RegularExpressions.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Threading.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Threading.Thread.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Threading.ThreadPool.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Windows.Extensions.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Windows.Forms.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Windows.Forms.Primitives.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Xaml.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Xml.ReaderWriter.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Xml.XDocument.dll" />
+        <Naps2ReadyToRunAssembly Include="System.Xml.XmlSerializer.dll" />
+        <Naps2ReadyToRunAssembly Include="UIAutomationProvider.dll" />
+        <Naps2ReadyToRunAssembly Include="UIAutomationTypes.dll" />
+        <Naps2ReadyToRunAssembly Include="WindowsBase.dll" />
+        <Naps2ReadyToRunAssembly Include="WindowsFormsIntegration.dll" />
+
+        <Naps2ReadyToRunAssembly Include="Autofac.dll" />
+        <Naps2ReadyToRunAssembly Include="Eto.dll" />
+        <Naps2ReadyToRunAssembly Include="Eto.Wpf.dll" />
+        <Naps2ReadyToRunAssembly Include="Google.Protobuf.dll" />
+        <Naps2ReadyToRunAssembly Include="Microsoft.Extensions.Logging.Abstractions.dll" />
+        <Naps2ReadyToRunAssembly Include="Microsoft.WindowsAPICodePack.dll" />
+        <Naps2ReadyToRunAssembly Include="Microsoft.WindowsAPICodePack.Shell.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Escl.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Images.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Images.Wpf.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Internals.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Lib.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Lib.Wpf.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Sdk.dll" />
+
+        <Naps2ReadyToRunAssembly Include="Ben.Demystifier.dll" />
+        <Naps2ReadyToRunAssembly Include="Grpc.Core.Api.dll" />
+        <Naps2ReadyToRunAssembly Include="GrpcDotNetNamedPipes.dll" />
+        <Naps2ReadyToRunAssembly Include="ICSharpCode.SharpZipLib.dll" />
+        <Naps2ReadyToRunAssembly Include="NAPS2.Wia.dll" />
+        <Naps2ReadyToRunAssembly Include="NLog.dll" />
+        <Naps2ReadyToRunAssembly Include="NLog.Extensions.Logging.dll" />
+        <Naps2ReadyToRunAssembly Include="NTwain.dll" />
+        <Naps2ReadyToRunAssembly Include="PdfSharpCore.dll" />
+    </ItemGroup>
+
+</Project>

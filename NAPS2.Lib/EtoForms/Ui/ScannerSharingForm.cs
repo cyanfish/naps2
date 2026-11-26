@@ -61,7 +61,7 @@ public class ScannerSharingForm : EtoDialogBase
             _shareAsService.CheckedChanged += ShareAsServiceCheckedChanged;
             _sharedDeviceManager.SharingServerStopped += SharingServerStopped;
         }
-        EtoPlatform.Current.AttachDpiDependency(this, _ => _listView.RegenerateImages());
+        EtoPlatform.Current.AttachIconDependency(this, _ => _listView.RegenerateImages());
         _listView.ImageSize = new Size(48, 48);
         _listView.SelectionChanged += SelectionChanged;
 
@@ -208,8 +208,8 @@ public class ScannerSharingForm : EtoDialogBase
         if (SelectedDevice != null)
         {
             string message = string.Format(UiStrings.ConfirmDeleteSharedDevice, SelectedDevice.Name);
-            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxType.Warning,
-                    MessageBoxDefaultButton.OK) == DialogResult.Ok)
+            if (MessageDialog.Confirm(this, message, UiStrings.StopSharing, UiStrings.StopSharing, MessageBoxType.Warning,
+                    destructive: true))
             {
                 _sharedDeviceManager.RemoveSharedDevice(SelectedDevice);
                 ReloadDevices();

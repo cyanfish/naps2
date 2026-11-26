@@ -287,7 +287,7 @@ internal class AutomatedScanning
         }
         downloadController.DownloadError += (_, _) =>
         {
-            _errorOutput.DisplayError(MiscResources.FilesCouldNotBeDownloaded);
+            _errorOutput.DisplayError(UiStrings.FilesCouldNotBeDownloaded);
         };
         await downloadController.StartDownloadsAsync();
     }

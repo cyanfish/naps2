@@ -60,7 +60,7 @@ public class AuthorizeForm : EtoDialogBase
             {
                 if (!_cancelTokenSource.IsCancellationRequested)
                 {
-                    _errorOutput.DisplayError(MiscResources.AuthError, ex);
+                    _errorOutput.DisplayError(UiStrings.AuthError, ex);
                     Log.ErrorException("Error acquiring Oauth token", ex);
                 }
                 Invoker.Current.Invoke(Close);

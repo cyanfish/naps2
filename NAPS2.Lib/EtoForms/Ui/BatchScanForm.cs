@@ -8,13 +8,6 @@ using NAPS2.ImportExport;
 using NAPS2.Scan;
 using NAPS2.Scan.Batch;
 using NAPS2.Scan.Exceptions;
-using Button = Eto.Forms.Button;
-using Control = Eto.Forms.Control;
-using DialogResult = Eto.Forms.DialogResult;
-using Label = Eto.Forms.Label;
-using MessageBox = Eto.Forms.MessageBox;
-using MessageBoxButtons = Eto.Forms.MessageBoxButtons;
-using RadioButton = Eto.Forms.RadioButton;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -115,9 +108,9 @@ public class BatchScanForm : EtoDialogBase
         UpdateUIFromSettings();
 
         FormStateController.FixedHeightLayout = true;
+        DefaultButton = _start;
         AbortButton = _cancel;
 
-        int profileButtonWidth = EtoPlatform.Current.IsWpf ? 32 : 30;
         LayoutController.Content = L.Column(
             L.Row(
                 _status.Scale().AlignCenter().NaturalWidth(200),
@@ -132,8 +125,10 @@ public class BatchScanForm : EtoDialogBase
                     C.Label(UiStrings.ProfileLabel),
                     L.Row(
                         _profile.AsControl().Scale().NaturalWidth(100),
-                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay).Width(profileButtonWidth),
-                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay).Width(profileButtonWidth)
+                        C.Button(EditProfileCommand, ButtonImagePosition.Overlay)
+                            .Width(EtoPlatform.Current.IconButtonSize),
+                        C.Button(NewProfileCommand, ButtonImagePosition.Overlay)
+                            .Width(EtoPlatform.Current.IconButtonSize)
                     ),
                     _singleScan,
                     _multipleScansPrompt,
@@ -353,8 +348,8 @@ public class BatchScanForm : EtoDialogBase
             Invoker.Current.Invoke(() =>
             {
                 _status.Text = _cts.IsCancellationRequested
-                    ? MiscResources.BatchStatusCancelled
-                    : MiscResources.BatchStatusComplete;
+                    ? UiStrings.BatchStatusCancelled
+                    : UiStrings.BatchStatusComplete;
             });
         }
         catch (ScanDriverException ex)
@@ -372,8 +367,8 @@ public class BatchScanForm : EtoDialogBase
         catch (Exception ex)
         {
             Log.ErrorException("Error in batch scan", ex);
-            _errorOutput.DisplayError(MiscResources.BatchError, ex);
-            Invoker.Current.Invoke(() => { _status.Text = MiscResources.BatchStatusError; });
+            _errorOutput.DisplayError(UiStrings.BatchError, ex);
+            Invoker.Current.Invoke(() => { _status.Text = UiStrings.BatchStatusError; });
         }
         Invoker.Current.Invoke(() =>
         {
@@ -381,7 +376,7 @@ public class BatchScanForm : EtoDialogBase
             _cts = new CancellationTokenSource();
             _start.Enabled = true;
             _cancel.Enabled = true;
-            _cancel.Text = MiscResources.Close;
+            _cancel.Text = UiStrings.Close;
             EnableDisableSettings(true);
             Focus();
         });
@@ -400,7 +395,7 @@ public class BatchScanForm : EtoDialogBase
         _status.Text = status;
         if (done)
         {
-            _cancel.Text = MiscResources.Close;
+            _cancel.Text = UiStrings.Close;
         }
     }
 
@@ -408,12 +403,20 @@ public class BatchScanForm : EtoDialogBase
     {
         if (_batchRunning)
         {
-            if (MessageBox.Show(MiscResources.ConfirmCancelBatch, MiscResources.CancelBatch, MessageBoxButtons.YesNo,
-                    MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes)
+            var result = MessageDialog.Show(this,
+                new MessageDialogOptions
+                {
+                    Title = UiStrings.BatchScanFormTitle,
+                    Text = UiStrings.ConfirmCancelBatch,
+                    Type = MessageBoxType.Question,
+                    PrimaryText = UiStrings.CancelBatch,
+                    CloseText = UiStrings.KeepScanning
+                });
+            if (result == MessageDialogResult.Primary)
             {
                 _cts.Cancel();
                 _cancel.Enabled = false;
-                _status.Text = MiscResources.BatchStatusCancelling;
+                _status.Text = UiStrings.BatchStatusCancelling;
             }
         }
         else

@@ -17,6 +17,45 @@ internal class PdfPage : NativePdfiumObject
     
     public float Height => Native.FPDF_GetPageHeightF(Handle);
 
+    public PdfRect BoundingBox
+    {
+        get
+        {
+            if (!Native.FPDF_GetPageBoundingBox(Handle, out var rect))
+            {
+                throw new Exception("Could not get page bounding box");
+            }
+            return rect;
+        }
+    }
+
+    // Pdfium returns 0-3 mapping to 0, 90, 180, 270
+    public int Rotation => Native.FPDFPage_GetRotation(Handle) * 90;
+
+    public PdfMatrix DisplayToUserSpaceMatrix
+    {
+        get
+        {
+            var box = BoundingBox;
+            return Rotation switch
+            {
+                90 => new PdfMatrix(0, 1, -1, 0, box.Right, box.Bottom),
+                180 => new PdfMatrix(-1, 0, 0, -1, box.Right, box.Top),
+                270 => new PdfMatrix(0, -1, 1, 0, box.Left, box.Top),
+                _ => new PdfMatrix(1, 0, 0, 1, box.Left, box.Bottom)
+            };
+        }
+    }
+
+    public (int x, int y) PageToDevice(int width, int height, double x, double y)
+    {
+        if (!Native.FPDF_PageToDevice(Handle, 0, 0, width, height, 0, x, y, out var deviceX, out var deviceY))
+        {
+            throw new Exception("Could not map page coordinates to device coordinates");
+        }
+        return (deviceX, deviceY);
+    }
+
     public bool HasTransparency => Native.FPDFPage_HasTransparency(Handle);
 
     public PdfText GetText()

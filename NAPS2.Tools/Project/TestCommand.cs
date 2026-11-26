@@ -7,11 +7,12 @@ public class TestCommand : ICommand<TestOptions>
     public int Run(TestOptions opts)
     {
         var arch = RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant();
+        var appProject = ProjectHelper.GetWindowsAppProject(opts.App);
         var depsRootPath = OperatingSystem.IsMacOS()
             ? $"NAPS2.App.Mac/bin/Debug/net11.0-macos/osx-{arch}"
             : OperatingSystem.IsLinux()
                 ? $"NAPS2.App.Gtk/bin/Debug/net11.0/linux-{arch}"
-                : $"NAPS2.App.WinForms/bin/Debug/net11.0-windows/win-{arch}";
+                : $"{appProject}/bin/Debug/net11.0-windows/win-{arch}";
 
         var scopes = string.IsNullOrEmpty(opts.Scope) ? ["sdk", "lib", "app"] : opts.Scope.Split('+');
         var projects = new List<string>();
@@ -40,6 +41,7 @@ public class TestCommand : ICommand<TestOptions>
             new()
         {
             { "NAPS2_TEST_DEPS", Path.Combine(Paths.SolutionRoot, depsRootPath) },
+            { "NAPS2_TEST_APP_PROJECT", appProject },
             { "NAPS2_TEST_NOGUI", opts.NoGui ? "1" : "0" },
             { "NAPS2_TEST_NONETWORK", opts.NoNetwork ? "1" : "0" },
             { "NAPS2_TEST_IMAGES", opts.Images ?? "" }

@@ -30,7 +30,7 @@ public class ImageListActions
 
     private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
 
-    private ListSelection<UiImage>? Selection => SelectionFunc?.Invoke();
+    public ListSelection<UiImage>? Selection => SelectionFunc?.Invoke();
 
     public ImageListActions WithSelection(Func<ListSelection<UiImage>> selectionFunc)
     {
@@ -103,13 +103,14 @@ public class ImageListActions
     public async Task Redo() => await _imageList.Redo();
 
     public Task SaveAllAsPdf() => _exportController.SavePdf(_imageList.Images, _notify);
-    public Task SaveSelectedAsPdf() => _exportController.SavePdf(_imageList.Selection, _notify);
+    public Task SaveSelectedAsPdf() => _exportController.SavePdf(Selection ?? _imageList.Selection, _notify);
     public Task SaveAllAsImages() => _exportController.SaveImages(_imageList.Images, _notify);
-    public Task SaveSelectedAsImages() => _exportController.SaveImages(_imageList.Selection, _notify);
+    public Task SaveSelectedAsImages() => _exportController.SaveImages(Selection ?? _imageList.Selection, _notify);
     public Task SaveAllAsPdfOrImages() => _exportController.SavePdfOrImages(_imageList.Images, _notify);
-    public Task SaveSelectedAsPdfOrImages() => _exportController.SavePdfOrImages(_imageList.Selection, _notify);
+    public Task SaveSelectedAsPdfOrImages() =>
+        _exportController.SavePdfOrImages(Selection ?? _imageList.Selection, _notify);
     public Task EmailAllAsPdf() => _exportController.EmailPdf(_imageList.Images);
-    public Task EmailSelectedAsPdf() => _exportController.EmailPdf(_imageList.Selection);
+    public Task EmailSelectedAsPdf() => _exportController.EmailPdf(Selection ?? _imageList.Selection);
 
     public void EditWithApp() => _editWithController.EditWithApp(Selection ?? _imageList.Selection);
     public void EditWithPick() => _editWithController.EditWithPick(Selection ?? _imageList.Selection);

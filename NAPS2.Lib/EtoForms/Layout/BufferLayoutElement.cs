@@ -24,20 +24,20 @@ public class BufferLayoutElement : LayoutElement
     public override void DoLayout(LayoutContext context, RectangleF bounds)
     {
         Element.DoLayout(context, new RectangleF(
-            bounds.X + Left * context.Scale,
-            bounds.Y + Top * context.Scale,
-            bounds.Width - (Left + Right) * context.Scale,
-            bounds.Height - (Top + Bottom) * context.Scale));
+            bounds.X + Left,
+            bounds.Y + Top,
+            bounds.Width - (Left + Right),
+            bounds.Height - (Top + Bottom)));
     }
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
         return Element.GetPreferredSize(context,
                    new RectangleF(
-                       parentBounds.X + Left * context.Scale,
-                       parentBounds.Y + Top * context.Scale,
-                       parentBounds.Width - (Left + Right) * context.Scale,
-                       parentBounds.Height - (Top + Bottom) * context.Scale))
-               + new SizeF(Left + Right, Top + Bottom) * context.Scale;
+                       parentBounds.X + Left,
+                       parentBounds.Y + Top,
+                       parentBounds.Width - (Left + Right),
+                       parentBounds.Height - (Top + Bottom)))
+               + new SizeF(Left + Right, Top + Bottom);
     }
 }

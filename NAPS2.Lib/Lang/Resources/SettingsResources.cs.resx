@@ -148,7 +148,7 @@
     <value>Výchozí</value>
   </data>
   <data name="AppleImpl_FileTransfer" xml:space="preserve">
-    <value>File Transfer</value>
+    <value>Přenos souborů</value>
   </data>
   <data name="AppleImpl_MemoryTransfer" xml:space="preserve">
     <value>Přenos paměti,</value>
@@ -190,13 +190,13 @@
     <value>Tmavý</value>
   </data>
   <data name="DockStyle_Top" xml:space="preserve">
-    <value>Top</value>
+    <value>Nahoře</value>
   </data>
   <data name="DockStyle_Left" xml:space="preserve">
     <value>Vlevo</value>
   </data>
   <data name="DockStyle_Bottom" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Dole</value>
   </data>
   <data name="DockStyle_Right" xml:space="preserve">
     <value>Vpravo</value>

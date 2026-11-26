@@ -12,7 +12,7 @@ public class BlankDetectorTests : ContextualTests
     [MemberData(nameof(TestCases))]
     public void Blank1(ImagePixelFormat pixelFormat)
     {
-        var image = GetTestImage(ImageResources.blank1, pixelFormat);
+        using var image = GetTestImage(ImageResources.blank1, pixelFormat);
         var op = new BlankDetectionImageOp(WHITE_THRESHOLD, COVERAGE_THRESHOLD);
         op.Perform(image);
         Assert.True(op.IsBlank);
@@ -22,7 +22,7 @@ public class BlankDetectorTests : ContextualTests
     [MemberData(nameof(TestCases))]
     public void Blank2(ImagePixelFormat pixelFormat)
     {
-        var image = GetTestImage(ImageResources.blank2, pixelFormat);
+        using var image = GetTestImage(ImageResources.blank2, pixelFormat);
         var op = new BlankDetectionImageOp(WHITE_THRESHOLD, COVERAGE_THRESHOLD);
         op.Perform(image);
         Assert.True(op.IsBlank);
@@ -32,7 +32,7 @@ public class BlankDetectorTests : ContextualTests
     [MemberData(nameof(TestCases))]
     public void NotBlank(ImagePixelFormat pixelFormat)
     {
-        var image = GetTestImage(ImageResources.notblank, pixelFormat);
+        using var image = GetTestImage(ImageResources.notblank, pixelFormat);
         var op = new BlankDetectionImageOp(WHITE_THRESHOLD, COVERAGE_THRESHOLD);
         op.Perform(image);
         Assert.False(op.IsBlank);
@@ -45,7 +45,10 @@ public class BlankDetectorTests : ContextualTests
         {
             return image.PerformTransform(new BlackWhiteTransform(WHITE_THRESHOLD * 20 - 1000));
         }
-        return image.CopyWithPixelFormat(pixelFormat);
+        using (image)
+        {
+            return image.CopyWithPixelFormat(pixelFormat);
+        }
     }
 
     public static IEnumerable<object[]> TestCases =

@@ -9,6 +9,8 @@ namespace NAPS2.Platform.Windows;
 /// </summary>
 internal static class Win32
 {
+    public const int WM_SETICON = 0x80;
+
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
@@ -19,8 +21,17 @@ internal static class Win32
     [DllImport("user32.dll")]
     public static extern IntPtr GetActiveWindow();
 
+    [DllImport("user32.dll")]
+    public static extern IntPtr GetDesktopWindow();
+
+    [DllImport("d3d9.dll")]
+    public static extern int Direct3DCreate9Ex(uint sdkVersion, out IDirect3D9Ex d3d);
+
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     public static extern int MessageBox(IntPtr hWnd, string lpText, string lpCaption, uint uType);
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    public static extern IntPtr MB_GetString(uint wBtn);
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -39,6 +50,9 @@ internal static class Win32
 
     [DllImport("dwmapi.dll")]
     public static extern int DwmEnableBlurBehindWindow(IntPtr hwnd, ref DwmBlurBehind pBlurBehind);
+
+    [DllImport("dwmapi.dll")]
+    public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref Margins pMarInset);
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -138,6 +152,14 @@ internal static class Win32
         [MarshalAs(UnmanagedType.Bool)] public bool fEnable;
         public IntPtr hRgnBlur;
         [MarshalAs(UnmanagedType.Bool)] public bool fTransitionOnMaximized;
+    }
+
+    public struct Margins
+    {
+        public int cxLeftWidth;
+        public int cxRightWidth;
+        public int cyTopHeight;
+        public int cyBottomHeight;
     }
 
     public struct Message
@@ -281,6 +303,26 @@ internal static class Win32
     public static extern int SHDefExtractIcon(string pszIconFile, int iIndex, uint uFlags, out IntPtr phiconLarge,
         IntPtr phiconSmall, uint nIconSize);
 
+    public const int GWL_EXSTYLE = -20;
+    public const int WS_EX_DLGMODALFRAME = 0x1;
+
+    [DllImport("user32.dll", EntryPoint = "GetWindowLongW")]
+    public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", EntryPoint = "SetWindowLongW")]
+    public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+    public const uint SWP_NOSIZE = 0x1;
+    public const uint SWP_NOMOVE = 0x2;
+    public const uint SWP_NOZORDER = 0x4;
+    public const uint SWP_NOACTIVATE = 0x10;
+    public const uint SWP_FRAMECHANGED = 0x20;
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy,
+        uint uFlags);
+
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     public static extern IntPtr ExtractAssociatedIcon(IntPtr hInst, StringBuilder pszIconPath, ref ushort piIcon);
 
@@ -403,5 +445,59 @@ internal static class Win32
         public int biYPelsPerMeter;
         public uint biClrUsed;
         public uint biClrImportant;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct D3DPresentParameters
+    {
+        public uint BackBufferWidth;
+        public uint BackBufferHeight;
+        public uint BackBufferFormat;
+        public uint BackBufferCount;
+        public uint MultiSampleType;
+        public uint MultiSampleQuality;
+        public uint SwapEffect;
+        public IntPtr DeviceWindow;
+        public int Windowed;
+        public int EnableAutoDepthStencil;
+        public uint AutoDepthStencilFormat;
+        public uint Flags;
+        public uint FullScreenRefreshRateInHz;
+        public uint PresentationInterval;
+    }
+
+    [ComImport]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("02177241-69FC-400C-8FF1-93A44DF6861D")]
+    public interface IDirect3D9Ex
+    {
+        // IDirect3D9
+        void RegisterSoftwareDevice(IntPtr pInitializeFunction);
+        [PreserveSig] uint GetAdapterCount();
+        void GetAdapterIdentifier(uint adapter, uint flags, IntPtr pIdentifier);
+        [PreserveSig] uint GetAdapterModeCount(uint adapter, uint format);
+        void EnumAdapterModes(uint adapter, uint format, uint mode, IntPtr pMode);
+        void GetAdapterDisplayMode(uint adapter, IntPtr pMode);
+        void CheckDeviceType(uint adapter, int devType, uint adapterFormat, uint backBufferFormat, int windowed);
+        void CheckDeviceFormat(uint adapter, int deviceType, uint adapterFormat, uint usage, int rType,
+            uint checkFormat);
+        void CheckDeviceMultiSampleType(uint adapter, int deviceType, uint surfaceFormat, int windowed,
+            uint multiSampleType, IntPtr pQualityLevels);
+        void CheckDepthStencilMatch(uint adapter, int deviceType, uint adapterFormat, uint renderTargetFormat,
+            uint depthStencilFormat);
+        void CheckDeviceFormatConversion(uint adapter, int deviceType, uint sourceFormat, uint targetFormat);
+        void GetDeviceCaps(uint adapter, int deviceType, IntPtr pCaps);
+        [PreserveSig] IntPtr GetAdapterMonitor(uint adapter);
+        void CreateDevice(uint adapter, int deviceType, IntPtr hFocusWindow, uint behaviorFlags,
+            ref D3DPresentParameters presentationParameters, out IntPtr returnedDevice);
+
+        // IDirect3D9Ex
+        [PreserveSig] uint GetAdapterModeCountEx(uint adapter, IntPtr pFilter);
+        void EnumAdapterModesEx(uint adapter, IntPtr pFilter, uint mode, IntPtr pMode);
+        void GetAdapterDisplayModeEx(uint adapter, IntPtr pMode, IntPtr pRotation);
+        [PreserveSig]
+        int CreateDeviceEx(uint adapter, int deviceType, IntPtr hFocusWindow, uint behaviorFlags,
+            ref D3DPresentParameters presentationParameters, IntPtr pFullscreenDisplayMode, out IntPtr returnedDevice);
+        void GetAdapterLUID(uint adapter, out long luid);
     }
 }

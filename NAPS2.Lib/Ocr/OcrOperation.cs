@@ -9,13 +9,13 @@ public class OcrOperation : OperationBase
     public OcrOperation(Action<CancellationToken> waitAll)
     {
         _waitAll = waitAll;
-        ProgressTitle = MiscResources.OcrProgress;
+        ProgressTitle = UiStrings.OcrProgress;
         AllowBackground = true;
         AllowCancel = true;
         SkipExitPrompt = true;
         Status = new OperationStatus
         {
-            StatusText = MiscResources.RunningOcr,
+            StatusText = UiStrings.RunningOcr,
             IndeterminateProgress = true
         };
     }

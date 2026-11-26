@@ -13,9 +13,8 @@ public class GtkDarkModeProvider : IDarkModeProvider
         {
             var settings = Settings.GetForScreen(Gdk.Screen.Default);
             bool isDarkByStyleContext = false;
-            if (StyleContext != null)
+            if (StyleContext != null && StyleContext.LookupColor("theme_fg_color", out var color))
             {
-                var color = StyleContext.GetColor(StateFlags.Normal);
                 isDarkByStyleContext = color is { Red: > 0.5, Green: > 0.5, Blue: > 0.5 };
             }
             return settings.ApplicationPreferDarkTheme || isDarkByStyleContext;

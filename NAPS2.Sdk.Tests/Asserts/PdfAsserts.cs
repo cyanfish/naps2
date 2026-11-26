@@ -96,11 +96,11 @@ public static class PdfAsserts
                 Assert.True(j < expectedChars.Count, $"Unexpected extra char '{c}'");
                 var (expectedChar, bounds) = expectedChars[j++];
                 Assert.Equal(expectedChar, c);
-                // The center of the char box (scaled to the OCR page bounds, with the origin at the top-left) should be
-                // within the word bounds. This assumes the page isn't cropped or rotated.
+                // The center of the char box, mapped to the page as displayed (accounting for cropping and rotation)
+                // and scaled to the OCR page bounds, should be within the word bounds
                 var box = text.GetCharBox(i);
-                var x = (box.Left + box.Right) / 2 * (ocrResult.PageBounds.w / page.Width);
-                var y = (page.Height - (box.Top + box.Bottom) / 2) * (ocrResult.PageBounds.h / page.Height);
+                var (x, y) = page.PageToDevice(ocrResult.PageBounds.w, ocrResult.PageBounds.h,
+                    (box.Left + box.Right) / 2, (box.Top + box.Bottom) / 2);
                 Assert.InRange(x, bounds.x, bounds.x + bounds.w);
                 Assert.InRange(y, bounds.y, bounds.y + bounds.h);
             }
@@ -148,7 +148,8 @@ public static class PdfAsserts
             expectedImages.Select(data => TestImageContextFactory.Get().Load(data)).ToDisposableList();
         var renderSizes = PdfRenderSize.FromIndividualPageSizes(
             expectedImagesRendered.Select(image => PdfRenderSize.FromDimensions(image.Width, image.Height)));
-        var actualImages = renderer.Render(TestImageContextFactory.Get(), filePath, renderSizes, password).ToList();
+        using var actualImages =
+            renderer.Render(TestImageContextFactory.Get(), filePath, renderSizes, password).ToDisposableList();
         Assert.Equal(expectedImages.Length, actualImages.Count);
         for (int i = 0; i < expectedImages.Length; i++)
         {

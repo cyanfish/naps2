@@ -30,9 +30,7 @@
     <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
-  <Import Project="..\NAPS2.Setup\targets\TestScenarios.targets" />
+  <Import Project="..\NAPS2.Setup\targets\LibTargets.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Sdk\NAPS2.Sdk.csproj" />
@@ -41,7 +39,7 @@
     <PackageReference Include="Autofac" Version="9.3.1" />
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="Eto.Forms" Version="2.11.0" />
+    <PackageReference Include="Eto.Forms" Version="2.13.0" />
     <PackageReference Include="Grpc.Tools" Version="2.83.0-pre1" PrivateAssets="all" />
     <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
     <PackageReference Include="MimeKitLite" Version="4.17.0" />
@@ -79,14 +77,6 @@
     <EmbeddedResource Include="Lang\Resources\SettingsResources.pt-BR.resx" Condition="'$(Configuration)' == 'Debug'" />
     <EmbeddedResource Update="Lang\Resources\SettingsResources.*.resx">
       <DependentUpon>SettingsResources.resx</DependentUpon>
-    </EmbeddedResource>
-
-    <EmbeddedResource Remove="Lang\Resources\MiscResources.*.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.fr.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.he.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Include="Lang\Resources\MiscResources.pt-BR.resx" Condition="'$(Configuration)' == 'Debug'" />
-    <EmbeddedResource Update="Lang\Resources\MiscResources.*.resx">
-      <DependentUpon>MiscResources.resx</DependentUpon>
     </EmbeddedResource>
 
     <EmbeddedResource Remove="Lang\Resources\UiStrings.*.resx" Condition="'$(Configuration)' == 'Debug'" />

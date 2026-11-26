@@ -45,7 +45,7 @@ public class CommonConfig
     public MessageBoxIcon StartupMessageIcon { get; set; }
 
     [Common]
-    public Theme Theme { get; set; }
+    public AppTheme Theme { get; set; }
 
     [Common]
     public bool ScanChangesDefaultProfile { get; set; }
@@ -58,6 +58,12 @@ public class CommonConfig
 
     [Common]
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
+
+    [Common]
+    public bool EnablePreviewPane { get; set; }
+
+    [Common]
+    public PreviewPaneMode PreviewPaneMode { get; set; }
 
     [Common]
     public ToolbarButtons HiddenButtons { get; set; }
@@ -230,6 +236,15 @@ public class CommonConfig
 
     [User]
     public int SidebarWidth { get; set; }
+
+    [User]
+    public int PreviewPaneWidth { get; set; }
+
+    [User]
+    public bool PreviewLastShownInPane { get; set; }
+
+    [User]
+    public bool PreviewPaneToolsVisible { get; set; }
 
     [User]
     public string? EditWithAppPath { get; set; }

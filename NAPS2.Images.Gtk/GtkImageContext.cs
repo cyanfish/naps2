@@ -15,7 +15,19 @@ public class GtkImageContext : ImageContext
         _tiffIo = new LibTiffIo(this);
     }
 
-    protected override bool SupportsTiff => true;
+    protected override bool SupportsDecodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif
+            or ImageFileFormat.Tiff
+        || format == ImageFileFormat.Heic && (PixbufMimeTypes.Value.Contains("image/heic") ||
+                                              PixbufMimeTypes.Value.Contains("image/heif"))
+        || format == ImageFileFormat.Avif && PixbufMimeTypes.Value.Contains("image/avif");
+
+    protected override bool SupportsEncodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff;
+
+    // HEIC/AVIF are supported if the respective gdk-pixbuf loaders (e.g. from libheif or libavif) are installed
+    private static readonly Lazy<HashSet<string>> PixbufMimeTypes = new(() =>
+        Pixbuf.Formats.SelectMany(format => format.MimeTypes).ToHashSet());
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
@@ -32,7 +44,16 @@ public class GtkImageContext : ImageContext
             _tiffIo.LoadTiff(img => { image = img; cts.Cancel(); }, stream, cts.Token);
             return image;
         }
-        return new GtkImage(new Pixbuf(stream));
+        var pixbuf = new Pixbuf(stream);
+        var gtkImage = new GtkImage(pixbuf);
+        // Legacy gdk-pixbuf loaders provide the embedded color profile (base64-encoded) but don't apply it.
+        // For modern glycin-based gdk-pixbuf, profiles are auto-applied and this option isn't set, so this code
+        // path is ignored.
+        if (pixbuf.GetOption("icc-profile") is { } iccProfile)
+        {
+            BundledColorConverter?.TryConvertToSrgb(gtkImage,Convert.FromBase64String(iccProfile));
+        }
+        return gtkImage;
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,

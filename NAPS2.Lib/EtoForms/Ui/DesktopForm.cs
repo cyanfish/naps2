@@ -31,11 +31,13 @@ public abstract class DesktopForm : EtoFormBase
     private readonly Sidebar _sidebar;
     protected readonly IIconProvider _iconProvider;
     private readonly EditWithController _editWithController;
+    private readonly PreviewPane _previewPane;
 
     protected readonly ListProvider<Command> _scanMenuCommands = new();
     private readonly ListProvider<Command> _languageMenuCommands = new();
     protected readonly ListProvider<Command> _editWithCommands = new();
     protected readonly ListProvider<Command> _manualDuplexPreviewCommands = new();
+    protected readonly ListProvider<Command> _viewInNewWindowCommands = new();
     private readonly ContextMenu _contextMenu = new();
 
     private readonly NotificationArea _notificationArea;
@@ -62,7 +64,8 @@ public abstract class DesktopForm : EtoFormBase
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController) : base(config)
+        EditWithController editWithController,
+        PreviewPane previewPane) : base(config)
     {
         Icon = EtoPlatform.Current.IsGtk ? new Icon(1f, Icons.scanner_128.ToEtoImage()) : Icons.favicon.ToEtoIcon();
 
@@ -83,6 +86,7 @@ public abstract class DesktopForm : EtoFormBase
         _iconProvider = iconProvider;
         _commands = commands;
         _editWithController = editWithController;
+        _previewPane = previewPane;
 
         _desktopFormProvider.DesktopForm = this;
         _keyboardShortcuts.Assign(Commands);
@@ -92,6 +96,7 @@ public abstract class DesktopForm : EtoFormBase
         UpdateProfilesToolbar();
         InitLanguageDropdown();
         UpdateManualDuplex();
+        UpdatePreviewPane();
 
         _listView = EtoPlatform.Current.CreateListView(imageListViewBehavior);
         _listView.Selection = ImageList.Selection;
@@ -100,14 +105,15 @@ public abstract class DesktopForm : EtoFormBase
         _listView.SelectionChanged += ListViewSelectionChanged;
         _listView.ImageSize = new Size(_thumbnailController.VisibleSize, _thumbnailController.VisibleSize);
         _listView.ContextMenu = _contextMenu;
+        _previewPane.Closed += (_, _) => _listView.Control.Focus();
 
         // TODO: Fix Eto so that we don't need to set an item here (otherwise the first time we right click nothing happens)
         _contextMenu.Items.Add(Commands.SelectAll);
         _contextMenu.Opening += OpeningContextMenu;
         EtoPlatform.Current.AttachMouseWheelEvent(_listView.Control, ListViewMouseWheel);
         EtoPlatform.Current.AttachMouseMoveEvent(_listView.Control, ListViewMouseMove);
-        EtoPlatform.Current.HandleKeyDown(this, _keyboardShortcuts.Perform);
-        EtoPlatform.Current.HandleKeyDown(_listView.Control, _keyboardShortcuts.Perform);
+        EtoPlatform.Current.HandleKeyDown(this, HandleKeyDown);
+        EtoPlatform.Current.HandleKeyDown(_listView.Control, HandleKeyDown);
 
         //
         // Shown += FDesktop_Shown;
@@ -117,8 +123,6 @@ public abstract class DesktopForm : EtoFormBase
         _thumbnailController.ThumbnailSizeChanged += ThumbnailController_ThumbnailSizeChanged;
         EtoPlatform.Current.AttachDpiDependency(this, scale => _thumbnailController.Oversample = scale);
         ImageList.SelectionChanged += ImageList_SelectionChanged;
-        ImageList.ImagesUpdated += ImageList_ImagesUpdated;
-        ImageList.ImagesThumbnailInvalidated += ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated += ProfileManager_ProfilesUpdated;
         _editWithController.AppChanged += EditWithController_AppChanged;
         _notificationArea =new NotificationArea(_notificationManager, LayoutController);
@@ -128,8 +132,7 @@ public abstract class DesktopForm : EtoFormBase
     {
         FormStateController.AutoLayoutSize = false;
         FormStateController.DefaultClientSize = new Size(1210, 600);
-        EtoPlatform.Current.AttachDpiDependency(this, _ =>
-            MinimumSize = Size.Round(new SizeF(600, 300) * EtoPlatform.Current.GetLayoutScaleFactor(this)));
+        MinimumSize = new Size(600, 300);
 
         LayoutController.RootPadding = 0;
         var mainContent = L.Overlay(
@@ -143,8 +146,17 @@ public abstract class DesktopForm : EtoFormBase
                     _notificationArea.Content)
             ).Padding(8)
         ).Scale();
-        LayoutController.Content = BuildSidebarLayout(mainContent);
+        var rightPanel = L.RightPanel(mainContent, _previewPane.CreateView(this, false)).SizeConfig(
+            () => Config.Get(c => c.PreviewPaneWidth),
+            width => Config.User.Set(c => c.PreviewPaneWidth, width),
+            PreviewPane.MinWidth,
+            Sidebar.MIN_CONTENT_WIDTH).MaxShownFraction(0.5);
+        LayoutController.Content = BuildSidebarLayout(rightPanel);
     }
+
+    public PreviewPane PreviewPane => _previewPane;
+
+    private bool HandleKeyDown(Keys keys) => _previewPane.HandleKeyDown(keys) || _keyboardShortcuts.Perform(keys);
 
     protected bool SidebarHidden => Config.Get(c => c.HiddenButtons).HasFlag(ToolbarButtons.Sidebar);
 
@@ -173,7 +185,10 @@ public abstract class DesktopForm : EtoFormBase
             // TODO: Is this memory leaking (because of event handlers) when commands are converted to menuitems?
             _contextMenu.Items.AddRange(
             [
-                C.ButtonMenuItem(this, Commands.ViewImage),
+                C.ButtonMenuItem(this, Commands.View),
+                ..Config.Get(c => c.EnablePreviewPane)
+                    ? new[] { C.ButtonMenuItem(this, Commands.ViewInNewWindow) }
+                    : [],
                 new SeparatorMenuItem(),
                 C.ButtonMenuItem(this, Commands.SelectAll),
                 C.ButtonMenuItem(this, Commands.Copy),
@@ -200,21 +215,7 @@ public abstract class DesktopForm : EtoFormBase
 
     private void ImageList_SelectionChanged(object? sender, EventArgs e)
     {
-        Invoker.Current.InvokeDispatch(() =>
-        {
-            UpdateToolbar();
-            _listView.Selection = ImageList.Selection;
-        });
-    }
-
-    private void ImageList_ImagesUpdated(object? sender, ImageListEventArgs e)
-    {
-        Invoker.Current.InvokeDispatch(UpdateToolbar);
-    }
-
-    private void ImageList_ImagesThumbnailInvalidated(object? sender, ImageListEventArgs e)
-    {
-        Invoker.Current.InvokeDispatch(UpdateToolbar);
+        Invoker.Current.InvokeDispatch(() => _listView.Selection = ImageList.Selection);
     }
 
     private void ProfileManager_ProfilesUpdated(object? sender, EventArgs e)
@@ -226,7 +227,6 @@ public abstract class DesktopForm : EtoFormBase
     private void ThumbnailController_ThumbnailSizeChanged(object? sender, EventArgs e)
     {
         SetThumbnailSpacing(_thumbnailController.VisibleSize, EtoPlatform.Current.GetScaleFactor(this));
-        UpdateToolbar();
     }
 
     protected UiImageList ImageList { get; }
@@ -278,8 +278,6 @@ public abstract class DesktopForm : EtoFormBase
         EtoPlatform.Current.AttachDpiDependency(_listView.Control,
             scale => SetThumbnailSpacing(_thumbnailController.VisibleSize, scale));
         _desktopController.PreInitialize();
-        // Set the toolbar state before the form is rendered so it doesn't visibly change
-        UpdateToolbar();
     }
 
     protected override async void OnShown(EventArgs e)
@@ -308,12 +306,11 @@ public abstract class DesktopForm : EtoFormBase
         // TODO: Make sure we don't have any remaining memory leaks (toolbars? commands?)
         _thumbnailController.ThumbnailSizeChanged -= ThumbnailController_ThumbnailSizeChanged;
         ImageList.SelectionChanged -= ImageList_SelectionChanged;
-        ImageList.ImagesUpdated -= ImageList_ImagesUpdated;
-        ImageList.ImagesThumbnailInvalidated -= ImageList_ImagesThumbnailInvalidated;
         _profileManager.ProfilesUpdated -= ProfileManager_ProfilesUpdated;
         _editWithController.AppChanged -= EditWithController_AppChanged;
         _notificationArea.Dispose();
         _imageListSyncer?.Dispose();
+        _previewPane.Dispose();
     }
 
     protected virtual void CreateToolbarsAndMenus()
@@ -371,7 +368,8 @@ public abstract class DesktopForm : EtoFormBase
         separatorPending = true;
         if (ShowButton(ToolbarButtons.Image))
             CreateToolbarMenu(Commands.ImageMenu, new MenuProvider()
-                .Append(Commands.ViewImage)
+                .Append(Commands.View)
+                .Dynamic(_viewInNewWindowCommands)
                 .Separator()
                 .Append(Commands.Crop)
                 .Append(Commands.BrightCont)
@@ -520,17 +518,19 @@ public abstract class DesktopForm : EtoFormBase
             return C.None();
         }
         var toggleSidebar = C.ImageButton(Commands.ToggleSidebar);
-        EtoPlatform.Current.ConfigureZoomButton(toggleSidebar, "application_side_list");
+        EtoPlatform.Current.ConfigureFloatingButton(toggleSidebar, "application_side_list");
         return toggleSidebar.AlignTrailing();
     }
 
     protected virtual LayoutElement GetZoomButtons()
     {
         var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in");
+        EtoPlatform.Current.ConfigureFloatingButton(zoomIn, "zoom_in");
         var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out");
-        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(-1);
+        EtoPlatform.Current.ConfigureFloatingButton(zoomOut, "zoom_out");
+        EtoPlatform.Current.ConfigureJoinedButtons(zoomOut, zoomIn);
+        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing())
+            .Spacing(EtoPlatform.Current.IsWinForms ? -1 : 0);
     }
 
     private void InitLanguageDropdown()
@@ -560,40 +560,6 @@ public abstract class DesktopForm : EtoFormBase
             _desktopController.Resume();
         }
         // TODO: If we make any other forms non-modal, we will need to refresh them too
-    }
-
-    protected virtual void UpdateToolbar()
-    {
-        // Top-level toolbar items
-        Commands.ImageMenu.Enabled =
-            Commands.RotateMenu.Enabled = Commands.MoveUp.Enabled = Commands.MoveDown.Enabled =
-                Commands.Delete.Enabled = ImageList.Selection.Any();
-        Commands.SavePdf.Enabled = Commands.SaveImages.Enabled = Commands.ClearAll.Enabled =
-            Commands.ReorderMenu.Enabled =
-                Commands.EmailPdf.Enabled = Commands.Print.Enabled = ImageList.Images.Any();
-
-        // "All" dropdown items
-        Commands.SaveAllPdf.Text = Commands.SaveAllImages.Text = Commands.EmailAll.Text =
-            Commands.ReverseAll.Text = string.Format(MiscResources.AllCount, ImageList.Images.Count);
-        Commands.SaveAllPdf.Enabled = Commands.SaveAllImages.Enabled = Commands.SaveAll.Enabled =
-            Commands.EmailAll.Enabled = Commands.ReverseAll.Enabled = ImageList.Images.Any();
-
-        // "Selected" dropdown items
-        Commands.SaveSelectedPdf.Text = Commands.SaveSelectedImages.Text = Commands.EmailSelected.Text =
-            Commands.ReverseSelected.Text = string.Format(MiscResources.SelectedCount, ImageList.Selection.Count);
-        Commands.SaveSelectedPdf.Enabled = Commands.SaveSelectedImages.Enabled = Commands.SaveSelected.Enabled =
-            Commands.EmailSelected.Enabled = Commands.ReverseSelected.Enabled = ImageList.Selection.Any();
-
-        // Other
-        Commands.SelectAll.Enabled = ImageList.Images.Any();
-        Commands.Undo.Enabled = ImageList.CanUndo;
-        Commands.Redo.Enabled = ImageList.CanRedo;
-        // TODO: Set undo/redo text here (e.g. "Undo Brightness/Contrast" instead of just "Undo")
-        Commands.ZoomIn.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize < ThumbnailSizes.MAX_SIZE;
-        Commands.ZoomOut.Enabled = ImageList.Images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
-        Commands.NewProfile.Enabled =
-            !(Config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
-        Commands.Combine.Enabled = ImageList.Images.Count > 1;
     }
 
     private void UpdateScanButton()
@@ -635,6 +601,19 @@ public abstract class DesktopForm : EtoFormBase
             : [Commands.ManualDuplexPreview];
     }
 
+    public void UpdatePreviewPane()
+    {
+        if (Config.Get(c => c.EnablePreviewPane))
+        {
+            _viewInNewWindowCommands.Value = [Commands.ViewInNewWindow];
+        }
+        else
+        {
+            _viewInNewWindowCommands.Value = [];
+            _previewPane.Hide();
+        }
+    }
+
     protected virtual void UpdateTitle(ScanProfile? defaultProfile)
     {
         Title = string.Format(UiStrings.Naps2TitleFormat, defaultProfile?.DisplayName ?? UiStrings.Naps2FullName);
@@ -658,12 +637,11 @@ public abstract class DesktopForm : EtoFormBase
     {
     }
 
-    private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowViewerForm();
+    private void ListViewItemClicked(object? sender, EventArgs e) => _desktopSubFormController.ShowPreview();
 
     private void ListViewSelectionChanged(object? sender, EventArgs e)
     {
         ImageList.UpdateSelection(_listView.Selection);
-        UpdateToolbar();
     }
 
     private void ListViewDrop(object? sender, DropEventArgs args)

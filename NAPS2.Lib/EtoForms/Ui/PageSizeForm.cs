@@ -32,8 +32,8 @@ public class PageSizeForm : EtoDialogBase
 
     private void DeletePageSize()
     {
-        if (MessageBox.Show(string.Format(MiscResources.ConfirmDelete, _name.Text), MiscResources.Delete,
-                MessageBoxButtons.OKCancel, MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
+        if (MessageDialog.Confirm(this, string.Format(UiStrings.ConfirmDelete, _name.Text), UiStrings.Delete,
+                UiStrings.Delete, destructive: true))
         {
             var presets = Config.Get(c => c.CustomPageSizePresets);
             presets = presets.RemoveAll(x => x.Name == _name.Text);
@@ -71,7 +71,7 @@ public class PageSizeForm : EtoDialogBase
             L.Row(
                 _name.Scale().NaturalWidth(250).AlignCenter(),
                 C.Button(DeletePageSizeCommand, ButtonImagePosition.Overlay).AlignCenter()
-                    .Width(EtoPlatform.Current.IsWpf ? 32 : 30)
+                    .Width(EtoPlatform.Current.IconButtonSize)
             ),
             C.Spacer(),
             C.Label(UiStrings.Dimensions),

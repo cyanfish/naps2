@@ -5,6 +5,9 @@ namespace NAPS2.Tools.Project;
 [Verb("test", HelpText = "Runs the project tests")]
 public class TestOptions : OptionsBase
 {
+    [Option("app", Required = false, HelpText = "On Windows, the app to test: winforms (default) or wpf")]
+    public string? App { get; set; }
+
     [Option("nogui", Required = false, HelpText = "Only run headless (no gui) tests")]
     public bool NoGui { get; set; }
 

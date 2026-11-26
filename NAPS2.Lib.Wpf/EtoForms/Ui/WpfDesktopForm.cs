@@ -11,7 +11,6 @@ using NAPS2.EtoForms.Notifications;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.Wpf;
 using Button = System.Windows.Controls.Button;
-using VerticalAlignment = System.Windows.VerticalAlignment;
 using Command = Eto.Forms.Command;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using Image = System.Windows.Controls.Image;
@@ -52,11 +51,12 @@ public class WpfDesktopForm : DesktopForm
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController)
+        EditWithController editWithController,
+        PreviewPane previewPane)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider,
-            editWithController)
+            editWithController, previewPane)
     {
         this.ToNative().SizeChanged += (_, e) =>
         {
@@ -216,8 +216,12 @@ public class WpfDesktopForm : DesktopForm
         mainButton.BindCommand(command);
         var arrowButton = _toolbarFormatter.CreateArrowButton();
         AutomationProperties.SetName(arrowButton, command.ToolBarText);
-        DockPanel.SetDock(arrowButton, Dock.Right);
-        var group = new DockPanel { Children = { arrowButton, mainButton } };
+        var group = new System.Windows.Controls.Grid
+        {
+            ColumnDefinitions = { new ColumnDefinition(), new ColumnDefinition { Width = GridLength.Auto } },
+            Children = { mainButton, arrowButton }
+        };
+        System.Windows.Controls.Grid.SetColumn(arrowButton, 1);
         var contextMenu = menu.ToWpfContextMenu(this);
         arrowButton.Click += (_, _) => ShowMenu(group, contextMenu);
         arrowButton.BindEnabled(command);
@@ -225,25 +229,16 @@ public class WpfDesktopForm : DesktopForm
         _mainToolBar.Items.Add(group);
     }
 
-    protected override LayoutElement GetZoomButtons()
-    {
-        var zoomIn = C.ImageButton(Commands.ZoomIn);
-        EtoPlatform.Current.ConfigureZoomButton(zoomIn, "zoom_in");
-        var zoomOut = C.ImageButton(Commands.ZoomOut);
-        EtoPlatform.Current.ConfigureZoomButton(zoomOut, "zoom_out");
-        // Join the buttons into a single "pill", with one divider line (the border is translucent, so overlapping the
-        // buttons would make the divider darker)
-        zoomOut.ToNative().SetValue(Border.CornerRadiusProperty, new CornerRadius(4, 0, 0, 4));
-        var zoomInNative = (System.Windows.Controls.Control) zoomIn.ToNative();
-        zoomInNative.SetValue(Border.CornerRadiusProperty, new CornerRadius(0, 4, 4, 0));
-        zoomInNative.BorderThickness = new Thickness(0, 1, 1, 1);
-        return L.Row(zoomOut.AlignTrailing(), zoomIn.AlignTrailing()).Spacing(0);
-    }
-
     protected override void CreateToolbarMenu(Command command, MenuProvider menu)
     {
         var button = _toolbarFormatter.CreateLargeButton(CreateButtonContent(command, true));
         var contextMenu = menu.ToWpfContextMenu(this);
+        if (command == Commands.LanguageMenu)
+        {
+            // There are too many languages to fit in one column on smaller screens
+            contextMenu.Template = XamlTemplates.PanelContextMenuTemplate;
+            contextMenu.ItemsPanel = XamlTemplates.ThreeColumnItemsPanel;
+        }
         button.Click += (_, _) => ShowMenu(button, contextMenu);
         AutomationProperties.SetName(button, command.ToolBarText);
         button.BindEnabled(command);
@@ -252,13 +247,8 @@ public class WpfDesktopForm : DesktopForm
 
     protected override void CreateToolbarStackedButtons(Command command1, Command command2)
     {
-        var panel = new StackPanel
-        {
-            VerticalAlignment = VerticalAlignment.Center,
-            Children = { CreateStackedButton(command1), CreateStackedButton(command2) }
-        };
-        System.Windows.Controls.Grid.SetIsSharedSizeScope(panel, true);
-        _mainToolBar.Items.Add(panel);
+        _mainToolBar.Items.Add(
+            _toolbarFormatter.CreateStackedPanel(CreateStackedButton(command1), CreateStackedButton(command2)));
     }
 
     private Button CreateStackedButton(Command command)
@@ -308,5 +298,5 @@ public class WpfDesktopForm : DesktopForm
     }
 
     private void SetIcon(Image image, Func<float, Eto.Drawing.Image?> getIcon) =>
-        EtoPlatform.Current.AttachDpiDependency(this, scale => image.Source = getIcon(scale)?.ToWpf());
+        EtoPlatform.Current.AttachIconDependency(this, scale => image.Source = getIcon(scale)?.ToWpf());
 }

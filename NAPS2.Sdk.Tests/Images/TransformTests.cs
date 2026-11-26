@@ -302,9 +302,9 @@ public class TransformTests : ContextualTests
     public void Scale1000Percent()
     {
         var original = LoadImage(ImageResources.dog);
-        var expected = LoadImage(ImageResources.dog_huge);
+        using var expected = LoadImage(ImageResources.dog_huge);
 
-        var transformed = original.PerformTransform(new ScaleTransform(10));
+        using var transformed = original.PerformTransform(new ScaleTransform(10));
 
         ImageAsserts.Similar(expected, transformed, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
         AssertOwnership(original, transformed);

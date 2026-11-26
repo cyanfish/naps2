@@ -23,6 +23,8 @@ public static class MacToolbarItems
             Bordered = true,
             Autovalidates = false
         }.WithAction(command.Execute);
+        item.Enabled = command.Enabled;
+        command.EnabledChanged += (_, _) => item.Enabled = command.Enabled;
         if (OperatingSystem.IsMacOSVersionAtLeast(11))
         {
             item.Navigational = nav;
@@ -33,19 +35,23 @@ public static class MacToolbarItems
     public static NSToolbarItem CreateMenu(string id, ActionCommand menuCommand, MenuProvider menuProvider,
         string? title = null, string? tooltip = null)
     {
-        return new NSMenuToolbarItem(id)
+        var item = new NSMenuToolbarItem(id)
         {
             Image = menuCommand.GetIconImage(IconScenario.Toolbar, 1)?.ToNS(),
             Label = menuCommand.ToolBarText ?? "",
             Title = title ?? "",
             ToolTip = tooltip ?? menuCommand.ToolBarText ?? "",
-            Menu = CreateMenuObject(menuProvider)
+            Menu = CreateMenuObject(menuProvider),
+            Autovalidates = false,
+            Enabled = menuCommand.Enabled
         };
+        menuCommand.EnabledChanged += (_, _) => item.Enabled = menuCommand.Enabled;
+        return item;
     }
 
     private static NSMenu CreateMenuObject(MenuProvider menuProvider)
     {
-        var menu = new NSMenu();
+        var menu = new NSMenu { AutoEnablesItems = false };
         menuProvider.Handle(items =>
         {
             menu.RemoveAllItems();
@@ -54,11 +60,14 @@ public static class MacToolbarItems
                 switch (item)
                 {
                     case MenuProvider.CommandItem { Command: var command }:
-                        menu.AddItem(new NSMenuItem
+                        var menuItem = new NSMenuItem
                         {
                             Title = command.MenuText,
                             Image = command.Image?.ToNS()
-                        }.WithAction(command.Execute));
+                        }.WithAction(command.Execute);
+                        menuItem.Enabled = command.Enabled;
+                        command.EnabledChanged += (_, _) => menuItem.Enabled = command.Enabled;
+                        menu.AddItem(menuItem);
                         break;
                     case MenuProvider.SeparatorItem:
                         menu.AddItem(NSMenuItem.SeparatorItem);

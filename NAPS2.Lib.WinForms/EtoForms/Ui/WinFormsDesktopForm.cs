@@ -43,11 +43,12 @@ public class WinFormsDesktopForm : DesktopForm
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController)
+        EditWithController editWithController,
+        PreviewPane previewPane)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider,
-            editWithController)
+            editWithController, previewPane)
     {
         _form = this.ToNative();
         _form.FormClosing += OnFormClosing;
@@ -237,7 +238,7 @@ public class WinFormsDesktopForm : DesktopForm
                 ImageAlign = ContentAlignment.MiddleLeft,
                 TextAlign = ContentAlignment.MiddleLeft
             };
-            EtoPlatform.Current.AttachDpiDependency(this,
+            EtoPlatform.Current.AttachIconDependency(this,
                 scale => item.Image = _iconProvider.GetIcon("control_play_blue", IconScenario.SmallToolbar, scale).ToSD());
             item.Click += (_, _) => _desktopScanController.ScanWithProfile((ScanProfile) item.Tag!);
             toolbarItems.Add(item);
@@ -272,7 +273,7 @@ public class WinFormsDesktopForm : DesktopForm
     {
         var pen = new Pen(_colorScheme.SeparatorColor.ToSD());
 
-        var splitter = ((LayoutLeftPanel) LayoutController.Content!).Splitter;
+        var splitter = ((LayoutSidePanel) LayoutController.Content!).Splitter;
         var panel1 = (WF.Panel) splitter.Panel1.ToNative();
         var panel2 = (WF.Panel) splitter.Panel2.ToNative();
         var split = (WF.SplitContainer) splitter.ToNative();
@@ -382,7 +383,7 @@ public class WinFormsDesktopForm : DesktopForm
             SecondText = command2.ToolBarText
         };
         item.AccessibleName = string.Join(" ", command1.ToolBarText, command2.ToolBarText);
-        EtoPlatform.Current.AttachDpiDependency(this, scale =>
+        EtoPlatform.Current.AttachIconDependency(this, scale =>
         {
             item.FirstImage = ((ActionCommand) command1).GetIconImage(IconScenario.SmallToolbar, scale).ToSD();
             item.SecondImage = ((ActionCommand) command2).GetIconImage(IconScenario.SmallToolbar, scale).ToSD();
@@ -396,7 +397,7 @@ public class WinFormsDesktopForm : DesktopForm
     private WF.ToolStripItem ApplyCommand(WF.ToolStripItem item, Command command)
     {
         void SetItemText() => item.Text = item is WF.ToolStripMenuItem ? command.MenuText : command.ToolBarText;
-        EtoPlatform.Current.AttachDpiDependency(this,
+        EtoPlatform.Current.AttachIconDependency(this,
             scale => item.Image = ((ActionCommand) command).GetIconImage(
                     item is WF.ToolStripMenuItem ? IconScenario.Menu : IconScenario.Toolbar, scale)
                 .ToSD());

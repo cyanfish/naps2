@@ -11,7 +11,7 @@ namespace NAPS2.TestScenarios;
 
 /// <summary>
 /// Runs a test scenario if NAPS2_TEST_SCENARIO is set to a scenario name (from a TestScenarioProvider, or "list" to
-/// list them) or the path of a JSON script (see ScriptTestScenario). NAPS2_TEST_DATA must also be set, and output files
+/// list them without variants, or "list-all" to list all of them) or the path of a JSON script (see ScriptTestScenario). NAPS2_TEST_DATA must also be set, and output files
 /// (including result.json) are written to its "output" subfolder. If NAPS2_TEST_SCENARIO_KEEP_OPEN is "1", the app
 /// stays open when the scenario finishes (e.g. so an external tool can capture the final state).
 /// </summary>
@@ -65,13 +65,15 @@ public class TestScenarioModule : Module
 
     private TestScenario GetNamedScenario(IEnumerable<TestScenarioProvider> providers)
     {
-        var scenarios = providers.SelectMany(p => p.GetScenarios()).ToDictionary(x => x.Name, x => x.Scenario);
-        if (_nameOrPath == "list")
+        var all = providers.SelectMany(p => p.GetScenarios()).ToList();
+        var scenarios = all.ToDictionary(x => x.Name, x => x.Scenario);
+        if (_nameOrPath is "list" or "list-all")
         {
+            var names = all.Where(x => _nameOrPath == "list-all" || !x.Variant).Select(x => (JsonNode) x.Name);
             WriteResult(new JsonObject
             {
                 ["success"] = true,
-                ["scenarios"] = new JsonArray(scenarios.Keys.Select(x => (JsonNode) x).ToArray())
+                ["scenarios"] = new JsonArray(names.ToArray())
             });
             Environment.Exit(0);
         }

@@ -2,7 +2,7 @@ using NAPS2.EtoForms.Desktop;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class DesktopCommands
+public class DesktopCommands : IDisposable
 {
     private readonly DesktopController _desktopController;
     private readonly DesktopScanController _desktopScanController;
@@ -14,11 +14,13 @@ public class DesktopCommands
     private readonly Naps2Config _config;
     private readonly DesktopFormProvider _desktopFormProvider;
     private readonly EditWithController _editWithController;
+    private readonly IProfileManager _profileManager;
 
     public DesktopCommands(DesktopController desktopController, DesktopScanController desktopScanController,
         IDesktopSubFormController desktopSubFormController, UiImageList imageList, ImageListActions imageListActions,
         ThumbnailController thumbnailController, IIconProvider iconProvider, Naps2Config config,
-        DesktopFormProvider desktopFormProvider, EditWithController editWithController)
+        DesktopFormProvider desktopFormProvider, EditWithController editWithController,
+        IProfileManager profileManager)
     {
         _desktopController = desktopController;
         _desktopScanController = desktopScanController;
@@ -30,6 +32,7 @@ public class DesktopCommands
         _config = config;
         _desktopFormProvider = desktopFormProvider;
         _editWithController = editWithController;
+        _profileManager = profileManager;
 
 
         Scan = new ActionCommand(desktopScanController.ScanDefault)
@@ -138,10 +141,15 @@ public class DesktopCommands
             Text = UiStrings.Image,
             IconName = "picture_edit"
         };
-        ViewImage = new ActionCommand(desktopSubFormController.ShowViewerForm)
+        View = new ActionCommand(desktopSubFormController.ShowPreviewPane)
         {
             Text = UiStrings.View,
             IconName = "zoom"
+        };
+        ViewInNewWindow = new ActionCommand(desktopSubFormController.ShowPreviewWindow)
+        {
+            Text = UiStrings.ViewInNewWindow,
+            IconName = "new_window"
         };
         Crop = new ActionCommand(desktopSubFormController.ShowCropForm)
         {
@@ -358,21 +366,78 @@ public class DesktopCommands
             Text = UiStrings.ToggleSidebar,
             IconName = "application_side_list"
         };
+
+        _imageList.SelectionChanged += StateChanged;
+        _imageList.ImagesUpdated += ImagesChanged;
+        _imageList.ImagesThumbnailInvalidated += ImagesChanged;
+        _thumbnailController.ThumbnailSizeChanged += StateChanged;
+        _profileManager.ProfilesUpdated += StateChanged;
+        UpdateState();
     }
 
-    public DesktopCommands WithSelection(Func<ListSelection<UiImage>> selectionFunc)
+    private void StateChanged(object? sender, EventArgs e) => Invoker.Current.InvokeDispatch(UpdateState);
+
+    private void ImagesChanged(object? sender, ImageListEventArgs e) => Invoker.Current.InvokeDispatch(UpdateState);
+
+    public void UpdateState()
+    {
+        var images = _imageList.Images;
+        var selection = _imageListActions.Selection ?? _imageList.Selection;
+
+        // Top-level toolbar items
+        ImageMenu.Enabled = RotateMenu.Enabled = MoveUp.Enabled = MoveDown.Enabled = Delete.Enabled = selection.Any();
+        SavePdf.Enabled = SaveImages.Enabled = ClearAll.Enabled = ReorderMenu.Enabled = EmailPdf.Enabled =
+            Print.Enabled = images.Any();
+
+        // "All" and "Selected" dropdown items
+        SaveAllPdf.Enabled = SaveAllImages.Enabled = SaveAll.Enabled = EmailAll.Enabled = ReverseAll.Enabled =
+            images.Any();
+        SaveSelectedPdf.Enabled = SaveSelectedImages.Enabled = SaveSelected.Enabled = EmailSelected.Enabled =
+            ReverseSelected.Enabled = selection.Any();
+        if (_imageListActions.Selection is null)
+        {
+            // Only the desktop form should show the selection count
+            SaveAllPdf.Text = SaveAllImages.Text = EmailAll.Text = ReverseAll.Text =
+                string.Format(UiStrings.AllCount, images.Count);
+            SaveSelectedPdf.Text = SaveSelectedImages.Text = EmailSelected.Text = ReverseSelected.Text =
+                string.Format(UiStrings.SelectedCount, selection.Count);
+        }
+
+        // Other
+        SelectAll.Enabled = images.Any();
+        Undo.Enabled = _imageList.CanUndo;
+        Redo.Enabled = _imageList.CanRedo;
+        // TODO: Set undo/redo text here (e.g. "Undo Brightness/Contrast" instead of just "Undo")
+        ZoomIn.Enabled = images.Any() && _thumbnailController.VisibleSize < ThumbnailSizes.MAX_SIZE;
+        ZoomOut.Enabled = images.Any() && _thumbnailController.VisibleSize > ThumbnailSizes.MIN_SIZE;
+        NewProfile.Enabled = !(_config.Get(c => c.NoUserProfiles) && _profileManager.Profiles.Any(x => x.IsLocked));
+        Combine.Enabled = images.Count > 1;
+    }
+
+    public void Dispose()
+    {
+        _imageList.SelectionChanged -= StateChanged;
+        _imageList.ImagesUpdated -= ImagesChanged;
+        _imageList.ImagesThumbnailInvalidated -= ImagesChanged;
+        _thumbnailController.ThumbnailSizeChanged -= StateChanged;
+        _profileManager.ProfilesUpdated -= StateChanged;
+    }
+
+    public DesktopCommands WithSelection(Func<ListSelection<UiImage>> selectionFunc,
+        Action<ImageEditor>? editorHost = null)
     {
         return new DesktopCommands(
             _desktopController,
             _desktopScanController,
-            _desktopSubFormController.WithSelection(selectionFunc),
+            _desktopSubFormController.WithSelection(selectionFunc, editorHost),
             _imageList,
             _imageListActions.WithSelection(selectionFunc),
             _thumbnailController,
             _iconProvider,
             _config,
             _desktopFormProvider,
-            _editWithController);
+            _editWithController,
+            _profileManager);
     }
 
     public ActionCommand CreateEditWithApp() => new(_imageListActions.EditWithApp)
@@ -409,7 +474,8 @@ public class DesktopCommands
     public ActionCommand EmailSettings { get; set; }
     public ActionCommand Print { get; set; }
     public ActionCommand ImageMenu { get; set; }
-    public ActionCommand ViewImage { get; set; }
+    public ActionCommand View { get; set; }
+    public ActionCommand ViewInNewWindow { get; set; }
     public ActionCommand Crop { get; set; }
     public ActionCommand BrightCont { get; set; }
     public ActionCommand HueSat { get; set; }

@@ -154,7 +154,7 @@ internal class ScanPerformer : IScanPerformer
                 // TODO: Test event logging
                 Log.Event(EventType.Scan, new EventParams
                 {
-                    Name = MiscResources.Scan,
+                    Name = UiStrings.Scan,
                     Pages = pageCount,
                     DeviceName = scanProfile.Device?.Name,
                     ProfileName = scanProfile.DisplayName,

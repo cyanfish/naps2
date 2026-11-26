@@ -65,7 +65,7 @@ public class WindowsApplicationLifecycle : ApplicationLifecycle
 
         if (failedUpdate)
         {
-            Out(MiscResources.UpdateError);
+            Out(UiStrings.UpdateError);
         }
 
         // Let StillImage figure out what it should do from the command-line args

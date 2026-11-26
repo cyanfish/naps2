@@ -70,7 +70,7 @@ public class OcrDownloadForm : EtoDialogBase
             .Select(x => x.DownloadInfo.Size)
             .Sum();
 
-        _downloadSize.Text = string.Format(MiscResources.EstimatedDownloadSize, downloadSize.ToString("f1"));
+        _downloadSize.Text = string.Format(UiStrings.EstimatedDownloadSize, downloadSize.ToString("f1"));
 
         _downloadButton.Enabled = _languageList.Selection.Any();
     }

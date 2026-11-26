@@ -32,7 +32,7 @@ public class DeviceSelectorWidget
         _iconProvider = iconProvider;
         _parentWindow = parentWindow;
         _chooseDevice.Click += ChooseDevice;
-        EtoPlatform.Current.AttachDpiDependency(_deviceIcon, _ => UpdateDeviceIconImage());
+        EtoPlatform.Current.AttachIconDependency(_deviceIcon, _ => UpdateDeviceIconImage());
     }
 
     public required Func<ScanProfile> ProfileFunc { get; init; }
@@ -134,8 +134,7 @@ public class DeviceSelectorWidget
     {
         float scale = EtoPlatform.Current.GetScaleFactor((Window) _parentWindow);
         _deviceIcon.Image = _deviceIconImage ?? _iconProvider.GetIcon(_deviceIconName, IconScenario.Inline32, scale);
-        var size = _deviceIconImage != null ? new SizeF(48, 48) : new SizeF(32, 32);
-        _deviceIcon.Size = Size.Round(size * EtoPlatform.Current.GetLayoutScaleFactor((Window) _parentWindow));
+        _deviceIcon.Size = _deviceIconImage != null ? new Size(48, 48) : new Size(32, 32);
     }
 
     public static implicit operator LayoutElement(DeviceSelectorWidget control)

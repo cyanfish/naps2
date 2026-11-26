@@ -45,669 +45,33 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string AboutFormTitle {
-            get {
-                return ResourceManager.GetString("AboutFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string CopyrightFormat {
-            get {
-                return ResourceManager.GetString("CopyrightFormat", resourceCulture);
-            }
-        }
-        
-        internal static string IconsFrom {
-            get {
-                return ResourceManager.GetString("IconsFrom", resourceCulture);
-            }
-        }
-        
-        internal static string CheckForUpdates {
-            get {
-                return ResourceManager.GetString("CheckForUpdates", resourceCulture);
-            }
-        }
-        
-        internal static string OK {
-            get {
-                return ResourceManager.GetString("OK", resourceCulture);
-            }
-        }
-        
-        internal static string Retry {
-            get {
-                return ResourceManager.GetString("Retry", resourceCulture);
-            }
-        }
-        
-        internal static string Donate {
-            get {
-                return ResourceManager.GetString("Donate", resourceCulture);
-            }
-        }
-        
-        internal static string ProfilesFormTitle {
-            get {
-                return ResourceManager.GetString("ProfilesFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string New {
-            get {
-                return ResourceManager.GetString("New", resourceCulture);
-            }
-        }
-        
-        internal static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
-            }
-        }
-        
-        internal static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        internal static string Scan {
-            get {
-                return ResourceManager.GetString("Scan", resourceCulture);
-            }
-        }
-        
-        internal static string SetDefault {
-            get {
-                return ResourceManager.GetString("SetDefault", resourceCulture);
-            }
-        }
-        
-        internal static string Copy {
-            get {
-                return ResourceManager.GetString("Copy", resourceCulture);
-            }
-        }
-        
-        internal static string Paste {
-            get {
-                return ResourceManager.GetString("Paste", resourceCulture);
-            }
-        }
-        
-        internal static string Undo {
-            get {
-                return ResourceManager.GetString("Undo", resourceCulture);
-            }
-        }
-        
-        internal static string Redo {
-            get {
-                return ResourceManager.GetString("Redo", resourceCulture);
-            }
-        }
-        
-        internal static string UndoFormat {
-            get {
-                return ResourceManager.GetString("UndoFormat", resourceCulture);
-            }
-        }
-        
-        internal static string RedoFormat {
-            get {
-                return ResourceManager.GetString("RedoFormat", resourceCulture);
-            }
-        }
-        
-        internal static string Done {
-            get {
-                return ResourceManager.GetString("Done", resourceCulture);
-            }
-        }
-        
-        internal static string Default {
-            get {
-                return ResourceManager.GetString("Default", resourceCulture);
-            }
-        }
-        
-        internal static string NewProfile {
-            get {
-                return ResourceManager.GetString("NewProfile", resourceCulture);
-            }
-        }
-        
-        internal static string BatchScan {
-            get {
-                return ResourceManager.GetString("BatchScan", resourceCulture);
-            }
-        }
-        
-        internal static string Ocr {
-            get {
-                return ResourceManager.GetString("Ocr", resourceCulture);
-            }
-        }
-        
-        internal static string Profiles {
-            get {
-                return ResourceManager.GetString("Profiles", resourceCulture);
-            }
-        }
-        
-        internal static string Import {
-            get {
-                return ResourceManager.GetString("Import", resourceCulture);
-            }
-        }
-        
-        internal static string SavePdf {
-            get {
-                return ResourceManager.GetString("SavePdf", resourceCulture);
-            }
-        }
-        
-        internal static string PdfSettings {
-            get {
-                return ResourceManager.GetString("PdfSettings", resourceCulture);
-            }
-        }
-        
-        internal static string SaveImages {
-            get {
-                return ResourceManager.GetString("SaveImages", resourceCulture);
-            }
-        }
-        
-        internal static string ImageSettings {
-            get {
-                return ResourceManager.GetString("ImageSettings", resourceCulture);
-            }
-        }
-        
-        internal static string EmailPdf {
-            get {
-                return ResourceManager.GetString("EmailPdf", resourceCulture);
-            }
-        }
-        
-        internal static string EmailSettings {
-            get {
-                return ResourceManager.GetString("EmailSettings", resourceCulture);
-            }
-        }
-        
-        internal static string Print {
-            get {
-                return ResourceManager.GetString("Print", resourceCulture);
-            }
-        }
-        
-        internal static string Image {
-            get {
-                return ResourceManager.GetString("Image", resourceCulture);
-            }
-        }
-        
-        internal static string View {
-            get {
-                return ResourceManager.GetString("View", resourceCulture);
-            }
-        }
-        
-        internal static string Crop {
-            get {
-                return ResourceManager.GetString("Crop", resourceCulture);
-            }
-        }
-        
-        internal static string BrightnessContrast {
-            get {
-                return ResourceManager.GetString("BrightnessContrast", resourceCulture);
-            }
-        }
-        
-        internal static string HueSaturation {
-            get {
-                return ResourceManager.GetString("HueSaturation", resourceCulture);
-            }
-        }
-        
-        internal static string BlackAndWhite {
-            get {
-                return ResourceManager.GetString("BlackAndWhite", resourceCulture);
-            }
-        }
-        
-        internal static string Sharpen {
-            get {
-                return ResourceManager.GetString("Sharpen", resourceCulture);
-            }
-        }
-        
-        internal static string DocumentCorrection {
-            get {
-                return ResourceManager.GetString("DocumentCorrection", resourceCulture);
-            }
-        }
-        
-        internal static string Reset {
-            get {
-                return ResourceManager.GetString("Reset", resourceCulture);
-            }
-        }
-        
-        internal static string Rotate {
-            get {
-                return ResourceManager.GetString("Rotate", resourceCulture);
-            }
-        }
-        
-        internal static string RotateLeft {
-            get {
-                return ResourceManager.GetString("RotateLeft", resourceCulture);
-            }
-        }
-        
-        internal static string RotateRight {
-            get {
-                return ResourceManager.GetString("RotateRight", resourceCulture);
-            }
-        }
-        
-        internal static string Flip {
-            get {
-                return ResourceManager.GetString("Flip", resourceCulture);
-            }
-        }
-        
-        internal static string Deskew {
-            get {
-                return ResourceManager.GetString("Deskew", resourceCulture);
-            }
-        }
-        
-        internal static string CustomRotation {
-            get {
-                return ResourceManager.GetString("CustomRotation", resourceCulture);
-            }
-        }
-        
-        internal static string MoveUp {
-            get {
-                return ResourceManager.GetString("MoveUp", resourceCulture);
-            }
-        }
-        
-        internal static string MoveDown {
-            get {
-                return ResourceManager.GetString("MoveDown", resourceCulture);
-            }
-        }
-        
-        internal static string MoveUpDown {
-            get {
-                return ResourceManager.GetString("MoveUpDown", resourceCulture);
-            }
-        }
-        
-        internal static string Reorder {
-            get {
-                return ResourceManager.GetString("Reorder", resourceCulture);
-            }
-        }
-        
-        internal static string Interleave {
-            get {
-                return ResourceManager.GetString("Interleave", resourceCulture);
-            }
-        }
-        
-        internal static string Deinterleave {
-            get {
-                return ResourceManager.GetString("Deinterleave", resourceCulture);
-            }
-        }
-        
-        internal static string AltInterleave {
-            get {
-                return ResourceManager.GetString("AltInterleave", resourceCulture);
-            }
-        }
-        
-        internal static string AltDeinterleave {
-            get {
-                return ResourceManager.GetString("AltDeinterleave", resourceCulture);
-            }
-        }
-        
-        internal static string Reverse {
-            get {
-                return ResourceManager.GetString("Reverse", resourceCulture);
-            }
-        }
-        
-        internal static string ReverseAll {
-            get {
-                return ResourceManager.GetString("ReverseAll", resourceCulture);
-            }
-        }
-        
-        internal static string ReverseSelected {
-            get {
-                return ResourceManager.GetString("ReverseSelected", resourceCulture);
-            }
-        }
-        
-        internal static string Clear {
-            get {
-                return ResourceManager.GetString("Clear", resourceCulture);
-            }
-        }
-        
-        internal static string ClearAll {
-            get {
-                return ResourceManager.GetString("ClearAll", resourceCulture);
-            }
-        }
-        
-        internal static string Language {
-            get {
-                return ResourceManager.GetString("Language", resourceCulture);
-            }
-        }
-        
-        internal static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        internal static string GeneralSettings {
-            get {
-                return ResourceManager.GetString("GeneralSettings", resourceCulture);
-            }
-        }
-        
-        internal static string Interface {
-            get {
-                return ResourceManager.GetString("Interface", resourceCulture);
-            }
-        }
-        
-        internal static string ScanChangesDefaultProfile {
-            get {
-                return ResourceManager.GetString("ScanChangesDefaultProfile", resourceCulture);
-            }
-        }
-        
-        internal static string ShowProfilesToolbar {
-            get {
-                return ResourceManager.GetString("ShowProfilesToolbar", resourceCulture);
-            }
-        }
-        
-        internal static string ShowPageNumbers {
-            get {
-                return ResourceManager.GetString("ShowPageNumbers", resourceCulture);
-            }
-        }
-        
-        internal static string ScanButtonDefaultAction {
-            get {
-                return ResourceManager.GetString("ScanButtonDefaultAction", resourceCulture);
-            }
-        }
-        
-        internal static string SaveButtonDefaultAction {
-            get {
-                return ResourceManager.GetString("SaveButtonDefaultAction", resourceCulture);
-            }
-        }
-        
-        internal static string Application {
-            get {
-                return ResourceManager.GetString("Application", resourceCulture);
-            }
-        }
-        
-        internal static string SingleInstanceDesc {
-            get {
-                return ResourceManager.GetString("SingleInstanceDesc", resourceCulture);
-            }
-        }
-        
         internal static string About {
             get {
                 return ResourceManager.GetString("About", resourceCulture);
             }
         }
         
-        internal static string Zoom {
+        internal static string AboutFormTitle {
             get {
-                return ResourceManager.GetString("Zoom", resourceCulture);
+                return ResourceManager.GetString("AboutFormTitle", resourceCulture);
             }
         }
         
-        internal static string ZoomIn {
+        internal static string AcquiringData {
             get {
-                return ResourceManager.GetString("ZoomIn", resourceCulture);
+                return ResourceManager.GetString("AcquiringData", resourceCulture);
             }
         }
         
-        internal static string ZoomOut {
+        internal static string Action {
             get {
-                return ResourceManager.GetString("ZoomOut", resourceCulture);
+                return ResourceManager.GetString("Action", resourceCulture);
             }
         }
         
-        internal static string ZoomActual {
+        internal static string ActiveOperations {
             get {
-                return ResourceManager.GetString("ZoomActual", resourceCulture);
-            }
-        }
-        
-        internal static string ScaleWithWindow {
-            get {
-                return ResourceManager.GetString("ScaleWithWindow", resourceCulture);
-            }
-        }
-        
-        internal static string Save {
-            get {
-                return ResourceManager.GetString("Save", resourceCulture);
-            }
-        }
-        
-        internal static string SaveAll {
-            get {
-                return ResourceManager.GetString("SaveAll", resourceCulture);
-            }
-        }
-        
-        internal static string SaveSelected {
-            get {
-                return ResourceManager.GetString("SaveSelected", resourceCulture);
-            }
-        }
-        
-        internal static string SaveAllAsPdf {
-            get {
-                return ResourceManager.GetString("SaveAllAsPdf", resourceCulture);
-            }
-        }
-        
-        internal static string SaveSelectedAsPdf {
-            get {
-                return ResourceManager.GetString("SaveSelectedAsPdf", resourceCulture);
-            }
-        }
-        
-        internal static string SaveAllAsImages {
-            get {
-                return ResourceManager.GetString("SaveAllAsImages", resourceCulture);
-            }
-        }
-        
-        internal static string SaveSelectedAsImages {
-            get {
-                return ResourceManager.GetString("SaveSelectedAsImages", resourceCulture);
-            }
-        }
-        
-        internal static string EmailAll {
-            get {
-                return ResourceManager.GetString("EmailAll", resourceCulture);
-            }
-        }
-        
-        internal static string EmailSelected {
-            get {
-                return ResourceManager.GetString("EmailSelected", resourceCulture);
-            }
-        }
-        
-        internal static string EmailAllAsPdf {
-            get {
-                return ResourceManager.GetString("EmailAllAsPdf", resourceCulture);
-            }
-        }
-        
-        internal static string EmailSelectedAsPdf {
-            get {
-                return ResourceManager.GetString("EmailSelectedAsPdf", resourceCulture);
-            }
-        }
-        
-        internal static string EditProfileFormTitle {
-            get {
-                return ResourceManager.GetString("EditProfileFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string DisplayNameLabel {
-            get {
-                return ResourceManager.GetString("DisplayNameLabel", resourceCulture);
-            }
-        }
-        
-        internal static string WiaDriver {
-            get {
-                return ResourceManager.GetString("WiaDriver", resourceCulture);
-            }
-        }
-        
-        internal static string TwainDriver {
-            get {
-                return ResourceManager.GetString("TwainDriver", resourceCulture);
-            }
-        }
-        
-        internal static string EsclDriver {
-            get {
-                return ResourceManager.GetString("EsclDriver", resourceCulture);
-            }
-        }
-        
-        internal static string AppleDriver {
-            get {
-                return ResourceManager.GetString("AppleDriver", resourceCulture);
-            }
-        }
-        
-        internal static string SaneDriver {
-            get {
-                return ResourceManager.GetString("SaneDriver", resourceCulture);
-            }
-        }
-        
-        internal static string DeviceLabel {
-            get {
-                return ResourceManager.GetString("DeviceLabel", resourceCulture);
-            }
-        }
-        
-        internal static string ChooseDevice {
-            get {
-                return ResourceManager.GetString("ChooseDevice", resourceCulture);
-            }
-        }
-        
-        internal static string UsePredefinedSettings {
-            get {
-                return ResourceManager.GetString("UsePredefinedSettings", resourceCulture);
-            }
-        }
-        
-        internal static string UseNativeUi {
-            get {
-                return ResourceManager.GetString("UseNativeUi", resourceCulture);
-            }
-        }
-        
-        internal static string PaperSourceLabel {
-            get {
-                return ResourceManager.GetString("PaperSourceLabel", resourceCulture);
-            }
-        }
-        
-        internal static string PageSizeLabel {
-            get {
-                return ResourceManager.GetString("PageSizeLabel", resourceCulture);
-            }
-        }
-        
-        internal static string ResolutionLabel {
-            get {
-                return ResourceManager.GetString("ResolutionLabel", resourceCulture);
-            }
-        }
-        
-        internal static string BrightnessLabel {
-            get {
-                return ResourceManager.GetString("BrightnessLabel", resourceCulture);
-            }
-        }
-        
-        internal static string BitDepthLabel {
-            get {
-                return ResourceManager.GetString("BitDepthLabel", resourceCulture);
-            }
-        }
-        
-        internal static string HorizontalAlignLabel {
-            get {
-                return ResourceManager.GetString("HorizontalAlignLabel", resourceCulture);
-            }
-        }
-        
-        internal static string ScaleLabel {
-            get {
-                return ResourceManager.GetString("ScaleLabel", resourceCulture);
-            }
-        }
-        
-        internal static string ContrastLabel {
-            get {
-                return ResourceManager.GetString("ContrastLabel", resourceCulture);
-            }
-        }
-        
-        internal static string EnableAutoSave {
-            get {
-                return ResourceManager.GetString("EnableAutoSave", resourceCulture);
-            }
-        }
-        
-        internal static string AutoSaveSettings {
-            get {
-                return ResourceManager.GetString("AutoSaveSettings", resourceCulture);
-            }
-        }
-        
-        internal static string AutoSaveSettingsFormTitle {
-            get {
-                return ResourceManager.GetString("AutoSaveSettingsFormTitle", resourceCulture);
+                return ResourceManager.GetString("ActiveOperations", resourceCulture);
             }
         }
         
@@ -717,279 +81,57 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string Cancel {
+        internal static string AdvancedProfileFormTitle {
             get {
-                return ResourceManager.GetString("Cancel", resourceCulture);
+                return ResourceManager.GetString("AdvancedProfileFormTitle", resourceCulture);
             }
         }
         
-        internal static string Select {
+        internal static string AlignBottom {
             get {
-                return ResourceManager.GetString("Select", resourceCulture);
+                return ResourceManager.GetString("AlignBottom", resourceCulture);
             }
         }
         
-        internal static string SelectSource {
+        internal static string AlignCenter {
             get {
-                return ResourceManager.GetString("SelectSource", resourceCulture);
+                return ResourceManager.GetString("AlignCenter", resourceCulture);
             }
         }
         
-        internal static string SelectDevice {
+        internal static string AlignLeft {
             get {
-                return ResourceManager.GetString("SelectDevice", resourceCulture);
+                return ResourceManager.GetString("AlignLeft", resourceCulture);
             }
         }
         
-        internal static string RunInBackground {
+        internal static string AlignMiddle {
             get {
-                return ResourceManager.GetString("RunInBackground", resourceCulture);
+                return ResourceManager.GetString("AlignMiddle", resourceCulture);
             }
         }
         
-        internal static string Naps2 {
+        internal static string AlignRight {
             get {
-                return ResourceManager.GetString("Naps2", resourceCulture);
+                return ResourceManager.GetString("AlignRight", resourceCulture);
             }
         }
         
-        internal static string Naps2TitleFormat {
+        internal static string AlignTop {
             get {
-                return ResourceManager.GetString("Naps2TitleFormat", resourceCulture);
+                return ResourceManager.GetString("AlignTop", resourceCulture);
             }
         }
         
-        internal static string Naps2FullName {
+        internal static string AllCount {
             get {
-                return ResourceManager.GetString("Naps2FullName", resourceCulture);
+                return ResourceManager.GetString("AllCount", resourceCulture);
             }
         }
         
-        internal static string OcrSetupFormTitle {
+        internal static string AllowAnnotations {
             get {
-                return ResourceManager.GetString("OcrSetupFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string MakePdfsSearchable {
-            get {
-                return ResourceManager.GetString("MakePdfsSearchable", resourceCulture);
-            }
-        }
-        
-        internal static string OcrLanguageLabel {
-            get {
-                return ResourceManager.GetString("OcrLanguageLabel", resourceCulture);
-            }
-        }
-        
-        internal static string OcrModeLabel {
-            get {
-                return ResourceManager.GetString("OcrModeLabel", resourceCulture);
-            }
-        }
-        
-        internal static string FixWhiteBalanceAndRemoveNoise {
-            get {
-                return ResourceManager.GetString("FixWhiteBalanceAndRemoveNoise", resourceCulture);
-            }
-        }
-        
-        internal static string RunOcrAfterScanning {
-            get {
-                return ResourceManager.GetString("RunOcrAfterScanning", resourceCulture);
-            }
-        }
-        
-        internal static string PreemptivelyOcrAfterScanning {
-            get {
-                return ResourceManager.GetString("PreemptivelyOcrAfterScanning", resourceCulture);
-            }
-        }
-        
-        internal static string GetMoreLanguages {
-            get {
-                return ResourceManager.GetString("GetMoreLanguages", resourceCulture);
-            }
-        }
-        
-        internal static string OcrDownloadFormTitle {
-            get {
-                return ResourceManager.GetString("OcrDownloadFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string OcrDownloadSummaryText {
-            get {
-                return ResourceManager.GetString("OcrDownloadSummaryText", resourceCulture);
-            }
-        }
-        
-        internal static string OcrSelectLanguageLabel {
-            get {
-                return ResourceManager.GetString("OcrSelectLanguageLabel", resourceCulture);
-            }
-        }
-        
-        internal static string EstimatedDownloadSize {
-            get {
-                return ResourceManager.GetString("EstimatedDownloadSize", resourceCulture);
-            }
-        }
-        
-        internal static string Download {
-            get {
-                return ResourceManager.GetString("Download", resourceCulture);
-            }
-        }
-        
-        internal static string DownloadProgressFormTitle {
-            get {
-                return ResourceManager.GetString("DownloadProgressFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string PreviewFormTitle {
-            get {
-                return ResourceManager.GetString("PreviewFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string Next {
-            get {
-                return ResourceManager.GetString("Next", resourceCulture);
-            }
-        }
-        
-        internal static string Previous {
-            get {
-                return ResourceManager.GetString("Previous", resourceCulture);
-            }
-        }
-        
-        internal static string XOfY {
-            get {
-                return ResourceManager.GetString("XOfY", resourceCulture);
-            }
-        }
-        
-        internal static string Revert {
-            get {
-                return ResourceManager.GetString("Revert", resourceCulture);
-            }
-        }
-        
-        internal static string AutoCrop {
-            get {
-                return ResourceManager.GetString("AutoCrop", resourceCulture);
-            }
-        }
-        
-        internal static string ApplyToSelected {
-            get {
-                return ResourceManager.GetString("ApplyToSelected", resourceCulture);
-            }
-        }
-        
-        internal static string SelectAll {
-            get {
-                return ResourceManager.GetString("SelectAll", resourceCulture);
-            }
-        }
-        
-        internal static string Recover {
-            get {
-                return ResourceManager.GetString("Recover", resourceCulture);
-            }
-        }
-        
-        internal static string NotNow {
-            get {
-                return ResourceManager.GetString("NotNow", resourceCulture);
-            }
-        }
-        
-        internal static string RecoverFormTitle {
-            get {
-                return ResourceManager.GetString("RecoverFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string RecoverPrompt {
-            get {
-                return ResourceManager.GetString("RecoverPrompt", resourceCulture);
-            }
-        }
-        
-        internal static string Ellipsis {
-            get {
-                return ResourceManager.GetString("Ellipsis", resourceCulture);
-            }
-        }
-        
-        internal static string Placeholders {
-            get {
-                return ResourceManager.GetString("Placeholders", resourceCulture);
-            }
-        }
-        
-        internal static string SkipSavePrompt {
-            get {
-                return ResourceManager.GetString("SkipSavePrompt", resourceCulture);
-            }
-        }
-        
-        internal static string SinglePageFiles {
-            get {
-                return ResourceManager.GetString("SinglePageFiles", resourceCulture);
-            }
-        }
-
-        internal static string AllowJbig2Compression {
-            get {
-                return ResourceManager.GetString("AllowJbig2Compression", resourceCulture);
-            }
-        }
-        
-        internal static string EncryptPdf {
-            get {
-                return ResourceManager.GetString("EncryptPdf", resourceCulture);
-            }
-        }
-        
-        internal static string Show {
-            get {
-                return ResourceManager.GetString("Show", resourceCulture);
-            }
-        }
-        
-        internal static string RestoreDefaults {
-            get {
-                return ResourceManager.GetString("RestoreDefaults", resourceCulture);
-            }
-        }
-        
-        internal static string AllowPrinting {
-            get {
-                return ResourceManager.GetString("AllowPrinting", resourceCulture);
-            }
-        }
-        
-        internal static string AllowFullQualityPrinting {
-            get {
-                return ResourceManager.GetString("AllowFullQualityPrinting", resourceCulture);
-            }
-        }
-        
-        internal static string AllowDocumentModification {
-            get {
-                return ResourceManager.GetString("AllowDocumentModification", resourceCulture);
-            }
-        }
-        
-        internal static string AllowDocumentAssembly {
-            get {
-                return ResourceManager.GetString("AllowDocumentAssembly", resourceCulture);
+                return ResourceManager.GetString("AllowAnnotations", resourceCulture);
             }
         }
         
@@ -1005,9 +147,15 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string AllowAnnotations {
+        internal static string AllowDocumentAssembly {
             get {
-                return ResourceManager.GetString("AllowAnnotations", resourceCulture);
+                return ResourceManager.GetString("AllowDocumentAssembly", resourceCulture);
+            }
+        }
+        
+        internal static string AllowDocumentModification {
+            get {
+                return ResourceManager.GetString("AllowDocumentModification", resourceCulture);
             }
         }
         
@@ -1017,747 +165,81 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string DefaultFilePathLabel {
+        internal static string AllowFullQualityPrinting {
             get {
-                return ResourceManager.GetString("DefaultFilePathLabel", resourceCulture);
+                return ResourceManager.GetString("AllowFullQualityPrinting", resourceCulture);
             }
         }
         
-        internal static string FilePathLabel {
+        internal static string AllowJbig2Compression {
             get {
-                return ResourceManager.GetString("FilePathLabel", resourceCulture);
+                return ResourceManager.GetString("AllowJbig2Compression", resourceCulture);
             }
         }
         
-        internal static string TitleLabel {
+        internal static string AllowPrinting {
             get {
-                return ResourceManager.GetString("TitleLabel", resourceCulture);
+                return ResourceManager.GetString("AllowPrinting", resourceCulture);
             }
         }
         
-        internal static string AuthorLabel {
+        internal static string AltDeinterleave {
             get {
-                return ResourceManager.GetString("AuthorLabel", resourceCulture);
+                return ResourceManager.GetString("AltDeinterleave", resourceCulture);
             }
         }
         
-        internal static string SubjectLabel {
+        internal static string AltInterleave {
             get {
-                return ResourceManager.GetString("SubjectLabel", resourceCulture);
+                return ResourceManager.GetString("AltInterleave", resourceCulture);
             }
         }
         
-        internal static string KeywordsLabel {
+        internal static string AltKey {
             get {
-                return ResourceManager.GetString("KeywordsLabel", resourceCulture);
+                return ResourceManager.GetString("AltKey", resourceCulture);
             }
         }
         
-        internal static string OwnerPasswordLabel {
-            get {
-                return ResourceManager.GetString("OwnerPasswordLabel", resourceCulture);
-            }
-        }
-        
-        internal static string UserPasswordLabel {
-            get {
-                return ResourceManager.GetString("UserPasswordLabel", resourceCulture);
-            }
-        }
-        
-        internal static string RememberTheseSettings {
-            get {
-                return ResourceManager.GetString("RememberTheseSettings", resourceCulture);
-            }
-        }
-        
-        internal static string Metadata {
-            get {
-                return ResourceManager.GetString("Metadata", resourceCulture);
-            }
-        }
-        
-        internal static string Encryption {
-            get {
-                return ResourceManager.GetString("Encryption", resourceCulture);
-            }
-        }
-        
-        internal static string Compatibility {
-            get {
-                return ResourceManager.GetString("Compatibility", resourceCulture);
-            }
-        }
-        
-        internal static string PlaceholdersFormTitle {
-            get {
-                return ResourceManager.GetString("PlaceholdersFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string Year4Digit {
-            get {
-                return ResourceManager.GetString("Year4Digit", resourceCulture);
-            }
-        }
-        
-        internal static string Year2Digit {
-            get {
-                return ResourceManager.GetString("Year2Digit", resourceCulture);
-            }
-        }
-        
-        internal static string Month2Digit {
-            get {
-                return ResourceManager.GetString("Month2Digit", resourceCulture);
-            }
-        }
-        
-        internal static string Day2Digit {
-            get {
-                return ResourceManager.GetString("Day2Digit", resourceCulture);
-            }
-        }
-        
-        internal static string Hour2Digit {
-            get {
-                return ResourceManager.GetString("Hour2Digit", resourceCulture);
-            }
-        }
-        
-        internal static string Minute2Digit {
-            get {
-                return ResourceManager.GetString("Minute2Digit", resourceCulture);
-            }
-        }
-        
-        internal static string Second2Digit {
-            get {
-                return ResourceManager.GetString("Second2Digit", resourceCulture);
-            }
-        }
-        
-        internal static string AutoIncrementing4Digit {
-            get {
-                return ResourceManager.GetString("AutoIncrementing4Digit", resourceCulture);
-            }
-        }
-        
-        internal static string AutoIncrementing3Digit {
-            get {
-                return ResourceManager.GetString("AutoIncrementing3Digit", resourceCulture);
-            }
-        }
-        
-        internal static string AutoIncrementing2Digit {
-            get {
-                return ResourceManager.GetString("AutoIncrementing2Digit", resourceCulture);
-            }
-        }
-        
-        internal static string AutoIncrementing1Digit {
-            get {
-                return ResourceManager.GetString("AutoIncrementing1Digit", resourceCulture);
-            }
-        }
-        
-        internal static string FileNameLabel {
-            get {
-                return ResourceManager.GetString("FileNameLabel", resourceCulture);
-            }
-        }
-        
-        internal static string PreviewLabel {
-            get {
-                return ResourceManager.GetString("PreviewLabel", resourceCulture);
-            }
-        }
-        
-        internal static string JpegQualityHelp {
-            get {
-                return ResourceManager.GetString("JpegQualityHelp", resourceCulture);
-            }
-        }
-        
-        internal static string JpegQuality {
-            get {
-                return ResourceManager.GetString("JpegQuality", resourceCulture);
-            }
-        }
-        
-        internal static string TiffOptions {
-            get {
-                return ResourceManager.GetString("TiffOptions", resourceCulture);
-            }
-        }
-        
-        internal static string CompressionLabel {
-            get {
-                return ResourceManager.GetString("CompressionLabel", resourceCulture);
-            }
-        }
-        
-        internal static string SettingsFormTitle {
-            get {
-                return ResourceManager.GetString("SettingsFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string Provider {
-            get {
-                return ResourceManager.GetString("Provider", resourceCulture);
-            }
-        }
-        
-        internal static string Change {
-            get {
-                return ResourceManager.GetString("Change", resourceCulture);
-            }
-        }
-        
-        internal static string AttachmentNameLabel {
-            get {
-                return ResourceManager.GetString("AttachmentNameLabel", resourceCulture);
-            }
-        }
-        
-        internal static string EmailProviderFormTitle {
-            get {
-                return ResourceManager.GetString("EmailProviderFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string AuthorizeFormTitle {
-            get {
-                return ResourceManager.GetString("AuthorizeFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string WaitingForAuthorization {
-            get {
-                return ResourceManager.GetString("WaitingForAuthorization", resourceCulture);
-            }
-        }
-        
-        internal static string ErrorFormTitle {
-            get {
-                return ResourceManager.GetString("ErrorFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string TechnicalDetails {
-            get {
-                return ResourceManager.GetString("TechnicalDetails", resourceCulture);
-            }
-        }
-        
-        internal static string PdfPasswordFormTitle {
-            get {
-                return ResourceManager.GetString("PdfPasswordFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string EncryptedFilePrompt {
-            get {
-                return ResourceManager.GetString("EncryptedFilePrompt", resourceCulture);
-            }
-        }
-        
-        internal static string PromptForFilePath {
-            get {
-                return ResourceManager.GetString("PromptForFilePath", resourceCulture);
-            }
-        }
-        
-        internal static string OneFilePerPage {
-            get {
-                return ResourceManager.GetString("OneFilePerPage", resourceCulture);
-            }
-        }
-        
-        internal static string OneFilePerScan {
-            get {
-                return ResourceManager.GetString("OneFilePerScan", resourceCulture);
-            }
-        }
-        
-        internal static string SeparateByPatchT {
-            get {
-                return ResourceManager.GetString("SeparateByPatchT", resourceCulture);
-            }
-        }
-        
-        internal static string MoreInfo {
-            get {
-                return ResourceManager.GetString("MoreInfo", resourceCulture);
-            }
-        }
-        
-        internal static string ClearAfterSaving {
-            get {
-                return ResourceManager.GetString("ClearAfterSaving", resourceCulture);
-            }
-        }
-        
-        internal static string KeepSession {
-            get {
-                return ResourceManager.GetString("KeepSession", resourceCulture);
-            }
-        }
-        
-        internal static string PageSizeFormTitle {
-            get {
-                return ResourceManager.GetString("PageSizeFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string NameOptional {
-            get {
-                return ResourceManager.GetString("NameOptional", resourceCulture);
-            }
-        }
-        
-        internal static string Dimensions {
-            get {
-                return ResourceManager.GetString("Dimensions", resourceCulture);
-            }
-        }
-        
-        internal static string ResolutionFormTitle {
-            get {
-                return ResourceManager.GetString("ResolutionFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string Dpi {
-            get {
-                return ResourceManager.GetString("Dpi", resourceCulture);
-            }
-        }
-        
-        internal static string WaitingForTwain {
-            get {
-                return ResourceManager.GetString("WaitingForTwain", resourceCulture);
-            }
-        }
-        
-        internal static string AdvancedProfileFormTitle {
-            get {
-                return ResourceManager.GetString("AdvancedProfileFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string ImageQuality {
-            get {
-                return ResourceManager.GetString("ImageQuality", resourceCulture);
-            }
-        }
-        
-        internal static string MaximumQuality {
-            get {
-                return ResourceManager.GetString("MaximumQuality", resourceCulture);
-            }
-        }
-        
-        internal static string BlankPages {
-            get {
-                return ResourceManager.GetString("BlankPages", resourceCulture);
-            }
-        }
-        
-        internal static string ExcludeBlankPages {
-            get {
-                return ResourceManager.GetString("ExcludeBlankPages", resourceCulture);
-            }
-        }
-        
-        internal static string WhiteThreshold {
-            get {
-                return ResourceManager.GetString("WhiteThreshold", resourceCulture);
-            }
-        }
-        
-        internal static string CoverageThreshold {
-            get {
-                return ResourceManager.GetString("CoverageThreshold", resourceCulture);
-            }
-        }
-        
-        internal static string PostProcessing {
-            get {
-                return ResourceManager.GetString("PostProcessing", resourceCulture);
-            }
-        }
-        
-        internal static string DeskewScannedPages {
-            get {
-                return ResourceManager.GetString("DeskewScannedPages", resourceCulture);
-            }
-        }
-        
-        internal static string AutoCropScannedPages {
-            get {
-                return ResourceManager.GetString("AutoCropScannedPages", resourceCulture);
-            }
-        }
-        
-        internal static string BrightnessContrastAfterScan {
-            get {
-                return ResourceManager.GetString("BrightnessContrastAfterScan", resourceCulture);
-            }
-        }
-        
-        internal static string OffsetWidth {
-            get {
-                return ResourceManager.GetString("OffsetWidth", resourceCulture);
-            }
-        }
-        
-        internal static string StretchToPageSize {
-            get {
-                return ResourceManager.GetString("StretchToPageSize", resourceCulture);
-            }
-        }
-        
-        internal static string CropToPageSize {
-            get {
-                return ResourceManager.GetString("CropToPageSize", resourceCulture);
-            }
-        }
-        
-        internal static string FlipDuplexedPages {
-            get {
-                return ResourceManager.GetString("FlipDuplexedPages", resourceCulture);
-            }
-        }
-        
-        internal static string FlipBackSidesOfDuplexPages {
-            get {
-                return ResourceManager.GetString("FlipBackSidesOfDuplexPages", resourceCulture);
-            }
-        }
-        
-        internal static string WiaVersionLabel {
-            get {
-                return ResourceManager.GetString("WiaVersionLabel", resourceCulture);
-            }
-        }
-        
-        internal static string TwainImplLabel {
-            get {
-                return ResourceManager.GetString("TwainImplLabel", resourceCulture);
-            }
-        }
-
-        internal static string AppleImplLabel {
-            get {
-                return ResourceManager.GetString("AppleImplLabel", resourceCulture);
-            }
-        }
-        
-        internal static string BatchScanFormTitle {
-            get {
-                return ResourceManager.GetString("BatchScanFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string PressStartWhenReady {
-            get {
-                return ResourceManager.GetString("PressStartWhenReady", resourceCulture);
-            }
-        }
-        
-        internal static string ScanConfig {
-            get {
-                return ResourceManager.GetString("ScanConfig", resourceCulture);
-            }
-        }
-        
-        internal static string Output {
-            get {
-                return ResourceManager.GetString("Output", resourceCulture);
-            }
-        }
-        
-        internal static string ProfileLabel {
-            get {
-                return ResourceManager.GetString("ProfileLabel", resourceCulture);
-            }
-        }
-        
-        internal static string SingleScan {
-            get {
-                return ResourceManager.GetString("SingleScan", resourceCulture);
-            }
-        }
-        
-        internal static string MultipleScansPrompt {
-            get {
-                return ResourceManager.GetString("MultipleScansPrompt", resourceCulture);
-            }
-        }
-        
-        internal static string MultipleScansDelay {
-            get {
-                return ResourceManager.GetString("MultipleScansDelay", resourceCulture);
-            }
-        }
-        
-        internal static string NumberOfScansLabel {
-            get {
-                return ResourceManager.GetString("NumberOfScansLabel", resourceCulture);
-            }
-        }
-        
-        internal static string TimeBetweenScansLabel {
-            get {
-                return ResourceManager.GetString("TimeBetweenScansLabel", resourceCulture);
-            }
-        }
-        
-        internal static string LoadIn {
-            get {
-                return ResourceManager.GetString("LoadIn", resourceCulture);
-            }
-        }
-        
-        internal static string SaveToSingleFile {
-            get {
-                return ResourceManager.GetString("SaveToSingleFile", resourceCulture);
-            }
-        }
-        
-        internal static string SaveToMultipleFiles {
-            get {
-                return ResourceManager.GetString("SaveToMultipleFiles", resourceCulture);
-            }
-        }
-        
-        internal static string Start {
-            get {
-                return ResourceManager.GetString("Start", resourceCulture);
-            }
-        }
-        
-        internal static string BatchPromptFormTitle {
-            get {
-                return ResourceManager.GetString("BatchPromptFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string ReadyForScan {
-            get {
-                return ResourceManager.GetString("ReadyForScan", resourceCulture);
-            }
-        }
-        
-        internal static string OpenFolder {
-            get {
-                return ResourceManager.GetString("OpenFolder", resourceCulture);
-            }
-        }
-        
-        internal static string Tools {
-            get {
-                return ResourceManager.GetString("Tools", resourceCulture);
-            }
-        }
-        
-        internal static string EnableDebugLogging {
-            get {
-                return ResourceManager.GetString("EnableDebugLogging", resourceCulture);
-            }
-        }
-        
-        internal static string Share {
-            get {
-                return ResourceManager.GetString("Share", resourceCulture);
-            }
-        }
-        
-        internal static string ScannerSharing {
-            get {
-                return ResourceManager.GetString("ScannerSharing", resourceCulture);
-            }
-        }
-        
-        internal static string ScannerSharingFormTitle {
-            get {
-                return ResourceManager.GetString("ScannerSharingFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string ScannerSharingIntro {
-            get {
-                return ResourceManager.GetString("ScannerSharingIntro", resourceCulture);
-            }
-        }
-        
-        internal static string SharedDeviceFormTitle {
-            get {
-                return ResourceManager.GetString("SharedDeviceFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string ConfirmDeleteSharedDevice {
-            get {
-                return ResourceManager.GetString("ConfirmDeleteSharedDevice", resourceCulture);
-            }
-        }
-        
-        internal static string ShareAsService {
-            get {
-                return ResourceManager.GetString("ShareAsService", resourceCulture);
-            }
-        }
-        
-        internal static string MultipleLanguages {
-            get {
-                return ResourceManager.GetString("MultipleLanguages", resourceCulture);
-            }
-        }
-        
-        internal static string OcrMultiLangFormTitle {
-            get {
-                return ResourceManager.GetString("OcrMultiLangFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string ShowNativeTwainProgress {
-            get {
-                return ResourceManager.GetString("ShowNativeTwainProgress", resourceCulture);
-            }
-        }
-        
-        internal static string Split {
-            get {
-                return ResourceManager.GetString("Split", resourceCulture);
-            }
-        }
-        
-        internal static string Combine {
-            get {
-                return ResourceManager.GetString("Combine", resourceCulture);
-            }
-        }
-        
-        internal static string ManualIp {
-            get {
-                return ResourceManager.GetString("ManualIp", resourceCulture);
-            }
-        }
-        
-        internal static string ManualIpFormTitle {
-            get {
-                return ResourceManager.GetString("ManualIpFormTitle", resourceCulture);
-            }
-        }
-        
-        internal static string IpHost {
-            get {
-                return ResourceManager.GetString("IpHost", resourceCulture);
-            }
-        }
-        
-        internal static string Port {
-            get {
-                return ResourceManager.GetString("Port", resourceCulture);
-            }
-        }
-        
-        internal static string Connect {
-            get {
-                return ResourceManager.GetString("Connect", resourceCulture);
-            }
-        }
-
-        internal static string WaitingToConnect {
-            get {
-                return ResourceManager.GetString("WaitingToConnect", resourceCulture);
-            }
-        }
-
-        internal static string Connecting {
-            get {
-                return ResourceManager.GetString("Connecting", resourceCulture);
-            }
-        }
-
-        internal static string ConnectionError {
-            get {
-                return ResourceManager.GetString("ConnectionError", resourceCulture);
-            }
-        }
-
-        internal static string ConnectionTimedOut {
-            get {
-                return ResourceManager.GetString("ConnectionTimedOut", resourceCulture);
-            }
-        }
-
         internal static string AlwaysAsk {
             get {
                 return ResourceManager.GetString("AlwaysAsk", resourceCulture);
             }
         }
         
-        internal static string SearchingForDevices {
+        internal static string AlwaysShowPreview {
             get {
-                return ResourceManager.GetString("SearchingForDevices", resourceCulture);
+                return ResourceManager.GetString("AlwaysShowPreview", resourceCulture);
             }
         }
         
-        internal static string DevicesFound {
+        internal static string AppleDriver {
             get {
-                return ResourceManager.GetString("DevicesFound", resourceCulture);
+                return ResourceManager.GetString("AppleDriver", resourceCulture);
             }
         }
         
-        internal static string DeviceFoundSingular {
+        internal static string AppleImplLabel {
             get {
-                return ResourceManager.GetString("DeviceFoundSingular", resourceCulture);
+                return ResourceManager.GetString("AppleImplLabel", resourceCulture);
             }
         }
         
-        internal static string NoDevicesFound {
+        internal static string Application {
             get {
-                return ResourceManager.GetString("NoDevicesFound", resourceCulture);
+                return ResourceManager.GetString("Application", resourceCulture);
             }
         }
         
-        internal static string ToggleSidebar {
+        internal static string Apply {
             get {
-                return ResourceManager.GetString("ToggleSidebar", resourceCulture);
+                return ResourceManager.GetString("Apply", resourceCulture);
             }
         }
         
-        internal static string CantFindScannerFlatpak {
+        internal static string ApplyToSelected {
             get {
-                return ResourceManager.GetString("CantFindScannerFlatpak", resourceCulture);
-            }
-        }
-        
-        internal static string KeyboardShortcuts {
-            get {
-                return ResourceManager.GetString("KeyboardShortcuts", resourceCulture);
-            }
-        }
-        
-        internal static string ScanWithProfile {
-            get {
-                return ResourceManager.GetString("ScanWithProfile", resourceCulture);
-            }
-        }
-        
-        internal static string ScanWithDefaultProfile {
-            get {
-                return ResourceManager.GetString("ScanWithDefaultProfile", resourceCulture);
-            }
-        }
-        
-        internal static string ScanWithNewProfile {
-            get {
-                return ResourceManager.GetString("ScanWithNewProfile", resourceCulture);
+                return ResourceManager.GetString("ApplyToSelected", resourceCulture);
             }
         }
         
@@ -1767,27 +249,681 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string Unassign {
+        internal static string AttachmentNameLabel {
             get {
-                return ResourceManager.GetString("Unassign", resourceCulture);
+                return ResourceManager.GetString("AttachmentNameLabel", resourceCulture);
             }
         }
         
-        internal static string Action {
+        internal static string AuthError {
             get {
-                return ResourceManager.GetString("Action", resourceCulture);
+                return ResourceManager.GetString("AuthError", resourceCulture);
             }
         }
         
-        internal static string Shortcut {
+        internal static string AuthorizeFormTitle {
             get {
-                return ResourceManager.GetString("Shortcut", resourceCulture);
+                return ResourceManager.GetString("AuthorizeFormTitle", resourceCulture);
             }
         }
         
-        internal static string ThemeLabel {
+        internal static string AuthorLabel {
             get {
-                return ResourceManager.GetString("ThemeLabel", resourceCulture);
+                return ResourceManager.GetString("AuthorLabel", resourceCulture);
+            }
+        }
+        
+        internal static string AutoCrop {
+            get {
+                return ResourceManager.GetString("AutoCrop", resourceCulture);
+            }
+        }
+        
+        internal static string AutoCropScannedPages {
+            get {
+                return ResourceManager.GetString("AutoCropScannedPages", resourceCulture);
+            }
+        }
+        
+        internal static string AutoDeskewing {
+            get {
+                return ResourceManager.GetString("AutoDeskewing", resourceCulture);
+            }
+        }
+        
+        internal static string AutoDeskewProgress {
+            get {
+                return ResourceManager.GetString("AutoDeskewProgress", resourceCulture);
+            }
+        }
+        
+        internal static string AutoIncrementing1Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing1Digit", resourceCulture);
+            }
+        }
+        
+        internal static string AutoIncrementing2Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing2Digit", resourceCulture);
+            }
+        }
+        
+        internal static string AutoIncrementing3Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing3Digit", resourceCulture);
+            }
+        }
+        
+        internal static string AutoIncrementing4Digit {
+            get {
+                return ResourceManager.GetString("AutoIncrementing4Digit", resourceCulture);
+            }
+        }
+        
+        internal static string AutoSaveError {
+            get {
+                return ResourceManager.GetString("AutoSaveError", resourceCulture);
+            }
+        }
+        
+        internal static string AutoSaveSettings {
+            get {
+                return ResourceManager.GetString("AutoSaveSettings", resourceCulture);
+            }
+        }
+        
+        internal static string AutoSaveSettingsFormTitle {
+            get {
+                return ResourceManager.GetString("AutoSaveSettingsFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string BackspaceKey {
+            get {
+                return ResourceManager.GetString("BackspaceKey", resourceCulture);
+            }
+        }
+        
+        internal static string BatchError {
+            get {
+                return ResourceManager.GetString("BatchError", resourceCulture);
+            }
+        }
+        
+        internal static string BatchPromptFormTitle {
+            get {
+                return ResourceManager.GetString("BatchPromptFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string BatchScan {
+            get {
+                return ResourceManager.GetString("BatchScan", resourceCulture);
+            }
+        }
+        
+        internal static string BatchScanFormTitle {
+            get {
+                return ResourceManager.GetString("BatchScanFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusCancelled {
+            get {
+                return ResourceManager.GetString("BatchStatusCancelled", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusCancelling {
+            get {
+                return ResourceManager.GetString("BatchStatusCancelling", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusComplete {
+            get {
+                return ResourceManager.GetString("BatchStatusComplete", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusError {
+            get {
+                return ResourceManager.GetString("BatchStatusError", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusPage {
+            get {
+                return ResourceManager.GetString("BatchStatusPage", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusSaving {
+            get {
+                return ResourceManager.GetString("BatchStatusSaving", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusScanPage {
+            get {
+                return ResourceManager.GetString("BatchStatusScanPage", resourceCulture);
+            }
+        }
+        
+        internal static string BatchStatusWaitingForScan {
+            get {
+                return ResourceManager.GetString("BatchStatusWaitingForScan", resourceCulture);
+            }
+        }
+        
+        internal static string BitDepthLabel {
+            get {
+                return ResourceManager.GetString("BitDepthLabel", resourceCulture);
+            }
+        }
+        
+        internal static string BlackAndWhite {
+            get {
+                return ResourceManager.GetString("BlackAndWhite", resourceCulture);
+            }
+        }
+        
+        internal static string BlankPages {
+            get {
+                return ResourceManager.GetString("BlankPages", resourceCulture);
+            }
+        }
+        
+        internal static string BrightnessContrast {
+            get {
+                return ResourceManager.GetString("BrightnessContrast", resourceCulture);
+            }
+        }
+        
+        internal static string BrightnessContrastAfterScan {
+            get {
+                return ResourceManager.GetString("BrightnessContrastAfterScan", resourceCulture);
+            }
+        }
+        
+        internal static string BrightnessLabel {
+            get {
+                return ResourceManager.GetString("BrightnessLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonsLabel {
+            get {
+                return ResourceManager.GetString("ButtonsLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        internal static string CancelBatch {
+            get {
+                return ResourceManager.GetString("CancelBatch", resourceCulture);
+            }
+        }
+        
+        internal static string CantFindScannerFlatpak {
+            get {
+                return ResourceManager.GetString("CantFindScannerFlatpak", resourceCulture);
+            }
+        }
+        
+        internal static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+        
+        internal static string CheckForUpdates {
+            get {
+                return ResourceManager.GetString("CheckForUpdates", resourceCulture);
+            }
+        }
+        
+        internal static string CheckingForUpdates {
+            get {
+                return ResourceManager.GetString("CheckingForUpdates", resourceCulture);
+            }
+        }
+        
+        internal static string ChooseDevice {
+            get {
+                return ResourceManager.GetString("ChooseDevice", resourceCulture);
+            }
+        }
+        
+        internal static string ChooseProfile {
+            get {
+                return ResourceManager.GetString("ChooseProfile", resourceCulture);
+            }
+        }
+        
+        internal static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        internal static string ClearAfterSaving {
+            get {
+                return ResourceManager.GetString("ClearAfterSaving", resourceCulture);
+            }
+        }
+        
+        internal static string ClearAll {
+            get {
+                return ResourceManager.GetString("ClearAll", resourceCulture);
+            }
+        }
+        
+        internal static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        internal static string Combine {
+            get {
+                return ResourceManager.GetString("Combine", resourceCulture);
+            }
+        }
+        
+        internal static string CombineHelp {
+            get {
+                return ResourceManager.GetString("CombineHelp", resourceCulture);
+            }
+        }
+        
+        internal static string CommandKey {
+            get {
+                return ResourceManager.GetString("CommandKey", resourceCulture);
+            }
+        }
+        
+        internal static string Compatibility {
+            get {
+                return ResourceManager.GetString("Compatibility", resourceCulture);
+            }
+        }
+        
+        internal static string Compress {
+            get {
+                return ResourceManager.GetString("Compress", resourceCulture);
+            }
+        }
+        
+        internal static string CompressionLabel {
+            get {
+                return ResourceManager.GetString("CompressionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmCancelBatch {
+            get {
+                return ResourceManager.GetString("ConfirmCancelBatch", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmClearItems {
+            get {
+                return ResourceManager.GetString("ConfirmClearItems", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmDelete {
+            get {
+                return ResourceManager.GetString("ConfirmDelete", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmDeleteItems {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteItems", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmDeleteSharedDevice {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteSharedDevice", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmDeleteSingleProfile {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteSingleProfile", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmOverwriteFile {
+            get {
+                return ResourceManager.GetString("ConfirmOverwriteFile", resourceCulture);
+            }
+        }
+        
+        internal static string ConfirmResetImages {
+            get {
+                return ResourceManager.GetString("ConfirmResetImages", resourceCulture);
+            }
+        }
+        
+        internal static string Connect {
+            get {
+                return ResourceManager.GetString("Connect", resourceCulture);
+            }
+        }
+        
+        internal static string Connecting {
+            get {
+                return ResourceManager.GetString("Connecting", resourceCulture);
+            }
+        }
+        
+        internal static string ConnectionError {
+            get {
+                return ResourceManager.GetString("ConnectionError", resourceCulture);
+            }
+        }
+        
+        internal static string ConnectionTimedOut {
+            get {
+                return ResourceManager.GetString("ConnectionTimedOut", resourceCulture);
+            }
+        }
+        
+        internal static string ContrastLabel {
+            get {
+                return ResourceManager.GetString("ContrastLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ControlKey {
+            get {
+                return ResourceManager.GetString("ControlKey", resourceCulture);
+            }
+        }
+        
+        internal static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        internal static string Copying {
+            get {
+                return ResourceManager.GetString("Copying", resourceCulture);
+            }
+        }
+        
+        internal static string CopyProgress {
+            get {
+                return ResourceManager.GetString("CopyProgress", resourceCulture);
+            }
+        }
+        
+        internal static string CopyrightFormat {
+            get {
+                return ResourceManager.GetString("CopyrightFormat", resourceCulture);
+            }
+        }
+        
+        internal static string CoverageThreshold {
+            get {
+                return ResourceManager.GetString("CoverageThreshold", resourceCulture);
+            }
+        }
+        
+        internal static string Crop {
+            get {
+                return ResourceManager.GetString("Crop", resourceCulture);
+            }
+        }
+        
+        internal static string CropHelp {
+            get {
+                return ResourceManager.GetString("CropHelp", resourceCulture);
+            }
+        }
+        
+        internal static string CropToPageSize {
+            get {
+                return ResourceManager.GetString("CropToPageSize", resourceCulture);
+            }
+        }
+        
+        internal static string CustomizeToolbar {
+            get {
+                return ResourceManager.GetString("CustomizeToolbar", resourceCulture);
+            }
+        }
+        
+        internal static string CustomPageSizeFormat {
+            get {
+                return ResourceManager.GetString("CustomPageSizeFormat", resourceCulture);
+            }
+        }
+        
+        internal static string CustomRotation {
+            get {
+                return ResourceManager.GetString("CustomRotation", resourceCulture);
+            }
+        }
+        
+        internal static string CustomRotationHelp {
+            get {
+                return ResourceManager.GetString("CustomRotationHelp", resourceCulture);
+            }
+        }
+        
+        internal static string Day2Digit {
+            get {
+                return ResourceManager.GetString("Day2Digit", resourceCulture);
+            }
+        }
+        
+        internal static string Default {
+            get {
+                return ResourceManager.GetString("Default", resourceCulture);
+            }
+        }
+        
+        internal static string DefaultFilePathLabel {
+            get {
+                return ResourceManager.GetString("DefaultFilePathLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Deinterleave {
+            get {
+                return ResourceManager.GetString("Deinterleave", resourceCulture);
+            }
+        }
+        
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        internal static string DeleteKey {
+            get {
+                return ResourceManager.GetString("DeleteKey", resourceCulture);
+            }
+        }
+        
+        internal static string Deskew {
+            get {
+                return ResourceManager.GetString("Deskew", resourceCulture);
+            }
+        }
+        
+        internal static string DeskewScannedPages {
+            get {
+                return ResourceManager.GetString("DeskewScannedPages", resourceCulture);
+            }
+        }
+        
+        internal static string DeviceBusy {
+            get {
+                return ResourceManager.GetString("DeviceBusy", resourceCulture);
+            }
+        }
+        
+        internal static string DeviceCoverOpen {
+            get {
+                return ResourceManager.GetString("DeviceCoverOpen", resourceCulture);
+            }
+        }
+        
+        internal static string DeviceFoundSingular {
+            get {
+                return ResourceManager.GetString("DeviceFoundSingular", resourceCulture);
+            }
+        }
+        
+        internal static string DeviceLabel {
+            get {
+                return ResourceManager.GetString("DeviceLabel", resourceCulture);
+            }
+        }
+        
+        internal static string DeviceNotFound {
+            get {
+                return ResourceManager.GetString("DeviceNotFound", resourceCulture);
+            }
+        }
+        
+        internal static string DeviceOffline {
+            get {
+                return ResourceManager.GetString("DeviceOffline", resourceCulture);
+            }
+        }
+        
+        internal static string DevicePaperJam {
+            get {
+                return ResourceManager.GetString("DevicePaperJam", resourceCulture);
+            }
+        }
+        
+        internal static string DevicesFound {
+            get {
+                return ResourceManager.GetString("DevicesFound", resourceCulture);
+            }
+        }
+        
+        internal static string DeviceWarmingUp {
+            get {
+                return ResourceManager.GetString("DeviceWarmingUp", resourceCulture);
+            }
+        }
+        
+        internal static string Dimensions {
+            get {
+                return ResourceManager.GetString("Dimensions", resourceCulture);
+            }
+        }
+        
+        internal static string DimensionsLabel {
+            get {
+                return ResourceManager.GetString("DimensionsLabel", resourceCulture);
+            }
+        }
+        
+        internal static string DiscardAndExit {
+            get {
+                return ResourceManager.GetString("DiscardAndExit", resourceCulture);
+            }
+        }
+        
+        internal static string DisplayNameLabel {
+            get {
+                return ResourceManager.GetString("DisplayNameLabel", resourceCulture);
+            }
+        }
+        
+        internal static string DocumentCorrection {
+            get {
+                return ResourceManager.GetString("DocumentCorrection", resourceCulture);
+            }
+        }
+        
+        internal static string Donate {
+            get {
+                return ResourceManager.GetString("Donate", resourceCulture);
+            }
+        }
+        
+        internal static string DonatePrompt {
+            get {
+                return ResourceManager.GetString("DonatePrompt", resourceCulture);
+            }
+        }
+        
+        internal static string Done {
+            get {
+                return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        internal static string DontHavePermission {
+            get {
+                return ResourceManager.GetString("DontHavePermission", resourceCulture);
+            }
+        }
+        
+        internal static string DownArrowKey {
+            get {
+                return ResourceManager.GetString("DownArrowKey", resourceCulture);
+            }
+        }
+        
+        internal static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        internal static string DownloadError {
+            get {
+                return ResourceManager.GetString("DownloadError", resourceCulture);
+            }
+        }
+        
+        internal static string DownloadProgressFormTitle {
+            get {
+                return ResourceManager.GetString("DownloadProgressFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Dpi {
+            get {
+                return ResourceManager.GetString("Dpi", resourceCulture);
+            }
+        }
+        
+        internal static string DriverNotSupported {
+            get {
+                return ResourceManager.GetString("DriverNotSupported", resourceCulture);
+            }
+        }
+        
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        internal static string EditProfileFormTitle {
+            get {
+                return ResourceManager.GetString("EditProfileFormTitle", resourceCulture);
             }
         }
         
@@ -1809,321 +945,93 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string ErrorStartingApplication {
+        internal static string Ellipsis {
             get {
-                return ResourceManager.GetString("ErrorStartingApplication", resourceCulture);
+                return ResourceManager.GetString("Ellipsis", resourceCulture);
             }
         }
         
-        internal static string StopScannerSharing {
+        internal static string EmailAll {
             get {
-                return ResourceManager.GetString("StopScannerSharing", resourceCulture);
+                return ResourceManager.GetString("EmailAll", resourceCulture);
             }
         }
         
-        internal static string CropHelp {
+        internal static string EmailAllAsPdf {
             get {
-                return ResourceManager.GetString("CropHelp", resourceCulture);
+                return ResourceManager.GetString("EmailAllAsPdf", resourceCulture);
             }
         }
         
-        internal static string SplitHelp {
+        internal static string EmailError {
             get {
-                return ResourceManager.GetString("SplitHelp", resourceCulture);
+                return ResourceManager.GetString("EmailError", resourceCulture);
             }
         }
         
-        internal static string CombineHelp {
+        internal static string EmailPdf {
             get {
-                return ResourceManager.GetString("CombineHelp", resourceCulture);
+                return ResourceManager.GetString("EmailPdf", resourceCulture);
             }
         }
         
-        internal static string CustomRotationHelp {
+        internal static string EmailPdfProgress {
             get {
-                return ResourceManager.GetString("CustomRotationHelp", resourceCulture);
+                return ResourceManager.GetString("EmailPdfProgress", resourceCulture);
             }
         }
         
-        internal static string ManualDuplex {
+        internal static string EmailProviderFormTitle {
             get {
-                return ResourceManager.GetString("ManualDuplex", resourceCulture);
+                return ResourceManager.GetString("EmailProviderFormTitle", resourceCulture);
             }
         }
         
-        internal static string ManualDuplexPreview {
+        internal static string EmailSelected {
             get {
-                return ResourceManager.GetString("ManualDuplexPreview", resourceCulture);
+                return ResourceManager.GetString("EmailSelected", resourceCulture);
             }
         }
         
-        internal static string ManualDuplexFormTitle {
+        internal static string EmailSelectedAsPdf {
             get {
-                return ResourceManager.GetString("ManualDuplexFormTitle", resourceCulture);
+                return ResourceManager.GetString("EmailSelectedAsPdf", resourceCulture);
             }
         }
         
-        internal static string AlwaysShowPreview {
+        internal static string EmailSettings {
             get {
-                return ResourceManager.GetString("AlwaysShowPreview", resourceCulture);
+                return ResourceManager.GetString("EmailSettings", resourceCulture);
             }
         }
         
-        internal static string ReverseBackSides {
+        internal static string EnableAutoSave {
             get {
-                return ResourceManager.GetString("ReverseBackSides", resourceCulture);
+                return ResourceManager.GetString("EnableAutoSave", resourceCulture);
             }
         }
         
-        internal static string ManualDuplexHelp {
+        internal static string EnableDebugLogging {
             get {
-                return ResourceManager.GetString("ManualDuplexHelp", resourceCulture);
+                return ResourceManager.GetString("EnableDebugLogging", resourceCulture);
             }
         }
         
-        internal static string Preview {
+        internal static string EncryptedFilePrompt {
             get {
-                return ResourceManager.GetString("Preview", resourceCulture);
+                return ResourceManager.GetString("EncryptedFilePrompt", resourceCulture);
             }
         }
         
-        internal static string PagesReordered {
+        internal static string Encryption {
             get {
-                return ResourceManager.GetString("PagesReordered", resourceCulture);
+                return ResourceManager.GetString("Encryption", resourceCulture);
             }
         }
         
-        internal static string ControlKey {
+        internal static string EncryptPdf {
             get {
-                return ResourceManager.GetString("ControlKey", resourceCulture);
-            }
-        }
-        
-        internal static string AltKey {
-            get {
-                return ResourceManager.GetString("AltKey", resourceCulture);
-            }
-        }
-        
-        internal static string ShiftKey {
-            get {
-                return ResourceManager.GetString("ShiftKey", resourceCulture);
-            }
-        }
-        
-        internal static string CommandKey {
-            get {
-                return ResourceManager.GetString("CommandKey", resourceCulture);
-            }
-        }
-        
-        internal static string OptionKey {
-            get {
-                return ResourceManager.GetString("OptionKey", resourceCulture);
-            }
-        }
-
-        internal static string Compress {
-            get {
-                return ResourceManager.GetString("Compress", resourceCulture);
-            }
-        }
-
-        internal static string ResolutionDpiLabel {
-            get {
-                return ResourceManager.GetString("ResolutionDpiLabel", resourceCulture);
-            }
-        }
-
-        internal static string DimensionsLabel {
-            get {
-                return ResourceManager.GetString("DimensionsLabel", resourceCulture);
-            }
-        }
-
-        internal static string PixelDimensionsLabel {
-            get {
-                return ResourceManager.GetString("PixelDimensionsLabel", resourceCulture);
-            }
-        }
-        
-        internal static string UseJpegCompression {
-            get {
-                return ResourceManager.GetString("UseJpegCompression", resourceCulture);
-            }
-        }
-
-        internal static string JpegQualityLabel {
-            get {
-                return ResourceManager.GetString("JpegQualityLabel", resourceCulture);
-            }
-        }
-        
-        internal static string MissingFileExtension {
-            get {
-                return ResourceManager.GetString("MissingFileExtension", resourceCulture);
-            }
-        }
-        
-        internal static string AlignLeft {
-            get {
-                return ResourceManager.GetString("AlignLeft", resourceCulture);
-            }
-        }
-        
-        internal static string AlignCenter {
-            get {
-                return ResourceManager.GetString("AlignCenter", resourceCulture);
-            }
-        }
-        
-        internal static string AlignRight {
-            get {
-                return ResourceManager.GetString("AlignRight", resourceCulture);
-            }
-        }
-        
-        internal static string AlignTop {
-            get {
-                return ResourceManager.GetString("AlignTop", resourceCulture);
-            }
-        }
-        
-        internal static string AlignMiddle {
-            get {
-                return ResourceManager.GetString("AlignMiddle", resourceCulture);
-            }
-        }
-        
-        internal static string AlignBottom {
-            get {
-                return ResourceManager.GetString("AlignBottom", resourceCulture);
-            }
-        }
-        
-        internal static string Swap {
-            get {
-                return ResourceManager.GetString("Swap", resourceCulture);
-            }
-        }
-        
-        internal static string SplitVertically {
-            get {
-                return ResourceManager.GetString("SplitVertically", resourceCulture);
-            }
-        }
-        
-        internal static string SplitHorizontally {
-            get {
-                return ResourceManager.GetString("SplitHorizontally", resourceCulture);
-            }
-        }
-        
-        internal static string Help {
-            get {
-                return ResourceManager.GetString("Help", resourceCulture);
-            }
-        }
-        
-        internal static string ToggleOrientation {
-            get {
-                return ResourceManager.GetString("ToggleOrientation", resourceCulture);
-            }
-        }
-        
-        internal static string ToggleView {
-            get {
-                return ResourceManager.GetString("ToggleView", resourceCulture);
-            }
-        }
-        
-        internal static string ToolbarSettings {
-            get {
-                return ResourceManager.GetString("ToolbarSettings", resourceCulture);
-            }
-        }
-        
-        internal static string CustomizeToolbar {
-            get {
-                return ResourceManager.GetString("CustomizeToolbar", resourceCulture);
-            }
-        }
-        
-        internal static string Toolbar {
-            get {
-                return ResourceManager.GetString("Toolbar", resourceCulture);
-            }
-        }
-        
-        internal static string ProfilesToolbar {
-            get {
-                return ResourceManager.GetString("ProfilesToolbar", resourceCulture);
-            }
-        }
-        
-        internal static string PositionLabel {
-            get {
-                return ResourceManager.GetString("PositionLabel", resourceCulture);
-            }
-        }
-        
-        internal static string ButtonsLabel {
-            get {
-                return ResourceManager.GetString("ButtonsLabel", resourceCulture);
-            }
-        }
-        
-        internal static string WindowsKey {
-            get {
-                return ResourceManager.GetString("WindowsKey", resourceCulture);
-            }
-        }
-        
-        internal static string EnterKey {
-            get {
-                return ResourceManager.GetString("EnterKey", resourceCulture);
-            }
-        }
-        
-        internal static string DeleteKey {
-            get {
-                return ResourceManager.GetString("DeleteKey", resourceCulture);
-            }
-        }
-        
-        internal static string InsertKey {
-            get {
-                return ResourceManager.GetString("InsertKey", resourceCulture);
-            }
-        }
-        
-        internal static string EscapeKey {
-            get {
-                return ResourceManager.GetString("EscapeKey", resourceCulture);
-            }
-        }
-        
-        internal static string SpaceKey {
-            get {
-                return ResourceManager.GetString("SpaceKey", resourceCulture);
-            }
-        }
-        
-        internal static string TabKey {
-            get {
-                return ResourceManager.GetString("TabKey", resourceCulture);
-            }
-        }
-        
-        internal static string BackspaceKey {
-            get {
-                return ResourceManager.GetString("BackspaceKey", resourceCulture);
-            }
-        }
-        
-        internal static string HomeKey {
-            get {
-                return ResourceManager.GetString("HomeKey", resourceCulture);
+                return ResourceManager.GetString("EncryptPdf", resourceCulture);
             }
         }
         
@@ -2133,27 +1041,405 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string PageUpKey {
+        internal static string EnterKey {
             get {
-                return ResourceManager.GetString("PageUpKey", resourceCulture);
+                return ResourceManager.GetString("EnterKey", resourceCulture);
             }
         }
         
-        internal static string PageDownKey {
+        internal static string Error {
             get {
-                return ResourceManager.GetString("PageDownKey", resourceCulture);
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
-        internal static string UpArrowKey {
+        internal static string ErrorEmailing {
             get {
-                return ResourceManager.GetString("UpArrowKey", resourceCulture);
+                return ResourceManager.GetString("ErrorEmailing", resourceCulture);
             }
         }
         
-        internal static string DownArrowKey {
+        internal static string ErrorFormTitle {
             get {
-                return ResourceManager.GetString("DownArrowKey", resourceCulture);
+                return ResourceManager.GetString("ErrorFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string ErrorSaving {
+            get {
+                return ResourceManager.GetString("ErrorSaving", resourceCulture);
+            }
+        }
+        
+        internal static string ErrorStartingApplication {
+            get {
+                return ResourceManager.GetString("ErrorStartingApplication", resourceCulture);
+            }
+        }
+        
+        internal static string EscapeKey {
+            get {
+                return ResourceManager.GetString("EscapeKey", resourceCulture);
+            }
+        }
+        
+        internal static string EsclDriver {
+            get {
+                return ResourceManager.GetString("EsclDriver", resourceCulture);
+            }
+        }
+        
+        internal static string EstimatedDownloadSize {
+            get {
+                return ResourceManager.GetString("EstimatedDownloadSize", resourceCulture);
+            }
+        }
+        
+        internal static string ExcludeBlankPages {
+            get {
+                return ResourceManager.GetString("ExcludeBlankPages", resourceCulture);
+            }
+        }
+        
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        internal static string ExitWithActiveOperations {
+            get {
+                return ResourceManager.GetString("ExitWithActiveOperations", resourceCulture);
+            }
+        }
+        
+        internal static string ExitWithUnsavedChanges {
+            get {
+                return ResourceManager.GetString("ExitWithUnsavedChanges", resourceCulture);
+            }
+        }
+        
+        internal static string FileInUse {
+            get {
+                return ResourceManager.GetString("FileInUse", resourceCulture);
+            }
+        }
+        
+        internal static string FileNameLabel {
+            get {
+                return ResourceManager.GetString("FileNameLabel", resourceCulture);
+            }
+        }
+        
+        internal static string FilePathLabel {
+            get {
+                return ResourceManager.GetString("FilePathLabel", resourceCulture);
+            }
+        }
+        
+        internal static string FilesCouldNotBeDownloaded {
+            get {
+                return ResourceManager.GetString("FilesCouldNotBeDownloaded", resourceCulture);
+            }
+        }
+        
+        internal static string FilesProgressFormat {
+            get {
+                return ResourceManager.GetString("FilesProgressFormat", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeAllFiles {
+            get {
+                return ResourceManager.GetString("FileTypeAllFiles", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeAvif {
+            get {
+                return ResourceManager.GetString("FileTypeAvif", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeBmp {
+            get {
+                return ResourceManager.GetString("FileTypeBmp", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeGif {
+            get {
+                return ResourceManager.GetString("FileTypeGif", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeHeic {
+            get {
+                return ResourceManager.GetString("FileTypeHeic", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeImageFiles {
+            get {
+                return ResourceManager.GetString("FileTypeImageFiles", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeJp2 {
+            get {
+                return ResourceManager.GetString("FileTypeJp2", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeJpeg {
+            get {
+                return ResourceManager.GetString("FileTypeJpeg", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeJxl {
+            get {
+                return ResourceManager.GetString("FileTypeJxl", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypePdf {
+            get {
+                return ResourceManager.GetString("FileTypePdf", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypePng {
+            get {
+                return ResourceManager.GetString("FileTypePng", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeTiff {
+            get {
+                return ResourceManager.GetString("FileTypeTiff", resourceCulture);
+            }
+        }
+        
+        internal static string FileTypeWebp {
+            get {
+                return ResourceManager.GetString("FileTypeWebp", resourceCulture);
+            }
+        }
+        
+        internal static string FixWhiteBalanceAndRemoveNoise {
+            get {
+                return ResourceManager.GetString("FixWhiteBalanceAndRemoveNoise", resourceCulture);
+            }
+        }
+        
+        internal static string Flip {
+            get {
+                return ResourceManager.GetString("Flip", resourceCulture);
+            }
+        }
+        
+        internal static string FlipBackSidesOfDuplexPages {
+            get {
+                return ResourceManager.GetString("FlipBackSidesOfDuplexPages", resourceCulture);
+            }
+        }
+        
+        internal static string FlipDuplexedPages {
+            get {
+                return ResourceManager.GetString("FlipDuplexedPages", resourceCulture);
+            }
+        }
+        
+        internal static string GeneralSettings {
+            get {
+                return ResourceManager.GetString("GeneralSettings", resourceCulture);
+            }
+        }
+        
+        internal static string GetMoreLanguages {
+            get {
+                return ResourceManager.GetString("GetMoreLanguages", resourceCulture);
+            }
+        }
+        
+        internal static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        internal static string HomeKey {
+            get {
+                return ResourceManager.GetString("HomeKey", resourceCulture);
+            }
+        }
+        
+        internal static string HorizontalAlignLabel {
+            get {
+                return ResourceManager.GetString("HorizontalAlignLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Hour2Digit {
+            get {
+                return ResourceManager.GetString("Hour2Digit", resourceCulture);
+            }
+        }
+        
+        internal static string HueSaturation {
+            get {
+                return ResourceManager.GetString("HueSaturation", resourceCulture);
+            }
+        }
+        
+        internal static string IconsFrom {
+            get {
+                return ResourceManager.GetString("IconsFrom", resourceCulture);
+            }
+        }
+        
+        internal static string Image {
+            get {
+                return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        internal static string ImageQuality {
+            get {
+                return ResourceManager.GetString("ImageQuality", resourceCulture);
+            }
+        }
+        
+        internal static string ImageSaved {
+            get {
+                return ResourceManager.GetString("ImageSaved", resourceCulture);
+            }
+        }
+        
+        internal static string ImageSettings {
+            get {
+                return ResourceManager.GetString("ImageSettings", resourceCulture);
+            }
+        }
+        
+        internal static string ImagesSaved {
+            get {
+                return ResourceManager.GetString("ImagesSaved", resourceCulture);
+            }
+        }
+        
+        internal static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        internal static string ImportErrorCouldNot {
+            get {
+                return ResourceManager.GetString("ImportErrorCouldNot", resourceCulture);
+            }
+        }
+        
+        internal static string Importing {
+            get {
+                return ResourceManager.GetString("Importing", resourceCulture);
+            }
+        }
+        
+        internal static string ImportingFormat {
+            get {
+                return ResourceManager.GetString("ImportingFormat", resourceCulture);
+            }
+        }
+        
+        internal static string ImportProgress {
+            get {
+                return ResourceManager.GetString("ImportProgress", resourceCulture);
+            }
+        }
+        
+        internal static string InsertKey {
+            get {
+                return ResourceManager.GetString("InsertKey", resourceCulture);
+            }
+        }
+        
+        internal static string Install {
+            get {
+                return ResourceManager.GetString("Install", resourceCulture);
+            }
+        }
+        
+        internal static string Interface {
+            get {
+                return ResourceManager.GetString("Interface", resourceCulture);
+            }
+        }
+        
+        internal static string Interleave {
+            get {
+                return ResourceManager.GetString("Interleave", resourceCulture);
+            }
+        }
+        
+        internal static string IpHost {
+            get {
+                return ResourceManager.GetString("IpHost", resourceCulture);
+            }
+        }
+        
+        internal static string JpegQuality {
+            get {
+                return ResourceManager.GetString("JpegQuality", resourceCulture);
+            }
+        }
+        
+        internal static string JpegQualityHelp {
+            get {
+                return ResourceManager.GetString("JpegQualityHelp", resourceCulture);
+            }
+        }
+        
+        internal static string JpegQualityLabel {
+            get {
+                return ResourceManager.GetString("JpegQualityLabel", resourceCulture);
+            }
+        }
+        
+        internal static string KeepScanning {
+            get {
+                return ResourceManager.GetString("KeepScanning", resourceCulture);
+            }
+        }
+        
+        internal static string KeepSession {
+            get {
+                return ResourceManager.GetString("KeepSession", resourceCulture);
+            }
+        }
+        
+        internal static string KeyboardShortcuts {
+            get {
+                return ResourceManager.GetString("KeyboardShortcuts", resourceCulture);
+            }
+        }
+        
+        internal static string KeywordsLabel {
+            get {
+                return ResourceManager.GetString("KeywordsLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        internal static string LeaveAReview {
+            get {
+                return ResourceManager.GetString("LeaveAReview", resourceCulture);
             }
         }
         
@@ -2163,15 +1449,1437 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
-        internal static string RightArrowKey {
+        internal static string LoadIn {
             get {
-                return ResourceManager.GetString("RightArrowKey", resourceCulture);
+                return ResourceManager.GetString("LoadIn", resourceCulture);
+            }
+        }
+        
+        internal static string MakePdfsSearchable {
+            get {
+                return ResourceManager.GetString("MakePdfsSearchable", resourceCulture);
+            }
+        }
+        
+        internal static string ManualDuplex {
+            get {
+                return ResourceManager.GetString("ManualDuplex", resourceCulture);
+            }
+        }
+        
+        internal static string ManualDuplexFormTitle {
+            get {
+                return ResourceManager.GetString("ManualDuplexFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string ManualDuplexHelp {
+            get {
+                return ResourceManager.GetString("ManualDuplexHelp", resourceCulture);
+            }
+        }
+        
+        internal static string ManualDuplexPreview {
+            get {
+                return ResourceManager.GetString("ManualDuplexPreview", resourceCulture);
+            }
+        }
+        
+        internal static string ManualIp {
+            get {
+                return ResourceManager.GetString("ManualIp", resourceCulture);
+            }
+        }
+        
+        internal static string ManualIpFormTitle {
+            get {
+                return ResourceManager.GetString("ManualIpFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string MaximumQuality {
+            get {
+                return ResourceManager.GetString("MaximumQuality", resourceCulture);
+            }
+        }
+        
+        internal static string Metadata {
+            get {
+                return ResourceManager.GetString("Metadata", resourceCulture);
+            }
+        }
+        
+        internal static string Minute2Digit {
+            get {
+                return ResourceManager.GetString("Minute2Digit", resourceCulture);
+            }
+        }
+        
+        internal static string MissingFileExtension {
+            get {
+                return ResourceManager.GetString("MissingFileExtension", resourceCulture);
+            }
+        }
+        
+        internal static string Month2Digit {
+            get {
+                return ResourceManager.GetString("Month2Digit", resourceCulture);
+            }
+        }
+        
+        internal static string MoreInfo {
+            get {
+                return ResourceManager.GetString("MoreInfo", resourceCulture);
+            }
+        }
+        
+        internal static string MoveDown {
+            get {
+                return ResourceManager.GetString("MoveDown", resourceCulture);
+            }
+        }
+        
+        internal static string MoveUp {
+            get {
+                return ResourceManager.GetString("MoveUp", resourceCulture);
+            }
+        }
+        
+        internal static string MoveUpDown {
+            get {
+                return ResourceManager.GetString("MoveUpDown", resourceCulture);
+            }
+        }
+        
+        internal static string MultipleLanguages {
+            get {
+                return ResourceManager.GetString("MultipleLanguages", resourceCulture);
+            }
+        }
+        
+        internal static string MultipleScansDelay {
+            get {
+                return ResourceManager.GetString("MultipleScansDelay", resourceCulture);
+            }
+        }
+        
+        internal static string MultipleScansPrompt {
+            get {
+                return ResourceManager.GetString("MultipleScansPrompt", resourceCulture);
+            }
+        }
+        
+        internal static string NamedPageSizeFormat {
+            get {
+                return ResourceManager.GetString("NamedPageSizeFormat", resourceCulture);
+            }
+        }
+        
+        internal static string NameMissing {
+            get {
+                return ResourceManager.GetString("NameMissing", resourceCulture);
+            }
+        }
+        
+        internal static string NameOptional {
+            get {
+                return ResourceManager.GetString("NameOptional", resourceCulture);
+            }
+        }
+        
+        internal static string Naps2 {
+            get {
+                return ResourceManager.GetString("Naps2", resourceCulture);
+            }
+        }
+        
+        internal static string Naps2FullName {
+            get {
+                return ResourceManager.GetString("Naps2FullName", resourceCulture);
+            }
+        }
+        
+        internal static string Naps2TitleFormat {
+            get {
+                return ResourceManager.GetString("Naps2TitleFormat", resourceCulture);
+            }
+        }
+        
+        internal static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        internal static string NewProfile {
+            get {
+                return ResourceManager.GetString("NewProfile", resourceCulture);
+            }
+        }
+        
+        internal static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        internal static string NoDeviceSelected {
+            get {
+                return ResourceManager.GetString("NoDeviceSelected", resourceCulture);
+            }
+        }
+        
+        internal static string NoDevicesFound {
+            get {
+                return ResourceManager.GetString("NoDevicesFound", resourceCulture);
+            }
+        }
+        
+        internal static string NoDuplexSupport {
+            get {
+                return ResourceManager.GetString("NoDuplexSupport", resourceCulture);
+            }
+        }
+        
+        internal static string NoFeederSupport {
+            get {
+                return ResourceManager.GetString("NoFeederSupport", resourceCulture);
+            }
+        }
+        
+        internal static string NoPagesInFeeder {
+            get {
+                return ResourceManager.GetString("NoPagesInFeeder", resourceCulture);
+            }
+        }
+        
+        internal static string NotNow {
+            get {
+                return ResourceManager.GetString("NotNow", resourceCulture);
+            }
+        }
+        
+        internal static string NoUpdates {
+            get {
+                return ResourceManager.GetString("NoUpdates", resourceCulture);
+            }
+        }
+        
+        internal static string NumberOfScansLabel {
+            get {
+                return ResourceManager.GetString("NumberOfScansLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Ocr {
+            get {
+                return ResourceManager.GetString("Ocr", resourceCulture);
+            }
+        }
+        
+        internal static string OcrDownloadFormTitle {
+            get {
+                return ResourceManager.GetString("OcrDownloadFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string OcrDownloadSummaryText {
+            get {
+                return ResourceManager.GetString("OcrDownloadSummaryText", resourceCulture);
+            }
+        }
+        
+        internal static string OcrLanguageLabel {
+            get {
+                return ResourceManager.GetString("OcrLanguageLabel", resourceCulture);
+            }
+        }
+        
+        internal static string OcrModeLabel {
+            get {
+                return ResourceManager.GetString("OcrModeLabel", resourceCulture);
+            }
+        }
+        
+        internal static string OcrMultiLangFormTitle {
+            get {
+                return ResourceManager.GetString("OcrMultiLangFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string OcrProgress {
+            get {
+                return ResourceManager.GetString("OcrProgress", resourceCulture);
+            }
+        }
+        
+        internal static string OcrSelectLanguageLabel {
+            get {
+                return ResourceManager.GetString("OcrSelectLanguageLabel", resourceCulture);
+            }
+        }
+        
+        internal static string OcrSetupFormTitle {
+            get {
+                return ResourceManager.GetString("OcrSetupFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string OffsetWidth {
+            get {
+                return ResourceManager.GetString("OffsetWidth", resourceCulture);
+            }
+        }
+        
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        internal static string OneFilePerPage {
+            get {
+                return ResourceManager.GetString("OneFilePerPage", resourceCulture);
+            }
+        }
+        
+        internal static string OneFilePerScan {
+            get {
+                return ResourceManager.GetString("OneFilePerScan", resourceCulture);
+            }
+        }
+        
+        internal static string OpenFolder {
+            get {
+                return ResourceManager.GetString("OpenFolder", resourceCulture);
+            }
+        }
+        
+        internal static string OptionKey {
+            get {
+                return ResourceManager.GetString("OptionKey", resourceCulture);
+            }
+        }
+        
+        internal static string Output {
+            get {
+                return ResourceManager.GetString("Output", resourceCulture);
+            }
+        }
+        
+        internal static string Overwrite {
+            get {
+                return ResourceManager.GetString("Overwrite", resourceCulture);
+            }
+        }
+        
+        internal static string OverwriteFile {
+            get {
+                return ResourceManager.GetString("OverwriteFile", resourceCulture);
+            }
+        }
+        
+        internal static string OwnerPasswordLabel {
+            get {
+                return ResourceManager.GetString("OwnerPasswordLabel", resourceCulture);
+            }
+        }
+        
+        internal static string PageDownKey {
+            get {
+                return ResourceManager.GetString("PageDownKey", resourceCulture);
+            }
+        }
+        
+        internal static string PageSizeFormTitle {
+            get {
+                return ResourceManager.GetString("PageSizeFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string PageSizeLabel {
+            get {
+                return ResourceManager.GetString("PageSizeLabel", resourceCulture);
+            }
+        }
+        
+        internal static string PagesReordered {
+            get {
+                return ResourceManager.GetString("PagesReordered", resourceCulture);
+            }
+        }
+        
+        internal static string PageUpKey {
+            get {
+                return ResourceManager.GetString("PageUpKey", resourceCulture);
+            }
+        }
+        
+        internal static string PaperSourceLabel {
+            get {
+                return ResourceManager.GetString("PaperSourceLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Paste {
+            get {
+                return ResourceManager.GetString("Paste", resourceCulture);
             }
         }
         
         internal static string PauseKey {
             get {
                 return ResourceManager.GetString("PauseKey", resourceCulture);
+            }
+        }
+        
+        internal static string PdfPasswordFormTitle {
+            get {
+                return ResourceManager.GetString("PdfPasswordFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string PdfSaved {
+            get {
+                return ResourceManager.GetString("PdfSaved", resourceCulture);
+            }
+        }
+        
+        internal static string PdfSettings {
+            get {
+                return ResourceManager.GetString("PdfSettings", resourceCulture);
+            }
+        }
+        
+        internal static string PdfStatus {
+            get {
+                return ResourceManager.GetString("PdfStatus", resourceCulture);
+            }
+        }
+        
+        internal static string PixelDimensionsLabel {
+            get {
+                return ResourceManager.GetString("PixelDimensionsLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Placeholders {
+            get {
+                return ResourceManager.GetString("Placeholders", resourceCulture);
+            }
+        }
+        
+        internal static string PlaceholdersFormTitle {
+            get {
+                return ResourceManager.GetString("PlaceholdersFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Port {
+            get {
+                return ResourceManager.GetString("Port", resourceCulture);
+            }
+        }
+        
+        internal static string PositionLabel {
+            get {
+                return ResourceManager.GetString("PositionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string PostProcessing {
+            get {
+                return ResourceManager.GetString("PostProcessing", resourceCulture);
+            }
+        }
+        
+        internal static string PreemptivelyOcrAfterScanning {
+            get {
+                return ResourceManager.GetString("PreemptivelyOcrAfterScanning", resourceCulture);
+            }
+        }
+        
+        internal static string PressStartWhenReady {
+            get {
+                return ResourceManager.GetString("PressStartWhenReady", resourceCulture);
+            }
+        }
+        
+        internal static string Preview {
+            get {
+                return ResourceManager.GetString("Preview", resourceCulture);
+            }
+        }
+        
+        internal static string PreviewFormTitle {
+            get {
+                return ResourceManager.GetString("PreviewFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string PreviewLabel {
+            get {
+                return ResourceManager.GetString("PreviewLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        internal static string Print {
+            get {
+                return ResourceManager.GetString("Print", resourceCulture);
+            }
+        }
+        
+        internal static string ProfileLabel {
+            get {
+                return ResourceManager.GetString("ProfileLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Profiles {
+            get {
+                return ResourceManager.GetString("Profiles", resourceCulture);
+            }
+        }
+        
+        internal static string ProfilesFormTitle {
+            get {
+                return ResourceManager.GetString("ProfilesFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string ProfilesToolbar {
+            get {
+                return ResourceManager.GetString("ProfilesToolbar", resourceCulture);
+            }
+        }
+        
+        internal static string ProgressFormat {
+            get {
+                return ResourceManager.GetString("ProgressFormat", resourceCulture);
+            }
+        }
+        
+        internal static string PromptForFilePath {
+            get {
+                return ResourceManager.GetString("PromptForFilePath", resourceCulture);
+            }
+        }
+        
+        internal static string Provider {
+            get {
+                return ResourceManager.GetString("Provider", resourceCulture);
+            }
+        }
+        
+        internal static string ReadyForScan {
+            get {
+                return ResourceManager.GetString("ReadyForScan", resourceCulture);
+            }
+        }
+        
+        internal static string Recover {
+            get {
+                return ResourceManager.GetString("Recover", resourceCulture);
+            }
+        }
+        
+        internal static string RecoverFormTitle {
+            get {
+                return ResourceManager.GetString("RecoverFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Recovering {
+            get {
+                return ResourceManager.GetString("Recovering", resourceCulture);
+            }
+        }
+        
+        internal static string RecoverPrompt {
+            get {
+                return ResourceManager.GetString("RecoverPrompt", resourceCulture);
+            }
+        }
+        
+        internal static string RecoveryProgress {
+            get {
+                return ResourceManager.GetString("RecoveryProgress", resourceCulture);
+            }
+        }
+        
+        internal static string Redo {
+            get {
+                return ResourceManager.GetString("Redo", resourceCulture);
+            }
+        }
+        
+        internal static string RedoFormat {
+            get {
+                return ResourceManager.GetString("RedoFormat", resourceCulture);
+            }
+        }
+        
+        internal static string RememberTheseSettings {
+            get {
+                return ResourceManager.GetString("RememberTheseSettings", resourceCulture);
+            }
+        }
+        
+        internal static string Reorder {
+            get {
+                return ResourceManager.GetString("Reorder", resourceCulture);
+            }
+        }
+        
+        internal static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        internal static string ResetImage {
+            get {
+                return ResourceManager.GetString("ResetImage", resourceCulture);
+            }
+        }
+        
+        internal static string ResolutionDpiLabel {
+            get {
+                return ResourceManager.GetString("ResolutionDpiLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ResolutionFormTitle {
+            get {
+                return ResourceManager.GetString("ResolutionFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string ResolutionLabel {
+            get {
+                return ResourceManager.GetString("ResolutionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string RestoreDefaults {
+            get {
+                return ResourceManager.GetString("RestoreDefaults", resourceCulture);
+            }
+        }
+        
+        internal static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
+            }
+        }
+        
+        internal static string Reverse {
+            get {
+                return ResourceManager.GetString("Reverse", resourceCulture);
+            }
+        }
+        
+        internal static string ReverseAll {
+            get {
+                return ResourceManager.GetString("ReverseAll", resourceCulture);
+            }
+        }
+        
+        internal static string ReverseBackSides {
+            get {
+                return ResourceManager.GetString("ReverseBackSides", resourceCulture);
+            }
+        }
+        
+        internal static string ReverseSelected {
+            get {
+                return ResourceManager.GetString("ReverseSelected", resourceCulture);
+            }
+        }
+        
+        internal static string Revert {
+            get {
+                return ResourceManager.GetString("Revert", resourceCulture);
+            }
+        }
+        
+        internal static string ReviewPrompt {
+            get {
+                return ResourceManager.GetString("ReviewPrompt", resourceCulture);
+            }
+        }
+        
+        internal static string RightArrowKey {
+            get {
+                return ResourceManager.GetString("RightArrowKey", resourceCulture);
+            }
+        }
+        
+        internal static string Rotate {
+            get {
+                return ResourceManager.GetString("Rotate", resourceCulture);
+            }
+        }
+        
+        internal static string RotateLeft {
+            get {
+                return ResourceManager.GetString("RotateLeft", resourceCulture);
+            }
+        }
+        
+        internal static string RotateRight {
+            get {
+                return ResourceManager.GetString("RotateRight", resourceCulture);
+            }
+        }
+        
+        internal static string RunInBackground {
+            get {
+                return ResourceManager.GetString("RunInBackground", resourceCulture);
+            }
+        }
+        
+        internal static string RunningOcr {
+            get {
+                return ResourceManager.GetString("RunningOcr", resourceCulture);
+            }
+        }
+        
+        internal static string RunOcrAfterScanning {
+            get {
+                return ResourceManager.GetString("RunOcrAfterScanning", resourceCulture);
+            }
+        }
+        
+        internal static string SaneDriver {
+            get {
+                return ResourceManager.GetString("SaneDriver", resourceCulture);
+            }
+        }
+        
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        internal static string SaveAll {
+            get {
+                return ResourceManager.GetString("SaveAll", resourceCulture);
+            }
+        }
+        
+        internal static string SaveAllAsImages {
+            get {
+                return ResourceManager.GetString("SaveAllAsImages", resourceCulture);
+            }
+        }
+        
+        internal static string SaveAllAsPdf {
+            get {
+                return ResourceManager.GetString("SaveAllAsPdf", resourceCulture);
+            }
+        }
+        
+        internal static string SaveButtonDefaultAction {
+            get {
+                return ResourceManager.GetString("SaveButtonDefaultAction", resourceCulture);
+            }
+        }
+        
+        internal static string SaveImages {
+            get {
+                return ResourceManager.GetString("SaveImages", resourceCulture);
+            }
+        }
+        
+        internal static string SaveImagesProgress {
+            get {
+                return ResourceManager.GetString("SaveImagesProgress", resourceCulture);
+            }
+        }
+        
+        internal static string SavePdf {
+            get {
+                return ResourceManager.GetString("SavePdf", resourceCulture);
+            }
+        }
+        
+        internal static string SavePdfProgress {
+            get {
+                return ResourceManager.GetString("SavePdfProgress", resourceCulture);
+            }
+        }
+        
+        internal static string SaveSelected {
+            get {
+                return ResourceManager.GetString("SaveSelected", resourceCulture);
+            }
+        }
+        
+        internal static string SaveSelectedAsImages {
+            get {
+                return ResourceManager.GetString("SaveSelectedAsImages", resourceCulture);
+            }
+        }
+        
+        internal static string SaveSelectedAsPdf {
+            get {
+                return ResourceManager.GetString("SaveSelectedAsPdf", resourceCulture);
+            }
+        }
+        
+        internal static string SaveToMultipleFiles {
+            get {
+                return ResourceManager.GetString("SaveToMultipleFiles", resourceCulture);
+            }
+        }
+        
+        internal static string SaveToSingleFile {
+            get {
+                return ResourceManager.GetString("SaveToSingleFile", resourceCulture);
+            }
+        }
+        
+        internal static string SavingFormat {
+            get {
+                return ResourceManager.GetString("SavingFormat", resourceCulture);
+            }
+        }
+        
+        internal static string ScaleLabel {
+            get {
+                return ResourceManager.GetString("ScaleLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ScaleWithWindow {
+            get {
+                return ResourceManager.GetString("ScaleWithWindow", resourceCulture);
+            }
+        }
+        
+        internal static string Scan {
+            get {
+                return ResourceManager.GetString("Scan", resourceCulture);
+            }
+        }
+        
+        internal static string ScanButtonDefaultAction {
+            get {
+                return ResourceManager.GetString("ScanButtonDefaultAction", resourceCulture);
+            }
+        }
+        
+        internal static string ScanChangesDefaultProfile {
+            get {
+                return ResourceManager.GetString("ScanChangesDefaultProfile", resourceCulture);
+            }
+        }
+        
+        internal static string ScanConfig {
+            get {
+                return ResourceManager.GetString("ScanConfig", resourceCulture);
+            }
+        }
+        
+        internal static string ScannedImage {
+            get {
+                return ResourceManager.GetString("ScannedImage", resourceCulture);
+            }
+        }
+        
+        internal static string ScannerSharing {
+            get {
+                return ResourceManager.GetString("ScannerSharing", resourceCulture);
+            }
+        }
+        
+        internal static string ScannerSharingFormTitle {
+            get {
+                return ResourceManager.GetString("ScannerSharingFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string ScannerSharingIntro {
+            get {
+                return ResourceManager.GetString("ScannerSharingIntro", resourceCulture);
+            }
+        }
+        
+        internal static string ScanProgressPage {
+            get {
+                return ResourceManager.GetString("ScanProgressPage", resourceCulture);
+            }
+        }
+        
+        internal static string ScanWithDefaultProfile {
+            get {
+                return ResourceManager.GetString("ScanWithDefaultProfile", resourceCulture);
+            }
+        }
+        
+        internal static string ScanWithNewProfile {
+            get {
+                return ResourceManager.GetString("ScanWithNewProfile", resourceCulture);
+            }
+        }
+        
+        internal static string ScanWithProfile {
+            get {
+                return ResourceManager.GetString("ScanWithProfile", resourceCulture);
+            }
+        }
+        
+        internal static string SearchingForDevices {
+            get {
+                return ResourceManager.GetString("SearchingForDevices", resourceCulture);
+            }
+        }
+        
+        internal static string Second2Digit {
+            get {
+                return ResourceManager.GetString("Second2Digit", resourceCulture);
+            }
+        }
+        
+        internal static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        internal static string SelectAll {
+            get {
+                return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        internal static string SelectDevice {
+            get {
+                return ResourceManager.GetString("SelectDevice", resourceCulture);
+            }
+        }
+        
+        internal static string SelectedCount {
+            get {
+                return ResourceManager.GetString("SelectedCount", resourceCulture);
+            }
+        }
+        
+        internal static string SelectProfileBeforeScan {
+            get {
+                return ResourceManager.GetString("SelectProfileBeforeScan", resourceCulture);
+            }
+        }
+        
+        internal static string SelectSource {
+            get {
+                return ResourceManager.GetString("SelectSource", resourceCulture);
+            }
+        }
+        
+        internal static string SeparateByPatchT {
+            get {
+                return ResourceManager.GetString("SeparateByPatchT", resourceCulture);
+            }
+        }
+        
+        internal static string SetDefault {
+            get {
+                return ResourceManager.GetString("SetDefault", resourceCulture);
+            }
+        }
+        
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        internal static string SettingsFormTitle {
+            get {
+                return ResourceManager.GetString("SettingsFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Share {
+            get {
+                return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+        
+        internal static string ShareAsService {
+            get {
+                return ResourceManager.GetString("ShareAsService", resourceCulture);
+            }
+        }
+        
+        internal static string SharedDeviceFormTitle {
+            get {
+                return ResourceManager.GetString("SharedDeviceFormTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Sharpen {
+            get {
+                return ResourceManager.GetString("Sharpen", resourceCulture);
+            }
+        }
+        
+        internal static string ShiftKey {
+            get {
+                return ResourceManager.GetString("ShiftKey", resourceCulture);
+            }
+        }
+        
+        internal static string Shortcut {
+            get {
+                return ResourceManager.GetString("Shortcut", resourceCulture);
+            }
+        }
+        
+        internal static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        internal static string ShowNativeTwainProgress {
+            get {
+                return ResourceManager.GetString("ShowNativeTwainProgress", resourceCulture);
+            }
+        }
+        
+        internal static string ShowPageNumbers {
+            get {
+                return ResourceManager.GetString("ShowPageNumbers", resourceCulture);
+            }
+        }
+        
+        internal static string ShowProfilesToolbar {
+            get {
+                return ResourceManager.GetString("ShowProfilesToolbar", resourceCulture);
+            }
+        }
+        
+        internal static string SingleInstanceDesc {
+            get {
+                return ResourceManager.GetString("SingleInstanceDesc", resourceCulture);
+            }
+        }
+        
+        internal static string SinglePageFiles {
+            get {
+                return ResourceManager.GetString("SinglePageFiles", resourceCulture);
+            }
+        }
+        
+        internal static string SingleScan {
+            get {
+                return ResourceManager.GetString("SingleScan", resourceCulture);
+            }
+        }
+        
+        internal static string SizeProgress {
+            get {
+                return ResourceManager.GetString("SizeProgress", resourceCulture);
+            }
+        }
+        
+        internal static string Skip {
+            get {
+                return ResourceManager.GetString("Skip", resourceCulture);
+            }
+        }
+        
+        internal static string SkipSavePrompt {
+            get {
+                return ResourceManager.GetString("SkipSavePrompt", resourceCulture);
+            }
+        }
+        
+        internal static string SpaceKey {
+            get {
+                return ResourceManager.GetString("SpaceKey", resourceCulture);
+            }
+        }
+        
+        internal static string Split {
+            get {
+                return ResourceManager.GetString("Split", resourceCulture);
+            }
+        }
+        
+        internal static string SplitHelp {
+            get {
+                return ResourceManager.GetString("SplitHelp", resourceCulture);
+            }
+        }
+        
+        internal static string SplitHorizontally {
+            get {
+                return ResourceManager.GetString("SplitHorizontally", resourceCulture);
+            }
+        }
+        
+        internal static string SplitVertically {
+            get {
+                return ResourceManager.GetString("SplitVertically", resourceCulture);
+            }
+        }
+        
+        internal static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        internal static string StopScannerSharing {
+            get {
+                return ResourceManager.GetString("StopScannerSharing", resourceCulture);
+            }
+        }
+        
+        internal static string StopSharing {
+            get {
+                return ResourceManager.GetString("StopSharing", resourceCulture);
+            }
+        }
+        
+        internal static string StretchToPageSize {
+            get {
+                return ResourceManager.GetString("StretchToPageSize", resourceCulture);
+            }
+        }
+        
+        internal static string SubjectLabel {
+            get {
+                return ResourceManager.GetString("SubjectLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Swap {
+            get {
+                return ResourceManager.GetString("Swap", resourceCulture);
+            }
+        }
+        
+        internal static string TabKey {
+            get {
+                return ResourceManager.GetString("TabKey", resourceCulture);
+            }
+        }
+        
+        internal static string TechnicalDetails {
+            get {
+                return ResourceManager.GetString("TechnicalDetails", resourceCulture);
+            }
+        }
+        
+        internal static string ThemeLabel {
+            get {
+                return ResourceManager.GetString("ThemeLabel", resourceCulture);
+            }
+        }
+        
+        internal static string TiffOptions {
+            get {
+                return ResourceManager.GetString("TiffOptions", resourceCulture);
+            }
+        }
+        
+        internal static string TimeBetweenScansLabel {
+            get {
+                return ResourceManager.GetString("TimeBetweenScansLabel", resourceCulture);
+            }
+        }
+        
+        internal static string TitleLabel {
+            get {
+                return ResourceManager.GetString("TitleLabel", resourceCulture);
+            }
+        }
+        
+        internal static string ToggleOrientation {
+            get {
+                return ResourceManager.GetString("ToggleOrientation", resourceCulture);
+            }
+        }
+        
+        internal static string ToggleSidebar {
+            get {
+                return ResourceManager.GetString("ToggleSidebar", resourceCulture);
+            }
+        }
+        
+        internal static string ToggleView {
+            get {
+                return ResourceManager.GetString("ToggleView", resourceCulture);
+            }
+        }
+        
+        internal static string Toolbar {
+            get {
+                return ResourceManager.GetString("Toolbar", resourceCulture);
+            }
+        }
+        
+        internal static string ToolbarSettings {
+            get {
+                return ResourceManager.GetString("ToolbarSettings", resourceCulture);
+            }
+        }
+        
+        internal static string Tools {
+            get {
+                return ResourceManager.GetString("Tools", resourceCulture);
+            }
+        }
+        
+        internal static string TwainDriver {
+            get {
+                return ResourceManager.GetString("TwainDriver", resourceCulture);
+            }
+        }
+        
+        internal static string TwainImplLabel {
+            get {
+                return ResourceManager.GetString("TwainImplLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Unassign {
+            get {
+                return ResourceManager.GetString("Unassign", resourceCulture);
+            }
+        }
+        
+        internal static string Undo {
+            get {
+                return ResourceManager.GetString("Undo", resourceCulture);
+            }
+        }
+        
+        internal static string UndoFormat {
+            get {
+                return ResourceManager.GetString("UndoFormat", resourceCulture);
+            }
+        }
+        
+        internal static string UnknownDriverError {
+            get {
+                return ResourceManager.GetString("UnknownDriverError", resourceCulture);
+            }
+        }
+        
+        internal static string UnsavedChanges {
+            get {
+                return ResourceManager.GetString("UnsavedChanges", resourceCulture);
+            }
+        }
+        
+        internal static string UpArrowKey {
+            get {
+                return ResourceManager.GetString("UpArrowKey", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateAvailable {
+            get {
+                return ResourceManager.GetString("UpdateAvailable", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateCheckDisabled {
+            get {
+                return ResourceManager.GetString("UpdateCheckDisabled", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateError {
+            get {
+                return ResourceManager.GetString("UpdateError", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateProgress {
+            get {
+                return ResourceManager.GetString("UpdateProgress", resourceCulture);
+            }
+        }
+        
+        internal static string Updating {
+            get {
+                return ResourceManager.GetString("Updating", resourceCulture);
+            }
+        }
+        
+        internal static string UploadingEmail {
+            get {
+                return ResourceManager.GetString("UploadingEmail", resourceCulture);
+            }
+        }
+        
+        internal static string UseJpegCompression {
+            get {
+                return ResourceManager.GetString("UseJpegCompression", resourceCulture);
+            }
+        }
+        
+        internal static string UseNativeUi {
+            get {
+                return ResourceManager.GetString("UseNativeUi", resourceCulture);
+            }
+        }
+        
+        internal static string UsePredefinedSettings {
+            get {
+                return ResourceManager.GetString("UsePredefinedSettings", resourceCulture);
+            }
+        }
+        
+        internal static string UserPasswordLabel {
+            get {
+                return ResourceManager.GetString("UserPasswordLabel", resourceCulture);
+            }
+        }
+        
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        internal static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        internal static string WaitingForAuthorization {
+            get {
+                return ResourceManager.GetString("WaitingForAuthorization", resourceCulture);
+            }
+        }
+        
+        internal static string WaitingForTwain {
+            get {
+                return ResourceManager.GetString("WaitingForTwain", resourceCulture);
+            }
+        }
+        
+        internal static string WaitingToConnect {
+            get {
+                return ResourceManager.GetString("WaitingToConnect", resourceCulture);
+            }
+        }
+        
+        internal static string WhiteThreshold {
+            get {
+                return ResourceManager.GetString("WhiteThreshold", resourceCulture);
+            }
+        }
+        
+        internal static string WiaDriver {
+            get {
+                return ResourceManager.GetString("WiaDriver", resourceCulture);
+            }
+        }
+        
+        internal static string WiaVersionLabel {
+            get {
+                return ResourceManager.GetString("WiaVersionLabel", resourceCulture);
+            }
+        }
+        
+        internal static string WindowsKey {
+            get {
+                return ResourceManager.GetString("WindowsKey", resourceCulture);
+            }
+        }
+        
+        internal static string ViewInPreviewPane {
+            get {
+                return ResourceManager.GetString("ViewInPreviewPane", resourceCulture);
+            }
+        }
+        
+        internal static string ClosePreviewPane {
+            get {
+                return ResourceManager.GetString("ClosePreviewPane", resourceCulture);
+            }
+        }
+        
+        internal static string ViewInNewWindow {
+            get {
+                return ResourceManager.GetString("ViewInNewWindow", resourceCulture);
+            }
+        }
+        
+        internal static string EnablePreviewPane {
+            get {
+                return ResourceManager.GetString("EnablePreviewPane", resourceCulture);
+            }
+        }
+        
+        internal static string PreviewPaneMode {
+            get {
+                return ResourceManager.GetString("PreviewPaneMode", resourceCulture);
+            }
+        }
+
+        internal static string EditTools {
+            get {
+                return ResourceManager.GetString("EditTools", resourceCulture);
+            }
+        }
+        
+        internal static string XOfY {
+            get {
+                return ResourceManager.GetString("XOfY", resourceCulture);
+            }
+        }
+        
+        internal static string Year2Digit {
+            get {
+                return ResourceManager.GetString("Year2Digit", resourceCulture);
+            }
+        }
+        
+        internal static string Year4Digit {
+            get {
+                return ResourceManager.GetString("Year4Digit", resourceCulture);
+            }
+        }
+        
+        internal static string Zoom {
+            get {
+                return ResourceManager.GetString("Zoom", resourceCulture);
+            }
+        }
+        
+        internal static string ZoomActual {
+            get {
+                return ResourceManager.GetString("ZoomActual", resourceCulture);
+            }
+        }
+        
+        internal static string ZoomIn {
+            get {
+                return ResourceManager.GetString("ZoomIn", resourceCulture);
+            }
+        }
+        
+        internal static string ZoomOut {
+            get {
+                return ResourceManager.GetString("ZoomOut", resourceCulture);
             }
         }
     }

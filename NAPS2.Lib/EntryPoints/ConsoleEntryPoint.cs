@@ -48,7 +48,7 @@ public static class ConsoleEntryPoint
             container.Resolve<CultureHelper>().SetCulturesFromConfig();
 
             var application = EtoPlatform.Current.CreateApplication();
-            application.Initialized += (_, _) => scanning.Execute().ContinueWith(_ => application.Quit());
+            application.Initialized += (_, _) => scanning.Execute().ContinueWith(_ => application.Invoke(application.Quit));
             Invoker.Current = new EtoInvoker(application);
             application.Run();
         }

@@ -1,5 +1,3 @@
-using NAPS2.Util;
-
 namespace NAPS2.ImportExport;
 
 public static class JpegFormatHelper
@@ -28,14 +26,7 @@ public static class JpegFormatHelper
             }
             if (type == 0xE1 && len >= 12 && buf is [0x45, 0x78, 0x69, 0x66, 0x00, 0x00, ..]) // Application data (EXIF)
             {
-                try
-                {
-                    header = ReadExif(buf, header);
-                }
-                catch (Exception)
-                {
-                    // Malformed EXIF data (e.g. offsets that point outside the segment) is ignored
-                }
+                header = ReadExif(buf, header);
             }
             // Start of frame. 0xC0 is baseline, and the rest of the 0xC0-0xCF range is for other encodings (e.g. 0xC2
             // is progressive), except for 0xC4/0xC8/0xCC which aren't frame markers.
@@ -87,71 +78,15 @@ public static class JpegFormatHelper
 
     private static JpegHeader ReadExif(byte[] buf, JpegHeader header)
     {
-        // https://docs.fileformat.com/image/exif/
-
-        // 0x4949 = little-endian, 0x4d4d = big-endian
-        var flipEnd = (buf[6] == 0x49 && buf[7] == 0x49) != BitConverter.IsLittleEndian;
-        var reader = new EndianReader(flipEnd);
-
-        var number = reader.ReadInt16(buf, 8);
-        if (number != 42)
+        // The segment starts with "Exif\0\0", followed by the Exif metadata
+        if (!ExifHelper.IsExif(buf, 6))
         {
             return header;
         }
         header = header with { HasExifHeader = true };
-
-        var ifdOffset = reader.ReadInt32(buf, 10);
-        var dirCount = reader.ReadInt16(buf, ifdOffset + 6);
-
-        double xRes = 0;
-        double yRes = 0;
-        int resUnit = 0;
-
-        for (int i = 0; i < dirCount; i++)
+        if (ExifHelper.ReadResolution(buf, 6) is var (xDpi, yDpi))
         {
-            var offset = ifdOffset + 8 + i * 12;
-
-            var tag = reader.ReadInt16(buf, offset);
-
-            if (tag == 282)
-            {
-                var valueOffset = reader.ReadInt32(buf, offset + 8);
-                var num = reader.ReadInt32(buf, valueOffset + 6);
-                var den = reader.ReadInt32(buf, valueOffset + 10);
-                xRes = num / (double) den;
-            }
-            if (tag == 283)
-            {
-                var valueOffset = reader.ReadInt32(buf, offset + 8);
-                var num = reader.ReadInt32(buf, valueOffset + 6);
-                var den = reader.ReadInt32(buf, valueOffset + 10);
-                yRes = num / (double) den;
-            }
-            if (tag == 296)
-            {
-                resUnit = reader.ReadInt16(buf, offset + 8);
-            }
-        }
-
-        // The upper bound excludes infinity (i.e. a zero denominator)
-        if (xRes is > 0 and < double.PositiveInfinity && yRes is > 0 and < double.PositiveInfinity)
-        {
-            if (resUnit == 3) // cm
-            {
-                header = header with
-                {
-                    HorizontalDpi = xRes * 2.54,
-                    VerticalDpi = yRes * 2.54
-                };
-            }
-            else // inch
-            {
-                header = header with
-                {
-                    HorizontalDpi = xRes,
-                    VerticalDpi = yRes
-                };
-            }
+            header = header with { HorizontalDpi = xDpi, VerticalDpi = yDpi };
         }
         return header;
     }

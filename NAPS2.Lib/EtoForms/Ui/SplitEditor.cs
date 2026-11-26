@@ -1,0 +1,267 @@
+using Eto.Drawing;
+using Eto.Forms;
+using NAPS2.EtoForms.Layout;
+
+namespace NAPS2.EtoForms.Ui;
+
+public class SplitEditor : UnaryImageEditor
+{
+    private const int HANDLE_WIDTH = 1;
+    private const double HANDLE_RADIUS_RATIO = 0.2;
+    private const int HANDLE_MIN_RADIUS = 50;
+
+    private static CropTransform? _lastTransform;
+
+    private readonly ColorScheme _colorScheme;
+    private readonly LayoutControl _vSplit;
+    private readonly LayoutControl _hSplit;
+
+    // Mouse down location
+    private PointF _mouseOrigin;
+
+    // Crop amounts from each side as a fraction of the total image size (updated as the user drags)
+    private float _cropX, _cropY;
+
+    // Crop amounts from each side as pixels of the image to be cropped (updated on mouse up)
+    private float _realX, _realY;
+
+    private bool _dragging;
+    private SplitOrientation _orientation;
+
+    public SplitEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+        ColorScheme colorScheme) :
+        base(config, imageList, thumbnailController)
+    {
+        Title = UiStrings.Split;
+        IconName = "split";
+        HelpText = UiStrings.SplitHelp;
+
+        _colorScheme = colorScheme;
+
+        _vSplit = C.IconButton("split_ver", UiStrings.SplitVertically, () => SetOrientation(SplitOrientation.Vertical));
+        _hSplit = C.IconButton("split_hor", UiStrings.SplitHorizontally, () => SetOrientation(SplitOrientation.Horizontal));
+    }
+
+    protected override List<Transform> Transforms => throw new NotSupportedException();
+
+    private int HandleClickRadius =>
+        (int) Math.Max(
+            Math.Round((_orientation == SplitOrientation.Horizontal ? ViewH : ViewW) * HANDLE_RADIUS_RATIO),
+            HANDLE_MIN_RADIUS);
+
+    protected override void OnInitialize()
+    {
+        base.OnInitialize();
+        if (_lastTransform != null && _lastTransform.OriginalWidth == RealImageWidth &&
+            _lastTransform.OriginalHeight == RealImageHeight)
+        {
+            _realX = _lastTransform.Left == 0 ? RealImageWidth / 2f : _lastTransform.Left;
+            _realY = _lastTransform.Top == 0 ? RealImageHeight / 2f : _lastTransform.Top;
+            _cropX = _realX / RealImageWidth;
+            _cropY = _realY / RealImageHeight;
+        }
+        else
+        {
+            _cropX = 0.5f;
+            _cropY = 0.5f;
+            _realX = RealImageWidth / 2f;
+            _realY = RealImageHeight / 2f;
+        }
+    }
+
+    protected override LayoutElement CreateControls()
+    {
+        return L.Column(
+            L.Row(
+                C.Filler(),
+                L.Row(_vSplit, _hSplit),
+                C.Filler()
+            ),
+            ApplyToSelectedControl
+        );
+    }
+
+    protected override void InitDisplayImage()
+    {
+        base.InitDisplayImage();
+        _orientation = WorkingImage!.Width > WorkingImage!.Height
+            ? SplitOrientation.Vertical
+            : SplitOrientation.Horizontal;
+    }
+
+    private void SetOrientation(SplitOrientation orientation)
+    {
+        _orientation = orientation;
+        UpdatePreviewBox();
+    }
+
+    protected override IMemoryImage RenderPreview()
+    {
+        return WorkingImage!.Clone();
+    }
+
+    protected override void Revert()
+    {
+        _cropX = _cropY = 0.5f;
+        _realX = RealImageWidth / 2f;
+        _realY = RealImageHeight / 2f;
+        Invalidate();
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        if (e.Key is Keys.Left or Keys.Right)
+        {
+            SetOrientation(SplitOrientation.Vertical);
+            e.Handled = true;
+        }
+        if (e.Key is Keys.Up or Keys.Down)
+        {
+            SetOrientation(SplitOrientation.Horizontal);
+            e.Handled = true;
+        }
+    }
+
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+        _dragging = IsHandleUnderMouse(e);
+        _mouseOrigin = e.Location;
+        Invalidate();
+    }
+
+    protected override void OnMouseUp(MouseEventArgs e)
+    {
+        _realX = _cropX * RealImageWidth;
+        _realY = _cropY * RealImageHeight;
+        _dragging = false;
+        Invalidate();
+    }
+
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+        Cursor = _dragging || IsHandleUnderMouse(e)
+            ? _orientation == SplitOrientation.Horizontal
+                ? Cursors.HorizontalSplit
+                : Cursors.VerticalSplit
+            : Cursors.Arrow;
+        if (_dragging)
+        {
+            UpdateCrop(e.Location);
+            Invalidate();
+        }
+    }
+
+    protected override void PaintOverlay(object? sender, PaintEventArgs e)
+    {
+        if (ViewW == 0 || ViewH == 0)
+        {
+            return;
+        }
+
+        var offsetX = _cropX * ViewW;
+        var offsetY = _cropY * ViewH;
+        var fillColor = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+        var handlePen = new Pen(_colorScheme.CropColor, HANDLE_WIDTH);
+
+        if (ViewW >= 1 && ViewH >= 1)
+        {
+            // Fade out cropped-out portions of the image
+            if (_orientation == SplitOrientation.Horizontal)
+            {
+                e.Graphics.FillRectangle(fillColor, ViewL, ViewT + offsetY, ViewW, ViewH - offsetY);
+            }
+            else
+            {
+                e.Graphics.FillRectangle(fillColor, ViewL + offsetX, ViewT, ViewW - offsetX, ViewH);
+            }
+        }
+
+        if (_orientation == SplitOrientation.Horizontal)
+        {
+            var y = ViewT + offsetY - HANDLE_WIDTH / 2f;
+            e.Graphics.DrawLine(handlePen, ViewL, y, ViewR - 1, y);
+        }
+        else
+        {
+            var x = ViewL + offsetX - HANDLE_WIDTH / 2f;
+            e.Graphics.DrawLine(handlePen, x, ViewT, x, ViewB - 1);
+        }
+    }
+
+    private bool IsHandleUnderMouse(MouseEventArgs e)
+    {
+        var radius = HandleClickRadius;
+        if (_orientation == SplitOrientation.Horizontal)
+        {
+            var y = ViewT + _cropY * ViewH;
+            return e.Location.Y > y - radius && e.Location.Y < y + radius && e.Location.X > ViewL &&
+                   e.Location.X < ViewR;
+        }
+        else
+        {
+            var x = ViewL + _cropX * ViewW;
+            return e.Location.X > x - radius && e.Location.X < x + radius && e.Location.Y > ViewT &&
+                   e.Location.Y < ViewB;
+        }
+    }
+
+    private void UpdateCrop(PointF mousePos)
+    {
+        var delta = mousePos - _mouseOrigin;
+        if (_orientation == SplitOrientation.Vertical)
+        {
+            _cropX = (_realX / RealImageWidth + delta.X / ViewW)
+                .Clamp(1f / RealImageWidth, (RealImageWidth - 1f) / RealImageWidth);
+        }
+        else
+        {
+            _cropY = (_realY / RealImageHeight + delta.Y / ViewH)
+                .Clamp(1f / RealImageHeight, (RealImageHeight - 1f) / RealImageHeight);
+        }
+    }
+
+    protected override void Apply()
+    {
+        var transform1 = _orientation == SplitOrientation.Horizontal
+            ? new CropTransform(0, 0, 0, RealImageHeight - (int) Math.Round(_realY), RealImageWidth, RealImageHeight)
+            : new CropTransform(0, RealImageWidth - (int) Math.Round(_realX), 0, 0, RealImageWidth, RealImageHeight);
+        var transform2 = _orientation == SplitOrientation.Horizontal
+            ? new CropTransform(0, 0, (int) Math.Round(_realY), 0, RealImageWidth, RealImageHeight)
+            : new CropTransform((int) Math.Round(_realX), 0, 0, 0, RealImageWidth, RealImageHeight);
+
+        DoSplit(Image, WorkingImage, transform1, transform2);
+        foreach (var image in ImagesToTransform.Where(x => x != Image))
+        {
+            DoSplit(image, null, transform1, transform2);
+        }
+
+        _lastTransform = transform2;
+    }
+
+    private void DoSplit(UiImage originalImage, IMemoryImage? workingImage, CropTransform transform1, CropTransform transform2)
+    {
+        var thumb1 = workingImage?.Clone()
+            .PerformAllTransforms([transform1, new ThumbnailTransform(ThumbnailController.RenderSize)]);
+        var thumb2 = workingImage?.Clone()
+            .PerformAllTransforms([transform2, new ThumbnailTransform(ThumbnailController.RenderSize)]);
+
+        // We keep the second image as the original UiImage reference so that any InsertAfter points come after the
+        // pair of images. For example, if I'm in the middle of scanning and I split the most-recently scanned image,
+        // the next scanned image should appear at the end of the list, not in between the split images.
+        var oldTransforms = originalImage.TransformState;
+        var image1 = new UiImage(originalImage.GetClonedImage(), useThumbnail: false);
+        var image2 = originalImage;
+        image1.AddTransform(transform1, thumb1);
+        image2.AddTransform(transform2, thumb2);
+        ImageList.Mutate(new ListMutation<UiImage>.InsertBefore(image1, image2));
+        ImageList.AddToSelection(image1);
+        ImageList.PushUndoElement(
+            new SplitUndoElement(ImageList, image1, image2, oldTransforms, transform1, transform2));
+    }
+
+    private enum SplitOrientation
+    {
+        Horizontal,
+        Vertical
+    }
+}

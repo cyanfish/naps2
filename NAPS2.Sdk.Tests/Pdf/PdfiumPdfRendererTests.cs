@@ -1,5 +1,6 @@
 ﻿using NAPS2.Pdf;
 using NAPS2.Sdk.Tests.Asserts;
+using PdfSharpCore.Pdf.IO;
 using Xunit;
 
 namespace NAPS2.Sdk.Tests.Pdf;
@@ -64,6 +65,31 @@ public class PdfiumPdfRendererTests : ContextualTests
         Assert.Single(images);
         // This also verifies that the renderer gets the actual image dpi (72)
         ImageAsserts.Similar(ImageResources.dog_bw, images[0]);
+    }
+
+    [Theory]
+    [InlineData(90)]
+    [InlineData(180)]
+    [InlineData(270)]
+    public void RenderRotatedImagePdfs(int rotation)
+    {
+        AssertRendersRotated(PdfResources.image_pdf, ImageResources.dog, rotation);
+        AssertRendersRotated(PdfResources.image_pdf_cmyk, ImageResources.dog, rotation);
+    }
+
+    private void AssertRendersRotated(byte[] pdf, byte[] expectedImage, int rotation)
+    {
+        var path = CopyResourceToFile(pdf, "test.pdf");
+        using (var doc = PdfReader.Open(path, PdfDocumentOpenMode.Modify))
+        {
+            doc.Pages[0].Rotate = rotation;
+            doc.Save(path);
+        }
+
+        var images = new PdfiumPdfRenderer().Render(ImageContext, path, PdfRenderSize.Default).ToList();
+
+        Assert.Single(images);
+        ImageAsserts.Similar(LoadImage(expectedImage).PerformTransform(new RotationTransform(rotation)), images[0]);
     }
 
     [Fact]

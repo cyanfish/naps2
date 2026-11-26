@@ -11,13 +11,6 @@ namespace NAPS2.EtoForms.Gtk;
 
 public class GtkListView<T> : IListView<T> where T : notnull
 {
-    private static readonly TargetEntry[] DragTargetEntries =
-    {
-        // TODO: Maybe use a different mime for different list types (profiles/images)?
-        // i.e. something similar to _behavior.CustomDragDataType but in mime format (maybe)
-        new("application/x-naps2-items", 0, 0)
-    };
-
     private readonly ListViewBehavior<T> _behavior;
 
     private ListSelection<T> _selection = ListSelection.Empty<T>();
@@ -51,9 +44,9 @@ public class GtkListView<T> : IListView<T> where T : notnull
             _flowBox.SelectedChildrenChanged += FlowBoxSelectionChanged;
         }
         _flowBox.ChildActivated += OnChildActivated;
-        _flowBox.ButtonPressEvent += OnButtonPress;
         var eventBox = new EventBox();
         eventBox.Child = _flowBox;
+        eventBox.ButtonPressEvent += OnButtonPress;
         if (_behavior.AllowDragDrop)
         {
             Drag.DestSet(eventBox, DestDefaults.All, GetDropTargetEntries(), DragAction.Copy | DragAction.Move);
@@ -63,6 +56,10 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
         _scrolledWindow.Add(eventBox);
         _scrolledWindow.StyleContext.AddClass("listview");
+        if (!_behavior.ShowLabels && !_behavior.Checkboxes)
+        {
+            _scrolledWindow.StyleContext.AddClass("image-listview");
+        }
         Control = _scrolledWindow.AsEto();
     }
 
@@ -111,23 +108,26 @@ public class GtkListView<T> : IListView<T> where T : notnull
         _entries.Clear();
         foreach (var item in items)
         {
-            var widget = GetItemWidget(item);
+            var widget = GetItemWidget(item, out var pageNumberLabel);
             _flowBox.Add(widget);
             _entries.Add(new Entry
             {
                 Index = _entries.Count,
                 Item = item,
-                Widget = widget
+                Widget = widget,
+                PageNumberLabel = pageNumberLabel
             });
         }
         _flowBox.ShowAll();
+        UpdatePageNumberLabels();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
     }
 
-    private Widget GetItemWidget(T item)
+    private Widget GetItemWidget(T item, out Label? pageNumberLabel)
     {
+        pageNumberLabel = null;
         var flowBoxChild = new FlowBoxChild();
         if (_behavior.Checkboxes)
         {
@@ -139,7 +139,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         else
         {
             using var image = _behavior.GetImage(this, item);
-            var imageWidget = image.ToGdk().ToScaledImage(_flowBox.ScaleFactor);
+            var imageWidget = CreateImageWidget(image.ToGdk());
             // TODO: Is there a better way to prevent the image from expanding in both dimensions?
             var hframe = new Box(Orientation.Horizontal, 0);
             hframe.Halign = Align.Center;
@@ -158,6 +158,21 @@ public class GtkListView<T> : IListView<T> where T : notnull
                 };
                 vframe.Add(label);
             }
+            if (_behavior.ShowPageNumbers)
+            {
+                // The text is filled in by UpdatePageNumberLabels, as the position depends on the other items
+                pageNumberLabel = new Label
+                {
+                    Halign = Align.Center,
+                    Justify = Justification.Center,
+                    MarginTop = 4
+                };
+                vframe.Add(pageNumberLabel);
+                // Fit the item to its content so the selection highlight doesn't fill the whole cell
+                flowBoxChild.Halign = Align.Center;
+                flowBoxChild.Valign = Align.Center;
+                flowBoxChild.StyleContext.AddClass("numbered");
+            }
             // TODO: Event box around the image instead of the frame?
             var eventBox = new EventBox();
             eventBox.Child = vframe;
@@ -165,12 +180,28 @@ public class GtkListView<T> : IListView<T> where T : notnull
             {
                 eventBox.DragBegin += OnDragBegin;
                 eventBox.DragDataGet += OnDragDataGet;
-                Drag.SourceSet(eventBox, ModifierType.Button1Mask, DragTargetEntries, DragAction.Move);
+                Drag.SourceSet(eventBox, ModifierType.Button1Mask, [new TargetEntry(CustomDragTarget, 0, 0)],
+                    DragAction.Move);
             }
             flowBoxChild.Add(eventBox);
         }
         flowBoxChild.StyleContext.AddClass("listview-item");
         return flowBoxChild;
+    }
+
+    private Widget CreateImageWidget(Pixbuf pixbuf)
+    {
+        int scaleFactor = _flowBox.ScaleFactor;
+        // Resize the pixbuf to fit the listview image size
+        // e.g. if we're waiting for thumbnail re-render after zooming 
+        double fit = Math.Min((double) ImageSize.Width * scaleFactor / pixbuf.Width,
+            (double) ImageSize.Height * scaleFactor / pixbuf.Height);
+        int width = Math.Max((int) Math.Round(pixbuf.Width * fit), 1);
+        int height = Math.Max((int) Math.Round(pixbuf.Height * fit), 1);
+        using var fitted = width != pixbuf.Width || height != pixbuf.Height
+            ? pixbuf.ScaleSimple(width, height, InterpType.Bilinear)
+            : null;
+        return (fitted ?? pixbuf).ToScaledImage(scaleFactor);
     }
 
     public void RegenerateImages()
@@ -187,11 +218,13 @@ public class GtkListView<T> : IListView<T> where T : notnull
         foreach (var entry in _entries)
         {
             RemoveAndDisposeWidget(entry.Widget);
-            var newWidget = GetItemWidget(entry.Item);
+            var newWidget = GetItemWidget(entry.Item, out var pageNumberLabel);
             entry.Widget = newWidget;
+            entry.PageNumberLabel = pageNumberLabel;
             _flowBox.Add(newWidget);
         }
         _flowBox.ShowAll();
+        UpdatePageNumberLabels();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
@@ -213,23 +246,25 @@ public class GtkListView<T> : IListView<T> where T : notnull
         _refreshing = true;
         foreach (var op in diffs.AppendOperations)
         {
-            var widget = GetItemWidget(op.Item);
+            var widget = GetItemWidget(op.Item, out var pageNumberLabel);
             var index = _entries.Count;
             _flowBox.Add(widget);
             _entries.Add(new Entry
             {
                 Item = op.Item,
                 Widget = widget,
-                Index = index
+                Index = index,
+                PageNumberLabel = pageNumberLabel
             });
         }
         foreach (var op in diffs.ReplaceOperations)
         {
             var entry = _entries[op.Index];
             RemoveAndDisposeWidget(entry.Widget);
-            var newWidget = GetItemWidget(op.Item);
+            var newWidget = GetItemWidget(op.Item, out var pageNumberLabel);
             _flowBox.Insert(newWidget, entry.Index);
             entry.Widget = newWidget;
+            entry.PageNumberLabel = pageNumberLabel;
             entry.Item = op.Item;
         }
         foreach (var op in diffs.TrimOperations)
@@ -241,6 +276,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
             _entries = _entries.Take(_entries.Count - op.Count).ToList();
         }
         _flowBox.ShowAll();
+        UpdatePageNumberLabels();
         SetSelectedItems();
         _refreshing = false;
         Updated?.Invoke(this, EventArgs.Empty);
@@ -294,6 +330,18 @@ public class GtkListView<T> : IListView<T> where T : notnull
         }
     }
 
+    private void UpdatePageNumberLabels()
+    {
+        // Page numbers are 1-based positions in the current list, so they're refreshed after every change
+        for (int i = 0; i < _entries.Count; i++)
+        {
+            if (_entries[i].PageNumberLabel is { } label)
+            {
+                label.Text = $"{i + 1} / {_entries.Count}";
+            }
+        }
+    }
+
     private Dictionary<T, Entry> ByItem() => _entries.ToDictionary(x => x.Item);
     private Dictionary<Widget, Entry> ByWidget() => _entries.ToDictionary(x => x.Widget);
 
@@ -324,12 +372,14 @@ public class GtkListView<T> : IListView<T> where T : notnull
         return (CheckButton) ((FlowBoxChild) widget).Child;
     }
 
+    private string CustomDragTarget => $"application/x-naps2-{_behavior.CustomDragDataType}";
+
     private TargetEntry[] GetDropTargetEntries()
     {
         var list = new List<TargetEntry>();
         if (_behavior.AllowDragDrop)
         {
-            list.Add(new("application/x-naps2-items", 0, 0));
+            list.Add(new(CustomDragTarget, 0, 0));
         }
         if (_behavior.AllowFileDrop)
         {
@@ -355,7 +405,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
         {
             // TODO: Can we set a pixbuf for the drag?
             args.SelectionData.Set(
-                Atom.Intern(_behavior.CustomDragDataType, false),
+                Atom.Intern(CustomDragTarget, false),
                 8,
                 _behavior.SerializeCustomDragData(Selection.ToArray()));
         }
@@ -364,7 +414,7 @@ public class GtkListView<T> : IListView<T> where T : notnull
     private void OnDragDataReceived(object sender, DragDataReceivedArgs args)
     {
         var index = GetDragIndex();
-        if (args.SelectionData.DataType.Name == _behavior.CustomDragDataType && _behavior.AllowDragDrop)
+        if (_behavior.AllowDragDrop && args.SelectionData.DataType.Name == CustomDragTarget)
         {
             Drop?.Invoke(this, new DropEventArgs(index, args.SelectionData.Data));
         }
@@ -376,9 +426,11 @@ public class GtkListView<T> : IListView<T> where T : notnull
 
     private void OnDragMotion(object sender, DragMotionArgs args)
     {
-        if (args.Context.SelectedAction != DragAction.Move) return;
         // Show a visual indicator of the drop location
         ClearDropIndicator();
+        // Only show for moves within this listview
+        if (args.Context.SelectedAction != DragAction.Move) return;
+        if (Drag.GetSourceWidget(args.Context) is not { } source || !source.IsAncestor(_flowBox)) return;
         var index = GetDragIndex();
         if (index == -1) return;
         var widgets = _flowBox.Children;
@@ -465,5 +517,6 @@ public class GtkListView<T> : IListView<T> where T : notnull
         public required T Item { get; set; }
         public required Widget Widget { get; set; }
         public required int Index { get; init; }
+        public Label? PageNumberLabel { get; set; }
     }
 }

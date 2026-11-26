@@ -72,17 +72,17 @@ public class UpdateCheckWidget
     {
         if (!_checkForUpdates.IsChecked())
         {
-            return C.NoWrap(MiscResources.UpdateCheckDisabled);
+            return C.NoWrap(UiStrings.UpdateCheckDisabled);
         }
         if (!_hasCheckedForUpdates)
         {
-            return C.NoWrap(MiscResources.CheckingForUpdates);
+            return C.NoWrap(UiStrings.CheckingForUpdates);
         }
         if (_update == null)
         {
-            return C.NoWrap(MiscResources.NoUpdates);
+            return C.NoWrap(UiStrings.NoUpdates);
         }
-        return C.Link(string.Format(MiscResources.Install, _update.Name),
+        return C.Link(string.Format(UiStrings.Install, _update.Name),
             InstallLinkClicked);
     }
 

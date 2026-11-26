@@ -6,13 +6,13 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class WixToolsetPackager
 {
-    public static void PackageMsi(Func<PackageInfo> pkgInfoFunc, bool noSign)
+    public static void PackageMsi(Func<PackageInfo> pkgInfoFunc, string appProject, bool noSign)
     {
         Output.Verbose("Building binaries");
         Cli.Run("dotnet", "clean NAPS2.App.Worker -c Release");
-        Cli.Run("dotnet", "clean NAPS2.App.WinForms -r win-x64 -c Release");
+        Cli.Run("dotnet", $"clean {appProject} -r win-x64 -c Release");
         Cli.Run("dotnet", "publish NAPS2.App.Worker -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
-        Cli.Run("dotnet", "publish NAPS2.App.WinForms -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
+        Cli.Run("dotnet", $"publish {appProject} -r win-x64 -c Release /p:DebugType=None /p:DebugSymbols=false /p:DefineConstants=MSI");
 
         var pkgInfo = pkgInfoFunc();
         if (!noSign)

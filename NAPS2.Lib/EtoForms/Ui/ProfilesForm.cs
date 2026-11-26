@@ -98,7 +98,7 @@ public class ProfilesForm : EtoDialogBase
         profilesKsm.Assign("Mod+V", _pasteCommand);
         EtoPlatform.Current.HandleKeyDown(_listView.Control, profilesKsm.Perform);
 
-        EtoPlatform.Current.AttachDpiDependency(this, _ => _listView.RegenerateImages());
+        EtoPlatform.Current.AttachIconDependency(this, _ => _listView.RegenerateImages());
         _listView.ImageSize = new Size(48, 48);
         _listView.ItemClicked += ItemClicked;
         _listView.SelectionChanged += SelectionChanged;
@@ -289,7 +289,7 @@ public class ProfilesForm : EtoDialogBase
         }
         if (SelectedProfile == null)
         {
-            MessageBox.Show(MiscResources.SelectProfileBeforeScan, MiscResources.ChooseProfile, MessageBoxButtons.OK,
+            MessageDialog.Show(this, UiStrings.SelectProfileBeforeScan, UiStrings.ChooseProfile,
                 MessageBoxType.Warning);
             return;
         }
@@ -336,9 +336,9 @@ public class ProfilesForm : EtoDialogBase
     {
         if (SelectedProfile != null && !SelectionLocked)
         {
-            string message = string.Format(MiscResources.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
-            if (MessageBox.Show(message, MiscResources.Delete, MessageBoxButtons.OKCancel, MessageBoxType.Warning,
-                    MessageBoxDefaultButton.OK) == DialogResult.Ok)
+            string message = string.Format(UiStrings.ConfirmDeleteSingleProfile, SelectedProfile.DisplayName);
+            if (MessageDialog.Confirm(this, message, UiStrings.Delete, UiStrings.Delete, MessageBoxType.Warning,
+                    destructive: true))
             {
                 foreach (var profile in _listView.Selection)
                 {

@@ -121,12 +121,6 @@ internal class KeyboardShortcutsPanel : SettingsPanel
                 }
             }
         };
-        if (EtoPlatform.Current.ScaleLayout)
-        {
-            var shortcutColumn = _gridView.Columns[1];
-            EtoPlatform.Current.AttachDpiDependency(_gridView,
-                scale => shortcutColumn.Width = (int) Math.Round(ShortcutColumnWidth * scale));
-        }
         _gridView.SelectionChanged += GridView_SelectionChanged;
         _gridView.CellDoubleClick += Assign_Click;
         _shortcutText.KeyDown += ShortcutText_KeyDown;

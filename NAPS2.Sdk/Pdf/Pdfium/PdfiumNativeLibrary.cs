@@ -90,6 +90,13 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
 
     public delegate float FPDF_GetPageHeightF_delegate(IntPtr page);
 
+    public delegate bool FPDF_GetPageBoundingBox_delegate(IntPtr page, out PdfRect rect);
+
+    public delegate int FPDFPage_GetRotation_delegate(IntPtr page);
+
+    public delegate bool FPDF_PageToDevice_delegate(IntPtr page, int startX, int startY, int sizeX, int sizeY,
+        int rotate, double pageX, double pageY, out int deviceX, out int deviceY);
+
     public delegate void FPDF_RenderPageBitmap_delegate(IntPtr bitmap, IntPtr page, int startX, int startY, int sizeX,
         int sizeY, int rotate, int flags);
 
@@ -230,6 +237,9 @@ internal class PdfiumNativeLibrary : Unmanaged.NativeLibrary
     public FPDFPage_Delete_delegate FPDFPage_Delete => Load<FPDFPage_Delete_delegate>();
     public FPDF_GetPageWidthF_delegate FPDF_GetPageWidthF => Load<FPDF_GetPageWidthF_delegate>();
     public FPDF_GetPageHeightF_delegate FPDF_GetPageHeightF => Load<FPDF_GetPageHeightF_delegate>();
+    public FPDF_GetPageBoundingBox_delegate FPDF_GetPageBoundingBox => Load<FPDF_GetPageBoundingBox_delegate>();
+    public FPDFPage_GetRotation_delegate FPDFPage_GetRotation => Load<FPDFPage_GetRotation_delegate>();
+    public FPDF_PageToDevice_delegate FPDF_PageToDevice => Load<FPDF_PageToDevice_delegate>();
     public FPDF_RenderPageBitmap_delegate FPDF_RenderPageBitmap => Load<FPDF_RenderPageBitmap_delegate>();
     public FPDFText_LoadPage_delegate FPDFText_LoadPage => Load<FPDFText_LoadPage_delegate>();
     public FPDFText_ClosePage_delegate FPDFText_ClosePage => Load<FPDFText_ClosePage_delegate>();

@@ -23,6 +23,8 @@ public abstract class LayoutElement
     protected internal int? Width { get; set; }
     protected internal int? Height { get; set; }
 
+    protected bool IsVisibleInContext(LayoutContext context) => IsVisible && context.ParentVisibility?.IsVisible != false;
+
     public static implicit operator LayoutElement(Control control) =>
         new LayoutControl(control);
 

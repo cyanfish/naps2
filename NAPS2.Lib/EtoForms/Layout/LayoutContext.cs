@@ -31,6 +31,4 @@ public record LayoutContext
     public bool UseCache { get; init; } = true;
     
     public Dictionary<LayoutElement, Eto.Drawing.SizeF> PreferredSizeCache { get; } = new();
-
-    public float Scale { get; init; }
 }

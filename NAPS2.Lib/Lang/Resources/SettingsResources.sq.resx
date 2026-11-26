@@ -190,13 +190,13 @@
     <value>E errët</value>
   </data>
   <data name="DockStyle_Top" xml:space="preserve">
-    <value>Top</value>
+    <value>Në krye</value>
   </data>
   <data name="DockStyle_Left" xml:space="preserve">
     <value>Majtas</value>
   </data>
   <data name="DockStyle_Bottom" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Në fund</value>
   </data>
   <data name="DockStyle_Right" xml:space="preserve">
     <value>Djathtas</value>

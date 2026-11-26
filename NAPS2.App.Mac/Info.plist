@@ -9,7 +9,7 @@
     <key>CFBundleIdentifier</key>
     <string>com.naps2.desktop</string>
     <key>CFBundleShortVersionString</key>
-    <string>8.6.0</string>
+    <string>9.0.1</string>
     <key>LSMinimumSystemVersion</key>
     <string>14.0</string>
     <key>CFBundleDevelopmentRegion</key>
@@ -87,6 +87,47 @@
         <key>LSItemContentTypes</key>
         <array>
           <string>com.microsoft.bmp</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>WEBP</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>org.webmproject.webp</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>JXL</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.jpeg-xl</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>HEIC</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.heic</string>
+          <string>public.heif</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleTypeName</key>
+        <string>AVIF</string>
+        <key>LSItemContentTypes</key>
+        <array>
+          <string>public.avif</string>
         </array>
       </dict>
     </array>

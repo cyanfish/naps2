@@ -58,7 +58,7 @@ public class EdgeDetectionRealWorldTests : ContextualTests
     public void DetectsPage(string name)
     {
         var scanCase = Cases[name];
-        var image = LoadImage(scanCase.Resource);
+        using var image = LoadImage(scanCase.Resource);
 
         AssertCrop(scanCase.Expected, Detect(image));
     }
@@ -71,7 +71,7 @@ public class EdgeDetectionRealWorldTests : ContextualTests
         var scanCase = Cases[name];
         var image = LoadImage(scanCase.Resource);
         var first = Detect(image);
-        var cropped = image.PerformTransform(new CropTransform(first.Left, first.Right, first.Top, first.Bottom));
+        using var cropped = image.PerformTransform(new CropTransform(first.Left, first.Right, first.Top, first.Bottom));
 
         AssertCrop(new Crop(0, 0, 0, 0), Detect(cropped));
     }
@@ -81,7 +81,8 @@ public class EdgeDetectionRealWorldTests : ContextualTests
     public void Grayscale(string name)
     {
         var scanCase = Cases[name];
-        var image = LoadImage(scanCase.Resource).CopyWithPixelFormat(ImagePixelFormat.Gray8);
+        using var source = LoadImage(scanCase.Resource);
+        using var image = source.CopyWithPixelFormat(ImagePixelFormat.Gray8);
 
         AssertCrop(scanCase.Expected, Detect(image));
     }
@@ -92,7 +93,7 @@ public class EdgeDetectionRealWorldTests : ContextualTests
     {
         // Detection should work for lower resolution scans too (here 150 dpi)
         var scanCase = Cases[name];
-        var image = LoadImage(scanCase.Resource).PerformTransform(new ScaleTransform(0.5));
+        using var image = LoadImage(scanCase.Resource).PerformTransform(new ScaleTransform(0.5));
         var actual = Detect(image);
 
         AssertCrop(scanCase.Expected, new Crop(actual.Left * 2, actual.Top * 2, actual.Right * 2, actual.Bottom * 2));
@@ -108,7 +109,7 @@ public class EdgeDetectionRealWorldTests : ContextualTests
         var scanCase = Cases[name];
         var image = LoadImage(scanCase.Resource);
         int margin = (int) Math.Ceiling(Math.Max(image.Width, image.Height) * Math.Sin(Math.Abs(angle) * Math.PI / 180));
-        var deskewed = image
+        using var deskewed = image
             .PerformTransform(new RotationTransform(angle))
             .PerformTransform(new CropTransform(margin, margin, margin, margin))
             .PerformTransform(new RotationTransform(-angle));
@@ -134,11 +135,11 @@ public class EdgeDetectionRealWorldTests : ContextualTests
         var scanCase = Cases[name];
         var expected = scanCase.Expected;
         int Inset(int crop) => crop > 0 ? crop + INSET : 0;
-        var page = LoadImage(scanCase.Resource).PerformTransform(new CropTransform(
+        using var page = LoadImage(scanCase.Resource).PerformTransform(new CropTransform(
             Inset(expected.Left), Inset(expected.Right), Inset(expected.Top), Inset(expected.Bottom)));
         int padX = axes.Contains('x') ? PAD_X : 0;
         int padY = axes.Contains('y') ? PAD_Y : 0;
-        var image = Pad(page, padX, padY, FillColors[color]);
+        using var image = Pad(page, padX, padY, FillColors[color]);
 
         var actual = Detect(image);
         AssertCrop(new Crop(0, 0, padX, padY), actual);

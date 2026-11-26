@@ -44,7 +44,9 @@ public class CultureHelper
                 var culture = new CultureInfo(cultureId);
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
-                MiscResources.Culture = culture;
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+                UiStrings.Culture = culture;
                 SettingsResources.Culture = culture;
             }
             catch (CultureNotFoundException e)

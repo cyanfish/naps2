@@ -15,8 +15,17 @@ public class MacImageContext : ImageContext
         _imageTransformer = new MacImageTransformer(this);
     }
 
-    protected override bool SupportsTiff => true;
-    protected override bool SupportsJpeg2000 => true;
+    protected override bool SupportsDecodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif
+            or ImageFileFormat.Tiff or ImageFileFormat.Jpeg2000
+        || format == ImageFileFormat.Heic && ImageTypes.Value.Contains("public.heic")
+        || format == ImageFileFormat.Avif && ImageTypes.Value.Contains("public.avif");
+
+    private static readonly Lazy<HashSet<string>> ImageTypes = new(() => NSImage.ImageTypes.ToHashSet());
+
+    protected override bool SupportsEncodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff
+            or ImageFileFormat.Jpeg2000;
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {

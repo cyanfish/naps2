@@ -1,8 +1,11 @@
+using NAPS2.EtoForms.Ui;
+
 namespace NAPS2.EtoForms.Desktop;
 
 public interface IDesktopSubFormController
 {
-    IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc);
+    IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc,
+        Action<ImageEditor>? editorHost = null);
     void ShowCropForm();
     void ShowBrightnessContrastForm();
     void ShowHueSaturationForm();
@@ -16,7 +19,9 @@ public interface IDesktopSubFormController
     void ShowOcrForm();
     void ShowBatchScanForm();
     void ShowScannerSharingForm();
-    void ShowViewerForm();
+    void ShowPreview();
+    void ShowPreviewPane();
+    void ShowPreviewWindow();
     void ShowPdfSettingsForm();
     void ShowImageSettingsForm();
     void ShowEmailSettingsForm();

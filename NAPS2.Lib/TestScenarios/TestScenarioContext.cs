@@ -1,4 +1,5 @@
 #if TEST_SCENARIOS
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading;
@@ -272,7 +273,23 @@ public class TestScenarioContext
     public async Task<string> Capture(string path, string? window = null, bool waitForOperations = true)
     {
         await WaitIdle(waitForOperations: waitForOperations);
-        return CaptureWindow(FindWindow(window), path);
+        var target = FindWindow(window);
+        await WaitForActiveWindow(target);
+        return CaptureWindow(target, path);
+    }
+
+    private async Task WaitForActiveWindow(TestScenarioWindow target)
+    {
+        if (!Ui(() => _platform.IsActive(target)))
+        {
+            var stopwatch = Stopwatch.StartNew();
+            while (stopwatch.ElapsedMilliseconds < 1000 && !Ui(() => _platform.IsActive(target)))
+            {
+                await Task.Delay(50);
+            }
+            // Give it time to repaint
+            await Task.Delay(200);
+        }
     }
 
     internal void CaptureAll(string prefix)
@@ -307,7 +324,9 @@ public class TestScenarioContext
                 {
                     ["title"] = window.Title,
                     ["bounds"] = new JsonArray(window.Bounds.X, window.Bounds.Y, window.Bounds.Width,
-                        window.Bounds.Height)
+                        window.Bounds.Height),
+                    ["owner"] = _platform.GetOwner(window),
+                    ["active"] = _platform.IsActive(window)
                 };
                 var etoWindow = GetEtoWindow(window);
                 if (etoWindow != null)
@@ -317,7 +336,7 @@ public class TestScenarioContext
                     obj["controls"] = new JsonArray(controls
                         .Select((control, i) => (JsonNode) TestScenarioUi.Describe(control, i)).ToArray());
                 }
-                windowsJson.Add(obj);
+                windowsJson.Add((JsonNode) obj);
             }
             var commands = new JsonObject();
             foreach (var (name, command) in GetDesktopCommands())
@@ -365,12 +384,26 @@ public class TestScenarioContext
     /// </summary>
     public void RunCommand(string name)
     {
-        var command = Ui(() => GetDesktopCommands()
-                                   .FirstOrDefault(x => string.Equals(x.Name, name,
-                                       StringComparison.OrdinalIgnoreCase)).Command
-                               ?? throw new TestScenarioException($"Unknown command: {name}"));
-        RunCommand(command);
+        RunCommand(Ui(() => FindCommand(Get<DesktopCommands>(), name)));
     }
+
+    /// <summary>
+    /// Runs a desktop command (as with RunCommand) from the open preview window, i.e. on the image it's showing.
+    /// </summary>
+    public void RunPreviewCommand(string name)
+    {
+        RunCommand(Ui(() => FindCommand(FindEtoWindow(null) switch
+        {
+            PreviewForm preview => preview.Pane.Commands,
+            DesktopForm { PreviewPane.IsVisible: true } desktop => desktop.PreviewPane.Commands,
+            _ => throw new TestScenarioException("The preview isn't open")
+        }, name)));
+    }
+
+    private Command FindCommand(DesktopCommands commands, string name) =>
+        GetDesktopCommands(commands)
+            .FirstOrDefault(x => string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase)).Command
+        ?? throw new TestScenarioException($"Unknown command: {name}");
 
     public void RunCommand(Func<DesktopCommands, Command> getCommand) =>
         RunCommand(Ui(() => getCommand(Get<DesktopCommands>())));
@@ -384,9 +417,10 @@ public class TestScenarioContext
         });
     }
 
-    private List<(string Name, Command Command)> GetDesktopCommands()
+    private List<(string Name, Command Command)> GetDesktopCommands() => GetDesktopCommands(Get<DesktopCommands>());
+
+    private static List<(string Name, Command Command)> GetDesktopCommands(DesktopCommands commands)
     {
-        var commands = Get<DesktopCommands>();
         return typeof(DesktopCommands).GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(p => typeof(Command).IsAssignableFrom(p.PropertyType))
             .Select(p => (p.Name, (Command) p.GetValue(commands)!))
@@ -412,6 +446,8 @@ public class TestScenarioContext
     /// <summary>
     /// Shows a form by its type name (e.g. "SettingsForm"), modal if it's a dialog.
     /// </summary>
+    [UnconditionalSuppressMessage("Trimming", "IL2026",
+        Justification = "Form types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     public void ShowForm(string typeName)
     {
         var type = typeof(IFormBase).Assembly.GetTypes()

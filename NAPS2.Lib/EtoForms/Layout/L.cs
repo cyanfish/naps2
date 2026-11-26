@@ -19,26 +19,7 @@ public static class L
     /// <returns></returns>
     public static LayoutElement OkCancel(LayoutElement ok, LayoutElement cancel)
     {
-        bool okFirst;
-        if (EtoPlatform.Current.IsWindows)
-        {
-            okFirst = true;
-        }
-        else if (EtoPlatform.Current.IsMac)
-        {
-            okFirst = false;
-        }
-        else if (EtoPlatform.Current.IsGtk)
-        {
-            // TODO: Check other desktop environments than gnome (cancel first) / kde (ok first)
-            var desktop = Environment.GetEnvironmentVariable("XDG_SESSION_DESKTOP") ?? "";
-            okFirst = desktop.ToLowerInvariant().Contains("kde");
-        }
-        else
-        {
-            throw new InvalidOperationException();
-        }
-        return okFirst
+        return EtoPlatform.Current.ButtonOrder == DialogButtonOrder.PrimarySecondaryClose
             ? new ExpandLayoutElement(ok, cancel)
             : new ExpandLayoutElement(cancel, ok);
     }
@@ -54,9 +35,19 @@ public static class L
         return new BufferLayoutElement(element, left, top, right, bottom);
     }
 
-    public static LayoutLeftPanel LeftPanel(LayoutElement left, LayoutElement right)
+    public static LayoutSidePanel LeftPanel(LayoutElement left, LayoutElement right)
     {
-        return new LayoutLeftPanel(left, right);
+        return new LayoutSidePanel(left, right, false);
+    }
+
+    public static LayoutSidePanel RightPanel(LayoutElement left, LayoutElement right)
+    {
+        return new LayoutSidePanel(left, right, true);
+    }
+
+    public static LayoutAdaptive Adaptive(LayoutElement wide, LayoutElement narrow)
+    {
+        return new LayoutAdaptive(wide, narrow);
     }
 
     public static LayoutScrollable Scrollable(LayoutElement content)

@@ -42,7 +42,7 @@ public abstract class EtoFormBase : Form, IFormBase
         set
         {
             var iconProvider = EtoPlatform.Current.IconProvider;
-            EtoPlatform.Current.AttachDpiDependency(this,
+            EtoPlatform.Current.AttachIconDependency(this,
                 scale => Icon = iconProvider.GetIcon(value, IconScenario.Inline16, scale) is { } icon ? iconProvider.ToFormIcon(icon) : null);
         }
     }

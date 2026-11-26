@@ -98,7 +98,10 @@ public class MacImage : IMemoryImage
             ImagePixelFormat.BW1 => SubPixelType.Bit,
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
-        imageData = new BitwiseImageData(ptr, new PixelInfo(Width, Height, subPixelType, stride));
+        imageData = new BitwiseImageData(ptr, new PixelInfo(Width, Height, subPixelType, stride)
+        {
+            PremultipliedAlpha = PixelFormat == ImagePixelFormat.ARGB32
+        });
         return new MacImageLockState();
     }
 

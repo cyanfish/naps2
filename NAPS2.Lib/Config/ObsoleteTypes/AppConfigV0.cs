@@ -23,7 +23,7 @@ public class AppConfigV0
 
     public ScanProfile? DefaultProfileSettings { get; set; }
 
-    public Theme Theme { get; set; }
+    public AppTheme Theme { get; set; }
 
     public bool ShowPageNumbers { get; set; }
 
@@ -34,6 +34,10 @@ public class AppConfigV0
     public ScanButtonDefaultAction ScanButtonDefaultAction { get; set; }
 
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
+
+    public bool EnablePreviewPane { get; set; } = true;
+
+    public PreviewPaneMode PreviewPaneMode { get; set; }
 
     public bool DeleteAfterSaving { get; set; }
 

@@ -285,6 +285,15 @@
   <data name="OcrMode_Best" xml:space="preserve">
     <value>Best</value>
   </data>
+  <data name="PreviewPaneMode_LastUsed" xml:space="preserve">
+    <value>Last Used View</value>
+  </data>
+  <data name="PreviewPaneMode_PreviewPane" xml:space="preserve">
+    <value>Preview Pane</value>
+  </data>
+  <data name="PreviewPaneMode_NewWindow" xml:space="preserve">
+    <value>New Window</value>
+  </data>
   <data name="SaveButtonDefaultAction_SaveAll" xml:space="preserve">
     <value>Save All</value>
   </data>

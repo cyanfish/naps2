@@ -1,4 +1,5 @@
-﻿using CommandLine;
+﻿using System.Reflection;
+using CommandLine;
 using NAPS2.Tools.Localization;
 using NAPS2.Tools.Project;
 using NAPS2.Tools.Project.Installation;
@@ -54,7 +55,15 @@ public static class Program
         var commandType = commands.GetCommandType(options.GetType());
         var command = Activator.CreateInstance(commandType);
         var run = commandType.GetMethod("Run") ?? throw new InvalidOperationException();
-        run.Invoke(command, new object?[] { options });
+        try
+        {
+            run.Invoke(command, new object?[] { options });
+        }
+        catch (TargetInvocationException ex) when (ex.InnerException != null)
+        {
+            Console.Error.WriteLine(ex.InnerException);
+            return 1;
+        }
         return 0;
     }
 

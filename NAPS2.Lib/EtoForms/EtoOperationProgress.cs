@@ -100,9 +100,9 @@ public class EtoOperationProgress : OperationProgress
         else
         {
             numberLabel.Text = status.ProgressType == OperationProgressType.MB
-                ? string.Format(MiscResources.SizeProgress, (status.CurrentProgress / 1000000.0).ToString("f1"),
+                ? string.Format(UiStrings.SizeProgress, (status.CurrentProgress / 1000000.0).ToString("f1"),
                     (status.MaxProgress / 1000000.0).ToString("f1"))
-                : string.Format(MiscResources.ProgressFormat, status.CurrentProgress, status.MaxProgress);
+                : string.Format(UiStrings.ProgressFormat, status.CurrentProgress, status.MaxProgress);
             progressBar.MaxValue = status.MaxProgress;
             progressBar.Value = status.CurrentProgress;
         }

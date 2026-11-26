@@ -15,9 +15,9 @@ public class ConsoleOverwritePrompt : IOverwritePrompt
         _errorOutput = errorOutput;
     }
 
-    public OverwriteResponse ConfirmOverwrite(string path)
+    public OverwriteResponse ConfirmOverwrite(string path, bool multipleFiles)
     {
         _errorOutput.DisplayError(string.Format(ConsoleResources.FileAlreadyExists, path));
-        return OverwriteResponse.No;
+        return OverwriteResponse.Skip;
     }
 }

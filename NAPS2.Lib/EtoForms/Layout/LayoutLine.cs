@@ -19,6 +19,8 @@ public abstract class LayoutLine : LayoutContainer
 
     protected bool Aligned { get; set; }
 
+    private bool _isMaterialized;
+
     protected abstract bool IsOrthogonalTo(LayoutLine other);
 
     protected abstract PointF UpdatePosition(PointF position, float delta);
@@ -35,6 +37,14 @@ public abstract class LayoutLine : LayoutContainer
 
     public override void Materialize(LayoutContext context)
     {
+        if (!_isMaterialized)
+        {
+            if (Visibility != null)
+            {
+                Visibility.IsVisibleChanged += (_, _) => context.Invalidate();
+            }
+            _isMaterialized = true;
+        }
         var childContext = GetChildContext(context, RectangleF.Empty, false);
         foreach (var child in Children)
         {
@@ -51,8 +61,8 @@ public abstract class LayoutLine : LayoutContainer
         if (Padding is { } padding)
         {
             bounds = new RectangleF(
-                bounds.X + padding.Left * context.Scale, bounds.Y + padding.Top * context.Scale,
-                bounds.Width - padding.Horizontal * context.Scale, bounds.Height - padding.Vertical * context.Scale);
+                bounds.X + padding.Left, bounds.Y + padding.Top,
+                bounds.Width - padding.Horizontal, bounds.Height - padding.Vertical);
         }
         var childContext = GetChildContext(context, bounds, true);
         GetInitialCellLengthsAndScaling(context, childContext, bounds, out var cellLengths, out var cellScaling);
@@ -82,13 +92,13 @@ public abstract class LayoutLine : LayoutContainer
             return 0;
         }
         if (!Children[i].IsVisible) return 0;
-        return GetSpacingCore(i, context) + (int) (context.Scale * next.SpacingBefore);
+        return GetSpacingCore(i, context) + next.SpacingBefore;
     }
 
     protected virtual int GetSpacingCore(int i, LayoutContext context)
     {
         int spacing = Children[i].SpacingAfter ?? Spacing ?? context.DefaultSpacing;
-        return (int) (context.Scale * spacing);
+        return spacing;
     }
 
     private void GetChildSizeAndOrigin(LayoutElement child, LayoutContext childContext,
@@ -98,7 +108,7 @@ public abstract class LayoutLine : LayoutContainer
             child.Alignment == LayoutAlignment.Fill
                 ? cellSize
                 : child.GetPreferredSize(childContext, new RectangleF(cellOrigin, cellSize)));
-        var remainingBreadth = GetBreadth(cellSize) - breadth;
+        var remainingBreadth = Math.Max(GetBreadth(cellSize) - breadth, 0);
         var alignmentOffset = child.Alignment switch
         {
             LayoutAlignment.Leading => 0,
@@ -112,11 +122,11 @@ public abstract class LayoutLine : LayoutContainer
 
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
-        var childContext = GetChildContext(context, parentBounds, true);
-        if (childContext.ParentVisibility?.IsVisible == false)
+        if (!IsVisibleInContext(context))
         {
             return SizeF.Empty;
         }
+        var childContext = GetChildContext(context, parentBounds, true);
         var size = SizeF.Empty;
         GetInitialCellLengthsAndScaling(context, childContext, parentBounds, out var cellLengths, out var cellScaling);
         UpdateCellLengthsWithPreferredLength(cellLengths, cellScaling);
@@ -126,7 +136,7 @@ public abstract class LayoutLine : LayoutContainer
             var childLayoutSize = GetSize(cellLengths[i], GetBreadth(childSize));
             size = UpdateTotalSize(size, childLayoutSize, GetSpacing(i, context));
         }
-        size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0) * context.Scale;
+        size += new SizeF(Padding?.Horizontal ?? 0, Padding?.Vertical ?? 0);
         if (Width != null)
         {
             size.Width = Width.Value;

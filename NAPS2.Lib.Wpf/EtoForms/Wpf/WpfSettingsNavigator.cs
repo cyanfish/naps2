@@ -33,7 +33,7 @@ public class WpfSettingsNavigator : ISettingsNavigator
         {
             var panel = new StackPanel { Orientation = Orientation.Horizontal };
             var image = new Image { Width = 16, Height = 16, Margin = new Thickness(0, 0, 10, 0) };
-            EtoPlatform.Current.AttachDpiDependency(Control, scale => image.Source =
+            EtoPlatform.Current.AttachIconDependency(Control, scale => image.Source =
                 EtoPlatform.Current.IconProvider.GetIcon(item.IconName, IconScenario.Inline16, scale)?.ToWpf());
             panel.Children.Add(image);
             panel.Children.Add(new TextBlock { Text = item.Label, VerticalAlignment = VerticalAlignment.Center });

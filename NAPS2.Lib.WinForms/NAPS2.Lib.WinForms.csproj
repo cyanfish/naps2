@@ -14,15 +14,13 @@
     <Configurations>Debug;Release;DebugLang</Configurations>
   </PropertyGroup>
 
-  <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-  <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
-  <Import Project="..\NAPS2.Setup\targets\TestScenarios.targets" />
+  <Import Project="..\NAPS2.Setup\targets\LibTargets.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
     <ProjectReference Include="..\NAPS2.Images.Gdi\NAPS2.Images.Gdi.csproj" />
-    <PackageReference Include="Eto.Forms" Version="2.11.0" />
-    <PackageReference Include="Eto.Platform.Windows" Version="2.11.0" />
+    <PackageReference Include="Eto.Forms" Version="2.13.0" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.13.0" />
   </ItemGroup>
 
   <ItemGroup>

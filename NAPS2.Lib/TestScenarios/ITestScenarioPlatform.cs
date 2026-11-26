@@ -20,6 +20,16 @@ public interface ITestScenarioPlatform
     /// </summary>
     void Capture(TestScenarioWindow window, string path);
 
+    /// <summary>
+    /// Gets whether the window is the active (foreground) window.
+    /// </summary>
+    bool IsActive(TestScenarioWindow window);
+
+    /// <summary>
+    /// Gets a description of the window's owner (e.g. its title), or null if it has none.
+    /// </summary>
+    string? GetOwner(TestScenarioWindow window) => null;
+
     void OpenDropDown(DropDown dropDown) =>
         throw new NotSupportedException("Opening dropdowns isn't supported on this platform");
 }

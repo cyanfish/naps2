@@ -2,7 +2,8 @@
 
     <PropertyGroup>
         <!-- Runtime files that are unneeded but not removed by the SDK -->
-        <_Naps2UnneededRuntimeFiles>Microsoft\.VisualBasic|System\.Data|System\.Private\.DataContract|System\.Windows\.Forms\.Design|WindowsBase</_Naps2UnneededRuntimeFiles>
+        <_Naps2UnneededRuntimeFiles>Microsoft\.VisualBasic|System\.Data|System\.Private\.DataContract|System\.Windows\.Forms\.Design|System\.Design|System\.Drawing\.Design</_Naps2UnneededRuntimeFiles>
+        <_Naps2UnneededRuntimeFiles Condition="'$(UseWPF)' != 'true'">$(_Naps2UnneededRuntimeFiles)|WindowsBase</_Naps2UnneededRuntimeFiles>
         <!-- Runtime files only used for debugging -->
         <_Naps2DebuggingRuntimeFiles>createdump|Microsoft\.DiaSymReader|mscordaccore|mscordbi</_Naps2DebuggingRuntimeFiles>
     </PropertyGroup>

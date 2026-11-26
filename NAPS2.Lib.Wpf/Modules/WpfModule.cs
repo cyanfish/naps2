@@ -24,7 +24,7 @@ public class WpfModule : Module
         builder.RegisterType<WpfDesktopForm>().As<DesktopForm>();
 
 #if TEST_SCENARIOS
-        builder.RegisterType<TestScenarios.Win32TestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();
+        builder.RegisterType<TestScenarios.WpfTestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();
 #endif
 
         builder.RegisterBuildCallback(ctx =>

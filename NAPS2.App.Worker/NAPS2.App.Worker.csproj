@@ -14,7 +14,6 @@
     <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>partial</TrimMode>
-    <PublishReadyToRun>true</PublishReadyToRun>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 
     <Title>NAPS2 - Not Another PDF Scanner</Title>
@@ -23,12 +22,13 @@
 
   <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
   <Import Project="..\NAPS2.Setup\targets\NativeLibs.targets" />
+  <Import Project="..\NAPS2.Setup\targets\ReadyToRun.Worker.targets" />
   <Import Project="..\NAPS2.Setup\targets\SdkUsers.targets" />
 
   <ItemGroup>
     <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="LargeAddressAware" Version="1.0.6" />
-    <PackageReference Include="NAPS2.Jpeg.Binaries" Version="1.0.0" />
+    <PackageReference Include="NAPS2.Jpeg.Binaries" Version="2.0.1" />
     <PackageReference Include="NLog" Version="5.5.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.5.0" />
 
@@ -39,6 +39,8 @@
   <ItemGroup>
     <Compile Include="../NAPS2.Lib/Paths.cs" />
     <Compile Include="../NAPS2.Lib/NLogConfig.cs" />
+    <Compile Include="../NAPS2.Lib/Logging/LazyLogger.cs" />
+    <Compile Include="../NAPS2.Lib/Logging/LoggerTraceListener.cs" />
     <Compile Include="../NAPS2.Lib/EntryPoints/CoreWorkerEntryPoint.cs" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,18 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <PublishSingleFile>true</PublishSingleFile>
+    </PropertyGroup>
+
+    <!-- Keep these as separate files instead of bundling them into the single-file exe: native libraries (e.g.
+         "_win64\pdfium.dll") are loaded from their platform folders, NAPS2.Console.exe needs to be run directly, and
+         WPF's C++/CLI assemblies can't be loaded from the bundle (https://github.com/dotnet/wpf/issues/11842) -->
+    <Target Name="Naps2ExcludeFromSingleFile" AfterTargets="ComputeResolvedFilesToPublishList">
+        <ItemGroup>
+            <ResolvedFileToPublish Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(ResolvedFileToPublish.RelativePath)', '^(_win(32|64|arm)[\\/]|NAPS2\.Console\.exe$|DirectWriteForwarder\.dll$|System\.Printing\.dll$)'))">
+                <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            </ResolvedFileToPublish>
+        </ItemGroup>
+    </Target>
+
+</Project>

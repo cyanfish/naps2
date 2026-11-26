@@ -1,0 +1,22 @@
+using NAPS2.EtoForms.Widgets;
+
+namespace NAPS2.EtoForms.Ui;
+
+public class SharpenEditor : UnaryImageEditor
+{
+    private readonly SliderWithTextBox _sharpenSlider = new();
+
+    public SharpenEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+        IIconProvider iconProvider) :
+        base(config, imageList, thumbnailController)
+    {
+        IconName = "sharpen";
+        Title = UiStrings.Sharpen;
+
+        AttachIconDependency(scale =>
+            _sharpenSlider.Icon = iconProvider.GetIcon("sharpen", IconScenario.Inline16, scale));
+        Sliders = [_sharpenSlider];
+    }
+
+    protected override List<Transform> Transforms => [new SharpenTransform(_sharpenSlider.IntValue)];
+}

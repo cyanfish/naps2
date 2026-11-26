@@ -30,7 +30,7 @@ public class MacScannedImagePrinter : IScannedImagePrinter
         {
             Log.Event(EventType.Print, new EventParams
             {
-                Name = MiscResources.Print,
+                Name = UiStrings.Print,
                 Pages = (int) printOp.PageRange.Length
             });
             return Task.FromResult(true);

@@ -62,7 +62,7 @@ internal class ChooseDeviceForm : EtoDialogBase
         deviceListViewBehavior.SetIconName(ManualIpMarker, "network_ip");
 
         EtoPlatform.Current.SetImageSize(_statusIcon, 16);
-        EtoPlatform.Current.AttachDpiDependency(this, _ =>
+        EtoPlatform.Current.AttachIconDependency(this, _ =>
         {
             _deviceIconList.RegenerateImages();
             UpdateStatusIcon();

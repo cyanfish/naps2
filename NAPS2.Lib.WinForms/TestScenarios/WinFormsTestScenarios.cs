@@ -139,33 +139,34 @@ internal class WinFormsTestScenarios : TestScenarioProvider
 
     private void DefineIconButtonToolTips()
     {
-        void Combine(string name, CombineOrientation orientation, (string Key, string Text)[] buttons)
+        void Combine(string name, CombineOrientation orientation, (string Key, string Text)[] buttons,
+            bool variant = false)
         {
             Add(name, () =>
             {
                 var images = LoadImages(2);
-                return ShowForm<CombineForm>(buttons.Select(b => b.Key).ToArray(),
-                    f => SetImage(f, images[0]),
+                return ShowForm<ImageEditorForm>(buttons.Select(b => b.Key).ToArray(),
+                    f => SetEditor<CombineEditor>(f, images[0]),
                     before: f =>
                     {
-                        f.SetOrientation(orientation);
+                        ((CombineEditor) f.Editor).SetOrientation(orientation);
                         WF.Application.DoEvents();
                         ShowButtonToolTips(f.ToNative(), buttons.Select(b => b.Text).ToArray());
                     });
-            });
+            }, variant: variant);
         }
         Combine("combine-tooltips-vertical", CombineOrientation.Vertical,
             [P(UiStrings.AlignLeft), P(UiStrings.AlignCenter), P(UiStrings.AlignRight), P(UiStrings.ToggleOrientation),
                 P(UiStrings.Swap)]);
         Combine("combine-tooltips-horizontal", CombineOrientation.Horizontal,
             [P(UiStrings.AlignTop), P(UiStrings.AlignMiddle), P(UiStrings.AlignBottom), P(UiStrings.ToggleOrientation),
-                P(UiStrings.Swap)]);
+                P(UiStrings.Swap)], variant: true);
         Add("split-tooltips", () =>
         {
             var images = LoadImages();
-            return ShowForm<SplitForm>(
+            return ShowForm<ImageEditorForm>(
                 [K(UiStrings.SplitVertically), K(UiStrings.SplitHorizontally), K(UiStrings.Help)],
-                f => SetImage(f, images[0]),
+                f => SetEditor<SplitEditor>(f, images[0]),
                 before: f => ShowButtonToolTips(f.ToNative(), UiStrings.SplitVertically, UiStrings.SplitHorizontally,
                     UiStrings.Help));
         });

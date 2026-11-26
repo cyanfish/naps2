@@ -190,13 +190,13 @@
     <value>Tamna</value>
   </data>
   <data name="DockStyle_Top" xml:space="preserve">
-    <value>Top</value>
+    <value>Vrh</value>
   </data>
   <data name="DockStyle_Left" xml:space="preserve">
     <value>Lijevo</value>
   </data>
   <data name="DockStyle_Bottom" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Dno</value>
   </data>
   <data name="DockStyle_Right" xml:space="preserve">
     <value>Desno</value>

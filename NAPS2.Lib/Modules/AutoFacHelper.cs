@@ -9,6 +9,7 @@ public class AutoFacHelper
     public static IContainer FromModules(params IModule?[] modules)
     {
         var builder = new ContainerBuilder();
+        ConstructorInvokers.Register(builder);
         builder.RegisterSource<AnyConcreteTypeNotAlreadyRegisteredSource>();
         foreach (var module in modules)
         {

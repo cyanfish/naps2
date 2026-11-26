@@ -703,4 +703,16 @@
   <data name="help_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\help_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="new_window_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\new_window_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="new_window_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\new_window_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="application_side_list_right_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\application_side_list_right_32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="application_side_list_right_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\application_side_list_right_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -124,6 +124,10 @@ internal abstract class BinaryBitwiseImageOp : BitwiseImageOp
         {
             throw new ArgumentException("InvertBit is not supported");
         }
+        if (src.hasAlpha && dst.hasAlpha && src.premultipliedAlpha != dst.premultipliedAlpha)
+        {
+            throw new ArgumentException("Source and destination must both have premultiplied alpha or neither");
+        }
     }
 
     protected abstract LockMode SrcLockMode { get; }

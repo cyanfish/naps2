@@ -21,7 +21,7 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool SupportsTheme => true;
 
-    public bool SupportsShowPageNumbers => false;
+    public bool SupportsShowPageNumbers => true;
 
     public bool SupportsProfilesToolbar => true;
 

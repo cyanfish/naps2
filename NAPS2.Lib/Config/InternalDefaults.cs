@@ -23,10 +23,12 @@ public static class InternalDefaults
             StartupMessageTitle = "",
             StartupMessageText = "",
             StartupMessageIcon = MessageBoxIcon.None,
-            Theme = Theme.Default,
+            Theme = AppTheme.Default,
             ScanChangesDefaultProfile = true,
             ScanButtonDefaultAction = ScanButtonDefaultAction.ScanWithDefaultProfile,
             SaveButtonDefaultAction = SaveButtonDefaultAction.SaveAll,
+            EnablePreviewPane = true,
+            PreviewPaneMode = PreviewPaneMode.LastUsed,
             HiddenButtons = ToolbarButtons.None,
             ExtraButtons = ToolbarButtons.None,
             DisableAutoSave = false,
@@ -65,6 +67,9 @@ public static class InternalDefaults
             ShowPageNumbers = false,
             SidebarVisible = true,
             SidebarWidth = 230,
+            PreviewPaneWidth = 500,
+            PreviewLastShownInPane = true,
+            PreviewPaneToolsVisible = false,
             EditWithAppPath = "",
             EditWithAppName = "",
             ApplyToAllSelected = false,
@@ -77,10 +82,10 @@ public static class InternalDefaults
             {
                 Metadata = new PdfMetadata
                 {
-                    Title = MiscResources.ScannedImage,
-                    Subject = MiscResources.ScannedImage,
-                    Author = MiscResources.NAPS2,
-                    Creator = MiscResources.NAPS2,
+                    Title = UiStrings.ScannedImage,
+                    Subject = UiStrings.ScannedImage,
+                    Author = UiStrings.Naps2,
+                    Creator = UiStrings.Naps2,
                     Keywords = ""
                 },
                 Encryption = new PdfEncryption

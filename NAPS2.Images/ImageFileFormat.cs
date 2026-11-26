@@ -7,5 +7,10 @@ public enum ImageFileFormat
     Jpeg,
     Jpeg2000,
     Png,
-    Tiff
+    Tiff,
+    WebP,
+    JpegXl,
+    Heic,
+    Avif,
+    Gif
 }

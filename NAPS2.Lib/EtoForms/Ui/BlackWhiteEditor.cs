@@ -1,0 +1,24 @@
+using NAPS2.EtoForms.Widgets;
+
+namespace NAPS2.EtoForms.Ui;
+
+public class BlackWhiteEditor : UnaryImageEditor
+{
+    private readonly SliderWithTextBox _thresholdSlider = new();
+
+    public BlackWhiteEditor(Naps2Config config, UiImageList imageList, ThumbnailController thumbnailController,
+        IIconProvider iconProvider) :
+        base(config, imageList, thumbnailController)
+    {
+        IconName = "contrast_high";
+        Title = UiStrings.BlackAndWhite;
+
+        AttachIconDependency(scale =>
+            _thresholdSlider.Icon = iconProvider.GetIcon("contrast_high", IconScenario.Inline16, scale));
+        Sliders = [_thresholdSlider];
+        // BlackWhiteTransform is not commutative with scaling
+        CanScaleWorkingImage = false;
+    }
+
+    protected override List<Transform> Transforms => [new BlackWhiteTransform(_thresholdSlider.IntValue)];
+}

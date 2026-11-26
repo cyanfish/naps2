@@ -7,6 +7,13 @@ namespace NAPS2.Tools.Project;
 
 public static class ProjectHelper
 {
+    public static string GetWindowsAppProject(string? app) => app?.ToLowerInvariant() switch
+    {
+        null or "winforms" => "NAPS2.App.WinForms",
+        "wpf" => "NAPS2.App.Wpf",
+        _ => throw new InvalidOperationException($"Unknown app: {app}")
+    };
+
     public static string GetCurrentVersion()
     {
         var versionTargetsPath = Path.Combine(Paths.Setup, "targets", "VersionTargets.targets");

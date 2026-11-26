@@ -22,6 +22,7 @@ public class FormStateController
         window.PreLoad += OnLoadInternal;
         window.Shown += OnShownInternal;
         window.Closed += OnClosed;
+        FormName = window.GetType().Name;
     }
 
     public bool SaveFormState { get; set; } = true;
@@ -48,19 +49,18 @@ public class FormStateController
 
     public bool Shown { get; private set; }
 
-    public string FormName => _window.GetType().Name;
+    public string FormName { get; set; }
 
     public void UpdateLayoutSize(LayoutController layoutController)
     {
         if (AutoLayoutSize)
         {
-            var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
             _minimumClientSize = layoutController.GetLayoutSize();
             var oldDefaultClientSize = DefaultClientSize;
             var oldMaximumClientSize = _maximumClientSize;
             DefaultClientSize = FixedDefaultClientSize is { } fixedSize
-                ? SizeF.Max(fixedSize, (SizeF) _minimumClientSize / scale)
-                : (SizeF) _minimumClientSize / scale + DefaultExtraLayoutSize;
+                ? SizeF.Max(fixedSize, _minimumClientSize)
+                : _minimumClientSize + DefaultExtraLayoutSize;
             _maximumClientSize = FixedHeightLayout || !Resizable ? new Size(0, _minimumClientSize.Height) : Size.Empty;
 
             if (Loaded)
@@ -102,8 +102,7 @@ public class FormStateController
         if (!_hasSetSize && !DefaultClientSize.IsEmpty)
         {
             // TODO: Use size delta to re-center
-            var scale = EtoPlatform.Current.GetLayoutScaleFactor(_window);
-            EtoPlatform.Current.SetClientSize(_window, Size.Round(DefaultClientSize * scale));
+            EtoPlatform.Current.SetClientSize(_window, Size.Round(DefaultClientSize));
         }
         Loaded = true;
     }
@@ -134,10 +133,7 @@ public class FormStateController
         {
             EtoPlatform.Current.SetFormLocation(_window, location);
         }
-        var scale = FixWinFormsDpiIssues ? 1f : EtoPlatform.Current.GetLayoutScaleFactor(_window);
-        var size = new Size(
-            (int) Math.Round(_formState.Size.Width * scale),
-            (int) Math.Round(_formState.Size.Height * scale));
+        var size = new Size(_formState.Size.Width, _formState.Size.Height);
         if (!size.IsEmpty && Resizable)
         {
             if (!_minimumClientSize.IsEmpty)
@@ -175,10 +171,13 @@ public class FormStateController
             if (_window.WindowState == WindowState.Normal)
             {
                 var size = EtoPlatform.Current.GetClientSize(_window);
-                var scale = FixWinFormsDpiIssues ? 1f : EtoPlatform.Current.GetLayoutScaleFactor(_window);
-                _formState.Size = new FormState.FormSize(
-                    (int) Math.Round(size.Width / scale),
-                    (int) Math.Round(size.Height / scale));
+                _formState.Size = new FormState.FormSize(size.Width, size.Height);
+            }
+            else if (_formState.Maximized && EtoPlatform.Current.IsWpf)
+            {
+                // WPF moves the window before it reports as maximized, so OnMove saved the maximized location
+                var restoreBounds = _window.RestoreBounds;
+                _formState.Location = new FormState.FormLocation(restoreBounds.X, restoreBounds.Y);
             }
         }
     }

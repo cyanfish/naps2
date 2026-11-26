@@ -16,7 +16,7 @@ namespace NAPS2.TestScenarios;
 /// </summary>
 internal abstract class TestScenarioProvider
 {
-    private readonly List<(string, TestScenario)> _scenarios = [];
+    private readonly List<(string, TestScenario, bool)> _scenarios = [];
 
     protected TestScenarioContext Ctx { get; private set; } = null!;
 
@@ -26,7 +26,7 @@ internal abstract class TestScenarioProvider
 
     protected string DesktopTitle => Ctx.Ui(() => Desktop.Title);
 
-    public IEnumerable<(string Name, TestScenario Scenario)> GetScenarios()
+    public IEnumerable<(string Name, TestScenario Scenario, bool Variant)> GetScenarios()
     {
         Define();
         return _scenarios;
@@ -34,13 +34,18 @@ internal abstract class TestScenarioProvider
 
     protected abstract void Define();
 
-    protected void Add(string name, Func<Task> run, Action<TestScenarioSetup>? setup = null)
+    /// <param name="name">The scenario name.</param>
+    /// <param name="run">Sets up the UI state and calls Ready.</param>
+    /// <param name="setup">Configures the app before it starts (e.g. config values or fake devices).</param>
+    /// <param name="variant">Whether the scenario has the same layout as another one, with only different strings or
+    /// state (e.g. another error message). These are only listed with "list-all".</param>
+    protected void Add(string name, Func<Task> run, Action<TestScenarioSetup>? setup = null, bool variant = false)
     {
         _scenarios.Add((name, new TestScenario(setup, async ctx =>
         {
             Ctx = ctx;
             await run();
-        })));
+        }), variant));
     }
 
     protected T Get<T>() where T : notnull => Ctx.Get<T>();
@@ -121,10 +126,9 @@ internal abstract class TestScenarioProvider
             popupCrop: popupCrop, positions: positions == null ? null : () => positions(form));
     }
 
-    protected async Task ShowMessage(string[] strings, string message, string caption,
-        MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxType type = MessageBoxType.Information)
+    protected async Task ShowMessage(string[] strings, MessageDialogOptions options)
     {
-        var window = await Ctx.WaitForNewWindow(() => MessageBox.Show(Desktop, message, caption, buttons, type));
+        var window = await Ctx.WaitForNewWindow(() => MessageDialog.Show(Desktop, options));
         await Ready(strings, window.Title);
     }
 
@@ -205,10 +209,12 @@ internal abstract class TestScenarioProvider
         return profile;
     }
 
-    protected static void SetImage(ImageFormBase form, UiImage image)
+    protected void SetEditor<T>(ImageEditorForm form, UiImage image) where T : ImageEditor
     {
-        form.Image = image;
-        form.SelectedImages = [image];
+        var editor = Get<IImageEditorFactory>().Create<T>();
+        editor.Image = image;
+        editor.SelectedImages = [image];
+        form.Editor = editor;
     }
 
     protected static readonly List<ScanDevice> ExampleDevices =

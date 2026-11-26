@@ -168,13 +168,10 @@ public static class CollectionExtensions
     /// <param name="dict"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static TValue? Get<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key) where TKey : notnull
+    public static TValue? Get<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dict, TKey key)
+        where TKey : notnull
     {
-        if (dict.ContainsKey(key))
-        {
-            return dict[key];
-        }
-        return default;
+        return dict.TryGetValue(key, out var value) ? value : default;
     }
 
     /// <summary>

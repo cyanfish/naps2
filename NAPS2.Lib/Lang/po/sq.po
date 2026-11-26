@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Albanian\n"
 "Language: sq\n"
@@ -131,6 +131,10 @@ msgstr "Lejo plotësimin e formularit"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Lejo printimin me cilësi të plotë"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -319,6 +323,10 @@ msgstr "B4 (250x353 mm)"
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 mm)"
 
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
+
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
@@ -359,7 +367,7 @@ msgstr "Faqet bosh"
 
 #: SettingsResources.resx$DockStyle_Bottom$Message
 msgid "Bottom"
-msgstr ""
+msgstr "Në fund"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -371,7 +379,7 @@ msgstr "Shkëlqimi:"
 
 #: UiStrings.resx$ButtonsLabel$Message
 msgid "Buttons:"
-msgstr ""
+msgstr "Butonat:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -469,7 +477,7 @@ msgstr "Lidhu"
 
 #: UiStrings.resx$Connecting$Message
 msgid "Connecting..."
-msgstr ""
+msgstr "Po lidhet..."
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
@@ -477,7 +485,7 @@ msgstr "Gabim në lidhje."
 
 #: UiStrings.resx$ConnectionTimedOut$Message
 msgid "Connection timed out."
-msgstr ""
+msgstr "Lidhja skadoi."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -542,7 +550,7 @@ msgstr "E personalizuar..."
 
 #: UiStrings.resx$CustomizeToolbar$Message
 msgid "Customize Toolbar"
-msgstr ""
+msgstr "Personalizo panelin e mjeteve"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -571,6 +579,7 @@ msgstr "Heq përzierjen"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "Fshi"
 
@@ -618,6 +627,10 @@ msgstr "Dhuro"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "U krye"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "Shifro PDF"
 msgid "Encryption"
 msgstr "Shifrimi"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "Gabim"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "Gabim në hapjen e aplikacionit {0}"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -783,6 +808,10 @@ msgstr "E hirtë"
 msgid "Help"
 msgstr "Ndihmë"
 
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
+
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
 msgstr "Drejto horizontalisht:"
@@ -839,6 +868,10 @@ msgstr "Po importon {0}..."
 msgid "Importing..."
 msgstr "Po importon..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "Instalo {0}"
@@ -893,6 +926,7 @@ msgstr "Lër një vlerësim"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "Majtas"
 
@@ -988,7 +1022,7 @@ msgstr "Lëviz lart"
 
 #: UiStrings.resx$MoveUpDown$Message
 msgid "Move Up/Down"
-msgstr ""
+msgstr "Lëviz lart/poshtë"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1203,6 +1237,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "Skedar PNG (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Madhësia e faqes:"
@@ -1223,6 +1265,10 @@ msgstr "Fjalëkalimi"
 msgid "Paste"
 msgstr "Ngjit"
 
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
+
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
 msgstr "Përmasat në piksel:"
@@ -1238,7 +1284,7 @@ msgstr "Porta"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr ""
+msgstr "Pozicioni:"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1285,7 +1331,7 @@ msgstr "Profilet"
 
 #: UiStrings.resx$ProfilesToolbar$Message
 msgid "Profiles toolbar"
-msgstr ""
+msgstr "Paneli i mjeteve të profileve"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1381,6 +1427,7 @@ msgstr "Rikthe"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "Djathtas"
 
@@ -1634,6 +1681,10 @@ msgstr "Skanim i vetëm"
 msgid "Skip save prompt"
 msgstr "Kapërce shenjën e ruajtjes"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "Ndaje"
@@ -1673,6 +1724,10 @@ msgstr "Skedar TIFF (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "Drejtuesi TWAIN"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1793,11 +1848,11 @@ msgstr "Ndrysho pamjen"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
-msgstr ""
+msgstr "Paneli i mjeteve"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr ""
+msgstr "Cilësimet e panelit të mjeteve"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1805,7 +1860,7 @@ msgstr "Mjetet"
 
 #: SettingsResources.resx$DockStyle_Top$Message
 msgid "Top"
-msgstr ""
+msgstr "Në krye"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1838,6 +1893,10 @@ msgstr "Skcaner i panjohur"
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "Ndryshimet e pa ruajtura"
+
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
@@ -1902,7 +1961,7 @@ msgstr "Po pret për skanimin {0}..."
 
 #: UiStrings.resx$WaitingToConnect$Message
 msgid "Waiting to connect."
-msgstr ""
+msgstr "Po pret të lidhet."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
@@ -1911,6 +1970,10 @@ msgstr "Kufiri i bardhë"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Versioni Wia:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

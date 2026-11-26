@@ -61,7 +61,7 @@ public class LanguageSelectionTests : AppiumTests
     private void ClickAndResetWindow(string name)
     {
         ClickAtName(name);
-        Thread.Sleep(100);
+        Thread.Sleep(1000);
         ResetMainWindow();
     }
 
