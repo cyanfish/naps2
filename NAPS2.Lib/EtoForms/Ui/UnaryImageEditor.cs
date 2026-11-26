@@ -77,7 +77,7 @@ public abstract class UnaryImageEditor(
 
     protected override LayoutElement CreateExtraButtons() => _revert;
 
-    private List<UiImage> ImagesToTransform =>
+    protected List<UiImage> ImagesToTransform =>
         SelectedImages.Count > 1 && _applyToSelected.IsChecked() ? SelectedImages : [Image];
 
     protected override IMemoryImage RenderPreview()

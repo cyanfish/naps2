@@ -230,7 +230,7 @@ public class SplitEditor : UnaryImageEditor
             : new CropTransform((int) Math.Round(_realX), 0, 0, 0, RealImageWidth, RealImageHeight);
 
         DoSplit(Image, WorkingImage, transform1, transform2);
-        foreach (var image in SelectedImages.Skip(1))
+        foreach (var image in ImagesToTransform.Where(x => x != Image))
         {
             DoSplit(image, null, transform1, transform2);
         }
