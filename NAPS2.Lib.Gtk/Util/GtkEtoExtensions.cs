@@ -9,14 +9,6 @@ namespace NAPS2.Util;
 
 public static class GtkEtoExtensions
 {
-    private static readonly FieldInfo GtkImageField =
-        typeof(ButtonHandler<Gtk.Button, Eto.Forms.Button, Eto.Forms.Button.ICallback>).GetField("gtkimage",
-            BindingFlags.Instance | BindingFlags.NonPublic)!;
-
-    private static readonly MethodInfo SetImagePositionMethod =
-        typeof(ButtonHandler<Gtk.Button, Eto.Forms.Button, Eto.Forms.Button.ICallback>).GetMethod(
-            "SetImagePosition", BindingFlags.Instance | BindingFlags.NonPublic)!;
-
     public static Image ToScaledImage(this Pixbuf pixbuf, int scaleFactor)
     {
         // Creating a Gtk.Image directly from a Pixbuf doesn't work if we want to render at high dpi.
@@ -35,8 +27,13 @@ public static class GtkEtoExtensions
         // (which wraps a Pixbuf) but to correctly scale images at high dpi we need a Gtk.Image constructed from a
         // surface.
         image.Show();
-        GtkImageField.SetValue(button.Handler, image);
-        SetImagePositionMethod.Invoke(button.Handler, []);
+        var handlerType = button is Eto.Forms.ToggleButton
+            ? typeof(ButtonHandler<Gtk.ToggleButton, Eto.Forms.ToggleButton, Eto.Forms.ToggleButton.ICallback>)
+            : typeof(ButtonHandler<Gtk.Button, Eto.Forms.Button, Eto.Forms.Button.ICallback>);
+        handlerType.GetField("gtkimage", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .SetValue(button.Handler, image);
+        handlerType.GetMethod("SetImagePosition", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .Invoke(button.Handler, []);
     }
 
     public static void ScaleImage(this Eto.Forms.Button button)
