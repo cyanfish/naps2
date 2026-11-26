@@ -2834,6 +2834,12 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("PreviewPaneMode", resourceCulture);
             }
         }
+
+        internal static string EditTools {
+            get {
+                return ResourceManager.GetString("EditTools", resourceCulture);
+            }
+        }
         
         internal static string XOfY {
             get {

@@ -170,6 +170,8 @@ public class PreviewPane : IDisposable
         ).Spacing(0).Visible(_paneVis);
     }
 
+    private bool UseEditToolsToggle => !_windowed && EtoPlatform.Current.SupportsInlinePreviewToolBar;
+
     private void UpdateHeader()
     {
         _editToolItems.Clear();
@@ -219,10 +221,40 @@ public class PreviewPane : IDisposable
                 : HeaderButton(CreateHeaderButton(_windowed ? ViewInPreviewPaneCommand : ViewInNewWindowCommand)),
             _windowed ? C.None() : HeaderButton(CreateHeaderButton(CloseCommand))
         ).Spacing(2);
+        if (UseEditToolsToggle)
+        {
+            // If the edit tools need their own row, a toggle that takes their place can hide it
+            var editToolsVis = new LayoutVisibility(_config.Get(c => c.PreviewPaneToolsVisible));
+            var toggle = CreateToolsToggle(editToolsVis).Width(44);
+            return L.Column(L.Adaptive(
+                L.Row(left, centeredEdit.Scale(), right),
+                L.Column(L.Row(left, C.Filler(), toggle, C.Filler(), right), centeredEdit.Visible(editToolsVis))
+            )).Padding(6);
+        }
         return L.Column(L.Adaptive(
             L.Row(left, centeredEdit.Scale(), right),
             L.Column(L.Row(left, C.Filler(), right), L.Adaptive(centeredEdit, narrowEdit))
         )).Padding(6);
+    }
+
+    private ToggleButton CreateToolsToggle(LayoutVisibility editToolsVis)
+    {
+        var toggle = new ToggleButton
+        {
+            ImagePosition = ButtonImagePosition.Overlay,
+            ToolTip = UiStrings.EditTools,
+            Checked = editToolsVis.IsVisible
+        };
+        EtoPlatform.Current.SetAccessibleName(toggle, toggle.ToolTip);
+        EtoPlatform.Current.AttachIconDependency(toggle, scale => toggle.Image =
+            EtoPlatform.Current.IconProvider.GetIcon("picture_edit", IconScenario.Button, scale));
+        EtoPlatform.Current.ConfigureImageButton(toggle, ButtonFlags.Compact);
+        toggle.CheckedChanged += (_, _) =>
+        {
+            _config.User.Set(c => c.PreviewPaneToolsVisible, toggle.Checked);
+            editToolsVis.IsVisible = toggle.Checked;
+        };
+        return toggle;
     }
 
     private static Button CreateHeaderButton(ActionCommand command, string? iconName = null)

@@ -69,6 +69,7 @@ public static class InternalDefaults
             SidebarWidth = 230,
             PreviewPaneWidth = 500,
             PreviewLastShownInPane = true,
+            PreviewPaneToolsVisible = false,
             EditWithAppPath = "",
             EditWithAppName = "",
             ApplyToAllSelected = false,

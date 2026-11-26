@@ -244,6 +244,9 @@ public class CommonConfig
     public bool PreviewLastShownInPane { get; set; }
 
     [User]
+    public bool PreviewPaneToolsVisible { get; set; }
+
+    [User]
     public string? EditWithAppPath { get; set; }
 
     [User]
