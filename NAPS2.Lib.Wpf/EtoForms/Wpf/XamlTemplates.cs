@@ -31,6 +31,12 @@ internal static class XamlTemplates
         (ControlTemplate) Templates["SubtleButtonTemplate"]!;
 
     /// <summary>
+    /// A toggle button that looks like a regular button, with an accent border when checked.
+    /// </summary>
+    public static ControlTemplate ImageToggleButtonTemplate { get; } =
+        (ControlTemplate) Templates["ImageToggleButtonTemplate"]!;
+
+    /// <summary>
     /// A small toolbar button.
     /// </summary>
     public static ControlTemplate ToolBarButtonTemplate { get; } =

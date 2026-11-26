@@ -37,6 +37,40 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!-- A toggle button that looks like a regular button. The theme fills checked buttons with the accent color, which
+         is too strong for an icon button, so this uses an accent border instead (like checked toolbar buttons). -->
+    <ControlTemplate x:Key="ImageToggleButtonTemplate" TargetType="ToggleButton">
+        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding Border.CornerRadius}">
+            <ContentPresenter Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+            </MultiTrigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="bd" Property="Opacity" Value="0.45" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <!-- Small toolbar templates. Buttons, toggle buttons and drop-downs share the same size and hover/pressed fill. -->
     <ControlTemplate x:Key="ToolBarButtonTemplate" TargetType="Button">
         <Border x:Name="bd" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4"

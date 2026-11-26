@@ -390,6 +390,10 @@ public class WpfEtoPlatform : EtoPlatform
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         var native = (SWC.Control) button.ToNative();
+        if (native is SWC.Primitives.ToggleButton)
+        {
+            native.Template = XamlTemplates.ImageToggleButtonTemplate;
+        }
         if (string.IsNullOrEmpty(button.Text))
         {
             native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING - 1, SMALL_BUTTON_PADDING,
