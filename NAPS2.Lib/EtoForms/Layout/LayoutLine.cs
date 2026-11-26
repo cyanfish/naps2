@@ -19,6 +19,8 @@ public abstract class LayoutLine : LayoutContainer
 
     protected bool Aligned { get; set; }
 
+    private bool _isMaterialized;
+
     protected abstract bool IsOrthogonalTo(LayoutLine other);
 
     protected abstract PointF UpdatePosition(PointF position, float delta);
@@ -35,6 +37,14 @@ public abstract class LayoutLine : LayoutContainer
 
     public override void Materialize(LayoutContext context)
     {
+        if (!_isMaterialized)
+        {
+            if (Visibility != null)
+            {
+                Visibility.IsVisibleChanged += (_, _) => context.Invalidate();
+            }
+            _isMaterialized = true;
+        }
         var childContext = GetChildContext(context, RectangleF.Empty, false);
         foreach (var child in Children)
         {
