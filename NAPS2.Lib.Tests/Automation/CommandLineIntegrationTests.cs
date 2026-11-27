@@ -103,6 +103,96 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task ScanToJpegFilesWithOcrLangSavesTextSidecars()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.autocrop_doc), "First page text" },
+            { LoadImage(ImageResources.autocrop_receipt), "Second page text" }
+        }, delay: 0, splitWords: true);
+        InstallFakeOcrLanguage("eng");
+        var path = $"{FolderPath}/test$(n).jpg";
+
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Split = true,
+                OcrLang = "eng",
+                Verbose = true
+            },
+            new[] { ImageResources.autocrop_doc, ImageResources.autocrop_receipt });
+
+        ImageAsserts.Similar(ImageResources.autocrop_doc, $"{FolderPath}/test1.jpg");
+        ImageAsserts.Similar(ImageResources.autocrop_receipt, $"{FolderPath}/test2.jpg");
+        Assert.Equal("First page text", File.ReadAllText($"{FolderPath}/test1.txt"));
+        Assert.Equal("Second page text", File.ReadAllText($"{FolderPath}/test2.txt"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanToJpegFilesDoesNotSaveTextSidecarsFromSavedOcrSettingAlone()
+    {
+        SetUpFakeOcr(ifNoMatch: "Unexpected text", delay: 0);
+        var path = $"{FolderPath}/test$(n).jpg";
+
+        await _automationHelper.WithContainer(container =>
+        {
+            var config = container.Resolve<Naps2Config>();
+            config.User.Set(c => c.EnableOcr, true);
+            config.User.Set(c => c.OcrLanguageCode, "eng");
+        }).RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Split = true,
+                Verbose = true
+            },
+            new[] { ImageResources.autocrop_doc, ImageResources.autocrop_receipt });
+
+        Assert.True(File.Exists($"{FolderPath}/test1.jpg"));
+        Assert.True(File.Exists($"{FolderPath}/test2.jpg"));
+        Assert.False(File.Exists($"{FolderPath}/test1.txt"));
+        Assert.False(File.Exists($"{FolderPath}/test2.txt"));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task JpegOutputWithPdfEmailUsesSavedOcrOnlyForPdf()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
+        });
+        InstallFakeOcrLanguage("eng");
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Single(message.Attachments);
+            PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", message.Attachments[0].FilePath);
+        });
+
+        var config = Naps2Config.Stub();
+        config.User.Set(c => c.EnableOcr, true);
+        config.User.Set(c => c.OcrLanguageCode, "eng");
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+            builder.RegisterInstance(config);
+        }).RunCommand(new AutomatedScanningOptions
+        {
+            OutputPath = P("test.jpg"),
+            EmailFileName = "attachment.pdf",
+            Verbose = true
+        }, ImageResources.ocr_test);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        Assert.True(File.Exists(P("test.jpg")));
+        Assert.False(File.Exists(P("test.txt")));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ScanWithEnableOcr()
     {
         SetUpFakeOcr(new()

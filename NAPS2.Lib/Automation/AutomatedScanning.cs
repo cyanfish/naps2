@@ -42,7 +42,7 @@ internal class AutomatedScanning
     private SaveParams _saveParams = null!;
     private NameContext _nameContext = null!;
     private List<string> _actualOutputPaths = null!;
-    private OcrParams _ocrParams = null!;
+    private OcrParams _ocrParams = OcrParams.Empty;
     private PageDimensions? _pageDimensions;
 
     public AutomatedScanning(ConsoleOutput output, AutomatedScanningOptions options, ImageContext imageContext,
@@ -197,13 +197,14 @@ internal class AutomatedScanning
 
     private bool ConfigureOcr()
     {
+        var jpegOutput = IsJpegFile(_options.OutputPath);
         _ocrParams = OcrParams.Empty;
         if (_options.NoProfile)
         {
             // Don't use OCR-enabled settings from the GUI if --noprofile is set
             _config.Run.Set(c => c.EnableOcr, false);
         }
-        bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName);
+        bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName) || jpegOutput;
         if (!canUseOcr)
         {
             return true;
@@ -211,6 +212,11 @@ internal class AutomatedScanning
         if (_options.DisableOcr)
         {
             _config.Run.Set(c => c.EnableOcr, false);
+        }
+        else if (jpegOutput && !IsPdfFile(_options.EmailFileName))
+        {
+            _config.Run.Set(c => c.EnableOcr,
+                _options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang));
         }
         else if (_options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang))
         {
@@ -619,14 +625,22 @@ internal class AutomatedScanning
         return Path.GetExtension(path)?.ToLower() == ".pdf";
     }
 
+    private bool IsJpegFile(string? path)
+    {
+        var extension = Path.GetExtension(path);
+        return extension?.Equals(".jpg", StringComparison.OrdinalIgnoreCase) == true ||
+               extension?.Equals(".jpeg", StringComparison.OrdinalIgnoreCase) == true;
+    }
+
     private async Task ExportToImageFiles()
     {
         var path = _nameManager.Get(_options.OutputPath!, _nameContext);
-        await DoExportToImageFiles(_options.OutputPath!);
+        await DoExportToImageFiles(_options.OutputPath!,
+            !_options.DisableOcr && (_options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang)));
         OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
     }
 
-    private async Task DoExportToImageFiles(string outputPath)
+    private async Task DoExportToImageFiles(string outputPath, bool saveOcrText = false)
     {
         _config.Run.Set(c => c.ImageSettings, new ImageSettings
         {
@@ -653,7 +667,8 @@ internal class AutomatedScanning
                 }
             };
             op.Start(outputPath, scan, imageSettings,
-                _saveParams with { BatchCount = fileCount, BatchIndex = fileIndex });
+                _saveParams with { BatchCount = fileCount, BatchIndex = fileIndex },
+                saveOcrText ? _ocrParams : OcrParams.Empty);
             await op.Success;
             fileIndex += SaveImagesOperation.GetFileCount(outputPath, scan.Count, imageSettings);
         }

@@ -2204,6 +2204,12 @@ namespace NAPS2.Lang.Resources {
                 return ResourceManager.GetString("SaveImagesProgress", resourceCulture);
             }
         }
+
+        internal static string SaveOcrTextAlongsideImages {
+            get {
+                return ResourceManager.GetString("SaveOcrTextAlongsideImages", resourceCulture);
+            }
+        }
         
         internal static string SavePdf {
             get {

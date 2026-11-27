@@ -40,7 +40,8 @@ public class AutoSaverTests : ContextualTests
             _config,
             ImageContext,
             new UiImageList(),
-            new NameManager()
+            new NameManager(),
+            ScanningContext
         );
     }
 

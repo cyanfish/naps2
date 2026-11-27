@@ -1218,6 +1218,9 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   <data name="SaveImagesProgress" xml:space="preserve">
     <value>Save Images Progress</value>
   </data>
+  <data name="SaveOcrTextAlongsideImages" xml:space="preserve">
+    <value>Also save OCR text files alongside the JPEG images?</value>
+  </data>
   <data name="SavePdf" xml:space="preserve">
     <value>Save PDF</value>
   </data>

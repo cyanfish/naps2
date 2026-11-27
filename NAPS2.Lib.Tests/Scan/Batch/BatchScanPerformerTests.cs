@@ -32,7 +32,7 @@ public class BatchScanPerformerTests : ContextualTests
         var nameManager = new NameManager();
         var operationFactory = Substitute.For<IOperationFactory>();
         operationFactory.Create<SaveImagesOperation>()
-            .Returns(_ => new SaveImagesOperation(_overwritePrompt, ImageContext, nameManager));
+            .Returns(_ => new SaveImagesOperation(_overwritePrompt, ImageContext, nameManager, ScanningContext));
         var profileManager = Substitute.For<IProfileManager>();
         profileManager.Profiles.Returns(ImmutableList.Create(new ScanProfile { DisplayName = "profile" }));
 

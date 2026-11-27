@@ -1460,6 +1460,10 @@ msgstr ""
 msgid "Save Images"
 msgstr ""
 
+#: UiStrings.resx$SaveOcrTextAlongsideImages$Message
+msgid "Also save OCR text files alongside the JPEG images?"
+msgstr ""
+
 #: MiscResources.resx$SaveImagesProgress$Message
 msgid "Save Images Progress"
 msgstr ""
@@ -2034,4 +2038,3 @@ msgstr ""
 #: UiStrings.resx$XOfY$Message
 msgid "{0} of {1}"
 msgstr ""
-
