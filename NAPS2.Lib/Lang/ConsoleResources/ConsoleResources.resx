@@ -263,6 +263,12 @@ Use the "--importpassword" option.</value>
   <data name="InvalidDriver" xml:space="preserve">
     <value>The driver option was not valid. Possible values: {0}</value>
   </data>
+  <data name="InvalidPatchCodes" xml:space="preserve">
+    <value>The patch codes option was not valid. Possible values: {0}</value>
+  </data>
+  <data name="InvalidBarcodeTypes" xml:space="preserve">
+    <value>The barcode types option was not valid. Possible values include: {0}</value>
+  </data>
   <data name="NoDeviceSpecified" xml:space="preserve">
     <value>No device was specified. Either use "--profile" to specify a profile with a device, or use "--device" to choose a particular device (and "--listdevices" to see available choices).</value>
   </data>

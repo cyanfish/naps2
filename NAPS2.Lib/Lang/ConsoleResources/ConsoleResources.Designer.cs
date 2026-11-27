@@ -340,11 +340,29 @@ namespace NAPS2.Lang.ConsoleResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The barcode types option was not valid. Possible values include: {0}.
+        /// </summary>
+        internal static string InvalidBarcodeTypes {
+            get {
+                return ResourceManager.GetString("InvalidBarcodeTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The driver option was not valid. Possible values: {0}.
         /// </summary>
         internal static string InvalidDriver {
             get {
                 return ResourceManager.GetString("InvalidDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The patch codes option was not valid. Possible values: {0}.
+        /// </summary>
+        internal static string InvalidPatchCodes {
+            get {
+                return ResourceManager.GetString("InvalidPatchCodes", resourceCulture);
             }
         }
         

@@ -267,6 +267,9 @@
   <data name="BackspaceKey" xml:space="preserve">
     <value>Backspace</value>
   </data>
+  <data name="BarcodeValue" xml:space="preserve">
+    <value>Barcode value (when splitting by barcode)</value>
+  </data>
   <data name="BatchError" xml:space="preserve">
     <value>An unknown error occurred during the batch scan.</value>
   </data>

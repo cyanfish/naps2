@@ -8,21 +8,42 @@ namespace NAPS2.ImportExport;
 /// Defines which decoded barcodes separate documents and whether the separator page is retained.
 /// </summary>
 [GeneratePropertyAccessors]
-public class BarcodeSeparatorOptions
+public record BarcodeSeparatorOptions
 {
-    public List<PatchCodeType> PatchCodes { get; set; } = [];
+    /// <summary>
+    /// The patch codes that separate documents. If no patch codes or barcode types are specified, any barcode does.
+    /// </summary>
+    public List<PatchCodeType> PatchCodes { get; init; } = [];
 
-    public BarcodeFormat? BarcodeType { get; set; }
+    /// <summary>
+    /// A single barcode format that separates documents, in addition to <see cref="BarcodeTypes"/>.
+    /// </summary>
+    public BarcodeFormat? BarcodeType { get; init; }
 
-    public List<BarcodeFormat> BarcodeTypes { get; set; } = [];
+    /// <summary>
+    /// The barcode formats that separate documents. If no patch codes or barcode types are specified, any barcode does.
+    /// </summary>
+    public List<BarcodeFormat> BarcodeTypes { get; init; } = [];
 
-    public int MinimumLength { get; set; } = 1;
+    /// <summary>
+    /// The minimum length of the barcode text for it to separate documents.
+    /// </summary>
+    public int MinimumLength { get; init; } = 1;
 
-    public int MaximumLength { get; set; } = int.MaxValue;
+    /// <summary>
+    /// The maximum length of the barcode text for it to separate documents.
+    /// </summary>
+    public int MaximumLength { get; init; } = int.MaxValue;
 
-    public string Prefix { get; set; } = "";
+    /// <summary>
+    /// The text the barcode must start with for it to separate documents.
+    /// </summary>
+    public string Prefix { get; init; } = "";
 
-    public bool RemoveBarcodePage { get; set; }
+    /// <summary>
+    /// Whether the separator page is removed rather than kept as the first page of the next document.
+    /// </summary>
+    public bool RemoveBarcodePage { get; init; }
 
     internal void Validate()
     {

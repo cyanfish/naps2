@@ -88,11 +88,10 @@ public class AutoSaver
                 OpenEndedSequence = true,
                 BatchCount = scans.Count
             };
-            foreach (var (scan, i) in scans.Select((x, i) => (x, i)))
+            foreach (var ((imagesToSave, barcodeValue), i) in scans.Select((x, i) => (x, i)))
             {
-                var imagesToSave = scan.Images;
                 (bool success, string? filePath) = await SaveOneFile(settings, saveParams with { BatchIndex = i },
-                    imagesToSave, doNotify: scans.Count == 1, barcodeValue: scan.BarcodeValue);
+                    imagesToSave, doNotify: scans.Count == 1, barcodeValue);
                 if (success)
                 {
                     // Normally we're supposed to take the CurrentState before the save operation starts, but that

@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using ZXing;
 using NAPS2.Dependencies;
 using NAPS2.EtoForms;
 using NAPS2.ImportExport;
@@ -13,6 +12,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 using NAPS2.Serialization;
+using ZXing;
 
 namespace NAPS2.Automation;
 
@@ -477,13 +477,14 @@ internal class AutomatedScanning
                     OutputVerbose(ConsoleResources.AttachingExportedPDF);
                     var context = NameContext.FromSaveParams(_saveParams with { BatchCount = _scanList.Count })
                         with { IsFilePath = false };
-                    for (int i = 0; i < _actualOutputPaths.Count; i++)
+                    int i = 0;
+                    foreach (var path in _actualOutputPaths)
                     {
                         string attachmentName = _nameManager.Get(_options.EmailFileName!,
-                            context with { BatchIndex = i, BarcodeValue = GetScanBarcodeValue(i) })!;
+                            context with { BarcodeValue = GetScanBarcodeValue(i), BatchIndex = i++ });
                         message.Attachments.Add(new EmailAttachment
                         {
-                            FilePath = _actualOutputPaths[i],
+                            FilePath = path,
                             AttachmentName = attachmentName
                         });
                     }
@@ -577,8 +578,8 @@ internal class AutomatedScanning
             if (patchCodeValues.Length == 0 || patchCodeValues.Any(value =>
                     !Enum.TryParse(value, true, out PatchCodeType patchCode) || !Enum.IsDefined(patchCode)))
             {
-                _errorOutput.DisplayError(
-                    "Invalid patch code list. Valid values are patchi, patchii, patchiii, patchiv, patchvi, patcht.");
+                _errorOutput.DisplayError(string.Format(ConsoleResources.InvalidPatchCodes,
+                    "patchi, patchii, patchiii, patchiv, patchvi, patcht"));
                 return false;
             }
             _parsedPatchCodes = patchCodeValues
@@ -593,8 +594,8 @@ internal class AutomatedScanning
             if (barcodeTypeValues.Length == 0 ||
                 barcodeTypeValues.Any(value => !TryParseBarcodeFormat(value, out _)))
             {
-                _errorOutput.DisplayError(
-                    "Invalid barcode type list. Valid values include code3of9, code128, qr_code, upc_a, ean_13.");
+                _errorOutput.DisplayError(string.Format(ConsoleResources.InvalidBarcodeTypes,
+                    "code3of9, code128, qr_code, upc_a, ean_13"));
                 return false;
             }
             _parsedBarcodeTypes = barcodeTypeValues
@@ -679,7 +680,7 @@ internal class AutomatedScanning
     private async Task ExportToImageFiles()
     {
         var path = _nameManager.Get(_options.OutputPath!,
-            _nameContext with { BarcodeValue = GetScanBarcodeValue(0) })!;
+            _nameContext with { BarcodeValue = GetScanBarcodeValue(0) });
         await DoExportToImageFiles(_options.OutputPath!);
         OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
     }
@@ -884,7 +885,6 @@ internal class AutomatedScanning
             {
                 ReceiveScannedImage(image);
             }
-
             OutputVerbose(ConsoleResources.PagesScanned, _pagesScanned);
         }
     }
