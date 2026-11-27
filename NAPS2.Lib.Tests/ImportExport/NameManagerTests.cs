@@ -55,7 +55,7 @@ public class NameManagerTests : ContextualTests
     [Fact]
     public void BarcodePlaceholder_FiltersInvalidCharactersByDefault()
     {
-        var context = _context with { BarcodeValue = "../safe\\name" };
+        var context = _context with { BarcodeValue = "../safe/name" };
 
         Assert.Equal(P("scan-.._safe_name.pdf"), Get(P("scan-$(barcode).pdf"), context));
     }

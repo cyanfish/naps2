@@ -93,7 +93,7 @@ public class NameManager
             var barcodeValue = context.FilterBarcode
                 ? SanitizeBarcodeValue(context.BarcodeValue)
                 : context.BarcodeValue;
-            result = result.Replace(BARCODE, barcodeValue, StringComparison.Ordinal);
+            result = result.Replace(BARCODE, barcodeValue);
         }
         if (numbering == Numbering.None)
         {
@@ -145,8 +145,8 @@ public class NameManager
 
     private static string SanitizeBarcodeValue(string value)
     {
-        const string invalidChars = "<>:\"/\\|?*";
-        return new string(value.Select(c => char.IsControl(c) || invalidChars.Contains(c) ? '_' : c).ToArray());
+        var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+        return new string(value.Select(c => invalidChars.Contains(c) ? '_' : c).ToArray());
     }
 
     private static Func<int, string> NumberFromPlaceholder(string name, Match numberMatch)

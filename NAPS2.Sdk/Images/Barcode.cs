@@ -16,8 +16,14 @@ public record Barcode(bool IsDetectionAttempted, bool IsDetected, string? Detect
     {
     }
 
+    /// <summary>
+    /// The format of the detected barcode, or null if no barcode was detected.
+    /// </summary>
     public BarcodeFormat? DetectedFormat { get; init; }
 
+    /// <summary>
+    /// The type of the detected patch code, or null if the detected barcode isn't a patch code.
+    /// </summary>
     public PatchCodeType? PatchCode => DetectedText switch
     {
         "PATCH1" => PatchCodeType.PatchI,
@@ -30,14 +36,4 @@ public record Barcode(bool IsDetectionAttempted, bool IsDetected, string? Detect
     };
 
     public bool IsPatchT => DetectedText == PATCH_T_TEXT;
-}
-
-public enum PatchCodeType
-{
-    PatchI,
-    PatchII,
-    PatchIII,
-    PatchIV,
-    PatchVI,
-    PatchT
 }

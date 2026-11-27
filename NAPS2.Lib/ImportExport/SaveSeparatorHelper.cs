@@ -47,7 +47,7 @@ internal static class SaveSeparatorHelper
         else if (separator == SaveSeparator.PatchT)
         {
             var images = new List<ProcessedImage>();
-            string? barcodeValue = "";
+            string? barcodeValue = null;
             foreach (var scan in scans)
             {
                 foreach (var image in scan)
@@ -56,7 +56,7 @@ internal static class SaveSeparatorHelper
                     {
                         if (images.Count > 0)
                         {
-                            yield return (images, barcodeValue);
+                            yield return (images, barcodeValue ?? "");
                             images = [];
                         }
                         barcodeValue = image.PostProcessingData.Barcode.DetectedText;
@@ -77,7 +77,7 @@ internal static class SaveSeparatorHelper
             }
             if (images.Count > 0)
             {
-                yield return (images, barcodeValue);
+                yield return (images, barcodeValue ?? "");
             }
         }
         else if (separator == SaveSeparator.Barcode)

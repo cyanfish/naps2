@@ -40,8 +40,15 @@ public record NameContext
     /// </summary>
     public bool Overwrite { get; init; }
 
+    /// <summary>
+    /// The barcode value substituted for the "$(barcode)" placeholder, or null to leave the placeholder as is.
+    /// </summary>
     public string? BarcodeValue { get; init; }
 
+    /// <summary>
+    /// Whether invalid file name characters in the barcode value are replaced with underscores. If false, the barcode
+    /// value can create paths outside the intended directory.
+    /// </summary>
     public bool FilterBarcode { get; init; } = true;
 
     public static NameContext FromSaveParams(SaveParams saveParams) => new()

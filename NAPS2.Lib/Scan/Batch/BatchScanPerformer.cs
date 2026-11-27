@@ -261,14 +261,9 @@ public class BatchScanPerformer : IBatchScanPerformer
                         barcodeSeparatorOptions: _settings.BarcodeSeparatorOptions)
                     .Where(x => x.Images.Count > 0).ToList();
                 saveParams = saveParams with { BatchCount = imageLists.Count };
-                foreach (var (scan, i) in imageLists.Select((x, i) => (x, i)))
+                foreach (var ((imageList, barcodeValue), i) in imageLists.Select((x, i) => (x, i)))
                 {
-                    await Save(scan.Images, saveParams with
-                    {
-                        BatchIndex = i,
-                        BarcodeValue = scan.BarcodeValue
-                    });
-                    var imageList = scan.Images;
+                    await Save(imageList, saveParams with { BatchIndex = i, BarcodeValue = barcodeValue });
                     foreach (var img in imageList)
                     {
                         img.Dispose();

@@ -18,7 +18,8 @@ public class PlaceholdersForm : EtoDialogBase
             (NameManager.NUMBER_4_DIGITS, UiStrings.AutoIncrementing4Digit),
             (NameManager.NUMBER_3_DIGITS, UiStrings.AutoIncrementing3Digit),
             (NameManager.NUMBER_2_DIGITS, UiStrings.AutoIncrementing2Digit),
-            (NameManager.NUMBER_1_DIGIT, UiStrings.AutoIncrementing1Digit)
+            (NameManager.NUMBER_1_DIGIT, UiStrings.AutoIncrementing1Digit),
+            (NameManager.BARCODE, UiStrings.BarcodeValue)
         };
 
     private readonly NameManager _nameManager;

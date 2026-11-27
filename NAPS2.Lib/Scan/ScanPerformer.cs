@@ -288,7 +288,8 @@ internal class ScanPerformer : IScanPerformer
             {
                 DetectBarcodes = scanParams.DetectPatchT ||
                                  scanParams.BarcodeSeparatorOptions != null ||
-                                 scanProfile.AutoSaveSettings?.Separator is SaveSeparator.PatchT or SaveSeparator.Barcode,
+                                 scanProfile.AutoSaveSettings?.Separator is SaveSeparator.PatchT
+                                     or SaveSeparator.Barcode,
                 PatchTOnly = scanParams.BarcodeSeparatorOptions == null &&
                              scanProfile.AutoSaveSettings?.Separator != SaveSeparator.Barcode
             },
