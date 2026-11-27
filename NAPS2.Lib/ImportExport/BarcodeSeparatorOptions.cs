@@ -1,4 +1,5 @@
 using NAPS2.Images;
+using NAPS2.Serialization;
 using ZXing;
 
 namespace NAPS2.ImportExport;
@@ -6,6 +7,7 @@ namespace NAPS2.ImportExport;
 /// <summary>
 /// Defines which decoded barcodes separate documents and whether the separator page is retained.
 /// </summary>
+[GeneratePropertyAccessors]
 public class BarcodeSeparatorOptions
 {
     public List<PatchCodeType> PatchCodes { get; set; } = [];
