@@ -18,5 +18,7 @@ public class BatchSettings
 
     public SaveSeparator SaveSeparator { get; set; }
 
+    public BarcodeSeparatorOptions BarcodeSeparatorOptions { get; set; } = new();
+
     public string? SavePath { get; set; }
 }

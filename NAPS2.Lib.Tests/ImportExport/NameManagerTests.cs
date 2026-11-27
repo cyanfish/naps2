@@ -45,6 +45,30 @@ public class NameManagerTests : ContextualTests
     }
 
     [Fact]
+    public void BarcodePlaceholder()
+    {
+        var context = _context with { BarcodeValue = "QR-12345" };
+
+        Assert.Equal(P("scan-QR-12345.pdf"), Get(P("scan-$(barcode).pdf"), context));
+    }
+
+    [Fact]
+    public void BarcodePlaceholder_FiltersInvalidCharactersByDefault()
+    {
+        var context = _context with { BarcodeValue = "../safe\\name" };
+
+        Assert.Equal(P("scan-.._safe_name.pdf"), Get(P("scan-$(barcode).pdf"), context));
+    }
+
+    [Fact]
+    public void BarcodePlaceholder_CanDisableFilter()
+    {
+        var context = _context with { BarcodeValue = "../safe", FilterBarcode = false };
+
+        Assert.Equal(P("scan-../safe.pdf"), Get(P("scan-$(barcode).pdf"), context));
+    }
+
+    [Fact]
     public void EnvironmentVariables()
     {
         var name = "NAPS2_TEST_" + Path.GetRandomFileName().Replace(".", "");

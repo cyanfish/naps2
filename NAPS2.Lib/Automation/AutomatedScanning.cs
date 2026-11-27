@@ -12,6 +12,7 @@ using NAPS2.Scan;
 using NAPS2.Scan.Exceptions;
 using NAPS2.Scan.Internal;
 using NAPS2.Serialization;
+using ZXing;
 
 namespace NAPS2.Automation;
 
@@ -36,7 +37,10 @@ internal class AutomatedScanning
     private readonly AutomatedScanningOptions _options;
     private readonly CancellationTokenSource _cts = new();
     private PdfEncryption _parsedEncryptConfigOption = null!;
+    private List<PatchCodeType> _parsedPatchCodes = [];
+    private List<BarcodeFormat> _parsedBarcodeTypes = [];
     private List<List<ProcessedImage>> _scanList = null!;
+    private List<string?>? _scanBarcodeValues;
     private int _pagesScanned;
     private int _totalPagesScanned;
     private SaveParams _saveParams = null!;
@@ -101,7 +105,8 @@ internal class AutomatedScanning
 
             _saveParams = new SaveParams
             {
-                OverwriteMode = _options.ForceOverwrite ? OverwriteMode.Force : OverwriteMode.Prompt
+                OverwriteMode = _options.ForceOverwrite ? OverwriteMode.Force : OverwriteMode.Prompt,
+                FilterBarcode = !_options.NoBarcodeFilter
             };
             _nameContext = NameContext.FromSaveParams(_saveParams);
 
@@ -304,10 +309,24 @@ internal class AutomatedScanning
     private void ReorderScannedImages()
     {
         var sep = _options.SplitPatchT ? SaveSeparator.PatchT
+            : _options.SplitBarcode ? SaveSeparator.Barcode
             : _options.SplitScans ? SaveSeparator.FilePerScan
             : _options.SplitSize > 0 || _options.Split ? SaveSeparator.FilePerPage
             : SaveSeparator.None;
-        _scanList = SaveSeparatorHelper.SeparateScans(_scanList, sep, _options.SplitSize).ToList();
+        var barcodeSeparatorOptions = new BarcodeSeparatorOptions
+        {
+            RemoveBarcodePage = _options.RemoveBarcodePage,
+            PatchCodes = _parsedPatchCodes,
+            BarcodeTypes = _parsedBarcodeTypes
+        };
+        var separatedScans = SaveSeparatorHelper.SeparateScansWithBarcodeValues(_scanList, sep,
+            _options.SplitSize, barcodeSeparatorOptions, !_options.KeepPatch,
+            _options.SplitBarcode && !_options.KeepPatch).ToList();
+        _scanList = separatedScans.Select(x => x.Images).ToList();
+        if (_options.SplitBarcode || _options.SplitPatchT)
+        {
+            _scanBarcodeValues = separatedScans.Select(x => x.BarcodeValue).ToList();
+        }
 
         foreach (var scan in _scanList)
         {
@@ -340,6 +359,9 @@ internal class AutomatedScanning
             scan.AddRange(imageList.Images.Select(x => x.GetImageWeakReference().ProcessedImage));
         }
     }
+
+    private string? GetScanBarcodeValue(int scanIndex) =>
+        _scanBarcodeValues != null && scanIndex < _scanBarcodeValues.Count ? _scanBarcodeValues[scanIndex] : null;
 
     private bool PreCheckOverwriteFile()
     {
@@ -376,8 +398,8 @@ internal class AutomatedScanning
                     Slice = Slice.Parse(filePath, out string actualPath),
                     BarcodeDetectionOptions =
                     {
-                        DetectBarcodes = _options.SplitPatchT,
-                        PatchTOnly = true
+                        DetectBarcodes = _options.SplitPatchT || _options.SplitBarcode,
+                        PatchTOnly = !_options.SplitBarcode
                     }
                 };
                 await foreach (var image in _fileImporter.Import(actualPath, importParams, _cts.Token))
@@ -459,7 +481,7 @@ internal class AutomatedScanning
                     foreach (var path in _actualOutputPaths)
                     {
                         string attachmentName = _nameManager.Get(_options.EmailFileName!,
-                            context with { BatchIndex = i++ });
+                            context with { BarcodeValue = GetScanBarcodeValue(i), BatchIndex = i++ });
                         message.Attachments.Add(new EmailAttachment
                         {
                             FilePath = path,
@@ -550,6 +572,42 @@ internal class AutomatedScanning
             }
         }
 
+        if (_options.PatchCodes != null)
+        {
+            var patchCodeValues = _options.PatchCodes.Split(',', StringSplitOptions.TrimEntries);
+            if (patchCodeValues.Length == 0 || patchCodeValues.Any(value =>
+                    !Enum.TryParse(value, true, out PatchCodeType patchCode) || !Enum.IsDefined(patchCode)))
+            {
+                _errorOutput.DisplayError(string.Format(ConsoleResources.InvalidPatchCodes,
+                    "patchi, patchii, patchiii, patchiv, patchvi, patcht"));
+                return false;
+            }
+            _parsedPatchCodes = patchCodeValues
+                .Select(value => Enum.Parse<PatchCodeType>(value, true))
+                .Distinct()
+                .ToList();
+        }
+
+        if (_options.BarcodeTypes != null)
+        {
+            var barcodeTypeValues = _options.BarcodeTypes.Split(',', StringSplitOptions.TrimEntries);
+            if (barcodeTypeValues.Length == 0 ||
+                barcodeTypeValues.Any(value => !TryParseBarcodeFormat(value, out _)))
+            {
+                _errorOutput.DisplayError(string.Format(ConsoleResources.InvalidBarcodeTypes,
+                    "code3of9, code128, qr_code, upc_a, ean_13"));
+                return false;
+            }
+            _parsedBarcodeTypes = barcodeTypeValues
+                .Select(value =>
+                {
+                    TryParseBarcodeFormat(value, out var format);
+                    return format;
+                })
+                .Distinct()
+                .ToList();
+        }
+
         if (_options.PageSize != null)
         {
             var pageSize = PageSize.Parse(_options.PageSize);
@@ -621,7 +679,8 @@ internal class AutomatedScanning
 
     private async Task ExportToImageFiles()
     {
-        var path = _nameManager.Get(_options.OutputPath!, _nameContext);
+        var path = _nameManager.Get(_options.OutputPath!,
+            _nameContext with { BarcodeValue = GetScanBarcodeValue(0) });
         await DoExportToImageFiles(_options.OutputPath!);
         OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
     }
@@ -639,8 +698,9 @@ internal class AutomatedScanning
         var imageSettings = _config.Get(c => c.ImageSettings);
         int fileCount = _scanList.Sum(scan => SaveImagesOperation.GetFileCount(outputPath, scan.Count, imageSettings));
         int fileIndex = 0;
-        foreach (var scan in _scanList)
+        for (int scanIndex = 0; scanIndex < _scanList.Count; scanIndex++)
         {
+            var scan = _scanList[scanIndex];
             var op = _operationFactory.Create<SaveImagesOperation>();
             _cts.Token.Register(op.Cancel);
             int i = -1;
@@ -653,7 +713,12 @@ internal class AutomatedScanning
                 }
             };
             op.Start(outputPath, scan, imageSettings,
-                _saveParams with { BatchCount = fileCount, BatchIndex = fileIndex });
+                _saveParams with
+                {
+                    BatchCount = fileCount,
+                    BatchIndex = fileIndex,
+                    BarcodeValue = GetScanBarcodeValue(scanIndex)
+                });
             await op.Success;
             fileIndex += SaveImagesOperation.GetFileCount(outputPath, scan.Count, imageSettings);
         }
@@ -726,6 +791,7 @@ internal class AutomatedScanning
         _actualOutputPaths = [];
         foreach (var (fileContents, scanIndex) in _scanList.Select((x, i) => (x, i)))
         {
+            string? barcodeValue = GetScanBarcodeValue(scanIndex);
             var op = _operationFactory.Create<SavePdfOperation>();
             _cts.Token.Register(op.Cancel);
             int i = -1;
@@ -738,7 +804,12 @@ internal class AutomatedScanning
                 }
             };
             op.Start(path, fileContents, _config.Get(c => c.PdfSettings), _ocrParams,
-                saveParams: _saveParams with { BatchCount = _scanList.Count, BatchIndex = scanIndex });
+                saveParams: _saveParams with
+                {
+                    BatchCount = _scanList.Count,
+                    BatchIndex = scanIndex,
+                    BarcodeValue = barcodeValue
+                });
             if (!await op.Success)
             {
                 return false;
@@ -799,7 +870,15 @@ internal class AutomatedScanning
             {
                 NoUI = !_options.Progress,
                 NoAutoSave = !_options.AutoSave || !autoSaveEnabled,
-                DetectPatchT = _options.SplitPatchT,
+                DetectPatchT = _options.SplitPatchT && !_options.SplitBarcode,
+                BarcodeSeparatorOptions = _options.SplitBarcode
+                    ? new BarcodeSeparatorOptions
+                    {
+                        RemoveBarcodePage = _options.RemoveBarcodePage,
+                        PatchCodes = _parsedPatchCodes,
+                        BarcodeTypes = _parsedBarcodeTypes
+                    }
+                    : null,
                 OcrParams = _ocrParams
             };
             await foreach (var image in _scanPerformer.PerformScan(profile, scanParams, cancelToken: _cts.Token))
@@ -808,6 +887,28 @@ internal class AutomatedScanning
             }
             OutputVerbose(ConsoleResources.PagesScanned, _pagesScanned);
         }
+    }
+
+    private static bool TryParseBarcodeFormat(string value, out BarcodeFormat format)
+    {
+        string normalizedValue = new(value.Where(char.IsLetterOrDigit).Select(char.ToUpperInvariant).ToArray());
+        if (normalizedValue == "CODE3OF9")
+        {
+            format = BarcodeFormat.CODE_39;
+            return true;
+        }
+        foreach (var barcodeFormat in Enum.GetValues<BarcodeFormat>())
+        {
+            string normalizedFormat = new(barcodeFormat.ToString().Where(char.IsLetterOrDigit)
+                .Select(char.ToUpperInvariant).ToArray());
+            if (normalizedValue == normalizedFormat)
+            {
+                format = barcodeFormat;
+                return true;
+            }
+        }
+        format = default;
+        return false;
     }
 
     private bool GetProfile(out ScanProfile profile)

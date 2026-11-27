@@ -24,6 +24,7 @@ public class NameManager
     public const string NUMBER_3_DIGITS = "$(nnn)";
     public const string NUMBER_2_DIGITS = "$(nn)";
     public const string NUMBER_1_DIGIT = "$(n)";
+    public const string BARCODE = "$(barcode)";
     public const string FULL_DATE = "$(YYYY)-$(MM)-$(DD)";
     public const string FULL_TIME = "$(hh)_$(mm)_$(ss)";
 
@@ -87,6 +88,13 @@ public class NameManager
         {
             result = result.Replace(placeholder, format(context.DateTime));
         }
+        if (context.BarcodeValue != null)
+        {
+            var barcodeValue = context.FilterBarcode
+                ? SanitizeBarcodeValue(context.BarcodeValue)
+                : context.BarcodeValue;
+            result = result.Replace(BARCODE, barcodeValue);
+        }
         if (numbering == Numbering.None)
         {
             return result;
@@ -133,6 +141,13 @@ public class NameManager
             }
             return candidate;
         }
+    }
+
+    private static string SanitizeBarcodeValue(string value)
+    {
+        var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+        invalidChars.Add('\\');
+        return new string(value.Select(c => invalidChars.Contains(c) ? '_' : c).ToArray());
     }
 
     private static Func<int, string> NumberFromPlaceholder(string name, Match numberMatch)

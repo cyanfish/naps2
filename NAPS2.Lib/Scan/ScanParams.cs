@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using NAPS2.ImportExport;
 using NAPS2.Ocr;
 
 namespace NAPS2.Scan;
@@ -10,6 +11,8 @@ namespace NAPS2.Scan;
 public class ScanParams
 {
     public bool DetectPatchT { get; set; }
+
+    public BarcodeSeparatorOptions? BarcodeSeparatorOptions { get; set; }
 
     public bool Modal { get; set; } = true;
 

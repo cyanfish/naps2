@@ -345,6 +345,12 @@ namespace NAPS2.Lang.Resources {
             }
         }
         
+        internal static string BarcodeValue {
+            get {
+                return ResourceManager.GetString("BarcodeValue", resourceCulture);
+            }
+        }
+        
         internal static string BatchError {
             get {
                 return ResourceManager.GetString("BatchError", resourceCulture);
