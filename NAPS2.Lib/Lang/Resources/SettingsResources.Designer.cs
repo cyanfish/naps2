@@ -384,6 +384,33 @@ namespace NAPS2.Lang.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Used View.
+        /// </summary>
+        internal static string PreviewPaneMode_LastUsed {
+            get {
+                return ResourceManager.GetString("PreviewPaneMode_LastUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview Pane.
+        /// </summary>
+        internal static string PreviewPaneMode_PreviewPane {
+            get {
+                return ResourceManager.GetString("PreviewPaneMode_PreviewPane", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Window.
+        /// </summary>
+        internal static string PreviewPaneMode_NewWindow {
+            get {
+                return ResourceManager.GetString("PreviewPaneMode_NewWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Always Prompt.
         /// </summary>
         internal static string SaveButtonDefaultAction_AlwaysPrompt {

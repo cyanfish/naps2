@@ -96,7 +96,7 @@ public class PrintDocumentPrinter : IScannedImagePrinter
 
             Log.Event(EventType.Print, new EventParams
             {
-                Name = MiscResources.Print,
+                Name = UiStrings.Print,
                 Pages = images.Count,
                 DeviceName = printDocument.PrinterSettings.PrinterName
             });

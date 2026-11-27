@@ -22,13 +22,12 @@ internal class MacImageTransformer : AbstractImageTransformer<MacImage>
         using CGBitmapContext c = MacBitmapHelper.CreateContext(newImage);
 
         CGRect fillRect = new CGRect(0, 0, newImage.Width, newImage.Height);
-        c.SetFillColor(new CGColor(255.ToNFloat(), 255.ToNFloat(), 255.ToNFloat(), 255.ToNFloat()));
+        c.SetFillColor(new CGColor(255, 255, 255, 255));
         c.FillRect(fillRect);
 
-        var t1 = CGAffineTransform.MakeTranslation((-image.Width / 2.0).ToNDouble(), (-image.Height / 2.0).ToNDouble());
-        var t2 = CGAffineTransform.MakeRotation((-transform.Angle * Math.PI / 180).ToNDouble());
-        var t3 = CGAffineTransform.MakeTranslation((newImage.Width / 2.0).ToNDouble(),
-            (newImage.Height / 2.0).ToNDouble());
+        var t1 = CGAffineTransform.MakeTranslation((NFloat) (-image.Width / 2.0), (NFloat) (-image.Height / 2.0));
+        var t2 = CGAffineTransform.MakeRotation((NFloat) (-transform.Angle * Math.PI / 180));
+        var t3 = CGAffineTransform.MakeTranslation((NFloat) (newImage.Width / 2.0), (NFloat) (newImage.Height / 2.0));
         c.ConcatCTM(CGAffineTransform.Multiply(CGAffineTransform.Multiply(t1, t2), t3));
 
         CGRect rect = new CGRect(0, 0, image.Width, image.Height);

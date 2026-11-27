@@ -104,6 +104,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         _dataSource.Items.Clear();
         _dataSource.Items.AddRange(items);
         _view.ReloadData();
+        RestoreViewSelection();
     }
 
     public void RegenerateImages()
@@ -113,6 +114,7 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
             return;
         }
         _view.ReloadData();
+        RestoreViewSelection();
     }
 
     public void ApplyDiffs(ListViewDiffs<T> diffs)
@@ -149,6 +151,14 @@ public class MacListView<T> : NSCollectionViewDelegateFlowLayout, IListView<T> w
         {
             _view.ReloadData();
         }
+        RestoreViewSelection();
+    }
+
+    private void RestoreViewSelection()
+    {
+        // Reloading items clears the view's selection, even though the items are still displayed as selected
+        _lastClickedIndexPath = null;
+        UpdateViewSelection();
     }
 
     private bool IsSingleItemMove(List<T> originalItems, ListViewDiffs<T> diffs, out int fromIndex, out int toIndex)

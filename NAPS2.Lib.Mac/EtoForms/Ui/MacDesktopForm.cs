@@ -35,13 +35,16 @@ public class MacDesktopForm : DesktopForm
         Lazy<DesktopCommands> commands,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController)
+        EditWithController editWithController,
+        PreviewPane previewPane)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider,
-            editWithController)
+            editWithController, previewPane)
     {
         _sidebar = sidebar;
+        // Allow the form to be re-shown after closing if the user clicks it again in the taskbar
+        this.ToNative().ReleaseWhenClosed(false);
     }
 
     protected override LayoutElement BuildSidebarLayout(LayoutElement mainContent)
@@ -170,7 +173,8 @@ public class MacDesktopForm : DesktopForm
                     .Append(Commands.NewProfile)
                     .Append(Commands.BatchScan)),
                 CreateSubMenu(Commands.ImageMenu, new MenuProvider()
-                    .Append(Commands.ViewImage)
+                    .Append(Commands.View)
+                    .Dynamic(_viewInNewWindowCommands)
                     .Append(Commands.ZoomIn)
                     .Append(Commands.ZoomOut)
                     .Separator()
@@ -266,7 +270,7 @@ public class MacDesktopForm : DesktopForm
             MacToolbarItems.Create("import", Commands.Import),
             MacToolbarItems.Create("save", Commands.SaveAll),
             MacToolbarItems.CreateSpace(),
-            MacToolbarItems.Create("viewer", Commands.ViewImage),
+            MacToolbarItems.Create("viewer", Commands.View),
             MacToolbarItems.CreateMenu("rotate", Commands.RotateMenu, GetRotateMenuProvider()),
             MacToolbarItems.Create("moveUp", Commands.MoveUp, tooltip: UiStrings.MoveUp),
             MacToolbarItems.Create("moveDown", Commands.MoveDown, tooltip: UiStrings.MoveDown),

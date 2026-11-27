@@ -7,6 +7,7 @@ public enum IconScenario
 {
     Menu,
     Button,
+    FloatingButton,
     LargeButton,
     Toolbar,
     SmallToolbar,
@@ -19,7 +20,8 @@ public static class IconScenarioExtensions
 {
     public static int ToSize(this IconScenario scenario) => scenario switch
     {
-        IconScenario.Menu or IconScenario.Button or IconScenario.SmallToolbar or IconScenario.Inline16 => 16,
+        IconScenario.Menu or IconScenario.Button or IconScenario.FloatingButton or IconScenario.SmallToolbar or
+            IconScenario.Inline16 => 16,
         IconScenario.LargeButton or IconScenario.Toolbar or IconScenario.Inline32 => 32,
         IconScenario.Inline48 => 48,
         _ => throw new ArgumentException()

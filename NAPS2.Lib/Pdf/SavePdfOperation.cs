@@ -37,7 +37,7 @@ internal class SavePdfOperation : OperationBase
     public bool Start(string fileName, ICollection<ProcessedImage> images, PdfSettings pdfSettings,
         OcrParams ocrParams, EmailMessage? emailMessage = null, SaveParams? saveParams = null)
     {
-        ProgressTitle = emailMessage != null ? MiscResources.EmailPdfProgress : MiscResources.SavePdfProgress;
+        ProgressTitle = emailMessage != null ? UiStrings.EmailPdfProgress : UiStrings.SavePdfProgress;
         saveParams ??= new SaveParams();
 
         var subFileName = _nameManager.Get(fileName, NameContext.FromSaveParams(saveParams));
@@ -59,13 +59,13 @@ internal class SavePdfOperation : OperationBase
 
         Status = new OperationStatus
         {
-            StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(fileNames[0])),
+            StatusText = string.Format(UiStrings.SavingFormat, Path.GetFileName(fileNames[0])),
             MaxProgress = images.Count
         };
 
         var singleFile = imagesByFile.Length == 1;
         if (singleFile && saveParams.OverwriteMode.ShouldPromptForPath(fileNames[0]) &&
-            _overwritePrompt.ConfirmOverwrite(fileNames[0]) != OverwriteResponse.Yes)
+            _overwritePrompt.ConfirmOverwrite(fileNames[0], multipleFiles: false) != OverwriteResponse.Overwrite)
         {
             reservations.Dispose();
             FailedToStart();
@@ -86,7 +86,7 @@ internal class SavePdfOperation : OperationBase
                         break;
                     }
                     var currentFileName = fileNames[i];
-                    Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
+                    Status.StatusText = string.Format(UiStrings.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
 
                     var progress = new ProgressHandler(singleFile ? OnProgress : null, CancelToken);
@@ -94,7 +94,8 @@ internal class SavePdfOperation : OperationBase
                             await WaitForFileNotInUse(currentFileName) &&
                             await _pdfExporter.Export(currentFileName, imagesForFile,
                                 new PdfExportParams(pdfSettings.Metadata.Substitute(_nameManager, context.DateTime),
-                                    pdfSettings.Encryption, pdfSettings.Compat), ocrParams, progress),
+                                    pdfSettings.Encryption, pdfSettings.Compat, pdfSettings.Compression),
+                                ocrParams, progress),
                         GetSaveErrorMessage);
                     if (!result)
                     {
@@ -118,12 +119,12 @@ internal class SavePdfOperation : OperationBase
             }
             catch (UnauthorizedAccessException ex)
             {
-                InvokeError(MiscResources.DontHavePermission, ex);
+                InvokeError(UiStrings.DontHavePermission, ex);
             }
             catch (Exception ex)
             {
-                Log.ErrorException(MiscResources.ErrorSaving, ex);
-                InvokeError(MiscResources.ErrorSaving, ex);
+                Log.ErrorException(UiStrings.ErrorSaving, ex);
+                InvokeError(UiStrings.ErrorSaving, ex);
             }
             finally
             {
@@ -137,7 +138,7 @@ internal class SavePdfOperation : OperationBase
                 {
                     return false;
                 }
-                Status.StatusText = MiscResources.UploadingEmail;
+                Status.StatusText = UiStrings.UploadingEmail;
                 Status.CurrentProgress = 0;
                 Status.MaxProgress = 1;
                 Status.ProgressType = OperationProgressType.MB;
@@ -145,7 +146,7 @@ internal class SavePdfOperation : OperationBase
 
                 result = await RunWithRetry(
                     () => _emailProviderFactory.Default.SendEmail(emailMessage, ProgressHandler),
-                    _ => MiscResources.ErrorEmailing);
+                    _ => UiStrings.ErrorEmailing);
             }
 
             return result;
@@ -158,7 +159,7 @@ internal class SavePdfOperation : OperationBase
                 {
                     Log.Event(EventType.Email, new EventParams
                     {
-                        Name = MiscResources.EmailPdf,
+                        Name = UiStrings.EmailPdf,
                         Pages = images.Count,
                         FileFormat = ".pdf"
                     });
@@ -167,7 +168,7 @@ internal class SavePdfOperation : OperationBase
                 {
                     Log.Event(EventType.SavePdf, new EventParams
                     {
-                        Name = MiscResources.SavePdf,
+                        Name = UiStrings.SavePdf,
                         Pages = images.Count,
                         FileFormat = ".pdf"
                     });

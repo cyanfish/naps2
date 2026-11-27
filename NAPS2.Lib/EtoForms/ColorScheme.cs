@@ -27,8 +27,8 @@ public class ColorScheme
 
     public bool DarkMode => (Config ?? throw new InvalidOperationException()).Get(c => c.Theme) switch
     {
-        Theme.Light => false,
-        Theme.Dark => true,
+        AppTheme.Light => false,
+        AppTheme.Dark => true,
         _ => _darkModeProvider.IsDarkModeEnabled,
     };
 

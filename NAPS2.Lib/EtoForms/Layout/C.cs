@@ -1,4 +1,3 @@
-using System.Windows.Input;
 using Eto.Drawing;
 using Eto.Forms;
 
@@ -109,7 +108,7 @@ public static class C
         }
         if (command.Image != null)
         {
-            EtoPlatform.Current.AttachDpiDependency(button,
+            EtoPlatform.Current.AttachIconDependency(button,
                 scale =>
                 {
                     int targetSize = flags.HasFlag(ButtonFlags.LargeIcon) ? 32 : 16;
@@ -119,7 +118,7 @@ public static class C
         else if (iconName != null)
         {
             var scenario = flags.HasFlag(ButtonFlags.LargeIcon) ? IconScenario.LargeButton : IconScenario.Button;
-            EtoPlatform.Current.AttachDpiDependency(button,
+            EtoPlatform.Current.AttachIconDependency(button,
                 scale => button.Image = EtoPlatform.Current.IconProvider.GetIcon(iconName, scenario, scale));
         }
         button.ImagePosition = imagePosition;
@@ -228,7 +227,7 @@ public static class C
             ToolTip = name
         };
         EtoPlatform.Current.SetAccessibleName(button, name);
-        EtoPlatform.Current.AttachDpiDependency(button, scale =>
+        EtoPlatform.Current.AttachIconDependency(button, scale =>
         {
             var icon = EtoPlatform.Current.IconProvider.GetIcon(iconName, IconScenario.Button, scale)!;
             button.Image = icon;
@@ -243,7 +242,7 @@ public static class C
         var menuItem = new ButtonMenuItem(command);
         // TODO: Can we fix this memory leak?
         command.TextChanged += (_, _) => menuItem.Text = command.MenuText;
-        EtoPlatform.Current.AttachDpiDependency(window, scale =>
+        EtoPlatform.Current.AttachIconDependency(window, scale =>
         {
             EtoPlatform.Current.SetImageSize(menuItem, (int) (16 * scale));
             menuItem.Image = command.GetIconImage(IconScenario.Menu, scale);
@@ -257,7 +256,7 @@ public static class C
         {
             Text = menuCommand.MenuText
         };
-        EtoPlatform.Current.AttachDpiDependency(window,
+        EtoPlatform.Current.AttachIconDependency(window,
             scale => menuItem.Image = ((ActionCommand) menuCommand).GetIconImage(IconScenario.Menu, scale));
         menuProvider.Handle(subItems => SetMenuItems(window, menuItem.Items, subItems));
         return menuItem;

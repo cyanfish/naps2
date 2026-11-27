@@ -30,7 +30,7 @@ public class ManualIpForm : EtoDialogBase
         _iconProvider = iconProvider;
 
         EtoPlatform.Current.SetImageSize(_statusIcon, 16);
-        EtoPlatform.Current.AttachDpiDependency(this, _ => UpdateStatusIcon());
+        EtoPlatform.Current.AttachIconDependency(this, _ => UpdateStatusIcon());
     }
 
     public ScanDevice? Device { get; set; }
@@ -80,14 +80,14 @@ public class ManualIpForm : EtoDialogBase
         _statusIcon.Image = _iconProvider.GetIcon("exclamation", IconScenario.Inline16, EtoPlatform.Current.GetScaleFactor(this));
     }
 
-    private void SetConnecting()
+    internal void SetConnecting()
     {
         _statusIconVis.IsVisible = false;
         _spinnerVis.IsVisible = true;
         _statusLabel.Text = UiStrings.Connecting;
     }
 
-    private void SetError(string message)
+    internal void SetError(string message)
     {
         _spinnerVis.IsVisible = false;
         _statusIconVis.IsVisible = true;

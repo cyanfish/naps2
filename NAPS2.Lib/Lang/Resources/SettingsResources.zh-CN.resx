@@ -190,13 +190,13 @@
     <value>深色</value>
   </data>
   <data name="DockStyle_Top" xml:space="preserve">
-    <value>Top</value>
+    <value>顶部</value>
   </data>
   <data name="DockStyle_Left" xml:space="preserve">
     <value>左对齐</value>
   </data>
   <data name="DockStyle_Bottom" xml:space="preserve">
-    <value>Bottom</value>
+    <value>底部</value>
   </data>
   <data name="DockStyle_Right" xml:space="preserve">
     <value>右对齐</value>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -74,27 +74,27 @@ msgstr "Configuració avançada del perfil"
 
 #: UiStrings.resx$AlignBottom$Message
 msgid "Align Bottom"
-msgstr ""
+msgstr "Alineació inferior"
 
 #: UiStrings.resx$AlignCenter$Message
 msgid "Align Center"
-msgstr ""
+msgstr "Alineació al centre"
 
 #: UiStrings.resx$AlignLeft$Message
 msgid "Align Left"
-msgstr ""
+msgstr "Alineació esquerra"
 
 #: UiStrings.resx$AlignMiddle$Message
 msgid "Align Middle"
-msgstr ""
+msgstr "Alineació centrada"
 
 #: UiStrings.resx$AlignRight$Message
 msgid "Align Right"
-msgstr ""
+msgstr "Alineació dreta"
 
 #: UiStrings.resx$AlignTop$Message
 msgid "Align Top"
-msgstr ""
+msgstr "Alineació superior"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -131,6 +131,10 @@ msgstr "Permet l'emplenament de camps de formulari"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Permet la impressió en alta resolució"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -319,6 +323,10 @@ msgstr "B4 (250 x 353 mm)"
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 mm)"
 
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
+
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
 msgid "Batch Scan"
@@ -359,7 +367,7 @@ msgstr "Pàgines buides"
 
 #: SettingsResources.resx$DockStyle_Bottom$Message
 msgid "Bottom"
-msgstr ""
+msgstr "Inferior"
 
 #: UiStrings.resx$BrightnessContrast$Message
 msgid "Brightness / Contrast"
@@ -371,7 +379,7 @@ msgstr "Brillantor:"
 
 #: UiStrings.resx$ButtonsLabel$Message
 msgid "Buttons:"
-msgstr ""
+msgstr "Botons:"
 
 #: SettingsResources.resx$TiffComp_Ccitt4$Message
 msgid "CCITT4"
@@ -469,7 +477,7 @@ msgstr "Connecta"
 
 #: UiStrings.resx$Connecting$Message
 msgid "Connecting..."
-msgstr ""
+msgstr "S'està connectant..."
 
 #: UiStrings.resx$ConnectionError$Message
 msgid "Connection error."
@@ -477,7 +485,7 @@ msgstr "Error de connexió."
 
 #: UiStrings.resx$ConnectionTimedOut$Message
 msgid "Connection timed out."
-msgstr ""
+msgstr "S'ha esgotat el temps de connexió."
 
 #: UiStrings.resx$ContrastLabel$Message
 msgid "Contrast:"
@@ -542,7 +550,7 @@ msgstr "Personalitzada..."
 
 #: UiStrings.resx$CustomizeToolbar$Message
 msgid "Customize Toolbar"
-msgstr ""
+msgstr "Personalitza la barra d'eines"
 
 #: SettingsResources.resx$Theme_Dark$Message
 msgid "Dark"
@@ -571,6 +579,7 @@ msgstr "Desentrellaça"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "Suprimeix"
 
@@ -618,6 +627,10 @@ msgstr "Donació"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "Fet"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "Xifra el PDF"
 msgid "Encryption"
 msgstr "Xifratge"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "Error"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "Error en iniciar l'aplicació {0}"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -761,7 +786,7 @@ msgstr "Per a obtenir imatges JPEG d'alta qualitat (80+), incrementeu també la 
 
 #: UiStrings.resx$GeneralSettings$Message
 msgid "General Settings"
-msgstr ""
+msgstr "Opcions generals"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -781,6 +806,10 @@ msgstr "Escala de grisos"
 
 #: UiStrings.resx$Help$Message
 msgid "Help"
+msgstr "Ajuda"
+
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
 msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
@@ -839,6 +868,10 @@ msgstr "S'està important {0}..."
 msgid "Importing..."
 msgstr "S'està important..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "Instal·la {0}"
@@ -893,6 +926,7 @@ msgstr "Deixeu una ressenya"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "Esquerra"
 
@@ -999,7 +1033,7 @@ msgstr "Mou amunt"
 
 #: UiStrings.resx$MoveUpDown$Message
 msgid "Move Up/Down"
-msgstr ""
+msgstr "Mou amunt/avall"
 
 #: UiStrings.resx$OcrMultiLangFormTitle$Message
 msgid "Multiple Languages"
@@ -1214,6 +1248,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "Fitxer PNG (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Mida de la pàgina:"
@@ -1234,6 +1276,10 @@ msgstr "Contrasenya"
 msgid "Paste"
 msgstr "Enganxa"
 
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
+
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
 msgstr "Mida en píxels:"
@@ -1249,7 +1295,7 @@ msgstr "Port"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr ""
+msgstr "Posició:"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
@@ -1296,7 +1342,7 @@ msgstr "Perfils"
 
 #: UiStrings.resx$ProfilesToolbar$Message
 msgid "Profiles toolbar"
-msgstr ""
+msgstr "Perfils"
 
 #: SettingsResources.resx$SaveButtonDefaultAction_PromptIfSelected$Message
 msgid "Prompt If Selected"
@@ -1392,6 +1438,7 @@ msgstr "Restaura"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "Dreta"
 
@@ -1646,17 +1693,21 @@ msgstr "Escaneig senzill"
 msgid "Skip save prompt"
 msgstr "Omet les opcions de desament"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "Divideix"
 
 #: UiStrings.resx$SplitHorizontally$Message
 msgid "Split Horizontally"
-msgstr ""
+msgstr "Divideix horitzontalment"
 
 #: UiStrings.resx$SplitVertically$Message
 msgid "Split Vertically"
-msgstr ""
+msgstr "Divideix verticalment"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1676,7 +1727,7 @@ msgstr "Assumpte:"
 
 #: UiStrings.resx$Swap$Message
 msgid "Swap"
-msgstr ""
+msgstr "Inverteix"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1685,6 +1736,10 @@ msgstr "Fitxer TIFF (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "Controlador TWAIN"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1804,19 +1859,19 @@ msgstr "Per a escanejar les dues cares d'un document de diverses pàgines amb l'
 
 #: UiStrings.resx$ToggleOrientation$Message
 msgid "Toggle Orientation"
-msgstr ""
+msgstr "Canvia l'orientació"
 
 #: UiStrings.resx$ToggleView$Message
 msgid "Toggle View"
-msgstr ""
+msgstr "Canvia la vista"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
-msgstr ""
+msgstr "Barra d'eines"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr ""
+msgstr "Opcions de la Barra d'eines"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1824,7 +1879,7 @@ msgstr "Eines"
 
 #: SettingsResources.resx$DockStyle_Top$Message
 msgid "Top"
-msgstr ""
+msgstr "Superior"
 
 #: UiStrings.resx$TwainImplLabel$Message
 msgid "Twain Implementation:"
@@ -1857,6 +1912,10 @@ msgstr "Escàner desconegut"
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "Canvis no desats"
+
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
@@ -1921,7 +1980,7 @@ msgstr "S'està esperant l'escàner {0}..."
 
 #: UiStrings.resx$WaitingToConnect$Message
 msgid "Waiting to connect."
-msgstr ""
+msgstr "En espera d'una connexió."
 
 #: UiStrings.resx$WhiteThreshold$Message
 msgid "White Threshold"
@@ -1930,6 +1989,10 @@ msgstr "Llindar del blanc"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Versió Wia:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

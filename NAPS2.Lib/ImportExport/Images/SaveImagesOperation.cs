@@ -18,7 +18,7 @@ internal class SaveImagesOperation : OperationBase
         _nameManager = nameManager;
         _scanningContext = scanningContext;
 
-        ProgressTitle = MiscResources.SaveImagesProgress;
+        ProgressTitle = UiStrings.SaveImagesProgress;
         AllowCancel = true;
         AllowBackground = true;
     }
@@ -74,11 +74,11 @@ internal class SaveImagesOperation : OperationBase
                 {
                     var tiffFileName = fileNames[0];
                     if (saveParams.OverwriteMode.ShouldPromptForPath(tiffFileName) &&
-                        _overwritePrompt.ConfirmOverwrite(tiffFileName) != OverwriteResponse.Yes)
+                        _overwritePrompt.ConfirmOverwrite(tiffFileName, multipleFiles: false) != OverwriteResponse.Overwrite)
                     {
                         return false;
                     }
-                    Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(tiffFileName));
+                    Status.StatusText = string.Format(UiStrings.SavingFormat, Path.GetFileName(tiffFileName));
                     FirstFileSaved = tiffFileName;
                     return await RunWithRetry(async () =>
                     {
@@ -106,8 +106,9 @@ internal class SaveImagesOperation : OperationBase
                     var currentFileName = fileNames[i];
                     if (saveParams.OverwriteMode.ShouldPromptForPath(currentFileName))
                     {
-                        var overwriteResponse = _overwritePrompt.ConfirmOverwrite(currentFileName);
-                        if (overwriteResponse == OverwriteResponse.No)
+                        var overwriteResponse =
+                            _overwritePrompt.ConfirmOverwrite(currentFileName, fileNames.Length > 1);
+                        if (overwriteResponse == OverwriteResponse.Skip)
                         {
                             continue;
                         }
@@ -116,7 +117,7 @@ internal class SaveImagesOperation : OperationBase
                             return false;
                         }
                     }
-                    Status.StatusText = string.Format(MiscResources.SavingFormat, Path.GetFileName(currentFileName));
+                    Status.StatusText = string.Format(UiStrings.SavingFormat, Path.GetFileName(currentFileName));
                     InvokeStatusChanged();
                     if (!await SaveImageWithRetry(image, currentFileName, format, imageSettings))
                     {
@@ -134,12 +135,12 @@ internal class SaveImagesOperation : OperationBase
             }
             catch (UnauthorizedAccessException ex)
             {
-                InvokeError(MiscResources.DontHavePermission, ex);
+                InvokeError(UiStrings.DontHavePermission, ex);
             }
             catch (Exception ex)
             {
-                Log.ErrorException(MiscResources.ErrorSaving, ex);
-                InvokeError(MiscResources.ErrorSaving, ex);
+                Log.ErrorException(UiStrings.ErrorSaving, ex);
+                InvokeError(UiStrings.ErrorSaving, ex);
             }
             finally
             {
@@ -153,7 +154,7 @@ internal class SaveImagesOperation : OperationBase
             {
                 Log.Event(EventType.SaveImages, new EventParams
                 {
-                    Name = MiscResources.SaveImages,
+                    Name = UiStrings.SaveImages,
                     Pages = images.Count,
                     FileFormat = Path.GetExtension(fileName)
                 });
@@ -223,18 +224,46 @@ internal class SaveImagesOperation : OperationBase
     private void DoSaveImage(ProcessedImage image, string path, ImageFileFormat format, ImageSettings imageSettings)
     {
         FileSystemHelper.EnsureParentDirExists(path);
+        var quality = imageSettings.JpegQuality.Clamp(0, 100);
+        if (format is ImageFileFormat.Jpeg or ImageFileFormat.JpegXl &&
+            GetDirectJpegPath(image, quality) is { } jpegPath)
+        {
+            if (format == ImageFileFormat.Jpeg)
+            {
+                File.Copy(jpegPath, path, true);
+                return;
+            }
+            if (ImageContext.BundledEncoders.Get(ImageFileFormat.JpegXl) is JpegXlCodec jpegXlCodec &&
+                jpegXlCodec.TryTranscodeJpeg(jpegPath, path))
+            {
+                return;
+            }
+        }
         using var renderedImage = image.Render();
         if (format == ImageFileFormat.Tiff)
         {
-            _imageContext.TiffWriter.SaveTiff(new[] { renderedImage }, path,
+            _imageContext.TiffWriter.SaveTiff([renderedImage], path,
                 imageSettings.TiffCompression.ToTiffCompressionType(), CancelToken);
+            return;
         }
-        else
+        renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
+    }
+
+    /// <summary>
+    /// Gets the path of the stored JPEG file if it can be used directly instead of re-encoding the image.
+    /// </summary>
+    private static string? GetDirectJpegPath(ProcessedImage image, int quality)
+    {
+        var storedQuality = image.Metadata.Quality == -1 ? ScanOptions.DEFAULT_QUALITY : image.Metadata.Quality;
+        // Any quality increase is ignored since we can't actually increase quality. It would just be a lossy re-encode.
+        // But a quality reduction implies the user is trying to shrink the file size, in which case we do re-encode.
+        bool noQualityReduction = quality >= storedQuality;
+        if (image.TransformState.IsEmpty && noQualityReduction &&
+            image.Storage is ImageFileStorage fileStorage &&
+            ImageContext.GetFileFormatFromExtension(fileStorage.FullPath) == ImageFileFormat.Jpeg)
         {
-            // Quality will be ignored when not needed
-            // TODO: Scale quality differently for jpeg2000?
-            var quality = imageSettings.JpegQuality.Clamp(0, 100);
-            renderedImage.Save(path, format, new ImageSaveOptions { Quality = quality });
+            return fileStorage.FullPath;
         }
+        return null;
     }
 }

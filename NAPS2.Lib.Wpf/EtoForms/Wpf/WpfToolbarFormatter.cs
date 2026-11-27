@@ -30,6 +30,7 @@ public class WpfToolbarFormatter
     private readonly List<(Button button, FrameworkElement content, bool isSplit)> _largeButtons = [];
     private readonly List<Button> _arrowButtons = [];
     private readonly List<Button> _stackedButtons = [];
+    private readonly List<StackPanel> _stackedPanels = [];
     private int _density = -1;
     private bool _vertical;
 
@@ -96,6 +97,18 @@ public class WpfToolbarFormatter
         return button;
     }
 
+    public FrameworkElement CreateStackedPanel(Button button1, Button button2)
+    {
+        var panel = new StackPanel
+        {
+            VerticalAlignment = VerticalAlignment.Top,
+            Children = { button1, button2 }
+        };
+        Grid.SetIsSharedSizeScope(panel, true);
+        _stackedPanels.Add(panel);
+        return panel;
+    }
+
     public Button CreateStackedButton(FrameworkElement content)
     {
         var contentGrid = new Grid
@@ -121,6 +134,7 @@ public class WpfToolbarFormatter
         _largeButtons.Clear();
         _arrowButtons.Clear();
         _stackedButtons.Clear();
+        _stackedPanels.Clear();
         _density = -1;
     }
 
@@ -172,6 +186,10 @@ public class WpfToolbarFormatter
             button.Padding = _vertical
                 ? new Thickness(FIXED_PADDING * 2, FIXED_PADDING, FIXED_PADDING * 2, FIXED_PADDING)
                 : new Thickness(d.StackedPadding, FIXED_PADDING, d.StackedPadding, FIXED_PADDING);
+        }
+        foreach (var panel in _stackedPanels)
+        {
+            panel.Margin = _vertical ? new Thickness() : new Thickness(0, FIXED_PADDING, 0, 0);
         }
     }
 

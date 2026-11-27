@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:53\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Slovak\n"
 "Language: sk\n"
@@ -74,27 +74,27 @@ msgstr "Rozšírené nastavenia profilu"
 
 #: UiStrings.resx$AlignBottom$Message
 msgid "Align Bottom"
-msgstr ""
+msgstr "Zarovnať dole"
 
 #: UiStrings.resx$AlignCenter$Message
 msgid "Align Center"
-msgstr ""
+msgstr "Zarovnať v strede"
 
 #: UiStrings.resx$AlignLeft$Message
 msgid "Align Left"
-msgstr ""
+msgstr "Zarovnať vľavo"
 
 #: UiStrings.resx$AlignMiddle$Message
 msgid "Align Middle"
-msgstr ""
+msgstr "Zarovnať v strede"
 
 #: UiStrings.resx$AlignRight$Message
 msgid "Align Right"
-msgstr ""
+msgstr "Zarovnať v pravo"
 
 #: UiStrings.resx$AlignTop$Message
 msgid "Align Top"
-msgstr ""
+msgstr "Zarovnať hore"
 
 #: MiscResources.resx$AllCount$Message
 msgid "All ({0})"
@@ -131,6 +131,10 @@ msgstr "Povoliť vyplňovanie formulárov"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Povoliť tlač v plnej kvalite"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -318,6 +322,10 @@ msgstr "B4 (250x353 mm)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 mm)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -571,6 +579,7 @@ msgstr "Rozklad"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "Odstrániť"
 
@@ -618,6 +627,10 @@ msgstr "Darovať"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "Hotovo"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "Zašifrovať PDF"
 msgid "Encryption"
 msgstr "Šifrovanie"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -708,6 +729,10 @@ msgstr "Chyba"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
+msgstr ""
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
 msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
@@ -761,7 +786,7 @@ msgstr "Pre najlepšie výsledky vysokej kvality obrázkov JPEG (80+), zvýšte 
 
 #: UiStrings.resx$GeneralSettings$Message
 msgid "General Settings"
-msgstr ""
+msgstr "Všeobecné nastavenia"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -781,6 +806,10 @@ msgstr "Odtiene sivej"
 
 #: UiStrings.resx$Help$Message
 msgid "Help"
+msgstr "Pomoc"
+
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
 msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
@@ -839,6 +868,10 @@ msgstr "Importuje sa {0}..."
 msgid "Importing..."
 msgstr "Importuje sa..."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "Inštalovať {0}"
@@ -893,6 +926,7 @@ msgstr "Zanechať recenziu"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "Vľavo"
 
@@ -1203,6 +1237,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "Súbor PNG (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Veľkosť stránky:"
@@ -1222,6 +1264,10 @@ msgstr "Heslo"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "Prilepiť"
+
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
@@ -1381,6 +1427,7 @@ msgstr "Prevrátiť"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "Vpravo"
 
@@ -1634,17 +1681,21 @@ msgstr "Jedno skenovanie"
 msgid "Skip save prompt"
 msgstr "Preskočiť výzvu na uloženie"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "Rozdeliť"
 
 #: UiStrings.resx$SplitHorizontally$Message
 msgid "Split Horizontally"
-msgstr ""
+msgstr "Rozdeliť horizontálne"
 
 #: UiStrings.resx$SplitVertically$Message
 msgid "Split Vertically"
-msgstr ""
+msgstr "Rozdeliť vertikálne"
 
 #: UiStrings.resx$Start$Message
 msgid "Start"
@@ -1664,7 +1715,7 @@ msgstr "Predmet:"
 
 #: UiStrings.resx$Swap$Message
 msgid "Swap"
-msgstr ""
+msgstr "Vymeniť"
 
 #: MiscResources.resx$FileTypeTiff$Message
 msgid "TIFF File (*.tiff, *.tif)"
@@ -1673,6 +1724,10 @@ msgstr "Súbor TIFF (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "Ovládač TWAIN"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1785,11 +1840,11 @@ msgstr ""
 
 #: UiStrings.resx$ToggleOrientation$Message
 msgid "Toggle Orientation"
-msgstr ""
+msgstr "Zmeniť orientáciu"
 
 #: UiStrings.resx$ToggleView$Message
 msgid "Toggle View"
-msgstr ""
+msgstr "Zmeniť zobrazenie"
 
 #: UiStrings.resx$Toolbar$Message
 msgid "Toolbar"
@@ -1838,6 +1893,10 @@ msgstr ""
 #: MiscResources.resx$UnsavedChanges$Message
 msgid "Unsaved Changes"
 msgstr "Neuložené zmeny"
+
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
 
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
@@ -1911,6 +1970,10 @@ msgstr "Prah bielej"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Verzia WIA:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

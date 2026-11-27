@@ -1,9 +1,11 @@
-﻿
+﻿using NAPS2.Serialization;
+
 
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace NAPS2.Images.Transforms;
 
+[GeneratePropertyAccessors]
 public record RotationTransform : Transform
 {
     public const double TOLERANCE = 0.001;

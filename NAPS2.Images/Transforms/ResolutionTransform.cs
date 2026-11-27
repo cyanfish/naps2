@@ -1,3 +1,5 @@
+using NAPS2.Serialization;
+
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace NAPS2.Images.Transforms;
@@ -5,6 +7,7 @@ namespace NAPS2.Images.Transforms;
 /// <summary>
 /// Sets the image's resolution (DPI) without changing its pixels.
 /// </summary>
+[GeneratePropertyAccessors]
 public record ResolutionTransform : Transform
 {
     public ResolutionTransform()

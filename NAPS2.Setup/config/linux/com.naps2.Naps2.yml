@@ -1,6 +1,6 @@
 app-id: com.naps2.Naps2
 runtime: org.freedesktop.Platform
-runtime-version: '25.08'
+runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.dotnet10
@@ -17,6 +17,33 @@ cleanup:
   - /share/doc
   - /share/man
 modules:
+  # Custom pixbuf build for https://github.com/cyanfish/naps2/issues/843. This won't be necessary after upgrading
+  # to runtime 27.08 as newer pixbuf fixes the issue. But our patched build avoids using glycin specifically for
+  # png/jpeg/tiff which fixes the problem without requiring any additional installation dependencies.
+  - name: gdk-pixbuf
+    buildsystem: meson
+    config-opts:
+      - -Dglycin=enabled
+      - -Dpng=enabled
+      - -Djpeg=enabled
+      - -Dtiff=enabled
+      - -Dgif=disabled
+      - -Dothers=disabled
+      - -Dbuiltin_loaders=glycin,png,jpeg,tiff
+      - -Dintrospection=disabled
+      - -Dthumbnailer=disabled
+      - -Dman=false
+      - -Dtests=false
+      - -Dinstalled_tests=false
+    cleanup:
+      - /bin/gdk-pixbuf-*
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/gdk-pixbuf.git
+        tag: 2.44.7
+        commit: 3377ae234c5e2baebfaa08bca0a71541d7e9fa79
+      - type: patch
+        path: gdk-pixbuf-native-loaders.patch
   # TODO: Used shared module for libusb
   - name: libusb
     buildsystem: autotools

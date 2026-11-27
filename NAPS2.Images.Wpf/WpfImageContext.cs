@@ -14,7 +14,14 @@ public class WpfImageContext : ImageContext
         _imageTransformer = new WpfImageTransformer(this);
     }
 
-    protected override bool SupportsTiff => true;
+    protected override bool SupportsDecodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif
+            or ImageFileFormat.Tiff
+            || format == ImageFileFormat.Heic && WicCodecSupport.Heic
+            || format == ImageFileFormat.Avif && WicCodecSupport.Avif;
+
+    protected override bool SupportsEncodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff;
 
     public override ITiffWriter TiffWriter => new WpfTiffWriter();
 
@@ -26,8 +33,9 @@ public class WpfImageContext : ImageContext
 
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-        return new WpfImage(decoder.Frames[0]);
+        var loader = new WpfFrameLoader(stream,
+            (options, cacheOption) => BitmapDecoder.Create(stream, options, cacheOption));
+        return loader.LoadFrame(0);
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
@@ -35,14 +43,16 @@ public class WpfImageContext : ImageContext
     {
         if (format == ImageFileFormat.Tiff)
         {
-            var decoder = new TiffBitmapDecoder(stream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnLoad);
-            progress.Report(0, decoder.Frames.Count);
-            int i = 0;
-            foreach (var frame in decoder.Frames)
+            var loader = new WpfFrameLoader(stream,
+                (options, cacheOption) => new TiffBitmapDecoder(stream, options | BitmapCreateOptions.DelayCreation,
+                    cacheOption));
+            int count = loader.FrameCount;
+            progress.Report(0, count);
+            for (int i = 0; i < count; i++)
             {
                 if (progress.IsCancellationRequested) return;
-                produceImage(new WpfImage(frame));
-                progress.Report(++i, decoder.Frames.Count);
+                produceImage(loader.LoadFrame(i));
+                progress.Report(i + 1, count);
             }
             return;
         }

@@ -1,7 +1,7 @@
 using System.Threading;
-using Eto.Drawing;
 using NAPS2.EtoForms.Layout;
 using NAPS2.ImportExport.Email.Oauth;
+using NAPS2.TestScenarios;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -37,6 +37,7 @@ public class AuthorizeForm : EtoDialogBase
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
+        if (TestScenarioFlags.SkipFormWork) return;
 
         if (OauthProvider == null) throw new InvalidOperationException("OauthProvider must be specified");
 
@@ -59,7 +60,7 @@ public class AuthorizeForm : EtoDialogBase
             {
                 if (!_cancelTokenSource.IsCancellationRequested)
                 {
-                    _errorOutput.DisplayError(MiscResources.AuthError, ex);
+                    _errorOutput.DisplayError(UiStrings.AuthError, ex);
                     Log.ErrorException("Error acquiring Oauth token", ex);
                 }
                 Invoker.Current.Invoke(Close);

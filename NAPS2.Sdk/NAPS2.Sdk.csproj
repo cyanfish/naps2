@@ -84,6 +84,7 @@
     <ProjectReference Include="..\NAPS2.Images.Mac\NAPS2.Images.Mac.csproj" Condition="'$(TargetFramework)' == 'net10.0-macos'" />
     <ProjectReference Include="..\NAPS2.Images\NAPS2.Images.csproj" />
     <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
+    <ProjectReference Include="..\NAPS2.Generators\NAPS2.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

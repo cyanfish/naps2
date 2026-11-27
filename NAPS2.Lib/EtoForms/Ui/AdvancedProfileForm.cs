@@ -4,6 +4,7 @@ using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Lang;
 using NAPS2.Scan;
+using NAPS2.TestScenarios;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -108,8 +109,12 @@ public class AdvancedProfileForm : EtoDialogBase
                     PlatformCompat.System.IsTwainDriverSupported ? C.Label(UiStrings.TwainImplLabel) : C.None(),
                     PlatformCompat.System.IsTwainDriverSupported ? _twainImpl : C.None(),
                     PlatformCompat.System.IsTwainDriverSupported ? _twainProgress : C.None(),
-                    PlatformCompat.System.IsAppleDriverSupported ? C.Label(UiStrings.AppleImplLabel) : C.None(),
-                    PlatformCompat.System.IsAppleDriverSupported ? _appleImpl : C.None()
+                    PlatformCompat.System.IsAppleDriverSupported || TestScenarioFlags.ShowAllDrivers
+                        ? C.Label(UiStrings.AppleImplLabel)
+                        : C.None(),
+                    PlatformCompat.System.IsAppleDriverSupported || TestScenarioFlags.ShowAllDrivers
+                        ? _appleImpl
+                        : C.None()
                 )
             ),
             L.Row(

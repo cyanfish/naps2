@@ -22,8 +22,19 @@ internal class FluentIconProvider : IIconProvider
         { "pencil", FluentIcons.Edit },
         { "add", FluentIcons.Add },
         { "control_play_blue", FluentIcons.Play },
-        { "cross", FluentIcons.Delete }
+        { "cross", FluentIcons.Delete },
+        { "cancel", FluentIcons.Cancel },
+        { "arrow_left", FluentIcons.ChevronLeft },
+        { "arrow_right", FluentIcons.ChevronRight },
+        { "new_window", FluentIcons.OpenInNewWindow },
+        { "application_side_list_right", FluentIcons.DockRight },
+        { "arrow_out", FluentIcons.ArrowExpand },
+        { "zoom_in", FluentIcons.ZoomIn },
+        { "zoom_out", FluentIcons.ZoomOut }
     };
+
+    private static readonly Typeface Typeface = new(
+        FluentIcons.FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
 
     private readonly DefaultIconProvider _defaultIconProvider;
 
@@ -33,9 +44,15 @@ internal class FluentIconProvider : IIconProvider
     }
 
     public Bitmap? GetIcon(string name, IconScenario scenario, float scale = 1f) =>
-        scenario == IconScenario.Button && GlyphMap.TryGetValue(name, out var glyph)
+        (scenario == IconScenario.Button || name == "new_window") && GlyphMap.TryGetValue(name, out var glyph) &&
+        HasGlyph(glyph)
             ? RenderGlyph(glyph, scenario.ToSize(), scale)
             : _defaultIconProvider.GetIcon(name, scenario, scale);
+
+    // Some glyphs are only in Segoe Fluent Icons and not in the Segoe MDL2 Assets fallback
+    private static bool HasGlyph(string glyph) =>
+        Typeface.TryGetGlyphTypeface(out var glyphTypeface) &&
+        glyphTypeface.CharacterToGlyphMap.ContainsKey(glyph[0]);
 
     public Icon ToFormIcon(Bitmap bitmap) => new(new IconHandler(BitmapFrame.Create(bitmap.ToWpf())));
 
@@ -45,7 +62,7 @@ internal class FluentIconProvider : IIconProvider
         var brush = Application.Current.TryFindResource("TextFillColorPrimaryBrush") as Brush ?? Brushes.Black;
         int pixelSize = (int) Math.Round(size * scale);
         var text = new FormattedText(glyph, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-            new Typeface(FluentIcons.FontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+            Typeface,
             pixelSize, brush, 1);
         // Center the glyph's actual shape (the font's line metrics include extra space)
         var geometry = text.BuildGeometry(new Point(0, 0));

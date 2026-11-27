@@ -5,6 +5,7 @@ using NLog.Extensions.Logging;
 using NLog.Filters;
 using NLog.LayoutRenderers;
 using NLog.Targets;
+using NAPS2.Logging;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace NAPS2;
@@ -12,6 +13,12 @@ namespace NAPS2;
 public static class NLogConfig
 {
     public static ILogger CreateLogger(Func<bool> enableDebugLogging)
+    {
+        return new LazyLogger(() => CreateNLogLogger(enableDebugLogging),
+            level => level >= Microsoft.Extensions.Logging.LogLevel.Information || enableDebugLogging());
+    }
+
+    private static ILogger CreateNLogLogger(Func<bool> enableDebugLogging)
     {
         LogManager.Setup().SetupExtensions(ext =>
         {

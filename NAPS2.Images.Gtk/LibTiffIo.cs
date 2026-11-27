@@ -80,15 +80,14 @@ internal class LibTiffIo : ITiffWriter
         }
     }
 
-    private static void WriteTiffMetadata(IntPtr tiff, ImagePixelFormat pixelFormat,
+    private static unsafe void WriteTiffMetadata(IntPtr tiff, ImagePixelFormat pixelFormat,
         TiffCompressionType compression, IMemoryImage image)
     {
-        // TODO: A lot of these types are wrong (e.g. int32 instead of int16)
         // http://www.libtiff.org/man/TIFFSetField.3t.html
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.ImageWidth, image.Width);
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.ImageHeight, image.Height);
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.PlanarConfig, 1);
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.Compression, (int) (compression switch
+        LibTiff.TIFFSetField(tiff, TiffTag.ImageWidth, image.Width);
+        LibTiff.TIFFSetField(tiff, TiffTag.ImageHeight, image.Height);
+        LibTiff.TIFFSetField(tiff, TiffTag.PlanarConfig, 1);
+        LibTiff.TIFFSetField(tiff, TiffTag.Compression, (int) (compression switch
         {
             TiffCompressionType.Ccitt4 => TiffCompression.G4,
             TiffCompressionType.Lzw => TiffCompression.Lzw,
@@ -97,29 +96,29 @@ internal class LibTiffIo : ITiffWriter
                 ? TiffCompression.G4
                 : TiffCompression.Lzw
         }));
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.Orientation, 1);
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.BitsPerSample, pixelFormat == ImagePixelFormat.BW1 ? 1 : 8);
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.SamplesPerPixel, pixelFormat switch
+        LibTiff.TIFFSetField(tiff, TiffTag.Orientation, 1);
+        LibTiff.TIFFSetField(tiff, TiffTag.BitsPerSample, pixelFormat == ImagePixelFormat.BW1 ? 1 : 8);
+        LibTiff.TIFFSetField(tiff, TiffTag.SamplesPerPixel, pixelFormat switch
         {
             ImagePixelFormat.RGB24 => 3,
             ImagePixelFormat.ARGB32 => 4,
             _ => 1
         });
-        LibTiff.TIFFSetFieldInt(tiff, TiffTag.Photometric, (int) (pixelFormat switch
+        LibTiff.TIFFSetField(tiff, TiffTag.Photometric, (int) (pixelFormat switch
         {
             ImagePixelFormat.RGB24 or ImagePixelFormat.ARGB32 => TiffPhotometric.Rgb,
             _ => TiffPhotometric.MinIsBlack
         }));
         if (pixelFormat == ImagePixelFormat.ARGB32)
         {
-            LibTiff.TIFFSetFieldShortArray(tiff, TiffTag.ExtraSamples, 1, new short[] { 2 });
+            short extraSample = 2;
+            LibTiff.TIFFSetField(tiff, TiffTag.ExtraSamples, 1, (IntPtr) (&extraSample));
         }
         if (image.HorizontalResolution != 0 && image.VerticalResolution != 0)
         {
-            LibTiff.TIFFSetFieldInt(tiff, TiffTag.ResolutionUnit, 2);
-            // TODO: Why do we need to write as a double? It's supposed to be a float.
-            LibTiff.TIFFSetFieldDouble(tiff, TiffTag.XResolution, image.HorizontalResolution);
-            LibTiff.TIFFSetFieldDouble(tiff, TiffTag.YResolution, image.VerticalResolution);
+            LibTiff.TIFFSetField(tiff, TiffTag.ResolutionUnit, 2);
+            LibTiff.TIFFSetField(tiff, TiffTag.XResolution, image.HorizontalResolution);
+            LibTiff.TIFFSetField(tiff, TiffTag.YResolution, image.VerticalResolution);
         }
     }
 
@@ -143,11 +142,11 @@ internal class LibTiffIo : ITiffWriter
             do
             {
                 if (progress.IsCancellationRequested) break;
-                LibTiff.TIFFGetFieldInt(tiff, TiffTag.ImageWidth, out int w);
-                LibTiff.TIFFGetFieldInt(tiff, TiffTag.ImageHeight, out int h);
+                LibTiff.TIFFGetField(tiff, TiffTag.ImageWidth, out int w);
+                LibTiff.TIFFGetField(tiff, TiffTag.ImageHeight, out int h);
                 // TODO: Check return values
-                LibTiff.TIFFGetFieldFloat(tiff, TiffTag.XResolution, out float xres);
-                LibTiff.TIFFGetFieldFloat(tiff, TiffTag.YResolution, out float yres);
+                LibTiff.TIFFGetField(tiff, TiffTag.XResolution, out float xres);
+                LibTiff.TIFFGetField(tiff, TiffTag.YResolution, out float yres);
                 var img = _imageContext.Create(w, h, ImagePixelFormat.ARGB32);
                 img.SetResolution(xres, yres);
                 img.OriginalFileFormat = ImageFileFormat.Tiff;
@@ -156,6 +155,10 @@ internal class LibTiffIo : ITiffWriter
                 imageLock.Dispose();
                 // LibTiff always produces pre-multiplied alpha, which we don't want
                 new UnmultiplyAlphaOp().Perform(img);
+                if (LibTiff.GetIccProfile(tiff) is { } iccProfile)
+                {
+                    ImageContext.BundledColorConverter?.TryConvertToSrgb(img, iccProfile);
+                }
                 progress.Report(++i, count);
                 produceImage(img);
             } while (LibTiff.TIFFReadDirectory(tiff) == 1);

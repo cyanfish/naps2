@@ -1,5 +1,5 @@
 using System.Text;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace NAPS2.Lib.Tests.Automation;
 

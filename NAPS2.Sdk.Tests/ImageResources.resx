@@ -313,6 +313,9 @@
   <data name="dog_exif" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_exif.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="dog_progressive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_progressive.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dog_icc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\dog_icc.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -339,5 +342,59 @@
   </data>
   <data name="autocrop_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\autocrop_table.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_alpha_webp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_alpha.webp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_avif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog.avif;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_bw_jxl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_bw.jxl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gray_jxl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_gray.jxl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_heic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog.heic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_jxl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog.jxl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_webp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog.webp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_gif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog.gif;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_anim_gif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_anim.gif;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_avif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.avif;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_heic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.heic;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_jp2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.jp2;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_jxl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.jxl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_tiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.tiff;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_webp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc.webp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_icc_alpha_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_icc_alpha.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dog_cmyk_icc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\dog_cmyk_icc.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -1,5 +1,5 @@
-﻿using Autofac;
-using NLog;
+﻿using System.Runtime.ExceptionServices;
+using Autofac;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace NAPS2.Modules;
@@ -11,9 +11,19 @@ public class StaticInitModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterBuildCallback(ctx => { Log.Logger = ctx.Resolve<ILogger>(); });
-        Trace.Listeners.Add(new NLogTraceListener());
+        builder.RegisterBuildCallback(ctx =>
+        {
+            Log.Logger = ctx.Resolve<ILogger>();
+            Trace.Listeners.Add(new LoggerTraceListener(Log.Logger));
+        });
         TaskScheduler.UnobservedTaskException += UnhandledTaskException;
+        ExceptionHandling.SetUnhandledExceptionHandler(UnhandledException);
+    }
+
+    private static bool UnhandledException(Exception ex)
+    {
+        Log.ErrorException("An unhandled error occurred on a background thread.", ex);
+        return true;
     }
 
     private static void UnhandledTaskException(object? sender, UnobservedTaskExceptionEventArgs e)

@@ -47,11 +47,6 @@ public static class AppTestHelper
     public static string GetExePath(AppTestExe exe)
     {
         var dir = GetBaseDirectory(exe);
-        if (!File.Exists(Path.Combine(dir, exe.ExeSubPath))
-            && dir != exe.DefaultRootPath && exe.TestRootSubPath != null)
-        {
-            dir = Path.Combine(dir, exe.TestRootSubPath);
-        }
         var file = Path.Combine(dir, exe.ExeSubPath);
         if (!File.Exists(file))
         {

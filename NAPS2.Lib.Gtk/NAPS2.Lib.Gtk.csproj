@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net10.0</TargetFrameworks>
+        <TargetFrameworks>net11.0</TargetFrameworks>
+        <!-- The flatpak only has the net10 SDK, which can't restore net11.0 -->
+        <TargetFrameworks Condition="$([MSBuild]::VersionLessThan('$(NETCoreSdkVersion)', '11.0'))">net10.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
         <RootNamespace>NAPS2</RootNamespace>
@@ -10,14 +12,17 @@
         <Product>NAPS2 - Not Another PDF Scanner</Product>
     </PropertyGroup>
 
-    <Import Project="..\NAPS2.Setup\targets\CommonTargets.targets" />
-    <Import Project="..\NAPS2.Setup\targets\LibUsers.targets" />
+    <Import Project="..\NAPS2.Setup\targets\LibTargets.targets" />
 
     <ItemGroup>
         <ProjectReference Include="..\NAPS2.Images.Gtk\NAPS2.Images.Gtk.csproj" />
         <ProjectReference Include="..\NAPS2.Lib\NAPS2.Lib.csproj" />
-        <PackageReference Include="Eto.Forms" Version="2.11.0" />
-        <PackageReference Include="Eto.Platform.Gtk" Version="2.11.0" />
+        <PackageReference Include="Eto.Forms" Version="2.13.0" />
+        <PackageReference Include="Eto.Platform.Gtk" Version="2.13.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="../NAPS2.Lib/Icons/lucide/*.svg" LogicalName="NAPS2.Icons.%(Filename).svg" />
     </ItemGroup>
 
     <ItemGroup>

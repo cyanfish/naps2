@@ -11,6 +11,9 @@ public class PackageOptions : OptionsBase
     [Option('p', "platform", Required = false, HelpText = "win|win32|win64|mac|macintel|macarm|linux")]
     public string? Platform { get; set; }
 
+    [Option("app", Required = false, HelpText = "On Windows, the app to package: winforms (default) or wpf")]
+    public string? App { get; set; }
+
     [Option("name", Required = false, HelpText = "Name to be appended to the package filename")]
     public string? Name { get; set; }
 

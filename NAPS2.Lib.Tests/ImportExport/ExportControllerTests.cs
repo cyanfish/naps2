@@ -79,7 +79,7 @@ public class ExportControllerTests : ContextualTests
 
         Assert.True(await _controller.SavePdf(CreateUiImages(ImageResources.dog), _notify));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
     }
 
@@ -143,7 +143,7 @@ public class ExportControllerTests : ContextualTests
 
         Assert.True(await _controller.SaveImages(CreateUiImages(ImageResources.dog), _notify));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
     }
 

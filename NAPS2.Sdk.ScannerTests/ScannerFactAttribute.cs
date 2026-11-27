@@ -1,10 +1,13 @@
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace NAPS2.Sdk.ScannerTests;
 
 public sealed class ScannerFactAttribute : FactAttribute
 {
-    public ScannerFactAttribute()
+    public ScannerFactAttribute(
+        [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = -1)
+        : base(sourceFilePath, sourceLineNumber)
     {
         if (!Debugger.IsAttached)
         {

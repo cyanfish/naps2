@@ -1,5 +1,4 @@
 ﻿using Crowdin.Api.SourceFiles;
-using NAPS2.Tools.Project;
 using File = System.IO.File;
 
 namespace NAPS2.Tools.Localization;

@@ -5,11 +5,12 @@ namespace NAPS2.Images;
 public class ImageRenderState : IEquatable<ImageRenderState>
 {
     public ImageRenderState(ProcessedImage.WeakReference image, TransformState? thumbnailState, IMemoryImage? thumbnail,
-        UiImage source)
+        bool isThumbnailStale, UiImage source)
     {
         Image = image;
         ThumbnailState = thumbnailState;
         Thumbnail = thumbnail;
+        IsThumbnailStale = isThumbnailStale;
         Source = source;
     }
 
@@ -18,6 +19,8 @@ public class ImageRenderState : IEquatable<ImageRenderState>
     public TransformState? ThumbnailState { get; init; }
 
     public IMemoryImage? Thumbnail { get; init; }
+
+    public bool IsThumbnailStale { get; init; }
 
     public UiImage Source { get; init; }
 
@@ -36,7 +39,7 @@ public class ImageRenderState : IEquatable<ImageRenderState>
         if (ReferenceEquals(this, other)) return true;
         // TODO: Should we also compare metadata? 
         return Equals(Image, other.Image) && Equals(ThumbnailState, other.ThumbnailState) &&
-               Equals(Thumbnail, other.Thumbnail);
+               Equals(Thumbnail, other.Thumbnail) && IsThumbnailStale == other.IsThumbnailStale;
     }
 
     public override int GetHashCode()

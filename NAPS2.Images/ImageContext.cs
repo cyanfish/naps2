@@ -16,9 +16,17 @@ public abstract class ImageContext
             ".jpg" or ".jpeg" => ImageFileFormat.Jpeg,
             ".tif" or ".tiff" => ImageFileFormat.Tiff,
             ".jp2" or ".jpx" => ImageFileFormat.Jpeg2000,
+            ".webp" => ImageFileFormat.WebP,
+            ".jxl" => ImageFileFormat.JpegXl,
+            ".heic" or ".heif" => ImageFileFormat.Heic,
+            ".avif" => ImageFileFormat.Avif,
+            ".gif" => ImageFileFormat.Gif,
             _ => ImageFileFormat.Unknown
         };
     }
+
+    // Number of bytes from the start of a file needed to detect all formats.
+    private const int FIRST_BYTES_LENGTH = 32;
 
     private static ImageFileFormat GetFileFormatFromFirstBytes(Stream stream)
     {
@@ -26,12 +34,21 @@ public abstract class ImageContext
         {
             return ImageFileFormat.Unknown;
         }
-        var firstBytes = new byte[8];
-        stream.Seek(0, SeekOrigin.Begin);
-        stream.ReadExactly(firstBytes, 0, 8);
-        stream.Seek(0, SeekOrigin.Begin);
+        return GetFileFormatFromFirstBytes(ReadFirstBytes(stream));
+    }
 
-        return GetFileFormatFromFirstBytes(firstBytes);
+    internal static byte[] ReadFirstBytes(Stream stream)
+    {
+        var buffer = new byte[FIRST_BYTES_LENGTH];
+        stream.Seek(0, SeekOrigin.Begin);
+        int length = 0;
+        int read;
+        while (length < buffer.Length && (read = stream.Read(buffer, length, buffer.Length - length)) > 0)
+        {
+            length += read;
+        }
+        stream.Seek(0, SeekOrigin.Begin);
+        return length == buffer.Length ? buffer : buffer.Take(length).ToArray();
     }
 
     public static ImageFileFormat GetFileFormatFromFirstBytes(byte[] firstBytes)
@@ -44,8 +61,39 @@ public abstract class ImageContext
             [0x49, 0x49, 0x2A, 0x00, ..] => ImageFileFormat.Tiff,
             [0x4D, 0x4D, 0x00, 0x2A, ..] => ImageFileFormat.Tiff,
             [_, _, _, _, 0x6A, 0x50, 0x20, 0x20, ..] => ImageFileFormat.Jpeg2000,
+            // "GIF87a" or "GIF89a"
+            [0x47, 0x49, 0x46, 0x38, ..] => ImageFileFormat.Gif,
+            // "RIFF" <size> "WEBP"
+            [0x52, 0x49, 0x46, 0x46, _, _, _, _, 0x57, 0x45, 0x42, 0x50, ..] => ImageFileFormat.WebP,
+            // JPEG XL codestream, or the container's signature box
+            [0xFF, 0x0A, ..] => ImageFileFormat.JpegXl,
+            [0x00, 0x00, 0x00, 0x0C, 0x4A, 0x58, 0x4C, 0x20, 0x0D, 0x0A, 0x87, 0x0A, ..] => ImageFileFormat.JpegXl,
+            // ISO base media file ("ftyp" box), which HEIC and AVIF both use
+            [_, _, _, _, 0x66, 0x74, 0x79, 0x70, ..] => GetFormatFromFileTypeBox(firstBytes),
             _ => ImageFileFormat.Unknown
         };
+    }
+
+    private static ImageFileFormat GetFormatFromFileTypeBox(byte[] firstBytes)
+    {
+        // The box has a 4-byte size, "ftyp", the major brand, a 4-byte version, then any compatible brands
+        int boxSize = (firstBytes[0] << 24) | (firstBytes[1] << 16) | (firstBytes[2] << 8) | firstBytes[3];
+        int end = Math.Min(boxSize, firstBytes.Length);
+        var brands = new List<string>();
+        for (int i = 8; i + 4 <= end; i += 4)
+        {
+            if (i == 12) continue;
+            brands.Add(System.Text.Encoding.ASCII.GetString(firstBytes, i, 4));
+        }
+        if (brands.Any(brand => brand is "avif" or "avis"))
+        {
+            return ImageFileFormat.Avif;
+        }
+        if (brands.Any(brand => brand is "heic" or "heix" or "heim" or "heis" or "hevc" or "hevx" or "mif1" or "msf1"))
+        {
+            return ImageFileFormat.Heic;
+        }
+        return ImageFileFormat.Unknown;
     }
 
     protected ImageContext(Type imageType)
@@ -116,12 +164,17 @@ public abstract class ImageContext
 
     public Type ImageType { get; }
 
-    public bool SupportsFormat(ImageFileFormat format) =>
-        format is ImageFileFormat.Bmp or ImageFileFormat.Jpeg or ImageFileFormat.Png ||
-        format == ImageFileFormat.Tiff && SupportsTiff || format == ImageFileFormat.Jpeg2000 && SupportsJpeg2000;
+    public bool SupportsFormat(ImageFileFormat format) => SupportsDecode(format) && SupportsEncode(format);
 
-    protected virtual bool SupportsTiff => false;
-    protected virtual bool SupportsJpeg2000 => false;
+    public bool SupportsDecode(ImageFileFormat format) =>
+        BundledDecoders.ContainsKey(format) || SupportsDecodeCore(format);
+
+    public bool SupportsEncode(ImageFileFormat format) =>
+        BundledEncoders.ContainsKey(format) || SupportsEncodeCore(format);
+
+    protected abstract bool SupportsDecodeCore(ImageFileFormat format);
+
+    protected abstract bool SupportsEncodeCore(ImageFileFormat format);
 
     /// <summary>
     /// Loads an image from the given file path.
@@ -142,8 +195,8 @@ public abstract class ImageContext
     public IMemoryImage Load(Stream stream)
     {
         var format = GetFileFormatFromFirstBytes(stream);
-        CheckSupportsFormat(format);
-        var image = LoadCore(stream, format);
+        CheckSupportsDecode(format);
+        var image = TryBundledDecode(stream, format, out var decoded) ? decoded : LoadCore(stream, format);
         if (image.OriginalFileFormat == ImageFileFormat.Unknown)
         {
             image.OriginalFileFormat = format;
@@ -190,7 +243,7 @@ public abstract class ImageContext
     {
         try
         {
-            CheckSupportsFormat(format);
+            CheckSupportsDecode(format);
         }
         catch (Exception)
         {
@@ -201,7 +254,16 @@ public abstract class ImageContext
         {
             try
             {
-                LoadFramesCore(produceImage, stream, format, progress);
+                if (TryBundledDecode(stream, format, out var image))
+                {
+                    progress.Report(0, 1);
+                    produceImage(image);
+                    progress.Report(1, 1);
+                }
+                else
+                {
+                    LoadFramesCore(produceImage, stream, format, progress);
+                }
             }
             finally
             {
@@ -229,21 +291,49 @@ public abstract class ImageContext
         }
     }
 
-    public void CheckSupportsFormat(ImageFileFormat format)
+    public void CheckSupportsDecode(ImageFileFormat format)
     {
-        if (!SupportsFormat(format))
+        if (!SupportsDecode(format))
         {
-            throw new NotSupportedException($"Unsupported file format: {format}");
+            throw new NotSupportedException($"Unsupported file format for loading: {format}");
+        }
+    }
+
+    public void CheckSupportsEncode(ImageFileFormat format)
+    {
+        if (!SupportsEncode(format))
+        {
+            throw new NotSupportedException($"Unsupported file format for saving: {format}");
         }
     }
 
     public virtual ITiffWriter TiffWriter => throw new NotSupportedException();
 
     /// <summary>
-    /// Encoders to use instead of the platform encoder for specific file formats. This is process-wide, as images
+    /// Codecs to use instead of the platform encoder for specific file formats. This is process-wide, as images
     /// don't necessarily share the ImageContext instance they were created from.
     /// </summary>
-    internal static ConcurrentDictionary<ImageFileFormat, IBundledEncoder> BundledEncoders { get; } = new();
+    internal static ConcurrentDictionary<ImageFileFormat, IBundledCodec> BundledEncoders { get; } = new();
+
+    /// <summary>
+    /// Codecs to use instead of the platform decoder for specific file formats.
+    /// </summary>
+    internal static ConcurrentDictionary<ImageFileFormat, IBundledCodec> BundledDecoders { get; } = new();
+
+    /// <summary>
+    /// Used to apply embedded color profiles on platforms whose decoders don't.
+    /// </summary>
+    internal static IBundledColorConverter? BundledColorConverter { get; set; }
+
+    /// <summary>
+    /// Loads the image with a bundled decoder if there's one for the given format. Returns false if the platform decoder
+    /// should be used instead.
+    /// </summary>
+    private bool TryBundledDecode(Stream stream, ImageFileFormat format, [NotNullWhen(true)] out IMemoryImage? image)
+    {
+        image = null;
+        return BundledDecoders.TryGetValue(format, out var decoder) && decoder.TryDecode(this, stream, out image);
+    }
 
     /// <summary>
     /// Saves the image with a bundled encoder if there's one for the given format. Returns false if the platform encoder

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using NAPS2.Pdf;
 using Xunit;
 
@@ -112,7 +113,9 @@ public class PdfBenchmarkTests : ContextualTests
 
     public class BenchmarkFact : FactAttribute
     {
-        public BenchmarkFact()
+        public BenchmarkFact(
+            [CallerFilePath] string? sourceFilePath = null, [CallerLineNumber] int sourceLineNumber = -1)
+            : base(sourceFilePath, sourceLineNumber)
         {
             Skip = "comment out this line to run benchmarks";
         }

@@ -1,5 +1,8 @@
+using NAPS2.Serialization;
+
 namespace NAPS2.Scan;
 
+[GeneratePropertyAccessors]
 public class ScanProfileCaps
 {
     public PaperSourceProfileCaps? PaperSources { get; set; }

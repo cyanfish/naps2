@@ -1,5 +1,8 @@
+using NAPS2.Serialization;
+
 namespace NAPS2.Config;
 
+[GeneratePropertyAccessors]
 public class FormState
 {
     public string? Name { get; set; }
@@ -10,8 +13,10 @@ public class FormState
 
     public bool Maximized { get; set; }
 
+    [GeneratePropertyAccessors]
     public record struct FormLocation(int X = 0, int Y = 0);
 
+    [GeneratePropertyAccessors]
     public record struct FormSize(int Width = 0, int Height = 0);
 
     public override string ToString()

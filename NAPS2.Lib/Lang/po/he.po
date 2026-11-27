@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:52\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -131,6 +131,10 @@ msgstr "לאפשר מילוי טופס"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "לאפשר הדפסה באיכות מירבית"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -318,6 +322,10 @@ msgstr "B4 (250x353 מ״מ)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 מ״מ)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -571,6 +579,7 @@ msgstr "ביטול הפרדה"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "מחיקה"
 
@@ -618,6 +627,10 @@ msgstr "תרומה"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "אישור"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "הצפנת PDF"
 msgid "Encryption"
 msgstr "הצפנה"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "שגיאה"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "שגיאה בהפעלת היישום {0}"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -783,6 +808,10 @@ msgstr "גווני אפור"
 msgid "Help"
 msgstr ""
 
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
+
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
 msgstr "יישור אופקי:"
@@ -839,6 +868,10 @@ msgstr "מתבצע ייבוא של {0}…"
 msgid "Importing..."
 msgstr "מתבצע ייבוא…"
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "התקנת {0}"
@@ -893,6 +926,7 @@ msgstr "כתיבת ביקורת"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "שמאל"
 
@@ -1214,6 +1248,14 @@ msgstr "תקן PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "קובץ PNG (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "גודל עמוד:"
@@ -1233,6 +1275,10 @@ msgstr "סיסמה"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "הדבקה"
+
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
@@ -1392,6 +1438,7 @@ msgstr "ביטול שינויים"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "ימין"
 
@@ -1646,6 +1693,10 @@ msgstr "סריקה בודדת"
 msgid "Skip save prompt"
 msgstr "דילוג על בקשת שמירה"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "פיצול"
@@ -1685,6 +1736,10 @@ msgstr "קובץ TIFF‏ (‎*.tiff,‏ ‎*.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "מנהל התקן TWAIN"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1857,6 +1912,10 @@ msgstr "סורק לא ידוע"
 msgid "Unsaved Changes"
 msgstr "שינויים שלא נשמרו"
 
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
+
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
 msgstr "התקדמות העדכון"
@@ -1929,6 +1988,10 @@ msgstr "סף לבן"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "גרסת Wia:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"

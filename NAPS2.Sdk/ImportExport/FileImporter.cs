@@ -1,7 +1,6 @@
 ﻿using System.IO.Compression;
 using NAPS2.Pdf;
 using NAPS2.Scan;
-using Polyfills;
 
 namespace NAPS2.ImportExport;
 
@@ -50,19 +49,15 @@ public class FileImporter
         }
 
         // If we couldn't infer if it's a PDF from the extension, we will try and read the file itself
-        var firstBytes = new byte[8];
+        byte[] firstBytes;
         if (input.Stream != null)
         {
-            input.Stream.Seek(0, SeekOrigin.Begin);
-            input.Stream.ReadExactly(firstBytes, 0, 8);
-            input.Stream.Seek(0, SeekOrigin.Begin);
+            firstBytes = ImageContext.ReadFirstBytes(input.Stream);
         }
         else
         {
             using var stream = new FileStream(input.FilePath!, FileMode.Open, FileAccess.Read);
-            stream.Seek(0, SeekOrigin.Begin);
-            stream.ReadExactly(firstBytes, 0, 8);
-            stream.Seek(0, SeekOrigin.Begin);
+            firstBytes = ImageContext.ReadFirstBytes(stream);
         }
 
         // PDFs begin with "%PDF", possibly with a UTF-8 BOM first

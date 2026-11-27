@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Drawing.Imaging;
 using NAPS2.Util;
 
 namespace NAPS2.Images.Gdi;
@@ -14,7 +13,12 @@ public class GdiImageContext : ImageContext
         _imageTransformer = new GdiImageTransformer(this);
     }
 
-    protected override bool SupportsTiff => true;
+    protected override bool SupportsDecodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Gif
+            or ImageFileFormat.Tiff;
+
+    protected override bool SupportsEncodeCore(ImageFileFormat format) =>
+        format is ImageFileFormat.Jpeg or ImageFileFormat.Png or ImageFileFormat.Bmp or ImageFileFormat.Tiff;
 
     public override IMemoryImage PerformTransform(IMemoryImage image, Transform transform)
     {
@@ -24,23 +28,29 @@ public class GdiImageContext : ImageContext
 
     protected override IMemoryImage LoadCore(Stream stream, ImageFileFormat format)
     {
-        var memoryStream = EnsureMemoryStream(stream);
-        using var bitmap = new Bitmap(memoryStream);
-        return new GdiImage(bitmap).Copy();
+        using var loader = new GdiFrameLoader(EnsureMemoryStream(stream));
+        return loader.LoadFrame(0);
     }
 
     protected override void LoadFramesCore(Action<IMemoryImage> produceImage, Stream stream,
         ImageFileFormat format, ProgressHandler progress)
     {
-        var memoryStream = EnsureMemoryStream(stream);
-        using var bitmap = new Bitmap(memoryStream);
-        int count = bitmap.GetFrameCount(FrameDimension.Page);
+        // GIF frames are animation frames (FrameDimension.Time) rather than pages, so we only load the first
+        if (format == ImageFileFormat.Gif)
+        {
+            progress.Report(0, 1);
+            if (progress.IsCancellationRequested) return;
+            produceImage(LoadCore(stream, format));
+            progress.Report(1, 1);
+            return;
+        }
+        using var loader = new GdiFrameLoader(EnsureMemoryStream(stream));
+        int count = loader.FrameCount;
         for (int i = 0; i < count; i++)
         {
             progress.Report(i, count);
             if (progress.IsCancellationRequested) break;
-            bitmap.SelectActiveFrame(FrameDimension.Page, i);
-            produceImage(new GdiImage(bitmap).Copy());
+            produceImage(loader.LoadFrame(i));
         }
         progress.Report(count, count);
     }

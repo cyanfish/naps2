@@ -27,12 +27,12 @@ public class UpdateOperation : OperationBase
         _desktopController = desktopController;
         _desktopFormProvider = desktopFormProvider;
 
-        ProgressTitle = MiscResources.UpdateProgress;
+        ProgressTitle = UiStrings.UpdateProgress;
         AllowBackground = true;
         AllowCancel = true;
         Status = new OperationStatus
         {
-            StatusText = MiscResources.Updating,
+            StatusText = UiStrings.Updating,
             ProgressType = OperationProgressType.MB
         };
     }
@@ -82,13 +82,13 @@ public class UpdateOperation : OperationBase
             if (!VerifyHash(_tempPath!, _update!.Sha256))
             {
                 Log.Error($"Update error for {_update!.Name}: hash does not match");
-                _errorOutput.DisplayError(MiscResources.UpdateError);
+                _errorOutput.DisplayError(UiStrings.UpdateError);
                 return;
             }
             if (!VerifySignature(_update!.Sha256, _update.Signature256))
             {
                 Log.Error($"Update error for {_update!.Name}: signature does not validate");
-                _errorOutput.DisplayError(MiscResources.UpdateError);
+                _errorOutput.DisplayError(UiStrings.UpdateError);
                 return;
             }
 
@@ -101,7 +101,7 @@ public class UpdateOperation : OperationBase
         catch (Exception ex)
         {
             Log.ErrorException("Update error", ex);
-            _errorOutput.DisplayError(MiscResources.UpdateError);
+            _errorOutput.DisplayError(UiStrings.UpdateError);
             return;
         }
         finally
@@ -125,7 +125,7 @@ public class UpdateOperation : OperationBase
     private void InstallZip()
     {
         ZipFile.ExtractToDirectory(_tempPath!, _tempFolder!);
-        string portableLauncherPath = Path.Combine(AssemblyHelper.LibFolder, "..", "..", "NAPS2.Portable.exe");
+        string portableLauncherPath = Path.Combine(AssemblyHelper.EntryFolder, "..", "NAPS2.Portable.exe");
         AtomicReplaceFile(Path.Combine(_tempFolder!, "NAPS2.Portable.exe"), portableLauncherPath);
         Process.Start(new ProcessStartInfo
         {

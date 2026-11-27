@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
+using NAPS2.Serialization;
 
 namespace NAPS2.Config.Model;
 
@@ -8,6 +10,8 @@ public class ConfigLookup
 {
     private static readonly Dictionary<Type, ImmutableList<PropertyData>> PropertyDataCache = new();
 
+    [UnconditionalSuppressMessage("Trimming", "IL2070",
+        Justification = "Config types are in NAPS2 assemblies, which aren't trimmed (TrimMode=partial)")]
     public static ImmutableList<PropertyData> GetPropertyData(Type type)
     {
         lock (PropertyDataCache)
@@ -102,7 +106,12 @@ public class ConfigLookup
         }
     }
 
-    public record PropertyData(string Name, Type Type, bool IsNestedConfig, PropertyInfo PropertyInfo);
+    public record PropertyData(string Name, Type Type, bool IsNestedConfig, PropertyInfo PropertyInfo)
+    {
+        public Func<object, object?> Getter { get; } = PropertyAccessors.GetGetter(PropertyInfo);
+
+        public Action<object, object?> Setter { get; } = PropertyAccessors.GetSetter(PropertyInfo);
+    }
 
     public ConfigLookup Append(PropertyData prop)
     {

@@ -9,6 +9,7 @@ using Eto.Forms;
 using Eto.Wpf;
 using Eto.Wpf.Drawing;
 using Eto.Wpf.Forms;
+using Eto.Wpf.Forms.Controls;
 using NAPS2.EtoForms.Layout;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.EtoForms.WinForms;
@@ -25,8 +26,9 @@ namespace NAPS2.EtoForms.Wpf;
 public class WpfEtoPlatform : EtoPlatform
 {
     private const int SMALL_BUTTON_PADDING = 7;
-    private const int SMALL_TOOLBAR_BUTTON_PADDING = 4;
-    private const double ZOOM_BUTTON_OPACITY = 0.85;
+    private const int SMALL_TOOLBAR_BUTTON_PADDING = 5;
+    private const int SMALL_TOOLBAR_TEXT_BUTTON_V_PADDING = 3;
+    private const double FLOATING_BUTTON_OPACITY = 0.85;
     private const double NARROW_TEXT_BOX_WIDTH = 100;
 
     private static readonly Size MinImageButtonSize = new(75, 32);
@@ -37,20 +39,46 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override IDarkModeProvider DarkModeProvider { get; } = new WindowsDarkModeProvider();
 
+    public override void StartPreloading()
+    {
+        base.StartPreloading();
+        WpfRenderPreloader.Start();
+        _etoControlTypes = Task.Run(FindEtoControlTypes);
+    }
+
     public override Application CreateApplicationCore()
     {
         // Eto.Wpf reuses an existing System.Windows.Application if there is one, so we create it first to configure
         // the Fluent theme before any windows are created.
         _ = new SW.Application { ShutdownMode = SW.ShutdownMode.OnExplicitShutdown };
-        var application = new Application(Eto.Platforms.Wpf);
+        // Otherwise Eto applies its non-Fluent theme first
+        ApplicationHandler.EnableCustomThemes = false;
+        var platform = new Eto.Wpf.Platform();
+        platform.Add<MessageBox.IHandler>(() => new FluentMessageBoxHandler());
+        platform.Add<Button.IHandler>(() => new WpfButtonHandler());
+        var application = new Application(platform);
         // Drawables paint their own content (e.g. the preview image), which a right-to-left window would mirror
-        Eto.Style.Add<Eto.Wpf.Forms.Controls.DrawableHandler>(null,
+        Eto.Style.Add<DrawableHandler>(null,
             handler => handler.Control.FlowDirection = SW.FlowDirection.LeftToRight);
         SynchronizationContext.SetSynchronizationContext(
             new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
         SetSystemTheme();
         HideClearButtonInNarrowTextBoxes();
+        FixMaximizedCaptionsOnSettingChange();
         return application;
+    }
+
+    private static void FixMaximizedCaptionsOnSettingChange()
+    {
+        // WPF resets the frame when handling WM_SETTINGCHANGE, right after invalidating this property (which only
+        // raises StaticPropertyChanged if it has been read since the last invalidation)
+        _ = SW.SystemParameters.WindowResizeBorderThickness;
+        SW.SystemParameters.StaticPropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName != nameof(SW.SystemParameters.WindowResizeBorderThickness)) return;
+            _ = SW.SystemParameters.WindowResizeBorderThickness;
+            Dispatcher.CurrentDispatcher.BeginInvoke(FixMaximizedCaptions, DispatcherPriority.Background);
+        };
     }
 
     private static void HideClearButtonInNarrowTextBoxes()
@@ -77,44 +105,151 @@ public class WpfEtoPlatform : EtoPlatform
     {
         if (SW.Application.Current is { } app)
         {
-            app.ThemeMode = ColorScheme.DarkMode ? SW.ThemeMode.Dark : SW.ThemeMode.Light;
+            Application.Instance.Theme = ColorScheme.DarkMode
+                ? _fluentDarkTheme ??= new(new BaseStylesFluentThemeHandler(SW.ThemeMode.Dark))
+                : _fluentLightTheme ??= new(new BaseStylesFluentThemeHandler(SW.ThemeMode.Light));
+            // Changing the theme resets the frame
+            FixMaximizedCaptions();
             ApplyFluentStylesToEtoControls(app);
             MakeSplittersUnfocusable(app);
             MakeComboBoxItemsHitTestable(app);
         }
     }
 
+    private static Theme? _fluentLightTheme;
+    private static Theme? _fluentDarkTheme;
+
+    /// <summary>
+    /// Sets the application's ThemeMode like Eto's Fluent themes.
+    /// </summary>
+    private class BaseStylesFluentThemeHandler(SW.ThemeMode mode) : FluentThemeHandler(mode)
+    {
+        public override IEnumerable<Uri> GetResourceUris() =>
+        [
+            new($"pack://application:,,,/{typeof(Eto.Wpf.Platform).Assembly.GetName().Name};component/themes/generic.xaml")
+        ];
+    }
+
     /// <summary>
     /// Makes Eto.Wpf controls pick up the Fluent theme. There are two problems:
     /// 1. Fluent provides implicit styles keyed by type (e.g. Button), which WPF only applies to that exact type, while
     ///    Eto.Wpf uses its own subclasses (e.g. EtoButton).
-    /// 2. Eto's themes/generic.xaml (merged into the application resources) has its own implicit styles without BasedOn
-    ///    (e.g. for EtoButton, CheckBox, EtoFormWindow), which replace the Fluent styles entirely.
+    /// 2. Eto's themes/generic.xaml (merged into the application resources) has its own implicit styles for some types
+    ///    (e.g. EtoButton, CheckBox, EtoFormWindow), which replace the Fluent styles for those types.
     /// So for each Eto control type (and each type Eto styles), we add an application-level style based on the Fluent
-    /// style of the nearest base type, merged with Eto's own setters/triggers.
+    /// style of the nearest base type, merged with Eto's own setters/triggers. These are created on first use, as
+    /// creating the Fluent styles for every type would take a while.
     /// </summary>
     private static void ApplyFluentStylesToEtoControls(SW.Application app)
     {
-        var etoDictionaries = app.Resources.MergedDictionaries.Where(IsEtoDictionary).SelectMany(Flatten).ToList();
-        var themeDictionaries = app.Resources.MergedDictionaries.Where(d => !IsEtoDictionary(d)).Reverse().ToList();
+        // Replace the styles from any previous call (e.g. when the theme changes)
+        if (_fluentEtoStyles != null)
+        {
+            app.Resources.MergedDictionaries.Remove(_fluentEtoStyles);
+        }
+        var etoDictionaries = new List<SW.ResourceDictionary>();
+        var themeDictionaries = new List<SW.ResourceDictionary>();
+        void Classify(SW.ResourceDictionary dict, bool inEtoDictionary)
+        {
+            bool isEto = inEtoDictionary || dict.Source?.OriginalString.Contains("Eto.Wpf") == true;
+            if (!isEto && dict.Source != null)
+            {
+                themeDictionaries.Add(dict);
+                return;
+            }
+            if (isEto)
+            {
+                etoDictionaries.Add(dict);
+            }
+            foreach (var merged in dict.MergedDictionaries)
+            {
+                Classify(merged, isEto);
+            }
+        }
+        foreach (var dict in app.Resources.MergedDictionaries)
+        {
+            Classify(dict, false);
+        }
+        // Later dictionaries take precedence
+        themeDictionaries.Reverse();
 
         var types = GetEtoControlTypes().Concat(etoDictionaries.SelectMany(d => d.Keys.OfType<Type>())).Distinct();
-        foreach (var type in types)
+        _fluentEtoStyles = new LazyStyleDictionary(types,
+            type => CreateFluentEtoStyle(type, themeDictionaries, etoDictionaries));
+        app.Resources.MergedDictionaries.Add(_fluentEtoStyles);
+    }
+
+    private static SW.Style? CreateFluentEtoStyle(Type type, List<SW.ResourceDictionary> themeDictionaries,
+        List<SW.ResourceDictionary> etoDictionaries)
+    {
+        if (FindThemeStyle(themeDictionaries, type) is not { } themeStyle) return null;
+        var style = new SW.Style(type, themeStyle);
+        foreach (var etoDictionary in etoDictionaries.Where(d => d.Contains(type)))
         {
-            // Remove the style from any previous call (e.g. when the theme changes) so it isn't found as a theme style
-            app.Resources.Remove(type);
-            if (FindThemeStyle(themeDictionaries, type) is not { } themeStyle) continue;
-            var style = new SW.Style(type, themeStyle);
-            foreach (var etoDictionary in etoDictionaries.Where(d => d.Contains(type)))
-            {
-                CopyEtoStyle((SW.Style) etoDictionary[type]!, style);
-            }
-            if (typeof(SWC.CheckBox).IsAssignableFrom(type) || typeof(SWC.RadioButton).IsAssignableFrom(type))
-            {
-                MakeToggleCompact(style);
-            }
-            app.Resources[type] = style;
+            CopyEtoStyle((SW.Style) etoDictionary[type]!, style);
         }
+        if (typeof(SWC.CheckBox).IsAssignableFrom(type) || typeof(SWC.RadioButton).IsAssignableFrom(type))
+        {
+            MakeToggleCompact(style);
+        }
+        if (typeof(SWC.Button).IsAssignableFrom(type) &&
+            themeDictionaries.Select(d => d["AccentButtonStyle"]).OfType<SW.Style>().FirstOrDefault() is { } accentStyle)
+        {
+            AddAccentStyleWhenDefault(style, accentStyle);
+        }
+        if (type == typeof(EtoAccessLabel))
+        {
+            AddDefaultButtonForeground(style);
+        }
+        return style;
+    }
+
+    private static void AddAccentStyleWhenDefault(SW.Style style, SW.Style accentStyle)
+    {
+        var whenDefault = new SW.Trigger { Property = SWC.Button.IsDefaultProperty, Value = true };
+        foreach (var setter in accentStyle.Setters)
+        {
+            whenDefault.Setters.Add(setter);
+        }
+        style.Triggers.Add(whenDefault);
+        foreach (var trigger in accentStyle.Triggers)
+        {
+            var (conditions, setters) = trigger switch
+            {
+                SW.Trigger t => ([new SW.Condition(t.Property, t.Value)], t.Setters),
+                SW.MultiTrigger t => (t.Conditions.ToList(), t.Setters),
+                _ => (new List<SW.Condition>(), new SW.SetterBaseCollection())
+            };
+            var multiTrigger = new SW.MultiTrigger
+            {
+                Conditions = { new SW.Condition(SWC.Button.IsDefaultProperty, true) }
+            };
+            foreach (var condition in conditions)
+            {
+                multiTrigger.Conditions.Add(new SW.Condition(condition.Property, condition.Value));
+            }
+            foreach (var setter in setters)
+            {
+                multiTrigger.Setters.Add(setter);
+            }
+            style.Triggers.Add(multiTrigger);
+        }
+    }
+
+    private static void AddDefaultButtonForeground(SW.Style style)
+    {
+        // Eto's button text is a label with its own style, so it doesn't pick up the accent style's foreground
+        var button = new SW.Data.RelativeSource(SW.Data.RelativeSourceMode.FindAncestor, typeof(SWC.Button), 1);
+        style.Triggers.Add(new SW.DataTrigger
+        {
+            Binding = new SW.Data.Binding(nameof(SWC.Button.IsDefault)) { RelativeSource = button },
+            Value = true,
+            Setters =
+            {
+                new SW.Setter(SWC.Control.ForegroundProperty,
+                    new SW.Data.Binding(nameof(SWC.Control.Foreground)) { RelativeSource = button })
+            }
+        });
     }
 
     private static void MakeSplittersUnfocusable(SW.Application app)
@@ -147,13 +282,16 @@ public class WpfEtoPlatform : EtoPlatform
         app.Resources[type] = new SW.Style(type, app.TryFindResource(type) as SW.Style) { Setters = { setter } };
     }
 
-    private static bool IsEtoDictionary(SW.ResourceDictionary dict) =>
-        dict.Source?.OriginalString.Contains("Eto.Wpf") == true;
+    private static Task<List<Type>>? _etoControlTypes;
+    private static LazyStyleDictionary? _fluentEtoStyles;
 
-    private static IEnumerable<SW.ResourceDictionary> Flatten(SW.ResourceDictionary dict) =>
-        dict.MergedDictionaries.SelectMany(Flatten).Prepend(dict);
+    private static List<Type> GetEtoControlTypes()
+    {
+        _etoControlTypes ??= Task.FromResult(FindEtoControlTypes());
+        return _etoControlTypes.Result;
+    }
 
-    private static IEnumerable<Type> GetEtoControlTypes()
+    private static List<Type> FindEtoControlTypes()
     {
         Type[] types;
         try
@@ -166,7 +304,8 @@ public class WpfEtoPlatform : EtoPlatform
             types = ex.Types.OfType<Type>().ToArray();
         }
         return types.Where(t =>
-            typeof(SW.FrameworkElement).IsAssignableFrom(t) && t is { IsAbstract: false, ContainsGenericParameters: false });
+                typeof(SW.FrameworkElement).IsAssignableFrom(t) && t is { IsAbstract: false, ContainsGenericParameters: false })
+            .ToList();
     }
 
     private static SW.Style? FindThemeStyle(List<SW.ResourceDictionary> themeDictionaries, Type type)
@@ -246,9 +385,15 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override ISettingsNavigator CreateSettingsNavigator() => new WpfSettingsNavigator();
 
+    public override int IconButtonSize => 32;
+
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
         var native = (SWC.Control) button.ToNative();
+        if (native is SWC.Primitives.ToggleButton)
+        {
+            native.Template = XamlTemplates.ImageToggleButtonTemplate;
+        }
         if (string.IsNullOrEmpty(button.Text))
         {
             native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING - 1, SMALL_BUTTON_PADDING,
@@ -319,22 +464,47 @@ public class WpfEtoPlatform : EtoPlatform
 
     public override void ConfigureSmallToolBar(ToolBar toolBar)
     {
-        // The Fluent toolbar button template has a fixed padding (12,6) meant for text buttons, so icon buttons take up
-        // too much space
+        // The Fluent toolbar templates have fixed padding meant for text buttons, and buttons, toggle buttons and
+        // drop-downs (menus) each look different, so use our own matching templates
         foreach (var item in toolBar.Items)
         {
-            if (item.ControlObject is SWC.Control native)
+            SWC.Control? button = item.ControlObject switch
             {
-                native.Loaded += (_, _) =>
-                {
-                    if (SWM.VisualTreeHelper.GetChildrenCount(native) > 0 &&
-                        SWM.VisualTreeHelper.GetChild(native, 0) is SWC.Border border)
-                    {
-                        border.Padding = new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING);
-                    }
-                };
+                SWC.Button b => SetTemplate(b, XamlTemplates.ToolBarButtonTemplate),
+                SWC.Primitives.ToggleButton b => SetTemplate(b, XamlTemplates.ToolBarToggleButtonTemplate),
+                SWC.Menu { Items: [SWC.MenuItem b] } => SetTemplate(b, XamlTemplates.ToolBarDropDownTemplate),
+                _ => null
+            };
+            if (button != null)
+            {
+                // Text is taller than the icons, so it gets less vertical padding to keep all items the same height
+                button.Padding = item.Image == null
+                    ? new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING, SMALL_TOOLBAR_TEXT_BUTTON_V_PADDING,
+                        SMALL_TOOLBAR_BUTTON_PADDING, SMALL_TOOLBAR_TEXT_BUTTON_V_PADDING)
+                    : new SW.Thickness(SMALL_TOOLBAR_BUTTON_PADDING);
+                button.Margin = new SW.Thickness(0);
+                button.MinWidth = button.MinHeight = 0;
+            }
+            if (item.ControlObject is SWC.Menu menu)
+            {
+                // Unlike buttons, the menu item doesn't stretch to the toolbar height
+                menu.VerticalAlignment = SW.VerticalAlignment.Center;
             }
         }
+
+        static SWC.Control SetTemplate(SWC.Control control, SWC.ControlTemplate template)
+        {
+            control.Template = template;
+            return control;
+        }
+    }
+
+    public override bool SupportsInlinePreviewToolBar => true;
+
+    public override Control CreateInlinePreviewToolBar(ToolBar toolBar)
+    {
+        ConfigureSmallToolBar(toolBar);
+        return ((SWC.ToolBar) toolBar.ControlObject).ToEto();
     }
 
     public override void ConfigureDonateButton(Button button)
@@ -344,10 +514,30 @@ public class WpfEtoPlatform : EtoPlatform
         native.BorderThickness = new SW.Thickness(2);
     }
 
+    public override MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options)
+    {
+        var buttons = options.GetButtons(ButtonOrder).ToList();
+        var dialog = new FluentMessageDialog(options.Title, options.Text, options.Type,
+            buttons.Select(x => x.Text.Replace("_", "__")).ToList(),
+            buttons.FindIndex(x => x.Result == options.EffectiveDefaultButton),
+            buttons.FindIndex(x => x.Result == MessageDialogResult.Close));
+        dialog.Owner = owner ?? DefaultDialogOwner;
+        return buttons[dialog.ShowModal()].Result;
+    }
+
+    public override void SetDefaultButton(Window window, Button? button)
+    {
+        base.SetDefaultButton(window, button);
+        if (window is not Dialog && button != null)
+        {
+            ((SWC.Button) button.ToNative()).IsDefault = true;
+        }
+    }
+
     public override void SetAccessibleName(Control control, string name) =>
         AutomationProperties.SetName(control.ToNative(), name);
 
-    public override void ConfigureZoomButton(Button button, string icon)
+    public override void ConfigureFloatingButton(Button button, string icon)
     {
         var native = (SWC.Control) button.ToNative();
         button.Text = "";
@@ -355,12 +545,23 @@ public class WpfEtoPlatform : EtoPlatform
         native.Padding = new SW.Thickness(SMALL_BUTTON_PADDING);
         native.MinWidth = native.MinHeight = 0;
         SetIconProps(button, 16);
-        AttachDpiDependency(button, scale => button.Image = IconProvider.GetIcon(icon, IconScenario.Button, scale));
+        AttachIconDependency(button,
+            scale => button.Image = IconProvider.GetIcon(icon, IconScenario.FloatingButton, scale));
         // These buttons are over the thumbnails, so make them (mostly) opaque, with a higher contrast border
         void UpdateBackground(object? sender, EventArgs e) => SetOpaqueButtonBackground(native);
         SetOpaqueButtonBackground(native);
         native.Loaded += (_, _) => ColorScheme.ColorSchemeChanged += UpdateBackground;
         native.Unloaded += (_, _) => ColorScheme.ColorSchemeChanged -= UpdateBackground;
+    }
+
+    public override void ConfigureJoinedButtons(Button left, Button right)
+    {
+        // Join the buttons into a single "pill", with one divider line (the border is translucent, so overlapping the
+        // buttons would make the divider darker)
+        left.ToNative().SetValue(SWC.Border.CornerRadiusProperty, new SW.CornerRadius(4, 0, 0, 4));
+        var rightNative = (SWC.Control) right.ToNative();
+        rightNative.SetValue(SWC.Border.CornerRadiusProperty, new SW.CornerRadius(0, 4, 4, 0));
+        rightNative.BorderThickness = new SW.Thickness(0, 1, 1, 1);
     }
 
     private static void SetOpaqueButtonBackground(SWC.Control native)
@@ -369,17 +570,19 @@ public class WpfEtoPlatform : EtoPlatform
         var app = SW.Application.Current;
         var back = ((SWM.SolidColorBrush) app.FindResource("SolidBackgroundFillColorBaseBrush")!).Color;
         var border = app.FindResource("ControlStrongStrokeColorDefaultBrush");
-        foreach (var state in new[] { "", "PointerOver", "Pressed", "Disabled" })
+        foreach (var state in new[] { "", "PointerOver", "Pressed" })
         {
             var fore = ((SWM.SolidColorBrush) app.FindResource($"ButtonBackground{state}")!).Color;
             double a = fore.A / 255.0;
             byte Blend(byte f, byte b) => (byte) Math.Round(f * a + b * (1 - a));
-            var brush = new SWM.SolidColorBrush(SWM.Color.FromArgb((byte) Math.Round(255 * ZOOM_BUTTON_OPACITY),
+            var brush = new SWM.SolidColorBrush(SWM.Color.FromArgb((byte) Math.Round(255 * FLOATING_BUTTON_OPACITY),
                 Blend(fore.R, back.R), Blend(fore.G, back.G), Blend(fore.B, back.B)));
             brush.Freeze();
             native.Resources[$"ButtonBackground{state}"] = brush;
             native.Resources[$"ButtonBorderBrush{state}"] = border;
         }
+        native.Resources["ButtonBackgroundDisabled"] = native.Resources["ButtonBackground"];
+        native.Resources["ButtonBorderBrushDisabled"] = border;
     }
 
     public override Bitmap ToBitmap(IMemoryImage image) => new(new BitmapHandler(image.ToDisplayBitmapSource()));
@@ -526,12 +729,7 @@ public class WpfEtoPlatform : EtoPlatform
         if (window is Dialog dialog)
         {
             // Like WinForms, use the active window as the owner (so the dialog is centered on it).
-            dialog.PreLoad += (_, _) =>
-            {
-                var activeWindow = Win32.GetActiveWindow();
-                dialog.Owner ??= Application.Instance.Windows.FirstOrDefault(x =>
-                    x != dialog && x.NativeHandle == activeWindow);
-            };
+            dialog.PreLoad += (_, _) => dialog.Owner ??= DefaultDialogOwner;
         }
         // WPF can show the window (e.g. when maximized) before its content is rendered, so hide it until then
         var interop = new SW.Interop.WindowInteropHelper(native);
@@ -539,8 +737,26 @@ public class WpfEtoPlatform : EtoPlatform
         {
             WindowCloaking.SetCloaked(interop.Handle, true);
             UndoBlurBehind(interop.Handle);
+            FixMaximizedCaption(interop.Handle);
         };
         native.ContentRendered += (_, _) => WindowCloaking.SetCloaked(interop.Handle, false);
+    }
+
+    private static void FixMaximizedCaptions()
+    {
+        foreach (SW.Window window in SW.Application.Current.Windows)
+        {
+            var hwnd = new SW.Interop.WindowInteropHelper(window).Handle;
+            if (hwnd != IntPtr.Zero) FixMaximizedCaption(hwnd);
+        }
+    }
+
+    private static void FixMaximizedCaption(IntPtr hwnd)
+    {
+        // Workaround for https://github.com/dotnet/wpf/issues/12153
+        if (Environment.OSVersion.Version.Build < 22621 || SW.SystemParameters.HighContrast) return;
+        var margins = new Win32.Margins { cyBottomHeight = 100000 };
+        Win32.DwmExtendFrameIntoClientArea(hwnd, ref margins);
     }
 
     private static void UndoBlurBehind(IntPtr hwnd)
@@ -617,7 +833,14 @@ public class WpfEtoPlatform : EtoPlatform
         var native = control is Window window ? window.ToNative() : control.ToNative();
 
         void Update() => callback((float) SWM.VisualTreeHelper.GetDpi(native).DpiScaleX);
-        void OnDpiChanged(object? sender, SW.DpiChangedEventArgs e) => Update();
+        void OnDpiChanged(object? sender, SW.DpiChangedEventArgs e)
+        {
+            // Filter bubbled-up events
+            if (e.OriginalSource is SW.Window)
+            {
+                Update();
+            }
+        }
 
         Update();
         native.Loaded += (_, _) =>

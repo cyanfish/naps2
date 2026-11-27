@@ -23,6 +23,7 @@ public struct BitwiseImageData
         aOff = sub.AlphaOffset;
         hasAlpha = sub.HasAlpha;
         invertY = pix.InvertY;
+        premultipliedAlpha = pix.PremultipliedAlpha && sub.HasAlpha;
         invertColorSpace = sub.InvertColorSpace;
     }
 
@@ -39,6 +40,7 @@ public struct BitwiseImageData
     public int aOff;
     public bool hasAlpha;
     public bool invertY;
+    public bool premultipliedAlpha;
     public bool invertColorSpace;
 
     public (int, int, int, int, int) BitLayout => (bitsPerPixel, rOff, gOff, bOff, aOff);

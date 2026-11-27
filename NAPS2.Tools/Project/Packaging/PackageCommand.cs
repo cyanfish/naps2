@@ -1,8 +1,4 @@
-using System.Text;
-using System.Text.RegularExpressions;
 using NAPS2.Tools.Project.Targets;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace NAPS2.Tools.Project.Packaging;
 
@@ -10,6 +6,7 @@ public class PackageCommand : ICommand<PackageOptions>
 {
     public int Run(PackageOptions opts)
     {
+        var appProject = ProjectHelper.GetWindowsAppProject(opts.App);
         foreach (var target in TargetsHelper.EnumeratePackageTargets(new TargetParams
                  {
                      PackageType = opts.PackageType,
@@ -18,20 +15,20 @@ public class PackageCommand : ICommand<PackageOptions>
                      XCompile = opts.XCompile
                  }))
         {
-            PackageInfo GetPackageInfoForConfig() => GetPackageInfo(target.Platform, opts.Name);
+            PackageInfo GetPackageInfoForConfig() => GetPackageInfo(target.Platform, appProject, opts.Name);
             switch (target.Type)
             {
                 case PackageType.Exe:
-                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig, target.Platform, opts.NoSign);
+                    InnoSetupPackager.PackageExe(GetPackageInfoForConfig, target.Platform, appProject, opts.NoSign);
                     break;
                 case PackageType.Msi:
-                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig, opts.NoSign);
+                    WixToolsetPackager.PackageMsi(GetPackageInfoForConfig, appProject, opts.NoSign);
                     break;
                 case PackageType.Msix:
-                    MsixPackager.PackageMsix(GetPackageInfoForConfig, opts.NoSign);
+                    MsixPackager.PackageMsix(GetPackageInfoForConfig, appProject, opts.NoSign);
                     break;
                 case PackageType.Zip:
-                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig, target.Platform, opts.NoSign);
+                    ZipArchivePackager.PackageZip(GetPackageInfoForConfig, target.Platform, appProject, opts.NoSign);
                     break;
                 case PackageType.Deb:
                     DebPackager.PackageDeb(GetPackageInfoForConfig(), opts.NoSign);
@@ -40,7 +37,7 @@ public class PackageCommand : ICommand<PackageOptions>
                     RpmPackager.PackageRpm(GetPackageInfoForConfig(), opts.NoSign);
                     break;
                 case PackageType.Flatpak:
-                    FlatpakPackager.Package(GetPackageInfoForConfig(), opts.NoPre);
+                    FlatpakPackager.Package(GetPackageInfoForConfig(), opts.NoPre, opts.NoSign);
                     break;
                 case PackageType.Pkg:
                     MacPackager.Package(GetPackageInfoForConfig(), opts.NoSign, opts.NoNotarize);
@@ -50,7 +47,7 @@ public class PackageCommand : ICommand<PackageOptions>
         return 0;
     }
 
-    private static PackageInfo GetPackageInfo(Platform platform, string? packageName)
+    private static PackageInfo GetPackageInfo(Platform platform, string appProject, string? packageName)
     {
         var pkgInfo = new PackageInfo(platform, ProjectHelper.GetCurrentVersionName(),
             ProjectHelper.GetCurrentVersion(), packageName);
@@ -63,29 +60,19 @@ public class PackageCommand : ICommand<PackageOptions>
 
         string arch = platform == Platform.WinArm64 ? "win-arm64" : "win-x64";
 
-        foreach (var project in new[]
-                     { "NAPS2.App.WinForms", "NAPS2.App.Console" })
-        {
-            var buildPath = Path.Combine(Paths.SolutionRoot, project, "bin", "Release", "net10.0-windows", arch,
-                "publish");
-            if (!Directory.Exists(buildPath))
-            {
-                throw new Exception($"Could not find build path.");
-            }
-            PopulatePackageInfo(buildPath, platform, pkgInfo);
-        }
+        var appBuildPath = Path.Combine(Paths.SolutionRoot, appProject, "bin", "Release", "net11.0-windows",
+            arch, "publish");
+        PopulatePackageInfo(appBuildPath, platform, pkgInfo);
 
         // Include the 32-bit worker (on both x64 and arm64) for TWAIN support
-        var workerBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net10.0-windows",
+        var workerBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.Worker", "bin", "Release", "net11.0-windows",
             "win-x86");
         var workerPath = Path.Combine(workerBuildPath, "publish");
-        pkgInfo.AddFile(new PackageFile(workerPath, "lib", "NAPS2.Worker.exe"));
+        pkgInfo.AddFile(new PackageFile(workerPath, "", "NAPS2.Worker.exe"));
         // The worker encodes scanned images as JPEG, so it needs its own (32-bit) copy of the encoder. This isn't in the
         // publish folder as the worker is published as a single file.
         AddPlatformFile(pkgInfo, workerBuildPath, "_win32", "naps2_jpeg.dll");
 
-        var appBuildPath = Path.Combine(Paths.SolutionRoot, "NAPS2.App.WinForms", "bin", "Release", "net10.0-windows",
-            arch, "publish");
         if (platform == Platform.Win64)
         {
             AddPlatformFiles(pkgInfo, appBuildPath, "_win64");
@@ -97,7 +84,6 @@ public class PackageCommand : ICommand<PackageOptions>
             AddPlatformFiles(pkgInfo, appBuildPath, "_winarm");
         }
 
-        pkgInfo.AddFile(new PackageFile(appBuildPath, "", "appsettings.xml"));
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "LICENSE", "license.txt"));
         pkgInfo.AddFile(new PackageFile(Paths.SolutionRoot, "", "CONTRIBUTORS", "contributors.txt"));
 
@@ -106,161 +92,26 @@ public class PackageCommand : ICommand<PackageOptions>
 
     private static void PopulatePackageInfo(string buildPath, Platform platform, PackageInfo pkgInfo)
     {
-        string[] excludeDlls =
-        {
-            // DLLs that are unneeded but missed by the built-in trimming
-            "Microsoft.VisualBasic",
-            "System.Data",
-            "System.Private.DataContract",
-            "System.Windows.Forms.Design",
-            // For WPF
-            "D3D",
-            "Presentation",
-            "Reach",
-            "System.Windows.Controls.Ribbon",
-            "System.Windows.Input",
-            "System.Windows.Presentation",
-            "System.Xaml",
-            "UIAutomation",
-            "WindowsBase",
-            "wpfgfx",
-            // For debugging
-            "createdump",
-            "Microsoft.DiaSymReader",
-            "mscordaccore",
-            "mscordbi",
-        };
-
         var dir = new DirectoryInfo(buildPath);
         if (!dir.Exists)
         {
             throw new Exception($"Could not find path: {dir.FullName}");
         }
 
-        // Parse the NAPS2.deps.json file to strip out dependencies we're "manually" trimming via "excludeDlls"
-        var depsFile = dir.EnumerateFiles("*.deps.json").First();
-        JObject deps;
-        using (var stream = depsFile.OpenText())
-        using (var reader = new JsonTextReader(stream))
-            deps = (JObject) JToken.ReadFrom(reader);
-        string arch = platform == Platform.WinArm64 ? "win-arm64" : "win-x64";
-        var targets = (JObject) deps["targets"]![$".NETCoreApp,Version=v10.0/{arch}"]!;
-        foreach (var pair in targets)
+        // NAPS2.exe is published as a single file. The other top-level files (NAPS2.Console.exe, appsettings.xml) are
+        // the ones that aren't bundled into it. Native libraries in platform subfolders are added separately.
+        foreach (var file in dir.EnumerateFiles())
         {
-            var target = (JObject) pair.Value!;
-            if (target.TryGetValue("runtime", out var runtime))
-            {
-                foreach (var runtimeDlls in new Dictionary<string, JToken?>((JObject) runtime))
-                {
-                    var parts = runtimeDlls.Key.Split("/");
-                    var dllName = parts.Last();
-                    if (excludeDlls.Any(exclude => dllName.StartsWith(exclude)))
-                    {
-                        ((JObject) runtime).Remove(runtimeDlls.Key);
-                    }
-                }
-            }
-            if (target.TryGetValue("resources", out var resources))
-            {
-                foreach (var runtimeDlls in new Dictionary<string, JToken?>((JObject) resources))
-                {
-                    var dllName = runtimeDlls.Key.Split("/").Last();
-                    if (excludeDlls.Any(exclude => dllName.StartsWith(exclude)))
-                    {
-                        ((JObject) resources).Remove(runtimeDlls.Key);
-                    }
-                }
-            }
-            if (target.TryGetValue("native", out var native))
-            {
-                foreach (var runtimeDlls in new Dictionary<string, JToken?>((JObject) native))
-                {
-                    var dllName = runtimeDlls.Key.Split("/").Last();
-                    if (excludeDlls.Any(exclude => dllName.StartsWith(exclude)))
-                    {
-                        ((JObject) native).Remove(runtimeDlls.Key);
-                    }
-                }
-            }
+            pkgInfo.AddFile(file, "");
         }
-        using (StreamWriter file = depsFile.CreateText())
-        using (JsonTextWriter writer = new JsonTextWriter(file) { Formatting = Formatting.Indented })
-            deps.WriteTo(writer);
 
-        // Add each included file to the package contents
-        foreach (var exeFile in dir.EnumerateFiles("*.exe"))
+        // Satellite resource assemblies are bundled into NAPS2.exe, but installers still need the list of languages
+        var outputDir = dir.Parent ?? throw new InvalidOperationException();
+        foreach (var langFolder in outputDir.EnumerateDirectories()
+                     .Where(x => File.Exists(Path.Combine(x.FullName, "NAPS2.Lib.resources.dll"))))
         {
-            if (excludeDlls.All(exclude => !exeFile.Name.StartsWith(exclude)))
-            {
-                if (exeFile.Name == "NAPS2.Worker.exe") continue;
-                PatchExe(exeFile);
-                pkgInfo.AddFile(exeFile, "");
-            }
+            pkgInfo.Languages.Add(langFolder.Name);
         }
-        foreach (var configFile in dir.EnumerateFiles("*.json"))
-        {
-            pkgInfo.AddFile(configFile, "lib");
-        }
-        foreach (var dllFile in dir.EnumerateFiles("*.dll"))
-        {
-            if (excludeDlls.All(exclude => !dllFile.Name.StartsWith(exclude)))
-            {
-                pkgInfo.AddFile(dllFile, "lib");
-            }
-        }
-        foreach (var langFolder in dir.EnumerateDirectories()
-                     .Where(x => Regex.IsMatch(x.Name, "[a-z]{2}(-[A-Za-z]+)?")))
-        {
-            foreach (var resourceDll in langFolder.EnumerateFiles("*.resources.dll"))
-            {
-                if (excludeDlls.All(exclude => !resourceDll.Name.StartsWith(exclude)))
-                {
-                    pkgInfo.AddFile(resourceDll, Path.Combine("lib", langFolder.Name));
-                    pkgInfo.Languages.Add(langFolder.Name);
-                }
-            }
-        }
-    }
-
-    private static void PatchExe(FileInfo exeFile)
-    {
-        // The dotnet base exes (e.g. NAPS2.exe) have a hard-coded path for the relevant dll (e.g. NAPS2.dll).
-        // This path is also the path at which all the dependencies are searched. By default, the path is in the current
-        // directory, but we can easily replace it with a subpath to the "lib" folder. (Note that the path is padded so
-        // we don't even need to offset the bytes afterward.) This means everything other than the exes can live in
-        // that "lib" subfolder once we do this patch.
-        var bytes = File.ReadAllBytes(exeFile.FullName);
-        var from = Path.ChangeExtension(exeFile.Name, ".dll");
-        var to = @"lib\" + from;
-        var fromBytes = Encoding.UTF8.GetBytes(from);
-        var toBytes = Encoding.UTF8.GetBytes(to);
-        var index = SearchBytes(bytes, fromBytes);
-        if (bytes[(index - 4)..index] is [(byte) 'l', (byte) 'i', (byte) 'b', (byte) '\\'])
-        {
-            // Already patched
-            return;
-        }
-        for (int i = 0; i < toBytes.Length; i++)
-        {
-            bytes[index + i] = toBytes[i];
-        }
-        File.WriteAllBytes(exeFile.FullName, bytes);
-    }
-
-    private static int SearchBytes(byte[] haystack, byte[] needle)
-    {
-        var len = needle.Length;
-        var limit = haystack.Length - len;
-        for (var i = 0; i <= limit; i++)
-        {
-            var k = 0;
-            for (; k < len; k++)
-            {
-                if (needle[k] != haystack[i + k]) break;
-            }
-            if (k == len) return i;
-        }
-        return -1;
     }
 
     private static void AddPlatformFiles(PackageInfo pkgInfo, string buildPath, string platformPath)
@@ -268,13 +119,12 @@ public class PackageCommand : ICommand<PackageOptions>
         var folder = new DirectoryInfo(Path.Combine(buildPath, platformPath));
         foreach (var file in folder.EnumerateFiles())
         {
-            pkgInfo.AddFile(new PackageFile(file.DirectoryName ?? "", Path.Combine("lib", platformPath), file.Name));
+            pkgInfo.AddFile(new PackageFile(file.DirectoryName ?? "", platformPath, file.Name));
         }
     }
 
     private static void AddPlatformFile(PackageInfo pkgInfo, string buildPath, string platformPath, string fileName)
     {
-        pkgInfo.AddFile(new PackageFile(Path.Combine(buildPath, platformPath), Path.Combine("lib", platformPath),
-            fileName));
+        pkgInfo.AddFile(new PackageFile(Path.Combine(buildPath, platformPath), platformPath, fileName));
     }
 }

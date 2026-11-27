@@ -7,6 +7,7 @@ using Eto.GtkSharp.Drawing;
 using NAPS2.EtoForms.Ui;
 using NAPS2.EtoForms.Widgets;
 using NAPS2.Images.Gtk;
+using NAPS2.Platform.Linux;
 using GTK = Gtk;
 
 namespace NAPS2.EtoForms.Gtk;
@@ -19,17 +20,33 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override bool IsGtk => true;
 
-    public override IIconProvider IconProvider { get; } = new DefaultIconProvider();
+    // Qt-based desktops put OK first, GTK-based ones put Cancel first. XDG_CURRENT_DESKTOP is a colon-separated list
+    // of the names registered in the freedesktop.org menu spec (e.g. "ubuntu:GNOME").
+    public override DialogButtonOrder ButtonOrder =>
+        (Environment.GetEnvironmentVariable("XDG_CURRENT_DESKTOP") ?? "").Split(':')
+            .Any(x => x is "KDE" or "LXQt" or "TDE")
+            ? DialogButtonOrder.PrimarySecondaryClose
+            : DialogButtonOrder.SecondaryClosePrimary;
+
+    public override IIconProvider IconProvider { get; } = new LucideIconProvider(new DefaultIconProvider());
     public override IDarkModeProvider DarkModeProvider { get; } = new GtkDarkModeProvider();
+
+    public override void StartPreloading()
+    {
+        base.StartPreloading();
+        GtkSharpPreloader.Start();
+    }
 
     public override Application CreateApplicationCore()
     {
+        GtkSharpPreloader.Wait();
         var application = new Application(Platforms.Gtk);
+        LinuxApplicationMetadata.Set();
         application.Initialized += (_, _) =>
         {
             SetSystemTheme();
             // Hack to force Eto to use normal title bars for dialogs
-            var type = Assembly.GetAssembly(typeof(Eto.GtkSharp.Platform))!.GetType("Eto.GtkSharp.Helper");
+            var type = Type.GetType("Eto.GtkSharp.Helper, Eto.Gtk");
             var prop = type!.GetField("UseHeaderBar", BindingFlags.Public | BindingFlags.Static);
             prop!.SetValue(null, false);
         };
@@ -42,10 +59,24 @@ public class GtkEtoPlatform : EtoPlatform
         GTK.Settings.GetForScreen(Gdk.Screen.Default).ApplicationPreferDarkTheme = ColorScheme.DarkMode;
     }
 
+    public override void ConfigureFileDialog(FileDialog fileDialog)
+    {
+        // Set the parent form, which is necessary for portals to behave properly
+        var parent = GTK.Window.ListToplevels().FirstOrDefault(w => w.IsActive)
+                     ?? (GTK.Window?) Application.Instance.MainForm?.ControlObject;
+        if (parent != null && fileDialog.ControlObject is GTK.FileChooserNative dialog)
+        {
+            LinuxInterop.gtk_native_dialog_set_transient_for(dialog.Handle, parent.Handle);
+        }
+    }
+
     public override IListView<T> CreateListView<T>(ListViewBehavior<T> behavior) =>
         new GtkListView<T>(behavior);
 
     public override ISettingsNavigator CreateSettingsNavigator() => new GtkSettingsNavigator();
+
+    public override int IconButtonSize => 34;
+    public override int CompactIconButtonSize => 30;
 
     public override void ConfigureImageButton(Button button, ButtonFlags flags)
     {
@@ -53,8 +84,13 @@ public class GtkEtoPlatform : EtoPlatform
         {
             // Eto's default minimum size is meant for text buttons and makes icon-only buttons much wider than needed
             button.MinimumSize = Size.Empty;
+            button.ToNative().StyleContext.AddClass("icon-button");
+            if (flags.HasFlag(ButtonFlags.Compact))
+            {
+                button.ToNative().StyleContext.AddClass("compact");
+            }
         }
-        AttachDpiDependency(button, _ => button.ScaleImage());
+        AttachIconDependency(button, _ => button.ScaleImage());
     }
 
     public override Bitmap ToBitmap(IMemoryImage image)
@@ -84,8 +120,6 @@ public class GtkEtoPlatform : EtoPlatform
 
     public override void SetFrame(Control container, Control control, Point location, Size size, bool inOverlay)
     {
-        // TODO: Getting some errors when starting naps2 with the sidebar hidden then trying to show it
-        if (location.X < 0 || location.Y < 0) throw new InvalidOperationException();
         var overlay = container.ToNative() as GTK.Overlay;
         var panel = container.ToNative() as GTK.Fixed;
         var widget = control.ToNative();
@@ -98,22 +132,26 @@ public class GtkEtoPlatform : EtoPlatform
             xOff = X_OFF;
             yOff = Y_OFF;
         }
+        int x = Math.Max(location.X - xOff, 0);
+        int y = Math.Max(location.Y - yOff, 0);
+        int width = Math.Max(size.Width, 0);
+        int height = Math.Max(size.Height, 0);
         if (overlay != null)
         {
             // TODO: Ideally we would use GetChildPosition instead of margin but that signal is not firing, not sure why
-            widget.MarginTop = location.Y - yOff;
-            widget.MarginStart = location.X - xOff;
+            widget.MarginTop = y;
+            widget.MarginStart = x;
         }
         if (panel != null)
         {
             if (widget.Parent != panel) throw new InvalidOperationException("Invalid parent");
-            panel.Move(widget, location.X - xOff, location.Y - yOff);
+            panel.Move(widget, x, y);
         }
-        widget.SetSizeRequest(size.Width, size.Height);
+        widget.SetSizeRequest(width, height);
         if (widget is GTK.Overlay childOverlay)
         {
             var childPanel = (GTK.Fixed) childOverlay.Child;
-            childPanel.SetSizeRequest(size.Width, size.Height);
+            childPanel.SetSizeRequest(width, height);
         }
     }
 
@@ -374,6 +412,20 @@ public class GtkEtoPlatform : EtoPlatform
         imageView.Size = new Size(size, size);
     }
 
+    public override void AttachFrameSizeChanged(Control control, Action<Size> action)
+    {
+        var widget = control.ToNative();
+        void OnNotify(object o, GLib.NotifyArgs args)
+        {
+            if (widget.WidthRequest > 0 && widget.HeightRequest > 0)
+            {
+                action(new Size(widget.WidthRequest, widget.HeightRequest));
+            }
+        }
+        widget.AddNotification("width-request", OnNotify);
+        widget.AddNotification("height-request", OnNotify);
+    }
+
     public override void AttachDpiDependency(Control control, Action<float> callback)
     {
         if (control.Loaded)
@@ -386,24 +438,127 @@ public class GtkEtoPlatform : EtoPlatform
         }
     }
 
+    public override void AttachIconDependency(Control control, Action<float> callback)
+    {
+        AttachDpiDependency(control, callback);
+        // Icons can use the theme's text color
+        void OnColorSchemeChanged(object? sender, EventArgs e) =>
+            Invoker.Current.Invoke(() => callback(GetScaleFactor(control.ParentWindow)));
+        if (control.Loaded)
+        {
+            ColorScheme.ColorSchemeChanged += OnColorSchemeChanged;
+        }
+        control.Load += (_, _) => ColorScheme.ColorSchemeChanged += OnColorSchemeChanged;
+        control.UnLoad += (_, _) => ColorScheme.ColorSchemeChanged -= OnColorSchemeChanged;
+    }
+
     public override void ConfigureDonateButton(Button button)
     {
         var native = (GTK.Button) button.ToNative();
         native.StyleContext.AddClass("donate-button");
     }
 
+    public override MessageDialogResult ShowMessageDialog(Window? owner, MessageDialogOptions options)
+    {
+        var dialog = new GTK.MessageDialog((GTK.Window?) (owner ?? DefaultDialogOwner)?.ControlObject,
+            GTK.DialogFlags.Modal,
+            options.Type switch
+            {
+                MessageBoxType.Warning => GTK.MessageType.Warning,
+                MessageBoxType.Error => GTK.MessageType.Error,
+                MessageBoxType.Question => GTK.MessageType.Question,
+                _ => GTK.MessageType.Info
+            }, GTK.ButtonsType.None, false, "");
+        dialog.Text = options.Text;
+        dialog.Title = options.Title;
+        int GetResponse(MessageDialogResult result) => result switch
+        {
+            MessageDialogResult.Primary => (int) GTK.ResponseType.Accept,
+            MessageDialogResult.Secondary => (int) GTK.ResponseType.Reject,
+            _ => (int) GTK.ResponseType.Cancel
+        };
+        foreach (var (text, result) in options.GetButtons(ButtonOrder))
+        {
+            var button = (GTK.Button) dialog.AddButton(text.Replace("_", "__"), GetResponse(result));
+            if (result == MessageDialogResult.Primary)
+            {
+                button.StyleContext.AddClass(options.Destructive ? "destructive-action" : "suggested-action");
+            }
+        }
+        dialog.DefaultResponse = (GTK.ResponseType) GetResponse(options.EffectiveDefaultButton);
+        var response = (GTK.ResponseType) dialog.Run();
+        dialog.Hide();
+        dialog.Dispose();
+        return response switch
+        {
+            GTK.ResponseType.Accept => MessageDialogResult.Primary,
+            GTK.ResponseType.Reject => MessageDialogResult.Secondary,
+            _ => MessageDialogResult.Close
+        };
+    }
+
+    public override void InitForm(Window window)
+    {
+        if (window is Dialog dialog)
+        {
+            dialog.PreLoad += (_, _) => dialog.Owner ??= DefaultDialogOwner;
+        }
+    }
+
+    public override bool SupportsInlinePreviewToolBar => true;
+
+    public override Control CreateInlinePreviewToolBar(ToolBar toolBar)
+    {
+        var native = (GTK.Toolbar) toolBar.ControlObject;
+        native.IconSize = GTK.IconSize.SmallToolbar;
+        native.Style = GTK.ToolbarStyle.Icons;
+        native.StyleContext.AddClass("preview-toolbar");
+        foreach (var item in native.Children.OfType<GTK.ToolItem>())
+        {
+            item.Homogeneous = false;
+            item.StyleContext.AddClass("preview-toolbar-button");
+        }
+        native.Mapped += (_, _) =>
+        {
+            foreach (var item in toolBar.Items)
+            {
+                if (item.ControlObject is GTK.ToolButton button && item.Image != null)
+                {
+                    button.IconWidget = item.Image.ToGdk().ToScaledImage(native.ScaleFactor);
+                    button.IconWidget.Show();
+                }
+            }
+        };
+        return native.AsEto();
+    }
+
+    public override void SetDefaultButton(Window window, Button? button)
+    {
+        base.SetDefaultButton(window, button);
+        if (window is not Dialog)
+        {
+            button?.ToNative().StyleContext.AddClass("suggested-action");
+        }
+    }
+
     public override void SetAccessibleName(Control control, string name) =>
         control.ToNative().Accessible.Name = name;
 
-    public override void ConfigureZoomButton(Button button, string icon)
+    public override void ConfigureFloatingButton(Button button, string icon)
     {
         var gtkButton = button.ToNative();
         button.Text = "";
-        button.Image = IconProvider.GetIcon(icon, IconScenario.Button, gtkButton.ScaleFactor);
+        button.Image = IconProvider.GetIcon(icon, IconScenario.FloatingButton, gtkButton.ScaleFactor);
         button.ScaleImage();
         button.Size = Size.Empty;
-        gtkButton.StyleContext.AddClass("zoom-button");
+        gtkButton.StyleContext.AddClass("floating-button");
         gtkButton.SetSizeRequest(0, 0);
+    }
+
+    public override void ConfigureJoinedButtons(Button left, Button right)
+    {
+        left.ToNative().StyleContext.AddClass("joined-left");
+        right.ToNative().StyleContext.AddClass("joined-right");
     }
 
     public override void AttachMouseWheelEvent(Control control, EventHandler<MouseEventArgs> eventHandler)
@@ -430,6 +585,22 @@ public class GtkEtoPlatform : EtoPlatform
             eventHandler.Invoke(sender, newArgs);
             args.RetVal = newArgs.Handled;
         };
+    }
+
+    public override void AttachFirstDrawnEvent(Window window, EventHandler<EventArgs> eventHandler)
+    {
+        var gtkWindow = (GTK.Window) window.ToNative();
+        void OnDrawn(object o, GTK.DrawnArgs args)
+        {
+            gtkWindow.Drawn -= OnDrawn;
+            // Drawn is raised before the window's contents are drawn, so wait for the frame to finish
+            GLib.Idle.Add(() =>
+            {
+                eventHandler(window, EventArgs.Empty);
+                return false;
+            });
+        }
+        gtkWindow.Drawn += OnDrawn;
     }
 
     public override void SetSplitterPosition(Splitter splitter, int pos)

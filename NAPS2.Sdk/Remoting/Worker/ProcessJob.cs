@@ -24,13 +24,19 @@ internal class Job : IDisposable
     private IntPtr _handle;
     private bool _disposed;
 
-    public Job()
+    private const uint JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK = 0x1000;
+    private const uint JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x2000;
+
+    /// <param name="allowBreakaway">If true, processes started by processes in the job aren't added to the job, so
+    /// they won't be killed with it.</param>
+    public Job(bool allowBreakaway = false)
     {
         _handle = CreateJobObject(IntPtr.Zero, null);
 
         var info = new JOBOBJECT_BASIC_LIMIT_INFORMATION
         {
-            LimitFlags = 0x2000
+            LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE |
+                         (allowBreakaway ? JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK : 0)
         };
 
         var extendedInfo = new JOBOBJECT_EXTENDED_LIMIT_INFORMATION
@@ -40,10 +46,17 @@ internal class Job : IDisposable
 
         int length = Marshal.SizeOf(typeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
         IntPtr extendedInfoPtr = Marshal.AllocHGlobal(length);
-        Marshal.StructureToPtr(extendedInfo, extendedInfoPtr, false);
+        try
+        {
+            Marshal.StructureToPtr(extendedInfo, extendedInfoPtr, false);
 
-        if (!SetInformationJobObject(_handle, JobObjectInfoType.ExtendedLimitInformation, extendedInfoPtr, (uint)length))
-            throw new Exception($"Unable to set information.  Error: {Marshal.GetLastWin32Error()}");
+            if (!SetInformationJobObject(_handle, JobObjectInfoType.ExtendedLimitInformation, extendedInfoPtr, (uint)length))
+                throw new Exception($"Unable to set information.  Error: {Marshal.GetLastWin32Error()}");
+        }
+        finally
+        {
+            Marshal.FreeHGlobal(extendedInfoPtr);
+        }
     }
 
     public void Dispose()

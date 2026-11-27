@@ -1,0 +1,22 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <!-- Runtime files that are unneeded but not removed by the SDK -->
+        <_Naps2UnneededRuntimeFiles>Microsoft\.VisualBasic|System\.Data|System\.Private\.DataContract|System\.Windows\.Forms\.Design|System\.Design|System\.Drawing\.Design</_Naps2UnneededRuntimeFiles>
+        <_Naps2UnneededRuntimeFiles Condition="'$(UseWPF)' != 'true'">$(_Naps2UnneededRuntimeFiles)|WindowsBase</_Naps2UnneededRuntimeFiles>
+        <!-- Runtime files only used for debugging -->
+        <_Naps2DebuggingRuntimeFiles>createdump|Microsoft\.DiaSymReader|mscordaccore|mscordbi</_Naps2DebuggingRuntimeFiles>
+    </PropertyGroup>
+
+    <!-- Removes the files (matched by name prefix) from the published output and from the generated deps.json. -->
+    <Target Name="Naps2ExcludeRuntimeFiles" AfterTargets="ResolveRuntimePackAssets"
+            Condition="'$(_IsPublishing)' == 'true'">
+        <ItemGroup>
+            <_Naps2ExcludedRuntimeFile Include="@(RuntimePackAsset)"
+                                       Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)%(Extension)', '^($(_Naps2UnneededRuntimeFiles)|$(_Naps2DebuggingRuntimeFiles))'))" />
+            <RuntimePackAsset Remove="@(_Naps2ExcludedRuntimeFile)" />
+            <ReferenceCopyLocalPaths Remove="@(_Naps2ExcludedRuntimeFile)" />
+        </ItemGroup>
+    </Target>
+
+</Project>

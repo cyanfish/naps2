@@ -5,7 +5,7 @@ namespace NAPS2.Tools.Project.Packaging;
 
 public static class FlatpakPackager
 {
-    public static void Package(PackageInfo packageInfo, bool noPre)
+    public static void Package(PackageInfo packageInfo, bool noPre, bool noSign)
     {
         // TODO: This only uses committed files, which is different from other packagers - maybe we can fix that somehow
 
@@ -34,6 +34,9 @@ public static class FlatpakPackager
         File.Copy(
             Path.Combine(Paths.SetupLinux, "sane-streamdevices.patch"),
             Path.Combine(packageDir, "sane-streamdevices.patch"), true);
+        File.Copy(
+            Path.Combine(Paths.SetupLinux, "gdk-pixbuf-native-loaders.patch"),
+            Path.Combine(packageDir, "gdk-pixbuf-native-loaders.patch"), true);
 
         if (!noPre)
         {
@@ -65,7 +68,7 @@ public static class FlatpakPackager
         var repoDir = N2Config.FlatpakRepo;
         repoDir = string.IsNullOrEmpty(repoDir) ? Path.Combine(packageDir, "repo") : repoDir;
         var branch = packageInfo.VersionName.Contains('b') ? "beta" : "stable";
-        var gpg = N2Config.FlatpakGpgKey;
+        var gpg = noSign ? "" : N2Config.FlatpakGpgKey;
         var gpgArgs = string.IsNullOrEmpty(gpg) ? "" : $"--gpg-sign={gpg}";
         Cli.Run("flatpak", $"build-export {gpgArgs} --arch {arch} {repoDir} {buildDir} {branch}");
 

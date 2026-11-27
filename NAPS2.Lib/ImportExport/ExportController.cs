@@ -201,7 +201,7 @@ public class ExportController : IExportController
         {
             return null;
         }
-        return MessageBox.Show(MiscResources.SaveOcrTextAlongsideImages, MiscResources.SaveImages,
+        return MessageBox.Show(UiStrings.SaveOcrTextAlongsideImages, UiStrings.SaveImages,
                    MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes
             ? ocrParams
             : null;

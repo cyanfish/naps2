@@ -121,12 +121,6 @@ internal class KeyboardShortcutsPanel : SettingsPanel
                 }
             }
         };
-        if (EtoPlatform.Current.ScaleLayout)
-        {
-            var shortcutColumn = _gridView.Columns[1];
-            EtoPlatform.Current.AttachDpiDependency(_gridView,
-                scale => shortcutColumn.Width = (int) Math.Round(ShortcutColumnWidth * scale));
-        }
         _gridView.SelectionChanged += GridView_SelectionChanged;
         _gridView.CellDoubleClick += Assign_Click;
         _shortcutText.KeyDown += ShortcutText_KeyDown;
@@ -207,7 +201,7 @@ internal class KeyboardShortcutsPanel : SettingsPanel
         {
             return;
         }
-        var text = _ksm.Stringify(e.KeyData);
+        var text = _ksm.KeysToInvariantString(e.KeyData);
         _transact.Set(selected.Accessor, text);
         UpdateUi();
     }
@@ -230,7 +224,7 @@ internal class KeyboardShortcutsPanel : SettingsPanel
         else
         {
             bool locked = _transactionConfig.AppLocked.Has(selected.Accessor);
-            _shortcutText.Text = GetKeyString(selected);
+            _shortcutText.Text = GetShortcutLabel(selected);
             _shortcutText.ReadOnly = true;
             _assign.Enabled = !locked;
             _unassign.Enabled = !locked && _shortcutText.Text != "";
@@ -238,20 +232,12 @@ internal class KeyboardShortcutsPanel : SettingsPanel
         _gridView.Invalidate();
     }
 
-    private string GetKeyString(Shortcut shortcut)
-    {
-        if (shortcut.Accessor == null) return "";
-
-        var keys = _ksm.Parse(_transactionConfig.Get(shortcut.Accessor));
-        return _ksm.Stringify(keys) ?? "";
-    }
-
     private string GetShortcutLabel(Shortcut shortcut)
     {
         if (shortcut.Accessor == null) return "";
 
         var keys = _ksm.Parse(_transactionConfig.Get(shortcut.Accessor));
-        return _ksm.Stringify(keys) ?? "";
+        return _ksm.KeysToLocalizedString(keys) ?? "";
     }
 
     public override void Save()

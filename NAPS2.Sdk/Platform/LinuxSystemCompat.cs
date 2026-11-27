@@ -21,7 +21,7 @@ internal class LinuxSystemCompat : ISystemCompat
 
     public bool SupportsTheme => true;
 
-    public bool SupportsShowPageNumbers => false;
+    public bool SupportsShowPageNumbers => true;
 
     public bool SupportsProfilesToolbar => true;
 
@@ -42,8 +42,6 @@ internal class LinuxSystemCompat : ISystemCompat
     public bool CombinedPdfAndImageSaving => false;
 
     public bool ShouldRememberBackgroundOperations => true;
-
-    public bool RenderInWorker => false;
 
     public bool SupportsWinX86Worker => false;
 

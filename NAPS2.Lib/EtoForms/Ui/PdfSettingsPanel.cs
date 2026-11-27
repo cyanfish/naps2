@@ -11,6 +11,7 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
     private readonly FilePathWithPlaceholders _defaultFilePath;
     private readonly CheckBox _skipSavePrompt = new() { Text = UiStrings.SkipSavePrompt };
     private readonly CheckBox _singlePagePdfs = new() { Text = UiStrings.SinglePageFiles };
+    private readonly CheckBox _allowJbig2 = new() { Text = UiStrings.AllowJbig2Compression };
     private readonly TextBox _title = new();
     private readonly TextBox _author = new();
     private readonly TextBox _subject = new();
@@ -94,7 +95,10 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
             ),
             L.GroupBox(
                 UiStrings.Compatibility,
-                _compat
+                L.Column(
+                    _compat,
+                    _allowJbig2
+                )
             )
         );
     }
@@ -107,6 +111,10 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
                 DefaultFileName = _defaultFilePath.Text,
                 SkipSavePrompt = _skipSavePrompt.IsChecked(),
                 SinglePagePdfs = _singlePagePdfs.IsChecked(),
+                Compression = new PdfCompression
+                {
+                    AllowJbig2 = _allowJbig2.IsChecked()
+                },
                 Metadata = new PdfMetadata
                 {
                     Title = _title.Text,
@@ -137,6 +145,7 @@ internal class PdfSettingsPanel : SettingsPanelWithRememberCheckbox<PdfSettings>
             _defaultFilePath.Text = value.DefaultFileName;
             _skipSavePrompt.Checked = value.SkipSavePrompt;
             _singlePagePdfs.Checked = value.SinglePagePdfs;
+            _allowJbig2.Checked = value.Compression.AllowJbig2;
             _title.Text = value.Metadata.Title;
             _author.Text = value.Metadata.Author;
             _subject.Text = value.Metadata.Subject;

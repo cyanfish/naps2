@@ -18,6 +18,8 @@ public class NotificationArea : IDisposable
 
     public LayoutColumn Content { get; } = L.Column(C.Filler()).Spacing(20).Padding(15);
 
+    internal IEnumerable<NotificationView> Views => _items.Values.Select(x => x.Item1);
+
     private void NotificationsUpdated(object? sender, EventArgs e)
     {
         UpdateViews();

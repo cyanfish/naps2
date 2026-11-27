@@ -5,7 +5,11 @@ public class DocCommand : ICommand<DocOptions>
     public int Run(DocOptions options)
     {
         // Clean up old build
-        Directory.Delete(Path.Combine(Paths.SolutionRoot, "NAPS2.Sdk", "_doc", "_site"), true);
+        var sitePath = Path.Combine(Paths.SolutionRoot, "NAPS2.Sdk", "_doc", "_site");
+        if (Directory.Exists(sitePath))
+        {
+            Directory.Delete(sitePath, true);
+        }
         foreach (var file in new DirectoryInfo(Path.Combine(Paths.SolutionRoot, "NAPS2.Sdk", "_doc", "api"))
                      .EnumerateFiles().Where(x => x.Name != ".gitignore"))
         {

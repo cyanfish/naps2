@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
         <OutputType>WinExe</OutputType>
         <LargeAddressAware>true</LargeAddressAware>
         <RootNamespace>NAPS2.Sdk.Worker</RootNamespace>
@@ -16,6 +16,7 @@
         <PublishSingleFile>true</PublishSingleFile>
         <PublishTrimmed>true</PublishTrimmed>
         <TrimMode>partial</TrimMode>
+        <PublishReadyToRun>true</PublishReadyToRun>
         <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     </PropertyGroup>
 

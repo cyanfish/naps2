@@ -10,12 +10,13 @@ public class LayoutControl : LayoutElement
 {
     private static readonly FieldInfo VisualParentField =
         typeof(Control).GetField("VisualParent_Key", BindingFlags.NonPublic | BindingFlags.Static)!;
-    private static readonly MethodInfo TriggerPreLoadMethod =
-        typeof(Control).GetMethod("TriggerPreLoad", BindingFlags.NonPublic | BindingFlags.Instance)!;
-    private static readonly MethodInfo TriggerLoadMethod =
-        typeof(Control).GetMethod("TriggerLoad", BindingFlags.NonPublic | BindingFlags.Instance)!;
-    private static readonly MethodInfo TriggerLoadCompleteMethod =
-        typeof(Control).GetMethod("TriggerLoadComplete", BindingFlags.NonPublic | BindingFlags.Instance)!;
+    private static readonly Action<Control, EventArgs> TriggerPreLoad = GetTriggerMethod("TriggerPreLoad");
+    private static readonly Action<Control, EventArgs> TriggerLoad = GetTriggerMethod("TriggerLoad");
+    private static readonly Action<Control, EventArgs> TriggerLoadComplete = GetTriggerMethod("TriggerLoadComplete");
+
+    private static Action<Control, EventArgs> GetTriggerMethod(string name) =>
+        typeof(Control).GetMethod(name, BindingFlags.NonPublic | BindingFlags.Instance)!
+            .CreateDelegate<Action<Control, EventArgs>>();
 
     private bool _isAdded;
     private bool _isWindowSet;
@@ -73,16 +74,17 @@ public class LayoutControl : LayoutElement
         }
         bounds.Size = UpdateFixedDimensions(context, bounds.Size);
         UpdateVisibility(context);
+        if (!IsVisibleInContext(context)) return;
         UpdateFrame(context, bounds);
     }
 
     private void UpdateFrame(LayoutContext context, RectangleF bounds)
     {
         if (Control == null) return;
-        var location = new PointF(bounds.X + Padding.Left * context.Scale, bounds.Y + Padding.Top * context.Scale);
+        var location = new PointF(bounds.X + Padding.Left, bounds.Y + Padding.Top);
         var size = new SizeF(
-            bounds.Width - Padding.Horizontal * context.Scale,
-            bounds.Height - Padding.Vertical * context.Scale);
+            bounds.Width - Padding.Horizontal,
+            bounds.Height - Padding.Vertical);
         size = SizeF.Max(SizeF.Empty, size);
         EtoPlatform.Current.SetFrame(
             context.Container,
@@ -95,7 +97,7 @@ public class LayoutControl : LayoutElement
     protected override SizeF GetPreferredSizeCore(LayoutContext context, RectangleF parentBounds)
     {
         var size = SizeF.Empty;
-        if (!IsVisible)
+        if (!IsVisibleInContext(context))
         {
             return size;
         }
@@ -113,8 +115,8 @@ public class LayoutControl : LayoutElement
         }
         size = UpdateFixedDimensions(context, size);
         size = new SizeF(
-            size.Width + Padding.Horizontal * context.Scale,
-            size.Height + Padding.Vertical * context.Scale);
+            size.Width + Padding.Horizontal,
+            size.Height + Padding.Vertical);
         if (DEBUG_SIZE)
         {
             var text = Control is TextControl txt ? $"\"{txt.Text}\" " : "";
@@ -127,14 +129,13 @@ public class LayoutControl : LayoutElement
     private SizeF GetWrappedSize(LayoutContext context, RectangleF parentBounds, int wrapDefaultWidth)
     {
         if (Control == null) throw new InvalidOperationException();
-        int scaledWrapDefaultWidth = (int) Math.Round(wrapDefaultWidth * context.Scale);
         // Label wrapping is fairly complicated.
         if (!context.IsLayout)
         {
             // If we're not in a layout operation (i.e. we're getting a minimum or default form size), the
             // measured size should be based on the default width for wrapping.
             // This produces the label width (if small) or the default width (if long enough to wrap).
-            return EtoPlatform.Current.GetWrappedSize(Control, scaledWrapDefaultWidth);
+            return EtoPlatform.Current.GetWrappedSize(Control, wrapDefaultWidth);
         }
         if (context.IsCellLengthQuery)
         {
@@ -145,7 +146,7 @@ public class LayoutControl : LayoutElement
             // usually what we want.
             return new SizeF(
                 EtoPlatform.Current.GetWrappedSize(Control, (int) parentBounds.Width).Width,
-                EtoPlatform.Current.GetWrappedSize(Control, Math.Min((int) parentBounds.Width, scaledWrapDefaultWidth))
+                EtoPlatform.Current.GetWrappedSize(Control, Math.Min((int) parentBounds.Width, wrapDefaultWidth))
                     .Height);
         }
         // Now that we've handled the special cases, this measures the real dimensions of the label given
@@ -157,35 +158,35 @@ public class LayoutControl : LayoutElement
     {
         if (MaxWidth != null)
         {
-            size.Width = Math.Min(size.Width, MaxWidth.Value * context.Scale);
+            size.Width = Math.Min(size.Width, MaxWidth.Value);
         }
         if (MinWidth != null)
         {
-            size.Width = Math.Max(size.Width, MinWidth.Value * context.Scale);
+            size.Width = Math.Max(size.Width, MinWidth.Value);
         }
         if (Width != null)
         {
-            size.Width = Width.Value * context.Scale;
+            size.Width = Width.Value;
         }
         if (!context.IsLayout && NaturalWidth != null)
         {
-            size.Width = NaturalWidth.Value * context.Scale;
+            size.Width = NaturalWidth.Value;
         }
         if (Height != null)
         {
-            size.Height = Height.Value * context.Scale;
+            size.Height = Height.Value;
         }
         if (MaxHeight != null)
         {
-            size.Height = Math.Min(size.Height, MaxHeight.Value * context.Scale);
+            size.Height = Math.Min(size.Height, MaxHeight.Value);
         }
         if (MinHeight != null)
         {
-            size.Height = Math.Max(size.Height, MinHeight.Value * context.Scale);
+            size.Height = Math.Max(size.Height, MinHeight.Value);
         }
         if (!context.IsLayout && NaturalHeight != null)
         {
-            size.Height = NaturalHeight.Value * context.Scale;
+            size.Height = NaturalHeight.Value;
         }
         // Fixed dimensions can't shrink a control below the platform's minimum size (e.g. Gtk always allocates widgets
         // at least their minimum size), so account for that or the control overflows its layout cell. This is per
@@ -236,9 +237,9 @@ public class LayoutControl : LayoutElement
         if (!_isWindowSet && context.Window != null)
         {
             Control.Properties.Set<Container>(VisualParentField.GetValue(null), context.Window);
-            TriggerPreLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
-            TriggerLoadMethod.Invoke(Control, new object[] { EventArgs.Empty });
-            TriggerLoadCompleteMethod.Invoke(Control, new object[] { EventArgs.Empty });
+            TriggerPreLoad(Control, EventArgs.Empty);
+            TriggerLoad(Control, EventArgs.Empty);
+            TriggerLoadComplete(Control, EventArgs.Empty);
             _isWindowSet = true;
         }
     }
@@ -248,7 +249,7 @@ public class LayoutControl : LayoutElement
         if (Control == null) return;
         if (Visibility != null || context.ParentVisibility != null)
         {
-            Control.Visible = IsVisible && (context.ParentVisibility?.IsVisible ?? true);
+            Control.Visible = IsVisibleInContext(context);
         }
     }
 }

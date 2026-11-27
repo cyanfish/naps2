@@ -27,10 +27,6 @@ public static class CurrentPlatformFlags
         {
             p |= PlatformFlags.Arm64;
         }
-        if (TestImageContextFactory.Get().ImageType.Name == "ImageSharpImage")
-        {
-            p |= PlatformFlags.ImageSharpImage;
-        }
         if (TestImageContextFactory.Get().ImageType.Name == "WpfImage")
         {
             p |= PlatformFlags.WpfImage;
@@ -46,6 +42,10 @@ public static class CurrentPlatformFlags
         if (TestImageContextFactory.Get().ImageType.Name == "GtkImage")
         {
             p |= PlatformFlags.GtkImage;
+        }
+        if (TestImageContextFactory.Get().ImageType.Name == "SkiaImage")
+        {
+            p |= PlatformFlags.SkiaImage;
         }
         return p;
     }

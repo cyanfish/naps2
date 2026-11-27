@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Reflection;
 using NAPS2.Serialization;
 
 namespace NAPS2.Images.Transforms;
@@ -11,13 +10,31 @@ public abstract record Transform
         XmlSerializer.RegisterCustomTypes(new TransformTypes());
     }
 
+    // Listed explicitly (rather than found via reflection) so they aren't removed by trimming
+    internal static readonly Type[] KnownTypes =
+    [
+        typeof(Transform),
+        typeof(BlackWhiteTransform),
+        typeof(BrightnessTransform),
+        typeof(ColorBitDepthTransform),
+        typeof(CorrectionTransform),
+        typeof(CropTransform),
+        typeof(FileFormatTransform),
+        typeof(GrayscaleTransform),
+        typeof(HueTransform),
+        typeof(ResizeTransform),
+        typeof(ResolutionTransform),
+        typeof(RotationTransform),
+        typeof(SaturationTransform),
+        typeof(ScaleTransform),
+        typeof(SharpenTransform),
+        typeof(ThumbnailTransform),
+        typeof(TrueContrastTransform)
+    ];
+
     private class TransformTypes : CustomXmlTypes<Transform>
     {
-        protected override Type[] GetKnownTypes() => Assembly
-            .GetExecutingAssembly()
-            .GetTypes()
-            .Where(t => typeof(Transform).IsAssignableFrom(t))
-            .ToArray();
+        protected override Type[] GetKnownTypes() => KnownTypes;
     }
 
     /// <summary>

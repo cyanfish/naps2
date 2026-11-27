@@ -1,10 +1,7 @@
 ﻿using System.IO.Compression;
 using System.Net.Http;
 using Crowdin.Api;
-using Crowdin.Api.SourceFiles;
 using Crowdin.Api.Translations;
-using NAPS2.Tools.Project;
-using File = System.IO.File;
 
 namespace NAPS2.Tools.Localization;
 

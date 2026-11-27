@@ -60,6 +60,11 @@ public class LinkNotificationView : NotificationView
         }
     }
 
+    /// <summary>
+    /// Shows the link's context menu below the link (rather than at the mouse position).
+    /// </summary>
+    internal void ShowContextMenu() => _contextMenu.Show(_link, new PointF(0, _link.Height));
+
     protected virtual void OpenFolder()
     {
         ProcessHelper.OpenFolder(_folderTarget!);

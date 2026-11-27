@@ -4,6 +4,9 @@ using NAPS2.EtoForms.Ui;
 using NAPS2.Modules;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan;
+#if TEST_SCENARIOS
+using NAPS2.TestScenarios;
+#endif
 
 namespace NAPS2.EntryPoints;
 
@@ -14,9 +17,19 @@ public static class GuiEntryPoint
 {
     public static int Run(string[] args, Module imageModule, Module platformModule)
     {
+        EtoPlatform.Current.StartPreloading();
+
+#if TEST_SCENARIOS
+        var testScenarioModule = TestScenarioModule.CreateFromEnvironment();
+#endif
+
         // Initialize Autofac (the DI framework)
         var container = AutoFacHelper.FromModules(
-            new CommonModule(), imageModule, platformModule, new GuiModule(), new RecoveryModule(), new StaticInitModule());
+            new CommonModule(), imageModule, platformModule, new GuiModule(), new RecoveryModule(), new StaticInitModule()
+#if TEST_SCENARIOS
+            , testScenarioModule
+#endif
+        );
 
         Paths.ClearTemp();
 
@@ -31,14 +44,20 @@ public static class GuiEntryPoint
         container.Resolve<CultureHelper>().SetCulturesFromConfig();
         Trace.Listeners.Add(new ConsoleTraceListener());
 
-        // Start a pending worker process
-        container.Resolve<IWorkerFactory>().Init(container.Resolve<ScanningContext>());
+        // Spare worker processes are started once the main form is drawn, as they compete with it for CPU
+        var workerFactory = container.Resolve<IWorkerFactory>();
+        var scanningContext = container.Resolve<ScanningContext>();
+        workerFactory.Init(scanningContext, new WorkerFactoryInitOptions { StartSpareWorkers = false });
 
         // Show the main form
         var application = EtoPlatform.Current.CreateApplication();
         Invoker.Current = new EtoInvoker(application);
         var formFactory = container.Resolve<IFormFactory>();
         var desktop = formFactory.Create<DesktopForm>();
+        EtoPlatform.Current.AttachFirstDrawnEvent(desktop, (_, _) => workerFactory.StartSpareWorkers(scanningContext));
+#if TEST_SCENARIOS
+        testScenarioModule?.Attach(container, desktop);
+#endif
 
         application.Run(desktop);
         return 0;

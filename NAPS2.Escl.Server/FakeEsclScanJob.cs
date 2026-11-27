@@ -11,9 +11,9 @@ internal class FakeEsclScanJob : IEsclScanJob
         _callback?.Invoke(StatusTransition.CancelJob);
     }
 
-    public void RegisterStatusTransitionCallback(Action<StatusTransition> callback)
+    public void Start(Action<StatusTransition>? statusCallback = null)
     {
-        _callback = callback;
+        _callback = statusCallback;
     }
 
     public Task<bool> WaitForNextDocument(CancellationToken cancelToken) => Task.FromResult(true);

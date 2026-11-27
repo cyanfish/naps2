@@ -6,10 +6,11 @@ using NAPS2.EtoForms.Widgets;
 using NAPS2.Lang;
 using NAPS2.Scan;
 using NAPS2.Scan.Internal;
+using NAPS2.TestScenarios;
 
 namespace NAPS2.EtoForms.Ui;
 
-public class ChooseDeviceForm : EtoDialogBase
+internal class ChooseDeviceForm : EtoDialogBase
 {
     private const string FLATPAK_MISSING_SCANNER_URL = "https://www.naps2.com/doc/flatpak-missing-scanner";
 
@@ -24,6 +25,7 @@ public class ChooseDeviceForm : EtoDialogBase
     private readonly IIconProvider _iconProvider;
     private readonly DeviceListViewBehavior _deviceListViewBehavior;
     private readonly ScanningContext _scanningContext;
+    private readonly IScanBridgeFactory _scanBridgeFactory;
     private readonly DeviceCapsCache _deviceCapsCache;
     private readonly LayoutVisibility _textListVis = new(false);
     private readonly ListBox _deviceTextList = new();
@@ -46,11 +48,12 @@ public class ChooseDeviceForm : EtoDialogBase
 
     public ChooseDeviceForm(Naps2Config config, IIconProvider iconProvider,
         DeviceListViewBehavior deviceListViewBehavior, ScanningContext scanningContext,
-        DeviceCapsCache deviceCapsCache) : base(config)
+        DeviceCapsCache deviceCapsCache, IScanBridgeFactory scanBridgeFactory) : base(config)
     {
         _iconProvider = iconProvider;
         _deviceListViewBehavior = deviceListViewBehavior;
         _scanningContext = scanningContext;
+        _scanBridgeFactory = scanBridgeFactory;
         _deviceCapsCache = deviceCapsCache;
         _selectDevice = C.OkButton(this, SelectDevice, UiStrings.Select);
         _deviceIconList = EtoPlatform.Current.CreateListView(deviceListViewBehavior);
@@ -59,7 +62,7 @@ public class ChooseDeviceForm : EtoDialogBase
         deviceListViewBehavior.SetIconName(ManualIpMarker, "network_ip");
 
         EtoPlatform.Current.SetImageSize(_statusIcon, 16);
-        EtoPlatform.Current.AttachDpiDependency(this, _ =>
+        EtoPlatform.Current.AttachIconDependency(this, _ =>
         {
             _deviceIconList.RegenerateImages();
             UpdateStatusIcon();
@@ -140,11 +143,11 @@ public class ChooseDeviceForm : EtoDialogBase
         {
             driverElements.Add(_twainDriver.Scale());
         }
-        if (PlatformCompat.System.IsAppleDriverSupported)
+        if (PlatformCompat.System.IsAppleDriverSupported || TestScenarioFlags.ShowAllDrivers)
         {
             driverElements.Add(_appleDriver.Scale());
         }
-        if (PlatformCompat.System.IsSaneDriverSupported)
+        if (PlatformCompat.System.IsSaneDriverSupported || TestScenarioFlags.ShowAllDrivers)
         {
             driverElements.Add(_saneDriver.Scale());
         }
@@ -171,11 +174,11 @@ public class ChooseDeviceForm : EtoDialogBase
             ),
             _deviceIconList.Control.NaturalSize(150, 100).Scale().Visible(!_textListVis),
             _deviceTextList.NaturalSize(150, 100).Scale().Visible(_textListVis),
-#if NET6_0_OR_GREATER
-            OperatingSystem.IsLinux() && File.Exists("/.flatpak-info")
-                ? _flatpakMissingDevice.Visible(_saneDriverVis)
-                : C.None(),
-#endif
+            TestScenarioFlags.ShowFlatpakLink
+                ? _flatpakMissingDevice
+                : OperatingSystem.IsLinux() && File.Exists("/.flatpak-info")
+                    ? _flatpakMissingDevice.Visible(_saneDriverVis)
+                    : C.None(),
             L.Row(
                 _spinner.Visible(_spinnerVis).AlignCenter(),
                 _statusIcon.Visible(!_spinnerVis).AlignCenter(),
@@ -246,7 +249,7 @@ public class ChooseDeviceForm : EtoDialogBase
         _getDevicesCts = cts;
         var optionsWithDriver = ScanOptions!.Clone();
         optionsWithDriver.Driver = DeviceDriver;
-        var controller = new ScanController(_scanningContext);
+        var controller = new ScanController(_scanningContext, _scanBridgeFactory);
 
         try
         {

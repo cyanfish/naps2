@@ -133,7 +133,7 @@
     <value>Sharpen</value>
   </data>
   <data name="DocumentCorrection" xml:space="preserve">
-    <value>Document Correction</value>
+    <value>文件校正</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>重設</value>
@@ -151,7 +151,7 @@
     <value>翻轉</value>
   </data>
   <data name="Deskew" xml:space="preserve">
-    <value>Deskew</value>
+    <value>校正</value>
   </data>
   <data name="CustomRotation" xml:space="preserve">
     <value>自訂旋轉</value>
@@ -340,10 +340,10 @@
     <value>Enable Auto Save</value>
   </data>
   <data name="AutoSaveSettings" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>自動儲存設置</value>
   </data>
   <data name="AutoSaveSettingsFormTitle" xml:space="preserve">
-    <value>Auto Save Settings</value>
+    <value>自動儲存設置</value>
   </data>
   <data name="Advanced" xml:space="preserve">
     <value>高级</value>
@@ -430,7 +430,7 @@
     <value>還原</value>
   </data>
   <data name="AutoCrop" xml:space="preserve">
-    <value>Auto-Crop</value>
+    <value>自動裁切</value>
   </data>
   <data name="ApplyToSelected" xml:space="preserve">
     <value>Apply to all {0} selected images</value>
@@ -458,6 +458,9 @@
   </data>
   <data name="SinglePageFiles" xml:space="preserve">
     <value>Single page files</value>
+  </data>
+  <data name="AllowJbig2Compression" xml:space="preserve">
+    <value>Allow JBIG2 compression</value>
   </data>
   <data name="EncryptPdf" xml:space="preserve">
     <value>加密 PDF</value>
@@ -598,7 +601,7 @@
     <value>Choose Email Provider</value>
   </data>
   <data name="AuthorizeFormTitle" xml:space="preserve">
-    <value>Authorize</value>
+    <value>授權</value>
   </data>
   <data name="WaitingForAuthorization" xml:space="preserve">
     <value>Waiting for authorization...</value>
@@ -655,7 +658,7 @@
     <value>等待 TWAIN 完成...</value>
   </data>
   <data name="AdvancedProfileFormTitle" xml:space="preserve">
-    <value>高级配置文件设置</value>
+    <value>進階設定檔設置</value>
   </data>
   <data name="ImageQuality" xml:space="preserve">
     <value>Image Quality</value>
@@ -679,10 +682,10 @@
     <value>Post-processing</value>
   </data>
   <data name="DeskewScannedPages" xml:space="preserve">
-    <value>Deskew scanned pages</value>
+    <value>校正掃描頁面</value>
   </data>
   <data name="AutoCropScannedPages" xml:space="preserve">
-    <value>Auto-crop scanned pages</value>
+    <value>自動裁切掃描頁面</value>
   </data>
   <data name="BrightnessContrastAfterScan" xml:space="preserve">
     <value>Apply brightness/contrast after scan</value>
@@ -1034,5 +1037,56 @@ If your scanner doesn't support "Duplex" scanning, follow these instructions:
   </data>
   <data name="ButtonsLabel" xml:space="preserve">
     <value>Buttons:</value>
+  </data>
+  <data name="WindowsKey" xml:space="preserve">
+    <value>Win</value>
+  </data>
+  <data name="EnterKey" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="DeleteKey" xml:space="preserve">
+    <value>刪除</value>
+  </data>
+  <data name="InsertKey" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="EscapeKey" xml:space="preserve">
+    <value>Esc</value>
+  </data>
+  <data name="SpaceKey" xml:space="preserve">
+    <value>Space</value>
+  </data>
+  <data name="TabKey" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="BackspaceKey" xml:space="preserve">
+    <value>Backspace</value>
+  </data>
+  <data name="HomeKey" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="EndKey" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="PageUpKey" xml:space="preserve">
+    <value>Page Up</value>
+  </data>
+  <data name="PageDownKey" xml:space="preserve">
+    <value>Page Down</value>
+  </data>
+  <data name="UpArrowKey" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="DownArrowKey" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="LeftArrowKey" xml:space="preserve">
+    <value>靠左</value>
+  </data>
+  <data name="RightArrowKey" xml:space="preserve">
+    <value>靠右</value>
+  </data>
+  <data name="PauseKey" xml:space="preserve">
+    <value>Pause</value>
   </data>
 </root>

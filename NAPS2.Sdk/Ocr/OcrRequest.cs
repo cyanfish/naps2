@@ -115,6 +115,10 @@ internal class OcrRequest
         SafeDelete(_tempImageFilePath!);
         lock (_ocrRequestQueue)
         {
+            if (State == OcrRequestState.Canceled)
+            {
+                return;
+            }
             State = result != null ? OcrRequestState.Completed : OcrRequestState.Error;
         }
         _tcs.SetResult(result);

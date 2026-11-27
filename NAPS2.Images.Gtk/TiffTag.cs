@@ -18,5 +18,6 @@ internal enum TiffTag
     YResolution = 283,
     PlanarConfig = 284,
     ResolutionUnit = 296,
-    ExtraSamples = 338
+    ExtraSamples = 338,
+    IccProfile = 34675
 }

@@ -10,7 +10,6 @@ using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Sdk.Tests.Mocks;
 using NSubstitute;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace NAPS2.Lib.Tests.Automation;
 
@@ -89,6 +88,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
+        InstallFakeOcrLanguage("eng");
         var path = P("test.pdf");
         await _automationHelper.RunCommand(
             new AutomatedScanningOptions
@@ -110,6 +110,7 @@ public class CommandLineIntegrationTests : ContextualTests
             { LoadImage(ImageResources.autocrop_doc), "First page text" },
             { LoadImage(ImageResources.autocrop_receipt), "Second page text" }
         }, delay: 0, splitWords: true);
+        InstallFakeOcrLanguage("eng");
         var path = $"{FolderPath}/test$(n).jpg";
 
         await _automationHelper.RunCommand(
@@ -157,12 +158,48 @@ public class CommandLineIntegrationTests : ContextualTests
     }
 
     [Fact]
+    public async Task JpegOutputWithPdfEmailUsesSavedOcrOnlyForPdf()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
+        });
+        InstallFakeOcrLanguage("eng");
+        var emailProviderFactory = new MockEmailProviderFactory(message =>
+        {
+            Assert.Single(message.Attachments);
+            PdfAsserts.AssertContainsTextOnce("ADVERTISEMENT.", message.Attachments[0].FilePath);
+        });
+
+        var config = Naps2Config.Stub();
+        config.User.Set(c => c.EnableOcr, true);
+        config.User.Set(c => c.OcrLanguageCode, "eng");
+        await _automationHelper.WithContainerBuilder(builder =>
+        {
+            builder.RegisterInstance<IEmailProviderFactory>(emailProviderFactory);
+            builder.RegisterInstance(config);
+        }).RunCommand(new AutomatedScanningOptions
+        {
+            OutputPath = P("test.jpg"),
+            EmailFileName = "attachment.pdf",
+            Verbose = true
+        }, ImageResources.ocr_test);
+
+        emailProviderFactory.CheckAsserts();
+        emailProviderFactory.VerifyExactlyOneMessageSent();
+        Assert.True(File.Exists(P("test.jpg")));
+        Assert.False(File.Exists(P("test.txt")));
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
     public async Task ScanWithEnableOcr()
     {
         SetUpFakeOcr(new()
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
+        InstallFakeOcrLanguage("eng");
         var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
@@ -212,6 +249,7 @@ public class CommandLineIntegrationTests : ContextualTests
         {
             { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
         });
+        InstallFakeOcrLanguage("eng");
         var path = P("test.pdf");
         await _automationHelper.WithContainer(container =>
         {
@@ -238,6 +276,7 @@ public class CommandLineIntegrationTests : ContextualTests
             { LoadImage(PdfResources.word_p2), "Page two." },
             { LoadImage(PdfResources.word_patcht_p1), "Sized for printing unscaled" }
         });
+        InstallFakeOcrLanguage("eng");
         var importPath = P("import.pdf");
         File.WriteAllBytes(importPath, PdfResources.word_patcht_pdf);
         var path = P("test.pdf");
@@ -250,6 +289,46 @@ public class CommandLineIntegrationTests : ContextualTests
                 OcrLang = "eng"
             });
         PdfAsserts.AssertContainsTextOnce("Sized for printing unscaled", path);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithOcrLangNotInstalled()
+    {
+        SetUpFakeOcr(new()
+        {
+            { LoadImage(ImageResources.ocr_test), "ADVERTISEMENT." }
+        });
+        InstallFakeOcrLanguage("eng");
+        var path = P("test.pdf");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true,
+                OcrLang = "eng+fra"
+            },
+            ImageResources.ocr_test);
+        Assert.False(File.Exists(path));
+        Assert.Contains("The OCR language \"fra\" is not installed. Run \"NAPS2.Console --install ocr-fra\"",
+            _automationHelper.Output);
+        AssertRecoveryCleanedUp();
+    }
+
+    [Fact]
+    public async Task ScanWithOcrLangNotRecognized()
+    {
+        var path = P("test.pdf");
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = path,
+                Verbose = true,
+                OcrLang = "xyz"
+            },
+            ImageResources.ocr_test);
+        Assert.False(File.Exists(path));
+        Assert.Contains("The OCR language \"xyz\" is not recognized.", _automationHelper.Output);
         AssertRecoveryCleanedUp();
     }
 
@@ -596,8 +675,7 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 OutputPath = path,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3, Image4, Image5, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -612,8 +690,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Interleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image3, Image5, Image2, Image4, Image6 });
+            }, Image1, Image3, Image5, Image2, Image4, Image6);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3, Image4, Image5, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -628,8 +705,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 AltInterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image3, Image5, Image6, Image4, Image2 });
+            }, Image1, Image3, Image5, Image6, Image4, Image2);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3, Image4, Image5, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -644,8 +720,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Deinterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image1, Image3, Image5, Image2, Image4, Image6);
         AssertRecoveryCleanedUp();
     }
@@ -660,8 +735,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 AltDeinterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image1, Image3, Image5, Image6, Image4, Image2);
         AssertRecoveryCleanedUp();
     }
@@ -676,8 +750,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Reverse = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         PdfAsserts.AssertImages(path, Image6, Image5, Image4, Image3, Image2, Image1);
         AssertRecoveryCleanedUp();
     }
@@ -693,8 +766,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Interleave = true,
                 Deinterleave = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5, Image6 });
+            }, Image1, Image2, Image3, Image4, Image5, Image6);
         Assert.False(File.Exists(path));
         AssertRecoveryCleanedUp();
     }
@@ -710,8 +782,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Interleave = true,
                 Reverse = true,
                 Verbose = true
-            },
-            new[] { Image1, Image3, Image5, Image2, Image4, Image6 });
+            }, Image1, Image3, Image5, Image2, Image4, Image6);
         PdfAsserts.AssertImages(path, Image6, Image5, Image4, Image3, Image2, Image1);
         AssertRecoveryCleanedUp();
     }
@@ -746,8 +817,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         PdfAsserts.AssertPageCount(1, P("test.1.pdf"));
         PdfAsserts.AssertPageCount(1, P("test.2.pdf"));
         PdfAsserts.AssertPageCount(1, P("test.3.pdf"));
@@ -765,8 +835,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         PdfAsserts.AssertImages(P("test1.pdf"), Image1);
         PdfAsserts.AssertImages(P("test2.pdf"), Image2);
         PdfAsserts.AssertImages(P("test3.pdf"), Image3);
@@ -785,8 +854,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = P("test.pdf"),
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         Assert.Equal("blah", File.ReadAllText(P("test.1.pdf")));
         Assert.Equal("blah", File.ReadAllText(P("test.2.pdf")));
         PdfAsserts.AssertImages(P("test.3.pdf"), Image1);
@@ -807,8 +875,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Split = true,
                 ForceOverwrite = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         PdfAsserts.AssertImages(P("test.1.pdf"), Image1);
         PdfAsserts.AssertImages(P("test.2.pdf"), Image2);
         Assert.False(File.Exists(P("test.3.pdf")));
@@ -827,8 +894,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Split = true,
                 ForceOverwrite = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         PdfAsserts.AssertImages(P("test1.pdf"), Image1);
         PdfAsserts.AssertImages(P("test2.pdf"), Image2);
         Assert.False(File.Exists(P("test3.pdf")));
@@ -845,8 +911,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = P("test$(n).pdf"),
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         Assert.Equal("blah", File.ReadAllText(P("test1.pdf")));
         PdfAsserts.AssertImages(P("test2.pdf"), Image1);
         PdfAsserts.AssertImages(P("test3.pdf"), Image2);
@@ -863,8 +928,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 SplitSize = 2,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3, Image4, Image5 });
+            }, Image1, Image2, Image3, Image4, Image5);
         PdfAsserts.AssertImages(P("test1.pdf"), Image1, Image2);
         PdfAsserts.AssertImages(P("test2.pdf"), Image3, Image4);
         PdfAsserts.AssertImages(P("test3.pdf"), Image5);
@@ -992,8 +1056,7 @@ public class CommandLineIntegrationTests : ContextualTests
             {
                 OutputPath = path,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         PdfAsserts.AssertImages(path, Image1, Image2, Image3);
         AssertRecoveryCleanedUp();
     }
@@ -1008,8 +1071,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = path,
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2, Image3 });
+            }, Image1, Image2, Image3);
         ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
         ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
         ImageAsserts.Similar(Image3, ImageContext.Load(P("test3.jpg")));
@@ -1029,8 +1091,7 @@ public class CommandLineIntegrationTests : ContextualTests
                 Split = true,
                 ForceOverwrite = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         ImageAsserts.Similar(Image1, ImageContext.Load(P("test1.jpg")));
         ImageAsserts.Similar(Image2, ImageContext.Load(P("test2.jpg")));
         Assert.False(File.Exists(P("test3.jpg")));
@@ -1046,11 +1107,28 @@ public class CommandLineIntegrationTests : ContextualTests
                 OutputPath = P("test.jpg"),
                 Split = true,
                 Verbose = true
-            },
-            new[] { Image1, Image2 });
+            }, Image1, Image2);
         ImageAsserts.Similar(Image1, ImageContext.Load(P("test.1.jpg")));
         ImageAsserts.Similar(Image2, ImageContext.Load(P("test.2.jpg")));
         Assert.False(File.Exists(P("test.jpg")));
+        AssertRecoveryCleanedUp();
+    }
+
+    [PlatformTheory(exclude: PlatformFlags.SkiaImage)]
+    [InlineData("test.tiff", "test.1.tiff", "test.2.tiff")]
+    [InlineData("test$(n).tiff", "test1.tiff", "test2.tiff")]
+    public async Task SplitToTiffFiles(string outputName, string firstName, string secondName)
+    {
+        await _automationHelper.RunCommand(
+            new AutomatedScanningOptions
+            {
+                OutputPath = P(outputName),
+                Split = true,
+                ForceOverwrite = true
+            }, Image1, Image2);
+        ImageAsserts.Similar(Image1, ImageContext.Load(P(firstName)));
+        ImageAsserts.Similar(Image2, ImageContext.Load(P(secondName)));
+        Assert.Equal(2, Directory.GetFiles(FolderPath, "*.tiff").Length);
         AssertRecoveryCleanedUp();
     }
 
@@ -1527,6 +1605,13 @@ public class CommandLineIntegrationTests : ContextualTests
         scanDriverMock.Scan(Arg.Any<ScanOptions>(), Arg.Any<CancellationToken>(), Arg.Any<IScanEvents>(),
             Arg.Any<Action<IMemoryImage>>()).Returns(Task.CompletedTask);
         return (scanDriverMock, scanDriverFactoryMock);
+    }
+
+    private void InstallFakeOcrLanguage(string code)
+    {
+        var fastPath = Path.Combine(FolderPath, "components", "tesseract4", "fast");
+        Directory.CreateDirectory(fastPath);
+        File.WriteAllText(Path.Combine(fastPath, $"{code}.traineddata"), "");
     }
 
     private void AssertRecoveryCleanedUp()

@@ -23,6 +23,10 @@ public class WpfModule : Module
 
         builder.RegisterType<WpfDesktopForm>().As<DesktopForm>();
 
+#if TEST_SCENARIOS
+        builder.RegisterType<TestScenarios.WpfTestScenarioPlatform>().As<TestScenarios.ITestScenarioPlatform>();
+#endif
+
         builder.RegisterBuildCallback(ctx =>
             Log.EventLogger = ctx.Resolve<WindowsEventLogger>());
     }

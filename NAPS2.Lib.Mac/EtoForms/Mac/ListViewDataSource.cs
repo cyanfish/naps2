@@ -20,7 +20,10 @@ public class ListViewDataSource<T> : NSCollectionViewDataSource where T : notnul
 
     public List<T> Items { get; } = [];
 
+    // The suggested replacement (GetNumberOfItems) isn't virtual, so it can't be overridden
+#pragma warning disable CS0672
     public override nint GetNumberofItems(NSCollectionView collectionView, nint section)
+#pragma warning restore CS0672
     {
         return Items.Count;
     }

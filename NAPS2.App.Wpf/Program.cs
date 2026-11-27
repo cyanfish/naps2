@@ -8,8 +8,9 @@ static class Program
     /// The NAPS2.exe main method.
     /// </summary>
     [STAThread]
-    static void Main(string[] args)
+    static int Main(string[] args)
     {
-        WpfEntryPoint.Run(args);
+        JitProfile.Start(args, "naps2.wpf");
+        return WpfEntryPoint.Run(args);
     }
 }

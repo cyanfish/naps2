@@ -94,12 +94,12 @@ public class SharedDeviceForm : EtoDialogBase
     {
         if (_displayName.Text == "")
         {
-            _errorOutput.DisplayError(MiscResources.NameMissing);
+            _errorOutput.DisplayError(UiStrings.NameMissing);
             return false;
         }
         if (_deviceSelectorWidget.Choice.Device == null)
         {
-            _errorOutput.DisplayError(MiscResources.NoDeviceSelected);
+            _errorOutput.DisplayError(UiStrings.NoDeviceSelected);
             return false;
         }
         SharedDevice = new SharedDevice

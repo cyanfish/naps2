@@ -131,7 +131,7 @@ public class SaveImagesOperationTests : ContextualTests
 
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray)));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.1.jpg")));
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.2.jpg")));
         ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test.3.jpg")));
@@ -141,11 +141,11 @@ public class SaveImagesOperationTests : ContextualTests
     public async Task Existing_PromptYes()
     {
         File.WriteAllText(P("test.jpg"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.jpg")).Returns(OverwriteResponse.Yes);
+        _overwritePrompt.ConfirmOverwrite(P("test.jpg"), false).Returns(OverwriteResponse.Overwrite);
 
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog)));
 
-        _overwritePrompt.Received().ConfirmOverwrite(P("test.jpg"));
+        _overwritePrompt.Received().ConfirmOverwrite(P("test.jpg"), false);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
     }
 
@@ -153,7 +153,7 @@ public class SaveImagesOperationTests : ContextualTests
     public async Task Existing_PromptNo()
     {
         File.WriteAllText(P("test.jpg"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.jpg")).Returns(OverwriteResponse.No);
+        _overwritePrompt.ConfirmOverwrite(P("test.jpg"), false).Returns(OverwriteResponse.Skip);
 
         Assert.False(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog)));
 
@@ -169,7 +169,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Confirmed));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
     }
 
@@ -181,7 +181,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Never));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.jpg")));
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.1.jpg")));
     }
@@ -194,7 +194,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog),
             overwriteMode: OverwriteMode.Force));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.jpg")));
     }
 
@@ -218,7 +218,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog), batchCount: 2));
         Assert.True(await Save(P("test.jpg"), CreateScannedImages(ImageResources.dog_gray), batchCount: 2));
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.1.jpg")));
         ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test.2.jpg")));
         Assert.Equal(2, Folder.GetFiles().Length);
@@ -249,7 +249,7 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.Equal(3, Folder.GetFiles().Length);
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.SkiaImage)]
     public async Task MultiPageTiff()
     {
         Assert.True(await Save(P("test.tiff"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray)));
@@ -259,11 +259,11 @@ public class SaveImagesOperationTests : ContextualTests
         Assert.Equal(2, frames.Count);
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.SkiaImage)]
     public async Task MultiPageTiff_Existing_PromptNo()
     {
         File.WriteAllText(P("test.tiff"), "blah");
-        _overwritePrompt.ConfirmOverwrite(P("test.tiff")).Returns(OverwriteResponse.No);
+        _overwritePrompt.ConfirmOverwrite(P("test.tiff"), false).Returns(OverwriteResponse.Skip);
 
         Assert.False(await Save(P("test.tiff"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray)));
 
@@ -271,6 +271,73 @@ public class SaveImagesOperationTests : ContextualTests
     }
 
     [Fact]
+    public async Task Jpeg_CopiesJpegStorage()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath));
+
+        Assert.True(await Save(P("test.jpg"), [image]));
+
+        Assert.Equal(ImageResources.dog, File.ReadAllBytes(P("test.jpg")));
+    }
+
+    [Fact]
+    public async Task Jpeg_LowerThanStoredQuality_ReEncodes()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath), quality: 90);
+
+        Assert.True(await Save(P("test.jpg"), [image], new ImageSettings { JpegQuality = 75 }));
+
+        Assert.NotEqual(ImageResources.dog, File.ReadAllBytes(P("test.jpg")));
+        using var expected = image.Render();
+        ImageAsserts.Similar(expected, ImageContext.Load(P("test.jpg")));
+    }
+
+    [Fact]
+    public async Task JpegXl_RecompressesJpegStorage()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath));
+
+        Assert.True(await Save(P("test.jxl"), [image]));
+
+        // A JPEG reconstruction box is only present when the JPEG is recompressed rather than re-encoded
+        var jxl = File.ReadAllBytes(P("test.jxl"));
+        Assert.True(jxl.AsSpan().IndexOf("jbrd"u8) >= 0);
+    }
+
+    [Fact]
+    public async Task JpegXl_LowerThanStoredQuality_ReEncodes()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath), quality: 90);
+
+        Assert.True(await Save(P("test.jxl"), [image], new ImageSettings { JpegQuality = 75 }));
+
+        Assert.True(File.ReadAllBytes(P("test.jxl")).AsSpan().IndexOf("jbrd"u8) < 0);
+    }
+
+    [Fact]
+    public async Task JpegXl_WithTransforms_ReEncodes()
+    {
+        SetUpFileStorage();
+        var jpegPath = CopyResourceToFile(ImageResources.dog, "stored.jpg");
+        var image = ScanningContext.CreateProcessedImage(new ImageFileStorage(jpegPath))
+            .WithTransform(new RotationTransform(90), true);
+
+        Assert.True(await Save(P("test.jxl"), [image]));
+
+        Assert.True(File.ReadAllBytes(P("test.jxl")).AsSpan().IndexOf("jbrd"u8) < 0);
+        using var expected = image.Render();
+        ImageAsserts.Similar(expected, ImageContext.Load(P("test.jxl")));
+    }
+
+    [PlatformFact(exclude: PlatformFlags.SkiaImage)]
     public async Task SinglePageTiff()
     {
         Assert.True(await Save(P("test.tiff"), CreateScannedImages(ImageResources.dog, ImageResources.dog_gray),

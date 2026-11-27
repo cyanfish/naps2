@@ -2008,5 +2008,45 @@ namespace NAPS2 {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] new_window_32 {
+            get {
+                object obj = ResourceManager.GetObject("new_window_32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] new_window_16 {
+            get {
+                object obj = ResourceManager.GetObject("new_window_16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] application_side_list_right_32 {
+            get {
+                object obj = ResourceManager.GetObject("application_side_list_right_32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] application_side_list_right_16 {
+            get {
+                object obj = ResourceManager.GetObject("application_side_list_right_16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

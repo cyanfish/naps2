@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:53\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -37,7 +37,7 @@ msgstr "Знайдено 1 пристрій."
 
 #: SettingsResources.resx$BitDepth_24Color$Message
 msgid "24-bit Color"
-msgstr "Кольорове (24-бітне)"
+msgstr "Кольорове, 24 біти"
 
 #: SettingsResources.resx$PageSize_A3$Message
 msgid "A3 (297x420 mm)"
@@ -131,6 +131,10 @@ msgstr "Дозволити заповнення форм"
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "Дозволити друк у повній якості"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -281,7 +285,7 @@ msgstr "Автоматично"
 #: UiStrings.resx$AutoSaveSettings$Message
 #: UiStrings.resx$AutoSaveSettingsFormTitle$Message
 msgid "Auto Save Settings"
-msgstr "Налаштування автоматичного збереження"
+msgstr "Параметри автозбереження"
 
 #: UiStrings.resx$AutoCrop$Message
 msgid "Auto-Crop"
@@ -318,6 +322,10 @@ msgstr "B4 (250 x 353 мм)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176 x 250 мм)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -571,6 +579,7 @@ msgstr "Розділити черговані сторінки"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "Видалити"
 
@@ -619,6 +628,10 @@ msgstr "Підтримати проєкт"
 msgid "Done"
 msgstr "Готово"
 
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
+
 #: UiStrings.resx$Download$Message
 msgid "Download"
 msgstr "Завантажити"
@@ -633,7 +646,7 @@ msgstr "Виконується завантаження"
 
 #: UiStrings.resx$Dpi$Message
 msgid "Dpi"
-msgstr "DPI (точок на дюйм)"
+msgstr "dpi (точок на дюйм)"
 
 #: SettingsResources.resx$Source_Duplex$Message
 msgid "Duplex"
@@ -683,7 +696,7 @@ msgstr "Надіслати вибране як PDF електронною пош
 
 #: UiStrings.resx$EmailSettings$Message
 msgid "Email Settings"
-msgstr "Налаштування електронної пошти"
+msgstr "Параметри електронної пошти"
 
 #: UiStrings.resx$EnableAutoSave$Message
 msgid "Enable Auto Save"
@@ -701,6 +714,14 @@ msgstr "Шифрувати PDF"
 msgid "Encryption"
 msgstr "Шифрування"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -709,6 +730,10 @@ msgstr "Помилка"
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
 msgstr "Помилка запуску програми {0}"
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
+msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
 #: UiStrings.resx$EstimatedDownloadSize$Message
@@ -761,7 +786,7 @@ msgstr "Для високої якості JPEG (80+) для отримання 
 
 #: UiStrings.resx$GeneralSettings$Message
 msgid "General Settings"
-msgstr "Загальні налаштування"
+msgstr "Загальні параметри"
 
 #: UiStrings.resx$GetMoreLanguages$Message
 msgid "Get more languages"
@@ -782,6 +807,10 @@ msgstr "Відтінки сірого"
 #: UiStrings.resx$Help$Message
 msgid "Help"
 msgstr "Довідка"
+
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
 
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
@@ -817,7 +846,7 @@ msgstr "Якість зображення"
 
 #: UiStrings.resx$ImageSettings$Message
 msgid "Image Settings"
-msgstr "Налаштування зображення"
+msgstr "Параметри зображення"
 
 #: MiscResources.resx$ImageSaved$Message
 msgid "Image saved."
@@ -838,6 +867,10 @@ msgstr "Виконується імпорт «{0}»..."
 #: MiscResources.resx$Importing$Message
 msgid "Importing..."
 msgstr "Виконується імпорт..."
+
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
 
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
@@ -893,6 +926,7 @@ msgstr "Залишити відгук"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "Ліворуч"
 
@@ -914,7 +948,7 @@ msgstr "Завантажити зображення в NAPS2"
 
 #: UiStrings.resx$MakePdfsSearchable$Message
 msgid "Make PDFs searchable using OCR"
-msgstr "Зробити PDF доступним для пошуку за допомогою OCR"
+msgstr "Зробити PDF-файли доступними для пошуку за допомогою OCR"
 
 #: UiStrings.resx$ManualDuplex$Message
 #: UiStrings.resx$ManualDuplexFormTitle$Message
@@ -928,7 +962,7 @@ msgstr "Двостороннє сканування вручну (поперед
 #: UiStrings.resx$ManualIp$Message
 #: UiStrings.resx$ManualIpFormTitle$Message
 msgid "Manual IP"
-msgstr "Ручна IP-адреса"
+msgstr "Вручну задати IP-адресу"
 
 #: UiStrings.resx$MaximumQuality$Message
 msgid "Maximum quality (large files)"
@@ -1071,7 +1105,7 @@ msgstr "Пристроїв не знайдено."
 #: MiscResources.resx$NoPagesInFeeder$Message
 #: SdkResources.resx$NoPagesInFeeder$Message
 msgid "No pages are in the feeder."
-msgstr "У подавачі немає сторінок."
+msgstr "У пристрої подачі немає аркушів."
 
 #: SettingsResources.resx$EmailProvider_NotSelected$Message
 msgid "No provider selected."
@@ -1088,7 +1122,7 @@ msgstr "Оновлень немає."
 
 #: SettingsResources.resx$TiffComp_None$Message
 msgid "None"
-msgstr "Нічого"
+msgstr "Немає"
 
 #: UiStrings.resx$Naps2FullName$Message
 msgid "Not Another PDF Scanner"
@@ -1188,7 +1222,7 @@ msgstr "PDF-документ (*.pdf)"
 
 #: UiStrings.resx$PdfSettings$Message
 msgid "PDF Settings"
-msgstr "Налаштування PDF"
+msgstr "Параметри PDF"
 
 #: MiscResources.resx$PdfSaved$Message
 msgid "PDF saved."
@@ -1214,6 +1248,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "PNG-файл (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "Розмір сторінки:"
@@ -1234,6 +1276,10 @@ msgstr "Пароль"
 msgid "Paste"
 msgstr "Вставити"
 
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
+
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
 msgstr "Розміри в пікселях:"
@@ -1249,11 +1295,11 @@ msgstr "Порт"
 
 #: UiStrings.resx$PositionLabel$Message
 msgid "Position:"
-msgstr "Положення:"
+msgstr "Розташування:"
 
 #: UiStrings.resx$PostProcessing$Message
 msgid "Post-processing"
-msgstr "Постобробка"
+msgstr "Пост-обробка"
 
 #: UiStrings.resx$PreemptivelyOcrAfterScanning$Message
 msgid "Pre-emptively run OCR after scanning"
@@ -1283,7 +1329,7 @@ msgstr "Друк"
 
 #: UiStrings.resx$EditProfileFormTitle$Message
 msgid "Profile Settings"
-msgstr "Налаштовування профілю"
+msgstr "Параметри профілю"
 
 #: UiStrings.resx$ProfileLabel$Message
 msgid "Profile:"
@@ -1340,7 +1386,7 @@ msgstr "Повторити {0}"
 
 #: UiStrings.resx$RememberTheseSettings$Message
 msgid "Remember these settings"
-msgstr "Запам’ятати ці налаштування"
+msgstr "Запам’ятати ці параметри"
 
 #: UiStrings.resx$Reorder$Message
 msgid "Reorder"
@@ -1392,6 +1438,7 @@ msgstr "Скасувати зміни"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "Праворуч"
 
@@ -1584,7 +1631,7 @@ msgstr "Встановити за замовчуванням"
 #: UiStrings.resx$Settings$Message
 #: UiStrings.resx$SettingsFormTitle$Message
 msgid "Settings"
-msgstr "Налаштування"
+msgstr "Параметри"
 
 #: UiStrings.resx$Share$Message
 msgid "Share"
@@ -1596,11 +1643,11 @@ msgstr "Надавати спільний доступ, навіть коли NA
 
 #: UiStrings.resx$SharedDeviceFormTitle$Message
 msgid "Shared Scanner Settings"
-msgstr "Налаштування спільного доступу до сканера"
+msgstr "Параметри спільного доступу до сканера"
 
 #: UiStrings.resx$ScannerSharingIntro$Message
 msgid "Shared scanners can be used from other computers on the local network by selecting \"ESCL Driver\" in the other computer's NAPS2 profile settings."
-msgstr "Сканери зі спільним доступом можна використовувати з інших комп’ютерів у локальній мережі, вибравши «Драйвер ESCL» у налаштуваннях профілю NAPS2 на іншому комп’ютері."
+msgstr "Сканери зі спільним доступом можна використовувати з інших комп’ютерів у локальній мережі, вибравши «Драйвер ESCL» у параметрах профілю NAPS2 на іншому комп’ютері."
 
 #: UiStrings.resx$Sharpen$Message
 msgid "Sharpen"
@@ -1646,6 +1693,10 @@ msgstr "Одне сканування"
 msgid "Skip save prompt"
 msgstr "Не запитувати підтвердження збереження"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "Розділити"
@@ -1685,6 +1736,10 @@ msgstr "TIFF-файл (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "Драйвер TWAIN"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1815,7 +1870,7 @@ msgstr "Панель інструментів"
 
 #: UiStrings.resx$ToolbarSettings$Message
 msgid "Toolbar Settings"
-msgstr "Налаштування панелі інструментів"
+msgstr "Параметри панелі інструментів"
 
 #: UiStrings.resx$Tools$Message
 msgid "Tools"
@@ -1857,6 +1912,10 @@ msgstr "Невідомий сканер"
 msgid "Unsaved Changes"
 msgstr "Незбережені зміни"
 
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
+
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
 msgstr "Виконання оновлення"
@@ -1883,7 +1942,7 @@ msgstr "Використовувати вбудований інтерфейс"
 
 #: UiStrings.resx$UsePredefinedSettings$Message
 msgid "Use predefined settings"
-msgstr "Використовувати задані налаштування"
+msgstr "Використовувати задані параметри"
 
 #: UiStrings.resx$UserPasswordLabel$Message
 msgid "User Password:"
@@ -1929,6 +1988,10 @@ msgstr "Порогове значення білого кольору"
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
 msgstr "Версія WIA:"
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
+msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message
 msgid "Year"
@@ -2000,7 +2063,7 @@ msgstr "Знайдено {0} пристроїв."
 
 #: SettingsResources.resx$DpiFormat$Message
 msgid "{0} dpi"
-msgstr "{0} DPI (точок на дюйм)"
+msgstr "{0} dpi (точок на дюйм)"
 
 #: UiStrings.resx$RecoverPrompt$Message
 msgid "{0} image(s) scanned on {1} at {2} may not have been saved, and are recoverable. Do you want to recover them?"

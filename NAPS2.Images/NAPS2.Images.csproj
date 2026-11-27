@@ -24,6 +24,7 @@
         <PackageReference Include="ZXing.Net" Version="0.16.11" />
 
         <ProjectReference Include="..\NAPS2.Internals\NAPS2.Internals.csproj" />
+        <ProjectReference Include="..\NAPS2.Generators\NAPS2.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
@@ -52,7 +53,7 @@
             <_Parameter1>NAPS2.Images.Mac</_Parameter1>
         </AssemblyAttribute>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-            <_Parameter1>NAPS2.Images.ImageSharp</_Parameter1>
+            <_Parameter1>NAPS2.Images.Skia</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>
 

@@ -2,17 +2,18 @@
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Ocr;
-using NAPS2.Pdf;
 using NAPS2.Scan;
 using NAPS2.Sdk.Tests.Asserts;
 using NAPS2.Unmanaged;
 using NSubstitute;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace NAPS2.Sdk.Tests;
 
-public class ContextualTests : IDisposable
+public class ContextualTests : IAsyncLifetime
 {
+    private Dictionary<IMemoryImage, string> _fakeOcrImages;
+
     public ContextualTests()
     {
         FolderPath = Path.GetFullPath(Path.Combine("naps2_test_temp", Path.GetRandomFileName()));
@@ -51,12 +52,17 @@ public class ContextualTests : IDisposable
 
     public ProcessedImage CreateScannedImage()
     {
-        return ScanningContext.CreateProcessedImage(LoadImage(ImageResources.dog));
+        using var image = LoadImage(ImageResources.dog);
+        return ScanningContext.CreateProcessedImage(image);
     }
 
     public List<ProcessedImage> CreateScannedImages(params byte[][] images)
     {
-        return images.Select(image => ScanningContext.CreateProcessedImage(LoadImage(image))).ToList();
+        return images.Select(data =>
+        {
+            using var image = LoadImage(data);
+            return ScanningContext.CreateProcessedImage(image);
+        }).ToList();
     }
 
     public void SetUpFileStorage()
@@ -82,6 +88,7 @@ public class ContextualTests : IDisposable
     public void SetUpFakeOcr(Dictionary<IMemoryImage, string> ocrTextByImage = null, string ifNoMatch = null, int delay = 200,
         bool splitWords = false)
     {
+        _fakeOcrImages = ocrTextByImage;
         var ocrMock = Substitute.For<IOcrEngine>();
         ocrMock.ProcessImage(ScanningContext, Arg.Any<string>(), Arg.Any<OcrParams>(), Arg.Any<CancellationToken>())
             .Returns(
@@ -89,7 +96,7 @@ public class ContextualTests : IDisposable
                 {
                     var path = (string) x[1]!;
                     var ocrParams = (OcrParams) x[2]!;
-                    var ocrImage = ImageContext.Load(path);
+                    using var ocrImage = ImageContext.Load(path);
                     await Task.Delay(delay);
 
                     OcrResult CreateOcrResult(string text) =>
@@ -119,7 +126,7 @@ public class ContextualTests : IDisposable
     }
 
     /// <summary>
-    /// Creates the OCR result used by SetUpFakeOcr, with page bounds of 100x100. If splitWords is true, the text is
+    /// Creates the OCR result used by SetUpFakeOcr, with page bounds of 1000x1000. If splitWords is true, the text is
     /// split into lines (by "\n") and words (by " "), with each word's width proportional to its length.
     /// Otherwise, the whole text is a single word.
     /// </summary>
@@ -129,32 +136,32 @@ public class ContextualTests : IDisposable
         {
             var allWords = new List<OcrResultElement>();
             var lines = new List<OcrResultElement>();
-            int y = 10;
+            int y = 100;
             foreach (var lineText in text.Split('\n'))
             {
                 var words = new List<OcrResultElement>();
-                int x = 10;
+                int x = 100;
                 foreach (var wordText in lineText.Split(' '))
                 {
                     // Width proportional to the word length, with a gap between words
-                    int w = wordText.Length * 2;
+                    int w = wordText.Length * 20;
                     words.Add(new OcrResultElement(wordText, languageCode, false,
-                        (x, y, w, 10), y + 10, 10, ImmutableList<OcrResultElement>.Empty));
-                    x += w + 2;
+                        (x, y, w, 100), y + 100, 100, ImmutableList<OcrResultElement>.Empty));
+                    x += w + 20;
                 }
                 lines.Add(new OcrResultElement(lineText, languageCode, false,
-                    (10, y, x - 12, 10), y + 10, 10, words.ToImmutableList()));
+                    (100, y, x - 120, 100), y + 100, 100, words.ToImmutableList()));
                 allWords.AddRange(words);
-                y += 15;
+                y += 150;
             }
-            return new((0, 0, 100, 100), allWords.ToImmutableList(), lines.ToImmutableList());
+            return new((0, 0, 1000, 1000), allWords.ToImmutableList(), lines.ToImmutableList());
         }
         var word = new OcrResultElement(text, languageCode, false,
-            (10, 10, 10, 10), 20, 10, ImmutableList<OcrResultElement>.Empty);
+            (100, 100, 100, 100), 200, 100, ImmutableList<OcrResultElement>.Empty);
         var line = new OcrResultElement(text, languageCode, false,
-            (10, 10, 10, 10), 20, 10, ImmutableList.Create(word));
+            (100, 100, 100, 100), 200, 100, ImmutableList.Create(word));
         var list = ImmutableList.Create(line);
-        return new((0, 0, 100, 100), list, list);
+        return new((0, 0, 1000, 1000), list, list);
     }
 
     public string CopyResourceToFile(byte[] resource, string folder, string fileName)
@@ -169,9 +176,21 @@ public class ContextualTests : IDisposable
         return CopyResourceToFile(resource, FolderPath, fileName);
     }
 
-    public virtual void Dispose()
+    public virtual ValueTask InitializeAsync() => ValueTask.CompletedTask;
+
+    public virtual ValueTask DisposeAsync()
     {
         ScanningContext.Dispose();
+        if (_fakeOcrImages != null)
+        {
+            lock (_fakeOcrImages)
+            {
+                foreach (var image in _fakeOcrImages.Keys)
+                {
+                    image.Dispose();
+                }
+            }
+        }
         try
         {
             Directory.Delete(FolderPath, true);
@@ -187,6 +206,7 @@ public class ContextualTests : IDisposable
             {
             }
         }
+        return ValueTask.CompletedTask;
     }
 
     public bool IsDisposed(ProcessedImage image)

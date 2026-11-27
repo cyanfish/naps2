@@ -6,14 +6,14 @@ namespace NAPS2.EtoForms.Widgets;
 
 public class UpdateCheckWidget
 {
-    private readonly UpdateChecker _updateChecker;
+    private readonly IUpdateChecker _updateChecker;
     private readonly Naps2Config _config;
     private readonly CheckBox _checkForUpdates;
     private readonly Panel _updatePanel;
     private bool _hasCheckedForUpdates;
     private UpdateInfo? _update;
 
-    public UpdateCheckWidget(UpdateChecker updateChecker, Naps2Config config)
+    public UpdateCheckWidget(IUpdateChecker updateChecker, Naps2Config config)
     {
         _updateChecker = updateChecker;
         _config = config;
@@ -72,17 +72,17 @@ public class UpdateCheckWidget
     {
         if (!_checkForUpdates.IsChecked())
         {
-            return C.NoWrap(MiscResources.UpdateCheckDisabled);
+            return C.NoWrap(UiStrings.UpdateCheckDisabled);
         }
         if (!_hasCheckedForUpdates)
         {
-            return C.NoWrap(MiscResources.CheckingForUpdates);
+            return C.NoWrap(UiStrings.CheckingForUpdates);
         }
         if (_update == null)
         {
-            return C.NoWrap(MiscResources.NoUpdates);
+            return C.NoWrap(UiStrings.NoUpdates);
         }
-        return C.Link(string.Format(MiscResources.Install, _update.Name),
+        return C.Link(string.Format(UiStrings.Install, _update.Name),
             InstallLinkClicked);
     }
 

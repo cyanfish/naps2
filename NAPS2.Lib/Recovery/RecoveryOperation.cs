@@ -13,7 +13,7 @@ internal class RecoveryOperation : OperationBase
         _formFactory = formFactory;
         _recoveryManager = recoveryManager;
 
-        ProgressTitle = MiscResources.RecoveryProgress;
+        ProgressTitle = UiStrings.RecoveryProgress;
         AllowCancel = true;
         AllowBackground = true;
     }
@@ -22,7 +22,7 @@ internal class RecoveryOperation : OperationBase
     {
         Status = new OperationStatus
         {
-            StatusText = MiscResources.Recovering
+            StatusText = UiStrings.Recovering
         };
 
         var recoverableFolder = _recoveryManager.GetLatestRecoverableFolder();

@@ -125,6 +125,11 @@ internal class AutomatedScanning
                 return;
             }
 
+            if (!ConfigureOcr())
+            {
+                return;
+            }
+
             _scanList = [];
 
             if (_options.ImportPath != null)
@@ -133,8 +138,6 @@ internal class AutomatedScanning
             }
 
             if (_cts.IsCancellationRequested) return;
-
-            ConfigureOcr();
 
             if (_options.Number > 0)
             {
@@ -192,9 +195,10 @@ internal class AutomatedScanning
         }
     }
 
-    private void ConfigureOcr()
+    private bool ConfigureOcr()
     {
         var jpegOutput = IsJpegFile(_options.OutputPath);
+        _ocrParams = OcrParams.Empty;
         if (_options.NoProfile)
         {
             // Don't use OCR-enabled settings from the GUI if --noprofile is set
@@ -203,13 +207,13 @@ internal class AutomatedScanning
         bool canUseOcr = IsPdfFile(_options.OutputPath) || IsPdfFile(_options.EmailFileName) || jpegOutput;
         if (!canUseOcr)
         {
-            return;
+            return true;
         }
         if (_options.DisableOcr)
         {
             _config.Run.Set(c => c.EnableOcr, false);
         }
-        else if (jpegOutput)
+        else if (jpegOutput && !IsPdfFile(_options.EmailFileName))
         {
             _config.Run.Set(c => c.EnableOcr,
                 _options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang));
@@ -223,6 +227,31 @@ internal class AutomatedScanning
             _config.Run.Set(c => c.OcrLanguageCode, _options.OcrLang);
         }
         _ocrParams = _config.DefaultOcrParams();
+        return ValidateOcrLanguages();
+    }
+
+    private bool ValidateOcrLanguages()
+    {
+        if (string.IsNullOrEmpty(_ocrParams.LanguageCode))
+        {
+            return true;
+        }
+        // Multiple languages can be specified, e.g. "eng+fra"
+        foreach (var code in _ocrParams.LanguageCode!.Split('+'))
+        {
+            var component = _tesseractLanguageManager.LanguageComponents.FirstOrDefault(x => x.Id == $"ocr-{code}");
+            if (component == null)
+            {
+                _errorOutput.DisplayError(string.Format(ConsoleResources.OcrLanguageNotRecognized, code));
+                return false;
+            }
+            if (!component.IsInstalled)
+            {
+                _errorOutput.DisplayError(string.Format(ConsoleResources.OcrLanguageNotInstalled, code));
+                return false;
+            }
+        }
+        return true;
     }
 
     private async Task InstallComponents()
@@ -259,7 +288,7 @@ internal class AutomatedScanning
         }
         downloadController.DownloadError += (_, _) =>
         {
-            _errorOutput.DisplayError(MiscResources.FilesCouldNotBeDownloaded);
+            _errorOutput.DisplayError(UiStrings.FilesCouldNotBeDownloaded);
         };
         await downloadController.StartDownloadsAsync();
     }
@@ -606,11 +635,12 @@ internal class AutomatedScanning
     private async Task ExportToImageFiles()
     {
         var path = _nameManager.Get(_options.OutputPath!, _nameContext);
-        await DoExportToImageFiles(_options.OutputPath!);
+        await DoExportToImageFiles(_options.OutputPath!,
+            !_options.DisableOcr && (_options.EnableOcr || !string.IsNullOrEmpty(_options.OcrLang)));
         OutputVerbose(ConsoleResources.FinishedSavingImages, Path.GetFullPath(path));
     }
 
-    private async Task DoExportToImageFiles(string outputPath)
+    private async Task DoExportToImageFiles(string outputPath, bool saveOcrText = false)
     {
         _config.Run.Set(c => c.ImageSettings, new ImageSettings
         {
@@ -637,7 +667,8 @@ internal class AutomatedScanning
                 }
             };
             op.Start(outputPath, scan, imageSettings,
-                _saveParams with { BatchCount = fileCount, BatchIndex = fileIndex }, _ocrParams);
+                _saveParams with { BatchCount = fileCount, BatchIndex = fileIndex },
+                saveOcrText ? _ocrParams : OcrParams.Empty);
             await op.Success;
             fileIndex += SaveImagesOperation.GetFileCount(outputPath, scan.Count, imageSettings);
         }

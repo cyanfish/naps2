@@ -83,7 +83,7 @@ internal class ThunderbirdEmailProvider : IEmailProvider
             }
             catch (Exception ex)
             {
-                _errorOutput.DisplayError(MiscResources.EmailError, ex);
+                _errorOutput.DisplayError(UiStrings.EmailError, ex);
                 return false;
             }
             finally

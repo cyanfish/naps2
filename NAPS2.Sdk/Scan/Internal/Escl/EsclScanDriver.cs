@@ -5,6 +5,7 @@ using System.Threading;
 using Microsoft.Extensions.Logging;
 using NAPS2.Escl;
 using NAPS2.Escl.Client;
+using NAPS2.ImportExport;
 using NAPS2.Pdf;
 using NAPS2.Remoting;
 using NAPS2.Scan.Exceptions;

@@ -1,9 +1,9 @@
 using System.ComponentModel;
-using Eto.Drawing;
 using Eto.Forms;
 using NAPS2.Dependencies;
 using NAPS2.EtoForms.Layout;
 using NAPS2.Scan;
+using NAPS2.TestScenarios;
 
 namespace NAPS2.EtoForms.Ui;
 
@@ -28,7 +28,7 @@ public class DownloadProgressForm : EtoDialogBase
 
     private void OnDownloadError(object? sender, EventArgs e)
     {
-        MessageBox.Show(MiscResources.FilesCouldNotBeDownloaded, MiscResources.DownloadError, MessageBoxButtons.OK,
+        MessageDialog.Show(this, UiStrings.FilesCouldNotBeDownloaded, UiStrings.DownloadError,
             MessageBoxType.Error);
     }
 
@@ -53,20 +53,23 @@ public class DownloadProgressForm : EtoDialogBase
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
+        if (TestScenarioFlags.SkipFormWork) return;
         Controller.StartDownloadsAsync().AssertNoAwait();
     }
 
     private void OnDownloadProgress(object? sender, EventArgs e)
     {
-        var f = Controller.FilesDownloaded;
-        var fTot = Controller.TotalFiles;
-        var c = Controller.CurrentFileProgress;
-        var cTot = Controller.CurrentFileSize;
-        _totalStatus.Text = string.Format(MiscResources.FilesProgressFormat, f, fTot);
+        UpdateProgress(Controller.FilesDownloaded, Controller.TotalFiles, Controller.CurrentFileProgress,
+            Controller.CurrentFileSize);
+    }
+
+    internal void UpdateProgress(int f, int fTot, long c, long cTot)
+    {
+        _totalStatus.Text = string.Format(UiStrings.FilesProgressFormat, f, fTot);
         _totalProgressBar.MaxValue = fTot * 1000;
         _totalProgressBar.Value = f * 1000 + (cTot == 0 ? 0 : (int) (c * 1e3 / cTot));
         _fileStatus.Text =
-            string.Format(MiscResources.SizeProgress, (c / 1e6).ToString("f1"), (cTot / 1e6).ToString("f1"));
+            string.Format(UiStrings.SizeProgress, (c / 1e6).ToString("f1"), (cTot / 1e6).ToString("f1"));
         if (c > 0)
         {
             _fileProgressBar.MaxValue = (int) cTot;

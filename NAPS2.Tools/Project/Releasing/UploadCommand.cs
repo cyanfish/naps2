@@ -125,7 +125,7 @@ public class UploadCommand : ICommand<UploadOptions>
             new NewRelease($"v{version}")
             {
                 Name = version,
-                Body = GetChangelog(),
+                Body = GetChangelog(version),
                 Draft = true,
                 Prerelease = version.Contains("b"),
                 TargetCommitish = publishCommit.Sha
@@ -231,19 +231,25 @@ public class UploadCommand : ICommand<UploadOptions>
             ]));
     }
 
-    private string GetChangelog()
+    private string GetChangelog(string version)
     {
         var lines = File.ReadAllLines(Path.Combine(Paths.SolutionRoot, "CHANGELOG.md"));
-        var expected = $"Changes in {ProjectHelper.GetCurrentVersionName()}:";
+        var expected = $"Changes in {version}:";
         if (lines[0] == expected)
         {
             return string.Join('\n', lines.TakeWhile(x => x.Trim() != ""));
         }
-        throw new Exception("Changelog needs updating (did not start with \"{expected}\")");
+        throw new Exception($"Changelog needs updating (did not start with \"{expected}\")");
     }
 
     private void UploadToStaticSite(string version, string? packageType)
     {
+        if (version.Contains('b'))
+        {
+            Output.Verbose("Skipping static site upload for beta");
+            return;
+        }
+
         Cli.Run("ssh", $"user@downloads.naps2.com \"mkdir -p /var/www/html/{version}/\"");
         // Only upload packages that are needed (e.g. for Microsoft store, Apt repo)
         foreach (var package in TargetsHelper.EnumeratePackageTargets(new TargetParams { PackageType = packageType })

@@ -190,13 +190,13 @@
     <value>Fosc</value>
   </data>
   <data name="DockStyle_Top" xml:space="preserve">
-    <value>Top</value>
+    <value>Superior</value>
   </data>
   <data name="DockStyle_Left" xml:space="preserve">
     <value>Esquerra</value>
   </data>
   <data name="DockStyle_Bottom" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Inferior</value>
   </data>
   <data name="DockStyle_Right" xml:space="preserve">
     <value>Dreta</value>

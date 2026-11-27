@@ -435,11 +435,11 @@ public class WpfListView<T> : IListView<T> where T : notnull
         }
         if (e.Effects == DragDropEffects.Move && _listBox.Items.Count > 0)
         {
-            var index = GetDragIndex(e.GetPosition(_listBox));
-            if (index >= 0)
+            var target = GetDropTarget(e.GetPosition(_listBox));
+            if (target.Index >= 0)
             {
-                bool after = index == _listBox.Items.Count;
-                ShowInsertionMark((WpfListViewItem<T>) _listBox.Items[after ? index - 1 : index]!, after);
+                ShowInsertionMark((WpfListViewItem<T>) _listBox.Items[target.MarkIndex]!, target.After,
+                    target.RowStart);
             }
         }
         else
@@ -470,7 +470,7 @@ public class WpfListView<T> : IListView<T> where T : notnull
     private void OnDrop(object sender, DragEventArgs e)
     {
         ClearInsertionMark();
-        var index = GetDragIndex(e.GetPosition(_listBox));
+        var index = GetDropTarget(e.GetPosition(_listBox)).Index;
         if (index == -1) return;
         if (_behavior.AllowDragDrop && e.Data.GetData(_behavior.CustomDragDataType) is byte[] bytes)
         {
@@ -490,28 +490,34 @@ public class WpfListView<T> : IListView<T> where T : notnull
         else if (position.Y > _listBox.ActualHeight - edge) scrollViewer.LineDown();
     }
 
-    private int GetDragIndex(Point position)
+    /// <summary>
+    /// Gets the index to drop at, and where to show the insertion mark. The mark is shown next to the item nearest
+    /// the mouse, so at a row boundary it's on the mouse's row (at the end of that row or the start of the next).
+    /// </summary>
+    private (int Index, int MarkIndex, bool After, bool RowStart) GetDropTarget(Point position)
     {
-        if (_listBox.Items.Count == 0) return 0;
+        if (_listBox.Items.Count == 0) return (0, -1, false, false);
         var bounds = Items
             .Select((item, index) => (index, rect: item.TransformToAncestor(_listBox)
                 .TransformBounds(new Rect(0, 0, item.ActualWidth, item.ActualHeight))))
             .ToList();
         double y = Math.Clamp(position.Y, bounds.Min(x => x.rect.Top), bounds.Max(x => x.rect.Bottom));
         var row = bounds.Where(x => x.rect.Top <= y && x.rect.Bottom >= y).OrderBy(x => x.rect.Left).ToList();
-        if (row.Count == 0) return -1;
+        if (row.Count == 0) return (-1, -1, false, false);
         var target = row.FirstOrDefault(x => x.rect.Right >= position.X);
         if (target.rect == default) target = row.Last();
-        return position.X > target.rect.Left + target.rect.Width / 2 ? target.index + 1 : target.index;
+        bool after = position.X > target.rect.Left + target.rect.Width / 2;
+        bool rowStart = !after && target.index == row[0].index;
+        return (after ? target.index + 1 : target.index, target.index, after, rowStart);
     }
 
-    private void ShowInsertionMark(WpfListViewItem<T> listBoxItem, bool after)
+    private void ShowInsertionMark(WpfListViewItem<T> listBoxItem, bool after, bool rowStart)
     {
         if (_insertionAdorner?.AdornedElement == listBoxItem && _insertionAdorner.After == after) return;
         ClearInsertionMark();
         var layer = AdornerLayer.GetAdornerLayer(listBoxItem);
         if (layer == null) return;
-        _insertionAdorner = new InsertionAdorner(listBoxItem, after);
+        _insertionAdorner = new InsertionAdorner(listBoxItem, after, rowStart);
         layer.Add(_insertionAdorner);
     }
 
@@ -540,16 +546,24 @@ public class WpfListView<T> : IListView<T> where T : notnull
         }
     }
 
-    private class InsertionAdorner(UIElement adornedElement, bool after) : Adorner(adornedElement)
+    private class InsertionAdorner(UIElement adornedElement, bool after, bool rowStart) : Adorner(adornedElement)
     {
+        private const double LINE_WIDTH = 3;
+        private const double MAX_ROW_START_OFFSET = 6;
+
         public bool After { get; } = after;
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             var size = AdornedElement.RenderSize;
             var brush = (Brush) (TryFindResource(SystemColors.HighlightBrushKey) ?? Brushes.DodgerBlue);
-            double x = After ? size.Width + 2 : -2;
-            drawingContext.DrawLine(new Pen(brush, 3), new Point(x, 0), new Point(x, size.Height));
+            var margin = ((FrameworkElement) AdornedElement).Margin;
+            // Between items, the line is centered in the gap. At the start of a row there's no gap, so the line goes
+            // near the item, but not so far out that it would be clipped by the edge of the list.
+            double x = After ? size.Width + margin.Right
+                : rowStart ? -Math.Min(MAX_ROW_START_OFFSET, margin.Left - LINE_WIDTH / 2)
+                : -margin.Left;
+            drawingContext.DrawLine(new Pen(brush, LINE_WIDTH), new Point(x, 0), new Point(x, size.Height));
         }
     }
 

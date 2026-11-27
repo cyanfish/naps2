@@ -5,7 +5,7 @@ public class DonateNotificationView : LinkNotificationView
     private const string DONATE_URL = "https://www.naps2.com/donate?src=notif";
 
     public DonateNotificationView(DonateNotification model)
-        : base(model, MiscResources.DonatePrompt, MiscResources.Donate, DONATE_URL, null)
+        : base(model, UiStrings.DonatePrompt, UiStrings.Donate, DONATE_URL, null)
     {
         HideTimeout = HIDE_LONG;
     }

@@ -1,6 +1,5 @@
 using System.Globalization;
 using Gdk;
-using NAPS2.Images.Bitwise;
 using NAPS2.Util;
 
 namespace NAPS2.Images.Gtk;
@@ -82,7 +81,7 @@ public class GtkImage : IMemoryImage
             ((GtkImageContext) ImageContext).TiffIo.SaveTiff([this], path);
             return;
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, path, imageFormat, options))
         {
             return;
@@ -105,7 +104,7 @@ public class GtkImage : IMemoryImage
             ((GtkImageContext) ImageContext).TiffIo.SaveTiff([this], stream);
             return;
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, stream, imageFormat, options))
         {
             return;

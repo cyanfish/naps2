@@ -1,3 +1,4 @@
+#if !MAC
 using Google.Protobuf;
 using NAPS2.Remoting.Worker;
 using NAPS2.Scan.Internal.Twain;
@@ -463,3 +464,4 @@ public class TwainMemoryBufferReaderTests : ContextualTests
         return ImageContext.Create(width, height, ImagePixelFormat.BW1);
     }
 }
+#endif

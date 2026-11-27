@@ -1,5 +1,4 @@
 using Autofac;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using NAPS2.EtoForms;
 using NAPS2.EtoForms.Ui;
@@ -47,7 +46,7 @@ public static class ServerEntryPoint
                     // is unregistered and the full cleanup won't happen.
                     Process.Start(AssemblyHelper.EntryFile, "/UnregisterSharingService").WaitForExit(5000);
                 }
-                application.Quit();
+                application.Invoke(application.Quit);
             }
 
             // Start the actual sharing server

@@ -21,9 +21,7 @@ internal class MapiEmailProvider : IEmailProvider
     /// <returns>Returns true if the message was sent, false if the user aborted.</returns>
     public Task<bool> SendEmail(EmailMessage message, ProgressHandler progress = default)
     {
-#if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindowsVersionAtLeast(7)) throw new InvalidOperationException("Windows-only");
-#endif
         return Task.Run(async () =>
         {
             var clientName = _config.Get(c => c.EmailSetup.SystemProviderName);
@@ -38,7 +36,7 @@ internal class MapiEmailProvider : IEmailProvider
             if (returnCode != MapiSendMailReturnCode.Success)
             {
                 Log.Error($"Error sending email. MAPI error code: {returnCode}");
-                _errorOutput.DisplayError(MiscResources.EmailError, $"MAPI returned error code: {returnCode}");
+                _errorOutput.DisplayError(UiStrings.EmailError, $"MAPI returned error code: {returnCode}");
                 return false;
             }
 

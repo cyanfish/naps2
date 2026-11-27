@@ -1,3 +1,5 @@
+using NAPS2.Serialization;
+
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
 namespace NAPS2.Images.Transforms;
@@ -6,6 +8,7 @@ namespace NAPS2.Images.Transforms;
 /// Sets the image's original file format without changing its pixels. This can affect how the image is exported, e.g.
 /// setting JPEG allows a PNG image to be exported with lossy compression (as long as it isn't marked as lossless).
 /// </summary>
+[GeneratePropertyAccessors]
 public record FileFormatTransform : Transform
 {
     public FileFormatTransform()

@@ -158,7 +158,7 @@ public class AutoSaverTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog_gray, P("test3.jpg"));
     }
 
-    [PlatformFact(exclude: PlatformFlags.ImageSharpImage)]
+    [PlatformFact(exclude: PlatformFlags.SkiaImage)]
     public async Task TiffFilePerScan()
     {
         var settings = new AutoSaveSettings
@@ -276,7 +276,7 @@ public class AutoSaverTests : ContextualTests
         var scanned = CreateScannedImages(ImageResources.dog);
         await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.pdf")));
         Assert.Equal("blah", File.ReadAllText(P("test.1.pdf")));
         PdfAsserts.AssertImages(P("test.2.pdf"), ImageResources.dog);
@@ -294,7 +294,7 @@ public class AutoSaverTests : ContextualTests
         var scanned = CreateScannedImages(ImageResources.dog);
         await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal("blah", File.ReadAllText(P("test.jpg")));
         ImageAsserts.Similar(ImageResources.dog, P("test.1.jpg"));
     }
@@ -310,7 +310,23 @@ public class AutoSaverTests : ContextualTests
         var scanned = CreateScannedImages(ImageResources.dog);
         await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
+        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.pdf"), ImageResources.dog);
+    }
+
+    [Fact]
+    public async Task DatePlaceholders_FilePerPage()
+    {
+        var settings = new AutoSaveSettings
+        {
+            FilePath = P("test_$(YYYY).pdf"),
+            Separator = SaveSeparator.FilePerPage
+        };
+
+        var scanned = CreateScannedImages(ImageResources.dog, ImageResources.dog_gray);
+        await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
+
         PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.1.pdf"), ImageResources.dog);
+        PdfAsserts.AssertImages(P($"test_{DateTime.Now:yyyy}.2.pdf"), ImageResources.dog_gray);
     }
 
     [Fact]
@@ -476,7 +492,7 @@ public class AutoSaverTests : ContextualTests
         var scanned = CreateScannedImages(ImageResources.dog);
         await _autoSaver.Save(settings, scanned.ToAsyncEnumerable()).ToListAsync();
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Single(Folder.GetFiles());
         PdfAsserts.AssertImages(P("test.pdf"), ImageResources.dog);
     }

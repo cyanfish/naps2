@@ -1,6 +1,4 @@
-﻿using NAPS2.Images.Bitwise;
-
-namespace NAPS2.Images.Mac;
+﻿namespace NAPS2.Images.Mac;
 
 public class MacImage : IMemoryImage
 {
@@ -18,11 +16,7 @@ public class MacImage : IMemoryImage
         }
         lock (MacImageContext.ConstructorLock)
         {
-#if MONOMAC
-            Rep = new NSBitmapImageRep(reps[0].Handle, false);
-#else
             Rep = (NSBitmapImageRep) reps[0];
-#endif
         }
         PixelFormat = GetPixelFormat(Rep);
         // TODO: Any replacement for deprecated ColorSpaceName?
@@ -75,8 +69,8 @@ public class MacImage : IMemoryImage
 
     public int Width => (int) Rep.PixelsWide;
     public int Height => (int) Rep.PixelsHigh;
-    public float HorizontalResolution => (float) (Width / NsImage.Size.Width * 72).ToDouble();
-    public float VerticalResolution => (float) (Height / NsImage.Size.Height * 72).ToDouble();
+    public float HorizontalResolution => (float) (Width / NsImage.Size.Width * 72);
+    public float VerticalResolution => (float) (Height / NsImage.Size.Height * 72);
 
     public void SetResolution(float xDpi, float yDpi)
     {
@@ -104,7 +98,10 @@ public class MacImage : IMemoryImage
             ImagePixelFormat.BW1 => SubPixelType.Bit,
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
-        imageData = new BitwiseImageData(ptr, new PixelInfo(Width, Height, subPixelType, stride));
+        imageData = new BitwiseImageData(ptr, new PixelInfo(Width, Height, subPixelType, stride)
+        {
+            PremultipliedAlpha = PixelFormat == ImagePixelFormat.ARGB32
+        });
         return new MacImageLockState();
     }
 
@@ -127,7 +124,7 @@ public class MacImage : IMemoryImage
         {
             imageFormat = ImageContext.GetFileFormatFromExtension(path);
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, path, imageFormat, options))
         {
             return;
@@ -145,7 +142,7 @@ public class MacImage : IMemoryImage
         {
             throw new ArgumentException("Format required to save to a stream", nameof(imageFormat));
         }
-        ImageContext.CheckSupportsFormat(imageFormat);
+        ImageContext.CheckSupportsEncode(imageFormat);
         if (ImageContext.TryBundledEncode(this, stream, imageFormat, options))
         {
             return;
@@ -182,17 +179,13 @@ public class MacImage : IMemoryImage
             var cgImage = helper.Image.Rep.CGImage!; //RepresentationUsingTypeProperties(fileType, props);
             var data = new NSMutableData();
             var props = new NSMutableDictionary();
-            props.Add((NSString) "DPIWidth", NSObject.FromObject(HorizontalResolution));
-            props.Add((NSString) "DPIHeight", NSObject.FromObject(VerticalResolution));
+            props.Add((NSString) "DPIWidth", NSNumber.FromFloat(HorizontalResolution));
+            props.Add((NSString) "DPIHeight", NSNumber.FromFloat(VerticalResolution));
             if (options.Quality != -1 && imageFormat is ImageFileFormat.Jpeg or ImageFileFormat.Jpeg2000)
             {
                 props.Add((NSString) "kCGImageDestinationLossyCompressionQuality", NSNumber.FromFloat(options.Quality / 100.0f));
             }
-#if MONOMAC
-            using var dest = CGImageDestination.FromData(data, fileType, 1);
-#else
             using var dest = CGImageDestination.Create(data, fileType.ToString(), 1)!;
-#endif
             dest.AddImage(cgImage, props);
             dest.Close();
             return data;
@@ -209,11 +202,7 @@ public class MacImage : IMemoryImage
                 return this.Copy();
             }
 
-#if MONOMAC
-            var nsImage = new NSImage(NsImage.Copy().Handle, true);
-#else
             var nsImage = (NSImage) NsImage.Copy();
-#endif
             return new MacImage(nsImage)
             {
                 OriginalFileFormat = OriginalFileFormat,

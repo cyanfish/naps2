@@ -21,7 +21,7 @@ public class LoadSaveTests : ContextualTests
 
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             Assert.Throws<NotSupportedException>(() => ImageContext.Load(path));
             return;
@@ -42,7 +42,7 @@ public class LoadSaveTests : ContextualTests
 
         var stream = new MemoryStream(GetResource(resource));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             Assert.Throws<NotSupportedException>(() => ImageContext.Load(stream));
             return;
@@ -64,7 +64,7 @@ public class LoadSaveTests : ContextualTests
         var path = CopyResourceToFile(GetResource(resource), $"image{ext}");
         var progressMock = Substitute.For<ProgressCallback>();
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await ImageContext.LoadFrames(path, progressMock).ToListAsync());
@@ -93,7 +93,7 @@ public class LoadSaveTests : ContextualTests
         var stream = new MemoryStream(GetResource(resource));
         var progressMock = Substitute.For<ProgressCallback>();
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsDecode(format))
         {
             await Assert.ThrowsAsync<NotSupportedException>(async () =>
                 await ImageContext.LoadFrames(stream, progressMock).ToListAsync());
@@ -122,7 +122,7 @@ public class LoadSaveTests : ContextualTests
         var path = P($"image{ext}");
         var expected = LoadImage(GetResource(compare[0]));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsEncode(format))
         {
             Assert.Throws<NotSupportedException>(() => expected.Save(path));
             return;
@@ -146,7 +146,7 @@ public class LoadSaveTests : ContextualTests
         var stream = new MemoryStream();
         var expected = LoadImage(GetResource(compare[0]));
 
-        if (!ImageContext.SupportsFormat(format))
+        if (!ImageContext.SupportsEncode(format))
         {
             Assert.Throws<NotSupportedException>(() => expected.Save(stream, format));
             return;
@@ -158,6 +158,30 @@ public class LoadSaveTests : ContextualTests
         Assert.Equal(format, image2.OriginalFileFormat);
         Assert.Equal(logicalPixelFormats[0], image2.UpdateLogicalPixelFormat());
         ImageAsserts.Similar(expected, image2, ignoreResolution: ignoreRes);
+    }
+
+    // These formats are decode-only, and support depends on the platform (and on Windows, codecs installed from the
+    // Microsoft Store).
+    [Theory]
+    [InlineData(ImageFileFormat.Heic, "dog_heic")]
+    [InlineData(ImageFileFormat.Avif, "dog_avif")]
+    public async Task LoadDecodeOnlyFormat(ImageFileFormat format, string resource)
+    {
+        var data = GetResource(resource);
+        if (!ImageContext.SupportsDecode(format))
+        {
+            Assert.Throws<NotSupportedException>(() => ImageContext.Load(data));
+            return;
+        }
+        using var image = ImageContext.Load(data);
+        var frames = await ImageContext.LoadFrames(new MemoryStream(data)).ToListAsync();
+
+        Assert.Equal(format, image.OriginalFileFormat);
+        ImageAsserts.Similar(ImageResources.dog, image, ImageAsserts.XPLAT_RMSE_THRESHOLD, ignoreResolution: true);
+        Assert.Single(frames);
+        ImageAsserts.Similar(image, frames[0], ImageAsserts.NULL_RMSE_THRESHOLD);
+        Assert.False(ImageContext.SupportsEncode(format));
+        Assert.Throws<NotSupportedException>(() => image.SaveToMemoryStream(format));
     }
 
     [Fact]
@@ -181,14 +205,46 @@ public class LoadSaveTests : ContextualTests
         ImageAsserts.Similar(ImageResources.dog, images[0]);
     }
 
-    // Gdi/Gtk/ImageSharp don't currently apply embedded color profiles
-    [PlatformFact(exclude: PlatformFlags.GdiImage | PlatformFlags.ImageSharpImage | PlatformFlags.GtkImage)]
-    public void LoadWithColorProfile()
+    [Theory]
+    [InlineData(ImageFileFormat.Jpeg, "dog_icc")]
+    [InlineData(ImageFileFormat.Png, "dog_icc_png")]
+    [InlineData(ImageFileFormat.Tiff, "dog_icc_tiff")]
+    [InlineData(ImageFileFormat.Jpeg2000, "dog_icc_jp2")]
+    [InlineData(ImageFileFormat.WebP, "dog_icc_webp")]
+    [InlineData(ImageFileFormat.JpegXl, "dog_icc_jxl")]
+    [InlineData(ImageFileFormat.Heic, "dog_icc_heic")]
+    [InlineData(ImageFileFormat.Avif, "dog_icc_avif")]
+    [InlineData(ImageFileFormat.Png, "dog_icc_alpha_png")]
+    public async Task LoadWithColorProfile(ImageFileFormat format, string resource)
     {
+        if (!ImageContext.SupportsDecode(format)) return;
+
         // The image has an embedded ICC profile with the primaries rotated (i.e. the stored red channel is green, etc.),
         // so the colors are only correct if the profile is applied.
-        var image = LoadImage(ImageResources.dog_icc);
-        ImageAsserts.Similar(ImageResources.dog, image, ignoreResolution: true);
+        var data = GetResource(resource);
+        var image = LoadImage(data);
+        ImageAsserts.Similar(ImageResources.dog, image, ImageAsserts.XL_RMSE_THRESHOLD, ignoreResolution: true);
+        var frames = await ImageContext.LoadFrames(new MemoryStream(data)).ToListAsync();
+        ImageAsserts.Similar(ImageResources.dog, Assert.Single(frames), ImageAsserts.XL_RMSE_THRESHOLD,
+            ignoreResolution: true);
+    }
+
+    [Fact]
+    public void LoadCmykWithColorProfile()
+    {
+        // Legacy gdk-pixbuf is less accurate so we set a higher threshold, but newer Glycin-based pixbuf should
+        // be much better.
+        var threshold = CurrentPlatformFlags.HasAny(PlatformFlags.GtkImage) ? 15 : ImageAsserts.XPLAT_RMSE_THRESHOLD;
+        var image = LoadImage(ImageResources.dog_cmyk_icc);
+        ImageAsserts.Similar(ImageResources.dog, image, threshold, ignoreResolution: true);
+    }
+
+    [Fact]
+    public void LoadProgressiveJpeg()
+    {
+        // This also verifies the resolution is read, which some image types need to parse from the JPEG header
+        var image = LoadImage(ImageResources.dog_progressive);
+        ImageAsserts.Similar(ImageResources.dog, image);
     }
 
     [Fact]
@@ -215,6 +271,38 @@ public class LoadSaveTests : ContextualTests
 
         Assert.Equal(300, image2.HorizontalResolution, 2);
         Assert.Equal(300, image2.VerticalResolution, 2);
+    }
+
+    [PlatformFact(exclude: PlatformFlags.SkiaImage)]
+    public void SetResolutionAndSaveTiff()
+    {
+        var image = LoadImage(ImageResources.dog);
+
+        image.SetResolution(300, 150);
+        var stream = image.SaveToMemoryStream(ImageFileFormat.Tiff);
+        var image2 = ImageContext.Load(stream);
+
+        Assert.Equal(300, image2.HorizontalResolution, 2);
+        Assert.Equal(150, image2.VerticalResolution, 2);
+    }
+
+    // PNG stores resolution as whole pixels per meter, so e.g. 300 DPI can be read back as 299.9994. Mac/Skia snap to
+    // the whole DPI, but not all image types do.
+    [PlatformTheory(include: PlatformFlags.SkiaImage)]
+    [InlineData(72)]
+    [InlineData(96)]
+    [InlineData(300)]
+    [InlineData(1200)]
+    public void SavePngWithExactResolution(int dpi)
+    {
+        var image = LoadImage(ImageResources.dog);
+
+        image.SetResolution(dpi, dpi);
+        var stream = image.SaveToMemoryStream(ImageFileFormat.Png);
+        var image2 = ImageContext.Load(stream);
+
+        Assert.Equal(dpi, image2.HorizontalResolution);
+        Assert.Equal(dpi, image2.VerticalResolution);
     }
 
     [Fact]
@@ -266,7 +354,7 @@ public class LoadSaveTests : ContextualTests
         // All optimized values should be less than their unoptimized counterparts.
         Assert.True(optimized32Bpp < unoptimized32Bpp);
         Assert.True(optimized24Bpp < unoptimized24Bpp);
-        if (!CurrentPlatformFlags.HasAny(PlatformFlags.ImageSharpImage | PlatformFlags.WpfImage))
+        if (!CurrentPlatformFlags.HasAny(PlatformFlags.WpfImage | PlatformFlags.SkiaImage))
         {
             Assert.True(optimized8Bpp < unoptimized8Bpp);
             Assert.Equal(optimized1Bpp, unoptimized1Bpp);
@@ -320,9 +408,7 @@ public class LoadSaveTests : ContextualTests
         ],
         [
             ImageFileFormat.Png, ".png", "dog_gray_24bit_png",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false,
-            // TODO: Can we improve this for WPF?
-            new PlatformFactAttribute(exclude: PlatformFlags.WpfImage)
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
         ],
         [
             ImageFileFormat.Png, ".png", "dog_bw",
@@ -374,25 +460,48 @@ public class LoadSaveTests : ContextualTests
         ],
         [
             ImageFileFormat.Tiff, ".tiff", "dog_gray_24bit_tiff",
-            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true,
-            // TODO: Can we improve this for WPF?
-            new PlatformFactAttribute(exclude: PlatformFlags.WpfImage)
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, true
         ],
         [
             ImageFileFormat.Tiff, ".tiff", "dog_bw_tiff",
             new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         ],
-        // TODO: Any way to improve these cases for ImageSharp?
         [
             ImageFileFormat.Tiff, ".tiff", "dog_alpha_tiff",
-            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true,
-            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, true
+        ],
+        [
+            ImageFileFormat.WebP, ".webp", "dog_webp",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
+        ],
+        [
+            ImageFileFormat.WebP, ".webp", "dog_alpha_webp",
+            new[] { "dog_alpha" }, new[] { ImagePixelFormat.ARGB32 }, false
+        ],
+        [
+            ImageFileFormat.JpegXl, ".jxl", "dog_jxl",
+            new[] { "dog" }, new[] { ImagePixelFormat.RGB24 }, false
+        ],
+        [
+            ImageFileFormat.JpegXl, ".jxl", "dog_gray_jxl",
+            new[] { "dog_gray" }, new[] { ImagePixelFormat.Gray8 }, false
+        ],
+        [
+            ImageFileFormat.JpegXl, ".jxl", "dog_bw_jxl",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, false
+        ],
+        [
+            ImageFileFormat.Gif, ".gif", "dog_gif",
+            new[] { "dog_palette_rgb" }, new[] { ImagePixelFormat.RGB24 }, true
+        ],
+        [
+            ImageFileFormat.Gif, ".gif", "dog_anim_gif",
+            new[] { "dog_bw" }, new[] { ImagePixelFormat.BW1 }, true
         ],
         [
             ImageFileFormat.Tiff, ".tiff", "animals_tiff",
             new[] { "dog", "dog_h_p300", "stock_cat" },
-            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true,
-            new PlatformFactAttribute(exclude: PlatformFlags.ImageSharpImage)
+            new[] { ImagePixelFormat.RGB24, ImagePixelFormat.RGB24, ImagePixelFormat.RGB24 }, true
         ],
     ];
 }

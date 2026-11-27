@@ -5,56 +5,80 @@ namespace NAPS2.EtoForms.Desktop;
 
 public class DesktopSubFormController : IDesktopSubFormController
 {
+    private readonly Naps2Config _config;
     private readonly IFormFactory _formFactory;
+    private readonly IImageEditorFactory _imageEditorFactory;
     private readonly UiImageList _imageList;
     private readonly DesktopImagesController _desktopImagesController;
     private readonly TesseractLanguageManager _tesseractLanguageManager;
+    private readonly DesktopFormProvider _desktopFormProvider;
 
-    public DesktopSubFormController(IFormFactory formFactory, UiImageList imageList,
-        DesktopImagesController desktopImagesController, TesseractLanguageManager tesseractLanguageManager)
+    public DesktopSubFormController(Naps2Config config, IFormFactory formFactory,
+        IImageEditorFactory imageEditorFactory, UiImageList imageList,
+        DesktopImagesController desktopImagesController, TesseractLanguageManager tesseractLanguageManager,
+        DesktopFormProvider desktopFormProvider)
     {
+        _config = config;
         _formFactory = formFactory;
+        _imageEditorFactory = imageEditorFactory;
         _imageList = imageList;
         _desktopImagesController = desktopImagesController;
         _tesseractLanguageManager = tesseractLanguageManager;
+        _desktopFormProvider = desktopFormProvider;
     }
 
     private Func<ListSelection<UiImage>>? SelectionFunc { get; init; }
 
+    private Action<ImageEditor>? EditorHost { get; init; }
+
     private ListSelection<UiImage> Selection => SelectionFunc?.Invoke() ?? _imageList.Selection;
 
-    public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc)
+    public IDesktopSubFormController WithSelection(Func<ListSelection<UiImage>> selectionFunc,
+        Action<ImageEditor>? editorHost = null)
     {
-        return new DesktopSubFormController(_formFactory, _imageList, _desktopImagesController,
-            _tesseractLanguageManager)
+        return new DesktopSubFormController(_config, _formFactory, _imageEditorFactory, _imageList,
+            _desktopImagesController, _tesseractLanguageManager, _desktopFormProvider)
         {
-            SelectionFunc = selectionFunc
+            SelectionFunc = selectionFunc,
+            EditorHost = editorHost
         };
     }
 
-    public void ShowCropForm() => ShowImageForm<CropForm>();
-    public void ShowBrightnessContrastForm() => ShowImageForm<BrightContForm>();
-    public void ShowHueSaturationForm() => ShowImageForm<HueSatForm>();
-    public void ShowBlackWhiteForm() => ShowImageForm<BlackWhiteForm>();
-    public void ShowSharpenForm() => ShowImageForm<SharpenForm>();
-    public void ShowCompressForm() => ShowImageForm<CompressForm>();
-    public void ShowSplitForm() => ShowImageForm<SplitForm>();
-    public void ShowRotateForm() => ShowImageForm<RotateForm>();
+    public void ShowCropForm() => ShowImageEditor<CropEditor>();
+    public void ShowBrightnessContrastForm() => ShowImageEditor<BrightContEditor>();
+    public void ShowHueSaturationForm() => ShowImageEditor<HueSatEditor>();
+    public void ShowBlackWhiteForm() => ShowImageEditor<BlackWhiteEditor>();
+    public void ShowSharpenForm() => ShowImageEditor<SharpenEditor>();
+    public void ShowCompressForm() => ShowImageEditor<CompressEditor>();
+    public void ShowSplitForm() => ShowImageEditor<SplitEditor>();
+    public void ShowRotateForm() => ShowImageEditor<RotateEditor>();
 
     public void ShowCombineForm()
     {
         if (_imageList.Images.Count < 2) return;
-        ShowImageForm<CombineForm>();
+        ShowImageEditor<CombineEditor>();
     }
 
-    private void ShowImageForm<T>() where T : ImageFormBase
+    private void ShowImageEditor<T>() where T : ImageEditor
     {
         var selection = Selection;
         if (selection.Any())
         {
-            var form = _formFactory.Create<T>();
-            form.Image = selection.First();
-            form.SelectedImages = selection.ToList();
+            if (EditorHost == null && _desktopFormProvider.DesktopForm.PreviewPane is { IsVisible: true } pane)
+            {
+                pane.StartEdit(typeof(T));
+                return;
+            }
+            var editor = _imageEditorFactory.Create<T>();
+            editor.Image = selection.First();
+            editor.SelectedImages = selection.ToList();
+            if (EditorHost != null)
+            {
+                EditorHost(editor);
+                return;
+            }
+            var form = _formFactory.Create<ImageEditorForm>();
+            form.Editor = editor;
             form.ShowModal();
         }
     }
@@ -100,14 +124,48 @@ public class DesktopSubFormController : IDesktopSubFormController
         form.ShowModal();
     }
 
-    public void ShowViewerForm()
+    public void ShowPreview()
     {
-        var selected = Selection.FirstOrDefault();
-        if (selected != null)
+        bool showInPane = _config.Get(c => c.PreviewPaneMode) switch
         {
-            using var viewer = _formFactory.Create<PreviewForm>();
-            viewer.CurrentImage = selected;
-            viewer.ShowModal();
+            PreviewPaneMode.PreviewPane => true,
+            PreviewPaneMode.NewWindow => false,
+            _ => _config.Get(c => c.PreviewLastShownInPane)
+        };
+        if (showInPane)
+        {
+            ShowPreviewPane();
+        }
+        else
+        {
+            ShowPreviewWindow();
+        }
+    }
+
+    public void ShowPreviewPane()
+    {
+        if (!_config.Get(c => c.EnablePreviewPane))
+        {
+            ShowPreviewWindow();
+            return;
+        }
+        if (Selection.FirstOrDefault() is not { } image) return;
+        _desktopFormProvider.DesktopForm.PreviewPane.Show(image);
+    }
+
+    public void ShowPreviewWindow()
+    {
+        if (Selection.FirstOrDefault() is not { } image) return;
+        var pane = _desktopFormProvider.DesktopForm.PreviewPane;
+        var editorType = pane.CurrentImage == image ? pane.ActiveEditorType : null;
+        pane.Hide();
+        using var viewer = _formFactory.Create<PreviewForm>();
+        viewer.CurrentImage = image;
+        viewer.EditorType = editorType;
+        viewer.ShowModal();
+        if (viewer.ContinueInPane)
+        {
+            pane.Show(viewer.CurrentImage, viewer.EditorType);
         }
     }
 

@@ -7,65 +7,140 @@ namespace NAPS2.EtoForms.Widgets;
 public class ScrollZoomImageViewer
 {
     private readonly Scrollable _scrollable = new() { Border = BorderType.None };
-    private readonly Drawable _imageView = new() { BackgroundColor = Colors.White };
-    private PointF _scrollableLocation;
-    private Size _renderSize;
+    private readonly Drawable _imageView = new();
     private float _renderFactor;
     private PointF? _mousePos;
     private PointF? _initialMousePos;
     private Point? _initialScrollPos;
+    private Point? _pendingScrollPosition;
     private bool _mouseIsDown;
+    private bool _fitToContainer = true;
+    private Bitmap? _scaledDown;
+    private int _scaledDownLevel;
 
     public ScrollZoomImageViewer()
     {
         _scrollable.Content = _imageView;
-        _scrollable.BackgroundColor = Colors.White;
         _imageView.Paint += ImagePaint;
-        _scrollable.Shown += OnShown;
+        _imageView.MouseDown += (_, e) => OverlayMouseDown?.Invoke(this, e);
+        _imageView.MouseMove += (_, e) => OverlayMouseMove?.Invoke(this, e);
+        _imageView.MouseUp += (_, e) => OverlayMouseUp?.Invoke(this, e);
         _scrollable.MouseEnter += OnMouseEnter;
         _scrollable.MouseLeave += OnMouseLeave;
         _scrollable.MouseMove += OnMouseMove;
         _scrollable.MouseDown += OnMouseDown;
         _scrollable.MouseUp += OnMouseUp;
         EtoPlatform.Current.AttachMouseWheelEvent(_scrollable, OnMouseWheel);
+        _scrollable.SizeChanged += OnSizeChanged;
+        _scrollable.Shown += OnSizeChanged;
+        EtoPlatform.Current.AttachFrameSizeChanged(_scrollable, OnFrameSizeChanged);
+        _scrollable.Scroll += (_, _) => _imageView.Invalidate();
         _scrollable.Cursor = Cursors.Pointer;
     }
 
     // For some reason Gtk can't render a few pixels width around the edge of the image, so we need to correct for that.
     private int BorderOffset { get; } = EtoPlatform.Current.IsGtk ? 6 : 0;
 
-    public Bitmap? Image { get; set; }
+    /// <summary>
+    /// The image shown. The viewer doesn't own it; use SetImage to replace it with the zoom adjusted.
+    /// </summary>
+    public Bitmap? Image { get; private set; }
 
     public ColorScheme? ColorScheme { get; set; }
 
+    public bool PanEnabled { get; set; } = true;
+
+    public bool FitIsMinZoom { get; set; }
+
+    public int ImagePadding
+    {
+        get;
+        set
+        {
+            field = value;
+            if (Image != null)
+            {
+                RenderSize = RenderSize;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The image's bounds in the coordinate space used by PaintOverlay and the overlay mouse events.
+    /// </summary>
+    public RectangleF ImageRect => new(XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+
+    public Cursor? OverlayCursor
+    {
+        set => _imageView.Cursor = value;
+    }
+
     public event EventHandler<ZoomChangedEventArgs>? ZoomChanged;
+
+    public event EventHandler<PaintEventArgs>? PaintOverlay;
+
+    public event EventHandler<MouseEventArgs>? OverlayMouseDown;
+    public event EventHandler<MouseEventArgs>? OverlayMouseMove;
+    public event EventHandler<MouseEventArgs>? OverlayMouseUp;
 
     private Size RenderSize
     {
-        get => _renderSize;
+        get;
         set
         {
-            _renderSize = value;
-            _imageView.Size = Size.Round(value) + new Size(2, 2);
+            field = value;
+            _pendingScrollPosition = null;
+            _imageView.Size = Size.Round(value) + new Size(2 + 2 * ImagePadding, 2 + 2 * ImagePadding);
             _imageView.Invalidate();
         }
     }
 
-    private int AvailableWidth => _scrollable.Width - 2 - BorderOffset;
-    private int AvailableHeight => _scrollable.Height - 2 - BorderOffset;
+    private Size? _frameSize;
+    private Size ContainerSize => _frameSize ?? _scrollable.Size;
+    private int AvailableWidth => ContainerSize.Width - 2 - BorderOffset - 2 * ImagePadding;
+    private int AvailableHeight => ContainerSize.Height - 2 - BorderOffset - 2 * ImagePadding;
+
+    /// <summary>
+    /// Replaces the image. If the new image has the same shape as the old one, it's shown at the same size on screen
+    /// (so a preview can be updated in place); otherwise it's zoomed to fit.
+    /// </summary>
+    public void SetImage(Bitmap? image)
+    {
+        var old = Image;
+        Image = image;
+        _scaledDown?.Dispose();
+        _scaledDown = null;
+        if (image == null)
+        {
+            RenderSize = Size.Empty;
+            _renderFactor = 0;
+            return;
+        }
+        bool sameShape = old != null && RenderSize.Width > 0 &&
+                         Math.Abs(old.Width / (float) old.Height - image.Width / (float) image.Height) < 0.01f;
+        if (sameShape)
+        {
+            _renderFactor = RenderSize.Width / (float) image.Width;
+            RenderSize = Size.Round(new SizeF(image.Width * _renderFactor, image.Height * _renderFactor));
+            ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
+        }
+        else
+        {
+            ZoomToContainer();
+            _imageView.Invalidate();
+        }
+    }
+
+    public void Invalidate() => _imageView.Invalidate();
 
     private bool IsWidthBound =>
         Image!.Width / (float) Image.Height > AvailableWidth / (float) AvailableHeight;
 
-    private bool FitsInBounds => RenderSize.Width <= AvailableWidth && RenderSize.Height <= AvailableHeight;
+    private float FitFactor =>
+        IsWidthBound ? AvailableWidth / (float) Image!.Width : AvailableHeight / (float) Image!.Height;
 
     private float XOffset => Math.Max((_imageView.Width - RenderSize.Width) / 2, 0);
     private float YOffset => Math.Max((_imageView.Height - RenderSize.Height) / 2, 0);
-
-    private void OnShown(object? sender, EventArgs e)
-    {
-        _scrollableLocation = _scrollable.Location;
-    }
 
     private void OnMouseEnter(object? sender, MouseEventArgs e)
     {
@@ -87,7 +162,7 @@ public class ScrollZoomImageViewer
 
     private void OnMouseMove(object? sender, MouseEventArgs e)
     {
-        if (_mouseIsDown && _initialMousePos.HasValue && _initialScrollPos.HasValue)
+        if (PanEnabled && _mouseIsDown && _initialMousePos.HasValue && _initialScrollPos.HasValue)
         {
             _scrollable.ScrollPosition = _initialScrollPos.Value + Point.Round(_initialMousePos.Value - e.Location);
         }
@@ -97,6 +172,36 @@ public class ScrollZoomImageViewer
     private void OnMouseLeave(object? sender, MouseEventArgs e)
     {
         _mousePos = null;
+    }
+
+    private void OnFrameSizeChanged(Size size)
+    {
+        // Gtk can only shrink the viewer as far as its content allows, so if we waited for the viewer's size to change
+        // before fitting the image, it would shrink (and repaint) in several steps
+        _frameSize = size;
+        if (_fitToContainer && Image != null)
+        {
+            ZoomToContainer();
+        }
+    }
+
+    // An image that was fitted to the viewer stays fitted when the viewer's size changes (the window is resized, or
+    // other controls appear next to it); an explicitly chosen zoom level is kept.
+    private void OnSizeChanged(object? sender, EventArgs e)
+    {
+        if (!_fitToContainer || Image == null) return;
+        if (EtoPlatform.Current.IsGtk)
+        {
+            // Gtk delays adjusting the image view size after the container size changes
+            Invoker.Current.InvokeDispatch(() =>
+            {
+                if (_fitToContainer) ZoomToContainer();
+            });
+        }
+        else
+        {
+            ZoomToContainer();
+        }
     }
 
     private void OnMouseWheel(object? sender, MouseEventArgs e)
@@ -110,15 +215,63 @@ public class ScrollZoomImageViewer
 
     private void ImagePaint(object? sender, PaintEventArgs e)
     {
-        var bgColor = ColorScheme?.BackgroundColor ?? Colors.White;
-        e.Graphics.FillRectangle(bgColor, 0, 0, _imageView.Width, _imageView.Height);
         if (Image != null)
         {
             e.Graphics.DrawRectangle(
                 ColorScheme?.BorderColor ?? Colors.Black,
                 XOffset - 1, YOffset - 1, RenderSize.Width + 1, RenderSize.Height + 1);
-            e.Graphics.DrawImage(Image, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+            DrawVisiblePart(e.Graphics, Image);
+            PaintOverlay?.Invoke(this, e);
         }
+    }
+
+    private void DrawVisiblePart(Graphics graphics, Bitmap image)
+    {
+        float scaleX = RenderSize.Width / (float) image.Width;
+        float scaleY = RenderSize.Height / (float) image.Height;
+        if (scaleX <= 1)
+        {
+            var source = image;
+            if (EtoPlatform.Current.IsGtk)
+            {
+                // The default is plain bilinear, which makes text unreadable when scaled down
+                graphics.ImageInterpolation = ImageInterpolation.Medium;
+                // GTK downscale during painting is slow, so do an intermediate render
+                source = GetScaledDownForGtk(image, scaleX * EtoPlatform.Current.GetScaleFactor(_imageView.ParentWindow));
+            }
+            graphics.DrawImage(source, XOffset, YOffset, RenderSize.Width, RenderSize.Height);
+            return;
+        }
+        var visible = _scrollable.VisibleRect;
+        float left = Math.Max((float) Math.Floor((visible.Left - XOffset) / scaleX), 0);
+        float top = Math.Max((float) Math.Floor((visible.Top - YOffset) / scaleY), 0);
+        float right = Math.Min((float) Math.Ceiling((visible.Right - XOffset) / scaleX), image.Width);
+        float bottom = Math.Min((float) Math.Ceiling((visible.Bottom - YOffset) / scaleY), image.Height);
+        if (right <= left || bottom <= top) return;
+        graphics.DrawImage(image,
+            new RectangleF(left, top, right - left, bottom - top),
+            new RectangleF(XOffset + left * scaleX, YOffset + top * scaleY,
+                (right - left) * scaleX, (bottom - top) * scaleY));
+    }
+
+    private Bitmap GetScaledDownForGtk(Bitmap image, float scale)
+    {
+        int level = 1;
+        while (scale * level * 2 <= 1)
+        {
+            level *= 2;
+        }
+        if (level == 1)
+        {
+            return image;
+        }
+        if (_scaledDown == null || _scaledDownLevel != level)
+        {
+            _scaledDown?.Dispose();
+            _scaledDown = new Bitmap(image, image.Width / level, image.Height / level, ImageInterpolation.High);
+            _scaledDownLevel = level;
+        }
+        return _scaledDown;
     }
 
     public float ZoomFactor => _renderFactor;
@@ -133,95 +286,126 @@ public class ScrollZoomImageViewer
 
     public void SetZoom(float value, bool anchorToMouse = false)
     {
+        if (FitIsMinZoom && value <= FitFactor)
+        {
+            ZoomToContainer();
+            return;
+        }
+        _fitToContainer = false;
         _renderFactor = value.Clamp(0.01f, MaxZoom);
         _scrollable.SuspendLayout();
         var anchor = GetMouseAnchor(anchorToMouse);
         RenderSize =
             Size.Round(new SizeF(Image!.Width * _renderFactor, Image.Height * _renderFactor));
-        SetMouseAnchor(anchor);
         _scrollable.ResumeLayout();
+        SetMouseAnchor(anchor);
         ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
     public void ZoomToActual()
     {
+        _fitToContainer = false;
         RenderSize = new Size(Image!.Width, Image.Height);
         _renderFactor = 1f;
         ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
+    /// <summary>
+    /// Fits the image to the viewer, now and whenever the viewer's size changes (until the zoom is changed). If the
+    /// viewer doesn't have a size yet, the image is fitted once it does.
+    /// </summary>
     public void ZoomToContainer()
     {
+        _fitToContainer = true;
         if (!_scrollable.Loaded || Image == null || _scrollable.Width <= 0 || _scrollable.Height <= 0)
         {
             return;
         }
-        if (IsWidthBound)
+        var size = IsWidthBound
+            ? new Size(AvailableWidth, (int) Math.Round(Image!.Height * AvailableWidth / (float) Image.Width))
+            : new Size((int) Math.Round(Image!.Width * AvailableHeight / (float) Image.Height), AvailableHeight);
+        if (size == RenderSize)
         {
-            RenderSize = new Size(AvailableWidth,
-                (int) Math.Round(Image!.Height * AvailableWidth / (float) Image.Width));
-            _renderFactor = AvailableWidth / (float) Image.Width;
+            return;
         }
-        else
-        {
-            RenderSize =
-                new Size((int) Math.Round(Image!.Width * AvailableHeight / (float) Image.Height),
-                    AvailableHeight);
-            _renderFactor = AvailableHeight / (float) Image.Height;
-        }
+        RenderSize = size;
+        _renderFactor = FitFactor;
         ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(_renderFactor));
     }
 
     // When we zoom in/out (e.g. with Ctrl+mousewheel), we want the point in the image underneath the mouse cursor to
     // stay stationary relative to the mouse (as much as permitted by the available scroll region). If the mouse is not
-    // overtop the image, the middle of the image (as currently visible) should stay stationary.
+    // overtop the image, the point in the middle of the viewport should stay stationary.
     //
     // This function calculates the image anchor as a fraction (i.e. a point in the range [<0,0>, <1,1>]). It also
     // returns the mouse position relative to the top left of the Scrollable (or the middle of the scrollable if the
     // mouse is not overtop the image).
-    private (PointF imageAnchor, PointF mouseRelativePos) GetMouseAnchor(bool anchorToMouse)
+    //
+    // The scroll position and content size are computed rather than read back from the control, as some platforms
+    // (e.g. WPF) only apply them on the next layout pass.
+    private (PointF imageAnchor, PointF viewportPos) GetMouseAnchor(bool anchorToMouse)
     {
-        var anchorMiddle = new PointF(0.5f, 0.5f);
-        var scrollableMiddle = new PointF(
-            _scrollableLocation.X + _scrollable.Width / 2f,
-            _scrollableLocation.Y + _scrollable.Height / 2f);
-        if (!anchorToMouse ||
-            _mousePos is not { } mousePos ||
-            mousePos.X < _scrollableLocation.X ||
-            mousePos.Y < _scrollableLocation.Y ||
-            mousePos.X > _scrollableLocation.X + _scrollable.Width ||
-            mousePos.Y > _scrollableLocation.Y + _scrollable.Height)
+        var viewport = _scrollable.VisibleRect.Size;
+        if (anchorToMouse && _mousePos is { } mousePos &&
+            mousePos.X >= 0 && mousePos.Y >= 0 && mousePos.X <= viewport.Width && mousePos.Y <= viewport.Height)
         {
-            // Mouse is outside the scrollable
-            return (anchorMiddle, scrollableMiddle);
+            var mouseViewportPos = mousePos - new Point(1, 1);
+            var mouseImageAnchor = GetImagePoint(mouseViewportPos, viewport);
+            if (mouseImageAnchor.X is >= 0 and <= 1 && mouseImageAnchor.Y is >= 0 and <= 1)
+            {
+                return (mouseImageAnchor, mouseViewportPos);
+            }
         }
-        var mouseRelativePos = mousePos - _scrollableLocation - new Point(1, 1);
-        var x = (mouseRelativePos.X + _scrollable.ScrollPosition.X - XOffset) / RenderSize.Width;
-        var y = (mouseRelativePos.Y + _scrollable.ScrollPosition.Y - YOffset) / RenderSize.Height;
-        if (x < 0 || y < 0 || x > 1 || y > 1)
-        {
-            // Mouse is inside the scrollable but outside the area covered by the image
-            return (anchorMiddle, scrollableMiddle);
-        }
-        return (new PointF(x, y), mouseRelativePos);
+        var middle = new PointF(viewport.Width / 2f, viewport.Height / 2f);
+        var middleAnchor = GetImagePoint(middle, viewport);
+        return (new PointF(middleAnchor.X.Clamp(0, 1), middleAnchor.Y.Clamp(0, 1)), middle);
+    }
+
+    private PointF GetImagePoint(PointF viewportPos, Size viewport)
+    {
+        var scroll = _pendingScrollPosition ?? _scrollable.ScrollPosition;
+        var offset = GetImageOffset(viewport);
+        return new PointF(
+            (viewportPos.X + scroll.X - offset.X) / RenderSize.Width,
+            (viewportPos.Y + scroll.Y - offset.Y) / RenderSize.Height);
     }
 
     // This function inverts the calculation done in GetMouseAnchor to get the correct scroll position to move the point
     // in the image that was underneath the mouse back there (after the image size has been changed).
-    private void SetMouseAnchor((PointF imageAnchor, PointF mouseRelativePos) anchor)
+    private void SetMouseAnchor((PointF imageAnchor, PointF viewportPos) anchor)
     {
-        if (FitsInBounds)
+        var viewport = _scrollable.VisibleRect.Size;
+        var offset = GetImageOffset(viewport);
+        var content = GetContentSize(viewport);
+        var scroll = Point.Round(new PointF(
+            (anchor.imageAnchor.X * RenderSize.Width + offset.X - anchor.viewportPos.X)
+            .Clamp(0, content.Width - viewport.Width),
+            (anchor.imageAnchor.Y * RenderSize.Height + offset.Y - anchor.viewportPos.Y)
+            .Clamp(0, content.Height - viewport.Height)));
+        _scrollable.ScrollPosition = scroll;
+        _pendingScrollPosition = scroll;
+        Invoker.Current.InvokeDispatch(() =>
         {
-            return;
-        }
-        // TODO: This is off a bit for the "middle" anchor, probably because the scrollbars themselves appear
-        var xScroll = anchor.imageAnchor.X * RenderSize.Width + XOffset - anchor.mouseRelativePos.X;
-        var yScroll = anchor.imageAnchor.Y * RenderSize.Height + YOffset - anchor.mouseRelativePos.Y;
-        _scrollable.ScrollPosition = Point.Round(new PointF(xScroll, yScroll));
+            if (_pendingScrollPosition != scroll) return;
+            _scrollable.ScrollPosition = scroll;
+            _pendingScrollPosition = null;
+        });
+    }
+
+    private SizeF GetContentSize(Size viewport) => new(
+        Math.Max(RenderSize.Width + 2 + 2 * ImagePadding, viewport.Width),
+        Math.Max(RenderSize.Height + 2 + 2 * ImagePadding, viewport.Height));
+
+    private PointF GetImageOffset(Size viewport)
+    {
+        var content = GetContentSize(viewport);
+        return new PointF((content.Width - RenderSize.Width) / 2, (content.Height - RenderSize.Height) / 2);
     }
 
     public static implicit operator LayoutElement(ScrollZoomImageViewer control)
     {
         return control._scrollable;
     }
+
+    public LayoutControl Scale() => _scrollable.Scale().NaturalSize(0, 0);
 }

@@ -46,11 +46,12 @@ public class GtkDesktopForm : DesktopForm
         IDarkModeProvider darkModeProvider,
         Sidebar sidebar,
         IIconProvider iconProvider,
-        EditWithController editWithController)
+        EditWithController editWithController,
+        PreviewPane previewPane)
         : base(config, keyboardShortcuts, notificationManager, cultureHelper, colorScheme, profileManager, imageList,
             thumbnailController, thumbnailProvider, desktopController, desktopScanController, imageListActions,
             imageListViewBehavior, desktopFormProvider, desktopSubFormController, commands, sidebar, iconProvider,
-            editWithController)
+            editWithController, previewPane)
     {
         ((GtkDarkModeProvider) darkModeProvider).StyleContext =
             Eto.Forms.Gtk3Helpers.ToNative(this).StyleContext;
@@ -72,26 +73,46 @@ public class GtkDesktopForm : DesktopForm
         var fgColor = _colorScheme.ForegroundColor.ToHex(false);
         var sepColor = _colorScheme.SeparatorColor.ToHex(false);
         var brdColor = _colorScheme.BorderColor.ToHex(false);
+        var hlBgColor = _colorScheme.HighlightBackgroundColor.ToHex(false);
+        var hlBrdColor = _colorScheme.HighlightBorderColor.ToHex(false);
         cssProvider.LoadFromData(@"
             .desktop-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .image-button { min-width: 50px; padding-left: 0; padding-right: 0; }
             .desktop-toolbar .toggle { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button * { min-width: 0; padding-left: 0; padding-right: 0; }
             .preview-toolbar-button button { padding: 0 5px; }
+            .preview-toolbar-button:disabled image { opacity: 0.4; }
             toolbar { border-bottom: 1px solid " + sepColor + @"; }
+            toolbar.preview-toolbar { border-bottom: none; background: none; padding: 0; }
             toolbar.dock-left { border-bottom: none; border-right: 1px solid " + sepColor + @"; }
             toolbar.dock-bottom { border-bottom: none; border-top: 1px solid " + sepColor + @"; }
             toolbar.dock-right { border-bottom: none; border-left: 1px solid " + sepColor + @"; }
             .listview .frame { background-color: " + bgColor + @"; }
+            .image-listview .numbered { border-radius: 0; border: 1px solid transparent; padding: 4px; }
             .listview .drop-before { border-radius: 0; border-left: 3px solid " + fgColor + @"; padding-left: 0; }
             .listview .drop-after { border-radius: 0; border-right: 3px solid " + fgColor + @"; padding-right: 0; }
-            .desktop-listview .listview-item image { border: 1px solid " + brdColor + @"; }
+            .image-listview .numbered.drop-before { padding-left: 2px; }
+            .image-listview .numbered.drop-after { padding-right: 2px; }
+            .image-listview .listview-item image { border: 1px solid " + brdColor + @"; }
+            .image-listview .listview-item:not(.numbered) image { margin: 2px; }
+            .image-listview .listview-item { outline-style: none; }
+            .image-listview .listview-item:selected { background: none; color: " + fgColor + @"; }
+            .image-listview .listview-item:not(.numbered):selected image { border: 3px solid " + hlBrdColor + @"; margin: 0; }
+            .image-listview .numbered:selected { background: " + hlBgColor + @"; border-color: " + hlBrdColor + @"; }
+            .image-listview .numbered:selected image { border-color: transparent; }
             .settings-navigator { background-color: @theme_base_color; border: 1px solid @borders; border-radius: 8px; padding: 4px; }
             .settings-navigator row { padding: 8px 10px; border-radius: 6px; }
             .link { padding: 0; }
             .donate-button { border: 1px solid #fbad5f; background: #feda96; }
             .donate-button:hover { background: #eeca86; }
-            .zoom-button { background: " + bgColor + @"; border: 1px solid " + brdColor + @"; border-radius: 0; }
+            .icon-button { min-width: 0; padding-left: 0; padding-right: 0; }
+            .icon-button.compact { min-height: 0; padding-top: 6px; padding-bottom: 6px; }
+            .floating-button { background: " + bgColor + @"; border: 1px solid alpha(@theme_fg_color, 0.4); border-radius: 5px; }
+            .floating-button:hover { background: mix(" + bgColor + @", @theme_fg_color, 0.06); }
+            .floating-button:active { background: mix(" + bgColor + @", @theme_fg_color, 0.12); }
+            .floating-button:disabled image, .icon-button:disabled image { opacity: 0.4; }
+            .joined-left { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+            .joined-right { border-top-left-radius: 0; border-bottom-left-radius: 0; border-left-style: none; }
         ");
         StyleContext.AddProviderForScreen(Gdk.Screen.Default, cssProvider, 800);
     }
@@ -99,9 +120,13 @@ public class GtkDesktopForm : DesktopForm
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
-        var listView = (GtkListView<UiImage>) _listView;
-        listView.NativeControl.StyleContext.AddClass("desktop-listview");
         PlaceToolbars();
+    }
+
+    public override void UpdateListView()
+    {
+        // GTK list items are built widgets rather than custom-drawn, so they must be rebuilt to reflect setting changes
+        _listView.RegenerateImages();
     }
 
     protected override void OnSizeChanged(EventArgs e)

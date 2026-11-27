@@ -11,12 +11,7 @@ internal static class PdfiumImageExtractor
         if (imageObj != null)
         {
             var metadata = imageObj.ImageMetadata;
-            var image = GetImageFromObject(imageContext, page, imageObj, metadata);
-            if (image != null)
-            {
-                image.SetResolution((int) Math.Round(metadata.HorizontalDpi), (int) Math.Round(metadata.VerticalDpi));
-                return image;
-            }
+            return GetImageFromObject(imageContext, page, imageObj, metadata);
         }
         return null;
     }
@@ -26,9 +21,15 @@ internal static class PdfiumImageExtractor
     private static IMemoryImage? GetImageFromObject(ImageContext imageContext, PdfPage page, PdfPageObject imageObj,
         PdfImageMetadata metadata)
     {
+        var image = ExtractRawImageData(imageContext, imageObj, metadata);
+        if (image != null)
+        {
+            image.SetResolution((int) Math.Round(metadata.HorizontalDpi), (int) Math.Round(metadata.VerticalDpi));
+            var rotation = page.Rotation;
+            return rotation != 0 ? image.PerformTransform(new RotationTransform(rotation)) : image;
+        }
         // Otherwise we render the entire page with the known image dimensions
-        return ExtractRawImageData(imageContext, imageObj, metadata) ??
-               RenderPdfPageToNewImage(imageContext, page, metadata);
+        return RenderPdfPageToNewImage(imageContext, page, metadata);
     }
 
     private static IMemoryImage? ExtractRawImageData(ImageContext imageContext, PdfPageObject imageObj,
@@ -75,13 +76,14 @@ internal static class PdfiumImageExtractor
     {
         // This maintains the correct image dimensions/resolution as we have that info from the metadata.
         using var pdfBitmap = RenderPdfPageToBitmap(page, metadata);
-        return CopyPdfBitmapToNewImage(imageContext, pdfBitmap, metadata);
+        return CopyPdfBitmapToNewImage(imageContext, page, pdfBitmap, metadata);
     }
 
     private static PdfBitmap RenderPdfPageToBitmap(PdfPage page, PdfImageMetadata imageMetadata)
     {
-        var w = imageMetadata.Width;
-        var h = imageMetadata.Height;
+        var swap = page.Rotation is 90 or 270;
+        var w = swap ? imageMetadata.Height : imageMetadata.Width;
+        var h = swap ? imageMetadata.Width : imageMetadata.Height;
         var format = imageMetadata.BitsPerPixel switch
         {
             1 or 8 => PdfiumNativeLibrary.FPDFBitmap_Gray,
@@ -95,7 +97,7 @@ internal static class PdfiumImageExtractor
         return pdfiumBitmap;
     }
 
-    private static IMemoryImage CopyPdfBitmapToNewImage(ImageContext imageContext, PdfBitmap pdfBitmap,
+    private static IMemoryImage CopyPdfBitmapToNewImage(ImageContext imageContext, PdfPage page, PdfBitmap pdfBitmap,
         PdfImageMetadata imageMetadata)
     {
         var (targetPixelFormat, subPixelType) = imageMetadata.BitsPerPixel switch
@@ -107,7 +109,14 @@ internal static class PdfiumImageExtractor
             _ => throw new ArgumentException()
         };
         var dstImage = imageContext.Create(pdfBitmap.Width, pdfBitmap.Height, targetPixelFormat);
-        dstImage.SetResolution(imageMetadata.HorizontalDpi, imageMetadata.VerticalDpi);
+        if (page.Rotation is 90 or 270)
+        {
+            dstImage.SetResolution(imageMetadata.VerticalDpi, imageMetadata.HorizontalDpi);
+        }
+        else
+        {
+            dstImage.SetResolution(imageMetadata.HorizontalDpi, imageMetadata.VerticalDpi);
+        }
         var srcPixelInfo = new PixelInfo(pdfBitmap.Width, pdfBitmap.Height, subPixelType, pdfBitmap.Stride);
         new CopyBitwiseImageOp().Perform(pdfBitmap.Buffer, srcPixelInfo, dstImage);
         return dstImage;
@@ -131,6 +140,7 @@ internal static class PdfiumImageExtractor
         }
         using var pageText = page.GetText();
         PdfPageObject? imageObject = null;
+        var fillPageMatrix = PdfMatrix.FillPage(page.BoundingBox);
         var objectCount = page.ObjectCount;
         for (int i = 0; i < objectCount; i++)
         {
@@ -139,7 +149,7 @@ internal static class PdfiumImageExtractor
             // TODO: We could consider, even in cases where we don't have an exact matrix match etc., getting a smarter dpi estimate.
             // TODO: But it's not clear how well that will render if there's a subpixel offset.
             if (pageObj.IsImage &&
-                PdfMatrix.EqualsWithinTolerance(pageObj.Matrix, PdfMatrix.FillPage(page.Width, page.Height)) &&
+                PdfMatrix.EqualsWithinTolerance(pageObj.Matrix, fillPageMatrix) &&
                 imageObject == null)
             {
                 imageObject = pageObj;

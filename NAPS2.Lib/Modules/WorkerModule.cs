@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using NAPS2.Scan;
 using NAPS2.Scan.Internal.Twain;
 
 namespace NAPS2.Modules;
@@ -14,7 +13,7 @@ public class WorkerModule : Module
         // Bindings for ITwainController as used by WorkerServiceImpl
 #if MAC
         builder.RegisterType<StubTwainController>().As<ITwainController>();
-#elif NET6_0_OR_GREATER
+#else
         if (OperatingSystem.IsWindows())
         {
             builder.RegisterType<LocalTwainController>().As<ITwainController>();
@@ -23,8 +22,6 @@ public class WorkerModule : Module
         {
             builder.RegisterType<StubTwainController>().As<ITwainController>();
         }
-#else
-        builder.RegisterType<LocalTwainController>().As<ITwainController>();
 #endif
     }
 }

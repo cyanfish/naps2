@@ -39,8 +39,6 @@ internal abstract class WindowsSystemCompat : ISystemCompat
 
     public bool ShouldRememberBackgroundOperations => true;
 
-    public bool RenderInWorker => true;
-
     public virtual bool SupportsWinX86Worker => true;
 
     // Due to weird MSIX permission issues, we need to run worker processes using their aliases so that Windows sets

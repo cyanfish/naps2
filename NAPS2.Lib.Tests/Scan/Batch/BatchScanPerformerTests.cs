@@ -177,7 +177,7 @@ public class BatchScanPerformerTests : ContextualTests
         await Run(BatchOutputType.MultipleFiles, SaveSeparator.FilePerPage, P("test.jpg"),
             [ImageResources.dog, ImageResources.dog_gray, ImageResources.dog_bw]);
 
-        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!);
+        _overwritePrompt.DidNotReceiveWithAnyArgs().ConfirmOverwrite(default!, default);
         Assert.Equal(3, Folder.GetFiles().Length);
         ImageAsserts.Similar(ImageResources.dog, ImageContext.Load(P("test.1.jpg")));
         ImageAsserts.Similar(ImageResources.dog_gray, ImageContext.Load(P("test.2.jpg")));

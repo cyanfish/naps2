@@ -2,5 +2,5 @@
 
 internal class StubOverwritePrompt : IOverwritePrompt
 {
-    public OverwriteResponse ConfirmOverwrite(string path) => OverwriteResponse.No;
+    public OverwriteResponse ConfirmOverwrite(string path, bool multipleFiles) => OverwriteResponse.Skip;
 }

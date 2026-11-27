@@ -1,7 +1,8 @@
-﻿using NAPS2.Scan;
+﻿using NAPS2.Serialization;
 
 namespace NAPS2.Recovery;
 
+[GeneratePropertyAccessors]
 public class RecoveryIndexImage
 {
     public string? FileName { get; set; }

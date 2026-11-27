@@ -51,7 +51,7 @@ public class PageSizeDropDownWidget : DropDownWidget<PageSizeDropDownWidget.Page
                 .Select(preset => new PageSizeListItem
                 {
                     Type = ScanPageSize.Custom,
-                    Text = string.Format(MiscResources.NamedPageSizeFormat, preset.Name, preset.Dimens.Width,
+                    Text = string.Format(UiStrings.NamedPageSizeFormat, preset.Name, preset.Dimens.Width,
                         preset.Dimens.Height, preset.Dimens.Unit.Description()),
                     CustomName = preset.Name,
                     CustomDimens = preset.Dimens
@@ -101,9 +101,9 @@ public class PageSizeDropDownWidget : DropDownWidget<PageSizeDropDownWidget.Page
         {
             Type = ScanPageSize.Custom,
             Text = string.IsNullOrEmpty(name)
-                ? string.Format(MiscResources.CustomPageSizeFormat, dimens.Width, dimens.Height,
+                ? string.Format(UiStrings.CustomPageSizeFormat, dimens.Width, dimens.Height,
                     dimens.Unit.Description())
-                : string.Format(MiscResources.NamedPageSizeFormat, name, dimens.Width, dimens.Height,
+                : string.Format(UiStrings.NamedPageSizeFormat, name, dimens.Width, dimens.Height,
                     dimens.Unit.Description()),
             CustomName = name,
             CustomDimens = dimens

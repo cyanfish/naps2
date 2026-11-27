@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: naps2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-19 21:51+0000\n"
-"PO-Revision-Date: 2026-10-25 18:53\n"
+"PO-Revision-Date: 2026-11-19 03:29\n"
 "Last-Translator: \n"
 "Language-Team: Thai\n"
 "Language: th\n"
@@ -131,6 +131,10 @@ msgstr "อนุญาตให้กรอกข้อมูลลงในแ
 #: UiStrings.resx$AllowFullQualityPrinting$Message
 msgid "Allow Full Quality Printing"
 msgstr "อนุญาตให้พิมพ์แบบคุณภาพสูง"
+
+#: UiStrings.resx$AllowJbig2Compression$Message
+msgid "Allow JBIG2 compression"
+msgstr ""
 
 #: UiStrings.resx$AllowPrinting$Message
 msgid "Allow Printing"
@@ -318,6 +322,10 @@ msgstr "B4 (250x353 มม.)"
 #: SettingsResources.resx$PageSize_B5$Message
 msgid "B5 (176x250 mm)"
 msgstr "B5 (176x250 มม.)"
+
+#: UiStrings.resx$BackspaceKey$Message
+msgid "Backspace"
+msgstr ""
 
 #: UiStrings.resx$BatchScan$Message
 #: UiStrings.resx$BatchScanFormTitle$Message
@@ -571,6 +579,7 @@ msgstr "แยกหน้าแบบสลับ"
 
 #: MiscResources.resx$Delete$Message
 #: UiStrings.resx$Delete$Message
+#: UiStrings.resx$DeleteKey$Message
 msgid "Delete"
 msgstr "ลบ"
 
@@ -618,6 +627,10 @@ msgstr "บริจาค"
 #: UiStrings.resx$Done$Message
 msgid "Done"
 msgstr "เสร็จ"
+
+#: UiStrings.resx$DownArrowKey$Message
+msgid "Down"
+msgstr ""
 
 #: UiStrings.resx$Download$Message
 msgid "Download"
@@ -701,6 +714,14 @@ msgstr "เข้ารหัส PDF"
 msgid "Encryption"
 msgstr "การเข้ารหัส"
 
+#: UiStrings.resx$EndKey$Message
+msgid "End"
+msgstr ""
+
+#: UiStrings.resx$EnterKey$Message
+msgid "Enter"
+msgstr ""
+
 #: MiscResources.resx$Error$Message
 #: UiStrings.resx$ErrorFormTitle$Message
 msgid "Error"
@@ -708,6 +729,10 @@ msgstr "ผิดพลาด"
 
 #: UiStrings.resx$ErrorStartingApplication$Message
 msgid "Error starting application {0}"
+msgstr ""
+
+#: UiStrings.resx$EscapeKey$Message
+msgid "Esc"
 msgstr ""
 
 #: MiscResources.resx$EstimatedDownloadSize$Message
@@ -783,6 +808,10 @@ msgstr "โทนสีเทา"
 msgid "Help"
 msgstr ""
 
+#: UiStrings.resx$HomeKey$Message
+msgid "Home"
+msgstr ""
+
 #: UiStrings.resx$HorizontalAlignLabel$Message
 msgid "Horizontal align:"
 msgstr "จัดแนวนอน:"
@@ -839,6 +868,10 @@ msgstr "กำลังนำเข้า {0}..."
 msgid "Importing..."
 msgstr "กำลังนำเข้า...."
 
+#: UiStrings.resx$InsertKey$Message
+msgid "Insert"
+msgstr ""
+
 #: MiscResources.resx$Install$Message
 msgid "Install {0}"
 msgstr "ติดตั้ง {0}"
@@ -893,6 +926,7 @@ msgstr "เขียนรีวิว"
 
 #: SettingsResources.resx$DockStyle_Left$Message
 #: SettingsResources.resx$HorizontalAlign_Left$Message
+#: UiStrings.resx$LeftArrowKey$Message
 msgid "Left"
 msgstr "ซ้าย"
 
@@ -1203,6 +1237,14 @@ msgstr "PDF/A-3u"
 msgid "PNG File (*.png)"
 msgstr "PNG File (*.png)"
 
+#: UiStrings.resx$PageDownKey$Message
+msgid "Page Down"
+msgstr ""
+
+#: UiStrings.resx$PageUpKey$Message
+msgid "Page Up"
+msgstr ""
+
 #: UiStrings.resx$PageSizeLabel$Message
 msgid "Page size:"
 msgstr "ขนาดหน้า:"
@@ -1222,6 +1264,10 @@ msgstr "รหัสผ่าน"
 #: UiStrings.resx$Paste$Message
 msgid "Paste"
 msgstr "วาง"
+
+#: UiStrings.resx$PauseKey$Message
+msgid "Pause"
+msgstr ""
 
 #: UiStrings.resx$PixelDimensionsLabel$Message
 msgid "Pixel dimensions:"
@@ -1381,6 +1427,7 @@ msgstr "เปลี่ยนกลับ"
 
 #: SettingsResources.resx$DockStyle_Right$Message
 #: SettingsResources.resx$HorizontalAlign_Right$Message
+#: UiStrings.resx$RightArrowKey$Message
 msgid "Right"
 msgstr "ขวา"
 
@@ -1634,6 +1681,10 @@ msgstr "สแกนครั้งเดียว"
 msgid "Skip save prompt"
 msgstr "ข้ามคำเตือนการบันทึก"
 
+#: UiStrings.resx$SpaceKey$Message
+msgid "Space"
+msgstr ""
+
 #: UiStrings.resx$Split$Message
 msgid "Split"
 msgstr "แยก"
@@ -1673,6 +1724,10 @@ msgstr "TIFF File (*.tiff, *.tif)"
 #: UiStrings.resx$TwainDriver$Message
 msgid "TWAIN Driver"
 msgstr "TWAIN Driver"
+
+#: UiStrings.resx$TabKey$Message
+msgid "Tab"
+msgstr ""
 
 #: UiStrings.resx$TechnicalDetails$Message
 msgid "Technical Details"
@@ -1839,6 +1894,10 @@ msgstr ""
 msgid "Unsaved Changes"
 msgstr ""
 
+#: UiStrings.resx$UpArrowKey$Message
+msgid "Up"
+msgstr ""
+
 #: MiscResources.resx$UpdateProgress$Message
 msgid "Update Progress"
 msgstr "ความคืบหน้าการอัปเดต"
@@ -1910,6 +1969,10 @@ msgstr ""
 
 #: UiStrings.resx$WiaVersionLabel$Message
 msgid "Wia Version:"
+msgstr ""
+
+#: UiStrings.resx$WindowsKey$Message
+msgid "Win"
 msgstr ""
 
 #: UiStrings.resx$Year4Digit$Message

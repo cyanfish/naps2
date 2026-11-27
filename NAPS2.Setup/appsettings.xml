@@ -11,6 +11,8 @@
   <ScanChangesDefaultProfile mode="default">true</ScanChangesDefaultProfile>
   <ScanButtonDefaultAction mode="default">ScanWithDefaultProfile</ScanButtonDefaultAction>
   <SaveButtonDefaultAction mode="default">SaveAll</SaveButtonDefaultAction>
+  <EnablePreviewPane mode="default">true</EnablePreviewPane>
+  <PreviewPaneMode mode="default">LastUsed</PreviewPaneMode>
   <DeleteAfterSaving mode="default">false</DeleteAfterSaving>
   <KeepSession mode="default">false</KeepSession>
   <SingleInstance mode="default">false</SingleInstance>

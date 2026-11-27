@@ -139,7 +139,8 @@ public class DesktopController
     private void ShowUpdatePrompt()
     {
 #if !MSI
-        if (_config.Get(c => c.CheckForUpdates) &&
+        if (OperatingSystem.IsWindows() &&
+            _config.Get(c => c.CheckForUpdates) &&
             !_config.Get(c => c.NoUpdatePrompt) &&
             (!_config.Get(c => c.HasCheckedForUpdates) ||
              _config.Get(c => c.LastUpdateCheckDate) < DateTime.Now - UpdateChecker.CheckInterval))
@@ -221,11 +222,17 @@ public class DesktopController
             {
                 if (_operationProgress.ActiveOperations.Any(x => !x.SkipExitPrompt))
                 {
-                    var result = MessageBox.Show(_desktopFormProvider.DesktopForm,
-                        MiscResources.ExitWithActiveOperations,
-                        MiscResources.ActiveOperations,
-                        MessageBoxButtons.YesNo, MessageBoxType.Warning, MessageBoxDefaultButton.No);
-                    if (result != DialogResult.Yes)
+                    var result = MessageDialog.Show(_desktopFormProvider.DesktopForm,
+                        new MessageDialogOptions
+                        {
+                            Title = UiStrings.ActiveOperations,
+                            Text = UiStrings.ExitWithActiveOperations,
+                            Type = MessageBoxType.Warning,
+                            PrimaryText = UiStrings.Exit,
+                            DefaultButton = MessageDialogResult.Close,
+                            Destructive = true
+                        });
+                    if (result != MessageDialogResult.Primary)
                     {
                         return false;
                     }
@@ -240,10 +247,17 @@ public class DesktopController
         {
             if (userClosing && !SkipRecoveryCleanup && !_config.Get(c => c.KeepSession))
             {
-                var result = MessageBox.Show(_desktopFormProvider.DesktopForm, MiscResources.ExitWithUnsavedChanges,
-                    MiscResources.UnsavedChanges,
-                    MessageBoxButtons.YesNo, MessageBoxType.Warning, MessageBoxDefaultButton.No);
-                if (result != DialogResult.Yes)
+                var result = MessageDialog.Show(_desktopFormProvider.DesktopForm,
+                    new MessageDialogOptions
+                    {
+                        Title = UiStrings.UnsavedChanges,
+                        Text = UiStrings.ExitWithUnsavedChanges,
+                        Type = MessageBoxType.Warning,
+                        PrimaryText = UiStrings.DiscardAndExit,
+                        DefaultButton = MessageDialogResult.Close,
+                        Destructive = true
+                    });
+                if (result != MessageDialogResult.Primary)
                 {
                     return false;
                 }
@@ -291,9 +305,8 @@ public class DesktopController
         // If configured (e.g. by a business), show a customizable message box on application startup.
         if (!string.IsNullOrWhiteSpace(_config.Get(c => c.StartupMessageText)))
         {
-            MessageBox.Show(_config.Get(c => c.StartupMessageText), _config.Get(c => c.StartupMessageTitle),
-                MessageBoxButtons.OK,
-                _config.Get(c => c.StartupMessageIcon).ToEto());
+            MessageDialog.Show(_config.Get(c => c.StartupMessageText)!,
+                _config.Get(c => c.StartupMessageTitle) ?? "", _config.Get(c => c.StartupMessageIcon).ToEto());
         }
     }
 
@@ -414,10 +427,9 @@ public class DesktopController
     {
         if (_imageList.Images.Count > 0)
         {
-            if (MessageBox.Show(_desktopFormProvider.DesktopForm,
-                    string.Format(MiscResources.ConfirmClearItems, _imageList.Images.Count),
-                    MiscResources.Clear, MessageBoxButtons.OKCancel,
-                    MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
+            if (MessageDialog.Confirm(_desktopFormProvider.DesktopForm,
+                    string.Format(UiStrings.ConfirmClearItems, _imageList.Images.Count),
+                    UiStrings.Clear, UiStrings.Clear, destructive: true))
             {
                 _imageListActions.DeleteAll();
                 GC.Collect();
@@ -429,10 +441,9 @@ public class DesktopController
     {
         if (_imageList.Selection.Any())
         {
-            if (MessageBox.Show(_desktopFormProvider.DesktopForm,
-                    string.Format(MiscResources.ConfirmDeleteItems, _imageList.Selection.Count),
-                    MiscResources.Delete, MessageBoxButtons.OKCancel,
-                    MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
+            if (MessageDialog.Confirm(_desktopFormProvider.DesktopForm,
+                    string.Format(UiStrings.ConfirmDeleteItems, _imageList.Selection.Count),
+                    UiStrings.Delete, UiStrings.Delete, destructive: true))
             {
                 _imageListActions.DeleteSelected();
                 GC.Collect();
@@ -444,10 +455,9 @@ public class DesktopController
     {
         if (_imageList.Selection.Any())
         {
-            if (MessageBox.Show(_desktopFormProvider.DesktopForm,
-                    string.Format(MiscResources.ConfirmResetImages, _imageList.Selection.Count),
-                    MiscResources.ResetImage,
-                    MessageBoxButtons.OKCancel, MessageBoxType.Question, MessageBoxDefaultButton.OK) == DialogResult.Ok)
+            if (MessageDialog.Confirm(_desktopFormProvider.DesktopForm,
+                    string.Format(UiStrings.ConfirmResetImages, _imageList.Selection.Count),
+                    UiStrings.ResetImage, UiStrings.Reset))
             {
                 _imageListActions.ResetTransforms();
             }
@@ -572,13 +582,11 @@ public class DesktopController
             Invoker.Current.InvokeDispatch(() =>
             {
                 controller._desktopFormProvider.DesktopForm.Close();
-#if NET6_0_OR_GREATER
                 if (OperatingSystem.IsMacOS())
                 {
                     // Closing the main window isn't enough to quit the app on Mac
                     Application.Instance.Quit();
                 }
-#endif
             });
             return Task.FromResult(new Empty());
         }

@@ -40,9 +40,9 @@
         },
         {
           "files": [
-            "NAPS2.Images.ImageSharp.csproj"
+            "NAPS2.Images.Skia.csproj"
           ],
-          "src": "../../NAPS2.Images.ImageSharp"
+          "src": "../../NAPS2.Images.Skia"
         }
       ],
       "dest": "api",

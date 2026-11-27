@@ -57,6 +57,8 @@
                             <uap:FileType ContentType="image/tiff">.tiff</uap:FileType>
                             <uap:FileType ContentType="image/tiff">.tif</uap:FileType>
                             <uap:FileType ContentType="image/bmp">.bmp</uap:FileType>
+                            <uap:FileType ContentType="image/webp">.webp</uap:FileType>
+                            <uap:FileType ContentType="image/jxl">.jxl</uap:FileType>
                         </uap:SupportedFileTypes>
                         <uap:DisplayName>Image Files</uap:DisplayName>
                         <uap:Logo>Assets\scanner-44.png</uap:Logo>
@@ -81,7 +83,7 @@
                 </uap3:Extension>
             </Extensions>
         </Application>
-        <Application Id="NAPS2.Worker" Executable="lib\NAPS2.Worker.exe"
+        <Application Id="NAPS2.Worker" Executable="NAPS2.Worker.exe"
                      uap10:RuntimeBehavior="win32App"
                      uap10:TrustLevel="mediumIL">
             <uap:VisualElements DisplayName="NAPS2 - Not Another PDF Scanner"

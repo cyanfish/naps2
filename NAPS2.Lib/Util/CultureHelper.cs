@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Globalization;
+using System.Threading;
 using NAPS2.Lang;
 
 namespace NAPS2.Util;
@@ -10,6 +11,20 @@ namespace NAPS2.Util;
 public class CultureHelper
 {
     private readonly Naps2Config _config;
+
+    /// <summary>
+    /// Loads globalization data on a background thread so it's ready by the time startup code needs it.
+    /// </summary>
+    public static void PreloadGlobalization()
+    {
+        new Thread(() =>
+        {
+            var culture = CultureInfo.CurrentCulture;
+            _ = culture.CompareInfo.Compare("a", "b");
+            _ = "a".ToUpper(culture);
+            _ = DateTime.Now.ToString(culture);
+        }) { IsBackground = true }.Start();
+    }
 
     public CultureHelper(Naps2Config config)
     {
@@ -29,7 +44,9 @@ public class CultureHelper
                 var culture = new CultureInfo(cultureId);
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
-                MiscResources.Culture = culture;
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+                UiStrings.Culture = culture;
                 SettingsResources.Culture = culture;
             }
             catch (CultureNotFoundException e)
@@ -54,23 +71,9 @@ public class CultureHelper
 
     public IEnumerable<(string langCode, string langName)> GetAvailableCultures()
     {
-#if NET6_0_OR_GREATER
         // For self-contained builds we don't have separate DLL files we can check for existence
         // TODO: Don't want to hard code this... it defeats the whole purpose of autodetection
         var exclude = new HashSet<string> { "bn", "ur" };
         return GetAllCultures().Where(x => !exclude.Contains(x.langCode));
-#else
-        foreach (var (langCode, langName) in GetAllCultures())
-        {
-            // Only include those languages for which localized resources exist
-            // TODO: Should we check for multiple project resource files? Or be less specific so this doesn't break if we rename the projects?
-            string localizedResourcesPath =
-                Path.Combine(AssemblyHelper.LibFolder, langCode, "NAPS2.Lib.resources.dll");
-            if (langCode == "en" || File.Exists(localizedResourcesPath))
-            {
-                yield return (langCode, langName);
-            }
-        }
-#endif
     }
 }

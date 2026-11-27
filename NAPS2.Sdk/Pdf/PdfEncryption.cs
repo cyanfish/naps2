@@ -1,8 +1,11 @@
+using NAPS2.Serialization;
+
 namespace NAPS2.Pdf;
 
 /// <summary>
 /// Configuration for PDF encryption (e.g. passwords, permissions).
 /// </summary>
+[GeneratePropertyAccessors]
 public record PdfEncryption
 {
     public bool EncryptPdf { get; init; }

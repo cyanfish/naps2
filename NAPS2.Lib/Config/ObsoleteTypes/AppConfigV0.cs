@@ -3,10 +3,12 @@ using NAPS2.Escl;
 using NAPS2.Ocr;
 using NAPS2.Pdf;
 using NAPS2.Scan;
+using NAPS2.Serialization;
 
 namespace NAPS2.Config.ObsoleteTypes;
 
 [XmlType("AppConfig")]
+[GeneratePropertyAccessors]
 public class AppConfigV0
 {
     public int Version { get; set; }
@@ -21,7 +23,7 @@ public class AppConfigV0
 
     public ScanProfile? DefaultProfileSettings { get; set; }
 
-    public Theme Theme { get; set; }
+    public AppTheme Theme { get; set; }
 
     public bool ShowPageNumbers { get; set; }
 
@@ -32,6 +34,10 @@ public class AppConfigV0
     public ScanButtonDefaultAction ScanButtonDefaultAction { get; set; }
 
     public SaveButtonDefaultAction SaveButtonDefaultAction { get; set; }
+
+    public bool EnablePreviewPane { get; set; } = true;
+
+    public PreviewPaneMode PreviewPaneMode { get; set; }
 
     public bool DeleteAfterSaving { get; set; }
 
