@@ -146,6 +146,7 @@ public class NameManager
     private static string SanitizeBarcodeValue(string value)
     {
         var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+        invalidChars.Add('\\');
         return new string(value.Select(c => invalidChars.Contains(c) ? '_' : c).ToArray());
     }
 
