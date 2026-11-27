@@ -4,8 +4,8 @@
     <metadata_license>FSFAP</metadata_license>
     <project_license>GPL-2.0-or-later</project_license>
 
-    <name>NAPS2 - Not Another PDF Scanner</name>
-    <summary>Scan documents to PDF and more, as simply as possible.</summary>
+    <name>NAPS2</name>
+    <summary>Scan documents to PDF and more</summary>
     <description>
         <p>
             NAPS2 on Linux allows you to scan from USB (using SANE) and network scanners. Use your chosen settings, or
@@ -29,7 +29,10 @@
     <url type="contribute">https://www.naps2.com/contribute</url>
     <url type="donation">https://www.naps2.com/donate</url>
     <url type="translate">https://translate.naps2.com</url>
-    <developer_name>Ben Olden-Cooligan</developer_name>
+    <url type="vcs-browser">https://github.com/cyanfish/naps2</url>
+    <developer id="com.naps2">
+        <name>Ben Olden-Cooligan</name>
+    </developer>
 
     <launchable type="desktop-id">com.naps2.Naps2.desktop</launchable>
     <provides>
@@ -42,7 +45,8 @@
         <category>Office</category>
     </categories>
     <branding>
-        <color type="primary">#6688aa</color>
+        <color type="primary" scheme_preference="light">#a3bfdb</color>
+        <color type="primary" scheme_preference="dark">#2f4a66</color>
     </branding>
     <keywords>
         <keyword translate="no">NAPS2</keyword>
@@ -59,10 +63,10 @@
     </keywords>
 
     <requires>
-        <display_length compare="ge">medium</display_length>
+        <display_length compare="ge">768</display_length>
     </requires>
     <recommends>
-        <display_length compare="ge">large</display_length>
+        <display_length compare="ge">1024</display_length>
         <control>pointing</control>
         <control>keyboard</control>
         <control>console</control>
@@ -72,20 +76,24 @@
 
     <screenshots>
         <screenshot type="default">
-            <image>https://www.naps2.com/images/naps2-gtk-screen-desktop-small.png</image>
+            <caption>Scan and organize pages</caption>
+            <image>https://www.naps2.com/images/naps2-desktop-linux-2x.png</image>
         </screenshot>
         <screenshot>
-            <image>https://www.naps2.com/images/naps2-gtk-screen-desktop.png</image>
+            <caption>Configure scanner profiles</caption>
+            <image>https://www.naps2.com/images/naps2-profile-linux-2x.png</image>
         </screenshot>
         <screenshot>
-            <image>https://www.naps2.com/images/naps2-gtk-screen-profile-settings.png</image>
+            <caption>Crop and edit scanned pages</caption>
+            <image>https://www.naps2.com/images/naps2-crop-linux-2x.png</image>
         </screenshot>
         <screenshot>
-            <image>https://www.naps2.com/images/naps2-gtk-screen-ocr-setup.png</image>
+            <caption>Share scanners over the network</caption>
+            <image>https://www.naps2.com/images/naps2-sharing-linux-2x.png</image>
         </screenshot>
     </screenshots>
 
     <releases>
-        <release version="7.0b1" date="2022-10-25"/>
+        <release version="8.6.1" date="2026-11-18"/>
     </releases>
 </component>
