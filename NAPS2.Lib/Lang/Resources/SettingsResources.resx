@@ -228,6 +228,9 @@
   <data name="Source_Feeder" xml:space="preserve">
     <value>Feeder</value>
   </data>
+  <data name="Source_Auto" xml:space="preserve">
+    <value>Auto (Feeder if loaded, else Glass)</value>
+  </data>
   <data name="Source_Glass" xml:space="preserve">
     <value>Glass</value>
   </data>
